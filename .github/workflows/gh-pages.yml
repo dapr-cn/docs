@@ -15,19 +15,18 @@ jobs:
           submodules: true # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
           ref: translate/v0.11
-
-      - name: Setup Docsy
-        run: cd daprdocs && git submodule update --init --recursive && sudo npm install -D --save autoprefixer && sudo npm install -D --save postcss-cli
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: "0.79.1"
           # extended: true
 
-      - name: Build
+      - name: Setup Docsy and Build
         run: |
           cd daprdocs
+          git submodule update --init --recursive 
+          sudo npm install -D --save autoprefixer 
+          sudo npm install -D --save postcss-cli
           hugo --minify
 
       - name: Deploy
