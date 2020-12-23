@@ -16,6 +16,13 @@ jobs:
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
           ref: translate/v0.11
 
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "12"
+      - run: |
+          cd daprdocs
+          npm install
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
