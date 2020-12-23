@@ -15,5 +15,5 @@ jobs:
         with:
           source_repo: "https://github.com/dapr/docs.git"
           source_branch: "v0.11"
-          destination_branch: "source_docs"
+          destination_branch: "source/v0.11"
           github_token: ${{ secrets.PAT }}
