@@ -42,7 +42,7 @@ jobs:
           publish_dir: daprdocs/public
 
       - name: Sync from Github to Gitee
-        uses: wei/git-sync@v2
+        uses: homerjam/git-sync-alternate@v1.0.2
         with:
           source_repo: "dapr-cn/dapr-cn.github.io"
           destination_repo: "git@gitee.com:dapr-cn/dapr-cn.git"
