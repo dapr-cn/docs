@@ -7,7 +7,7 @@ on:
       - feature/setup_hugo_github_pages
 
 jobs:
-  build_and_deploy_job:
+  delpoy_github:
     runs-on: ubuntu-latest
 
     steps:
@@ -40,6 +40,33 @@ jobs:
           external_repository: dapr-cn/dapr-cn.github.io
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: daprdocs/public
+
+  deploy_gitee:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+          ref: translate/v0.11
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+          extended: true
+
+      - name: Setup Docsy and Build
+        run: |
+          rm daprdocs/config.toml
+          cp zh/github.pages.config.toml daprdocs/config.toml
+          mkdir daprdocs/content/zh/
+          cp -r zh/daprdocs/content/en/* daprdocs/content/zh/
+          cd daprdocs
+          git submodule update --init --recursive 
+          sudo npm install -D --save autoprefixer 
+          sudo npm install -D --save postcss-cli
+          hugo --minify
 
       - name: Deploy Gitee
         uses: peaceiris/actions-gh-pages@v3
