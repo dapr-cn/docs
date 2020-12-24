@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Introduction to actors"
+title: "Actors简介"
 linkTitle: "Actors background"
 weight: 20
-description: Learn more about the actor pattern
+description: 了解有关参与者模式的更多信息
 ---
 
 The [actor pattern](https://en.wikipedia.org/wiki/Actor_model) describes **actors** as the lowest-level "unit of computation". In other words, you write your code in a self-contained unit (called an actor) that receives messages and processes them one at a time, without any kind of concurrency or threading.
