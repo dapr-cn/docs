@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Service invocation overview"
+title: "服务调用概述"
 linkTitle: "Overview"
 weight: 1000
-description: "Overview of the service invocation building block"
+description: "服务调用构建块概述"
 ---
 
-## Introduction
+## 介绍
 
-Using service invocation, your application can discover and reliably and securely communicate with other applications using the standard protocols of [gRPC](https://grpc.io) or [HTTP](https://www.w3.org/Protocols/).
+通过服务调用，应用程序可以使用 [gRPC](https://grpc.io) 或 [HTTP](https://www.w3.org/Protocols/) 这样的标准协议来发现并可靠地与其他应用程序通信。
 
 In many environments with multiple services that need to communicate with each other, developers often ask themselves the following questions:
 
