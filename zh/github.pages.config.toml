@@ -1,5 +1,5 @@
 # Site Configuration
-baseURL = "https://dapr-cn.github.io/docs/"
+baseURL = "https://dapr-cn.github.io/"
 title = "Dapr 中文文档"
 theme = "docsy"
 
