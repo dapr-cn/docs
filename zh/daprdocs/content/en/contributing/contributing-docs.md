@@ -23,15 +23,15 @@ Fork [文档存储库](https://github.com/dapr/docs) 以处理任何更改
 
 - **大小写** - 只在句子开头或专有名词（包括技术名称 Dapr、Redis、Kubernetes等）时使用大写。
 - **页眉和标题** - 页眉和标题必须是描述性的和清晰的，使用句子大小写，即对页眉和标题也使用上述的大小写指导。
-- **Use simple sentences** - Easy-to-read sentences mean the reader can quickly use the guidance you share.
-- **Avoid the first person** - Use 2nd person "you", "your" instead of "I", "we", "our".
-- **Assume a new developer audience** - Some obvious steps can seem hard. E.g. Now set an environment variable Dapr to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.
-- **Use present tense** - Avoid sentences like "this command will install redis", which implies the action is in the future. Instead use "This command installs redis" which is in the present tense.
+- **使用简单的句子** - 易于阅读的句子意味着读者可以快速使用您所共享的指导。
+- **避免使用第一人称** - 用第二人称 "你"、"你的 "代替 "我"、"我们"、"我们的"。
+- **假设一个新的开发者受众** - 一些明显的步骤可能看起来很难。 例如: 现在将环境变量 Dapr 设置为值 X。最好给读者一个明确的命令来做这个，而不是让他们自己去想办法。
+- **使用现在时** - 避免使用 "这个命令将安装 redis"这样的句子，因为这意味着操作是在未来发生。 请改为使用 " 此命令安装 redis" ( 现在时态 ) 。
 
 ## 贡献新文档页面
-- Make sure the documentation you are writing is in the correct place in the hierarchy.
-- Avoid creating new sections where possible, there is a good chance a proper place in the docs hierarchy already exists.
-- Make sure to include a complete [Hugo front-matter](front-matter).
+- 确保你所写的文件在层次结构中的位置是正确的。
+- 在可能的情况下，避免创建新的部分，很有可能在文档的层次结构中已经有一个合适的位置。
+- 确保包括完整的 [Hugo front-matter](front-matter)。
 
 ### 贡献一个新的概念文档
 - Ensure the reader can understand why they should care about this feature. What problems does it help them solve?
