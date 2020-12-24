@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Actors"
+title: "参与者"
 linkTitle: "Actors"
 weight: 50
-description: Encapsulate code and data in reusable actor objects as a common microservices design pattern
+description: 将代码和数据封装在可重用的角色对象中，作为一种常见的微服务设计模式。
 ---
 
