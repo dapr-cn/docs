@@ -1,28 +1,28 @@
 ---
 type: docs
-title: "How-To: Run Dapr in self-hosted mode without Docker"
+title: "入门指南: 不使用 Docker 在自托管模式下运行 Dapr"
 linkTitle: "Run without Docker"
 weight: 30000
-description: "How to deploy and run Dapr in self-hosted mode without Docker installed on the local machine"
+description: "如何以自托管方式部署和运行 Dapr ，而无需在本地机器上安装 Docker"
 ---
 
 This article provides guidance on running Dapr in self-hosted mode without Docker.
 
-## Prerequisites
+## 先决条件
 
 - [Dapr CLI]({{< ref "install-dapr-selfhost.md#installing-dapr-cli" >}})
 
-## Initialize Dapr without containers
+## 无需容器初始化 Dapr
 
-The Dapr CLI provides an option to initialize Dapr using slim init, without the default creation of a development environment which has a dependency on Docker. To initialize Dapr with slim init, after installing the Dapr CLI use the following command:
+Dapr CLI 提供了使用 slim init 初始化 Dapr 的选项，而无需默认创建依赖于 Docker 的开发环境。 要使用 slim init 初始化 Dapr ，请在安装 Dapr CLI 后使用以下命令:
 
 ```bash
 dapr init --slim
 ```
 
-In this mode two different binaries are installed `daprd` and `placement`. The `placement` binary is needed to enable [actors]({{< ref "actors-overview.md" >}}) in a Dapr self-hosted installation.
+在此模式下安装了两个不同的二进制文件 `daprd` 和 `placement`。 `placement` 需要在 Dapr 自托管安装中用于启动 [actors]({{< ref "actors-overview.md" >}}) 。
 
-In this mode no default components such as Redis are installed for state management or pub/sub. This means, that aside from [Service Invocation]({{< ref "service-invocation-overview.md" >}}), no other building block functionality is available on install out of the box. Users are free to setup their own environment and custom components. Furthermore, actor based service invocation is possible if a state store is configured as explained in the following sections.
+在此模式下，不会为状态管理或发布/订阅安装任何默认组件（如 Redis）。 This means, that aside from [Service Invocation]({{< ref "service-invocation-overview.md" >}}), no other building block functionality is available on install out of the box. Users are free to setup their own environment and custom components. Furthermore, actor based service invocation is possible if a state store is configured as explained in the following sections.
 
 ## Service invocation
 See [this sample](https://github.com/dapr/samples/tree/master/hello-dapr-slim) for an example on how to perform service invocation in this mode.
