@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Building blocks"
+title: "基础模块"
 linkTitle: "Building blocks"
 weight: 200
-description: "Modular best practices accessible over standard HTTP or gRPC APIs"
+description: "通过标准 HTTP 或 gRPC 访问的模块接口的最佳实践"
 ---
 
 A [building block]({{< ref building-blocks >}}) is an HTTP or gRPC API that can be called from your code and uses one or more Dapr components.

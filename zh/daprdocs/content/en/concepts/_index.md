@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Dapr Concepts"
+title: "Dapr概念"
 linkTitle: "Concepts"
 weight: 10
-description: "Learn about Dapr including its main features and capabilities"
+description: "了解 Dapr 的主要特征和功能"
 ---
 
