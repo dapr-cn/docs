@@ -38,29 +38,29 @@ Fork [文档存储库](https://github.com/dapr/docs) 以处理任何更改
 - 请确保文档引用该规范以获取使用 API 的示例。
 - 确保规范在名称，参数和术语方面与概念一致。 根据需要更新概念和规范。
 - 请避免重复该规范。 这个想法是为了给读者提供更多关于能力的信息和背景，以便他们可以尝试这个。 因此，尽可能提供更多的信息和实施细节。
-- Provide a link to the spec in the [Reference]({{X44X}}) section.
-- Where possible reference a practical How-To doc.
+- 提供指向 [参考资料]({{X44X}}) 中的规范的链接。
+- 在可能的情况下，参考一个实用的How-To文档。
 
 ### 贡献新的 How-To 指南
 
-- `How To` articles are meant to provide step-by-step practical guidance on to readers who wish to enable a feature, integrate a technology or use Dapr in a specific scenario.
-- Sub directory naming - the directory name should be descriptive and if referring to specific component or concept should begin with the relevant name. Example *pubsub-namespaces*.
-- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This include OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT etc.) or programming language. If instructions vary between operating systems, provide guidance for all.
-- Include code/sample/config snippets that can be easily copied and pasted.
-- At the end of the article, provide the reader with related links and next steps (this can be other relevant "how-to", samples for reference or related concepts).
+- `如何操作` 文章旨在为希望启用某项功能、整合某项技术或在特定场景下使用 Dapr 的读者提供逐步的实用指导。
+- 子目录命名 - 目录名称应该是描述性的，如果引用特定组件或概念，那么应以相关名称开头。 示例： *pubsub-namespaces*。
+- 请勿假定读者使用特定环境，除非文章本身是特定的环境。 这包括操作系统 ( Windows/Linux/MacOS )，部署目标 ( Kubernetes， IoT 等 ) 或编程语言。 如果不同操作系统的说明不同，请为所有系统提供指导。
+- 包括易于复制和粘贴的 代码/示例/配置 片段。
+- 在文章末尾，为读者提供相关链接和后续步骤 ( 这可以是其他相关的 "如何操作 " ，参考样本或相关概念 ) 。
 
 ## Docs.dapr.io 的要求
-Any contribution must ensure not to break the website build. The way Hugo builds the website requires following the below guidance.
+任何贡献都必须确保不中断 Web 站点构建。 Hugo 构建 Web 站点的方式需要遵循以下指导。
 
 ### 文件和文件夹名称
-File and folder names should be globally unique.
+文件和文件夹名称应该是全局唯一的。
     - `\service-invocation`
     - `service-invocation-overview.md`
 
 ### Front-matter
-[Front-matter](https://www.docsy.dev/docs/adding-content/content/#page-frontmatter) is what takes regular markdown files and upgrades them into Hugo compatible docs for rendering into the nav bars and ToCs.
+[Front-matter](https://www.docsy.dev/docs/adding-content/content/#page-frontmatter) 是常规标记文件的内容，并将其升级到 Hugo 兼容文档，以呈现到导航栏和 ToC 目录中。
 
-Every page needs a section at the top of the document like this:
+每个页面都需要在文档的顶部有一个这样的部分:
 ```yaml
 ---
 type: docs
@@ -75,94 +75,94 @@ description: "1+ SENTENCES DESCRIBING THE ARTICLE"
 ```yaml
 ---
 type: docs
-title: "Service invocation overview"
+title: "服务调用概述"
 linkTitle: "Overview"
 weight: 10
-description: "A quick overview of Dapr service invocation and how to use it to invoke services within your application"
+description: "Dapr服务调用的快速概述，以及如何在应用程序中使用它来调用服务。"
 ---
 ```
 
-> Weight determines the order of the pages in the left sidebar, with 0 being the top-most.
+> 权重确定左侧栏中页面的顺序，其中 0 是最顶部。
 
-Front-matter should be completed with all fields including type, title, linkTitle, weight, and description.
-- `title` should be 1 sentence, no period at the end
-- `linkTitle` should be 1-3 words, with the exception of How-to at the front.
-- `description` should be 1-2 sentences on what the reader will learn, accomplish, or do in this doc.
+Front-matter应完成所有字段，包括类型、标题、链接标题、重量和描述。
+- `title` 应该仅有一句话，最后没有句号
+- `linkTitle` 应该是 1到 3 个字，前面的How-to除外。
+- `description` 应该用1-2句话来说明读者将在本文档中学到什么，完成什么，或做什么。
 
-As per the [styling conventions](#styling-conventions), titles should only capitalize the first word and proper nouns, with the exception of "How-To:"
-    - "Getting started with Dapr service invocation"
-    - "How-To: Setup a local Redis instance"
+根据 [样式惯例](#styling-conventions)，标题只能大写第一个字和专有名词，但 "How-To："除外。
+    - "Dapr 服务调用入门"
+    - "How-To: 设置本地 Redis 实例"
 
-### Referencing other pages
-Hugo `ref` and `relref` [shortcodes](https://gohugo.io/content-management/cross-references/) are used to reference other pages and sections. It also allows the build to break if a page is incorrectly renamed or removed.
+### 引用其他页面
+Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-references/) 用于引用其他页面和章节。 如果一个页面被错误地重命名或删除，它也允许构建中断。
 
-This shortcode, written inline with the rest of the markdown page, will link to the _index.md of the section/folder name:
+此shortcode与markdown页面的其余部分内联，将链接到章节/文件夹名称的 _index.md:
 ```md
 {{</* ref "folder" */>}}
 ```
 
-This shortcode will link to a specific page:
+这个shortcode将链接到一个特定的页面。
 ```md
 {{</* ref "page.md" */>}}
 ```
-> Note that all pages and folders need to have globally unique names in order for the ref shortcode to work properly. If there are duplicate names the build will break and an error will be thrown.
+> 请注意，所有的页面和文件夹都需要有全局唯一的名称，以使ref shortcode正常工作。 如果存在重复的名称，那么构建将中断，并且将抛出错误。
 
-#### Referencing sections in other pages
+#### 引用其他页面中的部分
 
-To reference a specific section in another page, add `#section-short-name` to the end of your reference.
+要引用另一页面中的特定部分，请在引用末尾添加 `#section-short-name`。
 
-As a general rule, the section short name is the text of the section title, all lowercase, with spaces changed to "-". You can check the section short name by visiting the website page, clicking the link icon (🔗) next to the section, and see how the URL renders in the nav bar. The content after the "#" is your section shortname.
+通常，节短名称是节标题的文本，全部为小写，空格更改为"-"。 您可以通过访问 Web 站点页面，单击该部分旁边的链接图标 (🔗) 来检查区段短名称，并查看在导航栏中呈现 URL 的方式。 "#" 后面的内容是您的区段短名称。
 
-As an example, for this specific section the complete reference to the page and section would be:
+例如，对于此特定部分，完整引用页面和部分将是:
 
 ```md
 {{</* ref "contributing-docs.md#referencing-sections-in-other-pages" */>}}
 ```
 
-### Images
-The markdown spec used by Docsy and Hugo does not give an option to resize images using markdown notation. Instead, raw HMTL is used.
+### 图片
+Docsy和Hugo使用的markdown规范没有提供使用markdown符号调整图片大小的选项。 而是使用原始 HMTL 。
 
-Begin by placing images under `/daprdocs/static/images` with the naming convention of `[page-name]-[image-name].[png|jpg|svg]`.
+首先将图片放置在 `/daprdocs/static/images` 下，命名惯例为 `[page-name]-[image-name].[png|jpg|svg]`.
 
-Then link to the image using:
+然后使用以下项链接到图片:
 ```md
 <img src="/images/[image-filename]" width=1000 alt="Description of image">
 ```
-> Don't forget to set the alt attribute to keep the docs readable for our visually impaired users.
+> 请不要忘记设置 alt 属性，以保留视觉受损用户的文档可读。
 
-#### Example
+#### 例子
 
-This HTML will display the `dapr-overview.png` image on the `overview.md` page:
+此 HTML 将在 `overview.md` 页面上显示 `dapr-overview.png` 图片:
 ```md
 <img src="/images/overview-dapr-overview.png" width=1000 alt="Overview diagram of Dapr and its building blocks">
 ```
 
-### Tabbed content
-Tabs are made possible through [Hugo shortcodes](https://gohugo.io/content-management/shortcodes/).
+### 标签内容
+通过 [Hugo shortcodes](https://gohugo.io/content-management/shortcodes/) 可以实现标签。
 
-The overall format is:
+总体格式为:
 ```
 {{</* tabs [Tab1] [Tab2]>}}
 
 {{% codetab %}}
 [Content for Tab1]
-{{% /codetab %}}
+{{% /codetailb %}}
 
 {{% codetab %}}
 [Content for Tab2]
-{{% /codetab %}}
+{{% /codetailb %}}
 
 {{< /tabs */>}}
 ```
 
-All content you author will be rendered to Markdown, so you can include images, code blocks, YouTube videos, and more.
+您所编写的所有内容都将被渲染为Markdown，因此您可以包含图像、代码块、YouTube视频等。
 
-#### Example
+#### 例子
 ````
 {{</* tabs Windows Linux MacOS>}}
 
 {{% codetab %}}
-```powershell
+`` powershell
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
 ````
 {{% /codetab %}}
@@ -182,7 +182,7 @@ brew install dapr/tap/dapr-cli
 {{< /tabs */>}}
 ````
 
-This example will render to this:
+这个例子将呈现为：
 
 {{< tabs Windows Linux MacOS>}}
 
@@ -206,20 +206,20 @@ brew install dapr/tap/dapr-cli
 
 {{< /tabs >}}
 
-### YouTube videos
-Hugo can automatically embed YouTube videos using a shortcode:
+### YouTube 视频
+Hugo 可以使用短代码自动嵌入 YouTube 视频:
 ```
 {{</* youtube [VIDEO ID] */>}}
 ```
 
-#### Example
+#### 例子
 
-Given the video https://youtu.be/dQw4w9WgXcQ
+给定视频：https://youtu.be/dQw4w9WgXcQ
 
-The shortcode would be:
+短代码为：
 ```
 {{</* youtube dQw4w9WgXcQ */>}}
 ```
 
-### References
-- [Docsy authoring guide](https://www.docsy.dev/docs/adding-content/)
+### 参考资料
+- [Docsy 编写指南](https://www.docsy.dev/docs/adding-content/)
