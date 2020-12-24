@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "Docs contributions"
+title: "文档贡献"
 linkTitle: "Docs"
 weight: 2000
 description: >
-  Guidelines for contributing to the Dapr Docs
+  向Dapr Docs投稿的准则
 ---
 
-This guide contains information about contributions to the [Dapr docs repository](https://github.com/dapr/docs). Please review the guidelines below before making a contribution to the Dapr docs. This guide assumes you have already reviewed the [general guidance]({{< ref contributing-overview>}}) which applies to any Dapr project contributions.
+本指南包含有关对 [Dapr 文档库](https://github.com/dapr/docs) 的贡献信息。 请在对 Dapr docs 作出贡献之前，请先阅读以下准则。 本指南假定您已阅读了 [指南]({{< ref contributing-overview>}}) ，适用于任何 Dapr 项目贡献。
 
-Dapr docs are published to [docs.dapr.io](https://docs.dapr.io). Therefore, any contribution must ensure docs can be compiled and published correctly.
+Dapr 文档已发布到 [docs.dapr.io](https://docs.dapr.io)。 Therefore, any contribution must ensure docs can be compiled and published correctly.
 
-## Prerequisites
+## 先决条件
 The Dapr docs are built using [Hugo](https://gohugo.io/) with the [Docsy](https://docsy.dev) theme. To verify docs are built correctly before submitting a contribution, you should setup your local environment to build and display the docs locally.
 
 Fork the [docs repository](https://github.com/dapr/docs) to work on any changes
 
 Follow the instructions in the repository [README.md](https://github.com/dapr/docs/blob/master/README.md#environment-setup) to install Hugo locally and build the docs website.
 
-## Style and tone
+## 风格和语气
 These conventions should be followed throughout all Dapr documentation to ensure a consistent experience across all docs.
 
 - **Casing** - Use upper case only at the start of a sentence or for proper nouns including names of technologies (Dapr, Redis, Kubernetes etc.).
@@ -28,12 +28,12 @@ These conventions should be followed throughout all Dapr documentation to ensure
 - **Assume a new developer audience** - Some obvious steps can seem hard. E.g. Now set an environment variable Dapr to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.
 - **Use present tense** - Avoid sentences like "this command will install redis", which implies the action is in the future. Instead use "This command installs redis" which is in the present tense.
 
-## Contributing a new docs page
+## 贡献新文档页面
 - Make sure the documentation you are writing is in the correct place in the hierarchy.
 - Avoid creating new sections where possible, there is a good chance a proper place in the docs hierarchy already exists.
 - Make sure to include a complete [Hugo front-matter](front-matter).
 
-### Contributing a new concept doc
+### 贡献一个新的概念文档
 - Ensure the reader can understand why they should care about this feature. What problems does it help them solve?
 - Ensure the doc references the spec for examples of using the API.
 - Ensure the spec is consistent with concept in terms of names, parameters and terminology. Update both the concept and the spec as needed.
@@ -41,7 +41,7 @@ These conventions should be followed throughout all Dapr documentation to ensure
 - Provide a link to the spec in the [Reference]({{X44X}}) section.
 - Where possible reference a practical How-To doc.
 
-### Contributing a new How-To guide
+### 贡献新的 How-To 指南
 
 - `How To` articles are meant to provide step-by-step practical guidance on to readers who wish to enable a feature, integrate a technology or use Dapr in a specific scenario.
 - Sub directory naming - the directory name should be descriptive and if referring to specific component or concept should begin with the relevant name. Example *pubsub-namespaces*.
@@ -49,10 +49,10 @@ These conventions should be followed throughout all Dapr documentation to ensure
 - Include code/sample/config snippets that can be easily copied and pasted.
 - At the end of the article, provide the reader with related links and next steps (this can be other relevant "how-to", samples for reference or related concepts).
 
-## Requirements for docs.dapr.io
+## Docs.dapr.io 的要求
 Any contribution must ensure not to break the website build. The way Hugo builds the website requires following the below guidance.
 
-### Files and folder names
+### 文件和文件夹名称
 File and folder names should be globally unique.
     - `\service-invocation`
     - `service-invocation-overview.md`
@@ -71,7 +71,7 @@ description: "1+ SENTENCES DESCRIBING THE ARTICLE"
 ---
 ```
 
-#### Example
+#### 例子
 ```yaml
 ---
 type: docs
