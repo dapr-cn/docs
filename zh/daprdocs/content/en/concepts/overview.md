@@ -1,27 +1,27 @@
 ---
-type: docs
-title: "Overview"
-linkTitle: "Overview"
+type: 文档
+title: "概述"
+linkTitle: "概述"
 weight: 100
 description: >
-  Introduction to the Distributed Application Runtime
+  分布式应用程序运行时介绍
 ---
 
-Dapr is a portable, event-driven runtime that makes it easy for any developer to build resilient, stateless and stateful applications that run on the cloud and edge and embraces the diversity of languages and developer frameworks.
+Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种开发语言和开发框架。
 
 {{< youtube 9o9iDAgYBA8 >}}
 
-## Any language, any framework, anywhere
+## 任何语言，任何框架，任何地方
 
 <img src="/images/overview.png" width=1000>
 
-Today we are experiencing a wave of cloud adoption. Developers are comfortable with web + database application architectures (for example classic 3-tier designs) but not with microservice application architectures which are inherently distributed. It’s hard to become a distributed systems expert, nor should you have to. Developers want to focus on business logic, while leaning on the platforms to imbue their applications with scale, resiliency, maintainability, elasticity and the other attributes of cloud-native architectures.
+如今，我们正经历着云应用浪潮。 开发人员对 Web + 数据库应用结构（例如经典 3 层设计）非常熟悉，并且使用得手，但对本身能支持分布式的微服务应用结构却感觉很陌生。 成为分布式系统专家很难，并且你也不需要这么做。 开发人员希望专注于业务逻辑，同时希望平台为其提供可伸缩的、弹性的、可维护性和云原生架构的其他功能。
 
-This is where Dapr comes in. Dapr codifies the *best practices* for building microservice applications into open, independent, building blocks that enable you to build portable applications with the language and framework of your choice. Each building block is completely independent and you can use one, some, or all of them in your application.
+这就是Dapr所要解决的。 Dapr 将构建微服务应用的 *最佳实践* 设计成开放、独立和模块化的方式，让你能够选择的任意开发语言和框架构建可移植应用程序。 每个模块都是完全独立的，您可以采用其中一个或多个或全部来构建你的应用。
 
-In addition Dapr is platform agnostic meaning you can run your applications locally, on any Kubernetes cluster, and other hosting environments that Dapr integrates with. This enables you to build microservice applications that can run on the cloud and edge.
+此外，Dapr 是和平台无关的，这意味着您可以在本地、Kubernetes 群集或者其它集成 Dapr 的托管环境中运行应用程序。 这使你能够在云平台和边缘计算中运行微服务应用。
 
-Using Dapr you can easily build microservice applications using any language, any framework, and run them anywhere.
+使用 Dapr，您可以使用任何语言、任何框架轻松构建微服务应用，并运行在任何地方。
 
 ## Microservice building blocks for cloud and edge
 
