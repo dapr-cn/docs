@@ -1,10 +1,12 @@
-name: github pages deploy
+name: github pages
 
 on:
   push:
     branches:
-      - deploy
-      - feature/setup_hugo_github_pages
+      - translate/v0.11
+  pull_request:
+    branches:
+      - translate/v0.11
 
 jobs:
   build_and_deploy_job:
@@ -33,17 +35,3 @@ jobs:
           sudo npm install -D --save autoprefixer 
           sudo npm install -D --save postcss-cli
           hugo --minify
-
-      - name: Deploy Github
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          external_repository: dapr-cn/dapr-cn.github.io
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: daprdocs/public
-
-      - name: Deploy Gitee
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          external_repository: dapr-cn/dapr-cn.github.io
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY_GITEE }}
-          publish_dir: git@gitee.com:dapr-cn/dapr-cn.git
