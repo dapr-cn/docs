@@ -10,20 +10,20 @@ description: "服务调用构建块概述"
 
 通过服务调用，应用程序可以使用 [gRPC](https://grpc.io) 或 [HTTP](https://www.w3.org/Protocols/) 这样的标准协议来发现并可靠地与其他应用程序通信。
 
-In many environments with multiple services that need to communicate with each other, developers often ask themselves the following questions:
+在许多具有多个需要相互通信的服务的环境中，开发者经常会问自己以下问题：
 
-* How do I discover and invoke methods on different services?
-* How do I call other services securely?
-* How do I handle retries and transient errors?
-* How do I use distributed tracing to see a call graph to diagnose issues in production?
+* 我如何发现和调用不同服务上的方法？
+* 我如何安全地调用其他服务？
+* 我如何处理重试和瞬态错误？
+* 我如何使用分布式跟踪来查看调用图来诊断生产中的问题？
 
-Dapr allows you to overcome these challenges by providing an endpoint that acts as a combination of a reverse proxy with built-in service discovery, while leveraging built-in distributed tracing, metrics, error handling and more.
+Dapr 允许您通过一个组合了反向代理与内置服务发现的端点来克服这些挑战，同时能够利用内置的分布式跟踪，度量，错误处理等能力。
 
-Dapr uses a sidecar, decentralized architecture. To invoke an application using Dapr, you use the `invoke` API on any Dapr instance. The sidecar programming model encourages each applications to talk to its own instance of Dapr. The Dapr instances discover and communicate with one another.
+Dapr 采用一种边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调用应用程序，请在任意 Dapr 实例上使用 `invoke` 这个API。 Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr 实例会相互发现并进行通信。
 
-### Invoke logic
+### 调用逻辑
 
-The diagram below is an overview of how Dapr's service invocation works.
+下图是 Dapr的服务调用如何工作的总览图
 
 <img src="/images/service-invocation-overview.png" width=800 alt="Diagram showing the steps of service invocation">
 
