@@ -1,7 +1,7 @@
 ---
-type: 文档
+type: docs
 title: "概述"
-linkTitle: "概述"
+linkTitle: "Overview"
 weight: 100
 description: >
   分布式应用程序运行时介绍
@@ -23,11 +23,11 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 
 使用 Dapr，您可以使用任何语言、任何框架轻松构建微服务应用，并运行在任何地方。
 
-## Microservice building blocks for cloud and edge
+## 云平台和边缘计算的微服务基础模块
 
 <img src="/images/building_blocks.png" width=1000>
 
-There are many considerations when architecting microservices applications. Dapr provides best practices for common capabilities when building microservice applications that developers can use in a standard way and deploy to any environment. It does this by providing distributed system building blocks.
+在构建微服务应用时，需要考虑很多。 Dapr provides best practices for common capabilities when building microservice applications that developers can use in a standard way and deploy to any environment. It does this by providing distributed system building blocks.
 
 Each of these building blocks is independent, meaning that you can use one, some or all of them in your application. In this initial release of Dapr, the following building blocks are provided:
 
