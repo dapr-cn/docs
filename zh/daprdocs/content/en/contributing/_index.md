@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "为Dapr贡献"
+title: "Contributing to Dapr"
 linkTitle: "Contributing"
 weight: 100
 description: >
