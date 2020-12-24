@@ -1,6 +1,6 @@
 ---
-type: docs
-title: "Building blocks"
+type: 文档
+title: "基础模块"
 linkTitle: "Building blocks"
 weight: 200
 description: "Modular best practices accessible over standard HTTP or gRPC APIs"
