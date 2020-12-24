@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "How-To: Invoke and discover services"
+title: "入门指南：发现并调用服务"
 linkTitle: "How-To: Invoke services"
-description: "How-to guide on how to use Dapr service invocation in a distributed application"
+description: "入门指南指导如何使用 Dapr 服务在分布式应用程序中调用其它服务"
 weight: 2000
 ---
 
-This article describe how to deploy services each with an unique application ID, so that other services can discover and call endpoints on them using service invocation API.
+本文介绍如何使用唯一的应用程序 ID 部署每个服务，以便其他服务可以使用服务调用 API 发现和调用这些终结点。
 
-## Step 1: Choose an ID for your service
+## 步骤 1: 为服务选择标识
 
-Dapr allows you to assign a global, unique ID for your app. This ID encapsulates the state for your application, regardless of the number of instances it may have.
+Dapr 允许您为您的应用分配一个全局唯一ID。 此 ID 为您的应用程序封装了状态，不管它可能有多少实例。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
-In self hosted mode, set the `--app-id` flag:
+在自托管方式下，设置 `--app-id` 标记:
 
 ```bash
 dapr run --app-id cart --app-port 5000 python app.py
 ```
 
-If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection:
+如果您的应用使用 SSL 连接，您可以告诉Dapr 在不安全的 SSL 连接中调用您的应用：
 
 ```bash
 dapr run --app-id cart --app-port 5000 --app-ssl python app.py
@@ -30,9 +30,9 @@ dapr run --app-id cart --app-port 5000 --app-ssl python app.py
 
 {{% codetab %}}
 
-### Setup an ID using Kubernetes
+### 使用 Kubernetes 设置标识
 
-In Kubernetes, set the `dapr.io/app-id` annotation on your pod:
+在 Kubernetes 中，在您的pod 上设置 `dapr.io/app-id` 注解：
 
 ```yaml
 apiVersion: apps/v1
