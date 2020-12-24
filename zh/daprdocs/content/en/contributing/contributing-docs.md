@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Docs contributions"
+title: "文档贡献"
 linkTitle: "Docs"
 weight: 2000
 description: >
@@ -34,10 +34,10 @@ Fork [文档存储库](https://github.com/dapr/docs) 以处理任何更改
 - 确保包括完整的 [Hugo front-matter](front-matter)。
 
 ### 贡献一个新的概念文档
-- Ensure the reader can understand why they should care about this feature. What problems does it help them solve?
-- Ensure the doc references the spec for examples of using the API.
-- Ensure the spec is consistent with concept in terms of names, parameters and terminology. Update both the concept and the spec as needed.
-- Avoid just repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. Hence provide more information and implementation details where possible.
+- 请确保读者能够理解为什么他们应该关注此功能。 它能帮他们解决什么问题?
+- 请确保文档引用该规范以获取使用 API 的示例。
+- 确保规范在名称，参数和术语方面与概念一致。 根据需要更新概念和规范。
+- 请避免重复该规范。 这个想法是为了给读者提供更多关于能力的信息和背景，以便他们可以尝试这个。 因此，尽可能提供更多的信息和实施细节。
 - Provide a link to the spec in the [Reference]({{X44X}}) section.
 - Where possible reference a practical How-To doc.
 
