@@ -64,7 +64,7 @@ spec:
 {{< /tabs >}}
 
 
-## Step 2: Setup a service
+## 步骤 2: 设置服务
 
 以下是购物车应用的 Python 示例。 它可以用任何编程语言编写。
 
