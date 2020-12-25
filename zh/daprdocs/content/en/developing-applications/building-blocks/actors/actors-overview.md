@@ -26,27 +26,27 @@ Actor 可以使用状态管理功能可靠地保存状态。
 
 您可以通过 HTTP/GRPC 端点与 Dapr 进行状态管理。
 
-To use actors, your state store must support multi-item transactions.  This means your state store [component](https://github.com/dapr/components-contrib/tree/master/state) must implement the [TransactionalStore](https://github.com/dapr/components-contrib/blob/master/state/transactional_store.go) interface.  The following state stores implement this interface:
+要使用Actor，您的状态存储必须支持多项目事务。  这意味着您的状态存储 [组件](https://github.com/dapr/components-contrib/tree/master/state) 必须实现 [TransactionalStore](https://github.com/dapr/components-contrib/blob/master/state/transactional_store.go) 接口。  以下状态存储实现了此接口:
 
 - Redis
 - MongoDB
 - PostgreSQL
 - SQL Server
-- Azure CosmosDB
+- Azure CosmSDB
 
-## Actor timers and reminders
+## Actor timers 和 reminders
 
-Actors can schedule periodic work on themselves by registering either timers or reminders.
+Actors 可以通过 timer 或者 remider 自行注册周期性的任务.
 
 ### Actor timers
 
-You can register a callback on actor to be executed based on a timer.
+你可以通过 timer 在actor中注册一个回调。
 
-The Dapr actor runtime ensures that the callback methods respect the turn-based concurrency guarantees.This means that no other actor methods or timer/reminder callbacks will be in progress until this callback completes execution.
+Dapr Actor 运行时确保回调方法被顺序调用，而非并发调用。这意味着，在此回调完成执行之前，不会有其他Actor方法或timer/remider回调被执行。
 
-The next period of the timer starts after the callback completes execution. This implies that the timer is stopped while the callback is executing and is started when the callback finishes.
+Timer的下一个周期在回调完成执行后开始计算。 这意味着timer在执行回调时停止，并在回调结束时开始。
 
-The Dapr actors runtime saves changes made to the actor's state when the callback finishes. If an error occurs in saving the state, that actor object is deactivated and a new instance will be activated.
+Dapr Actor 运行时在回调完成时保存对actor的状态所作的更改。 如果在保存状态时发生错误，那么将取消激活该actor对象，并且将激活新实例。
 
 All timers are stopped when the actor is deactivated as part of garbage collection. No timer callbacks are invoked after that. Also, the Dapr actors runtime does not retain any information about the timers that were running before deactivation. It is up to the actor to register any timers that it needs when it is reactivated in the future.
 
