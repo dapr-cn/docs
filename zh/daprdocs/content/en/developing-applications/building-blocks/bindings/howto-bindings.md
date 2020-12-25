@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "操作方法：使用绑定与外部资源进行交互"
+title: "How-To：使用绑定与外部资源进行交互"
 linkTitle: "How-To: Bindings"
 description: "使用 Dapr 输出绑定调用外部系统"
 weight: 300
@@ -37,9 +37,9 @@ spec:
     value: topic1
 ```
 
-在这里，创建一个名称为 `myevent` 的新绑定组件。
+在这里，创建一个新的名称为 `myevent` 的绑定组件。
 
-在 `metadata` 部分中，配置 Kafka 相关属性，如消息要发布到的主题和代理。
+在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
 ## 2. 发送事件
 
@@ -53,10 +53,10 @@ curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "me
 
 如上文所见，您使用了要调用的绑定的名称来调用 `/binding` 终结点。 在我们的示例中，它的名称是 `myevent` 。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
 
-您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 You can check [here]({{< ref bindings >}}) which operations are supported for every output binding.
+您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以在 [这里]({{< ref bindings >}}) 查看每个输出绑定都支持的操作。
 
 
-## References
+## 参考资料
 
 - [Binding API]({{< ref bindings_api.md >}})
 - [Binding components]({{< ref bindings >}})
