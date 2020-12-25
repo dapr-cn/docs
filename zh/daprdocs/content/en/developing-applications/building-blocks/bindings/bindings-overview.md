@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "Bindings overview"
+title: "绑定概述"
 linkTitle: "Overview"
 weight: 100
-description: Overview of the Dapr bindings building block
+description: Dapr 绑定构建块概述
 ---
 
-## Introduction
+## 简介
 
-Using bindings, you can trigger your app with events coming in from external systems, or interface with external systems. This building block provides several benefits for you and your code:
+使用绑定，您可以使用来自外部系统的事件或与外部系统的接口来触发应用程序。 此构建块为您和您的代码提供了若干益处:
 
-- Remove the complexities of connecting to, and polling from, messaging systems such as queues and message buses
-- Focus on business logic and not implementation details of how to interact with a system
+- 除去连接到消息传递系统 ( 如队列和消息总线 ) 并进行轮询的复杂性
+- 聚焦于业务逻辑，而不是如何与系统交互的实现细节
 - Keep your code free from SDKs or libraries
 - Handle retries and failure recovery
 - Switch between bindings at run time
