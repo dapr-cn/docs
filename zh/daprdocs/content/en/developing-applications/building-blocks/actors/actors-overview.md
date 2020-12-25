@@ -1,30 +1,30 @@
 ---
 type: docs
-title: "Dapr actors overview"
+title: "Dapr Actors 概述"
 linkTitle: "Overview"
 weight: 10
-description: Overview of Dapr support for actors
+description: Dapr 中对 Actors 支持的概述
 ---
 
-The Dapr actors runtime provides support for [virtual actors]({{< ref actors-background.md >}}) through following capabilities:
+Dapr Actors 运行时通过以下功能为 [virtual actors]({{< ref actors-background.md >}}) 提供支持:
 
-## Actor method invocation
+## 调用 Actor 方法
 
-You can interact with Dapr to invoke the actor method by calling HTTP/gRPC endpoint
+您可以通过 HTTP/gRPC 来与 Dapr 交互以调用 actor 方法
 
 ```bash
 POST/GET/PUT/DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/method/<method>
 ```
 
-You can provide any data for the actor method in the request body and the response for the request is in response body which is data from actor method call.
+您可以在请求主体中为 actor 方法提供任何数据，并且请求的响应在响应主体中，这是来自 actor 方法调用的数据。
 
-Refer [api spec]({{< ref "actors_api.md#invoke-actor-method" >}}) for more details.
+参阅[api spec]({{< ref "actors_api.md#invoke-actor-method" >}}) 获取更多信息。
 
-## Actor state management
+## Actor 状态管理
 
-Actors can save state reliably using state management capability.
+Actor 可以使用状态管理功能可靠地保存状态。
 
-You can interact with Dapr through HTTP/gRPC endpoints for state management.
+您可以通过 HTTP/GRPC 端点与 Dapr 进行状态管理。
 
 To use actors, your state store must support multi-item transactions.  This means your state store [component](https://github.com/dapr/components-contrib/tree/master/state) must implement the [TransactionalStore](https://github.com/dapr/components-contrib/blob/master/state/transactional_store.go) interface.  The following state stores implement this interface:
 
@@ -134,4 +134,4 @@ You can remove the actor reminder by calling
 DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 ```
 
-Refer [api spec]({{< ref "actors_api.md#invoke-reminder" >}}) for more details.
+请参阅 [Api 描述]({{< ref "actors_api.md#invoke-reminder" >}}) 以获取更多详细信息。
