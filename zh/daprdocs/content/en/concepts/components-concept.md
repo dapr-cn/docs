@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Components"
+title: "组件"
 linkTitle: "Components"
 weight: 300
-description: "Modular functionality used by building blocks and applications"
+description: "用于构建块和应用程序的模块化功能"
 ---
 
-Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.  All of the components are pluggable so that you can swap out one component with the same interface for another. The [components contrib repo](https://github.com/dapr/components-contrib) is where you can contribute implementations for the component interfaces and extends Dapr's capabilities.
+Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有一个接口定义。  所有组件都是可插拔的，因此您可以将组件换为另一个具有相同接口的组件。 [components contrib repo](https://github.com/dapr/components-contrib) 是您可以为组件接口贡献实现并扩展Dapr功能的地方。
 
- A building block can use any combination of components. For example the [actors]({{X13X}}) building block and the [state management]({{X14X}}) building block both use [state components](https://github.com/dapr/components-contrib/tree/master/state).  As another example, the [Pub/Sub]({{X15X}}) building block uses [Pub/Sub components](https://github.com/dapr/components-contrib/tree/master/pubsub).
+ 构建块可以使用任何组件组合。 例如， [actors]({{X13X}}) 构建块和 [状态管理]({{X14X}}) 构建块都使用 [状态组件](https://github.com/dapr/components-contrib/tree/master/state)。  As another example, the [Pub/Sub]({{X15X}}) building block uses [Pub/Sub components](https://github.com/dapr/components-contrib/tree/master/pubsub).
 
  You can get a list of current components available in the current hosting environment using the `dapr components` CLI command.
 
