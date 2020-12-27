@@ -2,25 +2,25 @@
 type: docs
 title: "NATS streaming"
 linkTitle: "NATS streaming"
-description: "Detailed documentation on the NATS pubsub component"
+description: "NATS pubsub 组件详细文档"
 ---
 
-## Setup NATS
+## 安装 NATS
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-You can run a NATS server locally using Docker:
+您可以在本地使用 Docker运行NATS 服务器：
 
 ```bash
 docker run -d -name nats-streaming -p 4222:4222 -p 8222:8222 nats-streaming
 ```
 
-You can then interact with the server using the client port: `localhost:4222`.
+然后，您可以使用 `localhost:4222` 与服务器进行交互。
 {{% /codetab %}}
 
 {{% codetab %}}
-Install NATS on Kubernetes by using the [kubectl](https://docs.nats.io/nats-on-kubernetes/minimal-setup):
+使用 [kubectl](https://docs.nats.io/nats-on-kubernetes/minimal-setup) 在 Kubernetes 上安装 NATS:
 
 ```bash
 # Single server NATS
@@ -30,20 +30,20 @@ kubectl apply -f https://raw.githubusercontent.com/nats-io/k8s/master/nats-serve
 kubectl apply -f https://raw.githubusercontent.com/nats-io/k8s/master/nats-streaming-server/single-server-stan.yml
 ```
 
-This will install a single NATS-Streaming and Nats into the `default` namespace. To interact with NATS, find the service with: `kubectl get svc stan`.
+这将把一个 NATS-Streaming 和 NATS 安装到 `default` 命名空间。 To interact with NATS, find the service with: `kubectl get svc stan`.
 
-For example, if installing using the example above, the NATS Streaming address would be:
+如果使用上面的示例进行安装，那么 NATS Streaming 的请求地址将是:
 
 `<YOUR-HOST>:4222`
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Create a Dapr component
+## 创建 Dapr 组件
 
-The next step is to create a Dapr component for NATS-Streaming.
+下一步是该 NATS - Streaming 创建 Dapr 组件描述的 Yaml 文件, 以供 Dapr 装载该 pubsub 组件。
 
-Create the following YAML file named `nats-stan.yaml`:
+创建 `nats-stan.yaml` YAML 文件, 内容如下:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
