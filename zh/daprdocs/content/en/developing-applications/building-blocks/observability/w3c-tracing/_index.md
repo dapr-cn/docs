@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "W3C trace context"
+title: "W3C 跟踪上下文"
 linkTitle: "W3C trace context"
 weight: 1000
-description: Background and scenarios for using W3C tracing with Dapr
+description: 使用 Dapr 的 W3C 跟踪的背景和场景
 ---
 

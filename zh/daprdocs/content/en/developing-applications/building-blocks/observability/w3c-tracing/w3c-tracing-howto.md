@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "How-To: Use W3C trace context with Dapr"
+title: "How-To : 使用 Dapr 的 W3C 跟踪上下文"
 linkTitle: "How-To: Use W3C trace context"
 weight: 20000
-description: Using W3C tracing standard with Dapr
+description: 将 W3C 跟踪标准与 Dapr 一起使用
 ---
 
-# How to use trace context
-Dapr uses W3C trace context for distributed tracing for both service invocation and pub/sub messaging. Dapr does all the heavy lifting of generating and propagating the trace context information and there are very few cases where you need to either propagate or create a trace context. First read scenarios in the [W3C distributed tracing]({{< ref w3c-tracing >}}) article to understand whether you need to propagate or create a trace context.
+# 如何使用跟踪上下文
+Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分布式跟踪。 Dapr does all the heavy lifting of generating and propagating the trace context information and there are very few cases where you need to either propagate or create a trace context. First read scenarios in the [W3C distributed tracing]({{< ref w3c-tracing >}}) article to understand whether you need to propagate or create a trace context.
 
 To view traces, read the [how to diagnose with tracing]({{< ref tracing.md >}}) article.
 
