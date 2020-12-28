@@ -1,9 +1,6 @@
----
-type: docs
-title: "Apple Push Notification Service binding spec"
-linkTitle: "Apple Push Notification Service"
-description: "Detailed documentation on the Apple Push Notification Service binding component"
----
+- - -
+type: docs title: "Apple Push Notification Service binding spec" linkTitle: "Apple Push Notification Service" description: "Detailed documentation on the Apple Push Notification Service binding component"
+- - -
 
 ## Configuration
 
@@ -29,10 +26,10 @@ spec:
         key: <SECRET-KEY-NAME>
 ```
 
-- `database` tells the binding which APNs service to use. Set to `true` to use the development service or `false` to use the production service. If not specified, the binding will default to production.
+- `database` tells the binding which APNs service to use. `database` tells the binding which APNs service to use. Set to `true` to use the development service or `false` to use the production service. If not specified, the binding will default to production. If not specified, the binding will default to production.
 - `key-id` is the identifier for the private key from the Apple Developer Portal.
 - `team-id` is the identifier for the organization or author from the Apple Developer Portal.
-- `private-key` is a PKCS #8-formatted private key. It is intended that the private key is stored in the secret store and not exposed directly in the configuration.
+- `private-key` is a PKCS #8-formatted private key. `private-key` is a PKCS #8-formatted private key. It is intended that the private key is stored in the secret store and not exposed directly in the configuration.
 
 ## Request Format
 
@@ -56,7 +53,7 @@ spec:
 }
 ```
 
-The `data` object contains a complete push notification specification as described in the [Apple documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification). The `data` object will be sent directly to the APNs service.
+The `data` object contains a complete push notification specification as described in the [Apple documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification). The `data` object will be sent directly to the APNs service. The `data` object will be sent directly to the APNs service.
 
 Besides the `device-token` value, the HTTP headers specified in the [Apple documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns) can be sent as metadata fields and will be included in the HTTP request to the APNs service.
 
