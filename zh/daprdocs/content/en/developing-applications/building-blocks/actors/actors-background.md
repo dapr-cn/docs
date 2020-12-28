@@ -41,7 +41,7 @@ Dapr Actors 是虚拟的，这意味着他们的生命周期与他们的内存�
 
 调用 actor 方法和 reminders 都会重置 actor 的空闲时长计时器，例如， reminders 的触发将使 actor 保持活动状态。 不论 actor 是否处于活动状态或不活动状态 Actor reminders 都会触发，对不活动 actor ，那么会首先激活 actor。 Actor timers 不会重置空闲时间，因此 timer 触发不会使参与者保持活动状态。 Timer 仅在 actor 活跃时被触发。
 
-The idle timeout and scan interval Dapr runtime uses to see if an actor can be garbage-collected is configurable. This information can be passed when Dapr runtime calls into the actor service to get supported actor types.
+Dapr 运行时中的“空闲超时”和"扫描时间间隔"用于查看是否可以对 actor 进行垃圾收集。 当 Dapr 运行时调用 actor 服务以获取受支持的 actor 类型时，可以传递此信息。
 
 This virtual actor lifetime abstraction carries some caveats as a result of the virtual actor model, and in fact the Dapr Actors implementation deviates at times from this model.
 
