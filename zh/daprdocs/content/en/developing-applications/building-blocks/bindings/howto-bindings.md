@@ -15,7 +15,7 @@ weight: 300
 
 输出绑定表示 Dapr 将使用调用和向其发送消息的资源。
 
-就本指南的目的，您将使用 Kafka 绑定。 您可以在 \[此处\]({{< ref bindings >}}) 找到不同绑定规范的列表。
+就本指南的目的，您将使用 Kafka 绑定。 您可以在 [此处]({{< ref bindings >}}) 找到不同绑定规范的列表。
 
 创建以下 YAML 文件，名为 binding.yaml，并将其保存到应用程序的 `components` 子文件夹中。 （使用具有 `--components-path` 标记 的 `dapr run` 命令来指向自定义组件目录）
 
@@ -53,7 +53,7 @@ curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "me
 
 如上文所见，您使用了要调用的绑定的名称来调用 `/binding` 终结点。 在我们的示例中，它的名称是 `myevent` 。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
 
-您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以在\[这里\]({{< ref bindings >}}) 查看每个输出绑定都支持的操作。
+您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以查看 [这里]({{< ref bindings >}}) 查看每个输出绑定都支持的操作。
 
 
 ## 参考资料
