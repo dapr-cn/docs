@@ -2,7 +2,7 @@
 type: docs title: "Apple Push Notification Service binding spec" linkTitle: "Apple Push Notification Service" description: "Detailed documentation on the Apple Push Notification Service binding component"
 - - -
 
-## Configuration
+## 配置
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -26,9 +26,9 @@ spec:
         key: <SECRET-KEY-NAME>
 ```
 
-- `database` tells the binding which APNs service to use. `database` tells the binding which APNs service to use. Set to `true` to use the development service or `false` to use the production service. If not specified, the binding will default to production. If not specified, the binding will default to production.
-- `key-id` is the identifier for the private key from the Apple Developer Portal.
-- `team-id` is the identifier for the organization or author from the Apple Developer Portal.
+- `database` 指示 APN 服务绑定要使用的数据库 。 设置为 `true` 以用于开发环境， `false` 用于生产环境。 如果未指定，那么绑定将缺省为生产环境。
+- `key-id` 是 Apple Developer Portal中专用密钥的标识。
+- `team-id` 是 Apple Developer Portal中组织或作者的标识。
 - `private-key` is a PKCS #8-formatted private key. `private-key` is a PKCS #8-formatted private key. It is intended that the private key is stored in the secret store and not exposed directly in the configuration.
 
 ## Request Format
