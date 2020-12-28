@@ -53,7 +53,7 @@ curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "me
 
 如上文所见，您使用了要调用的绑定的名称来调用 `/binding` 终结点。 在我们的示例中，它的名称是 `myevent` 。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
 
-您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以在 [这里]({{< ref bindings >}}) 查看每个输出绑定都支持的操作。
+您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以在\[这里\]({{< ref bindings >}}) 查看每个输出绑定都支持的操作。
 
 
 ## 参考资料
