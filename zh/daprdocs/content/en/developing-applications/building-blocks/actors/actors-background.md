@@ -3,43 +3,43 @@ type: docs
 title: "Actors简介"
 linkTitle: "Actors background"
 weight: 20
-description: 了解有关参与者模式的更多信息
+description: 了解有关 Actor 模式的更多信息
 ---
 
-The [actor pattern](https://en.wikipedia.org/wiki/Actor_model) describes **actors** as the lowest-level "unit of computation". In other words, you write your code in a self-contained unit (called an actor) that receives messages and processes them one at a time, without any kind of concurrency or threading.
+[actor 模式](https://en.wikipedia.org/wiki/Actor_model) 阐述了 **Actors** 为最低级别的“计算单元”。 换句话说，您将代码写入独立单元 ( 称为actor) ，该单元接收消息并一次处理消息，而不进行任何类型的并行或线程处理。
 
-While your code processes a message, it can send one or more messages to other actors, or create new actors. An underlying **runtime** manages how, when and where each actor runs, and also routes messages between actors.
+当您的代码处理消息时，它可以发送一个或多个消息给其他Actors，或创建新的Actors。 底层 **运行时** 将管理每个 actor 的运行方式，时机和位置，并在 Actors 之间传递消息。
 
-A large number of actors can execute simultaneously, and actors execute independently from each other.
+大量 Actors 可以同时执行，而 Actors 可以相互独立执行。
 
-Dapr includes a runtime that specifically implements the [Virtual Actor pattern](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/). With Dapr's implementation, you write your Dapr actors according to the Actor model, and Dapr leverages the scalability and reliability guarantees that the underlying platform provides.
+Dapr 包含专门实现 [virtual actors 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/) 的运行时。 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
 
-## Quick links
+## 快速链接
 
-- [Dapr Actor Features]({{< ref actors-overview.md >}})
-- [Dapr Actor API Spec]({{< ref actors_api.md >}})
+- [Dapr Actor 特性]({{< ref actors-overview.md >}})
+- [Dapr Actor API 规范]({{< ref actors_api.md >}})
 
-### When to use actors
+### 何时使用 Actors？
 
-As with any other technology decision, you should decide whether to use actors based on the problem you're trying to solve.
+与任何其他技术决策一样，您应该根据您尝试解决的问题来决定是否使用 Actors。
 
-The actor design pattern can be a good fit to a number of distributed systems problems and scenarios, but the first thing you should consider are the constraints of the pattern. Generally speaking, consider the actor pattern to model your problem or scenario if:
+Actor 设计模式可以很好适应一些分布式系统问题和场景，但您首先应该考虑的是模式的约束。 一般来说，在下列情况下，考虑 actor 模式来模拟你的问题或场景：
 
-* Your problem space involves a large number (thousands or more) of small, independent, and isolated units of state and logic.
-* You want to work with single-threaded objects that do not require significant interaction from external components, including querying state across a set of actors.
-* Your actor instances won't block callers with unpredictable delays by issuing I/O operations.
+* 您的问题空间涉及大量(数千或更多) 的独立和孤立的小单位和逻辑。
+* 您想要处理单线程对象，这些对象不需要外部组件的大量交互，例如在一组 Actors 之间查询状态。
+* 您的 actor 实例不会通过发出I/O操作来阻塞调用方。
 
-## Actors in dapr
+## Dapr 中的 Actors
 
-Every actor is defined as an instance of an actor type, identical to the way an object is an instance of a class. For example, there may be an actor type that implements the functionality of a calculator and there could be many actors of that type that are distributed on various nodes across a cluster. Each such actor is uniquely identified by an actor ID.
+每个 actor 都被定义为一个 actor 类型的实例，这对象作为一与一个个类实例的方式相同。 例如，可能存在实现计算器功能的 actor 类型，并且该类型的许多 Actors 分布在集群的各个节点上。 每个这样的 actor 都是由一个 actor ID 确定的。
 
 <img src="/images/actor_background_game_example.png" width=400>
 
-## Actor lifetime
+## Actor 生命周期
 
-Dapr actors are virtual, meaning that their lifetime is not tied to their in-memory representation. As a result, they do not need to be explicitly created or destroyed. The Dapr actors runtime automatically activates an actor the first time it receives a request for that actor ID. If an actor is not used for a period of time, the Dapr Actors runtime garbage-collects the in-memory object. It will also maintain knowledge of the actor's existence should it need to be reactivated later.
+Dapr Actors 是虚拟的，这意味着他们的生命周期与他们的内存状况无关。 因此，它们不需要显式创建或销毁。 Dapr Actors 运行时在第一次接收到该 actor ID 的请求时自动激活 actor。 如果 actor 在一段时间内未被使用，那么 Dapr Actors 运行时将回收内存对象。 如果以后需要重新启动，它还将保持对 actor 的一切原有数据。
 
-Invocation of actor methods and reminders reset the idle time, e.g. reminder firing will keep the actor active. Actor reminders fire whether an actor is active or inactive, if fired for inactive actor, it will activate the actor first. Actor timers do not reset the idle time, so timer firing will not keep the actor active. Timers only fire while the actor is active.
+调用 actor 方法和 reminders 都会重置 actor 的空闲时长计时器，例如， reminders 的触发将使 actor 保持活动状态。 不论 actor 是否处于活动状态或不活动状态 Actor reminders 都会触发，对不活动 actor ，那么会首先激活 actor。 Actor timers 不会重置空闲时间，因此 timer 触发不会使参与者保持活动状态。 Timer 仅在 actor 活跃时被触发。
 
 The idle timeout and scan interval Dapr runtime uses to see if an actor can be garbage-collected is configurable. This information can be passed when Dapr runtime calls into the actor service to get supported actor types.
 
