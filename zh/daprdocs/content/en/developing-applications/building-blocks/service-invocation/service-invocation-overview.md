@@ -27,19 +27,19 @@ Dapr 采用一种边车（Sidecar）、去中心化的架构。 要使用 Dapr �
 
 <img src="/images/service-invocation-overview.png" width=800 alt="Diagram showing the steps of service invocation">
 
-1. Service A makes an http/gRPC call targeting Service B. The call goes to the local Dapr sidecar.
-2. Dapr discovers Service B's location using the [name resolution component](https://github.com/dapr/components-contrib/tree/master/nameresolution) which is running on the given [hosting platform]({{< ref "hosting" >}}).
-3. Dapr forwards the message to Service B's Dapr sidecar
+1. 服务 A 对服务 B 发起HTTP/gRPC的调用。调用发送到本地 Dapr 边车。
+2. Dapr 使用在给定 [ 托管平台]({{< ref "hosting" >}}) 上运行的 [命名解析组件](https://github.com/dapr/components-contrib/tree/master/nameresolution) 发现服务 B的位置。
+3. Dapr 将消息转发至服务 B的 Dapr 边车
 
-    **Note**: All calls between Dapr sidecars go over gRPC for performance. Only calls between services and Dapr sidecars can be either HTTP or gRPC
+    **注**: Dapr 边车之间的所有调用考虑到性能都优先使用 gRPC。 仅服务与 Dapr 边车之间的调用可以是 HTTP 或 gRPC
 
-4. Service B's Dapr sidecar forwards the request to the specified endpoint (or method) on Service B.  Service B then runs its business logic code.
-5. Service B sends a response to Service A.  The response goes to Service B's sidecar.
-6. Dapr forwards the response to Service A's Dapr sidecar.
-7. Service A receives the response.
+4. 服务 B的 Dapr 边车将请求转发至服务 B 上的特定端点 (或方法) 。服务 B 随后运行其业务逻辑代码。
+5. 服务 B 发送响应给服务 A。响应将转至服务 B 的边车。
+6. Dapr 将消息转发至服务 A 的 Dapr 边车。
+7. 服务 A 接收响应。
 
-## Features
-Service invocation provides several features to make it easy for you to call methods on remote applications.
+## 特性
+服务调用提供了一系列特性，使您可以方便地调用远程应用程序上的方法。
 
 ### Service invocation API
 
