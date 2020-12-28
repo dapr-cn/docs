@@ -48,17 +48,17 @@ Timer的下一个周期在回调完成执行后开始计算。 这意味着timer
 
 Dapr Actor 运行时在回调完成时保存对actor的状态所作的更改。 如果在保存状态时发生错误，那么将取消激活该actor对象，并且将激活新实例。
 
-All timers are stopped when the actor is deactivated as part of garbage collection. No timer callbacks are invoked after that. Also, the Dapr actors runtime does not retain any information about the timers that were running before deactivation. It is up to the actor to register any timers that it needs when it is reactivated in the future.
+当 actor 作为垃圾收集的一部分被停用时，所有 timer 都会停止。 在此之后，将不会再调用 timer 的回调。 此外， Dapr Actors 运行时不会保留有关在失活之前运行的 timer 的任何信息。 也就是说，重新启动 actor 后将会激活的 timer 完全取决于注册时登记的 timer。
 
-You can create a timer for an actor by calling the HTTP/gRPC request to Dapr.
+您可以通过将 HTTP/gRPC 请求调用 Dapr 来为 actor 创建 timer。
 
 ```http
 POST/PUT http://localhost:3500/v1.0/actors/<actorType>/<actorId>/timers/<name>
 ```
 
-The timer `duetime` and callback are specified in the request body.  The due time represents when the timer will first fire after registration.  The `period` represents how often the timer fires after that.  A due time of 0 means to fire immediately.  Negative due times and negative periods are invalid.
+Timer 的 `duetime` 和回调函数可以在请求主体中指定。  到期时间（due time）表示注册后 timer 将首次触发的事件。  `period` 表示 timer 在此之后触发的频率。  到期时间为0表示立即执行。  负 due times 和负 periods 都是无效。
 
-The following request body configures a timer with a `dueTime` of 9 seconds and a `period` of 3 seconds.  This means it will first fire after 9 seconds, then every 3 seconds after that.
+以下请求主体将配置一个 timer，该 timer 的 `dueTime` 为 9 秒， `period `为 3 秒。  这意味着它将在9秒后首次触发，然后每3秒触发一次。
 ```json
 {
   "dueTime":"0h0m9s0ms",
@@ -66,7 +66,7 @@ The following request body configures a timer with a `dueTime` of 9 seconds and 
 }
 ```
 
-The following request body configures a timer with a `dueTime` 0 seconds and a `period` of 3 seconds.  This means it fires immediately after registration, then every 3 seconds after that.
+以下请求主体将配置一个 timer，该 timer 的 `dueTime` 为 0 秒， `period`为 3 秒。  这意味着它将在注册之后立即触发，然后每3秒触发一次。
 ```json
 {
   "dueTime":"0h0m0s0ms",
@@ -74,27 +74,27 @@ The following request body configures a timer with a `dueTime` 0 seconds and a `
 }
 ```
 
-You can remove the actor timer by calling
+您可以通过调用来除去 Actor timers
 
 ```http
 DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/timers/<name>
 ```
 
-Refer [api spec]({{< ref "actors_api.md#invoke-timer" >}}) for more details.
+参阅[api spec]({{< ref "actors_api.md#invoke-timer" >}}) 获取更多信息。
 
 ### Actor reminders
 
-Reminders are a mechanism to trigger *persistent* callbacks on an actor at specified times. Their functionality is similar to timers. But unlike timers, reminders are triggered under all circumstances until the actor explicitly unregisters them or the actor is explicitly deleted. Specifically, reminders are triggered across actor deactivations and failovers because the Dapr actors runtime persists the information about the actors' reminders using Dapr actor state provider.
+Reminders 是一种机制，用于在指定时间触发 *持久化*的回调。 它们的功能类似于 timer。 但与 timer 不同，在所有情况下 reminders 都会触发，直到 actor 显式取消注册 reminders 或删除 actor 。 具体而言， reminders 会在所有 actor 失活和故障时也会触发触发，因为Dapr Actors 运行时会将 reminders 信息持久化到 Dapr Actors 状态提供者中。
 
-You can create a persistent reminder for an actor by calling the Http/gRPC request to Dapr.
+您可以通过将 HTTP/gRPC 请求调用 Dapr 来为 actor 创建 reminders。
 
 ```http
 POST/PUT http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 ```
 
-The reminder `duetime` and callback can be specified in the request body.  The due time represents when the reminder first fires after registration.  The `period` represents how often the reminder will fire after that.  A due time of 0 means to fire immediately.  Negative due times and negative periods are invalid.  To register a reminder that fires only once, set the period to an empty string.
+Reminders 的 `duetime` 和回调函数可以在请求主体中指定。  到期时间（due time）表示注册后 reminders将首次触发的时间。  `period` 表示 reminders 在此之后触发的频率。  到期时间为0表示立即执行。  负 due times 和负 periods 都是无效。  若要注册仅触发一次的 reminders ，请将 period 设置为空字符串。
 
-The following request body configures a reminder with a `dueTime` 9 seconds and a `period` of 3 seconds.  This means it will first fire after 9 seconds, then every 3 seconds after that.
+以下请求主体将配置一个 reminders，该 reminders 的 `dueTime` 为 9 秒， `period`为 3 秒。  这意味着它将在9秒后首次触发，然后每3秒触发一次。
 ```json
 {
   "dueTime":"0h0m9s0ms",
@@ -102,7 +102,7 @@ The following request body configures a reminder with a `dueTime` 9 seconds and 
 }
 ```
 
-The following request body configures a reminder with a `dueTime` 0 seconds and a `period` of 3 seconds.  This means it will fire immediately after registration, then every 3 seconds after that.
+以下请求主体将配置一个 reminders，该 reminders 的 `dueTime` 为 0 秒， `period`为 3 秒。  这意味着它将在注册之后立即触发，然后每3秒触发一次。
 ```json
 {
   "dueTime":"0h0m0s0ms",
@@ -110,7 +110,7 @@ The following request body configures a reminder with a `dueTime` 0 seconds and 
 }
 ```
 
-The following request body configures a reminder with a `dueTime` 15 seconds and a `period` of empty string.  This means it will first fire after 15 seconds, then never fire again.
+以下请求主体将配置一个 reminders，该 reminders 的 `dueTime` 为 15 秒， `period`为空。  这意味着它将在15秒后首次触发，之后就不再被触发。
 ```json
 {
   "dueTime":"0h0m15s0ms",
@@ -118,17 +118,17 @@ The following request body configures a reminder with a `dueTime` 15 seconds and
 }
 ```
 
-#### Retrieve actor reminder
+#### 检索 actor reminders
 
-You can retrieve the actor reminder by calling
+您可以通过调用来检索 actor reminders
 
 ```http
 GET http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 ```
 
-#### Remove the actor reminder
+#### 删除 actor reminders
 
-You can remove the actor reminder by calling
+您可以通过调用来除去 Actor timers
 
 ```http
 DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
