@@ -43,45 +43,45 @@ Dapr Actors 是虚拟的，这意味着他们的生命周期与他们的内存�
 
 Dapr 运行时中的“空闲超时”和"扫描时间间隔"用于查看是否可以对 actor 进行垃圾收集。 当 Dapr 运行时调用 actor 服务以获取受支持的 actor 类型时，可以传递此信息。
 
-This virtual actor lifetime abstraction carries some caveats as a result of the virtual actor model, and in fact the Dapr Actors implementation deviates at times from this model.
+Virtual actors 生命周期抽象会将一些警告作为 virtual actors 模型的结果，而事实上， Dapr Actors 实施有时会偏离此模型。
 
-An actor is automatically activated (causing an actor object to be constructed) the first time a message is sent to its actor ID. After some period of time, the actor object is garbage collected. In the future, using the actor ID again, causes a new actor object to be constructed. An actor's state outlives the object's lifetime as state is stored in configured state provider for Dapr runtime.
+在第一次将消息发送到其 actor ID 时，将自动激活 actor ( 这将构造 actor 对象) 。 在一段时间后，actor 对象将被垃圾回收。 以后，再次使用 actor ID 访问，将构造新的 actor。 Actor 的状态比对象的生命周期更久，因为状态存储在 Dapr 运行时的配置状态提供程序中（也就是说Actor即使不在活跃状态，仍然可以读取它的状态）。
 
-## Distribution and failover
+## 分发和故障转移
 
-To provide scalability and reliability, actors instances are distributed throughout the cluster and Dapr  automatically migrates them from failed nodes to healthy ones as required.
+为了提供可扩展性和可靠性，Actors 实例分布在整个集群中， Dapr 会根据需要自动将对象从失败的节点迁移到健康的节点。
 
-Actors are distributed across the instances of the actor service, and those instance are distributed across the nodes in a cluster. Each service instance contains a set of actors for a given actor type.
+Actors 分布在 Actors 服务的实例中，并且这些实例分布在集群中的节点之间。 每个服务实例都包含给定 Actors 类型的一组 Actors。
 
-### Actor placement service
-The Dapr actor runtime manages distribution scheme and key range settings for you. This is done by the actor `Placement` service. When a new instance of a service is created, the corresponding Dapr runtime registers the actor types it can create and the `Placement` service calculates the partitioning across all the instances for a given actor type. This table of partition information for each actor type is updated and stored in each Dapr instance running in the environment and can change dynamically as new instance of actor services are created and destroyed. This is shown in the diagram below.
+### Actor 安置服务 (Actor placement service)
+Dapr actor 运行时为您管理分发方案和键范围设置。 这是由 actor `Placement` 服务完成的。 创建服务的新实例时，相应的 Dapr 运行时将注册它可以创建的 actor 类型， `Placement` 服务将计算给定 actor 类型的所有实例之间的分区。 每个 actor 类型的分区信息表将更新并存储在环境中运行的每个 Dapr 实例中，并且可以随着新 actor 服务实例创建和销毁动态更改。 如下图所示。
 
 <img src="/images/actors_background_placement_service_registration.png" width=600>
 
-When a client calls an actor with a particular id (for example, actor id 123), the Dapr instance for the client hashes the actor type and id, and uses the information to call onto the corresponding Dapr instance that can serve the requests for that particular actor id. As a result, the same partition (or service instance) is always called for any given actor id. This is shown in the diagram below.
+当客户端调用具有特定 Id 的 actor ( 例如，actor Id123) 时，客户端的 Dapr 实例将哈希 actor 类型和 Id，并使用该信息来调用相应的 Dapr 实例，该实例可以为该特定 actor Id 提供实例以接收请求。 因此，始终对任何给定 actor Id 始终会落在同一分区 (或服务实例) 。 如下图所示。
 
 <img src="/images/actors_background_id_hashing_calling.png" width=600>
 
- This simplifies some choices but also carries some consideration:
+ 这简化了一些选择，但也带有一些考虑：
 
-* By default, actors are randomly placed into pods resulting in uniform distribution.
-* Because actors are randomly placed, it should be expected that actor operations always require network communication, including serialization and deserialization of method call data, incurring latency and overhead.
+* 默认情况下，Actors 被随机放入分区中，从而形成均匀的分布。
+* 由于 Actors 是随机放置的，因此可知，执行操作始终需要网络通信，包括方法调用数据的序列化和去序列化，产生延迟和开销。
 
-Note: The Dapr actor Placement service is only used for actor placement and therefore is not needed if your services are not using Dapr actors. The Placement service can run in all [hosting environments]({{< ref hosting >}}), including self-hosted and Kubernetes.
+注意：Dapr actor Placement 服务仅用于 actor 放置，因此，如果您的服务不使用 Dapr Actors，就不需要。 Placement 服务可以在所有 [ 托管环境中]({{< ref hosting >}})</a> ，包括自托管和 Kubernetes。
 
-## Actor communication
+## Actor 通信
 
-You can interact with Dapr to invoke the actor method by calling HTTP/gRPC endpoint.
+您可以通过 HTTP/gRPC 来与 Dapr 交互以调用 actor 方法.
 
 ```bash
 POST/GET/PUT/DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/<method/state/timers/reminders>
 ```
 
-You can provide any data for the actor method in the request body, and the response for the request would be in the response body which is the data from actor call.
+您可以在请求主体中为 actor 方法提供任何数据，并且请求的响应在响应主体中，这是来自 actor 方法调用的数据。
 
-Refer to [Dapr Actor Features]({{< ref actors-overview.md >}}) for more details.
+请参阅 [Dapr Actor 功能部件]({{< ref actors-overview.md >}}) ，以获取更多详细信息。
 
-### Concurrency
+### 并发（Concurrency）
 
 The Dapr Actors runtime provides a simple turn-based access model for accessing actor methods. This means that no more than one thread can be active inside an actor object's code at any time. Turn-based access greatly simplifies concurrent systems as there is no need for synchronization mechanisms for data access. It also means systems must be designed with special considerations for the single-threaded access nature of each actor instance.
 
