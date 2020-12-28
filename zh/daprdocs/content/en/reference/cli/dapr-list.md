@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "list CLI command reference"
+title: "list CLI 命令参考"
 linkTitle: "list"
-description: "Detailed information on the list CLI command"
+description: "有关 list CLI 命令的详细信息"
 ---
 
-## Description
+## 描述
 
-List all Dapr instances.
+列出所有 Dapr 实例。
 
-## Supported platforms
+## 支持的平台
 
-- [Self-Hosted]({{< ref self-hosted >}})
+- [自托管]({{< ref self-hosted >}})
 - [Kubernetes]({{< ref kubernetes >}})
 
-## Usage
+## 用法
 ```bash
 dapr list [flags]
 ```

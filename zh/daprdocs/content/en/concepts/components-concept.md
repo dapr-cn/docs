@@ -1,32 +1,32 @@
 ---
 type: docs
-title: "Components"
+title: "组件"
 linkTitle: "Components"
 weight: 300
-description: "Modular functionality used by building blocks and applications"
+description: "用于构建块和应用程序的模块化功能"
 ---
 
-Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.  All of the components are pluggable so that you can swap out one component with the same interface for another. The [components contrib repo](https://github.com/dapr/components-contrib) is where you can contribute implementations for the component interfaces and extends Dapr's capabilities.
+Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有一个接口定义。  所有组件都是可插拔的，因此您可以将组件换为另一个具有相同接口的组件。 [components contrib repo](https://github.com/dapr/components-contrib) 是您可以为组件接口贡献实现并扩展Dapr功能的地方。
 
- A building block can use any combination of components. For example the [actors]({{X13X}}) building block and the [state management]({{X14X}}) building block both use [state components](https://github.com/dapr/components-contrib/tree/master/state).  As another example, the [Pub/Sub]({{X15X}}) building block uses [Pub/Sub components](https://github.com/dapr/components-contrib/tree/master/pubsub).
+ 构建块可以使用任何组件组合。 例如， [actors]({{X13X}}) 构建块和 [状态管理]({{X14X}}) 构建块都使用 [状态组件](https://github.com/dapr/components-contrib/tree/master/state)。  另一个示例是 [Pub/Sub]({{X15X}}) 构建块使用 [ Pub/Sub 组件](https://github.com/dapr/components-contrib/tree/master/pubsub)。
 
- You can get a list of current components available in the current hosting environment using the `dapr components` CLI command.
+ 您可以使用 `dapr components` CLI 命令查看当前托管环境中可用组件的列表。
 
- The following are the component types provided by Dapr:
+ 以下是 Dapr 提供的组件类型:
 
-* [Bindings](https://github.com/dapr/components-contrib/tree/master/bindings)
-* [Pub/sub](https://github.com/dapr/components-contrib/tree/master/pubsub)
-* [Middleware](https://github.com/dapr/components-contrib/tree/master/middleware)
-* [Service discovery name resolution](https://github.com/dapr/components-contrib/tree/master/nameresolution)
-* [Secret stores](https://github.com/dapr/components-contrib/tree/master/secretstores)
-* [State](https://github.com/dapr/components-contrib/tree/master/state)
-* [Tracing exporters](https://github.com/dapr/components-contrib/tree/master/exporters)
+* [Bindings（绑定）](https://github.com/dapr/components-contrib/tree/master/bindings)
+* [Pub/sub（发布/订阅）](https://github.com/dapr/components-contrib/tree/master/pubsub)
+* [Middleware（中间件）](https://github.com/dapr/components-contrib/tree/master/middleware)
+* [Service discovery name resolution（服务发现名称解析）](https://github.com/dapr/components-contrib/tree/master/nameresolution)
+* [Secret stores（密钥存储）](https://github.com/dapr/components-contrib/tree/master/secretstores)
+* [State（状态）](https://github.com/dapr/components-contrib/tree/master/state)
+* [Tracing exporters（追踪出口）](https://github.com/dapr/components-contrib/tree/master/exporters)
 
-### Service invocation and service discovery components
-Service discovery components are used with the [service invocation]({{X23X}}) building block to integrate with the hosting environment to provide service-to-service discovery. For example, the Kubernetes service discovery component integrates with the Kubernetes DNS service and self hosted uses mDNS.
+### 服务调用和服务发现组件
+服务发现组件与 [服务调用]({{X23X}}) 构建块配合使用，与托管环境集成以提供服务到服务发现。 例如， Kubernetes 服务发现组件与 Kubernetes DNS 服务集成，并且自身托管使用 mDNS。
 
-### Service invocation and middleware components
-Dapr allows custom [middleware]({{X25X}})  to be plugged into the request processing pipeline. Middleware can perform additional actions on a request, such as authentication, encryption and message transformation before the request is routed to the user code, or before the request is returned to the client. The middleware components are used with the [service invocation]({{X26X}}) building block.
+### 服务调用和中间件组件
+Dapr 允许将自定义 [中间件]({{X25X}})  插入请求处理管道。 中间件可以在请求( 例如，认证，加密和消息转换) 路由到用户代码之前，或者在将请求返回给客户端之前，对请求执行额外的操作。 中间件组件与服务调用 [构建块]({{X26X}}) 一起使用。
 
-### Secret store components
-In Dapr, a [secret]({{X29X}}) is any piece of private information that you want to guard against unwanted users. Secrets stores, used to store secrets, are Dapr components and can be used by any of the building blocks.
+### 机密存储组件
+在 dapr 中， [机密]({{X29X}}) 是指任何你不想给不受欢迎的人（例如：黑客）知道的私有信息。 用于存储机密的机密存储组件是 Dapr 组件，可由任何构建基块使用。

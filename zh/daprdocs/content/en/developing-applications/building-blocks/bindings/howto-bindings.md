@@ -1,25 +1,25 @@
 ---
 type: docs
-title: "How-To: Use bindings to interface with external resources"
+title: "How-To：使用绑定与外部资源进行交互"
 linkTitle: "How-To: Bindings"
-description: "Invoke external systems with Dapr output bindings"
+description: "使用 Dapr 输出绑定调用外部系统"
 weight: 300
 ---
 
-Using bindings, it is possible to invoke external resources without tying in to special SDK or libraries. For a complete sample showing output bindings, visit this [link](https://github.com/dapr/quickstarts/tree/master/bindings).
+使用绑定，可以调用外部资源，而无需绑定到特定的 SDK 或库。 有关显示输出绑定的完整示例，请访问此 [链接](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
-Watch this [video](https://www.youtube.com/watch?v=ysklxm81MTs&feature=youtu.be&t=1960) on how to use bi-directional output bindings.
+观看如何使用双向输出绑定的 [视频](https://www.youtube.com/watch?v=ysklxm81MTs&feature=youtu.be&t=1960) 。
 
 
-## 1. Create a binding
+## 1. 创建绑定
 
-An output binding represents a resource that Dapr will use invoke and send messages to.
+输出绑定表示 Dapr 将使用调用和向其发送消息的资源。
 
-For the purpose of this guide, you'll use a Kafka binding. You can find a list of the different binding specs [here]({{< ref bindings >}}).
+就本指南的目的，您将使用 Kafka 绑定。 您可以在 [此处]({{< ref bindings >) 找到不同绑定规范的列表。
 
-Create the following YAML file, named binding.yaml, and save this to a `components` sub-folder in your application directory. (Use the `--components-path` flag with `dapr run` to point to your custom components dir)
+创建以下 YAML 文件，名为 binding.yaml，并将其保存到应用程序的 `components` 子文件夹中。 （使用具有 `--components-path` 标记 的 `dapr run` 命令来指向自定义组件目录）
 
-*Note: When running in Kubernetes, apply this file to your cluster using `kubectl apply -f binding.yaml`*
+*注: 在 Kubernetes 中运行时，使用 `kubectl apply -f binding.yaml` 将此文件应用于您的集群*
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -37,26 +37,26 @@ spec:
     value: topic1
 ```
 
-Here, create a new binding component with the name of `myevent`.
+在这里，创建一个新的名称为 `myevent` 的绑定组件。
 
-Inside the `metadata` section, configure Kafka related properties such as the topic to publish the message to and the broker.
+在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
-## 2. Send an event
+## 2. 发送事件
 
-All that's left now is to invoke the bindings endpoint on a running Dapr instance.
+现在剩下的就是在正在运行的 Dapr 实例上调用绑定终结点。
 
-You can do so using HTTP:
+您可以使用 HTTP 来这样做：
 
 ```bash
 curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }'
 ```
 
-As seen above, you invoked the `/binding` endpoint with the name of the binding to invoke, in our case its `myevent`. The payload goes inside the mandatory `data` field, and can be any JSON serializable value.
+如上文所见，您使用了要调用的绑定的名称来调用 `/binding` 终结点。 在我们的示例中，它的名称是 `myevent` 。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
 
-You'll also notice that there's an `operation` field that tells the binding what you need it to do. You can check [here]({{< ref bindings >}}) which operations are supported for every output binding.
+您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以在 [这里]({{< ref bindings >}}) 查看每个输出绑定都支持的操作。
 
 
-## References
+## 参考资料
 
 - [Binding API]({{< ref bindings_api.md >}})
 - [Binding components]({{< ref bindings >}})
