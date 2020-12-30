@@ -49,10 +49,10 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
 
     Dapr 在服务 A 中生成跟踪标头，这些跟踪标头从服务 A 传播到进一步启用了 Dapr 的服务 `服务 A -> 服务 B -> 服务 C`。 这与上面的场景 2 类似。
 
-4. Pub/sub messages Dapr generates the trace headers in the published message topic and these trace headers are propagated to any services listening on that topic.
+4. Pub/sub消息：Dapr 在发布的消息主题中生成跟踪头，而这些跟踪头被传播到任何监听该主题的服务。
 
-### You need to propagate or generate trace context between services
-In these scenarios Dapr does some of the work for you and you need to either create or propagate trace headers.
+### 您需要在服务之间传播或生成跟踪上下文
+在这些场景下，Dapr 会为您完成一些工作，您需要创建或传播跟踪标头。
 
 1. Multiple service calls to different services from single service
 
