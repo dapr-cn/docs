@@ -15,39 +15,39 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
 在过去，跟踪上下文传播通常由每个不同的跟踪供应商单独实现。 在多供应商环境中，这会导致互操作性问题，例如：
 
 - 由于没有共享的唯一标识，因此不同跟踪供应商收集的跟踪无法相互关联。
-- Traces that cross boundaries between different tracing vendors can not be propagated as there is no uniformly agreed set of identification that is forwarded.
-- Vendor specific metadata might be dropped by intermediaries.
-- Cloud platform vendors, intermediaries and service providers, cannot guarantee to support trace context propagation as there is no standard to follow.
+- 跨越不同跟踪供应商之间边界的跟踪无法传播，因为没有统一协商的标识集可以转发。
+- 供应商特定的元数据可能会被中介丢弃。
+- 因为没有可遵循的标准，云平台供应商，中介和服务提供商无法保证支持跟踪上下文的传播。
 
-In the past, these problems did not have a significant impact as most applications were monitored by a single tracing vendor and stayed within the boundaries of a single platform provider. Today, an increasing number of applications are distributed and leverage multiple middleware services and cloud platforms.
+在过去，这些问题没有产生重大影响，因为大多数应用程序都由单个跟踪供应商监控，并停留在单个平台提供者的边界内。 如今，越来越多的应用程序被分发到并使用多个中间件服务和云平台。
 
-This transformation of modern applications called for a distributed tracing context propagation standard. The [W3C trace context specification](https://www.w3.org/TR/trace-context/) defines a universally agreed-upon format for the exchange of trace context propagation data - referred to as trace context. Trace context solves the problems described above by;
+现代应用的这种转变呼唤建立一种分布式跟踪上下文传播标准。 [W3C 跟踪上下文规范](https://www.w3.org/TR/trace-context) 定义了一种普遍认可的交换跟踪上下文传播数据的格式 - 称为跟踪上下文。 跟踪上下文解决了上述问题：
 
-* Providing an unique identifier for individual traces and requests, allowing trace data of multiple providers to be linked together.
-* Providing an agreed-upon mechanism to forward vendor-specific trace data and avoid broken traces when multiple tracing tools participate in a single transaction.
-* Providing an industry standard that intermediaries, platforms, and hardware providers can support.
+* 为单个跟踪和请求提供唯一标识符，允许将多个供应商的跟踪数据连接起来。
+* 提供一个商定的机制，以转发供应商特有的跟踪数据，并在多个跟踪工具参与单个事务时避免出现跟踪中断的情况。
+* 提供中介、平台和硬件提供商都可以支持的行业标准。
 
-A unified approach for propagating trace data improves visibility into the behavior of distributed applications, facilitating problem and performance analysis.
+传播跟踪数据的统一方法提高了分布式应用程序行为的可见性，从而有助于问题分析和性能分析。
 
-## Scenarios
-There are two scenarios where you need to understand how tracing is used:
- 1. Dapr generates and propagates the trace context between services.
- 2. Dapr generates the trace context and you need to propagate the trace context to another service **or** you generate the trace context and Dapr propagates the trace context to a service.
+## 场景
+您需要了解如何使用跟踪的两种情况：
+ 1. Dapr生成并在服务之间传播跟踪上下文。
+ 2. Dapr 生成跟踪上下文，您需要将跟踪上下文传播到另一个服务，或者你生成跟踪上下文，Dapr 将跟踪上下文传播到服务。
 
-### Dapr generates and propagates the trace context between services.
-In these scenarios Dapr does all work for you. You do not need to create and propagate any trace headers. Dapr takes care of creating all trace headers and propogating them. Let's go through the scenarios with examples;
+### Dapr 在服务之间生成和传播跟踪上下文
+在这些场景下，Dapr 会为您完成所有工作。 您不需要创建和传播任何跟踪头。 Dapr 负责创建所有跟踪头并传播它们。 让我们用示例来了解一下这些场景：
 
-1. Single service invocation call (`service A -> service B` )
+1. 单个服务调用 (`service A -> service B` )
 
-    Dapr generates the trace headers in service A and these trace headers are propagated from service A to service B.
+    Dapr 在服务A 中生成跟踪标头，这些跟踪标头从服务A 传播到服务B。
 
-2. Multiple sequential service invocation calls ( `service A -> service B -> service C`)
+2. 多个顺序的服务调用 （ `服务 A -> 服务 B -> 服务 C`）
 
-    Dapr generates the trace headers at the beginning of the request in service A and these trace headers are propagated from `service A-> service B -> service C` and so on to further Dapr enabled services.
+    Dapr 在服务 A 中请求开始时生成跟踪标头，这些跟踪标头从 `服务 A-> 服务 B -> 服务 C` 一路传播到进一步启用了 Dapr 的服务。
 
-3. Request is from external endpoint (`For example from a gateway service to a Dapr enabled service A`)
+3. 请求来自外部端点 （例如从网关服务到启用 Dapr 的服务 A）
 
-    Dapr generates the trace headers in service A and these trace headers are propagated from service A to further Dapr enabled services `service  A-> service B -> service C`. This is similar to above case 2.
+    Dapr 在服务 A 中生成跟踪标头，这些跟踪标头从服务 A 传播到进一步启用了 Dapr 的服务 `服务 A -> 服务 B -> 服务 C`。 这与上面的场景 2 类似。
 
 4. Pub/sub messages Dapr generates the trace headers in the published message topic and these trace headers are propagated to any services listening on that topic.
 
