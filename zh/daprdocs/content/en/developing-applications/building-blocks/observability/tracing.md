@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Distributed tracing"
+title: "分布式跟踪"
 linkTitle: "Distributed tracing"
 weight: 1000
 description: "Use Dapr tracing to get visibility for distributed application"
