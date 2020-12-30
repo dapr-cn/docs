@@ -54,9 +54,9 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
 ### 您需要在服务之间传播或生成跟踪上下文
 在这些场景下，Dapr 会为您完成一些工作，您需要创建或传播跟踪标头。
 
-1. Multiple service calls to different services from single service
+1. 从单个服务到不同服务的多次服务调用
 
-   When you are calling multiple services from a single service, for example from service A like this, you need to propagate the trace headers;
+   当您从一个服务调用多个服务时，比如像这样从服务A中调用，你需要传播跟踪头。
    
         service A -> service B
         [ .. some code logic ..]
@@ -65,9 +65,9 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
         service A -> service D
         [ .. some code logic ..]
 
-    In this case, when service A first calls service B, Dapr generates the trace headers in service A, and these trace headers are then propagated to service B. These trace headers are returned in the response from service B as part of response headers. However you need to propagate the returned trace context to the next services, service C and Service D, as Dapr does not know you want to reuse the same header.
+    在这种情况下，当服务 A 首先调用服务 B 时，Dapr 会在服务 A 中生成跟踪标头，然后这些跟踪标头将传播到服务 B。这些跟踪标头作为响应标头的一部分在服务 B 的响应中返回。 但是，您需要将返回的跟踪上下文传播到下一个服务，如服务 C 和服务 D，因为 Dapr 不知道您希望重用相同的标头。
 
-     To understand how to extract the trace headers from a response and add the trace headers into a request, see the [how to use trace context]({{< ref w3c-tracing >}}) article.
+     若要了解如何从响应中提取跟踪标头并将跟踪标头添加到请求中，请参阅 [如何使用跟踪上下文]({{< ref w3c-tracing >}}) 一文.
 
 2. You have chosen to generate your own trace context headers. This is much more unusual. There may be occassions where you specifically chose to add W3C trace headers into a service call, for example if you have an existing application that does not currently use Dapr. In this case Dapr still propagates the trace context headers for you. If you decide to generate trace headers yourself, there are three ways this can be done :
 
