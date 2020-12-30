@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "W3C trace context overview"
+title: "W3C 跟踪上下文概述"
 linkTitle: "Overview"
 weight: 10000
-description: Background and scenarios for using W3C tracing with Dapr
+description: 使用Dapr进行W3C追踪的背景和场景
 ---
 
-## Introduction
-Dapr uses W3C trace context for distributed tracing for both service invocation and pub/sub messaging. Largely Dapr does all the heavy lifting of generating and propogating the trace context information and this can be sent to many different diagnostics tools for visualization and querying. There are only a very few cases where you, as a developer, need to either propagate a trace header or generate one.
+## 简介
+Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分布式跟踪。 在很大程度上，Dapr 负责生成和传播跟踪上下文信息的所有繁重工作，这些信息可以发送到许多不同的诊断工具进行可视化和查询。 作为开发者，您只有在极少数情况下需要传播或生成跟踪标头。
 
-## Background
-Distributed tracing is a methodology implemented by tracing tools to follow, analyze and debug a transaction across multiple software components. Typically, a distributed trace traverses more than one service which requires it to be uniquely identifiable. Trace context propagation passes along this unique identification.
+## 背景
+分布式跟踪是一种由跟踪工具实现的方法，用于跟踪、分析和调试跨多个软件组件的事务。 通常情况下，分布式跟踪会游历多个服务，这要求它是唯一可识别的。 跟踪上下文的传播依托于这个唯一标识。
 
-In the past, trace context propagation has typically been implemented individually by each different tracing vendors. In multi-vendor environments, this causes interoperability problems, such as;
+在过去，跟踪上下文传播通常由每个不同的跟踪供应商单独实现。 在多供应商环境中，这会导致互操作性问题，例如：
 
-- Traces that are collected by different tracing vendors cannot be correlated as there is no shared unique identifier.
+- 由于没有共享的唯一标识，因此不同跟踪供应商收集的跟踪无法相互关联。
 - Traces that cross boundaries between different tracing vendors can not be propagated as there is no uniformly agreed set of identification that is forwarded.
 - Vendor specific metadata might be dropped by intermediaries.
 - Cloud platform vendors, intermediaries and service providers, cannot guarantee to support trace context propagation as there is no standard to follow.
