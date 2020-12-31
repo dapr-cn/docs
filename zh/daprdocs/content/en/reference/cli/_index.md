@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Dapr CLI reference"
+title: "Dapr CLI 参考"
 linkTitle: "Dapr CLI"
-description: "Detailed information on the Dapr CLI commands"
+description: "Dapr CLI 命令的详细信息"
 ---
 
