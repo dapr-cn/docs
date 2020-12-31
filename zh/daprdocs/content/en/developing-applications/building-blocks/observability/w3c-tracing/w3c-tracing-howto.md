@@ -44,7 +44,7 @@ client.InvokeService(ctx, &pb.InvokeServiceRequest{
     grpc.Header(&responseHeader))
 ```
 
-### 在 C 中检索跟踪上下文
+### 在 C# 中检索跟踪上下文
 #### 对于 HTTP 调用
 要从 HTTP 响应检索跟踪上下文，可以使用 [.NET API](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.headers.httpresponseheaders?view=netcore-3.1):
 
@@ -195,7 +195,7 @@ var span = tracer.SpanBuilder("cache.Get").StartScopedSpan();
 ## 把它和一个Go 示例一起放在一起
 
 ### 在 Dapr 中配置跟踪
-首先需要在 Dapr 中启用跟踪配置。 This step is mentioned for completeness from enabling tracing to invoking Dapr with trace context. 创建一个部署配置 yaml ，例如 `appconfig.yaml` 具有以下配置。
+首先需要在 Dapr 中启用跟踪配置。 提到此步骤是为了完整地从启用跟踪到调用具有跟踪上下文的 Dapr。 创建一个部署配置 yaml ，例如 `appconfig.yaml` 具有以下配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
