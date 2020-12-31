@@ -47,21 +47,21 @@ Dapr 采用一种边车（Sidecar）、去中心化的架构。 要使用 Dapr �
 
 ### 命名空间作用域
 
-Service invocation supports calls across namespaces. On all supported hosting platforms, Dapr app IDs conform to a valid FQDN format that includes the target namespace.
+服务调用支持跨命名空间调用。 在所有受支持的托管平台上， Dapr 应用程序标识（ID）遵循包含了目标命名空间的有效 FQDN 格式。
 
-For example, the following string contains the app ID `nodeapp` in addition to the namespace the app runs in `production`.
+例如，以下字符串包含应用程序标识 `nodeapp` 以及应用程序在 `production` 中运行的名称空间。
 
 ```
 localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 ```
 
-This is especially useful in cross namespace calls in a Kubernetes cluster. Watch this video for a demo on how to use namespaces with service invocation. <iframe width="560" height="315" src="https://www.youtube.com/embed/LYYV_jouEuA?start=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+这在 Kubernetes 集群中进行跨命名空间调用特别有用。 观看此演示视频以获取有关如何使用具有命名空间的服务调用。 <iframe width="560" height="315" src="https://www.youtube.com/embed/LYYV_jouEuA?start=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-### Retries
+### 重试
 
-Service invocation performs automatic retries with backoff time periods in the event of call failures and transient errors.
+在发生调用失败和瞬态错误的情况下，服务调用会在回退（backoff）时间段内执行自动重试。
 
-Errors that cause retries are:
+导致重试的错误有：
 
 * Network errors including endpoint unavailability and refused connections
 * Authentication errors due to a renewing certificate on the calling/callee Dapr sidecars
