@@ -41,11 +41,11 @@ Dapr 采用一种边车（Sidecar）、去中心化的架构。 要使用 Dapr �
 ## 特性
 服务调用提供了一系列特性，使您可以方便地调用远程应用程序上的方法。
 
-### Service invocation API
+### 服务调用API
 
-The API for Pservice invocation can be found in the [spec repo]({{< ref service_invocation_api.md >}}).
+服务调用的 API 规范可在 [规范仓库]({{< ref service_invocation_api.md >}}) 中找到。
 
-### Namespaces scoping
+### 命名空间作用域
 
 Service invocation supports calls across namespaces. On all supported hosting platforms, Dapr app IDs conform to a valid FQDN format that includes the target namespace.
 
