@@ -9,7 +9,7 @@ description: 将 W3C 跟踪标准与 Dapr 一起使用
 # 如何使用跟踪上下文
 Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分布式跟踪。 Dapr 承担生成和传播跟踪上下文信息的所有繁重工作，并且很少需要传播或创建跟踪上下文。 首先阅读 [W3C 分布式跟踪]({{< ref w3c-tracing >}}) 这篇文章中的方案 ，以了解您是否需要传播或创建跟踪上下文。
 
-若要查看跟踪，请阅读 [如何诊断与跟踪]({{< ref tracing.md >\) 文章。
+若要查看跟踪，请阅读 [如何诊断与跟踪]({{< ref tracing.md >}}) 文章。
 
 ## 如何从响应中检索跟踪上下文
 `注意: 在 Dapr SDK 中没有用于传播和检索跟踪上下文的辅助方法。 您需要使用 http/gRPC 客户端通过 http 标头和 gRPC 元数据传播和检索跟踪标头。`
@@ -186,16 +186,16 @@ opencensus::trace::Span span = opencensus::trace::Span::StartSpan(
                                             "cache.Get", nullptr, {&sampler});
 ```
 
-### 在 C 中创建跟踪上下文
+### 在 C# 中创建跟踪上下文
 
 ```csharp
 var span = tracer.SpanBuilder("cache.Get").StartScopedSpan();
 ```
 
-## Putting it all together with a Go Sample
+## 把它和一个Go 示例一起放在一起
 
-### Configure tracing in Dapr
-First you need to enable tracing configuration in Dapr. This step is mentioned for completeness from enabling tracing to invoking Dapr with trace context. Create a deployment config yaml e.g. `appconfig.yaml` with following configuration.
+### 在 Dapr 中配置跟踪
+首先需要在 Dapr 中启用跟踪配置。 This step is mentioned for completeness from enabling tracing to invoking Dapr with trace context. 创建一个部署配置 yaml ，例如 `appconfig.yaml` 具有以下配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -207,29 +207,29 @@ spec:
     samplingRate: "1"
 ```
 
-In Kubernetes, you can apply the configuration as below :
+在 Kubernetes中，您可以应用以下配置 :
 
 ```bash
 kubectl apply -f appconfig.yaml
 ```
 
-You then set the following tracing annotation in your deployment YAML. You can add the following annotaion in sample [grpc app]({{< ref grpc.md >}}) deployment yaml.
+然后在部署 YAML 中设置以下跟踪注释。 您可以在示例 [grpc app]({{< ref grpc.md >}}) 部署 yaml 中添加以下注释。
 
 ```yaml
 dapr.io/config: "appconfig"
 ```
 
-### Invoking Dapr with trace context
+### 使用跟踪上下文调用 dapr
 
-Dapr covers generating trace context and you do not need to explicitly create trace context.
+Dapr 包含生成跟踪上下文，您无需明确创建跟踪上下文。
 
-However if you choose to pass the trace context explicitly, then Dapr will use the passed trace context and propagate all across the HTTP/gRPC call.
+但是，如果您选择显式传递跟踪上下文，那么 Dapr 将使用被传递的跟踪上下文并在整个 HTTP/GRPC 调用中传播。
 
-Using the [grpc app]({{< ref grpc.md >}}) in the example and putting this all together, the following steps show you how to create a Dapr client and call the InvokeService method passing the trace context:
+使用示例中的 [grpc app]({{< ref grpc.md >}}) 并将这全部放在一起，以下步骤显示如何创建 Dapr 客户端并调用传递跟踪上下文的 InvokeService 方法 :
 
-The Rest code snippet and details, refer to the [grpc app]({{< ref grpc >}}).
+其他代码片段和详细信息，请参阅 [grpc 应用程序]({{< ref grpc >}})。
 
-### 1. Import the package
+### 1. 导入包
 
 ```go
 package main
@@ -243,7 +243,7 @@ import (
 )
 ```
 
-### 2. Create the client
+### 2. 创建客户端
 
 ```go
   // Get the Dapr port and create a connection
@@ -259,7 +259,7 @@ import (
   client := pb.NewDaprClient(conn)
 ```
 
-### 3. Invoke the InvokeService method With Trace Context
+### 3. 使用跟踪上下文调用 InvokeService 方法
 
 ```go
   // Create the Trace Context
@@ -283,13 +283,13 @@ import (
     })
 ```
 
-You can now correlate the calls in your app and across services with Dapr using the same trace context.
+现在，您可以使用相同的跟踪上下文将应用中和跨服务的调用与 Dapr 关联。
 
-## Related Links
+## 相关链接
 
-- [Observability concepts]({{< ref observability-concept.md >}})
-- [W3C Trace Context for distributed tracing]({{< ref w3c-tracing >}})
-- [How To set up Application Insights for distributed tracing with OpenTelemetry]({{< ref open-telemetry-collector.md >}})
-- [How to set up Zipkin for distributed tracing]({{< ref zipkin.md >}})
-- [W3C trace context specification](https://www.w3.org/TR/trace-context/)
-- [Observability quickstart](https://github.com/dapr/quickstarts/tree/master/observability)
+- [可观察性概念]({{< ref observability-concept.md >}})
+- [用于分布式跟踪的 W3C 跟踪上下文]({{< ref w3c-tracing >}})
+- [如何使用 OpenTelemetry 为分布式跟踪设置 Application Insights]({{< ref open-telemetry-collector.md >}})
+- [如何设置 Zipkin 以进行分布式跟踪]({{< ref zipkin.md >}})
+- [W3C 跟踪上下文规范](https://www.w3.org/TR/trace-context/)
+- [可观察性 快速开始](https://github.com/dapr/quickstarts/tree/master/observability)
