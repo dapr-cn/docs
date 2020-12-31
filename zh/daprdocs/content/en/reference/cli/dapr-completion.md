@@ -1,46 +1,46 @@
 ---
 type: docs
-title: "completion CLI command reference"
+title: "completion CLI 命令参考"
 linkTitle: "completion"
-description: "Detailed information on the completion CLI command"
+description: "有关 completion CLI 命令的详细信息"
 ---
 
-## Description
+## 说明
 
-Generates shell completion scripts
+生成 shell 补全脚本
 
-## Usage
+## 用法
 
 ```bash
 dapr completion [flags]
 dapr completion [command]
 ```
 
-## Flags
+## 参数
 
-| Name           | Environment Variable | Default | Description              |
-| -------------- | -------------------- | ------- | ------------------------ |
-| `--help`, `-h` |                      |         | Prints this help message |
+| 名称             | 环境变量 | 默认值 | 说明      |
+| -------------- | ---- | --- | ------- |
+| `--help`, `-h` |      |     | 显示此帮助消息 |
 
-## Examples
+## 示例
 
-### Installing bash completion on macOS using Homebrew
+### 使用 HomeBrew 在 macOS 上安装 bash completion
 
-If running Bash 3.2 included with macOS:
+如果运行 macOS 包含的 Bash 3.2:
 ```bash
 brew install bash-completion
 ```
-Or, if running Bash 4.1+:
+或者，如果运行 Bash 4.1+:
 ```bash
 brew install bash-completion@2
 ```
-Add the completion to your completion directory:
+将 completion 添加到您的 completion 目录：
 ```bash
 dapr completion bash > $(brew --prefix)/etc/bash_completion.d/dapr
 source ~/.bash_profile
 ```
 
-### Installing bash completion on Linux
+### 在 Linux 上安装 bash completion
 
 If bash-completion is not installed on Linux, please install the bash-completion' package via your distribution's package manager.
 
