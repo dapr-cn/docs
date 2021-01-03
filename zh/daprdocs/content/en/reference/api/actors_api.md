@@ -1,54 +1,54 @@
 ---
 type: docs
-title: "Actors API reference"
+title: "Actors API 参考"
 linkTitle: "Actors API"
-description: "Detailed documentation on the actors API"
+description: "关于 Actors API 的详细文档"
 weight: 500
 ---
 
-Dapr provides native, cross-platform and cross-language virtual actor capabilities. Besides the language specific Dapr SDKs, a developer can invoke an actor using the API endpoints below.
+Dapr 提供原生、跨平台和跨语言 virtual actors 功能。 除了特定于语言的 Dapr SDK 之外，开发人员还可以使用下面的 API 终结点调用 actor。
 
-## User service code calling dapr
+## 调用 dapr 的服务代码
 
-### Invoke actor method
+### 调用 actor 方法
 
-Invoke an actor method through Dapr.
+通过 Dapr 调用 actor 方法。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/method/<method>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 描述        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description                       |
-| --------- | --------------------------------- |
-| daprPort  | The Dapr port.                    |
-| actorType | The actor type.                   |
-| actorId   | The actor ID.                     |
-| method    | The name of the method to invoke. |
+| 参数        | 描述         |
+| --------- | ---------- |
+| daprPort  | Dapr 端口。   |
+| actorType | Actor 类型。  |
+| actorId   | Actor ID   |
+| method    | 要调用的方法的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
-Example of invoking a method on an actor:
+对 actor 调用方法的示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/stormtrooper/50/method/shoot \
   -H "Content-Type: application/json"
 ```
 
-Example of invoking a method on an actor that takes parameters: You can provided the method parameters and values in the body of the request, for example in curl using -d "{\"param\":\"value\"}"
+若 Actor 方法具备参数：您可以在请求正文中提供方法参数和值，例如使用 -d "{\"param\":\"value\"}"
 
 
 ```shell
@@ -58,48 +58,48 @@ curl -X POST http://localhost:3500/v1.0/actors/x-wing/33/method/fly \
         "destination": "Hoth"
       }'
 ```
-or
+或者
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/x-wing/33/method/fly \
   -H "Content-Type: application/json"
   -d "{\"destination\":\"Hoth\"}"
 ```
-The response (the method return) from the remote endpoint is returned in the request body.
+被调用方法的返回值将会从响应正文中返回。
 
-### Actor state transactions
+### Actor 状态事务
 
-Persists the changed to the state for an actor as a multi-item transaction.
+将 Actor 状态的变成以 multi-item transaction 的方式持久化
 
-***Note that this operation is dependant on a using state store component that supports multi-item transactions.***
+***请注意，此操作取决于支持 multi-item transactions 的状态存储组件。***
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 201  | Request successful |
-| 400  | Actor not found    |
-| 500  | Request failed     |
+| Code | 描述        |
+| ---- | --------- |
+| 201  | 请求成功      |
+| 400  | 未找到 Actor |
+| 500  | 请求失败      |
 
 
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description     |
-| --------- | --------------- |
-| daprPort  | The Dapr port.  |
-| actorType | The actor type. |
-| actorId   | The actor ID.   |
+| 参数        | 说明        |
+| --------- | --------- |
+| daprPort  | Dapr 端口。  |
+| actorType | Actor 类型。 |
+| actorId   | Actor ID  |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/stormtrooper/50/state \
@@ -121,36 +121,36 @@ curl -X POST http://localhost:3500/v1.0/actors/stormtrooper/50/state \
       ]'
 ```
 
-### Get actor state
+### 获取 actor 状态
 
-Gets the state for an actor using a specified key.
+使用指定的键获取 actor 的状态。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state/<key>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description                                   |
-| ---- | --------------------------------------------- |
-| 200  | Request successful                            |
-| 204  | Key not found, and the response will be empty |
-| 400  | Actor not found                               |
-| 500  | Request failed                                |
+| Code | 描述          |
+| ---- | ----------- |
+| 200  | 请求成功        |
+| 204  | 找不到键值，响应将为空 |
+| 400  | 未找到 Actor   |
+| 500  | 请求失败        |
 
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description                  |
-| --------- | ---------------------------- |
-| daprPort  | The Dapr port.               |
-| actorType | The actor type.              |
-| actorId   | The actor ID.                |
-| key       | The key for the state value. |
+| 参数        | 描述        |
+| --------- | --------- |
+| daprPort  | Dapr 端口。  |
+| actorType | Actor 类型。 |
+| actorId   | Actor ID  |
+| key       | 状态的 key   |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
 #### Examples
 

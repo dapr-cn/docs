@@ -19,21 +19,21 @@ description: "有关 list CLI 命令的详细信息"
 dapr list [flags]
 ```
 
-## Flags
+## 参数
 
-| Name                 | Environment Variable | Default | Description                                |
-| -------------------- | -------------------- | ------- | ------------------------------------------ |
-| `--help`, `-h`       |                      |         | Print this help message                    |
-| `--kubernetes`, `-k` |                      | `false` | List all Dapr pods in a Kubernetes cluster |
+| 名称                   | 环境变量 | 默认值     | 说明                             |
+| -------------------- | ---- | ------- | ------------------------------ |
+| `--help`, `-h`       |      |         | 显示此帮助消息                        |
+| `--kubernetes`, `-k` |      | `false` | 列出 Kubernetes 集群中的所有 Dapr pods |
 
-## Examples
+## 示例
 
-### List Dapr instances in self-hosted mode
+### 列出在 Self-Hosted 模式下 Dapr 实例
 ```bash
 dapr list
 ```
 
-### List Dapr instances in Kubernetes mode
+### 列出在 Kubernetes 模式下 Dapr 实例
 ```bash
 dapr list -k
 ```

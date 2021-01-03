@@ -1,8 +1,8 @@
 ---
-type: docs 
-title: "Apple Push Notification Service binding spec" 
-linkTitle: "Apple Push Notification Service" 
-description: "Detailed documentation on the Apple Push Notification Service binding component"
+type: docs
+title: "Apple Push Notification Service binding spec"
+linkTitle: "Apple Push Notification Service"
+description: "有关 Apple 推送通知服务绑定组件的详细文档"
 ---
 
 ## 配置
