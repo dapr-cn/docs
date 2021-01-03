@@ -42,60 +42,60 @@ source ~/.bash_profile
 
 ### 在 Linux 上安装 bash completion
 
-If bash-completion is not installed on Linux, please install the bash-completion' package via your distribution's package manager.
+如果未在 Linux 上安装 bash-completion ，请通过包管理器安装 bash-completion 包。
 
-Load the dapr completion code for bash into the current shell:
+将用于 bash 的 dapr completion 加载到当前 shell 中：
 ```bash
 source <(dapr completion bash)
 ```
 
-Write bash completion code to a file and source if from .bash_profile:
+将 bash completion 载入代码写入文件并使用 source 载入 ( 例如使用 .bash_profile) :
 ```bash
 dapr completion bash > ~/.dapr/completion.bash.inc
 printf "source '$HOME/.dapr/completion.bash.inc'" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
 
-### Installing zsh completion on macOS using homebrew
+### 使用 HomeBrew 在 macOS 上安装 zsh completion
 
-If zsh-completion is not installed on macOS, please install the 'zsh-completion' package:
+如果未在 macOS 上安装 zsh-completion ，请安装"zsh-completion"包：
 ```bash
 brew install zsh-completions
 ```
 
-Set the dapr completion code for zsh[1] to autoload on startup:
+将用于 zsh 的 dapr completion 代码[1] 启动时自动加载：
 ```bash
 dapr completion zsh > "${fpath[1]}/_dapr"
 source ~/.zshrc
 ```
 
-### Installing zsh completion on Linux
+### 在 Linux 上安装 zsh completion
 
-If zsh-completion is not installed on Linux, please install the 'zsh-completion' package via your distribution's package manager.
+如果未在 Linux 上安装 zsh-completion ，请通过包管理器安装 zsh-completion 包。
 
-Load the dapr completion code for zsh into the current shell:
+将用于 zsh 的 dapr completion 加载到当前 shell 中：
 ```bash
 source <(dapr completion zsh)
 ```
 
-Set the dapr completion code for zsh[1] to autoload on startup:
+将用于 zsh 的 dapr completion 代码[1] 启动时自动加载：
 ```bash
 dapr completion zsh > "${fpath[1]}/_dapr"
 ```
 
-### Installing Powershell completion on Windows
+### 在 Windows 上安装 Powershell completion
 
-Create $PROFILE if it not exists:
+创建 $PROFILE ，如果它不存在：
 ```bash
 if (!(Test-Path -Path $PROFILE )){ New-Item -Type File -Path $PROFILE -Force }
 ```
 
-Add the completion to your profile:
+将 completion 添加到您的 profile：
 ```bash
 dapr completion powershell >> $PROFILE
 ```
 
-## Available Commands
+## 可用命令
 
 ```txt
 bash        Generates bash completion scripts
