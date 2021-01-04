@@ -447,13 +447,13 @@ curl -X GET http://localhost:3000/dapr/config \
 以上命令返回配置 ( 所有字段都是可选的):
 
 
-| 参数                      | 说明                                                                                                                                                                                                             |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| entities                | 此应用程序支持的 actor 类型。                                                                                                                                                                                             |
-| actorIdleTimeout        | 指定在取消激活空闲 actor 之前要等待的时间。  如果没有 actor 方法被调用，并且没有触发任何 reminders ，那么 actor 将处于空闲状态。                                                                                                                              |
-| actorScanInterval       | 指定扫描 Actors 以停用空闲 Actors 的频率时间间隔。  Actors 时间超过 actorIdleTimeout 的 Actors 将被取消激活。                                                                                                                               |
-| drainOngoingCallTimeout | A duration used when in the process of draining rebalanced actors.  This specifies how long to wait for the current active actor method to finish.  If there is no current actor method call, this is ignored. |
-| drainRebalancedActors   | A bool.  If true, Dapr will wait for `drainOngoingCallTimeout` to allow a current actor call to complete before trying to deactivate an actor.  If false, do not wait.                                         |
+| 参数                      | 说明                                                                                                       |
+| ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| entities                | 此应用程序支持的 actor 类型。                                                                                       |
+| actorIdleTimeout        | 指定在取消激活空闲 actor 之前要等待的时间。  如果没有 actor 方法被调用，并且没有触发任何 reminders ，那么 actor 将处于空闲状态。                        |
+| actorScanInterval       | 指定扫描 Actors 以停用空闲 Actors 的频率时间间隔。  Actors 时间超过 actorIdleTimeout 的 Actors 将被取消激活。                         |
+| drainOngoingCallTimeout | 在进行 Actor 重定位时使用的时间间隔。  这指定等待当前活动 actor 方法完成多长时间。  如果没有当前 actor 方法调用，那么将忽略此时间。                           |
+| drainRebalancedActors   | 布尔值。  如果为 true ，那么 Dapr 将等待 `drainOngoingCallTimeout` 以允许当前 actor 调用完成，然后再尝试停用 actor。  如果为 false ，则不会等待。 |
 
 ```json
 {
@@ -465,9 +465,9 @@ curl -X GET http://localhost:3000/dapr/config \
 }
 ```
 
-### Deactivate actor
+### 停用 actor
 
-Deactivates an actor by persisting the instance of the actor to the state store with the specified actorId
+通过将 指定 actor Id 的 actor 保留到状态存储与来停用 actor
 
 #### HTTP Request
 
