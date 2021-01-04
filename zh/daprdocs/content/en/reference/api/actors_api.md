@@ -152,14 +152,14 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state/<key>
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/state/location \
   -H "Content-Type: application/json"
 ```
 
-The above command returns the state:
+以上命令将返回状态:
 
 ```json
 {
@@ -167,11 +167,11 @@ The above command returns the state:
 }
 ```
 
-### Create actor reminder
+### 创建 actor reminders
 
-Creates a persistent reminder for an actor.
+为 actor 创建一个持久化的 reminders。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<name>
@@ -179,7 +179,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders
 
 Body:
 
-The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
+以下指定 `dueTime` 的 3 秒和 7 秒的句点。
 ```json
 {
   "dueTime":"0h0m3s0ms",
@@ -187,7 +187,7 @@ The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
 }
 ```
 
-A `dueTime` of 0 means to fire immediately.  The following body means to fire immediately, then every 9 seconds.
+`dueTime` 为0表示立即执行。  以下正文是指立即执行，然后每 9 秒钟再执行一次。
 ```json
 {
   "dueTime":"0h0m0s0ms",
@@ -195,7 +195,7 @@ A `dueTime` of 0 means to fire immediately.  The following body means to fire im
 }
 ```
 
-To configure the reminder to fire once only, the period should be set to empty string.  The following specifies a `dueTime` of 3 seconds with a period of empty string, which means the reminder will fire in 3 seconds and then never fire again.
+要将 reminders 配置为仅触发一次，应将 period 设置为空字符串。  以下指定一个 `dueTime` 3 秒，period 为空字符串，这意味着 reminders 将在 3 秒后立即执行，然后永远不会再次触发。
 ```json
 {
   "dueTime":"0h0m3s0ms",
@@ -203,26 +203,26 @@ To configure the reminder to fire once only, the period should be set to empty s
 }
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description                         |
-| --------- | ----------------------------------- |
-| daprPort  | The Dapr port.                      |
-| actorType | The actor type.                     |
-| actorId   | The actor ID.                       |
-| name      | The name of the reminder to create. |
+| 参数        | 说明                 |
+| --------- | ------------------ |
+| daprPort  | Dapr 端口。           |
+| actorType | Actor 类型。          |
+| actorId   | Actor ID           |
+| name      | 要创建 reminders 的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
@@ -234,43 +234,43 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
     }'
 ```
 
-### Get actor reminder
+### 获取 actor reminders
 
-Gets a reminder for an actor.
+获取一个 actor 的 reminders。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| daprPort  | The Dapr port.                   |
-| actorType | The actor type.                  |
-| actorId   | The actor ID.                    |
-| name      | The name of the reminder to get. |
+| 参数        | 说明                 |
+| --------- | ------------------ |
+| daprPort  | Dapr 端口。           |
+| actorType | Actor 类型。          |
+| actorId   | The actor ID.      |
+| name      | 要获取 reminders 的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
   "Content-Type: application/json"
 ```
 
-The above command returns the reminder:
+以上命令将返回 reminders:
 
 ```json
 {
@@ -280,47 +280,47 @@ The above command returns the reminder:
 }
 ```
 
-### Delete actor reminder
+### 删除 actor reminders
 
-Deletes a reminder for an actor.
+删除一个 actor 的 reminders。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description                         |
-| --------- | ----------------------------------- |
-| daprPort  | The Dapr port.                      |
-| actorType | The actor type.                     |
-| actorId   | The actor ID.                       |
-| name      | The name of the reminder to delete. |
+| 参数        | 说明                 |
+| --------- | ------------------ |
+| daprPort  | Dapr 端口。           |
+| actorType | Actor 类型。          |
+| actorId   | Actor ID           |
+| name      | 要删除 reminders 的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
   -X "Content-Type: application/json"
 ```
 
-### Create actor timer
+### 创建 Actor timers
 
-Creates a timer for an actor.
+创建一个 actor 的 reminders。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<name>
@@ -328,7 +328,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<n
 
 Body:
 
-The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
+以下指定 `dueTime` 的 3 秒和period 为 7 秒。
 ```json
 {
   "dueTime":"0h0m3s0ms",
@@ -336,7 +336,7 @@ The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
 }
 ```
 
-A `dueTime` of 0 means to fire immediately.  The following body means to fire immediately, then every 9 seconds.
+`dueTime` 为0表示立即执行。  以下正文是指立即执行，然后每 9 秒钟再执行一次。
 ```json
 {
   "dueTime":"0h0m0s0ms",
@@ -344,26 +344,26 @@ A `dueTime` of 0 means to fire immediately.  The following body means to fire im
 }
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| daprPort  | The Dapr port.                   |
-| actorType | The actor type.                  |
-| actorId   | The actor ID.                    |
-| name      | The name of the timer to create. |
+| 参数        | 说明             |
+| --------- | -------------- |
+| daprPort  | Dapr 端口。       |
+| actorType | Actor 类型。      |
+| actorId   | Actor ID       |
+| name      | 要创建 timer 的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
@@ -376,82 +376,82 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
     }'
 ```
 
-### Delete actor timer
+### 删除 Actor timers
 
-Deletes a timer for an actor.
+删除一个 actor 的 timer。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```http
 DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<name>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| daprPort  | The Dapr port.                   |
-| actorType | The actor type.                  |
-| actorId   | The actor ID.                    |
-| name      | The name of the timer to delete. |
+| 参数        | 说明             |
+| --------- | -------------- |
+| daprPort  | Dapr 端口。       |
+| actorType | Actor 类型。      |
+| actorId   | Actor ID       |
+| name      | 要删除 timer 的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
   -X "Content-Type: application/json"
 ```
 
-## Dapr calling to user service code
+## Dapr 调用用户服务
 
-### Get registered actors
+### 获取注册的 Actors
 
-Gets the registered actors types for this app and the Dapr actor configuration settings.
+获取此应用程序的注册的 Actors 类型和 Dapr actor 配置。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 GET http://localhost:<appPort>/dapr/config
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
+| Code | 说明   |
+| ---- | ---- |
+| 200  | 请求成功 |
+| 500  | 请求失败 |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description           |
-| --------- | --------------------- |
-| appPort   | The application port. |
+| 参数      | 说明     |
+| ------- | ------ |
+| appPort | 应用程序端口 |
 
-#### Examples
+#### 示例
 
-Example of getting the registered actors:
+获取注册的 Actors 的示例:
 
 ```shell
 curl -X GET http://localhost:3000/dapr/config \
   -H "Content-Type: application/json"
 ```
 
-The above command returns the config (all fields are optional):
+以上命令返回配置 ( 所有字段都是可选的):
 
 
-| Parameter               | Description                                                                                                                                                                                                    |
+| 参数                      | 说明                                                                                                                                                                                                             |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| entities                | The actor types this app supports.                                                                                                                                                                             |
-| actorIdleTimeout        | Specifies how long to wait before deactivating an idle actor.  An actor is idle if no actor method calls and no reminders have fired on it.                                                                    |
-| actorScanInterval       | A duration which specifies how often to scan for actors to deactivate idle actors.  Actors that have been idle longer than the actorIdleTimeout will be deactivated.                                           |
+| entities                | 此应用程序支持的 actor 类型。                                                                                                                                                                                             |
+| actorIdleTimeout        | 指定在取消激活空闲 actor 之前要等待的时间。  如果没有 actor 方法被调用，并且没有触发任何 reminders ，那么 actor 将处于空闲状态。                                                                                                                              |
+| actorScanInterval       | 指定扫描 Actors 以停用空闲 Actors 的频率时间间隔。  Actors 时间超过 actorIdleTimeout 的 Actors 将被取消激活。                                                                                                                               |
 | drainOngoingCallTimeout | A duration used when in the process of draining rebalanced actors.  This specifies how long to wait for the current active actor method to finish.  If there is no current actor method call, this is ignored. |
 | drainRebalancedActors   | A bool.  If true, Dapr will wait for `drainOngoingCallTimeout` to allow a current actor call to complete before trying to deactivate an actor.  If false, do not wait.                                         |
 
