@@ -3,25 +3,25 @@ type: docs
 title: "指南：发布消息并订阅主题"
 linkTitle: "How-To: Publish & subscribe"
 weight: 2000
-description: "Learn how to send messages to a topic with one service and subscribe to that topic in another service"
+description: "了解如何使用一个服务向主题发送消息，并在另一个服务中订阅该主题"
 ---
 
-## Introduction
+## 简介
 
-Pub/Sub is a common pattern in a distributed system with many services that want to utilize decoupled, asynchronous messaging. Using Pub/Sub, you can enable scenarios where event consumers are decoupled from event producers.
+Pub/Sub 是一个分布式系统中的常见模式，它有许多服务用于解偶、异步消息传递。 使用Pub/Sub，您可以在事件消费者与事件生产者解偶的场景中启用。
 
-Dapr provides an extensible Pub/Sub system with At-Least-Once guarantees, allowing developers to publish and subscribe to topics. Dapr provides different implementation of the underlying system, and allows operators to bring in their preferred infrastructure, for example Redis Streams, Kafka, etc.
+Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次），允许开发者发布和订阅主题。 Dapr 提供了对底层系统的不同实现，并允许运维引入其偏爱的基础设施，例如 Redis Streams、Kafka 等。
 
-## Step 1: Setup the Pub/Sub component
+## 步骤 1: 设置 Pub/Sub 组件
 
-The first step is to setup the Pub/Sub component:
+第一步是设置 Pub/Sub 组件：
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
-Redis Streams is installed by default on a local machine when running `dapr init`.
+运行 `dapr init` 时默认在本地机器上安装 Redis 流。
 
-Verify by opening your components file under `%UserProfile%\.dapr\components\pubsub.yaml` on Windows or `~/.dapr/components/pubsub.yaml` on Linux/MacOS:
+在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yam` 或在 Windows 上打开`%UserProfile%\.dapr\components\pubsub.yaml` 组件文件以验证:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -37,7 +37,7 @@ spec:
     value: ""
 ```
 
-You can override this file with another Redis instance or another [pubsub component]({{< ref setup-pubsub >}}) by creating a `components` directory containing the file and using the flag `--components-path` with the `dapr run` CLI command.
+您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
 {{% /codetab %}}
 
 {{% codetab %}}
