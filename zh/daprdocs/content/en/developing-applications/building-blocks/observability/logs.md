@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Logs"
+title: "日志"
 linkTitle: "Logs"
 weight: 3000
-description: "Understand Dapr logging"
+description: "了解 Dapr 日志记录"
 ---
 
-Dapr produces structured logs to stdout either as a plain text or JSON formatted. By default, all Dapr processes (runtime and system services) write to console out in plain text. To enable JSON formatted logs, you need to add the `--log-as-json` command flag when running Dapr processes.
+Dapr以纯文本形式或JSON格式生成结构化日志到标准输出。 默认情况下，所有 Dapr 进程 (运行时和系统服务) 都以纯文本写入控制台输出。 To enable JSON formatted logs, you need to add the `--log-as-json` command flag when running Dapr processes.
 
 If you want to use a search engine such as Elastic Search or Azure Monitor to search the logs, it is recommended to use JSON-formatted logs which the log collector and search engine can parse using the built-in JSON parser.
 
