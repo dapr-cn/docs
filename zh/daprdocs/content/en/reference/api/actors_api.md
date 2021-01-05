@@ -495,7 +495,7 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 
 #### 示例
 
-取消激活 actor 的示例: 该示例取消激活 actorId 为 50 的 actor 类型为 stormtroper
+取消激活 actor 的示例: 该示例取消激活 actorId 为 50 的 actor 类型为 stormtrooper
 
 ```shell
 curl -X DELETE http://localhost:3000/actors/stormtrooper/50 \
@@ -512,156 +512,156 @@ curl -X DELETE http://localhost:3000/actors/stormtrooper/50 \
 PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter  | Description                       |
-| ---------- | --------------------------------- |
-| appPort    | The application port.             |
-| actorType  | The actor type.                   |
-| actorId    | The actor ID.                     |
-| methodName | The name of the method to invoke. |
+| 参数         | 说明         |
+| ---------- | ---------- |
+| appPort    | 应用程序端口     |
+| actorType  | Actor 类型。  |
+| actorId    | Actor ID   |
+| methodName | 要调用的方法的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
-Example of invoking a method for an actor: The example calls the performAction method on the actor type stormtrooper that has actorId of 50
+对 actor 调用方法的示例: 该示例调用 actorId 为 50 的 actor 类型 stormtrooper上的 performAction 方法
 
 ```shell
 curl -X POST http://localhost:3000/actors/stormtrooper/50/method/performAction \
   -H "Content-Type: application/json"
 ```
 
-### Invoke reminder
+### 调用 reminders
 
-Invokes a reminder for an actor with the specified reminderName.  If the actor is not already running, the app side should [activate](#activating-an-actor) it.
+调用具有指定的 reminderName 的 actor 的 reminders。  如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/remind/<reminderName>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter    | Description                         |
-| ------------ | ----------------------------------- |
-| appPort      | The application port.               |
-| actorType    | The actor type.                     |
-| actorId      | The actor ID.                       |
-| reminderName | The name of the reminder to invoke. |
+| 参数           | 说明                 |
+| ------------ | ------------------ |
+| appPort      | 应用程序端口             |
+| actorType    | Actor 类型。          |
+| actorId      | Actor ID           |
+| reminderName | 要调用 reminders 的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
-Example of invoking a reminder for an actor: The example calls the checkRebels reminder method on the actor type stormtrooper that has actorId of 50
+对 actor 调用 reminders 的示例: 该示例调用 actorId 为 50 的参与者类型 stormtrooper 上的 checkRebels reminders 方法
 
 ```shell
 curl -X POST http://localhost:3000/actors/stormtrooper/50/method/remind/checkRebels \
   -H "Content-Type: application/json"
 ```
 
-### Invoke timer
+### 调用 timer
 
-Invokes a timer for an actor rwith the specified timerName.  If the actor is not already running, the app side should [activate](#activating-an-actor) it.
+为具有指定 timerName 的 actor 调用 timer。  如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/timer/<timerName>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| appPort   | The application port.            |
-| actorType | The actor type.                  |
-| actorId   | The actor ID.                    |
-| timerName | The name of the timer to invoke. |
+| 参数        | 说明             |
+| --------- | -------------- |
+| appPort   | 应用程序端口         |
+| actorType | Actor 类型。      |
+| actorId   | Actor ID       |
+| timerName | 要调用 timer 的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
-Example of invoking a timer for an actor: The example calls the checkRebels timer method on the actor type stormtrooper that has actorId of 50
+为 actor 调用 timer 的示例: 该示例调用 actorId 为 50 的 actor 类型 stormtrooper 上的 checkRebels timer 方法
 
 ```shell
 curl -X POST http://localhost:3000/actors/stormtrooper/50/method/timer/checkRebels \
   -H "Content-Type: application/json"
 ```
 
-### Health check
+### 健康检查
 
-Probes the application for a response to signal to Dapr that the app is healthy and running. Any other response status code other than `200` will be considered as an unhealthy response.
+探测应用程序以响应向 Dapr 发送的信号，用于表征该应用程序运行正常与否。 除了 `200` 以外的任何其他响应状态代码将被视为不健康的响应。
 
-A response body is not required.
+不需要响应主体。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 GET http://localhost:<appPort>/healthz
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description    |
-| ---- | -------------- |
-| 200  | App is healthy |
+| Code | 说明       |
+| ---- | -------- |
+| 200  | 应用程序是健康的 |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description           |
-| --------- | --------------------- |
-| appPort   | The application port. |
+| 参数      | 说明     |
+| ------- | ------ |
+| appPort | 应用程序端口 |
 
-#### Examples
+#### 示例
 
-Example of getting a health check response from the app:
+从应用程序获取健康检查响应的示例：
 
 ```shell
 curl -X GET http://localhost:3000/healthz \
 ```
 
-## Activating an Actor
+## 激活 Actor
 
-Conceptually, activating an actor  means creating the actor's object and adding the actor to a tracking table.  Here is an [example](https://github.com/dapr/dotnet-sdk/blob/6c271262231c41b21f3ca866eb0d55f7ce8b7dbc/src/Dapr.Actors/Runtime/ActorManager.cs#L199) from the .NET SDK.
+在概念上，激活 actor 意味着创建 actor 的对象并将 actor 添加到跟踪表。  下面是一个 [.NET SDK](https://github.com/dapr/dotnet-sdk/blob/6c271262231c41b21f3ca866eb0d55f7ce8b7dbc/src/Dapr.Actors/Runtime/ActorManager.cs#L199) 的一个示例。
 
-## Querying actor state externally
+## 外部查询 actor 状态
 
-In order to enable visibility into the state of an actor and allow for complex scenarios such as state aggregation, Dapr saves actor state in external state stores such as databases. As such, it is possible to query for an actor state externally by composing the correct key or query.
+为了启用对 actor 状态的可见性并允许复杂的方案（如状态聚合），Dapr 在外部状态存储（如数据库）中保存 actor 状态。 因此，可以通过组成正确的键或查询来外部查询 actor 状态。
 
-The state namespace created by Dapr for actors is composed of the following items:
-- App ID - Represents the unique ID given to the Dapr application.
-- Actor Type - Represents the type of the actor.
-- Actor ID - Represents the unique ID of the actor instance for an actor type.
-- Key - A key for the specific state value. An actor ID can hold multiple state keys.
+由 Dapr 为 Actors 创建的状态名称空间由以下项组成:
+- App ID - 表示给 Dapr 应用程序的唯一 ID。
+- Actor 类型 - 表示 actor 的类型。
+- Actor ID - 代表 actor 类型的 actor 实例的唯一ID。
+- Key - 特定状态值的键。 Actor ID 标识可以保存多个状态键。
 
-The following example shows how to construct a key for the state of an actor instance under the `myapp` App ID namespace: `myapp-cat-hobbit-food`
+下面的示例演示如何在 `myapp` 应用程序 ID 命名空间下为 actor 实例的状态构造状态名称空间： `myapp-cat-hobbit-food`
 
-In the example above, we are getting the value for the state key `food`, for the actor ID `hobbit` with an actor type of `cat`, under the App ID namespace of `myapp`.
+在以上示例中，我们在 `myapp` 的应用标识名称空间下，为 actor ID 为 `hobbit` ( actor 类型为 `cat`) 获取状态键 `food`的值。
