@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "How-To: Publish a message and subscribe to a topic"
+title: "指南：发布消息并订阅主题"
 linkTitle: "How-To: Publish & subscribe"
 weight: 2000
 description: "Learn how to send messages to a topic with one service and subscribe to that topic in another service"
