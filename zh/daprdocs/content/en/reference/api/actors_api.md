@@ -469,44 +469,44 @@ curl -X GET http://localhost:3000/dapr/config \
 
 通过将 指定 actor Id 的 actor 保留到状态存储与来停用 actor
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 ```
 
-#### HTTP Response Codes
+#### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
-| 404  | Actor not found    |
+| Code | 说明        |
+| ---- | --------- |
+| 200  | 请求成功      |
+| 500  | 请求失败      |
+| 404  | 未找到 Actor |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description           |
-| --------- | --------------------- |
-| appPort   | The application port. |
-| actorType | The actor type.       |
-| actorId   | The actor ID.         |
+| 参数        | 说明        |
+| --------- | --------- |
+| appPort   | 应用程序端口    |
+| actorType | Actor 类型。 |
+| actorId   | Actor ID  |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
-Example of deactivating an actor: The example deactives the actor type stormtrooper that has actorId of 50
+取消激活 actor 的示例: 该示例取消激活 actorId 为 50 的 actor 类型为 stormtroper
 
 ```shell
 curl -X DELETE http://localhost:3000/actors/stormtrooper/50 \
   -H "Content-Type: application/json"
 ```
 
-### Invoke actor method
+### 调用 actor 方法
 
-Invokes a method for an actor with the specified methodName where parameters to the method are passed in the body of the request message and return values are provided in the body of the response message.  If the actor is not already running, the app side should [activate](#activating-an-actor) it.
+调用具有指定 methodName 的 actor 的方法，其中方法的参数传递到请求消息的主体中，并在响应消息的主体中提供返回值。  如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
