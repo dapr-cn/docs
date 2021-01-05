@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "HTTP binding spec"
+title: "HTTP 绑定规范"
 linkTitle: "HTTP"
-description: "Detailed documentation on the HTTP binding component"
+description: "HTTP 绑定组件的详细文档"
 ---
 
 ## 设置 Dapr 组件
@@ -28,10 +28,10 @@ spec:
 
 ## 输出绑定支持的操作
 
-* 创建
+* create
 
-## Related links
+## 相关链接
 - [Bindings building block]({{< ref bindings >}})
-- [如何处理：触发带输入绑定的应用程序]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [如何使用 Bindings 作为接口连接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
