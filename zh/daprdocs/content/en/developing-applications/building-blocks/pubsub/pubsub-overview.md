@@ -57,18 +57,18 @@ Dapr 允许两种方法订阅主题: **声明式**，在外部文件中定义订
 
 ### At-Least-Once 保证
 
-Dapr 保证消息传递 at-least-once 语义。 That means that when an application publishes a message to a topic using the publish/subscribe API, Dapr ensures that this message will be delivered at least once to every subscriber.
+Dapr 保证消息传递 at-least-once 语义。 这意味着，当应用程序使用发布/订阅 API 将消息发布到主题时，Dapr 可确保此消息至少传递给每个订阅者一次。
 
-### Consumer groups and multiple instances
+### 多个消费组和多实例
 
-The burden of dealing with concepts like consumer groups and multiple application instances using a single consumer group is all handled automatically by Dapr. When multiple instances of the same application (same IDs) subscribe to a topic, Dapr delivers each message to only one instance of that application. Similarly, if two different applications (different IDs) subscribe to the same topic, Dapr will deliver each message to only one instance of each application.
+多个消费组、多个应用程序实例使用一个消费组，这些都将由 Dapr 自动处理。 当同一个应用程序的多个实例(相同的 ID) 订阅主题时，Dapr 只将每个消息传递给该应用程序的一个实例。 同样，如果两个不同的应用程序 (不同的 ID) 订阅同一主题，那么 Dapr 将每个消息仅传递到每个应用程序的一个实例。
 
-### Topic scoping
+### 主题范围
 
-By default, all topics backing the Dapr publish/subscribe component (e.g. Kafka, Redis, RabbitMQ) are available to every application configured with that component. To limit which application can publish or subscribe to topics, Dapr provides topic scoping. See [publish/subscribe topic scoping]({{< ref pubsub-scopes.md >}}) for more information.
+默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅主题，Dapr 提供了主题范围。 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}) 了解更多信息。
 
-## Next steps
+## 下一步
 
-- Read the How-To guide on [publishing and subscribing]({{< ref howto-publish-subscribe.md >}})
-- Learn about [Pub/Sub scopes]({{< ref pubsub-scopes.md >}})
-- Read the [API reference]({{< ref pubsub_api.md >}})
+- 阅读 [发布和订阅]({{< ref howto-publish-subscribe.md >}})指南
+- 了解 [发布/订阅范围]({{< ref pubsub-scopes.md >}})
+- 阅读 [API 引用]({{< ref pubsub_api.md >})
