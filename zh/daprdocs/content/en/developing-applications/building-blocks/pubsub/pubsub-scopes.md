@@ -21,28 +21,28 @@ description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程
 
 要使用这个主题范围，可以设置一个 pub/sub 组件的三个元数据属性：
 - `spec.metadata.publishingScopes`
-  - 分号分隔应用程序列表& 逗号分隔的主题列表表示允许该 app 发布信息到主题列表
+  - 分号分隔应用程序列表& 逗号分隔的主题列表允许该 app 发布信息到主题列表
   - 如果在 `publishingScopes` (缺省行为) 中未指定任何内容，那么所有应用程序可以发布到所有主题
   - 要拒绝应用程序发布信息到任何主题，请将主题列表留空 (`app1=;app2=topic2`)
-  - For example, `app1=topic1;app2=topic2,topic3;app3=` will allow app1 to publish to topic1 and nothing else, app2 to publish to topic2 and topic3 only, and app3 to publish to nothing.
+  - 例如， `app1=topic1;app2=topic2,topic3;app3=` 允许 app1 发布信息至 topic1 ，app2 允许发布信息到 topic2 和 topic3 ，app3 不允许发布信息到任何主题。
 - `spec.metadata.subscriptionScopes`
-  - A semicolon-separated list of applications & comma-separated topic lists, allowing that app to subscribe to that list of topics
-  - If nothing is specified in `subscriptionScopes` (default behavior), all apps can subscribe to all topics
-  - For example, `app1=topic1;app2=topic2,topic3` will allow app1 to subscribe to topic1 only and app2 to subscribe to topic2 and topic3
+  - 分号分隔应用程序列表& 逗号分隔的主题列表允许该 app 订阅主题列表
+  - 如果在 `subscriptionScopes` (缺省行为) 中未指定任何内容，那么所有应用程序都可以订阅所有主题
+  - 例如， `app1=topic1;app2=topic2,topic3` 允许 app1 订阅 topic1 ，app2 可以订阅 topic2 和 topic3
 - `spec.metadata.allowedTopics`
-  - A comma-separated list of allowed topics for all applications.
-  - If `allowedTopics` is not set (default behavior), all topics are valid. `subscriptionScopes` and `publishingScopes` still take place if present.
-  - `publishingScopes` or `subscriptionScopes` can be used in conjuction with `allowedTopics` to add granular limitations
+  - 一个逗号分隔的允许主题列表，对所有应用程序。
+  - 如果未设置 `allowedTopics` (缺省行为) ，那么所有主题都有效。 `subscriptionScopes` 和 `publishingScopes` 如果存在则仍然生效。
+  - `publishingScopes` 或 `subscriptionScopes` 可用于与 `allowedTopics` 的 conjuction ，以添加限制粒度
 
-These metadata properties can be used for all pub/sub components. The following examples use Redis as pub/sub component.
+这些元数据属性可用于所有 pub/sub 组件。 以下示例使用 Redis 作为 pub/sub 组件。
 
-## Example 1: Scope topic access
+## 示例 1: 限制主题访问权限
 
-Limiting which applications can publish/subscribe to topics can be useful if you have topics which contain sensitive information and only a subset of your applications are allowed to publish or subscribe to these.
+如果主题包含敏感信息，并且只允许应用程序的某个子集发布或订阅这些主题，限制哪些应用程序可以发布/订阅主题可能很有用。
 
-It can also be used for all topics to have always a "ground truth" for which applications are using which topics as publishers/subscribers.
+它还可以用于所有主题，以始终具有应用程序使用哪些主题作为发布者/订阅者的“基本事实”。
 
-Here is an example of three applications and three topics:
+以下是三个应用程序和三个主题的示例:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -63,7 +63,7 @@ spec:
     value: "app2=;app3=topic1"
 ```
 
-The table below shows which applications are allowed to publish into the topics:
+下表显示哪些应用程序允许在主题中发布：
 
 |      | topic1 | topic2 | topic3 |
 | ---- | ------ | ------ | ------ |
@@ -71,7 +71,7 @@ The table below shows which applications are allowed to publish into the topics:
 | app2 |        | X      | X      |
 | app3 |        |        |        |
 
-The table below shows which applications are allowed to subscribe to the topics:
+下表显示哪些应用程序可以订阅主题：
 
 |      | topic1 | topic2 | topic3 |
 | ---- | ------ | ------ | ------ |
@@ -79,7 +79,7 @@ The table below shows which applications are allowed to subscribe to the topics:
 | app2 |        |        |        |
 | app3 | X      |        |        |
 
-> Note: If an application is not listed (e.g. app1 in subscriptionScopes) it is allowed to subscribe to all topics. Because `allowedTopics` is not used and app1 does not have any subscription scopes, it can also use additional topics not listed above.
+> 注意: 如果应用程序未列出 ( 例如， subscriptionScopes 中的 app1) ，那么允许订阅所有主题。 Because `allowedTopics` is not used and app1 does not have any subscription scopes, it can also use additional topics not listed above.
 
 ## Example 2: Limit allowed topics
 
