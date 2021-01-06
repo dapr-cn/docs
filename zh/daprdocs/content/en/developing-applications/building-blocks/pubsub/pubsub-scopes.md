@@ -79,17 +79,17 @@ spec:
 | app2 |        |        |        |
 | app3 | X      |        |        |
 
-> 注意: 如果应用程序未列出 ( 例如， subscriptionScopes 中的 app1) ，那么允许订阅所有主题。 Because `allowedTopics` is not used and app1 does not have any subscription scopes, it can also use additional topics not listed above.
+> 注意: 如果应用程序未列出 ( 例如， subscriptionScopes 中的 app1) ，那么允许订阅所有主题。 因为 `allowedTopics` 未使用，而 app1 任何订阅范围，因此它还可以使用上面未列出的其他主题。
 
-## Example 2: Limit allowed topics
+## 示例 2: 限制允许的主题
 
-A topic is created if a Dapr application sends a message to it. In some scenarios this topic creation should be governed. For example:
-- A bug in a Dapr application on generating the topic name can lead to an unlimited amount of topics created
-- Streamline the topics names and total count and prevent an unlimited growth of topics
+当 Dapr 应用程序给主题发送信息时，主题将自动创建。 在某些情况下，这个主题的创建应该得到管理。 例如:
+- Dapr 应用程序中有关生成主题名称的错误可能会导致创建无限数量的主题
+- 简化主题名称和总数，防止主题无限增长
 
-In these situations `allowedTopics` can be used.
+在这些情况下，可以使用 `allowedTopics`。
 
-Here is an example of three allowed topics:
+以下是三个允许的主题的示例:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -108,13 +108,13 @@ spec:
     value: "topic1,topic2,topic3"
 ```
 
-All applications can use these topics, but only those topics, no others are allowed.
+所有应用程序都可以使用这些主题，但仅允许这些主题，不允许其他主题。
 
-## Example 3: Combine `allowedTopics` and scopes
+## 示例 3: 组合 `allowedTopics` 和范围
 
-Sometimes you want to combine both scopes, thus only having a fixed set of allowed topics and specify scoping to certain applications.
+有时，您希望合并这两个作用域，从而仅具有固定的一组允许主题，并指定对某些应用程序的作用域限定。
 
-Here is an example of three applications and two topics:
+以下是三个应用程序和两个主题的示例:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -137,9 +137,9 @@ spec:
     value: "app1=;app2=A"
 ```
 
-> Note: The third application is not listed, because if an app is not specified inside the scopes, it is allowed to use all topics.
+> 注意: 第三个应用程序未列出，因为如果在作用域内未指定应用程序，那么允许使用所有主题。
 
-The table below shows which application is allowed to publish into the topics:
+下表显示允许哪些应用程序发布到主题中:
 
 |      | A | B | C |
 | ---- | - | - | - |
@@ -147,7 +147,7 @@ The table below shows which application is allowed to publish into the topics:
 | app2 | X | X |   |
 | app3 | X | X |   |
 
-The table below shows which application is allowed to subscribe to the topics:
+下表显示哪些应用程序允许订阅主题：
 
 |      | A | B | C |
 | ---- | - | - | - |
@@ -156,4 +156,4 @@ The table below shows which application is allowed to subscribe to the topics:
 | app3 | X | X |   |
 
 
-## Demo <iframe width="560" height="315" src="https://www.youtube.com/embed/7VdWBBGcbHQ?start=513" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## 例子 <iframe width="560" height="315" src="https://www.youtube.com/embed/7VdWBBGcbHQ?start=513" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
