@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Publish and subscribe overview"
+title: "发布和订阅概述"
 linkTitle: "Overview"
 weight: 1000
 description: "Overview of the Dapr Pub/Sub building block"
