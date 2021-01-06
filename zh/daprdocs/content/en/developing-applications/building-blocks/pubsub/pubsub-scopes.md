@@ -1,29 +1,29 @@
 ---
 type: docs
-title: "Scope Pub/Sub topic access"
+title: "限定 Pub/Sub 主题访问权限"
 linkTitle: "Scope topic access"
 weight: 5000
-description: "Use scopes to limit Pub/Sub topics to specific applications"
+description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程序"
 ---
 
-## Introduction
+## 简介
 
-[Namespaces or component scopes]({{< ref component-scopes.md >}}) can be used to limit component access to particular applications. These application scopes added to a component limit only the applications with specific IDs to be able to use the component.
+[名称空间或组件 scopes]({{< ref component-scopes.md >}}) 可用于限制对特定应用程序的组件访问。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
 
-In addition to this general component scope, the following can be limited for pub/sub components:
-- Which topics which can be used (published or subscribed)
-- Which applications are allowed to publish to specific topics
-- Which applications are allowed to subscribe to specific topics
+除了此常规组件范围外，对于 pub/sub 组件，还可以限制以下操作：
+- 哪些主题可以使用(发布或订阅)
+- 哪些应用程序被允许发布到特定主题
+- 哪些应用程序被允许订阅特定主题
 
-This is called **pub/sub topic scoping**.
+这称为 **pub/sub 主题作用域限定**。
 
-Pub/sub scopes are defined for each pub/sub component.  You may have a pub/sub component named `pubsub` that has one set of scopes, and another `pubsub2` with a different set.
+为每个 pub/sub 组件定义发布/订阅范围。  您可能有一个名为 `pubsub` 的 pub/sub 组件，它有一组范围设置，另一个 `pubsub2` 另有一组范围设置。
 
-To use this topic scoping three metadata properties can be set for a pub/sub component:
+要使用这个主题范围，可以设置一个 pub/sub 组件的三个元数据属性：
 - `spec.metadata.publishingScopes`
-  - A semicolon-separated list of applications & comma-separated topic lists, allowing that app to publish to that list of topics
-  - If nothing is specified in `publishingScopes` (default behavior), all apps can publish to all topics
-  - To deny an app the ability to publish to any topic, leave the topics list blank (`app1=;app2=topic2`)
+  - 分号分隔应用程序列表& 逗号分隔的主题列表表示允许该 app 发布信息到主题列表
+  - 如果在 `publishingScopes` (缺省行为) 中未指定任何内容，那么所有应用程序可以发布到所有主题
+  - 要拒绝应用程序发布信息到任何主题，请将主题列表留空 (`app1=;app2=topic2`)
   - For example, `app1=topic1;app2=topic2,topic3;app3=` will allow app1 to publish to topic1 and nothing else, app2 to publish to topic2 and topic3 only, and app3 to publish to nothing.
 - `spec.metadata.subscriptionScopes`
   - A semicolon-separated list of applications & comma-separated topic lists, allowing that app to subscribe to that list of topics
