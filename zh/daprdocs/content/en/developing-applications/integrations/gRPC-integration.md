@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Dapr's gRPC Interface"
+title: "Dapr的 gRPC 接口"
 linkTitle: "gRPC"
 weight: 1000
-description: "Use the Dapr gRPC API in your application"
+description: "在应用程序中使用 Dapr gRPC API"
 ---
 
-# Dapr and gRPC
+# Dapr 和 gRPC
 
 Dapr implements both an HTTP and a gRPC API for local calls. gRPC is useful for low-latency, high performance scenarios and has language integration using the proto clients.
 
