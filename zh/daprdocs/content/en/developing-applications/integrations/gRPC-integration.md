@@ -8,7 +8,7 @@ description: "在应用程序中使用 Dapr gRPC API"
 
 # Dapr 和 gRPC
 
-Dapr implements both an HTTP and a gRPC API for local calls. gRPC is useful for low-latency, high performance scenarios and has language integration using the proto clients.
+Dapr 为本地调用实现 HTTP 和 gRPC API 。 gRPC 对于低延迟，高性能场景非常有用，并且具有使用 pro-Client 客户端的语言集成。
 
 You can find a list of auto-generated clients [here](https://github.com/dapr/docs#sdks).
 
