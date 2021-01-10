@@ -65,10 +65,10 @@ Dapr 保证消息传递 at-least-once 语义。 这意味着，当应用程序�
 
 ### 主题范围
 
-默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅主题，Dapr 提供了主题范围。 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}) 了解更多信息。
+默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅主题，Dapr 提供了主题范围。 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}}) 了解更多信息。
 
 ## 下一步
 
 - 阅读 [发布和订阅]({{< ref howto-publish-subscribe.md >}})指南
 - 了解 [发布/订阅范围]({{< ref pubsub-scopes.md >}})
-- 阅读 [API 引用]({{< ref pubsub_api.md >})
+- 阅读 [API 引用]({{< ref pubsub_api.md >}})
