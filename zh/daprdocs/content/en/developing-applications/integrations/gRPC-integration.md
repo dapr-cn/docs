@@ -73,11 +73,11 @@ spec:
 
 
 
-## Invoking Dapr with gRPC - Go example
+## 使用 gRPC 调用 dapr - 执行示例
 
-The following steps show you how to create a Dapr client and call the `SaveStateData` operation on it:
+下面的步骤显示了如何创建 Dapr 客户端并调用 `保存状态数据` 操作：
 
-1. Import the package
+1. 导入包
 
 
 
@@ -94,7 +94,7 @@ import (
 ```
 
 
-2. Create the client
+2. 创建客户端
 
 
 
@@ -112,7 +112,7 @@ defer client.Close()
 ```
 
 
-3. Invoke the Save State method
+3. 调用 " 保存状态 " 方法
 
 
 
@@ -128,15 +128,15 @@ logger.Println("data saved")
 
 Hooray!
 
-Now you can explore all the different methods on the Dapr client.
+现在你可以探索Dapr客户端上的所有不同方法。
 
 
 
-## Creating a gRPC app with Dapr
+## 使用 Dapr 创建 gRPC 应用程序
 
-The following steps will show you how to create an app that exposes a server for Dapr to communicate with.
+以下步骤将向您显示如何创建一个让Dapr服务器与之通信的应用程序。
 
-1. Import the package
+1. 导入包
 
 
 
@@ -159,7 +159,7 @@ import (
 ```
 
 
-2. Implement the interface
+2. 实现接口
 
 
 
@@ -222,7 +222,7 @@ func (s *server) OnTopicEvent(ctx context.Context, in *pb.TopicEventRequest) (*e
 ```
 
 
-3. Create the server
+3. 创建服务器
 
 
 
@@ -248,9 +248,9 @@ func main() {
 ```
 
 
-This creates a gRPC server for your app on port 4000.
+这将在端口 4000 上为应用程序创建一个 gRPC 服务器。
 
-4. Run your app
+4. 运行你的应用
 
 To run locally, use the Dapr CLI:
 
@@ -261,15 +261,15 @@ dapr run --app-id goapp --app-port 4000 --app-protocol grpc go run main.go
 ```
 
 
-On Kubernetes, set the required `dapr.io/app-protocol: "grpc"` and `dapr.io/app-port: "4000` annotations in your pod spec template as mentioned above.
+在 Kubernetes 上，设置所需的 `dapr.io/app-protocol: "grpc"` 和 `dapr.io/app-port: " 4000` 注释在您的 Pod 规范模板中如上所述。
 
 
 
 ## Other languages
 
-You can use Dapr with any language supported by Protobuf, and not just with the currently available generated SDKs. Using the [protoc](https://developers.google.com/protocol-buffers/docs/downloads) tool you can generate the Dapr clients for other languages like Ruby, C++, Rust and others.
+您可以将 Dapr 与 Protobuf 支持的任何语言一起使用，而不只是使用当前可用的生成 SDK。 使用 [原型](https://developers.google.com/protocol-buffers/docs/downloads) 工具，您可以为 Ruby， C++， Rust 等其他语言生成 Dapr 客户机。
 
-## Related Topics
+## 相关主题
 
 - [Service invocation building block]({{< ref service-invocation >}})
 - [Service invocation API specification]({{< ref service_invocation_api.md >}})
