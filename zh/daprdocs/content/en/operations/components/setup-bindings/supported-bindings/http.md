@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "HTTP binding spec"
+title: "HTTP 绑定规范"
 linkTitle: "HTTP"
-description: "Detailed documentation on the HTTP binding component"
+description: "HTTP 绑定组件的详细文档"
 ---
 
-## Setup Dapr component
+## 设置 Dapr 组件
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -23,15 +23,15 @@ spec:
     value: GET
 ```
 
-- `url` is the HTTP url to invoke.
-- `method` is the HTTP verb to use for the request.
+- `url` 是要调用的 HTTP 网址。
+- `method` 是用于请求的 HTTP 动作。
 
-## Output Binding Supported Operations
+## 输出绑定支持的操作
 
 * create
 
-## Related links
+## 相关链接
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [如何使用 Bindings 作为接口连接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})

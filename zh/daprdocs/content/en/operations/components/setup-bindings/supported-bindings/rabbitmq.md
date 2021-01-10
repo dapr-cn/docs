@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "RabbitMQ binding spec"
+title: "RabbitMQ 绑定规范"
 linkTitle: "RabbitMQ"
 description: "Detailed documentation on the RabbitMQ binding component"
 ---
 
-## Setup Dapr component
+## 设置 Dapr 组件
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,26 +31,26 @@ spec:
     value: 0
 ```
 
-- `queueName` is the RabbitMQ queue name.
-- `host` is the RabbitMQ host address.
-- `durable` tells RabbitMQ to persist message in storage.
-- `deleteWhenUnused` enables or disables auto-delete.
-- `ttlInSeconds` is an optional parameter to set the [default message time to live at RabbitMQ queue level](https://www.rabbitmq.com/ttl.html). If this parameter is omitted, messages won't expire, continuing to exist on the queue until processed.
-- `prefetchCount` is an optional parameter to set the [Channel Prefetch Setting (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch). If this parameter is omiited, QoS would set value to 0 as no limit.
+- `queueName` 是 RabbitMQ 队列名。
+- `host` 是 RabbitMQ 主机地址。
+- `durable` 告诉 RabbitMQ 将消息持久存储在存储器中。
+- `deleteWhenUnused` 启用或禁用自动删除。
+- `ttlInSeconds` 是一个可选的参数，可以将 [默认消息时间设置为在RabbitMQ 队列级别](https://www.rabbitmq.com/ttl.html) 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。
+- `prefetchCount` 是一个可选参数，用于设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch)。 如果此参数为空，QOS 会设置为0为无限制。
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Specifying a time to live on message level
+## 指定在消息级别上的生存时间
 
-Time to live can be defined on queue level (as illustrated above) or at the message level. The value defined at message level overwrites any value set at queue level.
+可以在队列级别 ( 如上所述) 或消息级别定义生存时间。 在消息级别定义的值会覆盖在队列级别设置的任何值。
 
-To set time to live at message level use the `metadata` section in the request body during the binding invocation.
+若要设置在消息级别生存的时间，请使用 `metadata` 请求正文中的元数据部分。
 
-The field name is `ttlInSeconds`.
+字段名为 `ttlInSeconds`。
 
-Example:
+示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
@@ -66,11 +66,11 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
       }'
 ```
 
-## Output Binding Supported Operations
+## 输出绑定支持的操作
 
 * create
 
-## Related links
+## 相关链接
 - [Bindings building block]({{< ref bindings >}})
 - [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
 - [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})

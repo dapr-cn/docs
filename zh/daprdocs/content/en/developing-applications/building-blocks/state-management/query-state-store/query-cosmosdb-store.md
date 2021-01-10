@@ -3,7 +3,7 @@ type: docs
 title: "Azure Cosmos DB"
 linkTitle: "Azure Cosmos DB"
 weight: 1000
-description: "Use Azure Cosmos DB as a backend state store"
+description: "使用 azure Cosmos DB 作为后端状态存储"
 ---
 
 Dapr doesn't transform state values while saving and retrieving states. Dapr requires all state store implementations to abide by a certain key format scheme (see [Dapr state management spec]({{< ref state_api.md >}}). You can directly interact with the underlying store to manipulate the state data, such querying states, creating aggregated views and making backups.

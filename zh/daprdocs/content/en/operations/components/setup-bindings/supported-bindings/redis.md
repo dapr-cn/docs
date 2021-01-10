@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "Redis binding spec"
+title: "Redis 绑定规范"
 linkTitle: "Redis"
-description: "Detailed documentation on the Redis binding component"
+description: "Redis 组件绑定详细说明"
 ---
 
-## Setup Dapr component
+## 设置 Dapr 组件
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -25,20 +25,20 @@ spec:
     value: <bool>
 ```
 
-- `redisHost` is the Redis host address.
-- `redisPassword` is the Redis password.
-- `enableTLS` - If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS.
+- `redisHost` 是 Redis 主机地址。
+- `RedisPassword` 是 Redis 密码。
+- `enableTLS` - 如果 Redis 实例支持使用公用证书的 TLS ，那么可以将其配置为启用或禁用 TLS。
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Output Binding Supported Operations
+## 输出绑定支持的操作
 
 * create
 
-## Related links
+## 相关链接
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [如何使用 Bindings 作为接口连接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 参考]({{< ref bindings_api.md >}})
