@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Metrics"
+title: "指标"
 linkTitle: "Metrics"
 weight: 4000
-description: "Observing Dapr metrics"
+description: "观察 dapr 指标"
 ---
 
-Dapr exposes a [Prometheus](https://prometheus.io/) metrics endpoint that you can scrape to gain a greater understanding of how Dapr is behaving and to setup alerts for specific conditions.
+Dapr 公开了一个 [Prometheus](https://prometheus.io/) 指标终结点，您可以扫描该终结点，以更深入地了解 Dapr 的行为方式，针对特定条件设置警报。
 
-## Configuration
+## 配置
 
-The metrics endpoint is enabled by default, you can disable it by passing the command line argument `--enable-metrics=false` to Dapr system processes.
+默认情况下，指标终结点处于启用状态，您可以通过命令行参数 `--enable-metrics=false` 来使 Dapr 系统进程来禁用它。
 
 The default metrics port is `9090`. This can be overridden by passing the command line argument `--metrics-port` to Daprd.
 
