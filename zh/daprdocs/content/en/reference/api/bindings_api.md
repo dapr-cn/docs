@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Bindings API reference"
+title: "Bindings API 引用"
 linkTitle: "Bindings API"
-description: "Detailed documentation on the bindings API"
+description: "关于 Bindings API 的详细文档"
 weight: 400
 ---
 
-Dapr provides bi-directional binding capabilities for applications and a consistent approach to interacting with different cloud/on-premise services or systems. Developers can invoke output bindings using the Dapr API, and have the Dapr runtime trigger an application with input bindings.
+Dapr 为应用程序提供双向绑定功能，并采用一致的方法来与不同的云/ 本地服务或系统进行交互。 开发者可以使用 Dapr API 调用输出绑定，并让 Dapr 运行时触发具有输入绑定的应用程序。
 
-Examples for bindings include `Kafka`, `Rabbit MQ`, `Azure Event Hubs`, `AWS SQS`, `GCP Storage` to name a few.
+绑定的示例包括 `Kafka`， `Rabbit MQ`， `Azure Event Hubs`， `AWS SQS`和 `GCP Storage`。
 
-## Bindings Structure
+## Bindings 结构
 
-A Dapr Binding yaml file has the following structure:
+Dapr 绑定 yaml 文件具有以下结构:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -27,17 +27,17 @@ spec:
     value: <VALUE>
 ```
 
-The `metadata.name` is the name of the binding.
+`metadata.name` 是绑定的名称。
 
-If running self hosted locally, place this file in your `components` folder next to your state store and message queue yml configurations.
+如果在本地 self hosted 运行，请将此文件放在您的 state store 和消息队列 yml 配置旁边的 `components` 文件夹中。
 
-If running on kubernetes apply the component to your cluster.
+如果在 kubernetes 上运行，那么应该将该组件应用于集群。
 
-> **Note:** In production never place passwords or secrets within Dapr component files. For information on securely storing and retrieving secrets using secret stores refer to [Setup Secret Store]({{< ref setup-secret-store >}})
+> **注意：** 在生产环境中，永远不会在 Dapr component 文件中放置密码或密钥。 有关使用 secret stores 和检索密钥的信息，请参阅 [设置 secret stores ]({{< ref setup-secret-store >}})
 
-## Invoking Service Code Through Input Bindings
+## 通过输入绑定调用服务代码
 
-A developer who wants to trigger their app using an input binding can listen on a `POST` http endpoint with the route name being the same as `metadata.name`.
+想要使用输入绑定触发应用的开发人员可以在 `POST` http 终结点上侦听以接收请求。路由名称与 `metadata.name`相同。
 
 On startup Dapr sends a `OPTIONS` request to the `metadata.name` endpoint and expects a different status code as `NOT FOUND (404)` if this application wants to subscribe to the binding.
 
