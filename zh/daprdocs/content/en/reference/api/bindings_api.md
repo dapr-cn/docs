@@ -39,13 +39,13 @@ spec:
 
 想要使用输入绑定触发应用的开发人员可以在 `POST` http 终结点上侦听以接收请求。路由名称与 `metadata.name`相同。
 
-On startup Dapr sends a `OPTIONS` request to the `metadata.name` endpoint and expects a different status code as `NOT FOUND (404)` if this application wants to subscribe to the binding.
+如果应用程序要订阅绑定，在启动 Dapr 时，将会对应用程序的所有已定义输入绑定发送 `OPTIONS` 请求，并期望 `NOT FOUND (404)` 以外的状态码。
 
-The `metadata` section is an open key/value metadata pair that allows a binding to define connection properties, as well as custom properties unique to the component implementation.
+`metadata` 部分是开放式键/值元数据对，它允许绑定定义连接属性以及组件实现独有的定制属性。
 
-### Examples
+### 示例
 
-For example, here's how a Python application subscribes for events from `Kafka` using a Dapr API compliant platform. Note how the metadata.name value `kafkaevent` in the components matches the POST route name in the Python code.
+例如，以下是 Python 应用程序如何使用 Dapr API 兼容平台从 `Kafka` 预订事件。 请注意，组件中的 metadata.name 值 `kafkaevent` 如何与 Python 代码中的 POST 路径名相匹配。
 
 #### Kafka Component
 
@@ -68,7 +68,7 @@ spec:
     value: "group1"
 ```
 
-#### Python Code
+#### Python 代码
 
 ```python
 from flask import Flask
@@ -81,62 +81,62 @@ def incoming():
     return "Kafka Event Processed!"
 ```
 
-### Binding endpoints
+### Binding 终结点
 
-Bindings are discovered from component yaml files. Dapr calls this endpoint on startup to ensure that app can handle this call. If the app doesn't have the endpoint, Dapr ignores it.
+Dapr 将从 component Yaml 文件中发现 Bindings。 Dapr 在启动时调用此端点，以确保应用程序可以处理此调用。 如果应用程序没有该终结点，那么 Dapr 将忽略。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 OPTIONS http://localhost:<appPort>/<name>
 ```
 
-#### HTTP Response codes
+#### HTTP 响应码
 
-| Code       | Description                                      |
-| ---------- | ------------------------------------------------ |
-| 404        | Application does not want to bind to the binding |
-| all others | Application wants to bind to the binding         |
+| 代码  | 描述                  |
+| --- | ------------------- |
+| 404 | 应用程序不希望绑定到 Bindings |
+| 其它  | 应用程序想要绑定到 Bindings  |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description             |
-| --------- | ----------------------- |
-| appPort   | the application port    |
-| name      | the name of the binding |
+| 参数      | 描述           |
+| ------- | ------------ |
+| appPort | 应用程序端口       |
+| name    | bindings 的名称 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
 ### Binding payload
 
-In order to deliver binding inputs, a POST call is made to user code with the name of the binding as the URL path.
+为了提供绑定的输入，将使用 POST 调用到用户代码，并将绑定的名称作为URL路径。
 
-#### HTTP Request
+#### HTTP 请求
 
 ```
 POST http://localhost:<appPort>/<name>
 ```
 
-#### HTTP Response codes
+#### HTTP 响应码
 
-| Code | Description                                          |
-| ---- | ---------------------------------------------------- |
-| 200  | Application processed the input binding successfully |
+| 代码  | 描述            |
+| --- | ------------- |
+| 200 | 应用程序已成功处理输入绑定 |
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter | Description             |
-| --------- | ----------------------- |
-| appPort   | the application port    |
-| name      | the name of the binding |
+| 参数      | 描述           |
+| ------- | ------------ |
+| appPort | 应用程序端口       |
+| name    | bindings 的名称 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-#### HTTP Response body (optional)
+#### HTTP 响应主体 (可选)
 
-Optionally, a response body can be used to directly bind input bindings with state stores or output bindings.
+可选地，响应正文可用于直接绑定具有 state stores 或输出 Bindings 的输入绑定。
 
-**Example:** Dapr stores `stateDataToStore` into a state store named "stateStore". Dapr sends `jsonObject` to the output bindings named "storage" and "queue" in parallel. If `concurrency` is not set, it is sent out sequential (the example below shows these operations are done in parallel)
+**示例:** Dapr 将 `stateDataToStore` 存储到名为 "stateStore"的状态存储中。 Dapr sends `jsonObject` to the output bindings named "storage" and "queue" in parallel. If `concurrency` is not set, it is sent out sequential (the example below shows these operations are done in parallel)
 
 ```json
 {
