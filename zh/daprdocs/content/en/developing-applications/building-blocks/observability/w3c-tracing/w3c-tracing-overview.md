@@ -88,20 +88,20 @@ Traceparent 标头以所有供应商都能理解的通用格式表示跟踪系�
 
 `traceparent: 00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01`
 
- The traceparent fields are detailed [here](https://www.w3.org/TR/trace-context/#traceparent-header)
+ Traceparent 字段的详细信息 [ 在这里 ](https://www. w3. org/Tr/trace-context/#traceparent-header)。
 
-#### Tracestate Header
-The tracestate header includes the parent in a potentially vendor-specific format:
+#### Tracestate 标头
+Tracestate 标头包含特定于供应商格式的父级（parent）。
 
 `tracestate: congo=t61rcWkgMzE`
 
-The tracestate fields are detailed [here](https://www.w3.org/TR/trace-context/#tracestate-header)
+Tracestate 字段的详细信息 [ 在这里 ](https://www.w3.org/TR/trace-context/#tracestate-header) 。
 
-### Trace context gRPC headers format
-In the gRPC API calls, trace context is passed through `grpc-trace-bin` header.
+### 跟踪上下文 gRPC 标头格式
+在 gRPC API 调用中，跟踪上下文通过 `grpc-trace-bin` 标头传递。
 
-## Related Links
-- [How To set up Application Insights for distributed tracing with OpenTelemetry]({{< ref open-telemetry-collector.md >}})
-- [How To set up Zipkin for distributed tracing]({{< ref zipkin.md >}})
-- [W3C trace context specification](https://www.w3.org/TR/trace-context/)
-- [Observability sample](https://github.com/dapr/quickstarts/tree/master/observability)
+## 相关链接
+- [操作方法：使用 OpenTelemetry Collector 为分布式跟踪安装应用程序洞察器]({{< ref open-telemetry-collector.md >}})
+- [操作方法: 为分布式跟踪安装 Zipkin]({{< ref zipkin.md >}})
+- [W3C 跟踪上下文规范](https://www.w3.org/TR/trace-context/)
+- [可观测性示例](https://github.com/dapr/quickstarts/tree/master/observability)
