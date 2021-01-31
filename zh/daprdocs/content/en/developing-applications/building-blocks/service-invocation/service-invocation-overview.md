@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "服务调用概述"
-linkTitle: "Overview"
+linkTitle: "概述"
 weight: 1000
 description: "服务调用构建块概述"
 ---
@@ -19,7 +19,7 @@ description: "服务调用构建块概述"
 
 Dapr 允许您通过一个组合了反向代理与内置服务发现的端点来克服这些挑战，同时能够利用内置的分布式跟踪，度量，错误处理等能力。
 
-Dapr 采用一种边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调用应用程序，请在任意 Dapr 实例上使用 `invoke` 这个API。 Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr 实例会相互发现并进行通信。
+Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调用应用程序，请在任意 Dapr 实例上使用 `invoke` 这个API。 Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr 实例会相互发现并进行通信。
 
 ### 调用逻辑
 
@@ -63,12 +63,12 @@ localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 
 导致重试的错误有：
 
-* Network errors including endpoint unavailability and refused connections
-* Authentication errors due to a renewing certificate on the calling/callee Dapr sidecars
+* 网络错误，包括端点不可用和拒绝连接
+* 因续订主调/被调方Dapr边车上的证书而导致的身份验证错误
 
-Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Connection establishment via gRPC to the target sidecar has a timeout of 5 seconds.
+每次调用重试的回退间隔是 1 秒，最多重试三次。 通过 gRPC 连接到目标 sidecar 的连接超时时间为 5 秒钟。
 
-### Service-to-service security
+### 服务间安全性
 
 All calls between Dapr applications can be made secure with mutual (mTLS) authentication on hosted platforms, including automatic certificate rollover, via the Dapr Sentry service. The diagram below shows this for self hosted applications.
 
