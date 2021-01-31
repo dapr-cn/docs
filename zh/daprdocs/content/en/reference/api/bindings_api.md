@@ -136,7 +136,7 @@ POST http://localhost:<appPort>/<name>
 
 可选地，响应正文可用于直接绑定具有 state stores 或输出 Bindings 的输入绑定。
 
-**示例:** Dapr 将 `stateDataToStore` 存储到名为 "stateStore"的状态存储中。 Dapr sends `jsonObject` to the output bindings named "storage" and "queue" in parallel. If `concurrency` is not set, it is sent out sequential (the example below shows these operations are done in parallel)
+**示例:** Dapr 将 `stateDataToStore` 存储到名为 "stateStore"的状态存储中。 Dapr 将 `jsonObject` 发送到名为 "storage" 和 " queue" 的输出绑定。 如果未设置 `concurrency` ，那么将顺序发出 ( 以下示例显示这些操作并行执行)
 
 ```json
 {
@@ -149,28 +149,28 @@ POST http://localhost:<appPort>/<name>
 }
 ```
 
-## Invoking Output Bindings
+## 调用输出绑定
 
-This endpoint lets you invoke a Dapr output binding. Dapr bindings support various operations, such as `create`.
+此端点允许您调用一个 Dapr 输出绑定。 Dapr 绑定支持各种操作，例如 `create`。
 
-See the [different specs]({{< ref supported-bindings >}}) on each binding to see the list of supported operations.
+请参阅 [ 每个绑定上的不同配置]({{< ref supported-bindings >}}) 以查看受支持操作的列表。
 
-### HTTP Request
+### HTTP 请求
 
 ```
 POST/PUT http://localhost:<daprPort>/v1.0/bindings/<name>
 ```
 
-### HTTP Response codes
+### HTTP 响应码
 
-| Code | Description        |
-| ---- | ------------------ |
-| 200  | Request successful |
-| 500  | Request failed     |
+| 代码  | 描述   |
+| --- | ---- |
+| 200 | 请求成功 |
+| 500 | 请求失败 |
 
 ### Payload
 
-The bindings endpoint receives the following JSON payload:
+绑定端点接收以下JSON payload ：
 
 ```json
 {
@@ -182,20 +182,20 @@ The bindings endpoint receives the following JSON payload:
 }
 ```
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-The `data` field takes any JSON serializable value and acts as the payload to be sent to the output binding. The `metadata` field is an array of key/value pairs and allows you to set binding specific metadata for each call. The `operation` field tells the Dapr binding which operation it should perform.
+`data` 字段需要任何 JSON 序列化值，并作为有效 payload 发送到输出绑定。 `metadata` 字段是键/值对的数组，允许您为每个调用设置绑定特定元数据。 `operation` 字段告诉 Dapr 绑定它应该执行的操作。
 
-### URL Parameters
+### URL 参数
 
-| Parameter | Description                              |
-| --------- | ---------------------------------------- |
-| daprPort  | the Dapr port                            |
-| name      | the name of the output binding to invoke |
+| 参数       | 描述                      |
+| -------- | ----------------------- |
+| daprPort | dapr 端口。                |
+| name     | 要调用 output binding 的名称。 |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
-### Examples
+### 示例
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
@@ -211,10 +211,10 @@ curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
       }'
 ```
 
-### Common metadata values
+### 通用元数据值
 
-There are common metadata properties which are support across multiple binding components. The list below illustrates them:
+存在公共元数据属性，这些属性支持多个绑定组件。 具体清单如下：
 
-| Property     | Description                                         | Binding definition                                                                                                                                      | Available in                                     |
-| ------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| ttlInSeconds | Defines the time to live in seconds for the message | If set in the binding definition will cause all messages to have a default time to live. The message ttl overrides any value in the binding definition. | RabbitMQ, Azure Service Bus, Azure Storage Queue |
+| 属性           | 描述                 | 绑定定义                                               | 有效范围                                             |
+| ------------ | ------------------ | -------------------------------------------------- | ------------------------------------------------ |
+| ttlInseconds | 定义消息的生存时间 ( 以秒为单位) | 如果在绑定定义中设置，那么将导致所有消息都具有缺省生存时间。 消息 ttl 覆盖绑定定义中的任何值。 | RabbitMQ, Azure Service Bus, Azure Storage Queue |
