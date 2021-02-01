@@ -1,11 +1,11 @@
 ---
-type: docs
+type: 文档
 title: "MySQL binding spec"
 linkTitle: "MySQL"
 description: "Detailed documentation on the MySQL binding component"
 ---
 
-## Setup Dapr component
+## 设置 Dapr 组件
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -53,9 +53,9 @@ also support connection pool configuration variables:
 - `connMaxLifetime`: duration string
 - `connMaxIdleTime`: duration string
 
-{{% alert title="Warning" color="warning" %}} The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}). {{% /alert %}}
+{{% alert title="Warning" color="warning" %}} The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。 {{% /alert %}}
 
-## Output Binding Supported Operations
+## 输出绑定支持的操作
 
 - `exec`
 - `query`
@@ -127,7 +127,7 @@ The `query` operation is used for `SELECT` statements, which returns the metadat
 
 ### close
 
-Finally, the `close` operation can be used to explicitly close the DB connection and return it to the pool. This operation doesn't have any response.
+Finally, the `close` operation can be used to explicitly close the DB connection and return it to the pool. This operation doesn't have any response. This operation doesn't have any response.
 
 **Request**
 
@@ -139,9 +139,9 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 
 > Note, the MySQL binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
 
-## Related links
+## 相关链接
 
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
