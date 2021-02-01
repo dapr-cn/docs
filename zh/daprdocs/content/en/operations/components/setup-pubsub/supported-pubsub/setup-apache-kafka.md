@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field        | Required | Details                                                                                                                                                                                                              | Example                                                     |
+| 字段           | Required | Details                                                                                                                                                                                                              | 示例                                                          |
 | ------------ |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | brokers      |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
 | authRequired |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`.                                                                                                                                                    | `"true"`, `"false"`                                         |
