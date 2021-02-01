@@ -34,7 +34,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field                | Required | Details                                                                                                 | Example                                                                                                                                    |
+| 字段                   | Required | Details                                                                                                 | 示例                                                                                                                                         |
 | -------------------- |:--------:| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | connectionString     |    Y     | Connection-string for the Event Hubs                                                                    | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
 | storageAccountName   |    Y     | Storage account name to use for the EventProcessorHost                                                  | `"myeventhubstorage"`                                                                                                                      |
