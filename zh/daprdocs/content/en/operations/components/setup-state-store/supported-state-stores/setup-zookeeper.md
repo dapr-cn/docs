@@ -45,7 +45,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                        | Example                                      |
+| 字段                | Required | Details                                                        | 示例                                           |
 | ----------------- |:--------:| -------------------------------------------------------------- | -------------------------------------------- |
 | servers           |    Y     | Comma delimited list of servers                                | `"zookeeper.default.svc.cluster.local:2181"` |
 | sessionTimeout    |    Y     | The session timeout value                                      | `"5s"`                                       |
@@ -85,7 +85,7 @@ For example, if installing using the example above, the Zookeeper host address w
 {{< /tabs >}}
 
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
