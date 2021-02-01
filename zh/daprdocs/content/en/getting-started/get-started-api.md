@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Use the Dapr API"
 linkTitle: "Use the Dapr API"
 weight: 30
