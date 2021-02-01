@@ -21,19 +21,19 @@ no_list: true
 
 ### Amazon Web Services (AWS)
 
-| Name                                           | Status |
+| 名称                                             | Status |
 | ---------------------------------------------- | ------ |
 | [AWS SNS/SQS]({{< ref setup-aws-snssqs.md >}}) | Alpha  |
 
 ### Google Cloud Platform (GCP)
 
-| Name                                           | Status |
+| 名称                                             | Status |
 | ---------------------------------------------- | ------ |
 | [GCP Pub/Sub]({{< ref setup-gcp-pubsub.md >}}) | Alpha  |
 
 ### Microsoft Azure
 
-| Name                                                       | Status |
+| 名称                                                         | Status |
 | ---------------------------------------------------------- | ------ |
 | [Azure Events Hub]({{< ref setup-azure-eventhubs.md >}})   | Alpha  |
 | [Azure Service Bus]({{< ref setup-azure-servicebus.md >}}) | Alpha  | 
