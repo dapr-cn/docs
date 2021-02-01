@@ -48,7 +48,7 @@ spec:
   - name: private_key
     value: <PRIVATE_KEY> # replace x509 cert here
   - name: disableEntityManagement
-    value: <REPLACE-WITH-DISABLE-ENTITY-MANAGEMENT> # Optional. Default: false. When set to true, topics and subscriptions do not get created automatically.
+    value: <REPLACE-WITH-DISABLE-ENTITY-MANAGEMENT> # Optional. Default: false. When set to true, topics and subscriptions do not get created automatically. Default: false. When set to true, topics and subscriptions do not get created automatically.
 ```
 
 - `topic` is the Pub/Sub topic name.
@@ -62,10 +62,10 @@ spec:
 - `auth_provider_x509_cert_url` is the GCP credentials cert url.
 - `client_x509_cert_url` is the GCP credentials project x509 cert url.
 - `private_key` is the GCP credentials private key.
-- `disableEntityManagement`  Optional. Default: false. When set to true, topics and subscriptions do not get created automatically.
+- `disableEntityManagement`  Optional. Default: false. `disableEntityManagement`  Optional. Default: false. When set to true, topics and subscriptions do not get created automatically.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Apply the configuration
