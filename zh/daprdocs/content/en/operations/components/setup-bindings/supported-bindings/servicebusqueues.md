@@ -27,16 +27,16 @@ spec:
 
 - `connectionString` is the Service Bus connection string.
 - `queueName` is the Service Bus queue name.
-- `ttlInSeconds` is an optional parameter to set the default message [time to live](https://docs.microsoft.com/azure/service-bus-messaging/message-expiration). If this parameter is omitted, messages will expire after 14 days.
+- `ttlInSeconds` is an optional parameter to set the default message [time to live](https://docs.microsoft.com/azure/service-bus-messaging/message-expiration). If this parameter is omitted, messages will expire after 14 days. If this parameter is omitted, messages will expire after 14 days.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 
 ## Specifying a time to live on message level
 
-Time to live can be defined on queue level (as illustrated above) or at the message level. The value defined at message level overwrites any value set at queue level.
+Time to live can be defined on queue level (as illustrated above) or at the message level. The value defined at message level overwrites any value set at queue level. The value defined at message level overwrites any value set at queue level.
 
 To set time to live at message level use the `metadata` section in the request body during the binding invocation.
 
