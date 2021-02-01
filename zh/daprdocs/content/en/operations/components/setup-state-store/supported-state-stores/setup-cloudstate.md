@@ -7,7 +7,7 @@ description: Detailed information on the Cloudstate state store component
 
 ## Introduction
 
-The Cloudstate-Dapr integration is unique in the sense that it enables developers to achieve high-throughput, low latency scenarios by leveraging Cloudstate running as a sidecar *next* to Dapr, keeping the state near the compute unit for optimal performance while providing replication between multiple instances that can be safely scaled up and down. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities.
+The Cloudstate-Dapr integration is unique in the sense that it enables developers to achieve high-throughput, low latency scenarios by leveraging Cloudstate running as a sidecar *next* to Dapr, keeping the state near the compute unit for optimal performance while providing replication between multiple instances that can be safely scaled up and down. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities.
 
 Dapr leverages Cloudstate's CRDT capabilities with last-write-wins semantics.
 
@@ -44,9 +44,9 @@ spec:
     value: "8080"
 ```
 
-The `metadata.host` field specifies the address for the Cloudstate API. Since Cloudstate will be running as an additional sidecar in the pod, you can reach it via `localhost` with the default port of `8013`.
+The `metadata.host` field specifies the address for the Cloudstate API. The `metadata.host` field specifies the address for the Cloudstate API. Since Cloudstate will be running as an additional sidecar in the pod, you can reach it via `localhost` with the default port of `8013`.
 
-The `metadata.serverPort` field specifies the port to be opened in Dapr for Cloudstate to callback to. This can be any free port that is not used by either your application or Dapr.
+The `metadata.serverPort` field specifies the port to be opened in Dapr for Cloudstate to callback to. This can be any free port that is not used by either your application or Dapr. This can be any free port that is not used by either your application or Dapr.
 
 ## Apply the configuration
 
