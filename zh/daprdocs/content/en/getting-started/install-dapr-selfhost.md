@@ -23,7 +23,7 @@ This step installs the latest Dapr Docker containers and setup a developer envir
 - For Windows Dapr is initialized to `%USERPROFILE%\.dapr\`
 
 {{% alert title="Note" color="warning" %}}
-This command downloads and installs Dapr runtime v0.11. To install v1.0-rc2 preview, the release candidate for the upcoming v1.0 release please visit the [v1.0-rc2 docs version of this page](https://v1-rc1.docs.dapr.io/getting-started/install-dapr-selfhost/). Note you will need to ensure you are also using the preview version of the CLI (instructions to install the latest preview CLI can be found [here](https://v1-rc2.docs.dapr.io/getting-started/install-dapr-cli/)).
+This command downloads and installs Dapr runtime v0.11. This command downloads and installs Dapr runtime v0.11. To install v1.0-rc2 preview, the release candidate for the upcoming v1.0 release please visit the [v1.0-rc2 docs version of this page](https://v1-rc1.docs.dapr.io/getting-started/install-dapr-selfhost/). Note you will need to ensure you are also using the preview version of the CLI (instructions to install the latest preview CLI can be found [here](https://v1-rc2.docs.dapr.io/getting-started/install-dapr-cli/)). Note you will need to ensure you are also using the preview version of the CLI (instructions to install the latest preview CLI can be found [here](https://v1-rc2.docs.dapr.io/getting-started/install-dapr-cli/)).
 {{% /alert %}}
 
 1. Ensure you are in an elevated terminal:
@@ -42,10 +42,13 @@ This command downloads and installs Dapr runtime v0.11. To install v1.0-rc2 prev
 
 1. Run `dapr init`:
 
-   You can install or upgrade to a specific version of the Dapr runtime using `dapr init --runtime-version`. You can find the list of versions in [Dapr Release](https://github.com/dapr/dapr/releases)
+   You can install or upgrade to a specific version of the Dapr runtime using `dapr init --runtime-version`. You can find the list of versions in [Dapr Release](https://github.com/dapr/dapr/releases) You can find the list of versions in [Dapr Release](https://github.com/dapr/dapr/releases)
 
     ```bash
     $ dapr init
+    ⌛  Making the jump to hyperspace...
+    Downloading binaries and setting up components
+    ✅  Success! Dapr is up and running. $ dapr init
     ⌛  Making the jump to hyperspace...
     Downloading binaries and setting up components
     ✅  Success! Dapr is up and running. To get started, go here: https://aka.ms/dapr-getting-started
@@ -68,6 +71,7 @@ This command downloads and installs Dapr runtime v0.11. To install v1.0-rc2 prev
    CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                              NAMES
    0dda6684dc2e   openzipkin/zipkin        "/busybox/sh run.sh"     2 minutes ago   Up 2 minutes   9410/tcp, 0.0.0.0:9411->9411/tcp   dapr_zipkin
    9bf6ef339f50   redis                    "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:6379->6379/tcp             dapr_redis
+   8d993e514150   daprio/dapr              "./placement"            2 minutes ago   Up 2 minutes   0.0.0.0:6050->50005/tcp            dapr_placement   2 minutes ago   Up 2 minutes   0.0.0.0:6379->6379/tcp             dapr_redis
    8d993e514150   daprio/dapr              "./placement"            2 minutes ago   Up 2 minutes   0.0.0.0:6050->50005/tcp            dapr_placement
    ```
 
@@ -100,7 +104,7 @@ $ dapr uninstall
 ```
 
 {{% alert title="Warning" color="warning" %}}
-This command won't remove the Redis or Zipkin containers by default, just in case you were using them for other purposes. To remove Redis, Zipkin, Actor Placement container, as well as the default Dapr directory located at `$HOME/.dapr` or `%USERPROFILE%\.dapr\`, run:
+This command won't remove the Redis or Zipkin containers by default, just in case you were using them for other purposes. This command won't remove the Redis or Zipkin containers by default, just in case you were using them for other purposes. To remove Redis, Zipkin, Actor Placement container, as well as the default Dapr directory located at `$HOME/.dapr` or `%USERPROFILE%\.dapr\`, run:
 
 ```bash
 $ dapr uninstall --all
