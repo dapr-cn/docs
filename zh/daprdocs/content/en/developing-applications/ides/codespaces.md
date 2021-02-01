@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Developing with GitHub Codespaces"
 linkTitle: "GitHub Codespaces"
 weight: 3000
@@ -12,7 +12,7 @@ description: "How to get up and running with Dapr in a GitHub Codespace"
 GitHub Codespaces is currently in a private beta. Sign up [here](https://github.com/features/codespaces/signup).
 {{% /alert %}}
 
-## Features
+## 功能
 
 - **Click and Run**: Get a dedicated and sandboxed environment with all of the required frameworks and packages ready to go.
 - **Usage-based Billing**: Only pay for the time you spend developing in the Codespace. Environments are spun down automatically when not in use.
@@ -28,5 +28,5 @@ To open a Dapr repository in a Codespace simply select "Code" from the repo home
 
 - [Python SDK](https://github.com/dapr/python-sdk)
 
-## Related links
+## 相关链接
 - [GitHub documentation](https://docs.github.com/en/github/developing-online-with-codespaces/about-codespaces)
