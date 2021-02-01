@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "How-To: Rate limiting"
 linkTitle: "Rate limiting"
 weight: 1000
@@ -28,6 +28,6 @@ Once the limit is reached, the request will return *HTTP Status code 429: Too Ma
 
 To be applied, the middleware must be referenced in a [Dapr Configuration]({{< ref configuration-concept.md >}}). See [Middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
 
-## Related links
+## 相关链接
 - [Middleware concept]({{< ref middleware-concept.md >}})
 - [Dapr configuration]({{< ref configuration-concept.md >}})
