@@ -400,7 +400,7 @@ You're up and running! Both Dapr and your app logs will appear here.
 
 {{< /tabs >}}
 
-## Next steps
+## 下一步
 
 - Read the full [State API reference]({{< ref state_api.md >}})
 - Try one of the [Dapr SDKs]({{< ref sdks >}})
