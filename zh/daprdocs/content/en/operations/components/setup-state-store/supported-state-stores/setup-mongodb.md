@@ -66,7 +66,7 @@ If you wish to use MongoDB as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| Field            | Required | Details                                                           | Example                                                               |
+| 字段               | Required | Details                                                           | Example                                                               |
 | ---------------- |:--------:| ----------------------------------------------------------------- | --------------------------------------------------------------------- |
 | host             |    Y     | The host to connect to                                            | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
 | username         |    N     | The username of the user to connect with                          | `"admin"`                                                             |
@@ -110,7 +110,7 @@ Follow the on-screen instructions to get the root password for MongoDB. The user
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
