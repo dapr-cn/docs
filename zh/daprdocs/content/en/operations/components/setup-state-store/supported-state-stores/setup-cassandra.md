@@ -57,7 +57,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                 | Example                                    |
+| 字段                | Required | Details                                                 | Example                                    |
 | ----------------- |:--------:| ------------------------------------------------------- | ------------------------------------------ |
 | hosts             |    Y     | Comma separated value of the hosts                      | `"cassandra.cassandra.svc.cluster.local"`. |
 | port              |    N     | Port for communication. Default `"9042"`                | `"9042"`                                   |
@@ -100,7 +100,7 @@ For example, if installing using the example above, the Cassandra DNS would be:
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
