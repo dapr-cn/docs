@@ -46,7 +46,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field         | Required | Details                                                             | Example                                   |
+| 字段            | Required | Details                                                             | Example                                   |
 | ------------- |:--------:| ------------------------------------------------------------------- | ----------------------------------------- |
 | datacenter    |    Y     | Datacenter to use                                                   | `"dc1"`                                   |
 | httpAddr      |    Y     | Address of the Consul server                                        | `"consul.default.svc.cluster.local:8500"` |
@@ -84,7 +84,7 @@ For example, if installing using the example above, the Consul host address woul
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
