@@ -27,14 +27,14 @@ Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调�
 
 <img src="/images/service-invocation-overview.png" width=800 alt="Diagram showing the steps of service invocation">
 
-1. 服务 A 对服务 B 发起HTTP/gRPC的调用。调用发送到本地 Dapr 边车。
+1. 服务 A 对服务 B 发起HTTP/gRPC的调用。 调用发送到本地 Dapr 边车。
 2. Dapr 使用在给定 [ 托管平台]({{< ref "hosting" >}}) 上运行的 [命名解析组件](https://github.com/dapr/components-contrib/tree/master/nameresolution) 发现服务 B的位置。
 3. Dapr 将消息转发至服务 B的 Dapr 边车
 
     **注**: Dapr 边车之间的所有调用考虑到性能都优先使用 gRPC。 仅服务与 Dapr 边车之间的调用可以是 HTTP 或 gRPC
 
-4. 服务 B的 Dapr 边车将请求转发至服务 B 上的特定端点 (或方法) 。服务 B 随后运行其业务逻辑代码。
-5. 服务 B 发送响应给服务 A。响应将转至服务 B 的边车。
+4. 服务 B的 Dapr 边车将请求转发至服务 B 上的特定端点 (或方法) 。 服务 B 随后运行其业务逻辑代码。
+5. 服务 B 发送响应给服务 A。 响应将转至服务 B 的边车。
 6. Dapr 将消息转发至服务 A 的 Dapr 边车。
 7. 服务 A 接收响应。
 
@@ -66,11 +66,11 @@ localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 * 网络错误，包括端点不可用和拒绝连接
 * 因续订主调/被调方Dapr边车上的证书而导致的身份验证错误
 
-每次调用重试的回退间隔是 1 秒，最多重试三次。 通过 gRPC 连接到目标 sidecar 的连接超时时间为 5 秒钟。
+每次调用重试的回退间隔是 1 秒，最多重试三次。 Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Connection establishment via gRPC to the target sidecar has a timeout of 5 seconds.
 
 ### 服务间安全性
 
-All calls between Dapr applications can be made secure with mutual (mTLS) authentication on hosted platforms, including automatic certificate rollover, via the Dapr Sentry service. The diagram below shows this for self hosted applications.
+All calls between Dapr applications can be made secure with mutual (mTLS) authentication on hosted platforms, including automatic certificate rollover, via the Dapr Sentry service. The diagram below shows this for self hosted applications. The diagram below shows this for self hosted applications.
 
 For more information read the [service-to-service security]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}) article.
 
@@ -78,7 +78,7 @@ For more information read the [service-to-service security]({{< ref "security-co
 
 ### Service access security
 
-Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. This enables you to restrict sensitive applications, that say have personnel information, from being accessed by unauthorized applications, and combined with service-to-service secure communication, provides for soft multi-tenancy deployments.
+Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. This enables you to restrict sensitive applications, that say have personnel information, from being accessed by unauthorized applications, and combined with service-to-service secure communication, provides for soft multi-tenancy deployments.
 
 For more information read the [access control allow lists for service invocation]({{< ref invoke-allowlist.md >}}) article.
 
@@ -93,16 +93,16 @@ For more information read the [observability]({{< ref observability-concept.md >
 Dapr can run on any [hosting platform]({{< ref hosting >}}). For the supported hosting platforms this means they have a [name resolution component](https://github.com/dapr/components-contrib/tree/master/nameresolution) developed for them that enables service discovery. For example, the Kubernetes name resolution component uses the Kubernetes DNS service to resolve the location of other applications running in the cluster.
 
 ## Example
-Following the above call sequence, suppose you have the applications as described in the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md), where a python app invokes a node.js app. In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B".
+Following the above call sequence, suppose you have the applications as described in the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md), where a python app invokes a node.js app. In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B". In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B".
 
 The diagram below shows sequence 1-7 again on a local machine showing the API call:
 
 <img src="/images/service-invocation-overview-example.png" width=800>
 
-1. The Node.js app has a Dapr app ID of `nodeapp`. The python app invokes the Node.js app's `neworder` method by POSTing `http://localhost:3500/v1.0/invoke/nodeapp/method/neworder`, which first goes to the python app's local Dapr sidecar.
+1. The Node.js app has a Dapr app ID of `nodeapp`. The Node.js app has a Dapr app ID of `nodeapp`. The python app invokes the Node.js app's `neworder` method by POSTing `http://localhost:3500/v1.0/invoke/nodeapp/method/neworder`, which first goes to the python app's local Dapr sidecar.
 2. Dapr discovers the Node.js app's location using name resolution component (in this case mDNS while self-hosted) which runs on your local machine.
 3. Dapr forwards the request to the Node.js app's sidecar using the location it just received.
-4. The Node.js app's sidecar forwards the request to the Node.js app. The Node.js app performs its business logic, logging the incoming message and then persist the order ID into Redis (not shown in the diagram)
+4. The Node.js app's sidecar forwards the request to the Node.js app. The Node.js app's sidecar forwards the request to the Node.js app. The Node.js app performs its business logic, logging the incoming message and then persist the order ID into Redis (not shown in the diagram)
 5. The Node.js app sends a response to the Python app through the Node.js sidecar.
 6. Dapr forwards the response to the Python Dapr sidecar
 7. The Python app receives the resposne.
