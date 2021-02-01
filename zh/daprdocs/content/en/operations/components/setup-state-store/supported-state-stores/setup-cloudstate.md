@@ -28,7 +28,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field      | Required | Details                                                                                                                                              | Example            |
+| 字段         | Required | Details                                                                                                                                              | 示例                 |
 | ---------- |:--------:| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
 | hosts      |    Y     | Specifies the address for the Cloudstate API                                                                                                         | `"localhost:8013"` |
 | serverPort |    Y     | Specifies the port to be opened in Dapr for Cloudstate to callback to. This can be any free port that is not used by either your application or Dapr | `"8080"`           |
@@ -165,7 +165,7 @@ subjects:
   name: default
 ```
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
