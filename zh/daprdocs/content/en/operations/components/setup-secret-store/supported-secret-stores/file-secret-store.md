@@ -40,7 +40,7 @@ spec:
     value: ":"
 ```
 
-The `nestedSeparator` parameter is optional (default value is ':'). It is used by the store when flattening the json hierarchy to a map.
+The `nestedSeparator` parameter is optional (default value is ':'). The `nestedSeparator` parameter is optional (default value is ':'). It is used by the store when flattening the json hierarchy to a map.
 
 ## Example
 
