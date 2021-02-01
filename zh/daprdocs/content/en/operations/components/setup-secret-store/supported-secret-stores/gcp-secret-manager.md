@@ -47,7 +47,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field                           | Required | Details                                        | Example                                                                                            |
+| 字段                              | Required | Details                                        | Example                                                                                            |
 | ------------------------------- |:--------:| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | type                            |    Y     | The type of the account.                       | `"serviceAccount"`                                                                                 |
 | project_id                      |    Y     | The project ID associated with this component. | `"project_id"`                                                                                     |
