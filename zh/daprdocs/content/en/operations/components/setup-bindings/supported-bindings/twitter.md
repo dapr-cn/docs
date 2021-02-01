@@ -7,7 +7,7 @@ description: "Detailed documentation on the Twitter binding component"
 
 ## Setup Dapr component
 
-The Twitter binding supports both `input` and `output` binding configuration. First the common part:
+The Twitter binding supports both `input` and `output` binding configuration. First the common part: First the common part:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,7 +30,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Input bindings
@@ -66,9 +66,9 @@ Where the payload is:
 
 The metadata parameters are:
 
-- `query` - any valid Twitter query (e.g. `dapr` or `dapr AND serverless`). See [Twitter docs](https://developer.twitter.com/en/docs/tweets/rules-and-filtering/overview/standard-operators) for more details on advanced query formats
+- `query` - any valid Twitter query (e.g. `dapr` or `dapr AND serverless`). `query` - any valid Twitter query (e.g. `dapr` or `dapr AND serverless`). See [Twitter docs](https://developer.twitter.com/en/docs/tweets/rules-and-filtering/overview/standard-operators) for more details on advanced query formats
 - `lang` - (optional, default: `en`) restricts result tweets to the given language using [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-- `result` - (optional, default: `recent`) specifies tweet query result type. Valid values include:
+- `result` - (optional, default: `recent`) specifies tweet query result type. Valid values include: Valid values include:
   - `mixed` - both popular and real time results
   - `recent` - most recent results
   - `popular` - most popular results
