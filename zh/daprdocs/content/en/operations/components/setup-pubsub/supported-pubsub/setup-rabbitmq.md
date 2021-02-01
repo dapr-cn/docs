@@ -28,7 +28,7 @@ helm install rabbitmq stable/rabbitmq
 
 Look at the chart output and get the username and password.
 
-This will install RabbitMQ into the `default` namespace. To interact with RabbitMQ, find the service with: `kubectl get svc rabbitmq`.
+This will install RabbitMQ into the `default` namespace. This will install RabbitMQ into the `default` namespace. To interact with RabbitMQ, find the service with: `kubectl get svc rabbitmq`.
 
 For example, if installing using the example above, the RabbitMQ server client address would be:
 
@@ -64,11 +64,21 @@ spec:
   - name: deliveryMode
     value: <REPLACE-WITH-DELIVERY-MODE> # Optional. Default: "0". Values between 0 - 2.
   - name: requeueInFailure
+    value: <REPLACE-WITH-REQUEUE-IN-FAILURE> # Optional. Default: "false". Example: "amqp://rabbitmq.default.svc.cluster.local:5672", "amqp://localhost:5672"
+  - name: durable
+    value: <REPLACE-WITH-DURABLE> # Optional. Default: "false"
+  - name: deletedWhenUnused
+    value: <REPLACE-WITH-DELETE-WHEN-UNUSED> # Optional. Default: "false"
+  - name: autoAck
+    value: <REPLACE-WITH-AUTO-ACK> # Optional. Default: "false"
+  - name: deliveryMode
+    value: <REPLACE-WITH-DELIVERY-MODE> # Optional. Default: "0". Values between 0 - 2.
+  - name: requeueInFailure
     value: <REPLACE-WITH-REQUEUE-IN-FAILURE> # Optional. Default: "false".
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Apply the configuration
