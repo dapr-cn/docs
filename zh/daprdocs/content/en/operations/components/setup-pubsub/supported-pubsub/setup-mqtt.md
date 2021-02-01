@@ -30,7 +30,7 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field        |        Required        | Details                                                                                                                  | Example                                                                                                                                                              |
+| 字段           |        Required        | Details                                                                                                                  | 示例                                                                                                                                                                   |
 | ------------ |:----------------------:| ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | url          |           Y            | Address of the MQTT broker                                                                                               | Use `**tcp://**` scheme for non-TLS communication.   Use`**tcps://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]" |
 | qos          |           N            | Indicates the Quality of Service Level (QoS) of the message. Default 0                                                   | `1`                                                                                                                                                                  |
@@ -72,7 +72,7 @@ spec:
 
 ### Consuming a shared topic
 
-When consuming a shared topic, each consumer must have a unique identifier. By default, the application Id is used to uniquely identify each consumer and publisher. In self-hosted mode, running each Dapr run with a different application Id is sufficient to have them consume from the same shared topic. However on Kubernetes, a pod with multiple application instances shares the same application Id, prohibiting all instances from consuming the same topic. To overcome this, configure the component's `ConsumerID` metadata with a `{uuid}` tag, making each instance to have a randomly generated `ConsumerID` value on start up. For example:
+When consuming a shared topic, each consumer must have a unique identifier. By default, the application Id is used to uniquely identify each consumer and publisher. In self-hosted mode, running each Dapr run with a different application Id is sufficient to have them consume from the same shared topic. However on Kubernetes, a pod with multiple application instances shares the same application Id, prohibiting all instances from consuming the same topic. To overcome this, configure the component's `ConsumerID` metadata with a `{uuid}` tag, making each instance to have a randomly generated `ConsumerID` value on start up. 例如:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
