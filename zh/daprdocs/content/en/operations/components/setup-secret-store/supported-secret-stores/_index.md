@@ -18,19 +18,19 @@ no_list: true
 
 ### Amazon Web Services (AWS)
 
-| Name                                                     | Status |
+| 名称                                                       | Status |
 | -------------------------------------------------------- | ------ |
 | [AWS Secrets Manager]({{< ref aws-secret-manager.md >}}) | Alpha  |
 
 ### Google Cloud Platform (GCP)
 
-| Name                                                    | Status |
+| 名称                                                      | Status |
 | ------------------------------------------------------- | ------ |
 | [GCP Secret Manager]({{< ref gcp-secret-manager.md >}}) | Alpha  |
 
 ### Microsoft Azure
 
-| Name                                                                                  | Status |
+| 名称                                                                                    | Status |
 | ------------------------------------------------------------------------------------- | ------ |
 | [Azure Key Vault w/ Managed Identity]({{< ref azure-keyvault-managed-identity.md >}}) | Alpha  |
 | [Azure Key Vault]({{< ref azure-keyvault.md >}})                                      | Alpha  | 
