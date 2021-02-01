@@ -6,7 +6,7 @@ weight: 3000
 description: "Use scoping to limit the secrets that can be read from secret stores"
 ---
 
-Follow [these instructions]({{< ref setup-secret-store >}}) to configure secret store for an application. Once configured, any secret defined within that store will be accessible from the Dapr application.
+Follow [these instructions]({{< ref setup-secret-store >}}) to configure secret store for an application. Once configured, any secret defined within that store will be accessible from the Dapr application. Once configured, any secret defined within that store will be accessible from the Dapr application.
 
 To limit the secrets to which the Dapr application has access, users can define secret scopes by augmenting existing configuration CRD with restrictive permissions.
 
@@ -14,7 +14,7 @@ Follow [these instructions]({{< ref configuration-concept.md >}}) to define a co
 
 ## Scenario 1 : Deny access to all secrets for a secret store
 
-In Kubernetes cluster, the native Kubernetes secret store is added to Dapr application by default. In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below:
+In Kubernetes cluster, the native Kubernetes secret store is added to Dapr application by default. In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below: In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below:
 
 Define the following `appconfig.yaml` and apply it to the Kubernetes cluster using the command `kubectl apply -f appconfig.yaml`.
 
@@ -55,7 +55,7 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-This example defines configuration for secret store named vault. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
+This example defines configuration for secret store named vault. This example defines configuration for secret store named vault. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
 
 ## Scenario 3: Deny access to certain senstive secrets in a secret store
 
@@ -74,7 +74,7 @@ spec:
         deniedSecrets: ["secret1", "secret2"]
 ```
 
-The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
+The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
 
 ## Permission priority
 
