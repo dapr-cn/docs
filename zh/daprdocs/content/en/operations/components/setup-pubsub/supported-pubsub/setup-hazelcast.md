@@ -28,7 +28,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field            | Required | Details                                                                        | Example                            |
+| 字段               | Required | Details                                                                        | 示例                                 |
 | ---------------- |:--------:| ------------------------------------------------------------------------------ | ---------------------------------- |
 | connectionString |    Y     | A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000" | `"hazelcast:3000,hazelcast2:3000"` |
 
