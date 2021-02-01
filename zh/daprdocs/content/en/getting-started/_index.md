@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Getting started with Dapr"
-linkTitle: "Getting started"
+title: "Dapr 入门"
+linkTitle: "入门"
 weight: 20
-description: "Get up and running with Dapr"
+description: "启动并运行Dapr"
 ---
 
