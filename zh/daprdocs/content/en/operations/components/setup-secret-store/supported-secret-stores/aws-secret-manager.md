@@ -38,7 +38,7 @@ Read [this guide]({{< ref howto-secrets.md >}}) to learn how to apply a Dapr com
 
 ## Example
 
-This example shows you how to set the Redis password from the AWS Secret Manager secret store. Here, you created a secret named `redisPassword` in AWS Secret Manager. Note its important to set it both as the `name` and `key` properties.
+This example shows you how to set the Redis password from the AWS Secret Manager secret store. Here, you created a secret named `redisPassword` in AWS Secret Manager. Note its important to set it both as the `name` and `key` properties. Here, you created a secret named `redisPassword` in AWS Secret Manager. Note its important to set it both as the `name` and `key` properties.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -61,7 +61,7 @@ auth:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## Related links
