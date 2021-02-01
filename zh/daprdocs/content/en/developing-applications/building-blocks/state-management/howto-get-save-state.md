@@ -8,13 +8,13 @@ description: "Use key value pairs to persist a state"
 
 ## Introduction
 
-State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
+State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
 
-Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
+Dapr provides state management capabilities that include consistency and concurrency options. Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
 
 ## Step 1: Setup a state store
 
-A state store component represents a resource that Dapr uses to communicate with a database. For the purpose of this how to we'll use a Redis state store, but any state store from the [supported list]({{< ref supported-state-stores >}}) will work.
+A state store component represents a resource that Dapr uses to communicate with a database. A state store component represents a resource that Dapr uses to communicate with a database. For the purpose of this how to we'll use a Redis state store, but any state store from the [supported list]({{< ref supported-state-stores >}}) will work.
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes>}}
 
@@ -42,7 +42,7 @@ Begin by ensuring a Dapr sidecar is running:
 dapr --app-id myapp --port 3500 run
 ```
 {{% alert title="Note" color="info" %}}
-It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
+It is important to set an app-id, as the state keys are prefixed with this value. It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
 
 {{% /alert %}}
 
@@ -59,7 +59,7 @@ dapr --app-id myapp --port 3500 run
 ```
 
 {{% alert title="Note" color="info" %}}
-It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
+It is important to set an app-id, as the state keys are prefixed with this value. It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
 
 {{% /alert %}}
 
@@ -70,7 +70,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": 
 {{% /codetab %}}
 
 {{% codetab %}}
-Make sure to install the Dapr Python SDK with `pip3 install dapr`. Then create a file named `state.py` with:
+Make sure to install the Dapr Python SDK with `pip3 install dapr`. Then create a file named `state.py` with: Then create a file named `state.py` with:
 ```python
 from dapr.clients import DaprClient
 from dapr.clients.grpc._state import StateItem
@@ -87,7 +87,7 @@ with DaprClient() as d:
 Run with `dapr run --app-id myapp run python state.py`
 
 {{% alert title="Note" color="info" %}}
-It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
+It is important to set an app-id, as the state keys are prefixed with this value. It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
 
 {{% /alert %}}
 
