@@ -39,14 +39,14 @@ For example, if you are fixing a typo, adding notes, or clarifying a point, make
 ## 贡献新文档页面
 - 确保你所写的文件在层次结构中的位置是正确的。
 - 在可能的情况下，避免创建新的部分，很有可能在文档的层次结构中已经有一个合适的位置。
-- Make sure to include a complete [Hugo front-matter](#front-matter).
+- 确保包括完整的 [Hugo front-matter](#front-matter)。
 
 ### 贡献一个新的概念文档
 - 请确保读者能够理解为什么他们应该关注此功能。 它能帮他们解决什么问题?
 - 请确保文档引用该规范以获取使用 API 的示例。
 - 确保规范在名称，参数和术语方面与概念一致。 根据需要更新概念和规范。
 - 请避免重复该规范。 这个想法是为了给读者提供更多关于能力的信息和背景，以便他们可以尝试这个。 因此，尽可能提供更多的信息和实施细节。
-- Provide a link to the spec in the [Reference]({{X45X}}) section.
+- 提供指向 [参考资料]({{X45X}}) 中的规范的链接。
 - 在可能的情况下，参考一个实用的How-To文档。
 
 ### 贡献新的 How-To 指南
