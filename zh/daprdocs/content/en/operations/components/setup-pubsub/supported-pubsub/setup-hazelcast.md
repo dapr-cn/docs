@@ -42,11 +42,11 @@ spec:
   version: v1
   metadata:
   - name: hazelcastServers
-    value: <REPLACE-WITH-HOSTS> # Required. A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000"
+    value: <REPLACE-WITH-HOSTS> # Required. A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000" A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Apply the configuration
