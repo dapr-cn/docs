@@ -1,12 +1,12 @@
 ---
-type: docs
+type: 文档
 title: "How-To: Share state between applications"
 linkTitle: "How-To: Share state between applications"
 weight: 400
 description: "Choose different strategies for sharing state between different applications"
 ---
 
-## Introduction
+## 简介
 
 Dapr offers developers different ways to share state between applications.
 
@@ -38,7 +38,7 @@ spec:
     value: <key-prefix-strategy>
 ```
 
-## Examples
+## 示例
 
 The following examples will show you how state retrieval looks like with each of the supported prefix strategies:
 
