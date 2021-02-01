@@ -42,7 +42,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field                    | Required | Details                                                                                                                                                                                                                  | Example                                      |
+| 字段                       | Required | Details                                                                                                                                                                                                                  | 示例                                           |
 | ------------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
 | accessKey                |    Y     | ID of the AWS account with appropriate permissions to SNS and SQS. Can be `secretKeyRef` to use a secret reference                                                                                                       | `"AKIAIOSFODNN7EXAMPLE"`                     |
 | secretKey                |    Y     | Secret for the AWS user. Can be `secretKeyRef` to use a secret reference                                                                                                                                                 | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
