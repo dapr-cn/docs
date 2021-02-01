@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Define a component"
 linkTitle: "Define a component"
 weight: 40
