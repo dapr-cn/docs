@@ -28,7 +28,7 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>
 
 #### Query Parameters
 
-Some secret stores have **optional** metadata properties. metadata is populated using query parameters:
+Some secret stores have **optional** metadata properties. metadata is populated using query parameters: metadata is populated using query parameters:
 
 ```
 GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>?metadata.version_id=15
