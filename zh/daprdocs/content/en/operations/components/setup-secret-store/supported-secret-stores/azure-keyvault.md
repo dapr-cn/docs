@@ -35,12 +35,12 @@ spec:
     value : "[pfx_certificate_file_local_path]"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将 Secret 明文存储。 The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field              | Required | Details                                                                                                  | Example         |
+| 字段                 | Required | Details                                                                                                  | 示例              |
 | ------------------ |:--------:| -------------------------------------------------------------------------------------------------------- | --------------- |
 | vaultName          |    Y     | The name of the Azure Key Vault                                                                          | `"mykeyvault"`  |
 | spnTenantId        |    Y     | Your Service Principal Tenant Id                                                                         | `"spnTenantId"` |
