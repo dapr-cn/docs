@@ -30,7 +30,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field            | Required | Details                                                     | Example                                                       |
+| 字段               | Required | Details                                                     | 示例                                                            |
 | ---------------- |:--------:| ----------------------------------------------------------- | ------------------------------------------------------------- |
 | connectionString |    Y     | The connection string for PostgreSQL                        | `"User ID=root;Password=myPassword;Host=localhost;Port=5432"` |
 | actorStateStore  |    N     | Consider this state store for actors. Defaults to `"false"` | `"true"`, `"false"`                                           |
@@ -69,7 +69,7 @@ If you wish to use PostgreSQL as an actor store, append the following to the yam
 
 {{% /tabs %}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
