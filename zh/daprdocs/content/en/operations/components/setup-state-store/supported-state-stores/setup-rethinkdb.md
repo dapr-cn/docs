@@ -61,7 +61,7 @@ Additionally, if the optional `archive` metadata is set to `true`, on each state
 
 ## Spec metadata fields
 
-| Field    | Required | Details                                  | Example                                                            |
+| 字段       | Required | Details                                  | 示例                                                                 |
 | -------- |:--------:| ---------------------------------------- | ------------------------------------------------------------------ |
 | address  |    Y     | The address for RethinkDB server         | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
 | database |    Y     | The database to use. Alpha-numerics only | `"dapr"`                                                           |
@@ -90,7 +90,7 @@ open "http://$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' rethin
 {{% /codetab %}}
 
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
