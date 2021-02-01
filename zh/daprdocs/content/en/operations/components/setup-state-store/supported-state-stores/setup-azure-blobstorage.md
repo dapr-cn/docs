@@ -35,7 +35,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field         | Required | Details                                                                                                        | Example               |
+| 字段            | Required | Details                                                                                                        | Example               |
 | ------------- |:--------:| -------------------------------------------------------------------------------------------------------------- | --------------------- |
 | accountName   |    Y     | The storage account name                                                                                       | `"mystorageaccount"`. |
 | accountKey    |    Y     | Primary or secondary storage key                                                                               | `"key"`               |
@@ -86,7 +86,7 @@ creates the blob file in the containter with `key` as filename and `value` as th
 
 Azure Blob Storage state concurrency is achieved by using `ETag`s according to [the Azure Blob Storage documentation](https://docs.microsoft.com/en-us/azure/storage/common/storage-concurrency#managing-concurrency-in-blob-storage).
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
