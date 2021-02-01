@@ -1,12 +1,12 @@
 ---
-type: docs
+type: 文档
 title: "Message Time-To-Live"
 linkTitle: "Message TTL"
 weight: 6000
 description: "Use time-to-live in Pub/Sub messages."
 ---
 
-## Introduction
+## 简介
 
 Dapr enables per-message time-to-live (TTL). This means that applications can set time-to-live per message, and subscribers will not receive those messages after expiration.
 
@@ -30,7 +30,7 @@ If messages are consumed by subscribers without Dapr, expired messages are not a
 
 When non-Dapr subscribers use components such as Azure Service Bus, which natively handle message TTL, they will not receive expired messages. No extra logic is needed.
 
-## Example
+## 示例
 
 Message TTL can be set in the metadata as part of the publishing request:
 
@@ -68,5 +68,5 @@ with DaprClient() as d:
 
 See [this guide]({{< ref pubsub_api.md >}}) for a full reference on the pub/sub API.
 
-## Related links
+## 相关链接
 - [Pub/sub API reference]({{< ref pubsub_api.md >}})
