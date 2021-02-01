@@ -25,6 +25,13 @@ spec:
     value: *****************
   - name: authToken # required.
     value: *****************
+    value: 111-111-1111
+  - name: fromNumber # required.
+    value: 222-222-2222
+  - name: accountSid # required.
+    value: *****************
+  - name: authToken # required.
+    value: *****************
 ```
 
 - `toNumber` is the target number to send the sms to.
@@ -33,7 +40,7 @@ spec:
 - `authToken` is the Twilio auth token.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 
