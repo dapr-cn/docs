@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "GCP Pub/Sub"
 linkTitle: "GCP Pub/Sub"
 description: "Detailed documentation on the GCP Pub/Sub component"
@@ -7,7 +7,7 @@ aliases:
   - "/operations/components/setup-pubsub/supported-pubsub/setup-gcp/"
 ---
 
-## Create a Dapr component
+## 创建 Dapr 组件
 
 To setup GCP pubsub create a component of type `pubsub.gcp.pubsub`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
 
@@ -47,7 +47,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field                           | Required | Details                                                                                             | Example                                                                                          |
+| 字段                              | Required | Details                                                                                             | 示例                                                                                               |
 | ------------------------------- |:--------:| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | type                            |    Y     | GCP credentials type                                                                                | `service_account`                                                                                |
 | project_id                      |    Y     | GCP project id                                                                                      | `projectId`                                                                                      |
@@ -62,14 +62,14 @@ spec:
 | disableEntityManagement         |    N     | When set to `"true"`, topics and subscriptions do not get created automatically. Default: `"false"` | `"true"`, `"false"`                                                                              |
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Create a GCP Pub/Sub
 
 Follow the instructions [here](https://cloud.google.com/pubsub/docs/quickstart-console) on setting up Google Cloud Pub/Sub system.
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
