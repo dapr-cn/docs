@@ -21,7 +21,13 @@ spec:
   version: v1
   metadata:
   - name: connectionString
-    value: <REPLACE-WITH-CONNECTION-STRING> # Required.
+    value: <REPLACE-WITH-CONNECTION-STRING> # Required. "Endpoint=sb://****"
+  - name: storageAccountName
+    value: <REPLACE-WITH-STORAGE-ACCOUNT-NAME> # Required.
+  - name: storageAccountKey
+    value: <REPLACE-WITH-STORAGE-ACCOUNT-KEY> # Required.
+  - name: storageContainerName
+    value: <REPLACE-WITH-CONTAINER-NAME > # Required.
   - name: tableName
     value: <REPLACE-WITH-TABLE-NAME>  # Required.
   - name: keyType 
@@ -45,7 +51,7 @@ Currently this component does not support state management for actors
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                        | Example                                                                                             |
+| 字段                | Required | Details                                                                        | Example                                                                                             |
 | ----------------- |:--------:| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | connectionString  |    Y     | The connection string used to connect                                          | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
 | tableName         |    Y     | The name of the table to use. Alpha-numeric with underscores                   | `"table_name"`                                                                                      |
@@ -75,7 +81,7 @@ When connecting with a dedicated user (not `sa`), these authorizations are requi
 - `CREATE TABLE`
 - `CREATE TYPE`
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
