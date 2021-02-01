@@ -42,7 +42,7 @@ Actors 可以通过 timer 或者 remider 自行注册周期性的任务.
 
 你可以通过 timer 在actor中注册一个回调。
 
-Dapr Actor 运行时确保回调方法被顺序调用，而非并发调用。这意味着，在此回调完成执行之前，不会有其他Actor方法或timer/remider回调被执行。
+Dapr Actor 运行时确保回调方法被顺序调用，而非并发调用。 这意味着，在此回调完成执行之前，不会有其他Actor方法或timer/remider回调被执行。
 
 Timer的下一个周期在回调完成执行后开始计算。 这意味着timer在执行回调时停止，并在回调结束时开始。
 
@@ -58,7 +58,7 @@ POST/PUT http://localhost:3500/v1.0/actors/<actorType>/<actorId>/timers/<name>
 
 Timer 的 `duetime` 和回调函数可以在请求主体中指定。  到期时间（due time）表示注册后 timer 将首次触发的事件。  `period` 表示 timer 在此之后触发的频率。  到期时间为0表示立即执行。  负 due times 和负 periods 都是无效。
 
-以下请求主体将配置一个 timer，该 timer 的 `dueTime` 为 9 秒， `period `为 3 秒。  这意味着它将在9秒后首次触发，然后每3秒触发一次。
+以下请求主体将配置一个 timer，该 timer 的 `dueTime` 为 9 秒， `period`为 3 秒。  这意味着它将在9秒后首次触发，然后每3秒触发一次。
 ```json
 {
   "dueTime":"0h0m9s0ms",
