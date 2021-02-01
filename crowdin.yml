@@ -1,0 +1,3 @@
+files:
+  - source: /daprdocs/content/
+    translation: /%two_letters_code%/%original_path%/%original_file_name%
