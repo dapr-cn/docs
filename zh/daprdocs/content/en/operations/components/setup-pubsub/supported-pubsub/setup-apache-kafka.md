@@ -9,7 +9,7 @@ description: "Detailed documentation on the Apache Kafka pubsub component"
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart). To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -46,10 +46,18 @@ spec:
       value: <username>
       # Only available is authRequired is set to true
     - name: saslPassword
+      value: <password> Default is "false"
+    - name: authRequired
+      value: "false"
+      # Only available is authRequired is set to true
+    - name: saslUsername
+      value: <username>
+      # Only available is authRequired is set to true
+    - name: saslPassword
       value: <password>
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Apply the configuration
