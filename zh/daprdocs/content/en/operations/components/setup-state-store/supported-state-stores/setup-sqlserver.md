@@ -7,15 +7,15 @@ description: Detailed information on the SQL Server state store component
 
 ## Create an Azure SQL instance
 
-[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.
+[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.  The database must be created before Dapr consumes it.
 
 **Note: SQL Server state store also supports SQL Server running on VMs.**
 
 In order to setup SQL Server as a state store, you will need the following properties:
 
-- **Connection String**: the SQL Server connection string. For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase;
-- **Schema**: The database schema to use (default=dbo). Will be created if not exists
-- **Table Name**: The database table name. Will be created if not exists
+- **Connection String**: the SQL Server connection string. For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase; For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase;
+- **Schema**: The database schema to use (default=dbo). Will be created if not exists Will be created if not exists
+- **Table Name**: The database table name. Will be created if not exists Will be created if not exists
 - **Indexed Properties**: Optional properties from json data which will be indexed and persisted as individual column
 
 ### Create a dedicated user
@@ -50,7 +50,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ### Example
