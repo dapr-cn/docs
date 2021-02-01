@@ -54,11 +54,17 @@ spec:
   - name: password
     value: <REPLACE-WITH-PASSWORD> # Required.
   - name: bucketName
+    value: <REPLACE-WITH-BUCKET> # Required. Example: "http://localhost:8091"
+  - name: username
+    value: <REPLACE-WITH-USERNAME> # Required.
+  - name: password
+    value: <REPLACE-WITH-PASSWORD> # Required.
+  - name: bucketName
     value: <REPLACE-WITH-BUCKET> # Required.
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Apply the configuration
