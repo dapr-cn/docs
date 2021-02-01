@@ -54,7 +54,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field                          | Required | Details                                                                                                | Example                                                                                                                                        |
+| 字段                             | Required | Details                                                                                                | 示例                                                                                                                                             |
 | ------------------------------ |:--------:| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | connectionString               |    Y     | Connection-string for the Event Hubs                                                                   | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
 | timeoutInSec                   |    N     | Timeout for sending messages and management operations. Default: `60`                                  | `30`                                                                                                                                           |
