@@ -53,7 +53,7 @@ spec:
     value: "[aws_session_token]"
 ```
 
-## Apply the configuration
+## 应用配置
 
 Once you have created the component's YAML file, follow these instructions to apply it based on your hosting environment:
 
