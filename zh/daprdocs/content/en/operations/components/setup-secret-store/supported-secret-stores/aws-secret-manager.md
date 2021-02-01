@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field        | Required | Details                                                                 | Example             |
+| 字段           | Required | Details                                                                 | Example             |
 | ------------ |:--------:| ----------------------------------------------------------------------- | ------------------- |
 | region       |    Y     | The specific AWS region the AWS Secrets Manager instance is deployed in | `"us-east-1"`       |
 | accessKey    |    Y     | The AWS Access Key to access this resource                              | `"key"`             |
