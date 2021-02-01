@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "MySQL"
 linkTitle: "MySQL"
 description: Detailed information on the MySQL state store component
@@ -31,7 +31,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 If you wish to use MySQL as an actor store, append the following to the yaml.
@@ -43,7 +43,7 @@ If you wish to use MySQL as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| Field            | Required | Details                                                                                            | Example                                                                                                                                                                                                                                                                                      |
+| 字段               | Required | Details                                                                                            | 示例                                                                                                                                                                                                                                                                                           |
 | ---------------- |:--------:| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | connectionString |    Y     | The connection string to connect to MySQL. Do not add the schema to the connection string          | [Non SSL connection](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL Connection](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
 | schemaName       |    N     | The schema name to use. Will be created if schema does not exist. Defaults to `"dapr_state_store"` | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                                                           |
@@ -125,7 +125,7 @@ Replace the `<CONNECTION STRING>` value with your connection string. The connect
 
 If your server requires SSL your connection string must end with `&tls=custom` for example, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"`. You must replace the `<PEM PATH>` with a full path to the PEM file. The connection to MySQL will require a minimum TLS version of 1.2.
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
