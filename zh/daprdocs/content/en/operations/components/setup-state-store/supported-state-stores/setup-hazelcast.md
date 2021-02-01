@@ -33,7 +33,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field            | Required | Details                             | Example                            |
+| 字段               | Required | Details                             | 示例                                 |
 | ---------------- |:--------:| ----------------------------------- | ---------------------------------- |
 | hazelcastServers |    Y     | A comma delimited string of servers | `"hazelcast:3000,hazelcast2:3000"` |
 | hazelcastMap     |    Y     | Hazelcast Map configuration         | `"foo-map"`                        |
@@ -58,7 +58,7 @@ The easiest way to install Hazelcast on Kubernetes is by using the [Helm chart](
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
