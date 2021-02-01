@@ -42,7 +42,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                                                                                                                                                                                               | Example                           |
+| 字段                | Required | Details                                                                                                                                                                                                                                               | 示例                                |
 | ----------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | host              |    Y     | Connection-string for the rabbitmq host                                                                                                                                                                                                               | `amqp://user:pass@localhost:5672` |
 | durable           |    N     | Whether or not to use [durable](https://www.rabbitmq.com/queues.html#durability) queues. Defaults to `"false"`                                                                                                                                        | `"true"`, `"false"`               |
