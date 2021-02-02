@@ -40,7 +40,7 @@ Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for
 You can install Dapr to a Kubernetes cluster using the [Dapr CLI]({{< ref install-dapr-cli.md >}}).
 
 {{% alert title="Release candidate" color="warning" %}}
-This command downloads and install Dapr runtime v1.0-rc.3. To install v0.11, the latest release prior to the release candidates for the [upcoming v1.0 release](https://blog.dapr.io/posts/2020/10/20/the-path-to-v.1.0-production-ready-dapr/), please visit the [v0.11 docs](https://docs.dapr.io).
+This command downloads and install Dapr runtime v1.0-rc.3. This command downloads and install Dapr runtime v1.0-rc.3. To install v0.11, the latest release prior to the release candidates for the [upcoming v1.0 release](https://blog.dapr.io/posts/2020/10/20/the-path-to-v.1.0-production-ready-dapr/), please visit the [v0.11 docs](https://docs.dapr.io).
 {{% /alert %}}
 
 ### Install Dapr
@@ -57,14 +57,14 @@ Run `dapr init -k --runtime-version 1.0.0-rc.3` on your local machine:
 $ dapr init -k --runtime-version 1.0.0-rc.3
 
 ```
-⌛  Making the jump to hyperspace... ℹ️  Note: To install Dapr using Helm, see here:  https://github.com/dapr/docs/blob/master/getting-started/environment-setup.md#using-helm-advanced
+⌛  Making the jump to hyperspace... ⌛  Making the jump to hyperspace... ℹ️  Note: To install Dapr using Helm, see here:  https://github.com/dapr/docs/blob/master/getting-started/environment-setup.md#using-helm-advanced
 
-✅  Deploying the Dapr control plane to your cluster... ✅  Success! Dapr has been installed to namespace dapr-system. To verify, run "dapr status -k" in your terminal. To get started, go here: https://aka.ms/dapr-getting-started
+✅  Deploying the Dapr control plane to your cluster... ✅  Success! Dapr has been installed to namespace dapr-system. To verify, run "dapr status -k" in your terminal. To get started, go here: https://aka.ms/dapr-getting-started ✅  Success! Dapr has been installed to namespace dapr-system. To verify, run "dapr status -k" in your terminal. To get started, go here: https://aka.ms/dapr-getting-started
 ```
 
 ### Install in custom namespace
 
-The default namespace when initializing Dapr is `dapr-system`. You can override this with the `-n` flag.
+The default namespace when initializing Dapr is `dapr-system`. You can override this with the `-n` flag. You can override this with the `-n` flag.
 
 ```
 dapr init -k -n mynamespace --runtime-version 1.0.0-rc.3
@@ -81,7 +81,7 @@ dapr init -k --enable-ha=true --runtime-version 1.0.0-rc.3
 
 ### Disable mTLS
 
-Dapr is initialized by default with [mTLS]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}). You can disable it with:
+Dapr is initialized by default with [mTLS]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}). You can disable it with: You can disable it with:
 
 ```
 dapr init -k --enable-mtls=false --runtime-version 1.0.0-rc.3
