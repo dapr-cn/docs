@@ -28,19 +28,11 @@ spec:
   - name: maxConnBufferSize
     value: <REPLACE-WITH-MAX-CONN-BUFFER-SIZE> # Optional. default: "1048576"
   - name: keyPrefixPath
-    value: <REPLACE-WITH-KEY-PREFIX-PATH> # Optional. Example: "zookeeper.default.svc.cluster.local:2181"
-  - name: sessionTimeout
-    value: <REPLACE-WITH-SESSION-TIMEOUT> # Required. Example: "5s"
-  - name: maxBufferSize
-    value: <REPLACE-WITH-MAX-BUFFER-SIZE> # Optional. default: "1048576"
-  - name: maxConnBufferSize
-    value: <REPLACE-WITH-MAX-CONN-BUFFER-SIZE> # Optional. default: "1048576"
-  - name: keyPrefixPath
     value: <REPLACE-WITH-KEY-PREFIX-PATH> # Optional.
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
@@ -75,7 +67,7 @@ helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubato
 helm install zookeeper incubator/zookeeper
 ```
 
-This installs Zookeeper into the `default` namespace. This will install Zookeeper into the `default` namespace. To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`. This will install Zookeeper into the `default` namespace. To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`.
+This installs Zookeeper into the `default` namespace. This will install Zookeeper into the `default` namespace. To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`. To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`.
 
 For example, if installing using the example above, the Zookeeper host address would be:
 
