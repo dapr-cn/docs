@@ -7,7 +7,7 @@ description: >
   分布式应用程序运行时介绍
 ---
 
-Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种开发语言和开发框架。
+Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种编程语言和开发框架。
 
 <iframe src="//player.bilibili.com/player.html?aid=586108726&bvid=BV1xz4y167XA&cid=277928385&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
@@ -15,31 +15,31 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 
 <img src="/images/overview.png" width=1000>
 
-如今，我们正经历着云应用浪潮。 开发人员对 Web + 数据库应用结构（例如经典 3 层设计）非常熟悉，并且使用得手，但对本身能支持分布式的微服务应用结构却感觉很陌生。 成为分布式系统专家很难，并且你也不需要这么做。 开发人员希望专注于业务逻辑，同时希望平台为其提供可伸缩的、弹性的、可维护性和云原生架构的其他功能。
+如今，我们正经历着上云浪潮。 开发人员对 Web + 数据库应用结构（例如经典 3 层设计）非常熟悉，并且使用得手，但对本身能支持分布式的微服务应用结构却感觉陌生。 成为分布式系统专家很难，并且你也不需要这么做。 开发人员希望专注于业务逻辑，同时希望平台为其提供可伸缩的、弹性的、可维护性和云原生架构的其他功能。
 
-这就是Dapr所要解决的。 Dapr 将构建微服务应用的 *最佳实践* 设计成开放、独立和模块化的方式，让你能够选择的任意开发语言和框架构建可移植应用程序。 每个模块都是完全独立的，您可以采用其中一个或多个或全部来构建你的应用。
+这就是Dapr所要解决的。 Dapr 将构建微服务应用的 *最佳实践* 设计成开放、独立和模块化的方式，让你能够选择的任意开发语言和框架构建可移植应用程序。 每个构建块都是完全独立的，您可以采用其中一个或多个或全部来构建你的应用。
 
-此外，Dapr 是和平台无关的，这意味着您可以在本地、Kubernetes 群集或者其它集成 Dapr 的托管环境中运行应用程序。 这使你能够在云平台和边缘计算中运行微服务应用。
+此外，Dapr 是和平台无关的，这意味着您可以在本地、Kubernetes 群集或者其它集成 Dapr 的托管环境中运行应用程序。 这使得您能够在云平台和边缘计算中运行微服务应用。
 
 使用 Dapr，您可以使用任何语言、任何框架轻松构建微服务应用，并运行在任何地方。
 
-## 云平台和边缘计算的微服务基础模块
+## 云平台和边缘计算的微服务构建块
 
 <img src="/images/building_blocks.png" width=1000>
 
-在构建微服务应用时，需要考虑很多。 Dapr 在构建微服务应用时为常见功能提供了最佳实践，开发人员可以使用标准方式并部署到任何环境。 它提供分布式系统模块来执行此工作。
+在构建微服务应用时，需要考虑很多。 Dapr 在构建微服务应用时为常见功能提供了最佳实践，开发人员可以使用标准方式然后部署到任何环境。 Dapr 通过提供分布式构建块来实现此目标。
 
-每个模块都是完全独立的，这意味着您可以采用其中一个或多个或全部来构建你的应用。 在此 Dapr 的初始版本中，提供了以下基础模块：
+每个构建块都是独立的，这意味着您可以采用其中一个或多个或全部来构建应用。 在当前 Dapr 的初始版本中，提供了以下构建块：
 
-| 基础模块                                   | 描述                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**服务之间互相调用**]({{X18X}})              | 弹性的服务间调用能在远程服务上进行方法调用（包括检索），无论它们是否位于受支持的托管环境中的。                                                                                                                                                                                                                                                                                                                                                                                            |
-| [**状态管理**]({{X21X}})                  | With state management for storing key/value pairs, long running, highly available, stateful services can be easily written alongside stateless services in your application. The state store is pluggable and can include Azure CosmosDB, Azure SQL Server, PostgreSQL, AWS DynamoDB or Redis among others. The state store is pluggable and can include Azure CosmosDB, Azure SQL Server, PostgreSQL, AWS DynamoDB or Redis among others. |
-| [**Publish and subscribe**]({{X24X}}) | Publishing events and subscribing to topics | tween services enables event-driven architectures to simplify horizontal scalability and make them | silient to failure. Dapr provides at least once message delivery guarantee. Dapr provides at least once message delivery guarantee.                                                                                                                                                     |
-| [**Resource bindings**]({{X27X}})     | Resource bindings with triggers builds further on event-driven architectures for scale and resiliency by receiving and sending events to and from any external source such as databases, queues, file systems, etc.                                                                                                                                                                                                                        |
-| [**Actors**]({{X30X}})                | A pattern for stateful and stateless objects that make concurrency simple with method and state encapsulation. A pattern for stateful and stateless objects that make concurrency simple with method and state encapsulation. Dapr provides many capabilities in its actor runtime including concurrency, state, life-cycle management for actor activation/deactivation and timers and reminders to wake-up actors.                       |
-| [**Observability**]({{X33X}})         | Dapr emit metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr emit metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr supports distributed tracing to easily diagnose and serve inter-service calls in production using the W3C Trace Context standard and Open Telemetry to send to different monitoring tools.                                                        |
-| [**Secrets**]({{X36X}})               | Dapr provides secrets management and integrates with public cloud and local secret stores to retrieve the secrets for use in application code.                                                                                                                                                                                                                                                                                             |
+| 构建块                            | 描述                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**服务间调用**]({{X18X}})         | 弹性的服务间调用能在远程服务上进行方法调用（包括检索），无论它们是否位于受支持的托管环境中的。                                                                                                                                                                                                                                                                                                                                                                      |
+| [**状态管理**]({{X21X}})          | 通过用于存储键/值对的状态管理，应用程序中长期运行、高可用的有状态服务可以轻松地与无状态服务一起编写。 状态存储是可插拔的，可以包括 Azure CosmosDB， Azure SQL Server， PostgreSQL， AWS DynamoDB 或 Redis 等。                                                                                                                                                                                                                                                                             |
+| [**发布订阅**]({{X24X}})          | 发布事件到主题和从主题中订阅事件。                                                                                                                                                                                                                                                                                                                                                                                                    |
+| [**资源绑定**]({{X27X}})          | Resource bindings with triggers builds further on event-driven architectures for scale and resiliency by receiving and sending events to and from any external source such as databases, queues, file systems, etc.                                                                                                                                                                                                  |
+| [**Actors**]({{X30X}})        | A pattern for stateful and stateless objects that make concurrency simple with method and state encapsulation. A pattern for stateful and stateless objects that make concurrency simple with method and state encapsulation. Dapr provides many capabilities in its actor runtime including concurrency, state, life-cycle management for actor activation/deactivation and timers and reminders to wake-up actors. |
+| [**Observability**]({{X33X}}) | Dapr emit metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr emit metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr supports distributed tracing to easily diagnose and serve inter-service calls in production using the W3C Trace Context standard and Open Telemetry to send to different monitoring tools.                                  |
+| [**Secrets**]({{X36X}})       | Dapr provides secrets management and integrates with public cloud and local secret stores to retrieve the secrets for use in application code.                                                                                                                                                                                                                                                                       |
 
 ## Sidecar architecture
 
