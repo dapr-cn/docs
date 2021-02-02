@@ -30,7 +30,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 If you wish to use CosmosDb as an actor store, append the following to the yaml.
@@ -52,12 +52,12 @@ If you wish to use CosmosDb as an actor store, append the following to the yaml.
 
 ## Setup Azure Cosmos DB
 
-[Follow the instructions](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-manage-database-account) from the Azure documentation on how to create an Azure CosmosDB account.  The database and collection must be created in CosmosDB before Dapr can use it.  The database and collection must be created in CosmosDB before Dapr can use it.
+[Follow the instructions](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-manage-database-account) from the Azure documentation on how to create an Azure CosmosDB account.  The database and collection must be created in CosmosDB before Dapr can use it.
 
-**Note : The partition key for the collection must be named "/partitionKey".  Note: this is case-sensitive.  Note: this is case-sensitive.**
+**Note : The partition key for the collection must be named "/partitionKey".  Note: this is case-sensitive.**
 
 In order to setup CosmosDB as a state store, you need the following properties:
-- **URL**: the CosmosDB url. for example: https://******.documents.azure.com:443/ for example: https://******.documents.azure.com:443/
+- **URL**: the CosmosDB url. for example: https://******.documents.azure.com:443/
 - **Master Key**: The key to authenticate to the CosmosDB account
 - **Database**: The name of the database
 - **Collection**: The name of the collection
@@ -72,7 +72,7 @@ For examples see the curl operations in the [Partition keys](#partition-keys) se
 
 ## Partition keys
 
-For **non-actor state** operations, the Azure Cosmos DB state store will use the `key` property provided in the requests to the Dapr API to determine the Cosmos DB partition key.  This can be overridden by specifying a metadata field in the request with a key of `partitionKey` and a value of the desired partition.  This can be overridden by specifying a metadata field in the request with a key of `partitionKey` and a value of the desired partition.
+For **non-actor state** operations, the Azure Cosmos DB state store will use the `key` property provided in the requests to the Dapr API to determine the Cosmos DB partition key.  This can be overridden by specifying a metadata field in the request with a key of `partitionKey` and a value of the desired partition.
 
 The following operation will use `nihilus` as the partition key value sent to CosmosDB:
 
@@ -87,7 +87,7 @@ curl -X POST http://localhost:3500/v1.0/state/<store_name> \
       ]'
 ```
 
-For **non-actor** state operations, if you want to control the CosmosDB partition, you can specify it in metadata.  Reusing the example above, here's how to put it under the `mypartition` partition  Reusing the example above, here's how to put it under the `mypartition` partition
+For **non-actor** state operations, if you want to control the CosmosDB partition, you can specify it in metadata.  Reusing the example above, here's how to put it under the `mypartition` partition
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state/<store_name> \
