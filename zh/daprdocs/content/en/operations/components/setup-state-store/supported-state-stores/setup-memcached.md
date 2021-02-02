@@ -24,15 +24,11 @@ spec:
   - name: maxIdleConnections
     value: <REPLACE-WITH-MAX-IDLE-CONNECTIONS> # Optional. default: "2"
   - name: timeout
-    value: <REPLACE-WITH-TIMEOUT> # Optional. default: "1000ms" Example: "memcached.default.svc.cluster.local:11211"
-  - name: maxIdleConnections
-    value: <REPLACE-WITH-MAX-IDLE-CONNECTIONS> # Optional. default: "2"
-  - name: timeout
     value: <REPLACE-WITH-TIMEOUT> # Optional. default: "1000ms"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
@@ -64,7 +60,7 @@ The easiest way to install Memcached on Kubernetes is by using the [Helm chart](
 helm install memcached stable/memcached
 ```
 
-This installs Memcached into the `default` namespace. This will install Memcached into the `default` namespace. To interact with Memcached, find the service with: `kubectl get svc memcached`. This will install Memcached into the `default` namespace. To interact with Memcached, find the service with: `kubectl get svc memcached`.
+This installs Memcached into the `default` namespace. This will install Memcached into the `default` namespace. To interact with Memcached, find the service with: `kubectl get svc memcached`. To interact with Memcached, find the service with: `kubectl get svc memcached`.
 
 For example, if installing using the example above, the Memcached host address would be:
 
