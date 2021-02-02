@@ -42,7 +42,7 @@ The MySQL binding uses [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)
     value: user:password@tcp(localhost:3306)/dbname
   ```
 
-If your server requires SSL your connection string must end of `&tls=custom` for example, `"<user>:<password>@tcp(<server>:3306)/<database>?allowNativePasswords=true&tls=custom"`. You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
+If your server requires SSL your connection string must end of `&tls=custom` for example, `"<user>:<password>@tcp(<server>:3306)/<database>?allowNativePasswords=true&tls=custom"`. You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2. You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
 
 - `pemPath`: path to the PEM file
 
@@ -53,7 +53,7 @@ also support connection pool configuration variables:
 - `connMaxLifetime`: duration string
 - `connMaxIdleTime`: duration string
 
-{{% alert title="Warning" color="warning" %}} The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。 {{% /alert %}}
+{{% alert title="Warning" color="warning" %}} The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}). {{% /alert %}} 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。 {{% /alert %}}
 
 ## 输出绑定支持的操作
 
