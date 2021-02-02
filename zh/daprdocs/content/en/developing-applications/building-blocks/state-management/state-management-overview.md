@@ -26,7 +26,7 @@ Developers can use the [state management API]({{< ref state_api.md >}}) to retri
 
 ### Pluggable state stores
 
-Dapr data stores are modeled as pluggable components, which can be swapped out without any changes to your service code. Check out the [full list of state stores]({{< ref supported-state-stores >}}) to see what Dapr supports. Check out the [full list of state stores]({{< ref supported-state-stores >}}) to see what Dapr supports.
+Dapr data stores are modeled as pluggable components, which can be swapped out without any changes to your service code. Check out the [full list of state stores]({{< ref supported-state-stores >}}) to see what Dapr supports.
 
 ### Configurable state store behavior
 
@@ -39,7 +39,7 @@ For example, you can attach:
 
 By default, your application should assume a data store is **eventually consistent** and uses a **last-write-wins** concurrency pattern.
 
-Not all stores are created equal. Not all stores are created equal. To ensure portability of your application you can query the capabilities of the store and make your code adaptive to different store capabilities.
+Not all stores are created equal. To ensure portability of your application you can query the capabilities of the store and make your code adaptive to different store capabilities.
 
 The following table gives examples of capabilities of popular data store implementations.
 
@@ -53,14 +53,14 @@ The following table gives examples of capabilities of popular data store impleme
 
 ### Concurrency
 
-Dapr supports optimistic concurrency control (OCC) using ETags. When a state is requested, Dapr always attaches an **ETag** property to the returned state. Dapr supports optimistic concurrency control (OCC) using ETags. When a state is requested, Dapr always attaches an **ETag** property to the returned state. When the user code tries to update or delete a state, it's expected to attach the ETag through the **If-Match** header. The write operation can succeed only when the provided ETag matches with the ETag in the state store. The write operation can succeed only when the provided ETag matches with the ETag in the state store.
+Dapr supports optimistic concurrency control (OCC) using ETags. When a state is requested, Dapr always attaches an **ETag** property to the returned state. When the user code tries to update or delete a state, it's expected to attach the ETag through the **If-Match** header. The write operation can succeed only when the provided ETag matches with the ETag in the state store.
 
 Dapr chooses OCC because in many applications, data update conflicts are rare because clients are naturally partitioned by business contexts to operate on different data. However, if your application chooses to use ETags, a request may get rejected because of mismatched ETags. It's recommended that you use a [retry policy](#retry-policies) to compensate for such conflicts when using ETags.
 
 If your application omits ETags in writing requests, Dapr skips ETag checks while handling the requests. This essentially enables the **last-write-wins** pattern, compared to the **first-write-wins** pattern with ETags.
 
 {{% alert title="Note on ETags" color="primary" %}}
-For stores that don't natively support ETags, it's expected that the corresponding Dapr state store implementation simulates ETags and follows the Dapr state management API specification when handling states. Because Dapr state store implementations are technically clients to the underlying data store, such simulation should be straightforward using the concurrency control mechanisms provided by the store. Because Dapr state store implementations are technically clients to the underlying data store, such simulation should be straightforward using the concurrency control mechanisms provided by the store.
+For stores that don't natively support ETags, it's expected that the corresponding Dapr state store implementation simulates ETags and follows the Dapr state management API specification when handling states. Because Dapr state store implementations are technically clients to the underlying data store, such simulation should be straightforward using the concurrency control mechanisms provided by the store.
 {{% /alert %}}
 
 ### Consistency
@@ -108,7 +108,7 @@ SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||tem
 ```
 
 {{% alert title="Note on direct queries" color="primary" %}}
-Direct queries of the state store are not governed by Dapr concurrency control, since you are not calling through the Dapr runtime. What you see are snapshots of committed data which are acceptable for read-only queries across multiple actors, however writes should be done via the actor instances. What you see are snapshots of committed data which are acceptable for read-only queries across multiple actors, however writes should be done via the actor instances.
+Direct queries of the state store are not governed by Dapr concurrency control, since you are not calling through the Dapr runtime. What you see are snapshots of committed data which are acceptable for read-only queries across multiple actors, however writes should be done via the actor instances.
 {{% /alert %}}
 
 ## Next steps
