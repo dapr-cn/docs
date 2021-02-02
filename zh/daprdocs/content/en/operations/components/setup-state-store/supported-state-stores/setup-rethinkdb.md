@@ -26,16 +26,6 @@ spec:
   - name: table
     value: # Optional
   - name: username
-    value: # Optional
-  - name: password
-    value: # Optional
-  - name: archive
-    value: # Optional (whether or not store should keep archive table of all the state changes)
-  - name: database
-    value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
-  - name: table
-    value: # Optional
-  - name: username
     value: <USERNAME> # Optional
   - name: password
     value: <PASSWORD> # Optional
@@ -44,7 +34,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 If you wish to use Redis as an actor store, append the following to the yaml.
@@ -55,9 +45,9 @@ If you wish to use Redis as an actor store, append the following to the yaml.
 ```
 
 
-RethinkDB state store supports transactions so it can be used to persist Dapr Actor state. By default, the state will be stored in table name `daprstate` in the specified database. By default, the state will be stored in table name `daprstate` in the specified database.
+RethinkDB state store supports transactions so it can be used to persist Dapr Actor state. By default, the state will be stored in table name `daprstate` in the specified database.
 
-Additionally, if the optional `archive` metadata is set to `true`, on each state change, the RethinkDB state store will also log state changes with timestamp in the `daprstate_archive` table. This allows for time series analyses of the state managed by Dapr. This allows for time series analyses of the state managed by Dapr.
+Additionally, if the optional `archive` metadata is set to `true`, on each state change, the RethinkDB state store will also log state changes with timestamp in the `daprstate_archive` table. This allows for time series analyses of the state managed by Dapr.
 
 ## Spec metadata fields
 
