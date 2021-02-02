@@ -57,26 +57,6 @@ Output received from the binding is of format `bindings.ReadResponse` with the `
      ...
    }
  }
-     },
-     "involvedObject": {
-       "kind": "Deployment",
-       "namespace": "kube-events",
-       ...
-     },
-     "reason": "ScalingReplicaSet",
-     "message": "Scaled up replica set hello-node-7bf657c596 to 1",
-     ...
-   },
-   "newVal": {
-     "metadata": { "creationTimestamp": "null" },
-     "involvedObject": {},
-     "source": {},
-     "firstTimestamp": "null",
-     "lastTimestamp": "null",
-     "eventTime": "null",
-     ...
-   }
- }
 ```
 Three different event types are available:
 - Add : Only the `newVal` field is populated, `oldVal` field is an empty `v1.Event`, `event` is `add`
@@ -89,7 +69,7 @@ For consuming `events` from Kubernetes, permissions need to be assigned to a Use
 
 ### Role
 
-One of the rules need to be of the form as below to give permissions to `get, watch` and `list` `events`. API Groups can be as restrictive as needed. API Groups can be as restrictive as needed.
+One of the rules need to be of the form as below to give permissions to `get, watch` and `list` `events`. API Groups can be as restrictive as needed.
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
