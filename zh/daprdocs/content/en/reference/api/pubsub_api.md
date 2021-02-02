@@ -8,7 +8,7 @@ weight: 300
 
 ## Publish a message to a given topic
 
-This endpoint lets you publish data to multiple consumers who are listening on a `topic`. Dapr guarantees at least once semantics for this endpoint. Dapr guarantees at least once semantics for this endpoint.
+This endpoint lets you publish data to multiple consumers who are listening on a `topic`. Dapr guarantees at least once semantics for this endpoint.
 
 ### HTTP Request
 
