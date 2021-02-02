@@ -6,31 +6,12 @@ weight: 2000
 description: "Use Dapr middleware to apply Open Policy Agent (OPA) policies on incoming requests"
 ---
 
-The Dapr Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware-concept.md >}}) allows applying [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. This can be used to apply reusable authorization policies to app endpoints. This can be used to apply reusable authorization policies to app endpoints.
+The Dapr Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware-concept.md >}}) allows applying [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. This can be used to apply reusable authorization policies to app endpoints.
 
 ## Middleware component definition
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: my-policy
-  namespace: default
-spec:
-  type: middleware.http.opa
-  version: v1
-  metadata:
-    # `includedHeaders` is a comma-seperated set of case-insensitive headers to include in the request input.
-    # Request headers are not passed to the policy by default. Include to recieve incoming request headers in
-    # the input
-    - name: includedHeaders
-      value: "x-my-custom-header, x-jwt-header"
-
-    # `defaultStatus` is the status code to return for denied responses
-    - name: defaultStatus
-      value: 403
-
-    # `rego` is the open policy agent policy to evaluate. apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: my-policy
