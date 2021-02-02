@@ -30,16 +30,16 @@ spec:
 - `storageAccount` is the Azure Storage account name.
 - `storageAccessKey` is the Azure Storage access key.
 - `queue` is the name of the Azure Storage queue.
-- `ttlInSeconds` is an optional parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes.
+- `ttlInSeconds` is an optional parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. If this parameter is omitted, messages will expire after 10 minutes.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 
 ## Specifying a time to live on message level
 
-Time to live can be defined on queue level (as illustrated above) or at the message level. The value defined at message level overwrites any value set at queue level.
+Time to live can be defined on queue level (as illustrated above) or at the message level. The value defined at message level overwrites any value set at queue level. The value defined at message level overwrites any value set at queue level.
 
 To set time to live at message level use the `metadata` section in the request body during the binding invocation.
 
