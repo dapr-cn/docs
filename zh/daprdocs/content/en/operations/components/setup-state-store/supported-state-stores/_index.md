@@ -28,16 +28,16 @@ The following stores are supported, at various levels, by the Dapr state managem
 
 ### Google Cloud Platform (GCP)
 
-| Name                                                               | CRUD   | Transactional   | Status                                                                                                                                                                                                                               |
-| ------------------------------------------------------------------ | ------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name                                                               | CRUD   | Transactional   | Status                                                                                                                           |
+| ------------------------------------------------------------------ | ------ | --------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | [GCP Firestore]({{< ref setup-firestore.md >}})                    | ✅      | ❌               | Alpha  |
 
 
-### Microsoft Azure| Name                                                             | CRUD | Transactional | Status || Name                                                             | CRUD | Transactional | Status |
-| ------------------------------------------------------------------ | ------ | --------------- | --------                                                                                                                                                                                                                             |
-| [Azure Blob Storage]({{< ref setup-azure-blobstorage.md >}})       | ✅      | ❌               | Alpha                                                                                                                                                                                                                                |
-| [Azure CosmosDB]({{< ref setup-azure-cosmosdb.md >}})              | ✅      | ✅               | Alpha                                                                                                                                                                                                                                |
-| [Azure SQL Server]({{< ref setup-sqlserver.md >}})                 | ✅      | ❌               | Alpha                                                                                                                                                                                                                                |
-| [Azure Table Storage]({{< ref setup-azure-tablestorage.md >}})     | ✅      | ❌               | Alpha                                                                                                                                                                                                                                |
+### Microsoft Azure| Name                                                             | CRUD | Transactional | Status |
+| ------------------------------------------------------------------ | ------ | --------------- | --------                                                                                                                         |
+| [Azure Blob Storage]({{< ref setup-azure-blobstorage.md >}})       | ✅      | ❌               | Alpha                                                                                                                            |
+| [Azure CosmosDB]({{< ref setup-azure-cosmosdb.md >}})              | ✅      | ✅               | Alpha                                                                                                                            |
+| [Azure SQL Server]({{< ref setup-sqlserver.md >}})                 | ✅      | ❌               | Alpha                                                                                                                            |
+| [Azure Table Storage]({{< ref setup-azure-tablestorage.md >}})     | ✅      | ❌               | Alpha                                                                                                                            |
 
 
