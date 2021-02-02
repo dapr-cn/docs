@@ -9,7 +9,7 @@ description: >
 
 This article addresses multiple security considerations when using Dapr in a distributed application including:
 
-Several of the areas above are addressed through encryption of data in transit. Several of the areas above are addressed through encryption of data in transit. One of the security mechanisms that Dapr employs for encrypting data in transit is [mutual authentication TLS](https://en.wikipedia.org/wiki/Mutual_authentication) or mTLS. mTLS offers a few key features for network traffic inside your application: mTLS offers a few key features for network traffic inside your application:
+Several of the areas above are addressed through encryption of data in transit. One of the security mechanisms that Dapr employs for encrypting data in transit is [mutual authentication TLS](https://en.wikipedia.org/wiki/Mutual_authentication) or mTLS. mTLS offers a few key features for network traffic inside your application:
 
 - Two way authentication - the client proving its identify to the server, and vice-versa
 - An encrypted channel for all in-flight communication, after two-way authentication is established
@@ -20,11 +20,11 @@ Dapr enables mTLS and all the features described in this document in your applic
 
 ## Sidecar-to-app communication
 
-The Dapr sidecar runs close to the application through **localhost**, and is recommended to run under the same network boundary as the app. While many cloud-native systems today consider the pod level (on Kubernetes, for example) as a trusted security boundary, Dapr provides user with API level authentication using tokens. This feature guarantees that even on localhost, only an authenticated caller may call into Dapr. While many cloud-native systems today consider the pod level (on Kubernetes, for example) as a trusted security boundary, Dapr provides user with API level authentication using tokens. This feature guarantees that even on localhost, only an authenticated caller may call into Dapr.
+The Dapr sidecar runs close to the application through **localhost**, and is recommended to run under the same network boundary as the app. While many cloud-native systems today consider the pod level (on Kubernetes, for example) as a trusted security boundary, Dapr provides user with API level authentication using tokens. This feature guarantees that even on localhost, only an authenticated caller may call into Dapr.
 
 ## Sidecar-to-sidecar communication
 
-Dapr includes an "on by default", automatic mutual TLS that provides in-transit encryption for traffic between Dapr sidecars. Dapr includes an "on by default", automatic mutual TLS that provides in-transit encryption for traffic between Dapr sidecars. To achieve this, Dapr leverages a system service named `Sentry` which acts as a Certificate Authority (CA) and signs workload (app) certificate requests originating from the Dapr sidecar.
+Dapr includes an "on by default", automatic mutual TLS that provides in-transit encryption for traffic between Dapr sidecars. To achieve this, Dapr leverages a system service named `Sentry` which acts as a Certificate Authority (CA) and signs workload (app) certificate requests originating from the Dapr sidecar.
 
 Dapr also manages workload certificate rotation, and does so with zero downtime to the application.
 
@@ -32,7 +32,7 @@ Sentry, the CA service, automatically creates and persists self signed root cert
 
 When root certs are replaced (secret in Kubernetes mode and filesystem for self hosted mode), the Sentry picks them up and re-builds the trust chain without needing to restart, with zero downtime to Sentry.
 
-When a new Dapr sidecar initializes, it first checks if mTLS is enabled. If it is, an ECDSA private key and certificate signing request are generated and sent to Sentry via a gRPC interface. When a new Dapr sidecar initializes, it first checks if mTLS is enabled. If it is, an ECDSA private key and certificate signing request are generated and sent to Sentry via a gRPC interface. The communication between the Dapr sidecar and Sentry is authenticated using the trust chain cert, which is injected into each Dapr instance by the Dapr Sidecar Injector system service.
+When a new Dapr sidecar initializes, it first checks if mTLS is enabled. If it is, an ECDSA private key and certificate signing request are generated and sent to Sentry via a gRPC interface. The communication between the Dapr sidecar and Sentry is authenticated using the trust chain cert, which is injected into each Dapr instance by the Dapr Sidecar Injector system service.
 
 In a Kubernetes cluster, the secret that holds the root certificates is scoped to the namespace in which the Dapr components are deployed to and is only accessible by the Dapr system pods.
 
@@ -40,7 +40,7 @@ Dapr also supports strong identities when deployed on Kubernetes, relying on a p
 
 By default, a workload cert is valid for 24 hours and the clock skew is set to 15 minutes.
 
-Mutual TLS can be turned off/on by editing the default configuration that is deployed with Dapr via the `spec.mtls.enabled` field. This can be done for both Kubernetes and self hosted modes. Details for how to do this can be found [here]({{< ref mtls.md >}}). This can be done for both Kubernetes and self hosted modes. Details for how to do this can be found [here]({{< ref mtls.md >}}).
+Mutual TLS can be turned off/on by editing the default configuration that is deployed with Dapr via the `spec.mtls.enabled` field. This can be done for both Kubernetes and self hosted modes. Details for how to do this can be found [here]({{< ref mtls.md >}}).
 
 ### mTLS self hosted
 The diagram below shows how the Sentry system service issues certificates for applications based on the root/issuer certificate that is provided by an operator or generated by the Sentry service as stored in a file
@@ -56,13 +56,13 @@ The diagram below shows how the Sentry system service issues certificates for ap
 
 In addition to automatic mTLS between Dapr sidecars, Dapr offers mandatory mTLS between the Dapr sidecar and the Dapr system services, namely the Sentry service (Certificate Authority), Placement service (actor placement) and the Kubernetes Operator.
 
-When mTLS is enabled, Sentry writes the root and issuer certificates to a Kubernetes secret that is scoped to the namespace where the control plane is installed. In self hosted mode, Sentry writes the certificates to a configurable filesystem path. In self hosted mode, Sentry writes the certificates to a configurable filesystem path.
+When mTLS is enabled, Sentry writes the root and issuer certificates to a Kubernetes secret that is scoped to the namespace where the control plane is installed. In self hosted mode, Sentry writes the certificates to a configurable filesystem path.
 
 In Kubernetes, when the Dapr system services start, they automatically mount the secret containing the root and issuer certs and use those to secure the gRPC server that is used by the Dapr sidecar.
 
 In self hosted mode, each system service can be mounted to a filesystem path to get the credentials.
 
-When the Dapr sidecar initializes, it authenticates with the system pods using the mounted leaf certificates and issuer private key. these are mounted as environment variables on the sidecar container. these are mounted as environment variables on the sidecar container.
+When the Dapr sidecar initializes, it authenticates with the system pods using the mounted leaf certificates and issuer private key. these are mounted as environment variables on the sidecar container.
 
 ### mTLS to system services in Kubernetes
 The diagram below shows secure communication between the Dapr sidecar and the Dapr Sentry (Certificate Authority), Placement (actor placement) and the Kubernetes Operator system services
@@ -71,29 +71,29 @@ The diagram below shows secure communication between the Dapr sidecar and the Da
 
 ## Component namespace scopes and secrets
 
-Dapr components are namespaced. Dapr components are namespaced. That means a Dapr runtime sidecar instance can only access the components that have been deployed to the same namespace. See the [components scope documentation]({{X29X}}) for more details. See the [components scope documentation]({{X29X}}) for more details.
+Dapr components are namespaced. That means a Dapr runtime sidecar instance can only access the components that have been deployed to the same namespace. See the [components scope documentation]({{X29X}}) for more details.
 
-Dapr components uses Dapr's built-in secret management capability to manage secrets. See the [secret store overview]({{X31X}}) for more details. See the [secret store overview]({{X31X}}) for more details.
+Dapr components uses Dapr's built-in secret management capability to manage secrets. See the [secret store overview]({{X31X}}) for more details.
 
-In addition, Dapr offers application-level scoping for components by allowing users to specify which applications can consume given components.For more information about application level scoping, see [here]({{X33X}}).
+In addition, Dapr offers application-level scoping for components by allowing users to specify which applications can consume given components.For more information about application level scoping, see [here]({{X33X}}).
 
 ## Network security
 
 You can adopt common network security technologies such as network security groups (NSGs), demilitarized zones (DMZs) and firewalls to provide layers of protections over your networked resources.
 
-For example, unless configured to talk to an external binding target, Dapr sidecars don’t open connections to the internet. And most binding implementations use outbound connections only. You can design your firewall rules to allow outbound connections only through designated ports. And most binding implementations use outbound connections only. You can design your firewall rules to allow outbound connections only through designated ports.
+For example, unless configured to talk to an external binding target, Dapr sidecars don’t open connections to the internet. And most binding implementations use outbound connections only. You can design your firewall rules to allow outbound connections only through designated ports.
 
 ## Bindings security
 
-Authentication with a binding target is configured by the binding’s configuration file. Generally, you should configure the minimum required access rights. Authentication with a binding target is configured by the binding’s configuration file. Generally, you should configure the minimum required access rights. For example, if you only read from a binding target, you should configure the binding to use an account with read-only access rights.
+Authentication with a binding target is configured by the binding’s configuration file. Generally, you should configure the minimum required access rights. For example, if you only read from a binding target, you should configure the binding to use an account with read-only access rights.
 
 ## State store security
 
-Dapr doesn't transform the state data from applications. This means Dapr doesn't attempt to encrypt/decrypt state data. However, your application can adopt encryption/decryption methods of your choice, and the state data remains opaque to Dapr. This means Dapr doesn't attempt to encrypt/decrypt state data. However, your application can adopt encryption/decryption methods of your choice, and the state data remains opaque to Dapr.
+Dapr doesn't transform the state data from applications. This means Dapr doesn't attempt to encrypt/decrypt state data. However, your application can adopt encryption/decryption methods of your choice, and the state data remains opaque to Dapr.
 
 Dapr does not store any data at rest.
 
-Dapr uses the configured authentication method to authenticate with the underlying state store. And many state store implementations use official client libraries that generally use secured communication channels with the servers. And many state store implementations use official client libraries that generally use secured communication channels with the servers.
+Dapr uses the configured authentication method to authenticate with the underlying state store. And many state store implementations use official client libraries that generally use secured communication channels with the servers.
 
 ## Management security
 
@@ -102,7 +102,7 @@ When deploying on Kubernetes, you can use regular [Kubernetes RBAC](https://kube
 When deploying on Azure Kubernetes Service (AKS), you can use [Azure Active Directory (AD) service principals](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals) to control access to management activities and resource management.
 
 ## Threat model
-Threat modeling is a process by which potential threats, such as structural vulnerabilities or the absence of appropriate safeguards, can be identified, enumerated, and mitigations can be prioritized. The Dapr threat model is below. The Dapr threat model is below.
+Threat modeling is a process by which potential threats, such as structural vulnerabilities or the absence of appropriate safeguards, can be identified, enumerated, and mitigations can be prioritized. The Dapr threat model is below.
 
 <img src="/images/security-threat-model.png" alt="Dapr threat model" width=1000>
 
@@ -110,7 +110,7 @@ Threat modeling is a process by which potential threats, such as structural vuln
 
 ### June 2020
 
-In June 2020, Dapr has undergone a security audit from Cure53, a CNCF approved cybersecurity firm. The test focused on the following: The test focused on the following:
+In June 2020, Dapr has undergone a security audit from Cure53, a CNCF approved cybersecurity firm. The test focused on the following:
 
 * Dapr runtime code base evaluation
 * Dapr components code base evaluation
@@ -126,4 +126,4 @@ In June 2020, Dapr has undergone a security audit from Cure53, a CNCF approved c
 
 The full report can be found [here](/docs/Dapr-july-2020-security-audit-report.pdf).
 
-Two issues, one critical and one high, were fixed during the test. Two issues, one critical and one high, were fixed during the test. As of July 21st 2020, Dapr has 0 criticals, 2 highs, 2 mediums, 1 low, 1 info.
+Two issues, one critical and one high, were fixed during the test. As of July 21st 2020, Dapr has 0 criticals, 2 highs, 2 mediums, 1 low, 1 info.
