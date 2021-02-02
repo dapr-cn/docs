@@ -42,7 +42,7 @@ spec:
 - `ttlInSeconds` 是一个可选的参数，可以将 [默认消息时间设置为在RabbitMQ 队列级别](https://www.rabbitmq.com/ttl.html) 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。
 - `prefetchCount` 是一个可选参数，用于设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch)。 如果此参数为空，QOS 会设置为0为无限制。
 - `exclusive` determines whether the topic will be an exclusive topic or not
-- `maxPriority` is an optional parameter to set the [priority queue](https://www.rabbitmq.com/priority.html). If this parameter is omitted, queue will be created as a general queue instead of a priority queue.
+- `ttlInSeconds` 是一个可选的参数，可以将 [默认消息时间设置为在RabbitMQ 队列级别](https://www.rabbitmq.com/ttl.html) 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。
 
 {{% alert title="Warning" color="warning" %}}
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
@@ -74,7 +74,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
 
 ## Specifying a priority on message level
 
-Priority can be defined at the message level. If `maxPriority` parameter is set, high priority messages will have priority over other low priority messages.
+Priority can be defined at the message level. Priority can be defined at the message level. If `maxPriority` parameter is set, high priority messages will have priority over other low priority messages.
 
 To set priority at message level use the `metadata` section in the request body during the binding invocation.
 
