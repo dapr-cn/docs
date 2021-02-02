@@ -7,7 +7,7 @@ description: Detailed information on the RethinkDB state store component
 
 ## Component format
 
-To setup RethinkDB state store create a component of type `state.rethinkdb`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup RethinkDB state store create a component of type `state.rethinkdb`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -61,14 +61,14 @@ Additionally, if the optional `archive` metadata is set to `true`, on each state
 
 ## Spec metadata fields
 
-| 字段       | Required | Details                                  | 示例                                                                 |
-| -------- |:--------:| ---------------------------------------- | ------------------------------------------------------------------ |
-| address  |    Y     | The address for RethinkDB server         | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
-| database |    Y     | The database to use. Alpha-numerics only | `"dapr"`                                                           |
-| table    |    N     | The table name to use                    | `"table"`                                                          |
-| username |    N     | The username to connect with             | `"user"`                                                           |
-| password |    N     | The password to connect with             | `"password"`                                                       |
-| archive  |    N     | Whether or not to archive the table      | `"true"`, `"false"`                                                |
+| 字段       | Required | Details                                                       | 示例                                                                 |
+| -------- |:--------:| ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| address  |    Y     | The address for RethinkDB server                              | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
+| database |    Y     | The database to use. The database to use. Alpha-numerics only | `"dapr"`                                                           |
+| table    |    N     | The table name to use                                         | `"table"`                                                          |
+| username |    N     | The username to connect with                                  | `"user"`                                                           |
+| password |    N     | The password to connect with                                  | `"password"`                                                       |
+| archive  |    N     | Whether or not to archive the table                           | `"true"`, `"false"`                                                |
 
 ## Setup RethinkDB
 
