@@ -6,7 +6,7 @@ description: "Detailed documentation on the NATS Streaming pubsub component"
 ---
 
 ## Component format
-To setup NATS Streaming pubsub create a component of type `pubsub.natsstreaming`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+To setup NATS Streaming pubsub create a component of type `pubsub.natsstreaming`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -46,29 +46,6 @@ spec:
     value: ""
   - name: startAtTimeFormat
     value: ""
-  - name: subscriptionType
-    value: <REPLACE-WITH-SUBSCRIPTION-TYPE> # Required. Allowed values: topic, queue.
-  - name: ackWaitTime
-    value: "" # Optional. 
-  - name: maxInFlight
-    value: "" # Optional.
-  - name: durableSubscriptionName
-    value: "" # Optional.
-  # following subscription options - only one can be used
-  - name: deliverNew
-    value: <bool>
-  - name: startAtSequence
-    value: 1
-  - name: startWithLastReceived
-    value: false
-  - name: deliverAll
-    value: false
-  - name: startAtTimeDelta
-    value: ""
-  - name: startAtTime
-    value: ""
-  - name: startAtTimeFormat
-    value: ""
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -77,21 +54,21 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                      | Required | Details                                                                                                                                                | 示例                              |
-| ----------------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
-| natsURL                 |    Y     | NATS server address URL                                                                                                                                | "`nats://localhost:4222`"       |
-| natsStreamingClusterID  |    Y     | NATS cluster ID                                                                                                                                        | `"clusterId"`                   |
-| subscriptionType        |    Y     | Subscription type. Subscription type. Allowed values `"topic"`, `"queue"`                                                                              | `"topic"`                       |
-| ackWaitTime             |    N     | See [here](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements)                                                                  | `"300ms"`                       |
-| maxInFlight             |    N     | See [here](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements)                                                                  | `"25"`                          |
-| durableSubscriptionName |    N     | [Durable subscriptions](https://docs.nats.io/developing-with-nats-streaming/durables) identification name.                                             | `"my-durable"`                  |
-| deliverNew              |    N     | Subscription Options. Only one can be used. Subscription Options. Only one can be used. Deliver new messages only                                      | `"true"`, `"false"`             |
-| startAtSequence         |    N     | Subscription Options. Only one can be used. Subscription Options. Only one can be used. Sets the desired start sequence position and state             | `"100000"`, `"230420"`          |
-| startWithLastReceived   |    N     | Subscription Options. Only one can be used. Subscription Options. Only one can be used. Sets the start position to last received.                      | `"true"`, `"false"`             |
-| deliverAll              |    N     | Subscription Options. Only one can be used. Subscription Options. Only one can be used. Deliver all available messages                                 | `"true"`, `"false"`             |
-| startAtTimeDelta        |    N     | Subscription Options. Only one can be used. Subscription Options. Only one can be used. Sets the desired start time position and state using the delta | `"10m"`, `"23s"`                |
-| startAtTime             |    N     | Subscription Options. Only one can be used. Subscription Options. Only one can be used. Sets the desired start time position and state                 | `"Feb 3, 2013 at 7:54pm (PST)"` |
-| startAtTimeDelta        |    N     | Must be used with `startAtTime`. Sets the format for the time Sets the format for the time                                                             | `"Jan 2, 2006 at 3:04pm (MST)"` |
+| 字段                      | Required | Details                                                                                                    | 示例                              |
+| ----------------------- |:--------:| ---------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| natsURL                 |    Y     | NATS server address URL                                                                                    | "`nats://localhost:4222`"       |
+| natsStreamingClusterID  |    Y     | NATS cluster ID                                                                                            | `"clusterId"`                   |
+| subscriptionType        |    Y     | Subscription type. Allowed values `"topic"`, `"queue"`                                                     | `"topic"`                       |
+| ackWaitTime             |    N     | See [here](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements)                      | `"300ms"`                       |
+| maxInFlight             |    N     | See [here](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements)                      | `"25"`                          |
+| durableSubscriptionName |    N     | [Durable subscriptions](https://docs.nats.io/developing-with-nats-streaming/durables) identification name. | `"my-durable"`                  |
+| deliverNew              |    N     | Subscription Options. Only one can be used. Deliver new messages only                                      | `"true"`, `"false"`             |
+| startAtSequence         |    N     | Subscription Options. Only one can be used. Sets the desired start sequence position and state             | `"100000"`, `"230420"`          |
+| startWithLastReceived   |    N     | Subscription Options. Only one can be used. Sets the start position to last received.                      | `"true"`, `"false"`             |
+| deliverAll              |    N     | Subscription Options. Only one can be used. Deliver all available messages                                 | `"true"`, `"false"`             |
+| startAtTimeDelta        |    N     | Subscription Options. Only one can be used. Sets the desired start time position and state using the delta | `"10m"`, `"23s"`                |
+| startAtTime             |    N     | Subscription Options. Only one can be used. Sets the desired start time position and state                 | `"Feb 3, 2013 at 7:54pm (PST)"` |
+| startAtTimeDelta        |    N     | Must be used with `startAtTime`. Sets the format for the time                                              | `"Jan 2, 2006 at 3:04pm (MST)"` |
 
 ## Create a NATS server
 
@@ -118,7 +95,7 @@ kubectl apply -f https://raw.githubusercontent.com/nats-io/k8s/master/nats-serve
 kubectl apply -f https://raw.githubusercontent.com/nats-io/k8s/master/nats-streaming-server/single-server-stan.yml
 ```
 
-This installs a single NATS-Streaming and Nats into the `default` namespace. To interact with NATS, find the service with: `kubectl get svc stan`. To interact with NATS, find the service with: `kubectl get svc stan`.
+This installs a single NATS-Streaming and Nats into the `default` namespace. To interact with NATS, find the service with: `kubectl get svc stan`.
 
 如果使用上面的示例进行安装，那么 NATS Streaming 的请求地址将是:
 
