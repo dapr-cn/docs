@@ -34,25 +34,11 @@ spec:
   - name: protoVersion
     value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
   - name: replicationFactor
-    value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1" Example: cassandra.cassandra.svc.cluster.local
-  - name: username
-    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
-  - name: password
-    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
-  - name: consistency
-    value: <REPLACE-WITH-CONSISTENCY> # Optional. default: "All"
-  - name: table
-    value: <REPLACE-WITH-TABLE> # Optional. default: "items"
-  - name: keyspace
-    value: <REPLACE-WITH-KEYSPACE> # Optional. default: "dapr"
-  - name: protoVersion
-    value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
-  - name: replicationFactor
     value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
@@ -91,7 +77,7 @@ kubectl create namespace cassandra
 helm install cassandra incubator/cassandra --namespace cassandra
 ```
 
-This installs Cassandra into the `cassandra` namespace by default. This will install Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`. This will install Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`.
+This installs Cassandra into the `cassandra` namespace by default. This will install Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`.
 
 For example, if installing using the example above, the Cassandra DNS would be:
 
