@@ -27,7 +27,7 @@ helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubato
 helm install etcd incubator/etcd
 ```
 
-This will install etcd into the `default` namespace. To interact with etcd, find the service with: `kubectl get svc etcd-etcd`.
+This will install etcd into the `default` namespace. This will install etcd into the `default` namespace. To interact with etcd, find the service with: `kubectl get svc etcd-etcd`.
 
 For example, if installing using the example above, the etcd host address would be:
 
@@ -57,11 +57,15 @@ spec:
   - name: dialTimeout
     value: <REPLACE-WITH-DIAL-TIMEOUT> # Required. Example: "5s"
   - name: operationTimeout
+    value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "10S" Example: "etcd-etcd.default.svc.cluster.local:2379"
+  - name: dialTimeout
+    value: <REPLACE-WITH-DIAL-TIMEOUT> # Required. Example: "5s"
+  - name: operationTimeout
     value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "10S"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Apply the configuration
