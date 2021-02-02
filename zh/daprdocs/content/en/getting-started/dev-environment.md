@@ -6,7 +6,7 @@ weight: 50
 description: "How to get up and running with Dapr SDKs, extensions, and tooling"
 ---
 
-As you get up and running with Dapr there are a variety of SDKs and tools to make things easier for you. Check out the below the options to get up and running in your preferred tools.
+As you get up and running with Dapr there are a variety of SDKs and tools to make things easier for you. Check out the below the options to get up and running in your preferred tools. Check out the below the options to get up and running in your preferred tools.
 
 ## Dapr SDKs
 
