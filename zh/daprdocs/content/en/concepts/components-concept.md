@@ -8,7 +8,7 @@ description: "用于构建块和应用程序的模块化功能"
 
 Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有一个接口定义。  所有组件都是可插拔的，因此您可以将组件换为另一个具有相同接口的组件。 [components contrib repo](https://github.com/dapr/components-contrib) 是您可以为组件接口贡献实现并扩展Dapr功能的地方。
 
- 构建块可以使用任何组件组合。 For example the [actors]({{X12X}}) building block and the [state management]({{X13X}}) building block both use [state components](https://github.com/dapr/components-contrib/tree/master/state).  As another example, the [Pub/Sub]({{X14X}}) building block uses [Pub/Sub components](https://github.com/dapr/components-contrib/tree/master/pubsub).
+ 构建块可以使用任何组件组合。 For example the [actors]({{X12X}}) building block and the [state management]({{X13X}}) building block both use [state components](https://github.com/dapr/components-contrib/tree/master/state).  As another example, the [Pub/Sub]({{X14X}}) building block uses [Pub/Sub components](https://github.com/dapr/components-contrib/tree/master/pubsub).  As another example, the [Pub/Sub]({{X14X}}) building block uses [Pub/Sub components](https://github.com/dapr/components-contrib/tree/master/pubsub).
 
  您可以使用 `dapr components` CLI 命令查看当前托管环境中可用组件的列表。
 
@@ -22,10 +22,10 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 * [State（状态）](https://github.com/dapr/components-contrib/tree/master/state)
 
 ### 服务调用和服务发现组件
-Service discovery components are used with the [service invocation]({{X22X}}) building block to integrate with the hosting environment to provide service-to-service discovery. 例如， Kubernetes 服务发现组件与 Kubernetes DNS 服务集成，并且自身托管使用 mDNS。
+Service discovery components are used with the [service invocation]({{X22X}}) building block to integrate with the hosting environment to provide service-to-service discovery. 例如， Kubernetes 服务发现组件与 Kubernetes DNS 服务集成，并且自身托管使用 mDNS。 例如， Kubernetes 服务发现组件与 Kubernetes DNS 服务集成，并且自身托管使用 mDNS。
 
 ### 服务调用和中间件组件
-Dapr allows custom [middleware]({{X24X}})  to be plugged into the request processing pipeline. 中间件可以在请求( 例如，认证，加密和消息转换) 路由到用户代码之前，或者在将请求返回给客户端之前，对请求执行额外的操作。 The middleware components are used with the [service invocation]({{X25X}}) building block.
+Dapr allows custom [middleware]({{X24X}})  to be plugged into the request processing pipeline. 中间件可以在请求( 例如，认证，加密和消息转换) 路由到用户代码之前，或者在将请求返回给客户端之前，对请求执行额外的操作。 The middleware components are used with the [service invocation]({{X25X}}) building block.
 
 ### 机密存储组件
-In Dapr, a [secret]({{X28X}}) is any piece of private information that you want to guard against unwanted users. 用于存储机密的机密存储组件是 Dapr 组件，可由任何构建基块使用。
+In Dapr, a [secret]({{X28X}}) is any piece of private information that you want to guard against unwanted users. 用于存储机密的机密存储组件是 Dapr 组件，可由任何构建基块使用。 用于存储机密的机密存储组件是 Dapr 组件，可由任何构建基块使用。
