@@ -44,7 +44,7 @@ spec:
       endpointAddress: "http://zipkin.default.svc.cluster.local:9411/api/v2/spans"
 ```
 
-将 `samplingRate` 更改为 0 将完全禁用追踪。
+将 ` samplingRate ` 更改为 0 将完全禁用追踪。
 
 关于如何在本地环境和 Kubernetes 环境中配置追踪的更多细节，请参阅 [参考文档](#references) 部分。
 
