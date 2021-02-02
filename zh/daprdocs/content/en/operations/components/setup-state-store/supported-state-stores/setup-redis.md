@@ -7,7 +7,7 @@ description: Detailed information on the Redis state store component
 
 ## Component format
 
-To setup Redis state store create a component of type `state.redis`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Redis state store create a component of type `state.redis`. To setup Redis state store create a component of type `state.redis`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -25,6 +25,14 @@ spec:
     value: <PASSWORD>
   - name: enableTLS
     value: <bool> # Optional. Allowed: true, false.
+  - name: failover
+    value: <bool> # Optional. Allowed: true, false.
+  - name: sentinelMasterName
+    value: <string> # Optional
+  - name: maxRetries
+    value: # Optional
+  - name: maxRetryBackoff
+    value: # Optional Allowed: true, false.
   - name: failover
     value: <bool> # Optional. Allowed: true, false.
   - name: sentinelMasterName
@@ -52,17 +60,17 @@ If you wish to use Redis as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| 字段                 | Required | Details                                                                                                                         | 示例                                                              |
-| ------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| redisHost          |    Y     | Connection-string for the redis host                                                                                            | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
-| redisPassword      |    Y     | Password for Redis host. No Default. Can be `secretKeyRef` to use a secret reference                                            | `""`, `"KeFg23!"`                                               |
-| consumerID         |    N     | The consumer group ID                                                                                                           | `"myGroup"`                                                     |
-| enableTLS          |    N     | If the Redis instance supports TLS with public certificates, can be configured to be enabled or disabled. Defaults to `"false"` | `"true"`, `"false"`                                             |
-| maxRetries         |    N     | Maximum number of retries before giving up. Defaults to `3`                                                                     | `5`, `10`                                                       |
-| maxRetryBackoff    |    N     | Minimum backoff between each retry. Defaults to `2` seconds                                                                     | `3000000000`                                                    |
-| failover           |    N     | Property to enabled failover configuration. Needs sentinalMasterName to be set. Defaults to `"false"`                           | `"true"`, `"false"`                                             |
-| sentinelMasterName |    N     | The sentinel master name. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel)                                  | `""`,  `"127.0.0.1:6379"`                                       |
-| actorStateStore    |    N     | Consider this state store for actors. Defaults to `"false"`                                                                     | `"true"`, `"false"`                                             |
+| 字段                 | Required | Details                                                                                                                                               | 示例                                                              |
+| ------------------ |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| redisHost          |    Y     | Connection-string for the redis host                                                                                                                  | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
+| redisPassword      |    Y     | Password for Redis host. No Default. Can be `secretKeyRef` to use a secret reference No Default. Can be `secretKeyRef` to use a secret reference      | `""`, `"KeFg23!"`                                               |
+| consumerID         |    N     | The consumer group ID                                                                                                                                 | `"myGroup"`                                                     |
+| enableTLS          |    N     | If the Redis instance supports TLS with public certificates, can be configured to be enabled or disabled. Defaults to `"false"` Defaults to `"false"` | `"true"`, `"false"`                                             |
+| maxRetries         |    N     | Maximum number of retries before giving up. Defaults to `3` Defaults to `3`                                                                           | `5`, `10`                                                       |
+| maxRetryBackoff    |    N     | Minimum backoff between each retry. Minimum backoff between each retry. Defaults to `2` seconds                                                       | `3000000000`                                                    |
+| failover           |    N     | Property to enabled failover configuration. Needs sentinalMasterName to be set. Defaults to `"false"`                                                 | `"true"`, `"false"`                                             |
+| sentinelMasterName |    N     | The sentinel master name. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel)                                                        | `""`,  `"127.0.0.1:6379"`                                       |
+| actorStateStore    |    N     | Consider this state store for actors. Defaults to `"false"` Defaults to `"false"`                                                                     | `"true"`, `"false"`                                             |
 
 ## Setup Redis
 
