@@ -11,7 +11,7 @@ Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Ins
 
 ## Component format
 
-To setup Azure Key Vault secret store create a component of type `secretstores.azure.keyvault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+To setup Azure Key Vault secret store create a component of type `secretstores.azure.keyvault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 See also [configure the component](#configure-the-component) guide in this page.
 
@@ -40,12 +40,12 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                 | Required | Details                                                                                                  | 示例              |
-| ------------------ |:--------:| -------------------------------------------------------------------------------------------------------- | --------------- |
-| vaultName          |    Y     | The name of the Azure Key Vault                                                                          | `"mykeyvault"`  |
-| spnTenantId        |    Y     | Your Service Principal Tenant Id                                                                         | `"spnTenantId"` |
-| spnClientId        |    Y     | Your Service Principal App Id                                                                            | `"spnAppId"`    |
-| spnCertificateFile |    Y     | Your PFX certificate file path. See [configure the component](#configure-the-component) for more details | `"path"`        |
+| 字段                 | Required | Details                                                                                                                                                                           | 示例              |
+| ------------------ |:--------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| vaultName          |    Y     | The name of the Azure Key Vault                                                                                                                                                   | `"mykeyvault"`  |
+| spnTenantId        |    Y     | Your Service Principal Tenant Id                                                                                                                                                  | `"spnTenantId"` |
+| spnClientId        |    Y     | Your Service Principal App Id                                                                                                                                                     | `"spnAppId"`    |
+| spnCertificateFile |    Y     | Your PFX certificate file path. See [configure the component](#configure-the-component) for more details See [configure the component](#configure-the-component) for more details | `"path"`        |
 
 ## Setup Key Vault and service principal
 
