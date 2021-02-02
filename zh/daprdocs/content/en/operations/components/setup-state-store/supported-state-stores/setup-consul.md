@@ -7,7 +7,7 @@ description: Detailed information on the HashiCorp Consul state store component
 
 ## Component format
 
-To setup Hashicorp Consul state store create a component of type `state.consul`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Hashicorp Consul state store create a component of type `state.consul`. To setup Hashicorp Consul state store create a component of type `state.consul`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -46,13 +46,13 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| 字段            | Required | Details                                                             | Example                                   |
-| ------------- |:--------:| ------------------------------------------------------------------- | ----------------------------------------- |
-| datacenter    |    Y     | Datacenter to use                                                   | `"dc1"`                                   |
-| httpAddr      |    Y     | Address of the Consul server                                        | `"consul.default.svc.cluster.local:8500"` |
-| aclToken      |    N     | Per Request ACL Token. Default is `""`                              | `"token"`                                 |
-| scheme        |    N     | Scheme is the URI scheme for the Consul server. Default is `"http"` | `"http"`                                  |
-| keyPrefixPath |    N     | Key prefix path in Consul. Default is `""`                          | `"dapr"`                                  |
+| 字段            | Required | Details                                                                                 | Example                                   |
+| ------------- |:--------:| --------------------------------------------------------------------------------------- | ----------------------------------------- |
+| datacenter    |    Y     | Datacenter to use                                                                       | `"dc1"`                                   |
+| httpAddr      |    Y     | Address of the Consul server                                                            | `"consul.default.svc.cluster.local:8500"` |
+| aclToken      |    N     | Per Request ACL Token. Default is `""` Default is `""`                                  | `"token"`                                 |
+| scheme        |    N     | Scheme is the URI scheme for the Consul server. Default is `"http"` Default is `"http"` | `"http"`                                  |
+| keyPrefixPath |    N     | Key prefix path in Consul. Default is `""` Default is `""`                              | `"dapr"`                                  |
 
 ## Setup HashiCorp Consul
 
@@ -75,7 +75,7 @@ The easiest way to install Consul on Kubernetes is by using the [Helm chart](htt
 helm install consul stable/consul
 ```
 
-This installs Consul into the `default` namespace. This will install Consul into the `default` namespace. To interact with Consul, find the service with: `kubectl get svc consul`.
+This installs Consul into the `default` namespace. This will install Consul into the `default` namespace. To interact with Consul, find the service with: `kubectl get svc consul`. This will install Consul into the `default` namespace. To interact with Consul, find the service with: `kubectl get svc consul`.
 
 For example, if installing using the example above, the Consul host address would be:
 
