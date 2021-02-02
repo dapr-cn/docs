@@ -7,7 +7,7 @@ description: Detailed information on the HashiCorp Vault secret store component
 
 ## Create the Vault component
 
-To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -42,16 +42,16 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                  | Required | Details                                                                                                                          | Example                    |
-| ------------------- |:--------:| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| vaultAddr           |    N     | The address of the Vault server. Defaults to `"https://127.0.0.1:8200"` Defaults to `"https://127.0.0.1:8200"`                   | `"https://127.0.0.1:8200"` |
-| caCert              |    N     | Certificate Authority use only one of the options. The encoded cacerts to use The encoded cacerts to use                         | `"cacerts"`                |
-| caPath              |    N     | Certificate Authority use only one of the options. Certificate Authority use only one of the options. The path to a CA cert file | `"path/to/cacert/file"`    |
-| caPem               |    N     | Certificate Authority use only one of the options. The encoded cacert pem to use                                                 | `"encodedpem"`             |
-| skipVerify          |    N     | Skip TLS verification. Defaults to `"false"` Defaults to `"false"`                                                               | `"true"`, `"false"`        |
-| tlsServerName       |    N     | TLS config server name                                                                                                           | `"tls-server"`             |
-| vaultTokenMountPath |    Y     | Path to file containing token                                                                                                    | `"path/to/file"`           |
-| vaultKVPrefix       |    N     | The prefix in vault. The prefix in vault. Defautls to `"dapr"`                                                                   | `"dapr"`, `"myprefix"`     |
+| 字段                  | Required | Details                                                                          | Example                    |
+| ------------------- |:--------:| -------------------------------------------------------------------------------- | -------------------------- |
+| vaultAddr           |    N     | The address of the Vault server. Defaults to `"https://127.0.0.1:8200"`          | `"https://127.0.0.1:8200"` |
+| caCert              |    N     | Certificate Authority use only one of the options. The encoded cacerts to use    | `"cacerts"`                |
+| caPath              |    N     | Certificate Authority use only one of the options. The path to a CA cert file    | `"path/to/cacert/file"`    |
+| caPem               |    N     | Certificate Authority use only one of the options. The encoded cacert pem to use | `"encodedpem"`             |
+| skipVerify          |    N     | Skip TLS verification. Defaults to `"false"`                                     | `"true"`, `"false"`        |
+| tlsServerName       |    N     | TLS config server name                                                           | `"tls-server"`             |
+| vaultTokenMountPath |    Y     | Path to file containing token                                                    | `"path/to/file"`           |
+| vaultKVPrefix       |    N     | The prefix in vault. Defautls to `"dapr"`                                        | `"dapr"`, `"myprefix"`     |
 ## Setup Hashicorp Vault instance
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
