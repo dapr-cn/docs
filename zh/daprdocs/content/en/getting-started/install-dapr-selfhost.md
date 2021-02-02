@@ -7,11 +7,11 @@ aliases:
   - /getting-started/install-dapr/
 ---
 
-Now that you have the [Dapr CLI installed]({{X22X}}), it's time to initialize Dapr on your local machine using the CLI.
+Now that you have the [Dapr CLI installed]({{X22X}}), it's time to initialize Dapr on your local machine using the CLI.
 
-Dapr runs as a sidecar alongside your application, and in self-hosted mode this means it is a process on your local machine. Therefore, initializing Dapr includes fetching the Dapr sidecar binaries and installing them locally. Therefore, initializing Dapr includes fetching the Dapr sidecar binaries and installing them locally.
+Dapr runs as a sidecar alongside your application, and in self-hosted mode this means it is a process on your local machine. Therefore, initializing Dapr includes fetching the Dapr sidecar binaries and installing them locally.
 
-In addition, the default initialization process also creates a development environment that helps streamline application development with Dapr. This includes the following steps: This includes the following steps:
+In addition, the default initialization process also creates a development environment that helps streamline application development with Dapr. This includes the following steps:
 
 1. Running a **Redis container instance** to be used as a local state store and message broker
 1. Running a **Zipkin container instance** for observability
@@ -20,11 +20,11 @@ In addition, the default initialization process also creates a development envir
 
 
 {{% alert title="Note" color="warning" %}}
-This command downloads and installs Dapr runtime v1.0-rc.3. This command downloads and installs Dapr runtime v1.0-rc.3. To install v0.11, the latest release prior to the release candidates for the [upcoming v1.0 release](https://blog.dapr.io/posts/2020/10/20/the-path-to-v.1.0-production-ready-dapr/), please visit the [v0.11 docs](https://docs.dapr.io).
+This command downloads and installs Dapr runtime v1.0-rc.3. To install v0.11, the latest release prior to the release candidates for the [upcoming v1.0 release](https://blog.dapr.io/posts/2020/10/20/the-path-to-v.1.0-production-ready-dapr/), please visit the [v0.11 docs](https://docs.dapr.io).
 {{% /alert %}}
 
 {{% alert title="Docker" color="primary" %}}
-This recommended development environment requires [Docker](https://docs.docker.com/install/). This recommended development environment requires [Docker](https://docs.docker.com/install/). It is possible to initialize Dapr without a dependency on Docker (see [this guidance]({{X26X}})) but next steps in this guide assume the recommended development environment.
+This recommended development environment requires [Docker](https://docs.docker.com/install/). It is possible to initialize Dapr without a dependency on Docker (see [this guidance]({{X26X}})) but next steps in this guide assume the recommended development environment.
 {{% /alert %}}
 
 ### Step 1: Open an elevated terminal
@@ -63,7 +63,7 @@ Runtime version: 1.0.0-rc.3
 
 ### Step 4: Verify containers are running
 
-As mentioned above, the `dapr init` command launches several containers that will help you get started with Dapr. Verify this by running: Verify this by running:
+As mentioned above, the `dapr init` command launches several containers that will help you get started with Dapr. Verify this by running:
 
 ```bash
 docker ps
@@ -75,16 +75,15 @@ Make sure that instances with `daprio/dapr`, `openzipkin/zipkin`, and `redis` im
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                              NAMES
 0dda6684dc2e   openzipkin/zipkin        "/busybox/sh run.sh"     2 minutes ago   Up 2 minutes   9410/tcp, 0.0.0.0:9411->9411/tcp   dapr_zipkin
 9bf6ef339f50   redis                    "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:6379->6379/tcp             dapr_redis
-8d993e514150   daprio/dapr              "./placement"            2 minutes ago   Up 2 minutes   0.0.0.0:6050->50005/tcp            dapr_placement   2 minutes ago   Up 2 minutes   0.0.0.0:6379->6379/tcp             dapr_redis
 8d993e514150   daprio/dapr              "./placement"            2 minutes ago   Up 2 minutes   0.0.0.0:6050->50005/tcp            dapr_placement
 ```
 
 ### Step 5: Verify components directory has been initialized
 
-On `dapr init`, the CLI also creates a default components folder which includes several YAML files with definitions for a state store, pub/sub and zipkin. These will be read by the Dapr sidecar, telling it to use the Redis container for state management and messaging and the Zipkin container for collecting traces. These will be read by the Dapr sidecar, telling it to use the Redis container for state management and messaging and the Zipkin container for collecting traces.
+On `dapr init`, the CLI also creates a default components folder which includes several YAML files with definitions for a state store, pub/sub and zipkin. These will be read by the Dapr sidecar, telling it to use the Redis container for state management and messaging and the Zipkin container for collecting traces.
 
-- In Linux/MacOS Dapr is initialized with default components and files in `$HOME/.dapr`.
-- For Windows Dapr is initialized to `%USERPROFILE%\.dapr\`
+- 在 Linux/MacOS 中 Dapr 使用默认组件和文件的路径是 `$HOME.dapr`。
+- Windows 中，Dapr 初始化路径到 `%USERPROFILE%\.dapr\`
 
 
 {{< tabs "Linux/MacOS" "Windows">}}
@@ -115,5 +114,5 @@ You will see the Dapr config, Dapr binaries directory, and the default component
 
 {{< /tabs >}}
 
-[\[}}" role="button">Next step: Use the Dapr API >>\]({{< ref get-started-api.md  mark=){.btn.btn-primary}]({{< ref get-started-api.md  mark=){.btn.btn-primary}
+[}}" role="button">Next step: Use the Dapr API >>]({{< ref get-started-api.md  mark=){.btn.btn-primary}
 
