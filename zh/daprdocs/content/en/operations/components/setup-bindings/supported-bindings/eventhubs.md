@@ -33,7 +33,7 @@ spec:
     value: 0
 ```
 
-- `connectionString` is the [EventHubs connection string](https://docs.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature). Note that this is the EventHub itself and not the EventHubs namespace. Make sure to use the child EventHub shared access policy connection string. Note that this is the EventHub itself and not the EventHubs namespace. Make sure to use the child EventHub shared access policy connection string.
+- `connectionString` is the [EventHubs connection string](https://docs.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature). Note that this is the EventHub itself and not the EventHubs namespace. Make sure to use the child EventHub shared access policy connection string.
 - `consumerGroup` is the name of an [EventHubs Consumer Group](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-features#consumer-groups) to listen on.
 - `storageAccountName` Is the name of the account of the Azure Storage account to persist checkpoints data on.
 - `storageAccountKey`  Is the account key for the Azure Storage account to persist checkpoints data on.
@@ -41,7 +41,7 @@ spec:
 - `partitionID` (Optional) ID of the partition to send and receive events.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Output Binding Supported Operations
