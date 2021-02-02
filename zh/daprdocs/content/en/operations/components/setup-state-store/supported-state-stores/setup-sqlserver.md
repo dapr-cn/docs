@@ -7,7 +7,7 @@ description: Detailed information on the SQL Server state store component
 
 ## Component format
 
-To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup SQL Server state store create a component of type `state.sqlserver`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -21,13 +21,17 @@ spec:
   version: v1
   metadata:
   - name: connectionString
-    value: <REPLACE-WITH-CONNECTION-STRING> # Required. "Endpoint=sb://****"
-  - name: storageAccountName
-    value: <REPLACE-WITH-STORAGE-ACCOUNT-NAME> # Required.
-  - name: storageAccountKey
-    value: <REPLACE-WITH-STORAGE-ACCOUNT-KEY> # Required.
-  - name: storageContainerName
-    value: <REPLACE-WITH-CONTAINER-NAME > # Required.
+    value: <REPLACE-WITH-CONNECTION-STRING> # Required.
+  - name: tableName
+    value: <REPLACE-WITH-TABLE-NAME>  # Required.
+  - name: keyType 
+    value: <REPLACE-WITH-KEY-TYPE>  # Optional. defaults to "string"
+  - name: keyLength
+    value: <KEY-LENGTH> # Optional. defaults to 200. Yo be used with "string" keyType
+  - name: schema
+    value: <SCHEMA> # Optional. defaults to "dbo"
+  - name: indexedProperties
+    value: <INDEXED-PROPERTIES> # Optional. List of IndexedProperties.
   - name: tableName
     value: <REPLACE-WITH-TABLE-NAME>  # Required.
   - name: keyType 
@@ -51,14 +55,14 @@ Currently this component does not support state management for actors
 
 ## Spec metadata fields
 
-| 字段                | Required | Details                                                                        | Example                                                                                             |
-| ----------------- |:--------:| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
-| connectionString  |    Y     | The connection string used to connect                                          | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
-| tableName         |    Y     | The name of the table to use. Alpha-numeric with underscores                   | `"table_name"`                                                                                      |
-| keyType           |    N     | The type of key used. Defaults to `"string"`                                   | `"string"`                                                                                          |
-| keyLength         |    N     | The max length of key. Used along with `"string"` keytype. Defaults to `"200"` | `"200"`                                                                                             |
-| schema            |    N     | The schema to use. Defaults to `"dbo"`                                         | `"dapr"`,`"dbo"`                                                                                    |
-| indexedProperties |    N     | List of IndexedProperties.                                                     | `"[{"ColumnName": "column", "Property": "property", "Type": "type"}]"`                              |
+| 字段                | Required | Details                                                                                                                                            | Example                                                                                             |
+| ----------------- |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| connectionString  |    Y     | The connection string used to connect                                                                                                              | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
+| tableName         |    Y     | The name of the table to use. The name of the table to use. Alpha-numeric with underscores                                                         | `"table_name"`                                                                                      |
+| keyType           |    N     | The type of key used. Defaults to `"string"`                                                                                                       | `"string"`                                                                                          |
+| keyLength         |    N     | The max length of key. The type of key used. Defaults to `"string"` The max length of key. Used along with `"string"` keytype. Defaults to `"200"` | `"200"`                                                                                             |
+| schema            |    N     | The schema to use. The schema to use. Defaults to `"dbo"`                                                                                          | `"dapr"`,`"dbo"`                                                                                    |
+| indexedProperties |    N     | List of IndexedProperties.                                                                                                                         | `"[{"ColumnName": "column", "Property": "property", "Type": "type"}]"`                              |
 
 
 ## Create Azure SQL instance
