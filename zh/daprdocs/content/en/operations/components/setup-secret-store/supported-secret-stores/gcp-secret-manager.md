@@ -46,7 +46,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## Apply the component
@@ -70,7 +70,7 @@ kubectl apply -f gcp_secret_manager.yaml
 
 ## Example
 
-This example shows you how to take the Redis password from the GCP Secret Manager secret store. Here, you created a secret named `redisPassword` in GCP Secret Manager. Note its important to set it both as the `name` and `key` properties.
+This example shows you how to take the Redis password from the GCP Secret Manager secret store. Here, you created a secret named `redisPassword` in GCP Secret Manager. Note its important to set it both as the `name` and `key` properties. Here, you created a secret named `redisPassword` in GCP Secret Manager. Note its important to set it both as the `name` and `key` properties.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
