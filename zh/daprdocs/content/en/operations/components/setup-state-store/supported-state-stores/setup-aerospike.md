@@ -24,15 +24,11 @@ spec:
   - name: namespace
     value: <REPLACE-WITH-NAMESPACE> # Required. The aerospike namespace.
   - name: set
-    value: <REPLACE-WITH-SET> # Optional. A comma delimited string of hosts. Example: "aerospike:3000,aerospike2:3000"
-  - name: namespace
-    value: <REPLACE-WITH-NAMESPACE> # Required. The aerospike namespace.
-  - name: set
     value: <REPLACE-WITH-SET> # Optional
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
@@ -65,7 +61,7 @@ helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubato
 helm install --name my-aerospike --namespace aerospike stable/aerospike
 ```
 
-This installs Aerospike into the `aerospike` namespace. This will install Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`. This will install Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
+This installs Aerospike into the `aerospike` namespace. This will install Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
 
 For example, if installing using the example above, the Aerospike host address would be:
 
