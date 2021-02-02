@@ -60,48 +60,52 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
    
         service A -> service B
         [ .. some code logic ..]
+        service A -> service B
+        [ .. some code logic ..]
         service A -> service C
         [ .. some code logic ..]
         service A -> service D
+        [ .. some code logic ..] some code logic ..]
+        service A -> service D
         [ .. some code logic ..]
 
-    在这种情况下，当服务 A 首先调用服务 B 时，Dapr 会在服务 A 中生成跟踪标头，然后这些跟踪标头将传播到服务 B。这些跟踪标头作为响应标头的一部分在服务 B 的响应中返回。 但是，您需要将返回的跟踪上下文传播到下一个服务，如服务 C 和服务 D，因为 Dapr 不知道您希望重用相同的标头。
+    在这种情况下，当服务 A 首先调用服务 B 时，Dapr 会在服务 A 中生成跟踪标头，然后这些跟踪标头将传播到服务 B。 这些跟踪标头作为响应标头的一部分在服务 B 的响应中返回。 但是，您需要将返回的跟踪上下文传播到下一个服务，如服务 C 和服务 D，因为 Dapr 不知道您希望重用相同的标头。
 
      若要了解如何从响应中提取跟踪标头并将跟踪标头添加到请求中，请参阅 [如何使用跟踪上下文]({{< ref w3c-tracing >}}) 一文.
 
-2. You have chosen to generate your own trace context headers. This is much more unusual. There may be occassions where you specifically chose to add W3C trace headers into a service call, for example if you have an existing application that does not currently use Dapr. In this case Dapr still propagates the trace context headers for you. If you decide to generate trace headers yourself, there are three ways this can be done :
+2. 您已选择生成自己的跟踪上下文标头。 这是很少会遇到的。 You have chosen to generate your own trace context headers. This is much more unusual. There may be occassions where you specifically chose to add W3C trace headers into a service call, for example if you have an existing application that does not currently use Dapr. In this case Dapr still propagates the trace context headers for you. If you decide to generate trace headers yourself, there are three ways this can be done : 在这种情况下，Dapr 仍然会为您传播跟踪上下文标头。 如果您决定自己生成跟踪标头，有三种方法可以实现：
 
-     1. You can use the industry standard OpenCensus/OpenTelemetry SDKs to generate trace headers and pass these trace headers to a Dapr enabled service. This is the preferred recommendation.
+     1. You can use the industry standard OpenCensus/OpenTelemetry SDKs to generate trace headers and pass these trace headers to a Dapr enabled service. This is the preferred recommendation. 这是首选的建议。
 
-     2. You can use a vendor SDK that provides a way to generate W3C trace headers such as DynaTrace SDK and pass these trace headers to a Dapr enabled service.
+     2. 您可以使用供应商SDK来生成W3C跟踪标头，如DynaTrace SDK，并将这些跟踪标头传递给启用Dapr的服务。
 
-     3. You can handcraft a trace context following [W3C trace context specification](https://www.w3.org/TR/trace-context/) and pass these trace headers to Dapr enabled service.
+     3. 您可以遵循 [ W3C 跟踪上下文规范 ](https://www.w3.org/TR/trace-context/) 来处理跟踪上下文，将这些跟踪标头传递给启用 Dapr 的服务。
 
-## W3C trace headers
-Theses are the specific trace context headers that are generated and propagated by Dapr for HTTP and gRPC.
+## W3C 跟踪标头
+这些是 Dapr 为 HTTP 和 gRPC 生成和传播的特定跟踪上下文标头。
 
-### Trace context HTTP headers format
-When propogating a trace context header from an HTTP response to an HTTP request, these are the headers that you need to copy.
+### 跟踪上下文 HTTP 标头格式
+当将HTTP响应的跟踪上下文头传播到HTTP请求时，您需要复制这些标头。
 
-#### Traceparent Header
-The traceparent header represents the incoming request in a tracing system in a common format, understood by all vendors. Here’s an example of a traceparent header.
+#### Traceparent 标头
+The traceparent header represents the incoming request in a tracing system in a common format, understood by all vendors. Here’s an example of a traceparent header. 下面是 Traceparent 标头的示例。
 
 `traceparent: 00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01`
 
- The traceparent fields are detailed [here](https://www.w3.org/TR/trace-context/#traceparent-header)
+ Traceparent 字段的详细信息 [ 在这里 ](https://www. w3. org/Tr/trace-context/#traceparent-header)。
 
-#### Tracestate Header
-The tracestate header includes the parent in a potentially vendor-specific format:
+#### Tracestate 标头
+Tracestate 标头包含特定于供应商格式的父级（parent）。
 
 `tracestate: congo=t61rcWkgMzE`
 
-The tracestate fields are detailed [here](https://www.w3.org/TR/trace-context/#tracestate-header)
+Tracestate 字段的详细信息 [ 在这里 ](https://www.w3.org/TR/trace-context/#tracestate-header) 。
 
-### Trace context gRPC headers format
-In the gRPC API calls, trace context is passed through `grpc-trace-bin` header.
+### 跟踪上下文 gRPC 标头格式
+在 gRPC API 调用中，跟踪上下文通过 `grpc-trace-bin` 标头传递。
 
-## Related Links
-- [How To set up Application Insights for distributed tracing with OpenTelemetry]({{< ref open-telemetry-collector.md >}})
-- [How To set up Zipkin for distributed tracing]({{< ref zipkin.md >}})
-- [W3C trace context specification](https://www.w3.org/TR/trace-context/)
-- [Observability sample](https://github.com/dapr/quickstarts/tree/master/observability)
+## 相关链接
+- [操作方法：使用 OpenTelemetry Collector 为分布式跟踪安装应用程序洞察器]({{< ref open-telemetry-collector.md >}})
+- [操作方法: 为分布式跟踪安装 Zipkin]({{< ref zipkin.md >}})
+- [W3C 跟踪上下文规范](https://www.w3.org/TR/trace-context/)
+- [可观测性示例](https://github.com/dapr/quickstarts/tree/master/observability)
