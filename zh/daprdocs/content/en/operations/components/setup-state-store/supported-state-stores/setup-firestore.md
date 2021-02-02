@@ -41,31 +41,11 @@ spec:
   - name: client_x509_cert_url
     value: <REPLACE-WITH-CLIENT-x509-CERT-URL> # Required.
   - name: entity_kind
-    value: <REPLACE-WITH-ENTITY-KIND> # Optional. default: "DaprState" Example: "serviceaccount"
-  - name: project_id
-    value: <REPLACE-WITH-PROJECT-ID> # Required.
-  - name: private_key_id
-    value: <REPLACE-WITH-PRIVATE-KEY-ID> # Required.
-  - name: private_key
-    value: <REPLACE-WITH-PRIVATE-KEY> # Required.
-  - name: client_email
-    value: <REPLACE-WITH-CLIENT-EMAIL> # Required.
-  - name: client_id
-    value: <REPLACE-WITH-CLIENT-ID> # Required.
-  - name: auth_uri
-    value: <REPLACE-WITH-AUTH-URI> # Required.
-  - name: token_uri
-    value: <REPLACE-WITH-TOKEN-URI> # Required.
-  - name: auth_provider_x509_cert_url
-    value: <REPLACE-WITH-AUTH-X509-CERT-URL> # Required.
-  - name: client_x509_cert_url
-    value: <REPLACE-WITH-CLIENT-x509-CERT-URL> # Required.
-  - name: entity_kind
     value: <REPLACE-WITH-ENTITY-KIND> # Optional. default: "DaprState"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
