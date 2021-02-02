@@ -7,7 +7,7 @@ description: "Detailed documentation on the Apache Kafka pubsub component"
 
 ## Component format
 
-To setup Apache Kafka pubsub create a component of type `pubsub.kafka`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+To setup Apache Kafka pubsub create a component of type `pubsub.kafka`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -36,12 +36,12 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| 字段           | Required | Details                                                                                                                                                                                                              | 示例                                                          |
-| ------------ |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| brokers      |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
-| authRequired |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`.                                                                                                                                                    | `"true"`, `"false"`                                         |
-| saslUsername |    N     | Username used for authentication. Only required if authRequired is set to true.                                                                                                                                      | `"adminuser"`                                               |
-| saslPassword |    N     | Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}) | `""`, `"KeFg23!"`                                           |
+| 字段           | Required | Details                                                                                                                                                                                                                                                                                                                                               | 示例                                                          |
+| ------------ |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| brokers      |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                                                                                                                                                 | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
+| authRequired |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`. Defaults to `"false"`.                                                                                                                                                                                                                                                              | `"true"`, `"false"`                                         |
+| saslUsername |    N     | Username used for authentication. Username used for authentication. Only required if authRequired is set to true.                                                                                                                                                                                                                                     | `"adminuser"`                                               |
+| saslPassword |    N     | Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}) | `""`, `"KeFg23!"`                                           |
 
 
 ## Create a Kafka instance
