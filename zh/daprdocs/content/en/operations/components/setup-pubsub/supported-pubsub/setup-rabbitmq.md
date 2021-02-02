@@ -37,7 +37,7 @@ spec:
     value: parallel
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
@@ -78,7 +78,7 @@ helm install rabbitmq stable/rabbitmq
 
 Look at the chart output and get the username and password.
 
-This will install RabbitMQ into the `default` namespace. This will install RabbitMQ into the `default` namespace. To interact with RabbitMQ, find the service with: `kubectl get svc rabbitmq`.
+This will install RabbitMQ into the `default` namespace. To interact with RabbitMQ, find the service with: `kubectl get svc rabbitmq`.
 
 For example, if installing using the example above, the RabbitMQ server client address would be:
 
