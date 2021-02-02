@@ -12,7 +12,7 @@ As part of the Dapr initialization the following pods are installed:
 
 - **dapr-operator:** Manages component updates and Kubernetes services endpoints for Dapr (state stores, pub/subs, etc.)
 - **dapr-sidecar-injector:** Injects Dapr into annotated deployment pods
-- **dapr-placement:** Used for actors only. Creates mapping tables that map actor instances to pods
+- **dapr-placement:** Used for actors only. Creates mapping tables that map actor instances to pods Creates mapping tables that map actor instances to pods
 - **dapr-sentry:** Manages mTLS between services and acts as a certificate authority
 
 ## Prerequisites
@@ -23,7 +23,7 @@ As part of the Dapr initialization the following pods are installed:
 
 ### Create cluster
 
-You can install Dapr on any Kubernetes cluster. Here are some helpful links:
+You can install Dapr on any Kubernetes cluster. Here are some helpful links: Here are some helpful links:
 
 - [Setup Minikube Cluster]({{< ref setup-minikube.md >}})
 - [Setup Azure Kubernetes Service Cluster]({{< ref setup-aks.md >}})
@@ -31,7 +31,7 @@ You can install Dapr on any Kubernetes cluster. Here are some helpful links:
 - [Setup Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 {{% alert title="Hybrid clusters" color="primary" %}}
-Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X48X}}).
+Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X48X}}). You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X48X}}).
 {{% /alert %}}
 
 
@@ -40,7 +40,7 @@ Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for
 You can install Dapr to a Kubernetes cluster using the [Dapr CLI]({{< ref install-dapr-cli.md >}}).
 
 {{% alert title="Release candidate" color="warning" %}}
-This command downloads and installs Dapr runtime v0.11. To install v1.0-rc2 preview, the release candidate for the upcoming v1.0 release please visit the [v1.0-rc2 docs version of this page](https://v1-rc1.docs.dapr.io/getting-started/install-dapr-kubernetes/). Note you will need to ensure you are also using the preview version of the CLI (instructions to install the latest preview CLI can be found [here](https://v1-rc2.docs.dapr.io/getting-started/install-dapr-cli/)).
+This command downloads and installs Dapr runtime v0.11. This command downloads and installs Dapr runtime v0.11. To install v1.0-rc2 preview, the release candidate for the upcoming v1.0 release please visit the [v1.0-rc2 docs version of this page](https://v1-rc1.docs.dapr.io/getting-started/install-dapr-kubernetes/). Note you will need to ensure you are also using the preview version of the CLI (instructions to install the latest preview CLI can be found [here](https://v1-rc2.docs.dapr.io/getting-started/install-dapr-cli/)). Note you will need to ensure you are also using the preview version of the CLI (instructions to install the latest preview CLI can be found [here](https://v1-rc2.docs.dapr.io/getting-started/install-dapr-cli/)).
 {{% /alert %}}
 
 ### Install Dapr
@@ -48,7 +48,7 @@ This command downloads and installs Dapr runtime v0.11. To install v1.0-rc2 prev
 The `-k` flag initializes Dapr on the Kubernetes cluster in your current context.
 
 {{% alert title="Target cluster" color="primary" %}}
-Make sure the correct "target" cluster is set. Check `kubectl context (kubectl config kubectl config get-contexts)` to verify. You can set a different context using `kubectl config use-context <CONTEXT>`.
+Make sure the correct "target" cluster is set. Make sure the correct "target" cluster is set. Check `kubectl context (kubectl config kubectl config get-contexts)` to verify. You can set a different context using `kubectl config use-context <CONTEXT>`. You can set a different context using `kubectl config use-context <CONTEXT>`.
 {{% /alert %}}
 
 Run `dapr init -k` on your local machine:
@@ -57,15 +57,19 @@ Run `dapr init -k` on your local machine:
 $ dapr init -k
 
 ⌛  Making the jump to hyperspace...
+$ dapr init -k
+
+⌛  Making the jump to hyperspace...
 ℹ️  Note: To install Dapr using Helm, see here:  https://github.com/dapr/docs/blob/master/getting-started/environment-setup.md#using-helm-advanced
 
 ✅  Deploying the Dapr control plane to your cluster...
+✅  Success! Dapr has been installed to namespace dapr-system. To verify, run "dapr status -k" in your terminal. To get started, go here: https://aka.ms/dapr-getting-started
 ✅  Success! Dapr has been installed to namespace dapr-system. To verify, run "dapr status -k" in your terminal. To get started, go here: https://aka.ms/dapr-getting-started
 ```
 
 ### Install in custom namespace
 
-The default namespace when initializing Dapr is `dapr-system`. You can override this with the `-n` flag.
+The default namespace when initializing Dapr is `dapr-system`. You can override this with the `-n` flag. You can override this with the `-n` flag.
 
 ```
 dapr init -k -n mynamespace
@@ -82,7 +86,7 @@ dapr init -k --enable-ha=true
 
 ### Disable mTLS
 
-Dapr is initialized by default with [mTLS]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}). You can disable it with:
+Dapr is initialized by default with [mTLS]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}). You can disable it with: You can disable it with:
 
 ```
 dapr init -k --enable-mtls=false
@@ -100,7 +104,7 @@ You can install Dapr to Kubernetes cluster using a Helm 3 chart.
 
 
 {{% alert title="Note" color="primary" %}}
-The latest Dapr helm chart no longer supports Helm v2. Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
+The latest Dapr helm chart no longer supports Helm v2. The latest Dapr helm chart no longer supports Helm v2. Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
 {{% /alert %}}
 
 ### Add and install Dapr helm chart
