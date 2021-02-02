@@ -6,7 +6,7 @@ description: "Detailed documentation on the Hazelcast pubsub component"
 ---
 
 ## Component format
-To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
