@@ -5,13 +5,13 @@ linkTitle: "Use the Dapr API"
 weight: 30
 ---
 
-After running the `dapr init` command in the [previous step]({{X18X}}), your local environment has the Dapr sidecar binaries as well as default component definitions for both state management and a message broker (both using Redis). You can now try out some of what Dapr has to offer by using the Dapr CLI to run a Dapr sidecar and try out the state API that will allow you to store and retrieve a state. You can learn more about the state building block and how it works in [these docs]({{< ref state-management >}}).
+After running the `dapr init` command in the [previous step]({{X18X}}), your local environment has the Dapr sidecar binaries as well as default component definitions for both state management and a message broker (both using Redis). You can now try out some of what Dapr has to offer by using the Dapr CLI to run a Dapr sidecar and try out the state API that will allow you to store and retrieve a state. You can learn more about the state building block and how it works in [these docs]({{< ref state-management >}}). You can now try out some of what Dapr has to offer by using the Dapr CLI to run a Dapr sidecar and try out the state API that will allow you to store and retrieve a state. You can learn more about the state building block and how it works in [these docs]({{< ref state-management >}}).
 
 You will now run the sidecar and call the API directly (simulating what an application would do).
 
 ## Step 1: Run the Dapr sidecar
 
-One the most useful Dapr CLI commands is [`dapr run`]({{< ref dapr-run.md >}}). This command launches an application together with a sidecar. For the purpose of this tutorial you'll run the sidecar without an application.
+One the most useful Dapr CLI commands is [`dapr run`]({{< ref dapr-run.md >}}). This command launches an application together with a sidecar. For the purpose of this tutorial you'll run the sidecar without an application. This command launches an application together with a sidecar. For the purpose of this tutorial you'll run the sidecar without an application.
 
 Run the following command to launch a Dapr sidecar that will listen on port 3500 for a blank application named myapp:
 
@@ -19,7 +19,7 @@ Run the following command to launch a Dapr sidecar that will listen on port 3500
 dapr run --app-id myapp --dapr-http-port 3500
 ```
 
-With this command, no custom component folder was defined so the Dapr uses the default component definitions that were created during the init flow (these can be found under `$HOME/.dapr/components` on Linux or MacOS and under `%USERPROFILE%\.dapr\components` on Windows). These tell Dapr to the local Redis Docker container as a state store and message broker.
+With this command, no custom component folder was defined so the Dapr uses the default component definitions that were created during the init flow (these can be found under `$HOME/.dapr/components` on Linux or MacOS and under `%USERPROFILE%\.dapr\components` on Windows). These tell Dapr to the local Redis Docker container as a state store and message broker. These tell Dapr to the local Redis Docker container as a state store and message broker.
 
 ## Step 2: Save state
 
@@ -66,7 +66,7 @@ Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/state/statestore/name'
 
 ## Step 3: See how the state is stored in Redis
 
-You can look in the Redis container and verify Dapr is using it as a state store. Run the following to use the Redis CLI:
+You can look in the Redis container and verify Dapr is using it as a state store. Run the following to use the Redis CLI: Run the following to use the Redis CLI:
 
 ```bash
 docker exec -it dapr_redis redis-cli
@@ -102,4 +102,4 @@ exit
 ```
 
 
-[}}" role="button">Next step: Define a component >>]({{< ref get-started-component.md  mark=){.btn.btn-primary}
+[\[}}" role="button">Next step: Define a component >>\]({{< ref get-started-component.md  mark=){.btn.btn-primary}]({{< ref get-started-component.md  mark=){.btn.btn-primary}
