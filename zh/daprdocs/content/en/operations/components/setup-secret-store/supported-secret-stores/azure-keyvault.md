@@ -6,7 +6,7 @@ description: Detailed information on the Azure Key Vault secret store component
 ---
 
 {{% alert title="Note" color="primary" %}}
-Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}).
+Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}). Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}).
 {{% /alert %}}
 
 ## Prerequisites
@@ -34,7 +34,7 @@ Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Ins
 
 3. Create a service principal
 
-    Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. You can skip this step if you want to use an existing service principal for keyvault instead of creating new one
+    Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. You can skip this step if you want to use an existing service principal for keyvault instead of creating new one
 
     ```bash
     az ad sp create-for-rbac --name [your_service_principal_name] --create-cert --cert [certificate_name] --keyvault [your_keyvault] --skip-assignment --years 1
@@ -61,6 +61,10 @@ Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Ins
         "objectType": "ServicePrincipal",
         ...
     }
+        "objectId": "[your_service_principal_object_id]",
+        "objectType": "ServicePrincipal",
+        ...
+    }
     ```
 
 5. Grant the service principal the GET permission to your Azure Key Vault
@@ -75,7 +79,7 @@ Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Ins
 
 - **Using the Azure portal:**
 
-  Go to your key vault on the Azure portal and navigate to the *Certificates* tab under *Settings*. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it.
+  Go to your key vault on the Azure portal and navigate to the *Certificates* tab under *Settings*. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it.
 
   Click *Download in PFX/PEM format* to download the certificate.
 
