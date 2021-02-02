@@ -7,7 +7,7 @@ description: Detailed information on the Aerospike state store component
 
 ## Component format
 
-To setup Aerospike state store create a component of type `state.Aerospike`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Aerospike state store create a component of type `state.Aerospike`. To setup Aerospike state store create a component of type `state.Aerospike`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -65,7 +65,7 @@ helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubato
 helm install --name my-aerospike --namespace aerospike stable/aerospike
 ```
 
-This installs Aerospike into the `aerospike` namespace. This will install Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
+This installs Aerospike into the `aerospike` namespace. This will install Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`. This will install Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
 
 For example, if installing using the example above, the Aerospike host address would be:
 
