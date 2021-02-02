@@ -85,7 +85,7 @@ spec:
         }
 ```
 
-You can prototype and experiment with policies using the [official opa playground](https://play.openpolicyagent.org). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE).
+You can prototype and experiment with policies using the [official opa playground](https://play.openpolicyagent.org). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE).
 
 ## Input
 
@@ -97,12 +97,6 @@ The `HTTPRequest` input contains all the revelant information about an incoming 
 
 ```go
 type Input struct {
-  request HTTPRequest
-}
-
-type HTTPRequest struct {
-  // The request method (e.g. GET,POST,etc...)
-  type Input struct {
   request HTTPRequest
 }
 
@@ -123,17 +117,12 @@ type HTTPRequest struct {
   headers map[string]string
   // The request scheme (e.g. http, https)
   scheme string
-} You must specify what headers
-  // you want to recieve via `spec.metadata.includedHeaders` (see above)
-  headers map[string]string
-  // The request scheme (e.g. http, https)
-  scheme string
 }
 ```
 
 ## Result
 
-The policy must set `data.http.allow` with either a `boolean` value, or an `object` value with an `allow` boolean property. A `true` `allow` will allow the request, while a `false` value will reject the request with the status specified by `defaultStatus`. The following policy, with defaults, demonstrates a `403 - Forbidden` for all requests: A `true` `allow` will allow the request, while a `false` value will reject the request with the status specified by `defaultStatus`. The following policy, with defaults, demonstrates a `403 - Forbidden` for all requests:
+The policy must set `data.http.allow` with either a `boolean` value, or an `object` value with an `allow` boolean property. A `true` `allow` will allow the request, while a `false` value will reject the request with the status specified by `defaultStatus`. The following policy, with defaults, demonstrates a `403 - Forbidden` for all requests:
 
 ```go
 package http
@@ -153,7 +142,7 @@ default allow = {
 
 ### Changing the rejected response status code
 
-When rejecting a request, you can override the status code the that gets returned. For example, if you wanted to return a `401` instead of a `403`, you could do the following: For example, if you wanted to return a `401` instead of a `403`, you could do the following:
+When rejecting a request, you can override the status code the that gets returned. For example, if you wanted to return a `401` instead of a `403`, you could do the following:
 
 ```go
 package http
