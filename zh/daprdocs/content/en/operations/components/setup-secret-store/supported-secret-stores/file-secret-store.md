@@ -13,7 +13,7 @@ This approach to secret management is not recommended for production environment
 
 ## Component format
 
-To setup local file based secret store create a component of type `secretstores.local.file`. Create a file with the following content in your `./components` directory:
+To setup local file based secret store create a component of type `secretstores.local.file`. Create a file with the following content in your `./components` directory: Create a file with the following content in your `./components` directory:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,10 +33,10 @@ spec:
 
 ## Spec metadata fields
 
-| 字段              | Required | Details                                                                          | Example               |
-| --------------- |:--------:| -------------------------------------------------------------------------------- | --------------------- |
-| secretsFile     |    Y     | The path to the file where secrets are stored                                    | `"path/to/file.json"` |
-| nestedSeparator |    N     | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"` | `":"`                 |
+| 字段              | Required | Details                                                                                            | Example               |
+| --------------- |:--------:| -------------------------------------------------------------------------------------------------- | --------------------- |
+| secretsFile     |    Y     | The path to the file where secrets are stored                                                      | `"path/to/file.json"` |
+| nestedSeparator |    N     | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"` Defaults to `":"` | `":"`                 |
 
 ## Setup JSON file to hold the secrets
 
