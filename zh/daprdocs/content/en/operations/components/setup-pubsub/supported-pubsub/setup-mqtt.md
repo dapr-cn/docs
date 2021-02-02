@@ -42,7 +42,7 @@ spec:
 
 
 ### Communication using TLS
-To configure communication using TLS, ensure mosquitto broker is configured to support certificates. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Make following additional changes to mqtt pubsub components for supporting TLS. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Here is an example.
+To configure communication using TLS, ensure mosquitto broker is configured to support certificates. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Here is an example.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -97,7 +97,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 
