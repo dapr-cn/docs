@@ -6,7 +6,7 @@ weight: 3000
 description: "Configure Dapr to send distributed tracing data"
 ---
 
-It is recommended to run Dapr with tracing enabled for any production scenario. It is recommended to run Dapr with tracing enabled for any production scenario. Since Dapr uses Open Census, you can configure various exporters for tracing and telemetry data based on your environment, whether it is running in the cloud or on-premises.
+It is recommended to run Dapr with tracing enabled for any production scenario. Since Dapr uses Open Census, you can configure various exporters for tracing and telemetry data based on your environment, whether it is running in the cloud or on-premises.
 
 ## Tracing configuration
 
@@ -108,7 +108,7 @@ annotations:
   dapr.io/config: "zipkin"
 ```
 
-That's it! That's it! Your sidecar is now configured for use with Open Census and Zipkin.
+That's it! Your sidecar is now configured for use with Open Census and Zipkin.
 
 ### Viewing Tracing Data
 
