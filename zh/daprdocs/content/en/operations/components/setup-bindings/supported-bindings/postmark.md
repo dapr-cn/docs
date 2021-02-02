@@ -25,16 +25,16 @@ spec:
   - name: emailTo
     value: "dave@dapr.io" # optional
   - name: subject
-    value: "Hello!" # optional # optional
+    value: "Hello!" # optional
 ```
 
-- `accountToken` is your Postmark account token, this should be considered a secret value. Required. Required.
-- `serverToken` is your Postmark server token, this should be considered a secret value. Required. Required.
-- `emailFrom` If set this specifies the 'from' email address of the email message. Optional field, see below. Optional field, see below.
-- `emailTo` If set this specifies the 'to' email address of the email message. Optional field, see below. Optional field, see below.
-- `emailCc` If set this specifies the 'cc' email address of the email message. Optional field, see below. Optional field, see below.
-- `emailBcc` If set this specifies the 'bcc' email address of the email message. Optional field, see below. Optional field, see below.
-- `subject` If set this specifies the subject of the email message. Optional field, see below. Optional field, see below.
+- `accountToken` is your Postmark account token, this should be considered a secret value. Required.
+- `serverToken` is your Postmark server token, this should be considered a secret value. Required.
+- `emailFrom` If set this specifies the 'from' email address of the email message. Optional field, see below.
+- `emailTo` If set this specifies the 'to' email address of the email message. Optional field, see below.
+- `emailCc` If set this specifies the 'cc' email address of the email message. Optional field, see below.
+- `emailBcc` If set this specifies the 'bcc' email address of the email message. Optional field, see below.
+- `subject` If set this specifies the subject of the email message. Optional field, see below.
 
 You can specify any of the optional metadata properties on the output binding request too (e.g. `emailFrom`, `emailTo`, `subject`, etc.)
 
@@ -51,11 +51,10 @@ Example request payload
   },
   "data": "<h1>Testing Dapr Bindings</h1>This is a test.<br>Bye!"
 }
-}
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Output Binding Supported Operations
