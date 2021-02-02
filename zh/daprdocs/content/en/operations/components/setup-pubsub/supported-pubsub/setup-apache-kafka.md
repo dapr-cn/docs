@@ -31,7 +31,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
@@ -48,7 +48,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart). To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
 {{% /codetab %}}
 
 {{% codetab %}}
