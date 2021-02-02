@@ -190,7 +190,7 @@ dapr --app-id app2 --app-port 3000 run node app2.js
 
 ### 编程方式订阅
 
-若要订阅主题，请使用您选择的编程语言启动 Web 服务器，并监听以下 `GET` 终结点： `/dapr/subscribe`。 Dapr 实例将在启动时调用到您的应用，并期望对的订阅主题响应 JOSN：
+若要订阅主题，请使用您选择的编程语言启动 Web 服务器，并监听以下 `GET` 终结点： `/dapr/subscribe `。 Dapr 实例将在启动时调用到您的应用，并期望对的订阅主题响应 JOSN：
 - `pubsubname`: Dapr 用到的 pub/sub 组件
 - `topic`: 订阅的主题
 - `route`：当消息来到该主题时，Dapr 需要调用哪个终结点
