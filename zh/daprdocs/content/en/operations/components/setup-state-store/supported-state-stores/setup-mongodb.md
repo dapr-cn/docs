@@ -26,14 +26,14 @@ The easiest way to install MongoDB on Kubernetes is by using the [Helm chart](ht
 helm install mongo stable/mongodb
 ```
 
-This will install MongoDB into the `default` namespace. To interact with MongoDB, find the service with: `kubectl get svc mongo-mongodb`.
+This will install MongoDB into the `default` namespace. This will install MongoDB into the `default` namespace. To interact with MongoDB, find the service with: `kubectl get svc mongo-mongodb`.
 
 For example, if installing using the example above, the MongoDB host address would be:
 
 `mongo-mongodb.default.svc.cluster.local:27017`
 
 
-Follow the on-screen instructions to get the root password for MongoDB. The username will be `admin` by default.
+Follow the on-screen instructions to get the root password for MongoDB. The username will be `admin` by default. The username will be `admin` by default.
 {{% /codetab %}}
 
 {{< /tabs >}}
@@ -69,11 +69,25 @@ spec:
   - name: readconcern
     value: <REPLACE-WITH-READ-CONCERN> # Optional.
   - name: operationTimeout
+    value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "5s" Example: "mongo-mongodb.default.svc.cluster.local:27017"
+  - name: username
+    value: <REPLACE-WITH-USERNAME> # Optional. Example: "admin"
+  - name: password
+    value: <REPLACE-WITH-PASSWORD> # Optional.
+  - name: databaseName
+    value: <REPLACE-WITH-DATABASE-NAME> # Optional. default: "daprStore"
+  - name: collectionName
+    value: <REPLACE-WITH-COLLECTION-NAME> # Optional. default: "daprCollection"
+  - name: writeconcern
+    value: <REPLACE-WITH-WRITE-CONCERN> # Optional.
+  - name: readconcern
+    value: <REPLACE-WITH-READ-CONCERN> # Optional.
+  - name: operationTimeout
     value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "5s"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ### Example
