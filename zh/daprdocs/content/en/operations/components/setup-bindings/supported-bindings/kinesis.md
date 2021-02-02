@@ -36,13 +36,13 @@ spec:
     value: *****************
 
 ```
-- `mode` Accepted values: shared, extended. shared - Shared throughput, extended - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html)
+- `mode` Accepted values: shared, extended. shared - Shared throughput, extended - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html) shared - Shared throughput, extended - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html)
 - `streamName` is the AWS Kinesis Stream Name.
 - `consumerName` is the AWS Kinesis Consumer Name.
 
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Output Binding Supported Operations
