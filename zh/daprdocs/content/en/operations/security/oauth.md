@@ -74,9 +74,6 @@ spec:
     # after Dapr successfully received Access Token from Identity Provider. 
     # By default, Dapr will use HTTP on this redirect.
   - name: forceHTTPS
-    value: "<set to true if you invoke an API method through Dapr from https origin>" 
-    # By default, Dapr will use HTTP on this redirect.
-  - name: forceHTTPS
     value: "<set to true if you invoke an API method through Dapr from https origin>"
 ```
 
