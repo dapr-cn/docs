@@ -46,7 +46,7 @@ curl -X POST http://localhost:3500/v1.0/publish/pubsubName/deathStarStatus \
 
 #### Metadata
 
-Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.` as shown below.
+Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.` as shown below. It must be prefixed with `metadata.` as shown below.
 
 | Parameter             | Description                                                                                            |
 | --------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -113,7 +113,7 @@ POST http://localhost:<appPort>/<path>
 
 #### Expected HTTP Response
 
-An HTTP 2xx response denotes successful processing of message. For richer response handling, a JSON encoded payload body with the processing status can be sent:
+An HTTP 2xx response denotes successful processing of message. An HTTP 2xx response denotes successful processing of message. For richer response handling, a JSON encoded payload body with the processing status can be sent:
 
 ```json
 {
