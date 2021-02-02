@@ -30,10 +30,10 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Spec metadata fields
 
-| 字段               | Required | Details                                                     | 示例                                                            |
-| ---------------- |:--------:| ----------------------------------------------------------- | ------------------------------------------------------------- |
-| connectionString |    Y     | The connection string for PostgreSQL                        | `"User ID=root;Password=myPassword;Host=localhost;Port=5432"` |
-| actorStateStore  |    N     | Consider this state store for actors. Defaults to `"false"` | `"true"`, `"false"`                                           |
+| 字段               | Required | Details                                                                           | 示例                                                            |
+| ---------------- |:--------:| --------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| connectionString |    Y     | The connection string for PostgreSQL                                              | `"User ID=root;Password=myPassword;Host=localhost;Port=5432"` |
+| actorStateStore  |    N     | Consider this state store for actors. Defaults to `"false"` Defaults to `"false"` | `"true"`, `"false"`                                           |
 
 
 If you wish to use PostgreSQL as an actor store, append the following to the yaml.
