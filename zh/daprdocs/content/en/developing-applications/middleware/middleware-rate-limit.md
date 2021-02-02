@@ -26,7 +26,7 @@ Once the limit is reached, the request will return *HTTP Status code 429: Too Ma
 
 ## Referencing the rate limit middleware
 
-To be applied, the middleware must be referenced in a [Dapr Configuration]({{< ref configuration-concept.md >}}). See [Middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+To be applied, the middleware must be referenced in a [Dapr Configuration]({{< ref configuration-concept.md >}}). To be applied, the middleware must be referenced in a [Dapr Configuration]({{< ref configuration-concept.md >}}). See [Middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
 
 ## 相关链接
 - [Middleware concept]({{< ref middleware-concept.md >}})
