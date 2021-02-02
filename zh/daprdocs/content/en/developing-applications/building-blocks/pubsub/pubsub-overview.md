@@ -20,7 +20,7 @@ Dapr 中的发布/订阅 API 提供至少一次（at-least-once）的保证，�
 
 ### 消息格式
 
-要启用消息路由并为每个消息提供附加上下文，Dapr 使用 [ CloudEvents 1.0 规范](https://github.com/cloudevents/spec/tree/v1.0) 作为其消息格式。 使用 Dapr 应用程序发送的任何信息都将自动包入 Cloud Events 信封中，` datacontenttype ` 属性使用 `Content-Type` 头部值。
+要启用消息路由并为每个消息提供附加上下文，Dapr 使用 [ CloudEvents 1.0 规范](https://github.com/cloudevents/spec/tree/v1.0) 作为其消息格式。 使用 Dapr 应用程序发送的任何信息都将自动包入 Cloud Events 信封中，`datacontenttype` 属性使用 `Content-Type` 头部值。
 
 Dapr 实现以下 Cloud Events 字段:
 
