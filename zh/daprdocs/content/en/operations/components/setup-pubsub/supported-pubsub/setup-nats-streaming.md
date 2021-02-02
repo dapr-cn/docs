@@ -82,6 +82,32 @@ spec:
   # - name: startAtTime
   #   value: ""
   # - name: startAtTimeFormat
+  #   value: "" example nats://localhost:4222
+  - name: natsStreamingClusterID
+    value: <REPLACE-WITH-NATS-CLUSTERID> # Required.
+    # blow are subscription configuration.
+  - name: subscriptionType
+    value: <REPLACE-WITH-SUBSCRIPTION-TYPE> # Required. Allowed values: topic, queue.
+  # - name: ackWaitTime
+    # value: "" # Optional. See: https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements
+  # - name: maxInFlight
+    # value: "" # Optional. See: https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements
+  # - name: durableSubscriptionName
+  #   value: ""
+  # following subscription options - only one can be used
+  # - name: startAtSequence
+    # value: 1
+  # - name: startWithLastReceived
+    # value: false
+  - name: deliverAll
+    value: true
+  # - name: deliverNew
+  #   value: false
+  # - name: startAtTimeDelta
+  #   value: ""
+  # - name: startAtTime
+  #   value: ""
+  # - name: startAtTimeFormat
   #   value: ""
 ```
 
