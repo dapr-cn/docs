@@ -10,15 +10,15 @@ description: "Choose different strategies for sharing state between different ap
 
 Dapr offers developers different ways to share state between applications.
 
-Different architectures might have different needs when it comes to sharing state. For example, in one scenario you may want to encapsulate all state within a given application and have Dapr manage the access for you. Different architectures might have different needs when it comes to sharing state. For example, in one scenario you may want to encapsulate all state within a given application and have Dapr manage the access for you. In a different scenario, you may need to have two applications working on the same state be able to get and save the same keys.
+Different architectures might have different needs when it comes to sharing state. For example, in one scenario you may want to encapsulate all state within a given application and have Dapr manage the access for you. In a different scenario, you may need to have two applications working on the same state be able to get and save the same keys.
 
 To enable state sharing, Dapr supports the following key prefixes strategies:
 
-* **`appid`** - This is the default strategy. **`appid`** - This is the default strategy. the `appid` prefix allows state to be managed only by the app with the specified `appid`. All state keys will be prefixed with the `appid`, and are scoped for the application. All state keys will be prefixed with the `appid`, and are scoped for the application.
+* **`appid`** - This is the default strategy. the `appid` prefix allows state to be managed only by the app with the specified `appid`. All state keys will be prefixed with the `appid`, and are scoped for the application.
 
-* **`name`** - This setting uses the name of the state store component as the prefix. Multiple applications can share the same state for a given state store. Multiple applications can share the same state for a given state store.
+* **`name`** - This setting uses the name of the state store component as the prefix. Multiple applications can share the same state for a given state store.
 
-* **`none`** - This setting uses no prefixing. Multiple applications share state across different state stores. Multiple applications share state across different state stores.
+* **`none`** - This setting uses no prefixing. Multiple applications share state across different state stores.
 
 ## Specifying a state prefix strategy
 
