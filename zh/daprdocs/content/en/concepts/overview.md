@@ -118,4 +118,4 @@ Dapr 可以配置为在任何 [Kubernetes 集群]({{< ref kubernetes >}}) 上运
 
 <img src="/images/overview_kubernetes.png" width=800>
 
-在 Kubernetes 集群中部署和运行启用 Dapr 的应用程序非常简单，只需向 deployment 方案添加一些注解。 You can see some examples [here](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes/deploy) in the Kubernetes getting started sample. Try this out with the [Kubernetes quickstart](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes).
+在 Kubernetes 集群中部署和运行启用 Dapr 的应用程序非常简单，只需向 deployment 方案添加一些注解。 您可以 [在这里](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes/deploy) 看到一些例子，在 Kubernetes 的入门示例中。 使用 [Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes) 来试试吧。
