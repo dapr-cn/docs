@@ -22,11 +22,11 @@ POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId
 
 #### HTTP 响应码
 
-| Code | 描述                             |
-| ---- | ------------------------------ |
-| 200  | 请求成功                           |
-| 500  | 请求失败                           |
-| XXX  | Status code from upstream call |
+| Code | 描述          |
+| ---- | ----------- |
+| 200  | 请求成功        |
+| 500  | 请求失败        |
+| XXX  | 来自上游调用的状态代码 |
 
 #### URL 参数
 
@@ -205,11 +205,11 @@ Body:
 
 #### HTTP 响应码
 
-| Code | 说明                                   |
-| ---- | ------------------------------------ |
-| 204  | 请求成功                                 |
-| 500  | 请求失败                                 |
-| 400  | Actor not found or malformed request |
+| Code | 说明                  |
+| ---- | ------------------- |
+| 204  | 请求成功                |
+| 500  | 请求失败                |
+| 400  | 未找到 Actor 或格式不正确的请求 |
 
 #### URL 参数
 
@@ -659,6 +659,6 @@ curl -X GET http://localhost:3000/healthz \
 - Actor ID - 代表 actor 类型的 actor 实例的唯一ID。
 - Key - 特定状态值的键。 Actor ID 标识可以保存多个状态键。
 
-The following example shows how to construct a key for the state of an actor instance under the `myapp` App ID namespace: `myapp||cat||hobbit||food`
+下面的示例演示如何在 `myapp` 应用程序 ID 命名空间下为 actor 实例的状态构造状态名称空间： `myapp||cat||hobbit||food`
 
 在以上示例中，我们在 `myapp` 的应用标识名称空间下，为 actor ID 为 `hobbit` ( actor 类型为 `cat`) 获取状态键 `food`的值。
