@@ -1,18 +1,18 @@
 ---
 type: docs
 title: "组件"
-linkTitle: "Components"
+linkTitle: "组件"
 weight: 300
 description: "用于构建块和应用程序的模块化功能"
 ---
 
-Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有一个接口定义。  所有组件都是可插拔的，因此您可以将组件换为另一个具有相同接口的组件。 [components contrib repo](https://github.com/dapr/components-contrib) 是您可以为组件接口贡献实现并扩展Dapr功能的地方。
+Dapr 使用模块化设计，以组件的方式提供功能。 每个组件都有接口定义。  所有组件都是可插拔的，因此您可以将组件换为另一个具有相同接口的组件。 您可以在 [components contrib repo](https://github.com/dapr/components-contrib) 为组件接口贡献实现并扩展 Dapr 功能。
 
- 构建块可以使用任何组件组合。 For example the [actors]({{X12X}}) building block and the [state management]({{X13X}}) building block both use [state components](https://github.com/dapr/components-contrib/tree/master/state).  As another example, the [Pub/Sub]({{X14X}}) building block uses [Pub/Sub components](https://github.com/dapr/components-contrib/tree/master/pubsub).
+ 构建块可以使用任何组件组合。 例如， [actor]({{X12X}}) 构建块和 [状态管理]({{X13X}}) 构建块都使用 [状态组件](https://github.com/dapr/components-contrib/tree/master/state)。  另一个示例是 [Pub/Sub]({{X14X}}) 构建块使用 [ Pub/Sub 组件](https://github.com/dapr/components-contrib/tree/master/pubsub)。
 
  您可以使用 `dapr components` CLI 命令查看当前托管环境中可用组件的列表。
 
- 以下是 Dapr 提供的组件类型:
+ 以下是 Dapr 提供的组件类型：
 
 * [Bindings（绑定）](https://github.com/dapr/components-contrib/tree/master/bindings)
 * [Pub/sub（发布/订阅）](https://github.com/dapr/components-contrib/tree/master/pubsub)
