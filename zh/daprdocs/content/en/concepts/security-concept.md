@@ -1,10 +1,10 @@
 ---
 type: docs
-title: "Security"
-linkTitle: "Security"
+title: "安全"
+linkTitle: "安全"
 weight: 600
 description: >
-  How Dapr is designed with security in mind
+  Dapr在设计时是如何考虑安全的
 ---
 
 This article addresses multiple security considerations when using Dapr in a distributed application including:
