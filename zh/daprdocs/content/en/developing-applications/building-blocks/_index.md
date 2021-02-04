@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Building blocks"
-linkTitle: "Building blocks"
+title: "构建块"
+linkTitle: "构建块"
 weight: 10
 description: "Dapr capabilities that solve common development challenges for distributed applications"
 ---
