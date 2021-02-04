@@ -93,37 +93,37 @@ Dapr 不会转换来自应用程序的状态数据。 这意味着 Dapr 不会�
 
 Dapr 不存储任何数据。
 
-Dapr 使用配置的身份验证方法来与底层状态存储进行身份验证。 And many state store implementations use official client libraries that generally use secured communication channels with the servers.
+Dapr 使用配置的身份验证方法来与底层状态存储进行身份验证。 许多状态存储实现都使用官方客户端库，这些客户端库通常使用安全通信通道和服务器通讯。
 
-## Management security
+## 管理安全
 
-When deploying on Kubernetes, you can use regular [Kubernetes RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to control access to management activities.
+在 Kubernetes 上部署时，您可以使用 [Kubernetes RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) 控制对管理活动的访问。
 
-When deploying on Azure Kubernetes Service (AKS), you can use [Azure Active Directory (AD) service principals](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals) to control access to management activities and resource management.
+在 Azure Kubernetes Service （AKS） 上部署时，可以使用 [Azure Active Directory （AD） 服务主体](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals) 控制对管理活动和资源管理的访问。
 
-## Threat model
-Threat modeling is a process by which potential threats, such as structural vulnerabilities or the absence of appropriate safeguards, can be identified, enumerated, and mitigations can be prioritized. The Dapr threat model is below.
+## 威胁模型
+威胁建模是一个过程，通过该过程可以识别、枚举潜在威胁（如结构漏洞或缺乏适当的安全措施），并确定缓解措施的优先级。 Dapr 威胁模型如下：
 
-<img src="/images/security-threat-model.png" alt="Dapr threat model" width=1000>
+<img src="/images/security-threat-model.png" alt="Dapr 威胁模型" width=1000>
 
-## Security audit
+## 安全审核
 
-### June 2020
+### 2020年6月
 
-In June 2020, Dapr has undergone a security audit from Cure53, a CNCF approved cybersecurity firm. The test focused on the following:
+2020 年 6 月，Dapr 接受了 CNCF 核定的网络安全公司 Cure53 的安全审计。 测试的重点是：
 
-* Dapr runtime code base evaluation
-* Dapr components code base evaluation
-* Dapr CLI code base evaluation
-* Privilege escalation
-* Traffic spoofing
-* Secrets management
+* Dapr 运行时代码库评估
+* Dapr 组件代码基础评估
+* Dapr CLI 代码基础评估
+* 权限升级
+* 流量欺骗
+* 密钥管理
 * RBAC
-* Validating base assumptions: mTLS, scopes, API authentication
-* Orchestration hardening (Kubernetes)
-* DoS attacks
-* Penetration testing
+* 验证基本假设：mTLS、作用域、API 身份验证
+* 编排强化 ( Kubernetes)
+* DoS 攻击
+* 渗透测试
 
-The full report can be found [here](/docs/Dapr-july-2020-security-audit-report.pdf).
+完整的报告可以 [在这里](/docs/Dapr-july-2020-security-audit-report.pdf) 找到。
 
-Two issues, one critical and one high, were fixed during the test. As of July 21st 2020, Dapr has 0 criticals, 2 highs, 2 mediums, 1 low, 1 info.
+测试期间修复了两个问题，一个是关键问题，一个是高优先级问题。 截至2020年7月21日，Dapr有0个关键点，2个高，2个中，1个低，1个Info。
