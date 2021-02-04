@@ -18,13 +18,13 @@ Fork [文档存储库](https://github.com/dapr/docs) 以处理任何更改
 
 遵循存储库 [README.md](https://github.com/dapr/docs/blob/master/README.md#environment-setup) 中的指示信息以在本地安装 Hugo 并构建 docs Web站点。
 
-## Branch guidance
+## 分支指南
 
-The Dapr docs handles branching differently than most code repositories. Instead of having a `master` or `main` branch, every branch is labeled to match the major and minor version of a runtime release. For the full list visit the [Docs repo](https://github.com/dapr/docs#branch-guidance)
+Dapr 文档处理分支的方式与大多数代码存储库不同。 每个分支都标记为运行时发行版的主版本和次要版本，而不存在 `master` 或 `main` 分支。 完整列表，请访问 [Docs repo](https://github.com/dapr/docs#branch-guidance)
 
-Overall, all updates should go into the docs branch for the latest release of Dapr. You can find this directly at https://github.com/dapr/docs, as the latest release will be the default branch. For any docs changes that are applicable to a release candidate or a pre-release version of the docs, make your changes into that particular branch.
+总体而言，所有更新都应进入对应 Dapr 最新版本的文档分支。 您可以直接在 https://github.com/dapr/docs 找到，因为最新版本将是默认分支。 对于适用于发布候选版本或文档的预发行版本的任何文档更改，请对该特定分支修改。
 
-For example, if you are fixing a typo, adding notes, or clarifying a point, make your changes into the default Dapr branch. If you are documenting an upcoming change to a component or the runtime, make your changes to the pre-release branch. Branches can be found in the [Docs repo](https://github.com/dapr/docs#branch-guidance)
+例如，如果要修复拼写错误、添加注释或澄清点，请在默认 Dapr 分支上变更。 如果要记录即将发生的组件或运行时的变更，请对预发行版分支进行修改。 分支可以在 [ Docs repo](https://github.com/dapr/docs#branch-guidance) 中找到
 
 ## 风格和语气
 应在所有 Dapr 文档中遵循这些约定，以确保所有文档的体验一致。
