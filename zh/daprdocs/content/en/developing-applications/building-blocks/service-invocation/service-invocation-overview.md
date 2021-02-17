@@ -27,7 +27,7 @@ Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调�
 
 <img src="/images/service-invocation-overview.png" width=800 alt="Diagram showing the steps of service invocation">
 
-1. 服务 A 对服务 B 发起HTTP/gRPC的调用。调用发送到本地 Dapr 边车。
+1. 服务 A 对服务 B 发起HTTP/gRPC的调用。
 2. Dapr 使用在给定 [ 托管平台]({{< ref "hosting" >}}) 上运行的 [命名解析组件](https://github.com/dapr/components-contrib/tree/master/nameresolution) 发现服务 B的位置。
 3. Dapr 将消息转发至服务 B的 Dapr 边车
 
@@ -41,10 +41,6 @@ Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调�
 ## 特性
 服务调用提供了一系列特性，使您可以方便地调用远程应用程序上的方法。
 
-### 服务调用API
-
-服务调用的 API 规范可在 [规范仓库]({{< ref service_invocation_api.md >}}) 中找到。
-
 ### 命名空间作用域
 
 服务调用支持跨命名空间调用。 在所有受支持的托管平台上， Dapr 应用程序标识（ID）遵循包含了目标命名空间的有效 FQDN 格式。
@@ -57,6 +53,25 @@ localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 
 这在 Kubernetes 集群中进行跨命名空间调用特别有用。 观看此演示视频以获取有关如何使用具有命名空间的服务调用。 <iframe width="560" height="315" src="https://www.bilibili.com/video/BV14z4y167te?p=2&t=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
+
+### 服务间安全性
+
+All calls between Dapr applications can be made secure with mutual (mTLS) authentication on hosted platforms, including automatic certificate rollover, via the Dapr Sentry service. The diagram below shows this for self hosted applications.
+
+For more information read the [service-to-service security]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}) article.
+
+
+### 重试
+
+Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. This enables you to restrict sensitive applications, that say have personnel information, from being accessed by unauthorized applications, and combined with service-to-service secure communication, provides for soft multi-tenancy deployments.
+
+For more information read the [access control allow lists for service invocation]({{< ref invoke-allowlist.md >}}) article.
+
+#### Service access security
+The diagram below is an example deployment on a Kubernetes cluster with a Daprized `Ingress` service that calls onto `Service A` using service invocation with mTLS encryption and an applies access control policy. `Service A` then calls onto `Service B` also using service invocation and mTLS. Each service is running in different namespaces for added isolation.
+
+<img src="/images/service-invocation-security.png" width=800>
+
 ### 重试
 
 在发生调用失败和瞬态错误的情况下，服务调用会在回退（backoff）时间段内执行自动重试。
@@ -68,29 +83,26 @@ localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 
 每次调用重试的回退间隔是 1 秒，最多重试三次。 通过 gRPC 连接到目标 sidecar 的连接超时时间为 5 秒钟。
 
-### 服务间安全性
-
-All calls between Dapr applications can be made secure with mutual (mTLS) authentication on hosted platforms, including automatic certificate rollover, via the Dapr Sentry service. The diagram below shows this for self hosted applications.
-
-For more information read the [service-to-service security]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}) article.
-
-<img src="/images/security-mTLS-sentry-selfhosted.png" width=800>
-
-### Service access security
-
-Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. This enables you to restrict sensitive applications, that say have personnel information, from being accessed by unauthorized applications, and combined with service-to-service secure communication, provides for soft multi-tenancy deployments.
-
-For more information read the [access control allow lists for service invocation]({{< ref invoke-allowlist.md >}}) article.
-
-### Observability
-
-By default, all calls between applications are traced and metrics are gathered to provide insights and diagnostics for applications, which is especially important in production scenarios.
-
-For more information read the [observability]({{< ref observability-concept.md >}}) article.
-
 ### Pluggable service discovery
 
-Dapr can run on any [hosting platform]({{< ref hosting >}}). For the supported hosting platforms this means they have a [name resolution component](https://github.com/dapr/components-contrib/tree/master/nameresolution) developed for them that enables service discovery. For example, the Kubernetes name resolution component uses the Kubernetes DNS service to resolve the location of other applications running in the cluster.
+Dapr can run on any [hosting platform]({{< ref hosting >}}). For the supported hosting platforms this means they have a [name resolution component](https://github.com/dapr/components-contrib/tree/master/nameresolution) developed for them that enables service discovery. For example, the Kubernetes name resolution component uses the Kubernetes DNS service to resolve the location of other applications running in the cluster. For local and multiple physical machines this uses the mDNS protocol.
+
+### Observability
+For more information read the [observability]({{< ref observability-concept.md >}}) article.
+
+The diagram below shows an example of how this works. If you have 1 instance of an application with app ID `FrontEnd` and 3 instances of application with app ID `Cart` and you call from `FrontEnd` app to `Cart` app, Dapr round robins' between the 3 instances. These instance can be on the same machine or on different machines. .
+
+<img src="/images/service-invocation-mdns-round-robin.png" width=800 alt="Diagram showing the steps of service invocation">
+
+Note: You can have N instances of the same app with the same app ID as app ID is unique per app. And you can have multiple instances of that app where all those instances have the same app ID.
+
+### Tracing and metrics with observability
+
+By default, all calls between applications are traced and metrics are gathered to provide insights and diagnostics for applications, which is especially important in production scenarios. This gives you call graphs and metrics on the calls between your services. For more information read about [observability]({{< ref observability-concept.md >}}).
+
+### 服务调用API
+
+服务调用的 API 规范可在 [规范仓库]({{< ref service_invocation_api.md >}}) 中找到。
 
 ## Example
 Following the above call sequence, suppose you have the applications as described in the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md), where a python app invokes a node.js app. In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B".
