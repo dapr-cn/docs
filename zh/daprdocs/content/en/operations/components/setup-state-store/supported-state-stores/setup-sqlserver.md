@@ -21,7 +21,13 @@ spec:
   version: v1
   metadata:
   - name: connectionString
-    value: <REPLACE-WITH-CONNECTION-STRING> # Required.
+    value: <REPLACE-WITH-CONNECTION-STRING> # Required. "Endpoint=sb://****"
+  - name: storageAccountName
+    value: <REPLACE-WITH-STORAGE-ACCOUNT-NAME> # Required.
+  - name: storageAccountKey
+    value: <REPLACE-WITH-STORAGE-ACCOUNT-KEY> # Required.
+  - name: storageContainerName
+    value: <REPLACE-WITH-CONTAINER-NAME > # Required.
   - name: tableName
     value: <REPLACE-WITH-TABLE-NAME>  # Required.
   - name: keyType 
@@ -36,7 +42,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 {{% alert title="Note" color="primary" %}}
@@ -45,7 +51,7 @@ Currently this component does not support state management for actors
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                        | Example                                                                                             |
+| 字段                | Required | Details                                                                        | Example                                                                                             |
 | ----------------- |:--------:| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | connectionString  |    Y     | The connection string used to connect                                          | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
 | tableName         |    Y     | The name of the table to use. Alpha-numeric with underscores                   | `"table_name"`                                                                                      |
@@ -57,15 +63,15 @@ Currently this component does not support state management for actors
 
 ## Create Azure SQL instance
 
-[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.  The database must be created before Dapr consumes it.
+[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.
 
 **Note: SQL Server state store also supports SQL Server running on VMs.**
 
 In order to setup SQL Server as a state store, you need the following properties:
 
-- **Connection String**: the SQL Server connection string. For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase; For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase;
-- **Schema**: The database schema to use (default=dbo). Will be created if not exists Will be created if does not exist
-- **Table Name**: The database table name. Will be created if not exists Will be created if does not exist
+- **Connection String**: the SQL Server connection string. For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase;
+- **Schema**: The database schema to use (default=dbo). Will be created if does not exist
+- **Table Name**: The database table name. Will be created if does not exist
 - **Indexed Properties**: Optional properties from json data which will be indexed and persisted as individual column
 
 ### Create a dedicated user
@@ -75,7 +81,7 @@ When connecting with a dedicated user (not `sa`), these authorizations are requi
 - `CREATE TABLE`
 - `CREATE TYPE`
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

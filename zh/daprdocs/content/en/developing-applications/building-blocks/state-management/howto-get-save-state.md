@@ -8,9 +8,9 @@ description: "Use key value pairs to persist a state"
 
 ## Introduction
 
-State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
+State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
 
-Dapr provides state management capabilities that include consistency and concurrency options. Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
+Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
 
 ## Pre-requisites
 
@@ -61,7 +61,7 @@ See the instructions [here]({{< ref "setup-state-store" >}}) on how to setup dif
 The following example shows how to a single key/value pair using the Dapr state building block.
 
 {{% alert title="Note" color="warning" %}}
-It is important to set an app-id, as the state keys are prefixed with this value. It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
+It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
 {{% /alert %}}
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK">}}
@@ -400,7 +400,7 @@ You're up and running! Both Dapr and your app logs will appear here.
 
 {{< /tabs >}}
 
-## Next steps
+## 下一步
 
 - Read the full [State API reference]({{< ref state_api.md >}})
 - Try one of the [Dapr SDKs]({{< ref sdks >}})

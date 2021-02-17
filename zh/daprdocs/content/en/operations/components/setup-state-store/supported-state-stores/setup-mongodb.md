@@ -35,25 +35,11 @@ spec:
   - name: readconcern
     value: <REPLACE-WITH-READ-CONCERN> # Optional.
   - name: operationTimeout
-    value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "5s" Example: "mongo-mongodb.default.svc.cluster.local:27017"
-  - name: username
-    value: <REPLACE-WITH-USERNAME> # Optional. Example: "admin"
-  - name: password
-    value: <REPLACE-WITH-PASSWORD> # Optional.
-  - name: databaseName
-    value: <REPLACE-WITH-DATABASE-NAME> # Optional. default: "daprStore"
-  - name: collectionName
-    value: <REPLACE-WITH-COLLECTION-NAME> # Optional. default: "daprCollection"
-  - name: writeconcern
-    value: <REPLACE-WITH-WRITE-CONCERN> # Optional.
-  - name: readconcern
-    value: <REPLACE-WITH-READ-CONCERN> # Optional.
-  - name: operationTimeout
     value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "5s"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 If you wish to use MongoDB as an actor store, append the following to the yaml.
@@ -66,7 +52,7 @@ If you wish to use MongoDB as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| Field            | Required | Details                                                           | Example                                                               |
+| 字段               | Required | Details                                                           | Example                                                               |
 | ---------------- |:--------:| ----------------------------------------------------------------- | --------------------------------------------------------------------- |
 | host             |    Y     | The host to connect to                                            | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
 | username         |    N     | The username of the user to connect with                          | `"admin"`                                                             |
@@ -98,19 +84,19 @@ The easiest way to install MongoDB on Kubernetes is by using the [Helm chart](ht
 helm install mongo stable/mongodb
 ```
 
-This installs MongoDB into the `default` namespace. This will install MongoDB into the `default` namespace. To interact with MongoDB, find the service with: `kubectl get svc mongo-mongodb`.
+This installs MongoDB into the `default` namespace. To interact with MongoDB, find the service with: `kubectl get svc mongo-mongodb`.
 
 For example, if installing using the example above, the MongoDB host address would be:
 
 `mongo-mongodb.default.svc.cluster.local:27017`
 
 
-Follow the on-screen instructions to get the root password for MongoDB. The username will be `admin` by default. The username is `admin` by default.
+Follow the on-screen instructions to get the root password for MongoDB. The username is `admin` by default.
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

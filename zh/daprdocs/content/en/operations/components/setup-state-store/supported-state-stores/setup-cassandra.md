@@ -34,30 +34,16 @@ spec:
   - name: protoVersion
     value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
   - name: replicationFactor
-    value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1" Example: cassandra.cassandra.svc.cluster.local
-  - name: username
-    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
-  - name: password
-    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
-  - name: consistency
-    value: <REPLACE-WITH-CONSISTENCY> # Optional. default: "All"
-  - name: table
-    value: <REPLACE-WITH-TABLE> # Optional. default: "items"
-  - name: keyspace
-    value: <REPLACE-WITH-KEYSPACE> # Optional. default: "dapr"
-  - name: protoVersion
-    value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
-  - name: replicationFactor
     value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                 | Example                                    |
+| 字段                | Required | Details                                                 | Example                                    |
 | ----------------- |:--------:| ------------------------------------------------------- | ------------------------------------------ |
 | hosts             |    Y     | Comma separated value of the hosts                      | `"cassandra.cassandra.svc.cluster.local"`. |
 | port              |    N     | Port for communication. Default `"9042"`                | `"9042"`                                   |
@@ -91,7 +77,7 @@ kubectl create namespace cassandra
 helm install cassandra incubator/cassandra --namespace cassandra
 ```
 
-This installs Cassandra into the `cassandra` namespace by default. This will install Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`.
+This installs Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`.
 
 For example, if installing using the example above, the Cassandra DNS would be:
 
@@ -100,7 +86,7 @@ For example, if installing using the example above, the Cassandra DNS would be:
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

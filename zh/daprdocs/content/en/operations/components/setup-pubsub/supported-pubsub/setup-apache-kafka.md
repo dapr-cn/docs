@@ -31,12 +31,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field        | Required | Details                                                                                                                                                                                                              | Example                                                     |
+| 字段           | Required | Details                                                                                                                                                                                                              | 示例                                                          |
 | ------------ |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | brokers      |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
 | authRequired |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`.                                                                                                                                                    | `"true"`, `"false"`                                         |
@@ -48,7 +48,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart). To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
 {{% /codetab %}}
 
 {{% codetab %}}

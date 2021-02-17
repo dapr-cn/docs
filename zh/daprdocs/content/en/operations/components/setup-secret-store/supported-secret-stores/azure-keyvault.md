@@ -6,7 +6,7 @@ description: Detailed information on the Azure Key Vault secret store component
 ---
 
 {{% alert title="Note" color="primary" %}}
-Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}). Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}).
+Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}).
 {{% /alert %}}
 
 ## Component format
@@ -35,12 +35,12 @@ spec:
     value : "[pfx_certificate_file_local_path]"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将 Secret 明文存储。 The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field              | Required | Details                                                                                                  | Example         |
+| 字段                 | Required | Details                                                                                                  | 示例              |
 | ------------------ |:--------:| -------------------------------------------------------------------------------------------------------- | --------------- |
 | vaultName          |    Y     | The name of the Azure Key Vault                                                                          | `"mykeyvault"`  |
 | spnTenantId        |    Y     | Your Service Principal Tenant Id                                                                         | `"spnTenantId"` |
@@ -74,7 +74,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 3. Create a service principal
 
-    Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. You can skip this step if you want to use an existing service principal for keyvault instead of creating new one
+    Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. You can skip this step if you want to use an existing service principal for keyvault instead of creating new one
 
     ```bash
     az ad sp create-for-rbac --name [your_service_principal_name] --create-cert --cert [certificate_name] --keyvault [your_keyvault] --skip-assignment --years 1
@@ -101,10 +101,6 @@ The above example uses secrets as plain strings. It is recommended to use a loca
         "objectType": "ServicePrincipal",
         ...
     }
-        "objectId": "[your_service_principal_object_id]",
-        "objectType": "ServicePrincipal",
-        ...
-    }
     ```
 
 5. Grant the service principal the GET permission to your Azure Key Vault
@@ -119,7 +115,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 - **Using the Azure portal:**
 
-  Go to your key vault on the Azure portal and navigate to the *Certificates* tab under *Settings*. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it.
+  Go to your key vault on the Azure portal and navigate to the *Certificates* tab under *Settings*. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it.
 
   Click *Download in PFX/PEM format* to download the certificate.
 

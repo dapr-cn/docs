@@ -12,7 +12,7 @@ Dapr 公开了一个 [Prometheus](https://prometheus.io/) 指标终结点，您�
 
 默认情况下，指标终结点处于启用状态，您可以通过命令行参数 `--enable-metrics=false` 传递给 Dapr 系统进程来禁用它。
 
-默认指标端口为 `9090`。 The default metrics port is `9090`. This can be overridden by passing the command line argument `--metrics-port` to Daprd.
+默认指标端口为 `9090`。 这可以通过将命令行参数 `--metrics-port` 传递到 Daprd 来重写。
 
 要禁用 Dapr 边车中的指标，您可以使用 `metric` 规范配置并启用设置 `enabled: false` 以禁用 Dapr 运行时中的指标。
 

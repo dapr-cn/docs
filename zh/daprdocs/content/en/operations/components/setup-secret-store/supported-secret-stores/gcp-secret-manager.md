@@ -42,12 +42,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                           | Required | Details                                        | Example                                                                                            |
+| 字段                              | Required | Details                                        | Example                                                                                            |
 | ------------------------------- |:--------:| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | type                            |    Y     | The type of the account.                       | `"serviceAccount"`                                                                                 |
 | project_id                      |    Y     | The project ID associated with this component. | `"project_id"`                                                                                     |

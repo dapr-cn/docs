@@ -28,7 +28,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field      | Required | Details                                                                                                                                              | Example            |
+| 字段         | Required | Details                                                                                                                                              | 示例                 |
 | ---------- |:--------:| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
 | hosts      |    Y     | Specifies the address for the Cloudstate API                                                                                                         | `"localhost:8013"` |
 | serverPort |    Y     | Specifies the port to be opened in Dapr for Cloudstate to callback to. This can be any free port that is not used by either your application or Dapr | `"8080"`           |
@@ -37,7 +37,7 @@ spec:
 
 ## Introduction
 
-The Cloudstate-Dapr integration is unique in the sense that it enables developers to achieve high-throughput, low latency scenarios by leveraging Cloudstate running as a sidecar *next* to Dapr, keeping the state near the compute unit for optimal performance while providing replication between multiple instances that can be safely scaled up and down. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities.
+The Cloudstate-Dapr integration is unique in the sense that it enables developers to achieve high-throughput, low latency scenarios by leveraging Cloudstate running as a sidecar *next* to Dapr, keeping the state near the compute unit for optimal performance while providing replication between multiple instances that can be safely scaled up and down. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities.
 
 Dapr leverages Cloudstate's CRDT capabilities with last-write-wins semantics.
 
@@ -165,7 +165,7 @@ subjects:
   name: default
 ```
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

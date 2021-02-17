@@ -34,29 +34,15 @@ spec:
   - name: vaultTokenMountPath # Required. Path to token file.
     value : "[path_to_file_containing_token]"
   - name: vaultKVPrefix # Optional. Default: "dapr"
-    value : "[vault_prefix]" Default: "https://127.0.0.1:8200"
-  - name: caCert # Optional. This or caPath or caPem
-    value: "[ca_cert]"
-  - name: caPath # Optional. This or CaCert or caPem
-    value: "[path_to_ca_cert_file]"
-  - name: caPem # Optional. This or CaCert or CaPath
-    value : "[encoded_ca_cert_pem]"
-  - name: skipVerify # Optional. Default: false
-    value : "[skip_tls_verification]"
-  - name: tlsServerName # Optional.
-    value : "[tls_config_server_name]"
-  - name: vaultTokenMountPath # Required. Path to token file.
-    value : "[path_to_file_containing_token]"
-  - name: vaultKVPrefix # Optional. Default: "dapr"
     value : "[vault_prefix]"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将 Secret 明文存储。 The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field               | Required | Details                                                                          | Example                    |
+| 字段                  | Required | Details                                                                          | Example                    |
 | ------------------- |:--------:| -------------------------------------------------------------------------------- | -------------------------- |
 | vaultAddr           |    N     | The address of the Vault server. Defaults to `"https://127.0.0.1:8200"`          | `"https://127.0.0.1:8200"` |
 | caCert              |    N     | Certificate Authority use only one of the options. The encoded cacerts to use    | `"cacerts"`                |

@@ -6,13 +6,13 @@ weight: 5000
 description: "How to configure Dapr to use gRPC for low-latency, high performance scenarios"
 ---
 
-Dapr implements both an HTTP and a gRPC API for local calls. Dapr implements both an HTTP and a gRPC API for local calls. gRPC is useful for low-latency, high performance scenarios and has language integration using the proto clients.
+Dapr implements both an HTTP and a gRPC API for local calls. gRPC is useful for low-latency, high performance scenarios and has language integration using the proto clients.
 
 You can find a list of auto-generated clients [here]({{< ref sdks >}}).
 
 The Dapr runtime implements a [proto service](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) that apps can communicate with via gRPC.
 
-In addition to calling Dapr via gRPC, Dapr can communicate with an application via gRPC. In addition to calling Dapr via gRPC, Dapr can communicate with an application via gRPC. To do that, the app needs to host a gRPC server and implements the [Dapr appcallback service](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/appcallback.proto)
+In addition to calling Dapr via gRPC, Dapr can communicate with an application via gRPC. To do that, the app needs to host a gRPC server and implements the [Dapr appcallback service](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/appcallback.proto)
 
 ## Configuring Dapr to communicate with an app via gRPC
 

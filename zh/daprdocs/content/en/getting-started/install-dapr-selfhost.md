@@ -82,8 +82,8 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 
 On `dapr init`, the CLI also creates a default components folder which includes several YAML files with definitions for a state store, pub/sub and zipkin. These will be read by the Dapr sidecar, telling it to use the Redis container for state management and messaging and the Zipkin container for collecting traces.
 
-- In Linux/MacOS Dapr is initialized with default components and files in `$HOME/.dapr`.
-- For Windows Dapr is initialized to `%USERPROFILE%\.dapr\`
+- 在 Linux/MacOS 中 Dapr 使用默认组件和文件的路径是 `$HOME.dapr`。
+- Windows 中，Dapr 初始化路径到 `%USERPROFILE%\.dapr\`
 
 
 {{< tabs "Linux/MacOS" "Windows">}}

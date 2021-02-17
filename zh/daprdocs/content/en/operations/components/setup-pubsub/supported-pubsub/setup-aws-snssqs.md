@@ -37,12 +37,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                    | Required | Details                                                                                                                                                                                                                  | Example                                      |
+| 字段                       | Required | Details                                                                                                                                                                                                                  | 示例                                           |
 | ------------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
 | accessKey                |    Y     | ID of the AWS account with appropriate permissions to SNS and SQS. Can be `secretKeyRef` to use a secret reference                                                                                                       | `"AKIAIOSFODNN7EXAMPLE"`                     |
 | secretKey                |    Y     | Secret for the AWS user. Can be `secretKeyRef` to use a secret reference                                                                                                                                                 | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
@@ -59,9 +59,9 @@ The above example uses secrets as plain strings. The above example uses secrets 
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" >}}
 
 {{% codetab %}}
-For local development the [localstack project](https://github.com/localstack/localstack) is used to integrate AWS SNS/SQS. Follow the instructions [here](https://github.com/localstack/localstack#installing) to install the localstack CLI. Follow the instructions [here](https://github.com/localstack/localstack#installing) to install the localstack CLI.
+For local development the [localstack project](https://github.com/localstack/localstack) is used to integrate AWS SNS/SQS. Follow the instructions [here](https://github.com/localstack/localstack#installing) to install the localstack CLI.
 
-In order to use localstack with your pubsub binding, you need to provide the `endpoint` configuration in the component metadata. The `endpoint` is unncessary when running against production AWS. The `endpoint` is unncessary when running against production AWS.
+In order to use localstack with your pubsub binding, you need to provide the `endpoint` configuration in the component metadata. The `endpoint` is unncessary when running against production AWS.
 
 See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
 
@@ -83,7 +83,7 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-To run localstack on Kubernetes, you can apply the configuration below. To run localstack on Kubernetes, you can apply the configuration below. Localstack is then reachable at the DNS name `http://localstack.default.svc.cluster.local:4566` (assuming this was applied to the default namespace) and this should be used as the `endpoint`
+To run localstack on Kubernetes, you can apply the configuration below. Localstack is then reachable at the DNS name `http://localstack.default.svc.cluster.local:4566` (assuming this was applied to the default namespace) and this should be used as the `endpoint`
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -128,7 +128,7 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-In order to run in AWS, you should create an IAM user with permissions to the SNS and SQS services. Use the account ID and account secret and plug them into the `awsAccountID` and `awsAccountSecret` in the component metadata using kubernetes secrets. Use the `AWS account ID` and `AWS account secret` and plug them into the `accessKey` and `secretKey` in the component metadata using Kubernetes secrets and `secretKeyRef`.
+In order to run in AWS, you should create an IAM user with permissions to the SNS and SQS services. Use the `AWS account ID` and `AWS account secret` and plug them into the `accessKey` and `secretKey` in the component metadata using Kubernetes secrets and `secretKeyRef`.
 {{% /codetab %}}
 
 {{< /tabs >}}

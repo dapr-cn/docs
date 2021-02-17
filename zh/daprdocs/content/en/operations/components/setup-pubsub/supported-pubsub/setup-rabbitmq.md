@@ -37,12 +37,12 @@ spec:
     value: parallel
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                                                                                                                                                                                               | Example                           |
+| 字段                | Required | Details                                                                                                                                                                                                                                               | 示例                                |
 | ----------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | host              |    Y     | Connection-string for the rabbitmq host                                                                                                                                                                                                               | `amqp://user:pass@localhost:5672` |
 | durable           |    N     | Whether or not to use [durable](https://www.rabbitmq.com/queues.html#durability) queues. Defaults to `"false"`                                                                                                                                        | `"true"`, `"false"`               |
@@ -78,7 +78,7 @@ helm install rabbitmq stable/rabbitmq
 
 Look at the chart output and get the username and password.
 
-This will install RabbitMQ into the `default` namespace. This will install RabbitMQ into the `default` namespace. To interact with RabbitMQ, find the service with: `kubectl get svc rabbitmq`.
+This will install RabbitMQ into the `default` namespace. To interact with RabbitMQ, find the service with: `kubectl get svc rabbitmq`.
 
 For example, if installing using the example above, the RabbitMQ server client address would be:
 

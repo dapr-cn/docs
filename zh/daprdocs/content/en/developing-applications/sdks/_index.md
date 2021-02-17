@@ -29,7 +29,7 @@ The Dapr SDKs are the easiest way for you to get Dapr into your application. Cho
 
 ## SDK languages
 
-| Language                                   |     State      | Client SDK |         Service Extensions         |                                        Actor SDK                                         |
+| 语言                                         |   状态 （State）   | Client SDK |         Service Extensions         |                                        Actor SDK                                         |
 | ------------------------------------------ |:--------------:|:----------:|:----------------------------------:|:----------------------------------------------------------------------------------------:|
 | [.NET](https://github.com/dapr/dotnet-sdk) | In Development |     ✔      |            ASP.NET Core            |                                            ✔                                             |
 | [Python]({{< ref python >}})               | In Development |     ✔      | [gRPC]({{< ref python-grpc.md >}}) | [FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |

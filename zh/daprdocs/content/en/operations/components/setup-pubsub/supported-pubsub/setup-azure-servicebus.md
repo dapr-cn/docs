@@ -49,12 +49,12 @@ spec:
 > __NOTE:__ The above settings are shared across all topics that use this component.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                          | Required | Details                                                                                                | Example                                                                                                                                        |
+| 字段                             | Required | Details                                                                                                | 示例                                                                                                                                             |
 | ------------------------------ |:--------:| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | connectionString               |    Y     | Connection-string for the Event Hubs                                                                   | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
 | timeoutInSec                   |    N     | Timeout for sending messages and management operations. Default: `60`                                  | `30`                                                                                                                                           |

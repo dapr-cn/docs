@@ -8,7 +8,7 @@ description: "Recommendations and practices for deploying Dapr to a Kubernetes c
 
 ## Cluster capacity requirements
 
-For a production ready Kubernetes cluster deployment, it is recommended you run a cluster of 3 worker nodes to support a highly-available setup of the control plane. The Dapr control plane pods are designed to be lightweight and require the following resources in a production-ready setup: The Dapr control plane pods are designed to be lightweight and require the following resources in a production-ready setup:
+For a production ready Kubernetes cluster deployment, it is recommended you run a cluster of 3 worker nodes to support a highly-available setup of the control plane. The Dapr control plane pods are designed to be lightweight and require the following resources in a production-ready setup:
 
 *Note: For more info on CPU and Memory resource units and their meaning, see [this](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes) link*
 
@@ -20,7 +20,7 @@ For a production ready Kubernetes cluster deployment, it is recommended you run 
 | Placement        | Limit: 1, Request: 250m   | Limit: 500Mi, Request: 100Mi |
 | Dashboard        | Limit: 200m, Request: 50m | Limit: 200Mi, Request: 20Mi  |
 
-To change the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "kubernetes-annotations.md" >}}). The specific annotations related to resource constraints are: The specific annotations related to resource constraints are:
+To change the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "kubernetes-annotations.md" >}}). The specific annotations related to resource constraints are:
 
 * `dapr.io/sidecar-cpu-limit`
 * `dapr.io/sidecar-memory-limit`
@@ -47,11 +47,11 @@ The Dapr sidecar requires the following resources in a production-ready setup:
 
 *Note: Since Dapr is intended to do much of the I/O heavy lifting for your app, it's expected that the resources given to Dapr enable you to drastically reduce the resource allocations for the application*
 
-The CPU and memory limits above account for the fact that Dapr is intended to do a lot of high performant I/O bound operations. Based on your app needs, you can increase or decrease those limits accordingly. Based on your app needs, you can increase or decrease those limits accordingly.
+The CPU and memory limits above account for the fact that Dapr is intended to do a lot of high performant I/O bound operations. Based on your app needs, you can increase or decrease those limits accordingly.
 
 ## Deploying Dapr with Helm
 
-When deploying to a production cluster, it's recommended to use Helm. The Dapr CLI installation into a Kubernetes cluster is for a development and test only setup. When deploying to a production cluster, it's recommended to use Helm. The Dapr CLI installation into a Kubernetes cluster is for a development and test only setup. You can find information [here]({{< ref "install-dapr-selfhost.md#using-helm-advanced" >}}) on how to deploy Dapr using Helm.
+When deploying to a production cluster, it's recommended to use Helm. The Dapr CLI installation into a Kubernetes cluster is for a development and test only setup. You can find information [here]({{< ref "install-dapr-selfhost.md#using-helm-advanced" >}}) on how to deploy Dapr using Helm.
 
 When deploying Dapr in a production-ready configuration, it's recommended to deploy with a highly available configuration of the control plane:
 
@@ -61,11 +61,11 @@ helm install dapr dapr/dapr --version=<Dapr chart version> --namespace dapr-syst
 
 This command will run 3 replicas of each control plane pod in the dapr-system namespace.
 
-*Note: The Dapr Helm chart automatically deploys with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy the Dapr control plane to Windows nodes, but most users should not need to. For more information see [Deploying to a Hybrid Linux/Windows K8s Cluster]({{< ref "kubernetes-hybrid-clusters.md" >}}) You can deploy the Dapr control plane to Windows nodes, but most users should not need to. For more information see [Deploying to a Hybrid Linux/Windows K8s Cluster]({{< ref "kubernetes-hybrid-clusters.md" >}})*
+*Note: The Dapr Helm chart automatically deploys with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy the Dapr control plane to Windows nodes, but most users should not need to. For more information see [Deploying to a Hybrid Linux/Windows K8s Cluster]({{< ref "kubernetes-hybrid-clusters.md" >}})*
 
 ## Upgrading Dapr with Helm
 
-Dapr supports zero downtime upgrades. The upgrade path includes the following steps: The upgrade path includes the following steps:
+Dapr supports zero downtime upgrades. The upgrade path includes the following steps:
 
 1. Upgrading a CLI version (optional but recommended)
 2. Updating the Dapr control plane
@@ -73,7 +73,7 @@ Dapr supports zero downtime upgrades. The upgrade path includes the following st
 
 ### Upgrading the CLI
 
-To upgrade the Dapr CLI, [download the latest version](https://github.com/dapr/cli/releases) of the CLI. After you downloaded the binary, it's recommended you put the CLI binary in your path. After you downloaded the binary, it's recommended you put the CLI binary in your path.
+To upgrade the Dapr CLI, [download the latest version](https://github.com/dapr/cli/releases) of the CLI. After you downloaded the binary, it's recommended you put the CLI binary in your path.
 
 ### Updating the control plane
 
@@ -106,7 +106,7 @@ data:
 kind: Secret
 ```
 
-Copy the contents of `ca.crt`, `issuer.crt` and `issuer.key` and base64 decode them. Save these certificates as files. Save these certificates as files.
+Copy the contents of `ca.crt`, `issuer.crt` and `issuer.key` and base64 decode them. Save these certificates as files.
 
 You should have the following files containing the base64 decoded text from the secret saved on your disk:
 
@@ -135,7 +135,7 @@ NAME        CHART VERSION   APP VERSION DESCRIPTION
 dapr/dapr   1.0.0-rc.1      1.0.0-rc.1  A Helm chart for Dapr on Kubernetes
 ```
 
-The APP VERSION column tells us which Dapr runtime version is installed by the chart. The APP VERSION column tells us which Dapr runtime version is installed by the chart. Now, use the following command to upgrade Dapr to your desired runtime version providing a path to the certificate files you saved before:
+The APP VERSION column tells us which Dapr runtime version is installed by the chart. Now, use the following command to upgrade Dapr to your desired runtime version providing a path to the certificate files you saved before:
 
 > Remove `--set global.ha.enabled=true` if current Dapr installation has not been deployed in HA mode.
 
@@ -150,7 +150,7 @@ helm upgrade dapr dapr/dapr \
     --set global.ha.enabled=true
 ```
 
-Kubernetes now performs a rolling update. Wait until all the new pods appear as running: Wait until all the new pods appear as running:
+Kubernetes now performs a rolling update. Wait until all the new pods appear as running:
 
 ```bash
 kubectl get po -n dapr-system -w
@@ -176,11 +176,11 @@ dapr-operator          dapr-system  True     Running  1         1.0.0-rc.1  1m  
 dapr-placement-server  dapr-system  True     Running  1         1.0.0-rc.1  1m   2020-11-16 14:42.19
 ```
 
-*Note: If new fields have been added to the target Helm Chart being upgraded to, the `helm upgrade` command will fail. Note: If new fields have been added to the target Helm Chart being upgraded to, the `helm upgrade` command will fail. If that happens, you need to find which new fields have been added in the new chart and add them as parameters to the upgrade command, for example: `--set <field-name>=<value>`.*
+*Note: If new fields have been added to the target Helm Chart being upgraded to, the `helm upgrade` command will fail. If that happens, you need to find which new fields have been added in the new chart and add them as parameters to the upgrade command, for example: `--set <field-name>=<value>`.*
 
 #### Updating the data plane (sidecars)
 
-The last step is to update pods that are running Dapr to pick up the new version of the Dapr runtime. To do that, simply issue a rollout restart command for any deployment that has the `dapr.io/enabled` annotation: To do that, simply issue a rollout restart command for any deployment that has the `dapr.io/enabled` annotation:
+The last step is to update pods that are running Dapr to pick up the new version of the Dapr runtime. To do that, simply issue a rollout restart command for any deployment that has the `dapr.io/enabled` annotation:
 
 ```
 kubectl rollout restart deploy/<Application deployment name>
@@ -256,11 +256,11 @@ Properly configured, Dapr not only be secured with regards to it's control plane
 
 It is recommended that a production-ready deployment includes the following settings:
 
-1. Mutual Authentication (mTLS) should be enabled. Note that Dapr has mTLS on by default. Mutual Authentication (mTLS) should be enabled. Note that Dapr has mTLS on by default. For details on how to bring your own certificates, see [here]({{< ref "mtls.md#bringing-your-own-certificates" >}})
+1. Mutual Authentication (mTLS) should be enabled. Note that Dapr has mTLS on by default. For details on how to bring your own certificates, see [here]({{< ref "mtls.md#bringing-your-own-certificates" >}})
 
-2. Dapr API authentication is enabled (this is the between your application and the Dapr sidecar). To secure the Dapr API from unauthorized access, it is recommended to enable Dapr's token based auth. See [here]({{< ref "api-token.md" >}}) for details To secure the Dapr API from unauthorized access, it is recommended to enable Dapr's token based auth. See [here]({{< ref "api-token.md" >}}) for details
+2. Dapr API authentication is enabled (this is the between your application and the Dapr sidecar). To secure the Dapr API from unauthorized access, it is recommended to enable Dapr's token based auth. See [here]({{< ref "api-token.md" >}}) for details
 
-3. All component YAMLs should have secret data configured in a secret store and not hard-coded in the YAML file. See [here]({{< ref "component-secrets.md" >}}) on how to use secrets with Dapr components See [here]({{< ref "component-secrets.md" >}}) on how to use secrets with Dapr components
+3. All component YAMLs should have secret data configured in a secret store and not hard-coded in the YAML file. See [here]({{< ref "component-secrets.md" >}}) on how to use secrets with Dapr components
 
 4. The Dapr control plane is installed on a separate namespace such as `dapr-system`, and never into the `default` namespace
 
@@ -268,10 +268,10 @@ Dapr also supports scoping components for certain applications. This is not a re
 
 ## Tracing and metrics configuration
 
-Dapr has tracing and metrics enabled by default. Dapr has tracing and metrics enabled by default. To configure a tracing backend for Dapr visit [this]({{< ref "setup-tracing.md" >}}) link.
+Dapr has tracing and metrics enabled by default. To configure a tracing backend for Dapr visit [this]({{< ref "setup-tracing.md" >}}) link.
 
 For metrics, Dapr exposes a Prometheus endpoint listening on port 9090 which can be scraped by Prometheus.
 
-It is *recommended* that you set up distributed tracing and metrics for your applications and the Dapr control plane in production. If you already have your own observability set-up, you can disable tracing and metrics for Dapr. If you already have your own observability set-up, you can disable tracing and metrics for Dapr.
+It is *recommended* that you set up distributed tracing and metrics for your applications and the Dapr control plane in production. If you already have your own observability set-up, you can disable tracing and metrics for Dapr.
 
 To setup Prometheus, Grafana and other monitoring tools with Dapr, visit [this]({{< ref "monitoring" >}}) link.

@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "Middleware pipelines"
-linkTitle: "Middleware"
+title: "中间件管道"
+linkTitle: "中间件"
 weight: 400
-description: "Custom processing pipelines of chained middleware components"
+description: "链式中间件组件的自定义处理管道"
 ---
 
-Dapr allows custom processing pipelines to be defined by chaining a series of middleware components. A request goes through all defined middleware components before it's routed to user code, and then goes through the defined middleware, in reverse order, before it's returned to the client, as shown in the following diagram. A request goes through all defined middleware components before it's routed to user code, and then goes through the defined middleware, in reverse order, before it's returned to the client, as shown in the following diagram.
+Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 请求在路由到用户代码之前经过所有已定义的中间件组件，然后在返回到客户机之前，按相反顺序经过已定义的中间件，如下图中所示。
 
 <img src="/images/middleware.png" width=400>
 
-## Customize processing pipeline
+## 自定义处理管道
 
-When launched, a Dapr sidecar constructs a middleware processing pipeline. By default the pipeline consists of [tracing middleware]({{< ref tracing.md >}}) and CORS middleware. Additional middleware, configured by a Dapr [configuration]({{< ref configuration-concept.md >}}), can be added to the pipeline in the order they are defined. The pipeline applies to all Dapr API endpoints, including state, pub/sub, service invocation, bindings, security and others. By default the pipeline consists of [tracing middleware]({{< ref tracing.md >}}) and CORS middleware. Additional middleware, configured by a Dapr [configuration]({{< ref configuration-concept.md >}}), can be added to the pipeline in the order they are defined. The pipeline applies to all Dapr API endpoints, including state, pub/sub, service invocation, bindings, security and others.
+启动后， Dapr sidecar 会构建中间件处理管道。 默认情况下，管道由 [跟踪中间件]({{< ref tracing.md >}}) 和 CORS 中间组成。 其他中间件，由 Dapr [ configuration ]({{< ref configuration-concept.md >}}) 配置，按照定义的顺序添加到管道中。 管道适用于所有 Dapr API 端点，包括状态，发布/订阅，服务调用，绑定，安全和其他。
 
-> **NOTE:** Dapr provides a **middleware.http.uppercase** pre-registered component that changes all text in a request body to uppercase. You can use it to test/verify if your custom pipeline is in place. You can use it to test/verify if your custom pipeline is in place.
+> **注意：** Dapr 提供 **middleware.http.uppercase** 预注册组件，该组件将请求正文中的所有文本更改为大写。 您可以使用它来测试/验证自定义管道是否已就绪。
 
-The following configuration example defines a custom pipeline that uses a [OAuth 2.0 middleware]({{< ref oauth.md >}}) and an uppercase middleware component. In this case, all requests are authorized through the OAuth 2.0 protocol, and transformed to uppercase text, before they are forwarded to user code. In this case, all requests are authorized through the OAuth 2.0 protocol, and transformed to uppercase text, before they are forwarded to user code.
+以下配置示例定义了使用 [OAuth 2.0 中间件]({{< ref oauth.md >}}) 和大写中间件组件的自定义管道。 在这种情况下，在转发到用户代码之前，所有请求都将通过 OAuth 2.0 协议进行授权，并转换为大写文本。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,9 +33,9 @@ spec:
       type: middleware.http.uppercase
 ```
 
-## Writing a custom middleware
+## 编写自定义中间件
 
-Dapr uses [FastHTTP](https://github.com/valyala/fasthttp) to implement it's HTTP server. Hence, your HTTP middleware needs to be written as a FastHTTP handler. Your middleware needs to implement a middleware interface, which defines a **GetHandler** method that returns a **fasthttp.RequestHandler**: Hence, your HTTP middleware needs to be written as a FastHTTP handler. Your middleware needs to implement a middleware interface, which defines a **GetHandler** method that returns a **fasthttp.RequestHandler**:
+Dapr 使用 [FastHTTP](https://github.com/valyala/fasthttp) 实现其 HTTP 服务器。 因此，您的 HTTP 中间件也需要编写为 FastHTTP handler。 中间件需要实现 middleware 接口，该接口定义 **GetHandler** 方法，该方法返回 **fasthttp.RequestHandler**:
 
 ```go
 type Middleware interface {
@@ -43,7 +43,7 @@ type Middleware interface {
 }
 ```
 
-Your handler implementation can include any inbound logic, outbound logic, or both:
+处理程序实现可以包括任何入站（inbound）逻辑、出站（outbound）逻辑或两者兼有：
 
 ```go
 func GetHandler(metadata Metadata) fasthttp.RequestHandler {
@@ -57,10 +57,10 @@ func GetHandler(metadata Metadata) fasthttp.RequestHandler {
 }
 ```
 
-## Adding new middleware components
-Your middleware component can be contributed to the [components-contrib repository](https://github.com/dapr/components-contrib/tree/master/middleware).
+## 添加新的中间件组件
+您的中间件组件可以贡献到 [components-contrib 仓库](https://github.com/dapr/components-contrib/tree/master/middleware)。
 
-Then submit another pull request against the [Dapr runtime repository](https://github.com/dapr/dapr) to register the new middleware type. Then submit another pull request against the [Dapr runtime repository](https://github.com/dapr/dapr) to register the new middleware type. You'll need to modify the **Load()** method in [registry.go](https://github.com/dapr/dapr/blob/master/pkg/components/middleware/http/registry.go) to register your middleware using the **Register** method.
+然后，在 [Dapr 运行时仓库](https://github.com/dapr/dapr) 提交另一个拉取请求（pull request/Pr），以注册新的中间件类型。 您需要修改位于 [ registry.go](https://github.com/dapr/dapr/blob/master/pkg/components/middleware/http/registry.go) 中的 **Load()** 方法以使用 **Register** 方法注册中间件。
 
-## Next steps
-* [How-To: Configure API authorization with OAuth]({{< ref oauth.md >}})
+## 下一步
+* [操作方法：使用 OAuth 配置 API 授权]({{< ref oauth.md >}})

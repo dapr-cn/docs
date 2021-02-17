@@ -24,20 +24,16 @@ spec:
   - name: namespace
     value: <REPLACE-WITH-NAMESPACE> # Required. The aerospike namespace.
   - name: set
-    value: <REPLACE-WITH-SET> # Optional. A comma delimited string of hosts. Example: "aerospike:3000,aerospike2:3000"
-  - name: namespace
-    value: <REPLACE-WITH-NAMESPACE> # Required. The aerospike namespace.
-  - name: set
     value: <REPLACE-WITH-SET> # Optional
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field     | Required | Details                           | Example                                                |
+| 字段        | Required | Details                           | 示例                                                     |
 | --------- |:--------:| --------------------------------- | ------------------------------------------------------ |
 | hosts     |    Y     | Host name/port of database server | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
 | namespace |    Y     | The Aerospike namespace           | `"namespace"`                                          |
@@ -65,7 +61,7 @@ helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubato
 helm install --name my-aerospike --namespace aerospike stable/aerospike
 ```
 
-This installs Aerospike into the `aerospike` namespace. This will install Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
+This installs Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
 
 For example, if installing using the example above, the Aerospike host address would be:
 
@@ -74,7 +70,7 @@ For example, if installing using the example above, the Aerospike host address w
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

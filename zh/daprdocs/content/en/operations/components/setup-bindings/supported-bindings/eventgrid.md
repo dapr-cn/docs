@@ -44,7 +44,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Input Binding Metadata
@@ -52,14 +52,14 @@ The above example uses secrets as plain strings. The above example uses secrets 
 - `subscriptionId` is the Azure subscription id in which this Event Grid Event Subscription should be created
 - `clientId` is the client id that should be used by the binding to create or update the Event Grid Event Subscription
 - `clientSecret`  is the client secret that should be used by the binding to create or update the Event Grid Event Subscription
-- `subscriberEndpoint` is the https (required) endpoint in which Event Grid will handshake and send Cloud Events. `subscriberEndpoint` is the https (required) endpoint in which Event Grid will handshake and send Cloud Events. If you aren't re-writing URLs on ingress, it should be in the form of: `https://[YOUR HOSTNAME]/api/events` If testing on your local machine, you can use something like [ngrok](https://ngrok.com) to create a public endpoint.
+- `subscriberEndpoint` is the https (required) endpoint in which Event Grid will handshake and send Cloud Events. If you aren't re-writing URLs on ingress, it should be in the form of: `https://[YOUR HOSTNAME]/api/events` If testing on your local machine, you can use something like [ngrok](https://ngrok.com) to create a public endpoint.
 - `handshakePort` is the container port that the input binding will listen on for handshakes and events
-- `scope` is the identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an Event Grid topic. For example: The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an Event Grid topic. For example:
+- `scope` is the identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an Event Grid topic. For example:
     - '/subscriptions/{subscriptionId}/' for a subscription
     - '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a resource group
     - '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}' for a resource
     - '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}' for an Event Grid topic > Values in braces {} should be replaced with actual values.
-- `eventSubscriptionName` (Optional) is the name of the event subscription. `eventSubscriptionName` (Optional) is the name of the event subscription. Event subscription names must be between 3 and 64 characters in length and should use alphanumeric letters only.
+- `eventSubscriptionName` (Optional) is the name of the event subscription. Event subscription names must be between 3 and 64 characters in length and should use alphanumeric letters only.
 
 ## Output Binding Metadata
 - `accessKey` is the Access Key to be used for publishing an Event Grid Event to a custom topic
@@ -70,7 +70,7 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 ## Additional information
 
-Event Grid Binding creates an [event subscription](https://docs.microsoft.com/en-us/azure/event-grid/concepts#event-subscriptions) when Dapr initializes. Your Service Principal needs to have the RBAC permissions to enable this. Your Service Principal needs to have the RBAC permissions to enable this.
+Event Grid Binding creates an [event subscription](https://docs.microsoft.com/en-us/azure/event-grid/concepts#event-subscriptions) when Dapr initializes. Your Service Principal needs to have the RBAC permissions to enable this.
 
 ```bash
 # First ensure that Azure Resource Manager provider is registered for Event Grid
@@ -102,7 +102,7 @@ dapr run --app-id dotnetwebapi --app-port 5000 --dapr-http-port 3500 dotnet run
 
 ### Testing om Kubernetes
 
-Azure Event Grid requires a valid HTTPS endpoint for custom webhooks. Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/). Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/).
+Azure Event Grid requires a valid HTTPS endpoint for custom webhooks. Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/).
 
 To get started, first create `dapr-annotations.yaml` for Dapr annotations
 
@@ -128,7 +128,7 @@ If deploying to Azure Kubernetes Service, you can follow [the official MS docume
 - Install cert-manager
 - Create a CA cluster issuer
 
-Final step for enabling communication between Event Grid and Dapr is to define `http` and custom port to your app's service and an `ingress` in Kubernetes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes.
+Final step for enabling communication between Event Grid and Dapr is to define `http` and custom port to your app's service and an `ingress` in Kubernetes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes.
 
 ```yaml
 # dotnetwebapi.yaml
@@ -216,7 +216,7 @@ kubectl apply -f dotnetwebapi.yaml
 
 #### Troubleshooting possible issues with Nginx controller
 
-After initial deployment the "Daprized" Nginx controller can malfunction. To check logs and fix issue (if it exists) follow these steps. To check logs and fix issue (if it exists) follow these steps.
+After initial deployment the "Daprized" Nginx controller can malfunction. To check logs and fix issue (if it exists) follow these steps.
 
 ```bash
 $ kubectl get pods -l app=nginx-ingress
@@ -229,11 +229,6 @@ $ kubectl logs nginx-nginx-ingress-controller-649df94867-fp6mg nginx-ingress-con
 
 # If you see 503s logged from calls to webhook endpoint '/api/events' restart the pod
 # .."OPTIONS /api/events HTTP/1.1" 503..
-
-$ kubectl delete pod nginx-nginx-ingress-controller-649df94867-fp6mg
-
-# Check the logs again - it should start returning 200
-# .."OPTIONS /api/events HTTP/1.1" 200..
 
 $ kubectl delete pod nginx-nginx-ingress-controller-649df94867-fp6mg
 

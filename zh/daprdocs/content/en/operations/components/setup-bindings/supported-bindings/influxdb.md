@@ -27,13 +27,13 @@ spec:
     value: <BUCKET>
 ```
 
-- `url` is the URL for the InfluxDB instance. eg. http://localhost:8086 eg. http://localhost:8086
+- `url` is the URL for the InfluxDB instance. eg. http://localhost:8086
 - `token` is the authorization token for InfluxDB.
 - `org` is the InfluxDB organization.
 - `bucket` bucket name to write to.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Output Binding Supported Operations

@@ -31,12 +31,12 @@ spec:
     value: "[aws_session_token]"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field        | Required | Details                                                                 | Example             |
+| 字段           | Required | Details                                                                 | Example             |
 | ------------ |:--------:| ----------------------------------------------------------------------- | ------------------- |
 | region       |    Y     | The specific AWS region the AWS Secrets Manager instance is deployed in | `"us-east-1"`       |
 | accessKey    |    Y     | The AWS Access Key to access this resource                              | `"key"`             |

@@ -24,20 +24,16 @@ spec:
   - name: maxIdleConnections
     value: <REPLACE-WITH-MAX-IDLE-CONNECTIONS> # Optional. default: "2"
   - name: timeout
-    value: <REPLACE-WITH-TIMEOUT> # Optional. default: "1000ms" Example: "memcached.default.svc.cluster.local:11211"
-  - name: maxIdleConnections
-    value: <REPLACE-WITH-MAX-IDLE-CONNECTIONS> # Optional. default: "2"
-  - name: timeout
     value: <REPLACE-WITH-TIMEOUT> # Optional. default: "1000ms"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field              | Required | Details                                               | Example                                       |
+| 字段                 | Required | Details                                               | 示例                                            |
 | ------------------ |:--------:| ----------------------------------------------------- | --------------------------------------------- |
 | hosts              |    Y     | Comma delimited endpoints                             | `"memcached.default.svc.cluster.local:11211"` |
 | maxIdleConnections |    N     | The max number of idle connections. Defaults to `"2"` | `"3"`                                         |
@@ -64,7 +60,7 @@ The easiest way to install Memcached on Kubernetes is by using the [Helm chart](
 helm install memcached stable/memcached
 ```
 
-This installs Memcached into the `default` namespace. This will install Memcached into the `default` namespace. To interact with Memcached, find the service with: `kubectl get svc memcached`.
+This installs Memcached into the `default` namespace. To interact with Memcached, find the service with: `kubectl get svc memcached`.
 
 For example, if installing using the example above, the Memcached host address would be:
 
@@ -73,7 +69,7 @@ For example, if installing using the example above, the Memcached host address w
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

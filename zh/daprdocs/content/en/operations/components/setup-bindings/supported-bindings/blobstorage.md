@@ -28,10 +28,10 @@ spec:
 - `storageAccount` is the Blob Storage account name.
 - `storageAccessKey` is the Blob Storage access key.
 - `container` is the name of the Blob Storage container to write to.
-- `decodeBase64` optional configuration to decode base64 file content before saving to Blob Storage. (In case of saving a file with binary content). "true" is the only allowed positive value. Other positive variations like "True" are not acceptable. (In case of saving a file with binary content). "true" is the only allowed positive value. Other positive variations like "True" are not acceptable.
+- `decodeBase64` optional configuration to decode base64 file content before saving to Blob Storage. (In case of saving a file with binary content). "true" is the only allowed positive value. Other positive variations like "True" are not acceptable.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Output Binding Supported Operations
@@ -63,7 +63,6 @@ The response body will contain the following JSON:
 
 ```json
 {
-   "blobURL": "https://<your account name>. {
    "blobURL": "https://<your account name>. blob.core.windows.net/<your container name>/<filename>"
 }
 
@@ -95,7 +94,7 @@ The response body will contain the value stored in the blob object.
 
 ## Metadata information
 
-By default the Azure Blob Storage output binding will auto generate a UUID as blob filename and not assign any system or custom metadata to it. It is configurable in the Metadata property of the message (all optional). It is configurable in the Metadata property of the message (all optional).
+By default the Azure Blob Storage output binding will auto generate a UUID as blob filename and not assign any system or custom metadata to it. It is configurable in the Metadata property of the message (all optional).
 
 Applications publishing to an Azure Blob Storage output binding should send a message with the following contract:
 ```json

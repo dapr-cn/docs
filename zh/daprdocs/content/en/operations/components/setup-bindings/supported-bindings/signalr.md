@@ -24,16 +24,16 @@ spec:
 ```
 
 - The metadata `connectionString` contains the Azure SignalR connection string.
-- The optional `hub` metadata value defines the hub in which the message will be send. The optional `hub` metadata value defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub").
+- The optional `hub` metadata value defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub").
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 
 ## Additional information
 
-By default the Azure SignalR output binding will broadcast messages to all connected users. To narrow the audience there are two options, both configurable in the Metadata property of the message: To narrow the audience there are two options, both configurable in the Metadata property of the message:
+By default the Azure SignalR output binding will broadcast messages to all connected users. To narrow the audience there are two options, both configurable in the Metadata property of the message:
 
 - group: will send the message to a specific Azure SignalR group
 - user: will send the message to a specific Azure SignalR user

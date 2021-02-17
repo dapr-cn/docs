@@ -28,12 +28,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field       | Required | Details                                                                                                | Example               |
+| 字段          | Required | Details                                                                                                | Example               |
 | ----------- |:--------:| ------------------------------------------------------------------------------------------------------ | --------------------- |
 | accountName |    Y     | The storage account name                                                                               | `"mystorageaccount"`. |
 | accountKey  |    Y     | Primary or secondary storage key                                                                       | `"key"`               |
@@ -43,12 +43,12 @@ The above example uses secrets as plain strings. The above example uses secrets 
 
 [Follow the instructions](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) from the Azure documentation on how to create an Azure Storage Account.
 
-If you wish to create a table for Dapr to use, you can do so beforehand. If you wish to create a table for Dapr to use, you can do so beforehand. However, Table Storage state provider will create one for you automatically if it doesn't exist.
+If you wish to create a table for Dapr to use, you can do so beforehand. However, Table Storage state provider will create one for you automatically if it doesn't exist.
 
 In order to setup Azure Table Storage as a state store, you will need the following properties:
-- **AccountName**: The storage account name. For example: **mystorageaccount**.
+- **AccountName**: The storage account name. For example: **mystorageaccount**. For example: **mystorageaccount**.
 - **AccountKey**: Primary or secondary storage key.
-- **TableName**: The name of the table to be used for Dapr state. The table will be created for you if it doesn't exist. The table will be created for you if it doesn't exist.
+- **TableName**: The name of the table to be used for Dapr state. The table will be created for you if it doesn't exist.
 
 ## Partitioning
 
@@ -80,7 +80,7 @@ will create the following record in a table:
 Azure Table Storage state concurrency is achieved by using `ETag`s according to [the official documenation](https://docs.microsoft.com/en-us/azure/storage/common/storage-concurrency#managing-concurrency-in-table-storage).
 
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

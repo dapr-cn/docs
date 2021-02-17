@@ -26,7 +26,7 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field     | Required | Details                                                     | Example             |
+| 字段        | Required | Details                                                     | 示例                  |
 | --------- |:--------:| ----------------------------------------------------------- | ------------------- |
 | host      |    Y     | Address of the Pulsar broker. Default is `"localhost:6650"` | `"localhost:6650"`  |
 | enableTLS |    Y     | Enable TLS.  Default: `"false"`                             | `"true"`, `"false"` |

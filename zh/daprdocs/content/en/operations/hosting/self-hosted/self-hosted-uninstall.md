@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Uninstall Dapr in a self-hosted environment"
 linkTitle: "Uninstall Dapr"
 weight: 60000
@@ -11,7 +11,7 @@ The following CLI command removes the Dapr sidecar binaries and the placement co
 ```bash
 dapr uninstall
 ```
-The above command will not remove the Redis or Zipkin containers that were installed during `dapr init` by default, just in case you were using them for other purposes. To remove Redis, Zipkin, Actor Placement container, as well as the default Dapr directory located at `$HOME/.dapr` or `%USERPROFILE%\.dapr\`, run:
+The above command will not remove the Redis or Zipkin containers that were installed during `dapr init` by default, just in case you were using them for other purposes. This command won't remove the Redis or Zipkin containers by default, just in case you were using them for other purposes. To remove Redis, Zipkin, Actor Placement container, as well as the default Dapr directory located at `$HOME/.dapr` or `%USERPROFILE%\.dapr\`, run:
 
 ```bash
 dapr uninstall --all

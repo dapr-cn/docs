@@ -18,13 +18,13 @@ Fork [文档存储库](https://github.com/dapr/docs) 以处理任何更改
 
 遵循存储库 [README.md](https://github.com/dapr/docs/blob/master/README.md#environment-setup) 中的指示信息以在本地安装 Hugo 并构建 docs Web站点。
 
-## Branch guidance
+## 分支指南
 
-The Dapr docs handles branching differently than most code repositories. Instead of having a `master` or `main` branch, every branch is labeled to match the major and minor version of a runtime release. For the full list visit the [Docs repo](https://github.com/dapr/docs#branch-guidance)
+Dapr 文档处理分支的方式与大多数代码存储库不同。 每个分支都标记为运行时发行版的主版本和次要版本，而不存在 `master` 或 `main` 分支。 完整列表，请访问 [Docs repo](https://github.com/dapr/docs#branch-guidance)
 
-Overall, all updates should go into the docs branch for the latest release of Dapr. You can find this directly at https://github.com/dapr/docs, as the latest release will be the default branch. For any docs changes that are applicable to a release candidate or a pre-release version of the docs, make your changes into that particular branch.
+总体而言，所有更新都应进入对应 Dapr 最新版本的文档分支。 您可以直接在 https://github.com/dapr/docs 找到，因为最新版本将是默认分支。 对于适用于发布候选版本或文档的预发行版本的任何文档更改，请对该特定分支修改。
 
-For example, if you are fixing a typo, adding notes, or clarifying a point, make your changes into the default Dapr branch. If you are documenting an upcoming change to a component or the runtime, make your changes to the pre-release branch. Branches can be found in the [Docs repo](https://github.com/dapr/docs#branch-guidance)
+例如，如果要修复拼写错误、添加注释或澄清点，请在默认 Dapr 分支上变更。 如果要记录即将发生的组件或运行时的变更，请对预发行版分支进行修改。 分支可以在 [ Docs repo](https://github.com/dapr/docs#branch-guidance) 中找到
 
 ## 风格和语气
 应在所有 Dapr 文档中遵循这些约定，以确保所有文档的体验一致。
@@ -39,14 +39,14 @@ For example, if you are fixing a typo, adding notes, or clarifying a point, make
 ## 贡献新文档页面
 - 确保你所写的文件在层次结构中的位置是正确的。
 - 在可能的情况下，避免创建新的部分，很有可能在文档的层次结构中已经有一个合适的位置。
-- Make sure to include a complete [Hugo front-matter](#front-matter).
+- 确保包括完整的 [Hugo front-matter](#front-matter)。
 
 ### 贡献一个新的概念文档
 - 请确保读者能够理解为什么他们应该关注此功能。 它能帮他们解决什么问题?
 - 请确保文档引用该规范以获取使用 API 的示例。
 - 确保规范在名称，参数和术语方面与概念一致。 根据需要更新概念和规范。
 - 请避免重复该规范。 这个想法是为了给读者提供更多关于能力的信息和背景，以便他们可以尝试这个。 因此，尽可能提供更多的信息和实施细节。
-- Provide a link to the spec in the [Reference]({{X45X}}) section.
+- 提供指向 [参考资料]({{X45X}}) 中的规范的链接。
 - 在可能的情况下，参考一个实用的How-To文档。
 
 ### 贡献新的 How-To 指南

@@ -33,7 +33,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                          | Example               |
+| 字段              | Required | Details                                                                          | Example               |
 | --------------- |:--------:| -------------------------------------------------------------------------------- | --------------------- |
 | secretsFile     |    Y     | The path to the file where secrets are stored                                    | `"path/to/file.json"` |
 | nestedSeparator |    N     | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"` | `":"`                 |

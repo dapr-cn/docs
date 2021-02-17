@@ -54,7 +54,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field                   | Required | Details                                                                                                    | Example                         |
+| 字段                      | Required | Details                                                                                                    | 示例                              |
 | ----------------------- |:--------:| ---------------------------------------------------------------------------------------------------------- | ------------------------------- |
 | natsURL                 |    Y     | NATS server address URL                                                                                    | "`nats://localhost:4222`"       |
 | natsStreamingClusterID  |    Y     | NATS cluster ID                                                                                            | `"clusterId"`                   |

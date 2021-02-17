@@ -11,7 +11,7 @@ weight: 300
 观看如何使用双向输出绑定的 [视频](https://www.bilibili.com/video/BV1EA411W71L?p=3&t=1960) 。
 
 
-## 1. 1. 创建绑定
+## 1. 创建绑定
 
 输出绑定表示 Dapr 将使用调用和向其发送消息的资源。
 
@@ -41,19 +41,19 @@ spec:
 
 在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
-## 2. 2. 发送事件
+## 2. 发送事件
 
 现在剩下的就是在正在运行的 Dapr 实例上调用绑定终结点。
 
 您可以使用 HTTP 来这样做：
 
 ```bash
-curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }' }, "operation": "create" }'
+curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }'
 ```
 
 如上文所见，您使用了要调用的绑定的名称来调用 `/binding` 终结点。 在我们的示例中，它的名称是 `myevent` 。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
 
-您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 You can check [here]({{< ref supported-bindings >}}) which operations are supported for every output binding.
+您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以查看 [这里]({{< ref supported-bindings >}}) 查看每个输出绑定都支持的操作。
 
 
 ## 参考资料

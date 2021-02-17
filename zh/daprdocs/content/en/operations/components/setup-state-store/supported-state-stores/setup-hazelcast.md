@@ -22,18 +22,16 @@ spec:
   - name: hazelcastServers
     value: <REPLACE-WITH-HOSTS> # Required. A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000"
   - name: hazelcastMap
-    value: <REPLACE-WITH-MAP> # Required. Hazelcast map configuration. A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000"
-  - name: hazelcastMap
     value: <REPLACE-WITH-MAP> # Required. Hazelcast map configuration.
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field            | Required | Details                             | Example                            |
+| 字段               | Required | Details                             | 示例                                 |
 | ---------------- |:--------:| ----------------------------------- | ---------------------------------- |
 | hazelcastServers |    Y     | A comma delimited string of servers | `"hazelcast:3000,hazelcast2:3000"` |
 | hazelcastMap     |    Y     | Hazelcast Map configuration         | `"foo-map"`                        |
@@ -58,7 +56,7 @@ The easiest way to install Hazelcast on Kubernetes is by using the [Helm chart](
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

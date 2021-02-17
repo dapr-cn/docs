@@ -29,24 +29,16 @@ spec:
   - name: scheme
     value: <REPLACE-WITH-SCHEME> # Optional. default: "http"
   - name: keyPrefixPath
-    value: <REPLACE-WITH-TABLE> # Optional. default: "" Example: dc1
-  - name: httpAddr
-    value: <REPLACE-WITH-CONSUL-HTTP-ADDRESS> # Required. Example: "consul.default.svc.cluster.local:8500"
-  - name: aclToken
-    value: <REPLACE-WITH-ACL-TOKEN> # Optional. default: ""
-  - name: scheme
-    value: <REPLACE-WITH-SCHEME> # Optional. default: "http"
-  - name: keyPrefixPath
     value: <REPLACE-WITH-TABLE> # Optional. default: ""
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field         | Required | Details                                                             | Example                                   |
+| 字段            | Required | Details                                                             | Example                                   |
 | ------------- |:--------:| ------------------------------------------------------------------- | ----------------------------------------- |
 | datacenter    |    Y     | Datacenter to use                                                   | `"dc1"`                                   |
 | httpAddr      |    Y     | Address of the Consul server                                        | `"consul.default.svc.cluster.local:8500"` |
@@ -75,7 +67,7 @@ The easiest way to install Consul on Kubernetes is by using the [Helm chart](htt
 helm install consul stable/consul
 ```
 
-This installs Consul into the `default` namespace. This will install Consul into the `default` namespace. To interact with Consul, find the service with: `kubectl get svc consul`.
+This installs Consul into the `default` namespace. To interact with Consul, find the service with: `kubectl get svc consul`.
 
 For example, if installing using the example above, the Consul host address would be:
 
@@ -84,7 +76,7 @@ For example, if installing using the example above, the Consul host address woul
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

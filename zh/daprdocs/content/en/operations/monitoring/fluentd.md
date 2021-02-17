@@ -30,7 +30,7 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search logs 
 
 3. Install Elastic Search using Helm
 
-By default the chart creates 3 replicas which must be on different nodes.  If your cluster has less than 3 nodes, specify a lower number of replicas.  For example, this sets it to 1:  If your cluster has less than 3 nodes, specify a lower number of replicas.  For example, this sets it to 1:
+By default the chart creates 3 replicas which must be on different nodes.  If your cluster has less than 3 nodes, specify a lower number of replicas.  For example, this sets it to 1:
 
 ```bash
 helm install elasticsearch elastic/elasticsearch -n dapr-monitoring --set replicas=1
@@ -82,7 +82,7 @@ kubectl apply -f ./fluentd-config-map.yaml
 kubectl apply -f ./fluentd-dapr-with-rbac.yaml
 ```
 
-2. Ensure that Fluentd is running as a daemonset; the number of instances should be the same as the number of cluster nodes.  In the example below we only have 1 node.  In the example below we only have 1 node.
+2. Ensure that Fluentd is running as a daemonset; the number of instances should be the same as the number of cluster nodes.  In the example below we only have 1 node.
 
 ```bash
 kubectl get pods -n kube-system -w
@@ -171,7 +171,7 @@ Handling connection for 5601
 
 8. Confirm that `scope`, `type`, `app_id`, `level`, etc are being indexed.
 
-> Note: if you cannot find the indexed field, please wait. Note: if you cannot find the indexed field, please wait. it depends on the volume of data and resource size where elastic search is running.
+> Note: if you cannot find the indexed field, please wait. it depends on the volume of data and resource size where elastic search is running.
 
 ![indexing](/images/kibana-6.png)
 
