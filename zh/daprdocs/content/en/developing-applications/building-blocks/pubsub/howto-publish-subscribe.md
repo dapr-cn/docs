@@ -14,7 +14,7 @@ Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次
 
 ## 步骤 1: 设置 Pub/Sub 组件
 
-When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter.
+When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter. gRPC clients and SDKs have a dedicated content type parameter.
 
 ## 步骤 1: 设置 Pub/Sub 组件
 然后发布一条消息给 `deathStarStatus` 主题：
@@ -156,14 +156,14 @@ def ds_subscriber():
 
 app.run()
 ```
-创建 `app1.py` 后，确保 flask 和 flask_cors 已经安装了：
+创建名为" `app1.py` 的文件，并粘贴如下内容：
 
 ```bash
 pip install flask
 pip install flask_cors
 ```
 
-然后运行:
+创建 `app1.py` 后，确保 flask 和 flask_cors 已经安装了：
 
 ```bash
 dapr --app-id app1 --app-port 5000 run python app1.py
@@ -188,7 +188,7 @@ app.post('/dsstatus', (req, res) => {
 
 app.listen(port, () => console.log(`consumer app listening on port ${port}!`))
 ```
-运行此应用：
+设置上述订阅后，将此 javascript（Node > 4.16）下载到 `app2.js` 文件中：
 
 ```bash
 dapr --app-id app2 --app-port 3000 run node app2.js
@@ -197,7 +197,7 @@ dapr --app-id app2 --app-port 3000 run node app2.js
 
 {{% codetab %}}
 
-然后运行:
+After creating `app1.php`, and with the [SDK installed](https://github.com/dapr/php-sdk/blob/main/docs/getting-started.md), go ahead and start the app:
 
 ```php
 <?php
@@ -217,7 +217,7 @@ $app->post('/dsstatus', function(
 $app->start();
 ```
 
-After creating `app1.php`, and with the [SDK installed](https://github.com/dapr/php-sdk/blob/main/docs/getting-started.md), go ahead and start the app:
+然后运行:
 
 ```bash
 dapr --app-id myapp --port 3500 run
@@ -229,7 +229,7 @@ dapr --app-id myapp --port 3500 run
 
 ### 编程方式订阅
 
-若要订阅主题，请使用您选择的编程语言启动 Web 服务器，并监听以下 `GET` 终结点： `/dapr/subscribe `。 Dapr 实例将在启动时调用到您的应用，并期望对的订阅主题响应 JOSN：
+若要订阅主题，请使用您选择的编程语言启动 Web 服务器，并监听以下 `GET` 终结点： `/dapr/subscribe`。 Dapr 实例将在启动时调用到您的应用，并期望对的订阅主题响应 JOSN：
 - `pubsubname`: Dapr 用到的 pub/sub 组件
 - `topic`: 订阅的主题
 - `route`：当消息来到该主题时，Dapr 需要调用哪个终结点
@@ -269,7 +269,7 @@ pip install flask
 pip install flask_cors
 ```
 
-然后运行:
+创建 `app1.py` 后，确保 flask 和 flask_cors 已经安装了：
 
 ```bash
 dapr --app-id app1 --app-port 5000 run python app1.py
@@ -349,7 +349,7 @@ dapr --app-id myapp --port 3500 run
 
 To publish a topic you need to run an instance of a Dapr sidecar to use the pubsub Redis component. You can use the default Redis component installed into your local environment.
 
-Dapr 将在符合 Cloud Events v1.0 的信封中自动包装用户有效负载，对 `datacontenttype` 属性使用 `Content-Type` 头值。
+To publish a topic you need to run an instance of a Dapr sidecar to use the pubsub Redis component. You can use the default Redis component installed into your local environment.
 
 ```bash
 dapr run --app-id testpubsub --dapr-http-port 3500 
@@ -471,7 +471,7 @@ dapr --app-id app2 run -- php app2.php
 
 ## Sending a custom CloudEvent
 
-Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
+Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
 
 See info about content types [here](#Content-Types).
 
