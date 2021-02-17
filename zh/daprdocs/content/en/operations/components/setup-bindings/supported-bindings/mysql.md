@@ -7,6 +7,10 @@ description: "Detailed documentation on the MySQL binding component"
 
 ## 设置 Dapr 组件
 
+To setup MySQL binding create a component of type `bindings.mysql`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+
+If your server requires SSL your connection string must end of `&tls=custom` for example, `"<user>:<password>@tcp(<server>:3306)/<database>?allowNativePasswords=true&tls=custom"`. You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -31,31 +35,33 @@ spec:
       value: <CONNECTION_MAX_IDLE_TIME>
 ```
 
-The MySQL binding uses [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) internally so the `url` parameter should follow the `DSN` format shown below:
-
-- `url`: Required, represent DB connection in Data Source Name (DNS) format.
-
-  **Example DSN**
-
-  ```yaml
-  - name: url
-    value: user:password@tcp(localhost:3306)/dbname
-  ```
-
-If your server requires SSL your connection string must end of `&tls=custom` for example, `"<user>:<password>@tcp(<server>:3306)/<database>?allowNativePasswords=true&tls=custom"`. You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
-
-- `pemPath`: path to the PEM file
-
 also support connection pool configuration variables:
-
-- `maxIdleConns`: integer greater than 0
-- `maxOpenConns`: integer greater than 0
-- `connMaxLifetime`: duration string
-- `connMaxIdleTime`: duration string
-
-{{% alert title="Warning" color="warning" %}} The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。 {{% /alert %}}
+The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+{{% /alert %}}
 
 ## 输出绑定支持的操作
+
+| Field                                  | Required | Binding support | Details                                                                                                                    | Example DSN                                                       |
+| -------------------------------------- |:--------:| --------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| url                                    |    Y     | Output          | `url`: Required, represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `- name: url
+    value: user:password@tcp(localhost:3306)/dbname` |
+| `pemPath`: path to the PEM file        |    Y     | Output          | Path to the PEM file. Used with SSL connection                                                                             | `"path/to/pem/file"`                                              |
+| maxIdleConns                           |    N     | Output          | The max idle connections. `maxIdleConns`: integer greater than 0                                                           | `"10"`                                                            |
+| `maxOpenConns`: integer greater than 0 |    N     | Output          | The max open connections. Integer greater than 0                                                                           | `"10"`                                                            |
+| connMaxLifetime                        |    N     | Output          | The max connection lifetime. Duration string                                                                               | `"12s"`                                                           |
+| `connMaxIdleTime`: duration string     |    N     | Output          | The max connection idel time. Duration string                                                                              | `"12s"`                                                           |
+
+### SSL connection
+
+If your server requires SSL your connection string must end of `&tls=custom` for example:
+```bash
+"<user>:<password>@tcp(<server>:3306)/<database>?allowNativePasswords=true&tls=custom"
+```
+ You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
+
+## 相关链接
+
+This component supports **output binding** with the following operations:
 
 - `exec`
 - `query`
@@ -141,6 +147,7 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 
 ## 相关链接
 
+- [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
 - [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
 - [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
