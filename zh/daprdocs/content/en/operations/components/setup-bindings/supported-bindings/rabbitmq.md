@@ -7,7 +7,7 @@ description: "Detailed documentation on the RabbitMQ binding component"
 
 ## 设置 Dapr 组件
 
-To setup RabbitMQ binding create a component of type `bindings.rabbitmq`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup RabbitMQ binding create a component of type `bindings.rabbitmq`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -44,16 +44,16 @@ spec:
 
 ## 指定在消息级别上的生存时间
 
-| Field                         | Required | Binding support | Details                                                                                                                                                                                                                                                    | 示例:                                                 |
-| ----------------------------- |:--------:| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `queueName` 是 RabbitMQ 队列名。   |    Y     | Input/Output    | The RabbitMQ queue name                                                                                                                                                                                                                                    | `"myqueue"`                                         |
-| host                          |    Y     | Input/Output    | `host` 是 RabbitMQ 主机地址。                                                                                                                                                                                                                                    | `"amqp://[username][:password]@host.domain[:port]"` |
-| durable                       |    N     | Output          | `durable` 告诉 RabbitMQ 将消息持久存储在存储器中。 Defaults to `"false"`                                                                                                                                                                                                  | `"true"`, `"false"`                                 |
-| `deleteWhenUnused` 启用或禁用自动删除。 |    N     | Input/Output    | Enables or disables auto-delete. Defaults to `"false"`                                                                                                                                                                                                     | `"true"`, `"false"`                                 |
-| ttlInSeconds                  |    N     | Output          | `ttlInSeconds` 是一个可选的参数，可以将 [默认消息时间设置为在RabbitMQ 队列级别](https://www.rabbitmq.com/ttl.html) 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 See [also](#specifying-a-ttl-per-message)                                                       | `60`                                                |
-| prefetchCount                 |    N     | Input           | `prefetchCount` 是一个可选参数，用于设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch)。 如果此参数为空，QOS 会设置为0为无限制。                                                                                                                           | `0`                                                 |
-| exclusive                     |    N     | Input/Output    | `exclusive` determines whether the topic will be an exclusive topic or not Defaults to `"false"`                                                                                                                                                           | `"true"`, `"false"`                                 |
-| maxPriority                   |    N     | Input/Output    | Parameter to set the [priority queue](https://www.rabbitmq.com/priority.html). If this parameter is omitted, queue will be created as a general queue instead of a priority queue. Value between 1 and 255. See [also](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
+| Field                         | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                                                                                | 示例:                                                 |
+| ----------------------------- |:--------:| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| `queueName` 是 RabbitMQ 队列名。   |    Y     | Input/Output    | The RabbitMQ queue name                                                                                                                                                                                                                                                                                                                                                                                                                | `"myqueue"`                                         |
+| host                          |    Y     | Input/Output    | `host` 是 RabbitMQ 主机地址。                                                                                                                                                                                                                                                                                                                                                                                                                | `"amqp://[username][:password]@host.domain[:port]"` |
+| durable                       |    N     | Output          | `durable` 告诉 RabbitMQ 将消息持久存储在存储器中。 Defaults to `"false"`                                                                                                                                                                                                                                                                                                                                                                              | `"true"`, `"false"`                                 |
+| `deleteWhenUnused` 启用或禁用自动删除。 |    N     | Input/Output    | Enables or disables auto-delete. Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                                                                                                                                                           | `"true"`, `"false"`                                 |
+| ttlInSeconds                  |    N     | Output          | `ttlInSeconds` 是一个可选的参数，可以将 [默认消息时间设置为在RabbitMQ 队列级别](https://www.rabbitmq.com/ttl.html) 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 See [also](#specifying-a-ttl-per-message)                                                                                                                                                                                                                                   | `60`                                                |
+| prefetchCount                 |    N     | Input           | `prefetchCount` 是一个可选参数，用于设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch)。 如果此参数为空，QOS 会设置为0为无限制。                                                                                                                                                                                                                                                                                                       | `0`                                                 |
+| exclusive                     |    N     | Input/Output    | `exclusive` determines whether the topic will be an exclusive topic or not Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                                                                                                                 | `"true"`, `"false"`                                 |
+| maxPriority                   |    N     | Input/Output    | Parameter to set the [priority queue](https://www.rabbitmq.com/priority.html). If this parameter is omitted, queue will be created as a general queue instead of a priority queue. Value between 1 and 255. See [also](#specifying-a-priority-per-message) If this parameter is omitted, queue will be created as a general queue instead of a priority queue. Value between 1 and 255. See [also](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
 ## Specifying a priority on message level
 
 若要设置在消息级别生存的时间，请使用 `metadata` 请求正文中的元数据部分。
@@ -70,7 +70,7 @@ spec:
 
 字段名为 `ttlInSeconds`。
 
-示例:
+{{< tabs >}}
 
 示例:
 {{% codetab %}}
@@ -109,7 +109,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
 
 ## 相关链接
 
-Priority can be defined at the message level. If `maxPriority` parameter is set, high priority messages will have priority over other low priority messages.
+Specifying a priority on message level Priority can be defined at the message level. If `maxPriority` parameter is set, high priority messages will have priority over other low priority messages.
 
 To set priority at message level use the `metadata` section in the request body during the binding invocation.
 
