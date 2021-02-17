@@ -6,12 +6,12 @@ weight: 2000
 description: "Use the secret store building block to securely retrieve a secret"
 ---
 
-This article provides guidance on using Dapr's secrets API in your code to leverage the [secrets store building block]({{X29X}}). The secrets API allows you to easily retrieve secrets in your application code from a configured secret store.
+This article provides guidance on using Dapr's secrets API in your code to leverage the [secrets store building block]({{X29X}}). The secrets API allows you to easily retrieve secrets in your application code from a configured secret store. The secrets API allows you to easily retrieve secrets in your application code from a configured secret store.
 
 ## Set up a secret store
 
 Before retrieving secrets in your application's code, you must have a secret store component configured. For the purposes of this guide, as an example you will configure a local secret store which uses a local JSON file to store secrets.
-> Note: The component used in this example is not secured and is not recommended for production deployments. You can find other alternatives [here]({{X26X}}).
+> Note: The component used in this example is not secured and is not recommended for production deployments. You can find other alternatives [here]({{X27X}}).
 
 Create a file named `secrets.json` with the following contents:
 
@@ -41,7 +41,7 @@ spec:
 
 Make sure to replace `<PATH TO SECRETS FILE>` with the path to the JSON file you just created.
 
-To configure a different kind of secret store see the guidance on [how to configure a secret store]({{X39X}}) and review [supported secret stores]({{X40X}}) to see specific details required for different secret store solutions.
+To configure a different kind of secret store see the guidance on [how to configure a secret store]({{X39X}}) and review [supported secret stores]({{X40X}}) to see specific details required for different secret store solutions.
 ## Get a secret
 
 Now run the Dapr sidecar (with no application)
@@ -150,13 +150,29 @@ Console.WriteLine(secret);
 ```
 {{% /codetab %}}
 
+{{% codetab %}}
+
+```php
+<?php
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$app = \Dapr\App::create();
+$app->run(function(\Dapr\SecretManager $secretManager, \Psr\Log\LoggerInterface $logger) {
+    $secret = $secretManager->retrieve(secret_store: 'my-secret-store', name: 'my-secret');
+    $logger->alert('got secret: {secret}', ['secret' => $secret]);
+});
+```
+
+{{% /codetab %}}
+
 {{< /tabs >}}
 
 ## Related links
 
-- [Dapr secrets overview]({{X14X}})
-- [Secrets API reference]({{X16X}})
-- [Configure a secret store]({{X18X}})
-- [Supported secrets]({{X20X}})
-- [Using secrets in components]({{X22X}})
+- [Dapr secrets overview]({{X15X}})
+- [Secrets API reference]({{X17X}})
+- [Configure a secret store]({{X19X}})
+- [Supported secrets]({{X21X}})
+- [Using secrets in components]({{X23X}})
 - [Secret stores quickstart](https://github.com/dapr/quickstarts/tree/master/secretstore)
