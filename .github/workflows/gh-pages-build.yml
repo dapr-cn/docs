@@ -3,10 +3,10 @@ name: github pages
 on:
   push:
     branches:
-      - translate/v0.11
+      - translate/v1.0
   pull_request:
     branches:
-      - translate/v0.11
+      - translate/v1.0
 
 jobs:
   build_and_deploy_job:
@@ -17,7 +17,7 @@ jobs:
         with:
           submodules: true # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
-          ref: translate/v0.11
+          ref: translate/v1.0
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:

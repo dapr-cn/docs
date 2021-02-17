@@ -14,6 +14,6 @@ jobs:
         uses: repo-sync/github-sync@v2
         with:
           source_repo: "https://github.com/dapr/docs.git"
-          source_branch: "v1.0-rc3"
-          destination_branch: "source/v1.0-rc3"
+          source_branch: "v1.0"
+          destination_branch: "source/v1.0"
           github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -15,7 +15,7 @@ jobs:
         with:
           submodules: true # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
-          ref: translate/v0.11
+          ref: translate/v1.0
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
