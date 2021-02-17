@@ -28,6 +28,8 @@ spec:
       value: "adminuser"
     - name: saslPassword
       value: "KeFg23!"
+    - name: maxMessageBytes
+      value: 1024
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -36,13 +38,33 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| 字段           | Required | Details                                                                                                                                                                                                              | 示例                                                          |
-| ------------ |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| brokers      |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
-| authRequired |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`.                                                                                                                                                    | `"true"`, `"false"`                                         |
-| saslUsername |    N     | Username used for authentication. Only required if authRequired is set to true.                                                                                                                                      | `"adminuser"`                                               |
-| saslPassword |    N     | Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}) | `""`, `"KeFg23!"`                                           |
+| 字段              | Required | Details                                                                                                                                                                                                              | 示例                                                          |
+| --------------- |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| brokers         |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
+| authRequired    |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`.                                                                                                                                                    | `"true"`, `"false"`                                         |
+| saslUsername    |    N     | Username used for authentication. Only required if authRequired is set to true.                                                                                                                                      | `"adminuser"`                                               |
+| saslPassword    |    N     | Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}) | `""`, `"KeFg23!"`                                           |
+| maxMessageBytes |    N     | The maximum message size allowed for a single Kafka message. Default is 1024.                                                                                                                                        | `2048`                                                      |
 
+## Per-call metadata fields
+
+### Partition Key
+
+When invoking the Kafka pub/sub, its possible to provide an optional partition key by using the `metadata` query param in the request url.
+
+The param name is `partitionKey`.
+
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+
+```shell
+curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partitionKey=key1 \
+  -H "Content-Type: application/json" \
+  -d '{
+        "data": {
+          "message": "Hi"
+        }
+      }'
+```
 
 ## Create a Kafka instance
 {{< tabs "Self-Hosted" "Kubernetes">}}

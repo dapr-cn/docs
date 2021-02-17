@@ -46,7 +46,7 @@ Dapr 文档处理分支的方式与大多数代码存储库不同。 每个分�
 - 请确保文档引用该规范以获取使用 API 的示例。
 - 确保规范在名称，参数和术语方面与概念一致。 根据需要更新概念和规范。
 - 请避免重复该规范。 这个想法是为了给读者提供更多关于能力的信息和背景，以便他们可以尝试这个。 因此，尽可能提供更多的信息和实施细节。
-- 提供指向 [参考资料]({{X45X}}) 中的规范的链接。
+- 提供指向 [参考资料]({{X45X}}) 中的规范的链接。
 - 在可能的情况下，参考一个实用的How-To文档。
 
 ### 贡献新的 How-To 指南
@@ -173,23 +173,10 @@ Docsy和Hugo使用的markdown规范没有提供使用markdown符号调整图片�
 `` powershell
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
 ````
-{{% /codetab %}}
-
-{{% codetab %}}
-```bash
-wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
-```
-{{% /codetab %}}
-
-{{% codetab %}}
-```bash
-brew install dapr/tap/dapr-cli
-```
-{{% /codetab %}}
-
+This example will render to this:
 {{< /tabs */>}}
-````
-
+{{% codetab %}}
+```powershell
 这个例子将呈现为：
 
 {{< tabs Windows Linux MacOS>}}
@@ -197,7 +184,7 @@ brew install dapr/tap/dapr-cli
 {{% codetab %}}
 ```powershell
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
-````
+```
 {{% /codetab %}}
 
 {{% codetab %}}
