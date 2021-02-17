@@ -45,9 +45,9 @@ description: Dapr 绑定构建块概述
 
 阅读 [ 使用输出绑定向外部系统发送事件]({{< ref howto-bindings.md >}}) 页以开始使用输出绑定。
 
-
-
- ## 相关主题
-- [使用输入绑定从不同资源触发服务]({{< ref howto-triggers.md >}})
-- [使用输出绑定调用不同的资源]({{< ref howto-bindings.md >}})
-
+## Next Steps
+* Follow these guides on:
+    * [使用输入绑定从不同资源触发服务]({{< ref howto-triggers.md >}})
+    * [使用输出绑定调用不同的资源]({{< ref howto-bindings.md >}})
+* Try out the [bindings quickstart](https://github.com/dapr/quickstarts/tree/master/bindings/README.md) which shows how to bind to a Kafka queue
+* Read the [bindings API specification]({{< ref bindings_api.md >}})
