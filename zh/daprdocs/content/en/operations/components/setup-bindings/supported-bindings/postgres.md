@@ -7,6 +7,9 @@ description: "Detailed documentation on the PostgrSQL binding component"
 
 ## Setup Dapr component
 
+To setup PostgreSQL binding create a component of type `bindings.postgres`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -25,7 +28,15 @@ spec:
 The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-The PostgrSQL binding uses [pgx connection pool](https://github.com/jackc/pgx) internally so the `url` parameter can be any valid connection string, either in a `DSN` or `URL` format:
+## Output Binding Supported Operations
+
+| Field | Required | Binding support | Details                                                                                                                                                                                 | Example                                                                                     |
+| ----- |:--------:| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| url   |    Y     | Output          | The PostgrSQL binding uses [pgx connection pool](https://github.com/jackc/pgx) internally so the `url` parameter can be any valid connection string, either in a `DSN` or `URL` format: | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
+
+### URL format
+
+The PostgreSQL binding uses [pgx connection pool](https://github.com/jackc/pgx) internally so the `url` parameter can be any valid connection string, either in a `DSN` or `URL` format:
 
 **Example DSN**
 
@@ -47,7 +58,10 @@ Both methods also support connection pool configuration variables:
 - `pool_max_conn_idle_time`: duration string
 - `pool_health_check_period`: duration string
 
-## Output Binding Supported Operations
+
+## Binding support
+
+This component supports **output binding** with the following operations:
 
 - `exec`
 - `query`
@@ -133,6 +147,8 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 > Note, the PostgreSql binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
 
 ## Related links
+
+- [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
 - [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
 - [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
