@@ -7,57 +7,38 @@ description: >
   如何通过跟踪、指标、日志和健康状况来监控应用程序
 ---
 
-可观测性是控制理论中的术语。 可观测性意味着您可以通过观察系统外部来回答系统内部发生了什么问题，而无需为了回答新的问题而发布新的代码。 在生产环境和服务中，可观测性对于调试、运维和监控Dapr系统服务、组件和用户应用至关重要。
+When building an applications, understanding how the system is behaving is an important part of operating it - this includes having the ability to observe the internal calls of an application, gauging its performance and becoming aware of problems as soon as they occur. This is challenging for any system but even more so for a distributed system comprised of multiple microservices where a flow, made of several calls, may start in one microservices but continue in another. Observability is critical in production environments but also useful during development to understand bottlenecks, improve performance and perform basic debugging across the span of microservices.
 
-可观测性能力使得用户能够监控Dapr系统服务、它们与用户应用程序的交互，并了解这些被监控的服务的行为。 可观测性能力分为以下几个领域。
+While some data points about an application can be gathered from the underlying infrastructure (e.g. memory consumption, CPU usage), other meaningful information must be collected from an "application aware" layer - one that can show how an important series of calls is executed across microservices. This usually means a developer must add some code to instrument an application for this purpose. Often, instrumentation code is simply meant to send collected data such as traces and metrics to an external monitoring tool or service that can help store, visualize and analyze all this information.
+
+Having to maintain this code, which is not part of the core logic of the application, is another burden on the developer, sometimes requiring understanding monitoring tools APIs, using additional SDKs etc. This instrumentation may also add to the portability challenges of an application which may require different instrumentation depending on where the application is deployed. For example, different cloud providers offer different monitoring solutions and an on-prem deployment might require an on-prem solution.
 
 ## 分布式跟踪
+When building an application which is leveraging Dapr building blocks to perform service-to-service calls and pub/sub messaging, Dapr offers an advantage in respect to [distributed tracing]({{X9X}}) because this inter-service communication flows through the Dapr sidecar, the sidecar is in a unique position to offload the burden of application level instrumentation.
 
-[分布式跟踪]({{X21X}}) 用于对 Dapr 系统服务和用户应用程序进行分析和监控。 分布式跟踪有助于确定故障发生的位置和导致性能不佳的原因。 分布式跟踪特别适用于调试和监视分布式软件架构，如微服务。
+### 分布式跟踪
+Dapr 使用 [W3C 跟踪上下文进行分布式跟踪]({{X23X}})
 
-您可以使用分布式跟踪来帮助调试和优化应用程序代码。 分布式跟踪包含 Dapr 运行时、Dapr 系统服务和跨进程、节点、网络和安全边界的用户应用之间的Trace Span。 它提供了对服务调用 (调用流) 和服务依赖的详细说明。
+<img src="/images/observability-tracing.png" width=1000 alt="Distributed tracing with Dapr">
 
-Dapr 使用 [W3C 跟踪上下文进行分布式跟踪]({{X23X}})
+### {{< ref open-telemetry-collector.md >}}
+Dapr can also be configured to work with the [OpenTelemetry Collector]({{X17X}}) which offers even more compatibility with external monitoring tools.
 
-通常建议在生产中运行 Dapr 时开启跟踪。
+<img src="/images/observability-opentelemetry-collector.png" width=1000 alt="操作方法：用Open Telemetry Collector搭建应用程序洞察器">
 
-### Open Telemetry
-
-Dapr 集成了 [OpenTelemetry](https://opentelemetry.io/) ，用于跟踪、指标和日志。 借助 OpenTelemetry，您可以根据您的环境（无论是云上运行还是本地运行）配置各种Exporter进行跟踪和指标。
-
-#### 下一步
-
-- [操作方法：搭建 Zipkin]({{< ref zipkin.md >}})
-- [操作方法：用Open Telemetry Collector搭建应用程序洞察器]({{< ref open-telemetry-collector.md >}})
-
-## 指标
-
-[指标]({{X26X}}) 是在一段时间内收集和存储的一系列测量值和计数。 Dapr 指标可以监控和了解 Dapr 系统服务和用户应用的行为。
-
+### Tracing context
 例如，Dapr sidecar和用户应用之间的服务指标显示调用延迟、流量故障、请求的错误率等。
 
+## 指标
 Dapr 系统服务指标显示 sidecar 注入失败、系统服务健康状态，包括 CPU 使用率、已做出的Actor放置数量等。
 
-#### 下一步
+<img src="/images/observability-sidecar.png" width=1000 alt="Dapr sidecar metrics, logs and health checks">
 
-- [操作方法：搭建 Prometheus 和 Grafana]({{< ref prometheus.md >}})
-- [操作方法：搭建 Azure Monitor]({{< ref azure-monitor.md >}})
+### 日志
+Dapr generates [logs]({{X23X}}) to provide visibility into sidecar operation and to help users identify issues and perform debugging. 日志事件包含由 Dapr 系统服务生成的警告，错误，信息和调试消息。 Dapr can also be configured to send logs to collectors such as [Fluentd]({{< ref fluentd.md >}}) and [Azure Monitor]({{< ref azure-monitor.md >}}) so they can be easily searched, analyzed and provide insights.
 
-## 日志
+### 指标
+Metrics are the series of measured values and counts that are collected and stored over time. [指标]({{X26X}}) 是在一段时间内收集和存储的一系列测量值和计数。 Dapr 指标可以监控和了解 Dapr 系统服务和用户应用的行为。 For example, the metrics between a Dapr sidecar and the user application show call latency, traffic failures, error rates of requests etc. Dapr [system services metrics](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md) show sidecar injection failures, health of the system services including CPU usage, number of actor placements made etc.
 
-[日志]({{X28X}}) 是已发生事件的记录，可用于确定故障或其他状态。
-
-日志事件包含由 Dapr 系统服务生成的警告，错误，信息和调试消息。 每个日志事件都包含消息类型、主机名、组件名、应用 ID、IP 地址等元数据。
-
-#### 下一步
-
-- [操作方法：在 Kubernetes 中搭建 Fluentd、Elastic search 和 Kibana]({{< ref fluentd.md >}})
-- [操作方法：搭建 Azure Monitor]({{< ref azure-monitor.md >}})
-
-## 健康状态
-
-Dapr 为托管平台提供了一种使用 HTTP 端点来确定其 [健康状况]({{X30X}}) 的方法。 通过此端点，可以探测 Dapr 进程或 sidecar，以确定它的准备度和活跃度，并采取相应的行动。
-
-#### 下一步
-
-- [健康状况 API]({{< ref health_api.md >}})
+### 健康状态
+Dapr 为托管平台提供了一种使用 HTTP 端点来确定其 [健康状况]({{X30X}}) 的方法。 通过此端点，可以探测 Dapr 进程或 sidecar，以确定它的准备度和活跃度，并采取相应的行动。 
