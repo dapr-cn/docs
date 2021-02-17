@@ -5,7 +5,7 @@ linkTitle: "Define a component"
 weight: 40
 ---
 
-In the [previous step]({{X13X}}) you called the Dapr HTTP API to store and retrieve a state from a Redis backed state store. Dapr knew to use the Redis instance that was configured locally on your machine through default component definition files that were created when Dapr was initialized.
+In the [previous step]({{X13X}}) you called the Dapr HTTP API to store and retrieve a state from a Redis backed state store. Dapr knew to use the Redis instance that was configured locally on your machine through default component definition files that were created when Dapr was initialized. Dapr knew to use the Redis instance that was configured locally on your machine through default component definition files that were created when Dapr was initialized.
 
 When building an app, you most likely would create your own component file definitions depending on the building block and specific component that you'd like to use.
 
@@ -55,7 +55,7 @@ spec:
     value: ":"
 ```
 
-You can see that the above file definition has a `type: secretstores.local.file` which tells Dapr to use the local file component as a secret store. The metadata fields provide component specific information needed to work with this component (in this case, the path to the secret store JSON)
+You can see that the above file definition has a `type: secretstores.local.file` which tells Dapr to use the local file component as a secret store. The metadata fields provide component specific information needed to work with this component (in this case, the path to the secret store JSON) The metadata fields provide component specific information needed to work with this component (in this case, the path to the secret store JSON)
 
 ## Step 3: Run the Dapr sidecar
 
