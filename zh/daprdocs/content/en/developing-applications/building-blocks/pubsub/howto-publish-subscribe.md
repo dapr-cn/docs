@@ -10,9 +10,17 @@ description: "了解如何使用一个服务向主题发送消息，并在另一
 
 Pub/Sub 是一个分布式系统中的常见模式，它有许多服务用于解偶、异步消息传递。 使用Pub/Sub，您可以在事件消费者与事件生产者解偶的场景中启用。
 
-Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次），允许开发者发布和订阅主题。 Dapr 提供了对底层系统的不同实现，并允许运维引入其偏爱的基础设施，例如 Redis Streams、Kafka 等。
+Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次），允许开发者发布和订阅主题。 Dapr provides components for pub/sub, that enable operators to use their preferred infrastructure, for example Redis Streams, Kafka, etc.
 
 ## 步骤 1: 设置 Pub/Sub 组件
+
+When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter.
+
+## 步骤 1: 设置 Pub/Sub 组件
+然后发布一条消息给 `deathStarStatus` 主题：
+
+<img src="/images/pubsub-publish-subscribe-example.png" width=1000>
+<br></br>
 
 第一步是设置 Pub/Sub 组件：
 
@@ -71,7 +79,8 @@ Dapr 允许两种方法订阅主题：
 - **编程方式**，订阅在用户代码中定义
 
 {{% alert title="Note" color="primary" %}}
-声明和编程方式都支持相同的功能。 声明的方式从用户代码中移除对 Dapr 的依赖性，并允许使用现有应用程序订阅主题。 编程方法在用户代码中实现订阅。
+ 声明和编程方式都支持相同的功能。 声明的方式从用户代码中移除对 Dapr 的依赖性，并允许使用现有应用程序订阅主题。 编程方法在用户代码中实现订阅。
+
 {{% /alert %}}
 
 ### 声明式订阅
@@ -102,7 +111,7 @@ scopes:
 {{% codetab %}}
 将 CRD 放在 `./components` 目录中。 当 Dapr 启动时，它将加载组件和订阅。
 
-*注意：默认情况下，在 MacOS/Linux 上从 `$HOME/.dapr/components` 加载组件，以及 `%USERPROFILE%\.dapr\components` 在Windows上。*
+注意：默认情况下，在 MacOS/Linux 上从 `$HOME/.dapr/components` 加载组件，以及 `%USERPROFILE%\.dapr\components` 在Windows上。
 
 还可以通过将 Dapr CLI 指向组件路径来覆盖默认目录：
 
@@ -126,7 +135,7 @@ kubectl apply -f subscription.yaml
 
 #### 示例
 
-{{< tabs Python Node>}}
+然后运行:
 
 {{% codetab %}}
 创建名为" `app1.py` 的文件，并粘贴如下内容：
@@ -186,6 +195,36 @@ dapr --app-id app2 --app-port 3000 run node app2.js
 ```
 {{% /codetab %}}
 
+{{% codetab %}}
+
+然后运行:
+
+```php
+<?php
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$app = \Dapr\App::create();
+$app->post('/dsstatus', function(
+    #[\Dapr\Attributes\FromBody]
+    \Dapr\PubSub\CloudEvent $cloudEvent,
+    \Psr\Log\LoggerInterface $logger
+    ) {
+        $logger->alert('Received event: {event}', ['event' => $cloudEvent]);
+        return ['status' => 'SUCCESS'];
+    }
+);
+$app->start();
+```
+
+After creating `app1.php`, and with the [SDK installed](https://github.com/dapr/php-sdk/blob/main/docs/getting-started.md), go ahead and start the app:
+
+```bash
+dapr --app-id myapp --port 3500 run
+```
+
+{{% /codetab %}}
+
 {{< /tabs >}}
 
 ### 编程方式订阅
@@ -197,7 +236,7 @@ dapr --app-id app2 --app-port 3000 run node app2.js
 
 #### 示例
 
-{{< tabs Python Node>}}
+{{< tabs Python Node PHP>}}
 
 {{% codetab %}}
 ```python
@@ -270,27 +309,63 @@ dapr --app-id app2 --app-port 3000 run node app2.js
 ```
 {{% /codetab %}}
 
+{{% codetab %}}
+
+Update `app1.php` with the following:
+
+```php
+<?php
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$app = \Dapr\App::create(configure: fn(\DI\ContainerBuilder $builder) => $builder->addDefinitions(['dapr.subscriptions' => [
+    new \Dapr\PubSub\Subscription(pubsubname: 'pubsub', topic: 'deathStarStatus', route: '/dsstatus'),
+]]));
+$app->post('/dsstatus', function(
+    #[\Dapr\Attributes\FromBody]
+    \Dapr\PubSub\CloudEvent $cloudEvent,
+    \Psr\Log\LoggerInterface $logger
+    ) {
+        $logger->alert('Received event: {event}', ['event' => $cloudEvent]);
+        return ['status' => 'SUCCESS'];
+    }
+);
+$app->start();
+```
+
+运行此应用：
+
+```bash
+dapr --app-id myapp --port 3500 run
+```
+
+{{% /codetab %}}
+
 {{< /tabs >}}
 
 `/dsstatus` 终结点与订阅中定义的 `route` 相匹配，这是 Dapr 将所有主题消息发送至的位置。
 
 ## 步骤 3: 发布主题
 
-要将消息发布到主题，请在 Dapr 实例上调用以下端点:
+To publish a topic you need to run an instance of a Dapr sidecar to use the pubsub Redis component. You can use the default Redis component installed into your local environment.
 
+Dapr 将在符合 Cloud Events v1.0 的信封中自动包装用户有效负载，对 `datacontenttype` 属性使用 `Content-Type` 头值。
+
+```bash
+dapr run --app-id testpubsub --dapr-http-port 3500 
+```
 {{< tabs "Dapr CLI" "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
+
+然后发布一条消息给 `deathStarStatus` 主题：
+
 ```bash
 dapr publish --pubsub pubsub --topic deathStarStatus --data '{"status": "completed"}'
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-首先确保 Dapr sidecar 正在运行：
-```bash
-dapr --app-id myapp --port 3500 run
-```
 然后发布一条消息给 `deathStarStatus` 主题：
 ```bash
 curl -X POST http://localhost:3500/v1.0/publish/pubsub/deathStarStatus -H "Content-Type: application/json" -d '{"status": "completed"}'
@@ -298,10 +373,6 @@ curl -X POST http://localhost:3500/v1.0/publish/pubsub/deathStarStatus -H "Conte
 {{% /codetab %}}
 
 {{% codetab %}}
-首先确保 Dapr sidecar 正在运行：
-```bash
-dapr --app-id myapp --port 3500 run
-```
 然后发布一条消息给 `deathStarStatus` 主题：
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"status": "completed"}' -Uri 'http://localhost:3500/v1.0/publish/pubsub/deathStarStatus'
@@ -339,7 +410,76 @@ app.post('/dsstatus', (req, res) => {
 
 {{< /tabs >}}
 
+## (Optional) Step 5: Publishing a topic with code
+
+{{< tabs Node PHP>}}
+
+{{% codetab %}}
+If you prefer publishing a topic using code, here is an example.
+
+```javascript
+const express = require('express');
+const path = require('path');
+const request = require('request');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+
+const daprPort = process.env.DAPR_HTTP_PORT || 3500;
+const daprUrl = `http://localhost:${daprPort}/v1.0`;
+const port = 8080;
+const pubsubName = 'pubsub';
+
+app.post('/publish', (req, res) => {
+  console.log("Publishing: ", req.body);
+  const publishUrl = `${daprUrl}/publish/${pubsubName}/deathStarStatus`;
+  request( { uri: publishUrl, method: 'POST', json: req.body } );
+  res.sendStatus(200);
+});
+
+app.listen(process.env.PORT || port, () => console.log(`Listening on port ${port}!`));
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+
+If you prefer publishing a topic using code, here is an example.
+
+```php
+<?php
+
+require_once __DIR__.'/vendor/autoload.php';
+
+$app = \Dapr\App::create();
+$app->run(function(\DI\FactoryInterface $factory, \Psr\Log\LoggerInterface $logger) {
+    $publisher = $factory->make(\Dapr\PubSub\Publish::class, ['pubsub' => 'pubsub']);
+    $publisher->topic('deathStarStatus')->publish('operational');
+    $logger->alert('published!');
+});
+```
+
+You can save this to `app2.php` and while `app1` is running in another terminal, execute:
+
+```bash
+dapr --app-id app2 run -- php app2.php
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+## Sending a custom CloudEvent
+
+Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
+
+See info about content types [here](#Content-Types).
+
 ## 下一步
-- [对 pub/sub 主题的访问权]({{< ref pubsub-scopes.md >}})
-- [Pub/Sub 快速开始](https://github.com/dapr/quickstarts/tree/master/pub-sub)
-- [Pub/sub 组件]({{< ref setup-pubsub >}})
+
+- https://github.com/dapr/quickstarts/tree/master/pub-sub
+- {{< ref pubsub-scopes.md >}}
+- Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
+- 您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
+- {{< ref setup-pubsub >}}
+- Read the [API reference]({{< ref pubsub_api.md >}})
