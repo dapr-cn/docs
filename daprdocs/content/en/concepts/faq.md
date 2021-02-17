@@ -29,7 +29,7 @@ Read [How does Dapr work with service meshes?](https://github.com/dapr/dapr/wiki
 Istio is not a programming model and does not focus on application level features such as state management, pub-sub, bindings etc. That is where Dapr comes in.
 
 ## Performance Benchmarks
-The Dapr project is focused on performance due to the inherent discussion of Dapr being a sidecar to your application. This [performance benchmark video](https://youtu.be/4kV3SHs1j2k?t=783) discusses and demos the work that has been done so far. The performance benchmark data is planned to be published on a regular basis. You can also run the perf tests in your own environment to get perf numbers. 
+The Dapr project is focused on performance due to the inherent discussion of Dapr being a sidecar to your application. See [here]({{< ref perf-service-invocation.md >}}) for updated performance numbers.
 
 ## Actors
 
@@ -50,7 +50,7 @@ The Dapr runtime SDKs have language specific actor frameworks. The .NET SDK for 
 
 ### Does Dapr have any SDKs if I want to work with a particular programming language or framework?
 
-To make using Dapr more natural for different languages, it includes language specific SDKs for Go, Java, JavaScript, .NET,  Python, Rust and C++. 
+To make using Dapr more natural for different languages, it includes [language specific SDKs]({{<ref sdks>}}) for Go, Java, JavaScript, .NET,  Python, PHP, Rust and C++. 
 
 These SDKs expose the functionality in the Dapr building blocks, such as saving state, publishing an event or creating an actor, through a typed, language API rather than calling the http/gRPC API. This enables you to write a combination of stateless and stateful functions and actors all in the language of their choice. And because these SDKs share the Dapr runtime, you get cross-language actor and functions support.
 

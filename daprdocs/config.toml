@@ -1,5 +1,5 @@
 # Site Configuration
-baseURL = "https://v1-rc3.docs.dapr.io/"
+baseURL = "https://docs.dapr.io/"
 title = "Dapr Docs"
 theme = "docsy"
 disableFastRender = true
@@ -43,6 +43,9 @@ id = "UA-149338238-3"
   [[module.mounts]]
     source = "../sdkdocs/python/daprdocs/content/en/python-sdk-contributing"
     target = "content/contributing/"
+  [[module.mounts]]
+    source = "../sdkdocs/php/daprdocs/content/en/php-sdk-docs"
+    target = "content/developing-applications/sdks/php"
 
 # Markdown Engine - Allow inline html
 [markup]
@@ -52,51 +55,51 @@ id = "UA-149338238-3"
 
 # Top Nav Bar
 [[menu.main]]
-    name = "Home"
+    name = "Homepage"
     weight = 40
     url = "https://dapr.io"
 [[menu.main]]
-    name = "About"
+    name = "GitHub"
     weight = 50
-    url = "https://dapr.io/#about"
-[[menu.main]]
-    name = "Download"
-    weight = 60
-    url = "https://dapr.io/#download"
+    url = "https://github.com/dapr"
 [[menu.main]]
     name = "Blog"
-    weight = 70
+    weight = 60
     url = "https://blog.dapr.io/posts"
+[[menu.main]]
+    name = "Discord"
+    weight = 70
+    url = "https://aka.ms/dapr-discord"
 [[menu.main]]
     name = "Community"
     weight = 80
-    url = "https://dapr.io/#community"
+    url = "https://github.com/dapr/community/blob/master/README.md"
 
 [params]
 copyright = "Dapr"
 #privacy_policy = "https://policies.google.com/privacy"
 
 # Algolia
-algolia_docsearch = false
+algolia_docsearch = true
 offlineSearch = false
 
 # GitHub Information
 github_repo = "https://github.com/dapr/docs"
 github_project_repo = "https://github.com/dapr/dapr"
 github_subdir = "daprdocs"
-github_branch = "v1.0-rc3"
+github_branch = "v1.0"
 
 # Versioning
-version_menu = "v1.0-rc.3 (preview)"
-version = "v1.0-rc.3"
+version_menu = "v1.0 (latest)"
+version = "v1.0"
 archived_version = false
 
 [[params.versions]]
-  version = "v1.0-rc.3 (preview)"
+  version = "v1.0 (latest)"
   url = "#"
 [[params.versions]]
-  version = "v0.11 (latest)"
-  url = "https://docs.dapr.io"
+  version = "v0.11"
+  url = "https://v0-11.docs.dapr.io"
 [[params.versions]]
   version = "v0.10"
   url = "https://github.com/dapr/docs/tree/v0.10.0"
