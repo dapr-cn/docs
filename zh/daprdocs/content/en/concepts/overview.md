@@ -73,6 +73,7 @@ Dapr 可以托管在多种环境中，包括用于本地开发的自托管，或
 - **[Python SDK](https://github.com/dapr/python-sdk)**
 - **[RUST SDK](https://github.com/dapr/rust-sdk)**
 - **[.NET SDK](https://github.com/dapr/dotnet-sdk)**
+- **[PHP SDK](https://github.com/dapr/php-sdk)**
 
 > 注意： Dapr 是语言无关的， 除了 protobuf 客户端外，还提供 [ RESTful HTTP API ]({{< ref api >}}) 。
 
@@ -86,6 +87,8 @@ Dapr 可以与任何开发框架集成。 下面是一些已经和 Dapr 集成�
 
 Dapr 很容易与Python [Flask](https://pypi.org/project/Flask/) 和 node [Express](http://expressjs.com/) 集成。 请参阅 [Dapr 快速开始](https://github.com/dapr/quickstarts) 中的示例。
 
+In the Dapr [PHP-SDK](https://github.com/dapr/php-sdk) you can serve with Apache, Nginx, or Caddyserver.
+
 #### Actor
 Dapr SDK 支持 [virtual actors]({{< ref actors >}}) ，这是简化并发、具有方法和状态封装的有状态对象，设计用于可扩展的分布式应用程序。
 
@@ -98,7 +101,7 @@ Dapr 通过扩展与 Azure Functions 运行时集成，使函数可以与 Dapr �
 ## 为运维设计
 Dapr 有为 [运维](/operations/) 做专门设计。 通过 Dapr CLI 安装的 [服务仪表板](https://github.com/dapr/dashboard)提供了基于 Web 的 UI ，使您能够查看信息，查看日志以及 Dapr sidecar 的更多内容。
 
-[监控工具支持](/operations/monitoring/) 提供 Dapr 系统服务和sidecar 的更深入的可见性，Dapr 的 [可观测性能力]({{X75X}}) 提供了对应用程序的深入了解，例如追踪和度量。
+[监控工具支持](/operations/monitoring/) 提供 Dapr 系统服务和sidecar 的更深入的可见性，Dapr 的 [可观测性能力]({{X75X}}) 提供了对应用程序的深入了解，例如追踪和度量。
 
 ## 在任何地方运行
 
