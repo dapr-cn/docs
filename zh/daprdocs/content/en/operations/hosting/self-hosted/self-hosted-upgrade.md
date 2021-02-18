@@ -1,8 +1,8 @@
 ---
-type: docs
+type: 文档
 title: "Steps to upgrade Dapr in a self-hosted environment"
 linkTitle: "Upgrade Dapr"
-weight: 50000
+weight: 40000
 description: "Follow these steps to upgrade Dapr in self-hosted mode and ensure a smooth upgrade"
 ---
 
@@ -10,7 +10,7 @@ description: "Follow these steps to upgrade Dapr in self-hosted mode and ensure 
 1. Uninstall the current Dapr deployment:
 
    {{% alert title="Note" color="warning" %}}
-   This will remove the default `$HOME/.dapr` directory, binaries and all containers (dapr_redis, dapr_placement and dapr_zipkin). Linux users need to run `sudo` if    docker command needs sudo.
+   This will remove the default `$HOME/.dapr` directory, binaries and all containers (dapr_redis, dapr_placement and dapr_zipkin). Linux users need to run `sudo` if    docker command needs sudo. Linux users need to run `sudo` if    docker command needs sudo.
    {{% /alert %}}
 
    ```bash
