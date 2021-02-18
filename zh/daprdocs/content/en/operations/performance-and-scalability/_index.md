@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Performance and Scalability"
 linkTitle: "Performance and Scalability"
 weight: 100
