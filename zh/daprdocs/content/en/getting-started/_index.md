@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Dapr 入门"
-linkTitle: "入门"
+title: "Getting started with Dapr"
+linkTitle: "Getting started"
 weight: 20
 description: "How to get up and running with Dapr in minutes"
 no_list: true
