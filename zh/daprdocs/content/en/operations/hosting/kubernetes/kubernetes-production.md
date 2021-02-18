@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Guidelines for production ready deployments on Kubernetes"
 linkTitle: "Production guidelines"
 weight: 10000
