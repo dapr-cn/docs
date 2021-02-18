@@ -1,0 +1,8 @@
+---
+type: 文档
+title: "Secrets building block"
+linkTitle: "Secrets"
+weight: 70
+description: Securely access secrets from your application
+---
+
