@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Supported stores"
 linkTitle: "Supported stores"
 description: "CRUD and/or transactional support for supported stores"
