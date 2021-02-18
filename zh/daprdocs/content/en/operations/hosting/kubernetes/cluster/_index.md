@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Kubernetes cluster setup"
 linkTitle: "How-to: Setup clusters"
 weight: 60000
