@@ -49,7 +49,7 @@ softwareupdate --install-rosetta
 {{% /codetab %}}
 
 {{% codetab %}}
-Each release of Dapr CLI includes various OSes and architectures. These binary versions can be manually downloaded and installed.
+Each release of Dapr CLI includes various OSes and architectures. These binary versions can be manually downloaded and installed. These binary versions can be manually downloaded and installed.
 
 1. Download the desired Dapr CLI from the latest [Dapr Release](https://github.com/dapr/cli/releases)
 2. Unpack it (e.g. dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip)
