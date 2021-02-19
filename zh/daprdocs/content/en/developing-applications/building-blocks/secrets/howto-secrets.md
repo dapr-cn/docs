@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How To: Retrieve a secret"
 linkTitle: "How To: Retrieve a secret"
 weight: 2000
