@@ -8,7 +8,7 @@ description: "How to deploy and run Dapr in self-hosted mode using Docker"
 
 This article provides guidance on running Dapr with Docker outside of Kubernetes. There are a number of different configurations in which you may wish to run Dapr with Docker that are documented below.
 
-## Prerequisites
+## 前期准备
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker-Compose](https://docs.docker.com/compose/install/) (optional)
 
