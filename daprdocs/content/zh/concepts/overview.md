@@ -31,15 +31,15 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 
 每个构建块都是独立的，这意味着您可以采用其中一个或多个或全部来构建应用。 在当前 Dapr 的初始版本中，提供了以下构建块：
 
-| 构建块                    | 说明                                                                                                                                                                                                                                                                                                                                                                                               |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**服务间调用**]({{X18X}}) | 弹性的服务间调用能在远程服务上进行方法调用（包括检索），无论它们是否位于受支持的托管环境中的。                                                                                                                                                                                                                                                                                                                                                  |
-| [**状态管理**]({{X21X}})  | With state management for storing key/value pairs, long running, highly available, stateful services can be easily written alongside stateless services in your application. The state store is pluggable and can include Azure CosmosDB, Azure SQL Server, PostgreSQL, AWS DynamoDB or Redis among others. 状态存储是可插拔的，可以包括 Azure CosmosDB， Azure SQL Server， PostgreSQL， AWS DynamoDB 或 Redis 等。 |
-| [**发布订阅**]({{X24X}})  | Publishing events and subscribing to topics | tween services enables event-driven architectures to simplify horizontal scalability and make them | silient to failure. Dapr provides at least once message delivery guarantee.                                                                                                                                                                   |
-| [**资源绑定**]({{X27X}})  | 带触发器的资源绑定通过接收和发送事件到任何外部源（如数据库、队列、文件系统等）来进一步构建事件驱动架构，以实现扩展性和弹性。                                                                                                                                                                                                                                                                                                                                   |
-| [**Actor**]({{X30X}}) | 一种用于有状态和无状态对象的模式，通过方法和状态的封装让并发变得简单。 Dapr 在其 actor 运行时提供了很多能力，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。                                                                                                                                                                                                                                                                                |
-| [**可观察性**]({{X33X}})  | Dapr 可以发出度量，日志和跟踪以调试和监控 Dapr 和用户应用程序。 Dapr 支持分布式跟踪，通过使用 W3C 跟踪上下文标准和 Open Telemetry 发送到不同的监控工具，以方便诊断和服务于生产中的服务间调用。                                                                                                                                                                                                                                                                               |
-| [**密钥**]({{X36X}})    | Dapr提供秘密管理，并与公有云和本地秘密存储集成，以检索秘密，用于应用代码。                                                                                                                                                                                                                                                                                                                                                          |
+| 构建块                    | 说明                                                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| [**服务间调用**]({{X18X}}) | 弹性的服务间调用能在远程服务上进行方法调用（包括检索），无论它们是否位于受支持的托管环境中的。                                                                                      |
+| [**状态管理**]({{X21X}})  | 对于存储键/值对的状态管理，长时间运行，高可用性，有状态服务可轻松写入应用程序中的无状态服务。 状态存储是可插拔的，可以包括 Azure CosmosDB， Azure SQL Server， PostgreSQL， AWS DynamoDB 或 Redis 等。 |
+| [**发布订阅**]({{X24X}})  | 发布活动并订阅主题|补间服务使事件驱动的体系结构能够简化水平可扩展性，并避免孤立的失败。 Dapr 至少提供一次消息传递保证。                                                                      |
+| [**资源绑定**]({{X27X}})  | 带触发器的资源绑定通过接收和发送事件到任何外部源（如数据库、队列、文件系统等）来进一步构建事件驱动架构，以实现扩展性和弹性。                                                                       |
+| [**Actor**]({{X30X}}) | 一种用于有状态和无状态对象的模式，通过方法和状态的封装让并发变得简单。 Dapr 在其 actor 运行时提供了很多能力，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。                    |
+| [**可观察性**]({{X33X}})  | Dapr 可以发出度量，日志和跟踪以调试和监控 Dapr 和用户应用程序。 Dapr 支持分布式跟踪，通过使用 W3C 跟踪上下文标准和 Open Telemetry 发送到不同的监控工具，以方便诊断和服务于生产中的服务间调用。                   |
+| [**密钥**]({{X36X}})    | Dapr提供秘密管理，并与公有云和本地秘密存储集成，以检索秘密，用于应用代码。                                                                                              |
 
 ## Sidecar 架构
 
@@ -87,7 +87,7 @@ Dapr 可以与任何开发框架集成。 下面是一些已经和 Dapr 集成�
 
 Dapr 很容易与Python [Flask](https://pypi.org/project/Flask/) 和 node [Express](http://expressjs.com/) 集成。 请参阅 [Dapr 快速开始](https://github.com/dapr/quickstarts) 中的示例。
 
-In the Dapr [PHP-SDK](https://github.com/dapr/php-sdk) you can serve with Apache, Nginx, or Caddyserver.
+在 Dapr [PHP-SDK](https://github.com/dapr/php-sdk) 中，您可以使用 Apache， Nginx 或 Caddyserver。
 
 #### Actor
 Dapr SDK 支持 [virtual actors]({{< ref actors >}}) ，这是简化并发、具有方法和状态封装的有状态对象，设计用于可扩展的分布式应用程序。
@@ -117,7 +117,7 @@ Dapr 可以配置为在开发人员本地计算机上以 [自托管模式]({{< r
 
 Dapr 可以配置为在任何 [Kubernetes 集群]({{< ref kubernetes >}}) 上运行。 在 Kubernetes 中， `dapr-sidecar-injector` 和 `dapr-operator` 服务提供一流的集成，以将 Dapr 作为 sidecar 容器启动在与服务容器相同的 pod 中 ，并为在集群中部署的 Dapr 组件提供更新通知。
 
-`dapr-sentry` 服务是证书颁发机构（certificate authority），支持 Dapr sidecar 实例之间的双向 TLS，以便进行安全的数据加密。 关于 `Sentry` 服务的更多信息请阅读 [安全概述]({{< ref "security-concept.md#dapr-to-dapr-communication" >}})
+`dapr-sentry` 服务是一个认证中心，它允许 Dapr sidecar 实例之间的相互 TLS 进行安全数据加密。 关于 `Sentry` 服务的更多信息请阅读 [安全概述]({{< ref "security-concept.md#dapr-to-dapr-communication" >}})
 
 <img src="/images/overview_kubernetes.png" width=800>
 
