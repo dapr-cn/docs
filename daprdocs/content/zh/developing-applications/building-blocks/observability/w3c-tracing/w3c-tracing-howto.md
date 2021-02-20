@@ -16,7 +16,7 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
 
 ### 在 Go 中检索跟踪上下文
 #### 对于 HTTP 调用
-OpenCensus Go SDK 提供 [ochttp](https://pkg.go.dev/go.opencensus.io/plugin/ochttp/propagation/tracecontext?tab=doc) 包，提供了从http响应中检索跟踪上下文的方法。
+OpenCensus Go SDK provides [ochttp](https://pkg.go.dev/go.opencensus.io/plugin/ochttp/propagation/tracecontext?tab=doc) package that provides methods to retrieve trace context from http response.
 
 若要从 HTTP 响应检索跟踪上下文，可以使用 ：
 
@@ -49,7 +49,7 @@ client.InvokeService(ctx, &pb.InvokeServiceRequest{
 要从 HTTP 响应检索跟踪上下文，可以使用 [.NET API](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.headers.httpresponseheaders?view=netcore-3.1):
 
 ```csharp
-// client is HttpClient. // client is HttpClient. req is HttpRequestMessage
+// client is HttpClient. req is HttpRequestMessage
 HttpResponseMessage response = await client.SendAsync(req);
 IEnumerable<string> values1, values2;
 string traceparentValue = "";
@@ -111,7 +111,7 @@ ctx = metadata.AppendToOutgoingContext(ctx, "grpc-trace-bin", string(traceContex
 要在 HTTP 请求中传递跟踪上下文，可以使用 [.NET API](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.headers.httprequestheaders?view=netcore-3.1):
 
 ```csharp
-// client is HttpClient. // client is HttpClient. req is HttpRequestMessage
+// client is HttpClient. req is HttpRequestMessage
 req.Headers.Add("traceparent", traceparentValue);
 req.Headers.Add("tracestate", tracestateValue);
 HttpResponseMessage response = await client.SendAsync(req);
@@ -262,13 +262,6 @@ import (
 ### 3. 3. 使用跟踪上下文调用 InvokeService 方法
 
 ```go
-  // Create the Trace Context
-  ctx , span := trace.StartSpan(context.Background(), "InvokeService")
-
-  // The returned context can be used to keep propagating the newly created span in the current context.
-  // In the same process, context.Context is used to propagate trace context.
-
-  // Across the process, use the propagation format of Trace Context to propagate trace context.
   // Create the Trace Context
   ctx , span := trace.StartSpan(context.Background(), "InvokeService")
 
