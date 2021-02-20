@@ -21,7 +21,7 @@ Create a new binding component with the name of `myevent`.
 
 在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
-在这里，创建一个新的名称为 `myevent` 的绑定组件。
+{{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
