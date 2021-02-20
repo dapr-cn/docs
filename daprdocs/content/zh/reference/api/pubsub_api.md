@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Pub/sub API reference"
 linkTitle: "Pub/Sub API"
 description: "Detailed documentation on the pub/sub API"
