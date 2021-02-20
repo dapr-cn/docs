@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Scope components to one or more applications"
 linkTitle: "How-To: Set component scopes"
-weight: 300
+weight: 200
 description: "Limit component access to particular Dapr instances"
 ---
 
@@ -45,6 +45,7 @@ Windows:
 
 ```powershell
 setx NAMESPACE "production"
+
 # run Dapr as usual
 ```
 {{% /codetab %}}
@@ -117,7 +118,7 @@ scopes:
 
 ## Example <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-## Related links
+## 相关链接
 
 - [Configure Pub/Sub components with multiple namespaces]({{< ref "pubsub-namespaces.md" >}})
 - [Use secret scoping]({{< ref "secrets-scopes.md" >}})
