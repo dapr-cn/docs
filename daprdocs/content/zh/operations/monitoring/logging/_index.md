@@ -1,8 +1,8 @@
 ---
-type: 文档
+type: docs
 title: "Logging"
 linkTitle: "Logging"
-weight: 300
+weight: 400
 description: "How to setup loggings for Dapr sidecar, and your application"
 ---
 
