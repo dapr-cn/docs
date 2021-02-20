@@ -1,12 +1,12 @@
 ---
 type: docs
 title: "W3C 跟踪上下文概述"
-linkTitle: "Overview"
+linkTitle: "Secrets stores overview"
 weight: 10000
 description: 使用Dapr进行W3C追踪的背景和场景
 ---
 
-## 简介
+## 背景
 Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分布式跟踪。 在很大程度上，Dapr 负责生成和传播跟踪上下文信息的所有繁重工作，这些信息可以发送到许多不同的诊断工具进行可视化和查询。 作为开发者，您只有在极少数情况下需要传播或生成跟踪标头。
 
 ## 背景
@@ -60,18 +60,22 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
    
         service A -> service B
         [ .. some code logic ..]
+        service A -> service B
+        [ .. some code logic ..]
         service A -> service C
         [ .. some code logic ..]
         service A -> service D
+        [ .. some code logic ..] some code logic ..]
+        service A -> service D
         [ .. some code logic ..]
 
-    在这种情况下，当服务 A 首先调用服务 B 时，Dapr 会在服务 A 中生成跟踪标头，然后这些跟踪标头将传播到服务 B。这些跟踪标头作为响应标头的一部分在服务 B 的响应中返回。 但是，您需要将返回的跟踪上下文传播到下一个服务，如服务 C 和服务 D，因为 Dapr 不知道您希望重用相同的标头。
+    在这种情况下，当服务 A 首先调用服务 B 时，Dapr 会在服务 A 中生成跟踪标头，然后这些跟踪标头将传播到服务 B。 这些跟踪标头作为响应标头的一部分在服务 B 的响应中返回。 但是，您需要将返回的跟踪上下文传播到下一个服务，如服务 C 和服务 D，因为 Dapr 不知道您希望重用相同的标头。
 
      若要了解如何从响应中提取跟踪标头并将跟踪标头添加到请求中，请参阅 [如何使用跟踪上下文]({{< ref w3c-tracing >}}) 一文.
 
-2. 您已选择生成自己的跟踪上下文标头。 这是很少会遇到的。 可能存在以下情况：您会特别选择将 W3C 跟踪头添加到服务调用中，例如，如果您有一个目前没有使用 Dapr的现有应用程序。 在这种情况下，Dapr 仍然会为您传播跟踪上下文标头。 如果您决定自己生成跟踪标头，有三种方法可以实现：
+2. 您已选择生成自己的跟踪上下文标头。 这是很少会遇到的。 You have chosen to generate your own trace context headers. This is much more unusual. There may be occassions where you specifically chose to add W3C trace headers into a service call, for example if you have an existing application that does not currently use Dapr. In this case Dapr still propagates the trace context headers for you. If you decide to generate trace headers yourself, there are three ways this can be done : 在这种情况下，Dapr 仍然会为您传播跟踪上下文标头。 如果您决定自己生成跟踪标头，有三种方法可以实现：
 
-     1. 您可以使用行业标准的 OpenCensus/OpenTelemetry SDK 来生成跟踪标头，并将这些跟踪标头传递给启用 Dapr 的服务。 这是首选的建议。
+     1. You can use the industry standard OpenCensus/OpenTelemetry SDKs to generate trace headers and pass these trace headers to a Dapr enabled service. This is the preferred recommendation. 这是首选的建议。
 
      2. 您可以使用供应商SDK来生成W3C跟踪标头，如DynaTrace SDK，并将这些跟踪标头传递给启用Dapr的服务。
 
@@ -84,7 +88,7 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
 当将HTTP响应的跟踪上下文头传播到HTTP请求时，您需要复制这些标头。
 
 #### Traceparent 标头
-Traceparent 标头以所有供应商都能理解的通用格式表示跟踪系统中的传入请求。 下面是 Traceparent 标头的示例。
+The traceparent header represents the incoming request in a tracing system in a common format, understood by all vendors. Here’s an example of a traceparent header. 下面是 Traceparent 标头的示例。
 
 `traceparent: 00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01`
 
