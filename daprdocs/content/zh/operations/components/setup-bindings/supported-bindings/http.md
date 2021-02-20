@@ -1,11 +1,11 @@
 ---
-type: 文档
-title: "HTTP 绑定规范"
+type: docs
+title: "HTTP binding spec"
 linkTitle: "HTTP"
-description: "HTTP 绑定组件的详细文档"
+description: "Detailed documentation on the HTTP binding component"
 ---
 
-## 设置 Dapr 组件
+## Setup Dapr component
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -19,22 +19,20 @@ spec:
   metadata:
   - name: url
     value: http://something.com
-  - name: method
-    value: GET
 ```
 
-## Input bindings
+## Spec metadata fields
 
-| 字段  | Required | Output Binding Supported Operations | Details                                     | Example:                                                   |
-| --- |:--------:| ----------------------------------- | ------------------------------------------- | ---------------------------------------------------------- |
-| url |    Y     | Output                              | The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers` |
+| Field | Required | Binding support | Details                                     | Example                                                    |
+| ----- |:--------:| --------------- | ------------------------------------------- | ---------------------------------------------------------- |
+| url   |    Y     | Output          | The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers` |
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the folowing [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html):
 
-- `url` 是要调用的 HTTP 网址。
-- `method` 是用于请求的 HTTP 动作。
+- `create` : For backward compatability and treated like a post
+- `get` :  Read data/records
 - `head` : Identical to get except that the server does not return a response body
 - `post` : Typically used to create records or send commands
 - `put` : Update data/records
@@ -85,13 +83,13 @@ The response body contains the data returned by the HTTP endpoint.  The `data` f
 | status     |    Y     | The status description                                                          | `"200 OK"`, `"201 Created"` |
 | Headers*   |    N     | Any fields that have a capital first letter are sent as request headers         | `"Content-Type"`            |
 
-#### Example:
+#### Example
 
 **Requesting the base URL**
 
-The response body will contain the value stored in the blob object.
+{{< tabs Windows Linux >}}
 
-在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
+{{% codetab %}}
 ```bash
 curl -d "{ \"operation\": \"get\" }" \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
@@ -146,7 +144,7 @@ Any metadata field that starts with a capital letter is passed as a request head
 }
 ```
 
-#### 例子
+#### Example
 
 **Posting a new record**
 
@@ -168,10 +166,10 @@ curl -d '{ "operation": "post", "data": "YOUR_BASE_64_CONTENT", "metadata": { "p
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
-- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
-- [绑定API 参考]({{< ref bindings_api.md >}})
+- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
+- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
+- [Bindings API reference]({{< ref bindings_api.md >}})
