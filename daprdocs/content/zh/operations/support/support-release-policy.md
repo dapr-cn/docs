@@ -61,5 +61,5 @@ Here is an example, using a hypothetical 1.1.0 as the deprecation announcement r
 ## Upgrade on Hosting platforms
 Dapr can support multiple hosting platforms for production. With the 1.0 release the two supported platforms are Kubernetes and physical machines. For Kubernetes upgrades see [Production guidelines on Kubernetes]({{< ref kubernetes-production.md >}})
 
-## Related links
+## 相关链接
 * Read the [Versioning policy]({{< ref support-versioning.md >}})
