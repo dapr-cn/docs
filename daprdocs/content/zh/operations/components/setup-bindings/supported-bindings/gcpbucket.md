@@ -45,12 +45,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                           | Required | Binding support | Details                                             | Example                                                                                          |
+| 字段                              | Required | Binding support | Details                                             | Example                                                                                          |
 | ------------------------------- |:--------:| --------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | bucket                          |    Y     | Output          | The bucket name                                     | `"mybucket"`                                                                                     |
 | type                            |    Y     | Output          | Tge GCP credentials type                            | `"service_account"`                                                                              |
@@ -64,16 +64,16 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | auth_provider_x509_cert_url |    Y     | Output          | GCP credentials cert url                            | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
 | client_x509_cert_url          |    Y     | Output          | GCP credentials project x509 cert url               | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
 
-## Binding support
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
 - `create`
 
-## Related links
+## 相关链接
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
