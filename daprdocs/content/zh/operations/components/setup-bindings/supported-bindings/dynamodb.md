@@ -40,7 +40,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field        | Required | Binding support | Details                                                          | Example             |
+| 字段           | Required | Binding support | Details                                                          | Example             |
 | ------------ |:--------:| --------------- | ---------------------------------------------------------------- | ------------------- |
 | table        |    Y     | Output          | The DynamoDB table name                                          | `"items"`           |
 | region       |    Y     | Output          | The specific AWS region the AWS DynamoDB instance is deployed in | `"us-east-1"`       |
@@ -49,17 +49,17 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | sessionToken |    N     | Output          | The AWS session token to use                                     | `"sessionToken"`    |
 
 
-## Binding support
+## Output bindings
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `create`
 
-## Related links
+## 相关链接
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
 - [Authenticating to AWS]({{< ref authenticating-aws.md >}})
