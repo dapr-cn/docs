@@ -26,7 +26,7 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field     | Required | Details                                                     | Example             |
+| 字段        | Required | Details                                                     | Example             |
 | --------- |:--------:| ----------------------------------------------------------- | ------------------- |
 | host      |    Y     | Address of the Pulsar broker. Default is `"localhost:6650"` | `"localhost:6650"`  |
 | enableTLS |    Y     | Enable TLS.  Default: `"false"`                             | `"true"`, `"false"` |
@@ -55,7 +55,7 @@ Refer to the following [Helm chart](https://pulsar.apache.org/docs/en/kubernetes
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
