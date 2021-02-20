@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Deploy Dapr on a Kubernetes cluster"
 linkTitle: "Deploy Dapr"
 weight: 20000
@@ -14,10 +14,10 @@ As part of the Dapr initialization the following pods are installed:
 
 - **dapr-operator:** Manages component updates and Kubernetes services endpoints for Dapr (state stores, pub/subs, etc.)
 - **dapr-sidecar-injector:** Injects Dapr into annotated deployment pods
-- **dapr-placement:** Used for actors only. Creates mapping tables that map actor instances to pods Creates mapping tables that map actor instances to pods
+- **dapr-placement:** Used for actors only. Creates mapping tables that map actor instances to pods
 - **dapr-sentry:** Manages mTLS between services and acts as a certificate authority
 
-## 前期准备
+## Prerequisites
 
 - Install [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
@@ -25,7 +25,7 @@ As part of the Dapr initialization the following pods are installed:
 
 ### Create cluster
 
-You can install Dapr on any Kubernetes cluster. Here are some helpful links: Here are some helpful links:
+You can install Dapr on any Kubernetes cluster. Here are some helpful links:
 
 - [Setup Minikube Cluster]({{< ref setup-minikube.md >}})
 - [Setup Azure Kubernetes Service Cluster]({{< ref setup-aks.md >}})
@@ -33,7 +33,7 @@ You can install Dapr on any Kubernetes cluster. Here are some helpful links: Her
 - [Setup Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 {{% alert title="Hybrid clusters" color="primary" %}}
-Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X48X}}). You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X52X}}).
+Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X52X}}).
 {{% /alert %}}
 
 
@@ -172,6 +172,6 @@ helm uninstall dapr --namespace dapr-system
 - See [this page](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md) for details on Dapr Helm charts.
 
 
-## 下一步
+## Next steps
 
 - [Configure state store & pubsub message broker]({{< ref configure-state-pubsub.md >}})
