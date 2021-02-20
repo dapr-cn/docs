@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "OAuth2"
 linkTitle: "OAuth2"
 weight: 2000
@@ -8,7 +8,7 @@ description: "Use OAuth2 middleware to secure HTTP endpoints"
 
 The OAuth2 [HTTP middleware]({{< ref middleware-concept.md >}}) enables the [OAuth2 Authorization Code flow](https://tools.ietf.org/html/rfc6749#section-4.1) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
 
-## Introduction
+## Component format
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -36,8 +36,8 @@ spec:
   - name: forceHTTPS
     value: "false" 
 ```
-## Input bindings
-| 字段             | Details                                                                                                                                                                      | 示例                                                 |
+## Spec metadata fields
+| Field          | Details                                                                                                                                                                      | Example                                            |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | clientId       | The client ID of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                                 |                                                    |
 | clientSecret   | The client secret of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                             |                                                    |
@@ -64,7 +64,7 @@ spec:
       type: middleware.http.oauth2
 ```
 
-## 相关链接
+## Related links
 - [Configure API authorization with OAuth]({{< ref oauth >}})
 - [Middleware OAuth quickstart](https://github.com/dapr/quickstarts/tree/master/middleware)
 - [Middleware concept]({{< ref middleware-concept.md >}})
