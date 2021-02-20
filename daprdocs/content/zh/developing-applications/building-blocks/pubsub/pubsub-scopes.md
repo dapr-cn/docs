@@ -6,7 +6,7 @@ weight: 5000
 description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程序"
 ---
 
-## 背景
+## Introduction
 
 [名称空间或组件 scopes]({{< ref component-scopes.md >}}) 可用于限制对特定应用程序的组件访问。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
 
@@ -156,7 +156,7 @@ spec:
 | app3 | X | X |   |
 
 
-## 例子 <iframe width="560" height="315" src="//player.bilibili.com/player.html?aid=331013260&bvid=BV1EA411W71L&cid=277947422&page=1&t=513" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## 例子 <iframe width="560" height="315" src="https://www.youtube.com/embed/7VdWBBGcbHQ?start=513" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 相关链接
 
