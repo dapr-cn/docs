@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Share state between applications"
 linkTitle: "How-To: Share state between applications"
-weight: 400
+weight: 300
 description: "Choose different strategies for sharing state between different applications"
 ---
 
