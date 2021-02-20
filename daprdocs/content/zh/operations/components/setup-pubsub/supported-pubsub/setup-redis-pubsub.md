@@ -30,12 +30,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field         | Required | Details                                                                                                                         | Example                                                         |
+| 字段            | Required | Details                                                                                                                         | Example                                                         |
 | ------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | redisHost     |    Y     | Connection-string for the redis host                                                                                            | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
 | redisPassword |    Y     | Password for Redis host. No Default. Can be `secretKeyRef` to use a secret reference                                            | `""`, `"KeFg23!"`                                               |
@@ -102,7 +102,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 The Dapr CLI automatically deploys a local redis instance in self hosted mode as part of the `dapr init` command.
 {{% /alert %}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
