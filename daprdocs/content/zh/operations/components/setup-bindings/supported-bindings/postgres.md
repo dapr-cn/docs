@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "PostgreSQL binding spec"
-linkTitle: "PostgreSQL"
+title: "PostgrSQL binding spec"
+linkTitle: "PostgrSQL"
 description: "Detailed documentation on the PostgreSQL binding component"
 ---
 
@@ -25,14 +25,14 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field | Required | Binding support | Details                                                             | Example                                                                                     |
-| ----- |:--------:| --------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| url   |    Y     | Output          | Postgres connection string See [here](#url-format) for more details | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
+| 字段  | Required | Binding support | Details                                                             | Example                                                                                     |
+| --- |:--------:| --------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| url |    Y     | Output          | Postgres connection string See [here](#url-format) for more details | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
 
 ### URL format
 
@@ -59,7 +59,7 @@ Both methods also support connection pool configuration variables:
 - `pool_health_check_period`: duration string
 
 
-## Binding support
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
@@ -146,7 +146,7 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 
 > Note, the PostgreSql binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
 
-## Related links
+## 相关链接
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
