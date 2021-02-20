@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "日志"
 linkTitle: "Logs"
 weight: 3000
