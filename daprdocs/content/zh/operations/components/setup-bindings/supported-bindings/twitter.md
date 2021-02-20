@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Twitter binding spec"
 linkTitle: "Twitter"
 description: "Detailed documentation on the Twitter binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup Twitter binding create a component of type `bindings.twitter`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -30,23 +30,23 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Specifying a time to live on message level
+## Spec metadata fields
 
-| 字段             | Required | Output Binding Supported Operations | Details                     | Example:           |
-| -------------- |:--------:| ----------------------------------- | --------------------------- | ------------------ |
-| consumerKey    |    Y     | Input/Output                        | Twitter API consumer key    | `"conusmerkey"`    |
-| consumerSecret |    Y     | Input/Output                        | Twitter API consumer secret | `"conusmersecret"` |
-| accessToken    |    Y     | Input/Output                        | Twitter API access token    | `"accesstoken"`    |
-| accessSecret   |    Y     | Input/Output                        | Twitter API access secret   | `"accesssecret"`   |
+| Field          | Required | Binding support | Details                     | Example            |
+| -------------- |:--------:| --------------- | --------------------------- | ------------------ |
+| consumerKey    |    Y     | Input/Output    | Twitter API consumer key    | `"conusmerkey"`    |
+| consumerSecret |    Y     | Input/Output    | Twitter API consumer secret | `"conusmersecret"` |
+| accessToken    |    Y     | Input/Output    | Twitter API access token    | `"accesstoken"`    |
+| accessSecret   |    Y     | Input/Output    | Twitter API access secret   | `"accesssecret"`   |
 
-## Specifying a priority on message level
+## Binding support
 
-若要设置在消息级别生存的时间，请使用 `metadata` 请求正文中的元数据部分。
+This component supports both **input and output** binding interfaces.
 
-字段名为 `ttlInSeconds`。
+This component supports **output binding** with the following operations:
 
 - `get`
 
@@ -93,7 +93,7 @@ The metadata parameters are:
 
 You can see the example of the JSON data that Twitter binding returns [here](https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets)
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
