@@ -5,7 +5,7 @@ linkTitle: "upgrade"
 description: "Detailed information on the upgrade CLI command"
 ---
 
-## Description
+## 说明
 
 Upgrade Dapr on supported hosting platforms.
 
@@ -13,21 +13,21 @@ Upgrade Dapr on supported hosting platforms.
 
 - [Kubernetes]({{< ref kubernetes >}})
 
-## Usage
+## 用法
 ```bash
 dapr upgrade [flags]
 ```
 
-## Flags
+## 参数
 
-| Name                 | Environment Variable | Default  | Description                                                                                               |
-| -------------------- | -------------------- | -------- | --------------------------------------------------------------------------------------------------------- |
-| `--help`, `-h`       |                      |          | Print this help message                                                                                   |
-| `--kubernetes`, `-k` |                      | `false`  | Upgrade Dapr in a Kubernetes cluster                                                                      |
-| `--runtime-version`  |                      | `latest` | The version of the Dapr runtime to upgrade to, for example: `1.0.0`                                       |
-| `--set`              |                      |          | Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2) |
+| Name                 | 环境变量 | 默认值      | 说明                                                                                                        |
+| -------------------- | ---- | -------- | --------------------------------------------------------------------------------------------------------- |
+| `--help`, `-h`       |      |          | 显示此帮助消息                                                                                                   |
+| `--kubernetes`, `-k` |      | `false`  | Upgrade Dapr in a Kubernetes cluster                                                                      |
+| `--runtime-version`  |      | `latest` | The version of the Dapr runtime to upgrade to, for example: `1.0.0`                                       |
+| `--set`              |      |          | Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2) |
 
-## Examples
+## 示例
 
 ### Upgrade Dapr in Kubernetes to latest version
 ```bash
