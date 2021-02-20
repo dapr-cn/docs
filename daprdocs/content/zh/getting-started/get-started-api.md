@@ -101,5 +101,3 @@ Exit the redis-cli with:
 exit
 ```
 
-
-[}}" role="button">Next step: Define a component >>]({{< ref get-started-component.md  mark=){.btn.btn-primary}
