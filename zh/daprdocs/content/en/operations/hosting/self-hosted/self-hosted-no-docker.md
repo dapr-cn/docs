@@ -2,13 +2,13 @@
 type: docs
 title: "入门指南: 不使用 Docker 在自托管模式下运行 Dapr"
 linkTitle: "Run without Docker"
-weight: 30000
+weight: 50000
 description: "如何以自托管方式部署和运行 Dapr ，而无需在本地机器上安装 Docker"
 ---
 
 本文提供了在没有 Docker 的自托管模式下运行 Dapr 的指导。
 
-## 先决条件
+## 前期准备
 
 - [Dapr CLI]({{< ref "install-dapr-selfhost.md#installing-dapr-cli" >}})
 
@@ -47,7 +47,7 @@ INFO[0000] Raft server is starting on 127.0.0.1:8201...  instance=Nicoletaz-L10.
 INFO[0000] placement service started on port 50005       instance=Nicoletaz-L10.redmond.corp.microsoft.com scope=dapr.placement type=log ver=1.0.0-rc.1
 INFO[0000] Healthz server is listening on :8080          instance=Nicoletaz-L10.redmond.corp.microsoft.com scope=dapr.placement type=log ver=1.0.0-rc.1
 INFO[0001] cluster leadership acquired                   instance=Nicoletaz-L10.redmond.corp.microsoft.com scope=dapr.placement type=log ver=1.0.0-rc.1
-INFO[0001] leader is established.                        instance=Nicoletaz-L10.redmond.corp.microsoft.com scope=dapr.placement type=log ver=1.0.0-rc.1
+INFO[0001] leader is established.                        instance=Nicoletaz-L10.redmond.corp.microsoft.com scope=dapr.placement type=log ver=1.0.0-rc.1                        instance=Nicoletaz-L10.redmond.corp.microsoft.com scope=dapr.placement type=log ver=1.0.0-rc.1
 
 ```
 
