@@ -1,13 +1,13 @@
 ---
-type: 文档
+type: docs
 title: "AWS DynamoDB"
 linkTitle: "AWS DynamoDB"
 description: Detailed information on the AWS DynamoDB state store component
 ---
 
-## Introduction
+## Component format
 
-To setup a DynamoDB state store create a component of type `state.dynamodb`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup a DynamoDB state store create a component of type `state.dynamodb`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -37,7 +37,7 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
 | 字段           | Required | Details                                                                                                                                                                                                               | Example                                      |
 | ------------ |:--------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |

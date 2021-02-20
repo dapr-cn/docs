@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "构建块"
 linkTitle: "构建块"
 weight: 10

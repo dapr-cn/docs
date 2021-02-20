@@ -1,12 +1,12 @@
 ---
 type: docs
 title: "绑定概述"
-linkTitle: "Secrets stores overview"
+linkTitle: "Overview"
 weight: 100
 description: Dapr 绑定构建块概述
 ---
 
-## 背景
+## Introduction
 
 使用绑定，您可以使用来自外部系统的事件或与外部系统的接口来触发应用程序。 此构建块为您和您的代码提供了若干益处 :
 

@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "HTTP 绑定规范"
 linkTitle: "HTTP"
 description: "HTTP 绑定组件的详细文档"
@@ -19,22 +19,20 @@ spec:
   metadata:
   - name: url
     value: http://something.com
-  - name: method
-    value: GET
 ```
 
-## Input bindings
+## Spec metadata fields
 
-| 字段  | Required | Output Binding Supported Operations | Details                                     | Example:                                                   |
-| --- |:--------:| ----------------------------------- | ------------------------------------------- | ---------------------------------------------------------- |
-| url |    Y     | Output                              | The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers` |
+| 字段  | Required | Binding support | Details                                     | Example                                                    |
+| --- |:--------:| --------------- | ------------------------------------------- | ---------------------------------------------------------- |
+| url |    Y     | Output          | The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers` |
 
 ## Output bindings
 
 This component supports **output binding** with the folowing [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html):
 
-- `url` 是要调用的 HTTP 网址。
-- `method` 是用于请求的 HTTP 动作。
+- `create` : For backward compatability and treated like a post
+- `get` :  Read data/records
 - `head` : Identical to get except that the server does not return a response body
 - `post` : Typically used to create records or send commands
 - `put` : Update data/records
@@ -89,9 +87,9 @@ The response body contains the data returned by the HTTP endpoint.  The `data` f
 
 **Requesting the base URL**
 
-The response body will contain the value stored in the blob object.
+{{< tabs Windows Linux >}}
 
-在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
+{{% codetab %}}
 ```bash
 curl -d "{ \"operation\": \"get\" }" \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>

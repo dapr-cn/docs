@@ -1,13 +1,13 @@
 ---
-type: 文档
+type: docs
 title: "AWS Secrets Manager"
 linkTitle: "AWS Secrets Manager"
 description: Detailed information on the  decret store component
 ---
 
-## Introduction
+## Component format
 
-To setup AWS Secrets Manager secret store create a component of type `secretstores.aws.secretmanager`. To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+To setup AWS Secrets Manager secret store create a component of type `secretstores.aws.secretmanager`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes.
 
@@ -30,11 +30,11 @@ spec:
   - name: sessionToken
     value: "[aws_session_token]"
 ```
-also support connection pool configuration variables:
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+{{% alert title="Warning" color="warning" %}}
+The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
 | 字段           | Required | Details                                                                 | Example             |
 | ------------ |:--------:| ----------------------------------------------------------------------- | ------------------- |

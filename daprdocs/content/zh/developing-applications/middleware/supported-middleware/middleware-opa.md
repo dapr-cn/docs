@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Apply Open Policy Agent (OPA) policies"
 linkTitle: "Open Policy Agent (OPA)"
 weight: 6000
@@ -8,7 +8,7 @@ description: "Use middleware to apply Open Policy Agent (OPA) policies on incomi
 
 The Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware-concept.md >}}) applys [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. This can be used to apply reusable authorization policies to app endpoints.
 
-## Introduction
+## Component format
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -22,25 +22,6 @@ spec:
   metadata:
     # `includedHeaders` is a comma-separated set of case-insensitive headers to include in the request input.
     # Request headers are not passed to the policy by default. Include to receive incoming request headers in
-    # the input
-    - name: includedHeaders
-      value: "x-my-custom-header, x-jwt-header"
-
-    # `defaultStatus` is the status code to return for denied responses
-    - name: defaultStatus
-      value: 403
-
-    # `rego` is the open policy agent policy to evaluate. apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: my-policy
-  namespace: default
-spec:
-  type: middleware.http.opa
-  version: v1
-  metadata:
-    # `includedHeaders` is a comma-seperated set of case-insensitive headers to include in the request input.
-    # Request headers are not passed to the policy by default. Include to recieve incoming request headers in
     # the input
     - name: includedHeaders
       value: "x-my-custom-header, x-jwt-header"
@@ -85,9 +66,9 @@ spec:
         }
 ```
 
-You can prototype and experiment with policies using the [official opa playground](https://play.openpolicyagent.org). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE).
+You can prototype and experiment with policies using the [official opa playground](https://play.openpolicyagent.org). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE).
 
-## Input bindings
+## Spec metadata fields
 
 | 字段              | Details                                                                                                                                                                                              | 示例                                                                |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |

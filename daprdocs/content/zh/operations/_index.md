@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Deploying and configuring Dapr in your environment"
 linkTitle: "Operations"
 weight: 40

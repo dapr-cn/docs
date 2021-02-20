@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Redis"
 linkTitle: "Redis"
 weight: 2000

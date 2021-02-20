@@ -1,7 +1,7 @@
 ---
-type: 文档
+type: docs
 title: "Overview of Dapr configuration options"
-linkTitle: "Secrets stores overview"
+linkTitle: "Overview"
 weight: 100
 description: "Information on Dapr configuration and how to set options for your application"
 ---
@@ -11,12 +11,12 @@ description: "Information on Dapr configuration and how to set options for your 
 ### Setup sidecar configuration
 
 #### Self-hosted sidecar
-In self hosted mode the Dapr configuration is a configuration file, for example `config.yaml`. In self hosted mode the Dapr configuration is a configuration file, for example `config.yaml`. By default the Dapr sidecar looks in the default Dapr folder for the runtime configuration eg: `$HOME/.dapr/config.yaml` in Linux/MacOS and `%USERPROFILE%\.dapr\config.yaml` in Windows.
+In self hosted mode the Dapr configuration is a configuration file, for example `config.yaml`. By default the Dapr sidecar looks in the default Dapr folder for the runtime configuration eg: `$HOME/.dapr/config.yaml` in Linux/MacOS and `%USERPROFILE%\.dapr\config.yaml` in Windows.
 
 A Dapr sidecar can also apply a configuration by using a `--config` flag to the file path with `dapr run` CLI command.
 
 #### Kubernetes sidecar
-In Kubernetes mode the Dapr configuration is a Configuration CRD, that is applied to the cluster. For example; For example;
+In Kubernetes mode the Dapr configuration is a Configuration CRD, that is applied to the cluster. For example;
 
 ```bash
 kubectl apply -f myappconfig.yaml
@@ -28,7 +28,7 @@ You can use the Dapr CLI to list the Configuration CRDs
 dapr configurations -k
 ```
 
-A Dapr sidecar can apply a specific configuration by using a `dapr.io/config` annotation. For example: For example:
+A Dapr sidecar can apply a specific configuration by using a `dapr.io/config` annotation. For example:
 
 ```yml
   annotations:
@@ -72,7 +72,7 @@ The following table lists the properties for tracing:
 
 `samplingRate` is used to enable or disable the tracing. To disable the sampling rate , set `samplingRate : "0"` in the configuration. The valid range of samplingRate is between 0 and 1 inclusive. The sampling rate determines whether a trace span should be sampled or not based on value. `samplingRate : "1"` samples all traces. By default, the sampling rate is (0.0001) or 1 in 10,000 traces.
 
-See [Observability distributed tracing]({{< ref "tracing.md" >}}) for more information
+See [Observability distributed tracing]({{< ref "tracing-overview.md" >}}) for more information
 
 #### Metrics
 
@@ -91,7 +91,7 @@ The following table lists the properties for metrics:
 | --------- | ------- | ------------------------------------- |
 | `enabled` | boolean | Whether metrics should to be enabled. |
 
-See [metrics documentation]({{< ref "metrics.md" >}}) for more information
+See [metrics documentation]({{< ref "metrics-overview.md" >}}) for more information
 
 #### Middleware
 
@@ -162,16 +162,16 @@ spec:
 ```
 
 ## Control-plane configuration
-There is a single configuration file called `default` installed with the Dapr control plane system services that applies global settings. This is only set up when Dapr is deployed to Kubernetes. This is only set up when Dapr is deployed to Kubernetes.
+There is a single configuration file called `default` installed with the Dapr control plane system services that applies global settings. This is only set up when Dapr is deployed to Kubernetes.
 
 ### Control-plane configuration settings
 A Dapr control plane configuration can configure the following settings:
 
-| Property         | Type   | 说明                                                                                                                                     |
-| ---------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| enabled          | bool   | Set mtls to be enabled or disabled                                                                                                     |
-| allowedClockSkew | string | The extra time to give for certificate expiry based on possible clock skew on a machine. Default is 15 minutes. Default is 15 minutes. |
-| workloadCertTTL  | string | Time a certificate is valid for. Time a certificate is valid for. Default is 24 hours                                                  |
+| Property         | Type   | 说明                                                                                                              |
+| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
+| enabled          | bool   | Set mtls to be enabled or disabled                                                                              |
+| allowedClockSkew | string | The extra time to give for certificate expiry based on possible clock skew on a machine. Default is 15 minutes. |
+| workloadCertTTL  | string | Time a certificate is valid for. Default is 24 hours                                                            |
 
 See the [Mutual TLS]({{< ref "mtls.md" >}}) HowTo and [security concepts]({{< ref "security-concept.md" >}}) for more information.
 

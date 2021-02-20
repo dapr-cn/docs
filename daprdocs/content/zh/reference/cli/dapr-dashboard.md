@@ -9,7 +9,7 @@ description: "有关 dashboard CLI 命令的详细信息"
 
 启动 [Dapr 仪表板](https://github.com/dapr/dashboard)。
 
-## 支持的平台
+## Supported platforms
 
 - [Self-Hosted]({{< ref self-hosted >}})
 - [Kubernetes]({{< ref kubernetes >}})
@@ -21,7 +21,7 @@ dapr dashboard [flags]
 
 ## 参数
 
-| 名称                   | 环境变量 | 默认值           | 说明                                       |
+| Name                 | 环境变量 | 默认值           | 说明                                       |
 | -------------------- | ---- | ------------- | ---------------------------------------- |
 | `--help`, `-h`       |      |               | 显示此帮助消息                                  |
 | `--kubernetes`, `-k` |      | `false`       | 通过本地代理连接 Kubernetes 集群，在本地浏览器打开Dapr 控制面板 |

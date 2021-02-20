@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Rate limiting"
 linkTitle: "Rate limiting"
 weight: 1000
@@ -8,7 +8,7 @@ description: "Use rate limit middleware to limit requests per second"
 
 The rate limit [HTTP middleware]({{< ref middleware-concept.md >}}) allows restricting the maximum number of allowed HTTP requests per second. Rate limiting can protect your application from denial of service (DOS) attacks. DOS attacks can be initiated by malicious 3rd parties but also by bugs in your software (a.k.a. a "friendly fire" DOS attack).
 
-## Introduction
+## Component format
 
 In the following definition, the maximum requests per second are set to 10:
 ```yaml
@@ -24,7 +24,7 @@ spec:
     value: 10
 ```
 
-## Input bindings
+## Spec metadata fields
 
 | 字段                   | Details                                                                                                                                                                | 示例   |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |

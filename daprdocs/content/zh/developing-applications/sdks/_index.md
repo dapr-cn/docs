@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr Software Development Kits (SDKs)"
 linkTitle: "SDKs"
 weight: 20
@@ -7,7 +7,7 @@ description: "Use your favorite languages with Dapr"
 no_list: true
 ---
 
-The Dapr SDKs are the easiest way for you to get Dapr into your application. Choose your favorite language and get up and running with Dapr in minutes. Choose your favorite language and get up and running with Dapr in minutes.
+The Dapr SDKs are the easiest way for you to get Dapr into your application. Choose your favorite language and get up and running with Dapr in minutes.
 
 ## SDK packages
 
@@ -29,16 +29,16 @@ The Dapr SDKs are the easiest way for you to get Dapr into your application. Cho
 
 ## SDK languages
 
-| 语言                                         |   状态 （State）   | Client SDK |     Service Extensions     |                                        Actor SDK                                         |
-| ------------------------------------------ |:--------------:|:----------:|:--------------------------:|:----------------------------------------------------------------------------------------:|
-| [.NET](https://github.com/dapr/dotnet-sdk) | In Development |     ✔      |        ASP.NET Core        |                                            ✔                                             |
-| [Python]({{< ref python >}})               | In Development |     ✔      | {{< ref python-grpc.md >}} | [FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |
-| [Java](https://github.com/dapr/java-sdk)   | In Development |     ✔      |        Spring Boot         |                                            ✔                                             |
-| [Go](https://github.com/dapr/go-sdk)       | In Development |     ✔      |             ✔              |                                                                                          |
-| [PHP](https://github.com/dapr/php-sdk)     |    Backlog     |     ✔      |             ✔              |                                            ✔                                             |
-| [C++](https://github.com/dapr/cpp-sdk)     |    Backlog     |     ✔      |                            |                                                                                          |
-| [Rust]()                                   |    Backlog     |     ✔      |                            |                                                                                          |
-| [Javascript]()                             | In development |     ✔      |                            |                                                                                          |
+| 语言                                         |   状态 （State）   | Client SDK |            Service Extensions             |                                        Actor SDK                                         |
+| ------------------------------------------ |:--------------:|:----------:|:-----------------------------------------:|:----------------------------------------------------------------------------------------:|
+| [.NET](https://github.com/dapr/dotnet-sdk) |     Stable     |     ✔      |            ✔ </br>ASP.NET Core            |                                            ✔                                             |
+| [Python]({{< ref python >}})               |     Stable     |     ✔      | ✔ </br>[gRPC]({{< ref python-grpc.md >}}) | [FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |
+| [Java](https://github.com/dapr/java-sdk)   |     Stable     |     ✔      |            ✔ </br>Spring Boot             |                                            ✔                                             |
+| [Go](https://github.com/dapr/go-sdk)       |     Stable     |     ✔      |                     ✔                     |                                                                                          |
+| [PHP](https://github.com/dapr/php-sdk)     |     Stable     |     ✔      |                     ✔                     |                                            ✔                                             |
+| [C++](https://github.com/dapr/cpp-sdk)     | In development |     ✔      |                                           |                                                                                          |
+| [Rust]()                                   | In development |     ✔      |                                           |                                                                                          |
+| [Javascript]()                             | In development |     ✔      |                                           |                                                                                          |
 
 ## Further reading
 

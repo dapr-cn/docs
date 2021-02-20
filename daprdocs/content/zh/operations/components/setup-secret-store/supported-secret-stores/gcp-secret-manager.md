@@ -1,13 +1,13 @@
 ---
-type: 文档
+type: docs
 title: "GCP Secret Manager"
 linkTitle: "GCP Secret Manager"
 description: Detailed information on the GCP Secret Manager secret store component
 ---
 
-## Introduction
+## Component format
 
-To setup GCP Secret Manager secret store create a component of type `secretstores.gcp.secretmanager`. To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+To setup GCP Secret Manager secret store create a component of type `secretstores.gcp.secretmanager`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -45,7 +45,7 @@ spec:
 以上示例将 Secret 明文存储。 It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
 | 字段                              | Required | Details                                        | Example                                                                                            |
 | ------------------------------- |:--------:| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |

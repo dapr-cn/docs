@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Tracing"
 linkTitle: "Tracing"
 weight: 100

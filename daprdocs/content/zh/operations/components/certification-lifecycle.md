@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Certification lifecycle"
 linkTitle: "Certification lifecycle"
 weight: 200

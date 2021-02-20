@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Setup an Azure Kubernetes Service cluster"
 linkTitle: "Azure Kubernetes Service"
 weight: 2000
@@ -17,7 +17,7 @@ description: >
 
 ## Deploy an Azure Kubernetes Service cluster
 
-This guide walks you through installing an Azure Kubernetes Service cluster. This guide walks you through installing an Azure Kubernetes Service cluster. If you need more information, refer to [Quickstart: Deploy an Azure Kubernetes Service (AKS) cluster using the Azure CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
+This guide walks you through installing an Azure Kubernetes Service cluster. If you need more information, refer to [Quickstart: Deploy an Azure Kubernetes Service (AKS) cluster using the Azure CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
 
 1. Login to Azure
 
@@ -55,7 +55,7 @@ az aks get-credentials -n [your_aks_cluster_name] -g [your_resource_group]
 
 1. [Install Helm v3 client](https://helm.sh/docs/intro/install/)
 
-> **Note:** The latest Dapr helm chart no longer supports Helm v2. Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/). Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
+> **Note:** The latest Dapr helm chart no longer supports Helm v2. Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
 
 2. In case you need permissions  the kubernetes dashboard (i.e. configmaps is forbidden: User "system:serviceaccount:kube-system:kubernetes-dashboard" cannot list configmaps in the namespace "default", etc.) execute this command
 

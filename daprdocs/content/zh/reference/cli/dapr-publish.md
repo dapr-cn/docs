@@ -9,7 +9,7 @@ description: "有关 publish CLI 命令的详细信息"
 
 发布 pub-sub 事件。
 
-## 支持的平台
+## Supported platforms
 
 - [Self-Hosted]({{< ref self-hosted >}})
 
@@ -21,7 +21,7 @@ dapr publish [flags]
 
 ## 参数
 
-| 名称                 | 环境变量 | 默认值 | 说明                |
+| Name               | 环境变量 | 默认值 | 说明                |
 | ------------------ | ---- | --- | ----------------- |
 | `--publish-app-id` | `-i` |     | 代表您要发布的应用程序的 ID   |
 | `--pubsub`         | `-p` |     | Pub/sub 组件的名称     |

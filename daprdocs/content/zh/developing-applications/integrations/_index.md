@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Integrations"
 linkTitle: "Integrations"
 weight: 50

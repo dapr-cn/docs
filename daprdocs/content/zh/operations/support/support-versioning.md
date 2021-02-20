@@ -1,12 +1,12 @@
 ---
-type: 文档
+type: docs
 title: "Versioning policy"
 linkTitle: "Versioning"
 weight: 2000
 description: "Dapr's versioning policies"
 ---
 
-## 背景
+## Introduction
 Dapr is designed for future changes in the runtime, APIs and components with versioning schemes. This topic describes the versioning schemes and strategies for APIs, manifests such as components and Github repositories.
 
 ## Versioning

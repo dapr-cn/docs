@@ -16,7 +16,7 @@ Having to maintain this code, which is not part of the core logic of the applica
 ## 分布式跟踪
 When building an application which is leveraging Dapr building blocks to perform service-to-service calls and pub/sub messaging, Dapr offers an advantage in respect to [distributed tracing]({{X9X}}) because this inter-service communication flows through the Dapr sidecar, the sidecar is in a unique position to offload the burden of application level instrumentation.
 
-### 分布式跟踪
+### Distributed tracing
 Dapr 使用 [W3C 跟踪上下文进行分布式跟踪]({{X23X}})
 
 <img src="/images/observability-tracing.png" width=1000 alt="Distributed tracing with Dapr">
@@ -37,7 +37,7 @@ Dapr 系统服务指标显示 sidecar 注入失败、系统服务健康状态，
 ### 日志
 Dapr generates [logs]({{X23X}}) to provide visibility into sidecar operation and to help users identify issues and perform debugging. 日志事件包含由 Dapr 系统服务生成的警告，错误，信息和调试消息。 Dapr can also be configured to send logs to collectors such as [Fluentd]({{< ref fluentd.md >}}) and [Azure Monitor]({{< ref azure-monitor.md >}}) so they can be easily searched, analyzed and provide insights.
 
-### 指标
+### Metrics
 Metrics are the series of measured values and counts that are collected and stored over time. [指标]({{X26X}}) 是在一段时间内收集和存储的一系列测量值和计数。 Dapr 指标可以监控和了解 Dapr 系统服务和用户应用的行为。 For example, the metrics between a Dapr sidecar and the user application show call latency, traffic failures, error rates of requests etc. Dapr [system services metrics](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md) show sidecar injection failures, health of the system services including CPU usage, number of actor placements made etc.
 
 ### 健康状态

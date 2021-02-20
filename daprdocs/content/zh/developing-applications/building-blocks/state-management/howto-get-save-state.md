@@ -1,16 +1,16 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Save and get state"
 linkTitle: "How-To: Save & get state"
 weight: 200
 description: "Use key value pairs to persist a state"
 ---
 
-## 背景
+## Introduction
 
-State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
+State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
 
-Dapr provides state management capabilities that include consistency and concurrency options. Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
+Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
 
 ## Pre-requisites
 
@@ -64,7 +64,7 @@ The following example shows how to a single key/value pair using the Dapr state 
 It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
 {{% /alert %}}
 
-{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK">}}
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
 Begin by launching a Dapr sidecar:
@@ -146,16 +146,6 @@ Updating metadata for app command: python pythonState.py
 You are up and running! Both Dapr and your app logs will appear here.
 
 == APP == State has been stored
-== APP == Got value: b'myFirstValue' name: statestore, type: state.redis" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T21:34:33.9760387-08:00" level=info msg="API gRPC server is running on port 51656" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T21:34:33.9770372-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 172.9994ms" app_id=Braidbald-Boot scope=dapr.
-
-Checking if Dapr sidecar is listening on GRPC port 51656
-Dapr sidecar is up and running.
-Updating metadata for app command: python pythonState.py
-You are up and running! Both Dapr and your app logs will appear here.
-
-== APP == State has been stored
 == APP == Got value: b'myFirstValue'
 ```
 
@@ -182,7 +172,7 @@ $app->run(function(\Dapr\State\StateManager $stateManager, \Psr\Log\LoggerInterf
 });
 ```
 
-{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK">}}
+Once saved run the following command to launch a Dapr sidecar and run the PHP application:
 
 ```bash
 dapr --app-id myapp run -- php state-example.php
@@ -207,7 +197,7 @@ You should get an output similar to the following, which will show both the Dapr
 
 The following example shows how to delete an item by using a key with the state management API:
 
-{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" >}}
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
 With the same dapr instance running from above run:
@@ -301,18 +291,7 @@ $app->run(function(\Dapr\State\StateManager $stateManager, \Psr\Log\LoggerInterf
 Now run it with:
 
 ```bash
-from dapr.clients import DaprClient
-from dapr.clients.grpc._state import StateItem
-
-with DaprClient() as d:
-    s1 = StateItem(key="key1", value="value1")
-    s2 = StateItem(key="key2", value="value2")
-
-    d.save_states(store_name="statestore", states=[s1,s2])
-    print("States have been stored")
-
-    items = d.get_states(store_name="statestore", keys=["key1", "key2"]).items
-    print(f"Got items: {[i.data for i in items]}")
+dapr --app-id myapp run -- php state-example.php
 ```
 
 You should see something similar the following output:
@@ -371,25 +350,15 @@ Update your `pythonState.py` file with the following code:
 ```python
 from dapr.clients import DaprClient
 from dapr.clients.grpc._state import StateItem
-from dapr.clients.grpc._request import TransactionalStateOperation, TransactionOperationType
 
 with DaprClient() as d:
     s1 = StateItem(key="key1", value="value1")
     s2 = StateItem(key="key2", value="value2")
 
-    d.save_states(store_name="statestore", states=[s1,s2])
+    d.save_bulk_state(store_name="statestore", states=[s1,s2])
     print("States have been stored")
 
-    d.execute_transaction(
-        store_name="statestore",
-        operations=[
-            TransactionalStateOperation(key="key1", data="newValue1", operation_type=TransactionOperationType.upsert),
-            TransactionalStateOperation(key="key2", data="value2", operation_type=TransactionOperationType.delete)
-        ]
-    )
-    print("State transactions have been completed")
-
-    items = d.get_states(store_name="statestore", keys=["key1", "key2"]).items
+    items = d.get_bulk_state(store_name="statestore", keys=["key1", "key2"]).items
     print(f"Got items: {[i.data for i in items]}")
 ```
 
@@ -427,20 +396,25 @@ To batch load and save state with PHP, just create a "Plain Ole' PHP Object" (PO
 Update the `state-example.php` file:
 
 ```php
-Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
-== DAPR == time="2021-01-06T22:18:14.1246721-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T22:18:14.1346254-08:00" level=info msg="standalone mode configured" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T22:18:14.2747063-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T22:18:14.2757062-08:00" level=info msg="API gRPC server is running on port 59534" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T22:18:14.2767059-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 142.0805ms" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
+<?php
 
-Checking if Dapr sidecar is listening on GRPC port 59534
-Dapr sidecar is up and running.
-Updating metadata for app command: python pythonState.py
-You're up and running! Both Dapr and your app logs will appear here.
+require_once __DIR__.'/vendor/autoload.php';
 
-== APP == State transactions have been completed
-== APP == Got items: [b'value1', b'']
+#[\Dapr\State\Attributes\StateStore('statestore', \Dapr\consistency\EventualLastWrite::class)]
+class MyState {
+    public string $key1 = 'value1';
+    public string $key2 = 'value2';
+}
+
+$app = \Dapr\App::create();
+$app->run(function(\Dapr\State\StateManager $stateManager, \Psr\Log\LoggerInterface $logger) {
+    $obj = new MyState();
+    $stateManager->save_object(item: $obj);
+    $logger->alert('States have been stored');
+
+    $stateManager->load_object(into: $obj);
+    $logger->alert("Got value: {data}", ['data' => $obj]);
+});
 ```
 
 Run the app:
@@ -605,7 +579,7 @@ Observe the following output:
 
 {{< /tabs >}}
 
-## 下一步
+## Next steps
 
 - Read the full [State API reference]({{< ref state_api.md >}})
 - Try one of the [Dapr SDKs]({{< ref sdks >}})

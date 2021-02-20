@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Manage Dapr configuration"
 linkTitle: "Configuration"
 weight: 200

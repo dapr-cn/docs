@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "OAuth2 client credentials"
 linkTitle: "OAuth2 client credentials"
 weight: 3000
@@ -8,7 +8,7 @@ description: "Use OAuth2 client credentials middleware to secure HTTP endpoints"
 
 The OAuth2 client credentials [HTTP middleware]({{< ref middleware-concept.md >}}) enables the [OAuth2 Client Credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
 
-## Introduction
+## Component format
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,7 +30,7 @@ spec:
   - name: headerName
     value: "authorization"
 ```
-## Input bindings
+## Spec metadata fields
 
 | 字段                  | Details                                                                                                                                                                      | 示例                                                 |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |

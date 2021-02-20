@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Debugging and Troubleshooting"
 linkTitle: "Troubleshooting"
 weight: 100

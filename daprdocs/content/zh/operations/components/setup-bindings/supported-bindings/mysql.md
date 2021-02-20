@@ -1,15 +1,15 @@
 ---
-type: 文档
+type: docs
 title: "MySQL binding spec"
 linkTitle: "MySQL"
 description: "Detailed documentation on the MySQL binding component"
 ---
 
-## Introduction
+## Component format
 
-To setup MySQL binding create a component of type `bindings.mysql`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup MySQL binding create a component of type `bindings.mysql`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
-If your server requires SSL your connection string must end of `&tls=custom` for example, `"<user>:<password>@tcp(<server>:3306)/<database>?allowNativePasswords=true&tls=custom"`. You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
+The MySQL binding uses [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) internally.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,21 +35,20 @@ spec:
       value: <CONNECTION_MAX_IDLE_TIME>
 ```
 
-also support connection pool configuration variables:
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+{{% alert title="Warning" color="warning" %}}
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                                     | Required | Output Binding Supported Operations | Details                                                                                                                                                                    | Example:                                                          |
-| -------------------------------------- |:--------:| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| url                                    |    Y     | Output                              | `url`: Required, represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details See [here](#ssl-connection-details) SSL details | `- name: url
-    value: user:password@tcp(localhost:3306)/dbname` |
-| `pemPath`: path to the PEM file        |    Y     | Output                              | Path to the PEM file. Used with SSL connection                                                                                                                             | `"path/to/pem/file"`                                              |
-| maxIdleConns                           |    N     | Output                              | The max idle connections. `maxIdleConns`: integer greater than 0                                                                                                           | `"10"`                                                            |
-| `maxOpenConns`: integer greater than 0 |    N     | Output                              | The max open connections. Integer greater than 0                                                                                                                           | `"10"`                                                            |
-| connMaxLifetime                        |    N     | Output                              | The max connection lifetime. Duration string                                                                                                                               | `"12s"`                                                           |
-| `connMaxIdleTime`: duration string     |    N     | Output                              | The max connection idel time. Duration string                                                                                                                              | `"12s"`                                                           |
+| 字段              | Required | Binding support | Details                                                                                                   | Example                                      |
+| --------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| url             |    Y     | Output          | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"` |
+| pemPath         |    Y     | Output          | Path to the PEM file. Used with SSL connection                                                            | `"path/to/pem/file"`                         |
+| maxIdleConns    |    N     | Output          | The max idle connections. Integer greater than 0                                                          | `"10"`                                       |
+| maxOpenConns    |    N     | Output          | The max open connections. Integer greater than 0                                                          | `"10"`                                       |
+| connMaxLifetime |    N     | Output          | The max connection lifetime. Duration string                                                              | `"12s"`                                      |
+| connMaxIdleTime |    N     | Output          | The max connection idel time. Duration string                                                             | `"12s"`                                      |
 
 ### SSL connection
 
@@ -57,7 +56,7 @@ If your server requires SSL your connection string must end of `&tls=custom` for
 ```bash
 "<user>:<password>@tcp(<server>:3306)/<database>?allowNativePasswords=true&tls=custom"
 ```
- You must replace the `<PEM PATH>` with a full path to the PEM file. You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2. The connection to MySQL will require a minimum TLS version of 1.2.
+ You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
 
 ## Output bindings
 
@@ -133,7 +132,7 @@ The `query` operation is used for `SELECT` statements, which returns the metadat
 
 ### close
 
-Finally, the `close` operation can be used to explicitly close the DB connection and return it to the pool. This operation doesn't have any response. This operation doesn't have any response. This operation doesn't have any response.
+Finally, the `close` operation can be used to explicitly close the DB connection and return it to the pool. This operation doesn't have any response.
 
 **Request**
 

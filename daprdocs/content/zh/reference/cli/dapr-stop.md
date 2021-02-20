@@ -9,7 +9,7 @@ description: "有关 stop CLI 命令的详细信息"
 
 停止 dapr 实例及其关联的应用程序。
 
-## 支持的平台
+## Supported platforms
 
 - [Self-Hosted]({{< ref self-hosted >}})
 
@@ -21,7 +21,7 @@ dapr stop [flags]
 
 ## 参数
 
-| 名称               | 环境变量 | 默认值 | 说明          |
+| Name             | 环境变量 | 默认值 | 说明          |
 | ---------------- | ---- | --- | ----------- |
 | `--app-id`, `-a` |      |     | 要停止的应用程序 Id |
 | `--help`, `-h`   |      |     | 显示此帮助消息     |

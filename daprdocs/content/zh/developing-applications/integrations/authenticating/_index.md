@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Authenticating to services"
 linkTitle: "Authenticating to services"
 weight: 3000

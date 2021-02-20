@@ -1,7 +1,7 @@
 ---
-type: 文档
+type: docs
 title: "概述"
-linkTitle: "Secrets stores overview"
+linkTitle: "Overview"
 description: "General overview on set up of middleware components for Dapr"
 weight: 10000
 ---

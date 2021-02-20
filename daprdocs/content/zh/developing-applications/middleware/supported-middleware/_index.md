@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Supported middleware"
 linkTitle: "Supported middleware"
 weight: 50000

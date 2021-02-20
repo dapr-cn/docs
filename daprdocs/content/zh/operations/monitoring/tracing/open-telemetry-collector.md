@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Using OpenTelemetry Collector to collect traces"
 linkTitle: "Using the OpenTelemetry Collector"
 weight: 900

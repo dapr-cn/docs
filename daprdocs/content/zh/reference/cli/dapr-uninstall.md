@@ -9,7 +9,7 @@ description: "有关 uninstall CLI 命令的详细信息"
 
 卸载 Dapr 运行时。
 
-## 支持的平台
+## Supported platforms
 
 - [Self-Hosted]({{< ref self-hosted >}})
 - [Kubernetes]({{< ref kubernetes >}})
@@ -22,7 +22,7 @@ dapr uninstall [flags]
 
 ## 参数
 
-| 名称                   | 环境变量           | 默认值           | 说明                                                                                                       |
+| Name                 | 环境变量           | 默认值           | 说明                                                                                                       |
 | -------------------- | -------------- | ------------- | -------------------------------------------------------------------------------------------------------- |
 | `--all`              |                | `false`       | 除 actor Placement放置容器外，卸载 Redis， Zipkin 容器。 删除 dapr 默认文件夹，路径为 `$HOME/.dapr or %USERPROFILE%\.dapr\`. |
 | `--help`, `-h`       |                |               | 显示此帮助消息                                                                                                  |

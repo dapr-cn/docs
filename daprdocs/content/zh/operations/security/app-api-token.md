@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Authenticate requests from Dapr using token authentication"
 linkTitle: "App API token authentication"
 weight: 4000
@@ -60,7 +60,7 @@ To rotate the configured token in self-hosted, simply set the `APP_API_TOKEN` en
 
 ### Kubernetes
 
-To rotate the configured token in Kubernates, update the previously created secret with the new token in each namespace. You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest: You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest:
+To rotate the configured token in Kubernates, update the previously created secret with the new token in each namespace. You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest:
 
 ```yaml
 apiVersion: v1

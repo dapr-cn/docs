@@ -6,7 +6,7 @@ weight: 2000
 description: "了解如何使用一个服务向主题发送消息，并在另一个服务中订阅该主题"
 ---
 
-## 背景
+## Introduction
 
 Pub/Sub 是一个分布式系统中的常见模式，它有许多服务用于解偶、异步消息传递。 使用Pub/Sub，您可以在事件消费者与事件生产者解偶的场景中启用。
 
@@ -14,7 +14,7 @@ Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次
 
 ## 步骤 1: 设置 Pub/Sub 组件
 
-When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter. gRPC clients and SDKs have a dedicated content type parameter.
+When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter.
 
 ## 步骤 1: 设置 Pub/Sub 组件
 然后发布一条消息给 `deathStarStatus` 主题：
@@ -26,7 +26,7 @@ When publishing a message, it's important to specify the content type of the dat
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
-Applications publishing to an Azure Blob Storage output binding should send a message with the following contract:
+{{% codetab %}}
 运行 `dapr init` 时默认在本地机器上安装 Redis 流。
 
 在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yam` 或在 Windows 上打开`%UserProfile%\.dapr\components\pubsub.yaml` 组件文件以验证:
@@ -135,10 +135,10 @@ kubectl apply -f subscription.yaml
 
 #### 示例
 
-然后运行:
+{{< tabs Python Node PHP>}}
 
 {{% codetab %}}
-创建名为" `app1.py` 的文件，并粘贴如下内容：
+Create a file named `app1.py` and paste in the following:
 ```python
 import flask
 from flask import request, jsonify
@@ -171,7 +171,7 @@ dapr --app-id app1 --app-port 5000 run python app1.py
 {{% /codetab %}}
 
 {{% codetab %}}
-设置上述订阅后，将此 javascript（Node > 4.16）下载到 `app2.js` 文件中：
+After setting up the subscription above, download this javascript (Node > 4.16) into a `app2.js` file:
 
 ```javascript
 const express = require('express')
@@ -197,7 +197,7 @@ dapr --app-id app2 --app-port 3000 run node app2.js
 
 {{% codetab %}}
 
-After creating `app1.php`, and with the [SDK installed](https://github.com/dapr/php-sdk/blob/main/docs/getting-started.md), go ahead and start the app:
+Create a file named `app1.php` and paste in the following:
 
 ```php
 <?php
@@ -220,7 +220,7 @@ $app->start();
 然后运行:
 
 ```bash
-dapr --app-id myapp --port 3500 run
+dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
 ```
 
 {{% /codetab %}}
@@ -262,14 +262,14 @@ def ds_subscriber():
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 app.run()
 ```
-创建 `app1.py` 后，确保 flask 和 flask_cors 已经安装了：
+After creating `app1.py` ensure flask and flask_cors are installed:
 
 ```bash
 pip install flask
 pip install flask_cors
 ```
 
-创建 `app1.py` 后，确保 flask 和 flask_cors 已经安装了：
+然后运行:
 
 ```bash
 dapr --app-id app1 --app-port 5000 run python app1.py
@@ -336,7 +336,7 @@ $app->start();
 运行此应用：
 
 ```bash
-dapr --app-id myapp --port 3500 run
+dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
 ```
 
 {{% /codetab %}}
@@ -349,7 +349,7 @@ dapr --app-id myapp --port 3500 run
 
 To publish a topic you need to run an instance of a Dapr sidecar to use the pubsub Redis component. You can use the default Redis component installed into your local environment.
 
-To publish a topic you need to run an instance of a Dapr sidecar to use the pubsub Redis component. You can use the default Redis component installed into your local environment.
+Start an instance of Dapr with an app-id called `testpubsub`:
 
 ```bash
 dapr run --app-id testpubsub --dapr-http-port 3500 
@@ -361,7 +361,7 @@ dapr run --app-id testpubsub --dapr-http-port 3500
 然后发布一条消息给 `deathStarStatus` 主题：
 
 ```bash
-dapr publish --pubsub pubsub --topic deathStarStatus --data '{"status": "completed"}'
+dapr publish --publish-app-id testpubapp --pubsub pubsub --topic deathStarStatus --data '{"status": "completed"}'
 ```
 {{% /codetab %}}
 
@@ -471,15 +471,15 @@ dapr --app-id app2 run -- php app2.php
 
 ## Sending a custom CloudEvent
 
-Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
+Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
 
 See info about content types [here](#Content-Types).
 
 ## 下一步
 
-- https://github.com/dapr/quickstarts/tree/master/pub-sub
-- {{< ref pubsub-scopes.md >}}
+- Try the [Pub/Sub quickstart sample](https://github.com/dapr/quickstarts/tree/master/pub-sub)
+- Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
 - Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
 - 您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
-- {{< ref setup-pubsub >}}
+- List of [pub/sub components]({{< ref setup-pubsub >}})
 - Read the [API reference]({{< ref pubsub_api.md >}})

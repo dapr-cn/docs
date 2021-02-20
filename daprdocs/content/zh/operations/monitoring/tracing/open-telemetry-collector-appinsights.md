@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Using OpenTelemetry Collector to collect traces to send to AppInsights"
 linkTitle: "Using the OpenTelemetry for Azure AppInsights"
 weight: 1000
@@ -16,7 +16,7 @@ A installation of Dapr on Kubernetes.
 
 ### Setup Application Insights
 
-1. First, you'll need an Azure account. First, you'll need an Azure account. See instructions [here](https://azure.microsoft.com/free/) to apply for a **free** Azure account.
+1. First, you'll need an Azure account. See instructions [here](https://azure.microsoft.com/free/) to apply for a **free** Azure account.
 2. Follow instructions [here](https://docs.microsoft.com/en-us/azure/azure-monitor/app/create-new-resource) to create a new Application Insights resource.
 3. Get the Application Insights Intrumentation key from your Application Insights page.
 

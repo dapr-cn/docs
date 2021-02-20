@@ -1,12 +1,12 @@
 ---
-type: 文档
+type: docs
 title: "Azure Events Hub"
 linkTitle: "Azure Events Hub"
 description: "Detailed documentation on the Azure Event Hubs pubsub component"
 ---
 
-## Introduction
-To setup Azure Event Hubs pubsub create a component of type `pubsub.azure.eventhubs`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## Component format
+To setup Azure Event Hubs pubsub create a component of type `pubsub.azure.eventhubs`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -32,14 +32,14 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                                                       | Required | Details                                                                                                                                                 | 示例                                                                                                                                         |
-| -------------------------------------------------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `connectionString` is the Service Bus connection string. |    Y     | Connection-string for the Event Hubs                                                                                                                    | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
-| storageAccountName                                       |    Y     | Storage account name to use for the EventProcessorHost                                                                                                  | `"myeventhubstorage"`                                                                                                                      |
-| storageAccountKey                                        |    Y     | Storage account key  to use for the EventProcessorHost. Can be `secretKeyRef` to use a secret reference Can be `secretKeyRef` to use a secret reference | `"112233445566778899"`                                                                                                                     |
-| storageContainerName                                     |    Y     | Storage container name for the storage account name.                                                                                                    | `"myeventhubstoragecontainer"`                                                                                                             |
+| 字段                   | Required | Details                                                                                                 | Example                                                                                                                                    |
+| -------------------- |:--------:| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| connectionString     |    Y     | Connection-string for the Event Hubs                                                                    | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
+| storageAccountName   |    Y     | Storage account name to use for the EventProcessorHost                                                  | `"myeventhubstorage"`                                                                                                                      |
+| storageAccountKey    |    Y     | Storage account key  to use for the EventProcessorHost. Can be `secretKeyRef` to use a secret reference | `"112233445566778899"`                                                                                                                     |
+| storageContainerName |    Y     | Storage container name for the storage account name.                                                    | `"myeventhubstoragecontainer"`                                                                                                             |
 
 
 ## Create an Azure Event Hub
