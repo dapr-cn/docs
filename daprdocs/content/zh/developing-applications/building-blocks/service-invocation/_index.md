@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Service invocation"
-linkTitle: "Service invocation"
+title: "服务调用"
+linkTitle: "服务调用"
 weight: 10
-description: Perform direct, secure, service-to-service method calls
+description: 执行直接而安全的服务间方法调用
 ---
 
