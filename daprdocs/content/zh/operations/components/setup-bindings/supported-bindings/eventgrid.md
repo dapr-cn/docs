@@ -51,7 +51,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                 | Required | Binding support | Details                                                                                                                                                                                                                                                                                                       | Example                                |
+| 字段                    | Required | Binding support | Details                                                                                                                                                                                                                                                                                                       | Example                                |
 | --------------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | tenantId              |    Y     | Input           | The Azure tenant id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                             | `"tenentID"`                           |
 | subscriptionId        |    Y     | Input           | The Azure subscription id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                       | `"subscriptionId"`                     |
@@ -71,7 +71,7 @@ Scope is the identifier of the resource to which the event subscription needs to
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'` for a resource group
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'` for a resource
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'` for an Event Grid topic > Values in braces {} should be replaced with actual values.
-## Binding support
+## Output bindings
 
 This component supports both **input and output** binding interfaces.
 
