@@ -70,7 +70,7 @@ You can prototype and experiment with policies using the [official opa playgroun
 
 ## Spec metadata fields
 
-| Field           | Details                                                                                                                                                                                              | Example                                                           |
+| 字段              | Details                                                                                                                                                                                              | 示例                                                                |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | rego            | The Rego policy language                                                                                                                                                                             | See above                                                         |
 | defaultStatus   | The status code to return for denied responses                                                                                                                                                       | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
@@ -204,7 +204,7 @@ type Result struct {
 }
 ```
 
-## Related links
+## 相关链接
 
 - [Open Policy Agent](https://www.openpolicyagent.org)
 - [HTTP API example](https://www.openpolicyagent.org/docs/latest/http-api-authorization/)
