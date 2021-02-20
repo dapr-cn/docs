@@ -24,13 +24,13 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 ### URL 参数
 
-| 参数       | 描述       |
+| 参数       | 说明       |
 | -------- | -------- |
 | daprPort | Dapr 端口。 |
 
 ### HTTP 响应码
 
-| Code | 说明                                             |
+| Code | 描述                                             |
 | ---- | ---------------------------------------------- |
 | 200  | Metadata information returned                  |
 | 500  | Dapr could not return the metadata information |
@@ -109,7 +109,7 @@ PUT http://localhost:<daprPort>/v1.0/metadata/attributeName
 
 ### URL 参数
 
-| 参数            | 说明                                                                                         |
+| 参数            | 描述                                                                                         |
 | ------------- | ------------------------------------------------------------------------------------------ |
 | daprPort      | Dapr 端口。                                                                                   |
 | attributeName | Custom attribute name. Custom attribute name. This is they key name in the key-value pair. |
@@ -132,7 +132,7 @@ attributeValue
 
 ### HTTP 响应码
 
-| Code | 说明                                                 |
+| Code | 描述                                                 |
 | ---- | -------------------------------------------------- |
 | 204  | Custom attribute added to the metadata information |
 
