@@ -5,7 +5,7 @@ linkTitle: "Azure Storage Queues"
 description: "Detailed documentation on the Azure Storage Queues binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup Azure Storage Queues binding create a component of type `bindings.azure.storagequeues`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -34,7 +34,7 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Specifying a time to live on message level
+## Input bindings
 
 | 字段                                                  | Required | Output Binding Supported Operations | Details                                                                                                                                                           | Example:      |
 | --------------------------------------------------- |:--------:| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -43,7 +43,7 @@ spec:
 | queue                                               |    Y     | Input/Output                        | `queue` is the name of the Azure Storage queue.                                                                                                                   | `"myqueue"`   |
 | ttlInSeconds                                        |    N     | Output                              | Parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. See [also](#specifying-a-ttl-per-message) | `"60"`        |
 
-## Output Binding Supported Operations
+## Output bindings
 
 For input bindings, where the query matching Tweets are streamed to the user service, the above component has to also include a query:
 
