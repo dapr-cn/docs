@@ -16,11 +16,11 @@ Dapr 绑定允许您 :
 * 在不更改代码的情况下替换绑定
 * 关注业务逻辑而不是事件资源实现
 
-有关绑定的更多信息，请阅读 [概述]({{X17X}})。
+有关绑定的更多信息，请阅读 [概述]({{X17X}})。
 
 有关展示绑定的快速入门示例，请访问此 [链接](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
-## 1. 创建绑定
+## 1. 1. 创建绑定
 
 输入绑定表示 Dapr 用于读取事件并推送到应用程序的事件资源。
 
@@ -94,7 +94,7 @@ res.status(500).send()
 事件传递保证由绑定实现控制。 根据绑定实现，事件传递可以正好一次或至少一次。
 
 
-## 参考资料
+## 参考文档
 
 * [Bindings building block]({{< ref bindings >}})
 * [Bindings API]({{< ref bindings_api.md >}})
