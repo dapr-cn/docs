@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Service invocation performance"
 linkTitle: "Service invocation performance"
 weight: 10000
@@ -30,17 +30,17 @@ For more information see [overview of Dapr in self-hosted mode]({{< ref self-hos
 
 For more information see [overview of Dapr on Kubernetes]({{< ref kubernetes-overview.md >}}).
 
-## Performance summary for Dapr v0.11.3
+## Performance summary for Dapr v1.0
 
-The service invocation API is a reverse proxy with built-in service discovery to connect to other services. This includes tracing, metrics, mTLS for in-transit encryption of traffic, together with resiliency in the form of retries for network partitions and connection errors. This includes tracing, metrics, mTLS for in-transit encryption of traffic, together with resiliency in the form of retries for network partitions and connection errors.
+The service invocation API is a reverse proxy with built-in service discovery to connect to other services. This includes tracing, metrics, mTLS for in-transit encryption of traffic, together with resiliency in the form of retries for network partitions and connection errors.
 
-Using service invocation you can call from HTTP to HTTP, HTTP to gRPC, gRPC to HTTP, and gRPC to gRPC. Using service invocation you can call from HTTP to HTTP, HTTP to gRPC, gRPC to HTTP, and gRPC to gRPC. Dapr does not use HTTP for the communication between sidecars, always using gRPC, while carrying over the semantics of the protocol used when called from the app. Service invocation is the underlying mechanism of communicating with Dapr Actors. Service invocation is the underlying mechanism of communicating with Dapr Actors.
+Using service invocation you can call from HTTP to HTTP, HTTP to gRPC, gRPC to HTTP, and gRPC to gRPC. Dapr does not use HTTP for the communication between sidecars, always using gRPC, while carrying over the semantics of the protocol used when called from the app. Service invocation is the underlying mechanism of communicating with Dapr Actors.
 
 For more information see [service invocation overview]({{< ref service-invocation-overview.md >}}).
 
 ### Kubernetes performance test setup
 
-The test was conducted on a 3 node Kubernetes cluster, using commodity hardware running 4 cores and 8GB of RAM, without any network acceleration. The test was conducted on a 3 node Kubernetes cluster, using commodity hardware running 4 cores and 8GB of RAM, without any network acceleration. The setup included a load tester ([Fortio](https://github.com/fortio/fortio)) pod with a Dapr sidecar injected into it that called the service invocation API to reach a pod on a different node.
+The test was conducted on a 3 node Kubernetes cluster, using commodity hardware running 4 cores and 8GB of RAM, without any network acceleration. The setup included a load tester ([Fortio](https://github.com/fortio/fortio)) pod with a Dapr sidecar injected into it that called the service invocation API to reach a pod on a different node.
 
 Test parameters:
 
@@ -54,7 +54,7 @@ The baseline test included direct, non-encrypted traffic, without telemetry, dir
 
 ### Control plane performance
 
-The Dapr control plane uses a total of 0.009 vCPU and 61.6 Mb when running in non-HA mode, meaning a single replica per system compoment. When running in a highly available production setup, the Dapr control plane consumes ~0.02 vCPU and 185 Mb. When running in a highly available production setup, the Dapr control plane consumes ~0.02 vCPU and 185 Mb.
+The Dapr control plane uses a total of 0.009 vCPU and 61.6 Mb when running in non-HA mode, meaning a single replica per system compoment. When running in a highly available production setup, the Dapr control plane consumes ~0.02 vCPU and 185 Mb.
 
 | Component        | vCPU  | Memory  |
 | ---------------- | ----- | ------- |
@@ -63,7 +63,7 @@ The Dapr control plane uses a total of 0.009 vCPU and 61.6 Mb when running in no
 | Sidecar Injector | 0.002 | 14.6 Mb |
 | Placement        | 0.001 | 20.9 Mb |
 
-There are a number of variants that affect the CPU and memory consumption for each of the system components. These variants are shown in the table below. These variants are shown in the table below.
+There are a number of variants that affect the CPU and memory consumption for each of the system components. These variants are shown in the table below.
 
 | Component        | vCPU                                                                   | Memory                          |
 | ---------------- | ---------------------------------------------------------------------- | ------------------------------- |
@@ -76,7 +76,7 @@ There are a number of variants that affect the CPU and memory consumption for ea
 
 The Dapr sidecar uses 0.48 vCPU and 23Mb per 1000 requests per second. End-to-end, the Dapr sidecars (client and server) add ~1.40 ms to the 90th percentile latency, and ~2.10 ms to the 99th percentile latency. End-to-end here is a call from one app to another app receiving a response. This is shown by steps 1-7 in [this diagram]({{< ref service-invocation-overview.md >}}).
 
-In the test setup, requests went through the Dapr sidecar both on the client side (serving requests from the load tester tool) and the server side (the target app). mTLS and telemetry (tracing with a sampling rate of 0.1) and metrics were enabled on the Dapr test, and disabled for the baseline test.
+This performance is on par or better than commonly used service meshes.
 
 ### Latency
 
