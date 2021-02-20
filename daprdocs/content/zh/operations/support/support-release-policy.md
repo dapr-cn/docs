@@ -1,12 +1,12 @@
 ---
-type: 文档
+type: docs
 title: "Supported releases"
 linkTitle: "Supported releases"
 weight: 1000
 description: "Release support and upgrade policies"
 ---
 
-## 背景
+## Introduction
 This topic details the supported versions of Dapr releases, the upgrade policies and how deprecations and breaking changes are communicated.
 
 Dapr releases use `MAJOR.MINOR.PATCH` versioning. For example 1.0.0
@@ -61,5 +61,5 @@ Here is an example, using a hypothetical 1.1.0 as the deprecation announcement r
 ## Upgrade on Hosting platforms
 Dapr can support multiple hosting platforms for production. With the 1.0 release the two supported platforms are Kubernetes and physical machines. For Kubernetes upgrades see [Production guidelines on Kubernetes]({{< ref kubernetes-production.md >}})
 
-## 相关链接
+## Related links
 * Read the [Versioning policy]({{< ref support-versioning.md >}})
