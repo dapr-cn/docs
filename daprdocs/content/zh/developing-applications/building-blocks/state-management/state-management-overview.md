@@ -20,7 +20,7 @@ Your application can used Dapr's state management API to save and read key/value
 <img src="/images/state-management-overview.png" width=900>
 
 
-## Features
+## 功能
 
 ### Pluggable state stores
 
@@ -36,7 +36,7 @@ By default, your application should assume a data store is **eventually consiste
 
 [Not all stores are created equal]({{< ref supported-state-stores.md >}}). To ensure portability of your application you can query the capabilities of the store and make your code adaptive to different store capabilities.
 
-### Concurrency
+### 并发（Concurrency）
 
 Dapr supports optimistic concurrency control (OCC) using ETags. When a state is requested, Dapr always attaches an ETag property to the returned state. When the user code tries to update or delete a state, it’s expected to attach the ETag either through the request body for updates or the `If-Match` header for deletes. The write operation can succeed only when the provided ETag matches with the ETag in the state store.
 
@@ -99,7 +99,7 @@ Direct queries of the state store are not governed by Dapr concurrency control, 
 
 The API for state management can be found in the [state management API reference]({{< ref state_api.md >}}) which describes how to retrieve, save and delete state values by providing keys.
 
-## Next steps
+## 下一步
 * Follow these guides on:
     * [How-To: Save and get state]({{< ref howto-get-save-state.md >}})
     * [How-To: Build a stateful service]({{< ref howto-stateful-service.md >}})
