@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Bearer"
 linkTitle: "Bearer"
 weight: 4000
@@ -8,7 +8,7 @@ description: "Use bearer middleware to secure HTTP endpoints by verifying bearer
 
 The bearer [HTTP middleware]({{< ref middleware-concept.md >}}) verifies a [Bearer Token](https://tools.ietf.org/html/rfc6750) using [OpenID Connect](https://openid.net/connect/) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
 
-## Introduction
+## Component format
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -24,7 +24,7 @@ spec:
   - name: issuerURL
     value: "https://accounts.google.com"
 ```
-## Input bindings
+## Spec metadata fields
 
 | 字段        | Details                                                                                                       | 示例                                                                |
 | --------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
