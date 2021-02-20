@@ -28,7 +28,7 @@ dapr run --app-id cart --app-port 5000 --app-ssl python app.py
 ```
 {{% /codetab %}}
 
-{{% codetab %}}
+在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
 ### 使用 Kubernetes 设置标识
 
@@ -75,6 +75,9 @@ app = Flask(__name__)
 @app.route('/add', methods=['POST'])
 def add():
     return "Added!"
+
+if __name__ == '__main__':
+    app.run()
 
 if __name__ == '__main__':
     app.run()
