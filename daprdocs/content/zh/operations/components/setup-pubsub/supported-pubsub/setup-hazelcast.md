@@ -1,12 +1,12 @@
 ---
-type: 文档
+type: docs
 title: "Hazelcast"
 linkTitle: "Hazelcast"
 description: "Detailed documentation on the Hazelcast pubsub component"
 ---
 
-## Introduction
-To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## Component format
+To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -26,11 +26,11 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                                                       | Required | Details                                                                        | 示例                                 |
-| -------------------------------------------------------- |:--------:| ------------------------------------------------------------------------------ | ---------------------------------- |
-| `connectionString` is the Service Bus connection string. |    Y     | A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000" | `"hazelcast:3000,hazelcast2:3000"` |
+| 字段               | Required | Details                                                                        | Example                            |
+| ---------------- |:--------:| ------------------------------------------------------------------------------ | ---------------------------------- |
+| connectionString |    Y     | A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000" | `"hazelcast:3000,hazelcast2:3000"` |
 
 
 ## Create a Hazelcast instance
