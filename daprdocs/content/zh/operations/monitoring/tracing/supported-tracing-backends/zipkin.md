@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Set up Zipkin for distributed tracing"
 linkTitle: "Zipkin"
 weight: 3000
@@ -105,6 +105,6 @@ In your browser, go to `http://localhost:9411` and you will see the Zipkin UI.
 
 ![zipkin](/images/zipkin_ui.png)
 
-## 参考文档
+## References
 - [Zipkin for distributed tracing](https://zipkin.io/)
 - [W3C distributed tracing]({{< ref w3c-tracing >}})
