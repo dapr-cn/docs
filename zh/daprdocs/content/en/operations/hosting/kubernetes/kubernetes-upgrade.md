@@ -2,7 +2,7 @@
 type: 文档
 title: "Steps to upgrade Dapr on a Kubernetes cluster"
 linkTitle: "Upgrade Dapr"
-weight: 50000
+weight: 30000
 description: "Follow these steps to upgrade Dapr on Kubernetes and ensure a smooth upgrade."
 ---
 
