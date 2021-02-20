@@ -151,7 +151,7 @@ spec:
       type: middleware.http.oauth2clientcredentials
 ```
 
-## Apply the configuration
+## 应用配置
 
 To apply the above configuration (regardless of grant type) to your Dapr sidecar, add a `dapr.io/config` annotation to your pod spec:
 
