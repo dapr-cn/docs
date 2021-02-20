@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Set up Jaeger for distributed tracing"
 linkTitle: "Jaeger"
 weight: 3000
