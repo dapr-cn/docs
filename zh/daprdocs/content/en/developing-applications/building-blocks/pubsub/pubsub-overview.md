@@ -1,12 +1,12 @@
 ---
 type: docs
 title: "发布和订阅概述"
-linkTitle: "Overview"
+linkTitle: "Secrets stores overview"
 weight: 1000
 description: "Dapr Pub/Sub 构建块概述"
 ---
 
-## 简介
+## 背景
 
 [发布 / 订阅模式](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) 允许微服务使用消息相互通信。 **生产者** 将消息发送至 **主题** ，并且不知道接收消息的应用程序。 This involves writing them to an input channel. 同样，一个 **消费者** 将订阅该主题并收到它的消息，并且不知道什么应用程序生产了这些消息。 This involves receiving messages from an output channel. An intermediary message broker is responsible for copying each message from an input channel to an output channels for all subscribers interested in that message. 当您需要将微服务解偶时，此模式特别有用。
 
