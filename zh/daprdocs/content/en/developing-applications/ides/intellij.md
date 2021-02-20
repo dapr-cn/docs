@@ -30,7 +30,7 @@ Create or edit the file in `$HOME/.IdeaIC2019.3/config/tools/External\ Tools.xml
 
 {{< tabs Windows Linux  MacOS >}}
 
-Now, create or edit the run configuration for the application to be debugged. It can be found in the menu next to the `main()` function.
+Applications publishing to an Azure Blob Storage output binding should send a message with the following contract:
 
 ```powershell
 <toolSet name="External Tools">
