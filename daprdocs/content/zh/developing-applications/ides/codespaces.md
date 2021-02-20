@@ -6,7 +6,7 @@ weight: 3000
 description: "How to get up and running with Dapr in a GitHub Codespace"
 ---
 
-[GitHub Codespaces](https://github.com/features/codespaces) are the easiest way to get up and running in a Dapr environment. In as little as a single click you have the environment, packages, code, samples, and documentation all ready to go in your browser.
+[GitHub Codespaces](https://github.com/features/codespaces) are the easiest way to get up and running in a Dapr environment. In as little as a single click you have the environment, packages, code, samples, and documentation all ready to go in your browser. In as little as a single click you have the environment, packages, code, samples, and documentation all ready to go in your browser.
 
 {{% alert title="Private Beta" color="warning" %}}
 GitHub Codespaces is currently in a private beta. Sign up [here](https://github.com/features/codespaces/signup).
@@ -28,5 +28,5 @@ To open a Dapr repository in a Codespace simply select "Code" from the repo home
 
 - [Python SDK](https://github.com/dapr/python-sdk)
 
-## Related links
+## 相关链接
 - [GitHub documentation](https://docs.github.com/en/github/developing-online-with-codespaces/about-codespaces)
