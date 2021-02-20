@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Environment variable reference"
 linkTitle: "Environment variables"
 description: "A list of environment variables used by Dapr"
