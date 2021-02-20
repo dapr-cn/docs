@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Hosting options for Dapr"
 linkTitle: "Hosting options"
 weight: 100
