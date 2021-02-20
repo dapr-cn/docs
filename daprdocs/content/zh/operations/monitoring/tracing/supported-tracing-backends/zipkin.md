@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Set up Zipkin for distributed tracing"
 linkTitle: "Zipkin"
 weight: 3000
