@@ -14,7 +14,7 @@ Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次
 
 ## 步骤 1: 设置 Pub/Sub 组件
 
-When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter. gRPC clients and SDKs have a dedicated content type parameter.
+When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter.
 
 ## 步骤 1: 设置 Pub/Sub 组件
 然后发布一条消息给 `deathStarStatus` 主题：
@@ -26,7 +26,7 @@ When publishing a message, it's important to specify the content type of the dat
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
-Applications publishing to an Azure Blob Storage output binding should send a message with the following contract:
+{{% codetab %}}
 运行 `dapr init` 时默认在本地机器上安装 Redis 流。
 
 在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yam` 或在 Windows 上打开`%UserProfile%\.dapr\components\pubsub.yaml` 组件文件以验证:
@@ -135,7 +135,7 @@ kubectl apply -f subscription.yaml
 
 #### 示例
 
-然后运行:
+{{< tabs Python Node PHP>}}
 
 {{% codetab %}}
 创建名为" `app1.py` 的文件，并粘贴如下内容：
@@ -220,7 +220,7 @@ $app->start();
 然后运行:
 
 ```bash
-dapr --app-id myapp --port 3500 run
+dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
 ```
 
 {{% /codetab %}}
@@ -269,7 +269,7 @@ pip install flask
 pip install flask_cors
 ```
 
-创建 `app1.py` 后，确保 flask 和 flask_cors 已经安装了：
+然后运行:
 
 ```bash
 dapr --app-id app1 --app-port 5000 run python app1.py
