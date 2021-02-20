@@ -5,7 +5,7 @@ linkTitle: "RethinkDB"
 description: "Detailed documentation on the RethinkDB binding component"
 ---
 
-## Introduction
+## 设置 Dapr 组件
 
 The [RethinkDB state store]({{X20X}}) supports transactions which means it can be used to support Dapr actors. Dapr persists only the actor's current state which doesn't allow the users to track how actor's state may have changed over time.
 
@@ -31,7 +31,7 @@ spec:
     value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
 ```
 
-## Setup Dapr component
+## Input bindings
 
 | 字段       | Required | Output Binding Supported Operations | Details                     | Example:                                                          |
 | -------- |:--------:| ----------------------------------- | --------------------------- | ----------------------------------------------------------------- |
