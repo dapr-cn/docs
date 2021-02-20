@@ -2,7 +2,7 @@
 type: docs
 title: "Production guidelines on Kubernetes"
 linkTitle: "Production guidelines"
-weight: 40000
+weight: 10000
 description: "Recommendations and practices for deploying Dapr to a Kubernetes cluster in a production ready configuration"
 ---
 
@@ -30,7 +30,7 @@ The following Dapr control plane deployments are optional:
 * Sentry - Needed for mTLS for service to service invocation
 * Dashboard - Needed for operational view of the cluster
 
-## Sidecar resource settings
+## Sidecar resource requirements
 
 To set the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "kubernetes-annotations.md" >}}). The specific annotations related to resource constraints are:
 
@@ -65,30 +65,7 @@ For a full list of all available options you can set in the values file (or by u
 Instead of using either `helm install` or `helm upgrade` as shown below, you can also run `helm upgrade --install` - this will dynamically determine whether to install or upgrade.
 
 ```bash
-# add/update the helm repo
-helm repo add dapr https://dapr.github.io/helm-charts/
-helm repo update
-
-# See which chart versions are available
-helm search repo dapr --devel --versions
-
-# create a values file to store variables
-touch values.yml
-cat << EOF >> values.yml
-global.ha.enabled: true
-
-EOF
-
-# run install/upgrade
-helm install dapr dapr/dapr \
-  --version=<Dapr chart version> \
-  --namespace dapr-system \
-  --create-namespace \
-  --values values.yml \
-  --wait
-
-# verify the installation
-kubectl get pods --namespace dapr-system
+helm install dapr dapr/dapr --version=<Dapr chart version> --namespace dapr-system --set global.ha.enabled=true
 ```
 
 This command will run 3 replicas of each control plane service in the dapr-system namespace.
