@@ -36,7 +36,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 {{% alert title="Note" color="primary" %}}
@@ -45,7 +45,7 @@ Currently this component does not support state management for actors
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                        | Example                                                                                             |
+| 字段                | Required | Details                                                                        | Example                                                                                             |
 | ----------------- |:--------:| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | connectionString  |    Y     | The connection string used to connect                                          | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
 | tableName         |    Y     | The name of the table to use. Alpha-numeric with underscores                   | `"table_name"`                                                                                      |
@@ -75,7 +75,7 @@ When connecting with a dedicated user (not `sa`), these authorizations are requi
 - `CREATE TABLE`
 - `CREATE TYPE`
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
