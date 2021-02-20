@@ -90,5 +90,3 @@ You should see output with the secret you stored in the JSON file.
 "I'm Batman"
 ```
 
-
-[}}" role="button">Next step: Explore Dapr quickstarts >>]({{< ref quickstarts.md  mark=){.btn.btn-primary}
