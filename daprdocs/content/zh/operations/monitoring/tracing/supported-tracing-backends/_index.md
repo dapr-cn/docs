@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Common Tracing Backends"
 linkTitle: "Common Tracing Backends"
 weight: 3000
