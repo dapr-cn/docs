@@ -47,7 +47,7 @@ To configure a different kind of secret store see the guidance on [how to config
 Now run the Dapr sidecar (with no application)
 
 ```bash
-dapr run --app-id my-app --dapr-http-port 3500 --components-path ./components
+dapr run --app-id my-app --port 3500 --components-path ./components
 ```
 
 And now you can get the secret by calling the Dapr sidecar using the secrets API:
@@ -62,7 +62,7 @@ For a full API reference, go [here]({{< ref secrets_api.md >}}).
 
 Once you have a secret store set up, you can call Dapr to get the secrets from your application code. Here are a few examples in different programming languages:
 
-{{< tabs "Go" "Javascript" "Python" "Rust" "C#" "PHP" >}}
+{{< tabs "Go" "Javascript" "Python" "Rust" "C#" >}}
 
 {{% codetab %}}
 ```Go
@@ -168,7 +168,7 @@ $app->run(function(\Dapr\SecretManager $secretManager, \Psr\Log\LoggerInterface 
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 
 - [Dapr secrets overview]({{X15X}})
 - [Secrets API reference]({{X17X}})
