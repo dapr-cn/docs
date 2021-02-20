@@ -28,7 +28,7 @@ spec:
 
 ## Fields
 
-| Field              | Required | Details                                                                                            | Example            |
+| 字段                 | Required | Details                                                                                            | Example            |
 | ------------------ |:--------:| -------------------------------------------------------------------------------------------------- | ------------------ |
 | apiVersion         |    Y     | The version of the Dapr (and Kubernetes if applicable) API you are calling                         | `dapr.io/v1alpha1` |
 | kind               |    Y     | The type of CRD. For components is must always be `Component`                                      | `Component`        |
