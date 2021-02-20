@@ -23,13 +23,13 @@ spec:
     value: GET
 ```
 
-## 输出绑定支持的操作
+## Input bindings
 
 | 字段  | Required | Output Binding Supported Operations | Details                                     | Example:                                                   |
 | --- |:--------:| ----------------------------------- | ------------------------------------------- | ---------------------------------------------------------- |
 | url |    Y     | Output                              | The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers` |
 
-## 相关链接
+## Output bindings
 
 This component supports **output binding** with the folowing [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html):
 
@@ -173,5 +173,5 @@ curl -d '{ "operation": "post", "data": "YOUR_BASE_64_CONTENT", "metadata": { "p
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
 - [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
-- [如何使用 Bindings 作为接口连接外部资源]({{< ref howto-bindings.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
 - [绑定API 参考]({{< ref bindings_api.md >}})
