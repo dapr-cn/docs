@@ -6,7 +6,7 @@ weight: 5000
 description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程序"
 ---
 
-## 简介
+## 背景
 
 [名称空间或组件 scopes]({{< ref component-scopes.md >}}) 可用于限制对特定应用程序的组件访问。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
 
