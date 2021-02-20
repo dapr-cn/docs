@@ -6,7 +6,7 @@ weight: 2000
 description: "Enable Dapr metrics and logs with Azure Monitor for Azure Kubernetes Service (AKS)"
 ---
 
-## Prerequisites
+## 前期准备
 
 - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/)
 - [Enable Azure Monitor For containers in AKS](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-overview)
