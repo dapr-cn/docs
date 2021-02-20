@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Twitter binding spec"
 linkTitle: "Twitter"
 description: "Detailed documentation on the Twitter binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup Twitter binding create a component of type `bindings.twitter`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -33,18 +33,18 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Specifying a time to live on message level
+## Spec metadata fields
 
-| 字段             | Required | Output Binding Supported Operations | Details                     | Example:           |
-| -------------- |:--------:| ----------------------------------- | --------------------------- | ------------------ |
-| consumerKey    |    Y     | Input/Output                        | Twitter API consumer key    | `"conusmerkey"`    |
-| consumerSecret |    Y     | Input/Output                        | Twitter API consumer secret | `"conusmersecret"` |
-| accessToken    |    Y     | Input/Output                        | Twitter API access token    | `"accesstoken"`    |
-| accessSecret   |    Y     | Input/Output                        | Twitter API access secret   | `"accesssecret"`   |
+| 字段             | Required | Binding support | Details                     | Example            |
+| -------------- |:--------:| --------------- | --------------------------- | ------------------ |
+| consumerKey    |    Y     | Input/Output    | Twitter API consumer key    | `"conusmerkey"`    |
+| consumerSecret |    Y     | Input/Output    | Twitter API consumer secret | `"conusmersecret"` |
+| accessToken    |    Y     | Input/Output    | Twitter API access token    | `"accesstoken"`    |
+| accessSecret   |    Y     | Input/Output    | Twitter API access secret   | `"accesssecret"`   |
 
-## Specifying a priority on message level
+## Output bindings
 
-若要设置在消息级别生存的时间，请使用 `metadata` 请求正文中的元数据部分。
+This component supports both **input and output** binding interfaces.
 
 字段名为 `ttlInSeconds`。
 
