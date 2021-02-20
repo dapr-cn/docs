@@ -26,9 +26,9 @@ spec:
 
 ## Spec metadata fields
 
-| Field                | Details                                                                                                                                                                | Example |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| maxRequestsPerSecond | The maximum requests per second by remote IP and path. Something to consider is that **the limit is enforced independently in each Dapr sidecar and not cluster wide** | `10`    |
+| 字段                   | Details                                                                                                                                                                | 示例   |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| maxRequestsPerSecond | The maximum requests per second by remote IP and path. Something to consider is that **the limit is enforced independently in each Dapr sidecar and not cluster wide** | `10` |
 
 Once the limit is reached, the request will return *HTTP Status code 429: Too Many Requests*.
 
@@ -50,7 +50,7 @@ spec:
       type: middleware.http.ratelimit
 ```
 
-## Related links
+## 相关链接
 
 - [Control max concurrently]({{< ref control-concurrency.md >}})
 - [Middleware concept]({{< ref middleware-concept.md >}})
