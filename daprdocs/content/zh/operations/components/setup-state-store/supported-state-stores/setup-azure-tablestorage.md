@@ -1,13 +1,13 @@
 ---
-type: 文档
+type: docs
 title: "Azure Table Storage"
 linkTitle: "Azure Table Storage"
 description: Detailed information on the Azure Table Storage state store component
 ---
 
-## Introduction
+## Component format
 
-To setup Azure Tablestorage state store create a component of type `state.azure.tablestorage`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Azure Tablestorage state store create a component of type `state.azure.tablestorage`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -28,16 +28,16 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段          | Required | Details                                                                                                                                                      | Example               |
-| ----------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
-| accountName |    Y     | The storage account name                                                                                                                                     | `"mystorageaccount"`. |
-| accountKey  |    Y     | Primary or secondary storage key                                                                                                                             | `"key"`               |
-| tableName   |    Y     | The name of the table to be used for Dapr state. The table will be created for you if it doesn't exist The table will be created for you if it doesn't exist | `"table"`             |
+| Field       | Required | Details                                                                                                | Example               |
+| ----------- |:--------:| ------------------------------------------------------------------------------------------------------ | --------------------- |
+| accountName |    Y     | The storage account name                                                                               | `"mystorageaccount"`. |
+| accountKey  |    Y     | Primary or secondary storage key                                                                       | `"key"`               |
+| tableName   |    Y     | The name of the table to be used for Dapr state. The table will be created for you if it doesn't exist | `"table"`             |
 
 ## Setup Azure Table Storage
 
@@ -46,13 +46,13 @@ spec:
 If you wish to create a table for Dapr to use, you can do so beforehand. However, Table Storage state provider will create one for you automatically if it doesn't exist.
 
 In order to setup Azure Table Storage as a state store, you will need the following properties:
-- **AccountName**: The storage account name. For example: **mystorageaccount**. For example: **mystorageaccount**.
+- **AccountName**: The storage account name. For example: **mystorageaccount**.
 - **AccountKey**: Primary or secondary storage key.
 - **TableName**: The name of the table to be used for Dapr state. The table will be created for you if it doesn't exist.
 
 ## Partitioning
 
-The Azure Table Storage state store uses the `key` property provided in the requests to the Dapr API to determine the `row key`. Service Name is used for `partition key`. This provides best performance, as each service type stores state in it's own table partition. Service Name is used for `partition key`. This provides best performance, as each service type stores state in it's own table partition.
+The Azure Table Storage state store uses the `key` property provided in the requests to the Dapr API to determine the `row key`. Service Name is used for `partition key`. This provides best performance, as each service type stores state in it's own table partition.
 
 This state store creates a column called `Value` in the table storage and puts raw state inside it.
 
@@ -80,7 +80,7 @@ will create the following record in a table:
 Azure Table Storage state concurrency is achieved by using `ETag`s according to [the official documenation](https://docs.microsoft.com/en-us/azure/storage/common/storage-concurrency#managing-concurrency-in-table-storage).
 
 
-## 相关链接
+## Related links
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
