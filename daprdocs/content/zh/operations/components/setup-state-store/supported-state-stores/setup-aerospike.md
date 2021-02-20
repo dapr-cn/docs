@@ -1,13 +1,13 @@
 ---
-type: 文档
+type: docs
 title: "Aerospike"
 linkTitle: "Aerospike"
 description: Detailed information on the Aerospike state store component
 ---
 
-## Introduction
+## Component format
 
-To setup Aerospike state store create a component of type `state.Aerospike`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Aerospike state store create a component of type `state.Aerospike`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,9 +31,9 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段        | Required | Details                           | 示例                                                     |
+| 字段        | Required | Details                           | Example                                                |
 | --------- |:--------:| --------------------------------- | ------------------------------------------------------ |
 | hosts     |    Y     | Host name/port of database server | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
 | namespace |    Y     | The Aerospike namespace           | `"namespace"`                                          |
@@ -61,7 +61,7 @@ helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubato
 helm install --name my-aerospike --namespace aerospike stable/aerospike
 ```
 
-This installs Aerospike into the `aerospike` namespace. This will install Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
+This installs Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
 
 For example, if installing using the example above, the Aerospike host address would be:
 
