@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Configure Dapr to send distributed tracing data"
 linkTitle: "Enable Dapr tracing for your application"
 weight: 100
