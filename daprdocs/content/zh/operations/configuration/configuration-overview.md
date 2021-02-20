@@ -44,7 +44,7 @@ Note: There are more [Kubernetes annotations]({{< ref "kubernetes-annotations.md
 The following configuration settings can be applied to Dapr application sidecars;
 - [Tracing](#tracing)
 - [Metrics](#metrics)
-- [Middleware](#middleware)
+- [Middleware（中间件）](#middleware)
 - [Scoping secrets for secret stores](#scoping-secrets-for-secret-stores)
 - [Access control allow lists for service invocation](#access-control-allow-lists-for-service-invocation)
 - [Example application sidecar configuration](#example-application-sidecar-configuration)
@@ -64,7 +64,7 @@ tracing:
 
 The following table lists the properties for tracing:
 
-| Property                 | Type   | Description                                              |
+| Property                 | Type   | 描述                                                       |
 | ------------------------ | ------ | -------------------------------------------------------- |
 | `samplingRate`           | string | Set sampling rate for tracing to be enabled or disabled. |
 | `zipkin.endpointAddress` | string | Set the Zipkin server address.                           |
@@ -87,7 +87,7 @@ metrics:
 
 The following table lists the properties for metrics:
 
-| Property  | Type    | Description                           |
+| Property  | Type    | 说明                                    |
 | --------- | ------- | ------------------------------------- |
 | `enabled` | boolean | Whether metrics should to be enabled. |
 
@@ -167,7 +167,7 @@ There is a single configuration file called `default` installed with the Dapr co
 ### Control-plane configuration settings
 A Dapr control plane configuration can configure the following settings:
 
-| Property         | Type   | Description                                                                                                     |
+| Property         | Type   | 说明                                                                                                              |
 | ---------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
 | enabled          | bool   | Set mtls to be enabled or disabled                                                                              |
 | allowedClockSkew | string | The extra time to give for certificate expiry based on possible clock skew on a machine. Default is 15 minutes. |
