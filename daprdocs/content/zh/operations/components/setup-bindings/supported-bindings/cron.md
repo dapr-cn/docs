@@ -26,7 +26,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field    | Required | Binding support | Details                                                                       | Example        |
+| 字段       | Required | Binding support | Details                                                                       | Example        |
 | -------- |:--------:| --------------- | ----------------------------------------------------------------------------- | -------------- |
 | schedule |    Y     | Input/Output    | The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"` |
 
@@ -57,15 +57,15 @@ For ease of use, the Dapr cron binding also supports few shortcuts:
 * `@every 15s` where `s` is seconds, `m` minutes, and `h` hours
 * `@daily` or `@hourly` which runs at that period from the time the binding is initialized
 
-## Binding support
+## Output bindings
 
 This component supports both **input and output** binding interfaces.
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `delete`
 
-## Related links
+## 相关链接
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
