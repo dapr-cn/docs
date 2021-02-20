@@ -314,7 +314,7 @@ You should see something similar the following output:
 
 Dapr also allows you to save and retrieve multiple states in the same call.
 
-{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK">}}
 
 {{% codetab %}}
 With the same dapr instance running from above save two key/value pairs into your statestore:
