@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Cron binding spec"
 linkTitle: "Cron"
 description: "Detailed documentation on the cron binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup cron binding create a component of type `bindings.cron`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -24,11 +24,11 @@ spec:
     value: "@every 15m" # valid cron schedule  
 ```
 
-## Input bindings
+## Spec metadata fields
 
-| 字段       | Required | Output Binding Supported Operations | Details                                                                       | Example:       |
-| -------- |:--------:| ----------------------------------- | ----------------------------------------------------------------------------- | -------------- |
-| schedule |    Y     | Input/Output                        | The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"` |
+| 字段       | Required | Binding support | Details                                                                       | Example        |
+| -------- |:--------:| --------------- | ----------------------------------------------------------------------------- | -------------- |
+| schedule |    Y     | Input/Output    | The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"` |
 
 ### Schedule Format
 
@@ -59,7 +59,7 @@ For ease of use, the Dapr cron binding also supports few shortcuts:
 
 ## Output bindings
 
-For input bindings, where the query matching Tweets are streamed to the user service, the above component has to also include a query:
+This component supports both **input and output** binding interfaces.
 
 字段名为 `ttlInSeconds`。
 
