@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Deploy and run Dapr in Kubernetes mode"
 linkTitle: "Kubernetes"
 weight: 2000
