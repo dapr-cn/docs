@@ -105,6 +105,6 @@ In your browser, go to `http://localhost:9411` and you will see the Zipkin UI.
 
 ![zipkin](/images/zipkin_ui.png)
 
-## References
+## 参考文档
 - [Zipkin for distributed tracing](https://zipkin.io/)
 - [W3C distributed tracing]({{< ref w3c-tracing >}})
