@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Kubernetes Events binding spec"
 linkTitle: "Kubernetes Events"
 description: "Detailed documentation on the Kubernetes Events binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup Kubernetes Events binding create a component of type `bindings.kubernetes`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -26,14 +26,14 @@ spec:
     vale: "<seconds>"
 ```
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                | Required | Output Binding Supported Operations                                                                                                  | Details                                                                 | Example:    |
-| ----------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- | ----------- |
-| namespace         |    Y     | Input                                                                                                                                | `namespace` (required) is the Kubernetes namespace to read events from. | `"default"` |
-| resyncPeriodInSec |    N     | `resyncPeriodInSec` (optional, default `10`) the period of time to refresh event list from Kubernetes API server. Defaults to `"10"` | `"15"`                                                                  |             |
+| Field             | Required | Binding support                                                                        | Details                                      | Example     |
+| ----------------- |:--------:| -------------------------------------------------------------------------------------- | -------------------------------------------- | ----------- |
+| namespace         |    Y     | Input                                                                                  | The Kubernetes namespace to read events from | `"default"` |
+| resyncPeriodInSec |    N     | Te period of time to refresh event list from Kubernetes API server. Defaults to `"10"` | `"15"`                                       |             |
 
-## Output bindings
+## Binding support
 
 This component supports **input** binding interface.
 
@@ -50,26 +50,6 @@ Output received from the binding is of format `bindings.ReadResponse` with the `
        "namespace": "kube-events",
        "selfLink": "/api/v1/namespaces/kube-events/events/hello-node.162c2661c524d095",
        ...
-     },
-     "involvedObject": {
-       "kind": "Deployment",
-       "namespace": "kube-events",
-       ...
-     },
-     "reason": "ScalingReplicaSet",
-     "message": "Scaled up replica set hello-node-7bf657c596 to 1",
-     ...
-   },
-   "newVal": {
-     "metadata": { "creationTimestamp": "null" },
-     "involvedObject": {},
-     "source": {},
-     "firstTimestamp": "null",
-     "lastTimestamp": "null",
-     "eventTime": "null",
-     ...
-   }
- }
      },
      "involvedObject": {
        "kind": "Deployment",
@@ -134,10 +114,10 @@ roleRef:
   apiGroup: ""
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
-- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
-- [绑定API 参考]({{< ref bindings_api.md >}})
+- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
+- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
+- [Bindings API reference]({{< ref bindings_api.md >}})
