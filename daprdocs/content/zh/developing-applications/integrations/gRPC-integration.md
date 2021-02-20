@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr的 gRPC 接口"
 linkTitle: "gRPC"
 weight: 1000
@@ -8,13 +8,13 @@ description: "在应用程序中使用 Dapr gRPC API"
 
 # Dapr 和 gRPC
 
-Dapr 为本地调用实现 HTTP 和 gRPC API 。 Dapr implements both an HTTP and a gRPC API for local calls. gRPC is useful for low-latency, high performance scenarios and has language integration using the proto clients.
+Dapr 为本地调用实现 HTTP 和 gRPC API 。 gRPC is useful for low-latency, high performance scenarios and has language integration using the proto clients.
 
 您可以在这里找到 [](https://github.com/dapr/docs#sdks) 自动生成的客户端 的列表。
 
 Dapr 运行时实现 [服务](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) ，应用程序可以通过 gRPC 进行通信。
 
-除了通过 gRPC 调用 Dapr ， Dapr 还可以通过 gRPC 与应用程序通信。 In addition to calling Dapr via gRPC, Dapr can communicate with an application via gRPC. To do that, the app needs to host a gRPC server and implements the [Dapr appcallback service](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/appcallback.proto)
+除了通过 gRPC 调用 Dapr ， Dapr 还可以通过 gRPC 与应用程序通信。 To do that, the app needs to host a gRPC server and implements the [Dapr appcallback service](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/appcallback.proto)
 
 ## 配置 dapr 以通过 gRPC 与应用程序通信
 
@@ -185,34 +185,6 @@ func (s *server) OnBindingEvent(ctx context.Context, in *pb.BindingEventRequest)
 func (s *server) OnTopicEvent(ctx context.Context, in *pb.TopicEventRequest) (*empty.Empty, error) {
     fmt.Println("Topic message arrived")
     return &empty.Empty{}, nil
-} In this example, we are telling Dapr
-// To subscribe to a topic named TopicA
-func (s *server) ListTopicSubscriptions(ctx context.Context, in *empty.Empty) (*pb.ListTopicSubscriptionsResponse, error) {
-    return &pb.ListTopicSubscriptionsResponse{
-        Subscriptions: []*pb.TopicSubscription{
-            {Topic: "TopicA"},
-        },
-    }, nil
-}
-
-// Dapr will call this method to get the list of bindings the app will get invoked by. In this example, we are telling Dapr
-// To invoke our app with a binding named storage
-func (s *server) ListInputBindings(ctx context.Context, in *empty.Empty) (*pb.ListInputBindingsResponse, error) {
-    return &pb.ListInputBindingsResponse{
-        Bindings: []string{"storage"},
-    }, nil
-}
-
-// This method gets invoked every time a new event is fired from a registerd binding. The message carries the binding name, a payload and optional metadata
-func (s *server) OnBindingEvent(ctx context.Context, in *pb.BindingEventRequest) (*pb.BindingEventResponse, error) {
-    fmt.Println("Invoked from binding")
-    return &pb.BindingEventResponse{}, nil
-}
-
-// This method is fired whenever a message has been published to a topic that has been subscribed. Dapr sends published messages in a CloudEvents 0.3 envelope.
-func (s *server) OnTopicEvent(ctx context.Context, in *pb.TopicEventRequest) (*empty.Empty, error) {
-    fmt.Println("Topic message arrived")
-    return &empty.Empty{}, nil
 }
 
 ```
@@ -232,12 +204,6 @@ func main() {
     pb.RegisterAppCallbackServer(s, &server{})
 
     fmt.Println("Client starting...")
-
-    // and start...
-    if err := s.Serve(lis); err != nil {
-        log.Fatalf("failed to serve: %v", err)
-    }
-}
 
     // and start...
     if err := s.Serve(lis); err != nil {
