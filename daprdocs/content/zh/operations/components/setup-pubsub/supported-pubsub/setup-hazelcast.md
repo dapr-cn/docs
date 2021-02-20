@@ -1,12 +1,12 @@
 ---
-type: 文档
+type: docs
 title: "Hazelcast"
 linkTitle: "Hazelcast"
 description: "Detailed documentation on the Hazelcast pubsub component"
 ---
 
-## Introduction
-To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## Component format
+To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -23,14 +23,14 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                                                       | Required | Details                                                                        | 示例                                 |
-| -------------------------------------------------------- |:--------:| ------------------------------------------------------------------------------ | ---------------------------------- |
-| `connectionString` is the Service Bus connection string. |    Y     | A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000" | `"hazelcast:3000,hazelcast2:3000"` |
+| Field            | Required | Details                                                                        | Example                            |
+| ---------------- |:--------:| ------------------------------------------------------------------------------ | ---------------------------------- |
+| connectionString |    Y     | A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000" | `"hazelcast:3000,hazelcast2:3000"` |
 
 
 ## Create a Hazelcast instance
@@ -53,7 +53,7 @@ The easiest way to install Hazelcast on Kubernetes is by using the [Helm chart](
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
