@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "概述"
-linkTitle: "Overview"
+linkTitle: "Secrets stores overview"
 weight: 100
 description: >
   分布式应用程序运行时介绍
@@ -31,15 +31,15 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 
 每个构建块都是独立的，这意味着您可以采用其中一个或多个或全部来构建应用。 在当前 Dapr 的初始版本中，提供了以下构建块：
 
-| 构建块                    | 描述                                                                                                                                       |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [**服务间调用**]({{X18X}}) | 弹性的服务间调用能在远程服务上进行方法调用（包括检索），无论它们是否位于受支持的托管环境中的。                                                                                          |
-| [**状态管理**]({{X21X}})  | 通过用于存储键/值对的状态管理，应用程序中长期运行、高可用的有状态服务可以轻松地与无状态服务一起编写。 状态存储是可插拔的，可以包括 Azure CosmosDB， Azure SQL Server， PostgreSQL， AWS DynamoDB 或 Redis 等。 |
-| [**发布订阅**]({{X24X}})  | 发布事件到主题和从主题中订阅事件。                                                                                                                        |
-| [**资源绑定**]({{X27X}})  | 带触发器的资源绑定通过接收和发送事件到任何外部源（如数据库、队列、文件系统等）来进一步构建事件驱动架构，以实现扩展性和弹性。                                                                           |
-| [**Actor**]({{X30X}}) | 一种用于有状态和无状态对象的模式，通过方法和状态的封装让并发变得简单。 Dapr 在其 actor 运行时提供了很多能力，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。                        |
-| [**可观测性**]({{X33X}})  | Dapr 可以发出度量，日志和跟踪以调试和监控 Dapr 和用户应用程序。 Dapr 支持分布式跟踪，通过使用 W3C 跟踪上下文标准和 Open Telemetry 发送到不同的监控工具，以方便诊断和服务于生产中的服务间调用。                       |
-| [**秘密**]({{X36X}})    | Dapr提供秘密管理，并与公有云和本地秘密存储集成，以检索秘密，用于应用代码。                                                                                                  |
+| 构建块                    | 说明                                                                                                                                                                                                                                                                                                                                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [**服务间调用**]({{X18X}}) | 弹性的服务间调用能在远程服务上进行方法调用（包括检索），无论它们是否位于受支持的托管环境中的。                                                                                                                                                                                                                                                                                                                                                  |
+| [**状态管理**]({{X21X}})  | With state management for storing key/value pairs, long running, highly available, stateful services can be easily written alongside stateless services in your application. The state store is pluggable and can include Azure CosmosDB, Azure SQL Server, PostgreSQL, AWS DynamoDB or Redis among others. 状态存储是可插拔的，可以包括 Azure CosmosDB， Azure SQL Server， PostgreSQL， AWS DynamoDB 或 Redis 等。 |
+| [**发布订阅**]({{X24X}})  | Publishing events and subscribing to topics | tween services enables event-driven architectures to simplify horizontal scalability and make them | silient to failure. Dapr provides at least once message delivery guarantee.                                                                                                                                                                   |
+| [**资源绑定**]({{X27X}})  | 带触发器的资源绑定通过接收和发送事件到任何外部源（如数据库、队列、文件系统等）来进一步构建事件驱动架构，以实现扩展性和弹性。                                                                                                                                                                                                                                                                                                                                   |
+| [**Actor**]({{X30X}}) | 一种用于有状态和无状态对象的模式，通过方法和状态的封装让并发变得简单。 Dapr 在其 actor 运行时提供了很多能力，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。                                                                                                                                                                                                                                                                                |
+| [**可观察性**]({{X33X}})  | Dapr 可以发出度量，日志和跟踪以调试和监控 Dapr 和用户应用程序。 Dapr 支持分布式跟踪，通过使用 W3C 跟踪上下文标准和 Open Telemetry 发送到不同的监控工具，以方便诊断和服务于生产中的服务间调用。                                                                                                                                                                                                                                                                               |
+| [**密钥**]({{X36X}})    | Dapr提供秘密管理，并与公有云和本地秘密存储集成，以检索秘密，用于应用代码。                                                                                                                                                                                                                                                                                                                                                          |
 
 ## Sidecar 架构
 
