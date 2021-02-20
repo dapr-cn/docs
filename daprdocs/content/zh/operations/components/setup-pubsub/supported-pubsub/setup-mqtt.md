@@ -30,7 +30,7 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field        |        Required        | Details                                                                                                                  | Example                                                                                                                                                              |
+| 字段           |        Required        | Details                                                                                                                  | Example                                                                                                                                                              |
 | ------------ |:----------------------:| ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | url          |           Y            | Address of the MQTT broker                                                                                               | Use `**tcp://**` scheme for non-TLS communication.   Use`**tcps://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]" |
 | qos          |           N            | Indicates the Quality of Service Level (QoS) of the message. Default 0                                                   | `1`                                                                                                                                                                  |
@@ -171,7 +171,7 @@ You can then interact with the server using the client port: `tcp://mqtt-broker.
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
