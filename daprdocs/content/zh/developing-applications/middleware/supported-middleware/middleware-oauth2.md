@@ -37,7 +37,7 @@ spec:
     value: "false" 
 ```
 ## Spec metadata fields
-| Field          | Details                                                                                                                                                                      | Example                                            |
+| 字段             | Details                                                                                                                                                                      | 示例                                                 |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | clientId       | The client ID of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                                 |                                                    |
 | clientSecret   | The client secret of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                             |                                                    |
@@ -64,7 +64,7 @@ spec:
       type: middleware.http.oauth2
 ```
 
-## Related links
+## 相关链接
 - [Configure API authorization with OAuth]({{< ref oauth >}})
 - [Middleware OAuth quickstart](https://github.com/dapr/quickstarts/tree/master/middleware)
 - [Middleware concept]({{< ref middleware-concept.md >}})
