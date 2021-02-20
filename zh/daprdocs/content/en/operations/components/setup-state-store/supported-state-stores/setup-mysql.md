@@ -56,7 +56,7 @@ Dapr can use any MySQL instance - containerized, running on your local dev machi
 
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
-{{% codetab %}}
+在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 <!-- Self-Hosted -->
 
 Run an instance of MySQL. Run an instance of MySQL. You can run a local instance of MySQL in Docker CE with the following command:
