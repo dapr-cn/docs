@@ -1,7 +1,7 @@
 ---
-type: 文档
+type: docs
 title: "PostgreSQL"
-linkTitle: "PostgrSQL"
+linkTitle: "PostgreSQL"
 description: Detailed information on the PostgreSQL state store component
 ---
 
@@ -24,16 +24,16 @@ spec:
   - name: connectionString
     value: "<CONNECTION STRING>"
 ```
-also support connection pool configuration variables:
-The above example uses secrets as plain strings. also support connection pool configuration variables: The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+{{% alert title="Warning" color="warning" %}}
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                                                       | Required | Details                                                                           | 示例                                                            |
-| -------------------------------------------------------- |:--------:| --------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `connectionString` is the Service Bus connection string. |    Y     | The connection string for PostgreSQL                                              | `"User ID=root;Password=myPassword;Host=localhost;Port=5432"` |
-| actorStateStore                                          |    N     | Consider this state store for actors. Defaults to `"false"` Defaults to `"false"` | `"true"`, `"false"`                                           |
+| Field            | Required | Details                                                     | Example                                                       |
+| ---------------- |:--------:| ----------------------------------------------------------- | ------------------------------------------------------------- |
+| connectionString |    Y     | The connection string for PostgreSQL                        | `"User ID=root;Password=myPassword;Host=localhost;Port=5432"` |
+| actorStateStore  |    N     | Consider this state store for actors. Defaults to `"false"` | `"true"`, `"false"`                                           |
 
 
 If you wish to use PostgreSQL as an actor store, append the following to the yaml.
@@ -48,9 +48,9 @@ If you wish to use PostgreSQL as an actor store, append the following to the yam
 
 {{< tabs "Self-Hosted" >}}
 
-在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
+{{% codetab %}}
 
-1. Run an instance of PostgreSQL. Run an instance of PostgreSQL. You can run a local instance of PostgreSQL in Docker CE with the following command:
+1. Run an instance of PostgreSQL. You can run a local instance of PostgreSQL in Docker CE with the following command:
 
      This example does not describe a production configuration because it sets the password in plain text and the user name is left as the PostgreSQL default of "postgres".
 
@@ -58,7 +58,7 @@ If you wish to use PostgreSQL as an actor store, append the following to the yam
      docker run -p 5432:5432 -e POSTGRES_PASSWORD=example postgres
      ```
 
-2. Create a database for state data. Create a database for state data. Either the default "postgres" database can be used, or create a new database for storing state data.
+2. Create a database for state data. Either the default "postgres" database can be used, or create a new database for storing state data.
 
     To create a new database in PostgreSQL, run the following SQL command:
 
@@ -69,7 +69,7 @@ If you wish to use PostgreSQL as an actor store, append the following to the yam
 
 {{% /tabs %}}
 
-## 相关链接
+## Related links
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
