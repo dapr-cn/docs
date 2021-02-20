@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Overview"
+title: "概述"
 linkTitle: "Overview"
 description: "Guidance on set up for state management components"
 weight: 10000
