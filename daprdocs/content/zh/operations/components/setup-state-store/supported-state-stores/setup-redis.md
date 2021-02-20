@@ -52,7 +52,7 @@ If you wish to use Redis as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| Field              | Required | Details                                                                                                                         | Example                                                         |
+| 字段                 | Required | Details                                                                                                                         | Example                                                         |
 | ------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | redisHost          |    Y     | Connection-string for the redis host                                                                                            | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
 | redisPassword      |    Y     | Password for Redis host. No Default. Can be `secretKeyRef` to use a secret reference                                            | `""`, `"KeFg23!"`                                               |
@@ -132,7 +132,7 @@ We can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Ku
 The Dapr CLI automatically deploys a local redis instance in self hosted mode as part of the `dapr init` command.
 {{% /alert %}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
