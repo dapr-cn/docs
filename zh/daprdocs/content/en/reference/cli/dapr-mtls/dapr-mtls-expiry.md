@@ -10,7 +10,7 @@ weight: 2000
 
 检查根证书的到期时间
 
-## 支持的平台
+## Supported platforms
 
 - [Kubernetes]({{< ref kubernetes >}})
 
@@ -21,7 +21,7 @@ dapr mtls expiry [flags]
 
 ## 参数
 
-| 名称             | 环境变量 | 默认值 | 说明   |
+| Name           | 环境变量 | 默认值 | 说明   |
 | -------------- | ---- | --- | ---- |
 | `--help`, `-h` |      |     | 帮助信息 |
 
