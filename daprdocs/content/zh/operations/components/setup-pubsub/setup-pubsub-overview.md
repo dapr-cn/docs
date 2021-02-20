@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Overview"
+title: "概述"
 linkTitle: "Overview"
 description: "Overview on setting up of pub/sub components for Dapr"
 weight: 10000
