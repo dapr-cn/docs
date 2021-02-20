@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Local environment variables (for Development)"
 linkTitle: "Local environment variables"
 description: Detailed information on the local environment secret store component
@@ -11,9 +11,9 @@ This Dapr secret store component uses locally defined environment variable and d
 This approach to secret management is not recommended for production environments.
 {{% /alert %}}
 
-## Introduction
+## Component format
 
-To setup local environment variables secret store create a component of type `secretstores.local.env`. Create a file with the following content in your `./components` directory: Create a file with the following content in your `./components` directory:
+To setup local environment variables secret store create a component of type `secretstores.local.env`. Create a file with the following content in your `./components` directory:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
