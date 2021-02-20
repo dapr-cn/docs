@@ -2,7 +2,7 @@
 type: docs
 title: "Apple Push Notification Service binding spec"
 linkTitle: "Apple Push Notification Service"
-description: "Detailed documentation on the Apple Push Notification Service binding component"
+description: "有关 Apple 推送通知服务绑定组件的详细文档"
 ---
 
 ## Component format
@@ -32,10 +32,10 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field       | Required | Binding support | Details                                                                                                                                                                                        | Example            |
+| 字段          | Required | Binding support | Details                                                                                                                                                                                        | Example            |
 | ----------- |:--------:| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| development |    Y     | Output          | Tells the binding which APNs service to use. Set to `"true"` to use the development service or `"false"` to use the production service. Default: `"true"`                                      | `"true"`           |
-| key-id      |    Y     | Output          | The identifier for the private key from the Apple Developer Portal                                                                                                                             | `"private-key-id`" |
+| development |    Y     | Output          | Tells the binding which APNs service to use. 设置为 `true` 以用于开发环境， `false` 用于生产环境。 Default: `"true"`                                                                                             | `"true"`           |
+| key-id      |    Y     | Output          | `key-id` 是 Apple Developer Portal中专用密钥的标识。                                                                                                                                                     | `"private-key-id`" |
 | team-id     |    Y     | Output          | The identifier for the organization or author from the Apple Developer Portal                                                                                                                  | `"team-id"`        |
 | private-key |    Y     | Output          | Is a PKCS #8-formatted private key. It is intended that the private key is stored in the secret store and not exposed directly in the configuration. See [here](#private-key) for more details | `"pem file"`       |
 
@@ -77,13 +77,13 @@ stringData:
         -----END PRIVATE KEY-----
 ```
 
-## Binding support
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
 - `create`
 
-## Push notification format
+## 输出绑定支持的操作
 
 The APNS binding is a pass-through wrapper over the Apple Push Notification Service. The APNS binding will send the request directly to the APNS service without any translation. It is therefore important to understand the payload for push notifications expected by the APNS service. The payload format is documented [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification).
 
@@ -125,6 +125,6 @@ Besides the `device-token` value, the HTTP headers specified in the [Apple docum
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
