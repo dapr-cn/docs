@@ -5,7 +5,7 @@ linkTitle: "Apple Push Notification Service"
 description: "有关 Apple 推送通知服务绑定组件的详细文档"
 ---
 
-## 配置
+## Introduction
 
 To setup Apple Push Notifications binding create a component of type `bindings.apns`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -30,7 +30,7 @@ spec:
         name: <SECRET>
         key: <SECRET-KEY-NAME>
 ```
-## 请求格式
+## Input bindings
 
 | 字段          | Required | Output Binding Supported Operations | Details                                                                                               | Example:           |
 | ----------- |:--------:| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------ |
@@ -77,7 +77,7 @@ stringData:
         -----END PRIVATE KEY-----
 ```
 
-## 响应格式
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
