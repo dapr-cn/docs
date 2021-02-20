@@ -1,8 +1,8 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Reference secrets in components"
 linkTitle: "How-To: Reference secrets"
-weight: 400
+weight: 300
 description: "How to securly reference secrets from a component definition"
 ---
 
@@ -60,7 +60,7 @@ auth:
   secretStore: <SECRET_STORE_NAME>
 ```
 
-`SECRET_STORE_NAME` is the name of the configured [secret store component]({{< ref supported-secret-stores >}}). When running in Kubernetes and using a Kubernetes secret store, the field `auth.SecretStore` defaults to `kubernetes` and can be left empty. When running in Kubernetes and using a Kubernetes secret store, the field `auth.SecretStore` defaults to `kubernetes` and can be left empty.
+`SECRET_STORE_NAME` is the name of the configured [secret store component]({{< ref supported-secret-stores >}}). When running in Kubernetes and using a Kubernetes secret store, the field `auth.SecretStore` defaults to `kubernetes` and can be left empty.
 
 The above component definition tells Dapr to extract a secret named `redis-secret` from the defined secret store and assign the value of the `redis-password` key in the secret to the `redisPassword` field in the Component.
 
