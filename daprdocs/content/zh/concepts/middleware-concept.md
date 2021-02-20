@@ -33,7 +33,7 @@ spec:
       type: middleware.http.uppercase
 ```
 
-## Next steps
+## 下一步
 
 * [操作方法：使用 OAuth 配置 API 授权]({{< ref middleware-overview.md >}})
-* [How-To: Configure API authorization with OAuth]({{< ref oauth.md >}})
+* [操作方法：使用 OAuth 配置 API 授权]({{< ref oauth.md >}})
