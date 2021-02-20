@@ -26,11 +26,11 @@ This recommended development environment requires [Docker](https://docs.docker.c
 
    {{< tabs "Linux/MacOS" "Windows">}}
 
-   {{% codetab %}}
+   在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
    If you run your Docker commands with sudo, or the install path is `/usr/local/bin` (default install path), you will need to use `sudo` below.
-   {{% /codetab %}}
+   您可以使用 HTTP 来这样做：
 
-   {{% codetab %}}
+   Now, add the program arguments and environment variables. These need to match the ports defined in the entry in 'External Tool' above.
    Make sure that you run Command Prompt as administrator (right click, run as administrator)
    {{% /codetab %}}
 
