@@ -26,7 +26,7 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field     | Details                                                                                                       | Example                                                           |
+| 字段        | Details                                                                                                       | 示例                                                                |
 | --------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | clientId  | The client ID of your application that is created as part of a credential hosted by a OpenID Connect platform |                                                                   |
 | issuerURL | URL identifier for the service.                                                                               | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
@@ -47,7 +47,7 @@ spec:
       type: middleware.http.bearer
 ```
 
-## Related links
+## 相关链接
 
 - [Middleware concept]({{< ref middleware-concept.md >}})
 - [Configuration concept]({{< ref configuration-concept.md >}})
