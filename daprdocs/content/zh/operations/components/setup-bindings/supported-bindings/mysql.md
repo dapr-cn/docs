@@ -41,7 +41,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field           | Required | Binding support | Details                                                                                                   | Example                                      |
+| 字段              | Required | Binding support | Details                                                                                                   | Example                                      |
 | --------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | url             |    Y     | Output          | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"` |
 | pemPath         |    Y     | Output          | Path to the PEM file. Used with SSL connection                                                            | `"path/to/pem/file"`                         |
@@ -58,7 +58,7 @@ If your server requires SSL your connection string must end of `&tls=custom` for
 ```
  You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
 
-## Binding support
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
@@ -144,10 +144,10 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 
 > Note, the MySQL binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
 
-## Related links
+## 相关链接
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
