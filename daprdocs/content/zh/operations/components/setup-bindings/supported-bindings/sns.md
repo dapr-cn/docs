@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "AWS SNS binding spec"
 linkTitle: "AWS SNS"
 description: "Detailed documentation on the AWS SNS binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup AWS SNS binding create a component of type `bindings.aws.sns`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -34,19 +34,19 @@ spec:
 
 ```
 
-also support connection pool configuration variables:
-The above example uses secrets as plain strings. also support connection pool configuration variables: The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+{{% alert title="Warning" color="warning" %}}
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段           | Required | Output Binding Supported Operations | Details                                           | Example:            |
-| ------------ |:--------:| ----------------------------------- | ------------------------------------------------- | ------------------- |
-| topicArn     |    Y     | Output                              | `topicArn` is the SNS topic name.                 | `"arn:::topicarn"`  |
-| region       |    Y     | Output                              | The specific AWS region                           | `"us-east-1"`       |
-| accessKey    |    Y     | Output                              | The AWS Access Key to access this resource        | `"key"`             |
-| secretKey    |    Y     | Output                              | The AWS Secret Access Key to access this resource | `"secretAccessKey"` |
-| sessionToken |    N     | Output                              | The AWS session token to use                      | `"sessionToken"`    |
+| 字段           | Required | Binding support | Details                                           | Example             |
+| ------------ |:--------:| --------------- | ------------------------------------------------- | ------------------- |
+| topicArn     |    Y     | Output          | The SNS topic name                                | `"arn:::topicarn"`  |
+| region       |    Y     | Output          | The specific AWS region                           | `"us-east-1"`       |
+| accessKey    |    Y     | Output          | The AWS Access Key to access this resource        | `"key"`             |
+| secretKey    |    Y     | Output          | The AWS Secret Access Key to access this resource | `"secretAccessKey"` |
+| sessionToken |    N     | Output          | The AWS session token to use                      | `"sessionToken"`    |
 
 ## Output bindings
 
