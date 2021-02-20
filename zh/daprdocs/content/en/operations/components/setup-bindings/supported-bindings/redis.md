@@ -5,7 +5,7 @@ linkTitle: "Redis"
 description: "Redis 组件绑定详细说明"
 ---
 
-## 设置 Dapr 组件
+## Introduction
 
 To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -29,10 +29,10 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## 输出绑定支持的操作
+## Input bindings
 
 | 字段                          | Required | Output Binding Supported Operations | Details                                                                           | Example:            |
 | --------------------------- |:--------:| ----------------------------------- | --------------------------------------------------------------------------------- | ------------------- |
@@ -41,7 +41,7 @@ spec:
 | enableTLS                   |    N     | Output                              | `enableTLS` - 如果 Redis 实例支持使用公用证书的 TLS ，那么可以将其配置为启用或禁用 TLS。 Defaults to `"false"` | `"true"`, `"false"` |
 
 
-## 相关链接
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
