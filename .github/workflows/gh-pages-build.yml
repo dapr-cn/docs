@@ -28,8 +28,6 @@ jobs:
         run: |
           rm daprdocs/config.toml
           cp zh/github.pages.config.toml daprdocs/config.toml
-          mkdir daprdocs/content/zh/
-          cp -r zh/daprdocs/content/en/* daprdocs/content/zh/
           cd daprdocs
           git submodule update --init --recursive 
           sudo npm install -D --save autoprefixer 
