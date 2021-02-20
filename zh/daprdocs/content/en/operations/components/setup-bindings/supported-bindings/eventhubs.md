@@ -5,7 +5,7 @@ linkTitle: "Azure Event Hubs"
 description: "Detailed documentation on the Azure Event Hubs binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup Azure Event Hubs binding create a component of type `bindings.azure.eventhubs`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -39,7 +39,7 @@ also support connection pool configuration variables:
 The above example uses secrets as plain strings. also support connection pool configuration variables: The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Output Binding Supported Operations
+## Input bindings
 
 | 字段                                                                                                           | Required | Output Binding Supported Operations | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Example:               |
 | ------------------------------------------------------------------------------------------------------------ |:--------:| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
