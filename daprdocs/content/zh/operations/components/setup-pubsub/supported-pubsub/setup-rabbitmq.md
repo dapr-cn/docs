@@ -37,12 +37,12 @@ spec:
     value: parallel
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                                                                                                                                                                                               | Example                           |
+| 字段                | Required | Details                                                                                                                                                                                                                                               | Example                           |
 | ----------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | host              |    Y     | Connection-string for the rabbitmq host                                                                                                                                                                                                               | `amqp://user:pass@localhost:5672` |
 | durable           |    N     | Whether or not to use [durable](https://www.rabbitmq.com/queues.html#durability) queues. Defaults to `"false"`                                                                                                                                        | `"true"`, `"false"`               |
@@ -88,7 +88,7 @@ For example, if installing using the example above, the RabbitMQ server client a
 {{< /tabs >}}
 
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}}) in the Related links section
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
