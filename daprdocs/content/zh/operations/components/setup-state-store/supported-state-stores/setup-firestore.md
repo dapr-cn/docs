@@ -45,12 +45,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                           | Required | Details                                                 | Example                                                 |
+| 字段                              | Required | Details                                                 | Example                                                 |
 | ------------------------------- |:--------:| ------------------------------------------------------- | ------------------------------------------------------- |
 | type                            |    Y     | The credentials type                                    | `"serviceaccount"`                                      |
 | project_id                      |    Y     | The ID of the GCP project to use                        | `"project-id"`                                          |
@@ -80,7 +80,7 @@ Follow the instructions [here](https://cloud.google.com/datastore/docs/quickstar
 {{< /tabs >}}
 
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
