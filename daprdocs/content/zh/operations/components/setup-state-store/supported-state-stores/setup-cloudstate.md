@@ -1,13 +1,13 @@
 ---
-type: 文档
+type: docs
 title: "Cloudstate"
 linkTitle: "Cloudstate"
 description: Detailed information on the Cloudstate state store component
 ---
 
-## Introduction
+## Component format
 
-To setup Cloudstate state store create a component of type `state.cloudstate`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Cloudstate state store create a component of type `state.cloudstate`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -26,12 +26,12 @@ spec:
     value: <REPLACE-WITH-PORT>
 ```
 
-## Input bindings
+## Spec metadata fields
 
-| 字段         | Required | Details                                                                                                                                                                                                                            | 示例                 |
-| ---------- |:--------:| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| hosts      |    Y     | Specifies the address for the Cloudstate API                                                                                                                                                                                       | `"localhost:8013"` |
-| serverPort |    Y     | Specifies the port to be opened in Dapr for Cloudstate to callback to. This can be any free port that is not used by either your application or Dapr This can be any free port that is not used by either your application or Dapr | `"8080"`           |
+| Field      | Required | Details                                                                                                                                              | Example            |
+| ---------- |:--------:| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| hosts      |    Y     | Specifies the address for the Cloudstate API                                                                                                         | `"localhost:8013"` |
+| serverPort |    Y     | Specifies the port to be opened in Dapr for Cloudstate to callback to. This can be any free port that is not used by either your application or Dapr | `"8080"`           |
 
 > Since Cloudstate is running as an additional sidecar in the pod, you can reach it via `localhost` with the default port of `8013`.
 
@@ -165,7 +165,7 @@ subjects:
   name: default
 ```
 
-## 相关链接
+## Related links
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
