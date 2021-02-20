@@ -32,12 +32,12 @@ spec:
     value: <integer>
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field             | Required | Binding support | Details                                                                                                                                                                                                                                                   | Example                |
+| 字段                | Required | Binding support | Details                                                                                                                                                                                                                                                   | Example                |
 | ----------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
 | storageAccount    |    Y     | Output          | The Blob Storage account name                                                                                                                                                                                                                             | `"myexmapleaccount"`   |
 | storageAccessKey  |    Y     | Output          | The Blob Storage access key                                                                                                                                                                                                                               | `"access-key"`         |
@@ -46,7 +46,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | getBlobRetryCount |    N     | Output          | Specifies the maximum number of HTTP GET requests that will be made while reading from a RetryReader Defaults to `"10"`                                                                                                                                   | `"1"`, `"2"`           |
 
 
-## Binding support
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
@@ -175,7 +175,7 @@ To perform a get blob operation, invoke the Azure Blob Storage binding with a `P
 }
 ```
 
-#### Example
+#### Example:
 
 {{< tabs Windows Linux >}}
 
@@ -222,6 +222,6 @@ Applications publishing to an Azure Blob Storage output binding should send a me
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
