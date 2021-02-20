@@ -5,7 +5,7 @@ linkTitle: "MySQL"
 description: "Detailed documentation on the MySQL binding component"
 ---
 
-## 设置 Dapr 组件
+## Introduction
 
 To setup MySQL binding create a component of type `bindings.mysql`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -36,12 +36,12 @@ spec:
 ```
 
 also support connection pool configuration variables:
-The above example uses secrets as plain strings. also support connection pool configuration variables: The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## 输出绑定支持的操作
+## Input bindings
 
-| 字段                                     | Required | Output Binding Supported Operations | Details                                                                                                                                                                    | Example DSN                                                       |
+| 字段                                     | Required | Output Binding Supported Operations | Details                                                                                                                                                                    | Example:                                                          |
 | -------------------------------------- |:--------:| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | url                                    |    Y     | Output                              | `url`: Required, represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details See [here](#ssl-connection-details) SSL details | `- name: url
     value: user:password@tcp(localhost:3306)/dbname` |
@@ -59,7 +59,7 @@ If your server requires SSL your connection string must end of `&tls=custom` for
 ```
  You must replace the `<PEM PATH>` with a full path to the PEM file. You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2. The connection to MySQL will require a minimum TLS version of 1.2.
 
-## 相关链接
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
