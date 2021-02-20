@@ -28,7 +28,7 @@ dapr run --app-id cart --app-port 5000 --app-ssl python app.py
 ```
 {{% /codetab %}}
 
-在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
+{{% codetab %}}
 
 ### 使用 Kubernetes 设置标识
 
