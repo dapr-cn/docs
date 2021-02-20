@@ -5,7 +5,7 @@ linkTitle: "Kubernetes Events"
 description: "Detailed documentation on the Kubernetes Events binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup Kubernetes Events binding create a component of type `bindings.kubernetes`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
