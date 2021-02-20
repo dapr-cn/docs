@@ -1,12 +1,12 @@
 ---
-type: 文档
+type: docs
 title: "Supported releases"
 linkTitle: "Supported releases"
 weight: 1000
 description: "Release support and upgrade policies"
 ---
 
-## 背景
+## Introduction
 This topic details the supported versions of Dapr releases, the upgrade policies and how deprecations and breaking changes are communicated.
 
 Dapr releases use `MAJOR.MINOR.PATCH` versioning. For example 1.0.0
