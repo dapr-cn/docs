@@ -23,7 +23,7 @@ Create a new binding component with the name of `myevent`.
 
 在这里，创建一个新的名称为 `myevent` 的绑定组件。
 
-在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
+{{% codetab %}}
 
 创建以下 YAML 文件，名为 binding.yaml，并将其保存到应用程序的 `components` 子文件夹中。 （使用具有 `--components-path` 标记 的 `dapr run` 命令来指向自定义组件目录）
 
@@ -84,7 +84,7 @@ curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "me
 
 您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以查看 [这里]({{< ref supported-bindings >}}) 查看每个输出绑定都支持的操作。
 
-## 参考资料
+## 参考文档
 
 - [Binding API]({{< ref bindings_api.md >}})
 - [Binding components]({{< ref bindings >}})
