@@ -2,7 +2,7 @@
 type: docs
 title: "Uninstall Dapr in a self-hosted environment"
 linkTitle: "Uninstall Dapr"
-weight: 60000
+weight: 20000
 description: "Steps to remove Dapr from your local machine"
 ---
 
