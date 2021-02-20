@@ -40,7 +40,7 @@ spec:
       type: middleware.http.uppercase
 ```
 
-## Related links
+## 相关链接
 
 - [Middleware concept]({{< ref middleware-concept.md >}})
 - [Configuration concept]({{< ref configuration-concept.md >}})
