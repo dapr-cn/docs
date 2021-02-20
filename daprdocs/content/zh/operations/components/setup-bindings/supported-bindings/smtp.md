@@ -43,12 +43,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The example configuration shown above, contain a username and password as plain-text strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field         | Required | Binding support | Details                                                                                       | Example             |
+| 字段            | Required | Binding support | Details                                                                                       | Example             |
 | ------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------- | ------------------- |
 | host          |    Y     | Output          | The host where your SMTP server runs                                                          | `"smtphost"`        |
 | port          |    Y     | Output          | The port your SMTP server listens on                                                          | `"9999"`            |
@@ -61,7 +61,7 @@ The example configuration shown above, contain a username and password as plain-
 | emailBcc      |    N     | Output          | If set, this specifies email address to BCC in. See [also](#example-request)                  | `"me@example.com"`  |
 | subject       |    N     | Output          | If set, this specifies the subject of the email message. See [also](#example-request)         | `"subject of mail"` |
 
-## Binding support
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
