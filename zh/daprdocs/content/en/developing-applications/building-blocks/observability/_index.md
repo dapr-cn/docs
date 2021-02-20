@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "可观测性"
-linkTitle: "Observability"
+linkTitle: "Monitoring"
 weight: 60
 description: 查看和度量跨组件和网络服务的消息调用
 ---
