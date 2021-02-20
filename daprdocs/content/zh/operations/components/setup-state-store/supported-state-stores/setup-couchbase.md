@@ -1,13 +1,13 @@
 ---
-type: 文档
+type: docs
 title: "Couchbase"
 linkTitle: "Couchbase"
 description: Detailed information on the Couchbase state store component
 ---
 
-## Introduction
+## Component format
 
-To setup Couchbase state store create a component of type `state.couchbase`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Couchbase state store create a component of type `state.couchbase`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -34,9 +34,9 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段           | Required | Details                         | 示例                        |
+| 字段           | Required | Details                         | Example                   |
 | ------------ |:--------:| ------------------------------- | ------------------------- |
 | couchbaseURL |    Y     | The URL of the Couchbase server | `"http://localhost:8091"` |
 | username     |    Y     | The username for the database   | `"user"`                  |
