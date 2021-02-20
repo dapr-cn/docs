@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Set up Jaeger for distributed tracing"
 linkTitle: "Jaeger"
 weight: 3000
@@ -127,6 +127,6 @@ In your browser, go to `http://localhost:16686` and you will see the Jaeger UI.
 
 ![jaeger](/images/jaeger_ui.png)
 
-## 参考文档
+## References
 - [Jaeger Getting Started](https://www.jaegertracing.io/docs/1.21/getting-started/#all-in-one)
 - [W3C distributed tracing]({{< ref w3c-tracing >}})
