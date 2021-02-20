@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Secrets management overview"
+title: "Secrets stores overview"
 linkTitle: "Overview"
 weight: 1000
 description: "Overview of secrets management building block"
@@ -23,7 +23,7 @@ See [Setup secret stores]({{< ref howto-secrets.md >}}) for guidance on how to s
 
 ## Using secrets in your application
 
-Application code can call the secrets building block API to retrieve secrets from Dapr supported secret stores that can be used in your code. Watch this [video](https://www.youtube.com/watch?v=OtbYCBt9C34&t=1818) for an example of how the secrets API can be used in your application.
+Application code can call the secrets building block API to retrieve secrets from Dapr supported secret stores that can be used in your code. 请观看此 [视频](https://www.bilibili.com/video/BV1QK4y1p7fn?p=9&t=1818) ，以获取有关如何在应用程序中使用秘密 API 的示例。
 
 For example, the diagram below shows an application requesting the secret called "mysecret" from a secret store called "vault" from a configured cloud secret store.
 
