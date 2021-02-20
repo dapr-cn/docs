@@ -49,12 +49,12 @@ spec:
 > __NOTE:__ The above settings are shared across all topics that use this component.
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                          | Required | Details                                                                                                | Example                                                                                                                                        |
+| 字段                             | Required | Details                                                                                                | Example                                                                                                                                        |
 | ------------------------------ |:--------:| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | connectionString               |    Y     | Connection-string for the Event Hubs                                                                   | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
 | timeoutInSec                   |    N     | Timeout for sending messages and management operations. Default: `60`                                  | `30`                                                                                                                                           |
@@ -74,7 +74,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 Follow the instructions [here](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-quickstart-topics-subscriptions-portal) on setting up Azure Service Bus Topics.
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Pub/Sub building block]({{< ref pubsub >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
