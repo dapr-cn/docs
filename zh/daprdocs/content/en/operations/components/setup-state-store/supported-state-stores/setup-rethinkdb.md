@@ -64,7 +64,7 @@ Additionally, if the optional `archive` metadata is set to `true`, on each state
 
 {{< tabs "Self-Hosted" >}}
 
-{{% codetab %}}
+Applications publishing to an Azure Blob Storage output binding should send a message with the following contract:
 You can run [RethinkDB](https://rethinkdb.com/) locally using Docker:
 
 ```
