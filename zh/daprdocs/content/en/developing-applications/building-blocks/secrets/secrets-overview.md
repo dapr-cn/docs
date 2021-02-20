@@ -1,7 +1,7 @@
 ---
 type: 文档
 title: "Secrets stores overview"
-linkTitle: "Secrets stores overview"
+linkTitle: "Overview"
 weight: 1000
 description: "Overview of Dapr secrets management building block"
 ---
