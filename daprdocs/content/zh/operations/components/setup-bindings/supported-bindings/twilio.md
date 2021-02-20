@@ -29,29 +29,29 @@ spec:
     value: *****************
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field      | Required | Binding support | Details                              | Example          |
+| 字段         | Required | Binding support | Details                              | Example          |
 | ---------- |:--------:| --------------- | ------------------------------------ | ---------------- |
 | toNumber   |    Y     | Output          | The target number to send the sms to | `"111-111-1111"` |
 | fromNumber |    Y     | Output          | The sender phone number              | `"122-222-2222"` |
 | accountSid |    Y     | Output          | The Twilio account SID               | `"account sid"`  |
 | authToken  |    Y     | Output          | The Twilio auth token                | `"auth token"`   |
 
-## Binding support
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
 - `create`
 
 
-## Related links
+## 相关链接
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
