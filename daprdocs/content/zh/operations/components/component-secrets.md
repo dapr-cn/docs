@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Reference secrets in components"
 linkTitle: "How-To: Reference secrets"
-weight: 400
+weight: 300
 description: "How to securly reference secrets from a component definition"
 ---
 
@@ -144,7 +144,7 @@ These resources grant Dapr permissions to get secrets from the Kubernetes secret
 In production scenario to limit Dapr's access to certain secret resources alone, you can use the `resourceNames` field. See this [link](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) for further explanation.
 {{% /alert %}}
 
-## Related links
+## 相关链接
 
 - [Use secret scoping]({{< ref "secrets-scopes.md" >}})
 - [Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}})
