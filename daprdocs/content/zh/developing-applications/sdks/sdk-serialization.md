@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Serialization in Dapr's SDKs"
-linkTitle: "Serialization"
+linkTitle: "序列化（Serialization）"
 description: "How Dapr serializes data within the SDKs"
 weight: 2000
 aliases:
@@ -129,7 +129,7 @@ public String actorMethod(String message) {
 The default serializer for Dapr is a JSON serializer with the following expectations:
 
 1. Use of basic [JSON data types](https://www.w3schools.com/js/js_json_datatypes.asp) for cross-language and cross-platform compatibility: string, number, array, boolean, null and another JSON object. Every complex property type in application's serializable objects (DateTime, for example), should be represented as one of the JSON's basic types.
-2. Data persisted with the default serializer should be saved as JSON objects too, without extra quotes or encoding. The example below shows how a string and a JSON object would look like in a Redis store.
+2. Data persisted with the default serializer should be saved as JSON objects too, without extra quotes or encoding. The example below shows how a string and a JSON object would look like in a Redis store. The example below shows how a string and a JSON object would look like in a Redis store.
 ```bash
 redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||message
 "This is a message to be saved and retrieved."
