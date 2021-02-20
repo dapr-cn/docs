@@ -5,7 +5,7 @@ linkTitle: "Twilio SendGrid"
 description: "Detailed documentation on the Twilio SendGrid binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup Twilio SendGrid binding create a component of type `bindings.twilio.sendgrid`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -36,7 +36,7 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Output Binding Supported Operations
+## Input bindings
 
 | 字段        | Required | Output Binding Supported Operations | Details                                                                                                                                                           | Example:                 |
 | --------- |:--------:| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
