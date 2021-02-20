@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Actors activation performance"
 linkTitle: "Actors activation performance"
 weight: 20000
@@ -20,7 +20,7 @@ For applications using actors in Dapr there are two aspects to be considered. Fi
 * Sidecar Injector (control plane)
 * Sentry (optional, control plane)
 
-## Performance summary for Dapr v0.11.3
+## Performance summary for Dapr v1.0
 
 The actors API in Dapr sidecar will identify which hosts are registered for a given actor type and route the request to the appropriate host for a given actor ID. The host runs an instance of the application and uses the Dapr SDK (.Net, Java, Python or PHP) to handle actors requests via HTTP.
 
@@ -52,5 +52,5 @@ Test parameters:
 * No app restarts
 * No sidecar restarts
 
-## 相关链接
+## Related links
 * For more information see [overview of Dapr on Kubernetes]({{< ref kubernetes-overview.md >}})
