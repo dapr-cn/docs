@@ -15,7 +15,7 @@ The [Dapr Quickstarts](https://github.com/dapr/quickstarts/tree/v1.0.0) are a co
 
 ## Quickstarts
 
-| Quickstart                                                                                       | Description                                                                                                                                                                                    |
+| Quickstart                                                                                       | 说明                                                                                                                                                                                             |
 | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Hello World](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)                       | Demonstrates how to run Dapr locally. Highlights service invocation and state management.                                                                                                      |
 | [Hello Kubernetes](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-kubernetes)             | Demonstrates how to run Dapr in Kubernetes. Highlights service invocation and state management.                                                                                                |
