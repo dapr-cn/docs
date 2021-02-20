@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Azure SignalR binding spec"
 linkTitle: "Azure SignalR"
 description: "Detailed documentation on the Azure SignalR binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup Azure SignalR binding create a component of type `bindings.azure.signalr`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -27,18 +27,18 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                                                       | Required | Output Binding Supported Operations | Details                                                                                                                                                                                                                                             | Example:                                                                                                           |
-| -------------------------------------------------------- |:--------:| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `connectionString` is the Service Bus connection string. |    Y     | Output                              | The metadata `connectionString` contains the Azure SignalR connection string.                                                                                                                                                                       | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
-| hub                                                      |    N     | Output                              | Defines the hub in which the message will be send. The optional `hub` metadata value defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub"). | `"myhub"`                                                                                                          |
+| Field            | Required | Binding support | Details                                                                                                                                                       | Example                                                                                                            |
+| ---------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| connectionString |    Y     | Output          | The Azure SignalR connection string                                                                                                                           | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
+| hub              |    N     | Output          | Defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub") | `"myhub"`                                                                                                          |
 
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 
@@ -48,8 +48,8 @@ This component supports **output binding** with the following operations:
 
 By default the Azure SignalR output binding will broadcast messages to all connected users. To narrow the audience there are two options, both configurable in the Metadata property of the message:
 
-- group: will send the message to a specific Azure SignalR group
-- user: will send the message to a specific Azure SignalR user
+- group: Sends the message to a specific Azure SignalR group
+- user: Sends the message to a specific Azure SignalR user
 
 Applications publishing to an Azure SignalR output binding should send a message with the following contract:
 
