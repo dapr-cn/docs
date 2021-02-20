@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Configure state store and pub/sub message broker"
 linkTitle: "(optional) Configure state & pub/sub"
-weight: 80
+weight: 400
 description: "Configure state store and pub/sub message broker components for Dapr"
 aliases:
   - /getting-started/configure-redis/
@@ -197,7 +197,7 @@ spec:
     value: <PASSWORD>
 ```
 
-## Apply the configuration
+## 应用配置
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
@@ -227,5 +227,5 @@ kubectl apply -f redis-pubsub.yaml
 
 {{< /tabs >}}
 
-## Next steps
+## 下一步
 - [Try out a Dapr quickstart]({{< ref quickstarts.md >}})
