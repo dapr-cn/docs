@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Managing components in Dapr"
 linkTitle: "组件"
 weight: 200
