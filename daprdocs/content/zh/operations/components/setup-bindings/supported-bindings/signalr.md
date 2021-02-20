@@ -27,18 +27,18 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field            | Required | Binding support | Details                                                                                                                                                       | Example                                                                                                            |
+| 字段               | Required | Binding support | Details                                                                                                                                                       | Example                                                                                                            |
 | ---------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | connectionString |    Y     | Output          | The Azure SignalR connection string                                                                                                                           | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
 | hub              |    N     | Output          | Defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub") | `"myhub"`                                                                                                          |
 
 
-## Binding support
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
