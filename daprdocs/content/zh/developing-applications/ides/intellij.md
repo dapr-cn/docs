@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "IntelliJ"
 linkTitle: "IntelliJ"
 weight: 2000
