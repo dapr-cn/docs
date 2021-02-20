@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Alibaba Cloud Object Storage Service binding spec"
 linkTitle: "Alibaba Cloud Object Storage"
 description: "Detailed documentation on the Alibaba Cloud Object Storage binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup an Alibaba Cloud Object Storage binding create a component of type `bindings.alicloud.oss`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
@@ -30,19 +30,19 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段            | Required | Output Binding Supported Operations | Details                     | Example:                             |
-| ------------- | -------- | ----------------------------------- | --------------------------- | ------------------------------------ |
-| `endpoint`    | Y        | Output                              | Alicloud OSS endpoint.      | https://oss-cn-hangzhou.aliyuncs.com |
-| `accessKeyID` | Y        | Output                              | Access key ID credential.   |                                      |
-| `accessKey`   | Y        | Output                              | Access key credential.      |                                      |
-| `bucket`      | Y        | Output                              | Name of the storage bucket. |                                      |
+| Field         | Required | Binding support | Details                     | Example                              |
+| ------------- | -------- | --------------- | --------------------------- | ------------------------------------ |
+| `endpoint`    | Y        | Output          | Alicloud OSS endpoint.      | https://oss-cn-hangzhou.aliyuncs.com |
+| `accessKeyID` | Y        | Output          | Access key ID credential.   |                                      |
+| `accessKey`   | Y        | Output          | Access key credential.      |                                      |
+| `bucket`      | Y        | Output          | Name of the storage bucket. |                                      |
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 - `create`: [Create object](#create-object)
@@ -55,9 +55,7 @@ To perform a create object operation, invoke the binding with a `POST` method an
 ```json
 {
   "operation": "create",
-  "data": {
-    "field1": "value1"
-  }
+  "data": "YOUR_CONTENT"
 }
 ```
 
@@ -65,7 +63,7 @@ To perform a create object operation, invoke the binding with a `POST` method an
 By default, a random UUID is auto-generated as the object key. See below for Metadata support to set the key for the object.
 {{% /alert %}}
 
-#### 示例
+#### Example
 
 **Saving to a random generated UUID file**
 
@@ -74,8 +72,7 @@ By default, a random UUID is auto-generated as the object key. See below for Met
 {{% codetab %}}
 
 ```bash
-curl -d '{ "operation": "create", "data": { "field1": "value1" }}' \
-      http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
+curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
 {{% /codetab %}}
