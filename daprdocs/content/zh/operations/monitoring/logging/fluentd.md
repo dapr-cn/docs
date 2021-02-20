@@ -6,7 +6,7 @@ weight: 1000
 description: "How to install Fluentd, Elastic Search, and Kibana to search logs in Kubernetes"
 ---
 
-## Prerequisites
+## 前期准备
 
 - Kubernetes (> 1.14)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
