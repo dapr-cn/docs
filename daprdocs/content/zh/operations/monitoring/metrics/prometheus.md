@@ -109,9 +109,9 @@ dapr-prom-prometheus-pushgateway-688665d597-h4xx2   1/1     Running   0         
 dapr-prom-prometheus-server-694fd8d7c-q5d59         2/2     Running   0          4m58s
 ```
 
-## Example <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=2577" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## Example  <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=2577" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-## References
+## 参考文档
 
 * [Prometheus Installation](https://github.com/prometheus-community/helm-charts)
 * [Prometheus Query Language](https://prometheus.io/docs/prometheus/latest/querying/basics/)
