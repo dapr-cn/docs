@@ -1,12 +1,12 @@
 ---
-type: 文档
+type: docs
 title: "Pulsar"
 linkTitle: "Pulsar"
 description: "Detailed documentation on the Pulsar pubsub component"
 ---
 
-## Introduction
-To setup Pulsar pubsub create a component of type `pubsub.pulsar`. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## Component format
+To setup Pulsar pubsub create a component of type `pubsub.pulsar`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -24,12 +24,12 @@ spec:
     value: "false"
 
 ```
-## Input bindings
+## Spec metadata fields
 
-| 字段        | Required | Details                                                                                   | 示例                  |
-| --------- |:--------:| ----------------------------------------------------------------------------------------- | ------------------- |
-| host      |    Y     | Address of the Pulsar broker. Address of the Pulsar broker. Default is `"localhost:6650"` | `"localhost:6650"`  |
-| enableTLS |    Y     | Enable TLS.  Enable TLS.  Default: `"false"`                                              | `"true"`, `"false"` |
+| 字段        | Required | Details                                                     | Example             |
+| --------- |:--------:| ----------------------------------------------------------- | ------------------- |
+| host      |    Y     | Address of the Pulsar broker. Default is `"localhost:6650"` | `"localhost:6650"`  |
+| enableTLS |    Y     | Enable TLS.  Default: `"false"`                             | `"true"`, `"false"` |
 
 
 ## Create a Pulsar instance
@@ -49,7 +49,7 @@ docker run -it \
 ```
 {{% /codetab %}}
 
-In self hosted mode, a developer can specify the namespace to a Dapr instance by setting the `NAMESPACE` environment variable. If the `NAMESPACE` environment variable is set, Dapr will not load any component that does not specify the same namespace in its metadata.
+{{% codetab %}}
 Refer to the following [Helm chart](https://pulsar.apache.org/docs/en/kubernetes-helm/) Documentation.
 {{% /codetab %}}
 
