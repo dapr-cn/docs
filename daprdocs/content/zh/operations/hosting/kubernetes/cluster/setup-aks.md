@@ -9,7 +9,7 @@ description: >
 
 # Set up an Azure Kubernetes Service cluster
 
-## Prerequisites
+## 前期准备
 
 - [Docker](https://docs.docker.com/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
