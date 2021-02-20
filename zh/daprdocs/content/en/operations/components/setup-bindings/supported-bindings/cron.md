@@ -5,7 +5,7 @@ linkTitle: "Cron"
 description: "Detailed documentation on the cron binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup cron binding create a component of type `bindings.cron`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
