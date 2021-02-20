@@ -6,7 +6,7 @@ weight: 2000
 description: "了解如何使用一个服务向主题发送消息，并在另一个服务中订阅该主题"
 ---
 
-## 简介
+## 背景
 
 Pub/Sub 是一个分布式系统中的常见模式，它有许多服务用于解偶、异步消息传递。 使用Pub/Sub，您可以在事件消费者与事件生产者解偶的场景中启用。
 
@@ -26,7 +26,7 @@ When publishing a message, it's important to specify the content type of the dat
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
-{{% codetab %}}
+Applications publishing to an Azure Blob Storage output binding should send a message with the following contract:
 运行 `dapr init` 时默认在本地机器上安装 Redis 流。
 
 在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yam` 或在 Windows 上打开`%UserProfile%\.dapr\components\pubsub.yaml` 组件文件以验证:
@@ -387,7 +387,7 @@ Dapr 将在符合 Cloud Events v1.0 的信封中自动包装用户有效负载�
 
 为了告诉Dapr 消息处理成功，返回一个 `200 OK` 响应。 如果 Dapr 收到超过 `200` 的返回状态代码，或者你的应用崩溃，Dapr 将根据 At-Least-Once 语义尝试重新传递消息。
 
-#### 示例
+#### Example:
 
 {{< tabs Python Node>}}
 
