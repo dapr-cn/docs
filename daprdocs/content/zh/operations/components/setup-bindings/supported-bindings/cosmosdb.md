@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Azure CosmosDB binding spec"
 linkTitle: "Azure CosmosDB"
 description: "Detailed documentation on the Azure CosmosDB binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup Azure CosmosDB binding create a component of type `bindings.azure.cosmosdb`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -36,15 +36,15 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段           | Required | Output Binding Supported Operations | Details                                                                     | Example:                                    |
-| ------------ |:--------:| ----------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------- |
-| url          |    Y     | Output                              | `url` is the CosmosDB url.                                                  | `"https://******.documents.azure.com:443/"` |
-| masterKey    |    Y     | Output                              | `masterKey` is the CosmosDB account master key.                             | `"master-key"`                              |
-| database     |    Y     | Output                              | `database` is the name of the CosmosDB database.                            | `"OrderDb"`                                 |
-| collection   |    Y     | Output                              | `collection` is name of the collection inside the database.                 | `"Orders"`                                  |
-| partitionKey |    Y     | Output                              | `partitionKey` is the name of the partitionKey to extract from the payload. | `"OrderId"`, `"message"`                    |
+| 字段           | Required | Binding support | Details                                                                               | Example                                     |
+| ------------ |:--------:| --------------- | ------------------------------------------------------------------------------------- | ------------------------------------------- |
+| url          |    Y     | Output          | The CosmosDB url                                                                      | `"https://******.documents.azure.com:443/"` |
+| masterKey    |    Y     | Output          | The CosmosDB account master key                                                       | `"master-key"`                              |
+| database     |    Y     | Output          | The name of the CosmosDB database                                                     | `"OrderDb"`                                 |
+| collection   |    Y     | Output          | The name of the container inside the database.                                        | `"Orders"`                                  |
+| partitionKey |    Y     | Output          | The name of the partitionKey to extract from the payload and is used in the container | `"OrderId"`, `"message"`                    |
 
 For more information see [Azure Cosmos DB resource model](https://docs.microsoft.com/en-us/azure/cosmos-db/account-databases-containers-items).
 
