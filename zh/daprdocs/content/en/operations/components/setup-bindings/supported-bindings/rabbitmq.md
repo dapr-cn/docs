@@ -5,7 +5,7 @@ linkTitle: "RabbitMQ"
 description: "Detailed documentation on the RabbitMQ binding component"
 ---
 
-## 设置 Dapr 组件
+## Introduction
 
 To setup RabbitMQ binding create a component of type `bindings.rabbitmq`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -39,12 +39,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将 Secret 明文存储。 The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## 指定在消息级别上的生存时间
+## Input bindings
 
-| 字段                            | Required | Output Binding Supported Operations | Details                                                                                                                                                                                                                                                                                                                                                                                                                                | 示例:                                                 |
+| 字段                            | Required | Output Binding Supported Operations | Details                                                                                                                                                                                                                                                                                                                                                                                                                                | Example:                                            |
 | ----------------------------- |:--------:| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | `queueName` 是 RabbitMQ 队列名。   |    Y     | Input/Output                        | The RabbitMQ queue name                                                                                                                                                                                                                                                                                                                                                                                                                | `"myqueue"`                                         |
 | host                          |    Y     | Input/Output                        | `host` 是 RabbitMQ 主机地址。                                                                                                                                                                                                                                                                                                                                                                                                                | `"amqp://[username][:password]@host.domain[:port]"` |
@@ -54,9 +54,9 @@ spec:
 | prefetchCount                 |    N     | Input                               | `prefetchCount` 是一个可选参数，用于设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch)。 如果此参数为空，QOS 会设置为0为无限制。                                                                                                                                                                                                                                                                                                       | `0`                                                 |
 | exclusive                     |    N     | Input/Output                        | `exclusive` determines whether the topic will be an exclusive topic or not Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                                                                                                                 | `"true"`, `"false"`                                 |
 | maxPriority                   |    N     | Input/Output                        | Parameter to set the [priority queue](https://www.rabbitmq.com/priority.html). If this parameter is omitted, queue will be created as a general queue instead of a priority queue. Value between 1 and 255. See [also](#specifying-a-priority-per-message) If this parameter is omitted, queue will be created as a general queue instead of a priority queue. Value between 1 and 255. See [also](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
-## Specifying a priority on message level
+## Output bindings
 
-若要设置在消息级别生存的时间，请使用 `metadata` 请求正文中的元数据部分。
+For input bindings, where the query matching Tweets are streamed to the user service, the above component has to also include a query:
 
 字段名为 `ttlInSeconds`。
 
