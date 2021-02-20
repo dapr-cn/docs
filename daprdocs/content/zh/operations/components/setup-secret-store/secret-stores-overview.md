@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Overview"
+title: "概述"
 linkTitle: "Overview"
 description: "General overview on set up of secret stores for Dapr"
 weight: 10000
