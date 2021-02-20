@@ -5,7 +5,7 @@ linkTitle: "Azure SignalR"
 description: "Detailed documentation on the Azure SignalR binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup Azure SignalR binding create a component of type `bindings.azure.signalr`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -38,7 +38,7 @@ spec:
 | hub                                                      |    N     | Output                              | Defines the hub in which the message will be send. The optional `hub` metadata value defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub"). | `"myhub"`                                                                                                          |
 
 
-## Output Binding Supported Operations
+## Output bindings
 
 This component supports **output binding** with the following operations:
 
