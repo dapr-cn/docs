@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Metadata API reference"
 linkTitle: "Metadata API"
 description: "Detailed documentation on the Metadata API"
@@ -16,19 +16,19 @@ Note: The Dapr metatada endpoint is for instance being used by the Dapr CLI when
 
 Gets the Dapr sidecar information provided by the Metadata Endpoint.
 
-### HTTP 请求
+### HTTP Request
 
 ```http
 GET http://localhost:<daprPort>/v1.0/metadata
 ```
 
-### URL 参数
+### URL Parameters
 
-| 参数       | 说明       |
-| -------- | -------- |
-| daprPort | Dapr 端口。 |
+| Parameter | 说明             |
+| --------- | -------------- |
+| daprPort  | The Dapr port. |
 
-### HTTP 响应码
+### HTTP Response Codes
 
 | Code | 描述                                             |
 | ---- | ---------------------------------------------- |
@@ -39,7 +39,7 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 **Metadata API Response Object**
 
-| 名称                     | 类型                                                                    | 说明                                                                             |
+| Name                   | Type                                                                  | Description                                                                    |
 | ---------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | id                     | string                                                                | Application ID                                                                 |
 | actors                 | [Metadata API Response Registered Actor](#metadataapiresponseactor)[] | A json encoded array of Registered Actors metadata.                            |
@@ -48,20 +48,20 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 <a id="metadataapiresponseactor"></a>**Metadata API Response Registered Actor**
 
-| 名称    | 类型      | 说明                         |
+| Name  | Type    | 说明                         |
 | ----- | ------- | -------------------------- |
 | type  | string  | The registered actor type. |
 | count | integer | Number of actors running.  |
 
 <a id="metadataapiresponsecomponent"></a>**Metadata API Response Component**
 
-| 名称      | 类型     | 说明                     |
+| Name    | Type   | Description            |
 | ------- | ------ | ---------------------- |
 | name    | string | Name of the component. |
 | type    | string | Component type.        |
 | version | string | Component version.     |
 
-### 示例
+### Examples
 
 Note: This example is based on the Actor sample provided in the [Dapr SDK for Python](https://github.com/dapr/python-sdk/tree/master/examples/demo_actor).
 
@@ -101,7 +101,7 @@ curl http://localhost:3500/v1.0/metadata
 
 Adds a custom attribute to the Dapr sidecar information stored by the Metadata Endpoint.
 
-### HTTP 请求
+### HTTP Request
 
 ```http
 PUT http://localhost:<daprPort>/v1.0/metadata/attributeName
@@ -130,13 +130,13 @@ Within the body of the request place the custom attribute value you want to stor
 attributeValue
 ```
 
-### HTTP 响应码
+### HTTP Response Codes
 
 | Code | 描述                                                 |
 | ---- | -------------------------------------------------- |
 | 204  | Custom attribute added to the metadata information |
 
-### 示例
+### Examples
 
 Note: This example is based on the Actor sample provided in the [Dapr SDK for Python](https://github.com/dapr/python-sdk/tree/master/examples/demo_actor).
 
