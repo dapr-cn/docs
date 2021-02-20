@@ -5,7 +5,7 @@ linkTitle: "Kafka"
 description: "Detailed documentation on the kafka binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup Kafka binding create a component of type `bindings.kafka`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -68,7 +68,7 @@ spec:
 | maxMessageBytes |    N     | Input/Output                        | The maximum size allowed for a single Kafka message. Defaults to 1024                                                                           | `2048`                                                                                                    |
 
 
-## Output Binding Supported Operations
+## Output bindings
 
 For input bindings, where the query matching Tweets are streamed to the user service, the above component has to also include a query:
 
