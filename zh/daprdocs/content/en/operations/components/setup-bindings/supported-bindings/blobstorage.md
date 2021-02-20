@@ -5,7 +5,7 @@ linkTitle: "Azure Blob Storage"
 description: "Detailed documentation on the Azure Blob Storage binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup Azure Blob Storage binding create a component of type `bindings.azure.blobstorage`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -28,10 +28,10 @@ spec:
     value: container1
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Output Binding Supported Operations
+## Input bindings
 
 | 字段                                                  | Required | Output Binding Supported Operations | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Example:               |
 | --------------------------------------------------- |:--------:| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
@@ -69,7 +69,7 @@ To perform a create blob operation, invoke the Azure Blob Storage binding with a
 The response body will contain the value stored in the blob object.
 
 **Note: by default, a random UUID is generated. See below for Metadata support to set the name**
-Applications publishing to an Azure Blob Storage output binding should send a message with the following contract:
+Now, create or edit the run configuration for the application to be debugged. It can be found in the menu next to the `main()` function.
 On Windows, utilize cmd prompt (PowerShell has different escaping mechanism)
 ```bash
 curl -d '{ "operation": "create", "data": { "field1": "value1" }}' \
@@ -176,7 +176,7 @@ To perform a get blob operation, invoke the Azure Blob Storage binding with a `P
 }
 ```
 
-#### Example:
+#### 示例
 
 {{< tabs Windows Linux >}}
 
