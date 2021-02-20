@@ -21,13 +21,17 @@ spec:
   version: v1
   metadata:
   - name: connectionString
-    value: <REPLACE-WITH-CONNECTION-STRING> # Required. "Endpoint=sb://****"
-  - name: storageAccountName
-    value: <REPLACE-WITH-STORAGE-ACCOUNT-NAME> # Required.
-  - name: storageAccountKey
-    value: <REPLACE-WITH-STORAGE-ACCOUNT-KEY> # Required.
-  - name: storageContainerName
-    value: <REPLACE-WITH-CONTAINER-NAME > # Required.
+    value: <REPLACE-WITH-CONNECTION-STRING> # Required.
+  - name: tableName
+    value: <REPLACE-WITH-TABLE-NAME>  # Required.
+  - name: keyType 
+    value: <REPLACE-WITH-KEY-TYPE>  # Optional. defaults to "string"
+  - name: keyLength
+    value: <KEY-LENGTH> # Optional. defaults to 200. Yo be used with "string" keyType
+  - name: schema
+    value: <SCHEMA> # Optional. defaults to "dbo"
+  - name: indexedProperties
+    value: <INDEXED-PROPERTIES> # Optional. List of IndexedProperties.
   - name: tableName
     value: <REPLACE-WITH-TABLE-NAME>  # Required.
   - name: keyType 
