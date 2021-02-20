@@ -2,13 +2,13 @@
 type: docs
 title: "Dapr Kubernetes pod annotations spec"
 linkTitle: "Kubernetes annotations"
-weight: 50000
+weight: 40000
 description: "The available annotations available when configuring Dapr in your Kubernetes environment"
 ---
 
 The following table shows all the supported pod Spec annotations supported by Dapr.
 
-| Annotation                                        | Description                                                                                                                                                                                                                                                                                                             |
+| Annotation                                        | 说明                                                                                                                                                                                                                                                                                                                      |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dapr.io/enabled`                                 | Setting this paramater to `true` injects the Dapr sidecar into the pod                                                                                                                                                                                                                                                  |
 | `dapr.io/app-port`                                | This parameter tells Dapr which port your application is listening on                                                                                                                                                                                                                                                   |
