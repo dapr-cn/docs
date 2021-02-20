@@ -3,9 +3,9 @@ type: docs
 no_list: true
 ---
 
-# <img src="/images/home-title.png" alt="Dapr Docs" width=400>
+# <img src="/images/home-title.png" alt="Dapr 文档" width=400>
 
-Welcome to the Dapr documentation site!
+欢迎来到 Dapr 文档库!
 
 ### Sections
 
