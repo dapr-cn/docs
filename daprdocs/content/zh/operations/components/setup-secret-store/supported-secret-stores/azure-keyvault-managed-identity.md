@@ -35,7 +35,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field       | Required | Details                         | Example        |
+| 字段          | Required | Details                         | Example        |
 | ----------- |:--------:| ------------------------------- | -------------- |
 | vaultName   |    Y     | The name of the Azure Key Vault | `"mykeyvault"` |
 | spnClientId |    Y     | Your managed identity client Id | `"yourId"`     |
@@ -154,7 +154,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
     kubectl apply -f azure-identity-config.yaml
     ```
 
-## References
+## 参考文档
 - [Azure CLI Keyvault CLI](https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-create)
 - [Create an Azure service principal with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest)
 - [AAD Pod Identity](https://github.com/Azure/aad-pod-identity)
