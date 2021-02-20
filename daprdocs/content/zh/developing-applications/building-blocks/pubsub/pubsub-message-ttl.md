@@ -1,40 +1,40 @@
 ---
-type: 文档
-title: "消息生存时间"
-linkTitle: "消息 TTL"
+type: docs
+title: "Message Time-to-Live (TTL)"
+linkTitle: "Message TTL"
 weight: 6000
-description: "在 Pub/Sub 消息中使用生存时间。"
+description: "Use time-to-live in Pub/Sub messages."
 ---
 
-## 背景
+## Introduction
 
-Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可以设置每条消息的生存时间，并且这些消息过期后订阅者不会收到。
+Dapr enables per-message time-to-live (TTL). This means that applications can set time-to-live per message, and subscribers do not receive those messages after expiration.
 
-All Dapr [pub/sub components]({{< ref supported-pubsub >}}) are compatible with message TTL, as Dapr handles the TTL logic within the runtime. Simply set the `ttlInSeconds` metadata when publishing a message. Simply set the `ttlInSeconds` metadata when publishing a message.
+All Dapr [pub/sub components]({{< ref supported-pubsub >}}) are compatible with message TTL, as Dapr handles the TTL logic within the runtime. Simply set the `ttlInSeconds` metadata when publishing a message.
 
-In some components, such as Kafka, time-to-live can be configured in the topic via `retention.ms` as per [documentation](https://kafka.apache.org/documentation/#topicconfigs_retention.ms). With message TTL in Dapr, applications using Kafka can now set time-to-live per message in addition to per topic. With message TTL in Dapr, applications using Kafka can now set time-to-live per message in addition to per topic.
+In some components, such as Kafka, time-to-live can be configured in the topic via `retention.ms` as per [documentation](https://kafka.apache.org/documentation/#topicconfigs_retention.ms). With message TTL in Dapr, applications using Kafka can now set time-to-live per message in addition to per topic.
 
 ## Native message TTL support
 
-When message time-to-live has native support in the component, Dapr will simply forward the time-to-live configuration without adding extra logic, keeping predictable behavior. This is helpful when the expired messages are handled differently by the component - like in Azure Service Bus, where expired messages are stored in the dead letter queue and not simply deleted. This is helpful when the expired messages are handled differently by the component. For example, with Azure Service Bus, where expired messages are stored in the dead letter queue and are not simply deleted.
+When message time-to-live has native support in the pub/sub component, Dapr simply forwards the time-to-live configuration without adding any extra logic, keeping predictable behavior. This is helpful when the expired messages are handled differently by the component. For example, with Azure Service Bus, where expired messages are stored in the dead letter queue and are not simply deleted.
 
 ### Supported components
 
 #### Azure Service Bus
 
-Azure Service Bus supports [entity level time-to-live]((https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-expiration)). It means that messages have a default time-to-live but can also be set with a shorter timespan at publishing time. Dapr will propagate the time-to-live metadata for the message and let Azure Service Bus handle expiration directly. This means that messages have a default time-to-live but can also be set with a shorter timespan at publishing time. Dapr propagates the time-to-live metadata for the message and lets Azure Service Bus handle the expiration directly.
+Azure Service Bus supports [entity level time-to-live]((https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-expiration)). This means that messages have a default time-to-live but can also be set with a shorter timespan at publishing time. Dapr propagates the time-to-live metadata for the message and lets Azure Service Bus handle the expiration directly.
 
 ## Non-Dapr subscribers
 
-If messages are consumed by subscribers without Dapr, expired messages are not automatically dropped, as expiration is handled by the Dapr runtime when a Dapr application receives a message. However, subscribers can programmatically drop expired messages by adding logic to handle the `expiration` attribute in the cloud event, which follows the [RFC3339](https://tools.ietf.org/html/rfc3339) format. However, subscribers can programmatically drop expired messages by adding logic to handle the `expiration` attribute in the cloud event, which follows the [RFC3339](https://tools.ietf.org/html/rfc3339) format.
+If messages are consumed by subscribers not using Dapr, the expired messages are not automatically dropped, as expiration is handled by the Dapr runtime when a Dapr sidecar receives a message. However, subscribers can programmatically drop expired messages by adding logic to handle the `expiration` attribute in the cloud event, which follows the [RFC3339](https://tools.ietf.org/html/rfc3339) format.
 
-When non-Dapr subscribers use components such as Azure Service Bus, which natively handle message TTL, they will not receive expired messages. No extra logic is needed. Here, no extra logic is needed.
+When non-Dapr subscribers use components such as Azure Service Bus, which natively handle message TTL, they do not receive expired messages. Here, no extra logic is needed.
 
-## 示例
+## Example
 
 Message TTL can be set in the metadata as part of the publishing request:
 
-{{< tabs curl "Python SDK">}}
+{{< tabs curl "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
 ```bash
@@ -82,11 +82,11 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 {{< /tabs >}}
 
-See [this guide]({{< ref pubsub_api.md >}}) for a full reference on the pub/sub API.
+See [this guide]({{< ref pubsub_api.md >}}) for a reference on the pub/sub API.
 
-## 相关链接
+## Related links
 
-- {{< ref pubsub_api.md >}}
+- Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
 - Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
 - List of [pub/sub components]({{< ref supported-pubsub >}})
 - Read the [API reference]({{< ref pubsub_api.md >}})
