@@ -2,7 +2,7 @@
 type: 文档
 title: "How-To: Scope components to one or more applications"
 linkTitle: "How-To: Set component scopes"
-weight: 200
+weight: 300
 description: "Limit component access to particular Dapr instances"
 ---
 
@@ -15,7 +15,7 @@ Namespaces can be used to limit component access to particular Dapr instances.
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
-In self hosted mode, a developer can specify the namespace to a Dapr instance by setting the `NAMESPACE` environment variable. If the `NAMESPACE` environment variable is set, Dapr will not load any component that does not specify the same namespace in its metadata.
+{{% codetab %}}
 In self hosted mode, a developer can specify the namespace to a Dapr instance by setting the `NAMESPACE` environment variable. If the `NAMESPACE` environment variable is set, Dapr will not load any component that does not specify the same namespace in its metadata. In self hosted mode, a developer can specify the namespace to a Dapr instance by setting the `NAMESPACE` environment variable. If the `NAMESPACE` environment variable is set, Dapr does not load any component that does not specify the same namespace in its metadata. If the `NAMESPACE` environment variable is set, Dapr does not load any component that does not specify the same namespace in its metadata.
 
 For example given this component in the `production` namespace
