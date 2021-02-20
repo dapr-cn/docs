@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Kubernetes Events binding spec"
 linkTitle: "Kubernetes Events"
 description: "Detailed documentation on the Kubernetes Events binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup Kubernetes Events binding create a component of type `bindings.kubernetes`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -26,12 +26,12 @@ spec:
     vale: "<seconds>"
 ```
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                | Required | Output Binding Supported Operations                                                                                                  | Details                                                                 | Example:    |
-| ----------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- | ----------- |
-| namespace         |    Y     | Input                                                                                                                                | `namespace` (required) is the Kubernetes namespace to read events from. | `"default"` |
-| resyncPeriodInSec |    N     | `resyncPeriodInSec` (optional, default `10`) the period of time to refresh event list from Kubernetes API server. Defaults to `"10"` | `"15"`                                                                  |             |
+| 字段                | Required | Binding support                                                                        | Details                                      | Example     |
+| ----------------- |:--------:| -------------------------------------------------------------------------------------- | -------------------------------------------- | ----------- |
+| namespace         |    Y     | Input                                                                                  | The Kubernetes namespace to read events from | `"default"` |
+| resyncPeriodInSec |    N     | Te period of time to refresh event list from Kubernetes API server. Defaults to `"10"` | `"15"`                                       |             |
 
 ## Output bindings
 
