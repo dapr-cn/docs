@@ -121,7 +121,7 @@ kubectl delete namespace namespace-a
 kubectl delete namespace namespace-b
 ```
 
-## Related links
+## 相关链接
 
 - [Scope components to one or more applications]({{< ref "component-scopes.md" >}})
 - [Use secret scoping]({{< ref "secrets-scopes.md" >}})
