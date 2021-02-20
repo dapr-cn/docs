@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Message Time-to-Live (TTL)"
-linkTitle: "Message TTL"
+title: "消息生存时间"
+linkTitle: "消息 TTL"
 weight: 6000
-description: "Use time-to-live in Pub/Sub messages."
+description: "在 Pub/Sub 消息中使用生存时间。"
 ---
 
 ## Introduction
 
-Dapr enables per-message time-to-live (TTL). This means that applications can set time-to-live per message, and subscribers do not receive those messages after expiration.
+Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可以设置每条消息的生存时间，并且这些消息过期后订阅者不会收到。
 
 All Dapr [pub/sub components]({{< ref supported-pubsub >}}) are compatible with message TTL, as Dapr handles the TTL logic within the runtime. Simply set the `ttlInSeconds` metadata when publishing a message.
 
