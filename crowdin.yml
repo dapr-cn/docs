@@ -1,4 +1,4 @@
 preserve_hierarchy: true
 files:
-  - source: "/daprdocs/content/en/**/*"
-    translation: "/daprdocs/content/%two_letters_code%/**/%original_file_name%"
+  - source: /daprdocs/content/en/**/*
+    translation: /daprdocs/content/%two_letters_code%/**/%original_file_name%
