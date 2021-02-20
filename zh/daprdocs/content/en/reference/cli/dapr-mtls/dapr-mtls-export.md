@@ -10,7 +10,7 @@ weight: 1000
 
 将根 CA，颁发者证书和密钥从 Kubernetes 导出到本地文件
 
-## 支持的平台
+## Supported platforms
 
 - [Kubernetes]({{< ref kubernetes >}})
 
@@ -21,7 +21,7 @@ dapr mtls export [flags]
 
 ## 参数
 
-| 名称             | 环境变量 | 默认值  | 说明            |
+| Name           | 环境变量 | 默认值  | 说明            |
 | -------------- | ---- | ---- | ------------- |
 | `--help`, `-h` |      |      | 帮助信息          |
 | `--out`, `-o`  |      | 当前目录 | 用于保存证书的输出目录路径 |
