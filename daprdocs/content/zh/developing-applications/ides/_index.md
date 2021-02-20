@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "IDE support"
 linkTitle: "IDE support"
 weight: 30
