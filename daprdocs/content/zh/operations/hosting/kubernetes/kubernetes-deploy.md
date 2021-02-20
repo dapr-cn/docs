@@ -17,7 +17,7 @@ As part of the Dapr initialization the following pods are installed:
 - **dapr-placement:** Used for actors only. Creates mapping tables that map actor instances to pods
 - **dapr-sentry:** Manages mTLS between services and acts as a certificate authority
 
-## Prerequisites
+## 前期准备
 
 - Install [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
@@ -172,6 +172,6 @@ helm uninstall dapr --namespace dapr-system
 - See [this page](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md) for details on Dapr Helm charts.
 
 
-## Next steps
+## 下一步
 
 - [Configure state store & pubsub message broker]({{< ref configure-state-pubsub.md >}})
