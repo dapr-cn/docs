@@ -109,5 +109,4 @@ You will see the Dapr config, Dapr binaries directory, and the default component
 
 {{< /tabs >}}
 
-[}}" role="button">Next step: Use the Dapr API >>]({{< ref get-started-api.md  mark=){.btn.btn-primary}
 
