@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Build a stateful service"
 linkTitle: "How-To: Build a stateful service"
-weight: 300
+weight: 200
 description: "Use state management with a scaled, replicated service"
 ---
 
