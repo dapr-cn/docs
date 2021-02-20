@@ -8,42 +8,29 @@ description: "在应用程序中使用 Dapr gRPC API"
 
 # Dapr 和 gRPC
 
-Dapr 为本地调用实现 HTTP 和 gRPC API 。 gRPC 对于低延迟，高性能场景非常有用，并且具有使用 pro-Client 客户端的语言集成。
+Dapr 为本地调用实现 HTTP 和 gRPC API 。 Dapr implements both an HTTP and a gRPC API for local calls. gRPC is useful for low-latency, high performance scenarios and has language integration using the proto clients.
 
-您可以在这里找到 [](https://github.com/dapr/docs#sdks) 自动生成的客户端
- 的列表。</p> 
+您可以在这里找到 [](https://github.com/dapr/docs#sdks) 自动生成的客户端 的列表。
 
 Dapr 运行时实现 [服务](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) ，应用程序可以通过 gRPC 进行通信。
 
-除了通过 gRPC 调用 Dapr ， Dapr 还可以通过 gRPC 与应用程序通信。 要做到这一点，应用程序需要托管一个 gRPC 服务器并实现 [Dapr appcallback 服务](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/appcallback.proto)
-
-
+除了通过 gRPC 调用 Dapr ， Dapr 还可以通过 gRPC 与应用程序通信。 In addition to calling Dapr via gRPC, Dapr can communicate with an application via gRPC. To do that, the app needs to host a gRPC server and implements the [Dapr appcallback service](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/appcallback.proto)
 
 ## 配置 dapr 以通过 gRPC 与应用程序通信
-
-
 
 ### 自托管
 
 当在自己托管模式下运行时，使用 `--app-protocol` 标志告诉Dapr 使用 gRPC 来与应用程序对话：
 
-
-
 ```bash
 dapr run --app-protocol grpc --app-port 5005 node app.js
 ```
-
-
 This tells Dapr to communicate with your app via gRPC over port `5005`.
-
-
 
 
 ### Kubernetes
 
 On Kubernetes, set the following annotations in your deployment YAML:
-
-
 
 ```yaml
 apiVersion: apps/v1
@@ -70,16 +57,11 @@ spec:
 ...
 ```
 
-
-
-
 ## 使用 gRPC 调用 dapr - 执行示例
 
 下面的步骤显示了如何创建 Dapr 客户端并调用 `保存状态数据` 操作：
 
 1. 导入包
-
-
 
 ```go
 package main
@@ -93,10 +75,7 @@ import (
 )
 ```
 
-
 2. 创建客户端
-
-
 
 ```go
 // just for this demo
@@ -111,10 +90,7 @@ if err != nil {
 defer client.Close()
 ```
 
-
 3. 调用 " 保存状态 " 方法
-
-
 
 ```go
 // save state with the key key1
@@ -125,20 +101,15 @@ if err != nil {
 logger.Println("data saved")
 ```
 
-
 Hooray!
 
 现在你可以探索Dapr客户端上的所有不同方法。
-
-
 
 ## 使用 Dapr 创建 gRPC 应用程序
 
 以下步骤将向您显示如何创建一个让Dapr服务器与之通信的应用程序。
 
 1. 导入包
-
-
 
 ```go
 package main
@@ -158,10 +129,7 @@ import (
 )
 ```
 
-
 2. 实现接口
-
-
 
 ```go
 // server is our user app
@@ -249,10 +217,7 @@ func (s *server) OnTopicEvent(ctx context.Context, in *pb.TopicEventRequest) (*e
 
 ```
 
-
 3. 创建服务器
-
-
 
 ```go
 func main() {
@@ -281,29 +246,22 @@ func main() {
 }
 ```
 
-
 这将在端口 4000 上为应用程序创建一个 gRPC 服务器。
 
 4. 运行你的应用
 
 To run locally, use the Dapr CLI:
 
-
-
 ```
 dapr run --app-id goapp --app-port 4000 --app-protocol grpc go run main.go
 ```
 
-
 在 Kubernetes 上，设置所需的 `dapr.io/app-protocol: "grpc"` 和 `dapr.io/app-port: " 4000` 注释在您的 Pod 规范模板中如上所述。
-
-
 
 ## Other languages
 
 您可以将 Dapr 与 Protobuf 支持的任何语言一起使用，而不只是使用当前可用的生成 SDK。 使用 [原型](https://developers.google.com/protocol-buffers/docs/downloads) 工具，您可以为 Ruby， C++， Rust 等其他语言生成 Dapr 客户机。
 
-## 相关主题
-
+ 相关主题
 - [Service invocation building block]({{< ref service-invocation >}})
 - [服务调用 API 规范]({{< ref service_invocation_api.md >}})
