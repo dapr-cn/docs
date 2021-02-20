@@ -2,7 +2,7 @@
 type: docs
 title: "组件"
 linkTitle: "组件"
-weight: 300
+weight: 200
 description: "用于构建块和应用程序的模块化功能"
 ---
 
