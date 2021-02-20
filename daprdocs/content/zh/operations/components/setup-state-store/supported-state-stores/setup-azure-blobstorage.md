@@ -1,13 +1,13 @@
 ---
-type: 文档
+type: docs
 title: "Azure Blob Storage"
 linkTitle: "Azure Blob Storage"
 description: Detailed information on the Azure Blob Store state store component
 ---
 
-## Introduction
+## Component format
 
-To setup Azure Blobstorage state store create a component of type `state.azure.blobstorage`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Azure Blobstorage state store create a component of type `state.azure.blobstorage`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -33,13 +33,13 @@ spec:
 {{% /alert %}}
 
 
-## Input bindings
+## Spec metadata fields
 
-| 字段            | Required | Details                                                                                                                                                                  | Example               |
-| ------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
-| accountName   |    Y     | The storage account name                                                                                                                                                 | `"mystorageaccount"`. |
-| accountKey    |    Y     | Primary or secondary storage key                                                                                                                                         | `"key"`               |
-| containerName |    Y     | The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist The container will be created for you if it doesn't exist | `"container"`         |
+| 字段            | Required | Details                                                                                                        | Example               |
+| ------------- |:--------:| -------------------------------------------------------------------------------------------------------------- | --------------------- |
+| accountName   |    Y     | The storage account name                                                                                       | `"mystorageaccount"`. |
+| accountKey    |    Y     | Primary or secondary storage key                                                                               | `"key"`               |
+| containerName |    Y     | The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist | `"container"`         |
 
 ## Setup Azure Blobstorage
 
@@ -48,9 +48,9 @@ spec:
 If you wish to create a container for Dapr to use, you can do so beforehand. However, Blob Storage state provider will create one for you automatically if it doesn't exist.
 
 In order to setup Azure Blob Storage as a state store, you will need the following properties:
-- **AccountName**: The storage account name. For example: **mystorageaccount**. For example: **mystorageaccount**.
+- **AccountName**: The storage account name. For example: **mystorageaccount**.
 - **AccountKey**: Primary or secondary storage key.
-- **ContainerName**: The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist. The container will be created for you if it doesn't exist.
+- **ContainerName**: The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist.
 
 ## Apply the configuration
 
