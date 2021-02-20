@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "How-To：使用绑定与外部资源进行交互"
+title: "How-To: Use output bindings to interface with external resources"
 linkTitle: "How-To: Bindings"
 description: "使用 Dapr 输出绑定调用外部系统"
 weight: 300
@@ -21,7 +21,7 @@ Create a new binding component with the name of `myevent`.
 
 在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
-在这里，创建一个新的名称为 `myevent` 的绑定组件。
+{{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
@@ -43,9 +43,9 @@ spec:
     value: topic1
 ```
 
-您可以使用 HTTP 来这样做：
+{{% /codetab %}}
 
-Now, add the program arguments and environment variables. These need to match the ports defined in the entry in 'External Tool' above.
+{{% codetab %}}
 
 您可以使用 HTTP 来这样做：
 
