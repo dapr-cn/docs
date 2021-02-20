@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "分布式跟踪"
 linkTitle: "Distributed tracing"
 weight: 1000
