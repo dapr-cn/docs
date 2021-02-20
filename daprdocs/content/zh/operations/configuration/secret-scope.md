@@ -27,7 +27,7 @@ secrets:
 
 The following table lists the properties for secret scopes:
 
-| Property       | Type   | Description                                                                  |
+| Property       | Type   | 描述                                                                           |
 | -------------- | ------ | ---------------------------------------------------------------------------- |
 | storeName      | string | Name of the secret store component. storeName must be unique within the list |
 | defaultAccess  | string | Access modifier. Accepted values "allow" (default) or "deny"                 |
