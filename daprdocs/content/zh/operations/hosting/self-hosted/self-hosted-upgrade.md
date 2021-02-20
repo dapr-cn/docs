@@ -2,7 +2,7 @@
 type: docs
 title: "Steps to upgrade Dapr in a self-hosted environment"
 linkTitle: "Upgrade Dapr"
-weight: 50000
+weight: 40000
 description: "Follow these steps to upgrade Dapr in self-hosted mode and ensure a smooth upgrade"
 ---
 
