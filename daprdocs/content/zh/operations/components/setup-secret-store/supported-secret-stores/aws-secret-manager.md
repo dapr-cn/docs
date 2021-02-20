@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field        | Required | Details                                                                 | Example             |
+| 字段           | Required | Details                                                                 | Example             |
 | ------------ |:--------:| ----------------------------------------------------------------------- | ------------------- |
 | region       |    Y     | The specific AWS region the AWS Secrets Manager instance is deployed in | `"us-east-1"`       |
 | accessKey    |    Y     | The AWS Access Key to access this resource                              | `"key"`             |
@@ -46,7 +46,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 Setup AWS Secrets Manager using the AWS documentation: https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html.
 
-## Related links
+## 相关链接
 - [Secrets building block]({{< ref secrets >}})
 - [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})
 - [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
