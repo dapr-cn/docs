@@ -32,7 +32,7 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field               | Details                                                                                                                                                                      | Example                                            |
+| 字段                  | Details                                                                                                                                                                      | 示例                                                 |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | clientId            | The client ID of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                                 |                                                    |
 | clientSecret        | The client secret of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                             |                                                    |
@@ -66,7 +66,7 @@ spec:
       type: middleware.http.oauth2clientcredentials
 ```
 
-## Related links
+## 相关链接
 - [Middleware concept]({{< ref middleware-concept.md >}})
 - [Configuration concept]({{< ref configuration-concept.md >}})
 - [Configuration overview]({{< ref configuration-overview.md >}})
