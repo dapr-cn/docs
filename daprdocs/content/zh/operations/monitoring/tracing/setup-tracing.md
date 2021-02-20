@@ -22,7 +22,7 @@ tracing:
 
 The following table lists the properties for tracing:
 
-| Property                 | Type   | Description                                              |
+| Property                 | Type   | 描述                                                       |
 | ------------------------ | ------ | -------------------------------------------------------- |
 | `samplingRate`           | string | Set sampling rate for tracing to be enabled or disabled. |
 | `zipkin.endpointAddress` | string | Set the Zipkin server address.                           |
@@ -122,5 +122,5 @@ On your browser, go to `http://localhost:9411` and you should see the Zipkin UI.
 
 ![zipkin](/images/zipkin_ui.png)
 
-## References
+## 参考文档
 - [Zipkin for distributed tracing](https://zipkin.io/)
