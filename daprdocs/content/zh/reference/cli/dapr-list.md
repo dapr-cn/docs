@@ -5,13 +5,13 @@ linkTitle: "list"
 description: "有关 list CLI 命令的详细信息"
 ---
 
-## 描述
+## 说明
 
 列出所有 Dapr 实例。
 
-## 支持的平台
+## Supported platforms
 
-- [自托管]({{< ref self-hosted >}})
+- [Self-Hosted]({{< ref self-hosted >}})
 - [Kubernetes]({{< ref kubernetes >}})
 
 ## 用法
@@ -21,7 +21,7 @@ dapr list [flags]
 
 ## 参数
 
-| 名称                   | 环境变量 | 默认值     | 说明                             |
+| Name                 | 环境变量 | 默认值     | 说明                             |
 | -------------------- | ---- | ------- | ------------------------------ |
 | `--help`, `-h`       |      |         | 显示此帮助消息                        |
 | `--kubernetes`, `-k` |      | `false` | 列出 Kubernetes 集群中的所有 Dapr pods |
