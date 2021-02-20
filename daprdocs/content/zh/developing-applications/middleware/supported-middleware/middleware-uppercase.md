@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Uppercase request body"
 linkTitle: "Uppercase"
 weight: 9999
@@ -8,7 +8,7 @@ description: "Test your HTTP pipeline is functioning with the uppercase middlewa
 
 The uppercase [HTTP middleware]({{< ref middleware-concept.md >}}) converts the body of the request to uppercase letters and is used for testing that the pipeline is functioning. It should only be used for local development.
 
-## Introduction
+## Component format
 
 In the following definition, the maximum requests per second are set to 10:
 
