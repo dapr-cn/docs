@@ -2,12 +2,13 @@
 baseURL = "https://dapr-cn.github.io/"
 title = "Dapr 中文文档"
 theme = "docsy"
+disableFastRender = true
 
 enableRobotsTXT = true
 enableGitInfo = true
 
 # Language Configuration
-languageCode = "zh-cn"
+languageCode = "zh"
 contentDir = "content/zh"
 defaultContentLanguage = "zh"
 
@@ -17,6 +18,36 @@ disableKinds = ["taxonomy", "term"]
 # Google Analytics
 [services.googleAnalytics]
 id = "UA-149338238-3"
+
+# Mounts
+[module]
+  [[module.mounts]]
+    source = "content/zh"
+    target = "content"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "archetypes"
+    target = "archetypes"
+  [[module.mounts]]
+    source = "../sdkdocs/python/daprdocs/content/en/python-sdk-docs"
+    target = "content/developing-applications/sdks/python"
+  [[module.mounts]]
+    source = "../sdkdocs/python/daprdocs/content/en/python-sdk-contributing"
+    target = "content/contributing/"
+  [[module.mounts]]
+    source = "../sdkdocs/php/daprdocs/content/en/php-sdk-docs"
+    target = "content/developing-applications/sdks/php"
 
 # Markdown Engine - Allow inline html
 [markup]
@@ -30,26 +61,25 @@ id = "UA-149338238-3"
     weight = 40
     url = "https://dapr.io"
 [[menu.main]]
-    name = "关于"
+    name = "GitHub"
     weight = 50
-    url = "https://dapr.io/#about"
+    url = "https://github.com/dapr"
 [[menu.main]]
-    name = "下载"
+    name = "Blog"
     weight = 60
-    url = "https://dapr.io/#download"
-[[menu.main]]
-    name = "博客"
-    weight = 70
     url = "https://blog.dapr.io/posts"
 [[menu.main]]
-    name = "社区"
+    name = "Discord"
+    weight = 70
+    url = "https://aka.ms/dapr-discord"
+[[menu.main]]
+    name = "Community"
     weight = 80
-    url = "https://dapr.io/#community"
+    url = "https://github.com/dapr/community/blob/master/README.md"
 [[menu.main]]
     name = "英文文档"
     weight = 80
     url = "https://docs.dapr.io/"
-
 
 [params]
 copyright = "Dapr"
@@ -63,19 +93,19 @@ offlineSearch = false
 github_repo = "https://github.com/dapr-cn/docs"
 github_project_repo = "https://github.com/dapr/dapr"
 github_subdir = "daprdocs"
-github_branch = "v0.11"
+github_branch = "v1.0"
 
 # Versioning
-version_menu = "v0.11 (latest)"
-version = "v0.11"
+version_menu = "v1.0 (latest)"
+version = "v1.0"
 archived_version = false
 
 [[params.versions]]
-  version = "v1.0-rc.2 (preview)"
-  url = "https://v1-rc2.docs.dapr.io"
-[[params.versions]]
-  version = "v0.11 (latest)"
+  version = "v1.0 (latest)"
   url = "#"
+[[params.versions]]
+  version = "v0.11"
+  url = "https://v0-11.docs.dapr.io"
 [[params.versions]]
   version = "v0.10"
   url = "https://github.com/dapr/docs/tree/v0.10.0"
