@@ -43,7 +43,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field        | Required | Binding support | Details                                                                                                                                                                                                                      | Example                  |
+| 字段           | Required | Binding support | Details                                                                                                                                                                                                                      | Example                  |
 | ------------ |:--------:| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | mode         |    N     | Input           | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"` |
 | streamName   |    Y     | Input/Output    | The AWS Kinesis Stream Name                                                                                                                                                                                                  | `"stream"`               |
@@ -53,18 +53,18 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | secretKey    |    Y     | Output          | The AWS Secret Access Key to access this resource                                                                                                                                                                            | `"secretAccessKey"`      |
 | sessionToken |    N     | Output          | The AWS session token to use                                                                                                                                                                                                 | `"sessionToken"`         |
 
-## Binding support
+## Output bindings
 
 This component supports both **input and output** binding interfaces.
 
 This component supports **output binding** with the following operations:
 
 - `create`
-## Related links
+## 相关链接
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
 - [Authenticating to AWS]({{< ref authenticating-aws.md >}})
