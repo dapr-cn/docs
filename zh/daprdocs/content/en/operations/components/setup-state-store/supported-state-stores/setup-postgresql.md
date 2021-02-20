@@ -48,7 +48,7 @@ If you wish to use PostgreSQL as an actor store, append the following to the yam
 
 {{< tabs "Self-Hosted" >}}
 
-{{% codetab %}}
+在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
 1. Run an instance of PostgreSQL. Run an instance of PostgreSQL. You can run a local instance of PostgreSQL in Docker CE with the following command:
 
