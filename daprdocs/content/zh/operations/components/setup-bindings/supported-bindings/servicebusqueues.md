@@ -1,11 +1,11 @@
 ---
-type: 文档
+type: docs
 title: "Azure Service Bus Queues binding spec"
 linkTitle: "Azure Service Bus Queues"
 description: "Detailed documentation on the Azure Service Bus Queues binding component"
 ---
 
-## Introduction
+## Component format
 
 To setup Azure Service Bus Queues binding create a component of type `bindings.azure.servicebusqueues`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -31,17 +31,17 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Input bindings
+## Spec metadata fields
 
-| 字段                                                       | Required | Output Binding Supported Operations | Details                                                                                                                                                                                                                                                                                                                                     | 示例:                            |
-| -------------------------------------------------------- |:--------:| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `connectionString` is the Service Bus connection string. |    Y     | Input/Output                        | The Service Bus connection string                                                                                                                                                                                                                                                                                                           | `"Endpoint=sb://************"` |
-| queueName                                                |    Y     | Input/Output                        | `queueName` is the Service Bus queue name.                                                                                                                                                                                                                                                                                                  | `"queuename"`                  |
-| ttlInSeconds                                             |    N     | Output                              | `ttlInSeconds` is an optional parameter to set the default message [time to live](https://docs.microsoft.com/azure/service-bus-messaging/message-expiration). If this parameter is omitted, messages will expire after 14 days. If this parameter is omitted, messages will expire after 14 days. See [also](#specifying-a-ttl-per-message) | `"60"`                         |
+| 字段               | Required | Binding support | Details                                                                                                                                                                                                                                     | Example                        |
+| ---------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| connectionString |    Y     | Input/Output    | The Service Bus connection string                                                                                                                                                                                                           | `"Endpoint=sb://************"` |
+| queueName        |    Y     | Input/Output    | The Service Bus queue name                                                                                                                                                                                                                  | `"queuename"`                  |
+| ttlInSeconds     |    N     | Output          | Parameter to set the default message [time to live](https://docs.microsoft.com/azure/service-bus-messaging/message-expiration). If this parameter is omitted, messages will expire after 14 days. See [also](#specifying-a-ttl-per-message) | `"60"`                         |
 
 ## Output bindings
 
-For input bindings, where the query matching Tweets are streamed to the user service, the above component has to also include a query:
+This component supports both **input and output** binding interfaces.
 
 字段名为 `ttlInSeconds`。
 
@@ -57,7 +57,7 @@ For input bindings, where the query matching Tweets are streamed to the user ser
 
 {{< tabs "Linux">}}
 
-Now, add the program arguments and environment variables. These need to match the ports defined in the entry in 'External Tool' above.
+{{% codetab %}}
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myServiceBusQueue \
