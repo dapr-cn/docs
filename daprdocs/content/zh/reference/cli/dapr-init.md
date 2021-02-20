@@ -9,7 +9,7 @@ description: "有关 init CLI 命令的详细信息"
 
 在受支持的托管平台上安装 Dapr 。
 
-## 支持的平台
+## Supported platforms
 
 - [Self-Hosted]({{< ref self-hosted >}})
 - [Kubernetes]({{< ref kubernetes >}})
