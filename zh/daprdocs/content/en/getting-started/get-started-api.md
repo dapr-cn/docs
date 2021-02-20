@@ -26,14 +26,14 @@ With this command, no custom component folder was defined so the Dapr uses the d
 In a separate terminal run:
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
-{{% codetab %}}
+Applications publishing to an Azure Blob Storage output binding should send a message with the following contract:
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "name", "value": "Bruce Wayne"}]' http://localhost:3500/v1.0/state/statestore
 ```
-{{% /codetab %}}
+您可以使用 HTTP 来这样做：
 
-{{% codetab %}}
+Now, add the program arguments and environment variables. These need to match the ports defined in the entry in 'External Tool' above.
 
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": "name", "value": "Bruce Wayne"}]' -Uri 'http://localhost:3500/v1.0/state/statestore'
