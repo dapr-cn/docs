@@ -24,7 +24,7 @@ The following tables lists the different properties for access control, policies
 
 ### Access Control
 
-| Property      | Type   | Description                                                                    |
+| Property      | Type   | 描述                                                                             |
 | ------------- | ------ | ------------------------------------------------------------------------------ |
 | defaultAction | string | Global default action when no other policy is matched                          |
 | trustDomain   | string | Trust domain assigned to the application. Default is "public".                 |
@@ -32,7 +32,7 @@ The following tables lists the different properties for access control, policies
 
 ### Policies
 
-| Property      | Type   | Description                                                                                         |
+| Property      | Type   | 说明                                                                                                  |
 | ------------- | ------ | --------------------------------------------------------------------------------------------------- |
 | app           | string | AppId of the calling app to allow/deny service invocation from                                      |
 | namespace     | string | Namespace value that needs to be matched with the namespace of the calling app                      |
