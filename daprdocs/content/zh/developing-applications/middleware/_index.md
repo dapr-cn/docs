@@ -1,8 +1,8 @@
 ---
-type: 文档
+type: docs
 title: "Middleware"
-linkTitle: "中间件"
+linkTitle: "Middleware"
 weight: 50
-description: "Customize Dapr processing pipelines by adding middleware components"
+description: "Customize processing pipelines by adding middleware components"
 ---
 
