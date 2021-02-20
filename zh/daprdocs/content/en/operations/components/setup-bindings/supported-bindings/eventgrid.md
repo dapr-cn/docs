@@ -5,7 +5,7 @@ linkTitle: "Azure Event Grid"
 description: "Detailed documentation on the Azure Event Grid binding component"
 ---
 
-## Setup Dapr component
+## Introduction
 
 To setup Azure Event Grid binding create a component of type `bindings.azure.eventgrid`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -49,7 +49,7 @@ also support connection pool configuration variables:
 The above example uses secrets as plain strings. also support connection pool configuration variables: The above example uses secrets as plain strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
-## Input Binding Metadata
+## Input bindings
 
 | 字段                                                    | Required | Output Binding Supported Operations | Details                                                                                                                                                                                                                                                                                                       | Example:                                                                                    |
 | ----------------------------------------------------- |:--------:| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
@@ -71,7 +71,7 @@ Scope is the identifier of the resource to which the event subscription needs to
 - `subscriptionId` is the Azure subscription id in which this Event Grid Event Subscription should be created
 - `clientId` is the client id that should be used by the binding to create or update the Event Grid Event Subscription
 - `clientSecret`  is the client secret that should be used by the binding to create or update the Event Grid Event Subscription
-## Output Binding Metadata
+## Output bindings
 
 Azure Event Grid requires a valid HTTPS endpoint for custom webhooks. Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/).
 
