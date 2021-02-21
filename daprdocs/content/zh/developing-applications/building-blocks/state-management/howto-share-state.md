@@ -6,11 +6,11 @@ weight: 300
 description: "Choose different strategies for sharing state between different applications"
 ---
 
-## Introduction
+## 介绍
 
-Dapr offers developers different ways to share state between applications.
+Dapr 为开发者提供了不同的方式来共享应用程序之间的状态。
 
-Different architectures might have different needs when it comes to sharing state. For example, in one scenario you may want to encapsulate all state within a given application and have Dapr manage the access for you. In a different scenario, you may need to have two applications working on the same state be able to get and save the same keys.
+在共享状态时，不同的体系结构可能有不同的需求。 例如，在一个场景中，您可能想要封装某个应用程序中的所有状态，并让 Dapr 管理您的访问权限。 In a different scenario, you may need to have two applications working on the same state be able to get and save the same keys.
 
 To enable state sharing, Dapr supports the following key prefixes strategies:
 
