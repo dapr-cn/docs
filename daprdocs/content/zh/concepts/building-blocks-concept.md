@@ -6,15 +6,15 @@ weight: 200
 description: "可通过标准 HTTP 或 gRPC API 访问的模块化最佳实践"
 ---
 
-[构建块]({{< ref building-blocks >}}) 是可从代码调用并使用一个或多个 Dapr 组件的 HTTP 或 gRPC API 。
+[构建块]({{< ref building-blocks >}}) 是可以从您的代码中调用的HTTP或gRPC API，并且由一个或多个Dapr组件组成。
 
-构建块可以解决构建弹性，微服务应用程序和编纂最佳实践和模式方面的共同挑战。 Dapr 由一组构建块组成，并具备添加新构建块的扩展性。
+构建块解决了构建弹性微服务应用程序中的常见挑战，并编纂了最佳实践和模式。 Dapr由一组构建块组成，并且具有可扩展性以添加新的构建块。
 
 下图显示了构建块如何公开了可被代码调用的公共 API ，并使用组件来实现构建块的能力。
 
 <img src="/images/concepts-building-blocks.png" width=250>
 
-以下是 Dapr 提供的构建块类型:
+以下是 Dapr 提供的构建块:
 
 <img src="/images/building_blocks.png" width=1000>
 
