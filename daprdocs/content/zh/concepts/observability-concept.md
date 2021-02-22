@@ -7,7 +7,7 @@ description: >
   如何通过跟踪、指标、日志和健康状况来监控应用程序
 ---
 
-When building an applications, understanding how the system is behaving is an important part of operating it - this includes having the ability to observe the internal calls of an application, gauging its performance and becoming aware of problems as soon as they occur. This is challenging for any system but even more so for a distributed system comprised of multiple microservices where a flow, made of several calls, may start in one microservices but continue in another. Observability is critical in production environments but also useful during development to understand bottlenecks, improve performance and perform basic debugging across the span of microservices.
+在构建应用程序时，了解系统如何运行是运维的一个重要部分——这包括有能力观测应用程序的内部调用，评估其性能并在发生问题时立即意识到问题。 这对任何系统都是一种挑战，而对于由多个微服务组成的分布式系统来说更是如此，其中由多个调用组成的流程，可以在一个微服务中启动，然后在另一个微服务中继续。 可观察性在生产环境中至关重要，但在开发期间也很有用，可以了解瓶颈所在，提高性能并在整个微服务范围内进行基本的调试。
 
 While some data points about an application can be gathered from the underlying infrastructure (e.g. memory consumption, CPU usage), other meaningful information must be collected from an "application aware" layer - one that can show how an important series of calls is executed across microservices. This usually means a developer must add some code to instrument an application for this purpose. Often, instrumentation code is simply meant to send collected data such as traces and metrics to an external monitoring tool or service that can help store, visualize and analyze all this information.
 
@@ -37,7 +37,7 @@ Dapr 系统服务指标显示 sidecar 注入失败、系统服务健康状态，
 ### 日志
 Dapr generates [logs]({{X23X}}) to provide visibility into sidecar operation and to help users identify issues and perform debugging. 日志事件包含由 Dapr 系统服务生成的警告，错误，信息和调试消息。 Dapr can also be configured to send logs to collectors such as [Fluentd]({{< ref fluentd.md >}}) and [Azure Monitor]({{< ref azure-monitor.md >}}) so they can be easily searched, analyzed and provide insights.
 
-### Metrics
+### 指标
 Metrics are the series of measured values and counts that are collected and stored over time. [指标]({{X26X}}) 是在一段时间内收集和存储的一系列测量值和计数。 Dapr 指标可以监控和了解 Dapr 系统服务和用户应用的行为。 For example, the metrics between a Dapr sidecar and the user application show call latency, traffic failures, error rates of requests etc. Dapr [system services metrics](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md) show sidecar injection failures, health of the system services including CPU usage, number of actor placements made etc.
 
 ### 健康状态
