@@ -98,8 +98,8 @@ Front-matter 应填写所有字段，包括类型、标题、链接标题、权�
 - `描述` 应该是 1-2 个句子，描述读者将在此文档中学习，完成或执行什么。
 
 根据 [styling conventions](#styling-conventions)，标题只能大写第一个字和专有名词，但 "How-To："除外。
-    - "Dapr 服务调用入门"
-    - "How-To: 设置本地 Redis 实例"
+    - "Getting started with Dapr service invocation"
+    - "How-To: Setup a local Redis instance"
 
 ### 引用其他页面
 Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-references/) 用于引用其他页面和部分。 如果某一页面被错误重命名或删除，它会中断构建。
@@ -217,7 +217,7 @@ Hugo 可以使用短代码自动嵌入 YouTube 视频:
 {{</* youtube [VIDEO ID] */>}}
 ```
 
-#### 例子
+#### 示例
 
 给定视频：https://youtu.be/dQw4w9WgXcQ
 
