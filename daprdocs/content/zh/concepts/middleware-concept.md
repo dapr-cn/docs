@@ -3,7 +3,7 @@ type: docs
 title: "中间件管道"
 linkTitle: "中间件"
 weight: 300
-description: "链式中间件组件的自定义处理管道"
+description: "自定义链式中间件组件的处理管道"
 ---
 
 Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 请求在路由到用户代码之前经过所有已定义的中间件组件，然后在返回到客户机之前，按相反顺序经过已定义的中间件，如下图中所示。
@@ -12,7 +12,7 @@ Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。
 
 ## 自定义处理管道
 
-启动后， Dapr sidecar 会构建中间件处理管道。 启动后， Dapr sidecar 会构建中间件处理管道。 其他中间件，由 Dapr [ configuration ]({{< ref configuration-concept.md >}}) 配置，按照定义的顺序添加到管道中。 管道适用于所有 Dapr API 端点，包括状态，发布/订阅，服务调用，绑定，安全性和其他。
+启动后， Dapr sidecar 会构建中间件处理管道。 默认情况下，管道由 [追踪中间件]({{< ref tracing-overview.md >}) 和 CORS 中间件组成。 其他中间件，由 Dapr [ configuration ]({{< ref configuration-concept.md >}}) 配置，按照定义的顺序添加到管道中。 管道适用于所有 Dapr API 端点，包括状态，发布/订阅，服务调用，绑定，安全性和其他。
 
 > **备注:** Dapr 提供 **middleware.http.uppercase** 预注册组件，会将请求体中的所有文本更改为大写。 您可以使用它来测试/验证您的自定义管道是否已经就绪。
 
@@ -35,5 +35,5 @@ spec:
 
 ## 下一步
 
-* [操作方法：使用 OAuth 配置 API 授权]({{< ref middleware-overview.md >}})
+* [中间件概述]({{< ref middleware-overview.md >}})
 * [操作方法：使用 OAuth 配置 API 授权]({{< ref oauth.md >}})
