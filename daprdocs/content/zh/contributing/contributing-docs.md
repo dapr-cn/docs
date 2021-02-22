@@ -104,7 +104,7 @@ Front-matter 应填写所有字段，包括类型、标题、链接标题、权�
 ### 引用其他页面
 Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-references/) 用于引用其他页面和部分。 如果某一页面被错误重命名或删除，它会中断构建。
 
-This shortcode, written inline with the rest of the markdown page, will link to the _index.md of the section/folder name:
+这个 shortcodes 在 Markdown 页面中写入，将链接到该节/文件夹名称的 _index.md 页面
 ```md
 {{</* ref "folder" */>}}
 ```
