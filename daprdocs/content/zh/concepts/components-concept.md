@@ -3,7 +3,7 @@ type: docs
 title: "组件"
 linkTitle: "组件"
 weight: 200
-description: "用于构建块和应用程序的模块化功能"
+description: "被用于构建块和应用程序的模块化功能"
 ---
 
 Dapr 使用模块化设计，以组件的方式提供功能。 每个组件都有接口定义。  所有组件都是可插拔的，因此您可以将组件换为另一个具有相同接口的组件。 您可以在 [components contrib repo](https://github.com/dapr/components-contrib) 为组件接口贡献实现并扩展 Dapr 功能。
@@ -18,7 +18,7 @@ Dapr 使用模块化设计，以组件的方式提供功能。 每个组件都�
 * [Pub/sub（发布/订阅）](https://github.com/dapr/components-contrib/tree/master/pubsub)
 * [Middleware（中间件）](https://github.com/dapr/components-contrib/tree/master/middleware)
 * [Service discovery name resolution（服务发现名称解析）](https://github.com/dapr/components-contrib/tree/master/nameresolution)
-* [Secret stores（密钥存储）](https://github.com/dapr/components-contrib/tree/master/secretstores)
+* [Secret stores（Secret存储）](https://github.com/dapr/components-contrib/tree/master/secretstores)
 * [State（状态）](https://github.com/dapr/components-contrib/tree/master/state)
 
 ### 服务调用和服务发现组件
