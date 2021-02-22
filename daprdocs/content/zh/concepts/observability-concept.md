@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "可观测性"
-linkTitle: "Monitoring"
+linkTitle: "可观测性"
 weight: 500
 description: >
   如何通过跟踪、指标、日志和健康状况来监控应用程序
