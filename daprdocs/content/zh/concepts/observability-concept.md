@@ -22,7 +22,7 @@ Dapr 使用 [W3C 跟踪上下文进行分布式跟踪]({{X23X}})
 <img src="/images/observability-tracing.png" width=1000 alt="使用 Dapr 进行分布式跟踪">
 
 ### {{< ref open-telemetry-collector.md >}}
-Dapr 还可以通过配置来使用 [OpenTelemetry Collector]({{X17X}}) ，它会提供了与外部监控工具的更多兼容性。
+Dapr 还可以通过配置来使用 [OpenTelemetry Collector]({{X17X}}) ，它会提供更多与外部监控工具的兼容性。
 
 <img src="/images/observability-opentelemetry-collector.png" width=1000 alt="通过 OpenTelemetry collector 进行分布式跟踪">
 
