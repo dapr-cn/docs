@@ -56,13 +56,13 @@ Dapr 还管理工作负载证书轮换，并且这样做时应用程序不会停
 
 除了 Dapr Sidecar 之间的自动 mTLS 之外，Dapr 还提供 Dapr sidecar 和 Dapr 系统服务之间的强制性 mTLS，这些系统服务包括 Sentry 服务（证书颁发机构）、 Placement 服务（Actor安置）和 Kubernetes Operator。
 
-启用 mTLS 后，Sentry 会将根证书和颁发证书写入 Kubernetes secret，该 secret 的范围是安装控制平面的命名空间。 在自托管模式下，Sentry 将证书写入可配置的文件系统路径。
+启用 mTLS 时， Sentry 将根证书和颁发者证书写入 Kubernetes secret，该密钥的作用域限定为部署控制平面的名称空间。 在自托管模式下，Sentry 将证书写入可配置的文件系统路径下。
 
 在 Kubernetes 中，当 Dapr 系统服务启动时，它们会自动装载包含根证书和颁发证书的 secret，并使用这些secret 来加固 Dapr sidecar 使用的 gRPC 服务器。
 
-在自托管模式下，每个系统服务都可以装载文件系统路径以获取证书。
+在自托管模式下，每个系统服务都可以挂载文件系统路径以获取证书。
 
-当 Dapr sidecar 初始化时，它使用挂载的叶证书和颁发者私钥对系统 pod 进行身份验证。 这些作为环境变量安装在 sidecar 容器上。
+当 Dapr sidecar 初始化时，它使用挂载的叶证书和颁发者私钥对系统 pod 进行身份验证。 这些作为环境变量挂载在 sidecar 容器上。
 
 ### Kubernetes 中系统服务的 mTLS
 下图显示了 Dapr Sidecar 与 Dapr Sentry（证书颁发机构）、Placement（Actor 安置）和 Kubernetes Operator 系统服务之间的安全通信
@@ -101,7 +101,7 @@ Dapr 使用配置的身份验证方法来与底层状态存储进行身份验证
 
 在 Azure Kubernetes Service （AKS） 上部署时，可以使用 [Azure Active Directory （AD） 服务主体](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals) 控制对管理活动和资源管理的访问。
 
-## 威胁模型
+## 威胁分析
 威胁建模是一个过程，通过该过程可以识别、枚举潜在威胁（如结构漏洞或缺乏适当的安全措施），并确定缓解措施的优先级。 Dapr 威胁模型如下：
 
 <img src="/images/security-threat-model.png" alt="Dapr 威胁模型" width=1000>
