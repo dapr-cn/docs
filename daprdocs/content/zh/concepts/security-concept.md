@@ -14,7 +14,7 @@ description: >
 - 双向身份验证 - 客户端向服务器证明其身份，反之亦然
 - 建立双向认证后，所有进行中通信都走加密通道
 
-在几乎所有场景中，相互 TLS 都很有用，尤其是对于受法规约束的系统，例如 [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) 和 [ PCI](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)。
+在几乎所有场景中，双向TLS 都很有用，尤其是对于受法规约束的系统，例如 [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) 和 [ PCI](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)。
 
 Dapr 支持 mTLS 和本文档中描述的应用程序中的所有功能，在生产系统中几乎不需要额外的代码或复杂配置。
 
@@ -24,7 +24,7 @@ Dapr sidecar通过 **localhost** 运行在应用程序附近，建议在与应�
 
 ## Sidecar之间的通信
 
-Dapr 包括一个"默认开启"，自动相互 TLS，为 Dapr sidecar之间的流量提供传输加密。 为此，Dapr 利用名为 `Sentry` 的系统服务，该服务充当证书颁发机构 （Certificate Authority/CA），并为来自 Dapr sidecar的工作负载 （app） 签署证书请求。
+Dapr 包括一个"默认开启"，自动双向TLS，为 Dapr sidecar之间的流量提供传输加密。 为此，Dapr 利用名为 `Sentry` 的系统服务，该服务充当证书颁发机构 （Certificate Authority/CA），并为来自 Dapr sidecar的工作负载 （app） 签署证书请求。
 
 Dapr 还管理工作负载证书轮换，并且这样做时应用程序不会停机。
 
@@ -40,15 +40,15 @@ Dapr 还管理工作负载证书轮换，并且这样做时应用程序不会停
 
 默认情况下，工作负荷证书的有效期为 24 小时，时钟偏差设置为 15 分钟。
 
-编辑与 Dapr 一起部署的默认配置中的 `spec.mtls.enabled` 字段，可以关闭/开启相互TLS。 这既可用于 Kubernetes 模式，也可以用于自托管模式。 有关如何做到这一点的详细信息，[在这里]({{< ref mtls.md >}})。
+编辑与 Dapr 一起部署的默认配置中的 `spec.mtls.enabled` 字段，可以关闭/开启双向TLS。 这既可用于 Kubernetes 模式，也可以用于自托管模式。 有关如何做到这一点的详细信息，[在这里]({{< ref mtls.md >}})。
 
 ### 自托管中的 mTLS
 下图显示了 Sentry 系统服务如何根据运维人员提供或由 Sentry 服务生成的根证书/颁发者证书（这些证书存储在文件中）为应用程序颁发证书。
 
 <img src="/images/security-mTLS-sentry-selfhosted.png" width=1000>
 
-### kubernetes 中的 mtls
-下图显示了 Sentry 系统服务如何根据运维人员提供的，或者由 Sentry 服务生成（存储为 Kubernetes sucret ）的根证书/颁发者证书为应用程序颁发证书。
+### kubernetes 中的 mTLS
+下图显示了 Sentry 系统服务如何根据运维人员提供的，或者由 Sentry 服务生成（存储为 Kubernetes secret ）的根证书/颁发者证书为应用程序颁发证书。
 
 <img src="/images/security-mTLS-sentry-kubernetes.png" width=1000>
 
