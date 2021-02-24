@@ -7,7 +7,7 @@ no_list: true
 
 欢迎来到 Dapr 文档库!
 
-### Sections
+### 章节
 
 <div class="card-deck">
   <div class="card">
