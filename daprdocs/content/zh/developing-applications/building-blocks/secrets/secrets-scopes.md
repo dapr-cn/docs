@@ -1,9 +1,9 @@
 ---
 type: docs
 title: "How To: Use secret scoping"
-linkTitle: "How To: Use secret scoping"
+linkTitle: "如何 : 使用秘钥的作用域限定"
 weight: 3000
-description: "Use scoping to limit the secrets that can be read by your application from secret stores"
+description: "应用程序从秘钥存储介质中读取时，需要使用作用域来限定"
 ---
 
 You can read [guidance on setting up secret store components]({{< ref setup-secret-store >}}) to configure a secret store for an application. Once configured, by default *any* secret defined within that store is accessible from the Dapr application.
