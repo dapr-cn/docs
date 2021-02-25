@@ -2,11 +2,11 @@
 type: docs
 title: "NATS Streaming"
 linkTitle: "NATS Streaming"
-description: "Detailed documentation on the NATS Streaming pubsub component"
+description: "NATS Streaming pubsub 组件详细文档"
 ---
 
 ## Component format
-To setup NATS Streaming pubsub create a component of type `pubsub.natsstreaming`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+要设置NATS Streaming pubsub，请创建类型为 `pubsub.natsstreaming` 的组件。 参见如何创建和应用 pubsub 配置[指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) 。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
