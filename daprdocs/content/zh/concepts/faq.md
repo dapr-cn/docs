@@ -24,18 +24,18 @@ SMI 是一个抽象层，它提供跨不同服务网格技术的公共 API 。  
 
 ### Dapr， Istio 和 Linkerd 之间的差异
 
-阅读 [Dapr 如何使用服务网?](https://github.com/dapr/dapr/wiki/FAQ#how-does-dapr-work-with-service-meshes) Istio是一个开源的服务网状结构实现，主要关注服务之间的Layer7路由、流量管理和mTLS认证。 Istio使用边车来拦截进出容器的流量，并对它们执行一套网络策略。
+阅读 [Dapr 如何使用服务网?](https://github.com/dapr/dapr/wiki/FAQ#how-does-dapr-work-with-service-meshes) Istio是一个开源的服务网状结构实现，主要关注服务之间的7层路由、流量管理和mTLS认证。 Istio使用边车来拦截进出容器的流量，并对它们执行一套网络策略。
 
 Istio 不是编程模型，不关注应用程序级别的功能，如状态管理， pub-sub，绑定等。 这就是Dapr所要解决的。
 
 ## 性能基准
-Dapr项目的重点是性能，因为其固有的讨论是Dapr作为您的应用程序的侧面。 See [here]({{< ref perf-service-invocation.md >}}) for updated performance numbers.
+Dapr项目的重点是性能，因为Dapr作为您的应用程序的边车的固有定位。 请参阅 [这里]({{< ref perf-service-invocation.md >}) 以获取更新的性能数字。
 
 ## Actors
 
 ### Dapr，Orleans 和 Service Fabric Reliable Actors之间的关系是什么?
 
-Dapr 中的Actors基于同一个虚拟Actor概念， [Orleans](https://www.microsoft.com/research/project/orleans-virtual-actors/) ，简单来说，当被调用时就会被激活，一段时间后就会被停用。 如果您熟悉Orleans，Dapr C# 行为者将会很熟悉。 Dapr C# Actors 基于 [Service Fabric Reliable Actors](https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-actors-introduction) (也来自Orleans) ，使您能够在 Service Fabric 中使用 Reliable Actors ，并将其迁移到其他托管平台，例如 Kubernetes 或其他本地环境。 Dapr 不仅仅是Actors。 它为您提供了一套最佳实践构建模块，以构建到任何微服务应用程序中。 请参阅 [Dapr 概述](https://github.com/dapr/docs/blob/master/overview/README.md)。
+Dapr 中的Actors基于同一个虚拟Actor概念， [Orleans](https://www.microsoft.com/research/project/orleans-virtual-actors/) ，简单来说，当被调用时就会被激活，一段时间后就会被停用。 如果您熟悉Orleans，那你就会很熟悉Dapr中 C# 的actor。 Dapr C# Actors 基于 [Service Fabric Reliable Actors](https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-actors-introduction) (也来自Orleans) ，使您能够在 Service Fabric 中使用 Reliable Actors ，并将其迁移到其他托管平台，例如 Kubernetes 或其他本地环境。 Dapr 不仅仅是Actors。 它为您提供了一套最佳实践构建模块，以构建到任何微服务应用程序中。 请参阅 [Dapr 概述](https://github.com/dapr/docs/blob/master/overview/README.md)。
 
 ### Actor 框架与 Dapr 之间的差异
 
@@ -56,10 +56,10 @@ Dapr 运行时 SDK 具有特定于语言的 actor 框架。 例如， .NET SDK �
 ### Dapr 集成了哪些框架?
 Dapr 可以与任何开发者框架集成。 例如，在 Dapr .NET SDK 中，您可以与 ASP.NET Core集成，它带来了有状态的路由控制器来响应来自其他服务的 pub/sub 事件。
 
-Dapr 集成了以下框架;
+Dapr 集成了以下框架：
 
 - 基于Dapr[工作流](https://github.com/dapr/workflows)的 Logic Apps
 - 基于 Dapr[Azure Functions Extension](https://github.com/dapr/azure-functions-extension)的函数
 - Java SDK中的Spring Boot Web应用
 - .NET SDK中的ASP.NET Core
-- [Azure API Management](https://cloudblogs.microsoft.com/opensource/2020/09/22/announcing-dapr-integration-azure-api-management-service-apim/)
+- [Azure API 管理](https://cloudblogs.microsoft.com/opensource/2020/09/22/announcing-dapr-integration-azure-api-management-service-apim/)

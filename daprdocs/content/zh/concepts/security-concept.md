@@ -14,7 +14,7 @@ description: >
 - 双向身份验证 - 客户端向服务器证明其身份，反之亦然
 - 建立双向认证后，所有进行中通信都走加密通道
 
-在几乎所有场景中，相互 TLS 都很有用，尤其是对于受法规约束的系统，例如 [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) 和 [ PCI](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)。
+在几乎所有场景中，双向TLS 都很有用，尤其是对于受法规约束的系统，例如 [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) 和 [ PCI](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)。
 
 Dapr 支持 mTLS 和本文档中描述的应用程序中的所有功能，在生产系统中几乎不需要额外的代码或复杂配置。
 
@@ -24,7 +24,7 @@ Dapr sidecar通过 **localhost** 运行在应用程序附近，建议在与应�
 
 ## Sidecar之间的通信
 
-Dapr 包括一个"默认开启"，自动相互 TLS，为 Dapr sidecar之间的流量提供传输加密。 为此，Dapr 利用名为 `Sentry` 的系统服务，该服务充当证书颁发机构 （Certificate Authority/CA），并为来自 Dapr sidecar的工作负载 （app） 签署证书请求。
+Dapr 包括一个"默认开启"，自动双向TLS，为 Dapr sidecar之间的流量提供传输加密。 为此，Dapr 利用名为 `Sentry` 的系统服务，该服务充当证书颁发机构 （Certificate Authority/CA），并为来自 Dapr sidecar的工作负载 （app） 签署证书请求。
 
 Dapr 还管理工作负载证书轮换，并且这样做时应用程序不会停机。
 
@@ -40,15 +40,15 @@ Dapr 还管理工作负载证书轮换，并且这样做时应用程序不会停
 
 默认情况下，工作负荷证书的有效期为 24 小时，时钟偏差设置为 15 分钟。
 
-编辑与 Dapr 一起部署的默认配置中的 `spec.mtls.enabled` 字段，可以关闭/开启相互TLS。 这既可用于 Kubernetes 模式，也可以用于自托管模式。 有关如何做到这一点的详细信息，[在这里]({{< ref mtls.md >}})。
+编辑与 Dapr 一起部署的默认配置中的 `spec.mtls.enabled` 字段，可以关闭/开启双向TLS。 这既可用于 Kubernetes 模式，也可以用于自托管模式。 有关如何做到这一点的详细信息，[在这里]({{< ref mtls.md >}})。
 
 ### 自托管中的 mTLS
 下图显示了 Sentry 系统服务如何根据运维人员提供或由 Sentry 服务生成的根证书/颁发者证书（这些证书存储在文件中）为应用程序颁发证书。
 
 <img src="/images/security-mTLS-sentry-selfhosted.png" width=1000>
 
-### kubernetes 中的 mtls
-下图显示了 Sentry 系统服务如何根据运维人员提供的，或者由 Sentry 服务生成（存储为 Kubernetes sucret ）的根证书/颁发者证书为应用程序颁发证书。
+### kubernetes 中的 mTLS
+下图显示了 Sentry 系统服务如何根据运维人员提供的，或者由 Sentry 服务生成（存储为 Kubernetes secret ）的根证书/颁发者证书为应用程序颁发证书。
 
 <img src="/images/security-mTLS-sentry-kubernetes.png" width=1000>
 
@@ -56,13 +56,13 @@ Dapr 还管理工作负载证书轮换，并且这样做时应用程序不会停
 
 除了 Dapr Sidecar 之间的自动 mTLS 之外，Dapr 还提供 Dapr sidecar 和 Dapr 系统服务之间的强制性 mTLS，这些系统服务包括 Sentry 服务（证书颁发机构）、 Placement 服务（Actor安置）和 Kubernetes Operator。
 
-启用 mTLS 后，Sentry 会将根证书和颁发证书写入 Kubernetes secret，该 secret 的范围是安装控制平面的命名空间。 在自托管模式下，Sentry 将证书写入可配置的文件系统路径。
+启用 mTLS 时， Sentry 将根证书和颁发者证书写入 Kubernetes secret，该密钥的作用域限定为部署控制平面的名称空间。 在自托管模式下，Sentry 将证书写入可配置的文件系统路径下。
 
 在 Kubernetes 中，当 Dapr 系统服务启动时，它们会自动装载包含根证书和颁发证书的 secret，并使用这些secret 来加固 Dapr sidecar 使用的 gRPC 服务器。
 
-在自托管模式下，每个系统服务都可以装载文件系统路径以获取证书。
+在自托管模式下，每个系统服务都可以挂载文件系统路径以获取证书。
 
-当 Dapr sidecar 初始化时，它使用挂载的叶证书和颁发者私钥对系统 pod 进行身份验证。 这些作为环境变量安装在 sidecar 容器上。
+当 Dapr sidecar 初始化时，它使用挂载的叶证书和颁发者私钥对系统 pod 进行身份验证。 这些作为环境变量挂载在 sidecar 容器上。
 
 ### Kubernetes 中系统服务的 mTLS
 下图显示了 Dapr Sidecar 与 Dapr Sentry（证书颁发机构）、Placement（Actor 安置）和 Kubernetes Operator 系统服务之间的安全通信
@@ -101,7 +101,7 @@ Dapr 使用配置的身份验证方法来与底层状态存储进行身份验证
 
 在 Azure Kubernetes Service （AKS） 上部署时，可以使用 [Azure Active Directory （AD） 服务主体](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals) 控制对管理活动和资源管理的访问。
 
-## 威胁模型
+## 威胁分析
 威胁建模是一个过程，通过该过程可以识别、枚举潜在威胁（如结构漏洞或缺乏适当的安全措施），并确定缓解措施的优先级。 Dapr 威胁模型如下：
 
 <img src="/images/security-threat-model.png" alt="Dapr 威胁模型" width=1000>
