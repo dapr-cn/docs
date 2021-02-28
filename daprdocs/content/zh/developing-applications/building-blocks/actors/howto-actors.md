@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "How-to: Use virtual actors in Dapr"
+title: "How-to: 在 Dapr 中使用 virtual actors"
 linkTitle: "How-To: Virtual actors"
 weight: 20
 description: 了解有关 Actor 模式的更多信息
 ---
 
-The Dapr actors runtime provides support for [virtual actors]({{< ref actors-overview.md >}}) through following capabilities:
+Dapr Actors 运行时通过以下功能为 [virtual actors]({{< ref actors-overview.md >}}) 提供支持:
 
 ## 调用 Actor 方法
 
@@ -26,7 +26,7 @@ Actor 可以使用状态管理功能可靠地保存状态。
 
 您可以通过 HTTP/GRPC 端点与 Dapr 进行状态管理。
 
-要使用Actor，您的状态存储必须支持多项目事务。  This means your state store [component](https://github.com/dapr/components-contrib/tree/master/state) must implement the [TransactionalStore](https://github.com/dapr/components-contrib/blob/master/state/transactional_store.go) interface.  The list of components that support transactions/actors can be found here: [supported state stores]({{< ref supported-state-stores.md >}}).
+要使用Actor，您的状态存储必须支持多项目事务。  这意味着您的状态存储 [组件](https://github.com/dapr/components-contrib/tree/master/state) 必须实现 [TransactionalStore](https://github.com/dapr/components-contrib/blob/master/state/transactional_store.go) 接口。  The list of components that support transactions/actors can be found here: [supported state stores]({{< ref supported-state-stores.md >}}).
 
 ## Actor timers 和 reminders
 
