@@ -36,7 +36,7 @@ The development package will contain features and behavior that will be compatib
 ```bash
 pip install dapr-dev
 ```
-{{% /codetab %}}
+您可以使用 HTTP 来这样做：
 
 {{< /tabs >}}
 
