@@ -6,7 +6,7 @@ weight: 2000
 description: "Use OAuth2 middleware to secure HTTP endpoints"
 ---
 
-The OAuth2 [HTTP middleware]({{< ref middleware-concept.md >}}) enables the [OAuth2 Authorization Code flow](https://tools.ietf.org/html/rfc6749#section-4.1) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
+The OAuth2 [HTTP middleware]({{< ref middleware-concept.md >}}) enables the [OAuth2 Authorization Code flow](https://tools.ietf.org/html/rfc6749#section-4.1) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
 
 ## Component format
 
@@ -37,7 +37,7 @@ spec:
     value: "false" 
 ```
 ## Spec metadata fields
-| Field          | Details                                                                                                                                                                      | Example                                            |
+| 字段             | Details                                                                                                                                                                      | 示例                                                 |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | clientId       | The client ID of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                                 |                                                    |
 | clientSecret   | The client secret of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                             |                                                    |
@@ -50,7 +50,7 @@ spec:
 
 ## Dapr configuration
 
-To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). To be applied, the middleware must be referenced in a [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -64,7 +64,7 @@ spec:
       type: middleware.http.oauth2
 ```
 
-## Related links
+## 相关链接
 - [Configure API authorization with OAuth]({{< ref oauth >}})
 - [Middleware OAuth quickstart](https://github.com/dapr/quickstarts/tree/master/middleware)
 - [Middleware concept]({{< ref middleware-concept.md >}})
