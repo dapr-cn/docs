@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "Configuration"
+title: "配置"
 linkTitle: "Configuration"
 weight: 400
-description: "Change the behavior of Dapr sidecars or globally on Dapr system services"
+description: "变更 Dapr sidecars 或全局 Dapr 系统服务的行为"
 ---
 
-Dapr configurations are settings that enable you to change the behavior of individual Dapr application sidecars or globally on the system services in the Dapr control plane. An example of a per Dapr application sidecar setting is configuring trace settings. An example of a Dapr control plane setting is mutual TLS which is a global setting on the Sentry system service.
+您可以在 Dapr 控制面板中更改 Dapr 配置，这些设置能够改变单个 Dapr 应用程序 sidecars 或全局系统服务。 每个 Dapr 应用程序 sidecar 设置的一个示例是配置跟踪设置。 Dapr 控制平面设置的一个示例是相互 TLS，它是哨兵（Sentry）系统服务上的全局设置。
 
-Read [this page]({{X1X}}) for a list of all configuration options.
+阅读 [此页面]({{X1X}}) 查看所有配置选项列表。
