@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "日志"
+title: "Logs"
 linkTitle: "Logs"
 weight: 3000
 description: "了解 Dapr 日志记录"
