@@ -7,7 +7,7 @@ description: "Detailed documentation on the AWS SNS binding component"
 
 ## Component format
 
-To setup AWS SNS binding create a component of type `bindings.aws.sns`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup AWS SNS binding create a component of type `bindings.aws.sns`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
 
@@ -35,7 +35,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
@@ -48,7 +48,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | secretKey    |    Y     | Output          | The AWS Secret Access Key to access this resource | `"secretAccessKey"` |
 | sessionToken |    N     | Output          | The AWS session token to use                      | `"sessionToken"`    |
 
-## Output bindings
+## Binding support
 
 字段名为 `ttlInSeconds`。
 
