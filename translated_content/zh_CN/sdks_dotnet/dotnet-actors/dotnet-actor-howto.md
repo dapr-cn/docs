@@ -6,7 +6,7 @@ weight: 100000
 description: Try out .NET virtual actors with this example
 ---
 
-## Prerequisites
+## 前期准备
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
 - Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
