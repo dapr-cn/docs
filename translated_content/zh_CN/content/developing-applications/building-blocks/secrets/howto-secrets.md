@@ -6,12 +6,12 @@ weight: 2000
 description: "Use the secret store building block to securely retrieve a secret"
 ---
 
-This article provides guidance on using Dapr's secrets API in your code to leverage the [secrets store building block]({{X30X}}). The secrets API allows you to easily retrieve secrets in your application code from a configured secret store.
+This article provides guidance on using Dapr's secrets API in your code to leverage the [secrets store building block]({{X30X}}). The secrets API allows you to easily retrieve secrets in your application code from a configured secret store. The secrets API allows you to easily retrieve secrets in your application code from a configured secret store.
 
 ## Set up a secret store
 
-Before retrieving secrets in your application's code, you must have a secret store component configured. For the purposes of this guide, as an example you will configure a local secret store which uses a local JSON file to store secrets.
-> Note: The component used in this example is not secured and is not recommended for production deployments. You can find other alternatives [here]({{X27X}}).
+Before retrieving secrets in your application's code, you must have a secret store component configured. Before retrieving secrets in your application's code, you must have a secret store component configured. For the purposes of this guide, as an example you will configure a local secret store which uses a local JSON file to store secrets.
+> Note: The component used in this example is not secured and is not recommended for production deployments. You can find other alternatives [here]({{X27X}}). You can find other alternatives [here]({{X27X}}).
 
 Create a file named `secrets.json` with the following contents:
 
@@ -41,13 +41,13 @@ spec:
 
 Make sure to replace `<PATH TO SECRETS FILE>` with the path to the JSON file you just created.
 
-To configure a different kind of secret store see the guidance on [how to configure a secret store]({{X40X}}) and review [supported secret stores]({{X41X}}) to see specific details required for different secret store solutions.
+To configure a different kind of secret store see the guidance on [how to configure a secret store]({{X40X}}) and review [supported secret stores]({{X41X}}) to see specific details required for different secret store solutions.
 ## Get a secret
 
 Now run the Dapr sidecar (with no application)
 
 ```bash
-dapr run --app-id my-app --dapr-http-port 3500 --components-path ./components
+dapr run --app-id my-app --port 3500 --components-path ./components
 ```
 
 And now you can get the secret by calling the Dapr sidecar using the secrets API:
@@ -60,9 +60,9 @@ For a full API reference, go [here]({{< ref secrets_api.md >}}).
 
 ## Calling the secrets API from your code
 
-Once you have a secret store set up, you can call Dapr to get the secrets from your application code. Here are a few examples in different programming languages:
+Once you have a secret store set up, you can call Dapr to get the secrets from your application code. Here are a few examples in different programming languages: Here are a few examples in different programming languages:
 
-{{< tabs "Go" "Javascript" "Python" "Rust" "C#" "PHP" >}}
+{{< tabs "Go" "Javascript" "Python" "Rust" "C#" >}}
 
 {{% codetab %}}
 ```Go
@@ -168,7 +168,7 @@ $app->run(function(\Dapr\SecretManager $secretManager, \Psr\Log\LoggerInterface 
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 
 - [Dapr secrets overview]({{X15X}})
 - [Secrets API reference]({{X17X}})
