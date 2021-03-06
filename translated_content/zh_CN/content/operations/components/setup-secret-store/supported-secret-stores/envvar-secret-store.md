@@ -13,7 +13,7 @@ This approach to secret management is not recommended for production environment
 
 ## Component format
 
-To setup local environment variables secret store create a component of type `secretstores.local.env`. Create a file with the following content in your `./components` directory:
+To setup local environment variables secret store create a component of type `secretstores.local.env`. Create a file with the following content in your `./components` directory: Create a file with the following content in your `./components` directory:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
