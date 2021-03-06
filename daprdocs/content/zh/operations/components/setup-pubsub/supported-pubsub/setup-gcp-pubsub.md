@@ -9,7 +9,7 @@ aliases:
 
 ## Create a Dapr component
 
-To setup GCP pubsub create a component of type `pubsub.gcp.pubsub`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
+To setup GCP pubsub create a component of type `pubsub.gcp.pubsub`. To setup GCP pubsub create a component of type `pubsub.gcp.pubsub`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -50,19 +50,19 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                              | Required | Details                                                                                             | Example                                                                                          |
-| ------------------------------- |:--------:| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| type                            |    Y     | GCP credentials type                                                                                | `service_account`                                                                                |
-| project_id                      |    Y     | GCP project id                                                                                      | `projectId`                                                                                      |
-| private_key_id                |    Y     | GCP private key id                                                                                  | `"privateKeyId"`                                                                                 |
-| private_key                     |    Y     | GCP credentials private key. Replace with x509 cert                                                 | `12345-12345`                                                                                    |
-| client_email                    |    Y     | GCP client email                                                                                    | `"client@email.com"`                                                                             |
-| client_id                       |    Y     | GCP client id                                                                                       | `0123456789-0123456789`                                                                          |
-| auth_uri                        |    Y     | Google account OAuth endpoint                                                                       | `https://accounts.google.com/o/oauth2/auth`                                                      |
-| token_uri                       |    Y     | Google account token uri                                                                            | `https://oauth2.googleapis.com/token`                                                            |
-| auth_provider_x509_cert_url |    Y     | GCP credentials cert url                                                                            | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
-| client_x509_cert_url          |    Y     | GCP credentials project x509 cert url                                                               | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
-| disableEntityManagement         |    N     | When set to `"true"`, topics and subscriptions do not get created automatically. Default: `"false"` | `"true"`, `"false"`                                                                              |
+| 字段                              | Required | Details                                                                                                                | Example                                                                                          |
+| ------------------------------- |:--------:| ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| type                            |    Y     | GCP credentials type                                                                                                   | `service_account`                                                                                |
+| project_id                      |    Y     | GCP project id                                                                                                         | `projectId`                                                                                      |
+| private_key_id                |    Y     | GCP private key id                                                                                                     | `"privateKeyId"`                                                                                 |
+| private_key                     |    Y     | GCP credentials private key. Replace with x509 cert Replace with x509 cert                                             | `12345-12345`                                                                                    |
+| client_email                    |    Y     | GCP client email                                                                                                       | `"client@email.com"`                                                                             |
+| client_id                       |    Y     | GCP client id                                                                                                          | `0123456789-0123456789`                                                                          |
+| auth_uri                        |    Y     | Google account OAuth endpoint                                                                                          | `https://accounts.google.com/o/oauth2/auth`                                                      |
+| token_uri                       |    Y     | Google account token uri                                                                                               | `https://oauth2.googleapis.com/token`                                                            |
+| auth_provider_x509_cert_url |    Y     | GCP credentials cert url                                                                                               | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
+| client_x509_cert_url          |    Y     | GCP credentials project x509 cert url                                                                                  | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
+| disableEntityManagement         |    N     | When set to `"true"`, topics and subscriptions do not get created automatically. Default: `"false"` Default: `"false"` | `"true"`, `"false"`                                                                              |
 
 ## Create a GCP Pub/Sub
 
