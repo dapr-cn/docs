@@ -7,7 +7,7 @@ description: "Detailed documentation on the Apache Kafka pubsub component"
 
 ## Component format
 
-To setup Apache Kafka pubsub create a component of type `pubsub.kafka`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+To setup Apache Kafka pubsub create a component of type `pubsub.kafka`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,6 +30,8 @@ spec:
       value: "KeFg23!"
     - name: maxMessageBytes
       value: 1024
+    - name: maxMessageBytes
+      value: 1024
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -38,13 +40,13 @@ spec:
 
 ## Spec metadata fields
 
-| 字段              | Required | Details                                                                                                                                                                                                              | Example                                                     |
-| --------------- |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| brokers         |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
-| authRequired    |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`.                                                                                                                                                    | `"true"`, `"false"`                                         |
-| saslUsername    |    N     | Username used for authentication. Only required if authRequired is set to true.                                                                                                                                      | `"adminuser"`                                               |
-| saslPassword    |    N     | Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}) | `""`, `"KeFg23!"`                                           |
-| maxMessageBytes |    N     | The maximum message size allowed for a single Kafka message. Default is 1024.                                                                                                                                        | `2048`                                                      |
+| 字段              | Required | Details                                                                                                                                                                                                                                                                                                                                               | Example                                                     |
+| --------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| brokers         |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                                                                                                                                                 | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
+| authRequired    |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`. Defaults to `"false"`.                                                                                                                                                                                                                                                              | `"true"`, `"false"`                                         |
+| saslUsername    |    N     | Username used for authentication. Username used for authentication. Only required if authRequired is set to true.                                                                                                                                                                                                                                     | `"adminuser"`                                               |
+| saslPassword    |    N     | Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}) | `""`, `"KeFg23!"`                                           |
+| maxMessageBytes |    N     | The maximum message size allowed for a single Kafka message. Default is 1024. Default is 1024.                                                                                                                                                                                                                                                        | `2048`                                                      |
 
 ## Per-call metadata fields
 
@@ -70,7 +72,7 @@ curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partiti
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart). To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
 {{% /codetab %}}
 
 {{% codetab %}}
