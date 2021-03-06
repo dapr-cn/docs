@@ -20,7 +20,7 @@ Dapr 绑定允许您 :
 
 有关展示绑定的快速入门示例，请访问此 [链接](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
-## 1. 1. 创建绑定
+## 1. 1. 1. 创建绑定
 
 输入绑定表示 Dapr 用于读取事件并推送到应用程序的事件资源。
 
@@ -52,7 +52,7 @@ spec:
 
 在 `metadata` 部分中，配置 Kafka 相关属性，如要监听的topics，代理或者更多。
 
-## 2. 监听传入事件
+## 2. Listen for incoming events
 
 现在配置您的应用程序来接收传入事件。 如果使用 HTTP ，那么需要监听在文件 `metadata.name` 中指定的绑定名称所对应的`POST` 终结点。  在此示例中，是 `myevent`。
 
