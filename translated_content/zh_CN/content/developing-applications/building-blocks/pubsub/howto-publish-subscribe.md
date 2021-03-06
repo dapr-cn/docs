@@ -1,35 +1,35 @@
 ---
 type: docs
-title: "How-To: Publish a message and subscribe to a topic"
+title: "指南：发布消息并订阅主题"
 linkTitle: "How-To: Publish & subscribe"
 weight: 2000
-description: "Learn how to send messages to a topic with one service and subscribe to that topic in another service"
+description: "了解如何使用一个服务向主题发送消息，并在另一个服务中订阅该主题"
 ---
 
-## Introduction
+## 介绍
 
-Pub/Sub is a common pattern in a distributed system with many services that want to utilize decoupled, asynchronous messaging. Using Pub/Sub, you can enable scenarios where event consumers are decoupled from event producers.
+Pub/Sub 是一个分布式系统中的常见模式，它有许多服务用于解偶、异步消息传递。 使用Pub/Sub，您可以在事件消费者与事件生产者解偶的场景中启用。
 
-Dapr provides an extensible Pub/Sub system with At-Least-Once guarantees, allowing developers to publish and subscribe to topics. Dapr provides components for pub/sub, that enable operators to use their preferred infrastructure, for example Redis Streams, Kafka, etc.
+Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次），允许开发者发布和订阅主题。 Dapr provides components for pub/sub, that enable operators to use their preferred infrastructure, for example Redis Streams, Kafka, etc.
 
-## Content Types
+## 步骤 1: 设置 Pub/Sub 组件
 
-When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter.
+When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter. gRPC clients and SDKs have a dedicated content type parameter.
 
-## Step 1: Setup the Pub/Sub component
-The following example creates applications to publish and subscribe to a topic called `deathStarStatus`.
+## 步骤 1: 设置 Pub/Sub 组件
+然后发布一条消息给 `deathStarStatus` 主题：
 
 <img src="/images/pubsub-publish-subscribe-example.png" width=1000>
 <br></br>
 
-The first step is to setup the Pub/Sub component:
+第一步是设置 Pub/Sub 组件：
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
-Redis Streams is installed by default on a local machine when running `dapr init`.
+运行 `dapr init` 时默认在本地机器上安装 Redis 流。
 
-Verify by opening your components file under `%UserProfile%\.dapr\components\pubsub.yaml` on Windows or `~/.dapr/components/pubsub.yaml` on Linux/MacOS:
+在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yam` 或在 Windows 上打开`%UserProfile%\.dapr\components\pubsub.yaml` 组件文件以验证:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -45,11 +45,11 @@ spec:
     value: ""
 ```
 
-You can override this file with another Redis instance or another [pubsub component]({{< ref setup-pubsub >}}) by creating a `components` directory containing the file and using the flag `--components-path` with the `dapr run` CLI command.
+您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
 {{% /codetab %}}
 
 {{% codetab %}}
-To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [desired pubsub component]({{< ref setup-pubsub >}}) in the yaml below, save as `pubsub.yaml`, and run `kubectl apply -f pubsub.yaml`.
+要将其部署到 Kubernetes 群集中，请为你想要的[ pubsub 组件]({{< ref setup-pubsub >}}) 在下面的 yaml `metadata` 中填写链接详情，保存为 `pubsub.yaml`，然后运行 `kubectl apply -f pubsub.yaml`。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -71,21 +71,21 @@ spec:
 {{< /tabs >}}
 
 
-## Step 2: Subscribe to topics
+## 步骤 2: 订阅主题
 
-Dapr allows two methods by which you can subscribe to topics:
+Dapr 允许两种方法订阅主题：
 
-- **Declaratively**, where subscriptions are are defined in an external file.
-- **Programmatically**, where subscriptions are defined in user code.
+- **声明**，其中订阅是在外部文件中定义的。
+- **编程方式**，订阅在用户代码中定义
 
 {{% alert title="Note" color="primary" %}}
- Both declarative and programmatic approaches support the same features. The declarative approach removes the Dapr dependency from your code and allows, for example, existing applications to subscribe to topics, without having to change code. The programmatic approach implements the subscription in your code.
+ 声明和编程方式都支持相同的功能。 声明的方式从用户代码中移除对 Dapr 的依赖性，并允许使用现有应用程序订阅主题。 编程方法在用户代码中实现订阅。
 
 {{% /alert %}}
 
-### Declarative subscriptions
+### 声明式订阅
 
-You can subscribe to a topic using the following Custom Resources Definition (CRD). Create a file named `subscription.yaml` and paste the following:
+您可以使用以下自定义资源定义 （CRD） 订阅主题。 创建名为 `subscription.yaml` 的文件并粘贴以下内容:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -101,30 +101,30 @@ scopes:
 - app2
 ```
 
-The example above shows an event subscription to topic `deathStarStatus`, for the pubsub component `pubsub`.
-- The `route` field tells Dapr to send all topic messages to the `/dsstatus` endpoint in the app.
-- The `scopes` field enables this subscription for apps with IDs `app1` and `app2`.
+上面的示例显示了 `deathStarStatus`主题的事件订阅，对于pubsub 组件 `pubsub`。
+- `route` 告诉 Dapr 将所有主题消息发送到应用程序中的 `/dsstatus` 端点。
+- `scopes` 为 `app1` 和 `app2` 启用订阅。
 
-Set the component with:
+设置组件：
 {{< tabs "Self-Hosted (CLI)" Kubernetes>}}
 
 {{% codetab %}}
-Place the CRD in your `./components` directory. When Dapr starts up, it loads subscriptions along with components.
+将 CRD 放在 `./components` 目录中。 当 Dapr 启动时，它将加载组件和订阅。
 
-Note: By default, Dapr loads components from `$HOME/.dapr/components` on MacOS/Linux and `%USERPROFILE%\.dapr\components` on Windows.
+注意：默认情况下，在 MacOS/Linux 上从 `$HOME/.dapr/components` 加载组件，以及 `%USERPROFILE%\.dapr\components` 在Windows上。
 
-You can also override the default directory by pointing the Dapr CLI to a components path:
+还可以通过将 Dapr CLI 指向组件路径来覆盖默认目录：
 
 ```bash
 dapr run --app-id myapp --components-path ./myComponents -- python3 app1.py
 ```
 
-*Note: If you place the subscription in a custom components path, make sure the Pub/Sub component is present also.*
+*注意：如果你将订阅置于自定义组件路径中，请确保Pub/Sub 组件也存在。*
 
 {{% /codetab %}}
 
 {{% codetab %}}
-In Kubernetes, save the CRD to a file and apply it to the cluster:
+在 Kubernetes 中，将 CRD 保存到文件中并将其应用于群集：
 
 ```bash
 kubectl apply -f subscription.yaml
@@ -133,7 +133,7 @@ kubectl apply -f subscription.yaml
 
 {{< /tabs >}}
 
-#### Example
+#### 示例
 
 {{< tabs Python Node PHP>}}
 
@@ -156,14 +156,14 @@ def ds_subscriber():
 
 app.run()
 ```
-After creating `app1.py` ensure flask and flask_cors are installed:
+创建名为" `app1.py` 的文件，并粘贴如下内容：
 
 ```bash
 pip install flask
 pip install flask_cors
 ```
 
-Then run:
+创建 `app1.py` 后，确保 flask 和 flask_cors 已经安装了：
 
 ```bash
 dapr --app-id app1 --app-port 5000 run python app1.py
@@ -188,7 +188,7 @@ app.post('/dsstatus', (req, res) => {
 
 app.listen(port, () => console.log(`consumer app listening on port ${port}!`))
 ```
-Run this app with:
+设置上述订阅后，将此 javascript（Node > 4.16）下载到 `app2.js` 文件中：
 
 ```bash
 dapr --app-id app2 --app-port 3000 run node app2.js
@@ -217,7 +217,7 @@ $app->post('/dsstatus', function(
 $app->start();
 ```
 
-After creating `app1.php`, and with the [SDK installed](https://github.com/dapr/php-sdk/blob/main/docs/getting-started.md), go ahead and start the app:
+然后运行:
 
 ```bash
 dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
@@ -227,14 +227,14 @@ dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
 
 {{< /tabs >}}
 
-### Programmatic subscriptions
+### 编程方式订阅
 
-To subscribe to topics, start a web server in the programming language of your choice and listen on the following `GET` endpoint: `/dapr/subscribe`. The Dapr instance calls into your app at startup and expect a JSON response for the topic subscriptions with:
-- `pubsubname`: Which pub/sub component Dapr should use.
-- `topic`: Which topic to subscribe to.
-- `route`: Which endpoint for Dapr to call on when a message comes to that topic.
+若要订阅主题，请使用您选择的编程语言启动 Web 服务器，并监听以下 `GET` 终结点： `/dapr/subscribe`。 Dapr 实例将在启动时调用到您的应用，并期望对的订阅主题响应 JOSN：
+- `pubsubname`: Dapr 用到的 pub/sub 组件
+- `topic`: 订阅的主题
+- `route`：当消息来到该主题时，Dapr 需要调用哪个终结点
 
-#### Example
+#### 示例
 
 {{< tabs Python Node PHP>}}
 
@@ -269,7 +269,7 @@ pip install flask
 pip install flask_cors
 ```
 
-Then run:
+然后运行:
 
 ```bash
 dapr --app-id app1 --app-port 5000 run python app1.py
@@ -302,7 +302,7 @@ app.post('/dsstatus', (req, res) => {
 
 app.listen(port, () => console.log(`consumer app listening on port ${port}!`))
 ```
-Run this app with:
+运行此应用：
 
 ```bash
 dapr --app-id app2 --app-port 3000 run node app2.js
@@ -333,7 +333,7 @@ $app->post('/dsstatus', function(
 $app->start();
 ```
 
-Run this app with:
+运行此应用：
 
 ```bash
 dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
@@ -343,11 +343,11 @@ dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
 
 {{< /tabs >}}
 
-The `/dsstatus` endpoint matches the `route` defined in the subscriptions and this is where Dapr will send all topic messages to.
+`/dsstatus` 终结点与订阅中定义的 `route` 相匹配，这是 Dapr 将所有主题消息发送至的位置。
 
-## Step 3: Publish a topic
+## 步骤 3: 发布主题
 
-To publish a topic you need to run an instance of a Dapr sidecar to use the pubsub Redis component. You can use the default Redis component installed into your local environment.
+To publish a topic you need to run an instance of a Dapr sidecar to use the pubsub Redis component. You can use the default Redis component installed into your local environment. You can use the default Redis component installed into your local environment.
 
 Start an instance of Dapr with an app-id called `testpubsub`:
 
@@ -358,7 +358,7 @@ dapr run --app-id testpubsub --dapr-http-port 3500
 
 {{% codetab %}}
 
-Then publish a message to the `deathStarStatus` topic:
+然后发布一条消息给 `deathStarStatus` 主题：
 
 ```bash
 dapr publish --publish-app-id testpubapp --pubsub pubsub --topic deathStarStatus --data '{"status": "completed"}'
@@ -366,14 +366,14 @@ dapr publish --publish-app-id testpubapp --pubsub pubsub --topic deathStarStatus
 {{% /codetab %}}
 
 {{% codetab %}}
-Then publish a message to the `deathStarStatus` topic:
+然后发布一条消息给 `deathStarStatus` 主题：
 ```bash
 curl -X POST http://localhost:3500/v1.0/publish/pubsub/deathStarStatus -H "Content-Type: application/json" -d '{"status": "completed"}'
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-Then publish a message to the `deathStarStatus` topic:
+然后发布一条消息给 `deathStarStatus` 主题：
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"status": "completed"}' -Uri 'http://localhost:3500/v1.0/publish/pubsub/deathStarStatus'
 ```
@@ -381,13 +381,13 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"status":
 
 {{< /tabs >}}
 
-Dapr automatically wraps the user payload in a Cloud Events v1.0 compliant envelope, using `Content-Type` header value for `datacontenttype` attribute.
+Dapr 将在符合 Cloud Events v1.0 的信封中自动包装用户有效负载，对 `datacontenttype` 属性使用 `Content-Type` 头值。
 
-## Step 4: ACK-ing a message
+## 步骤 4: ACK-ing 消息
 
-In order to tell Dapr that a message was processed successfully, return a `200 OK` response. If Dapr receives any other return status code than `200`, or if your app crashes, Dapr will attempt to redeliver the message following At-Least-Once semantics.
+为了告诉Dapr 消息处理成功，返回一个 `200 OK` 响应。 如果 Dapr 收到超过 `200` 的返回状态代码，或者你的应用崩溃，Dapr 将根据 At-Least-Once 语义尝试重新传递消息。
 
-#### Example
+#### 示例
 
 {{< tabs Python Node>}}
 
@@ -471,15 +471,15 @@ dapr --app-id app2 run -- php app2.php
 
 ## Sending a custom CloudEvent
 
-Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
+Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
 
 See info about content types [here](#Content-Types).
 
-## Next steps
+## 下一步
 
 - Try the [Pub/Sub quickstart sample](https://github.com/dapr/quickstarts/tree/master/pub-sub)
 - Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
 - Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
-- Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
+- 您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
 - List of [pub/sub components]({{< ref setup-pubsub >}})
 - Read the [API reference]({{< ref pubsub_api.md >}})
