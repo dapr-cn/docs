@@ -60,8 +60,12 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
    
         service A -> service B
         [ .. some code logic ..]
+        service A -> service B
+        [ .. some code logic ..]
         service A -> service C
         [ .. some code logic ..]
+        service A -> service D
+        [ .. some code logic ..] some code logic ..]
         service A -> service D
         [ .. some code logic ..]
 
@@ -69,9 +73,9 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
 
      若要了解如何从响应中提取跟踪标头并将跟踪标头添加到请求中，请参阅 [如何使用跟踪上下文]({{< ref w3c-tracing >}}) 一文.
 
-2. 您已选择生成自己的跟踪上下文标头。 这是很少会遇到的。 There may be occassions where you specifically chose to add W3C trace headers into a service call, for example if you have an existing application that does not currently use Dapr. 在这种情况下，Dapr 仍然会为您传播跟踪上下文标头。 如果您决定自己生成跟踪标头，有三种方法可以实现：
+2. 您已选择生成自己的跟踪上下文标头。 This is much more unusual. There may be occassions where you specifically chose to add W3C trace headers into a service call, for example if you have an existing application that does not currently use Dapr. 在这种情况下，Dapr 仍然会为您传播跟踪上下文标头。 In this case Dapr still propagates the trace context headers for you. 如果您决定自己生成跟踪标头，有三种方法可以实现：
 
-     1. You can use the industry standard OpenCensus/OpenTelemetry SDKs to generate trace headers and pass these trace headers to a Dapr enabled service. 这是首选的建议。
+     1. You can use the industry standard OpenCensus/OpenTelemetry SDKs to generate trace headers and pass these trace headers to a Dapr enabled service. 这是首选的建议。 This is the preferred recommendation.
 
      2. 您可以使用供应商SDK来生成W3C跟踪标头，如DynaTrace SDK，并将这些跟踪标头传递给启用Dapr的服务。
 
@@ -84,11 +88,11 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
 当将HTTP响应的跟踪上下文头传播到HTTP请求时，您需要复制这些标头。
 
 #### Traceparent 标头
-The traceparent header represents the incoming request in a tracing system in a common format, understood by all vendors. 下面是 Traceparent 标头的示例。
+The traceparent header represents the incoming request in a tracing system in a common format, understood by all vendors. 下面是 Traceparent 标头的示例。 Here’s an example of a traceparent header.
 
 `traceparent: 00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01`
 
- Traceparent 字段的详细信息 [ 在这里 ](https://www. w3. org/Tr/trace-context/#traceparent-header)。
+ Traceparent 字段的详细信息 \[ 在这里 \](https://www. w3. org/Tr/trace-context/#traceparent-header)。
 
 #### Tracestate 标头
 Tracestate 标头包含特定于供应商格式的父级（parent）。
