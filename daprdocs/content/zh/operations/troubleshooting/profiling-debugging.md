@@ -6,7 +6,7 @@ weight: 4000
 description: "Discover problems and issues such as concurrency, performance, cpu and memory usage through a profiling session"
 ---
 
-In any real world scenario, an app might start exhibiting undesirable behavior in terms of resource spikes. CPU/Memory spikes are not uncommon in most cases.
+In any real world scenario, an app might start exhibiting undesirable behavior in terms of resource spikes. CPU/Memory spikes are not uncommon in most cases. CPU/Memory spikes are not uncommon in most cases.
 
 Dapr allows users to start an on-demand profiling session using `pprof` through its profiling server endpoint and start an instrumentation session to discover problems and issues such as concurrency, performance, cpu and memory usage.
 
@@ -47,13 +47,13 @@ APP ID           DAPR PORT     APP PORT  COMMAND      AGE  CREATED              
 node-subscriber  3500          3000      node app.js  12s  2019-09-09 15:11.24  896
 ```
 
-Grab the DAPR PORT, and if profiling has been enabled as described above, you can now start using `pprof` to profile Dapr. Look at the Kubernetes examples above for some useful commands to profile Dapr.
+Grab the DAPR PORT, and if profiling has been enabled as described above, you can now start using `pprof` to profile Dapr. Look at the Kubernetes examples above for some useful commands to profile Dapr. Look at the Kubernetes examples above for some useful commands to profile Dapr.
 
 More info on pprof can be found [here](https://github.com/google/pprof).
 
 ### Kubernetes
 
-First, find the pod containing the Dapr runtime. If you don't already know the the pod name, type `kubectl get pods`:
+First, find the pod containing the Dapr runtime. First, find the pod containing the Dapr runtime. If you don't already know the the pod name, type `kubectl get pods`:
 
 ```bash
 NAME                                        READY     STATUS    RESTARTS   AGE
