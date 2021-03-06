@@ -5,9 +5,9 @@ linkTitle: "Autoscale"
 weight: 2000
 ---
 
-Dapr, with its modular building-block approach, along with the 10+ different [pub/sub components]({{< ref pubsub >}}), make it easy to write message processing applications. Since Dapr can run in many environments (e.g. VM, bare-metal, Cloud, or Edge) the autoscaling of Dapr applications is managed by the hosting later.
+Dapr, with its modular building-block approach, along with the 10+ different [pub/sub components]({{< ref pubsub >}}), make it easy to write message processing applications. Since Dapr can run in many environments (e.g. VM, bare-metal, Cloud, or Edge) the autoscaling of Dapr applications is managed by the hosting later. Since Dapr can run in many environments (e.g. VM, bare-metal, Cloud, or Edge) the autoscaling of Dapr applications is managed by the hosting later.
 
-For Kubernetes, Dapr integrates with [KEDA](https://github.com/kedacore/keda), an event driven autoscaler for Kubernetes. Many of Dapr's pub/sub components overlap with the scalers provided by [KEDA](https://github.com/kedacore/keda) so it's easy to configure your Dapr deployment on Kubernetes to autoscale based on the back pressure using KEDA.
+For Kubernetes, Dapr integrates with [KEDA](https://github.com/kedacore/keda), an event driven autoscaler for Kubernetes. Many of Dapr's pub/sub components overlap with the scalers provided by [KEDA](https://github.com/kedacore/keda) so it's easy to configure your Dapr deployment on Kubernetes to autoscale based on the back pressure using KEDA. Many of Dapr's pub/sub components overlap with the scalers provided by [KEDA](https://github.com/kedacore/keda) so it's easy to configure your Dapr deployment on Kubernetes to autoscale based on the back pressure using KEDA.
 
 This how-to walks through the configuration of a scalable Dapr application along with the back pressure on Kafka topic, however you can apply this approach to [pub/sub components]({{< ref pubsub >}}) offered by Dapr.
 
@@ -61,7 +61,7 @@ kubectl -n kafka exec -it kafka-client -- kafka-topics \
 
 ## Deploy a Dapr Pub/Sub component
 
-Next, we'll deploy the Dapr Kafka pub/sub component for Kubernetes. Paste the following YAML into a file named `kafka-pubsub.yaml`:
+Next, we'll deploy the Dapr Kafka pub/sub component for Kubernetes. Next, we'll deploy the Dapr Kafka pub/sub component for Kubernetes. Paste the following YAML into a file named `kafka-pubsub.yaml`:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -120,8 +120,8 @@ A few things to review here in the above file:
 
 * `name` in the `scaleTargetRef` section in the `spec:` is the Dapr ID of your app defined in the Deployment (The value of the `dapr.io/id` annotation)
 * `pollingInterval` is the frequency in seconds with which KEDA checks Kafka for current topic partition offset
-* `minReplicaCount` is the minimum number of replicas KEDA creates for your deployment. (Note, if your application takes a long time to start it may be better to set that to `1` to ensure at least one replica of your deployment is always running. Otherwise, set that to `0` and KEDA creates the first replica for you)
-* `maxReplicaCount` is the maximum number of replicas for your deployment. Given how [Kafka partition offset](http://cloudurable.com/blog/kafka-architecture-topics/index.html#:~:text=Kafka%20continually%20appended%20to%20partitions,fit%20on%20a%20single%20server.) works, you shouldn't set that value higher than the total number of topic partitions
+* `minReplicaCount` is the minimum number of replicas KEDA creates for your deployment. (Note, if your application takes a long time to start it may be better to set that to `1` to ensure at least one replica of your deployment is always running. Otherwise, set that to `0` and KEDA creates the first replica for you) (Note, if your application takes a long time to start it may be better to set that to `1` to ensure at least one replica of your deployment is always running. Otherwise, set that to `0` and KEDA creates the first replica for you)
+* `maxReplicaCount` is the maximum number of replicas for your deployment. `maxReplicaCount` is the maximum number of replicas for your deployment. Given how [Kafka partition offset](http://cloudurable.com/blog/kafka-architecture-topics/index.html#:~:text=Kafka%20continually%20appended%20to%20partitions,fit%20on%20a%20single%20server.) works, you shouldn't set that value higher than the total number of topic partitions
 * `topic` in the Kafka `metadata` section which should be set to the same topic to which your Dapr deployment subscribe (In this example `demo-topic`)
 * Similarly the `bootstrapServers` should be set to the same broker connection string used in the `kafka-pubsub.yaml` file
 * The `consumerGroup` should be set to the same value as the `consumerID` in the `kafka-pubsub.yaml` file
@@ -136,6 +136,6 @@ kubectl apply -f kafka_scaler.yaml
 
 All done!
 
-Now, that the `ScaledObject` KEDA object is configured, your deployment will scale based on the lag of the Kafka topic. More information on configuring KEDA for Kafka topics is available [here](https://keda.sh/docs/2.0/scalers/apache-kafka/).
+Now, that the `ScaledObject` KEDA object is configured, your deployment will scale based on the lag of the Kafka topic. More information on configuring KEDA for Kafka topics is available [here](https://keda.sh/docs/2.0/scalers/apache-kafka/). More information on configuring KEDA for Kafka topics is available [here](https://keda.sh/docs/2.0/scalers/apache-kafka/).
 
-You can now start publishing messages to your Kafka topic `demo-topic` and watch the pods autoscale when the lag threshold is higher than `5` topics, as we have defined in the KEDA scaler manifest. You can publish messages to the Kafka Dapr component by using the Dapr [Publish](https://github.com/dapr/CLI#publishsubscribe) CLI command
+You can now start publishing messages to your Kafka topic `demo-topic` and watch the pods autoscale when the lag threshold is higher than `5` topics, as we have defined in the KEDA scaler manifest. You can publish messages to the Kafka Dapr component by using the Dapr [Publish](https://github.com/dapr/CLI#publishsubscribe) CLI command You can publish messages to the Kafka Dapr component by using the Dapr [Publish](https://github.com/dapr/CLI#publishsubscribe) CLI command
