@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "指标"
+title: "Metrics"
 linkTitle: "Metrics"
 weight: 4000
 description: "观察 dapr 指标"
@@ -29,7 +29,7 @@ spec:
     enabled: false
 ```
 
-## 指标
+## Metrics
 
 默认情况下，每个 Dapr 系统进程都会发出 Go 运行时/进程指标，并有自己的指标：
 
