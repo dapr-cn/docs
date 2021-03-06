@@ -7,7 +7,7 @@ description: "Detailed documentation on the Twilio SMS binding component"
 
 ## Component format
 
-To setup Twilio SMS binding create a component of type `bindings.twilio.sms`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Twilio SMS binding create a component of type `bindings.twilio.sms`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -20,6 +20,13 @@ spec:
   version: v1
   metadata:
   - name: toNumber # required.
+    value: 111-111-1111
+  - name: fromNumber # required.
+    value: 222-222-2222
+  - name: accountSid # required.
+    value: *****************
+  - name: authToken # required.
+    value: *****************
     value: 111-111-1111
   - name: fromNumber # required.
     value: 222-222-2222
@@ -41,7 +48,7 @@ spec:
 | accountSid |    Y     | Output          | The Twilio account SID               | `"account sid"`  |
 | authToken  |    Y     | Output          | The Twilio auth token                | `"auth token"`   |
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 
