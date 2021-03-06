@@ -37,22 +37,22 @@ spec:
     value: parallel
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                                                                                                                                                                                               | Example                           |
-| ----------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| host              |    Y     | Connection-string for the rabbitmq host                                                                                                                                                                                                               | `amqp://user:pass@localhost:5672` |
-| durable           |    N     | Whether or not to use [durable](https://www.rabbitmq.com/queues.html#durability) queues. Defaults to `"false"`                                                                                                                                        | `"true"`, `"false"`               |
-| deletedWhenUnused |    N     | Whether or not the queue sohuld be configured to [auto-delete](https://www.rabbitmq.com/queues.html) Defaults to `"false"`                                                                                                                            | `"true"`, `"false"`               |
-| autoAck           |    N     | Whether or not the queue consumer should [auto-ack](https://www.rabbitmq.com/confirms.html) messages. Defaults to `"false"`                                                                                                                           | `"true"`, `"false"`               |
-| deliveryMode      |    N     | Persistence mode when publishing messages. Defaults to `"0"`. RabbitMQ treats `"2"` as persistent, all other numbers as non-persistent                                                                                                                | `"0"`, `"2"`                      |
-| requeueInFailure  |    N     | Whether or not to requeue when sending a [negative acknolwedgement](https://www.rabbitmq.com/nack.html) in case of a failure. Defaults to `"false"`                                                                                                   | `"true"`, `"false"`               |
-| prefetchCount     |    N     | Number of messages to [prefecth](https://www.rabbitmq.com/consumer-prefetch.html). Consider changing this to a non-zero value for production environments. Defaults to `"0"`, which means that all available messages will be pre-fetched.            | `"2"`                             |
-| reconnectWait     |    N     | How long to wait (in seconds) before reconnecting if a connection failure occurs                                                                                                                                                                      | `"0"`                             |
-| concurrencyMode   |    N     | `parallel` is the default, and allows processing multiple messages in parallel (limited by the `app-max-concurrency` annotation, if configured). Set to `single` to disable parallel processing. In most situations there's no reason to change this. | `parallel`, `single`              |
+| 字段                | Required | Details                                                                                                                                                                                                                                                                                                                                                                                               | Example                           |
+| ----------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| host              |    Y     | Connection-string for the rabbitmq host                                                                                                                                                                                                                                                                                                                                                               | `amqp://user:pass@localhost:5672` |
+| durable           |    N     | Whether or not to use [durable](https://www.rabbitmq.com/queues.html#durability) queues. Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                                                                  | `"true"`, `"false"`               |
+| deletedWhenUnused |    N     | Whether or not the queue sohuld be configured to [auto-delete](https://www.rabbitmq.com/queues.html) Defaults to `"false"`                                                                                                                                                                                                                                                                            | `"true"`, `"false"`               |
+| autoAck           |    N     | Whether or not the queue consumer should [auto-ack](https://www.rabbitmq.com/confirms.html) messages. Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                                                     | `"true"`, `"false"`               |
+| deliveryMode      |    N     | Persistence mode when publishing messages. Defaults to `"0"`. Persistence mode when publishing messages. Defaults to `"0"`. RabbitMQ treats `"2"` as persistent, all other numbers as non-persistent                                                                                                                                                                                                  | `"0"`, `"2"`                      |
+| requeueInFailure  |    N     | Whether or not to requeue when sending a [negative acknolwedgement](https://www.rabbitmq.com/nack.html) in case of a failure. Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                             | `"true"`, `"false"`               |
+| prefetchCount     |    N     | Number of messages to [prefecth](https://www.rabbitmq.com/consumer-prefetch.html). Consider changing this to a non-zero value for production environments. Number of messages to [prefecth](https://www.rabbitmq.com/consumer-prefetch.html). Consider changing this to a non-zero value for production environments. Defaults to `"0"`, which means that all available messages will be pre-fetched. | `"2"`                             |
+| reconnectWait     |    N     | How long to wait (in seconds) before reconnecting if a connection failure occurs                                                                                                                                                                                                                                                                                                                      | `"0"`                             |
+| concurrencyMode   |    N     | `parallel` is the default, and allows processing multiple messages in parallel (limited by the `app-max-concurrency` annotation, if configured). Set to `single` to disable parallel processing. In most situations there's no reason to change this.                                                                                                                                                 | `parallel`, `single`              |
 
 
 ## Create a RabbitMQ server
@@ -78,7 +78,7 @@ helm install rabbitmq stable/rabbitmq
 
 Look at the chart output and get the username and password.
 
-This will install RabbitMQ into the `default` namespace. To interact with RabbitMQ, find the service with: `kubectl get svc rabbitmq`.
+This will install RabbitMQ into the `default` namespace. This will install RabbitMQ into the `default` namespace. To interact with RabbitMQ, find the service with: `kubectl get svc rabbitmq`.
 
 For example, if installing using the example above, the RabbitMQ server client address would be:
 
@@ -88,7 +88,7 @@ For example, if installing using the example above, the RabbitMQ server client a
 {{< /tabs >}}
 
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}}) in the Related links section
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
