@@ -13,7 +13,7 @@ This approach to secret management is not recommended for production environment
 
 ## Component format
 
-To setup local file based secret store create a component of type `secretstores.local.file`. Create a file with the following content in your `./components` directory:
+To setup local file based secret store create a component of type `secretstores.local.file`. Create a file with the following content in your `./components` directory: Create a file with the following content in your `./components` directory:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,10 +33,10 @@ spec:
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                          | Example               |
-| --------------- |:--------:| -------------------------------------------------------------------------------- | --------------------- |
-| secretsFile     |    Y     | The path to the file where secrets are stored                                    | `"path/to/file.json"` |
-| nestedSeparator |    N     | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"` | `":"`                 |
+| 字段              | Required | Details                                                                                            | Example               |
+| --------------- |:--------:| -------------------------------------------------------------------------------------------------- | --------------------- |
+| secretsFile     |    Y     | The path to the file where secrets are stored                                                      | `"path/to/file.json"` |
+| nestedSeparator |    N     | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"` Defaults to `":"` | `":"`                 |
 
 ## Setup JSON file to hold the secrets
 
@@ -62,7 +62,7 @@ The store will load the file and create a map with the following key value pairs
 
 Use the flattened key (`connectionStrings:sql`) to access the secret.
 
-## Related links
+## 相关链接
 - [Secrets building block]({{< ref secrets >}})
 - [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})
 - [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
