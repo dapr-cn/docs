@@ -7,7 +7,7 @@ description: "Detailed documentation on the Azure SignalR binding component"
 
 ## Component format
 
-To setup Azure SignalR binding create a component of type `bindings.azure.signalr`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Azure SignalR binding create a component of type `bindings.azure.signalr`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -32,13 +32,13 @@ spec:
 
 ## Spec metadata fields
 
-| 字段               | Required | Binding support | Details                                                                                                                                                       | Example                                                                                                            |
-| ---------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| connectionString |    Y     | Output          | The Azure SignalR connection string                                                                                                                           | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
-| hub              |    N     | Output          | Defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub") | `"myhub"`                                                                                                          |
+| 字段               | Required | Binding support | Details                                                                                                                                                                                                          | Example                                                                                                            |
+| ---------------- |:--------:| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| connectionString |    Y     | Output          | The Azure SignalR connection string                                                                                                                                                                              | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
+| hub              |    N     | Output          | Defines the hub in which the message will be send. Defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub") | `"myhub"`                                                                                                          |
 
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 
@@ -46,7 +46,7 @@ This component supports **output binding** with the following operations:
 
 ## Additional information
 
-By default the Azure SignalR output binding will broadcast messages to all connected users. To narrow the audience there are two options, both configurable in the Metadata property of the message:
+By default the Azure SignalR output binding will broadcast messages to all connected users. To narrow the audience there are two options, both configurable in the Metadata property of the message: To narrow the audience there are two options, both configurable in the Metadata property of the message:
 
 - group: Sends the message to a specific Azure SignalR group
 - user: Sends the message to a specific Azure SignalR user
