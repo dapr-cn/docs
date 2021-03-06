@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Bindings components"
+title: "绑定组件"
 linkTitle: "Bindings"
-description: "Guidance on setting up Dapr bindings components"
+description: "关于设置Dapr绑定组件的指南"
 weight: 4000
 ---
 
