@@ -9,7 +9,7 @@ description: >
 
 Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种编程语言和开发框架。
 
-<iframe src="//player.bilibili.com/player.html?aid=586108726&bvid=BV1xz4y167XA&cid=277928385&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+{{< youtube 9o9iDAgYBA8 >}}
 
 ## 任何语言，任何框架，任何地方
 
@@ -81,16 +81,16 @@ Dapr 可以托管在多种环境中，包括用于本地开发的自托管，或
 Dapr 可以与任何开发框架集成。 下面是一些已经和 Dapr 集成的。
 
 #### Web
- 例如，在 Dapr [.NET SDK ](https://github.com/dapr/dotnet-sdk) 中，您可以与 ASP.NET Core集成，它提供了有状态的路由控制器来响应来自其他服务的 pub/sub 事件。
-
  在 Dapr [Java SDK](https://github.com/dapr/java-sdk) 中，您可以找到 [Spring Boot](https://spring.io/) 集成。
+
+ 在 Dapr [PHP-SDK](https://github.com/dapr/php-sdk) 中，您可以使用 Apache， Nginx 或 Caddyserver。
 
 Dapr 很容易与Python [Flask](https://pypi.org/project/Flask/) 和 node [Express](http://expressjs.com/) 集成。 请参阅 [Dapr 快速开始](https://github.com/dapr/quickstarts) 中的示例。
 
-在 Dapr [PHP-SDK](https://github.com/dapr/php-sdk) 中，您可以使用 Apache， Nginx 或 Caddyserver。
+Dapr SDK 支持 [virtual actors]({{< ref actors >}}) ，这是简化并发、具有方法和状态封装的有状态对象，设计用于可扩展的分布式应用程序。
 
 #### Actor
-Dapr SDK 支持 [virtual actors]({{< ref actors >}}) ，这是简化并发、具有方法和状态封装的有状态对象，设计用于可扩展的分布式应用程序。
+Dapr SDKs support for [virtual actors]({{< ref actors >}}) which are stateful objects that make concurrency simple, have method and state encapsulation, and are designed for scalable, distributed applications.
 
 #### Azure Functions
 Dapr 通过扩展与 Azure Functions 运行时集成，使函数可以与 Dapr 无缝交互。 Azure Functions 提供事件驱动的编程模型， 而 Dapr 提供了云原生的构建块。 通过此扩展，您可以为无服务器和事件驱动的应用程序同时提供两者。 更多信息请阅读 [用于 Dapr 的 Azure Functions扩展](https://cloudblogs.microsoft.com/opensource/2020/07/01/announcing-azure-functions-extension-for-dapr/) 并访问 [Azure Functions 扩展](https://github.com/dapr/azure-functions-extension) 仓库以试用示例。
