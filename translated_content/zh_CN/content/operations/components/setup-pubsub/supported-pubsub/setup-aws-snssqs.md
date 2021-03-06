@@ -6,7 +6,7 @@ description: "Detailed documentation on the AWS SNS/SQS pubsub component"
 ---
 
 ## Component format
-To setup AWS SNS/SQS for pub/sub, you create a component of type `pubsub.snssqs`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+To setup AWS SNS/SQS for pub/sub, you create a component of type `pubsub.snssqs`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -37,31 +37,31 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                    | Required | Details                                                                                                                                                                                                                  | Example                                      |
-| ------------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| accessKey                |    Y     | ID of the AWS account with appropriate permissions to SNS and SQS. Can be `secretKeyRef` to use a secret reference                                                                                                       | `"AKIAIOSFODNN7EXAMPLE"`                     |
-| secretKey                |    Y     | Secret for the AWS user. Can be `secretKeyRef` to use a secret reference                                                                                                                                                 | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
-| region                   |    Y     | The AWS region to the instance. See this page for valid regions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html. Ensure that SNS and SQS are available in that region. | `"us-east-1"`                                |
-| endpoint                 |    N     | AWS endpoint for the component to use. Only used for local development. The `endpoint` is unncessary when running against production AWS                                                                                 | `"http://localhost:4566"`                    |
-| sessionToken             |    N     | AWS session token to use.  A session token is only required if you are using temporary security credentials                                                                                                              | `"TOKEN"`                                    |
-| messageVisibilityTimeout |    N     | Amount of time in seconds that a message is hidden from receive requests after it is sent to a subscriber. Default: `10`                                                                                                 | `10`                                         |
-| messageRetryLimit        |    N     | Number of times to resend a message after processing of that message fails before removing that message from the queue. Default: `10`                                                                                    | `10`                                         |
-| messageWaitTimeSeconds   |    N     | amount of time to await receipt of a message before making another request. Default: `1`                                                                                                                                 | `1`                                          |
-| messageMaxNumber         |    N     | maximum number of messages to receive from the queue at a time. Default: `10`, Maximum: `10`                                                                                                                             | `10`                                         |
+| 字段                       | Required | Details                                                                                                                                                                                                                                                                                                        | Example                                      |
+| ------------------------ |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| accessKey                |    Y     | ID of the AWS account with appropriate permissions to SNS and SQS. Can be `secretKeyRef` to use a secret reference Secret for the AWS user. Can be `secretKeyRef` to use a secret reference                                                                                                                    | `"AKIAIOSFODNN7EXAMPLE"`                     |
+| secretKey                |    Y     | Secret for the AWS user. Secret for the AWS user. Can be `secretKeyRef` to use a secret reference                                                                                                                                                                                                              | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
+| region                   |    Y     | The AWS region to the instance. The AWS region to the instance. See this page for valid regions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html. Ensure that SNS and SQS are available in that region. Ensure that SNS and SQS are available in that region. | `"us-east-1"`                                |
+| endpoint                 |    N     | AWS endpoint for the component to use. Only used for local development. AWS endpoint for the component to use. Only used for local development. The `endpoint` is unncessary when running against production AWS                                                                                               | `"http://localhost:4566"`                    |
+| sessionToken             |    N     | AWS session token to use.  A session token is only required if you are using temporary security credentials  A session token is only required if you are using temporary security credentials                                                                                                                  | `"TOKEN"`                                    |
+| messageVisibilityTimeout |    N     | Amount of time in seconds that a message is hidden from receive requests after it is sent to a subscriber. Default: `10` Default: `10`                                                                                                                                                                         | `10`                                         |
+| messageRetryLimit        |    N     | Number of times to resend a message after processing of that message fails before removing that message from the queue. Default: `10` Default: `10`                                                                                                                                                            | `10`                                         |
+| messageWaitTimeSeconds   |    N     | amount of time to await receipt of a message before making another request. Default: `1` Default: `1`                                                                                                                                                                                                          | `1`                                          |
+| messageMaxNumber         |    N     | maximum number of messages to receive from the queue at a time. Default: `10`, Maximum: `10` Default: `10`, Maximum: `10`                                                                                                                                                                                      | `10`                                         |
 
 ## Create an SNS/SQS instance
 
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" >}}
 
 {{% codetab %}}
-For local development the [localstack project](https://github.com/localstack/localstack) is used to integrate AWS SNS/SQS. Follow the instructions [here](https://github.com/localstack/localstack#installing) to install the localstack CLI.
+For local development the [localstack project](https://github.com/localstack/localstack) is used to integrate AWS SNS/SQS. Follow the instructions [here](https://github.com/localstack/localstack#installing) to install the localstack CLI. Follow the instructions [here](https://github.com/localstack/localstack#installing) to install the localstack CLI.
 
-In order to use localstack with your pubsub binding, you need to provide the `endpoint` configuration in the component metadata. The `endpoint` is unncessary when running against production AWS.
+In order to use localstack with your pubsub binding, you need to provide the `endpoint` configuration in the component metadata. The `endpoint` is unncessary when running against production AWS. The `endpoint` is unncessary when running against production AWS.
 
 See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
 
@@ -80,10 +80,10 @@ spec:
     - name: region
       value: us-east-1
 ```
-{{% /codetab %}}
+您可以使用 HTTP 来这样做：
 
 {{% codetab %}}
-To run localstack on Kubernetes, you can apply the configuration below. Localstack is then reachable at the DNS name `http://localstack.default.svc.cluster.local:4566` (assuming this was applied to the default namespace) and this should be used as the `endpoint`
+To run localstack on Kubernetes, you can apply the configuration below. To run localstack on Kubernetes, you can apply the configuration below. Localstack is then reachable at the DNS name `http://localstack.default.svc.cluster.local:4566` (assuming this was applied to the default namespace) and this should be used as the `endpoint`
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -128,12 +128,12 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-In order to run in AWS, you should create an IAM user with permissions to the SNS and SQS services. Use the `AWS account ID` and `AWS account secret` and plug them into the `accessKey` and `secretKey` in the component metadata using Kubernetes secrets and `secretKeyRef`.
+In order to run in AWS, you should create an IAM user with permissions to the SNS and SQS services. In order to run in AWS, you should create an IAM user with permissions to the SNS and SQS services. Use the `AWS account ID` and `AWS account secret` and plug them into the `accessKey` and `secretKey` in the component metadata using Kubernetes secrets and `secretKeyRef`.
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Pub/Sub building block]({{< ref pubsub >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
