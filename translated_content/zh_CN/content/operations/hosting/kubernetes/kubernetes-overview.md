@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Overview of Dapr on Kubernetes"
-linkTitle: "Overview"
+linkTitle: "Secrets stores overview"
 weight: 10000
 description: "Overview of how to get Dapr running on your Kubernetes cluster"
 ---
@@ -22,7 +22,7 @@ Read [this guide]({{< ref kubernetes-deploy.md >}}) to learn how to deploy Dapr 
 
 ## Adding Dapr to a Kubernetes deployment
 
-Deploying and running a Dapr enabled application into your Kubernetes cluster is a simple as adding a few annotations to the deployment schemes. To give your service an `id` and `port` known to Dapr, turn on tracing through configuration and launch the Dapr sidecar container, you annotate your Kubernetes deployment like this.
+Deploying and running a Dapr enabled application into your Kubernetes cluster is a simple as adding a few annotations to the deployment schemes. To give your service an `id` and `port` known to Dapr, turn on tracing through configuration and launch the Dapr sidecar container, you annotate your Kubernetes deployment like this. To give your service an `id` and `port` known to Dapr, turn on tracing through configuration and launch the Dapr sidecar container, you annotate your Kubernetes deployment like this.
 
 ```yml
   annotations:
