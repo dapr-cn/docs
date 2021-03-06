@@ -7,7 +7,7 @@ description: "Detailed documentation on the MQTT binding component"
 
 ## Component format
 
-To setup MQTT binding create a component of type `bindings.mqtt`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup MQTT binding create a component of type `bindings.mqtt`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -36,7 +36,7 @@ spec:
 | url   |    Y     | Input/Output    | The MQTT broker url                      | `"mqtt[s]://[username][:password]@host.domain[:port]"` |
 | topic |    Y     | Input/Output    | The topic to listen on or send events to | `"mytopic"`                                            |
 
-## Output bindings
+## Binding support
 
 This component supports both **input and output** binding interfaces.
 
