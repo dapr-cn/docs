@@ -7,7 +7,7 @@ description: "Detailed documentation on the Azure Storage Queues binding compone
 
 ## Component format
 
-To setup Azure Storage Queues binding create a component of type `bindings.azure.storagequeues`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Azure Storage Queues binding create a component of type `bindings.azure.storagequeues`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -36,14 +36,14 @@ spec:
 
 ## Spec metadata fields
 
-| 字段               | Required | Binding support | Details                                                                                                                                                           | Example       |
-| ---------------- |:--------:| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| storageAccount   |    Y     | Input/Output    | The Azure Storage account name                                                                                                                                    | `"account1"`  |
-| storageAccessKey |    Y     | Input/Output    | The Azure Storage access key                                                                                                                                      | `"accessKey"` |
-| queue            |    Y     | Input/Output    | The name of the Azure Storage queue                                                                                                                               | `"myqueue"`   |
-| ttlInSeconds     |    N     | Output          | Parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. See [also](#specifying-a-ttl-per-message) | `"60"`        |
+| 字段               | Required | Binding support | Details                                                                                                                                                                                                                                                        | Example       |
+| ---------------- |:--------:| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| storageAccount   |    Y     | Input/Output    | The Azure Storage account name                                                                                                                                                                                                                                 | `"account1"`  |
+| storageAccessKey |    Y     | Input/Output    | The Azure Storage access key                                                                                                                                                                                                                                   | `"accessKey"` |
+| queue            |    Y     | Input/Output    | The name of the Azure Storage queue                                                                                                                                                                                                                            | `"myqueue"`   |
+| ttlInSeconds     |    N     | Output          | Parameter to set the default message time to live. Parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. See [also](#specifying-a-ttl-per-message) See [also](#specifying-a-ttl-per-message) | `"60"`        |
 
-## Output bindings
+## Binding support
 
 This component supports both **input and output** binding interfaces.
 
