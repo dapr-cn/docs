@@ -6,9 +6,9 @@ weight: 20000
 description: "How to deploy and run Dapr in self-hosted mode using Docker"
 ---
 
-This article provides guidance on running Dapr with Docker outside of Kubernetes. There are a number of different configurations in which you may wish to run Dapr with Docker that are documented below.
+This article provides guidance on running Dapr with Docker outside of Kubernetes. This article provides guidance on running Dapr with Docker outside of Kubernetes. There are a number of different configurations in which you may wish to run Dapr with Docker that are documented below.
 
-## Prerequisites
+## 前期准备
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker-Compose](https://docs.docker.com/compose/install/) (optional)
 
@@ -38,7 +38,7 @@ There are published Docker images for each of the Dapr components available on [
 ## Run app as a process
 > For development purposes ONLY
 
-If you are running Dapr in a Docker container and your app as a process on the host machine, then you need to configure Docker to use the host network so that Dapr and the app can share a localhost network interface. Unfortunately, the host networking driver for Docker is only supported on Linux hosts. If you are running your Docker daemon on a Linux host, you should be able to run the following to launch Dapr.
+If you are running Dapr in a Docker container and your app as a process on the host machine, then you need to configure Docker to use the host network so that Dapr and the app can share a localhost network interface. Unfortunately, the host networking driver for Docker is only supported on Linux hosts. If you are running your Docker daemon on a Linux host, you should be able to run the following to launch Dapr. Unfortunately, the host networking driver for Docker is only supported on Linux hosts. If you are running your Docker daemon on a Linux host, you should be able to run the following to launch Dapr.
 ```shell
 docker run --net="host" --mount type=bind,source="$(pwd)"/components,target=/components daprio/daprd:edge ./daprd -app-id <my-app-id> -app-port <my-app-port>
 ```
@@ -49,7 +49,7 @@ However, if you are not running your Docker daemon on a Linux host, it is recomm
 ## Run app and Dapr in a single Docker container
 > For development purposes ONLY
 
-It is not recommended to run both the Dapr runtime and an application inside the same container. However, it is possible to do so for local development scenarios. In order to do this, you'll need to write a Dockerfile that installs the Dapr runtime, Dapr CLI and your app code. You can then invoke both the Dapr runtime and your app code using the Dapr CLI.
+It is not recommended to run both the Dapr runtime and an application inside the same container. However, it is possible to do so for local development scenarios. It is not recommended to run both the Dapr runtime and an application inside the same container. However, it is possible to do so for local development scenarios. In order to do this, you'll need to write a Dockerfile that installs the Dapr runtime, Dapr CLI and your app code. You can then invoke both the Dapr runtime and your app code using the Dapr CLI. You can then invoke both the Dapr runtime and your app code using the Dapr CLI.
 
 Below is an example of a Dockerfile which achieves this:
 ```
@@ -68,9 +68,12 @@ COPY python .
 RUN pip install requests
 ENTRYPOINT ["dapr"]
 CMD ["run", "--app-id", "nodeapp", "--app-port", "3000", "node", "app.js"]
+RUN pip install requests
+ENTRYPOINT ["dapr"]
+CMD ["run", "--app-id", "nodeapp", "--app-port", "3000", "node", "app.js"]
 ```
 
-Remember that if Dapr needs to communicate with other components i.e. Redis, these also need to be made accessible to it.
+Remember that if Dapr needs to communicate with other components i.e. Redis, these also need to be made accessible to it. Redis, these also need to be made accessible to it.
 
 ## Run on a Docker network
 If you have multiple instances of Dapr running in Docker containers and want them to be able to communicate with each other i.e. for service invocation, then you'll need to create a shared Docker network and make sure those Dapr containers are attached to it.
@@ -86,11 +89,11 @@ docker run --net=my-dapr-network ...
 Each container will receive a unique IP on that network and be able to communicate with other containers on that network.
 
 ## Run using Docker-Compose
-[Docker Compose](https://docs.docker.com/compose/) can be used to define multi-container application configurations. If you wish to run multiple apps with Dapr sidecars locally without Kubernetes then it is recommended to use a Docker Compose definition (`docker-compose.yml`).
+[Docker Compose](https://docs.docker.com/compose/) can be used to define multi-container application configurations. [Docker Compose](https://docs.docker.com/compose/) can be used to define multi-container application configurations. If you wish to run multiple apps with Dapr sidecars locally without Kubernetes then it is recommended to use a Docker Compose definition (`docker-compose.yml`).
 
 The syntax and tooling of Docker Compose is outside the scope of this article, however, it is recommended you refer to the [offical Docker documentation](https://docs.docker.com/compose/) for further details.
 
-In order to run your applications using Dapr and Docker Compose you'll need to define the sidecar pattern in your `docker-compose.yml`. For example:
+In order to run your applications using Dapr and Docker Compose you'll need to define the sidecar pattern in your `docker-compose.yml`. For example: For example:
 
 ```yaml
 version: '3'
@@ -126,6 +129,14 @@ services:
     ports:
       - "50006:50006"
     networks:
+      - hello-dapr Redis)
+
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+    networks:
       - hello-dapr
 ```
 
@@ -134,5 +145,5 @@ services:
 To further learn how to run Dapr with Docker Compose, see the [Docker-Compose Sample](https://github.com/dapr/samples/tree/master/hello-docker-compose).
 
 ## Run on Kubernetes
-If your deployment target is Kubernetes then you're probably better of running your applicaiton and Dapr sidecars directly on a Kubernetes platform. Running Dapr on Kubernetes is a first class experience and is documented separately. Please refer to the [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}})
+If your deployment target is Kubernetes then you're probably better of running your applicaiton and Dapr sidecars directly on a Kubernetes platform. Running Dapr on Kubernetes is a first class experience and is documented separately. Please refer to the [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}}) Running Dapr on Kubernetes is a first class experience and is documented separately. Please refer to the [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}})
 
