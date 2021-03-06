@@ -7,7 +7,7 @@ description: "Detailed documentation on the cron binding component"
 
 ## Component format
 
-To setup cron binding create a component of type `bindings.cron`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup cron binding create a component of type `bindings.cron`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -26,9 +26,9 @@ spec:
 
 ## Spec metadata fields
 
-| 字段       | Required | Binding support | Details                                                                       | Example        |
-| -------- |:--------:| --------------- | ----------------------------------------------------------------------------- | -------------- |
-| schedule |    Y     | Input/Output    | The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"` |
+| 字段       | Required | Binding support | Details                                                                                                       | Example        |
+| -------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------- | -------------- |
+| schedule |    Y     | Input/Output    | The valid cron schedule to use. The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"` |
 
 ### Schedule Format
 
@@ -57,7 +57,7 @@ For ease of use, the Dapr cron binding also supports few shortcuts:
 * `@every 15s` where `s` is seconds, `m` minutes, and `h` hours
 * `@daily` or `@hourly` which runs at that period from the time the binding is initialized
 
-## Output bindings
+## Binding support
 
 This component supports both **input and output** binding interfaces.
 
