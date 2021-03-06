@@ -6,7 +6,7 @@ weight: 3000
 description: "Set up Jaeger for distributed tracing"
 ---
 
-Dapr currently supports the Zipkin protocol. Since Jaeger is compatible with Zipkin, the Zipkin protocol can be used to talk to Jaeger.
+Dapr currently supports the Zipkin protocol. Dapr currently supports the Zipkin protocol. Since Jaeger is compatible with Zipkin, the Zipkin protocol can be used to talk to Jaeger.
 
 ## Configure self hosted mode
 
@@ -113,7 +113,7 @@ annotations:
   dapr.io/config: "tracing"
 ```
 
-That's it! Your Dapr sidecar is now configured for use with Jaeger.
+That's it! That's it! Your Dapr sidecar is now configured for use with Jaeger.
 
 ### Viewing Tracing Data
 
@@ -127,6 +127,6 @@ In your browser, go to `http://localhost:16686` and you will see the Jaeger UI.
 
 ![jaeger](/images/jaeger_ui.png)
 
-## References
+## 参考资料
 - [Jaeger Getting Started](https://www.jaegertracing.io/docs/1.21/getting-started/#all-in-one)
 - [W3C distributed tracing]({{< ref w3c-tracing >}})
