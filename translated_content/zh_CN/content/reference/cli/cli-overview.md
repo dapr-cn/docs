@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Dapr command line interface (CLI) reference"
-linkTitle: "Overview"
-description: "Detailed information on the Dapr CLI"
+title: "Dapr 命令行接口 （CLI） 参考"
+linkTitle: "Secrets stores overview"
+description: "Dapr CLI 命令的详细信息"
 weight: 10
 ---
 
-The Dapr CLI allows you to setup Dapr on your local dev machine or on a Kubernetes cluster, provides debugging support, and launches and manages Dapr instances.
+Dapr CLI 允许您在本地开发机或Kubernetes集群上安装Dapr。 提供调试支持，启动和管理 Dapr 实例。
 
 ```bash
 
@@ -48,9 +48,9 @@ Flags:
 Use "dapr [command] --help" for more information about a command.
 ```
 
-## Command Reference
+## 命令参考
 
-You can learn more about each Dapr command from the links below.
+您可以通过以下链接了解有关每个 Dapr 命令的详细信息。
 
  - [`dapr completion`]({{< ref dapr-completion.md >}})
  - [`dapr components`]({{< ref dapr-components.md >}})
@@ -69,6 +69,6 @@ You can learn more about each Dapr command from the links below.
  - [`dapr uninstall`]({{< ref dapr-uninstall.md >}})
  - [`dapr upgrade`]({{< ref dapr-upgrade.md >}})
 
-## Environment Variables
+## 环境变量
 
-Some Dapr flags can be set via environment variables (e.g. `DAPR_NETWORK` for the `--network` flag of the `dapr init` command). Note that specifying the flag on the command line overrides any set environment variable.
+一些 Dapr 参数可以通过环境变量进行设置（例如 `DAPR_NETWORK` 自动用在 `dapr init` 命令的 `--network` 参数上）。 请注意，在命令行上指定标志将覆盖环境变量。
