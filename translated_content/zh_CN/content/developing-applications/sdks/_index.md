@@ -7,7 +7,7 @@ description: "Use your favorite languages with Dapr"
 no_list: true
 ---
 
-The Dapr SDKs are the easiest way for you to get Dapr into your application. Choose your favorite language and get up and running with Dapr in minutes.
+The Dapr SDKs are the easiest way for you to get Dapr into your application. Choose your favorite language and get up and running with Dapr in minutes. Choose your favorite language and get up and running with Dapr in minutes.
 
 ## SDK packages
 
@@ -29,7 +29,7 @@ The Dapr SDKs are the easiest way for you to get Dapr into your application. Cho
 
 ## SDK languages
 
-| Language                                 | Status         | Client SDK |             Server extensions             |                                        Actor SDK                                         |
+| 语言                                       | 状态 （State）     | Client SDK |             Server extensions             |                                        Actor SDK                                         |
 | ---------------------------------------- |:-------------- |:----------:|:-----------------------------------------:|:----------------------------------------------------------------------------------------:|
 | [.NET]({{< ref dotnet >}})               | Stable         |     ✔      | [ASP.NET Core]({{< ref dotnet-aspnet >}}) |                                            ✔                                             |
 | [Python]({{< ref python >}})             | Stable         |     ✔      |    [gRPC]({{< ref python-grpc.md >}})     | [FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |
