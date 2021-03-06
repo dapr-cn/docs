@@ -6,12 +6,12 @@ description: Detailed information on the Azure Key Vault secret store component
 ---
 
 {{% alert title="Note" color="primary" %}}
-Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}).
+Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}). Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}).
 {{% /alert %}}
 
 ## Component format
 
-To setup Azure Key Vault secret store create a component of type `secretstores.azure.keyvault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+To setup Azure Key Vault secret store create a component of type `secretstores.azure.keyvault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 See also [configure the component](#configure-the-component) guide in this page.
 
@@ -35,17 +35,17 @@ spec:
     value : "[pfx_certificate_file_fully_qualified_local_path]"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field              | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                         |
-| ------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| vaultName          |    Y     | The name of the Azure Key Vault                                                                                                                                                                                                                                                                                                                                                                                                      | `"mykeyvault"`                                                                  |
-| spnTenantId        |    Y     | Service Principal Tenant Id                                                                                                                                                                                                                                                                                                                                                                                                          | `"spnTenantId"`                                                                 |
-| spnClientId        |    Y     | Service Principal App Id                                                                                                                                                                                                                                                                                                                                                                                                             | `"spnAppId"`                                                                    |
-| spnCertificateFile |    Y     | PFX certificate file path. <br></br> For Windows the `[pfx_certificate_file_fully_qualified_local_path]` value must use escaped backslashes, i.e. double backslashes. For example `"C:\\folder1\\folder2\\certfile.pfx"`. <br></br> For Linux you can use single slashes. For example `"/folder1/folder2/certfile.pfx"`.  <br></br> See [configure the component](#configure-the-component) for more details | `"C:\\folder1\\folder2\\certfile.pfx"`, `"/folder1/folder2/certfile.pfx"` |
+| 字段                 | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example                                                                         |
+| ------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| vaultName          |    Y     | The name of the Azure Key Vault                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `"mykeyvault"`                                                                  |
+| spnTenantId        |    Y     | Service Principal Tenant Id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `"spnTenantId"`                                                                 |
+| spnClientId        |    Y     | Service Principal App Id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `"spnAppId"`                                                                    |
+| spnCertificateFile |    Y     | PFX certificate file path. PFX certificate file path. <br></br> For Windows the `[pfx_certificate_file_fully_qualified_local_path]` value must use escaped backslashes, i.e. double backslashes. For example `"C:\\folder1\\folder2\\certfile.pfx"`. <br></br> For Linux you can use single slashes. For example `"/folder1/folder2/certfile.pfx"`.  <br></br> See [configure the component](#configure-the-component) for more details For example `"C:\\folder1\\folder2\\certfile.pfx"`. <br></br> For Linux you can use single slashes. For example `"/folder1/folder2/certfile.pfx"`.  <br></br> See [configure the component](#configure-the-component) for more details | `"C:\\folder1\\folder2\\certfile.pfx"`, `"/folder1/folder2/certfile.pfx"` |
 
 ## Setup Key Vault and service principal
 
@@ -74,7 +74,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 3. Create a service principal
 
-    Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. You can skip this step if you want to use an existing service principal for keyvault instead of creating new one
+    Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. You can skip this step if you want to use an existing service principal for keyvault instead of creating new one
 
     ```bash
     az ad sp create-for-rbac --name [your_service_principal_name] --create-cert --cert [certificate_name] --keyvault [your_keyvault] --skip-assignment --years 1
@@ -101,6 +101,10 @@ The above example uses secrets as plain strings. It is recommended to use a loca
         "objectType": "ServicePrincipal",
         ...
     }
+        "objectId": "[your_service_principal_object_id]",
+        "objectType": "ServicePrincipal",
+        ...
+    }
     ```
 
 5. Grant the service principal the GET permission to your Azure Key Vault
@@ -115,7 +119,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 - **Using the Azure portal:**
 
-  Go to your key vault on the Azure portal and navigate to the *Certificates* tab under *Settings*. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it.
+  Go to your key vault on the Azure portal and navigate to the *Certificates* tab under *Settings*. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it.
 
   Click *Download in PFX/PEM format* to download the certificate.
 
