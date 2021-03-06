@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "概述"
+title: "Overview"
 linkTitle: "Overview"
 description: "Guidance on set up for state management components"
 weight: 10000
 ---
 
-Dapr integrates with existing databases to provide apps with state management capabilities for CRUD operations, transactions and more. It also supports the configuration of multiple, named, state store components *per application*.
+Dapr integrates with existing databases to provide apps with state management capabilities for CRUD operations, transactions and more. It also supports the configuration of multiple, named, state store components *per application*. It also supports the configuration of multiple, named, state store components *per application*.
 
 State stores are extensible and can be found in the [components-contrib repo](https://github.com/dapr/components-contrib).
 
@@ -29,7 +29,7 @@ spec:
 ...
 ```
 
-The type of database is determined by the `type` field, and things like connection strings and other metadata are put in the `.metadata` section. Even though metadata values can contain secrets in plain text, it is recommended you use a [secret store]({{< ref component-secrets.md >}}).
+The type of database is determined by the `type` field, and things like connection strings and other metadata are put in the `.metadata` section. The type of database is determined by the `type` field, and things like connection strings and other metadata are put in the `.metadata` section. Even though metadata values can contain secrets in plain text, it is recommended you use a [secret store]({{< ref component-secrets.md >}}).
 
 Visit [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to configure a state store component.
 
