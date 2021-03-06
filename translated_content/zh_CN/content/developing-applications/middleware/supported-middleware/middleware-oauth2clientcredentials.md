@@ -6,7 +6,7 @@ weight: 3000
 description: "Use OAuth2 client credentials middleware to secure HTTP endpoints"
 ---
 
-The OAuth2 client credentials [HTTP middleware]({{< ref middleware-concept.md >}}) enables the [OAuth2 Client Credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
+The OAuth2 client credentials [HTTP middleware]({{< ref middleware-concept.md >}}) enables the [OAuth2 Client Credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
 
 ## Component format
 
@@ -32,7 +32,7 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field               | Details                                                                                                                                                                      | Example                                            |
+| 字段                  | Details                                                                                                                                                                      | 示例                                                 |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | clientId            | The client ID of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                                 |                                                    |
 | clientSecret        | The client secret of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                             |                                                    |
@@ -40,19 +40,19 @@ spec:
 | tokenURL            | The endpoint is used by the client to obtain an access token by presenting its authorization grant or refresh token                                                          | `"https://accounts.google.com/o/oauth2/token"`     |
 | headerName          | The authorization header name to forward to your application                                                                                                                 | `"authorization"`                                  |
 | endpointParamsQuery | Specifies additional parameters for requests to the token endpoint                                                                                                           | `true`                                             |
-| authStyle           | Optionally specifies how the endpoint wants the client ID & client secret sent. See the table of possible values below                                                       | `0`                                                |
+| authStyle           | Optionally specifies how the endpoint wants the client ID & client secret sent. See the table of possible values below See the table of possible values below                | `0`                                                |
 
 ### Possible values for `authStyle`
 
-| Value | Meaning                                                                                                                                                                                                    |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `1`   | Sends the "client_id" and "client_secret" in the POST body as application/x-www-form-urlencoded parameters.                                                                                              |
-| `2`   | Sends the "client_id" and "client_secret" using HTTP Basic Authorization. This is an optional style described in the [OAuth2 RFC 6749 section 2.3.1](https://tools.ietf.org/html/rfc6749#section-2.3.1). |
-| `0`   | Means to auto-detect which authentication style the provider wants by trying both ways and caching the successful way for the future.                                                                      |
+| Value | Meaning                                                                                                                                                                                                                                                                                                                                   |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `1`   | Sends the "client_id" and "client_secret" in the POST body as application/x-www-form-urlencoded parameters.                                                                                                                                                                                                                             |
+| `2`   | Sends the "client_id" and "client_secret" using HTTP Basic Authorization. This is an optional style described in the [OAuth2 RFC 6749 section 2.3.1](https://tools.ietf.org/html/rfc6749#section-2.3.1). This is an optional style described in the [OAuth2 RFC 6749 section 2.3.1](https://tools.ietf.org/html/rfc6749#section-2.3.1). |
+| `0`   | Means to auto-detect which authentication style the provider wants by trying both ways and caching the successful way for the future.                                                                                                                                                                                                     |
 
 ## Dapr configuration
 
-To be applied, the middleware must be referenced in a [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+To be applied, the middleware must be referenced in a [configuration]({{< ref configuration-concept.md >}}). To be applied, the middleware must be referenced in a [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -66,7 +66,7 @@ spec:
       type: middleware.http.oauth2clientcredentials
 ```
 
-## Related links
+## 相关链接
 - [Middleware concept]({{< ref middleware-concept.md >}})
 - [Configuration concept]({{< ref configuration-concept.md >}})
 - [Configuration overview]({{< ref configuration-overview.md >}})
