@@ -22,20 +22,20 @@ POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId
 
 #### HTTP 响应码
 
-| 代码  | 说明          |
-| --- | ----------- |
-| 200 | 请求成功        |
-| 500 | 请求失败        |
-| XXX | 来自上游调用的状态代码 |
+| Code | 说明          |
+| ---- | ----------- |
+| 200  | 请求成功        |
+| 500  | 请求失败        |
+| XXX  | 来自上游调用的状态代码 |
 
 #### URL 参数
 
-| 参数        | 描述         |
-| --------- | ---------- |
-| daprPort  | Dapr 端口。   |
-| actorType | Actor 类型。  |
-| actorId   | Actor ID   |
-| method    | 要调用的方法的名称。 |
+| 参数        | 描述            |
+| --------- | ------------- |
+| daprPort  | Dapr 端口。      |
+| actorType | Actor 类型。     |
+| actorId   | The actor ID. |
+| method    | 要调用的方法的名称。    |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -81,21 +81,21 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state
 
 #### HTTP 响应码
 
-| 代码  | 描述        |
-| --- | --------- |
-| 204 | 请求成功      |
-| 400 | 未找到 Actor |
-| 500 | 请求失败      |
+| Code | 描述        |
+| ---- | --------- |
+| 204  | 请求成功      |
+| 400  | 未找到 Actor |
+| 500  | 请求失败      |
 
 
 
 #### URL 参数
 
-| 参数        | 描述        |
-| --------- | --------- |
-| daprPort  | Dapr 端口。  |
-| actorType | Actor 类型。 |
-| actorId   | Actor ID  |
+| 参数        | 描述            |
+| --------- | ------------- |
+| daprPort  | Dapr 端口。      |
+| actorType | Actor 类型。     |
+| actorId   | The actor ID. |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -133,22 +133,22 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state/<key>
 
 #### HTTP 响应码
 
-| 代码  | 描述          |
-| --- | ----------- |
-| 200 | 请求成功        |
-| 204 | 找不到键值，响应将为空 |
-| 400 | 未找到 Actor   |
-| 500 | 请求失败        |
+| Code | 描述          |
+| ---- | ----------- |
+| 200  | 请求成功        |
+| 204  | 找不到键值，响应将为空 |
+| 400  | 未找到 Actor   |
+| 500  | 请求失败        |
 
 
 #### URL 参数
 
-| 参数        | 描述        |
-| --------- | --------- |
-| daprPort  | Dapr 端口。  |
-| actorType | Actor 类型。 |
-| actorId   | Actor ID  |
-| key       | 状态的 key   |
+| 参数        | 描述            |
+| --------- | ------------- |
+| daprPort  | Dapr 端口。      |
+| actorType | Actor 类型。     |
+| actorId   | The actor ID. |
+| key       | 状态的 key       |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -205,11 +205,11 @@ Body:
 
 #### HTTP 响应码
 
-| Code | 描述                  |
-| ---- | ------------------- |
-| 204  | 请求成功                |
-| 500  | 请求失败                |
-| 400  | 未找到 Actor 或格式不正确的请求 |
+| Code | 描述                                   |
+| ---- | ------------------------------------ |
+| 204  | 请求成功                                 |
+| 500  | 请求失败                                 |
+| 400  | Actor not found or malformed request |
 
 #### URL 参数
 
@@ -217,7 +217,7 @@ Body:
 | --------- | ------------------ |
 | daprPort  | Dapr 端口。           |
 | actorType | Actor 类型。          |
-| actorId   | Actor ID           |
+| actorId   | The actor ID.      |
 | name      | 要创建 reminders 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
@@ -302,7 +302,7 @@ DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<
 | --------- | ------------------ |
 | daprPort  | Dapr 端口。           |
 | actorType | Actor 类型。          |
-| actorId   | Actor ID           |
+| actorId   | The actor ID.      |
 | name      | 要删除 reminders 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
@@ -356,7 +356,7 @@ Body:
 | --------- | -------------- |
 | daprPort  | Dapr 端口。       |
 | actorType | Actor 类型。      |
-| actorId   | Actor ID       |
+| actorId   | The actor ID.  |
 | name      | 要创建 timer 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
@@ -397,7 +397,7 @@ DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<nam
 | --------- | -------------- |
 | daprPort  | Dapr 端口。       |
 | actorType | Actor 类型。      |
-| actorId   | Actor ID       |
+| actorId   | The actor ID.  |
 | name      | 要删除 timer 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
@@ -482,11 +482,11 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 
 #### URL 参数
 
-| 参数        | 说明        |
-| --------- | --------- |
-| appPort   | 应用程序端口    |
-| actorType | Actor 类型。 |
-| actorId   | Actor ID  |
+| 参数        | 说明            |
+| --------- | ------------- |
+| appPort   | 应用程序端口        |
+| actorType | Actor 类型。     |
+| actorId   | The actor ID. |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -519,12 +519,12 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
 
 #### URL 参数
 
-| 参数         | 说明         |
-| ---------- | ---------- |
-| appPort    | 应用程序端口     |
-| actorType  | Actor 类型。  |
-| actorId    | Actor ID   |
-| methodName | 要调用的方法的名称。 |
+| 参数         | 说明            |
+| ---------- | ------------- |
+| appPort    | 应用程序端口        |
+| actorType  | Actor 类型。     |
+| actorId    | The actor ID. |
+| methodName | 要调用的方法的名称。    |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -561,7 +561,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/remind/<remin
 | ------------ | ------------------ |
 | appPort      | 应用程序端口             |
 | actorType    | Actor 类型。          |
-| actorId      | Actor ID           |
+| actorId      | The actor ID.      |
 | reminderName | 要调用 reminders 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
@@ -599,7 +599,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/timer/<timerN
 | --------- | -------------- |
 | appPort   | 应用程序端口         |
 | actorType | Actor 类型。      |
-| actorId   | Actor ID       |
+| actorId   | The actor ID.  |
 | timerName | 要调用 timer 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
