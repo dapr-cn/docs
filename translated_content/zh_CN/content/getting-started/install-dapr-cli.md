@@ -5,7 +5,7 @@ linkTitle: "Install Dapr CLI"
 weight: 10
 ---
 
-The Dapr CLI is the main tool you'll be using for various Dapr related tasks. You can use it to run an application with a Dapr sidecar, as well as review sidecar logs, list running services, and run the Dapr dashboard. The Dapr CLI works with both [self-hosted]({{< ref self-hosted >}}) and [Kubernetes]({{< ref Kubernetes >}}) environments.
+The Dapr CLI is the main tool you'll be using for various Dapr related tasks. The Dapr CLI is the main tool you'll be using for various Dapr related tasks. You can use it to run an application with a Dapr sidecar, as well as review sidecar logs, list running services, and run the Dapr dashboard. The Dapr CLI works with both [self-hosted]({{< ref self-hosted >}}) and [Kubernetes]({{< ref Kubernetes >}}) environments. The Dapr CLI works with both [self-hosted]({{< ref self-hosted >}}) and [Kubernetes]({{< ref Kubernetes >}}) environments.
 
 Begin by downloading and installing the Dapr CLI:
 
@@ -37,7 +37,7 @@ brew install dapr/tap/dapr-cli
 ```
 
 {{% alert title="Note for M1 Macs" color="primary" %}}
-For M1 Macs, homebrew is not supported. You will need to use the dapr install script and have the rosetta amd64 compatibility layer installed. If you do not have it installed already, you can run the following:
+For M1 Macs, homebrew is not supported. You will need to use the dapr install script and have the rosetta amd64 compatibility layer installed. If you do not have it installed already, you can run the following: You will need to use the dapr install script and have the rosetta amd64 compatibility layer installed. If you do not have it installed already, you can run the following:
 
 ```bash
 softwareupdate --install-rosetta
@@ -49,13 +49,13 @@ softwareupdate --install-rosetta
 {{% /codetab %}}
 
 {{% codetab %}}
-Each release of Dapr CLI includes various OSes and architectures. These binary versions can be manually downloaded and installed.
+Each release of Dapr CLI includes various OSes and architectures. These binary versions can be manually downloaded and installed. These binary versions can be manually downloaded and installed.
 
 1. Download the desired Dapr CLI from the latest [Dapr Release](https://github.com/dapr/cli/releases)
 2. Unpack it (e.g. dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip)
 3. Move it to your desired location.
    - For Linux/MacOS - `/usr/local/bin`
-   - For Windows, create a directory and add this to your System PATH. For example create a directory called `C:\dapr` and add this directory to your User PATH, by editing your system environment variable.
+   - For Windows, create a directory and add this to your System PATH. For Windows, create a directory and add this to your System PATH. For example create a directory called `C:\dapr` and add this directory to your User PATH, by editing your system environment variable.
 {{% /codetab %}}
 {{< /tabs >}}
 
