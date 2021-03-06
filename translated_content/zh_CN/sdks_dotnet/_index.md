@@ -45,7 +45,7 @@ Dapr offers a variety of packages to help with the development of .NET applicati
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>Troubleshooting</b></h5>
-      <p class="card-text">Detailed documentation on the Dapr API, CLI, bindings and more.</p>
+      <p class="card-text">关于 Dapr API，CLI，资源绑定及更多内容的详细文档</p>
       <a href="{{< ref reference >}}" class="stretched-link"></a>
     </div>
   </div>
