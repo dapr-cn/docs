@@ -7,7 +7,7 @@ description: "Use your favorite languages with Dapr"
 no_list: true
 ---
 
-The Dapr SDKs are the easiest way for you to get Dapr into your application. Choose your favorite language and get up and running with Dapr in minutes.
+The Dapr SDKs are the easiest way for you to get Dapr into your application. Choose your favorite language and get up and running with Dapr in minutes. Choose your favorite language and get up and running with Dapr in minutes.
 
 ## SDK packages
 
