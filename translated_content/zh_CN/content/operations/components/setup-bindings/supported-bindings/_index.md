@@ -7,20 +7,20 @@ description: The supported external bindings that interface with Dapr
 no_list: true
 ---
 
-Every binding has its own unique set of properties. Click the name link to see the component YAML for each binding.
+Every binding has its own unique set of properties. Every binding has its own unique set of properties. Click the name link to see the component YAML for each binding.
 
 
 Table captions:
 
-> `Status`: [Component certification]({{X63X}}) status
+> `Status`: [Component certification]({{X63X}}) status
   - [Alpha]({{X52X}})
   - [Beta]({{X54X}})
-  - [GA]({{X56X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X56X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
 
 > `Component version`: defines the version of the component
 ### Generic
 
-| Name                                                     | Input<br>Binding | Output<br>Binding | Status | Component version | Since runtime version |
+| 名称                                                       | Input<br>Binding | Output<br>Binding | Status | Component version | Since runtime version |
 | -------------------------------------------------------- |:----------------------:|:-----------------------:| ------ | ----------------- | --------------------- |
 | [Apple Push Notifications (APN)]({{< ref apns.md >}})    |                        |            ✅            | Alpha  | v1                | 1.0                   |
 | [Cron (Scheduler)]({{< ref cron.md >}})                  |           ✅            |            ✅            | Alpha  | v1                | 1.0                   |
