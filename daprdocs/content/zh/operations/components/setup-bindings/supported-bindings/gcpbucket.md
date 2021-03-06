@@ -7,7 +7,7 @@ description: "Detailed documentation on the GCP Storage Bucket binding component
 
 ## Component format
 
-To setup GCP Storage Bucket binding create a component of type `bindings.gcp.bucket`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup GCP Storage Bucket binding create a component of type `bindings.gcp.bucket`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -50,21 +50,21 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                              | Required | Binding support | Details                                             | Example                                                                                          |
-| ------------------------------- |:--------:| --------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| bucket                          |    Y     | Output          | The bucket name                                     | `"mybucket"`                                                                                     |
-| type                            |    Y     | Output          | Tge GCP credentials type                            | `"service_account"`                                                                              |
-| project_id                      |    Y     | Output          | GCP project id                                      | `projectId`                                                                                      |
-| private_key_id                |    Y     | Output          | GCP private key id                                  | `"privateKeyId"`                                                                                 |
-| private_key                     |    Y     | Output          | GCP credentials private key. Replace with x509 cert | `12345-12345`                                                                                    |
-| client_email                    |    Y     | Output          | GCP client email                                    | `"client@email.com"`                                                                             |
-| client_id                       |    Y     | Output          | GCP client id                                       | `0123456789-0123456789`                                                                          |
-| auth_uri                        |    Y     | Output          | Google account OAuth endpoint                       | `https://accounts.google.com/o/oauth2/auth`                                                      |
-| token_uri                       |    Y     | Output          | Google account token uri                            | `https://oauth2.googleapis.com/token`                                                            |
-| auth_provider_x509_cert_url |    Y     | Output          | GCP credentials cert url                            | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
-| client_x509_cert_url          |    Y     | Output          | GCP credentials project x509 cert url               | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
+| 字段                              | Required | Binding support | Details                                                                    | Example                                                                                          |
+| ------------------------------- |:--------:| --------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| bucket                          |    Y     | Output          | The bucket name                                                            | `"mybucket"`                                                                                     |
+| type                            |    Y     | Output          | Tge GCP credentials type                                                   | `"service_account"`                                                                              |
+| project_id                      |    Y     | Output          | GCP project id                                                             | `projectId`                                                                                      |
+| private_key_id                |    Y     | Output          | GCP private key id                                                         | `"privateKeyId"`                                                                                 |
+| private_key                     |    Y     | Output          | GCP credentials private key. Replace with x509 cert Replace with x509 cert | `12345-12345`                                                                                    |
+| client_email                    |    Y     | Output          | GCP client email                                                           | `"client@email.com"`                                                                             |
+| client_id                       |    Y     | Output          | GCP client id                                                              | `0123456789-0123456789`                                                                          |
+| auth_uri                        |    Y     | Output          | Google account OAuth endpoint                                              | `https://accounts.google.com/o/oauth2/auth`                                                      |
+| token_uri                       |    Y     | Output          | Google account token uri                                                   | `https://oauth2.googleapis.com/token`                                                            |
+| auth_provider_x509_cert_url |    Y     | Output          | GCP credentials cert url                                                   | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
+| client_x509_cert_url          |    Y     | Output          | GCP credentials project x509 cert url                                      | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 
