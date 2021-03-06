@@ -2,13 +2,13 @@
 type: docs
 title: "Production guidelines on Kubernetes"
 linkTitle: "Production guidelines"
-weight: 40000
+weight: 10000
 description: "Recommendations and practices for deploying Dapr to a Kubernetes cluster in a production ready configuration"
 ---
 
 ## Cluster capacity requirements
 
-For a production ready Kubernetes cluster deployment, it is recommended you run a cluster of at least 3 worker nodes to support a highly-available control plane installation. Use the following resource settings might serve as a starting point. Requirements will vary depending on cluster size and other factors, so individual testing is needed to find the right values for your environment:
+For a production ready Kubernetes cluster deployment, it is recommended you run a cluster of at least 3 worker nodes to support a highly-available control plane installation. Use the following resource settings might serve as a starting point. Requirements will vary depending on cluster size and other factors, so individual testing is needed to find the right values for your environment: Use the following resource settings might serve as a starting point. Requirements will vary depending on cluster size and other factors, so individual testing is needed to find the right values for your environment:
 
 *Note: For more info on CPU and Memory resource units and their meaning, see [this](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes) link*
 
@@ -32,16 +32,16 @@ The following Dapr control plane deployments are optional:
 - **Sentry** - Needed for mTLS for service to service invocation
 - **Dashboard** - Needed for operational view of the cluster
 
-## Sidecar resource settings
+## Sidecar resource requirements
 
-To set the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "kubernetes-annotations.md" >}}). The specific annotations related to resource constraints are:
+To set the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "kubernetes-annotations.md" >}}). The specific annotations related to resource constraints are: The specific annotations related to resource constraints are:
 
 - `dapr.io/sidecar-cpu-limit`
 - `dapr.io/sidecar-memory-limit`
 - `dapr.io/sidecar-cpu-request`
 - `dapr.io/sidecar-memory-request`
 
-If not set, the dapr sidecar will run without resource settings, which may lead to issues. For a production-ready setup it is strongly recommended to configure these settings.
+If not set, the dapr sidecar will run without resource settings, which may lead to issues. For a production-ready setup it is strongly recommended to configure these settings. For a production-ready setup it is strongly recommended to configure these settings.
 
 For more details on configuring resource in Kubernetes see [Assign Memory Resources to Containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) and [Assign CPU Resources to Containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/).
 
@@ -53,7 +53,7 @@ Example settings for the dapr sidecar in a production-ready setup:
 
 *Note: Since Dapr is intended to do much of the I/O heavy lifting for your app, it's expected that the resources given to Dapr enable you to drastically reduce the resource allocations for the application*
 
-The CPU and memory limits above account for the fact that Dapr is intended to a high number of I/O bound operations. It is strongly recommended that you use a tool monitoring tool to baseline the sidecar (and app) containers and tune these settings based on those baselines.
+The CPU and memory limits above account for the fact that Dapr is intended to a high number of I/O bound operations. It is strongly recommended that you use a tool monitoring tool to baseline the sidecar (and app) containers and tune these settings based on those baselines. It is strongly recommended that you use a tool monitoring tool to baseline the sidecar (and app) containers and tune these settings based on those baselines.
 
 ## Highly-available mode
 
@@ -71,30 +71,7 @@ For a full list of all available options you can set in the values file (or by u
 Instead of using either `helm install` or `helm upgrade` as shown below, you can also run `helm upgrade --install` - this will dynamically determine whether to install or upgrade.
 
 ```bash
-# add/update the helm repo
-helm repo add dapr https://dapr.github.io/helm-charts/
-helm repo update
-
-# See which chart versions are available
-helm search repo dapr --devel --versions
-
-# create a values file to store variables
-touch values.yml
-cat << EOF >> values.yml
-global.ha.enabled: true
-
-EOF
-
-# run install/upgrade
-helm install dapr dapr/dapr \
-  --version=<Dapr chart version> \
-  --namespace dapr-system \
-  --create-namespace \
-  --values values.yml \
-  --wait
-
-# verify the installation
-kubectl get pods --namespace dapr-system
+helm install dapr dapr/dapr --version=<Dapr chart version> --namespace dapr-system --set global.ha.enabled=true
 ```
 
 This command will run 3 replicas of each control plane service in the dapr-system namespace.
@@ -140,11 +117,11 @@ When properly configured, Dapr ensures secure communication. It can also make yo
 
 It is recommended that a production-ready deployment includes the following settings:
 
-1. **Mutual Authentication (mTLS)** should be enabled. Note that Dapr has mTLS on by default. For details on how to bring your own certificates, see [here]({{< ref "mtls.md#bringing-your-own-certificates" >}})
+1. **Mutual Authentication (mTLS)** should be enabled. Note that Dapr has mTLS on by default. Mutual Authentication (mTLS) should be enabled. Note that Dapr has mTLS on by default. For details on how to bring your own certificates, see [here]({{< ref "mtls.md#bringing-your-own-certificates" >}})
 
-2. **App to Dapr API authentication** is enabled. This is the communication between your application and the Dapr sidecar. To secure the Dapr API from unauthorized application access, it is recommended to enable Dapr's token based auth. See [enable API token authentication in Dapr]({{< ref "api-token.md" >}}) for details
+2. **App to Dapr API authentication** is enabled. This is the communication between your application and the Dapr sidecar. App to Dapr API authentication is enabled. This is the communication between your application and the Dapr sidecar. To secure the Dapr API from unauthorized application access, it is recommended to enable Dapr's token based auth. See [enable API token authentication in Dapr]({{< ref "api-token.md" >}}) for details See [enable API token authentication in Dapr]({{< ref "api-token.md" >}}) for details
 
-3. **Dapr to App API authentication** is enabled. This is the communication between Dapr and your application. This ensures that Dapr knows that it is communicating with an authorized application. See [Authenticate requests from Dapr using token authentication]({{< ref "app-api-token.md" >}}) for details
+3. **Dapr to App API authentication** is enabled. This is the communication between Dapr and your application. This ensures that Dapr knows that it is communicating with an authorized application. Dapr to App API authentication is enabled. This is the communication between Dapr and your application. This ensures that Dapr knows that it is communicating with an authorized application. See [Authenticate requests from Dapr using token authentication]({{< ref "app-api-token.md" >}}) for details
 
 4. All component YAMLs should have **secret data configured in a secret store** and not hard-coded in the YAML file. See [here]({{< ref "component-secrets.md" >}}) on how to use secrets with Dapr components
 
