@@ -7,7 +7,7 @@ description: "Detailed documentation on the Postmark binding component"
 
 ## Component format
 
-To setup Postmark binding create a component of type `bindings.postmark`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Postmark binding create a component of type `bindings.postmark`. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -28,15 +28,15 @@ spec:
   - name: emailTo
     value: "dave@dapr.io" # optional
   - name: subject
-    value: "Hello!" # optional
+    value: "Hello!" # optional # optional
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field        | Required | Binding support | Details                                                              | Example            |
+| 字段           | Required | Binding support | Details                                                              | Example            |
 | ------------ |:--------:| --------------- | -------------------------------------------------------------------- | ------------------ |
 | accountToken |    Y     | Output          | The Postmark account token, this should be considered a secret value | `"account token"`  |
 | serverToken  |    Y     | Output          | The Postmark server token, this should be considered a secret value  | `"server token"`   |
@@ -51,7 +51,7 @@ You can specify any of the optional metadata properties on the output binding re
 Combined, the optional metadata properties in the component configuration and the request payload should at least contain the `emailFrom`, `emailTo` and `subject` fields, as these are required to send an email with success.
 
 
-## Binding support
+## 相关链接
 
 This component supports **output binding** with the following operations:
 
@@ -69,12 +69,14 @@ This component supports **output binding** with the following operations:
   },
   "data": "<h1>Testing Dapr Bindings</h1>This is a test.<br>Bye!"
 }
+}
+}
 ```
 
 ## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
