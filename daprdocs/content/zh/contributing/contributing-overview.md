@@ -7,11 +7,11 @@ description: >
   为任何Dapr项目资源库做出贡献的通用指南
 ---
 
-感谢您对 Dapr的兴趣! 感谢您对 Dapr的兴趣! 本文档提供了有关如何通过问题和拉取请求对 [Dapr 项目](https://github.com/dapr) 作出贡献的指南。 贡献还可以通过多种方式来实现，如举办线下活动，参加社区会议，评论问题或拉取请求等。
+Thank you for your interest in Dapr! 感谢您对 Dapr的兴趣! 感谢您对 Dapr的兴趣! 本文档提供了有关如何通过问题和拉取请求对 [Dapr 项目](https://github.com/dapr) 作出贡献的指南。 贡献还可以通过多种方式来实现，如举办线下活动，参加社区会议，评论问题或拉取请求等。
 
 了解有关社区参与和社区成员的更多信息，请参阅 [Dapr community repository](https://github.com/dapr/community)。
 
-> 如果你想为Dapr文档做出贡献，还请参阅 <a href="{{< ref contributing-docs >}}> 投稿准则 </a>。
+> 如果你想为Dapr文档做出贡献，还请参阅 [}}> 投稿准则 ]({{< ref contributing-docs  mark=)。
 
 ## Issues
 
