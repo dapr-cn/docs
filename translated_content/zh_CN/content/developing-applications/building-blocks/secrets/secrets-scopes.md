@@ -1,22 +1,22 @@
 ---
 type: docs
 title: "How To: Use secret scoping"
-linkTitle: "How To: Use secret scoping"
+linkTitle: "如何 : 使用秘钥的作用域限定"
 weight: 3000
-description: "Use scoping to limit the secrets that can be read by your application from secret stores"
+description: "应用程序从秘钥存储介质中读取时，需要使用作用域来限定"
 ---
 
-You can read [guidance on setting up secret store components]({{< ref setup-secret-store >}}) to configure a secret store for an application. Once configured, by default *any* secret defined within that store is accessible from the Dapr application.
+You can read [guidance on setting up secret store components]({{< ref setup-secret-store >}}) to configure a secret store for an application. Once configured, by default *any* secret defined within that store is accessible from the Dapr application. Once configured, by default *any* secret defined within that store is accessible from the Dapr application.
 
-To limit the secrets to which the Dapr application has access to, you can can define secret scopes by adding a secret scope policy to the application configuration with restrictive permissions. Follow [these instructions]({{< ref configuration-concept.md >}}) to define an application configuration.
+To limit the secrets to which the Dapr application has access to, you can can define secret scopes by adding a secret scope policy to the application configuration with restrictive permissions. Follow [these instructions]({{< ref configuration-concept.md >}}) to define an application configuration. Follow [these instructions]({{< ref configuration-concept.md >}}) to define an application configuration.
 
-The secret scoping policy applies to any [secret store]({{< ref supported-secret-stores.md >}}), whether that is a local secret store, a Kubernetes secret store or a public cloud secret store. For details on how to set up a [secret stores]({{< ref secret-stores-overview.md >}}) read [How To: Retrieve a secret]({{< ref howto-secrets.md >}})
+The secret scoping policy applies to any [secret store]({{< ref supported-secret-stores.md >}}), whether that is a local secret store, a Kubernetes secret store or a public cloud secret store. For details on how to set up a [secret stores]({{< ref secret-stores-overview.md >}}) read [How To: Retrieve a secret]({{< ref howto-secrets.md >}}) For details on how to set up a [secret stores]({{< ref secret-stores-overview.md >}}) read [How To: Retrieve a secret]({{< ref howto-secrets.md >}})
 
 Watch this [video](https://youtu.be/j99RN_nxExA?start=2272) for a demo on how to use secret scoping with your application. <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=2272" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 ## Scenario 1 : Deny access to all secrets for a secret store
 
-This example uses Kubernetes. The native Kubernetes secret store is added to you Dapr application by default. In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below:
+This example uses Kubernetes. This example uses Kubernetes. The native Kubernetes secret store is added to you Dapr application by default. In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below: In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below:
 
 Define the following `appconfig.yaml` configuration and apply it to the Kubernetes cluster using the command `kubectl apply -f appconfig.yaml`.
 
@@ -42,7 +42,7 @@ With this defined, the application no longer has access to any secrets in the Ku
 
 ## Scenario 2 : Allow access to only certain secrets in a secret store
 
-This example uses a secret store that is named `vault`. For example this could be a Hashicorp secret store component that has been set on your application. To allow a Dapr application to have access to only certain secrets `secret1` and `secret2` in the `vault` secret store, define the following `appconfig.yaml`:
+This example uses a secret store that is named `vault`. For example this could be a Hashicorp secret store component that has been set on your application. This example uses a secret store that is named `vault`. For example this could be a Hashicorp secret store component that has been set on your application. To allow a Dapr application to have access to only certain secrets `secret1` and `secret2` in the `vault` secret store, define the following `appconfig.yaml`:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -57,7 +57,7 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-This example defines configuration for secret store named `vault`. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
+This example defines configuration for secret store named `vault`. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
 
 ## Scenario 3: Deny access to certain sensitive secrets in a secret store
 
@@ -76,7 +76,7 @@ spec:
         deniedSecrets: ["secret1", "secret2"]
 ```
 
-This example uses a secret store that is named `vault`. The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
+This example uses a secret store that is named `vault`. This example uses a secret store that is named `vault`. The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar. Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
 
 ## Permission priority
 
