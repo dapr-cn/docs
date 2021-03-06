@@ -7,7 +7,7 @@ description: "Detailed documentation on the Azure Blob Storage binding component
 
 ## Component format
 
-To setup Azure Blob Storage binding create a component of type `bindings.azure.blobstorage`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Azure Blob Storage binding create a component of type `bindings.azure.blobstorage`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -37,16 +37,16 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                | Required | Binding support | Details                                                                                                                                                                                                                                                   | Example                |
-| ----------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| storageAccount    |    Y     | Output          | The Blob Storage account name                                                                                                                                                                                                                             | `"myexmapleaccount"`   |
-| storageAccessKey  |    Y     | Output          | The Blob Storage access key                                                                                                                                                                                                                               | `"access-key"`         |
-| container         |    Y     | Output          | The name of the Blob Storage container to write to                                                                                                                                                                                                        | `"myexamplecontainer"` |
-| decodeBase64      |    N     | Output          | Configuration to decode base64 file content before saving to Blob Storage. (In case of saving a file with binary content). `"true"` is the only allowed positive value. Other positive variations like `"True"` are not acceptable. Defaults to `"false"` | `"true"`, `"false"`    |
-| getBlobRetryCount |    N     | Output          | Specifies the maximum number of HTTP GET requests that will be made while reading from a RetryReader Defaults to `"10"`                                                                                                                                   | `"1"`, `"2"`           |
+| 字段                | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example                |
+| ----------------- |:--------:| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| storageAccount    |    Y     | Output          | The Blob Storage account name                                                                                                                                                                                                                                                                                                                                                                                                            | `"myexmapleaccount"`   |
+| storageAccessKey  |    Y     | Output          | The Blob Storage access key                                                                                                                                                                                                                                                                                                                                                                                                              | `"access-key"`         |
+| container         |    Y     | Output          | The name of the Blob Storage container to write to                                                                                                                                                                                                                                                                                                                                                                                       | `"myexamplecontainer"` |
+| decodeBase64      |    N     | Output          | Configuration to decode base64 file content before saving to Blob Storage. (In case of saving a file with binary content). `"true"` is the only allowed positive value. Other positive variations like `"True"` are not acceptable. Defaults to `"false"` (In case of saving a file with binary content). `"true"` is the only allowed positive value. Other positive variations like `"True"` are not acceptable. Defaults to `"false"` | `"true"`, `"false"`    |
+| getBlobRetryCount |    N     | Output          | Specifies the maximum number of HTTP GET requests that will be made while reading from a RetryReader Defaults to `"10"`                                                                                                                                                                                                                                                                                                                  | `"1"`, `"2"`           |
 
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 
@@ -57,7 +57,7 @@ This component supports **output binding** with the following operations:
 
 To perform a create blob operation, invoke the Azure Blob Storage binding with a `POST` method and the following JSON body:
 
-> Note: by default, a random UUID is generated. See below for Metadata support to set the name
+> Note: by default, a random UUID is generated. See below for Metadata support to set the name See below for Metadata support to set the name
 
 ```json
 {
@@ -157,6 +157,7 @@ The response body will contain the following JSON:
 
 ```json
 {
+   "blobURL": "https://<your account name>. {
    "blobURL": "https://<your account name>. blob.core.windows.net/<your container name>/<filename>"
 }
 
@@ -175,7 +176,7 @@ To perform a get blob operation, invoke the Azure Blob Storage binding with a `P
 }
 ```
 
-#### Example:
+#### Example
 
 {{< tabs Windows Linux >}}
 
@@ -198,7 +199,7 @@ The response body contains the value stored in the blob object.
 
 ## Metadata information
 
-By default the Azure Blob Storage output binding auto generates a UUID as the blob filename and is not assigned any system or custom metadata to it. It is configurable in the metadata property of the message (all optional).
+By default the Azure Blob Storage output binding auto generates a UUID as the blob filename and is not assigned any system or custom metadata to it. It is configurable in the metadata property of the message (all optional). It is configurable in the metadata property of the message (all optional).
 
 Applications publishing to an Azure Blob Storage output binding should send a message with the following format:
 ```json
