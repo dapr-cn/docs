@@ -34,7 +34,6 @@ no_list: true
 </div>
 
 <br />
-
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
