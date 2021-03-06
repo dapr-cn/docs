@@ -7,7 +7,7 @@ description: "Detailed documentation on the InfluxDB binding component"
 
 ## Component format
 
-To setup InfluxDB binding create a component of type `bindings.influx`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup InfluxDB binding create a component of type `bindings.influx`. To setup InfluxDB binding create a component of type `bindings.influx`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -43,7 +43,7 @@ spec:
 | org    |    Y     | Output          | The InfluxDB organization            | `"myorg"`                 |
 | bucket |    Y     | Output          | Bucket name to write to              | `"mybucket"`              |
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 
