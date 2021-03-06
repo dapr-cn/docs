@@ -7,7 +7,7 @@ description: "Detailed documentation on the MQTT pubsub component"
 
 ## Component format
 
-To setup MQTT pubsub create a component of type `pubsub.mqtt`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
+To setup MQTT pubsub create a component of type `pubsub.mqtt`. To setup MQTT pubsub create a component of type `pubsub.mqtt`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,19 +30,19 @@ spec:
 ```
 ## Spec metadata fields
 
-| Field        |        Required        | Details                                                                                                                  | Example                                                                                                                                                              |
-| ------------ |:----------------------:| ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| url          |           Y            | Address of the MQTT broker                                                                                               | Use `**tcp://**` scheme for non-TLS communication.   Use`**tcps://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]" |
-| qos          |           N            | Indicates the Quality of Service Level (QoS) of the message. Default 0                                                   | `1`                                                                                                                                                                  |
-| retain       |           N            | Defines whether the message is saved by the broker as the last known good value for a specified topic. Default `"false"` | `"true"`, `"false"`                                                                                                                                                  |
-| cleanSession |           N            | will set the "clean session" in the connect message when client connects to an MQTT broker. Default `"true"`             | `"true"`, `"false"`                                                                                                                                                  |
-| caCert       | Required for using TLS | Certificate authority certificate. Can be `secretKeyRef` to use a secret reference                                       | `0123456789-0123456789`                                                                                                                                              |
-| clientCert   | Required for using TLS | Client certificate. Can be `secretKeyRef` to use a secret reference                                                      | `0123456789-0123456789`                                                                                                                                              |
-| clientKey    | Required for using TLS | Client key. Can be `secretKeyRef` to use a secret reference                                                              | `012345`                                                                                                                                                             |
+| 字段           |        Required        | Details                                                                                                                                    | Example                                                                                                                                                                                                                                                                                    |
+| ------------ |:----------------------:| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| url          |           Y            | Address of the MQTT broker                                                                                                                 | Use `**tcp://**` scheme for non-TLS communication.   Use`**tcps://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]"   Use`**tcps://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]" |
+| qos          |           N            | Indicates the Quality of Service Level (QoS) of the message. Default 0 Default 0                                                           | `1`                                                                                                                                                                                                                                                                                        |
+| retain       |           N            | Defines whether the message is saved by the broker as the last known good value for a specified topic. Default `"false"` Default `"false"` | `"true"`, `"false"`                                                                                                                                                                                                                                                                        |
+| cleanSession |           N            | will set the "clean session" in the connect message when client connects to an MQTT broker. Default `"true"` Default `"true"`              | `"true"`, `"false"`                                                                                                                                                                                                                                                                        |
+| caCert       | Required for using TLS | Certificate authority certificate. Client key. Can be `secretKeyRef` to use a secret reference                                             | `0123456789-0123456789`                                                                                                                                                                                                                                                                    |
+| clientCert   | Required for using TLS | Client certificate. Can be `secretKeyRef` to use a secret reference                                                                        | `0123456789-0123456789`                                                                                                                                                                                                                                                                    |
+| clientKey    | Required for using TLS | Client key. Can be `secretKeyRef` to use a secret reference                                                                                | `012345`                                                                                                                                                                                                                                                                                   |
 
 
 ### Communication using TLS
-To configure communication using TLS, ensure mosquitto broker is configured to support certificates. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Here is an example.
+To configure communication using TLS, ensure mosquitto broker is configured to support certificates. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Here is an example. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Here is an example.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -97,7 +97,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 
@@ -171,7 +171,7 @@ You can then interact with the server using the client port: `tcp://mqtt-broker.
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
