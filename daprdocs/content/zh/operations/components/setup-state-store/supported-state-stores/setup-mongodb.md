@@ -7,7 +7,7 @@ description: Detailed information on the MongoDB state store component
 
 ## Component format
 
-To setup MongoDB state store create a component of type `state.mongodb`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup MongoDB state store create a component of type `state.mongodb`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -22,6 +22,20 @@ spec:
   metadata:
   - name: host
     value: <REPLACE-WITH-HOST> # Required. Example: "mongo-mongodb.default.svc.cluster.local:27017"
+  - name: username
+    value: <REPLACE-WITH-USERNAME> # Optional. Example: "admin"
+  - name: password
+    value: <REPLACE-WITH-PASSWORD> # Optional.
+  - name: databaseName
+    value: <REPLACE-WITH-DATABASE-NAME> # Optional. default: "daprStore"
+  - name: collectionName
+    value: <REPLACE-WITH-COLLECTION-NAME> # Optional. default: "daprCollection"
+  - name: writeconcern
+    value: <REPLACE-WITH-WRITE-CONCERN> # Optional.
+  - name: readconcern
+    value: <REPLACE-WITH-READ-CONCERN> # Optional.
+  - name: operationTimeout
+    value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "5s" Example: "mongo-mongodb.default.svc.cluster.local:27017"
   - name: username
     value: <REPLACE-WITH-USERNAME> # Optional. Example: "admin"
   - name: password
@@ -52,16 +66,16 @@ If you wish to use MongoDB as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| 字段               | Required | Details                                                           | Example                                                               |
-| ---------------- |:--------:| ----------------------------------------------------------------- | --------------------------------------------------------------------- |
-| host             |    Y     | The host to connect to                                            | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
-| username         |    N     | The username of the user to connect with                          | `"admin"`                                                             |
-| password         |    N     | The password of the user                                          | `"password"`                                                          |
-| databaseName     |    N     | The name of the database to use. Defaults to `"daprStore"`        | `"daprStore"`                                                         |
-| collectionName   |    N     | The name of the collection to use. Defaults to `"daprCollection"` | `"daprCollection"`                                                    |
-| writeconcern     |    N     | The write concern to use                                          | `"majority"`                                                          |
-| readconcern      |    N     | The read concern to use                                           | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
-| operationTimeout |    N     | The timeout for the operation. Defautls to `"5s"`                 | `"5s"`                                                                |
+| 字段               | Required | Details                                                                                              | Example                                                               |
+| ---------------- |:--------:| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| host             |    Y     | The host to connect to                                                                               | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
+| username         |    N     | The username of the user to connect with                                                             | `"admin"`                                                             |
+| password         |    N     | The password of the user                                                                             | `"password"`                                                          |
+| databaseName     |    N     | The name of the database to use. The name of the database to use. Defaults to `"daprStore"`          | `"daprStore"`                                                         |
+| collectionName   |    N     | The name of the collection to use. The name of the collection to use. Defaults to `"daprCollection"` | `"daprCollection"`                                                    |
+| writeconcern     |    N     | The write concern to use                                                                             | `"majority"`                                                          |
+| readconcern      |    N     | The read concern to use                                                                              | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
+| operationTimeout |    N     | The timeout for the operation. The timeout for the operation. Defautls to `"5s"`                     | `"5s"`                                                                |
 
 ## Setup MongoDB
 
@@ -84,14 +98,14 @@ The easiest way to install MongoDB on Kubernetes is by using the [Helm chart](ht
 helm install mongo stable/mongodb
 ```
 
-This installs MongoDB into the `default` namespace. To interact with MongoDB, find the service with: `kubectl get svc mongo-mongodb`.
+This installs MongoDB into the `default` namespace. This installs MongoDB into the `default` namespace. To interact with MongoDB, find the service with: `kubectl get svc mongo-mongodb`.
 
 For example, if installing using the example above, the MongoDB host address would be:
 
 `mongo-mongodb.default.svc.cluster.local:27017`
 
 
-Follow the on-screen instructions to get the root password for MongoDB. The username is `admin` by default.
+Follow the on-screen instructions to get the root password for MongoDB. The username is `admin` by default. The username is `admin` by default.
 {{% /codetab %}}
 
 {{< /tabs >}}
