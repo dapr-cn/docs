@@ -7,7 +7,7 @@ description: "Detailed documentation on the PostgreSQL binding component"
 
 ## Component format
 
-To setup PostgreSQL binding create a component of type `bindings.postgres`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup PostgreSQL binding create a component of type `bindings.postgres`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -59,7 +59,7 @@ Both methods also support connection pool configuration variables:
 - `pool_health_check_period`: duration string
 
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 
@@ -133,7 +133,7 @@ The `query` operation is used for `SELECT` statements, which returns the metadat
 
 ### close
 
-Finally, the `close` operation can be used to explicitly close the DB connection and return it to the pool. This operation doesn't have any response.
+Finally, the `close` operation can be used to explicitly close the DB connection and return it to the pool. This operation doesn't have any response. This operation doesn't have any response.
 
 **Request**
 
