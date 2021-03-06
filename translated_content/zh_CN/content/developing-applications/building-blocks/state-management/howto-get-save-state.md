@@ -6,11 +6,11 @@ weight: 200
 description: "Use key value pairs to persist a state"
 ---
 
-## Introduction
+## 介绍
 
-State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
+State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
 
-Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
+Dapr provides state management capabilities that include consistency and concurrency options. Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
 
 ## Pre-requisites
 
@@ -61,7 +61,7 @@ See the instructions [here]({{< ref "setup-state-store" >}}) on how to setup dif
 The following example shows how to a single key/value pair using the Dapr state building block.
 
 {{% alert title="Note" color="warning" %}}
-It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
+It is important to set an app-id, as the state keys are prefixed with this value. It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
 {{% /alert %}}
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
@@ -146,6 +146,16 @@ Updating metadata for app command: python pythonState.py
 You are up and running! Both Dapr and your app logs will appear here.
 
 == APP == State has been stored
+== APP == Got value: b'myFirstValue' name: statestore, type: state.redis" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T21:34:33.9760387-08:00" level=info msg="API gRPC server is running on port 51656" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T21:34:33.9770372-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 172.9994ms" app_id=Braidbald-Boot scope=dapr.
+
+Checking if Dapr sidecar is listening on GRPC port 51656
+Dapr sidecar is up and running.
+Updating metadata for app command: python pythonState.py
+You are up and running! Both Dapr and your app logs will appear here.
+
+== APP == State has been stored
 == APP == Got value: b'myFirstValue'
 ```
 
@@ -181,6 +191,8 @@ dapr --app-id myapp run -- php state-example.php
 You should get an output similar to the following, which will show both the Dapr and app logs:
 
 ```md
+✅  You're up and running! Both Dapr and your app logs will appear here.
+
 ✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T16:30:11.078777+01:00] APP.ALERT: State has been stored [] []
@@ -244,11 +256,22 @@ dapr --app-id myapp run python pythonState.py
 You should see an output similar to the following:
 
 ```md
-Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. gRPC Port: 59458
+Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. gRPC Port: 59458
 
 == DAPR == time="2021-01-06T22:55:36.5570696-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.5690367-08:00" level=info msg="standalone mode configured" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7220140-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T22:55:36.7230148-08:00" level=info msg="API gRPC server is running on port 59458" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T22:55:36.7240207-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 154.984ms" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
+
+Checking if Dapr sidecar is listening on GRPC port 59458
+Dapr sidecar is up and running.
+Updating metadata for app command: python pythonState.py
+You're up and running! Both Dapr and your app logs will appear here.
+
+== APP == State has been stored
+== APP == Got value: b'value1'
+== APP == Got value after delete: b'' name: statestore, type: state.redis" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7230148-08:00" level=info msg="API gRPC server is running on port 59458" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7240207-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 154.984ms" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 
@@ -299,6 +322,8 @@ You should see something similar the following output:
 ```md
 ✅  You're up and running! Both Dapr and your app logs will appear here.
 
+✅  You're up and running! Both Dapr and your app logs will appear here.
+
 == APP == [2021-02-12T16:38:00.839201+01:00] APP.ALERT: State has been stored [] []
 
 == APP == [2021-02-12T16:38:00.841997+01:00] APP.ALERT: Got value: myFirstValue {"data":"myFirstValue"} []
@@ -314,7 +339,7 @@ You should see something similar the following output:
 
 Dapr also allows you to save and retrieve multiple states in the same call.
 
-{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK">}}
 
 {{% codetab %}}
 With the same dapr instance running from above save two key/value pairs into your statestore:
@@ -384,6 +409,16 @@ Updating metadata for app command: python pythonState.py
 You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == States have been stored
+== APP == Got items: [b'value1', b'value2'] name: statestore, type: state.redis" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T21:54:56.8854273-08:00" level=info msg="API gRPC server is running on port 60614" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T21:54:56.8854273-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 145.234ms" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
+
+Checking if Dapr sidecar is listening on GRPC port 60614
+Dapr sidecar is up and running.
+Updating metadata for app command: python pythonState.py
+You're up and running! Both Dapr and your app logs will appear here.
+
+== APP == States have been stored
 == APP == Got items: [b'value1', b'value2']
 ```
 
@@ -428,6 +463,8 @@ And see the following output:
 ```md
 ✅  You're up and running! Both Dapr and your app logs will appear here.
 
+✅  You're up and running! Both Dapr and your app logs will appear here.
+
 == APP == [2021-02-12T16:55:02.913801+01:00] APP.ALERT: States have been stored [] []
 
 == APP == [2021-02-12T16:55:02.917850+01:00] APP.ALERT: Got value: [object MyState] {"data":{"MyState":{"key1":"value1","key2":"value2"}}} []
@@ -440,7 +477,7 @@ And see the following output:
 ## Step 5: Perform state transactions
 
 {{% alert title="Note" color="warning" %}}
-State transactions require a state store that supports multi-item transactions. Visit the [supported state stores page]({{< ref supported-state-stores >}}) page for a full list. Note that the default Redis container created in a self-hosted environment supports them.
+State transactions require a state store that supports multi-item transactions. State transactions require a state store that supports multi-item transactions. Visit the [supported state stores page]({{< ref supported-state-stores >}}) page for a full list. Note that the default Redis container created in a self-hosted environment supports them. Note that the default Redis container created in a self-hosted environment supports them.
 {{% /alert %}}
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
@@ -510,10 +547,20 @@ dapr run python pythonState.py
 You should see an output similar to the following:
 
 ```md
-Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
+Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
 == DAPR == time="2021-01-06T22:18:14.1246721-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.1346254-08:00" level=info msg="standalone mode configured" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2747063-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T22:18:14.2757062-08:00" level=info msg="API gRPC server is running on port 59534" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T22:18:14.2767059-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 142.0805ms" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
+
+Checking if Dapr sidecar is listening on GRPC port 59534
+Dapr sidecar is up and running.
+Updating metadata for app command: python pythonState.py
+You're up and running! Both Dapr and your app logs will appear here.
+
+== APP == State transactions have been completed
+== APP == Got items: [b'value1', b''] name: statestore, type: state.redis" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2757062-08:00" level=info msg="API gRPC server is running on port 59534" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2767059-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 142.0805ms" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 
@@ -530,7 +577,7 @@ You're up and running! Both Dapr and your app logs will appear here.
 
 {{% codetab %}}
 
-Transactional state is supported by extending `TransactionalState` base object which hooks into your object via setters and getters to provide a transaction. Before you created your own transactional object, but now you'll ask the Dependency Injection framework to build one for you.
+Transactional state is supported by extending `TransactionalState` base object which hooks into your object via setters and getters to provide a transaction. Before you created your own transactional object, but now you'll ask the Dependency Injection framework to build one for you. Before you created your own transactional object, but now you'll ask the Dependency Injection framework to build one for you.
 
 Modify the `state-example.php` file again:
 
@@ -569,6 +616,8 @@ Observe the following output:
 
 ```md
 ✅  You're up and running! Both Dapr and your app logs will appear here.
+
+== APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! ✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! [] []
 
