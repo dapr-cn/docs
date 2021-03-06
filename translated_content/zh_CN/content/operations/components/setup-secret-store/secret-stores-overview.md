@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Overview"
-linkTitle: "Overview"
+title: "概述"
+linkTitle: "Secrets stores overview"
 description: "General overview on set up of secret stores for Dapr"
 weight: 10000
 ---
 
-Dapr integrates with secret stores to provide apps and other components with secure store and access to secrets such as access keys and passwords. Each secret store component has a name and this name is used when accessing a secret.
+Dapr integrates with secret stores to provide apps and other components with secure store and access to secrets such as access keys and passwords. Each secret store component has a name and this name is used when accessing a secret. Each secret store component has a name and this name is used when accessing a secret.
 
 As with other building block components, secret store components are extensible and can be found in the [components-contrib repo](https://github.com/dapr/components-contrib).
 
@@ -31,7 +31,7 @@ spec:
 
 The type of secret store is determined by the `type` field, and things like connection strings and other metadata are put in the `.metadata` section.
 
-Different [supported secret stores]({{< ref supported-secret-stores >}}) will have different specific fields that would need to be configured. For example, when configuring a secret store which uses AWS Secrets Manager the file would look like this:
+Different [supported secret stores]({{< ref supported-secret-stores >}}) will have different specific fields that would need to be configured. For example, when configuring a secret store which uses AWS Secrets Manager the file would look like this: For example, when configuring a secret store which uses AWS Secrets Manager the file would look like this:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -62,7 +62,7 @@ Once you have created the component's YAML file, follow these instructions to ap
 
 {{% codetab %}}
 To run locally, create a `components` dir containing the YAML file and provide the path to the `dapr run` command with the flag `--components-path`.
-{{% /codetab %}}
+您可以使用 HTTP 来这样做：
 
 {{% codetab %}}
 To deploy in Kubernetes, assuming your component file is named `secret-store.yaml`, run:
