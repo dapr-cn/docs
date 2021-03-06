@@ -7,7 +7,7 @@ description: "Detailed documentation on the Postmark binding component"
 
 ## Component format
 
-To setup Postmark binding create a component of type `bindings.postmark`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Postmark binding create a component of type `bindings.postmark`. To setup Postmark binding create a component of type `bindings.postmark`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -28,7 +28,7 @@ spec:
   - name: emailTo
     value: "dave@dapr.io" # optional
   - name: subject
-    value: "Hello!" # optional
+    value: "Hello!" # optional # optional
 ```
 {{% alert title="Warning" color="warning" %}}
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
@@ -51,7 +51,7 @@ You can specify any of the optional metadata properties on the output binding re
 Combined, the optional metadata properties in the component configuration and the request payload should at least contain the `emailFrom`, `emailTo` and `subject` fields, as these are required to send an email with success.
 
 
-## Output bindings
+## Binding support
 
 This component supports **output binding** with the following operations:
 
@@ -68,6 +68,7 @@ This component supports **output binding** with the following operations:
     "subject": "An email from Dapr Postmark binding"
   },
   "data": "<h1>Testing Dapr Bindings</h1>This is a test.<br>Bye!"
+}
 }
 }
 ```
