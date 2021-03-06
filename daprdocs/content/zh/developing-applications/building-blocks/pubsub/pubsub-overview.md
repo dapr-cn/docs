@@ -8,9 +8,9 @@ description: "Overview of the Pub/Sub building block"
 
 ## Introduction
 
-[发布 / 订阅模式](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) 允许微服务使用消息相互通信。 The **producer or publisher** sends messages to a **topic** without knowledge of what application will receive them. This involves writing them to an input channel. 同样，一个 **消费者** 将订阅该主题并收到它的消息，并且不知道什么应用程序生产了这些消息。 This involves receiving messages from an output channel. An intermediary message broker is responsible for copying each message from an input channel to an output channels for all subscribers interested in that message. 当您需要将微服务解偶时，此模式特别有用。
+[发布 / 订阅模式](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) 允许微服务使用消息相互通信。 The **producer or publisher** sends messages to a **topic** without knowledge of what application will receive them. This involves writing them to an input channel. 同样，一个 **消费者** 将订阅该主题并收到它的消息，并且不知道什么应用程序生产了这些消息。 This involves writing them to an input channel. Similarly, a **consumer or subscriber** subscribes to the topic and receive its messages without any knowledge of what service produced these messages. This involves receiving messages from an output channel. This involves receiving messages from an output channel. An intermediary message broker is responsible for copying each message from an input channel to an output channels for all subscribers interested in that message. 当您需要将微服务解偶时，此模式特别有用。 This pattern is especially useful when you need to decouple microservices from one another.
 
-Dapr 中的发布/订阅 API 提供至少一次（at-least-once）的保证，并与各种消息代理和队列系统集成。 The specific implementation used by your service is pluggable and configured as a Dapr pub/sub component at runtime. This approach removes the dependency from your service and, as a result, makes your service more portable and flexible to changes.
+Dapr 中的发布/订阅 API 提供至少一次（at-least-once）的保证，并与各种消息代理和队列系统集成。 The specific implementation used by your service is pluggable and configured as a Dapr pub/sub component at runtime. This approach removes the dependency from your service and, as a result, makes your service more portable and flexible to changes. This approach removes the dependency from your service and, as a result, makes your service more portable and flexible to changes.
 
 发布 / 订阅 API 位于 [API 引用]({{< ref pubsub_api.md >}})。
 
@@ -18,11 +18,11 @@ Dapr 中的发布/订阅 API 提供至少一次（at-least-once）的保证，�
 
 <br></br>
 
-The Dapr pub/sub building block provides a platform-agnostic API to send and receive messages. Your services publish messages to a named topic and also subscribe to a topic to consume the messages.
+The Dapr pub/sub building block provides a platform-agnostic API to send and receive messages. Your services publish messages to a named topic and also subscribe to a topic to consume the messages. Your services publish messages to a named topic and also subscribe to a topic to consume the messages.
 
-The service makes a network call to a Dapr pub/sub building block, exposed as a sidecar. This building block then makes calls into a Dapr pub/sub component that encapsulates a specific message broker product. To receive topics, Dapr subscribes to the Dapr pub/sub component on behalf of your service and delivers the messages to an endpoint when they arrive.
+The service makes a network call to a Dapr pub/sub building block, exposed as a sidecar. This building block then makes calls into a Dapr pub/sub component that encapsulates a specific message broker product. To receive topics, Dapr subscribes to the Dapr pub/sub component on behalf of your service and delivers the messages to an endpoint when they arrive. This building block then makes calls into a Dapr pub/sub component that encapsulates a specific message broker product. To receive topics, Dapr subscribes to the Dapr pub/sub component on behalf of your service and delivers the messages to an endpoint when they arrive.
 
-The diagram below shows an example of a "shipping" service and an "email" service that have both subscribed to topics that are published by the "cart" service. Each service loads pub/sub component configuration files that point to the same pub/sub message bus component, for example Redis Streams, NATS Streaming, Azure Service Bus, or GCP Pub/Sub.
+The diagram below shows an example of a "shipping" service and an "email" service that have both subscribed to topics that are published by the "cart" service. Each service loads pub/sub component configuration files that point to the same pub/sub message bus component, for example Redis Streams, NATS Streaming, Azure Service Bus, or GCP Pub/Sub. Each service loads pub/sub component configuration files that point to the same pub/sub message bus component, for example Redis Streams, NATS Streaming, Azure Service Bus, or GCP Pub/Sub.
 
 <img src="/images/pubsub-overview-components.png" width=1000>
 <br></br>
@@ -64,19 +64,19 @@ The following example shows an XML content in CloudEvent v1.0 serialized as JSON
 
 ### 消息格式
 
-Dapr applications can subscribe to published topics. Dapr allows two methods by which your applications can subscribe to topics:
+Dapr applications can subscribe to published topics. Dapr applications can subscribe to published topics. Dapr allows two methods by which your applications can subscribe to topics:
 
  - 阅读 [发布和订阅]({{< ref howto-publish-subscribe.md >}})指南
  - **Programmatic**, where a subscription is defined in the user code.
 
- Both declarative and programmatic approaches support the same features. The declarative approach removes the Dapr dependency from your code and allows for existing applications to subscribe to topics, without having to change code. The programmatic approach implements the subscription in your code.
+ Both declarative and programmatic approaches support the same features. Both declarative and programmatic approaches support the same features. The declarative approach removes the Dapr dependency from your code and allows for existing applications to subscribe to topics, without having to change code. The programmatic approach implements the subscription in your code. The programmatic approach implements the subscription in your code.
 
   For more information read [How-To: Publish a message and subscribe to a topic]({{< ref howto-publish-subscribe >}}).
 
 
 ### 订阅消息
 
-In principle, Dapr considers message successfully delivered when the subscriber responds with a non-error response after processing the message. For more granular control, Dapr's publish/subscribe API also provides explicit statuses, defined in the response payload, which the subscriber can use to indicate the specific handling instructions to Dapr (e.g. `RETRY` or `DROP`). For more information on message routing read [Dapr publish/subscribe API documentation]({{< ref "pubsub_api.md#provide-routes-for-dapr-to-deliver-topic-events" >}})
+In principle, Dapr considers message successfully delivered when the subscriber responds with a non-error response after processing the message. For more granular control, Dapr's publish/subscribe API also provides explicit statuses, defined in the response payload, which the subscriber can use to indicate the specific handling instructions to Dapr (e.g. `RETRY` or `DROP`). In principle, Dapr considers message successfully delivered when the subscriber responds with a non-error response after processing the message. For more granular control, Dapr's publish/subscribe API also provides explicit statuses, defined in the response payload, which the subscriber can use to indicate the specific handling instructions to Dapr (e.g. `RETRY` or `DROP`). For more information on message routing read [Dapr publish/subscribe API documentation]({{< ref "pubsub_api.md#provide-routes-for-dapr-to-deliver-topic-events" >}})
 
 ### 消息传递
 
@@ -84,7 +84,7 @@ Dapr 保证消息传递 at-least-once 语义。 That means that when an applicat
 
 ### Consumer groups and competing consumers pattern
 
-The burden of dealing with concepts like consumer groups and multiple application instances using a single consumer group is all handled automatically by Dapr. 当同一个应用程序的多个实例(相同的 ID) 订阅主题时，Dapr 只将每个消息传递给该应用程序的一个实例。 This is commonly known as the competing consumers pattern and is illustrated in the diagram below.
+The burden of dealing with concepts like consumer groups and multiple application instances using a single consumer group is all handled automatically by Dapr. 当同一个应用程序的多个实例(相同的 ID) 订阅主题时，Dapr 只将每个消息传递给该应用程序的一个实例。 When multiple instances of the same application (running same app-IDs) subscribe to a topic, Dapr delivers each message to *only one instance of **that** application*. This is commonly known as the competing consumers pattern and is illustrated in the diagram below.
 
 <img src="/images/pubsub-overview-pattern-competing-consumers.png" width=1000>
 <br></br>
@@ -93,12 +93,12 @@ The burden of dealing with concepts like consumer groups and multiple applicatio
 
 ### Topic scoping
 
-默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 To limit which application can publish or subscribe to topics, Dapr provides topic scoping. This enables to you say which topics an application is allowed to published and which topics an application is allowed to subscribed to. 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}}) 了解更多信息。
+默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 To limit which application can publish or subscribe to topics, Dapr provides topic scoping. This enables to you say which topics an application is allowed to published and which topics an application is allowed to subscribed to. 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}}) 了解更多信息。 This enables to you say which topics an application is allowed to published and which topics an application is allowed to subscribed to. For more information read [publish/subscribe topic scoping]({{< ref pubsub-scopes.md >}}).
 
 ### Message Time-to-Live (TTL)
-Dapr can set a timeout message on a per message basis, meaning that if the message is not read from the pub/sub component, then the message is discarded. This is to prevent the build up of messages that are not read. A message that has been in the queue for longer than the configured TTL is said to be dead.  For more information read [publish/subscribe message time-to-live]({{< ref pubsub-message-ttl.md >}}).
+Dapr can set a timeout message on a per message basis, meaning that if the message is not read from the pub/sub component, then the message is discarded. This is to prevent the build up of messages that are not read. A message that has been in the queue for longer than the configured TTL is said to be dead.  For more information read [publish/subscribe message time-to-live]({{< ref pubsub-message-ttl.md >}}). This is to prevent the build up of messages that are not read. A message that has been in the queue for longer than the configured TTL is said to be dead.  For more information read [publish/subscribe message time-to-live]({{< ref pubsub-message-ttl.md >}}).
 
-- Note: Message TTL can also be set for a given queue at the time of component creation. Look at the specific characteristic of the component that you are using.
+- Note: Message TTL can also be set for a given queue at the time of component creation. Look at the specific characteristic of the component that you are using. Look at the specific characteristic of the component that you are using.
 
 ### Publish/Subscribe API
 
