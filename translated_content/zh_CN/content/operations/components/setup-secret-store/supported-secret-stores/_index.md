@@ -2,28 +2,28 @@
 type: docs
 title: "Supported secret stores"
 linkTitle: "Supported secret stores"
-weight: 30000
+weight: 50000
 description: The supported secret stores that interface with Dapr
 no_list: true
 ---
 
 Table captions:
 
-> `Status`: [Component certification]({{X28X}}) status
+> `Status`: [Component certification]({{X28X}}) status
   - [Alpha]({{X17X}})
   - [Beta]({{X19X}})
-  - [GA]({{X21X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X21X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
 
 > `Component version`: defines the version of the component
 
 ### Generic
 
-| Name                                                              | Status | Component version | Since |
-| ----------------------------------------------------------------- | ------ | ----------------- | ----- |
-| [Local environment variables]({{< ref envvar-secret-store.md >}}) | Beta   | v1                | 1.0   |
-| [Local file]({{< ref file-secret-store.md >}})                    | Beta   | v1                | 1.0   |
-| [HashiCorp Vault]({{< ref hashicorp-vault.md >}})                 | Alpha  | v1                | 1.0   |
-| [Kubernetes secrets]({{< ref kubernetes-secret-store.md >}})      | GA     | v1                | 1.0   |
+| 名称                                                                | 状态 （State） | Component version | Since |
+| ----------------------------------------------------------------- | ---------- | ----------------- | ----- |
+| [Local environment variables]({{< ref envvar-secret-store.md >}}) | Beta       | v1                | 1.0   |
+| [Local file]({{< ref file-secret-store.md >}})                    | Beta       | v1                | 1.0   |
+| [HashiCorp Vault]({{< ref hashicorp-vault.md >}})                 | Alpha      | v1                | 1.0   |
+| [Kubernetes secrets]({{< ref kubernetes-secret-store.md >}})      | GA         | v1                | 1.0   |
 
 ### Amazon Web Services (AWS)
 
