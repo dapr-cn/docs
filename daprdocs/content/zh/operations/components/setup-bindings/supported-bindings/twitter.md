@@ -7,7 +7,7 @@ description: "Detailed documentation on the Twitter binding component"
 
 ## Component format
 
-To setup Twitter binding create a component of type `bindings.twitter`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Twitter binding create a component of type `bindings.twitter`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -42,7 +42,7 @@ spec:
 | accessToken    |    Y     | Input/Output    | Twitter API access token    | `"accesstoken"`    |
 | accessSecret   |    Y     | Input/Output    | Twitter API access secret   | `"accesssecret"`   |
 
-## Output bindings
+## Binding support
 
 This component supports both **input and output** binding interfaces.
 
@@ -84,9 +84,9 @@ Where the payload is:
 
 The metadata parameters are:
 
-- `query` - any valid Twitter query (e.g. `dapr` or `dapr AND serverless`). See [Twitter docs](https://developer.twitter.com/en/docs/tweets/rules-and-filtering/overview/standard-operators) for more details on advanced query formats
+- `query` - any valid Twitter query (e.g. `dapr` or `dapr AND serverless`). `query` - any valid Twitter query (e.g. `dapr` or `dapr AND serverless`). See [Twitter docs](https://developer.twitter.com/en/docs/tweets/rules-and-filtering/overview/standard-operators) for more details on advanced query formats
 - `lang` - (optional, default: `en`) restricts result tweets to the given language using [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-- `result` - (optional, default: `recent`) specifies tweet query result type. Valid values include:
+- `result` - (optional, default: `recent`) specifies tweet query result type. Valid values include: Valid values include:
   - `mixed` - both popular and real time results
   - `recent` - most recent results
   - `popular` - most popular results
