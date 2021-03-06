@@ -6,7 +6,7 @@ weight: 1000
 description: "Use rate limit middleware to limit requests per second"
 ---
 
-The rate limit [HTTP middleware]({{< ref middleware-concept.md >}}) allows restricting the maximum number of allowed HTTP requests per second. Rate limiting can protect your application from denial of service (DOS) attacks. DOS attacks can be initiated by malicious 3rd parties but also by bugs in your software (a.k.a. a "friendly fire" DOS attack).
+The rate limit [HTTP middleware]({{< ref middleware-concept.md >}}) allows restricting the maximum number of allowed HTTP requests per second. Rate limiting can protect your application from denial of service (DOS) attacks. DOS attacks can be initiated by malicious 3rd parties but also by bugs in your software (a.k.a. a "friendly fire" DOS attack). Rate limiting can protect your application from denial of service (DOS) attacks. DOS attacks can be initiated by malicious 3rd parties but also by bugs in your software (a.k.a. a "friendly fire" DOS attack).
 
 ## Component format
 
@@ -26,9 +26,9 @@ spec:
 
 ## Spec metadata fields
 
-| Field                | Details                                                                                                                                                                | Example |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| maxRequestsPerSecond | The maximum requests per second by remote IP and path. Something to consider is that **the limit is enforced independently in each Dapr sidecar and not cluster wide** | `10`    |
+| 字段                   | Details                                                                                                                                                                                                                       | 示例   |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| maxRequestsPerSecond | The maximum requests per second by remote IP and path. The maximum requests per second by remote IP and path. Something to consider is that **the limit is enforced independently in each Dapr sidecar and not cluster wide** | `10` |
 
 Once the limit is reached, the request will return *HTTP Status code 429: Too Many Requests*.
 
@@ -36,7 +36,7 @@ Alternatively, the [max concurrency setting]({{< ref control-concurrency.md >}})
 
 ## Dapr configuration
 
-To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -50,7 +50,7 @@ spec:
       type: middleware.http.ratelimit
 ```
 
-## Related links
+## 相关链接
 
 - [Control max concurrently]({{< ref control-concurrency.md >}})
 - [Middleware concept]({{< ref middleware-concept.md >}})
