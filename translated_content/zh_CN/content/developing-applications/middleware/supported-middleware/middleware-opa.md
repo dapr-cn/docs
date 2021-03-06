@@ -6,12 +6,31 @@ weight: 6000
 description: "Use middleware to apply Open Policy Agent (OPA) policies on incoming requests"
 ---
 
-The Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware-concept.md >}}) applys [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. This can be used to apply reusable authorization policies to app endpoints.
+The Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware-concept.md >}}) applys [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. This can be used to apply reusable authorization policies to app endpoints. This can be used to apply reusable authorization policies to app endpoints.
 
 ## Component format
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: my-policy
+  namespace: default
+spec:
+  type: middleware.http.opa
+  version: v1
+  metadata:
+    # `includedHeaders` is a comma-separated set of case-insensitive headers to include in the request input.
+    # Request headers are not passed to the policy by default. Include to receive incoming request headers in
+    # the input
+    - name: includedHeaders
+      value: "x-my-custom-header, x-jwt-header"
+
+    # `defaultStatus` is the status code to return for denied responses
+    - name: defaultStatus
+      value: 403
+
+    # `rego` is the open policy agent policy to evaluate. apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: my-policy
@@ -66,19 +85,19 @@ spec:
         }
 ```
 
-You can prototype and experiment with policies using the [official opa playground](https://play.openpolicyagent.org). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE).
+You can prototype and experiment with policies using the [official opa playground](https://play.openpolicyagent.org). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE).
 
 ## Spec metadata fields
 
-| Field           | Details                                                                                                                                                                                              | Example                                                           |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| rego            | The Rego policy language                                                                                                                                                                             | See above                                                         |
-| defaultStatus   | The status code to return for denied responses                                                                                                                                                       | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
-| includedHeaders | A comma-separated set of case-insensitive headers to include in the request input. Request headers are not passed to the policy by default. Include to receive incoming request headers in the input | `"x-my-custom-header, x-jwt-header"`                              |
+| 字段              | Details                                                                                                                                                                                                                                                                                                                | 示例                                                                |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| rego            | The Rego policy language                                                                                                                                                                                                                                                                                               | See above                                                         |
+| defaultStatus   | The status code to return for denied responses                                                                                                                                                                                                                                                                         | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
+| includedHeaders | A comma-separated set of case-insensitive headers to include in the request input. Request headers are not passed to the policy by default. Include to receive incoming request headers in the input Request headers are not passed to the policy by default. Include to receive incoming request headers in the input | `"x-my-custom-header, x-jwt-header"`                              |
 
 ## Dapr configuration
 
-To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -107,6 +126,12 @@ type Input struct {
 
 type HTTPRequest struct {
   // The request method (e.g. GET,POST,etc...)
+  type Input struct {
+  request HTTPRequest
+}
+
+type HTTPRequest struct {
+  // The request method (e.g. GET,POST,etc...)
   method string
   // The raw request path (e.g. "/v2/my-path/")
   path string
@@ -122,12 +147,17 @@ type HTTPRequest struct {
   headers map[string]string
   // The request scheme (e.g. http, https)
   scheme string
+} You must specify what headers
+  // you want to receive via `spec.metadata.includedHeaders` (see above)
+  headers map[string]string
+  // The request scheme (e.g. http, https)
+  scheme string
 }
 ```
 
 ## Result
 
-The policy must set `data.http.allow` with either a `boolean` value, or an `object` value with an `allow` boolean property. A `true` `allow` will allow the request, while a `false` value will reject the request with the status specified by `defaultStatus`. The following policy, with defaults, demonstrates a `403 - Forbidden` for all requests:
+The policy must set `data.http.allow` with either a `boolean` value, or an `object` value with an `allow` boolean property. A `true` `allow` will allow the request, while a `false` value will reject the request with the status specified by `defaultStatus`. The following policy, with defaults, demonstrates a `403 - Forbidden` for all requests: A `true` `allow` will allow the request, while a `false` value will reject the request with the status specified by `defaultStatus`. The following policy, with defaults, demonstrates a `403 - Forbidden` for all requests:
 
 ```go
 package http
@@ -147,7 +177,7 @@ default allow = {
 
 ### Changing the rejected response status code
 
-When rejecting a request, you can override the status code the that gets returned. For example, if you wanted to return a `401` instead of a `403`, you could do the following:
+When rejecting a request, you can override the status code the that gets returned. For example, if you wanted to return a `401` instead of a `403`, you could do the following: For example, if you wanted to return a `401` instead of a `403`, you could do the following:
 
 ```go
 package http
@@ -204,7 +234,7 @@ type Result struct {
 }
 ```
 
-## Related links
+## 相关链接
 
 - [Open Policy Agent](https://www.openpolicyagent.org)
 - [HTTP API example](https://www.openpolicyagent.org/docs/latest/http-api-authorization/)
