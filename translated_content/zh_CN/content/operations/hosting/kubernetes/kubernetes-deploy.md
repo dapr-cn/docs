@@ -12,15 +12,15 @@ When setting up Kubernetes you can use either the Dapr CLI or Helm.
 
 For more information on what is deployed to your Kubernetes cluster read the [Kubernetes overview]({{< ref kubernetes-overview.md >}})
 
-## Prerequisites
+## 前期准备
 
-- Install [Dapr CLI]({{< ref install-dapr-cli.md >}})
+- 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - Kubernetes cluster (see below if needed)
 
 ### Create cluster
 
-You can install Dapr on any Kubernetes cluster. Here are some helpful links:
+You can install Dapr on any Kubernetes cluster. Here are some helpful links: Here are some helpful links:
 
 - [Setup Minikube Cluster]({{< ref setup-minikube.md >}})
 - [Setup Azure Kubernetes Service Cluster]({{< ref setup-aks.md >}})
@@ -28,7 +28,7 @@ You can install Dapr on any Kubernetes cluster. Here are some helpful links:
 - [Setup Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 {{% alert title="Hybrid clusters" color="primary" %}}
-Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X49X}}).
+Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X52X}}). You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X49X}}).
 {{% /alert %}}
 
 
@@ -59,7 +59,7 @@ dapr init -k
 
 ### Install in custom namespace
 
-The default namespace when initializing Dapr is `dapr-system`. You can override this with the `-n` flag.
+The default namespace when initializing Dapr is `dapr-system`. You can override this with the `-n` flag. You can override this with the `-n` flag.
 
 ```bash
 dapr init -k -n mynamespace
@@ -76,7 +76,7 @@ dapr init -k --enable-ha=true
 
 ### Disable mTLS
 
-Dapr is initialized by default with [mTLS]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}). You can disable it with:
+Dapr is initialized by default with [mTLS]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}). You can disable it with: You can disable it with:
 
 ```bash
 dapr init -k --enable-mtls=false
@@ -95,7 +95,7 @@ dapr uninstall -k
 You can install Dapr on Kubernetes using a Helm 3 chart.
 
 {{% alert title="Ensure you are on Helm v3" color="primary" %}}
-The latest Dapr helm chart no longer supports Helm v2. Please migrate from Helm v2 to Helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
+The latest Dapr helm chart no longer supports Helm v2. The latest Dapr helm chart no longer supports Helm v2. Please migrate from Helm v2 to Helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
 {{% /alert %}}
 
 ### Add and install Dapr Helm chart
