@@ -21,6 +21,9 @@ description: "Enable Dapr metrics and logs with Azure Monitor for Azure Kubernet
 $ kubectl get pods -n kube-system
 NAME                                                              READY   STATUS    RESTARTS   AGE
 ...
+$ kubectl get pods -n kube-system
+NAME                                                              READY   STATUS    RESTARTS   AGE
+...
 omsagent-75qjs                                                    1/1     Running   1          44h
 omsagent-c7c4t                                                    1/1     Running   0          44h
 omsagent-rs-74f488997c-dshpx                                      1/1     Running   1          44h
@@ -32,10 +35,11 @@ omsagent-smtk7                                                    1/1     Runnin
 
 You can use [azm-config-map.yaml](/docs/azm-config-map.yaml) to enable prometheus metrics endpoint scrape.
 
-If you installed Dapr to the different namespace, you need to change the `monitor_kubernetes_pod_namespaces` array values. For example:
+If you installed Dapr to the different namespace, you need to change the `monitor_kubernetes_pod_namespaces` array values. For example: For example:
 
 ```yaml
 ...
+  ...
   prometheus-data-collection-settings: |-
     [prometheus_data_collection_settings.cluster]
         interval = "1m"
