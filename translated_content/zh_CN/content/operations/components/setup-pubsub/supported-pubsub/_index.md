@@ -2,30 +2,30 @@
 type: docs
 title: "Supported pub/sub brokers"
 linkTitle: "Supported pub/sub brokers"
-weight: 30000
+weight: 50000
 description: The supported pub/sub brokers that interface with Dapr
 no_list: true
 ---
 
 Table captions:
 
-> `Status`: [Component certification]({{X31X}}) status
+> `Status`: [Component certification]({{X31X}}) status
   - [Alpha]({{X20X}})
   - [Beta]({{X22X}})
-  - [GA]({{X24X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X24X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
 
 > `Component version`: defines the version of the component
 ### Generic
 
-| Name                                                  | Status | Component version | Since |
-| ----------------------------------------------------- | ------ | ----------------- | ----- |
-| [Apache Kafka]({{< ref setup-apache-kafka.md >}})     | Beta   | v1                | 1.0   |
-| [Hazelcast]({{< ref setup-hazelcast.md >}})           | Alpha  | v1                | 1.0   |
-| [MQTT]({{< ref setup-mqtt.md >}})                     | Alpha  | v1                | 1.0   |
-| [NATS Streaming]({{< ref setup-nats-streaming.md >}}) | Beta   | v1                | 1.0   |
-| [Pulsar]({{< ref setup-pulsar.md >}})                 | Alpha  | v1                | 1.0   |
-| [RabbitMQ]({{< ref setup-rabbitmq.md >}})             | Alpha  | v1                | 1.0   |
-| [Redis Streams]({{< ref setup-redis-pubsub.md >}})    | GA     | v1                | 1.0   |
+| 名称                                                    | 状态 （State） | Component version | Since |
+| ----------------------------------------------------- | ---------- | ----------------- | ----- |
+| [Apache Kafka]({{< ref setup-apache-kafka.md >}})     | Beta       | v1                | 1.0   |
+| [Hazelcast]({{< ref setup-hazelcast.md >}})           | Alpha      | v1                | 1.0   |
+| [MQTT]({{< ref setup-mqtt.md >}})                     | Alpha      | v1                | 1.0   |
+| [NATS Streaming]({{< ref setup-nats-streaming.md >}}) | Beta       | v1                | 1.0   |
+| [Pulsar]({{< ref setup-pulsar.md >}})                 | Alpha      | v1                | 1.0   |
+| [RabbitMQ]({{< ref setup-rabbitmq.md >}})             | Alpha      | v1                | 1.0   |
+| [Redis Streams]({{< ref setup-redis-pubsub.md >}})    | GA         | v1                | 1.0   |
 
 ### Amazon Web Services (AWS)
 
