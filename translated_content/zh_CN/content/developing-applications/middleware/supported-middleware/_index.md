@@ -2,14 +2,14 @@
 type: docs
 title: "Supported middleware"
 linkTitle: "Supported middleware"
-weight: 30000
+weight: 50000
 description: List of all the supported middleware components that can be injected in Dapr's processing pipeline.
 no_list: true
 ---
 
 ### HTTP
 
-| Name                                                                           | Description                                                                                                                     | Status                     | Component version |
+| 名称                                                                             | 说明                                                                                                                              | Status                     | Component version |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ----------------- |
 | [Rate limit]({{< ref middleware-rate-limit.md >}})                             | Restricts the maximum number of allowed HTTP requests per second                                                                | Alpha                      | v1                |
 | [OAuth2]({{< ref middleware-oauth2.md >}})                                     | Enables the [OAuth2 Authorization Grant flow](https://tools.ietf.org/html/rfc6749#section-4.1) on a Web API                     | Alpha                      | v1                |
