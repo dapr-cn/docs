@@ -9,10 +9,10 @@ no_list: true
 
 Table captions:
 
-> `Status`: [Component certification]({{X43X}}) status
+> `Status`: [Component certification]({{X43X}}) status
   - [Alpha]({{X32X}})
   - [Beta]({{X34X}})
-  - [GA]({{X36X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X36X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
 
 > `Component version`: defines the version of the component
 
