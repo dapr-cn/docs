@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "Middleware pipelines"
-linkTitle: "Middleware"
+title: "中间件管道"
+linkTitle: "中间件"
 weight: 400
-description: "Custom processing pipelines of chained middleware components"
+description: "链式中间件组件的自定义处理管道"
 ---
 
-Dapr allows custom processing pipelines to be defined by chaining a series of middleware components. A request goes through all defined middleware components before it's routed to user code, and then goes through the defined middleware, in reverse order, before it's returned to the client, as shown in the following diagram.
+Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 请求在路由到用户代码之前经过所有已定义的中间件组件，然后在返回到客户机之前，按相反顺序经过已定义的中间件，如下图中所示。
 
 <img src="/images/middleware.png" width=400>
 
-## Customize processing pipeline
+## 自定义处理管道
 
-When launched, a Dapr sidecar constructs a middleware processing pipeline. By default the pipeline consists of [tracing middleware]({{< ref tracing-overview.md >}}) and CORS middleware. Additional middleware, configured by a Dapr [configuration]({{< ref configuration-concept.md >}}), can be added to the pipeline in the order they are defined. The pipeline applies to all Dapr API endpoints, including state, pub/sub, service invocation, bindings, security and others.
+启动后， Dapr sidecar 会构建中间件处理管道。 默认情况下，管道由 [追踪中间件]({{< ref tracing-overview.md >}) 和 CORS 中间件组成。 其他中间件，由 Dapr [ configuration ]({{< ref configuration-concept.md >}}) 配置，按照定义的顺序添加到管道中。 管道适用于所有 Dapr API 端点，包括状态，发布/订阅，服务调用，绑定，安全性和其他。
 
-> **NOTE:** Dapr provides a **middleware.http.uppercase** pre-registered component that changes all text in a request body to uppercase. You can use it to test/verify if your custom pipeline is in place.
+> **注意：** Dapr 提供 **middleware.http.uppercase** 预注册组件，该组件将请求正文中的所有文本更改为大写。 您可以使用它来测试/验证自定义管道是否已就绪。
 
-The following configuration example defines a custom pipeline that uses a [OAuth 2.0 middleware]({{< ref oauth.md >}}) and an uppercase middleware component. In this case, all requests are authorized through the OAuth 2.0 protocol, and transformed to uppercase text, before they are forwarded to user code.
+以下配置示例定义了使用 [OAuth 2.0 中间件]({{< ref oauth.md >}}) 和大写中间件组件的自定义管道。 在这种情况下，在转发到用户代码之前，所有请求都将通过 OAuth 2.0 协议进行授权，并转换为大写文本。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,7 +33,7 @@ spec:
       type: middleware.http.uppercase
 ```
 
-## Next steps
+## 下一步
 
-* [Middleware overview]({{< ref middleware-overview.md >}})
-* [How-To: Configure API authorization with OAuth]({{< ref oauth.md >}})
+* [操作方法：使用 OAuth 配置 API 授权]({{< ref middleware-overview.md >}})
+* [操作方法：使用 OAuth 配置 API 授权]({{< ref oauth.md >}})
