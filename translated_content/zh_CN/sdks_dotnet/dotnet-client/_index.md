@@ -9,7 +9,7 @@ no_list: true
 
 The Dapr client package allows you to interact with other Dapr applications from a .NET application.
 
-## Prerequisites
+## 前期准备
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
 - Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
@@ -140,5 +140,5 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 
 - For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
 
-## Related links
+## 相关链接
 - [.NET SDK examples](https://github.com/dapr/dotnet-sdk/tree/master/examples)
