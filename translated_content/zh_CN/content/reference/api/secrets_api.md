@@ -18,17 +18,17 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>
 
 #### URL Parameters
 
-| Parameter         | Description                                         |
+| Parameter         | 说明                                                  |
 | ----------------- | --------------------------------------------------- |
 | daprPort          | the Dapr port                                       |
 | secret-store-name | the name of the secret store to get the secret from |
 | name              | the name of the secret to get                       |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
 #### Query Parameters
 
-Some secret stores have **optional** metadata properties. metadata is populated using query parameters:
+Some secret stores have **optional** metadata properties. metadata is populated using query parameters: metadata is populated using query parameters: metadata is populated using query parameters:
 
 ```
 GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>?metadata.version_id=15
@@ -37,14 +37,14 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>?metadata
 ##### GCP Secret Manager
 The following optional meta can be provided to the GCP Secret Manager component
 
-| Query Parameter     | Description                      |
+| Query Parameter     | 描述                               |
 | ------------------- | -------------------------------- |
 | metadata.version_id | version for the given secret key |
 
 ##### AWS Secret Manager
 The following optional meta can be provided to the AWS Secret Manager component
 
-| Query Parameter        | Description                            |
+| Query Parameter        | 描述                                     |
 | ---------------------- | -------------------------------------- |
 | metadata.version_id    | version for the given secret key       |
 | metadata.version_stage | version stage for the given secret key |
@@ -84,7 +84,7 @@ curl http://localhost:3500/v1.0/secrets/vault/db-secret
 
 #### Response Codes
 
-| Code | Description                                      |
+| Code | 说明                                               |
 | ---- | ------------------------------------------------ |
 | 200  | OK                                               |
 | 204  | Secret not found                                 |
@@ -110,28 +110,28 @@ curl http://localhost:3500/v1.0/secrets/vault/db-secret?metadata.version_id=15&?
 
 ## Get Bulk Secret
 
-This endpoint lets you get all the secrets in a secret store. It's recommended to use [token authentication]({{X47X}}) for Dapr if configuring a secret store.
+This endpoint lets you get all the secrets in a secret store. This endpoint lets you get all the secrets in a secret store. This endpoint lets you get all the secrets in a secret store. It's recommended to use [token authentication]({{X47X}}) for Dapr if configuring a secret store.
 
-### HTTP Request
+### HTTP 请求
 
 ```
 GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/bulk
 ```
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter         | Description                                         |
+| Parameter         | 描述                                                  |
 | ----------------- | --------------------------------------------------- |
 | daprPort          | the Dapr port                                       |
 | secret-store-name | the name of the secret store to get the secret from |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
 ### HTTP Response
 
 #### Response Body
 
-The returned response is a JSON containing the secrets. The JSON object will contain the secret names as fields and a map of secret keys and values as the field value.
+The returned response is a JSON containing the secrets. The returned response is a JSON containing the secrets. The JSON object will contain the secret names as fields and a map of secret keys and values as the field value. The JSON object will contain the secret names as fields and a map of secret keys and values as the field value.
 
 ##### Response with multiple secrets and multiple key / values in a secret (eg. Kubernetes):
 
@@ -154,7 +154,7 @@ curl http://localhost:3500/v1.0/secrets/kubernetes/bulk
 
 #### Response Codes
 
-| Code | Description                                      |
+| Code | 描述                                               |
 | ---- | ------------------------------------------------ |
 | 200  | OK                                               |
 | 400  | Secret store is missing or misconfigured         |
