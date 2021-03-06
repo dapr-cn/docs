@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Bindings"
+title: "绑定"
 linkTitle: "Bindings"
 weight: 40
-description: Interface with or be triggered from external systems
+description: 从大量外部资源触发代码并与之交互
 ---
 
