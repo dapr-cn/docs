@@ -7,7 +7,7 @@ description: "Detailed documentation on the Azure Event Grid binding component"
 
 ## Component format
 
-To setup Azure Event Grid binding create a component of type `bindings.azure.eventgrid`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Azure Event Grid binding create a component of type `bindings.azure.eventgrid`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 See [this](https://docs.microsoft.com/en-us/azure/event-grid/) for Azure Event Grid documentation.
 
@@ -46,32 +46,32 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                 | Required | Binding support | Details                                                                                                                                                                                                                                                                                                       | Example                                |
-| --------------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| tenantId              |    Y     | Input           | The Azure tenant id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                             | `"tenentID"`                           |
-| subscriptionId        |    Y     | Input           | The Azure subscription id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                       | `"subscriptionId"`                     |
-| clientId              |    Y     | Input           | The client id that should be used by the binding to create or update the Event Grid Event Subscription                                                                                                                                                                                                        | `"clientId"`                           |
-| clientSecret          |    Y     | Input           | The client id that should be used by the binding to create or update the Event Grid Event Subscription                                                                                                                                                                                                        | `"clientSecret"`                       |
-| subscriberEndpoint    |    Y     | Input           | The https endpoint in which Event Grid will handshake and send Cloud Events. If you aren't re-writing URLs on ingress, it should be in the form of: `https://[YOUR HOSTNAME]/api/events` If testing on your local machine, you can use something like [ngrok](https://ngrok.com) to create a public endpoint. | `"https://[YOUR HOSTNAME]/api/events"` |
-| handshakePort         |    Y     | Input           | The container port that the input binding will listen on for handshakes and events                                                                                                                                                                                                                            | `"9000"`                               |
-| scope                 |    Y     | Input           | The identifier of the resource to which the event subscription needs to be created or updated. See [here](#scope) for more details                                                                                                                                                                            | `"/subscriptions/{subscriptionId}/"`   |
-| eventSubscriptionName |    N     | Input           | The name of the event subscription. Event subscription names must be between 3 and 64 characters in length and should use alphanumeric letters only                                                                                                                                                           | `"name"`                               |
-| accessKey             |    Y     | Output          | The Access Key to be used for publishing an Event Grid Event to a custom topic                                                                                                                                                                                                                                | `"accessKey"`                          |
-| topicEndpoint         |    Y     | Output          | The topic endpoint in which this output binding should publish events                                                                                                                                                                                                                                         | `"topic-endpoint"`                     |
+| 字段                    | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                                    | Example                                |
+| --------------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
+| tenantId              |    Y     | Input           | The Azure tenant id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                                                                                                          | `"tenentID"`                           |
+| subscriptionId        |    Y     | Input           | The Azure subscription id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                                                                                                    | `"subscriptionId"`                     |
+| clientId              |    Y     | Input           | The client id that should be used by the binding to create or update the Event Grid Event Subscription                                                                                                                                                                                                                                                                                     | `"clientId"`                           |
+| clientSecret          |    Y     | Input           | The client id that should be used by the binding to create or update the Event Grid Event Subscription                                                                                                                                                                                                                                                                                     | `"clientSecret"`                       |
+| subscriberEndpoint    |    Y     | Input           | The https endpoint in which Event Grid will handshake and send Cloud Events. The https endpoint in which Event Grid will handshake and send Cloud Events. If you aren't re-writing URLs on ingress, it should be in the form of: `https://[YOUR HOSTNAME]/api/events` If testing on your local machine, you can use something like [ngrok](https://ngrok.com) to create a public endpoint. | `"https://[YOUR HOSTNAME]/api/events"` |
+| handshakePort         |    Y     | Input           | The container port that the input binding will listen on for handshakes and events                                                                                                                                                                                                                                                                                                         | `"9000"`                               |
+| scope                 |    Y     | Input           | The identifier of the resource to which the event subscription needs to be created or updated. See [here](#scope) for more details See [here](#scope) for more details                                                                                                                                                                                                                     | `"/subscriptions/{subscriptionId}/"`   |
+| eventSubscriptionName |    N     | Input           | The name of the event subscription. The name of the event subscription. Event subscription names must be between 3 and 64 characters in length and should use alphanumeric letters only                                                                                                                                                                                                    | `"name"`                               |
+| accessKey             |    Y     | Output          | The Access Key to be used for publishing an Event Grid Event to a custom topic                                                                                                                                                                                                                                                                                                             | `"accessKey"`                          |
+| topicEndpoint         |    Y     | Output          | The topic endpoint in which this output binding should publish events                                                                                                                                                                                                                                                                                                                      | `"topic-endpoint"`                     |
 
 ### Scope
 
-Scope is the identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an Event Grid topic. For example:
+Scope is the identifier of the resource to which the event subscription needs to be created or updated. Scope is the identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an Event Grid topic. For example: For example:
 - `'/subscriptions/{subscriptionId}/'` for a subscription
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'` for a resource group
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'` for a resource
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'` for an Event Grid topic > Values in braces {} should be replaced with actual values.
-## Binding support
+## 相关链接
 
 This component supports both **input and output** binding interfaces.
 
@@ -80,7 +80,7 @@ This component supports **output binding** with the following operations:
 - `create`
 ## Additional information
 
-Event Grid Binding creates an [event subscription](https://docs.microsoft.com/en-us/azure/event-grid/concepts#event-subscriptions) when Dapr initializes. Your Service Principal needs to have the RBAC permissions to enable this.
+Event Grid Binding creates an [event subscription](https://docs.microsoft.com/en-us/azure/event-grid/concepts#event-subscriptions) when Dapr initializes. Your Service Principal needs to have the RBAC permissions to enable this. Your Service Principal needs to have the RBAC permissions to enable this.
 
 ```bash
 # First ensure that Azure Resource Manager provider is registered for Event Grid
@@ -112,7 +112,7 @@ dapr run --app-id dotnetwebapi --app-port 5000 --dapr-http-port 3500 dotnet run
 
 ### Testing on Kubernetes
 
-Azure Event Grid requires a valid HTTPS endpoint for custom webhooks. Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/).
+Azure Event Grid requires a valid HTTPS endpoint for custom webhooks. Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/). Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/).
 
 To get started, first create `dapr-annotations.yaml` for Dapr annotations
 
@@ -138,7 +138,7 @@ If deploying to Azure Kubernetes Service, you can follow [the official MS docume
 - Install cert-manager
 - Create a CA cluster issuer
 
-Final step for enabling communication between Event Grid and Dapr is to define `http` and custom port to your app's service and an `ingress` in Kubernetes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes.
+Final step for enabling communication between Event Grid and Dapr is to define `http` and custom port to your app's service and an `ingress` in Kubernetes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes.
 
 ```yaml
 # dotnetwebapi.yaml
@@ -226,7 +226,7 @@ kubectl apply -f dotnetwebapi.yaml
 
 #### Troubleshooting possible issues with Nginx controller
 
-After initial deployment the "Daprized" Nginx controller can malfunction. To check logs and fix issue (if it exists) follow these steps.
+After initial deployment the "Daprized" Nginx controller can malfunction. To check logs and fix issue (if it exists) follow these steps. To check logs and fix issue (if it exists) follow these steps.
 
 ```bash
 $ kubectl get pods -l app=nginx-ingress
@@ -239,6 +239,11 @@ $ kubectl logs nginx-nginx-ingress-controller-649df94867-fp6mg nginx-ingress-con
 
 # If you see 503s logged from calls to webhook endpoint '/api/events' restart the pod
 # .."OPTIONS /api/events HTTP/1.1" 503..
+
+$ kubectl delete pod nginx-nginx-ingress-controller-649df94867-fp6mg
+
+# Check the logs again - it should start returning 200
+# .."OPTIONS /api/events HTTP/1.1" 200..
 
 $ kubectl delete pod nginx-nginx-ingress-controller-649df94867-fp6mg
 
