@@ -8,14 +8,14 @@ description: "The component certification lifecycle from submission to productio
 
 ## Overview
 
-Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.  All of the components are pluggable so that in ideal scenarios, you can swap out one component with the same interface for another. Each component that is used in production, needs to maintain a certain set of technical requirements that ensure the functional compatibility and robustness of the component.
+Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有接口定义。  All of the components are pluggable so that in ideal scenarios, you can swap out one component with the same interface for another. All of the components are pluggable so that in ideal scenarios, you can swap out one component with the same interface for another. Each component that is used in production, needs to maintain a certain set of technical requirements that ensure the functional compatibility and robustness of the component.
 
 In general a component needs to be:
 - compliant with the defined Dapr interfaces
 - functionally correct and robust
 - well documented and maintained
 
-To make sure a component conforms to the standards set by Dapr, there are a set of tests run against a component in a Dapr maintainers managed environment. Once the tests pass consistently, the maturity level can be determined for a component.
+To make sure a component conforms to the standards set by Dapr, there are a set of tests run against a component in a Dapr maintainers managed environment. Once the tests pass consistently, the maturity level can be determined for a component. Once the tests pass consistently, the maturity level can be determined for a component.
 
 ## Certification levels
 
@@ -50,7 +50,7 @@ All components start at the Alpha stage.
 
 ## Conformance tests
 
-Each component in the [components-contrib](https://github.com/dapr/components-contrib) repository needs to adhere to a set of interfaces defined by Dapr. Conformance tests are tests that are run on these component definitions with their associated backing services such that the component is tested to be conformant with the Dapr interface specifications and behavior.
+Each component in the [components-contrib](https://github.com/dapr/components-contrib) repository needs to adhere to a set of interfaces defined by Dapr. Each component in the [components-contrib](https://github.com/dapr/components-contrib) repository needs to adhere to a set of interfaces defined by Dapr. Conformance tests are tests that are run on these component definitions with their associated backing services such that the component is tested to be conformant with the Dapr interface specifications and behavior.
 
 The conformance tests are defined for the following building blocks:
 
@@ -78,7 +78,7 @@ For a new component requiring a certification change from Alpha to Beta or Beta 
 - The user details the environment setup in the issue created, so that a Dapr maintainer can setup the service in a managed environment
 - After the environment setup is complete, Dapr maintainers review the PR and if approved merges that PR
 - Dapr maintainers review functional correctness with the test being run in an environment maintained by the Dapr team
-- Dapr maintainers update the component status document categorized by Dapr Runtime version. This is done as part of the release process in the next release of Dapr runtime
+- Dapr maintainers update the component status document categorized by Dapr Runtime version. This is done as part of the release process in the next release of Dapr runtime This is done as part of the release process in the next release of Dapr runtime
 
 ### Existing GA certified component
 
