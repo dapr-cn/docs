@@ -1,4 +1,4 @@
 preserve_hierarchy: true
 files:
   - source: /content/**/*
-    translation: /translated_content/**/%original_file_name%
+    translation: /translated_content/%locale_with_underscore%/**/%original_file_name%
