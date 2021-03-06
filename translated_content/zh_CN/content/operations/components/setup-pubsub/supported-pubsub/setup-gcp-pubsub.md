@@ -9,7 +9,7 @@ aliases:
 
 ## Create a Dapr component
 
-To setup GCP pubsub create a component of type `pubsub.gcp.pubsub`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
+To setup GCP pubsub create a component of type `pubsub.gcp.pubsub`. To setup MQTT pubsub create a component of type `pubsub.mqtt`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -45,30 +45,30 @@ spec:
     value: "false"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| Field                           | Required | Details                                                                                             | Example                                                                                          |
-| ------------------------------- |:--------:| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| type                            |    Y     | GCP credentials type                                                                                | `service_account`                                                                                |
-| project_id                      |    Y     | GCP project id                                                                                      | `projectId`                                                                                      |
-| private_key_id                |    Y     | GCP private key id                                                                                  | `"privateKeyId"`                                                                                 |
-| private_key                     |    Y     | GCP credentials private key. Replace with x509 cert                                                 | `12345-12345`                                                                                    |
-| client_email                    |    Y     | GCP client email                                                                                    | `"client@email.com"`                                                                             |
-| client_id                       |    Y     | GCP client id                                                                                       | `0123456789-0123456789`                                                                          |
-| auth_uri                        |    Y     | Google account OAuth endpoint                                                                       | `https://accounts.google.com/o/oauth2/auth`                                                      |
-| token_uri                       |    Y     | Google account token uri                                                                            | `https://oauth2.googleapis.com/token`                                                            |
-| auth_provider_x509_cert_url |    Y     | GCP credentials cert url                                                                            | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
-| client_x509_cert_url          |    Y     | GCP credentials project x509 cert url                                                               | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
-| disableEntityManagement         |    N     | When set to `"true"`, topics and subscriptions do not get created automatically. Default: `"false"` | `"true"`, `"false"`                                                                              |
+| 字段                              | Required | Details                                                                                                                | Example                                                                                          |
+| ------------------------------- |:--------:| ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| type                            |    Y     | GCP credentials type                                                                                                   | `service_account`                                                                                |
+| project_id                      |    Y     | GCP project id                                                                                                         | `projectId`                                                                                      |
+| private_key_id                |    Y     | GCP private key id                                                                                                     | `"privateKeyId"`                                                                                 |
+| private_key                     |    Y     | GCP credentials private key. Replace with x509 cert Replace with x509 cert                                             | `12345-12345`                                                                                    |
+| client_email                    |    Y     | GCP client email                                                                                                       | `"client@email.com"`                                                                             |
+| client_id                       |    Y     | GCP client id                                                                                                          | `0123456789-0123456789`                                                                          |
+| auth_uri                        |    Y     | Google account OAuth endpoint                                                                                          | `https://accounts.google.com/o/oauth2/auth`                                                      |
+| token_uri                       |    Y     | Google account token uri                                                                                               | `https://oauth2.googleapis.com/token`                                                            |
+| auth_provider_x509_cert_url |    Y     | GCP credentials cert url                                                                                               | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
+| client_x509_cert_url          |    Y     | GCP credentials project x509 cert url                                                                                  | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
+| disableEntityManagement         |    N     | When set to `"true"`, topics and subscriptions do not get created automatically. Default: `"false"` Default: `"false"` | `"true"`, `"false"`                                                                              |
 
 ## Create a GCP Pub/Sub
 
 Follow the instructions [here](https://cloud.google.com/pubsub/docs/quickstart-console) on setting up Google Cloud Pub/Sub system.
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [Pub/Sub building block]({{< ref pubsub >}})
