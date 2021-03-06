@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Configure state store and pub/sub message broker"
 linkTitle: "(optional) Configure state & pub/sub"
-weight: 80
+weight: 400
 description: "Configure state store and pub/sub message broker components for Dapr"
 aliases:
   - /getting-started/configure-redis/
@@ -20,21 +20,21 @@ A full list of supported components can be found here:
 The rest of this page describes how to get up and running with Redis.
 
 {{% alert title="Self-hosted mode" color="warning" %}}
-When initialized in self-hosted mode, Dapr automatically runs a Redis container and sets up the required component yaml files. You can skip this page and go to [next steps](#next-steps)
+When initialized in self-hosted mode, Dapr automatically runs a Redis container and sets up the required component yaml files. You can skip this page and go to [next steps](#next-steps) You can skip this page and go to [next steps](#next-steps)
 {{% /alert %}}
 
 ## Create a Redis store
 
-Dapr can use any Redis instance - either containerized on your local dev machine or a managed cloud service. If you already have a Redis store, move on to the [configuration](#configure-dapr-components) section.
+Dapr can use any Redis instance - either containerized on your local dev machine or a managed cloud service. If you already have a Redis store, move on to the [configuration](#configure-dapr-components) section. If you already have a Redis store, move on to the [configuration](#configure-dapr-components) section.
 
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
-Redis is automatically installed in self-hosted environments by the Dapr CLI as part of the initialization process. You are all set and can skip to the \[next steps\](next steps)
+Redis is automatically installed in self-hosted environments by the Dapr CLI as part of the initialization process. You are all set and can skip to the \[next steps\](next steps) You are all set and can skip to the \[next steps\](next steps)
 {{% /codetab %}}
 
 {{% codetab %}}
-You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm v3](https://github.com/helm/helm#install).
+You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm v3](https://github.com/helm/helm#install). This approach requires [Installing Helm v3](https://github.com/helm/helm#install).
 
 1. Install Redis into your cluster:
 
@@ -44,7 +44,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
    helm install redis bitnami/redis
    ```
 
-   Note that you will need a Redis version greater than 5, which is what Dapr's pub/sub functionality requires. If you're intending on using Redis as just a state store (and not for pub/sub) a lower version can be used.
+   Note that you will need a Redis version greater than 5, which is what Dapr's pub/sub functionality requires. If you're intending on using Redis as just a state store (and not for pub/sub) a lower version can be used. If you're intending on using Redis as just a state store (and not for pub/sub) a lower version can be used.
 
 2. Run `kubectl get pods` to see the Redis containers now running in your cluster:
 
@@ -63,12 +63,12 @@ Note that the hostname is `redis-master.default.svc.cluster.local:6379`, and a K
 {{% codetab %}}
 This method requires having an Azure Subscription.
 
-1. Open the [Azure Portal](https://ms.portal.azure.com/#create/Microsoft.Cache) to start the Azure Redis Cache creation flow. Log in if necessary.
+1. Open the [Azure Portal](https://ms.portal.azure.com/#create/Microsoft.Cache) to start the Azure Redis Cache creation flow. Log in if necessary. Log in if necessary.
 1. Fill out the necessary information
-   - Dapr pub/sub uses [Redis streams](https://redis.io/topics/streams-intro) that was introduced by Redis 5.0. If you would like to use Azure Redis Cache for pub/sub make sure to set the version to (PREVIEW) 6.
+   - Dapr pub/sub uses [Redis streams](https://redis.io/topics/streams-intro) that was introduced by Redis 5.0. If you would like to use Azure Redis Cache for pub/sub make sure to set the version to (PREVIEW) 6. If you would like to use Azure Redis Cache for pub/sub make sure to set the version to (PREVIEW) 6.
 1. Click "Create" to kickoff deployment of your Redis instance.
-1. You'll need the hostname of your Redis instance, which you can retrieve from the "Overview" in Azure. It should look like `xxxxxx.redis.cache.windows.net:6380`. Note this for later.
-1. Once your instance is created, you'll need to grab your access key. Navigate to "Access Keys" under "Settings" and create a Kubernetes secret to store your Redis password:
+1. You'll need the hostname of your Redis instance, which you can retrieve from the "Overview" in Azure. It should look like `xxxxxx.redis.cache.windows.net:6380`. Note this for later. It should look like `xxxxxx.redis.cache.windows.net:6380`. Note this for later.
+1. Once your instance is created, you'll need to grab your access key. Once your instance is created, you'll need to grab your access key. Navigate to "Access Keys" under "Settings" and create a Kubernetes secret to store your Redis password:
    ```bash
    kubectl create secret generic redis --from-literal=redis-password=*********
    ```
@@ -97,7 +97,7 @@ This method requires having an Azure Subscription.
 
 ## Configure Dapr components
 
-Dapr uses components to define what resources to use for building block functionality. These steps go through how to connect the resources you created above to Dapr for state and pub/sub.
+Dapr uses components to define what resources to use for building block functionality. These steps go through how to connect the resources you created above to Dapr for state and pub/sub. These steps go through how to connect the resources you created above to Dapr for state and pub/sub.
 
 In self-hosted mode, component files are automatically created under:
 - **Windows**: `%USERPROFILE%\.dapr\components\`
@@ -197,13 +197,13 @@ spec:
     value: <PASSWORD>
 ```
 
-## Apply the configuration
+## 应用配置
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
-By default the Dapr CLI creates a local Redis instance when you run `dapr init`. However, if you want to configure a different Redis instance you can either:
+By default the Dapr CLI creates a local Redis instance when you run `dapr init`. However, if you want to configure a different Redis instance you can either: However, if you want to configure a different Redis instance you can either:
 - Update the existing component files or create new ones in the default components directory
    - **Linux/MacOS:** `$HOME/.dapr/components`
    - **Windows:** `%USERPROFILE%\.dapr\components`
@@ -227,5 +227,5 @@ kubectl apply -f redis-pubsub.yaml
 
 {{< /tabs >}}
 
-## Next steps
+## 下一步
 - [Try out a Dapr quickstart]({{< ref quickstarts.md >}})
