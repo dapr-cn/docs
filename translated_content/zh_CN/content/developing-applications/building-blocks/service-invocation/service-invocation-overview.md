@@ -1,49 +1,49 @@
 ---
 type: docs
-title: "Service invocation overview"
-linkTitle: "Overview"
+title: "服务调用概述"
+linkTitle: "Secrets stores overview"
 weight: 1000
-description: "Overview of the service invocation building block"
+description: "服务调用构建块概述"
 ---
 
-## Introduction
+## 介绍
 
-Using service invocation, your application can reliably and securely communicate with other applications using the standard [gRPC](https://grpc.io) or [HTTP](https://www.w3.org/Protocols/) protocols.
+通过服务调用，应用程序可以使用 [gRPC](https://grpc.io) 或 [HTTP](https://www.w3.org/Protocols/) 这样的标准协议来发现并可靠地与其他应用程序通信。
 
-In many environments with multiple services that need to communicate with each other, developers often ask themselves the following questions:
+在许多具有多个需要相互通信的服务的环境中，开发者经常会问自己以下问题：
 
-* How do I discover and invoke methods on different services?
-* How do I call other services securely with encryption and apply access control on the methods?
-* How do I handle retries and transient errors?
-* How do I use tracing to see a call graph with metrics to diagnose issues in production?
+* 我如何发现和调用不同服务上的方法？
+* 我如何安全地调用其他服务？
+* 我如何处理重试和瞬态错误？
+* 我如何使用分布式跟踪来查看调用图来诊断生产中的问题？
 
 Dapr addresses these challenges by providing a service invocation API that acts as a combination of a reverse proxy with built-in service discovery, while leveraging built-in distributed tracing, metrics, error handling, encryption and more.
 
-Dapr uses a sidecar architecture. To invoke an application using Dapr, you use the `invoke` API on any Dapr instance. The sidecar programming model encourages each applications to talk to its own instance of Dapr. The Dapr instances discover and communicate with one another.
+Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调用应用程序，请在任意 Dapr 实例上使用 `invoke` 这个API。 Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr 实例会相互发现并进行通信。
 
-### Service invocation
+### 调用逻辑
 
-The diagram below is an overview of how Dapr's service invocation works.
+下图是 Dapr的服务调用如何工作的总览图
 
 <img src="/images/service-invocation-overview.png" width=800 alt="Diagram showing the steps of service invocation">
 
-1. Service A makes an HTTP or gRPC call targeting Service B. The call goes to the local Dapr sidecar.
-2. Dapr discovers Service B's location using the [name resolution component](https://github.com/dapr/components-contrib/tree/master/nameresolution) which is running on the given [hosting platform]({{< ref "hosting" >}}).
-3. Dapr forwards the message to Service B's Dapr sidecar
+1. 服务 A 对服务 B 发起HTTP/gRPC的调用。
+2. Dapr 使用在给定 [ 托管平台]({{< ref "hosting" >}}) 上运行的 [命名解析组件](https://github.com/dapr/components-contrib/tree/master/nameresolution) 发现服务 B的位置。
+3. Dapr 将消息转发至服务 B的 Dapr 边车
 
-    **Note**: All calls between Dapr sidecars go over gRPC for performance. Only calls between services and Dapr sidecars can be either HTTP or gRPC
+    **注**: Dapr 边车之间的所有调用考虑到性能都优先使用 gRPC。 仅服务与 Dapr 边车之间的调用可以是 HTTP 或 gRPC
 
-4. Service B's Dapr sidecar forwards the request to the specified endpoint (or method) on Service B.  Service B then runs its business logic code.
-5. Service B sends a response to Service A.  The response goes to Service B's sidecar.
-6. Dapr forwards the response to Service A's Dapr sidecar.
-7. Service A receives the response.
+4. 服务 B的 Dapr 边车将请求转发至服务 B 上的特定端点 (或方法) 。 服务 B 随后运行其业务逻辑代码。
+5. 服务 B 发送响应给服务 A。 响应将转至服务 B 的边车。
+6. Dapr 将消息转发至服务 A 的 Dapr 边车。
+7. 服务 A 接收响应。
 
-## Features
-Service invocation provides several features to make it easy for you to call methods between applications.
+## 特性
+服务调用提供了一系列特性，使您可以方便地调用远程应用程序上的方法。
 
 ### Namespaces scoping
 
-Service invocation supports calls across namespaces. On all supported hosting platforms, Dapr app IDs conform to a valid FQDN format that includes the target namespace.
+Service invocation supports calls across namespaces. Service invocation supports calls across namespaces. On all supported hosting platforms, Dapr app IDs conform to a valid FQDN format that includes the target namespace.
 
 For example, the following string contains the app ID `nodeapp` in addition to the namespace the app runs in `production`.
 
@@ -51,24 +51,24 @@ For example, the following string contains the app ID `nodeapp` in addition to t
 localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 ```
 
-This is especially useful in cross namespace calls in a Kubernetes cluster. Watch this video for a demo on how to use namespaces with service invocation. <iframe width="560" height="315" src="https://www.youtube.com/embed/LYYV_jouEuA?start=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+This is especially useful in cross namespace calls in a Kubernetes cluster. This is especially useful in cross namespace calls in a Kubernetes cluster. Watch this video for a demo on how to use namespaces with service invocation.  <iframe width="560" height="315" src="https://www.youtube.com/embed/LYYV_jouEuA?start=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 
 ### Service-to-service security
 
-All calls between Dapr applications can be made secure with mutual (mTLS) authentication on hosted platforms, including automatic certificate rollover, via the Dapr Sentry service. The diagram below shows this for self hosted applications.
+All calls between Dapr applications can be made secure with mutual (mTLS) authentication on hosted platforms, including automatic certificate rollover, via the Dapr Sentry service. The diagram below shows this for self hosted applications. The diagram below shows this for self hosted applications.
 
 For more information read the [service-to-service security]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}) article.
 
 
-### Service access policies security
+### 重试
 
-Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. This enables you to restrict sensitive applications, that say have personnel information, from being accessed by unauthorized applications, and combined with service-to-service secure communication, provides for soft multi-tenancy deployments.
+Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. This enables you to restrict sensitive applications, that say have personnel information, from being accessed by unauthorized applications, and combined with service-to-service secure communication, provides for soft multi-tenancy deployments.
 
 For more information read the [access control allow lists for service invocation]({{< ref invoke-allowlist.md >}}) article.
 
 #### Example service invocation security
-The diagram below is an example deployment on a Kubernetes cluster with a Daprized `Ingress` service that calls onto `Service A` using service invocation with mTLS encryption and an applies access control policy. `Service A` then calls onto `Service B` also using service invocation and mTLS. Each service is running in different namespaces for added isolation.
+The diagram below is an example deployment on a Kubernetes cluster with a Daprized `Ingress` service that calls onto `Service A` using service invocation with mTLS encryption and an applies access control policy. `Service A` then calls onto `Service B` also using service invocation and mTLS. Each service is running in different namespaces for added isolation. `Service A` then calls onto `Service B` also using service invocation and mTLS. Each service is running in different namespaces for added isolation.
 
 <img src="/images/service-invocation-security.png" width=800>
 
@@ -78,10 +78,10 @@ Service invocation performs automatic retries with backoff time periods in the e
 
 Errors that cause retries are:
 
-* Network errors including endpoint unavailability and refused connections.
-* Authentication errors due to a renewing certificate on the calling/callee Dapr sidecars.
+* 网络错误，包括端点不可用和拒绝连接
+* 因续订主调/被调方Dapr边车上的证书而导致的身份验证错误
 
-Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Connection establishment via gRPC to the target sidecar has a timeout of 5 seconds.
+Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Connection establishment via gRPC to the target sidecar has a timeout of 5 seconds.
 
 ### Pluggable service discovery
 
@@ -90,11 +90,11 @@ Dapr can run on any [hosting platform]({{< ref hosting >}}). For the supported h
 ### Round robin load balancing with mDNS
 Dapr provides round robin load balancing of service invocation requests with the mDNS protocol, for example with a single machine or with multiple, networked, physical machines.
 
-The diagram below shows an example of how this works. If you have 1 instance of an application with app ID `FrontEnd` and 3 instances of application with app ID `Cart` and you call from `FrontEnd` app to `Cart` app, Dapr round robins' between the 3 instances. These instance can be on the same machine or on different machines. .
+The diagram below shows an example of how this works. The diagram below shows an example of how this works. If you have 1 instance of an application with app ID `FrontEnd` and 3 instances of application with app ID `Cart` and you call from `FrontEnd` app to `Cart` app, Dapr round robins' between the 3 instances. These instance can be on the same machine or on different machines. . These instance can be on the same machine or on different machines. .
 
 <img src="/images/service-invocation-mdns-round-robin.png" width=800 alt="Diagram showing the steps of service invocation">
 
-Note: You can have N instances of the same app with the same app ID as app ID is unique per app. And you can have multiple instances of that app where all those instances have the same app ID.
+Note: You can have N instances of the same app with the same app ID as app ID is unique per app. And you can have multiple instances of that app where all those instances have the same app ID. And you can have multiple instances of that app where all those instances have the same app ID.
 
 ### Tracing and metrics with observability
 
@@ -102,24 +102,24 @@ By default, all calls between applications are traced and metrics are gathered t
 
 ### Service invocation API
 
-The API for service invocation can be found in the [service invocation API reference]({{< ref service_invocation_api.md >}}) which describes how to invoke a method on another service.
+服务调用的 API 规范可在 [规范仓库]({{< ref service_invocation_api.md >}}) 中找到。
 
 ## Example
-Following the above call sequence, suppose you have the applications as described in the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md), where a python app invokes a node.js app. In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B".
+Following the above call sequence, suppose you have the applications as described in the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md), where a python app invokes a node.js app. In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B". In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B".
 
 The diagram below shows sequence 1-7 again on a local machine showing the API calls:
 
 <img src="/images/service-invocation-overview-example.png" width=800>
 
-1. The Node.js app has a Dapr app ID of `nodeapp`. The python app invokes the Node.js app's `neworder` method by POSTing `http://localhost:3500/v1.0/invoke/nodeapp/method/neworder`, which first goes to the python app's local Dapr sidecar.
+1. The Node.js app has a Dapr app ID of `nodeapp`. The Node.js app has a Dapr app ID of `nodeapp`. The python app invokes the Node.js app's `neworder` method by POSTing `http://localhost:3500/v1.0/invoke/nodeapp/method/neworder`, which first goes to the python app's local Dapr sidecar.
 2. Dapr discovers the Node.js app's location using name resolution component (in this case mDNS while self-hosted) which runs on your local machine.
 3. Dapr forwards the request to the Node.js app's sidecar using the location it just received.
-4. The Node.js app's sidecar forwards the request to the Node.js app. The Node.js app performs its business logic, logging the incoming message and then persist the order ID into Redis (not shown in the diagram)
+4. The Node.js app's sidecar forwards the request to the Node.js app. The Node.js app's sidecar forwards the request to the Node.js app. The Node.js app performs its business logic, logging the incoming message and then persist the order ID into Redis (not shown in the diagram)
 5. The Node.js app sends a response to the Python app through the Node.js sidecar.
 6. Dapr forwards the response to the Python Dapr sidecar
 7. The Python app receives the response.
 
-## Next steps
+## 下一步
 
 * Follow these guides on:
     * [How-to: Invoke services using HTTP]({{< ref howto-invoke-discover-services.md >}})
