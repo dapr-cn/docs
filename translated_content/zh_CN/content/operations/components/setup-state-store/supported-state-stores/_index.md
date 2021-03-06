@@ -23,7 +23,7 @@ The following stores are supported, at various levels, by the Dapr state managem
 
 ### Generic
 
-| Name                                               | CRUD | Transactional | ETag | Actors | Status | Component version | Since |
+| 名称                                                 | CRUD | Transactional | ETag | Actors | Status | Component version | Since |
 | -------------------------------------------------- | ---- | ------------- | ---- | ------ | ------ | ----------------- | ----- |
 | [Aerospike]({{< ref setup-aerospike.md >}})        | ✅    | ❌             | ✅    | ❌      | Alpha  | v1                | 1.0   |
 | [Apache Cassandra]({{< ref setup-cassandra.md >}}) | ✅    | ❌             | ❌    | ❌      | Alpha  | v1                | 1.0   |
