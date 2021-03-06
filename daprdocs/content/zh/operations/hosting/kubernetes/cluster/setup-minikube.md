@@ -47,21 +47,32 @@ minikube addons enable ingress
 
 1. [Install Helm v3 client](https://helm.sh/docs/intro/install/)
 
-> **Note:** The latest Dapr helm chart no longer supports Helm v2. Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
+> **Note:** The latest Dapr helm chart no longer supports Helm v2. Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/). Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
 
 ### Troubleshooting
 
 1. The external IP address of load balancer is not shown from `kubectl get svc`
 
-In Minikube, EXTERNAL-IP in `kubectl get svc` shows `<pending>` state for your service. In this case, you can run `minikube service [service_name]` to open your service without external IP address.
+In Minikube, EXTERNAL-IP in `kubectl get svc` shows `<pending>` state for your service. In this case, you can run `minikube service [service_name]` to open your service without external IP address. In this case, you can run `minikube service [service_name]` to open your service without external IP address.
 
 ```bash
+$ kubectl get svc
+NAME                        TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)            AGE
+...
 $ kubectl get svc
 NAME                        TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)            AGE
 ...
 calculator-front-end        LoadBalancer   10.103.98.37     <pending>     80:30534/TCP       25h
 calculator-front-end-dapr   ClusterIP      10.107.128.226   <none>        80/TCP,50001/TCP   25h
 ...
+
+$ minikube service calculator-front-end
+|-----------|----------------------|-------------|---------------------------|
+| NAMESPACE |         NAME         | TARGET PORT |            URL            |
+|-----------|----------------------|-------------|---------------------------|
+| default   | calculator-front-end |             | http://192.168.64.7:30534 |
+|-----------|----------------------|-------------|---------------------------|
+🎉  Opening kubernetes service  default/calculator-front-end in default browser...
 
 $ minikube service calculator-front-end
 |-----------|----------------------|-------------|---------------------------|
