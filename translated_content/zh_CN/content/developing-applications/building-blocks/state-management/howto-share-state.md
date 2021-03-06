@@ -6,19 +6,19 @@ weight: 400
 description: "Choose different strategies for sharing state between different applications"
 ---
 
-## Introduction
+## 介绍
 
-Dapr offers developers different ways to share state between applications.
+Dapr 为开发者提供了不同的方式来共享应用程序之间的状态。
 
-Different architectures might have different needs when it comes to sharing state. For example, in one scenario you may want to encapsulate all state within a given application and have Dapr manage the access for you. In a different scenario, you may need to have two applications working on the same state be able to get and save the same keys.
+在共享状态时，不同的体系结构可能有不同的需求。 例如，在一个场景中，您可能想要封装某个应用程序中的所有状态，并让 Dapr 管理您的访问权限。 在不同的场景中，您可能需要两个在相同状态下工作的应用程序能够获得和保存相同的键值(keys)。
 
-To enable state sharing, Dapr supports the following key prefixes strategies:
+要启用状态共享， Dapr 支持以下键前缀策略:
 
-* **`appid`** - This is the default strategy. the `appid` prefix allows state to be managed only by the app with the specified `appid`. All state keys will be prefixed with the `appid`, and are scoped for the application.
+* **`Appid`** - 这是默认策略。 the `appid` prefix allows state to be managed only by the app with the specified `appid`. All state keys will be prefixed with the `appid`, and are scoped for the application. All state keys will be prefixed with the `appid`, and are scoped for the application.
 
-* **`name`** - This setting uses the name of the state store component as the prefix. Multiple applications can share the same state for a given state store.
+* **`name`** - This setting uses the name of the state store component as the prefix. Multiple applications can share the same state for a given state store. Multiple applications can share the same state for a given state store.
 
-* **`none`** - This setting uses no prefixing. Multiple applications share state across different state stores.
+* **`none`** - This setting uses no prefixing. Multiple applications share state across different state stores. Multiple applications share state across different state stores.
 
 ## Specifying a state prefix strategy
 
