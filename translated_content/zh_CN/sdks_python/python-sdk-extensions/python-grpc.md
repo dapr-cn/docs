@@ -92,5 +92,5 @@ app.run(50051)
 
 A full sample can be found [here](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-binding).
 
-## Related links
+## 相关链接
 - [PyPi](https://pypi.org/project/dapr-ext-grpc/)
