@@ -8,7 +8,7 @@ weight: 300
 
 ## Publish a message to a given topic
 
-This endpoint lets you publish data to multiple consumers who are listening on a `topic`. Dapr guarantees at least once semantics for this endpoint. Dapr guarantees at least once semantics for this endpoint.
+This endpoint lets you publish data to multiple consumers who are listening on a `topic`. Dapr guarantees at least once semantics for this endpoint. Dapr guarantees at least once semantics for this endpoint. Dapr guarantees at least once semantics for this endpoint.
 
 ### HTTP Request
 
@@ -27,7 +27,7 @@ POST http://localhost:<daprPort>/v1.0/publish/<pubsubname>/<topic>[?<metadata>]
 
 ### URL Parameters
 
-| 参数         | 描述                                               |
+| Parameter  | 描述                                               |
 | ---------- | ------------------------------------------------ |
 | daprPort   | the Dapr port                                    |
 | pubsubname | the name of pubsub component                     |
@@ -46,13 +46,13 @@ curl -X POST http://localhost:3500/v1.0/publish/pubsubName/deathStarStatus \
 
 ### Headers
 
-The `Content-Type` header tells Dapr which content type your data adheres to when constructing a CloudEvent envelope. The value of the `Content-Type` header populates the `datacontenttype` field in the CloudEvent. Unless specified, Dapr assumes `text/plain`. If your content type is JSON, use a `Content-Type` header with the value of `application/json`.
+The `Content-Type` header tells Dapr which content type your data adheres to when constructing a CloudEvent envelope. The value of the `Content-Type` header populates the `datacontenttype` field in the CloudEvent. Unless specified, Dapr assumes `text/plain`. If your content type is JSON, use a `Content-Type` header with the value of `application/json`. The value of the `Content-Type` header populates the `datacontenttype` field in the CloudEvent. Unless specified, Dapr assumes `text/plain`. If your content type is JSON, use a `Content-Type` header with the value of `application/json`.
 
 If you want to send your own custom CloundEvent, use the `application/cloudevents+json` value for the `Content-Type` header.
 
 #### Metadata
 
-Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.` as shown below.
+Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.` as shown below. It must be prefixed with `metadata.` as shown below.
 
 | Parameter             | 描述                                                                                                     |
 | --------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -72,11 +72,11 @@ Dapr will invoke the following endpoint on user code to discover topic subscript
 GET http://localhost:<appPort>/dapr/subscribe
 ```
 
-#### URL 参数
+#### URL Parameters
 
-| 参数      | 描述     |
-| ------- | ------ |
-| appPort | 应用程序端口 |
+| Parameter | 描述                   |
+| --------- | -------------------- |
+| appPort   | the application port |
 
 #### HTTP Response body
 
@@ -102,7 +102,7 @@ In order to deliver topic events, a `POST` call will be made to user code with t
 
 The following example illustrates this point, considering a subscription for topic `newOrder` with route `orders` on port 3000: `POST http://localhost:3000/orders`
 
-#### HTTP 请求
+#### HTTP Request
 
 ```
 POST http://localhost:<appPort>/<path>
@@ -119,7 +119,7 @@ POST http://localhost:<appPort>/<path>
 
 #### Expected HTTP Response
 
-An HTTP 2xx response denotes successful processing of message. For richer response handling, a JSON encoded payload body with the processing status can be sent:
+An HTTP 2xx response denotes successful processing of message. An HTTP 2xx response denotes successful processing of message. For richer response handling, a JSON encoded payload body with the processing status can be sent:
 
 ```json
 {
