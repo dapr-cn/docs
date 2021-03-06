@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "How-To: Invoke services using HTTP"
+title: "入门指南：发现并调用服务"
 linkTitle: "How-To: Invoke services"
-description: "Call between services using service invocation"
+description: "入门指南指导如何使用 Dapr 服务在分布式应用程序中调用其它服务"
 weight: 2000
 ---
 
-This article describe how to deploy services each with an unique application ID, so that other services can discover and call endpoints on them using service invocation API.
+本文介绍如何使用唯一的应用程序 ID 部署每个服务，以便其他服务可以使用服务调用 API 发现和调用这些终结点。
 
-## Step 1: Choose an ID for your service
+## 步骤 1: 为服务选择标识
 
-Dapr allows you to assign a global, unique ID for your app. This ID encapsulates the state for your application, regardless of the number of instances it may have.
+Dapr 允许您为您的应用分配一个全局唯一ID。 此 ID 为您的应用程序封装了状态，不管它可能有多少实例。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
-In self hosted mode, set the `--app-id` flag:
+在自托管方式下，设置 `--app-id` 标记:
 
 ```bash
 dapr run --app-id cart --app-port 5000 python app.py
 ```
 
-If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection:
+如果您的应用使用 SSL 连接，您可以告诉Dapr 在不安全的 SSL 连接中调用您的应用：
 
 ```bash
 dapr run --app-id cart --app-port 5000 --app-ssl python app.py
@@ -30,9 +30,9 @@ dapr run --app-id cart --app-port 5000 --app-ssl python app.py
 
 {{% codetab %}}
 
-### Setup an ID using Kubernetes
+### 使用 Kubernetes 设置标识
 
-In Kubernetes, set the `dapr.io/app-id` annotation on your pod:
+在 Kubernetes 中，在您的pod 上设置 `dapr.io/app-id` 注解：
 
 ```yaml
 apiVersion: apps/v1
@@ -57,16 +57,16 @@ spec:
         dapr.io/app-port: "5000"
 ...
 ```
-*If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection with the `app-ssl: "true"` annotation (full list [here]({{< ref kubernetes-annotations.md >}}))*
+*如果应用程序使用 SSL 连接，那么可以使用 `app-ssl: "true"` 注解 (完整列表 [此处]({{< ref kubernetes-annotations.md >}})) 告知 Dapr 在不安全的 SSL 连接上调用应用程序。*
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
 
-## Step 2: Setup a service
+## 步骤 2: 设置服务
 
-The following is a Python example of a cart app. It can be written in any programming language.
+以下是购物车应用的 Python 示例。 它可以用任何编程语言编写。
 
 ```python
 from flask import Flask
@@ -78,39 +78,42 @@ def add():
 
 if __name__ == '__main__':
     app.run()
+
+if __name__ == '__main__':
+    app.run()
 ```
 
-This Python app exposes an `add()` method via the `/add` endpoint.
+此 Python 应用程序通过 `/add()` 端点暴露了一个 `add()` 方法。
 
-## Step 3: Invoke the service
+## 步骤 3: 调用服务
 
-Dapr uses a sidecar, decentralized architecture. To invoke an application using Dapr, you can use the `invoke` API on any Dapr instance.
+Dapr 采用边车（sidecar）、去中心化的架构。 要使用 Dapr 调用应用程序，您可以在任意 Dapr 实例中使用 `调用` API。
 
-The sidecar programming model encourages each applications to talk to its own instance of Dapr. The Dapr instances discover and communicate with one another.
+sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr 实例会相互发现并进行通信。
 
 {{< tabs curl CLI >}}
 
 {{% codetab %}}
-From a terminal or command prompt run:
+从一个终端或命令提示运行：
 ```bash
 curl http://localhost:3500/v1.0/invoke/cart/method/add -X POST
 ```
 
-Since the add endpoint is a 'POST' method, we used `-X POST` in the curl command.
+由于 add 端点是一个“POST”方法，我们在 curl 命令中使用了 `-X POST`。
 
-To invoke a 'GET' endpoint:
+要调用 "GET" 端点:
 
 ```bash
 curl http://localhost:3500/v1.0/invoke/cart/method/add
 ```
 
-To invoke a 'DELETE' endpoint:
+要调用 "DELETE" 端点:
 
 ```bash
 curl http://localhost:3500/v1.0/invoke/cart/method/add -X DELETE
 ```
 
-Dapr puts any payload returned by the called service in the HTTP response's body.
+Dapr 将调用的服务返回的任何有效负载放在 HTTP 响应的消息体中。
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -121,25 +124,25 @@ dapr invoke --app-id cart --method add
 
 {{< /tabs >}}
 
-### Namespaces
+### 命名空间
 
-When running on [namespace supported platforms]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}}), you include the namespace of the target app in the app ID: `myApp.production`
+当运行于[支持命名空间]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})的平台时，在您的 app ID 中包含命名空间：`myApp.production`
 
-For example, invoking the example python service with a namespace would be:
+例如，调用包含名称空间的示例 python 服务:
 
 ```bash
 curl http://localhost:3500/v1.0/invoke/cart.production/method/add -X POST
 ```
 
-See the [Cross namespace API spec]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) for more information on namespaces.
+查看更多有关名称空间的内容，请参阅\[跨命名空间 API 规范\]({{< ref "service_invocation_api. md#cross-namespace-invocation" >}})。
 
-## Step 4: View traces and logs
+## 步骤 4: 查看跟踪和日志
 
-The example above showed you how to directly invoke a different service running locally or in Kubernetes. Dapr outputs metrics, tracing and logging information allowing you to visualize a call graph between services, log errors and optionally log the payload body.
+上面的示例显示了如何直接调用本地或 Kubernetes 中运行的其他服务。 Dapr 输出指标、跟踪和日志记录信息，允许您可视化服务之间的调用图、日志错误和可选地记录有效负载正文。
 
-For more information on tracing and logs see the [observability]({{< ref observability-concept.md >}}) article.
+有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 篇文章。
 
- ## Related Links
+ 相关链接
 
-* [Service invocation overview]({{< ref service-invocation-overview.md >}})
-* [Service invocation API specification]({{< ref service_invocation_api.md >}})
+* [服务调用概述]({{< ref service-invocation-overview.md >}})
+* [服务调用 API 规范]({{< ref service_invocation_api.md >}})
