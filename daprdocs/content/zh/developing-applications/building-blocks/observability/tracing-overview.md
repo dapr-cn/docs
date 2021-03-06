@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "分布式跟踪"
+title: "Distributed tracing"
 linkTitle: "Distributed tracing"
 weight: 1000
 description: "使用 Dapr 跟踪获取分布式应用程序的可见性"
 ---
 
-Dapr uses the Zipkin protocol for distributed traces and metrics collection. Due to the ubiquity of the Zipkin protocol, many backends are supported out of the box, for examples [Stackdriver](https://cloud.google.com/stackdriver), [Zipkin](https://zipkin.io), [New Relic](https://newrelic.com) and others. Combining with the OpenTelemetry Collector, Dapr can export traces to many other backends including but not limted to [Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/), [Datadog](https://www.datadoghq.com), [Instana](https://www.instana.com), [Jaeger](https://www.jaegertracing.io/), and [SignalFX](https://www.signalfx.com/).
+Dapr uses the Zipkin protocol for distributed traces and metrics collection. Due to the ubiquity of the Zipkin protocol, many backends are supported out of the box, for examples [Stackdriver](https://cloud.google.com/stackdriver), [Zipkin](https://zipkin.io), [New Relic](https://newrelic.com) and others. Dapr uses the Zipkin protocol for distributed traces and metrics collection. Due to the ubiquity of the Zipkin protocol, many backends are supported out of the box, for examples [Stackdriver](https://cloud.google.com/stackdriver), [Zipkin](https://zipkin.io), [New Relic](https://newrelic.com) and others. Combining with the OpenTelemetry Collector, Dapr can export traces to many other backends including but not limted to [Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/), [Datadog](https://www.datadoghq.com), [Instana](https://www.instana.com), [Jaeger](https://www.jaegertracing.io/), and [SignalFX](https://www.signalfx.com/).
 
 <img src="/images/tracing.png" width=600>
 
@@ -27,7 +27,7 @@ Dapr 使用标准的 W3C 跟踪上下文标头。 对于 HTTP 请求，Dapr 使�
 
 ## 配置
 
-Dapr uses probabilistic sampling. 采样率定义跟踪 Span 采样的概率，其值可以在0和1之间（包括）。 The default sample rate is 0.0001 (i.e. 1 in 10,000 spans is sampled).
+Dapr uses probabilistic sampling. 采样率定义跟踪 Span 采样的概率，其值可以在0和1之间（包括）。 The sample rate defines the probability a tracing span will be sampled and can have a value between 0 and 1 (inclusive). The default sample rate is 0.0001 (i.e. 1 in 10,000 spans is sampled).
 
 若要更改默认的跟踪行为，请使用配置文件（在自托管模式下）或 Kubernetes 配置对象（在 Kubernetes 模式下）。 例如，以下配置对象将采样率更改为 1（即每个Span都采样），并使用 Zipkin 协议将跟踪发送到位于 http://zipkin.default.svc.cluster.local 的 Zipkin 服务器：
 
