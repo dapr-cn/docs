@@ -6,13 +6,13 @@ weight: 20000
 description: "Use Dapr Pub/Sub with multiple namespaces"
 ---
 
-In some scenarios, applications can be spread across namespaces and share a queue or topic via PubSub. In this case, the PubSub component must be provisioned on each namespace.
+In some scenarios, applications can be spread across namespaces and share a queue or topic via PubSub. In this case, the PubSub component must be provisioned on each namespace. In this case, the PubSub component must be provisioned on each namespace.
 
 {{% alert title="Note" color="primary" %}}
-Namespaces are a Dapr concept used for scoping applications and components. This example uses Kubernetes namespaces, however the Dapr component namespace scoping can be used on any supported platform. Read [How-To: Scope components to one or more applications]({{< ref "component-scopes.md" >}}) for more information on scoping components.
+Namespaces are a Dapr concept used for scoping applications and components. This example uses Kubernetes namespaces, however the Dapr component namespace scoping can be used on any supported platform. Read [How-To: Scope components to one or more applications]({{< ref "component-scopes.md" >}}) for more information on scoping components. This example uses Kubernetes namespaces, however the Dapr component namespace scoping can be used on any supported platform. Read [How-To: Scope components to one or more applications]({{< ref "component-scopes.md" >}}) for more information on scoping components.
 {{% /alert %}}
 
-This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/pub-sub). The Redis installation and the subscribers are in `namespace-a` while the publisher UI is in `namespace-b`. This solution will also work if Redis is installed on another namespace or if you use a managed cloud service like Azure ServiceBus, AWS SNS/SQS or GCP PubSub.
+This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/pub-sub). The Redis installation and the subscribers are in `namespace-a` while the publisher UI is in `namespace-b`. This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/pub-sub). The Redis installation and the subscribers are in `namespace-a` while the publisher UI is in `namespace-b`. This solution will also work if Redis is installed on another namespace or if you use a managed cloud service like Azure ServiceBus, AWS SNS/SQS or GCP PubSub.
 
 This is a diagram of the example using namespaces.
 
@@ -106,7 +106,7 @@ kubectl logs node-subscriber-XYZ node-subscriber
 kubectl logs python-subscriber-XYZ python-subscriber
 ```
 
-The messages published on the browser should show in the corresponding subscriber's logs. The Node.js subscriber receives messages of type "A" and "B", while the Python subscriber receives messages of type "A" and "C".
+The messages published on the browser should show in the corresponding subscriber's logs. The messages published on the browser should show in the corresponding subscriber's logs. The Node.js subscriber receives messages of type "A" and "B", while the Python subscriber receives messages of type "A" and "C".
 
 ## Clean up
 
@@ -121,7 +121,7 @@ kubectl delete namespace namespace-a
 kubectl delete namespace namespace-b
 ```
 
-## Related links
+## 相关链接
 
 - [Scope components to one or more applications]({{< ref "component-scopes.md" >}})
 - [Use secret scoping]({{< ref "secrets-scopes.md" >}})
