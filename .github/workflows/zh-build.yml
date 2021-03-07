@@ -1,0 +1,37 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - v1.0/translate_site
+  pull_request:
+    branches:
+      - v1.0/translate_site
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+          ref: v1.0/translate_site
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+          extended: true
+
+      - name: Setup Docsy and Build
+        run: |
+          cd daprdocs
+          sed -i 's/..\/translations\/docs-zh\/content\/zh-hans/..\/translated_content\/zh_CN\/content/g' config.toml
+          sed -i 's/..\/translations\/docs-zh\/content\/contributing/..\/translated_content\/zh_CN\/contributing/g' config.toml
+          sed -i 's/..\/translations\/docs-zh\/content\/sdks_python/..\/translated_content\/zh_CN\/sdks_python/g' config.toml
+          sed -i 's/..\/translations\/docs-zh\/content\/sdks_php/..\/translated_content\/zh_CN\/sdks_php/g' config.toml
+          sed -i 's/..\/translations\/docs-zh\/content\/sdks_dotnet/..\/translated_content\/zh_CN\/sdks_dotnet/g' config.toml
+          sudo npm install -D --save autoprefixer 
+          sudo npm install -D --save postcss-cli
+          hugo --minify
