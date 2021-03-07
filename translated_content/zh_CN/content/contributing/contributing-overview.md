@@ -11,6 +11,8 @@ description: >
 
 了解有关社区参与和社区成员的更多信息，请参阅 [Dapr community repository](https://github.com/dapr/community)。
 
+> 如果你想为Dapr文档做出贡献，还请参阅 [}}> 投稿准则 ]({{< ref contributing-docs  mark=)。
+
 ## Issues
 
 ### Issue类型
