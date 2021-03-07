@@ -7,11 +7,11 @@ aliases:
   - /getting-started/install-dapr/
 ---
 
-Now that you have the [Dapr CLI installed]({{X22X}}), it's time to initialize Dapr on your local machine using the CLI.
+Now that you have the [Dapr CLI installed]({{X22X}}), it's time to initialize Dapr on your local machine using the CLI.
 
-Dapr runs as a sidecar alongside your application, and in self-hosted mode this means it is a process on your local machine. Therefore, initializing Dapr includes fetching the Dapr sidecar binaries and installing them locally. Therefore, initializing Dapr includes fetching the Dapr sidecar binaries and installing them locally.
+Dapr runs as a sidecar alongside your application, and in self-hosted mode this means it is a process on your local machine. Therefore, initializing Dapr includes fetching the Dapr sidecar binaries and installing them locally.
 
-In addition, the default initialization process also creates a development environment that helps streamline application development with Dapr. This includes the following steps: This includes the following steps:
+In addition, the default initialization process also creates a development environment that helps streamline application development with Dapr. This includes the following steps:
 
 1. Running a **Redis container instance** to be used as a local state store and message broker
 1. Running a **Zipkin container instance** for observability
@@ -19,7 +19,7 @@ In addition, the default initialization process also creates a development envir
 1. Running a **Dapr placement service container instance** for local actor support
 
 {{% alert title="Docker" color="primary" %}}
-This recommended development environment requires [Docker](https://docs.docker.com/install/). This recommended development environment requires [Docker](https://docs.docker.com/install/). It is possible to initialize Dapr without a dependency on Docker (see [this guidance]({{X24X}})) but next steps in this guide assume the recommended development environment.
+This recommended development environment requires [Docker](https://docs.docker.com/install/). It is possible to initialize Dapr without a dependency on Docker (see [this guidance]({{X24X}})) but next steps in this guide assume the recommended development environment.
 {{% /alert %}}
 
 ### Step 1: Open an elevated terminal
@@ -28,7 +28,7 @@ This recommended development environment requires [Docker](https://docs.docker.c
 
    {{% codetab %}}
    If you run your Docker commands with sudo, or the install path is `/usr/local/bin` (default install path), you will need to use `sudo` below.
-   您可以使用 HTTP 来这样做：
+   {{% /codetab %}}
 
    {{% codetab %}}
    Make sure that you run Command Prompt as administrator (right click, run as administrator)
@@ -110,5 +110,4 @@ You will see the Dapr config, Dapr binaries directory, and the default component
 
 {{< /tabs >}}
 
-[}}" role="button">Next step: Use the Dapr API]({{< ref get-started-api.md  mark=){.btn.btn-primary}
 
