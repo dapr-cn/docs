@@ -7,7 +7,7 @@ description: "Redis 组件绑定详细说明"
 
 ## Component format
 
-To setup Redis binding create a component of type `bindings.redis`. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -29,7 +29,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## Spec metadata fields
@@ -54,11 +54,11 @@ Dapr can use any Redis instance - containerized, running on your local dev machi
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" "GCP" "Azure">}}
 
 {{% codetab %}}
-The Dapr CLI will automatically create and setup a Redis Streams instance for you. The Dapr CLI will automatically create and setup a Redis Streams instance for you. The Redis instance will be installed via Docker when you run `dapr init`, and the component file will be created in default directory. (`$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows). (`$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows).
-您可以使用 HTTP 来这样做：
+The Dapr CLI will automatically create and setup a Redis Streams instance for you. The Redis instance will be installed via Docker when you run `dapr init`, and the component file will be created in default directory. (`$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows).
+{{% /codetab %}}
 
 {{% codetab %}}
-You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm](https://github.com/helm/helm#install). This approach requires [Installing Helm](https://github.com/helm/helm#install).
+You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm](https://github.com/helm/helm#install).
 
 1. Install Redis into your cluster.
     ```bash
@@ -67,7 +67,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
     ```
 
 2. Run `kubectl get pods` to see the Redis containers now running in your cluster.
-3. Add `redis-master:6379` as the `redisHost` in your redis.yaml file. For example: For example:
+3. Add `redis-master:6379` as the `redisHost` in your redis.yaml file. For example:
 
     ```yaml
         metadata:
@@ -76,11 +76,11 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
     ```
 
 4. Next, we'll get our Redis password, which is slightly different depending on the OS we're using:
-    - **Windows**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`, which will create a file with your encoded password. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files.
+    - **Windows**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`, which will create a file with your encoded password. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files.
 
     - **Linux/MacOS**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode` and copy the outputted password.
 
-    Add this password as the `redisPassword` value in your redis.yaml file. For example: For example:
+    Add this password as the `redisPassword` value in your redis.yaml file. For example:
 
     ```yaml
         - name: redisPassword
