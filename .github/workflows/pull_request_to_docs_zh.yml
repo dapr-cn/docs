@@ -3,7 +3,7 @@ name: create pull request to docs-zh
 on:
   push:
     branches:
-      - v1.0/publish_translate_site_test
+      - v1.0/publish_translate_site
 
 jobs:
   delpoy_github:
