@@ -27,6 +27,7 @@ jobs:
           chmod a+x ./update_config_zh.sh
           ./update_config_zh.sh
           sed -i 's/en-us/zh-hans/g' config.toml
+          sed -i 's/weight = 2/weight = 0/g' config.toml
           sudo npm install --save
           hugo --minify
 
