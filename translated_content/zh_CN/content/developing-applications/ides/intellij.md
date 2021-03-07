@@ -12,12 +12,12 @@ When developing Dapr applications, you typically use the Dapr CLI to start your 
 dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 ```
 
-This uses the default components yaml files (created on `dapr init`) so that your service can interact with the local Redis container. This is great when you are just getting started but what if you want to attach a debugger to your service and step through the code? This is where you can use the dapr cli without invoking an app. This is great when you are just getting started but what if you want to attach a debugger to your service and step through the code? This is where you can use the dapr cli without invoking an app.
+This uses the default components yaml files (created on `dapr init`) so that your service can interact with the local Redis container. This is great when you are just getting started but what if you want to attach a debugger to your service and step through the code? This is where you can use the dapr cli without invoking an app.
 
 
-One approach to attaching the debugger to your service is to first run `dapr run --` from the command line and then launch your code and attach the debugger. One approach to attaching the debugger to your service is to first run `dapr run --` from the command line and then launch your code and attach the debugger. While this is a perfectly acceptable solution, it does require a few extra steps (like switching between terminal and IDE) and some instruction to developers who might want to clone your repo and hit the "play" button to begin debugging.
+One approach to attaching the debugger to your service is to first run `dapr run --` from the command line and then launch your code and attach the debugger. While this is a perfectly acceptable solution, it does require a few extra steps (like switching between terminal and IDE) and some instruction to developers who might want to clone your repo and hit the "play" button to begin debugging.
 
-This document explains how to use `dapr` directly from IntelliJ. This document explains how to use `dapr` directly from IntelliJ. As a pre-requisite, make sure you have initialized the Dapr's dev environment via `dapr init`.
+This document explains how to use `dapr` directly from IntelliJ. As a pre-requisite, make sure you have initialized the Dapr's dev environment via `dapr init`.
 
 Let's get started!
 
@@ -35,7 +35,7 @@ For versions [2020.1](https://www.jetbrains.com/help/idea/2020.1/tuning-the-ide.
 ```powershell
 %USERPROFILE%\AppData\Roaming\JetBrains\IntelliJIdea2020.1\tools\
 ```
-您可以使用 HTTP 来这样做：
+{{% /codetab %}}
 
 
 {{% codetab %}}
