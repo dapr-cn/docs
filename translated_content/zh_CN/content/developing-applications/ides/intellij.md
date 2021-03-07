@@ -35,7 +35,7 @@ For versions [2020.1](https://www.jetbrains.com/help/idea/2020.1/tuning-the-ide.
 ```powershell
 %USERPROFILE%\AppData\Roaming\JetBrains\IntelliJIdea2020.1\tools\
 ```
-{{% /codetab %}}
+您可以使用 HTTP 来这样做：
 
 
 {{% codetab %}}
