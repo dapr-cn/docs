@@ -43,12 +43,9 @@ spec:
     value: topic1
 ```
 
-您可以使用 HTTP 来这样做：
+{{% /codetab %}}
 
 {{% codetab %}}
-
-您可以使用 HTTP 来这样做：
-
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

@@ -80,7 +80,7 @@ spec:
     - name: region
       value: us-east-1
 ```
-您可以使用 HTTP 来这样做：
+{{% /codetab %}}
 
 {{% codetab %}}
 To run localstack on Kubernetes, you can apply the configuration below. To run localstack on Kubernetes, you can apply the configuration below. Localstack is then reachable at the DNS name `http://localstack.default.svc.cluster.local:4566` (assuming this was applied to the default namespace) and this should be used as the `endpoint`

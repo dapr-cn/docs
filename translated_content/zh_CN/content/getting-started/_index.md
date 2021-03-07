@@ -22,5 +22,4 @@ The following steps in this guide are:
 1. Configure a component
 1. Explore Dapr quickstarts
 
-[}}" role="button">First step: Install the Dapr CLI >>]({{< ref install-dapr-cli.md  mark=){.btn.btn-primary}
 

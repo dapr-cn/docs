@@ -89,7 +89,7 @@ docker run --name some-mongo -d mongo
 ```
 
 You can then interact with the server using `localhost:27017`.
-您可以使用 HTTP 来这样做：
+{{% /codetab %}}
 
 {{% codetab %}}
 The easiest way to install MongoDB on Kubernetes is by using the [Helm chart](https://github.com/helm/charts/tree/master/stable/mongodb):

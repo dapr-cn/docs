@@ -29,7 +29,7 @@ SMI 是一个抽象层，它提供跨不同服务网格技术的公共 API 。  
 Istio 不是编程模型，不关注应用程序级别的功能，如状态管理， pub-sub，绑定等。 这就是Dapr所要解决的。
 
 ## 性能基准
-Dapr项目的重点是性能，因为其固有的讨论是Dapr作为您的应用程序的侧面。 请参阅 [这里]({{< ref perf-service-invocation.md >}) 以获取更新的性能数字。
+Dapr项目的重点是性能，因为其固有的讨论是Dapr作为您的应用程序的侧面。 请参阅 [这里]({{< ref perf-service-invocation.md >}}) 以获取更新的性能数字。
 
 ## Actors
 

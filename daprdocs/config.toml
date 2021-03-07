@@ -73,23 +73,23 @@ id = "UA-149338238-3"
     lang = "en"
 
   [[module.mounts]]
-    source = "../translations/docs-zh/content/zh-hans"
+    source = "../translated_content/zh_CN/content"
     target = "content"
     lang = "zh-hans"
   [[module.mounts]]
-    source = "../translations/docs-zh/content/contributing"
+    source = "../translated_content/zh_CN/contributing"
     target = "content/contributing/"
     lang = "zh-hans"
   [[module.mounts]]
-    source = "../translations/docs-zh/content/sdks_python"
+    source = "../translated_content/zh_CN/sdks_python"
     target = "content/developing-applications/sdks/python"
     lang = "zh-hans"
   [[module.mounts]]
-    source = "../translations/docs-zh/content/sdks_php"
+    source = "../translated_content/zh_CN/sdks_php"
     target = "content/developing-applications/sdks/php"
     lang = "zh-hans"
   [[module.mounts]]
-    source = "../translations/docs-zh/content/sdks_dotnet"
+    source = "../translated_content/zh_CN/sdks_dotnet"
     target = "content/developing-applications/sdks/dotnet"
     lang = "zh-hans"
 

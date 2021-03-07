@@ -31,7 +31,7 @@ In a separate terminal run:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "name", "value": "Bruce Wayne"}]' http://localhost:3500/v1.0/state/statestore
 ```
-您可以使用 HTTP 来这样做：
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -102,4 +102,3 @@ exit
 ```
 
 
-[}}" role="button">Next step: Define a component >>]({{< ref get-started-component.md  mark=){.btn.btn-primary}

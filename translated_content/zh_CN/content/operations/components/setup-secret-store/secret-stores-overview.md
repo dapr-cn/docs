@@ -62,7 +62,7 @@ Once you have created the component's YAML file, follow these instructions to ap
 
 {{% codetab %}}
 To run locally, create a `components` dir containing the YAML file and provide the path to the `dapr run` command with the flag `--components-path`.
-您可以使用 HTTP 来这样做：
+{{% /codetab %}}
 
 {{% codetab %}}
 To deploy in Kubernetes, assuming your component file is named `secret-store.yaml`, run:

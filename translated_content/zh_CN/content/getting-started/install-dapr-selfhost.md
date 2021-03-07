@@ -28,7 +28,7 @@ This recommended development environment requires [Docker](https://docs.docker.c
 
    {{% codetab %}}
    If you run your Docker commands with sudo, or the install path is `/usr/local/bin` (default install path), you will need to use `sudo` below.
-   您可以使用 HTTP 来这样做：
+   {{% /codetab %}}
 
    {{% codetab %}}
    Make sure that you run Command Prompt as administrator (right click, run as administrator)
@@ -110,5 +110,4 @@ You will see the Dapr config, Dapr binaries directory, and the default component
 
 {{< /tabs >}}
 
-[}}" role="button">Next step: Use the Dapr API >>]({{< ref get-started-api.md  mark=){.btn.btn-primary}
 
