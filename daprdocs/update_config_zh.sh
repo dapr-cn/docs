@@ -3,3 +3,4 @@ sed -i 's/..\/translations\/docs-zh\/content\/contributing/..\/translated_conten
 sed -i 's/..\/translations\/docs-zh\/content\/sdks_python/..\/translated_content\/zh_CN\/sdks_python/g' config.toml
 sed -i 's/..\/translations\/docs-zh\/content\/sdks_php/..\/translated_content\/zh_CN\/sdks_php/g' config.toml
 sed -i 's/..\/translations\/docs-zh\/content\/sdks_dotnet/..\/translated_content\/zh_CN\/sdks_dotnet/g' config.toml
+sed -i 's/languageCode = "en-us"/defaultContentLanguage = "zh-hans"/g' config.toml
