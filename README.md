@@ -13,11 +13,15 @@
 - <https://dapr-cn.github.io/>
 - <https://dapr-cn.gitee.io/>
 
+并且，我们会定期将内容推送到官方的 docs.dapr.io 文档库。
+
+- <https://docs.dapr.io>
+
 ## 只需要三步，您也可以参与
 
 只要简单三步，您也可以非常轻松参与我们的工作中来。
 
-1. [点击链接 https://crwd.in/daprcndocs](https://crwd.in/daprcndocs) 在 crowdin.com 上加入该翻译项目。过程中将会需要填写一些您个人的信息。
+1. [点击链接 https://crwd.in/cndocsdapr](https://crwd.in/cndocsdapr) 在 crowdin.com 上加入该翻译项目。过程中将会需要填写一些您个人的信息。
 2. [点击链接 https://crowdin.com/project/daprcndocs/zh-CN#](https://crowdin.com/project/daprcndocs/zh-CN#) 查看并选择您感兴趣的未翻译内容。
 3. 如下图所示，提交一段您的翻译建议。我们将会定时审阅您的翻译内容。并发布到站点中。
 
@@ -33,9 +37,6 @@
 
 我们感谢所有参与该项目的贡献者，没有所有人的辛勤付出，就不会有该文库的成功运行。
 
+局限于目前的技术，所有的贡献内容将统一署名为 dapr-cn-github dapr-cn@hotmail.com 。
+
 本文档遵循[“保持署名—非商用”创意共享 4.0 许可证（CC BY-NC 4.0）](http://creativecommons.org/licenses/by-nc/4.0/deed.zh)，请在**保持署名**、**非商用**的前提下自由使用，你甚至可以把它架设在自己的电脑或内网服务器上。
-
-## 联系人
-
-- James Yeung shunjiey@hotmail.com
-- newbe36524 newbe36524@qq.com
