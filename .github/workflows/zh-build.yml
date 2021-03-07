@@ -26,9 +26,9 @@ jobs:
 
       - name: Setup Docsy and Build
         run: |
+          git submodule update --init --recursive 
           cd daprdocs
           chmod a+x ./update_config_zh.sh
           ./update_config_zh.sh
-          sudo npm install -D --save autoprefixer 
-          sudo npm install -D --save postcss-cli
+          sudo npm install --save
           hugo --minify
