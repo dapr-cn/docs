@@ -55,7 +55,7 @@ Dapr can use any Redis instance - containerized, running on your local dev machi
 
 {{% codetab %}}
 The Dapr CLI will automatically create and setup a Redis Streams instance for you. The Dapr CLI will automatically create and setup a Redis Streams instance for you. The Redis instance will be installed via Docker when you run `dapr init`, and the component file will be created in default directory. (`$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows). (`$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows).
-{{% /codetab %}}
+您可以使用 HTTP 来这样做：
 
 {{% codetab %}}
 You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm](https://github.com/helm/helm#install). This approach requires [Installing Helm](https://github.com/helm/helm#install).
