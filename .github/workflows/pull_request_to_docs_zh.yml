@@ -13,7 +13,7 @@ jobs:
       - name: Checkout docs_zh
         uses: actions/checkout@v2
         with:
-          repository: dapr-cn/docs-zh
+          repository: dapr/docs-zh
           ref: v1.0_content
       - name: Checkout content
         uses: actions/checkout@v2
@@ -33,6 +33,19 @@ jobs:
         with:
           token: ${{ secrets.PAT_TO_DOCS_ZH }}
           commit-message: Update content
+          committer: dapr-cn <dapr-cn@hotmail.com>
           signoff: false
           delete-branch: true
           title: "Update content"
+          labels: |
+            content update
+            automated pr
+          assignees: |
+            newbe36524
+            skyao
+          reviewers: |
+            newbe36524
+            skyao
+          team-reviewers: |
+            owners
+            maintainers
