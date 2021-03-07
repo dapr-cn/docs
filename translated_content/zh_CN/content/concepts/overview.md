@@ -81,7 +81,7 @@ Dapr 可以托管在多种环境中，包括用于本地开发的自托管，或
 Dapr 可以与任何开发框架集成。 下面是一些已经和 Dapr 集成的。
 
 #### Web
- In the Dapr [.NET SDK](https://github.com/dapr/dotnet-sdk) you can find [ASP.NET Core](https://dotnet.microsoft.com/apps/aspnet) integration, which brings stateful routing controllers that respond to pub/sub events from other services.
+ 例如，通过使用 Dapr 的 [.NET SDK](https://github.com/dapr/dotnet-sdk)，您可以很方便的与 [ASP.NET Core](https://dotnet.microsoft.com/apps/aspnet) 进行集成，它包含了有状态的路由控制器来响应来自其他服务的 pub/sub 事件。
 
  在 Dapr [PHP-SDK](https://github.com/dapr/php-sdk) 中，您可以使用 Apache， Nginx 或 Caddyserver。
 
@@ -101,7 +101,7 @@ Dapr 通过扩展与 Azure Functions 运行时集成，使函数可以与 Dapr �
 ## 为运维设计
 Dapr 有为 [运维](/operations/) 做专门设计。 通过 Dapr CLI 安装的 [服务仪表板](https://github.com/dapr/dashboard)提供了基于 Web 的 UI ，使您能够查看信息，查看日志以及 Dapr sidecar 的更多内容。
 
-The [monitoring tools support](/operations/monitoring/) provides deeper visibility into the Dapr system services and side-cars and the [observability capabilities]({{X81X}}) of Dapr provide insights into your application such as tracing and metrics.
+[对于监控工具的支持](/operations/monitoring/)使您可以更深入地了解到 Dapr 自身的系统服务和 side-cars 中的服务，而 Dapr 构建了对于应用程序的[可观察性能力]({{X81X}})，例如链路跟踪和指标。
 
 ## 在任何地方运行
 
