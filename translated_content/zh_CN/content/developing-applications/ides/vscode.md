@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "Visual Studio Code integrations with Dapr"
+title: "Visual Studio Code与Dapr 集成"
 linkTitle: "Visual Studio Code"
 weight: 1000
-description: "Information on how to develop and run Dapr applications in VS Code"
+description: "有关如何在 VS Code中开发和运行Dapr应用程序的介绍"
 ---
 
 ## Extension
 
-Dapr offers a *preview* [Dapr Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) for local development and debugging of your Dapr applications.
+Dapr提供了一个*预览版* [的Dapr Visual Studio Code扩展](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) ，用于您的Dapr应用程序的本地开发和调试。
 
-<a href="vscode:extension/ms-azuretools.vscode-dapr" class="btn btn-primary" role="button">Open in VSCode</a>
+<a href="vscode:extension/ms-azuretools.vscode-dapr" class="btn btn-primary" role="button">在 VSCode 中打开</a>
 
-### Feature overview
+### 功能概述
 - Scaffold Dapr task, launch, and component assets <br /><img src="/images/vscode-extension-scaffold.png" alt="Screenshot of the Dapr VSCode extension scaffold option" width="800" />
-- View running Dapr applications <br /><img src="/images/vscode-extension-view.png" alt="Screenshot of the Dapr VSCode extension view running applications option" width="800" />
-- Invoke Dapr application methods <br /><img src="/images/vscode-extension-invoke.png" alt="Screenshot of the Dapr VSCode extension invoke option" width="800" />
-- Publish events to Dapr applications <br /><img src="/images/vscode-extension-publish.png" alt="Screenshot of the Dapr VSCode extension publish option" width="800" />
+- 查看正在运行的 Dapr 应用程序 <br /><img src="/images/vscode-extension-view.png" alt="Screenshot of the Dapr VSCode extension view running applications option" width="800" />
+- 调用 Dapr 应用的方法  <br /><img src="/images/vscode-extension-invoke.png" alt="Screenshot of the Dapr VSCode extension invoke option" width="800" />
+- 发布事件到 Dapr 应用程序 <br /><img src="/images/vscode-extension-publish.png" alt="Screenshot of the Dapr VSCode extension publish option" width="800" />
 
 #### 示例
 观看有关如何使用 Dapr VS 代码扩展的 [视频](https://www.bilibili.com/video/BV1QK4y1p7fn?p=9&t=85): <iframe width="560" height="315" src="https://www.youtube.com/embed/OtbYCBt9C34?start=85" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
@@ -43,22 +43,22 @@ Dapr has pre-built Docker remote containers for each of the language SDKs. You c
 #### 例子
 观看有关如何使用应用程序的 Dapr VS 代码远程容器的 [视频](https://www.bilibili.com/video/BV1QK4y1p7fn?p=8&t=120)。 <iframe width="560" height="315" src="https://www.youtube.com/embed/D2dO4aGpHcg?start=120" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-## Troubleshooting
+## 疑难解答
 
-### Debugging multiple Dapr applications at the same time
-Using the VS Code extension you can debug multiple Dapr applications at the same time with [Multi-target debugging](https://code.visualstudio.com/docs/editor/debugging#_multitarget-debugging)
+### 同时调试多个Dapr应用程序
+使用 VS Code extension，您可以通过[Multi-target debugging](https://code.visualstudio.com/docs/editor/debugging#_multitarget-debugging)同时调试多个Dapr应用程序
 
 
-### Manually configuring Visual Studio Code for debugging with daprd
-If instead of using the Dapr VS Code extension you wish to configure a project to use Dapr in the [tasks.json](https://code.visualstudio.com/Docs/editor/tasks) and [launch.json](https://code.visualstudio.com/Docs/editor/debugging) files these are the manual steps.
+### 手动配置 Visual Studio Code 调试 daprd
+如果你想要通过 [tasks.json](https://code.visualstudio.com/Docs/editor/tasks) 和 [launch.json](https://code.visualstudio.com/Docs/editor/debugging) 文件配置一个项目使用Dapr而又不想使用 Dapr VS Code extension，这里有一些手动步骤说明。
 
-When developing Dapr applications, you typically use the dapr cli to start your daprized service similar to this:
+开发 Dapr应用程序时，您通常使用 dapr cli 来启动你自定义的dapr服务，就像这样：
 
 ```bash
 dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 ```
 
-This will generate the components yaml files (if they don't exist) so that your service can interact with the local redis container. This is great when you are just getting started but what if you want to attach a debugger to your service and step through the code? This is where you can use the dapr runtime (daprd) to help facilitate this. This is great when you are just getting started but what if you want to attach a debugger to your service and step through the code? This is where you can use the dapr runtime (daprd) to help facilitate this.
+这将生成组件的 yaml 文件(如果它们不存在)，以便您的服务能够与本地的redis 容器交互。 当你刚刚入门时这是好的开始，但是如果你想要附加一个debugger到你的服务并且通过VS Code进行单点调试呢？ 您可以在这里使用 dapr 运行时(daprd) 来帮助实现这一点。
 
 {{% alert title="Note" color="primary" %}}
 The dapr runtime (daprd) will not automatically generate the components yaml files for Redis. These will need to be created manually or you will need to run the dapr cli (dapr) once in order to have them created automatically. These will need to be created manually or you will need to run the dapr cli (dapr) once in order to have them created automatically.
