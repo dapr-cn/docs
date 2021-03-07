@@ -43,11 +43,11 @@ spec:
     value: topic1
 ```
 
-您可以使用 HTTP 来这样做：
+{{% /codetab %}}
 
 {{% codetab %}}
 
-您可以使用 HTTP 来这样做：
+To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [desired binding component]({{< ref setup-bindings >}}) in the yaml below (in this case kafka), save as `binding.yaml`, and run `kubectl apply -f binding.yaml`.
 
 
 ```yaml
