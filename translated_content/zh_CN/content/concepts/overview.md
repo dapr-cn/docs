@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "概述"
-linkTitle: "Secrets stores overview"
+linkTitle: "概述"
 weight: 100
 description: >
   分布式应用程序运行时介绍
