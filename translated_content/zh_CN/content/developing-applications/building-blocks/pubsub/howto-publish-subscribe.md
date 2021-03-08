@@ -10,11 +10,11 @@ description: "了解如何使用一个服务向主题发送消息，并在另一
 
 Pub/Sub 是一个分布式系统中的常见模式，它有许多服务用于解偶、异步消息传递。 使用Pub/Sub，您可以在事件消费者与事件生产者解偶的场景中启用。
 
-Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次），允许开发者发布和订阅主题。 Dapr provides components for pub/sub, that enable operators to use their preferred infrastructure, for example Redis Streams, Kafka, etc.
+Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次），允许开发者发布和订阅主题。 Dapr 为 Pub/Sub 提供组件，使操作者能够使用他们所喜欢的基础设施，例如 Redis Streams 和 Kafka 等。
 
 ## 步骤 1: 设置 Pub/Sub 组件
 
-When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter. gRPC clients and SDKs have a dedicated content type parameter.
+当发布消息时，必须指定所发送数据的内容类型。 Unless specified, Dapr will assume `text/plain`. When publishing a message, it's important to specify the content type of the data being sent. Unless specified, Dapr will assume `text/plain`. When using Dapr's HTTP API, the content type can be set in a `Content-Type` header. gRPC clients and SDKs have a dedicated content type parameter. gRPC clients and SDKs have a dedicated content type parameter.
 
 ## 步骤 1: 设置 Pub/Sub 组件
 然后发布一条消息给 `deathStarStatus` 主题：
