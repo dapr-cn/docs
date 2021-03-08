@@ -160,7 +160,7 @@ spec:
 
 ## 相关链接
 
-- Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
-- Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
-- List of [pub/sub components]({{< ref supported-pubsub >}})
-- Read the [API reference]({{< ref pubsub_api.md >}})
+- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
+- 了解 [消息存活时间（TTL）]({{< ref pubsub-message-ttl.md >}})
+- [Pub/Sub 组件列表]({{< ref supported-pubsub >}})
+- 阅读 [API 引用]({{< ref pubsub_api.md >}})
