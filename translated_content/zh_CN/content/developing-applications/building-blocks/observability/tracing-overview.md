@@ -16,8 +16,8 @@ Dapr 将 HTTP/GRPC Middleware 添加到 Dapr sidecar。 Middleware 拦截所有 
 
 * 无需代码检测。 所有流量都会自动跟踪可配置的跟踪级别。
 * 跨微服务的一致跟踪行为。 跟踪是在 Dapr sidecar 上进行配置和管理的，因此它可以在服务之间保持一致，这些服务由不同的团队提供，并可能以不同的编程语言编写。
-* 可配置和可扩展。 By leveraging the Zipkin API and the OpenTelemetry Collector, Dapr tracing can be configured to work with popular tracing backends, including custom backends a customer may have.
-* You can define and enable multiple exporters at the same time.
+* 可配置和可扩展。 通过利用 Zipkin API 和 OpenTelemetry 收集器，可以将 Dapr 追踪配置为与流行的追踪后端配合使用，包括客户可能有的自定义后端。
+* 可以同时定义和启用多个Exporter。
 
 ## W3C Correlation ID
 
@@ -44,7 +44,7 @@ spec:
       endpointAddress: "http://zipkin.default.svc.cluster.local:9411/api/v2/spans"
 ```
 
-Note: Changing `samplingRate` to 0 disables tracing altogether.
+注意：将 `samplingRate` 更改为0 完全禁用追踪。
 
 关于如何在本地环境和 Kubernetes 环境中配置追踪的更多细节，请参阅 [参考文档](#references) 部分。
 
