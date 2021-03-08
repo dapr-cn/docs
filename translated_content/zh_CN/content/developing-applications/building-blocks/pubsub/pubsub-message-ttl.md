@@ -86,7 +86,7 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 ## 相关链接
 
-- 了解 [主题范围]({{< ref pubsub-scopes.md >})
+- 了解 [Topic 限界]({{< ref pubsub-scopes.md >})
 - 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
 - [Pub/Sub 组件列表]({{< ref supported-pubsub >}})
 - 阅读 [API 引用]({{< ref pubsub_api.md >}})
