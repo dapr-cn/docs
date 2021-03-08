@@ -11,7 +11,7 @@ description: >
 
 上述几个领域是通过对传输中的数据进行加密解决的。 Dapr 用于加密传输中数据的安全机制之一是 [相互认证（mutual authentication）TLS](https://en.wikipedia.org/wiki/Mutual_authentication) 或简写为 mTLS。 mTLS 为应用程序内的网络流量提供了一些关键功能：
 
-- Two way authentication - the client proving its identity to the server, and vice-versa
+- 双向身份验证 - 客户端向服务器证明其身份，反之亦然
 - 建立双向认证后，所有进行中通信都走加密通道
 
 在几乎所有场景中，相互 TLS 都很有用，尤其是对于受法规约束的系统，例如 [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) 和 [ PCI](https://en.wikipedia.org/wiki/Payment_Card_Industry_Data_Security_Standard)。
