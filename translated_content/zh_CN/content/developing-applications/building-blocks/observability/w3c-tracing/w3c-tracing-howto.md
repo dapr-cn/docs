@@ -16,7 +16,7 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
 
 ### 在 Go 中检索跟踪上下文
 #### 对于 HTTP 调用
-OpenCensus Go SDK provides [ochttp](https://pkg.go.dev/go.opencensus.io/plugin/ochttp/propagation/tracecontext?tab=doc) package that provides methods to retrieve trace context from http response.
+OpenCensus Go SDK 提供 [ochttp](https://pkg.go.dev/go.opencensus.io/plugin/ochttp/propagation/tracecontext?tab=doc) 包，提供从 http 响应中检索跟踪上下文的方法。
 
 若要从 HTTP 响应检索跟踪上下文，可以使用 ：
 
