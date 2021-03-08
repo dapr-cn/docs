@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "Use the Dapr API"
+title: "使用 Dapr API"
 linkTitle: "Use the Dapr API"
 weight: 30
 ---
 
-After running the `dapr init` command in the [previous step]({{X18X}}), your local environment has the Dapr sidecar binaries as well as default component definitions for both state management and a message broker (both using Redis). You can now try out some of what Dapr has to offer by using the Dapr CLI to run a Dapr sidecar and try out the state API that will allow you to store and retrieve a state. You can learn more about the state building block and how it works in [these docs]({{< ref state-management >}}).
+在 [前一步]({{X18X}})中运行了 `dapr init` 命令后， 您的本地环境有 Dapr sidecar 二进制文件以及默认组件定义的状态管理和message broker(都使用 Redis)。 现在您可以通过使用Dapr CLI来运行Dapr sidecar并尝试使用状态API来存储和检索状态，从而尝试Dapr提供的一些功能。 You can learn more about the state building block and how it works in [these docs]({{< ref state-management >}}).
 
 You will now run the sidecar and call the API directly (simulating what an application would do).
 
