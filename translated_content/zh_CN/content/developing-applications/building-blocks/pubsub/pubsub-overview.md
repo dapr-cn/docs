@@ -1,14 +1,14 @@
 ---
 type: docs
 title: "发布和订阅概述"
-linkTitle: "Secrets stores overview"
+linkTitle: "pub sub overview"
 weight: 1000
-description: "Overview of the Pub/Sub building block"
+description: "Pub/Sub 构建块概述"
 ---
 
 ## 介绍
 
-[发布 / 订阅模式](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) 允许微服务使用消息相互通信。 The **producer or publisher** sends messages to a **topic** without knowledge of what application will receive them. This involves writing them to an input channel. 同样，一个 **消费者** 将订阅该主题并收到它的消息，并且不知道什么应用程序生产了这些消息。 This involves writing them to an input channel. 同样，一个 **消费者** 将订阅该主题并收到它的消息，并且不知道什么应用程序生产了这些消息。 This involves receiving messages from an output channel. This involves receiving messages from an output channel. An intermediary message broker is responsible for copying each message from an input channel to an output channels for all subscribers interested in that message. 当您需要将微服务解偶时，此模式特别有用。 当您需要将微服务解偶时，此模式特别有用。
+[发布 / 订阅模式](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) 允许微服务使用消息相互通信。 **生产者或发布者** 将消息发送至 **主题（Topic）** ，并且不知道接收消息的应用程序。 这涉及将它们写入一个输入频道。 同样，一个 **消费者** 将订阅该主题并收到它的消息，并且不知道什么应用程序生产了这些消息。 这涉及从输出频道接收消息。 This involves receiving messages from an output channel. An intermediary message broker is responsible for copying each message from an input channel to an output channels for all subscribers interested in that message. 当您需要将微服务解偶时，此模式特别有用。 当您需要将微服务解偶时，此模式特别有用。
 
 Dapr 中的发布/订阅 API 提供至少一次（at-least-once）的保证，并与各种消息代理和队列系统集成。 The specific implementation used by your service is pluggable and configured as a Dapr pub/sub component at runtime. This approach removes the dependency from your service and, as a result, makes your service more portable and flexible to changes. This approach removes the dependency from your service and, as a result, makes your service more portable and flexible to changes.
 
