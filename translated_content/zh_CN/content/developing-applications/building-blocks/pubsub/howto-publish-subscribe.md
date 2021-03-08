@@ -17,7 +17,7 @@ Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次
 当发布消息时，必须指定所发送数据的内容类型。 除非指定, Dapr 将假定类型为 `text/plain`。 当使用 Dapr 的 HTTP API时，内容类型可以设置在 `Content-Type` 头中。 gRPC 客户端和 SDK 有一个专用的内容类型参数。
 
 ## 步骤 1: 设置 Pub/Sub 组件
-然后发布一条消息给 `deathStarStatus` 主题：
+然后发布一条消息给 `deathStarStatus` topic：
 
 <img src="/images/pubsub-publish-subscribe-example.png" width=1000>
 <br></br>
@@ -478,7 +478,7 @@ Dapr 自动接收发布请求上发送的数据，并将其包装在CloudEvent 1
 ## 下一步
 
 - 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)
-- 了解 [主题范围]({{< ref pubsub-scopes.md >})
+- 了解 [Topic 限界]({{< ref pubsub-scopes.md >})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
 - 您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
 - [Pub/Sub 组件列表]({{< ref setup-pubsub >}})
