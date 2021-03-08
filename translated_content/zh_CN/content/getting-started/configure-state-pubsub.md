@@ -86,8 +86,8 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 
 {{% codetab %}}
 1. 访问 [GCP Cloud MemoryStore](https://cloud.google.com/memorystore/) 来部署一个 MemoryStore 实例
-1. Note the Redis hostname in the GCP portal for use later
-1. Create a Kubernetes secret to store your Redis password:
+1. 注意GCP门户中的Redis主机名，以便以后使用。
+1. 创建一个Kubernetes密钥来存储您的 Redis 密码：
    ```bash
    kubectl create secret generic redis --from-literal=redis-password=*********
    ```
@@ -95,19 +95,19 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 
 {{< /tabs >}}
 
-## Configure Dapr components
+## 配置 Dapr 组件
 
-Dapr uses components to define what resources to use for building block functionality. These steps go through how to connect the resources you created above to Dapr for state and pub/sub. These steps go through how to connect the resources you created above to Dapr for state and pub/sub.
+Dapr 使用组件来定义用于构建块功能的资源。 这些步骤通过如何将你上面创建的资源连接到Dapr的 状态 和 发布/订阅 。
 
-In self-hosted mode, component files are automatically created under:
+在自托管模式下，组件文件自动创建以下内容：
 - **Windows**: `%USERPROFILE%\.dapr\components\`
 - **Linux/MacOS**: `$HOME/.dapr/components`
 
-For Kubernetes, files can be created in any directory, as they are applied with `kubectl`.
+对于Kubernetes来说，文件可以在任何目录下创建，因为它们是用`kubectl`应用的。
 
-### Create State store component
+### 创建 状态 存储组件
 
-Create a file named `redis-state.yaml`, and paste the following:
+创建名为 `redis-state.yaml` 的文件, 并粘贴以下内容:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -127,15 +127,15 @@ spec:
       key: redis-password
 ```
 
-This example uses the the kubernetes secret that was created when setting up a cluster with the above instructions.
+这个例子使用的是用上面的说明设置集群时创建的kubernetes秘密。
 
 {{% alert title="Other stores" color="primary" %}}
-If using a state store other than Redis, refer to the [supported state stores]({{< ref supported-state-stores >}}) for information on what options to set.
+如果使用 Redis 以外的其他状态存储，请参考 [支持的状态存储]({{< ref supported-state-stores >}})，了解要设置哪些选项。
 {{% /alert %}}
 
-### Create Pub/sub message broker component
+### 创建 发布/订阅 消息代理组件
 
-Create a file called redis-pubsub.yaml, and paste the following:
+创建名为 redis-pubsub.yaml 的文件, 并粘贴以下内容:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -155,15 +155,15 @@ spec:
       key: redis-password
 ```
 
-This example uses the the kubernetes secret that was created when setting up a cluster with the above instructions.
+这个例子使用的是用上面的说明设置集群时创建的kubernetes秘密。
 
 {{% alert title="Other stores" color="primary" %}}
-If using a pub/sub message broker other than Redis, refer to the [supported pub/sub message brokers]({{< ref supported-pubsub >}}) for information on what options to set.
+如果使用 Redis 以外的 发布/订阅 消息代理，请参考 [支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})，了解要设置哪些选项。
 {{% /alert %}}
 
-### Hard coded passwords (not recommended)
+### 硬编码密码（不推荐）
 
-For development purposes only you can skip creating kubernetes secrets and place passwords directly into the Dapr component file:
+仅用于开发目的，你可以跳过创建kubernetes秘密，直接将密码放入Dapr组件文件中。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -203,21 +203,21 @@ spec:
 
 {{% codetab %}}
 
-By default the Dapr CLI creates a local Redis instance when you run `dapr init`. However, if you want to configure a different Redis instance you can either: However, if you want to configure a different Redis instance you can either:
-- Update the existing component files or create new ones in the default components directory
+默认情况下，当你运行 `dapr init` 时，CLI 创建一个本地的 Redis 实例。 但是，如果你想要配置一个不同的 Redis 实例你可以：
+- 更新现有的组件文件或在默认的组件目录下创建新的组件文件。
    - **Linux/MacOS:** `$HOME/.dapr/components`
    - **Windows:** `%USERPROFILE%\.dapr\components`
-- Create a new `components` directory in your app folder containing the YAML files and provide the path to the `dapr run` command with the flag `--components-path`
+- 在你的应用程序文件夹中创建一个新的`components`目录，其中包含YAML文件，并提供`dapr run`命令的路径，标志为`--components-path`。
 
 {{% alert title="Self-hosted slim mode" color="primary" %}}
-If you initialized Dapr in [slim mode]({{< ref self-hosted-no-docker.md >}}) (without Docker) you need to manually create the default directory, or always specify a components directory using `--components-path`.
+如果您在[slim模式]({{< ref self-hosted-no-docker.md >}})下初始化Dapr（没有Docker），您需要手动创建默认目录，或者始终使用`--components-path`指定一个组件目录。
 {{% /alert %}}
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-Run `kubectl apply -f <FILENAME>` for both state and pubsub files:
+运行 `kubectl apply -f <FILENAME>` 同时适用于 状态文件 和 发布订阅文件：
 
 ```bash
 kubectl apply -f redis-state.yaml
@@ -228,4 +228,4 @@ kubectl apply -f redis-pubsub.yaml
 {{< /tabs >}}
 
 ## 下一步
-- [Try out a Dapr quickstart]({{< ref quickstarts.md >}})
+- [试用Dapr快速入门]({{< ref quickstarts.md >}})
