@@ -7,7 +7,7 @@ description: The supported external bindings that interface with Dapr
 no_list: true
 ---
 
-Every binding has its own unique set of properties. Every binding has its own unique set of properties. Click the name link to see the component YAML for each binding.
+每个绑定都有自己独特的属性集。 Every binding has its own unique set of properties. Click the name link to see the component YAML for each binding.
 
 
 Table captions:
