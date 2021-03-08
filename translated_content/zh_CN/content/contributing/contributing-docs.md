@@ -22,7 +22,7 @@ Fork [文档 repo](https://github.com/dapr/docs) 以处理任何更改
 
 Dapr 文档处理分支的方式与大多数代码存储库不同。 每个分支都标记为运行时发行版的主版本和次要版本，而不存在 `master` 或 `main` 分支。 完整列表，请访问 [Docs repo](https://github.com/dapr/docs#branch-guidance)
 
-总体而言，所有更新都应进入对应 Dapr 最新版本的文档分支。 You can find this directly at [https://github.com/dapr/docs](https://github.com/dapr/docs), as the latest release will be the default branch. 对于适用于发布候选版本或文档的预发行版本的任何文档更改，请对该特定分支修改。
+总体而言，所有更新都应进入对应 Dapr 最新版本的文档分支。 您可以直接在 [https://github.com/dapr/docs](https://github.com/dapr/docs)找到这个选项，因为最新版本将是默认分支。 对于适用于发布候选版本或文档的预发行版本的任何文档更改，请对该特定分支修改。
 
 例如，如果要修复拼写错误、添加注释或澄清点，请在默认 Dapr 分支上变更。 如果要记录即将发生的组件或运行时的变更，请对预发行版分支进行修改。 分支可以在 [ Docs repo](https://github.com/dapr/docs#branch-guidance) 中找到
 
@@ -46,7 +46,7 @@ Dapr 文档处理分支的方式与大多数代码存储库不同。 每个分�
 - 请确保文档引用该规范以获取使用 API 的示例。
 - 确保规范在名称，参数和术语方面与概念一致。 根据需要更新概念和规范。
 - 请避免重复该规范。 这个想法是为了给读者提供更多关于能力的信息和背景，以便他们可以尝试这个。 因此，尽可能提供更多的信息和实施细节。
-- Provide a link to the spec in the [Reference]({{X47X}}) section.
+- 提供指向 [参考资料]({{X47X}}) 中的规范的链接。
 - 在可能的情况下，参考一个实用的How-To文档。
 
 ### 贡献新的 How-To 指南
@@ -128,7 +128,7 @@ Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-
 ```
 
 ### 图片
-Docsy 和 Hugo 使用的 markdown 规范没有提供使用 markdown 语法来调整图片大小。 Instead, raw HTML is used.
+Docsy 和 Hugo 使用的 markdown 规范没有提供使用 markdown 语法来调整图片大小。 而是使用原始 HTML 。
 
 首先将图片放置在 `/daprdocs/static/images` 下，命名惯例为 `[page-name]-[image-name].[png|jpg|svg]`.
 
@@ -237,19 +237,19 @@ brew install dapr/tap/dapr-cli
 ### 参考资料
 - [Docsy 编写指南](https://www.docsy.dev/docs/adding-content/)
 
-## Translations
+## 翻译
 
-The Dapr Docs supports adding language translations into the docs using git submodules and Hugo's built in language support.
+Dapr 文档支持使用 git 子模块和 Hugo 的内置语言支持将语言翻译添加到文档中。
 
-You can find an example PR of adding Chinese language support in [PR 1286](https://github.com/dapr/docs/pull/1286).
+您可以在 [PR 1286](https://github.com/dapr/docs/pull/1286) 中找到一个添加中文语言支持的PR 示例。
 
-Steps to add a language:
-- Open an issue in the Docs repo requesting to create a new language-specific docs repo
-- Once created, create a git submodule within the docs repo:
+添加语言的步骤：
+- 在 Docs Repo 中打开一个issue，请求创建一个新的特定语言文档
+- 创建完成后，在文档仓库中创建 git 子模块：
    ```sh
    git submodule add <remote_url> translations/<language_code>
    ```
-- Add a language entry within `daprdocs/config.toml`:
+- 在 `daprdocs/config.toml` 中添加语言条目：
    ```toml
     [languages.<language_code>]
       title = "Dapr Docs"
@@ -257,11 +257,11 @@ Steps to add a language:
       contentDir = "content/<language_code>"
       languageName = "<language_name>"
    ```
-- Create a mount within `daprdocs/config.toml`:
+- 在 `daprdocs/config.toml` 中创建一个挂载：
    ```toml
    [[module.mounts]]
      source = "../translations/docs-<language_code>/content/<language_code>"
      target = "content"
      lang = "<language_code>"
    ```
-- Repeat above step as necessary for all other translation directories
+- 所有其他翻译目录视需要重复上述步骤
