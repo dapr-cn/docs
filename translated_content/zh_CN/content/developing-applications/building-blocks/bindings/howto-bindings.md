@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "How-To: Use output bindings to interface with external resources"
+title: "How-To：使用输出绑定与外部资源进行交互"
 linkTitle: "How-To: Bindings"
 description: "使用 Dapr 输出绑定调用外部系统"
 weight: 300
@@ -17,7 +17,7 @@ weight: 300
 
 就本指南的目的，您将使用 Kafka 绑定。 您可以在 [此处]({{< ref bindings >}}) 找到不同绑定规范的列表。
 
-Create a new binding component with the name of `myevent`.
+创建一个新的名称为 `myevent` 的绑定组件。
 
 在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
