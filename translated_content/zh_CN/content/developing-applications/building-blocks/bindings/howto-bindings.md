@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To：使用输出绑定与外部资源进行交互"
-linkTitle: "How-To: Bindings"
+linkTitle: "How-To: 绑定"
 description: "使用 Dapr 输出绑定调用外部系统"
 weight: 300
 ---
@@ -47,7 +47,7 @@ spec:
 
 {{% codetab %}}
 
-To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [desired binding component]({{< ref setup-bindings >}}) in the yaml below (in this case kafka), save as `binding.yaml`, and run `kubectl apply -f binding.yaml`.
+要将其部署到 Kubernetes 群集中，请为你想要的[ 绑定 组件]({{< ref setup-bindings >}}) 在下面的 yaml `metadata` 中填写链接详情，保存为 `binding.yaml(在这里为kafka)`，然后运行 `kubectl apply -f binding.yaml`。
 
 
 ```yaml
@@ -77,7 +77,7 @@ spec:
 您可以使用 HTTP 来这样做：
 
 ```bash
-curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }' }, "operation": "create" }' }, "operation": "create" }'
+curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }'  
 ```
 
 如上文所见，您使用了要调用的绑定的名称来调用 `/binding` 终结点。 在我们的示例中，它的名称是 `myevent` 。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
@@ -87,5 +87,5 @@ curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "me
 ## 参考资料
 
 - [Binding API]({{< ref bindings_api.md >}})
-- [Binding components]({{< ref bindings >}})
-- [Binding detailed specifications]({{< ref supported-bindings >}}) 
+- [绑定组件]({{< ref bindings >}})
+- [绑定详细规范]({{< ref supported-bindings >}}) 
