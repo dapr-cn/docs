@@ -1,6 +1,6 @@
 # Dapr 中文文档库
 
-目前进度： [![Crowdin](https://badges.crowdin.net/daprcndocs/localized.svg)](https://crowdin.com/project/daprcndocs)
+目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
 
 欢迎来到 Dapr 中文文档库。
 
