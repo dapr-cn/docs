@@ -66,12 +66,12 @@ Dapr 实现以下 Cloud Events 字段:
 
 Dapr 应用程序可以订阅已发布的 topics。 Dapr 允许您的应用程序有两种方法来订阅 topics：
 
- - 阅读 [发布和订阅]({{< ref howto-publish-subscribe.md >}})指南
+ - **声明**，其中订阅是在外部文件中定义的。
  - **编程**，其中订阅在用户代码中定义。
 
  声明和编程方式都支持相同的功能。 声明式方法会从您的代码中移除 Dapr 依赖，并允许现有的应用程序订阅 topics，而无需更改代码。 编程方法在用户代码中实现订阅。
 
-  更多信息查看 [如何发布消息并订阅主题]({{< ref howto-publish-subscribe >})。
+  更多信息查看 [如何发布消息并订阅主题]({{< ref howto-publish-subscribe >}})。
 
 
 ### 订阅消息
