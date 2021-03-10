@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "How To: Retrieve a secret"
+title: "指南：获取密钥"
 linkTitle: "How To: Retrieve a secret"
 weight: 2000
-description: "Use the secret store building block to securely retrieve a secret"
+description: "使用密钥存储构建块安全地获取密钥"
 ---
 
-This article provides guidance on using Dapr's secrets API in your code to leverage the [secrets store building block]({{X30X}}). The secrets API allows you to easily retrieve secrets in your application code from a configured secret store. The secrets API allows you to easily retrieve secrets in your application code from a configured secret store.
+这篇文章提供了关于如何在你的代码中使用 Dapr 的密钥 API 来充分利用 [密钥存储构建块]({{X30X}}) 的指导。 The secrets API allows you to easily retrieve secrets in your application code from a configured secret store.
 
 ## Set up a secret store
 
