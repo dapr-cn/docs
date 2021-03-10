@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "尝试 Dapr 快速入门以学习核心概念"
-linkTitle: "Dapr Quickstarts"
+linkTitle: "Dapr 快速入门"
 weight: 60
 description: "教程与代码样本，旨在让你快速上手使用Dapr。"
 ---
