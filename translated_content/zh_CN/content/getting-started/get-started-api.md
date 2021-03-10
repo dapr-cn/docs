@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "使用 Dapr API"
-linkTitle: "Use the Dapr API"
+linkTitle: "使用 Dapr API"
 weight: 30
 ---
 
