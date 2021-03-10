@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "安装 Dapr CLI"
-linkTitle: "Install Dapr CLI"
+linkTitle: "安装 Dapr CLI"
 weight: 10
 ---
 
