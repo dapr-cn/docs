@@ -25,7 +25,7 @@ Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调�
 
 下图是 Dapr的服务调用如何工作的总览图
 
-<img src="/images/service-invocation-overview.png" width=800 alt="Diagram showing the steps of service invocation">
+<img src="/images/service-invocation-overview.png" width=800 alt="显示服务调用步骤的图表">
 
 1. 服务 A 对服务 B 发起HTTP/gRPC的调用。
 2. Dapr 使用在给定 [ 托管平台]({{< ref "hosting" >}}) 上运行的 [命名解析组件](https://github.com/dapr/components-contrib/tree/master/nameresolution) 发现服务 B的位置。
@@ -81,49 +81,49 @@ Dapr 应用程序之间的所有调用都可以通过托管平台上的相互(mT
 * 网络错误，包括端点不可用和拒绝连接
 * 因续订主调/被调方Dapr边车上的证书而导致的身份验证错误
 
-每次调用重试的回退间隔是 1 秒，最多重试三次。 Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Connection establishment via gRPC to the target sidecar has a timeout of 5 seconds.
+每次调用重试的回退间隔是 1 秒，最多重试三次。 通过 gRPC 连接目标 sidecar 的超时时间为5秒。
 
-### Pluggable service discovery
+### 可插拔的服务发现
 
-Dapr can run on any [hosting platform]({{< ref hosting >}}). For the supported hosting platforms this means they have a [name resolution component](https://github.com/dapr/components-contrib/tree/master/nameresolution) developed for them that enables service discovery. For example, the Kubernetes name resolution component uses the Kubernetes DNS service to resolve the location of other applications running in the cluster. For local and multiple physical machines this uses the mDNS protocol.
+Dapr 可以运行在任何[托管平台]({{< ref hosting >}})。 对于支持的托管平台，这意味着他们有一个能够发现服务的 [名称解析组件](https://github.com/dapr/components-contrib/tree/master/nameresolution)。 例如，Kubernetes 名称解析组件使用 Kubernetes DNS 服务来解析在集群中运行的其他应用程序的位置。 对于本地和多个物理机器，这将使用 mDNS 协议。
 
-### Round robin load balancing with mDNS
-Dapr provides round robin load balancing of service invocation requests with the mDNS protocol, for example with a single machine or with multiple, networked, physical machines.
+### 使用 mDNS 轮询负载均衡
+Dapr 使用 mDNS 协议提供轮询负载均衡的服务调用请求，例如用于本地或多个联网的物理机器。
 
-The diagram below shows an example of how this works. The diagram below shows an example of how this works. If you have 1 instance of an application with app ID `FrontEnd` and 3 instances of application with app ID `Cart` and you call from `FrontEnd` app to `Cart` app, Dapr round robins' between the 3 instances. These instance can be on the same machine or on different machines. . These instance can be on the same machine or on different machines. .
+下面的图表显示了如何运作的一个例子。 如果您有一个应用程序实例，其中包含 app ID 为 `FrontEnd` 和 3 个 app ID 为 `Cart` 的应用程序实例，并且您从 `FrontEnd` 应用程序到 `Cart` 应用程序的3个实例之间的进行轮询。 这些实例可以在同一机器上或不同的机器上。 .
 
-<img src="/images/service-invocation-mdns-round-robin.png" width=800 alt="Diagram showing the steps of service invocation">
+<img src="/images/service-invocation-mdns-round-robin.png" width=800 alt="显示服务调用步骤的图表">
 
-Note: You can have N instances of the same app with the same app ID as app ID is unique per app. And you can have multiple instances of that app where all those instances have the same app ID. And you can have multiple instances of that app where all those instances have the same app ID.
+注意：您可以有 N 个相同app ID的实例，对于每个应用程序来说 app ID 都是唯一的。 而且您可以有多个此应用程序的实例，其中所有这些实例都有相同的 app ID。
 
-### Tracing and metrics with observability
+### 具有可观测性的追踪和指标
 
-By default, all calls between applications are traced and metrics are gathered to provide insights and diagnostics for applications, which is especially important in production scenarios. This gives you call graphs and metrics on the calls between your services. For more information read about [observability]({{< ref observability-concept.md >}}).
+默认情况下，所有应用程序之间的调用都会被追踪，也会收集到度量（metrics），以便为应用程序提供洞察力（insights）和诊断。 这在生产场景中尤其重要。 这给您的服务之间的调用提供了调用链图和度量（metrics）。 更多信息参考 [观测性]({{< ref observability-concept.md >}})。
 
-### Service invocation API
+### 服务调用 API
 
 服务调用的 API 规范可在 [规范仓库]({{< ref service_invocation_api.md >}}) 中找到。
 
 ## Example
-Following the above call sequence, suppose you have the applications as described in the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md), where a python app invokes a node.js app. In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B". In such a scenario, the python app would be "Service A" , and a Node.js app would be "Service B".
+按照上述调用顺序，假定您有 [Hello World 快速入门](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md)中描述的应用程序，在 python 应用程序调用一个 node.js 应用的地方。 这种情况下，python应用将是“service A”，Node.js应用将是“service B”。
 
-The diagram below shows sequence 1-7 again on a local machine showing the API calls:
+下面的图表展示本地机器上 API 调用的顺序 1-7：
 
 <img src="/images/service-invocation-overview-example.png" width=800>
 
-1. The Node.js app has a Dapr app ID of `nodeapp`. The Node.js app has a Dapr app ID of `nodeapp`. The python app invokes the Node.js app's `neworder` method by POSTing `http://localhost:3500/v1.0/invoke/nodeapp/method/neworder`, which first goes to the python app's local Dapr sidecar.
-2. Dapr discovers the Node.js app's location using name resolution component (in this case mDNS while self-hosted) which runs on your local machine.
-3. Dapr forwards the request to the Node.js app's sidecar using the location it just received.
-4. The Node.js app's sidecar forwards the request to the Node.js app. The Node.js app's sidecar forwards the request to the Node.js app. The Node.js app performs its business logic, logging the incoming message and then persist the order ID into Redis (not shown in the diagram)
-5. The Node.js app sends a response to the Python app through the Node.js sidecar.
-6. Dapr forwards the response to the Python Dapr sidecar
-7. The Python app receives the response.
+1. Node.js 应用程序有一个 app ID 为 `nodeapp` 的 Dapr 应用程序。 当 python 应用程序通过 POST `http://localhost:3500/v1.0/invoke/nodeapp/method/neworder` 调用 Node.js 应用程序的 `neworder` 方法时, 首先会到达 python app 的本地 dapr sidecar。
+2. Dapr 使用本地机器运行的名称解析组件(在这种情况下自动运行的 mDNS)，发现 Node.js 应用的位置。
+3. Dapr 使用刚刚收到的位置将请求转发到 Node.js 应用的 sidecar。
+4. Node.js 应用的 sidecar 将请求转发到 Node.js 应用程序。 Node.js 应用执行其业务逻辑，记录收到的消息，然后将订单 ID 存储到 Redis (未在图表中显示)中
+5. Node.js应 用程序通过 Node.js sidecar 向 Python 应用程序发送一个响应。
+6. Dapr 转发响应到 Python 的 Dapr sidecar
+7. Python 应用程序收到响应。
 
 ## 下一步
 
-* Follow these guides on:
-    * [How-to: Invoke services using HTTP]({{< ref howto-invoke-discover-services.md >}})
-    * [How-To: Configure Dapr to use gRPC]({{< ref grpc >}})
-* Try out the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) which shows how to use HTTP service invocation or try the samples in the [Dapr SDKs]({{< ref sdks >}})
-* Read the [service invocation API specification]({{< ref service_invocation_api.md >}})
-* Understand the [service invocation performance]({{< ref perf-service-invocation.md >}}) numbers
+* 关注以下指南：
+    * [入门指南：发现并调用服务]({{< ref howto-invoke-discover-services.md >}})
+    * [指南：配置 Dapr 来使用 gRPC]({{< ref grpc >}})
+* 试试 [hello World 快速入门](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) ，它会显示如何使用 HTTP 服务调用或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
+* 阅读 [服务调用 API 规范]({{< ref service_invocation_api.md >})
+* 了解 [服务调用性能]({{< ref perf-service-invocation.md >}}) 数字
