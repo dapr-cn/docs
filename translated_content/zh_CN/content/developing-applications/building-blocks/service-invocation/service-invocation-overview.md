@@ -17,7 +17,7 @@ description: "服务调用构建块概述"
 * 我如何处理重试和瞬态错误？
 * 我如何使用分布式跟踪来查看调用图来诊断生产中的问题？
 
-Dapr addresses these challenges by providing a service invocation API that acts as a combination of a reverse proxy with built-in service discovery, while leveraging built-in distributed tracing, metrics, error handling, encryption and more.
+Dapr 通过提供服务调用 API 来应对这些问题，这种调用 API 作为反向代理与内置的服务发现相结合， 同时利用内置分布式跟踪、计量、错误处理、加密等功能。
 
 Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调用应用程序，请在任意 Dapr 实例上使用 `invoke` 这个API。 Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr 实例会相互发现并进行通信。
 
@@ -41,47 +41,47 @@ Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调�
 ## 特性
 服务调用提供了一系列特性，使您可以方便地调用远程应用程序上的方法。
 
-### Namespaces scoping
+### 命名空间作用域
 
-Service invocation supports calls across namespaces. Service invocation supports calls across namespaces. On all supported hosting platforms, Dapr app IDs conform to a valid FQDN format that includes the target namespace.
+服务调用支持跨命名空间调用。 在所有受支持的托管平台上， Dapr 应用程序标识（ID）遵循包含了目标命名空间的有效 FQDN 格式。
 
-For example, the following string contains the app ID `nodeapp` in addition to the namespace the app runs in `production`.
+例如，以下字符串包含应用程序标识 `nodeapp` 以及应用程序在 `production` 中运行的名称空间。
 
 ```
 localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 ```
 
-This is especially useful in cross namespace calls in a Kubernetes cluster. This is especially useful in cross namespace calls in a Kubernetes cluster. Watch this video for a demo on how to use namespaces with service invocation.  <iframe width="560" height="315" src="https://www.youtube.com/embed/LYYV_jouEuA?start=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+这在 Kubernetes 集群中进行跨命名空间调用特别有用。 观看此演示视频以获取有关如何使用具有命名空间的服务调用。 <iframe width="560" height="315" src="https://www.youtube.com/embed/LYYV_jouEuA?start=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 
-### Service-to-service security
+### 服务间安全性
 
-All calls between Dapr applications can be made secure with mutual (mTLS) authentication on hosted platforms, including automatic certificate rollover, via the Dapr Sentry service. The diagram below shows this for self hosted applications. The diagram below shows this for self hosted applications.
+Dapr 应用程序之间的所有调用都可以通过托管平台上的相互(mTLS) 身份验证来安全，包括通过 Dapr 哨兵服务来自动证书翻转（certificate rollover）。 下面的图表显示了自托管的应用程序。
 
-For more information read the [service-to-service security]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}) article.
+更多信息查看 [服务间安全]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}})。
 
 
 ### 重试
 
-Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. Applications can control which other applications are allowed to call them and what they are authorized to do via access policies. This enables you to restrict sensitive applications, that say have personnel information, from being accessed by unauthorized applications, and combined with service-to-service secure communication, provides for soft multi-tenancy deployments.
+应用程序可以控制哪些其他应用程序允许调用它们，以及通过访问策略授权它们做什么。 这使您能够限制敏感应用，也就是说有人员信息的应用被未经授权的应用访问。 与服务间安全通信相结合，提供软多租户部署。
 
-For more information read the [access control allow lists for service invocation]({{< ref invoke-allowlist.md >}}) article.
+更多信息参考 [服务调用的访问控制允许列表]({{< ref invoke-allowlist.md >})。
 
-#### Example service invocation security
-The diagram below is an example deployment on a Kubernetes cluster with a Daprized `Ingress` service that calls onto `Service A` using service invocation with mTLS encryption and an applies access control policy. `Service A` then calls onto `Service B` also using service invocation and mTLS. Each service is running in different namespaces for added isolation. `Service A` then calls onto `Service B` also using service invocation and mTLS. Each service is running in different namespaces for added isolation.
+#### 服务调用安全示例
+下图是 Kubernetes 集群上的一个部署示例，使用 Dapr 化的`Ingress`服务，该服务调用`Service A`，使用mTLS加密服务调用，并应用访问控制策略。 `Service A` 接下来调用 `Service B` 并也使用服务调用和 mTLS。 每个服务都在不同的名称空间中运行，以增加隔离。
 
 <img src="/images/service-invocation-security.png" width=800>
 
-### Retries
+### 重试
 
-Service invocation performs automatic retries with backoff time periods in the event of call failures and transient errors.
+在发生调用失败和瞬态错误的情况下，服务调用会在回退（backoff）时间段内执行自动重试。
 
-Errors that cause retries are:
+导致重试的错误有：
 
 * 网络错误，包括端点不可用和拒绝连接
 * 因续订主调/被调方Dapr边车上的证书而导致的身份验证错误
 
-Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Connection establishment via gRPC to the target sidecar has a timeout of 5 seconds.
+每次调用重试的回退间隔是 1 秒，最多重试三次。 Per call retries are performed with a backoff interval of 1 second up to a threshold of 3 times. Connection establishment via gRPC to the target sidecar has a timeout of 5 seconds.
 
 ### Pluggable service discovery
 
