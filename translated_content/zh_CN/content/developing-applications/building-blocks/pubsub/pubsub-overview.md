@@ -91,9 +91,9 @@ Dapr 保证消息传递 at-least-once 语义。 这意味着，当应用程序�
 
 同样，如果两个不同的应用程序 (不同的 ID) 订阅同一 topic，那么 Dapr 将每个消息仅传递到每个应用程序的一个实例。
 
-### Topic 限界（Topic scoping）
+### Topic 作用域（Topic scoping）
 
-默认情况下，支持Dapr发布/订阅组件的所有 Topics (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅 topic，Dapr 提供了 topic 限界。 这使您能够让应用程序允许发布哪些主题以及应用程序允许订阅哪些主题。 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}}) 了解更多信息。
+默认情况下，支持Dapr发布/订阅组件的所有 Topics (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅 topic，Dapr 提供了 topic 作用域限定。 这使您能够让应用程序允许发布哪些主题以及应用程序允许订阅哪些主题。 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}}) 了解更多信息。
 
 ### 消息生存时间（TTL）
 Dapr 可以在每个消息的基础上设置超时。 表示如果消息未从 Pub/Sub 组件读取，则消息将被丢弃。 这是为了防止未读消息的积累。 在队列中超过配置的 TTL 的消息就可以说它挂了。  查看 [发布/订阅 topic 限界]({{< ref pubsub-message-ttl.md >}}) 了解更多信息。
