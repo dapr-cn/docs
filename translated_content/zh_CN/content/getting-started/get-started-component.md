@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "定义一个组件"
-linkTitle: "Define a component"
+linkTitle: "定义一个组件"
 weight: 40
 ---
 
