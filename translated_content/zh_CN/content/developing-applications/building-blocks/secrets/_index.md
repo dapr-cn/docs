@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Secrets management"
+title: "密钥管理"
 linkTitle: "Secrets management"
 weight: 70
-description: Securely access secrets from your application
+description: 安全地访问您的应用程序的密钥
 ---
 
