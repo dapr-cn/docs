@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "在本地环境中初始化 Dapr"
-linkTitle: "Init Dapr locally"
+linkTitle: "本地初始化 Dapr"
 weight: 20
 aliases:
   - /getting-started/install-dapr/
