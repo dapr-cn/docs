@@ -12,7 +12,7 @@ description: "Pub/Sub 构建块概述"
 
 Dapr 中的发布/订阅 API 提供至少一次（at-least-once）的保证，并与各种消息代理和队列系统集成。 您的服务所使用的特定实现是可插入的，并被配置为运行时的 Dapr Pub/Sub 组件。 这种方法消除了您服务的依赖性，从而使您的服务可以更便携，更灵活地适应更改。
 
-Dapr Pub/Sub 组件的完整列表在 [这里]({{< ref supported-pubsub >})。
+Dapr Pub/Sub 组件的完整列表在 [这里]({{< ref supported-pubsub >}})。
 
 <img src="/images/pubsub-overview-pattern.png" width=1000>
 
