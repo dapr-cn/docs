@@ -76,7 +76,7 @@ Dapr 应用程序可以订阅已发布的 topics。 Dapr 允许您的应用程�
 
 ### 订阅消息
 
-原则上，当订阅者在处理消息后应答非错误响应时，Dapr 认为成功发送了的消息。 为了进行更精细的控制，Dapr 的发布/订阅 API 还提供显式状态（在响应负载中定义），订阅者可以使用这些状态向 Dapr 指示特定的处理指令（例如： `RETRY` 或 `DROP`）。 更多消息路由的信息查看 [Dapr 发布/订阅 API 文档]({{< ref "pubsub_api.md#provide-routes-for-dapr-to-deliver-topic-events" >})
+原则上，当订阅者在处理消息后应答非错误响应时，Dapr 认为成功发送了的消息。 为了进行更精细的控制，Dapr 的发布/订阅 API 还提供显式状态（在响应负载中定义），订阅者可以使用这些状态向 Dapr 指示特定的处理指令（例如： `RETRY` 或 `DROP`）。 更多消息路由的信息查看 [Dapr 发布/订阅 API 文档]({{< ref "pubsub_api.md#provide-routes-for-dapr-to-deliver-topic-events" >}})
 
 ### 消息传递
 
