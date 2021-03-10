@@ -478,7 +478,7 @@ Dapr 自动接收发布请求上发送的数据，并将其包装在CloudEvent 1
 ## 下一步
 
 - 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)
-- 了解 [Topic 限界]({{< ref pubsub-scopes.md >}})
+- 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
 - 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
 - [Pub/Sub 组件列表]({{< ref setup-pubsub >}})
