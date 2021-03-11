@@ -7,7 +7,7 @@ description: The supported external bindings that interface with Dapr
 no_list: true
 ---
 
-每个绑定都有自己独特的属性集。 Every binding has its own unique set of properties. Click the name link to see the component YAML for each binding.
+每个绑定都有自己独特的属性集。 Click the name link to see the component YAML for each binding.
 
 
 Table captions:
@@ -15,7 +15,7 @@ Table captions:
 > `Status`: [Component certification]({{X63X}}) status
   - [Alpha]({{X52X}})
   - [Beta]({{X54X}})
-  - [GA]({{X56X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X56X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
 
 > `Component version`: defines the version of the component
 ### Generic
