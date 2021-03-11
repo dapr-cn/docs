@@ -6,11 +6,11 @@ weight: 1000
 description: "使用 azure Cosmos DB 作为后端状态存储"
 ---
 
-Dapr 在保存和检索状态时不会转换状态值。 Dapr requires all state store implementations to abide by a certain key format scheme (see [Dapr state management spec]({{< ref state_api.md >}}). You can directly interact with the underlying store to manipulate the state data, such querying states, creating aggregated views and making backups. You can directly interact with the underlying store to manipulate the state data, such querying states, creating aggregated views and making backups.
+Dapr 在保存和检索状态时不会转换状态值。 Dapr要求所有的状态存储实现都要遵守特定的密钥格式 (参见[Dapr状态管理规范]({{< ref state_api.md >}}))。 你可以直接与底层存储进行交互，对状态数据进行操作，比如查询状态、创建聚合视图和进行备份。
 
-> **NOTE:** Azure Cosmos DB is a multi-modal database that supports multiple APIs. The default Dapr Cosmos DB state store implementation uses the [Azure Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started). The default Dapr Cosmos DB state store implementation uses the [Azure Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started).
+> **注意:** Azure Cosmos DB是一个支持多种API的多模数据库。 默认的Dapr Cosmos DB状态存储实现使用 [Azure Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started).
 
-## 1. 1. Connect to Azure Cosmos DB
+## 1. 连接到 Azure Cosmos DB
 
 The easiest way to connect to your Cosmos DB instance is to use the Data Explorer on [Azure Management Portal](https://portal.azure.com). Alternatively, you can use [various SDKs and tools](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction). Alternatively, you can use [various SDKs and tools](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
 
