@@ -8,19 +8,19 @@ aliases:
   - /getting-started/install-dapr-kubernetes/
 ---
 
-When setting up Kubernetes you can use either the Dapr CLI or Helm.
+你可以使用 Dapr CLI 或 Helm 在 Kubernetes 中部署 Dapr
 
-For more information on what is deployed to your Kubernetes cluster read the [Kubernetes overview]({{< ref kubernetes-overview.md >}})
+有关部署到Kubernetes集群的内容的更多信息，请阅读[Kubernetes概述]({{< ref kubernetes-overview.md >}})。
 
 ## 前期准备
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- Kubernetes cluster (see below if needed)
+- 安装[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- Kubernetes 集群 (如有需要可参考下文)
 
-### Create cluster
+### 创建集群
 
-You can install Dapr on any Kubernetes cluster. Here are some helpful links: Here are some helpful links:
+你可以在任何 Kubernetes 集群上安装 Dapr. 下面的链接可以提供帮助:
 
 - [Setup Minikube Cluster]({{< ref setup-minikube.md >}})
 - [Setup Azure Kubernetes Service Cluster]({{< ref setup-aks.md >}})
@@ -28,17 +28,17 @@ You can install Dapr on any Kubernetes cluster. Here are some helpful links: Her
 - [Setup Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 {{% alert title="Hybrid clusters" color="primary" %}}
-Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X52X}}). You can deploy Dapr to Windows nodes if your application requires it. For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{X49X}}).
+Dapr CLI 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 如果你的应用程序有需要，你也可以将 Dapr 部署到 Windows 节点。 更多信息参见 [部署到Linux/Windows混合型Kubernetes集群]({{X49X}}).
 {{% /alert %}}
 
 
-## Install with Dapr CLI
+## 使用 Dapr CLI 安装
 
-You can install Dapr to a Kubernetes cluster using the [Dapr CLI]({{< ref install-dapr-cli.md >}}).
+你可以使用 [Dapr CLI]({{< ref install-dapr-cli.md >}}) 来把 Dapr 安装到 Kubernetes 集群上。
 
-### Install Dapr
+### 安装 Dapr
 
-The `-k` flag initializes Dapr on the Kubernetes cluster in your current context.
+`-k` 标志在当前上下文中初始化 Kubernetes 集群上的 Dapr.
 
 {{% alert title="Ensure correct cluster is set" color="warning" %}}
 Make sure the correct "target" cluster is set. Check `kubectl context (kubectl config get-contexts)` to verify. You can set a different context using `kubectl config use-context <CONTEXT>`.
