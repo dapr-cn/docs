@@ -5,9 +5,9 @@ linkTitle: "Cloudstate"
 description: Detailed information on the Cloudstate state store component
 ---
 
-## Component format
+## 组件格式
 
-To setup Cloudstate state store create a component of type `state.cloudstate`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置Cloudstate状态存储，请创建一个类型为`state.cloudstate`的组件。 请参阅[本指南]({< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
