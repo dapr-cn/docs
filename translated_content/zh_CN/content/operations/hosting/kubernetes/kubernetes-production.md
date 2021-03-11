@@ -117,22 +117,22 @@ nodeapp    3000      16h  2020-07-29 17:16.22
 
 建议生产环境的部署涵盖以下设置：
 
-1. **启用相互验证 (mTLS)**。 请注意，Dapr默认开启了mTLS。 有关如何携带自定义证书的详细信息，请参见 [这里]({< ref "mtls.md#bring-your-own-certificates" >}})。
+1. **启用相互验证 (mTLS)**。 请注意，Dapr默认开启了mTLS。 有关如何携带自定义证书的详细信息，请参见 [这里]({{< ref "mtls.md#bringing-your-own-certificates" >}})。
 
-2. **启用App to Dapr API认证**。 这是你的应用程序和Dapr边车之间的通信。 App to Dapr API authentication is enabled. This is the communication between your application and the Dapr sidecar. To secure the Dapr API from unauthorized application access, it is recommended to enable Dapr's token based auth. See [enable API token authentication in Dapr]({{< ref "api-token.md" >}}) for details See [enable API token authentication in Dapr]({{< ref "api-token.md" >}}) for details
+2. **启用App to Dapr API认证**。 这是你的应用程序和Dapr边车之间的通信。 为了防止未经授权的应用程序访问Dapr API，建议启用Dapr的基于令牌的认证。 请参阅[在 Dapr 中启用 API 令牌认证。]({{< ref "api-token.md" >}}) 以了解详情
 
-3. **Dapr to App API authentication** is enabled. This is the communication between Dapr and your application. This ensures that Dapr knows that it is communicating with an authorized application. Dapr to App API authentication is enabled. This is the communication between Dapr and your application. This ensures that Dapr knows that it is communicating with an authorized application. See [Authenticate requests from Dapr using token authentication]({{< ref "app-api-token.md" >}}) for details
+3. **启用Dapr to App API验证**。 这是Dapr和你的应用程序之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 请参阅[使用令牌认证对来自Dapr的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
 
-4. All component YAMLs should have **secret data configured in a secret store** and not hard-coded in the YAML file. See [here]({{< ref "component-secrets.md" >}}) on how to use secrets with Dapr components
+4. 所有的组件YAML都应该把**密钥数据配置在密钥存储中**，而不是硬编码在YAML文件中。 请参阅 [这里]({{< ref "component-secrets.md" >}})，了解如何在Dapr组件中使用秘密。
 
-5. The Dapr **control plane is installed on a dedicated namespace** such as `dapr-system`.
+5. Dapr **控制平面安装在一个专用的命名空间**上，如`dapr-system`。
 
-6. Dapr also supports **scoping components for certain applications**. This is not a required practice, and can be enabled according to your security needs. See [here]({{< ref "component-scopes.md" >}}) for more info.
+6. Dapr还支持**框定应用程序的组件范围**。 这不是必要的，可以根据您的安全需求启用。 请参阅 [这里]({{< ref "component-scopes.md" >}}) 以获取更多信息。
 
 
-## Tracing and metrics configuration
+## 追踪和度量配置
 
-Dapr has tracing and metrics enabled by default. It is *recommended* that you set up distributed tracing and metrics for your applications and the Dapr control plane in production.
+Dapr 默认启用追踪和度量。 *建议*在生产环境中为您的应用程序和Dapr控制平面设置分布式追踪和度量。
 
 If you already have your own observability set-up, you can disable tracing and metrics for Dapr.
 
