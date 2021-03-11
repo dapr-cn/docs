@@ -134,12 +134,12 @@ nodeapp    3000      16h  2020-07-29 17:16.22
 
 Dapr 默认启用追踪和度量。 *建议*在生产环境中为您的应用程序和Dapr控制平面设置分布式追踪和度量。
 
-If you already have your own observability set-up, you can disable tracing and metrics for Dapr.
+如果你已经有了自己的可观察测性支持组件，你可以禁用Dapr的追踪和度量。
 
-### Tracing
-To configure a tracing backend for Dapr visit [this]({{< ref "setup-tracing.md" >}}) link.
+### 追踪
+要为 Dapr 配置后台追踪，请访问[这个]({{< ref "setup-tracing.md" >}})链接。
 
-### Metrics
-For metrics, Dapr exposes a Prometheus endpoint listening on port 9090 which can be scraped by Prometheus.
+### 度量
+对于度量，Dapr在9090端口上暴露了一个Prometheus端点，可以被Prometheus收集。
 
-To setup Prometheus, Grafana and other monitoring tools with Dapr, visit [this]({{< ref "monitoring" >}}) link.
+要为 Dapr 配置Prometheus、Grafana 和其他监控工具，请访问 [这个]({{< ref "monitoring" >}})链接。
