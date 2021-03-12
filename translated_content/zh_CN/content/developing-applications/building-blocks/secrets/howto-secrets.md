@@ -56,7 +56,7 @@ dapr run --app-id my-app --dapr-http-port 3500 --components-path ./components
 curl http://localhost:3500/v1.0/secrets/my-secrets-store/my-secret
 ```
 
-对于完整的 API 引用，请访问 [这里]({{< ref secrets_api.md >})。
+对于完整的 API 引用，请访问 [这里]({{< ref secrets_api.md >}})。
 
 ## 从你的代码调用密钥 API
 
