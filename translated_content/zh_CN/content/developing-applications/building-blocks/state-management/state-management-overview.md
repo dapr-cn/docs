@@ -34,13 +34,13 @@ Dapr允许开发人员在对于状态的操作请求中附加额外的元数据�
 
 默认情况下，您的应用程序应该假设数据存储是**最终一致**的，并使用**last-write-wins**并发模式。
 
-[Not all stores are created equal]({{< ref supported-state-stores.md >}}). [Not all stores are created equal]({{< ref supported-state-stores.md >}}). To ensure portability of your application you can query the capabilities of the store and make your code adaptive to different store capabilities.
+[并非所有的存储引擎都一样]({{< ref supported-state-stores.md >}})。 为了保证应用程序的可移植性，你可以了解下存储引擎的功能，使你的代码适应不同的存储引擎。
 
 ### 并发（Concurrency）
 
-Dapr supports optimistic concurrency control (OCC) using ETags. When a state is requested, Dapr always attaches an ETag property to the returned state. Dapr supports optimistic concurrency control (OCC) using ETags. When a state is requested, Dapr always attaches an ETag property to the returned state. When the user code tries to update or delete a state, it’s expected to attach the ETag either through the request body for updates or the `If-Match` header for deletes. The write operation can succeed only when the provided ETag matches with the ETag in the state store. The write operation can succeed only when the provided ETag matches with the ETag in the state store.
+Dapr支持使用ETags的乐观并发控制（OCC）。 当一个发送请求操作状态时，Dapr会给返回的状态附加一个ETag属性。 当用户代码试图更新或删除一个状态时，它应该通过更新的请求体或删除的`If-Match`头附加ETag。 只有当提供的ETag与状态存储中的ETag匹配时，写操作才能成功。
 
-Dapr chooses OCC because in many applications, data update conflicts are rare because clients are naturally partitioned by business contexts to operate on different data. However, if your application chooses to use ETags, a request may get rejected because of mismatched ETags. It's recommended that you use a retry policy to compensate for such conflicts when using ETags. However, if your application chooses to use ETags, a request may get rejected because of mismatched ETags. It's recommended that you use a retry policy to compensate for such conflicts when using ETags.
+Dapr之所以选择OCC，是因为在不少应用中，数据更新冲突都是很少的，因为客户端是按业务上下文自然分割的，可以对不同的数据进行操作。 然而，如果你的应用选择使用ETags，请求可能会因为不匹配的ETags而被拒绝。 建议你在使用ETags时，使用重试策略来补偿这种冲突。
 
 If your application omits ETags in writing requests, Dapr skips ETag checks while handling the requests. This essentially enables the **last-write-wins** pattern, compared to the **first-write-wins** pattern with ETags. This essentially enables the **last-write-wins** pattern, compared to the **first-write-wins** pattern with ETags.
 
