@@ -8,31 +8,31 @@ description: "Overview of the state management building block"
 
 ## 介绍
 
-Using state management, your application can store data as key/value pairs in the [supported state stores]({{< ref supported-state-stores.md >}}).
+通过状态管理构件，你的应用程序可以将数据存储为 [支持的状态存储引擎]({{< ref supported-state-stores.md >}})中的键/值对。
 
-When using state management your application can leverage features that would otherwise be complicated and error-prone to build yourself such as:
+当使用状态管理时，你的应用程序可以利用一些自己构建会很复杂，容易出错的功能，比如:
 
-- Distributed concurrency and data consistency
-- Bulk [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations
+- 分布式并发和数据一致性
+- 批量[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) 操作
 
-Your application can used Dapr's state management API to save and read key/value pairs using a state store component, as shown in the diagram below. For example, by using HTTP POST you can save key/value pairs and by using HTTP GET you can read a key and have its value returned. For example, by using HTTP POST you can save key/value pairs and by using HTTP GET you can read a key and have its value returned.
+你的应用程序可以使用Dapr的状态管理API，使用状态存储组件保存和读取键/值对，如下图所示。 例如，通过使用HTTP POST可以保存键/值对，通过使用HTTP GET可以读取一个键并返回它的值。
 
 <img src="/images/state-management-overview.png" width=900>
 
 
 ## 特性
 
-### Pluggable state stores
+### 可插拔状态存储
 
-Dapr data stores are modeled as components, which can be swapped out without any changes to your service code. See [supported state stores]({{< ref supported-state-stores >}}) to see the list. See [supported state stores]({{< ref supported-state-stores >}}) to see the list.
+Dapr数据存储被建模为组件，可以在不修改你的服务代码的情况下进行替换。 请访问 [支持的状态存储引擎]({{< ref supported-state-stores >}})页面查看完整列表。
 
-### Configurable state store behavior
+### 可配置的状态存储行为
 
-Dapr allows developers to attach additional metadata to a state operation request that describes how the request is expected to be handled. You can attach: You can attach:
-- Concurrency requirements
-- Consistency requirements
+Dapr允许开发人员在对于状态的操作请求中附加额外的元数据，这些元数据用以描述期望如何处理该请求。 你可以附加以下：
+- 并发要求
+- 一致性要求
 
-By default, your application should assume a data store is **eventually consistent** and uses a **last-write-wins** concurrency pattern.
+默认情况下，您的应用程序应该假设数据存储是**最终一致**的，并使用**last-write-wins**并发模式。
 
 [Not all stores are created equal]({{< ref supported-state-stores.md >}}). [Not all stores are created equal]({{< ref supported-state-stores.md >}}). To ensure portability of your application you can query the capabilities of the store and make your code adaptive to different store capabilities.
 
