@@ -6,15 +6,15 @@ weight: 300
 description: "Use state management with a scaled, replicated service"
 ---
 
-In this article you'll learn how you can create a stateful service which can be horizontally scaled, using opt-in concurrency and consistency models.
+在这篇文章中，你将了解到如何使用选入(opt-in) 并发和一致性模型来创建一个可以水平扩展的有状态服务。
 
-This frees developers from difficult state coordination, conflict resolution and failure handling, and allows them instead to consume these capabilities as APIs from Dapr.
+这可以把开发人员从困难的状态协调、冲突解决和失败处理中解放出来，允许他们以Dapr的API形式使用这些功能。
 
-## Setup a state store
+## 设置状态存储
 
-A state store component represents a resource that Dapr uses to communicate with a database. For the purpose of this guide, we'll use a Redis state store. For the purpose of this guide, we'll use a Redis state store.
+状态存储组件代表Dapr用来与数据库进行通信的资源。 在本指南中，我们将使用Redis作为状态存储引擎。
 
-See a list of supported state stores [here]({{< ref supported-state-stores >}})
+在[这里]({{< ref supported-state-stores >}})查看支持的状态存储引擎列表。
 
 ### Using the Dapr CLI
 
