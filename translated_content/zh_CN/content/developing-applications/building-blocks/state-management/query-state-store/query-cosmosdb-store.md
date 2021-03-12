@@ -12,29 +12,29 @@ Dapr 在保存和检索状态时不会转换状态值。 Dapr要求所有的状�
 
 ## 1. 连接到 Azure Cosmos DB
 
-The easiest way to connect to your Cosmos DB instance is to use the Data Explorer on [Azure Management Portal](https://portal.azure.com). Alternatively, you can use [various SDKs and tools](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction). Alternatively, you can use [various SDKs and tools](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
+连接到您的 Cosmos DB 实例的最简单方法是使用 [Azure Management Portal](https://portal.azure.com)上的数据资源管理器。 或者，你也可以使用[多种SDK和工具](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction)。
 
-> **NOTE:** The following samples use Cosmos DB [SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started). When you configure an Azure Cosmos DB for Dapr, you need to specify the exact database and collection to use. The follow samples assume you've already connected to the right database and a collection named "states". When you configure an Azure Cosmos DB for Dapr, you need to specify the exact database and collection to use. The follow samples assume you've already connected to the right database and a collection named "states".
+> **注意:** 下面的示例使用 Cosmos DB [SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started). 当你为 Dapr 配置 Azure Cosmos DB 时，你需要明确指定要使用的数据库和集合。 下面的示例假设你已经连接到了正确的数据库和一个名为 "states"的集合。
 
-## 2. 2. 通过 App ID 列出键
+## 2. 通过 App ID 列出键
 
-To get all state keys associated with application "myapp", use the query:
+执行下面的查询，以获得与应用程序 "myapp "相关的所有状态键：
 
 ```sql
 SELECT * FROM states WHERE CONTAINS(states.id, 'myapp||')
 ```
 
-The above query returns all documents with id containing "myapp-", which is the prefix of the state keys.
+上面的查询会返回所有id包含 "myapp-"的文档，也就是状态键的前缀。
 
-## 3. 3. 获取特定状态数据
+## 3. 获取指定状态数据
 
-To get the state data by a key "balance" for the application "myapp", use the query:
+执行下面的查询，以通过键 "balance "获取应用程序 "myapp "的状态数据:
 
 ```sql
 SELECT * FROM states WHERE states.id = 'myapp||balance'
 ```
 
-Then, read the **value** field of the returned document.
+然后，读取返回的文档的**value**字段。
 
 要获取状态version/ETag ，请使用以下命令:
 
@@ -56,4 +56,4 @@ SELECT * FROM states WHERE CONTAINS(states.id, 'mypets||cat||leroy||')
 SELECT * FROM states WHERE states.id = 'mypets||cat||leroy||food'
 ```
 
-> **WARNING:** You should not manually update or delete states in the store. All writes and delete operations should be done via the Dapr runtime. All writes and delete operations should be done via the Dapr runtime.
+> **警告:** 您不应该手动更新或删除存储引擎中的状态， 所有的写入和删除操作都应该通过Dapr运行时来完成。
