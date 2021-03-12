@@ -45,16 +45,16 @@ Dapr之所以选择OCC，是因为在不少应用中，数据更新冲突都是�
 如果您的应用程序在书面请求中省略了ETags，Dapr会在处理请求时跳过ETags校验。 这与ETags的**last-write-wins**模式相比，基本上可以实现**first-write-wins**模式。
 
 {{% alert title="Note on ETags" color="primary" %}}
-对于原生不支持ETags的存储引擎，要求相应的Dapr状态存储实现能够模拟ETags，并在处理状态时遵循Dapr状态管理API规范。 Because Dapr state store implementations are technically clients to the underlying data store, such simulation should be straightforward using the concurrency control mechanisms provided by the store.
+对于原生不支持ETags的存储引擎，要求相应的Dapr状态存储实现能够模拟ETags，并在处理状态时遵循Dapr状态管理API规范。 由于Dapr状态存储实现在技术上是底层数据存储引擎的客户端，所以这种模拟应该直接使用存储引擎提供的并发控制机制。
 {{% /alert %}}
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how to set concurrency options.
+阅读[API参考]({{< ref state_api.md >}})，了解如何设置并发选项。
 
-### Consistency
+### 一致性
 
-Dapr supports both **strong consistency** and **eventual consistency**, with eventual consistency as the default behavior.
+Dapr同时支持**强一致性**和**最终一致性**，其中最终一致性为默认行为。
 
-When strong consistency is used, Dapr waits for all replicas (or designated quorums) to acknowledge before it acknowledges a write request. When strong consistency is used, Dapr waits for all replicas (or designated quorums) to acknowledge before it acknowledges a write request. When eventual consistency is used, Dapr returns as soon as the write request is accepted by the underlying data store, even if this is a single replica.
+当使用强一致性时，Dapr会等待所有副本（或指定的quorums）确认后才会确认写入请求。 When strong consistency is used, Dapr waits for all replicas (or designated quorums) to acknowledge before it acknowledges a write request. When eventual consistency is used, Dapr returns as soon as the write request is accepted by the underlying data store, even if this is a single replica.
 
 Read the [API reference]({{< ref state_api.md >}}) to learn how to set consistency options.
 
