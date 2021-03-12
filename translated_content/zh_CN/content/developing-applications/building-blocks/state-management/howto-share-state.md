@@ -14,9 +14,9 @@ Dapr 为开发者提供了不同的方式来共享应用程序之间的状态。
 
 要启用状态共享， Dapr 支持以下键前缀策略:
 
-* **`Appid`** - 这是默认策略。 the `appid` prefix allows state to be managed only by the app with the specified `appid`. All state keys will be prefixed with the `appid`, and are scoped for the application. All state keys will be prefixed with the `appid`, and are scoped for the application.
+* **`Appid`** - 这是默认策略。 带有`appid`前缀的状态仅允许具有指定`appid`的应用程序管理。 所有的状态键都会以`appid`为前缀，并对应用进行限定。
 
-* **`name`** - This setting uses the name of the state store component as the prefix. Multiple applications can share the same state for a given state store. Multiple applications can share the same state for a given state store.
+* **`name`** - 此设置使用状态存储组件的名称作为前缀。 对于一个给定的状态存储，多个应用程序可以共享同一个状态。
 
 * **`none`** - This setting uses no prefixing. Multiple applications share state across different state stores. Multiple applications share state across different state stores.
 
