@@ -67,7 +67,7 @@ spec:
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
-首先启动一个Dapr边车：
+首先启动一个Dapr sidecar：
 
 ```bash
 dapr run --app-id myapp --dapr-http-port 3500
@@ -83,12 +83,12 @@ curl -X POST -H "Content-Type: application/json" -d '[{ "key": "key1", "value": 
 curl http://localhost:3500/v1.0/state/statestore/key1
 ```
 
-你也可以重启你的边车，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
+你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 {{% /codetab %}}
 
 {{% codetab %}}
 
-首先启动Dapr边车:
+首先启动Dapr sidecar:
 
 ```bash
 dapr --app-id myapp --port 3500 run
@@ -104,7 +104,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "
 Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/state/statestore/key1'
 ```
 
-你也可以重启你的边车，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
+你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 
 {{% /codetab %}}
 
@@ -124,7 +124,7 @@ with DaprClient() as d:
 
 ```
 
-保存后执行以下命令启动Dapr 边车并运行Python应用程序:
+保存后执行以下命令启动Dapr sidecar并运行Python应用程序:
 
 ```bash
 dapr --app-id myapp run python pythonState.py
@@ -182,7 +182,7 @@ $app->run(function(\Dapr\State\StateManager $stateManager, \Psr\Log\LoggerInterf
 });
 ```
 
-保存后，执行以下命令启动Dapr 边车并运行PHP应用程序:
+保存后，执行以下命令启动Dapr sidecar并运行PHP应用程序:
 
 ```bash
 dapr --app-id myapp run -- php state-example.php
@@ -347,19 +347,19 @@ Dapr还允许你在同一个调用中保存和检索多个状态:
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "key1", "value": "value1"}, { "key": "key2", "value": "value2"}]' http://localhost:3500/v1.0/state/statestore
 ```
 
-Now get the states you just saved:
+现在获取你刚才保存的状态：
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"keys":["key1", "key2"]}' http://localhost:3500/v1.0/state/statestore/bulk
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-With the same dapr instance running from above save two key/value pairs into your statestore:
+在上面运行的同一个dapr实例中，将两个键/值对保存到你的statetore中:
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": "key1", "value": "value1"}, { "key": "key2", "value": "value2"}]' -Uri 'http://localhost:3500/v1.0/state/statestore'
 ```
 
-Now get the states you just saved:
+现在获取你刚才保存的状态：
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["key1", "key2"]}' -Uri 'http://localhost:3500/v1.0/state/statestore/bulk'
 ```
@@ -368,9 +368,9 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 
 {{% codetab %}}
 
-The `StateItem` object can be used to store multiple Dapr states with the `save_states` and `get_states` methods.
+`StateItem`对象可以使用`save_states`和`get_states`方法来存储多个Dapr状态。
 
-Update your `pythonState.py` file with the following code:
+用以下代码更新你的`pythonState.py`文件:
 
 ```python
 from dapr.clients import DaprClient
@@ -387,13 +387,13 @@ with DaprClient() as d:
     print(f"Got items: {[i.data for i in items]}")
 ```
 
-Now run your program with:
+现在通过以下命令运行你的程序:
 
 ```bash
 dapr --app-id myapp run python pythonState.py
 ```
 
-You should see an output similar to the following:
+你应该会看到一个类似于下面的输出:
 
 ```md
 == DAPR == time="2021-01-06T21:54:56.7262358-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
@@ -426,9 +426,9 @@ You're up and running! Both Dapr and your app logs will appear here.
 
 {{% codetab %}}
 
-To batch load and save state with PHP, just create a "Plain Ole' PHP Object" (POPO) and annotate it with the StateStore annotation.
+要用PHP批量加载和保存状态，只需创建一个 "Plain Ole' PHP对象"(POPO)，并用 StateStore注解进行声明。
 
-Update the `state-example.php` file:
+更新`state-example.php`文件:
 
 ```php
 <?php
@@ -452,13 +452,13 @@ $app->run(function(\Dapr\State\StateManager $stateManager, \Psr\Log\LoggerInterf
 });
 ```
 
-Run the app:
+运行该应用:
 
 ```bash
 dapr --app-id myapp run -- php state-example.php
 ```
 
-And see the following output:
+并看到以下输出:
 
 ```md
 ✅  You're up and running! Both Dapr and your app logs will appear here.
@@ -474,33 +474,33 @@ And see the following output:
 
 {{< /tabs >}}
 
-## Step 5: Perform state transactions
+## 第五步：执行状态事务性操作
 
 {{% alert title="Note" color="warning" %}}
-State transactions require a state store that supports multi-item transactions. State transactions require a state store that supports multi-item transactions. Visit the [supported state stores page]({{< ref supported-state-stores >}}) page for a full list. Note that the default Redis container created in a self-hosted environment supports them. Note that the default Redis container created in a self-hosted environment supports them.
+状态事务性操作需要一个支持multi-item transactions的状态存储引擎。 请访问 [支持的状态存储引擎]({{< ref supported-state-stores >}})页面查看完整列表。 请注意，在自托管环境中创建的默认Redis容器是支持的。
 {{% /alert %}}
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
-With the same dapr instance running from above perform two state transactions:
+用上面运行的同一个dapr实例执行两个状态事务操作:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"operations": [{"operation":"upsert", "request": {"key": "key1", "value": "newValue1"}}, {"operation":"delete", "request": {"key": "key2"}}]}' http://localhost:3500/v1.0/state/statestore/transaction
 ```
 
-Now see the results of your state transactions:
+现在可以看到你的状态事务操作的结果:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"keys":["key1", "key2"]}' http://localhost:3500/v1.0/state/statestore/bulk
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-With the same dapr instance running from above save two key/value pairs into your statestore:
+在上面运行的同一个dapr实例中，将两个键/值对保存到你的statetore中:
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"operations": [{"operation":"upsert", "request": {"key": "key1", "value": "newValue1"}}, {"operation":"delete", "request": {"key": "key2"}}]}' -Uri 'http://localhost:3500/v1.0/state/statestore'
 ```
 
-Now see the results of your state transactions:
+现在可以看到你的状态事务操作的结果:
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["key1", "key2"]}' -Uri 'http://localhost:3500/v1.0/state/statestore/bulk'
 ```
@@ -509,9 +509,9 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 
 {{% codetab %}}
 
-The `TransactionalStateOperation` can perform a state transaction if your state stores need to be transactional.
+如果你的状态存储需要事务支持，可以考虑使用`TransactionalStateOperation`。
 
-Update your `pythonState.py` file with the following code:
+用以下代码更新你的`pythonState.py`文件:
 
 ```python
 from dapr.clients import DaprClient
@@ -538,13 +538,13 @@ with DaprClient() as d:
     print(f"Got items: {[i.data for i in items]}")
 ```
 
-Now run your program with:
+现在通过以下命令运行你的程序:
 
 ```bash
 dapr run python pythonState.py
 ```
 
-You should see an output similar to the following:
+你应该会看到一个类似于下面的输出:
 
 ```md
 Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
@@ -577,9 +577,9 @@ You're up and running! Both Dapr and your app logs will appear here.
 
 {{% codetab %}}
 
-Transactional state is supported by extending `TransactionalState` base object which hooks into your object via setters and getters to provide a transaction. Before you created your own transactional object, but now you'll ask the Dependency Injection framework to build one for you. Before you created your own transactional object, but now you'll ask the Dependency Injection framework to build one for you.
+事务性状态通过扩展`TransactionalState`基础对象来支持，它挂接到你的 对象，然后通过setters和getters来提供事务。 而你可能会希望依赖注入框架来替你创建一个事务对象:
 
-Modify the `state-example.php` file again:
+再次修改`state-example.php`文件:
 
 ```php
 <?php
@@ -606,13 +606,13 @@ $app->run(function(MyState $obj, \Psr\Log\LoggerInterface $logger, \Dapr\State\S
 });
 ```
 
-Run the application:
+运行程序:
 
 ```bash
 dapr --app-id myapp run -- php state-example.php
 ```
 
-Observe the following output:
+观察到以下输出:
 
 ```md
 ✅  You're up and running! Both Dapr and your app logs will appear here.
@@ -628,7 +628,7 @@ Observe the following output:
 
 {{< /tabs >}}
 
-## Next steps
+## 下一步
 
 - Read the full [State API reference]({{< ref state_api.md >}})
 - Try one of the [Dapr SDKs]({{< ref sdks >}})
