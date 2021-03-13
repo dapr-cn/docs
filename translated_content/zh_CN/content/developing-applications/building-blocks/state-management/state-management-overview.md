@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "State management overview"
+title: "状态管理概览"
 linkTitle: "Secrets stores overview"
 weight: 100
-description: "Overview of the state management building block"
+description: "状态管理构建块概览"
 ---
 
 ## 介绍
@@ -54,11 +54,11 @@ Dapr之所以选择OCC，是因为在不少应用中，数据更新冲突都是�
 
 Dapr同时支持**强一致性**和**最终一致性**，其中最终一致性为默认行为。
 
-当使用强一致性时，Dapr会等待所有副本（或指定的quorums）确认后才会确认写入请求。 When strong consistency is used, Dapr waits for all replicas (or designated quorums) to acknowledge before it acknowledges a write request. When eventual consistency is used, Dapr returns as soon as the write request is accepted by the underlying data store, even if this is a single replica.
+当使用强一致性时，Dapr会等待所有副本（或指定的quorums）确认后才会确认写入请求。 当最终使用一致性时，Dapr 将在基本数据存储接受写入请求后立即返回，即使这是单个副本。
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how to set consistency options.
+阅读[API参考]({{< ref state_api.md >}})，了解如何设置一致性选项。
 
-### Bulk operations
+### 批量操作
 
 Dapr supports two types of bulk operations - **bulk** or **multi**. You can group several requests of the same type into a bulk (or a batch). Dapr submits requests in the bulk as individual requests to the underlying data store. In other words, bulk operations are not transactional. On the other hand, you can group requests of different types into a multi-operation, which is handled as an atomic transaction. You can group several requests of the same type into a bulk (or a batch). Dapr submits requests in the bulk as individual requests to the underlying data store. In other words, bulk operations are not transactional. On the other hand, you can group requests of different types into a multi-operation, which is handled as an atomic transaction.
 
