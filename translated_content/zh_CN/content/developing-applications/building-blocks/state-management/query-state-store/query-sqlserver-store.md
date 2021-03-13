@@ -3,7 +3,7 @@ type: docs
 title: "SQL server"
 linkTitle: "SQL server"
 weight: 3000
-description: "Use SQL server as a backend state store"
+description: "使用 SQL Server 作为后端状态存储"
 ---
 
 Dapr 在保存和检索状态时不会转换状态值。 Dapr 要求所有状态存储的实现都遵守特定格式(见 [Dapr状态管理规范]({{< ref state_api.md >}}))。 您可以直接与基础存储进行交互以操作状态数据，例如查询状态、创建聚合视图和进行备份。
