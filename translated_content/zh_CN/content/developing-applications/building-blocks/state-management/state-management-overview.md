@@ -60,51 +60,51 @@ Dapr同时支持**强一致性**和**最终一致性**，其中最终一致性�
 
 ### 批量操作
 
-Dapr supports two types of bulk operations - **bulk** or **multi**. You can group several requests of the same type into a bulk (or a batch). Dapr submits requests in the bulk as individual requests to the underlying data store. In other words, bulk operations are not transactional. On the other hand, you can group requests of different types into a multi-operation, which is handled as an atomic transaction. You can group several requests of the same type into a bulk (or a batch). Dapr submits requests in the bulk as individual requests to the underlying data store. In other words, bulk operations are not transactional. On the other hand, you can group requests of different types into a multi-operation, which is handled as an atomic transaction.
+Dapr 支持两种类型的批量操作 - **bulk** 或 **multi**。 您可以将几个相同类型的请求分组成批量(或批次)。 Dapr将请求作为单个请求批量提交给基础数据存储。 换句话说，批量（bulk）操作不是事务性的。 另一方面，您可以将不同类型的请求分组为多操作，作为原子事务处理。
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how use bulk and multi options.
+阅读 [API 参考]({{< ref state_api.md >}) 以了解如何使用批量（bulk）选项和批次（multi）选项。
 
-### Actor state
-Transactional state stores can be used to store actor state. To specify which state store to be used for actors, specify value of property `actorStateStore` as `true` in the metadata section of the state store component. Actors state is stored with a specific scheme in transactional state stores, which allows for consistent querying. Read the [API reference]({{< ref state_api.md >}}) to learn more about state stores for actors and the [actors API reference]({{< ref actors_api.md >}}) To specify which state store to be used for actors, specify value of property `actorStateStore` as `true` in the metadata section of the state store component. Actors state is stored with a specific scheme in transactional state stores, which allows for consistent querying. Read the [API reference]({{< ref state_api.md >}}) to learn more about state stores for actors and the [actors API reference]({{< ref actors_api.md >}})
+### Actor 状态
+事务性状态存储可用于存储 Actor 状态。 指定 Actor 要使用哪个状态存储， 在状态存储组件的元数据部分中指定属性 `actorStateStore` as `true` Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 阅读 [API 参考]({{< ref state_api.md >}) 以了解更多关于 Actor 中的状态存储 和 [Actor API 参考]({{< ref actors_api.md >})
 
-### Query state store directly
+### 直接查询状态存储
 
-Dapr saves and retrieves state values without any transformation. Dapr saves and retrieves state values without any transformation. You can query and aggregate state directly from the [underlying state store]({{< ref query-state-store >}}).
+Dapr保存和检索状态值，而不进行任何转换。 您可以直接从 [基础状态存储]({{< ref query-state-store >}}) 中查询并聚合状态。
 
-For example, to get all state keys associated with an application ID "myApp" in Redis, use:
+例如，要在 Redis 中获取与 app ID“myApp”相关的所有状态 key，可以使用:
 
 ```bash
 KEYS "myApp*"
 ```
 
-#### Querying actor state
+#### 查询 Actor 状态
 
-If the data store supports SQL queries, you can query an actor's state using SQL queries. For example use: For example use:
+如果数据存储支持 SQL 查询，您可以使用 SQL 查询 Actor 的状态。 例如使用：
 
 ```sql
 SELECT * FROM StateTable WHERE Id='<app-id>||<actor-type>||<actor-id>||<key>'
 ```
 
-You can also perform aggregate queries across actor instances, avoiding the common turn-based concurrency limitations of actor frameworks. For example, to calculate the average temperature of all thermometer actors, use: For example, to calculate the average temperature of all thermometer actors, use:
+您还可以跨 Actor 实例执行聚合查询，避免 Actor 框架常见的基于回合的并发性限制。 例如，要计算所有温度计Actor的平均温度，使用:
 
 ```sql
 SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||temperature'
 ```
 
 {{% alert title="Note on direct queries" color="primary" %}}
-Direct queries of the state store are not governed by Dapr concurrency control, since you are not calling through the Dapr runtime. What you see are snapshots of committed data which are acceptable for read-only queries across multiple actors, however writes should be done via the Dapr state management or actors APIs. What you see are snapshots of committed data which are acceptable for read-only queries across multiple actors, however writes should be done via the Dapr state management or actors APIs.
+对状态存储的直接查询不受 Dapr 并发控制，毕竟您没有通过 Dapr 运行时调用。 您看到的是提交数据的快照，对于跨多个 Actor 的只读查询是可以接受的，当然写操作应该通过 Dapr 状态管理或 Actor api 来执行。
 {{% /alert %}}
 
-### State management API
+### 状态管理 API
 
-The API for state management can be found in the [state management API reference]({{< ref state_api.md >}}) which describes how to retrieve, save and delete state values by providing keys.
+状态管理API可以在 [状态管理 API 参考]({{< ref state_api.md >}}) 中找到。它描述了如何根据 key 来查询、保存和删除状态。
 
 ## 下一步
-* Follow these guides on:
-    * [How-To: Save and get state]({{< ref howto-get-save-state.md >}})
-    * [How-To: Build a stateful service]({{< ref howto-stateful-service.md >}})
-    * [How-To: Share state between applications]({{< ref howto-share-state.md >}})
-* Try out the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) which shows how to use state management or try the samples in the [Dapr SDKs]({{< ref sdks >}})
-* List of [state store components]({{< ref supported-state-stores.md >}})
-* Read the [state management API reference]({{< ref state_api.md >}})
-* Read the [actors API reference]({{< ref actors_api.md >}})
+* 关注以下指南：
+    * [指南：保存和获取状态]({{< ref howto-get-save-state.md >}})
+    * [指南：创建一个有状态的服务]({{< ref howto-stateful-service.md >}})
+    * [指南：如何在应用程序之间共享状态]({{< ref howto-share-state.md >}})
+* 试试 [hello world 快速入门](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) ，它会显示如何使用状态管理或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
+* [状态存储组件]({{< ref supported-state-stores.md >}}) 列表
+* 阅读 [状态管理 API 引用]({{< ref state_api.md >}})
+* 阅读 [Actor API 引用]({{< ref actors_api.md >})
