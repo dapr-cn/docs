@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "How-To: Build a stateful service"
+title: "指南：如何创建一个有状态的服务"
 linkTitle: "How-To: Build a stateful service"
 weight: 300
-description: "Use state management with a scaled, replicated service"
+description: "对可伸缩的副本使用状态管理"
 ---
 
 在这篇文章中，你将了解到如何使用选入(opt-in) 并发和一致性模型来创建一个可以水平扩展的有状态服务。
