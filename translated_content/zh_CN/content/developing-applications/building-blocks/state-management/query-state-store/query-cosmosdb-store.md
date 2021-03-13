@@ -42,7 +42,7 @@ SELECT * FROM states WHERE states.id = 'myapp||balance'
 SELECT states._etag FROM states WHERE states.id = 'myapp||balance'
 ```
 
-## 4. 4. 获取 actor 状态
+## 4. 获取 actor 状态
 
 要获取应用ID为 "myets "，实例ID为"leroy"，actor类型为"cat"的相关联所有actor的状态键，请使用以下命令:
 
