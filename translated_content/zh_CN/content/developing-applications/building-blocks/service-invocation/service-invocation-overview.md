@@ -51,7 +51,7 @@ Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调�
 localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 ```
 
-这在 Kubernetes 集群中进行跨命名空间调用特别有用。 观看此演示视频以获取有关如何使用具有命名空间的服务调用。 <iframe width="560" height="315" src="https://www.youtube.com/embed/LYYV_jouEuA?start=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+这在 Kubernetes 集群中进行跨命名空间调用特别有用。 观看此演示视频以获取有关如何使用具有命名空间的服务调用。 <iframe width="560" height="315" src="https://www.bilibili.com/video/BV14z4y167te?p=2&t=497" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 
 ### 服务间安全性
@@ -65,7 +65,7 @@ Dapr 应用程序之间的所有调用都可以通过托管平台上的相互(mT
 
 应用程序可以控制哪些其他应用程序允许调用它们，以及通过访问策略授权它们做什么。 这使您能够限制敏感应用，也就是说有人员信息的应用被未经授权的应用访问。 与服务间安全通信相结合，提供软多租户部署。
 
-更多信息参考 [服务调用的访问控制允许列表]({{< ref invoke-allowlist.md >})。
+更多信息参考 [服务调用的访问控制允许列表]({{< ref invoke-allowlist.md >}})。
 
 #### 服务调用安全示例
 下图是 Kubernetes 集群上的一个部署示例，使用 Dapr 化的`Ingress`服务，该服务调用`Service A`，使用mTLS加密服务调用，并应用访问控制策略。 `Service A` 接下来调用 `Service B` 并也使用服务调用和 mTLS。 每个服务都在不同的名称空间中运行，以增加隔离。
@@ -125,5 +125,5 @@ Dapr 使用 mDNS 协议提供轮询负载均衡的服务调用请求，例如用
     * [入门指南：发现并调用服务]({{< ref howto-invoke-discover-services.md >}})
     * [指南：配置 Dapr 来使用 gRPC]({{< ref grpc >}})
 * 试试 [hello World 快速入门](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) ，它会显示如何使用 HTTP 服务调用或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
-* 阅读 [服务调用 API 规范]({{< ref service_invocation_api.md >})
+* 阅读 [服务调用 API 规范]({{< ref service_invocation_api.md >}})
 * 了解 [服务调用性能]({{< ref perf-service-invocation.md >}}) 数字
