@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "How-To: Save and get state"
+title: "指南：如何保存和获取状态"
 linkTitle: "How-To: Save & get state"
 weight: 200
-description: "Use key value pairs to persist a state"
+description: "使用键值对来持久化状态"
 ---
 
 ## 介绍
@@ -630,6 +630,6 @@ dapr --app-id myapp run -- php state-example.php
 
 ## 下一步
 
-- Read the full [State API reference]({{< ref state_api.md >}})
-- Try one of the [Dapr SDKs]({{< ref sdks >}})
-- Build a [stateful service]({{< ref howto-stateful-service.md >}})
+- 阅读完整的 [状态 API 参考]({{< ref state_api.md >}})
+- 试试其中一个 [Dapr SDK]({{< ref sdks >}})
+- 构建一个 [状态服务]({{< ref howto-stateful-service.md >}})
