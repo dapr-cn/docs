@@ -6,16 +6,16 @@ weight: 2000
 description: "Configuring IntelliJ community edition for debugging with Dapr"
 ---
 
-When developing Dapr applications, you typically use the Dapr CLI to start your 'Daprized' service similar to this:
+开发 Dapr应用程序时，你通常使用 Dapr CLI 来启动你的 Dapr 服务，就像这样：
 
 ```bash
 dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 ```
 
-This uses the default components yaml files (created on `dapr init`) so that your service can interact with the local Redis container. This is great when you are just getting started but what if you want to attach a debugger to your service and step through the code? This is where you can use the dapr cli without invoking an app.
+这使用了默认的组件yaml文件（在`dapr init`上创建），这样你的服务就可以与本地Redis容器交互。 作为一个入门方法这很好用，但是如果你想要附加一个调试器到你的服务来进行代码调试呢？ 在这里你可以使用dapr cli而不需要调用app。
 
 
-One approach to attaching the debugger to your service is to first run `dapr run --` from the command line and then launch your code and attach the debugger. While this is a perfectly acceptable solution, it does require a few extra steps (like switching between terminal and IDE) and some instruction to developers who might want to clone your repo and hit the "play" button to begin debugging.
+将调试器附加到服务中的一种方法是首先从命令行运行`dapr run --`，然后运行你的代码并附加调试器。 While this is a perfectly acceptable solution, it does require a few extra steps (like switching between terminal and IDE) and some instruction to developers who might want to clone your repo and hit the "play" button to begin debugging.
 
 This document explains how to use `dapr` directly from IntelliJ. As a pre-requisite, make sure you have initialized the Dapr's dev environment via `dapr init`.
 
