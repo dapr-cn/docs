@@ -61,7 +61,7 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 
 ## 用Helm部署Dapr
 
-有关使用 Helm 部署 Dapr 的完整指南，请访问 [本指南]({< ref "kubernetes-deploy.md#install-with-helm-advanced" >}})。
+有关使用 Helm 部署 Dapr 的完整指南，请访问 [本指南]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}})。
 
 ### 参数文件
 建议创建一个文件来存储值，而不是在命令行中指定参数。 这个文件应当应用代码版本控制，这样你就可以跟踪对它的修改。
@@ -90,7 +90,7 @@ Dapr支持零停机升级， 升级包括以下步骤：
 
 要升级 Dapr CLI，[下载 CLI 的最新版本](https://github.com/dapr/cli/releases)，并确保它在您的当前路径中。
 
-### 更新Dapr控制平面
+### 更新Dapr control plane
 
 请参阅 [在 Kubernetes 集群上升级 Dapr 的步骤]({{< ref "kubernetes-upgrade.md#helm" >}})。
 
