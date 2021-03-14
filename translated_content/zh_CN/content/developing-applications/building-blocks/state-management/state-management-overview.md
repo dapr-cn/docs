@@ -107,4 +107,4 @@ SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||tem
 * 试试 [hello world 快速入门](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) ，它会显示如何使用状态管理或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
 * [状态存储组件]({{< ref supported-state-stores.md >}}) 列表
 * 阅读 [状态管理 API 引用]({{< ref state_api.md >}})
-* 阅读 [Actor API 引用]({{< ref actors_api.md >})
+* 阅读 [Actor API 引用]({{< ref actors_api.md >}})
