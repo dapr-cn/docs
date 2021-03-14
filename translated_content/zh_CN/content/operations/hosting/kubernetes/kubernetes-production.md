@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Production guidelines on Kubernetes"
-linkTitle: "Production guidelines"
-weight: 10000
-description: "Recommendations and practices for deploying Dapr to a Kubernetes cluster in a production ready configuration"
+title: "Kubernetes生产环境配置指南"
+linkTitle: "生产环境配置指南"
+weight: 40000
+description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和做法"
 ---
 
 ## 集群能力要求
@@ -92,9 +92,9 @@ Dapr支持零停机升级， 升级包括以下步骤：
 
 ### 更新Dapr控制平面
 
-请参阅 [在 Kubernetes 集群上升级 Dapr 的步骤]({< ref "kubernetes-upgrade.md#helm">}})。
+请参阅 [在 Kubernetes 集群上升级 Dapr 的步骤]({{< ref "kubernetes-upgrade.md#helm">}})。
 
-### 更新数据平面(边车)
+### 更新数据平面(sidecar)
 
 最后一步是更新正在运行Dapr的pod，以接替新版本的Dapr运行时。 要完成这一步，只需对有`dapr.io/enabled`注解的任何deployment发送rollout restart命令即可。
 
