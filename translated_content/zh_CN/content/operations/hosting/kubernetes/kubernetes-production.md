@@ -92,7 +92,7 @@ Dapr支持零停机升级， 升级包括以下步骤：
 
 ### 更新Dapr控制平面
 
-请参阅 [在 Kubernetes 集群上升级 Dapr 的步骤]({{< ref "kubernetes-upgrade.md#helm">}})。
+请参阅 [在 Kubernetes 集群上升级 Dapr 的步骤]({{< ref "kubernetes-upgrade.md#helm" >}})。
 
 ### 更新数据平面(sidecar)
 
