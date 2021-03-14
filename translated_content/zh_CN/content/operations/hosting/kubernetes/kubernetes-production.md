@@ -32,9 +32,9 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 - **Sentry** - 用于服务间调用的mTLS
 - **Dashboard** - 用于集群的操作视图
 
-## 边车资源设置
+## Sidecar 资源设置
 
-请参见 [这里]({< ref "kubernetes-annotations.md" >}})来为 Dapr 边车设置资源分配， 与资源约束相关的具体注解如下:
+请参见 [这里]({{< ref "kubernetes-annotations.md" >}})来为 Dapr sidecar设置资源分配， 与资源约束相关的具体注解如下:
 
 - `dapr.io/sidecar-cpu-limit`
 - `dapr.io/sidecar-memory-limit`
