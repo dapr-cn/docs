@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "newbe36524",
+      "name": "Newbe36524",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7685462?v=4",
+      "profile": "https://www.newbe.pro",
+      "contributions": [
+        "ideas",
+        "translation"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "docs",
+  "projectOwner": "dapr-cn",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
