@@ -8,13 +8,13 @@ description: "在应用程序中使用 Dapr gRPC API"
 
 # Dapr 和 gRPC
 
-Dapr 为本地调用实现 HTTP 和 gRPC API 。 gRPC is useful for low-latency, high performance scenarios and has language integration using the proto clients.
+Dapr 为本地调用实现 HTTP 和 gRPC API 。 gRPC适用于低延迟、高性能的场景，并且使用原生客户端进行语言集成。
 
 您可以在这里找到 [](https://github.com/dapr/docs#sdks) 自动生成的客户端 的列表。
 
 Dapr 运行时实现 [服务](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) ，应用程序可以通过 gRPC 进行通信。
 
-除了通过 gRPC 调用 Dapr ， Dapr 还可以通过 gRPC 与应用程序通信。 To do that, the app needs to host a gRPC server and implements the [Dapr appcallback service](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/appcallback.proto)
+除了通过 gRPC 调用 Dapr ， Dapr 还可以通过 gRPC 与应用程序通信。 要做到这一点，应用程序需要托管一个gRPC服务器，并实现[Dapr appcallback服务](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/appcallback.proto)。
 
 ## 配置 dapr 以通过 gRPC 与应用程序通信
 
@@ -25,12 +25,12 @@ Dapr 运行时实现 [服务](https://github.com/dapr/dapr/blob/master/dapr/prot
 ```bash
 dapr run --app-protocol grpc --app-port 5005 node app.js
 ```
-This tells Dapr to communicate with your app via gRPC over port `5005`.
+这将告诉Dapr通过gRPC与您的应用程序通过`5005`端口进行通信。
 
 
 ### Kubernetes
 
-On Kubernetes, set the following annotations in your deployment YAML:
+在Kubernetes上，在你的deployment YAML中设置以下注解:
 
 ```yaml
 apiVersion: apps/v1
@@ -101,7 +101,7 @@ if err != nil {
 logger.Println("data saved")
 ```
 
-Hooray!
+好耶!
 
 现在你可以探索Dapr客户端上的所有不同方法。
 
@@ -181,35 +181,7 @@ func (s *server) OnBindingEvent(ctx context.Context, in *pb.BindingEventRequest)
     return &pb.BindingEventResponse{}, nil
 }
 
-// This method is fired whenever a message has been published to a topic that has been subscribed. Dapr sends published messages in a CloudEvents 0.3 envelope.
-func (s *server) OnTopicEvent(ctx context.Context, in *pb.TopicEventRequest) (*empty.Empty, error) {
-    fmt.Println("Topic message arrived")
-    return &empty.Empty{}, nil
-} In this example, we are telling Dapr
-// To subscribe to a topic named TopicA
-func (s *server) ListTopicSubscriptions(ctx context.Context, in *empty.Empty) (*pb.ListTopicSubscriptionsResponse, error) {
-    return &pb.ListTopicSubscriptionsResponse{
-        Subscriptions: []*pb.TopicSubscription{
-            {Topic: "TopicA"},
-        },
-    }, nil
-}
-
-// Dapr will call this method to get the list of bindings the app will get invoked by. In this example, we are telling Dapr
-// To invoke our app with a binding named storage
-func (s *server) ListInputBindings(ctx context.Context, in *empty.Empty) (*pb.ListInputBindingsResponse, error) {
-    return &pb.ListInputBindingsResponse{
-        Bindings: []string{"storage"},
-    }, nil
-}
-
-// This method gets invoked every time a new event is fired from a registerd binding. The message carries the binding name, a payload and optional metadata
-func (s *server) OnBindingEvent(ctx context.Context, in *pb.BindingEventRequest) (*pb.BindingEventResponse, error) {
-    fmt.Println("Invoked from binding")
-    return &pb.BindingEventResponse{}, nil
-}
-
-// This method is fired whenever a message has been published to a topic that has been subscribed. Dapr sends published messages in a CloudEvents 0.3 envelope.
+// This method is fired whenever a message has been published to a topic that has been subscribed. Dapr用CloudEvents 0.3规范发送发布的消息。
 func (s *server) OnTopicEvent(ctx context.Context, in *pb.TopicEventRequest) (*empty.Empty, error) {
     fmt.Println("Topic message arrived")
     return &empty.Empty{}, nil
@@ -250,7 +222,7 @@ func main() {
 
 4. 运行你的应用
 
-To run locally, use the Dapr CLI:
+使用 Dapr CLI在本地运行：
 
 ```
 dapr run --app-id goapp --app-port 4000 --app-protocol grpc go run main.go
