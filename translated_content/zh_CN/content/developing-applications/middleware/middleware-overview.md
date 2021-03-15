@@ -1,14 +1,14 @@
 ---
 type: docs
 title: "概述"
-linkTitle: "Secrets stores overview"
-description: "General overview on set up of middleware components for Dapr"
+linkTitle: "概述"
+description: "Dapr中间件设置的概述"
 weight: 10000
 ---
 
-Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 Middleware pipelines are defined in Dapr configuration files. Middleware pipelines are defined in Dapr configuration files. As with other [building block components]({{< ref component-schema.md >}}), middleware components are extensible and can be found in the [components-contrib repo](https://github.com/dapr/components-contrib/tree/master/middleware/http).
+Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 Dapr配置文件中定义了中件管道。 与其他[构建块组件]({{< ref component-schema.md >}})一样，中间件组件是可扩展的，可以在[components-contrib repo](https://github.com/dapr/components-contrib/tree/master/middleware/http)中找到。
 
-Middleware in Dapr is described using a `Component` file with the following schema:
+Dapr中的中间件使用`Component`文件描述，其schema如下:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -26,9 +26,9 @@ spec:
     value: <VALUE>
 ...
 ```
-The type of middleware is determined by the `type` field. Component setting values such as rate limits, OAuth credentials and other settings are put in the `metadata` section. The type of middleware is determined by the `type` field. Component setting values such as rate limits, OAuth credentials and other settings are put in the `metadata` section. Even though metadata values can contain secrets in plain text, it is recommended that you use a [secret store]({{< ref component-secrets.md >}}).
+中间件类型由 `type` 字段决定。 组件设置值，如速率限制，OAuth 凭据和其他设置被放入 `metadata` 部分。 即使元数据值可以在纯文本中包含密钥，但建议您使用一个 [密钥存储]({{< ref component-secrets.md >}})。
 
-Next, a Dapr [configuration]({{< ref configuration-overview.md >}}) defines the pipeline of middleware components for your application.
+接下来，一个 Dapr [配置]({{< ref configuration-overview.md >}) 定义了您应用程序的中间件组件管道.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -44,9 +44,9 @@ spec:
       type: middleware.http.<MIDDLEWARE TYPE>
 ```
 
-## Writing a custom middleware
+## 编写自定义中间件
 
-Dapr uses [FastHTTP](https://github.com/valyala/fasthttp) to implement its HTTP server. 因此，您的 HTTP 中间件也需要编写为 FastHTTP handler。 因此，您的 HTTP 中间件也需要编写为 FastHTTP handler。 您的中间件需要实现 Middleware 接口，该接口定义 **GetHandler** 方法，该方法返回 **fasthttp.RequestHandler**:
+Dapr 使用 [FastHTTP](https://github.com/valyala/fasthttp) 来实现其的 HTTP 服务器。 因此，您的 HTTP 中间件也需要编写为 FastHTTP handler。 您的中间件需要实现 Middleware 接口，该接口定义 **GetHandler** 方法，该方法返回 **fasthttp.RequestHandler**:
 
 ```go
 type Middleware interface {
@@ -68,15 +68,15 @@ func GetHandler(metadata Metadata) fasthttp.RequestHandler {
 }
 ```
 
-## Adding new middleware components
+## 添加新的中间件组件
 
 您的中间件组件可以贡献到 [components-contrib 仓库](https://github.com/dapr/components-contrib/tree/master/middleware)。
 
-After the components-contrib change has been accepted, submit another pull request against the [Dapr runtime repository](https://github.com/dapr/dapr) to register the new middleware type. You'll need to modify **[runtime.WithHTTPMiddleware](https://github.com/dapr/dapr/blob/f4d50b1369e416a8f7b93e3e226c4360307d1313/cmd/daprd/main.go#L394-L424)** method in [cmd/daprd/main.go](https://github.com/dapr/dapr/blob/master/cmd/daprd/main.go) to register your middleware with Dapr's runtime. You'll need to modify **[runtime.WithHTTPMiddleware](https://github.com/dapr/dapr/blob/f4d50b1369e416a8f7b93e3e226c4360307d1313/cmd/daprd/main.go#L394-L424)** method in [cmd/daprd/main.go](https://github.com/dapr/dapr/blob/master/cmd/daprd/main.go) to register your middleware with Dapr's runtime.
+在接受了 components-contrib 变更后，针对 [Dapr 运行时仓库](https://github.com/dapr/dapr) 提交另一个 pull 请求，以注册新的中间件类型。 您需要修改[runtime.WithHTTPMiddleware](https://github.com/dapr/dapr/blob/f4d50b1369e416a8f7b93e3e226c4360307d1313/cmd/daprd/main.go#L394-L424)</strong>方法中的**[cmd/daprd/main.go](https://github.com/dapr/dapr/blob/master/cmd/daprd/main.go)方法，将您的中间件注册到Dapr的运行时。</p>
 
 ## 相关链接
 
-* [Middleware pipelines concept]({{< ref middleware-concept.md >}})
-* [Component schema]({{< ref component-schema.md >}})
-* [Configuration overview]({{< ref configuration-overview.md >}})
-* [Middleware quickstart](https://github.com/dapr/quickstarts/tree/master/middleware)
+* [中件管道概念]({{< ref middleware-concept.md >}})
+* [组件schema]({{< ref component-schema.md >}})
+* [配置概览]({{< ref configuration-overview.md >}})
+* [中间件快速入门](https://github.com/dapr/quickstarts/tree/master/middleware)
