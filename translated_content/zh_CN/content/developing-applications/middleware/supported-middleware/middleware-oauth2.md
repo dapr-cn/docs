@@ -3,10 +3,10 @@ type: docs
 title: "OAuth2"
 linkTitle: "OAuth2"
 weight: 2000
-description: "Use OAuth2 middleware to secure HTTP endpoints"
+description: "使用OAuth2中间件来保护HTTP端点的安全"
 ---
 
-The OAuth2 [HTTP middleware]({{< ref middleware-concept.md >}}) enables the [OAuth2 Authorization Code flow](https://tools.ietf.org/html/rfc6749#section-4.1) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
+OAuth2 [HTTP 中间件]({{< ref middleware-concept.md >}})可以在 Web API 上实现 [OAuth2 授权代码流](https://tools.ietf.org/html/rfc6749#section-4.1)，而无需修改应用程序。 This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
 
 ## Component format
 
