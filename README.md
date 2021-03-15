@@ -1,6 +1,6 @@
 # Dapr 中文文档库
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -60,6 +60,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.jianshu.com/u/39ec0e6b1844?order_by=top"><img src="https://avatars.githubusercontent.com/u/12607748?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Shengjie Yan</b></sub></a><br /><a href="#translation-sheng-jie" title="Translation">🌍</a></td>
     <td align="center"><a href="https://yuiter.com"><img src="https://avatars.githubusercontent.com/u/32116018?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Danvic Wang</b></sub></a><br /><a href="#translation-danvic712" title="Translation">🌍</a></td>
     <td align="center"><a href="https://jadyn.wang"><img src="https://avatars.githubusercontent.com/u/13699353?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jadyn</b></sub></a><br /><a href="#translation-JadynWong" title="Translation">🌍</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="http://www.oudi.org"><img src="https://avatars.githubusercontent.com/u/2518192?v=4?s=100" width="100px;" alt=""/><br /><sub><b>oudi</b></sub></a><br /><a href="#translation-oudi" title="Translation">🌍</a></td>
   </tr>
 </table>
 
