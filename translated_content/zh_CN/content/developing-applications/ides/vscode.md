@@ -13,10 +13,10 @@ Dapr提供了一个*预览版* [的Dapr Visual Studio Code扩展](https://market
 <a href="vscode:extension/ms-azuretools.vscode-dapr" class="btn btn-primary" role="button">在 VSCode 中打开</a>
 
 ### 功能概述
-- Scaffold Dapr task, launch, and component assets <br /><img src="/images/vscode-extension-scaffold.png" alt="Screenshot of the Dapr VSCode extension scaffold option" width="800" />
-- 查看正在运行的 Dapr 应用程序 <br /><img src="/images/vscode-extension-view.png" alt="Screenshot of the Dapr VSCode extension view running applications option" width="800" />
-- 调用 Dapr 应用的方法  <br /><img src="/images/vscode-extension-invoke.png" alt="Screenshot of the Dapr VSCode extension invoke option" width="800" />
-- 发布事件到 Dapr 应用程序 <br /><img src="/images/vscode-extension-publish.png" alt="Screenshot of the Dapr VSCode extension publish option" width="800" />
+- Scaffold Dapr task, launch, and component assets <br /><img src="/images/vscode-extension-scaffold.png" alt="Dapr VSCode 扩展 scaffold 选项的截图" width="800" />
+- 查看正在运行的 Dapr 应用程序 <br /><img src="/images/vscode-extension-view.png" alt="Dapr VSCode 扩展视图运行应用程序选项的截图" width="800" />
+- 调用 Dapr 应用的方法  <br /><img src="/images/vscode-extension-invoke.png" alt="Dapr VSCode 扩展调用选项的截图" width="800" />
+- 发布事件到 Dapr 应用程序 <br /><img src="/images/vscode-extension-publish.png" alt="Dapr VSCode 扩展发布选项的截图" width="800" />
 
 #### 示例
 观看有关如何使用 Dapr VS 代码扩展的 [视频](https://www.bilibili.com/video/BV1QK4y1p7fn?p=9&t=85): <iframe width="560" height="315" src="https://www.youtube.com/embed/OtbYCBt9C34?start=85" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
@@ -36,9 +36,9 @@ Dapr 为每种语言的 SDK 预先构建了Docker 远程容器。 您可以选�
 
 #### 创建远程 Dapr 容器
 1. 在 VS 代码中打开您的应用程序工作区（workspace）
-2. 在 command palette 中 (ctrl+shift+p) 输入并选择 `Remote-Containers: Add Development Container Configuration Files...` <br /><img src="/images/vscode-remotecontainers-addcontainer.png" alt="Screenshot of adding a remote container" width="700" />
-3. 输入 `dapr` 来过滤列表到可用的 Dapr 远程容器，并选择符合您应用程序的语言容器。 请注意，您可能需要选择 `Show All Definitions...` <br /><img src="/images/vscode-remotecontainers-daprcontainers.png" alt="Screenshot of adding a Dapr container" width="700" />
-4. 按照提示重建您在容器中的应用程序。 <br /><img src="/images/vscode-remotecontainers-reopen.png" alt="Screenshot of reopening an application in the dev container" width="700" />
+2. 在 command palette 中 (ctrl+shift+p) 输入并选择 `Remote-Containers: Add Development Container Configuration Files...` <br /><img src="/images/vscode-remotecontainers-addcontainer.png" alt="添加远程容器的截图" width="700" />
+3. 输入 `dapr` 来过滤列表到可用的 Dapr 远程容器，并选择符合您应用程序的语言容器。 请注意，您可能需要选择 `Show All Definitions...` <br /><img src="/images/vscode-remotecontainers-daprcontainers.png" alt="添加 dapr 容器的截图" width="700" />
+4. 按照提示重建您在容器中的应用程序。 <br /><img src="/images/vscode-remotecontainers-reopen.png" alt="在开发容器中重新打开应用程序的截图" width="700" />
 
 #### 例子
 观看有关如何使用应用程序的 Dapr VS 代码远程容器的 [视频](https://www.bilibili.com/video/BV1QK4y1p7fn?p=8&t=120)。 <iframe width="560" height="315" src="https://www.youtube.com/embed/D2dO4aGpHcg?start=120" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
@@ -114,16 +114,16 @@ Dapr runtime (daprd) 不会自动生成用于 Redis 的组件的 yaml 文件。 
 
 #### 添加 daprd 任务到 tasks.json
 
-您需要在您的 [tasks.json](https://code.visualstudio.com/Docs/editor/tasks) 文件中定义一个 daprd 任务和问题匹配器（problem matcher）。 这里有两个示例(均通过上述 [preLaunchTask](https://code.visualstudio.com/Docs/editor/debugging#_launchjson-attributes) 成员引用。 注意，在 .NET Core daprd 任务(dpred -leaderboard)的情况下，还有一个[dependsOn](https://code.visualstudio.com/Docs/editor/tasks#_compound-tasks)成员，它引用构建任务，以确保最新的代码正在运行/调试。 The [problemMatcher](https://code.visualstudio.com/Docs/editor/tasks#_defining-a-problem-matcher) is used so that VSCode can understand when the daprd process is up and running.
+您需要在您的 [tasks.json](https://code.visualstudio.com/Docs/editor/tasks) 文件中定义一个 daprd 任务和问题匹配器（problem matcher）。 这里有两个示例(均通过上述 [preLaunchTask](https://code.visualstudio.com/Docs/editor/debugging#_launchjson-attributes) 成员引用。 注意，在 .NET Core daprd 任务(dpred -leaderboard)的情况下，还有一个[dependsOn](https://code.visualstudio.com/Docs/editor/tasks#_compound-tasks)成员，它引用构建任务，以确保最新的代码正在运行/调试。 用了 [problemMatcher](https://code.visualstudio.com/Docs/editor/tasks#_defining-a-problem-matcher)，这样当 daprd 进程启动和运行时，VSCode 就能够知道。
 
-Let's take a quick look at the args that are being passed to the daprd command.
+让我们大概看看正在传递到 daprd 命令的参数吧。
 
-* -app-id -- the id (how you will locate it via service invocation) of your microservice
-* -app-port -- the port number that your application code is listening on
-* -dapr-http-port -- the http port for the dapr api
-* -dapr-grpc-port -- the grpc port for the dapr api
-* -placement-host-address -- the location of the placement service (this should be running in docker as it was created when you installed dapr and ran `dapr init`) > Note: You will need to ensure that you specify different http/grpc (-dapr-http-port and -dapr-grpc-port) ports for each daprd task that you create, otherwise you will run into port conflicts when you attempt to launch the second configuration.
-> Note: You will need to ensure that you specify different http/grpc (-dapr-http-port and -dapr-grpc-port) ports for each daprd task that you create, otherwise you will run into port conflicts when you attempt to launch the second configuration.
+* -app-id - 您微服务的 id (您将如何通过服务调用来定位它)
+* -app-port -- 您的应用程序代码正在监听的端口号
+* -dapr-http-port -- Dapr api的 http 端口
+* -dapr-grpc-port -- Dapr api的 grpc 端口
+* -placement-host-address -- 放置服务的位置(这应该在docker中运行，因为它是当你安装了dapr 并运行` dapr init`的时候创建)
+> 注意: 您将需要确保您为您创建的每个dapr-grpc (-dapr-http-port 和 -dapr-grpc-port) 指定不同的 http/grpc 端口， 否则，当您尝试启动第二个配置时将端口冲突。
 
 ```json
 {
@@ -208,10 +208,10 @@ Let's take a quick look at the args that are being passed to the daprd command.
 }
 ```
 
-#### Wrapping up
+#### 收尾
 
-Once you have made the required changes, you should be able to switch to the [debug](https://code.visualstudio.com/Docs/editor/debugging) view in VSCode and launch your daprized configurations by clicking the "play" button. If everything was configured correctly, you should see daprd launch in the VSCode terminal window and the [debugger](https://code.visualstudio.com/Docs/editor/debugging) should attach to your application (you should see it's output in the debug window). If everything was configured correctly, you should see daprd launch in the VSCode terminal window and the [debugger](https://code.visualstudio.com/Docs/editor/debugging) should attach to your application (you should see it's output in the debug window).
+一旦您进行了所需的更改， 您应该能够在 VSCode 中切换到 [debug](https://code.visualstudio.com/Docs/editor/debugging) 视图，然后点击“play”按钮来启动您的调试配置。 如果所有配置正确， 您应该在 VSCode 终端窗口中看到数据启动， [debugger](https://code.visualstudio.com/Docs/editor/debugging) 应该附加到您的应用程序(您应该在调试窗口中看到它的输出)。
 
 {{% alert title="Note" color="primary" %}}
-Since you didn't launch the service(s) using the **dapr** ***run*** cli command, but instead by running **daprd**, the **dapr** ***list*** command will not show a list of apps that are currently running.
+因为您没有使用 **dapr* run*** cli 命令， 但通过运行 **daprd *list*** 命令将不会显示当前正在运行的应用列表。
 {{% /alert %}}
