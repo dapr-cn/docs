@@ -99,9 +99,9 @@ kubectl get pods --namespace dapr-system
 
 该命令将为dapr-system命名空间中每个控制平面service创建3个副本。
 
-*Dapr Cli 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 你可以将Dapr控制平面部署到Windows节点，但大多数用户应该不需要。 更多信息参见 <a href="{{< ref "kubernetes-hybrid-clusters.md" >部署到Linux/Windows混合型Kubernetes集群</a>*
+*Dapr Cli 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 你可以将Dapr控制平面部署到Windows节点，但大多数用户应该不需要。 更多信息参见[部署到Linux/Windows混合型Kubernetes集群]({{< ref "kubernetes-hybrid-clusters.md" >}})*
 
-## 用Helm部署Dapr
+## 用 Helm 升级 Dapr
 
 Dapr支持零停机升级， 升级包括以下步骤：
 
