@@ -3,7 +3,7 @@ type: docs
 title: "IntelliJ"
 linkTitle: "IntelliJ"
 weight: 2000
-description: "Configuring IntelliJ community edition for debugging with Dapr"
+description: "配置 IntelliJ 社区版以调试 Dapr"
 ---
 
 开发 Dapr应用程序时，你通常使用 Dapr CLI 来启动你的 Dapr 服务，就像这样：
@@ -115,14 +115,14 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 现在，为要调试的应用程序创建或编辑运行配置。 它可以在`main()`函数旁边的菜单中找到。
 
-![Edit run configuration menu](/images/intellij_debug_menu.png)
+![编辑运行的配置菜单](/images/intellij_debug_menu.png)
 
 现在，添加程序参数和环境变量: 这些端口需要与上面 "External Tool "条目中定义的端口相匹配。
 
 * 本例的命令行参数：`-p 3000`
 * 本例的环境变量：`DAPR_HTTP_PORT=3005;DAPR_GRPC_PORT=52000`
 
-![Edit run configuration](/images/intellij_edit_run_configuration.png)
+![编辑运行配置](/images/intellij_edit_run_configuration.png)
 
 ## 开始调试
 
@@ -130,11 +130,11 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 1. 通过 IntelliJ 中的 `Tools` -> `External Tool` 启动 `dapr`。
 
-![Run dapr as 'External Tool'](/images/intellij_start_dapr.png)
+![作为“外部工具”运行 Dapr](/images/intellij_start_dapr.png)
 
 2. 在调试模式下启动你的应用程序。
 
-![Start application in debug mode](/images/intellij_debug_app.png)
+![在调试模式下启动应用程序](/images/intellij_debug_app.png)
 
 ## 收尾
 
@@ -145,4 +145,4 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 ## 相关链接
 
-- [Change](https://intellij-support.jetbrains.com/hc/en-us/articles/206544519-Directories-used-by-the-IDE-to-store-settings-caches-plugins-and-logs) in IntelliJ configuration directory location
+- [更改 IntelliJ 配置目录位置](https://intellij-support.jetbrains.com/hc/en-us/articles/206544519-Directories-used-by-the-IDE-to-store-settings-caches-plugins-and-logs)
