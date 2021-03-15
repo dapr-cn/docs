@@ -64,3 +64,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+以上列表由手动更新而生成，如果您在其中没有找到您的名字，请在 crowdin.com 上，通过右上角的 conversation 按钮向 newbe36524 发送您的 github id。我们将及时处理。
