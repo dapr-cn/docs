@@ -1,6 +1,6 @@
 # Dapr 中文文档库
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -58,6 +58,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/LLLLimbo"><img src="https://avatars.githubusercontent.com/u/31607003?v=4?s=100" width="100px;" alt=""/><br /><sub><b>LLLLimbo</b></sub></a><br /><a href="#translation-LLLLimbo" title="Translation">🌍</a></td>
     <td align="center"><a href="https://yuque.com/abser"><img src="https://avatars.githubusercontent.com/u/32089134?v=4?s=100" width="100px;" alt=""/><br /><sub><b>AbserAri</b></sub></a><br /><a href="#translation-abserari" title="Translation">🌍</a></td>
     <td align="center"><a href="https://www.jianshu.com/u/39ec0e6b1844?order_by=top"><img src="https://avatars.githubusercontent.com/u/12607748?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Shengjie Yan</b></sub></a><br /><a href="#translation-sheng-jie" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://yuiter.com"><img src="https://avatars.githubusercontent.com/u/32116018?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Danvic Wang</b></sub></a><br /><a href="#translation-danvic712" title="Translation">🌍</a></td>
   </tr>
 </table>
 
