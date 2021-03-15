@@ -6,9 +6,9 @@ weight: 2000
 description: "使用OAuth2中间件来保护HTTP端点的安全"
 ---
 
-OAuth2 [HTTP 中间件]({{< ref middleware-concept.md >}})可以在 Web API 上实现 [OAuth2 授权代码流](https://tools.ietf.org/html/rfc6749#section-4.1)，而无需修改应用程序。 This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
+OAuth2 [HTTP 中间件]({{< ref middleware-concept.md >}})可以在 Web API 上实现 [OAuth2 授权代码流](https://tools.ietf.org/html/rfc6749#section-4.1)，而无需修改应用程序。 这种设计将认证/授权的关注点从应用中分离出来，因此应用操作者可以在不影响应用代码的情况下采用和配置认证/授权提供者。
 
-## Component format
+## 组件格式
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -36,21 +36,21 @@ spec:
   - name: forceHTTPS
     value: "false" 
 ```
-## Spec metadata fields
-| 字段             | Details                                                                                                                                                                      | 示例                                                 |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| clientId       | The client ID of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                                 |                                                    |
-| clientSecret   | The client secret of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                             |                                                    |
-| scopes         | A list of space-delimited, case-sensitive strings of [scopes](https://tools.ietf.org/html/rfc6749#section-3.3) which are typically used for authorization in the application | `"https://www.googleapis.com/auth/userinfo.email"` |
-| authURL        | The endpoint of the OAuth2 authorization server                                                                                                                              | `"https://accounts.google.com/o/oauth2/v2/auth"`   |
-| tokenURL       | The endpoint is used by the client to obtain an access token by presenting its authorization grant or refresh token                                                          | `"https://accounts.google.com/o/oauth2/token"`     |
-| redirectURL    | The URL of your web application that the authorization server should redirect to once the user has authenticated                                                             | `"https://myapp.com"`                              |
-| authHeaderName | The authorization header name to forward to your application                                                                                                                 | `"authorization"`                                  |
-| forceHTTPS     | If true, enforces the use of TLS/SSL                                                                                                                                         | `"true"`,`"false"`                                 |
+## Spec 元数据字段
+| 字段             | 详情                                                                                         | 示例                                                 |
+| -------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| clientId       | 你的应用程序的客户端ID，它是作为OAuth平台托管的凭证的一部分创建的                                                       |                                                    |
+| clientSecret   | 你的应用程序的客户端密钥，它是作为OAuth平台托管的凭证的一部分而创建的                                                      |                                                    |
+| scopes         | [作用域](https://tools.ietf.org/html/rfc6749#section-3.3)的列表，通常用于应用程序中的授权，注意格式为空格分隔、大小写敏感的字符串 | `"https://www.googleapis.com/auth/userinfo.email"` |
+| authURL        | OAuth2 授权服务器的端点                                                                            | `"https://accounts.google.com/o/oauth2/v2/auth"`   |
+| tokenURL       | 客户端通过出示其访问许可或刷新令牌来获取access token的端点                                                        | `"https://accounts.google.com/o/oauth2/token"`     |
+| redirectURL    | 用户认证后，授权服务器应重定向到的Web应用程序的URL                                                               | `"https://myapp.com"`                              |
+| authHeaderName | 转发到您的应用程序的授权头名称                                                                            | `"authorization"`                                  |
+| forceHTTPS     | 如果为true，强制使用TLS/SSL                                                                        | `"true"`,`"false"`                                 |
 
-## Dapr configuration
+## Dapr 配置
 
-To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). To be applied, the middleware must be referenced in a [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+要应用中间件，必须在[配置]({{< ref configuration-concept.md >}})中引用。 请参阅[中间件管道]({{< ref "middleware-concept.md#customize-processing-pipeline">}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -65,8 +65,8 @@ spec:
 ```
 
 ## 相关链接
-- [Configure API authorization with OAuth]({{< ref oauth >}})
-- [Middleware OAuth quickstart](https://github.com/dapr/quickstarts/tree/master/middleware)
-- [Middleware concept]({{< ref middleware-concept.md >}})
-- [Configuration concept]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview.md >}})
+- [使用 OAuth 配置 API 授权]({{< ref oauth >}})
+- [中间件 OAuth 快速开始](https://github.com/dapr/quickstarts/tree/master/middleware)
+- [中间件概念]({{< ref middleware-concept.md >}})
+- [配置概念]({{< ref configuration-concept.md >}})
+- [配置概览]({{< ref configuration-overview.md >}})
