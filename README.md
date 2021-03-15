@@ -1,6 +1,6 @@
 # Dapr 中文文档库
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -55,6 +55,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://www.newbe.pro"><img src="https://avatars.githubusercontent.com/u/7685462?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Newbe36524</b></sub></a><br /><a href="#ideas-newbe36524" title="Ideas, Planning, & Feedback">🤔</a> <a href="#translation-newbe36524" title="Translation">🌍</a></td>
     <td align="center"><a href="https://skyao.io"><img src="https://avatars.githubusercontent.com/u/1582369?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sky/敖小剑</b></sub></a><br /><a href="#ideas-skyao" title="Ideas, Planning, & Feedback">🤔</a> <a href="#translation-skyao" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/LLLLimbo"><img src="https://avatars.githubusercontent.com/u/31607003?v=4?s=100" width="100px;" alt=""/><br /><sub><b>LLLLimbo</b></sub></a><br /><a href="#translation-LLLLimbo" title="Translation">🌍</a></td>
   </tr>
 </table>
 
