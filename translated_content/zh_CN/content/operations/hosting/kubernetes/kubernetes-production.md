@@ -71,7 +71,30 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 你也可以不使用`helm install`或`helm upgrade`，如下图所示，你可以运行`helm upgrade --install` - 这将动态地决定是安装还是升级。
 
 ```bash
-helm install dapr dapr/dapr --version=<Dapr chart version> --namespace dapr-system --set global.ha.enabled=true
+# add/update the helm repo
+helm repo add dapr https://dapr.github.io/helm-charts/
+helm repo update
+
+# See which chart versions are available
+helm search repo dapr --devel --versions
+
+# create a values file to store variables
+touch values.yml
+cat << EOF >> values.yml
+global.ha.enabled: true
+
+EOF
+
+# run install/upgrade
+helm install dapr dapr/dapr \
+  --version=<Dapr chart version> \
+  --namespace dapr-system \
+  --create-namespace \
+  --values values.yml \
+  --wait
+
+# verify the installation
+kubectl get pods --namespace dapr-system
 ```
 
 该命令将为dapr-system命名空间中每个控制平面service创建3个副本。
@@ -83,7 +106,7 @@ helm install dapr dapr/dapr --version=<Dapr chart version> --namespace dapr-syst
 Dapr支持零停机升级， 升级包括以下步骤：
 
 1. 升级CLI版本(可选但推荐)
-2. 更新Dapr控制平面
+2. 更新Dapr control plane
 3. 更新数据平面(Dapr sidecars)
 
 ### 升级CLI
