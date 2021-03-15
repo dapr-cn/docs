@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Dapr Software Development Kits (SDKs)"
+title: "Dapr 开发套件 (SDKs)"
 linkTitle: "SDKs"
 weight: 20
-description: "Use your favorite languages with Dapr"
+description: "使用你最喜欢的语言来开发Dapr应用"
 no_list: true
 ---
 
-The Dapr SDKs are the easiest way for you to get Dapr into your application. Choose your favorite language and get up and running with Dapr in minutes. Choose your favorite language and get up and running with Dapr in minutes.
+Dapr SDK是将Dapr应用到您的应用程序中最简单的方法。 选择你最喜欢的语言，并在几分钟内开始使用Dapr。
 
 ## SDK packages
 
