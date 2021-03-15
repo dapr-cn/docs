@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Deploy Dapr on a Kubernetes cluster"
+title: "在Kubernetes集群上部署Dapr"
 linkTitle: "Deploy Dapr"
 weight: 20000
-description: "Follow these steps to deploy Dapr on Kubernetes."
+description: "按照这些步骤在Kubernetes上部署Dapr"
 aliases:
   - /getting-started/install-dapr-kubernetes/
 ---
