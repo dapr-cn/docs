@@ -28,7 +28,7 @@ spec:
 ```
 中间件类型由 `type` 字段决定。 组件设置值，如速率限制，OAuth 凭据和其他设置被放入 `metadata` 部分。 即使元数据值可以在纯文本中包含密钥，但建议您使用一个 [密钥存储]({{< ref component-secrets.md >}})。
 
-接下来，一个 Dapr [配置]({{< ref configuration-overview.md >}) 定义了您应用程序的中间件组件管道.
+接下来，一个 Dapr [配置]({{< ref configuration-overview.md >}}) 定义了您应用程序的中间件组件管道.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
