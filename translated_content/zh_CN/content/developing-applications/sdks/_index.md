@@ -11,35 +11,35 @@ Dapr SDK是将Dapr应用到您的应用程序中最简单的方法。 选择你�
 
 ## SDK packages
 
-- **Client SDK**: The Dapr client allows you to invoke Dapr building block APIs and perform actions such as:
-   - [Invoke]({{< ref service-invocation >}}) methods on other services
-   - Store and get [state]({{< ref state-management >}})
-   - [Publish and subscribe]({{< ref pubsub >}}) to message topics
-   - Interact with external resources through input and output [bindings]({{< ref bindings >}})
-   - Get [secrets]({{< ref secrets >}}) from secret stores
-   - Interact with [virtual actors]({{< ref actors >}})
-- **Server extensions**: The Dapr service extensions allow you to create services that can:
-   - Be [invoked]({{< ref service-invocation >}}) by other services
-   - [Subscribe]({{< ref pubsub >}}) to topics
-- **Actor SDK**: The Dapr Actor SDK allows you to build virtual actors with:
-   - Methods that can be [invoked]({{< ref "howto-actors.md#actor-method-invocation" >}}) by other services
-   - [State]({{< ref "howto-actors.md#actor-state-management" >}}) that can be stored and retrieved
-   - [Timers]({{< ref "howto-actors.md#actor-timers" >}}) with callbacks
-   - Persistent [reminders]({{< ref "howto-actors.md#actor-reminders" >}})
+- **客户端SDK**：Dapr客户端允许您调用Dapr构件的API，并执行下例操作:
+   - [调用]({{< ref service-invocation >}})其他服务中的方法
+   - 存储和获取[状态]({< ref statemanagement >}})
+   - [发布和订阅]({{< ref pubsub >}})消息主题
+   - 通过 [绑定]({{< ref bindings >}})输入和输出与外部资源进行交互
+   - 从密钥存储中获取[密钥]({{< ref secrets >}})
+   - 与 [virtual actors]({{< ref actors >}})进行交互
+- **服务扩展**：Dapr服务扩展允许你创建具有以下功能的服务:
+   - 被其他服务[调用]({{< ref service-invocation >}})
+   - [订阅]({{< ref pubsub >}})主题
+- **Actor SDK**: Dapr Actor SDK允许你使用以下方法构建virtual actors:
+   - 可以被其他服务 [调用]({{< ref "howto-actors.md#actor-method-invocation" >}})的方法
+   - 可以被存储和检索的[状态]({{< ref "howto-actors.md#actor-state-management" >}})
+   - 带回调的[定时器]({{< ref "howto-actors.md#actor-timers" >}})
+   - 持久化的[reminders]({{< ref "howto-actors.md#actor-reminders" >}})
 
-## SDK languages
+## SDK 语言
 
-| 语言                                       | 状态 （State）     | Client SDK |             Server extensions             |                                        Actor SDK                                         |
-| ---------------------------------------- |:-------------- |:----------:|:-----------------------------------------:|:----------------------------------------------------------------------------------------:|
-| [.NET]({{< ref dotnet >}})               | Stable         |     ✔      | [ASP.NET Core]({{< ref dotnet-aspnet >}}) |                                            ✔                                             |
-| [Python]({{< ref python >}})             | Stable         |     ✔      |    [gRPC]({{< ref python-grpc.md >}})     | [FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |
-| [Java](https://github.com/dapr/java-sdk) | Stable         |     ✔      |                Spring Boot                |                                            ✔                                             |
-| [Go](https://github.com/dapr/go-sdk)     | Stable         |     ✔      |                     ✔                     |                                                                                          |
-| [PHP]({{< ref php >}})                   | Stable         |     ✔      |                     ✔                     |                                            ✔                                             |
-| [C++](https://github.com/dapr/cpp-sdk)   | In development |     ✔      |                                           |                                                                                          |
-| [Rust]()                                 | In development |     ✔      |                                           |                                                                                          |
-| [Javascript]()                           | In development |     ✔      |                                           |                                                                                          |
+| 语言                                       | 状态 （State）     | 客户端 SDK |                   服务扩展                    |                                        Actor SDK                                         |
+| ---------------------------------------- |:-------------- |:-------:|:-----------------------------------------:|:----------------------------------------------------------------------------------------:|
+| [.NET]({{< ref dotnet >}})               | Stable         |    ✔    | [ASP.NET Core]({{< ref dotnet-aspnet >}}) |                                            ✔                                             |
+| [Python]({{< ref python >}})             | Stable         |    ✔    |    [gRPC]({{< ref python-grpc.md >}})     | [FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |
+| [Java](https://github.com/dapr/java-sdk) | Stable         |    ✔    |                Spring Boot                |                                            ✔                                             |
+| [Go](https://github.com/dapr/go-sdk)     | Stable         |    ✔    |                     ✔                     |                                                                                          |
+| [PHP]({{< ref php >}})                   | Stable         |    ✔    |                     ✔                     |                                            ✔                                             |
+| [C++](https://github.com/dapr/cpp-sdk)   | In development |    ✔    |                                           |                                                                                          |
+| [Rust]()                                 | In development |    ✔    |                                           |                                                                                          |
+| [Javascript]()                           | In development |    ✔    |                                           |                                                                                          |
 
-## Further reading
+## 深入阅读
 
-- [Serialization in the Dapr SDKs]({{< ref sdk-serialization.md >}})
+- [Dapr SDK中的序列化]({{< ref sdk-serialization.md >}})
