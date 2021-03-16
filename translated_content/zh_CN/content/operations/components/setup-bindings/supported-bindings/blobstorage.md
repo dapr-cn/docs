@@ -7,7 +7,7 @@ description: "关于 Azure Blob Storage绑定组件的详细文档"
 
 ## 组件格式
 
-要设置 Azure Blob Storage 绑定，请创建一个类型为 `bindings.azure.blobstorage` 的组件。 请参阅[本指南]({< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 Azure Blob Storage 绑定，请创建一个类型为 `bindings.azure.blobstorage` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
