@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Supported pub/sub brokers"
+title: "支持的 发布/订阅 消息代理"
 linkTitle: "Supported pub/sub brokers"
 weight: 50000
-description: The supported pub/sub brokers that interface with Dapr
+description: Dapr支持的发布/订阅消息代理
 no_list: true
 ---
 
-Table captions:
+表格标题：
 
-> `Status`: [Component certification]({{X31X}}) status
+> `Status`: [组件认证]({{X31X}}) 状态
   - [Alpha]({{X20X}})
   - [Beta]({{X22X}})
-  - [GA]({{X24X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X24X}}) > `自从`: 定义了当前组件从哪个Dapr Runtime版本开始支持
 
 > `Component version`: defines the version of the component
 ### Generic
