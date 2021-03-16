@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Azure Event Grid binding spec"
+title: "Azure Event Grid 绑定规范"
 linkTitle: "Azure Event Grid"
-description: "Detailed documentation on the Azure Event Grid binding component"
+description: "Azure Event Grid 绑定组件的详细文档"
 ---
 
-## Component format
+## 组件格式
 
-To setup Azure Event Grid binding create a component of type `bindings.azure.eventgrid`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置 Azure 事件网格（Event Grid）绑定，请创建一个类型为 `bindings.azure.eventgrid` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [this](https://docs.microsoft.com/en-us/azure/event-grid/) for Azure Event Grid documentation.
+请参阅[这里](https://docs.microsoft.com/en-us/azure/event-grid/)了解 Azure Event Grid 文档。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -46,30 +46,30 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段                    | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                                    | Example                                |
-| --------------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| tenantId              |    Y     | Input           | The Azure tenant id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                                                                                                          | `"tenentID"`                           |
-| subscriptionId        |    Y     | Input           | The Azure subscription id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                                                                                                    | `"subscriptionId"`                     |
-| clientId              |    Y     | Input           | The client id that should be used by the binding to create or update the Event Grid Event Subscription                                                                                                                                                                                                                                                                                     | `"clientId"`                           |
-| clientSecret          |    Y     | Input           | The client id that should be used by the binding to create or update the Event Grid Event Subscription                                                                                                                                                                                                                                                                                     | `"clientSecret"`                       |
-| subscriberEndpoint    |    Y     | Input           | The https endpoint in which Event Grid will handshake and send Cloud Events. The https endpoint in which Event Grid will handshake and send Cloud Events. If you aren't re-writing URLs on ingress, it should be in the form of: `https://[YOUR HOSTNAME]/api/events` If testing on your local machine, you can use something like [ngrok](https://ngrok.com) to create a public endpoint. | `"https://[YOUR HOSTNAME]/api/events"` |
-| handshakePort         |    Y     | Input           | The container port that the input binding will listen on for handshakes and events                                                                                                                                                                                                                                                                                                         | `"9000"`                               |
-| scope                 |    Y     | Input           | The identifier of the resource to which the event subscription needs to be created or updated. See [here](#scope) for more details See [here](#scope) for more details                                                                                                                                                                                                                     | `"/subscriptions/{subscriptionId}/"`   |
-| eventSubscriptionName |    N     | Input           | The name of the event subscription. The name of the event subscription. Event subscription names must be between 3 and 64 characters in length and should use alphanumeric letters only                                                                                                                                                                                                    | `"name"`                               |
-| accessKey             |    Y     | Output          | The Access Key to be used for publishing an Event Grid Event to a custom topic                                                                                                                                                                                                                                                                                                             | `"accessKey"`                          |
-| topicEndpoint         |    Y     | Output          | The topic endpoint in which this output binding should publish events                                                                                                                                                                                                                                                                                                                      | `"topic-endpoint"`                     |
+| 字段                    | 必填 | 绑定支持   | 详情                                                                                                                                                      | 示例                                     |
+| --------------------- |:--:| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| tenantId              | Y  | Input  | 创建这个事件网格事件订阅的 Azure 租户 id                                                                                                                               | `"tenentID"`                           |
+| subscriptionId        | Y  | Input  | 创建这个事件网格事件订阅的 Azure 订阅 id                                                                                                                               | `"subscriptionId"`                     |
+| clientId              | Y  | Input  | 由绑定来创建或更新事件网格事件订阅的客户端 id                                                                                                                                | `"clientId"`                           |
+| clientSecret          | Y  | Input  | 由绑定来创建或更新事件网格事件订阅的客户端 id                                                                                                                                | `"clientSecret"`                       |
+| subscriberEndpoint    | Y  | Input  | 事件网格将进行握手并发送云端事件的 https 端点。 如果您没有在 ingress 上重写URL， 其形式应该是： `https://[YOUR HOSTNAME]/api/events`。如果测试您的本地机器， 您可以使用 [ngrok](https://ngrok.com) 来创建一个公共端点。 | `"https://[YOUR HOSTNAME]/api/events"` |
+| handshakePort         | Y  | Input  | 输入绑定将侦听握手和事件的容器端口                                                                                                                                       | `"9000"`                               |
+| scope                 | Y  | Input  | 事件订阅需要创建或更新的资源标识符。 请参阅[这里](#scope)了解更多详情。                                                                                                               | `"/subscriptions/{subscriptionId}/"`   |
+| eventSubscriptionName | N  | Input  | 事件订阅的名称。 事件订阅名称长度必须在3到64个字符之间，并且只能使用字母数字                                                                                                                | `"name"`                               |
+| accessKey             | Y  | Output | 将事件网格事件发布到自定义 topic 的访问密钥                                                                                                                               | `"accessKey"`                          |
+| topicEndpoint         | Y  | Output | 输出绑定应该在其中发布事件的 topic 端点                                                                                                                                 | `"topic-endpoint"`                     |
 
 ### Scope
 
-Scope is the identifier of the resource to which the event subscription needs to be created or updated. Scope is the identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an Event Grid topic. For example: For example:
-- `'/subscriptions/{subscriptionId}/'` for a subscription
-- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'` for a resource group
-- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'` for a resource
+Scope 是事件订阅需要创建或更新的资源的标识符。 Scope 可以是订阅组，也可以是资源组。 或属于资源提供者命名空间或事件网格主题的顶级资源。 例如:
+- `'/subscriptions/{subscriptionId}/'` 单个订阅
+- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'` 资源组
+- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'` 资源
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'` for an Event Grid topic > Values in braces {} should be replaced with actual values.
 ## 相关链接
 
