@@ -230,7 +230,7 @@ dapr run --app-id goapp --app-port 4000 --app-protocol grpc go run main.go
 
 在 Kubernetes 上，设置所需的 `dapr.io/app-protocol: "grpc"` 和 `dapr.io/app-port: " 4000` 注释在您的 Pod 规范模板中如上所述。
 
-## Other languages
+## 其他语言
 
 您可以将 Dapr 与 Protobuf 支持的任何语言一起使用，而不只是使用当前可用的生成 SDK。 使用 [原型](https://developers.google.com/protocol-buffers/docs/downloads) 工具，您可以为 Ruby， C++， Rust 等其他语言生成 Dapr 客户机。
 
