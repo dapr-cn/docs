@@ -70,51 +70,51 @@ Scope 是事件订阅需要创建或更新的资源的标识符。 Scope 可以�
 - `'/subscriptions/{subscriptionId}/'` 单个订阅
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'` 资源组
 - `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'` 资源
-- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'` for an Event Grid topic > Values in braces {} should be replaced with actual values.
+- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'` 事件网格主题 > 在大括号 {} 中的内容应该替换为实际值.
 ## 相关链接
 
-This component supports both **input and output** binding interfaces.
+此组件支持 **输入和输出** 绑定接口。
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `create`
-## Additional information
+## 补充资料
 
-Event Grid Binding creates an [event subscription](https://docs.microsoft.com/en-us/azure/event-grid/concepts#event-subscriptions) when Dapr initializes. Your Service Principal needs to have the RBAC permissions to enable this. Your Service Principal needs to have the RBAC permissions to enable this.
+在Dapr初始化时，事件网格绑定会创建一个 [事件订阅](https://docs.microsoft.com/en-us/azure/event-grid/concepts#event-subscriptions)。 您的服务主要需要获得权限才能启用此功能。
 
 ```bash
-# First ensure that Azure Resource Manager provider is registered for Event Grid
+# 首先确保 Azure Resource Manager 提供商已注册事件网格
 az provider register --namespace Microsoft.EventGrid
 az provider show --namespace Microsoft.EventGrid --query "registrationState"
-# Give the SP needed permissions so that it can create event subscriptions to Event Grid
+# 给予SP 所需的权限，以便它可以创建事件订阅到事件网格
 az role assignment create --assignee <clientId> --role "EventGrid EventSubscription Contributor" --scopes <scope>
 ```
 
-_Make sure to also to add quotes around the `[HandshakePort]` in your Event Grid binding component because Kubernetes expects string values from the config._
+_请务必在事件网格绑定组件中同时添加引号 `[HandshakePort]` ，因为 Kubernetes 需要配置的字符串值。_
 
-### Testing locally
+### 本地测试
 
-- Install [ngrok](https://ngrok.com/download)
-- Run locally using custom port `9000` for handshakes
+- 安装 [ngrok](https://ngrok.com/download)
+- 在本地使用自定义端口 `9000` 进行握手
 
 ```bash
-# Using random port 9000 as an example
+# 使用随机端口 9000 作为示例
 ngrok http -host-header=localhost 9000
 ```
 
-- Configure the ngrok's HTTPS endpoint and custom port to input binding metadata
-- Run Dapr
+- 配置 ngrok 的 HTTPS 端点和自定义端口来输入绑定元数据
+- 运行 Dapr
 
 ```bash
-# Using default ports for .NET core web api and Dapr as an example
+# 使用 .NET core web api 和 Dapr 的默认端口作为示例
 dapr run --app-id dotnetwebapi --app-port 5000 --dapr-http-port 3500 dotnet run
 ```
 
-### Testing on Kubernetes
+### 在 Kubernetes 上测试
 
-Azure Event Grid requires a valid HTTPS endpoint for custom webhooks. Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/). Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/).
+Azure 事件网格需要一个有效的 HTTPS 端点用于自定义 webhooks. 自签名证书是不行的。 为了使流量从公共互联网到你的应用程序的 Dapr sidecar，你需要一个启用了 Dapr 的 ingress 控制器。 有一篇关于这个主题的好文章:[Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/)。
 
-To get started, first create `dapr-annotations.yaml` for Dapr annotations
+若要开始，请首先为 Dapr 创建批注 `dapr-annotations.yaml`
 
 ```yaml
 controller:
@@ -124,21 +124,21 @@ controller:
       dapr.io/app-port: "80"
 ```
 
-Then install NGINX ingress controller to your Kubernetes cluster with Helm 3 using the annotations
+然后使用 Helm 3 安装 NGINX ingress controller 到您的 Kubernetes 集群使用
 
 ```bash
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm install nginx stable/nginx-ingress -f ./dapr-annotations.yaml -n default
-# Get the public IP for the ingress controller
+# 获取 ingress controller 的公开IP
 kubectl get svc -l component=controller -o jsonpath='Public IP is: {.items[0].status.loadBalancer.ingress[0].ip}{"\n"}'
 ```
 
-If deploying to Azure Kubernetes Service, you can follow [the official MS documentation for rest of the steps](https://docs.microsoft.com/en-us/azure/aks/ingress-tls)
-- Add an A record to your DNS zone
-- Install cert-manager
-- Create a CA cluster issuer
+如果部署到 Azure Kubernetes 服务, 你可以跟随 [官方的 MS 文档进行其余步骤](https://docs.microsoft.com/en-us/azure/aks/ingress-tls)
+- 添加一条记录到你的 DNS 区域
+- 安装证书管理器
+- 创建 CA 集群发行者（issuer）
 
-Final step for enabling communication between Event Grid and Dapr is to define `http` and custom port to your app's service and an `ingress` in Kubernetes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes.
+开启事件网格与 Dapr 之间通信的最后一步是定义 `http` 和自定义端口到您应用的服务和一个 Kubernetes 中的 ` ingress `。 这个示例使用 .NET Core Web api 和 Dapr 默认端口和用于握手的自定义端口 9000 。
 
 ```yaml
 # dotnetwebapi.yaml
@@ -213,20 +213,20 @@ spec:
         imagePullPolicy: Always
 ```
 
-Deploy binding and app (including ingress) to Kubernetes
+部署绑定和应用 (包括ingress) 到 Kubernetes
 
 ```bash
-# Deploy Dapr components
+# 部署 Dapr 组件
 kubectl apply -f eventgrid.yaml
-# Deploy your app and Nginx ingress
+# 部署你的应用程序和 Nginx ingress
 kubectl apply -f dotnetwebapi.yaml
 ```
 
-> **Note:** This manifest deploys everything to Kubernetes default namespace.
+> **注意：** 此清单将所有内容都部署到 Kubernetes 默认命名空间中。
 
-#### Troubleshooting possible issues with Nginx controller
+#### 解决与 Nginx 控制器相关的可能的问题
 
-After initial deployment the "Daprized" Nginx controller can malfunction. To check logs and fix issue (if it exists) follow these steps. To check logs and fix issue (if it exists) follow these steps.
+在 Dapr 中初始部署后，Nginx cointroller 可能发生故障。 检查日志并修复问题 (如果存在的话) 可以遵循这些步骤。
 
 ```bash
 $ kubectl get pods -l app=nginx-ingress
@@ -251,10 +251,10 @@ $ kubectl delete pod nginx-nginx-ingress-controller-649df94867-fp6mg
 # .."OPTIONS /api/events HTTP/1.1" 200.. 
 ```
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
