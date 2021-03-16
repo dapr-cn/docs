@@ -92,14 +92,14 @@ spec:
 
 {{< tabs Windows Linux >}}
 
-  {% codetab %}
+  {{% codetab %}}
   ```bash
   curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\", \"metadata\": { \"blobName\": \"my-test-file.txt\" } }" \
         http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
   ```
   {{% /codetab %}}
 
-  {% codetab %}
+  {{% codetab %}}
   ```bash
   curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "blobName": "my-test-file.txt" } }' \
         http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
@@ -143,7 +143,7 @@ spec:
   ```
   {{% /codetab %}}
 
-  {% codetab %}
+  {{% codetab %}}
   ```bash
   curl -d '{ "operation": "create", "data": "YOUR_BASE_64_CONTENT", "metadata": { "blobName": "my-test-file.jpg" } }' \
         http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
@@ -180,13 +180,13 @@ spec:
 
 {{< tabs Windows Linux >}}
 
-  {% codetab %}
+  {{% codetab %}}
   ```bash
   curl -d '{ \"operation\": \"get\", \"metadata\": { \"blobName\": \"myblob\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name> 
   ```
   {{% /codetab %}}
 
-  {% codetab %}
+  {{% codetab %}}
   ```bash
   curl -d '{ "operation": "get", "metadata": { "blobName": "myblob" }}' \
         http://localhost:<dapr-port>/v1.0/bindings/<binding-name> 
