@@ -1,43 +1,43 @@
 ---
 type: docs
-title: "Supported external bindings"
+title: "支持的外部绑定"
 linkTitle: "Supported bindings"
 weight: 200
-description: The supported external bindings that interface with Dapr
+description: 支持与Dapr衔接的外部绑定
 no_list: true
 ---
 
-每个绑定都有自己独特的属性集。 Click the name link to see the component YAML for each binding.
+每个绑定都有自己独特的属性集。 点击下方列出的绑定的名称链接可以看到每个绑定的组件YAML。
 
 
-Table captions:
+表格标题：
 
-> `Status`: [Component certification]({{X63X}}) status
+> `状态`: [组件认证]({{X63X}}) 状态
   - [Alpha]({{X52X}})
   - [Beta]({{X54X}})
-  - [GA]({{X56X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X56X}}) > `Since`: 定义了当前组件处于哪个Dapr Runtime版本的状态
 
-> `Component version`: defines the version of the component
-### Generic
+> `组件版本`：代表组件的版本
+### 通用
 
-| 名称                                                       | Input<br>Binding | Output<br>Binding | Status | Component version | Since runtime version |
-| -------------------------------------------------------- |:----------------------:|:-----------------------:| ------ | ----------------- | --------------------- |
-| [Apple Push Notifications (APN)]({{< ref apns.md >}})    |                        |            ✅            | Alpha  | v1                | 1.0                   |
-| [Cron (Scheduler)]({{< ref cron.md >}})                  |           ✅            |            ✅            | Alpha  | v1                | 1.0                   |
-| [HTTP]({{< ref http.md >}})                              |                        |            ✅            | GA     | v1                | 1.0                   |
-| [InfluxDB]({{< ref influxdb.md >}})                      |                        |            ✅            | Alpha  | v1                | 1.0                   |
-| [Kafka]({{< ref kafka.md >}})                            |           ✅            |            ✅            | Alpha  | v1                | 1.0                   |
-| [Kubernetes Events]({{< ref "kubernetes-binding.md" >}}) |           ✅            |                         | Alpha  | v1                | 1.0                   |
-| [MQTT]({{< ref mqtt.md >}})                              |           ✅            |            ✅            | Alpha  | v1                | 1.0                   |
-| [MySQL]({{< ref mysql.md >}})                            |                        |            ✅            | Alpha  | v1                | 1.0                   |
-| [PostgreSql]({{< ref postgres.md >}})                    |                        |            ✅            | Alpha  | v1                | 1.0                   |
-| [Postmark]({{< ref postmark.md >}})                      |                        |            ✅            | Alpha  | v1                | 1.0                   |
-| [RabbitMQ]({{< ref rabbitmq.md >}})                      |           ✅            |            ✅            | Alpha  | v1                | 1.0                   |
-| [Redis]({{< ref redis.md >}})                            |                        |            ✅            | Alpha  | v1                | 1.0                   |
-| [SMTP]({{< ref smtp.md >}})                              |                        |            ✅            | Alpha  | v1                | 1.0                   |
-| [Twilio]({{< ref twilio.md >}})                          |                        |            ✅            | Alpha  | v1                | 1.0                   |
-| [Twitter]({{< ref twitter.md >}})                        |           ✅            |            ✅            | Alpha  | v1                | 1.0                   |
-| [SendGrid]({{< ref sendgrid.md >}})                      |                        |            ✅            | Alpha  | v1                | 1.0                   |
+| 名称                                                       | 输入绑定 | 输出绑定 | 状态    | 组件版本 | Since runtime version |
+| -------------------------------------------------------- |:----:|:----:| ----- | ---- | --------------------- |
+| [Apple Push Notifications (APN)]({{< ref apns.md >}})    |      |  ✅   | Alpha | v1   | 1.0                   |
+| [Cron (Scheduler)]({{< ref cron.md >}})                  |  ✅   |  ✅   | Alpha | v1   | 1.0                   |
+| [HTTP]({{< ref http.md >}})                              |      |  ✅   | GA    | v1   | 1.0                   |
+| [InfluxDB]({{< ref influxdb.md >}})                      |      |  ✅   | Alpha | v1   | 1.0                   |
+| [Kafka]({{< ref kafka.md >}})                            |  ✅   |  ✅   | Alpha | v1   | 1.0                   |
+| [Kubernetes Events]({{< ref "kubernetes-binding.md" >}}) |  ✅   |      | Alpha | v1   | 1.0                   |
+| [MQTT]({{< ref mqtt.md >}})                              |  ✅   |  ✅   | Alpha | v1   | 1.0                   |
+| [MySQL]({{< ref mysql.md >}})                            |      |  ✅   | Alpha | v1   | 1.0                   |
+| [PostgreSql]({{< ref postgres.md >}})                    |      |  ✅   | Alpha | v1   | 1.0                   |
+| [Postmark]({{< ref postmark.md >}})                      |      |  ✅   | Alpha | v1   | 1.0                   |
+| [RabbitMQ]({{< ref rabbitmq.md >}})                      |  ✅   |  ✅   | Alpha | v1   | 1.0                   |
+| [Redis]({{< ref redis.md >}})                            |      |  ✅   | Alpha | v1   | 1.0                   |
+| [SMTP]({{< ref smtp.md >}})                              |      |  ✅   | Alpha | v1   | 1.0                   |
+| [Twilio]({{< ref twilio.md >}})                          |      |  ✅   | Alpha | v1   | 1.0                   |
+| [Twitter]({{< ref twitter.md >}})                        |  ✅   |  ✅   | Alpha | v1   | 1.0                   |
+| [SendGrid]({{< ref sendgrid.md >}})                      |      |  ✅   | Alpha | v1   | 1.0                   |
 
 
 ### Alibaba Cloud
