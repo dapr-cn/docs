@@ -87,6 +87,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "siegrainwong",
+      "name": "Weiyi Wong",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11625599?v=4",
+      "profile": "https://siegrain.wang",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,

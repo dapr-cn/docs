@@ -1,6 +1,6 @@
 # Dapr 中文文档库
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -64,6 +64,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://www.oudi.org"><img src="https://avatars.githubusercontent.com/u/2518192?v=4?s=100" width="100px;" alt=""/><br /><sub><b>oudi</b></sub></a><br /><a href="#translation-oudi" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/ZhangX-Byte"><img src="https://avatars.githubusercontent.com/u/6357361?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ZhangX-Byte</b></sub></a><br /><a href="#translation-ZhangX-Byte" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://siegrain.wang"><img src="https://avatars.githubusercontent.com/u/11625599?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Weiyi Wong</b></sub></a><br /><a href="#translation-siegrainwong" title="Translation">🌍</a></td>
   </tr>
 </table>
 
