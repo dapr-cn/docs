@@ -2,11 +2,11 @@
 type: docs
 title: "AWS SNS/SQS"
 linkTitle: "AWS SNS/SQS"
-description: "Detailed documentation on the AWS SNS/SQS pubsub component"
+description: "关于AWS SNS/SQS pubsub组件的详细文档"
 ---
 
-## Component format
-To setup AWS SNS/SQS for pub/sub, you create a component of type `pubsub.snssqs`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## 组件格式
+要为 发布/订阅设置 AWS SNS/SQS，您需要创建一个类型为 `pubsub.snssqs` 的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -40,19 +40,19 @@ spec:
 以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段                       | Required | Details                                                                                                                                                                                                                  | Example                                      |
-| ------------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| accessKey                |    Y     | ID of the AWS account with appropriate permissions to SNS and SQS. Can be `secretKeyRef` to use a secret reference                                                                                                       | `"AKIAIOSFODNN7EXAMPLE"`                     |
-| secretKey                |    Y     | Secret for the AWS user. Can be `secretKeyRef` to use a secret reference                                                                                                                                                 | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
-| region                   |    Y     | The AWS region to the instance. See this page for valid regions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html. Ensure that SNS and SQS are available in that region. | `"us-east-1"`                                |
-| endpoint                 |    N     | AWS endpoint for the component to use. Only used for local development. The `endpoint` is unncessary when running against production AWS                                                                                 | `"http://localhost:4566"`                    |
-| sessionToken             |    N     | AWS session token to use.  A session token is only required if you are using temporary security credentials                                                                                                              | `"TOKEN"`                                    |
-| messageVisibilityTimeout |    N     | Amount of time in seconds that a message is hidden from receive requests after it is sent to a subscriber. Default: `10`                                                                                                 | `10`                                         |
-| messageRetryLimit        |    N     | Number of times to resend a message after processing of that message fails before removing that message from the queue. Default: `10`                                                                                    | `10`                                         |
-| messageWaitTimeSeconds   |    N     | amount of time to await receipt of a message before making another request. Default: `1`                                                                                                                                 | `1`                                          |
-| messageMaxNumber         |    N     | maximum number of messages to receive from the queue at a time. Default: `10`, Maximum: `10`                                                                                                                             | `10`                                         |
+| 字段                       | 必填 | 详情                                                                                                                                    | 示例                                           |
+| ------------------------ |:--:| ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| accessKey                | Y  | 具有SNS和SQS适当权限的AWS账户的ID。 可以用`secretKeyRef`来引用密钥。                                                                                       | `"AKIAIOSFODNN7EXAMPLE"`                     |
+| secretKey                | Y  | AWS用户的密钥。 可以用`secretKeyRef`来引用密钥。                                                                                                     | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
+| region                   | Y  | AWS区域到实例。 有效区域请参见本页面：https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html。 确保该地区有SNS和SQS。 | `"us-east-1"`                                |
+| endpoint                 | N  | 该组件要使用的AWS端点， 仅用于本地开发。 当对生产环境的AWS，`endpoint`是不需要的。                                                                                    | `"http://localhost:4566"`                    |
+| sessionToken             | N  | 要使用的 AWS 会话令牌。  只有当您使用临时安全凭证时才需要会话令牌。                                                                                                 | `"TOKEN"`                                    |
+| messageVisibilityTimeout | N  | 消息发送至订阅者后，隐藏接收请求的时间，以秒为单位。 默认值：`10`                                                                                                   | `10`                                         |
+| messageRetryLimit        | N  | 在处理消息失败后，从队列中删除该消息之前，重新发送消息的次数。 Default: `10`                                                                                         | `10`                                         |
+| messageWaitTimeSeconds   | N  | amount of time to await receipt of a message before making another request. Default: `1`                                              | `1`                                          |
+| messageMaxNumber         | N  | maximum number of messages to receive from the queue at a time. Default: `10`, Maximum: `10`                                          | `10`                                         |
 
 ## Create an SNS/SQS instance
 
