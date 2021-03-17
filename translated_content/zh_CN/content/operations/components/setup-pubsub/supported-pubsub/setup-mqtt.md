@@ -97,7 +97,7 @@ spec:
 ```
 
 {% alert title="Warning" color="warning" %}
-以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}}})描述的密钥存储。
+以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}})描述的密钥存储。
 {{% /alert %}}
 
 
@@ -105,7 +105,7 @@ spec:
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
-{% codetab %}
+{{% codetab %}}
 你可以使用Docker[本地运行MQTT broker](https://hub.docker.com/_/eclipse-mosquitto):
 
 ```bash
