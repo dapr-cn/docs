@@ -9,7 +9,7 @@ no_list: true
 
 Dapr SDK是将Dapr应用到您的应用程序中最简单的方法。 选择你最喜欢的语言，并在几分钟内开始使用Dapr。
 
-## SDK packages
+## SDK软件包
 
 - **客户端SDK**：Dapr客户端允许您调用Dapr构件的API，并执行下例操作:
    - [调用]({{< ref service-invocation >}})其他服务中的方法
