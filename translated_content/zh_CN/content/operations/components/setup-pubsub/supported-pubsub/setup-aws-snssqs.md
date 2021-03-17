@@ -50,7 +50,7 @@ spec:
 | endpoint                 | N  | 该组件要使用的AWS端点， 仅用于本地开发。 当对生产环境的AWS，`endpoint`是不需要的。                                                                                    | `"http://localhost:4566"`                    |
 | sessionToken             | N  | 要使用的 AWS 会话令牌。  只有当您使用临时安全凭证时才需要会话令牌。                                                                                                 | `"TOKEN"`                                    |
 | messageVisibilityTimeout | N  | 消息发送至订阅者后，隐藏接收请求的时间，以秒为单位。 默认值：`10`                                                                                                   | `10`                                         |
-| messageRetryLimit        | N  | 在处理消息失败后，从队列中删除该消息之前，重新发送消息的次数。 Default: `10`                                                                                         | `10`                                         |
+| messageRetryLimit        | N  | 在处理消息失败后，从队列中删除该消息之前，重新发送消息的次数。 默认值：`10`                                                                                              | `10`                                         |
 | messageWaitTimeSeconds   | N  | 等待收到消息后再提出请求的时间 默认值：`1`                                                                                                               | `1`                                          |
 | messageMaxNumber         | N  | 每次从队列中接收消息的最大数量。 默认值：`10`，最大值：`10`                                                                                                    | `10`                                         |
 
@@ -58,7 +58,7 @@ spec:
 
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" >}}
 
-{% codetab %}
+{{% codetab %}}
 对于本地开发来说，可以用[localstack项目](https://github.com/localstack/localstack)集成AWS SNS/SQS。 按照[这里](https://github.com/localstack/localstack#installing)的说明安装localstack CLI。
 
 为了将localstack与你的pubsub绑定在一起，你需要提供`endpoint`配置。 在组件元数据中， 当在AWS生产环境上运行时，`endpoint`是不需要的。
