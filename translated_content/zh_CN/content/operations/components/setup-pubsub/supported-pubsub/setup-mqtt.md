@@ -96,7 +96,7 @@ spec:
       value: "false"
 ```
 
-{% alert title="Warning" color="warning" %}
+{{% alert title="Warning" color="warning" %}}
 以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}})描述的密钥存储。
 {{% /alert %}}
 
