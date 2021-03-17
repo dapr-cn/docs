@@ -2,11 +2,11 @@
 type: docs
 title: "Azure Events Hub"
 linkTitle: "Azure Events Hub"
-description: "Detailed documentation on the Azure Event Hubs pubsub component"
+description: "关于 Azure Event Hubs pubsub 组件的详细文档"
 ---
 
-## Component format
-To setup Azure Event Hubs pubsub create a component of type `pubsub.azure.eventhubs`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## 组件格式
+要安装 Azure Event Hubs pubsub，请创建一个类型为 `pubsub.azure.eventhubs` 的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -29,32 +29,32 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}}})描述的密钥存储。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段                   | Required | Details                                                                                                                                                 | Example                                                                                                                                    |
-| -------------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| connectionString     |    Y     | Connection-string for the Event Hubs                                                                                                                    | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
-| storageAccountName   |    Y     | Storage account name to use for the EventProcessorHost                                                                                                  | `"myeventhubstorage"`                                                                                                                      |
-| storageAccountKey    |    Y     | Storage account key  to use for the EventProcessorHost. Can be `secretKeyRef` to use a secret reference Can be `secretKeyRef` to use a secret reference | `"112233445566778899"`                                                                                                                     |
-| storageContainerName |    Y     | Storage container name for the storage account name.                                                                                                    | `"myeventhubstoragecontainer"`                                                                                                             |
+| 字段                   | 必填 | 详情                                                    | 示例                                                                                                                                         |
+| -------------------- |:--:| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| connectionString     | Y  | Event Hubs的连接地址                                       | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
+| storageAccountName   | Y  | 用于EventProcessorHost的存储账户名称                           | `"myeventhubstorage"`                                                                                                                      |
+| storageAccountKey    | Y  | 用于EventProcessorHost的存储账户密钥。 可以用`secretKeyRef`来使用密钥索引 | `"112233445566778899"`                                                                                                                     |
+| storageContainerName | Y  | 存储账户名称的存储容器名称。                                        | `"myeventhubstoragecontainer"`                                                                                                             |
 
 
-## Create an Azure Event Hub
+## 创建Azure Event Hub
 
-Follow the instructions [here](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create) on setting up Azure Event Hubs. Follow the instructions [here](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create) on setting up Azure Event Hubs. Since this implementation uses the Event Processor Host, you will also need an [Azure Storage Account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal). Follow the instructions [here](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage) to manage the storage account access keys. Follow the instructions [here](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage) to manage the storage account access keys.
+请按照[此处](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create)的说明设置 Azure Event Hubs。 由于本实施例使用Event Processor Host，你还需要一个[Azure Storage Account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)。 请遵循[此处](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage)的说明来管理存储帐户访问密钥。
 
-See [here](https://docs.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature) on how to get the Event Hubs connection string. Note this is not the Event Hubs namespace. Note this is not the Event Hubs namespace.
+请参阅[这里](https://docs.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature)，了解如何获取 Event Hubs 连接地址。 注意这不是Event Hubs命名空间。
 
-### Create consumer groups for each subscriber
+### 为每个订阅者创建消费组
 
-For every Dapr app that wants to subscribe to events, create an Event Hubs consumer group with the name of the `dapr id`. For example, a Dapr app running on Kubernetes with `dapr.io/app-id: "myapp"` will need an Event Hubs consumer group named `myapp`. For example, a Dapr app running on Kubernetes with `dapr.io/app-id: "myapp"` will need an Event Hubs consumer group named `myapp`.
+对于每个要订阅事件的Dapr应用，创建一个名称为`dapr id`的Event Hubs消费组。 例如，在 Kubernetes 上运行的 Dapr 应用程序的 `dapr.io/app-id: "myapp"`将需要一个名为`myapp`的Event Hubs消费组。
 
-Note: Dapr passes the name of the Consumer group to the EventHub and so this is not supplied in the metadata.
+注意：Dapr将消费组的名称传递给EventHub，因此没有在元数据中提供。
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
-- [Pub/Sub building block]({{< ref pubsub >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 请访问 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) ，了解如何配置 pub/sub 组件
+- [发布/订阅构建块]({{< ref pubsub >}})
