@@ -23,7 +23,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}}})描述的密钥存储。
+以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}})描述的密钥存储。
 {{% /alert %}}
 
 ## 元数据字段规范
@@ -37,7 +37,7 @@ spec:
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
-{% codetab %}
+{{% codetab %}}
 你可以使用Docker在本地运行Hazelcast：
 
 ```
