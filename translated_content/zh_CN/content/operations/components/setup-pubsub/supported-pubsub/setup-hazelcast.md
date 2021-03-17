@@ -2,11 +2,11 @@
 type: docs
 title: "Hazelcast"
 linkTitle: "Hazelcast"
-description: "Detailed documentation on the Hazelcast pubsub component"
+description: "关于Hazelcast pubsub组件的详细文档。"
 ---
 
-## Component format
-To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## 组件格式
+要安装 hazelcast pubsub ，请创建一个类型为 `pubsub.hazelcast` 的组件。 请参阅 [本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -23,7 +23,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将密钥明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
 {{% /alert %}}
 
 ## Spec metadata fields
