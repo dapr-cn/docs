@@ -34,12 +34,12 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                   | 必填 | 详情                                                    | 示例                                                                                                                                         |
-| -------------------- |:--:| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| connectionString     | Y  | Event Hubs的连接地址                                       | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
-| storageAccountName   | Y  | 用于EventProcessorHost的存储账户名称                           | `"myeventhubstorage"`                                                                                                                      |
-| storageAccountKey    | Y  | 用于EventProcessorHost的存储账户密钥。 可以用`secretKeyRef`来使用密钥索引 | `"112233445566778899"`                                                                                                                     |
-| storageContainerName | Y  | 存储账户名称的存储容器名称。                                        | `"myeventhubstoragecontainer"`                                                                                                             |
+| 字段                   | 必填 | 详情                                                | 示例                                                                                                                                         |
+| -------------------- |:--:| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| connectionString     | Y  | Event Hubs的连接地址                                   | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
+| storageAccountName   | Y  | 用于EventProcessorHost的存储账户名称                       | `"myeventhubstorage"`                                                                                                                      |
+| storageAccountKey    | Y  | 用于EventProcessorHost的存储账户密钥。 可以用`secretKeyRef`来引用 | `"112233445566778899"`                                                                                                                     |
+| storageContainerName | Y  | 存储账户名称的存储容器名称。                                    | `"myeventhubstoragecontainer"`                                                                                                             |
 
 
 ## 创建Azure Event Hub
