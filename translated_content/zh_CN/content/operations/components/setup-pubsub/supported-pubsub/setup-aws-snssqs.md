@@ -51,19 +51,19 @@ spec:
 | sessionToken             | N  | 要使用的 AWS 会话令牌。  只有当您使用临时安全凭证时才需要会话令牌。                                                                                                 | `"TOKEN"`                                    |
 | messageVisibilityTimeout | N  | 消息发送至订阅者后，隐藏接收请求的时间，以秒为单位。 默认值：`10`                                                                                                   | `10`                                         |
 | messageRetryLimit        | N  | 在处理消息失败后，从队列中删除该消息之前，重新发送消息的次数。 Default: `10`                                                                                         | `10`                                         |
-| messageWaitTimeSeconds   | N  | amount of time to await receipt of a message before making another request. Default: `1`                                              | `1`                                          |
-| messageMaxNumber         | N  | maximum number of messages to receive from the queue at a time. Default: `10`, Maximum: `10`                                          | `10`                                         |
+| messageWaitTimeSeconds   | N  | 等待收到消息后再提出请求的时间 默认值：`1`                                                                                                               | `1`                                          |
+| messageMaxNumber         | N  | 每次从队列中接收消息的最大数量。 默认值：`10`，最大值：`10`                                                                                                    | `10`                                         |
 
-## Create an SNS/SQS instance
+## 创建SNS/SQS实例
 
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" >}}
 
-{{% codetab %}}
-For local development the [localstack project](https://github.com/localstack/localstack) is used to integrate AWS SNS/SQS. Follow the instructions [here](https://github.com/localstack/localstack#installing) to install the localstack CLI.
+{% codetab %}
+对于本地开发来说，可以用[localstack项目](https://github.com/localstack/localstack)集成AWS SNS/SQS。 按照[这里](https://github.com/localstack/localstack#installing)的说明安装localstack CLI。
 
-In order to use localstack with your pubsub binding, you need to provide the `endpoint` configuration in the component metadata. The `endpoint` is unncessary when running against production AWS.
+为了将localstack与你的pubsub绑定在一起，你需要提供`endpoint`配置。 在组件元数据中， 当在AWS生产环境上运行时，`endpoint`是不需要的。
 
-See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
+请参阅 [Authenticating to AWS]({{< ref authenticating-aws.md >}})，了解有关身份验证相关属性的信息。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -83,7 +83,7 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-To run localstack on Kubernetes, you can apply the configuration below. Localstack is then reachable at the DNS name `http://localstack.default.svc.cluster.local:4566` (assuming this was applied to the default namespace) and this should be used as the `endpoint`
+要在Kubernetes上运行localstack，可以应用以下配置。 然后，Localstack可以通过DNS名称`http://localstack.default.svc.cluster.local:4566`发现。 (假设这被应用于默认的命名空间)，这应该被用作`端点`。
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -128,16 +128,16 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-In order to run in AWS, you should create an IAM user with permissions to the SNS and SQS services. Use the `AWS account ID` and `AWS account secret` and plug them into the `accessKey` and `secretKey` in the component metadata using Kubernetes secrets and `secretKeyRef`.
+为了在AWS中运行，你应该创建一个具有SNS和SQS服务权限的IAM用户。 使用`AWS account ID`和`AWS account secret`，并使用Kubernetes密钥和`secretKeyRef`将它们插入组件元数据中的`accessKey`和`secretKey`。
 {{% /codetab %}}
 
 {{< /tabs >}}
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Pub/Sub building block]({{< ref pubsub >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
-- [AWS SQS as subscriber to SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-sqs-as-subscriber.html)
-- [AWS SNS API refernce](https://docs.aws.amazon.com/sns/latest/api/Welcome.html)
-- [AWS SQS API refernce](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/Welcome.html)
-- [Authenticating to AWS]({{< ref authenticating-aws.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [发布/订阅构建块]({{< ref pubsub >}})
+- 请访问 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) ，了解如何配置 pub/sub 组件
+- [将AWS SQS作为SNS的订阅者](https://docs.aws.amazon.com/sns/latest/dg/sns-sqs-as-subscriber.html)
+- [AWS SNS API参考](https://docs.aws.amazon.com/sns/latest/api/Welcome.html)
+- [AWS SQS API参考](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/Welcome.html)
+- [AWS认证]({{< ref authenticating-aws.md >}})
