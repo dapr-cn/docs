@@ -2,12 +2,12 @@
 type: docs
 title: "MQTT"
 linkTitle: "MQTT"
-description: "Detailed documentation on the MQTT pubsub component"
+description: "关于MQTT pubsub组件的详细文档"
 ---
 
-## Component format
+## 组件格式
 
-To setup MQTT pubsub create a component of type `pubsub.mqtt`. To setup MQTT pubsub create a component of type `pubsub.mqtt`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
+要安装MQTT pubsub，请创建一个类型为`pubsub.mqtt`的组件。 请参阅 [本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -28,21 +28,21 @@ spec:
   - name: cleanSession
     value: "false"
 ```
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段           |        Required        | Details                                                                                                                                    | Example                                                                                                                                                                                                                                                                                    |
-| ------------ |:----------------------:| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| url          |           Y            | Address of the MQTT broker                                                                                                                 | Use `**tcp://**` scheme for non-TLS communication.   Use`**tcps://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]"   Use`**tcps://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]" |
-| qos          |           N            | Indicates the Quality of Service Level (QoS) of the message. Default 0 Default 0                                                           | `1`                                                                                                                                                                                                                                                                                        |
-| retain       |           N            | Defines whether the message is saved by the broker as the last known good value for a specified topic. Default `"false"` Default `"false"` | `"true"`, `"false"`                                                                                                                                                                                                                                                                        |
-| cleanSession |           N            | will set the "clean session" in the connect message when client connects to an MQTT broker. Default `"true"` Default `"true"`              | `"true"`, `"false"`                                                                                                                                                                                                                                                                        |
-| caCert       | Required for using TLS | Certificate authority certificate. Client key. Can be `secretKeyRef` to use a secret reference                                             | `0123456789-0123456789`                                                                                                                                                                                                                                                                    |
-| clientCert   | Required for using TLS | Client certificate. Can be `secretKeyRef` to use a secret reference                                                                        | `0123456789-0123456789`                                                                                                                                                                                                                                                                    |
-| clientKey    | Required for using TLS | Client key. Can be `secretKeyRef` to use a secret reference                                                                                | `012345`                                                                                                                                                                                                                                                                                   |
+| 字段           |    必填    | 详情                                                         | 示例                                                                                                            |
+| ------------ |:--------:| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| url          |    Y     | MQTT broker地址                                              | 非TLS通信： `**tcp://**`，   TLS通信：`**tcps://**`。  <br> "tcp://\[username\]\[:password\]@host.domain[:port]" |
+| qos          |    N     | 表示消息的服务质量等级（QoS）， 默认值 0                                    | `1`                                                                                                           |
+| retain       |    N     | 定义消息是否被broker保存为指定主题的最后已知有效值 默认值为 `"false"`                | `"true"`, `"false"`                                                                                           |
+| cleanSession |    N     | 将在客户端连接到MQTT broker时，在连接消息中设置 "clean session" 默认: `"true"` | `"true"`, `"false"`                                                                                           |
+| caCert       | 使用TLS时需要 | 授权， 可以用`secretKeyRef`来引用                                   | `0123456789-0123456789`                                                                                       |
+| clientCert   | 使用TLS时需要 | 客户端证书， 可以用`secretKeyRef`来引用                                | `0123456789-0123456789`                                                                                       |
+| clientKey    | 使用TLS时需要 | 客户端键， 可以用`secretKeyRef`来引用                                 | `012345`                                                                                                      |
 
 
-### Communication using TLS
-To configure communication using TLS, ensure mosquitto broker is configured to support certificates. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Here is an example. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Here is an example.
+### 使用 TLS 通信
+要配置使用 TLS 通信，需配置并确保mosquitto broker支持凭证。 前提条件包括`certficate authority certificate`、`ca issued client certificate`、`client private key`。 参见下面的示例。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -70,9 +70,9 @@ spec:
     value: ''
 ```
 
-### Consuming a shared topic
+### 消费共享主题
 
-When consuming a shared topic, each consumer must have a unique identifier. By default, the application Id is used to uniquely identify each consumer and publisher. In self-hosted mode, running each Dapr run with a different application Id is sufficient to have them consume from the same shared topic. However on Kubernetes, a pod with multiple application instances shares the same application Id, prohibiting all instances from consuming the same topic. To overcome this, configure the component's `ConsumerID` metadata with a `{uuid}` tag, making each instance to have a randomly generated `ConsumerID` value on start up. For example:
+当消费一个共享主题时，每个消费者必须有一个唯一的标识符。 默认情况下，应用ID用于唯一标识每个消费者和发布者。 在自托管模式下，用不同的应用程序Id运行每个Dapr运行就足以让它们从同一个共享主题消费。 然而在Kubernetes上，一个有多个应用实例的pod共享同一个应用Id，这阻碍了所有实例消费同一个主题。 为了克服这个问题，请用`{uuid}`标签配置组件的`ConsumerID`元数据，使每个实例在启动时有一个随机生成的`ConsumerID`值。 例如:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -96,26 +96,26 @@ spec:
       value: "false"
 ```
 
-{{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+{% alert title="Warning" color="warning" %}
+以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}}})描述的密钥存储。
 {{% /alert %}}
 
 
-## Create a MQTT broker
+## 创建一个 MQTT broker
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
-{{% codetab %}}
-You can run a MQTT broker [locally using Docker](https://hub.docker.com/_/eclipse-mosquitto):
+{% codetab %}
+你可以使用Docker[本地运行MQTT broker](https://hub.docker.com/_/eclipse-mosquitto):
 
 ```bash
 docker run -d -p 1883:1883 -p 9001:9001 --name mqtt eclipse-mosquitto:1.6.9
 ```
-You can then interact with the server using the client port: `mqtt://localhost:1883`
+然后你可以通过`mqtt://localhost:1883`与服务器交互
 {{% /codetab %}}
 
 {{% codetab %}}
-You can run a MQTT broker in kubernetes using following yaml:
+你可以使用下面的yaml在kubernetes中运行一个MQTT broker:
 
 ```yaml
 apiVersion: apps/v1
@@ -166,12 +166,12 @@ spec:
       name: websocket
       protocol: TCP
 ```
-You can then interact with the server using the client port: `tcp://mqtt-broker.default.svc.cluster.local:1883`
+然后你可以通过`tcp://mqtt-broker.default.svc.cluster.local:1883`与服务器交互。
 {{% /codetab %}}
 
 {{< /tabs >}}
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
-- [Pub/Sub building block]({{< ref pubsub >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 请访问 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) ，了解如何配置 pub/sub 组件
+- [发布/订阅构建块]({{< ref pubsub >}})
