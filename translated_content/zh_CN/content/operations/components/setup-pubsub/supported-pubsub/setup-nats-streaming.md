@@ -49,7 +49,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}}})描述的密钥仓库来存储密钥。
+以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}})描述的密钥仓库来存储密钥。
 {{% /alert %}}
 
 ## 元数据字段规范
@@ -74,7 +74,7 @@ spec:
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
-{% codetab %}
+{{% codetab %}}
 您可以在本地使用 Docker运行NATS 服务器：
 
 ```bash
