@@ -36,7 +36,7 @@ spec:
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
-{% codetab %}
+{{% codetab %}}
 ```
 docker run -it \
   -p 6650:6650 \
@@ -49,7 +49,7 @@ docker run -it \
 ```
 {{% /codetab %}}
 
-{% codetab %}
+{{% codetab %}}
 请参考以下[Helm chart](https://pulsar.apache.org/docs/en/kubernetes-helm/)文档。
 {{% /codetab %}}
 
