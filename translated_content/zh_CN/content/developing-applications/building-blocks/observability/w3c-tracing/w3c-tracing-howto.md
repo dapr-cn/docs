@@ -111,10 +111,10 @@ ctx = metadata.AppendToOutgoingContext(ctx, "grpc-trace-bin", string(traceContex
 要在 HTTP 请求中传递跟踪上下文，可以使用 [.NET API](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.headers.httprequestheaders?view=netcore-3.1):
 
 ```csharp
-// client is HttpClient. // client is HttpClient. req is HttpRequestMessage
+// client is HttpClient. req is HttpRequestMessage
 req.Headers.Add("traceparent", traceparentValue);
 req.Headers.Add("tracestate", tracestateValue);
-HttpResponseMessage response = await client.SendAsync(req);
+HttpResponseMessage response = await client.SendAsync(req);  
 ```
 
 #### 对于gRPC 调用
