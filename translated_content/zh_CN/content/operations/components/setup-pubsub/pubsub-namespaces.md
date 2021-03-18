@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "HowTo: Configure Pub/Sub components with multiple namespaces"
+title: "操作：配置具有多个命名空间的 Pub/Sub 组件"
 linkTitle: "Multiple namespaces"
 weight: 20000
-description: "Use Dapr Pub/Sub with multiple namespaces"
+description: "多个命名空间下使用Dapr Pub/Sub"
 ---
 
-In some scenarios, applications can be spread across namespaces and share a queue or topic via PubSub. In this case, the PubSub component must be provisioned on each namespace. In this case, the PubSub component must be provisioned on each namespace.
+在某些场景下，应用程序分布在不同的命名空间，并通过PubSub共享一个队列或主题。 在这种情况下，必须在每个命名空间上都提供PubSub组件。
 
 {{% alert title="Note" color="primary" %}}
-Namespaces are a Dapr concept used for scoping applications and components. This example uses Kubernetes namespaces, however the Dapr component namespace scoping can be used on any supported platform. Read [How-To: Scope components to one or more applications]({{< ref "component-scopes.md" >}}) for more information on scoping components. This example uses Kubernetes namespaces, however the Dapr component namespace scoping can be used on any supported platform. Read [How-To: Scope components to one or more applications]({{< ref "component-scopes.md" >}}) for more information on scoping components.
+命名空间是一个Dapr里的，用于确定应用程序和组件的作用范围概念。 这个例子使用的是Kubernetes的命名空间，然而Dapr组件的命名空间范围可以在任何支持的平台上使用。 请阅读[指南：将组件作用范围限定到一个或多个应用程序]({< ref "component-scopes.md" >}})，以了解更多关于组件作用范围限定的信息。
 {{% /alert %}}
 
-This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/pub-sub). The Redis installation and the subscribers are in `namespace-a` while the publisher UI is in `namespace-b`. This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/pub-sub). The Redis installation and the subscribers are in `namespace-a` while the publisher UI is in `namespace-b`. This solution will also work if Redis is installed on another namespace or if you use a managed cloud service like Azure ServiceBus, AWS SNS/SQS or GCP PubSub.
+这个例子使用了[PubSub示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)。 Redis安装和其订阅者在`namespace-a`中，而发布者UI在`namespace-b`中。 如果Redis安装在另一个命名空间上，或者使用Azure ServiceBus、AWS SNS/SQS或GCP PubSub等云服务，该解决方案也同样奏效。
 
-This is a diagram of the example using namespaces.
+这是一个使用命名空间的示例图片。
 
 <img src="/images/pubsub-multiple-namespaces.png" width=1000>
 <br></br>
 
-The table below shows which resources are deployed to which namespaces:
+下表描述了部署的资源和所在命名空间的对应关系：
 
-| Resource                | namespace-a | namespace-b |
+| 资源                      | namespace-a | namespace-b |
 | ----------------------- | ----------- | ----------- |
 | Redis master            | X           |             |
 | Redis slave             | X           |             |
@@ -30,7 +30,7 @@ The table below shows which resources are deployed to which namespaces:
 | Python subscriber       | X           |             |
 | React UI publisher      |             | X           |
 
-## Pre-requisites
+## 前提
 
 * [Dapr installed on Kubernetes]({{< ref "kubernetes-deploy.md" >}}) in any namespace since Dapr works at the cluster level.
 * Checkout and cd into the directory for [PubSub quickstart](https://github.com/dapr/quickstarts/tree/master/pub-sub).
