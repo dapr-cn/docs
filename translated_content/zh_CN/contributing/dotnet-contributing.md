@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Contributing to the .NET SDK"
+title: "为 .NET SDK 贡献"
 linkTitle: ".NET SDK"
 weight: 3000
-description: Guidelines for contributing to the Dapr .NET SDK
+description: Dapr .NET SDK贡献准则
 ---
 
-When contributing to the [.NET SDK](https://github.com/dapr/dotnet-sdk) the following rules and best-practices should be followed.
+当为 [.NET SDK](https://github.com/dapr/dotnet-sdk) 贡献时，应该遵循以下规则和最佳做法。
 
-## Examples
+## 示例
 
 The `examples` directory contains code samples for users to run to try out specific functionality of the various .NET SDK packages and extensions. When writing new and updated samples keep in mind:
 
