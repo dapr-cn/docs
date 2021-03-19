@@ -47,7 +47,7 @@ Dapr 应用 sidecar 提供以下配置选项；
 - [Middleware（中间件）](#middleware)
 - [限定范围的密钥储存](#scoping-secrets-for-secret-stores)
 - [服务间调用的访问控制](#access-control-allow-lists-for-service-invocation)
-- [Example application sidecar configuration](#example-application-sidecar-configuration)
+- [Sidecar 配置示例](#example-application-sidecar-configuration)
 
 #### Tracing（调用链追踪）
 
@@ -95,7 +95,7 @@ metrics:
 
 #### Middleware（中间件）
 
-Middleware configuration set named Http pipeline middleware handlers The `httpPipeline` section under the `Configuration` spec contains the following properties:
+中间件配置用于配置一系列可命名的HTTP管道处理器。`Configuration` spec 下的`httpPipeline` 部分包含以下的配置属性：
 
 ```yml
 httpPipeline:
@@ -108,23 +108,23 @@ httpPipeline:
 
 下面的表格给出了HTTP 处理器可配置的属性
 
-| Property | Type   | Description                      |
-| -------- | ------ | -------------------------------- |
-| name     | string | Name of the middleware component |
-| type     | string | Type of middleware component     |
+| 属性   | 数据类型   | 说明        |
+| ---- | ------ | --------- |
+| name | string | 中间件组件的名称。 |
+| type | string | 中间件组件的类型。 |
 
-See [Middleware pipelines]({{< ref "middleware-concept.md" >}}) for more information
+请参阅 [中间件管道]({{< ref "middleware-concept.md" >}}) 一节以获取更多信息。
 
-#### Scope secret store access
+#### 限定作用域的密钥储存控制
 
-See the [Scoping secrets]({{< ref "secret-scope.md" >}}) guide for information and examples on how to scope secrets to an application.
+请参阅 [Scoping secrets]({{< ref "secret-scope.md" >}}) 指南查看更多信息，以及如何为应用程序设置密钥作用域的例子。
 
-#### Access Control allow lists for service invocation
+#### 服务间调用的访问控制
 
-See the [Allow lists for service invocation]({{< ref "invoke-allowlist.md" >}}) guide for information and examples on how to set allow lists.
+请参阅 [服务间调用允许列表]({{< ref "invoke-allowlist.md" >}) 了解更多信息，以及如何设置允许列表的例子。
 
-### Example sidecar configuration
-The following yaml shows an example configuration file that can be applied to an applications' Dapr sidecar.
+### Sidecar 配置示例
+下面的yaml内容展示了一个可以被应用于Dapr sidecar的配置文件：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -161,21 +161,21 @@ spec:
         action: allow
 ```
 
-## Control-plane configuration
-There is a single configuration file called `default` installed with the Dapr control plane system services that applies global settings. This is only set up when Dapr is deployed to Kubernetes. This is only set up when Dapr is deployed to Kubernetes.
+## 控制平面配置
+在 Dapr 控制平面系统中，安装了一个名为`default` 的配置文件，用于应用全局配置。 这个配置仅在Dapr部署到Kubernetes中时生效。
 
-### Control-plane configuration settings
-A Dapr control plane configuration can configure the following settings:
+### 控制平面配置列表
+在 Dapr 控制平面中，可以使用以下配置项：
 
-| Property         | Type   | Description                                                                                                                            |
-| ---------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| enabled          | bool   | Set mtls to be enabled or disabled                                                                                                     |
-| allowedClockSkew | string | The extra time to give for certificate expiry based on possible clock skew on a machine. Default is 15 minutes. Default is 15 minutes. |
-| workloadCertTTL  | string | Time a certificate is valid for. Time a certificate is valid for. Default is 24 hours                                                  |
+| 属性               | 数据类型   | 描述                                 |
+| ---------------- | ------ | ---------------------------------- |
+| enabled          | bool   | 配置mtls是否开启                         |
+| allowedClockSkew | string | 证书到期时，基于本地时钟偏差给出的额外过期时间。 默认值为15分钟。 |
+| workloadCertTTL  | string | 证书有效时间。 默认值为 24 小时。                |
 
-See the [Mutual TLS]({{< ref "mtls.md" >}}) HowTo and [security concepts]({{< ref "security-concept.md" >}}) for more information.
+请参阅 [Mutual TLS]({{< ref "mtls.md" >}}) 和 [安全概念]({{< ref "security-concept.md" >}}) 了解更多信息。
 
-### Example control plane configuration
+### 控制平面配置示例
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
