@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Overview of Dapr configuration options"
+title: "Dapr 配置选项概述"
 linkTitle: "Secrets stores overview"
 weight: 100
 description: "Information on Dapr configuration and how to set options for your application"
