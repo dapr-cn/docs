@@ -51,9 +51,9 @@ minikube addons enable ingress
 
 ### 疑难解答
 
-1. The external IP address of load balancer is not shown from `kubectl get svc`
+1. 负载均衡器的外部IP地址不显示在`kubectl get svc`
 
-In Minikube, EXTERNAL-IP in `kubectl get svc` shows `<pending>` state for your service. In this case, you can run `minikube service [service_name]` to open your service without external IP address. In this case, you can run `minikube service [service_name]` to open your service without external IP address.
+在 Minikube 中，您 Service 的 EXTERNAL-IP 在 `kubectl get svc` 显示 `<pending>` 在这种情况下，您可以运行 `minikube service [service_name]` 在没有外部 IP 地址的情况下打开您的服务。
 
 ```bash
 $ kubectl get svc
