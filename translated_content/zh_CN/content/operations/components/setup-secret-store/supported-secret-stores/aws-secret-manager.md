@@ -2,12 +2,12 @@
 type: docs
 title: "AWS Secrets Manager"
 linkTitle: "AWS Secrets Manager"
-description: Detailed information on the  decret store component
+description: 详细介绍了关于密钥仓库组件的信息
 ---
 
-## Component format
+## 组件格式
 
-To setup AWS Secrets Manager secret store create a component of type `secretstores.aws.secretmanager`. To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置AWS Secrets Manager密钥仓库，请创建一个类型为`secretstores.aws.secretmanager`的组件。 请参阅 [本指南]({{< ref "secret-stores-overview.md#apply-the-configuration" >}})，了解如何创建和应用 secretstore 配置。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
 See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes.
 
