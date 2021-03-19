@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Setup an Minikube cluster"
+title: "设置 Minikube 集群"
 linkTitle: "Minikube"
 weight: 2000
 description: >
-  How to setup Dapr on a Minikube cluster.
+  如何在 Minikube 集群中设置 Dapr。
 ---
 
-# Set up a Minikube cluster
+# 设置 Minikube 集群
 
 ## 前期准备
 
@@ -15,41 +15,41 @@ description: >
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/)
 
-> Note: For Windows, enable Virtualization in BIOS and [install Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v)
+> 注意：对于Windows，在 BIOS 和 [安装 Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) 启用虚拟化（Vitualization）
 
-## Start the Minikube cluster
+## 启动 Minikube 集群
 
-1. (optional) Set the default VM driver
+1. (可选) 设置默认的 VM 驱动
 
 ```bash
 minikube config set vm-driver [driver_name]
 ```
 
-> Note: See [DRIVERS](https://minikube.sigs.k8s.io/docs/reference/drivers/) for details on supported drivers and how to install plugins.
+> 注意：关于支持的驱动程序和如何安装插件的详细信息，请参阅 [DRIVERS](https://minikube.sigs.k8s.io/docs/reference/drivers/)。
 
-2. Start the cluster Use 1.13.x or newer version of Kubernetes with `--kubernetes-version`
+2. 使用 1.13.x 或更新版本的 Kubernetes `--kubernetes-version` 启动集群
 
 ```bash
 minikube start --cpus=4 --memory=4096 --kubernetes-version=1.16.2 --extra-config=apiserver.authorization-mode=RBAC
 ```
 
-3. Enable dashboard and ingress addons
+3. 启用仪表盘和 ingress 插件
 
 ```bash
-# Enable dashboard
+# 启用 dashboard
 minikube addons enable dashboard
 
-# Enable ingress
+# 启用 ingress
 minikube addons enable ingress
 ```
 
-## (optional) Install Helm v3
+## (可选) 安装Helm v3
 
-1. [Install Helm v3 client](https://helm.sh/docs/intro/install/)
+1. [安装 Helm v3 客户端](https://helm.sh/docs/intro/install/)
 
-> **Note:** The latest Dapr helm chart no longer supports Helm v2. Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/). Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
+> **注意：** 最新的 Dapr helm chart 不再支持 Helm v2。 请按照这篇文章 [Helm 迁移指南](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/) 从Helm v2 迁移到Helm v3。
 
-### Troubleshooting
+### 疑难解答
 
 1. The external IP address of load balancer is not shown from `kubectl get svc`
 
