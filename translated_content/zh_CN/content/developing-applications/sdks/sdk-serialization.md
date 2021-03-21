@@ -13,9 +13,8 @@ Dapr的SDK为下面两种情况提供序列化： 首先是对于通过请求和
 ## 服务调用
 
 ```java
-    No translations matched your search
-DaprClient client = (new DaprClientBuilder()).build();
-    client.invokeService(Verb.POST, "myappid", "saySomething", "My Message", null).block();
+    DaprClient client = (new DaprClientBuilder()).build();
+    client.invokeService("myappid", "saySomething", "My Message", HttpExtension.POST).block();
 ```
 
 在上面的示例中，应用程序将收到一个对`saySomething`方法的`POST`请求，请求的有效载荷为`"My Message"`，这句说明中给它添加了引号是因为序列化工具会把输入的String字符串序列化为JSON。
@@ -140,7 +139,7 @@ redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928
 {"value":"My data value."}
 ```
 3. 自定义序列化工具必须将对象序列化为`byte[]`类型。
-4. 自定义序列化工具必须将`byte[]`反序列化为对象。
+4. Custom serializers must deserialize `byte[]` to object.
 5. 当用户提供一个自定义的序列化工具时，它应该以`byte[]`的形式被传输或持久化， 持久化时，也应当编码为Base64字符串， 大多数JSON库都能够完成这个功能。
 ```bash
 redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||message
@@ -150,6 +149,5 @@ redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928
  redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||mydata
 "eyJ2YWx1ZSI6Ik15IGRhdGEgdmFsdWUuIn0="
 ```
-6. 当序列化一个`byte[]`的对象时，序列化工具应该只是将其传递过去，因为`byte[]`应该已经在SDK内部处理。 当反序列化为`byte[]`时，也会发生同样的情况。
 
 *目前而言，[Java SDK](https://github.com/dapr/java-sdk/)是唯一实现该规范的Dapr SDK。 在不久的将来，其他SDK也会实现同样的功能。*
