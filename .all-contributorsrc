@@ -105,6 +105,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "MarkLux",
+      "name": "Mark Lumin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19239409?v=4",
+      "profile": "http://marklux.cn",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
