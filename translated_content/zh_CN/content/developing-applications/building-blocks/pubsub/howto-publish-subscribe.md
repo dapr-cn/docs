@@ -217,7 +217,7 @@ $app->post('/dsstatus', function(
 $app->start();
 ```
 
-然后运行:
+After creating `app1.php`, and with the [SDK installed](https://docs.dapr.io/developing-applications/sdks/php/), go ahead and start the app:
 
 ```bash
 dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
