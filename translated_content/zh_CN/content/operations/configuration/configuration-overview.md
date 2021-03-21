@@ -121,7 +121,7 @@ httpPipeline:
 
 #### 服务间调用的访问控制
 
-请参阅 [服务间调用允许列表]({{< ref "invoke-allowlist.md" >}) 了解更多信息，以及如何设置允许列表的例子。
+请参阅 [服务间调用允许列表]({{< ref "invoke-allowlist.md" >}}) 了解更多信息，以及如何设置允许列表的例子。
 
 ### Sidecar 配置示例
 下面的yaml内容展示了一个可以被应用于Dapr sidecar的配置文件：
