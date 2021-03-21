@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Integrations"
+title: "集成"
 linkTitle: "Integrations"
 weight: 50
-description: "Dapr integrations with other technologies"
+description: "Dapr 与其他技术的集成"
 ---
 

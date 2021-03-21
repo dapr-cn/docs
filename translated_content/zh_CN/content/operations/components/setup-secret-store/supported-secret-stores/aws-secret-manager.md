@@ -2,14 +2,14 @@
 type: docs
 title: "AWS Secrets Manager"
 linkTitle: "AWS Secrets Manager"
-description: Detailed information on the  decret store component
+description: 详细介绍了关于密钥仓库组件的信息
 ---
 
-## Component format
+## 组件格式
 
-To setup AWS Secrets Manager secret store create a component of type `secretstores.aws.secretmanager`. To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置AWS Secrets Manager密钥仓库，请创建一个类型为`secretstores.aws.secretmanager`的组件。 请参阅 [本指南]({{< ref "secret-stores-overview.md#apply-the-configuration" >}})，了解如何创建和应用 secretstore 配置。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
-See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes.
+请参阅 [AWS认证]({{< ref authenticating-aws.md >}})，了解有关身份验证相关属性的信息。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,24 +31,24 @@ spec:
     value: "[aws_session_token]"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将密钥明文存储， 建议将密钥存储在本地，如 [Kubernetes密钥仓库]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段           | Required | Details                                                                 | Example             |
-| ------------ |:--------:| ----------------------------------------------------------------------- | ------------------- |
-| region       |    Y     | The specific AWS region the AWS Secrets Manager instance is deployed in | `"us-east-1"`       |
-| accessKey    |    Y     | The AWS Access Key to access this resource                              | `"key"`             |
-| secretKey    |    Y     | The AWS Secret Access Key to access this resource                       | `"secretAccessKey"` |
-| sessionToken |    N     | The AWS session token to use                                            | `"sessionToken"`    |
-## Create an AWS Secrets Manager instance
+| 字段           | 必填 | 详情                                 | 示例                  |
+| ------------ |:--:| ---------------------------------- | ------------------- |
+| region       | Y  | AWS Secrets Manager 实例所部署的特定AWS 区域 | `"us-east-1"`       |
+| accessKey    | Y  | 要访问此资源的 AWS 访问密钥                   | `"key"`             |
+| secretKey    | Y  | 要访问此资源的 AWS 密钥访问 Key               | `"secretAccessKey"` |
+| sessionToken | N  | 要使用的 AWS 会话令牌                      | `"sessionToken"`    |
+## 创建一个AWS Secrets Manager实例
 
-Setup AWS Secrets Manager using the AWS documentation: https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html.
+参考AWS文档设置AWS Secrets Manager：https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html。
 
 ## 相关链接
-- [Secrets building block]({{< ref secrets >}})
-- [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})
-- [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
-- [Secrets API reference]({{< ref secrets_api.md >}})
-- [Authenticating to AWS]({{< ref authenticating-aws.md >}})
+- [密钥构建块]({{< ref secrets >}})
+- [指南：获取密钥]({{< ref "howto-secrets.md" >}})
+- [指南：在Dapr组件中引用密钥]({{< ref component-secrets.md >}})
+- [密钥 API 参考]({{< ref secrets_api.md >}})
+- [AWS认证]({{< ref authenticating-aws.md >}})

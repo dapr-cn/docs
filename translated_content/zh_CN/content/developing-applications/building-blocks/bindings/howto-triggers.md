@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: 使用输入绑定来触发应用程序"
-linkTitle: "How-To: Triggers"
+linkTitle: "How-To: 触发器"
 description: "使用 Dapr 输入绑定来触发由事件驱动的程序"
 weight: 200
 ---
@@ -96,7 +96,7 @@ res.status(500).send()
 
 ## 参考资料
 
-* [Bindings building block]({{< ref bindings >}})
-* [Bindings API]({{< ref bindings_api.md >}})
+* [绑定构建块]({{< ref bindings >}})
+* [绑定 API]({{< ref bindings_api.md >}})
 * [Components concept]({{< ref components-concept.md >}})
 * [Supported bindings]({{< ref supported-bindings >}})

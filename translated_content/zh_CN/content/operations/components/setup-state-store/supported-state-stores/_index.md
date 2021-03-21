@@ -17,9 +17,9 @@ Table captions:
 > `Component version`: defines the version of the component
 
 
-The following stores are supported, at various levels, by the Dapr state management building block:
+Dapr 状态管理组件不同程度地支持以下存储:
 
-> State stores can be used for actors if it supports both transactional operations and etag.
+> 如果存储引擎同时支持事务性操作和etag，则状态存储可以用于 actors。
 
 ### Generic
 

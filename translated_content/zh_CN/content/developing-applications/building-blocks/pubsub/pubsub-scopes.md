@@ -3,12 +3,12 @@ type: docs
 title: "限定 Pub/Sub 主题访问权限"
 linkTitle: "Scope topic access"
 weight: 5000
-description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程序"
+description: "使用作用域（scopes）限制 Pub/Sub 主题到特定的应用程序"
 ---
 
 ## 介绍
 
-[名称空间或组件 scopes]({{< ref component-scopes.md >}}) 可用于限制对特定应用程序的组件访问。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
+[名称空间或组件作用域（scopes）]({{< ref component-scopes.md >}}) 可用于限制对特定应用程序的组件访问。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
 
 除了此常规组件范围外，对于 pub/sub 组件，还可以限制以下操作：
 - 哪些主题可以使用(发布或订阅)
@@ -160,7 +160,7 @@ spec:
 
 ## 相关链接
 
-- Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
-- Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
-- List of [pub/sub components]({{< ref supported-pubsub >}})
-- Read the [API reference]({{< ref pubsub_api.md >}})
+- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
+- 了解 [消息存活时间（TTL）]({{< ref pubsub-message-ttl.md >}})
+- [Pub/Sub 组件列表]({{< ref supported-pubsub >}})
+- 阅读 [API 引用]({{< ref pubsub_api.md >}})

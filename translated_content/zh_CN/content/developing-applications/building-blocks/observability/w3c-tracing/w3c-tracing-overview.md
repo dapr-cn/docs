@@ -60,12 +60,8 @@ Dapr 使用 W3C 跟踪上下文对服务调用和 pub/sub 消息传递进行分�
    
         service A -> service B
         [ .. some code logic ..]
-        service A -> service B
-        [ .. some code logic ..]
         service A -> service C
         [ .. some code logic ..]
-        service A -> service D
-        [ .. some code logic ..] some code logic ..]
         service A -> service D
         [ .. some code logic ..]
 

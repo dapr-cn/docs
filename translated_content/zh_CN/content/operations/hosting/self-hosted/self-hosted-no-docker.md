@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "入门指南: 不使用 Docker 在自托管模式下运行 Dapr"
-linkTitle: "Run without Docker"
+linkTitle: "不使用 Docker 运行"
 weight: 50000
 description: "如何以自托管方式部署和运行 Dapr ，而无需在本地机器上安装 Docker"
 ---
@@ -51,9 +51,9 @@ INFO[0001] leader is established.                        instance=Nicoletaz-L10.
 
 ```
 
-From here on you can follow the sample example created for the [java-sdk](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors), [python-sdk](https://github.com/dapr/python-sdk/tree/master/examples/demo_actor) or [dotnet-sdk]({{< ref "dotnet-actor-howto.md" >}}) for running an application with Actors enabled.
+至此，您可以跟随为 [java-sdk](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors)， [python-sdk](https://github.com/dapr/python-sdk/tree/master/examples/demo_actor) 或 [dotne-sdk]({{< ref "dotnet-actor-howto.md" >}}) 创建的样本示例，在启用了 Actors 的情况下运行应用程序。
 
-更新状态存储配置文件使 Redis host 地址和密码和您的设置相同。 Additionally to enable it as a actor state store have the metadata piece added similar to the [sample Java Redis component](https://github.com/dapr/java-sdk/blob/master/examples/components/state/redis.yaml) definition.
+更新状态存储配置文件使 Redis host 地址和密码和您的设置相同。 此外，为了使它能够作为一个actor状态存储，还添加了类似于[示例Java Redis组件](https://github.com/dapr/java-sdk/blob/master/examples/components/state/redis.yaml)定义的元数据部分。
 
 ```yaml
   - name: actorStateStore

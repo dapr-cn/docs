@@ -3,11 +3,11 @@ type: docs
 title: "Virtual Actors"
 linkTitle: "Actors"
 weight: 1000
-description: How to build actors
+description: 如何创建一个actor
 no_list: true
 ---
 
-If you're new to the actor pattern, the best place to learn about the actor pattern is in the [Actor Overview.]({{< ref actors-overview.md >}})
+如果您之前不了解actor模型，可以先在这里查看 [actor模型]({{< ref actors-overview.md >}})
 
 In the PHP SDK, there are two sides to an actor, the Client, and the Actor (aka, the Runtime). As a client of an actor, you'll interact with a remote actor via the `ActorProxy` class. This class generates a proxy class on-the-fly using one of several configured strategies.
 

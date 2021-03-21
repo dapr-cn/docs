@@ -1,32 +1,32 @@
 ---
 type: docs
-title: "Developing with GitHub Codespaces"
+title: "使用 GitHub Codespaces 开发"
 linkTitle: "GitHub Codespaces"
 weight: 3000
-description: "How to get up and running with Dapr in a GitHub Codespace"
+description: "如何在 GitHub Codespace 中启动和运行 Dapr"
 ---
 
-[GitHub Codespaces](https://github.com/features/codespaces) are the easiest way to get up and running in a Dapr environment. In as little as a single click you have the environment, packages, code, samples, and documentation all ready to go in your browser. In as little as a single click you have the environment, packages, code, samples, and documentation all ready to go in your browser. In as little as a single click you have the environment, packages, code, samples, and documentation all ready to go in your browser.
+[GitHub Codespaces](https://github.com/features/codespaces) 是启动和运行 Dapr 环境最简单的方式。 只需点击一下，您就可以在浏览器中准备好环境、包、代码、示例和文档。
 
 {{% alert title="Private Beta" color="warning" %}}
-GitHub Codespaces is currently in a private beta. Sign up [here](https://github.com/features/codespaces/signup). Sign up [here](https://github.com/features/codespaces/signup).
+GitHub Codespaces目前处于内测阶段。 在 [这里](https://github.com/features/codespaces/signup) 注册。
 {{% /alert %}}
 
-## Features
+## 功能
 
-- **Click and Run**: Get a dedicated and sandboxed environment with all of the required frameworks and packages ready to go.
-- **Usage-based Billing**: Only pay for the time you spend developing in the Codespace. Environments are spun down automatically when not in use. Environments are spun down automatically when not in use.
-- **Portable**: Run in your browser or in Visual Studio Code
+- **单击并运行**: 获得一个专用和沙盒化的环境，并且所有所需的框架和包件已准备就绪。
+- **基于使用情况的计费**: 只为您在 Codespace 上花费的开发时间支付费用。 环境在不使用时自动关闭。
+- **便携**: 在您的浏览器或 Visual Studio Code 中运行
 
-## Open a Dapr repo in a Codespace
+## 在 Codespace 中打开 Dapr
 
-To open a Dapr repository in a Codespace simply select "Code" from the repo homepage and "Open with Codespaces":
+要在 Codespace 中打开一个Dapr 仓库，只需从repo 主页中选择"Code"和"Open with Codespaces"：
 
-<img src="/images/codespaces-create.png" alt="Screenshot of creating a Dapr Codespace" width="300" />
+<img src="/images/codespaces-create.png" alt="创建 Dapr Codespace 的截图" width="300" />
 
-### Supported repos
+### 支持的 Repo
 
 - [Python SDK](https://github.com/dapr/python-sdk)
 
 ## 相关链接
-- [GitHub documentation](https://docs.github.com/en/github/developing-online-with-codespaces/about-codespaces)
+- [GitHub 文档](https://docs.github.com/en/github/developing-online-with-codespaces/about-codespaces)

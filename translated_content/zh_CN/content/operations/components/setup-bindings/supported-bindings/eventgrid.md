@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Azure Event Grid binding spec"
+title: "Azure Event Grid 绑定规范"
 linkTitle: "Azure Event Grid"
-description: "Detailed documentation on the Azure Event Grid binding component"
+description: "Azure Event Grid 绑定组件的详细文档"
 ---
 
-## Component format
+## 组件格式
 
-To setup Azure Event Grid binding create a component of type `bindings.azure.eventgrid`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置 Azure 事件网格（Event Grid）绑定，请创建一个类型为 `bindings.azure.eventgrid` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [this](https://docs.microsoft.com/en-us/azure/event-grid/) for Azure Event Grid documentation.
+请参阅[这里](https://docs.microsoft.com/en-us/azure/event-grid/)了解 Azure Event Grid 文档。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -46,75 +46,75 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段                    | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                                    | Example                                |
-| --------------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| tenantId              |    Y     | Input           | The Azure tenant id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                                                                                                          | `"tenentID"`                           |
-| subscriptionId        |    Y     | Input           | The Azure subscription id in which this Event Grid Event Subscription should be created                                                                                                                                                                                                                                                                                                    | `"subscriptionId"`                     |
-| clientId              |    Y     | Input           | The client id that should be used by the binding to create or update the Event Grid Event Subscription                                                                                                                                                                                                                                                                                     | `"clientId"`                           |
-| clientSecret          |    Y     | Input           | The client id that should be used by the binding to create or update the Event Grid Event Subscription                                                                                                                                                                                                                                                                                     | `"clientSecret"`                       |
-| subscriberEndpoint    |    Y     | Input           | The https endpoint in which Event Grid will handshake and send Cloud Events. The https endpoint in which Event Grid will handshake and send Cloud Events. If you aren't re-writing URLs on ingress, it should be in the form of: `https://[YOUR HOSTNAME]/api/events` If testing on your local machine, you can use something like [ngrok](https://ngrok.com) to create a public endpoint. | `"https://[YOUR HOSTNAME]/api/events"` |
-| handshakePort         |    Y     | Input           | The container port that the input binding will listen on for handshakes and events                                                                                                                                                                                                                                                                                                         | `"9000"`                               |
-| scope                 |    Y     | Input           | The identifier of the resource to which the event subscription needs to be created or updated. See [here](#scope) for more details See [here](#scope) for more details                                                                                                                                                                                                                     | `"/subscriptions/{subscriptionId}/"`   |
-| eventSubscriptionName |    N     | Input           | The name of the event subscription. The name of the event subscription. Event subscription names must be between 3 and 64 characters in length and should use alphanumeric letters only                                                                                                                                                                                                    | `"name"`                               |
-| accessKey             |    Y     | Output          | The Access Key to be used for publishing an Event Grid Event to a custom topic                                                                                                                                                                                                                                                                                                             | `"accessKey"`                          |
-| topicEndpoint         |    Y     | Output          | The topic endpoint in which this output binding should publish events                                                                                                                                                                                                                                                                                                                      | `"topic-endpoint"`                     |
+| 字段                    | 必填 | 绑定支持   | 详情                                                                                                                                                      | 示例                                     |
+| --------------------- |:--:| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| tenantId              | Y  | Input  | 创建这个事件网格事件订阅的 Azure 租户 id                                                                                                                               | `"tenentID"`                           |
+| subscriptionId        | Y  | Input  | 创建这个事件网格事件订阅的 Azure 订阅 id                                                                                                                               | `"subscriptionId"`                     |
+| clientId              | Y  | Input  | 由绑定来创建或更新事件网格事件订阅的客户端 id                                                                                                                                | `"clientId"`                           |
+| clientSecret          | Y  | Input  | 由绑定来创建或更新事件网格事件订阅的客户端 id                                                                                                                                | `"clientSecret"`                       |
+| subscriberEndpoint    | Y  | Input  | 事件网格将进行握手并发送云端事件的 https 端点。 如果您没有在 ingress 上重写URL， 其形式应该是： `https://[YOUR HOSTNAME]/api/events`。如果测试您的本地机器， 您可以使用 [ngrok](https://ngrok.com) 来创建一个公共端点。 | `"https://[YOUR HOSTNAME]/api/events"` |
+| handshakePort         | Y  | Input  | 输入绑定将侦听握手和事件的容器端口                                                                                                                                       | `"9000"`                               |
+| scope                 | Y  | Input  | 事件订阅需要创建或更新的资源标识符。 请参阅[这里](#scope)了解更多详情。                                                                                                               | `"/subscriptions/{subscriptionId}/"`   |
+| eventSubscriptionName | N  | Input  | 事件订阅的名称。 事件订阅名称长度必须在3到64个字符之间，并且只能使用字母数字                                                                                                                | `"name"`                               |
+| accessKey             | Y  | Output | 将事件网格事件发布到自定义 topic 的访问密钥                                                                                                                               | `"accessKey"`                          |
+| topicEndpoint         | Y  | Output | 输出绑定应该在其中发布事件的 topic 端点                                                                                                                                 | `"topic-endpoint"`                     |
 
 ### Scope
 
-Scope is the identifier of the resource to which the event subscription needs to be created or updated. Scope is the identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an Event Grid topic. For example: For example:
-- `'/subscriptions/{subscriptionId}/'` for a subscription
-- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'` for a resource group
-- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'` for a resource
-- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'` for an Event Grid topic > Values in braces {} should be replaced with actual values.
+Scope 是事件订阅需要创建或更新的资源的标识符。 Scope 可以是订阅组，也可以是资源组。 或属于资源提供者命名空间或事件网格主题的顶级资源。 例如:
+- `'/subscriptions/{subscriptionId}/'` 单个订阅
+- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'` 资源组
+- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'` 资源
+- `'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'` 事件网格主题 > 在大括号 {} 中的内容应该替换为实际值.
 ## 相关链接
 
-This component supports both **input and output** binding interfaces.
+此组件支持 **输入和输出** 绑定接口。
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `create`
-## Additional information
+## 补充资料
 
-Event Grid Binding creates an [event subscription](https://docs.microsoft.com/en-us/azure/event-grid/concepts#event-subscriptions) when Dapr initializes. Your Service Principal needs to have the RBAC permissions to enable this. Your Service Principal needs to have the RBAC permissions to enable this.
+在Dapr初始化时，事件网格绑定会创建一个 [事件订阅](https://docs.microsoft.com/en-us/azure/event-grid/concepts#event-subscriptions)。 您的服务主要需要获得权限才能启用此功能。
 
 ```bash
-# First ensure that Azure Resource Manager provider is registered for Event Grid
+# 首先确保 Azure Resource Manager 提供商已注册事件网格
 az provider register --namespace Microsoft.EventGrid
 az provider show --namespace Microsoft.EventGrid --query "registrationState"
-# Give the SP needed permissions so that it can create event subscriptions to Event Grid
+# 给予SP 所需的权限，以便它可以创建事件订阅到事件网格
 az role assignment create --assignee <clientId> --role "EventGrid EventSubscription Contributor" --scopes <scope>
 ```
 
-_Make sure to also to add quotes around the `[HandshakePort]` in your Event Grid binding component because Kubernetes expects string values from the config._
+_请务必在事件网格绑定组件中同时添加引号 `[HandshakePort]` ，因为 Kubernetes 需要配置的字符串值。_
 
-### Testing locally
+### 本地测试
 
-- Install [ngrok](https://ngrok.com/download)
-- Run locally using custom port `9000` for handshakes
+- 安装 [ngrok](https://ngrok.com/download)
+- 在本地使用自定义端口 `9000` 进行握手
 
 ```bash
-# Using random port 9000 as an example
+# 使用随机端口 9000 作为示例
 ngrok http -host-header=localhost 9000
 ```
 
-- Configure the ngrok's HTTPS endpoint and custom port to input binding metadata
-- Run Dapr
+- 配置 ngrok 的 HTTPS 端点和自定义端口来输入绑定元数据
+- 运行 Dapr
 
 ```bash
-# Using default ports for .NET core web api and Dapr as an example
+# 使用 .NET core web api 和 Dapr 的默认端口作为示例
 dapr run --app-id dotnetwebapi --app-port 5000 --dapr-http-port 3500 dotnet run
 ```
 
-### Testing on Kubernetes
+### 在 Kubernetes 上测试
 
-Azure Event Grid requires a valid HTTPS endpoint for custom webhooks. Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/). Self signed certificates won't do. In order to enable traffic from public internet to your app's Dapr sidecar you need an ingress controller enabled with Dapr. There's a good article on this topic: [Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/).
+Azure 事件网格需要一个有效的 HTTPS 端点用于自定义 webhooks. 自签名证书是不行的。 为了使流量从公共互联网到你的应用程序的 Dapr sidecar，你需要一个启用了 Dapr 的 ingress 控制器。 有一篇关于这个主题的好文章:[Kubernetes NGINX ingress controller with Dapr](https://carlos.mendible.com/2020/04/05/kubernetes-nginx-ingress-controller-with-dapr/)。
 
-To get started, first create `dapr-annotations.yaml` for Dapr annotations
+若要开始，请首先为 Dapr 创建批注 `dapr-annotations.yaml`
 
 ```yaml
 controller:
@@ -124,21 +124,21 @@ controller:
       dapr.io/app-port: "80"
 ```
 
-Then install NGINX ingress controller to your Kubernetes cluster with Helm 3 using the annotations
+然后使用 Helm 3 安装 NGINX ingress controller 到您的 Kubernetes 集群使用
 
 ```bash
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm install nginx stable/nginx-ingress -f ./dapr-annotations.yaml -n default
-# Get the public IP for the ingress controller
+# 获取 ingress controller 的公开IP
 kubectl get svc -l component=controller -o jsonpath='Public IP is: {.items[0].status.loadBalancer.ingress[0].ip}{"\n"}'
 ```
 
-If deploying to Azure Kubernetes Service, you can follow [the official MS documentation for rest of the steps](https://docs.microsoft.com/en-us/azure/aks/ingress-tls)
-- Add an A record to your DNS zone
-- Install cert-manager
-- Create a CA cluster issuer
+如果部署到 Azure Kubernetes 服务, 你可以跟随 [官方的 MS 文档进行其余步骤](https://docs.microsoft.com/en-us/azure/aks/ingress-tls)
+- 添加一条记录到你的 DNS 区域
+- 安装证书管理器
+- 创建 CA 集群发行者（issuer）
 
-Final step for enabling communication between Event Grid and Dapr is to define `http` and custom port to your app's service and an `ingress` in Kubernetes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes. This example uses .NET Core web api and Dapr default ports and custom port 9000 for handshakes.
+开启事件网格与 Dapr 之间通信的最后一步是定义 `http` 和自定义端口到您应用的服务和一个 Kubernetes 中的 ` ingress `。 这个示例使用 .NET Core Web api 和 Dapr 默认端口和用于握手的自定义端口 9000 。
 
 ```yaml
 # dotnetwebapi.yaml
@@ -213,20 +213,20 @@ spec:
         imagePullPolicy: Always
 ```
 
-Deploy binding and app (including ingress) to Kubernetes
+部署绑定和应用 (包括ingress) 到 Kubernetes
 
 ```bash
-# Deploy Dapr components
+# 部署 Dapr 组件
 kubectl apply -f eventgrid.yaml
-# Deploy your app and Nginx ingress
+# 部署你的应用程序和 Nginx ingress
 kubectl apply -f dotnetwebapi.yaml
 ```
 
-> **Note:** This manifest deploys everything to Kubernetes default namespace.
+> **注意：** 此清单将所有内容都部署到 Kubernetes 默认命名空间中。
 
-#### Troubleshooting possible issues with Nginx controller
+#### 解决与 Nginx 控制器相关的可能的问题
 
-After initial deployment the "Daprized" Nginx controller can malfunction. To check logs and fix issue (if it exists) follow these steps. To check logs and fix issue (if it exists) follow these steps.
+在 Dapr 中初始部署后，Nginx cointroller 可能发生故障。 检查日志并修复问题 (如果存在的话) 可以遵循这些步骤。
 
 ```bash
 $ kubectl get pods -l app=nginx-ingress
@@ -251,10 +251,10 @@ $ kubectl delete pod nginx-nginx-ingress-controller-649df94867-fp6mg
 # .."OPTIONS /api/events HTTP/1.1" 200.. 
 ```
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
+- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})

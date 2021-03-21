@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "HowTo: Configure Pub/Sub components with multiple namespaces"
+title: "操作：配置具有多个命名空间的 Pub/Sub 组件"
 linkTitle: "Multiple namespaces"
 weight: 20000
-description: "Use Dapr Pub/Sub with multiple namespaces"
+description: "多个命名空间下使用Dapr Pub/Sub"
 ---
 
-In some scenarios, applications can be spread across namespaces and share a queue or topic via PubSub. In this case, the PubSub component must be provisioned on each namespace. In this case, the PubSub component must be provisioned on each namespace.
+在某些场景下，应用程序分布在不同的命名空间，并通过PubSub共享一个队列或主题。 在这种情况下，必须在每个命名空间上都提供PubSub组件。
 
 {{% alert title="Note" color="primary" %}}
-Namespaces are a Dapr concept used for scoping applications and components. This example uses Kubernetes namespaces, however the Dapr component namespace scoping can be used on any supported platform. Read [How-To: Scope components to one or more applications]({{< ref "component-scopes.md" >}}) for more information on scoping components. This example uses Kubernetes namespaces, however the Dapr component namespace scoping can be used on any supported platform. Read [How-To: Scope components to one or more applications]({{< ref "component-scopes.md" >}}) for more information on scoping components.
+命名空间是一个Dapr里的，用于确定应用程序和组件的作用范围概念。 这个例子使用的是Kubernetes的命名空间，然而Dapr组件的命名空间范围可以在任何支持的平台上使用。 请阅读[指南：将组件作用范围限定到一个或多个应用程序]({< ref "component-scopes.md" >}})，以了解更多关于组件作用范围限定的信息。
 {{% /alert %}}
 
-This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/pub-sub). The Redis installation and the subscribers are in `namespace-a` while the publisher UI is in `namespace-b`. This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/pub-sub). The Redis installation and the subscribers are in `namespace-a` while the publisher UI is in `namespace-b`. This solution will also work if Redis is installed on another namespace or if you use a managed cloud service like Azure ServiceBus, AWS SNS/SQS or GCP PubSub.
+这个例子使用了[PubSub示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)。 Redis安装和其订阅者在`namespace-a`中，而发布者UI在`namespace-b`中。 如果Redis安装在另一个命名空间上，或者使用Azure ServiceBus、AWS SNS/SQS或GCP PubSub等云服务，该解决方案也同样奏效。
 
-This is a diagram of the example using namespaces.
+这是一个使用命名空间的示例图片。
 
 <img src="/images/pubsub-multiple-namespaces.png" width=1000>
 <br></br>
 
-The table below shows which resources are deployed to which namespaces:
+下表描述了部署的资源和所在命名空间的对应关系：
 
-| Resource                | namespace-a | namespace-b |
+| 资源                      | namespace-a | namespace-b |
 | ----------------------- | ----------- | ----------- |
 | Redis master            | X           |             |
 | Redis slave             | X           |             |
@@ -30,22 +30,22 @@ The table below shows which resources are deployed to which namespaces:
 | Python subscriber       | X           |             |
 | React UI publisher      |             | X           |
 
-## Pre-requisites
+## 前提
 
-* [Dapr installed on Kubernetes]({{< ref "kubernetes-deploy.md" >}}) in any namespace since Dapr works at the cluster level.
-* Checkout and cd into the directory for [PubSub quickstart](https://github.com/dapr/quickstarts/tree/master/pub-sub).
+* 因为Dapr在集群层面工作的需要，[Dapr需要安装在任意Kubernetesr]({{< ref "kubernetes-deploy.md" >}})命名空间上。
+* 将 [PubSub quickstart](https://github.com/dapr/quickstarts/tree/master/pub-sub)示例git checkout下来并切到项目目录下。
 
-## Setup `namespace-a`
+## 设置`namespace-a`
 
-Create namespace and switch kubectl to use it.
+创建命名空间并用kubectl切入。
 ```
 kubectl create namespace namespace-a
 kubectl config set-context --current --namespace=namespace-a
 ```
 
-Install Redis (master and slave) on `namespace-a`, following [these instructions]({{< ref "configure-state-pubsub.md" >}}).
+在`namespace-a`上安装主从Redis，遵循 [这些说明]({{< ref "configure-state-pubsub.md" >}})。
 
-Now, configure `deploy/redis.yaml`, paying attention to the hostname containing `namespace-a`.
+现在，配置`deploy/redis.yaml`，注意包含`namespace-a`的主机名。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -62,53 +62,53 @@ spec:
     value: "YOUR_PASSWORD"
 ```
 
-Deploy resources to `namespace-a`:
+将资源部署到`namespace-a`：
 ```
 kubectl apply -f deploy/redis.yaml
 kubectl apply -f deploy/node-subscriber.yaml
 kubectl apply -f deploy/python-subscriber.yaml
 ```
 
-## Setup `namespace-b`
+## 设置`namespace-b`
 
-Create namespace and switch kubectl to use it.
+创建命名空间并用kubectl切入。
 ```
 kubectl create namespace namespace-b
 kubectl config set-context --current --namespace=namespace-b
 ```
 
-Deploy resources to `namespace-b`, including the Redis component:
+将资源部署到`namespace-b`，包括Redis组件:
 ```
 kubectl apply -f deploy/redis.yaml
 kubectl apply -f deploy/react-form.yaml
 ```
 
-Now, find the IP address for react-form, open it on your browser and publish messages to each topic (A, B and C).
+现在，找到react-form的IP地址，在浏览器上打开它，并将消息发布到每个主题（A、B、C）。
 ```
 kubectl get service -A
 ```
 
-## Confirm subscribers received the messages.
+## 确认订阅者收到信息
 
-Switch back to `namespace-a`:
+切换回 `namespace-a`:
 ```
 kubectl config set-context --current --namespace=namespace-a
 ```
 
-Find the POD names:
+查找POD名称：
 ```
-kubectl get pod # Copy POD names and use in the next commands.
+kubectl get pod # 复制POD名称并在接下来的命令中使用。
 ```
 
-Display logs:
+显示日志：
 ```
 kubectl logs node-subscriber-XYZ node-subscriber
 kubectl logs python-subscriber-XYZ python-subscriber
 ```
 
-The messages published on the browser should show in the corresponding subscriber's logs. The messages published on the browser should show in the corresponding subscriber's logs. The Node.js subscriber receives messages of type "A" and "B", while the Python subscriber receives messages of type "A" and "C".
+浏览器上发布的消息应该会显示在相应用户的日志中。 Node.js订阅者接收的消息类型为 "A "和 "B"，而Python订阅者接收的消息类型为 "A "和 "C"。
 
-## Clean up
+## 清理
 
 ```
 kubectl delete -f deploy/redis.yaml  --namespace namespace-a
@@ -123,6 +123,6 @@ kubectl delete namespace namespace-b
 
 ## 相关链接
 
-- [Scope components to one or more applications]({{< ref "component-scopes.md" >}})
-- [Use secret scoping]({{< ref "secrets-scopes.md" >}})
-- [Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}})
+- [限定组件作用范围在一至多个应用]({{< ref "component-scopes.md" >}})
+- [使用密钥范围界定]({{< ref "secrets-scopes.md" >}})
+- [限制可以从密钥仓库中读取的密钥]({{< ref "secret-scope.md" >}})
