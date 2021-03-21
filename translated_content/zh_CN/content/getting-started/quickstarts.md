@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "Try out Dapr quickstarts to learn core concepts"
-linkTitle: "Dapr Quickstarts"
+title: "尝试 Dapr 快速入门以学习核心概念"
+linkTitle: "Dapr 快速入门"
 weight: 60
-description: "Tutorials with code samples that are aimed to get you started quickly with Dapr"
+description: "教程与代码样本，旨在让你快速上手使用Dapr。"
 ---
 
-The [Dapr Quickstarts](https://github.com/dapr/quickstarts/tree/v1.0.0) are a collection of tutorials with code samples that are aimed to get you started quickly with Dapr, each highlighting a different Dapr capability.
+[Dapr 快速启动](https://github.com/dapr/quickstarts/tree/v1.0.0) 是代码样本的教程集合，旨在让您从 Dapr 快速入门，每个教程都突出了不同的 Dapr 功能。
 
-- A good place to start is the hello-world quickstart, it demonstrates how to run Dapr in standalone mode locally on your machine and demonstrates state management and service invocation in a simple application.
-- Next, if you are familiar with Kubernetes and want to see how to run the same application in a Kubernetes environment, look for the hello-kubernetes quickstart. Other quickstarts such as pub-sub, bindings and the distributed-calculator quickstart explore different Dapr capabilities include instructions for running both locally and on Kubernetes and can be completed in any order. A full list of the quickstarts can be found below. Other quickstarts such as pub-sub, bindings and the distributed-calculator quickstart explore different Dapr capabilities include instructions for running both locally and on Kubernetes and can be completed in any order. A full list of the quickstarts can be found below.
-- At anytime, you can explore the Dapr documentation or SDK specific samples and come back to try additional quickstarts.
-- When you're done, consider exploring the [Dapr samples repository](https://github.com/dapr/samples) for additional code samples contributed by the community that show more advanced or specific usages of Dapr.
+- 一个好的起点是hello-world快速入门，它演示了如何在本地机器上以独立模式运行Dapr，并在一个简单的应用程序中演示了状态管理和服务调用。
+- 接下来，如果您熟悉Kubernetes，想要看看如何在Kubernetes环境中运行相同的应用程序 寻找hello-kubernetes 快速入门。 其他快速入门，如pub-sub、bindings和distributed-calculator快速启动，探索不同的Dapr功能，包括本地和Kubernetes上运行的说明，可以按照任何顺序完成。 快速入门的完整列表可在下方找到。
+- 在任何时候，您可以浏览 Dapr 文档或 SDK 特定样本，然后回来尝试其他快速入门。
+- 当你完成后，可以考虑探索[Dapr样例库](https://github.com/dapr/samples)，查看由社区贡献的更多的代码样本，展示Dapr的更多高级或特定用途。
 
-## Quickstarts
+## 快速入门
 
-| Quickstart                                                                                       | 说明                                                                                                                                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Hello World](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)                       | Demonstrates how to run Dapr locally. Demonstrates how to run Dapr locally. Highlights service invocation and state management.                                                                                                                                                           |
-| [Hello Kubernetes](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-kubernetes)             | Demonstrates how to run Dapr in Kubernetes. Highlights service invocation and state management. Highlights service invocation and state management.                                                                                                                                       |
-| [Distributed Calculator](https://github.com/dapr/quickstarts/tree/v1.0.0/distributed-calculator) | Demonstrates a distributed calculator application that uses Dapr services to power a React web app. Highlights polyglot (multi-language) programming, service invocation and state management. Highlights polyglot (multi-language) programming, service invocation and state management. |
-| [Pub/Sub](https://github.com/dapr/quickstarts/tree/v1.0.0/pub-sub)                               | Demonstrates how to use Dapr to enable pub-sub applications. Uses Redis as a pub-sub component. Uses Redis as a pub-sub component.                                                                                                                                                        |
-| [Bindings](https://github.com/dapr/quickstarts/tree/v1.0.0/bindings)                             | Demonstrates how to use Dapr to create input and output bindings to other components. Uses bindings to Kafka. Uses bindings to Kafka.                                                                                                                                                     |
-| [Middleware](https://github.com/dapr/quickstarts/tree/v1.0.0/middleware)                         | Demonstrates use of Dapr middleware to enable OAuth 2.0 authorization.                                                                                                                                                                                                                    |
-| [Observability](https://github.com/dapr/quickstarts/tree/v1.0.0/observability)                   | Demonstrates Dapr tracing capabilities. Demonstrates Dapr tracing capabilities. Uses Zipkin as a tracing component.                                                                                                                                                                       |
-| [Secret Store](https://github.com/dapr/quickstarts/tree/v1.0.0/secretstore)                      | Demonstrates the use of Dapr Secrets API to access secret stores.                                                                                                                                                                                                                         |
+| 快速启动                                                                                             | 说明                                                                 |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| [Hello World](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)                       | 演示如何在本地运行Dapr。 重点介绍服务调用和状态管理。                                      |
+| [Hello Kubernetes](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-kubernetes)             | 演示如何在Kubernetes中运行Dapr。 重点介绍服务调用和状态管理。                             |
+| [Distributed Calculator](https://github.com/dapr/quickstarts/tree/v1.0.0/distributed-calculator) | 展示了一个分布式计算器应用，该应用使用Dapr服务来驱动React web应用。 重点介绍多语言（多语言）编程、服务调用和状态管理。 |
+| [Pub/Sub](https://github.com/dapr/quickstarts/tree/v1.0.0/pub-sub)                               | 演示如何使用Dapr启用 发布-订阅 应用程序。 使用Redis作为 发布-订阅 组件。                       |
+| [Bindings](https://github.com/dapr/quickstarts/tree/v1.0.0/bindings)                             | 演示如何使用Dapr创建与其他组件的输入和输出绑定。 使用与Kafka的绑定。                            |
+| [Middleware](https://github.com/dapr/quickstarts/tree/v1.0.0/middleware)                         | 演示使用Dapr中间件来实现OAuth 2.0授权。                                         |
+| [Observability](https://github.com/dapr/quickstarts/tree/v1.0.0/observability)                   | 展示Dapr跟踪能力。 使用Zipkin作为跟踪组件。                                        |
+| [Secret Store](https://github.com/dapr/quickstarts/tree/v1.0.0/secretstore)                      | 演示使用Dapr Secrets API来访问密钥存储。                                       |

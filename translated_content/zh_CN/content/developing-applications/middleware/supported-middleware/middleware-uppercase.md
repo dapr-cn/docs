@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Uppercase request body"
-linkTitle: "Uppercase"
+title: "大写请求实体"
+linkTitle: "大写"
 weight: 9999
-description: "Test your HTTP pipeline is functioning with the uppercase middleware"
+description: "测试您的 HTTP 管道与大写中间件一起运行"
 ---
 
-The uppercase [HTTP middleware]({{< ref middleware-concept.md >}}) converts the body of the request to uppercase letters and is used for testing that the pipeline is functioning. It should only be used for local development. It should only be used for local development.
+大写 [HTTP midleware]({{< ref middleware-concept.md >}}) 将请求的正文转换为大写字母，并用于测试管道正在起作用。 它只应用于本地开发。
 
-## Component format
+## 组件格式
 
-In the following definition, the maximum requests per second are set to 10:
+根据下述定义，请求正文转换为大写字母：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -22,11 +22,11 @@ spec:
   version: v1
 ```
 
-This component has no `metadata` to configure.
+此组件没有要配置的 `metadata`。
 
-## Dapr configuration
+## Dapr 配置
 
-To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+要应用中间件，必须在[配置]({{< ref configuration-concept.md >}})中引用。 请参阅[中间件管道]({{< ref "middleware-concept.md#customize-processing-pipeline">}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -42,6 +42,6 @@ spec:
 
 ## 相关链接
 
-- [Middleware concept]({{< ref middleware-concept.md >}})
-- [Configuration concept]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview.md >}})
+- [中间件概念]({{< ref middleware-concept.md >}})
+- [配置概念]({{< ref configuration-concept.md >}})
+- [配置概览]({{< ref configuration-overview.md >}})

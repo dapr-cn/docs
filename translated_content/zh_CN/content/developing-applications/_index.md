@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Developing applications with Dapr"
+title: "使用Dapr开发应用程序"
 linkTitle: "Developing applications"
-description: "Tools, tips, and information on how to build your application with Dapr"
+description: "如何使用Dapr构建应用程序的工具、技巧和信息。"
 weight: 30
 ---
 

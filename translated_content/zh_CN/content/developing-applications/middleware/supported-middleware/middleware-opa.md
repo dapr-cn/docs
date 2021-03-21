@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Apply Open Policy Agent (OPA) policies"
-linkTitle: "Open Policy Agent (OPA)"
+title: "应用开放策略代理 (OPA) 策略"
+linkTitle: "开放策略代理 (OPA)"
 weight: 6000
-description: "Use middleware to apply Open Policy Agent (OPA) policies on incoming requests"
+description: "使用中间件对传入的请求应用开放策略代理（OPA）策略。"
 ---
 
-The Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware-concept.md >}}) applys [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. This can be used to apply reusable authorization policies to app endpoints. This can be used to apply reusable authorization policies to app endpoints.
+开放策略代理（OPA）[HTTP 中间件]({{< ref middleware-concept.md >}})将[OPA 策略](https://www.openpolicyagent.org/)应用到传入的 Dapr HTTP 请求中。 这可以用来将可重用的授权策略应用到应用终结点。
 
-## Component format
+## 组件格式
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -83,21 +83,22 @@ spec:
             [_, jwt] := split(auth_header, " ")
             [_, payload, _] := io.jwt.decode(jwt)
         }
+         
 ```
 
-You can prototype and experiment with policies using the [official opa playground](https://play.openpolicyagent.org). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE). For example, [you can find the example policy above here](https://play.openpolicyagent.org/p/oRIDSo6OwE).
+您可以使用 [官方 opa playground](https://play.openpolicyagent.org)对策略进行原型设计和实验。 例如，[您可以在这里找到上面的示例策略](https://play.openpolicyagent.org/p/oRIDSo6OwE)。
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段              | Details                                                                                                                                                                                                                                                                                                                | 示例                                                                |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| rego            | The Rego policy language                                                                                                                                                                                                                                                                                               | See above                                                         |
-| defaultStatus   | The status code to return for denied responses                                                                                                                                                                                                                                                                         | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
-| includedHeaders | A comma-separated set of case-insensitive headers to include in the request input. Request headers are not passed to the policy by default. Include to receive incoming request headers in the input Request headers are not passed to the policy by default. Include to receive incoming request headers in the input | `"x-my-custom-header, x-jwt-header"`                              |
+| 字段              | 详情                                                             | 示例                                                                |
+| --------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
+| rego            | Rego策略语言                                                       | 见上文                                                               |
+| defaultStatus   | 状态码返回拒绝的响应                                                     | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
+| includedHeaders | 一组以逗号分隔的不区分大小写的头信息，包含在请求输入中。 默认情况下，请求头不会传递给策略。 在输入中包含接收传入的请求头。 | `"x-my-custom-header, x-jwt-header"`                              |
 
-## Dapr configuration
+## Dapr 配置
 
-To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+要应用中间件，必须在[配置]({{< ref configuration-concept.md >}})中引用。 请参阅[中间件管道]({{< ref "middleware-concept.md#customize-processing-pipeline">}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -111,22 +112,16 @@ spec:
       type: middleware.http.opa
 ```
 
-## Input
+## 输入
 
-This middleware supplies a [`HTTPRequest`](#httprequest) as input.
+这个中间件提供了一个 [`HTTPRequest`](#httprequest) 作为输入。
 
-### HTTPRequest
+### HTTP请求
 
-The `HTTPRequest` input contains all the revelant information about an incoming HTTP Request except it's body.
+`HTTPRequest` 输入包含所有关于传入HTTP请求的透彻信息，但它的正文除外。
 
 ```go
 type Input struct {
-  request HTTPRequest
-}
-
-type HTTPRequest struct {
-  // The request method (e.g. GET,POST,etc...)
-  type Input struct {
   request HTTPRequest
 }
 
@@ -147,17 +142,13 @@ type HTTPRequest struct {
   headers map[string]string
   // The request scheme (e.g. http, https)
   scheme string
-} You must specify what headers
-  // you want to receive via `spec.metadata.includedHeaders` (see above)
-  headers map[string]string
-  // The request scheme (e.g. http, https)
-  scheme string
 }
+     
 ```
 
-## Result
+## 结果
 
-The policy must set `data.http.allow` with either a `boolean` value, or an `object` value with an `allow` boolean property. A `true` `allow` will allow the request, while a `false` value will reject the request with the status specified by `defaultStatus`. The following policy, with defaults, demonstrates a `403 - Forbidden` for all requests: A `true` `allow` will allow the request, while a `false` value will reject the request with the status specified by `defaultStatus`. The following policy, with defaults, demonstrates a `403 - Forbidden` for all requests:
+策略必须设置 `data.http.allow` 带有 `boolean` 值或者一个 `object` 值与一个 `allow` 布尔属性。 `true` `allow` 将允许请求 当一个 `false` 值将以 `defaultStatus` 指定的状态拒绝请求。 下面的策略，在默认情况下，演示了对所有请求的 `403 - Forbidden`:
 
 ```go
 package http
@@ -165,7 +156,7 @@ package http
 default allow = false
 ```
 
-which is the same as:
+等价于：
 
 ```go
 package http
@@ -175,9 +166,9 @@ default allow = {
 }
 ```
 
-### Changing the rejected response status code
+### 更改拒绝的响应状态代码
 
-When rejecting a request, you can override the status code the that gets returned. For example, if you wanted to return a `401` instead of a `403`, you could do the following: For example, if you wanted to return a `401` instead of a `403`, you could do the following:
+拒绝请求时，您可以覆盖返回的状态代码。 例如，如果您想退回 `401` 而不是 `403`，你可以这样做：
 
 ```go
 package http
@@ -188,9 +179,9 @@ default allow = {
 }
 ```
 
-### Adding response headers
+### 添加响应头
 
-To redirect, add headers and set the `status_code` to the returned result:
+若要重定向，添加消息头并将 `status_code` 设置为返回的结果：
 
 ```go
 package http
@@ -204,9 +195,9 @@ default allow = {
 }
 ```
 
-### Adding request headers
+### 添加请求头
 
-You can also set additional headers on the allowed request:
+你也可以在允许的请求上设置额外的头信息：
 
 ```go
 package http
@@ -220,7 +211,7 @@ allow = { "allow": true, "additional_headers": { "X-JWT-Payload": payload } } {
 }
 ```
 
-### Result structure
+### 结果结构
 ```go
 type Result bool
 // or
@@ -236,8 +227,8 @@ type Result struct {
 
 ## 相关链接
 
-- [Open Policy Agent](https://www.openpolicyagent.org)
-- [HTTP API example](https://www.openpolicyagent.org/docs/latest/http-api-authorization/)
-- [Middleware concept]({{< ref middleware-concept.md >}})
-- [Configuration concept]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview.md >}})
+- [开放策略代理](https://www.openpolicyagent.org)
+- [HTTP API 示例](https://www.openpolicyagent.org/docs/latest/http-api-authorization/)
+- [中间件概念]({{< ref middleware-concept.md >}})
+- [配置概念]({{< ref configuration-concept.md >}})
+- [配置概览]({{< ref configuration-overview.md >}})

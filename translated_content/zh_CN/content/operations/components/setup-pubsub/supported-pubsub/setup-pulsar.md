@@ -2,11 +2,11 @@
 type: docs
 title: "Pulsar"
 linkTitle: "Pulsar"
-description: "Detailed documentation on the Pulsar pubsub component"
+description: "关于Pulsar pubsub组件的详细文档"
 ---
 
-## Component format
-To setup Pulsar pubsub create a component of type `pubsub.pulsar`. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## 组件格式
+要设置Pulsar pubsub，请创建一个`pubsub.pulsar`类型的组件。 请参阅 [本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -24,15 +24,15 @@ spec:
     value: "false"
 
 ```
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段        | Required | Details                                                                                   | Example             |
-| --------- |:--------:| ----------------------------------------------------------------------------------------- | ------------------- |
-| host      |    Y     | Address of the Pulsar broker. Address of the Pulsar broker. Default is `"localhost:6650"` | `"localhost:6650"`  |
-| enableTLS |    Y     | Enable TLS.  Enable TLS.  Default: `"false"`                                              | `"true"`, `"false"` |
+| 字段        | 必填 | 详情                                         | 示例                  |
+| --------- |:--:| ------------------------------------------ | ------------------- |
+| host      | Y  | Pulsar broker. 地址， 默认值是 `"localhost:6650"` | `"localhost:6650"`  |
+| enableTLS | Y  | 启用TLS  默认值为 `"false"`                      | `"true"`, `"false"` |
 
 
-## Create a Pulsar instance
+## 创建 Pulsar 实例
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
@@ -50,12 +50,12 @@ docker run -it \
 {{% /codetab %}}
 
 {{% codetab %}}
-Refer to the following [Helm chart](https://pulsar.apache.org/docs/en/kubernetes-helm/) Documentation.
+请参考以下[Helm chart](https://pulsar.apache.org/docs/en/kubernetes-helm/)文档。
 {{% /codetab %}}
 
 {{< /tabs >}}
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
-- [Pub/Sub building block]({{< ref pubsub >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 请访问 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) ，了解如何配置 pub/sub 组件
+- [发布/订阅构建块]({{< ref pubsub >}})

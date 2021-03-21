@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Deploy and run Dapr in Kubernetes mode"
+title: "在 Kubernetes 模式中部署和运行 Dapr"
 linkTitle: "Kubernetes"
 weight: 2000
-description: "How to get Dapr up and running on your Kubernetes cluster"
+description: "如何在您的 Kubernetes 集群上启动和运行 Dapr"
 ---
 

@@ -5,9 +5,9 @@ linkTitle: "Cloudstate"
 description: Detailed information on the Cloudstate state store component
 ---
 
-## Component format
+## 组件格式
 
-To setup Cloudstate state store create a component of type `state.cloudstate`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置Cloudstate状态存储，请创建一个类型为`state.cloudstate`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
@@ -26,47 +26,47 @@ spec:
     value: <REPLACE-WITH-PORT>
 ```
 
-## Spec metadata fields
+## Spec 元数据字段
 
-| 字段         | Required | Details                                                                                                                                                                                                                            | Example            |
-| ---------- |:--------:| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| hosts      |    Y     | Specifies the address for the Cloudstate API                                                                                                                                                                                       | `"localhost:8013"` |
-| serverPort |    Y     | Specifies the port to be opened in Dapr for Cloudstate to callback to. This can be any free port that is not used by either your application or Dapr This can be any free port that is not used by either your application or Dapr | `"8080"`           |
+| 字段         | Required | Details                                                  | Example            |
+| ---------- |:--------:| -------------------------------------------------------- | ------------------ |
+| hosts      |    Y     | 指定Cloudstate API 地址                                      | `"localhost:8013"` |
+| serverPort |    Y     | 指定要在 Dapr 中打开的 Cloudstate 回调端口。 这需要是你的应用程序或 Dapr 没有占用的端口 | `"8080"`           |
 
-> Since Cloudstate is running as an additional sidecar in the pod, you can reach it via `localhost` with the default port of `8013`.
+> 由于 Cloudstate 在 pod 中作为额外的 边车运行，你可以通过 `localhost` 以默认端口 `8013` 访问它。
 
-## Introduction
+## 介绍
 
-The Cloudstate-Dapr integration is unique in the sense that it enables developers to achieve high-throughput, low latency scenarios by leveraging Cloudstate running as a sidecar *next* to Dapr, keeping the state near the compute unit for optimal performance while providing replication between multiple instances that can be safely scaled up and down. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities.
+Cloudstate-Dapr 的独特之处在于，它使开发人员能够通过让 Cloudstate 作为 *紧邻* Dapr 的边车运行来实现高吞吐量、低延迟的场景，以此将状态保持在计算单元附近以获得最佳性能，同时提供可安全扩缩容的多个实例之间的复制能力。 这是由于Cloudstate在其边车之间形成了一个 Akka 集群，并在内存中复制实体。
 
-Dapr leverages Cloudstate's CRDT capabilities with last-write-wins semantics.
+Dapr 利用 Cloudstate 的 CRDT (无冲突可复制数据类型) 功能与last-write-wins的语义。
 
-## Setup Cloudstate
+## 安装 Cloudstate
 
-To install Cloudstate on your Kubernetes cluster, run the following commands:
+要在 Kubernetes 集群上安装 Cloudstate，请执行以下命令:
 
 ```
 kubectl create namespace cloudstate
 kubectl apply -n cloudstate -f https://github.com/cloudstateio/cloudstate/releases/download/v0.5.0/cloudstate-0.5.0.yaml
 ```
 
-This installs Cloudstate into the `cloudstate` namespace with version `0.5.0`.
+这会把 Cloudstate 安装到版本为 `0.5.0` 的 `cloudstate` 命名空间中。
 
-## Apply the configuration
+## 应用配置
 
-### In Kubernetes
+### 在Kubernetes中
 
-To apply the Cloudstate state store to Kubernetes, use the `kubectl` CLI:
+要将Cloudstate状态存储应用到Kubernetes，请使用`kubectl` CLI。
 
 ```
 kubectl apply -f cloudstate.yaml
 ```
 
-## Running the Cloudstate sidecar alongside Dapr
+## 注入 Cloudstate 边车到 Dapr
 
-The next examples shows you how to manually inject a Cloudstate sidecar into a Dapr enabled deployment:
+下面的例子展示了如何将 Cloudstate 边车手动注入到启用了Dapr的deployment中。
 
-*Notice the `HTTP_PORT` for the `cloudstate-sidecar` container is the port to be used in the Cloudstate component yaml in `host`.*
+*请注意，`cloudstate-sidecar`容器的`HTTP_PORT`是`host`中Cloudstate组件yaml中要使用的端口。*
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -165,7 +165,7 @@ subjects:
   name: default
 ```
 
-## Related links
+## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})

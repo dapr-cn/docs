@@ -2,11 +2,11 @@
 type: docs
 title: "Azure Service Bus"
 linkTitle: "Azure Service Bus"
-description: "Detailed documentation on the Azure Service Bus pubsub component"
+description: "关于 Azure Service Bus pubsub 组件的详细文档"
 ---
 
-## Component format
-To setup Azure Event Hubs pubsub create a component of type `pubsub.azure.servicebus`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+## 组件格式
+要安装 Azure Event Hubs pubsub ，请创建一个类型为 `pubsub.azure.servicebus` 的组件。 请参阅 [本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -46,35 +46,35 @@ spec:
     value: 10
 ```
 
-> __NOTE:__ The above settings are shared across all topics that use this component.
+> __注意：__上述设置在使用该组件的所有主题中是通用的。
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}}})描述的密钥存储。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段                             | Required | Details                                                                                                                      | Example                                                                                                                                        |
-| ------------------------------ |:--------:| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| connectionString               |    Y     | Connection-string for the Event Hubs                                                                                         | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
-| timeoutInSec                   |    N     | Timeout for sending messages and management operations. Default: `60` Default: `60`                                          | `30`                                                                                                                                           |
-| handlerTimeoutInSec            |    N     | Timeout for invoking app handler. # Optional. Default: `60` # Optional. Default: `60`                                        | `30`                                                                                                                                           |
-| disableEntityManagement        |    N     | When set to true, topics and subscriptions do not get created automatically. Default: `"false"` Default: `"false"`           | `"true"`, `"false"`                                                                                                                            |
-| maxDeliveryCount               |    N     | Defines the number of attempts the server will make to deliver a message. Default set by server Default set by server        | `10`                                                                                                                                           |
-| lockDurationInSec              |    N     | Defines the length in seconds that a message will be locked for before expiring. Default set by server Default set by server | `30`                                                                                                                                           |
-| lockRenewalInSec               |    N     | Defines the frequency at which buffered message locks will be renewed. Default: `20`. Default: `20`.                         | `20`                                                                                                                                           |
-| maxActiveMessages              |    N     | Defines the maximum number of messages to be buffered or processing at once. Default: `10000` Default: `10000`               | `2000`                                                                                                                                         |
-| maxActiveMessagesRecoveryInSec |    N     | Defines the number of seconds to wait once the maximum active message limit is reached. Default: `2` Default: `2`            | `10`                                                                                                                                           |
-| maxConcurrentHandlers          |    N     | Defines the maximum number of concurrent message handlers                                                                    | `10`                                                                                                                                           |
-| prefetchCount                  |    N     | Defines the number of prefetched messages (use for high throughput / low latency scenarios)                                  | `5`                                                                                                                                            |
-| defaultMessageTimeToLiveInSec  |    N     | Default message time to live.                                                                                                | `10`                                                                                                                                           |
-| autoDeleteOnIdleInSec          |    N     | Time in seconds to wait before auto deleting messages.                                                                       | `10`                                                                                                                                           |
+| 字段                             | 必填 | 详情                                       | 示例                                                                                                                                             |
+| ------------------------------ |:--:| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| connectionString               | Y  | Event Hubs的连接地址                          | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
+| timeoutInSec                   | N  | 发送消息和其他管理操作的超时时间。 默认值：`60`               | `30`                                                                                                                                           |
+| handlerTimeoutInSec            | N  | 调用应用handler的超时。 # 可选的。 默认值：`60`          | `30`                                                                                                                                           |
+| disableEntityManagement        | N  | 设置为 "true "时，主题和订阅不会自动创建。 默认值为 `"false"` | `"true"`, `"false"`                                                                                                                            |
+| maxDeliveryCount               | N  | 定义服务器发送消息的尝试次数。 由服务端默认设置                 | `10`                                                                                                                                           |
+| lockDurationInSec              | N  | 定义消息过期前被锁定的时长，以秒为单位。 由服务端默认设置            | `30`                                                                                                                                           |
+| lockRenewalInSec               | N  | 定义缓冲消息锁的更新频率。 默认值：`20`.                  | `20`                                                                                                                                           |
+| maxActiveMessages              | N  | 定义一次要缓冲或处理的消息的最大数量。 默认值：`10000`          | `2000`                                                                                                                                         |
+| maxActiveMessagesRecoveryInSec | N  | 定义达到最大活跃消息限制后等待的时长(秒) 默认值：`2`            | `10`                                                                                                                                           |
+| maxConcurrentHandlers          | N  | 定义并发消息处理器的最大数量                           | `10`                                                                                                                                           |
+| prefetchCount                  | N  | 定义预取消息的数量(用于高吞吐量/低延迟场景)                  | `5`                                                                                                                                            |
+| defaultMessageTimeToLiveInSec  | N  | 默认消息存活时间                                 | `10`                                                                                                                                           |
+| autoDeleteOnIdleInSec          | N  | 自动删除消息前等待的时间(秒)                          | `10`                                                                                                                                           |
 
-## Create an Azure Service Bus
+## 创建Azure Service Bus
 
-Follow the instructions [here](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-quickstart-topics-subscriptions-portal) on setting up Azure Service Bus Topics.
+请按照[此处](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-quickstart-topics-subscriptions-portal)的说明设置Azure Service Bus Topics。
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Pub/Sub building block]({{< ref pubsub >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [发布/订阅构建块]({{< ref pubsub >}})
+- 请访问 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) ，了解如何配置 pub/sub 组件

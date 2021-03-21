@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Middleware"
+title: "中间件"
 linkTitle: "中间件"
 weight: 50
-description: "Customize processing pipelines by adding middleware components"
+description: "通过添加中间件组件自定义处理管道"
 ---
 
