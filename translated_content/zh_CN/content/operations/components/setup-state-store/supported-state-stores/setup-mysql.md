@@ -2,12 +2,12 @@
 type: docs
 title: "MySQL"
 linkTitle: "MySQL"
-description: Detailed information on the MySQL state store component
+description: MySQL 状态存储组件的详细信息
 ---
 
-## Component format
+## 配置
 
-To setup MySQL state store create a component of type `state.mysql`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置 MySQL 状态储存，请创建一个类型为 `state.mysql`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
@@ -31,24 +31,24 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件，参考 [此处]({{< ref component-secrets.md >}}})的说明。
 {{% /alert %}}
 
-If you wish to use MySQL as an actor store, append the following to the yaml.
+如果您想要使用 MySQL 作为 Actor 存储，请在 yaml 上附上以下内容。
 
 ```yaml
   - name: actorStateStore
     value: "true"
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段               | Required | Details                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                      |
-| ---------------- |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| connectionString |    Y     | The connection string to connect to MySQL. Do not add the schema to the connection string Do not add the schema to the connection string                             | [Non SSL connection](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL Connection](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
-| schemaName       |    N     | The schema name to use. Will be created if schema does not exist. The schema name to use. Will be created if schema does not exist. Defaults to `"dapr_state_store"` | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                                                           |
-| tableName        |    N     | The table name to use. The table name to use. Will be created if table does not exist. Defaults to `"state"` Defaults to `"state"`                                   | `"table_name"`, `"dapr_state"`                                                                                                                                                                                                                                                               |
-| pemPath          |    N     | Full path to the PEM file to use for [enforced SSL Connection](#enforced-ssl-connection)                                                                             | `"/path/to/file.pem"`, `"C:\path\to\file.pem"`                                                                                                                                                                                                                                            |
+| 字段               | 必填 | 详情                                                                                                                                                                   | 示例                                                                                                                                                                                                                                                                       |
+| ---------------- |:--:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| connectionString | 是  | 用于连接到 MySQL 的连接串。 请不要将schema添加到连接串中。                                                                                                                                 | [非SSL连接](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL 连接](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
+| schemaName       | N  | The schema name to use. Will be created if schema does not exist. The schema name to use. Will be created if schema does not exist. Defaults to `"dapr_state_store"` | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                                       |
+| tableName        | N  | The table name to use. The table name to use. Will be created if table does not exist. Defaults to `"state"` Defaults to `"state"`                                   | `"table_name"`, `"dapr_state"`                                                                                                                                                                                                                                           |
+| pemPath          | N  | Full path to the PEM file to use for [enforced SSL Connection](#enforced-ssl-connection)                                                                             | `"/path/to/file.pem"`, `"C:\path\to\file.pem"`                                                                                                                                                                                                                        |
 
 ## Setup MySQL
 
