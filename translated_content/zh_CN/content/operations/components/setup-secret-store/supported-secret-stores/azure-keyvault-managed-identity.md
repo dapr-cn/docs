@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "Azure Key Vault with Managed Identities on Kubernetes"
+title: "Azure Key Vault 和Kubernetes上的Managed Identities"
 linkTitle: "Azure Key Vault w/ Managed Identity"
-description: How to configure Azure Key Vault and Kubernetes to use Azure Managed Identities to access secrets
+description: 如何配置Azure Key Vault和Kubernetes以使用Azure Managed Identities来获取密钥
 ---
 
-## Component format
+## 配置
 
-To setup Azure Key Vault secret store with Managed Identies create a component of type `secretstores.azure.keyvault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置Azure Key Vault密钥仓库，请创建一个类型为`secretstores.azure.keyvault`的组件。 请参阅 [本指南]({{< ref "secret-stores-overview.md#apply-the-configuration" >}})，了解如何创建和应用 secretstore 配置。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
-In Kubernetes mode, you store the certificate for the service principal into the Kubernetes Secret Store and then enable Azure Key Vault secret store with this certificate in Kubernetes secretstore.
+在Kubernetes中，将服务主体的证书存储到Kubernetes Secret Store中，然后用Kubernetes secretstore中的这个证书启用Azure Key Vault密钥仓库。
 
-The component yaml uses the name of your key vault and the Cliend ID of the managed identity to setup the secret store.
+组件yaml使用你的密钥仓库的名称和托管标识的Cliend ID来配置密钥仓库。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,26 +30,26 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将密钥明文存储。 建议将密钥存储在本地，如 [Kubernetes密钥仓库]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段          | Required | Details                         | Example        |
-| ----------- |:--------:| ------------------------------- | -------------- |
-| vaultName   |    Y     | The name of the Azure Key Vault | `"mykeyvault"` |
-| spnClientId |    Y     | Your managed identity client Id | `"yourId"`     |
+| 字段          | 必填 | 详情                | 例子             |
+| ----------- |:--:| ----------------- | -------------- |
+| vaultName   | Y  | Azure Key Vault名称 | `"mykeyvault"` |
+| spnClientId | Y  | 你的托管标识客户端ID       | `"yourId"`     |
 
-## Setup Managed Identity and Azure Key Vault
+## 设置Managed Identity和 Azure Key Vault
 
-### Prerequisites
+### 前期准备
 
 - [Azure Subscription](https://azure.microsoft.com/en-us/free/)
 - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 
-### Steps
+### 步骤
 
-1. Login to Azure and set the default subscription
+1. 登录到 Azure 并设置默认订阅
 
     ```bash
     # Log in Azure
