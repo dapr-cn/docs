@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "How-To: Set up Fluentd, Elastic search and Kibana in Kubernetes"
+title: "操作方法：在 Kubernetes 中搭建 Fluentd、Elastic search 和 Kibana"
 linkTitle: "FluentD"
 weight: 1000
-description: "How to install Fluentd, Elastic Search, and Kibana to search logs in Kubernetes"
+description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜索日志"
 ---
 
 ## 前期准备
@@ -13,9 +13,9 @@ description: "How to install Fluentd, Elastic Search, and Kibana to search logs 
 - [Helm 3](https://helm.sh/)
 
 
-## Install Elastic search and Kibana
+## 安装 Elasticsearch 和 Kibana
 
-1.  Create namespace for monitoring tool and add Helm repo for Elastic Search
+1.  为监测工具创建命名空间并添加 Helm Repo 用于Elastic Search
 
     ```bash
     kubectl create namespace dapr-monitoring
