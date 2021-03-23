@@ -1,19 +1,19 @@
 ---
 type: docs
-title: "Local file (for Development)"
-linkTitle: "Local file"
-description: Detailed information on the local file secret store component
+title: "本地文件 (用于开发)"
+linkTitle: "本地文件"
+description: 详细介绍了关于本地文件密钥仓库组件的信息
 ---
 
-This Dapr secret store component reads plain text JSON from a given file and does not use authentication.
+这个Dapr密钥仓库组件不使用身份认证，而是读取JSON文本。
 
 {{% alert title="Warning" color="warning" %}}
-This approach to secret management is not recommended for production environments.
+这种密钥管理的方法不建议用于生产环境。
 {{% /alert %}}
 
-## Component format
+## 配置
 
-To setup local file based secret store create a component of type `secretstores.local.file`. Create a file with the following content in your `./components` directory: Create a file with the following content in your `./components` directory:
+要设置基于本地文件密钥仓库，请创建一个类型为`secretstores.local.file`的组件。 在你的`./components`目录下创建一个包含以下内容的文件:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,16 +31,16 @@ spec:
     value: ":"
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段              | Required | Details                                                                                            | Example               |
-| --------------- |:--------:| -------------------------------------------------------------------------------------------------- | --------------------- |
-| secretsFile     |    Y     | The path to the file where secrets are stored                                                      | `"path/to/file.json"` |
-| nestedSeparator |    N     | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"` Defaults to `":"` | `":"`                 |
+| 字段              | 必填 | 详情                                  | 示例                    |
+| --------------- |:--:| ----------------------------------- | --------------------- |
+| secretsFile     | Y  | 存储密钥的文件路径                           | `"path/to/file.json"` |
+| nestedSeparator | N  | 在将JSON层次结构扁平化为map时，被仓库使用 默认值为 `":"` | `":"`                 |
 
-## Setup JSON file to hold the secrets
+## 设置 JSON 文件来保存密钥
 
-Given the following json:
+提供以下json：
 
 ```json
 {
@@ -52,18 +52,18 @@ Given the following json:
 }
 ```
 
-The store will load the file and create a map with the following key value pairs:
+仓库将加载文件并创建一个具有以下键值对的map:
 
-| flattened key             | value                          |
+| 扁平键                       | 值                              |
 | ------------------------- | ------------------------------ |
 | "redis"                   | "your redis password"          |
 | "connectionStrings:sql"   | "your sql connection string"   |
 | "connectionStrings:mysql" | "your mysql connection string" |
 
-Use the flattened key (`connectionStrings:sql`) to access the secret.
+使用扁平键 (`connectionStrings:sql`)来访问密钥。
 
 ## 相关链接
-- [Secrets building block]({{< ref secrets >}})
-- [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})
-- [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
-- [Secrets API reference]({{< ref secrets_api.md >}})
+- [密钥构建块]({{< ref secrets >}})
+- [指南：获取密钥]({{< ref "howto-secrets.md" >}})
+- [指南：在Dapr组件中引用密钥]({{< ref component-secrets.md >}})
+- [密钥 API 参考]({{< ref secrets_api.md >}})
