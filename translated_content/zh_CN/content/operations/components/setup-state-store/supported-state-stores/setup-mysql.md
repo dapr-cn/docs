@@ -31,7 +31,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件，参考 [此处]({{< ref component-secrets.md >}})的说明。
+以上示例将 Secret 明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}})描述的密钥仓库来存储密钥。
 {{% /alert %}}
 
 如果您想要使用 MySQL 作为 Actor 存储，请在 yaml 上附上以下内容。
@@ -43,25 +43,25 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 详情                                                                                                                                                                   | 示例                                                                                                                                                                                                                                                                       |
-| ---------------- |:--:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| connectionString | 是  | 用于连接到 MySQL 的连接串。 请不要将schema添加到连接串中。                                                                                                                                 | [非SSL连接](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL 连接](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
-| schemaName       | N  | The schema name to use. Will be created if schema does not exist. The schema name to use. Will be created if schema does not exist. Defaults to `"dapr_state_store"` | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                                       |
-| tableName        | N  | The table name to use. The table name to use. Will be created if table does not exist. Defaults to `"state"` Defaults to `"state"`                                   | `"table_name"`, `"dapr_state"`                                                                                                                                                                                                                                           |
-| pemPath          | N  | Full path to the PEM file to use for [enforced SSL Connection](#enforced-ssl-connection)                                                                             | `"/path/to/file.pem"`, `"C:\path\to\file.pem"`                                                                                                                                                                                                                        |
+| 字段               | 必填 | 详情                                                                  | 示例                                                                                                                                                                                                                                                                       |
+| ---------------- |:--:| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| connectionString | 是  | 用于连接到 MySQL 的连接串。 请不要将schema添加到连接串中。                                | [非SSL连接](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL 连接](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
+| schemaName       | 否  | 要使用的schema名称。 如果指定的schema不存在，将会自动创建。 默认值为 `"dapr_state_store"`      | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                                       |
+| tableName        | 否  | 要使用的表名。 如果对应的表不存在，将被自动创建。 默认值为 `"state"`                            | `"table_name"`, `"dapr_state"`                                                                                                                                                                                                                                           |
+| pemPath          | 否  | 使用 [enforced SSL 连接](#enforced-ssl-connection) 时，指定要使用的 PEM 文件完整路径。 | `"/path/to/file.pem"`, `"C:\path\to\file.pem"`                                                                                                                                                                                                                        |
 
-## Setup MySQL
+## 设置 MySQL
 
-Dapr can use any MySQL instance - containerized, running on your local dev machine, or a managed cloud service.
+Dapr 可以使用任意的 MySQL 实例 - 无论它是运行在本地开发机上的、容器化的还是托管在云上的。
 
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
 <!-- Self-Hosted -->
 
-Run an instance of MySQL. Run an instance of MySQL. You can run a local instance of MySQL in Docker CE with the following command:
+运行一个MySQL实例。 你可以在 Docker CE 中使用下面的命令运行一个本地的 MySQL 实例：
 
-This example does not describe a production configuration because it sets the password in plain text and the user name is left as the MySQL default of "root".
+这个示例不是用于描述生产环境配置的，因为它使用明文设置密码，并且用户名使用了 MySQL 默认的root。
 
 ```bash
 docker run --name dapr-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
@@ -72,23 +72,23 @@ docker run --name dapr-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d
 {{% codetab %}}
 <!-- Kubernetes -->
 
-We can use [Helm](https://helm.sh/) to quickly create a MySQL instance in our Kubernetes cluster. This approach requires [Installing Helm](https://github.com/helm/helm#install). This approach requires [Installing Helm](https://github.com/helm/helm#install).
+我们可以使用 [Helm](https://helm.sh/) 在 Kubernetes 集群中快速创建一个 MySQL 实例。 这种方法需要 [安装 Helm](https://github.com/helm/helm#install)。
 
-1. Install MySQL into your cluster.
+1. 安装 MySQL 到您的集群。
 
     ```bash
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm install dapr-mysql bitnami/mysql
     ```
 
-1. Run `kubectl get pods` to see the MySQL containers now running in your cluster.
+1. 执行`kubectl get pods`来查看现在正在集群中运行的MySQL容器。
 
-1. Next, we'll get our password, which is slightly different depending on the OS we're using:
-    - **Windows**: Run `[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($(kubectl get secret --namespace default dapr-mysql -o jsonpath="{.data.mysql-root-password}")))` and copy the outputted password.
+1. 接下来，我们会获取到我们的MySQL密码，根据我们使用的操作系统不同，密码也会略有不同：
+    - **Windows**: 运行 `[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($(kubectl get secret --namespace default dapr-mysql -o jsonpath="{.data.mysql-root-password}")))` 然后复制输出的密码。
 
-    - **Linux/MacOS**: Run `kubectl get secret --namespace default dapr-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode` and copy the outputted password.
+    - **Linux/MacOS**: 运行 `kubectl get secret --namespace default dapr-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode` 并复制输出的密码。
 
-1. With the password you can construct your connection string.
+1. 你可以使用密码你的构建连接串。
 
 {{% /codetab %}}
 
@@ -97,7 +97,7 @@ We can use [Helm](https://helm.sh/) to quickly create a MySQL instance in our Ku
 
 [Azure MySQL](http://bit.ly/AzureMySQL)
 
-If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate.
+如果你使用 [运行在 Azure 上的 MySQL](http://bit.ly/AzureMySQLSSL) 请查阅 Azure [关于SSL数据库连接的文档](http://bit.ly/MySQLSSL)，来了解有关如何下载必要凭证的信息。
 
 {{% /codetab %}}
 
@@ -119,11 +119,11 @@ If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [do
 
 ### Non SSL connection
 
-Replace the `<CONNECTION STRING>` value with your connection string. The connection string is a standard MySQL connection string. For example, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`. The connection string is a standard MySQL connection string. For example, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`.
+Replace the `<CONNECTION STRING>` value with your connection string. The connection string is a standard MySQL connection string. For example, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`.
 
 ### Enforced SSL connection
 
-If your server requires SSL your connection string must end with `&tls=custom` for example, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"`. You must replace the `<PEM PATH>` with a full path to the PEM file. The connection to MySQL will require a minimum TLS version of 1.2. You must replace the `<PEM PATH>` with a full path to the PEM file. The connection to MySQL will require a minimum TLS version of 1.2.
+If your server requires SSL your connection string must end with `&tls=custom` for example, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"`. You must replace the `<PEM PATH>` with a full path to the PEM file. The connection to MySQL will require a minimum TLS version of 1.2.
 
 ## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
