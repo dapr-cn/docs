@@ -117,7 +117,7 @@ docker run --name dapr-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d
 
 {{< /tabs >}}
 
-### Non SSL connection
+### 非 SSL 连接
 
 Replace the `<CONNECTION STRING>` value with your connection string. The connection string is a standard MySQL connection string. For example, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`.
 
