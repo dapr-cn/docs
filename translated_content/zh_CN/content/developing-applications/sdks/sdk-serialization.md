@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Dapr SDK中的序列化"
-linkTitle: "序列化（Serialization）"
+linkTitle: "序列化"
 description: "Dapr如何在SDK中序列化数据"
 weight: 2000
 aliases:
@@ -139,7 +139,7 @@ redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928
 {"value":"My data value."}
 ```
 3. 自定义序列化工具必须将对象序列化为`byte[]`类型。
-4. Custom serializers must deserialize `byte[]` to object.
+4. 自定义序列化工具必须将`byte[]`反序列化为对象。
 5. 当用户提供一个自定义的序列化工具时，它应该以`byte[]`的形式被传输或持久化， 持久化时，也应当编码为Base64字符串， 大多数JSON库都能够完成这个功能。
 ```bash
 redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||message
