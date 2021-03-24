@@ -46,15 +46,15 @@ Dapr 状态管理组件不同程度地支持以下存储:
 | [AWS DynamoDB]({{< ref setup-dynamodb.md>}}) | ✅    | ❌  | ❌    | ❌      | Alpha       | v1                      | 1.0       |
 
 ### Google Cloud Platform (GCP)
-| 名称                                              | CRUD | 事务 | ETag | Actors | 状态 （Status） | Component version | Since |
-| ----------------------------------------------- | ---- | -- | ---- | ------ | ----------- | ----------------- | ----- |
-| [GCP Firestore]({{< ref setup-firestore.md >}}) | ✅    | ❌  | ❌    | ❌      | Alpha       | v1                | 1.0   |
+| 名称                                              | CRUD | 事务 | ETag | Actors | 状态 （Status） | 组件版本(Component version) | 自从(Since) |
+| ----------------------------------------------- | ---- | -- | ---- | ------ | ----------- | ----------------------- | --------- |
+| [GCP Firestore]({{< ref setup-firestore.md >}}) | ✅    | ❌  | ❌    | ❌      | Alpha       | v1                      | 1.0       |
 
 ### Microsoft Azure
 
-| Name                                                           | CRUD | Transactional | ETag | Actors | Status | Component version | Since |
-| -------------------------------------------------------------- | ---- | ------------- | ---- | ------ | ------ | ----------------- | ----- |
-| [Azure Blob Storage]({{< ref setup-azure-blobstorage.md >}})   | ✅    | ❌             | ✅    | ❌      | GA     | v1                | 1.0   |
-| [Azure CosmosDB]({{< ref setup-azure-cosmosdb.md >}})          | ✅    | ✅             | ✅    | ✅      | GA     | v1                | 1.0   |
-| [Azure SQL Server]({{< ref setup-sqlserver.md >}})             | ✅    | ✅             | ✅    | ✅      | Alpha  | v1                | 1.0   |
-| [Azure Table Storage]({{< ref setup-azure-tablestorage.md >}}) | ✅    | ❌             | ✅    | ❌      | Alpha  | v1                | 1.0   |
+| 名称                                                             | CRUD | 事务 | ETag | Actors | 状态 （Status） | 组件版本(Component version) | 自从(Since) |
+| -------------------------------------------------------------- | ---- | -- | ---- | ------ | ----------- | ----------------------- | --------- |
+| [Azure Blob Storage]({{< ref setup-azure-blobstorage.md >}})   | ✅    | ❌  | ✅    | ❌      | GA          | v1                      | 1.0       |
+| [Azure CosmosDB]({{< ref setup-azure-cosmosdb.md >}})          | ✅    | ✅  | ✅    | ✅      | GA          | v1                      | 1.0       |
+| [Azure SQL Server]({{< ref setup-sqlserver.md >}})             | ✅    | ✅  | ✅    | ✅      | Alpha       | v1                      | 1.0       |
+| [Azure Table Storage]({{< ref setup-azure-tablestorage.md >}}) | ✅    | ❌  | ✅    | ❌      | Alpha       | v1                      | 1.0       |
