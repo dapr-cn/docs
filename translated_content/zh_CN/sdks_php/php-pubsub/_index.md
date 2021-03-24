@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Publish and Subscribe with PHP"
+title: "使用 PHP 发布和订阅"
 linkTitle: "Publish and Subscribe"
 weight: 1000
 description: How to use
