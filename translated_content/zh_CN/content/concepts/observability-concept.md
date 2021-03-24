@@ -17,28 +17,28 @@ description: >
 在利用 Dapr 构建块来执行服务到服务调用和 pub/sub 消息传递构建应用程序时， Dapr 拥有相对于 [distributed tracing]({{X9X}}) 的优势，因为此服务间通信全部流经 Dapr sidecar，sidecar 处于这样独特的位置，可以消除应用程序级别检测的负担。
 
 ### 分布式跟踪
-Dapr can be [configured to emit tracing data]({{X11X}}), and because Dapr does so using widely adopted protocols such as the [Zipkin](https://zipkin.io) protocol, it can be easily integrated with multiple [monitoring backends]({{X12X}}).
+Dapr 可以 [配置发送跟踪数据]({{X11X}})，并且由于 Dapr 使用广泛采用的协议（如 [Zipkin](https://zipkin.io) 协议）进行跟踪，因此可以轻松地集成多个 [监控后端]({{X12X}})。
 
 <img src="/images/observability-tracing.png" width=1000 alt="使用 Dapr 进行分布式跟踪">
 
-### {{< ref open-telemetry-collector.md >}}
-Dapr 还可以通过配置来使用 [OpenTelemetry Collector]({{X17X}}) ，它会提供更多与外部监控工具的兼容性。
+### OpenTelemetry 收集器
+Dapr 还可以通过配置来使用 [OpenTelemetry Collector]({{X17X}}) ，它会提供更多与外部监控工具的兼容性。
 
 <img src="/images/observability-opentelemetry-collector.png" width=1000 alt="通过 OpenTelemetry collector 进行分布式跟踪">
 
 ### 跟踪上下文
-例如，Dapr sidecar和用户应用之间的服务指标显示调用延迟、流量故障、请求的错误率等。
+Dapr 使用 [W3C 跟踪]({{X20X}}) 规范来跟踪上下文，并可以生成和传播上下文头本身或传播用户提供的上下文头。
 
-## 指标
-对于系统的其他部分，您将希望能够观察 Dapr 本身并收集 Dapr sidecar 发出的度量和日志，这些度量和日志沿每个微服务运行，以及在环境中的 Dapr 相关服务，例如为启用Dapr的Kubernetes集群部署的控制平面服务。
+## Dapr sidecar 和系统服务的可观察性
+至于系统的其他部分，您希望能够观察 Dapr 本身，并收集 Dapr sidecar 沿每个微服务以及您环境中的 Dapr 相关服务（如部署在 Dapr 启用的 Kubernetes 集群中的控制面板服务）发出的指标和日志。
 
-<img src="/images/observability-sidecar.png" width=1000 alt="Dapr sidecar 计量、日志和健康检查">
+<img src="/images/observability-sidecar.png" width=1000 alt="Dapr sidecar 度量、日志和健康检查">
 
 ### 日志
-Dapr生成 [日志]({{X23X}}) 以提供sidecar操作的可见性，并帮助用户识别问题和执行调试操作。 日志事件包含由 Dapr 系统服务生成的警告，错误，信息和调试消息。 Dapr 还可以通过配置将日志发送到收集器，例如 [Fluentd]({{< ref fluentd.md >}}) 和 [Azure Monitor]({{< ref azure-monitor.md >}}) ，这样就可以轻松搜索，分析和提供洞察。
+Dapr 生成 [日志]({{X23X}})，以提供 sidecar 操作的可见性，并帮助用户识别问题并执行调试。 日志事件包含由 Dapr 系统服务生成的警告，错误，信息和调试消息。 Dapr 还可以通过配置将日志发送到收集器，例如 [Fluentd]({{< ref fluentd.md >}}) 和 [Azure Monitor]({{< ref azure-monitor.md >}}) ，这样就可以轻松搜索，分析和提供洞察。
 
 ### 指标
-指标（Metrics）是在一段时间内收集和存储的一系列度量值和计数。 [Dapr 指标]({{X27X}}) 提供监控功能，以了解 Dapr sidecar 和系统服务的行为。 例如，Dapr sidecar 和用户应用之间的服务指标可以展示调用延迟、流量故障、请求的错误率等。 Dapr 的[系统服务度量](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md) 则可以显示 sidecar 注入失败，系统服务的运行状况 ( 包括 CPU 使用率，actor 位置数量等) 。
+指标（Metrics）是在一段时间内收集和存储的一系列度量值和计数。 [Dapr 指标]({{X27X}}) 提供监控功能，以了解 Dapr sidecar 和系统服务的行为。 例如，Dapr sidecar 和用户应用之间的服务指标可以展示调用延迟、流量故障、请求的错误率等。 Dapr [系统服务指标](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md) 显示 sidecar 注入故障、系统服务的健康（包括 CPU 使用情况、actor placement 次数等）。
 
 ### 健康状态
-Dapr 为托管平台提供了一种使用 HTTP 端点来确定其 [健康状况]({{X30X}}) 的方法。 通过此端点，可以探测 Dapr 进程或 sidecar，以确定它的准备度和活跃度，并采取相应的行动。 
+Dapr sidecar 暴露了 [健康检查]({{X30X}})的 HTTP 终结点。 通过此终结点，可以探测 Dapr 进程或 sidecar，以确定它的准备度和活跃度，并采取相应的行动。 
