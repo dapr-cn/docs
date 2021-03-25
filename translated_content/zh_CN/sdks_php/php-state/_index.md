@@ -20,7 +20,7 @@ $app->run(
         $stateManager->save_state('statestore', new \Dapr\State\StateItem('key', 'value', metadata: ['port' => '112'])));
 ```
 
-这是您如何将元数据传递给 [Cassandra]({{< ref setup-cassandra.md >}}) 的一个例子。
+这是为您展示如何将元数据传递给 [Cassandra]({{< ref setup-cassandra.md >}}) 的一个例子。
 
 每个状态操作都允许传递元数据。
 
