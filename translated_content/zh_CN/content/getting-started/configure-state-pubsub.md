@@ -30,11 +30,11 @@ Dapr可以使用任何Redis实例--无论是在本地开发机器上的容器化
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
-Redis is automatically installed in self-hosted environments by the Dapr CLI as part of the initialization process. You are all set and can skip to the \[next steps\](next steps) 您都已设置完毕，可以跳转到\[下一步\](下一步)
+作为初始化过程的一部分，Dapr CLI 会自动在自托管环境中安装 Redis。 您都已设置完毕，可以跳转到\[下一步\](下一步)
 {{% /codetab %}}
 
 {{% codetab %}}
-You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm v3](https://github.com/helm/helm#install). 此方法需要 [安装 Helm v3](https://github.com/helm/helm#install)。
+您可以使用 [helm](https://helm.sh/) 在我们的 Kubernetes 集群中快速创建 dapr 实例。 此方法需要 [安装 Helm v3](https://github.com/helm/helm#install)。
 
 1. 安装 Redis 到您的集群：
 
@@ -127,7 +127,7 @@ spec:
       key: redis-password
 ```
 
-这个例子使用的是用上面的说明设置集群时创建的kubernetes秘密。
+这个例子使用的是用上面的说明设置集群时创建的 kubernetes 密钥。
 
 {{% alert title="Other stores" color="primary" %}}
 如果使用 Redis 以外的其他状态存储，请参考 [支持的状态存储]({{< ref supported-state-stores >}})，了解要设置哪些选项。
@@ -155,7 +155,7 @@ spec:
       key: redis-password
 ```
 
-这个例子使用的是用上面的说明设置集群时创建的kubernetes秘密。
+这个例子使用的是用上面的说明设置集群时创建的 kubernetes 密钥。
 
 {{% alert title="Other stores" color="primary" %}}
 如果使用 Redis 以外的 发布/订阅 消息代理，请参考 [支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})，了解要设置哪些选项。
@@ -163,7 +163,7 @@ spec:
 
 ### 硬编码密码（不推荐）
 
-仅用于开发目的，你可以跳过创建kubernetes秘密，直接将密码放入Dapr组件文件中。
+仅用于开发目的，你可以跳过创建 kubernetes 密钥，直接将密码放入 Dapr 组件文件中。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
