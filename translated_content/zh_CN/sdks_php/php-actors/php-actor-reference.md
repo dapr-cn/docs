@@ -1,13 +1,13 @@
 ---
-type: docs
-title: "Production Reference: Actors"
+type: 文档
+title: "参考：actor"
 linkTitle: "Production Reference"
 weight: 1000
-description: Running PHP actors in production
+description: 在生产中使用 PHP actor
 no_list: true
 ---
 
-## Proxy modes
+## 代理模式
 
 There are four different modes actor proxies are handled. Each mode presents different trade-offs that you'll need to weigh during development and in production.
 
