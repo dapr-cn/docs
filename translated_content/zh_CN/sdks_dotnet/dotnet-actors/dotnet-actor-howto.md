@@ -14,7 +14,7 @@ description: Try out .NET virtual actors with this example
 
 ## Overview
 
-This document describes how to create an Actor(`MyActor`) and invoke its methods on the client application.
+本文档描述了如何创建一个Actor(`MyActor`) 并从客户端程序调用其方法。
 
 ```
 MyActor --- MyActor.Interfaces
