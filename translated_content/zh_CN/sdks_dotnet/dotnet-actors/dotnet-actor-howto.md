@@ -355,7 +355,7 @@ dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
 
 ### Invoke Actor method with Actor Service Remoting
 
-We recommend to use the local proxy to actor instance because `ActorProxy.Create<IMyActor>(actorID, actorType)` returns strongly-typed actor instance to set up the remote procedure call.
+我们建议使用actor实例的本地代理，因为 `ActorProxy.Create<IMyActor>(actorID, actorType)`返回强类型的actor实例来配置远程过程调用。
 
 ```csharp
 namespace MyActorClient
@@ -390,9 +390,9 @@ namespace MyActorClient
 ```
 
 ### Invoke Actor method without Actor Service Remoting
-You can invoke Actor methods without remoting (directly over http or using helper methods provided in ActorProxy), if Actor method accepts at-most one argument. Actor runtime will deserialize the incoming request body from client and use it as method argument to invoke the actor method. When making non-remoting calls Actor method arguments and return types are serialized, deserialized as JSON.
+如果actor方法接受最多一个参数，您可以无需使用remoting来调用actor方法(直接通过 http 或使用 ActorProxy 提供的辅助方法)。 Actor 运行时将会反序列化从客户端接收到的请求体，并将其作为方法参数来调用actor方法。 当进行non-remoting调用，Actor方法参数和返回值会被序列化，反序列化为 JSON 。
 
-`ActorProxy.Create(actorID, actorType)` returns ActorProxy instance and allow to use the raw http client to invoke the method defined in `IMyActor`.
+`ActorProxy.Create(actorID, actorType)` 返回ActorProxy实例，并且可以使用原始的http client 来调用在 `IMyActor`中定义的方法。
 
 ```csharp
 namespace MyActorClient
@@ -436,7 +436,7 @@ In order to validate and debug actor service and client, we need to run actor se
    $ dapr run --app-id myapp --app-port 5000 --dapr-http-port 3500 dotnet run
    ```
 
-   After executing MyActorService via Dapr runtime, make sure that application is discovered on port 5000 and actor connection is established successfully.
+   通过 Dapr 运行时执行 MyActorService 后，请确保应用程序在 5000 端口被发现，并成功建立actor连接。
 
    ```bash
     INFO[0000] starting Dapr Runtime -- version  -- commit
@@ -464,9 +464,9 @@ In order to validate and debug actor service and client, we need to run actor se
 
 2. Run MyActorClient
 
-   MyActorClient will console out if it calls actor hosted in MyActorService successfully.
+   如果MyActorClient成功的调用了MyActorService中的actor，它将会在控制台进行输出。
 
-   > If you specify the different Dapr runtime http port (default port: 3500), you need to set DAPR_HTTP_PORT environment variable before running the client. 
+   > 如果你指定了不同的Dapr运行时http端口（默认端口：3500），你需要在运行客户端之前设置DAPR_HTTP_PORT环境变量。 
    > 
    > ```bash
    >    Success
