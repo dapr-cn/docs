@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "DaprClient usage"
+title: "DaprClient 使用"
 linkTitle: "DaprClient usage"
 weight: 100000
-description: Essential tips and advice for using DaprClient
+description: 使用 DaprClient 的基本提示和建议
 ---
 
-## Lifetime management
+## 生命周期管理
 
-A `DaprClient` holds access to networking resources in the form of TCP sockets used to communicate with the Dapr sidecar. `DaprClient` implements `IDisposable` to support eager cleanup of resources.
+`DaprClient` 能够以TCP 套接口的形式访问网络资源，与 Dapr sidecar 通信。 `DaprClient` 实现 `IDisposable` 以支持主动的资源清理。
 
-For best performance, create a single long-lived instance of `DaprClient` and provide access to that shared instance throughout your application. `DaprClient` instances are thread-safe and intended to be shared.
+为了获得最佳性能，请创建一个长期存在的 `DaprClient` 实例，并在整个应用程序中提供访问该共享实例的访问权限。 `DaprClient` 实例是线程安全的并且允许共享的。
 
-Avoid creating a `DaprClient` per-operation and disposing it when the operation is complete.
+避免每个操作创建一个 `DaprClient` 并在操作完成后释放它。
 
-## Configuring DaprClient
+## 配置 DaprClient
 
 A `DaprClient` can be configured by invoking methods on `DaprClientBuilder` class before calling `.Build()` to create the client. The settings for each `DaprClient` object are separate and cannot be changed after calling `.Build()`.
 
