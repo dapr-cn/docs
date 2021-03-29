@@ -9,7 +9,7 @@ no_list: true
 
 ## 代理模式
 
-There are four different modes actor proxies are handled. Each mode presents different trade-offs that you'll need to weigh during development and in production.
+Actor 代理有四种处理方式。 每种模式都需要您在开发和生产过程中权衡。
 
 ```php
 <?php
@@ -19,17 +19,17 @@ There are four different modes actor proxies are handled. Each mode presents dif
 \Dapr\Actors\Generators\ProxyFactory::DYNAMIC;
 ```
 
-It can be set with `dapr.actors.proxy.generation` configuration key.
+它可以使用 `dapr.actors.proxy.generate` 配置密钥。
 
 {{< tabs "GENERATED" "GENERATED_CACHED" "ONLY_EXISTING" "DYNAMIC" >}}
 {{% codetab %}}
 
-This is the default mode. In this mode, a class is generated and `eval`'d on every request. It's mostly for development and shouldn't be used in production.
+这是默认的模式。 在这种模式下，每次请求都会生成一个 `eval`类， 它主要用于开发环境而不能应用于生产。
 
 {{% /codetab %}}
 {{% codetab %}}
 
-This is the same as `ProxyModes::GENERATED` except the class is stored in a tmp file so it doesn't need to be regenerated on every request. It doesn't know when to update the cached class, so using it in development is discouraged but is offered for when manually generating the files isn't possible.
+这与 `ProxyModes::GENERATED` 相同，但这个类存储在临时文件中，所以不需要 在每个请求中重新生成。 It doesn't know when to update the cached class, so using it in development is discouraged but is offered for when manually generating the files isn't possible.
 
 {{% /codetab %}}
 {{% codetab %}}
