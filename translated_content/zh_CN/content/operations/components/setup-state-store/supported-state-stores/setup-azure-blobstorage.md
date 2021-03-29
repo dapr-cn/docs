@@ -2,12 +2,12 @@
 type: docs
 title: "Azure Blob Storage"
 linkTitle: "Azure Blob Storage"
-description: Detailed information on the Azure Blob Store state store component
+description: 关于Azure Blob Store状态存储组件的详细信息
 ---
 
-## Component format
+## 配置
 
-To setup Azure Blobstorage state store create a component of type `state.azure.blobstorage`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置 Azure Blobstorage状态存储，请创建一个类型为`state.azure.blobstorage`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
@@ -29,17 +29,17 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用密钥储存，请参阅 [此处]({{< ref component-secrets.md >})。
 {{% /alert %}}
 
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段            | Required | Details                                                                                                                                                                  | Example               |
-| ------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
-| accountName   |    Y     | The storage account name                                                                                                                                                 | `"mystorageaccount"`. |
-| accountKey    |    Y     | Primary or secondary storage key                                                                                                                                         | `"key"`               |
-| containerName |    Y     | The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist The container will be created for you if it doesn't exist | `"container"`         |
+| 字段            | 必填 | 详情                                                                                                                                                                       | Example               |
+| ------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
+| accountName   | Y  | The storage account name                                                                                                                                                 | `"mystorageaccount"`. |
+| accountKey    | Y  | Primary or secondary storage key                                                                                                                                         | `"key"`               |
+| containerName | Y  | The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist The container will be created for you if it doesn't exist | `"container"`         |
 
 ## Setup Azure Blobstorage
 
