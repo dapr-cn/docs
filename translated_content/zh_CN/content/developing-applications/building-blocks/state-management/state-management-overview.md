@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "状态管理概览"
-linkTitle: "Secrets stores overview"
+linkTitle: "概述"
 weight: 100
 description: "状态管理构建块概览"
 ---
@@ -15,7 +15,7 @@ description: "状态管理构建块概览"
 - 分布式并发和数据一致性
 - 批量[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) 操作
 
-Your application can use Dapr's state management API to save and read key/value pairs using a state store component, as shown in the diagram below. 例如，通过使用HTTP POST可以保存键/值对，通过使用HTTP GET可以读取一个键并返回它的值。
+你的应用程序可以使用Dapr的状态管理API，使用状态存储组件保存和读取键/值对，如下图所示。 例如，通过使用HTTP POST可以保存键/值对，通过使用HTTP GET可以读取一个键并返回它的值。
 
 <img src="/images/state-management-overview.png" width=900>
 
