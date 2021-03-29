@@ -2,12 +2,12 @@
 type: docs
 title: "Aerospike"
 linkTitle: "Aerospike"
-description: Detailed information on the Aerospike state store component
+description: 关于Aerospike状态存储组件的详细信息
 ---
 
-## Component format
+## 配置
 
-To setup Aerospike state store create a component of type `state.Aerospike`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置Aerospike 状态存储，请创建一个类型为`state.Aerospike`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -20,11 +20,7 @@ spec:
   version: v1
   metadata:
   - name: hosts
-    value: <REPLACE-WITH-HOSTS> # Required. A comma delimited string of hosts. Example: "aerospike:3000,aerospike2:3000"
-  - name: namespace
-    value: <REPLACE-WITH-NAMESPACE> # Required. The aerospike namespace.
-  - name: set
-    value: <REPLACE-WITH-SET> # Optional A comma delimited string of hosts. Example: "aerospike:3000,aerospike2:3000"
+    value: <REPLACE-WITH-HOSTS> # Required. 逗号分隔的服务器地址 Example: "aerospike:3000,aerospike2:3000"
   - name: namespace
     value: <REPLACE-WITH-NAMESPACE> # Required. The aerospike namespace.
   - name: set
@@ -32,42 +28,42 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用密钥储存，请参阅 [此处]({{< ref component-secrets.md >})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段        | Required | Details                           | Example                                                |
-| --------- |:--------:| --------------------------------- | ------------------------------------------------------ |
-| hosts     |    Y     | Host name/port of database server | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
-| namespace |    Y     | The Aerospike namespace           | `"namespace"`                                          |
-| set       |    N     | The setName in the database       | `"myset"`                                              |
+| 字段        | 必填 | 详情              | 例子                                                     |
+| --------- |:--:| --------------- | ------------------------------------------------------ |
+| hosts     | Y  | 数据库服务器主机名/端口    | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
+| namespace | Y  | Aerospike 命名空间。 | `"namespace"`                                          |
+| set       | N  | 数据库中的 setname   | `"myset"`                                              |
 
-## Setup Aerospike
+## 安装Aerospike
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
-{{% codetab %}}
-You can run Aerospike locally using Docker:
+{% codetab %}
+您可以使用 Docker 在本地运行 Aerospike ：
 
 ```
 docker run -d --name aerospike -p 3000:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 aerospike
 ```
 
-You can then interact with the server using `localhost:3000`.
+然后您可以使用 `localhost:3000` 与服务器交互。
 {{% /codetab %}}
 
 {{% codetab %}}
-The easiest way to install Aerospike on Kubernetes is by using the [Helm chart](https://github.com/helm/charts/tree/master/stable/aerospike):
+在 Kubernetes 上安装Aerospike 最简单的方法是使用[Helm chart](https://github.com/helm/charts/tree/master/stable/aerospike)：
 
 ```
 helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
 helm install --name my-aerospike --namespace aerospike stable/aerospike
 ```
 
-This installs Aerospike into the `aerospike` namespace. This installs Aerospike into the `aerospike` namespace. To interact with Aerospike, find the service with: `kubectl get svc aerospike -n aerospike`.
+这将把Aerospike安装到`aerospike`命名空间。 要与Aerospike交互，请使用以下方法找到服务：`kubectl get svc aerospike -n aerospike`。
 
-For example, if installing using the example above, the Aerospike host address would be:
+例如，如果使用上面的例子安装，Aerospike 主机地址将是：
 
 `aerospike-my-aerospike.aerospike.svc.cluster.local:3000`
 {{% /codetab %}}
@@ -75,6 +71,6 @@ For example, if installing using the example above, the Aerospike host address w
 {{< /tabs >}}
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
+- [状态管理构建块]({{< ref state-management >}})
