@@ -29,18 +29,18 @@ Actor 代理有四种处理方式。 每种模式都需要您在开发和生产�
 {{% /codetab %}}
 {{% codetab %}}
 
-这与 `ProxyModes::GENERATED` 相同，但这个类存储在临时文件中，所以不需要 在每个请求中重新生成。 It doesn't know when to update the cached class, so using it in development is discouraged but is offered for when manually generating the files isn't possible.
+这与 `ProxyModes::GENERATED` 相同，但这个类存储在临时文件中，所以不需要在每个请求中重新生成。 它不知道何时更新缓存的类，也无法手动生成文件时提供，因此不建议在开发中使用它
 
 {{% /codetab %}}
 {{% codetab %}}
 
-In this mode, an exception is thrown if the proxy class doesn't exist. This is useful for when you don't want to generate code in production. You'll have to make sure the class is generated and pre-/autoloaded.
+在这种模式下，如果不存在代理类，将会抛出异常。 可以用在当你不想在生产生产环境中生成代码时 您必须确保class生成并自动加载。
 
-### Generating proxies
+### 生成代理
 
-You can create a composer script to generate proxies on demand to take advantage of the `ONLY_EXISTING` mode.
+您可以创建一个编写器脚本来根据需要生成代理，以利用`ONLY_EXISTING`模式。
 
-Create a `ProxyCompiler.php`
+创建 `ProxyCompiler.php`
 
 ```php
 <?php
@@ -73,7 +73,7 @@ class ProxyCompiler {
 }
 ```
 
-Then add a psr-4 autoloader for the generated proxies and a script in `composer.json`:
+然后在 `composer.json` 中为生成的代理添加一个 psr-4 自动加载器和脚本：
 
 ```json
 {
@@ -88,7 +88,7 @@ Then add a psr-4 autoloader for the generated proxies and a script in `composer.
 }
 ```
 
-And finally, configure dapr to only use the generated proxies:
+最后，将dapr配置为仅使用生成的代理：
 
 ```php
 <?php
@@ -102,18 +102,18 @@ return [
 {{% /codetab %}}
 {{% codetab %}}
 
-In this mode, the proxy satisfies the interface contract, however, it does not actually implement the interface itself (meaning `instanceof` will be `false`). This mode takes advantage of a few quirks in PHP to work and exists for cases where code cannot be `eval`'d or generated.
+然而，在这种模式下，代理人满足了接口契约。 它实际上没有实现接口本身 (意指 `instanceof` 将是 `false`). 这种模式利用了PHP中的一些特性来工作，并适用于某些情况 其中code不能是`eval`'d或生成。
 
 {{% /codetab %}}
 {{< /tabs >}}
 
-### Requests
+### 请求列表
 
-Creating an actor proxy is very inexpensive for any mode. There are no requests made when creating an actor proxy object.
+无论使用哪种模式，创建actor代理都是非常方便的。 在创建actor代理对象时不会发出请求。
 
-When you call a method on a proxy object, only methods that you implemented are serviced by your actor implementation. `get_id()` is handled locally, and `get_reminder()`, `delete_reminder()`, etc. are handled by the `daprd`.
+当您在代理对象上调用方法时，actor只会为您实现的方法提供服务。 `get_id()` 是本地处理的， `get_emergder()`, `delete_emergder()`, 等由 `daprd` 处理。
 
-## Actor implementation
+## 添加Actor实现
 
 Every actor implementation in PHP must implement `\Dapr\Actors\IActor` and use the `\Dapr\Actors\ActorTrait` trait. This allows for fast reflection and some shortcuts. Using the `\Dapr\Actors\Actor` abstract base class does this for you, but if you need to override the default behavior, you can do so by implementing the interface and using the trait.
 
