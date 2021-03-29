@@ -35,39 +35,39 @@ spec:
 
 ## 元数据字段规范
 
-| 字段            | 必填 | 详情                                                                                                                                                                       | Example               |
-| ------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
-| accountName   | Y  | The storage account name                                                                                                                                                 | `"mystorageaccount"`. |
-| accountKey    | Y  | Primary or secondary storage key                                                                                                                                         | `"key"`               |
-| containerName | Y  | The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist The container will be created for you if it doesn't exist | `"container"`         |
+| 字段            | 必填 | 详情                           | 例子                    |
+| ------------- |:--:| ---------------------------- | --------------------- |
+| accountName   | Y  | 存储帐户名称                       | `"mystorageaccount"`. |
+| accountKey    | Y  | 主要或次要存储密钥                    | `"key"`               |
+| containerName | Y  | Dapr 状态的容器名称， 如果容器不存在，将会自动创建 | `"container"`         |
 
-## Setup Azure Blobstorage
+## 安装Azure Blobstorage
 
-[Follow the instructions](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) from the Azure documentation on how to create an Azure Storage Account.
+[请遵循 Azure 文档中关于如何创建 Azure Storage Account的说明](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)。
 
-If you wish to create a container for Dapr to use, you can do so beforehand. If you wish to create a container for Dapr to use, you can do so beforehand. However, Blob Storage state provider will create one for you automatically if it doesn't exist.
+如果你想创建一个容器供Dapr使用，你可以事先这样做。 但是，当 Blob Storage状态提供者会在其不存在时为你自动创建。
 
-In order to setup Azure Blob Storage as a state store, you will need the following properties:
-- **AccountName**: The storage account name. For example: **mystorageaccount**. For example: **mystorageaccount**.
-- **AccountKey**: Primary or secondary storage key.
-- **ContainerName**: The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist. The container will be created for you if it doesn't exist.
+要将 Azure Blob Storage配置为状态存储，你需要如下属性：
+- **AccountName**：存储账户名称 举例：**mystorageaccount**
+- **AccountKey**：主要或次要存储密钥。
+- **ContainerName**：用于Dapr状态的容器名称。 如果容器不存在，将会自动创建.
 
-## Apply the configuration
+## 应用配置
 
-### In Kubernetes
+### 在Kubernetes中
 
-To apply Azure Blob Storage state store to Kubernetes, use the `kubectl` CLI:
+要将 Azure Blob Storage状态存储应用到Kubernetes，请执行如下`kubectl` CLI：
 
 ```
 kubectl apply -f azureblob.yaml
 ```
-### Running locally
+### 本地运行
 
-To run locally, create a `components` dir containing the YAML file and provide the path to the `dapr run` command with the flag `--components-path`.
+要在本地运行，创建一个包含YAML文件的`components`目录，并提供`dapr run`命令的路径，标志为`--components-path`。
 
-This state store creates a blob file in the container and puts raw state inside it.
+这个状态存储在容器中创建一个blob文件，并将原始状态放在里面。
 
-For example, the following operation coming from service called `myservice`
+例如，以下操作来自于名为`myservice`的服务
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state \
@@ -80,13 +80,13 @@ curl -X POST http://localhost:3500/v1.0/state \
       ]'
 ```
 
-creates the blob file in the containter with `key` as filename and `value` as the contents of file.
+在容器中创建blob文件，文件名为`key`，文件内容为`value`。
 
-## Concurrency
+## 并发（Concurrency）
 
-Azure Blob Storage state concurrency is achieved by using `ETag`s according to [the Azure Blob Storage documentation](https://docs.microsoft.com/en-us/azure/storage/common/storage-concurrency#managing-concurrency-in-blob-storage).
+根据[Azure Blob Storage文档](https://docs.microsoft.com/en-us/azure/storage/common/storage-concurrency#managing-concurrency-in-blob-storage)，通过使用`ETag`实现Azure Blob Storage状态并发。
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
+- [状态管理构建块]({{< ref state-management >}})
