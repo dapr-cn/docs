@@ -9,8 +9,8 @@ description: 试用 .NET 虚拟 Actor
 ## 前期准备
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
-- [.NET Core 3.1 or .NET 5+](https://dotnet.microsoft.com/download) installed
+- 初始化后的 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
+- [.NET Core 3.1 or .NET 5+](https://dotnet.microsoft.com/download) 已安装
 
 ## 概述
 
