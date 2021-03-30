@@ -3,12 +3,12 @@ type: docs
 title: "Dapr actor .NET SDK入门"
 linkTitle: "Example"
 weight: 100000
-description: Try out .NET virtual actors with this example
+description: 试用 .NET 虚拟 Actor
 ---
 
 ## 前期准备
 
-- [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
+- 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
 - [.NET Core 3.1 or .NET 5+](https://dotnet.microsoft.com/download) installed
 
