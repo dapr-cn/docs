@@ -115,15 +115,16 @@ return [
 
 ## 添加Actor实现
 
-Every actor implementation in PHP must implement `\Dapr\Actors\IActor` and use the `\Dapr\Actors\ActorTrait` trait. This allows for fast reflection and some shortcuts. Using the `\Dapr\Actors\Actor` abstract base class does this for you, but if you need to override the default behavior, you can do so by implementing the interface and using the trait.
+PHP 中的每个执行者必须实现 `\Dapr\Actors\Iactor` 并使用 `\Dapr\Actors\ActorTrait` 特性。 这个支持反射. 使用 `\Dapr\Actors\Actor` 抽象基础类为您服务。 但是 如果您需要覆盖默认行为，您可以通过实现接口和使用特性来做到这一点。
 
-## Activation and deactivation
+## 激活和停用
 
-When an actor activates, a token file is written to a temporary directory (by default this is in `'/tmp/dapr_' + sha256(concat(Dapr type, id))` in linux and `'%temp%/dapr_' + sha256(concat(Dapr type, id))` on Windows). This is persisted until the actor deactivates, or the host shuts down. This allows for `on_activation` to be called once and only once when Dapr activates the actor on the host.
+当actor激活时，令牌文件将被写入临时目录（默认情况下，该目录位于linux下 `'/tmp/dapr_'+ sha256（concat（Dapr type，Id））</ code>和Windows上的<code>'％temp％/ dapr_'+ sha256（concat（Dapr type，Id））</ code>）。
+这种情况持续到actor或host停用。 这允许<code> on_activation `被调用一次 并且只有Dapr激活host上的actor时才执行一次。
 
-## Performance
+## 性能
 
-Actor method invocation is very fast on a production setup with `php-fpm` and `nginx`, or IIS on Windows. Even though the actor is constructed on every request, actor state keys are only loaded on-demand and not during each request. However, there is some overhead in loading each key individually. This can be mitigated by storing an array of data in state, trading some usability for speed. It is not recommended doing this from the start, but as an optimization when needed.
+actor方法的执行效率非常高， `php-fpm` and `nginx`, 或 IIS 在 Windows 上有一个生产设置。 Even though the actor is constructed on every request, actor state keys are only loaded on-demand and not during each request. However, there is some overhead in loading each key individually. This can be mitigated by storing an array of data in state, trading some usability for speed. It is not recommended doing this from the start, but as an optimization when needed.
 
 ## Versioning state
 
