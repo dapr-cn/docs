@@ -43,7 +43,7 @@ spec:
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
-{% codetab %}
+{{% codetab %}}
 您可以使用 Docker 在本地运行 Aerospike ：
 
 ```
