@@ -28,7 +28,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用密钥储存，请参阅 [此处]({{< ref component-secrets.md >})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
