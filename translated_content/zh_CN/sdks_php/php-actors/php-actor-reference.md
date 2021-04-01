@@ -124,9 +124,9 @@ PHP 中的每个执行者必须实现 `\Dapr\Actors\Iactor` 并使用 `\Dapr\Act
 
 ## 性能
 
-actor方法的执行效率非常高， `php-fpm` and `nginx`, 或 IIS 在 Windows 上有一个生产设置。 Even though the actor is constructed on every request, actor state keys are only loaded on-demand and not during each request. However, there is some overhead in loading each key individually. This can be mitigated by storing an array of data in state, trading some usability for speed. It is not recommended doing this from the start, but as an optimization when needed.
+actor方法的执行效率非常高， `php-fpm` and `nginx`, 或 IIS 在 Windows 上有一个生产设置。 虽然actor是在每个请求上都会构造，actor状态密钥是按需加载，而不是在每个请求时加载。 在分别加载每个key时会有一些开销。 可以通过在状态中存储数据数组来缓解这种情况 ，为了速度而牺牲了一些可用性。 不建议从一开始就这样做，而是在需要 时作为一种优化。
 
-## Versioning state
+## 版本状态
 
 The names of the variables in the `ActorState` object directly correspond to key names in the store. This means that if you change the type or name of a variable, you may run into errors. To get around this, you may need to version your state object. In order to do this, you'll need to override how state is loaded and stored. There are many ways to approach this, one such solution might be something like this:
 
