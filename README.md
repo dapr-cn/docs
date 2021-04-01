@@ -1,6 +1,6 @@
 # Dapr 中文文档库
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -69,6 +69,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://marklux.cn"><img src="https://avatars.githubusercontent.com/u/19239409?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mark Lumin</b></sub></a><br /><a href="#translation-MarkLux" title="Translation">🌍</a></td>
     <td align="center"><a href="http://blog.ithuo.net:8877"><img src="https://avatars.githubusercontent.com/u/20416202?v=4?s=100" width="100px;" alt=""/><br /><sub><b>charleszhn</b></sub></a><br /><a href="#translation-charleszhn" title="Translation">🌍</a></td>
     <td align="center"><a href="http://www.tomorjm.com"><img src="https://avatars.githubusercontent.com/u/11410549?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jaime Zhang</b></sub></a><br /><a href="#translation-TomorJM" title="Translation">🌍</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://www.cnblogs.com/weihanli"><img src="https://avatars.githubusercontent.com/u/7604648?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Weihan Li</b></sub></a><br /><a href="#translation-weihanli" title="Translation">🌍</a></td>
   </tr>
 </table>
 
