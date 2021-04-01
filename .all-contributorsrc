@@ -132,6 +132,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "weihanli",
+      "name": "Weihan Li",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7604648?v=4",
+      "profile": "https://www.cnblogs.com/weihanli",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
