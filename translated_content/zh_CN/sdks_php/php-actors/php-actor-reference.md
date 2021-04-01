@@ -128,7 +128,7 @@ actor方法的执行效率非常高， `php-fpm` and `nginx`, 或 IIS 在 Window
 
 ## 版本状态
 
-The names of the variables in the `ActorState` object directly correspond to key names in the store. This means that if you change the type or name of a variable, you may run into errors. To get around this, you may need to version your state object. In order to do this, you'll need to override how state is loaded and stored. There are many ways to approach this, one such solution might be something like this:
+`ActorState`对象中的变量名直接对应于存储库中的键名。 这意味着如果更改一个变量的类型或名称，可能会出现错误。 To get around this, you may need to version your state object. In order to do this, you'll need to override how state is loaded and stored. There are many ways to approach this, one such solution might be something like this:
 
 ```php
 <?php
