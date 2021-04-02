@@ -6,13 +6,13 @@ weight: 20000
 description: "如何在 Kubernetes 上运行带有 Windows 节点的 Dapr 应用"
 ---
 
-Dapr 支持在 Kubernetes 上运行带有 windows 节点的集群。 您可以只在 Windows 上运行您的 Dapr 微型服务，或只在 Linux 上运行，或者两者兼而有之。 这对可能会零星地将旧应用程序迁移到 Dapr Kubernetes 集群的用户有帮助。
+Dapr 支持在带有 windows 节点的 kubernetes 集群上运行。 您可以只在 Windows 上运行您的 Dapr 微服务，或只在 Linux 上运行，或者两者兼而有之。 这对那些可能会将遗留应用零散迁移到 Dapr Kubernetes 集群的用户很有帮助。
 
-Kubernetes 使用一个叫做节点亲和的概念，以便您可以表示您想要在 Linux 节点或Windows 节点上启动您的应用程序。 部署到既有Windows节点和Linux节点的集群时，您必须为您的应用程序提供亲和性规则。 否则Kubernetes调度程序可能会在错误的节点类型上启动您的应用程序。
+Kubernetes 使用了一个叫做节点亲和性的概念，这样你就可以表示你的应用是想在 Linux 节点还是 Windows 节点上启动。 当部署到一个同时拥有 Windows 和 Linux 节点的集群时，你必须为你的应用提供亲和性规则，否则 Kubernetes 调度器可能会在错误的节点类型上启动你的应用。
 
 ## 先决条件
 
-您需要一个带有Windows节点的 Kubernetes 集群。 许多Kubernetes供应商支持自动提供 Windows 启用 Kubernetes 集群。
+您需要一个带有Windows节点的 Kubernetes 集群。 许多 Kubernetes 提供商支持自动配置启用 Windows 的 Kubernetes 集群。
 
 1. 按照您的首选提供商的说明来设置一个带有Windows功能的集群。
 
@@ -31,15 +31,15 @@ Kubernetes 使用一个叫做节点亲和的概念，以便您可以表示您想
    akswin000000                        Ready    agent   6d      v1.17.9   10.240.0.66    <none>        Windows Server 2019    Datacenter   10.0.17763.1339     docker://19.3.5
    akswin000001                        Ready    agent   6d      v1.17.9   10.240.0.97    <none>        Windows Server 2019    Datacenter   10.0.17763.1339     docker://19.3.5
    ```
-## 安装 Dapr control plane
+## 安装 Dapr 控制面板
 
-如果您正在使用 Dapr CLI 或通过 Helm Chart 安装， 只需遵循正常的部署程序： [在 Kubernetes 集群上安装 Dapr]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >})
+如果您正在使用 Dapr CLI 或通过 Helm Chart 安装， 只需遵循正常的部署程序： [在 Kubernetes 集群上安装 Dapr]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >}})
 
 关联性将被自动设置为 `kubernetes.io/os=linux`。 这对于大多数用户来说是足够的，因为Kubernetes至少需要一个Linux节点池。
 
-> **注意：** Dapr control plane 容器已经安装并测试了 windows 和 linux 两种容器。 然而，我们通常建议使用Linux control plain 容器。 它们往往规模较小，用户基础大得多。
+> **注意：** Dapr 控制面板容器是为windows和linux构建和测试的，但是，我们一般建议使用linux 控制面板容器。 它们往往较小，用户基础也大得多。
 
-如果您理解以上内容，但想要将 Dapr 控制平面部署到Windows，您可以通过设置这样做：
+如果您理解以上内容，但想要将 Dapr 控制面板部署到Windows，您可以通过设置这样做：
 
 ```
 helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
@@ -48,11 +48,11 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 ## 安装 Dapr 应用程序
 
 ### Windows 应用程序
-为了在 Windows 上启动 Dapr 应用程序，您需要首先创建一个安装应用程序的 Docker 容器。 指南见 [开始：为容器准备 Windows](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment)。 一旦你拥有一个带有应用程序的Docker container，创建一个部署的 YAML 文件，节点亲和性设置为 kubernetes.io/os: windows。
+为了在 Windows 上启动 Dapr 应用程序，您需要首先创建一个安装应用程序的 Docker 容器。 指南见 [开始：为容器准备 Windows](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment)。 一旦你拥有一个带有应用程序的Docker container，创建一个 deployment YAML 文件，节点亲和性设置为 kubernetes.io/os: windows。
 
-1. 创建一个部署 YAML
+1. 创建一个 deployment YAML
 
-   这里是一个示例部署，节点关联性设置为“windows”。 根据您的应用程序的需要修改。
+   这里是一个示例 deployment ，节点关联性设置为“windows”。 根据您的应用程序的需要修改。
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
@@ -91,7 +91,7 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
                      values:
                      - windows
    ```
-   这个部署 yaml 将与任何其它的 dapr 应用程序相同，还有一个额外的 spec.template.spec.affinity 部分如上文所示。
+   这个 deployment yaml 将与任何其它的 dapr 应用程序相同，还有一个额外的 spec.template.spec.affinity 部分如上文所示。
 
 2. 部署到您的 Kubernetes 集群
 
@@ -102,9 +102,9 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 ### Linux 应用程序
 如果您已经在 Linux 上有运行的 dapr 应用程序， 您仍然需要像以上添加亲和性规则，只不过要选择 linux 亲和性。
 
-1. 创建一个部署 YAML
+1. 创建一个 deployment YAML
 
-   这里是一个示例部署，节点关联性设置为“linux”。 根据您的应用程序的需要修改。
+   这里是一个示例 deployment，节点亲和性设置为“linux”。 根据您的应用程序的需要修改。
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
