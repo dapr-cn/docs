@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "使用 .NET SDK 对 发布/订阅 进行故障排除。"
+title: "对使用 .NET SDK 的 发布/订阅 进行故障排除。"
 linkTitle: "发布/订阅的故障排除"
 weight: 100000
 description: 对发布订阅进行故障排除
@@ -94,7 +94,7 @@ app.UseEndpoints(endpoints =>
 
 **如果添加订阅处理程序无法解决问题。 请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
 
-### 选项2：响应包含JSON，但它是空的（如 `[]`）
+### 选项 2：响应包含JSON，但它是空的（如 `[]`）
 
 如果JSON输出是一个空数组 (如 `[]`)，那么下面的处理程序将被注册，但没有任何 topic 终结点。
 
@@ -203,25 +203,25 @@ info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
       Executing endpoint 'ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)'
 ```
 
-This entry shows that:
+此条目显示：
 
-- Routing executed
-- Routing chose the `ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)'` endpoint
+- 路由已执行
+- 路由选择 `ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)` 终结点
 
-Now you have the information needed to troubleshoot this step.
+现在你已经掌握了解决这个问题所需的信息。
 
-### Option 0: Routing chose the correct endpoint
+### 选项0：路由选择正确的终结点
 
-If the information in the routing log entry is correct, then it means that in isolation your application is behaving correctly.
+如果路由日志条目中的信息是正确的，那么这意味着您的应用程序的行为是正确的。
 
-Example:
+示例:
 
 ```txt
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
       Executing endpoint 'ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)'
 ```
 
-You might want to try using the Dapr cli to execute send a pub/sub message directly and compare the logging output.
+您可能想尝试使用 Dapr cli 执行直接发送 发布/订阅 消息并比较日志输出。
 
 Example command:
 
@@ -229,16 +229,16 @@ Example command:
 dapr publish --pubsub pubsub --topic withdraw --data '{}'
 ```
 
-**If after doing this you still don't understand the problem please open an issue on this repo and include the contents of your `Startup.cs`.**
+**如果这样做之后，你仍然不理解这个问题，请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
 
-### Option 1: Routing did not execute
+### 选项 1：路由没有执行
 
-If you don't see an entry for `Microsoft.AspNetCore.Routing.EndpointMiddleware` in the logs, then it means that the request was handled by something other than routing. Usually the problem in this case is a misbehaving middleware. Other logs from the request might give you a clue to what's happening.
+如果您在日志中没有看到 `Microsoft.AspNetCore.Routing.EndpointMiddleware` 的条目，那么这意味着该请求是由路由以外的其他东西处理的。 在这种情况下，问题通常是中间件错乱。 请求中的其他日志可能会给你一个线索，让你知道发生了什么。
 
-**If you need help understanding the problem please open an issue on this repo and include the contents of your `Startup.cs`.**
+**如果您需要帮助理解这个问题，请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
 
-### Option 2: Routing chose the wrong endpoint
+### 选项 2：路由选择了错误的终结点
 
-If you see an entry for `Microsoft.AspNetCore.Routing.EndpointMiddleware` in the logs, but it contains the wrong endpoint then it means that you've got a routing conflict. The endpoint that was chosen will appear in the logs so that should give you an idea of what's causing the conflict.
+如果您在日志中看到 `Microsoft.AspNetCore.Routing.EndpointMiddleware` 的条目，但它包含了错误的端点，那么这意味着您有路由冲突。 所选择的终结点将出现在日志中，以便让你了解造成冲突的原因。
 
-**If you need help understanding the problem please open an issue on this repo and include the contents of your `Startup.cs`.**
+**如果您需要帮助理解这个问题，请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
