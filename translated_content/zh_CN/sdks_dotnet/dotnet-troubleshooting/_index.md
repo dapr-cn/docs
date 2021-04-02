@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "How to troubleshoot and debug with the Dapr .NET SDK"
-linkTitle: "Troubleshooting"
+title: "如何用 Dapr.NET SDK 进行故障排除和诊断"
+linkTitle: "故障排除"
 weight: 100000
-description: Tips, tricks, and guides for troubleshooting and debugging with the Dapr .NET SDKs
+description: Dapr .NET SDK故障排除和调试的提示、技巧和指南
 ---
 
