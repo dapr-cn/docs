@@ -50,7 +50,7 @@ dotnet new classlib -o MyActor.Interfaces
 cd MyActor.Interfaces
 
 # Add Dapr.Actors nuget package. Please use the latest package version from nuget.org
-dotnet add package Dapr.Actors -v 1.0.0-rc02
+dotnet add package Dapr.Actors -v 1.0.0-rc02  
 ```
 
 
@@ -86,7 +86,7 @@ namespace MyActor.Interfaces
             return $"PropertyA: {propAValue}, PropertyB: {propBValue}";
         }
     }
-}
+}    
 ```
 
 ## STEP2 - 创建Actor服务
@@ -108,7 +108,7 @@ dotnet add package Dapr.Actors -v 1.0.0-rc02
 dotnet add package Dapr.Actors.AspNetCore -v 1.0.0-rc02
 
 # Add Actor Interface reference
-dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
+dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj    
 ```
 
 ### 添加Actor实现
@@ -132,7 +132,7 @@ namespace MyActorService
         /// <summary>
         /// Initializes a new instance of MyActor
         /// </summary>
-        /// <param name="host">The Dapr.Actors.Runtime.ActorHost that will host this actor instance.</param>
+        /// 
         public MyActor(ActorHost host)
             : base(host)
         {
@@ -162,7 +162,7 @@ namespace MyActorService
         /// <summary>
         /// Set MyData into actor's private state store
         /// </summary>
-        /// <param name="data">the user-defined MyData which will be stored into state store as "my_data" state</param>
+        /// 
         public async Task<string> SetDataAsync(MyData data)
         {
             // Data is saved to configured state store implicitly after each method execution by Actor's runtime.
@@ -247,6 +247,16 @@ namespace MyActorService
         }
     }
 }
+
+         
+         
+             
+         
+             
+             
+             
+             
+         
 ```
 
 #### 使用显式的actor类型名称
@@ -259,6 +269,7 @@ namespace MyActorService
     {
         // ...
     }
+     
 ```
 
 ### 使用ASP.NET Core Startup来注册Actor runtime
@@ -304,6 +315,7 @@ Actors通过Dapr runtime使用HTTP调用来实现。 此功能是应用程序的
                 endpoints.MapActorsHandlers();
             });
         }
+                 
 ```
 
 ### **可选** - 覆盖默认的Actor设置
@@ -350,10 +362,10 @@ cd MyActorClient
 dotnet add package Dapr.Actors -v 1.0.0-rc02
 
 # Add Actor Interface reference
-dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
+dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj  
 ```
 
-### Invoke Actor method with Actor Service Remoting
+### 使用 Actor 服务远程调用 Actor 方法
 
 我们建议使用actor实例的本地代理，因为 `ActorProxy.Create<IMyActor>(actorID, actorType)`返回强类型的actor实例来配置远程过程调用。
 
@@ -387,9 +399,12 @@ namespace MyActorClient
         }
     ...
 }
+         
+             
+ 
 ```
 
-### Invoke Actor method without Actor Service Remoting
+### 无 Actor 服务远程调用 Actor 方法
 如果actor方法接受最多一个参数，您可以无需使用remoting来调用actor方法(直接通过 http 或使用 ActorProxy 提供的辅助方法)。 Actor 运行时将会反序列化从客户端接收到的请求体，并将其作为方法参数来调用actor方法。 当进行non-remoting调用，Actor方法参数和返回值会被序列化，反序列化为 JSON 。
 
 `ActorProxy.Create(actorID, actorType)` 返回ActorProxy实例，并且可以使用原始的http client 来调用在 `IMyActor`中定义的方法。
@@ -423,14 +438,16 @@ namespace MyActorClient
             Console.WriteLine(savedData);
         }
     ...
-}
+} 
+         
+ 
 ```
 
-## Run Actor
+## 运行 Actor
 
-In order to validate and debug actor service and client, we need to run actor services via Dapr CLI first.
+为了验证和调试执行者服务和客户端，我们需要先通过 Dapr CLI 运行 actor 服务。
 
-1. Run Dapr Runtime via Dapr cli
+1. 通过 Dapr cli 运行 Dapr
 
    ```bash
    $ dapr run --app-id myapp --app-port 5000 --dapr-http-port 3500 dotnet run
@@ -439,7 +456,7 @@ In order to validate and debug actor service and client, we need to run actor se
    通过 Dapr 运行时执行 MyActorService 后，请确保应用程序在 5000 端口被发现，并成功建立actor连接。
 
    ```bash
-    INFO[0000] starting Dapr Runtime -- version  -- commit
+        INFO[0000] starting Dapr Runtime -- version  -- commit
     INFO[0000] log level set to: info
     INFO[0000] standalone mode configured
     INFO[0000] dapr id: myapp
@@ -459,10 +476,10 @@ In order to validate and debug actor service and client, we need to run actor se
     INFO[0000] actors: placement order received: update
     INFO[0000] actors: placement tables updated
     INFO[0000] actors: placement order received: unlock
-    ...
+    ...           
    ```
 
-2. Run MyActorClient
+2. 运行 MyActorClient
 
    如果MyActorClient成功的调用了MyActorService中的actor，它将会在控制台进行输出。
 
