@@ -10,7 +10,7 @@ Dapr 支持在 Kubernetes 上运行带有 windows 节点的集群。 您可以�
 
 Kubernetes 使用一个叫做节点亲和的概念，以便您可以表示您想要在 Linux 节点或Windows 节点上启动您的应用程序。 部署到既有Windows节点和Linux节点的集群时，您必须为您的应用程序提供亲和性规则。 否则Kubernetes调度程序可能会在错误的节点类型上启动您的应用程序。
 
-## 前提
+## 先决条件
 
 您需要一个带有Windows节点的 Kubernetes 集群。 许多Kubernetes供应商支持自动提供 Windows 启用 Kubernetes 集群。
 
