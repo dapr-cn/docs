@@ -21,42 +21,42 @@ description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜�
     kubectl create namespace dapr-monitoring
     ```
 
-2. Add Elastic helm repo
+2. 添加 Elastic helm repo
 
     ```bash
     helm repo add elastic https://helm.elastic.co
     helm repo update
     ```
 
-3. Install Elastic Search using Helm
+3. 使用 Helm 安装 Elastic Search
 
-By default the chart creates 3 replicas which must be on different nodes.  If your cluster has less than 3 nodes, specify a lower number of replicas.  For example, this sets it to 1:  If your cluster has less than 3 nodes, specify a lower number of replicas.  For example, this sets it to 1:
+默认情况下，Chart 必须在不同的节点上创建3个副本。  如果您的集群少于3个节点，请指定一个较低的副本数量。  例如，将它设置为 1：
 
 ```bash
 helm install elasticsearch elastic/elasticsearch -n dapr-monitoring --set replicas=1
 ```
 
-Otherwise:
+否则：
 
 ```bash
 helm install elasticsearch elastic/elasticsearch -n dapr-monitoring
 ```
 
-If you are using minikube or want to disable persistent volumes for development purposes, you can disable it by using the following command:
+如果您正在使用 minikube 或者想要禁用持久化卷来开发，您可以使用以下命令禁用它：
 
 ```bash
 helm install elasticsearch elastic/elasticsearch -n dapr-monitoring --set persistence.enabled=false,replicas=1
 ```
 
-4. Install Kibana
+4. 安装 Kibana
 
     ```bash
     helm install kibana elastic/kibana -n dapr-monitoring
     ```
 
-5. Validation
+5. 校验
 
-    Ensure Elastic Search and Kibana are running in your Kubernetes cluster.
+    确保 Elastic Search 和 Kibana 正在您的Kubernetes 集群中运行。
 
     ```bash
     kubectl get pods -n dapr-monitoring
@@ -65,24 +65,24 @@ helm install elasticsearch elastic/elasticsearch -n dapr-monitoring --set persis
     kibana-kibana-95bc54b89-zqdrk   1/1     Running   0          4m21s
     ```
 
-## Install Fluentd
+## 安装 Fluentd
 
-1. Install config map and Fluentd as a daemonset
+1. 安装 config map 和 Fluentd 作为守护程序
 
-Download these config files:
+下载这些配置文件：
 - [fluentd-config-map.yaml](/docs/fluentd-config-map.yaml)
 - [fluentd-dapr-with-rbac.yaml](/docs/fluentd-dapr-with-rbac.yaml)
 
-> Note: If you already have Fluentd running in your cluster, please enable the nested json parser to parse JSON formatted log from Dapr.
+> 注意：如果你已经在你的集群中运行 Fluentd，请启用 nested json 解析器从 Dapr 解析JSON 格式的日志。
 
-Apply the configurations to your cluster:
+将配置应用到您的集群：
 
 ```bash
 kubectl apply -f ./fluentd-config-map.yaml
 kubectl apply -f ./fluentd-dapr-with-rbac.yaml
 ```
 
-2. Ensure that Fluentd is running as a daemonset; the number of instances should be the same as the number of cluster nodes.  In the example below we only have 1 node.  In the example below we only have 1 node.
+2. 确保 Fluentd 作为守护程序运行；实例的数量应与集群节点的数量相同。  在下面的例子中，我们只有一个节点。
 
 ```bash
 kubectl get pods -n kube-system -w
@@ -94,9 +94,9 @@ fluentd-sdrld                 1/1     Running   0          14s
 ```
 
 
-## Install Dapr with JSON formatted logs
+## 使用 JSON 格式化日志安装 Dapr
 
-1. Install Dapr with enabling JSON-formatted logs
+1. 使用 JSON 格式化日志启用 Dapr
 
     ```bash
     helm repo add dapr https://dapr.github.io/helm-charts/
@@ -104,11 +104,11 @@ fluentd-sdrld                 1/1     Running   0          14s
     helm install dapr dapr/dapr --namespace dapr-system --set global.logAsJson=true
     ```
 
-2. Enable JSON formatted log in Dapr sidecar
+2. 在 Dapr sidecar 中启用 JSON 格式化日志
 
-Add `dapr.io/log-as-json: "true"` annotation to your deployment yaml.
+添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
