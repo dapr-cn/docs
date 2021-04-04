@@ -133,11 +133,11 @@ spec:
 ...
 ```
 
-## Search logs
+## 搜索日志
 
-> Note: Elastic Search takes a time to index the logs that Fluentd sends.
+> 注意: Elastic Search 需要一段时间才能索引 Fluentd 发送的日志。
 
-1. Port-forward to svc/kibana-kibana
+1. Port-forward 到 svc/kibana-kibana
 
 ```
 $ kubectl port-forward svc/kibana-kibana 5601 -n dapr-monitoring
@@ -147,44 +147,44 @@ Handling connection for 5601
 Handling connection for 5601
 ```
 
-2. Browse `http://localhost:5601`
+2. 浏览 `http://localhost:5601`
 
-3. Click Management -> Index Management
+3. 点击Management -> Index Management
 
-![kibana management](/images/kibana-1.png)
+![kibana 管理](/images/kibana-1.png)
 
-4. Wait until dapr-* is indexed.
+4. 请稍候，直到Dapr-* 被索引。
 
-![index log](/images/kibana-2.png)
+![索引日志](/images/kibana-2.png)
 
-5. Once dapr-* indexed, click Kibana->Index Patterns and Create Index Pattern
+5. 一旦dapr-* 被索引了，请点击 Kibana-> Index Patterns 并创建索引模式
 
-![create index pattern](/images/kibana-3.png)
+![创建索引模式](/images/kibana-3.png)
 
-6. Define index pattern - type `dapr*` in index pattern
+6. 在index pattern中输入 `dapr*`定义索引模式
 
-![define index pattern](/images/kibana-4.png)
+![定义索引模式](/images/kibana-4.png)
 
-7. Select time stamp filed: `@timestamp`
+7. 选择time stamp填入： `@timestamp`
 
 ![timestamp](/images/kibana-5.png)
 
-8. Confirm that `scope`, `type`, `app_id`, `level`, etc are being indexed.
+8. 确认 `scope`, `type`, `app_id`, `level`, 等正在索引。
 
-> Note: if you cannot find the indexed field, please wait. Note: if you cannot find the indexed field, please wait. it depends on the volume of data and resource size where elastic search is running.
+> 注意：如果您找不到索引字段，请稍候。 它取决于正在进行弹性搜索的数据量和资源大小。
 
-![indexing](/images/kibana-6.png)
+![正在索引](/images/kibana-6.png)
 
-9. Click `discover` icon and search `scope:*`
+9. 点击 `discover` 图标并搜索 `scope:*`
 
-> Note: it would take some time to make log searchable based on the data volume and resource.
+> 注：根据数据量和资源进行日志检索需要一些时间。
 
-![discover](/images/kibana-7.png)
+![发现](/images/kibana-7.png)
 
-## References
+## 参考
 
-* [Fluentd for Kubernetes](https://docs.fluentd.org/v/0.12/articles/kubernetes-fluentd)
+* [用于 Kubernetes 的 Fluentd](https://docs.fluentd.org/v/0.12/articles/kubernetes-fluentd)
 * [Elastic search helm chart](https://github.com/elastic/helm-charts/tree/master/elasticsearch)
 * [Kibana helm chart](https://github.com/elastic/helm-charts/tree/master/kibana)
-* [Kibana Query Language](https://www.elastic.co/guide/en/kibana/current/kuery-query.html)
-* [Troubleshooting using Logs]({{< ref "logs-troubleshooting.md" >}})
+* [Kibana 查询语句](https://www.elastic.co/guide/en/kibana/current/kuery-query.html)
+* [使用日志进行故障排除]({{< ref "logs-troubleshooting.md" >}})
