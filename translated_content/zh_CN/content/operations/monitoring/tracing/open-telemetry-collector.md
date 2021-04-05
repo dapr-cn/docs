@@ -59,6 +59,15 @@ spec:
   template:
     metadata:
       ...
+      apiVersion: apps/v1
+kind: Deployment
+metadata:
+  ...
+spec:
+  ...
+  template:
+    metadata:
+      ...
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "MyApp"
