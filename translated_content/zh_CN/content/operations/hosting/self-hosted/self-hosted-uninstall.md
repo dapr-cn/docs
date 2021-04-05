@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Uninstall Dapr in a self-hosted environment"
 linkTitle: "Uninstall Dapr"
 weight: 60000
