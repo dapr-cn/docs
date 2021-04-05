@@ -1,14 +1,14 @@
 ---
-type: docs
+type: 文档
 title: "Configure and view Dapr Logs"
-linkTitle: "Logs"
+linkTitle: "日志"
 weight: 2000
 description: "Understand how logging works in Dapr and how to configure and view logs"
 ---
 
 This section will assist you in understanding how logging works in Dapr, configuring and viewing logs.
 
-## Overview
+## 概述
 
 Logs have different, configurable verbosity levels. The levels outlined below are the same for both system components and the Dapr sidecar process/container:
 
@@ -19,7 +19,7 @@ Logs have different, configurable verbosity levels. The levels outlined below ar
 
 error produces the minimum amount of output, where debug produces the maximum amount. The default level is info, which provides a balanced amount of information for operating Dapr in normal conditions.
 
-To set the output level, you can use the `--log-level` command-line option. For example:
+To set the output level, you can use the `--log-level` command-line option. 例如:
 
 ```bash
 ./daprd --log-level error
@@ -175,6 +175,6 @@ time="2019-09-04T00:21:57Z" level=info msg="host added: 10.244.1.89"
 
 The examples above are specific specific to Kubernetes, but the principal is the same for any kind of container based environment: simply grab the container ID of the Dapr sidecar and/or system component (if applicable) and view its logs.
 
-## References
+## 参考资料
 
-* [How to setup loggings for Dapr sidecar, and your application]({{< ref "logging.md" >}})
+* [如何为Dapr sidecar和你的应用程序设置日志]({{< ref "logging.md" >}})
