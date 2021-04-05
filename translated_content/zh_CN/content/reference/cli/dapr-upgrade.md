@@ -1,48 +1,48 @@
 ---
-type: docs
-title: "upgrade CLI command reference"
+type: 文档
+title: "upgrade CLI 命令参考"
 linkTitle: "upgrade"
-description: "Detailed information on the upgrade CLI command"
+description: "有关 upgrade CLI 命令的详细信息"
 ---
 
-## Description
+## 描述
 
-Upgrade Dapr on supported hosting platforms.
+在受支持的托管平台上升级 Dapr 。
 
-## Supported platforms
+## 支持的平台
 
 - [Kubernetes]({{< ref kubernetes >}})
 
-## Usage
+## 用法
 ```bash
 dapr upgrade [flags]
 ```
 
-## Flags
+## 参数
 
-| Name                 | Environment Variable | Default  | Description                                                                                               |
-| -------------------- | -------------------- | -------- | --------------------------------------------------------------------------------------------------------- |
-| `--help`, `-h`       |                      |          | Print this help message                                                                                   |
-| `--kubernetes`, `-k` |                      | `false`  | Upgrade Dapr in a Kubernetes cluster                                                                      |
-| `--runtime-version`  |                      | `latest` | The version of the Dapr runtime to upgrade to, for example: `1.0.0`                                       |
-| `--set`              |                      |          | Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2) |
+| 名称                   | 环境变量 | 默认值      | 描述                                            |
+| -------------------- | ---- | -------- | --------------------------------------------- |
+| `--help`, `-h`       |      |          | 显示此帮助消息                                       |
+| `--kubernetes`, `-k` |      | `false`  | 更新 Kubernetes 集群中的 dapr                       |
+| `--runtime-version`  |      | `latest` | 要升级的 Dapr 运行时的版本，例如: `1.0.0`                  |
+| `--set`              |      |          | 在命令行上设置值 (可以用逗号指定多个或多个值: key1=val1,key2=val2) |
 
-## Examples
+## 示例
 
-### Upgrade Dapr in Kubernetes to latest version
+### 将 Kubernetes 中的 dapr 升级到最新版本
 ```bash
 dapr upgrade -k
 ```
 
-### Upgrade specified version of Dapr runtime in Kubernetes
+### 在 Kubernetes 中升级指定版本的 Dapr 运行时
 ```bash
 dapr upgrade -k --runtime-version 1.1.0
 ```
 
-### Upgrade specified version of Dapr runtime in Kubernetes with value set
+### 在 Kubernetes 中升级指定版本的 Dapr 运行时，并包含一些参数
 ```bash
 dapr upgrade -k --runtime-version 1.1.0 --set global.logAsJson=true
 ```
-# Related links
+# 相关链接
 
-- [Upgrade Dapr on a Kubernetes cluster]({{< ref kubernetes-upgrade.md >}})
+- [更新 Kubernetes 集群中的 Dapr]({{< ref kubernetes-upgrade.md >}})
