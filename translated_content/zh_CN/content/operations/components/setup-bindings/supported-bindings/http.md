@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "HTTP binding spec"
+title: "HTTP 绑定规范"
 linkTitle: "HTTP"
-description: "Detailed documentation on the HTTP binding component"
+description: "HTTP 绑定组件的详细文档"
 ---
 
-## Setup Dapr component
+## 设置 Dapr 组件
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -21,13 +21,13 @@ spec:
     value: http://something.com
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field | Required | Binding support | Details                                     | Example                                                    |
-| ----- |:--------:| --------------- | ------------------------------------------- | ---------------------------------------------------------- |
-| url   |    Y     | Output          | The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers` |
+| 字段  | 必填 | 绑定支持 | 详情                                          | 示例                                                         |
+| --- |:--:| ---- | ------------------------------------------- | ---------------------------------------------------------- |
+| url | 是  | 输出   | The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers` |
 
-## Binding support
+## 绑定支持
 
 This component supports **output binding** with the folowing [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html):
 
@@ -47,10 +47,10 @@ This component supports **output binding** with the folowing [HTTP methods/verbs
 
 All of the operations above support the following metadata fields
 
-| Field    | Required | Details                                                                 | Example                               |
-| -------- |:--------:| ----------------------------------------------------------------------- | ------------------------------------- |
-| path     |    N     | The path to append to the base URL. Used for accessing specific URIs    | `"/1234"`, `"/search?lastName=Jones"` |
-| Headers* |    N     | Any fields that have a capital first letter are sent as request headers | `"Content-Type"`, `"Accept"`          |
+| 字段       | 必填 | 详情                                                                      | 示例                                    |
+| -------- |:--:| ----------------------------------------------------------------------- | ------------------------------------- |
+| path     | N  | The path to append to the base URL. Used for accessing specific URIs    | `"/1234"`, `"/search?lastName=Jones"` |
+| Headers* | N  | Any fields that have a capital first letter are sent as request headers | `"Content-Type"`, `"Accept"`          |
 
 #### Retrieving data
 
@@ -73,17 +73,17 @@ Optionally, a path can be specified to interact with resource URIs:
 }
 ```
 
-### Response
+### 响应
 
 The response body contains the data returned by the HTTP endpoint.  The `data` field contains the HTTP response body as a byte slice (Base64 encoded via curl). The `metadata` field contains:
 
-| Field      | Required | Details                                                                         | Example                     |
-| ---------- |:--------:| ------------------------------------------------------------------------------- | --------------------------- |
-| statusCode |    Y     | The [HTTP status code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
-| status     |    Y     | The status description                                                          | `"200 OK"`, `"201 Created"` |
-| Headers*   |    N     | Any fields that have a capital first letter are sent as request headers         | `"Content-Type"`            |
+| 字段         | 必填 | 详情                                                                              | 示例                          |
+| ---------- |:--:| ------------------------------------------------------------------------------- | --------------------------- |
+| statusCode | 是  | The [HTTP status code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
+| status     | 是  | The status description                                                          | `"200 OK"`, `"201 Created"` |
+| Headers*   | N  | Any fields that have a capital first letter are sent as request headers         | `"Content-Type"`            |
 
-#### Example
+#### 示例
 
 **Requesting the base URL**
 
@@ -144,7 +144,7 @@ Any metadata field that starts with a capital letter is passed as a request head
 }
 ```
 
-#### Example
+#### 示例
 
 **Posting a new record**
 
@@ -166,10 +166,10 @@ curl -d '{ "operation": "post", "data": "YOUR_BASE_64_CONTENT", "metadata": { "p
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
