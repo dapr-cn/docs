@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Versioning policy"
 linkTitle: "Versioning"
 weight: 2000
