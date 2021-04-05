@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "API返回的错误代码"
 linkTitle: "Error codes"
 description: "Dapr API 错误代码的详细参考"
