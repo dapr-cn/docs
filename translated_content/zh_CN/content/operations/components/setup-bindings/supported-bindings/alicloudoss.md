@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "阿里云对象存储服务绑定规范"
+title: "Alibaba Cloud Object Storage Service binding spec"
 linkTitle: "Alibaba Cloud Object Storage"
-description: "阿里云对象存储绑定组件的详细说明文档"
+description: "Detailed documentation on the Alibaba Cloud Object Storage binding component"
 ---
 
-## 组件格式
+## Component format
 
-要设置阿里云对象存储绑定，请创建一个类型为`bindings.alicloud.os`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用 secretstore 配置。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
+To setup an Alibaba Cloud Object Storage binding create a component of type `bindings.alicloud.oss`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,27 +30,27 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## 元数据字段规范
+## Spec metadata fields
 
-| 字段            | 必填 | 绑定支持 | 详情               | 示例                                   |
-| ------------- | -- | ---- | ---------------- | ------------------------------------ |
-| `endpoint`    | Y  | 输出   | Alicloud OSS 端点。 | https://oss-cn-hangzhou.aliyuncs.com |
-| `accessKeyID` | Y  | 输出   | 访问密钥 ID 凭据。      |                                      |
-| `accessKey`   | Y  | 输出   | 访问密钥凭据。          |                                      |
-| `bucket`      | Y  | 输出   | 存储桶名称            |                                      |
+| Field         | Required | Binding support | Details                     | Example                              |
+| ------------- | -------- | --------------- | --------------------------- | ------------------------------------ |
+| `endpoint`    | Y        | Output          | Alicloud OSS endpoint.      | https://oss-cn-hangzhou.aliyuncs.com |
+| `accessKeyID` | Y        | Output          | Access key ID credential.   |                                      |
+| `accessKey`   | Y        | Output          | Access key credential.      |                                      |
+| `bucket`      | Y        | Output          | Name of the storage bucket. |                                      |
 
-## 相关链接
+## Binding support
 
-该组件支持**输出绑定**，其操作如下:
-- `create`: [创建对象](#create-object)
+This component supports **output binding** with the following operations:
+- `create`: [Create object](#create-object)
 
 
-### 创建对象
+### Create object
 
-要执行创建对象操作，请使用`POST`方法和以下JSON调用绑定：
+To perform a create object operation, invoke the binding with a `POST` method and the following JSON body:
 
 ```json
 {
@@ -60,12 +60,12 @@ spec:
 ```
 
 {{% alert title="Note" color="primary" %}}
-默认情况下，会自动生成一个随机的UUID作为对象密钥。 参见下面所示的支持的元数据为对象设置密钥。
+By default, a random UUID is auto-generated as the object key. See below for Metadata support to set the key for the object.
 {{% /alert %}}
 
-#### 示例
+#### Example
 
-**保存到一个随机生成的UUID文件**
+**Saving to a random generated UUID file**
 
 {{< tabs "Windows" "Linux/MacOS" >}}
 
@@ -89,7 +89,7 @@ curl -d '{ "operation": "create", "data": "Hello World" }' http://localhost:<dap
 
 <br />
 
-**保存到特定文件**
+**Saving to a specific file**
 {{< tabs "Windows" "Linux/MacOS" >}}
 
 {{% codetab %}}
@@ -111,14 +111,14 @@ curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "key": "m
 {{< /tabs >}}
 
 {{% alert title="Note" color="primary" %}}
-Windows CMD需要转义`"`字符。
+Windows CMD requires escaping the `"` character.
 {{% /alert %}}
 
-## 元数据信息
+## Metadata information
 
-### 对象键
+### Object key
 
-默认情况下，Alicloud OSS输出绑定会自动生成一个UUID作为对象键。 您可以通过以下元数据来设置键：
+By default, the Alicloud OSS output binding will auto-generate a UUID as the object key. You can set the key with the following metadata:
 
 ```json
 {
@@ -130,9 +130,9 @@ Windows CMD需要转义`"`字符。
 }
 ```
 
-## 相关链接
+## Related links
 
-- [绑定构建块]({{< ref bindings >}})
-- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
-- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
-- [绑定API 参考]({{< ref bindings_api.md >}})
+- [Bindings building block]({{< ref bindings >}})
+- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
+- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
+- [Bindings API reference]({{< ref bindings_api.md >}})
