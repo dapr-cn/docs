@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr PHP SDK"
 linkTitle: "PHP"
 weight: 1000
