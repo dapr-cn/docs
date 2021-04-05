@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Metadata API reference"
 linkTitle: "Metadata API"
 description: "Detailed documentation on the Metadata API"
