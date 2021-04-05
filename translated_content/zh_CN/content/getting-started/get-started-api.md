@@ -5,7 +5,7 @@ linkTitle: "使用 Dapr 的内置 API"
 weight: 30
 ---
 
-After running the `dapr init` command in the [previous step]({{X18X}}), your local environment has the Dapr sidecar binaries as well as default component definitions for both state management and a message broker (both using Redis). 现在您可以通过使用 Dapr CLI 来运行 Dapr sidecar 并尝试使用状态API来存储和检索状态，从而尝试 Dapr 提供的一些功能。 你可以在 [这些文档]({{< ref state-management >}})中了解更多关于状态构建块及其工作原理的信息。
+在 [前一步]({{X18X}})中运行了 `dapr init` 命令后， 您的本地环境有 Dapr sidecar 二进制文件以及默认组件定义的 状态管理 和 消息代理 (都使用 Redis)。 现在您可以通过使用 Dapr CLI 来运行 Dapr sidecar 并尝试使用状态API来存储和检索状态，从而尝试 Dapr 提供的一些功能。 你可以在 [这些文档]({{< ref state-management >}})中了解更多关于状态构建块及其工作原理的信息。
 
 您现在将运行sidecar并直接调用 API (模拟应用程序将做什么)。
 
@@ -102,6 +102,6 @@ exit
 ```
 
 {{% alert color="primary" %}}
-[Next step: Define a component >>]({{< ref get-started-component.md >}})
+[下一步：定义一个组件 >>]({{< ref get-started-component.md >}})
 {{% /alert %}}
 
