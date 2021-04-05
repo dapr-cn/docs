@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Observability"
-linkTitle: "Observability"
+title: "可观测性"
+linkTitle: "可观测性"
 weight: 500
 description: >
   Monitor applications through tracing, metrics, logs and health
