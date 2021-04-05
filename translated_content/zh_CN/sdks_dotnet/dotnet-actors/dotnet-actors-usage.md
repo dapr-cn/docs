@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr actor .NET usage guide"
 linkTitle: "Authoriung actors"
 weight: 200000
@@ -93,11 +93,11 @@ When logging, avoid using format strings like: `$"Getting state at {DateTime.Utc
 
 Logging should use the [named placeholder syntax](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-message-template) which is more performant and offers better integration with logging systems.
 
-### 使用显式的actor类型名称
+### Using an explicit actor type name
 
 By default, the *type* of the actor as seen by clients is derived from the name of the actor implementation class. The default name will be the class name name (without namespace).
 
-如果需要，你可以通过向actor实现类附加一个 `ActorAttribute` 特性来指定一个显式的类型名称。
+If desired, you can specify an explicit type name by attaching an `ActorAttribute` attribute to the actor implementation class.
 
 ```csharp
 [Actor(TypeName = "MyCustomActorTypeName")]
