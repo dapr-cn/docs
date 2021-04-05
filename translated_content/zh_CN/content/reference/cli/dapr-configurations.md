@@ -1,36 +1,36 @@
 ---
 type: docs
-title: "configurations CLI 命令参考"
+title: "configurations CLI command reference"
 linkTitle: "configurations"
-description: "有关 configurations CLI 命令的详细信息"
+description: "Detailed information on the configurations CLI command"
 ---
 
-## 说明
+## Description
 
-列出所有 Dapr 配置。
+List all Dapr configurations.
 
-## 支持的平台
+## Supported platforms
 
 - [Kubernetes]({{< ref kubernetes >}})
 
-## 用法
+## Usage
 
 ```bash
 dapr configurations [flags]
 ```
 
-## 参数
+## Flags
 
-| 名称                   | 环境变量 | 默认值     | 说明                           |
-| -------------------- | ---- | ------- | ---------------------------- |
-| `--kubernetes`, `-k` |      | `false` | 列出 Kubernetes 群集中的所有 Dapr 配置 |
-| `--name`, `-n`       |      |         | 要打印的配置名称（可选）                 |
-| `--output`, `-o`     |      | `list`  | 输出格式（选项：json 或 yaml 或列表）     |
-| `--help`, `-h`       |      |         | 显示此帮助消息                      |
+| Name                 | Environment Variable | Default | Description                                          |
+| -------------------- | -------------------- | ------- | ---------------------------------------------------- |
+| `--kubernetes`, `-k` |                      | `false` | List all Dapr configurations in a Kubernetes cluster |
+| `--name`, `-n`       |                      |         | The configuration name to be printed (optional)      |
+| `--output`, `-o`     |                      | `list`  | Output format (options: json or yaml or list)        |
+| `--help`, `-h`       |                      |         | Print this help message                              |
 
-## 示例
+## Examples
 
-### 列表 Kubernetes dapr 配置
+### List Kubernetes Dapr configurations
 ```bash
 dapr configurations -k
 ```
