@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Example of running and using virtual actors in the .NET SDK"
 linkTitle: "示例"
 weight: 300000
@@ -39,9 +39,9 @@ Since we'll be creating 3 projects, choose an empty directory to start from, and
 
 ## Step 1: Create actor interfaces
 
-Actor接口定义了actor的实现和调用actor的客户端之间的约定。
+Actor interface defines the actor contract that is shared by the actor implementation and the clients calling the actor.
 
-Actor接口的定义需要满足以下要求：
+Actor interface is defined with the below requirements:
 
 * Actor接口必须继承 `Dapr.Actors.IActor` 接口
 * Actor方法的返回值必须是`Task` 或者 `Task<object>`类型
@@ -99,7 +99,7 @@ namespace MyActor.Interfaces
 
 ## Step 2: Create actor service
 
-Dapr 使用 ASP.NET web service来托管Actor服务。 本节将会实现`IMyActor`接口并将Actor注册到Dapr Runtime。
+Dapr uses ASP.NET web service to host Actor service. This section will implement `IMyActor` actor interface and register Actor to Dapr Runtime.
 
 ### Create actor service project and add dependencies
 
@@ -120,7 +120,7 @@ cd ..
 
 ### Add actor implementation
 
-实现IMyActor接口并继承自 `Dapr.Actors.Actor` 。 下面的例子同样展示了如何使用Actor Reminders。 Actor如果要使用Reminders，则必须实现IRemindable接口 如果你不打算使用Reminder功能，你可以跳过下面代码中实现IRemindable接口和Reminder特定方法的操作。
+Implement IMyActor interface and derive from `Dapr.Actors.Actor` class. Following example shows how to use Actor Reminders as well. For Actors to use Reminders, it must derive from IRemindable. If you don't intend to use Reminder feature, you can skip implementing IRemindable and reminder specific methods which are shown in the code below.
 
 Paste the following code into `MyActor.cs` in the `MyActorService` project:
 
@@ -400,11 +400,11 @@ namespace MyActorService
 
 ### Register actor runtime with ASP.NET Core startup
 
-Actor runtime使用ASP.NET Core `Startup.cs`来配置。
+The Actor runtime is configured through ASP.NET Core `Startup.cs`.
 
-运行时使用ASP.NET Core依赖注入系统来注册actor类型和基本服务。 通过在 `ConfigureServices(...)` 中调用 `AddActors(...)` 方法来提供这种集成。 使用传递到 `AddActors(...)` 方法的委托来注册actor类型并配置actor运行时设置。 你可以在`ConfigureServices(...)`中为依赖注入注册额外的类型。 它们都可以被注入到你的Actor类型的构造器。
+The runtime uses the ASP.NET Core dependency injection system to register actor types and essential services. This integration is provided through the `AddActors(...)` method call in `ConfigureServices(...)`. Use the delegate passed to `AddActors(...)` to register actor types and configure actor runtime settings. You can register additional types for dependency injection inside `ConfigureServices(...)`. These will be available to be injected into the constructors of your Actor types.
 
-Actors通过Dapr runtime使用HTTP调用来实现。 此功能是应用程序的 HTTP 处理管道的一部分，在 `Configure(...)` 方法中的`UseEndpoint(...)` 注册。
+Actors are implemented via HTTP calls with the Dapr runtime. This functionality is part of the application's HTTP processing pipeline and is registered inside `UseEndpoints(...)` inside `Configure(...)`.
 
 Paste the following code into `Startup.cs` in the `MyActorService` project:
 
@@ -450,7 +450,7 @@ namespace MyActorService
 
 ## Step 3: Add a client
 
-创建一个简单的控制台应用来调用actor服务。 Dapr SDK 提供 Actor 代理客户端来调用Actor接口中定义的actor方法。
+Create a simple console app to call the actor service. Dapr SDK provides Actor Proxy client to invoke actor methods defined in Actor Interface.
 
 ### Create actor client project and add dependencies
 
@@ -461,10 +461,6 @@ dotnet new console -o MyActorClient
 cd MyActorClient
 
 # Add Dapr.Actors nuget package. Please use the latest package version from nuget.org
-dotnet add package Dapr.Actors -v 1.0.0-rc02
-
-# Add Actor Interface reference
-dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj Please use the latest package version from nuget.org
 dotnet add package Dapr.Actors -v 1.0.0
 
 # Add Actor Interface reference
