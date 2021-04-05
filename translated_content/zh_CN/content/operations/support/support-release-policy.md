@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Supported releases"
 linkTitle: "Supported releases"
 weight: 1000
