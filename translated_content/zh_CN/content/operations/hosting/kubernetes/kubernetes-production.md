@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Production guidelines on Kubernetes"
 linkTitle: "Production guidelines"
 weight: 40000
@@ -162,7 +162,7 @@ If you already have your own observability set-up, you can disable tracing and m
 ### Tracing
 To configure a tracing backend for Dapr visit [this]({{< ref "setup-tracing.md" >}}) link.
 
-### Metrics
+### 指标
 For metrics, Dapr exposes a Prometheus endpoint listening on port 9090 which can be scraped by Prometheus.
 
 To setup Prometheus, Grafana and other monitoring tools with Dapr, visit [this]({{< ref "monitoring" >}}) link.
