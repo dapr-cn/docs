@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Hazelcast"
 linkTitle: "Hazelcast"
 description: Detailed information on the Hazelcast state store component
