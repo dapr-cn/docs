@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "uninstall CLI 命令参考"
 linkTitle: "uninstall"
 description: "有关 uninstall CLI 命令的详细信息"
