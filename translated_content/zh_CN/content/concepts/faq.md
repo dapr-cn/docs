@@ -6,11 +6,11 @@ weight: 1000
 description: "关于 Dapr 的常见问题"
 ---
 
-## How does Dapr compare to service meshes such as Istio, Linkerd or OSM?
-Dapr is not a service mesh. While service meshes focus on fine grained network control, Dapr is focused on helping developers build distributed applications. Both Dapr and service meshes use the sidecar pattern and run alongside the application and they do have some overlapping features but also offer unique benefits. For more information please read the [Dapr & service meshes]({{X13X}}) concept page.
+## Dapr 与 Istio 、Linkerd 或 OSM 等服务网格相比如何？
+Dapr 不是一个服务网格。 虽然服务网侧重于细粒度网络控制，但 Dapr 专注于帮助开发人员构建分布式应用程序。 Dapr 和服务网都使用 sidecar 模式，并随应用程序一起运行，它们确实具有一些重叠的功能，但也提供独特的优势。 欲了解更多信息，请阅读 [Dapr & 服务网格]({{X13X}}) 概念页面。
 
 ## 性能基准
-The Dapr project is focused on performance due to the inherent discussion of Dapr being a sidecar to your application. See [here]({{< ref perf-service-invocation.md >}}) for updated performance numbers.
+Dapr项目的重点是性能，因为其固有的讨论是Dapr作为您的应用程序的侧面。 请参阅 [这里]({{< ref perf-service-invocation.md >}}) 以获取最新的性能数字。
 
 ## Actors
 
