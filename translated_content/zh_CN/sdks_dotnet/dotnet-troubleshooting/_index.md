@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "如何用 Dapr.NET SDK 进行故障排除和诊断"
 linkTitle: "疑难解答"
 weight: 100000
