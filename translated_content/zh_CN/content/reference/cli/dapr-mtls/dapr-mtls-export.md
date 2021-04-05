@@ -1,34 +1,34 @@
 ---
-type: docs
-title: "mtls export CLI command reference"
+type: 文档
+title: "mtls export CLI 命令参考"
 linkTitle: "mtls export"
-description: "Detailed information on the mtls export CLI command"
+description: "有关 mtls export CLI 命令的详细信息"
 weight: 1000
 ---
 
-## Description
+## 描述
 
-Export the root CA, issuer cert and key from Kubernetes to local files
+将根 CA，颁发者证书和密钥从 Kubernetes 导出到本地文件
 
-## Supported platforms
+## 支持的平台
 
 - [Kubernetes]({{< ref kubernetes >}})
 
-## Usage
+## 用法
 ```bash
 dapr mtls export [flags]
 ```
 
-## Flags
+## 参数
 
-| Name           | Environment Variable | Default           | Description                                 |
-| -------------- | -------------------- | ----------------- | ------------------------------------------- |
-| `--help`, `-h` |                      |                   | help for export                             |
-| `--out`, `-o`  |                      | current directory | The output directory path to save the certs |
+| 名称             | 环境变量 | 默认值  | 描述            |
+| -------------- | ---- | ---- | ------------- |
+| `--help`, `-h` |      |      | 帮助信息          |
+| `--out`, `-o`  |      | 当前目录 | 用于保存证书的输出目录路径 |
 
-## Examples
+## 示例
 
-### Check expiry of Kubernetes certs
+### 检查 Kubernetes 证书的过期时间
 ```bash 
 dapr mtls export -o ./certs
 ```
