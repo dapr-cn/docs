@@ -35,6 +35,20 @@ spec:
   - name: readconcern
     value: <REPLACE-WITH-READ-CONCERN> # Optional.
   - name: operationTimeout
+    value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "5s" Example: "mongo-mongodb.default.svc.cluster.local:27017"
+  - name: username
+    value: <REPLACE-WITH-USERNAME> # Optional. Example: "admin"
+  - name: password
+    value: <REPLACE-WITH-PASSWORD> # Optional.
+  - name: databaseName
+    value: <REPLACE-WITH-DATABASE-NAME> # Optional. default: "daprStore"
+  - name: collectionName
+    value: <REPLACE-WITH-COLLECTION-NAME> # Optional. default: "daprCollection"
+  - name: writeconcern
+    value: <REPLACE-WITH-WRITE-CONCERN> # Optional.
+  - name: readconcern
+    value: <REPLACE-WITH-READ-CONCERN> # Optional.
+  - name: operationTimeout
     value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "5s"
 ```
 
@@ -52,16 +66,16 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 详情                               | 示例                                                                    |
-| ---------------- |:--:| -------------------------------- | --------------------------------------------------------------------- |
-| host             | Y  | 要连接的主机                           | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
-| username         | N  | 要连接的用户名                          | `"admin"`                                                             |
-| password         | N  | 用户密码                             | `"password"`                                                          |
-| databaseName     | N  | 要使用的数据库名称。 默认值为 `"daprStore"`    | `"daprStore"`                                                         |
-| collectionName   | N  | 要使用的收藏名称 默认值为 `"daprCollection"` | `"daprCollection"`                                                    |
-| writeconcern     | N  | 要使用的写入保证                         | `"majority"`                                                          |
-| readconcern      | N  | 要使用的读取保证                         | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
-| operationTimeout | N  | 操作超时。 默认为 `"5s"`                 | `"5s"`                                                                |
+| 字段               | 必填 | 详情                                                                  | 示例                                                                    |
+| ---------------- |:--:| ------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| host             | Y  | 要连接的主机                                                              | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
+| username         | N  | 要连接的用户名                                                             | `"admin"`                                                             |
+| password         | N  | 用户密码                                                                | `"password"`                                                          |
+| databaseName     | N  | 要使用的数据库名称。 默认值为 `"daprStore"`                                       | `"daprStore"`                                                         |
+| collectionName   | N  | The name of the collection to use. 要使用的收藏名称 默认值为 `"daprCollection"` | `"daprCollection"`                                                    |
+| writeconcern     | N  | 要使用的写入保证                                                            | `"majority"`                                                          |
+| readconcern      | N  | 要使用的读取保证                                                            | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
+| operationTimeout | N  | 操作超时。 默认为 `"5s"`                                                    | `"5s"`                                                                |
 
 ## 配置 MongoDB
 
