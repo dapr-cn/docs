@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "RabbitMQ 绑定规范"
+title: "RabbitMQ binding spec"
 linkTitle: "RabbitMQ"
 description: "Detailed documentation on the RabbitMQ binding component"
 ---
 
 ## Component format
 
-To setup RabbitMQ binding create a component of type `bindings.rabbitmq`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup RabbitMQ binding create a component of type `bindings.rabbitmq`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -39,40 +39,40 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| 字段               | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                                                                                | Example                                             |
-| ---------------- |:--------:| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| queueName        |    Y     | Input/Output    | The RabbitMQ queue name                                                                                                                                                                                                                                                                                                                                                                                                                | `"myqueue"`                                         |
-| host             |    Y     | Input/Output    | The RabbitMQ host address                                                                                                                                                                                                                                                                                                                                                                                                              | `"amqp://[username][:password]@host.domain[:port]"` |
-| durable          |    N     | Output          | Tells RabbitMQ to persist message in storage. Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                                                                                                                                              | `"true"`, `"false"`                                 |
-| deleteWhenUnused |    N     | Input/Output    | Enables or disables auto-delete. Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                                                                                                                                                           | `"true"`, `"false"`                                 |
-| ttlInSeconds     |    N     | Output          | Set the [default message time to live at RabbitMQ queue level](https://www.rabbitmq.com/ttl.html). 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 See [also](#specifying-a-ttl-per-message)                                                                                                                                                                                                                         | `60`                                                |
-| prefetchCount    |    N     | Input           | Set the [Channel Prefetch Setting (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch). 如果此参数为空，QOS 会设置为0为无限制。 如果此参数为空，QOS 会设置为0为无限制。                                                                                                                                                                                                                                                                                   | `0`                                                 |
-| exclusive        |    N     | Input/Output    | Determines whether the topic will be an exclusive topic or not. Defaults to `"false"` Defaults to `"false"`                                                                                                                                                                                                                                                                                                                            | `"true"`, `"false"`                                 |
-| maxPriority      |    N     | Input/Output    | Parameter to set the [priority queue](https://www.rabbitmq.com/priority.html). If this parameter is omitted, queue will be created as a general queue instead of a priority queue. Value between 1 and 255. See [also](#specifying-a-priority-per-message) If this parameter is omitted, queue will be created as a general queue instead of a priority queue. Value between 1 and 255. See [also](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
-## 相关链接
+| Field            | Required | Binding support | Details                                                                                                                                                                                                                                                    | Example                                             |
+| ---------------- |:--------:| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| queueName        |    Y     | Input/Output    | The RabbitMQ queue name                                                                                                                                                                                                                                    | `"myqueue"`                                         |
+| host             |    Y     | Input/Output    | The RabbitMQ host address                                                                                                                                                                                                                                  | `"amqp://[username][:password]@host.domain[:port]"` |
+| durable          |    N     | Output          | Tells RabbitMQ to persist message in storage. Defaults to `"false"`                                                                                                                                                                                        | `"true"`, `"false"`                                 |
+| deleteWhenUnused |    N     | Input/Output    | Enables or disables auto-delete. Defaults to `"false"`                                                                                                                                                                                                     | `"true"`, `"false"`                                 |
+| ttlInSeconds     |    N     | Output          | Set the [default message time to live at RabbitMQ queue level](https://www.rabbitmq.com/ttl.html). If this parameter is omitted, messages won't expire, continuing to exist on the queue until processed. See [also](#specifying-a-ttl-per-message)        | `60`                                                |
+| prefetchCount    |    N     | Input           | Set the [Channel Prefetch Setting (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch). If this parameter is omiited, QoS would set value to 0 as no limit                                                                                  | `0`                                                 |
+| exclusive        |    N     | Input/Output    | Determines whether the topic will be an exclusive topic or not. Defaults to `"false"`                                                                                                                                                                      | `"true"`, `"false"`                                 |
+| maxPriority      |    N     | Input/Output    | Parameter to set the [priority queue](https://www.rabbitmq.com/priority.html). If this parameter is omitted, queue will be created as a general queue instead of a priority queue. Value between 1 and 255. See [also](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
+## Binding support
 
 This component supports both **input and output** binding interfaces.
 
-字段名为 `ttlInSeconds`。
+This component supports **output binding** with the following operations:
 
 - `create`
 
-## 输出绑定支持的操作
+## Specifying a TTL per message
 
-可以在队列级别 ( 如上所述) 或消息级别定义生存时间。 在消息级别定义的值会覆盖在队列级别设置的任何值。
+Time to live can be defined on queue level (as illustrated above) or at the message level. The value defined at message level overwrites any value set at queue level.
 
-若要设置在消息级别生存的时间，请使用 `metadata` 请求正文中的元数据部分。
+To set time to live at message level use the `metadata` section in the request body during the binding invocation.
 
-字段名为 `ttlInSeconds`。
+The field name is `ttlInSeconds`.
 
-{{< tabs >}}
+Example:
 
-示例:
+{{< tabs Windows Linux >}}
 {{% codetab %}}
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
@@ -107,15 +107,15 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
 {{< /tabs >}}
 
 
-## 相关链接
+## Specifying a priority per message
 
-Priority can be defined at the message level. Priority can be defined at the message level. If `maxPriority` parameter is set, high priority messages will have priority over other low priority messages.
+Priority can be defined at the message level. If `maxPriority` parameter is set, high priority messages will have priority over other low priority messages.
 
 To set priority at message level use the `metadata` section in the request body during the binding invocation.
 
 The field name is `priority`.
 
-示例:
+Example:
 
 {{< tabs Windows Linux >}}
 {{% codetab %}}
@@ -151,10 +151,10 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
 {{% /codetab %}}
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})
-- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
-- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
-- [绑定API 参考]({{< ref bindings_api.md >}})
+- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
+- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
+- [Bindings API reference]({{< ref bindings_api.md >}})
