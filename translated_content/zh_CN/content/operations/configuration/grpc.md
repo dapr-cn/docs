@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "指南：配置 Dapr 来使用 gRPC"
 linkTitle: "Use gRPC interface"
 weight: 5000
