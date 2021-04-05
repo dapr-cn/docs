@@ -1,8 +1,8 @@
 ---
-type: 文档
+type: docs
 title: "在自托管环境中升级 Dapr 的步骤"
 linkTitle: "升级 Dapr"
-weight: 50000
+weight: 40000
 description: "按照这些步骤在自托管模式下升级 Dapr，并确保顺利升级"
 ---
 
