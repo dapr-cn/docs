@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Local Storage binding spec"
-linkTitle: "Local Storage"
-description: "Detailed documentation on the Local Storage binding component"
+title: "本地存储绑定规范"
+linkTitle: "本地存储"
+description: "关于本地存储绑定组件的详细文档"
 ---
 
 ## 配置
