@@ -123,7 +123,7 @@ docker run --name dapr-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d
 
 ### Enforced SSL 连接
 
-如果你的服务器需要 SSL 加密，那么连接字符串必须以 `&tls=custom` 结尾。例如, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"`。 您必须使用完整的PEM文件路径替换 `<PEM PATH>` 。 与 MySQL 的连接至少需要1.2版本及以上的 TLS。
+如果你的服务器需要 SSL 加密，那么连接字符串必须以 `&tls=custom` 结尾。 例如, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"`。 您必须使用完整的PEM文件路径替换 `<PEM PATH>` 。 与 MySQL 的连接至少需要1.2版本及以上的 TLS。
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
