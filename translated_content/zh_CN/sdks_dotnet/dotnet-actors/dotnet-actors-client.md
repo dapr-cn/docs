@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Dapr actor .NET usage guide"
 linkTitle: "Actors client"
 weight: 100000
