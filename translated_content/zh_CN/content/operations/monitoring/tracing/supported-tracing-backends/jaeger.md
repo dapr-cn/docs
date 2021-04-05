@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "How-To: Set up Jaeger for distributed tracing"
+title: "操作方法: 为分布式跟踪安装 Jaeger"
 linkTitle: "Jaeger"
 weight: 3000
-description: "Set up Jaeger for distributed tracing"
+description: "为分布式跟踪安装 Jaeger"
 ---
 
-Dapr currently supports the Zipkin protocol. Dapr currently supports the Zipkin protocol. Since Jaeger is compatible with Zipkin, the Zipkin protocol can be used to talk to Jaeger.
+Dapr 目前支持Zipkin 协议。 既然Jaeger 与 Zipkin 兼容，那么 Zipkin 协议可以用来与 Jaeger 通信。
 
-## Configure self hosted mode
+## 配置自托管模式
 
-### Setup
+### 设置
 
-The simplest way to start Jaeger is to use the pre-built all-in-one Jaeger image published to DockerHub:
+启动Jaeger的最简单方式是使用发布到DockerHub的Jaeger全家桶镜像：
 
 ```bash
 docker run -d --name jaeger \
@@ -23,9 +23,9 @@ docker run -d --name jaeger \
 ```
 
 
-Next, create the following YAML files locally:
+接下来，在本地创建以下YAML文件：
 
-* **config.yaml**: Note that because we are using the Zipkin protocol to talk to Jaeger, we specify the `zipkin` section of tracing configuration set the `endpointAddress` to address of the Jaeger instance.
+* **config.yaml**: 注意, 因为我们正在使用 Zipkin 协议 来与 Jaeger 通信, 我们指定 `zipkin` 追踪部分 配置设置 `endpointAddress` 来定位Jaeger 实例。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
