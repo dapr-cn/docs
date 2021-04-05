@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "PostgreSQL"
-linkTitle: "PostgrSQL"
+linkTitle: "PostgreSQL"
 description: PostgreSQL 状态存储组件的详细信息
 ---
 
@@ -25,7 +25,7 @@ spec:
     value: "<CONNECTION STRING>"
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
+The above example uses secrets as plain strings. 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
