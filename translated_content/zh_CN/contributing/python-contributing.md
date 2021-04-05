@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "为 Python SDK 贡献"
 linkTitle: "Python SDK"
 weight: 3000
