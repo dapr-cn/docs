@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Dapr PHP SDK"
 linkTitle: "PHP"
 weight: 1000
@@ -11,7 +11,7 @@ Dapr offers an SDK to help with the development of PHP applications. Using it, y
 
 ## Setting up
 
-### Prerequisites
+### 前期准备
 
 - [Composer](https://getcomposer.org/)
 - [PHP 8](https://www.php.net/)
