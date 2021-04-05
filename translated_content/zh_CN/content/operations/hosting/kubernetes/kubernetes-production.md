@@ -17,7 +17,7 @@ For a production ready Kubernetes cluster deployment, it is recommended you run 
 | **Operator**         | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 100Mi |
 | **Sidecar Injector** | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 30Mi  |
 | **Sentry**           | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 30Mi  |
-| **Placement**        | Limit: 1, Request: 250m   | Limit: 150Mi, Request: 75Mi  |
+| **放置**               | Limit: 1, Request: 250m   | Limit: 150Mi, Request: 75Mi  |
 | **Dashboard**        | Limit: 200m, Request: 50m | Limit: 200Mi, Request: 20Mi  |
 
 ### Helm
