@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr 参考文档"
 linkTitle: "参考资料"
 weight: 60
