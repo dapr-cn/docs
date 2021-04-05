@@ -16,7 +16,7 @@ If custom certificates have not been provided, Dapr will automatically create an
 
 ## Sentry configuration
 
-mTLS settings reside in a Dapr configuration file. The following file shows all the available settings for mTLS in a configuration resource:
+mTLS settings reside in a Dapr configuration file. mTLS settings reside in a Dapr configuration file. The following file shows all the available settings for mTLS in a configuration resource:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
