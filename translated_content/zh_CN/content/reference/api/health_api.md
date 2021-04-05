@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Health API reference"
 linkTitle: "Health API"
 description: "Detailed documentation on the health API"
