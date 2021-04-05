@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Frequently asked questions and answers"
+title: "常见问题及解答"
 linkTitle: "FAQs"
 weight: 1000
-description: "Common questions asked about Dapr"
+description: "关于 Dapr 的常见问题"
 ---
 
 ## How does Dapr compare to service meshes such as Istio, Linkerd or OSM?
 Dapr is not a service mesh. While service meshes focus on fine grained network control, Dapr is focused on helping developers build distributed applications. Both Dapr and service meshes use the sidecar pattern and run alongside the application and they do have some overlapping features but also offer unique benefits. For more information please read the [Dapr & service meshes]({{X13X}}) concept page.
 
-## Performance Benchmarks
+## 性能基准
 The Dapr project is focused on performance due to the inherent discussion of Dapr being a sidecar to your application. See [here]({{< ref perf-service-invocation.md >}}) for updated performance numbers.
 
 ## Actors
@@ -26,7 +26,7 @@ Creating a new actor follows a local call like `http://localhost:3500/v1.0/actor
 
 The Dapr runtime SDKs have language specific actor frameworks. The .NET SDK for example has C# actors. The goal is for all the Dapr language SDKs to have an actor framework. Currently .NET, Java and Python SDK have actor frameworks.
 
-## Developer language SDKs and frameworks
+## 开发者语言 SDK 和框架
 
 ### Does Dapr have any SDKs if I want to work with a particular programming language or framework?
 
@@ -39,8 +39,8 @@ Dapr can be integrated with any developer framework. For example, in the Dapr .N
 
 Dapr is integrated with the following frameworks;
 
-- Logic Apps with Dapr [Workflows](https://github.com/dapr/workflows)
-- Functions with Dapr [Azure Functions Extension](https://github.com/dapr/azure-functions-extension)
-- Spring Boot Web apps in Java SDK
-- ASP.NET Core in .NET SDK
-- [Azure API Management](https://cloudblogs.microsoft.com/opensource/2020/09/22/announcing-dapr-integration-azure-api-management-service-apim/)
+- 基于Dapr[工作流](https://github.com/dapr/workflows)的 Logic Apps
+- 基于 Dapr[Azure Functions Extension](https://github.com/dapr/azure-functions-extension)的函数
+- Java SDK中的Spring Boot Web应用
+- .NET SDK中的ASP.NET Core
+- [Azure API 管理](https://cloudblogs.microsoft.com/opensource/2020/09/22/announcing-dapr-integration-azure-api-management-service-apim/)
