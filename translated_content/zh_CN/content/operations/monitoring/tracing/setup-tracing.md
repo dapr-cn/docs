@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Configure Dapr to send distributed tracing data"
 linkTitle: "Enable Dapr tracing for your application"
 weight: 100
@@ -66,7 +66,7 @@ For self hosted mode, create a Dapr configuration file locally and reference it 
 
 The following steps show you how to configure Dapr to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster, and how to view them.
 
-### Setup
+### 设置
 
 First, deploy Zipkin:
 
