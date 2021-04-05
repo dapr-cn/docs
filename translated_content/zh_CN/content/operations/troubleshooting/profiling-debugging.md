@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Profiling & Debugging"
 linkTitle: "Debugging"
 weight: 4000
