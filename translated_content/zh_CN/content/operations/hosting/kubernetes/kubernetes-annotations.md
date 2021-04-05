@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr Kubernetes pod annotations spec"
 linkTitle: "Kubernetes annotations"
 weight: 40000
