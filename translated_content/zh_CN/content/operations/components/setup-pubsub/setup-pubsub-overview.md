@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "概述"
-linkTitle: "密钥仓库概述"
-description: "Dapr pub/sub 组件设置概述"
+title: "Overview"
+linkTitle: "Overview"
+description: "Overview on setting up of pub/sub components for Dapr"
 weight: 10000
 ---
 
-Dapr集成了pub/sub消息总线，为应用程序提供了创建事件驱动、松散耦合架构的能力，在这种架构下，生产者通过主题向消费者发送事件。
+Dapr integrates with pub/sub message buses to provide applications with the ability to create event-driven, loosely coupled architectures where producers send events to consumers via topics.
 
-Dapr支持为*每个应用*配置多个命名的pub/sub组件。 每个pub/sub组件都有一个名称，这个名称在发布消息主题时使用。 阅读 [API 参考]({{< ref pubsub_api.md >}})，了解如何发布和订阅主题的详细信息。
+Dapr supports the configuration of multiple, named, pub/sub components *per application*. Each pub/sub component has a name and this name is used when publishing a message topic. Read the [API reference]({{< ref pubsub_api.md >}}) for details on how to publish and subscribe to topics.
 
-Pub/sub组件是可扩展的， [这里]({{< ref supported-pubsub >}})有支持的pub/sub组件列表，实现可以在[components-contrib repo](https://github.com/dapr/components-contrib)中找到。
+Pub/sub components are extensible. A list of support pub/sub components is [here]({{< ref supported-pubsub >}}) and the implementations can be found in the [components-contrib repo](https://github.com/dapr/components-contrib).
 
-## 组件文件
+## Component files
 
-Pub/sub使用`Component`文件来描述：
+A pub/sub is described using a `Component` file:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,21 +33,21 @@ spec:
 ...
 ```
 
-Pub/sub的类型由`type`字段决定，连接地址和其他元数据等属性放在`.metadata`部分。 尽管元数据值可以包含纯文本的密钥，但建议你使用[密钥仓库]({{< ref component-secrets.md >}})来存储并用`secretKeyRef`引用。
+The type of pub/sub is determined by the `type` field, and properties such as connection strings and other metadata are put in the `.metadata` section. Even though metadata values can contain secrets in plain text, it is recommended you use a [secret store]({{< ref component-secrets.md >}}) using a `secretKeyRef`.
 
 {{% alert title="Topic creation" color="primary" %}}
-根据你使用的 pub/sub 消息总线及其配置方式，主题可能会被自动创建。 即使消息总线支持自动创建主题，在生产环境中把它禁用也是一种常见的做法。 你可能会需要使用 CLI、管理控制台或请求表单来手动创建应用所需的主题。
+Depending on the pub/sub message bus you are using and how it is configured, topics may be created automatically. Even if the message bus supports automatic topic creation, it is a common governance practice to disable it in production environments. You may still need to use a CLI, admin console, or request form to manually create the topics required by your application.
 {{% /alert %}}
 
-请访问 [本指南]({{< ref "howto-publish-subscribe.md#step-3-publish-a-topic" >}})，了解有关配置和使用 pub/sub 组件的说明。
+Visit [this guide]({{< ref "howto-publish-subscribe.md#step-3-publish-a-topic" >}}) for instructions on configuring and using pub/sub components.
 
-## 相关链接
+## Related links
 
-- Dapr概述 [Pub/Sub构件块]({{< ref pubsub-overview.md >}})
-- 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)
-- 阅读[发布和订阅指南]({{< ref howto-publish-subscribe.md >}})
-- 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
-- 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
-- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
-- [Pub/Sub 组件列表]({{< ref supported-pubsub >}})
-- 阅读 [API 参考]({{< ref pubsub_api.md >}})
+- Overview of the Dapr [Pub/Sub building block]({{< ref pubsub-overview.md >}})
+- Try the [Pub/Sub quickstart sample](https://github.com/dapr/quickstarts/tree/master/pub-sub)
+- Read the [guide on publishing and subscribing]({{< ref howto-publish-subscribe.md >}})
+- Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
+- Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
+- Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
+- List of [pub/sub components]({{< ref supported-pubsub >}})
+- Read the [API reference]({{< ref pubsub_api.md >}})
