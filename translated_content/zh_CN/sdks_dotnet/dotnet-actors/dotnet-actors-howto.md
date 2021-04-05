@@ -1,20 +1,20 @@
 ---
 type: docs
 title: "Example of running and using virtual actors in the .NET SDK"
-linkTitle: "Example"
+linkTitle: "示例"
 weight: 300000
 description: Try out .NET Dapr virtual actors with this example
 ---
 
-The Dapr actor package allows you to interact with Dapr virtual actors from a .NET application.
+通过Dapr actor 程序包，您可以与.NET应用程序中的Dapr虚拟actor进行交互。
 
-## Prerequisites
+## 前期准备
 
-- [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
-- Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
-- [.NET Core 3.1 or .NET 5+](https://dotnet.microsoft.com/download) installed
+- 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
+- 初始化的 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
+- [.NET Core 3.1 或 .NET 5+](https://dotnet.microsoft.com/download) 已安装
 
-## Overview
+## 概述
 
 This document describes how to create an Actor (`MyActor`) and invoke its methods on the client application.
 
@@ -26,11 +26,12 @@ MyActor --- MyActor.Interfaces
          +- MyActorClient
 ```
 
-* **The interface project(\MyActor\MyActor.Interfaces).** This project contains the interface definition for the actor. Actor interfaces can be defined in any project with any name. The interface defines the actor contract that is shared by the actor implementation and the clients calling the actor. Because client projects may depend on it, it typically makes sense to define it in an assembly that is separate from the actor implementation.
+* **接口项目(\MyActor\MyActor.Interfaces).** 该项目包含了actor的接口定义。 Actor接口可以在任何项目中以任意的名称定义。 它定义了actor的实现和调用actor的客户端之间的约定。 由于客户端项目可能会依赖它，所以在一个和actor实现分隔开的程序集中定义通常是有意义的。
 
-* **The actor service project(\MyActor\MyActorService).** This project implements ASP.Net Core web service that is going to host the actor. It contains the implementation of the actor, MyActor.cs. An actor implementation is a class that derives from the base type Actor and implements the interfaces defined in the MyActor.Interfaces project. An actor class must also implement a constructor that accepts an ActorService instance and an ActorId and passes them to the base Actor class.
+* **Actor服务项目 (\MyActor\MyActorService)。** 该项目实现了Asp.Net Core web service，用于托管actor。 它包含了actor的实现，MyActor.cs。 Actor的实现是一个继承了基类Actor并且实现了Myactor.Interfaces项目中定义的接口的类。 Actor还必须提供接受一个ActorService实例和ActorId的构造函数，并将他们传递给基类。
 
-* **The actor client project(\MyActor\MyActorClient)** This project contains the implementation of the actor client which calls MyActor's method defined in Actor Interfaces.
+* [Actor(TypeName = "MyCustomActorTypeName")] internal class MyActor : Actor, IMyActor
+    { // ... }
 
 ## Step 0: Prepare
 
@@ -42,9 +43,9 @@ Actor interface defines the actor contract that is shared by the actor implement
 
 Actor interface is defined with the below requirements:
 
-* Actor interface must inherit `Dapr.Actors.IActor` interface
-* The return type of Actor method must be `Task` or `Task<object>`
-* Actor method can have one argument at a maximum
+* Actor接口必须继承 `Dapr.Actors.IActor` 接口
+* Actor方法的返回值必须是`Task` 或者 `Task<object>`类型
+* Actor方法最多只能有一个参数
 
 ### Create interface project and add dependencies
 
@@ -55,6 +56,7 @@ dotnet new classlib -o MyActor.Interfaces
 cd MyActor.Interfaces
 
 # Add Dapr.Actors nuget package. Please use the latest package version from nuget.org
+dotnet add package Dapr.Actors -v 1.0.0-rc02 Please use the latest package version from nuget.org
 dotnet add package Dapr.Actors -v 1.0.0
 
 cd ..
@@ -92,7 +94,7 @@ namespace MyActor.Interfaces
             return $"PropertyA: {propAValue}, PropertyB: {propBValue}";
         }
     }
-}
+}    
 ```
 
 ## Step 2: Create actor service
@@ -139,7 +141,7 @@ namespace MyActorService
         /// <summary>
         /// Initializes a new instance of MyActor
         /// </summary>
-        /// <param name="host">The Dapr.Actors.Runtime.ActorHost that will host this actor instance.</param>
+        /// 
         public MyActor(ActorHost host)
             : base(host)
         {
@@ -169,7 +171,147 @@ namespace MyActorService
         /// <summary>
         /// Set MyData into actor's private state store
         /// </summary>
-        /// <param name="data">the user-defined MyData which will be stored into state store as "my_data" state</param>
+        /// 
+        public async Task<string> SetDataAsync(MyData data)
+        {
+            // Data is saved to configured state store implicitly after each method execution by Actor's runtime.
+            // Data can also be saved explicitly by calling this.StateManager.SaveStateAsync();
+            // State to be saved must be DataContract serializable.
+            await this.StateManager.SetStateAsync<MyData>(
+                "my_data",  // state name
+                data);      // data saved for the named state "my_data"
+
+            return "Success";
+        }
+
+        /// <summary>
+        /// Get MyData from actor's private state store
+        /// </summary>
+        /// <return>the user-defined MyData which is stored into state store as "my_data" state</return>
+        public Task<MyData> GetDataAsync()
+        {
+            // Gets state from the state store.
+            return this.StateManager.GetStateAsync<MyData>("my_data");
+        }
+
+        /// <summary>
+        /// Register MyReminder reminder with the actor
+        /// </summary>
+        public async Task RegisterReminder()
+        {
+            await this.RegisterReminderAsync(
+                "MyReminder",              // The name of the reminder
+                null,                      // User state passed to IRemindable.ReceiveReminderAsync()
+                TimeSpan.FromSeconds(5),   // Time to delay before invoking the reminder for the first time
+                TimeSpan.FromSeconds(5));  // Time interval between reminder invocations after the first invocation
+        }
+
+        /// <summary>
+        /// Unregister MyReminder reminder with the actor
+        /// </summary>
+        public Task UnregisterReminder()
+        {
+            Console.WriteLine("Unregistering MyReminder...");
+            return this.UnregisterReminderAsync("MyReminder");
+        }
+
+        // <summary>
+        // Implement IRemindeable.ReceiveReminderAsync() which is call back invoked when an actor reminder is triggered.
+        // </summary>
+        public Task ReceiveReminderAsync(string reminderName, byte[] state, TimeSpan dueTime, TimeSpan period)
+        {
+            Console.WriteLine("ReceiveReminderAsync is called!");
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Register MyTimer timer with the actor
+        /// </summary>
+        public Task RegisterTimer()
+        {
+            return this.RegisterTimerAsync(
+                "MyTimer",                  // The name of the timer
+                nameof(this.OnTimerCallBack),       // Timer callback
+                null,                       // User state passed to OnTimerCallback()
+                TimeSpan.FromSeconds(5),    // Time to delay before the async callback is first invoked
+                TimeSpan.FromSeconds(5));   // Time interval between invocations of the async callback
+        }
+
+        /// <summary>
+        /// Unregister MyTimer timer with the actor
+        /// </summary>
+        public Task UnregisterTimer()
+        {
+            Console.WriteLine("Unregistering MyTimer...");
+            return this.UnregisterTimerAsync("MyTimer");
+        }
+
+        /// <summary>
+        /// Timer callback once timer is expired
+        /// </summary>
+        private Task OnTimerCallBack(byte[] data)
+        {
+            Console.WriteLine("OnTimerCallBack is called!");
+            return Task.CompletedTask;
+        }
+    }
+}
+
+         
+         
+             
+         
+             
+             
+             
+             
+        using Dapr.Actors;
+using Dapr.Actors.Runtime;
+using MyActor.Interfaces;
+using System;
+using System.Threading.Tasks;
+
+namespace MyActorService
+{
+    internal class MyActor : Actor, IMyActor, IRemindable
+    {
+        // The constructor must accept ActorHost as a parameter, and can also accept additional
+        // parameters that will be retrieved from the dependency injection container
+        //
+        /// <summary>
+        /// Initializes a new instance of MyActor
+        /// </summary>
+        /// 
+        public MyActor(ActorHost host)
+            : base(host)
+        {
+        }
+
+        /// <summary>
+        /// This method is called whenever an actor is activated.
+        /// An actor is activated the first time any of its methods are invoked.
+        /// </summary>
+        protected override Task OnActivateAsync()
+        {
+            // Provides opportunity to perform some optional setup.
+            Console.WriteLine($"Activating actor id: {this.Id}");
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// This method is called whenever an actor is deactivated after a period of inactivity.
+        /// </summary>
+        protected override Task OnDeactivateAsync()
+        {
+            // Provides Opporunity to perform optional cleanup.
+            Console.WriteLine($"Deactivating actor id: {this.Id}");
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Set MyData into actor's private state store
+        /// </summary>
+        /// 
         public async Task<string> SetDataAsync(MyData data)
         {
             // Data is saved to configured state store implicitly after each method execution by Actor's runtime.
@@ -418,7 +560,7 @@ The projects that you've created can now to test the sample.
     == APP ==       Content root path: /Users/ryan/actortest/MyActorService
     ```
 
-2. Run MyActorClient
+2. 运行 MyActorClient
 
     `MyActorClient` is acting as the client, and it can be run normally with `dotnet run`.
 
@@ -442,7 +584,7 @@ The projects that you've created can now to test the sample.
 
 Now you have successfully created an actor service and client. See the related links section to learn more.
 
-## Related links
+## 相关链接
 
 - [.NET Dapr Actors client guide]({{< ref dotnet-actors-client.md >}})
 - [.NET Dapr Actors usage guide]({{< ref dotnet-actors-usage.md >}})
