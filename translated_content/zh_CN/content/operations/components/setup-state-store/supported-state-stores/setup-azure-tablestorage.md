@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Azure Table Storage"
 linkTitle: "Azure Table Storage"
 description: 关于Azure Table Storage状态存储组件的详细信息
