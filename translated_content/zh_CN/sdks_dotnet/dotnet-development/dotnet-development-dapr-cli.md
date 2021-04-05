@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr .NET SDK Development with Dapr CLI"
 linkTitle: "Dapr CLI"
 weight: 50000
