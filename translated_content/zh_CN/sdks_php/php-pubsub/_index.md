@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "使用 PHP 发布和订阅"
 linkTitle: "发布与订阅"
 weight: 1000
