@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "How-To: Observe metrics with Grafana"
 linkTitle: "Metrics dashboards with Grafana"
 weight: 5000
