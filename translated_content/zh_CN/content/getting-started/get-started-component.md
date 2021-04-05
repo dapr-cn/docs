@@ -89,4 +89,6 @@ Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/secrets/my-secret-store/my-se
 ```json
 {"my-secret":"I'm Batman"}
 ```
-
+{{% alert color="primary" %}}
+[Next step: Explore Dapr quickstarts >>]({{< ref quickstarts.md >}})
+{{% /alert %}}
