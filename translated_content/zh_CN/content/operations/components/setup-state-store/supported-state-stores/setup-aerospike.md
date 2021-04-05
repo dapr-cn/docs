@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Aerospike"
 linkTitle: "Aerospike"
 description: 关于Aerospike状态存储组件的详细信息
