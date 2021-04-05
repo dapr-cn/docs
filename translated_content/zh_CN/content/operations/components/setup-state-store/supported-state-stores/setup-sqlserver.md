@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "SQL Server"
 linkTitle: "SQL Server"
 description: Detailed information on the SQL Server state store component
