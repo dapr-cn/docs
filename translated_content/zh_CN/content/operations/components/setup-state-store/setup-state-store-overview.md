@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "概述"
 linkTitle: "概述"
 description: "状态管理组件的设置指导"
