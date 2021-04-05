@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Running Dapr with a Kubernetes Job"
 linkTitle: "Kubernetes Jobs"
 weight: 70000
