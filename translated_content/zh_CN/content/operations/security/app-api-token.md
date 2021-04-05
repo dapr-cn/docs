@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Authenticate requests from Dapr using token authentication"
 linkTitle: "App API token authentication"
 weight: 4000
@@ -34,7 +34,7 @@ To rotate the configured token, simply set the `APP_API_TOKEN` environment varia
 
 ### Kubernetes
 
-In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. Start by creating a new secret:
+In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. Start by creating a new secret: Start by creating a new secret: Start by creating a new secret:
 
 ```shell
 kubectl create secret generic app-api-token --from-literal=token=<token> 
@@ -130,7 +130,7 @@ In self-hosted mode, you can set the token as an environment variable for your a
 export APP_API_TOKEN=<my-app-token>
 ```
 
-## Related Links
+## 相关链接
 
 - Learn about [Dapr security concepts]({{< ref security-concept.md >}})
 - Learn [HowTo Enable API token authentication in Dapr]({{< ref api-token.md >}})
