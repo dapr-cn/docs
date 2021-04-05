@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "绑定API 参考"
 linkTitle: "绑定 API"
 description: "关于 Bindings API 的详细文档"
