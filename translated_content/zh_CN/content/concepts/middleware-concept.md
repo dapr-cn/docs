@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Middleware pipelines"
-linkTitle: "Middleware"
+linkTitle: "中间件"
 weight: 400
 description: "Custom processing pipelines of chained middleware components"
 ---
