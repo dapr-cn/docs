@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Getting started with the Dapr actor Python SDK"
 linkTitle: "Actor"
 weight: 20000
