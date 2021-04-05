@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr .NET SDK Development with Docker-Compose"
 linkTitle: "Docker Compose"
 weight: 40000
