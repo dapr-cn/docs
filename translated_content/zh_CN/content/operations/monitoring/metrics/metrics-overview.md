@@ -1,14 +1,14 @@
 ---
-type: docs
-title: "Metrics"
-linkTitle: "Metrics"
+type: 文档
+title: "指标"
+linkTitle: "指标"
 weight: 4000
 description: "Observing Dapr metrics in Kubernetes"
 ---
 
 Dapr exposes a [Prometheus](https://prometheus.io/) metrics endpoint that you can scrape to gain a greater understanding of how Dapr is behaving and to setup alerts for specific conditions.
 
-## Configuration
+## 配置
 
 The metrics endpoint is enabled by default, you can disable it by passing the command line argument `--enable-metrics=false` to Dapr system processes.
 
@@ -60,13 +60,13 @@ spec:
     enabled: true
 ```
 
-## Metrics
+## 指标
 
 Each Dapr system process emits Go runtime/process metrics by default and have their own metrics:
 
 - [Dapr metric list](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md)
 
-## References
+## 参考资料
 
 * [Howto: Run Prometheus locally]({{< ref prometheus.md >}})
 * [Howto: Set up Prometheus and Grafana for metrics]({{< ref grafana.md >}})
