@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Configure and view Dapr Logs"
 linkTitle: "日志"
 weight: 2000
