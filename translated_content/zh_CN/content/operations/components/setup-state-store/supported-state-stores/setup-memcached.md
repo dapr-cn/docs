@@ -28,6 +28,10 @@ spec:
   - name: maxIdleConnections
     value: <REPLACE-WITH-MAX-IDLE-CONNECTIONS> # Optional. default: "2"
   - name: timeout
+    value: <REPLACE-WITH-TIMEOUT> # Optional. default: "1000ms" Example: "memcached.default.svc.cluster.local:11211"
+  - name: maxIdleConnections
+    value: <REPLACE-WITH-MAX-IDLE-CONNECTIONS> # Optional. default: "2"
+  - name: timeout
     value: <REPLACE-WITH-TIMEOUT> # Optional. default: "1000ms"
 ```
 
