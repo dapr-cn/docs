@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "HashiCorp Consul"
 linkTitle: "HashiCorp Consul"
 description: Detailed information on the HashiCorp Consul state store component
