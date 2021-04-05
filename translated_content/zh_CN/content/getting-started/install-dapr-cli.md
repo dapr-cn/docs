@@ -111,3 +111,5 @@ Use "dapr [command] --help" for more information about a command.
 ```
 
 
+[}}" role="button">Next step: Initialize Dapr >>]({{< ref install-dapr-selfhost.md  mark=){.btn.btn-primary}
+
