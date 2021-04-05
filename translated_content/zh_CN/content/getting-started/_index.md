@@ -22,7 +22,5 @@ If you are looking for an introductory overview of Dapr and learn more about bas
 1. 完成一个组件的配置
 1. 探索 Dapr 的快速入门案例
 
-{{% alert color="primary" %}}
-[First step: Install the Dapr CLI >>]({{< ref install-dapr-cli.md >}})
-{{% /alert %}}
+[}}" role="button">First step: Install the Dapr CLI]({{< ref install-dapr-cli.md  mark=){.btn.btn-primary}
 
