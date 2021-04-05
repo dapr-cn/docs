@@ -33,11 +33,11 @@ spec:
 
 ## 元数据字段规范
 
-| 字段          | 必填 | 详情                                                                                                                   | 示例                    |
-| ----------- |:--:| -------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| accountName | Y  | 存储帐户名称                                                                                                               | `"mystorageaccount"`. |
-| accountKey  | Y  | 主要或次要存储密钥                                                                                                            | `"key"`               |
-| tableName   | Y  | The name of the table to be used for Dapr state. The table will be created for you if it doesn't exist 如果表不存在，将会自动创建 | `"table"`             |
+| 字段          | 必填 | 详情                                         | 示例                    |
+| ----------- |:--:| ------------------------------------------ | --------------------- |
+| accountName | Y  | 存储帐户名称                                     | `"mystorageaccount"`. |
+| accountKey  | Y  | 主要或次要存储密钥                                  | `"key"`               |
+| tableName   | Y  | **TableName**：用于Dapr状态的表名称。 如果表不存在，将会自动创建. | `"table"`             |
 
 ## 安装Azure Table Storage
 
@@ -46,9 +46,9 @@ spec:
 如果你想创建一张表供Dapr使用，你可以事先这样做。 但是，当 Table Storage状态提供者会在其不存在时为你自动创建。
 
 要将 Azure Table Storage配置为状态存储，你需要如下属性：
-- **AccountName**：存储账户名称 举例：**mystorageaccount**
+- **AccountName**：存储账户名称 举例：**mystorageaccount** For example: **mystorageaccount**.
 - **AccountKey**：主要或次要存储密钥。
-- **TableName**：用于Dapr状态的表名称。 如果表不存在，将会自动创建.
+- **TableName**: The name of the table to be used for Dapr state. The name of the table to be used for Dapr state. The table will be created for you if it doesn't exist 如果表不存在，将会自动创建
 
 ## 分区
 
