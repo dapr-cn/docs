@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Zookeeper"
 linkTitle: "Zookeeper"
 description: Detailed information on the Zookeeper state store component
