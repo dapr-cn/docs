@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "invoke CLI 命令参考"
 linkTitle: "invoke"
 description: "有关 invoke CLI 命令的详细信息"
