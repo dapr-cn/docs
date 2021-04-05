@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "自我托管模式下的 Dapr 概述"
-linkTitle: "概述"
+title: "Overview of Dapr in self-hosted mode"
+linkTitle: "Overview"
 weight: 10000
-description: "如何在本地机器上运行 Dapr 的概述"
+description: "Overview of how to get Dapr running on your local machine"
 ---
 
-Dapr 可以配置为在开发人员本地计算机上以 自托管模式 运行。 每个运行的服务都有一个 Dapr 运行时进程 (或 sidecar) ，配置为使用状态存储，发布/订阅，绑定组件和其他构建块。
+Dapr can be configured to run on your local developer machine in self hosted mode. Each running service has a Dapr runtime process (or sidecar) which is configured to use state stores, pub/sub, binding components and the other building blocks.
 
-在自托管模式下，Redis 在本地容器中运行，并被配置为 状态存储 和 发布/订阅 的默认组件。 还配置了一个 Zipkin 容器用于诊断和跟踪。  运行 `dapr init`, 见 `$HOME/.dapr/components` directory (Mac/Linux) 或 `%USERPROFILE%\.dapr\components` on Windows。
+In self hosted mode, Redis is running locally in a container and is configured to serve as both the default component for state store and for pub/sub. A Zipkin container is also configured for diagnostics and tracing.  After running `dapr init`, see the `$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows.
 
-`dapr-placement` 服务负责管理 actor 分布方案和关键范围设置。 此服务仅在您使用 Dapr actors 时才需要。 有关 actor `放置` 服务的更多信息，请阅读 [actor 概述]({{< ref "actors-overview.md" >}})。
+The `dapr-placement` service is responsible for managing the actor distribution scheme and key range settings. This service is only required if you are using Dapr actors. For more information on the actor `Placement` service read [actor overview]({{< ref "actors-overview.md" >}}).
 
 <img src="/images/overview_standalone.png" width=800>
 
-您可以使用 [Dapr CLI](https://github.com/dapr/cli#launch-dapr-and-your-app) 在本地机器上运行启用了 Dapr 的应用程序。
+You can use the [Dapr CLI](https://github.com/dapr/cli#launch-dapr-and-your-app) to run a Dapr enabled application on your local machine.
