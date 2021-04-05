@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "可观测性"
-linkTitle: "可观测性"
+title: "Observability"
+linkTitle: "Observability"
 weight: 60
-description: 查看和度量跨组件和网络服务的消息调用
+description: See and measure the message calls across components and networked services
 ---
 
-本节包含在可观测性方面对开发者的指导。 关于Dapr中 [可观测性概念的总体概述]({{< ref observability >}}) 和 [监控运维指南]({{< ref monitoring >}}) 请参阅其他章节.
+This section includes guides for developers in the context of observability. See other sections for a [general overview of the observability concept]({{< ref observability-concept >}}) in Dapr and for [operations guidance on monitoring]({{< ref monitoring >}}).
