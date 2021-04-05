@@ -3,22 +3,22 @@ type: docs
 title: "Dapr Python SDK"
 linkTitle: "Python"
 weight: 1000
-description: 开发 Dapr 应用程序的 Python SDK 包
+description: Python SDK packages for developing Dapr applications
 no_list: true
 ---
 
-Dapr提供了帮助开发Python应用程序各种包。 你可以使用他们来创建 Python 客户端、服务器和 virtual actors。
+Dapr offers a variety of packages to help with the development of Python applications. Using them you can create Python clients, servers, and virtual actors with Dapr.
 
-## 可用软件包
+## Available packages
 
-- [**Dapr 客户端**]({{< ref python-client.md >}}) 用于与 Python 应用程序交互的 Dapr 边车和其他 Dapr 应用程序
-- [**Dapr actor**]({{< ref python-actor.md >}}) 用于使用 Python 创建并和有状态的virtual actors 交互。
-- [**扩展**]({{< ref python-sdk-extensions >}}) 用于将Dapr与其他 Python 框架兼容
-    - [**gRPC 扩展**]({{< ref python-grpc.md >}}) 用创建 Dapr gRPC 服务器
-    - [**FastAPI 扩展**]({{< ref python-fastapi.md >}}) 向 FastAPI 应用程序中添加 Dapr actor 的功能
-    - [**Flask 扩展**]({{< ref python-flask.md >}}) 向Flask 应用程序添加 Dapr actor 的功能
+- [**Dapr client**]({{< ref python-client.md >}}) for writing Python applications to interact with the Dapr sidecar and other Dapr applications
+- [**Dapr actor**]({{< ref python-actor.md >}}) for creating for creating and interacting with stateful virtual actors in Python
+- [**Extensions**]({{< ref python-sdk-extensions >}}) for adding Dapr capabilities to other Python frameworks
+    - [**gRPC extension**]({{< ref python-grpc.md >}}) for creating a gRPC server with Dapr
+    - [**FastAPI extension**]({{< ref python-fastapi.md >}}) for adding Dapr actor capabilities to FastAPI applications
+    - [**Flask extension**]({{< ref python-flask.md >}}) for adding Dapr actor capabilities to Flask applications
 
-## 安装 Dapr 模块
+## Install the Dapr module
 
 {{< tabs Stable Development>}}
 
@@ -30,7 +30,7 @@ pip install dapr
 
 {{% codetab %}}
 {{% alert title="Note" color="warning" %}}
-开发包包含的功能和行为将兼容此前发行的 Dapr 运行时。 在安装 dapr-dev 包之前，请务必卸载以前任意稳定版本的 Python SDK 扩展包。
+The development package will contain features and behavior that will be compatible with the pre-release version of the Dapr runtime. Make sure to uninstall any stable versions of the Python SDK before installing the dapr-dev package.
 {{% /alert %}}
 
 ```bash
@@ -40,15 +40,15 @@ pip install dapr-dev
 
 {{< /tabs >}}
 
-## 试试吧
+## Try it out
 
-克隆Python SDK 仓库来尝试一些 [示例](https://github.com/dapr/python-sdk/tree/master/examples)。
+Clone the Python SDK repo to try out some of the [examples](https://github.com/dapr/python-sdk/tree/master/examples).
 
 ```bash
 git clone https://github.com/dapr/python-sdk.git
 ```
 
-## 更多信息
+## More information
 
-- [Python 软件包索引 (PyPI)](https://pypi.org/user/dapr.io/)
-- [Dapr SDK 序列化]({{< ref sdk-serialization.md >}})
+- [Python Package Index (PyPI)](https://pypi.org/user/dapr.io/)
+- [Dapr SDK serialization]({{< ref sdk-serialization.md >}})
