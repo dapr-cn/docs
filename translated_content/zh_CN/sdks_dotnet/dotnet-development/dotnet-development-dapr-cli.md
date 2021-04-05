@@ -2,7 +2,7 @@
 type: docs
 title: "Dapr .NET SDK Development with Dapr CLI"
 linkTitle: "Dapr CLI"
-weight: 30000
+weight: 50000
 description: Learn about local development with the Dapr CLI
 ---
 
@@ -12,7 +12,7 @@ description: Learn about local development with the Dapr CLI
 
 The Dapr CLI provides you with a good base to work from by initializing a local redis container, zipkin container, the placement service, and component manifests for redis. This will enable you to work with the following building blocks on a fresh install with no additional setup:
 
-- [Service invocation]({{< ref service-invocation >}})
+- [服务调用]({{< ref service-invocation >}})
 - [State Store]({{< ref state-management >}})
 - [发布/订阅]({{< ref pubsub >}})
 - [Actors]({{< ref actors >}})
@@ -23,7 +23,7 @@ You can run .NET services with `dapr run` as your strategy for developing locall
 - **Con:** this uses long-running docker containers on your machine, which might not be desirable
 - **Con:** the scalability of this approach is poor since it requires running a separate command per-service
 
-### Using the Dapr CLI
+### 使用 Dapr CLI
 
 For each service you need to choose:
 
@@ -46,7 +46,7 @@ Since you need to configure a unique port for each service, you can use this com
 
 If any of your services do not accept HTTP traffic, then modify the command above by removing the `--app-port` and `--urls` arguments.
 
-### Next steps
+### 下一步
 
 If you need to debug, then use the attach feature of your debugger to attach to one of the running processes.
 
