@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Developing applications with the Dapr .NET SDK"
 linkTitle: "Dev integrations"
 weight: 40000
