@@ -1,16 +1,16 @@
 ---
-type: docs
+type: 文档
 title: "How-To: Set-up New Relic to collect and analyze metrics"
 linkTitle: "New Relic"
 weight: 6000
 description: "Set-up New Relic for Dapr metrics"
 ---
 
-## Prerequisites
+## 前期准备
 
 - Perpetually [free New Relic account](https://newrelic.com/signup?ref=dapr), 100 GB/month of free data ingest, 1 free full access user, unlimited free basic users
 
-## Background
+## 背景
 
 New Relic offers a Prometheus OpenMetrics Integration.
 
