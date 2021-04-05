@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Custom Serialization"
 linkTitle: "Custom Serializers"
 weight: 1000
