@@ -89,4 +89,6 @@ You should see output with the secret you stored in the JSON file.
 ```json
 {"my-secret":"I'm Batman"}
 ```
-
+{{% alert color="primary" %}}
+[Next step: Explore Dapr quickstarts >>]({{< ref quickstarts.md >}})
+{{% /alert %}}
