@@ -6,7 +6,7 @@ description: "Detailed documentation on the service invocation API"
 weight: 100
 ---
 
-Dapr provides users with the ability to call other applications that have unique ids. Dapr provides users with the ability to call other applications that have unique ids. This functionality allows apps to interact with one another via named identifiers and puts the burden of service discovery on the Dapr runtime. This functionality allows apps to interact with one another via named identifiers and puts the burden of service discovery on the Dapr runtime.
+Dapr provides users with the ability to call other applications that have unique ids. This functionality allows apps to interact with one another via named identifiers and puts the burden of service discovery on the Dapr runtime.
 
 ## Invoke a method on a remote dapr app
 
@@ -20,26 +20,26 @@ POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method/<meth
 
 ### HTTP Response codes
 
-When a service invokes another service with Dapr, the status code of the called service will be returned to the caller. When a service invokes another service with Dapr, the status code of the called service will be returned to the caller. If there's a network error or other transient error, Dapr will return a `500` error with the detailed error message. If there's a network error or other transient error, Dapr will return a `500` error with the detailed error message.
+When a service invokes another service with Dapr, the status code of the called service will be returned to the caller. If there's a network error or other transient error, Dapr will return a `500` error with the detailed error message.
 
 In case a user invokes Dapr over HTTP to talk to a gRPC enabled service, an error from the called gRPC service will return as `500` and a successful response will return as `200OK`.
 
-| 代码  | 说明                                     |
-| --- | -------------------------------------- |
-| XXX | Upstream status returned               |
-| 400 | Method name not given                  |
-| 403 | Invocation forbidden by access control |
-| 500 | Request failed                         |
+| Code | Description                            |
+| ---- | -------------------------------------- |
+| XXX  | Upstream status returned               |
+| 400  | Method name not given                  |
+| 403  | Invocation forbidden by access control |
+| 500  | Request failed                         |
 
 ### URL Parameters
 
-| 参数          | 描述                                                        |
+| Parameter   | Description                                               |
 | ----------- | --------------------------------------------------------- |
 | daprPort    | the Dapr port                                             |
 | appId       | the App ID associated with the remote app                 |
 | method-name | the name of the method or url to invoke on the remote app |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
 ### Request Contents
 
@@ -69,7 +69,7 @@ The Dapr app being invoked will need to be listening for and responding to reque
 
 ### Cross namespace invocation
 
-On hosting platforms that support namespaces, Dapr app IDs conform to a valid FQDN format that includes the target namespace. For example, the following string contains the app ID (`myApp`) in addition to the namespace the app runs in (`production`). For example, the following string contains the app ID (`myApp`) in addition to the namespace the app runs in (`production`). For example, the following string contains the app ID (`myApp`) in addition to the namespace the app runs in (`production`).
+On hosting platforms that support namespaces, Dapr app IDs conform to a valid FQDN format that includes the target namespace. For example, the following string contains the app ID (`myApp`) in addition to the namespace the app runs in (`production`).
 
 ```
 myApp.production
