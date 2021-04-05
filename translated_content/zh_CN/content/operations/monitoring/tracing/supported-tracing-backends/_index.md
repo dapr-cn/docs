@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Common Tracing Backends"
-linkTitle: "Common Tracing Backends"
+title: "常见追踪后端"
+linkTitle: "常见追踪后端"
 weight: 3000
-description: "How to setup various common tracing backends"
+description: "如何设置各种常见的追踪后端"
 ---
 
