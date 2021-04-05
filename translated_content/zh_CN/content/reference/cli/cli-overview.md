@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr 命令行接口 （CLI） 参考"
 linkTitle: "概述"
 description: "Dapr CLI 命令的详细信息"
