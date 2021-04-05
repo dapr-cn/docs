@@ -1,12 +1,12 @@
 ---
-type: docs
+type: 文档
 title: "Supported releases"
 linkTitle: "Supported releases"
 weight: 1000
 description: "Release support and upgrade policies"
 ---
 
-## Introduction
+## 介绍
 This topic details the supported versions of Dapr releases, the upgrade policies and how deprecations and breaking changes are communicated.
 
 Dapr releases use `MAJOR.MINOR.PATCH` versioning. For example 1.0.0
@@ -29,7 +29,7 @@ Patch support is for supported versions (current and previous).
 ## Supported versions
 The table below shows the versions of Dapr releases that have been tested together and form a "packaged" release. Any other combinations of releases are not supported.
 
-| Release date  |  Runtime   | CLI   | SDKs                                                                      | Dashboard | Status              |
+| Release date  |  Runtime   | CLI   | SDK                                                                       | Dashboard | 状态                  |
 | ------------- |:----------:|:----- | ------------------------------------------------------------------------- | --------- | ------------------- |
 | Feb 17th 2021 | 1.0.0</br> | 1.0.0 | Java 1.0.0 </br>Go 1.0.0 </br>PHP 1.0.0 </br>Python 1.0.0 </br>.NET 1.0.0 | 0.6.0     | Supported           |
 | Mar 4th 2021  | 1.0.1</br> | 1.0.1 | Java 1.0.2 </br>Go 1.0.0 </br>PHP 1.0.0 </br>Python 1.0.0 </br>.NET 1.0.0 | 0.6.0     | Supported           |
@@ -65,5 +65,5 @@ Here is an example, using a hypothetical 1.1.0 as the deprecation announcement r
 ## Upgrade on Hosting platforms
 Dapr can support multiple hosting platforms for production. With the 1.0 release the two supported platforms are Kubernetes and physical machines. For Kubernetes upgrades see [Production guidelines on Kubernetes]({{< ref kubernetes-production.md >}})
 
-## Related links
+## 相关链接
 * Read the [Versioning policy]({{< ref support-versioning.md >}})
