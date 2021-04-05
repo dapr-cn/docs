@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "参考：actor"
 linkTitle: "Production Reference"
 weight: 1000
