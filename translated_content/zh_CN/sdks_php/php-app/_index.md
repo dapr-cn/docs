@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "The App"
 linkTitle: "App"
 weight: 1000
