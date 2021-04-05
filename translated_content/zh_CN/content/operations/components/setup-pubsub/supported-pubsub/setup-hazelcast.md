@@ -2,11 +2,11 @@
 type: docs
 title: "Hazelcast"
 linkTitle: "Hazelcast"
-description: "关于Hazelcast pubsub组件的详细文档。"
+description: "Detailed documentation on the Hazelcast pubsub component"
 ---
 
-## 组件格式
-要安装 hazelcast pubsub ，请创建一个类型为 `pubsub.hazelcast` 的组件。 请参阅 [本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
+## Component format
+To setup hazelcast pubsub create a component of type `pubsub.hazelcast`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -23,37 +23,37 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}})描述的密钥仓库来存储密钥。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## 元数据字段规范
+## Spec metadata fields
 
-| 字段               | 必填 | 详情                                             | 示例                                 |
-| ---------------- |:--:| ---------------------------------------------- | ---------------------------------- |
-| connectionString | Y  | 逗号分隔的服务器地址 示例：“hazelcast:3000,hazelcast2:3000” | `"hazelcast:3000,hazelcast2:3000"` |
+| Field            | Required | Details                                                                        | Example                            |
+| ---------------- |:--------:| ------------------------------------------------------------------------------ | ---------------------------------- |
+| connectionString |    Y     | A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000" | `"hazelcast:3000,hazelcast2:3000"` |
 
 
-## 创建Hazelcast 实例
+## Create a Hazelcast instance
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-你可以使用Docker在本地运行Hazelcast：
+You can run Hazelcast locally using Docker:
 
 ```
 docker run -e JAVA_OPTS="-Dhazelcast.local.publicAddress=127.0.0.1:5701" -p 5701:5701 hazelcast/hazelcast
 ```
 
-然后你可以通过`127.0.0.1:5701`与服务器交互。
+You can then interact with the server using the `127.0.0.1:5701`.
 {{% /codetab %}}
 
 {{% codetab %}}
-在Kubernetes上安装Hazelcast的最简单方法是使用[Helm chart](https://github.com/helm/charts/tree/master/stable/hazelcast)。
+The easiest way to install Hazelcast on Kubernetes is by using the [Helm chart](https://github.com/helm/charts/tree/master/stable/hazelcast).
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
-- [Dapr组件的基本格式]({{< ref component-schema >}})
-- 请访问 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) ，了解如何配置 pub/sub 组件
-- [发布/订阅构建块]({{< ref pubsub >}})
+## Related links
+- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
+- [Pub/Sub building block]({{< ref pubsub >}})
