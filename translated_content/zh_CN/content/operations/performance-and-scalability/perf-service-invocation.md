@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Service invocation performance"
 linkTitle: "Service invocation performance"
 weight: 10000
