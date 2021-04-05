@@ -31,14 +31,14 @@ There are many considerations when architecting microservices applications. Dapr
 
 Each of these building blocks is independent, meaning that you can use one, some or all of them in your application. In this initial release of Dapr, the following building blocks are provided:
 
-| Building Block                                 | Description                                                                                                                                                                                                                                                                                                 |
+| 构建块                                            | Description                                                                                                                                                                                                                                                                                                 |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Service-to-service invocation**]({{X18X}}) | Resilient service-to-service invocation enables method calls, including retries, on remote services wherever they are located in the supported hosting environment.                                                                                                                                         |
 | [**State management**]({{X21X}})              | With state management for storing key/value pairs, long running, highly available, stateful services can be easily written alongside stateless services in your application. The state store is pluggable and can include Azure CosmosDB, Azure SQL Server, PostgreSQL, AWS DynamoDB or Redis among others. |
 | [**Publish and subscribe**]({{X24X}})         | Publishing events and subscribing to topics | tween services enables event-driven architectures to simplify horizontal scalability and make them | silient to failure. Dapr provides at least once message delivery guarantee.                                                                              |
 | [**Resource bindings**]({{X27X}})             | Resource bindings with triggers builds further on event-driven architectures for scale and resiliency by receiving and sending events to and from any external source such as databases, queues, file systems, etc.                                                                                         |
 | [**Actors**]({{X30X}})                        | A pattern for stateful and stateless objects that make concurrency simple with method and state encapsulation. Dapr provides many capabilities in its actor runtime including concurrency, state, life-cycle management for actor activation/deactivation and timers and reminders to wake-up actors.       |
-| [**Observability**]({{X33X}})                 | Dapr emit metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr supports distributed tracing to easily diagnose and serve inter-service calls in production using the W3C Trace Context standard and Open Telemetry to send to different monitoring tools.                   |
+| [**可观测性**]({{X33X}})                          | Dapr emit metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr supports distributed tracing to easily diagnose and serve inter-service calls in production using the W3C Trace Context standard and Open Telemetry to send to different monitoring tools.                   |
 | [**Secrets**]({{X36X}})                       | Dapr provides secrets management and integrates with public cloud and local secret stores to retrieve the secrets for use in application code.                                                                                                                                                              |
 
 ## Sidecar architecture
@@ -48,7 +48,7 @@ Dapr exposes its APIs as a sidecar architecture, either as a container or as a p
 ## Hosting Environments
 Dapr can be hosted in multiple environments, including self hosted for local development or to deploy to a group of VMs, Kubernetes and edge environments such as Azure IoT Edge.
 
-### Self hosted
+### 自托管
 
 In self hosted mode Dapr runs as a separate side-car process which your service code can call via HTTP or gRPC. In self hosted mode, you can  also deploy Dapr onto a set of VMs.
 
