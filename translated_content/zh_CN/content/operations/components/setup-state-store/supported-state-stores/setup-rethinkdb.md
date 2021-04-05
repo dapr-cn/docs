@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "RethinkDB"
 linkTitle: "RethinkDB"
 description: Detailed information on the RethinkDB state store component
