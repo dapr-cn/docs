@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr .NET SDK Development with Project Tye"
 linkTitle: "Project Tye"
 weight: 40000
