@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Support and versioning"
 linkTitle: "Support"
 weight: 600
