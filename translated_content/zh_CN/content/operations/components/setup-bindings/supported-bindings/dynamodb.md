@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "AWS DynamoDB 绑定规范"
+title: "AWS DynamoDB binding spec"
 linkTitle: "AWS DynamoDB"
-description: "AWS DynamoDB 绑定组件的详细文档"
+description: "Detailed documentation on the AWS DynamoDB binding component"
 ---
 
-## 组成格式
+## Component format
 
-要设置 AWS DynamoDB 绑定，请创建一个类型为 `bindings.aws.dynamodb` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+To setup AWS DynamoDB binding create a component of type `bindings.aws.dynamodb`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
-关于身份验证相关属性的信息，请参阅 [认证到 AWS]({{< ref authenticating-aws.md >}})
+See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,31 +35,31 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储。 建议使用 [这里]({{< ref component-secrets.md >}})描述的密钥存储。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## 元数据字段规范
+## Spec metadata fields
 
-| 字段           | 必填 | 绑定支持   | 详情                          | 示例                  |
-| ------------ |:--:| ------ | --------------------------- | ------------------- |
-| table        | Y  | Output | DynamoDB 表名称                | `"items"`           |
-| region       | Y  | Output | AWS DynamoDB 实例所部署的特定AWS 区域 | `"us-east-1"`       |
-| accessKey    | Y  | Output | 要访问此资源的 AWS 访问密钥            | `"key"`             |
-| secretKey    | Y  | Output | 要访问此资源的 AWS 密钥访问 Key        | `"secretAccessKey"` |
-| sessionToken | N  | Output | 要使用的 AWS 会话令牌               | `"sessionToken"`    |
+| Field        | Required | Binding support | Details                                                          | Example             |
+| ------------ |:--------:| --------------- | ---------------------------------------------------------------- | ------------------- |
+| table        |    Y     | Output          | The DynamoDB table name                                          | `"items"`           |
+| region       |    Y     | Output          | The specific AWS region the AWS DynamoDB instance is deployed in | `"us-east-1"`       |
+| accessKey    |    Y     | Output          | The AWS Access Key to access this resource                       | `"key"`             |
+| secretKey    |    Y     | Output          | The AWS Secret Access Key to access this resource                | `"secretAccessKey"` |
+| sessionToken |    N     | Output          | The AWS session token to use                                     | `"sessionToken"`    |
 
 
-## 相关链接
+## Binding support
 
-字段名为 `ttlInSeconds`。
+This component supports **output binding** with the following operations:
 
 - `create`
 
-## 相关链接
+## Related links
 
-- [Dapr组件的基本格式]({{< ref component-schema >}})
-- [绑定构建块]({{< ref bindings >}})
-- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
-- [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
-- [绑定API 参考]({{< ref bindings_api.md >}})
-- [AWS 认证]({{< ref authenticating-aws.md >}})
+- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- [Bindings building block]({{< ref bindings >}})
+- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
+- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
+- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Authenticating to AWS]({{< ref authenticating-aws.md >}})
