@@ -20,7 +20,7 @@ aliases:
 
 ### 创建集群
 
-你可以在任何 Kubernetes 集群上安装 Dapr. 下面的链接可以提供帮助:
+你可以在任何 Kubernetes 集群上安装 Dapr. 下面的链接可以提供帮助: Here are some helpful links:
 
 - [Setup Minikube Cluster]({{< ref setup-minikube.md >}})
 - [Setup Azure Kubernetes Service Cluster]({{< ref setup-aks.md >}})
@@ -28,7 +28,7 @@ aliases:
 - [Setup Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 {{% alert title="Hybrid clusters" color="primary" %}}
-Dapr CLI 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 如果你的应用程序有需要，你也可以将 Dapr 部署到 Windows 节点。 更多信息参见 [部署到Linux/Windows混合型Kubernetes集群]({{X49X}}).
+Dapr CLI 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 如果你的应用程序有需要，你也可以将 Dapr 部署到 Windows 节点。 更多信息参见 [部署到Linux/Windows混合型Kubernetes集群]({{X49X}}).
 {{% /alert %}}
 
 
@@ -131,7 +131,7 @@ dapr uninstall -k
     ```
 
 
-   有关使用 Helm 安装和升级 Dapr 的更多信息，请参阅 [Kubernetes上的生产环境部署指南]({{X69X}})。
+   有关使用 Helm 安装和升级 Dapr 的更多信息，请参阅 [Kubernetes上的生产环境部署指南]({{X69X}})。
 
 ### 卸载 Kubernetes 上的 Dapr
 
