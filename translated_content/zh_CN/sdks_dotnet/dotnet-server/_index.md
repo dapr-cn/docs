@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "使用 Dapr .NET SDK 创建服务器"
 linkTitle: "Server"
 weight: 50000
