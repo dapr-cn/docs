@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Common issues when running Dapr"
 linkTitle: "Common Issues"
 weight: 1000
