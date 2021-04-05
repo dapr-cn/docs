@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "MySQL binding spec"
+title: "MySQL 绑定规范"
 linkTitle: "MySQL"
-description: "Detailed documentation on the MySQL binding component"
+description: "MySQL 组件绑定详细说明"
 ---
 
-## Component format
+## 配置
 
-To setup MySQL binding create a component of type `bindings.mysql`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup MySQL binding create a component of type `bindings.mysql`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 The MySQL binding uses [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) internally.
 
@@ -36,19 +36,19 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field           | Required | Binding support | Details                                                                                                   | Example                                      |
-| --------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| url             |    Y     | Output          | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"` |
-| pemPath         |    Y     | Output          | Path to the PEM file. Used with SSL connection                                                            | `"path/to/pem/file"`                         |
-| maxIdleConns    |    N     | Output          | The max idle connections. Integer greater than 0                                                          | `"10"`                                       |
-| maxOpenConns    |    N     | Output          | The max open connections. Integer greater than 0                                                          | `"10"`                                       |
-| connMaxLifetime |    N     | Output          | The max connection lifetime. Duration string                                                              | `"12s"`                                      |
-| connMaxIdleTime |    N     | Output          | The max connection idel time. Duration string                                                             | `"12s"`                                      |
+| 字段              | 必填 | 绑定支持 | 详情                                                                                                        | 示例                                           |
+| --------------- |:--:| ---- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| url             | 是  | 输出   | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"` |
+| pemPath         | 是  | 输出   | Path to the PEM file. Used with SSL connection                                                            | `"path/to/pem/file"`                         |
+| maxIdleConns    | N  | 输出   | The max idle connections. Integer greater than 0                                                          | `"10"`                                       |
+| maxOpenConns    | N  | 输出   | The max open connections. Integer greater than 0                                                          | `"10"`                                       |
+| connMaxLifetime | N  | 输出   | The max connection lifetime. Duration string                                                              | `"12s"`                                      |
+| connMaxIdleTime | N  | 输出   | The max connection idel time. Duration string                                                             | `"12s"`                                      |
 
 ### SSL connection
 
@@ -58,9 +58,9 @@ If your server requires SSL your connection string must end of `&tls=custom` for
 ```
  You must replace the `<PEM PATH>` with a full path to the PEM file. If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate. The connection to MySQL will require a minimum TLS version of 1.2.
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `exec`
 - `query`
@@ -81,7 +81,7 @@ The `exec` operation can be used for DDL operations (like table creation), as we
 }
 ```
 
-**Response**
+**响应**
 
 ```json
 {
@@ -111,7 +111,7 @@ The `query` operation is used for `SELECT` statements, which returns the metadat
 }
 ```
 
-**Response**
+**响应**
 
 ```json
 {
@@ -144,10 +144,10 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 
 > Note, the MySQL binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
