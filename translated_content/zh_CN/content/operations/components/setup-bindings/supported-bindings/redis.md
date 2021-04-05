@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Redis 绑定规范"
+title: "Redis binding spec"
 linkTitle: "Redis"
-description: "Redis 组件绑定详细说明"
+description: "Detailed documentation on the Redis binding component"
 ---
 
 ## Component format
@@ -29,19 +29,19 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| 字段            | Required | Binding support | Details                                                                                                                                                | Example             |
-| ------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
-| redisHost     |    Y     | Output          | The Redis host address                                                                                                                                 | `"localhost:6379"`  |
-| redisPassword |    Y     | Output          | The Redis password                                                                                                                                     | `"password"`        |
-| enableTLS     |    N     | Output          | If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS. Defaults to `"false"` Defaults to `"false"` | `"true"`, `"false"` |
+| Field         | Required | Binding support | Details                                                                                                                          | Example             |
+| ------------- |:--------:| --------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| redisHost     |    Y     | Output          | The Redis host address                                                                                                           | `"localhost:6379"`  |
+| redisPassword |    Y     | Output          | The Redis password                                                                                                               | `"password"`        |
+| enableTLS     |    N     | Output          | If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS. Defaults to `"false"` | `"true"`, `"false"` |
 
 
-## 相关链接
+## Binding support
 
 This component supports **output binding** with the following operations:
 
