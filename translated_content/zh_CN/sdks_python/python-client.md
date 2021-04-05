@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Getting started with the Dapr client Python SDK"
 linkTitle: "客户端"
 weight: 10000
