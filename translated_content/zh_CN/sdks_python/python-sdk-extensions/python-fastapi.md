@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr Python SDK 与 FastAPI 集成"
 linkTitle: "FastAPI"
 weight: 200000
