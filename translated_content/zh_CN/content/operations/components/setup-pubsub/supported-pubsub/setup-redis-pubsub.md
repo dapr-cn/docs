@@ -2,12 +2,12 @@
 type: docs
 title: "Redis Streams"
 linkTitle: "Redis Streams"
-description: "Detailed documentation on the Redis Streams pubsub component"
+description: "关于Redis Streams pubsub组件的详细文档"
 ---
 
-## Component format
+## 配置
 
-To setup Redis Streams pubsub create a component of type `pubsub.redis`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+要设置Redis Streams pubsub，请创建一个类型为`pubsub.redis`的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,21 +30,21 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field             | Required | Details                                                                                                                         | Example                                                         |
-| ----------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| redisHost         |    Y     | Connection-string for the redis host                                                                                            | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
-| redisPassword     |    Y     | Password for Redis host. No Default. Can be `secretKeyRef` to use a secret reference                                            | `""`, `"KeFg23!"`                                               |
-| consumerID        |    N     | The consumer group ID                                                                                                           | `"myGroup"`                                                     |
-| enableTLS         |    N     | If the Redis instance supports TLS with public certificates, can be configured to be enabled or disabled. Defaults to `"false"` | `"true"`, `"false"`                                             |
-| redeliverInterval |    N     | The interval between checking for pending messages to redelivery. Defaults to `"60s"`. `"0"` disables redelivery.               | `"30s"`                                                         |
-| processingTimeout |    N     | The amount time a message must be pending before attempting to redeliver it. Defaults to `"15s"`. `"0"` disables redelivery.    | `"30s"`                                                         |
-| queueDepth        |    N     | The size of the message queue for processing. Defaults to `"100"`.                                                              | `"1000"`                                                        |
-| concurrency       |    N     | The number of concurrent workers that are processing messages. Defaults to `"10"`.                                              | `"15"`                                                          |
+| 字段                | 必填 | 详情                                                                                                                           | 示例                                                              |
+| ----------------- |:--:| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| redisHost         | 是  | Redis的连接地址                                                                                                                   | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
+| redisPassword     | 是  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                                                        | `""`, `"KeFg23!"`                                               |
+| consumerID        | N  | 消费组 ID                                                                                                                       | `"mygroup"`                                                     |
+| enableTLS         | N  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                                                                             | `"true"`, `"false"`                                             |
+| redeliverInterval | N  | The interval between checking for pending messages to redelivery. Defaults to `"60s"`. `"0"` disables redelivery.            | `"30s"`                                                         |
+| processingTimeout | N  | The amount time a message must be pending before attempting to redeliver it. Defaults to `"15s"`. `"0"` disables redelivery. | `"30s"`                                                         |
+| queueDepth        | N  | The size of the message queue for processing. Defaults to `"100"`.                                                           | `"1000"`                                                        |
+| concurrency       | N  | The number of concurrent workers that are processing messages. Defaults to `"10"`.                                           | `"15"`                                                          |
 
 ## Create a Redis instance
 
@@ -57,16 +57,16 @@ The Dapr CLI will automatically create and setup a Redis Streams instance for yo
 {{% /codetab %}}
 
 {{% codetab %}}
-You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm](https://github.com/helm/helm#install).
+您可以使用 [helm](https://helm.sh/) 在我们的 Kubernetes 集群中快速创建 dapr 实例。 This approach requires [Installing Helm](https://github.com/helm/helm#install).
 
-1. Install Redis into your cluster.
+1. 安装 Redis 到你的集群：
     ```bash
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm install redis bitnami/redis
     ```
 
-2. Run `kubectl get pods` to see the Redis containers now running in your cluster.
-3. Add `redis-master:6379` as the `redisHost` in your redis.yaml file. For example:
+2. 执行`kubectl get pods`来查看现在正在集群中运行的Redis容器。
+3. 在您的redis.yaml文件中添加`redis-master:6379`作为`redisHost`。 例如:
 
     ```yaml
         metadata:
@@ -74,12 +74,12 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
           value: redis-master:6379
     ```
 
-4. Next, we'll get our Redis password, which is slightly different depending on the OS we're using:
-    - **Windows**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`, which will create a file with your encoded password. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files.
+4. 接下来，我们会获取到我们的Redis密码，根据我们使用的操作系统不同，密码也会略有不同：
+    - **Windows**：执行`kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`，这将创建一个有你的加密后密码的文件。 接下来，执行`certutil -decode encoded.b64 password.txt`，它将把你的redis密码放在一个名为`password.txt`的文本文件中。 复制密码，删除这两个文件。
 
     - **Linux/MacOS**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode` and copy the outputted password.
 
-    Add this password as the `redisPassword` value in your redis.yaml file. For example:
+    Add this password as the `redisPassword` value in your redis.yaml file. 例如:
 
     ```yaml
         - name: redisPassword
@@ -106,7 +106,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 The Dapr CLI automatically deploys a local redis instance in self hosted mode as part of the `dapr init` command.
 {{% /alert %}}
 
-## Related links
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
-- [Pub/Sub building block]({{< ref pubsub >}})
+## 相关链接
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 请访问 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) ，了解如何配置 pub/sub 组件
+- [发布/订阅构建块]({{< ref pubsub >}})
