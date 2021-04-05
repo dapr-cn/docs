@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Cloudstate"
 linkTitle: "Cloudstate"
 description: 关于Cloudstate状态存储组件的详细信息
