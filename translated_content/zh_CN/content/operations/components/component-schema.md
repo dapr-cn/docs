@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Component schema"
-linkTitle: "Component schema"
+title: "组件schema"
+linkTitle: "组件schema"
 weight: 100
 description: "The basic schema for a Dapr component"
 ---
@@ -28,19 +28,19 @@ spec:
 
 ## Fields
 
-| Field              | Required | Details                                                                                            | Example            |
-| ------------------ |:--------:| -------------------------------------------------------------------------------------------------- | ------------------ |
-| apiVersion         |    Y     | The version of the Dapr (and Kubernetes if applicable) API you are calling                         | `dapr.io/v1alpha1` |
-| kind               |    Y     | The type of CRD. For components is must always be `Component`                                      | `Component`        |
-| **metadata**       |    -     | **Information about the component registration**                                                   |                    |
-| metadata.name      |    Y     | The name of the component                                                                          | `prod-statestore`  |
-| metadata.namespace |    N     | The namespace for the component for hosting environments with namespaces                           | `myapp-namespace`  |
-| **spec**           |    -     | **Detailed information on the component resource**                                                 |                    |
-| spec.type          |    Y     | The type of the component                                                                          | `state.redis`      |
-| spec.version       |    Y     | The version of the component                                                                       | `v1`               |
-| spec.initTimeout   |    N     | The timeout duration for the initialization of the component. Default is 30s                       | `5m`, `1h`, `20s`  |
-| spec.ignoreErrors  |    N     | Tells the Dapr sidecar to continue initialization if the component fails to load. Default is false | `false`            |
-| **spec.metadata**  |    -     | **A key/value pair of component specific configuration. See your component definition for fields** |                    |
+| 字段                 | 必填 | 详情                                                                                                 | 示例                 |
+| ------------------ |:--:| -------------------------------------------------------------------------------------------------- | ------------------ |
+| apiVersion         | 是  | The version of the Dapr (and Kubernetes if applicable) API you are calling                         | `dapr.io/v1alpha1` |
+| kind               | 是  | The type of CRD. For components is must always be `Component`                                      | `Component`        |
+| **metadata**       | -  | **Information about the component registration**                                                   |                    |
+| metadata.name      | 是  | The name of the component                                                                          | `prod-statestore`  |
+| metadata.namespace | N  | The namespace for the component for hosting environments with namespaces                           | `myapp-namespace`  |
+| **spec**           | -  | **Detailed information on the component resource**                                                 |                    |
+| spec.type          | 是  | The type of the component                                                                          | `state.redis`      |
+| spec.version       | 是  | The version of the component                                                                       | `v1`               |
+| spec.initTimeout   | N  | The timeout duration for the initialization of the component. Default is 30s                       | `5m`, `1h`, `20s`  |
+| spec.ignoreErrors  | N  | Tells the Dapr sidecar to continue initialization if the component fails to load. Default is false | `false`            |
+| **spec.metadata**  | -  | **A key/value pair of component specific configuration. See your component definition for fields** |                    |
 
 ### Special metadata values
 
@@ -67,10 +67,10 @@ spec:
       value: "false"
 ```
 
-## Further reading
+## 深入阅读
 - [Components concept]({{< ref components-concept.md >}})
 - [Reference secrets in component definitions]({{< ref component-secrets.md >}})
-- [Supported state stores]({{< ref supported-state-stores >}})
+- [支持的状态存储]({{< ref supported-state-stores >}})
 - [Supported pub/sub brokers]({{< ref supported-pubsub >}})
 - [Supported secret stores]({{< ref supported-secret-stores >}})
 - [Supported bindings]({{< ref supported-bindings >}})
