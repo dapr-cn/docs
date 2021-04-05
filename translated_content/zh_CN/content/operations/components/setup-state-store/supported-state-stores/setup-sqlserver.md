@@ -7,7 +7,7 @@ description: Detailed information on the SQL Server state store component
 
 ## Component format
 
-To setup SQL Server state store create a component of type `state.sqlserver`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -31,32 +31,12 @@ spec:
   - name: schema
     value: <SCHEMA> # Optional. defaults to "dbo"
   - name: indexedProperties
-    value: <INDEXED-PROPERTIES> # Optional. List of IndexedProperties.
-  - name: tableName
-    value: <REPLACE-WITH-TABLE-NAME>  # Required.
-  - name: keyType 
-    value: <REPLACE-WITH-KEY-TYPE>  # Optional. defaults to "string"
-  - name: keyLength
-    value: <KEY-LENGTH> # Optional. defaults to 200. Yo be used with "string" keyType
-  - name: schema
-    value: <SCHEMA> # Optional. defaults to "dbo"
-  - name: indexedProperties
-    value: <INDEXED-PROPERTIES> # Optional. List of IndexedProperties.
-  - name: tableName
-    value: <REPLACE-WITH-TABLE-NAME>  # Required.
-  - name: keyType 
-    value: <REPLACE-WITH-KEY-TYPE>  # Optional. defaults to "string"
-  - name: keyLength
-    value: <KEY-LENGTH> # Optional. defaults to 200. Yo be used with "string" keyType
-  - name: schema
-    value: <SCHEMA> # Optional. defaults to "dbo"
-  - name: indexedProperties
     value: <INDEXED-PROPERTIES> # Optional. List of IndexedProperties. 
 
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 {{% alert title="Note" color="primary" %}}
@@ -65,27 +45,27 @@ Currently this component does not support state management for actors
 
 ## Spec metadata fields
 
-| 字段                | Required | Details                                                                                                                                                                                                             | Example                                                                                             |
-| ----------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| connectionString  |    Y     | The connection string used to connect                                                                                                                                                                               | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
-| tableName         |    Y     | The name of the table to use. The name of the table to use. Alpha-numeric with underscores Alpha-numeric with underscores                                                                                           | `"table_name"`                                                                                      |
-| keyType           |    N     | The type of key used. Defaults to `"string"`                                                                                                                                                                        | `"string"`                                                                                          |
-| keyLength         |    N     | The max length of key. The type of key used. Defaults to `"string"` The max length of key. Used along with `"string"` keytype. Defaults to `"200"` The type of key used. Defaults to `"string"` Defaults to `"200"` | `"200"`                                                                                             |
-| schema            |    N     | The schema to use. The schema to use. The schema to use. Defaults to `"dbo"`                                                                                                                                        | `"dapr"`,`"dbo"`                                                                                    |
-| indexedProperties |    N     | List of IndexedProperties.                                                                                                                                                                                          | `"[{"ColumnName": "column", "Property": "property", "Type": "type"}]"`                              |
+| Field             | Required | Details                                                                        | Example                                                                                             |
+| ----------------- |:--------:| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| connectionString  |    Y     | The connection string used to connect                                          | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
+| tableName         |    Y     | The name of the table to use. Alpha-numeric with underscores                   | `"table_name"`                                                                                      |
+| keyType           |    N     | The type of key used. Defaults to `"string"`                                   | `"string"`                                                                                          |
+| keyLength         |    N     | The max length of key. Used along with `"string"` keytype. Defaults to `"200"` | `"200"`                                                                                             |
+| schema            |    N     | The schema to use. Defaults to `"dbo"`                                         | `"dapr"`,`"dbo"`                                                                                    |
+| indexedProperties |    N     | List of IndexedProperties.                                                     | `"[{"ColumnName": "column", "Property": "property", "Type": "type"}]"`                              |
 
 
 ## Create Azure SQL instance
 
-[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.  The database must be created before Dapr consumes it.  The database must be created before Dapr consumes it.
+[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.
 
 **Note: SQL Server state store also supports SQL Server running on VMs.**
 
 In order to setup SQL Server as a state store, you need the following properties:
 
-- **Connection String**: the SQL Server connection string. For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase; For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase; For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase;
-- **Schema**: The database schema to use (default=dbo). Will be created if does not exist Will be created if does not exist Will be created if does not exist
-- **Table Name**: The database table name. Will be created if does not exist Will be created if does not exist Will be created if does not exist
+- **Connection String**: the SQL Server connection string. For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase;
+- **Schema**: The database schema to use (default=dbo). Will be created if does not exist
+- **Table Name**: The database table name. Will be created if does not exist
 - **Indexed Properties**: Optional properties from json data which will be indexed and persisted as individual column
 
 ### Create a dedicated user
@@ -95,7 +75,7 @@ When connecting with a dedicated user (not `sa`), these authorizations are requi
 - `CREATE TABLE`
 - `CREATE TYPE`
 
-## 相关链接
+## Related links
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
