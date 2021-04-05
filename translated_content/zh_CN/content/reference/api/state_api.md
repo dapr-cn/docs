@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "State management API reference"
 linkTitle: "状态管理 API"
 description: "Detailed documentation on the state management API"
