@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Enable API token authentication in Dapr"
 linkTitle: "Dapr API token authentication"
 weight: 3000
@@ -130,7 +130,7 @@ In self-hosted mode, you can set the token as an environment variable for your a
 export DAPR_API_TOKEN=<my-dapr-token>
 ```
 
-## Related Links
+## 相关链接
 
 - Learn about [Dapr security concepts]({{< ref security-concept.md >}})
 - Learn [HowTo authenticate requests from Dapr using token authentication]({{< ref app-api-token.md >}})
