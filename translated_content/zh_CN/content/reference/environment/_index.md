@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "环境变量引用"
 linkTitle: "环境变量"
 description: "Dapr 使用的环境变量列表"
