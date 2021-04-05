@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Dapr 的托管选项"
-linkTitle: "托管选项"
+title: "Hosting options for Dapr"
+linkTitle: "Hosting options"
 weight: 100
-description: "如何将 Dapr 部署到您的环境中。"
+description: "How to deploy Dapr into your environment."
 ---
 
