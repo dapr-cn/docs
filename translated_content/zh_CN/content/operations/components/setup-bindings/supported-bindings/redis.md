@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Redis binding spec"
+title: "Redis 绑定规范"
 linkTitle: "Redis"
-description: "Detailed documentation on the Redis binding component"
+description: "Redis 组件绑定详细说明"
 ---
 
-## Component format
+## 配置
 
-To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Redis binding create a component of type `bindings.redis`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -29,21 +29,21 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field         | Required | Binding support | Details                                                                                                                          | Example             |
-| ------------- |:--------:| --------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| redisHost     |    Y     | Output          | The Redis host address                                                                                                           | `"localhost:6379"`  |
-| redisPassword |    Y     | Output          | The Redis password                                                                                                               | `"password"`        |
-| enableTLS     |    N     | Output          | If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS. Defaults to `"false"` | `"true"`, `"false"` |
+| 字段            | 必填 | 绑定支持 | 详情                                                                                                                        | 示例                  |
+| ------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| redisHost     | 是  | 输出   | The Redis host address                                                                                                    | `"localhost:6379"`  |
+| redisPassword | 是  | 输出   | The Redis password                                                                                                        | `"password"`        |
+| enableTLS     | N  | 输出   | If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS. 默认值为 `"false"` | `"true"`, `"false"` |
 
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `create`
 
@@ -58,16 +58,16 @@ The Dapr CLI will automatically create and setup a Redis Streams instance for yo
 {{% /codetab %}}
 
 {{% codetab %}}
-You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm](https://github.com/helm/helm#install).
+您可以使用 [helm](https://helm.sh/) 在我们的 Kubernetes 集群中快速创建 dapr 实例。 This approach requires [Installing Helm](https://github.com/helm/helm#install).
 
-1. Install Redis into your cluster.
+1. 安装 Redis 到你的集群：
     ```bash
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm install redis bitnami/redis
     ```
 
-2. Run `kubectl get pods` to see the Redis containers now running in your cluster.
-3. Add `redis-master:6379` as the `redisHost` in your redis.yaml file. For example:
+2. 执行`kubectl get pods`来查看现在正在集群中运行的Redis容器。
+3. 在您的redis.yaml文件中添加`redis-master:6379`作为`redisHost`。 例如:
 
     ```yaml
         metadata:
@@ -75,12 +75,12 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
           value: redis-master:6379
     ```
 
-4. Next, we'll get our Redis password, which is slightly different depending on the OS we're using:
-    - **Windows**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`, which will create a file with your encoded password. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files.
+4. 接下来，我们会获取到我们的Redis密码，根据我们使用的操作系统不同，密码也会略有不同：
+    - **Windows**：执行`kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`，这将创建一个有你的加密后密码的文件。 接下来，执行`certutil -decode encoded.b64 password.txt`，它将把你的redis密码放在一个名为`password.txt`的文本文件中。 复制密码，删除这两个文件。
 
     - **Linux/MacOS**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode` and copy the outputted password.
 
-    Add this password as the `redisPassword` value in your redis.yaml file. For example:
+    Add this password as the `redisPassword` value in your redis.yaml file. 例如:
 
     ```yaml
         - name: redisPassword
@@ -108,10 +108,10 @@ The Dapr CLI automatically deploys a local redis instance in self hosted mode as
 {{% /alert %}}
 
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
