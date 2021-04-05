@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Securing Dapr deployments"
 linkTitle: "安全"
 weight: 500
