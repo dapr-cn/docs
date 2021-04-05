@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr 客户端 .NET SDK入门"
 linkTitle: "客户端"
 weight: 20000
