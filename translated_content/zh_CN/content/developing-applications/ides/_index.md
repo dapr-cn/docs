@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "IDE support"
-linkTitle: "IDE support"
+title: "IDE 支持"
+linkTitle: "IDE 支持"
 weight: 30
-description: "Support for common Integrated Development Environments (IDEs)"
+description: "对常见集成开发环境（IDE）的支持"
 ---
 
