@@ -10,7 +10,7 @@ no_list: true
 欢迎来到 Dapr 的入门指南
 
 {{% alert title="Dapr 的基础概念" color="primary" %}}
-If you are looking for an introductory overview of Dapr and learn more about basic Dapr terminology, it is recommended to visit the [concepts section]({{X2X}}).
+如果您正在寻找 Dapr 的入门概述，并希望了解有关 Dapr 的基本术语的更多信息，建议访问[基础概念章节]({{X2X}}).
 {{% /alert %}}
 
 这篇入门指南将引导您完成安装，初始化和开始使用 Dapr 的一系列步骤。 这里推荐的 Dapr 入门学习的方式是在本地搭建开发环境（也就是被称为[_自托管_ 模式]({{< ref self-hosted >}})），在搭建完成的开发环境中包括了 Dapr CLI，Dapr sidecar 的二进制文件和一些默认的 Dapr 组件，它们可以帮助您快速的开始使用 Dapr。
@@ -23,5 +23,5 @@ If you are looking for an introductory overview of Dapr and learn more about bas
 1. 探索 Dapr 的快速入门案例
 
 {{% alert color="primary" %}}
-[First step: Install the Dapr CLI >>]({{< ref install-dapr-cli.md >}})
+[第一步：安装Dapr CLI >>]({{< ref install-dapr-cli.md >}})
 {{% /alert %}}
