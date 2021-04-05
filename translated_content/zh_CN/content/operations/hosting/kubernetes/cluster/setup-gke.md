@@ -1,12 +1,12 @@
 ---
-type: docs
+type: 文档
 title: "Setup a Google Kubernetes Engine cluster"
 linkTitle: "Google Kubernetes Engine"
 weight: 3000
 description: "Setup a Google Kubernetes Engine cluster"
 ---
 
-### Prerequisites
+### 前期准备
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Google Cloud SDK](https://cloud.google.com/sdk)
@@ -42,13 +42,13 @@ $ gcloud container clusters get-credentials $CLUSTER_NAME \
     --project $PROJECT_ID
 ```
 
-## (optional) Install Helm v3
+## (可选) 安装Helm v3
 
-1. [Install Helm v3 client](https://helm.sh/docs/intro/install/)
+1. [安装 Helm v3 客户端](https://helm.sh/docs/intro/install/)
 
-> **Note:** The latest Dapr helm chart no longer supports Helm v2. Please migrate from helm v2 to helm v3 by following [this guide](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
+> **注意：** 最新的 Dapr helm chart 不再支持 Helm v2。 请按照这篇文章 [Helm 迁移指南](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/) 从Helm v2 迁移到Helm v3。
 
-2. In case you need permissions  the kubernetes dashboard (i.e. configmaps is forbidden: User "system:serviceaccount:kube-system:kubernetes-dashboard" cannot list configmaps in the namespace "default", etc.) execute this command
+2. 如果您需要 Kubernetes 仪表板权限，(例如 configmaps is forbidden: User "system:serviceaccount:kube-system:kubernetes-dashboard" cannot list configmaps in the namespace "default" 等等），执行这个命令
 
 ```bash
 kubectl create clusterrolebinding kubernetes-dashboard -n kube-system --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
