@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "components CLI 命令参考"
 linkTitle: "components"
 description: "有关 components CLI 命令的详细信息"
