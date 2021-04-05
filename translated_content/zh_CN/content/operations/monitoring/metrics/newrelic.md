@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Set-up New Relic to collect and analyze metrics"
 linkTitle: "New Relic"
 weight: 6000
@@ -16,7 +16,7 @@ New Relic offers a Prometheus OpenMetrics Integration.
 
 This document explains how to install it in your cluster, either using a Helm chart (recommended).
 
-## Installation
+## 安装
 
 1. Install Helm following the official instructions.
 
