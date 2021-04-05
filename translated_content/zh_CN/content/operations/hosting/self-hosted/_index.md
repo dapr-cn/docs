@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Run Dapr in Self Hosted Mode"
+title: "在自托管模式下运行 Dapr"
 linkTitle: "自托管"
 weight: 1000
-description: "How to get Dapr up and running in your local environment"
+description: "如何让 Dapr 在本地环境中启动和运行"
 ---
 
