@@ -7,7 +7,7 @@ description: Detailed information on the GCP Firestore state store component
 
 ## Component format
 
-To setup GCP Firestore state store create a component of type `state.gcp.firestore`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup GCP Firestore state store create a component of type `state.gcp.firestore`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -45,23 +45,23 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| 字段                              | Required | Details                                                                                                         | Example                                                 |
-| ------------------------------- |:--------:| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| type                            |    Y     | The credentials type                                                                                            | `"serviceaccount"`                                      |
-| project_id                      |    Y     | The ID of the GCP project to use                                                                                | `"project-id"`                                          |
-| private_key_id                |    Y     | The ID of the prvate key to use                                                                                 | `"private-key-id"`                                      |
-| client_email                    |    Y     | The email address for the client                                                                                | `"eample@example.com"`                                  |
-| client_id                       |    Y     | The client id value to use for authentication                                                                   | `"client-id"`                                           |
-| auth_uri                        |    Y     | The authentication URI to use                                                                                   | `"https://accounts.google.com/o/oauth2/auth"`           |
-| token_uri                       |    Y     | The token URI to query for Auth token                                                                           | `"https://oauth2.googleapis.com/token"`                 |
-| auth_provider_x509_cert_url |    Y     | The auth provider certificate URL                                                                               | `"https://www.googleapis.com/oauth2/v1/certs"`          |
-| client_x509_cert_url          |    Y     | The client certificate URL                                                                                      | `"https://www.googleapis.com/robot/v1/metadata/x509/x"` |
-| entity_kind                     |    N     | The entity name in Filestore. The entity name in Filestore. Defaults to `"DaprState"` Defaults to `"DaprState"` | `"DaprState"`                                           |
+| Field                           | Required | Details                                                 | Example                                                 |
+| ------------------------------- |:--------:| ------------------------------------------------------- | ------------------------------------------------------- |
+| type                            |    Y     | The credentials type                                    | `"serviceaccount"`                                      |
+| project_id                      |    Y     | The ID of the GCP project to use                        | `"project-id"`                                          |
+| private_key_id                |    Y     | The ID of the prvate key to use                         | `"private-key-id"`                                      |
+| client_email                    |    Y     | The email address for the client                        | `"eample@example.com"`                                  |
+| client_id                       |    Y     | The client id value to use for authentication           | `"client-id"`                                           |
+| auth_uri                        |    Y     | The authentication URI to use                           | `"https://accounts.google.com/o/oauth2/auth"`           |
+| token_uri                       |    Y     | The token URI to query for Auth token                   | `"https://oauth2.googleapis.com/token"`                 |
+| auth_provider_x509_cert_url |    Y     | The auth provider certificate URL                       | `"https://www.googleapis.com/oauth2/v1/certs"`          |
+| client_x509_cert_url          |    Y     | The client certificate URL                              | `"https://www.googleapis.com/robot/v1/metadata/x509/x"` |
+| entity_kind                     |    N     | The entity name in Filestore. Defaults to `"DaprState"` | `"DaprState"`                                           |
 
 ## Setup GCP Firestone
 
@@ -80,7 +80,7 @@ Follow the instructions [here](https://cloud.google.com/datastore/docs/quickstar
 {{< /tabs >}}
 
 
-## 相关链接
+## Related links
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
