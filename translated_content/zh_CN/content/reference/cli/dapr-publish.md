@@ -1,0 +1,38 @@
+---
+type: docs
+title: "publish CLI command reference"
+linkTitle: "publish"
+description: "Detailed information on the publish CLI command"
+---
+
+## Description
+
+Publish a pub-sub event.
+
+## Supported platforms
+
+- [自托管]({{< ref self-hosted >}})
+
+## Usage
+
+```bash
+dapr publish [flags]
+```
+
+## Flags
+
+| Name               | Environment Variable | Default | Description                                                  |
+| ------------------ | -------------------- | ------- | ------------------------------------------------------------ |
+| `--publish-app-id` | `-i`                 |         | The ID that represents the app from which you are publishing |
+| `--pubsub`         | `-p`                 |         | The name of the pub/sub component                            |
+| `--topic`, `-t`    |                      |         | The topic to be published to                                 |
+| `--data`, `-d`     |                      |         | The JSON serialized string (optional)                        |
+| `--help`, `-h`     |                      |         | Print this help message                                      |
+
+
+## Examples
+
+### Publish to sample topic in target pubsub
+```bash
+dapr publish --publish-app-id appId --topic sample --pubsub target --data '{"key":"value"}'
+```
