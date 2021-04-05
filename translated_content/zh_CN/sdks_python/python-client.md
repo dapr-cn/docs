@@ -94,5 +94,5 @@ with DaprClient() as d:
 - For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/secret_store) for code samples and instructions to try out retrieving secrets
 
-## 相关链接
+## Related links
 - [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples)
