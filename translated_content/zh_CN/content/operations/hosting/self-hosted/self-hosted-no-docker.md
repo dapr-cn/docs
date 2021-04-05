@@ -10,7 +10,7 @@ description: "如何以自托管方式部署和运行 Dapr ，而无需在本地
 
 ## 前期准备
 
-- [Dapr CLI]({{< ref "install-dapr-selfhost.md#installing-dapr-cli" >}})
+- [Dapr CLI]({{< ref "install-dapr-selfhost.md#installing-dapr-cli">}})
 
 ## 无需容器初始化 Dapr
 
