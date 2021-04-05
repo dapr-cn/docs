@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr Python SDK 与 Flask 集成"
 linkTitle: "Flask"
 weight: 300000
