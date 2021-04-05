@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Dapr .NET SDK Development with Project Tye"
 linkTitle: "Project Tye"
 weight: 40000
@@ -60,7 +60,7 @@ Checkin `tye.yaml` in source control wiht the application code.
 
 You can now use `tye run` to launch the whole application from one terminal. When running, Tye has a dashboard at `http://localhost:8000` to view application status and logs.
 
-### Next steps
+### 下一步
 
 Tye runs your services locally as normal .NET process. If you need to debug, then use the attach feature of your debugger to attach to one of the running processes. Since Tye is .NET aware, it has the ability to [start a process suspended](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options) for startup debugging.
 
