@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Publish & subscribe messaging"
+title: "发布 & 订阅消息"
 linkTitle: "Publish & subscribe"
 weight: 30
-description: Secure, scalable messaging between services
+description: 服务之间的安全、可扩展的消息传递
 ---
 
