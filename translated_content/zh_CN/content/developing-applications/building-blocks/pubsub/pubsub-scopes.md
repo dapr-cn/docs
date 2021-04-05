@@ -1,48 +1,48 @@
 ---
 type: docs
-title: "Scope Pub/Sub topic access"
+title: "限定 Pub/Sub 主题访问权限"
 linkTitle: "Scope topic access"
 weight: 5000
-description: "Use scopes to limit Pub/Sub topics to specific applications"
+description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程序"
 ---
 
-## Introduction
+## 介绍
 
-[Namespaces or component scopes]({{< ref component-scopes.md >}}) can be used to limit component access to particular applications. These application scopes added to a component limit only the applications with specific IDs to be able to use the component.
+[名称空间或组件作用域（scopes）]({{< ref component-scopes.md >}}) 可用于限制对特定应用程序的组件访问。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
 
-In addition to this general component scope, the following can be limited for pub/sub components:
-- Which topics which can be used (published or subscribed)
-- Which applications are allowed to publish to specific topics
-- Which applications are allowed to subscribe to specific topics
+除了此常规组件范围外，对于 pub/sub 组件，还可以限制以下操作：
+- 哪些主题可以使用(发布或订阅)
+- 哪些应用程序被允许发布到特定主题
+- 哪些应用程序被允许订阅特定主题
 
-This is called **pub/sub topic scoping**.
+这称为 **pub/sub 主题作用域限定**。
 
-Pub/sub scopes are defined for each pub/sub component.  You may have a pub/sub component named `pubsub` that has one set of scopes, and another `pubsub2` with a different set.
+为每个 pub/sub 组件定义发布/订阅范围。  您可能有一个名为 `pubsub` 的 pub/sub 组件，它有一组范围设置，另一个 `pubsub2` 另有一组范围设置。
 
-To use this topic scoping three metadata properties can be set for a pub/sub component:
+要使用这个主题范围，可以设置一个 pub/sub 组件的三个元数据属性：
 - `spec.metadata.publishingScopes`
-  - A semicolon-separated list of applications & comma-separated topic lists, allowing that app to publish to that list of topics
-  - If nothing is specified in `publishingScopes` (default behavior), all apps can publish to all topics
-  - To deny an app the ability to publish to any topic, leave the topics list blank (`app1=;app2=topic2`)
-  - For example, `app1=topic1;app2=topic2,topic3;app3=` will allow app1 to publish to topic1 and nothing else, app2 to publish to topic2 and topic3 only, and app3 to publish to nothing.
+  - 分号分隔应用程序列表& 逗号分隔的主题列表允许该 app 发布信息到主题列表
+  - 如果在 `publishingScopes` (缺省行为) 中未指定任何内容，那么所有应用程序可以发布到所有主题
+  - 要拒绝应用程序发布信息到任何主题，请将主题列表留空 (`app1=;app2=topic2`)
+  - 例如， `app1=topic1;app2=topic2,topic3;app3=` 允许 app1 发布信息至 topic1 ，app2 允许发布信息到 topic2 和 topic3 ，app3 不允许发布信息到任何主题。
 - `spec.metadata.subscriptionScopes`
-  - A semicolon-separated list of applications & comma-separated topic lists, allowing that app to subscribe to that list of topics
-  - If nothing is specified in `subscriptionScopes` (default behavior), all apps can subscribe to all topics
-  - For example, `app1=topic1;app2=topic2,topic3` will allow app1 to subscribe to topic1 only and app2 to subscribe to topic2 and topic3
+  - 分号分隔应用程序列表& 逗号分隔的主题列表允许该 app 订阅主题列表
+  - 如果在 `subscriptionScopes` (缺省行为) 中未指定任何内容，那么所有应用程序都可以订阅所有主题
+  - 例如， `app1=topic1;app2=topic2,topic3` 允许 app1 订阅 topic1 ，app2 可以订阅 topic2 和 topic3
 - `spec.metadata.allowedTopics`
-  - A comma-separated list of allowed topics for all applications.
-  - If `allowedTopics` is not set (default behavior), all topics are valid. `subscriptionScopes` and `publishingScopes` still take place if present.
-  - `publishingScopes` or `subscriptionScopes` can be used in conjuction with `allowedTopics` to add granular limitations
+  - 一个逗号分隔的允许主题列表，对所有应用程序。
+  - 如果未设置 `allowedTopics` (缺省行为) ，那么所有主题都有效。 `subscriptionScopes` 和 `publishingScopes` 如果存在则仍然生效。
+  - `publishingScopes` 或 `subscriptionScopes` 可用于与 `allowedTopics` 的 conjuction ，以添加限制粒度
 
-These metadata properties can be used for all pub/sub components. The following examples use Redis as pub/sub component.
+这些元数据属性可用于所有 pub/sub 组件。 以下示例使用 Redis 作为 pub/sub 组件。
 
-## Example 1: Scope topic access
+## 示例 1: 限制主题访问权限
 
-Limiting which applications can publish/subscribe to topics can be useful if you have topics which contain sensitive information and only a subset of your applications are allowed to publish or subscribe to these.
+如果主题包含敏感信息，并且只允许应用程序的某个子集发布或订阅这些主题，限制哪些应用程序可以发布/订阅主题可能很有用。
 
-It can also be used for all topics to have always a "ground truth" for which applications are using which topics as publishers/subscribers.
+它还可以用于所有主题，以始终具有应用程序使用哪些主题作为发布者/订阅者的“基本事实”。
 
-Here is an example of three applications and three topics:
+以下是三个应用程序和三个主题的示例:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -63,7 +63,7 @@ spec:
     value: "app2=;app3=topic1"
 ```
 
-The table below shows which applications are allowed to publish into the topics:
+下表显示哪些应用程序允许在主题中发布：
 
 |      | topic1 | topic2 | topic3 |
 | ---- | ------ | ------ | ------ |
@@ -71,7 +71,7 @@ The table below shows which applications are allowed to publish into the topics:
 | app2 |        | X      | X      |
 | app3 |        |        |        |
 
-The table below shows which applications are allowed to subscribe to the topics:
+下表显示哪些应用程序可以订阅主题：
 
 |      | topic1 | topic2 | topic3 |
 | ---- | ------ | ------ | ------ |
@@ -79,17 +79,17 @@ The table below shows which applications are allowed to subscribe to the topics:
 | app2 |        |        |        |
 | app3 | X      |        |        |
 
-> Note: If an application is not listed (e.g. app1 in subscriptionScopes) it is allowed to subscribe to all topics. Because `allowedTopics` is not used and app1 does not have any subscription scopes, it can also use additional topics not listed above.
+> 注意: 如果应用程序未列出 ( 例如， subscriptionScopes 中的 app1) ，那么允许订阅所有主题。 因为 `allowedTopics` 未使用，而 app1 任何订阅范围，因此它还可以使用上面未列出的其他主题。
 
-## Example 2: Limit allowed topics
+## 示例 2: 限制允许的主题
 
-A topic is created if a Dapr application sends a message to it. In some scenarios this topic creation should be governed. For example:
-- A bug in a Dapr application on generating the topic name can lead to an unlimited amount of topics created
-- Streamline the topics names and total count and prevent an unlimited growth of topics
+当 Dapr 应用程序给主题发送信息时，主题将自动创建。 在某些情况下，这个主题的创建应该得到管理。 例如:
+- Dapr 应用程序中有关生成主题名称的错误可能会导致创建无限数量的主题
+- 简化主题名称和总数，防止主题无限增长
 
-In these situations `allowedTopics` can be used.
+在这些情况下，可以使用 `allowedTopics`。
 
-Here is an example of three allowed topics:
+以下是三个允许的主题的示例:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -108,13 +108,13 @@ spec:
     value: "topic1,topic2,topic3"
 ```
 
-All applications can use these topics, but only those topics, no others are allowed.
+所有应用程序都可以使用这些主题，但仅允许这些主题，不允许其他主题。
 
-## Example 3: Combine `allowedTopics` and scopes
+## 示例 3: 组合 `allowedTopics` 和范围
 
-Sometimes you want to combine both scopes, thus only having a fixed set of allowed topics and specify scoping to certain applications.
+有时，您希望合并这两个作用域，从而仅具有固定的一组允许主题，并指定对某些应用程序的作用域限定。
 
-Here is an example of three applications and two topics:
+以下是三个应用程序和两个主题的示例:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -137,9 +137,9 @@ spec:
     value: "app1=;app2=A"
 ```
 
-> Note: The third application is not listed, because if an app is not specified inside the scopes, it is allowed to use all topics.
+> 注意: 第三个应用程序未列出，因为如果在作用域内未指定应用程序，那么允许使用所有主题。
 
-The table below shows which application is allowed to publish into the topics:
+下表显示允许哪些应用程序发布到主题中:
 
 |      | A | B | C |
 | ---- | - | - | - |
@@ -147,7 +147,7 @@ The table below shows which application is allowed to publish into the topics:
 | app2 | X | X |   |
 | app3 | X | X |   |
 
-The table below shows which application is allowed to subscribe to the topics:
+下表显示哪些应用程序允许订阅主题：
 
 |      | A | B | C |
 | ---- | - | - | - |
@@ -156,11 +156,11 @@ The table below shows which application is allowed to subscribe to the topics:
 | app3 | X | X |   |
 
 
-## Demo <iframe width="560" height="315" src="https://www.youtube.com/embed/7VdWBBGcbHQ?start=513" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## 例子   <iframe width="560" height="315" src="https://www.youtube.com/embed/7VdWBBGcbHQ?start=513" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-## Related links
+## 相关链接
 
-- Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
-- Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
-- List of [pub/sub components]({{< ref supported-pubsub >}})
-- Read the [API reference]({{< ref pubsub_api.md >}})
+- 您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
+- 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
+- {{< ref supported-pubsub >}}
+- 阅读 [API 引用]({{< ref pubsub_api.md >}})
