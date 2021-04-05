@@ -10,7 +10,7 @@ Dapr components are namespaced (separate from the Kubernetes namespace concept),
 
 When Dapr runs, it matches it's own configured namespace with the namespace of the components that it loads and initializes only the ones matching its namespaces. All other components in a different namespace are not loaded.
 
-## Namespaces
+## 命名空间
 Namespaces can be used to limit component access to particular Dapr instances.
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
@@ -45,6 +45,7 @@ Windows:
 
 ```powershell
 setx NAMESPACE "production"
+
 # run Dapr as usual
 ```
 {{% /codetab %}}
@@ -115,9 +116,9 @@ scopes:
 - app2
 ```
 
-## Example <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## 示例 <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-## Related links
+## 相关链接
 
 - [Configure Pub/Sub components with multiple namespaces]({{< ref "pubsub-namespaces.md" >}})
 - [Use secret scoping]({{< ref "secrets-scopes.md" >}})
