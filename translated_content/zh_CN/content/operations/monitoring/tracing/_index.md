@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Tracing（调用链追踪）"
 linkTitle: "Tracing（调用链追踪）"
 weight: 100
