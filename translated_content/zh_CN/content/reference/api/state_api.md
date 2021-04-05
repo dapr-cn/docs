@@ -30,13 +30,13 @@ The `metadata.name` is the name of the state store.
 
 the `spec/metadata` section is an open key value pair metadata that allows a binding to define connection properties.
 
-Starting with 0.4.0 release, support for multiple state stores was added. This is a breaking change from previous releases as the state APIs were changed to support this new scenario. This is a breaking change from previous releases as the state APIs were changed to support this new scenario.
+Starting with 0.4.0 release, support for multiple state stores was added. This is a breaking change from previous releases as the state APIs were changed to support this new scenario.
 
 Please refer https://github.com/dapr/dapr/blob/master/docs/decision_records/api/API-008-multi-state-store-api-design.md for more details.
 
 ## Key scheme
 
-Dapr state stores are key/value stores. Dapr state stores are key/value stores. To ensure data compatibility, Dapr requires these data stores follow a fixed key scheme. For general states, the key format is: For general states, the key format is:
+Dapr state stores are key/value stores. To ensure data compatibility, Dapr requires these data stores follow a fixed key scheme. For general states, the key format is:
 
 ```
 <App ID>||<state key>
@@ -60,18 +60,18 @@ POST http://localhost:<daprPort>/v1.0/state/<storename>
 
 #### URL Parameters
 
-| Parameter | 说明                                                                                                                                                                                                                     |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| daprPort  | the Dapr port                                                                                                                                                                                                          |
-| storename | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. Please refer Dapr State Store configuration structure mentioned above. |
+| Parameter | Description                                                                                                                                     |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| daprPort  | the Dapr port                                                                                                                                   |
+| storename | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
 #### Request Body
 
-A JSON array of state objects. A JSON array of state objects. Each state object is comprised with the following fields:
+A JSON array of state objects. Each state object is comprised with the following fields:
 
-| Field    | 描述                                                                                     |
+| Field    | Description                                                                            |
 | -------- | -------------------------------------------------------------------------------------- |
 | key      | state key                                                                              |
 | value    | state value, which can be any byte array                                               |
@@ -79,17 +79,17 @@ A JSON array of state objects. A JSON array of state objects. Each state object 
 | metadata | (optional) additional key-value pairs to be passed to the state store                  |
 | options  | (optional) state operation options, see [state operation options](#optional-behaviors) |
 
-> **ETag format** Dapr runtime treats ETags as opaque strings. The exact ETag format is defined by the corresponding data store. The exact ETag format is defined by the corresponding data store.
+> **ETag format** Dapr runtime treats ETags as opaque strings. The exact ETag format is defined by the corresponding data store.
 
 ### HTTP Response
 
 #### Response Codes
 
-| 代码  | 描述                                                           |
-| --- | ------------------------------------------------------------ |
-| 204 | State saved                                                  |
-| 400 | State store is missing or misconfigured or malformed request |
-| 500 | Failed to save state                                         |
+| Code | Description                                                  |
+| ---- | ------------------------------------------------------------ |
+| 204  | State saved                                                  |
+| 400  | State store is missing or misconfigured or malformed request |
+| 500  | Failed to save state                                         |
 
 #### Response Body
 
@@ -103,7 +103,8 @@ curl -X POST http://localhost:3500/v1.0/state/starwars \
   -d '[
         {
           "key": "weapon",
-          "value": "DeathStar"
+          "value": "DeathStar",
+          "etag": "1234"
         },
         {
           "key": "planet",
@@ -118,38 +119,38 @@ curl -X POST http://localhost:3500/v1.0/state/starwars \
 
 This endpoint lets you get the state for a specific key.
 
-### HTTP 请求
+### HTTP Request
 
 ```
 GET http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 ```
 
-#### URL 参数
+#### URL Parameters
 
-| 参数          | 说明                                                                                                                                                                                                                     |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| daprPort    | the Dapr port                                                                                                                                                                                                          |
-| storename   | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. Please refer Dapr State Store configuration structure mentioned above. |
-| key         | the key of the desired state                                                                                                                                                                                           |
-| consistency | (optional) read consistency mode, see [state operation options](#optional-behaviors)                                                                                                                                   |
-| metadata    | (optional) metadata as query parameters to the state store                                                                                                                                                             |
+| Parameter   | Description                                                                                                                                     |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| daprPort    | the Dapr port                                                                                                                                   |
+| storename   | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. |
+| key         | the key of the desired state                                                                                                                    |
+| consistency | (optional) read consistency mode, see [state operation options](#optional-behaviors)                                                            |
+| metadata    | (optional) metadata as query parameters to the state store                                                                                      |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
 ### HTTP Response
 
 #### Response Codes
 
-| 代码  | 描述                                      |
-| --- | --------------------------------------- |
-| 200 | Get state successful                    |
-| 204 | Key is not found                        |
-| 400 | State store is missing or misconfigured |
-| 500 | Get state failed                        |
+| Code | Description                             |
+| ---- | --------------------------------------- |
+| 200  | Get state successful                    |
+| 204  | Key is not found                        |
+| 400  | State store is missing or misconfigured |
+| 500  | Get state failed                        |
 
 #### Response Headers
 
-| Header | 描述                     |
+| Header | Description            |
 | ------ | ---------------------- |
 | ETag   | ETag of returned value |
 
@@ -189,19 +190,19 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/bulk
 
 #### URL Parameters
 
-| Parameter | 说明                                                                                                                                                                                                                     |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| daprPort  | the Dapr port                                                                                                                                                                                                          |
-| storename | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. Please refer Dapr State Store configuration structure mentioned above. |
-| metadata  | (optional) metadata as query parameters to the state store                                                                                                                                                             |
+| Parameter | Description                                                                                                                                     |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| daprPort  | the Dapr port                                                                                                                                   |
+| storename | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. |
+| metadata  | (optional) metadata as query parameters to the state store                                                                                      |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
 ### HTTP Response
 
 #### Response Codes
 
-| Code | 说明                                      |
+| Code | Description                             |
 | ---- | --------------------------------------- |
 | 200  | Get state successful                    |
 | 400  | State store is missing or misconfigured |
@@ -256,19 +257,19 @@ DELETE http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                                                                     |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| daprPort    | the Dapr port                                                                                                                                                                                                          |
-| storename   | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. Please refer Dapr State Store configuration structure mentioned above. |
-| key         | the key of the desired state                                                                                                                                                                                           |
-| concurrency | (optional) either *first-write* or *last-write*, see [state operation options](#optional-behaviors)                                                                                                                    |
-| consistency | (optional) either *strong* or *eventual*, see [state operation options](#optional-behaviors)                                                                                                                           |
+| Parameter   | Description                                                                                                                                     |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| daprPort    | the Dapr port                                                                                                                                   |
+| storename   | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. |
+| key         | the key of the desired state                                                                                                                    |
+| concurrency | (optional) either *first-write* or *last-write*, see [state operation options](#optional-behaviors)                                             |
+| consistency | (optional) either *strong* or *eventual*, see [state operation options](#optional-behaviors)                                                    |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
 #### Request Headers
 
-| Header   | 说明                                                    |
+| Header   | Description                                           |
 | -------- | ----------------------------------------------------- |
 | If-Match | (Optional) ETag associated with the key to be deleted |
 
@@ -276,7 +277,7 @@ DELETE http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### Response Codes
 
-| Code | 说明                                      |
+| Code | Description                             |
 | ---- | --------------------------------------- |
 | 204  | Delete state successful                 |
 | 400  | State store is missing or misconfigured |
@@ -288,7 +289,7 @@ None.
 ### Example
 
 ```shell
-curl -X "DELETE" http://localhost:3500/v1.0/state/starwars/planet -H "ETag: xxxxxxx"
+curl -X "DELETE" http://localhost:3500/v1.0/state/starwars/planet -H "If-Match: xxxxxxx"
 ```
 
 ## State transactions
@@ -303,7 +304,7 @@ List of state stores that support transactions:
 * MongoDB
 * PostgreSQL
 * SQL Server
-* Azure CosmSDB
+* Azure CosmosDB
 
 #### HTTP Request
 
@@ -313,7 +314,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/transaction
 
 #### HTTP Response Codes
 
-| Code | 说明                                                           |
+| Code | Description                                                  |
 | ---- | ------------------------------------------------------------ |
 | 204  | Request successful                                           |
 | 400  | State store is missing or misconfigured or malformed request |
@@ -321,23 +322,23 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/transaction
 
 #### URL Parameters
 
-| Parameter | 说明                                                                                                                                                                                                                     |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| daprPort  | the Dapr port                                                                                                                                                                                                          |
-| storename | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. Please refer Dapr State Store configuration structure mentioned above. |
+| Parameter | Description                                                                                                                                     |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| daprPort  | the Dapr port                                                                                                                                   |
+| storename | `metadata.name` field in the user configured state store component yaml. Please refer Dapr State Store configuration structure mentioned above. |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
 #### Request Body
 
-| Field      | 说明                                                                     |
+| Field      | Description                                                            |
 | ---------- | ---------------------------------------------------------------------- |
 | operations | A JSON array of state operation                                        |
 | metadata   | (optional) the metadata for transaction that applies to all operations |
 
 Each state operation is comprised with the following fields:
 
-| Field    | 说明                                                                                     |
+| Field    | Description                                                                            |
 | -------- | -------------------------------------------------------------------------------------- |
 | key      | state key                                                                              |
 | value    | state value, which can be any byte array                                               |
@@ -346,7 +347,7 @@ Each state operation is comprised with the following fields:
 | options  | (optional) state operation options, see [state operation options](#optional-behaviors) |
 
 
-#### 示例
+#### Examples
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state/starwars/transaction \
@@ -376,9 +377,9 @@ curl -X POST http://localhost:3500/v1.0/state/starwars/transaction \
 
 ## Configuring state store for actors
 
-Actors don't support multiple state stores and require a transactional state store to be used with Dapr. Currently Mongodb, Redis, PostgreSQL, SQL Server, and Azure CosmosDB implement the transactional state store interface. Currently Mongodb, Redis, PostgreSQL, SQL Server, and Azure CosmosDB implement the transactional state store interface.
+Actors don't support multiple state stores and require a transactional state store to be used with Dapr. Currently Mongodb, Redis, PostgreSQL, SQL Server, and Azure CosmosDB implement the transactional state store interface.
 
-To specify which state store to be used for actors, specify value of property `actorStateStore` as true in the metadata section of the state store component yaml file. Example: Following components yaml will configure redis to be used as the state store for Actors. Example: Following components yaml will configure redis to be used as the state store for Actors.
+To specify which state store to be used for actors, specify value of property `actorStateStore` as true in the metadata section of the state store component yaml file. Example: Following components yaml will configure redis to be used as the state store for Actors.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -407,23 +408,6 @@ A Dapr-compatible state store shall use the following key scheme:
 
 * *\<App ID>||\<state key>* key format for general states
 * *\<App ID>||\<Actor type>||\<Actor id>||\<state key>* key format for Actor states.
-
-### Concurrency
-
-Dapr uses Optimized Concurrency Control (OCC) with ETags. Dapr makes optional the following requirements on state stores:
-
-* An Dapr-compatible state store may support optimistic concurrency control using ETags. When an ETag is associated with an *save* or *delete*  request, the store shall allow the update only if the attached ETag matches with the latest ETag in the database.
-* When ETag is missing in the write requests, the state store shall handle the requests in a last-write-wins fashion. This is to allow optimizations for high-throughput write scenarios in which data contingency is low or has no negative effects.
-* A store shall **always** return ETags when returning states to callers.
-
-### Consistency
-
-Dapr allows clients to attach a consistency hint to *get*, *set* and *delete* operation. Dapr support two consistency level: **strong** and **eventual**, which are defined as the follows:
-
-#### Eventual Consistency
-
-Dapr assumes data stores are eventually consistent by default. \<App ID>||\<state key></em> key format for general states</li>
-* *\<App ID>||\<Actor type>||\<Actor id>||\<state key>* key format for Actor states.</ul>
 
 ### Concurrency
 
@@ -510,46 +494,6 @@ curl http://localhost:3500/v1.0/state/statestore/sampleData -v
 ```
 
 The returned ETag here was 1. Sending a new request to update or delete the data with the wrong ETag will return an error (omitting the ETag will allow the request):
-
-```shell
-# Update
-curl -X POST http://localhost:3500/v1.0/state/statestore \
-    -H "Content-Type: application/json" \
-    -d '[
-            {
-                "key": "sampleData",
-                "value": "2",
-                "etag": "2"
-            }
-    ]'
-{"errorCode":"ERR_STATE_SAVE","message":"failed saving state in state store statestore: possible etag mismatch. error from state store: ERR Error running script (call to f_83e03ec05d6a3b6fb48483accf5e594597b6058f): @user_script:1: user_script:1: failed to set key nodeapp||sampleData"}
-
-# Delete
-curl -X DELETE -H 'If-Match: 5' http://localhost:3500/v1.0/state/statestore/sampleData
-{"errorCode":"ERR_STATE_DELETE","message":"failed deleting state with key sampleData: possible etag mismatch. error from state store: ERR Error running script (call to f_9b5da7354cb61e2ca9faff50f6c43b81c73c0b94): @user_script:1: user_script:1: failed to delete node
-app||sampleData"}
-```
-
-In order to update or delete the object, simply match the ETag in either the request body (update) or the `If-Match` header (delete). Note, when the state is updated, it receives a new ETag so further updates or deletes will need to use the new ETag.
-
-```shell
-# Update
-curl -X POST http://localhost:3500/v1.0/state/statestore \
-    -H "Content-Type: application/json" \
-    -d '[
-        {
-            "key": "sampleData",
-            "value": "2",
-            "etag": "1"
-        }
-    ]'
-
-# Delete
-curl -X DELETE -H 'If-Match: 1' http://localhost:3500/v1.0/state/statestore/sampleData
-```
-## Next Steps
-- [State management overview]({{< ref state-management-overview.md >}})
-- [How-To: Save & get state]({{< ref howto-get-save-state.md >}}) Sending a new request to update or delete the data with the wrong ETag will return an error (omitting the ETag will allow the request):
 
 ```shell
 # Update
