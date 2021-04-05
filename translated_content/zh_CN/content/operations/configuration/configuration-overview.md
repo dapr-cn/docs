@@ -44,7 +44,7 @@ Note: There are more [Kubernetes annotations]({{< ref "kubernetes-annotations.md
 The following configuration settings can be applied to Dapr application sidecars;
 - [Tracing](#tracing)
 - [Metrics](#metrics)
-- [Middleware](#middleware)
+- [中间件](#middleware)
 - [Scoping secrets for secret stores](#scoping-secrets-for-secret-stores)
 - [Access control allow lists for service invocation](#access-control-allow-lists-for-service-invocation)
 - [Example application sidecar configuration](#example-application-sidecar-configuration)
@@ -93,7 +93,7 @@ The following table lists the properties for metrics:
 
 See [metrics documentation]({{< ref "metrics-overview.md" >}}) for more information
 
-#### Middleware
+#### 中间件
 
 Middleware configuration set named Http pipeline middleware handlers The `httpPipeline` section under the `Configuration` spec contains the following properties:
 
