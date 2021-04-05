@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "mtls expiry CLI 命令参考"
 linkTitle: "mtls expiry"
 description: "有关 mtls expiry CLI 命令的详细信息"
