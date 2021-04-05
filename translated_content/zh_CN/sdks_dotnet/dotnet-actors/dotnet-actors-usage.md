@@ -75,7 +75,7 @@ When using this pattern, take care to avoid creating many instances of **transie
 
 Actors can implement `IDisposable` or `IAsyncDisposable`. It is recommended that you rely on dependency injection for resource management rather than implementing dispose functionality in application code. Dispose support is provided for the rare case where it is truly necessary.
 
-### Logging
+### 日志
 
 Inside of an actor class you have access to an instance of `ILogger` through a property on the base `Actor` class. This instance is connected to the ASP.NET Core logging system, and should be used for all logging inside an actor. Read more about logging [here](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line). You can configure a variety of different logging formats and output sinks.
 
