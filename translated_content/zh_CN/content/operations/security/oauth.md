@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "使用 OAuth 配置 API 授权"
 linkTitle: "OAuth"
 weight: 2000
