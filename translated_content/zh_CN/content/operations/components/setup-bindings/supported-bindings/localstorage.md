@@ -5,9 +5,9 @@ linkTitle: "Local Storage"
 description: "Detailed documentation on the Local Storage binding component"
 ---
 
-## Component format
+## 配置
 
-To set up the Local Storage binding, create a component of type `bindings.localstorage`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To set up the Local Storage binding, create a component of type `bindings.localstorage`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -24,15 +24,15 @@ spec:
     value: <string>
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field    | Required | Binding support | Details                                                 | Example         |
-| -------- |:--------:| --------------- | ------------------------------------------------------- | --------------- |
-| rootPath |    Y     | Input / Output  | The root path anchor to which files can be read / saved | `"/temp/files"` |
+| 字段       | 必填 | 绑定支持           | 详情                                                      | 示例              |
+| -------- |:--:| -------------- | ------------------------------------------------------- | --------------- |
+| rootPath | 是  | Input / Output | The root path anchor to which files can be read / saved | `"/temp/files"` |
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `create` : [Create file](#create-file)
 - `get` : [Get file](#get-file)
@@ -43,7 +43,7 @@ This component supports **output binding** with the following operations:
 
 To perform a create file operation, invoke the Local Storage binding with a `POST` method and the following JSON body:
 
-> Note: by default, a random UUID is generated. See below for Metadata support to set the name
+> 注意：默认情况下，会随机生成一个UUID。 参见下面所示的支持的元数据设置名称
 
 ```json
 {
@@ -52,14 +52,14 @@ To perform a create file operation, invoke the Local Storage binding with a `POS
 }
 ```
 
-#### Examples
+#### 示例
 
 
 ##### Save text to a random generated UUID file
 
 {{< tabs Windows Linux >}}
   {{% codetab %}}
-  On Windows, utilize cmd prompt (PowerShell has different escaping mechanism)
+  在Windows上，使用cmd提示符（PowerShell有不同的转义机制）。
   ```bash
   curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
   ```
@@ -116,9 +116,9 @@ To upload a file, encode it as Base64. The binding should automatically detect t
 
 {{< /tabs >}}
 
-#### Response
+#### 响应
 
-The response body will contain the following JSON:
+响应体将包含以下JSON：
 
 ```json
 {
@@ -140,7 +140,7 @@ To perform a get file operation, invoke the Local Storage binding with a `POST` 
 }
 ```
 
-#### Example
+#### 示例
 
 {{< tabs Windows Linux >}}
 
@@ -159,7 +159,7 @@ To perform a get file operation, invoke the Local Storage binding with a `POST` 
 
 {{< /tabs >}}
 
-#### Response
+#### 响应
 
 The response body contains the value stored in the file.
 
@@ -184,7 +184,7 @@ If you only want to list the files beneath a particular directory below the `roo
 }
 ```
 
-#### Example
+#### 示例
 
 {{< tabs Windows Linux >}}
 
@@ -203,7 +203,7 @@ If you only want to list the files beneath a particular directory below the `roo
 
 {{< /tabs >}}
 
-#### Response
+#### 响应
 
 The response is a JSON array of file names.
 
@@ -220,7 +220,7 @@ To perform a delete file operation, invoke the Local Storage binding with a `POS
 }
 ```
 
-#### Example
+#### 示例
 
 {{< tabs Windows Linux >}}
 
@@ -239,11 +239,11 @@ To perform a delete file operation, invoke the Local Storage binding with a `POS
 
 {{< /tabs >}}
 
-#### Response
+#### 响应
 
 An HTTP 204 (No Content) and empty body will be returned if successful.
 
-## Metadata information
+## 元数据信息
 
 By default the Local Storage output binding auto generates a UUID as the file name. It is configurable in the metadata property of the message.
 
@@ -257,10 +257,10 @@ By default the Local Storage output binding auto generates a UUID as the file na
 }
 ```
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
