@@ -35,11 +35,11 @@ spec:
 
 ## 元数据字段规范
 
-| 字段            | 必填 | 详情                           | 例子                    |
-| ------------- |:--:| ---------------------------- | --------------------- |
-| accountName   | Y  | 存储帐户名称                       | `"mystorageaccount"`. |
-| accountKey    | Y  | 主要或次要存储密钥                    | `"key"`               |
-| containerName | Y  | Dapr 状态的容器名称， 如果容器不存在，将会自动创建 | `"container"`         |
+| 字段            | 必填 | 详情                                               | 例子                    |
+| ------------- |:--:| ------------------------------------------------ | --------------------- |
+| accountName   | Y  | 存储帐户名称                                           | `"mystorageaccount"`. |
+| accountKey    | Y  | 主要或次要存储密钥                                        | `"key"`               |
+| containerName | Y  | **ContainerName**：用于Dapr状态的容器名称。 如果容器不存在，将会自动创建. | `"container"`         |
 
 ## 安装Azure Blobstorage
 
@@ -48,9 +48,9 @@ spec:
 如果你想创建一个容器供Dapr使用，你可以事先这样做。 但是，当 Blob Storage状态提供者会在其不存在时为你自动创建。
 
 要将 Azure Blob Storage配置为状态存储，你需要如下属性：
-- **AccountName**：存储账户名称 举例：**mystorageaccount**
+- **AccountName**：存储账户名称 举例：**mystorageaccount** For example: **mystorageaccount**.
 - **AccountKey**：主要或次要存储密钥。
-- **ContainerName**：用于Dapr状态的容器名称。 如果容器不存在，将会自动创建.
+- **ContainerName**: The name of the container to be used for Dapr state. The container will be created for you if it doesn't exist.
 
 ## 应用配置
 
