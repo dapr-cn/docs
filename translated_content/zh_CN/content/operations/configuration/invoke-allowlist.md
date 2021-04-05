@@ -6,17 +6,17 @@ weight: 4000
 description: "Restrict what operations *calling* applications can perform, via service invocation, on the *called* application"
 ---
 
-Access control enables the configuration of policies that restrict what operations *calling* applications can perform, via service invocation, on the *called* application. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration.
+Access control enables the configuration of policies that restrict what operations *calling* applications can perform, via service invocation, on the *called* application. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration.
 
-An access control policy is specified in configuration and be applied to Dapr sidecar for the *called* application. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applicatons to access to the called app. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applicatons to access to the called app.
+An access control policy is specified in configuration and be applied to Dapr sidecar for the *called* application. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applicatons to access to the called app. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applicatons to access to the called app. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applicatons to access to the called app.
 
 Watch this [video](https://youtu.be/j99RN_nxExA?t=1108) on how to apply access control list for service invocation. <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=1108" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 ## Concepts
 
-**TrustDomain** - A "trust domain" is a logical group to manage trust relationships. Every application is assigned a trust domain which can be specified in the access control list policy spec. If no policy spec is defined or an empty trust domain is specified, then a default value "public" is used. This trust domain is used to generate the identity of the application in the TLS cert. Every application is assigned a trust domain which can be specified in the access control list policy spec. If no policy spec is defined or an empty trust domain is specified, then a default value "public" is used. This trust domain is used to generate the identity of the application in the TLS cert.
+**TrustDomain** - A "trust domain" is a logical group to manage trust relationships. Every application is assigned a trust domain which can be specified in the access control list policy spec. If no policy spec is defined or an empty trust domain is specified, then a default value "public" is used. This trust domain is used to generate the identity of the application in the TLS cert.
 
-**App Identity** - Dapr requests the sentry service to generate a [SPIFFE](https://spiffe.io/) id for all applications and this id is attached in the TLS cert. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched.
+**App Identity** - Dapr requests the sentry service to generate a [SPIFFE](https://spiffe.io/) id for all applications and this id is attached in the TLS cert. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched.
 
 ## Configuration properties
 
@@ -24,29 +24,29 @@ The following tables lists the different properties for access control, policies
 
 ### Access Control
 
-| Property      | Type   | 描述                                                                                  |
-| ------------- | ------ | ----------------------------------------------------------------------------------- |
-| defaultAction | string | Global default action when no other policy is matched                               |
-| trustDomain   | string | Trust domain assigned to the application. Default is "public". Default is "public". |
-| policies      | string | Policies to determine what operations the calling app can do on the called app      |
+| Property      | Type   | Description                                                                                                                   |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| defaultAction | string | Global default action when no other policy is matched                                                                         |
+| trustDomain   | string | Trust domain assigned to the application. Trust domain assigned to the application. Default is "public". Default is "public". |
+| policies      | string | Policies to determine what operations the calling app can do on the called app                                                |
 
 ### Policies
 
-| Property      | Type   | Description                                                                                                             |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
-| app           | string | AppId of the calling app to allow/deny service invocation from                                                          |
-| namespace     | string | Namespace value that needs to be matched with the namespace of the calling app                                          |
-| trustDomain   | string | Trust domain that needs to be matched with the trust domain of the calling app. Default is "public" Default is "public" |
-| defaultAction | string | App level default action in case the app is found but no specific operation is matched                                  |
-| operations    | string | operations that are allowed from the calling app                                                                        |
+| Property      | Type   | Description                                                                                                                                 |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| app           | string | AppId of the calling app to allow/deny service invocation from                                                                              |
+| namespace     | string | Namespace value that needs to be matched with the namespace of the calling app                                                              |
+| trustDomain   | string | Trust domain that needs to be matched with the trust domain of the calling app. Default is "public" Default is "public" Default is "public" |
+| defaultAction | string | App level default action in case the app is found but no specific operation is matched                                                      |
+| operations    | string | operations that are allowed from the calling app                                                                                            |
 
 ### Operations
 
-| Property | Type   | Description                                                                                                                                                                                                                 |
-| -------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name     | string | Path name of the operations allowed on the called app. Path name of the operations allowed on the called app. Wildcard "\*" can be used to under a path to match                                                          |
-| httpVerb | list   | List specific http verbs that can be used by the calling app. Wildcard "\*" can be used to match any http verb. Unused for grpc invocation Wildcard "\*" can be used to match any http verb. Unused for grpc invocation |
-| action   | string | Access modifier. Access modifier. Accepted values "allow" (default) or "deny"                                                                                                                                               |
+| Property | Type   | Description                                                                                                                                                                                                                                                                                                |
+| -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name     | string | Path name of the operations allowed on the called app. Path name of the operations allowed on the called app. Wildcard "\*" can be used to under a path to match Wildcard "\*" can be used to under a path to match                                                                                    |
+| httpVerb | list   | List specific http verbs that can be used by the calling app. Wildcard "\*" can be used to match any http verb. Unused for grpc invocation Wildcard "\*" can be used to match any http verb. Unused for grpc invocation Wildcard "\*" can be used to match any http verb. Unused for grpc invocation |
+| action   | string | Access modifier. Access modifier. Access modifier. Accepted values "allow" (default) or "deny"                                                                                                                                                                                                             |
 
 ## Policy rules
 
@@ -65,11 +65,9 @@ The action corresponding to the most specific policy matched takes effect as ord
 
 ## Example scenarios
 
-Below are some example scenarios for using access control list for service invocation. See [configuration guidance]({{< ref "configuration-concept.md" >}}) to understand the available configuration settings for an application sidecar.
+Below are some example scenarios for using access control list for service invocation. Below are some example scenarios for using access control list for service invocation. See [configuration guidance]({{< ref "configuration-concept.md" >}}) to understand the available configuration settings for an application sidecar.
 
-<font size=5>Below are some example scenarios for using access control list for service invocation. See 
-
-[configuration guidance]({{< ref "configuration-concept.md" >}}) to understand the available configuration settings for an application sidecar.<font size=5>Scenario 1: Deny access to all apps except where trustDomain = public, namespace = default, appId = app1</font></font>
+<font size=5>Below are some example scenarios for using access control list for service invocation. See \[configuration guidance\]({{< ref "configuration-concept.md" >}}) to understand the available configuration settings for an application sidecar.<font size=5>Scenario 1: Deny access to all apps except where trustDomain = public, namespace = default, appId = app1</font></font>
 
 With this configuration, all calling methods with appId = app1 are allowed and all other invocation requests from other applications are denied
 
@@ -193,9 +191,9 @@ spec:
 ```
 
 ## Hello world examples
-These examples show how to apply access control to the [hello world](https://github.com/dapr/quickstarts#quickstarts) quickstart samples where a python app invokes a node.js app. Access control lists rely on the Dapr [Sentry service]({{< ref "security-concept.md" >}}) to generate the TLS certificates with a SPIFFE id for authentication, which means the Sentry service either has to be running locally or deployed to your hosting enviroment such as a Kubernetes cluster. Access control lists rely on the Dapr [Sentry service]({{< ref "security-concept.md" >}}) to generate the TLS certificates with a SPIFFE id for authentication, which means the Sentry service either has to be running locally or deployed to your hosting enviroment such as a Kubernetes cluster.
+These examples show how to apply access control to the [hello world](https://github.com/dapr/quickstarts#quickstarts) quickstart samples where a python app invokes a node.js app. Access control lists rely on the Dapr [Sentry service]({{< ref "security-concept.md" >}}) to generate the TLS certificates with a SPIFFE id for authentication, which means the Sentry service either has to be running locally or deployed to your hosting enviroment such as a Kubernetes cluster. Access control lists rely on the Dapr [Sentry service]({{< ref "security-concept.md" >}}) to generate the TLS certificates with a SPIFFE id for authentication, which means the Sentry service either has to be running locally or deployed to your hosting enviroment such as a Kubernetes cluster. Access control lists rely on the Dapr [Sentry service]({{< ref "security-concept.md" >}}) to generate the TLS certificates with a SPIFFE id for authentication, which means the Sentry service either has to be running locally or deployed to your hosting enviroment such as a Kubernetes cluster.
 
-The nodeappconfig example below shows how to **deny** access to the `neworder` method from the `pythonapp`, where the python app is in the `myDomain` trust domain and `default` namespace. The nodeapp is in the `public` trust domain. The nodeapp is in the `public` trust domain.
+The nodeappconfig example below shows how to **deny** access to the `neworder` method from the `pythonapp`, where the python app is in the `myDomain` trust domain and `default` namespace. The nodeapp is in the `public` trust domain. The nodeapp is in the `public` trust domain. The nodeapp is in the `public` trust domain.
 
 **nodeappconfig.yaml**
 
@@ -317,14 +315,14 @@ The following steps run the Sentry service locally with mTLS enabled, set up nec
    python app.py
    ```
 
-8. You should see the calls to the node app fail in the python app command prompt based due to the **deny** operation action in the nodeappconfig file. Change this action to **allow** and re-run the apps and you should then see this call succeed. Change this action to **allow** and re-run the apps and you should then see this call succeed.
+8. You should see the calls to the node app fail in the python app command prompt based due to the **deny** operation action in the nodeappconfig file. Change this action to **allow** and re-run the apps and you should then see this call succeed. Change this action to **allow** and re-run the apps and you should then see this call succeed. Change this action to **allow** and re-run the apps and you should then see this call succeed.
 
 ### Kubernetes mode
 This example uses the [hello kubernetes](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes/README.md) quickstart.
 
 You can create and apply the above configuration files `nodeappconfig.yaml` and `pythonappconfig.yaml` as described in the [configuration]({{< ref "configuration-concept.md" >}}) to the Kubernetes deployments.
 
-For example, below is how the pythonapp is deployed to Kubernetes in the default namespace with this pythonappconfig configuration file. Do the same for the nodeapp deployment and then look at the logs for the pythonapp to see the calls fail due to the **deny** operation action set in the nodeappconfig file. Change this action to **allow** and re-deploy the apps and you should then see this call succeed. Do the same for the nodeapp deployment and then look at the logs for the pythonapp to see the calls fail due to the **deny** operation action set in the nodeappconfig file. Change this action to **allow** and re-deploy the apps and you should then see this call succeed.
+For example, below is how the pythonapp is deployed to Kubernetes in the default namespace with this pythonappconfig configuration file. Do the same for the nodeapp deployment and then look at the logs for the pythonapp to see the calls fail due to the **deny** operation action set in the nodeappconfig file. Change this action to **allow** and re-deploy the apps and you should then see this call succeed. Do the same for the nodeapp deployment and then look at the logs for the pythonapp to see the calls fail due to the **deny** operation action set in the nodeappconfig file. Change this action to **allow** and re-deploy the apps and you should then see this call succeed. Do the same for the nodeapp deployment and then look at the logs for the pythonapp to see the calls fail due to the **deny** operation action set in the nodeappconfig file. Change this action to **allow** and re-deploy the apps and you should then see this call succeed.
 
 ```yaml
 apiVersion: apps/v1
