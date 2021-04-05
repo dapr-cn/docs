@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Control concurrency and rate limit applications"
 linkTitle: "Concurrency & rate limits"
 weight: 2000
