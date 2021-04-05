@@ -119,7 +119,7 @@ Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-
 
 要引用另一页面中的特定部分，请在引用末尾添加 `#section-short-name`。
 
-通常，节短名称是节标题的文本，全部为小写，空格更改为"-"。 You can check the section short name by visiting the website page, clicking the link icon (🔗) next to the section, and see how the URL renders in the nav bar. "#" 后面的内容是您的段节短名称。
+通常，节短名称是节标题的文本，全部为小写，空格更改为"-"。 您可以通过访问 Web 站点页面，单击该部分旁边的链接图标 (🔗) 来检查区段短名称，并查看在导航栏中呈现 URL 的方式。 "#" 后面的内容是您的段节短名称。
 
 例如，对于此特定段节，完整引用页面和部分将是:
 
