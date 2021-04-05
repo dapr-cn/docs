@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Actors API 参考"
 linkTitle: "Actors API"
 description: "关于 Actors API 的详细文档"
