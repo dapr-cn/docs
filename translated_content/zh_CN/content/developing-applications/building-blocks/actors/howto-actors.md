@@ -32,7 +32,7 @@ To use actors, your state store must support multi-item transactions.  This mean
 
 Actors can schedule periodic work on themselves by registering either timers or reminders.
 
-### Actor timers
+### Actor 计时器
 
 You can register a callback on actor to be executed based on a timer.
 
