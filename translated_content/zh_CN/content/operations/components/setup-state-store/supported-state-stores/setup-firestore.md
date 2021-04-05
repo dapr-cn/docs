@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "GCP Firestore (Datastore mode)"
 linkTitle: "GCP Firestore"
 description: Detailed information on the GCP Firestore state store component
