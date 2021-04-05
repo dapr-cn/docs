@@ -1,13 +1,13 @@
 ---
-type: docs
+type: 文档
 title: "Cassandra"
 linkTitle: "Cassandra"
 description: Detailed information on the Cassandra state store component
 --- 
 
-## Component format
+## 配置
 
-To setup Cassandra state store create a component of type `state.cassandra`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Cassandra state store create a component of type `state.cassandra`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -34,26 +34,54 @@ spec:
   - name: protoVersion
     value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
   - name: replicationFactor
+    value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1" Example: cassandra.cassandra.svc.cluster.local
+  - name: username
+    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
+  - name: password
+    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
+  - name: consistency
+    value: <REPLACE-WITH-CONSISTENCY> # Optional. default: "All"
+  - name: table
+    value: <REPLACE-WITH-TABLE> # Optional. default: "items"
+  - name: keyspace
+    value: <REPLACE-WITH-KEYSPACE> # Optional. default: "dapr"
+  - name: protoVersion
+    value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
+  - name: replicationFactor
+    value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1" Example: cassandra.cassandra.svc.cluster.local
+  - name: username
+    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
+  - name: password
+    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
+  - name: consistency
+    value: <REPLACE-WITH-CONSISTENCY> # Optional. default: "All"
+  - name: table
+    value: <REPLACE-WITH-TABLE> # Optional. default: "items"
+  - name: keyspace
+    value: <REPLACE-WITH-KEYSPACE> # Optional. default: "dapr"
+  - name: protoVersion
+    value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
+  - name: replicationFactor
     value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1"
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field             | Required | Details                                                 | Example                                    |
-| ----------------- |:--------:| ------------------------------------------------------- | ------------------------------------------ |
-| hosts             |    Y     | Comma separated value of the hosts                      | `"cassandra.cassandra.svc.cluster.local"`. |
-| port              |    N     | Port for communication. Default `"9042"`                | `"9042"`                                   |
-| username          |    Y     | The username of database user. No default               | `"user"`                                   |
-| password          |    Y     | The password for the user                               | `"password"`                               |
-| consistency       |    N     | The consistency values                                  | `"All"`, `"Quorum"`                        |
-| table             |    N     | Table name. Defaults to `"items"`                       | `"items"`, `"tab"`                         |
-| keyspace          |    N     | The cassandra keyspace to use. Defaults to `"dapr"`     | `"dapr"`                                   |
-| protoVersion      |    N     | The proto version for the client. Defaults to `"4"`     | `"3"`, `"4"`                               |
-| replicationFactor |    N     | The replication factor for the calls. Defaults to `"1"` | `"3"`                                      |
+| 字段                | 必填 | 详情                                                      | 示例                                         |
+| ----------------- |:--:| ------------------------------------------------------- | ------------------------------------------ |
+| hosts             | 是  | Comma separated value of the hosts                      | `"cassandra.cassandra.svc.cluster.local"`. |
+| port              | N  | Port for communication. Default `"9042"`                | `"9042"`                                   |
+| username          | 是  | The username of database user. No default               | `"user"`                                   |
+| password          | 是  | The password for the user                               | `"password"`                               |
+| consistency       | N  | The consistency values                                  | `"All"`, `"Quorum"`                        |
+| table             | N  | Table name. Defaults to `"items"`                       | `"items"`, `"tab"`                         |
+| keyspace          | N  | The cassandra keyspace to use. Defaults to `"dapr"`     | `"dapr"`                                   |
+| protoVersion      | N  | The proto version for the client. Defaults to `"4"`     | `"3"`, `"4"`                               |
+| replicationFactor | N  | The replication factor for the calls. Defaults to `"1"` | `"3"`                                      |
 
 ## Setup Cassandra
 
@@ -86,7 +114,7 @@ For example, if installing using the example above, the Cassandra DNS would be:
 
 {{< /tabs >}}
 
-## Related links
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+## 相关链接
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
+- [状态管理构建块]({{< ref state-management >}})
