@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "设置 Azure Kubernetes 服务集群"
 linkTitle: "Azure Kubernetes Service"
 weight: 2000
