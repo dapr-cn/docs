@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Dapr Python SDK 与 Flask 集成"
+title: "Dapr Python SDK integration with Flask"
 linkTitle: "Flask"
 weight: 300000
-description: 如何创建基于 Python FastAPI 的 Dapr 虚拟 actors
+description: How to create Dapr Python virtual actors with the Flask extension
 ---
 
-Dapr Python SDK 使用 `flask-dapr` 模块提供与Flask 的集成
+The Dapr Python SDK provides integration with Flask using the `flask-dapr` module
 
-## 安装
+## Installation
 
-你可以通过下面的方式下载和安装 Dapr Flask 扩展模块：
+You can download and install the Dapr Flask extension module with:
 
 {{< tabs Stable Development>}}
 
@@ -32,7 +32,7 @@ pip install flask-dapr-dev
 
 {{< /tabs >}}
 
-## 示例
+## Example
 
 ```python
 from flask import Flask
