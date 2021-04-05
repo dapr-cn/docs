@@ -1,0 +1,152 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "newbe36524",
+      "name": "Newbe36524",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7685462?v=4",
+      "profile": "https://www.newbe.pro",
+      "contributions": [
+        "ideas",
+        "translation"
+      ]
+    },
+    {
+      "login": "skyao",
+      "name": "Sky/敖小剑",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1582369?v=4",
+      "profile": "https://skyao.io",
+      "contributions": [
+        "ideas",
+        "translation"
+      ]
+    },
+    {
+      "login": "LLLLimbo",
+      "name": "LLLLimbo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31607003?v=4",
+      "profile": "https://github.com/LLLLimbo",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "abserari",
+      "name": "AbserAri",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32089134?v=4",
+      "profile": "https://yuque.com/abser",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "sheng-jie",
+      "name": "Shengjie Yan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12607748?v=4",
+      "profile": "https://www.jianshu.com/u/39ec0e6b1844?order_by=top",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "danvic712",
+      "name": "Danvic Wang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32116018?v=4",
+      "profile": "https://yuiter.com",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "JadynWong",
+      "name": "Jadyn",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13699353?v=4",
+      "profile": "https://jadyn.wang",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "oudi",
+      "name": "oudi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2518192?v=4",
+      "profile": "http://www.oudi.org",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "ZhangX-Byte",
+      "name": "ZhangX-Byte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6357361?v=4",
+      "profile": "https://github.com/ZhangX-Byte",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "siegrainwong",
+      "name": "Weiyi Wong",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11625599?v=4",
+      "profile": "https://siegrain.wang",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "lifejoyforpy",
+      "name": "lifejoy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38183800?v=4",
+      "profile": "https://github.com/lifejoyforpy",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "MarkLux",
+      "name": "Mark Lumin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19239409?v=4",
+      "profile": "http://marklux.cn",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "charleszhn",
+      "name": "charleszhn",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20416202?v=4",
+      "profile": "http://blog.ithuo.net:8877",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "TomorJM",
+      "name": "Jaime Zhang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11410549?v=4",
+      "profile": "http://www.tomorjm.com",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "weihanli",
+      "name": "Weihan Li",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7604648?v=4",
+      "profile": "https://www.cnblogs.com/weihanli",
+      "contributions": [
+        "translation"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "docs",
+  "projectOwner": "dapr-cn",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

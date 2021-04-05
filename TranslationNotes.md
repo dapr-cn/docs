@@ -49,14 +49,14 @@ description: >
 ---
 ```
 
-**其中，除了 title 和 description 之外的内容都不需要翻译。**
+**其中，除了 title、linkTitle 和 description 之外的内容都不需要翻译。**
 因此，翻译的结果如下：
 
 ```md
 ---
 type: docs
 title: "文档贡献"
-linkTitle: "Docs"
+linkTitle: "文档贡献"
 weight: 2000
 description: >
   向 Dapr Docs 投稿的准则
