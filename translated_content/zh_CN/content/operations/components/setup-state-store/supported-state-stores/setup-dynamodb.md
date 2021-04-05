@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "AWS DynamoDB"
 linkTitle: "AWS DynamoDB"
 description: Detailed information on the AWS DynamoDB state store component
