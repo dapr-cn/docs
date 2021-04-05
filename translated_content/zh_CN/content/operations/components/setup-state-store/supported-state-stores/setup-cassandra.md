@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Cassandra"
 linkTitle: "Cassandra"
 description: Detailed information on the Cassandra state store component
