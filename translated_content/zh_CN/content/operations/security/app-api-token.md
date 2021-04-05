@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Authenticate requests from Dapr using token authentication"
 linkTitle: "App API token authentication"
 weight: 4000
