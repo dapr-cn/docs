@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "dashboard CLI 命令参考"
 linkTitle: "dashboard"
 description: "有关 dashboard CLI 命令的详细信息"
