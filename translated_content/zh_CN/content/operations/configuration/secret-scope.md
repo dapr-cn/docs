@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Limit the secrets that can be read from secret stores"
 linkTitle: "Limit secret store access"
 weight: 3000
