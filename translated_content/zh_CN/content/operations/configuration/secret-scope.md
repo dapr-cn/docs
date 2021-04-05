@@ -6,7 +6,7 @@ weight: 3000
 description: "To limit the secrets to which the Dapr application has access, users can define secret scopes by augmenting existing configuration CRD with restrictive permissions."
 ---
 
-In addition to scoping which applications can access a given component, for example a secret store component (see [Scoping components]({{< ref "component-scopes.md">}})), a named secret store component itself can be scoped to one or more secrets for an application. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets.
+In addition to scoping which applications can access a given component, for example a secret store component (see [Scoping components]({{< ref "component-scopes.md">}})), a named secret store component itself can be scoped to one or more secrets for an application. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets.
 
 Follow [these instructions]({{< ref "configuration-overview.md" >}}) to define a configuration CRD.
 
@@ -27,12 +27,12 @@ secrets:
 
 The following table lists the properties for secret scopes:
 
-| Property       | Type   | 描述                                                                                                               |
-| -------------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
-| storeName      | string | Name of the secret store component. Name of the secret store component. storeName must be unique within the list |
-| defaultAccess  | string | Access modifier. Access modifier. Accepted values "allow" (default) or "deny"                                    |
-| allowedSecrets | list   | List of secret keys that can be accessed                                                                         |
-| deniedSecrets  | list   | List of secret keys that cannot be accessed                                                                      |
+| Property       | Type   | 描述                                                                                                                                                        |
+| -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| storeName      | string | Name of the secret store component. Name of the secret store component. storeName must be unique within the list storeName must be unique within the list |
+| defaultAccess  | string | Access modifier. Access modifier. Access modifier. Accepted values "allow" (default) or "deny"                                                            |
+| allowedSecrets | list   | List of secret keys that can be accessed                                                                                                                  |
+| deniedSecrets  | list   | List of secret keys that cannot be accessed                                                                                                               |
 
 When an `allowedSecrets` list is present with at least one element, only those secrets defined in the list can be accessed by the application.
 
@@ -53,7 +53,7 @@ The `allowedSecrets` and `deniedSecrets` list values take priorty over the `defa
 
 ### Scenario 1 : Deny access to all secrets for a secret store
 
-In Kubernetes cluster, the native Kubernetes secret store is added to Dapr application by default. In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below: In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below:
+In Kubernetes cluster, the native Kubernetes secret store is added to Dapr application by default. In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below: In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below: In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below:
 
 Define the following `appconfig.yaml` and apply it to the Kubernetes cluster using the command `kubectl apply -f appconfig.yaml`.
 
@@ -94,7 +94,7 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-This example defines configuration for secret store named vault. This example defines configuration for secret store named vault. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
+This example defines configuration for secret store named vault. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
 
 ### Scenario 3: Deny access to certain senstive secrets in a secret store
 
@@ -113,4 +113,4 @@ spec:
         deniedSecrets: ["secret1", "secret2"]
 ```
 
-The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
+The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
