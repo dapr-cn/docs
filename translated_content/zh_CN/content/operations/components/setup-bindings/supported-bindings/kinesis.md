@@ -5,9 +5,9 @@ linkTitle: "AWS Kinesis"
 description: "Detailed documentation on the AWS Kinesis binding component"
 ---
 
-## Component format
+## 配置
 
-To setup AWS Kinesis binding create a component of type `bindings.aws.kinesis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup AWS Kinesis binding create a component of type `bindings.aws.kinesis`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 See [this](https://aws.amazon.com/kinesis/data-streams/getting-started/) for instructions on how to set up an AWS Kinesis data streams See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
 
@@ -38,33 +38,33 @@ spec:
 
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field        | Required | Binding support | Details                                                                                                                                                                                                                      | Example                  |
-| ------------ |:--------:| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| mode         |    N     | Input           | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"` |
-| streamName   |    Y     | Input/Output    | The AWS Kinesis Stream Name                                                                                                                                                                                                  | `"stream"`               |
-| consumerName |    Y     | Input           | The AWS Kinesis Consumer Name                                                                                                                                                                                                | `"myconsumer"`           |
-| region       |    Y     | Output          | The specific AWS region the AWS Kinesis instance is deployed in                                                                                                                                                              | `"us-east-1"`            |
-| accessKey    |    Y     | Output          | The AWS Access Key to access this resource                                                                                                                                                                                   | `"key"`                  |
-| secretKey    |    Y     | Output          | The AWS Secret Access Key to access this resource                                                                                                                                                                            | `"secretAccessKey"`      |
-| sessionToken |    N     | Output          | The AWS session token to use                                                                                                                                                                                                 | `"sessionToken"`         |
+| 字段           | 必填 | 绑定支持         | 详情                                                                                                                                                                                                                           | 示例                       |
+| ------------ |:--:| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| mode         | N  | 输入           | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"` |
+| streamName   | 是  | Input/Output | The AWS Kinesis Stream Name                                                                                                                                                                                                  | `"stream"`               |
+| consumerName | 是  | 输入           | The AWS Kinesis Consumer Name                                                                                                                                                                                                | `"myconsumer"`           |
+| region       | 是  | 输出           | The specific AWS region the AWS Kinesis instance is deployed in                                                                                                                                                              | `"us-east-1"`            |
+| accessKey    | 是  | 输出           | 要访问此资源的 AWS 访问密钥                                                                                                                                                                                                             | `"key"`                  |
+| secretKey    | 是  | 输出           | 要访问此资源的 AWS 密钥访问 Key                                                                                                                                                                                                         | `"secretAccessKey"`      |
+| sessionToken | N  | 输出           | 要使用的 AWS 会话令牌                                                                                                                                                                                                                | `"sessionToken"`         |
 
-## Binding support
+## 绑定支持
 
-This component supports both **input and output** binding interfaces.
+此组件支持 **输入和输出** 绑定接口。
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `create`
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
-- [Authenticating to AWS]({{< ref authenticating-aws.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
+- [AWS认证]({{< ref authenticating-aws.md >}})
