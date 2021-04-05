@@ -1,52 +1,52 @@
 ---
-type: docs
-title: "dashboard CLI command reference"
+type: 文档
+title: "dashboard CLI 命令参考"
 linkTitle: "dashboard"
-description: "Detailed information on the dashboard CLI command"
+description: "有关 dashboard CLI 命令的详细信息"
 ---
 
-## Description
+## 描述
 
-Start [Dapr dashboard](https://github.com/dapr/dashboard).
+启动 [Dapr 仪表板](https://github.com/dapr/dashboard)。
 
-## Supported platforms
+## 支持的平台
 
 - [自托管]({{< ref self-hosted >}})
 - [Kubernetes]({{< ref kubernetes >}})
 
-## Usage
+## 用法
 ```bash
 dapr dashboard [flags]
 ```
 
-## Flags
+## 参数
 
-| Name                 | Environment Variable | Default       | Description                                                                 |
-| -------------------- | -------------------- | ------------- | --------------------------------------------------------------------------- |
-| `--help`, `-h`       |                      |               | Prints this help message                                                    |
-| `--kubernetes`, `-k` |                      | `false`       | Opens Dapr dashboard in local browser via local proxy to Kubernetes cluster |
-| `--namespace`, `-n`  |                      | `dapr-system` | The namespace where Dapr dashboard is running                               |
-| `--port`, `-p`       |                      | `8080`        | The local port on which to serve Dapr dashboard                             |
-| `--version`, `-v`    |                      | `false`       | Print the version for Dapr dashboard                                        |
+| 名称                   | 环境变量 | 默认值           | 描述                                       |
+| -------------------- | ---- | ------------- | ---------------------------------------- |
+| `--help`, `-h`       |      |               | 显示此帮助消息                                  |
+| `--kubernetes`, `-k` |      | `false`       | 通过本地代理连接 Kubernetes 集群，在本地浏览器打开Dapr 控制面板 |
+| `--namespace`, `-n`  |      | `dapr-system` | Dapr 仪表板正在运行的名称空间                        |
+| `--port`, `-p`       |      | `8080`        | 用于 Dapr 仪表板的本地端口                         |
+| `--version`, `-v`    |      | `false`       | 打印 Dapr 仪表板的版本                           |
 
-## Examples
+## 示例
 
-### Start dashboard locally
+### 在本地启动仪表板
 ```bash
 dapr dashboard
 ```
 
-### Start dashboard service locally on a specified port
+### 在指定端口本地启动仪表板服务
 ```bash
 dapr dashboard -p 9999
 ```
 
-### Port forward to dashboard service running in Kubernetes
+### 端口转发到在 Kubernetes 中运行的仪表板服务
 ```bash
 dapr dashboard -k
 ```
 
-### Port forward to dashboard service running in Kubernetes on a specified port
+### 端口转发到在 Kubernetes 指定端口中运行的仪表板服务
 ```bash
 dapr dashboard -k -p 9999
 ```
