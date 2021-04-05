@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "publish CLI 命令参考"
 linkTitle: "publish"
 description: "有关 publish CLI 命令的详细信息"
