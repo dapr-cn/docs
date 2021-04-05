@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "Sidecar 运行状况"
+title: "Sidecar health"
 linkTitle: "Sidecar health"
 weight: 5000
-description: Dapr sidecar 运行状况检查。
+description: Dapr sidecar health checks.
 ---
 
-Dapr 提供了一种使用 HTTP /healthz 端点来确定其健康状况的方法。 通过此端点，对Dapr 进程或 sidecar进行探测，可以确定其运行状况，从而确定其就绪程度和活跃度。 请参阅 [health API ]({{< ref health_api.md >}})
+Dapr provides a way to determine it's health using an HTTP /healthz endpoint. With this endpoint, the Dapr process, or sidecar, can be probed for its health and hence determine its readiness and liveness. See [health API ]({{< ref health_api.md >}})
 
-Dapr `/healthz` 端点可以被应用程序托管平台上的健康探测器使用。 本主题描述 Dapr 如何与来自不同托管平台的探测器集成。
+The Dapr `/healthz` endpoint can be used by health probes from the application hosting platform. This topic describes how Dapr integrates with probes from different hosting platforms.
 
-作为用户，在将Dapr部署到主机平台时(例如Kubernetes)，Dapr健康端点会自动为您配置。 您无需配置任何内容。
+As a user, when deploying Dapr to a hosting platform (for example Kubernetes), the Dapr health endpoint is automatically configured for you. There is nothing you need to configure.
 
-注意：Dapr actors还有一个健康 API 终点，Dapr 会探测对 Dapr 信号的响应申请，该信号表示actor应用程序是健康且运行的。 请参阅 [health API ]({{< ref health_api.md >}})
+Note: Dapr actors also have a health API endpoint where Dapr probes the application for a response to a signal from Dapr that the actor application is healthy and running. See [actor health API]({{< ref "actors_api.md#health-check" >}})
 
-## 运行状况终结点：与Kubernetes集成
+## Health endpoint: Integration with Kubernetes
 
-Kubernetes使用 * 准备就绪 * 和 * 活跃程度 * 探测器来确定容器的运行状况。
+Kubernetes uses *readiness* and *liveness* probes to determines the health of the container.
 
-Kubelet使用主动性探针来了解何时重新启动容器。 例如，活跃探针可捕获应用程序正在运行但无法进行处理的死锁。 在这种状态下重新启动容器有助于使应用程序在具有错误的情况下更可用。
+The kubelet uses liveness probes to know when to restart a container. For example, liveness probes could catch a deadlock, where an application is running, but unable to make progress. Restarting a container in such a state can help to make the application more available despite having bugs.
 
-Kubelet使用准备状态探针来知道一个容器何时准备好开始接收流量。 当一个 pod 的所有容器都已准备就绪时，会认为其准备就绪。 此就绪信号的一个用途是控制哪些 Pod 用作 Kubernetes 服务的后端。 当 Pod 未就绪时，将从 Kubernetes 服务负载均衡器中除去。
+The kubelet uses readiness probes to know when a container is ready to start accepting traffic. A pod is considered ready when all of its containers are ready. One use of this readiness signal is to control which Pods are used as backends for Kubernetes services. When a pod is not ready, it is removed from Kubernetes service load balancers.
 
-当与 Kubernetes 集成时，Dapr sidecar 会被注入一个Kubernetes 探针配置，告诉它要使用 Dapr healthz 端点。 这是由 `Sidecar Injector` 系统服务完成的。 下面的图中显示了与 kubelet 的集成。
+When integrating with Kubernetes, the Dapr sidecar is injected with a Kubernetes probe configuration telling it to use the Dapr healthz endpoint. This is done by the `Sidecar Injector` system service. The integration with the kubelet  is shown in the diagram below.
 
 <img src="/images/security-mTLS-dapr-system-services.png" width=600>
 
-### 如何在 Kubernetes 中配置活跃度探测器
+### How to configure a liveness probe in Kubernetes
 
-在 pod 配置文件中，活跃度探测器将添加到容器规范部分中，如下所示 :
+In the pod configuration file, the liveness probe is added in the containers spec section as shown below :
 
 ```
  livenessProbe:
@@ -39,13 +39,13 @@ Kubelet使用准备状态探针来知道一个容器何时准备好开始接收�
       periodSeconds: 3
 ```
 
-在上述 *示例*, `perionds` 字段指定的 kubelet 应该每3秒执行一个主动性探测。 `initialDelaySeconds` 字段告诉 kubelet 在执行第一个探测前应等待 3 秒钟。 在此示例中，要执行探测器， kubelet 将 HTTP GET 请求发送到正在容器中运行并侦听端口 8080的服务器。 如果服务器的 /healthz 路径的处理程序返回成功代码，那么 kubelet 将认为容器是活动的并且是健康的。 如果处理程序返回失败代码，kubelet 将杀死容器并重新启动它。
+In the above *example*, the `periodSeconds` field specifies that the kubelet should perform a liveness probe every 3 seconds. The `initialDelaySeconds` field tells the kubelet that it should wait 3 seconds before performing the first probe. To perform a probe, the kubelet sends an HTTP GET request to the server that is running in the container and listening on port 8080 in this example. If the handler for the server’s /healthz path returns a success code, the kubelet considers the container to be alive and healthy. If the handler returns a failure code, the kubelet kills the container and restarts it.
 
-任何大于或等于200和小于400的代码都是成功的。 任何其他代码表示失败。
+Any code greater than or equal to 200 and less than 400 indicates success. Any other code indicates failure.
 
-### 如何在Kubernetes配置准备就绪探测器
+### How to configure a readiness probe in Kubernetes
 
-准备就绪探测器与活跃度探测器配置相类似。 唯一的不同是您使用 `readinessProbe` 字段而不是 `livenessProbe` 字段。
+Readiness probes are configured similarly to liveness probes. The only difference is that you use the `readinessProbe` field instead of the `livenessProbe` field.
 
 ```
 readinessProbe:
@@ -56,10 +56,10 @@ readinessProbe:
       periodSeconds: 3
 ```
 
-### 如何使用 Kubernetes 配置 Dapr sidecar 运行状况终结点
-As mentioned above, this configuration is done automatically by the Sidecar Injector service. 本部分描述了在活跃度和就绪探测器上设置的特定值。 本部分描述了在活跃度和就绪探测器上设置的特定值。
+### How the Dapr sidecar health endpoint is configured with Kubernetes
+As mentioned above, this configuration is done automatically by the Sidecar Injector service. This section describes the specific values that are set on the liveness and readiness probes.
 
-Dapr has its HTTP health endpoint `/v1.0/healthz` on port 3500, This can be used with Kubernetes for readiness and liveness probe. 当注入Dapr sidecar后，准备就绪和活跃度探测器在pod配置文件中配置的，配置的值如下。 当注入Dapr sidecar后，准备就绪和活跃度探测器在pod配置文件中配置的，配置的值如下。
+Dapr has its HTTP health endpoint `/v1.0/healthz` on port 3500, This can be used with Kubernetes for readiness and liveness probe. When the Dapr sidecar is injected , the readiness and liveness probes are configured in the pod configuration file with the following values.
 
 ```
 livenessProbe:
@@ -80,8 +80,8 @@ readinessProbe:
       failureThreshold: 3
 ```
 
-有关更多信息;
+For more information refer to;
 
-- [ 终结点运行状况 API]({{< ref health_api.md >}})
-- [参与者运行状况 API]({{< ref "actors_api.md#health-check" >}})
-- [Kubernetes 探测器配置参数](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+- [ Endpoint health API]({{< ref health_api.md >}})
+- [Actor health API]({{< ref "actors_api.md#health-check" >}})
+- [Kubernetes probe configuration parameters](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
