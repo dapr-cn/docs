@@ -8,7 +8,7 @@ description: "How to push trace events to Azure Application Insights, using the 
 
 Dapr integrates with [OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector) using the Zipkin API. This guide walks through an example using Dapr to push trace events to Azure Application Insights, using the OpenTelemetry Collector.
 
-## Requirements
+## 必备条件
 
 A installation of Dapr on Kubernetes.
 
@@ -30,11 +30,11 @@ Install the OpenTelemetry Collector to your Kubernetes cluster to push events to
 
 Next, set up both a Dapr configuration file to turn on tracing and deploy a tracing exporter component that uses the OpenTelemetry Collector.
 
-1. Create a collector-config.yaml file with this [content](/docs/open-telemetry-collector/collector-config.yaml)
+1. 创建具有[此内容的](/docs/open-telemetry-collector/collector-config.yaml) collector-config.yaml 文件
 
-2. Apply the configuration with `kubectl apply -f collector-config.yaml`.
+2. 使用 `kubectl apply -f collector-config.yaml`来应用配置
 
-### Deploy your app with tracing
+### 部署你的应用，并启用应用痕迹跟踪功能
 
 When running in Kubernetes mode, apply the `appconfig` configuration by adding a `dapr.io/config` annotation to the container that you want to participate in the distributed tracing, as shown in the following example:
 
@@ -59,7 +59,7 @@ Some of the quickstarts such as [distributed calculator](https://github.com/dapr
 
 That's it! There's no need include any SDKs or instrument your application code. Dapr automatically handles the distributed tracing for you.
 
-> **NOTE**: You can register multiple tracing exporters at the same time, and the tracing logs are forwarded to all registered exporters.
+> **备注**: 您可以同时注册多个的应用痕迹跟踪导出器，并且跟踪日志转发到所有已注册的导出器中。
 
 Deploy and run some applications. After a few minutes, you should see tracing logs appearing in your Application Insights resource. You can also use the **Application Map** to examine the topology of your services, as shown below:
 
@@ -67,6 +67,6 @@ Deploy and run some applications. After a few minutes, you should see tracing lo
 
 > **NOTE**: Only operations going through Dapr API exposed by Dapr sidecar (e.g. service invocation or event publishing) are displayed in Application Map topology.
 
-## Related links
-* Try out the [observability quickstart](https://github.com/dapr/quickstarts/tree/master/observability/README.md)
-* How to set [tracing configuration options]({{< ref "configuration-overview.md#tracing" >}})
+## 相关链接
+* 尝试访问[可观察性快速入门](https://github.com/dapr/quickstarts/tree/master/observability/README.md)
+* 如何设置[应用跟踪配置选项]({{< ref "configuration-overview.md#tracing" >}})
