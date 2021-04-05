@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Virtual Actors"
 linkTitle: "Actors"
 weight: 1000
