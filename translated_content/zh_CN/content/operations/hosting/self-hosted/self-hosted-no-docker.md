@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "How-To: Run Dapr in self-hosted mode without Docker"
 linkTitle: "Run without Docker"
 weight: 30000
@@ -8,7 +8,7 @@ description: "How to deploy and run Dapr in self-hosted mode without Docker inst
 
 This article provides guidance on running Dapr in self-hosted mode without Docker.
 
-## Prerequisites
+## 前期准备
 
 - [Dapr CLI]({{< ref "install-dapr-selfhost.md#installing-dapr-cli" >}})
 
