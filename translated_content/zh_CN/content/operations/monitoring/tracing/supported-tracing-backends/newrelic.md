@@ -1,12 +1,12 @@
 ---
-type: docs
+type: 文档
 title: "How-To: Set-up New Relic for distributed tracing"
 linkTitle: "New Relic"
 weight: 2000
 description: "Set-up New Relic for distributed tracing"
 ---
 
-## Prerequisites
+## 前期准备
 
 - Perpetually [free New Relic account](https://newrelic.com/signup?ref=dapr), 100 GB/month of free data ingest, 1 free full access user, unlimited free basic users
 
