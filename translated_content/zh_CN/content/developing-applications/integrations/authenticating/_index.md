@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Authenticating to services"
-linkTitle: "Authenticating to services"
+title: "对服务进行身份验证"
+linkTitle: "对服务进行身份验证"
 weight: 3000
-description: "Information about authentication and configuration for various cloud providers"
+description: "关于各种云端服务商的身份验证和配置信息"
 ---
 
