@@ -18,7 +18,7 @@ In addition to calling Dapr via gRPC, Dapr can communicate with an application v
 
 ## Configuring Dapr to communicate with an app via gRPC
 
-### Self hosted
+### 自托管
 
 When running in self hosted mode, use the `--app-protocol` flag to tell Dapr to use gRPC to talk to the app:
 
