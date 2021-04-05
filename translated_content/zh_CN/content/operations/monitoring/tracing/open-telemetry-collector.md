@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Using OpenTelemetry Collector to collect traces"
 linkTitle: "Using the OpenTelemetry Collector"
 weight: 900
@@ -65,7 +65,7 @@ That's it! There's no need include any SDKs or instrument your application code.
 
 Deploy and run some applications. Wait for the trace to propagate to your tracing backend and view them there.
 
-## Related links
+## 相关链接
 * Try out the [observability quickstart](https://github.com/dapr/quickstarts/tree/master/observability/README.md)
 * How to set [tracing configuration options]({{< ref "configuration-overview.md#tracing" >}})
 
