@@ -110,5 +110,4 @@ explorer "%USERPROFILE%\.dapr\"
 
 {{< /tabs >}}
 
-[}}" role="button">Next step: Use the Dapr API >>]({{< ref get-started-api.md  mark=){.btn.btn-primary}
 
