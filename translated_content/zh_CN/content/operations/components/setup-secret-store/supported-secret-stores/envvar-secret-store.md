@@ -1,19 +1,19 @@
 ---
 type: docs
-title: "本地环境变量（用于开发）"
-linkTitle: "本地环境变量"
-description: 详细介绍了关于本地变量密钥仓库组件的信息
+title: "Local environment variables (for Development)"
+linkTitle: "Local environment variables"
+description: Detailed information on the local environment secret store component
 ---
 
-这个Dapr密钥仓库组件不使用身份认证，而是使用本地定义的环境变量。
+This Dapr secret store component uses locally defined environment variable and does not use authentication.
 
 {{% alert title="Warning" color="warning" %}}
-这种密钥管理的方法不建议用于生产环境。
+This approach to secret management is not recommended for production environments.
 {{% /alert %}}
 
-## 配置
+## Component format
 
-要设置本地环境变量密钥存储，请创建一个类型为`secretstores.local.env`的组件。 在你的`./components`目录下创建一个包含以下内容的文件:
+To setup local environment variables secret store create a component of type `secretstores.local.env`. Create a file with the following content in your `./components` directory:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -26,8 +26,8 @@ spec:
   version: v1
   metadata:
 ```
-## 相关链接
-- [密钥构建块]({{< ref secrets >}})
-- [指南：获取密钥]({{< ref "howto-secrets.md" >}})
-- [指南：在Dapr组件中引用密钥]({{< ref component-secrets.md >}})
-- [密钥 API 参考]({{< ref secrets_api.md >}})
+## Related Links
+- [Secrets building block]({{< ref secrets >}})
+- [How-To: Retreive a secret]({{< ref "howto-secrets.md" >}})
+- [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
+- [Secrets API reference]({{< ref secrets_api.md >}})
