@@ -56,8 +56,8 @@ The conformance tests are defined for the following building blocks:
 
 - State store
 - Secret store
-- Bindings
-- Pub/Sub
+- 绑定
+- 发布/订阅
 
 To understand more about them see the readme [here](https://github.com/dapr/components-contrib/blob/master/tests/conformance/README.md).
 
