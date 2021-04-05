@@ -5,9 +5,9 @@ linkTitle: "RethinkDB"
 description: Detailed information on the RethinkDB state store component
 ---
 
-## Component format
+## 配置
 
-To setup RethinkDB state store create a component of type `state.rethinkdb`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup RethinkDB state store create a component of type `state.rethinkdb`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,10 +31,30 @@ spec:
     value: <PASSWORD> # Optional
   - name: archive
     value: bool # Optional (whether or not store should keep archive table of all the state changes)
+  - name: database
+    value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
+  - name: table
+    value: # Optional
+  - name: username
+    value: <USERNAME> # Optional
+  - name: password
+    value: <PASSWORD> # Optional
+  - name: archive
+    value: bool # Optional (whether or not store should keep archive table of all the state changes)
+  - name: database
+    value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
+  - name: table
+    value: # Optional
+  - name: username
+    value: <USERNAME> # Optional
+  - name: password
+    value: <PASSWORD> # Optional
+  - name: archive
+    value: bool # Optional (whether or not store should keep archive table of all the state changes)
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 If you wish to use Redis as an actor store, append the following to the yaml.
@@ -49,16 +69,16 @@ RethinkDB state store supports transactions so it can be used to persist Dapr Ac
 
 Additionally, if the optional `archive` metadata is set to `true`, on each state change, the RethinkDB state store will also log state changes with timestamp in the `daprstate_archive` table. This allows for time series analyses of the state managed by Dapr.
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field    | Required | Details                                  | Example                                                            |
-| -------- |:--------:| ---------------------------------------- | ------------------------------------------------------------------ |
-| address  |    Y     | The address for RethinkDB server         | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
-| database |    Y     | The database to use. Alpha-numerics only | `"dapr"`                                                           |
-| table    |    N     | The table name to use                    | `"table"`                                                          |
-| username |    N     | The username to connect with             | `"user"`                                                           |
-| password |    N     | The password to connect with             | `"password"`                                                       |
-| archive  |    N     | Whether or not to archive the table      | `"true"`, `"false"`                                                |
+| 字段       | 必填 | 详情                                       | 示例                                                                 |
+| -------- |:--:| ---------------------------------------- | ------------------------------------------------------------------ |
+| address  | 是  | The address for RethinkDB server         | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
+| database | 是  | The database to use. Alpha-numerics only | `"dapr"`                                                           |
+| table    | N  | The table name to use                    | `"table"`                                                          |
+| username | N  | The username to connect with             | `"user"`                                                           |
+| password | N  | The password to connect with             | `"password"`                                                       |
+| archive  | N  | Whether or not to archive the table      | `"true"`, `"false"`                                                |
 
 ## Setup RethinkDB
 
@@ -80,7 +100,7 @@ open "http://$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' rethin
 {{% /codetab %}}
 
 
-## Related links
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+## 相关链接
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
+- [状态管理构建块]({{< ref state-management >}})
