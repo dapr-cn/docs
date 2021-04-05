@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Set up Azure Monitor to search logs and collect metrics"
 linkTitle: "Azure Monitor"
 weight: 2000
@@ -21,6 +21,9 @@ description: "Enable Dapr metrics and logs with Azure Monitor for Azure Kubernet
 $ kubectl get pods -n kube-system
 NAME                                                              READY   STATUS    RESTARTS   AGE
 ...
+$ kubectl get pods -n kube-system
+NAME                                                              READY   STATUS    RESTARTS   AGE
+...
 omsagent-75qjs                                                    1/1     Running   1          44h
 omsagent-c7c4t                                                    1/1     Running   0          44h
 omsagent-rs-74f488997c-dshpx                                      1/1     Running   1          44h
@@ -36,6 +39,7 @@ If you installed Dapr to the different namespace, you need to change the `monito
 
 ```yaml
 ...
+  ...
   prometheus-data-collection-settings: |-
     [prometheus_data_collection_settings.cluster]
         interval = "1m"
@@ -52,9 +56,9 @@ Apply config map:
 kubectl apply -f ./azm-config.map.yaml
 ```
 
-## Install Dapr with JSON formatted logs
+## 使用 JSON 格式化日志安装 Dapr
 
-1. Install Dapr with enabling JSON-formatted logs
+1. 使用 JSON 格式化日志启用 Dapr
 
 ```bash
 helm install dapr dapr/dapr --namespace dapr-system --set global.logAsJson=true
@@ -64,7 +68,7 @@ helm install dapr dapr/dapr --namespace dapr-system --set global.logAsJson=true
 
 > Note: OMS Agent scrapes the metrics only if replicaset has Prometheus annotations.
 
-Add `dapr.io/log-as-json: "true"` annotation to your deployment yaml.
+添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml.
 
 Example:
 ```yaml
