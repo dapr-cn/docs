@@ -3,31 +3,31 @@ type: docs
 title: "Dapr .NET SDK"
 linkTitle: ".NET"
 weight: 1000
-description: 开发 Dapr 应用程序的 .NET SDK 包
+description: .NET SDK packages for developing Dapr applications
 no_list: true
 ---
 
-Dapr提供了帮助开发 .NET 应用程序各种包。 你可以使用他们来创建 .NET 客户端、服务器和 virtual actors。
+Dapr offers a variety of packages to help with the development of .NET applications. Using them you can create .NET clients, servers, and virtual actors with Dapr.
 
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>客户端</b></h5>
-      <p class="card-text">创建与 Dapr sidecar 和其他Dapr 应用程序交互的 .NET 客户端。</p>
+      <h5 class="card-title"><b>Client</b></h5>
+      <p class="card-text">Create .NET clients that interact with a Dapr sidecar and other Dapr applications.</p>
       <a href="{{< ref dotnet-client >}}" class="stretched-link"></a>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>服务器</b></h5>
-      <p class="card-text">使用 Dapr SDK 在 .NET 中编写服务器和服务。 包括对 ASP.NET的支持。</p>
+      <h5 class="card-title"><b>Server</b></h5>
+      <p class="card-text">Write servers and services in .NET using the Dapr SDK. Includes support for ASP.NET.</p>
       <a href="{{< ref dotnet-server >}}" class="stretched-link"></a>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>Actors</b></h5>
-      <p class="card-text">在 .NET 中创建具有状态、reminders/timer 和方法的 virtual actors。</p>
+      <p class="card-text">Create virtual actors with state, reminders/timers, and methods in .NET.</p>
       <a href="{{< ref dotnet-actors >}}" class="stretched-link"></a>
     </div>
   </div>
@@ -37,22 +37,22 @@ Dapr提供了帮助开发 .NET 应用程序各种包。 你可以使用他们来
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>示例</b></h5>
-      <p class="card-text">克隆.NET SDK repo来尝试一些示例并快速开始。</p>
+      <h5 class="card-title"><b>Examples</b></h5>
+      <p class="card-text">Clone the .NET SDK repo to try out some of the examples and get started quickly.</p>
       <a href="https://github.com/dapr/dotnet-sdk/tree/master/examples" class="stretched-link"></a>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>故障排除</b></h5>
-      <p class="card-text">关于 Dapr API，CLI，资源绑定及更多内容的详细文档</p>
+      <h5 class="card-title"><b>Troubleshooting</b></h5>
+      <p class="card-text">Detailed documentation on the Dapr API, CLI, bindings and more.</p>
       <a href="{{< ref reference >}}" class="stretched-link"></a>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>Nuget 包</b></h5>
-      <p class="card-text">为您的 .NET应用程序 添加 .NET SDK 的 Dapr 包。</p>
+      <h5 class="card-title"><b>NuGet packages</b></h5>
+      <p class="card-text">Dapr packages for adding the .NET SDKs to your .NET applications.</p>
       <a href="https://www.nuget.org/profiles/dapr.io" class="stretched-link"></a>
     </div>
   </div>
