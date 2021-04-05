@@ -7,7 +7,7 @@ description: Detailed information on the Cassandra state store component
 
 ## Component format
 
-To setup Cassandra state store create a component of type `state.cassandra`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Cassandra state store create a component of type `state.cassandra`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -48,6 +48,20 @@ spec:
   - name: protoVersion
     value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
   - name: replicationFactor
+    value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1" Example: cassandra.cassandra.svc.cluster.local
+  - name: username
+    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
+  - name: password
+    value: <REPLACE-WITH-PASSWORD> # Optional. default: ""
+  - name: consistency
+    value: <REPLACE-WITH-CONSISTENCY> # Optional. default: "All"
+  - name: table
+    value: <REPLACE-WITH-TABLE> # Optional. default: "items"
+  - name: keyspace
+    value: <REPLACE-WITH-KEYSPACE> # Optional. default: "dapr"
+  - name: protoVersion
+    value: <REPLACE-WITH-PROTO-VERSION> # Optional. default: "4"
+  - name: replicationFactor
     value: <REPLACE-WITH-REPLICATION-FACTOR> #  Optional. default: "1"
 ```
 
@@ -57,17 +71,17 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                | Required | Details                                                                                       | Example                                    |
-| ----------------- |:--------:| --------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| hosts             |    Y     | Comma separated value of the hosts                                                            | `"cassandra.cassandra.svc.cluster.local"`. |
-| port              |    N     | Port for communication. Port for communication. Default `"9042"`                              | `"9042"`                                   |
-| username          |    Y     | The username of database user. No default No default                                          | `"user"`                                   |
-| password          |    Y     | The password for the user                                                                     | `"password"`                               |
-| consistency       |    N     | The consistency values                                                                        | `"All"`, `"Quorum"`                        |
-| table             |    N     | Table name. Table name. Defaults to `"items"`                                                 | `"items"`, `"tab"`                         |
-| keyspace          |    N     | The cassandra keyspace to use. The cassandra keyspace to use. Defaults to `"dapr"`            | `"dapr"`                                   |
-| protoVersion      |    N     | The proto version for the client. The proto version for the client. Defaults to `"4"`         | `"3"`, `"4"`                               |
-| replicationFactor |    N     | The replication factor for the calls. The replication factor for the calls. Defaults to `"1"` | `"3"`                                      |
+| 字段                | Required | Details                                                                                                         | Example                                    |
+| ----------------- |:--------:| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| hosts             |    Y     | Comma separated value of the hosts                                                                              | `"cassandra.cassandra.svc.cluster.local"`. |
+| port              |    N     | Port for communication. Port for communication. Default `"9042"` Default `"9042"`                               | `"9042"`                                   |
+| username          |    Y     | The username of database user. No default No default No default                                                 | `"user"`                                   |
+| password          |    Y     | The password for the user                                                                                       | `"password"`                               |
+| consistency       |    N     | The consistency values                                                                                          | `"All"`, `"Quorum"`                        |
+| table             |    N     | Table name. Table name. Table name. Defaults to `"items"`                                                       | `"items"`, `"tab"`                         |
+| keyspace          |    N     | The cassandra keyspace to use. The cassandra keyspace to use. Defaults to `"dapr"` Defaults to `"dapr"`         | `"dapr"`                                   |
+| protoVersion      |    N     | The proto version for the client. The proto version for the client. Defaults to `"4"` Defaults to `"4"`         | `"3"`, `"4"`                               |
+| replicationFactor |    N     | The replication factor for the calls. The replication factor for the calls. Defaults to `"1"` Defaults to `"1"` | `"3"`                                      |
 
 ## Setup Cassandra
 
@@ -91,7 +105,7 @@ kubectl create namespace cassandra
 helm install cassandra incubator/cassandra --namespace cassandra
 ```
 
-This installs Cassandra into the `cassandra` namespace by default. This installs Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`.
+This installs Cassandra into the `cassandra` namespace by default. This installs Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`.
 
 For example, if installing using the example above, the Cassandra DNS would be:
 
