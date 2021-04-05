@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "操作方法：在 Kubernetes 中搭建 Fluentd、Elastic search 和 Kibana"
 linkTitle: "FluentD"
 weight: 1000
