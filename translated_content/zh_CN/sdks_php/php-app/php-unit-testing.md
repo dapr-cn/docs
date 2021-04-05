@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Unit Testing"
 linkTitle: "Unit Testing"
 weight: 1000
