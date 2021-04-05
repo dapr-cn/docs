@@ -7,7 +7,7 @@ description: Detailed information on the Zookeeper state store component
 
 ## Component format
 
-To setup Zookeeper state store create a component of type `state.zookeeper`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Zookeeper state store create a component of type `state.zookeeper`. To setup Zookeeper state store create a component of type `state.zookeeper`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -36,6 +36,14 @@ spec:
   - name: maxConnBufferSize
     value: <REPLACE-WITH-MAX-CONN-BUFFER-SIZE> # Optional. default: "1048576"
   - name: keyPrefixPath
+    value: <REPLACE-WITH-KEY-PREFIX-PATH> # Optional. Example: "zookeeper.default.svc.cluster.local:2181"
+  - name: sessionTimeout
+    value: <REPLACE-WITH-SESSION-TIMEOUT> # Required. Example: "5s"
+  - name: maxBufferSize
+    value: <REPLACE-WITH-MAX-BUFFER-SIZE> # Optional. default: "1048576"
+  - name: maxConnBufferSize
+    value: <REPLACE-WITH-MAX-CONN-BUFFER-SIZE> # Optional. default: "1048576"
+  - name: keyPrefixPath
     value: <REPLACE-WITH-KEY-PREFIX-PATH> # Optional.
 ```
 
@@ -45,13 +53,13 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                | Required | Details                                                                                | Example                                      |
-| ----------------- |:--------:| -------------------------------------------------------------------------------------- | -------------------------------------------- |
-| servers           |    Y     | Comma delimited list of servers                                                        | `"zookeeper.default.svc.cluster.local:2181"` |
-| sessionTimeout    |    Y     | The session timeout value                                                              | `"5s"`                                       |
-| maxBufferSize     |    N     | The maximum size of buffer. The maximum size of buffer. Defaults to `"1048576"`        | `"1048576"`                                  |
-| maxConnBufferSize |    N     | The maximum size of connection buffer. Defautls to `"1048576`" Defautls to `"1048576`" | `"1048576"`                                  |
-| keyPrefixPath     |    N     | The key prefix path in Zookeeper. No default No default                                | `"dapr"`                                     |
+| 字段                | Required | Details                                                                                                                       | Example                                      |
+| ----------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| servers           |    Y     | Comma delimited list of servers                                                                                               | `"zookeeper.default.svc.cluster.local:2181"` |
+| sessionTimeout    |    Y     | The session timeout value                                                                                                     | `"5s"`                                       |
+| maxBufferSize     |    N     | The maximum size of buffer. The maximum size of buffer. Defaults to `"1048576"` Defaults to `"1048576"`                       | `"1048576"`                                  |
+| maxConnBufferSize |    N     | The maximum size of connection buffer. The maximum size of connection buffer. Defautls to `"1048576`" Defautls to `"1048576`" | `"1048576"`                                  |
+| keyPrefixPath     |    N     | The key prefix path in Zookeeper. No default No default No default                                                            | `"dapr"`                                     |
 
 ## Setup Zookeeper
 
@@ -75,7 +83,7 @@ helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubato
 helm install zookeeper incubator/zookeeper
 ```
 
-This installs Zookeeper into the `default` namespace. This installs Zookeeper into the `default` namespace. To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`.
+This installs Zookeeper into the `default` namespace. This installs Zookeeper into the `default` namespace. To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`. To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`.
 
 For example, if installing using the example above, the Zookeeper host address would be:
 
