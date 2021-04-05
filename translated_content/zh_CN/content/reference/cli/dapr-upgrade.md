@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "upgrade CLI 命令参考"
 linkTitle: "upgrade"
 description: "有关 upgrade CLI 命令的详细信息"
