@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "PostgreSQL binding spec"
-linkTitle: "PostgreSQL"
+title: "PostgrSQL binding spec"
+linkTitle: "PostgrSQL"
 description: "Detailed documentation on the PostgreSQL binding component"
 ---
 
-## Component format
+## 配置
 
-To setup PostgreSQL binding create a component of type `bindings.postgres`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup PostgreSQL binding create a component of type `bindings.postgres`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -25,14 +25,14 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field | Required | Binding support | Details                                                             | Example                                                                                     |
-| ----- |:--------:| --------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| url   |    Y     | Output          | Postgres connection string See [here](#url-format) for more details | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
+| 字段  | 必填 | 绑定支持 | 详情                                                                  | 示例                                                                                          |
+| --- |:--:| ---- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| url | 是  | 输出   | Postgres connection string See [here](#url-format) for more details | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
 
 ### URL format
 
@@ -59,9 +59,9 @@ Both methods also support connection pool configuration variables:
 - `pool_health_check_period`: duration string
 
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `exec`
 - `query`
@@ -82,7 +82,7 @@ The `exec` operation can be used for DDL operations (like table creation), as we
 }
 ```
 
-**Response**
+**响应**
 
 ```json
 {
@@ -112,7 +112,7 @@ The `query` operation is used for `SELECT` statements, which returns the metadat
 }
 ```
 
-**Response**
+**响应**
 
 ```json
 {
@@ -146,10 +146,10 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 
 > Note, the PostgreSql binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
