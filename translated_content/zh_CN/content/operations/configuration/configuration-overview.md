@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr 配置选项概述"
 linkTitle: "概述"
 weight: 100
