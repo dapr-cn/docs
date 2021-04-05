@@ -11,7 +11,7 @@ Uninstall Dapr runtime.
 
 ## Supported platforms
 
-- [Self-Hosted]({{< ref self-hosted >}})
+- [自托管]({{< ref self-hosted >}})
 - [Kubernetes]({{< ref kubernetes >}})
 
 ## Usage
