@@ -1,47 +1,47 @@
 ---
-type: docs
-title: "init CLI command reference"
+type: 文档
+title: "init CLI 命令参考"
 linkTitle: "init"
-description: "Detailed information on the init CLI command"
+description: "有关 init CLI 命令的详细信息"
 ---
 
-## Description
+## 描述
 
-Install Dapr on supported hosting platforms.
+在受支持的托管平台上安装 Dapr 。
 
-## Supported platforms
+## 支持的平台
 
 - [自托管]({{< ref self-hosted >}})
 - [Kubernetes]({{< ref kubernetes >}})
 
-## Usage
+## 用法
 ```bash
 dapr init [flags]
 ```
 
-## Flags
+## 参数
 
-| Name                 | Environment Variable | Default       | Description                                                                          |
-| -------------------- | -------------------- | ------------- | ------------------------------------------------------------------------------------ |
-| `--enable-ha`        |                      | `false`       | Enable high availability (HA) mode                                                   |
-| `--enable-mtls`      |                      | `true`        | Enable mTLS in your cluster                                                          |
-| `--help`, `-h`       |                      |               | Print this help message                                                              |
-| `--kubernetes`, `-k` |                      | `false`       | Deploy Dapr to a Kubernetes cluster                                                  |
-| `--wait`             |                      | `false`       | Wait for Kubernetes initialization to complete                                       |
-| `--timeout`          |                      | `300`         | The wait timeout for the Kubernetes installation                                     |
-| `--namespace`, `-n`  |                      | `dapr-system` | The Kubernetes namespace to install Dapr in                                          |
-| `--network`          | `DAPR_NETWORK`       |               | The Docker network on which to deploy the Dapr runtime                               |
-| `--runtime-version`  |                      | `latest`      | The version of the Dapr runtime to install, for example: `1.0.0`                     |
-| `--slim`, `-s`       |                      | `false`       | Exclude placement service, Redis and Zipkin containers from self-hosted installation |
+| 名称                   | 环境变量           | 默认值           | 描述                                                 |
+| -------------------- | -------------- | ------------- | -------------------------------------------------- |
+| `--enable-ha`        |                | `false`       | 启用高可用性 (HA) 方式                                     |
+| `--enable-mtls`      |                | `true`        | 在群集中启用 mTLS                                        |
+| `--help`, `-h`       |                |               | 显示此帮助消息                                            |
+| `--kubernetes`, `-k` |                | `false`       | 将 Dapr 部署到 Kubernetes 集群                           |
+| `--wait`             |                | `false`       | Wait for Kubernetes initialization to complete     |
+| `--timeout`          |                | `300`         | The wait timeout for the Kubernetes installation   |
+| `--namespace`, `-n`  |                | `dapr-system` | 用于安装 Dapr 的 Kubernetes 名称空间                        |
+| `--network`          | `DAPR_NETWORK` |               | 部署 Dapr 运行时的 Docker 网络                             |
+| `--runtime-version`  |                | `latest`      | 要安装的 Dapr 运行时的版本，例如: `1.0.0`                       |
+| `--slim`, `-s`       |                | `false`       | 从 Self-Hosted 安装中排除 Placement 服务、Redis 和 Zipkin 容器 |
 
-## Examples
+## 示例
 
-### Initialize Dapr in self-hosted mode
+### 以 Self-Hosted 方式初始化 dapr
 ```bash
 dapr init
 ```
 
-### Initialize Dapr in Kubernetes
+### 在 Kubernetes 中初始化 dapr
 ```bash
 dapr init -k
 ```
@@ -55,17 +55,17 @@ dapr init -k
 dapr init -k --wait --timeout 600
 ```
 
-### Initialize specified version of Dapr runtime in self-hosted mode
+### 以 Self-Hosted 初始化指定版本的 Dapr 运行时
 ```bash
 dapr init --runtime-version 0.10.0
 ```
 
-### Initialize specified version of Dapr runtime in Kubernetes
+### 以 Kubernetes 初始化指定版本的 Dapr 运行时
 ```bash
 dapr init -k --runtime-version 0.10.0
 ```
 
-### Initialize Dapr in [slim self-hosted mode]({{< ref self-hosted-no-docker.md >}})
+### 以 [精简 Self-Hosted 方式]({{< ref self-hosted-no-docker.md >}})初始化 dapr
 ```bash
 dapr init -s
 ```
