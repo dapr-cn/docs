@@ -2,14 +2,14 @@
 type: docs
 title: "PostgreSQL"
 linkTitle: "PostgreSQL"
-description: PostgreSQL 状态存储组件的详细信息
+description: Detailed information on the PostgreSQL state store component
 ---
 
-## 创建 Dapr 组件
+## Create a Dapr component
 
-创建一个名为 `postgres.yaml`的文件，粘贴以下文件并用您的连接字符串替换 `<CONNECTION STRING>` 值。 连接字符串是一个标准 PostgreSQL 连接字符串。 例如， `"host=localhost user=postgres password=example port=5432 connect_timeout=10 database=dapr_test"`。 查看 PostgreSQL 的[数据库连接文档](https://www.postgresql.org/docs/current/libpq-connect.html) ，特别是关键字/值连接字符串，了解如何定义连接字符串的信息。
+Create a file called `postgres.yaml`, paste the following and replace the `<CONNECTION STRING>` value with your connection string. The connection string is a standard PostgreSQL connection string. For example, `"host=localhost user=postgres password=example port=5432 connect_timeout=10 database=dapr_test"`. See the PostgreSQL [documentation on database connections](https://www.postgresql.org/docs/current/libpq-connect.html), specifically Keyword/Value Connection Strings, for information on how to define a connection string.
 
-如果您也想要配置 PostgreSQL 来存储 Actor，请在下面添加 `actorStateStore` 配置元素。
+If you want to also configure PostgreSQL to store actors, add the `actorStateStore` configuration element shown below.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -25,18 +25,18 @@ spec:
     value: "<CONNECTION STRING>"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [点击这里查看操作方法]({{< ref component-secrets.md >}})。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## 元数据字段规范
+## Spec metadata fields
 
-| 字段               | 必填 | 详情                                 | 例子                                                            |
-| ---------------- |:--:| ---------------------------------- | ------------------------------------------------------------- |
-| connectionString | Y  | PostgreSQL 的连接字符串                  | `"User ID=root;Password=myPassword;Host=localhost;Port=5432"` |
-| actorStateStore  | N  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"` | `"true"`, `"false"`                                           |
+| Field            | Required | Details                                                     | Example                                                       |
+| ---------------- |:--------:| ----------------------------------------------------------- | ------------------------------------------------------------- |
+| connectionString |    Y     | The connection string for PostgreSQL                        | `"User ID=root;Password=myPassword;Host=localhost;Port=5432"` |
+| actorStateStore  |    N     | Consider this state store for actors. Defaults to `"false"` | `"true"`, `"false"`                                           |
 
 
-如果您想要使用 PostgreSQL 作为 Actor 存储，请在 yaml 上附上以下内容。
+If you wish to use PostgreSQL as an actor store, append the following to the yaml.
 
 ```yaml
   - name: actorStateStore
@@ -44,23 +44,23 @@ The above example uses secrets as plain strings. 以上示例将密钥明文存�
 ```
 
 
-## 创建 PostgreSQL
+## Create PostgreSQL
 
 {{< tabs "Self-Hosted" >}}
 
 {{% codetab %}}
 
-1. 运行 PostgreSQL 实例。 您可以在Docker CE 中运行一个本地的 PostgreSQL 实例，并使用以下命令：
+1. Run an instance of PostgreSQL. You can run a local instance of PostgreSQL in Docker CE with the following command:
 
-     此示例没有描述生产配置，因为它用纯文本设置了密码，用户名保留为“postgres”默认值。
+     This example does not describe a production configuration because it sets the password in plain text and the user name is left as the PostgreSQL default of "postgres".
 
      ```bash
      docker run -p 5432:5432 -e POSTGRES_PASSWORD=example postgres
      ```
 
-2. 为状态数据创建数据库。 可以使用默认的 "postgres" 数据库，或者创建一个新的数据库来存储状态数据。
+2. Create a database for state data. Either the default "postgres" database can be used, or create a new database for storing state data.
 
-    要在 PostgreSQL 中创建一个新的数据库，请运行以下SQL 命令：
+    To create a new database in PostgreSQL, run the following SQL command:
 
     ```SQL
     create database dapr_test
@@ -69,7 +69,7 @@ The above example uses secrets as plain strings. 以上示例将密钥明文存�
 
 {{% /tabs %}}
 
-## 相关链接
-- [Dapr组件的基本格式]({{< ref component-schema >}})
-- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
-- [状态管理构建块]({{< ref state-management >}})
+## Related links
+- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
+- [State management building block]({{< ref state-management >}})
