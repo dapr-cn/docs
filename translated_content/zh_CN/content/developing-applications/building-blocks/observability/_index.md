@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Observability"
-linkTitle: "Observability"
+title: "可观测性"
+linkTitle: "可观测性"
 weight: 60
 description: See and measure the message calls across components and networked services
 ---
