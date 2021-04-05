@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Memcached"
 linkTitle: "Memcached"
 description: Memcached 状态存储组件的详细信息
