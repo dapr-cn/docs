@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 no_list: true
 ---
 
