@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "设置 Minikube 集群"
 linkTitle: "Minikube"
 weight: 1000
