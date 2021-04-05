@@ -6,7 +6,7 @@ weight: 100
 description: "The basic schema for a Dapr component"
 ---
 
-Dapr defines and registers components using a [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/). All components are defined as a CRD and can be applied to any hosting environment where Dapr is running, not just Kubernetes. All components are defined as a CRD and can be applied to any hosting environment where Dapr is running, not just Kubernetes.
+Dapr defines and registers components using a [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/). All components are defined as a CRD and can be applied to any hosting environment where Dapr is running, not just Kubernetes.
 
 ## Format
 
@@ -28,23 +28,23 @@ spec:
 
 ## Fields
 
-| 字段                 | Required | Details                                                                                                                                     | Example            |
-| ------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| apiVersion         |    Y     | The version of the Dapr (and Kubernetes if applicable) API you are calling                                                                  | `dapr.io/v1alpha1` |
-| kind               |    Y     | The type of CRD. The type of CRD. For components is must always be `Component`                                                              | `Component`        |
-| **metadata**       |    -     | **Information about the component registration**                                                                                            |                    |
-| metadata.name      |    Y     | The name of the component                                                                                                                   | `prod-statestore`  |
-| metadata.namespace |    N     | The namespace for the component for hosting environments with namespaces                                                                    | `myapp-namespace`  |
-| **spec**           |    -     | **Detailed information on the component resource**                                                                                          |                    |
-| spec.type          |    Y     | The type of the component                                                                                                                   | `state.redis`      |
-| spec.version       |    Y     | The version of the component                                                                                                                | `v1`               |
-| spec.initTimeout   |    N     | The timeout duration for the initialization of the component. Default is 30s Default is 30s                                                 | `5m`, `1h`, `20s`  |
-| spec.ignoreErrors  |    N     | Tells the Dapr sidecar to continue initialization if the component fails to load. Default is false Default is false                         | `false`            |
-| **spec.metadata**  |    -     | **A key/value pair of component specific configuration. See your component definition for fields See your component definition for fields** |                    |
+| Field              | Required | Details                                                                                            | Example            |
+| ------------------ |:--------:| -------------------------------------------------------------------------------------------------- | ------------------ |
+| apiVersion         |    Y     | The version of the Dapr (and Kubernetes if applicable) API you are calling                         | `dapr.io/v1alpha1` |
+| kind               |    Y     | The type of CRD. For components is must always be `Component`                                      | `Component`        |
+| **metadata**       |    -     | **Information about the component registration**                                                   |                    |
+| metadata.name      |    Y     | The name of the component                                                                          | `prod-statestore`  |
+| metadata.namespace |    N     | The namespace for the component for hosting environments with namespaces                           | `myapp-namespace`  |
+| **spec**           |    -     | **Detailed information on the component resource**                                                 |                    |
+| spec.type          |    Y     | The type of the component                                                                          | `state.redis`      |
+| spec.version       |    Y     | The version of the component                                                                       | `v1`               |
+| spec.initTimeout   |    N     | The timeout duration for the initialization of the component. Default is 30s                       | `5m`, `1h`, `20s`  |
+| spec.ignoreErrors  |    N     | Tells the Dapr sidecar to continue initialization if the component fails to load. Default is false | `false`            |
+| **spec.metadata**  |    -     | **A key/value pair of component specific configuration. See your component definition for fields** |                    |
 
 ### Special metadata values
 
-Metadata values can contain a `{uuid}` tag that is replaced with a randomly generate UUID when the Dapr sidecar starts up. A new UUID is generated on every start up. It can be used, for example, to have a pod on Kubernetes with multiple application instances consuming a [shared MQTT subscription]({{< ref "setup-mqtt.md" >}}). Below is an example of using the `{uuid}` tag. A new UUID is generated on every start up. It can be used, for example, to have a pod on Kubernetes with multiple application instances consuming a [shared MQTT subscription]({{< ref "setup-mqtt.md" >}}). Below is an example of using the `{uuid}` tag.
+Metadata values can contain a `{uuid}` tag that is replaced with a randomly generate UUID when the Dapr sidecar starts up. A new UUID is generated on every start up. It can be used, for example, to have a pod on Kubernetes with multiple application instances consuming a [shared MQTT subscription]({{< ref "setup-mqtt.md" >}}). Below is an example of using the `{uuid}` tag.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
