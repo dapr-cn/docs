@@ -29,16 +29,22 @@ omsagent-c7c4t                                                    1/1     Runnin
 omsagent-rs-74f488997c-dshpx                                      1/1     Running   1          44h
 omsagent-smtk7                                                    1/1     Running   1          44h
 ...
+omsagent-75qjs                                                    1/1     Running   1          44h
+omsagent-c7c4t                                                    1/1     Running   0          44h
+omsagent-rs-74f488997c-dshpx                                      1/1     Running   1          44h
+omsagent-smtk7                                                    1/1     Running   1          44h
+...
 ```
 
 2. Apply config map to enable Prometheus metrics endpoint scrape.
 
 You can use [azm-config-map.yaml](/docs/azm-config-map.yaml) to enable prometheus metrics endpoint scrape.
 
-If you installed Dapr to the different namespace, you need to change the `monitor_kubernetes_pod_namespaces` array values. For example: For example:
+If you installed Dapr to the different namespace, you need to change the `monitor_kubernetes_pod_namespaces` array values. For example: For example: For example:
 
 ```yaml
 ...
+  ...
   ...
   prometheus-data-collection-settings: |-
     [prometheus_data_collection_settings.cluster]
