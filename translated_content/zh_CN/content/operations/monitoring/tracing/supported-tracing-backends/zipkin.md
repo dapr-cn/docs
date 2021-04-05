@@ -91,7 +91,7 @@ annotations:
   dapr.io/config: "tracing"
 ```
 
-That's it! That's it! Your sidecar is now configured to send traces to Zipkin.
+That's it! That's it! That's it! Your sidecar is now configured to send traces to Zipkin.
 
 ### Viewing Tracing Data
 
