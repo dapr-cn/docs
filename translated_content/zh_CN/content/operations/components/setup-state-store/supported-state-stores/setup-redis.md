@@ -7,7 +7,7 @@ description: Detailed information on the Redis state store component
 
 ## Component format
 
-To setup Redis state store create a component of type `state.redis`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Redis state store create a component of type `state.redis`. To setup Redis state store create a component of type `state.redis`. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -40,14 +40,22 @@ spec:
   - name: maxRetries
     value: # Optional
   - name: maxRetryBackoff
+    value: # Optional Allowed: true, false.
+  - name: failover
+    value: <bool> # Optional. Allowed: true, false.
+  - name: sentinelMasterName
+    value: <string> # Optional
+  - name: maxRetries
+    value: # Optional
+  - name: maxRetryBackoff
     value: # Optional
 ```
 **TLS:** If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS `true` or `false`.
 
-**Failover:** When set to `true` enables the failover feature. The redisHost should be the sentinel host address. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel) The redisHost should be the sentinel host address. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel)
+**Failover:** When set to `true` enables the failover feature. The redisHost should be the sentinel host address. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel)
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The above example uses secrets as plain strings. The above example uses secrets as plain strings. The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 
@@ -60,21 +68,21 @@ If you wish to use Redis as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| 字段                 | Required | Details                                                                                                                                                                   | Example                                                         |
-| ------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| redisHost          |    Y     | Connection-string for the redis host                                                                                                                                      | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
-| redisPassword      |    Y     | Password for Redis host. No Default. Can be `secretKeyRef` to use a secret reference No Default. Secret for the AWS user. Can be `secretKeyRef` to use a secret reference | `""`, `"KeFg23!"`                                               |
-| consumerID         |    N     | The consumer group ID                                                                                                                                                     | `"myGroup"`                                                     |
-| enableTLS          |    N     | If the Redis instance supports TLS with public certificates, can be configured to be enabled or disabled. Defaults to `"false"` Defaults to `"false"`                     | `"true"`, `"false"`                                             |
-| maxRetries         |    N     | Maximum number of retries before giving up. Defaults to `3` Defaults to `3`                                                                                               | `5`, `10`                                                       |
-| maxRetryBackoff    |    N     | Minimum backoff between each retry. Minimum backoff between each retry. Defaults to `2` seconds                                                                           | `3000000000`                                                    |
-| failover           |    N     | Property to enabled failover configuration. Needs sentinalMasterName to be set. Defaults to `"false"`                                                                     | `"true"`, `"false"`                                             |
-| sentinelMasterName |    N     | The sentinel master name. The sentinel master name. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel)                                                  | `""`,  `"127.0.0.1:6379"`                                       |
-| actorStateStore    |    N     | Consider this state store for actors. Defaults to `"false"` Defaults to `"false"`                                                                                         | `"true"`, `"false"`                                             |
+| 字段                 | Required | Details                                                                                                                                                                                       | Example                                                         |
+| ------------------ |:--------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| redisHost          |    Y     | Connection-string for the redis host                                                                                                                                                          | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
+| redisPassword      |    Y     | Password for Redis host. No Default. Can be `secretKeyRef` to use a secret reference                                                                                                          | `""`, `"KeFg23!"`                                               |
+| consumerID         |    N     | The consumer group ID                                                                                                                                                                         | `"myGroup"`                                                     |
+| enableTLS          |    N     | If the Redis instance supports TLS with public certificates, can be configured to be enabled or disabled. Defaults to `"false"` Defaults to `"false"` Defaults to `"false"`                   | `"true"`, `"false"`                                             |
+| maxRetries         |    N     | Maximum number of retries before giving up. Maximum number of retries before giving up. Defaults to `3` Defaults to `3`                                                                       | `5`, `10`                                                       |
+| maxRetryBackoff    |    N     | Minimum backoff between each retry. Minimum backoff between each retry. Defaults to `2` seconds Defaults to `2` seconds                                                                       | `3000000000`                                                    |
+| failover           |    N     | Property to enabled failover configuration. Needs sentinalMasterName to be set. Defaults to `"false"`                                                                                         | `"true"`, `"false"`                                             |
+| sentinelMasterName |    N     | The sentinel master name. The sentinel master name. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel) See [Redis Sentinel Documentation](https://redis.io/topics/sentinel) | `""`,  `"127.0.0.1:6379"`                                       |
+| actorStateStore    |    N     | Consider this state store for actors. Consider this state store for actors. Defaults to `"false"` Defaults to `"false"`                                                                       | `"true"`, `"false"`                                             |
 
 ## Setup Redis
 
-Dapr can use any Redis instance - containerized, running on your local dev machine, or a managed cloud service. If you already have a Redis store, move on to the [Configuration](#configuration) section. If you already have a Redis store, move on to the [Configuration](#configuration) section.
+Dapr can use any Redis instance - containerized, running on your local dev machine, or a managed cloud service. If you already have a Redis store, move on to the [Configuration](#configuration) section. If you already have a Redis store, move on to the [Configuration](#configuration) section. If you already have a Redis store, move on to the [Configuration](#configuration) section.
 
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
@@ -83,27 +91,27 @@ A Redis instance is automatically created as a Docker container when you run `da
 {{% /codetab %}}
 
 {{% codetab %}}
-We can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm](https://github.com/helm/helm#install). This approach requires [Installing Helm](https://github.com/helm/helm#install).
+We can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm](https://github.com/helm/helm#install). This approach requires [Installing Helm](https://github.com/helm/helm#install). This approach requires [Installing Helm](https://github.com/helm/helm#install).
 
-1. Install Redis into your cluster. Note that we're explicitly setting an image tag to get a version greater than 5, which is what Dapr' pub/sub functionality requires. Install Redis into your cluster. Note that we're explicitly setting an image tag to get a version greater than 5, which is what Dapr' pub/sub functionality requires. If you're intending on using Redis as just a state store (and not for pub/sub), you do not have to set the image version.
+1. Install Redis into your cluster. Note that we're explicitly setting an image tag to get a version greater than 5, which is what Dapr' pub/sub functionality requires. Install Redis into your cluster. Note that we're explicitly setting an image tag to get a version greater than 5, which is what Dapr' pub/sub functionality requires. Install Redis into your cluster. Note that we're explicitly setting an image tag to get a version greater than 5, which is what Dapr' pub/sub functionality requires. If you're intending on using Redis as just a state store (and not for pub/sub), you do not have to set the image version.
     ```bash
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm install redis bitnami/redis
     ```
 
 2. Run `kubectl get pods` to see the Redis containers now running in your cluster.
-3. Add `redis-master:6379` as the `redisHost` in your [redis.yaml](#configuration) file. For example: For example:
+3. Add `redis-master:6379` as the `redisHost` in your [redis.yaml](#configuration) file. For example: For example: For example:
     ```yaml
         metadata:
         - name: redisHost
           value: redis-master:6379
     ```
 4. Next, we'll get the Redis password, which is slightly different depending on the OS we're using:
-    - **Windows**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`, which will create a file with your encoded password. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files.
+    - **Windows**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`, which will create a file with your encoded password. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files. Next, run `certutil -decode encoded.b64 password.txt`, which will put your redis password in a text file called `password.txt`. Copy the password and delete the two files.
 
     - **Linux/MacOS**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode` and copy the outputted password.
 
-    Add this password as the `redisPassword` value in your [redis.yaml](#configuration) file. For example: For example:
+    Add this password as the `redisPassword` value in your [redis.yaml](#configuration) file. For example: For example: For example:
     ```yaml
         metadata:
         - name: redisPassword
@@ -114,15 +122,15 @@ We can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Ku
 {{% codetab %}}
 **Note**: this approach requires having an Azure Subscription.
 
-1. Open [this link](https://ms.portal.azure.com/#create/Microsoft.Cache) to start the Azure Cache for Redis  creation flow. Log in if necessary. Log in if necessary.
+1. Open [this link](https://ms.portal.azure.com/#create/Microsoft.Cache) to start the Azure Cache for Redis  creation flow. Log in if necessary. Log in if necessary. Log in if necessary.
 2. Fill out necessary information and **check the "Unblock port 6379" box**, which will allow us to persist state without SSL.
 3. Click "Create" to kickoff deployment of your Redis instance.
 4. Once your instance is created, you'll need to grab the Host name (FQDN) and your access key.
    - for the Host name navigate to the resources "Overview" and copy "Host name"
    - for your access key navigate to "Access Keys" under "Settings" and copy your key.
-5. Finally, we need to add our key and our host to a `redis.yaml` file that Dapr can apply to our cluster. If you're running a sample, you'll add the host and key to the provided `redis.yaml`. If you're creating a project from the ground up, you'll create a `redis.yaml` file as specified in [Configuration](#configuration). Set the `redisHost` key to `[HOST NAME FROM PREVIOUS STEP]:6379` and the `redisPassword` key to the key you copied in step 4. **Note:** In a production-grade application, follow [secret management](https://github.com/dapr/docs/blob/master/concepts/components/secrets.md) instructions to securely manage your secrets. If you're running a sample, you'll add the host and key to the provided `redis.yaml`. If you're creating a project from the ground up, you'll create a `redis.yaml` file as specified in [Configuration](#configuration). Set the `redisHost` key to `[HOST NAME FROM PREVIOUS STEP]:6379` and the `redisPassword` key to the key you copied in step 4. **Note:** In a production-grade application, follow [secret management]({{< ref component-secrets.md >}}) instructions to securely manage your secrets.
+5. Finally, we need to add our key and our host to a `redis.yaml` file that Dapr can apply to our cluster. If you're running a sample, you'll add the host and key to the provided `redis.yaml`. If you're creating a project from the ground up, you'll create a `redis.yaml` file as specified in [Configuration](#configuration). Set the `redisHost` key to `[HOST NAME FROM PREVIOUS STEP]:6379` and the `redisPassword` key to the key you copied in step 4. **Note:** In a production-grade application, follow [secret management]({{< ref component-secrets.md >}}) instructions to securely manage your secrets.
 
-> **NOTE:** Dapr pub/sub uses [Redis Streams](https://redis.io/topics/streams-intro) that was introduced by Redis 5.0, which isn't currently available on Azure Managed Redis Cache. Consequently, you can use Azure Managed Redis Cache only for state persistence. Consequently, you can use Azure Managed Redis Cache only for state persistence. 
+> **NOTE:** Dapr pub/sub uses [Redis Streams](https://redis.io/topics/streams-intro) that was introduced by Redis 5.0, which isn't currently available on Azure Managed Redis Cache. Consequently, you can use Azure Managed Redis Cache only for state persistence. Consequently, you can use Azure Managed Redis Cache only for state persistence. Consequently, you can use Azure Managed Redis Cache only for state persistence. 
 > 
 > {{% /codetab %}}
 
