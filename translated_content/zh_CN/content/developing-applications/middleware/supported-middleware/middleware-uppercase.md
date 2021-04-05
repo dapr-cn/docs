@@ -10,7 +10,7 @@ description: "测试您的 HTTP 管道与大写中间件一起运行"
 
 ## 组件格式
 
-根据下述定义，请求正文转换为大写字母：
+在下述定义中，将请求体的内容变成大写：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

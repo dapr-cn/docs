@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "贡献概述"
-linkTitle: "Secrets stores overview"
+linkTitle: "概述"
 weight: 1000
 description: >
   为任何Dapr项目资源库做出贡献的通用指南

@@ -1,26 +1,26 @@
 ---
 type: docs
-title: "Deploy to hybrid Linux/Windows Kubernetes clusters"
+title: "部署到 Linux/Windows Kubernetes 的混合集群"
 linkTitle: "Hybrid clusters"
 weight: 20000
-description: "How to run Dapr apps on Kubernetes clusters with windows nodes"
+description: "如何在 Kubernetes 上运行带有 Windows 节点的 Dapr 应用"
 ---
 
-Dapr supports running on kubernetes clusters with windows nodes. You can run your Dapr microservices exclusively on Windows, exclusively on Linux, or a combination of both. This is helpful to users who may be doing a piecemeal migration of a legacy application into a Dapr Kubernetes cluster. You can run your Dapr microservices exclusively on Windows, exclusively on Linux, or a combination of both. This is helpful to users who may be doing a piecemeal migration of a legacy application into a Dapr Kubernetes cluster.
+Dapr 支持在带有 windows 节点的 kubernetes 集群上运行。 您可以只在 Windows 上运行您的 Dapr 微服务，或只在 Linux 上运行，或者两者兼而有之。 这对那些可能会将遗留应用零散迁移到 Dapr Kubernetes 集群的用户很有帮助。
 
-Kubernetes uses a concept called node affinity so that you can denote whether you want your application to be launched on a Linux node or a Windows node. Kubernetes uses a concept called node affinity so that you can denote whether you want your application to be launched on a Linux node or a Windows node. When deploying to a cluster which has both Windows and Linux nodes, you must provide affinity rules for your applications, otherwise the Kubernetes scheduler might launch your application on the wrong type of node.
+Kubernetes 使用了一个叫做节点亲和性的概念，这样你就可以表示你的应用是想在 Linux 节点还是 Windows 节点上启动。 当部署到一个同时拥有 Windows 和 Linux 节点的集群时，你必须为你的应用提供亲和性规则，否则 Kubernetes 调度器可能会在错误的节点类型上启动你的应用。
 
-## Pre-requisites
+## 先决条件
 
-You will need a Kubernetes cluster with Windows nodes. You will need a Kubernetes cluster with Windows nodes. Many Kubernetes providers support the automatic provisioning of Windows enabled Kubernetes clusters.
+您需要一个带有Windows节点的 Kubernetes 集群。 许多 Kubernetes 提供商支持自动配置启用 Windows 的 Kubernetes 集群。
 
-1. Follow your preferred provider's instructions for setting up a cluster with Windows enabled
+1. 按照您的首选提供商的说明来设置一个带有Windows功能的集群。
 
-- [Setting up Windows on Azure AKS](https://docs.microsoft.com/en-us/azure/aks/windows-container-cli)
-- [Setting up Windows on AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)
-- [Setting up Windows on Google Cloud GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster-windows)
+- [在 Azure AKS 上设置 Windows](https://docs.microsoft.com/en-us/azure/aks/windows-container-cli)
+- [在 AWS EKS 上设置 Windows](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)
+- [在 Google Cloud GKE 上设置 Windows](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster-windows)
 
-2. Once you have set up the cluster, you should see that it has both Windows and Linux nodes available
+2. 一旦你设置了集群，你应该看到它同时有 Windows 和 Linux 节点可用
 
    ```bash
    kubectl get nodes -o wide
@@ -31,28 +31,28 @@ You will need a Kubernetes cluster with Windows nodes. You will need a Kubernete
    akswin000000                        Ready    agent   6d      v1.17.9   10.240.0.66    <none>        Windows Server 2019    Datacenter   10.0.17763.1339     docker://19.3.5
    akswin000001                        Ready    agent   6d      v1.17.9   10.240.0.97    <none>        Windows Server 2019    Datacenter   10.0.17763.1339     docker://19.3.5
    ```
-## Installing the Dapr control plane
+## 安装 Dapr 控制面板
 
-If you are installing using the Dapr CLI or via a helm chart, simply follow the normal deployment procedures: [Installing Dapr on a Kubernetes cluster]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >}})
+如果您正在使用 Dapr CLI 或通过 Helm Chart 安装， 只需遵循正常的部署程序： [在 Kubernetes 集群上安装 Dapr]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >}})
 
-Affinity will be automatically set for `kubernetes.io/os=linux`. Affinity will be automatically set for kubernetes.io/os=linux. This will be sufficient for most users, as Kubernetes requires at least one Linux node pool.
+关联性将被自动设置为 `kubernetes.io/os=linux`。 这对于大多数用户来说是足够的，因为Kubernetes至少需要一个Linux节点池。
 
-> **Note:** Dapr control plane containers are built and tested for both windows and linux, however, we generally recommend using the linux control plane containers. They tend to be smaller and have a much larger user base. They tend to be smaller and have a much larger user base.
+> **注意：** Dapr 控制面板容器是为windows和linux构建和测试的，但是，我们一般建议使用linux 控制面板容器。 它们往往较小，用户基础也大得多。
 
-If you understand the above, but want to deploy the Dapr control plane to Windows, you can do so by setting:
+如果您理解以上内容，但想要将 Dapr 控制面板部署到Windows，您可以通过设置这样做：
 
 ```
 helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 ```
 
-## Installing Dapr applications
+## 安装 Dapr 应用程序
 
-### Windows applications
-In order to launch a Dapr application on Windows, you'll first need to create a Docker container with your application installed. For a step by step guide see [Get started: Prep Windows for containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment). Once you have a docker container with your application, create a deployment YAML file with node affinity set to kubernetes.io/os: windows. For a step by step guide see [Get started: Prep Windows for containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment). Once you have a docker container with your application, create a deployment YAML file with node affinity set to kubernetes.io/os: windows.
+### Windows 应用程序
+为了在 Windows 上启动 Dapr 应用程序，您需要首先创建一个安装应用程序的 Docker 容器。 指南见 [开始：为容器准备 Windows](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment)。 一旦你拥有一个带有应用程序的Docker container，创建一个 deployment YAML 文件，节点亲和性设置为 kubernetes.io/os: windows。
 
-1. Create a deployment YAML
+1. 创建一个 deployment YAML
 
-   Here is a sample deployment with nodeAffinity set to "windows". Modify as needed for your application.
+   这里是一个示例 deployment ，节点关联性设置为“windows”。 根据您的应用程序的需要修改。
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
@@ -91,20 +91,20 @@ In order to launch a Dapr application on Windows, you'll first need to create a 
                      values:
                      - windows
    ```
-   This deployment yaml will be the same as any other dapr application, with an additional spec.template.spec.affinity section as shown above.
+   这个 deployment yaml 将与任何其它的 dapr 应用程序相同，还有一个额外的 spec.template.spec.affinity 部分如上文所示。
 
-2. Deploy to your Kubernetes cluster
+2. 部署到您的 Kubernetes 集群
 
    ```bash
    kubectl apply -f deploy_windows.yaml
    ```
 
-### Linux applications
-If you have already got a dapr application with runs on Linux, you'll still need to add affinity rules as above, but choose linux affinity instead.
+### Linux 应用程序
+如果您已经在 Linux 上有运行的 dapr 应用程序， 您仍然需要像以上添加亲和性规则，只不过要选择 linux 亲和性。
 
-1. Create a deployment YAML
+1. 创建一个 deployment YAML
 
-   Here is a sample deployment with nodeAffinity set to "linux". Modify as needed for your application.
+   这里是一个示例 deployment，节点亲和性设置为“linux”。 根据您的应用程序的需要修改。
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
@@ -144,13 +144,13 @@ If you have already got a dapr application with runs on Linux, you'll still need
                      - linux
    ```
 
-2. Deploy to your Kubernetes cluster
+2. 部署到您的 Kubernetes 集群
 
    ```bash
    kubectl apply -f deploy_linux.yaml
    ```
 
-## Cleanup
+## 清理
 
 ```bash
 kubectl delete -f deploy_linux.yaml
@@ -158,11 +158,11 @@ kubectl delete -f deploy_windows.yaml
 helm uninstall dapr
 ```
 
-## Related links
+## 相关链接
 
-- See the [official Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) for examples of more advanced configuration via node affinity
-- [Get started: Prep Windows for containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment)
-- [Setting up a Windows enabled Kubernetes cluster on Azure AKS](https://docs.microsoft.com/en-us/azure/aks/windows-container-cli)
-- [Setting up a Windows enabled Kubernetes cluster on AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)
-- [Setting up Windows on Google Cloud GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster-windows)
+- 通过 [官方的 Kubernetes 文档](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) 获取更高级的节点亲和性配置的案例
+- [开始：为容器准备 Windows](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment)
+- [在 Azure AKS 上设置一个启用了 Windows Kubernetes 的集群](https://docs.microsoft.com/en-us/azure/aks/windows-container-cli)
+- [在 AWS EKS 上设置一个启用了 Windows Kubernetes 的集群](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)
+- [在 Google Cloud GKE 上设置 Windows](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster-windows)
 

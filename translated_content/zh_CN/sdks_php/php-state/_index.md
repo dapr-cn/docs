@@ -1,17 +1,17 @@
 ---
-type: docs
-title: "State Management with PHP"
-linkTitle: "State management"
+type: 文档
+title: "使用PHP的状态管理"
+linkTitle: "状态管理"
 weight: 1000
-description: How to use
+description: 使用方式
 no_list: true
 ---
 
-Dapr offers a great modular approach to using state in your application. The best way to learn the basics is to visit [the howto]({{< ref howto-get-save-state.md >}}).
+Dapr 提供了一个很好的模块化方法来管理您的应用程序中的状态。 新手入门可以参考 [如何帮助]({{< ref howto-get-save-state.md >}})
 
-## Metadata
+## 元数据（Metadata）
 
-Many state components allow you to pass metadata to the component to control specific aspects of the component's behavior. The PHP SDK allows you to pass that metadata through:
+许多状态组件允许您将元数据传递给组件，以控制组件的特定行为。 PHP SDK 允许您通过以下方式传递该元数据：
 
 ```php
 <?php
@@ -20,13 +20,13 @@ $app->run(
         $stateManager->save_state('statestore', new \Dapr\State\StateItem('key', 'value', metadata: ['port' => '112'])));
 ```
 
-This is an example of how you might pass the port metadata to [Cassandra]({{< ref setup-cassandra.md >}}).
+这是为您展示如何将元数据传递给 [Cassandra]({{< ref setup-cassandra.md >}}) 的一个例子。
 
-Every state operation allows passing metadata.
+每个状态操作都允许传递元数据。
 
-## Consistency/concurrency
+## 一致性/并发性
 
-In the PHP SDK, there are four classes that represent the four different types of consistency and concurrency in Dapr:
+在PHP SDK中，有四种不同类型的Dapr中的一致性和并发性：
 
 ```php
 <?php
@@ -38,15 +38,15 @@ In the PHP SDK, there are four classes that represent the four different types o
 ] 
 ```
 
-Passing one of them to a `StateManager` method or using the `StateStore()` attribute allows you to define how the state store should handle conflicts.
+将其中之一传递给 `StateManager` 方法或使用 `StateStore()` 属性允许您定义state store来处理冲突。
 
-## Parallelism
+## 并行
 
-When doing a bulk read or beginning a transaction, you can specify the amount of parallelism. Dapr will read "at most" that many keys at a time from the underlying store if it has to read one key at a time. This can be helpful to control the load on the state store at the expense of performance. The default is `10`.
+进行批量读取或开始事务时，可以指定并行的数量。 Dapr 一次可以从store中读取更多的key 这是以牺牲性能为代价控制状态存储的负载。 该属性的默认值是 `10`。
 
-## Prefix
+## 前缀
 
-Hardcoded key names are useful, but why not make state objects more reusable? When committing a transaction or saving an object to state, you can pass a prefix that is applied to every key in the object.
+硬编码的键名很有用，但是为什么不让状态对象可复用性更高呢？ 当提交交易或保存 对象状态时，您可以传递一个应用于对象中每个键的前缀。
 
 {{< tabs "Transaction prefix" "StateManager prefix" >}}
 
