@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Handle large http body requests"
 linkTitle: "Http request body size"
 weight: 6000
