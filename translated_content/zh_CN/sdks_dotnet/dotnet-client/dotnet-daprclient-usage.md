@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "DaprClient 使用"
 linkTitle: "DaprClient 使用"
 weight: 100000
