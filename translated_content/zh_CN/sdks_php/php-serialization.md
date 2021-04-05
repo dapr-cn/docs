@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Custom Serialization"
 linkTitle: "Custom Serializers"
 weight: 1000
@@ -9,7 +9,7 @@ no_list: true
 
 Dapr uses JSON serialization and thus (complex) type information is lost when sending/receiving data.
 
-## Serialization
+## 序列化（Serialization）
 
 When returning an object from a controller, passing an object to the `DaprClient`, or storing an object in a state store, only public properties are scanned and serialized. You can customize this behavior by implementing `\Dapr\Serialization\ISerialize`. For example, if you wanted to create an ID type that serialized to a string, you may implement it like so:
 
