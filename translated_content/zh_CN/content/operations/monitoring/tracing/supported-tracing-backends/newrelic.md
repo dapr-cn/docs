@@ -41,22 +41,17 @@ New Relic 分布式追踪详情![New Relic Kubernetes 集群资源管理器应�
 
 ### OpenTelemetry 工具
 
-利用不同语言的 OpenTelemetry 实现，例如 [支持 .NET 的 New Relic Telemetry SDK 和 OpenTelemetry](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet)。 在这种情况下，使用 [OpenTelemetry Trace Exporter](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet/tree/main/src/NewRelic.OpenTelemetry)。  [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp-otel/Startup.cs)。
+利用不同语言的 OpenTelemetry 实现，例如 [支持 .NET 的 New Relic Telemetry SDK 和 OpenTelemetry](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet)。 在这种情况下，使用 [OpenTelemetry Trace Exporter](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet/tree/main/src/NewRelic.OpenTelemetry)。 [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp-otel/Startup.cs)。
 
 ### New Relic 语言代理
 
-类似于 OpenTelemetry 仪器, 您也可以利用一个 New Relic 语言代理。 一个例子是 </a>.NET Core 的 New Relic 代理工具
-是Docker文件的一部分。  [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp/Dockerfile)。</p> 
-
-
+类似于 OpenTelemetry 仪器, 您也可以利用一个 New Relic 语言代理。 一个例子是 </a>.NET Core 的 New Relic 代理工具 是Docker文件的一部分。 [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp/Dockerfile)。
 
 ## (可选) 启用 New Relic Kubernetes 集成
 
 如果 Dapr 和您的应用程序在Kubernetes环境中运行，您可以启用额外的度量和日志。
 
 安装New Relic Kubernetes集成的最简单方法是使用[自动安装程序](https://one.newrelic.com/launcher/nr1-core.settings?pane=eyJuZXJkbGV0SWQiOiJrOHMtY2x1c3Rlci1leHBsb3Jlci1uZXJkbGV0Lms4cy1zZXR1cCJ9)生成一个清单。 它不仅包着集成守护程序，而且包着其他New Relic Kubernetes配置， 像 [Kubernetes 事件](https://docs.newrelic.com/docs/integrations/kubernetes-integration/kubernetes-events/install-kubernetes-events-integration), [Prometheus OpenMetrics](https://docs.newrelic.com/docs/integrations/prometheus-integrations/get-started/new-relic-prometheus-openmetrics-integration-kubernetes), 和 [New Relic日志监测](https://docs.newrelic.com/docs/logs)。
-
-
 
 ### New Relic Kubernetes 集群浏览器
 
@@ -68,41 +63,27 @@ New Relic 分布式追踪详情![New Relic Kubernetes 集群资源管理器应�
 
 自动关联是New Relic的可视化功能的一部分。
 
-
-
 ### Pod 级别细节
 
 ![New Relic K8s Pod 级别详细信息](/images/nr-k8s-pod-level-details.png)
-
-
 
 ### 上下文中的日志
 
 ![在上下文日志的 New Relic K8s](/images/nr-k8s-logs-in-context.png)
 
-
-
 ## New Relic 仪表盘
-
-
 
 ### Kubernetes 概述
 
 ![New Relic 仪表盘 Kubernetes 概览](/images/nr-dashboard-k8s-overview.png)
 
-
-
 ### Dapr 系统服务
 
 ![New Relic 仪表盘 Dapr 系统服务](/images/nr-dashboard-dapr-system-services.png)
 
-
-
 ### Dapr 度量
 
 ![New Relic 仪表盘 Dapr Metrics 1](/images/nr-dashboard-dapr-metrics-1.png)
-
-
 
 ## New Relic Grafana 集成
 
@@ -116,13 +97,9 @@ New Relic 与 [Grafana Labs](https://grafana.com/) 联手让您可以使用 [遥
 
 ![New Relic Grafana 仪表盘](/images/nr-grafana-dashboard.png)
 
-
-
 ## New Relic 警报
 
 从Dapr、Kubernetes或运行在其上的任何服务收集的所有数据都可以用于设置警报和通知到您选择的首选通道。 参见[警报和应用情报](https://docs.newrelic.com/docs/alerts-applied-intelligence)。
-
-
 
 ## 关联链接/参考
 
