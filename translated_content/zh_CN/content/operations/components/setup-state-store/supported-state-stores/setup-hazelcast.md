@@ -7,7 +7,7 @@ description: Detailed information on the Hazelcast state store component
 
 ## Create a Dapr component
 
-To setup Hazelcast state store create a component of type `state.hazelcast`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Hazelcast state store create a component of type `state.hazelcast`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -21,6 +21,8 @@ spec:
   metadata:
   - name: hazelcastServers
     value: <REPLACE-WITH-HOSTS> # Required. A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000"
+  - name: hazelcastMap
+    value: <REPLACE-WITH-MAP> # Required. Hazelcast map configuration. A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000"
   - name: hazelcastMap
     value: <REPLACE-WITH-MAP> # Required. Hazelcast map configuration.
 ```
