@@ -1,62 +1,62 @@
 ---
 type: docs
-title: "How-To: Set up Fluentd, Elastic search and Kibana in Kubernetes"
+title: "操作方法：在 Kubernetes 中搭建 Fluentd、Elastic search 和 Kibana"
 linkTitle: "FluentD"
 weight: 1000
-description: "How to install Fluentd, Elastic Search, and Kibana to search logs in Kubernetes"
+description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜索日志"
 ---
 
-## Prerequisites
+## 前期准备
 
 - Kubernetes (> 1.14)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Helm 3](https://helm.sh/)
 
 
-## Install Elastic search and Kibana
+## 安装 Elasticsearch 和 Kibana
 
-1.  Create namespace for monitoring tool and add Helm repo for Elastic Search
+1.  为监测工具创建命名空间并添加 Helm Repo 用于Elastic Search
 
     ```bash
     kubectl create namespace dapr-monitoring
     ```
 
-2. Add Elastic helm repo
+2. 添加 Elastic helm repo
 
     ```bash
     helm repo add elastic https://helm.elastic.co
     helm repo update
     ```
 
-3. Install Elastic Search using Helm
+3. 使用 Helm 安装 Elastic Search
 
-By default the chart creates 3 replicas which must be on different nodes.  If your cluster has less than 3 nodes, specify a lower number of replicas.  For example, this sets it to 1:
+默认情况下，Chart 必须在不同的节点上创建3个副本。  如果您的集群少于3个节点，请指定一个较低的副本数量。  例如，将它设置为 1：
 
 ```bash
 helm install elasticsearch elastic/elasticsearch -n dapr-monitoring --set replicas=1
 ```
 
-Otherwise:
+否则：
 
 ```bash
 helm install elasticsearch elastic/elasticsearch -n dapr-monitoring
 ```
 
-If you are using minikube or want to disable persistent volumes for development purposes, you can disable it by using the following command:
+如果您正在使用 minikube 或者想要禁用持久化卷来开发，您可以使用以下命令禁用它：
 
 ```bash
 helm install elasticsearch elastic/elasticsearch -n dapr-monitoring --set persistence.enabled=false,replicas=1
 ```
 
-4. Install Kibana
+4. 安装 Kibana
 
     ```bash
     helm install kibana elastic/kibana -n dapr-monitoring
     ```
 
-5. Validation
+5. 校验
 
-    Ensure Elastic Search and Kibana are running in your Kubernetes cluster.
+    确保 Elastic Search 和 Kibana 正在您的Kubernetes 集群中运行。
 
     ```bash
     kubectl get pods -n dapr-monitoring
@@ -65,24 +65,24 @@ helm install elasticsearch elastic/elasticsearch -n dapr-monitoring --set persis
     kibana-kibana-95bc54b89-zqdrk   1/1     Running   0          4m21s
     ```
 
-## Install Fluentd
+## 安装 Fluentd
 
-1. Install config map and Fluentd as a daemonset
+1. 安装 config map 和 Fluentd 作为守护程序
 
-Download these config files:
+下载这些配置文件：
 - [fluentd-config-map.yaml](/docs/fluentd-config-map.yaml)
 - [fluentd-dapr-with-rbac.yaml](/docs/fluentd-dapr-with-rbac.yaml)
 
-> Note: If you already have Fluentd running in your cluster, please enable the nested json parser to parse JSON formatted log from Dapr.
+> 注意：如果你已经在你的集群中运行 Fluentd，请启用 nested json 解析器从 Dapr 解析JSON 格式的日志。
 
-Apply the configurations to your cluster:
+将配置应用到您的集群：
 
 ```bash
 kubectl apply -f ./fluentd-config-map.yaml
 kubectl apply -f ./fluentd-dapr-with-rbac.yaml
 ```
 
-2. Ensure that Fluentd is running as a daemonset; the number of instances should be the same as the number of cluster nodes.  In the example below we only have 1 node.
+2. 确保 Fluentd 作为守护程序运行；实例的数量应与集群节点的数量相同。  在下面的例子中，我们只有一个节点。
 
 ```bash
 kubectl get pods -n kube-system -w
@@ -94,9 +94,9 @@ fluentd-sdrld                 1/1     Running   0          14s
 ```
 
 
-## Install Dapr with JSON formatted logs
+## 使用 JSON 格式化日志安装 Dapr
 
-1. Install Dapr with enabling JSON-formatted logs
+1. 使用 JSON 格式化日志启用 Dapr
 
     ```bash
     helm repo add dapr https://dapr.github.io/helm-charts/
@@ -104,9 +104,9 @@ fluentd-sdrld                 1/1     Running   0          14s
     helm install dapr dapr/dapr --namespace dapr-system --set global.logAsJson=true
     ```
 
-2. Enable JSON formatted log in Dapr sidecar
+2. 在 Dapr sidecar 中启用 JSON 格式化日志
 
-Add `dapr.io/log-as-json: "true"` annotation to your deployment yaml.
+添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml.
 
 Example:
 ```yaml
@@ -133,11 +133,11 @@ spec:
 ...
 ```
 
-## Search logs
+## 搜索日志
 
-> Note: Elastic Search takes a time to index the logs that Fluentd sends.
+> 注意: Elastic Search 需要一段时间才能索引 Fluentd 发送的日志。
 
-1. Port-forward to svc/kibana-kibana
+1. Port-forward 到 svc/kibana-kibana
 
 ```
 $ kubectl port-forward svc/kibana-kibana 5601 -n dapr-monitoring
@@ -147,44 +147,44 @@ Handling connection for 5601
 Handling connection for 5601
 ```
 
-2. Browse `http://localhost:5601`
+2. 浏览 `http://localhost:5601`
 
-3. Click Management -> Index Management
+3. 点击Management -> Index Management
 
-![kibana management](/images/kibana-1.png)
+![kibana 管理](/images/kibana-1.png)
 
-4. Wait until dapr-* is indexed.
+4. 请稍候，直到Dapr-* 被索引。
 
-![index log](/images/kibana-2.png)
+![索引日志](/images/kibana-2.png)
 
-5. Once dapr-* indexed, click Kibana->Index Patterns and Create Index Pattern
+5. 一旦dapr-* 被索引了，请点击 Kibana-> Index Patterns 并创建索引模式
 
-![create index pattern](/images/kibana-3.png)
+![创建索引模式](/images/kibana-3.png)
 
-6. Define index pattern - type `dapr*` in index pattern
+6. 在index pattern中输入 `dapr*`定义索引模式
 
-![define index pattern](/images/kibana-4.png)
+![定义索引模式](/images/kibana-4.png)
 
-7. Select time stamp filed: `@timestamp`
+7. 选择time stamp填入： `@timestamp`
 
 ![timestamp](/images/kibana-5.png)
 
-8. Confirm that `scope`, `type`, `app_id`, `level`, etc are being indexed.
+8. 确认 `scope`, `type`, `app_id`, `level`, 等正在索引。
 
-> Note: if you cannot find the indexed field, please wait. it depends on the volume of data and resource size where elastic search is running.
+> 注意：如果您找不到索引字段，请稍候。 它取决于正在进行弹性搜索的数据量和资源大小。
 
-![indexing](/images/kibana-6.png)
+![正在索引](/images/kibana-6.png)
 
-9. Click `discover` icon and search `scope:*`
+9. 点击 `discover` 图标并搜索 `scope:*`
 
-> Note: it would take some time to make log searchable based on the data volume and resource.
+> 注：根据数据量和资源进行日志检索需要一些时间。
 
-![discover](/images/kibana-7.png)
+![发现](/images/kibana-7.png)
 
-## References
+## 参考资料
 
-* [Fluentd for Kubernetes](https://docs.fluentd.org/v/0.12/articles/kubernetes-fluentd)
+* [用于 Kubernetes 的 Fluentd](https://docs.fluentd.org/v/0.12/articles/kubernetes-fluentd)
 * [Elastic search helm chart](https://github.com/elastic/helm-charts/tree/master/elasticsearch)
 * [Kibana helm chart](https://github.com/elastic/helm-charts/tree/master/kibana)
-* [Kibana Query Language](https://www.elastic.co/guide/en/kibana/current/kuery-query.html)
-* [Troubleshooting using Logs]({{< ref "logs-troubleshooting.md" >}})
+* [Kibana 查询语句](https://www.elastic.co/guide/en/kibana/current/kuery-query.html)
+* [使用日志进行故障排除]({{< ref "logs-troubleshooting.md" >}})
