@@ -1,15 +1,15 @@
 ---
-type: 文档
-title: "参考：actor"
+type: docs
+title: "Production Reference: Actors"
 linkTitle: "Production Reference"
 weight: 1000
-description: 在生产中使用 PHP actor
+description: Running PHP actors in production
 no_list: true
 ---
 
-## 代理模式
+## Proxy modes
 
-Actor 代理有四种处理方式。 每种模式都需要您在开发和生产过程中权衡。
+There are four different modes actor proxies are handled. Each mode presents different trade-offs that you'll need to weigh during development and in production.
 
 ```php
 <?php
@@ -19,28 +19,28 @@ Actor 代理有四种处理方式。 每种模式都需要您在开发和生产�
 \Dapr\Actors\Generators\ProxyFactory::DYNAMIC;
 ```
 
-它可以使用 `dapr.actors.proxy.generate` 配置密钥。
+It can be set with `dapr.actors.proxy.generation` configuration key.
 
 {{< tabs "GENERATED" "GENERATED_CACHED" "ONLY_EXISTING" "DYNAMIC" >}}
 {{% codetab %}}
 
-这是默认的模式。 在这种模式下，每次请求都会生成一个 `eval`类， 它主要用于开发环境而不能应用于生产。
+This is the default mode. In this mode, a class is generated and `eval`'d on every request. It's mostly for development and shouldn't be used in production.
 
 {{% /codetab %}}
 {{% codetab %}}
 
-这与 `ProxyModes::GENERATED` 相同，但这个类存储在临时文件中，所以不需要在每个请求中重新生成。 它不知道何时更新缓存的类，也无法手动生成文件时提供，因此不建议在开发中使用它
+This is the same as `ProxyModes::GENERATED` except the class is stored in a tmp file so it doesn't need to be regenerated on every request. It doesn't know when to update the cached class, so using it in development is discouraged but is offered for when manually generating the files isn't possible.
 
 {{% /codetab %}}
 {{% codetab %}}
 
-在这种模式下，如果不存在代理类，将会抛出异常。 可以用在当你不想在生产生产环境中生成代码时 您必须确保class生成并自动加载。
+In this mode, an exception is thrown if the proxy class doesn't exist. This is useful for when you don't want to generate code in production. You'll have to make sure the class is generated and pre-/autoloaded.
 
-### 生成代理
+### Generating proxies
 
-您可以创建一个编写器脚本来根据需要生成代理，以利用`ONLY_EXISTING`模式。
+You can create a composer script to generate proxies on demand to take advantage of the `ONLY_EXISTING` mode.
 
-创建 `ProxyCompiler.php`
+Create a `ProxyCompiler.php`
 
 ```php
 <?php
@@ -73,7 +73,7 @@ class ProxyCompiler {
 }
 ```
 
-然后在 `composer.json` 中为生成的代理添加一个 psr-4 自动加载器和脚本：
+Then add a psr-4 autoloader for the generated proxies and a script in `composer.json`:
 
 ```json
 {
@@ -88,7 +88,7 @@ class ProxyCompiler {
 }
 ```
 
-最后，将dapr配置为仅使用生成的代理：
+And finally, configure dapr to only use the generated proxies:
 
 ```php
 <?php
@@ -102,33 +102,32 @@ return [
 {{% /codetab %}}
 {{% codetab %}}
 
-然而，在这种模式下，代理人满足了接口契约。 它实际上没有实现接口本身 (意指 `instanceof` 将是 `false`). 这种模式利用了PHP中的一些特性来工作，并适用于某些情况 其中code不能是`eval`'d或生成。
+In this mode, the proxy satisfies the interface contract, however, it does not actually implement the interface itself (meaning `instanceof` will be `false`). This mode takes advantage of a few quirks in PHP to work and exists for cases where code cannot be `eval`'d or generated.
 
 {{% /codetab %}}
 {{< /tabs >}}
 
-### 请求列表
+### Requests
 
-无论使用哪种模式，创建actor代理都是非常方便的。 在创建actor代理对象时不会发出请求。
+Creating an actor proxy is very inexpensive for any mode. There are no requests made when creating an actor proxy object.
 
-当您在代理对象上调用方法时，actor只会为您实现的方法提供服务。 `get_id()` 是本地处理的， `get_emergder()`, `delete_emergder()`, 等由 `daprd` 处理。
+When you call a method on a proxy object, only methods that you implemented are serviced by your actor implementation. `get_id()` is handled locally, and `get_reminder()`, `delete_reminder()`, etc. are handled by the `daprd`.
 
-## 添加Actor实现
+## Actor implementation
 
-PHP 中的每个执行者必须实现 `\Dapr\Actors\Iactor` 并使用 `\Dapr\Actors\ActorTrait` 特性。 这个支持反射. 使用 `\Dapr\Actors\Actor` 抽象基础类为您服务。 但是 如果您需要覆盖默认行为，您可以通过实现接口和使用特性来做到这一点。
+Every actor implementation in PHP must implement `\Dapr\Actors\IActor` and use the `\Dapr\Actors\ActorTrait` trait. This allows for fast reflection and some shortcuts. Using the `\Dapr\Actors\Actor` abstract base class does this for you, but if you need to override the default behavior, you can do so by implementing the interface and using the trait.
 
-## 激活和停用
+## Activation and deactivation
 
-当actor激活时，令牌文件将被写入临时目录（默认情况下，该目录位于linux下 `'/tmp/dapr_'+ sha256（concat（Dapr type，Id））</ code>和Windows上的<code>'％temp％/ dapr_'+ sha256（concat（Dapr type，Id））</ code>）。
-这种情况持续到actor或host停用。 这允许<code> on_activation `被调用一次 并且只有Dapr激活host上的actor时才执行一次。
+When an actor activates, a token file is written to a temporary directory (by default this is in `'/tmp/dapr_' + sha256(concat(Dapr type, id))` in linux and `'%temp%/dapr_' + sha256(concat(Dapr type, id))` on Windows). This is persisted until the actor deactivates, or the host shuts down. This allows for `on_activation` to be called once and only once when Dapr activates the actor on the host.
 
-## 性能
+## Performance
 
-actor方法的执行效率非常高， `php-fpm` and `nginx`, 或 IIS 在 Windows 上有一个生产设置。 虽然actor是在每个请求上都会构造，actor状态密钥是按需加载，而不是在每个请求时加载。 在分别加载每个key时会有一些开销。 可以通过在状态中存储数据数组来缓解这种情况 ，为了速度而牺牲了一些可用性。 不建议从一开始就这样做，而是在需要 时作为一种优化。
+Actor method invocation is very fast on a production setup with `php-fpm` and `nginx`, or IIS on Windows. Even though the actor is constructed on every request, actor state keys are only loaded on-demand and not during each request. However, there is some overhead in loading each key individually. This can be mitigated by storing an array of data in state, trading some usability for speed. It is not recommended doing this from the start, but as an optimization when needed.
 
-## 版本状态
+## Versioning state
 
-`ActorState`对象中的变量名直接对应于存储库中的键名。 这意味着如果更改一个变量的类型或名称，可能会出现错误。 To get around this, you may need to version your state object. In order to do this, you'll need to override how state is loaded and stored. There are many ways to approach this, one such solution might be something like this:
+The names of the variables in the `ActorState` object directly correspond to key names in the store. This means that if you change the type or name of a variable, you may run into errors. To get around this, you may need to version your state object. In order to do this, you'll need to override how state is loaded and stored. There are many ways to approach this, one such solution might be something like this:
 
 ```php
 <?php
