@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "mtls export CLI 命令参考"
 linkTitle: "mtls export"
 description: "有关 mtls export CLI 命令的详细信息"
