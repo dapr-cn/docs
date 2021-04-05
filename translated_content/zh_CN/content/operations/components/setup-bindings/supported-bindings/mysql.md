@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "MySQL binding spec"
+title: "MySQL 绑定规范"
 linkTitle: "MySQL"
-description: "Detailed documentation on the MySQL binding component"
+description: "MySQL 组件绑定详细说明"
 ---
 
-## Component format
+## 组件格式
 
 To setup MySQL binding create a component of type `bindings.mysql`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 

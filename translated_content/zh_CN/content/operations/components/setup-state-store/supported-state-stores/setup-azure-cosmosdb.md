@@ -2,12 +2,12 @@
 type: docs
 title: "Azure Cosmos DB"
 linkTitle: "Azure Cosmos DB"
-description: Detailed information on the Azure CosmosDB state store component
+description: 关于 Azure CosmosDB 状态存储组件的详细信息
 ---
 
-## Component format
+## 配置
 
-To setup Azure CosmosDb state store create a component of type `state.azure.cosmosdb`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置 Azure CosmosDb 状态存储，请创建一个类型为 `state.azure.cosmosdb` 的组件。 请参阅 [本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,51 +30,51 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+以上示例将 Secret 明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}})描述的密钥仓库来存储密钥。
 {{% /alert %}}
 
-If you wish to use CosmosDb as an actor store, append the following to the yaml.
+如果您想要使用 CosmosDb 作为 Actor 存储，请在 yaml 上附上以下内容。
 
 ```yaml
   - name: actorStateStore
     value: "true"
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段              | Required | Details                                                                           | Example                                      |
-| --------------- |:--------:| --------------------------------------------------------------------------------- | -------------------------------------------- |
-| url             |    Y     | The CosmosDB url                                                                  | `"https://******.documents.azure.com:443/"`. |
-| masterKey       |    Y     | The key to authenticate to the CosmosDB account                                   | `"key"`                                      |
-| database        |    Y     | The name of the database                                                          | `"db"`                                       |
-| collection      |    Y     | The name of the collection                                                        | `"collection"`                               |
-| actorStateStore |    N     | Consider this state store for actors. Defaults to `"false"` Defaults to `"false"` | `"true"`, `"false"`                          |
+| 字段              | 必填 | 详情                                 | 示例                                           |
+| --------------- |:--:| ---------------------------------- | -------------------------------------------- |
+| url             | Y  | CosmosDB 地址                        | `"https://******.documents.azure.com:443/"`. |
+| masterKey       | Y  | 认证到CosmosDB 账户的密钥                  | `"key"`                                      |
+| database        | Y  | 数据库名称                              | `"db"`                                       |
+| collection      | Y  | 要使用的集合名称                           | `"collection"`                               |
+| actorStateStore | N  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"` | `"true"`, `"false"`                          |
 
-## Setup Azure Cosmos DB
+## 安装Azure Cosmos DB
 
-[Follow the instructions](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-manage-database-account) from the Azure documentation on how to create an Azure CosmosDB account.  The database and collection must be created in CosmosDB before Dapr can use it.  The database and collection must be created in CosmosDB before Dapr can use it.
+[请遵循 Azure 文档中关于如何创建 Azure CosmosDB 帐户的说明](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-manage-database-account)。  在为Dapr所使用之前，必须先在CosmosDB中创建数据库和集合。
 
-**Note : The partition key for the collection must be named "/partitionKey".  Note: this is case-sensitive.  Note: this is case-sensitive.**
+**注意：集合的分区键必须命名为"/partitionKey"。  注意：这是区分大小写的。**
 
-In order to setup CosmosDB as a state store, you need the following properties:
-- **URL**: the CosmosDB url. for example: https://******.documents.azure.com:443/ for example: https://******.documents.azure.com:443/
-- **Master Key**: The key to authenticate to the CosmosDB account
-- **Database**: The name of the database
-- **Collection**: The name of the collection
+为了配置CosmosDB作为状态存储，你需要以下属性：
+- **URL**: CosmosDB的 url. 示例: https://******.documents.azure.com:443/
+- **Master Key**: 用于验证 CosmosDB 账户的密钥
+- **Database**: 数据库的名称
+- **Collection**: 集合的名称
 
-## Data format
+## 日期格式
 
-To use the CosmosDB state store, your data must be sent to Dapr in JSON-serialized.  Having it just JSON *serializable* will not work.  Having it just JSON *serializable* will not work.
+要使用CosmosDB状态存储，你的数据必须以JSON序列化的方式发送到Dapr。  让它仅仅是JSON *可序列化* 是不行的。
 
-If you are using the Dapr SDKs (e.g. https://github.com/dapr/dotnet-sdk) the SDK will serialize your data to json.
+如果您使用的是Dapr SDKs (例如https://github.com/dapr/dotnet-sdk)，SDK会将您的数据序列化为json。
 
-For examples see the curl operations in the [Partition keys](#partition-keys) section.
+例子请看[分区键](#partition-keys)部分的 curl 操作。
 
-## Partition keys
+## 分区键
 
-For **non-actor state** operations, the Azure Cosmos DB state store will use the `key` property provided in the requests to the Dapr API to determine the Cosmos DB partition key.  This can be overridden by specifying a metadata field in the request with a key of `partitionKey` and a value of the desired partition.  This can be overridden by specifying a metadata field in the request with a key of `partitionKey` and a value of the desired partition.
+对于**non-actor**状态操作，Azure Cosmos DB状态存储将使用向Dapr API发出的请求中提供的`key`属性来确定Cosmos DB分区键。  这可以通过在请求中指定一个元数据字段来覆盖，该字段的键为`partitionKey`，值为所需的分区。
 
-The following operation will use `nihilus` as the partition key value sent to CosmosDB:
+以下操作将使用`nihilus`作为发送到CosmosDB的分区键值：
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state/<store_name> \
@@ -87,7 +87,7 @@ curl -X POST http://localhost:3500/v1.0/state/<store_name> \
       ]'
 ```
 
-For **non-actor** state operations, if you want to control the CosmosDB partition, you can specify it in metadata.  Reusing the example above, here's how to put it under the `mypartition` partition  Reusing the example above, here's how to put it under the `mypartition` partition
+对于**non-actor**状态操作，如果你想控制CosmosDB分区，你可以在元数据中指定它。  重用上面的例子，下面是如何把它放在`mypartition`分区下的方法：
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state/<store_name> \
@@ -104,9 +104,9 @@ curl -X POST http://localhost:3500/v1.0/state/<store_name> \
 ```
 
 
-For **actor** state operations, the partition key is generated by Dapr using the `appId`, the actor type, and the actor id, such that data for the same actor always ends up under the same partition (you do not need to specify it).  This is because actor state operations must use transactions, and in CosmosDB the items in a transaction must be on the same partition.  This is because actor state operations must use transactions, and in CosmosDB the items in a transaction must be on the same partition.
+对于**actor**状态的操作，Dapr使用`appId`、actor类型和actor id生成分区键，这样同一个actor的数据最终总是在同一个分区下（你不需要指定它）。  这是因为actor状态操作必须使用事务，而在CosmosDB中，事务中的项必须在同一个分区上。
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
+- [状态管理构建块]({{< ref state-management >}})

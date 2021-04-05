@@ -72,7 +72,7 @@ The output should look like this:
 
 
 ```md
-                  __                
+         __                
     ____/ /___ _____  _____
    / __  / __ '/ __ \/ ___/
   / /_/ / /_/ / /_/ / /    
@@ -107,7 +107,7 @@ Flags:
   -h, --help      help for dapr
   -v, --version   version for dapr
 
-Use "dapr [command] --help" for more information about a command.                       .      
+Use "dapr [command] --help" for more information about a command.
 ```
 
 

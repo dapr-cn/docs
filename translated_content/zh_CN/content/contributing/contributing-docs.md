@@ -84,7 +84,7 @@ description: "1+ SENTENCES DESCRIBING THE ARTICLE"
 ---
 type: docs
 title: "服务调用概述"
-linkTitle: "Overview"
+linkTitle: "概述"
 weight: 10
 description: "Dapr服务调用的快速概述，以及如何在应用程序中使用它来调用服务。"
 ---
@@ -95,7 +95,7 @@ description: "Dapr服务调用的快速概述，以及如何在应用程序中�
 Front-matter 应填写所有字段，包括类型、标题、链接标题、权重和描述。
 - `title` 应该仅有一句话，最后没有句号
 - `linkTitle` 应该是 1到 3 个字，前面的How-to除外。
-- `描述` 应该是 1-2 个句子，描述读者将在此文档中学习，完成或执行什么。
+- `description` 应该是 1-2 个句子，描述读者将在此文档中学习，完成或执行什么。
 
 根据 [styling conventions](#styling-conventions)，标题只能大写第一个字和专有名词，但 "How-To："除外。
     - "Getting started with Dapr service invocation"
@@ -195,12 +195,6 @@ brew install dapr/tap/dapr-cli
 {{< tabs Windows Linux MacOS>}}
 {{% codetab %}}
 ```powershell
-这个例子将呈现为：
-
-{{< tabs Windows Linux MacOS>}}
-
-{{% codetab %}}
-```powershell
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
 ```
 {{% /codetab %}}
@@ -220,7 +214,7 @@ brew install dapr/tap/dapr-cli
 {{< /tabs >}}
 
 ### YouTube 视频
-短代码为：
+Hugo 可以使用短代码自动嵌入 Youtube 视频：
 ```
 {{</* youtube [VIDEO ID] */>}}
 ```

@@ -7,12 +7,12 @@ description: 开发 Dapr 应用程序的 Python SDK 包
 no_list: true
 ---
 
-Dapr提供了帮助开发Python应用程序各种包。 你可以使用他们来创建 Python 客户端、服务器和虚拟actors。
+Dapr提供了帮助开发Python应用程序各种包。 你可以使用他们来创建 Python 客户端、服务器和 virtual actors。
 
 ## 可用软件包
 
 - [**Dapr 客户端**]({{< ref python-client.md >}}) 用于与 Python 应用程序交互的 Dapr 边车和其他 Dapr 应用程序
-- [**Dapr actor**]({{< ref python-actor.md >}}) 用于使用 Python 创建并和有状态的虚拟 actors 交互。
+- [**Dapr actor**]({{< ref python-actor.md >}}) 用于使用 Python 创建并和有状态的virtual actors 交互。
 - [**扩展**]({{< ref python-sdk-extensions >}}) 用于将Dapr与其他 Python 框架兼容
     - [**gRPC 扩展**]({{< ref python-grpc.md >}}) 用创建 Dapr gRPC 服务器
     - [**FastAPI 扩展**]({{< ref python-fastapi.md >}}) 向 FastAPI 应用程序中添加 Dapr actor 的功能
