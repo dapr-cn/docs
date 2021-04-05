@@ -1,22 +1,22 @@
 ---
-type: docs
+type: 文档
 title: "How-To: Set-up New Relic for Dapr logging"
 linkTitle: "New Relic"
 weight: 2000
 description: "Set-up New Relic for Dapr logging"
 ---
 
-## Prerequisites
+## 前期准备
 
 - Perpetually [free New Relic account](https://newrelic.com/signup?ref=dapr), 100 GB/month of free data ingest, 1 free full access user, unlimited free basic users
 
-## Background
+## 背景
 
 New Relic offers a [Fluent Bit](https://fluentbit.io/) output [plugin](https://github.com/newrelic/newrelic-fluent-bit-output) to easily forward your logs to [New Relic Logs](https://github.com/newrelic/newrelic-fluent-bit-output). This plugin is also provided in a standalone Docker image that can be installed in a Kubernetes cluster in the form of a DaemonSet, which we refer as the Kubernetes plugin.
 
 This document explains how to install it in your cluster, either using a Helm chart (recommended), or manually by applying Kubernetes manifests.
 
-## Installation
+## 安装
 
 ### Install using the Helm chart (recommended)
 
