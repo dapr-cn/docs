@@ -34,7 +34,7 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 
 ## Sidecar 资源设置
 
-请参见 [这里]({{< ref "kubernetes-annotations.md" >}})来为 Dapr sidecar设置资源分配， 与资源约束相关的具体注解如下:
+请参见 [这里]({{< ref "kubernetes-annotations.md" >}})来为 Dapr sidecar设置资源分配， 与资源约束相关的具体注解如下: The specific annotations related to resource constraints are:
 
 - `dapr.io/sidecar-cpu-limit`
 - `dapr.io/sidecar-memory-limit`
@@ -103,7 +103,7 @@ kubectl get pods --namespace dapr-system
 
 ## 用 Helm 升级 Dapr
 
-Dapr支持零停机升级， 升级包括以下步骤：
+Dapr支持零停机升级， 升级包括以下步骤： The upgrade path includes the following steps:
 
 1. 升级CLI版本(可选但推荐)
 2. 更新Dapr control plane
@@ -136,15 +136,15 @@ nodeapp    3000      16h  2020-07-29 17:16.22
 
 ## 建议的安全配置
 
-当正确配置时，Dapr可确保安全通信， 它还可以通过一些内置的功能使你的应用更加安全。
+当正确配置时，Dapr可确保安全通信， 它还可以通过一些内置的功能使你的应用更加安全。 It can also make your application more secure with a number of built-in features.
 
 建议生产环境的部署涵盖以下设置：
 
 1. **启用相互验证 (mTLS)**。 请注意，Dapr默认开启了mTLS。 有关如何携带自定义证书的详细信息，请参见 [这里]({{< ref "mtls.md#bringing-your-own-certificates" >}})。
 
-2. **启用App to Dapr API认证**。 这是你的应用程序和Dapr边车之间的通信。 为了防止未经授权的应用程序访问Dapr API，建议启用Dapr的基于令牌的认证。 请参阅[在 Dapr 中启用 API 令牌认证。]({{< ref "api-token.md" >}}) 以了解详情
+2. **启用Dapr to App API验证**。 这是Dapr和你的应用程序之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 请参阅[使用令牌认证对来自Dapr的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
 
-3. **启用Dapr to App API验证**。 这是Dapr和你的应用程序之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 请参阅[使用令牌认证对来自Dapr的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
+3. **启用App to Dapr API认证**。 这是你的应用程序和Dapr边车之间的通信。 This ensures that Dapr knows that it is communicating with an authorized application. 请参阅[在 Dapr 中启用 API 令牌认证。 ]({{< ref "api-token.md" >}}) 以了解详情
 
 4. 所有的组件YAML都应该把**密钥数据配置在密钥存储中**，而不是硬编码在YAML文件中。 请参阅 [这里]({{< ref "component-secrets.md" >}})，了解如何在Dapr组件中使用秘密。
 
