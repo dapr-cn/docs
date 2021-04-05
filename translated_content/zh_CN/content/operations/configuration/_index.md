@@ -1,8 +1,8 @@
 ---
-type: docs
-title: "Manage Dapr configuration"
-linkTitle: "Configuration"
+type: 文档
+title: "管理 Dapr 配置"
+linkTitle: "配置"
 weight: 200
-description: "How to set your Dapr configuration and manage your deployment"
+description: "如何设置您的 Dapr 配置并管理您的部署"
 ---
 
