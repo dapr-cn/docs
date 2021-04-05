@@ -1,49 +1,49 @@
 ---
 type: docs
-title: "mtls CLI 命令参考"
+title: "mtls CLI command reference"
 linkTitle: "mtls"
-description: "有关 mtls CLI 命令的详细信息"
+description: "Detailed information on the mtls CLI command"
 ---
 
-## 说明
+## Description
 
-检查是否启用了 mTLS
+Check if mTLS is enabled.
 
-## 支持的平台
+## Supported platforms
 
 - [Kubernetes]({{< ref kubernetes >}})
 
-## 用法
+## Usage
 
 ```bash
 dapr mtls [flags]
 dapr mtls [command]
 ```
 
-## 参数
+## Flags
 
-| 名称                   | 环境变量 | 默认值     | 说明                           |
-| -------------------- | ---- | ------- | ---------------------------- |
-| `--help`, `-h`       |      |         | 显示此帮助消息                      |
-| `--kubernetes`, `-k` |      | `false` | 检查是否在 Kubernetes 集群中启用了 mTLS |
+| Name                 | Environment Variable | Default | Description                                      |
+| -------------------- | -------------------- | ------- | ------------------------------------------------ |
+| `--help`, `-h`       |                      |         | Print this help message                          |
+| `--kubernetes`, `-k` |                      | `false` | Check if mTLS is enabled in a Kubernetes cluster |
 
-## 可用命令
+## Available Commands
 
 ```txt
-expiry      检查根证书是否过期
-export      从 Kubernetes 中导出根证书、签发密钥到本地文件
+expiry      Checks the expiry of the root certificate
+export      Export the root CA, issuer cert and key from Kubernetes to local files
 ```
 
-## 命令参考
+## Command Reference
 
-您可以通过以下链接了解有关每个 子命令的详细信息。
+You can learn more about each sub command from the links below.
 
  - [`dapr mtls expiry`]({{< ref dapr-mtls-expiry.md >}})
  - [`dapr mtls export`]({{< ref dapr-mtls-export.md >}})
 
-## 示例
+## Examples
 
-### 检查是否启用了 mTLS
+### Check if mTLS is enabled
 ```bash
 dapr mtls -k
 ```
