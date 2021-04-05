@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Pub/Sub 代理"
-linkTitle: "Pub/Sub 代理"
-description: "关于为Dapr Pub/Sub设置不同的消息代理的指南"
+title: "Pub/Sub brokers"
+linkTitle: "Pub/sub brokers"
+description: "Guidance on setting up different message brokers for Dapr Pub/Sub"
 weight: 2000
 ---
 
