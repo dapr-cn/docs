@@ -5,9 +5,9 @@ linkTitle: "Twitter"
 description: "Detailed documentation on the Twitter binding component"
 ---
 
-## Component format
+## 配置
 
-To setup Twitter binding create a component of type `bindings.twitter`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Twitter binding create a component of type `bindings.twitter`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,23 +30,23 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field          | Required | Binding support | Details                     | Example            |
-| -------------- |:--------:| --------------- | --------------------------- | ------------------ |
-| consumerKey    |    Y     | Input/Output    | Twitter API consumer key    | `"conusmerkey"`    |
-| consumerSecret |    Y     | Input/Output    | Twitter API consumer secret | `"conusmersecret"` |
-| accessToken    |    Y     | Input/Output    | Twitter API access token    | `"accesstoken"`    |
-| accessSecret   |    Y     | Input/Output    | Twitter API access secret   | `"accesssecret"`   |
+| 字段             | 必填 | 绑定支持         | 详情                          | 示例                 |
+| -------------- |:--:| ------------ | --------------------------- | ------------------ |
+| consumerKey    | 是  | Input/Output | Twitter API consumer key    | `"conusmerkey"`    |
+| consumerSecret | 是  | Input/Output | Twitter API consumer secret | `"conusmersecret"` |
+| accessToken    | 是  | Input/Output | Twitter API access token    | `"accesstoken"`    |
+| accessSecret   | 是  | Input/Output | Twitter API access secret   | `"accesssecret"`   |
 
-## Binding support
+## 绑定支持
 
-This component supports both **input and output** binding interfaces.
+此组件支持 **输入和输出** 绑定接口。
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `get`
 
@@ -93,10 +93,10 @@ The metadata parameters are:
 
 You can see the example of the JSON data that Twitter binding returns [here](https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets)
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
