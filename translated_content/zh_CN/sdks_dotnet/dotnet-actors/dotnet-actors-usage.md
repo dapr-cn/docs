@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Dapr actor .NET usage guide"
 linkTitle: "Authoriung actors"
 weight: 200000
@@ -75,7 +75,7 @@ When using this pattern, take care to avoid creating many instances of **transie
 
 Actors can implement `IDisposable` or `IAsyncDisposable`. It is recommended that you rely on dependency injection for resource management rather than implementing dispose functionality in application code. Dispose support is provided for the rare case where it is truly necessary.
 
-### Logging
+### 日志
 
 Inside of an actor class you have access to an instance of `ILogger` through a property on the base `Actor` class. This instance is connected to the ASP.NET Core logging system, and should be used for all logging inside an actor. Read more about logging [here](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line). You can configure a variety of different logging formats and output sinks.
 
@@ -93,11 +93,11 @@ When logging, avoid using format strings like: `$"Getting state at {DateTime.Utc
 
 Logging should use the [named placeholder syntax](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-message-template) which is more performant and offers better integration with logging systems.
 
-### Using an explicit actor type name
+### 使用显式的actor类型名称
 
 By default, the *type* of the actor as seen by clients is derived from the name of the actor implementation class. The default name will be the class name name (without namespace).
 
-If desired, you can specify an explicit type name by attaching an `ActorAttribute` attribute to the actor implementation class.
+如果需要，你可以通过向actor实现类附加一个 `ActorAttribute` 特性来指定一个显式的类型名称。
 
 ```csharp
 [Actor(TypeName = "MyCustomActorTypeName")]
