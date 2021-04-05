@@ -1,33 +1,33 @@
 ---
 type: docs
-title: "mtls expiry CLI 命令参考"
+title: "mtls expiry CLI command reference"
 linkTitle: "mtls expiry"
-description: "有关 mtls expiry CLI 命令的详细信息"
+description: "Detailed information on the mtls expiry CLI command"
 weight: 2000
 ---
 
-## 说明
+## Description
 
-检查根证书的到期时间
+Checks the expiry of the root certificate
 
-## 支持的平台
+## Supported platforms
 
 - [Kubernetes]({{< ref kubernetes >}})
 
-## 用法
+## Usage
 ```bash
 dapr mtls expiry [flags]
 ```
 
-## 参数
+## Flags
 
-| 名称             | 环境变量 | 默认值 | 说明   |
-| -------------- | ---- | --- | ---- |
-| `--help`, `-h` |      |     | 帮助信息 |
+| Name           | Environment Variable | Default | Description     |
+| -------------- | -------------------- | ------- | --------------- |
+| `--help`, `-h` |                      |         | help for expiry |
 
-## 示例
+## Examples
 
-### 检查 Kubernetes 证书的过期时间
+### Check expiry of Kubernetes certs
 ```bash
 dapr mtls expiry
 ```
