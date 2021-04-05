@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "init CLI 命令参考"
 linkTitle: "init"
 description: "有关 init CLI 命令的详细信息"
