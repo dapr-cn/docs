@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Apply access control list configuration for service invocation"
 linkTitle: "Service Invocation access control"
 weight: 4000
