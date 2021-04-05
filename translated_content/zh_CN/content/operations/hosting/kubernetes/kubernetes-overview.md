@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Kubernetes上的 Dapr 概述"
 linkTitle: "概述"
 weight: 10000
