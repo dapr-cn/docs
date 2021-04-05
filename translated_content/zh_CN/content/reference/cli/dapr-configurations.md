@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "configurations CLI 命令参考"
 linkTitle: "configurations"
 description: "有关 configurations CLI 命令的详细信息"
