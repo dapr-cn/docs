@@ -1,19 +1,19 @@
 ---
 type: docs
-title: "Azure Key Vault secret store"
+title: "Azure Key Vault 密钥仓库"
 linkTitle: "Azure Key Vault"
-description: Detailed information on the Azure Key Vault secret store component
+description: 详细介绍了关于 Azure Key Vault密钥仓库组件的信息
 ---
 
 {{% alert title="Note" color="primary" %}}
-Azure Managed Identity can be used for Azure Key Vault access on Kubernetes. Instructions [here]({{< ref azure-keyvault-managed-identity.md >}}).
+Azure Managed Identity 可用于 Kubernetes 上的 Azure Key Vault 访问， 在 [这里]({{< ref azure-keyvault-managed-identity.md >}})查看说明。 在 [这里]({{< ref azure-keyvault-managed-identity.md >}})查看说明。
 {{% /alert %}}
 
-## Component format
+## 配置
 
-To setup Azure Key Vault secret store create a component of type `secretstores.azure.keyvault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置Azure Key Vault密钥仓库，请创建一个类型为`secretstores.azure.keyvault`的组件。 请参阅 [本指南]({{< ref "secret-stores-overview.md#apply-the-configuration" >}})，了解如何创建和应用 secretstore 配置。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
-See also [configure the component](#configure-the-component) guide in this page.
+也请参见本页面中的[配置组件](#configure-the-component)指南。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,28 +35,28 @@ spec:
     value : "[pfx_certificate_file_fully_qualified_local_path]"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将密钥明文存储。 建议将密钥存储在本地，如 [Kubernetes密钥仓库]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field              | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                         |
-| ------------------ |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| vaultName          |    Y     | The name of the Azure Key Vault                                                                                                                                                                                                                                                                                                                                                                                                      | `"mykeyvault"`                                                                  |
-| spnTenantId        |    Y     | Service Principal Tenant Id                                                                                                                                                                                                                                                                                                                                                                                                          | `"spnTenantId"`                                                                 |
-| spnClientId        |    Y     | Service Principal App Id                                                                                                                                                                                                                                                                                                                                                                                                             | `"spnAppId"`                                                                    |
-| spnCertificateFile |    Y     | PFX certificate file path. <br></br> For Windows the `[pfx_certificate_file_fully_qualified_local_path]` value must use escaped backslashes, i.e. double backslashes. For example `"C:\\folder1\\folder2\\certfile.pfx"`. <br></br> For Linux you can use single slashes. For example `"/folder1/folder2/certfile.pfx"`.  <br></br> See [configure the component](#configure-the-component) for more details | `"C:\\folder1\\folder2\\certfile.pfx"`, `"/folder1/folder2/certfile.pfx"` |
+| 字段                 | 必填 | 详情                                                                                                                                                                                                                                                                                                                                                                                | 示例                                                                              |
+| ------------------ |:--:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| vaultName          | 是  | Azure Key Vault名称                                                                                                                                                                                                                                                                                                                                                                 | `"mykeyvault"`                                                                  |
+| spnTenantId        | 是  | Service Principal Tenant Id                                                                                                                                                                                                                                                                                                                                                       | `"spnTenantId"`                                                                 |
+| spnClientId        | 是  | Service Principal App Id                                                                                                                                                                                                                                                                                                                                                          | `"spnAppId"`                                                                    |
+| spnCertificateFile | 是  | PFX证书文件路径， PFX证书文件路径， <br></br> 对于Windows， `[pfx_certificate_file_fully_qualified_local_path]` 值必须使用转义的反斜杠，即双反斜杠。 例如 `"C:\\folder1\\folder2\\certfile.pfx"` <br></br> 对于Linux，你可以使用单斜杠。 <br></br> 对于Linux，你可以使用单斜杠。 例如 `"/folder1/folder2/certfile.pfx"`  例如 `"/folder1/folder2/certfile.pfx"`  <br></br> 请参阅[配置组件](#configure-the-component)了解更多详情 | `"C:\\folder1\\folder2\\certfile.pfx"`, `"/folder1/folder2/certfile.pfx"` |
 
-## Setup Key Vault and service principal
+## 设置Key Vault和服务主体
 
-### Prerequisites
+### 前期准备
 
 - [Azure Subscription](https://azure.microsoft.com/en-us/free/)
 - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 
-### Steps
+### 步骤
 
-1. Login to Azure and set the default subscription
+1. 登录到 Azure 并设置默认订阅
 
     ```bash
     # Log in Azure
@@ -66,15 +66,15 @@ The above example uses secrets as plain strings. It is recommended to use a loca
     az account set -s [your subscription id]
     ```
 
-2. Create an Azure Key Vault in a region
+2. 在一个区域中创建 Azure Key Vault
 
      ```bash
      az keyvault create --location [region] --name [your_keyvault] --resource-group [your resource group]
      ```
 
-3. Create a service principal
+3. 创建一个服务主体
 
-    Create a service principal with a new certificate and store the 1-year certificate inside your keyvault's certificate vault. You can skip this step if you want to use an existing service principal for keyvault instead of creating new one
+    使用新的证书创建一个服务主体，并将为期1年的证书存储在keyvault的证书库中。 如果你想为keyvault使用现有的服务主体，而不是创建新的服务主体，你可以跳过这一步。
 
     ```bash
     az ad sp create-for-rbac --name [your_service_principal_name] --create-cert --cert [certificate_name] --keyvault [your_keyvault] --skip-assignment --years 1
@@ -88,9 +88,9 @@ The above example uses secrets as plain strings. It is recommended to use a loca
     }
     ```
 
-    **Save the both the appId and tenant from the output which will be used in the next step**
+    **从输出中保存appId和租户，这将在下一步中使用**
 
-4. Get the Object Id for [your_service_principal_name]
+4. 获取 [your_service_principal_name] 的对象ID
 
     ```bash
     az ad sp show --id [service_principal_app_id]
@@ -103,36 +103,36 @@ The above example uses secrets as plain strings. It is recommended to use a loca
     }
     ```
 
-5. Grant the service principal the GET permission to your Azure Key Vault
+5. 授予服务主体对你的 Azure Key Vault 的 GET 权限
 
     ```bash
     az keyvault set-policy --name [your_keyvault] --object-id [your_service_principal_object_id] --secret-permissions get
     ```
 
-    Now that your service principal has access to your keyvault you are ready to configure the secret store component to use secrets stored in your keyvault to access     other components securely.
+    现在，你的服务主体已经可以访问你的keyvault，你可以配置密钥仓库组件，以使用存储在keyvault中的密钥来安全地访问其他组件。
 
-6. Download the certificate in PFX format from your Azure Key Vault either using the Azure portal or the Azure CLI:
+6. 使用 Azure 门户或 Azure CLI 从 Azure Key Vault 下载 PFX 格式的证书：
 
-- **Using the Azure portal:**
+- **使用 Azure 门户：**
 
-  Go to your key vault on the Azure portal and navigate to the *Certificates* tab under *Settings*. Find the certificate that was created during the service principal creation, named [certificate_name] and click on it.
+  转到 Azure 门户上的密钥库，然后导航到 *Certificates*标签下的 *Settings*。 找到服务主体创建时创建的证书，命名为[certificate_name]，点击它。
 
-  Click *Download in PFX/PEM format* to download the certificate.
+  点击*以PFX/PEM格式下载*下载证书。
 
-- **Using the Azure CLI:**
+- **使用 Azure CLI:**
 
    ```bash
    az keyvault secret download --vault-name [your_keyvault] --name [certificate_name] --encoding base64 --file [certificate_name].pfx
    ```
 
-## Configure the component
+## 配置组件
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-1. Copy downloaded PFX cert from your Azure Keyvault into your components directory or a secure location on your local disk
+1. 将下载的 PFX 证书从 Azure Keyvault 复制到你的组件目录或本地磁盘上的安全位置。
 
-2. Create a file called `azurekeyvault.yaml` in the components directory
+2. 在组件目录下创建一个名为`azurekeyvault.yaml`的文件
 
     ```yaml
     apiVersion: dapr.io/v1alpha1
@@ -154,24 +154,24 @@ The above example uses secrets as plain strings. It is recommended to use a loca
         value : "[pfx_certificate_file_fully_qualified_local_path]"
     ```
 
-Fill in the metadata fields with your Key Vault details from the above setup process.
+在元数据字段中填写上述设置过程中密钥库的详细信息。
 {{% /codetab %}}
 
 {{% codetab %}}
-In Kubernetes, you store the certificate for the service principal into the Kubernetes Secret Store and then enable Azure Key Vault secret store with this certificate in Kubernetes secretstore.
+在Kubernetes中，将服务主体的证书存储到Kubernetes Secret Store中，然后用Kubernetes secretstore中的这个证书启用Azure Key Vault密钥仓库。
 
-1. Create a kubernetes secret using the following command:
+1. 使用以下命令创建一个kubernetes密钥:
 
    ```bash
    kubectl create secret generic [your_k8s_spn_secret_name] --from-file=[pfx_certificate_file_fully_qualified_local_path]
    ```
 
-- `[pfx_certificate_file_fully_qualified_local_path]` is the path of PFX cert file you downloaded above
-- `[your_k8s_spn_secret_name]` is secret name in Kubernetes secret store
+- `[pfx_certificate_file_fully_qualified_local_path]`是你在上面下载的PFX证书文件的路径
+- `[your_k8s_spn_secret_name]`是Kubernetes密钥仓库中的密钥名称
 
-2. Create a `azurekeyvault.yaml` component file
+2. 创建一个`azurekeyvault.yaml`组件文件
 
-The component yaml refers to the Kubernetes secretstore using `auth` property and  `secretKeyRef` refers to the certificate stored in Kubernetes secret store.
+组件yaml使用`auth`属性引用Kubernetes secretstore，`secretKeyRef`引用存储在Kubernetes secret store中的证书。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -197,7 +197,7 @@ auth:
     secretStore: kubernetes
 ```
 
-3. Apply `azurekeyvault.yaml` component
+3. 应用`azurekeyvault.yaml`组件
 
 ```bash
 kubectl apply -f azurekeyvault.yaml
@@ -206,11 +206,11 @@ kubectl apply -f azurekeyvault.yaml
 
 {{< /tabs >}}
 
-## References
+## 参考资料
 
 - [Azure CLI Keyvault CLI](https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-create)
-- [Create an Azure service principal with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest)
-- [Secrets building block]({{< ref secrets >}})
-- [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})
-- [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
-- [Secrets API reference]({{< ref secrets_api.md >}})
+- [使用 Azure CLI 创建 Azure 服务主体](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest)
+- [密钥构建块]({{< ref secrets >}})
+- [指南：获取密钥]({{< ref "howto-secrets.md" >}})
+- [指南：在Dapr组件中引用密钥]({{< ref component-secrets.md >}})
+- [密钥 API 参考]({{< ref secrets_api.md >}})
