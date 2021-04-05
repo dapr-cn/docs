@@ -95,7 +95,7 @@ metrics:
 
 #### Middleware（中间件）
 
-中间件配置用于配置一系列可命名的HTTP管道处理器。`Configuration` spec 下的`httpPipeline` 部分包含以下的配置属性：
+中间件配置用于配置一系列可命名的HTTP管道处理器。 `Configuration` spec 下的`httpPipeline` 部分包含以下的配置属性：
 
 ```yml
 httpPipeline:
