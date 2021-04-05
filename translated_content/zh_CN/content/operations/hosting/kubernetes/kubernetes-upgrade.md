@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "更新 Kubernetes 集群中的 dapr"
-linkTitle: "升级 Dapr"
-weight: 50000
-description: "按照这些步骤升级 Kubernetes 上的 Dapr，并确保顺利升级."
+title: "Upgrade Dapr on a Kubernetes cluster"
+linkTitle: "Upgrade Dapr"
+weight: 30000
+description: "Follow these steps to upgrade Dapr on Kubernetes and ensure a smooth upgrade."
 ---
 
-## 前期准备
+## Prerequisites
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- [Helm 3](https://github.com/helm/helm/releases) (如果使用 Helm)
+- [Helm 3](https://github.com/helm/helm/releases) (if using Helm)
 
-## 将现有集群升级为1.0.1
-有两种方法可以使用Dapr CLI或Helm升级Kubernetes集群上的Dapr control plane。
+## Upgrade existing cluster to 1.0.1
+There are two ways to upgrade the Dapr control plane on a Kubernetes cluster using either the Dapr CLI or Helm.
 
 ### Dapr CLI
 
-下面的例子显示了如何升级到1.0.1版本：
+The example below shows how to upgrade to version 1.0.1:
 
   ```bash
   dapr upgrade -k --runtime-version=1.0.1
   ```
 
-您可以使用Dapr CLI提供所有可用的Helm chart配置。 请参阅 [这里](https://github.com/dapr/cli#supplying-helm-values) 以获取更多信息。
+You can provide all the available Helm chart configurations using the Dapr CLI. See [here](https://github.com/dapr/cli#supplying-helm-values) for more info.
 
 ### Helm
 
-从1.0.0版本开始，使用Helm升级Dapr不再是一个破坏性的动作，因为现有的证书值将自动被重新使用。
+From version 1.0.0 onwards, upgrading Dapr using Helm is no longer a disruptive action since existing certificate values will automatically be re-used.
 
-1. 将Dapr从1.0.0（或更新）升级到任何[新版本] > v1.0.0。
+1. Upgrade Dapr from 1.0.0 (or newer) to any [NEW VERSION] > v1.0.0:
 
    ```bash
    helm repo update
@@ -37,9 +37,9 @@ description: "按照这些步骤升级 Kubernetes 上的 Dapr，并确保顺利�
    ```bash
    helm upgrade dapr dapr/dapr --version [NEW VERSION] --namespace dapr-system --wait
    ```
-   *如果你使用的是values文件，记得在运行升级命令时添加`--values`选项。*
+   *If you're using a values file, remember to add the `--values` option when running the upgrade command.*
 
-2. 确保所有pod正在运行：
+2. Ensure all pods are running:
 
    ```bash
    kubectl get pods -n dapr-system -w
@@ -52,15 +52,15 @@ description: "按照这些步骤升级 Kubernetes 上的 Dapr，并确保顺利�
    dapr-sidecar-injector-68f868668f-6xnbt   1/1     Running   0          41s
    ```
 
-3. 重新启动您的应用程序 deployments 以更新 Dapr 运行时。
+3. Restart your application deployments to update the Dapr runtime:
 
    ```bash
    kubectl rollout restart deploy/<DEPLOYMENT-NAME>
    ```
 
-4. 全部完成！
+4. All done!
 
-## 下一步
+## Next steps
 
-- [Kubernetes上的 Dapr]({{< ref kubernetes-overview.md >}})
-- [Dapr生产环境指南]({{< ref kubernetes-production.md >}})
+- [Dapr on Kubernetes]({{< ref kubernetes-overview.md >}})
+- [Dapr production guidelines]({{< ref kubernetes-production.md >}})
