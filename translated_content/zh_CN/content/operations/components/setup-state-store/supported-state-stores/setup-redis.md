@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Redis"
 linkTitle: "Redis"
 description: Detailed information on the Redis state store component
