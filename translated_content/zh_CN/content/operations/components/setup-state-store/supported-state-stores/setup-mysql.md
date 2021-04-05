@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "MySQL"
 linkTitle: "MySQL"
 description: MySQL 状态存储组件的详细信息
