@@ -24,6 +24,10 @@ spec:
   - name: namespace
     value: <REPLACE-WITH-NAMESPACE> # Required. The aerospike namespace.
   - name: set
+    value: <REPLACE-WITH-SET> # Optional A comma delimited string of hosts. Example: "aerospike:3000,aerospike2:3000"
+  - name: namespace
+    value: <REPLACE-WITH-NAMESPACE> # Required. The aerospike namespace.
+  - name: set
     value: <REPLACE-WITH-SET> # Optional
 ```
 
