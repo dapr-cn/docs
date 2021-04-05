@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: Dapr API 参考
 linkTitle: "Dapr API"
 weight: 100
