@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Setup & configure mutual TLS"
 linkTitle: "mTLS"
 weight: 1000
