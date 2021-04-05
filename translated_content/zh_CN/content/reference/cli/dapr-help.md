@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "help CLI 命令参考"
 linkTitle: "help"
 description: "有关 help CLI 命令的详细信息"
