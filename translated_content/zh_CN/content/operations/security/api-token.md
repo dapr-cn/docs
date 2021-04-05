@@ -6,7 +6,7 @@ weight: 3000
 description: "Require every incoming API request for Dapr to include an authentication token before allowing that request to pass through"
 ---
 
-By default, Dapr relies on the network boundary to limit access to its public API. If you plan on exposing the Dapr API outside of that boundary, or if your deployment demands an additional level of security, consider enabling the token authentication for Dapr APIs. This will cause Dapr to require every incoming gRPC and HTTP request for its APIs for to include authentication token, before allowing that request to pass through. If you plan on exposing the Dapr API outside of that boundary, or if your deployment demands an additional level of security, consider enabling the token authentication for Dapr APIs. This will cause Dapr to require every incoming gRPC and HTTP request for its APIs for to include authentication token, before allowing that request to pass through.
+By default, Dapr relies on the network boundary to limit access to its public API. If you plan on exposing the Dapr API outside of that boundary, or if your deployment demands an additional level of security, consider enabling the token authentication for Dapr APIs. This will cause Dapr to require every incoming gRPC and HTTP request for its APIs for to include authentication token, before allowing that request to pass through. If you plan on exposing the Dapr API outside of that boundary, or if your deployment demands an additional level of security, consider enabling the token authentication for Dapr APIs. This will cause Dapr to require every incoming gRPC and HTTP request for its APIs for to include authentication token, before allowing that request to pass through. If you plan on exposing the Dapr API outside of that boundary, or if your deployment demands an additional level of security, consider enabling the token authentication for Dapr APIs. This will cause Dapr to require every incoming gRPC and HTTP request for its APIs for to include authentication token, before allowing that request to pass through.
 
 ## Create a token
 
@@ -24,7 +24,7 @@ The token authentication configuration is slightly different for either Kubernet
 
 ### Self-hosted
 
-In self-hosting scenario, Dapr looks for the presence of `DAPR_API_TOKEN` environment variable. In self-hosting scenario, Dapr looks for the presence of `DAPR_API_TOKEN` environment variable. If that environment variable is set while `daprd` process launches, Dapr will enforce authentication on its public APIs:
+In self-hosting scenario, Dapr looks for the presence of `DAPR_API_TOKEN` environment variable. In self-hosting scenario, Dapr looks for the presence of `DAPR_API_TOKEN` environment variable. If that environment variable is set while `daprd` process launches, Dapr will enforce authentication on its public APIs: If that environment variable is set while `daprd` process launches, Dapr will enforce authentication on its public APIs:
 
 ```shell
 export DAPR_API_TOKEN=<token>
@@ -34,7 +34,7 @@ To rotate the configured token, simply set the `DAPR_API_TOKEN` environment vari
 
 ### Kubernetes
 
-In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. Start by creating a new secret: In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. To configure Dapr APIs authentication start by creating a new secret:
+In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. Start by creating a new secret: In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. To configure Dapr APIs authentication start by creating a new secret: To configure Dapr APIs authentication start by creating a new secret:
 
 ```shell
 kubectl create secret generic dapr-api-token --from-literal=token=<token> 
@@ -60,7 +60,7 @@ To rotate the configured token in self-hosted, simply set the `DAPR_API_TOKEN` e
 
 ### Kubernetes
 
-To rotate the configured token in Kubernates, update the previously created secret with the new token in each namespace. You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest: You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest:
+To rotate the configured token in Kubernates, update the previously created secret with the new token in each namespace. You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest: You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest: You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest:
 
 ```yaml
 apiVersion: v1
