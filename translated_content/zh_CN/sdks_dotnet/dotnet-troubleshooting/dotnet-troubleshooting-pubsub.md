@@ -1,33 +1,33 @@
 ---
 type: docs
-title: "对使用 .NET SDK 的 发布/订阅 进行故障排除。"
-linkTitle: "发布/订阅的故障排除"
+title: "Troubleshoot Pub/Sub with the .NET SDK"
+linkTitle: "Troubleshoot pub/sub"
 weight: 100000
-description: 对发布订阅进行故障排除
+description: Try out .NET virtual actors with this example
 ---
 
-# 发布/订阅的故障排除
+# Troubleshooting Pub/Sub
 
-发布/订阅 最常见的问题是应用程序中的 发布/订阅 终结点没有被调用。
+The most common problem with pub/sub is that the pub/sub endpoint in your application is not being called.
 
-这个问题有两个层次，有不同的解决方案：
+There are two layers to this problem with different solutions:
 
-- 应用程序没有向 Dapr 注册 发布/订阅 终结点
-- 发布/订阅 终结点在 Dapr 注册，但请求没有到达所需的终结点
+- The application is not registering pub/sub endpoints with Dapr
+- The pub/sub endpoints are registered with Dapr, but the request is not reaching the desired endpoint
 
-## 第 1 步：验证终结点注册
+## Step 1: Verify endpoint registration
 
-1. 像平常一样启动应用程序(`dapr run ...`)。
+1. Start the application as you would normally (`dapr run ...`).
 
-2. 在命令行中使用`curl`（或其他HTTP测试工具）来访问`/dapr/subscribe`端点。
+2. Use `curl` at the command line (or another HTTP testing tool) to access the `/dapr/subscribe` endpoint.
 
-下面是一个例子，假设你的应用程序的监听端口是5000。
+Here's an example command assuming your application's listening port is 5000:
 
 ```sh
 curl http://localhost:5000/dapr/subscribe -v
 ```
 
-对于正确配置的应用，输出应如下所示：
+For a correctly configured application the output should look like the following:
 
 ```txt
 *   Trying ::1...
@@ -48,16 +48,16 @@ curl http://localhost:5000/dapr/subscribe -v
 [{"topic":"deposit","route":"deposit","pubsubName":"pubsub"},{"topic":"withdraw","route":"withdraw","pubsubName":"pubsub"}]* Closing connection 0
 ```
 
-特别注意 HTTP 状态代码和 JSON 输出。
+Pay particular attention to the HTTP status code, and the JSON output.
 
 ```txt
 < HTTP/1.1 200 OK
 ```
 
-200 状态代码表示成功。
+A 200 status code indicates success.
 
 
-最后包含的 JSON blob 是`/dapr/subscribe`的输出，由Dapr运行时处理。 在这种情况下，它使用的是这个repo中的`ControllerSample` - 所以这是一个正确输出的例子。
+The JSON blob that's included near the end is the output of `/dapr/subscribe` that's procesed by the Dapr runtime. In this case it's using the `ControllerSample` in this repo - so this is an example of correct output.
 
 ```json
 [
@@ -68,17 +68,17 @@ curl http://localhost:5000/dapr/subscribe -v
 
 ---
 
-有了这个命令的输出，你就可以诊断问题或进入下一步了。
+With the output of this command in hand, you are ready to diagnose a problem or move on to the next step.
 
-### 选项 0： 响应是200，其中包含一些 发布/订阅 条目。
+### Option 0: The response was a 200 included some pub/sub entries
 
-**如果您在 JSON 输出中有此测试的条目，那么问题就会在其他地方出现，然后转到步骤 2。**
+**If you have entries in the JSON output from this test then the problem lies elsewhere, move on to step 2.**
 
-### 选项 1： 响应不是 200， 或不包含 Json
+### Option 1: The response was not a 200, or didn't contain JSON
 
-如果响应不是200或不包含 JSON ，则 `MapSubscribibeHandler()` 终结点未能实现。
+If the response was not a 200 or did not contain JSON, then the `MapSubscribeHandler()` endpoint was not reached.
 
-请确保您在 `Startup.cs` 中有一些代码，然后重复测试。
+Make sure you have some code like the following in `Startup.cs` and repeat the test.
 
 ```cs
 app.UseRouting();
@@ -92,15 +92,15 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-**如果添加订阅处理程序无法解决问题。 请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
+**If adding the subscribe handler did not resolve the problem, please open an issue on this repo and include the contents of your `Startup.cs` file.**
 
-### 选项 2：响应包含JSON，但它是空的（如 `[]`）
+### Option 2: The response contained JSON but it was empty (like `[]`)
 
-如果JSON输出是一个空数组 (如 `[]`)，那么下面的处理程序将被注册，但没有任何 topic 终结点。
+If the JSON output was an empty array (like `[]`) then the subcribe handler is registered, but no topic endpoints were registered.
 
 ---
 
-如果你正在使用一个控制器来处理 发布/订阅 ，你应该有一个类似的方法：
+If you're using a controller for pub/sub you should have a method like:
 
 ```C#
 [Topic("pubsub", "deposit")]
@@ -108,25 +108,25 @@ app.UseEndpoints(endpoints =>
 public async Task<ActionResult> Deposit(...)
 ```
 
-在这个示例中，需要 `Topic` 和 `HttpPost` 属性，但其他细节可能不同。
+In this example the `Topic` and `HttpPost` attributes are required, but other details might be different.
 
 ---
 
-如果你使用的是 发布/订阅 的路由，你应该有一个终结点，比如：
+If you're using routing for pub/sub you should have an endpoint like:
 
 ```C#
 endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
 ```
 
-在这个例子中，需要调用 `WithTopic(...)` ，但其他细节可能有所不同。
+In this example the call to `WithTopic(...)` is required but other details might be different.
 
 ---
 
-**在纠正这段代码并重新测试后，如果JSON输出仍然是空数组（像 `[]` ），那么请在这个仓库上打开一个问题，并包含 `Startup.cs` 的内容和你的 发布/订阅 终结点。**
+**After correcting this code and re-testing if the JSON output is still the empty array (like `[]`) then please open an issue on this repository and include the contents of `Startup.cs` and your pub/sub endpoint.**
 
-## 第 2 步：验证终结点是否可访问
+## Step 2: Verify endpoint reachability
 
-在这一步中，我们将验证用 发布/订阅 注册的条目是否可以访问。 最后一步应该给你留下一些JSON输出，比如下面：
+In this step we'll verify that the entries registered with pub/sub are reachable. The last step should have left you with some JSON output like the following:
 
 ```json
 [
@@ -135,21 +135,21 @@ endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
 ]
 ```
 
-保留此输出，因为我们将使用 `route` 信息来测试应用程序。
+Keep this output, as we'll use the `route` information to test the application.
 
-1. 像平常一样启动应用程序(dapr run ...)。
+1. Start the application as you would normally (`dapr run ...`).
 
-2. 按照 [这里](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#debug-diagnostics)的描述，调整日志记录的详细程度，以包含 ASP.NET Core 的 `Information` 日志记录。 将 `Microsoft` 键的值设为 `Information`。
+2. Adjust the logging verbosity to include `Information` logging for ASP.NET Core as described [here](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#debug-diagnostics). Set the `Microsoft` key to `Information`.
 
-3. 在命令行使用 `curl` (或其他HTTP测试工具) 来访问一个注册了 发布/订阅 终结点的路由。
+3. Use `curl` at the command line (or another HTTP testing tool) to access one of the routes registered a pub/sub endpoint.
 
-下面是一个例子，假设您的应用程序的监听端口是5000，并且您的 发布/订阅 路由之一是`withdraw`。
+Here's an example command assuming your application's listening port is 5000, and one of your pub/sub routes is `withdraw`:
 
 ```sh
 curl http://localhost:5000/withdraw -H 'Content-Type: application/json' -d '{}' -v
 ```
 
-以下是对示例运行上述命令的输出：
+Here's the output from running the above command against the sample:
 
 ```txt
 *   Trying ::1...
@@ -173,9 +173,9 @@ curl http://localhost:5000/withdraw -H 'Content-Type: application/json' -d '{}' 
 {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|5e9d7eee-4ea66b1e144ce9bb.","errors":{"Id":["The Id field is required."]}}* Closing connection 0
 ```
 
-根据 HTTP 400 和 JSON 有效载荷，该响应表明已到达终结点，但由于验证错误，请求被拒绝。
+Based on the HTTP 400 and JSON payload, this response indicates that the endpoint was reached but the request was rejected due to a validation error.
 
-你也应该看看运行应用程序的控制台输出。 这是为清晰起见，去掉Dapr日志头的输出示例。
+You should also look at the console output of the running application. This is example output with the Dapr logging headers stripped away for clarity.
 
 ```
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
@@ -191,37 +191,35 @@ info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[2]
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
       Executed endpoint 'ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)'
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished in 157.056ms 400 application/problem+json; charset=utf-8  
- 
- 
+      Request finished in 157.056ms 400 application/problem+json; charset=utf-8
 ```
 
-主要关注的日志条目是来自路由的：
+The log entry of primary interest is the one coming from routing:
 
 ```txt
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
       Executing endpoint 'ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)'
 ```
 
-此条目显示：
+This entry shows that:
 
-- 路由已执行
-- 路由选择 `ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)` 终结点
+- Routing executed
+- Routing chose the `ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)'` endpoint
 
-现在你已经掌握了解决这个问题所需的信息。
+Now you have the information needed to troubleshoot this step.
 
-### 选项0：路由选择正确的终结点
+### Option 0: Routing chose the correct endpoint
 
-如果路由日志条目中的信息是正确的，那么这意味着您的应用程序的行为是正确的。
+If the information in the routing log entry is correct, then it means that in isolation your application is behaving correctly.
 
-示例:
+Example:
 
 ```txt
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
       Executing endpoint 'ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)'
 ```
 
-您可能想尝试使用 Dapr cli 执行直接发送 发布/订阅 消息并比较日志输出。
+You might want to try using the Dapr cli to execute send a pub/sub message directly and compare the logging output.
 
 Example command:
 
@@ -229,16 +227,16 @@ Example command:
 dapr publish --pubsub pubsub --topic withdraw --data '{}'
 ```
 
-**如果这样做之后，你仍然不理解这个问题，请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
+**If after doing this you still don't understand the problem please open an issue on this repo and include the contents of your `Startup.cs`.**
 
-### 选项 1：路由没有执行
+### Option 1: Routing did not execute
 
-如果您在日志中没有看到 `Microsoft.AspNetCore.Routing.EndpointMiddleware` 的条目，那么这意味着该请求是由路由以外的其他东西处理的。 在这种情况下，问题通常是中间件错乱。 请求中的其他日志可能会给你一个线索，让你知道发生了什么。
+If you don't see an entry for `Microsoft.AspNetCore.Routing.EndpointMiddleware` in the logs, then it means that the request was handled by something other than routing. Usually the problem in this case is a misbehaving middleware. Other logs from the request might give you a clue to what's happening.
 
-**如果您需要帮助理解这个问题，请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
+**If you need help understanding the problem please open an issue on this repo and include the contents of your `Startup.cs`.**
 
-### 选项 2：路由选择了错误的终结点
+### Option 2: Routing chose the wrong endpoint
 
-如果您在日志中看到 `Microsoft.AspNetCore.Routing.EndpointMiddleware` 的条目，但它包含了错误的端点，那么这意味着您有路由冲突。 所选择的终结点将出现在日志中，以便让你了解造成冲突的原因。
+If you see an entry for `Microsoft.AspNetCore.Routing.EndpointMiddleware` in the logs, but it contains the wrong endpoint then it means that you've got a routing conflict. The endpoint that was chosen will appear in the logs so that should give you an idea of what's causing the conflict.
 
-**如果您需要帮助理解这个问题，请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
+**If you need help understanding the problem please open an issue on this repo and include the contents of your `Startup.cs`.**
