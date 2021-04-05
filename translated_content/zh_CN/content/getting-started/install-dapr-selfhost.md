@@ -110,4 +110,6 @@ explorer "%USERPROFILE%\.dapr\"
 
 {{< /tabs >}}
 
-
+{{% alert color="primary" %}}
+[Next step: Use the Dapr API >>]({{< ref get-started-api.md >}})
+{{% /alert %}}
