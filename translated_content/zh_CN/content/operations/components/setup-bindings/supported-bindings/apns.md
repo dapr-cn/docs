@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Apple Push Notification Service binding spec"
+title: "Apple Push Notification Service绑定规范"
 linkTitle: "Apple Push Notification Service"
-description: "Detailed documentation on the Apple Push Notification Service binding component"
+description: "有关 Apple 推送通知服务绑定组件的详细文档"
 ---
 
-## Component format
+## 配置
 
-To setup Apple Push Notifications binding create a component of type `bindings.apns`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置Apple Push Notifications绑定，请创建一个类型为`bindings.apns`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,19 +30,19 @@ spec:
         name: <SECRET>
         key: <SECRET-KEY-NAME>
 ```
-## Spec metadata fields
+## 元数据字段规范
 
-| Field       | Required | Binding support | Details                                                                                                                                                                                        | Example            |
-| ----------- |:--------:| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| development |    Y     | Output          | Tells the binding which APNs service to use. Set to `"true"` to use the development service or `"false"` to use the production service. Default: `"true"`                                      | `"true"`           |
-| key-id      |    Y     | Output          | The identifier for the private key from the Apple Developer Portal                                                                                                                             | `"private-key-id`" |
-| team-id     |    Y     | Output          | The identifier for the organization or author from the Apple Developer Portal                                                                                                                  | `"team-id"`        |
-| private-key |    Y     | Output          | Is a PKCS #8-formatted private key. It is intended that the private key is stored in the secret store and not exposed directly in the configuration. See [here](#private-key) for more details | `"pem file"`       |
+| 字段          | 必填 | 绑定支持 | 详情                                                                         | 示例                 |
+| ----------- |:--:| ---- | -------------------------------------------------------------------------- | ------------------ |
+| development | 是  | 输出   | 告诉绑定使用哪个APNs服务。 设置为 `true` 以用于开发环境， `false` 用于生产环境。 默认: `"true"`           | `“true”`           |
+| key-id      | 是  | 输出   | 来自 Apple 开发者门户的私钥的标识符。                                                     | `"private-key-id`" |
+| team-id     | 是  | 输出   | 来自 Apple 开发者门户的组织或作者的标识符。                                                  | `"team-id"`        |
+| private-key | 是  | 输出   | 是一个PKCS #8格式的私钥。 其目的是将私钥存储在密钥存储中，而不是直接暴露在配置中。 请参阅[这里](#private-key)了解更多详情。 | `"pem file"`       |
 
-### Private key
-The APNS binding needs a cryptographic private key in order to generate authentication tokens for the APNS service. The private key can be generated from the Apple Developer Portal and is provided as a PKCS #8 file with the private key stored in PEM format. The private key should be stored in the Dapr secret store and not stored directly in the binding's configuration file.
+### 私钥
+APNS绑定需要一个加密私钥，以便为APNS服务生成认证令牌。 私钥可以从Apple开发者门户生成，并以PKCS #8文件的形式提供，私钥以PEM格式存储。 私钥应该存储在Dapr的密钥存储中，而不是直接存储在绑定的配置文件中。
 
-A sample configuration file for the APNS binding is shown below:
+APNS绑定的配置文件示例如下所示：
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -63,7 +63,7 @@ spec:
       name: apns-secrets
       key: private-key
 ```
-If using Kubernetes, a sample secret configuration may look like this:
+如果使用Kubernetes，一个示例的密钥配置可能是这样的：
 ```yaml
 apiVersion: v1
 kind: Secret
@@ -77,17 +77,17 @@ stringData:
         -----END PRIVATE KEY-----
 ```
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `create`
 
-## Push notification format
+## 输出绑定支持的操作
 
-The APNS binding is a pass-through wrapper over the Apple Push Notification Service. The APNS binding will send the request directly to the APNS service without any translation. It is therefore important to understand the payload for push notifications expected by the APNS service. The payload format is documented [here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification).
+APNS 绑定是Apple Push Notification Service的通行证封装。 APNS绑定会直接将请求发送到APNS服务，不需要任何翻译。 因此，了解APNS服务所期望的推送通知的有效载荷非常重要。 有效载荷格式在[这里](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)有详细文档。
 
-### Request format
+### 请求格式
 
 ```json
 {
@@ -109,11 +109,11 @@ The APNS binding is a pass-through wrapper over the Apple Push Notification Serv
 }
 ```
 
-The `data` object contains a complete push notification specification as described in the [Apple documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification). The `data` object will be sent directly to the APNs service.
+`data`对象包含完整的推送通知规范，如[Apple文档](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)中所述。 `data`对象将直接发送到APNs服务。
 
-Besides the `device-token` value, the HTTP headers specified in the [Apple documentation](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns) can be sent as metadata fields and will be included in the HTTP request to the APNs service.
+除了`device-token`值之外，[Apple文档](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns)中指定的HTTP头信息可以作为元数据字段发送，并将包含在向APNs服务发出的HTTP请求中。
 
-### Response format
+### 响应格式
 
 ```json
 {
@@ -121,10 +121,10 @@ Besides the `device-token` value, the HTTP headers specified in the [Apple docum
 }
 ```
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
