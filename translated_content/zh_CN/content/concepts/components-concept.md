@@ -14,9 +14,9 @@ Dapr uses a modular design where functionality is delivered as a component. Each
 
  The following are the component types provided by Dapr:
 
-* [Bindings](https://github.com/dapr/components-contrib/tree/master/bindings)
+* [绑定](https://github.com/dapr/components-contrib/tree/master/bindings)
 * [Pub/sub](https://github.com/dapr/components-contrib/tree/master/pubsub)
-* [Middleware](https://github.com/dapr/components-contrib/tree/master/middleware)
+* [中间件](https://github.com/dapr/components-contrib/tree/master/middleware)
 * [Service discovery name resolution](https://github.com/dapr/components-contrib/tree/master/nameresolution)
 * [Secret stores](https://github.com/dapr/components-contrib/tree/master/secretstores)
 * [State](https://github.com/dapr/components-contrib/tree/master/state)
