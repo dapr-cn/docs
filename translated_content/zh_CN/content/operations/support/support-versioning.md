@@ -6,7 +6,7 @@ weight: 2000
 description: "Dapr's versioning policies"
 ---
 
-## Introduction
+## 介绍
 Dapr is designed for future changes in the runtime, APIs and components with versioning schemes. This topic describes the versioning schemes and strategies for APIs, manifests such as components and Github repositories.
 
 ## Versioning
@@ -24,7 +24,7 @@ Dapr has the following versioning schemes:
 - Releases (GitHub repositories including dapr, CLI, SDKs and Helm Chart) with `MAJOR.MINOR.PATCH`
 - Documentation and Quickstarts repositories are versioned with the Dapr runtime repository versioning.
 - Dapr `Components` with `MAJOR` in components-contrib GitHub repositories.
-- Dapr `Manifests` with `MAJOR.MINOR`. These include subscriptions and configurations.
+- Dapr `Manifests` with `MAJOR.MINOR`. These include subscriptions and configurations. These include subscriptions and configurations. These include subscriptions and configurations.
 
 Note that the Dapr APIs,  binaries releases (runtime, CLI, SDKs) and components are all independent from one another.
 
@@ -49,14 +49,14 @@ SDKs, CLIs and Dashboard are versioning follows a `MAJOR.MINOR.PATCH` format. A 
 
 Samples and examples in SDKs version with that repo.
 
-## Components
+## 组件
 Components are implemented in the components-contrib repository and follow a `MAJOR` versioning scheme. The version for components adheres to major versions (vX), as patches and non-breaking changes are added to the latest major version. The version is incremented when there’s a non-backwards compatible change in a component interface, for example, changing an existing method in the State Store interface.
 
 The [components-contrib](https://github.com/dapr/components-contrib/) repo release is a flat version across all components inside.  That is, a version for the components-contrib repo release is made up of all the schemas for the components inside it. A new version of Dapr does not mean there is a new release of components-contrib if there are no component changes.
 
 Note: Components have a production usage lifecycle status: Alpha, Beta and GA (stable). These statuses are not related to their versioning. The tables of supported components shows both their versions and their status.
-* List of [state store components]({{< ref supported-state-stores.md >}})
-* List of [pub/sub components]({{< ref supported-pubsub.md >}})
+* [状态存储组件]({{< ref supported-state-stores.md >}}) 列表
+* 可用发布/订阅实现的完整列表 [在这]({{< ref supported-pubsub >}})。
 * List of [secret store components]({{< ref supported-secret-stores.md >}})
 * List of [binding components]({{< ref supported-bindings.md >}})
 
@@ -66,7 +66,7 @@ For more information on component versioning  read [Version 2 and beyond of a co
 
 Versioning for component YAMLs comes in two forms:
 - Versioning for the component manifest. The `apiVersion`
-- Version for the component implementation. The `.spec.version`
+- Version for the component implementation. Version for the component implementation. The `.spec.version`
 
 A component manifest includes the schema for an implementation in the `.spec.metadata` field, with the `.type` field denoting the implementation
 
@@ -100,5 +100,5 @@ Quickstarts in the [Quickstarts repo](https://github.com/dapr/quickstarts) are v
 
 Samples in the [Samples repo](https://github.com/dapr/samples) are each versioned on a case by case basis depending on the sample maintainer. Samples that become very out of date with the runtime releases (many versions behind) or have not been maintained for more than 1 year will be removed.
 
-## Related links
+## 相关链接
 * Read the [Supported releases]({{< ref support-release-policy.md >}})
