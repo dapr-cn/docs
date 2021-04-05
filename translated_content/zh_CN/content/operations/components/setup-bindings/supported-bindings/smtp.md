@@ -7,7 +7,7 @@ description: "Detailed documentation on the SMTP binding component"
 
 ## Component format
 
-To setup SMTP binding create a component of type `bindings.smtp`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup SMTP binding create a component of type `bindings.smtp`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -43,25 +43,25 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The example configuration shown above, contain a username and password as plain-text strings. The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [here]({{< ref component-secrets.md >}}})。
+The example configuration shown above, contain a username and password as plain-text strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| 字段            | Required | Binding support | Details                                                                                                             | Example             |
-| ------------- |:--------:| --------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| host          |    Y     | Output          | The host where your SMTP server runs                                                                                | `"smtphost"`        |
-| port          |    Y     | Output          | The port your SMTP server listens on                                                                                | `"9999"`            |
-| user          |    Y     | Output          | The user to authenticate against the SMTP server                                                                    | `"user"`            |
-| password      |    Y     | Output          | The password of the user                                                                                            | `"password"`        |
-| skipTLSVerify |    N     | Output          | If set to true, the SMPT server's TLS certificate will not be verified. Defaults to `"false"` Defaults to `"false"` | `"true"`, `"false"` |
-| emailFrom     |    N     | Output          | If set, this specifies the email address of the sender. See [also](#example-request) See [also](#example-request)   | `"me@example.com"`  |
-| emailTo       |    N     | Output          | If set, this specifies the email address of the receiver. See [also](#example-request) See [also](#example-request) | `"me@example.com"`  |
-| emailCc       |    N     | Output          | If set, this specifies the email address to CC in. See [also](#example-request) See [also](#example-request)        | `"me@example.com"`  |
-| emailBcc      |    N     | Output          | If set, this specifies email address to BCC in. See [also](#example-request) See [also](#example-request)           | `"me@example.com"`  |
-| subject       |    N     | Output          | If set, this specifies the subject of the email message. See [also](#example-request) See [also](#example-request)  | `"subject of mail"` |
+| Field         | Required | Binding support | Details                                                                                       | Example             |
+| ------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------- | ------------------- |
+| host          |    Y     | Output          | The host where your SMTP server runs                                                          | `"smtphost"`        |
+| port          |    Y     | Output          | The port your SMTP server listens on                                                          | `"9999"`            |
+| user          |    Y     | Output          | The user to authenticate against the SMTP server                                              | `"user"`            |
+| password      |    Y     | Output          | The password of the user                                                                      | `"password"`        |
+| skipTLSVerify |    N     | Output          | If set to true, the SMPT server's TLS certificate will not be verified. Defaults to `"false"` | `"true"`, `"false"` |
+| emailFrom     |    N     | Output          | If set, this specifies the email address of the sender. See [also](#example-request)          | `"me@example.com"`  |
+| emailTo       |    N     | Output          | If set, this specifies the email address of the receiver. See [also](#example-request)        | `"me@example.com"`  |
+| emailCc       |    N     | Output          | If set, this specifies the email address to CC in. See [also](#example-request)               | `"me@example.com"`  |
+| emailBcc      |    N     | Output          | If set, this specifies email address to BCC in. See [also](#example-request)                  | `"me@example.com"`  |
+| subject       |    N     | Output          | If set, this specifies the subject of the email message. See [also](#example-request)         | `"subject of mail"` |
 
-## 相关链接
+## Binding support
 
 This component supports **output binding** with the following operations:
 
@@ -77,7 +77,7 @@ You can specify any of the following optional metadata properties with each requ
 - `emailBCC`
 - `subject`
 
-When sending an email, the metadata in the configuration and in the request is combined. When sending an email, the metadata in the configuration and in the request is combined. The combined set of metadata must contain at least the `emailFrom`, `emailTo` and `subject` fields.
+When sending an email, the metadata in the configuration and in the request is combined. The combined set of metadata must contain at least the `emailFrom`, `emailTo` and `subject` fields.
 
 The `emailTo`, `emailCC` and `emailBCC` fields can contain multiple email addresses separated by a semicolon.
 
