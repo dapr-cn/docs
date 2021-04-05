@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "概述"
-linkTitle: "概述"
-description: "Dapr密钥存储的概述"
+title: "Overview"
+linkTitle: "Overview"
+description: "General overview on set up of secret stores for Dapr"
 weight: 10000
 ---
 
-Dapr 与密钥存储集成，为应用程序和其他组件提供安全存储和访问密钥和密码等机密。 每个密钥存储组件都有一个名称，这个名称用于访问密钥。
+Dapr integrates with secret stores to provide apps and other components with secure store and access to secrets such as access keys and passwords. Each secret store component has a name and this name is used when accessing a secret.
 
-与其他构建块组件一样，密钥存储组件是可扩展的，可以在[components-contrib 仓库](https://github.com/dapr/components-contrib)中找到。
+As with other building block components, secret store components are extensible and can be found in the [components-contrib repo](https://github.com/dapr/components-contrib).
 
-Dapr中的密钥存储使用`Component`文件描述，其字段如下:
+A secret store in Dapr is described using a `Component` file with the following fields:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -29,9 +29,9 @@ spec:
 ...
 ```
 
-密钥存储的类型由`type`字段决定，连接地址和其他元数据等放在`.metadata`部分。
+The type of secret store is determined by the `type` field, and things like connection strings and other metadata are put in the `.metadata` section.
 
-不同的 [支持的密钥存储]({{< ref supported-secret-stores >}}) 将有不同的特定字段需要配置。 例如，当配置一个使用 AWS Secrets Manager秘密存储时，文件看起来就像这样：
+Different [supported secret stores]({{< ref supported-secret-stores >}}) will have different specific fields that would need to be configured. For example, when configuring a secret store which uses AWS Secrets Manager the file would look like this:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -53,19 +53,19 @@ spec:
     value: "[aws_session_token]"
 ```
 
-## 应用配置
+## Apply the configuration
 
-一旦您创建了组件的 YAML 文件，按照以下说明来根据您的主机环境应用它：
+Once you have created the component's YAML file, follow these instructions to apply it based on your hosting environment:
 
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-要在本地运行，创建一个包含YAML文件的`components`目录，并提供`dapr run`命令的路径，标志为`--components-path`。
+To run locally, create a `components` dir containing the YAML file and provide the path to the `dapr run` command with the flag `--components-path`.
 {{% /codetab %}}
 
 {{% codetab %}}
-若要在 Kubernetes 中部署，假定您的组件文件名为 `secret-store.yaml`，运行：
+To deploy in Kubernetes, assuming your component file is named `secret-store.yaml`, run:
 
 ```bash
 kubectl apply -f secret-store.yaml
@@ -75,7 +75,7 @@ kubectl apply -f secret-store.yaml
 {{< /tabs >}}
 
 
-## 相关链接
+## Related links
 
-- [支持的密钥存储组件]({{< ref supported-secret-stores >}})
-- [密钥构建块]({{< ref secrets >}})
+- [Supported secret store components]({{< ref supported-secret-stores >}})
+- [Secrets building block]({{< ref secrets >}})
