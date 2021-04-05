@@ -11,7 +11,7 @@ Invoke a method on a given Dapr application.
 
 ## Supported platforms
 
-- [Self-Hosted]({{< ref self-hosted >}})
+- [自托管]({{< ref self-hosted >}})
 
 ## Usage
 ```bash
