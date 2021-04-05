@@ -11,7 +11,7 @@ Run Dapr and (optionally) your application side by side.
 
 ## Supported platforms
 
-- [Self-Hosted]({{< ref self-hosted >}})
+- [自托管]({{< ref self-hosted >}})
 
 ## Usage
 
