@@ -68,10 +68,12 @@ COPY python .
 RUN pip install requests
 ENTRYPOINT ["dapr"]
 CMD ["run", "--app-id", "nodeapp", "--app-port", "3000", "node", "app.js"]
- 
+RUN pip install requests
+ENTRYPOINT ["dapr"]
+CMD ["run", "--app-id", "nodeapp", "--app-port", "3000", "node", "app.js"]
 ```
 
-请记住，如果Dapr需要与其他组件通信，即： Redis，这些也需要让它访问。
+请记住，如果Dapr需要与其他组件通信，即： Redis，这些也需要让它访问。 Redis, these also need to be made accessible to it.
 
 ## 在 Docker 网络运行
 如果您有多个Dapr实例运行在Docker容器中，并希望它们能够 互相通信，即服务调用，那么你就需要创建一个共享的Docker网络。 并确保那些Dapr容器与之相连。
@@ -127,7 +129,15 @@ services:
     ports:
       - "50006:50006"
     networks:
-      - hello-dapr  
+      - hello-dapr Redis)
+
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+    networks:
+      - hello-dapr
 ```
 
 > 对于那些在Linux主机上运行Docker守护进程的用户，如果需要的话，还可以使用`network_mode: host`来利用主机联网。
