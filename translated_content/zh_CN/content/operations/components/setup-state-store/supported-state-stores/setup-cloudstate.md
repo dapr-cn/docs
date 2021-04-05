@@ -2,12 +2,12 @@
 type: docs
 title: "Cloudstate"
 linkTitle: "Cloudstate"
-description: 关于Cloudstate状态存储组件的详细信息
+description: Detailed information on the Cloudstate state store component
 ---
 
-## 组件格式
+## Component format
 
-要设置Cloudstate状态存储，请创建一个类型为`state.cloudstate`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+To setup Cloudstate state store create a component of type `state.cloudstate`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -26,47 +26,47 @@ spec:
     value: <REPLACE-WITH-PORT>
 ```
 
-## Spec 元数据字段
+## Spec metadata fields
 
-| 字段         | Required | 详情                                                       | 示例                 |
-| ---------- |:--------:| -------------------------------------------------------- | ------------------ |
-| hosts      |    Y     | 指定Cloudstate API 地址                                      | `"localhost:8013"` |
-| serverPort |    Y     | 指定要在 Dapr 中打开的 Cloudstate 回调端口。 这需要是你的应用程序或 Dapr 没有占用的端口 | `"8080"`           |
+| Field      | Required | Details                                                                                                                                              | Example            |
+| ---------- |:--------:| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| hosts      |    Y     | Specifies the address for the Cloudstate API                                                                                                         | `"localhost:8013"` |
+| serverPort |    Y     | Specifies the port to be opened in Dapr for Cloudstate to callback to. This can be any free port that is not used by either your application or Dapr | `"8080"`           |
 
-> 由于 Cloudstate 在 pod 中作为额外的sidecar运行，你可以通过 `localhost` 以默认端口 `8013` 访问它。
+> Since Cloudstate is running as an additional sidecar in the pod, you can reach it via `localhost` with the default port of `8013`.
 
-## 介绍
+## Introduction
 
-Cloudstate-Dapr 的独特之处在于，它使开发人员能够通过让 Cloudstate 作为 *紧邻* Dapr 的sidecar运行来实现高吞吐量、低延迟的场景，以此将状态保持在计算单元附近以获得最佳性能，同时提供可安全扩缩容的多个实例之间的复制能力。 这是由于Cloudstate在其边车之间形成了一个 Akka 集群，并在内存中复制实体。
+The Cloudstate-Dapr integration is unique in the sense that it enables developers to achieve high-throughput, low latency scenarios by leveraging Cloudstate running as a sidecar *next* to Dapr, keeping the state near the compute unit for optimal performance while providing replication between multiple instances that can be safely scaled up and down. This is due to Cloudstate forming an Akka cluster between its sidecars with replicated in-memory entities.
 
-Dapr 利用 Cloudstate 的 CRDT (无冲突可复制数据类型) 功能与last-write-wins的语义。
+Dapr leverages Cloudstate's CRDT capabilities with last-write-wins semantics.
 
-## 安装 Cloudstate
+## Setup Cloudstate
 
-要在 Kubernetes 集群上安装 Cloudstate，请执行以下命令:
+To install Cloudstate on your Kubernetes cluster, run the following commands:
 
 ```
 kubectl create namespace cloudstate
 kubectl apply -n cloudstate -f https://github.com/cloudstateio/cloudstate/releases/download/v0.5.0/cloudstate-0.5.0.yaml
 ```
 
-这会把 Cloudstate 安装到版本为 `0.5.0` 的 `cloudstate` 命名空间中。
+This installs Cloudstate into the `cloudstate` namespace with version `0.5.0`.
 
-## 应用配置
+## Apply the configuration
 
-### 在Kubernetes中
+### In Kubernetes
 
-要将Cloudstate状态存储应用到Kubernetes，请使用`kubectl` CLI。
+To apply the Cloudstate state store to Kubernetes, use the `kubectl` CLI:
 
 ```
 kubectl apply -f cloudstate.yaml
 ```
 
-## 注入 Cloudstate sidecar到 Dapr
+## Running the Cloudstate sidecar alongside Dapr
 
-下面的例子展示了如何将 Cloudstate 边车手动注入到启用了Dapr的deployment中。
+The next examples shows you how to manually inject a Cloudstate sidecar into a Dapr enabled deployment:
 
-*请注意，`cloudstate-sidecar`容器的`HTTP_PORT`是`host`中Cloudstate组件yaml中要使用的端口。*
+*Notice the `HTTP_PORT` for the `cloudstate-sidecar` container is the port to be used in the Cloudstate component yaml in `host`.*
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -165,7 +165,7 @@ subjects:
   name: default
 ```
 
-## 相关链接
-- [Dapr组件的基本格式]({{< ref component-schema >}})
-- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
-- [状态管理构建块]({{< ref state-management >}})
+## Related links
+- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
+- [State management building block]({{< ref state-management >}})
