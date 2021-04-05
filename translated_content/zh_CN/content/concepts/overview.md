@@ -62,7 +62,7 @@ Dapr 可以托管在多种环境中，包括用于本地开发的自托管，或
 
 ## 开发者语言 SDK 和框架
 
-To make using Dapr more natural for different languages, it also includes [language specific SDKs]({{X64X}}) for C++, Go, Java, JavaScript, Python, Rust .NET and PHP. These SDKs expose the functionality in the Dapr building blocks, such as saving state, publishing an event or creating an actor, through a typed, language API rather than calling the http/gRPC API. This enables you to write a combination of stateless and stateful functions and actors all in the language of their choice. And because these SDKs share the Dapr runtime, you get cross-language actor and functions support.
+To make using Dapr more natural for different languages, it also includes [language specific SDKs]({{X64X}}) for C++, Go, Java, JavaScript, Python, Rust .NET and PHP. 这些 SDK 通过类型化的语言 API 而不是通过调用 API 来使用 Dapr 构建块中的功能，例如，保存状态，发布事件或创建Actor。 这使您能够以自己选择的语言编写无状态和有状态功能和 actors 的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言 actor 和功能支持。
 
 ### SDK
 
