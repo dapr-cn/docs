@@ -125,7 +125,7 @@ kubectl port-forward svc/jaeger-query 16686
 
 在您的浏览器中，转到 `http://localhost:16686` 并会看到Jaeger UI。
 
-![Jaeger](/images/jaeger_ui.png)
+![jaeger](/images/jaeger_ui.png)
 
 ## 参考资料
 - [Jaeger 入门](https://www.jaegertracing.io/docs/1.21/getting-started/#all-in-one)
