@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "logs CLI 命令参考"
 linkTitle: "logs"
 description: "有关 logs CLI 命令的详细信息"
