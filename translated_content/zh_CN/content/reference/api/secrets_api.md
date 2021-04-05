@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "密钥 API 参考"
 linkTitle: "Secrets API"
 description: "Detailed documentation on the secrets API"
