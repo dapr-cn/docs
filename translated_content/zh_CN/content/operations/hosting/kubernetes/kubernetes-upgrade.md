@@ -1,12 +1,12 @@
 ---
-type: docs
+type: 文档
 title: "Upgrade Dapr on a Kubernetes cluster"
 linkTitle: "Upgrade Dapr"
 weight: 30000
 description: "Follow these steps to upgrade Dapr on Kubernetes and ensure a smooth upgrade."
 ---
 
-## Prerequisites
+## 前期准备
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - [Helm 3](https://github.com/helm/helm/releases) (if using Helm)
@@ -80,7 +80,7 @@ From version 1.0.0 onwards, upgrading Dapr using Helm is no longer a disruptive 
 
 4. All done!
 
-## Next steps
+## 下一步
 
 - [Dapr on Kubernetes]({{< ref kubernetes-overview.md >}})
 - [Dapr production guidelines]({{< ref kubernetes-production.md >}})
