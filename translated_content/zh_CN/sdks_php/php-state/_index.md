@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "使用PHP的状态管理"
 linkTitle: "状态管理"
 weight: 1000
