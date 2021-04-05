@@ -6,9 +6,9 @@ weight: 200
 description: "The component certification lifecycle from submission to production ready"
 ---
 
-## Overview
+## 概述
 
-Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.  All of the components are pluggable so that in ideal scenarios, you can swap out one component with the same interface for another. Each component that is used in production, needs to maintain a certain set of technical requirements that ensure the functional compatibility and robustness of the component.
+Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有接口定义。  All of the components are pluggable so that in ideal scenarios, you can swap out one component with the same interface for another. Each component that is used in production, needs to maintain a certain set of technical requirements that ensure the functional compatibility and robustness of the component.
 
 In general a component needs to be:
 - compliant with the defined Dapr interfaces
