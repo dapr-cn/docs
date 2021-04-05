@@ -1,41 +1,41 @@
 ---
 type: docs
-title: "invoke CLI command reference"
+title: "invoke CLI 命令参考"
 linkTitle: "invoke"
-description: "Detailed information on the invoke CLI command"
+description: "有关 invoke CLI 命令的详细信息"
 ---
 
-## Description
+## 描述
 
-Invoke a method on a given Dapr application.
+调用给定 Dapr 应用程序上的方法。
 
-## Supported platforms
+## 支持的平台
 
 - [自托管]({{< ref self-hosted >}})
 
-## Usage
+## 用法
 ```bash
 dapr invoke [flags]
 ```
 
-## Flags
+## 参数
 
-| Name             | Environment Variable | Default | Description                                |
-| ---------------- | -------------------- | ------- | ------------------------------------------ |
-| `--app-id`, `-a` |                      |         | The application id to invoke               |
-| `--help`, `-h`   |                      |         | Print this help message                    |
-| `--method`, `-m` |                      |         | The method to invoke                       |
-| `--data`, `-d`   |                      |         | The JSON serialized data string (optional) |
-| `--verb`, `-v`   |                      | `POST`  | The HTTP verb to use                       |
+| 名称               | 环境变量 | 默认值    | 描述                |
+| ---------------- | ---- | ------ | ----------------- |
+| `--app-id`, `-a` |      |        | 要调用的应用程序 Id       |
+| `--help`, `-h`   |      |        | 显示此帮助消息           |
+| `--method`, `-m` |      |        | 调用的方法             |
+| `--data`, `-d`   |      |        | JSON 序列化数据字符串（可选） |
+| `--verb`, `-v`   |      | `POST` | 要使用的 HTTP 谓词      |
 
-## Examples
+## 示例
 
-### Invoke a sample method on target app with POST Verb
+### 使用 POST 谓词在目标应用上调用示例方法
 ```bash 
 dapr invoke --app-id target --method sample --data '{"key":"value"}'
 ```
 
-### Invoke a sample method on target app with GET Verb
+### 使用 GET 谓词在目标应用上调用示例方法
 ```bash
 dapr invoke --app-id target --method sample --verb GET
 ```
