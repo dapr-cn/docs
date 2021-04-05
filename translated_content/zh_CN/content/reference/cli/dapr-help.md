@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "help CLI command reference"
+title: "help CLI 命令参考"
 linkTitle: "help"
-description: "Detailed information on the help CLI command"
+description: "有关 help CLI 命令的详细信息"
 ---
 
-## Description
+## 描述
 
-Help provides help for any command in the application.
+帮助为应用程序中的任何命令提供帮助。
 
-## Usage
+## 用法
 
 ```bash
 dapr help [command] [flags]
 ```
 
-## Flags
+## 参数
 
-| Name           | Environment Variable | Default | Description              |
-| -------------- | -------------------- | ------- | ------------------------ |
-| `--help`, `-h` |                      |         | Prints this help message |
+| 名称             | 环境变量 | 默认值 | 描述      |
+| -------------- | ---- | --- | ------- |
+| `--help`, `-h` |      |     | 显示此帮助消息 |
