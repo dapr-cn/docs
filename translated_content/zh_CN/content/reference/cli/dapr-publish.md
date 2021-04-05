@@ -1,38 +1,38 @@
 ---
 type: docs
-title: "publish CLI 命令参考"
+title: "publish CLI command reference"
 linkTitle: "publish"
-description: "有关 publish CLI 命令的详细信息"
+description: "Detailed information on the publish CLI command"
 ---
 
-## 说明
+## Description
 
-发布 pub-sub 事件。
+Publish a pub-sub event.
 
-## 支持的平台
+## Supported platforms
 
-- [自托管]({{< ref self-hosted >}})
+- [Self-Hosted]({{< ref self-hosted >}})
 
-## 用法
+## Usage
 
 ```bash
 dapr publish [flags]
 ```
 
-## 参数
+## Flags
 
-| 名称                 | 环境变量 | 默认值 | 说明                |
-| ------------------ | ---- | --- | ----------------- |
-| `--publish-app-id` | `-i` |     | 代表您要发布的应用程序的 ID   |
-| `--pubsub`         | `-p` |     | Pub/sub 组件的名称     |
-| `--topic`, `-t`    |      |     | 待发布的 topic        |
-| `--data`, `-d`     |      |     | JSON 序列化数据字符串（可选） |
-| `--help`, `-h`     |      |     | 显示此帮助消息           |
+| Name               | Environment Variable | Default | Description                                                  |
+| ------------------ | -------------------- | ------- | ------------------------------------------------------------ |
+| `--publish-app-id` | `-i`                 |         | The ID that represents the app from which you are publishing |
+| `--pubsub`         | `-p`                 |         | The name of the pub/sub component                            |
+| `--topic`, `-t`    |                      |         | The topic to be published to                                 |
+| `--data`, `-d`     |                      |         | The JSON serialized string (optional)                        |
+| `--help`, `-h`     |                      |         | Print this help message                                      |
 
 
-## 示例
+## Examples
 
-### 将示例 topic 发布到目标 pubsub
+### Publish to sample topic in target pubsub
 ```bash
 dapr publish --publish-app-id appId --topic sample --pubsub target --data '{"key":"value"}'
 ```
