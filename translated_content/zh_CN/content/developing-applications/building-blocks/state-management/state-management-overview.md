@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "状态管理概览"
-linkTitle: "Secrets stores overview"
+linkTitle: "概述"
 weight: 100
 description: "状态管理构建块概览"
 ---

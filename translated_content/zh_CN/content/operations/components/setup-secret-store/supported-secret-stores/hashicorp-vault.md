@@ -2,12 +2,12 @@
 type: docs
 title: "HashiCorp Vault"
 linkTitle: "HashiCorp Vault"
-description: Detailed information on the HashiCorp Vault secret store component
+description: 详细介绍了关于 HashiCorp Vault密钥仓库组件的信息
 ---
 
-## Create the Vault component
+## 创建 Vault 组件
 
-To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. To setup HashiCorp Vault secret store create a component of type `secretstores.hashicorp.vault`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置HashiCorp Vault密钥仓库，请创建一个类型为`secretstores.hashicorp.vault`的组件。 请参阅 [本指南]({{< ref "secret-stores-overview.md#apply-the-configuration" >}})，了解如何创建和应用 secretstore 配置。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -34,53 +34,39 @@ spec:
   - name: vaultTokenMountPath # Required. Path to token file.
     value : "[path_to_file_containing_token]"
   - name: vaultKVPrefix # Optional. Default: "dapr"
-    value : "[vault_prefix]" Default: "https://127.0.0.1:8200"
-  - name: caCert # Optional. This or caPath or caPem
-    value: "[ca_cert]"
-  - name: caPath # Optional. This or CaCert or caPem
-    value: "[path_to_ca_cert_file]"
-  - name: caPem # Optional. This or CaCert or CaPath
-    value : "[encoded_ca_cert_pem]"
-  - name: skipVerify # Optional. Default: false
-    value : "[skip_tls_verification]"
-  - name: tlsServerName # Optional.
-    value : "[tls_config_server_name]"
-  - name: vaultTokenMountPath # Required. Path to token file.
-    value : "[path_to_file_containing_token]"
-  - name: vaultKVPrefix # Optional. Default: "dapr"
     value : "[vault_prefix]"
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将 Secret 明文存储。 建议将密钥存储在本地，如 [Kubernetes密钥仓库]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| 字段                  | Required | Details                                                                                                                                                     | Example                    |
-| ------------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| vaultAddr           |    N     | The address of the Vault server. Defaults to `"https://127.0.0.1:8200"` Defaults to `"https://127.0.0.1:8200"`                                              | `"https://127.0.0.1:8200"` |
-| caCert              |    N     | Certificate Authority use only one of the options. The encoded cacerts to use                                                                               | `"cacerts"`                |
-| caPath              |    N     | Certificate Authority use only one of the options. The encoded cacerts to use Certificate Authority use only one of the options. The path to a CA cert file | `"path/to/cacert/file"`    |
-| caPem               |    N     | Certificate Authority use only one of the options. The encoded cacert pem to use                                                                            | `"encodedpem"`             |
-| skipVerify          |    N     | Skip TLS verification. Defaults to `"false"` Defaults to `"false"`                                                                                          | `"true"`, `"false"`        |
-| tlsServerName       |    N     | TLS config server name                                                                                                                                      | `"tls-server"`             |
-| vaultTokenMountPath |    Y     | Path to file containing token                                                                                                                               | `"path/to/file"`           |
-| vaultKVPrefix       |    N     | The prefix in vault. The prefix in vault. Defautls to `"dapr"`                                                                                              | `"dapr"`, `"myprefix"`     |
-## Setup Hashicorp Vault instance
+| 字段                  | 必填 | 详情                                               | 示例                         |
+| ------------------- |:--:| ------------------------------------------------ | -------------------------- |
+| vaultAddr           | N  | Vault服务器的地址 默认值为 `"https://127.0.0.1:8200"`      | `"https://127.0.0.1:8200"` |
+| caCert              | N  | Certificate Authority只使用其中一个选项。 要使用的加密cacerts    | `"cacerts"`                |
+| caPath              | N  | Certificate Authority只使用其中一个选项。 CA证书文件的路径        | `"path/to/cacert/file"`    |
+| caPem               | N  | Certificate Authority只使用其中一个选项。 要是用的加密cacert pem | `"encodedpem"`             |
+| skipVerify          | N  | 跳过 TLS 验证。 默认值为 `"false"`                        | `"true"`, `"false"`        |
+| tlsServerName       | N  | TLS 配置服务器名称                                      | `"tls-server"`             |
+| vaultTokenMountPath | Y  | 包含token的文件路径                                     | `"path/to/file"`           |
+| vaultKVPrefix       | N  | 仓库前缀 默认值为 `"dapr"`                               | `"dapr"`, `"myprefix"`     |
+## 设置 Hashicorp Vault实例
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-Setup Hashicorp Vault using the Vault documentation: https://www.vaultproject.io/docs/install/index.html.
+参考Vault文档设置Hashicorp Vault：https://www.vaultproject.io/docs/install/index.html。
 {{% /codetab %}}
 
 {{% codetab %}}
-For Kubernetes, you can use the Helm Chart: <https://github.com/hashicorp/vault-helm>.
+对于Kubernetes，你可以使用Helm Chart：<https://github.com/hashicorp/vault-helm>。
 {{% /codetab %}}
 
 {{< /tabs >}}
 ## 相关链接
-- [Secrets building block]({{< ref secrets >}})
-- [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})
-- [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
-- [Secrets API reference]({{< ref secrets_api.md >}})
+- [密钥构建块]({{< ref secrets >}})
+- [指南：获取密钥]({{< ref "howto-secrets.md" >}})
+- [指南：在Dapr组件中引用密钥]({{< ref component-secrets.md >}})
+- [密钥 API 参考]({{< ref secrets_api.md >}})

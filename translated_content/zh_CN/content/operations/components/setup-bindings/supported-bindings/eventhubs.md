@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "Azure Event Hubs binding spec"
+title: "Azure Event Hubs 绑定规范"
 linkTitle: "Azure Event Hubs"
-description: "Detailed documentation on the Azure Event Hubs binding component"
+description: "关于 Azure Event Hubs 组件绑定的详细文档"
 ---
 
-## Component format
+## 组件格式
 
 To setup Azure Event Hubs binding create a component of type `bindings.azure.eventhubs`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. To setup Redis binding create a component of type `bindings.redis`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
