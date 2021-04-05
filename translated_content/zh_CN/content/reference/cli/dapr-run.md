@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "run CLI 命令参考"
 linkTitle: "run"
 description: "有关 run CLI 命令的详细信息"
