@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Using OpenTelemetry Collector to collect traces to send to AppInsights"
 linkTitle: "Using the OpenTelemetry for Azure AppInsights"
 weight: 1000
@@ -67,6 +67,6 @@ Deploy and run some applications. After a few minutes, you should see tracing lo
 
 > **NOTE**: Only operations going through Dapr API exposed by Dapr sidecar (e.g. service invocation or event publishing) are displayed in Application Map topology.
 
-## Related links
+## 相关链接
 * Try out the [observability quickstart](https://github.com/dapr/quickstarts/tree/master/observability/README.md)
 * How to set [tracing configuration options]({{< ref "configuration-overview.md#tracing" >}})
