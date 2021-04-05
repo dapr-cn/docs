@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Azure Cosmos DB"
 linkTitle: "Azure Cosmos DB"
 description: 关于 Azure CosmosDB 状态存储组件的详细信息
