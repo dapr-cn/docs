@@ -1,39 +1,39 @@
 ---
 type: docs
-title: "指南：如何保存和获取状态"
+title: "How-To: Save and get state"
 linkTitle: "How-To: Save & get state"
 weight: 200
-description: "使用键值对来持久化状态"
+description: "Use key value pairs to persist a state"
 ---
 
-## 介绍
+## Introduction
 
-状态管理是任何应用程序最常见的需求之一：无论是新是旧，是单体还是微服务。 与不同的数据库库打交道，进行测试，处理重试和故障是很费时费力的。
+State management is one of the most common needs of any application: new or legacy, monolith or microservice. Dealing with different databases libraries, testing them, handling retries and faults can be time consuming and hard.
 
-Dapr提供的状态管理功能包括一致性和并发选项。 在本指南中，我们将从基础知识开始。使用键/值状态API来允许应用程序保存，获取和删除状态。
+Dapr provides state management capabilities that include consistency and concurrency options. In this guide we'll start of with the basics: Using the key/value state API to allow an application to save, get and delete state.
 
-## 前提
+## Pre-requisites
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化的 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
+- Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
 
-## 第一步：设置状态存储
+## Step 1: Setup a state store
 
-状态存储组件代表Dapr用来与数据库进行通信的资源。
+A state store component represents a resource that Dapr uses to communicate with a database.
 
-在本指南中，我们将使用 Redis 作为状态存储引擎，但在 [支持列表]({{< ref supported-state-stores >}})中的任何状态存储引擎都是可以使用的。
+For the purpose of this guide we'll use a Redis state store, but any state store from the [supported list]({{< ref supported-state-stores >}}) will work.
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes>}}
 
 {{% codetab %}}
-当在单机模式下使用`dapr init`时，Dapr CLI会自动提供一个状态存储(Redis)，并在`components`目录中创建相关的YAML，在Linux/MacOS上位于`$HOME/.dapr/components`，在Windows上位于`%USERPROFILE%/.dapr/components`。
+When using `dapr init` in Standalone mode, the Dapr CLI automatically provisions a state store (Redis) and creates the relevant YAML in a `components` directory, which for Linux/MacOS is `$HOME/.dapr/components` and for Windows is `%USERPROFILE%\.dapr\components`
 
-如果需要切换使用的状态存储引擎，用你选择的文件替换`/components`下的YAML文件`statestore.yaml`。
+To optionally change the state store being used, replace the YAML file `statestore.yaml` under `/components` with the file of your choice.
 {{% /codetab %}}
 
 {{% codetab %}}
 
-要将其部署到 Kubernetes 集群中，请在下面的 yaml 中填写你的[所需statestore 组件]({{< ref supported-state-stores >}}) 的 `metadata` 连接详情，保存为 `statestore.yaml`，并执行命令 `kubectl apply -f statestore.yaml`。
+To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [desired statestore component]({{< ref supported-state-stores >}}) in the yaml below, save as `statestore.yaml`, and run `kubectl apply -f statestore.yaml`.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -50,67 +50,67 @@ spec:
   - name: redisPassword
     value: ""
 ```
-请参阅 [这里]({{< ref "setup-state-store" >}})的说明，了解如何在 Kubernetes 上设置不同的状态存储引擎。
+See the instructions [here]({{< ref "setup-state-store" >}}) on how to setup different state stores on Kubernetes.
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## 第二步：保存和检索单个状态
+## Step 2: Save and retrieve a single state
 
-下面的例子显示了如何使用Dapr状态构件的单个键/值对。
+The following example shows how to a single key/value pair using the Dapr state building block.
 
 {{% alert title="Note" color="warning" %}}
-设置一个app-id是很重要的，因为状态键是以这个值为前缀的。 如果你不设置，就会在运行期间为你自动生成一个值，而到下次运行命令时又会生成一个新的值，你将因此无法再访问以前保存的状态。
+It is important to set an app-id, as the state keys are prefixed with this value. If you don't set it one is generated for you at runtime, and the next time you run the command a new one will be generated and you will no longer be able to access previously saved state.
 {{% /alert %}}
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
-首先启动一个Dapr sidecar：
+Begin by launching a Dapr sidecar:
 
 ```bash
 dapr run --app-id myapp --dapr-http-port 3500
 ```
 
-然后在一个单独的终端中保存一个键/值对到你的statestore中：
+Then in a separate terminal save a key/value pair into your statestore:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "key1", "value": "value1"}]' http://localhost:3500/v1.0/state/statestore
 ```
 
-现在获取你刚才保存的状态：
+Now get the state you just saved:
 ```bash
 curl http://localhost:3500/v1.0/state/statestore/key1
 ```
 
-你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
+You can also restart your sidecar and try retrieving state again to see that state persists separate from the app.
 {{% /codetab %}}
 
 {{% codetab %}}
 
-首先启动Dapr sidecar:
+Begin by launching a Dapr sidecar:
 
 ```bash
 dapr --app-id myapp --port 3500 run
 ```
 
-然后在一个单独的终端中保存一个键/值对到你的statestore中:
+Then in a separate terminal save a key/value pair into your statestore:
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "key1", "value": "value1"}]' -Uri 'http://localhost:3500/v1.0/state/statestore'
 ```
 
-现在获取你刚才保存的状态：
+Now get the state you just saved:
 ```powershell
 Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/state/statestore/key1'
 ```
 
-你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
+You can also restart your sidecar and try retrieving state again to see that state persists separate from the app.
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-将以下内容保存到名为`pythonState.py`的文件中:
+Save the following to a file named `pythonState.py`:
 
 ```python
 from dapr.clients import DaprClient
@@ -124,29 +124,19 @@ with DaprClient() as d:
 
 ```
 
-保存后执行以下命令启动Dapr sidecar并运行Python应用程序:
+Once saved run the following command to launch a Dapr sidecar and run the Python application:
 
 ```bash
 dapr --app-id myapp run python pythonState.py
 ```
 
-你应该会得到一个类似于下面的输出，它将同时显示Dapr和应用程序的日志:
+You should get an output similar to the following, which will show both the Dapr and app logs:
 
 ```md
 == DAPR == time="2021-01-06T21:34:33.7970377-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:34:33.8040378-08:00" level=info msg="standalone mode configured" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:34:33.8040378-08:00" level=info msg="app id: Braidbald-Boot" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:34:33.9750400-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T21:34:33.9760387-08:00" level=info msg="API gRPC server is running on port 51656" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T21:34:33.9770372-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 172.9994ms" app_id=Braidbald-Boot scope=dapr.
-
-Checking if Dapr sidecar is listening on GRPC port 51656
-Dapr sidecar is up and running.
-Updating metadata for app command: python pythonState.py
-You are up and running! Both Dapr and your app logs will appear here.
-
-== APP == State has been stored
-== APP == Got value: b'myFirstValue' name: statestore, type: state.redis" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:34:33.9760387-08:00" level=info msg="API gRPC server is running on port 51656" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:34:33.9770372-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 172.9994ms" app_id=Braidbald-Boot scope=dapr.
 
@@ -163,7 +153,7 @@ You are up and running! Both Dapr and your app logs will appear here.
 
 {{% codetab %}}
 
-在`state-example.php`中保存以下内容:
+Save the following in `state-example.php`:
 
 ```php
 <?php
@@ -182,17 +172,15 @@ $app->run(function(\Dapr\State\StateManager $stateManager, \Psr\Log\LoggerInterf
 });
 ```
 
-保存后，执行以下命令启动Dapr sidecar并运行PHP应用程序:
+Once saved run the following command to launch a Dapr sidecar and run the PHP application:
 
 ```bash
 dapr --app-id myapp run -- php state-example.php
 ```
 
-你应该会得到一个类似于下面的输出，它将同时显示Dapr和应用程序的日志:
+You should get an output similar to the following, which will show both the Dapr and app logs:
 
 ```md
-✅  You're up and running! Both Dapr and your app logs will appear here.
-
 ✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T16:30:11.078777+01:00] APP.ALERT: State has been stored [] []
@@ -205,31 +193,31 @@ dapr --app-id myapp run -- php state-example.php
 {{< /tabs >}}
 
 
-## 第三步：删除状态
+## Step 3: Delete state
 
-下面的例子显示了如何通过给状态管理API传递一个键来删除一个对象:
+The following example shows how to delete an item by using a key with the state management API:
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
-用上面运行的同一个dapr实例执行:
+With the same dapr instance running from above run:
 ```bash
 curl -X DELETE 'http://localhost:3500/v1.0/state/statestore/key1'
 ```
-再尝试获取状态，注意没有返回任何值。
+Try getting state again and note that no value is returned.
 {{% /codetab %}}
 
 {{% codetab %}}
-用上面运行的同一个dapr实例执行:
+With the same dapr instance running from above run:
 ```powershell
 Invoke-RestMethod -Method Delete -Uri 'http://localhost:3500/v1.0/state/statestore/key1'
 ```
-再尝试获取状态，注意没有返回任何值。
+Try getting state again and note that no value is returned.
 {{% /codetab %}}
 
 {{% codetab %}}
 
-修改`pythonState.py`如下：
+Update `pythonState.py` with:
 
 ```python
 from dapr.clients import DaprClient
@@ -247,31 +235,20 @@ with DaprClient() as d:
     print(f"Got value after delete: {data}")
 ```
 
-现在通过以下命令运行你的程序:
+Now run your program with:
 
 ```bash
 dapr --app-id myapp run python pythonState.py
 ```
 
-你应该会看到一个类似于下面的输出:
+You should see an output similar to the following:
 
 ```md
-Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. gRPC Port: 59458
+Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. gRPC Port: 59458
 
 == DAPR == time="2021-01-06T22:55:36.5570696-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.5690367-08:00" level=info msg="standalone mode configured" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7220140-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T22:55:36.7230148-08:00" level=info msg="API gRPC server is running on port 59458" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T22:55:36.7240207-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 154.984ms" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
-
-Checking if Dapr sidecar is listening on GRPC port 59458
-Dapr sidecar is up and running.
-Updating metadata for app command: python pythonState.py
-You're up and running! Both Dapr and your app logs will appear here.
-
-== APP == State has been stored
-== APP == Got value: b'value1'
-== APP == Got value after delete: b'' name: statestore, type: state.redis" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7230148-08:00" level=info msg="API gRPC server is running on port 59458" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7240207-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 154.984ms" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 
@@ -288,7 +265,7 @@ You're up and running! Both Dapr and your app logs will appear here.
 
 {{% codetab %}}
 
-修改`state-example.php`，内容如下:
+Update `state-example.php` with the following contents:
 
 ```php
 <?php
@@ -311,17 +288,15 @@ $app->run(function(\Dapr\State\StateManager $stateManager, \Psr\Log\LoggerInterf
 });
 ```
 
-现在使用以下命令运行它:
+Now run it with:
 
 ```bash
 dapr --app-id myapp run -- php state-example.php
 ```
 
-你应该会看到类似下面的输出:
+You should see something similar the following output:
 
 ```md
-✅  You're up and running! Both Dapr and your app logs will appear here.
-
 ✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T16:38:00.839201+01:00] APP.ALERT: State has been stored [] []
@@ -335,31 +310,31 @@ dapr --app-id myapp run -- php state-example.php
 
 {{< /tabs >}}
 
-## 第四步：保存和检索多个状态
+## Step 4: Save and retrieve multiple states
 
-Dapr还允许你在同一个调用中保存和检索多个状态:
+Dapr also allows you to save and retrieve multiple states in the same call.
 
-{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK">}}
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
-在上面运行的同一个dapr实例中，将两个键/值对保存到你的statetore中:
+With the same dapr instance running from above save two key/value pairs into your statestore:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "key1", "value": "value1"}, { "key": "key2", "value": "value2"}]' http://localhost:3500/v1.0/state/statestore
 ```
 
-现在获取你刚才保存的状态：
+Now get the states you just saved:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"keys":["key1", "key2"]}' http://localhost:3500/v1.0/state/statestore/bulk
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-在上面运行的同一个dapr实例中，将两个键/值对保存到你的statetore中:
+With the same dapr instance running from above save two key/value pairs into your statestore:
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": "key1", "value": "value1"}, { "key": "key2", "value": "value2"}]' -Uri 'http://localhost:3500/v1.0/state/statestore'
 ```
 
-现在获取你刚才保存的状态：
+Now get the states you just saved:
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["key1", "key2"]}' -Uri 'http://localhost:3500/v1.0/state/statestore/bulk'
 ```
@@ -368,9 +343,9 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 
 {{% codetab %}}
 
-`StateItem`对象可以使用`save_states`和`get_states`方法来存储多个Dapr状态。
+The `StateItem` object can be used to store multiple Dapr states with the `save_states` and `get_states` methods.
 
-用以下代码更新你的`pythonState.py`文件:
+Update your `pythonState.py` file with the following code:
 
 ```python
 from dapr.clients import DaprClient
@@ -387,29 +362,19 @@ with DaprClient() as d:
     print(f"Got items: {[i.data for i in items]}")
 ```
 
-现在通过以下命令运行你的程序:
+Now run your program with:
 
 ```bash
 dapr --app-id myapp run python pythonState.py
 ```
 
-你应该会看到一个类似于下面的输出:
+You should see an output similar to the following:
 
 ```md
 == DAPR == time="2021-01-06T21:54:56.7262358-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:54:56.7401933-08:00" level=info msg="standalone mode configured" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:54:56.8754240-08:00" level=info msg="Initialized name resolution to standalone" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:54:56.8844248-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T21:54:56.8854273-08:00" level=info msg="API gRPC server is running on port 60614" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T21:54:56.8854273-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 145.234ms" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
-
-Checking if Dapr sidecar is listening on GRPC port 60614
-Dapr sidecar is up and running.
-Updating metadata for app command: python pythonState.py
-You're up and running! Both Dapr and your app logs will appear here.
-
-== APP == States have been stored
-== APP == Got items: [b'value1', b'value2'] name: statestore, type: state.redis" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:54:56.8854273-08:00" level=info msg="API gRPC server is running on port 60614" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:54:56.8854273-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 145.234ms" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
 
@@ -426,9 +391,9 @@ You're up and running! Both Dapr and your app logs will appear here.
 
 {{% codetab %}}
 
-要用PHP批量加载和保存状态，只需创建一个 "Plain Ole' PHP对象"(POPO)，并用 StateStore注解进行声明。
+To batch load and save state with PHP, just create a "Plain Ole' PHP Object" (POPO) and annotate it with the StateStore annotation.
 
-更新`state-example.php`文件:
+Update the `state-example.php` file:
 
 ```php
 <?php
@@ -452,17 +417,15 @@ $app->run(function(\Dapr\State\StateManager $stateManager, \Psr\Log\LoggerInterf
 });
 ```
 
-运行该应用:
+Run the app:
 
 ```bash
 dapr --app-id myapp run -- php state-example.php
 ```
 
-并看到以下输出:
+And see the following output:
 
 ```md
-✅  You're up and running! Both Dapr and your app logs will appear here.
-
 ✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T16:55:02.913801+01:00] APP.ALERT: States have been stored [] []
@@ -474,33 +437,33 @@ dapr --app-id myapp run -- php state-example.php
 
 {{< /tabs >}}
 
-## 第五步：执行状态事务性操作
+## Step 5: Perform state transactions
 
 {{% alert title="Note" color="warning" %}}
-状态事务性操作需要一个支持multi-item transactions的状态存储引擎。 请访问 [支持的状态存储引擎]({{< ref supported-state-stores >}})页面查看完整列表。 请注意，在自托管环境中创建的默认Redis容器是支持的。
+State transactions require a state store that supports multi-item transactions. Visit the [supported state stores page]({{< ref supported-state-stores >}}) page for a full list. Note that the default Redis container created in a self-hosted environment supports them.
 {{% /alert %}}
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
-用上面运行的同一个dapr实例执行两个状态事务操作:
+With the same dapr instance running from above perform two state transactions:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"operations": [{"operation":"upsert", "request": {"key": "key1", "value": "newValue1"}}, {"operation":"delete", "request": {"key": "key2"}}]}' http://localhost:3500/v1.0/state/statestore/transaction
 ```
 
-现在可以看到你的状态事务操作的结果:
+Now see the results of your state transactions:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"keys":["key1", "key2"]}' http://localhost:3500/v1.0/state/statestore/bulk
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-在上面运行的同一个dapr实例中，将两个键/值对保存到你的statetore中:
+With the same dapr instance running from above save two key/value pairs into your statestore:
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"operations": [{"operation":"upsert", "request": {"key": "key1", "value": "newValue1"}}, {"operation":"delete", "request": {"key": "key2"}}]}' -Uri 'http://localhost:3500/v1.0/state/statestore'
 ```
 
-现在可以看到你的状态事务操作的结果:
+Now see the results of your state transactions:
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["key1", "key2"]}' -Uri 'http://localhost:3500/v1.0/state/statestore/bulk'
 ```
@@ -509,9 +472,9 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 
 {{% codetab %}}
 
-如果你的状态存储需要事务支持，可以考虑使用`TransactionalStateOperation`。
+The `TransactionalStateOperation` can perform a state transaction if your state stores need to be transactional.
 
-用以下代码更新你的`pythonState.py`文件:
+Update your `pythonState.py` file with the following code:
 
 ```python
 from dapr.clients import DaprClient
@@ -538,29 +501,19 @@ with DaprClient() as d:
     print(f"Got items: {[i.data for i in items]}")
 ```
 
-现在通过以下命令运行你的程序:
+Now run your program with:
 
 ```bash
 dapr run python pythonState.py
 ```
 
-你应该会看到一个类似于下面的输出:
+You should see an output similar to the following:
 
 ```md
-Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
+Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
 == DAPR == time="2021-01-06T22:18:14.1246721-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.1346254-08:00" level=info msg="standalone mode configured" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2747063-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T22:18:14.2757062-08:00" level=info msg="API gRPC server is running on port 59534" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T22:18:14.2767059-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 142.0805ms" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
-
-Checking if Dapr sidecar is listening on GRPC port 59534
-Dapr sidecar is up and running.
-Updating metadata for app command: python pythonState.py
-You're up and running! Both Dapr and your app logs will appear here.
-
-== APP == State transactions have been completed
-== APP == Got items: [b'value1', b''] name: statestore, type: state.redis" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2757062-08:00" level=info msg="API gRPC server is running on port 59534" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2767059-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 142.0805ms" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 
@@ -577,9 +530,9 @@ You're up and running! Both Dapr and your app logs will appear here.
 
 {{% codetab %}}
 
-事务性状态通过扩展`TransactionalState`基础对象来支持，它挂接到你的 对象，然后通过setters和getters来提供事务。 而你可能会希望依赖注入框架来替你创建一个事务对象:
+Transactional state is supported by extending `TransactionalState` base object which hooks into your object via setters and getters to provide a transaction. Before you created your own transactional object, but now you'll ask the Dependency Injection framework to build one for you.
 
-再次修改`state-example.php`文件:
+Modify the `state-example.php` file again:
 
 ```php
 <?php
@@ -606,18 +559,16 @@ $app->run(function(MyState $obj, \Psr\Log\LoggerInterface $logger, \Dapr\State\S
 });
 ```
 
-运行程序:
+Run the application:
 
 ```bash
 dapr --app-id myapp run -- php state-example.php
 ```
 
-观察到以下输出:
+Observe the following output:
 
 ```md
 ✅  You're up and running! Both Dapr and your app logs will appear here.
-
-== APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! ✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! [] []
 
@@ -628,8 +579,8 @@ dapr --app-id myapp run -- php state-example.php
 
 {{< /tabs >}}
 
-## 下一步
+## Next steps
 
-- 阅读完整的 [状态 API 参考]({{< ref state_api.md >}})
-- 试试其中一个 [Dapr SDK]({{< ref sdks >}})
-- 构建一个 [状态服务]({{< ref howto-stateful-service.md >}})
+- Read the full [State API reference]({{< ref state_api.md >}})
+- Try one of the [Dapr SDKs]({{< ref sdks >}})
+- Build a [stateful service]({{< ref howto-stateful-service.md >}})
