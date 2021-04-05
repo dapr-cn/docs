@@ -7,7 +7,7 @@ description: Detailed information on the GCP Firestore state store component
 
 ## Component format
 
-To setup GCP Firestore state store create a component of type `state.gcp.firestore`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup GCP Firestore state store create a component of type `state.gcp.firestore`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 
 ```yaml
@@ -41,26 +41,6 @@ spec:
   - name: client_x509_cert_url
     value: <REPLACE-WITH-CLIENT-x509-CERT-URL> # Required.
   - name: entity_kind
-    value: <REPLACE-WITH-ENTITY-KIND> # Optional. default: "DaprState" Example: "serviceaccount"
-  - name: project_id
-    value: <REPLACE-WITH-PROJECT-ID> # Required.
-  - name: private_key_id
-    value: <REPLACE-WITH-PRIVATE-KEY-ID> # Required.
-  - name: private_key
-    value: <REPLACE-WITH-PRIVATE-KEY> # Required.
-  - name: client_email
-    value: <REPLACE-WITH-CLIENT-EMAIL> # Required.
-  - name: client_id
-    value: <REPLACE-WITH-CLIENT-ID> # Required.
-  - name: auth_uri
-    value: <REPLACE-WITH-AUTH-URI> # Required.
-  - name: token_uri
-    value: <REPLACE-WITH-TOKEN-URI> # Required.
-  - name: auth_provider_x509_cert_url
-    value: <REPLACE-WITH-AUTH-X509-CERT-URL> # Required.
-  - name: client_x509_cert_url
-    value: <REPLACE-WITH-CLIENT-x509-CERT-URL> # Required.
-  - name: entity_kind
     value: <REPLACE-WITH-ENTITY-KIND> # Optional. default: "DaprState"
 ```
 
@@ -70,18 +50,18 @@ spec:
 
 ## Spec metadata fields
 
-| 字段                              | Required | Details                                                                           | Example                                                 |
-| ------------------------------- |:--------:| --------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| type                            |    Y     | The credentials type                                                              | `"serviceaccount"`                                      |
-| project_id                      |    Y     | The ID of the GCP project to use                                                  | `"project-id"`                                          |
-| private_key_id                |    Y     | The ID of the prvate key to use                                                   | `"private-key-id"`                                      |
-| client_email                    |    Y     | The email address for the client                                                  | `"eample@example.com"`                                  |
-| client_id                       |    Y     | The client id value to use for authentication                                     | `"client-id"`                                           |
-| auth_uri                        |    Y     | The authentication URI to use                                                     | `"https://accounts.google.com/o/oauth2/auth"`           |
-| token_uri                       |    Y     | The token URI to query for Auth token                                             | `"https://oauth2.googleapis.com/token"`                 |
-| auth_provider_x509_cert_url |    Y     | The auth provider certificate URL                                                 | `"https://www.googleapis.com/oauth2/v1/certs"`          |
-| client_x509_cert_url          |    Y     | The client certificate URL                                                        | `"https://www.googleapis.com/robot/v1/metadata/x509/x"` |
-| entity_kind                     |    N     | The entity name in Filestore. Defaults to `"DaprState"` Defaults to `"DaprState"` | `"DaprState"`                                           |
+| 字段                              | Required | Details                                                                                                         | Example                                                 |
+| ------------------------------- |:--------:| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| type                            |    Y     | The credentials type                                                                                            | `"serviceaccount"`                                      |
+| project_id                      |    Y     | The ID of the GCP project to use                                                                                | `"project-id"`                                          |
+| private_key_id                |    Y     | The ID of the prvate key to use                                                                                 | `"private-key-id"`                                      |
+| client_email                    |    Y     | The email address for the client                                                                                | `"eample@example.com"`                                  |
+| client_id                       |    Y     | The client id value to use for authentication                                                                   | `"client-id"`                                           |
+| auth_uri                        |    Y     | The authentication URI to use                                                                                   | `"https://accounts.google.com/o/oauth2/auth"`           |
+| token_uri                       |    Y     | The token URI to query for Auth token                                                                           | `"https://oauth2.googleapis.com/token"`                 |
+| auth_provider_x509_cert_url |    Y     | The auth provider certificate URL                                                                               | `"https://www.googleapis.com/oauth2/v1/certs"`          |
+| client_x509_cert_url          |    Y     | The client certificate URL                                                                                      | `"https://www.googleapis.com/robot/v1/metadata/x509/x"` |
+| entity_kind                     |    N     | The entity name in Filestore. The entity name in Filestore. Defaults to `"DaprState"` Defaults to `"DaprState"` | `"DaprState"`                                           |
 
 ## Setup GCP Firestone
 
