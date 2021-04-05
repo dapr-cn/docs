@@ -1,43 +1,43 @@
 ---
 type: docs
-title: "Install the Dapr CLI"
-linkTitle: "Install Dapr CLI"
+title: "安装 Dapr CLI 脚手架工具"
+linkTitle: "安装 Dapr CLI"
 weight: 10
 ---
 
-The Dapr CLI is the main tool you'll be using for various Dapr related tasks. You can use it to run an application with a Dapr sidecar, as well as review sidecar logs, list running services, and run the Dapr dashboard. The Dapr CLI works with both [self-hosted]({{< ref self-hosted >}}) and [Kubernetes]({{< ref Kubernetes >}}) environments.
+Dapr CLI 是您用于各种 Dapr 相关任务的主要工具。 您可以使用它来运行一个Dapr sidecar的应用程序， 以及查看sidecar日志，列出运行服务，并运行 Dapr 仪表板。 Dapr CLI 同时使用 [自托管]({{< ref self-hosted >}}) 和 [Kubernetes]({{< ref Kubernetes >}}) 环境。
 
-Begin by downloading and installing the Dapr CLI:
+开始下载并安装 Dapr CLI：
 
 {{< tabs Linux Windows MacOS Binaries>}}
 
 {{% codetab %}}
-This command installs the latest linux Dapr CLI to `/usr/local/bin`:
+此命令将最新的 Linux Dapr CLI 安装到 `/usr/local/bin`：
 ```bash
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-This Command Prompt command installs the latest windows Dapr cli to `C:\dapr` and adds this directory to User PATH environment variable.
+此命令提示命令将最新的 Windows Dapr CLI 安装到 `C:\dapr` 并将此目录添加到用户PATH 环境变量。
 ```powershell
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-This command installs the latest darwin Dapr CLI to `/usr/local/bin`:
+此命令将最新的 darwin Dapr CLI 安装到 `/usr/local/bin`:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | /bin/bash
 ```
 
-Or you can install via [Homebrew](https://brew.sh):
+或者您可以通过 [Homebrew](https://brew.sh) 进行安装：
 ```bash
 brew install dapr/tap/dapr-cli
 ```
 
 {{% alert title="Note for M1 Macs" color="primary" %}}
-For M1 Macs, homebrew is not supported. You will need to use the dapr install script and have the rosetta amd64 compatibility layer installed. If you do not have it installed already, you can run the following:
+M1 Mac不支持homebrew 您需要使用 Dapr 安装脚本并安装 rosetta amd64 兼容层。 如果你没有安装它，你可以运行：
 
 ```bash
 softwareupdate --install-rosetta
@@ -49,20 +49,20 @@ softwareupdate --install-rosetta
 {{% /codetab %}}
 
 {{% codetab %}}
-Each release of Dapr CLI includes various OSes and architectures. These binary versions can be manually downloaded and installed.
+每次发行的Dapr CLI包括各种操作系统和架构。 这些二进制版本可以手动下载和安装。
 
-1. Download the desired Dapr CLI from the latest [Dapr Release](https://github.com/dapr/cli/releases)
-2. Unpack it (e.g. dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip)
-3. Move it to your desired location.
-   - For Linux/MacOS - `/usr/local/bin`
-   - For Windows, create a directory and add this to your System PATH. For example create a directory called `C:\dapr` and add this directory to your User PATH, by editing your system environment variable.
+1. 从最新的 [Dapr Releases](https://github.com/dapr/cli/releases)中下载所需的 Dapr CLI
+2. 解压它(例如，dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip)
+3. 将其移动到你想要的位置。
+   - 用于 Linux/MacOS - `/usr/local/bin`
+   - 对于Windows，创建一个目录并将其添加到系统PATH。 例如，通过编辑系统环境变量，创建一个名为 `C:\dapr` 的目录，并将此目录添加到您的用户PATH。
 {{% /codetab %}}
 {{< /tabs >}}
 
 
-### Step 2: Verify the installation
+### 步骤 2：验证安装
 
-You can verify the CLI is installed by restarting your terminal/command prompt and running the following:
+您可以通过重新启动您的终端/命令提示和运行以下操作来验证CLI：
 
 ```bash
 dapr
