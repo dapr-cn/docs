@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Set-up New Relic for Dapr logging"
 linkTitle: "New Relic"
 weight: 2000
