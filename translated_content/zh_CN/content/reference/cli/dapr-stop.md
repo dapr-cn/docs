@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "stop CLI 命令参考"
 linkTitle: "stop"
 description: "有关 stop CLI 命令的详细信息"
