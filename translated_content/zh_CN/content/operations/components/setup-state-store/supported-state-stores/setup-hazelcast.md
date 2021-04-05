@@ -7,7 +7,7 @@ description: Detailed information on the Hazelcast state store component
 
 ## Create a Dapr component
 
-To setup Hazelcast state store create a component of type `state.hazelcast`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Hazelcast state store create a component of type `state.hazelcast`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -22,18 +22,16 @@ spec:
   - name: hazelcastServers
     value: <REPLACE-WITH-HOSTS> # Required. A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000"
   - name: hazelcastMap
-    value: <REPLACE-WITH-MAP> # Required. Hazelcast map configuration. A comma delimited string of servers. Example: "hazelcast:3000,hazelcast2:3000"
-  - name: hazelcastMap
     value: <REPLACE-WITH-MAP> # Required. Hazelcast map configuration.
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将 Secret 明文存储。 更推荐的方式是使用 [这里]({{< ref component-secrets.md >}})描述的密钥仓库来存储密钥。
+The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 ## Spec metadata fields
 
-| 字段               | Required | Details                             | Example                            |
+| Field            | Required | Details                             | Example                            |
 | ---------------- |:--------:| ----------------------------------- | ---------------------------------- |
 | hazelcastServers |    Y     | A comma delimited string of servers | `"hazelcast:3000,hazelcast2:3000"` |
 | hazelcastMap     |    Y     | Hazelcast Map configuration         | `"foo-map"`                        |
@@ -58,7 +56,7 @@ The easiest way to install Hazelcast on Kubernetes is by using the [Helm chart](
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
 - [State management building block]({{< ref state-management >}})
