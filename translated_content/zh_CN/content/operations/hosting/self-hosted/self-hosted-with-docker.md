@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "入门指南: 使用 Docker 在自托管模式下运行 Dapr"
 linkTitle: "使用 Docker 运行"
 weight: 20000
