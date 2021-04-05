@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Service invocation API reference"
 linkTitle: "服务调用 API"
 description: "Detailed documentation on the service invocation API"
