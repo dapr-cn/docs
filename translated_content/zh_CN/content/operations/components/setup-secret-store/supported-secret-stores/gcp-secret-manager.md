@@ -2,12 +2,12 @@
 type: docs
 title: "GCP Secret Manager"
 linkTitle: "GCP Secret Manager"
-description: Detailed information on the GCP Secret Manager secret store component
+description: GCP Secret Manager密钥仓库组件的详细信息
 ---
 
-## Component format
+## 配置
 
-To setup GCP Secret Manager secret store create a component of type `secretstores.gcp.secretmanager`. See [this guide]({{< ref "secret-stores-overview.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置GCP Secret Manager密钥仓库，请创建一个类型为`secretstores.gcp.secretmanager`的组件。 请参阅 [本指南]({{< ref "secret-stores-overview.md#apply-the-configuration" >}})，了解如何创建和应用 secretstore 配置。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -42,30 +42,30 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将密钥明文存储。 建议将密钥存储在本地，如 [Kubernetes密钥仓库]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field                           | Required | Details                                        | Example                                                                                            |
-| ------------------------------- |:--------:| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| type                            |    Y     | The type of the account.                       | `"serviceAccount"`                                                                                 |
-| project_id                      |    Y     | The project ID associated with this component. | `"project_id"`                                                                                     |
-| private_key_id                |    N     | The private key ID                             | `"privatekey"`                                                                                     |
-| client_email                    |    Y     | The client email address                       | `"client@example.com"`                                                                             |
-| client_id                       |    N     | The ID of the client                           | `"11111111"`                                                                                       |
-| auth_uri                        |    N     | The authentication URI                         | `"https://accounts.google.com/o/oauth2/auth"`                                                      |
-| token_uri                       |    N     | The authentication token URI                   | `"https://oauth2.googleapis.com/token"`                                                            |
-| auth_provider_x509_cert_url |    N     | The certificate URL for the auth provider      | `"https://www.googleapis.com/oauth2/v1/certs"`                                                     |
-| client_x509_cert_url          |    N     | The certificate URL for the client             | `"https://www.googleapis.com/robot/v1/metadata/x509/<project-name>.iam.gserviceaccount.com"` |
-| private_key                     |    Y     | The private key for authentication             | `"privateKey"`                                                                                     |
+| 字段                              | 必填 | 详情             | 示例                                                                                                 |
+| ------------------------------- |:--:| -------------- | -------------------------------------------------------------------------------------------------- |
+| type                            | 是  | 账户类型           | `"serviceAccount"`                                                                                 |
+| project_id                      | 是  | 与此组件相关联的项目 ID。 | `"project_id"`                                                                                     |
+| private_key_id                | N  | 私钥ID           | `"privatekey"`                                                                                     |
+| client_email                    | 是  | 客户端电子邮件地址      | `"client@example.com"`                                                                             |
+| client_id                       | N  | 客户端的 ID        | `"11111111"`                                                                                       |
+| auth_uri                        | N  | 认证URI          | `"https://accounts.google.com/o/oauth2/auth"`                                                      |
+| token_uri                       | N  | 认证token URI    | `"https://oauth2.googleapis.com/token"`                                                            |
+| auth_provider_x509_cert_url | N  | 认证提供者的证书URL    | `"https://www.googleapis.com/oauth2/v1/certs"`                                                     |
+| client_x509_cert_url          | N  | 客户端的证书 URL     | `"https://www.googleapis.com/robot/v1/metadata/x509/<project-name>.iam.gserviceaccount.com"` |
+| private_key                     | 是  | 认证用的私钥         | `"privateKey"`                                                                                     |
 
-## Setup GCP Secret Manager instance
+## 设置GCP Secret Manager实例
 
-Setup GCP Secret Manager using the GCP documentation: https://cloud.google.com/secret-manager/docs/quickstart.
+参考GCP文档设置 GCP Secret Manager：https://cloud.google.com/secret-manager/docs/quickstart。
 
-## Related links
-- [Secrets building block]({{< ref secrets >}})
-- [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})
-- [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
-- [Secrets API reference]({{< ref secrets_api.md >}})
+## 相关链接
+- [密钥构建块]({{< ref secrets >}})
+- [指南：获取密钥]({{< ref "howto-secrets.md" >}})
+- [指南：在Dapr组件中引用密钥]({{< ref component-secrets.md >}})
+- [密钥 API 参考]({{< ref secrets_api.md >}})
