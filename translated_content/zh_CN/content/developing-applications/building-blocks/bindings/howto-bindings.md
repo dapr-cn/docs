@@ -1,31 +1,31 @@
 ---
 type: docs
-title: "How-To: Use output bindings to interface with external resources"
-linkTitle: "How-To: Output bindings"
-description: "Invoke external systems with output bindings"
+title: "使用输出绑定调用不同的资源"
+linkTitle: "How-To: 绑定"
+description: "使用 Dapr 输出绑定调用外部系统"
 weight: 300
 ---
 
-Output bindings enable you to invoke external resources without taking dependencies on special SDK or libraries. For a complete sample showing output bindings, visit this [link](https://github.com/dapr/quickstarts/tree/master/bindings).
+使用绑定，可以调用外部资源，而无需绑定到特定的 SDK 或库。 有关显示输出绑定的完整示例，请访问此 [链接](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
-Watch this [video](https://www.youtube.com/watch?v=ysklxm81MTs&feature=youtu.be&t=1960) on how to use bi-directional output bindings. <iframe width="560" height="315" src="https://www.youtube.com/embed/ysklxm81MTs?start=1960" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+观看如何使用双向输出绑定的 [视频](https://www.bilibili.com/video/BV1EA411W71L?p=3&t=1960) 。 <iframe width="560" height="315" src="https://www.youtube.com/embed/ysklxm81MTs?start=1960" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 
-## 1. Create a binding
+## 1. 1. 创建绑定
 
-An output binding represents a resource that Dapr uses to invoke and send messages to.
+输出绑定表示 Dapr 将使用调用和向其发送消息的资源。
 
-For the purpose of this guide, you'll use a Kafka binding. You can find a list of the different binding specs [here]({{< ref setup-bindings >}}).
+就本指南的目的，您将使用 Kafka 绑定。 您可以在 [此处]({{< ref bindings >}}) 找到不同绑定规范的列表。
 
-Create a new binding component with the name of `myevent`.
+创建一个新的名称为 `myevent` 的绑定组件。
 
-Inside the `metadata` section, configure Kafka related properties such as the topic to publish the message to and the broker.
+在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
-Create the following YAML file, named `binding.yaml`, and save this to a `components` sub-folder in your application directory. (Use the `--components-path` flag with `dapr run` to point to your custom components dir)
+创建以下 YAML 文件，名为 binding.yaml，并将其保存到应用程序的 `components` 子文件夹中。 （使用具有 `--components-path` 标记 的 `dapr run` 命令来指向自定义组件目录）
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -47,7 +47,7 @@ spec:
 
 {{% codetab %}}
 
-To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [desired binding component]({{< ref setup-bindings >}}) in the yaml below (in this case kafka), save as `binding.yaml`, and run `kubectl apply -f binding.yaml`.
+要将其部署到 Kubernetes 群集中，请为你想要的[ 绑定 组件]({{< ref setup-bindings >}}) 在下面的 yaml `metadata` 中填写链接详情，保存为 `binding.yaml(在这里为kafka)`，然后运行 `kubectl apply -f binding.yaml`。
 
 
 ```yaml
@@ -70,22 +70,22 @@ spec:
 
 {{< /tabs >}}
 
-## 2. Send an event
+## 2. 2. 发送事件
 
-All that's left now is to invoke the output bindings endpoint on a running Dapr instance.
+注: 在 Kubernetes 中运行时，使用 `kubectl apply -f binding.yaml` 将此文件应用于您的集群
 
-You can do so using HTTP:
+您可以使用 HTTP 来这样做：
 
 ```bash
-curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }'
+curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }' }, "operation": "create" }' }, "operation": "create" }'
 ```
 
-As seen above, you invoked the `/binding` endpoint with the name of the binding to invoke, in our case its `myevent`. The payload goes inside the mandatory `data` field, and can be any JSON serializable value.
+如上文所见，您使用了要调用的绑定的名称来调用 `/binding` 终结点。 在我们的示例中，它的名称是 `myevent` 。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
 
-You'll also notice that there's an `operation` field that tells the binding what you need it to do. You can check [here]({{< ref supported-bindings >}}) which operations are supported for every output binding.
+您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以查看 [这里]({{< ref supported-bindings >}}) 查看每个输出绑定都支持的操作。
 
-## References
+## 参考资料
 
 - [Binding API]({{< ref bindings_api.md >}})
-- [Binding components]({{< ref bindings >}})
-- [Binding detailed specifications]({{< ref supported-bindings >}}) 
+- [绑定组件]({{< ref bindings >}})
+- [绑定详细规范]({{< ref supported-bindings >}}) 
