@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "Run Dapr in Self Hosted Mode"
 linkTitle: "自托管"
 weight: 1000
