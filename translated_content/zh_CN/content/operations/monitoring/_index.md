@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Observe your application with Dapr"
 linkTitle: "可观测性"
 weight: 400
