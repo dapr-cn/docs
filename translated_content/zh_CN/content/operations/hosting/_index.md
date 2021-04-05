@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr 的托管选项"
 linkTitle: "托管选项"
 weight: 100
