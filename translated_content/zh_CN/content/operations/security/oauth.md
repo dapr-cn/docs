@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Configure API authorization with OAuth"
+title: "使用 OAuth 配置 API 授权"
 linkTitle: "OAuth"
 weight: 2000
 description: "Enable OAUTH authorization on Dapr endpoints for your web APIs"
@@ -72,6 +72,12 @@ spec:
     # forceHTTPS:
     # This key is used to set HTTPS schema on redirect to your API method 
     # after Dapr successfully received Access Token from Identity Provider. 
+    # By default, Dapr will use HTTP on this redirect.
+  - name: forceHTTPS
+    value: "<set to true if you invoke an API method through Dapr from https origin>" 
+    # By default, Dapr will use HTTP on this redirect.
+  - name: forceHTTPS
+    value: "<set to true if you invoke an API method through Dapr from https origin>" 
     # By default, Dapr will use HTTP on this redirect.
   - name: forceHTTPS
     value: "<set to true if you invoke an API method through Dapr from https origin>"
@@ -151,7 +157,7 @@ spec:
       type: middleware.http.oauth2clientcredentials
 ```
 
-## Apply the configuration
+## 应用配置
 
 To apply the above configuration (regardless of grant type) to your Dapr sidecar, add a `dapr.io/config` annotation to your pod spec:
 
