@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Azure Blob Storage"
 linkTitle: "Azure Blob Storage"
 description: 关于Azure Blob Store状态存储组件的详细信息
