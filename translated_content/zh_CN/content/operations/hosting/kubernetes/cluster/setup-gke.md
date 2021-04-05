@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Setup a Google Kubernetes Engine cluster"
 linkTitle: "Google Kubernetes Engine"
 weight: 3000
