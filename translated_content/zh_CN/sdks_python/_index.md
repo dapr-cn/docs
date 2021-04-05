@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr Python SDK"
 linkTitle: "Python"
 weight: 1000
