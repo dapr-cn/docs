@@ -52,7 +52,7 @@ dapr --version
 
 Output should look like this:
 ```
-CLI version: 1.0.0
+CLI version: 1.0.1
 Runtime version: 1.0.1
 ```
 
@@ -109,4 +109,5 @@ You will see the Dapr config, Dapr binaries directory, and the default component
 
 {{< /tabs >}}
 
+<a class="btn btn-primary" href="{{< ref get-started-api.md >}}" role="button">Next step: Use the Dapr API >></a>
 
