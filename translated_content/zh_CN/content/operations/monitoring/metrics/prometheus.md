@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "How-To: Observe metrics with Prometheus"
 linkTitle: "Prometheus"
 weight: 4000
