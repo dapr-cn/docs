@@ -11,7 +11,7 @@ Stop Dapr instances and their associated apps.
 
 ## Supported platforms
 
-- [Self-Hosted]({{< ref self-hosted >}})
+- [自托管]({{< ref self-hosted >}})
 
 ## Usage
 
