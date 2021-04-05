@@ -5,11 +5,11 @@ linkTitle: "AWS SNS"
 description: "Detailed documentation on the AWS SNS binding component"
 ---
 
-## Component format
+## 配置
 
-To setup AWS SNS binding create a component of type `bindings.aws.sns`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup AWS SNS binding create a component of type `bindings.aws.sns`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
+关于身份验证相关属性的信息，请参阅 [认证到 AWS]({{< ref authenticating-aws.md >}})
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,30 +35,30 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储。 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field        | Required | Binding support | Details                                           | Example             |
-| ------------ |:--------:| --------------- | ------------------------------------------------- | ------------------- |
-| topicArn     |    Y     | Output          | The SNS topic name                                | `"arn:::topicarn"`  |
-| region       |    Y     | Output          | The specific AWS region                           | `"us-east-1"`       |
-| accessKey    |    Y     | Output          | The AWS Access Key to access this resource        | `"key"`             |
-| secretKey    |    Y     | Output          | The AWS Secret Access Key to access this resource | `"secretAccessKey"` |
-| sessionToken |    N     | Output          | The AWS session token to use                      | `"sessionToken"`    |
+| 字段           | 必填 | 绑定支持 | 详情                      | 示例                  |
+| ------------ |:--:| ---- | ----------------------- | ------------------- |
+| topicArn     | 是  | 输出   | The SNS topic name      | `"arn:::topicarn"`  |
+| region       | 是  | 输出   | The specific AWS region | `"us-east-1"`       |
+| accessKey    | 是  | 输出   | 要访问此资源的 AWS 访问密钥        | `"key"`             |
+| secretKey    | 是  | 输出   | 要访问此资源的 AWS 密钥访问 Key    | `"secretAccessKey"` |
+| sessionToken | N  | 输出   | 要使用的 AWS 会话令牌           | `"sessionToken"`    |
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+该组件支持**输出绑定**，其操作如下:
 
 - `create`
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
-- [Authenticating to AWS]({{< ref authenticating-aws.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [绑定API 参考]({{< ref bindings_api.md >}})
+- [AWS认证]({{< ref authenticating-aws.md >}})
