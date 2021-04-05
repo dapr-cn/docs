@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "State stores components"
+title: "状态存储组件"
 linkTitle: "State stores"
-description: "Guidance on setting up different state stores for Dapr state management"
+description: "为 Dapr 状态管理建立不同状态存储的指导"
 weight: 1000
 ---
 
