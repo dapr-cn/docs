@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "Overview of Dapr configuration options"
-linkTitle: "Overview"
+title: "Dapr 配置选项概述"
+linkTitle: "概述"
 weight: 100
-description: "Information on Dapr configuration and how to set options for your application"
+description: "关于 Dapr 配置以及如何设置应用程序选项的信息"
 ---
 
-## Sidecar configuration
+## Sidecar 配置
 
-### Setup sidecar configuration
+### 设置 Sidecar 选项配置
 
-#### Self-hosted sidecar
-In self hosted mode the Dapr configuration is a configuration file, for example `config.yaml`. By default the Dapr sidecar looks in the default Dapr folder for the runtime configuration eg: `$HOME/.dapr/config.yaml` in Linux/MacOS and `%USERPROFILE%\.dapr\config.yaml` in Windows.
+#### 自托管模式的 Sidecar
+在自托管模式下，Dapr 配置通过配置文件进行定义，如 `config.yaml`。 默认情况下，Dapr sidecar 会在默认的 Dapr 目录下寻找运行时配置，在 Linux / MacOS操作系统下，位置为 `$HOME/.dapr/config.yaml` ， Windows操作系统下则为 `%USERPROFILE%\.dapr\config.yaml`
 
-A Dapr sidecar can also apply a configuration by using a `--config` flag to the file path with `dapr run` CLI command.
+也可以在运行 `dapr run` CLI 命令时，通过使用 `--config` 标志来制定 Dapr sidecar 所读取的配置文件所在的位置。
 
-#### Kubernetes sidecar
-In Kubernetes mode the Dapr configuration is a Configuration CRD, that is applied to the cluster. For example;
+#### Kubernetes 模式的 Sidecar
+在 Kubernetes 模式下，Dapr 可以通过集群中的一个配置 CRD 进行配置。 例如：
 
 ```bash
 kubectl apply -f myappconfig.yaml
 ```
 
-You can use the Dapr CLI to list the Configuration CRDs
+您也可以使用 Dapr CLI 工具列举查看当前的配置 CRD 列表：
 
 ```bash
 dapr configurations -k
 ```
 
-A Dapr sidecar can apply a specific configuration by using a `dapr.io/config` annotation. For example:
+也可以使用 `dapr.io/config` 注解对指定的 Dapr sidecar 应用特定的配置。 例如:
 
 ```yml
   annotations:
@@ -37,23 +37,23 @@ A Dapr sidecar can apply a specific configuration by using a `dapr.io/config` an
     dapr.io/app-port: "3000"
     dapr.io/config: "myappconfig"
 ```
-Note: There are more [Kubernetes annotations]({{< ref "kubernetes-annotations.md" >}}) available to configure the Dapr sidecar on activation by sidecar Injector system service.
+注意: 还有更多的 [Kubernetes 注解]({{< ref "kubernetes-annotations.md" >}}) 可以用来配置 Dapr sidecar，通过 sidecar injector 系统服务来激活。
 
-### Sidecar configuration settings
+### Sidecar 配置
 
-The following configuration settings can be applied to Dapr application sidecars;
-- [Tracing](#tracing)
-- [Metrics](#metrics)
+Dapr 应用 sidecar 提供以下配置选项；
+- [Tracing（调用链追踪）](#tracing)
+- [指标](#metrics)
 - [中间件](#middleware)
-- [Scoping secrets for secret stores](#scoping-secrets-for-secret-stores)
-- [Access control allow lists for service invocation](#access-control-allow-lists-for-service-invocation)
-- [Example application sidecar configuration](#example-application-sidecar-configuration)
+- [限定范围的密钥储存](#scoping-secrets-for-secret-stores)
+- [服务间调用的访问控制](#access-control-allow-lists-for-service-invocation)
+- [Sidecar 配置示例](#example-application-sidecar-configuration)
 
-#### Tracing
+#### Tracing（调用链追踪）
 
-Tracing configuration turns on tracing for an application.
+链路追踪配置用于为应用程序开启调用链追踪功能。
 
-The `tracing` section under the `Configuration` spec contains the following properties:
+`Configuration` sepc下的 `tracing` 部分包含以下属性：
 
 ```yml
 tracing:
@@ -62,40 +62,40 @@ tracing:
     endpointAddress: "http://zipkin.default.svc.cluster.local:9411/api/v2/spans"
 ```
 
-The following table lists the properties for tracing:
+下面的表格给出了调用链追踪功能可配置的属性
 
-| Property                 | Type   | Description                                              |
-| ------------------------ | ------ | -------------------------------------------------------- |
-| `samplingRate`           | string | Set sampling rate for tracing to be enabled or disabled. |
-| `zipkin.endpointAddress` | string | Set the Zipkin server address.                           |
+| 属性                       | 数据类型   | 描述                    |
+| ------------------------ | ------ | --------------------- |
+| `samplingRate`           | string | 设置采样率，可以用来控制追踪功能是否开启。 |
+| `zipkin.endpointAddress` | string | 设置 Zipkin 服务器地址。      |
 
 
-`samplingRate` is used to enable or disable the tracing. To disable the sampling rate , set `samplingRate : "0"` in the configuration. The valid range of samplingRate is between 0 and 1 inclusive. The sampling rate determines whether a trace span should be sampled or not based on value. `samplingRate : "1"` samples all traces. By default, the sampling rate is (0.0001) or 1 in 10,000 traces.
+`samplingRate` 用来控制调用链追踪是否启用。 要禁用采样率 , 可以在配置文件中设置 `samplingRate : "0"` 。 SamplingRate 的有效值在0到1之间。 系统将根据采样率配置的数值决定一条 trace span 是否要被采样。 如果设置 `samplingRate : "1"` ，将会对所有的调用链进行采样。 默认情况下，采样率配置为 (0.0001)，即每10,000条请求中会有一条被采样。
 
-See [Observability distributed tracing]({{< ref "tracing-overview.md" >}}) for more information
+请参阅 [分布式可观测性追踪]({{< ref "tracing-overview.md" >}}) 了解更多信息。
 
-#### Metrics
+#### 指标
 
-The metrics section can be used to enable or disable metrics for an application.
+配置中的 metrics 部分用来为应用开启或禁用度量功能。
 
-The `metrics` section under the `Configuration` spec contains the following properties:
+`Configuration` sepc下的 `metrics` 部分包含以下属性：
 
 ```yml
 metrics:
   enabled: true
 ```
 
-The following table lists the properties for metrics:
+下面的表格给出了度量功能可配置的属性
 
-| Property  | Type    | Description                           |
-| --------- | ------- | ------------------------------------- |
-| `enabled` | boolean | Whether metrics should to be enabled. |
+| 属性        | 数据类型    | 描述        |
+| --------- | ------- | --------- |
+| `enabled` | boolean | 是否启用度量功能。 |
 
-See [metrics documentation]({{< ref "metrics-overview.md" >}}) for more information
+请参阅 [度量文档]({{< ref "metrics-overview.md" >}}) 了解更多信息。
 
 #### 中间件
 
-Middleware configuration set named Http pipeline middleware handlers The `httpPipeline` section under the `Configuration` spec contains the following properties:
+中间件配置用于配置一系列可命名的HTTP管道处理器。`Configuration` spec 下的`httpPipeline` 部分包含以下的配置属性：
 
 ```yml
 httpPipeline:
@@ -106,25 +106,25 @@ httpPipeline:
       type: middleware.http.uppercase
 ```
 
-The following table lists the properties for HTTP handlers:
+下面的表格给出了HTTP 处理器可配置的属性
 
-| Property | Type   | Description                      |
-| -------- | ------ | -------------------------------- |
-| name     | string | Name of the middleware component |
-| type     | string | Type of middleware component     |
+| 属性   | 数据类型   | 描述        |
+| ---- | ------ | --------- |
+| name | string | 中间件组件的名称。 |
+| type | string | 中间件组件的类型。 |
 
-See [Middleware pipelines]({{< ref "middleware-concept.md" >}}) for more information
+请参阅 [中间件管道]({{< ref "middleware-concept.md" >}}) 一节以获取更多信息。
 
-#### Scope secret store access
+#### 限定作用域的密钥储存控制
 
-See the [Scoping secrets]({{< ref "secret-scope.md" >}}) guide for information and examples on how to scope secrets to an application.
+请参阅 [Scoping secrets]({{< ref "secret-scope.md" >}}) 指南查看更多信息，以及如何为应用程序设置密钥作用域的例子。
 
-#### Access Control allow lists for service invocation
+#### 服务间调用的访问控制
 
-See the [Allow lists for service invocation]({{< ref "invoke-allowlist.md" >}}) guide for information and examples on how to set allow lists.
+请参阅 [服务间调用允许列表]({{< ref "invoke-allowlist.md" >}}) 了解更多信息，以及如何设置允许列表的例子。
 
-### Example sidecar configuration
-The following yaml shows an example configuration file that can be applied to an applications' Dapr sidecar.
+### Sidecar 配置示例
+下面的yaml内容展示了一个可以被应用于Dapr sidecar的配置文件：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -161,21 +161,21 @@ spec:
         action: allow
 ```
 
-## Control-plane configuration
-There is a single configuration file called `default` installed with the Dapr control plane system services that applies global settings. This is only set up when Dapr is deployed to Kubernetes.
+## 控制平面配置
+在 Dapr 控制平面系统中，安装了一个名为`default` 的配置文件，用于应用全局配置。 这个配置仅在Dapr部署到Kubernetes中时生效。
 
-### Control-plane configuration settings
-A Dapr control plane configuration can configure the following settings:
+### 控制平面配置列表
+在 Dapr 控制平面中，可以使用以下配置项：
 
-| Property         | Type   | Description                                                                                                     |
-| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
-| enabled          | bool   | Set mtls to be enabled or disabled                                                                              |
-| allowedClockSkew | string | The extra time to give for certificate expiry based on possible clock skew on a machine. Default is 15 minutes. |
-| workloadCertTTL  | string | Time a certificate is valid for. Default is 24 hours                                                            |
+| 属性               | 数据类型   | 描述                                 |
+| ---------------- | ------ | ---------------------------------- |
+| enabled          | bool   | 配置mtls是否开启                         |
+| allowedClockSkew | string | 证书到期时，基于本地时钟偏差给出的额外过期时间。 默认值为15分钟。 |
+| workloadCertTTL  | string | 证书有效时间。 默认值为 24 小时。                |
 
-See the [Mutual TLS]({{< ref "mtls.md" >}}) HowTo and [security concepts]({{< ref "security-concept.md" >}}) for more information.
+请参阅 [Mutual TLS]({{< ref "mtls.md" >}}) 和 [安全概念]({{< ref "security-concept.md" >}}) 了解更多信息。
 
-### Example control plane configuration
+### 控制平面配置示例
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
