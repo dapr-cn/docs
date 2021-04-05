@@ -91,7 +91,7 @@ annotations:
   dapr.io/config: "tracing"
 ```
 
-That's it! That's it! That's it! Your sidecar is now configured to send traces to Zipkin.
+That's it! Your sidecar is now configured to send traces to Zipkin.
 
 ### Viewing Tracing Data
 
@@ -105,6 +105,6 @@ In your browser, go to `http://localhost:9411` and you will see the Zipkin UI.
 
 ![zipkin](/images/zipkin_ui.png)
 
-## 参考资料
+## References
 - [Zipkin for distributed tracing](https://zipkin.io/)
 - [W3C distributed tracing]({{< ref w3c-tracing >}})
