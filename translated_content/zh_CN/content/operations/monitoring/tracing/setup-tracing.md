@@ -6,7 +6,7 @@ weight: 100
 description: "Configure Dapr to send distributed tracing data"
 ---
 
-It is recommended to run Dapr with tracing enabled for any production scenario.  It is recommended to run Dapr with tracing enabled for any production scenario.  It is recommended to run Dapr with tracing enabled for any production scenario.  You can configure Dapr to send tracing and telemetry data to many backends based on your environment, whether it is running in the cloud or on-premises.
+It is recommended to run Dapr with tracing enabled for any production scenario.  You can configure Dapr to send tracing and telemetry data to many backends based on your environment, whether it is running in the cloud or on-premises.
 
 ## Tracing configuration
 
@@ -22,7 +22,7 @@ spec:
 
 The following table lists the properties for tracing:
 
-| Property                 | Type   | 描述                                                       |
+| Property                 | Type   | Description                                              |
 | ------------------------ | ------ | -------------------------------------------------------- |
 | `samplingRate`           | string | Set sampling rate for tracing to be enabled or disabled. |
 | `zipkin.endpointAddress` | string | Set the Zipkin server address.                           |
@@ -108,7 +108,7 @@ annotations:
   dapr.io/config: "zipkin"
 ```
 
-That's it! That's it! That's it! Your sidecar is now configured for use with Zipkin.
+That's it! Your sidecar is now configured for use with Zipkin.
 
 ### Viewing Tracing Data
 
@@ -122,5 +122,5 @@ On your browser, go to `http://localhost:9411` and you should see the Zipkin UI.
 
 ![zipkin](/images/zipkin_ui.png)
 
-## 参考文档
+## References
 - [Zipkin for distributed tracing](https://zipkin.io/)
