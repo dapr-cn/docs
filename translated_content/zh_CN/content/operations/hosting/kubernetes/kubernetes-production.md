@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Production guidelines on Kubernetes"
-linkTitle: "Production guidelines"
+title: "Kubernetes生产环境配置指南"
+linkTitle: "生产环境配置指南"
 weight: 40000
-description: "Recommendations and practices for deploying Dapr to a Kubernetes cluster in a production ready configuration"
+description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和做法"
 ---
 
-## Cluster capacity requirements
+## 集群能力要求
 
-For a production ready Kubernetes cluster deployment, it is recommended you run a cluster of at least 3 worker nodes to support a highly-available control plane installation. Use the following resource settings might serve as a starting point. Requirements will vary depending on cluster size and other factors, so individual testing is needed to find the right values for your environment:
+对于生产环境部署的Kubernetes集群，建议你运行一个至少由3个工作节点组成的集群，以支持高可用的控制平面安装。 可以以下面的资源设置起步。 要求会根据集群大小和其他因素而有所不同，因此需要进行单独测试，以找到适合你的环境的值。
 
-*Note: For more info on CPU and Memory resource units and their meaning, see [this](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes) link*
+*注：有关 CPU 和内存资源单位及其含义的更多信息，请参见[这个](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes)链接。*
 
 | Deployment           | CPU                       | Memory                       |
 | -------------------- | ------------------------- | ---------------------------- |
@@ -22,53 +22,53 @@ For a production ready Kubernetes cluster deployment, it is recommended you run 
 
 ### Helm
 
-When installing Dapr using Helm, no default limit/request values are set. Each component has a `resources` option (for example, `dapr_dashboard.resources`), which you can use to tune the Dapr control plane to fit your environment. The [Helm chart readme](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md) has detailed information and examples. For local/dev installations, you might simply want to skip configuring the `resources` options.
+使用 Helm 安装 Dapr 时，没有默认限制/请求值。 每个组件都有一个`resources`选项(例如，`dapr_dashboard.resources`)，你可以用它来调整Dapr控制平面以适应你的环境。 [Helm chart readme](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md)有详细的信息和示例。 在本机/开发环境安装的时候，你可以跳过配置`resources`选项。
 
-### Optional components
+### 可选组件
 
-The following Dapr control plane deployments are optional:
+下面的 Dapr 控制平面deployment是可选的：
 
-- **Placement** - Needed for Dapr Actors
-- **Sentry** - Needed for mTLS for service to service invocation
-- **Dashboard** - Needed for operational view of the cluster
+- **Placement**-用于Dapr Actors
+- **Sentry** - 用于服务间调用的mTLS
+- **Dashboard** - 用于集群的操作视图
 
-## Sidecar resource settings
+## Sidecar 资源设置
 
-To set the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "kubernetes-annotations.md" >}}). The specific annotations related to resource constraints are:
+请参见 [这里]({{< ref "kubernetes-annotations.md" >}})来为 Dapr sidecar设置资源分配， 与资源约束相关的具体注解如下: 与资源约束相关的具体注解如下:
 
 - `dapr.io/sidecar-cpu-limit`
 - `dapr.io/sidecar-memory-limit`
 - `dapr.io/sidecar-cpu-request`
 - `dapr.io/sidecar-memory-request`
 
-If not set, the dapr sidecar will run without resource settings, which may lead to issues. For a production-ready setup it is strongly recommended to configure these settings.
+如果没有设置，dapr 边车将在没有资源配置的情况下运行，这可能会引起问题。 在生产环境下安装时，强烈建议调整这些配置。
 
-For more details on configuring resource in Kubernetes see [Assign Memory Resources to Containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) and [Assign CPU Resources to Containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/).
+有关在 Kubernetes 中配置资源的详细信息，请参见 [将内存资源分配给容器和 Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/)和 [将 CPU 资源分配给容器和 Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/)。
 
-Example settings for the dapr sidecar in a production-ready setup:
+在生产环境中，dapr 边车的设置示例:
 
 | CPU                        | Memory                        |
 | -------------------------- | ----------------------------- |
 | Limit: 300m, Request: 100m | Limit: 1000Mi, Request: 250Mi |
 
-*Note: Since Dapr is intended to do much of the I/O heavy lifting for your app, it's expected that the resources given to Dapr enable you to drastically reduce the resource allocations for the application*
+*注意：由于Dapr的目的是为了替你的应用程序完成大部分的I/O任务，因此给Dapr的资源能让您大幅减少其他应用程序的资源分配。*
 
-The CPU and memory limits above account for the fact that Dapr is intended to a high number of I/O bound operations. It is strongly recommended that you use a tool monitoring tool to baseline the sidecar (and app) containers and tune these settings based on those baselines.
+上面的CPU和内存限制是出于Dapr存在大量的I/O密集型操作的考虑。 强烈建议你使用工具监控工具对边车（和应用）容器进行基准监控，并根据基准来调整这些设置。
 
-## Highly-available mode
+## 高可用模式
 
-When deploying Dapr in a production-ready configuration, it's recommended to deploy with a highly available configuration of the control plane, which creates 3 replicas of each control plane pod in the dapr-system namespace.
+当在生产环境中部署Dapr时，建议使用控制平面的高可用配置进行部署，在dapr-system命名空间中为每个控制平面pod创建3个副本。
 
-## Deploying Dapr with Helm
+## 用Helm部署Dapr
 
-For a full guide on deploying Dapr with Helm visit [this guide]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}}).
+有关使用 Helm 部署 Dapr 的完整指南，请访问 [本指南]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}})。
 
-### Parameters file
-It is recommended to create a values file instead of specifying parameters on the command-line. This file should be checked in to source control so that you can track changes made to it.
+### 参数文件
+建议创建一个文件来存储值，而不是在命令行中指定参数。 这个文件应当应用代码版本控制，这样你就可以跟踪对它的修改。
 
-For a full list of all available options you can set in the values file (or by using the `--set` command-line option), see https://github.com/dapr/dapr/blob/master/charts/dapr/README.md.
+关于您可以在 值文件中设置的所有可用选项的完整列表（或使用 `--set` 命令行选项），请参阅 https://github.com/dapr/dapr/blob/master/charts/dapr/README.md。
 
-Instead of using either `helm install` or `helm upgrade` as shown below, you can also run `helm upgrade --install` - this will dynamically determine whether to install or upgrade.
+你也可以不使用`helm install`或`helm upgrade`，如下图所示，你可以运行`helm upgrade --install` - 这将动态地决定是安装还是升级。
 
 ```bash
 # add/update the helm repo
@@ -97,35 +97,35 @@ helm install dapr dapr/dapr \
 kubectl get pods --namespace dapr-system
 ```
 
-This command will run 3 replicas of each control plane service in the dapr-system namespace.
+该命令将为dapr-system命名空间中每个控制平面service创建3个副本。
 
-*Note: The Dapr Helm chart automatically deploys with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy the Dapr control plane to Windows nodes, but most users should not need to. For more information see [Deploying to a Hybrid Linux/Windows K8s Cluster]({{< ref "kubernetes-hybrid-clusters.md" >}})*
+*Dapr Cli 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 你可以将Dapr控制平面部署到Windows节点，但大多数用户应该不需要。 更多信息参见[部署到Linux/Windows混合型Kubernetes集群]({{< ref "kubernetes-hybrid-clusters.md" >}})*
 
-## Upgrading Dapr with Helm
+## 用 Helm 升级 Dapr
 
-Dapr supports zero downtime upgrades. The upgrade path includes the following steps:
+Dapr支持零停机升级， 升级包括以下步骤： 升级包括以下步骤：
 
-1. Upgrading a CLI version (optional but recommended)
-2. Updating the Dapr control plane
-3. Updating the data plane (Dapr sidecars)
+1. 升级CLI版本(可选但推荐)
+2. 更新Dapr control plane
+3. 更新数据平面(Dapr sidecars)
 
-### Upgrading the CLI
+### 升级CLI
 
-To upgrade the Dapr CLI, [download the latest version](https://github.com/dapr/cli/releases) of the CLI and ensure it's in your path.
+要升级 Dapr CLI，[下载 CLI 的最新版本](https://github.com/dapr/cli/releases)，并确保它在您的当前路径中。
 
-### Upgrading the control plane
+### 更新Dapr control plane
 
-See [steps to upgrade Dapr on a Kubernetes cluster]({{< ref "kubernetes-upgrade.md#helm" >}}).
+请参阅 [在 Kubernetes 集群上升级 Dapr 的步骤]({{< ref "kubernetes-upgrade.md#helm" >}})。
 
-### Updating the data plane (sidecars)
+### 更新数据平面(sidecar)
 
-The last step is to update pods that are running Dapr to pick up the new version of the Dapr runtime. To do that, simply issue a rollout restart command for any deployment that has the `dapr.io/enabled` annotation:
+最后一步是更新正在运行Dapr的pod，以接替新版本的Dapr运行时。 要完成这一步，只需对有`dapr.io/enabled`注解的任何deployment发送rollout restart命令即可。
 
 ```bash
 kubectl rollout restart deploy/<Application deployment name>
 ```
 
-To see a list of all your Dapr enabled deployments, you can either use the [Dapr Dashboard](https://github.com/dapr/dashboard) or run the following command using the Dapr CLI:
+要查看所有已启用Dapr的deployment列表，您可以使用[Dapr Dashboard](https://github.com/dapr/dashboard)或使用Dapr CLI运行以下命令。
 
 ```bash
 dapr list -k
@@ -134,35 +134,35 @@ APP ID     APP PORT  AGE  CREATED
 nodeapp    3000      16h  2020-07-29 17:16.22
 ```
 
-## Recommended security configuration
+## 建议的安全配置
 
-When properly configured, Dapr ensures secure communication. It can also make your application more secure with a number of built-in features.
+当正确配置时，Dapr可确保安全通信， 它还可以通过一些内置的功能使你的应用更加安全。 它还可以通过一些内置的功能使你的应用更加安全。
 
-It is recommended that a production-ready deployment includes the following settings:
+建议生产环境的部署涵盖以下设置：
 
-1. **Mutual Authentication (mTLS)** should be enabled. Note that Dapr has mTLS on by default. For details on how to bring your own certificates, see [here]({{< ref "mtls.md#bringing-your-own-certificates" >}})
+1. **启用相互验证 (mTLS)**。 请注意，Dapr默认开启了mTLS。 有关如何携带自定义证书的详细信息，请参见 [这里]({{< ref "mtls.md#bringing-your-own-certificates" >}})。
 
-2. **App to Dapr API authentication** is enabled. This is the communication between your application and the Dapr sidecar. To secure the Dapr API from unauthorized application access, it is recommended to enable Dapr's token based auth. See [enable API token authentication in Dapr]({{< ref "api-token.md" >}}) for details
+2. **启用Dapr to App API验证**。 这是你的应用程序和Dapr边车之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 请参阅[使用令牌认证对来自Dapr的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
 
-3. **Dapr to App API authentication** is enabled. This is the communication between Dapr and your application. This ensures that Dapr knows that it is communicating with an authorized application. See [Authenticate requests from Dapr using token authentication]({{< ref "app-api-token.md" >}}) for details
+3. **启用Dapr to App API验证**。 这是你的应用程序和Dapr边车之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 请参阅[使用令牌认证对来自Dapr的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
 
-4. All component YAMLs should have **secret data configured in a secret store** and not hard-coded in the YAML file. See [here]({{< ref "component-secrets.md" >}}) on how to use secrets with Dapr components
+4. 所有的组件YAML都应该把**密钥数据配置在密钥存储中**，而不是硬编码在YAML文件中。 请参阅 [这里]({{< ref "component-secrets.md" >}})，了解如何在Dapr组件中使用秘密。
 
-5. The Dapr **control plane is installed on a dedicated namespace** such as `dapr-system`.
+5. Dapr **控制平面安装在一个专用的命名空间**上，如`dapr-system`。
 
-6. Dapr also supports **scoping components for certain applications**. This is not a required practice, and can be enabled according to your security needs. See [here]({{< ref "component-scopes.md" >}}) for more info.
+6. Dapr还支持**框定应用程序的组件范围**。 这不是必要的，可以根据您的安全需求启用。 请参阅 [这里]({{< ref "component-scopes.md" >}}) 以获取更多信息。
 
 
-## Tracing and metrics configuration
+## 追踪和度量配置
 
-Dapr has tracing and metrics enabled by default. It is *recommended* that you set up distributed tracing and metrics for your applications and the Dapr control plane in production.
+Dapr 默认启用追踪和度量。 *建议*在生产环境中为您的应用程序和Dapr控制平面设置分布式追踪和度量。
 
-If you already have your own observability set-up, you can disable tracing and metrics for Dapr.
+如果你已经有了自己的可观察测性支持组件，你可以禁用Dapr的追踪和度量。
 
-### Tracing
-To configure a tracing backend for Dapr visit [this]({{< ref "setup-tracing.md" >}}) link.
+### Tracing（调用链追踪）
+要为 Dapr 配置后台追踪，请访问[这个]({{< ref "setup-tracing.md" >}})链接。
 
-### Metrics
-For metrics, Dapr exposes a Prometheus endpoint listening on port 9090 which can be scraped by Prometheus.
+### 指标
+对于度量，Dapr在9090端口上暴露了一个Prometheus端点，可以被Prometheus收集。
 
-To setup Prometheus, Grafana and other monitoring tools with Dapr, visit [this]({{< ref "monitoring" >}}) link.
+要为 Dapr 配置Prometheus、Grafana 和其他监控工具，请访问 [这个]({{< ref "monitoring" >}})链接。
