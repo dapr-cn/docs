@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Dapr and service meshes"
-linkTitle: "Service meshes"
+title: "Dapr 和服务网格"
+linkTitle: "服务网格"
 weight: 100
 description: >
-  How Dapr compares to, and works with service meshes
+  Dapr 如何与服务网格进行比较和工作
 ---
 
-Dapr uses a sidecar architecture, running as a separate process alongside the application and includes features such as, service invocation, network security and distributed tracing. This often raises the question - how does Dapr compare to service mesh solutions such as Linkerd, Istio and Open Service Mesh (OSM)?
+Dapr 使用 sidecar 架构，与应用程序一起作为单独的流程运行，包括服务调用、网络安全和分布式跟踪等功能。 这经常会引发一个问题 - Dapr 与服务网格解决方案（如 Linkerd 、Istio 和开放式服务网格 （OSM） 相比如何？
 
-## How Dapr and service meshes compare
+## Dapr 和服务网格的比较
 While Dapr and service meshes do offer some overlapping capabilities, **Dapr is not a service mesh** where a service mesh, is defined as a *networking* service mesh. Unlike a service mesh which is focused on networking concerns, Dapr is focused on providing building blocks that make it easier for developers to build applications as microservices. Dapr is developer-centric versus service meshes being infrastructure-centric.
 
 In most cases, developers do not need to be aware that the application they are building will be deployed in an environment which includes a service mesh since a service mesh intercepts network traffic. Service meshes are mostly managed and deployed by system operators. However, Dapr building block APIs are intended to be used by developers explicitly in their code.
