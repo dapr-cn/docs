@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Kubernetes 密钥"
-linkTitle: "Kubernetes 密钥"
-description: 详细介绍了关于 Kubernetes密钥仓库组件的信息
+title: "Kubernetes secrets"
+linkTitle: "Kubernetes secrets"
+description: Detailed information on the Kubernetes secret store component
 ---
 
-## 开篇摘要
+## Summary
 
-Kubernetes有一个内置的密钥仓库，Dapr组件可以使用它来检索密钥。 设置Kubernetes密钥仓库不需要特殊的配置，你能够从`http://localhost:3500/v1.0/secrets/kubernetes/[my-secret]`这个 URL中检索密钥。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
+Kubernetes has a built-in secrets store which Dapr components can use to retrieve secrets from. No special configuration is needed to setup the Kubernetes secrets store, and you are able to retrieve secrets from the `http://localhost:3500/v1.0/secrets/kubernetes/[my-secret]` URL. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
-## 相关链接
-- [密钥构建块]({{< ref secrets >}})
-- [指南：获取密钥]({{< ref "howto-secrets.md" >}})
-- [指南：在Dapr组件中引用密钥]({{< ref component-secrets.md >}})
-- [密钥 API 参考]({{< ref secrets_api.md >}})
+## Related links
+- [Secrets building block]({{< ref secrets >}})
+- [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})
+- [How-To: Reference secrets in Dapr components]({{< ref component-secrets.md >}})
+- [Secrets API reference]({{< ref secrets_api.md >}})
