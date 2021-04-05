@@ -8,7 +8,7 @@ description: "Common issues and problems faced when running Dapr applications"
 
 ## I don't see the Dapr sidecar injected to my pod
 
-There could be several reasons to why a sidecar will not be injected into a pod. There could be several reasons to why a sidecar will not be injected into a pod. First, check your Deployment or Pod YAML file, and check that you have the following annotations in the right place:
+There could be several reasons to why a sidecar will not be injected into a pod. First, check your Deployment or Pod YAML file, and check that you have the following annotations in the right place:
 
 Sample deployment:
 
@@ -75,9 +75,9 @@ You might see a table like the following at the end of the command output:
   Warning  BackOff    3m2s (x18 over 6m48s)  kubelet, aks-agentpool-12499885-vmss000000  Back-off restarting failed container
 ```
 
-The message `Container daprd failed liveness probe, will be restarted` indicates at the Dapr sidecar has failed its health checks and will be restarted. The messages `Readiness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` and `Liveness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` show that the health check failed because no connection could be made to the sidecar. The messages `Readiness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` and `Liveness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` show that the health check failed because no connection could be made to the sidecar.
+The message `Container daprd failed liveness probe, will be restarted` indicates at the Dapr sidecar has failed its health checks and will be restarted. The messages `Readiness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` and `Liveness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` show that the health check failed because no connection could be made to the sidecar.
 
-The most common cause of this failure is that a component (such as a state store) is misconfigured and is causing initialization to take too long. The most common cause of this failure is that a component (such as a state store) is misconfigured and is causing initialization to take too long. When initialization takes a long time, it's possible that the health check could terminate the sidecar before anything useful is logged by the sidecar.
+The most common cause of this failure is that a component (such as a state store) is misconfigured and is causing initialization to take too long. When initialization takes a long time, it's possible that the health check could terminate the sidecar before anything useful is logged by the sidecar.
 
 To diagnose the root cause:
 
@@ -97,9 +97,9 @@ To check, use kubectl get a list of components:
 kubectl get components
 ```
 
-If there isn't a state store component, it means you need to set one up. Visit [here]({{< ref "state-management" >}}) for more details. Visit [here]({{< ref "state-management" >}}) for more details.
+If there isn't a state store component, it means you need to set one up. Visit [here]({{< ref "state-management" >}}) for more details.
 
-If everything's set up correctly, make sure you got the credentials right. If everything's set up correctly, make sure you got the credentials right. Search the Dapr runtime logs and look for any state store errors:
+If everything's set up correctly, make sure you got the credentials right. Search the Dapr runtime logs and look for any state store errors:
 
 ```bash
 kubectl logs <name-of-pod> daprd
@@ -115,9 +115,9 @@ To check, use kubectl get a list of components:
 kubectl get components
 ```
 
-If there isn't a pub/sub component, it means you need to set one up. Visit [here]({{< ref "pubsub" >}}) for more details. Visit [here]({{< ref "pubsub" >}}) for more details.
+If there isn't a pub/sub component, it means you need to set one up. Visit [here]({{< ref "pubsub" >}}) for more details.
 
-If everything is set up correctly, make sure you got the credentials right. If everything is set up correctly, make sure you got the credentials right. Search the Dapr runtime logs and look for any pub/sub errors:
+If everything is set up correctly, make sure you got the credentials right. Search the Dapr runtime logs and look for any pub/sub errors:
 
 ```bash
 kubectl logs <name-of-pod> daprd
@@ -125,7 +125,7 @@ kubectl logs <name-of-pod> daprd
 
 ## The Dapr Operator pod keeps crashing
 
-Check that there's only one installation of the Dapr Operator in your cluster. Find out by running Find out by running
+Check that there's only one installation of the Dapr Operator in your cluster. Find out by running
 
 ```bash
 kubectl get pods -l app=dapr-operator --all-namespaces
@@ -135,7 +135,7 @@ If two pods appear, delete the redundant Dapr installation.
 
 ## I'm getting 500 Error responses when calling Dapr
 
-This means there are some internal issue inside the Dapr runtime. To diagnose, view the logs of the sidecar: To diagnose, view the logs of the sidecar:
+This means there are some internal issue inside the Dapr runtime. To diagnose, view the logs of the sidecar:
 
 ```bash
 kubectl logs <name-of-pod> daprd
@@ -143,11 +143,11 @@ kubectl logs <name-of-pod> daprd
 
 ## I'm getting 404 Not Found responses when calling Dapr
 
-This means you're trying to call an Dapr API endpoint that either doesn't exist or the URL is malformed. This means you're trying to call an Dapr API endpoint that either doesn't exist or the URL is malformed. Look at the Dapr API reference [here]({{< ref "api" >}}) and make sure you're calling the right endpoint.
+This means you're trying to call an Dapr API endpoint that either doesn't exist or the URL is malformed. Look at the Dapr API reference [here]({{< ref "api" >}}) and make sure you're calling the right endpoint.
 
 ## I don't see any incoming events or calls from other services
 
-Have you specified the port your app is listening on? Have you specified the port your app is listening on? In Kubernetes, make sure the `dapr.io/app-port` annotation is specified:
+Have you specified the port your app is listening on? In Kubernetes, make sure the `dapr.io/app-port` annotation is specified:
 
 ```yaml
 annotations:
@@ -160,9 +160,9 @@ If using Dapr Standalone and the Dapr CLI, make sure you pass the `--app-port` f
 
 ## My Dapr-enabled app isn't behaving correctly
 
-The first thing to do is inspect the HTTP error code returned from the Dapr API, if any. If you still can't find the issue, try enabling `debug` log levels for the Dapr runtime. See [here]({{< ref "logs.md" >}}) how to do so. If you still can't find the issue, try enabling `debug` log levels for the Dapr runtime. See [here]({{< ref "logs.md" >}}) how to do so.
+The first thing to do is inspect the HTTP error code returned from the Dapr API, if any. If you still can't find the issue, try enabling `debug` log levels for the Dapr runtime. See [here]({{< ref "logs.md" >}}) how to do so.
 
-You might also want to look at error logs from your own process. You might also want to look at error logs from your own process. If running on Kubernetes, find the pod containing your app, and execute the following:
+You might also want to look at error logs from your own process. If running on Kubernetes, find the pod containing your app, and execute the following:
 
 ```bash
 kubectl logs <pod-name> <name-of-your-container>
@@ -172,7 +172,7 @@ If running in Standalone mode, you should see the stderr and stdout outputs from
 
 ## I'm getting timeout/connection errors when running Actors locally
 
-Each Dapr instance reports it's host address to the placement service. The placement service then distributes a table of nodes and their addresses to all Dapr instances. If that host address is unreachable, you are likely to encounter socket timeout errors or other variants of failing request errors. The placement service then distributes a table of nodes and their addresses to all Dapr instances. If that host address is unreachable, you are likely to encounter socket timeout errors or other variants of failing request errors.
+Each Dapr instance reports it's host address to the placement service. The placement service then distributes a table of nodes and their addresses to all Dapr instances. If that host address is unreachable, you are likely to encounter socket timeout errors or other variants of failing request errors.
 
 Unless the host name has been specified by setting an environment variable named `DAPR_HOST_IP` to a reachable, pingable address, Dapr will loop over the network interfaces and select the first non-loopback address it finds.
 
@@ -186,10 +186,10 @@ The following example shows how to set the Host IP env var to `127.0.0.1`:
 export DAPR_HOST_IP=127.0.0.1
 ```
 
-## None of my components are getting loaded when my application starts. None of my components are getting loaded when my application starts. I keep getting "Error component X cannot be found"
+## None of my components are getting loaded when my application starts. I keep getting "Error component X cannot be found"
 
 This is usually due to one of the following issues
 
-- You may have defined the `NAMESPACE` environment variable locally or deployed your components into a different namespace in Kubernetes. Check which namespace your app and the components are deployed to. Read [scoping components to one or more applications]({{< ref "component-scopes.md" >}}) for more information. Check which namespace your app and the components are deployed to. Read [scoping components to one or more applications]({{< ref "component-scopes.md" >}}) for more information.
-- You may have not provided a `--components-path` with the Dapr `run` commands or not placed your components into the default components folder for your OS. Read [define a component]({{< ref "get-started-component.md" >}}) for more information. Read [define a component]({{< ref "get-started-component.md" >}}) for more information.
-- You may have a syntax issue in component YAML file. You may have a syntax issue in component YAML file. Check your component YAML with the component [YAML samples]({{< ref "components.md" >}}).
+- You may have defined the `NAMESPACE` environment variable locally or deployed your components into a different namespace in Kubernetes. Check which namespace your app and the components are deployed to. Read [scoping components to one or more applications]({{< ref "component-scopes.md" >}}) for more information.
+- You may have not provided a `--components-path` with the Dapr `run` commands or not placed your components into the default components folder for your OS. Read [define a component]({{< ref "get-started-component.md" >}}) for more information.
+- You may have a syntax issue in component YAML file. Check your component YAML with the component [YAML samples]({{< ref "components.md" >}}).
