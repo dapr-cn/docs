@@ -26,7 +26,7 @@ This tells Dapr to set maximum request body size to `16` MB.
 
 {{% codetab %}}
 
-On Kubernetes, set the following annotations in your deployment YAML:
+在Kubernetes上，在你的deployment YAML中设置以下注解:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -56,5 +56,5 @@ spec:
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 - [Dapr Kubernetes pod annotations spec]({{< ref kubernetes-annotations.md >}})
