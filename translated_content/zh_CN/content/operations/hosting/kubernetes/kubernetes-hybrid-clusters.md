@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "部署到 Linux/Windows Kubernetes 的混合集群"
 linkTitle: "Hybrid clusters"
 weight: 20000
