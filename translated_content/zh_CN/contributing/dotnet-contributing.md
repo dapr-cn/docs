@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "为 .NET SDK 贡献"
 linkTitle: ".NET SDK"
 weight: 3000
