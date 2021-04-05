@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "Dapr .NET SDK 与 ASP.NET 集成"
 linkTitle: "ASP.NET"
 weight: 100000
