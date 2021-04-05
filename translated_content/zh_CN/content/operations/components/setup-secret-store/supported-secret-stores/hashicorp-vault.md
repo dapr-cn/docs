@@ -34,6 +34,20 @@ spec:
   - name: vaultTokenMountPath # Required. Path to token file.
     value : "[path_to_file_containing_token]"
   - name: vaultKVPrefix # Optional. Default: "dapr"
+    value : "[vault_prefix]" Default: "https://127.0.0.1:8200"
+  - name: caCert # Optional. This or caPath or caPem
+    value: "[ca_cert]"
+  - name: caPath # Optional. This or CaCert or caPem
+    value: "[path_to_ca_cert_file]"
+  - name: caPem # Optional. This or CaCert or CaPath
+    value : "[encoded_ca_cert_pem]"
+  - name: skipVerify # Optional. Default: false
+    value : "[skip_tls_verification]"
+  - name: tlsServerName # Optional.
+    value : "[tls_config_server_name]"
+  - name: vaultTokenMountPath # Required. Path to token file.
+    value : "[path_to_file_containing_token]"
+  - name: vaultKVPrefix # Optional. Default: "dapr"
     value : "[vault_prefix]"
 ```
 {{% alert title="Warning" color="warning" %}}
@@ -42,16 +56,16 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                  | 必填 | 详情                                               | 示例                         |
-| ------------------- |:--:| ------------------------------------------------ | -------------------------- |
-| vaultAddr           | N  | Vault服务器的地址 默认值为 `"https://127.0.0.1:8200"`      | `"https://127.0.0.1:8200"` |
-| caCert              | N  | Certificate Authority只使用其中一个选项。 要使用的加密cacerts    | `"cacerts"`                |
-| caPath              | N  | Certificate Authority只使用其中一个选项。 CA证书文件的路径        | `"path/to/cacert/file"`    |
-| caPem               | N  | Certificate Authority只使用其中一个选项。 要是用的加密cacert pem | `"encodedpem"`             |
-| skipVerify          | N  | 跳过 TLS 验证。 默认值为 `"false"`                        | `"true"`, `"false"`        |
-| tlsServerName       | N  | TLS 配置服务器名称                                      | `"tls-server"`             |
-| vaultTokenMountPath | Y  | 包含token的文件路径                                     | `"path/to/file"`           |
-| vaultKVPrefix       | N  | 仓库前缀 默认值为 `"dapr"`                               | `"dapr"`, `"myprefix"`     |
+| 字段                  | 必填 | 详情                                                                           | 示例                         |
+| ------------------- |:--:| ---------------------------------------------------------------------------- | -------------------------- |
+| vaultAddr           | N  | The address of the Vault server. Vault服务器的地址 默认值为 `"https://127.0.0.1:8200"` | `"https://127.0.0.1:8200"` |
+| caCert              | N  | Certificate Authority只使用其中一个选项。 要使用的加密cacerts                                | `"cacerts"`                |
+| caPath              | N  | Certificate Authority只使用其中一个选项。 CA证书文件的路径                                    | `"path/to/cacert/file"`    |
+| caPem               | N  | Certificate Authority只使用其中一个选项。 要是用的加密cacert pem                             | `"encodedpem"`             |
+| skipVerify          | N  | 跳过 TLS 验证。 默认值为 `"false"`                                                    | `"true"`, `"false"`        |
+| tlsServerName       | N  | TLS 配置服务器名称                                                                  | `"tls-server"`             |
+| vaultTokenMountPath | Y  | 包含token的文件路径                                                                 | `"path/to/file"`           |
+| vaultKVPrefix       | N  | The prefix in vault. Defautls to `"dapr"`                                    | `"dapr"`, `"myprefix"`     |
 ## 设置 Hashicorp Vault实例
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
