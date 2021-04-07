@@ -342,9 +342,9 @@ cd ..
 
 ### 使用强类型客户端调用 actor 方法
 
-You can use `ActorProxy.Create<IMyActor>(..)` to create a strongly-typed client and invoke methods on the actor.
+您可以使用 `ActorProxy.Create<IMyActor>(.)` 来创建一个强类型客户端，并调用 actor 上的方法。
 
-Paste the following code into `Program.cs` in the `MyActorClient` project:
+在 `MyActorClient` 项目中，将以下代码粘贴到 `Program.cs` 中。
 
 ```csharp
 using System;
@@ -388,22 +388,25 @@ namespace MyActorClient
         }
     }
 }
+              
+             
+             
 ```
 
-## Running the code
+## 运行代码
 
-The projects that you've created can now to test the sample.
+你已经创建的项目现在可以测试示例。
 
-1. Run MyActorService
+1. 运行 MyActorService
 
-    Since `MyActorService` is hosting actors, it needs to be run with the Dapr CLI.
+    由于`MyActorService`正在托管 Actors，因此需要使用 Dapr CLI 来运行。
 
     ```bash
     cd MyActorService
     dapr run --app-id myapp --app-port 5000 --dapr-http-port 3500 -- dotnet run
     ```
 
-    You will see commandline output from both `daprd` and `MyActorService` in this terminal. You should see something like the following, which indicates that the application started successfully.
+    您将在这个终端中看到 `daprd` 和 `MyActorService` 的命令行输出。 您应该看到以下情况，这表明应用程序已成功启动。
 
     ```txt
     ...
@@ -433,15 +436,15 @@ The projects that you've created can now to test the sample.
 
 2. 运行 MyActorClient
 
-    `MyActorClient` is acting as the client, and it can be run normally with `dotnet run`.
+    `MyActorClient` 作为客户端，它可以用 `dotnet run` 正常运行。
 
-    Open a new terminal an navigate to the `MyActorClient` directory. Then run the project with:
+    打开一个新的终端，导航到 `MyActorClient` 目录。 然后运行此项目：
 
     ```bash
     dotnet run
     ```
 
-    You should see commandline output like:
+    您应该看到命令行输出，如：
 
     ```txt
     Startup up...
@@ -451,11 +454,11 @@ The projects that you've created can now to test the sample.
     Got response: Success
     ```
 
-> 💡 This sample relies on a few assumptions. The default listening port for an ASP.NET Core web project is 5000, which is being passed to `dapr run` as `--app-port 5000`. The default HTTP port for the Dapr sidecar is 3500. We're telling the sidecar for `MyActorService` to use 3500 so that `MyActorClient` can rely on the default value.
+> 💡 这个示例依赖于几个假设。 ASP.NET Core Web 项目的默认监听端口是 5000，它被传递给 `dapr run` 作为 `--app-port 5000`。 Dapr sidecar 的默认HTTP端口是 3500。 我们告诉 sidecar 的 `MyActorService` 使用 3500，以便 `MyActorClient` 可以依赖默认值。
 
-Now you have successfully created an actor service and client. See the related links section to learn more.
+现在您已经成功创建了 actor 服务和客户端。 查看相关链接部分了解更多信息。
 
 ## 相关链接
 
-- [.NET Dapr Actors client guide]({{< ref dotnet-actors-client.md >}})
-- [.NET Dapr Actors usage guide]({{< ref dotnet-actors-usage.md >}})
+- [.NET Dapr Actors 客户端指南]({{< ref dotnet-actors-client.md >}})
+- [.NET Dapr Actors 客户端指南]({{< ref dotnet-actors-usage.md >}})
