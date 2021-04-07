@@ -50,7 +50,7 @@ omsagent-smtk7                                                    1/1     Runnin
 ...
 ```
 
-应用配置映射：
+应用config map：
 
 ```bash
 kubectl apply -f ./azm-config.map.yaml
@@ -64,9 +64,9 @@ kubectl apply -f ./azm-config.map.yaml
 helm install dapr dapr/dapr --namespace dapr-system --set global.logAsJson=true
 ```
 
-2. Enable JSON formatted log in Dapr sidecar and add Prometheus annotations.
+2. 启用 JSON 格式化日志到 Dapr sidecar 并添加 Prometheus 注释。
 
-> Note: OMS Agent scrapes the metrics only if replicaset has Prometheus annotations.
+> 注意: OMS Agent仅在replicaset具有Prometheus注释时才抓取指标。
 
 添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml.
 
@@ -99,13 +99,13 @@ spec:
 ...
 ```
 
-## Search metrics and logs with Azure Monitor
+## 用 Azure Monitor 搜索度量和日志
 
-1. Go to Azure Monitor
+1. 前往Azure Monitor
 
-2. Search Dapr logs
+2. 搜索 Dapr 日志
 
-Here is an example query, to parse JSON formatted logs and query logs from dapr system processes.
+下面是一个示例查询，用于解析JSON格式的日志和来自Dapr系统进程的查询日志。
 
 ```
 ContainerLog
@@ -115,9 +115,9 @@ ContainerLog
 | sort by Time
 ```
 
-3. Search metrics
+3. 搜索度量
 
-This query, queries process_resident_memory_bytes Prometheus metrics for Dapr system processes and renders timecharts
+这个语句查询process_resident_memory_bytes Prometheus度量的Dapr系统进程，并呈现时间图
 
 ```
 InsightsMetrics
@@ -131,6 +131,6 @@ InsightsMetrics
 
 # 参考资料
 
-* [Configure scraping of Prometheus metrics with Azure Monitor for containers](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-prometheus-integration)
-* [Configure agent data collection for Azure Monitor for containers](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-agent-config)
-* [Azure Monitor Query](https://docs.microsoft.com/en-us/azure/azure-monitor/log-query/query-language)
+* [使用Azure Monitor为容器配置普Prometheus度量数据抓取](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-prometheus-integration)
+* [配置用于容器的 Azure Monitor的代理数据收集](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-agent-config)
+* [Azure Monitor 查询](https://docs.microsoft.com/en-us/azure/azure-monitor/log-query/query-language)
