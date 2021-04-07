@@ -31,16 +31,16 @@ public Task<MyData> GetDataAsync()
 
 本文档中的指导将集中在 `IActorProxyFactory` 上。 `ActorProxy` 的静态方法功能是相同的，除了集中管理配置的能力。
 
-## Identifying an actor
+## 识别 actor
 
-In order to communicate with an actor, you will need to know its type and id, and for a strongly-typed client one of its interfaces. All of the APIs on `IActorProxyFactory` will require an actor type and actor id.
+为了与 actor 进行通信，你需要知道它的类型和id，对于强类型的客户端，需要知道它的一个接口。 `IActorProxyFactory` 上的所有API都需要一个 actor 类型和 actor id。
 
-- The actor type uniquely identifies the actor implementation across the whole application.
-- The actor id uniquely identifies an instance of that type.
+- Actor 类型唯一地识别了 actor 在整个应用中的实现情况。
+- Actor id唯一地标识了该类型的一个实例。
 
-If you do not have an actor id and want to communicate with a new instance, you can use `ActorId.CreateRandom()` to create a randomized id. Since the random id is a cryptographically strong identifier, the runtime will create a new actor instance when you interact with it.
+如果您没有actor id，并且想要与新的实例进行通信，您可以使用 `ActorId.CreateRandom()` 来创建一个随机的id。 由于随机 id 是一个加密的强标识符，所以当你与它交互时，运行时将创建一个新的 actor 实例。
 
-You can use the type `ActorReference` to exchange an actor type and actor id with other actors as part of messages.
+你可以使用 `ActorReference` 类型与其他actor交换 actor类型和actor id作为消息的一部分。
 
 ## Two styles of actor client
 
