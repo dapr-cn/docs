@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Example of running and using virtual actors in the .NET SDK"
+title: "在.NET SDK中运行和使用 virtual actors 的例子。"
 linkTitle: "示例"
 weight: 300000
-description: Try out .NET Dapr virtual actors with this example
+description: 试用 .NET Dapr virtual actors
 ---
 
 通过Dapr actor 程序包，您可以与.NET应用程序中的Dapr虚拟actor进行交互。
@@ -16,7 +16,7 @@ description: Try out .NET Dapr virtual actors with this example
 
 ## 概述
 
-This document describes how to create an Actor (`MyActor`) and invoke its methods on the client application.
+本文档描述了如何创建一个Actor(`MyActor`) 并从客户端程序调用其方法。
 
 ```
 MyActor --- MyActor.Interfaces
@@ -33,38 +33,37 @@ MyActor --- MyActor.Interfaces
 * [Actor(TypeName = "MyCustomActorTypeName")] internal class MyActor : Actor, IMyActor
     { // ... }
 
-## Step 0: Prepare
+## 第 0 步：准备
 
-Since we'll be creating 3 projects, choose an empty directory to start from, and open it in your terminal of choice.
+由于我们将创建3个项目，所以选择一个空的目录开始，在你选择的终端中打开它。
 
-## Step 1: Create actor interfaces
+## 第 1 步：创建 actor 接口
 
-Actor interface defines the actor contract that is shared by the actor implementation and the clients calling the actor.
+Actor接口定义了actor的实现和调用actor的客户端之间的约定。
 
-Actor interface is defined with the below requirements:
+Actor接口的定义需要满足以下要求：
 
 * Actor接口必须继承 `Dapr.Actors.IActor` 接口
 * Actor方法的返回值必须是`Task` 或者 `Task<object>`类型
 * Actor方法最多只能有一个参数
 
-### Create interface project and add dependencies
+### 创建接口项目并添加依赖
 
 ```bash
-# Create Actor Interfaces
+# 创建 Actor 接口
 dotnet new classlib -o MyActor.Interfaces
 
 cd MyActor.Interfaces
 
-# Add Dapr.Actors nuget package. Please use the latest package version from nuget.org
-dotnet add package Dapr.Actors -v 1.0.0-rc02 Please use the latest package version from nuget.org
+# 添加 Dapr.Actors nuget 包。 请使用来自 nuget.org 的最新软件包版本
 dotnet add package Dapr.Actors -v 1.0.0
 
 cd ..
 ```
 
-### Implement IMyActor interface
+### 定义IMyActor接口
 
-Define `IMyActor` interface and `MyData` data object. Paste the following code into `MyActor.cs` in the `MyActor.Interfaces` project.
+定义 `IMyActor` 接口和 `MyData` 数据对象。 在 `Myactor.Interface` 项目中，将以下代码粘贴到 `Myactor.cs` 中。
 
 ```csharp
 using Dapr.Actors;
@@ -97,7 +96,7 @@ namespace MyActor.Interfaces
 }    
 ```
 
-## Step 2: Create actor service
+## 第 2 步：创建 actor 服务
 
 Dapr uses ASP.NET web service to host Actor service. This section will implement `IMyActor` actor interface and register Actor to Dapr Runtime.
 
