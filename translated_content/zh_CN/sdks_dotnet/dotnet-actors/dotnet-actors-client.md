@@ -1,21 +1,21 @@
 ---
 type: docs
-title: "Dapr actor .NET usage guide"
-linkTitle: "Actors client"
+title: "Dapr actor .NET 使用指南"
+linkTitle: "Actors 客户端"
 weight: 100000
-description: Learn all about using the actor client with the .NET SDK
+description: 了解有关使用 actor client 与 .NET SDK 的所有信息
 ---
 
-## Using the IActorProxyFactory
+## 使用 IActorProxyFactory
 
-Inside of an `Actor` class or otherwisde inside of an ASP.NET Core project you should use the `IActorProxyFactory` interface to create actor clients.
+在一个 `Actor` 类或其他ASP.NET Core项目中，你应该使用 `IActorProxyFactory` 接口来创建 actor 客户端。
 
-The `AddActors(...)` method will register actor services with ASP.NET Core dependency injection.
+`AddActors(...)` 方法将通过 ASP.NET Core 依赖注入注册 actor 服务。
 
-- Outside of an actor instance, the `IActorProxyFactory` instance is available through dependency injection as a singleton service.
-- Inside an actor instance, the `IActorProxyFactory` instance is available as a property (`this.ProxyFactory`).
+- 在 actor 实例之外，`IActorProxyFactory` 实例可以通过依赖注入作为单例服务使用。
+- 在一个 actor 实例中，`IActorProxyFactory` 实例作为一个属性(`this.ProxyFactory`)可用。
 
-The following is an example of creating a proxy inside an actor:
+下面是一个在 actor 内部创建代理的例子。
 
 ```csharp
 public Task<MyData> GetDataAsync()
@@ -27,9 +27,9 @@ public Task<MyData> GetDataAsync()
 }
 ```
 
-> 💡 For a non-dependency-injected application you can use the static methods on `ActorProxy`. These methods are error prone when you need to configure custom settings, and should be avoided when possible.
+> 💡 对于一个非依赖注入的应用程序，你可以使用 `ActorProxy` 上静态方法。 当你需要配置自定义设置时，这些方法容易出错，应尽量避免。
 
-The guidance in this document will focus on `IActorProxyFactory`. `ActorProxy`'s static method functionality is identical except for the ability to manage configuration centrally.
+本文档中的指导将集中在 `IActorProxyFactory` 上。 `ActorProxy` 的静态方法功能是相同的，除了集中管理配置的能力。
 
 ## Identifying an actor
 
