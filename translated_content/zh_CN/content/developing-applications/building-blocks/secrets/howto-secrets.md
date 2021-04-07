@@ -6,12 +6,12 @@ weight: 2000
 description: "使用密钥仓库构建块安全地获取密钥"
 ---
 
-This article provides guidance on using Dapr's secrets API in your code to leverage the [secrets store building block]({{X30X}}). 密钥 API 允许您从配置的密钥仓库轻松获取应用程序代码中的密钥。
+这篇文章提供了关于如何在你的代码中使用 Dapr 的密钥 API 来充分利用 [密钥仓库构建块]({{X30X}}) 的指导。 密钥 API 允许您从配置的密钥仓库轻松获取应用程序代码中的密钥。
 
 ## 建立一个密钥仓库
 
 在获取应用程序代码中的密钥之前，您必须配置一个密钥仓库组件。 就本指南而言，作为一个示例，您将配置一个本地的密钥仓库，该仓库使用本地的 JSON 文件来存储密钥。
-> 注意：此示例中使用的组件未被加密且不推荐用于生产部署。 You can find other alternatives [here]({{X27X}}).
+> 注意：此示例中使用的组件未被加密且不推荐用于生产部署。 您可以在 [这里]({{X27X}})找到其它替代项。
 
 创建一个名为 `secrets.json` 的文件，包含以下内容：
 
@@ -41,7 +41,7 @@ spec:
 
 请确保用您刚刚创建的 JSON 文件的路径替换 `<密钥路径>`。
 
-To configure a different kind of secret store see the guidance on [how to configure a secret store]({{X40X}}) and review [supported secret stores]({{X41X}}) to see specific details required for different secret store solutions.
+要配置不同类型的密钥仓库，请参阅关于 [如何配置密钥仓库]({{X40X}}) 并审阅 [支持的密钥仓库]({{X41X}}) 查看不同密钥仓库解决方案所需的具体细节。
 ## 获取密钥
 
 现在运行 Dapr sidecar (在没有应用程序的情况下)
