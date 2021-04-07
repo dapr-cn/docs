@@ -1,21 +1,21 @@
 ---
 type: docs
-title: "How-To: Set up Azure Monitor to search logs and collect metrics"
+title: "指南: 设置 Azure 监视器以搜索日志并收集指标"
 linkTitle: "Azure Monitor"
 weight: 2000
-description: "Enable Dapr metrics and logs with Azure Monitor for Azure Kubernetes Service (AKS)"
+description: "使用Azure Monitor为Azure Kubernetes Service(AKS) 启用Dapr度量和日志"
 ---
 
 ## 前期准备
 
 - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/)
-- [Enable Azure Monitor For containers in AKS](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-overview)
+- [对AKS中的容器启用 Azure Monitor。](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-overview)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Helm 3](https://helm.sh/)
 
-## Enable Prometheus metric scrape using config map
+## 使用config map启用 Prometheus 度量抓取
 
-1. Make sure that omsagents are running
+1. 请确保正在运行 omsagents
 
 ```bash
 $ kubectl get pods -n kube-system
@@ -31,11 +31,11 @@ omsagent-smtk7                                                    1/1     Runnin
 ...
 ```
 
-2. Apply config map to enable Prometheus metrics endpoint scrape.
+2. 应用config map来启用Prometheus metrics endpoint抓取。
 
-You can use [azm-config-map.yaml](/docs/azm-config-map.yaml) to enable prometheus metrics endpoint scrape.
+您可以使用 [azm-config-map.yaml](/docs/azm-config-map.yaml) 来启用 Prometheus 度量端点抓取。
 
-If you installed Dapr to the different namespace, you need to change the `monitor_kubernetes_pod_namespaces` array values. 例如:
+如果你安装 Dapr 到不同的命名空间, 你需要更改 `monitor_kubernetes_pod_namespaces` 数组值。 例如:
 
 ```yaml
 ...
@@ -50,7 +50,7 @@ If you installed Dapr to the different namespace, you need to change the `monito
 ...
 ```
 
-Apply config map:
+应用config map：
 
 ```bash
 kubectl apply -f ./azm-config.map.yaml
