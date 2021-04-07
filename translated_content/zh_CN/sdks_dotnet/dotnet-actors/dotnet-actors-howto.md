@@ -340,7 +340,7 @@ dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
 cd ..
 ```
 
-### Invoke actor methods with strongly-typed client
+### 使用强类型客户端调用 actor 方法
 
 You can use `ActorProxy.Create<IMyActor>(..)` to create a strongly-typed client and invoke methods on the actor.
 
