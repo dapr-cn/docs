@@ -98,30 +98,30 @@ namespace MyActor.Interfaces
 
 ## 第 2 步：创建 actor 服务
 
-Dapr uses ASP.NET web service to host Actor service. This section will implement `IMyActor` actor interface and register Actor to Dapr Runtime.
+Dapr 使用 ASP.NET web 服务来托管 Actor 服务。 本节将会实现 `IMyActor` 接口并将 Actor 注册到 Dapr Runtime。
 
-### Create actor service project and add dependencies
+### 创建 actor 服务项目并添加依赖
 
 ```bash
-# Create ASP.Net Web service to host Dapr actor
+# 创建 ASP.Net Web 服务来托管 Dapr actor
 dotnet new web -o MyActorService
 
 cd MyActorService
 
-# Add Dapr.Actors.AspNetCore nuget package. Please use the latest package version from nuget.org
+# 添加 Dapr.Actors.AspNetCore nuget 包. 请从nuget.org添加最新的包版本
 dotnet add package Dapr.Actors.AspNetCore -v 1.0.0
 
-# Add Actor Interface reference
+# 添加 Actor 接口引用
 dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
 
 cd ..
 ```
 
-### Add actor implementation
+### 添加 actor 实现
 
-Implement IMyActor interface and derive from `Dapr.Actors.Actor` class. Following example shows how to use Actor Reminders as well. For Actors to use Reminders, it must derive from IRemindable. If you don't intend to use Reminder feature, you can skip implementing IRemindable and reminder specific methods which are shown in the code below.
+实现IMyActor接口并继承自 `Dapr.Actors.Actor` 。 下面的例子同样展示了如何使用Actor Reminders。 Actor如果要使用Reminders，则必须实现IRemindable接口 如果你不打算使用Reminder功能，你可以跳过下面代码中实现IRemindable接口和Reminder特定方法的操作。
 
-Paste the following code into `MyActor.cs` in the `MyActorService` project:
+在 `MyActorService` 项目中，将以下代码粘贴到 `MyActor.cs` 中。
 
 ```csharp
 using Dapr.Actors;
@@ -264,148 +264,18 @@ namespace MyActorService
              
              
              
-        using Dapr.Actors;
-using Dapr.Actors.Runtime;
-using MyActor.Interfaces;
-using System;
-using System.Threading.Tasks;
-
-namespace MyActorService
-{
-    internal class MyActor : Actor, IMyActor, IRemindable
-    {
-        // The constructor must accept ActorHost as a parameter, and can also accept additional
-        // parameters that will be retrieved from the dependency injection container
-        //
-        /// <summary>
-        /// Initializes a new instance of MyActor
-        /// </summary>
-        /// 
-        public MyActor(ActorHost host)
-            : base(host)
-        {
-        }
-
-        /// <summary>
-        /// This method is called whenever an actor is activated.
-        /// An actor is activated the first time any of its methods are invoked.
-        /// </summary>
-        protected override Task OnActivateAsync()
-        {
-            // Provides opportunity to perform some optional setup.
-            Console.WriteLine($"Activating actor id: {this.Id}");
-            return Task.CompletedTask;
-        }
-
-        /// <summary>
-        /// This method is called whenever an actor is deactivated after a period of inactivity.
-        /// </summary>
-        protected override Task OnDeactivateAsync()
-        {
-            // Provides Opporunity to perform optional cleanup.
-            Console.WriteLine($"Deactivating actor id: {this.Id}");
-            return Task.CompletedTask;
-        }
-
-        /// <summary>
-        /// Set MyData into actor's private state store
-        /// </summary>
-        /// 
-        public async Task<string> SetDataAsync(MyData data)
-        {
-            // Data is saved to configured state store implicitly after each method execution by Actor's runtime.
-            // Data can also be saved explicitly by calling this.StateManager.SaveStateAsync();
-            // State to be saved must be DataContract serializable.
-            await this.StateManager.SetStateAsync<MyData>(
-                "my_data",  // state name
-                data);      // data saved for the named state "my_data"
-
-            return "Success";
-        }
-
-        /// <summary>
-        /// Get MyData from actor's private state store
-        /// </summary>
-        /// <return>the user-defined MyData which is stored into state store as "my_data" state</return>
-        public Task<MyData> GetDataAsync()
-        {
-            // Gets state from the state store.
-            return this.StateManager.GetStateAsync<MyData>("my_data");
-        }
-
-        /// <summary>
-        /// Register MyReminder reminder with the actor
-        /// </summary>
-        public async Task RegisterReminder()
-        {
-            await this.RegisterReminderAsync(
-                "MyReminder",              // The name of the reminder
-                null,                      // User state passed to IRemindable.ReceiveReminderAsync()
-                TimeSpan.FromSeconds(5),   // Time to delay before invoking the reminder for the first time
-                TimeSpan.FromSeconds(5));  // Time interval between reminder invocations after the first invocation
-        }
-
-        /// <summary>
-        /// Unregister MyReminder reminder with the actor
-        /// </summary>
-        public Task UnregisterReminder()
-        {
-            Console.WriteLine("Unregistering MyReminder...");
-            return this.UnregisterReminderAsync("MyReminder");
-        }
-
-        // <summary>
-        // Implement IRemindeable.ReceiveReminderAsync() which is call back invoked when an actor reminder is triggered.
-        // </summary>
-        public Task ReceiveReminderAsync(string reminderName, byte[] state, TimeSpan dueTime, TimeSpan period)
-        {
-            Console.WriteLine("ReceiveReminderAsync is called!");
-            return Task.CompletedTask;
-        }
-
-        /// <summary>
-        /// Register MyTimer timer with the actor
-        /// </summary>
-        public Task RegisterTimer()
-        {
-            return this.RegisterTimerAsync(
-                "MyTimer",                  // The name of the timer
-                nameof(this.OnTimerCallBack),       // Timer callback
-                null,                       // User state passed to OnTimerCallback()
-                TimeSpan.FromSeconds(5),    // Time to delay before the async callback is first invoked
-                TimeSpan.FromSeconds(5));   // Time interval between invocations of the async callback
-        }
-
-        /// <summary>
-        /// Unregister MyTimer timer with the actor
-        /// </summary>
-        public Task UnregisterTimer()
-        {
-            Console.WriteLine("Unregistering MyTimer...");
-            return this.UnregisterTimerAsync("MyTimer");
-        }
-
-        /// <summary>
-        /// Timer callback once timer is expired
-        /// </summary>
-        private Task OnTimerCallBack(byte[] data)
-        {
-            Console.WriteLine("OnTimerCallBack is called!");
-            return Task.CompletedTask;
-        }
-    }
-}
+         
 ```
 
-### Register actor runtime with ASP.NET Core startup
+### 使用 ASP.NET Core Startup 来注册 actor runtime
 
-The Actor runtime is configured through ASP.NET Core `Startup.cs`.
+Actor runtime 使用 ASP.NET Core `Startup.cs` 来配置。
 
-The runtime uses the ASP.NET Core dependency injection system to register actor types and essential services. This integration is provided through the `AddActors(...)` method call in `ConfigureServices(...)`. Use the delegate passed to `AddActors(...)` to register actor types and configure actor runtime settings. You can register additional types for dependency injection inside `ConfigureServices(...)`. These will be available to be injected into the constructors of your Actor types.
+运行时使用ASP.NET Core依赖注入系统来注册actor类型和基本服务。 通过在 `ConfigureServices(...)` 中调用 `AddActors(...)` 方法来提供这种集成。 使用传递到 `AddActors(...)` 方法的委托来注册actor类型并配置actor运行时设置。 你可以在`ConfigureServices(...)`中为依赖注入注册额外的类型。 它们都可以被注入到你的Actor类型的构造器。
 
-Actors are implemented via HTTP calls with the Dapr runtime. This functionality is part of the application's HTTP processing pipeline and is registered inside `UseEndpoints(...)` inside `Configure(...)`.
+Actors通过Dapr runtime使用HTTP调用来实现。 此功能是应用程序的 HTTP 处理管道的一部分，在 `Configure(...)` 方法中的`UseEndpoint(...)` 注册。
 
-Paste the following code into `Startup.cs` in the `MyActorService` project:
+在 `MyActorService` 项目中，将以下代码粘贴到 `Startup.cs` 中。
 
 ```csharp
 using Microsoft.AspNetCore.Builder;
@@ -445,24 +315,26 @@ namespace MyActorService
         }
     }
 }
+                 
 ```
 
-## Step 3: Add a client
+## 第 3 步：添加客户端
 
-Create a simple console app to call the actor service. Dapr SDK provides Actor Proxy client to invoke actor methods defined in Actor Interface.
+创建一个简单的控制台应用来调用actor服务。 Dapr SDK 提供 Actor 代理客户端来调用Actor接口中定义的actor方法。
 
-### Create actor client project and add dependencies
+### 创建 actor 客户端项目并添加依赖
 
 ```bash
-# Create Actor's Client
+# 创建 Actor 客户端
 dotnet new console -o MyActorClient
 
 cd MyActorClient
 
-# Add Dapr.Actors nuget package. Please use the latest package version from nuget.org
+# 添加 Dapr.Actors nuget 包。 Please use the latest package version from nuget.org
+请从nuget.org添加最新的包版本
 dotnet add package Dapr.Actors -v 1.0.0
 
-# Add Actor Interface reference
+# 添加 Actor 接口引用
 dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
 
 cd ..
