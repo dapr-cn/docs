@@ -10,15 +10,15 @@ description: 试用 .NET 虚拟 Actor
 
 发布/订阅 最常见的问题是应用程序中的 发布/订阅 终结点没有被调用。
 
-There are a few layers to this problem with different solutions:
+这个问题有几层有不同的解决方案：
 
-- The application is not recieving any traffic from Dapr
-- The application is not registering pub/sub endpoints with Dapr
-- The pub/sub endpoints are registered with Dapr, but the request is not reaching the desired endpoint
+- 应用程序没有接收到任何来自 Dapr 的流量
+- 应用程序没有向 Dapr 注册 发布/订阅 终结点
+- 发布/订阅 终结点在 Dapr 注册，但请求没有到达所需的终结点
 
-## Step 1: Turn up the logs
+## 第 1 步：打开日志
 
-**This is important. Future steps will depend on your ability to see logging output. ASP.NET Core logs almost nothing with the default log settings, so you will need to change it.**
+**这一点很重要。 之后的步骤将取决于您能否看到日志输出。 ASP.NET Core logs almost nothing with the default log settings, so you will need to change it.**
 
 Adjust the logging verbosity to include `Information` logging for ASP.NET Core as described [here](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#debug-diagnostics). Set the `Microsoft` key to `Information`.
 
