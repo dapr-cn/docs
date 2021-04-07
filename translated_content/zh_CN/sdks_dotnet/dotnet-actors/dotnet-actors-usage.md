@@ -60,7 +60,7 @@ public void ConfigureServices(IServiceCollection services)
 
 每个actor实例都有自己的依赖注入范围。 每个 actor 在执行完一个操作后，都会在内存中保留一段时间，在这段时间内，与 actor 相关的依赖注入作用域也被认为是活的。 当演员被停用时，该范围将被释放。
 
-If an actor injects an `IServiceProvider` in the constructor, the actor will recieve a reference to the `IServiceProvider` associated with its scope. The `IServiceProvider` can be used to resolve services dynamically in the future.
+如果一个actor在构造函数中注入一个 `IServiceProvider` ，该actor将收到一个与它的作用域相关联的 `IServiceProvider` 的引用。 `IServiceProvider` 可以用来在将来动态地解析服务。
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -69,7 +69,10 @@ internal class MyActor : Actor, IMyActor, IRemindable
         : base(host)
     {
         ...
-     
+    }
+}
+    }
+}
 ```
 
 When using this pattern, take care to avoid creating many instances of **transient** services which implement `IDisposable`. Since the scope associated with an actor could be considered valid for a long time, it is possible to accumulate many services in memory. See the [dependency injection guidelines](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines) for more information.
