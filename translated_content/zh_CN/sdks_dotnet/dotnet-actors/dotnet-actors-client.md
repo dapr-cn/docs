@@ -42,15 +42,15 @@ public Task<MyData> GetDataAsync()
 
 你可以使用 `ActorReference` 类型与其他actor交换 actor类型和actor id作为消息的一部分。
 
-## Two styles of actor client
+## Actor 客户端的两种风格
 
-The actor client supports two different styles of invocation: *strongly-typed* clients that use .NET interfaces and *weakly-typed* clients that use the `ActorProxy` class.
+Actor客户端支持两种不同风格的调用。*使用.NET接口的强类型*客户端和使用 `ActorProxy` 类的弱类型</em>客户端。
 
-Since *strongly-typed* clients are based on .NET interfaces provide the typical benefits of strong-typing, however they do not work with non-.NET actors. You should use the *weakly-typed* client only when required for interop or other advanced reasons.
+由于 *强类型* 客户端基于.NET接口提供了强类型的典型优势，但是它们不能与非.NET Actors 一起工作。 您应该只在需要互操作或其他高级原因时才使用 *弱类型* 客户端。
 
-### Using a strongly-typed client
+### 使用强类型客户端
 
-Use the `CreateActorProxy<>` method to create a strongly-typed client like the following example. `CreateActorProxy<>` requires an actor interface type, and will return an instance of that interface.
+使用 `CreateActorProxy<>` 来创建一个强类型的客户端，比如下面的例子。 `CreateActorProxy<>` 需要一个actor接口类型，并将返回该接口的实例。
 
 ```csharp
 // Create a proxy for IOtherActor to type OtherActor with a random id
@@ -62,9 +62,9 @@ var proxy = this.ProxyFactory.CreateActorProxy<IOtherActor>(ActorId.CreateRandom
 await proxy.DoSomethingGreat();
 ```
 
-### Using a weakly-typed client
+### 使用弱类型客户端
 
-Use the `Create` method to create a weakly-typed client like the following example. `Create` returns an instance of `ActorProxy`.
+使用 `Create` 方法来创建一个弱类型客户端，比如下面的例子。 `Create` 返回一个 `ActorProxy` 的实例。
 
 ```csharp
 // Create a proxy for type OtherActor with a random id
@@ -74,11 +74,12 @@ var proxy = this.ProxyFactory.Create(ActorId.CreateRandom(), "OtherActor");
 //
 // proxy is an instance of ActorProxy.
 await proxy.InvokeMethodAsync("DoSomethingGreat");
+ 
 ```
 
-Since `ActorProxy` is a weakly-typed proxy you need to pass in the actor method name as a string.
+由于 `ActorProxy` 是一个弱类型的代理，你需要将 actor 方法名作为一个字符串传入。
 
-You can also use `ActorProxy` to invoke methods with a request message and response message. Request and response messages will be serialized using the `System.Text.Json` serializer.
+您也可以使用 `ActorProxy` 来调用带有请求消息和响应消息的方法。 请求和响应消息将使用 `System.Text.Json` 序列化器序列化。
 
 ```csharp
 // Create a proxy for type OtherActor with a random id
@@ -89,6 +90,7 @@ var proxy = this.ProxyFactory.Create(ActorId.CreateRandom(), "OtherActor");
 // proxy is an instance of ActorProxy.
 var request = new MyRequest() { Message = "Hi, it's me.", };
 var response = await proxy.InvokeMethodAsync<MyRequest, MyResponse>("DoSomethingGreat", request);
+ 
 ```
 
-When using a weakly-typed proxy, it is your responsbility to define the correct actor method names and message types. This is done for you when using a strongly-typed proxy since the names and types are part of the interface definition.
+当使用弱类型的代理时，您有责任定义正确的代理方法名称和消息类型。 当使用强类型代理时，这是为你完成的，因为名称和类型是接口定义的一部分。
