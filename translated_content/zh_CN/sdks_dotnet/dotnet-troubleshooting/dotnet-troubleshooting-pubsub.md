@@ -18,40 +18,40 @@ description: 试用 .NET 虚拟 Actor
 
 ## 第 1 步：打开日志
 
-**这一点很重要。 之后的步骤将取决于您能否看到日志输出。 ASP.NET Core logs almost nothing with the default log settings, so you will need to change it.**
+**这一点很重要。 之后的步骤将取决于您能否看到日志输出。 ASP.NET Core日志几乎没有默认日志设置，所以您需要更改它。**
 
-Adjust the logging verbosity to include `Information` logging for ASP.NET Core as described [here](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#debug-diagnostics). Set the `Microsoft` key to `Information`.
+按照 [这里](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#debug-diagnostics)的描述，调整日志记录的详细程度，以包含 ASP.NET Core 的 `Information` 日志记录。 将 `Microsoft` 键的值设为 `Information`。
 
-## Step 2: Verify you can receive traffic from Dapr
+## 第 2 步：验证您可以接收来自 Dapr 的流量
 
-1. Start the application as you would normally (`dapr run ...`). Make sure that you're including an `--app-port` argument in the commandline. Dapr needs to know that your application is listening for traffic. By default an ASP.NET Core application will listen for HTTP on port 5000 in local development.
+1. 像平常一样启动应用程序(`dapr run ...`)。 请确保您在命令行中包含 `--app-port` 参数。 Dapr需要知道您的应用程序正在监听流量。 默认情况下，ASP.NET Core应用程序将在本地开发中通过5000端口监听HTTP。
 
-2. Wait for Dapr to finish starting
+2. 等待 Dapr 完成启动
 
-3. Examine the logs
+3. 检查日志
 
-You should see a log entry like:
+你应该看到一个日志条目，如：
 
 ```
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
       Request starting HTTP/1.1 GET http://localhost:5000/.....
 ```
 
-During initialization Dapr will make some requests to your application for configuration. If you can't find these then it means that something has gone wrong. Please ask for help either via an issue or in Discord (include the logs). If you see requests made to your application, then continue to step 3.
+在初始化过程中，Dapr会对您的应用程序发出一些配置请求。 如果你找不到这些，那么这意味着出了问题。 请通过 issue 或 Discord 请求帮助 (包括日志)。 如果您看到向应用程序发出的请求，请继续第 3 步。
 
-## Step 3: Verify endpoint registration
+## 第 3 步：验证终结点注册
 
-1. Start the application as you would normally (`dapr run ...`).
+1. 像平常一样启动应用程序(`dapr run ...`)。
 
-2. Use `curl` at the command line (or another HTTP testing tool) to access the `/dapr/subscribe` endpoint.
+2. 在命令行中使用`curl`（或其他HTTP测试工具）来访问`/dapr/subscribe`端点。
 
-Here's an example command assuming your application's listening port is 5000:
+下面是一个例子，假设你的应用程序的监听端口是5000。
 
 ```sh
 curl http://localhost:5000/dapr/subscribe -v
 ```
 
-For a correctly configured application the output should look like the following:
+对于正确配置的应用，输出应如下所示：
 
 ```txt
 *   Trying ::1...
@@ -72,16 +72,16 @@ For a correctly configured application the output should look like the following
 [{"topic":"deposit","route":"deposit","pubsubName":"pubsub"},{"topic":"withdraw","route":"withdraw","pubsubName":"pubsub"}]* Closing connection 0
 ```
 
-Pay particular attention to the HTTP status code, and the JSON output.
+特别注意 HTTP 状态代码和 JSON 输出。
 
 ```txt
 < HTTP/1.1 200 OK
 ```
 
-A 200 status code indicates success.
+200 状态代码表示成功。
 
 
-The JSON blob that's included near the end is the output of `/dapr/subscribe` that's procesed by the Dapr runtime. In this case it's using the `ControllerSample` in this repo - so this is an example of correct output.
+最后包含的 JSON blob 是`/dapr/subscribe`的输出，由Dapr运行时处理。 在这种情况下，它使用的是这个repo中的`ControllerSample` - 所以这是一个正确输出的例子。
 
 ```json
 [
@@ -92,17 +92,17 @@ The JSON blob that's included near the end is the output of `/dapr/subscribe` th
 
 ---
 
-With the output of this command in hand, you are ready to diagnose a problem or move on to the next step.
+有了这个命令的输出，你就可以诊断问题或进入下一步了。
 
 ### 选项0：响应是200，其中包含一些 发布/订阅 条目。
 
-**If you have entries in the JSON output from this test then the problem lies elsewhere, move on to step 2.**
+**如果您在 JSON 输出中有此测试的条目，那么问题就会在其他地方出现，然后转到步骤 2。**
 
 ### 选项 1： 响应不是 200， 或不包含 Json
 
-If the response was not a 200 or did not contain JSON, then the `MapSubscribeHandler()` endpoint was not reached.
+如果响应不是200或不包含 JSON ，则 `MapSubscribibeHandler()` 终结点未能实现。
 
-Make sure you have some code like the following in `Startup.cs` and repeat the test.
+请确保您在 `Startup.cs` 中有一些代码，然后重复测试。
 
 ```cs
 app.UseRouting();
@@ -116,15 +116,15 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-**If adding the subscribe handler did not resolve the problem, please open an issue on this repo and include the contents of your `Startup.cs` file.**
+**如果添加订阅处理程序无法解决问题。 请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
 
 ### 选项 2：响应包含JSON，但它是空的（如 `[]`）
 
-If the JSON output was an empty array (like `[]`) then the subcribe handler is registered, but no topic endpoints were registered.
+如果JSON输出是一个空数组 (如 `[]`)，那么下面的处理程序将被注册，但没有任何 topic 终结点。
 
 ---
 
-If you're using a controller for pub/sub you should have a method like:
+如果你正在使用一个控制器来处理 发布/订阅 ，你应该有一个类似的方法：
 
 ```C#
 [Topic("pubsub", "deposit")]
@@ -132,25 +132,25 @@ If you're using a controller for pub/sub you should have a method like:
 public async Task<ActionResult> Deposit(...)
 ```
 
-In this example the `Topic` and `HttpPost` attributes are required, but other details might be different.
+在这个示例中，需要 `Topic` 和 `HttpPost` 属性，但其他细节可能不同。
 
 ---
 
-If you're using routing for pub/sub you should have an endpoint like:
+如果你使用的是 发布/订阅 的路由，你应该有一个终结点，比如：
 
 ```C#
 endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
 ```
 
-In this example the call to `WithTopic(...)` is required but other details might be different.
+在这个例子中，需要调用 `WithTopic(...)` ，但其他细节可能有所不同。
 
 ---
 
-**After correcting this code and re-testing if the JSON output is still the empty array (like `[]`) then please open an issue on this repository and include the contents of `Startup.cs` and your pub/sub endpoint.**
+**在纠正这段代码并重新测试后，如果JSON输出仍然是空数组（像 `[]` ），那么请在这个仓库上打开一个问题，并包含 `Startup.cs` 的内容和你的 发布/订阅 终结点。**
 
-## Step 4: Verify endpoint reachability
+## 第 4 步：验证终结点是否可访问
 
-In this step we'll verify that the entries registered with pub/sub are reachable. The last step should have left you with some JSON output like the following:
+在这一步中，我们将验证用 发布/订阅 注册的条目是否可以访问。 最后一步应该给你留下一些JSON输出，比如下面：
 
 ```json
 [
@@ -159,9 +159,9 @@ In this step we'll verify that the entries registered with pub/sub are reachable
 ]
 ```
 
-Keep this output, as we'll use the `route` information to test the application.
+保留此输出，因为我们将使用 `route` 信息来测试应用程序。
 
-1. Start the application as you would normally (`dapr run ...`).
+1. 像平常一样启动应用程序(`dapr run ...`)。
 
 2. Use `curl` at the command line (or another HTTP testing tool) to access one of the routes registered with a pub/sub endpoint.
 
