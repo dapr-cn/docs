@@ -1,16 +1,16 @@
 ---
 type: docs
 title: "Dapr actor .NET 使用指南"
-linkTitle: "Authoriung actors"
+linkTitle: "编写 Actors"
 weight: 200000
-description: Learn all about authoring and running actors with the .NET SDK
+description: 了解有关使用 .NET SDK 编写和运行 Actors
 ---
 
-## Authoring actors
+## 编写 Actors
 
 ### ActorHost
 
-The `ActorHost` is a required constructor parameter of all actors, and must be passed to the base class constructor.
+`ActorHost` 是所有Actors的必备构造参数，必须传递给基类构造函数。
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -22,11 +22,11 @@ internal class MyActor : Actor, IMyActor, IRemindable
 }
 ```
 
-The `ActorHost` is provided by the runtime and contains all of the state that the allows that actor instance to communicate with the runtime. Since the `ActorHost` contains state unique to the actor, you should not pass the instance into other parts of your code. You should not create your own instances of `ActorHost` except in tests.
+`ActorHost` 由运行时提供，包含了允许该 actor 实例与运行时通信的所有状态。 因为 `ActorHost` 包含了actor 独有的状态，所以你不应该将实例传递到代码的其他部分。 除了在测试中，您不应该创建自己的 `ActorHost` 实例。
 
-### Using dependency injection
+### 使用依赖输入
 
-Actors support [depenendency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) of additonal parameters into the constructor. Any other parameters your define will have their values satisfied from the dependency injection container.
+Actors支持[依赖性注入](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection)到构造函数中的附加参数。 您定义的任何其他参数都将从依赖注入容器中得到它们的值。
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -37,11 +37,12 @@ internal class MyActor : Actor, IMyActor, IRemindable
         ...
     }
 }
+     
 ```
 
-An actor type should have a single `public` constructor. The actor infrastructure uses the [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#constructor-injection-behavior) pattern for constructing actor instances.
+一个 actor 类型应该有一个单一的`public`构造函数。 Actor 基础设施使用 [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#constructor-injection-behavior) 模式来构建 actor 实例。
 
-You can register types with dependency injection in `Startup.cs` to make them available. You can read more about the different ways of registering your types [here](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?#service-registration-methods)
+你可以在 `Startup.cs` 中用依赖注入注册类型来使它们可用。 你可以阅读更多关于注册类型的不同方法 [这里](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?#service-registration-methods) 。
 
 ```csharp
 // In Startup.cs
@@ -52,9 +53,12 @@ public void ConfigureServices(IServiceCollection services)
     // Register additional types with dependency injection.
     services.AddSingleton<BankService>();
 }
+
+     
+     
 ```
 
-Each actor instance has its own dependency injection scope. Each actor remains in memory for some time after performing an operation, and during that time the dependency injection scope associated with the actor is also considered live. The scope will be releases when the actor is deactivated.
+每个actor实例都有自己的依赖注入范围。 每个 actor 在执行完一个操作后，都会在内存中保留一段时间，在这段时间内，与 actor 相关的依赖注入作用域也被认为是活的。 当演员被停用时，该范围将被释放。
 
 If an actor injects an `IServiceProvider` in the constructor, the actor will recieve a reference to the `IServiceProvider` associated with its scope. The `IServiceProvider` can be used to resolve services dynamically in the future.
 
@@ -65,8 +69,7 @@ internal class MyActor : Actor, IMyActor, IRemindable
         : base(host)
     {
         ...
-    }
-}
+     
 ```
 
 When using this pattern, take care to avoid creating many instances of **transient** services which implement `IDisposable`. Since the scope associated with an actor could be considered valid for a long time, it is possible to accumulate many services in memory. See the [dependency injection guidelines](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines) for more information.
@@ -195,18 +198,18 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 The `UseRouting` and `UseEndpoints` calls are necessary to configure routing. Adding `MapActorsHandlers` inside the endpoint middleware is what configures actors as part of the pipline.
 
-This is a minimal example, it's valid for Actors functionality to existing alongside:
+这只是一个最小的例子，它对 Actor 功能并存是有效的：
 
 - Controllers
 - Razor Pages
 - Blazor
-- gRPC Services
-- Dapr pub/sub handler
-- other endpoints such as health checks
+- gRPC 服务
+- Dapr 发布/订阅 处理
+- 其他终结点，如健康检查
 
-### Problematic middleware
+### 问题中间件
 
-Certain middleware may interfere with the routing of Dapr requests to the actors handlers. In particular the `UseHttpsRedirection` is problematic for the default configuration of Dapr. Dapr will send requests over unencrypted HTTP by default, which will then be blocked by the `UseHttpsRedirection` middleware. This middleware cannot be used with Dapr at this time.
+某些中间件可能会干扰 Dapr 请求到 actors 处理程序的路由。 特别是 `UseHttpsRedirection` 对于Dapr的默认配置是有问题的。 Dapr默认会通过未加密的HTTP发送请求，然后会被 `UseHttpsRedirection` 中间件阻止。 这个中间件目前不能与 Dapr 一起使用。
 
 ```csharp
 // in Startup.cs
@@ -229,4 +232,5 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         endpoints.MapActorsHandlers();
     });
 }
+         
 ```
