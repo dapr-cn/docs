@@ -41,13 +41,13 @@ dapr run --app-id <app-id> --app-port <port> --components-path <components-path>
 **说明：** 此命令将使用 `dapr run` 来启动每个服务及其 sidecar。 命令的前半部分（在 `--`之前） 将所需的配置传递给 Dapr CLI。 命令的后半部分（ `--`之后）将所需的配置传递给 `dotnet run` 命令。
 
 {{% alert title="💡 Ports" color="primary" %}}
-Since you need to configure a unique port for each service, you can use this command to pass that port value to **both** Dapr and the service. `--urls http://localhost:<port>` will configure ASP.NET Core to listen for traffic on the provided port. Using configuration at the commandline is a more flexible approach than hardcoding a listening port elsewhere.
+因为您需要为每个服务配置一个独特的端口， 您可以使用此命令将该端口值传递到 **同时**传递给 Dapr 和应用服务。 `--urls http://localhost：<port>` 将配置 ASP.NET Core 来监听所提供端口上的流量。 在命令行处使用配置比在其他地方硬编码监听端口更灵活。
 {{% /alert %}}
 
-If any of your services do not accept HTTP traffic, then modify the command above by removing the `--app-port` and `--urls` arguments.
+如果您的服务都不接受任何HTTP流量， 然后通过删除 `--app-port` 和 `--urls` 参数来修改上面的命令。
 
 ### 下一步
 
-If you need to debug, then use the attach feature of your debugger to attach to one of the running processes.
+如果您需要调试，请使用调试器的附加功能将其附加到正在运行的进程中。
 
-If you want to scale up this approach, then consider building a script which automates this process for your whole application.
+如果您想要伸缩这个方法，以部署更多的应用，可以考虑构建一个脚本，为您的整个应用程序自动化此过程。
