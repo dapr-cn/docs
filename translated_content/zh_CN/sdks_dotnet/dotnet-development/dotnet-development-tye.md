@@ -62,6 +62,6 @@ You can now use `tye run` to launch the whole application from one terminal. Whe
 
 ### 下一步
 
-Tye runs your services locally as normal .NET process. If you need to debug, then use the attach feature of your debugger to attach to one of the running processes. Since Tye is .NET aware, it has the ability to [start a process suspended](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options) for startup debugging.
+Tye runs your services locally as normal .NET process. 如果您需要调试，请使用调试器的附加功能将其附加到正在运行的进程中。 Since Tye is .NET aware, it has the ability to [start a process suspended](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options) for startup debugging.
 
 Tye also has an [option](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options) to run your services in containers if you wish to test locally in containers.
