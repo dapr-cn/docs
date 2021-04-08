@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Dapr .NET SDK Development with Dapr CLI"
+title: "Dapr .NET SDK 与 Dapr CLI 进行开发"
 linkTitle: "Dapr CLI"
 weight: 50000
-description: Learn about local development with the Dapr CLI
+description: 通过 Dapr CLI 学习本地开发
 ---
 
 ## Dapr CLI
