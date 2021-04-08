@@ -60,7 +60,7 @@ curl http://localhost:3500/v1.0/secrets/my-secrets-store/my-secret
 
 ## 从你的代码调用密钥 API
 
-一旦您设置了一个密钥仓库，您可以调用 Dapr 从您的应用程序代码中获取密钥。 以下是不同编程语言的几个示例：
+一旦您设置了一个密钥存储，您可以调用 Dapr 从您的应用程序代码中获取密钥。 以下是不同编程语言的几个示例：
 
 {{< tabs "Go" "Javascript" "Python" "Rust" "C#" >}}
 
