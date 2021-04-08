@@ -38,7 +38,7 @@ Dapr CLI 为您提供了一个很好的工作基础，通过初始化本地重�
 dapr run --app-id <app-id> --app-port <port> --components-path <components-path> -- dotnet run -p <project> --urls http://localhost:<port>
 ```
 
-**说明：** 此命令将使用 `dapr run` 来启动每个服务及其 sidecar。 命令的前半部分（在 `--`之前） 将所需的配置传递给 Dapr CLI。 The second half of the command (after `--`) passes required configuration to the `dotnet run` command.
+**说明：** 此命令将使用 `dapr run` 来启动每个服务及其 sidecar。 命令的前半部分（在 `--`之前） 将所需的配置传递给 Dapr CLI。 命令的后半部分（ `--`之后）将所需的配置传递给 `dotnet run` 命令。
 
 {{% alert title="💡 Ports" color="primary" %}}
 Since you need to configure a unique port for each service, you can use this command to pass that port value to **both** Dapr and the service. `--urls http://localhost:<port>` will configure ASP.NET Core to listen for traffic on the provided port. Using configuration at the commandline is a more flexible approach than hardcoding a listening port elsewhere.
