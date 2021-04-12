@@ -4,7 +4,7 @@ title: "在本地环境中初始化 Dapr"
 linkTitle: "本地初始化 Dapr"
 weight: 20
 aliases:
-  - /getting-started/install-dapr/
+  - /zh-hans/getting-started/install-dapr/
 ---
 
 现在，您已经安装了 [Dapr CLI]({{X22X}})，是时候使用 CLI 在本地机器上初始化 Dapr 了。
