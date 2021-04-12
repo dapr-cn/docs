@@ -128,7 +128,7 @@ actor方法的执行效率非常高， `php-fpm` and `nginx`, 或 IIS 在 Window
 
 ## 版本状态
 
-`ActorState`对象中的变量名直接对应于存储库中的键名。 这意味着如果更改一个变量的类型或名称，可能会出现错误。 To get around this, you may need to version your state object. In order to do this, you'll need to override how state is loaded and stored. There are many ways to approach this, one such solution might be something like this:
+`ActorState`对象中的变量名直接对应于存储库中的键名。 这意味着如果更改一个变量的类型或名称，可能会出现错误。 为了解决这个问题，您可能需要对状态进行版本控制 因此，您需要重写状态的加载和存储方式。 There are many ways to approach this, one such solution might be something like this:
 
 ```php
 <?php
@@ -213,4 +213,4 @@ class VersionedState extends \Dapr\Actors\ActorState {
 }
 ```
 
-There's a lot to be optimized, and it wouldn't be a good idea to use this verbatim in production, but you can get the gist of how it would work. A lot of it will depend on your use case which is why there's not something like this in the SDK. For instance, in this example implementation, the previous value is kept for where there may be a bug during an upgrade; keeping the previous value allows for running the upgrade again, but you may wish to delete the previous value. 
+有很多要优化的地方，在生产中使用逐字记录不是一个好方式 A lot of it will depend on your use case which is why there's not something like this in the SDK. For instance, in this example implementation, the previous value is kept for where there may be a bug during an upgrade; keeping the previous value allows for running the upgrade again, but you may wish to delete the previous value. 
