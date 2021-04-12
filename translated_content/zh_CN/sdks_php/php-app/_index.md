@@ -7,7 +7,7 @@ description: Using the App Class
 no_list: true
 ---
 
-In PHP, there is no default router. Thus, the `\Dapr\App` class is provided. It uses [Nikic's FastRoute](https://github.com/nikic/FastRoute) under the hood. However, you are free to use any router or framework that you'd like. Just check out the `add_dapr_routes()` method in the `App` class to see how actors and subscriptions are implemented.
+在 PHP 中没有默认路由器。 因此，提供了 `\Dapr\App` 类。 It uses [Nikic's FastRoute](https://github.com/nikic/FastRoute) under the hood. However, you are free to use any router or framework that you'd like. Just check out the `add_dapr_routes()` method in the `App` class to see how actors and subscriptions are implemented.
 
 Every app should start with `App::create()` which takes two parameters, the first is an existing DI container, if you have one, and the second is a callback to hook into the `ContainerBuilder` and add your own configuration.
 
