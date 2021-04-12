@@ -5,7 +5,7 @@ linkTitle: "序列化（Serialization）"
 description: "Dapr如何在SDK中序列化数据"
 weight: 2000
 aliases:
-  - '/developing-applications/sdks/serialization/'
+  - '/zh-hans/developing-applications/sdks/serialization/'
 ---
 
 Dapr的SDK为下面两种情况提供序列化： 首先是对于通过请求和响应的有效载荷传递的API对象。 其次，对于要持久化的对象。 对于这两种情况，SDK都提供了默认的序列化实现。 在Java SDK中，由[DefaultObjectSerializer](https://dapr.github.io/java-sdk/io/dapr/serializer/DefaultObjectSerializer.html)这个类提供JSON序列化功能。
