@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Supported secret stores"
-linkTitle: "Supported secret stores"
-weight: 50000
+title: "支持的密钥仓库"
+linkTitle: "支持的密钥仓库"
+weight: 30000
 description: Dapr支持对接的密钥仓库
 no_list: true
 ---
 
 表格标题：
 
-> `Status`: [Component certification]({{X28X}}) status
+> `状态`: [组件认证]({{X28X}}) 状态
   - [Alpha]({{X17X}})
   - [Beta]({{X19X}})
-  - [GA]({{X21X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X21X}}) > `自从`: 定义了当前组件从哪个Dapr Runtime版本开始支持
 
 > `组件版本`：代表组件的版本
 
