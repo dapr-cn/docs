@@ -213,4 +213,4 @@ class VersionedState extends \Dapr\Actors\ActorState {
 }
 ```
 
-有很多要优化的地方，在生产中使用逐字记录不是一个好方式 A lot of it will depend on your use case which is why there's not something like this in the SDK. For instance, in this example implementation, the previous value is kept for where there may be a bug during an upgrade; keeping the previous value allows for running the upgrade again, but you may wish to delete the previous value. 
+有很多要优化的地方，在生产中使用逐字记录不是一个好方式 很多时候它将取决于您的使用案例，所以在SDK 中没有这种情况。 例如，在这个示例实现过程中，先前的值被保留在升级过程中可能存在错误的地方； 保留以前的值允许再次运行升级，但您可能希望删除以前的值。 
