@@ -4,7 +4,7 @@ title: "GCP Pub/Sub"
 linkTitle: "GCP Pub/Sub"
 description: "GCP Pub/Sub组件详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-gcp/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-gcp/"
 ---
 
 ## 创建 Dapr 组件
