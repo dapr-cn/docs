@@ -27,8 +27,8 @@ dapr init [flags]
 | `--enable-mtls`      |                | `true`        | 在群集中启用 mTLS                                        |
 | `--help`, `-h`       |                |               | 显示此帮助消息                                            |
 | `--kubernetes`, `-k` |                | `false`       | 将 Dapr 部署到 Kubernetes 集群                           |
-| `--wait`             |                | `false`       | Wait for Kubernetes initialization to complete     |
-| `--timeout`          |                | `300`         | The wait timeout for the Kubernetes installation   |
+| `--wait`             |                | `false`       | 等待Kubernetes初始化完成                                  |
+| `--timeout`          |                | `300`         | Kubernetes安装等待超时                                   |
 | `--namespace`, `-n`  |                | `dapr-system` | 用于安装 Dapr 的 Kubernetes 名称空间                        |
 | `--network`          | `DAPR_NETWORK` |               | 部署 Dapr 运行时的 Docker 网络                             |
 | `--runtime-version`  |                | `latest`      | 要安装的 Dapr 运行时的版本，例如: `1.0.0`                       |
@@ -46,11 +46,11 @@ dapr init
 dapr init -k
 ```
 
-### Initialize Dapr in Kubernetes and wait for the installation to complete
+### 初始化Kubernetes的Dapr并等待安装完成
 
- You can wait for the installation to complete its deployment with the `--wait` flag.
+ 您可以使用 `--want` 标志来等待安装完成。
 
- The default timeout is 300s (5 min), but can be customized with the `--timeout` flag.
+ 默认超时是 300s (5分钟)，但可以使用 `--timeout` 标志自定义超时。
 ```bash
 dapr init -k --wait --timeout 600
 ```
