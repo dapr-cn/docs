@@ -62,7 +62,7 @@ Dapr 可以托管在多种环境中，包括用于本地开发的自托管，或
 
 ## 开发者语言 SDK 和框架
 
-To make using Dapr more natural for different languages, it also includes [language specific SDKs]({{X64X}}) for C++, Go, Java, JavaScript, Python, Rust .NET and PHP. 这些 SDK 通过类型化的语言 API 而不是通过调用 API 来使用 Dapr 构建块中的功能，例如，保存状态，发布事件或创建Actor。 这使您能够以自己选择的语言编写无状态和有状态功能和 actors 的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言 actor 和功能支持。
+为了让不同的开发语言用户能够更加自然地使用到 Dapr ，它还提供了适用于 C++、Go、Java、JavaScript、Python、Rust、 .NET 和 PHP的 [SDK]({{X64X}})。 这些 SDK 通过类型化的语言 API 而不是通过调用 API 来使用 Dapr 构建块中的功能，例如，保存状态，发布事件或创建Actor。 这使您能够以自己选择的语言编写无状态和有状态功能和 actors 的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言 actor 和功能支持。
 
 ### SDK
 
@@ -101,7 +101,7 @@ Dapr 通过扩展与 Azure Functions 运行时集成，使函数可以与 Dapr �
 ## 为运维设计
 Dapr 有为 [运维](/operations/) 做专门设计。 通过 Dapr CLI 安装的 [服务仪表板](https://github.com/dapr/dashboard)提供了基于 Web 的 UI ，使您能够查看信息，查看日志以及 Dapr sidecar 的更多内容。
 
-The [monitoring tools support](/operations/monitoring/) provides deeper visibility into the Dapr system services and side-cars and the [observability capabilities]({{X81X}}) of Dapr provide insights into your application such as tracing and metrics.
+[对于监控工具的支持](/operations/monitoring/)使您可以更深入地了解到 Dapr 自身的系统服务和 side-cars 中的服务，而 Dapr 构建了对于应用程序的[可观察性能力]({{X81X}})，例如链路跟踪和指标。
 
 ## 在任何地方运行
 

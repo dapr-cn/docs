@@ -7,7 +7,7 @@ aliases:
   - /getting-started/install-dapr/
 ---
 
-Now that you have the [Dapr CLI installed]({{X22X}}), it's time to initialize Dapr on your local machine using the CLI.
+现在，您已经安装了 [Dapr CLI]({{X22X}})，是时候使用 CLI 在本地机器上初始化 Dapr 了。
 
 Dapr 与您的应用程序一起作为sidecar运行，在自托管模式下，这意味着它是您本地机器上的一个进程。 因此，初始化 Dapr 包括获取 Dapr sidecar 二进制文件并将其安装到本地.
 
@@ -19,7 +19,7 @@ Dapr 与您的应用程序一起作为sidecar运行，在自托管模式下，�
 1. 运行用于本地演员支持的**Dapr placement服务容器实例**
 
 {{% alert title="Docker" color="primary" %}}
-这种推荐的开发环境需要 [Docker](https://docs.docker.com/install/)。 It is possible to initialize Dapr without a dependency on Docker (see [this guidance]({{X24X}})) but next steps in this guide assume the recommended development environment.
+这种推荐的开发环境需要 [Docker](https://docs.docker.com/install/)。 无需依赖 Docker 即可初始化 Dapr（参见[本指南]({{X24X}})），但本指南中的下一步假设了建议的开发环境。
 {{% /alert %}}
 
 ### 第 1 步：打开架起终端
