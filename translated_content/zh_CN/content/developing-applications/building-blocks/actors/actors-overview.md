@@ -5,7 +5,7 @@ linkTitle: "概述"
 weight: 10
 description: Dapr Actor 构建块概述
 aliases:
-  - "/developing-applications/building-blocks/actors/actors-background"
+  - "/zh-hans/developing-applications/building-blocks/actors/actors-background"
 ---
 
 ## 介绍
