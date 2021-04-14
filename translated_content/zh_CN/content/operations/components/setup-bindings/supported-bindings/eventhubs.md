@@ -9,7 +9,7 @@ description: "关于 Azure Event Hubs 组件绑定的详细文档"
 
 To setup Azure Event Hubs binding create a component of type `bindings.azure.eventhubs`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [this](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-dotnet-framework-getstarted-send) for instructions on how to set up an Event Hub.
+参考此[实例](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-dotnet-framework-getstarted-send)来创建一个事件中心。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
