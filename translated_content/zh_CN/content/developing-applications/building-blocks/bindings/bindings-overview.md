@@ -1,5 +1,5 @@
 ---
-type: docs
+type: 文档
 title: "绑定概述"
 linkTitle: "概述"
 weight: 100
