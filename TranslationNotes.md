@@ -46,10 +46,16 @@ linkTitle: "Docs"
 weight: 2000
 description: >
   Guidelines for contributing to the Dapr Docs
+aliases:
+  - "/developing-applications/building-blocks/actors/actors-background"
 ---
 ```
 
-**其中，除了 title、linkTitle 和 description 之外的内容都不需要翻译。**
+翻译的要点如下：
+
+- 其中，除了 title、linkTitle 和 description 之外的内容都不需要翻译。
+- 如果有 aliases ，则需要为对应的链接添加 `/zh-hans/`。 [此问题在这里有详细的讨论](https://github.com/dapr/docs/pull/1377#issuecomment-816822405)
+
 因此，翻译的结果如下：
 
 ```md
@@ -60,6 +66,8 @@ linkTitle: "文档贡献"
 weight: 2000
 description: >
   向 Dapr Docs 投稿的准则
+aliases:
+  - "/zh-hans/developing-applications/building-blocks/actors/actors-background"
 ---
 ```
 
