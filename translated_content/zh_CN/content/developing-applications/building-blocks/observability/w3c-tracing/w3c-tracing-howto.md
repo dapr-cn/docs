@@ -229,7 +229,7 @@ Dapr 包含生成跟踪上下文，您无需明确创建跟踪上下文。
 
 其他代码片段和详细信息，请参阅 [grpc 应用程序]({{< ref grpc >}})。
 
-### 1. 1. 导入包
+### 1. 导入包
 
 ```go
 package main
@@ -243,7 +243,7 @@ import (
 )
 ```
 
-### 2. 2. 创建客户端
+### 2. 创建客户端
 
 ```go
   // Get the Dapr port and create a connection
@@ -259,20 +259,20 @@ import (
   client := pb.NewDaprClient(conn)
 ```
 
-### 3. 3. 使用跟踪上下文调用 InvokeService 方法
+### 3. 使用跟踪上下文调用 InvokeService 方法
 
 ```go
-  // 创建Trace Context
+  // Create the Trace Context
   ctx , span := trace.StartSpan(context.Background(), "InvokeService")
 
-  // 返回的上下文可以用于在当前环境中不断传播新创建的span。
-  // 在同一进程中，Context用来传播追踪上下文。
+  // The returned context can be used to keep propagating the newly created span in the current context.
+  // In the same process, context.Context is used to propagate trace context.
 
-  // 跨进程中，使用Trace Context 的传播格式来传播追踪上下文。
+  // Across the process, use the propagation format of Trace Context to propagate trace context.
   traceContext := propagation.Binary(span.SpanContext())
   ctx = metadata.NewOutgoingContext(ctx, string(traceContext))
 
-  // 传递链路上下文
+  // Pass the trace context
   resp, err := client.InvokeService(ctx, &pb.InvokeServiceRequest{
         Id: "client",
         Message: &commonv1pb.InvokeRequest{
@@ -288,7 +288,7 @@ import (
 ## 相关链接
 
 - [可观察性概念]({{< ref observability-concept.md >}})
-- [用于分布式跟踪的 W3C 跟踪上下文]({{< ref w3c-tracing >}})
+- [用于分布式跟踪的 W3C 跟踪上下文]({{< ref w3c-tracking >}})
 - [如何使用 OpenTelemetry 为分布式跟踪设置 Application Insights]({{< ref open-telemetry-collector.md >}})
 - [如何设置 Zipkin 以进行分布式跟踪]({{< ref zipkin.md >}})
 - [W3C 跟踪上下文规范](https://www.w3.org/TR/trace-context/)
