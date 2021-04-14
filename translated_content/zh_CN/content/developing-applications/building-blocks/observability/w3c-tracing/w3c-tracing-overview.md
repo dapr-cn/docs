@@ -92,7 +92,7 @@ Traceparent 头以所有供应商都能理解的通用格式在追踪系统中�
 
 `traceparent: 00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01`
 
- Traceparent 字段的详细信息 \[ 在这里 \](https://www. w3. org/Tr/trace-context/#traceparent-header)。
+ 关于 traceparent 字段的详情可见[此处](https://www.w3.org/TR/trace-context/#traceparent-header)
 
 #### Tracestate 标头
 Tracestate 标头包含特定于供应商格式的父级（parent）。
