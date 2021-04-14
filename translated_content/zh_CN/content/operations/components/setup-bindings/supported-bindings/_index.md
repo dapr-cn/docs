@@ -12,10 +12,10 @@ no_list: true
 
 表格标题：
 
-> `Status`: [Component certification]({{X63X}}) status
+> `状态`: [组件认证]({{X63X}}) 状态
   - [Alpha]({{X52X}})
   - [Beta]({{X54X}})
-  - [GA]({{X56X}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
+  - [GA]({{X56X}}) > `自从`: 定义了当前组件从哪个Dapr Runtime版本开始支持
 
 > `组件版本`：代表组件的版本
 ### 通用

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To : 使用 Dapr 的 W3C 跟踪上下文"
-linkTitle: "How-To: Use W3C trace context"
+linkTitle: "How-To: 使用 W3C 跟踪上下文"
 weight: 20000
 description: 将 W3C 追踪标准与 Dapr 一起使用
 ---
@@ -288,7 +288,7 @@ import (
 ## 相关链接
 
 - [可观察性概念]({{< ref observability-concept.md >}})
-- [用于分布式跟踪的 W3C 跟踪上下文]({{< ref w3c-tracing >}})
+- [用于分布式跟踪的 W3C 跟踪上下文]({{< ref w3c-tracking >}})
 - [如何使用 OpenTelemetry 为分布式跟踪设置 Application Insights]({{< ref open-telemetry-collector.md >}})
 - [如何设置 Zipkin 以进行分布式跟踪]({{< ref zipkin.md >}})
 - [W3C 跟踪上下文规范](https://www.w3.org/TR/trace-context/)

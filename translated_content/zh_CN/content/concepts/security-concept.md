@@ -71,11 +71,11 @@ Dapr 还管理工作负载证书轮换，并且这样做时应用程序不会停
 
 ## 组件命名空间的作用域和密钥
 
-Dapr 组件是受限于命名空间的。 这意味着 Dapr runtime sidecar 的实例只能访问部署到同一命名空间的组件。 See the [components scope documentation]({{X31X}}) for more details.
+Dapr 组件是受限于命名空间的。 这意味着 Dapr runtime sidecar 的实例只能访问部署到同一命名空间的组件。 更多详细信息，请参阅 [组件范围文档]({{X31X}})。
 
-Dapr 组件使用 Dapr 的内置密钥管理功能来管理密钥。 See the [secret store overview]({{X33X}}) for more details.
+Dapr 组件使用 Dapr 的内置密钥管理功能来管理密钥。 详细信息请参阅 [密钥存储概述]({{X33X}})。
 
-In addition, Dapr offers application-level scoping for components by allowing users to specify which applications can consume given components.For more information about application level scoping, see [here]({{X35X}}).
+此外，Dapr 还允许用户指定哪些应用程序可以消耗给定的组件，从而为组件提供应用程序级别的范围范围。有关应用级别范围的更多信息，请参阅 [此处]({{X35X}})。
 
 ## 网络安全
 
@@ -110,7 +110,7 @@ Dapr 使用配置的身份验证方法来与底层状态存储进行身份验证
 
 ### 2021 年 2 月
 
-In February 2021, Dapr has gone through a 2nd security audit targetting it's 1.0 release by Cure53. 测试的重点是：
+2021 年 2 月，Dapr 进行了第二次安全审计，目标是 Cure53 发布的 1.0。 测试的重点是：
 
 * 自上次审计以来的 Dapr 运行时间代码基础评估
 * 访问控制列表
