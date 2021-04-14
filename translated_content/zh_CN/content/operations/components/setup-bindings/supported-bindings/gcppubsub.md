@@ -7,7 +7,7 @@ description: "Detailed documentation on the GCP Pub/Sub binding component"
 
 ## 配置
 
-To setup Azure Pub/Sub binding create a component of type `bindings.gcp.pubsub`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要开始 Azure 发布/订阅 绑定，需要创建一个类型为 `bindings.gcp.pubsub` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
