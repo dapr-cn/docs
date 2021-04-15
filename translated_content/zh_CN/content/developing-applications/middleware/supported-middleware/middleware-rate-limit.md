@@ -6,7 +6,7 @@ weight: 1000
 description: "使用速率限制中间件来限制每秒的请求"
 ---
 
-速率限制 [HTTP 中间件]({{< ref middleware-concept.md >}})允许限制每秒允许的 HTTP 请求的最大数量。 速率限制可以保护您的应用程序免受拒绝服务（DOS）攻击。 DOS攻击可以由恶意的第三方发起，也可以由你的软件中的错误发起（也就是 "友军 "DOS攻击）。 a "friendly fire" DOS attack).
+速率限制 [HTTP 中间件]({{< ref middleware-concept.md >}})允许限制每秒允许的 HTTP 请求的最大数量。 速率限制可以保护您的应用程序免受拒绝服务（DOS）攻击。 DOS攻击可以由恶意的第三方发起，也可以由你的软件中的错误发起（也就是 "友军 "DOS攻击）。
 
 ## 配置
 
