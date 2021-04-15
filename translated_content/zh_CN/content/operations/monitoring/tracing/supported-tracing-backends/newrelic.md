@@ -29,7 +29,7 @@ spec:
       endpointAddress: "https://trace-api.newrelic.com/trace/v1?Api-Key=<NR-INSIGHTS-INSERT-API-KEY>&Data-Format=zipkin&Data-Format-Version=2"
 ```
 
-### Viewing Traces
+### 查看 Traces
 
 New Relic 分布式追踪概览 ![New Relic Kubernetes Cluster Explorer App](/images/nr-distributed-tracing-overview.png)
 
