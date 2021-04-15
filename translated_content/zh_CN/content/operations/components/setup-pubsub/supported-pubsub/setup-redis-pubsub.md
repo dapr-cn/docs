@@ -42,14 +42,14 @@ spec:
 | consumerID    | N  | 消费组 ID                                           | `"mygroup"`                                                     |
 | enableTLS     | N  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"` | `"true"`, `"false"`                                             |
 
-## Create a Redis instance
+## 创建Redis实例
 
-Dapr can use any Redis instance - containerized, running on your local dev machine, or a managed cloud service, provided the version of Redis is 5.0.0 or later.
+Dapr可以使用任何Redis实例，无论是容器化的，运行在本地开发机器上的，或者是托管的云服务，前提是Redis的版本是5.0.0或更高。
 
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" "GCP" "Azure">}}
 
 {{% codetab %}}
-The Dapr CLI will automatically create and setup a Redis Streams instance for you. The Redis instance will be installed via Docker when you run `dapr init`, and the component file will be created in default directory. (`$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows).
+Dapr CLI将自动为你创建和设置一个Redis Streams实例。 当你执行`dapr init`时，Redis实例将通过Docker安装，组件文件将在默认目录下创建。 (`$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows).
 {{% /codetab %}}
 
 {{% codetab %}}
