@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "限定 Pub/Sub 主题访问权限"
-linkTitle: "Scope topic access"
+linkTitle: "作用域主题访问"
 weight: 5000
 description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程序"
 ---
