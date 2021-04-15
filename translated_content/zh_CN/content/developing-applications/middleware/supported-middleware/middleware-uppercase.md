@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "大写请求实体"
-linkTitle: "Uppercase"
+linkTitle: "大写"
 weight: 9999
 description: "测试您的 HTTP 管道与大写中间件一起运行"
 ---
