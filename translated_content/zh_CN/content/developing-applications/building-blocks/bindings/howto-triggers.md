@@ -16,7 +16,7 @@ Dapr 绑定允许您 :
 * 在不更改代码的情况下替换绑定
 * 关注业务逻辑而不是事件资源实现
 
-For more info on bindings, read [this overview]({{X17X}}).
+有关绑定的更多信息，请阅读 [概述]({{X17X}})。
 
 有关展示绑定的快速入门示例，请访问此 [链接](https://github.com/dapr/quickstarts/tree/master/bindings)。
 

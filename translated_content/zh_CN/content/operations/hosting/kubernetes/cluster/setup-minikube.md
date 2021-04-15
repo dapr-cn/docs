@@ -49,7 +49,7 @@ minikube addons enable ingress
 
 > **注意：** 最新的 Dapr helm chart 不再支持 Helm v2。 请按照这篇文章 [Helm 迁移指南](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/) 从Helm v2 迁移到Helm v3。
 
-### 疑难解答
+### Troubleshooting
 
 1. 负载均衡器的外部IP地址不显示在`kubectl get svc`
 

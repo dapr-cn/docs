@@ -40,10 +40,10 @@ docker run -d -p 9411:9411 openzipkin/zipkin
 ```bash
 dapr run --app-id mynode --app-port 3000 node app.js
 ```
-### Viewing Traces
+### 查看 Traces
 To view traces, in your browser go to http://localhost:9411 and you will see the Zipkin UI.
 
-## Configure Kubernetes
+## 配置 Kubernetes
 
 The following steps shows you how to configure Dapr to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster, and how to view them.
 

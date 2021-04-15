@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "OAuth2 client credentials"
-linkTitle: "OAuth2 client credentials"
+title: "OAuth2 客户端凭证"
+linkTitle: "OAuth2 客户端凭证"
 weight: 3000
 description: "使用OAuth2客户端凭证中间件来保护HTTP端点的安全"
 ---

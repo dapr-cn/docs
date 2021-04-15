@@ -61,7 +61,7 @@ spec:
 
 下面的步骤显示了如何创建 Dapr 客户端并调用 `保存状态数据` 操作：
 
-1. 1. 导入包
+1. 导入包
 
 ```go
 package main
@@ -75,7 +75,7 @@ import (
 )
 ```
 
-2. 2. 创建客户端
+2. 创建客户端
 
 ```go
 // just for this demo
@@ -109,7 +109,7 @@ logger.Println("data saved")
 
 以下步骤将向您显示如何创建一个让Dapr服务器与之通信的应用程序。
 
-1. 1. 导入包
+1. 导入包
 
 ```go
 package main

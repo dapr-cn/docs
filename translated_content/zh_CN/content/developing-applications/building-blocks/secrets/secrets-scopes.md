@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "How To: Use secret scoping"
-linkTitle: "How To: Use secret scoping"
+title: "如何: 使用秘钥的作用域限定"
+linkTitle: "如何: 使用秘钥的作用域限定"
 weight: 3000
 description: "应用程序从秘钥存储介质中读取时，需要使用作用域来限定"
 ---
