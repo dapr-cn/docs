@@ -6,7 +6,7 @@ weight: 2000
 description: "使用 Redis 作为后端状态存储"
 ---
 
-Dapr 在保存和检索状态时不会转换状态值。 Dapr requires all state store implementations to abide by a certain key format scheme (see [Dapr state management spec]({{X16X}}). 您可以直接与基础存储进行交互以操作状态数据，例如查询状态、创建聚合视图和进行备份。
+Dapr 在保存和检索状态时不会转换状态值。 Dapr 要求所有状态存储的实现都遵守特定格式(见 [Dapr 状态管理规范]({{X16X}}))。 您可以直接与基础存储进行交互以操作状态数据，例如查询状态、创建聚合视图和进行备份。
 > **注：** 以下示例使用 Redis CLI 来查询作为Dapr默认状态存储实现的Redis中的状态数据。
 
 ## 1. 连接Redis
