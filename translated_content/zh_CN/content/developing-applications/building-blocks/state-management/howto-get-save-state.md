@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "指南：如何保存和获取状态"
-linkTitle: "How-To: Save & get state"
+linkTitle: "指南：如何保存和获取状态"
 weight: 200
 description: "使用键值对来持久化状态"
 ---
@@ -146,7 +146,12 @@ Updating metadata for app command: python pythonState.py
 You are up and running! Both Dapr and your app logs will appear here.
 
 == APP == State has been stored
-== APP == Got value: b'myFirstValue'
+== APP == Got value: b'myFirstValue'      
+
+ 
+   
+
+ 
 ```
 
 {{% /codetab %}}
@@ -181,7 +186,7 @@ dapr --app-id myapp run -- php state-example.php
 你应该会得到一个类似于下面的输出，它将同时显示Dapr和应用程序的日志:
 
 ```md
-✅  You're up and running! Both Dapr and your app logs will appear here.
+✅  You're up and running!  
 
 == APP == [2021-02-12T16:30:11.078777+01:00] APP.ALERT: State has been stored [] []
 
@@ -426,7 +431,7 @@ dapr --app-id myapp run -- php state-example.php
 并看到以下输出:
 
 ```md
-✅  You're up and running! Both Dapr and your app logs will appear here.
+✅  You're up and running!  
 
 == APP == [2021-02-12T16:55:02.913801+01:00] APP.ALERT: States have been stored [] []
 
@@ -568,7 +573,7 @@ dapr --app-id myapp run -- php state-example.php
 观察到以下输出:
 
 ```md
-✅  You're up and running! Both Dapr and your app logs will appear here.
+✅  You're up and running!  
 
 == APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! [] []
 
