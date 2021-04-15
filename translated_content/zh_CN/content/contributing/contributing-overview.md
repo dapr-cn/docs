@@ -33,8 +33,8 @@ description: >
 1. 检查现有问题
     - 在创建新问题之前，请在 [open issues](https://github.com/dapr/dapr/issues) 中进行搜索，以查看问题或功能请求是否已经被提交。
     - 如果发现问题已存在，请进行相关注释并添加 [reaction](https://github.com/blog/2119-add-reaction-to-pull-requests-issues-and-comments)。 添加回应
-        - 👍 up-vote
-        - 👎 down-vote
+        - 👍 赞同投票
+        - 👎 反对投票
 1. 对于bugs
     - 检查它不是环境问题。 例如，如果在 Kubernetes 上运行，请确保先决条件已到位。 (状态存储，绑定等)
     - 您有尽可能多的数据。 这通常以日志和/或堆栈跟踪的形式出现。 如果在 Kubernetes 或其他环境中运行，请查看 Dapr 服务的日志 (运行时，操作员和安置服务) 。 有关如何获取日志的更多详细信息，请<a href="{{< ref "logs-troubleshooting.md" >}}访问此处</a>.
