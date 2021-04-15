@@ -288,7 +288,7 @@ import (
 ## 相关链接
 
 - [可观察性概念]({{< ref observability-concept.md >}})
-- [用于分布式跟踪的 W3C 跟踪上下文]({{< ref w3c-tracking >}})
+- [用于分布式跟踪的 W3C 跟踪上下文]({{< ref w3c-tracing >}})
 - [如何使用 OpenTelemetry 为分布式跟踪设置 Application Insights]({{< ref open-telemetry-collector.md >}})
 - [如何设置 Zipkin 以进行分布式跟踪]({{< ref zipkin.md >}})
 - [W3C 跟踪上下文规范](https://www.w3.org/TR/trace-context/)
