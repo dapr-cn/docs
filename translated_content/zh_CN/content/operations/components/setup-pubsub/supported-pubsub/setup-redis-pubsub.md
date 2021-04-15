@@ -49,11 +49,11 @@ Dapr可以使用任何Redis实例，无论是容器化的，运行在本地开�
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" "GCP" "Azure">}}
 
 {{% codetab %}}
-Dapr CLI将自动为你创建和设置一个Redis Streams实例。 当你执行`dapr init`时，Redis实例将通过Docker安装，组件文件将在默认目录下创建。 (`$HOME/.dapr/components` directory (Mac/Linux) or `%USERPROFILE%\.dapr\components` on Windows).
+Dapr CLI将自动为你创建和设置一个Redis Streams实例。 当你执行`dapr init`时，Redis实例将通过Docker安装，组件文件将在默认目录下创建。 (默认目录位于`$HOME/.dapr/components` (Mac/Linux) ，`%USERPROFILE%\.dapr\components` (Windows)).
 {{% /codetab %}}
 
 {{% codetab %}}
-您可以使用 [helm](https://helm.sh/) 在我们的 Kubernetes 集群中快速创建 dapr 实例。 This approach requires [Installing Helm](https://github.com/helm/helm#install).
+您可以使用 [helm](https://helm.sh/) 在我们的 Kubernetes 集群中快速创建 dapr 实例。 这种方法需要[安装Helm](https://github.com/helm/helm#install)。
 
 1. 安装 Redis 到你的集群：
     ```bash
@@ -73,9 +73,9 @@ Dapr CLI将自动为你创建和设置一个Redis Streams实例。 当你执行`
 4. 接下来，我们会获取到我们的Redis密码，根据我们使用的操作系统不同，密码也会略有不同：
     - **Windows**：执行`kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`，这将创建一个有你的加密后密码的文件。 接下来，执行`certutil -decode encoded.b64 password.txt`，它将把你的redis密码放在一个名为`password.txt`的文本文件中。 复制密码，删除这两个文件。
 
-    - **Linux/MacOS**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode` and copy the outputted password.
+    - **Linux/MacOS**：执行 `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode`并复制输出的密码。
 
-    Add this password as the `redisPassword` value in your redis.yaml file. 例如:
+    将此密码设置为redis.yaml文件的`redisPassword`的值。 例如:
 
     ```yaml
         - name: redisPassword
@@ -99,7 +99,7 @@ Dapr CLI将自动为你创建和设置一个Redis Streams实例。 当你执行`
 
 
 {{% alert title="Note" color="primary" %}}
-The Dapr CLI automatically deploys a local redis instance in self hosted mode as part of the `dapr init` command.
+作为`dapr init`命令的一部分，Dapr CLI会在自托管模式下自动部署本地redis实例。
 {{% /alert %}}
 
 ## 相关链接
