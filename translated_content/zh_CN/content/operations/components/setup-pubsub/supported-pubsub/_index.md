@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Supported pub/sub brokers"
-linkTitle: "Supported pub/sub brokers"
+title: "支持的 发布/订阅 消息代理"
+linkTitle: "支持的 发布/订阅 消息代理"
 weight: 50000
 description: Dapr支持的发布/订阅消息代理
 no_list: true
