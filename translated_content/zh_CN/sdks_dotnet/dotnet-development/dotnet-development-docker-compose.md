@@ -1,9 +1,9 @@
 ---
-type: docs
-title: "Dapr .NET SDK Development with Docker-Compose"
+type: 文档
+title: "使用Docker-Compose进行Dapr .NET SDK开发"
 linkTitle: "Docker Compose"
 weight: 40000
-description: Learn about local development with Docker-Compose
+description: 学习如何使用Docker-Compose进行本地开发
 ---
 
 ## Docker-Compose
