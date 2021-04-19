@@ -59,7 +59,7 @@ spec:
 | sessionTimeout    | 是  | The session timeout value                                      | `"5s"`                                       |
 | maxBufferSize     | N  | The maximum size of buffer. Defaults to `"1048576"`            | `"1048576"`                                  |
 | maxConnBufferSize | N  | The maximum size of connection buffer. Defautls to `"1048576`" | `"1048576"`                                  |
-| keyPrefixPath     | N  | The key prefix path in Zookeeper. No default                   | `"dapr"`                                     |
+| keyPrefixPath     | N  | The key prefix path in Zookeeper. 无默认值                         | `"dapr"`                                     |
 
 ## Setup Zookeeper
 
