@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "How-To: Scope components to one or more applications"
-linkTitle: "How-To: Set component scopes"
+title: "How-To: 限定组件作用范围在一或多个应用"
+linkTitle: "设置组件作用域"
 weight: 300
-description: "Limit component access to particular Dapr instances"
+description: "限制特定 Dapr 实例的组件访问"
 ---
 
-Dapr components are namespaced (separate from the Kubernetes namespace concept), meaning a Dapr runtime instance can only access components that have been deployed to the same namespace.
+Dapr 组件的名称空间（注意与 Kubernetes 名称空间概念区分），这意味着 Dapr runtime 实例只能访问已部署到同一名称空间的组件。
 
-When Dapr runs, it matches it's own configured namespace with the namespace of the components that it loads and initializes only the ones matching its namespaces. All other components in a different namespace are not loaded.
+当 Dapr 运行时，它将自己的配置名称空间与其加载的组件的命名空间进行匹配，并且仅初始化与其名称空间匹配的组件。 并且不会加载不同命名空间中的所有其他组件。
 
 ## 命名空间
-Namespaces can be used to limit component access to particular Dapr instances.
+名称空间可用于限制组件访问特定的 Dapr 实例。
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-In self hosted mode, a developer can specify the namespace to a Dapr instance by setting the `NAMESPACE` environment variable. If the `NAMESPACE` environment variable is set, Dapr does not load any component that does not specify the same namespace in its metadata.
+在自托管模式下，开发人员可以通过设置 `NAMESPACE` 环境变量来指定 Dapr 实例的名称空间。 如果设置了 `NAMESPACE` 环境变量，Dapr 只会加载其元数据中指定相同名称空间的组件。
 
-For example given this component in the `production` namespace
+例如，将此组件 `production` 命名空间中
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -33,7 +33,7 @@ spec:
     value: redis-master:6379
 ```
 
-To tell Dapr which namespace it is deployed to, set the environment variable:
+若要告诉 Dapr 它部署到哪个名称空间，请设置环境变量：
 
 MacOS/Linux:
 
@@ -51,7 +51,7 @@ setx NAMESPACE "production"
 {{% /codetab %}}
 
 {{% codetab %}}
-Let's consider the following component in Kubernetes:
+让我们考虑在 Kubernetes 中的以下组件：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -67,7 +67,7 @@ spec:
     value: redis-master:6379
 ```
 
-In this example, the Redis component is only accessible to Dapr instances running inside the `production` namespace.
+在此示例中，只有运行在 `production` 名称空间内的 Dapr 实例才能访问 Redis 组件。
 {{% /codetab %}}
 
 {{< /tabs >}}
