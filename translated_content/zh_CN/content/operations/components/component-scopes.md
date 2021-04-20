@@ -72,15 +72,15 @@ spec:
 
 {{< /tabs >}}
 
-## Using namespaces with service invocation
+## 在服务调用时使用名称空间
 
-When using service invocation an application in a namespace you have to qualify it with the namespace. For example calling the `ping` method on `myapp` which is scoped to the `production` namespace would be like this.
+在名称空间中使用服务调用应用程序时，您必须将其与名称空间进行限定。 例如，在 `myapp` 上调用 `ping` 方法，该方法限定范围为 `production` 名称空间。
 
 ```bash
 https://localhost:3500/v1.0/invoke/myapp.production/method/ping
 ```
 
-Or using a curl command from an external DNS address, in this case `api.demo.dapr.team` would be like this.
+或者使用外部DNS地址的curl 命令，在这种情况下 `api.demo.dapr.team` 就类似下面这样
 
 MacOS/Linux:
 ```
@@ -90,14 +90,14 @@ curl -i -d '{ "message": "hello" }' \
      https://api.demo.dapr.team/v1.0/invoke/myapp.production/method/ping
 ```
 
-## Using namespaces with pub/sub
-Read [Pub/Sub and namespaces]({{< ref "component-scopes.md" >}}) for more information on scoping components.
+## 使用 pub/sub 的命名空间
+请阅读 [Pub/Sub 和名称空间]({{< ref "component-scopes.md" >}}) 了解有关范围组件的更多信息。
 
-## Application access to components with scopes
+## 对具有作用域的组件的应用程序访问
 
-Developers and operators might want to limit access for one database to a certain application, or a specific set of applications. To achieve this, Dapr allows you to specify `scopes` on the component YAML. Application scopes added to a component limit only the applications with specific IDs to be able to use the component.
+开发人员和操作员可能希望将一个数据库的访问权限限制为某个应用程序或一组特定应用程序。 为此，Dapr 允许您在组件 YAML 上指定</code>scopes`作用域。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。</p>
 
-The following example shows how to give access to two Dapr enabled apps, with the app IDs of `app1` and `app2` to the Redis component named `statestore` which itself is in the `production` namespace
+<p spaces-before="0">下面的示例演示如何给予两个启用的Dapr应用访问权限， 使用 <code>app1` 和 `app2` 两个应用程序可以访问名为 `statestore` 的 Redis 组件，这个组件部署在 `production` 命名空间
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -116,10 +116,10 @@ scopes:
 - app2
 ```
 
-## 示例 <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## 示例 <iframe width="560" height="315" src="//player.bilibili.com/player.html?aid=886064109&bvid=BV1QK4y1p7fn&cid=277946151&page=10&t=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 相关链接
 
-- [Configure Pub/Sub components with multiple namespaces]({{< ref "pubsub-namespaces.md" >}})
-- [Use secret scoping]({{< ref "secrets-scopes.md" >}})
-- [Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}})
+- [操作：配置具有多个命名空间的 Pub/Sub 组件]({{< ref "pubsub-namespaces.md" >}})
+- [使用密钥作用域]({{< ref "secrets-scopes.md" >}})
+- [限制可以从密钥仓库中读取的密钥]({{< ref "secret-scope.md" >}})
