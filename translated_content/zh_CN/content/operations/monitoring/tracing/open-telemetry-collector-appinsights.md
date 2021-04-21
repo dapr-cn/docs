@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Using OpenTelemetry Collector to collect traces to send to AppInsights"
-linkTitle: "Using the OpenTelemetry for Azure AppInsights"
+title: "使用 OpenTelemetry Collector 来收集追踪信息，发送至 AppInsights"
+linkTitle: "为 Azure AppInsights 使用 OpenTelemetry"
 weight: 1000
 description: "How to push trace events to Azure Application Insights, using the OpenTelemetry Collector."
 ---
