@@ -141,6 +141,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "herowk",
+      "name": "kyle wong",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1592834?v=4",
+      "profile": "http://www.herowk.com",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
