@@ -18,17 +18,17 @@ description: 了解.NET Dapr应用程序的本地开发集成选项
 - 状态存储等其他依赖项
 - 可选：Actors 的 Dapr placement 服务
 
-本文档将假设您正在构建生产应用程序，并希望创建一套可重复且强大的开发实践。 The guidance here is general, and applies to any .NET server application using Dapr (including actors).
+本文档将假设您正在构建生产应用程序，并希望创建一套可重复且强大的开发实践。 这里的指导是一般性的，适用于任何使用 Dapr 的 .NET服务器应用程序（包括Actors）。
 
-## Managing components
+## 管理组件
 
-You have two primary methods of storing component definitions for local development with Dapr:
+你有两种主要的方法来存储组件定义，以便用Dapr进行本地开发：
 
-- Use the default location (`~/.dapr/components`)
-- Use your own location
+- 使用默认位置(`~/.dapr/components`)
+- 使用您自己的位置
 
-Creating a folder within your source code repository to store components and configuration will give you a way to version and share these definitions. The guidance provided here will assume you created a folder next to the application source code to store these files.
+在你的源代码库中创建一个文件夹来存储组件和配置，将为你提供一个版本和分享这些定义的方法。 这里提供的指导将假设你在应用程序源代码旁边创建了一个文件夹来存储这些文件。
 
-## Development options
+## 开发选择
 
-Choose one of these links to learn about tools you can use in local development scenarios. These articles are ordered from lowest investment to highest investment. You may want to read them all to get an overview of your options.
+选择其中一个链接来了解你可以在本地开发场景中使用的工具。 这些文章从最低投资到最高投资排序。 您可能需要阅读所有这些内容，以便全面了解您的选择。
