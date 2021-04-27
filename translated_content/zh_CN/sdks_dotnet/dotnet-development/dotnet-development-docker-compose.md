@@ -18,10 +18,10 @@ description: 学习如何使用Docker-Compose进行本地开发
 
 ### 使用docker-compose
 
-从.NET的角度来看，使用 `docker-compose` 配合 Dapr 不需要专门的指导。 `docker-compose` runs containers, and once your service is in a container, configuring it similar to any other programming technology.
+从.NET的角度来看，使用 `docker-compose` 配合 Dapr 不需要专门的指导。 `docker-compose` 运行容器，一旦您的服务放在容器中，它的配置与其他任意的编程技术都是相似的。
 
 {{% alert title="💡 App Port" color="primary" %}}
-In a container, an ASP.NET Core app will listen on port 80 by default. Remember this for when you need to configure the `--app-port` later.
+在容器中，ASP.NET Core应用默认监听80端口。 Remember this for when you need to configure the `--app-port` later.
 {{% /alert %}}
 
 To summarize the approach:
