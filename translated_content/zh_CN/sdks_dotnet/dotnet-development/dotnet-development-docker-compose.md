@@ -39,6 +39,6 @@ Compose 文件至少包含：
 - 每个服务的容器
 - 一个带有服务端口和 app-id 指定的 `<service>-daprd` sidecar 容器
 - 在容器中运行的其他依赖关系（例如redis）
-- 可选：Dapr 放置容器 (适用于 Actors)
+- 可选：Dapr placement容器 (适用于 Actors)
 
 您也可以从 [eShopOnContainers](https://github.com/dotnet-architecture/eShopOnDapr/blob/master/docker-compose.yml) 示例应用程序中查看一个更大规模的示例。
