@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "Dapr .NET SDK Development with Project Tye"
-linkTitle: "Project Tye"
+title: "Dapr .NET SDK 与 Tye 项目开发"
+linkTitle: "Tye项目"
 weight: 40000
-description: Learn about local development with Project Tye
+description: 学习使用 Tye 项目本地开发
 ---
 
-## Project Tye
+## Tye项目
 
-[.NET Project Tye](https://github.com/dotnet/tye/) is a microservices development tool designed to make running many .NET services easy. Tye enables you to store a configuration of multiple .NET services, processes, and container images as a runnable application.
+[.NET Project Tye](https://github.com/dotnet/tye/) 是一种微服务开发工具，旨在使多个.NET 服务更容易运行。 Tye 使您能够将多个 .NET 服务、流程和容器镜像的配置存储为可运行的应用程序。
 
-Tye is advantageous for a .NET Dapr developer because:
+Tye 对 .NET Dapr 开发者有利，因为：
 
-- Tye has the ability to automate the dapr CLI built-in
-- Tye understands .NET's conventions and requires almost no configuration for .NET services
-- Tye can manage the lifetime of your dependencies in containers
+- Tye有能力将自动化的dapr CLI内置。
+- Tye了解.NET的惯例，对.NET服务几乎不需要配置。
+- Tye可以管理你在容器中的依赖关系的生命周期
 
-Pros/cons:
-- **Pro:** Tye can automate all of the steps described above. You no longer need to think about concepts like ports or app-ids.
-- **Pro:** Since Tye can also manage containers for you, you can make those part of the application definition and stop the long-running containers on your machine.
+优点/缺点:
+- **优点：** Tye 可以实现上述所有步骤的自动化。 您不再需要思考像端口或应用ID这样的概念。
+- **优点：**由于Tye也可以为你管理容器，你可以将这些作为应用程序定义的一部分，并停止你机器上长期运行的容器。
 
-### Using Tye
+### 使用 Tye
 
-Follow the [Tye Getting Started](https://github.com/dotnet/tye/blob/master/docs/getting_started.md) to install the `tye` CLI and create a `tye.yaml` for your application.
+按照[Tye入门](https://github.com/dotnet/tye/blob/master/docs/getting_started.md)来安装 `tye` CLI 并为您的应用程序创建`tye.yaml`。
 
-Next follow the steps in the [Tye Dapr recipe](https://github.com/dotnet/tye/blob/master/docs/recipes/dapr.md) to add Dapr. Make sure to specify the relative path to your components folder with `components-path` in `tye.yaml`.
+接下来按照 [Tye Dapr配方](https://github.com/dotnet/tye/blob/master/docs/recipes/dapr.md) 中的步骤来添加Dapr。 请确保在 `tye.yaml` 中指定组件目录中包含 `components-path` 的相对路径。
 
-Next add any additional container dependencies and add component definitions to the folder you created earlier.
+接下来添加任何额外的容器依赖项，并将组件定义添加到你之前创建的文件夹中。
 
-You should end up with something like this:
+你最终应该得到这样的结果：
 
 ```yaml
 name: store-application
@@ -41,7 +41,7 @@ extensions:
 # Services to run go here.
 services:
 
-  # The name will be used as the app-id. For a .NET project, Tye only needs the path to the project file.
+  # 此名称将被用作 app-id. 对于.NET 项目，Tye 只需要项目文件的路径。
 - name: orders
   project: orders/orders.csproj
 - name: products
@@ -56,12 +56,12 @@ services:
     - port: 6973
 ```
 
-Checkin `tye.yaml` in source control wiht the application code.
+使用应用程序代码在源控制中签入 `tye.yaml` 。
 
-You can now use `tye run` to launch the whole application from one terminal. When running, Tye has a dashboard at `http://localhost:8000` to view application status and logs.
+您现在可以使用 `tye run` 从一个终端启动整个应用程序。 运行时，Tye有一个仪表板在 `http://localhost:8000` 查看应用程序状态和日志。
 
 ### 下一步
 
-Tye runs your services locally as normal .NET process. 如果您需要调试，请使用调试器的附加功能将其附加到正在运行的进程中。 Since Tye is .NET aware, it has the ability to [start a process suspended](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options) for startup debugging.
+Tye 将您的服务按正常 .NET 进程在本地运行。 如果您需要调试，请使用调试器的附加功能将其附加到正在运行的进程中。 由于 Tye 具有 .NE T意识，它有能力[启动一个暂停的进程](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options)以进行启动调试。
 
-Tye also has an [option](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options) to run your services in containers if you wish to test locally in containers.
+如果您想要在容器中进行本地测试，Tye 也有 [选项](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options) 来运行您的服务。
