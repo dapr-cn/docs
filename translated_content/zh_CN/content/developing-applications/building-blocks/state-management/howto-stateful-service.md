@@ -22,7 +22,7 @@ description: "对可伸缩的副本使用状态管理"
 
 ### Kubernetes
 
-请参阅 [这里]({{X20X}}) 的说明，了解如何在 Kubernetes 上设置不同的状态存储引擎。
+请参阅 [这里]({{X20X}}) 的说明，了解如何在 Kubernetes 上设置不同的状态存储引擎。
 
 ## 强一致性和最终一致性
 
@@ -131,6 +131,13 @@ def get_state(key):
     return response
 
 # Exit when save state is successful. success will be False if there's an ETag mismatch -->
+success = False
+while success != True:
+    response = get_state("key1")
+    etag = response.headers['ETag']
+    newState = '[{ "key": "key1", "value": "New Data", "etag": {}, "options": { "concurrency": "first-write" }}]'.format(etag)
+
+    success = save_state(newState) success will be False if there's an ETag mismatch -->
 success = False
 while success != True:
     response = get_state("key1")
