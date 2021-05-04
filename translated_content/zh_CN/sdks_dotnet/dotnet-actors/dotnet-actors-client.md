@@ -44,7 +44,7 @@ public Task<MyData> GetDataAsync()
 
 ## Actor 客户端的两种风格
 
-Actor客户端支持两种不同风格的调用。*使用.NET接口的强类型*客户端和使用 `ActorProxy` 类的弱类型</em>客户端。
+Actor客户端支持两种不同风格的调用。 *使用.NET接口的强类型*客户端和使用 `ActorProxy` 类的弱类型</em>客户端。
 
 由于 *强类型* 客户端基于.NET接口提供了强类型的典型优势，但是它们不能与非.NET Actors 一起工作。 您应该只在需要互操作或其他高级原因时才使用 *弱类型* 客户端。
 
@@ -90,7 +90,14 @@ var proxy = this.ProxyFactory.Create(ActorId.CreateRandom(), "OtherActor");
 // proxy is an instance of ActorProxy.
 var request = new MyRequest() { Message = "Hi, it's me.", };
 var response = await proxy.InvokeMethodAsync<MyRequest, MyResponse>("DoSomethingGreat", request);
- 
+// Create a proxy for type OtherActor with a random id
+var proxy = this.ProxyFactory.Create(ActorId.CreateRandom(), "OtherActor");
+
+// Invoke a method on the proxy to invoke the actor
+//
+// proxy is an instance of ActorProxy.
+var request = new MyRequest() { Message = "Hi, it's me.", };
+var response = await proxy.InvokeMethodAsync<MyRequest, MyResponse>("DoSomethingGreat", request);
 ```
 
 当使用弱类型的代理时，您有责任定义正确的代理方法名称和消息类型。 当使用强类型代理时，这是为你完成的，因为名称和类型是接口定义的一部分。
