@@ -78,6 +78,9 @@ def add():
 
 if __name__ == '__main__':
     app.run()
+
+if __name__ == '__main__':
+    app.run()
 ```
 
 此 Python 应用程序通过 `/add()` 端点暴露了一个 `add()` 方法。
