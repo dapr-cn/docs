@@ -11,7 +11,7 @@ weight: 300
 观看如何使用双向输出绑定的 [视频](https://www.bilibili.com/video/BV1EA411W71L?p=3&t=1960) 。 <iframe width="560" height="315" src="https://www.youtube.com/embed/ysklxm81MTs?start=1960" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 
-## 1. 1. 创建绑定
+## 1. 1. 1. 创建绑定
 
 输出绑定表示 Dapr 将使用调用和向其发送消息的资源。
 
@@ -70,14 +70,14 @@ spec:
 
 {{< /tabs >}}
 
-## 2. 2. 发送事件
+## 2. 2. 2. 发送事件
 
 注: 在 Kubernetes 中运行时，使用 `kubectl apply -f binding.yaml` 将此文件应用于您的集群
 
 您可以使用 HTTP 来这样做：
 
 ```bash
-curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }'   
+curl -X POST -H  http://localhost:3500/v1.0/bindings/myevent -d '{ "data": { "message": "Hi!" }, "operation": "create" }'  
 ```
 
 如上文所见，您使用了要调用的绑定的名称来调用 `/binding` 终结点。 在我们的示例中，它的名称是 `myevent` 。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
