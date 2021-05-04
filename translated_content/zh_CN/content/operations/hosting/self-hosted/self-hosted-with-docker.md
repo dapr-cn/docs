@@ -68,6 +68,9 @@ COPY python .
 RUN pip install requests
 ENTRYPOINT ["dapr"]
 CMD ["run", "--app-id", "nodeapp", "--app-port", "3000", "node", "app.js"]
+RUN pip install requests
+ENTRYPOINT ["dapr"]
+CMD ["run", "--app-id", "nodeapp", "--app-port", "3000", "node", "app.js"]
 ```
 
 请记住，如果Dapr需要与其他组件通信，即： Redis，这些也需要让它访问。 Redis，这些也需要让它访问。
@@ -119,6 +122,14 @@ services:
     network_mode: "service:nodeapp" # Attach the nodeapp-dapr service to the nodeapp network namespace
 
   ... # Deploy other daprized services and components (i.e. Redis)
+
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+    networks:
+      - hello-dapr Redis)
 
   placement:
     image: "daprio/dapr"
