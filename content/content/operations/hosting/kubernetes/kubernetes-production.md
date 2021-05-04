@@ -55,11 +55,13 @@ Example settings for the dapr sidecar in a production-ready setup:
 
 *Note: Since Dapr is intended to do much of the I/O heavy lifting for your app, it's expected that the resources given to Dapr enable you to drastically reduce the resource allocations for the application*
 
-The CPU and memory limits above account for the fact that Dapr is intended to a high number of I/O bound operations. It is strongly recommended that you use a tool monitoring tool to baseline the sidecar (and app) containers and tune these settings based on those baselines.
+The CPU and memory limits above account for the fact that Dapr is intended to a high number of I/O bound operations. It is strongly recommended that you use a monitoring tool to baseline the sidecar (and app) containers and tune these settings based on those baselines.
 
 ## Highly-available mode
 
-When deploying Dapr in a production-ready configuration, it's recommended to deploy with a highly available configuration of the control plane, which creates 3 replicas of each control plane pod in the dapr-system namespace.
+When deploying Dapr in a production-ready configuration, it's recommended to deploy with a highly available (HA) configuration of the control plane, which creates 3 replicas of each control plane pod in the dapr-system namespace. This configuration allows for the Dapr control plane to survive node failures and other outages.
+
+HA mode can be enabled with both the [Dapr CLI]({{< ref "kubernetes-deploy.md#install-in-highly-available-mode" >}} and with [Helm charts]({{< ref "kubernetes-deploy.md#add-and-install-dapr-helm-chart" >}}).
 
 ## Deploying Dapr with Helm
 
