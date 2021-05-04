@@ -34,7 +34,7 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 
 ## Sidecar 资源设置
 
-请参见 [这里]({{< ref "kubernetes-annotations.md" >}})来为 Dapr sidecar设置资源分配， 与资源约束相关的具体注解如下: 与资源约束相关的具体注解如下:
+请参见 [这里]({{< ref "kubernetes-annotations.md" >}})来为 Dapr sidecar设置资源分配， 与资源约束相关的具体注解如下: 与资源约束相关的具体注解如下: 与资源约束相关的具体注解如下:
 
 - `dapr.io/sidecar-cpu-limit`
 - `dapr.io/sidecar-memory-limit`
@@ -103,7 +103,7 @@ kubectl get pods --namespace dapr-system
 
 ## 用 Helm 升级 Dapr
 
-Dapr支持零停机升级， 升级包括以下步骤： 升级包括以下步骤：
+Dapr支持零停机升级， 升级包括以下步骤： Dapr支持零停机升级， 升级包括以下步骤： 升级包括以下步骤：
 
 1. 升级CLI版本(可选但推荐)
 2. 更新Dapr control plane
