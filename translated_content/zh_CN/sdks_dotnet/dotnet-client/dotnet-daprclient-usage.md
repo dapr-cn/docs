@@ -94,6 +94,12 @@ public class Widget
 }
 ...
 
+public class Widget
+{
+    public string Color { get; set; }
+}
+...
+
 // Storing a Widget value as JSON in the state store
 widget widget = new Widget() { Color = "Green", };
 await client.SaveStateAsync("mystatestore", "mykey", widget);
@@ -108,10 +114,6 @@ await client.SaveStateAsync("mystatestore", "mykey", widget);
 
 由于JSON序列化器的行为是由声明的类型决定的，所以它只看到一个简单的 <code>Widget</code>，并将保存<code>{ "color": "Green" }</code>，而不是<code>{ "color": "Green", "hasSelfCleaningFeature": true }</code>。
 ```
- ，但变量的声明类型是 Widget。
-
-由于JSON序列化器的行为是由声明的类型决定的，所以它只看到一个简单的 Widget，并将保存{ "color": "Green" }，而不是{ "color": "Green", "hasSelfCleaningFeature": true }。
-</code>
 
 在这个例子中，我们使用的是 `SuperWidget` ，但变量的声明类型是 `Widget`。 由于JSON序列化器的行为是由声明的类型决定的，所以它只看到一个简单的 `Widget`，并将保存`{ "color": "Green" }`，而不是`{ "color": "Green", "hasSelfCleaningFeature": true }`。
 
@@ -144,4 +146,4 @@ catch (DaprException ex)
 - 暂时性故障，如网络问题
 - 无效数据，如未能反序列化JSON
 
-在任何这些情况下，你都可以通过 `.InnerException` 属性检查更多的异常细节。
+`DaprClient` 上的方法会在遇到失败时抛出 `DaprException` 或子类。
