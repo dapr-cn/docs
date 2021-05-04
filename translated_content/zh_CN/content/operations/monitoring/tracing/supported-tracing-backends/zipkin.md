@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "操作方法: 为分布式跟踪安装 Zipkin"
+title: "How-To: Set up Zipkin for distributed tracing"
 linkTitle: "Zipkin"
 weight: 3000
 description: "Set up Zipkin for distributed tracing"
 ---
 
-## 配置自托管模式
+## Configure self hosted mode
 
 For self hosted mode, on running `dapr init`:
 
@@ -40,14 +40,14 @@ docker run -d -p 9411:9411 openzipkin/zipkin
 ```bash
 dapr run --app-id mynode --app-port 3000 node app.js
 ```
-### 查看 Traces
+### Viewing Traces
 To view traces, in your browser go to http://localhost:9411 and you will see the Zipkin UI.
 
-## 配置 Kubernetes
+## Configure Kubernetes
 
 The following steps shows you how to configure Dapr to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster, and how to view them.
 
-### 设置
+### Setup
 
 First, deploy Zipkin:
 
@@ -91,7 +91,7 @@ annotations:
   dapr.io/config: "tracing"
 ```
 
-就这么简单！ That's it! Your sidecar is now configured to send traces to Zipkin.
+That's it! Your sidecar is now configured to send traces to Zipkin.
 
 ### Viewing Tracing Data
 
@@ -105,6 +105,6 @@ In your browser, go to `http://localhost:9411` and you will see the Zipkin UI.
 
 ![zipkin](/images/zipkin_ui.png)
 
-## 参考资料
+## References
 - [Zipkin for distributed tracing](https://zipkin.io/)
-- [W3C 分布式跟踪]({{< ref w3c-tracing >}})
+- [W3C distributed tracing]({{< ref w3c-tracing >}})
