@@ -59,7 +59,7 @@ readinessProbe:
 ### 如何使用 Kubernetes 配置 Dapr sidecar 运行状况终结点
 如上所述，此配置由 Sidecar 注入服务自动完成。 本部分描述了在活跃度和就绪探测器上设置的特定值。
 
-Dapr 在3500端口上有它的 HTTP 健康端点 `/v1.0/healthz` 。这可以和 Kubernetes 一起用于准备就绪和活跃度探针。 当注入Dapr sidecar后，准备就绪和活跃度探测器在pod配置文件中配置的，配置的值如下。
+Dapr 在3500端口上有它的 HTTP 健康端点 `/v1.0/healthz` 。 这可以和 Kubernetes 一起用于准备就绪和活跃度探针。 当注入Dapr sidecar后，准备就绪和活跃度探测器在pod配置文件中配置的，配置的值如下。
 
 ```
 livenessProbe:
