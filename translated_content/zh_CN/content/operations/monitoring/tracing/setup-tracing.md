@@ -6,11 +6,11 @@ weight: 100
 description: "Configure Dapr to send distributed tracing data"
 ---
 
-It is recommended to run Dapr with tracing enabled for any production scenario.  It is recommended to run Dapr with tracing enabled for any production scenario.  You can configure Dapr to send tracing and telemetry data to many backends based on your environment, whether it is running in the cloud or on-premises.
+It is recommended to run Dapr with tracing enabled for any production scenario.  You can configure Dapr to send tracing and telemetry data to many backends based on your environment, whether it is running in the cloud or on-premises.
 
 ## Tracing configuration
 
-`Configuration` sepc下的 `tracing` 部分包含以下属性：
+The `tracing` section under the `Configuration` spec contains the following properties:
 
 ```yml
 spec:
@@ -20,12 +20,12 @@ spec:
       endpointAddress: "https://..."
 ```
 
-下面的表格给出了调用链追踪功能可配置的属性
+The following table lists the properties for tracing:
 
-| 属性                       | 数据类型   | 描述                    |
-| ------------------------ | ------ | --------------------- |
-| `samplingRate`           | string | 设置采样率，可以用来控制追踪功能是否开启。 |
-| `zipkin.endpointAddress` | string | 设置 Zipkin 服务器地址。      |
+| Property                 | Type   | Description                                              |
+| ------------------------ | ------ | -------------------------------------------------------- |
+| `samplingRate`           | string | Set sampling rate for tracing to be enabled or disabled. |
+| `zipkin.endpointAddress` | string | Set the Zipkin server address.                           |
 
 
 ## Zipkin in self hosted mode
@@ -66,7 +66,7 @@ For self hosted mode, create a Dapr configuration file locally and reference it 
 
 The following steps show you how to configure Dapr to send distributed tracing data to Zipkin running as a container in your Kubernetes cluster, and how to view them.
 
-### 设置
+### Setup
 
 First, deploy Zipkin:
 
@@ -108,7 +108,7 @@ annotations:
   dapr.io/config: "zipkin"
 ```
 
-就这么简单！ That's it! Your sidecar is now configured for use with Zipkin.
+That's it! Your sidecar is now configured for use with Zipkin.
 
 ### Viewing Tracing Data
 
@@ -122,5 +122,5 @@ On your browser, go to `http://localhost:9411` and you should see the Zipkin UI.
 
 ![zipkin](/images/zipkin_ui.png)
 
-## 参考资料
+## References
 - [Zipkin for distributed tracing](https://zipkin.io/)
