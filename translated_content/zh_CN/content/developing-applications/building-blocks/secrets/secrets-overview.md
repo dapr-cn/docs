@@ -1,56 +1,56 @@
 ---
 type: docs
-title: "密钥管理概览"
-linkTitle: "概述"
+title: "Secrets management overview"
+linkTitle: "Overview"
 weight: 1000
-description: "密钥管理构建块概览"
+description: "Overview of secrets management building block"
 ---
 
-应用程序通常会通过使用专用的密钥存储来秘密存储敏感信息，如连接字符串、密钥和用于与数据库、服务和外部系统进行验证的令牌。
+It's common for applications to store sensitive information such as connection strings, keys and tokens that are used to authenticate with databases, services and external systems in secrets by using a dedicated secret store.
 
-通常这需要建立一个密钥存储，如Azure Key Vault、Hashicorp 保险库和其他仓库，并在那里存储应用程序级别的密钥。 要访问这些密钥存储，应用程序需要导入密钥存储SDK，并使用它访问这些密钥。 这可能需要相当数量的模板代码，这些代码与应用的实际业务领域无关，因此在多云场景中，可能会使用不同厂商特定的密钥存储，这就成为一个更大的挑战。
+Usually this involves setting up a secret store such as Azure Key Vault, Hashicorp Vault and others and storing the application level secrets there. To access these secret stores, the application needs to import the secret store SDK, and use it to access the secrets. This may require a fair amount of boilerplate code that is not related to the actual business domain of the app, and so becomes an even greater challenge in multi-cloud scenarios where different vendor specific secret stores may be used.
 
-让开发人员在任何地方更容易消耗应用程序密钥， Dapr 有一个专用的密钥构建块 API ，允许开发人员从一个密钥存储获得密钥。
+To make it easier for developers everywhere to consume application secrets, Dapr has a dedicated secrets building block API that allows developers to get secrets from a secret store.
 
-使用 Dapr 的密钥存储构建块通常涉及以下内容：
-1. 设置一个特定的密钥存储解决方案的组件。
-1. 在应用程序代码中使用 Dapr 密钥 API 获取密钥。
-1. 可选，在Dapr组件文件中引用密钥。
+Using Dapr's secret store building block typically involves the following:
+1. Setting up a component for a specific secret store solution.
+1. Retrieving secrets using the Dapr secrets API in the application code.
+1. Optionally, referencing secrets in Dapr component files.
 
-## 设置一个密钥存储
+## Setting up a secret store
 
-请参阅 [设置密钥存储]({{< ref howto-secrets.md >}}) 以了解如何设置一个密钥存储。
+See [Setup secret stores]({{< ref howto-secrets.md >}}) for guidance on how to setup a secret store with Dapr.
 
-## 在您的应用程序中使用密钥
+## Using secrets in your application
 
-应用程序代码可以调用密钥构建块API，从Dapr支持的密钥存储中检索密钥，并可以在您的代码中使用。 请观看此 [视频](https://www.bilibili.com/video/BV1QK4y1p7fn?p=9&t=1818) ，以获取有关如何在应用程序中使用秘密 API 的示例。
+Application code can call the secrets building block API to retrieve secrets from Dapr supported secret stores that can be used in your code. Watch this [video](https://www.youtube.com/watch?v=OtbYCBt9C34&t=1818) for an example of how the secrets API can be used in your application.
 
-例如，下图显示了一个应用程序从配置的云密钥存储中请求名为 "mysecret "的密钥存储 "vault"。
+For example, the diagram below shows an application requesting the secret called "mysecret" from a secret store called "vault" from a configured cloud secret store.
 
 <img src="/images/secrets-overview-cloud-stores.png" width=600>
 
-应用程序可以使用密钥API访问Kubernetes密钥存储的秘密。 在下面的示例中，应用程序会从 Kubernetes 密钥存储检索相同的密钥“mysecret”。
+Applications can use the secrets API to access secrets from a Kubernetes secret store. In the example below, the application retrieves the same secret "mysecret" from a Kubernetes secret store.
 
 <img src="/images/secrets-overview-kubernetes-store.png" width=600>
 
-在 Azure 中，Dapr 可以配置为使用管理身份验证的 Azure Key Vault，以便获取密钥。 在下面的示例中，Azure Kubernetes 服务 (AKS) 集群被配置为使用托管标识。 然后，Dapr 使用 [pod identities](https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-identity#use-pod-identities) 代表应用程序从 Azure Key Vault 中检索机密。
+In Azure Dapr can be configured to use Managed Identities to authenticate with Azure Key Vault in order to retrieve secrets. In the example below, an Azure Kubernetes Service (AKS) cluster is configured to use managed identities. Then Dapr uses [pod identities](https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-identity#use-pod-identities) to retrieve secrets from Azure Key Vault on behalf of the application.
 
 <img src="/images/secrets-overview-azure-aks-keyvault.png" width=600>
 
-请注意，在以上所有示例中，应用程序代码不必更改以获取相同的密钥。 Dapr在这里通过密钥构建块API和使用密钥组件完成了所有的重任。
+Notice that in all of the examples above the application code did not have to change to get the same secret. Dapr did all the heavy lifting here via the secrets building block API and using the secret components.
 
-请参阅 [使用 密钥API 访问应用程序密钥]({{< ref howto-secrets.md >}}) 以了解如何在您的应用程序中使用密钥。
+See [Access Application Secrets using the Secrets API]({{< ref howto-secrets.md >}}) for a How To guide to use secrets in your application.
 
-有关详细的API信息，请阅读 [密钥API]({{< ref secrets_api.md >}})。
+For detailed API information read [Secrets API]({{< ref secrets_api.md >}}).
 
-## 在Dapr组件中引用密钥存储
+## Referencing secret stores in Dapr components
 
-在配置Dapr组件（如状态存储）时，通常需要在组件文件中包含凭证。 与此相反，您可以将凭证放在Dapr支持的密钥存储中，并在Dapr组件中引用该密钥。 这是首选方法，是推荐的最佳做法，尤其是在生产环境中。
+When configuring Dapr components such as state stores it is often required to include credentials in components files. Instead of doing that, you can place the credentials within a Dapr supported secret store and reference the secret within the Dapr component. This is preferred approach and is a recommended best practice especially in production environments.
 
-欲了解更多信息，请阅读 [引用组件中的密钥存储]({{< ref component-secrets.md >}})
+For more information read [referencing secret stores in components]({{< ref component-secrets.md >}})
 
-## 限制访问密钥
+## Limiting access to secrets
 
-为了对访问密钥提供更精细的控制，Dapr 提供了定义范围和限制访问权限的能力。 了解更多关于[使用密钥范围]({{X15X}})的信息。
+To provide more granular control on access to secrets, Dapr provides the ability to define scopes and restricting access permissions. Learn more about [using secret scoping]({{X15X}})
 
 
