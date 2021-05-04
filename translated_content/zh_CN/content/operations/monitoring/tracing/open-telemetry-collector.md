@@ -12,7 +12,7 @@ description: "如何结合 Dapr 和 OpenTelemetry Collector 实现跟踪事件�
 
 ## 必备条件
 
-1. A installation of Dapr on Kubernetes.
+1. 在 Kubernetes 上安装 Dapr
 
 2. 您已经设置好了分布式追踪后端程序用以接受应用痕迹信息
 
@@ -30,7 +30,7 @@ description: "如何结合 Dapr 和 OpenTelemetry Collector 实现跟踪事件�
 ## 设置 Dapr 从而将应用痕迹信息发送到 OpenTelemetry Collector
 
 ### 在 Dapr 中启用应用痕迹追踪功能
-Next, set up both a Dapr configuration file to turn on tracing and deploy a tracing exporter component that uses the OpenTelemetry Collector.
+接下来，设置 Dapr 的配置文件以启用应用分布式追踪并部署一个使用 OpenTelemetry Collector 的应用追踪信息导出组件。
 
 1. 创建具有[此内容的](/docs/open-telemetry-collector/collector-config.yaml) collector-config.yaml 文件
 
@@ -38,10 +38,19 @@ Next, set up both a Dapr configuration file to turn on tracing and deploy a trac
 
 ### 部署你的应用，并启用应用痕迹跟踪功能
 
-When running in Kubernetes mode, apply the `appconfig` configuration by adding a `dapr.io/config` annotation to the container that you want to participate in the distributed tracing, as shown in the following example:
+在 Kubernetes 模式下运行时，通过将`dapr.io/config`注解添加到要参与分布式跟踪的容器中，从而来应用`appconfig`配置，示例配置如下所示
 
 ```yaml
 apiVersion: apps/v1
+kind: Deployment
+metadata:
+  ...
+spec:
+  ...
+  template:
+    metadata:
+      ...
+      apiVersion: apps/v1
 kind: Deployment
 metadata:
   ...
@@ -57,13 +66,13 @@ spec:
         dapr.io/config: "appconfig"
 ```
 
-Some of the quickstarts such as [distributed calculator](https://github.com/dapr/quickstarts/tree/master/distributed-calculator) already configure these settings, so if you are using those no additional settings are needed.
+一些快速入门案例，例如[分布式计算器](https://github.com/dapr/quickstarts/tree/master/distributed-calculator)已经配置了这些设置，因此，如果您在使用这些时，则不需要进行其他的设置
 
-That's it! There's no need include any SDKs or instrument your application code. Dapr automatically handles the distributed tracing for you.
+就这么简单！ 没有必要包含任何的 SDK 或分析您的应用程序代码来确定是否能够支持。 Dapr 自动为您的程序负责了分布式跟踪。
 
 > **备注**: 您可以同时注册多个的应用痕迹跟踪导出器，并且跟踪日志转发到所有已注册的导出器中。
 
-Deploy and run some applications. 等待应用痕迹信息推送到您的分布式跟踪后端中，并在那里查看它们。
+部署并运行一些应用程序。 等待应用痕迹信息推送到您的分布式跟踪后端中，并在那里查看它们。
 
 ## 相关链接
 * 尝试访问[可观察性快速入门](https://github.com/dapr/quickstarts/tree/master/observability/README.md)
