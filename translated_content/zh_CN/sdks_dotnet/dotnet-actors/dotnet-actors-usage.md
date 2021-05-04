@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Dapr actor .NET 使用指南"
-linkTitle: "编写 Actors"
+title: "Dapr actor .NET usage guide"
+linkTitle: "Authoriung actors"
 weight: 200000
-description: 了解有关使用 .NET SDK 编写和运行 Actors
+description: Learn all about authoring and running actors with the .NET SDK
 ---
 
-## 编写 Actors
+## Authoring actors
 
 ### ActorHost
 
-`ActorHost` 是所有Actors的必备构造参数，必须传递给基类构造函数。
+The `ActorHost` is a required constructor parameter of all actors, and must be passed to the base class constructor.
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -22,11 +22,11 @@ internal class MyActor : Actor, IMyActor, IRemindable
 }
 ```
 
-`ActorHost` 由运行时提供，包含了允许该 actor 实例与运行时通信的所有状态。 因为 `ActorHost` 包含了actor 独有的状态，所以你不应该将实例传递到代码的其他部分。 除了在测试中，您不应该创建自己的 `ActorHost` 实例。
+The `ActorHost` is provided by the runtime and contains all of the state that the allows that actor instance to communicate with the runtime. Since the `ActorHost` contains state unique to the actor, you should not pass the instance into other parts of your code. You should not create your own instances of `ActorHost` except in tests.
 
-### 使用依赖输入
+### Using dependency injection
 
-Actors支持[依赖性注入](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection)到构造函数中的附加参数。 您定义的任何其他参数都将从依赖注入容器中得到它们的值。
+Actors support [depenendency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) of additonal parameters into the constructor. Any other parameters your define will have their values satisfied from the dependency injection container.
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -37,12 +37,11 @@ internal class MyActor : Actor, IMyActor, IRemindable
         ...
     }
 }
-     
 ```
 
-一个 actor 类型应该有一个单一的`public`构造函数。 Actor 基础设施使用 [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#constructor-injection-behavior) 模式来构建 actor 实例。
+An actor type should have a single `public` constructor. The actor infrastructure uses the [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#constructor-injection-behavior) pattern for constructing actor instances.
 
-你可以在 `Startup.cs` 中用依赖注入注册类型来使它们可用。 你可以阅读更多关于注册类型的不同方法 [这里](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?#service-registration-methods) 。
+You can register types with dependency injection in `Startup.cs` to make them available. You can read more about the different ways of registering your types [here](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?#service-registration-methods)
 
 ```csharp
 // In Startup.cs
@@ -53,21 +52,11 @@ public void ConfigureServices(IServiceCollection services)
     // Register additional types with dependency injection.
     services.AddSingleton<BankService>();
 }
-
-     
-    // In Startup.cs
-public void ConfigureServices(IServiceCollection services)
-{
-    ...
-
-    // Register additional types with dependency injection.
-    services.AddSingleton<BankService>();
-}
 ```
 
-每个actor实例都有自己的依赖注入范围。 每个 actor 在执行完一个操作后，都会在内存中保留一段时间，在这段时间内，与 actor 相关的依赖注入作用域也被认为是活的。 当演员被停用时，该范围将被释放。
+Each actor instance has its own dependency injection scope. Each actor remains in memory for some time after performing an operation, and during that time the dependency injection scope associated with the actor is also considered live. The scope will be releases when the actor is deactivated.
 
-如果一个actor在构造函数中注入一个 `IServiceProvider` ，该actor将收到一个与它的作用域相关联的 `IServiceProvider` 的引用。 `IServiceProvider` 可以用来在将来动态地解析服务。
+If an actor injects an `IServiceProvider` in the constructor, the actor will recieve a reference to the `IServiceProvider` associated with its scope. The `IServiceProvider` can be used to resolve services dynamically in the future.
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -78,20 +67,19 @@ internal class MyActor : Actor, IMyActor, IRemindable
         ...
     }
 }
-     
 ```
 
-在使用该模式时，要注意避免创建许多实现 `IDisposable` 的 **transient** 服务的实例。 由于与一个 actor 相关联的作用域可以被认为是长期有效的，所以有可能在内存中积累许多服务。 更多信息请参见 [依赖注入指南](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines) 。
+When using this pattern, take care to avoid creating many instances of **transient** services which implement `IDisposable`. Since the scope associated with an actor could be considered valid for a long time, it is possible to accumulate many services in memory. See the [dependency injection guidelines](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines) for more information.
 
-### IDisposable 和 actors
+### IDisposable and actors
 
-Actors可以实现 `IDisposable` 或 `IAsyncDisposable` 。 建议您依靠依赖注入进行资源管理，而不是在应用代码中实现处置功能。 在真正有必要的罕见情况下，提供处置支持。
+Actors can implement `IDisposable` or `IAsyncDisposable`. It is recommended that you rely on dependency injection for resource management rather than implementing dispose functionality in application code. Dispose support is provided for the rare case where it is truly necessary.
 
-### 日志
+### Logging
 
-在 actor 类的内部，你可以通过基类 `Actor` 上的一个属性来访问 `ILogger` 的实例。 该实例连接到 ASP.NET Core 日志系统，应该用于 actor 内部的所有日志记录。 在 [此处](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line) 阅读更多有关日志的信息。 您可以配置各种不同的日志格式和输出接收器。
+Inside of an actor class you have access to an instance of `ILogger` through a property on the base `Actor` class. This instance is connected to the ASP.NET Core logging system, and should be used for all logging inside an actor. Read more about logging [here](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line). You can configure a variety of different logging formats and output sinks.
 
-您应该使用 *结构化日志* 与 *命名的占位符* 类似于下面的示例：
+You should use *structured logging* with *named placeholders* like the example below:
 
 ```csharp
 public Task<MyData> GetDataAsync()
@@ -101,15 +89,15 @@ public Task<MyData> GetDataAsync()
 }
 ```
 
-日志记录时，避免使用格式字符串： `$"Getting state at {DateTime.UtcNow}`
+When logging, avoid using format strings like: `$"Getting state at {DateTime.UtcNow}"`
 
-日志记录应该使用 [命名的占位符语法](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-message-template), 这种语法更加性能，能够更好地与日志系统集成。
+Logging should use the [named placeholder syntax](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-message-template) which is more performant and offers better integration with logging systems.
 
-### 使用显式的actor类型名称
+### Using an explicit actor type name
 
-默认情况下，客户端所看到的actor的 *type* 来自 actor 实现类的名称。 默认名称将是类名 (不含命名空间)。
+By default, the *type* of the actor as seen by clients is derived from the name of the actor implementation class. The default name will be the class name name (without namespace).
 
-如果需要，你可以通过向actor实现类附加一个 `ActorAttribute` 特性来指定一个显式的类型名称。
+If desired, you can specify an explicit type name by attaching an `ActorAttribute` attribute to the actor implementation class.
 
 ```csharp
 [Actor(TypeName = "MyCustomActorTypeName")]
@@ -117,26 +105,24 @@ internal class MyActor : Actor, IMyActor
 {
     // ...
 }
-}
-}
 ```
 
-在上面的示例中，名称将是 `MyCustomActorTypename`。
+In the example above the name will be `MyCustomActorTypeName`.
 
-无需更改以运行时注册 actor类型的代码，只需通过属性提供值。
+No change is needed to the code that registers the actor type with the runtime, providing the value via the attribute is all that is required.
 
-## 在服务器上托管 Actors
+## Hosting actors on the server
 
-### 注册 Actors
+### Registering actors
 
-Actor 注册是 `Startup.cs` 中 `ConfigureServices` 的一部分。 `ConfigureServices`方法是用依赖注入注册服务的位置，注册 actor 类型集是 actor 服务注册的一部分。
+Actor registration is part `ConfigureServices` in `Startup.cs`. The `ConfigureServices` method is where services are registered with dependency injection, and registering the set of actor types is part of the registration of actor services.
 
-在 `ConfigureServices` 中，您可以：
+Inside `ConfigureServices` you can:
 
-- 注册 actor 运行时(`UseActors`)
-- 注册 actor 类型(`options.Actors.RegisterActor<>`)
-- 配置 actor 运行时设置 `options`
-- 注册额外的服务类型以便将依赖注入到 Actors中(`services`)
+- Register the actor runtime (`UseActors`)
+- Register actor types (`options.Actors.RegisterActor<>`)
+- Configure actor runtime settings `options`
+- Register additional service types for dependency injection into actors (`services`)
 
 ```csharp
 // In Startup.cs
@@ -160,13 +146,13 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-### 配置 JSON 选项
+### Configuring JSON options
 
-Actor 运行时使用 [System.Text.Json](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview) 将数据序列化到状态存储，并处理来自弱类型客户端的请求。
+The actor runtime uses [System.Text.Json](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview) for serializing data to the state store, and for handling requests from the weakly-typed client.
 
-默认情况下，actor运行时使用基于 [JsonSerializerDefaults.Web](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializerdefaults?view=net-5.0) 的设置。
+By default the actor runtime uses settings based on [JsonSerializerDefaults.Web](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializerdefaults?view=net-5.0)
 
-您可以配置 `JsonSerializerOptions` 作为 `ConfigureServices` 的一部分：
+You can configure the `JsonSerializerOptions` as part of `ConfigureServices`:
 
 ```csharp
 // In Startup.cs
@@ -180,16 +166,13 @@ public void ConfigureServices(IServiceCollection services)
         options.JsonSerializerOptions = ...
     });
 }
-
-         
-     
 ```
 
-### Actors 和 路由
+### Actors and routing
 
-ASP.NET Core 托管支持对 actors 使用\[终结点路由\](https://docs.microsoft.com/en-us/aspnet/core/fundamenta ls/routing) 系统。 .NET SDK 不提供支持托管 Actors 的早期 ASP.NET Core版本的遗留路由系统。
+The ASP.NET Core hosting support for actors uses the [endpoint routing](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing) system. The .NET SDK provides no support hosting actors with the legacy routing system from early ASP.NET Core releases.
 
-由于 actors 使用终结点路由，Actors HTTP处理程序是中间件管道的一部分。 下面是一个 `Configure` 方法与 actors一起设置中间件管道的最小示例。
+Since actors uses endpoint routing, the actors HTTP handler is part of the middleware pipeline. The following is a minimal example of a `Configure` method setting up the middleware pipeline with actors.
 
 ```csharp
 // in Startup.cs
@@ -208,23 +191,22 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         endpoints.MapActorsHandlers();
     });
 }
-         
 ```
 
-`UseRouting` 和 `UseEndpoints` 调用是配置路由所必需的。 在终结点中间件中添加 `MapActorsHandlers` 就是将 actors 配置为管道的一部分。
+The `UseRouting` and `UseEndpoints` calls are necessary to configure routing. Adding `MapActorsHandlers` inside the endpoint middleware is what configures actors as part of the pipline.
 
-这只是一个最小的例子，它对 Actor 功能并存是有效的：
+This is a minimal example, it's valid for Actors functionality to existing alongside:
 
 - Controllers
 - Razor Pages
 - Blazor
-- gRPC 服务
-- Dapr 发布/订阅 处理
-- 其他终结点，如健康检查
+- gRPC Services
+- Dapr pub/sub handler
+- other endpoints such as health checks
 
-### 问题中间件
+### Problematic middleware
 
-某些中间件可能会干扰 Dapr 请求到 actors 处理程序的路由。 特别是 `UseHttpsRedirection` 对于Dapr的默认配置是有问题的。 Dapr默认会通过未加密的HTTP发送请求，然后会被 `UseHttpsRedirection` 中间件阻止。 这个中间件目前不能与 Dapr 一起使用。
+Certain middleware may interfere with the routing of Dapr requests to the actors handlers. In particular the `UseHttpsRedirection` is problematic for the default configuration of Dapr. Dapr will send requests over unencrypted HTTP by default, which will then be blocked by the `UseHttpsRedirection` middleware. This middleware cannot be used with Dapr at this time.
 
 ```csharp
 // in Startup.cs
@@ -247,5 +229,4 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         endpoints.MapActorsHandlers();
     });
 }
-         
 ```
