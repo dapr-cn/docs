@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Kubernetes 集群配置"
+title: "Kubernetes cluster setup"
 linkTitle: "How-to: Setup clusters"
 weight: 80000
 description: >
-  如何创建 Kubernetes 集群
+  How to create a Kubernetes cluster
 ---
 
