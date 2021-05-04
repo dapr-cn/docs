@@ -62,6 +62,8 @@ Content-Length: 12
   }
       CloudEvent event = CloudEvent.deserialize(body);
   }
+      CloudEvent event = CloudEvent.deserialize(body);
+  }
 ```
 
 ## 绑定
@@ -118,9 +120,14 @@ Actor也可以有状态。 在这种情况下，状态管理器将使用状态�
 ```java
 public String actorMethod(String message) {
     // Reads a state from key and deserializes it to String.
+    public String actorMethod(String message) {
+    // Reads a state from key and deserializes it to String.
     String previousMessage = super.getActorStateManager().get("lastmessage", String.class).block();
 
     // Sets the new state for the key after serializing it.
+    super.getActorStateManager().set("lastmessage", message).block();
+    return previousMessage;
+}
     super.getActorStateManager().set("lastmessage", message).block();
     return previousMessage;
 }
