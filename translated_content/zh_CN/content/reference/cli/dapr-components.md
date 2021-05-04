@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "components CLI 命令参考"
+title: "components CLI command reference"
 linkTitle: "components"
-description: "有关 components CLI 命令的详细信息"
+description: "Detailed information on the components CLI command"
 ---
 
-## 描述
+## Description
 
-列出所有 Dapr 组件。
+List all Dapr components.
 
-## 支持的平台
+## Supported platforms
 
 - [Kubernetes]({{< ref kubernetes >}})
 
-## 用法
+## Usage
 
 ```bash
 dapr components [flags]
 ```
 
-## 参数
+## Flags
 
-| 名称                   | 环境变量 | 默认值     | 描述                           |
-| -------------------- | ---- | ------- | ---------------------------- |
-| `--help`, `-h`       |      |         | 显示此帮助消息                      |
-| `--kubernetes`, `-k` |      | `false` | 列出 Kubernetes 集群中的所有 Dapr 组件 |
+| Name                 | Environment Variable | Default | Description                                      |
+| -------------------- | -------------------- | ------- | ------------------------------------------------ |
+| `--help`, `-h`       |                      |         | Print this help message                          |
+| `--kubernetes`, `-k` |                      | `false` | List all Dapr components in a Kubernetes cluster |
 
-## 示例
+## Examples
 
-### 列出 Kubernetes 组件
+### List Kubernetes components
 ```bash
 dapr components -k
 ```
