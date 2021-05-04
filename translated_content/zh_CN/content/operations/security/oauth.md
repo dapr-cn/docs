@@ -6,13 +6,13 @@ weight: 2000
 description: "Enable OAUTH authorization on Dapr endpoints for your web APIs"
 ---
 
-Dapr OAuth 2.0 [middleware]({{< ref "middleware-concept.md" >}}) allows you to enable [OAuth](https://oauth.net/2/) authorization on Dapr endpoints for your web APIs using the [Authorization Code Grant flow](https://tools.ietf.org/html/rfc6749#section-4.1). You can also inject authorization tokens into your APIs which can be used for authorization towards external APIs called by your APIs using the [Client Credentials Grant flow](https://tools.ietf.org/html/rfc6749#section-4.4). When the middleware is enabled any method invocation through Dapr needs to be authorized before getting passed to the user code.
+Dapr OAuth 2.0 [middleware]({{< ref "middleware-concept.md" >}}) allows you to enable [OAuth](https://oauth.net/2/) authorization on Dapr endpoints for your web APIs using the [Authorization Code Grant flow](https://tools.ietf.org/html/rfc6749#section-4.1). You can also inject authorization tokens into your APIs which can be used for authorization towards external APIs called by your APIs using the [Client Credentials Grant flow](https://tools.ietf.org/html/rfc6749#section-4.4). When the middleware is enabled any method invocation through Dapr needs to be authorized before getting passed to the user code. You can also inject authorization tokens into your APIs which can be used for authorization towards external APIs called by your APIs using the [Client Credentials Grant flow](https://tools.ietf.org/html/rfc6749#section-4.4). When the middleware is enabled any method invocation through Dapr needs to be authorized before getting passed to the user code.
 
 The main difference between the two flows is that the `Authorization Code Grant flow` needs user interaction and authorizes a user where the `Client Credentials Grant flow` doesn't need a user interaction and authorizes a service/application.
 
 ## Register your application with a authorization server
 
-Different authorization servers provide different application registration experiences. Here are some samples:
+Different authorization servers provide different application registration experiences. Here are some samples: Here are some samples:
 
 * [Azure AAD](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-protocols-oauth-code)
 * [Facebook](https://developers.facebook.com/apps)
@@ -80,6 +80,9 @@ spec:
     value: "<set to true if you invoke an API method through Dapr from https origin>" 
     # By default, Dapr will use HTTP on this redirect.
   - name: forceHTTPS
+    value: "<set to true if you invoke an API method through Dapr from https origin>" 
+    # By default, Dapr will use HTTP on this redirect.
+  - name: forceHTTPS
     value: "<set to true if you invoke an API method through Dapr from https origin>"
 ```
 
@@ -138,6 +141,15 @@ spec:
     # described in the OAuth2 RFC 6749 section 2.3.1.
   - name: authStyle
     value: "<see comment>"
+
+    # "1" sends the "client_id" and "client_secret"
+    # in the POST body as application/x-www-form-urlencoded parameters.
+
+    # "2" sends the client_id and client_password
+    # using HTTP Basic Authorization. This is an optional style
+    # described in the OAuth2 RFC 6749 section 2.3.1.
+  - name: authStyle
+    value: "<see comment>"
 ```
 
 ### Define a custom pipeline for a Client Credentials Grant
@@ -175,13 +187,23 @@ spec:
         ...
         dapr.io/config: "pipeline"
 ...
+spec:
+  ...
+  template:
+    metadata:
+      ...
+      annotations:
+        dapr.io/enabled: "true"
+        ...
+        dapr.io/config: "pipeline"
+...
 ```
 
 ## Accessing the access token
 
 ### Authorization Code Grant
 
-Once everything is in place, whenever a client tries to invoke an API method through Dapr sidecar (such as calling the *v1.0/invoke/* endpoint), it will be redirected to the authorization's consent page if an access token is not found. Otherwise, the access token is written to the **authHeaderName** header and made available to the app code.
+Once everything is in place, whenever a client tries to invoke an API method through Dapr sidecar (such as calling the *v1.0/invoke/* endpoint), it will be redirected to the authorization's consent page if an access token is not found. Otherwise, the access token is written to the **authHeaderName** header and made available to the app code. Otherwise, the access token is written to the **authHeaderName** header and made available to the app code.
 
 ### Client Credentials Grant
 
