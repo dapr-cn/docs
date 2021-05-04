@@ -6,7 +6,7 @@ weight: 3000
 description: "To limit the secrets to which the Dapr application has access, users can define secret scopes by augmenting existing configuration CRD with restrictive permissions."
 ---
 
-In addition to scoping which applications can access a given component, for example a secret store component (see [Scoping components]({{< ref "component-scopes.md">}})), a named secret store component itself can be scoped to one or more secrets for an application. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets.
+In addition to scoping which applications can access a given component, for example a secret store component (see [Scoping components]({{< ref "component-scopes.md">}})), a named secret store component itself can be scoped to one or more secrets for an application. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets.
 
 Follow [these instructions]({{< ref "configuration-overview.md" >}}) to define a configuration CRD.
 
@@ -27,33 +27,33 @@ secrets:
 
 The following table lists the properties for secret scopes:
 
-| 属性        | 数据类型   | 描述                                                                                                                                                                                            |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| storeName | string | Name of the secret store component. Name of the secret store component. storeName must be unique within the list Name of the secret store component. storeName must be unique within the list |
-| 默认权限      | string | Access modifier. Access modifier. Accepted values "allow" (default) or "deny"                                                                                                                 |
-| 允许的密钥     | list   | List of secret keys that can be accessed                                                                                                                                                      |
-| 被拒绝的密钥    | list   | List of secret keys that cannot be accessed                                                                                                                                                   |
+| Property       | Type   | Description                                                                  |
+| -------------- | ------ | ---------------------------------------------------------------------------- |
+| storeName      | string | Name of the secret store component. storeName must be unique within the list |
+| defaultAccess  | string | Access modifier. Accepted values "allow" (default) or "deny"                 |
+| allowedSecrets | list   | List of secret keys that can be accessed                                     |
+| deniedSecrets  | list   | List of secret keys that cannot be accessed                                  |
 
 When an `allowedSecrets` list is present with at least one element, only those secrets defined in the list can be accessed by the application.
 
-## 权限优先级
+## Permission priority
 
 The `allowedSecrets` and `deniedSecrets` list values take priorty over the `defaultAccess`.
 
-| 场景               | 默认权限  | 允许的密钥  | 被拒绝的密钥 | 权限         |
-| ---------------- | ----- | ------ | ------ | ---------- |
-| 1 - 仅默认访问        | 拒绝/允许 | 为空     | 为空     | 拒绝/允许      |
-| 2 - 默认拒绝允许列表     | 拒绝    | ["s1"] | 为空     | 只能访问"s1"   |
-| 3 - 默认允许拒绝列表     | 允许    | 为空     | ["s1"] | 仅限"s1"无法访问 |
-| 4 - 默认允许允许列表     | 允许    | ["s1"] | 为空     | 只能访问"s1"   |
-| 5 - 默认拒绝拒绝列表     | 拒绝    | 为空     | ["s1"] | 拒绝         |
-| 6 - 两个列表的默认拒绝/允许 | 拒绝/允许 | ["s1"] | ["s2"] | 只能访问"s1"   |
+| Scenarios                              | defaultAccess | allowedSecrets | deniedSecrets | permission                   |
+| -------------------------------------- | ------------- | -------------- | ------------- | ---------------------------- |
+| 1 - Only default access                | deny/allow    | empty          | empty         | deny/allow                   |
+| 2 - Default deny with allowed list     | deny          | ["s1"]         | empty         | only "s1" can be accessed    |
+| 3 - Default allow with deneied list    | allow         | empty          | ["s1"]        | only "s1" cannot be accessed |
+| 4 - Default allow with allowed list    | allow         | ["s1"]         | empty         | only "s1" can be accessed    |
+| 5 - Default deny with denied list      | deny          | empty          | ["s1"]        | deny                         |
+| 6 - Default deny/allow with both lists | deny/allow    | ["s1"]         | ["s2"]        | only "s1" can be accessed    |
 
-## 示例
+## Examples
 
-### 场景1：拒绝访问所有密钥仓库
+### Scenario 1 : Deny access to all secrets for a secret store
 
-In Kubernetes cluster, the native Kubernetes secret store is added to Dapr application by default. 在某些情况下，可能有必要拒绝某个应用程序访问 Dapr 密钥。 在某些情况下，可能有必要拒绝某个应用程序访问 Dapr 密钥。 要添加此配置，请按照下面的步骤：
+In Kubernetes cluster, the native Kubernetes secret store is added to Dapr application by default. In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below:
 
 Define the following `appconfig.yaml` and apply it to the Kubernetes cluster using the command `kubectl apply -f appconfig.yaml`.
 
@@ -77,7 +77,7 @@ dapr.io/config: appconfig
 
 With this defined, the application no longer has access to Kubernetes secret store.
 
-### 场景2：只允许访问密钥仓库中的某些密钥
+### Scenario 2 : Allow access to only certain secrets in a secret store
 
 To allow a Dapr application to have access to only certain secrets, define the following `config.yaml`:
 
@@ -94,11 +94,11 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-This example defines configuration for secret store named vault. 密钥仓库的默认访问权限是`deny`，而有些密钥可以通过应用程序基于`allowedSecrets`列表访问。 密钥仓库的默认访问权限是`deny`，而有些密钥可以通过应用程序基于`allowedSecrets`列表访问。 Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
+This example defines configuration for secret store named vault. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
 
 ### Scenario 3: Deny access to certain senstive secrets in a secret store
 
-定义以下 `config.yaml`:
+Define the following `config.yaml`:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -113,4 +113,4 @@ spec:
         deniedSecrets: ["secret1", "secret2"]
 ```
 
-上面的配置明确禁止从名为 vault 的密钥仓库访问 `secret1` 和 `secret2` ，但允许访问所有其他密钥。 Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
+The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
