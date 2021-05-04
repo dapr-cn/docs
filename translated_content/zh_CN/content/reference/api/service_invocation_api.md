@@ -6,7 +6,7 @@ description: "Detailed documentation on the service invocation API"
 weight: 100
 ---
 
-Dapr provides users with the ability to call other applications that have unique ids. This functionality allows apps to interact with one another via named identifiers and puts the burden of service discovery on the Dapr runtime.
+Dapr provides users with the ability to call other applications that have unique ids. Dapr provides users with the ability to call other applications that have unique ids. This functionality allows apps to interact with one another via named identifiers and puts the burden of service discovery on the Dapr runtime.
 
 ## Invoke a method on a remote dapr app
 
@@ -20,7 +20,7 @@ POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method/<meth
 
 ### HTTP 响应码
 
-When a service invokes another service with Dapr, the status code of the called service will be returned to the caller. If there's a network error or other transient error, Dapr will return a `500` error with the detailed error message.
+When a service invokes another service with Dapr, the status code of the called service will be returned to the caller. When a service invokes another service with Dapr, the status code of the called service will be returned to the caller. If there's a network error or other transient error, Dapr will return a `500` error with the detailed error message.
 
 In case a user invokes Dapr over HTTP to talk to a gRPC enabled service, an error from the called gRPC service will return as `500` and a successful response will return as `200OK`.
 
@@ -69,7 +69,7 @@ The Dapr app being invoked will need to be listening for and responding to reque
 
 ### Cross namespace invocation
 
-On hosting platforms that support namespaces, Dapr app IDs conform to a valid FQDN format that includes the target namespace. For example, the following string contains the app ID (`myApp`) in addition to the namespace the app runs in (`production`).
+On hosting platforms that support namespaces, Dapr app IDs conform to a valid FQDN format that includes the target namespace. For example, the following string contains the app ID (`myApp`) in addition to the namespace the app runs in (`production`). For example, the following string contains the app ID (`myApp`) in addition to the namespace the app runs in (`production`).
 
 ```
 myApp.production
