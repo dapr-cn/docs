@@ -116,4 +116,4 @@ Dapr 专为 [运维]({{< ref operations >}}) 和安全性而设计。 Dapr sidec
 
 通过 Dapr CLI 安装的 [服务仪表板](https://github.com/dapr/dashboard)提供了基于 Web 的 UI ，使您能够查看信息，查看日志以及 Dapr sidecar 的更多内容。
 
-<a href="{{< ref monitoring >对于监控工具的支持</a>使您可以更深入地了解到 Dapr 自身的系统服务和 side-cars 中的服务，而 Dapr 构建了对于应用程序的[可观察性能力]({{X72X}})，例如链路跟踪和 metrics。
+[对于监控工具的支持]({{< ref monitoring >}})使您可以更深入地了解到 Dapr 自身的系统服务和 side-cars 中的服务，而 Dapr 构建了对于应用程序的[可观察性能力]({{X72X}})，例如链路跟踪和 metrics。
