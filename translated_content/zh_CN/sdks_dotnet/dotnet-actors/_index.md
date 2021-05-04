@@ -1,11 +1,11 @@
 ---
 type: docs
-title: "Dapr actors .NET SDK入门"
+title: "Getting started with the Dapr actors .NET SDK"
 linkTitle: "Actors"
 weight: 40000
-description: 如何启动和运行Dapr .NET SDK
+description: How to get up and running with the Dapr .NET SDK
 ---
 
-通过Dapr actor 程序包，您可以与.NET应用程序中的Dapr虚拟actor进行交互。
+The Dapr actor package allows you to interact with Dapr virtual actors from a .NET application.
 
-请参阅 [如何使用 Dapr actors]({{< ref dotnet-actors-howto.md >}}) 来获取开始的说明。
+See [How to use Dapr actors]({{< ref dotnet-actors-howto.md >}}) for getting started instructions.
