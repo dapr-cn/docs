@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "绑定API 参考"
-linkTitle: "绑定 API"
-description: "关于 Bindings API 的详细文档"
+title: "Bindings API reference"
+linkTitle: "Bindings API"
+description: "Detailed documentation on the bindings API"
 weight: 400
 ---
 
-Dapr provides bi-directional binding capabilities for applications and a consistent approach to interacting with different cloud/on-premise services or systems. Developers can invoke output bindings using the Dapr API, and have the Dapr runtime trigger an application with input bindings. Developers can invoke output bindings using the Dapr API, and have the Dapr runtime trigger an application with input bindings.
+Dapr provides bi-directional binding capabilities for applications and a consistent approach to interacting with different cloud/on-premise services or systems. Developers can invoke output bindings using the Dapr API, and have the Dapr runtime trigger an application with input bindings.
 
-绑定的示例包括 `Kafka`， `Rabbit MQ`， `Azure Event Hubs`， `AWS SQS`和 `GCP Storage`。
+Examples for bindings include `Kafka`, `Rabbit MQ`, `Azure Event Hubs`, `AWS SQS`, `GCP Storage` to name a few.
 
-## Bindings 结构
+## Bindings Structure
 
-Dapr 绑定 yaml 文件具有以下结构:
+A Dapr Binding yaml file has the following structure:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -28,25 +28,25 @@ spec:
     value: <VALUE>
 ```
 
-`metadata.name` 是绑定的名称。
+The `metadata.name` is the name of the binding.
 
-如果在本地 self hosted 运行，请将此文件放在您的 state store 和消息队列 yml 配置旁边的 `components` 文件夹中。
+If running self hosted locally, place this file in your `components` folder next to your state store and message queue yml configurations.
 
-如果在 kubernetes 上运行，那么应该将该组件应用于集群。
+If running on kubernetes apply the component to your cluster.
 
-> **Note:** In production never place passwords or secrets within Dapr component files. 有关使用 secret stores 和检索密钥的信息，请参阅 [设置 secret stores ]({{< ref setup-secret-store >}}) 有关使用 secret stores 和检索密钥的信息，请参阅 [设置 secret stores ]({{< ref setup-secret-store >}})
+> **Note:** In production never place passwords or secrets within Dapr component files. For information on securely storing and retrieving secrets using secret stores refer to [Setup Secret Store]({{< ref setup-secret-store >}})
 
-## 通过输入绑定调用服务代码
+## Invoking Service Code Through Input Bindings
 
-想要使用输入绑定触发应用的开发人员可以在 `POST` http 终结点上侦听以接收请求。 路由名称与 `metadata.name`相同。
+A developer who wants to trigger their app using an input binding can listen on a `POST` http endpoint with the route name being the same as `metadata.name`.
 
-如果应用程序要订阅绑定，在启动 Dapr 时，将会对应用程序的所有已定义输入绑定发送 `OPTIONS` 请求，并期望 `NOT FOUND (404)` 以外的状态码。
+On startup Dapr sends a `OPTIONS` request to the `metadata.name` endpoint and expects a different status code as `NOT FOUND (404)` if this application wants to subscribe to the binding.
 
-`metadata` 部分是开放式键/值元数据对，它允许绑定定义连接属性以及组件实现独有的定制属性。
+The `metadata` section is an open key/value metadata pair that allows a binding to define connection properties, as well as custom properties unique to the component implementation.
 
-### 示例
+### Examples
 
-例如，以下是 Python 应用程序如何使用 Dapr API 兼容平台从 `Kafka` 预订事件。 Note how the metadata.name value `kafkaevent` in the components matches the POST route name in the Python code.
+For example, here's how a Python application subscribes for events from `Kafka` using a Dapr API compliant platform. Note how the metadata.name value `kafkaevent` in the components matches the POST route name in the Python code.
 
 #### Kafka Component
 
@@ -70,7 +70,7 @@ spec:
     value: "group1"
 ```
 
-#### Python 代码
+#### Python Code
 
 ```python
 from flask import Flask
@@ -83,62 +83,62 @@ def incoming():
     return "Kafka Event Processed!"
 ```
 
-### Binding 终结点
+### Binding endpoints
 
-Dapr 将从 component Yaml 文件中发现 Bindings。 Dapr calls this endpoint on startup to ensure that app can handle this call. 如果应用程序没有该终结点，那么 Dapr 将忽略。 如果应用程序没有该终结点，那么 Dapr 将忽略。
+Bindings are discovered from component yaml files. Dapr calls this endpoint on startup to ensure that app can handle this call. If the app doesn't have the endpoint, Dapr ignores it.
 
-#### HTTP 请求
+#### HTTP Request
 
 ```
 OPTIONS http://localhost:<appPort>/<name>
 ```
 
-#### HTTP 响应码
+#### HTTP Response codes
 
-| 代码  | 描述                  |
-| --- | ------------------- |
-| 404 | 应用程序不希望绑定到 Bindings |
-| 其它  | 应用程序想要绑定到 Bindings  |
+| Code       | Description                                      |
+| ---------- | ------------------------------------------------ |
+| 404        | Application does not want to bind to the binding |
+| all others | Application wants to bind to the binding         |
 
-#### URL 参数
+#### URL Parameters
 
-| 参数      | 描述           |
-| ------- | ------------ |
-| appPort | 应用程序端口       |
-| name    | bindings 的名称 |
+| Parameter | Description             |
+| --------- | ----------------------- |
+| appPort   | the application port    |
+| name      | the name of the binding |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
 ### Binding payload
 
-为了提供绑定的输入，将使用 POST 调用到用户代码，并将绑定的名称作为URL路径。
+In order to deliver binding inputs, a POST call is made to user code with the name of the binding as the URL path.
 
-#### HTTP 请求
+#### HTTP Request
 
 ```
 POST http://localhost:<appPort>/<name>
 ```
 
-#### HTTP 响应码
+#### HTTP Response codes
 
-| 代码  | 描述            |
-| --- | ------------- |
-| 200 | 应用程序已成功处理输入绑定 |
+| Code | Description                                          |
+| ---- | ---------------------------------------------------- |
+| 200  | Application processed the input binding successfully |
 
-#### URL 参数
+#### URL Parameters
 
-| 参数      | 描述           |
-| ------- | ------------ |
-| appPort | 应用程序端口       |
-| name    | bindings 的名称 |
+| Parameter | Description             |
+| --------- | ----------------------- |
+| appPort   | the application port    |
+| name      | the name of the binding |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
-#### HTTP 响应主体 (可选)
+#### HTTP Response body (optional)
 
-可选地，响应正文可用于直接绑定具有 state stores 或输出 Bindings 的输入绑定。
+Optionally, a response body can be used to directly bind input bindings with state stores or output bindings.
 
-**Example:** Dapr stores `stateDataToStore` into a state store named "stateStore". Dapr 将 `jsonObject` 发送到名为 "storage" 和 " queue" 的输出绑定。 Dapr 将 `jsonObject` 发送到名为 "storage" 和 " queue" 的输出绑定。 如果未设置 `concurrency` ，那么将顺序发出 ( 以下示例显示这些操作并行执行)
+**Example:** Dapr stores `stateDataToStore` into a state store named "stateStore". Dapr sends `jsonObject` to the output bindings named "storage" and "queue" in parallel. If `concurrency` is not set, it is sent out sequential (the example below shows these operations are done in parallel)
 
 ```json
 {
@@ -151,30 +151,30 @@ POST http://localhost:<appPort>/<name>
 }
 ```
 
-## 调用输出绑定
+## Invoking Output Bindings
 
-此端点允许您调用一个 Dapr 输出绑定。 Dapr bindings support various operations, such as `create`.
+This endpoint lets you invoke a Dapr output binding. Dapr bindings support various operations, such as `create`.
 
-请参阅 [ 每个绑定上的不同配置]({{< ref supported-bindings >}}) 以查看受支持操作的列表。
+See the [different specs]({{< ref supported-bindings >}}) on each binding to see the list of supported operations.
 
-### HTTP 请求
+### HTTP Request
 
 ```
 POST/PUT http://localhost:<daprPort>/v1.0/bindings/<name>
 ```
 
-### HTTP 响应码
+### HTTP Response codes
 
-| 代码  | 描述                |
-| --- | ----------------- |
-| 200 | 请求成功              |
-| 204 | Empty Response    |
-| 400 | Malformed request |
-| 500 | 请求失败              |
+| Code | Description        |
+| ---- | ------------------ |
+| 200  | Request successful |
+| 204  | Empty Response     |
+| 400  | Malformed request  |
+| 500  | Request failed     |
 
 ### Payload
 
-绑定端点接收以下JSON payload ：
+The bindings endpoint receives the following JSON payload:
 
 ```json
 {
@@ -186,20 +186,20 @@ POST/PUT http://localhost:<daprPort>/v1.0/bindings/<name>
 }
 ```
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
-The `data` field takes any JSON serializable value and acts as the payload to be sent to the output binding. `metadata` 字段是键/值对的数组，允许您为每个调用设置绑定特定元数据。 `metadata` 字段是键/值对的数组，允许您为每个调用设置绑定特定元数据。 `operation` 字段告诉 Dapr 绑定它应该执行的操作。
+The `data` field takes any JSON serializable value and acts as the payload to be sent to the output binding. The `metadata` field is an array of key/value pairs and allows you to set binding specific metadata for each call. The `operation` field tells the Dapr binding which operation it should perform.
 
-### URL 参数
+### URL Parameters
 
-| 参数       | 描述                      |
-| -------- | ----------------------- |
-| daprPort | dapr 端口。                |
-| name     | 要调用 output binding 的名称。 |
+| Parameter | Description                              |
+| --------- | ---------------------------------------- |
+| daprPort  | the Dapr port                            |
+| name      | the name of the output binding to invoke |
 
-> 注意：所有的 URL 参数都是大小写敏感的。
+> Note, all URL parameters are case-sensitive.
 
-### 示例
+### Examples
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
@@ -215,10 +215,10 @@ curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
       }'
 ```
 
-### 通用元数据值
+### Common metadata values
 
-There are common metadata properties which are support across multiple binding components. 具体清单如下： 具体清单如下：
+There are common metadata properties which are support across multiple binding components. The list below illustrates them:
 
-| 属性           | 描述                 | 绑定定义                                                                                                                             | 有效范围                                             |
-| ------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| ttlInSeconds | 定义消息的生存时间 ( 以秒为单位) | If set in the binding definition will cause all messages to have a default time to live. 消息 ttl 覆盖绑定定义中的任何值。 消息 ttl 覆盖绑定定义中的任何值。 | RabbitMQ, Azure Service Bus, Azure Storage Queue |
+| Property     | Description                                         | Binding definition                                                                                                                                      | Available in                                     |
+| ------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| ttlInSeconds | Defines the time to live in seconds for the message | If set in the binding definition will cause all messages to have a default time to live. The message ttl overrides any value in the binding definition. | RabbitMQ, Azure Service Bus, Azure Storage Queue |
