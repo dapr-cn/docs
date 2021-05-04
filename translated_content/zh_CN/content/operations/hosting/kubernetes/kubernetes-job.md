@@ -2,17 +2,19 @@
 type: docs
 title: "Running Dapr with a Kubernetes Job"
 linkTitle: "Kubernetes Jobs"
-weight: 60000
+weight: 70000
 description: "Use Dapr API in a Kubernetes Job context"
 ---
 
 # Kubernetes Job
 
-The Dapr sidecar is designed to be a long running process, in the context of a [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) this behaviour can block your job completion. To address this issue the Dapr sidecar has an endpoint to `Shutdown` the sidecar. To address this issue the Dapr sidecar has an endpoint to `Shutdown` the sidecar.
+The Dapr sidecar is designed to be a long running process, in the context of a [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) this behaviour can block your job completion. To address this issue the Dapr sidecar has an endpoint to `Shutdown` the sidecar.
 
 When running a basic [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) you will need to call the `/shutdown` endpoint for the sidecar to gracefully stop and the job will be considered `Completed`.
 
 When a job is finish without calling `Shutdown` your job will be in a `NotReady` state with only the `daprd` container running endlessly.
+
+Be sure and use the *POST* HTTP verb when calling the shutdown API.
 
 ```yaml
 apiVersion: batch/v1
@@ -28,8 +30,8 @@ spec:
     spec:
       containers:
       - name: job
-        image: busybox
-        command: ["/bin/sh", "-c", "sleep 20 && wget localhost:3500/v1.0/shutdown"]
+        image: alpine
+        command: ["/bin/sh", "-c", "apk --no-cache add curl && sleep 20 && curl -X POST localhost:3500/v1.0/shutdown"]
       restartPolicy: Never
 ```
 
