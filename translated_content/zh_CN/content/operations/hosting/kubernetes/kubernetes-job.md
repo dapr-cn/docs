@@ -8,7 +8,7 @@ description: "Use Dapr API in a Kubernetes Job context"
 
 # Kubernetes Job
 
-The Dapr sidecar is designed to be a long running process, in the context of a [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) this behaviour can block your job completion. To address this issue the Dapr sidecar has an endpoint to `Shutdown` the sidecar.
+The Dapr sidecar is designed to be a long running process, in the context of a [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) this behaviour can block your job completion. To address this issue the Dapr sidecar has an endpoint to `Shutdown` the sidecar. To address this issue the Dapr sidecar has an endpoint to `Shutdown` the sidecar.
 
 When running a basic [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) you will need to call the `/shutdown` endpoint for the sidecar to gracefully stop and the job will be considered `Completed`.
 
