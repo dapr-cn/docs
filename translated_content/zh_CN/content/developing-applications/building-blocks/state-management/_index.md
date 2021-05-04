@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "状态管理"
-linkTitle: "状态管理"
+title: "State management"
+linkTitle: "State management"
 weight: 20
-description: 创建长期运行的状态服务
+description: Create long running stateful services
 ---
 
