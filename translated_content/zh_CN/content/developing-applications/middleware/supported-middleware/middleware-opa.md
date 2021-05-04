@@ -92,6 +92,87 @@ spec:
     - name: defaultStatus
       value: 403
 
+    # `rego` is the open policy agent policy to evaluate. apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: my-policy
+  namespace: default
+spec:
+  type: middleware.http.opa
+  version: v1
+  metadata:
+    # `includedHeaders` is a comma-separated set of case-insensitive headers to include in the request input.
+    # Request headers are not passed to the policy by default. Include to receive incoming request headers in
+    # the input
+    - name: includedHeaders
+      value: "x-my-custom-header, x-jwt-header"
+
+    # `defaultStatus` is the status code to return for denied responses
+    - name: defaultStatus
+      value: 403
+
+    # `rego` is the open policy agent policy to evaluate. apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: my-policy
+  namespace: default
+spec:
+  type: middleware.http.opa
+  version: v1
+  metadata:
+    # `includedHeaders` is a comma-separated set of case-insensitive headers to include in the request input.
+    # Request headers are not passed to the policy by default. Include to receive incoming request headers in
+    # the input
+    - name: includedHeaders
+      value: "x-my-custom-header, x-jwt-header"
+
+    # `defaultStatus` is the status code to return for denied responses
+    - name: defaultStatus
+      value: 403
+
+    # `rego` is the open policy agent policy to evaluate. required
+    # The policy package must be http and the policy must set data.http.allow
+    - name: rego
+      value: |
+        package http
+
+        default allow = true
+
+        # Allow may also be an object and include other properties
+
+        # For example, if you wanted to redirect on a policy failure, you could set the status code to 301 and set the location header on the response:
+        allow = {
+            "status_code": 301,
+            "additional_headers": {
+                "location": "https://my.site/authorize"
+            }
+        } {
+            not jwt.payload["my-claim"]
+        }
+
+        # You can also allow the request and add additional headers to it:
+        allow = {
+            "allow": true,
+            "additional_headers": {
+                "x-my-claim": my_claim
+            }
+        } {
+            my_claim := jwt.payload["my-claim"]
+        }
+        jwt = { "payload": payload } {
+            auth_header := input.request.headers["authorization"]
+            [_, jwt] := split(auth_header, " ")
+            [_, payload, _] := io.jwt.decode(jwt)
+        }
+    # Request headers are not passed to the policy by default. Include to receive incoming request headers in
+    # the input
+    - name: includedHeaders
+      value: "x-my-custom-header, x-jwt-header"
+
+    # `defaultStatus` is the status code to return for denied responses
+    - name: defaultStatus
+      value: 403
+
     # `rego` is the open policy agent policy to evaluate. required
     # The policy package must be http and the policy must set data.http.allow
     - name: rego
@@ -185,6 +266,12 @@ type HTTPRequest struct {
   // The request scheme (e.g. http, https)
   scheme string
 }
+  type Input struct {
+  request HTTPRequest
+}
+
+type HTTPRequest struct {
+  // The request method (e.g. GET,POST,etc...)
   method string
   // The raw request path (e.g. "/v2/my-path/")
   path string
@@ -196,6 +283,27 @@ type HTTPRequest struct {
   query map[string][]string
   // The request headers
   // NOTE: By default, no headers are included. You must specify what headers
+  // you want to receive via `spec.metadata.includedHeaders` (see above)
+  headers map[string]string
+  // The request scheme (e.g. http, https)
+  scheme string
+}
+  method string
+  // The raw request path (e.g. "/v2/my-path/")
+  path string
+  // The path broken down into parts for easy consumption (e.g. ["v2", "my-path"])
+  path_parts string[]
+  // The raw query string (e.g. "?a=1&b=2")
+  raw_query string
+  // The query broken down into keys and their values
+  query map[string][]string
+  // The request headers
+  // NOTE: By default, no headers are included. You must specify what headers
+  // you want to receive via `spec.metadata.includedHeaders` (see above)
+  headers map[string]string
+  // The request scheme (e.g. http, https)
+  scheme string
+} You must specify what headers
   // you want to receive via `spec.metadata.includedHeaders` (see above)
   headers map[string]string
   // The request scheme (e.g. http, https)
