@@ -1,40 +1,40 @@
 ---
 type: docs
-title: "指南：如何创建一个有状态的服务"
-linkTitle: "指南：如何创建一个有状态的服务"
+title: "How-To: Build a stateful service"
+linkTitle: "How-To: Build a stateful service"
 weight: 300
-description: "对可伸缩的副本使用状态管理"
+description: "Use state management with a scaled, replicated service"
 ---
 
-在这篇文章中，你将了解到如何使用选入(opt-in) 并发和一致性模型来创建一个可以水平扩展的有状态服务。
+In this article you'll learn how you can create a stateful service which can be horizontally scaled, using opt-in concurrency and consistency models.
 
-这可以把开发人员从困难的状态协调、冲突解决和失败处理中解放出来，允许他们以Dapr的API形式使用这些功能。
+This frees developers from difficult state coordination, conflict resolution and failure handling, and allows them instead to consume these capabilities as APIs from Dapr.
 
-## 设置状态存储
+## Setup a state store
 
-状态存储组件代表Dapr用来与数据库进行通信的资源。 在本指南中，我们将使用Redis作为状态存储引擎。
+A state store component represents a resource that Dapr uses to communicate with a database. For the purpose of this guide, we'll use a Redis state store.
 
-在[这里]({{< ref supported-state-stores >}})查看支持的状态存储引擎列表。
+See a list of supported state stores [here]({{< ref supported-state-stores >}})
 
-### 使用 Dapr CLI
+### Using the Dapr CLI
 
-当使用`dapr run`运行你的应用程序时，Dapr CLI会自动提供一个状态存储（Redis）并创建相关的YAML。 如果需要切换使用的状态存储引擎，用你选择的文件替换/components下的YAML文件``。
+The Dapr CLI automatically provisions a state store (Redis) and creates the relevant YAML when running your app with `dapr run`. To change the state store being used, replace the YAML under `/components` with the file of your choice.
 
 ### Kubernetes
 
-请参阅 [这里]({{X20X}}) 的说明，了解如何在 Kubernetes 上设置不同的状态存储引擎。
+See the instructions [here]({{X20X}}) on how to setup different state stores on Kubernetes.
 
-## 强一致性和最终一致性
+## Strong and Eventual consistency
 
-使用强一致性时，Dapr将确保底层状态存储在写入或删除状态之前，一旦数据被写入到所有副本或收到来自quorum的ack，就会返回响应。
+Using strong consistency, Dapr will make sure the underlying state store returns the response once the data has been written to all replicas or received an ack from a quorum before writing or deleting state.
 
-对于GET类型的请求，Dapr将确保存储引擎在副本间一致地返回最新的数据。 除非在对状态API的请求中另有指定，否则默认为最终一致性。
+For get requests, Dapr will make sure the store returns the most up to date data consistently among replicas. The default is eventual consistency, unless specified otherwise in the request to the state API.
 
-下面的例子使用了强一致性:
+The following examples illustrates using strong consistency:
 
-### 保存状态
+### Saving state
 
-*下面的例子是用Python编写的，但适用于任何编程语言。*
+*The following example is written in Python, but is applicable to any programming language*
 
 ```python
 import requests
@@ -46,9 +46,9 @@ stateReq = '[{ "key": "k1", "value": "Some Data", "options": { "consistency": "s
 response = requests.post(dapr_state_url, json=stateReq)
 ```
 
-### 获取状态
+### Getting state
 
-*下面的例子是用Python编写的，但适用于任何编程语言。*
+*The following example is written in Python, but is applicable to any programming language*
 
 ```python
 import requests
@@ -60,9 +60,9 @@ response = requests.get(dapr_state_url + "/key1", headers={"consistency":"strong
 print(response.headers['ETag'])
 ```
 
-### 删除状态
+### Deleting state
 
-*下面的例子是用Python编写的，但适用于任何编程语言。*
+*The following example is written in Python, but is applicable to any programming language*
 
 ```python
 import requests
@@ -73,23 +73,23 @@ dapr_state_url = "http://localhost:3500/v1.0/state/{}".format(store_name)
 response = requests.delete(dapr_state_url + "/key1", headers={"consistency":"strong"})
 ```
 
-如果没有指定`concurrency`选项，last-write 是默认的并发模式。
+Last-write concurrency is the default concurrency mode if the `concurrency` option is not specified.
 
-## First-write-wins 和 Last-write-wins
+## First-write-wins and Last-write-wins
 
-Dapr允许开发人员在处理数据存储时选择两种常见的并发模式：First-write-wins 和 Last-write-wins。 在有多个应用程序实例，同时向同一个键进行写入的情况下，First-Write-Wins策略非常有用。
+Dapr allows developers to opt-in for two common concurrency patterns when working with data stores: First-write-wins and Last-write-wins. First-Write-Wins is useful in situations where you have multiple instances of an application, all writing to the same key concurrently.
 
-Dapr的默认模式是Last-write-wins。
+The default mode for Dapr is Last-write-wins.
 
-Dapr使用版本号来确定一个特定的键是否已经更新。 客户端在读取键对应的值时保留版本号，然后在写入和删除等更新过程中使用版本号。 如果版本信息在客户端检索后发生了变化，就会抛出一个错误，这时就需要客户端再次执行读取，以获取最新的版本信息和状态。
+Dapr uses version numbers to determine whether a specific key has been updated. Clients retain the version number when reading the data for a key and then use the version number during updates such as writes and deletes. If the version information has changed since the client retrieved, an error is thrown, which then requires the client to perform a read again to get the latest version information and state.
 
-Dapr利用ETags来确定状态的版本号。 ETags标签从状态相关请求中以`ETag`头返回。
+Dapr utilizes ETags to determine the state's version number. ETags are returned from state requests in an `ETag` header.
 
-使用ETags，当出现ETag不匹配时，客户可以通过异常知道资源在上次检查后已经被更新。
+Using ETags, clients know that a resource has been updated since the last time they checked by erroring when there's an ETag mismatch.
 
-下面的例子展示了如何获得一个ETag，然后使用它来保存状态，然后删除状态：
+The following example shows how to get an ETag, and then use it to save state and then delete the state:
 
-*下面的例子是用Python编写的，但适用于任何编程语言。*
+*The following example is written in Python, but is applicable to any programming language*
 
 ```python
 import requests
@@ -105,9 +105,9 @@ requests.post(dapr_state_url, json=newState)
 response = requests.delete(dapr_state_url + "/key1", headers={"If-Match": "{}".format(etag)})
 ```
 
-### 处理版本不匹配引起的失败
+### Handling version mismatch failures
 
-在这个例子中，我们将看到如何在版本发生变化时重试保存状态操作:
+In this example, we'll see how to retry a save state operation when the version has changed:
 
 ```python
 import requests
@@ -131,13 +131,6 @@ def get_state(key):
     return response
 
 # Exit when save state is successful. success will be False if there's an ETag mismatch -->
-success = False
-while success != True:
-    response = get_state("key1")
-    etag = response.headers['ETag']
-    newState = '[{ "key": "key1", "value": "New Data", "etag": {}, "options": { "concurrency": "first-write" }}]'.format(etag)
-
-    success = save_state(newState) success will be False if there's an ETag mismatch -->
 success = False
 while success != True:
     response = get_state("key1")
