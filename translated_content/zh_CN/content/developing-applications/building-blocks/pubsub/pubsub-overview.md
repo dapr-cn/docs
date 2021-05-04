@@ -27,7 +27,7 @@ Dapr Pub/Sub 构建块提供一个平台不可知（platform-agnositc）的 API 
 <img src="/images/pubsub-overview-components.png" width=1000>
 <br></br>
 
-下面的图表有相同的服务。 然而，这次展示的 Dapr 的发布API 发送“订单” topic 和订阅服务的订单端点。这些 topic messages 是由 Dapr 发布的。
+下面的图表有相同的服务。 然而，这次展示的 Dapr 的发布API 发送“订单” topic 和订阅服务的订单端点。 这些 topic messages 是由 Dapr 发布的。
 
 <img src="/images/pubsub-overview-publish-API.png" width=1000>
 <br></br>
