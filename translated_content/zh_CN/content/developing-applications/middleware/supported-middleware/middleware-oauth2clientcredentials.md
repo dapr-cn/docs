@@ -44,11 +44,11 @@ spec:
 
 ### authStyle 的可能值
 
-| 值   | 含义                                                                                                                                       |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `1` | 将POST body中的"client_id"和"client_secret"作为 application/x-www-form-urlencoded 参数发送。                                                      |
-| `2` | 使用 HTTP Basic授权发送"client_id" 和 "client_secret" 这是 [OAuth2 RFC 6749 节 2.31](https://tools.ietf.org/html/rfc6749#section-2.3.1)中描述的可选风格。 |
-| `0` | 是指通过两种方式的尝试，自动检测提供者想要的认证方式，并将成功的方式缓存起来，以备将来使用。                                                                                           |
+| 值   | 含义                                                                                                                                                                                        |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `1` | 将POST body中的"client_id"和"client_secret"作为 application/x-www-form-urlencoded 参数发送。                                                                                                       |
+| `2` | 使用 HTTP Basic授权发送"client_id" 和 "client_secret" 使用 HTTP Basic授权发送"client_id" 和 "client_secret" 这是 [OAuth2 RFC 6749 节 2.31](https://tools.ietf.org/html/rfc6749#section-2.3.1)中描述的可选风格。 |
+| `0` | 是指通过两种方式的尝试，自动检测提供者想要的认证方式，并将成功的方式缓存起来，以备将来使用。                                                                                                                                            |
 
 ## Dapr配置
 
