@@ -97,7 +97,7 @@ SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||tem
 
 ### 状态管理 API
 
-状态管理API可以在 [状态管理 API 参考]({{< ref state_api.md >}}) 中找到。它描述了如何根据 key 来查询、保存和删除状态。
+状态管理API可以在 [状态管理 API 参考]({{< ref state_api.md >}}) 中找到。 它描述了如何根据 key 来查询、保存和删除状态。
 
 ## 下一步
 * 遵循这些指南：
