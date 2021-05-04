@@ -8,7 +8,7 @@ weight: 300
 
 ## Publish a message to a given topic
 
-This endpoint lets you publish data to multiple consumers who are listening on a `topic`. Dapr guarantees at least once semantics for this endpoint.
+This endpoint lets you publish data to multiple consumers who are listening on a `topic`. Dapr guarantees at least once semantics for this endpoint. Dapr guarantees at least once semantics for this endpoint.
 
 ### HTTP 请求
 
@@ -46,13 +46,13 @@ curl -X POST http://localhost:3500/v1.0/publish/pubsubName/deathStarStatus \
 
 ### Headers
 
-The `Content-Type` header tells Dapr which content type your data adheres to when constructing a CloudEvent envelope. The value of the `Content-Type` header populates the `datacontenttype` field in the CloudEvent. Unless specified, Dapr assumes `text/plain`. If your content type is JSON, use a `Content-Type` header with the value of `application/json`.
+The `Content-Type` header tells Dapr which content type your data adheres to when constructing a CloudEvent envelope. The value of the `Content-Type` header populates the `datacontenttype` field in the CloudEvent. Unless specified, Dapr assumes `text/plain`. If your content type is JSON, use a `Content-Type` header with the value of `application/json`. The value of the `Content-Type` header populates the `datacontenttype` field in the CloudEvent. Unless specified, Dapr assumes `text/plain`. If your content type is JSON, use a `Content-Type` header with the value of `application/json`.
 
 If you want to send your own custom CloundEvent, use the `application/cloudevents+json` value for the `Content-Type` header.
 
 #### Metadata
 
-Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.` as shown below.
+Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.` as shown below. It must be prefixed with `metadata.` as shown below.
 
 | 参数                    | 描述                                                                                                     |
 | --------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -119,7 +119,7 @@ POST http://localhost:<appPort>/<path>
 
 #### Expected HTTP Response
 
-An HTTP 2xx response denotes successful processing of message. For richer response handling, a JSON encoded payload body with the processing status can be sent:
+An HTTP 2xx response denotes successful processing of message. An HTTP 2xx response denotes successful processing of message. For richer response handling, a JSON encoded payload body with the processing status can be sent:
 
 ```json
 {
