@@ -14,7 +14,7 @@ In order to reference a secret, you need to set the `auth.secretStore` field to 
 
 When running in Kubernetes, if the `auth.secretStore` is empty, the Kubernetes secret store is assumed.
 
-### Supported secret stores
+### 支持的密钥存储
 
 Go to [this]({{< ref "howto-secrets.md" >}}) link to see all the secret stores supported by Dapr, along with information on how to configure and use them.
 
@@ -146,5 +146,5 @@ In production scenario to limit Dapr's access to certain secret resources alone,
 
 ## 相关链接
 
-- [Use secret scoping]({{< ref "secrets-scopes.md" >}})
-- [Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}})
+- [使用密钥作用域]({{< ref "secrets-scopes.md" >}})
+- [限制可以从密钥仓库中读取的密钥]({{< ref "secret-scope.md" >}})

@@ -3,12 +3,12 @@ type: docs
 title: "组件schema"
 linkTitle: "组件schema"
 weight: 100
-description: "The basic schema for a Dapr component"
+description: "Dapr组件的基本 schema"
 ---
 
-Dapr defines and registers components using a [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/). All components are defined as a CRD and can be applied to any hosting environment where Dapr is running, not just Kubernetes.
+Dapr 使用 [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/) 定义和注册组件。 所有组件都定义为 CRD，可应用于 Dapr 运行的任何托管环境，而不仅仅是 Kubernetes。
 
-## Format
+## 格式
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -26,25 +26,25 @@ spec:
     value: [METADATA-VALUE]
 ```
 
-## Fields
+## 字段
 
-| 字段                 | 必填 | 详情                                                                                                 | 示例                 |
-| ------------------ |:--:| -------------------------------------------------------------------------------------------------- | ------------------ |
-| apiVersion         | 是  | The version of the Dapr (and Kubernetes if applicable) API you are calling                         | `dapr.io/v1alpha1` |
-| kind               | 是  | The type of CRD. For components is must always be `Component`                                      | `Component`        |
-| **metadata**       | -  | **Information about the component registration**                                                   |                    |
-| metadata.name      | 是  | The name of the component                                                                          | `prod-statestore`  |
-| metadata.namespace | N  | The namespace for the component for hosting environments with namespaces                           | `myapp-namespace`  |
-| **spec**           | -  | **Detailed information on the component resource**                                                 |                    |
-| spec.type          | 是  | The type of the component                                                                          | `state.redis`      |
-| spec.version       | 是  | The version of the component                                                                       | `v1`               |
-| spec.initTimeout   | N  | The timeout duration for the initialization of the component. Default is 30s                       | `5m`, `1h`, `20s`  |
-| spec.ignoreErrors  | N  | Tells the Dapr sidecar to continue initialization if the component fails to load. Default is false | `false`            |
-| **spec.metadata**  | -  | **A key/value pair of component specific configuration. See your component definition for fields** |                    |
+| 字段                 | 必填 | 详情                                        | 示例                 |
+| ------------------ |:--:| ----------------------------------------- | ------------------ |
+| apiVersion         | 是  | 您正在调用的Dapr版本(如果适用的话为 Kubernetes) API      | `dapr.io/v1alpha1` |
+| kind               | 是  | CRD的类型。 组件必须始终是 `Component`               | `Component`        |
+| **metadata**       | -  | **有关组件注册的信息**                             |                    |
+| metadata.name      | 是  | 组件的名称                                     | `prod-statestore`  |
+| metadata.namespace | N  | 主机环境的命名空间                                 | `myapp-namespace`  |
+| **spec**           | -  | **关于组件资源的详细信息**                           |                    |
+| spec.type          | 是  | 组件类型                                      | `state.redis`      |
+| spec.version       | 是  | 组件版本                                      | `v1`               |
+| spec.initTimeout   | N  | 组件初始化的超时时间 默认为30秒                         | `5m`, `1h`, `20s`  |
+| spec.ignoreErrors  | N  | 如果组件加载失败，请告诉Dapr sidecar 继续初始化。 默认为 false | `false`            |
+| **spec.metadata**  | -  | **一个组件特定配置的键/值。 查看你的组件字段定义**              |                    |
 
-### Special metadata values
+### 特殊的元数据值
 
-Metadata values can contain a `{uuid}` tag that is replaced with a randomly generate UUID when the Dapr sidecar starts up. A new UUID is generated on every start up. It can be used, for example, to have a pod on Kubernetes with multiple application instances consuming a [shared MQTT subscription]({{< ref "setup-mqtt.md" >}}). Below is an example of using the `{uuid}` tag.
+元数据值可以包含一个 `{uuid}` 标签，当 Dapr sidecar 启动时，该标记将被随机生成的 UUID 所取代。 每个启动都会生成新的 UUID。 它可以用来在 Kubernetes 上区分同一个 pod 的多个实例 ，比如 [共享的 MQTT 订阅]({{< ref "setup-mqtt.md" >}})。 下面是一个使用 ` {uuid}` 选项的示例。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -68,10 +68,10 @@ spec:
 ```
 
 ## 深入阅读
-- [Components concept]({{< ref components-concept.md >}})
-- [Reference secrets in component definitions]({{< ref component-secrets.md >}})
+- [组件概念]({{< ref components-concept.md >}})
+- [组件定义中的引用密钥]({{< ref component-secrets.md >}})
 - [支持的状态存储]({{< ref supported-state-stores >}})
-- [Supported pub/sub brokers]({{< ref supported-pubsub >}})
-- [Supported secret stores]({{< ref supported-secret-stores >}})
-- [Supported bindings]({{< ref supported-bindings >}})
-- [Set component scopes]({{< ref component-scopes.md >}})
+- [支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})
+- [支持的密钥存储]({{< ref supported-secret-stores >}})
+- [已支持的绑定]({{< ref supported-bindings >}})
+- [设置组件作用域]({{< ref component-scopes.md >}})

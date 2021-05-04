@@ -7,7 +7,7 @@ description: "Detailed documentation on the PostgreSQL binding component"
 
 ## 配置
 
-To setup PostgreSQL binding create a component of type `bindings.postgres`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置与 PostgreSQL相关的 绑定,需要创建类型 `bindings.postgres` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -30,11 +30,11 @@ spec:
 
 ## 元数据字段规范
 
-| 字段  | 必填 | 绑定支持 | 详情                                                                  | 示例                                                                                          |
-| --- |:--:| ---- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| url | 是  | 输出   | Postgres connection string See [here](#url-format) for more details | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
+| 字段  | 必填 | 绑定支持 | 详情                                     | 示例                                                                                          |
+| --- |:--:| ---- | -------------------------------------- | ------------------------------------------------------------------------------------------- |
+| url | 是  | 输出   | Postgres连接字符串的写法，请参阅此处 [](#url-format) | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
 
-### URL format
+### URL格式
 
 The PostgreSQL binding uses [pgx connection pool](https://github.com/jackc/pgx) internally so the `url` parameter can be any valid connection string, either in a `DSN` or `URL` format:
 
