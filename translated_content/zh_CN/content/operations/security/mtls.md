@@ -12,11 +12,11 @@ Dapr allows operators and developers to bring in their own certificates, or let 
 
 For detailed information on mTLS, go to the concepts section [here]({{< ref "security-concept.md" >}}).
 
-If custom certificates have not been provided, Dapr will automatically create and persist self signed certs valid for one year. In Kubernetes, the certs are persisted to a secret that resides in the namespace of the Dapr system pods, accessible only to them. In Self Hosted mode, the certs are persisted to disk. More information on that is shown below.
+If custom certificates have not been provided, Dapr will automatically create and persist self signed certs valid for one year. In Kubernetes, the certs are persisted to a secret that resides in the namespace of the Dapr system pods, accessible only to them. In Self Hosted mode, the certs are persisted to disk. More information on that is shown below. In Kubernetes, the certs are persisted to a secret that resides in the namespace of the Dapr system pods, accessible only to them. In Self Hosted mode, the certs are persisted to disk. More information on that is shown below.
 
 ## Sentry configuration
 
-mTLS settings reside in a Dapr configuration file. mTLS settings reside in a Dapr configuration file. The following file shows all the available settings for mTLS in a configuration resource:
+mTLS settings reside in a Dapr configuration file. mTLS settings reside in a Dapr configuration file. mTLS settings reside in a Dapr configuration file. The following file shows all the available settings for mTLS in a configuration resource:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,13 +31,13 @@ spec:
     allowedClockSkew: "15m"
 ```
 
-The file here shows the default `daprsystem` configuration settings. The examples below show you how to change and apply this configuration to Sentry in Kubernetes and Self hosted modes.
+The file here shows the default `daprsystem` configuration settings. The file here shows the default `daprsystem` configuration settings. The examples below show you how to change and apply this configuration to Sentry in Kubernetes and Self hosted modes.
 
 ## Kubernetes
 
 ### Setting up mTLS with the configuration resource
 
-In Kubernetes, Dapr creates a default configuration resource with mTLS enabled. Sentry, the certificate authority system pod, is installed both with Helm and with the Dapr CLI using `dapr init --kubernetes`.
+In Kubernetes, Dapr creates a default configuration resource with mTLS enabled. In Kubernetes, Dapr creates a default configuration resource with mTLS enabled. Sentry, the certificate authority system pod, is installed both with Helm and with the Dapr CLI using `dapr init --kubernetes`.
 
 You can view the configuration resource with the following command:
 
@@ -89,7 +89,7 @@ kubectl logs --selector=app=dapr-sentry --namespace <DAPR_NAMESPACE>
 
 Using Helm, you can provide the PEM encoded root cert, issuer cert and private key that will be populated into the Kubernetes secret.
 
-*Note: This example uses the step tool to create the certificates. You can install step tool from [here](https://smallstep.com/docs/getting-started/). Windows binaries available [here](https://github.com/smallstep/cli/releases)*
+*Note: This example uses the step tool to create the certificates. You can install step tool from [here](https://smallstep.com/docs/getting-started/). Windows binaries available [here](https://github.com/smallstep/cli/releases) You can install step tool from [here](https://smallstep.com/docs/getting-started/). Windows binaries available [here](https://github.com/smallstep/cli/releases)*
 
 Create the root certificate:
 
@@ -125,15 +125,15 @@ If the Root or Issuer certs are about to expire, you can update them and restart
 
 First, issue new certificates using the step above in [Bringing your own certificates](#bringing-your-own-certificates).
 
-Now that you have the new certificates, you can update the Kubernetes secret that holds them. Edit the Kubernetes secret:
+Now that you have the new certificates, you can update the Kubernetes secret that holds them. Edit the Kubernetes secret: Edit the Kubernetes secret:
 
 ```
 kubectl edit secret dapr-trust-bundle -n <DAPR_NAMESPACE>
 ```
 
-Replace the `ca.crt`, `issuer.crt` and `issuer.key` keys in the Kubernetes secret with their corresponding values from the new certificates. *__Note: The values must be base64 encoded__*
+Replace the `ca.crt`, `issuer.crt` and `issuer.key` keys in the Kubernetes secret with their corresponding values from the new certificates. *__Note: The values must be base64 encoded__* *__Note: The values must be base64 encoded__*
 
-If you signed the new cert root with a different private key, restart all Dapr-enabled pods. The recommended way to do this is to perform a rollout restart of your deployment:
+If you signed the new cert root with a different private key, restart all Dapr-enabled pods. The recommended way to do this is to perform a rollout restart of your deployment: The recommended way to do this is to perform a rollout restart of your deployment:
 
 ```
 kubectl rollout restart deploy/myapp
@@ -159,13 +159,13 @@ Run Sentry locally with the following command:
 ./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local
 ```
 
-If successful, sentry will run and create the root certs in the given directory. This command uses default configuration values as no custom config file was given. See below on how to start Sentry with a custom configuration.
+If successful, sentry will run and create the root certs in the given directory. This command uses default configuration values as no custom config file was given. See below on how to start Sentry with a custom configuration. This command uses default configuration values as no custom config file was given. See below on how to start Sentry with a custom configuration.
 
 ### Setting up mTLS with the configuration resource
 
 #### Dapr instance configuration
 
-When running Dapr in self hosted mode, mTLS is disabled by default. you can enable it by creating the following configuration file:
+When running Dapr in self hosted mode, mTLS is disabled by default. you can enable it by creating the following configuration file: you can enable it by creating the following configuration file:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -214,11 +214,11 @@ In order to start Sentry with a custom config, use the following flag:
 
 ### Bringing your own certificates
 
-In order to provide your own credentials, create ECDSA PEM encoded root and issuer certificates and place them on the file system. Tell Sentry where to load the certificates from using the `--issuer-credentials` flag.
+In order to provide your own credentials, create ECDSA PEM encoded root and issuer certificates and place them on the file system. Tell Sentry where to load the certificates from using the `--issuer-credentials` flag. Tell Sentry where to load the certificates from using the `--issuer-credentials` flag.
 
 The next examples creates root and issuer certs and loads them with Sentry.
 
-*Note: This example uses the step tool to create the certificates. You can install step tool from [here](https://smallstep.com/docs/getting-started/). Windows binaries available [here](https://github.com/smallstep/cli/releases)*
+*Note: This example uses the step tool to create the certificates. You can install step tool from [here](https://smallstep.com/docs/getting-started/). Windows binaries available [here](https://github.com/smallstep/cli/releases) You can install step tool from [here](https://smallstep.com/docs/getting-started/). Windows binaries available [here](https://github.com/smallstep/cli/releases)*
 
 Create the root certificate:
 
@@ -232,7 +232,7 @@ Create the issuer certificate:
 step certificate create cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 8760h --no-password --insecure
 ```
 
-This creates the root and issuer certs and keys. Place `ca.crt`, `issuer.crt` and `issuer.key` in a desired path (`$HOME/.dapr/certs` in the example below), and launch Sentry:
+This creates the root and issuer certs and keys. This creates the root and issuer certs and keys. Place `ca.crt`, `issuer.crt` and `issuer.key` in a desired path (`$HOME/.dapr/certs` in the example below), and launch Sentry:
 
 ```bash
 ./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local
@@ -244,6 +244,6 @@ If the Root or Issuer certs are about to expire, you can update them and restart
 
 First, issue new certificates using the step above in [Bringing your own certificates](#bringing-your-own-certificates).
 
-Copy `ca.crt`, `issuer.crt` and `issuer.key` to the filesystem path of every configured system service, and restart the process or container. By default, system services will look for the credentials in `/var/run/dapr/credentials`.
+Copy `ca.crt`, `issuer.crt` and `issuer.key` to the filesystem path of every configured system service, and restart the process or container. By default, system services will look for the credentials in `/var/run/dapr/credentials`. By default, system services will look for the credentials in `/var/run/dapr/credentials`.
 
 *Note:If you signed the cert root with a different private key, restart the Dapr instances.*
