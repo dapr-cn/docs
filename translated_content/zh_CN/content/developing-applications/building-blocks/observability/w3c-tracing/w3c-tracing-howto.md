@@ -49,7 +49,7 @@ client.InvokeService(ctx, &pb.InvokeServiceRequest{
 要从 HTTP 响应检索跟踪上下文，可以使用 [.NET API](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.headers.httpresponseheaders?view=netcore-3.1):
 
 ```csharp
-// client is HttpClient. req is HttpRequestMessage
+// client is HttpClient. // client is HttpClient. req is HttpRequestMessage
 HttpResponseMessage response = await client.SendAsync(req);
 IEnumerable<string> values1, values2;
 string traceparentValue = "";
@@ -111,7 +111,7 @@ ctx = metadata.AppendToOutgoingContext(ctx, "grpc-trace-bin", string(traceContex
 要在 HTTP 请求中传递跟踪上下文，可以使用 [.NET API](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.headers.httprequestheaders?view=netcore-3.1):
 
 ```csharp
-// client is HttpClient. req is HttpRequestMessage
+// client is HttpClient. // client is HttpClient. req is HttpRequestMessage
 req.Headers.Add("traceparent", traceparentValue);
 req.Headers.Add("tracestate", tracestateValue);
 HttpResponseMessage response = await client.SendAsync(req);
@@ -142,14 +142,14 @@ using var call = client.InvokeServiceAsync(req, headers);
 
 ### 在 Go 中创建跟踪上下文
 
-#### 1. 1. 获取 OpenCensus Go SDK
+#### 1. 1. 1. 获取 OpenCensus Go SDK
 
 先决条件:OpenCensus Go 库需要 Go 1.8 或更高版本。 有关安装的详细信息，请访问 [这里](https://pkg.go.dev/go.opencensus.io?tab=overview)。
 
-#### 2. 2. 导入包 "go.openensuss.io/trace"
+#### 2. 2. 2. 导入包 "go.openensuss.io/trace"
 `$ go get -u go.opencensus.io`
 
-#### 3. 3. 创建跟踪上下文
+#### 3. 3. 3. 创建跟踪上下文
 
 ```go
 ctx, span := trace.StartSpan(ctx, "cache.Get")
@@ -229,7 +229,7 @@ Dapr 包含生成跟踪上下文，您无需明确创建跟踪上下文。
 
 其他代码片段和详细信息，请参阅 [grpc 应用程序]({{< ref grpc >}})。
 
-### 1. 导入包
+### 1. 1. 导入包
 
 ```go
 package main
@@ -243,7 +243,7 @@ import (
 )
 ```
 
-### 2. 创建客户端
+### 2. 2. 创建客户端
 
 ```go
   // Get the Dapr port and create a connection
@@ -259,9 +259,16 @@ import (
   client := pb.NewDaprClient(conn)
 ```
 
-### 3. 使用跟踪上下文调用 InvokeService 方法
+### 3. 3. 使用跟踪上下文调用 InvokeService 方法
 
 ```go
+  // Create the Trace Context
+  ctx , span := trace.StartSpan(context.Background(), "InvokeService")
+
+  // The returned context can be used to keep propagating the newly created span in the current context.
+  // In the same process, context.Context is used to propagate trace context.
+
+  // Across the process, use the propagation format of Trace Context to propagate trace context.
   // Create the Trace Context
   ctx , span := trace.StartSpan(context.Background(), "InvokeService")
 
