@@ -167,7 +167,7 @@ class TheTest extends \PHPUnit\Framework\TestCase
 
 ## 测试Transactions
 
-When building on transactions, you'll likely want to test how a failed transaction is handled. In order to do that, you need to inject failures and ensure the transaction matches what you expect.
+When building on transactions, you'll likely want to test how a failed transaction is handled. In order to do that, you need to inject failures and ensure the transaction matches what you expect. In order to do that, you need to inject failures and ensure the transaction matches what you expect.
 
 {{< tabs "integration test with TestClient" "unit test" >}}
 
