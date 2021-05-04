@@ -7,7 +7,7 @@ description: Using the App Class
 no_list: true
 ---
 
-在 PHP 中没有默认路由器。 因此，提供了 `\Dapr\App` 类。 在后台使用了 [Nikic's FastRoute](https://github.com/nikic/FastRoute)  ，但是，您也可以自由使用任何路由器或 您想要的框架。 只需在 `App` 类中查看 `add_dapr_routes()` 方法，看看actors和 订阅是如何实现的。
+在 PHP 中没有默认路由器。 因此，提供了 `\Dapr\App` 类。 在后台使用了 [Nikic's FastRoute](https://github.com/nikic/FastRoute)  ，但是，您也可以自由使用任何路由器或 您想要的框架。 ，但是，您也可以自由使用任何路由器或 您想要的框架。 只需在 `App` 类中查看 `add_dapr_routes()` 方法，看看actors和 订阅是如何实现的。
 
 每个应用都应该以 `App:::create()` 开头，这需要两个参数，第一个是现有的DI 容器， 第二个是回调到 `ContainerBuilder` 并添加您自己的配置。
 
@@ -16,6 +16,9 @@ no_list: true
 
 ```php
 <?php
+// app.php
+
+require_once __DIR__ . <?php
 // app.php
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -52,6 +55,9 @@ $app->start();
 
 ```php
 <?php
+// app.php
+
+require_once __DIR__ . <?php
 // app.php
 
 require_once __DIR__ . '/vendor/autoload.php';
