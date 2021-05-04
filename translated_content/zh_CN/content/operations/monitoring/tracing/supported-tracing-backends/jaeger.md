@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "操作方法: 为分布式跟踪安装 Jaeger"
+title: "How-To: Set up Jaeger for distributed tracing"
 linkTitle: "Jaeger"
 weight: 3000
-description: "为分布式跟踪安装 Jaeger"
+description: "Set up Jaeger for distributed tracing"
 ---
 
-Dapr 目前支持Zipkin 协议。 既然Jaeger 与 Zipkin 兼容，那么 Zipkin 协议可以用来与 Jaeger 通信。
+Dapr currently supports the Zipkin protocol. Since Jaeger is compatible with Zipkin, the Zipkin protocol can be used to talk to Jaeger.
 
-## 配置自托管模式
+## Configure self hosted mode
 
-### 设置
+### Setup
 
-启动Jaeger的最简单方式是使用发布到DockerHub的Jaeger全家桶镜像：
+The simplest way to start Jaeger is to use the pre-built all-in-one Jaeger image published to DockerHub:
 
 ```bash
 docker run -d --name jaeger \
@@ -23,9 +23,9 @@ docker run -d --name jaeger \
 ```
 
 
-接下来，在本地创建以下YAML文件：
+Next, create the following YAML files locally:
 
-* **config.yaml**: 注意, 因为我们正在使用 Zipkin 协议 来与 Jaeger 通信, 我们指定 `zipkin` 追踪部分 配置设置 `endpointAddress` 来定位Jaeger 实例。
+* **config.yaml**: Note that because we are using the Zipkin protocol to talk to Jaeger, we specify the `zipkin` section of tracing configuration set the `endpointAddress` to address of the Jaeger instance.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -40,21 +40,21 @@ spec:
       endpointAddress: "http://localhost:9412/api/v2/spans"
 ```
 
-要启动指向新的 YAML 文件的应用程序，您可以使用 `--config` 选项：
+To launch the application referring to the new YAML file, you can use `--config` option:
 
 ```bash
 dapr run --app-id mynode --app-port 3000 node app.js --config config.yaml
 ```
 
-### 查看 Traces
-要查看 traces，在您的浏览器中请访问 http://localhost:16686，您会看到Jaeger UI。
+### Viewing Traces
+To view traces, in your browser go to http://localhost:16686 and you will see the Jaeger UI.
 
-## 配置 Kubernetes
-以下步骤可向您展示如何配置 Dapr 将分布式跟踪数据发送给 Jaeger，该数据作为 Dapr 中的容器运行，以及如何查看它们。
+## Configure Kubernetes
+The following steps shows you how to configure Dapr to send distributed tracing data to Jaeger running as a container in your Kubernetes cluster, how to view them.
 
-### 设置
+### Setup
 
-首先创建下面的 YAML 文件来安装Jaeger
+First create the following YAML file to install Jaeger
 * jaeger-operator.yaml
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -72,7 +72,7 @@ spec:
         base-path: /jaeger
 ```
 
-现在，使用上面的 YAML 文件安装 Jaeger
+Now, use the above YAML file to install Jaeger
 ```bash
 # Install Jaeger
 helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
@@ -100,7 +100,7 @@ spec:
       endpointAddress: "http://jaeger-collector.default.svc.cluster.local:9411/api/v2/spans"
 ```
 
-最后，部署Dapr组件和配置文件：
+Finally, deploy the the Dapr component and configuration files:
 
 ```bash
 kubectl apply -f tracing.yaml
@@ -113,20 +113,20 @@ annotations:
   dapr.io/config: "tracing"
 ```
 
-就这么简单！ That's it! 您的 Dapr sidecar 现已配置为Jaeger使用。
+That's it! Your Dapr sidecar is now configured for use with Jaeger.
 
 ### Viewing Tracing Data
 
-要查看 traces 数据，请连接到Jaeger服务并打开 UI：
+To view traces, connect to the Jaeger Service and open the UI:
 
 ```bash
 kubectl port-forward svc/jaeger-query 16686
 ```
 
-在您的浏览器中，转到 `http://localhost:16686` 并会看到Jaeger UI。
+In your browser, go to `http://localhost:16686` and you will see the Jaeger UI.
 
 ![jaeger](/images/jaeger_ui.png)
 
-## 参考资料
-- [Jaeger 快速入门](https://www.jaegertracing.io/docs/1.21/getting-started/#all-in-one)
-- [W3C 分布式跟踪]({{< ref w3c-tracing >}})
+## References
+- [Jaeger Getting Started](https://www.jaegertracing.io/docs/1.21/getting-started/#all-in-one)
+- [W3C distributed tracing]({{< ref w3c-tracing >}})
