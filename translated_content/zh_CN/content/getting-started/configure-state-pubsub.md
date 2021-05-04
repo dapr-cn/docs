@@ -20,7 +20,7 @@ aliases:
 此页的其余部分描述了如何使用Redis启动和运行。
 
 {{% alert title="Self-hosted mode" color="warning" %}}
-当在自托管模式下初始化时，Dapr会自动运行一个Redis容器并设置所需的 yaml 文件. 您可以跳过此页并跳转到 [下一步](#next-steps) 您可以跳过此页并跳转到 [下一步](#next-steps)
+当在自托管模式下初始化时，Dapr会自动运行一个Redis容器并设置所需的 yaml 文件. 您可以跳过此页并跳转到 [下一步](#next-steps) 您可以跳过此页并跳转到 [下一步](#next-steps) 您可以跳过此页并跳转到 [下一步](#next-steps)
 {{% /alert %}}
 
 ## 创建Redis存储
