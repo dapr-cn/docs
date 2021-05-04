@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "使用后端状态存储"
+title: "Work with backend state stores"
 linkTitle: "Backend stores"
 weight: 500
-description: "用于使用特定后端状态存储的指南"
+description: "Guides for working with specific backend states stores"
 ---
 
-查看 **功能操作** 章节可以看到一系列[受支持的状态存储]({{X1X}}) 以及如何设置[状态存储组件]({{X2X}}).
+Explore the **Operations** section to see a list of [supported state stores]({{X1X}}) and how to setup [state store components]({{X2X}}).
