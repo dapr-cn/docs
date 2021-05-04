@@ -113,7 +113,7 @@ annotations:
   dapr.io/config: "tracing"
 ```
 
-That's it! 您的 Dapr sidecar 现已配置为Jaeger使用。
+就这么简单！ That's it! 您的 Dapr sidecar 现已配置为Jaeger使用。
 
 ### Viewing Tracing Data
 
