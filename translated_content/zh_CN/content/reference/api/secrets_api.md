@@ -28,7 +28,7 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>
 
 #### Query Parameters
 
-Some secret stores have **optional** metadata properties. metadata is populated using query parameters:
+Some secret stores have **optional** metadata properties. metadata is populated using query parameters: metadata is populated using query parameters:
 
 ```
 GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>?metadata.version_id=15
@@ -110,7 +110,7 @@ curl http://localhost:3500/v1.0/secrets/vault/db-secret?metadata.version_id=15&?
 
 ## Get Bulk Secret
 
-This endpoint lets you get all the secrets in a secret store. It's recommended to use [token authentication]({{X47X}}) for Dapr if configuring a secret store.
+This endpoint lets you get all the secrets in a secret store. This endpoint lets you get all the secrets in a secret store. It's recommended to use [token authentication]({{X47X}}) for Dapr if configuring a secret store.
 
 ### HTTP 请求
 
@@ -131,7 +131,7 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/bulk
 
 #### Response Body
 
-The returned response is a JSON containing the secrets. The JSON object will contain the secret names as fields and a map of secret keys and values as the field value.
+The returned response is a JSON containing the secrets. The returned response is a JSON containing the secrets. The JSON object will contain the secret names as fields and a map of secret keys and values as the field value.
 
 ##### Response with multiple secrets and multiple key / values in a secret (eg. Kubernetes):
 
