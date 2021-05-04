@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "How-To: 使用输入绑定来触发应用程序"
-linkTitle: "How-To: 触发器"
-description: "使用 Dapr 输入绑定来触发由事件驱动的程序"
+title: "How-To: Trigger your application with input bindings"
+linkTitle: "How-To: Triggers"
+description: "Use Dapr input bindings to trigger event driven applications"
 weight: 200
 ---
 
-使用绑定，代码可以被来自不同资源的传入事件触发，这些事件可以是任何内容：队列、消息传递管道、云服务、文件系统等。
+Using bindings, your code can be triggered with incoming events from different resources which can be anything: a queue, messaging pipeline, cloud-service, filesystem etc.
 
-这对于事件驱动的处理，数据管道或只是对事件作出反应并进一步处理都很理想。
+This is ideal for event-driven processing, data pipelines or just generally reacting to events and doing further processing.
 
-Dapr 绑定允许您 :
+Dapr bindings allow you to:
 
-* 接收不包含特定 SDK 或库的事件
-* 在不更改代码的情况下替换绑定
-* 关注业务逻辑而不是事件资源实现
+* Receive events without including specific SDKs or libraries
+* Replace bindings without changing your code
+* Focus on business logic and not the event resource implementation
 
-有关绑定的更多信息，请阅读 [概述]({{X17X}})。
+For more info on bindings, read [this overview]({{X17X}}).
 
-有关展示绑定的快速入门示例，请访问此 [链接](https://github.com/dapr/quickstarts/tree/master/bindings)。
+For a quickstart sample showing bindings, visit this [link](https://github.com/dapr/quickstarts/tree/master/bindings).
 
-## 1. 1. 1. 创建绑定
+## 1. Create a binding
 
-输入绑定表示 Dapr 用于读取事件并推送到应用程序的事件资源。
+An input binding represents an event resource that Dapr uses to read events from and push to your application.
 
-就本指南的目的，我们会使用 Kafka 绑定。 您可以在 [此处]({{< ref supported-bindings >}}) 找到不同绑定规范的列表。
+For the purpose of this HowTo, we'll use a Kafka binding. You can find a list of the different binding specs [here]({{< ref supported-bindings >}}).
 
-创建以下 YAML 文件，名为 binding.yaml，并将其保存到应用程序的 `components` 子文件夹中。 （使用具有 `--components-path` 标记 的 `dapr run` 命令来指向自定义组件目录）
+Create the following YAML file, named binding.yaml, and save this to a `components` sub-folder in your application directory. (Use the `--components-path` flag with `dapr run` to point to your custom components dir)
 
-*注: 在 Kubernetes 中运行时，使用 `kubectl apply -f binding.yaml` 将此文件应用于您的集群*
+*Note: When running in Kubernetes, apply this file to your cluster using `kubectl apply -f binding.yaml`*
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -48,15 +48,15 @@ spec:
     value: group1
 ```
 
-在这里，创建一个新的名称为 `myevent` 的绑定组件。
+Here, you create a new binding component with the name of `myevent`.
 
-在 `metadata` 部分中，配置 Kafka 相关属性，如要监听的topics，代理或者更多。
+Inside the `metadata` section, configure the Kafka related properties such as the topics to listen on, the brokers and more.
 
-## 2. 监听传入事件
+## 2. Listen for incoming events
 
-现在配置您的应用程序来接收传入事件。 如果使用 HTTP ，那么需要监听在文件 `metadata.name` 中指定的绑定名称所对应的`POST` 终结点。  在此示例中，是 `myevent`。
+Now configure your application to receive incoming events. If using HTTP, you need to listen on a `POST` endpoint with the name of the binding as specified in `metadata.name` in the file.  In this example, this is `myevent`.
 
-*以下示例演示了在 Node.js 中您该如何监听事件，但这适用于任何编程语言*
+*The following example shows how you would listen for the event in Node.js, but this is applicable to any programming language*
 
 ```javascript
 const express = require('express')
@@ -74,29 +74,29 @@ app.post('/myevent', (req, res) => {
 app.listen(port, () => console.log(`Kafka consumer app listening on port ${port}!`))
 ```
 
-### 确认事件
+### ACK-ing an event
 
-为了告诉 Dapr 您成功处理了应用程序中的事件，请从 http 处理程序 返回 `200 OK` 响应。
+In order to tell Dapr that you successfully processed an event in your application, return a `200 OK` response from your HTTP handler.
 
 ```javascript
 res.status(200).send()
 ```
 
-### 拒绝事件
+### Rejecting an event
 
-为了告知 Dapr 事件未在应用程序中正确处理事件并将其调度为重新交付，请返回与 `200 OK` 不同的响应。 例如， `500 Error`。
+In order to tell Dapr that the event wasn't processed correctly in your application and schedule it for redelivery, return any response different from `200 OK`. For example, a `500 Error`.
 
 ```javascript
 res.status(500).send()
 ```
 
-### 事件传递保证
-事件传递保证由绑定实现控制。 根据绑定实现，事件传递可以正好一次或至少一次。
+### Event delivery Guarantees
+Event delivery guarantees are controlled by the binding implementation. Depending on the binding implementation, the event delivery can be exactly once or at least once.
 
 
-## 参考资料
+## References
 
-* [绑定构建块]({{< ref bindings >}})
-* [绑定 API]({{< ref bindings_api.md >}})
+* [Bindings building block]({{< ref bindings >}})
+* [Bindings API]({{< ref bindings_api.md >}})
 * [Components concept]({{< ref components-concept.md >}})
 * [Supported bindings]({{< ref supported-bindings >}})
