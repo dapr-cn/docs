@@ -12,7 +12,7 @@ description: "Set-up New Relic for Dapr logging"
 
 ## 背景
 
-New Relic offers a [Fluent Bit](https://fluentbit.io/) output [plugin](https://github.com/newrelic/newrelic-fluent-bit-output) to easily forward your logs to [New Relic Logs](https://github.com/newrelic/newrelic-fluent-bit-output). This plugin is also provided in a standalone Docker image that can be installed in a Kubernetes cluster in the form of a DaemonSet, which we refer as the Kubernetes plugin.
+New Relic offers a [Fluent Bit](https://fluentbit.io/) output [plugin](https://github.com/newrelic/newrelic-fluent-bit-output) to easily forward your logs to [New Relic Logs](https://github.com/newrelic/newrelic-fluent-bit-output). This plugin is also provided in a standalone Docker image that can be installed in a Kubernetes cluster in the form of a DaemonSet, which we refer as the Kubernetes plugin. This plugin is also provided in a standalone Docker image that can be installed in a Kubernetes cluster in the form of a DaemonSet, which we refer as the Kubernetes plugin.
 
 This document explains how to install it in your cluster, either using a Helm chart (recommended), or manually by applying Kubernetes manifests.
 
@@ -38,7 +38,7 @@ This document explains how to install it in your cluster, either using a Helm ch
 
 For EU users, add `--set endpoint=https://log-api.eu.newrelic.com/log/v1 to any of the helm install commands above.
 
-By default, tailing is set to /var/log/containers/*.log. To change this setting, provide your preferred path by adding --set fluentBit.path=DESIRED_PATH to any of the helm install commands above.
+By default, tailing is set to /var/log/containers/*.log. By default, tailing is set to /var/log/containers/*.log. To change this setting, provide your preferred path by adding --set fluentBit.path=DESIRED_PATH to any of the helm install commands above.
 
 ### Install the Kubernetes manifest
 
@@ -59,9 +59,9 @@ By default, tailing is set to /var/log/containers/*.log. To change this setting,
     kubectl apply -f .
     ```
 
-4. [OPTIONAL] You can configure how the plugin parses the data by editing the parsers.conf section in the fluent-conf.yml file. For more information, see Fluent Bit's documentation on Parsers configuration.
+4. [OPTIONAL] You can configure how the plugin parses the data by editing the parsers.conf section in the fluent-conf.yml file. For more information, see Fluent Bit's documentation on Parsers configuration. For more information, see Fluent Bit's documentation on Parsers configuration.
 
-    By default, tailing is set to /var/log/containers/*.log. To change this setting, replace the default path with your preferred path in the new-relic-fluent-plugin.yml file.
+    By default, tailing is set to /var/log/containers/*.log. By default, tailing is set to /var/log/containers/*.log. To change this setting, replace the default path with your preferred path in the new-relic-fluent-plugin.yml file.
 
 ## View Logs
 
