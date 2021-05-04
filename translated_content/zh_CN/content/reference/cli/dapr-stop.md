@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "stop CLI 命令参考"
+title: "stop CLI command reference"
 linkTitle: "stop"
-description: "有关 stop CLI 命令的详细信息"
+description: "Detailed information on the stop CLI command"
 ---
 
-## 描述
+## Description
 
-停止 dapr 实例及其关联的应用程序。
+Stop Dapr instances and their associated apps.
 
-## 支持的平台
+## Supported platforms
 
 - [自托管]({{< ref self-hosted >}})
 
-## 用法
+## Usage
 
 ```bash
 dapr stop [flags]
 ```
 
-## 参数
+## Flags
 
-| 名称               | 环境变量 | 默认值 | 描述          |
-| ---------------- | ---- | --- | ----------- |
-| `--app-id`, `-a` |      |     | 要停止的应用程序 Id |
-| `--help`, `-h`   |      |     | 显示此帮助消息     |
+| Name             | Environment Variable | Default | Description                      |
+| ---------------- | -------------------- | ------- | -------------------------------- |
+| `--app-id`, `-a` |                      |         | The application id to be stopped |
+| `--help`, `-h`   |                      |         | Print this help message          |
 
-## 示例
+## Examples
 
-### 停止 Dapr 应用程序
+### Stop Dapr application
 ```bash
 dapr stop --app-id <ID>
 ```
