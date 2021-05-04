@@ -55,7 +55,14 @@ public void ConfigureServices(IServiceCollection services)
 }
 
      
-     
+    // In Startup.cs
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+
+    // Register additional types with dependency injection.
+    services.AddSingleton<BankService>();
+}
 ```
 
 每个actor实例都有自己的依赖注入范围。 每个 actor 在执行完一个操作后，都会在内存中保留一段时间，在这段时间内，与 actor 相关的依赖注入作用域也被认为是活的。 当演员被停用时，该范围将被释放。
@@ -109,6 +116,7 @@ public Task<MyData> GetDataAsync()
 internal class MyActor : Actor, IMyActor
 {
     // ...
+}
 }
 }
 ```
@@ -179,7 +187,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Actors 和 路由
 
-ASP.NET Core 托管支持对 actors 使用[终结点路由](https://docs.microsoft.com/en-us/aspnet/core/fundamenta ls/routing) 系统。 .NET SDK 不提供支持托管 Actors 的早期 ASP.NET Core版本的遗留路由系统。
+ASP.NET Core 托管支持对 actors 使用\[终结点路由\](https://docs.microsoft.com/en-us/aspnet/core/fundamenta ls/routing) 系统。 .NET SDK 不提供支持托管 Actors 的早期 ASP.NET Core版本的遗留路由系统。
 
 由于 actors 使用终结点路由，Actors HTTP处理程序是中间件管道的一部分。 下面是一个 `Configure` 方法与 actors一起设置中间件管道的最小示例。
 
