@@ -7,20 +7,20 @@ description: Unit Testing
 no_list: true
 ---
 
-单元和集成测试是PHP SDK的一等公民。 使用 DI 容器、 mocks、 stubs、 和提供的 `\Dapr\Mocks\TestClient` 允许您进行非常精良的测试。
+Unit and integration tests are first-class citizens with the PHP SDK. Using the DI container, mocks, stubs, and the provided `\Dapr\Mocks\TestClient` allows you to have very fine-grained tests.
 
-## 测试Actors
+## Testing Actors
 
-对于actor，在测试actor时，我们有两件事要关注：
+With actors, there are two things we're interested in while the actor is under test:
 
-1. 根据初始状态返回的结果
-2. 基于初始状态的结果状态
+1. The returned result based on an initial state
+2. The resulting state based on the initial state
 
 {{< tabs "integration test with TestClient" "unit test" >}}
 
 {{% codetab %}}
 
-这是一个测试非常简单的actor的示例，该actor更新其状态并返回特定值：
+Here's an example test a very simple actor that updates its state and returns a specific value:
 
 ```php
 <?php
@@ -165,9 +165,9 @@ class TheTest extends \PHPUnit\Framework\TestCase
 
 {{< /tabs >}}
 
-## 测试Transactions
+## Testing Transactions
 
-When building on transactions, you'll likely want to test how a failed transaction is handled. In order to do that, you need to inject failures and ensure the transaction matches what you expect. In order to do that, you need to inject failures and ensure the transaction matches what you expect.
+When building on transactions, you'll likely want to test how a failed transaction is handled. In order to do that, you need to inject failures and ensure the transaction matches what you expect.
 
 {{< tabs "integration test with TestClient" "unit test" >}}
 
