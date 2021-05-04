@@ -1,11 +1,28 @@
 ---
 type: docs
-title: "配置"
-linkTitle: "配置"
+title: "Configuration"
+linkTitle: "Configuration"
 weight: 400
-description: "变更 Dapr sidecars 或全局 Dapr 系统服务的行为"
+description: "Change the behavior of Dapr sidecars or globally on Dapr system services"
 ---
 
-您可以在 Dapr 控制面板中更改 Dapr 配置，这些设置能够改变单个 Dapr 应用程序 sidecars 或全局系统服务。 这是一个为每个 Dapr 应用程序 sidecar 设置跟踪配置的示例。 Dapr 控制平面设置的一个示例是相互 TLS，它是哨兵（Sentry）系统服务上的全局设置。
+Dapr configurations are settings that enable you to change both the behavior of individual Dapr applications, or the global behavior of the system services in the Dapr control plane.
 
-阅读 [此页面]({{X1X}}) 查看所有配置选项的列表。
+Configurations are defined and deployed as a YAML file. An application configuration example is like this:
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Configuration
+metadata:
+  name: daprConfig
+  namespace: default
+spec:
+  tracing:
+    samplingRate: "1"
+    zipkin:
+      endpointAddress: "http://localhost:9411/api/v2/spans"
+```
+
+This configuration configures tracing for telemetry recording. It can be loaded in self-hosted mode by editing the default configuration file called `config.yaml` file in your `.dapr` directory, or by applying it to your Kubernetes cluster with kubectl/helm.
+
+Read [this page]({{X6X}}) for a list of all configuration options.
