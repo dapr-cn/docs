@@ -1,17 +1,27 @@
 ---
 type: docs
-title: "自我托管模式下的 Dapr 概述"
-linkTitle: "概述"
+title: "Overview of Dapr in self-hosted mode"
+linkTitle: "Overview"
 weight: 10000
-description: "如何在本地机器上运行 Dapr 的概述"
+description: "Overview of how to get Dapr running on a Windows/Linux/MacOS machine"
 ---
 
-Dapr 可以配置为在开发人员本地计算机上以 自托管模式 运行。 每个运行的服务都有一个 Dapr 运行时进程 (或 sidecar) ，配置为使用状态存储， pub/sub，绑定组件和其他构建块。
+## Overview
 
-在自托管模式下，Redis 在本地容器中运行，并被配置为 状态存储 和 发布/订阅 的默认组件。 还配置了一个 Zipkin 容器用于诊断和跟踪。  运行 `dapr init`, 见 `$HOME/.dapr/components` directory (Mac/Linux) 或 `%USERPROFILE%\.dapr\components` on Windows。
+Dapr can be configured to run in self-hosted mode on your local developer machine or on production VMs. Each running service has a Dapr runtime process (or sidecar) which is configured to use state stores, pub/sub, binding components and the other building blocks.
 
-`dapr-placement` 服务负责管理 actor 分布方案和关键范围设置。 此服务仅在您使用 Dapr actors 时才需要。 有关 actor `放置` 服务的更多信息，请阅读 [actor 概述]({{< ref "actors-overview.md" >}})。
+## Initialization
 
-<img src="/images/overview_standalone.png" width=800>
+Dapr can be initialized [with Docker]({{< ref self-hosted-with-docker.md >}}) (default) or in [slim-init mode]({{< ref self-hosted-no-docker.md >}}). The default Docker setup provides out of the box functionality with the following containers and configuration:
+- A Redis container configured to serve as the default component for both state management and publish/subscribe.
+- A Zipkin container for diagnostics and tracing.
+- A default Dapr configuration and components installed in `$HOME/.dapr/` (Mac/Linux) or `%USERPROFILE%\.dapr\` (Windows).
 
-您可以使用 [Dapr CLI](https://github.com/dapr/cli#launch-dapr-and-your-app) 在本地机器上运行启用了 Dapr 的应用程序。
+The `dapr-placement` service is responsible for managing the actor distribution scheme and key range settings. This service is not launched as a container and is only required if you are using Dapr actors. For more information on the actor `Placement` service read [actor overview]({{< ref "actors-overview.md" >}}).
+
+<img src="/images/overview-standalone-docker.png" width=1000 alt="Diagram of Dapr in self-hosted Docker mode" />
+
+## Launching applications with Dapr
+
+You can use the [`dapr run` CLI command]({{< ref dapr-run.md >}}) to a Dapr sidecar process along with your application.
+
