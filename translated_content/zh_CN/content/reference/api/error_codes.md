@@ -6,11 +6,12 @@ description: "Dapr API 错误代码的详细参考"
 weight: 1000
 ---
 
-For http calls made to Dapr runtime, when an error is encountered, an error json is returned in http response body. Json 包含错误代码和描述性错误消息，例如
+For http calls made to Dapr runtime, when an error is encountered, an error json is returned in http response body. Json 包含错误代码和描述性错误消息，例如 Json 包含错误代码和描述性错误消息，例如
 ```
 {
     "errorCode": "ERR_STATE_GET",
     "message": "Requested state key does not exist in state store."
+}
 }
 }
 }
