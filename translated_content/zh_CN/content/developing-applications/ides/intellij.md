@@ -54,7 +54,7 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 {{< /tabs >}}
 
-> 2019.3或更早版本的配置文件位置不同， 更多详情请参见[这里](https://www.jetbrains.com/help/idea/2019.3/tuning-the-ide.html#config-directory)。
+> 2019.3或更早版本的配置文件位置不同， 2019.3或更早版本的配置文件位置不同， 更多详情请参见[这里](https://www.jetbrains.com/help/idea/2019.3/tuning-the-ide.html#config-directory)。
 
 如有需要，请更改路径中的IntelliJ版本。
 
@@ -64,9 +64,9 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 ```xml
 <toolSet name="External Tools">
+  ...<!-- 1. <toolSet name="External Tools">
   ...
-  <!-- 1. Each tool has its own app-id, so create one per application to be debugged -->
-  <tool name="dapr for DemoService in examples" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
+  <!-- 1. Each tool has its own app-id, so create one per application to be debugged --><tool name="dapr for DemoService in examples" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
     <exec>
       <!-- 2. For Linux or MacOS use: /usr/local/bin/dapr -->
       <option name="COMMAND" value="C:\dapr\dapr.exe" />
@@ -77,6 +77,11 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
     </exec>
   </tool>
   ...
+</toolSet> For Linux or MacOS use: /usr/local/bin/dapr -->
+      <option name="COMMAND" value="C:\dapr\dapr.exe" /><!-- 3. Choose app, http and grpc ports that do not conflict with other daprd command entries (placement address should not change). --><option name="PARAMETERS" value="run -app-id demoservice -app-port 3000 -dapr-http-port 3005 -dapr-grpc-port 52000" /><!-- 4. Use the folder where the `components` folder is located --><option name="WORKING_DIRECTORY" value="C:/Code/dapr/java-sdk/examples" />
+    </exec>
+  </tool>
+  ...
 </toolSet>
 ```
 
@@ -84,27 +89,11 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 ```xml
 <toolSet name="External Tools">
-  ...
-  <!-- 1. Reusable entry for apps with app port. -->
-  <tool name="dapr with app-port" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
-    <exec>
-      <!-- 2. For Linux or MacOS use: /usr/local/bin/dapr -->
-      <option name="COMMAND" value="c:\dapr\dapr.exe" />
-      <!-- 3. Prompts user 4 times (in order): app id, app port, Dapr's http port, Dapr's grpc port. -->
-      <option name="PARAMETERS" value="run --app-id $Prompt$ --app-port $Prompt$ --dapr-http-port $Prompt$ --dapr-grpc-port $Prompt$" />
-      <!-- 4. Use the folder where the `components` folder is located -->
-      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
+  ...<!-- 1. Reusable entry for apps with app port. --><tool name="dapr with app-port" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
+    <exec><!-- 2. For Linux or MacOS use: /usr/local/bin/dapr --><option name="COMMAND" value="c:\dapr\dapr.exe" /><!-- 3. Prompts user 4 times (in order): app id, app port, Dapr's http port, Dapr's grpc port. --><option name="PARAMETERS" value="run --app-id $Prompt$ --app-port $Prompt$ --dapr-http-port $Prompt$ --dapr-grpc-port $Prompt$" /><!-- 4. Use the folder where the `components` folder is located --><option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
     </exec>
-  </tool>
-  <!-- 1. Reusable entry for apps without app port. -->
-  <tool name="dapr without app-port" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
-    <exec>
-      <!-- 2. For Linux or MacOS use: /usr/local/bin/dapr -->
-      <option name="COMMAND" value="c:\dapr\dapr.exe" />
-      <!-- 3. Prompts user 3 times (in order): app id, Dapr's http port, Dapr's grpc port. -->
-      <option name="PARAMETERS" value="run --app-id $Prompt$ --dapr-http-port $Prompt$ --dapr-grpc-port $Prompt$" />
-      <!-- 4. Use the folder where the `components` folder is located -->
-      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
+  </tool><!-- 1. Reusable entry for apps without app port. --><tool name="dapr without app-port" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
+    <exec><!-- 2. For Linux or MacOS use: /usr/local/bin/dapr --><option name="COMMAND" value="c:\dapr\dapr.exe" /><!-- 3. Prompts user 3 times (in order): app id, Dapr's http port, Dapr's grpc port. --><option name="PARAMETERS" value="run --app-id $Prompt$ --dapr-http-port $Prompt$ --dapr-grpc-port $Prompt$" /><!-- 4. Use the folder where the `components` folder is located --><option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
     </exec>
   </tool>
   ...
@@ -117,7 +106,7 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 ![编辑运行的配置菜单](/images/intellij_debug_menu.png)
 
-现在，添加程序参数和环境变量: 这些端口需要与上面 "External Tool "条目中定义的端口相匹配。
+现在，添加程序参数和环境变量: 现在，添加程序参数和环境变量: 这些端口需要与上面 "External Tool "条目中定义的端口相匹配。
 
 * 本例的命令行参数：`-p 3000`
 * 本例的环境变量：`DAPR_HTTP_PORT=3005;DAPR_GRPC_PORT=52000`
