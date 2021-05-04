@@ -26,7 +26,7 @@ Azure Service Bus 支持 [实体级别的 TTL]((https://docs.microsoft.com/en-us
 
 ## 非 Dapr 订阅者
 
-如果订阅者不使用 Dapr 消费消息，则不会自动丢弃过期消息，因为过期时间是通过 Dapr 运行时在 Dapr sidecar 收到消息时处理的。 虽然，订阅者依然可以通过在CloudEvent中的 `expiration` 属性上添加代码来删掉过期消息。遵循 [RFC3339](https://tools.ietf.org/html/rfc3339) 格式.
+如果订阅者不使用 Dapr 消费消息，则不会自动丢弃过期消息，因为过期时间是通过 Dapr 运行时在 Dapr sidecar 收到消息时处理的。 虽然，订阅者依然可以通过在CloudEvent中的 `expiration` 属性上添加代码来删掉过期消息。 遵循 [RFC3339](https://tools.ietf.org/html/rfc3339) 格式.
 
 当非 Dapr 订阅者使用 Azure Service Bus 等组件时，也就是在本机处理消息 TTL，就收不到过期的消息。 在这方面，不需要额外的逻辑。
 
