@@ -21,7 +21,7 @@ $ gcloud services enable container.googleapis.com && \
 For more options refer to the [Google Cloud SDK docs](https://cloud.google.com/sdk/gcloud/reference/container/clusters/create), or instead create a cluster through the [Cloud Console](https://console.cloud.google.com/kubernetes) for a more interactive experience.
 
 {{% alert title="For private GKE clusters" color="warning" %}}
-Sidecar injection will not work for private clusters without extra steps. An automatically created firewall rule for master access does not open port 4000. This is needed for Dapr sidecar injection.
+Sidecar injection will not work for private clusters without extra steps. An automatically created firewall rule for master access does not open port 4000. This is needed for Dapr sidecar injection. An automatically created firewall rule for master access does not open port 4000. This is needed for Dapr sidecar injection.
 
 To review the relevant firewall rule:
 ```bash
