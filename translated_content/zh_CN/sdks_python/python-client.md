@@ -55,10 +55,16 @@ with DaprClient() as d:
     d.delete_state(store_name="statestore", key="key1")
 ```
 
-- 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/state_store) for code samples and instructions to try out state management
+- 有关状态操作的完整列表，请访问
+如何：获取 & 保存 状态。</li> 
+  
+  - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/state_store) for code samples and instructions to try out state management</ul> 
+
+
 
 ### 发布消息
+
+
 
 ```python
 from dapr.clients import DaprClient
@@ -67,10 +73,15 @@ with DaprClient() as d:
     resp = d.publish_event(pubsub_name='pubsub', topic='TOPIC_A', data='{"message":"Hello World"}')
 ```
 
+
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/pubsub-simple) for code samples and instructions to try out pub/sub
 
+
+
 ### 与输出绑定交互
+
+
 
 ```python
 from dapr.clients import DaprClient
@@ -79,10 +90,15 @@ with DaprClient() as d:
     resp = d.invoke_binding(name='kafkaBinding', operation='create', data='{"message":"Hello World"}')
 ```
 
+
 - 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/invoke-binding) for code samples and instructions to try out output bindings
 
+
+
 ### 检索密钥
+
+
 
 ```python
 from dapr.clients import DaprClient
@@ -91,8 +107,12 @@ with DaprClient() as d:
     resp = d.get_secret(store_name='localsecretstore', key='secretKey')
 ```
 
+
 - 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/secret_store) for code samples and instructions to try out retrieving secrets
 
+
+
 ## 相关链接
+
 - [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples)
