@@ -10,7 +10,7 @@ description: "使用键值对来持久化状态"
 
 状态管理是任何应用程序最常见的需求之一：无论是新是旧，是单体还是微服务。 与不同的数据库库打交道，进行测试，处理重试和故障是很费时费力的。
 
-Dapr提供的状态管理功能包括一致性和并发选项。 在本指南中，我们将从基础知识开始。使用键/值状态API来允许应用程序保存，获取和删除状态。
+Dapr提供的状态管理功能包括一致性和并发选项。 在本指南中，我们将从基础知识开始。 使用键/值状态API来允许应用程序保存，获取和删除状态。
 
 ## 前提
 
@@ -188,6 +188,8 @@ dapr --app-id myapp run -- php state-example.php
 ```md
 ✅  You're up and running!  
 
+✅  You're up and running!  
+
 == APP == [2021-02-12T16:30:11.078777+01:00] APP.ALERT: State has been stored [] []
 
 == APP == [2021-02-12T16:30:11.082620+01:00] APP.ALERT: Got value: myFirstValue {"data":"myFirstValue"} []
@@ -249,11 +251,22 @@ dapr --app-id myapp run python pythonState.py
 你应该会看到一个类似于下面的输出:
 
 ```md
-Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. gRPC Port: 59458
+Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. gRPC Port: 59458
 
 == DAPR == time="2021-01-06T22:55:36.5570696-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.5690367-08:00" level=info msg="standalone mode configured" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7220140-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T22:55:36.7230148-08:00" level=info msg="API gRPC server is running on port 59458" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T22:55:36.7240207-08:00" level=info msg="dapr initialized.   Init Elapsed 154.984ms" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
+
+Checking if Dapr sidecar is listening on GRPC port 59458
+Dapr sidecar is up and running.
+Updating metadata for app command: python pythonState.py
+You're up and running!  
+
+== APP == State has been stored
+== APP == Got value: b'value1'
+== APP == Got value after delete: b'' name: statestore, type: state.redis" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7230148-08:00" level=info msg="API gRPC server is running on port 59458" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:55:36.7240207-08:00" level=info msg="dapr initialized.   Init Elapsed 154.984ms" app_id=Yakchocolate-Lord scope=dapr.runtime type=log ver=0.11.3
 
@@ -302,6 +315,8 @@ dapr --app-id myapp run -- php state-example.php
 你应该会看到类似下面的输出:
 
 ```md
+✅  You're up and running!  
+
 ✅  You're up and running!  
 
 == APP == [2021-02-12T16:38:00.839201+01:00] APP.ALERT: State has been stored [] []
@@ -389,6 +404,16 @@ Updating metadata for app command: python pythonState.py
 You're up and running!  
 
 == APP == States have been stored
+== APP == Got items: [b'value1', b'value2'] name: statestore, type: state.redis" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T21:54:56.8854273-08:00" level=info msg="API gRPC server is running on port 60614" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T21:54:56.8854273-08:00" level=info msg="dapr initialized.   Init Elapsed 145.234ms" app_id=Musesequoia-Sprite scope=dapr.runtime type=log ver=0.11.3
+
+Checking if Dapr sidecar is listening on GRPC port 60614
+Dapr sidecar is up and running.
+Updating metadata for app command: python pythonState.py
+You're up and running!  
+
+== APP == States have been stored
 == APP == Got items: [b'value1', b'value2']
 ```
 
@@ -431,6 +456,8 @@ dapr --app-id myapp run -- php state-example.php
 并看到以下输出:
 
 ```md
+✅  You're up and running!  
+
 ✅  You're up and running!  
 
 == APP == [2021-02-12T16:55:02.913801+01:00] APP.ALERT: States have been stored [] []
@@ -515,10 +542,20 @@ dapr run python pythonState.py
 你应该会看到一个类似于下面的输出:
 
 ```md
-Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
+Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
 == DAPR == time="2021-01-06T22:18:14.1246721-08:00" level=info msg="starting Dapr Runtime -- version 0.11.3 -- commit a1a8e11" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.1346254-08:00" level=info msg="standalone mode configured" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2747063-08:00" level=info msg="component loaded. name: statestore, type: state.redis" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T22:18:14.2757062-08:00" level=info msg="API gRPC server is running on port 59534" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
+== DAPR == time="2021-01-06T22:18:14.2767059-08:00" level=info msg="dapr initialized.   Init Elapsed 142.0805ms" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
+
+Checking if Dapr sidecar is listening on GRPC port 59534
+Dapr sidecar is up and running.
+Updating metadata for app command: python pythonState.py
+You're up and running!  
+
+== APP == State transactions have been completed
+== APP == Got items: [b'value1', b''] name: statestore, type: state.redis" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2757062-08:00" level=info msg="API gRPC server is running on port 59534" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T22:18:14.2767059-08:00" level=info msg="dapr initialized.   Init Elapsed 142.0805ms" app_id=Singerchecker-Player scope=dapr.runtime type=log ver=0.11.3
 
@@ -574,6 +611,8 @@ dapr --app-id myapp run -- php state-example.php
 
 ```md
 ✅  You're up and running!  
+
+== APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! ✅  You're up and running!  
 
 == APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! [] []
 
