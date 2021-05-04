@@ -411,7 +411,7 @@ namespace MyActorClient
     ```txt
     ...
     ℹ️  Updating metadata for app command: dotnet run
-    ✅  You're up and running! Both Dapr and your app logs will appear here.
+    ✅  You're up and running!  
 
     == APP == info: Microsoft.Hosting.Lifetime[0]
 

@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Visual Studio Code与Dapr 集成"
+title: "Visual Studio Code与 Dapr 集成"
 linkTitle: "Visual Studio Code"
 weight: 1000
 description: "有关如何在 VS Code中开发和运行Dapr应用程序的介绍"
@@ -13,7 +13,7 @@ Dapr提供了一个*预览版* [的Dapr Visual Studio Code扩展](https://market
 <a href="vscode:extension/ms-azuretools.vscode-dapr" class="btn btn-primary" role="button">在 VSCode 中打开</a>
 
 ### 功能概述
-- Scaffold Dapr task, launch, and component assets <br /><img src="/images/vscode-extension-scaffold.png" alt="Dapr VSCode 扩展 scaffold 选项的截图" width="800" />
+- 脚手架Dapr任务、启动和组件资产  <br /><img src="/images/vscode-extension-scaffold.png" alt="Dapr VSCode 扩展 scaffold 选项的截图" width="800" />
 - 查看正在运行的 Dapr 应用程序 <br /><img src="/images/vscode-extension-view.png" alt="Dapr VSCode 扩展视图运行应用程序选项的截图" width="800" />
 - 调用 Dapr 应用的方法  <br /><img src="/images/vscode-extension-invoke.png" alt="Dapr VSCode 扩展调用选项的截图" width="800" />
 - 发布事件到 Dapr 应用程序 <br /><img src="/images/vscode-extension-publish.png" alt="Dapr VSCode 扩展发布选项的截图" width="800" />
@@ -43,7 +43,7 @@ Dapr 为每种语言的 SDK 预先构建了Docker 远程容器。 您可以选�
 #### 示例
 观看有关如何使用应用程序的 Dapr VS 代码远程容器的 [视频](https://www.bilibili.com/video/BV1QK4y1p7fn?p=8&t=120)。 <iframe width="560" height="315" src="https://www.youtube.com/embed/D2dO4aGpHcg?start=120" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-## 疑难解答
+## Troubleshooting
 
 ### 同时调试多个Dapr应用程序
 使用 VS Code extension，您可以通过[Multi-target debugging](https://code.visualstudio.com/docs/editor/debugging#_multitarget-debugging)同时调试多个Dapr应用程序

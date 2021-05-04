@@ -19,8 +19,8 @@ Dapr提供了帮助开发 .NET 应用程序各种包。 你可以使用他们来
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>Server</b></h5>
-      <p class="card-text">使用 Dapr SDK 在 .NET 中编写服务器和服务。 包括对 ASP.NET的支持。</p>
+      <h5 class="card-title"><b>服务器</b></h5>
+      <p class="card-text">使用 Dapr SDK 在 .NET 中编写服务器和服务。 包括对 ASP.NET 的支持。</p>
       <a href="{{< ref dotnet-server >}}" class="stretched-link"></a>
     </div>
   </div>
@@ -52,7 +52,7 @@ Dapr提供了帮助开发 .NET 应用程序各种包。 你可以使用他们来
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>疑难解答</b></h5>
+      <h5 class="card-title"><b>故障排除</b></h5>
       <p class="card-text">关于 Dapr API，CLI，资源绑定及更多内容的详细文档</p>
       <a href="{{< ref reference >}}" class="stretched-link"></a>
     </div>

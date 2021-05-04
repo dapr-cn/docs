@@ -2,12 +2,12 @@
 type: docs
 title: "Cassandra"
 linkTitle: "Cassandra"
-description: Detailed information on the Cassandra state store component
+description: Cassandra 状态存储组件的详细信息
 --- 
 
 ## 配置
 
-To setup Cassandra state store create a component of type `state.cassandra`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+要设置 Cassandra 状态存储，请创建一个类型为 `state.cassandra` 的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -71,43 +71,43 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 详情                                                      | 示例                                         |
-| ----------------- |:--:| ------------------------------------------------------- | ------------------------------------------ |
-| hosts             | 是  | Comma separated value of the hosts                      | `"cassandra.cassandra.svc.cluster.local"`. |
-| port              | N  | Port for communication. Default `"9042"`                | `"9042"`                                   |
-| username          | 是  | The username of database user. No default               | `"user"`                                   |
-| password          | 是  | The password for the user                               | `"password"`                               |
-| consistency       | N  | The consistency values                                  | `"All"`, `"Quorum"`                        |
-| table             | N  | Table name. Defaults to `"items"`                       | `"items"`, `"tab"`                         |
-| keyspace          | N  | The cassandra keyspace to use. Defaults to `"dapr"`     | `"dapr"`                                   |
-| protoVersion      | N  | The proto version for the client. Defaults to `"4"`     | `"3"`, `"4"`                               |
-| replicationFactor | N  | The replication factor for the calls. Defaults to `"1"` | `"3"`                                      |
+| 字段                | 必填 | 详情                                    | 示例                                         |
+| ----------------- |:--:| ------------------------------------- | ------------------------------------------ |
+| hosts             | 是  | 主机的逗号分隔值                              | `"cassandra.cassandra.svc.cluster.local"`. |
+| port              | N  | 通信端口 默认值：`9042`                       | `"9042"`                                   |
+| username          | 是  | 数据库用户名。 无默认值                          | `"user"`                                   |
+| password          | 是  | 用户密码                                  | `"password"`                               |
+| consistency       | N  | 一致性值                                  | `"All"`, `"Quorum"`                        |
+| table             | N  | 表名称 默认值为 `"items"`                    | `"items"`, `"tab"`                         |
+| keyspace          | N  | 要使用的cassandra keyspace。 默认值为 `"dapr"` | `"dapr"`                                   |
+| protoVersion      | N  | 客户端的 proto 版本。 默认值为 `"4"`             | `"3"`, `"4"`                               |
+| replicationFactor | N  | 调用的副本因子。 默认值为 `"1"`                   | `"3"`                                      |
 
-## Setup Cassandra
+## 配置 Cassandra
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-You can run Cassandra locally with the Datastax Docker image:
+您可以使用 DataStax Docker Image 在本地运行Cassandra：
 
 ```
 docker run -e DS_LICENSE=accept --memory 4g --name my-dse -d datastax/dse-server -g -s -k
 ```
 
-You can then interact with the server using `localhost:9042`.
+然后您可以使用 `localhost:9042` 与服务器交互。
 {{% /codetab %}}
 
 {{% codetab %}}
-The easiest way to install Cassandra on Kubernetes is by using the [Helm chart](https://github.com/helm/charts/tree/master/incubator/cassandra):
+在 Kubernetes 上安装 Cassandra 最简单的方法是使用 [Helm chart](https://github.com/helm/charts/tree/master/incubator/cassandra)：
 
 ```
 kubectl create namespace cassandra
 helm install cassandra incubator/cassandra --namespace cassandra
 ```
 
-This installs Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`.
+默认情况下，这会将Cassandra安装到 `cassandra·` 命名空间中。 要与 Cassandra 交互，请通过 `kubectl get svc -n cassandra` 找到 service。
 
-For example, if installing using the example above, the Cassandra DNS would be:
+例如，如果使用上面的例子安装，Cassandra DNS 将是：
 
 `cassandra.cassandra.svc.cluster.local`
 {{% /codetab %}}
