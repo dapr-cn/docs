@@ -120,7 +120,7 @@ PHP 中的每个执行者必须实现 `\Dapr\Actors\Iactor` 并使用 `\Dapr\Act
 ## 激活和停用
 
 当actor激活时，令牌文件将被写入临时目录（默认情况下，该目录位于linux下 `'/tmp/dapr_'+ sha256（concat（Dapr type，Id））&lt;/ code&gt;和Windows上的<code>'％temp％/ dapr_'+ sha256（concat（Dapr type，Id））&lt;/ code&gt;）。
-这种情况持续到actor或host停用。 这允许<code> on_activation `被调用一次 并且只有Dapr激活host上的actor时才执行一次。
+这种情况持续到actor或host停用。 这允许<code> on_activation`被调用一次 并且只有Dapr激活host上的actor时才执行一次。
 
 ## 性能
 
@@ -128,10 +128,57 @@ actor方法的执行效率非常高， `php-fpm` and `nginx`, 或 IIS 在 Window
 
 ## 版本状态
 
-`ActorState`对象中的变量名直接对应于存储库中的键名。 这意味着如果更改一个变量的类型或名称，可能会出现错误。 为了解决这个问题，您可能需要对状态进行版本控制 因此，您需要重写状态的加载和存储方式。 There are many ways to approach this, one such solution might be something like this:
+`ActorState`对象中的变量名直接对应于存储库中的键名。 这意味着如果更改一个变量的类型或名称，可能会出现错误。 为了解决这个问题，您可能需要对状态进行版本控制 为了解决这个问题，您可能需要对状态进行版本控制 因此，您需要重写状态的加载和存储方式。 There are many ways to approach this, one such solution might be something like this:
 
 ```php
 <?php
+
+class VersionedState extends \Dapr\Actors\ActorState {
+    /**
+     * @var int The current version of the state in the store. We give a default value of the current version. 
+     * However, it may be in the store with a different value. 
+     */
+    public int $state_version = self::VERSION;
+
+    /**
+     * @var int The current version of the data
+     */
+    private const VERSION = 3;
+
+    /**
+     * Call when your actor activates.
+     */
+    public function upgrade() {
+        if($this->state_version < self::VERSION) {
+            $value = parent::__get($this->get_versioned_key('key', $this->state_version));
+            // update the value after updating the data structure
+            parent::__set($this->get_versioned_key('key', self::VERSION), $value);
+            $this->state_version = self::VERSION;
+            $this->save_state();
+        }
+    }
+
+    // if you upgrade all keys as needed in the method above, you don't need to walk the previous
+    // keys when loading/saving and you can just get the current version of the key.
+
+    private function get_previous_version(int $version): int {
+        return $this->has_previous_version($version) ? $version - 1 : $version;
+    }
+
+    private function has_previous_version(int $version): bool {
+        return $version >= 0;
+    }
+
+    private function walk_versions(int $version, callable $callback, callable $predicate): mixed {
+        $value = $callback($version);
+        if($predicate($value) || !$this->has_previous_version($version)) {
+            return $value;
+        }
+        return $this->walk_versions($this->get_previous_version($version), $callback, $predicate);
+    }
+
+    private function get_versioned_key(string $key, int $version) {
+        return $this->has_previous_version($version) ? <?php
 
 class VersionedState extends \Dapr\Actors\ActorState {
     /**
@@ -213,4 +260,4 @@ class VersionedState extends \Dapr\Actors\ActorState {
 }
 ```
 
-有很多要优化的地方，在生产中使用逐字记录不是一个好方式 很多时候它将取决于您的使用案例，所以在SDK 中没有这种情况。 例如，在这个示例实现过程中，先前的值被保留在升级过程中可能存在错误的地方； 保留以前的值允许再次运行升级，但您可能希望删除以前的值。 
+示例代码有很多要优化的地方，在生产中不建议这样使用 很多时候它将取决于您的使用案例，所以在这个SDK 中没有这种情况。 例如，在这个示例实现过程中，先前的值被保留在升级过程中可能存在错误的地方； 保留以前的值允许再次运行升级，但您可能希望删除以前的值。 
