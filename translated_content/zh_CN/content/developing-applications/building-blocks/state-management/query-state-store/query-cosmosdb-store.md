@@ -3,57 +3,57 @@ type: docs
 title: "Azure Cosmos DB"
 linkTitle: "Azure Cosmos DB"
 weight: 1000
-description: "使用 azure Cosmos DB 作为后端状态存储"
+description: "Use Azure Cosmos DB as a backend state store"
 ---
 
-Dapr 在保存和检索状态时不会转换状态值。 Dapr要求所有的状态存储实现都要遵守特定的密钥格式 (参见[Dapr状态管理规范]({{< ref state_api.md >}}))。 您可以直接与基础存储进行交互以操作状态数据，例如查询状态、创建聚合视图和进行备份。
+Dapr doesn't transform state values while saving and retrieving states. Dapr requires all state store implementations to abide by a certain key format scheme (see [Dapr state management spec]({{< ref state_api.md >}}). You can directly interact with the underlying store to manipulate the state data, such querying states, creating aggregated views and making backups.
 
-> **注意:** Azure Cosmos DB是一个支持多种API的多模数据库。 默认的Dapr Cosmos DB状态存储实现使用 [Azure Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started).
+> **NOTE:** Azure Cosmos DB is a multi-modal database that supports multiple APIs. The default Dapr Cosmos DB state store implementation uses the [Azure Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started).
 
-## 1. 1. 连接到 Azure Cosmos DB
+## 1. Connect to Azure Cosmos DB
 
-连接到您的 Cosmos DB 实例的最简单方法是使用 [Azure Management Portal](https://portal.azure.com)上的数据资源管理器。 或者，你也可以使用[多种SDK和工具](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction)。
+The easiest way to connect to your Cosmos DB instance is to use the Data Explorer on [Azure Management Portal](https://portal.azure.com). Alternatively, you can use [various SDKs and tools](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
 
-> **注意:** 下面的示例使用 Cosmos DB [SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started). 当你为 Dapr 配置 Azure Cosmos DB 时，你需要明确指定要使用的数据库和集合。 当你为 Dapr 配置 Azure Cosmos DB 时，你需要明确指定要使用的数据库和集合。 下面的示例假设你已经连接到了正确的数据库和一个名为 "states"的集合。
+> **NOTE:** The following samples use Cosmos DB [SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-getting-started). When you configure an Azure Cosmos DB for Dapr, you need to specify the exact database and collection to use. The follow samples assume you've already connected to the right database and a collection named "states".
 
-## 2. 2. 通过 App ID 列出键
+## 2. List keys by App ID
 
-执行下面的查询，以获得与应用程序 "myapp "相关的所有状态键：
+To get all state keys associated with application "myapp", use the query:
 
 ```sql
 SELECT * FROM states WHERE CONTAINS(states.id, 'myapp||')
 ```
 
-上面的查询会返回所有id包含 "myapp-"的文档，也就是状态键的前缀。
+The above query returns all documents with id containing "myapp-", which is the prefix of the state keys.
 
-## 3. 3. 获取特定状态数据
+## 3. Get specific state data
 
-执行下面的查询，以通过键 "balance "获取应用程序 "myapp "的状态数据:
+To get the state data by a key "balance" for the application "myapp", use the query:
 
 ```sql
 SELECT * FROM states WHERE states.id = 'myapp||balance'
 ```
 
-然后，读取返回的文档的**value**字段。
+Then, read the **value** field of the returned document.
 
-要获取状态version/ETag ，请使用以下命令:
+To get the state version/ETag, use the command:
 
 ```sql
 SELECT states._etag FROM states WHERE states.id = 'myapp||balance'
 ```
 
-## 4. 4. 获取 actor 状态
+## 4. Read actor state
 
-要获取应用ID为 "myets "，实例ID为"leroy"，actor类型为"cat"的相关联所有actor的状态键，请使用以下命令:
+To get all the state keys associated with an actor with the instance ID "leroy" of actor type "cat" belonging to the application with ID "mypets", use the command:
 
 ```sql
 SELECT * FROM states WHERE CONTAINS(states.id, 'mypets||cat||leroy||')
 ```
 
-要获取特定actor状态（如"food"） ，请使用以下命令:
+And to get a specific actor state such as "food", use the command:
 
 ```sql
 SELECT * FROM states WHERE states.id = 'mypets||cat||leroy||food'
 ```
 
-> **警告:** 您不应该手动更新或删除存储引擎中的状态， 所有的写入和删除操作都应该通过Dapr运行时来完成。 所有的写入和删除操作都应该通过Dapr运行时来完成。
+> **WARNING:** You should not manually update or delete states in the store. All writes and delete operations should be done via the Dapr runtime.
