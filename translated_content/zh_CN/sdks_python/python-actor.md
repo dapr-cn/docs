@@ -17,7 +17,7 @@ The Dapr actor package allows you to interact with Dapr virtual actors from a Py
 
 ## Actor interface
 
-The interface defines the actor contract that is shared between the actor implementation and the clients calling the actor. Because a client may depend on it, it typically makes sense to define it in an assembly that is separate from the actor implementation.
+The interface defines the actor contract that is shared between the actor implementation and the clients calling the actor. Because a client may depend on it, it typically makes sense to define it in an assembly that is separate from the actor implementation. Because a client may depend on it, it typically makes sense to define it in an assembly that is separate from the actor implementation.
 
 ```python
 from dapr.actor import ActorInterface, actormethod
@@ -30,7 +30,7 @@ class DemoActorInterface(ActorInterface):
 
 ## Actor services
 
-An actor service hosts the virtual actor. It is implemented a class that derives from the base type `Actor` and implements the interfaces defined in the actor interface.
+An actor service hosts the virtual actor. An actor service hosts the virtual actor. It is implemented a class that derives from the base type `Actor` and implements the interfaces defined in the actor interface.
 
 Actors can be created using one of the Dapr actor extensions:
    - [FastAPI actor extension]({{< ref python-flask.md >}})
