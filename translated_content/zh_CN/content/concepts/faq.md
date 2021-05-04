@@ -7,7 +7,7 @@ description: "关于 Dapr 的常见问题"
 ---
 
 ## Dapr 与 Istio 、Linkerd 或 OSM 等服务网格相比如何？
-Dapr 不是一个服务网格。 虽然服务网侧重于细粒度网络控制，但 Dapr 专注于帮助开发人员构建分布式应用程序。 Dapr 和服务网都使用 sidecar 模式，并随应用程序一起运行，它们确实具有一些重叠的功能，但也提供独特的优势。 欲了解更多信息，请阅读 [Dapr & 服务网格]({{X13X}}) 概念页面。
+Dapr 不是一个服务网格。 虽然服务网侧重于细粒度网络控制，但 Dapr 专注于帮助开发人员构建分布式应用程序。 Dapr 和服务网都使用 sidecar 模式，并随应用程序一起运行，它们确实具有一些重叠的功能，但也提供独特的优势。 欲了解更多信息，请阅读 [Dapr & 服务网格]({{X13X}}) 概念页面。
 
 ## 性能基准
 Dapr项目的重点是性能，因为其固有的讨论是Dapr作为您的应用程序的侧面。 请参阅 [这里]({{< ref perf-service-invocation.md >}}) 以获取最新的性能数字。
@@ -30,7 +30,7 @@ Dapr 运行时 SDK 具有特定于语言的 actor 框架。 例如， .NET SDK �
 
 ### 如果我想使用特定的编程语言或框架，Dapr是否有任何语言的SDK？
 
-为了使不同语言使用 Dapr 更加自然，它包括 [特定语言的 SDK]({{X29X}}) 用于 Go、Java、JavaScript、.NET、Python、PHP、Rust 和C++。
+为了使不同语言使用 Dapr 更加自然，它包括 [特定语言的 SDK]({{X29X}}) 用于 Go、Java、JavaScript、.NET、Python、PHP、Rust 和C++。
 
 这些 SDK 通过类型化的语言 API 而不是通过调用 API 来使用 Dapr 构建块中的功能，例如，保存状态，发布事件或创建Actor。 这使您能够以自己选择的语言编写无状态和有状态功能和 actors 的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言 actor 和功能支持。
 
