@@ -29,6 +29,14 @@ omsagent-c7c4t                                                    1/1     Runnin
 omsagent-rs-74f488997c-dshpx                                      1/1     Running   1          44h
 omsagent-smtk7                                                    1/1     Running   1          44h
 ...
+$ kubectl get pods -n kube-system
+NAME                                                              READY   STATUS    RESTARTS   AGE
+...
+omsagent-75qjs                                                    1/1     Running   1          44h
+omsagent-c7c4t                                                    1/1     Running   0          44h
+omsagent-rs-74f488997c-dshpx                                      1/1     Running   1          44h
+omsagent-smtk7                                                    1/1     Running   1          44h
+...
 ```
 
 2. 应用config map来启用Prometheus metrics endpoint抓取。
@@ -39,6 +47,7 @@ omsagent-smtk7                                                    1/1     Runnin
 
 ```yaml
 ...
+  ...
   ...
   prometheus-data-collection-settings: |-
     [prometheus_data_collection_settings.cluster]
