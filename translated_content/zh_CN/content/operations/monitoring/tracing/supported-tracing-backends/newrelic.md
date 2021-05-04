@@ -12,7 +12,7 @@ description: "Set-up New Relic for distributed tracing"
 
 ## Configure Dapr tracing
 
-Dapr natively captures metrics and traces that can be send directly to New Relic. The easiest way to export these is by configuring Dapr to send the traces to [New Relic's Trace API](https://docs.newrelic.com/docs/understand-dependencies/distributed-tracing/trace-api/report-zipkin-format-traces-trace-api#existing-zipkin) using the Zipkin trace format.
+Dapr natively captures metrics and traces that can be send directly to New Relic. Dapr natively captures metrics and traces that can be send directly to New Relic. The easiest way to export these is by configuring Dapr to send the traces to [New Relic's Trace API](https://docs.newrelic.com/docs/understand-dependencies/distributed-tracing/trace-api/report-zipkin-format-traces-trace-api#existing-zipkin) using the Zipkin trace format.
 
 In order for the integration to send data to New Relic [Telemetry Data Platform](https://newrelic.com/platform/telemetry-data-platform), you need a [New Relic Insights Insert API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#insights-insert-key).
 
@@ -41,11 +41,11 @@ In order for the integrations to send data to New Relic Telemetry Data Platform,
 
 ### OpenTelemetry instrumentation
 
-Leverage the different language specific OpenTelemetry implementations, for example [New Relic Telemetry SDK and OpenTelemetry support for .NET](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet). In this case, use the [OpenTelemetry Trace Exporter](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet/tree/main/src/NewRelic.OpenTelemetry). [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp-otel/Startup.cs)。
+Leverage the different language specific OpenTelemetry implementations, for example [New Relic Telemetry SDK and OpenTelemetry support for .NET](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet). In this case, use the [OpenTelemetry Trace Exporter](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet/tree/main/src/NewRelic.OpenTelemetry). [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp-otel/Startup.cs)。 In this case, use the [OpenTelemetry Trace Exporter](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet/tree/main/src/NewRelic.OpenTelemetry). [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp-otel/Startup.cs)。
 
 ### New Relic Language agent
 
-Similarly to the OpenTelemetry instrumentation, you can also leverage a New Relic language agent. 一个例子是 </a>.NET Core 的 New Relic 代理工具
+Similarly to the OpenTelemetry instrumentation, you can also leverage a New Relic language agent. 一个例子是 </a>.NET Core 的 New Relic 代理工具 是Docker文件的一部分。 一个例子是 </a>.NET Core 的 New Relic 代理工具
 是Docker文件的一部分。 [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp/Dockerfile)。</p> 
 
 
@@ -54,7 +54,7 @@ Similarly to the OpenTelemetry instrumentation, you can also leverage a New Reli
 
 In case Dapr and your applications run in the context of a Kubernetes environment, you can enable additional metrics and logs.
 
-The easiest way to install the New Relic Kubernetes integration is to use the [automated installer](https://one.newrelic.com/launcher/nr1-core.settings?pane=eyJuZXJkbGV0SWQiOiJrOHMtY2x1c3Rlci1leHBsb3Jlci1uZXJkbGV0Lms4cy1zZXR1cCJ9) to generate a manifest. It bundles not just the integration DaemonSets, but also other New Relic Kubernetes configurations, like [Kubernetes events](https://docs.newrelic.com/docs/integrations/kubernetes-integration/kubernetes-events/install-kubernetes-events-integration), [Prometheus OpenMetrics](https://docs.newrelic.com/docs/integrations/prometheus-integrations/get-started/new-relic-prometheus-openmetrics-integration-kubernetes), and [New Relic log monitoring](https://docs.newrelic.com/docs/logs).
+The easiest way to install the New Relic Kubernetes integration is to use the [automated installer](https://one.newrelic.com/launcher/nr1-core.settings?pane=eyJuZXJkbGV0SWQiOiJrOHMtY2x1c3Rlci1leHBsb3Jlci1uZXJkbGV0Lms4cy1zZXR1cCJ9) to generate a manifest. It bundles not just the integration DaemonSets, but also other New Relic Kubernetes configurations, like [Kubernetes events](https://docs.newrelic.com/docs/integrations/kubernetes-integration/kubernetes-events/install-kubernetes-events-integration), [Prometheus OpenMetrics](https://docs.newrelic.com/docs/integrations/prometheus-integrations/get-started/new-relic-prometheus-openmetrics-integration-kubernetes), and [New Relic log monitoring](https://docs.newrelic.com/docs/logs). It bundles not just the integration DaemonSets, but also other New Relic Kubernetes configurations, like [Kubernetes events](https://docs.newrelic.com/docs/integrations/kubernetes-integration/kubernetes-events/install-kubernetes-events-integration), [Prometheus OpenMetrics](https://docs.newrelic.com/docs/integrations/prometheus-integrations/get-started/new-relic-prometheus-openmetrics-integration-kubernetes), and [New Relic log monitoring](https://docs.newrelic.com/docs/logs).
 
 
 
@@ -120,7 +120,7 @@ And the exact same dashboard templates from Dapr can be imported to visualize Da
 
 ## New Relic Alerts
 
-All the data that is collected from Dapr, Kubernetes or any services that run on top of can be used to set-up alerts and notifications into the preferred channel of your choice. See [Alerts and Applied Intelligence](https://docs.newrelic.com/docs/alerts-applied-intelligence).
+All the data that is collected from Dapr, Kubernetes or any services that run on top of can be used to set-up alerts and notifications into the preferred channel of your choice. See [Alerts and Applied Intelligence](https://docs.newrelic.com/docs/alerts-applied-intelligence). See [Alerts and Applied Intelligence](https://docs.newrelic.com/docs/alerts-applied-intelligence).
 
 
 
