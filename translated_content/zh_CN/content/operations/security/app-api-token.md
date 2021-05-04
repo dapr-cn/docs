@@ -6,7 +6,7 @@ weight: 4000
 description: "Require every incoming API request from Dapr to include an authentication token"
 ---
 
-For some building blocks such as pub/sub, service invocation and input bindings, Dapr communicates with an app over HTTP or gRPC. To enable the application to authenticate requests that are arriving from the Dapr sidecar, you can configure Dapr to send an API token as a header (in HTTP requests) or metadata (in gRPC requests).
+For some building blocks such as pub/sub, service invocation and input bindings, Dapr communicates with an app over HTTP or gRPC. For some building blocks such as pub/sub, service invocation and input bindings, Dapr communicates with an app over HTTP or gRPC. To enable the application to authenticate requests that are arriving from the Dapr sidecar, you can configure Dapr to send an API token as a header (in HTTP requests) or metadata (in gRPC requests).
 
 ## Create a token
 
@@ -24,7 +24,7 @@ The token authentication configuration is slightly different for either Kubernet
 
 ### Self-hosted
 
-In self-hosting scenario, Dapr looks for the presence of `APP_API_TOKEN` environment variable. If that environment variable is set while `daprd` process launches, Dapr includes the token when calling an app:
+In self-hosting scenario, Dapr looks for the presence of `APP_API_TOKEN` environment variable. In self-hosting scenario, Dapr looks for the presence of `APP_API_TOKEN` environment variable. If that environment variable is set while `daprd` process launches, Dapr includes the token when calling an app:
 
 ```shell
 export APP_API_TOKEN=<token>
@@ -34,7 +34,7 @@ To rotate the configured token, simply set the `APP_API_TOKEN` environment varia
 
 ### Kubernetes
 
-In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. Start by creating a new secret: Start by creating a new secret: Start by creating a new secret:
+In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. Start by creating a new secret: Start by creating a new secret: Start by creating a new secret: Start by creating a new secret:
 
 ```shell
 kubectl create secret generic app-api-token --from-literal=token=<token> 
@@ -60,7 +60,7 @@ To rotate the configured token in self-hosted, simply set the `APP_API_TOKEN` en
 
 ### Kubernetes
 
-To rotate the configured token in Kubernates, update the previously created secret with the new token in each namespace. You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest:
+To rotate the configured token in Kubernates, update the previously created secret with the new token in each namespace. You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest: You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest:
 
 ```yaml
 apiVersion: v1
@@ -111,7 +111,7 @@ dapr-api-token[0].
 
 ### Kubernetes
 
-In Kubernetes, it's recommended to mount the secret to your pod as an environment variable. Assuming we created a secret with the name `app-api-token` to hold the token:
+In Kubernetes, it's recommended to mount the secret to your pod as an environment variable. Assuming we created a secret with the name `app-api-token` to hold the token: Assuming we created a secret with the name `app-api-token` to hold the token:
 
 ```
 containers:
