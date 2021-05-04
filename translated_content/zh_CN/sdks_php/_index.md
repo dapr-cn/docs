@@ -7,7 +7,7 @@ description: PHP SDK packages for developing Dapr applications
 no_list: true
 ---
 
-Dapr offers an SDK to help with the development of PHP applications. Using it, you can create PHP clients, servers, and virtual actors with Dapr.
+Dapr offers an SDK to help with the development of PHP applications. Using it, you can create PHP clients, servers, and virtual actors with Dapr. Using it, you can create PHP clients, servers, and virtual actors with Dapr.
 
 ## Setting up
 
@@ -23,7 +23,7 @@ Dapr offers an SDK to help with the development of PHP applications. Using it, y
 
 ## Initialize your project
 
-In a directory where you want to create your service, run `composer init` and answer the questions. Install `dapr/php-sdk` and any other dependencies you may wish to use.
+In a directory where you want to create your service, run `composer init` and answer the questions. Install `dapr/php-sdk` and any other dependencies you may wish to use. Install `dapr/php-sdk` and any other dependencies you may wish to use.
 
 ## Configure your service
 
@@ -92,6 +92,10 @@ $app = App::create(configure: fn(\DI\ContainerBuilder $builder) => $builder->add
 $app->get('/hello/{name}', function(string $name) {
     return ['hello' => $name];
 });
+$app->start(); '/config.php'));
+$app->get('/hello/{name}', function(string $name) {
+    return ['hello' => $name];
+});
 $app->start();
 ```
 
@@ -101,7 +105,7 @@ Initialize dapr with `dapr init` and then start the project with `dapr run -a de
 
 You can now open a web browser and point it to [http://localhost:3000/hello/world](http://localhost:3000/hello/world) replacing `world` with your name, a pet's name, or whatever you want.
 
-Congratulations, you've created your first Dapr service! I'm excited to see what you'll do with it!
+Congratulations, you've created your first Dapr service! I'm excited to see what you'll do with it! I'm excited to see what you'll do with it!
 
 ## More Information
 
