@@ -1,29 +1,29 @@
 ---
 type: docs
-title: "构建块"
-linkTitle: "构建块"
+title: "Building blocks"
+linkTitle: "Building blocks"
 weight: 200
-description: "可通过标准 HTTP 或 gRPC API 访问的模块化最佳实践"
+description: "Modular best practices accessible over standard HTTP or gRPC APIs"
 ---
 
-[构建块]({{< ref building-blocks >}}) 是可以从您的代码中调用的HTTP或gRPC API，并且由一个或多个Dapr组件组成。
+A [building block]({{< ref building-blocks >}}) is an HTTP or gRPC API that can be called from your code and uses one or more Dapr components.
 
-构建块解决了构建弹性微服务应用程序中的常见挑战，并编纂了最佳实践和模式。 Dapr由一组构建块组成，并且具有可扩展性以添加新的构建块。
+Building blocks address common challenges in building resilient, microservices applications and codify best practices and patterns. Dapr consists of a set of building blocks, with extensibility to add new building blocks.
 
-下图显示了构建块如何公开了可被代码调用的公共 API ，并使用组件来实现构建块的能力。
+The diagram below shows how building blocks expose a public API that is called from your code, using components to implement the building blocks' capability.
 
 <img src="/images/concepts-building-blocks.png" width=250>
 
-以下是 Dapr 提供的构建块类型:
+The following are the building blocks provided by Dapr:
 
 <img src="/images/building_blocks.png" width=1000>
 
-| 构建块                     | 终结点                               | 描述                                                                                                     |
-| ----------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [**服务间调用**]({{X1X}})   | `/v1.0/invoke`                    | 服务调用使应用程序能够通过 Http 或 gRPC 消息形式相互通信。 Dapr 提供了一个终结点，它充当反向代理与内置服务发现的组合，同时内置分布式跟踪和错误处理。                    |
-| [**状态管理**]({{X6X}})    | `/v1.0/state`                     | 应用程序状态是应用程序想要保留在单个会话之外的任何内容。 Dapr 提供基于键 / 值的状态 API ，使用可插拔的状态存储进行持久化。                                   |
-| [**发布订阅**]({{X11X}})   | `/v1.0/publish` `/v1.0/subscribe` | 发布/预订是松散耦合的消息传递模式，发送方 (或发布者) 将消息推送到订阅者预订的主题。 Dapr 支持应用程序之间的发布/订阅模式。                                    |
-| [**资源绑定**]({{X18X}})   | `/v1.0/bindings`                  | 绑定提供一个外部云与本地服务或系统的双向连接。 Dapr 允许您通过 Dapr 绑定 API 调用外部服务，也可以通过已连接的服务发送的事件来触发应用程序。                         |
-| [**Actors**]({{X23X}}) | `/v1.0/actors`                    | 参与者是孤立的独立计算单元，具有单线程执行。 Dapr提供了基于Virtual Actor模式的actor实现，该模式提供了单线程编程模型，并且在不使用actor时会对其进行垃圾回收。           |
-| [**可观测性**]({{X28X}})   | `N/A`                             | Dapr 系统组件和运行时记录 metrics，log 和 trace 以调试，操作和监视 Dapr 系统服务，组件和用户应用程序。                                     |
-| [**密钥**]({{X33X}})     | `/v1.0/secrets`                   | Dapr 提供一个密钥构建块 API ，并与 Azure Key Vault 和 Kubernetes 等密钥存储集成，以存储密钥。 服务代码可以调用密钥 API 从 Dapr 支持的密钥存储中检索密钥。 |
+| 构建块                                           | Endpoint                          | Description                                                                                                                                                                                                                                                                                                          |
+| --------------------------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Service-to-service invocation**]({{X1X}}) | `/v1.0/invoke`                    | Service invocation enables applications to communicate with each other through well-known endpoints in the form of http or gRPC messages. Dapr provides an endpoint that acts as a combination of a reverse proxy with built-in service discovery, while leveraging built-in distributed tracing and error handling. |
+| [**State management**]({{X6X}})              | `/v1.0/state`                     | Application state is anything an application wants to preserve beyond a single session. Dapr provides a key/value-based state API with pluggable state stores for persistence.                                                                                                                                       |
+| [**Publish and subscribe**]({{X11X}})        | `/v1.0/publish` `/v1.0/subscribe` | Pub/Sub is a loosely coupled messaging pattern where senders (or publishers) publishes messages to a topic, to which subscribers subscribe. Dapr supports the pub/sub pattern between applications.                                                                                                                  |
+| [**Resource bindings**]({{X18X}})            | `/v1.0/bindings`                  | A binding provides a bi-directional connection to an external cloud/on-premise service or system. Dapr allows you to invoke the external service through the  Dapr binding API, and it allows your application to be triggered by events sent by the connected service.                                              |
+| [**Actors**]({{X23X}})                       | `/v1.0/actors`                    | An actor is an isolated, independent unit of compute and state with single-threaded execution. Dapr provides an actor implementation based on the Virtual Actor pattern which provides a single-threaded programming model and where actors are garbage collected when not in use.                                   |
+| [**可观测性**]({{X28X}})                         | `N/A`                             | Dapr system components and runtime emit metrics, logs, and traces to debug, operate and monitor Dapr system services, components and user applications.                                                                                                                                                              |
+| [**Secrets**]({{X33X}})                      | `/v1.0/secrets`                   | Dapr offers a secrets building block API and integrates with secret stores such as Azure Key Vault and Kubernetes to store the secrets. Service code can call the secrets API to retrieve secrets out of the Dapr supported secret stores.                                                                           |
