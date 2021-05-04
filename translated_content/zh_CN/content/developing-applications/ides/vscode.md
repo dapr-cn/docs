@@ -123,7 +123,7 @@ Dapr runtime (daprd) 不会自动生成用于 Redis 的组件的 yaml 文件。 
 * -dapr-http-port -- Dapr api的 http 端口
 * -dapr-grpc-port -- Dapr api的 grpc 端口
 * -placement-host-address -- 放置服务的位置(这应该在docker中运行，因为它是当你安装了dapr 并运行`dapr init`的时候创建) > 注意: 您将需要确保您为您创建的每个dapr-grpc (-dapr-http-port 和 -dapr-grpc-port) 指定不同的 http/grpc 端口， 否则，当您尝试启动第二个配置时将端口冲突。
-> 注意: 您将需要确保您为您创建的每个dapr-grpc (-dapr-http-port 和 -dapr-grpc-port) 指定不同的 http/grpc 端口， 否则，当您尝试启动第二个配置时将端口冲突。
+> > 注意: 您将需要确保您为您创建的每个dapr-grpc (-dapr-http-port 和 -dapr-grpc-port) 指定不同的 http/grpc 端口， 否则，当您尝试启动第二个配置时将端口冲突。
 
 ```json
 {
