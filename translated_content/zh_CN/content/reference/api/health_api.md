@@ -3,7 +3,7 @@ type: docs
 title: "Health API reference"
 linkTitle: "Health API"
 description: "Detailed documentation on the health API"
-weight: 100
+weight: 700
 ---
 
 Dapr provides health checking probes that can be used as readiness or liveness of Dapr.
@@ -12,26 +12,26 @@ Dapr provides health checking probes that can be used as readiness or liveness o
 
 Gets the health state for Dapr.
 
-### HTTP 请求
+### HTTP Request
 
 ```http
 GET http://localhost:<daprPort>/v1.0/healthz
 ```
 
-### HTTP 响应码
+### HTTP Response Codes
 
-| 代码  | 描述                  |
-| --- | ------------------- |
-| 204 | dapr is healthy     |
-| 500 | dapr is not healthy |
+| Code | Description         |
+| ---- | ------------------- |
+| 204  | dapr is healthy     |
+| 500  | dapr is not healthy |
 
-### URL 参数
+### URL Parameters
 
-| 参数       | 描述       |
-| -------- | -------- |
-| daprPort | Dapr 端口。 |
+| Parameter | Description    |
+| --------- | -------------- |
+| daprPort  | The Dapr port. |
 
-### 示例
+### Examples
 
 ```shell
 curl http://localhost:3500/v1.0/healthz
