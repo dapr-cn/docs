@@ -30,7 +30,7 @@ The `grafana-actor-dashboard.json` template shows Dapr Sidecar status, actor inv
 
 {{< /tabs >}}
 
-## 前提
+## Pre-requisites
 
 - [Setup Prometheus]({{X16X}})
 
@@ -65,7 +65,7 @@ The `grafana-actor-dashboard.json` template shows Dapr Sidecar status, actor inv
    kubectl get secret --namespace dapr-monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
    ```
 
-   You will get a password similar to `cj3m0OfBNx8SLzUlTx91dEECgzRlYJb60D2evof1%`. You will get a password similar to `cj3m0OfBNx8SLzUlTx91dEECgzRlYJb60D2evof1%`. Remove the `%` character from the password to get `cj3m0OfBNx8SLzUlTx91dEECgzRlYJb60D2evof1` as the admin password.
+   You will get a password similar to `cj3m0OfBNx8SLzUlTx91dEECgzRlYJb60D2evof1%`. Remove the `%` character from the password to get `cj3m0OfBNx8SLzUlTx91dEECgzRlYJb60D2evof1` as the admin password.
 
 1. Validation Grafana is running in your cluster:
 
@@ -135,8 +135,7 @@ First you need to connect Prometheus as a data source to Grafana.
    ```
 
 
-    In this guide the server name is <code>dapr-prom-prometheus-server and the namespace is dapr-monitoring, so the HTTP URL will be http://dapr-prom-prometheus-server.dapr-monitoring.
-    </code>
+    In this guide the server name is `dapr-prom-prometheus-server` and the namespace is `dapr-monitoring`, so the HTTP URL will be `http://dapr-prom-prometheus-server.dapr-monitoring`.
 
 1. Fill in the following settings:
 
@@ -166,7 +165,7 @@ First you need to connect Prometheus as a data source to Grafana.
    <img src="/images/grafana-tooltip.png" alt="Screenshot of the tooltip for graphs" width=700>
    {{% /alert %}}
 
-## 参考资料
+## References
 
 * [Dapr Observability]({{X25X}})
 * [Prometheus Installation](https://github.com/prometheus-community/helm-charts)
@@ -174,4 +173,4 @@ First you need to connect Prometheus as a data source to Grafana.
 * [Prometheus Query Language](https://prometheus.io/docs/prometheus/latest/querying/basics/)
 * [Supported Dapr metrics](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md)
 
-## 示例  <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=2577" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## Example <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=2577" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
