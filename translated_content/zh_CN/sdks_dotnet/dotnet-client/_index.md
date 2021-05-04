@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "Dapr 客户端 .NET SDK入门"
-linkTitle: "客户端"
+title: "Getting started with the Dapr client .NET SDK"
+linkTitle: "Client"
 weight: 20000
-description: 如何启动和运行Dapr .NET SDK
+description: How to get up and running with the Dapr .NET SDK
 no_list: true
 ---
 
-Dapr 客户端包允许您从.NET应用程序中与其他 Dapr 应用程序进行交互。
+The Dapr client package allows you to interact with other Dapr applications from a .NET application.
 
-## 前期准备
+## Prerequisites
 
-- 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化的 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
-- [.NET Core 3.1 或 .NET 5+](https://dotnet.microsoft.com/download) 已安装
+- [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
+- Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
+- [.NET Core 3.1 or .NET 5+](https://dotnet.microsoft.com/download) installed
 
-## 构建块
+## Building blocks
 
-.NET SDK允许您与所有的[Dapr构建块]({{< ref building-blocks >}})接口。
+The .NET SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
 
-### 调用服务
+### Invoke a service
 
-您可以使用 `DaprClient` 或 `System.Net.Http.HttpClient` 调用您的服务。
+You can either use the `DaprClient` or `System.Net.Http.HttpClient` to invoke your services.
 
 {{< tabs SDK HTTP>}}
 
@@ -49,9 +49,9 @@ Console.WriteLine("Returned: id:{0} | Balance:{1}", account.Id, account.Balance)
 
 {{< /tabs >}}
 
-- 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
+- For a full guide on service invocation visit [How-To: Invoke a service]({{< ref howto-invoke-discover-services.md >}}).
 
-### 保存 & 获取 应用程序状态
+### Save & get application state
 
 ```csharp
 var client = new DaprClientBuilder().Build();
@@ -67,9 +67,9 @@ await client.DeleteStateAsync(storeName, stateKeyName, cancellationToken: cancel
 Console.WriteLine("Deleted State!");
 ```
 
-- 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
+- For a full list of state operations visit [How-To: Get & save state]({{< ref howto-get-save-state.md >}}).
 
-### 发布消息
+### Publish messages
 
 ```csharp
 var client = new DaprClientBuilder().Build();
@@ -79,10 +79,10 @@ await client.PublishEventAsync(pubsubName, "deposit", eventData, cancellationTok
 Console.WriteLine("Published deposit event!");
 ```
 
-- 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- 请访问[.NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe)，获取代码示例和说明，以试用 发布/订阅。
+- For a full list of state operations visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
+- Visit [.NET SDK examples](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe) for code samples and instructions to try out pub/sub
 
-### 与输出绑定交互
+### Interact with output bindings
 
 ```csharp
 using var client = new DaprClientBuilder().Build();
@@ -100,9 +100,9 @@ var email = new
 await client.InvokeBindingAsync("send-email", "create", email);
 ```
 
-- 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
+- For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
 
-### 检索密钥
+### Retrieve secrets
 
 {{< tabs Multi-value-secret Single-value-secret >}}
 
@@ -138,7 +138,7 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 
 {{< /tabs >}}
 
-- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
+- For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
 
-## 相关链接
-- [.NET SDK 示例](https://github.com/dapr/dotnet-sdk/tree/master/examples)
+## Related links
+- [.NET SDK examples](https://github.com/dapr/dotnet-sdk/tree/master/examples)
