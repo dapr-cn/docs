@@ -1,25 +1,25 @@
 ---
 type: docs
 title: "Configure and view Dapr Logs"
-linkTitle: "日志"
+linkTitle: "Logs"
 weight: 2000
 description: "Understand how logging works in Dapr and how to configure and view logs"
 ---
 
 This section will assist you in understanding how logging works in Dapr, configuring and viewing logs.
 
-## 概述
+## Overview
 
-Logs have different, configurable verbosity levels. Logs have different, configurable verbosity levels. The levels outlined below are the same for both system components and the Dapr sidecar process/container:
+Logs have different, configurable verbosity levels. The levels outlined below are the same for both system components and the Dapr sidecar process/container:
 
 1. error
 2. warning
 3. info
 4. debug
 
-error produces the minimum amount of output, where debug produces the maximum amount. error produces the minimum amount of output, where debug produces the maximum amount. The default level is info, which provides a balanced amount of information for operating Dapr in normal conditions.
+error produces the minimum amount of output, where debug produces the maximum amount. The default level is info, which provides a balanced amount of information for operating Dapr in normal conditions.
 
-To set the output level, you can use the `--log-level` command-line option. 例如: 例如:
+To set the output level, you can use the `--log-level` command-line option. For example:
 
 ```bash
 ./daprd --log-level error
@@ -36,7 +36,7 @@ To set the log level when running your app with the Dapr CLI, pass the `log-leve
 dapr run --log-level warning node myapp.js
 ```
 
-As outlined above, every Dapr binary takes a `--log-level` argument. For example, to launch the placement service with a log level of warning: For example, to launch the placement service with a log level of warning:
+As outlined above, every Dapr binary takes a `--log-level` argument. For example, to launch the placement service with a log level of warning:
 
 ```bash
 ./placement --log-level warning
@@ -44,12 +44,12 @@ As outlined above, every Dapr binary takes a `--log-level` argument. For example
 
 ### Viewing Logs on Standalone Mode
 
-When running Dapr with the Dapr CLI, both your app's log output and the runtime's output will be redirected to the same session, for easy debugging. For example, this is the output when running Dapr: For example, this is the output when running Dapr:
+When running Dapr with the Dapr CLI, both your app's log output and the runtime's output will be redirected to the same session, for easy debugging. For example, this is the output when running Dapr:
 
 ```bash
 dapr run node myapp.js
 ℹ️  Starting Dapr with id Trackgreat-Lancer on port 56730
-✅  You are up and running!  
+✅  You are up and running! Both Dapr and your app logs will appear here.
 
 == APP == App listening on port 3000!
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="starting Dapr Runtime -- version 0.3.0-alpha -- commit b6f2810-dirty"
@@ -65,7 +65,7 @@ dapr run node myapp.js
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actors: starting connection attempt to placement service at localhost:50005"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="http server is running on port 56730"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="gRPC server is running on port 56731"
-== DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="dapr initialized.   Init Elapsed 8.772922000000001ms"
+== DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 8.772922000000001ms"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actors: established connection to placement service at localhost:50005"
 ```
 
@@ -99,11 +99,11 @@ helm install dapr dapr/dapr --namespace dapr-system --set dapr_operator.logLevel
 
 ### Viewing Logs on Kubernetes
 
-Dapr logs are written to stdout and stderr. Dapr logs are written to stdout and stderr. This section will guide you on how to view logs for Dapr system components as well as the Dapr sidecar.
+Dapr logs are written to stdout and stderr. This section will guide you on how to view logs for Dapr system components as well as the Dapr sidecar.
 
 #### Sidecar Logs
 
-When deployed in Kubernetes, the Dapr sidecar injector will inject an Dapr container named `daprd` into your annotated pod. In order to view logs for the sidecar, simply find the pod in question by running `kubectl get pods`: In order to view logs for the sidecar, simply find the pod in question by running `kubectl get pods`:
+When deployed in Kubernetes, the Dapr sidecar injector will inject an Dapr container named `daprd` into your annotated pod. In order to view logs for the sidecar, simply find the pod in question by running `kubectl get pods`:
 
 ```bash
 NAME                                        READY     STATUS    RESTARTS   AGE
@@ -125,14 +125,7 @@ time="2019-09-04T02:52:27Z" level=info msg="actor runtime started. actor idle ti
 time="2019-09-04T02:52:27Z" level=info msg="actors: starting connection attempt to placement service at dapr-placement.dapr-system.svc.cluster.local:80"
 time="2019-09-04T02:52:27Z" level=info msg="http server is running on port 3500"
 time="2019-09-04T02:52:27Z" level=info msg="gRPC server is running on port 50001"
-time="2019-09-04T02:52:27Z" level=info msg="dapr initialized.   Init Elapsed 64.234049ms"
-time="2019-09-04T02:52:27Z" level=info msg="actors: established connection to placement service at dapr-placement.dapr-system.svc.cluster.local:80" waiting on port 6000"
-time="2019-09-04T02:52:27Z" level=info msg="application discovered on port 6000"
-time="2019-09-04T02:52:27Z" level=info msg="actor runtime started. actor idle timeout: 1h0m0s. actor scan interval: 30s"
-time="2019-09-04T02:52:27Z" level=info msg="actors: starting connection attempt to placement service at dapr-placement.dapr-system.svc.cluster.local:80"
-time="2019-09-04T02:52:27Z" level=info msg="http server is running on port 3500"
-time="2019-09-04T02:52:27Z" level=info msg="gRPC server is running on port 50001"
-time="2019-09-04T02:52:27Z" level=info msg="dapr initialized.   Init Elapsed 64.234049ms"
+time="2019-09-04T02:52:27Z" level=info msg="dapr initialized. Status: Running. Init Elapsed 64.234049ms"
 time="2019-09-04T02:52:27Z" level=info msg="actors: established connection to placement service at dapr-placement.dapr-system.svc.cluster.local:80"
 ```
 
@@ -182,6 +175,6 @@ time="2019-09-04T00:21:57Z" level=info msg="host added: 10.244.1.89"
 
 The examples above are specific specific to Kubernetes, but the principal is the same for any kind of container based environment: simply grab the container ID of the Dapr sidecar and/or system component (if applicable) and view its logs.
 
-## 参考资料
+## References
 
-* [如何为Dapr sidecar和你的应用程序设置日志]({{< ref "logging.md" >}})
+* [How to setup loggings for Dapr sidecar, and your application]({{< ref "logging.md" >}})
