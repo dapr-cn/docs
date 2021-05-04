@@ -12,7 +12,7 @@ Dapr 公开了一个 [Prometheus](https://prometheus.io/) 指标终结点，您�
 
 默认情况下，指标终结点处于启用状态，您可以通过命令行参数 `--enable-metrics=false` 传递给 Dapr 系统进程来禁用它。
 
-默认指标端口为 `9090`。 This can be overridden by passing the command line argument `--metrics-port` to Daprd. Additionally, the metrics exporter can be disabled for a specific application by setting the `dapr.io/enable-metrics: "false"` annotation to your application deployment. With the metrics exporter disabled, `daprd` will not open the metrics listening port.
+默认指标端口为 `9090`。 This can be overridden by passing the command line argument `--metrics-port` to Daprd. Additionally, the metrics exporter can be disabled for a specific application by setting the `dapr.io/enable-metrics: "false"` annotation to your application deployment. This can be overridden by passing the command line argument `--metrics-port` to Daprd. Additionally, the metrics exporter can be disabled for a specific application by setting the `dapr.io/enable-metrics: "false"` annotation to your application deployment. With the metrics exporter disabled, `daprd` will not open the metrics listening port.
 
 ```yaml
 apiVersion: apps/v1
