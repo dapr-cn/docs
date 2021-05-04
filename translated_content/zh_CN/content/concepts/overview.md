@@ -7,7 +7,7 @@ description: >
   分布式应用程序运行时介绍
 ---
 
-Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种编程语言和开发框架。 <iframe width="1120" height="630" src="https://www.youtube.com/embed/9o9iDAgYBA8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种编程语言和开发框架。 <iframe width="1120" height="630" src="//player.bilibili.com/player.html?aid=586108726&bvid=BV1xz4y167XA&cid=277928385&page=1" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 任何语言，任何框架，任何地方
 
@@ -37,7 +37,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 | [**资源绑定**]({{X22X}})   | 带触发器的资源绑定通过接收和发送事件到任何外部源（如数据库、队列、文件系统等）来进一步构建事件驱动架构，以实现扩展性和弹性。                                                                       |
 | [**Actors**]({{X25X}}) | 一种用于有状态和无状态对象的模式，通过方法和状态的封装让并发变得简单。 Dapr 在其 actor 运行时提供了很多能力，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。                    |
 | [**可观测性**]({{X28X}})   | Dapr 可以发出度量，日志和跟踪以调试和监控 Dapr 和用户应用程序。 Dapr 支持分布式跟踪，通过使用 W3C 跟踪上下文标准和 Open Telemetry 发送到不同的监控工具，以方便诊断和服务于生产中的服务间调用。                   |
-| [**秘密**]({{X31X}})     | Dapr提供秘密管理，并与公有云和本地秘密存储集成，以检索秘密，用于应用代码。                                                                                              |
+| [**密钥**]({{X31X}})     | Dapr提供密钥管理，并与公有云和本地密钥存储集成，以检索密钥，用于应用代码。                                                                                              |
 
 ## Sidecar 架构
 
@@ -51,11 +51,11 @@ Dapr可以在多个环境中托管，包括在Windows/Linux/macOS机器上自托
 
 ### 自托管
 
-在 [自托管模式]({{< ref self-hosted-overview.md >}) Dapr 运行一个单独的 sidecar 程序，您的服务代码可以通过 HTTP 或 gRPC 调用。 每个运行的服务都有一个 Dapr 运行时进程 (或 sidecar) ，配置为使用状态存储， pub/sub，绑定组件和其他构建块。
+在 [自托管模式]({{< ref self-hosted-overview.md >}}) Dapr 运行一个单独的 sidecar 程序，您的服务代码可以通过 HTTP 或 gRPC 调用。 每个运行的服务都有一个 Dapr 运行时进程 (或 sidecar) ，配置为使用状态存储， pub/sub，绑定组件和其他构建块。
 
 您可以使用 [Dapr CLI](https://github.com/dapr/cli#launch-dapr-and-your-app) 在本地机器上运行启用了 Dapr 的应用程序。 请使用 [入门示例]({{< ref getting-started >}})。
 
-<img src="/images/overview_standalone.png" width=1000 alt="Architecture diagram of Dapr in self-hosted mode">
+<img src="/images/overview_standalone.png" width=1000 alt="自托管模式下的 Dapr 架构图">
 
 ### Kubernetes 托管
 
@@ -67,15 +67,15 @@ Dapr可以在多个环境中托管，包括在Windows/Linux/macOS机器上自托
 
 在 Kubernetes 集群中部署和运行启用 Dapr 的应用程序非常简单，只需向 deployment 方案添加一些注解。 访问 [Kubernetes 文档上的 Dapr]({{< ref kubernetes >}})
 
-<img src="/images/overview_kubernetes.png" width=1000 alt="Architecture diagram of Dapr in Kubernetes mode">
+<img src="/images/overview_kubernetes.png" width=1000 alt="Kubernetes 模式下的 Dapr 架构图">
 
 ## 开发者语言 SDK 和框架
 
-Dapr offers a variety of SDKs and frameworks to make it easy to begin developing with Dapr in your preferred language.
+Dapr 提供各种 SDK 和框架，便于开始以您喜欢的语言与 Dapr 一起开发。
 
 ### Dapr SDKs
 
-To make using Dapr more natural for different languages, it also includes [language specific SDKs]({{X67X}}) for:
+为了让不同语言使用 Dapr 更加自然，它还包含了 [语言特定的 SDK]({{X67X}})：
 - C++
 - Go
 - Java
@@ -85,35 +85,35 @@ To make using Dapr more natural for different languages, it also includes [langu
 - .NET
 - PHP
 
-These SDKs expose the functionality of the Dapr building blocks through a typed language API, rather than calling the http/gRPC API. 这使您能够以自己选择的语言编写无状态和有状态功能和 actors 的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言 actor 和功能支持。
+这些 SDK 通过特定语言 API 来暴露 Dapr 构建块的功能，而不是调用 http/gRPC API。 这使您能够以自己选择的语言编写无状态和有状态功能和 actors 的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言 actor 和功能支持。
 
 ### 开发框架
 
-Dapr can be used from any developer framework. Here are some that have been integrated with Dapr:
+Dapr 可以与任何开发框架集成。 下面是一些已经和 Dapr 集成的。
 
 #### Web
 
-| 语言                                           | Frameworks                              | 描述                                                                                                                                                                                                   |
-| -------------------------------------------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [.NET]({{< ref dotnet >}})                   | [ASP.NET]({{< ref dotnet-aspnet.md >}}) | Brings stateful routing controllers that respond to pub/sub events from other services. Can also take advantage of [ASP.NET Core gRPC Services](https://docs.microsoft.com/en-us/aspnet/core/grpc/). |
-| [Java](https://github.com/dapr/java-sdk)     | [Spring Boot](https://spring.io/)       |                                                                                                                                                                                                      |
-| [Python]({{< ref python >}})                 | [Flask]({{< ref python-flask.md >}})    |                                                                                                                                                                                                      |
-| [Javascript](https://github.com/dapr/js-sdk) | [Express](http://expressjs.com/)        |                                                                                                                                                                                                      |
-| [PHP]({{< ref php >}})                       |                                         | You can serve with Apache, Nginx, or Caddyserver.                                                                                                                                                    |
+| 语言                                           | 框架                                      | 描述                                                                                                                 |
+| -------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [.NET]({{< ref dotnet >}})                   | [ASP.NET]({{< ref dotnet-aspnet.md >}}) | 带来状态路由控制器，从而完成来自其他应用的 发布/订阅 构建块。 也可以利用 [ASP.NET Core gRPC 服务](https://docs.microsoft.com/en-us/aspnet/core/grpc/)。 |
+| [Java](https://github.com/dapr/java-sdk)     | [Spring Boot](https://spring.io/)       |                                                                                                                    |
+| [Python]({{< ref python >}})                 | [Flask]({{< ref python-flask.md >}})    |                                                                                                                    |
+| [Javascript](https://github.com/dapr/js-sdk) | [Express](http://expressjs.com/)        |                                                                                                                    |
+| [PHP]({{< ref php >}})                       |                                         | 您可以使用 Apache, Nginx, 或 Caddyserver 进行托管                                                                            |
 
-#### Integrations and extensions
+#### 集成和扩展
 
-Visit the [integrations]({{< ref integrations >}}) page to learn about some of the first-class support Dapr has for various frameworks and external products, including:
+访问 [integrations]({{< ref integrations >}}) 页面，了解 Dapr 对各种框架和外部产品的一流支持，包括：
 - Azure Functions runtime
 - Azure Logic Apps runtime
 - Azure API 管理
 - KEDA
 - Visual Studio Code
 
-## Designed for operations
+## 为运维而设计
 
-Dapr is designed for [operations]({{< ref operations >}}) and security. The Dapr sidecars, runtime, components, and configuration can all be managed and deployed easily and securly to match your organization's needs.
+Dapr 专为 [运维]({{< ref operations >}}) 和安全性而设计。 Dapr sidecar、运行时间、组件和配置都可以轻松、安全地管理和部署，以满足组织的需求。
 
 通过 Dapr CLI 安装的 [服务仪表板](https://github.com/dapr/dashboard)提供了基于 Web 的 UI ，使您能够查看信息，查看日志以及 Dapr sidecar 的更多内容。
 
-The [monitoring tools support]({{< ref monitoring >}}) provides deeper visibility into the Dapr system services and side-cars and the [observability capabilities]({{X72X}}) of Dapr provide insights into your application such as tracing and metrics.
+<a href="{{< ref monitoring >对于监控工具的支持</a>使您可以更深入地了解到 Dapr 自身的系统服务和 side-cars 中的服务，而 Dapr 构建了对于应用程序的[可观察性能力]({{X72X}})，例如链路跟踪和 metrics。
