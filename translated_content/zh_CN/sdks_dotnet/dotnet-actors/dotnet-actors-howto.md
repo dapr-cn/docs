@@ -28,10 +28,9 @@ MyActor --- MyActor.Interfaces
 
 * **接口项目(\MyActor\MyActor.Interfaces).** 该项目包含了actor的接口定义。 Actor接口可以在任何项目中以任意的名称定义。 它定义了actor的实现和调用actor的客户端之间的约定。 由于客户端项目可能会依赖它，所以在一个和actor实现分隔开的程序集中定义通常是有意义的。
 
-* **Actor服务项目 (\MyActor\MyActorService)。** 该项目实现了Asp.Net Core web service，用于托管actor。 它包含了actor的实现，MyActor.cs。 Actor的实现是一个继承了基类Actor并且实现了Myactor.Interfaces项目中定义的接口的类。 Actor还必须提供接受一个ActorService实例和ActorId的构造函数，并将他们传递给基类。
+* **Actor服务项目 (\MyActor\MyActorService)。 ** 该项目实现了Asp.Net Core web service，用于托管actor。 它包含了actor的实现，MyActor.cs。 Actor的实现是一个继承了基类Actor并且实现了Myactor.Interfaces项目中定义的接口的类。 Actor还必须提供接受一个ActorService实例和ActorId的构造函数，并将他们传递给基类。
 
 * [Actor(TypeName = "MyCustomActorTypeName")] internal class MyActor : Actor, IMyActor
-    { // ... }
 
 ## 第 0 步：准备
 
@@ -103,13 +102,14 @@ Dapr 使用 ASP.NET web 服务来托管 Actor 服务。 本节将会实现 `IMyA
 ### 创建 actor 服务项目并添加依赖
 
 ```bash
-# 创建 ASP.Net Web 服务来托管 Dapr actor
-dotnet new web -o MyActorService
+# 创建 Actor 客户端
+dotnet new console -o MyActorClient
 
-cd MyActorService
+cd MyActorClient
 
-# 添加 Dapr.Actors.AspNetCore nuget 包. 请从nuget.org添加最新的包版本
-dotnet add package Dapr.Actors.AspNetCore -v 1.0.0
+# 添加 Dapr.Actors nuget 包。 Please use the latest package version from nuget.org
+请从nuget.org添加最新的包版本
+dotnet add package Dapr.Actors -v 1.0.0
 
 # 添加 Actor 接口引用
 dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
@@ -330,9 +330,13 @@ dotnet new console -o MyActorClient
 
 cd MyActorClient
 
-# 添加 Dapr.Actors nuget 包。 Please use the latest package version from nuget.org
-请从nuget.org添加最新的包版本
-dotnet add package Dapr.Actors -v 1.0.0
+# 添加 Dapr.Actors nuget 包。 # 创建 ASP.Net Web 服务来托管 Dapr actor
+dotnet new web -o MyActorService
+
+cd MyActorService
+
+# 添加 Dapr.Actors.AspNetCore nuget 包. 请从nuget.org添加最新的包版本
+dotnet add package Dapr.Actors.AspNetCore -v 1.0.0
 
 # 添加 Actor 接口引用
 dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
@@ -413,6 +417,10 @@ namespace MyActorClient
     ℹ️  Updating metadata for app command: dotnet run
     ✅  You're up and running!  
 
+    ...
+    ℹ️  Updating metadata for app command: dotnet run
+    ✅  You're up and running!  
+
     == APP == info: Microsoft.Hosting.Lifetime[0]
 
     == APP ==       Now listening on: https://localhost:5001
@@ -424,6 +432,14 @@ namespace MyActorClient
     == APP == info: Microsoft.Hosting.Lifetime[0]
 
     == APP ==       Application started. Press Ctrl+C to shut down.
+
+    == APP == info: Microsoft.Hosting.Lifetime[0]
+
+    == APP ==       Hosting environment: Development
+
+    == APP == info: Microsoft.Hosting.Lifetime[0]
+
+    == APP ==       Content root path: /Users/ryan/actortest/MyActorService Press Ctrl+C to shut down.
 
     == APP == info: Microsoft.Hosting.Lifetime[0]
 
@@ -449,8 +465,11 @@ namespace MyActorClient
     ```txt
     Startup up...
     Calling SetDataAsync on MyActor:1...
+    Startup up...
+    Calling SetDataAsync on MyActor:1...
     Got response: Success
     Calling GetDataAsync on MyActor:1...
+    Got response: Success
     Got response: Success
     ```
 
