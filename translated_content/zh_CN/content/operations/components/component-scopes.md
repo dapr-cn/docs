@@ -95,9 +95,9 @@ curl -i -d '{ "message": "hello" }' \
 
 ## 对具有作用域的组件的应用程序访问
 
-开发人员和操作员可能希望将一个数据库的访问权限限制为某个应用程序或一组特定应用程序。 为此，Dapr 允许您在组件 YAML 上指定</code>scopes`作用域。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。</p>
+开发人员和操作员可能希望将一个数据库的访问权限限制为某个应用程序或一组特定应用程序。 为此，Dapr 允许您在组件 YAML 上指定</code>scopes`作用域。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
 
-<p spaces-before="0">下面的示例演示如何给予两个启用的Dapr应用访问权限， 使用 <code>app1` 和 `app2` 两个应用程序可以访问名为 `statestore` 的 Redis 组件，这个组件部署在 `production` 命名空间
+下面的示例演示如何给予两个启用的Dapr应用访问权限， 使用 <code>app1`和`app2`两个应用程序可以访问名为`statestore`的 Redis 组件，这个组件部署在`production` 命名空间
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -116,7 +116,7 @@ scopes:
 - app2
 ```
 
-## 示例 <iframe width="560" height="315" src="//player.bilibili.com/player.html?aid=886064109&bvid=BV1QK4y1p7fn&cid=277946151&page=10&t=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## 示例  <iframe width="560" height="315" src="//player.bilibili.com/player.html?aid=886064109&bvid=BV1QK4y1p7fn&cid=277946151&page=10&t=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 相关链接
 
