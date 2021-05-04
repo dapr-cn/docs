@@ -6,7 +6,7 @@ description: "关于 Actors API 的详细文档"
 weight: 500
 ---
 
-Dapr 提供原生、跨平台和跨语言 virtual actors 功能。 Besides the [language specific SDKs]({{X156X}}), a developer can invoke an actor using the API endpoints below.
+Dapr 提供原生、跨平台和跨语言 virtual actors 功能。 Besides the [language specific SDKs]({{X156X}}), a developer can invoke an actor using the API endpoints below.
 
 ## 调用 dapr 的服务代码
 
