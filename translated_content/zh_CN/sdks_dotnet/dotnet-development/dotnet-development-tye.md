@@ -35,10 +35,17 @@ name: store-application
 extensions:
 
   # Configuration for dapr goes here.
+name: store-application
+extensions:
+
+  # Configuration for dapr goes here.
 - name: dapr
   components-path: <components-path> 
 
 # Services to run go here.
+services:
+
+  # 此名称将被用作 app-id. 对于.NET 项目，Tye 只需要项目文件的路径。
 services:
 
   # 此名称将被用作 app-id. 对于.NET 项目，Tye 只需要项目文件的路径。
@@ -50,6 +57,10 @@ services:
   project: store/store.csproj
 
   # Containers you want to run need an image name and set of ports to expose.
+- name: redis
+  image: redis
+  bindings:
+    - port: 6973
 - name: redis
   image: redis
   bindings:
