@@ -6,7 +6,7 @@ description: "关于 Bindings API 的详细文档"
 weight: 400
 ---
 
-Dapr provides bi-directional binding capabilities for applications and a consistent approach to interacting with different cloud/on-premise services or systems. Developers can invoke output bindings using the Dapr API, and have the Dapr runtime trigger an application with input bindings.
+Dapr provides bi-directional binding capabilities for applications and a consistent approach to interacting with different cloud/on-premise services or systems. Developers can invoke output bindings using the Dapr API, and have the Dapr runtime trigger an application with input bindings. Developers can invoke output bindings using the Dapr API, and have the Dapr runtime trigger an application with input bindings.
 
 绑定的示例包括 `Kafka`， `Rabbit MQ`， `Azure Event Hubs`， `AWS SQS`和 `GCP Storage`。
 
@@ -34,11 +34,11 @@ spec:
 
 如果在 kubernetes 上运行，那么应该将该组件应用于集群。
 
-> **Note:** In production never place passwords or secrets within Dapr component files. 有关使用 secret stores 和检索密钥的信息，请参阅 [设置 secret stores ]({{< ref setup-secret-store >}})
+> **Note:** In production never place passwords or secrets within Dapr component files. 有关使用 secret stores 和检索密钥的信息，请参阅 [设置 secret stores ]({{< ref setup-secret-store >}}) 有关使用 secret stores 和检索密钥的信息，请参阅 [设置 secret stores ]({{< ref setup-secret-store >}})
 
 ## 通过输入绑定调用服务代码
 
-想要使用输入绑定触发应用的开发人员可以在 `POST` http 终结点上侦听以接收请求。路由名称与 `metadata.name`相同。
+想要使用输入绑定触发应用的开发人员可以在 `POST` http 终结点上侦听以接收请求。 路由名称与 `metadata.name`相同。
 
 如果应用程序要订阅绑定，在启动 Dapr 时，将会对应用程序的所有已定义输入绑定发送 `OPTIONS` 请求，并期望 `NOT FOUND (404)` 以外的状态码。
 
@@ -85,7 +85,7 @@ def incoming():
 
 ### Binding 终结点
 
-Dapr 将从 component Yaml 文件中发现 Bindings。 Dapr calls this endpoint on startup to ensure that app can handle this call. 如果应用程序没有该终结点，那么 Dapr 将忽略。
+Dapr 将从 component Yaml 文件中发现 Bindings。 Dapr calls this endpoint on startup to ensure that app can handle this call. 如果应用程序没有该终结点，那么 Dapr 将忽略。 如果应用程序没有该终结点，那么 Dapr 将忽略。
 
 #### HTTP 请求
 
@@ -138,7 +138,7 @@ POST http://localhost:<appPort>/<name>
 
 可选地，响应正文可用于直接绑定具有 state stores 或输出 Bindings 的输入绑定。
 
-**Example:** Dapr stores `stateDataToStore` into a state store named "stateStore". Dapr 将 `jsonObject` 发送到名为 "storage" 和 " queue" 的输出绑定。 如果未设置 `concurrency` ，那么将顺序发出 ( 以下示例显示这些操作并行执行)
+**Example:** Dapr stores `stateDataToStore` into a state store named "stateStore". Dapr 将 `jsonObject` 发送到名为 "storage" 和 " queue" 的输出绑定。 Dapr 将 `jsonObject` 发送到名为 "storage" 和 " queue" 的输出绑定。 如果未设置 `concurrency` ，那么将顺序发出 ( 以下示例显示这些操作并行执行)
 
 ```json
 {
@@ -188,7 +188,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/bindings/<name>
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-The `data` field takes any JSON serializable value and acts as the payload to be sent to the output binding. `metadata` 字段是键/值对的数组，允许您为每个调用设置绑定特定元数据。 `operation` 字段告诉 Dapr 绑定它应该执行的操作。
+The `data` field takes any JSON serializable value and acts as the payload to be sent to the output binding. `metadata` 字段是键/值对的数组，允许您为每个调用设置绑定特定元数据。 `metadata` 字段是键/值对的数组，允许您为每个调用设置绑定特定元数据。 `operation` 字段告诉 Dapr 绑定它应该执行的操作。
 
 ### URL 参数
 
@@ -217,8 +217,8 @@ curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
 
 ### 通用元数据值
 
-There are common metadata properties which are support across multiple binding components. 具体清单如下：
+There are common metadata properties which are support across multiple binding components. 具体清单如下： 具体清单如下：
 
-| 属性           | 描述                 | 绑定定义                                                                                                         | 有效范围                                             |
-| ------------ | ------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
-| ttlInSeconds | 定义消息的生存时间 ( 以秒为单位) | If set in the binding definition will cause all messages to have a default time to live. 消息 ttl 覆盖绑定定义中的任何值。 | RabbitMQ, Azure Service Bus, Azure Storage Queue |
+| 属性           | 描述                 | 绑定定义                                                                                                                             | 有效范围                                             |
+| ------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| ttlInSeconds | 定义消息的生存时间 ( 以秒为单位) | If set in the binding definition will cause all messages to have a default time to live. 消息 ttl 覆盖绑定定义中的任何值。 消息 ttl 覆盖绑定定义中的任何值。 | RabbitMQ, Azure Service Bus, Azure Storage Queue |
