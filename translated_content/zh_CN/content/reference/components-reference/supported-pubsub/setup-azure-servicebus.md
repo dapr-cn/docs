@@ -4,7 +4,7 @@ title: "Azure Service Bus"
 linkTitle: "Azure Service Bus"
 description: "关于 Azure Service Bus pubsub 组件的详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-azure-servicebus/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-azure-servicebus/"
 ---
 
 ## 配置
