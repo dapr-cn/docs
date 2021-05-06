@@ -4,7 +4,7 @@ title: "RabbitMQ"
 linkTitle: "RabbitMQ"
 description: "RabbitMQ pubsub组件的详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-rabbitmq/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-rabbitmq/"
 ---
 
 ## 配置
