@@ -4,7 +4,7 @@ title: "Azure Event Hubs 绑定规范"
 linkTitle: "Azure Event Hubs"
 description: "关于 Azure Event Hubs 组件绑定的详细文档"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/eventhubs/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/eventhubs/"
 ---
 
 ## 配置
