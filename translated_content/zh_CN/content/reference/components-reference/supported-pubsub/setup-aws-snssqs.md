@@ -4,7 +4,7 @@ title: "AWS SNS/SQS"
 linkTitle: "AWS SNS/SQS"
 description: "关于AWS SNS/SQS pubsub组件的详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-aws-snssqs/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-aws-snssqs/"
 ---
 
 ## 配置
