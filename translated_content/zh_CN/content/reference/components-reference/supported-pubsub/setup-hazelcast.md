@@ -4,7 +4,7 @@ title: "Hazelcast"
 linkTitle: "Hazelcast"
 description: "关于Hazelcast pubsub组件的详细文档。"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-hazelcast/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-hazelcast/"
 ---
 
 ## 配置
