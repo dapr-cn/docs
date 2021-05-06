@@ -4,7 +4,7 @@ title: "Azure CosmosDB 绑定规范"
 linkTitle: "Azure CosmSDB"
 description: "Azure CosmosDB 绑定组件的详细文档"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/cosmosdb/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/cosmosdb/"
 ---
 
 ## 配置
