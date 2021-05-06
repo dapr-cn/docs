@@ -5,7 +5,7 @@ linkTitle: "Pub/Sub 代理"
 weight: 2000
 description: Dapr支持的发布/订阅消息代理
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/"
 no_list: true
 ---
 
