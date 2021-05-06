@@ -4,7 +4,7 @@ title: "Pulsar"
 linkTitle: "Pulsar"
 description: "关于Pulsar pubsub组件的详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-pulsar/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-pulsar/"
 ---
 
 ## 配置
