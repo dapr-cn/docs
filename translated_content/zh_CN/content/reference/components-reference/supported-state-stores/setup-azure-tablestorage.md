@@ -4,7 +4,7 @@ title: "Azure Table Storage"
 linkTitle: "Azure Table Storage"
 description: 关于Azure Table Storage状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-azure-tablestorage/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-azure-tablestorage/"
 ---
 
 ## 配置
