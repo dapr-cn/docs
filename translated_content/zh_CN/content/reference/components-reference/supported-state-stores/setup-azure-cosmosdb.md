@@ -4,7 +4,7 @@ title: "Azure Cosmos DB"
 linkTitle: "Azure Cosmos DB"
 description: 关于 Azure CosmosDB 状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-azure-cosmosdb/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-azure-cosmosdb/"
 ---
 
 ## 配置
