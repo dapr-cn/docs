@@ -4,7 +4,7 @@ title: "MongoDB"
 linkTitle: "MongoDB"
 description: MongoDB 状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-mongodb/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-mongodb/"
 ---
 
 ## 配置
