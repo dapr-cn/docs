@@ -4,7 +4,7 @@ title: "Azure Key Vault 密钥仓库"
 linkTitle: "Azure Key Vault"
 description: 详细介绍了关于 Azure Key Vault密钥仓库组件的信息
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault/"
 ---
 
 {{% alert title="Note" color="primary" %}}
