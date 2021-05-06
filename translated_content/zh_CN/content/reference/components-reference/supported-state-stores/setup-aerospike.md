@@ -4,7 +4,7 @@ title: "Aerospike"
 linkTitle: "Aerospike"
 description: 关于Aerospike状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-aerospike/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-aerospike/"
 ---
 
 ## 配置
