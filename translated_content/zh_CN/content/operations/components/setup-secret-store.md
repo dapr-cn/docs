@@ -5,7 +5,7 @@ linkTitle: "Secret stores（密钥存储）"
 description: "关于配置不同的密钥仓库组件的指南"
 weight: 3000
 aliases:
-  - "/operations/components/setup-state-store/secret-stores-overview/"
+  - "/zh-hans/operations/components/setup-state-store/secret-stores-overview/"
 ---
 
 Dapr integrates with secret stores to provide apps and other components with secure storage and access to secrets such as access keys and passwords. 每个密钥存储组件都有一个名称，这个名称用于访问密钥。
