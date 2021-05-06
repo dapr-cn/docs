@@ -4,7 +4,7 @@ title: "Azure Key Vault 和Kubernetes上的Managed Identities"
 linkTitle: "Azure Key Vault w/ Managed Identity"
 description: 如何配置Azure Key Vault和Kubernetes以使用Azure Managed Identities来获取密钥
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
 ---
 
 ## 配置
