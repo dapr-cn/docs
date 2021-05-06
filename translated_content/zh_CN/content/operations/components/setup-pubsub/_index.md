@@ -5,7 +5,7 @@ linkTitle: "Pub/Sub 代理"
 description: "关于为Dapr Pub/Sub设置不同的消息代理的指南"
 weight: 2000
 aliases:
-  - "/operations/components/setup-pubsub/setup-pubsub-overview/"
+  - "/zh-hans/operations/components/setup-pubsub/setup-pubsub-overview/"
 ---
 
 Dapr集成了pub/sub消息总线，为应用程序提供了创建事件驱动、松散耦合架构的能力，在这种架构下，生产者通过主题向消费者发送事件。
