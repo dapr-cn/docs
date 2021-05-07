@@ -4,7 +4,7 @@ title: "RethinkDB"
 linkTitle: "RethinkDB"
 description: Detailed information on the RethinkDB state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-rethinkdb/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-rethinkdb/"
 ---
 
 ## 配置
@@ -23,26 +23,6 @@ spec:
   metadata:
   - name: address
     value: <REPLACE-RETHINKDB-ADDRESS> # Required, e.g. 127.0.0.1:28015 or rethinkdb.default.svc.cluster.local:28015).
-  - name: database
-    value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
-  - name: table
-    value: # Optional
-  - name: username
-    value: <USERNAME> # Optional
-  - name: password
-    value: <PASSWORD> # Optional
-  - name: archive
-    value: bool # Optional (whether or not store should keep archive table of all the state changes)
-  - name: database
-    value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
-  - name: table
-    value: # Optional
-  - name: username
-    value: <USERNAME> # Optional
-  - name: password
-    value: <PASSWORD> # Optional
-  - name: archive
-    value: bool # Optional (whether or not store should keep archive table of all the state changes)
   - name: database
     value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
   - name: table

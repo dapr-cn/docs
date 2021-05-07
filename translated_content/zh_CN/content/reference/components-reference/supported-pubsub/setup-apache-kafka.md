@@ -4,7 +4,7 @@ title: "Apache Kafka"
 linkTitle: "Apache Kafka"
 description: "关于Apache Kafka pubsub组件的详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-apache-kafka/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-apache-kafka/"
 ---
 
 ## 配置

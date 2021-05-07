@@ -4,7 +4,7 @@ title: "HTTP 绑定规范"
 linkTitle: "HTTP"
 description: "HTTP 绑定组件的详细文档"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/http/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/http/"
 ---
 
 ## 设置 Dapr 组件

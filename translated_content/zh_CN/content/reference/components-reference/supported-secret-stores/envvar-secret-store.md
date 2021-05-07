@@ -4,7 +4,7 @@ title: "本地环境变量（用于开发）"
 linkTitle: "Local environment variables"
 description: 详细介绍了关于本地变量密钥仓库组件的信息
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/envvar-secret-store/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/envvar-secret-store/"
 ---
 
 这个Dapr密钥仓库组件不使用身份认证，而是使用本地定义的环境变量。

@@ -4,7 +4,7 @@ title: "GCP Secret Manager"
 linkTitle: "GCP Secret Manager"
 description: GCP Secret Manager密钥仓库组件的详细信息
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/gcp-secret-manager/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/gcp-secret-manager/"
 ---
 
 ## 配置

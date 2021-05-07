@@ -8,7 +8,7 @@ description: "变更 Dapr sidecars 或全局 Dapr 系统服务的行为"
 
 Dapr configurations are settings that enable you to change both the behavior of individual Dapr applications, or the global behavior of the system services in the Dapr control plane.
 
-Configurations are defined and deployed as a YAML file. An application configuration example is like this:
+配置定义和部署形式为 YAML 文件。 一个应用程序配置示例就像这样：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -23,6 +23,6 @@ spec:
       endpointAddress: "http://localhost:9411/api/v2/spans"
 ```
 
-This configuration configures tracing for telemetry recording. It can be loaded in self-hosted mode by editing the default configuration file called `config.yaml` file in your `.dapr` directory, or by applying it to your Kubernetes cluster with kubectl/helm.
+这个配置文件配置了遥测录制跟踪。 你可以在自托管模式中通过编辑 `.dapr` 目录中名为 `config.yaml` 的配置文件进行加载；或者通过 kubectl/helm 应用到您的 Kubernetes 集群。
 
 阅读 [此页面]({{X6X}}) 查看所有配置选项的列表。

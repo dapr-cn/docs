@@ -4,7 +4,7 @@ title: "Cloudstate"
 linkTitle: "Cloudstate"
 description: 关于Cloudstate状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-cloudstate/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-cloudstate/"
 ---
 
 ## 配置

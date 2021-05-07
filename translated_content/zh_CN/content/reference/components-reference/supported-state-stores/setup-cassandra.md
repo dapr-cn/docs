@@ -4,7 +4,7 @@ title: "Cassandra"
 linkTitle: "Cassandra"
 description: Cassandra 状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-cassandra/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-cassandra/"
 --- 
 
 ## 配置

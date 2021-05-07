@@ -4,7 +4,7 @@ title: "GCP Firestore (Datastore mode)"
 linkTitle: "GCP Firestore"
 description: Detailed information on the GCP Firestore state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-firestore/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-firestore/"
 ---
 
 ## 配置
@@ -24,26 +24,6 @@ spec:
   metadata:
   - name: type
     value: <REPLACE-WITH-CREDENTIALS-TYPE> # Required. Example: "serviceaccount"
-  - name: project_id
-    value: <REPLACE-WITH-PROJECT-ID> # Required.
-  - name: private_key_id
-    value: <REPLACE-WITH-PRIVATE-KEY-ID> # Required.
-  - name: private_key
-    value: <REPLACE-WITH-PRIVATE-KEY> # Required.
-  - name: client_email
-    value: <REPLACE-WITH-CLIENT-EMAIL> # Required.
-  - name: client_id
-    value: <REPLACE-WITH-CLIENT-ID> # Required.
-  - name: auth_uri
-    value: <REPLACE-WITH-AUTH-URI> # Required.
-  - name: token_uri
-    value: <REPLACE-WITH-TOKEN-URI> # Required.
-  - name: auth_provider_x509_cert_url
-    value: <REPLACE-WITH-AUTH-X509-CERT-URL> # Required.
-  - name: client_x509_cert_url
-    value: <REPLACE-WITH-CLIENT-x509-CERT-URL> # Required.
-  - name: entity_kind
-    value: <REPLACE-WITH-ENTITY-KIND> # Optional. default: "DaprState" Example: "serviceaccount"
   - name: project_id
     value: <REPLACE-WITH-PROJECT-ID> # Required.
   - name: private_key_id
