@@ -150,6 +150,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "ipfans",
+      "name": "ipfans",
+      "avatar_url": "https://avatars.githubusercontent.com/u/363344?v=4",
+      "profile": "https://www.4async.com",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
