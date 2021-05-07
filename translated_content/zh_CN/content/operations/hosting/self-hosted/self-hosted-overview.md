@@ -12,7 +12,7 @@ Dapr 可以配置为在本地开发者机器或生产VM上以自托管模式运�
 
 ## 初始化
 
-Dapr 可以初始化为 <a href="{{< ref self-hosted-with-docker.md >使用 Docker 模式</a> (默认) 或 <a href="{{< ref self-hosted-no-docker.md > slim-init 模式</a>。 默认的 Docker 初始通过以下容器和配置提供了开箱即用功能：
+Dapr 可以初始化为 [使用 Docker 模式]({{< ref self-hosted-with-docker.md >}}) (默认) 或 [ slim-init 模式]({{< ref self-hosted-no-docker.md >}})。 默认的 Docker 初始通过以下容器和配置提供了开箱即用功能：
 - 一个为状态管理和发布/订阅配置的默认组件的 Redis 容器。
 - 一个用于诊断和追踪的Zipkin容器。
 - 默认的 Dapr 配置和组件安装在 `$HOME/.dapr/` (Mac/Linux) 或`%USERPROFILE%\.dapr\` (Windows)。
