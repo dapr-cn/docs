@@ -1,6 +1,6 @@
 # Dapr 中文文档库
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -73,6 +73,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://www.cnblogs.com/weihanli"><img src="https://avatars.githubusercontent.com/u/7604648?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Weihan Li</b></sub></a><br /><a href="#translation-weihanli" title="Translation">🌍</a></td>
     <td align="center"><a href="http://www.herowk.com"><img src="https://avatars.githubusercontent.com/u/1592834?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kyle wong</b></sub></a><br /><a href="#translation-herowk" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://www.4async.com"><img src="https://avatars.githubusercontent.com/u/363344?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ipfans</b></sub></a><br /><a href="#translation-ipfans" title="Translation">🌍</a></td>
   </tr>
 </table>
 
