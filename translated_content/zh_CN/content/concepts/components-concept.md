@@ -14,24 +14,24 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 
  以下是 Dapr 提供的组件类型：
 
-## State stores
+## 状态存储
 
-State store components are data stores (databases, files, memory) that store key-value pairs as part of the [state management]({{< ref "state-management-overview.md" >}}) building block.
+状态存储组件是存储键值对的数据存储（数据库、文件、内存），其作为 [状态管理]({{< ref "state-management-overview.md" >}}) 的构建模块之一。
 
-- [List of state stores]({{< ref supported-state-stores >}})
-- [State store implementations](https://github.com/dapr/components-contrib/tree/master/state)
+- [状态存储列表]({{< ref supported-state-stores >}})
+- [状态存储的实现](https://github.com/dapr/components-contrib/tree/master/state)
 
-## Service discovery
+## 服务发现
 
 服务发现组件与 [服务调用]({{X35X}}) 构建块配合使用，与托管环境集成以提供服务到服务发现。 例如， Kubernetes 服务发现组件与 Kubernetes DNS 服务集成，而自托管时使用 mDNS。
 
-- [Service discovery name resolution implementations](https://github.com/dapr/components-contrib/tree/master/nameresolution)
+- [服务发现名称解析的实现](https://github.com/dapr/components-contrib/tree/master/nameresolution)
 
 ## 中间件
 
 Dapr 允许将自定义 [中间件]({{X37X}})  插入请求处理管道。 中间件可以在请求路由到用户代码之前，或者在将请求返回给客户端之前，对请求执行额外的操作（例如，认证，加密和消息转换）。 中间件组件与服务调用 [构建块]({{X38X}}) 一起使用。
 
-- [Middleware implementations](https://github.com/dapr/components-contrib/tree/master/middleware)
+- [中间件的实现](https://github.com/dapr/components-contrib/tree/master/middleware)
 
 ## Pub/Sub 代理
 
