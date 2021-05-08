@@ -49,7 +49,7 @@ External resources can connect to Dapr in order to trigger a service or be calle
 
 ## Secret stores（密钥存储）
 
-在 dapr 中， [机密]({{X43X}}) 是指任何你不想给不受欢迎的人（例如：黑客）知道的私有信息。 Secrets stores are used to store secrets that can be retrieved and used in services.
+在 dapr 中， [机密]({{X43X}}) 是指任何你不想给不受欢迎的人（例如：黑客）知道的私有信息。 密钥存储被用来存储可以在服务中被获取以及被使用的密钥
 
-- [List of supported secret stores]({{< ref supported-secret-stores >}})
-- [Secret store implementations](https://github.com/dapr/components-contrib/tree/master/secretstores)
+- [支持的密钥存储]({{< ref supported-secret-stores >}})
+- [密钥存储实现](https://github.com/dapr/components-contrib/tree/master/secretstores)
