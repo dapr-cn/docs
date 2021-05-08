@@ -23,5 +23,5 @@ Dapr 可以初始化为 [使用 Docker 模式]({{< ref self-hosted-with-docker.m
 
 ## 使用 Dapr 启动应用程序
 
-您可以使用 <a href="{{< ref dapr-run.md >`dapr run` CLI 命令</a> 启动你的应用和对应的 Dapr sidecar 进程。
+您可以使用 [`dapr run` CLI 命令]({{< ref dapr-run.md >}}) 运行 Dapr sidecar 程序以及您的应用程序。
 
