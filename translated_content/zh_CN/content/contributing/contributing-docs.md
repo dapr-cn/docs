@@ -119,7 +119,7 @@ Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-
 
 要引用另一页面中的特定部分，请在引用末尾添加 `#section-short-name`。
 
-通常，节短名称是节标题的文本，全部为小写，空格更改为"-"。 You can check the section short name by visiting the website page, clicking the link icon (🔗) next to the section, and see how the URL renders in the nav bar. "#" 后面的内容是您的段节短名称。
+通常，节短名称是节标题的文本，全部为小写，空格更改为"-"。 您可以通过访问 Web 站点页面，单击该部分旁边的链接图标 (🔗) 来检查区段短名称，并查看在导航栏中呈现 URL 的方式。 "#" 后面的内容是您的段节短名称。
 
 例如，对于此特定段节，完整引用页面和部分将是:
 
@@ -129,7 +129,7 @@ Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-
 
 ## Shortcodes
 
-The following are useful shortcodes for writing Dapr documentation
+以下是编写 Dapr 文档的有用 shortcodes
 
 ### 图片
 Docsy和Hugo使用的markdown规范没有提供使用markdown符号调整图片大小的选项。 而是使用原始 HTML 。
@@ -230,11 +230,11 @@ brew install dapr/tap/dapr-cli
 {{</* youtube dQw4w9WgXcQ */>}}
 ```
 
-### Buttons
+### 按钮
 
-To create a button in a webpage, use the `button` shortcode.
+若要在网页上创建按钮，请使用 `button` 短码。
 
-#### Link to an external page
+#### 链接到外部文件
 
 ```
 {{</* button text="My Button" link="https://example.com" */>}}
@@ -242,18 +242,18 @@ To create a button in a webpage, use the `button` shortcode.
 
 {{< button text="My Button" link="https://example.com" >}}
 
-#### Link to another docs page
+#### 链接到另一个文档
 
-You can also reference pages in your button as well:
+您还可以在按钮中引用页面：
 ```
 {{</* button text="My Button" page="contributing" */>}}
 ```
 
 {{< button text="My Button" page="contributing" >}}
 
-#### Button colors
+#### 按钮颜色
 
-You can customize the colors using the Bootstrap colors:
+您可以使用 Bootstrap 颜色自定义颜色：
 ```
 {{</* button text="My Button" link="https://example.com" color="primary" */>}}
 {{</* button text="My Button" link="https://example.com" color="secondary" */>}}
