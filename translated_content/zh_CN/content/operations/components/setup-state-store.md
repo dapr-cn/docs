@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "状态存储组件"
-linkTitle: "State stores"
+linkTitle: "状态存储"
 description: "为 Dapr 状态管理建立不同状态存储的指导"
 weight: 1000
 aliases:
