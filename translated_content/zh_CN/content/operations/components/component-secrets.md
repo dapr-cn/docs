@@ -1,26 +1,26 @@
 ---
 type: docs
-title: "How-To: Reference secrets in components"
-linkTitle: "Reference secrets in components"
+title: "指南：在组件中引用密钥"
+linkTitle: "在组件中引用密钥"
 weight: 400
-description: "How to securly reference secrets from a component definition"
+description: "如何从组件定义中安全地引用密钥"
 ---
 
 ## 概述
 
-Components can reference secrets for the `spec.metadata` section within the components definition.
+组件可以在组件定义中为 `spec.metadata` 部分引用密钥。
 
-In order to reference a secret, you need to set the `auth.secretStore` field to specify the name of the secret store that holds the secrets.
+为了引用密钥，您需要设置 `auth.secretStore` 字段以指定密钥存储的名称。
 
-When running in Kubernetes, if the `auth.secretStore` is empty, the Kubernetes secret store is assumed.
+在 Kubernetes 运行时，如果 `auth.secretStore` 为空，则假定使用Kubernetes 密钥存储。
 
 ### 支持的密钥存储
 
-Go to [this]({{< ref "howto-secrets.md" >}}) link to see all the secret stores supported by Dapr, along with information on how to configure and use them.
+跳转到 [此]({{< ref "howto-secrets.md" >}}) 链接来查看Dapr 支持的所有密钥存储，以及如何配置和使用这些存储的信息。
 
-## Referencing secrets
+## 引用密钥
 
-While you have the option to use plain text secrets, this is not recommended for production:
+虽然您可以选择使用纯文本密钥，但不建议用于生产：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -38,7 +38,7 @@ spec:
     value: MyPassword
 ```
 
-Instead create the secret in your secret store and reference it in the component definition:
+相反，在您应该在密钥存储中创建密钥，并在组件定义中引用它：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -60,9 +60,9 @@ auth:
   secretStore: <SECRET_STORE_NAME>
 ```
 
-`SECRET_STORE_NAME` is the name of the configured [secret store component]({{< ref supported-secret-stores >}}). When running in Kubernetes and using a Kubernetes secret store, the field `auth.SecretStore` defaults to `kubernetes` and can be left empty. When running in Kubernetes and using a Kubernetes secret store, the field `auth.SecretStore` defaults to `kubernetes` and can be left empty.
+`SECRET_STORE_NAME` 是已配置的 [密钥存储组件]({{< ref supported-secret-stores >}}) 当在 Kubernetes 中运行并使用 Kubernetes 密钥存储时，字段 `auth.SecretStore` 默认为 `kubernetes` 并且可以留空。
 
-The above component definition tells Dapr to extract a secret named `redis-secret` from the defined secret store and assign the value of the `redis-password` key in the secret to the `redisPassword` field in the Component.
+上面的组件定义让Dapr从定义的秘密存储中提取一个名为 `redis-secret` 的密钥，并将密钥的值分配给组件中的 `redis-password` 密钥中的 `redisPassword` 欄位。
 
 ## 示例
 
