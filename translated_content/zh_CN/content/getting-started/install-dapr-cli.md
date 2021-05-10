@@ -68,7 +68,7 @@ softwareupdate --install-rosetta
 dapr
 ```
 
-The output should look like this:
+输出显示应该如下方所示：
 
 
 ```md
