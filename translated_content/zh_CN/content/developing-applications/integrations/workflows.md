@@ -2,7 +2,7 @@
 type: docs
 title: "Build workflows with Logic Apps"
 linkTitle: "Workflows"
-description: "Learn how to build workflows using Dapr Workflows and Logic Apps"
+description: "学习如何使用 Dapr Workflow 和 Logic Apps 构建工作流"
 weight: 4000
 ---
 
