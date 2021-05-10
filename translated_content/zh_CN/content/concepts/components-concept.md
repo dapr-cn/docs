@@ -35,17 +35,17 @@ Dapr 允许将自定义 [中间件]({{X37X}})  插入请求处理管道。 中�
 
 ## Pub/Sub 代理
 
-Pub/sub broker components are message brokers that can pass messages to/from services as part of the [publish & subscribe]({{< ref pubsub-overview.md >}}) building block.
+发布/订阅 组件是消息分发器，可以作为应用程序之间进行消息[发布 & 订阅]({{< ref pubsub-overview.md >}}) 构建块。
 
-- [List of pub/sub brokers]({{< ref supported-pubsub >}})
-- [Pub/sub broker implementations](https://github.com/dapr/components-contrib/tree/master/pubsub)
+- [Pub/sub 支持的列表]({{< ref supported-pubsub >}})
+- [发布/订阅 实现](https://github.com/dapr/components-contrib/tree/master/pubsub)
 
 ## 绑定
 
-External resources can connect to Dapr in order to trigger a service or be called from a service as part of the [bindings]({{< ref bindings-overview.md >}}) building block.
+[绑定]({{< ref bindings-overview.md >}}) 构建块使得外部资源可以连接到 Dapr 以触发服务或作从应用触发外部服务。
 
-- [List of supported bindings]({{< ref supported-bindings >}})
-- [Binding implementations](https://github.com/dapr/components-contrib/tree/master/bindings)
+- [支持的绑定列表]({{< ref supported-bindings >}})
+- [绑定实现](https://github.com/dapr/components-contrib/tree/master/bindings)
 
 ## Secret stores（密钥存储）
 
