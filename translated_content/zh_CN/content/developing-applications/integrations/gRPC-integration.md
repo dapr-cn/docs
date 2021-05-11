@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Dapr的 gRPC 接口"
-linkTitle: "gRPC interface"
+title: "Dapr的gRPC接口"
+linkTitle: "gRPC接口"
 weight: 1000
 description: "在应用程序中使用 Dapr gRPC API"
 ---
@@ -10,7 +10,7 @@ description: "在应用程序中使用 Dapr gRPC API"
 
 Dapr 为本地调用实现 HTTP 和 gRPC API 。 gRPC适用于低延迟、高性能的场景，并且使用原生客户端进行语言集成。
 
-您可以在这里找到 [](https://github.com/dapr/docs#sdks) 自动生成的客户端 的列表。
+您可以在 [这里](https://github.com/dapr/docs#sdks)找到自动生成的客户端 的列表。
 
 Dapr 运行时实现 [服务](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) ，应用程序可以通过 gRPC 进行通信。
 
