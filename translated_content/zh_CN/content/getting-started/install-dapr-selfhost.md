@@ -97,7 +97,7 @@ bin  components  config.yaml
 {{% /codetab %}}
 
 {{% codetab %}}
-Using Command Prompt (not PowerShell), open `%USERPROFILE%\.dapr\` in file explorer:
+使用命令提示CMD(不是 PowerShell)，在文件探索器中打开 `%USERPROFILE%\.dapr\` ：
 
 ```powershell
 explorer "%USERPROFILE%\.dapr\"
@@ -110,4 +110,4 @@ explorer "%USERPROFILE%\.dapr\"
 
 {{< /tabs >}}
 
-{{< button text="Next step: Use the Dapr API >>" page="get-started-api" >}}
+{{< button text="下一步: 定义一个组件 >>" page="get-started-api" >}}
