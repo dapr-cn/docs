@@ -90,4 +90,4 @@ Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/secrets/my-secret-store/my-se
 {"my-secret":"I'm Batman"}
 ```
 
-{{< button text="Next step: Explore Dapr quickstarts >>" page="quickstarts" >}}
+{{< button text="下一步: 探索 Dapr 快速启动 >>" page="quickstarts" >}}
