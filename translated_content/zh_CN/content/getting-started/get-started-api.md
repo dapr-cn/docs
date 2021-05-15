@@ -11,7 +11,7 @@ weight: 30
 
 ## 第 1 步：运行Dapr sidecar
 
-One of the most useful Dapr CLI commands is [`dapr run`]({{< ref dapr-run.md >}}). 此命令与sidecar一起启动一个应用程序。 为了本教程的目的，您将在没有应用程序的情况下运行sidecar。
+一个最有用的Dapr CLI 命令是 [`dapr run`]({{< ref dapr-run.md >}})。 此命令与sidecar一起启动一个应用程序。 为了本教程的目的，您将在没有应用程序的情况下运行sidecar。
 
 运行以下命令以启动 Dapr sidecar，它将在端口 3500 上监听名为 myapp 的空白应用程序：
 
@@ -23,7 +23,7 @@ dapr run --app-id myapp --dapr-http-port 3500
 
 ## 第 2 步：保存状态
 
-We will now update the state with an object. The new state will look like this:
+我们现在将更新对象的状态。 新状态将看起来像这样：
 
 ```json
 [
@@ -34,9 +34,9 @@ We will now update the state with an object. The new state will look like this:
 ]
 ```
 
-Notice, the object contained in the state has a `key` assigned with the value `name`. You will use the key in the next step.
+注意, 状态中包含的对象有一个 `key`, 其值 `name`。 您将在下一步中使用该key。
 
-Run the command shown below to store the new state.
+运行下面显示的命令来存储新的状态。
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 {{% codetab %}}
@@ -57,7 +57,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": 
 
 ## 第 3 步：获取状态
 
-Now get the object you just stored in the state by using the state management API with the key `name`:
+现在通过使用状态管理API，用key `name` 来获取你刚刚存储在状态中的对象。
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -114,4 +114,4 @@ hgetall "myapp||name"
 exit
 ```
 
-{{< button text="Next step: Define a component >>" page="get-started-component" >}}
+{{< button text="下一步: 定义一个组件 >>" page="get-started-component" >}}
