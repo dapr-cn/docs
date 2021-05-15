@@ -110,4 +110,4 @@ Flags:
 Use "dapr [command] --help" for more information about a command.
 ```
 
-{{< button text="Next step: Initialize Dapr >>" page="install-dapr-selfhost" >}}
+{{< button text="下一步: 初始化 Dapr >>" page="install-dapr-selfhost" >}}
