@@ -3,31 +3,31 @@ type: docs
 title: "Dapr PHP SDK"
 linkTitle: "PHP"
 weight: 1000
-description: PHP SDK packages for developing Dapr applications
+description: 开发 Dapr 应用程序的 PHP SDK 包
 no_list: true
 ---
 
-Dapr offers an SDK to help with the development of PHP applications. Using it, you can create PHP clients, servers, and virtual actors with Dapr.
+Dapr提供了帮助开发 PHP 应用程序各种包。 你可以使用他们来创建 PHP 客户端、服务器和 virtual actors。
 
-## Setting up
+## 设置
 
 ### 先决条件
 
 - [Composer](https://getcomposer.org/)
 - [PHP 8](https://www.php.net/)
 
-### Optional Prerequisites
+### 可选条件
 
 - [Docker](https://www.docker.com/)
 - [xdebug](http://xdebug.org/) -- for debugging
 
-## Initialize your project
+## 初始化您的项目
 
-In a directory where you want to create your service, run `composer init` and answer the questions. Install `dapr/php-sdk` and any other dependencies you may wish to use.
+在您想要创建服务的目录中，运行 `composer init` 并确认命令执行。 安装 `dapr/php-sdk` 和您可能希望使用的其他依赖项。
 
-## Configure your service
+## 配置服务
 
-Create a config.php, copying the contents below:
+创建一个 config.php ，复制下面的内容：
 
 ```php
 <?php
@@ -77,9 +77,9 @@ return [
 ];
 ```
 
-## Create your service
+## 创建一个服务
 
-Create `index.php` and put the following contents:
+修改`index.php`，内容如下:
 
 ```php
 <?php
@@ -103,7 +103,7 @@ You can now open a web browser and point it to [http://localhost:3000/hello/worl
 
 Congratulations, you've created your first Dapr service! I'm excited to see what you'll do with it!
 
-## More Information
+## 更多信息
 
 - [Packagist](https://packagist.org/packages/dapr/php-sdk)
 - [Dapr SDK 序列化]({{< ref sdk-serialization.md >}})
