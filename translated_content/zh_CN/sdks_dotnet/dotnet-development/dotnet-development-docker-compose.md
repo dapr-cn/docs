@@ -31,7 +31,7 @@ description: 学习如何使用Docker-Compose进行本地开发
 
 要了解如何编写 `docker-compose.yaml` ，请查阅： [Hello, docker-compose sample](https://github.com/dapr/samples/tree/master/hello-docker-compose) 。
 
-您需要设定一个唯一的app-id，就像在本地为每个服务运行 `dapr run` 时一样。 将此app-id作为容器名称简单易记。
+您需要设定一个唯一的app-id，就像在本地为每个服务运行 `dapr run` 时一样。 并且将此app-id作为容器名称以便于记忆。
 
 Compose 文件应至少包含：
 
