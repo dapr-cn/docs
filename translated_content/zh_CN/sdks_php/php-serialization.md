@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Custom Serialization"
-linkTitle: "Custom Serializers"
+title: "自定义序列化"
+linkTitle: "自定义序列化"
 weight: 1000
-description: How to configure serialization
+description: 如何配置序列化
 no_list: true
 ---
 
