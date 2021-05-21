@@ -97,11 +97,11 @@ $app->start();
 
 ## 试试吧
 
-Initialize dapr with `dapr init` and then start the project with `dapr run -a dev -p 3000 -- php -S 0.0.0.0:3000`.
+用` dapr init `初始化dapr，然后用` dapr run -a dev -p 3000-php -S 0.0.0.0:3000 `启动项目。
 
-You can now open a web browser and point it to [http://localhost:3000/hello/world](http://localhost:3000/hello/world) replacing `world` with your name, a pet's name, or whatever you want.
+现在，您可以打开网络浏览器访问[ http://localhost:3000/ hello/world ](http://localhost:3000/hello/world)用您的名字，宠物的名字或您想要的任何名称替换` world `。
 
-Congratulations, you've created your first Dapr service! I'm excited to see what you'll do with it!
+恭喜，你已经建立了你的Dapr 服务！ 我很高兴看到您会怎么做！
 
 ## 更多信息
 
