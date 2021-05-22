@@ -6,7 +6,7 @@ weight: 60
 description: "教程与代码样本，旨在让你快速上手使用Dapr。"
 ---
 
-[Dapr 快速启动](https://github.com/dapr/quickstarts/tree/v1.0.0) 是代码样本的教程集合，旨在让您从 Dapr 快速入门，每个教程都突出了不同的 Dapr 功能。
+[Dapr 快速入门](https://github.com/dapr/quickstarts/tree/v1.0.0) 是代码样本的教程集合，旨在让您从 Dapr 快速入门，每个教程都突出了不同的 Dapr 功能。
 
 - 一个好的起点是 hello-world 快速入门，它演示了如何在本地机器上以独立模式运行Dapr，并在一个简单的应用程序中演示了状态管理和服务调用。
 - 接下来，如果您熟悉Kubernetes，想要看看如何在Kubernetes环境中运行相同的应用程序 寻找hello-kubernetes 快速入门。 其他快速入门，如pub-sub、bindings和distributed-calculator快速启动，探索不同的Dapr功能，包括本地和Kubernetes上运行的说明，可以按照任何顺序完成。 快速入门的完整列表可在下方找到。
