@@ -124,7 +124,7 @@ containers:
 
 ### 自托管
 
-In self-hosted mode, you can set the token as an environment variable for your app:
+在自托管模式下，您可以将令牌设置为应用程序的环境变量 ：
 
 ```
 export APP_API_TOKEN=<my-app-token>
@@ -132,5 +132,5 @@ export APP_API_TOKEN=<my-app-token>
 
 ## 相关链接
 
-- Learn about [Dapr security concepts]({{< ref security-concept.md >}})
+- 了解 [Dapr 安全概念]({{< ref security-concept.md >}})
 - Learn [HowTo Enable API token authentication in Dapr]({{< ref api-token.md >}})
