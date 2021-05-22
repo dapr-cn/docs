@@ -8,19 +8,19 @@ description: "Require every incoming API request from Dapr to include an authent
 
 For some building blocks such as pub/sub, service invocation and input bindings, Dapr communicates with an app over HTTP or gRPC. To enable the application to authenticate requests that are arriving from the Dapr sidecar, you can configure Dapr to send an API token as a header (in HTTP requests) or metadata (in gRPC requests).
 
-## Create a token
+## 创建令牌
 
-Dapr uses [JWT](https://jwt.io/) tokens for API authentication.
+Dapr 使用 [JWT](https://jwt.io/) 令牌进行 API 身份验证。
 
 > Note, while Dapr itself is actually not the JWT token issuer in this implementation, being explicit about the use of JWT standard enables federated implementations in the future (e.g. OAuth2).
 
-To configure API authentication, start by generating your token using any JWT token compatible tool (e.g. https://jwt.io/) and your secret.
+为了配置 API 身份验证，需要先使用任意 JWT 令牌兼容工具(如https://jwt.io/) 和 secret 来生成您的令牌。
 
-> Note, that secret is only necessary to generate the token, and Dapr doesn't need to know about or store it
+> 注意，这个 secret 仅仅用来生成令牌，Dapr 不需要知道或存储它
 
 ## Configure app API token authentication in Dapr
 
-The token authentication configuration is slightly different for either Kubernetes or self-hosted Dapr deployments:
+令牌认证配置在 Kubernetes 和 自托管 Dapr deployments 下稍有不同：
 
 ### 自托管
 
@@ -34,7 +34,7 @@ To rotate the configured token, simply set the `APP_API_TOKEN` environment varia
 
 ### Kubernetes
 
-In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. Start by creating a new secret: Start by creating a new secret: Start by creating a new secret:
+在 Kubernetes deployment 里，Dapr 借助 Kubernetes secrets store 保存 JWT 令牌。 Start by creating a new secret:
 
 ```shell
 kubectl create secret generic app-api-token --from-literal=token=<token> 
@@ -52,7 +52,7 @@ annotations:
 
 When deployed, the Dapr Sidecar Injector automatically creates a secret reference and injects the actual value into `APP_API_TOKEN` environment variable.
 
-## Rotate a token
+## 更新令牌
 
 ### 自托管
 
@@ -60,7 +60,7 @@ To rotate the configured token in self-hosted, simply set the `APP_API_TOKEN` en
 
 ### Kubernetes
 
-To rotate the configured token in Kubernates, update the previously created secret with the new token in each namespace. You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest:
+如果需要更新在 Kubernates 中已配置的令牌，更新先前在每个命名空间中创建的 secret 的令牌。 您可以使用 `kubectl patch` 命令执行此操作，但更简单的方法是，使用 manifest 更新每个命名空间中的这些对象:
 
 ```yaml
 apiVersion: v1
@@ -72,19 +72,19 @@ data:
   token: <your-new-token>
 ```
 
-And then apply it to each namespace:
+然后将其 apply 到每个命名空间：
 
 ```shell
 kubectl apply --file token-secret.yaml --namespace <namespace-name>
 ```
 
-To tell Dapr to start using the new token, trigger a rolling upgrade to each one of your deployments:
+为了让 Dapr 开始使用新令牌，需要对你的每个 deployment 进行滚动升级：
 
 ```shell
 kubectl rollout restart deployment/<deployment-name> --namespace <namespace-name>
 ```
 
-> Note, assuming your service is configured with more than one replica, the key rotation process does not result in any downtime.
+> 请注意，假设您的服务配置为多个副本，则 key 滚动过程不会导致任何停机。
 
 
 ## Authenticating requests from Dapr
@@ -107,7 +107,7 @@ When using gRPC protocol, inspect the incoming calls for the API token on the gR
 dapr-api-token[0].
 ```
 
-## Accessing the token from the app
+## 从应用程序访问令牌
 
 ### Kubernetes
 
