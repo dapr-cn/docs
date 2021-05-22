@@ -5,28 +5,28 @@ linkTitle: "安装 Dapr CLI"
 weight: 10
 ---
 
-Dapr CLI 是您用于各种 Dapr 相关任务的主要工具。 您可以使用它来运行一个Dapr sidecar的应用程序， 以及查看sidecar日志，列出运行服务，并运行 Dapr 仪表板。 Dapr CLI 同时使用 [自托管]({{< ref self-hosted >}}) 和 [Kubernetes]({{< ref Kubernetes >}}) 环境。
+Dapr CLI 是您用于各种 Dapr 相关任务的主要工具。 您可以使用它来运行一个带有Dapr sidecar的应用程序， 以及查看sidecar日志，列出运行中的服务，并运行 Dapr 仪表板。 Dapr CLI 同时支持 [自托管]({{< ref self-hosted >}}) 和 [Kubernetes]({{< ref Kubernetes >}}) 环境。
 
 开始下载并安装 Dapr CLI：
 
 {{< tabs Linux Windows MacOS Binaries>}}
 
 {{% codetab %}}
-此命令将最新的 Linux Dapr CLI 安装到 `/usr/local/bin`：
+此命令将安装最新的 Linux Dapr CLI 到 `/usr/local/bin`：
 ```bash
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-此命令提示命令将最新的 Windows Dapr CLI 安装到 `C:\dapr` 并将此目录添加到用户PATH 环境变量。
+此命令提示命令将安装最新的 Windows Dapr CLI 到 `C:\dapr` 并将此目录添加到用户PATH 环境变量。
 ```powershell
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-此命令将最新的 darwin Dapr CLI 安装到 `/usr/local/bin`:
+此命令将安装最新的 darwin Dapr CLI 到 `/usr/local/bin`:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | /bin/bash
 ```
