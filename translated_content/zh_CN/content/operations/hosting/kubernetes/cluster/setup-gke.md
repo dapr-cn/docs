@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Setup a Google Kubernetes Engine cluster"
-linkTitle: "Google Kubernetes Engine"
+title: "设置 Google Kubernetes 服务集群"
+linkTitle: "谷歌Kubernetes引擎(GKE)"
 weight: 3000
-description: "Setup a Google Kubernetes Engine cluster"
+description: "设置 Google Kubernetes 服务集群"
 ---
 
 ### 先决条件
@@ -11,30 +11,30 @@ description: "Setup a Google Kubernetes Engine cluster"
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Google Cloud SDK](https://cloud.google.com/sdk)
 
-## Create a new cluster
+## 创建新群集
 ```bash
 $ gcloud services enable container.googleapis.com && \
   gcloud container clusters create $CLUSTER_NAME \
   --zone $ZONE \
   --project $PROJECT_ID
 ```
-For more options refer to the [Google Cloud SDK docs](https://cloud.google.com/sdk/gcloud/reference/container/clusters/create), or instead create a cluster through the [Cloud Console](https://console.cloud.google.com/kubernetes) for a more interactive experience.
+更多选项请参阅 [Google 云SDK 文档](https://cloud.google.com/sdk/gcloud/reference/container/clusters/create)， 或者通过 [云控制台](https://console.cloud.google.com/kubernetes) 创建集群以获取更多交互体验。
 
 {{% alert title="For private GKE clusters" color="warning" %}}
 Sidecar injection will not work for private clusters without extra steps. An automatically created firewall rule for master access does not open port 4000. This is needed for Dapr sidecar injection.
 
-To review the relevant firewall rule:
+审查相关防火墙规则：
 ```bash
 $ gcloud compute firewall-rules list --filter="name~gke-${CLUSTER_NAME}-[0-9a-z]*-master"
 ```
 
-To replace the existing rule and allow kubernetes master access to port 4000:
+要替换现有的规则并允许Kubernetes主访问端口4000：
 ```bash
 $ gcloud compute firewall-rules update <firewall-rule-name> --allow tcp:10250,tcp:443,tcp:4000
 ```
 {{% /alert %}}
 
-## Retrieve your credentials for `kubectl`
+## 获取您的 `kubectl` 的凭据
 
 ```bash
 $ gcloud container clusters get-credentials $CLUSTER_NAME \
