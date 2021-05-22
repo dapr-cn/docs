@@ -66,16 +66,16 @@ auth:
 
 ## 示例
 
-### Referencing a Kubernetes secret
+### 引用一个Kubernetes密钥
 
-The following example shows you how to create a Kubernetes secret to hold the connection string for an Event Hubs binding.
+下面的示例向您展示如何创建 Kubernetes 密钥来保持 Event Hubs 绑定的连接字符串。
 
-1. First, create the Kubernetes secret:
+1. 首先，创建Kubernetes密钥：
     ```bash
      kubectl create secret generic eventhubs-secret --from-literal=connectionString=*********
     ```
 
-2. Next, reference the secret in your binding:
+2. 接下来，在您的绑定中引用该密钥：
     ```yaml
     apiVersion: dapr.io/v1alpha1
     kind: Component
@@ -92,24 +92,24 @@ The following example shows you how to create a Kubernetes secret to hold the co
           key: connectionString
     ```
 
-3. Finally, apply the component to the Kubernetes cluster:
+3. 最后，将组件应用到 Kubernetes 集群：
     ```bash
     kubectl apply -f ./eventhubs.yaml
     ```
 
-## Scoping access to secrets
+## 访问密钥的范围
 
-Dapr can restrict access to secrets in a secret store using its configuration. Read [How To: Use secret scoping]({{< ref "secrets-scopes.md" >}}) and  [How-To: Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}}) for more information. This is the recommended way to limit access to secrets using Dapr.
+Dapr 可以使用其配置限制对密钥存储中的密钥的访问。 请阅读[如何：使用密钥范围]({{< ref "secrets-scopes.md" >}})和[如何：限制可从密钥存储中读取的密钥]({{< ref "secret-scope.md" >}})以了解更多信息。 这是推荐的使用 Dapr 限制访问密钥的方式。
 
-## Kubernetes permissions
+## Kubernetes 权限
 
-### Default namespace
+### 默认命名空间
 
-When running in Kubernetes, Dapr, during installtion, defines default Role and RoleBinding for secrets access from Kubernetes secret store in the `default` namespace. For Dapr enabled apps that fetch secrets from `default` namespace, a secret can be defined and referenced in components as shown in the example above.
+当在 Kubernetes 中运行时，Dapr 在安装过程中定义了默认的 Role 和 RoleBinding ，用于在 `default` 命名空间中从 Kubernetes 密钥存储中获取密钥。 对于启用了 Dapr 的应用程序，从`default`命名空间获取密钥，可以在组件中定义和引用一个密钥，如上例所示。
 
-### Non-default namespaces
+### 非默认命名空间
 
-If your Dapr enabled apps are using components that fetch secrets from non-default namespaces, apply the following resources to that namespace:
+如果您的 Dapr 启用的应用正在使用从非默认命名空间获取密钥的组件，在该命名空间应用以下资源：
 
 ```yaml
 ---
@@ -138,10 +138,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-These resources grant Dapr permissions to get secrets from the Kubernetes secret store for the namespace defined in the Role and RoleBinding.
+这些资源给予了 Dapr 权限，从Kubernetes 密钥商店获取角色和 RoleBinding 定义的命名空间的密钥。
 
 {{% alert title="Note" color="warning" %}}
-In production scenario to limit Dapr's access to certain secret resources alone, you can use the `resourceNames` field. See this [link](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) for further explanation.
+在生产场景中，仅限Dapr访问某些秘密资源时，您可以使用 `resourceNames` 字段。 请参阅此 [链接](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) 获取更多解释。
 {{% /alert %}}
 
 ## 相关链接
