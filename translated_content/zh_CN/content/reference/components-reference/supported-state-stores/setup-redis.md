@@ -2,14 +2,14 @@
 type: docs
 title: "Redis"
 linkTitle: "Redis"
-description: Detailed information on the Redis state store component
+description: Redis 状态存储组件的详细信息
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-redis/"
 ---
 
 ## 配置
 
-To setup Redis state store create a component of type `state.redis`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+要设置 Redis 状态储存，请创建一个类型为 `state.redis`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -34,25 +34,9 @@ spec:
   - name: maxRetries
     value: # Optional
   - name: maxRetryBackoff
-    value: # Optional Allowed: true, false.
-  - name: failover
-    value: <bool> # Optional. Allowed: true, false.
-  - name: sentinelMasterName
-    value: <string> # Optional
-  - name: maxRetries
-    value: # Optional
-  - name: maxRetryBackoff
-    value: # Optional Allowed: true, false.
-  - name: failover
-    value: <bool> # Optional. Allowed: true, false.
-  - name: sentinelMasterName
-    value: <string> # Optional
-  - name: maxRetries
-    value: # Optional
-  - name: maxRetryBackoff
     value: # Optional
 ```
-**TLS:** If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS `true` or `false`.
+**TLS：** 如果Redis 实例支持公开证书的TLS，它可以配置为启用或禁用 TLS `true` 或 `fals`
 
 **Failover:** When set to `true` enables the failover feature. The redisHost should be the sentinel host address. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel)
 
