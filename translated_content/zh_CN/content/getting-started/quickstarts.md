@@ -9,13 +9,13 @@ description: "教程与代码样本，旨在让你快速上手使用Dapr。"
 [Dapr 快速入门](https://github.com/dapr/quickstarts/tree/v1.0.0) 是代码样本的教程集合，旨在让您从 Dapr 快速入门，每个教程都突出了不同的 Dapr 功能。
 
 - 一合适的入门起点是 hello-world 快速入门，它演示了如何在本地机器上以自托管模式运行Dapr，并使用一个简单的应用程序中演示了状态管理和服务调用。
-- 接下来，如果您熟悉Kubernetes，想了解如何在Kubernetes环境中运行相同的应用程序，请阅读hello-kubernetes快速入门。 其他快速入门，如pub-sub、bindings和distributed-calculator快速启动，探索不同的Dapr功能，包括本地和Kubernetes上运行的说明，可以按照任何顺序完成。 快速入门的完整列表可在下方找到。
-- 在任何时候，您可以浏览 Dapr 文档或 SDK 特定样本，然后回来尝试其他快速入门。
-- 当你完成后，可以考虑探索[Dapr样例库](https://github.com/dapr/samples)，查看由社区贡献的更多的代码样本，展示Dapr的更多高级或特定用途。
+- 接下来，如果您熟悉Kubernetes，想了解如何在Kubernetes环境中运行相同的应用程序，请阅读hello-kubernetes快速入门。 其他的快速入门教程皆在探索Dapr的不同功能，如发布/订阅、绑定和分布式计算，同时教程内包括本地和Kubernetes上运行的说明，可以无序完成。 快速入门的完整列表可在下方找到。
+- 您可以随时浏览 Dapr 文档或 SDK 特定例子，还可以尝试额外的快速入门。
+- 当你完成所有入门后，可以考虑探索[Dapr样例库](https://github.com/dapr/samples)，查看由社区贡献的更多的代码样本，其中展示Dapr的更多高阶或特定的用法。
 
 ## 快速入门
 
-| 快速入门                                                                                 | 描述                                                                 |
+| 入门项                                                                                  | 描述                                                                 |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | [Hello World](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-world)           | 演示如何在本地运行Dapr。 重点介绍服务调用和状态管理。                                      |
 | [Hello Kubernetes](https://github.com/dapr/quickstarts/tree/v1.0.0/hello-kubernetes) | 演示如何在Kubernetes中运行Dapr。 重点介绍服务调用和状态管理。                             |
