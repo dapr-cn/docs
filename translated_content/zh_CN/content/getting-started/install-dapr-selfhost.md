@@ -64,7 +64,7 @@ Runtime version: 1.1.2
 docker ps
 ```
 
-请确保 `daprio/dapr`, `openzipkin/zipkin`和 `redis` 图像都在运行：
+请确保镜像为`daprio/dapr`, `openzipkin/zipkin`和 `redis` 的容器都在运行：
 
 ```
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                              NAMES
@@ -97,7 +97,7 @@ bin  components  config.yaml
 {{% /codetab %}}
 
 {{% codetab %}}
-使用命令提示CMD(不是 PowerShell)，在文件探索器中打开 `%USERPROFILE%\.dapr\` ：
+使用命令提示符CMD(不是 PowerShell)，在文件管理器中打开 `%USERPROFILE%\.dapr\` ：
 
 ```powershell
 explorer "%USERPROFILE%\.dapr\"
