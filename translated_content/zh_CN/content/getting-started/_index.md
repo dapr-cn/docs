@@ -22,4 +22,4 @@ no_list: true
 1. 完成一个组件的配置
 1. 探索 Dapr 的快速入门案例
 
-{{< button text="First step: Install the Dapr CLI >>" page="install-dapr-cli" >}}
+{{< button text="第一步: 安装 Dapr CLI >>" page="install-dapr-cli" >}}

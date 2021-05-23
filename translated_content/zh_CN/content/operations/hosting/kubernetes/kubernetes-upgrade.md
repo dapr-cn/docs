@@ -11,34 +11,34 @@ description: "按照这些步骤升级 Kubernetes 上的 Dapr，并确保顺利�
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - [Helm 3](https://github.com/helm/helm/releases) (如果使用 Helm)
 
-## Upgrade existing cluster to 1.1.2
+## 将现有集群升级到 1.1.2
 有两种方法可以使用Dapr CLI或Helm升级Kubernetes集群上的Dapr control plane。
 
 ### Dapr CLI
 
-The example below shows how to upgrade to version 1.1.2:
+下面的示例显示了如何升级到版本 1.1.2：
 
   ```bash
   dapr upgrade -k --runtime-version=1.1.2
   ```
 
 {{% alert title="Note" color="warning" %}}
-If you are using Dapr CLI v1.1.0 there is a known issue where mTLS will be enabled by default, even on clusters where it is disabled. If your cluster has mTLS disabled, and you would like it to stay disabled, add `--set global.mtls.enabled=false` to your upgrade command:
+如果您使用的是 Dapr CLI v1.1.0，则存在一个已知问题，默认情况下将启用 mTLS，即使在禁用的集群中也是如此。 如果您的集群已禁用 mTLS，并且希望它保持禁用状态，请在升级命令中添加 `--set global.mtls.enabled=false` ：
 
 ```bash
 dapr upgrade -k --runtime-version 1.1.1 --set global.mtls.enabled=false
 ```
 
-You can track the issue here: [#664](https://github.com/dapr/cli/issues/664).
+您可以在此处跟踪问题： [#664](https://github.com/dapr/cli/issues/664)。
 {{% /alert %}}
 
 您可以使用Dapr CLI提供所有可用的Helm chart配置。 请参阅 [这里](https://github.com/dapr/cli#supplying-helm-values) 以获取更多信息。
 
-#### Troubleshooting upgrade using the CLI
+#### 使用 CLI 进行故障排除升级
 
-There is a known issue running upgrades on clusters that may have previously had a version prior to 1.0.0-rc.2 installed on a cluster.
+在集群上安装 1.0.0-rc.2 之前，可能以前有一个版本，但在集群上运行升级时存在一个已知问题。
 
-Most users should not encounter this issue, but there are a few upgrade path edge cases that may leave an incompatible CustomResourceDefinition installed on your cluster. The error message for this case looks like this:
+大多数用户不应该遇到这个问题。 但有几个升级路径边缘案例可能会在您的集群中安装不兼容的CustomResourceDefin。 此案例的错误消息看起来像这样：
 
 ```
 ❌  Failed to upgrade Dapr: Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
@@ -46,13 +46,13 @@ The CustomResourceDefinition "configurations.dapr.io" is invalid: spec.preserveU
 
 ```
 
-To resolve this issue please run the follow command to upgrade the CustomResourceDefinition to a compatible version:
+要解决此问题，请运行以下命令，将自定义资源定义升级到兼容版本：
 
 ```
 kubectl replace -f https://raw.githubusercontent.com/dapr/dapr/5a15b3e0f093d2d0938b12f144c7047474a290fe/charts/dapr/crds/configuration.yaml
 ```
 
-Then proceed with the `dapr upgrade --runtime-version 1.1.2 -k` command as above.
+然后继续 `dapr upgrade --runtime-version 1.1.2 -k` 命令如下。
 
 ### Helm
 

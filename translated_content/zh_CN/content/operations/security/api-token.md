@@ -1,48 +1,48 @@
 ---
 type: docs
-title: "Enable API token authentication in Dapr"
-linkTitle: "Dapr API token authentication"
+title: "在 Dapr 上启用 token 认证"
+linkTitle: "Dapr API 令牌认证"
 weight: 3000
-description: "Require every incoming API request for Dapr to include an authentication token before allowing that request to pass through"
+description: "Dapr 要求每个入站 API 请求都需要包含一个认证令牌，然后才能放行"
 ---
 
-By default, Dapr relies on the network boundary to limit access to its public API. If you plan on exposing the Dapr API outside of that boundary, or if your deployment demands an additional level of security, consider enabling the token authentication for Dapr APIs. This will cause Dapr to require every incoming gRPC and HTTP request for its APIs for to include authentication token, before allowing that request to pass through.
+默认情况下，Dapr 依靠网络边界来限制对其公共 API 的访问。 如果你打算将 Dapr API 暴露在网络边界之外，或者如果您的 deployment 需要额外级别的安全性，那么请考虑开启 Dapr API 的令牌认证。 这将使得 Dapr 要求每个入站 gRPC 和 HTTP API 请求都需要包含认证令牌，然后请求才能放行。
 
-## Create a token
+## 创建令牌
 
-Dapr uses [JWT](https://jwt.io/) tokens for API authentication.
+Dapr 使用 [JWT](https://jwt.io/) 令牌进行 API 身份验证。
 
 > Note, while Dapr itself is actually not the JWT token issuer in this implementation, being explicit about the use of JWT standard enables federated implementations in the future (e.g. OAuth2).
 
-To configure API authentication, start by generating your token using any JWT token compatible tool (e.g. https://jwt.io/) and your secret.
+为了配置 API 身份验证，需要先使用任意 JWT 令牌兼容工具(如https://jwt.io/) 和 secret 来生成您的令牌。
 
-> Note, that secret is only necessary to generate the token, and Dapr doesn't need to know about or store it
+> 注意，这个 secret 仅仅用来生成令牌，Dapr 不需要知道或存储它
 
-## Configure API token authentication in Dapr
+## 在 Dapr 上配置 token 认证
 
-The token authentication configuration is slightly different for either Kubernetes or self-hosted Dapr deployments:
+令牌认证配置在 Kubernetes 和 自托管 Dapr deployments 下稍有不同：
 
 ### 自托管
 
-In self-hosting scenario, Dapr looks for the presence of `DAPR_API_TOKEN` environment variable. If that environment variable is set while `daprd` process launches, Dapr will enforce authentication on its public APIs:
+在自托管场景中， Dapr 查找是否存在 `DAPR_API_TOKEN` 环境变量。 如果设置了该环境变量，当 `daprd`进程启动时，Dapr 将对其公开的 APIs 强制执行身份验证：
 
 ```shell
 export DAPR_API_TOKEN=<token>
 ```
 
-To rotate the configured token, simply set the `DAPR_API_TOKEN` environment variable to the new value and restart the `daprd` process.
+如果需要更新已配置的令牌，只需将 `DAPR_API_TOKEN` 环境变量设置为新值，然后重新启动 `daprd`进程。
 
 ### Kubernetes
 
-In Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the JWT token. Start by creating a new secret: Start by creating a new secret: To configure Dapr APIs authentication start by creating a new secret:
+在 Kubernetes deployment 里，Dapr 借助 Kubernetes secrets store 保存 JWT 令牌。 配置 Dapr API 认证，需要创建新的 secret：
 
 ```shell
 kubectl create secret generic dapr-api-token --from-literal=token=<token> 
 ```
 
-> Note, the above secret needs to be created in each namespace in which you want to enable Dapr token authentication
+> 注意，上述 secret 需要你希望开启 Dapr 令牌认证的命名空间中创建
 
-To indicate to Dapr to use that secret to secure its public APIs, add an annotation to your Deployment template spec:
+指定 Dapr 使用该密钥来保护其公有 API，需要在你的 Deployment template spec 中添加 annotation：
 
 ```yaml
 annotations: 
@@ -50,17 +50,17 @@ annotations:
   dapr.io/api-token-secret: "dapr-api-token" # name of the Kubernetes secret
 ```
 
-When deployed, Dapr sidecar injector will automatically create a secret reference and inject the actual value into `DAPR_API_TOKEN` environment variable.
+当 Deployment 部署后，Dapr sidecar 注入器会自动创建一个 secret，并将实际值注入到 `DAPR_API_TOKEN` 环境变量中。
 
-## Rotate a token
+## 更新令牌
 
 ### 自托管
 
-To rotate the configured token in self-hosted, simply set the `DAPR_API_TOKEN` environment variable to the new value and restart the `daprd` process.
+如果需要更新已配置的令牌，只需将环境变量 `DAPR_API_TOKEN`设置为新值，然后重新启动 `daprd`进程。
 
 ### Kubernetes
 
-To rotate the configured token in Kubernates, update the previously created secret with the new token in each namespace. You can do that using `kubectl patch` command, but the easiest way to update these in each namespace is by using manifest:
+如果需要更新在 Kubernates 中已配置的令牌，更新先前在每个命名空间中创建的 secret 的令牌。 您可以使用 `kubectl patch` 命令执行此操作，但更简单的方法是，使用 manifest 更新每个命名空间中的这些对象:
 
 ```yaml
 apiVersion: v1
@@ -72,28 +72,28 @@ data:
   token: <your-new-token>
 ```
 
-And then apply it to each namespace:
+然后将其 apply 到每个命名空间：
 
 ```shell
 kubectl apply --file token-secret.yaml --namespace <namespace-name>
 ```
 
-To tell Dapr to start using the new token, trigger a rolling upgrade to each one of your deployments:
+为了让 Dapr 开始使用新令牌，需要对你的每个 deployment 进行滚动升级：
 
 ```shell
 kubectl rollout restart deployment/<deployment-name> --namespace <namespace-name>
 ```
 
-> Note, assuming your service is configured with more than one replica, the key rotation process does not result in any downtime.
+> 请注意，假设您的服务配置为多个副本，则 key 滚动过程不会导致任何停机。
 
 
-## Adding JWT token to client API invocations
+## 将 JWT 令牌添加到客户端 API 调用
 
-Once token authentication is configured in Dapr, all clients invoking Dapr API will have to append the JWT token to every request:
+在 Dapr 中配置令牌认证后，所有客户端调用 Dapr API 的都必须要把 JWT 令牌附加到每个请求：
 
 ### HTTP
 
-In case of HTTP, Dapr inspect the incoming request for presence of `dapr-api-token` parameter in HTTP header:
+如果是 HTTP ，那么 Dapr 将检查在 HTTP 请求头中否存在 `dapr-api-token` 参数 ：
 
 ```shell
 dapr-api-token: <token>
@@ -101,17 +101,17 @@ dapr-api-token: <token>
 
 ### gRPC
 
-When using gRPC protocol, Dapr will inspect the incoming calls for the API token on the gRPC metadata:
+当使用 gRPC 协议时，Dapr 将检查入站 gRPC 请求的元数据（metadata）上的 API 令牌 ：
 
 ```shell
 dapr-api-token[0].
 ```
 
-## Accessing the token from the app
+## 从应用程序访问令牌
 
 ### Kubernetes
 
-In Kubernetes, it's recommended to mount the secret to your pod as an environment variable, as shown in the example below, where a Kubernetes secret with the name `dapr-api-token` is used to hold the token.
+在 Kubernetes中，推荐将您的 secret mount 到 pod 的环境变量，如以下面示例中所示，一个叫做 `dapr-api-token` 的 Kubernetes secret 用于保存令牌。
 
 ```
 containers:
@@ -124,7 +124,7 @@ containers:
 
 ### 自托管
 
-In self-hosted mode, you can set the token as an environment variable for your app:
+在自托管模式下，您可以将令牌设置为应用程序的环境变量 ：
 
 ```
 export DAPR_API_TOKEN=<my-dapr-token>
@@ -132,5 +132,5 @@ export DAPR_API_TOKEN=<my-dapr-token>
 
 ## 相关链接
 
-- Learn about [Dapr security concepts]({{< ref security-concept.md >}})
-- Learn [HowTo authenticate requests from Dapr using token authentication]({{< ref app-api-token.md >}})
+- 了解 [Dapr 安全概念]({{< ref security-concept.md >}})
+- 学习 [如何通过令牌认证 来自 Dapr 的请求]({{< ref app-api-token.md >}})

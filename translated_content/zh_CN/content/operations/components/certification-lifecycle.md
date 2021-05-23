@@ -1,89 +1,89 @@
 ---
 type: docs
-title: "Certification lifecycle"
-linkTitle: "Certification lifecycle"
+title: "认证生命周期"
+linkTitle: "认证生命周期"
 weight: 200
-description: "The component certification lifecycle from submission to production ready"
+description: "从提交到生产准备的组件认证生命周期"
 ---
 
 ## 概述
 
-Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有接口定义。  All of the components are pluggable so that in ideal scenarios, you can swap out one component with the same interface for another. Each component that is used in production, needs to maintain a certain set of technical requirements that ensure the functional compatibility and robustness of the component.
+Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有接口定义。  所有的组件都是可插拔的，因此在理想的情况下，你可以用一个具有相同接口的组件换掉另一个。 用于生产的每个组件， 需要保持一套技术要求，以确保组件的功能兼容性和强度。
 
-In general a component needs to be:
-- compliant with the defined Dapr interfaces
-- functionally correct and robust
-- well documented and maintained
+一般来说，一个组件需要是：
+- 符合定义的Dapr接口
+- 功能正确和强健
+- 完善的文档和维护
 
-To make sure a component conforms to the standards set by Dapr, there are a set of tests run against a component in a Dapr maintainers managed environment. Once the tests pass consistently, the maturity level can be determined for a component.
+为了确保一个组件符合Dapr设定的标准，在Dapr维护者管理的环境中，有一组针对组件的测试。 一旦测试持续通过，就可以确定一个组件的成熟度。
 
-## Certification levels
+## 认证级别
 
-The levels are as follows:
+级别如下:
 - [Alpha](#alpha)
 - [Beta](#beta)
-- [General availability (GA)](#general-availability-ga)
+- [一般可用性（GA）](#general-availability-ga)
 
 ### Alpha
 
-- The component implements the required interface and works as described in the specification
-- The component has documentation
-- The component might be buggy or might expose bugs on integration
-- The component may not pass all conformance tests
-- The component may not have conformance tests
-- Recommended for only non-business-critical uses because of potential for incompatible changes in subsequent releases
+- 该组件实现了所需的接口，并按照规范中的描述工作。
+- 该组件有文档
+- 该组件可能有问题，或者在集成时可能会暴露出问题。
+- 该组件可能无法通过所有的一致性测试
+- 该组件可能没有符合性测试
+- 建议仅用于非业务关键型用途，因为在后续版本中可能会出现不兼容的变化
 
-All components start at the Alpha stage.
+所有组件都在 Alpha 阶段开始。
 
 ### Beta
 
-- The component must pass all the component conformance tests defined to satisfy the component specification
-- The component conformance tests have been run in a Dapr maintainers managed environment
-- The component contains a record of the conformance test result reviewed and approved by Dapr maintainers with specific components-contrib version
-- Recommended for only non-business-critical uses because of potential for incompatible changes in subsequent releases
+- 该组件必须通过为满足组件规范而定义的所有组件一致性测试
+- 组件的一致性测试已经在Dapr维护者管理的环境中运行
+- 该组件包含了由Dapr维护者审查和批准的一致性测试结果的记录，并具有特定组件-contrib版本
+- 建议仅用于非业务关键型用途，因为在后续版本中可能会出现不兼容的变化
 
-### General Availability (GA)
+### 一般可用性 (GA)
 
-- Has at least two different users using the component in production
-- A GA component has a maintainer in the Dapr community or the Dapr maintainers
-- The component is well documented, tested and maintained across multiple versions of components-contrib repo
+- 至少有两个不同的用户在生产中使用该组件
+- 一个GA组件在Dapr社区或Dapr维护者中有一个维护者
+- 该组件在多个版本的组件-contrib repo中都有良好的文档、测试和维护
 
-## Conformance tests
+## 一致性测试
 
-Each component in the [components-contrib](https://github.com/dapr/components-contrib) repository needs to adhere to a set of interfaces defined by Dapr. Conformance tests are tests that are run on these component definitions with their associated backing services such that the component is tested to be conformant with the Dapr interface specifications and behavior.
+[components-contrib](https://github.com/dapr/components-contrib)资源库中的每个组件都需要遵守由Dapr定义的一组接口。 一致性测试是对这些组件定义及其相关的支持服务运行的测试，这样组件就被测试为符合Dapr接口规范和行为。
 
-The conformance tests are defined for the following building blocks:
+符合性测试是为以下构建块定义的:
 
-- State store
-- Secret store
+- 状态存储
+- 密钥存储
 - 绑定
 - 发布/订阅
 
-To understand more about them see the readme [here](https://github.com/dapr/components-contrib/blob/master/tests/conformance/README.md).
+要了解更多关于它们的信息，请看readme [这里](https://github.com/dapr/components-contrib/blob/master/tests/conformance/README.md)。
 
-### Test requirements
+### 测试要求
 
-- The tests should validate the functional behavior and robustness of component based on the component specification
-- All the details needed to reproduce the tests are added as part of the component conformance test documentation
+- 测试应该根据组件的规范来验证组件的功能行为和稳健性
+- 重现测试所需的所有细节都作为组件一致性测试文件的一部分加入
 
-## Component certification process
+## 组件认证过程
 
-For a component to be certified tests are run in an environment maintained by the Dapr team.
+为了使一个部件得到认证，测试在Dapr团队维护的环境中运行。
 
-### New component certification: Alpha->Beta or Beta->GA
+### 新的组件认证。Alpha->Beta或Beta->GA
 
-For a new component requiring a certification change from Alpha to Beta or Beta to GA, a request for component certification follows these steps:
-- An issue is created with a request for certification of the component with the current and the new certification levels
-- A user of a component submits a PR for integrating the component to run with the defined conformance test suite
-- The user details the environment setup in the issue created, so that a Dapr maintainer can setup the service in a managed environment
-- After the environment setup is complete, Dapr maintainers review the PR and if approved merges that PR
-- Dapr maintainers review functional correctness with the test being run in an environment maintained by the Dapr team
-- Dapr maintainers update the component status document categorized by Dapr Runtime version. This is done as part of the release process in the next release of Dapr runtime
+对于一个需要从Alpha到Beta或Beta到GA的认证变更的新组件，组件认证申请遵循以下步骤:
+- 创建了一个issue，要求以当前和新的认证级别对组件进行认证
+- 一个组件的用户提交了一个整合组件的PR，以便与定义的一致性测试套件一起运行
+- 用户在创建的问题中详细说明了环境设置，以便Dapr维护者能够在受管理的环境中设置服务
+- 在环境设置完成后，Dapr维护者会审查PR，如果批准，就会合并该PR
+- Dapr维护者在Dapr团队维护的环境中运行测试，审查功能是否正确
+- Dapr维护者按照Dapr Runtime版本分类更新组件状态文件。 这是在Dapr运行时的下一个版本中作为发布过程的一部分进行的
 
-### Existing GA certified component
+### 现有的GA认证组件
 
-For an existing GA certified component, conformance test should be run against any changes made to component code or the backing service version or the client version.
+对于现有的GA认证的组件，一致性测试应该针对组件代码或支持服务版本或客户端版本的任何变化来运行。
 
-In the scenarios where a component version is updated, the component again starts from Alpha stage and then the new component certification is followed for that.
+在组件版本更新的情况下，该组件再次从Alpha阶段开始，然后按照新的组件认证来进行。
 
 

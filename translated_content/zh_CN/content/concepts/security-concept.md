@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "安全"
+title: "Security"
 linkTitle: "安全"
 weight: 600
 description: >

@@ -87,6 +87,6 @@ $app->run(function(\DI\FactoryInterface $factory) {
 ## 相关链接
 
 - 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
-- 您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
+- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
 - [Pub/Sub 组件列表]({{< ref supported-pubsub >}})
 - 阅读 [API 引用]({{< ref pubsub_api.md >}})

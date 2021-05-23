@@ -6,7 +6,7 @@ weight: 400
 description: "变更 Dapr sidecars 或全局 Dapr 系统服务的行为"
 ---
 
-Dapr configurations are settings that enable you to change both the behavior of individual Dapr applications, or the global behavior of the system services in the Dapr control plane.
+您可以在 Dapr 控制面板中更改 Dapr 全局系统服务配置，这些设置能够改变单个 Dapr 应用程序 sidecar。
 
 配置定义和部署形式为 YAML 文件。 一个应用程序配置示例就像这样：
 

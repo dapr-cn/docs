@@ -26,7 +26,7 @@ This tells Dapr to set maximum request body size to `16` MB.
 
 {{% codetab %}}
 
-在Kubernetes上，在你的deployment YAML中设置以下注解:
+在Kubernetes中，需要在deployment YAML文件中设置以下注解:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment

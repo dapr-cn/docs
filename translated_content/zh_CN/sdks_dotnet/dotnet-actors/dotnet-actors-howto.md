@@ -611,7 +611,7 @@ namespace MyActorClient
     Got response: Success
     ```
 
-> 💡 This sample relies on a few assumptions. ASP.NET Core Web 项目的默认监听端口是 5000，它被传递给 `dapr run` 作为 `--app-port 5000`。 Dapr sidecar 的默认HTTP端口是 3500。 我们告诉 sidecar 的 `MyActorService` 使用 3500，以便 `MyActorClient` 可以依赖默认值。
+> 💡 这个示例依赖于几个假设。 ASP.NET Core Web 项目的默认监听端口是 5000，它被传递给 `dapr run` 作为 `--app-port 5000`。 Dapr sidecar 的默认HTTP端口是 3500。 我们告诉 sidecar 的 `MyActorService` 使用 3500，以便 `MyActorClient` 可以依赖默认值。
 
 现在您已经成功创建了 actor 服务和客户端。 查看相关链接部分了解更多信息。
 

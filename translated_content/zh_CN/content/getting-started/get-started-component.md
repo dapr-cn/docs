@@ -7,7 +7,7 @@ weight: 40
 
 在 [之前的步骤]({{X13X}}) 中，你调用 Dapr HTTP API 从Redis支持的状态存储中存储和检索状态 Dapr通过Dapr初始化时创建的默认组件定义文件，知道使用本地配置在机器上的Redis实例。 Dapr通过Dapr初始化时创建的默认组件定义文件，知道使用本地配置在机器上的Redis实例。
 
-当构建一个应用程序时，你很可能会根据你想使用的构建块和特定的组件来创建自己的组件文件定义。
+当构建一个应用程序时，你很可能会根据你想使用的构建块和特定的组件来定义自己的组建文件。
 
 作为如何为您的应用程序定义自定义组件的一个例子，您现在将创建一个组件定义文件来与[密钥构建块]({{< ref secrets >}})进行交互。
 
@@ -30,7 +30,7 @@ Dapr 支持 [许多类型的密钥存储]({{< ref supported-secret-stores >}})�
 
 ## 第 2 步：创建一个密钥存储Dapr 组件
 
-创建一个名为 `my-components` 的新目录来保存新组件文件：
+创建一个名为 `my-components` 的目录来存放新的组件文件：
 
 ```bash
 mkdir my-components
@@ -55,7 +55,7 @@ spec:
     value: ":"
 ```
 
-您可以看到上面的文件定义有一个 `type: secretstores.local.file` 告诉Dapr使用本地文件组件作为密钥存储。 元数据字段提供了使用该组件所需的组件特定信息（在本例中，是密钥存储JSON的路径）。
+您可以看到上述的文件定义有一个 `type: secretstores.local.file` 字段值，其告诉Dapr使用本地文件组件作为密钥存储。 元数据字段提供了使用该组件所需的组件特定信息（在本例中，是密钥存储JSON的路径）。
 
 ## 第 3 步：运行Dapr sidecar
 
@@ -84,10 +84,10 @@ Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/secrets/my-secret-store/my-se
 {{% /codetab %}}
 {{< /tabs >}}
 
-你应该看到你存储在JSON文件中的密钥的输出。
+你看到的输出应该为你存储在JSON文件中的密钥
 
 ```json
 {"my-secret":"I'm Batman"}
 ```
 
-{{< button text="Next step: Explore Dapr quickstarts >>" page="quickstarts" >}}
+{{< button text="下一步: 探索 Dapr 快速启动 >>" page="quickstarts" >}}
