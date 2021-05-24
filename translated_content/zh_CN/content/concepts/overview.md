@@ -41,13 +41,13 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 
 ## Sidecar 架构
 
-Dapr以 sidecar 架构的方式公开其API，可以是容器，也可以是进程，不需要应用代码包含任何 Dapr 运行时代码。 这使得 Dapr 与其他运行时的集成变得容易，同时也提供了应用逻辑的分离，改善可支持性。
+Dapr以 sidecar 架构的方式公开其API，可以是容器，也可以是进程，不需要应用代码包含任何 Dapr 运行时代码。 这使得 Dapr 与其他运行时的集成变得容易，在应用逻辑层面做了隔离处理，提高了可扩展性。
 
 <img src="/images/overview-sidecar-model.png" width=700>
 
 ## 托管环境
 
-Dapr可以在多个环境中托管，包括在Windows/Linux/macOS机器上自托管和Kubernetes。
+Dapr可以托管在多个环境中，包括在Windows/Linux/macOS机器上自托管和Kubernetes。
 
 ### 自托管
 
