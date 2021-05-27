@@ -149,7 +149,7 @@ You are up and running! Both Dapr and your app logs will appear here.
 == APP == Got value: b'myFirstValue'   Status: Running. Init Elapsed 172.9994ms" app_id=Braidbald-Boot scope=dapr.
 
  
-   
+  Both Dapr and your app logs will appear here.
 
  
 ```
@@ -384,7 +384,7 @@ dapr --app-id myapp run python pythonState.py
 Checking if Dapr sidecar is listening on GRPC port 60614
 Dapr sidecar is up and running.
 Updating metadata for app command: python pythonState.py
-You're up and running!  
+You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == States have been stored
 == APP == Got items: [b'value1', b'value2']
@@ -429,7 +429,7 @@ dapr --app-id myapp run -- php state-example.php
 并看到以下输出:
 
 ```md
-✅  You're up and running!  
+✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T16:55:02.913801+01:00] APP.ALERT: States have been stored [] []
 
@@ -523,7 +523,7 @@ Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
 Checking if Dapr sidecar is listening on GRPC port 59534
 Dapr sidecar is up and running.
 Updating metadata for app command: python pythonState.py
-You're up and running!  
+You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == State transactions have been completed
 == APP == Got items: [b'value1', b'']
@@ -571,7 +571,7 @@ dapr --app-id myapp run -- php state-example.php
 观察到以下输出:
 
 ```md
-✅  You're up and running!  
+✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! [] []
 
