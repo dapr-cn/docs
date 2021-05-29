@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "status CLI command reference"
+title: "status CLI 命令参考"
 linkTitle: "status"
-description: "Detailed information on the status CLI command"
+description: "有关 status CLI 命令的详细信息"
 ---
 
-## Description
+## 说明
 
-Show the health status of Dapr services.
+显示 Dapr 服务的健康状况。
 
-## Supported platforms
+## 支持的平台
 
 - [Kubernetes]({{< ref kubernetes >}})
 
-## Usage
+## 用法
 
 ```bash
 dapr status -k
 ```
 
-## Flags
+## 参数
 
-| Name                 | Environment Variable | Default | Description                                                   |
-| -------------------- | -------------------- | ------- | ------------------------------------------------------------- |
-| `--help`, `-h`       |                      |         | Print this help message                                       |
-| `--kubernetes`, `-k` |                      | `false` | Show the health status of Dapr services on Kubernetes cluster |
+| Name                 | 环境变量 | 默认值     | 说明                             |
+| -------------------- | ---- | ------- | ------------------------------ |
+| `--help`, `-h`       |      |         | 显示此帮助消息                        |
+| `--kubernetes`, `-k` |      | `false` | 显示 Kubernetes 集群上 Dapr 服务的运行状况 |
 
-## Examples
+## 示例
 
-### Get status of Dapr services from Kubernetes
+### 获取来自 Kubernetes 的 Dapr 服务的状态
 ```bash
 dapr status -k
 ```
