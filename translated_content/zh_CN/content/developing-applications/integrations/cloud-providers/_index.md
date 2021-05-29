@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Integrations with cloud providers"
-linkTitle: "Cloud providers"
+title: "与云提供商的集成"
+linkTitle: "云提供商"
 weight: 5000
-description: "Information about authentication and configuration for various cloud providers"
+description: "关于各种云端服务商的身份验证和配置信息"
 ---
 
