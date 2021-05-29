@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Zookeeper state store create a component of type `state.zookeeper`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Zookeeper state store create a component of type `state.zookeeper`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -81,5 +81,5 @@ For example, if installing using the example above, the Zookeeper host address w
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
 - [状态管理构建块]({{< ref state-management >}})
