@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Service invocation API reference"
-linkTitle: "Service invocation API"
+linkTitle: "服务调用 API"
 description: "Detailed documentation on the service invocation API"
 weight: 100
 ---
@@ -12,34 +12,34 @@ Dapr provides users with the ability to call other applications that have unique
 
 This endpoint lets you invoke a method in another Dapr enabled app.
 
-### HTTP Request
+### HTTP 请求
 
 ```
 POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method/<method-name>
 ```
 
-### HTTP Response codes
+### HTTP 响应码
 
 When a service invokes another service with Dapr, the status code of the called service will be returned to the caller. If there's a network error or other transient error, Dapr will return a `500` error with the detailed error message.
 
 In case a user invokes Dapr over HTTP to talk to a gRPC enabled service, an error from the called gRPC service will return as `500` and a successful response will return as `200OK`.
 
-| Code | Description                            |
-| ---- | -------------------------------------- |
-| XXX  | Upstream status returned               |
-| 400  | Method name not given                  |
-| 403  | Invocation forbidden by access control |
-| 500  | Request failed                         |
+| 代码  | 说明                                     |
+| --- | -------------------------------------- |
+| XXX | Upstream status returned               |
+| 400 | Method name not given                  |
+| 403 | Invocation forbidden by access control |
+| 500 | 请求失败                                   |
 
-### URL Parameters
+### URL 参数
 
-| Parameter   | Description                                               |
+| 参数          | 说明                                                        |
 | ----------- | --------------------------------------------------------- |
-| daprPort    | the Dapr port                                             |
+| daprPort    | dapr 端口。                                                  |
 | appId       | the App ID associated with the remote app                 |
 | method-name | the name of the method or url to invoke on the remote app |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
 ### Request Contents
 
@@ -79,7 +79,7 @@ myApp.production
 
 - Kubernetes
 
-### Examples
+### 示例
 
 You can invoke the `add` method on the `mathService` service by sending the following:
 
@@ -117,5 +117,5 @@ In case you are invoking `mathService` on a different namespace, you can use the
 
 In this URL, `testing` is the namespace that `mathService` is running in.
 
-## Next Steps
-- [How-To: Invoke and discover services]({{< ref howto-invoke-discover-services.md >}})
+## 下一步
+- [入门指南：发现并调用服务]({{< ref howto-invoke-discover-services.md >}})
