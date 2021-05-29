@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Azure Blob Storage binding spec"
+title: "Azure Blob Storage绑定规范"
 linkTitle: "Azure Blob Storage"
-description: "Detailed documentation on the Azure Blob Storage binding component"
+description: "关于 Azure Blob Storage绑定组件的详细文档"
 aliases:
   - "/operations/components/setup-bindings/supported-bindings/blobstorage/"
 ---
 
-## Component format
+## 配置
 
-To setup Azure Blob Storage binding create a component of type `bindings.azure.blobstorage`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置 Azure Blob Storage 绑定，请创建一个类型为 `bindings.azure.blobstorage` 的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -34,33 +34,33 @@ spec:
     value: <integer>
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field             | Required | Binding support | Details                                                                                                                                                                                                                                                   | Example                |
-| ----------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| storageAccount    |    Y     | Output          | The Blob Storage account name                                                                                                                                                                                                                             | `"myexmapleaccount"`   |
-| storageAccessKey  |    Y     | Output          | The Blob Storage access key                                                                                                                                                                                                                               | `"access-key"`         |
-| container         |    Y     | Output          | The name of the Blob Storage container to write to                                                                                                                                                                                                        | `"myexamplecontainer"` |
-| decodeBase64      |    N     | Output          | Configuration to decode base64 file content before saving to Blob Storage. (In case of saving a file with binary content). `"true"` is the only allowed positive value. Other positive variations like `"True"` are not acceptable. Defaults to `"false"` | `"true"`, `"false"`    |
-| getBlobRetryCount |    N     | Output          | Specifies the maximum number of HTTP GET requests that will be made while reading from a RetryReader Defaults to `"10"`                                                                                                                                   | `"1"`, `"2"`           |
+| 字段                | 必填 | 绑定支持 | 详情                                                                                                          | Example                |
+| ----------------- |:--:| ---- | ----------------------------------------------------------------------------------------------------------- | ---------------------- |
+| storageAccount    | Y  | 输出   | Blob Storage 账户名称                                                                                           | `"myexmapleaccount"`   |
+| storageAccessKey  | Y  | 输出   | Blob Storage 访问密钥                                                                                           | `"access-key"`         |
+| container         | Y  | 输出   | 要写入的Blob Storage容器名称                                                                                        | `"myexamplecontainer"` |
+| decodeBase64      | N  | 输出   | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `"true"`是唯一允许的正值。 其他正值，如`"True"`是不可接受的。 默认值为 `"false"` | `"true"`, `"false"`    |
+| getBlobRetryCount | N  | 输出   | 指定从 RetryReader 读取时，将进行的 HTTP GET 请求的最大次数 默认为 `"10"`。                                                       | `"1"`, `"2"`           |
 
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
-- `create` : [Create blob](#create-blob)
-- `get` : [Get blob](#get-blob)
+- `create` : [创建blob](#create-blob)
+- `get` : [获取blob](#get-blob)
 - `delete` : [Delete blob](#delete-blob)
 
-### Create blob
+### 创建blob
 
-To perform a create blob operation, invoke the Azure Blob Storage binding with a `POST` method and the following JSON body:
+要执行创建 blob 操作，请使用 `POST` 方法和以下 JSON 调用 Azure Blob Storage绑定。
 
-> Note: by default, a random UUID is generated. See below for Metadata support to set the name
+> 注意：默认情况下，会随机生成一个UUID。 参见下面所示的支持的元数据设置名称
 
 ```json
 {
@@ -69,14 +69,14 @@ To perform a create blob operation, invoke the Azure Blob Storage binding with a
 }
 ```
 
-#### Examples
+#### 示例
 
 
-##### Save text to a random generated UUID blob
+##### 保存到一个随机生成的UUID blob
 
 {{< tabs Windows Linux >}}
   {{% codetab %}}
-  On Windows, utilize cmd prompt (PowerShell has different escaping mechanism)
+  在Windows上，使用cmd提示符（PowerShell有不同的转义机制）。
   ```bash
   curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
   ```
@@ -91,7 +91,7 @@ To perform a create blob operation, invoke the Azure Blob Storage binding with a
 
 {{< /tabs >}}
 
-##### Save text to a specific blob
+##### 保存文本到指定blob
 
 {{< tabs Windows Linux >}}
 
@@ -112,9 +112,9 @@ To perform a create blob operation, invoke the Azure Blob Storage binding with a
 {{< /tabs >}}
 
 
-##### Save a file to a blob
+##### 保存文件到blob
 
-To upload a file, encode it as Base64 and let the Binding know to deserialize it:
+要上传一个文件，将其编码为Base64，并让绑定知道要对它进行反序列化：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -136,7 +136,7 @@ spec:
     value: "true"
 ```
 
-Then you can upload it as you would normally:
+然后你就可以像平常一样上传了：
 
 {{< tabs Windows Linux >}}
 
@@ -155,20 +155,21 @@ Then you can upload it as you would normally:
 
 {{< /tabs >}}
 
-#### Response
+#### 响应
 
-The response body will contain the following JSON:
+响应体将包含以下JSON：
 
 ```json
 {
+   "blobURL": "https://<your account name>. {
    "blobURL": "https://<your account name>. blob.core.windows.net/<your container name>/<filename>"
 }
 
 ```
 
-### Get blob
+### 获取blob
 
-To perform a get blob operation, invoke the Azure Blob Storage binding with a `POST` method and the following JSON body:
+要执行获取blob操作，请使用`POST`方法和以下JSON体调用Azure Blob Storage绑定:
 
 ```json
 {
@@ -198,9 +199,9 @@ To perform a get blob operation, invoke the Azure Blob Storage binding with a `P
 
 {{< /tabs >}}
 
-#### Response
+#### 响应
 
-The response body contains the value stored in the blob object.
+响应体包含存储在blob对象中的值。
 
 ### Delete blob
 
@@ -215,7 +216,7 @@ To perform a delete blob operation, invoke the Azure Blob Storage binding with a
 }
 ```
 
-#### Examples
+#### 示例
 
 ##### Delete blob
 
@@ -274,15 +275,15 @@ To perform a delete blob operation, invoke the Azure Blob Storage binding with a
 
 {{< /tabs >}}
 
-#### Response
+#### 响应
 
 An HTTP 204 (No Content) and empty body will be retuned if successful.
 
-## Metadata information
+## 元数据信息
 
-By default the Azure Blob Storage output binding auto generates a UUID as the blob filename and is not assigned any system or custom metadata to it. It is configurable in the metadata property of the message (all optional).
+默认情况下，Azure Blob Storage 输出绑定会自动生成一个 UUID 作为 blob 文件名，并且不会为其分配任何系统或自定义元数据。 它可以在消息的元数据属性中配置（都是可选的）。
 
-Applications publishing to an Azure Blob Storage output binding should send a message with the following format:
+应用程序发布到 Azure Blob Storage 输出绑定时，应发送格式如下的消息。
 
 ```json
 {
@@ -301,10 +302,10 @@ Applications publishing to an Azure Blob Storage output binding should send a me
 }
 ```
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
