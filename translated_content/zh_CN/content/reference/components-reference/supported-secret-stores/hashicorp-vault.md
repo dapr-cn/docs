@@ -4,7 +4,7 @@ title: "HashiCorp Vault"
 linkTitle: "HashiCorp Vault"
 description: 详细介绍了关于 HashiCorp Vault密钥仓库组件的信息
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/hashicorp-vault/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/hashicorp-vault/"
 ---
 
 ## 创建 Vault 组件
