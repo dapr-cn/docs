@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Contributing to Dapr"
+title: "为Dapr贡献"
 linkTitle: "参与贡献"
 weight: 100
 description: >
-  How to contribute to the Dapr project
+  如何为 Dapr 项目做贡献
 ---
 
