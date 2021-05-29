@@ -1,39 +1,39 @@
 ---
 type: docs
-title: "publish CLI command reference"
+title: "publish CLI 命令参考"
 linkTitle: "publish"
-description: "Detailed information on the publish CLI command"
+description: "有关 publish CLI 命令的详细信息"
 ---
 
-## Description
+## 说明
 
-Publish a pub-sub event.
+发布 pub-sub 事件。
 
-## Supported platforms
+## 支持的平台
 
 - [自托管]({{< ref self-hosted >}})
 
-## Usage
+## 用法
 
 ```bash
 dapr publish [flags]
 ```
 
-## Flags
+## 参数
 
-| Name                     | Environment Variable | Default                                                      | Description                                           |
-| ------------------------ | -------------------- | ------------------------------------------------------------ | ----------------------------------------------------- |
-| `--publish-app-id`, `-i` |                      | The ID that represents the app from which you are publishing |                                                       |
-| `--pubsub`, `-p`         |                      | The name of the pub/sub component                            |                                                       |
-| `--topic`, `-t`          |                      |                                                              | The topic to be published to                          |
-| `--data`, `-d`           |                      |                                                              | The JSON serialized string (optional)                 |
-| `--data-file`, `-f`      |                      |                                                              | A file containing the JSON serialized data (optional) |
-| `--help`, `-h`           |                      |                                                              | Print this help message                               |
+| Name                     | 环境变量 | 默认值             | 说明                                                    |
+| ------------------------ | ---- | --------------- | ----------------------------------------------------- |
+| `--publish-app-id`, `-i` |      | 代表您要发布的应用程序的 ID |                                                       |
+| `--pubsub`, `-p`         |      | Pub/sub 组件的名称   |                                                       |
+| `--topic`, `-t`          |      |                 | 待发布的 topic                                            |
+| `--data`, `-d`           |      |                 | JSON 序列化数据字符串（可选）                                     |
+| `--data-file`, `-f`      |      |                 | A file containing the JSON serialized data (optional) |
+| `--help`, `-h`           |      |                 | 显示此帮助消息                                               |
 
 
-## Examples
+## 示例
 
-### Publish to sample topic in target pubsub
+### 将示例 topic 发布到目标 pubsub
 ```bash
 dapr publish --publish-app-id appId --topic sample --pubsub target --data '{"key":"value"}'
 ```
