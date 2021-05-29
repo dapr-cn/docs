@@ -7,7 +7,7 @@ aliases:
   - "/operations/components/setup-bindings/supported-bindings/sendgrid/"
 ---
 
-## Component format
+## 配置
 
 To setup Twilio SendGrid binding create a component of type `bindings.twilio.sendgrid`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -33,24 +33,24 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field     | Required | Binding support | Details                                                                                                                    | Example                  |
-| --------- |:--------:| --------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| apiKey    |    Y     | Output          | SendGrid API key, this should be considered a secret value                                                                 | `"apikey"`               |
-| emailFrom |    N     | Output          | If set this specifies the 'from' email address of the email message. Optional field, see [below](#example-request-payload) | `"me@example.com"`       |
-| emailTo   |    N     | Output          | If set this specifies the 'to' email address of the email message. Optional field, see [below](#example-request-payload)   | `"me@example.com"`       |
-| emailCc   |    N     | Output          | If set this specifies the 'cc' email address of the email message. Optional field, see [below](#example-request-payload)   | `"me@example.com"`       |
-| emailBcc  |    N     | Output          | If set this specifies the 'bcc' email address of the email message. Optional field, see [below](#example-request-payload)  | `"me@example.com"`       |
-| subject   |    N     | Output          | If set this specifies the subject of the email message. Optional field, see [below](#example-request-payload)              | `"subject of the email"` |
+| 字段        | 必填 | 绑定支持 | 详情                                                                                                                         | Example                  |
+| --------- |:--:| ---- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| apiKey    | Y  | 输出   | SendGrid API key, this should be considered a secret value                                                                 | `"apikey"`               |
+| emailFrom | N  | 输出   | If set this specifies the 'from' email address of the email message. Optional field, see [below](#example-request-payload) | `"me@example.com"`       |
+| emailTo   | N  | 输出   | If set this specifies the 'to' email address of the email message. Optional field, see [below](#example-request-payload)   | `"me@example.com"`       |
+| emailCc   | N  | 输出   | If set this specifies the 'cc' email address of the email message. Optional field, see [below](#example-request-payload)   | `"me@example.com"`       |
+| emailBcc  | N  | 输出   | If set this specifies the 'bcc' email address of the email message. Optional field, see [below](#example-request-payload)  | `"me@example.com"`       |
+| subject   | N  | 输出   | If set this specifies the subject of the email message. Optional field, see [below](#example-request-payload)              | `"subject of the email"` |
 
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `create`
 
@@ -67,10 +67,10 @@ You can specify any of the optional metadata properties on the output binding re
   "data": "<h1>Testing Dapr Bindings</h1>This is a test.<br>Bye!"
 }
 ```
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
