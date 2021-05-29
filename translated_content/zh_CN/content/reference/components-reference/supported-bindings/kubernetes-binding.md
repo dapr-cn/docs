@@ -4,7 +4,7 @@ title: "Kubernetes Events binding spec"
 linkTitle: "Kubernetes 事件"
 description: "Detailed documentation on the Kubernetes Events binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/kubernetes-binding/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/kubernetes-binding/"
 ---
 
 ## 配置
