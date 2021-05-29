@@ -1,42 +1,42 @@
 ---
 type: docs
-title: "How-To: Configure state store and pub/sub message broker"
-linkTitle: "(optional) Configure state & pub/sub"
-weight: 80
-description: "Configure state store and pub/sub message broker components for Dapr"
+title: "如何操作：配置 状态存储 和 发布/订阅 消息代理"
+linkTitle: "(可选) 配置 状态 & 发布/订阅"
+weight: 400
+description: "配置Dapr的状态存储和 发布/订阅 消息代理"
 aliases:
   - /getting-started/configure-redis/
 ---
 
-In order to get up and running with the state and pub/sub building blocks two components are needed:
+为了启动和运行状态和 发布/订阅 构建块，需要两个组件。
 
-1. A state store component for persistence and restoration
-2. As pub/sub message broker component for async-style message delivery
+1. 一个用于持久化和恢复的状态存储组件。
+2. 作为发布/订阅消息代理组件，用于异步式的消息传递。
 
-A full list of supported components can be found here:
-- [Supported state stores]({{< ref supported-state-stores >}})
-- [Supported pub/sub message brokers]({{< ref supported-pubsub >}})
+支持的组件的完整列表可以在这里找到：
+- [支持的状态存储]({{< ref supported-state-stores >}})
+- [支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})
 
-The rest of this page describes how to get up and running with Redis.
+此页的其余部分描述了如何使用Redis启动和运行。
 
 {{% alert title="Self-hosted mode" color="warning" %}}
-When initialized in self-hosted mode, Dapr automatically runs a Redis container and sets up the required component yaml files. You can skip this page and go to [next steps](#next-steps)
+当在自托管模式下初始化时，Dapr会自动运行一个Redis容器并设置所需的 yaml 文件. 您可以跳过此页并跳转到 [下一步](#next-steps) 您可以跳过此页并跳转到 [下一步](#next-steps)
 {{% /alert %}}
 
-## Create a Redis store
+## 创建Redis存储
 
-Dapr can use any Redis instance - either containerized on your local dev machine or a managed cloud service. If you already have a Redis store, move on to the [configuration](#configure-dapr-components) section.
+Dapr可以使用任何Redis实例--无论是在本地开发机器上的容器化的还是在托管云服务上的。 如果您已经有了Redis存储，请转到 [配置](#configure-dapr-components) 部分。
 
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
-Redis is automatically installed in self-hosted environments by the Dapr CLI as part of the initialization process. You are all set and can skip to the \[next steps\](next steps)
+作为初始化过程的一部分，Dapr CLI 会自动在自托管环境中安装 Redis。 您都已设置完毕，可以跳转到\[下一步\](下一步)
 {{% /codetab %}}
 
 {{% codetab %}}
-You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. This approach requires [Installing Helm v3](https://github.com/helm/helm#install).
+您可以使用 [helm](https://helm.sh/) 在我们的 Kubernetes 集群中快速创建 dapr 实例。 此方法需要 [安装 Helm v3](https://github.com/helm/helm#install)。
 
-1. Install Redis into your cluster:
+1. 安装 Redis 到您的集群：
 
    ```bash
    helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -44,9 +44,9 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
    helm install redis bitnami/redis
    ```
 
-   Note that you will need a Redis version greater than 5, which is what Dapr's pub/sub functionality requires. If you're intending on using Redis as just a state store (and not for pub/sub) a lower version can be used.
+   请注意，您将需要 Redis 版本大于 5, 这是Dapr 的 发布/订阅 功能所要求的。 如果你打算将Redis仅仅作为一个状态存储（而不是用于 发布/订阅），可以使用一个低版本。
 
-2. Run `kubectl get pods` to see the Redis containers now running in your cluster:
+2. 运行`kubectl get pods`来查看现在正在集群中运行的Redis容器。
 
     ```bash
     $ kubectl get pods
@@ -56,19 +56,19 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
     redis-slave-1    1/1     Running   0          22s
     ```
 
-Note that the hostname is `redis-master.default.svc.cluster.local:6379`, and a Kubernetes secret, `redis`, is created automatically.
+请注意，主机名是 `redis-master.default.svc.cluster.local:6379`，Kubernetes 密钥 `redis`是自动创建的。
 
 {{% /codetab %}}
 
 {{% codetab %}}
-This method requires having an Azure Subscription.
+此方法需要 Azure 订阅。
 
-1. Open the [Azure Portal](https://ms.portal.azure.com/#create/Microsoft.Cache) to start the Azure Redis Cache creation flow. Log in if necessary.
-1. Fill out the necessary information
-   - Dapr pub/sub uses [Redis streams](https://redis.io/topics/streams-intro) that was introduced by Redis 5.0. If you would like to use Azure Redis Cache for pub/sub make sure to set the version to (PREVIEW) 6.
-1. Click "Create" to kickoff deployment of your Redis instance.
-1. You'll need the hostname of your Redis instance, which you can retrieve from the "Overview" in Azure. It should look like `xxxxxx.redis.cache.windows.net:6380`. Note this for later.
-1. Once your instance is created, you'll need to grab your access key. Navigate to "Access Keys" under "Settings" and create a Kubernetes secret to store your Redis password:
+1. 打开 [Azure Portal](https://ms.portal.azure.com/#create/Microsoft.Cache) 来启动 Azure Redis Cache 创建流程。 如有必要，请登录。
+1. 填写必要的信息
+   - Dapr 发布/订阅 使用 [Redis streams](https://redis.io/topics/streams-intro) ，这是由Redis 5.0引入的。 如果您想使用 Azure Redis Cache 来处理 发布/订阅，请确保将版本设置为 (PREVIEW) 6。
+1. 点击“创建”来启动您的 Redis 实例的部署。
+1. 你需要Redis实例的主机名，你可以从Azure中的 "概述 "中检索。 它看起来像 `xxxxxx.redis.cache.windows.net:6380`。 注意这一点，以备后用。
+1. 创建实例后，您需要获取访问密钥。 在“设置”下导航到"访问密钥"并创建一个Kubernetes密钥来存储您的 Redis 密码：
    ```bash
    kubectl create secret generic redis --from-literal=redis-password=*********
    ```
@@ -76,18 +76,18 @@ This method requires having an Azure Subscription.
 {{% /codetab %}}
 
 {{% codetab %}}
-1. Visit [AWS Redis](https://aws.amazon.com/redis/) to deploy a Redis instance
-1. Note the Redis hostname in the AWS portal for use later
-1. Create a Kubernetes secret to store your Redis password:
+1. 访问 [AWS Redis](https://aws.amazon.com/redis/) 来部署一个 Redis 实例
+1. 注意AWS门户中的Redis主机名，以便以后使用。
+1. 创建一个Kubernetes密钥来存储您的 Redis 密码：
    ```bash
    kubectl create secret generic redis --from-literal=redis-password=*********
    ```
 {{% /codetab %}}
 
 {{% codetab %}}
-1. Visit [GCP Cloud MemoryStore](https://cloud.google.com/memorystore/) to deploy a MemoryStore instance
-1. Note the Redis hostname in the GCP portal for use later
-1. Create a Kubernetes secret to store your Redis password:
+1. 访问 [GCP Cloud MemoryStore](https://cloud.google.com/memorystore/) 来部署一个 MemoryStore 实例
+1. 注意GCP门户中的Redis主机名，以便以后使用。
+1. 创建一个Kubernetes密钥来存储您的 Redis 密码：
    ```bash
    kubectl create secret generic redis --from-literal=redis-password=*********
    ```
@@ -95,19 +95,19 @@ This method requires having an Azure Subscription.
 
 {{< /tabs >}}
 
-## Configure Dapr components
+## 配置 Dapr 组件
 
-Dapr uses components to define what resources to use for building block functionality. These steps go through how to connect the resources you created above to Dapr for state and pub/sub.
+Dapr 使用组件来定义用于构建块功能的资源。 这些步骤通过如何将你上面创建的资源连接到Dapr的 状态 和 发布/订阅 。
 
-In self-hosted mode, component files are automatically created under:
+在自托管模式下，组件文件自动创建以下内容：
 - **Windows**: `%USERPROFILE%\.dapr\components\`
 - **Linux/MacOS**: `$HOME/.dapr/components`
 
-For Kubernetes, files can be created in any directory, as they are applied with `kubectl`.
+对于Kubernetes来说，文件可以在任何目录下创建，因为它们是用`kubectl`应用的。
 
-### Create State store component
+### 创建 状态 存储组件
 
-Create a file named `redis-state.yaml`, and paste the following:
+创建名为 `redis-state.yaml` 的文件, 并粘贴以下内容:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -127,15 +127,15 @@ spec:
       key: redis-password
 ```
 
-This example uses the the kubernetes secret that was created when setting up a cluster with the above instructions.
+这个例子使用的是用上面的说明设置集群时创建的 kubernetes 密钥。
 
 {{% alert title="Other stores" color="primary" %}}
 If using a state store other than Redis, refer to the [supported state stores]({{< ref supported-state-stores >}}) for information on what options to set.
 {{% /alert %}}
 
-### Create Pub/sub message broker component
+### 创建 发布/订阅 消息代理组件
 
-Create a file called redis-pubsub.yaml, and paste the following:
+创建名为 redis-pubsub.yaml 的文件, 并粘贴以下内容:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -155,15 +155,15 @@ spec:
       key: redis-password
 ```
 
-This example uses the the kubernetes secret that was created when setting up a cluster with the above instructions.
+这个例子使用的是用上面的说明设置集群时创建的 kubernetes 密钥。
 
 {{% alert title="Other stores" color="primary" %}}
 If using a pub/sub message broker other than Redis, refer to the [supported pub/sub message brokers]({{< ref supported-pubsub >}}) for information on what options to set.
 {{% /alert %}}
 
-### Hard coded passwords (not recommended)
+### 硬编码密码（不推荐）
 
-For development purposes only you can skip creating kubernetes secrets and place passwords directly into the Dapr component file:
+仅用于开发目的，你可以跳过创建 kubernetes 密钥，直接将密码放入 Dapr 组件文件中。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -197,17 +197,17 @@ spec:
     value: <PASSWORD>
 ```
 
-## Apply the configuration
+## 应用配置
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
-By default the Dapr CLI creates a local Redis instance when you run `dapr init`. However, if you want to configure a different Redis instance you can either:
-- Update the existing component files or create new ones in the default components directory
+默认情况下，当你运行 `dapr init` 时，CLI 创建一个本地的 Redis 实例。 但是，如果你想要配置一个不同的 Redis 实例你可以：
+- 更新现有的组件文件或在默认的组件目录下创建新的组件文件。
    - **Linux/MacOS:** `$HOME/.dapr/components`
    - **Windows:** `%USERPROFILE%\.dapr\components`
-- Create a new `components` directory in your app folder containing the YAML files and provide the path to the `dapr run` command with the flag `--components-path`
+- 在你的应用程序文件夹中创建一个新的`components`目录，其中包含YAML文件，并提供`dapr run`命令的路径，标志为`--components-path`。
 
 {{% alert title="Self-hosted slim mode" color="primary" %}}
 If you initialized Dapr in [slim mode]({{< ref self-hosted-no-docker.md >}}) (without Docker) you need to manually create the default directory, or always specify a components directory using `--components-path`.
@@ -217,7 +217,7 @@ If you initialized Dapr in [slim mode]({{< ref self-hosted-no-docker.md >}}) (wi
 
 {{% codetab %}}
 
-Run `kubectl apply -f <FILENAME>` for both state and pubsub files:
+运行 `kubectl apply -f <FILENAME>` 同时适用于 状态文件 和 发布订阅文件：
 
 ```bash
 kubectl apply -f redis-state.yaml
@@ -228,4 +228,4 @@ kubectl apply -f redis-pubsub.yaml
 {{< /tabs >}}
 
 ## 下一步
-- [Try out a Dapr quickstart]({{< ref quickstarts.md >}})
+- [试用Dapr快速入门]({{< ref quickstarts.md >}})
