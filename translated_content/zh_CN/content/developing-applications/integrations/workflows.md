@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Build workflows with Logic Apps"
-linkTitle: "Workflows"
-description: "Learn how to build workflows using Dapr Workflows and Logic Apps"
+title: "使用Logic Apps构建工作流"
+linkTitle: "工作流"
+description: "学习如何使用 Dapr Workflow 和 Logic Apps 构建工作流"
 weight: 4000
 ---
 
@@ -63,7 +63,7 @@ Since Dapr supports many pluggable state stores and bindings, the workflow becom
 
 ## Get started
 
-Prerequisites:
+前期准备:
 
 1. Install the [Dapr CLI]({{< ref install-dapr-cli.md >}})
 2. [Azure blob storage account](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-create-account-block-blob?tabs=azure-portal)
