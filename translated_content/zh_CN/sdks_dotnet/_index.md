@@ -12,7 +12,7 @@ Dapr提供了帮助开发 .NET 应用程序各种包。 你可以使用他们来
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>Client</b></h5>
+      <h5 class="card-title"><b>客户端</b></h5>
       <p class="card-text">创建与 Dapr sidecar 和其他Dapr 应用程序交互的 .NET 客户端。</p>
       <a href="{{< ref dotnet-client >}}" class="stretched-link"></a>
     </div>
