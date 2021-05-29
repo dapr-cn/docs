@@ -3,12 +3,12 @@ type: docs
 title: "Bearer"
 linkTitle: "Bearer"
 weight: 4000
-description: "Use bearer middleware to secure HTTP endpoints by verifying bearer tokens"
+description: "使用Bearer中间件，通过验证Bearer token来确保HTTP端点的安全"
 ---
 
-The bearer [HTTP middleware]({{< ref middleware-concept.md >}}) verifies a [Bearer Token](https://tools.ietf.org/html/rfc6750) using [OpenID Connect](https://openid.net/connect/) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
+The bearer [HTTP middleware]({{< ref middleware-concept.md >}}) verifies a [Bearer Token](https://tools.ietf.org/html/rfc6750) using [OpenID Connect](https://openid.net/connect/) on a Web API without modifying the application. 这种设计将认证/授权的关注点从应用中分离出来，因此应用操作者可以采用和配置认证/授权提供者，而不影响应用代码。
 
-## Component format
+## 配置
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -24,12 +24,12 @@ spec:
   - name: issuerURL
     value: "https://accounts.google.com"
 ```
-## Spec metadata fields
+## 元数据字段规范
 
-| Field     | Details                                                                                                       | Example                                                           |
-| --------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| clientId  | The client ID of your application that is created as part of a credential hosted by a OpenID Connect platform |                                                                   |
-| issuerURL | URL identifier for the service.                                                                               | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
+| 字段        | 详情                                            | Example                                                           |
+| --------- | --------------------------------------------- | ----------------------------------------------------------------- |
+| clientId  | 你的应用程序的客户端ID，它是作为OpenID Connect平台托管的凭证的一部分创建的 |                                                                   |
+| issuerURL | 服务的URL标识                                      | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
 
 ## Dapr配置
 
@@ -47,8 +47,8 @@ spec:
       type: middleware.http.bearer
 ```
 
-## Related links
+## 相关链接
 
-- [Middleware concept]({{< ref middleware-concept.md >}})
-- [Configuration concept]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview.md >}})
+- [中间件概念]({{< ref middleware-concept.md >}})
+- [配置概念]({{< ref configuration-concept.md >}})
+- [配置概览]({{< ref configuration-overview.md >}})
