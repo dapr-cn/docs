@@ -25,4 +25,4 @@ spec:
 
 这个配置文件配置了遥测录制跟踪。 你可以在自托管模式中通过编辑 `.dapr` 目录中名为 `config.yaml` 的配置文件进行加载；或者通过 kubectl/helm 应用到您的 Kubernetes 集群。
 
-Read [this page]({{<ref "configuration-overview.md">}}) for a list of all configuration options.
+阅读 [此页面]({{<ref "configuration-overview.md">}}) 查看所有配置选项的列表。
