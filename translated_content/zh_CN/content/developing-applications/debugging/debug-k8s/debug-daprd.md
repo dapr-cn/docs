@@ -7,13 +7,13 @@ description: "How to debug the Dapr sidecar (daprd) on your Kubernetes cluster"
 ---
 
 
-## Overview
+## 概述
 
 Sometimes it is necessary to understand what's going on in the Dapr sidecar (daprd), which runs as a sidecar next to your application, especially when you diagnose your Dapr application and wonder if there's something wrong in Dapr itself. Additionally, you may be developing a new feature for Dapr on Kubernetes and want to debug your code.
 
 his guide will cover how to use built-in Dapr debugging to debug the Dapr sidecar in your Kubernetes pods.
 
-## Pre-requisites
+## 前提
 
 - Refer to [this guide]({{< ref kubernetes-deploy.md >}}) to learn how to deploy Dapr to your Kubernetes cluster.
 - Follow [this guide]({{< ref "debug-dapr-services.md">}}) to build the Dapr debugging binaries you will be deploying in the next step.
@@ -87,9 +87,9 @@ Forwarding from [::1]:40000 -> 40000
 
 All done. Now you can point to port 40000 and start a remote debug session to daprd from your favorite IDE.
 
-## Related links
+## 相关链接
 
-- [Overview of Dapr on Kubernetes]({{< ref kubernetes-overview >}})
-- [Deploy Dapr to a Kubernetes cluster]({{< ref kubernetes-deploy >}})
+- [Kubernetes上的 Dapr 概述]({{< ref kubernetes-overview >}})
+- [将 dapr 部署到 Kubernetes 集群]({{< ref kubernetes-deploy >}})
 - [Debug Dapr services on Kubernetes]({{< ref debug-dapr-services >}})
-- [Dapr Kubernetes Quickstart](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes)
+- [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes)
