@@ -1,14 +1,14 @@
 ---
 type: docs
 title: "Configure and view Dapr Logs"
-linkTitle: "Logs"
+linkTitle: "日志"
 weight: 2000
 description: "Understand how logging works in Dapr and how to configure and view logs"
 ---
 
 This section will assist you in understanding how logging works in Dapr, configuring and viewing logs.
 
-## Overview
+## 概述
 
 Logs have different, configurable verbosity levels. The levels outlined below are the same for both system components and the Dapr sidecar process/container:
 
@@ -19,7 +19,7 @@ Logs have different, configurable verbosity levels. The levels outlined below ar
 
 error produces the minimum amount of output, where debug produces the maximum amount. The default level is info, which provides a balanced amount of information for operating Dapr in normal conditions.
 
-To set the output level, you can use the `--log-level` command-line option. For example:
+To set the output level, you can use the `--log-level` command-line option. 例如:
 
 ```bash
 ./daprd --log-level error
@@ -49,7 +49,7 @@ When running Dapr with the Dapr CLI, both your app's log output and the runtime'
 ```bash
 dapr run node myapp.js
 ℹ️  Starting Dapr with id Trackgreat-Lancer on port 56730
-✅  You are up and running! Both Dapr and your app logs will appear here.
+✅  You are up and running!  
 
 == APP == App listening on port 3000!
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="starting Dapr Runtime -- version 0.3.0-alpha -- commit b6f2810-dirty"
@@ -61,7 +61,7 @@ dapr run node myapp.js
 == DAPR == 2019/09/05 12:26:43 redis: connecting to localhost:6379
 == DAPR == 2019/09/05 12:26:43 redis: connected to localhost:6379 (localAddr: [::1]:56734, remAddr: [::1]:6379)
 == DAPR == time="2019-09-05T12:26:43-07:00" level=warning msg="failed to init input bindings: app channel not initialized"
-== DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actor runtime started. actor idle timeout: 1h0m0s. actor scan interval: 30s"
+== DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actor runtime started.   actor scan interval: 30s"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actors: starting connection attempt to placement service at localhost:50005"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="http server is running on port 56730"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="gRPC server is running on port 56731"
@@ -91,7 +91,7 @@ Components:
 - dapr_placement
 - dapr_sidecar_injector
 
-Example:
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
 
 ```bash
 helm install dapr dapr/dapr --namespace dapr-system --set dapr_operator.logLevel=error
@@ -121,7 +121,7 @@ time="2019-09-04T02:52:27Z" level=info msg="kubernetes mode configured"
 time="2019-09-04T02:52:27Z" level=info msg="app id: addapp"
 time="2019-09-04T02:52:27Z" level=info msg="application protocol: http. waiting on port 6000"
 time="2019-09-04T02:52:27Z" level=info msg="application discovered on port 6000"
-time="2019-09-04T02:52:27Z" level=info msg="actor runtime started. actor idle timeout: 1h0m0s. actor scan interval: 30s"
+time="2019-09-04T02:52:27Z" level=info msg="actor runtime started.   actor scan interval: 30s"
 time="2019-09-04T02:52:27Z" level=info msg="actors: starting connection attempt to placement service at dapr-placement.dapr-system.svc.cluster.local:80"
 time="2019-09-04T02:52:27Z" level=info msg="http server is running on port 3500"
 time="2019-09-04T02:52:27Z" level=info msg="gRPC server is running on port 50001"
@@ -175,6 +175,6 @@ time="2019-09-04T00:21:57Z" level=info msg="host added: 10.244.1.89"
 
 The examples above are specific specific to Kubernetes, but the principal is the same for any kind of container based environment: simply grab the container ID of the Dapr sidecar and/or system component (if applicable) and view its logs.
 
-## References
+## 参考资料
 
-* [How to setup loggings for Dapr sidecar, and your application]({{< ref "logging.md" >}})
+* [如何为Dapr sidecar和你的应用程序设置日志]({{< ref "logging.md" >}})
