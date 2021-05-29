@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Uppercase request body"
+title: "大写请求实体"
 linkTitle: "Uppercase"
 weight: 9999
-description: "Test your HTTP pipeline is functioning with the uppercase middleware"
+description: "测试您的 HTTP 管道与大写中间件一起运行"
 ---
 
-The uppercase [HTTP middleware]({{< ref middleware-concept.md >}}) converts the body of the request to uppercase letters and is used for testing that the pipeline is functioning. It should only be used for local development.
+The uppercase [HTTP middleware]({{< ref middleware-concept.md >}}) converts the body of the request to uppercase letters and is used for testing that the pipeline is functioning. 它只应用于本地开发。
 
-## Component format
+## 配置
 
-In the following definition, it make content of request body into uppercase:
+在下述定义中，将请求体的内容变成大写：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -22,7 +22,7 @@ spec:
   version: v1
 ```
 
-This component has no `metadata` to configure.
+此组件没有要配置的 `metadata`。
 
 ## Dapr配置
 
@@ -40,8 +40,8 @@ spec:
       type: middleware.http.uppercase
 ```
 
-## Related links
+## 相关链接
 
-- [Middleware concept]({{< ref middleware-concept.md >}})
-- [Configuration concept]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview.md >}})
+- [中间件概念]({{< ref middleware-concept.md >}})
+- [配置概念]({{< ref configuration-concept.md >}})
+- [配置概览]({{< ref configuration-overview.md >}})
