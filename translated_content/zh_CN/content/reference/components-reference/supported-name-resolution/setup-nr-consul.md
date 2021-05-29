@@ -2,16 +2,16 @@
 type: docs
 title: "HashiCorp Consul"
 linkTitle: "HashiCorp Consul"
-description: Detailed information on the HashiCorp Consul name resolution component
+description: 详细介绍了关于 HashiCorp Consul 服务发现组件的信息
 --- 
 
-## Configuration format
+## 配置格式
 
-Hashicorp Consul is setup within the [Dapr Configuration]({{< ref configuration-overview.md >}}).
+Hashicorp Consul 是在 [Dapr Configuration]({{< ref configuration-overview.md >}}) 中设置的。
 
-Within the config, add a `nameResolution` spec and set the `component` field to `"consul"`.
+在配置中，添加一个 `nameResolution` spec ，并将 `component` 字段设置为 `"consul`。
 
-If you are using the Dapr sidecar to register your service to Consul then you will need the following configuration:
+如果您正在使用 Dapr sidecar 注册您的服务到 Consul ，那么您将需要以下配置：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -25,35 +25,35 @@ spec:
       selfRegister: true
 ```
 
-If Consul service registration is managed externally from Dapr you need to ensure that the Dapr-to-Dapr internal gRPC port is added to the service metadata under `DAPR_PORT` (this key is configurable) and that the Consul service Id matches the Dapr app Id. You can then omit `selfRegister` from the config above.
+如果 Consul 服务注册由 Dapr 外部管理，则需要确保将 Dapr-to-Dapr 内部 gRPC 端口添加到 `DAPR_PORT` 下的服务元数据中（此项是可配置的），并且 Consul 服务 ID 与 Dapr 应用 ID 匹配。 然后，您可以从上面的配置中省略 `selfRegister` 。
 
-## Behaviour
+## 行为
 
-On init the Consul component will either validate the connection to the configured (or default) agent or register the service if configured to do so. The name resolution interface does not cater for an "on shutdown" pattern so please consider this if using Dapr to register services to Consul as it will not deregister services.
+在启动时，Consul组件将验证与配置的（或默认的）代理的连接，或者如果配置了服务，则注册该服务。 名称解析接口不能满足 "shutdown "的模式，所以如果使用 Dapr 向 Consul 注册服务，请考虑它不会取消注册服务。
 
-The component resolves target apps by filtering healthy services and looks for a `DAPR_PORT` in the metadata (key is configurable) in order to retrieve the Dapr sidecar port. Consul `service.meta` is used over `service.port` so as to not interfere with existing Consul estates.
+该组件通过过滤健康的服务来解决目标应用程序，并在元数据中寻找`DAPR_PORT`，以检索Dapr sidecar端口（该项是可配置的）。 Consul `service.meta`在`service.port`之上使用，以便不干扰现有的Consul数据。
 
 
-## Spec configuration fields
+## Spec 配置字段
 
-As of writing the configuration spec is fixed to v1.3.0 of the Consul api
+截至发稿时，配置规格已固定为Consul api的v1.3.0版本
 
-| Field                | Required |                                                                                                                Type | Details                                                                                                                                                                                                                                                                      | Examples                                     |
-| -------------------- |:--------:| -------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| Client               |    N     |                                     [*api.Config](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#Config) | Configures client connection to the Consul agent. If blank it will use the sdk defaults, which in this case is just an address of `127.0.0.1:8500`                                                                                                                           | `10.0.4.4:8500`                              |
-| QueryOptions         |    N     |                         [*api.QueryOptions](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#QueryOptions) | Configures query used for resolving healthy services, if blank it will default to `UseCache:true`                                                                                                                                                                            | `UseCache: false`, `Datacenter: "myDC"`      |
-| Checks               |    N     |             [[]*api.AgentServiceCheck](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#AgentServiceCheck) | Configures health checks if/when registering. If blank it will default to a single health check on the Dapr sidecar health endpoint                                                                                                                                          | See [sample configs](#sample-configurations) |
-| Tags                 |    N     |                                                                                                          `[]string` | Configures any tags to include if/when registering services                                                                                                                                                                                                                  | `- "dapr"`                                   |
-| Meta                 |    N     |                                                                                                 `map[string]string` | Configures any additional metadata to include if/when registering services                                                                                                                                                                                                   | `DAPR_METRICS_PORT: "${DAPR_METRICS_PORT}"`  |
-| DaprPortMetaKey      |    N     |                                                                                                            `string` | The key used for getting the Dapr sidecar port from Consul service metadata during service resolution, it will also be used to set the Dapr sidecar port in metadata during registration. If blank it will default to `DAPR_PORT`                                            | `"DAPR_TO_DAPR_PORT"`                        |
-| SelfRegister         |    N     |                                                                                                              `bool` | Controls if Dapr will register the service to Consul. The name resolution interface does not cater for an "on shutdown" pattern so please consider this if using Dapr to register services to Consul as it will not deregister services. If blank it will default to `false` | `true`                                       |
-| AdvancedRegistration |    N     | [*api.AgentServiceRegistration](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#AgentServiceRegistration) | Gives full control of service registration through configuration. If configured the component will ignore any configuration of Checks, Tags, Meta and SelfRegister.                                                                                                          | See [sample configs](#sample-configurations) |
+| 字段                   | 必填 |                                                                                                                数据类型 | 详情                                                                                                             | 示例                                          |
+| -------------------- |:--:| -------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| Client               | N  |                                     [*api.Config](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#Config) | 配置客户端与 Consul 代理的连接。 如果留空，它将使用 sdk 默认值，在这种情况下这只是 `127.0.0.1:8500`                                              | `10.0.4.4:8500`                             |
+| QueryOptions         | N  |                         [*api.QueryOptions](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#QueryOptions) | 配置用于解决健康服务的查询，如果为空白，它将默认为 `UseCache:true`                                                                      | `UseCache: false`, `Datacenter: "myDC"`     |
+| Checks               | N  |             [[]*api.AgentServiceCheck](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#AgentServiceCheck) | 当进行注册服务时，配置健康检查。 如果为空白，它将默认到 Dapr sidecar 健康端点                                                                 | 查看 [示例配置](#sample-configurations)           |
+| Tags                 | N  |                                                                                                          `[]string` | 在注册服务服务时包含的额外标签                                                                                                | `- "dapr"`                                  |
+| Meta                 | N  |                                                                                                 `map[string]string` | 在注册服务服务时包含的额外 metadata                                                                                         | `DAPR_METRICS_PORT: "${DAPR_METRICS_PORT}"` |
+| DaprPortMetaKey      | N  |                                                                                                            `string` | 用于在服务解析过程中从Consul服务元数据中获取Dapr sidecar 端口的 key，它也将用于在注册时在元数据中设置Dapr sidecar 端口。 如果留空，它将默认为 `DAPR_PORT`          | `"DAPR_TO_DAPR_PORT"`                       |
+| SelfRegister         | N  |                                                                                                              `bool` | 控制 Dapr 是否会向 Consul 注册服务。 名称解析接口不能满足 "shutdown "的模式，所以如果使用 Dapr 向 Consul 注册服务，请考虑它不会取消注册服务。 如果留空，它将默认为 `false` | `true`                                      |
+| AdvancedRegistration | N  | [*api.AgentServiceRegistration](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#AgentServiceRegistration) | 通过配置完全控制服务注册结果。 如果配置此项，组件将忽略Checks、 Tags、 Meta 和 SelfRegister的任何配置。                                            | 查看 [示例配置](#sample-configurations)           |
 
-## Sample configurations
+## 示例配置
 
-### Basic
+### 基础
 
-The minimum configuration needed is the following:
+所需的最小配置如下：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -65,9 +65,9 @@ spec:
     component: "consul"
 ```
 
-### Registration with additional customizations
+### 注册时进行小部分定制
 
-Enabling `SelfRegister` it is then possible to customize the checks, tags and meta
+启用 `SelfRegister` 然后可以自定义 checks, tags 和 meta
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -103,9 +103,9 @@ spec:
         filter: "Checks.ServiceTags contains dapr"
 ```
 
-### Advanced registration
+### 高级注册
 
-Configuring the advanced registration gives you full control over all the properties possible when registering.
+配置高级注册后，您可以完全控制注册时可能的所有属性。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -138,18 +138,18 @@ spec:
           - "dapr"
 ```
 
-## Setup HashiCorp Consul
+## 搭建 Hashicorp Consul
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-HashiCorp offer in depth guides on how to setup Consul for different hosting models. Please check out the [self-hosted guide here](https://learn.hashicorp.com/collections/consul/getting-started)
+HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 Please check out the [self-hosted guide here](https://learn.hashicorp.com/collections/consul/getting-started)
 {{% /codetab %}}
 
 {{% codetab %}}
-HashiCorp offer in depth guides on how to setup Consul for different hosting models. Please check out the [Kubernetes guide here](https://learn.hashicorp.com/collections/consul/gs-consul-service-mesh)
+HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 Please check out the [Kubernetes guide here](https://learn.hashicorp.com/collections/consul/gs-consul-service-mesh)
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Related links
-- [Service invocation building block]({{< ref service-invocation >}})
+## 相关链接
+- [服务调用构建块]({{< ref service-invocation >}})
