@@ -4,7 +4,7 @@ title: "Cron 绑定规范"
 linkTitle: "Cron"
 description: "Cron 绑定组件的详细文档"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/cron/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/cron/"
 ---
 
 ## 配置
