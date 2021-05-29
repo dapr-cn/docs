@@ -2,14 +2,14 @@
 type: docs
 title: "Memcached"
 linkTitle: "Memcached"
-description: Detailed information on the Memcached state store component
+description: Memcached 状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-memcached/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-memcached/"
 ---
 
-## Component format
+## 配置
 
-To setup Memcached state store create a component of type `state.memcached`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置 Memcached 状态存储，请创建一个类型为 `state.memcached` 的组件。 See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,41 +30,41 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field              | Required | Details                                               | Example                                       |
-| ------------------ |:--------:| ----------------------------------------------------- | --------------------------------------------- |
-| hosts              |    Y     | Comma delimited endpoints                             | `"memcached.default.svc.cluster.local:11211"` |
-| maxIdleConnections |    N     | The max number of idle connections. Defaults to `"2"` | `"3"`                                         |
-| timeout            |    N     | The timeout for the calls. Defaults to `"1000ms"`     | `"1000ms"`                                    |
+| 字段                 | 必填 | 详情                      | Example                                       |
+| ------------------ |:--:| ----------------------- | --------------------------------------------- |
+| hosts              | Y  | 逗号分隔的 endpoints         | `"memcached.default.svc.cluster.local:11211"` |
+| maxIdleConnections | N  | 空闲连接的最大数量。 默认值为 `"2"`   | `"3"`                                         |
+| timeout            | N  | 调用超时时间。 默认值为 `"1000ms"` | `"1000ms"`                                    |
 
-## Setup Memcached
+## 设置 Memcached
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-You can run Memcached locally using Docker:
+您可以使用 Docker 在本地运行 Memcached：
 
 ```
 docker run --name my-memcache -d memcached
 ```
 
-You can then interact with the server using `localhost:11211`.
+然后您可以使用 `localhost:11211` 与服务器交互。
 {{% /codetab %}}
 
 {{% codetab %}}
-The easiest way to install Memcached on Kubernetes is by using the [Helm chart](https://github.com/helm/charts/tree/master/stable/memcached):
+在 Kubernetes 上安装 Memcached 最简单的方法是使用 [Helm chart](https://github.com/helm/charts/tree/master/stable/memcached)：
 
 ```
 helm install memcached stable/memcached
 ```
 
-This installs Memcached into the `default` namespace. To interact with Memcached, find the service with: `kubectl get svc memcached`.
+这将将 Memcached 安装到 `default` 命名空间。 要与 Memcached 交互，请通过 `kubectl get svc memcached` 找到 service。
 
-For example, if installing using the example above, the Memcached host address would be:
+例如，如果使用上面的例子安装，Memcached 主机地址将是：
 
 `memcached.default.svc.cluster.local:11211`
 {{% /codetab %}}
@@ -72,6 +72,6 @@ For example, if installing using the example above, the Memcached host address w
 {{< /tabs >}}
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+- [状态管理构建块]({{< ref state-management >}})
