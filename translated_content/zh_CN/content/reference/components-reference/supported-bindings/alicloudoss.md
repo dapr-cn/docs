@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Alibaba Cloud Object Storage Service binding spec"
+title: "阿里云对象存储服务绑定规范"
 linkTitle: "Alibaba Cloud Object Storage"
-description: "Detailed documentation on the Alibaba Cloud Object Storage binding component"
+description: "阿里云对象存储绑定组件的详细说明文档"
 aliases:
   - "/operations/components/setup-bindings/supported-bindings/alicloudoss/"
 ---
 
-## Component format
+## 配置
 
-To setup an Alibaba Cloud Object Storage binding create a component of type `bindings.alicloud.oss`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置阿里云对象存储绑定，请创建一个类型为`bindings.alicloud.os`的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -32,27 +32,27 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field         | Required | Binding support | Details                     | Example                              |
-| ------------- | -------- | --------------- | --------------------------- | ------------------------------------ |
-| `终结点`         | Y        | Output          | Alicloud OSS endpoint.      | https://oss-cn-hangzhou.aliyuncs.com |
-| `accessKeyID` | Y        | Output          | Access key ID credential.   |                                      |
-| `accessKey`   | Y        | Output          | Access key credential.      |                                      |
-| `bucket`      | Y        | Output          | Name of the storage bucket. |                                      |
+| 字段            | 必填 | 绑定支持   | 详情               | Example                              |
+| ------------- | -- | ------ | ---------------- | ------------------------------------ |
+| `终结点`         | Y  | 输出     | Alicloud OSS 端点。 | https://oss-cn-hangzhou.aliyuncs.com |
+| `accessKeyID` | Y  | Output | 访问密钥 ID 凭据。      |                                      |
+| `accessKey`   | Y  | 输出     | 访问密钥凭据。          |                                      |
+| `bucket`      | Y  | 输出     | 存储桶名称            |                                      |
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
-- `create`: [Create object](#create-object)
+字段名为 `ttlInSeconds`。
+- `create`: [创建对象](#create-object)
 
 
-### Create object
+### 创建对象
 
-To perform a create object operation, invoke the binding with a `POST` method and the following JSON body:
+要执行创建对象操作，请使用`POST`方法和以下JSON调用绑定：
 
 ```json
 {
@@ -62,12 +62,12 @@ To perform a create object operation, invoke the binding with a `POST` method an
 ```
 
 {{% alert title="Note" color="primary" %}}
-By default, a random UUID is auto-generated as the object key. See below for Metadata support to set the key for the object.
+默认情况下，会自动生成一个随机的UUID作为对象密钥。 参见下面所示的支持的元数据为对象设置密钥。
 {{% /alert %}}
 
 #### Example
 
-**Saving to a random generated UUID file**
+**保存到一个随机生成的UUID文件**
 
 {{< tabs "Windows" "Linux/MacOS" >}}
 
@@ -91,7 +91,7 @@ curl -d '{ "operation": "create", "data": "Hello World" }' http://localhost:<dap
 
 <br />
 
-**Saving to a specific file**
+**保存到特定文件**
 {{< tabs "Windows" "Linux/MacOS" >}}
 
 {{% codetab %}}
@@ -113,14 +113,14 @@ curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "key": "m
 {{< /tabs >}}
 
 {{% alert title="Note" color="primary" %}}
-Windows CMD requires escaping the `"` character.
+Windows CMD需要转义`"`字符。
 {{% /alert %}}
 
-## Metadata information
+## 元数据信息
 
-### Object key
+### 对象键
 
-By default, the Alicloud OSS output binding will auto-generate a UUID as the object key. You can set the key with the following metadata:
+默认情况下，Alicloud OSS输出绑定会自动生成一个UUID作为对象键。 您可以通过以下元数据来设置键：
 
 ```json
 {
@@ -132,9 +132,9 @@ By default, the Alicloud OSS output binding will auto-generate a UUID as the obj
 }
 ```
 
-## Related links
+## 相关链接
 
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
