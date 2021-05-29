@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Configure API authorization with OAuth"
+title: "使用 OAuth 配置 API 授权"
 linkTitle: "OAuth"
 weight: 2000
 description: "Enable OAUTH authorization on Dapr endpoints for your web APIs"
@@ -32,7 +32,7 @@ To figure the Dapr OAuth middleware, you'll need to collect the following inform
 
 Authorization/Token URLs of some of the popular authorization servers:
 
-| Server    | Authorization URL                                             | Token URL                                                                                 |
+| 服务器       | Authorization URL                                             | Token URL                                                                                 |
 | --------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Azure AAD | <https://login.microsoftonline.com/{tenant}/oauth2/authorize> | <https://login.microsoftonline.com/{tenant}/oauth2/token>                                 |
 | GitHub    | <https://github.com/login/oauth/authorize>                    | <https://github.com/login/oauth/access_token>                                             |
@@ -151,7 +151,7 @@ spec:
       type: middleware.http.oauth2clientcredentials
 ```
 
-## Apply the configuration
+## 应用配置
 
 To apply the above configuration (regardless of grant type) to your Dapr sidecar, add a `dapr.io/config` annotation to your pod spec:
 
