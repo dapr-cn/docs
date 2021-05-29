@@ -7,11 +7,11 @@ description: Using the App Class
 no_list: true
 ---
 
-In PHP, there is no default router. Thus, the `\Dapr\App` class is provided. It uses [Nikic's FastRoute](https://github.com/nikic/FastRoute) under the hood. However, you are free to use any router or framework that you'd like. Just check out the `add_dapr_routes()` method in the `App` class to see how actors and subscriptions are implemented.
+在 PHP 中没有默认路由器。 因此，提供了 `\Dapr\App` 类。 在后台使用了 [Nikic's FastRoute](https://github.com/nikic/FastRoute)  ，但是，您也可以自由使用任何路由器或 您想要的框架。 只需在 `App` 类中查看 `add_dapr_routes()` 方法，看看actors和 订阅是如何实现的。
 
-Every app should start with `App::create()` which takes two parameters, the first is an existing DI container, if you have one, and the second is a callback to hook into the `ContainerBuilder` and add your own configuration.
+每个应用都应该以 `App:::create()` 开头，这需要两个参数，第一个是现有的DI 容器， 第二个是回调到 `ContainerBuilder` 并添加您自己的配置。
 
-From there, you should define your routes and then call `$app->start()` to execute the route on the current request.
+您应该从那里定义您的路由，然后调用 `$app->start()` 来执行当前请求的路由。
 
 
 ```php
@@ -28,9 +28,9 @@ $app->get('/test/{id}', fn(string $id) => $id);
 $app->start();
 ```
 
-## Returning from a controller
+## 从控制器中返回
 
-You can return anything from a controller, and it will be serialized into a json object. You can also request the Psr Response object and return that instead, allowing you to customize headers, and have control over the entire response:
+从控制器返回任何数据都会被序列化为json 对象。 您也可以要求Psr Response对象并返回该对象，允许您自定义headers并控制整个响应：
 
 ```php
 <?php
@@ -46,9 +46,9 @@ $app->get('/test/{id}',
 $app->start();
 ```
 
-## Using the app as a client
+## 将应用程序作为客户端
 
-When you just want to use Dapr as a client, such as in existing code, you can call `$app->run()`. In these cases, there's usually no need for a custom configuration, however, you may want to use a compiled DI container, especially in production:
+当你只想使用Dapr作为客户端，例如在现有代码中，你可以调用 `$app->run()`。 通常情况下，特别是在生产中 不需要自定义配置，但您可能想使用编译的DI 容器：
 
 ```php
 <?php
