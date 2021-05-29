@@ -5,7 +5,7 @@ linkTitle: "Zeebe command"
 description: "Detailed documentation on the Zeebe command binding component"
 ---
 
-## Component format
+## 配置
 
 To setup Zeebe command binding create a component of type `bindings.zeebe.command`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -31,18 +31,18 @@ spec:
     value: /path/to/ca-cert
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field                  | Required | Binding support | Details                                                                                  | Example            |
-| ---------------------- |:--------:| --------------- | ---------------------------------------------------------------------------------------- | ------------------ |
-| gatewayAddr            |    Y     | Output          | Zeebe gateway address                                                                    | `localhost:26500`  |
-| gatewayKeepAlive       |    N     | Output          | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds | `45s`              |
-| usePlainTextConnection |    N     | Output          | Whether to use a plain text connection or not                                            | `true,false`       |
-| caCertificatePath      |    N     | Output          | The path to the CA cert                                                                  | `/path/to/ca-cert` |
+| 字段                     | 必填 | 绑定支持 | 详情                                                                                       | Example            |
+| ---------------------- |:--:| ---- | ---------------------------------------------------------------------------------------- | ------------------ |
+| gatewayAddr            | Y  | 输出   | Zeebe gateway address                                                                    | `localhost:26500`  |
+| gatewayKeepAlive       | N  | 输出   | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds | `45s`              |
+| usePlainTextConnection | N  | 输出   | Whether to use a plain text connection or not                                            | `true,false`       |
+| caCertificatePath      | N  | 输出   | The path to the CA cert                                                                  | `/path/to/ca-cert` |
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `topology`
 - `deploy-workflow`
@@ -57,7 +57,7 @@ This component supports **output binding** with the following operations:
 - `update-job-retries`
 - `throw-error`
 
-### Output binding
+### 输出绑定
 
 Zeebe uses gRPC under the hood for the Zeebe client we use in this binding. Please consult the gRPC API reference for more information: https://stage.docs.zeebe.io/reference/grpc.html
 
@@ -74,7 +74,7 @@ To perform a `topology` operation, invoke the Zeebe command binding with a `POST
 }
 ```
 
-##### Response
+##### 响应
 
 The binding returns a JSON with the following response:
 
@@ -141,7 +141,7 @@ The metadata parameters are:
 - `fileName` - the name of the workflow file
 - `fileType` - (optional) the type of the file 'bpmn' or 'file'. If no type was given, the default will be recognized based on the file extension 'bpmn' for file extension .bpmn, for all other files it will be set to 'file'
 
-##### Response
+##### 响应
 
 The binding returns a JSON with the following response:
 
@@ -222,7 +222,7 @@ The data parameters are:
 - `variables` - (optional) JSON document that will instantiate the variables for the root variable scope of the workflow instance; it must be a JSON object, as variables will be mapped in a key-value fashion. e.g. { "a": 1, "b": 2 } will create two variables, named "a" and "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the JSON document is an array and not an object
 
 
-##### Response
+##### 响应
 
 The binding returns a JSON with the following response:
 
@@ -262,7 +262,7 @@ The data parameters are:
 
 - `workflowInstanceKey` - the workflow instance key
 
-##### Response
+##### 响应
 
 The binding does not return a response body.
 
@@ -293,7 +293,7 @@ The data parameters are:
 - `local` - (optional, default: `false`) if true, the variables will be merged strictly into the local scope (as indicated by elementInstanceKey); this means the variables is not propagated to upper scopes. for example, let's say we have two scopes, '1' and '2', with each having effective variables as: 1 => `{ "foo" : 2 }`, and 2 => `{ "bar" : 1 }`. if we send an update request with elementInstanceKey = 2, variables `{ "foo" : 5 }`, and local is true, then scope 1 will be unchanged, and scope 2 will now be `{ "bar" : 1, "foo" 5 }`. if local was false, however, then scope 1 would be `{ "foo": 5 }`, and scope 2 would be `{ "bar" : 1 }`
 - `variables` - a JSON serialized document describing variables as key value pairs; the root of the document must be an object
 
-##### Response
+##### 响应
 
 The binding returns a JSON with the following response:
 
@@ -327,7 +327,7 @@ The data parameters are:
 
 - `incidentKey` - the unique ID of the incident to resolve
 
-##### Response
+##### 响应
 
 The binding does not return a response body.
 
@@ -358,7 +358,7 @@ The data parameters are:
 - `messageId` - (optional) the unique ID of the message; can be omitted. only useful to ensure only one message with the given ID will ever be published (during its lifetime)
 - `variables` - (optional) the message variables as a JSON document; to be valid, the root of the document must be an object, e.g. { "a": "foo" }. [ "foo" ] would not be valid
 
-##### Response
+##### 响应
 
 The binding returns a JSON with the following response:
 
@@ -404,7 +404,7 @@ The data parameters are:
 - `workerName` - (optional, default: `default`) the name of the worker activating the jobs, mostly used for logging purposes
 - `fetchVariables` - (optional) a list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned
 
-##### Response
+##### 响应
 
 The binding returns a JSON with the following response:
 
@@ -458,7 +458,7 @@ The data parameters are:
 - `jobKey` - the unique job identifier, as obtained from the activate jobs response
 - `variables` - (optional) a JSON document representing the variables in the current task scope
 
-##### Response
+##### 响应
 
 The binding does not return a response body.
 
@@ -486,7 +486,7 @@ The data parameters are:
 - `retries` - the amount of retries the job should have left
 - `errorMessage` - (optional) an message describing why the job failed this is particularly useful if a job runs out of retries and an incident is raised, as it this message can help explain why an incident was raised
 
-##### Response
+##### 响应
 
 The binding does not return a response body.
 
@@ -512,7 +512,7 @@ The data parameters are:
 - `jobKey` - the unique job identifier, as obtained through the activate-jobs operation
 - `retries` - the new amount of retries for the job; must be positive
 
-##### Response
+##### 响应
 
 The binding does not return a response body.
 
@@ -540,14 +540,14 @@ The data parameters are:
 - `errorCode` - the error code that will be matched with an error catch event
 - `errorMessage` - (optional) an error message that provides additional context
 
-##### Response
+##### 响应
 
 The binding does not return a response body.
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
