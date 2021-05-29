@@ -6,10 +6,10 @@ weight: 7000
 description: "Use Pub/Sub without CloudEvents."
 ---
 
-## Introduction
+## 介绍
 
 Dapr uses CloudEvents to provide additional context to the event payload, enabling features like:
-* Tracing
+* 追踪
 * Deduplication by message Id
 * Content-type for proper deserialization of event's data
 
@@ -153,7 +153,7 @@ $app->start();
 
 Subscription Custom Resources Definitions (CRDs) do not currently contain metadata attributes ([issue #3225](https://github.com/dapr/dapr/issues/3225)). At this time subscribing to raw events can only be done through programmatic subscriptions.
 
-## Related links
+## 相关链接
 
 - Learn more about [how to publish and subscribe]({{< ref howto-publish-subscribe.md >}})
 - List of [pub/sub components]({{< ref supported-pubsub >}})
