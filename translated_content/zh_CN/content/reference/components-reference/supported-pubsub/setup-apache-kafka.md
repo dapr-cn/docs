@@ -2,14 +2,14 @@
 type: docs
 title: "Apache Kafka"
 linkTitle: "Apache Kafka"
-description: "Detailed documentation on the Apache Kafka pubsub component"
+description: "关于Apache Kafka pubsub组件的详细文档"
 aliases:
   - "/operations/components/setup-pubsub/supported-pubsub/setup-apache-kafka/"
 ---
 
-## Component format
+## 配置
 
-To setup Apache Kafka pubsub create a component of type `pubsub.kafka`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+要设置Apache Kafka pubsub，请创建一个`pubsub.kafka`类型的组件。 See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,28 +35,28 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field           | Required | Details                                                                                                                                                                                                              | Example                                                     |
-| --------------- |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| brokers         |    Y     | Comma separated list of kafka brokers                                                                                                                                                                                | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
-| authRequired    |    N     | Enable authentication on the Kafka broker. Defaults to `"false"`.                                                                                                                                                    | `"true"`, `"false"`                                         |
-| saslUsername    |    N     | Username used for authentication. Only required if authRequired is set to true.                                                                                                                                      | `"adminuser"`                                               |
-| saslPassword    |    N     | Password used for authentication. Can be `secretKeyRef` to use a secret reference. Only required if authRequired is set to true. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}) | `""`, `"KeFg23!"`                                           |
-| maxMessageBytes |    N     | The maximum message size allowed for a single Kafka message. Default is 1024.                                                                                                                                        | `2048`                                                      |
+| 字段              | 必填 | 详情                                                                                                                                                   | Example                                                     |
+| --------------- |:--:| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| brokers         | Y  | 逗号分隔的kafka broker列表                                                                                                                                  | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
+| authRequired    | N  | 在Kafka broker上启用验证。 默认值为 `"false"`.                                                                                                                  | `"true"`, `"false"`                                         |
+| saslUsername    | N  | 用于认证的用户名。 只有当 authRequired 设置为 true 时才需要。                                                                                                            | `"adminuser"`                                               |
+| saslPassword    | N  | 用于认证的密码。 可以用`secretKeyRef`来引用密钥。 只有当 authRequired 设置为 true 时才需要。 Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}) | `""`, `"KeFg23!"`                                           |
+| maxMessageBytes | N  | 单条Kafka消息允许的最大消息大小。 默认值为 1024。                                                                                                                       | `2048`                                                      |
 
-## Per-call metadata fields
+## 每次调用的元数据字段
 
-### Partition Key
+### 分区键
 
-When invoking the Kafka pub/sub, its possible to provide an optional partition key by using the `metadata` query param in the request url.
+当调用Kafka 发布/订阅时，可以通过在请求url中使用`metadata`查询参数来提供一个可选的分区键。
 
-The param name is `partitionKey`.
+参数名是`partitionKey`。
 
-Example:
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partitionKey=key1 \
@@ -68,11 +68,11 @@ curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partiti
       }'
 ```
 
-## Create a Kafka instance
+## 创建 Kafka 实例
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+你可以使用[这个](https://github.com/wurstmeister/kafka-docker)Docker镜像在本地运行Kafka。 要在没有Docker的情况下运行，请参阅[入门指南](https://kafka.apache.org/quickstart)。
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -82,7 +82,7 @@ To run Kafka on Kubernetes, you can use any Kafka operator, such as [Strimzi](ht
 {{< /tabs >}}
 
 
-## Related links
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
+## 相关链接
+- [Dapr组件的基本格式]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md##step-1-setup-the-pubsub-component" >}}) for instructions on configuring pub/sub components
-- [Pub/Sub building block]({{< ref pubsub >}})
+- [发布/订阅构建块]({{< ref pubsub >}})
