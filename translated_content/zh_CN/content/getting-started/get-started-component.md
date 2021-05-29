@@ -1,26 +1,26 @@
 ---
 type: docs
-title: "Define a component"
-linkTitle: "Define a component"
+title: "定义一个组件"
+linkTitle: "定义一个组件"
 weight: 40
 ---
 
-In the [previous step]({{<ref get-started-api.md>}}) you called the Dapr HTTP API to store and retrieve a state from a Redis backed state store. Dapr knew to use the Redis instance that was configured locally on your machine through default component definition files that were created when Dapr was initialized.
+In the [previous step]({{<ref get-started-api.md>}}) you called the Dapr HTTP API to store and retrieve a state from a Redis backed state store. Dapr通过初始化时创建的默认组件定义文件得知，要使用你机器上本地配置好的Redis实例。
 
-When building an app, you most likely would create your own component file definitions depending on the building block and specific component that you'd like to use.
+当构建一个应用程序时，你很可能会根据你想使用的构建块和特定的组件来定义自己的组建文件。
 
 As an example of how to define custom components for your application, you will now create a component definition file to interact with the [secrets building block]({{< ref secrets >}}).
 
-In this guide you will:
-- Create a local JSON secret store
-- Register the secret store with Dapr using a component definition file
-- Obtain the secret using the Dapr HTTP API
+在本指南中，您将：
+- 创建本地JSON密钥存储
+- 使用组件定义文件在 Dapr 注册密钥存储
+- 使用 Dapr HTTP API 获取密钥
 
-## Step 1: Create a JSON secret store
+## 第 1 步：创建一个 JSON 密钥存储
 
 While Dapr supports [many types of secret stores]({{< ref supported-secret-stores >}}), the easiest way to get started is a local JSON file with your secret (note this secret store is meant for development purposes and is not recommended for production use cases as it is not secured).
 
-Begin by saving the following JSON contents into a file named `mysecrets.json`:
+首先保存下面的 JSON 内容到一个名为 `mysecrets.json` 的文件：
 
 ```json
 {
@@ -28,15 +28,15 @@ Begin by saving the following JSON contents into a file named `mysecrets.json`:
 }
 ```
 
-## Step 2: Create a secret store Dapr component
+## 第 2 步：创建一个密钥存储Dapr 组件
 
-Create a new directory named `my-components` to hold the new component file:
+创建一个名为 `my-components` 的目录来存放新的组件文件：
 
 ```bash
 mkdir my-components
 ```
 
-Inside this directory create a new file `localSecretStore.yaml` with the following contents:
+在此目录内创建一个新文件 `localSecretStore.yaml` ，内容如下：
 
 
 ```yaml
@@ -55,19 +55,19 @@ spec:
     value: ":"
 ```
 
-You can see that the above file definition has a `type: secretstores.local.file` which tells Dapr to use the local file component as a secret store. The metadata fields provide component specific information needed to work with this component (in this case, the path to the secret store JSON)
+您可以看到上述的文件定义有一个 `type: secretstores.local.file` 字段值，其告诉Dapr使用本地文件组件作为密钥存储。 元数据字段提供了使用该组件所需的组件特定信息（在本例中，是密钥存储JSON的路径）。
 
-## Step 3: Run the Dapr sidecar
+## 第 3 步：运行Dapr sidecar
 
-Run the following command to launch a Dapr sidecar that will listen on port 3500 for a blank application named myapp:
+运行以下命令以启动 Dapr sidecar，它将在端口 3500 上监听名为 myapp 的空白应用程序：
 
 ```bash
 dapr run --app-id myapp --dapr-http-port 3500 --components-path ./my-components
 ```
 
-## Step 4: Get a secret
+## 第 4 步：获取一个密钥
 
-In a separate terminal run:
+在单独的终端运行中：
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 {{% codetab %}}
@@ -84,10 +84,10 @@ Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/secrets/my-secret-store/my-se
 {{% /codetab %}}
 {{< /tabs >}}
 
-You should see output with the secret you stored in the JSON file.
+你看到的输出应该为你存储在JSON文件中的密钥
 
 ```json
 {"my-secret":"I'm Batman"}
 ```
 
-{{< button text="Next step: Explore Dapr quickstarts >>" page="quickstarts" >}}
+{{< button text="下一步: 探索 Dapr 快速启动 >>" page="quickstarts" >}}
