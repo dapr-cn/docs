@@ -18,10 +18,10 @@ Below is a list of existing preview features:
 ## Configuration properties
 The `features` section under the `Configuration` spec contains the following properties:
 
-| Property | Type   | 说明                                                            |
-| -------- | ------ | ------------------------------------------------------------- |
-| name     | string | The name of the preview feature that will be enabled/disabled |
-| enabled  | bool   | Boolean specifying if the feature is enabled or disabled      |
+| 属性      | 数据类型   | 说明                                                            |
+| ------- | ------ | ------------------------------------------------------------- |
+| name    | string | The name of the preview feature that will be enabled/disabled |
+| enabled | bool   | Boolean specifying if the feature is enabled or disabled      |
 
 ## Enabling a preview feature
 Preview features are specified in the configuration. Here is an example of a full configuration that contains multiple features:
@@ -64,7 +64,7 @@ In Kubernetes mode, the configuration must be provided via a configuration compo
 kubectl apply -f previewConfig.yaml
 ```
 
-This configuration component can then be referenced in any application by modifying the application's configuration to reference that specific configuration component via the `dapr.io/config` element. For example:
+This configuration component can then be referenced in any application by modifying the application's configuration to reference that specific configuration component via the `dapr.io/config` element. 例如:
 
 ```yaml
 apiVersion: apps/v1
