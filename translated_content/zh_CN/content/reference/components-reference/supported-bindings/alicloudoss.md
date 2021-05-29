@@ -4,7 +4,7 @@ title: "阿里云对象存储服务绑定规范"
 linkTitle: "Alibaba Cloud Object Storage"
 description: "阿里云对象存储绑定组件的详细说明文档"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/alicloudoss/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/alicloudoss/"
 ---
 
 ## 配置
