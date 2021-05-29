@@ -7,7 +7,7 @@ aliases:
   - "/operations/components/setup-bindings/supported-bindings/influxdb/"
 ---
 
-## Component format
+## 配置
 
 To setup InfluxDB binding create a component of type `bindings.influx`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -33,28 +33,28 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field  | Required | Binding support | Details                              | Example                   |
-| ------ |:--------:| --------------- | ------------------------------------ | ------------------------- |
-| url    |    Y     | Output          | The URL for the InfluxDB instance    | `"http://localhost:8086"` |
-| token  |    Y     | Output          | The authorization token for InfluxDB | `"mytoken"`               |
-| org    |    Y     | Output          | The InfluxDB organization            | `"myorg"`                 |
-| bucket |    Y     | Output          | Bucket name to write to              | `"mybucket"`              |
+| 字段     | 必填 | 绑定支持 | 详情                                   | Example                   |
+| ------ |:--:| ---- | ------------------------------------ | ------------------------- |
+| url    | Y  | 输出   | The URL for the InfluxDB instance    | `"http://localhost:8086"` |
+| token  | Y  | 输出   | The authorization token for InfluxDB | `"mytoken"`               |
+| org    | Y  | 输出   | The InfluxDB organization            | `"myorg"`                 |
+| bucket | Y  | 输出   | Bucket name to write to              | `"mybucket"`              |
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `create`
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
