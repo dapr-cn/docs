@@ -7,7 +7,7 @@ aliases:
   - "/operations/components/setup-bindings/supported-bindings/rethinkdb/"
 ---
 
-## Component format
+## 配置
 
 The [RethinkDB state store]({{<ref setup-rethinkdb.md>}}) supports transactions which means it can be used to support Dapr actors. Dapr persists only the actor's current state which doesn't allow the users to track how actor's state may have changed over time.
 
@@ -31,22 +31,22 @@ spec:
     value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field    | Required | Binding support | Details                     | Example                                                           |
-| -------- |:--------:| --------------- | --------------------------- | ----------------------------------------------------------------- |
-| address  |    Y     | Input           | Address of RethinkDB server | `"27.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
-| database |    Y     | Input           | RethinDB database name      | `"dapr"`                                                          |
+| 字段       | 必填 | 绑定支持 | 详情                          | Example                                                           |
+| -------- |:--:| ---- | --------------------------- | ----------------------------------------------------------------- |
+| address  | Y  | 输入   | Address of RethinkDB server | `"27.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
+| database | Y  | 输入   | RethinDB database name      | `"dapr"`                                                          |
 
-## Binding support
+## 绑定支持
 
 This component only supports **input** binding interface.
 
-## Related links
+## 相关链接
 
 - [Combine this binding with Dapr Pub/Sub](https://github.com/mchmarny/dapr-state-store-change-handler) to stream state changes to a topic
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
