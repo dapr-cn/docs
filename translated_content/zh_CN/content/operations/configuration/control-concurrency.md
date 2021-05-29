@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "How-To: Control concurrency and rate limit applications"
-linkTitle: "Concurrency & rate limits"
+title: "如何：控制并发和限流"
+linkTitle: "并发& 限流"
 weight: 2000
-description: "Control how many requests and events will invoke your application simultaneously"
+description: "控制同时又多少个请求和实现可以同时调用你的应用"
 ---
 
-A common scenario in distributed computing is to only allow for a given number of requests to execute concurrently. Using Dapr, you can control how many requests and events will invoke your application simultaneously.
+只允许通知执行给定数量的请求时分布式计算中一个常见的场景 使用Dapr，你可以控制同时有多少个应用和时间可以调用你的应用
 
-*Note that this rate limiing is guaranteed for every event that's coming from Dapr, meaning Pub/Sub events, direct invocation from other services, bindings events etc. Dapr can't enforce the concurrency policy on requests that are coming to your app externally.*
+*请注意，这个速率限制对每一个来自Dapr的事件都是有保证的，这意味着Pub/Sub事件、来自其他服务的直接调用、绑定事件等等。 Dapr不能对从从Dapr外部调用你的应用程序的请求应用并发策略。*
 
-*Note that rate limiting per second can be achieved by using the **middleware.http.ratelimit** middleware. However, there is an imporant difference between the two approaches. The rate limit middlware is time bound and limits the number of requests per second, while the `app-max-concurrency` flag specifies the number of concurrent requests (and events) at any point of time. See [Rate limit middleware]({{< ref middleware-rate-limit.md >}}). *
+*Note that rate limiting per second can be achieved by using the **middleware.http.ratelimit** middleware. However, there is an imporant difference between the two approaches. The rate limit middlware is time bound and limits the number of requests per second, while the `app-max-concurrency` flag specifies the number of concurrent requests (and events) at any point of time. See [Rate limit middleware]({{< ref middleware-rate-limit.md >}}). * However, there is an imporant difference between the two approaches. The rate limit middlware is time bound and limits the number of requests per second, while the `app-max-concurrency` flag specifies the number of concurrent requests (and events) at any point of time. See [Rate limit middleware]({{< ref middleware-rate-limit.md >}}). *
 
 Watch this [video](https://youtu.be/yRI5g6o_jp8?t=1710) on how to control concurrency and rate limiting ". <iframe width="764" height="430" src="https://www.youtube.com/embed/yRI5g6o_jp8?t=1710" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-## Setting app-max-concurrency
+## 设置 app-max-concurrency
 
-Without using Dapr, a developer would need to create some sort of a semaphore in the application and take care of acquiring and releasing it. Using Dapr, there are no code changes needed to an app.
+如果不适用Dapr，开发者需要在应用中创建某种信号量，并且负责获取和释放它 使用 Dapr，应用程序不需要代码更改。
 
-### Setting app-max-concurrency in Kubernetes
+### 在Kubernetes中设置app-max-concurrency
 
 To set app-max-concurrency in Kubernetes, add the following annotation to your pod:
 
