@@ -4,7 +4,7 @@ title: "Azure Blob Storage绑定规范"
 linkTitle: "Azure Blob Storage"
 description: "关于 Azure Blob Storage绑定组件的详细文档"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/blobstorage/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/blobstorage/"
 ---
 
 ## 配置
