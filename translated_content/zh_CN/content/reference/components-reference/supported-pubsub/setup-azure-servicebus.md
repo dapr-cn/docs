@@ -4,7 +4,7 @@ title: "Azure Service Bus"
 linkTitle: "Azure Service Bus"
 description: "关于 Azure Service Bus pubsub 组件的详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-azure-servicebus/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-azure-servicebus/"
 ---
 
 ## 配置
@@ -79,7 +79,7 @@ spec:
 | prefetchCount                   | N  | 定义预取消息的数量(用于高吞吐量/低延迟场景)                                                                                                    | `5`                                                                                                                                            |
 | defaultMessageTimeToLiveInSec   | N  | 默认消息存活时间                                                                                                                   | `10`                                                                                                                                           |
 | autoDeleteOnIdleInSec           | N  | 自动删除消息前等待的时间(秒)                                                                                                            | `10`                                                                                                                                           |
-| maxReconnectionAttempts         | N  | Defines the maximum number of reconnect attempts. Default: `30`                                                            | `30`                                                                                                                                           |
+| maxReconnectionAttempts         | N  | Defines the maximum number of reconnect attempts. 默认值：`30`                                                                 | `30`                                                                                                                                           |
 | connectionRecoveryInSec         | N  | Time in seconds to wait between connection recovery attempts. Defaults: `2`                                                | `2`                                                                                                                                            |
 | publishMaxRetries               | N  | The max number of retries for when Azure Service Bus responds with "too busy" in order to throttle messages. Defaults: `5` | `5`                                                                                                                                            |
 | publishInitialRetryInternalInMs | N  | Time in milliseconds for the initial exponential backoff when Azure Service Bus throttle messages. Defaults: `500`         | `500`                                                                                                                                          |
