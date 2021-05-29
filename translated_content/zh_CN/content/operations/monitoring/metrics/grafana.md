@@ -30,7 +30,7 @@ The `grafana-actor-dashboard.json` template shows Dapr Sidecar status, actor inv
 
 {{< /tabs >}}
 
-## Pre-requisites
+## 前提
 
 - [Setup Prometheus]({{<ref prometheus.md>}})
 
@@ -165,7 +165,7 @@ First you need to connect Prometheus as a data source to Grafana.
    <img src="/images/grafana-tooltip.png" alt="Screenshot of the tooltip for graphs" width=700>
    {{% /alert %}}
 
-## References
+## 参考资料
 
 * [Dapr Observability]({{<ref observability-concept.md >}})
 * [Prometheus Installation](https://github.com/prometheus-community/helm-charts)
