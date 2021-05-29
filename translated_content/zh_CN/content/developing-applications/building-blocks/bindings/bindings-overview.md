@@ -1,53 +1,53 @@
 ---
 type: docs
-title: "Bindings overview"
+title: "绑定概述"
 linkTitle: "概述"
 weight: 100
-description: Overview of the bindings building block
+description: Dapr 绑定构建块概述
 ---
 
-## Introduction
+## 介绍
 
-Using bindings, you can trigger your app with events coming in from external systems, or interface with external systems. This building block provides several benefits for you and your code:
+使用绑定，您可以使用来自外部系统的事件或与外部系统的接口来触发应用程序。 此构建块为您和您的代码提供了若干益处 :
 
-- Remove the complexities of connecting to, and polling from, messaging systems such as queues and message buses
-- Focus on business logic and not implementation details of how to interact with a system
-- Keep your code free from SDKs or libraries
-- Handle retries and failure recovery
-- Switch between bindings at run time
-- Build portable applications where environment-specific bindings are set-up and no code changes are required
+- 除去连接到消息传递系统 ( 如队列和消息总线 ) 并进行轮询的复杂性
+- 聚焦于业务逻辑，而不是如何与系统交互的实现细节
+- 使代码不受 SDK 或库的跟踪
+- 处理重试和故障恢复
+- 在运行时在绑定之间切换
+- 构建具有特定于环境的绑定的可移植应用程序，不需要进行代码更改
 
-For a specific example, bindings would allow your microservice to respond to incoming Twilio/SMS messages without adding or configuring a third-party Twilio SDK, worrying about polling from Twilio (or using websockets, etc.).
+对于特定示例，绑定将允许微服务响应入局 Twilo/SMS 消息而不添加或配置第三方 Twilio SDK，担心来自 Twilio 的轮询 (或使用 websockets 等 ) 。
 
-Bindings are developed independently of Dapr runtime. You can view and contribute to the bindings [here](https://github.com/dapr/components-contrib/tree/master/bindings).
+绑定是独立于 Dapr 运行时开发的。 您可以在 [这里](https://github.com/dapr/components-contrib/tree/master/bindings) 查看绑定并做出贡献。
 
-## Input bindings
+## 输入绑定
 
-Input bindings are used to trigger your application when an event from an external resource has occurred. An optional payload and metadata may be sent with the request.
+输入绑定用于在发生来自外部资源的事件时触发应用程序。 可选的有效负载和元数据可以与请求一起发送。
 
-In order to receive events from an input binding:
+为了接收来自输入绑定的事件 :
 
-1. Define the component YAML that describes the type of binding and its metadata (connection info, etc.)
-2. Listen on an HTTP endpoint for the incoming event, or use the gRPC proto library to get incoming events
+1. 定义描述绑定类型及其元数据 ( 连接信息等) 的组件 YAML
+2. 监听传入事件的 HTTP 终结点，或使用 gRPC 原型库获取传入事件
 
-> On startup Dapr sends a `OPTIONS` request for all defined input bindings to the application and expects a status code other than `NOT FOUND (404)` if this application wants to subscribe to the binding.
+> 如果应用程序要订阅绑定，在启动 Dapr 时，对应用程序的所有已定义输入绑定发送 `OPTIONS` 请求，并期望 `NOT FOUND (404)` 以外的状态码。
 
 Read the [Create an event-driven app using input bindings]({{< ref howto-triggers.md >}}) page to get started with input bindings.
 
-## Output bindings
+## 输出绑定
 
-Output bindings allow you to invoke external resources. An optional payload and metadata can be sent with the invocation request.
+输出绑定允许用户调用外部资源。 可选的有效负载和元数据可与调用请求一起发送。
 
-In order to invoke an output binding:
+为了调用输出绑定：
 
-1. Define the component YAML that describes the type of binding and its metadata (connection info, etc.)
-2. Use the HTTP endpoint or gRPC method to invoke the binding with an optional payload
+1. 定义描述绑定类型及其元数据 ( 连接信息等) 的组件 YAML
+2. 使用 HTTP 终结点或 gRPC 方法调用具有可选有效负载的绑定
 
 Read the [Use output bindings to interface with external resources]({{< ref howto-bindings.md >}}) page to get started with output bindings.
 
-## Next Steps
-* Follow these guides on:
-    * [How-To: Trigger a service from different resources with input bindings]({{< ref howto-triggers.md >}})
-    * [How-To: Use output bindings to interface with external resources]({{< ref howto-bindings.md >}})
-* Try out the [bindings quickstart](https://github.com/dapr/quickstarts/tree/master/bindings/README.md) which shows how to bind to a Kafka queue
+## 下一步
+* 遵循这些指南：
+    * [使用输入绑定从不同资源触发服务]({{< ref howto-triggers.md >}})
+    * [使用输出绑定调用不同的资源]({{< ref howto-bindings.md >}})
+* 试试 [绑定快速启动](https://github.com/dapr/quickstarts/tree/master/bindings/README.md) 来显示如何绑定到 Kafka 队列
 * Read the [bindings API specification]({{< ref bindings_api.md >}})
