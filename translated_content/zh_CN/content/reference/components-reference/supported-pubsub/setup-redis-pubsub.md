@@ -4,7 +4,7 @@ title: "Redis Streams"
 linkTitle: "Redis Streams"
 description: "关于Redis Streams pubsub组件的详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-redis-pubsub/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-redis-pubsub/"
 ---
 
 ## 配置
