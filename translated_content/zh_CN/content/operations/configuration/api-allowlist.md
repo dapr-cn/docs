@@ -69,12 +69,12 @@ The `name` field takes the name of the Dapr API you would like to enable.
 
 See this list of values corresponding to the different Dapr APIs:
 
-| Name     | Dapr API                                                    |
-| -------- | ----------------------------------------------------------- |
-| state    | [State]({{< ref state_api.md>}})                            |
-| invoke   | [Service Invocation]({{< ref service_invocation_api.md >}}) |
-| secrets  | [秘密]({{< ref secrets_api.md >}})                            |
-| bindings | [Output Bindings]({{< ref bindings_api.md >}})              |
-| publish  | [发布/订阅]({{< ref pubsub.md >}})                              |
-| actors   | [Actors]({{< ref actors_api.md >}})                         |
-| metadata | [Metadata]({{< ref metadata_api.md >}})                     |
+| Name         | Dapr API                                                    |
+| ------------ | ----------------------------------------------------------- |
+| state（状态）    | [State（状态）]({{< ref state_api.md>}})                        |
+| invoke       | [Service Invocation]({{< ref service_invocation_api.md >}}) |
+| 秘密           | [秘密]({{< ref secrets_api.md >}})                            |
+| bindings（绑定） | [Output Bindings]({{< ref bindings_api.md >}})              |
+| publish      | [发布/订阅]({{< ref pubsub.md >}})                              |
+| actors       | [Actors]({{< ref actors_api.md >}})                         |
+| metadata     | [元数据（Metadata）]({{< ref metadata_api.md >}})                |
