@@ -1,23 +1,26 @@
 ---
 type: docs
-title: "How-To: Set up Azure Monitor to search logs and collect metrics"
+title: "指南: 设置 Azure 监视器以搜索日志并收集指标"
 linkTitle: "Azure Monitor"
 weight: 2000
-description: "Enable Dapr metrics and logs with Azure Monitor for Azure Kubernetes Service (AKS)"
+description: "使用Azure Monitor为Azure Kubernetes Service(AKS) 启用Dapr度量和日志"
 ---
 
-## Prerequisites
+## 先决条件
 
 - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/)
-- [Enable Azure Monitor For containers in AKS](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-overview)
+- [对AKS中的容器启用 Azure Monitor。](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-overview)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Helm 3](https://helm.sh/)
 
-## Enable Prometheus metric scrape using config map
+## 使用config map启用 Prometheus 度量抓取
 
-1. Make sure that omsagents are running
+1. 请确保正在运行 omsagents
 
 ```bash
+$ kubectl get pods -n kube-system
+NAME                                                              READY   STATUS    RESTARTS   AGE
+...
 $ kubectl get pods -n kube-system
 NAME                                                              READY   STATUS    RESTARTS   AGE
 ...
@@ -28,14 +31,15 @@ omsagent-smtk7                                                    1/1     Runnin
 ...
 ```
 
-2. Apply config map to enable Prometheus metrics endpoint scrape.
+2. 应用config map来启用Prometheus metrics endpoint抓取。
 
-You can use [azm-config-map.yaml](/docs/azm-config-map.yaml) to enable prometheus metrics endpoint scrape.
+您可以使用 [azm-config-map.yaml](/docs/azm-config-map.yaml) 来启用 Prometheus 度量端点抓取。
 
-If you installed Dapr to the different namespace, you need to change the `monitor_kubernetes_pod_namespaces` array values. For example:
+如果你安装 Dapr 到不同的命名空间, 你需要更改 `monitor_kubernetes_pod_namespaces` 数组值。 例如:
 
 ```yaml
 ...
+  ...
   prometheus-data-collection-settings: |-
     [prometheus_data_collection_settings.cluster]
         interval = "1m"
@@ -46,27 +50,27 @@ If you installed Dapr to the different namespace, you need to change the `monito
 ...
 ```
 
-Apply config map:
+应用config map：
 
 ```bash
 kubectl apply -f ./azm-config.map.yaml
 ```
 
-## Install Dapr with JSON formatted logs
+## 使用 JSON 格式化日志安装 Dapr
 
-1. Install Dapr with enabling JSON-formatted logs
+1. 使用 JSON 格式化日志启用 Dapr
 
 ```bash
 helm install dapr dapr/dapr --namespace dapr-system --set global.logAsJson=true
 ```
 
-2. Enable JSON formatted log in Dapr sidecar and add Prometheus annotations.
+2. 启用 JSON 格式化日志到 Dapr sidecar 并添加 Prometheus 注释。
 
-> Note: OMS Agent scrapes the metrics only if replicaset has Prometheus annotations.
+> 注意: OMS Agent仅在replicaset具有Prometheus注释时才抓取指标。
 
-Add `dapr.io/log-as-json: "true"` annotation to your deployment yaml.
+添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml.
 
-Example:
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -95,13 +99,13 @@ spec:
 ...
 ```
 
-## Search metrics and logs with Azure Monitor
+## 用 Azure Monitor 搜索度量和日志
 
-1. Go to Azure Monitor
+1. 前往Azure Monitor
 
-2. Search Dapr logs
+2. 搜索 Dapr 日志
 
-Here is an example query, to parse JSON formatted logs and query logs from dapr system processes.
+下面是一个示例查询，用于解析JSON格式的日志和来自Dapr系统进程的查询日志。
 
 ```
 ContainerLog
@@ -111,9 +115,9 @@ ContainerLog
 | sort by Time
 ```
 
-3. Search metrics
+3. 搜索度量
 
-This query, queries process_resident_memory_bytes Prometheus metrics for Dapr system processes and renders timecharts
+这个语句查询process_resident_memory_bytes Prometheus度量的Dapr系统进程，并呈现时间图
 
 ```
 InsightsMetrics
@@ -125,8 +129,8 @@ InsightsMetrics
 | render timechart
 ```
 
-# References
+# 参考资料
 
-* [Configure scraping of Prometheus metrics with Azure Monitor for containers](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-prometheus-integration)
-* [Configure agent data collection for Azure Monitor for containers](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-agent-config)
-* [Azure Monitor Query](https://docs.microsoft.com/en-us/azure/azure-monitor/log-query/query-language)
+* [使用Azure Monitor为容器配置普Prometheus度量数据抓取](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-prometheus-integration)
+* [配置用于容器的 Azure Monitor的代理数据收集](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-agent-config)
+* [Azure Monitor 查询](https://docs.microsoft.com/en-us/azure/azure-monitor/log-query/query-language)
