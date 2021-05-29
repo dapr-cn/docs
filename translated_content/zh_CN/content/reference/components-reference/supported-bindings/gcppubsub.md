@@ -7,9 +7,9 @@ aliases:
   - "/operations/components/setup-bindings/supported-bindings/gcppubsub/"
 ---
 
-## Component format
+## 配置
 
-To setup Azure Pub/Sub binding create a component of type `bindings.gcp.pubsub`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要开始 Azure 发布/订阅 绑定，需要创建一个类型为 `bindings.gcp.pubsub` 的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -48,36 +48,36 @@ spec:
     value: PRIVATE KEY
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field                           | Required | Binding support               | Details                                             | Example                                                                                          |
-| ------------------------------- |:--------:| ----------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| topic                           |    Y     | Output                        | GCP Pub/Sub topic name                              | `"topic1"`                                                                                       |
-| subscription                    |    Y     | GCP Pub/Sub subscription name | `"name1"`                                           |                                                                                                  |
-| type                            |    Y     | Output                        | GCP credentials type                                | `service_account`                                                                                |
-| project_id                      |    Y     | Output                        | GCP project id                                      | `projectId`                                                                                      |
-| private_key_id                |    Y     | Output                        | GCP private key id                                  | `"privateKeyId"`                                                                                 |
-| private_key                     |    Y     | Output                        | GCP credentials private key. Replace with x509 cert | `12345-12345`                                                                                    |
-| client_email                    |    Y     | Output                        | GCP client email                                    | `"client@email.com"`                                                                             |
-| client_id                       |    Y     | Output                        | GCP client id                                       | `0123456789-0123456789`                                                                          |
-| auth_uri                        |    Y     | Output                        | Google account OAuth endpoint                       | `https://accounts.google.com/o/oauth2/auth`                                                      |
-| token_uri                       |    Y     | Output                        | Google account token uri                            | `https://oauth2.googleapis.com/token`                                                            |
-| auth_provider_x509_cert_url |    Y     | Output                        | GCP credentials cert url                            | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
-| client_x509_cert_url          |    Y     | Output                        | GCP credentials project x509 cert url               | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
+| 字段                              | 必填 | 绑定支持                          | 详情                     | Example                                                                                          |
+| ------------------------------- |:--:| ----------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------ |
+| topic                           | Y  | 输出                            | GCP Pub/Sub topic name | `"topic1"`                                                                                       |
+| subscription                    | Y  | GCP Pub/Sub subscription name | `"name1"`              |                                                                                                  |
+| type                            | Y  | 输出                            | GCP 凭证类型               | `service_account`                                                                                |
+| project_id                      | Y  | 输出                            | GCP 项目 id              | `project_id`                                                                                     |
+| private_key_id                | Y  | 输出                            | GCP 私钥 id              | `"privateKeyId"`                                                                                 |
+| private_key                     | Y  | 输出                            | GCP凭证私钥 替换为x509证书      | `12345-12345`                                                                                    |
+| client_email                    | Y  | 输出                            | GCP 客户端邮箱地址            | `"client@email.com"`                                                                             |
+| client_id                       | Y  | 输出                            | GCP 客户端 id             | `0123456789-0123456789`                                                                          |
+| auth_uri                        | Y  | 输出                            | Google帐户 OAuth 端点      | `https://accounts.google.com/o/oauth2/auth`                                                      |
+| token_uri                       | Y  | 输出                            | Google帐户token地址        | `https://oauth2.googleapis.com/token`                                                            |
+| auth_provider_x509_cert_url | Y  | 输出                            | GCP凭证证书地址              | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
+| client_x509_cert_url          | Y  | 输出                            | GCP凭证项目x509证书地址        | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `create`
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
