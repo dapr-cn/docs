@@ -2,14 +2,14 @@
 type: docs
 title: "Cassandra"
 linkTitle: "Cassandra"
-description: Detailed information on the Cassandra state store component
+description: Cassandra 状态存储组件的详细信息
 aliases:
   - "/operations/components/setup-state-store/supported-state-stores/setup-cassandra/"
 ---
 
-## Component format
+## 配置
 
-To setup Cassandra state store create a component of type `state.cassandra`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置 Cassandra 状态存储，请创建一个类型为 `state.cassandra` 的组件。 See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -40,48 +40,48 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field             | Required | Details                                                 | Example                                    |
-| ----------------- |:--------:| ------------------------------------------------------- | ------------------------------------------ |
-| hosts             |    Y     | Comma separated value of the hosts                      | `"cassandra.cassandra.svc.cluster.local"`. |
-| port              |    N     | Port for communication. Default `"9042"`                | `"9042"`                                   |
-| username          |    Y     | The username of database user. No default               | `"user"`                                   |
-| password          |    Y     | The password for the user                               | `"password"`                               |
-| consistency       |    N     | The consistency values                                  | `"All"`, `"Quorum"`                        |
-| table             |    N     | Table name. Defaults to `"items"`                       | `"items"`, `"tab"`                         |
-| keyspace          |    N     | The cassandra keyspace to use. Defaults to `"dapr"`     | `"dapr"`                                   |
-| protoVersion      |    N     | The proto version for the client. Defaults to `"4"`     | `"3"`, `"4"`                               |
-| replicationFactor |    N     | The replication factor for the calls. Defaults to `"1"` | `"3"`                                      |
+| 字段                | 必填 | 详情                                    | Example                                    |
+| ----------------- |:--:| ------------------------------------- | ------------------------------------------ |
+| hosts             | Y  | 主机的逗号分隔值                              | `"cassandra.cassandra.svc.cluster.local"`. |
+| port              | N  | 通信端口 默认值：`9042`                       | `"9042"`                                   |
+| username          | Y  | 数据库用户名。 无默认值                          | `"user"`                                   |
+| password          | Y  | 用户密码                                  | `"password"`                               |
+| consistency       | N  | 一致性值                                  | `"All"`, `"Quorum"`                        |
+| table             | N  | 表名称 默认值为 `"items"`                    | `"items"`, `"tab"`                         |
+| keyspace          | N  | 要使用的cassandra keyspace。 默认值为 `"dapr"` | `"dapr"`                                   |
+| protoVersion      | N  | 客户端的 proto 版本。 默认值为 `"4"`             | `"3"`, `"4"`                               |
+| replicationFactor | N  | 调用的副本因子。 默认值为 `"1"`                   | `"3"`                                      |
 
-## Setup Cassandra
+## 配置 Cassandra
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-You can run Cassandra locally with the Datastax Docker image:
+您可以使用 DataStax Docker Image 在本地运行Cassandra：
 
 ```
 docker run -e DS_LICENSE=accept --memory 4g --name my-dse -d datastax/dse-server -g -s -k
 ```
 
-You can then interact with the server using `localhost:9042`.
+然后您可以使用 `localhost:9042` 与服务器交互。
 {{% /codetab %}}
 
 {{% codetab %}}
-The easiest way to install Cassandra on Kubernetes is by using the [Helm chart](https://github.com/helm/charts/tree/master/incubator/cassandra):
+在 Kubernetes 上安装 Cassandra 最简单的方法是使用 [Helm chart](https://github.com/helm/charts/tree/master/incubator/cassandra)：
 
 ```
 kubectl create namespace cassandra
 helm install cassandra incubator/cassandra --namespace cassandra
 ```
 
-This installs Cassandra into the `cassandra` namespace by default. To interact with Cassandra, find the service with: `kubectl get svc -n cassandra`.
+默认情况下，这会将Cassandra安装到 `cassandra·` 命名空间中。 要与 Cassandra 交互，请通过 `kubectl get svc -n cassandra` 找到 service。
 
-For example, if installing using the example above, the Cassandra DNS would be:
+例如，如果使用上面的例子安装，Cassandra DNS 将是：
 
 `cassandra.cassandra.svc.cluster.local`
 {{% /codetab %}}
@@ -89,6 +89,6 @@ For example, if installing using the example above, the Cassandra DNS would be:
 {{< /tabs >}}
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+- [状态管理构建块]({{< ref state-management >}})
