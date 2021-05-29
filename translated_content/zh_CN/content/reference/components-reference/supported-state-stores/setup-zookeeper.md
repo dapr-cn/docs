@@ -4,10 +4,10 @@ title: "Zookeeper"
 linkTitle: "Zookeeper"
 description: Detailed information on the Zookeeper state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-zookeeper/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-zookeeper/"
 ---
 
-## Component format
+## 配置
 
 To setup Zookeeper state store create a component of type `state.zookeeper`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
@@ -34,18 +34,18 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field             | Required | Details                                                        | Example                                      |
-| ----------------- |:--------:| -------------------------------------------------------------- | -------------------------------------------- |
-| servers           |    Y     | Comma delimited list of servers                                | `"zookeeper.default.svc.cluster.local:2181"` |
-| sessionTimeout    |    Y     | The session timeout value                                      | `"5s"`                                       |
-| maxBufferSize     |    N     | The maximum size of buffer. Defaults to `"1048576"`            | `"1048576"`                                  |
-| maxConnBufferSize |    N     | The maximum size of connection buffer. Defautls to `"1048576`" | `"1048576"`                                  |
-| keyPrefixPath     |    N     | The key prefix path in Zookeeper. No default                   | `"dapr"`                                     |
+| 字段                | 必填 | 详情                                                             | Example                                      |
+| ----------------- |:--:| -------------------------------------------------------------- | -------------------------------------------- |
+| servers           | Y  | Comma delimited list of servers                                | `"zookeeper.default.svc.cluster.local:2181"` |
+| sessionTimeout    | Y  | The session timeout value                                      | `"5s"`                                       |
+| maxBufferSize     | N  | The maximum size of buffer. 默认值为 `"1048576"`                   | `"1048576"`                                  |
+| maxConnBufferSize | N  | The maximum size of connection buffer. Defautls to `"1048576`" | `"1048576"`                                  |
+| keyPrefixPath     | N  | The key prefix path in Zookeeper. 无默认值                         | `"dapr"`                                     |
 
 ## Setup Zookeeper
 
@@ -58,7 +58,7 @@ You can run Zookeeper locally using Docker:
 docker run --name some-zookeeper --restart always -d zookeeper
 ```
 
-You can then interact with the server using `localhost:2181`.
+然后您可以使用 `localhost:2181` 与服务器交互。
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -80,6 +80,6 @@ For example, if installing using the example above, the Zookeeper host address w
 
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+- [状态管理构建块]({{< ref state-management >}})
