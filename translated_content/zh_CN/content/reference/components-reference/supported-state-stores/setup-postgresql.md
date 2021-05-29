@@ -73,5 +73,5 @@ spec:
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
 - [状态管理构建块]({{< ref state-management >}})
