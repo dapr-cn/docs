@@ -4,7 +4,7 @@ title: "PostgrSQL binding spec"
 linkTitle: "PostgreSQL"
 description: "Detailed documentation on the PostgreSQL binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/postgres/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/postgres/"
 ---
 
 ## 配置
