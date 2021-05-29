@@ -4,7 +4,7 @@ title: "AWS Secrets Manager"
 linkTitle: "AWS Secrets Manager"
 description: 详细介绍了关于密钥仓库组件的信息
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/aws-secret-manager/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/aws-secret-manager/"
 ---
 
 ## 配置
