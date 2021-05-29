@@ -5,7 +5,7 @@ linkTitle: "Alibaba Cloud DingTalk"
 description: "Detailed documentation on the Alibaba Cloud DingTalk binding component"
 ---
 
-## Setup Dapr component
+## 设置 Dapr 组件
 To setup an Alibaba Cloud DingTalk binding create a component of type `bindings.dingtalk.webhook`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 ```yaml
@@ -26,20 +26,20 @@ spec:
     value: "****************"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
-## Spec metadata fields
-| Field | Required | Binding support | Details                          | Example                                                      |
-| ----- |:--------:| --------------- | -------------------------------- | ------------------------------------------------------------ |
-| id    |    Y     | Input/Output    | unique id                        | `"test_webhook_id"`                                          |
-| url   |    Y     | Input/Output    | DingTalk's Webhook url           | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
-| 密钥    |    N     | Input/Output    | the secret of DingTalk's Webhook | `"****************"`                                         |
+## 元数据字段规范
+| 字段  | 必填 | 绑定支持         | 详情                               | Example                                                      |
+| --- |:--:| ------------ | -------------------------------- | ------------------------------------------------------------ |
+| id  | Y  | Input/Output | unique id                        | `"test_webhook_id"`                                          |
+| url | Y  | Input/Output | DingTalk's Webhook url           | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
+| 密钥  | N  | Input/Output | the secret of DingTalk's Webhook | `"****************"`                                         |
 
-## Binding support
+## 相关链接
 
-This component supports both **input and output** binding interfaces.
+此组件支持 **输入和输出** 绑定接口。
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 - `create`
 - `get`
 
@@ -74,10 +74,10 @@ curl -X POST http://localhost:3500/v1.0/bindings/myDingTalk \
         "operation": "get"
       }'
 ```
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
