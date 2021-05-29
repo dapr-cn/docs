@@ -4,7 +4,7 @@ title: "NATS Streaming"
 linkTitle: "NATS Streaming"
 description: "NATS Streaming pubsub 组件详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-nats-streaming/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-nats-streaming/"
 ---
 
 ## 配置
