@@ -4,12 +4,12 @@ title: "Cassandra"
 linkTitle: "Cassandra"
 description: Cassandra 状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-cassandra/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-cassandra/"
 ---
 
 ## 配置
 
-要设置 Cassandra 状态存储，请创建一个类型为 `state.cassandra` 的组件。 See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置 Cassandra 状态存储，请创建一个类型为 `state.cassandra` 的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -90,5 +90,5 @@ helm install cassandra incubator/cassandra --namespace cassandra
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
 - [状态管理构建块]({{< ref state-management >}})
