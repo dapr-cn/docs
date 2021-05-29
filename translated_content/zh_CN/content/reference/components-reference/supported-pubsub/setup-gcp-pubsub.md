@@ -2,15 +2,15 @@
 type: docs
 title: "GCP Pub/Sub"
 linkTitle: "GCP Pub/Sub"
-description: "Detailed documentation on the GCP Pub/Sub component"
+description: "GCP Pub/Sub组件详细文档"
 aliases:
   - "/operations/components/setup-pubsub/supported-pubsub/setup-gcp/"
   - "/operations/components/setup-pubsub/supported-pubsub/setup-gcp-pubsub/"
 ---
 
-## Create a Dapr component
+## 创建 Dapr 组件
 
-To setup GCP pubsub create a component of type `pubsub.gcp.pubsub`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
+要安装GCP pubsub，请创建一个类型为`pubsub.gcp.pubsub`的组件。 See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -48,32 +48,32 @@ spec:
     value: "false"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field                   | Required | Details                                                                                                                        | Example                                                                                                  |
-| ----------------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| type                    |    N     | GCP credentials type. Only `service_account` is supported. Defaults to `service_account`                                       | `service_account`                                                                                        |
-| projectId               |    Y     | GCP project id                                                                                                                 | `myproject-123`                                                                                          |
-| identityProjectId       |    N     | If the GCP pubsub project is different from the identity project, specify the identity project using this attribute            | `"myproject-123"`                                                                                        |
-| privateKeyId            |    N     | If using explicit credentials, this field should contain the `private_key_id` field from the service account json document     | `"my-private-key"`                                                                                       |
-| privateKey              |    N     | If using explicit credentials, this field should contain the `private_key` field from the service account json                 | `-----BEGIN PRIVATE KEY-----MIIBVgIBADANBgkqhkiG9w0B`                                                    |
-| clientEmail             |    N     | If using explicit credentials, this field should contain the `client_email` field from the service account json                | `"myservice@myproject-123.iam.gserviceaccount.com"`                                                      |
-| clientId                |    N     | If using explicit credentials, this field should contain the `client_id` field from the service account json                   | `106234234234`                                                                                           |
-| authUri                 |    N     | If using explicit credentials, this field should contain the `auth_uri` field from the service account json                    | `https://accounts.google.com/o/oauth2/auth`                                                              |
-| tokenUri                |    N     | If using explicit credentials, this field should contain the `token_uri` field from the service account json                   | `https://oauth2.googleapis.com/token`                                                                    |
-| authProviderX509CertUrl |    N     | If using explicit credentials, this field should contain the `auth_provider_x509_cert_url` field from the service account json | `https://www.googleapis.com/oauth2/v1/certs`                                                             |
-| clientX509CertUrl       |    N     | If using explicit credentials, this field should contain the `client_x509_cert_url` field from the service account json        | `https://www.googleapis.com/robot/v1/metadata/x509/myserviceaccount%40myproject.iam.gserviceaccount.com` |
-| disableEntityManagement |    N     | When set to `"true"`, topics and subscriptions do not get created automatically. Default: `"false"`                            | `"true"`, `"false"`                                                                                      |
+| 字段                      | 必填 | 详情                                                                                                                             | Example                                                                                                  |
+| ----------------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| type                    | N  | GCP credentials type. Only `service_account` is supported. Defaults to `service_account`                                       | `service_account`                                                                                        |
+| project_id              | Y  | GCP 项目 id                                                                                                                      | `myproject-123`                                                                                          |
+| identityProjectId       | N  | If the GCP pubsub project is different from the identity project, specify the identity project using this attribute            | `"myproject-123"`                                                                                        |
+| privateKeyId            | N  | If using explicit credentials, this field should contain the `private_key_id` field from the service account json document     | `"my-private-key"`                                                                                       |
+| privateKey              | N  | If using explicit credentials, this field should contain the `private_key` field from the service account json                 | `-----BEGIN PRIVATE KEY-----MIIBVgIBADANBgkqhkiG9w0B`                                                    |
+| clientEmail             | N  | If using explicit credentials, this field should contain the `client_email` field from the service account json                | `"myservice@myproject-123.iam.gserviceaccount.com"`                                                      |
+| clientId                | N  | If using explicit credentials, this field should contain the `client_id` field from the service account json                   | `106234234234`                                                                                           |
+| authUri                 | N  | If using explicit credentials, this field should contain the `auth_uri` field from the service account json                    | `https://accounts.google.com/o/oauth2/auth`                                                              |
+| tokenUri                | N  | If using explicit credentials, this field should contain the `token_uri` field from the service account json                   | `https://oauth2.googleapis.com/token`                                                                    |
+| authProviderX509CertUrl | N  | If using explicit credentials, this field should contain the `auth_provider_x509_cert_url` field from the service account json | `https://www.googleapis.com/oauth2/v1/certs`                                                             |
+| clientX509CertUrl       | N  | If using explicit credentials, this field should contain the `client_x509_cert_url` field from the service account json        | `https://www.googleapis.com/robot/v1/metadata/x509/myserviceaccount%40myproject.iam.gserviceaccount.com` |
+| disableEntityManagement | N  | 当设置为`"true"`时，主题和订阅不会自动创建。 默认值为 `"false"`                                                                                      | `"true"`, `"false"`                                                                                      |
 
-## Create a GCP Pub/Sub
+## 创建 GCP Pub/Sub
 You can use either "explicit" or "implicit" credentials to configure access to your GCP pubsub instance. If using explicit, most fields are required. Implicit relies on dapr running under a Kubernetes service account (KSA) mapped to a Google service account (GSA) which has the necessary permissions to access pubsub. In implicit mode, only the `projectId` attribute is needed, all other are optional.
 
-Follow the instructions [here](https://cloud.google.com/pubsub/docs/quickstart-console) on setting up Google Cloud Pub/Sub system.
+按照[这里](https://cloud.google.com/pubsub/docs/quickstart-console)的说明设置Google Cloud Pub/Sub系统。
 
-## Related links
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
+## 相关链接
+- [Dapr组件的基本格式]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
-- [Pub/Sub building block]({{< ref pubsub >}})
+- [发布/订阅构建块]({{< ref pubsub >}})
