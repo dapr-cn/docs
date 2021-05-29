@@ -1,74 +1,74 @@
 ---
 type: docs
-title: "Docs contributions"
+title: "文档贡献"
 linkTitle: "Docs"
 weight: 2000
 description: >
-  Guidelines for contributing to the Dapr Docs
+  向Dapr Docs投稿的准则
 ---
 
-This guide contains information about contributions to the [Dapr docs repository](https://github.com/dapr/docs). Please review the guidelines below before making a contribution to the Dapr docs. This guide assumes you have already reviewed the [general guidance]({{< ref contributing-overview>}}) which applies to any Dapr project contributions.
+本指南包含有关对 [Dapr 文档库](https://github.com/dapr/docs) 的贡献信息。 请在对 Dapr docs 作出贡献之前，请先阅读以下准则。 This guide assumes you have already reviewed the [general guidance]({{< ref contributing-overview>}}) which applies to any Dapr project contributions.
 
-Dapr docs are published to [docs.dapr.io](https://docs.dapr.io). Therefore, any contribution must ensure docs can be compiled and published correctly.
+Dapr 文档已发布到 [docs.dapr.io](https://docs.dapr.io)。 因此，任何贡献都必须确保文档能够正确编译和发布。
 
-## Prerequisites
-The Dapr docs are built using [Hugo](https://gohugo.io/) with the [Docsy](https://docsy.dev) theme. To verify docs are built correctly before submitting a contribution, you should setup your local environment to build and display the docs locally.
+## 先决条件
+Dapr docs 使用 [Hugo](https://gohugo.io/) 的[Docsy](https://docsy.dev) 主题构建。 要在提交添加项之前验证文档是否正确构建，您应该设置本地环境以在本地构建和显示文档。
 
-Fork the [docs repository](https://github.com/dapr/docs) to work on any changes
+Fork [文档 repo](https://github.com/dapr/docs) 以处理任何更改
 
-Follow the instructions in the repository [README.md](https://github.com/dapr/docs/blob/master/README.md#environment-setup) to install Hugo locally and build the docs website.
+遵循存储库 [README.md](https://github.com/dapr/docs/blob/master/README.md#environment-setup) 中的指示信息以在本地安装 Hugo 并构建 docs Web站点。
 
-## Branch guidance
+## 分支指南
 
-The Dapr docs handles branching differently than most code repositories. Instead of having a `master` or `main` branch, every branch is labeled to match the major and minor version of a runtime release. For the full list visit the [Docs repo](https://github.com/dapr/docs#branch-guidance)
+Dapr 文档处理分支的方式与大多数代码存储库不同。 每个分支都标记为运行时发行版的主版本和次要版本，而不存在 `master` 或 `main` 分支。 完整列表，请访问 [Docs repo](https://github.com/dapr/docs#branch-guidance)
 
-Overall, all updates should go into the docs branch for the latest release of Dapr. You can find this directly at [https://github.com/dapr/docs](https://github.com/dapr/docs), as the latest release will be the default branch. For any docs changes that are applicable to a release candidate or a pre-release version of the docs, make your changes into that particular branch.
+总体而言，所有更新都应进入对应 Dapr 最新版本的文档分支。 您可以直接在 [https://github.com/dapr/docs](https://github.com/dapr/docs)找到这个选项，因为最新版本将是默认分支。 对于适用于发布候选版本或文档的预发行版本的任何文档更改，请对该特定分支修改。
 
-For example, if you are fixing a typo, adding notes, or clarifying a point, make your changes into the default Dapr branch. If you are documenting an upcoming change to a component or the runtime, make your changes to the pre-release branch. Branches can be found in the [Docs repo](https://github.com/dapr/docs#branch-guidance)
+例如，如果要修复拼写错误、添加注释或澄清点，请在默认 Dapr 分支上变更。 如果要记录即将发生的组件或运行时的变更，请对预发行版分支进行修改。 分支可以在 [ Docs repo](https://github.com/dapr/docs#branch-guidance) 中找到
 
-## Style and tone
-These conventions should be followed throughout all Dapr documentation to ensure a consistent experience across all docs.
+## 风格和语气
+应在所有 Dapr 文档中遵循这些约定，以确保所有文档的体验一致。
 
-- **Casing** - Use upper case only at the start of a sentence or for proper nouns including names of technologies (Dapr, Redis, Kubernetes etc.).
-- **Headers and titles** - Headers and titles must be descriptive and clear, use sentence casing i.e. use the above casing guidance for headers and titles too
-- **Use simple sentences** - Easy-to-read sentences mean the reader can quickly use the guidance you share.
-- **Avoid the first person** - Use 2nd person "you", "your" instead of "I", "we", "our".
-- **Assume a new developer audience** - Some obvious steps can seem hard. E.g. Now set an environment variable Dapr to a value X. It is better to give the reader the explicit command to do this, rather than having them figure this out.
-- **Use present tense** - Avoid sentences like "this command will install redis", which implies the action is in the future. Instead use "This command installs redis" which is in the present tense.
+- **大小写** - 只在句子开头或专有名词(包括技术名称 Dapr、Redis、Kubernetes等) 时使用大写。
+- **页眉和标题** - 页眉和标题必须是描述性的和清晰的，使用句子大小写，即对页眉和标题也使用上述的大小写指导。
+- **使用简单的句子** - 易于阅读的句子意味着读者可以快速使用您所共享的指导。
+- **避免使用第一人称** - 用第二人称 "你"、"你的 "代替 "我"、"我们"、"我们的"。
+- **假设一个新的开发者受众** - 一些明显的步骤可能看起来很难。 例如: 现在将环境变量 Dapr 设置为值 X。最好给读者一个明确的命令来做这个，而不是让他们自己去想办法。
+- **使用现在时** - 避免使用 "这个命令将安装 redis"这样的句子，因为这意味着操作是在未来发生。 请改为使用 " 此命令安装 redis" (现在时态) 。
 
-## Contributing a new docs page
-- Make sure the documentation you are writing is in the correct place in the hierarchy.
-- Avoid creating new sections where possible, there is a good chance a proper place in the docs hierarchy already exists.
-- Make sure to include a complete [Hugo front-matter](#front-matter).
+## 贡献新页面
+- 确保你所写的文件在层次结构中的位置是正确的。
+- 在可能的情况下，避免创建新的部分，很有可能在文档的层次结构中已经有一个合适的位置。
+- 确保包括完整的 [Hugo front-matter](#front-matter)。
 
-### Contributing a new concept doc
-- Ensure the reader can understand why they should care about this feature. What problems does it help them solve?
-- Ensure the doc references the spec for examples of using the API.
-- Ensure the spec is consistent with concept in terms of names, parameters and terminology. Update both the concept and the spec as needed.
-- Avoid just repeating the spec. The idea is to give the reader more information and background on the capability so that they can try this out. Hence provide more information and implementation details where possible.
+### 贡献一个新的概念文档
+- 请确保读者能够理解为什么他们应该关注此功能。 它能帮他们解决什么问题?
+- 请确保文档引用该规范以获取使用 API 的示例。
+- 确保规范在名称，参数和术语方面与概念一致。 根据需要更新概念和规范。
+- 请避免重复该规范。 这个想法是为了给读者提供更多关于能力的信息和背景，以便他们可以尝试这个。 因此，尽可能提供更多的信息和实施细节。
 - Provide a link to the spec in the [Reference]({{<ref reference >}}) section.
-- Where possible reference a practical How-To doc.
+- 在可能的情况下，参考一个实用的How-To文档。
 
-### Contributing a new How-To guide
+### 贡献新的 How-To 指南
 
-- `How To` articles are meant to provide step-by-step practical guidance on to readers who wish to enable a feature, integrate a technology or use Dapr in a specific scenario.
-- Sub directory naming - the directory name should be descriptive and if referring to specific component or concept should begin with the relevant name. Example *pubsub-namespaces*.
-- Do not assume the reader is using a specific environment unless the article itself is specific to an environment. This include OS (Windows/Linux/MacOS), deployment target (Kubernetes, IoT etc.) or programming language. If instructions vary between operating systems, provide guidance for all.
-- Include code/sample/config snippets that can be easily copied and pasted.
-- At the end of the article, provide the reader with related links and next steps (this can be other relevant "how-to", samples for reference or related concepts).
+- `如何操作` 文章旨在为希望启用某项功能、整合某项技术或在特定场景下使用 Dapr 的读者提供逐步的实用指导。
+- 子目录命名 - 目录名称应该是描述性的，如果引用特定组件或概念，那么应以相关名称开头。 示例： *pubsub-namespaces*。
+- 请勿假定读者使用特定环境，除非文章本身是特定的环境。 这包括操作系统 ( Windows/Linux/MacOS )，部署目标 ( Kubernetes， IoT 等 ) 或编程语言。 如果不同操作系统的说明不同，请为所有系统提供指导。
+- 包括易于复制和粘贴的 代码/示例/配置 片段。
+- 在文章末尾，为读者提供相关链接和后续步骤 ( 这可以是其他相关的 "如何操作 " ，参考样本或相关概念 ) 。
 
-## Requirements for docs.dapr.io
-Any contribution must ensure not to break the website build. The way Hugo builds the website requires following the below guidance.
+## docs.dapr.io 的要求
+任何贡献都必须确保 Web 站点构建成功。 Hugo 构建 Web 站点的方式需要遵循以下指导。
 
-### Files and folder names
-File and folder names should be globally unique.
+### 文件和文件夹名称
+文件和文件夹名称应该是全局唯一的。
     - `\service-invocation`
     - `service-invocation-overview.md`
 
 ### Front-matter
-[Front-matter](https://www.docsy.dev/docs/adding-content/content/#page-frontmatter) is what takes regular markdown files and upgrades them into Hugo compatible docs for rendering into the nav bars and ToCs.
+[Front-matter](https://www.docsy.dev/docs/adding-content/content/#page-frontmatter) 是将常规 markdown 文档升级到 Hugo 兼容文档，用以呈现到导航栏和 ToC 目录中的功能组件。
 
-Every page needs a section at the top of the document like this:
+每个页面都需要在文档的顶部有一个这样的部分:
 ```yaml
 ---
 type: docs
@@ -83,45 +83,45 @@ description: "1+ SENTENCES DESCRIBING THE ARTICLE"
 ```yaml
 ---
 type: docs
-title: "Service invocation overview"
-linkTitle: "Overview"
+title: "服务调用概述"
+linkTitle: "概述"
 weight: 10
-description: "A quick overview of Dapr service invocation and how to use it to invoke services within your application"
+description: "Dapr服务调用的快速概述，以及如何在应用程序中使用它来调用服务。"
 ---
 ```
 
-> Weight determines the order of the pages in the left sidebar, with 0 being the top-most.
+> 权重确定左侧栏中页面的顺序，其中 0 是最顶部。
 
-Front-matter should be completed with all fields including type, title, linkTitle, weight, and description.
-- `title` should be 1 sentence, no period at the end
-- `linkTitle` should be 1-3 words, with the exception of How-to at the front.
-- `description` should be 1-2 sentences on what the reader will learn, accomplish, or do in this doc.
+Front-matter 应填写所有字段，包括类型、标题、链接标题、权重和描述。
+- `title` 应该仅有一句话，最后没有句号
+- `linkTitle` 应该是 1到 3 个字，前面的How-to除外。
+- `描述` 应该是 1-2 个句子，描述读者将在此文档中学习，完成或执行什么。
 
-As per the [styling conventions](#styling-conventions), titles should only capitalize the first word and proper nouns, with the exception of "How-To:"
+根据 [styling conventions](#styling-conventions)，标题只能大写第一个字和专有名词，但 "How-To："除外。
     - "Getting started with Dapr service invocation"
-    - "How-To: Setup a local Redis instance"
+    - "How-To: 设置本地 Redis 实例"
 
-### Referencing other pages
-Hugo `ref` and `relref` [shortcodes](https://gohugo.io/content-management/cross-references/) are used to reference other pages and sections. It also allows the build to break if a page is incorrectly renamed or removed.
+### 引用其他页面
+Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-references/) 用于引用其他页面和部分。 如果某一页面被错误重命名或删除，它会中断构建。
 
-This shortcode, written inline with the rest of the markdown page, will link to the _index.md of the section/folder name:
+这个 shortcodes 在 Markdown 页面中写入，将链接到该节/文件夹名称的 _index.md 页面
 ```md
 {{</* ref "folder" */>}}
 ```
 
-This shortcode will link to a specific page:
+这个shortcode将链接到一个特定的页面。
 ```md
 {{</* ref "page.md" */>}}
 ```
-> Note that all pages and folders need to have globally unique names in order for the ref shortcode to work properly. If there are duplicate names the build will break and an error will be thrown.
+> 请注意，所有的页面和文件夹都需要有全局唯一的名称，以使ref shortcode正常工作。 如果存在重复的名称，那么构建将中断，并且将抛出错误。
 
-#### Referencing sections in other pages
+#### 引用其他页面中的部分
 
-To reference a specific section in another page, add `#section-short-name` to the end of your reference.
+要引用另一页面中的特定部分，请在引用末尾添加 `#section-short-name`。
 
-As a general rule, the section short name is the text of the section title, all lowercase, with spaces changed to "-". You can check the section short name by visiting the website page, clicking the link icon (🔗) next to the section, and see how the URL renders in the nav bar. The content after the "#" is your section shortname.
+通常，节短名称是节标题的文本，全部为小写，空格更改为"-"。 您可以通过访问 Web 站点页面，单击该部分旁边的链接图标 (🔗) 来检查区段短名称，并查看在导航栏中呈现 URL 的方式。 "#" 后面的内容是您的段节短名称。
 
-As an example, for this specific section the complete reference to the page and section would be:
+例如，对于此特定段节，完整引用页面和部分将是:
 
 ```md
 {{</* ref "contributing-docs.md#referencing-sections-in-other-pages" */>}}
@@ -129,30 +129,30 @@ As an example, for this specific section the complete reference to the page and 
 
 ## Shortcodes
 
-The following are useful shortcodes for writing Dapr documentation
+以下是编写 Dapr 文档的有用 shortcodes
 
 ### Images
-The markdown spec used by Docsy and Hugo does not give an option to resize images using markdown notation. Instead, raw HTML is used.
+Docsy 和 Hugo 使用的 markdown 规范没有提供使用 markdown 语法来调整图片大小。 而是使用原始 HTML 。
 
-Begin by placing images under `/daprdocs/static/images` with the naming convention of `[page-name]-[image-name].[png|jpg|svg]`.
+首先将图片放置在 `/daprdocs/static/images` 下，命名惯例为 `[page-name]-[image-name].[png|jpg|svg]`.
 
-Then link to the image using:
+然后使用以下项链接到图片:
 ```md
 <img src="/images/[image-filename]" width=1000 alt="Description of image">
 ```
-> Don't forget to set the alt attribute to keep the docs readable for our visually impaired users.
+> 请不要忘记设置 alt 属性，以保留视觉受损用户的文档可读。
 
-#### Example
+#### Example:
 
-This HTML will display the `dapr-overview.png` image on the `overview.md` page:
+此 HTML 将在 `overview.md` 页面上显示 `dapr-overview.png` 图片:
 ```md
 <img src="/images/overview-dapr-overview.png" width=1000 alt="Overview diagram of Dapr and its building blocks">
 ```
 
-### Tabbed content
-Tabs are made possible through [Hugo shortcodes](https://gohugo.io/content-management/shortcodes/).
+### 标签内容
+通过 [Hugo shortcodes](https://gohugo.io/content-management/shortcodes/) 可以实现标签。
 
-The overall format is:
+总体格式为:
 ```
 {{</* tabs [Tab1] [Tab2]>}}
 
@@ -167,7 +167,7 @@ The overall format is:
 {{< /tabs */>}}
 ```
 
-All content you author will be rendered to Markdown, so you can include images, code blocks, YouTube videos, and more.
+您所编写的所有内容都将被渲染为Markdown，因此您可以包含图像、代码块、YouTube视频等。
 
 #### Example
 ````
@@ -193,7 +193,7 @@ brew install dapr/tap/dapr-cli
 
 {{< /tabs */>}}
 ````
-This example will render to this:
+这个示例将为此呈现：
 {{< tabs Windows Linux MacOS>}}
 {{% codetab %}}
 ```powershell
@@ -215,26 +215,26 @@ brew install dapr/tap/dapr-cli
 
 {{< /tabs >}}
 
-### YouTube videos
-Hugo can automatically embed YouTube videos using a shortcode:
+### YouTube 视频
+短代码为：
 ```
 {{</* youtube [VIDEO ID] */>}}
 ```
 
 #### Example
 
-Given the video https://youtu.be/dQw4w9WgXcQ
+给定视频：https://youtu.be/dQw4w9WgXcQ
 
-The shortcode would be:
+短代码为：
 ```
 {{</* youtube dQw4w9WgXcQ */>}}
 ```
 
-### Buttons
+### 按钮
 
-To create a button in a webpage, use the `button` shortcode.
+若要在网页上创建按钮，请使用 `button` 短码。
 
-#### Link to an external page
+#### 链接到外部文件
 
 ```
 {{</* button text="My Button" link="https://example.com" */>}}
@@ -242,18 +242,18 @@ To create a button in a webpage, use the `button` shortcode.
 
 {{< button text="My Button" link="https://example.com" >}}
 
-#### Link to another docs page
+#### 链接到另一个文档
 
-You can also reference pages in your button as well:
+您还可以在按钮中引用页面：
 ```
 {{</* button text="My Button" page="contributing" */>}}
 ```
 
 {{< button text="My Button" page="contributing" >}}
 
-#### Button colors
+#### 按钮颜色
 
-You can customize the colors using the Bootstrap colors:
+您可以使用 Bootstrap 颜色自定义颜色：
 ```
 {{</* button text="My Button" link="https://example.com" color="primary" */>}}
 {{</* button text="My Button" link="https://example.com" color="secondary" */>}}
@@ -270,22 +270,22 @@ You can customize the colors using the Bootstrap colors:
 {{< button text="My Button" link="https://example.com" color="warning" >}}
 {{< button text="My Button" link="https://example.com" color="info" >}}
 
-### References
-- [Docsy authoring guide](https://www.docsy.dev/docs/adding-content/)
+### 参考资料
+- [Docsy 编写指南](https://www.docsy.dev/docs/adding-content/)
 
-## Translations
+## 翻译
 
-The Dapr Docs supports adding language translations into the docs using git submodules and Hugo's built in language support.
+添加语言的步骤：
 
-You can find an example PR of adding Chinese language support in [PR 1286](https://github.com/dapr/docs/pull/1286).
+您可以在 [PR 1286](https://github.com/dapr/docs/pull/1286) 中找到一个添加中文语言支持的PR 示例。
 
-Steps to add a language:
-- Open an issue in the Docs repo requesting to create a new language-specific docs repo
-- Once created, create a git submodule within the docs repo:
+添加语言的步骤：
+- 在 Docs Repo 中打开一个issue，请求创建一个新的特定语言文档
+- 创建完成后，在文档仓库中创建 git 子模块：
    ```sh
    git submodule add <remote_url> translations/<language_code>
    ```
-- Add a language entry within `daprdocs/config.toml`:
+- 在 `daprdocs/config.toml` 中添加语言条目：
    ```toml
     [languages.<language_code>]
       title = "Dapr Docs"
@@ -293,11 +293,11 @@ Steps to add a language:
       contentDir = "content/<language_code>"
       languageName = "<language_name>"
    ```
-- Create a mount within `daprdocs/config.toml`:
+- 在 `daprdocs/config.toml` 中创建一个挂载：
    ```toml
    [[module.mounts]]
      source = "../translations/docs-<language_code>/content/<language_code>"
      target = "content"
      lang = "<language_code>"
    ```
-- Repeat above step as necessary for all other translation directories
+- 所有其他翻译目录视需要重复上述步骤
