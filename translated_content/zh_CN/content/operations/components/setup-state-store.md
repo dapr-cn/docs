@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "State stores components"
+title: "状态存储组件"
 linkTitle: "状态存储"
-description: "Guidance on setting up different state stores for Dapr state management"
+description: "为 Dapr 状态管理建立不同状态存储的指导"
 weight: 1000
 aliases:
   - "/operations/components/setup-state-store/setup-state-store-overview/"
 ---
 
-Dapr integrates with existing databases to provide apps with state management capabilities for CRUD operations, transactions and more. It also supports the configuration of multiple, named, state store components *per application*.
+Dapr 与现有数据库集成，为应用程序提供CRUD操作、事务等状态管理功能。 Dapr 支持为*每个应用*配置多个命名的状态存储组件。
 
-State stores are extensible and can be found in the [components-contrib repo](https://github.com/dapr/components-contrib).
+状态存储可以扩展，可以在 [components-contrib repo](https://github.com/dapr/components-contrib) 中找到。
 
-A state store in Dapr is described using a `Component` file:
+Dapr 的使用 `Component` 文件来描述状态存储：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,16 +31,16 @@ spec:
 ...
 ```
 
-The type of database is determined by the `type` field, and things like connection strings and other metadata are put in the `.metadata` section. Even though metadata values can contain secrets in plain text, it is recommended you use a [secret store]({{< ref component-secrets.md >}}).
+数据库的类型由`type`字段决定，连接地址和其他元数据等放在`.metadata`部分。 Even though metadata values can contain secrets in plain text, it is recommended you use a [secret store]({{< ref component-secrets.md >}}).
 
 Visit [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to configure a state store component.
 
-## Supported state stores
+## 支持的状态存储
 
 Visit [this reference]({{< ref supported-state-stores >}}) to see all of the supported state stores in Dapr.
 
-## Related topics
-- [Component concept]({{< ref components-concept.md >}})
-- [State management overview]({{< ref state-management >}})
-- [State management API specification]({{< ref state_api.md >}})
-- [Supported state stores]({{< ref supported-state-stores >}})
+## 相关主题
+- [组件概念]({{< ref components-concept.md >}})
+- [状态管理概览]({{< ref state-management >}})
+- [状态管理 API 规范]({{< ref state_api.md >}})
+- [支持的状态存储]({{< ref supported-state-stores >}})
