@@ -4,10 +4,10 @@ title: "SQL Server"
 linkTitle: "SQL Server"
 description: Detailed information on the SQL Server state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-sqlserver/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-sqlserver/"
 ---
 
-## Component format
+## 配置
 
 To setup SQL Server state store create a component of type `state.sqlserver`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
@@ -38,7 +38,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
 If you wish to use Redis as an [actor state store]({{< ref "state_api.md#configuring-state-store-for-actors" >}}), append the following to the yaml.
@@ -48,22 +48,22 @@ If you wish to use Redis as an [actor state store]({{< ref "state_api.md#configu
     value: "true"
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field             | Required | Details                                                                                                                                                            | Example                                                                                             |
-| ----------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
-| connectionString  |    Y     | The connection string used to connect                                                                                                                              | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
-| tableName         |    Y     | The name of the table to use. Alpha-numeric with underscores                                                                                                       | `"table_name"`                                                                                      |
-| keyType           |    N     | The type of key used. Defaults to `"string"`                                                                                                                       | `"string"`                                                                                          |
-| keyLength         |    N     | The max length of key. Used along with `"string"` keytype. Defaults to `"200"`                                                                                     | `"200"`                                                                                             |
-| schema            |    N     | The schema to use. Defaults to `"dbo"`                                                                                                                             | `"dapr"`,`"dbo"`                                                                                    |
-| indexedProperties |    N     | List of IndexedProperties.                                                                                                                                         | `"[{"ColumnName": "column", "Property": "property", "Type": "type"}]"`                              |
-| actorStateStore   |    N     | Indicates that Dapr should configure this component for the actor state store ([more information]({{< ref "state_api.md#configuring-state-store-for-actors" >}})). | `"true"`                                                                                            |
+| 字段                | 必填 | 详情                                                                                                                                                                 | Example                                                                                             |
+| ----------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| connectionString  | Y  | The connection string used to connect                                                                                                                              | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
+| tableName         | Y  | The name of the table to use. Alpha-numeric with underscores                                                                                                       | `"table_name"`                                                                                      |
+| keyType           | N  | The type of key used. Defaults to `"string"`                                                                                                                       | `"string"`                                                                                          |
+| keyLength         | N  | The max length of key. Used along with `"string"` keytype. 默认值为 `"200"`                                                                                            | `"200"`                                                                                             |
+| schema            | N  | The schema to use. Defaults to `"dbo"`                                                                                                                             | `"dapr"`,`"dbo"`                                                                                    |
+| indexedProperties | N  | List of IndexedProperties.                                                                                                                                         | `"[{"ColumnName": "column", "Property": "property", "Type": "type"}]"`                              |
+| actorStateStore   | N  | Indicates that Dapr should configure this component for the actor state store ([more information]({{< ref "state_api.md#configuring-state-store-for-actors" >}})). | `“true”`                                                                                            |
 
 
 ## Create Azure SQL instance
 
-[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.
+[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.  The database must be created before Dapr consumes it.  The database must be created before Dapr consumes it.
 
 **Note: SQL Server state store also supports SQL Server running on VMs.**
 
@@ -82,6 +82,6 @@ When connecting with a dedicated user (not `sa`), these authorizations are requi
 - `CREATE TYPE`
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+- [状态管理构建块]({{< ref state-management >}})
