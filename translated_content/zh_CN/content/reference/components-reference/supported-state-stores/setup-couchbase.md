@@ -4,12 +4,12 @@ title: "Couchbase"
 linkTitle: "Couchbase"
 description: Detailed information on the Couchbase state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-couchbase/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-couchbase/"
 ---
 
 ## 配置
 
-To setup Couchbase state store create a component of type `state.couchbase`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+To setup Couchbase state store create a component of type `state.couchbase`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
@@ -73,5 +73,5 @@ helm install couchbase/couchbase-cluster
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
 - [状态管理构建块]({{< ref state-management >}})
