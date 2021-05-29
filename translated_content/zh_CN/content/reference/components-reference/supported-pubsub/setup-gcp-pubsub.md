@@ -4,8 +4,8 @@ title: "GCP Pub/Sub"
 linkTitle: "GCP Pub/Sub"
 description: "GCP Pub/Sub组件详细文档"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-gcp/"
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-gcp-pubsub/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-gcp/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-gcp-pubsub/"
 ---
 
 ## 创建 Dapr 组件
@@ -55,7 +55,7 @@ spec:
 
 | 字段                      | 必填 | 详情                                                                                                                             | Example                                                                                                  |
 | ----------------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| type                    | N  | GCP credentials type. Only `service_account` is supported. Defaults to `service_account`                                       | `service_account`                                                                                        |
+| type                    | N  | GCP 凭证类型. Only `service_account` is supported. Defaults to `service_account`                                                   | `service_account`                                                                                        |
 | project_id              | Y  | GCP 项目 id                                                                                                                      | `myproject-123`                                                                                          |
 | identityProjectId       | N  | If the GCP pubsub project is different from the identity project, specify the identity project using this attribute            | `"myproject-123"`                                                                                        |
 | privateKeyId            | N  | If using explicit credentials, this field should contain the `private_key_id` field from the service account json document     | `"my-private-key"`                                                                                       |
