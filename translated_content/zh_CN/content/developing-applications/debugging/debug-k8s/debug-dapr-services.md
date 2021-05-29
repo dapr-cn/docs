@@ -1,12 +1,12 @@
 ---
 type: docs
 title: "Debug Dapr control plane on Kubernetes"
-linkTitle: "Dapr control plane"
+linkTitle: "Dapr control plane (Dapr 控制面板)"
 weight: 1000
 description: "How to debug Dapr control plane on your Kubernetes cluster"
 ---
 
-## Overview
+## 概述
 
 Sometimes it is necessary to understand what's going on in Dapr control plane (aka, Kubernetes services), including `dapr-sidecar-injector`, `dapr-operator`, `dapr-placement`, and `dapr-sentry`, especially when you diagnose your Dapr application and wonder if there's something wrong in Dapr itself. Additionally, you may be developing a new feature for Dapr on Kubernetes and want to debug your code.
 
@@ -14,7 +14,7 @@ This guide will cover how to use Dapr debugging binaries to debug the Dapr servi
 
 ## Debugging Dapr Kubernetes services
 
-### Pre-requisites
+### 前提
 
 - Familiarize yourself with [this guide]({{< ref kubernetes-deploy.md >}}) to learn how to deploy Dapr to your Kubernetes cluster.
 - Setup your [dev environment](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
@@ -106,8 +106,8 @@ Forwarding from [::1]:40000 -> 40000
 
 All done. Now you can point to port 40000 and start a remote debug session from your favorite IDE.
 
-## Related links
+## 相关链接
 
-- [Overview of Dapr on Kubernetes]({{< ref kubernetes-overview >}})
-- [Deploy Dapr to a Kubernetes cluster]({{< ref kubernetes-deploy >}})
-- [Dapr Kubernetes Quickstart](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes)
+- [Kubernetes上的 Dapr 概述]({{< ref kubernetes-overview >}})
+- [将 dapr 部署到 Kubernetes 集群]({{< ref kubernetes-deploy >}})
+- [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes)
