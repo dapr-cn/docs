@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "PostgreSQL binding spec"
+title: "PostgrSQL binding spec"
 linkTitle: "PostgreSQL"
 description: "Detailed documentation on the PostgreSQL binding component"
 aliases:
   - "/operations/components/setup-bindings/supported-bindings/postgres/"
 ---
 
-## Component format
+## 配置
 
-To setup PostgreSQL binding create a component of type `bindings.postgres`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置与 PostgreSQL相关的 绑定,需要创建类型 `bindings.postgres` 的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
 
 ```yaml
@@ -27,16 +27,16 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field | Required | Binding support | Details                                                             | Example                                                                                     |
-| ----- |:--------:| --------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| url   |    Y     | Output          | Postgres connection string See [here](#url-format) for more details | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
+| 字段  | 必填 | 绑定支持 | 详情                                     | Example                                                                                     |
+| --- |:--:| ---- | -------------------------------------- | ------------------------------------------------------------------------------------------- |
+| url | Y  | 输出   | Postgres连接字符串的写法，请参阅此处 [](#url-format) | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
 
-### URL format
+### URL格式
 
 The PostgreSQL binding uses [pgx connection pool](https://github.com/jackc/pgx) internally so the `url` parameter can be any valid connection string, either in a `DSN` or `URL` format:
 
@@ -61,9 +61,9 @@ Both methods also support connection pool configuration variables:
 - `pool_health_check_period`: duration string
 
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `exec`
 - `query`
@@ -73,7 +73,7 @@ This component supports **output binding** with the following operations:
 
 The `exec` operation can be used for DDL operations (like table creation), as well as `INSERT`, `UPDATE`, `DELETE` operations which return only metadata (e.g. number of affected rows).
 
-**Request**
+**请求**
 
 ```json
 {
@@ -84,7 +84,7 @@ The `exec` operation can be used for DDL operations (like table creation), as we
 }
 ```
 
-**Response**
+**响应**
 
 ```json
 {
@@ -103,7 +103,7 @@ The `exec` operation can be used for DDL operations (like table creation), as we
 
 The `query` operation is used for `SELECT` statements, which returns the metadata along with data in a form of an array of row values.
 
-**Request**
+**请求**
 
 ```json
 {
@@ -114,7 +114,7 @@ The `query` operation is used for `SELECT` statements, which returns the metadat
 }
 ```
 
-**Response**
+**响应**
 
 ```json
 {
@@ -137,7 +137,7 @@ The `query` operation is used for `SELECT` statements, which returns the metadat
 
 Finally, the `close` operation can be used to explicitly close the DB connection and return it to the pool. This operation doesn't have any response.
 
-**Request**
+**请求**
 
 ```json
 {
@@ -148,10 +148,10 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 
 > Note, the PostgreSql binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
