@@ -8,7 +8,7 @@ description: How to get up and running with the Dapr Python SDK
 
 The Dapr actor package allows you to interact with Dapr virtual actors from a Python application.
 
-## Pre-requisites
+## 前提
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
 - Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
