@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "HTTP binding spec"
+title: "HTTP 绑定规范"
 linkTitle: "HTTP"
-description: "Detailed documentation on the HTTP binding component"
+description: "HTTP 绑定组件的详细文档"
 aliases:
   - "/operations/components/setup-bindings/supported-bindings/http/"
 ---
 
-## Setup Dapr component
+## 设置 Dapr 组件
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -23,40 +23,40 @@ spec:
     value: http://something.com
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field | Required | Binding support | Details                                     | Example                                                    |
-| ----- |:--------:| --------------- | ------------------------------------------- | ---------------------------------------------------------- |
-| url   |    Y     | Output          | The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers` |
+| 字段  | 必填 | 绑定支持 | 详情                     | Example                                                    |
+| --- |:--:| ---- | ---------------------- | ---------------------------------------------------------- |
+| url | Y  | 输出   | 要调用的 HTTP 终点的 base URL | `http://host:port/path`, `http://myservice:8000/customers` |
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the folowing [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html):
+此组件支持以下 [HTTP 方法/谓词](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) **输出绑定** ：
 
-- `create` : For backward compatability and treated like a post
-- `get` :  Read data/records
-- `head` : Identical to get except that the server does not return a response body
-- `post` : Typically used to create records or send commands
-- `put` : Update data/records
-- `patch` : Sometimes used to update a subset of fields of a record
-- `delete` : Delete a data/record
-- `options` : Requests for information about the communication options available (not commonly used)
-- `trace` : Used to invoke a remote, application-layer loop- back of the request message (not commonly used)
+- `create` : 为了向后的兼容，并被当作一个 post 请求处理
+- `get` : 读数据或者记录
+- `head` : 连接服务器但不返回响应正文
+- `post` ： 通常用于创建记录或发送命令
+- `put` ： 更新数据或者记录
+- `patch` ： 有时用于更新记录的字段子集
+- `删除` : 删除数据或者记录
+- `options` : 请求提供关于可用通信选项的信息(不常用)
+- `trace` ：用于调用请求消息的远程应用程序层回路（不常用）
 
-### Request
+### 请求
 
-#### Operation metadata fields
+#### 请求格式
 
-All of the operations above support the following metadata fields
+以上所有操作都支持以下元数据字段
 
-| Field    | Required | Details                                                                 | Example                               |
-| -------- |:--------:| ----------------------------------------------------------------------- | ------------------------------------- |
-| path     |    N     | The path to append to the base URL. Used for accessing specific URIs    | `"/1234"`, `"/search?lastName=Jones"` |
-| Headers* |    N     | Any fields that have a capital first letter are sent as request headers | `"Content-Type"`, `"Accept"`          |
+| 字段       | 必填 | 详情                          | Example                               |
+| -------- |:--:| --------------------------- | ------------------------------------- |
+| path     | N  | 追加到 base URL的路径。 用于访问特定的URI | `"/1234"`, `"/search?lastName=Jones"` |
+| Headers* | N  | 任何第一字母为大写字母的字段均作为请求头发送      | `"Content-Type"`, `"Accept"`          |
 
-#### Retrieving data
+#### 检索数据
 
-To retrieve data from the HTTP endpoint, invoke the HTTP binding with a `GET` method and the following JSON body:
+要从 HTTP 终结点检索数据，请使用 `GET` 方法和以下 JSON 的 HTTP 绑定：
 
 ```json
 {
@@ -64,7 +64,7 @@ To retrieve data from the HTTP endpoint, invoke the HTTP binding with a `GET` me
 }
 ```
 
-Optionally, a path can be specified to interact with resource URIs:
+可以指定 URI ：
 
 ```json
 {
@@ -75,19 +75,19 @@ Optionally, a path can be specified to interact with resource URIs:
 }
 ```
 
-### Response
+### 响应
 
-The response body contains the data returned by the HTTP endpoint.  The `data` field contains the HTTP response body as a byte slice (Base64 encoded via curl). The `metadata` field contains:
+响应正文包含 HTTP 终结点返回的数据。  `data` 字段包含一个 HTTP 响应实体作为字节数组(通过curl Base64 编码). `metadata` 字段含有：
 
-| Field      | Required | Details                                                                         | Example                     |
-| ---------- |:--------:| ------------------------------------------------------------------------------- | --------------------------- |
-| statusCode |    Y     | The [HTTP status code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
-| status     |    Y     | The status description                                                          | `"200 OK"`, `"201 Created"` |
-| Headers*   |    N     | Any fields that have a capital first letter are sent as request headers         | `"Content-Type"`            |
+| 字段         | 必填 | 详情                                                                   | Example                     |
+| ---------- |:--:| -------------------------------------------------------------------- | --------------------------- |
+| statusCode | Y  | [HTTP 状态代码](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
+| status     | Y  | 状态说明                                                                 | `"200 OK"`, `"201 Created"` |
+| Headers*   | N  | 任何第一字母为大写字母的字段均作为请求头                                                 | `"Content-Type"`            |
 
 #### Example
 
-**Requesting the base URL**
+**请求 base URL**
 
 {{< tabs Windows Linux >}}
 
@@ -107,7 +107,7 @@ curl -d '{ "operation": "get" }' \
 
 {{< /tabs >}}
 
-**Requesting a specific path**
+**请求特定路径**
 
 {{< tabs Windows Linux >}}
 
@@ -127,12 +127,12 @@ curl -d '{ "operation": "get", "metadata": { "path": "/things/1234" } }' \
 
 {{< /tabs >}}
 
-### Sending and updating data
+### 发送和更新数据
 
-To send data to the HTTP endpoint, invoke the HTTP binding with a `POST`, `PUT`, or `PATCH` method and the following JSON body:
+要将数据发送到 HTTP 终结点，请调用带有 `POST`的 HTTP 绑定， `PUT`，或 `PATCH` 方法和以下 JSON 正文：
 
 {{% alert title="Note" color="primary" %}}
-Any metadata field that starts with a capital letter is passed as a request header. For example, the default content type is `application/json; charset=utf-8`. This can be overriden be setting the `Content-Type` metadata field.
+以大写字母开头的任何元数据字段都作为请求头传递。 例如，默认 content type 是 `application/json; charset=utf-8`. 这可以设置 `Content-Type` 元数据字段来覆盖。
 {{% /alert %}}
 
 ```json
@@ -148,7 +148,7 @@ Any metadata field that starts with a capital letter is passed as a request head
 
 #### Example
 
-**Posting a new record**
+**发布新记录**
 
 {{< tabs Windows Linux >}}
 
@@ -168,10 +168,10 @@ curl -d '{ "operation": "post", "data": "YOUR_BASE_64_CONTENT", "metadata": { "p
 
 {{< /tabs >}}
 
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
