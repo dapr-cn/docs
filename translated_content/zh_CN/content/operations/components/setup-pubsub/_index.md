@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "Pub/Sub brokers"
+title: "Pub/Sub 代理"
 linkTitle: "Pub/Sub 代理"
-description: "Guidance on setting up different message brokers for Dapr Pub/Sub"
+description: "关于为Dapr Pub/Sub设置不同的消息代理的指南"
 weight: 2000
 aliases:
   - "/operations/components/setup-pubsub/setup-pubsub-overview/"
 ---
 
-Dapr integrates with pub/sub message buses to provide applications with the ability to create event-driven, loosely coupled architectures where producers send events to consumers via topics.
+Dapr集成了pub/sub消息总线，为应用程序提供了创建事件驱动、松散耦合架构的能力，在这种架构下，生产者通过主题向消费者发送事件。
 
-Dapr supports the configuration of multiple, named, pub/sub components *per application*. Each pub/sub component has a name and this name is used when publishing a message topic. Read the [API reference]({{< ref pubsub_api.md >}}) for details on how to publish and subscribe to topics.
+Dapr支持为*每个应用*配置多个命名的pub/sub组件。 每个pub/sub组件都有一个名称，这个名称在发布消息主题时使用。 Read the [API reference]({{< ref pubsub_api.md >}}) for details on how to publish and subscribe to topics.
 
-Pub/sub components are extensible. A list of support pub/sub components is [here]({{< ref supported-pubsub >}}) and the implementations can be found in the [components-contrib repo](https://github.com/dapr/components-contrib).
+Pub/sub组件是可扩展的， A list of support pub/sub components is [here]({{< ref supported-pubsub >}}) and the implementations can be found in the [components-contrib repo](https://github.com/dapr/components-contrib).
 
-## Component files
+## 组件文件
 
-A pub/sub is described using a `Component` file:
+Pub/sub使用`Component`文件来描述：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,15 +35,15 @@ spec:
 ...
 ```
 
-The type of pub/sub is determined by the `type` field, and properties such as connection strings and other metadata are put in the `.metadata` section. Even though metadata values can contain secrets in plain text, it is recommended you use a [secret store]({{< ref component-secrets.md >}}) using a `secretKeyRef`.
+Pub/sub的类型由`type`字段决定，连接地址和其他元数据等属性放在`.metadata`部分。 Even though metadata values can contain secrets in plain text, it is recommended you use a [secret store]({{< ref component-secrets.md >}}) using a `secretKeyRef`.
 
 {{% alert title="Topic creation" color="primary" %}}
-Depending on the pub/sub message bus you are using and how it is configured, topics may be created automatically. Even if the message bus supports automatic topic creation, it is a common governance practice to disable it in production environments. You may still need to use a CLI, admin console, or request form to manually create the topics required by your application.
+根据你使用的 pub/sub 消息总线及其配置方式，主题可能会被自动创建。 即使消息总线支持自动创建主题，在生产环境中把它禁用也是一种常见的做法。 你可能会需要使用 CLI、管理控制台或请求表单来手动创建应用所需的主题。
 {{% /alert %}}
 
 Visit [this guide]({{< ref "howto-publish-subscribe.md#step-3-publish-a-topic" >}}) for instructions on configuring and using pub/sub components.
 
-## Related links
+## 相关链接
 
 - Overview of the Dapr [Pub/Sub building block]({{< ref pubsub-overview.md >}})
 - 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)
