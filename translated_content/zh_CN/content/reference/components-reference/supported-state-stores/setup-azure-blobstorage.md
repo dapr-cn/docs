@@ -4,12 +4,12 @@ title: "Azure Blob Storage"
 linkTitle: "Azure Blob Storage"
 description: 关于Azure Blob Store状态存储组件的详细信息
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-azure-blobstorage/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-azure-blobstorage/"
 ---
 
 ## 配置
 
-要设置 Azure Blobstorage状态存储，请创建一个类型为`state.azure.blobstorage`的组件。 See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
+要设置 Azure Blobstorage状态存储，请创建一个类型为`state.azure.blobstorage`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
@@ -96,5 +96,5 @@ curl -X POST http://localhost:3500/v1.0/state \
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
+- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
 - [状态管理构建块]({{< ref state-management >}})
