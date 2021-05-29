@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Securing Dapr deployments"
-linkTitle: "Security"
+title: "保护 Dapr deployment"
+linkTitle: "安全"
 weight: 500
-description: "Best practices and instructions on how to secure your Dapr applications"
+description: "关于如何保护您的 Dapr 应用程序的最佳实践和说明"
 ---
 
