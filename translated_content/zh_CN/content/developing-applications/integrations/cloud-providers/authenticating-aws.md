@@ -5,7 +5,7 @@ linkTitle: "Authenticating to AWS"
 weight: 10
 description: "关于AWS的认证和配置选项"
 aliases:
-  - /developing-applications/integrations/authenticating/authenticating-aws/
+  - /zh-hans/developing-applications/integrations/authenticating/authenticating-aws/
 ---
 
 所有使用AWS服务(如DynamoDB、SQS、S3等) 的Dapr组件都使用一套标准化的属性进行配置，这些属性描述如下。
