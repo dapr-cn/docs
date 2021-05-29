@@ -5,7 +5,7 @@ linkTitle: "Secret stores（密钥存储）"
 weight: 4000
 description: Dapr支持对接的密钥仓库
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/"
 no_list: true
 ---
 
