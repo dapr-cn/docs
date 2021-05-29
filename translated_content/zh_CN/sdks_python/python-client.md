@@ -27,7 +27,7 @@ from dapr.clients import DaprClient
 
 The Python SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
 
-### Invoke a service
+### 调用服务
 
 ```python 
 from dapr.clients import DaprClient
@@ -39,7 +39,7 @@ with DaprClient() as d:
 - For a full guide on service invocation visit [How-To: Invoke a service]({{< ref howto-invoke-discover-services.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/invoke-simple) for code samples and instructions to try out service invocation
 
-### Save & get application state
+### 保存 & 获取 应用程序状态
 
 ```python
 from dapr.clients import DaprClient
@@ -58,7 +58,7 @@ with DaprClient() as d:
 - For a full list of state operations visit [How-To: Get & save state]({{< ref howto-get-save-state.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/state_store) for code samples and instructions to try out state management
 
-### Publish messages
+### 发布消息
 
 ```python
 from dapr.clients import DaprClient
@@ -70,7 +70,7 @@ with DaprClient() as d:
 - For a full list of state operations visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/pubsub-simple) for code samples and instructions to try out pub/sub
 
-### Interact with output bindings
+### 与输出绑定交互
 
 ```python
 from dapr.clients import DaprClient
@@ -82,7 +82,7 @@ with DaprClient() as d:
 - For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/invoke-binding) for code samples and instructions to try out output bindings
 
-### Retrieve secrets
+### 检索密钥
 
 ```python
 from dapr.clients import DaprClient
