@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Dapr 客户端 .NET SDK入门"
-linkTitle: "Client"
+linkTitle: "客户端"
 weight: 20000
 description: 如何启动和运行Dapr .NET SDK
 no_list: true
