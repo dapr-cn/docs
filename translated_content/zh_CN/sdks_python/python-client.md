@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Getting started with the Dapr client Python SDK"
-linkTitle: "Client"
+linkTitle: "客户端"
 weight: 10000
 description: How to get up and running with the Dapr Python SDK
 ---
