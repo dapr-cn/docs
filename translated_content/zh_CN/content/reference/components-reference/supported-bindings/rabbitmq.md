@@ -4,7 +4,7 @@ title: "RabbitMQ 绑定规范"
 linkTitle: "RabbitMQ"
 description: "Detailed documentation on the RabbitMQ binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/rabbitmq/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/rabbitmq/"
 ---
 
 ## 配置
