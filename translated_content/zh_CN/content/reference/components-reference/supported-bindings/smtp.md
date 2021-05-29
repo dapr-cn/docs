@@ -7,7 +7,7 @@ aliases:
   - "/operations/components/setup-bindings/supported-bindings/smtp/"
 ---
 
-## Component format
+## 配置
 
 To setup SMTP binding create a component of type `bindings.smtp`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -48,24 +48,24 @@ spec:
 The example configuration shown above, contain a username and password as plain-text strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field         | Required | Binding support | Details                                                                                       | Example             |
-| ------------- |:--------:| --------------- | --------------------------------------------------------------------------------------------- | ------------------- |
-| host          |    Y     | Output          | The host where your SMTP server runs                                                          | `"smtphost"`        |
-| port          |    Y     | Output          | The port your SMTP server listens on                                                          | `"9999"`            |
-| user          |    Y     | Output          | The user to authenticate against the SMTP server                                              | `"user"`            |
-| password      |    Y     | Output          | The password of the user                                                                      | `"password"`        |
-| skipTLSVerify |    N     | Output          | If set to true, the SMPT server's TLS certificate will not be verified. Defaults to `"false"` | `"true"`, `"false"` |
-| emailFrom     |    N     | Output          | If set, this specifies the email address of the sender. See [also](#example-request)          | `"me@example.com"`  |
-| emailTo       |    N     | Output          | If set, this specifies the email address of the receiver. See [also](#example-request)        | `"me@example.com"`  |
-| emailCc       |    N     | Output          | If set, this specifies the email address to CC in. See [also](#example-request)               | `"me@example.com"`  |
-| emailBcc      |    N     | Output          | If set, this specifies email address to BCC in. See [also](#example-request)                  | `"me@example.com"`  |
-| subject       |    N     | Output          | If set, this specifies the subject of the email message. See [also](#example-request)         | `"subject of mail"` |
+| 字段            | 必填 | 绑定支持 | 详情                                                                                     | Example             |
+| ------------- |:--:| ---- | -------------------------------------------------------------------------------------- | ------------------- |
+| host          | Y  | 输出   | The host where your SMTP server runs                                                   | `"smtphost"`        |
+| port          | Y  | 输出   | The port your SMTP server listens on                                                   | `"9999"`            |
+| user          | Y  | 输出   | The user to authenticate against the SMTP server                                       | `"user"`            |
+| password      | Y  | 输出   | 用户密码                                                                                   | `"password"`        |
+| skipTLSVerify | N  | 输出   | If set to true, the SMPT server's TLS certificate will not be verified. 默认值为 `"false"` | `"true"`, `"false"` |
+| emailFrom     | N  | 输出   | If set, this specifies the email address of the sender. See [also](#example-request)   | `"me@example.com"`  |
+| emailTo       | N  | 输出   | If set, this specifies the email address of the receiver. See [also](#example-request) | `"me@example.com"`  |
+| emailCc       | N  | 输出   | If set, this specifies the email address to CC in. See [also](#example-request)        | `"me@example.com"`  |
+| emailBcc      | N  | 输出   | If set, this specifies email address to BCC in. See [also](#example-request)           | `"me@example.com"`  |
+| subject       | N  | 输出   | If set, this specifies the subject of the email message. See [also](#example-request)  | `"subject of mail"` |
 
-## Binding support
+## 绑定支持
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `create`
 
@@ -83,7 +83,7 @@ When sending an email, the metadata in the configuration and in the request is c
 
 The `emailTo`, `emailCC` and `emailBCC` fields can contain multiple email addresses separated by a semicolon.
 
-Example:
+You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
 ```json
 {
   "operation": "create",
@@ -97,10 +97,10 @@ Example:
 ```
 
 The `emailTo`, `emailCC` and `emailBCC` fields can contain multiple email addresses separated by a semicolon.
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
