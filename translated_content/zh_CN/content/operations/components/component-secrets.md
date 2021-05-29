@@ -1,26 +1,26 @@
 ---
 type: docs
-title: "How-To: Reference secrets in components"
-linkTitle: "Reference secrets in components"
+title: "指南：在组件中引用密钥"
+linkTitle: "在组件中引用密钥"
 weight: 400
-description: "How to securly reference secrets from a component definition"
+description: "如何从组件定义中安全地引用密钥"
 ---
 
 ## 概述
 
-Components can reference secrets for the `spec.metadata` section within the components definition.
+组件可以在组件定义中为 `spec.metadata` 部分引用密钥。
 
-In order to reference a secret, you need to set the `auth.secretStore` field to specify the name of the secret store that holds the secrets.
+为了引用密钥，您需要设置 `auth.secretStore` 字段以指定密钥存储的名称。
 
-When running in Kubernetes, if the `auth.secretStore` is empty, the Kubernetes secret store is assumed.
+在 Kubernetes 运行时，如果 `auth.secretStore` 为空，则假定使用Kubernetes 密钥存储。
 
-### Supported secret stores
+### 支持的密钥存储
 
 Go to [this]({{< ref "howto-secrets.md" >}}) link to see all the secret stores supported by Dapr, along with information on how to configure and use them.
 
-## Referencing secrets
+## 引用密钥
 
-While you have the option to use plain text secrets, this is not recommended for production:
+虽然您可以选择使用纯文本密钥，但不建议用于生产：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -38,7 +38,7 @@ spec:
     value: MyPassword
 ```
 
-Instead create the secret in your secret store and reference it in the component definition:
+相反，在您应该在密钥存储中创建密钥，并在组件定义中引用它：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -60,22 +60,22 @@ auth:
   secretStore: <SECRET_STORE_NAME>
 ```
 
-`SECRET_STORE_NAME` is the name of the configured [secret store component]({{< ref supported-secret-stores >}}). When running in Kubernetes and using a Kubernetes secret store, the field `auth.SecretStore` defaults to `kubernetes` and can be left empty.
+`SECRET_STORE_NAME` is the name of the configured [secret store component]({{< ref supported-secret-stores >}}). 当在 Kubernetes 中运行并使用 Kubernetes 密钥存储时，字段 `auth.SecretStore` 默认为 `kubernetes` 并且可以留空。
 
-The above component definition tells Dapr to extract a secret named `redis-secret` from the defined secret store and assign the value of the `redis-password` key in the secret to the `redisPassword` field in the Component.
+上面的组件定义让Dapr从定义的秘密存储中提取一个名为 `redis-secret` 的密钥，并将密钥的值分配给组件中的 `redis-password` 密钥中的 `redisPassword` 欄位。
 
 ## Example
 
-### Referencing a Kubernetes secret
+### 引用一个Kubernetes密钥
 
-The following example shows you how to create a Kubernetes secret to hold the connection string for an Event Hubs binding.
+下面的示例向您展示如何创建 Kubernetes 密钥来保持 Event Hubs 绑定的连接字符串。
 
-1. First, create the Kubernetes secret:
+1. 首先，创建Kubernetes密钥：
     ```bash
      kubectl create secret generic eventhubs-secret --from-literal=connectionString=*********
     ```
 
-2. Next, reference the secret in your binding:
+2. 接下来，在您的绑定中引用该密钥：
     ```yaml
     apiVersion: dapr.io/v1alpha1
     kind: Component
@@ -92,24 +92,24 @@ The following example shows you how to create a Kubernetes secret to hold the co
           key: connectionString
     ```
 
-3. Finally, apply the component to the Kubernetes cluster:
+3. 最后，将组件应用到 Kubernetes 集群：
     ```bash
     kubectl apply -f ./eventhubs.yaml
     ```
 
-## Scoping access to secrets
+## 访问密钥的范围
 
-Dapr can restrict access to secrets in a secret store using its configuration. Read [How To: Use secret scoping]({{< ref "secrets-scopes.md" >}}) and  [How-To: Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}}) for more information. This is the recommended way to limit access to secrets using Dapr.
+Dapr 可以使用其配置限制对密钥存储中的密钥的访问。 Read [How To: Use secret scoping]({{< ref "secrets-scopes.md" >}}) and  [How-To: Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}}) for more information. 这是推荐的使用 Dapr 限制访问密钥的方式。
 
-## Kubernetes permissions
+## Kubernetes 权限
 
-### Default namespace
+### 默认命名空间
 
-When running in Kubernetes, Dapr, during installtion, defines default Role and RoleBinding for secrets access from Kubernetes secret store in the `default` namespace. For Dapr enabled apps that fetch secrets from `default` namespace, a secret can be defined and referenced in components as shown in the example above.
+当在 Kubernetes 中运行时，Dapr 在安装过程中定义了默认的 Role 和 RoleBinding ，用于在 `default` 命名空间中从 Kubernetes 密钥存储中获取密钥。 对于启用了 Dapr 的应用程序，从`default`命名空间获取密钥，可以在组件中定义和引用一个密钥，如上例所示。
 
-### Non-default namespaces
+### 非默认命名空间
 
-If your Dapr enabled apps are using components that fetch secrets from non-default namespaces, apply the following resources to that namespace:
+如果您的 Dapr 启用的应用正在使用从非默认命名空间获取密钥的组件，在该命名空间应用以下资源：
 
 ```yaml
 ---
@@ -138,13 +138,13 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-These resources grant Dapr permissions to get secrets from the Kubernetes secret store for the namespace defined in the Role and RoleBinding.
+这些资源给予了 Dapr 权限，从Kubernetes 密钥商店获取角色和 RoleBinding 定义的命名空间的密钥。
 
 {{% alert title="Note" color="warning" %}}
-In production scenario to limit Dapr's access to certain secret resources alone, you can use the `resourceNames` field. See this [link](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) for further explanation.
+在生产场景中，仅限Dapr访问某些秘密资源时，您可以使用 `resourceNames` 字段。 请参阅此 [链接](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) 获取更多解释。
 {{% /alert %}}
 
-## Related links
+## 相关链接
 
-- [Use secret scoping]({{< ref "secrets-scopes.md" >}})
-- [Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}})
+- [使用密钥作用域]({{< ref "secrets-scopes.md" >}})
+- [限制可以从密钥仓库中读取的密钥]({{< ref "secret-scope.md" >}})
