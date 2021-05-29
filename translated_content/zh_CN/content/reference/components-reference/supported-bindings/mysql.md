@@ -4,7 +4,7 @@ title: "MySQL 绑定规范"
 linkTitle: "MySQL"
 description: "MySQL 组件绑定详细说明"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/mysql/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/mysql/"
 ---
 
 ## 配置
