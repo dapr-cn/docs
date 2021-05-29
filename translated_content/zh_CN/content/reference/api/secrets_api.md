@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Secrets API reference"
+title: "密钥 API 参考"
 linkTitle: "Secrets API"
 description: "Detailed documentation on the secrets API"
 weight: 600
@@ -10,21 +10,21 @@ weight: 600
 
 This endpoint lets you get the value of a secret for a given secret store.
 
-### HTTP Request
+### HTTP 请求
 
 ```
 GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>
 ```
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter         | Description                                         |
+| 参数                | 说明                                                  |
 | ----------------- | --------------------------------------------------- |
-| daprPort          | the Dapr port                                       |
+| daprPort          | dapr 端口。                                            |
 | secret-store-name | the name of the secret store to get the secret from |
 | name              | the name of the secret to get                       |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
 #### Query Parameters
 
@@ -37,14 +37,14 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>?metadata
 ##### GCP Secret Manager
 The following optional meta can be provided to the GCP Secret Manager component
 
-| Query Parameter     | Description                      |
+| Query Parameter     | 说明                               |
 | ------------------- | -------------------------------- |
 | metadata.version_id | version for the given secret key |
 
 ##### AWS Secret Manager
 The following optional meta can be provided to the AWS Secret Manager component
 
-| Query Parameter        | Description                            |
+| Query Parameter        | 说明                                     |
 | ---------------------- | -------------------------------------- |
 | metadata.version_id    | version for the given secret key       |
 | metadata.version_stage | version stage for the given secret key |
@@ -84,15 +84,15 @@ curl http://localhost:3500/v1.0/secrets/vault/db-secret
 
 #### Response Codes
 
-| Code | Description                                      |
-| ---- | ------------------------------------------------ |
-| 200  | OK                                               |
-| 204  | Secret not found                                 |
-| 400  | Secret store is missing or misconfigured         |
-| 403  | Access denied                                    |
-| 500  | Failed to get secret or no secret stores defined |
+| 代码  | 说明                                               |
+| --- | ------------------------------------------------ |
+| 200 | OK                                               |
+| 204 | Secret not found                                 |
+| 400 | Secret store is missing or misconfigured         |
+| 403 | Access denied                                    |
+| 500 | Failed to get secret or no secret stores defined |
 
-### Examples
+### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/secrets/vault/db-secret \
@@ -112,20 +112,20 @@ curl http://localhost:3500/v1.0/secrets/vault/db-secret?metadata.version_id=15&?
 
 This endpoint lets you get all the secrets in a secret store. It's recommended to use [token authentication]({{<ref "api-token.md">}}) for Dapr if configuring a secret store.
 
-### HTTP Request
+### HTTP 请求
 
 ```
 GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/bulk
 ```
 
-#### URL Parameters
+#### URL 参数
 
-| Parameter         | Description                                         |
+| 参数                | 说明                                                  |
 | ----------------- | --------------------------------------------------- |
-| daprPort          | the Dapr port                                       |
+| daprPort          | dapr 端口。                                            |
 | secret-store-name | the name of the secret store to get the secret from |
 
-> Note, all URL parameters are case-sensitive.
+> 注意：所有的 URL 参数都是大小写敏感的。
 
 ### HTTP Response
 
@@ -154,14 +154,14 @@ curl http://localhost:3500/v1.0/secrets/kubernetes/bulk
 
 #### Response Codes
 
-| Code | Description                                      |
-| ---- | ------------------------------------------------ |
-| 200  | OK                                               |
-| 400  | Secret store is missing or misconfigured         |
-| 403  | Access denied                                    |
-| 500  | Failed to get secret or no secret stores defined |
+| 代码  | 说明                                               |
+| --- | ------------------------------------------------ |
+| 200 | OK                                               |
+| 400 | Secret store is missing or misconfigured         |
+| 403 | Access denied                                    |
+| 500 | Failed to get secret or no secret stores defined |
 
-### Examples
+### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/secrets/vault/bulk \
