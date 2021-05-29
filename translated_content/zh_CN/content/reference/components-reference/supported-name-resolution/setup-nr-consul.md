@@ -142,11 +142,11 @@ spec:
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 Please check out the [self-hosted guide here](https://learn.hashicorp.com/collections/consul/getting-started)
+HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 请查看此处的 [自托管指南](https://learn.hashicorp.com/collections/consul/getting-started)
 {{% /codetab %}}
 
 {{% codetab %}}
-HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 Please check out the [Kubernetes guide here](https://learn.hashicorp.com/collections/consul/gs-consul-service-mesh)
+HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 请在此查看 [Kubernetes 指南](https://learn.hashicorp.com/collections/consul/gs-consul-service-mesh)
 {{% /codetab %}}
 
 {{< /tabs >}}
