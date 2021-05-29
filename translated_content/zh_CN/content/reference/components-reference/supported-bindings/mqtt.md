@@ -7,7 +7,7 @@ aliases:
   - "/operations/components/setup-bindings/supported-bindings/mqtt/"
 ---
 
-## Component format
+## 配置
 
 To setup MQTT binding create a component of type `bindings.mqtt`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
@@ -34,24 +34,24 @@ spec:
     value: "false"
 ```
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field        |        Required        | Binding support | Details                                                                                                                  | Example                                                                                                                                                             |
-| ------------ |:----------------------:| --------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| url          |           Y            | Input/Output    | Address of the MQTT broker                                                                                               | Use `**tcp://**` scheme for non-TLS communication.   Use`**ssl://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]" |
-| topic        |           Y            | Input/Output    | The topic to listen on or send events to                                                                                 | `"mytopic"`                                                                                                                                                         |
-| qos          |           N            | Input/Output    | Indicates the Quality of Service Level (QoS) of the message. Default 0                                                   | `1`                                                                                                                                                                 |
-| retain       |           N            | Input/Output    | Defines whether the message is saved by the broker as the last known good value for a specified topic. Default `"false"` | `"true"`, `"false"`                                                                                                                                                 |
-| cleanSession |           N            | Input/Output    | will set the "clean session" in the connect message when client connects to an MQTT broker. Default `"true"`             | `"true"`, `"false"`                                                                                                                                                 |
-| caCert       | Required for using TLS | Input/Output    | Certificate authority certificate. Can be `secretKeyRef` to use a secret reference                                       | `0123456789-0123456789`                                                                                                                                             |
-| clientCert   | Required for using TLS | Input/Output    | Client certificate. Can be `secretKeyRef` to use a secret reference                                                      | `0123456789-0123456789`                                                                                                                                             |
-| clientKey    | Required for using TLS | Input/Output    | Client key. Can be `secretKeyRef` to use a secret reference                                                              | `012345`                                                                                                                                                            |
+| 字段           |    必填    | 绑定支持         | 详情                                                                      | Example                                                                                                                                                           |
+| ------------ |:--------:| ------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| url          |    Y     | Input/Output | MQTT broker地址                                                           | 非TLS通信： `**tcp://**`，   TLS通信：`**tcps://**`。   Use`**ssl://**` scheme for TLS communication.  <br> "tcp://\[username\]\[:password\]@host.domain[:port]" |
+| topic        |    Y     | Input/Output | The topic to listen on or send events to                                | `"mytopic"`                                                                                                                                                       |
+| qos          |    N     | Input/Output | 表示消息的服务质量等级（QoS）， 默认值 0 默认值 0                                           | `1`                                                                                                                                                               |
+| retain       |    N     | Input/Output | 定义消息是否被broker保存为指定主题的最后已知有效值 默认值为 `"false"` 默认值为 `"false"`              | `"true"`, `"false"`                                                                                                                                               |
+| cleanSession |    N     | Input/Output | 将在客户端连接到MQTT broker时，在连接消息中设置 "clean session" 默认: `"true"` 默认: `"true"` | `"true"`, `"false"`                                                                                                                                               |
+| caCert       | 使用TLS时需要 | Input/Output | 授权， 可以用`secretKeyRef`来引用密钥。                                             | `0123456789-0123456789`                                                                                                                                           |
+| clientCert   | 使用TLS时需要 | Input/Output | 客户端证书， 可以用`secretKeyRef`来引用密钥。                                          | `0123456789-0123456789`                                                                                                                                           |
+| clientKey    | 使用TLS时需要 | Input/Output | 客户端键， 可以用`secretKeyRef`来引用密钥。                                           | `012345`                                                                                                                                                          |
 
-### Communication using TLS
-To configure communication using TLS, ensure mosquitto broker is configured to support certificates. Pre-requisite includes `certficate authority certificate`, `ca issued client certificate`, `client private key`. Here is an example.
+### 使用 TLS 通信
+要配置使用 TLS 通信，需配置并确保mosquitto broker支持凭证。 前提条件包括`certficate authority certificate`、`ca issued client certificate`、`client private key`。 参见下面的示例。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -81,9 +81,9 @@ spec:
     value: ''
 ```
 
-### Consuming a shared topic
+### 消费共享主题
 
-When consuming a shared topic, each consumer must have a unique identifier. By default, the application Id is used to uniquely identify each consumer and publisher. In self-hosted mode, running each Dapr run with a different application Id is sufficient to have them consume from the same shared topic. However on Kubernetes, a pod with multiple application instances shares the same application Id, prohibiting all instances from consuming the same topic. To overcome this, configure the component's `ConsumerID` metadata with a `{uuid}` tag, making each instance to have a randomly generated `ConsumerID` value on start up. For example:
+当消费一个共享主题时，每个消费者必须有一个唯一的标识符。 默认情况下，应用ID用于唯一标识每个消费者和发布者。 在自托管模式下，用不同的应用程序Id运行每个Dapr运行就足以让它们从同一个共享主题消费。 然而在Kubernetes上，一个有多个应用实例的pod共享同一个应用Id，这阻碍了所有实例消费同一个主题。 为了克服这个问题，请用`{uuid}`标签配置组件的`ConsumerID`元数据，使每个实例在启动时有一个随机生成的`ConsumerID`值。 例如:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -110,20 +110,20 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Binding support
+## 绑定支持
 
-This component supports both **input and output** binding interfaces.
+此组件支持 **输入和输出** 绑定接口。
 
-This component supports **output binding** with the following operations:
+字段名为 `ttlInSeconds`。
 
 - `create`
-## Related links
+## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
-- [Bindings building block]({{< ref bindings >}})
-- [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
-- [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
-- [Bindings API reference]({{< ref bindings_api.md >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
+- [绑定构建块]({{< ref bindings >}})
+- [如何通过输入绑定触发应用]({{< ref howto-triggers.md >}})
+- [如何处理: 使用绑定对接外部资源]({{< ref howto-bindings.md >}})
+- [Bindings API 引用]({{< ref bindings_api.md >}})
