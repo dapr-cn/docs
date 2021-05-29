@@ -11,23 +11,23 @@ no_list: true
 
 The following components provide name resolution for the service invocation building block
 
-### Generic
+### 通用
 
-| Name                                               | Status | Component version | Since |
-| -------------------------------------------------- |:------:|:-----------------:|:-----:|
-| [HashiCorp Consul]({{< ref setup-nr-consul.md >}}) | Alpha  |        v1         |  1.2  |
+| Name                                               |  状态   | 组件版本 | 自从  |
+| -------------------------------------------------- |:-----:|:----:|:---:|
+| [HashiCorp Consul]({{< ref setup-nr-consul.md >}}) | Alpha |  v1  | 1.2 |
 
 ### 自托管
 
-| Name | Status | Component version | Since |
-| ---- |:------:|:-----------------:|:-----:|
-| mDNS |   GA   |        v1         |  1.0  |
+| Name | 状态 | 组件版本 | 自从  |
+| ---- |:--:|:----:|:---:|
+| mDNS | GA |  v1  | 1.0 |
 
 ### Kubernetes
 
-| Name       | Status | Component version | Since |
-| ---------- |:------:|:-----------------:|:-----:|
-| Kubernetes |   GA   |        v1         |  1.0  |
+| Name       | 状态 | 组件版本 | 自从  |
+| ---------- |:--:|:----:|:---:|
+| Kubernetes | GA |  v1  | 1.0 |
 
 
 ## Definitions
@@ -37,4 +37,4 @@ The following components provide name resolution for the service invocation buil
    - [Beta]({{<ref "certification-lifecycle.md#beta">}})
    - [GA]({{<ref "certification-lifecycle.md#general-availability-ga">}})
 - **Since**: defines from which Dapr Runtime version, the component is in the current status
-- **Component version**: defines the version of the component
+- **组件版本**：代表组件的版本
