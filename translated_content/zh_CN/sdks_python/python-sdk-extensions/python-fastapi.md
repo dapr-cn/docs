@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Dapr Python SDK integration with FastAPI"
+title: "Dapr Python SDK 与 FastAPI 集成"
 linkTitle: "FastAPI"
 weight: 200000
-description: How to create Dapr Python virtual actors with the FastAPI extension
+description: 如何创建基于 FastAPI 扩展的Dapr Python virtual actors
 ---
 
-The Dapr Python SDK provides integration with FastAPI using the `dapr-ext-fastapi` module
+Dapr Python SDK 使用 `dapr-ext-fastapi` 模块与 FastAPI 集成
 
-## Installation
+## 安装
 
-You can download and install the Dapr FastAPI extension module with:
+你可以通过下面的方式下载和安装 Dapr FastAPI 扩展模块：
 
 {{< tabs Stable Development>}}
 
@@ -22,7 +22,7 @@ pip install dapr-ext-fastapi
 
 {{% codetab %}}
 {{% alert title="Note" color="warning" %}}
-The development package will contain features and behavior that will be compatible with the pre-release version of the Dapr runtime. Make sure to uninstall any stable versions of the Python SDK extension before installing the dapr-dev package.
+开发包包含的功能和行为将兼容此前发行的 Dapr 运行时。 在安装 dapr-dev 包之前，请务必卸载以前任意稳定版本的 dapr-ext-fastapi 的 Python SDK 扩展包。
 {{% /alert %}}
 
 ```bash
