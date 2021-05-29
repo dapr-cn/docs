@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Bindings components"
+title: "绑定组件"
 linkTitle: "绑定"
-description: "Guidance on setting up Dapr bindings components"
+description: "关于设置Dapr绑定组件的指南"
 weight: 4000
 ---
 
@@ -55,19 +55,19 @@ spec:
     value: <integer>
 ```
 
-## Apply the configuration
+## 应用配置
 
-Once you have created the component's YAML file, follow these instructions to apply it based on your hosting environment:
+一旦您创建了组件的 YAML 文件，按照以下说明来根据您的主机环境应用它：
 
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-To run locally, create a `components` dir containing the YAML file and provide the path to the `dapr run` command with the flag `--components-path`.
+要在本地运行，创建一个包含YAML文件的`components`目录，并提供`dapr run`命令的路径，标志为`--components-path`。
 {{% /codetab %}}
 
 {{% codetab %}}
-To deploy in Kubernetes, assuming your component file is named `mybinding.yaml`, run:
+若要在 Kubernetes 中部署，假定您的组件文件名为 `mybinding.yaml`，运行：
 
 ```bash
 kubectl apply -f mybinding.yaml
@@ -80,6 +80,6 @@ kubectl apply -f mybinding.yaml
 
 Visit the [bindings reference]({{< ref supported-bindings >}}) for a full list of supported resources.
 
-## Related links
+## 相关链接
 - [绑定构建块]({{< ref bindings >}})
 - [Supported bindings]({{<ref supported-bindings >}})
