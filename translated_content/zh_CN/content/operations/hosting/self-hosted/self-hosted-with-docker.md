@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "How-To: Run Dapr in self-hosted mode with Docker"
-linkTitle: "Run with Docker"
+title: "入门指南: 使用 Docker 在自托管模式下运行 Dapr"
+linkTitle: "使用 Docker 运行"
 weight: 20000
-description: "How to deploy and run Dapr in self-hosted mode using Docker"
+description: "如何使用 Docker 在自托管模式下部署和运行 Dapr"
 ---
 
 This article provides guidance on running Dapr with Docker on a Windows/Linux/macOS machine or VM.
 
-## Prerequisites
+## 先决条件
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - [Docker](https://docs.docker.com/get-docker/)
-- [Docker-Compose](https://docs.docker.com/compose/install/) (optional)
+- [Docker-Compose](https://docs.docker.com/compose/install/) (可选)
 
 ## Initialize Dapr environment
 
@@ -46,16 +46,16 @@ If you are running your Docker daemon on a Linux host, you can run the following
 docker run --net="host" --mount type=bind,source="$(pwd)"/components,target=/components daprio/daprd:edge ./daprd -app-id <my-app-id> -app-port <my-app-port>
 ```
 
-Then you can run your app on the host and they should connect over the localhost network interface.
+然后，你可以在主机上运行你的应用程序，他们应该通过localhost网络接口连接。
 
 ## Run both app and Dapr in a single Docker container
-> For development purposes ONLY
+> 仅用于开发目的
 
-It is not recommended to run both the Dapr runtime and an application inside the same container. However, it is possible to do so for local development scenarios.
+不建议在同一容器内运行 Dapr 运行时和应用程序。 但是，对于本地开发的场景，可以这样做。
 
-In order to do this, you'll need to write a Dockerfile that installs the Dapr runtime, Dapr CLI and your app code. You can then invoke both the Dapr runtime and your app code using the Dapr CLI.
+为了做到这一点，你需要编写一个Docker文件，安装Dapr运行时、Dapr CLI和你的应用代码。 然后，您可以使用 Dapr CLI 调用Dapr 运行时和您的应用代码。
 
-Below is an example of a Dockerfile which achieves this:
+下面是实现这一目标的Docker文件的例子。
 
 ```docker
 FROM python:3.7.1
@@ -75,29 +75,29 @@ ENTRYPOINT ["dapr"]
 CMD ["run", "--app-id", "nodeapp", "--app-port", "3000", "node", "app.js"]
 ```
 
-Remember that if Dapr needs to communicate with other components i.e. Redis, these also need to be made accessible to it.
+请记住，如果Dapr需要与其他组件通信，即： Redis，这些也需要让它访问。 Redis，这些也需要让它访问。
 
-## Run on a Docker network
+## 在 Docker 网络运行
 
 If you have multiple instances of Dapr running in Docker containers and want them to be able to communicate with each other *i.e. for service invocation*, then you'll need to create a shared Docker network and make sure those Dapr containers are attached to it.
 
-You can create a simple Docker network using:
+您可以使用以下方法创建一个简单的Docker网络:
 ```bash
 docker network create my-dapr-network
 ```
-When running your Docker containers, you can attach them to the network using:
+当运行您的 Docker 容器时，您可以通过以下方式将其附加到网络:
 ```bash
 docker run --net=my-dapr-network ...
 ```
-Each container will receive a unique IP on that network and be able to communicate with other containers on that network.
+每个容器将在该网络上获得一个唯一的IP，并能与该网络上的其他容器进行通信。
 
-## Run using Docker-Compose
+## 使用 Docker-Compose 运行
 
-[Docker Compose](https://docs.docker.com/compose/) can be used to define multi-container application configurations. If you wish to run multiple apps with Dapr sidecars locally without Kubernetes then it is recommended to use a Docker Compose definition (`docker-compose.yml`).
+[Docker Compose](https://docs.docker.com/compose/) can be used to define multi-container application configurations. 如果您希望在没有Kubernetes的情况下，在本地使用Dapr sidecars运行多个应用程序，那么建议使用Docker Compose定义（`docker-compose.yml`）。
 
-The syntax and tooling of Docker Compose is outside the scope of this article, however, it is recommended you refer to the [offical Docker documentation](https://docs.docker.com/compose/) for further details.
+Docker Compose的语法和工具超出了本文的范围，但是，建议你参考[官方Docker文档](https://docs.docker.com/compose/)了解更多细节。
 
-In order to run your applications using Dapr and Docker Compose you'll need to define the sidecar pattern in your `docker-compose.yml`. For example:
+为了使用Dapr和Docker Compose运行您的应用程序，您需要在您的`docker-compose.yml`中定义sidecar模式。 例如:
 
 ```yaml
 version: '3'
@@ -133,24 +133,32 @@ services:
     ports:
       - "50006:50006"
     networks:
+      - hello-dapr Redis)
+
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+    networks:
       - hello-dapr
 ```
 
-> For those running the Docker daemon on a Linux host, you can also use `network_mode: host` to leverage host networking if needed.
+> 对于那些在Linux主机上运行Docker守护进程的用户，如果需要的话，还可以使用`network_mode: host`来利用主机联网。
 
-To further learn how to run Dapr with Docker Compose, see the [Docker-Compose Sample](https://github.com/dapr/samples/tree/master/hello-docker-compose).
+要进一步了解如何使用 Docker Compose 运行 Dapr，请参见 [Docker-Compose Sample](https://github.com/dapr/samples/tree/master/hello-docker-compose)。
 
-## Run on Kubernetes
+## 在 Kubernetes 运行
 
 If your deployment target is Kubernetes please use Dapr's first-class integration. Refer to the [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}}).
 
 ## Docker images
 
-Dapr provides a number of prebuilt Docker images for different components, you should select the relevant image for your desired binary, architecture, and tag/version.
+Dapr 为不同的组件提供了许多预构建的 Docker 镜像，您应该为所需的二进制、架构和 标签/版本 选择相关镜像。
 
 ### Images
-There are published Docker images for each of the Dapr components available on [Docker Hub](https://hub.docker.com/u/daprio).
-- [daprio/dapr](https://hub.docker.com/r/daprio/dapr) (contains all Dapr binaries)
+[Docker Hub](https://hub.docker.com/u/daprio)上，每个 Dapr 组件都有已发布的 Docker 镜像。
+- [daprio/dapr](https://hub.docker.com/r/daprio/dapr) (包含所有Dapr binaries)
 - [daprio/daprd](https://hub.docker.com/r/daprio/daprd)
 - [daprio/placement](https://hub.docker.com/r/daprio/placement)
 - [daprio/sentry](https://hub.docker.com/r/daprio/sentry)
@@ -159,12 +167,12 @@ There are published Docker images for each of the Dapr components available on [
 ### Tags
 
 #### Linux/amd64
-- `latest`: The latest release version, **ONLY** use for development purposes.
-- `edge`: The latest edge build (master).
-- `major.minor.patch`: A release version.
-- `major.minor.patch-rc.iteration`: A release candidate.
+- `latest`：最新版本，**仅** 用于开发目的。
+- `edge`: 最新的edge构建(master)。
+- `major.minor.patch`: 发布版本。
+- `major.patch-rc.iteration`: 候选发布。
 #### Linux/arm/v7
-- `latest-arm`: The latest release version for ARM, **ONLY** use for development purposes.
-- `edge-arm`: The latest edge build for ARM (master).
-- `major.minor.patch-arm`: A release version for ARM.
-- `major.minor.patch-rc.iteration-arm`: A release candidate for ARM.
+- `latest-arm`：最新的ARM版本， **只** 用于开发目的。
+- `edge-arm`: ARM的最新的edge构建(master)。
+- `major.minor.patch-arm`: ARM的发布版本。
+- `major.patch-rc.iteration`: ARM的候选发布。
