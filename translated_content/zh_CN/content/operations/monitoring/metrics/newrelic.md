@@ -6,17 +6,17 @@ weight: 6000
 description: "Set-up New Relic for Dapr metrics"
 ---
 
-## Prerequisites
+## 先决条件
 
 - Perpetually [free New Relic account](https://newrelic.com/signup?ref=dapr), 100 GB/month of free data ingest, 1 free full access user, unlimited free basic users
 
-## Background
+## 背景
 
 New Relic offers a Prometheus OpenMetrics Integration.
 
 This document explains how to install it in your cluster, either using a Helm chart (recommended).
 
-## Installation
+## 安装
 
 1. Install Helm following the official instructions.
 
