@@ -3,7 +3,7 @@ name: github pages deploy
 on:
   push:
     branches:
-      - v1.1/publish_translate_site
+      - v1.2/publish_translate_site
 
 jobs:
   delpoy_github:

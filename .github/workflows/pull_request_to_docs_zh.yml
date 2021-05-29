@@ -3,7 +3,7 @@ name: create pull request to docs-zh
 on:
   push:
     branches:
-      - v1.1/publish_translate_site
+      - v1.2/publish_translate_site
 
 jobs:
   delpoy_github:
@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: dapr/docs-zh
-          ref: v1.1_content
+          ref: v1.2_content
       - name: Checkout content
         uses: actions/checkout@v2
         with:
