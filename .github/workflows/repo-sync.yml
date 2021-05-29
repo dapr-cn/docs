@@ -26,3 +26,10 @@ jobs:
           source_branch: "v1.1"
           destination_branch: "v1.1/source_site"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: repo-sync-1.2
+        uses: repo-sync/github-sync@v2
+        with:
+          source_repo: "https://github.com/dapr/docs.git"
+          source_branch: "v1.2"
+          destination_branch: "v1.2/source_site"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
