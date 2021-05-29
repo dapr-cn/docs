@@ -16,52 +16,52 @@ Note: The Dapr metatada endpoint is for instance being used by the Dapr CLI when
 
 Gets the Dapr sidecar information provided by the Metadata Endpoint.
 
-### HTTP Request
+### HTTP 请求
 
 ```http
 GET http://localhost:<daprPort>/v1.0/metadata
 ```
 
-### URL Parameters
+### URL 参数
 
-| Parameter | Description    |
-| --------- | -------------- |
-| daprPort  | The Dapr port. |
+| 参数       | 说明       |
+| -------- | -------- |
+| daprPort | Dapr 端口。 |
 
-### HTTP Response Codes
+### HTTP 响应码
 
-| Code | Description                                    |
-| ---- | ---------------------------------------------- |
-| 200  | Metadata information returned                  |
-| 500  | Dapr could not return the metadata information |
+| 代码  | 说明                                             |
+| --- | ---------------------------------------------- |
+| 200 | Metadata information returned                  |
+| 500 | Dapr could not return the metadata information |
 
 ### HTTP Response Body
 
 **Metadata API Response Object**
 
-| Name                   | Type                                                                  | Description                                                                    |
+| Name                   | 数据类型                                                                  | 说明                                                                             |
 | ---------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | id                     | string                                                                | Application ID                                                                 |
 | actors                 | [Metadata API Response Registered Actor](#metadataapiresponseactor)[] | A json encoded array of Registered Actors metadata.                            |
 | extended.attributeName | string                                                                | List of custom attributes as key-value pairs, where key is the attribute name. |
-| components             | [Metadata API Response Component](#metadataapiresponsecomponent)[]    | A json encoded array of loaded components metadata.                            |
+| 组件                     | [Metadata API Response Component](#metadataapiresponsecomponent)[]    | A json encoded array of loaded components metadata.                            |
 
 <a id="metadataapiresponseactor"></a>**Metadata API Response Registered Actor**
 
-| Name  | Type    | Description                |
+| Name  | 数据类型    | 说明                         |
 | ----- | ------- | -------------------------- |
 | type  | string  | The registered actor type. |
 | count | integer | Number of actors running.  |
 
 <a id="metadataapiresponsecomponent"></a>**Metadata API Response Component**
 
-| Name    | Type   | Description            |
+| Name    | 数据类型   | 说明                     |
 | ------- | ------ | ---------------------- |
 | name    | string | Name of the component. |
 | type    | string | Component type.        |
-| version | string | Component version.     |
+| version | string | 组件版本.                  |
 
-### Examples
+### 示例
 
 Note: This example is based on the Actor sample provided in the [Dapr SDK for Python](https://github.com/dapr/python-sdk/tree/master/examples/demo_actor).
 
@@ -101,17 +101,17 @@ curl http://localhost:3500/v1.0/metadata
 
 Adds a custom attribute to the Dapr sidecar information stored by the Metadata Endpoint.
 
-### HTTP Request
+### HTTP 请求
 
 ```http
 PUT http://localhost:<daprPort>/v1.0/metadata/attributeName
 ```
 
-### URL Parameters
+### URL 参数
 
-| Parameter     | Description                                                         |
+| 参数            | 说明                                                                  |
 | ------------- | ------------------------------------------------------------------- |
-| daprPort      | The Dapr port.                                                      |
+| daprPort      | Dapr 端口。                                                            |
 | attributeName | Custom attribute name. This is they key name in the key-value pair. |
 
 ### HTTP Request Body
@@ -130,13 +130,13 @@ Within the body of the request place the custom attribute value you want to stor
 attributeValue
 ```
 
-### HTTP Response Codes
+### HTTP 响应码
 
-| Code | Description                                        |
-| ---- | -------------------------------------------------- |
-| 204  | Custom attribute added to the metadata information |
+| 代码  | 说明                                                 |
+| --- | -------------------------------------------------- |
+| 204 | Custom attribute added to the metadata information |
 
-### Examples
+### 示例
 
 Note: This example is based on the Actor sample provided in the [Dapr SDK for Python](https://github.com/dapr/python-sdk/tree/master/examples/demo_actor).
 
