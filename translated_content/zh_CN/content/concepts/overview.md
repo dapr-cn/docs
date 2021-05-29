@@ -41,17 +41,17 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 
 ## Sidecar 架构
 
-Dapr以 sidecar 架构的方式公开其API，可以是容器，也可以是进程，不需要应用代码包含任何 Dapr 运行时代码。 这使得 Dapr 与其他运行时的集成变得容易，同时也提供了应用逻辑的分离，改善可支持性。
+Dapr以 sidecar 架构的方式公开其API，可以是容器，也可以是进程，不需要应用代码包含任何 Dapr 运行时代码。 这使得 Dapr 与其他运行时的集成变得容易，在应用逻辑层面做了隔离处理，提高了可扩展性。
 
 <img src="/images/overview-sidecar-model.png" width=700>
 
 ## 托管环境
 
-Dapr可以在多个环境中托管，包括在Windows/Linux/macOS机器上自托管和Kubernetes。
+Dapr可以托管在多个环境中，包括在Windows/Linux/macOS机器上自托管和Kubernetes。
 
 ### 自托管
 
-在 [自托管模式]({{< ref self-hosted-overview.md >}}) Dapr 运行一个单独的 sidecar 程序，您的服务代码可以通过 HTTP 或 gRPC 调用。 每个运行的服务都有一个 Dapr 运行时进程 (或 sidecar) ，配置为使用状态存储， pub/sub，绑定组件和其他构建块。
+[自托管模式]({{< ref self-hosted-overview.md >}}) 下，Dapr 运行一个单独的 sidecar 程序，在您的服务代码中可以通过 HTTP 或 gRPC 调用它。 每个运行的服务都有一个 Dapr 运行时进程 (或 sidecar) ，配置为使用状态存储， pub/sub，绑定组件和其他构建块。
 
 您可以使用 [Dapr CLI](https://github.com/dapr/cli#launch-dapr-and-your-app) 在本地机器上运行启用了 Dapr 的应用程序。 请使用 [入门示例]({{< ref getting-started >}})。
 
@@ -59,7 +59,7 @@ Dapr可以在多个环境中托管，包括在Windows/Linux/macOS机器上自托
 
 ### Kubernetes 托管
 
-在容器托管环境（如 Kubernetes）中，Dapr 作为 sidecar 容器运行，和应用程序容器在同一个 pod 中。
+在托管在容器环境中（如 Kubernetes），Dapr 作为 sidecar 容器运行，和应用程序容器在同一个 pod 中。
 
 在 Kubernetes 中， `dapr-sidecar-injector` 和 `dapr-operator` 服务提供一流的集成，以将 Dapr 作为 sidecar 容器启动在与服务容器相同的 pod 中 ，并为在集群中部署的 Dapr 组件提供更新通知。
 

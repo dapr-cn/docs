@@ -16,9 +16,9 @@ We welcome community members giving presentations on Dapr and spreading the word
 - Next, review the docs to make sure you understand the [concepts]({{< ref concepts >}}).
 - Use the Dapr [quickstarts](https://github.com/dapr/quickstarts) repo and [samples](https://github.com/dapr/samples) repo to show demos of how to use Dapr.
 
-## Previous Dapr presentations
+## 以前的 Dapr 演示文稿
 
-| Presentation                                                                       | Recording                                           | Deck                                                 |
+| 演示文稿                                                                               | Recording                                           | Deck                                                 |
 | ---------------------------------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------- |
 | Ignite 2019: Mark Russinovich Presents the Future of Cloud Native Applications     | [Link](https://www.youtube.com/watch?v=LAUDVk8PaCY) | [Link](/presentations/2019IgniteCloudNativeApps.pdf) |
 | Azure Community Live: Build microservice applications using DAPR with Mark Fussell | [Link](https://www.youtube.com/watch?v=CgqI7nen-Ng) | N/A                                                  |
