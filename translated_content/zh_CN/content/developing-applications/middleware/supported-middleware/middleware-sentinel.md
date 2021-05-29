@@ -10,9 +10,9 @@ description: "Use Sentinel middleware to guarantee the reliability and resilienc
 
 The Sentinel [HTTP middleware]({{< ref middleware-concept.md >}}) enables Dapr to facilitate Sentinel's powerful abilities to protect your application. You can refer to [Sentinel Wiki](https://github.com/alibaba/sentinel-golang/wiki) for more details on Sentinel.
 
-## Component format
+## 配置
 
-In the following definition, the maximum requests per second are set to 10:
+根据下述定义，请求正文转换为大写字母：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -39,9 +39,9 @@ spec:
       ]
 ```
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field               | Details                                                     | Example                                                                                                    |
+| 字段                  | 详情                                                          | Example                                                                                                    |
 | ------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | appName             | the name of current running service                         | `nodeapp`                                                                                                  |
 | logDir              | the log directory path                                      | `/var/tmp/sentinel`                                                                                        |
@@ -51,7 +51,7 @@ spec:
 | isolationRules      | json array of sentinel isolation rules                      | [isolation rule](https://github.com/alibaba/sentinel-golang/blob/master/core/isolation/rule.go)            |
 | systemRules         | json array of sentinel system rules                         | [system rule](https://github.com/alibaba/sentinel-golang/blob/master/core/system/rule.go)                  |
 
-Once the limit is reached, the request will return *HTTP Status code 429: Too Many Requests*.
+一旦达到上限，请求将返回 *HTTP Status code 429: Too Many Requests*。
 
 Special note to `resource` field in each rule's definition. In Dapr, it follows the following format:
 
@@ -77,9 +77,9 @@ spec:
         type: middleware.http.sentinel
 ```
 
-## Related links
+## 相关链接
 
 - [Sentinel Github](https://github.com/alibaba/sentinel-golang)
-- [Middleware concept]({{< ref middleware-concept.md >}})
+- [中间件概念]({{< ref middleware-concept.md >}})
 - [Dapr配置]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview.md >}})
+- [配置概览]({{< ref configuration-overview.md >}})
