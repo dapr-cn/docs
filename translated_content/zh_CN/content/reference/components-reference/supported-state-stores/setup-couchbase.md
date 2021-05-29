@@ -7,7 +7,7 @@ aliases:
   - "/operations/components/setup-state-store/supported-state-stores/setup-couchbase/"
 ---
 
-## Component format
+## 配置
 
 To setup Couchbase state store create a component of type `state.couchbase`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
@@ -33,17 +33,17 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 
-## Spec metadata fields
+## 元数据字段规范
 
-| Field        | Required | Details                         | Example                   |
-| ------------ |:--------:| ------------------------------- | ------------------------- |
-| couchbaseURL |    Y     | The URL of the Couchbase server | `"http://localhost:8091"` |
-| username     |    Y     | The username for the database   | `"user"`                  |
-| password     |    Y     | The password for access         | `"password"`              |
-| bucketName   |    Y     | The bucket name to write to     | `"bucket"`                |
+| 字段           | 必填 | 详情                              | Example                   |
+| ------------ |:--:| ------------------------------- | ------------------------- |
+| couchbaseURL | Y  | The URL of the Couchbase server | `"http://localhost:8091"` |
+| username     | Y  | The username for the database   | `"user"`                  |
+| password     | Y  | The password for access         | `"password"`              |
+| bucketName   | Y  | The bucket name to write to     | `"bucket"`                |
 
 ## Setup Couchbase
 
@@ -72,6 +72,6 @@ helm install couchbase/couchbase-cluster
 {{< /tabs >}}
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}})
+- [Dapr组件的基本格式]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components
-- [State management building block]({{< ref state-management >}})
+- [状态管理构建块]({{< ref state-management >}})
