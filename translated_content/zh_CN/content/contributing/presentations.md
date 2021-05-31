@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Giving a presentation on Dapr"
-linkTitle: "Presentations"
+title: "做一个关于 Dapr 的介绍会"
+linkTitle: "介绍会"
 weight: 1500
-description: How to give a presentation on Dapr and examples
+description: 如何介绍 Dapr 和一些例子
 ---
 
-We welcome community members giving presentations on Dapr and spreading the word about all the awesome Dapr features! We offer a template PowerPoint file to get started.
+我们欢迎社区成员在Dapr上做演讲，并传播有关所有令人激动的Dapr功能的消息！ We offer a template PowerPoint file to get started.
 
 {{< button text="Download the Dapr Presentation Deck" link="/presentations/dapr-slidedeck.zip" >}}
 
