@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "做一个关于 Dapr 的介绍会"
+title: "做一个关于 Dapr 的介绍"
 linkTitle: "介绍会"
 weight: 1500
 description: 如何介绍 Dapr 和一些例子
 ---
 
-我们欢迎社区成员在Dapr上做演讲，并传播有关所有令人激动的Dapr功能的消息！ We offer a template PowerPoint file to get started.
+我们欢迎社区成员在Dapr上做演讲，并传播有关所有令人激动的Dapr功能的消息！ 我们提供了一个 PowerPoint 模板文件。
 
 {{< button text="Download the Dapr Presentation Deck" link="/presentations/dapr-slidedeck.zip" >}}
 
 ## Giving a Dapr presentation
 
-- Begin by downloading the [Dapr Presentation Deck](/presentations/dapr-slidedeck.zip). This contains slides and diagrams needed to give a Dapr presentation.
-- Next, review the docs to make sure you understand the [concepts]({{< ref concepts >}}).
-- Use the Dapr [quickstarts](https://github.com/dapr/quickstarts) repo and [samples](https://github.com/dapr/samples) repo to show demos of how to use Dapr.
+- 首先下载 [Dapr 演示模板](/presentations/dapr-slidedeck.zip)。 这包含为 Dapr 演示所需的幻灯片和图表。
+- 接下来，查看文档，以确保您了解[相关概念]({{< ref concepts >}})。
+- 使用 Dapr [quickstarts](https://github.com/dapr/quickstarts) repo 和 [示例](https://github.com/dapr/samples) repo 来演示如何使用 Dapr.
 
 ## 以前的 Dapr 演示文稿
 
