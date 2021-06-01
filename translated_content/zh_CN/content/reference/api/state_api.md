@@ -331,10 +331,10 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/transaction
 
 #### Request Body
 
-| 字段       | 说明                                                                     |
-| -------- | ---------------------------------------------------------------------- |
-| 功能操作     | A JSON array of state operation                                        |
-| metadata | (optional) the metadata for transaction that applies to all operations |
+| 字段         | 说明                                                                     |
+| ---------- | ---------------------------------------------------------------------- |
+| operations | A JSON array of state operation                                        |
+| metadata   | (optional) the metadata for transaction that applies to all operations |
 
 Each state operation is comprised with the following fields:
 
