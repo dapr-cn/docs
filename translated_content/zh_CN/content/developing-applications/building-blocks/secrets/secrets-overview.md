@@ -19,7 +19,7 @@ description: "密钥管理构建块概览"
 
 ## 设置一个密钥存储
 
-See [Setup secret stores]({{< ref howto-secrets.md >}}) for guidance on how to setup a secret store with Dapr.
+请参阅 [设置密钥存储]({{< ref howto-secrets.md >}}) 以了解如何设置一个密钥存储。
 
 ## 在您的应用程序中使用密钥
 
@@ -39,15 +39,15 @@ See [Setup secret stores]({{< ref howto-secrets.md >}}) for guidance on how to s
 
 请注意，在以上所有示例中，应用程序代码不必更改以获取相同的密钥。 Dapr在这里通过密钥构建块API和使用密钥组件完成了所有的重任。
 
-See [Access Application Secrets using the Secrets API]({{< ref howto-secrets.md >}}) for a How To guide to use secrets in your application.
+请参阅 [使用 密钥API 访问应用程序密钥]({{< ref howto-secrets.md >}}) 以了解如何在您的应用程序中使用密钥。
 
-For detailed API information read [Secrets API]({{< ref secrets_api.md >}}).
+有关详细的API信息，请阅读 [密钥API]({{< ref secrets_api.md >}})。
 
 ## 在Dapr组件中引用密钥存储
 
 在配置Dapr组件（如状态存储）时，通常需要在组件文件中包含凭证。 与此相反，您可以将凭证放在Dapr支持的密钥存储中，并在Dapr组件中引用该密钥。 这是首选方法，是推荐的最佳做法，尤其是在生产环境中。
 
-For more information read [referencing secret stores in components]({{< ref component-secrets.md >}})
+欲了解更多信息，请阅读 [引用组件中的密钥存储]({{< ref component-secrets.md >}})
 
 ## 限制访问密钥
 
