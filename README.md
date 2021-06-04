@@ -1,6 +1,9 @@
 # Dapr 中文文档库
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -87,3 +90,461 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 以上列表由手动更新而生成，如果您在其中没有找到您的名字，请在 crowdin.com 上，通过右上角的 conversation 按钮向 newbe36524 发送您的 github id。我们将及时处理。
+
+## Crowdin 统计
+
+我们非常珍视每一位为项目提供过翻译支持的老伙计。此处将更新截至目前的最新贡献数据。
+
+<!-- CROWDIN-TRANSLATORS-START -->
+<table style="width: 100%;"><tr>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/dapr-cn-github">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14655472/medium/e202f38d532df9974d4f4650ee8180b9.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>dapr-cn-github</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>436261 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/newbe36524">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14343192/medium/4d4f53fb1650aef3e1e74849d4293595.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Newbe36524 (newbe36524)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>115437 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/Jadyn">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14016211/medium/3ceda39cee7ab8540c6d47e84e7c20da.jpg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Jadyn</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>22487 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/LLLimbo">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14662540/medium/221399a113d62b524901b9384f6ba9b5.jpg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>LLLLimbo (LLLimbo)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>20462 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/siegrainwong">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14658460/medium/ee7d4abad04d01213596cc943048cf3c.jpeg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Sean Wong (siegrainwong)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>13907 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/herowk">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14684048/medium/a671bdc899c5f9c4d6851f13726a9b37.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>kyle wong (herowk)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>2053 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/charleszhn">
+                    <img style="width: 58px" src="https://www.gravatar.com/avatar/b803a21d4574831484a432a203f87120?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>charleszhn</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>1727 words</b>
+                  </sub>
+              </td></tr><tr>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/MarkLux">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14674432/medium/a1117a26198499b2b95feb9dc569769f.jpg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>MarkLux</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>1264 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/w_Y_">
+                    <img style="width: 58px" src="https://www.gravatar.com/avatar/52730627c93e4557e9a1088295898303?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>w_Y_</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>748 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/Danvic.Wang">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14615740/medium/3f35f4e495afae34f0633d49c65b8113.jpeg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Danvic Wang (Danvic.Wang)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>615 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/Stitch-Zhang">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14767960/medium/1c4b01393ea83f568156af368df46f03.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Stitch-Zhang</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>385 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/oudi">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14397588/medium/d45928ebed8263cf5919c863bfcd699e.jpeg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>oudi</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>280 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/Itoktsnhc">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14744976/medium/dbb59b4e47b2224cd85722049d14f698.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>itoktsnhc (Itoktsnhc)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>233 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/codjust">
+                    <img style="width: 58px" src="https://www.gravatar.com/avatar/6d5421b05ba725cd4cf65cdd85eb6f3b?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>codjust</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>208 words</b>
+                  </sub>
+              </td></tr><tr>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/ipfans">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14689592/medium/4cec88d56b5a3e88926b5f4758affa93.jpeg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>ipfans</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>192 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/WeihanLi">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14686614/medium/514d87f9880deed98f006b2a13aeb128.jpeg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Weihan Li (WeihanLi)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>119 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/sunshinebaby00">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14576690/medium/c5e9d1d3c62de3a098c94d0b44c7be62.jpeg"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>pengyunlong (sunshinebaby00)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>114 words</b>
+                  </sub>
+              </td></tr></table>
+<!-- CROWDIN-TRANSLATORS-END -->
+
+- 该表格仅统计了参与超过 100 个词的前 100 位老伙计
+- 您可以忽略管理员的贡献数字，毕竟很多自动操作也会生成贡献数据
+
+<details>
+  <summary>由于历史的原因，翻译项目经历过迁移。前一个项目的贡献者可以展开此处进行查看。</summary>
+<table style="width: 100%;"><tr>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/newbe36524">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14343192/medium/4d4f53fb1650aef3e1e74849d4293595.png"/>
+      </a>
+    <br />
+    <sub>
+        <b>Newbe36524 (newbe36524)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>79730 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/skyao">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14555814/medium/5d768c59a963649d667ba88370356627.jpeg"/>
+      </a>
+    <br />
+    <sub>
+        <b>Sky/敖小剑 (skyao)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>6281 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/ZhangX-Byte">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14548398/medium/488c14cc6b9c803497582582efe4847b.png"/>
+      </a>
+    <br />
+    <sub>
+        <b>ZhangX-Byte</b>
+    </sub>
+    <br />
+    <sub>
+        <b>4311 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/fffirer">
+      <img style="width: 58px" src="https://www.gravatar.com/avatar/3e94ebb36363097fb0b2e5a94e835373?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+      </a>
+    <br />
+    <sub>
+        <b>fffirer</b>
+    </sub>
+    <br />
+    <sub>
+        <b>3943 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/msdz">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/13368878/medium/a3291c46f7859b752e90cea385aa54e1.jpeg"/>
+      </a>
+    <br />
+    <sub>
+        <b>David Zheng (msdz)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>4665 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/yhyddr">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/13843187/medium/bd780c98ac58da3cdab556ab6367d9cf.png"/>
+      </a>
+    <br />
+    <sub>
+        <b>Abser·Ari (yhyddr)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>1613 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/sheng-jie">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14570618/medium/8122d28f63654c0c2fb6a985089002b9.jpeg"/>
+      </a>
+    <br />
+    <sub>
+        <b>Shengjie Yan (sheng-jie)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>6542 words</b>
+    </sub>
+</td></tr><tr>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/liuyangc3">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14660900/medium/0bdd3c54a919c5281765e19e7544eb31.jpeg"/>
+      </a>
+    <br />
+    <sub>
+        <b>yang liu (liuyangc3)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>652 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/betulasector">
+      <img style="width: 58px" src="https://www.gravatar.com/avatar/c757045e7c6adb9682ee1ac35dabdb69?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+      </a>
+    <br />
+    <sub>
+        <b>betulasector</b>
+    </sub>
+    <br />
+    <sub>
+        <b>589 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/heavenwing">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14548206/medium/eb0f45aa3396ea685c465bf67e7103a8.png"/>
+      </a>
+    <br />
+    <sub>
+        <b>Yongguang Zhu (heavenwing)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>604 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/sunshinebaby00">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14576690/medium/c5e9d1d3c62de3a098c94d0b44c7be62.jpeg"/>
+      </a>
+    <br />
+    <sub>
+        <b>pengyunlong (sunshinebaby00)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>522 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/mrpengfei">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14659712/medium/7ab051b1a809e29b3a1ccd94eabc03d2.png"/>
+      </a>
+    <br />
+    <sub>
+        <b>mrpengfei</b>
+    </sub>
+    <br />
+    <sub>
+        <b>508 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/Jadyn">
+      <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+      </a>
+    <br />
+    <sub>
+        <b>Jadyn</b>
+    </sub>
+    <br />
+    <sub>
+        <b>479 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/LLLimbo">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14662540/medium/221399a113d62b524901b9384f6ba9b5.jpg"/>
+      </a>
+    <br />
+    <sub>
+        <b>LLLLimbo (LLLimbo)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>458 words</b>
+    </sub>
+</td></tr><tr>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/oudi">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14397588/medium/d45928ebed8263cf5919c863bfcd699e.jpeg"/>
+      </a>
+    <br />
+    <sub>
+        <b>oudi</b>
+    </sub>
+    <br />
+    <sub>
+        <b>379 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/lifejoyforpy">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14657860/medium/08a4c53e85f5cc73127e0b6e6d2c09af.jpeg"/>
+      </a>
+    <br />
+    <sub>
+        <b>lifejoy (lifejoyforpy)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>157 words</b>
+    </sub>
+</td>
+<td style="text-align:center; vertical-align: top;">
+    <a href="https://crowdin.com/profile/Danvic.Wang">
+      <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14615740/medium/3f35f4e495afae34f0633d49c65b8113.jpeg"/>
+      </a>
+    <br />
+    <sub>
+        <b>Danvic Wang (Danvic.Wang)</b>
+    </sub>
+    <br />
+    <sub>
+        <b>116 words</b>
+    </sub>
+</td></tr></table>
+</details>
