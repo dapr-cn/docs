@@ -45,11 +45,11 @@ spec:
     value: ""
 ```
 
-You can override this file with another Redis instance or another [pubsub component]({{< ref setup-pubsub >}}) by creating a `components` directory containing the file and using the flag `--components-path` with the `dapr run` CLI command.
+您可以重写这个文件以使用另一个 Redis 实例或者另一个 [pubsub component]({{< ref setup-pubsub >}}) ，通过创建 `components` 文件夹（文件夹中包含重写的文件）并在 `dapr run` 命令行界面使用 `--components-path` 标志。
 {{% /codetab %}}
 
 {{% codetab %}}
-To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [desired pubsub component]({{< ref setup-pubsub >}}) in the yaml below, save as `pubsub.yaml`, and run `kubectl apply -f pubsub.yaml`.
+要将其部署到 Kubernetes 群集中，请为你想要的[ pubsub 组件]({{< ref setup-pubsub >}}) 在下面的 yaml `metadata` 中填写链接详情，保存为 `pubsub.yaml`，然后运行 `kubectl apply -f pubsub.yaml`。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -473,13 +473,13 @@ dapr --app-id app2 run -- php app2.php
 
 Dapr 自动接收发布请求上发送的数据，并将其包装在CloudEvent 1.0 信封中。 如果您想使用自己自定义的 CloudEvent，请确保指定内容类型为 `application/ cloudevents+json`。
 
-Read about content types [here](#content-types), and about the [Cloud Events message format]({{< ref "pubsub-overview.md#cloud-events-message-format" >}}).
+[请在此处阅读有关内容类型](#content-types)，以及有关 [ Cloud Events 消息格式]({{< ref "pubsub-overview.md#cloud-events-message-format" >}})。
 
 ## 下一步
 
 - 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)
-- Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
-- Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
-- Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
-- List of [pub/sub components]({{< ref setup-pubsub >}})
-- Read the [API reference]({{< ref pubsub_api.md >}})
+- 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
+- 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
+- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
+- Pub/sub组件是可扩展的， [这里]({{< ref setup-pubsub >}})有支持的pub/sub组件列表，实现可以在[components-contrib repo](https://github.com/dapr/components-contrib)中找到。
+- 阅读 [API 引用]({{< ref pubsub_api.md >}})
