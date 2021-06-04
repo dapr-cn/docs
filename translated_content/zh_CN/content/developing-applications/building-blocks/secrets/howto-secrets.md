@@ -6,12 +6,12 @@ weight: 2000
 description: "使用密钥存储构建块安全地获取密钥"
 ---
 
-This article provides guidance on using Dapr's secrets API in your code to leverage the [secrets store building block]({{<ref secrets-overview>}}). 密钥 API 允许您从配置的密钥存储轻松获取应用程序代码中的密钥。
+这篇文章提供了关于如何在你的代码中使用 Dapr 的密钥 API 来充分利用 [密钥仓库构建块]({{<ref secrets-overview>}}) 的指导。 密钥 API 允许您从配置的密钥存储轻松获取应用程序代码中的密钥。
 
 ## 建立一个密钥存储
 
 在获取应用程序代码中的密钥之前，您必须配置一个密钥存储组件。 就本指南而言，作为一个示例，您将配置一个本地的密钥存储，该仓库使用本地的 JSON 文件来存储密钥。
-> 注意：此示例中使用的组件未被加密且不推荐用于生产部署。 You can find other alternatives [here]({{<ref supported-secret-stores >}}).
+> 注意：此示例中使用的组件未被加密且不推荐用于生产部署。 您可以在[这里]({{<ref supported-secret-stores >}})找到其它替代项。
 
 创建一个名为 `secrets.json` 的文件，包含以下内容：
 
@@ -41,13 +41,13 @@ spec:
 
 请确保用您刚刚创建的 JSON 文件的路径替换 `<密钥路径>`。
 
-To configure a different kind of secret store see the guidance on [how to configure a secret store]({{<ref setup-secret-store>}}) and review [supported secret stores]({{<ref supported-secret-stores >}}) to see specific details required for different secret store solutions.
+要配置不同类型的密钥存储，请参阅关于 [如何配置密钥存储]({{<ref setup-secret-store>}}) 并审阅 [支持的密钥存储]({{<ref supported-secret-stores >}}) 查看不同密钥存储解决方案所需的具体细节。
 ## 获取密钥
 
 现在运行 Dapr sidecar (在没有应用程序的情况下)
 
 ```bash
-dapr run --app-id my-app --port 3500 --components-path ./components
+dapr run --app-id my-app --dapr-http-port 3500 --components-path ./components
 ```
 
 现在你可以通过使用密钥 API 调用 Dapr sidecar 来获得密钥：
@@ -56,13 +56,13 @@ dapr run --app-id my-app --port 3500 --components-path ./components
 curl http://localhost:3500/v1.0/secrets/my-secrets-store/my-secret
 ```
 
-For a full API reference, go [here]({{< ref secrets_api.md >}}).
+对于完整的 API 引用，请访问 [这里]({{< ref secrets_api.md >}})。
 
 ## 从你的代码调用密钥 API
 
 一旦您设置了一个密钥存储，您可以调用 Dapr 从您的应用程序代码中获取密钥。 以下是不同编程语言的几个示例：
 
-{{< tabs "Go" "Javascript" "Python" "Rust" "C#" >}}
+{{< tabs "Go" "Javascript" "Python" "Rust" "C#" "PHP" >}}
 
 {{% codetab %}}
 ```Go
