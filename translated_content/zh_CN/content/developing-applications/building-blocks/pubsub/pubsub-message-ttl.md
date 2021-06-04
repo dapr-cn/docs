@@ -10,7 +10,7 @@ description: "在 Pub/Sub 消息中使用生存时间。"
 
 Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可以设置每条消息的生存时间，并且这些消息过期后订阅者不会收到。
 
-All Dapr [pub/sub components]({{< ref supported-pubsub >}}) are compatible with message TTL, as Dapr handles the TTL logic within the runtime. 只需在发布消息时设置 `ttlInseconds` 元数据。
+所有 Dapr [Pub/Sub组件]({{< ref supported-pubsub >}}) 与消息 TTL 兼容，因为 Dapr 在运行时内处理 TTL 逻辑。 只需在发布消息时设置 `ttlInseconds` 元数据。
 
 在 Kafka 等组件中，可以通过[文档中](https://kafka.apache.org/documentation/#topicconfigs_retention.ms) `retention.ms` 在主题配置 TTL。 在 Dapr 中使用 TTL 消息时，使用 Kafka 的应用程序现在除了每个主题外，还可以设定每条消息的 TTL。
 
@@ -82,11 +82,11 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 {{< /tabs >}}
 
-See [this guide]({{< ref pubsub_api.md >}}) for a reference on the pub/sub API.
+请参阅 [本指南]({{< ref pubsub_api.md >}}) 以获取关于 Pub/Sub API的参考。
 
 ## 相关链接
 
-- Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
-- Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
-- List of [pub/sub components]({{< ref supported-pubsub >}})
-- Read the [API reference]({{< ref pubsub_api.md >}})
+- 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
+- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
+- [pub/sub组件列表]({{< ref supported-pubsub >}})
+- 阅读 [API 引用]({{< ref pubsub_api.md >}})
