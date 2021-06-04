@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "OAuth2 client credentials"
-linkTitle: "OAuth2 client credentials"
+title: "OAuth2 客户端认证"
+linkTitle: "OAuth2 客户端认证"
 weight: 3000
-description: "使用OAuth2客户端凭证中间件来保护HTTP端点的安全"
+description: "使用 OAuth2 客户端认证中间件来保护HTTP端点的安全"
 ---
 
-The OAuth2 client credentials [HTTP middleware]({{< ref middleware-concept.md >}}) enables the [OAuth2 Client Credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4) on a Web API without modifying the application. 这种设计将认证/授权的关注点从应用中分离出来，因此应用操作者可以采用和配置认证/授权提供者，而不影响应用代码。
+OAuth2 客户端认证[HTTP中间件]({{< ref middleware-concept.md >}})在 Web API 上启用 [OAuth2 客户端认证流程](https://tools.ietf.org/html/rfc6749#section-4.4)，而无需修改应用程序。 这种设计将认证/授权的关注点从应用中分离出来，因此应用操作者可以采用和配置认证/授权提供者，而不影响应用代码。
 
 ## 配置
 
@@ -52,7 +52,7 @@ spec:
 
 ## Dapr配置
 
-To be applied, the middleware must be referenced in a [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+要应用，必须在[配置]({{< ref configuration-concept.md >}})中引用中间件。 参考[中间件管道]({{< ref "middleware-concept.md#customize-processing-pipeline">}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
