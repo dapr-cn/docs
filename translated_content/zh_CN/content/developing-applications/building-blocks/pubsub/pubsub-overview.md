@@ -12,7 +12,7 @@ description: "Pub/Sub 构建块概述"
 
 Dapr 中的发布/订阅 API 提供至少一次（at-least-once）的保证，并与各种消息代理和队列系统集成。 您的服务所使用的特定实现是可插入的，并被配置为运行时的 Dapr Pub/Sub 组件。 这种方法消除了您服务的依赖性，从而使您的服务可以更便携，更灵活地适应更改。
 
-The complete list of Dapr pub/sub components is [here]({{< ref supported-pubsub >}}).
+Dapr 发布/订阅组件的完整列表 [点击这里]({{< ref supported-pubsub >}})。
 
 <img src="/images/pubsub-overview-pattern.png" width=1000>
 
@@ -71,12 +71,12 @@ Dapr 应用程序可以订阅已发布的 topics。 Dapr 允许您的应用程�
 
  声明和编程方式都支持相同的功能。 声明式方法会从您的代码中移除 Dapr 依赖，并允许现有的应用程序订阅 topics，而无需更改代码。 编程方法在用户代码中实现订阅。
 
-  For more information read [How-To: Publish a message and subscribe to a topic]({{< ref howto-publish-subscribe >}}).
+  更多信息查看 [如何发布消息并订阅主题]({{< ref howto-publish-subscribe >}})。
 
 
 ### 订阅消息
 
-原则上，当订阅者在处理消息后应答非错误响应时，Dapr 认为成功发送了的消息。 为了进行更精细的控制，Dapr 的发布/订阅 API 还提供显式状态（在响应负载中定义），订阅者可以使用这些状态向 Dapr 指示特定的处理指令（例如： `RETRY` 或 `DROP`）。 For more information on message routing read [Dapr publish/subscribe API documentation]({{< ref "pubsub_api.md#provide-routes-for-dapr-to-deliver-topic-events" >}})
+原则上，当订阅者在处理消息后应答非错误响应时，Dapr 认为成功发送了的消息。 为了进行更精细的控制，Dapr 的发布/订阅 API 还提供显式状态（在响应负载中定义），订阅者可以使用这些状态向 Dapr 指示特定的处理指令（例如： `RETRY` 或 `DROP`）。 更多消息路由的信息查看 [Dapr 发布/订阅 API 文档]({{< ref "pubsub_api.md#provide-routes-for-dapr-to-deliver-topic-events" >}})
 
 ### 消息传递
 
@@ -93,10 +93,10 @@ Dapr 保证消息传递 at-least-once 语义。 这意味着，当应用程序�
 
 ### Topic 作用域（Topic scoping）
 
-默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅 topic，Dapr 提供了 topic 作用域限定。 这使您能够让应用程序允许发布哪些主题以及应用程序允许订阅哪些主题。 For more information read [publish/subscribe topic scoping]({{< ref pubsub-scopes.md >}}).
+默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅 topic，Dapr 提供了 topic 作用域限定。 这使您能够让应用程序允许发布哪些主题以及应用程序允许订阅哪些主题。 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}}) 了解更多信息。
 
 ### 消息生存时间
-Dapr 可以在每个消息的基础上设置超时。 表示如果消息未从 Pub/Sub 组件读取，则消息将被丢弃。 这是为了防止未读消息的积累。 在队列中超过配置的 TTL 的消息就可以说它挂了。  For more information read [publish/subscribe message time-to-live]({{< ref pubsub-message-ttl.md >}}).
+Dapr 可以在每个消息的基础上设置超时。 表示如果消息未从 Pub/Sub 组件读取，则消息将被丢弃。 这是为了防止未读消息的积累。 在队列中超过配置的 TTL 的消息就可以说它挂了。  查看 [发布/订阅 topic 限界]({{< ref pubsub-message-ttl.md >}}) 了解更多信息。
 
 - 注意：在组件创建时，消息 TTL 也可以设置为给定的队列。 根据你正在使用的组件的具体特性。
 
@@ -105,7 +105,7 @@ For scenarios where one application uses Dapr but another doesn't, CloudEvent wr
 
 ### 发布/订阅 API
 
-The publish/subscribe API is located in the [API reference]({{< ref pubsub_api.md >}}).
+发布 / 订阅 API 位于 [API 引用]({{< ref pubsub_api.md >}})。
 
 ## 下一步
 
@@ -113,8 +113,8 @@ The publish/subscribe API is located in the [API reference]({{< ref pubsub_api.m
     * [指南：发布消息并订阅主题]({{< ref howto-publish-subscribe.md >}})
     * [操作：配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
 * 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)
-* Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
-* Learn about [message time-to-live (TTL)]({{< ref pubsub-message-ttl.md >}})
-* Learn about [pubsub without CloudEvent]({{< ref pubsub-raw.md >}})
-* List of [pub/sub components]({{< ref supported-pubsub.md >}})
-* Read the [pub/sub API reference]({{< ref pubsub_api.md >}})
+* 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
+* 了解 [消息存活时间（TTL）]({{< ref pubsub-message-ttl.md >}})
+* 学习 [不通过CloudEvent 进行 pubsub]({{< ref pubsub-raw.md >}})
+* [pub/sub组件列表]({{< ref supported-pubsub.md >}})
+* 阅读 [API 引用]({{< ref pubsub_api.md >}})
