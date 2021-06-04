@@ -156,5 +156,5 @@ Subscription Custom Resources Definitions (CRDs) do not currently contain metada
 ## 相关链接
 
 - Learn more about [how to publish and subscribe]({{< ref howto-publish-subscribe.md >}})
-- List of [pub/sub components]({{< ref supported-pubsub >}})
-- Read the [API reference]({{< ref pubsub_api.md >}})
+- [pub/sub组件列表]({{< ref supported-pubsub >}})
+- 阅读 [API 引用]({{< ref pubsub_api.md >}})
