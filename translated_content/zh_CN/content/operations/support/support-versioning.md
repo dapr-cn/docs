@@ -56,7 +56,7 @@ The [components-contrib](https://github.com/dapr/components-contrib/) repo relea
 
 Note: Components have a production usage lifecycle status: Alpha, Beta and GA (stable). These statuses are not related to their versioning. The tables of supported components shows both their versions and their status.
 * List of [state store components]({{< ref supported-state-stores.md >}})
-* List of [pub/sub components]({{< ref supported-pubsub.md >}})
+* [pub/sub组件列表]({{< ref supported-pubsub.md >}})
 * List of [secret store components]({{< ref supported-secret-stores.md >}})
 * List of [binding components]({{< ref supported-bindings.md >}})
 
