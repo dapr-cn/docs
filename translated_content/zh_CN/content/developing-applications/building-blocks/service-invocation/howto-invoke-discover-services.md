@@ -57,7 +57,7 @@ spec:
         dapr.io/app-port: "5000"
 ...
 ```
-*If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection with the `app-ssl: "true"` annotation (full list [here]({{< ref kubernetes-annotations.md >}}))*
+*如果应用程序使用 SSL 连接，那么可以使用 `app-ssl: "true"` 注解 (完整列表 [此处]({{< ref kubernetes-annotations.md >}})) 告知 Dapr 在不安全的 SSL 连接上调用应用程序。*
 
 {{% /codetab %}}
 
@@ -123,7 +123,7 @@ dapr invoke --app-id cart --method add
 
 ### 命名空间
 
-When running on [namespace supported platforms]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}}), you include the namespace of the target app in the app ID: `myApp.production`
+当运行于[支持命名空间]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})的平台时，在您的 app ID 中包含命名空间：`myApp.production`
 
 例如，调用包含名称空间的示例 python 服务:
 
@@ -131,13 +131,13 @@ When running on [namespace supported platforms]({{< ref "service_invocation_api.
 curl http://localhost:3500/v1.0/invoke/cart.production/method/add -X POST
 ```
 
-See the [Cross namespace API spec]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) for more information on namespaces.
+有关名称空间的更多信息，请参阅 [跨命名空间 API]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) 。
 
 ## 步骤 4: 查看跟踪和日志
 
 上面的示例显示了如何直接调用本地或 Kubernetes 中运行的其他服务。 Dapr 输出指标、跟踪和日志记录信息，允许您可视化服务之间的调用图、日志错误和可选地记录有效负载正文。
 
-For more information on tracing and logs see the [observability]({{< ref observability-concept.md >}}) article.
+有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 篇文章。
 
  相关链接
 
