@@ -6,11 +6,11 @@ weight: 3000
 description: "应用程序从秘钥存储介质中读取时，需要使用作用域来限定"
 ---
 
-You can read [guidance on setting up secret store components]({{< ref setup-secret-store >}}) to configure a secret store for an application. 一旦配置完毕，默认情况下 *任何* 该仓库内定义的密钥都可以从 Dapr 应用程序访问。
+您可以阅读 [设置密钥仓库组件指南]({{< ref setup-secret-store >}}) 以配置应用程序的密钥仓库。 一旦配置完毕，默认情况下 *任何* 该仓库内定义的密钥都可以从 Dapr 应用程序访问。
 
-要限制 Dapr 应用程序访问密钥的话， 您可以通过向应用程序配置添加密钥作用域政策并限制权限来定义密钥作用域。 Follow [these instructions]({{< ref configuration-concept.md >}}) to define an application configuration.
+要限制 Dapr 应用程序访问密钥的话， 您可以通过向应用程序配置添加密钥作用域政策并限制权限来定义密钥作用域。 按照 [这些说明]({{< ref configuration-concept.md >}}) 来定义应用程序配置。
 
-The secret scoping policy applies to any [secret store]({{< ref supported-secret-stores.md >}}), whether that is a local secret store, a Kubernetes secret store or a public cloud secret store. For details on how to set up a [secret stores]({{< ref setup-secret-store.md >}}) read [How To: Retrieve a secret]({{< ref howto-secrets.md >}})
+密钥作用域适用于任何 [密钥仓库]({{< ref supported-secret-stores.md >}})， 是否是本地密钥仓库、Kubernetes 密钥仓库或公共云密钥仓库。 关于如何设置一个 [密钥仓库]({{< ref setup-secret-store.md >}}) 查看 [指南：获取密钥]({{< ref howto-secrets.md >}})
 
 观看这个 [视频](https://youtu.be/j99RN_nxExA?start=2272) 演示如何让你的应用程序使用密钥作用域。 <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=2272" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
@@ -32,7 +32,7 @@ spec:
         defaultAccess: deny
 ```
 
-For applications that need to be denied access to the Kubernetes secret store, follow [these instructions]({{< ref kubernetes-overview.md >}}), and add the following annotation to the application pod.
+对于需要拒绝访问 Kubernetes 密钥仓库的应用程序， 按照 [这些说明]({{< ref kubernetes-overview.md >}})，并将以下注释添加到应用程序 pod 中。
 
 ```yaml
 dapr.io/config: appconfig
@@ -57,7 +57,7 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-此示例定义了名为 `vault` 的密钥仓库配置。 密钥仓库的默认访问权限是`deny`，而有些密钥可以通过应用程序基于`allowedSecrets`列表访问。 Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
+此示例定义了名为 `vault` 的密钥仓库配置。 密钥仓库的默认访问权限是`deny`，而有些密钥可以通过应用程序基于`allowedSecrets`列表访问。 按照 [这些说明]({{< ref configuration-concept.md >}}) 将配置应用到 sidecar。
 
 ## 场景3：拒绝访问密钥仓库中的某些敏感密钥
 
@@ -76,7 +76,7 @@ spec:
         deniedSecrets: ["secret1", "secret2"]
 ```
 
-这个示例使用一个名为 `vault` 的密钥仓库。 上面的配置明确禁止从名为 vault 的密钥仓库访问 `secret1` 和 `secret2` ，但允许访问所有其他密钥。 Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
+这个示例使用一个名为 `vault` 的密钥仓库。 上面的配置明确禁止从名为 vault 的密钥仓库访问 `secret1` 和 `secret2` ，但允许访问所有其他密钥。 按照 [这些说明]({{< ref configuration-concept.md >}}) 将配置应用到 sidecar。
 
 ## 权限优先级
 
@@ -92,7 +92,7 @@ spec:
 | 6 - 两个列表的默认拒绝/允许 | 拒绝/允许 | ["s1"] | ["s2"] | 只能访问"s1"   |
 
 ## 相关链接
-* List of [secret stores]({{< ref supported-secret-stores.md >}})
-* Overview of [secret stores]({{< ref setup-secret-store.md >}})
+* [密钥存储]({{< ref supported-secret-stores.md >}}) 列表
+* [密钥存储]({{< ref setup-secret-store.md >}}) 概述
 
 howto-secrets/
