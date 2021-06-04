@@ -3,10 +3,10 @@ type: docs
 title: "Bearer"
 linkTitle: "Bearer"
 weight: 4000
-description: "使用Bearer中间件，通过验证Bearer token来确保HTTP端点的安全"
+description: "使用 Bearer 中间件，通过验证 Bearer token 来确保 HTTP 端点的安全"
 ---
 
-The bearer [HTTP middleware]({{< ref middleware-concept.md >}}) verifies a [Bearer Token](https://tools.ietf.org/html/rfc6750) using [OpenID Connect](https://openid.net/connect/) on a Web API without modifying the application. 这种设计将认证/授权的关注点从应用中分离出来，因此应用操作者可以采用和配置认证/授权提供者，而不影响应用代码。
+[Bearer 中间件]({{< ref middleware-concept.md >}})在 Web API 上使用 [OpenID Connect](https://openid.net/connect/) 来验证 [Bearer Token](https://tools.ietf.org/html/rfc6750) 而无须修改应用程序。 这种设计将认证/授权的关注点从应用中分离出来，因此应用操作者可以采用和配置认证/授权提供者，而不影响应用代码。
 
 ## 配置
 
@@ -31,7 +31,7 @@ spec:
 | clientId  | 你的应用程序的客户端ID，它是作为OpenID Connect平台托管的凭证的一部分创建的 |                                                                   |
 | issuerURL | 服务的URL标识                                      | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
 
-## Dapr配置
+## Dapr 配置
 
 To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
 
