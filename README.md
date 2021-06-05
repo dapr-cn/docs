@@ -119,7 +119,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>115437 words</b>
+                      <b>116224 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -227,6 +227,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/stulzq">
+                    <img style="width: 58px" src="https://www.gravatar.com/avatar/a034587b0605a71b61a473a55eade6b5?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>stulzq</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>394 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/Stitch-Zhang">
                     <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14767960/medium/1c4b01393ea83f568156af368df46f03.png"/>
                    </a>
@@ -264,7 +277,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>233 words</b>
                   </sub>
-              </td>
+              </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/codjust">
                     <img style="width: 58px" src="https://www.gravatar.com/avatar/6d5421b05ba725cd4cf65cdd85eb6f3b?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
@@ -277,7 +290,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>208 words</b>
                   </sub>
-              </td></tr><tr>
+              </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/ipfans">
                     <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14689592/medium/4cec88d56b5a3e88926b5f4758affa93.jpeg"/>
