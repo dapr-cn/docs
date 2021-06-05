@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Sentinel fault-tolerance middleware component"
+title: "Sentinel 容错中间件组件"
 linkTitle: "Sentinel"
 weight: 7000
-description: "Use Sentinel middleware to guarantee the reliability and resiliency of your application"
+description: "使用 Sentinel 中间件来保证应用程序的可靠性和弹性"
 ---
 
-[Sentinel](https://github.com/alibaba/sentinel-golang) is a powerful fault-tolerance component that takes "flow" as the breakthrough point and covers multiple fields including flow control, traffic shaping, concurrency limiting, circuit breaking, and adaptive system protection to guarantee the reliability and resiliency of microservices.
+[Sentinel](https://github.com/alibaba/sentinel-golang) 是一个功能强大的容错组件，它以“流量”为切入点，从流量控制、流量整形、集群限流、熔断降级和系统自适应保护等多个维度来保证微服务的可靠性和弹性。
 
-The Sentinel [HTTP middleware]({{< ref middleware-concept.md >}}) enables Dapr to facilitate Sentinel's powerful abilities to protect your application. You can refer to [Sentinel Wiki](https://github.com/alibaba/sentinel-golang/wiki) for more details on Sentinel.
+Sentinel [HTTP 中间件]({{< ref middleware-concept.md >}}) 使 Dapr 能够使用 Sentinel 的强大能力来保护您的应用程序。 您可以参考 [Sentinel Wiki](https://github.com/alibaba/sentinel-golang/wiki) 来了解更多关于 Sentinel 的信息。
 
 ## 配置
 
@@ -63,7 +63,7 @@ All concrete HTTP API information can be found from [Dapr API Reference]{{< ref 
 
 ## Dapr配置
 
-To be applied, the middleware must be referenced in [configuration]({{< ref configuration-concept.md >}}). See [middleware pipelines]({{< ref "middleware-concept.md#customize-processing-pipeline">}}).
+要应用中间件，必须在[配置]({{< ref configuration-concept.md >}})中引用中间件。 参考[中间件管道]({{< ref "middleware-concept.md#customize-processing-pipeline">}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

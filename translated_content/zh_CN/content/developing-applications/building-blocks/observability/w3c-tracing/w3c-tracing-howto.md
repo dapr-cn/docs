@@ -7,9 +7,9 @@ description: 将 W3C 追踪标准与 Dapr 一起使用
 ---
 
 # 如何使用追踪上下文
-Dapr 使用 W3C 追踪上下文对服务调用和 pub/sub 消息传递进行分布式跟踪。 Dapr 承担生成和传播跟踪上下文信息的所有繁重工作，并且很少需要传播或创建跟踪上下文。 First read scenarios in the [W3C distributed tracing]({{< ref w3c-tracing >}}) article to understand whether you need to propagate or create a trace context.
+Dapr 使用 W3C 追踪上下文对服务调用和 pub/sub 消息传递进行分布式跟踪。 Dapr 承担生成和传播跟踪上下文信息的所有繁重工作，并且很少需要传播或创建跟踪上下文。 首先阅读 [W3C 分布式跟踪]({{< ref w3c-tracing >}}) 这篇文章中的方案 ，以了解您是否需要传播或创建跟踪上下文。
 
-To view traces, read the [how to diagnose with tracing]({{< ref tracing-overview.md >}}) article.
+若要查看跟踪，请阅读 [如何诊断与跟踪]({{< ref tracing-overview.md >}}) 文章。
 
 ## 如何从响应中检索跟踪上下文
 `注意: 在 Dapr SDK 中没有用于传播和检索跟踪上下文的辅助方法。 您需要使用 http/gRPC 客户端通过 http 标头和 gRPC 元数据传播和检索跟踪标头。`
@@ -213,7 +213,7 @@ spec:
 kubectl apply -f appconfig.yaml
 ```
 
-然后在部署 YAML 中设置以下跟踪注释。 You can add the following annotaion in sample [grpc app]({{< ref grpc.md >}}) deployment yaml.
+然后在部署 YAML 中设置以下跟踪注释。 您可以在示例 [grpc app]({{< ref grpc.md >}}) 部署 yaml 中添加以下注释。
 
 ```yaml
 dapr.io/config: "appconfig"
@@ -225,9 +225,9 @@ Dapr 包含生成跟踪上下文，您无需明确创建跟踪上下文。
 
 但是，如果您选择显式传递跟踪上下文，那么 Dapr 将使用被传递的跟踪上下文并在整个 HTTP/GRPC 调用中传播。
 
-Using the [grpc app]({{< ref grpc.md >}}) in the example and putting this all together, the following steps show you how to create a Dapr client and call the InvokeService method passing the trace context:
+使用示例中的 [grpc app]({{< ref grpc.md >}}) 并将这全部放在一起，以下步骤显示如何创建 Dapr 客户端并调用传递跟踪上下文的 InvokeService 方法 :
 
-The Rest code snippet and details, refer to the [grpc app]({{< ref grpc >}}).
+其他代码片段和详细信息，请参阅 [grpc 应用程序]({{< ref grpc >}})。
 
 ### 1. 导入包
 

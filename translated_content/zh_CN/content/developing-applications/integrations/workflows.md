@@ -220,7 +220,7 @@ Since Dapr supports many pluggable state stores and bindings, the workflow becom
 
 Watch an example from the Dapr community call: <iframe width="560" height="315" src="https://www.youtube.com/embed/7fP-0Ixmi-w?start=116" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
-## Additional resources
+## 其他资源
 
 - [Blog announcement](https://cloudblogs.microsoft.com/opensource/2020/05/26/announcing-cloud-native-workflows-dapr-logic-apps/)
 - [Repo](https://github.com/dapr/workflows)

@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "Pub/Sub without CloudEvents"
-linkTitle: "Pub/Sub without CloudEvents"
+title: "无 CloudEvents 的发布/订阅"
+linkTitle: "无 CloudEvents 的发布/订阅"
 weight: 7000
-description: "Use Pub/Sub without CloudEvents."
+description: "在没有 CloudEvents 的情况下使用发布订阅"
 ---
 
 ## 介绍
 
-Dapr uses CloudEvents to provide additional context to the event payload, enabling features like:
+Dapr 使用 CloudEvents 为事件负载提供额外的上下文，从而启用以下功能：
 * 追踪
-* Deduplication by message Id
-* Content-type for proper deserialization of event's data
+* 按消息 Id 进行重复数据删除
+* 用于正确反序列化事件数据的 Content-type
 
-For more information about CloudEvents, read the [CloudEvents specification](https://github.com/cloudevents/spec).
+更多关于 CloudEvents 的信息，查看 [ CloudEvents 规范](https://github.com/cloudevents/spec)。
 
-When adding Dapr to your application, some services may still need to communicate via raw pub/sub messages not encapsulated in CloudEvents. This may be for compatibility reasons, or because some apps are not using Dapr. Dapr enables apps to publish and subscribe to raw events that are not wrapped in a CloudEvent.
+当添加 Dapr 到你的应用时，某些服务可能仍需要通过未封装在 CloudEvents 中的原始发布/订阅消息进行通信。 这可能是出于兼容性原因，或者因为某些应用程序没有使用 Dapr。 Dapr 允许应用程序发布和订阅未包装在 CloudEvent 中的原始事件。
 
 {{% alert title="Warning" color="warning" %}}
-Not using CloudEvents disables support for tracing, event deduplication per messageId, content-type metadata, and any other features built using the CloudEvent schema.
+不使用 CloudEvents 将禁用对追踪、每个 messageId 的事件重复数据删除、content-type 元数据以及使用 CloudEvent 架构构建的任何其他功能的支持。
 {{% /alert %}}
 
-## Publishing raw messages
+## 发布原始消息
 
 Dapr apps are able to publish raw events to pub/sub topics without CloudEvent encapsulation, for compatibility with non-Dapr apps.
 
@@ -77,7 +77,7 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 {{< /tabs >}}
 
-## Subscribing to raw messages
+## 订阅原始消息
 
 Dapr apps are also able to subscribe to raw events coming from existing pub/sub topics that do not use CloudEvent encapsulation.
 
@@ -155,6 +155,6 @@ Subscription Custom Resources Definitions (CRDs) do not currently contain metada
 
 ## 相关链接
 
-- Learn more about [how to publish and subscribe]({{< ref howto-publish-subscribe.md >}})
-- List of [pub/sub components]({{< ref supported-pubsub >}})
-- Read the [API reference]({{< ref pubsub_api.md >}})
+- 了解有关[如何发布和订阅]({{< ref howto-publish-subscribe.md >}})的详细信息
+- [pub/sub组件列表]({{< ref supported-pubsub >}})
+- 阅读 [API 引用]({{< ref pubsub_api.md >}})
