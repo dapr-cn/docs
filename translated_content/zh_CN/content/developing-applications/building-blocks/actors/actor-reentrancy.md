@@ -38,7 +38,7 @@ spec:
 ```
 
 ### Actor 运行时配置
-一旦将 Actor reentrancy 作为选择加入预览功能启用，reentrancy 的 actor 还必须提供适当的配置才能使用 reentrancy。 This is done by the actor's endpoint for `GET /dapr/config`, similar to other actor configuration elements. Here is a snipet of an actor written in Golang providing the configuration:
+一旦将 Actor reentrancy 作为选择加入预览功能启用，reentrancy 的 actor 还必须提供适当的配置才能使用 reentrancy。 这是由 `GET /dapr/config`的 actor 终结点完成的，类似于其他 actor 配置元素。 以下是用 Golang 编写的 actor 代码片段，提供配置：
 
 ```go
 type daprConfig struct {
