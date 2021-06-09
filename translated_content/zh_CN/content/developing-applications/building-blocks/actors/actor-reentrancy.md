@@ -1,30 +1,30 @@
 ---
 type: docs
-title: "How-to: Enable and use actor reentrancy in Dapr"
-linkTitle: "How-To: Actor reentrancy"
+title: "如何：在Dapr中启用 Actor 的 reentrancy"
+linkTitle: "如何：Actor reentrancy （可重入）"
 weight: 30
-description: Learn more about actor reentrancy
+description: 了解更多关于 actor reentrancy
 ---
 
 {{% alert title="Preview feature" color="warning" %}}
-Actor reentrancy is currently in [preview]({{< ref preview-features.md >}}).
+Actor reentrancy 目前正在 [preview]({{< ref preview-features.md >}})状态。
 {{% /alert %}}
 
 ## Actor reentrancy
-A core tenet of the virtual actor pattern is the single-threaded nature of actor execution. Before reentrancy, this caused the Dapr runtime to lock an actor on any given request. A second request could not start until the first had completed. This behavior means an actor cannot call itself, or have another actor call into it even if it is part of the same chain. Reentrancy solves this by allowing requests from the same chain or context to re-enter into an already locked actor. Examples of chains that reentrancy allows can be seen below:
+虚拟 actor 模式的核心原则是 actor 执行的单线程性质。 在 reentrancy 之前，这导致 Dapr runtime 锁定任何给定请求的 actor 。 第二个请求要到第一个请求完成后才能开始。 这种行为意味着 actor 不能调用自己，或让另一个 actor 调用它，即使它是同一链的一部分。 Reentrancy 通过允许来自同一链或上下文的请求重新输入已锁定的参与者来解决这个问题。 Reentrancy 的调用链示例如下：
 
 ```
 Actor A -> Actor A
 ActorA -> Actor B -> Actor A
 ```
 
-With reentrancy, there can be more complex actor calls without sacrificing the single-threaded behavior of virtual actors.
+通过 reentrancy，可以在不牺牲虚拟 actor 单线程行为的情况下，有更复杂的 actor 调用。
 
-## Enabling actor reentrancy
-Actor reentrancy is currently in preview, so enabling it is a two step process.
+## 启用 Actor reentrancy
+Actor reentrancy 进入当前处于预览阶段，因此启用它是几步过程。
 
-### Preview feature configuration
-Before using reentrancy, the feature must be enabled in Dapr. For more information on preview configurations, see [the full guide on opting into preview features in Dapr]({{< ref preview-features.md >}}). Below is an example of the configuration for actor reentrancy:
+### 预览功能配置
+在使用 reentrancy 之前，必须在 Dapr 中启用该功能。 有关预览配置的更多信息，请参阅 [在 Dapr 中的预览特性]({{< ref preview-features.md >}})中的完整指南。 以下是 Actor reentrancy 配置的示例：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -37,8 +37,8 @@ spec:
       enabled: true
 ```
 
-### Actor runtime configuration
-Once actor reentrancy is enabled as an opt-in preview feature, the actor that will be reentrant must also provide the appropriate configuration to use reentrancy. This is done by the actor's endpoint for `GET /dapr/config`, similar to other actor configuration elements. Here is a snipet of an actor written in Golang providing the configuration:
+### Actor 运行时配置
+一旦将 Actor reentrancy 作为选择加入预览功能启用，reentrancy 的 actor 还必须提供适当的配置才能使用 reentrancy。 This is done by the actor's endpoint for `GET /dapr/config`, similar to other actor configuration elements. Here is a snipet of an actor written in Golang providing the configuration:
 
 ```go
 type daprConfig struct {
