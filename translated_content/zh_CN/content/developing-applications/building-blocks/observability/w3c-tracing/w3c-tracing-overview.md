@@ -63,15 +63,11 @@ Dapr 使用 W3C 追踪上下文对服务调用和 pub/sub 消息传递进行分�
         service A -> service C
         [ .. some code logic ..]
         service A -> service D
-        [ .. some code logic ..] some code logic ..]
-        service A -> service C
-        [ .. some code logic ..]
-        service A -> service D
         [ .. some code logic ..]
 
     在这种情况下，当服务 A 首先调用服务 B 时，Dapr 会在服务 A 中生成跟踪标头，然后这些跟踪标头将传播到服务 B。 这些跟踪标头作为响应标头的一部分在服务 B 的响应中返回。 但是，您需要将返回的跟踪上下文传播到下一个服务，如服务 C 和服务 D，因为 Dapr 不知道您希望重用相同的标头。
 
-     To understand how to extract the trace headers from a response and add the trace headers into a request, see the [how to use trace context]({{< ref w3c-tracing >}}) article.
+     若要了解如何从响应中提取跟踪标头并将跟踪标头添加到请求中，请参阅 [如何使用跟踪上下文]({{< ref w3c-tracing >}}) 一文.
 
 2. 您已选择生成自己的跟踪上下文标头。 这是很少会遇到的。 您可能会在服务通话中特别选择添加 W3C 跟踪头， 例如，如果您已有的应用程序目前不使用 Dapr。 在这种情况下，Dapr 仍然会为您传播跟踪上下文标头。 如果您决定自己生成跟踪标头，有三种方法可以实现：
 
