@@ -8,7 +8,7 @@ description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程
 
 ## 介绍
 
-[Namespaces or component scopes]({{< ref component-scopes.md >}}) can be used to limit component access to particular applications. 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
+[名称空间或组件作用域（scopes）]({{< ref component-scopes.md >}}) 可用于限制对特定应用程序的组件访问。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
 
 除了此常规组件范围外，对于 pub/sub 组件，还可以限制以下操作：
 - 哪些主题可以使用(发布或订阅)
