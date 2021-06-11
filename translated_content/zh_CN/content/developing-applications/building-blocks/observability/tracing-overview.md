@@ -23,7 +23,7 @@ Dapr 将 HTTP/GRPC Middleware 添加到 Dapr sidecar。 Middleware 拦截所有 
 
 Dapr 使用标准的 W3C 跟踪上下文标头。 对于 HTTP 请求，Dapr 使用 `traceparent` 标头。 对于 gRPC 请求，Dapr 使用 `grpc-trace-bin` 标头。   当请求到达时，如果没有跟踪 ID ，Dapr 将创建一个新的跟踪 ID。 否则，它将沿调用链传递跟踪 ID。
 
-Read [W3C distributed tracing]({{< ref w3c-tracing >}}) for more background on W3C Trace Context.
+阅读 [W3C 分布式跟踪]({{< ref w3c-tracing >}}) ，了解更多关于 W3C Trace Context 的背景.
 
 ## Configuration (配置)
 
