@@ -7,7 +7,7 @@ description: >
   向Dapr Docs投稿的准则
 ---
 
-本指南包含有关对 [Dapr 文档库](https://github.com/dapr/docs) 的贡献信息。 请在对 Dapr docs 作出贡献之前，请先阅读以下准则。 This guide assumes you have already reviewed the [general guidance]({{< ref contributing-overview>}}) which applies to any Dapr project contributions.
+本指南包含有关对 [Dapr 文档库](https://github.com/dapr/docs) 的贡献信息。 请在对 Dapr docs 作出贡献之前，请先阅读以下准则。 本指南假定您已阅读了适用于任何Dapr项目贡献的[通用指南]({{< ref contributing-overview>}})。
 
 Dapr 文档已发布到 [docs.dapr.io](https://docs.dapr.io)。 因此，任何贡献都必须确保文档能够正确编译和发布。
 
