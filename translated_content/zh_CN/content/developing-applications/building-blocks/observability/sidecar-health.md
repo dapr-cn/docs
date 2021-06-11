@@ -6,13 +6,13 @@ weight: 5000
 description: Dapr sidecar 运行状况检查。
 ---
 
-Dapr 提供了一种使用 HTTP /healthz 端点来确定其健康状况的方法。 通过此端点，对Dapr 进程或 sidecar进行探测，可以确定其运行状况，从而确定其就绪程度和活跃度。 See [health API ]({{< ref health_api.md >}})
+Dapr 提供了一种使用 HTTP /healthz 端点来确定其健康状况的方法。 通过此端点，对Dapr 进程或 sidecar进行探测，可以确定其运行状况，从而确定其就绪程度和活跃度。 请参阅 [health API ]({{< ref health_api.md >}})
 
 The Dapr `/healthz` endpoint can be used by health probes from the application hosting platform. 本主题描述 Dapr 如何与来自不同托管平台的探测器集成。 本主题描述 Dapr 如何与来自不同托管平台的探测器集成。
 
 作为用户，在将Dapr部署到主机平台时(例如Kubernetes)，Dapr健康端点会自动为您配置。 您无需配置任何内容。
 
-注意：Dapr actors还有一个健康 API 终点，Dapr 会探测对 Dapr 信号的响应申请，该信号表示actor应用程序是健康且运行的。 See [actor health API]({{< ref "actors_api.md#health-check" >}})
+注意：Dapr actors还有一个健康 API 终点，Dapr 会探测对 Dapr 信号的响应申请，该信号表示actor应用程序是健康且运行的。 请参阅 [health API ]({{< ref "actors_api.md#health-check" >}})
 
 ## 运行状况终结点：与Kubernetes集成
 
