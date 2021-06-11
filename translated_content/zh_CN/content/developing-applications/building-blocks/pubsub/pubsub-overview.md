@@ -100,8 +100,8 @@ Dapr 可以在每个消息的基础上设置超时。 表示如果消息未从 P
 
 - 注意：在组件创建时，消息 TTL 也可以设置为给定的队列。 根据你正在使用的组件的具体特性。
 
-### Communication with applications not using Dapr and CloudEvents
-For scenarios where one application uses Dapr but another doesn't, CloudEvent wrapping can be disabled for a publisher or subscriber. This allows partial adoption of Dapr pubsub in applications that cannot adopt Dapr all at once. For more information read [how to use pubsub without CloudEvent]({{< ref pubsub-raw.md >}}).
+### 与不使用 Dapr 和 CloudEvents 的应用程序通信
+对于一个应用程序使用 Dapr 但另一个应用程序不使用的情况，可以为发布者或订阅者禁用 CloudEvent 包装。 这允许在无法同时采用 Dapr 的应用程序中部分采用 Dapr pubsub 。 将更多信息可以参阅 [如何使用 pubsub 而不使用 CloudEvent]({{< ref pubsub-raw.md >}})。
 
 ### 发布/订阅 API
 
