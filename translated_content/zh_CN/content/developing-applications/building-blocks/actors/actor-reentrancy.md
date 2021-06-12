@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "如何：在Dapr中启用 Actor 的 reentrancy"
-linkTitle: "如何：Actor reentrancy （可重入）"
+title: "如何：在Dapr中启用 Actor 的可重入机制"
+linkTitle: "如何：Actor的可重入机制"
 weight: 30
-description: 了解更多关于 actor reentrancy
+description: 了解更多关于 actor 可重入机制
 ---
 
 {{% alert title="Preview feature" color="warning" %}}
