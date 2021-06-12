@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "如何：在Dapr中启用 Actor 的可重入机制"
-linkTitle: "如何：Actor的可重入机制"
+title: "如何：在Dapr中启用 Actor 的可重入性"
+linkTitle: "如何：Actor的可重入性"
 weight: 30
-description: 了解更多关于 actor 可重入机制
+description: 了解更多关于 actor 可重入性
 ---
 
 {{% alert title="Preview feature" color="warning" %}}
-Actor reentrancy 目前正在 [preview]({{< ref preview-features.md >}})状态。
+Actor可重入性当前处于 [preview]({{< ref preview-features.md >}})状态。
 {{% /alert %}}
 
-## Actor reentrancy
+## Actor可重入性
 虚拟 actor 模式的核心原则是 actor 执行的单线程性质。 在 reentrancy 之前，这导致 Dapr runtime 锁定任何给定请求的 actor 。 第二个请求要到第一个请求完成后才能开始。 这种行为意味着 actor 不能调用自己，或让另一个 actor 调用它，即使它是同一链的一部分。 Reentrancy 通过允许来自同一链或上下文的请求重新输入已锁定的参与者来解决这个问题。 Reentrancy 的调用链示例如下：
 
 ```
