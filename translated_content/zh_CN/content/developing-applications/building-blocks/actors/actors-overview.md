@@ -15,7 +15,7 @@ aliases:
 
 大量 Actors 可以同时执行，但他们之间是相互独立执行的。
 
-Dapr 包含专门实现 [ virtual actors 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/) 的运行时。 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
+Dapr 包含专门实现 [ 虚拟 actors 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/) 的运行时。 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
 
 ### 何时使用 Actors？
 
@@ -37,7 +37,7 @@ Actor 设计模式可以很好适应一些分布式系统问题和场景，但�
 
 Dapr Actors 是虚拟的，意思是他们的生命周期与他们的 in - memory 表现不相关。 因此，它们不需要显式创建或销毁。 Dapr Actors 运行时在第一次接收到该 actor ID 的请求时自动激活 actor。 如果 actor 在一段时间内未被使用，那么 Dapr Actors 运行时将回收内存对象。 如果以后需要重新启动，它还将保持对 actor 的一切原有数据。
 
-调用 actor 方法和 reminders 将重置空闲时间，例如，reminders 触发将使 actor 保持活动状态。 不论 actor 是否处于活动状态或不活动状态 Actor reminders 都会触发，对不活动 actor ，那么会首先激活 actor。 Actor timers 不会重置空闲时间，因此 timer 触发不会使参与者保持活动状态。 Timer 仅在 actor 活跃时被触发。
+调用 actor 方法和 reminders 将重置空闲时间，例如，reminders 触发将使 actor 保持活动状态。 不论 actor 是否处于活动状态或非活动状态 Actor reminders 都会触发，对于非活动状态的actor会先进行激活。 Actor timers 不会重置空闲时间，因此 timer 触发不会使actor保持活动状态。 Timer 仅在 actor 活跃时被触发。
 
 空闲超时和扫描时间间隔 Dapr 运行时用于查看是否可以对 actor 进行垃圾收集。 当 Dapr 运行时调用 actor 服务以获取受支持的 actor 类型时，可以传递此信息。
 
