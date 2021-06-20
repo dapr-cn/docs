@@ -13,7 +13,7 @@ aliases:
 
 当代码处理一条消息时，它可以向其他参与者发送一条或多条消息，或者创建新的 Actors。 底层 运行时 将管理每个 actor 的运行方式，时机和位置，并在 Actors 之间传递消息。
 
-大量 Actors 可以同时执行，而 Actors 可以相互独立执行。
+大量 Actors 可以同时执行，但他们之间是相互独立执行的。
 
 Dapr 包含专门实现 [ virtual actors 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/) 的运行时。 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
 
