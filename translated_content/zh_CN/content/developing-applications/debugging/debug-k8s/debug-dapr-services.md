@@ -16,7 +16,7 @@ This guide will cover how to use Dapr debugging binaries to debug the Dapr servi
 
 ### 前提
 
-- 阅读 [}}">本指南]({{< ref kubernetes-deploy.md >}}) 来学习如何将 Dapr 部署到您的 Kubernetes 集群。
+- 阅读 [本指南]({{< ref kubernetes-deploy.md >}}) 来学习如何将 Dapr 部署到您的 Kubernetes 集群。
 - 设置您的 [开发环境](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
 -  [Helm](https://github.com/helm/helm/releases)
 
