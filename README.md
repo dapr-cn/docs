@@ -171,12 +171,12 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>2205 words</b>
+                      <b>2443 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/charleszhn">
-                    <img style="width: 58px" src="https://www.gravatar.com/avatar/b803a21d4574831484a432a203f87120?s=96&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                    <img style="width: 58px" src="https://www.gravatar.com/avatar/b803a21d4574831484a432a203f87120?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
                    </a>
                   <br />
                   <sub>
@@ -202,7 +202,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/w_Y_">
-                    <img style="width: 58px" src="https://www.gravatar.com/avatar/52730627c93e4557e9a1088295898303?s=96&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                    <img style="width: 58px" src="https://www.gravatar.com/avatar/52730627c93e4557e9a1088295898303?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
                    </a>
                   <br />
                   <sub>
@@ -228,7 +228,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/stulzq">
-                    <img style="width: 58px" src="https://www.gravatar.com/avatar/a034587b0605a71b61a473a55eade6b5?s=96&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                    <img style="width: 58px" src="https://www.gravatar.com/avatar/a034587b0605a71b61a473a55eade6b5?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
                    </a>
                   <br />
                   <sub>
@@ -280,7 +280,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/codjust">
-                    <img style="width: 58px" src="https://www.gravatar.com/avatar/6d5421b05ba725cd4cf65cdd85eb6f3b?s=96&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                    <img style="width: 58px" src="https://www.gravatar.com/avatar/6d5421b05ba725cd4cf65cdd85eb6f3b?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
                    </a>
                   <br />
                   <sub>
