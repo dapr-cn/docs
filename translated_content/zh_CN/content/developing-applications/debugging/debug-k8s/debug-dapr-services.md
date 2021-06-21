@@ -16,13 +16,13 @@ This guide will cover how to use Dapr debugging binaries to debug the Dapr servi
 
 ### 前提
 
-- Familiarize yourself with [this guide]({{< ref kubernetes-deploy.md >}}) to learn how to deploy Dapr to your Kubernetes cluster.
-- Setup your [dev environment](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
+- 阅读 [}}">本指南]({{< ref kubernetes-deploy.md >}}) 来学习如何将 Dapr 部署到您的 Kubernetes 集群。
+- 设置您的 [开发环境](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
 -  [Helm](https://github.com/helm/helm/releases)
 
 ### 1. Build Dapr debugging binaries
 
-In order to debug Dapr Kubernetes services, it's required to rebuild all Dapr binaries and Docker images to disable compiler optimization. To do this, execute the following commands:
+为了调试 Dapr Kubernetes 服务，需要重新构建建所有的Dapr 二进制文件 和 Docker 镜像来禁用编译器优化。 要做到这一点，请运行以下命令：
 
 ```bash
 git clone https://github.com/dapr/dapr.git
