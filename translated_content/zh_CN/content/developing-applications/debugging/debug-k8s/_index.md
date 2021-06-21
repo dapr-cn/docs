@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Debug Dapr in Kubernetes mode"
+title: "在Kubernetes模式下Debug Dapr"
 linkTitle: "Kubernetes"
 weight: 200
-description: "How to debug Dapr on your Kubernetes cluster"
+description: "如何在Kubernetes集群上Debug Dapr"
 ---
 
