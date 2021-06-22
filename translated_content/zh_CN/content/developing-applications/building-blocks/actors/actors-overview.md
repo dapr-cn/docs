@@ -89,8 +89,8 @@ Dapr Actors 运行时提供了一个简单的基于回合的访问模型，用�
 
 <img src="/images/actors_background_communication.png" width=600>
 
-#### Reentrancy
-As an enhancement to the base actors in dapr, reentrancy can now be enabled as a preview feature. To learn more about it, see [actor reentrancy]({{<ref actor-reentrancy.md>}})
+#### 可重入性
+在Dapr中，作为基础actors的一个增强功能，可重入性现在可以在预览特性中启用了。 更多内容请参阅：[actor 可重入性]({{<ref actor-reentrancy.md>}})
 
 ### 基于回合的访问
 
