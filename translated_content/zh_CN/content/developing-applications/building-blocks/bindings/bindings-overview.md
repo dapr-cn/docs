@@ -32,7 +32,7 @@ description: Dapr 绑定构建块概述
 
 > 如果应用程序要订阅绑定，在启动 Dapr 时，对应用程序的所有已定义输入绑定发送 `OPTIONS` 请求，并期望 `NOT FOUND (404)` 以外的状态码。
 
-Read the [Create an event-driven app using input bindings]({{< ref howto-triggers.md >}}) page to get started with input bindings.
+开始使用输入绑定，请参阅[使用输入绑定创建事件驱动应用]({{< ref howto-triggers.md >}})。
 
 ## 输出绑定
 
@@ -43,11 +43,11 @@ Read the [Create an event-driven app using input bindings]({{< ref howto-trigger
 1. 定义描述绑定类型及其元数据 ( 连接信息等) 的组件 YAML
 2. 使用 HTTP 终结点或 gRPC 方法调用具有可选有效负载的绑定
 
-Read the [Use output bindings to interface with external resources]({{< ref howto-bindings.md >}}) page to get started with output bindings.
+开始使用输入绑定，请参阅[使用输出绑定向外部系统发送事件]({{< ref howto-bindings.md >}})。
 
 ## 下一步
 * 遵循这些指南：
     * [使用输入绑定从不同资源触发服务]({{< ref howto-triggers.md >}})
     * [使用输出绑定调用不同的资源]({{< ref howto-bindings.md >}})
 * 试试 [绑定快速启动](https://github.com/dapr/quickstarts/tree/master/bindings/README.md) 来显示如何绑定到 Kafka 队列
-* Read the [bindings API specification]({{< ref bindings_api.md >}})
+* 查阅[绑定API规范]({{< ref bindings_api.md >}})
