@@ -119,7 +119,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>116701 words</b>
+                      <b>116716 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -253,6 +253,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/Itoktsnhc">
+                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14744976/medium/dbb59b4e47b2224cd85722049d14f698.png"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>itoktsnhc (Itoktsnhc)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>293 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/oudi">
                     <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14397588/medium/d45928ebed8263cf5919c863bfcd699e.jpeg"/>
                    </a>
@@ -263,19 +276,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>280 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/Itoktsnhc">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14744976/medium/dbb59b4e47b2224cd85722049d14f698.png"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>itoktsnhc (Itoktsnhc)</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>233 words</b>
                   </sub>
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
