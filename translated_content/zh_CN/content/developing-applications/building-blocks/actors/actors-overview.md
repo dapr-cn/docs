@@ -65,7 +65,7 @@ Dapr actor 运行时为您管理分发方案和键范围设置。 这是由 acto
 * 默认情况下，Actors 被随机放入分区中，从而形成均匀的分布。
 * 由于 Actors 是随机放置的，因此可知，执行操作始终需要网络通信，包括方法调用数据的序列化和去序列化，产生延迟和开销。
 
-注: Dapr actor Placement 服务仅用于 actor 安置，因此，如果您的服务未使用 Dapr Actors，那么不需要。 The Placement service can run in all [hosting environments]({{< ref hosting >}}), including self-hosted and Kubernetes.
+注: Dapr actor Placement 服务仅用于 actor 安置，因此，如果您的服务未使用 Dapr Actors，那么不需要。 Placement服务可以运行在[托管环境]({{< ref hosting >}})，包括自托管和Kubernetes。
 
 ## Actor 通信
 
@@ -75,9 +75,9 @@ Dapr actor 运行时为您管理分发方案和键范围设置。 这是由 acto
 POST/GET/PUT/DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/<method/state/timers/reminders>
 ```
 
-您可以在请求主体中为 actor 方法提供任何数据，并且请求的响应在响应主体中，这是来自 actor 方法调用的数据。
+您可以在请求主体中为 actor 方法提供任何数据，且在actor调用的数据中包含该请求的响应信息。
 
-Refer to [Dapr Actor Features]({{< ref howto-actors.md >}}) for more details.
+更多信息请查阅： [Dapr Actor 特性]({{< ref howto-actors.md >}})
 
 ### 并发（Concurrency）
 
