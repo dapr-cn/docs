@@ -142,14 +142,14 @@ using var call = client.InvokeServiceAsync(req, headers);
 
 ### 在 Go 中创建跟踪上下文
 
-#### 1. 1. 获取 OpenCensus Go SDK
+#### 1. 获取 OpenCensus Go SDK
 
 先决条件:OpenCensus Go 库需要 Go 1.8 或更高版本。 有关安装的详细信息，请访问 [这里](https://pkg.go.dev/go.opencensus.io?tab=overview)。
 
-#### 2. 2. 导入包 "go.openensuss.io/trace"
+#### 2. 导入包 "go.openensuss.io/trace"
 `$ go get -u go.opencensus.io`
 
-#### 3. 3. 创建跟踪上下文
+#### 3. 创建跟踪上下文
 
 ```go
 ctx, span := trace.StartSpan(ctx, "cache.Get")
