@@ -15,7 +15,7 @@ Dapr提供的状态管理功能包括一致性和并发选项。 在本指南中
 ## 前提
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
+- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
 
 ## 第一步：设置状态存储
 
