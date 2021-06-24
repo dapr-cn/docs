@@ -11,7 +11,7 @@ description: 试用 .NET Dapr virtual actors
 ## 先决条件
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
-- Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
+- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
 - [.NET Core 3.1 或 .NET 5+](https://dotnet.microsoft.com/download) 已安装
 
 ## 概述
