@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "指南：如何在应用程序之间共享状态"
-linkTitle: "How-To: Share state between applications"
+linkTitle: "如何：在应用间共享状态"
 weight: 400
 description: "以不同的策略在不同的应用程序之间共享状态"
 ---
