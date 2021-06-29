@@ -6,6 +6,6 @@ weight: 10
 description: "为分布式应用程序解决相同开发挑战的 Dapr 功能"
 ---
 
-Get a high-level [overview of Dapr building blocks]({{< ref building-blocks-concept >}}) in the **Concepts** section.
+更高级的[Dapr构建块概览]({{< ref building-blocks-concept >}})可在**概述**章节中查看。
 
 <img src="/images/buildingblocks-overview.png" alt="显示不同的Dapr构建块的图表" width=1000>
