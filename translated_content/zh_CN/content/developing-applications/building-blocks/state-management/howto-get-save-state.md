@@ -21,7 +21,7 @@ Dapr提供的状态管理功能包括一致性和并发选项。 在本指南中
 
 状态存储组件代表Dapr用来与数据库进行通信的资源。
 
-For the purpose of this guide we'll use a Redis state store, but any state store from the [supported list]({{< ref supported-state-stores >}}) will work.
+本手册演示使用Redis状态存储，在[支持列表]({{< ref supported-state-stores >}})中的所有状态存储均可使用。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes>}}
 
