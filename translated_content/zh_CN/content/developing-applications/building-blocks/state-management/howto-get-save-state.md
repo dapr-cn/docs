@@ -33,7 +33,7 @@ Dapr提供的状态管理功能包括一致性和并发选项。 在本指南中
 
 {{% codetab %}}
 
-To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [desired statestore component]({{< ref supported-state-stores >}}) in the yaml below, save as `statestore.yaml`, and run `kubectl apply -f statestore.yaml`.
+若要部署在Kubernetes集群中，请在以下所示的yaml文件中对[期望状态存储组件]({{< ref supported-state-stores >}})的`metadata`进行连接信息填充，保存为`statestore.yaml`，然后运行`kubectl apply -f statestore.yaml`。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -50,7 +50,7 @@ spec:
   - name: redisPassword
     value: ""
 ```
-See the instructions [here]({{< ref "setup-state-store" >}}) on how to setup different state stores on Kubernetes.
+如何在Kubernetes中设置状态存储，请查阅[这里]({{< ref "setup-state-store" >}})。
 
 {{% /codetab %}}
 
@@ -75,12 +75,12 @@ dapr run --app-id myapp --dapr-http-port 3500
 
 然后在一个单独的终端中保存一个键/值对到你的statestore中：
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '[{ "key": "key1", "value": "value1"}]' http://localhost:3500/v1.0/state/statestore
+curl -X POST -H "Content-Type: application/json" -d '[{ "key": "name", "value": "Bruce Wayne"}]' http://localhost:3500/v1.0/state/statestore
 ```
 
 现在获取你刚才保存的状态：
 ```bash
-curl http://localhost:3500/v1.0/state/statestore/key1
+curl http://localhost:3500/v1.0/state/statesstore/key1
 ```
 
 你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
@@ -443,7 +443,7 @@ dapr --app-id myapp run -- php state-example.php
 ## 第五步：执行状态事务性操作
 
 {{% alert title="Note" color="warning" %}}
-状态事务性操作需要一个支持multi-item transactions的状态存储引擎。 Visit the [supported state stores page]({{< ref supported-state-stores >}}) page for a full list. 请注意，在自托管环境中创建的默认Redis容器是支持的。
+状态事务性操作需要一个支持multi-item transactions的状态存储引擎。 完整列表请查阅[受支持的状态存储]({{< ref supported-state-stores >}})。 请注意，在自托管环境中创建的默认Redis容器是支持的。
 {{% /alert %}}
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" "Python SDK">}}
@@ -584,6 +584,6 @@ dapr --app-id myapp run -- php state-example.php
 
 ## 下一步
 
-- Read the full [State API reference]({{< ref state_api.md >}})
-- Try one of the [Dapr SDKs]({{< ref sdks >}})
-- Build a [stateful service]({{< ref howto-stateful-service.md >}})
+- 请查阅[状态API参考手册]({{< ref state_api.md >}})
+- 尝试一个 [Dapr SDKs]({{< ref sdks >}})
+- 构建一个 [状态服务]({{< ref howto-stateful-service.md >}})
