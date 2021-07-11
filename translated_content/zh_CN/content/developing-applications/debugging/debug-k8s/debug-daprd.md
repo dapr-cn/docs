@@ -9,26 +9,26 @@ description: "How to debug the Dapr sidecar (daprd) on your Kubernetes cluster"
 
 ## 概述
 
-Sometimes it is necessary to understand what's going on in the Dapr sidecar (daprd), which runs as a sidecar next to your application, especially when you diagnose your Dapr application and wonder if there's something wrong in Dapr itself. Additionally, you may be developing a new feature for Dapr on Kubernetes and want to debug your code.
+有时有必要了解 Dapr sidecar（daprd） 中发生了什么，它作为 sidecar 运行在您的应用程序旁边，尤其是当您诊断您的 Dapr 应用程序并想知道 Dapr 本身是否出了问题时。 此外，您可能正在为 Kubernetes 上的 Dapr 开发新功能，并希望调试您的代码。
 
-his guide will cover how to use built-in Dapr debugging to debug the Dapr sidecar in your Kubernetes pods.
+本指南将涵盖如何使用内置的Dapr调试来调试您的 Kubernetes pod 中的 Dapr sidecar 。
 
 ## 前提
 
-- Refer to [this guide]({{< ref kubernetes-deploy.md >}}) to learn how to deploy Dapr to your Kubernetes cluster.
-- Follow [this guide]({{< ref "debug-dapr-services.md">}}) to build the Dapr debugging binaries you will be deploying in the next step.
+- 阅读 [本指南]({{< ref kubernetes-deploy.md >}}) 来学习如何将 Dapr 部署到您的 Kubernetes 集群。
+- 请按照 [本指南]({{< ref "debug-dapr-services.md">}}) ，以构建下一步将部署的 Dapr 调试二进制文件。
 
 
-## Initialize Dapr in debug mode
+## 在调试模式下初始化 Dapr
 
-If Dapr has already been installed in your Kubernetes cluster, uninstall it first:
+如果 Dapr 已安装在您的 Kubernetes 集群中，请先卸载它：
 
 ```bash
 dapr uninstall -k
 ```
-We will use 'helm' to install Dapr debugging binaries. For more information refer to [Install with Helm]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}}).
+我们将使用"helm"来安装 Dapr 调试二进制文件。 了解更多信息，请参阅 [使用 helm 安装]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}})。
 
-First configure a values file named `values.yml` with these options:
+首先配置名为 `values.yml` 的文件。
 
 ```yaml
 global:
@@ -36,13 +36,13 @@ global:
    tag: "dev-linux-amd64"
 ```
 
-Then step into 'dapr' directory from your cloned [dapr/dapr repository](https://github.com/dapr/dapr) and execute the following command:
+然后从您的克隆 [dapr/dapr 存储库](https://github.com/dapr/dapr) 中转到"dapr"目录，并执行以下命令：
 
 ```bash
 helm install dapr charts/dapr --namespace dapr-system --values values.yml --wait
 ```
 
-To enable debug mode for daprd, you need to put an extra annotation `dapr.io/enable-debug` in your application's deployment file. Let's use [quickstarts/hello-kubernetes](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes) as an example. Modify 'deploy/node.yaml' like below:
+要启用 daprd 调试模式，您需要在应用程序的部署文件中放置额外的注释 `dapr.io/enable-debug` 。 让我们以 [quickstarts/hello-kubernetes](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes) 为例。 修改如下 'deploy/node.yaml'：
 
 ```diff
 diff --git a/hello-kubernetes/deploy/node.yaml b/hello-kubernetes/deploy/node.yaml
