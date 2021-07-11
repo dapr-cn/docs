@@ -43,9 +43,9 @@ spec:
 
 | 字段                  | 详情                                                          | Example                                                                                                    |
 | ------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| appName             | the name of current running service                         | `nodeapp`                                                                                                  |
-| logDir              | the log directory path                                      | `/var/tmp/sentinel`                                                                                        |
-| flowRules           | json array of sentinel flow control rules                   | [flow control rule](https://github.com/alibaba/sentinel-golang/blob/master/core/flow/rule.go)              |
+| appName             | 当前运行服务的名称                                                   | `nodeapp`                                                                                                  |
+| logDir              | 日志目录路径                                                      | `/var/tmp/sentinel`                                                                                        |
+| flowRules           | json array of sentinel flow control rules                   | [流量控制规则](https://github.com/alibaba/sentinel-golang/blob/master/core/flow/rule.go)                         |
 | circuitBreakerRules | json array of sentinel circuit breaker rules                | [circuit breaker rule](https://github.com/alibaba/sentinel-golang/blob/master/core/circuitbreaker/rule.go) |
 | hotSpotParamRules   | json array of sentinel hotspot parameter flow control rules | [hotspot rule](https://github.com/alibaba/sentinel-golang/blob/master/core/hotspot/rule.go)                |
 | isolationRules      | json array of sentinel isolation rules                      | [isolation rule](https://github.com/alibaba/sentinel-golang/blob/master/core/isolation/rule.go)            |
