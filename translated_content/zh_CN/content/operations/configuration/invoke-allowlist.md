@@ -44,7 +44,7 @@ The following tables lists the different properties for access control, policies
 
 | 属性       | 数据类型   | 说明                                                                                                                                           |
 | -------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| name     | string | Path name of the operations allowed on the called app. Wildcard "\*" can be used to under a path to match                                  |
+| name     | string | Path name of the operations allowed on the called app. 通配符"\*"可用于在匹配路径                                                                     |
 | httpVerb | list   | List specific http verbs that can be used by the calling app. Wildcard "\*" can be used to match any http verb. Unused for grpc invocation |
 | action   | string | Access modifier. Accepted values "allow" (default) or "deny"                                                                                 |
 
@@ -67,7 +67,7 @@ The action corresponding to the most specific policy matched takes effect as ord
 
 Below are some example scenarios for using access control list for service invocation. See [configuration guidance]({{< ref "configuration-concept.md" >}}) to understand the available configuration settings for an application sidecar.
 
-<font size=5>Scenario 1: Deny access to all apps except where trustDomain = public, namespace = default, appId = app1</font>
+<font size=5>方案1：拒绝访问所有应用，除非 trustDomain = public, namespace = default, appId = app1</font>
 
 With this configuration, all calling methods with appId = app1 are allowed and all other invocation requests from other applications are denied
 
@@ -87,7 +87,7 @@ spec:
       namespace: "default"
 ```
 
-<font size=5>Scenario 2: Deny access to all apps except trustDomain = public, namespace = default, appId = app1, operation = op1</font>
+<font size=5>方案2：拒绝访问除信任域外的所有 trustDomain = public, namespace = default, appId = app1, operation = op1</font>
 
 With this configuration, only method op1 from appId = app1 is allowed and all other method requests from all other apps, including other methods on app1, are denied
 
@@ -111,7 +111,7 @@ spec:
         action: allow
 ```
 
-<font size=5>Scenario 3: Deny access to all apps except when a specific verb for HTTP and operation for GRPC is matched</font>
+<font size=5>方案 3：拒绝访问所有应用，除非匹配 HTTP 的特定动词和 GRPC 的操作</font>
 
 With this configuration, the only scenarios below are allowed access and and all other method requests from all other apps, including other methods on app1 or app2, are denied
 * trustDomain = public, namespace = default, appID = app1, operation = op1, http verb = POST/PUT
