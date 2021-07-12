@@ -3,7 +3,7 @@ type: docs
 title: "如何：将访问控制列表配置应用于服务调用"
 linkTitle: "服务调用访问控制"
 weight: 4000
-description: "Restrict what operations *calling* applications can perform, via service invocation, on the *called* application"
+description: "限制应用程序可以通过服务调用在\"调用\"应用程序上执行什么操作"
 ---
 
 Access control enables the configuration of policies that restrict what operations *calling* applications can perform, via service invocation, on the *called* application. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration.
