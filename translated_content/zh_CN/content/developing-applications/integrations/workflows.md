@@ -10,7 +10,7 @@ Dapr Workflows is a lightweight host that allows developers to run cloud-native 
 
 ## Benefits
 
-By using a workflow engine, business logic can be defined in a declarative, no-code fashion so application code doesn't need to change when a workflow changes. Dapr Workflows allows you to use workflows in a distributed application along with these added benefits:
+通过使用工作流引擎，可以以声明性、无代码的方式定义业务逻辑，因此当工作流发生变化时，应用程序代码不需要更改。 Dapr 工作流允许您在分布式应用程序中使用工作流以及这些附加好处：
 
 - **Run workflows anywhere**: on your local machine, on-premises, on Kubernetes or in the cloud
 - **Built-in observability**: tracing, metrics and mTLS through Dapr
