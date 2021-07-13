@@ -41,25 +41,25 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                  | 详情                                                          | Example                                                                                                    |
-| ------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| appName             | 当前运行服务的名称                                                   | `nodeapp`                                                                                                  |
-| logDir              | 日志目录路径                                                      | `/var/tmp/sentinel`                                                                                        |
-| flowRules           | json array of sentinel flow control rules                   | [流量控制规则](https://github.com/alibaba/sentinel-golang/blob/master/core/flow/rule.go)                         |
-| circuitBreakerRules | json array of sentinel circuit breaker rules                | [circuit breaker rule](https://github.com/alibaba/sentinel-golang/blob/master/core/circuitbreaker/rule.go) |
-| hotSpotParamRules   | json array of sentinel hotspot parameter flow control rules | [hotspot rule](https://github.com/alibaba/sentinel-golang/blob/master/core/hotspot/rule.go)                |
-| isolationRules      | json array of sentinel isolation rules                      | [isolation rule](https://github.com/alibaba/sentinel-golang/blob/master/core/isolation/rule.go)            |
-| systemRules         | json array of sentinel system rules                         | [system rule](https://github.com/alibaba/sentinel-golang/blob/master/core/system/rule.go)                  |
+| 字段                  | 详情                  | Example                                                                                     |
+| ------------------- | ------------------- | ------------------------------------------------------------------------------------------- |
+| appName             | 当前运行服务的名称           | `nodeapp`                                                                                   |
+| logDir              | 日志目录路径              | `/var/tmp/sentinel`                                                                         |
+| flowRules           | 哨兵流量控制规则 json 数组    | [流量控制规则](https://github.com/alibaba/sentinel-golang/blob/master/core/flow/rule.go)          |
+| circuitBreakerRules | 哨兵断路器规则 json 数组     | [断路器规则](https://github.com/alibaba/sentinel-golang/blob/master/core/circuitbreaker/rule.go) |
+| hotSpotParamRules   | 哨兵热点参数流控制规则 json 数组 | [热点规则](https://github.com/alibaba/sentinel-golang/blob/master/core/hotspot/rule.go)         |
+| isolationRules      | 哨兵隔离规则 json 数组      | [隔离规则](https://github.com/alibaba/sentinel-golang/blob/master/core/isolation/rule.go)       |
+| systemRules         | 哨兵系统规则 json 数组      | [系统规则](https://github.com/alibaba/sentinel-golang/blob/master/core/system/rule.go)          |
 
 一旦达到上限，请求将返回 *HTTP Status code 429: Too Many Requests*。
 
-Special note to `resource` field in each rule's definition. In Dapr, it follows the following format:
+特别注意每个规则定义中 `resource` 领域。 在 Dapr 中，它遵循以下格式：
 
 ```
 POST/GET/PUT/DELETE:Dapr HTTP API Request Path
 ```
 
-All concrete HTTP API information can be found from [Dapr API Reference]{{< ref "api" >}}. In the above sample config, the `resource` field is set to **POST:/v1.0/invoke/nodeapp/method/neworder**.
+所有具体的 HTTP API 信息都可以从 \[Dapr API Reference\]({{< ref "api" >}}) 中找到. 在上述示例配置中， `resource` 字段设置为 **POST:/v1.0/invoke/nodeapp/method/neworder**。
 
 ## Dapr配置
 
