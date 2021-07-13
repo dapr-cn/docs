@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Debugging Dapr applications and the Dapr control plane"
-linkTitle: "Debugging"
+title: "如何调试 Dapr 应用程序和 Dapr 控制面板的指南"
+linkTitle: "调试"
 weight: 60
-description: "Guides on how to debug Dapr applications and the Dapr control plane"
+description: "如何调试 Dapr 应用程序和 Dapr 控制面板的指南"
 ---
 
