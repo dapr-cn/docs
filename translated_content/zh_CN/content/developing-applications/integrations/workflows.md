@@ -6,7 +6,7 @@ description: "学习如何使用 Dapr Workflow 和 Logic Apps 构建工作流"
 weight: 4000
 ---
 
-Dapr Workflows is a lightweight host that allows developers to run cloud-native workflows locally, on-premises or any cloud environment using the [Azure Logic Apps](https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) workflow engine and Dapr.
+Dapr Workflow 是一个轻量级主机，允许开发人员在本地运行云端本地工作流。 使用 [Azure Logic Apps](https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) Workflow 引擎和 Dapr来运行或任何云端环境。
 
 ## Benefits
 
