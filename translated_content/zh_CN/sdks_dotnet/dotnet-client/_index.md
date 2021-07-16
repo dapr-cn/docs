@@ -11,13 +11,13 @@ Dapr 客户端包允许您从.NET应用程序中与其他 Dapr 应用程序进�
 
 ## 先决条件
 
-- [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
+- 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
 - [.NET Core 3.1 或 .NET 5+](https://dotnet.microsoft.com/download) 已安装
 
 ## 构建块
 
-The .NET SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
+.NET SDK允许您与所有的[Dapr构建块]({{< ref building-blocks >}})接口。
 
 ### 调用服务
 
@@ -49,7 +49,7 @@ Console.WriteLine("Returned: id:{0} | Balance:{1}", account.Id, account.Balance)
 
 {{< /tabs >}}
 
-- For a full guide on service invocation visit [How-To: Invoke a service]({{< ref howto-invoke-discover-services.md >}}).
+- 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
 ### 保存 & 获取 应用程序状态
 
@@ -67,7 +67,7 @@ await client.DeleteStateAsync(storeName, stateKeyName, cancellationToken: cancel
 Console.WriteLine("Deleted State!");
 ```
 
-- For a full list of state operations visit [How-To: Get & save state]({{< ref howto-get-save-state.md >}}).
+- 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
 
 ### 发布消息
 
@@ -79,7 +79,7 @@ await client.PublishEventAsync(pubsubName, "deposit", eventData, cancellationTok
 Console.WriteLine("Published deposit event!");
 ```
 
-- For a full list of state operations visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
+- 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
 - 请访问[.NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe)，获取代码示例和说明，以试用 发布/订阅。
 
 ### 与输出绑定交互
@@ -100,7 +100,7 @@ var email = new
 await client.InvokeBindingAsync("send-email", "create", email);
 ```
 
-- For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
+- 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
 
 ### 检索密钥
 
@@ -138,7 +138,7 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 
 {{< /tabs >}}
 
-- For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
+- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
 
 ## 相关链接
 - [.NET SDK 示例](https://github.com/dapr/dotnet-sdk/tree/master/examples)
