@@ -98,7 +98,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 <table style="width: 100%;"><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/dapr-cn-github">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14655472/medium/e202f38d532df9974d4f4650ee8180b9.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -111,7 +111,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/newbe36524">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14343192/medium/4d4f53fb1650aef3e1e74849d4293595.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -124,7 +124,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/Jadyn">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14016211/medium/3ceda39cee7ab8540c6d47e84e7c20da.jpg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -137,7 +137,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/LLLimbo">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14662540/medium/221399a113d62b524901b9384f6ba9b5.jpg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -150,7 +150,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/siegrainwong">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14658460/medium/ee7d4abad04d01213596cc943048cf3c.jpeg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -163,7 +163,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/herowk">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14684048/medium/a671bdc899c5f9c4d6851f13726a9b37.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -176,7 +176,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/charleszhn">
-                    <img style="width: 58px" src="https://www.gravatar.com/avatar/b803a21d4574831484a432a203f87120?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -189,7 +189,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/MarkLux">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14674432/medium/a1117a26198499b2b95feb9dc569769f.jpg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -202,7 +202,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/w_Y_">
-                    <img style="width: 58px" src="https://www.gravatar.com/avatar/52730627c93e4557e9a1088295898303?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -215,7 +215,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/Danvic.Wang">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14615740/medium/3f35f4e495afae34f0633d49c65b8113.jpeg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -228,7 +228,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/stulzq">
-                    <img style="width: 58px" src="https://www.gravatar.com/avatar/a034587b0605a71b61a473a55eade6b5?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -241,7 +241,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/Stitch-Zhang">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14767960/medium/1c4b01393ea83f568156af368df46f03.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -254,7 +254,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/Itoktsnhc">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14744976/medium/dbb59b4e47b2224cd85722049d14f698.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -267,7 +267,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/oudi">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14397588/medium/d45928ebed8263cf5919c863bfcd699e.jpeg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -280,7 +280,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/codjust">
-                    <img style="width: 58px" src="https://www.gravatar.com/avatar/6d5421b05ba725cd4cf65cdd85eb6f3b?s=48&d=https%3A%2F%2Fcrowdin.com%2Fimages%2Fuser-picture.png"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -293,7 +293,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/ipfans">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14689592/medium/4cec88d56b5a3e88926b5f4758affa93.jpeg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -306,7 +306,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/WeihanLi">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14686614/medium/514d87f9880deed98f006b2a13aeb128.jpeg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
@@ -319,7 +319,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
               </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/sunshinebaby00">
-                    <img style="width: 58px" src="https://crowdin-static.downloads.crowdin.com/avatar/14576690/medium/c5e9d1d3c62de3a098c94d0b44c7be62.jpeg"/>
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
