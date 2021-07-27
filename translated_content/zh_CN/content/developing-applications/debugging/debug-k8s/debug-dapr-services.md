@@ -8,11 +8,11 @@ description: "在Kubernetes中如何在Dapr控制面板中进行调试"
 
 ## 概述
 
-Sometimes it is necessary to understand what's going on in Dapr control plane (aka, Kubernetes services), including `dapr-sidecar-injector`, `dapr-operator`, `dapr-placement`, and `dapr-sentry`, especially when you diagnose your Dapr application and wonder if there's something wrong in Dapr itself. Additionally, you may be developing a new feature for Dapr on Kubernetes and want to debug your code.
+有时候，我们需要知道在Dapr控制面板中发生了什么(aka. Kubernetes服务)，包括 `dapr-sidecar-injector`, `dapr-operator`, `dapr-placement`, and `dapr-sentry`，特别是当你诊断你的Dapr应用时想要知道是不是Dapr自身存在什么错误。 此外，你可能正在为Kubernetes中的Dapr开发一个新功能，并且想调试你的代码。
 
-This guide will cover how to use Dapr debugging binaries to debug the Dapr services on your Kubernetes cluster.
+这份指南将展示在Kubernetes集群中如何使用Dapr调试二进制文件对Dapr服务进行调试。
 
-## Debugging Dapr Kubernetes services
+## 调试Dapr Kubernetes服务
 
 ### 前提
 
@@ -20,16 +20,16 @@ This guide will cover how to use Dapr debugging binaries to debug the Dapr servi
 - 设置您的 [开发环境](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
 -  [Helm](https://github.com/helm/helm/releases)
 
-### 1. Build Dapr debugging binaries
+### 1. 构建Dapr调试二进制文件
 
-为了调试 Dapr Kubernetes 服务，需要重新构建建所有的Dapr 二进制文件 和 Docker 镜像来禁用编译器优化。 要做到这一点，请运行以下命令：
+为了调试 Dapr Kubernetes 服务，需要重新构建所有的Dapr 二进制文件 和 Docker 镜像来禁用编译器优化。 要做到这一点，请运行以下命令：
 
 ```bash
 git clone https://github.com/dapr/dapr.git
 cd dapr
 make release GOOS=linux GOARCH=amd64 DEBUG=1
 ```
-> 在Windows下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。 在Windows下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。
+> Windows：下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。 Windows：下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。
 
 In the above command, 'DEBUG' is specified  to '1' to disable compiler optimization. 'GOOS=linux' and 'GOARCH=amd64' are also necessary since the binaries will be packaged into Linux-based Docker image in the next step.
 
