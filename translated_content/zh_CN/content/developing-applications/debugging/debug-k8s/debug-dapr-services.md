@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Debug Dapr control plane on Kubernetes"
-linkTitle: "Dapr control plane (Dapr 控制面板)"
+title: "Kubernetes中的Dapr调试面板"
+linkTitle: "Dapr控制面板"
 weight: 1000
-description: "How to debug Dapr control plane on your Kubernetes cluster"
+description: "在Kubernetes中如何在Dapr控制面板中进行调试"
 ---
 
 ## 概述
