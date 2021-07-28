@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Debug daprd on Kubernetes"
+title: "在Kubernetes模式下调试Dapr"
 linkTitle: "Dapr sidecar"
 weight: 2000
-description: "How to debug the Dapr sidecar (daprd) on your Kubernetes cluster"
+description: "如何在你的Kubernetes集群中调试Dapr sidecar(daprd)"
 ---
 
 
@@ -76,7 +76,7 @@ NAME                       READY   STATUS        RESTARTS   AGE
 nodeapp-78866448f5-pqdtr   1/2     Running       0          14s
 ```
 
-Then use kubectl's `port-forward` command to expose the internal debug port to the external IDE:
+然后使用 kubectl 的 `port-forward` 命令将内部调试端口曝光到外部 IDE ：
 
 ```bash
 $ kubectl port-forward nodeapp-78866448f5-pqdtr 40000:40000
@@ -85,7 +85,7 @@ Forwarding from 127.0.0.1:40000 -> 40000
 Forwarding from [::1]:40000 -> 40000
 ```
 
-All done. Now you can point to port 40000 and start a remote debug session to daprd from your favorite IDE.
+全部完成！ Now you can point to port 40000 and start a remote debug session to daprd from your favorite IDE.
 
 ## 相关链接
 
