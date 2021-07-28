@@ -58,7 +58,7 @@ dapr uninstall -k
 
 我们将使用"helm"来安装Dapr调试二进制文件。 接下来的章节，我们将使用Dapr Operator来演示在Kubernetes环境中如何配置、安装和调试Dapr服务。
 
-首先配置具有这些选项的值文件：
+首先配置名为 `values.yml` 的文件。
 
 ```yaml
 global:
@@ -74,7 +74,7 @@ dapr_operator:
 如果你需要调试Dapr服务的启动阶段， 可以将配置中的 `initialDelaySeconds` 设定到一个很长的时间值，例如："3000" 秒。 除此之外的情况，请将其配置为一个短时间值，如："3"秒。
 {{% /alert %}}
 
-然后进入到"dapr"目录中，如果你没有这个目录，请草诏本指南开始的说明，从GithHub中克隆下来。然后执行下面的命令:
+然后进入到"dapr"目录中，如果你没有这个目录，请参照本指南开始的说明，从GithHub中克隆下来。然后执行下面的命令:
 
 ```bash
 helm install dapr charts/dapr --namespace dapr-system --values values.yml --wait
@@ -104,7 +104,7 @@ Forwarding from 127.0.0.1:40000 -> 40000
 Forwarding from [::1]:40000 -> 40000
 ```
 
-全部完成！ 现在你可以指向40000端口，并从你最喜欢的 IDE 开启远程调试会话。
+全部完成！ 现在您可以从您喜欢的IDE中使用40000端口开启远程调试了。
 
 ## 相关链接
 
