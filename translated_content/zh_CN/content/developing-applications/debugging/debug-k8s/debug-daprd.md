@@ -15,13 +15,13 @@ description: "如何在你的Kubernetes集群中调试Dapr sidecar(daprd)"
 
 ## 前提
 
-- 阅读 [本指南]({{< ref kubernetes-deploy.md >}}) 来学习如何将 Dapr 部署到您的 Kubernetes 集群。
-- 请按照 [本指南]({{< ref "debug-dapr-services.md">}}) ，以构建下一步将部署的 Dapr 调试二进制文件。
+- 阅读 [Kubernetes部署指南]({{< ref kubernetes-deploy.md >}}) 来学习如何将 Dapr 部署到您的 Kubernetes 集群。
+- 请按照 [调试dapr服务指南]({{< ref "debug-dapr-services.md">}}) ，以构建下一步将部署的 Dapr 调试二进制文件。
 
 
 ## 在调试模式下初始化 Dapr
 
-如果 Dapr 已安装在您的 Kubernetes 集群中，请先卸载它：
+如果您的Kubernetes集群中已经安装了Dapr，请先卸载它：
 
 ```bash
 dapr uninstall -k
@@ -36,13 +36,13 @@ global:
    tag: "dev-linux-amd64"
 ```
 
-然后从您的克隆 [dapr/dapr 存储库](https://github.com/dapr/dapr) 中转到"dapr"目录，并执行以下命令：
+然后进入到"dapr"目录中，如果你没有这个目录，请参照本指南开始的说明，从GithHub中克隆下来。然后执行下面的命令:
 
 ```bash
 helm install dapr charts/dapr --namespace dapr-system --values values.yml --wait
 ```
 
-要启用 daprd 调试模式，您需要在应用程序的部署文件中放置额外的注释 `dapr.io/enable-debug` 。 让我们以 [quickstarts/hello-kubernetes](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes) 为例。 修改如下 'deploy/node.yaml'：
+要启用 daprd 的调试模式，您需要在应用程序的部署文件中添加额外的注解 `dapr.io/enable-debug` 。 让我们以 [quickstarts/hello-kubernetes](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes) 为例。 修改如下 'deploy/node.yaml'：
 
 ```diff
 diff --git a/hello-kubernetes/deploy/node.yaml b/hello-kubernetes/deploy/node.yaml
@@ -59,15 +59,15 @@ index 23185a6..6cdb0ae 100644
        - name: node
 ```
 
-The annotation `dapr.io/enable-debug` will hint Dapr injector to inject Dapr sidecar into the debug mode. You can also specify the debug port with annotation `dapr.io/debug-port`, otherwise the default port will be "40000".
+`dapr.io/enable-debug` 注解将提示Dapr注入器将Dapr sidecar注入到调试模式。 您也可以使用注解 `dapr.io/debug-port`指定调试端口，否则默认端口将是“40000”。
 
-Deploy the application with the following command. For the complete guide refer to the [Dapr Kubernetes Quickstart](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes):
+使用下面的命令来部署应用。 完整指南请参照 [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes)。
 
 ```bash
 kubectl apply -f ./deploy/node.yaml
 ```
 
-Figure out the target application's pod name with the following command:
+下面的命令显示目标应用程序的pod名称：
 
 ```bash
 $ kubectl get pods
@@ -85,11 +85,11 @@ Forwarding from 127.0.0.1:40000 -> 40000
 Forwarding from [::1]:40000 -> 40000
 ```
 
-全部完成！ Now you can point to port 40000 and start a remote debug session to daprd from your favorite IDE.
+全部完成！ 现在您可以从您喜欢的IDE中使用40000端口开启远程调试了。
 
 ## 相关链接
 
 - [Kubernetes上的 Dapr 概述]({{< ref kubernetes-overview >}})
 - [将 dapr 部署到 Kubernetes 集群]({{< ref kubernetes-deploy >}})
-- [Debug Dapr services on Kubernetes]({{< ref debug-dapr-services >}})
+- [在Kubernetees中调试Dapr服务]({{< ref debug-dapr-services >}})
 - [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes)
