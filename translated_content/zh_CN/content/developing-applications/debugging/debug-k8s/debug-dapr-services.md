@@ -50,15 +50,15 @@ make docker-push DEBUG=1
 
 ### 3. 安装Dapr调试二进制文件
 
-If Dapr has already been installed in your Kubernetes cluster, uninstall it first:
+如果你的Kubernetes集群中已经安装了Dapr，需要先将它卸载:
 
 ```bash
 dapr uninstall -k
 ```
 
-We will use 'helm' to install Dapr debugging binaries. In the following sections, we will use Dapr operator as an example to demonstrate how to configure, install, and debug Dapr services in a Kubernetes environment.
+我们将使用"helm"来安装Dapr调试二进制文件。 接下来的章节，我们将使用Dapr Operator来演示在Kubernetes环境中如何配置、安装和调试Dapr服务。
 
-First configure a values file with these options:
+首先配置具有这些选项的值文件：
 
 ```yaml
 global:
@@ -71,18 +71,18 @@ dapr_operator:
 ```
 
 {{% alert title="Notice" color="primary" %}}
-If you need to debug the startup time of Dapr services, you need to consider configuring `initialDelaySeconds` to a very long time value, e.g. "3000" seconds. If this is not the case, configure it to a short time value, e.g. "3" seconds.
+如果你需要调试Dapr服务的启动阶段， 可以将配置中的 `initialDelaySeconds` 设定到一个很长的时间值，例如："3000" 秒。 除此之外的情况，请将其配置为一个短时间值，如："3"秒。
 {{% /alert %}}
 
-Then step into 'dapr' directory which's cloned from GitHub in the beginning of this guide if you haven't, and execute the following command:
+然后进入到"dapr"目录中，如果你没有这个目录，请草诏本指南开始的说明，从GithHub中克隆下来。然后执行下面的命令:
 
 ```bash
 helm install dapr charts/dapr --namespace dapr-system --values values.yml --wait
 ```
 
-### 4. Forward debugging port
+### 4. 转发调试端口
 
-To debug the target Dapr service (Dapr operator in this case), its pre-configured debug port needs to be visible to your IDE. In order to achieve this, we need to find the target Dapr service's pod first:
+要调试目标 Dapr 服务 (在这种情况下为 Dapr Operator)，其预配置的调试端口需要是对你的 IDE 可见。 为了做到这一点，我们需要首先找到目标Dapr服务的节点：
 
 ```bash
 $ kubectl get pods -n dapr-system -o wide
@@ -95,7 +95,7 @@ dapr-sentry-68c7d4c7df-sc47x             1/1     Running   0          61s   172.
 dapr-sidecar-injector-56c8f489bb-t2st9   1/1     Running   0          61s   172.17.0.10   minikube   <none>           <none>
 ```
 
-Then use kubectl's `port-forward` command to expose the internal debug port to the external IDE:
+然后使用 kubectl 的 `port-forward` 命令将内部调试端口曝光到外部 IDE ：
 
 ```bash
 $ kubectl port-forward dapr-operator-7878f94fcd-6bfx9 40000:40000 -n dapr-system
@@ -104,7 +104,7 @@ Forwarding from 127.0.0.1:40000 -> 40000
 Forwarding from [::1]:40000 -> 40000
 ```
 
-All done. Now you can point to port 40000 and start a remote debug session from your favorite IDE.
+全部完成！ 现在你可以指向40000端口，并从你最喜欢的 IDE 开启远程调试会话。
 
 ## 相关链接
 
