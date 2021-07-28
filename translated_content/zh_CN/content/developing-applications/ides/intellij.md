@@ -56,7 +56,7 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 > 2019.3或更早版本的配置文件位置不同， 更多详情请参见[这里](https://www.jetbrains.com/help/idea/2019.3/tuning-the-ide.html#config-directory)。
 
-如有需要，请更改路径中的IntelliJ版本。
+如有需要，请在路径中更改IntelliJ版本。
 
 创建或编辑`<CONFIG PATH>/tools/External\ Tools.xml`中的文件（如有需要，请更改路径中的IntelliJ版本）。 如上所述，`<CONFIG PATH>`是操作系统依赖的。
 
