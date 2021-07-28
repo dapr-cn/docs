@@ -31,13 +31,13 @@ make release GOOS=linux GOARCH=amd64 DEBUG=1
 ```
 > Windows：下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。 Windows：下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。
 
-In the above command, 'DEBUG' is specified  to '1' to disable compiler optimization. 'GOOS=linux' and 'GOARCH=amd64' are also necessary since the binaries will be packaged into Linux-based Docker image in the next step.
+在上述命令中，“DEBUG”设定为“1”可禁用编译器优化。 'GOOS=linux' 和 'GOARCH=amd64' 也是必要的，因为二进制文件将在下一步中打包到基于 Linux 的Docker图像。
 
-The binaries could be found under 'dist/linux_amd64/debug' sub-directory under the 'dapr' directory.
+可以在“dapr”目录下的'dist/linux_amd64/debug'子目录下找到二进制文件。
 
-### 2. Build Dapr debugging Docker images
+### 2. 构建Dapr调试Docker镜像
 
-Use the following commands to package the debugging binaries into Docker images. Before this, you need to login your docker.io account, and if you don't have it yet, you may need to consider registering one from "https://hub.docker.com/".
+使用下面的命令将调试二进制文件打包成Docker镜像。 在此之前，你需要登录到你的docker账号，如果还没有docker账号，可以在"https://hub.docker.com/"中注册。
 
 ```bash
 export DAPR_TAG=dev
@@ -46,9 +46,9 @@ docker login
 make docker-push DEBUG=1
 ```
 
-Once the Dapr Docker images are built and pushed onto Docker hub, then you are ready to re-install Dapr in your Kubernetes cluster.
+一旦Dapr镜像构建完成并推送到Docker hub中，你就已经做好了在你的Kubernetes中重新安装Dapr的准备。
 
-### 3. Install Dapr debugging binaries
+### 3. 安装Dapr调试二进制文件
 
 If Dapr has already been installed in your Kubernetes cluster, uninstall it first:
 
