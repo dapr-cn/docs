@@ -6,15 +6,15 @@ weight: 4500
 description: "Choose which Dapr sidecar APIs are available to the app"
 ---
 
-In certain scenarios such as zero trust networks or when exposing the Dapr sidecar to external traffic through a frontend, it's recommended to only enable the Dapr sidecar APIs that are being used by the app. Doing so reduces the attack surface and helps keep the Dapr APIs scoped to the actual needs of the application.
+在某些情况下，如零信任网络或当通过前端将 Dapr sidecar 暴露在外部流量中时，建议仅启用应用正在使用的 Dapr sidecar API。 这样做可减少攻击面，并有助于将 Dapr API 范围控制在应用程序的实际需求范围内。
 
-Dapr allows developers to control which APIs are accessible to the application by setting an API allow list using a [Dapr Configuration](({{<ref "configuration-overview.md">}})).
+Dapr 允许开发人员使用 [Dapr 配置](({{<ref "configuration-overview.md">}}))设置 API 允许列表来控制应用程序可访问的 API。
 
-### Default behavior
+### 默认行为
 
-If an API allow list section is not specified, the default behavior is to allow access to all Dapr APIs. Once an allow list is set, only the specified APIs are accessible.
+如果未指定 API 允许列表部分，则默认行为是允许访问所有 Dapr API。 设置允许列表后，只能访问指定的 API。
 
-For example, the following configuration enables all APIs for both HTTP and gRPC:
+例如，以下配置支持 HTTP 和 gRPC 的所有 API：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -27,9 +27,9 @@ spec:
     samplingRate: "1"
 ```
 
-### Enabling specific HTTP APIs
+### 启用特定的 HTTP API
 
-The following example enables the state `v1.0` HTTP API and block all the rest:
+以下示例使状态 `v1.0` HTTP API 并阻止所有其他：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -45,9 +45,9 @@ spec:
       protocol: http
 ```
 
-### Enabling specific gRPC APIs
+### 启用特定的gRPC API
 
-The following example enables the state `v1` gRPC API and block all the rest:
+以下示例使状态 `v1` gRPC API 并阻止所有其他：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -63,18 +63,18 @@ spec:
       protocol: grpc
 ```
 
-### List of Dapr APIs
+### Dapr API 列表
 
-The `name` field takes the name of the Dapr API you would like to enable.
+`name` 字段是您想要启用的 Dapr API 的名称。
 
-See this list of values corresponding to the different Dapr APIs:
+参阅此与不同 Dapr API 相对应的值列表：
 
-| Name         | Dapr API                                                    |
-| ------------ | ----------------------------------------------------------- |
-| state（状态）    | [State（状态）]({{< ref state_api.md>}})                        |
-| invoke       | [Service Invocation]({{< ref service_invocation_api.md >}}) |
-| 秘密           | [秘密]({{< ref secrets_api.md >}})                            |
-| bindings（绑定） | [Output Bindings]({{< ref bindings_api.md >}})              |
-| publish      | [发布/订阅]({{< ref pubsub.md >}})                              |
-| actors       | [Actors]({{< ref actors_api.md >}})                         |
-| metadata     | [元数据（Metadata）]({{< ref metadata_api.md >}})                |
+| Name     | Dapr API                                      |
+| -------- | --------------------------------------------- |
+| state    | [State（状态）]({{< ref state_api.md>}})          |
+| invoke   | [服务调用]({{< ref service_invocation_api.md >}}) |
+| secrets  | [密钥]({{< ref secrets_api.md >}})              |
+| bindings | [输出绑定]({{< ref bindings_api.md >}})           |
+| publish  | [发布/订阅]({{< ref pubsub.md >}})                |
+| actors   | [Actors]({{< ref actors_api.md >}})           |
+| metadata | [元数据（Metadata）]({{< ref metadata_api.md >}})  |
