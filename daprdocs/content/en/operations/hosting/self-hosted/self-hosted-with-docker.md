@@ -99,7 +99,7 @@ Each container will receive a unique IP on that network and be able to communica
 
 [Docker Compose](https://docs.docker.com/compose/) can be used to define multi-container application configurations. If you wish to run multiple apps with Dapr sidecars locally without Kubernetes then it is recommended to use a Docker Compose definition (`docker-compose.yml`).
 
-The syntax and tooling of Docker Compose is outside the scope of this article, however, it is recommended you refer to the [offical Docker documentation](https://docs.docker.com/compose/) for further details.
+The syntax and tooling of Docker Compose is outside the scope of this article, however, it is recommended you refer to the [official Docker documentation](https://docs.docker.com/compose/) for further details.
 
 In order to run your applications using Dapr and Docker Compose you'll need to define the sidecar pattern in your `docker-compose.yml`. For example:
 
@@ -148,6 +148,10 @@ To further learn how to run Dapr with Docker Compose, see the [Docker-Compose Sa
 
 If your deployment target is Kubernetes please use Dapr's first-class integration. Refer to the
 [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}}).
+
+## Name resolution
+
+Dapr by default uses mDNS as the name resolution component in self-hosted mode for service invocation. If you are running Dapr on virtual machines or where mDNS is not available, then you can use the [HashiCorp Consul]({{< ref setup-nr-consul.md >}}) component for name resolution.
 
 ## Docker images
 

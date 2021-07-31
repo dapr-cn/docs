@@ -311,8 +311,8 @@ name | The name of the reminder to delete.
 #### Examples
 
 ```shell
-curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
-  -X "Content-Type: application/json"
+curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
+  -H "Content-Type: application/json"
 ```
 
 ### Create actor timer
@@ -381,7 +381,7 @@ Deletes a timer for an actor.
 
 #### HTTP Request
 
-```http
+```
 DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<name>
 ```
 
@@ -404,8 +404,8 @@ name | The name of the timer to delete.
 > Note, all URL parameters are case-sensitive.
 
 ```shell
-curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
-  -X "Content-Type: application/json"
+curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
+  -H "Content-Type: application/json"
 ```
 
 ## Dapr calling to user service code

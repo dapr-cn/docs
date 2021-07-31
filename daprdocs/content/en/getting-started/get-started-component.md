@@ -55,7 +55,7 @@ spec:
     value: ":"
 ```
 
-You can see that the above file definition has a `type: secretstores.local.file` which tells Dapr to use the local file component as a secret store. The metadata fields provide component specific information needed to work with this component (in this case, the path to the secret store JSON)
+You can see that the above file definition has a `type: secretstores.local.file` which tells Dapr to use the local file component as a secret store. The metadata fields provide component specific information needed to work with this component (in this case, the path to the secret store JSON is relative to where you call `dapr run` from.)
 
 ## Step 3: Run the Dapr sidecar
 
@@ -64,6 +64,8 @@ Run the following command to launch a Dapr sidecar that will listen on port 3500
 ```bash
 dapr run --app-id myapp --dapr-http-port 3500 --components-path ./my-components
 ```
+
+> If you encounter a error message stating the app ID is already in use, it may be that the sidecar you ran in the previous step is still running. Make sure you stop the sidecar before running the above command (e.g. using "Control-C").
 
 ## Step 4: Get a secret
 
