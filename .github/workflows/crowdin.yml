@@ -41,8 +41,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: v1.2/translate_site
+          branch: l10n_crowdin_action
           base: v1.2/translate_site
           commit-message: Update content
           committer: dapr-cn <dapr-cn@hotmail.com>
