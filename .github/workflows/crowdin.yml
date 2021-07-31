@@ -43,6 +43,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: v1.2/translate_site
+          base: v1.2/translate_site
           commit-message: Update content
           committer: dapr-cn <dapr-cn@hotmail.com>
           signoff: false
