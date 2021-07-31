@@ -2,7 +2,7 @@ name: Crowdin Action
 
 on:
   schedule:
-    - cron: "10 * * * *"
+    - cron: "*/10 * * * *"
   push:
     branches: [v*/translate_site]
 
