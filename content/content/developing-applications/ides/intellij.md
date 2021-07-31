@@ -80,7 +80,7 @@ Add a new `<tool></tool>` entry:
 </toolSet>
 ```
 
-Optionally, you may also create a new entry for a sidecar tool that can be reused accross many projects:
+Optionally, you may also create a new entry for a sidecar tool that can be reused across many projects:
 
 ```xml
 <toolSet name="External Tools">
@@ -146,4 +146,8 @@ Happy debugging!
 
 ## Related links
 
+<!-- IGNORE_LINKS -->
+
 - [Change](https://intellij-support.jetbrains.com/hc/en-us/articles/206544519-Directories-used-by-the-IDE-to-store-settings-caches-plugins-and-logs) in IntelliJ configuration directory location
+
+<!-- END_IGNORE -->
