@@ -31,9 +31,9 @@ spec:
 
 ## 绑定支持
 
-此组件支持以下 [HTTP 方法/谓词](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) **输出绑定** ：
+This component supports **output binding** with the following [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html):
 
-- `create` : 为了向后的兼容，并被当作一个 post 请求处理
+- `create` : For backward compatibility and treated like a post
 - `get` : 读数据或者记录
 - `head` : 连接服务器但不返回响应正文
 - `post` ： 通常用于创建记录或发送命令
@@ -83,7 +83,7 @@ spec:
 | ---------- |:--:| -------------------------------------------------------------------- | --------------------------- |
 | statusCode | Y  | [HTTP 状态代码](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
 | status     | Y  | 状态说明                                                                 | `"200 OK"`, `"201 Created"` |
-| Headers*   | N  | 任何第一字母为大写字母的字段均作为请求头                                                 | `"Content-Type"`            |
+| Headers*   | N  | 任何第一字母为大写字母的字段均作为请求头发送                                               | `"Content-Type"`            |
 
 #### Example
 
@@ -132,7 +132,7 @@ curl -d '{ "operation": "get", "metadata": { "path": "/things/1234" } }' \
 要将数据发送到 HTTP 终结点，请调用带有 `POST`的 HTTP 绑定， `PUT`，或 `PATCH` 方法和以下 JSON 正文：
 
 {{% alert title="Note" color="primary" %}}
-以大写字母开头的任何元数据字段都作为请求头传递。 例如，默认 content type 是 `application/json; charset=utf-8`. 这可以设置 `Content-Type` 元数据字段来覆盖。
+以大写字母开头的任何元数据字段都作为请求头传递。 例如，默认 content type 是 `application/json; charset=utf-8`. This can be overridden be setting the `Content-Type` metadata field.
 {{% /alert %}}
 
 ```json

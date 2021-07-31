@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Name resolution component specs"
+title: "Name resolution provider component specs"
 linkTitle: "Name resolution"
 weight: 5000
 description: The supported name resolution providers that interface with Dapr service invocation
@@ -19,16 +19,15 @@ The following components provide name resolution for the service invocation buil
 
 ### 自托管
 
-| Name | 状态 | 组件版本 | 自从  |
-| ---- |:--:|:----:|:---:|
-| mDNS | GA |  v1  | 1.0 |
+| Name                           | 状态 | 组件版本 | 自从  |
+| ------------------------------ |:--:|:----:|:---:|
+| [mDNS]({{< ref nr-mdns.md >}}) | GA |  v1  | 1.0 |
 
 ### Kubernetes
 
-| Name       | 状态 | 组件版本 | 自从  |
-| ---------- |:--:|:----:|:---:|
-| Kubernetes | GA |  v1  | 1.0 |
-
+| Name                                       | 状态 | 组件版本 | 自从  |
+| ------------------------------------------ |:--:|:----:|:---:|
+| [Kubernetes]({{< ref nr-kubernetes.md >}}) | GA |  v1  | 1.0 |
 
 ## Definitions
 

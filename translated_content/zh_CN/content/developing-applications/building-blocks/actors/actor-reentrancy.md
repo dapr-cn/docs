@@ -10,7 +10,7 @@ description: 了解更多关于 actor 可重入性
 Actor可重入性当前处于 [preview]({{< ref preview-features.md >}})状态。
 {{% /alert %}}
 
-## Actor可重入性
+## Actor reentrancy
 虚拟 actor 模式的核心原则是 actor 执行的单线程性质。 在具有可重入性之前，这个性质使Dapr运行时锁定了actor的任意请求 。 第二个请求要到第一个请求完成后才能开始。 这种行为意味着 actor 不能调用自己，或让另一个 actor 调用它，即使它是同一链的一部分。 可重入性通过允许来自同一链或同一上下文的请求重新进入已锁定的actor来解决这个问题。 可重入性的调用链示例如下：
 
 ```

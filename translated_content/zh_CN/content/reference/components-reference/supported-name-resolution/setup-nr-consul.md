@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "HashiCorp Consul"
+title: "HashiCorp Consul name resolution provider spec"
 linkTitle: "HashiCorp Consul"
 description: 详细介绍了关于 HashiCorp Consul 服务发现组件的信息
---- 
+---
 
 ## 配置格式
 
@@ -29,21 +29,21 @@ spec:
 
 ## 行为
 
-在启动时，Consul组件将验证与配置的（或默认的）代理的连接，或者如果配置了服务，则注册该服务。 名称解析接口不能满足 "shutdown "的模式，所以如果使用 Dapr 向 Consul 注册服务，请考虑它不会取消注册服务。
+On `init` the Consul component either validates the connection to the configured (or default) agent or registers the service if configured to do so. The name resolution interface does not cater for an "on shutdown" pattern so consider this when using Dapr to register services to Consul as it does not deregister services.
 
-该组件通过过滤健康的服务来解决目标应用程序，并在元数据中寻找`DAPR_PORT`，以检索Dapr sidecar端口（该项是可配置的）。 Consul `service.meta`在`service.port`之上使用，以便不干扰现有的Consul数据。
+该组件通过过滤健康的服务来解决目标应用程序，并在元数据中寻找`DAPR_PORT`，以检索Dapr sidecar端口（该项是可配置的）。 Consul `service.meta` is used over `service.port` so as to not interfere with existing Consul estates.
 
 
 ## Spec 配置字段
 
-截至发稿时，配置规格已固定为Consul api的v1.3.0版本
+The configuration spec is fixed to v1.3.0 of the Consul API
 
 | 字段                   | 必填 |                                                                                                                数据类型 | 详情                                                                                                             | 示例                                          |
 | -------------------- |:--:| -------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| Client               | N  |                                     [*api.Config](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#Config) | 配置客户端与 Consul 代理的连接。 如果留空，它将使用 sdk 默认值，在这种情况下这只是 `127.0.0.1:8500`                                              | `10.0.4.4:8500`                             |
+| 客户端                  | N  |                                     [*api.Config](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#Config) | 配置客户端与 Consul 代理的连接。 如果留空，它将使用 sdk 默认值，在这种情况下这只是 `127.0.0.1:8500`                                              | `10.0.4.4:8500`                             |
 | QueryOptions         | N  |                         [*api.QueryOptions](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#QueryOptions) | 配置用于解决健康服务的查询，如果为空白，它将默认为 `UseCache:true`                                                                      | `UseCache: false`, `Datacenter: "myDC"`     |
 | Checks               | N  |             [[]*api.AgentServiceCheck](https://pkg.go.dev/github.com/hashicorp/consul/api@v1.3.0#AgentServiceCheck) | 当进行注册服务时，配置健康检查。 如果为空白，它将默认到 Dapr sidecar 健康端点                                                                 | 查看 [示例配置](#sample-configurations)           |
-| Tags                 | N  |                                                                                                          `[]string` | 在注册服务服务时包含的额外标签                                                                                                | `- "dapr"`                                  |
+| 标签                   | N  |                                                                                                          `[]string` | 在注册服务服务时包含的额外标签                                                                                                | `- "dapr"`                                  |
 | Meta                 | N  |                                                                                                 `map[string]string` | 在注册服务服务时包含的额外 metadata                                                                                         | `DAPR_METRICS_PORT: "${DAPR_METRICS_PORT}"` |
 | DaprPortMetaKey      | N  |                                                                                                            `string` | 用于在服务解析过程中从Consul服务元数据中获取Dapr sidecar 端口的 key，它也将用于在注册时在元数据中设置Dapr sidecar 端口。 如果留空，它将默认为 `DAPR_PORT`          | `"DAPR_TO_DAPR_PORT"`                       |
 | SelfRegister         | N  |                                                                                                              `bool` | 控制 Dapr 是否会向 Consul 注册服务。 名称解析接口不能满足 "shutdown "的模式，所以如果使用 Dapr 向 Consul 注册服务，请考虑它不会取消注册服务。 如果留空，它将默认为 `false` | `true`                                      |
@@ -84,11 +84,11 @@ spec:
       checks:
         - name: "Dapr Health Status"
           checkID: "daprHealth:${APP_ID}"
-          interval: "15s",
+          interval: "15s"
           http: "http://${HOST_ADDRESS}:${DAPR_HTTP_PORT}/v1.0/healthz"
         - name: "Service Health Status"
           checkID: "serviceHealth:${APP_ID}"
-          interval: "15s",
+          interval: "15s"
           http: "http://${HOST_ADDRESS}:${APP_PORT}/health"
       tags:
         - "dapr"
@@ -105,7 +105,7 @@ spec:
 
 ### 高级注册
 
-配置高级注册后，您可以完全控制注册时可能的所有属性。
+Configuring the advanced registration gives you full control over setting all the Consul properties possible when registering.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -129,7 +129,7 @@ spec:
         check:
           name: "Dapr Health Status"
           checkID: "daprHealth:${APP_ID}"
-          interval: "15s",
+          interval: "15s"
           http: "http://${HOST_ADDRESS}:${DAPR_HTTP_PORT}/v1.0/healthz"
         meta:
           DAPR_METRICS_PORT: "${DAPR_METRICS_PORT}"
@@ -142,11 +142,11 @@ spec:
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 请查看此处的 [自托管指南](https://learn.hashicorp.com/collections/consul/getting-started)
+HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 Check out the [self-hosted guide here](https://learn.hashicorp.com/collections/consul/getting-started)
 {{% /codetab %}}
 
 {{% codetab %}}
-HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 请在此查看 [Kubernetes 指南](https://learn.hashicorp.com/collections/consul/gs-consul-service-mesh)
+HashiCorp提供了关于如何为不同主机模型搭建 Consul 的深度指南。 Check out the [Kubernetes guide here](https://learn.hashicorp.com/collections/consul/gs-consul-service-mesh)
 {{% /codetab %}}
 
 {{< /tabs >}}

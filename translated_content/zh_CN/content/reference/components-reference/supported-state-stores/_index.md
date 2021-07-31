@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "State store component specs"
-linkTitle: "状态存储"
+linkTitle: "State stores"
 description: "Dapr支持的状态存储组件"
 weight: 1000
 aliases:

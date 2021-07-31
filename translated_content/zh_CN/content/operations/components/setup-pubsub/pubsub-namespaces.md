@@ -24,7 +24,7 @@ description: "多个命名空间下使用Dapr Pub/Sub"
 | 资源                      | namespace-a | namespace-b |
 | ----------------------- | ----------- | ----------- |
 | Redis master            | X           |             |
-| Redis slave             | X           |             |
+| Redis replicas          | X           |             |
 | Dapr's PubSub component | X           | X           |
 | Node subscriber         | X           |             |
 | Python subscriber       | X           |             |

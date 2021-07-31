@@ -20,16 +20,16 @@ Dapr CLI 提供了使用 slim init 初始化 Dapr 的选项，而无需默认创
 dapr init --slim
 ```
 
-在此模式下安装了两个不同的二进制文件 `daprd` 和 `placement`。 The `placement` binary is needed to enable [actors]({{< ref "actors-overview.md" >}}) in a Dapr self-hosted installation.
+在此模式下安装了两个不同的二进制文件 `daprd` 和 `placement`。 `placement` 需要在 Dapr 自托管安装中用于启动 [actors]({{< ref "actors-overview.md" >}}) 。
 
-在此模式下，不会为状态管理或发布/订阅安装任何默认组件（如 Redis）。 This means, that aside from [Service Invocation]({{< ref "service-invocation-overview.md" >}}), no other building block functionality is available on install out of the box. 用户可以自由设置自己的环境和自定义组件。 此外，如果按照以下部分所述配置状态存储，基于 actor 的服务就可以调用。
+在此模式下，不会为状态管理或发布/订阅安装任何默认组件（如 Redis）。 这意味着，除了 [服务调用]({{< ref "service-invocation-overview.md" >}})，在现成可用的情况下，没有其他构建块功能可用。 用户可以自由设置自己的环境和自定义组件。 此外，如果按照以下部分所述配置状态存储，基于 actor 的服务就可以调用。
 
 ## 调用逻辑
 有关如何在此方式下执行服务调用的示例，请参阅 [此示例](https://github.com/dapr/samples/tree/master/hello-dapr-slim)。
 
 ## 启用状态管理或发布/订阅
 
-See configuring Redis in self-hosted mode [without docker](https://redis.io/topics/quickstart) to enable a local state store or pub/sub broker for messaging.
+请参阅 " 以自托管方式 [配置 Redis (不使用 docker](https://redis.io/topics/quickstart)) " 启用本地状态存储或发布/订阅代理以通信。
 
 ## 启用 actors
 

@@ -39,7 +39,6 @@ omsagent-smtk7                                                    1/1     Runnin
 
 ```yaml
 ...
-  ...
   prometheus-data-collection-settings: |-
     [prometheus_data_collection_settings.cluster]
         interval = "1m"

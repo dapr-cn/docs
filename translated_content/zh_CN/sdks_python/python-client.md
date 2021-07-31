@@ -33,11 +33,16 @@ The Python SDK allows you to interface with all of the [Dapr building blocks]({{
 from dapr.clients import DaprClient
 
 with DaprClient() as d:
-    resp = d.invoke_service(id='service-to-invoke', method='method-to-invoke', data='{"message":"Hello World"}')
+    # invoke a method (gRPC or HTTP GET)    
+    resp = d.invoke_method('service-to-invoke', 'method-to-invoke', data='{"message":"Hello World"}')
+
+    # for other HTTP verbs the verb must be specified
+    # invoke a 'POST' method (HTTP only)    
+    resp = d.invoke_method('service-to-invoke', 'method-to-invoke', data='{"id":"100", "FirstName":"Value", "LastName":"Value"}', http_verb='post')
 ```
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/invoke-simple) for code samples and instructions to try out service invocation
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/invoke-simple) for code samples and instructions to try out service invocation
 
 ### 保存 & 获取 应用程序状态
 
@@ -56,9 +61,11 @@ with DaprClient() as d:
 ```
 
 - 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/state_store) for code samples and instructions to try out state management
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/state_store) for code samples and instructions to try out state management
 
-### 发布消息
+### Publish & subscribe to messages
+
+##### 发布消息
 
 ```python
 from dapr.clients import DaprClient
@@ -67,8 +74,24 @@ with DaprClient() as d:
     resp = d.publish_event(pubsub_name='pubsub', topic='TOPIC_A', data='{"message":"Hello World"}')
 ```
 
+##### Subscribe to messages
+
+```python
+from cloudevents.sdk.event import v1
+from dapr.ext.grpc import App
+import json
+
+app = App()
+
+@app.subscribe(pubsub_name='pubsub', topic='TOPIC_A')
+def mytopic(event: v1.Event) -> None:
+    data = json.loads(event.Data())
+    print(f'Received: id={data["id"]}, message="{data ["message"]}"' 
+          ' content_type="{event.content_type}"',flush=True)
+```
+
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/pubsub-simple) for code samples and instructions to try out pub/sub
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/pubsub-simple) for code samples and instructions to try out pub/sub
 
 ### 与输出绑定交互
 
@@ -80,7 +103,7 @@ with DaprClient() as d:
 ```
 
 - 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/invoke-binding) for code samples and instructions to try out output bindings
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/invoke-binding) for code samples and instructions to try out output bindings
 
 ### 检索密钥
 
@@ -92,7 +115,7 @@ with DaprClient() as d:
 ```
 
 - 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples/secret_store) for code samples and instructions to try out retrieving secrets
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/secret_store) for code samples and instructions to try out retrieving secrets
 
 ## 相关链接
-- [Python SDK examples](https://github.com/dapr/python-sdk/tree/daprdocs-setup/examples)
+- [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples)

@@ -18,7 +18,7 @@ Gets the Dapr sidecar information provided by the Metadata Endpoint.
 
 ### HTTP 请求
 
-```http
+```
 GET http://localhost:<daprPort>/v1.0/metadata
 ```
 
@@ -42,7 +42,7 @@ GET http://localhost:<daprPort>/v1.0/metadata
 | Name                   | 数据类型                                                                  | 说明                                                                             |
 | ---------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | id                     | string                                                                | Application ID                                                                 |
-| actors                 | [Metadata API Response Registered Actor](#metadataapiresponseactor)[] | A json encoded array of Registered Actors metadata.                            |
+| actor                  | [Metadata API Response Registered Actor](#metadataapiresponseactor)[] | A json encoded array of Registered Actors metadata.                            |
 | extended.attributeName | string                                                                | List of custom attributes as key-value pairs, where key is the attribute name. |
 | 组件                     | [Metadata API Response Component](#metadataapiresponsecomponent)[]    | A json encoded array of loaded components metadata.                            |
 
@@ -103,7 +103,7 @@ Adds a custom attribute to the Dapr sidecar information stored by the Metadata E
 
 ### HTTP 请求
 
-```http
+```
 PUT http://localhost:<daprPort>/v1.0/metadata/attributeName
 ```
 

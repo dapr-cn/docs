@@ -58,7 +58,7 @@ If you wish to use Redis as an [actor state store]({{< ref "state_api.md#configu
 | keyLength         | N  | The max length of key. Used along with `"string"` keytype. 默认值为 `"200"`                                                                                            | `"200"`                                                                                             |
 | schema            | N  | The schema to use. Defaults to `"dbo"`                                                                                                                             | `"dapr"`,`"dbo"`                                                                                    |
 | indexedProperties | N  | List of IndexedProperties.                                                                                                                                         | `"[{"ColumnName": "column", "Property": "property", "Type": "type"}]"`                              |
-| actorStateStore   | N  | Indicates that Dapr should configure this component for the actor state store ([more information]({{< ref "state_api.md#configuring-state-store-for-actors" >}})). | `“true”`                                                                                            |
+| actorStateStore   | N  | Indicates that Dapr should configure this component for the actor state store ([more information]({{< ref "state_api.md#configuring-state-store-for-actors" >}})). | `"true"`                                                                                            |
 
 
 ## Create Azure SQL instance

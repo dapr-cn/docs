@@ -13,7 +13,7 @@ description: "使用密钥存储构建块安全地获取密钥"
 在获取应用程序代码中的密钥之前，您必须配置一个密钥存储组件。 就本指南而言，作为一个示例，您将配置一个本地的密钥存储，该仓库使用本地的 JSON 文件来存储密钥。
 > 注意：此示例中使用的组件未被加密且不推荐用于生产部署。 您可以在[这里]({{<ref supported-secret-stores >}})找到其它替代项。
 
-创建一个名为 `secrets.json` 的文件，包含以下内容：
+创建一个名为 `mysecrets.json` 的文件，包含以下内容：
 
 ```json
 {
@@ -40,6 +40,8 @@ spec:
 ```
 
 请确保用您刚刚创建的 JSON 文件的路径替换 `<密钥路径>`。
+> Note: the path to the secret store JSON is relative to where you call `dapr run` from.
+
 
 要配置不同类型的密钥存储，请参阅关于 [如何配置密钥存储]({{<ref setup-secret-store>}}) 并审阅 [支持的密钥存储]({{<ref supported-secret-stores >}}) 查看不同密钥存储解决方案所需的具体细节。
 ## 获取密钥
@@ -47,7 +49,7 @@ spec:
 现在运行 Dapr sidecar (在没有应用程序的情况下)
 
 ```bash
-dapr run --app-id my-app --dapr-http-port 3500 --components-path ./components
+dapr run --app-id my-app --port 3500 --components-path ./components
 ```
 
 现在你可以通过使用密钥 API 调用 Dapr sidecar 来获得密钥：

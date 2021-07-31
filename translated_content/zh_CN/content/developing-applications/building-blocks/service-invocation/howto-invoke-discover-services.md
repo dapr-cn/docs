@@ -57,7 +57,7 @@ spec:
         dapr.io/app-port: "5000"
 ...
 ```
-*如果应用程序使用 SSL 连接，那么可以使用 `app-ssl: "true"` 注解 (完整列表 [此处]({{< ref kubernetes-annotations.md >}})) 告知 Dapr 在不安全的 SSL 连接上调用应用程序。*
+*如果应用程序使用 SSL 连接，那么可以使用 `app-ssl: "true"` 注解 (完整列表 [此处]({{< ref arguments-annotations-overview.md >}})) 告知 Dapr 在不安全的 SSL 连接上调用应用程序。*
 
 {{% /codetab %}}
 
@@ -139,7 +139,7 @@ curl http://localhost:3500/v1.0/invoke/cart.production/method/add -X POST
 
 有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 篇文章。
 
- 相关链接
+ ## Related Links
 
 * [服务调用概述]({{< ref service-invocation-overview.md >}})
 * [服务调用 API 规范]({{< ref service_invocation_api.md >}})

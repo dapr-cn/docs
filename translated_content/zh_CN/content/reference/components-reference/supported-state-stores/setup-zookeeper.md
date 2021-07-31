@@ -44,7 +44,7 @@ spec:
 | servers           | Y  | Comma delimited list of servers                                | `"zookeeper.default.svc.cluster.local:2181"` |
 | sessionTimeout    | Y  | The session timeout value                                      | `"5s"`                                       |
 | maxBufferSize     | N  | The maximum size of buffer. 默认值为 `"1048576"`                   | `"1048576"`                                  |
-| maxConnBufferSize | N  | The maximum size of connection buffer. Defautls to `"1048576`" | `"1048576"`                                  |
+| maxConnBufferSize | N  | The maximum size of connection buffer. Defaults to `"1048576`" | `"1048576"`                                  |
 | keyPrefixPath     | N  | The key prefix path in Zookeeper. 无默认值                         | `"dapr"`                                     |
 
 ## Setup Zookeeper

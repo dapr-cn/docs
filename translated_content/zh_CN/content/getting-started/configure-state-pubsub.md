@@ -30,7 +30,7 @@ Dapr可以使用任何Redis实例--无论是在本地开发机器上的容器化
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
-作为初始化过程的一部分，Dapr CLI 会自动在自托管环境中安装 Redis。 您都已设置完毕，可以跳转到\[下一步\](下一步)
+作为初始化过程的一部分，Dapr CLI 会自动在自托管环境中安装 Redis。 You are all set and can skip to the [next steps](#next-steps)
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -52,8 +52,8 @@ Dapr可以使用任何Redis实例--无论是在本地开发机器上的容器化
     $ kubectl get pods
     NAME             READY   STATUS    RESTARTS   AGE
     redis-master-0   1/1     Running   0          69s
-    redis-slave-0    1/1     Running   0          69s
-    redis-slave-1    1/1     Running   0          22s
+    redis-replicas-0    1/1     Running   0          69s
+    redis-replicas-1    1/1     Running   0          22s
     ```
 
 请注意，主机名是 `redis-master.default.svc.cluster.local:6379`，Kubernetes 密钥 `redis`是自动创建的。
@@ -127,7 +127,7 @@ spec:
       key: redis-password
 ```
 
-这个例子使用的是用上面的说明设置集群时创建的 kubernetes 密钥。
+This example uses the kubernetes secret that was created when setting up a cluster with the above instructions.
 
 {{% alert title="Other stores" color="primary" %}}
 If using a state store other than Redis, refer to the [supported state stores]({{< ref supported-state-stores >}}) for information on what options to set.
@@ -155,7 +155,7 @@ spec:
       key: redis-password
 ```
 
-这个例子使用的是用上面的说明设置集群时创建的 kubernetes 密钥。
+This example uses the kubernetes secret that was created when setting up a cluster with the above instructions.
 
 {{% alert title="Other stores" color="primary" %}}
 If using a pub/sub message broker other than Redis, refer to the [supported pub/sub message brokers]({{< ref supported-pubsub >}}) for information on what options to set.

@@ -22,38 +22,38 @@ spec:
   metadata:
   - name: connectionString # Required
     value: "Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}"
-  - name: timeoutInSec # Optional
-    value: 60
-  - name: handlerTimeoutInSec # Optional
-    value: 60
-  - name: disableEntityManagement # Optional
-    value: "false"
-  - name: maxDeliveryCount # Optional
-    value: 3
-  - name: lockDurationInSec # Optional
-    value: 60
-  - name: lockRenewalInSec # Optional
-    value: 20
-  - name: maxActiveMessages # Optional
-    value: 2000
-  - name: maxActiveMessagesRecoveryInSec # Optional
-    value: 2
-  - name: maxConcurrentHandlers # Optional
-    value: 10
-  - name: prefetchCount # Optional
-    value: 5
-  - name: defaultMessageTimeToLiveInSec # Optional
-    value: 10
-  - name: autoDeleteOnIdleInSec # Optional
-    value: 10
-  - name: maxReconnectionAttempts # Optional
-    value: 30
-  - name: connectionRecoveryInSec # Optional
-    value: 2
-  - name: publishMaxRetries # Optional
-    value: 5
-  - name: publishInitialRetryInternalInMs # Optional
-    value: 500
+  # - name: timeoutInSec # Optional
+  #   value: 60
+  # - name: handlerTimeoutInSec # Optional
+  #   value: 60
+  # - name: disableEntityManagement # Optional
+  #   value: "false"
+  # - name: maxDeliveryCount # Optional
+  #   value: 3
+  # - name: lockDurationInSec # Optional
+  #   value: 60
+  # - name: lockRenewalInSec # Optional
+  #   value: 20
+  # - name: maxActiveMessages # Optional
+  #   value: 2000
+  # - name: maxActiveMessagesRecoveryInSec # Optional
+  #   value: 2
+  # - name: maxConcurrentHandlers # Optional
+  #   value: 10
+  # - name: prefetchCount # Optional
+  #   value: 5
+  # - name: defaultMessageTimeToLiveInSec # Optional
+  #   value: 10
+  # - name: autoDeleteOnIdleInSec # Optional
+  #   value: 10
+  # - name: maxReconnectionAttempts # Optional
+  #   value: 30
+  # - name: connectionRecoveryInSec # Optional
+  #   value: 2
+  # - name: publishMaxRetries # Optional
+  #   value: 5
+  # - name: publishInitialRetryInternalInMs # Optional
+  #   value: 500
 ```
 
 > __注意：__上述设置在使用该组件的所有主题中是通用的。
@@ -66,7 +66,7 @@ spec:
 
 | 字段                              | 必填 | 详情                                                                                                                         | Example                                                                                                                                        |
 | ------------------------------- |:--:| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| connectionString                | Y  | Connection-string for the Service Bus                                                                                      | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
+| connectionString                | Y  | Shared access policy connection-string for the Service Bus                                                                 | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
 | timeoutInSec                    | N  | 发送消息和其他管理操作的超时时间。 默认值：`60`                                                                                                 | `30`                                                                                                                                           |
 | handlerTimeoutInSec             | N  | 调用应用handler的超时。 # 可选的。 默认值：`60`                                                                                            | `30`                                                                                                                                           |
 | disableEntityManagement         | N  | 设置为 "true "时，主题和订阅不会自动创建。 默认值为 `"false"`                                                                                   | `"true"`, `"false"`                                                                                                                            |
@@ -79,7 +79,7 @@ spec:
 | prefetchCount                   | N  | 定义预取消息的数量(用于高吞吐量/低延迟场景)                                                                                                    | `5`                                                                                                                                            |
 | defaultMessageTimeToLiveInSec   | N  | 默认消息存活时间                                                                                                                   | `10`                                                                                                                                           |
 | autoDeleteOnIdleInSec           | N  | 自动删除消息前等待的时间(秒)                                                                                                            | `10`                                                                                                                                           |
-| maxReconnectionAttempts         | N  | Defines the maximum number of reconnect attempts. 默认值：`30`                                                                 | `30`                                                                                                                                           |
+| maxReconnectionAttempts         | N  | Defines the maximum number of reconnect attempts. Default: `30`                                                            | `30`                                                                                                                                           |
 | connectionRecoveryInSec         | N  | Time in seconds to wait between connection recovery attempts. Defaults: `2`                                                | `2`                                                                                                                                            |
 | publishMaxRetries               | N  | The max number of retries for when Azure Service Bus responds with "too busy" in order to throttle messages. Defaults: `5` | `5`                                                                                                                                            |
 | publishInitialRetryInternalInMs | N  | Time in milliseconds for the initial exponential backoff when Azure Service Bus throttle messages. Defaults: `500`         | `500`                                                                                                                                          |

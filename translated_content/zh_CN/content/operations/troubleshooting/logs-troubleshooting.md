@@ -61,7 +61,7 @@ dapr run node myapp.js
 == DAPR == 2019/09/05 12:26:43 redis: connecting to localhost:6379
 == DAPR == 2019/09/05 12:26:43 redis: connected to localhost:6379 (localAddr: [::1]:56734, remAddr: [::1]:6379)
 == DAPR == time="2019-09-05T12:26:43-07:00" level=warning msg="failed to init input bindings: app channel not initialized"
-== DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actor runtime started.   actor scan interval: 30s"
+== DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actor runtime started. actor idle timeout: 1h0m0s. actor scan interval: 30s"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actors: starting connection attempt to placement service at localhost:50005"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="http server is running on port 56730"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="gRPC server is running on port 56731"
@@ -121,7 +121,7 @@ time="2019-09-04T02:52:27Z" level=info msg="kubernetes mode configured"
 time="2019-09-04T02:52:27Z" level=info msg="app id: addapp"
 time="2019-09-04T02:52:27Z" level=info msg="application protocol: http. waiting on port 6000"
 time="2019-09-04T02:52:27Z" level=info msg="application discovered on port 6000"
-time="2019-09-04T02:52:27Z" level=info msg="actor runtime started.   actor scan interval: 30s"
+time="2019-09-04T02:52:27Z" level=info msg="actor runtime started. actor idle timeout: 1h0m0s. actor scan interval: 30s"
 time="2019-09-04T02:52:27Z" level=info msg="actors: starting connection attempt to placement service at dapr-placement.dapr-system.svc.cluster.local:80"
 time="2019-09-04T02:52:27Z" level=info msg="http server is running on port 3500"
 time="2019-09-04T02:52:27Z" level=info msg="gRPC server is running on port 50001"

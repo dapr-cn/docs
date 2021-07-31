@@ -30,6 +30,15 @@ scrape_configs:
   - job_name: 'dapr'
 
     # Override the global default and scrape targets from this job every 5 seconds.
+    global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  - job_name: 'dapr'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
 
     static_configs:
@@ -57,7 +66,7 @@ docker run \
     -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
     prom/prometheus --config.file=/etc/prometheus/prometheus.yml --web.listen-address=:8080
 ```
-`--net=host` ensures that the Prometheus instance will be able to connect to any Dapr instances running on the host machine. If you plan to run your Dapr apps in containers as well, you'll need to run them on a shared Docker network and update the configuration with the correct target address.
+`--net=host` ensures that the Prometheus instance will be able to connect to any Dapr instances running on the host machine. `--net=host` ensures that the Prometheus instance will be able to connect to any Dapr instances running on the host machine. If you plan to run your Dapr apps in containers as well, you'll need to run them on a shared Docker network and update the configuration with the correct target address.
 
 Once Prometheus is running, you'll be able to visit its dashboard by visiting `http://localhost:8080`.
 

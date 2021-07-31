@@ -73,7 +73,7 @@ var proxy = this.ProxyFactory.Create(ActorId.CreateRandom(), "OtherActor");
 // Invoke a method by name to invoke the actor
 //
 // proxy is an instance of ActorProxy.
- 
+await proxy.InvokeMethodAsync("DoSomethingGreat");
 ```
 
 由于 `ActorProxy` 是一个弱类型的代理，你需要将 actor 方法名作为一个字符串传入。
@@ -87,7 +87,8 @@ var proxy = this.ProxyFactory.Create(ActorId.CreateRandom(), "OtherActor");
 // Invoke a method on the proxy to invoke the actor
 //
 // proxy is an instance of ActorProxy.
- 
+var request = new MyRequest() { Message = "Hi, it's me.", };
+var response = await proxy.InvokeMethodAsync<MyRequest, MyResponse>("DoSomethingGreat", request);
 ```
 
 当使用弱类型的代理时，您有责任定义正确的代理方法名称和消息类型。 当使用强类型代理时，这是为你完成的，因为名称和类型是接口定义的一部分。

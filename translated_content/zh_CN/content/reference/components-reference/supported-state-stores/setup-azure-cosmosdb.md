@@ -59,7 +59,7 @@ spec:
 **注意：集合的分区键必须命名为"/partitionKey"。  注意：这是区分大小写的。**
 
 为了配置CosmosDB作为状态存储，你需要以下属性：
-- **URL**: CosmosDB的 url. 示例: https://******.documents.azure.com:443/ 示例: https://******.documents.azure.com:443/
+- **URL**: the CosmosDB url. 示例: https://******.documents.azure.com:443/
 - **Master Key**: 用于验证 CosmosDB 账户的密钥
 - **Database**: 数据库的名称
 - **Collection**: 集合的名称

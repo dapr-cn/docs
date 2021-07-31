@@ -44,7 +44,8 @@ Dapr 使用`CancellationToken`来取消，依赖于 gRPC 通道选项的配置�
 
 ```C#
 var daprClient = new DaprClientBuilder()
-    .UseGrpcChannelOptions(new GrpcChannelOptions { ...  
+    .UseGrpcChannelOptions(new GrpcChannelOptions { ... ThrowOperationCanceledOnCancellation = true })
+    .Build();
 ```
 
 ## 使用 DaprClient 取消
@@ -87,12 +88,6 @@ public class Widget
 }
 ...
 
-public class Widget
-{
-    public string Color { get; set; }
-}
-...
-
 // Storing a Widget value as JSON in the state store
 widget widget = new Widget() { Color = "Green", };
 await client.SaveStateAsync("mystatestore", "mykey", widget);
@@ -105,11 +100,15 @@ await client.SaveStateAsync("mystatestore", "mykey", widget);
 ```C#
 在这个例子中，我们使用的是 <code>SuperWidget</code> ，但变量的声明类型是 <code>Widget</code>。
 
-由于JSON序列化器的行为是由声明的类型决定的，所以它只看到一个简单的 <code>Widget</code>，并将保存<code>{ "color": "Green" }</code>，而不是<code>{ "color": "Green", "hasSelfCleaningFeature": true }</code>。
+// Storing a SuperWidget value as JSON in the state store
+Widget widget = new SuperWidget() { Color = "Green", HasSelfCleaningFeature = true, };
+await client.SaveStateAsync("mystatestore", "mykey", widget);
 ```
  ，但变量的声明类型是 Widget。
 
-由于JSON序列化器的行为是由声明的类型决定的，所以它只看到一个简单的 Widget，并将保存{ "color": "Green" }，而不是{ "color": "Green", "hasSelfCleaningFeature": true }。
+// Storing a SuperWidget value as JSON in the state store
+Widget widget = new SuperWidget() { Color = "Green", HasSelfCleaningFeature = true, };
+await client.SaveStateAsync("mystatestore", "mykey", widget);
 </code>
 
 在这个例子中，我们使用的是 `SuperWidget` ，但变量的声明类型是 `Widget`。 由于JSON序列化器的行为是由声明的类型决定的，所以它只看到一个简单的 `Widget`，并将保存`{ "color": "Green" }`，而不是`{ "color": "Green", "hasSelfCleaningFeature": true }`。

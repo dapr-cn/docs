@@ -65,7 +65,7 @@ Dapr 支持两种类型的批量操作 - **bulk** 或 **multi**。 您可以将�
 阅读 [API 参考]({{< ref state_api.md >}}) 以了解如何使用批量（bulk）选项和批次（multi）选项。
 
 ### Actor 状态
-事务性状态存储可用于存储 Actor 状态。 指定 Actor 要使用哪个状态存储， 在状态存储组件的元数据部分中指定属性 `actorStateStore` as `true` Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 阅读 [API 参考]({{< ref state_api.md >}}) 以了解更多关于 Actor 中的状态存储 和 [Actor API 参考]({{< ref actors_api.md >}})
+事务性状态存储可用于存储 Actor 状态。 指定 Actor 要使用哪个状态存储， 在状态存储组件的元数据部分中指定属性 `actorStateStore` as `true` Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 Only a single state store component can be used as the statestore for all actors. 阅读 [API 参考]({{< ref state_api.md >}}) 以了解更多关于 Actor 中的状态存储 和 [Actor API 参考]({{< ref actors_api.md >}})
 
 ### 直接查询状态存储
 
@@ -101,8 +101,8 @@ SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||tem
 
 ## 下一步
 * 遵循这些指南：
-    * [指南：如何保存和获取状态]({{< ref howto-get-save-state.md >}})
-    * [指南：如何创建一个有状态的服务]({{< ref howto-stateful-service.md >}})
+    * [指南：保存和获取状态]({{< ref howto-get-save-state.md >}})
+    * [指南：创建一个有状态的服务]({{< ref howto-stateful-service.md >}})
     * [指南：如何在应用程序之间共享状态]({{< ref howto-share-state.md >}})
 * 试试 [hello world 快速入门](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) ，它会显示如何使用状态管理或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
 * [状态存储组件]({{< ref supported-state-stores.md >}}) 列表

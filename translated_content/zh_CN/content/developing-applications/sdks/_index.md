@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Dapr 开发套件 (SDKs)"
-linkTitle: "SDKs"
+linkTitle: "SDK"
 weight: 20
 description: "使用你最喜欢的语言来开发Dapr应用"
 no_list: true
@@ -33,8 +33,8 @@ Dapr SDK是将Dapr应用到您的应用程序中最简单的方法。 选择你�
 | -------------------------------------------- |:-------------- |:-------:|:-----------------------------------------:|:----------------------------------------------------------------------------------------:|
 | [.NET]({{< ref dotnet >}})                   | Stable         |    ✔    | [ASP.NET Core]({{< ref dotnet-aspnet >}}) |                                            ✔                                             |
 | [Python]({{< ref python >}})                 | Stable         |    ✔    |    [gRPC]({{< ref python-grpc.md >}})     | [FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |
-| [Java](https://github.com/dapr/java-sdk)     | Stable         |    ✔    |                Spring Boot                |                                            ✔                                             |
-| [Go](https://github.com/dapr/go-sdk)         | Stable         |    ✔    |                     ✔                     |                                                                                          |
+| [Java]({{< ref java >}})                     | Stable         |    ✔    |                Spring Boot                |                                            ✔                                             |
+| [Go]({{< ref go >}})                         | Stable         |    ✔    |                     ✔                     |                                                                                          |
 | [PHP]({{< ref php >}})                       | Stable         |    ✔    |                     ✔                     |                                            ✔                                             |
 | [C++](https://github.com/dapr/cpp-sdk)       | In development |    ✔    |                                           |                                                                                          |
 | [Rust](https://github.com/dapr/rust-sdk)     | In development |    ✔    |                                           |                                                                                          |

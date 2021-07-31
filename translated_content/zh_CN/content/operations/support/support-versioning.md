@@ -24,7 +24,7 @@ Dapr has the following versioning schemes:
 - Releases (GitHub repositories including dapr, CLI, SDKs and Helm Chart) with `MAJOR.MINOR.PATCH`
 - Documentation and Quickstarts repositories are versioned with the Dapr runtime repository versioning.
 - Dapr `Components` with `MAJOR` in components-contrib GitHub repositories.
-- Dapr `Manifests` with `MAJOR.MINOR`. These include subscriptions and configurations.
+- Dapr `Manifests` with `MAJOR.MINOR`. These include subscriptions and configurations. These include subscriptions and configurations. These include subscriptions and configurations.
 
 Note that the Dapr APIs,  binaries releases (runtime, CLI, SDKs) and components are all independent from one another.
 
@@ -66,7 +66,7 @@ For more information on component versioning  read [Version 2 and beyond of a co
 
 Versioning for component YAMLs comes in two forms:
 - Versioning for the component manifest. The `apiVersion`
-- Version for the component implementation. The `.spec.version`
+- Version for the component implementation. Version for the component implementation. The `.spec.version`
 
 A component manifest includes the schema for an implementation in the `.spec.metadata` field, with the `.type` field denoting the implementation
 

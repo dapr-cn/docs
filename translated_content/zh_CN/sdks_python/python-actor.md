@@ -10,10 +10,10 @@ The Dapr actor package allows you to interact with Dapr virtual actors from a Py
 
 ## 前提
 
-- [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
+- 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Python 3.7+](https://www.python.org/downloads/) installed
-- [Dapr Python module]({{< ref "python#install-the0dapr-module" >}}) installed
+- 安装[Python 3.7+](https://www.python.org/downloads/)
+- 安装[Dapr Python 模块]({{< ref "python#install-the0dapr-module" >}})
 
 ## Actor interface
 
@@ -33,8 +33,8 @@ class DemoActorInterface(ActorInterface):
 An actor service hosts the virtual actor. It is implemented a class that derives from the base type `Actor` and implements the interfaces defined in the actor interface.
 
 Actors can be created using one of the Dapr actor extensions:
-   - [FastAPI actor extension]({{< ref python-flask.md >}})
-   - [Flask actor extension]({{< ref python-fastapi.md >}})
+   - [FastAPI actor extension]({{< ref python-fastapi.md >}})
+   - [Flask actor extension]({{< ref python-flask.md >}})
 
 ## Actor client
 

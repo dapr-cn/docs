@@ -19,7 +19,7 @@ no_list: true
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>快速入门</b></h5>
+      <h5 class="card-title"><b>入门</b></h5>
       <p class="card-text">如何通过几分钟的时间，在你的操作环境中实现 Dapr 的启动与运行</p>
       <a href="{{< ref getting-started >}}" class="stretched-link"></a>
     </div>
@@ -37,7 +37,7 @@ no_list: true
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>功能操作</b></h5>
+      <h5 class="card-title"><b>Operations</b></h5>
       <p class="card-text">关于在 Dapr 上运行您的应用程序的托管选项，最佳实践和其他指南</p>
       <a href="{{< ref operations >}}" class="stretched-link"></a>
     </div>
@@ -101,7 +101,7 @@ no_list: true
       </div>
     </div>
     <div class="media mt-3">
-      <a class="pr-4" href="{{< ref sdks >}}">
+      <a class="pr-4" href="{{< ref go >}}">
         <img src="/images/homepage/golang.svg" alt="Go logo" width=30>
       </a>
       <div class="media-body">

@@ -35,7 +35,7 @@ spec:
 | url | Y  | Input/Output | DingTalk's Webhook url           | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
 | 密钥  | N  | Input/Output | the secret of DingTalk's Webhook | `"****************"`                                         |
 
-## 相关链接
+## 绑定支持
 
 此组件支持 **输入和输出** 绑定接口。
 

@@ -30,7 +30,7 @@ minikube config set vm-driver [driver_name]
 2. 使用 1.13.x 或更新版本的 Kubernetes `--kubernetes-version` 启动集群
 
 ```bash
-minikube start --cpus=4 --memory=4096 --kubernetes-version=1.16.2 --extra-config=apiserver.authorization-mode=RBAC
+minikube start --cpus=4 --memory=4096
 ```
 
 3. 启用仪表盘和 ingress 插件

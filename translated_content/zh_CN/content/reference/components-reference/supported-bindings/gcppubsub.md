@@ -56,17 +56,17 @@ spec:
 | 字段                              | 必填 | 绑定支持                          | 详情                     | Example                                                                                          |
 | ------------------------------- |:--:| ----------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------ |
 | topic                           | Y  | 输出                            | GCP Pub/Sub topic name | `"topic1"`                                                                                       |
-| subscription                    | Y  | GCP Pub/Sub subscription name | `"name1"`              |                                                                                                  |
+| subscription                    | N  | GCP Pub/Sub subscription name | `"name1"`              |                                                                                                  |
 | type                            | Y  | 输出                            | GCP 凭证类型               | `service_account`                                                                                |
 | project_id                      | Y  | 输出                            | GCP 项目 id              | `project_id`                                                                                     |
-| private_key_id                | Y  | 输出                            | GCP 私钥 id              | `"privateKeyId"`                                                                                 |
+| private_key_id                | N  | 输出                            | GCP 私钥 id              | `"privateKeyId"`                                                                                 |
 | private_key                     | Y  | 输出                            | GCP凭证私钥 替换为x509证书      | `12345-12345`                                                                                    |
 | client_email                    | Y  | 输出                            | GCP 客户端邮箱地址            | `"client@email.com"`                                                                             |
-| client_id                       | Y  | 输出                            | GCP 客户端 id             | `0123456789-0123456789`                                                                          |
-| auth_uri                        | Y  | 输出                            | Google帐户 OAuth 端点      | `https://accounts.google.com/o/oauth2/auth`                                                      |
-| token_uri                       | Y  | 输出                            | Google帐户token地址        | `https://oauth2.googleapis.com/token`                                                            |
-| auth_provider_x509_cert_url | Y  | 输出                            | GCP凭证证书地址              | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
-| client_x509_cert_url          | Y  | 输出                            | GCP凭证项目x509证书地址        | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
+| client_id                       | N  | 输出                            | GCP 客户端 id             | `0123456789-0123456789`                                                                          |
+| auth_uri                        | N  | 输出                            | Google帐户 OAuth 端点      | `https://accounts.google.com/o/oauth2/auth`                                                      |
+| token_uri                       | N  | 输出                            | Google帐户token地址        | `https://oauth2.googleapis.com/token`                                                            |
+| auth_provider_x509_cert_url | N  | 输出                            | GCP凭证证书地址              | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
+| client_x509_cert_url          | N  | 输出                            | GCP凭证项目x509证书地址        | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
 
 ## 绑定支持
 

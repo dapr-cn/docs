@@ -22,7 +22,7 @@ Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可
 
 #### Azure Service Bus
 
-Azure Service Bus 支持 [实体级别的 TTL]((https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-expiration))。 这意味着消息有默认的 TTL，但也可以在发布时间设置更短的时间。 Dapr 会为消息传播 TTL 元数据，并允许 Azure Service Bus 直接处理过期时间。
+Azure Service Bus 支持 [实体级别的 TTL](https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-expiration)。 这意味着消息有默认的 TTL，但也可以在发布时间设置更短的时间。 Dapr 会为消息传播 TTL 元数据，并允许 Azure Service Bus 直接处理过期时间。
 
 ## 非 Dapr 订阅者
 

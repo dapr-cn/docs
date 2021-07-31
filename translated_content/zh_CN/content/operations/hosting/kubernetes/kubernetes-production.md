@@ -34,7 +34,7 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 
 ## Sidecar 资源设置
 
-To set the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "kubernetes-annotations.md" >}}). 与资源约束相关的具体注解如下:
+To set the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "arguments-annotations-overview.md" >}}). 与资源约束相关的具体注解如下:
 
 - `dapr.io/sidecar-cpu-limit`
 - `dapr.io/sidecar-memory-limit`
@@ -152,7 +152,7 @@ nodeapp    3000      16h  2020-07-29 17:16.22
 
 5. Dapr **控制平面安装在一个专用的命名空间**上，如`dapr-system`。
 
-6. Dapr还支持**框定应用程序的组件范围**。 这不是必要的，可以根据您的安全需求启用。 请参阅 [这里]({{< ref "component-scopes.md" >}}) 以获取更多信息。
+6. Dapr还支持**框定应用程序的组件范围**。 这不是必要的，可以根据您的安全需求启用。 See [here]({{< ref "component-scopes.md" >}}) for more info.
 
 
 ## 追踪和度量配置

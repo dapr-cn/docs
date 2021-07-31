@@ -32,7 +32,7 @@ description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程
 - `spec.metadata.allowedTopics`
   - 一个逗号分隔的允许主题列表，对所有应用程序。
   - 如果未设置 `allowedTopics` (缺省行为) ，那么所有主题都有效。 `subscriptionScopes` 和 `publishingScopes` 如果存在则仍然生效。
-  - `publishingScopes` 或 `subscriptionScopes` 可用于与 `allowedTopics` 的 conjuction ，以添加限制粒度
+  - `publishingScopes` or `subscriptionScopes` can be used in conjunction with `allowedTopics` to add granular limitations
 
 这些元数据属性可用于所有 pub/sub 组件。 以下示例使用 Redis 作为 pub/sub 组件。
 
@@ -156,7 +156,7 @@ spec:
 | app3 | X | X |   |
 
 
-## 例子   <iframe width="560" height="315" src="//player.bilibili.com/player.html?aid=331013260&bvid=BV1EA411W71L&cid=277947422&page=1&t=513" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+## 例子   <iframe width="560" height="315" src="https://www.youtube.com/embed/7VdWBBGcbHQ?start=513" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 相关链接
 

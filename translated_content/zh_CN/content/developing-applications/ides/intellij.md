@@ -80,7 +80,7 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 </toolSet>
 ```
 
-你也可以为一个可以在多个项目中复用的sidecar工具创建一个新条目:
+Optionally, you may also create a new entry for a sidecar tool that can be reused across many projects:
 
 ```xml
 <toolSet name="External Tools">
@@ -145,4 +145,8 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 ## 相关链接
 
+<!-- IGNORE_LINKS -->
+
 - https://intellij-support.jetbrains.com/hc/en-us/articles/206544519-Directories-used-by-the-IDE-to-store-settings-caches-plugins-and-logs
+
+<!-- END_IGNORE -->

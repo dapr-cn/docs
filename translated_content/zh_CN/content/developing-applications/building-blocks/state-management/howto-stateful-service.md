@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "指南：如何创建一个有状态的服务"
-linkTitle: "如何: 构建状态存储服务"
+title: "指南：创建一个有状态的服务"
+linkTitle: "指南：创建一个有状态的服务"
 weight: 300
 description: "对可伸缩的副本使用状态管理"
 ---

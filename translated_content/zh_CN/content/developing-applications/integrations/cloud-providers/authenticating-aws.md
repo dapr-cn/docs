@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "AWS认证"
-linkTitle: "Authenticating to AWS"
+linkTitle: "AWS认证"
 weight: 10
 description: "关于AWS的认证和配置选项"
 aliases:

@@ -29,7 +29,7 @@ Patch support is for supported versions (current and previous).
 ## Supported versions
 The table below shows the versions of Dapr releases that have been tested together and form a "packaged" release. Any other combinations of releases are not supported.
 
-| 发布日期       |  Runtime   | CLI   | SDKs                                                                      | Dashboard | 状态     |
+| 发布日期       |  Runtime   | CLI   | SDK                                                                       | Dashboard | 状态     |
 | ---------- |:----------:|:----- | ------------------------------------------------------------------------- | --------- | ------ |
 | 2021年2月17日 | 1.0.0</br> | 1.0.0 | Java 1.0.0 </br>Go 1.0.0 </br>PHP 1.0.0 </br>Python 1.0.0 </br>.NET 1.0.0 | 0.6.0     | 不受支持   |
 | 2021年3月4日  | 1.0.1</br> | 1.0.1 | Java 1.0.2 </br>Go 1.0.0 </br>PHP 1.0.0 </br>Python 1.0.0 </br>.NET 1.0.0 | 0.6.0     | 不受支持   |

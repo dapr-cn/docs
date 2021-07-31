@@ -8,7 +8,7 @@ description: "Choose which Dapr sidecar APIs are available to the app"
 
 在某些情况下，如零信任网络或当通过前端将 Dapr sidecar 暴露在外部流量中时，建议仅启用应用正在使用的 Dapr sidecar API。 这样做可减少攻击面，并有助于将 Dapr API 范围控制在应用程序的实际需求范围内。
 
-Dapr 允许开发人员使用 [Dapr 配置](({{<ref "configuration-overview.md">}}))设置 API 允许列表来控制应用程序可访问的 API。
+Dapr 允许开发人员使用 [Dapr 配置]({{<ref "configuration-overview.md">}})设置 API 允许列表来控制应用程序可访问的 API。
 
 ### 默认行为
 
@@ -69,12 +69,12 @@ spec:
 
 参阅此与不同 Dapr API 相对应的值列表：
 
-| Name     | Dapr API                                      |
-| -------- | --------------------------------------------- |
-| state    | [State（状态）]({{< ref state_api.md>}})          |
-| invoke   | [服务调用]({{< ref service_invocation_api.md >}}) |
-| secrets  | [密钥]({{< ref secrets_api.md >}})              |
-| bindings | [输出绑定]({{< ref bindings_api.md >}})           |
-| publish  | [发布/订阅]({{< ref pubsub.md >}})                |
-| actors   | [Actors]({{< ref actors_api.md >}})           |
-| metadata | [元数据（Metadata）]({{< ref metadata_api.md >}})  |
+| Name      | Dapr API                                      |
+| --------- | --------------------------------------------- |
+| state（状态） | [State（状态）]({{< ref state_api.md>}})          |
+| invoke    | [服务调用]({{< ref service_invocation_api.md >}}) |
+| 秘密        | [秘密]({{< ref secrets_api.md >}})              |
+| 绑定        | [输出绑定]({{< ref bindings_api.md >}})           |
+| publish   | [发布/订阅]({{< ref pubsub.md >}})                |
+| actor     | [Actors]({{< ref actors_api.md >}})           |
+| metadata  | [元数据（Metadata）]({{< ref metadata_api.md >}})  |

@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "安装 Dapr CLI 脚手架工具"
+title: "安装 Dapr CLI"
 linkTitle: "安装 Dapr CLI"
 weight: 10
 ---

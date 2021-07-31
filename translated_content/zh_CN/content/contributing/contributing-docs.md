@@ -142,7 +142,7 @@ Docsy 和 Hugo 使用的 markdown 规范没有提供使用 markdown 语法来调
 ```
 > 请不要忘记设置 alt 属性，以保留视觉受损用户的文档可读。
 
-#### Example:
+#### Example
 
 此 HTML 将在 `overview.md` 页面上显示 `dapr-overview.png` 图片:
 ```md
@@ -215,8 +215,104 @@ brew install dapr/tap/dapr-cli
 
 {{< /tabs >}}
 
-### YouTube 视频
-短代码为：
+### Embedded code snippets
+
+Use the `code-snippet` shortcode to reference code snippets from the `static/code` directory.
+
+```
+{{</* code-snippet file="myfile.py" lang="python" */>}}
+```
+
+{{% alert title="Warning" color="warning" %}}
+All Dapr sample code should be self-contained in separate files, not in markdown. Use the techniques described here to highlight the parts of the sample code users should focus on.
+{{% /alert %}}
+
+Use the `lang` (default `txt`) parameter to configure the language used for syntax highlighting.
+
+Use the `marker` parameter to limit the embedded snipped to a portion of the sample file. This is useful when you want to show just a portion of a larger file. The typical way to do this is surround the interesting code with comments, and then pass the comment text into `marker`.
+
+The shortcode below and code sample:
+
+```
+{{</* code-snippet file="./contributing-1.py" lang="python" marker="#SAMPLE" */>}}
+```
+
+```python
+import json
+import time
+
+from dapr.clients import DaprClient
+
+#SAMPLE
+with DaprClient() as d:
+    req_data = {
+        'id': 1,
+        'message': 'hello world'
+    }
+
+    while True:
+        # Create a typed message with content type and body
+        resp = d.invoke_method(
+            'invoke-receiver',
+            'my-method',
+            data=json.dumps(req_data),
+        )
+
+        # Print the response
+        print(resp.content_type, flush=True)
+        print(resp.text(), flush=True)
+
+        time.sleep(2)
+#SAMPLE
+```
+
+Will result in the following output:
+
+{{< code-snippet file="contributing-1.py" lang="python" marker="#SAMPLE" >}}
+
+Use the `replace-key-[token]` and `replace-value-[token]` parameters to limit the embedded snipped to a portion of the sample file. This is useful when you want abbreviate a portion of the code sample. Multiple replacements are supported with multiple values of `token`.
+
+The shortcode below and code sample:
+
+```
+{{</* code-snippet file="./contributing-2.py" lang="python" replace-key-imports="#IMPORTS" replace-value-imports="# Import statements"  */>}}
+```
+
+```python
+#IMPORTS
+import json
+import time
+#IMPORTS
+
+from dapr.clients import DaprClient
+
+with DaprClient() as d:
+    req_data = {
+        'id': 1,
+        'message': 'hello world'
+    }
+
+    while True:
+        # Create a typed message with content type and body
+        resp = d.invoke_method(
+            'invoke-receiver',
+            'my-method',
+            data=json.dumps(req_data),
+        )
+
+        # Print the response
+        print(resp.content_type, flush=True)
+        print(resp.text(), flush=True)
+
+        time.sleep(2)
+```
+
+Will result in the following output:
+
+{{< code-snippet file="./contributing-2.py" lang="python" replace-key-imports="#IMPORTS" replace-value-imports="# Import statements"  >}}
+
+### YouTube videos
+Hugo can automatically embed YouTube videos using a shortcode:
 ```
 {{</* youtube [VIDEO ID] */>}}
 ```

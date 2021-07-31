@@ -95,7 +95,7 @@ docker run --net=my-dapr-network ...
 
 [Docker Compose](https://docs.docker.com/compose/) can be used to define multi-container application configurations. 如果您希望在没有Kubernetes的情况下，在本地使用Dapr sidecars运行多个应用程序，那么建议使用Docker Compose定义（`docker-compose.yml`）。
 
-Docker Compose的语法和工具超出了本文的范围，但是，建议你参考[官方Docker文档](https://docs.docker.com/compose/)了解更多细节。
+The syntax and tooling of Docker Compose is outside the scope of this article, however, it is recommended you refer to the [official Docker documentation](https://docs.docker.com/compose/) for further details.
 
 为了使用Dapr和Docker Compose运行您的应用程序，您需要在您的`docker-compose.yml`中定义sidecar模式。 例如:
 
@@ -152,6 +152,10 @@ services:
 
 If your deployment target is Kubernetes please use Dapr's first-class integration. Refer to the [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}}).
 
+## Name resolution
+
+Dapr by default uses mDNS as the name resolution component in self-hosted mode for service invocation. If you are running Dapr on virtual machines or where mDNS is not available, then you can use the [HashiCorp Consul]({{< ref setup-nr-consul.md >}}) component for name resolution.
+
 ## Docker images
 
 Dapr 为不同的组件提供了许多预构建的 Docker 镜像，您应该为所需的二进制、架构和 标签/版本 选择相关镜像。
@@ -164,7 +168,7 @@ Dapr 为不同的组件提供了许多预构建的 Docker 镜像，您应该为�
 - [daprio/sentry](https://hub.docker.com/r/daprio/sentry)
 - [daprio/dapr-dev](https://hub.docker.com/r/daprio/dapr-dev)
 
-### Tags
+### 标签
 
 #### Linux/amd64
 - `latest`：最新版本，**仅** 用于开发目的。

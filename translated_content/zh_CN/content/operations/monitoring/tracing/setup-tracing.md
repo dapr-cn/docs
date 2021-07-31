@@ -123,4 +123,4 @@ On your browser, go to `http://localhost:9411` and you should see the Zipkin UI.
 ![zipkin](/images/zipkin_ui.png)
 
 ## 参考资料
-- [Zipkin for distributed tracing](https://zipkin.io/)
+- [Zipkin 分布式追踪](https://zipkin.io/)

@@ -33,7 +33,7 @@ no_list: true
 | [本地存储]({{< ref localstorage.md >}})                   |                |       ✅        | Alpha | v1   | 1.1 |
 | [MQTT]({{< ref mqtt.md >}})                           |       ✅        |       ✅        | Alpha | v1   | 1.0 |
 | [MySQL]({{< ref mysql.md >}})                         |                |       ✅        | Alpha | v1   | 1.0 |
-| [PostgrSQL]({{< ref postgres.md >}})                  |                |       ✅        | Alpha | v1   | 1.0 |
+| [PostgreSql]({{< ref postgres.md >}})                 |                |       ✅        | Alpha | v1   | 1.0 |
 | [Postmark]({{< ref postmark.md >}})                   |                |       ✅        | Alpha | v1   | 1.0 |
 | [RabbitMQ]({{< ref rabbitmq.md >}})                   |       ✅        |       ✅        | Alpha | v1   | 1.0 |
 | [Redis]({{< ref redis.md >}})                         |                |       ✅        | Alpha | v1   | 1.0 |

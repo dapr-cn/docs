@@ -23,5 +23,10 @@ Dapr can be initialized [with Docker]({{< ref self-hosted-with-docker.md >}}) (d
 
 ## 使用 Dapr 启动应用程序
 
-You can use the [`dapr run` CLI command]({{< ref dapr-run.md >}}) to a Dapr sidecar process along with your application.
+You can use the [`dapr run` CLI command]({{< ref dapr-run.md >}}) to a Dapr sidecar process along with your application. Additional arguments and flags can be found [here]({{< ref arguments-annotations-overview.md >}}).
 
+## Name resolution
+
+Dapr uses a [name resolution component]({{< ref supported-name-resolution >}}) for service discovery within the [service invocation]({{< ref service-invocation >}}) building block. By default Dapr uses mDNS when in self-hosted mode.
+
+If you are running Dapr on virtual machines or where mDNS is not available, then you can use the [HashiCorp Consul]({{< ref setup-nr-consul.md >}}) component for name resolution.

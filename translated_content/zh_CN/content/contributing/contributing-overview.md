@@ -48,6 +48,7 @@ description: >
 
 1. 确保有一个问题（bug或建议）被提出，这为你即将做出的贡献设定了期望。
 1. 分叉相关的repo并创建一个新的分支。
+    - Some Dapr repos support [Codespaces]({{< ref codespaces.md >}}) to provide an instant environment for you to build and test your changes.
 1. 创建更改
     - 代码更改需要测试
 1. 更新有关更改的相关文档

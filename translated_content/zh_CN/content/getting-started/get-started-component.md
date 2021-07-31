@@ -55,7 +55,7 @@ spec:
     value: ":"
 ```
 
-您可以看到上述的文件定义有一个 `type: secretstores.local.file` 字段值，其告诉Dapr使用本地文件组件作为密钥存储。 元数据字段提供了使用该组件所需的组件特定信息（在本例中，是密钥存储JSON的路径）。
+您可以看到上述的文件定义有一个 `type: secretstores.local.file` 字段值，其告诉Dapr使用本地文件组件作为密钥存储。 The metadata fields provide component specific information needed to work with this component (in this case, the path to the secret store JSON is relative to where you call `dapr run` from.)
 
 ## 第 3 步：运行Dapr sidecar
 
@@ -64,6 +64,8 @@ spec:
 ```bash
 dapr run --app-id myapp --dapr-http-port 3500 --components-path ./my-components
 ```
+
+> If you encounter a error message stating the app ID is already in use, it may be that the sidecar you ran in the previous step is still running. Make sure you stop the sidecar before running the above command (e.g. using "Control-C").
 
 ## 第 4 步：获取一个密钥
 

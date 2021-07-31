@@ -7,7 +7,7 @@ description: "有关 run CLI 命令的详细信息"
 
 ## 说明
 
-并排运行 Dapr 和 (可选) 应用程序。
+并排运行 Dapr 和 (可选) 应用程序。 A full list comparing daprd arguments, CLI arguments, and Kubernetes annotations can be found [here]({{< ref arguments-annotations-overview.md >}}).
 
 ## 支持的平台
 

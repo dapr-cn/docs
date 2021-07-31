@@ -38,8 +38,8 @@ spec:
 | **spec**           | -  | **关于组件资源的详细信息**                           |                    |
 | spec.type          | Y  | 组件类型                                      | `state.redis`      |
 | spec.version       | Y  | 组件版本                                      | `v1`               |
-| spec.initTimeout   | 否  | 组件初始化的超时时间 默认为30秒                         | `5m`, `1h`, `20s`  |
-| spec.ignoreErrors  | 否  | 如果组件加载失败，请告诉Dapr sidecar 继续初始化。 默认为 false | `false`            |
+| spec.initTimeout   | N  | 组件初始化的超时时间 默认为30秒                         | `5m`, `1h`, `20s`  |
+| spec.ignoreErrors  | N  | 如果组件加载失败，请告诉Dapr sidecar 继续初始化。 默认为 false | `false`            |
 | **spec.metadata**  | -  | **一个组件特定配置的键/值。 查看你的组件字段定义**              |                    |
 
 ### 特殊的元数据值

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Configuration (配置)"
-linkTitle: "Configuration"
+linkTitle: "Configuration (配置)"
 weight: 400
 description: "变更 Dapr sidecars 或全局 Dapr 系统服务的行为"
 ---

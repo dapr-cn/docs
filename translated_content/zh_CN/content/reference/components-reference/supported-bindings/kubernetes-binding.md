@@ -72,26 +72,6 @@ Output received from the binding is of format `bindings.ReadResponse` with the `
      ...
    }
  }
-     },
-     "involvedObject": {
-       "kind": "Deployment",
-       "namespace": "kube-events",
-       ...
-     },
-     "reason": "ScalingReplicaSet",
-     "message": "Scaled up replica set hello-node-7bf657c596 to 1",
-     ...
-   },
-   "newVal": {
-     "metadata": { "creationTimestamp": "null" },
-     "involvedObject": {},
-     "source": {},
-     "firstTimestamp": "null",
-     "lastTimestamp": "null",
-     "eventTime": "null",
-     ...
-   }
- }
 ```
 Three different event types are available:
 - Add : Only the `newVal` field is populated, `oldVal` field is an empty `v1.Event`, `event` is `add`

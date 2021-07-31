@@ -14,7 +14,7 @@ Gets the health state for Dapr.
 
 ### HTTP 请求
 
-```http
+```
 GET http://localhost:<daprPort>/v1.0/healthz
 ```
 

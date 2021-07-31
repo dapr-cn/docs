@@ -129,9 +129,10 @@ controller:
 然后使用 Helm 3 安装 NGINX ingress controller 到您的 Kubernetes 集群使用
 
 ```bash
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-helm install nginx stable/nginx-ingress -f ./dapr-annotations.yaml -n default
-# 获取 ingress controller 的公开IP
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install nginx-ingress ingress-nginx/ingress-nginx -f ./dapr-annotations.yaml -n default
+# Get the public IP for the ingress controller
 kubectl get svc -l component=controller -o jsonpath='Public IP is: {.items[0].status.loadBalancer.ingress[0].ip}{"\n"}'
 ```
 

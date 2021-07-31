@@ -22,7 +22,7 @@ Read [this guide]({{< ref kubernetes-deploy.md >}}) to learn how to deploy Dapr 
 
 ## 将 Dapr 添加到 Kubernetes deployment
 
-在 Kubernetes 集群中部署和运行启用 Dapr 的应用程序非常简单，只需向 deployment 方案添加一些注解。 要给您的服务提供一个 `id` 和 `port` 已知的 Dapr, 通过配置进行追踪并启动 Dapr sidecar 容器, 你要像这样注释你的 Kubernetes deployment。 For more information check  [dapr annotations]({{< ref kubernetes-annotations.md >}})
+在 Kubernetes 集群中部署和运行启用 Dapr 的应用程序非常简单，只需向 deployment 方案添加一些注解。 要给您的服务提供一个 `id` 和 `port` 已知的 Dapr, 通过配置进行追踪并启动 Dapr sidecar 容器, 你要像这样注释你的 Kubernetes deployment。 For more information check  [dapr annotations]({{< ref arguments-annotations-overview.md >}})
 
 ```yml
   annotations:
@@ -50,3 +50,4 @@ Dapr is tested and supported on the following versions of Kubernetes.
 - [更新 Kubernetes 集群中的 Dapr]({{< ref kubernetes-upgrade >}})
 - [Kubernetes 的 Dapr 生产环境配置指南]({{< ref kubernetes-production.md >}})
 - [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/hello-kubernetes)
+- [Use Bridge to Kubernetes to debug Dapr apps locally, while connected to your Kubernetes cluster]({{< ref bridge-to-kubernetes >}})

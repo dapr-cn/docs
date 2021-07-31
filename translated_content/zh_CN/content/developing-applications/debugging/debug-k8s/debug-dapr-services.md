@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Kubernetes中的Dapr调试面板"
-linkTitle: "Dapr控制面板"
+linkTitle: "Dapr control plane (Dapr 控制面板)"
 weight: 1000
 description: "在Kubernetes中如何在Dapr控制面板中进行调试"
 ---
@@ -29,7 +29,7 @@ git clone https://github.com/dapr/dapr.git
 cd dapr
 make release GOOS=linux GOARCH=amd64 DEBUG=1
 ```
-> Windows：下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。 Windows：下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。
+> Windows：下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。
 
 在上述命令中，“DEBUG”设定为“1”可禁用编译器优化。 'GOOS=linux' 和 'GOARCH=amd64' 也是必要的，因为二进制文件将在下一步中打包到基于 Linux 的Docker图像。
 
@@ -50,13 +50,13 @@ make docker-push DEBUG=1
 
 ### 3. 安装Dapr调试二进制文件
 
-如果你的Kubernetes集群中已经安装了Dapr，需要先将它卸载:
+如果您的Kubernetes集群中已经安装了Dapr，请先卸载它：
 
 ```bash
 dapr uninstall -k
 ```
 
-我们将使用"helm"来安装Dapr调试二进制文件。 接下来的章节，我们将使用Dapr Operator来演示在Kubernetes环境中如何配置、安装和调试Dapr服务。
+我们将使用"helm"来安装 Dapr 调试二进制文件。 接下来的章节，我们将使用Dapr Operator来演示在Kubernetes环境中如何配置、安装和调试Dapr服务。
 
 首先配置名为 `values.yml` 的文件。
 

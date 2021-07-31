@@ -63,7 +63,7 @@ spec:
 | collectionName   | N  | 要使用的收藏名称 默认值为 `"daprCollection"` | `"daprCollection"`                                                    |
 | writeconcern     | N  | 要使用的写入保证                         | `"majority"`                                                          |
 | readconcern      | N  | 要使用的读取保证                         | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
-| operationTimeout | N  | 操作超时。 默认为 `"5s"`                 | `"5s"`                                                                |
+| operationTimeout | N  | 操作超时。 Defaults to `"5s"`         | `"5s"`                                                                |
 
 ## 配置 MongoDB
 
@@ -77,6 +77,9 @@ docker run --name some-mongo -d mongo
 ```
 
 然后您可以使用 `localhost:27017` 与服务器交互。
+
+If you do not specify a `databaseName` value in your component definition, make sure to create a database named `daprStore`.
+
 {{% /codetab %}}
 
 {{% codetab %}}

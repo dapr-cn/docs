@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "构建块"
-linkTitle: "Building blocks"
+linkTitle: "构建块"
 weight: 200
 description: "可通过标准 HTTP 或 gRPC API 访问的模块化最佳实践"
 ---
@@ -26,4 +26,4 @@ description: "可通过标准 HTTP 或 gRPC API 访问的模块化最佳实践"
 | [**资源绑定**]({{<ref "bindings-overview.md">}})           | `/v1.0/bindings`                  | 绑定提供一个外部云与本地服务或系统的双向连接。 Dapr 允许您通过 Dapr 绑定 API 调用外部服务，也可以通过已连接的服务发送的事件来触发应用程序。                         |
 | [**Actors**]({{<ref "actors-overview.md">}})           | `/v1.0/actors`                    | 参与者是孤立的独立计算单元，具有单线程执行。 Dapr提供了基于Virtual Actor模式的actor实现，该模式提供了单线程编程模型，并且在不使用actor时会对其进行垃圾回收。           |
 | [**可观测性**]({{<ref "observability-concept.md">}})       | `N/A`                             | Dapr 系统组件和运行时记录 metrics，log 和 trace 以调试，操作和监视 Dapr 系统服务，组件和用户应用程序。                                     |
-| [**Secrets**]({{<ref "secrets-overview.md">}})         | `/v1.0/secrets`                   | Dapr 提供一个机密构建块 API ，并与 Azure Key Vault 和 Kubernetes 等机密商店集成，以存储机密。 服务代码可以调用密钥 API 从 Dapr 支持的密钥存储中检索密钥。 |
+| [**秘密**]({{<ref "secrets-overview.md">}})              | `/v1.0/secrets`                   | Dapr 提供一个机密构建块 API ，并与 Azure Key Vault 和 Kubernetes 等机密商店集成，以存储机密。 服务代码可以调用密钥 API 从 Dapr 支持的密钥存储中检索密钥。 |
