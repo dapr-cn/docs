@@ -21,7 +21,6 @@ jobs:
           upload_translations: false
           download_translations: true
           dryrun_action: false
-          create_pull_request: false
           crowdin_branch_name: v1.2_translate_site
 
           # This is the name of the git branch that Crowdin will create when opening a pull request.
