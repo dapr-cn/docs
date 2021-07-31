@@ -10,7 +10,7 @@ description: 如何介绍 Dapr 和一些例子
 
 {{< button text="Download the Dapr Presentation Deck" link="/presentations/dapr-slidedeck.zip" >}}
 
-## Giving a Dapr presentation
+## Dapr演示
 
 - 首先下载 [Dapr 演示模板](/presentations/dapr-slidedeck.zip)。 这包含为 Dapr 演示所需的幻灯片和图表。
 - 接下来，查看文档，以确保您了解[相关概念]({{< ref concepts >}})。

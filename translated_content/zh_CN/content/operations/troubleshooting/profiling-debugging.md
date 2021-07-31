@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Profiling & Debugging"
-linkTitle: "Debugging"
+linkTitle: "调试"
 weight: 4000
 description: "Discover problems and issues such as concurrency, performance, cpu and memory usage through a profiling session"
 ---

@@ -13,9 +13,9 @@ aliases:
 
 当代码处理一条消息时，它可以向其他参与者发送一条或多条消息，或者创建新的 Actors。 底层 运行时 将管理每个 actor 的运行方式，时机和位置，并在 Actors 之间传递消息。
 
-大量 Actors 可以同时执行，而 Actors 可以相互独立执行。
+大量 Actors 可以同时执行，但他们之间是相互独立执行的。
 
-Dapr 包含专门实现 [ virtual actors 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/) 的运行时。 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
+Dapr 包含专门实现 [ 虚拟 actors 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/) 的运行时。 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
 
 ### 何时使用 Actors？
 
@@ -37,7 +37,7 @@ Actor 设计模式可以很好适应一些分布式系统问题和场景，但�
 
 Dapr Actors 是虚拟的，意思是他们的生命周期与他们的 in - memory 表现不相关。 因此，它们不需要显式创建或销毁。 Dapr Actors 运行时在第一次接收到该 actor ID 的请求时自动激活 actor。 如果 actor 在一段时间内未被使用，那么 Dapr Actors 运行时将回收内存对象。 如果以后需要重新启动，它还将保持对 actor 的一切原有数据。
 
-调用 actor 方法和 reminders 将重置空闲时间，例如，reminders 触发将使 actor 保持活动状态。 不论 actor 是否处于活动状态或不活动状态 Actor reminders 都会触发，对不活动 actor ，那么会首先激活 actor。 Actor timers 不会重置空闲时间，因此 timer 触发不会使参与者保持活动状态。 Timer 仅在 actor 活跃时被触发。
+调用 actor 方法和 reminders 将重置空闲时间，例如，reminders 触发将使 actor 保持活动状态。 不论 actor 是否处于活动状态或非活动状态 Actor reminders 都会触发，对于非活动状态的actor会先进行激活。 Actor timers 不会重置空闲时间，因此 timer 触发不会使actor保持活动状态。 Timer 仅在 actor 活跃时被触发。
 
 空闲超时和扫描时间间隔 Dapr 运行时用于查看是否可以对 actor 进行垃圾收集。 当 Dapr 运行时调用 actor 服务以获取受支持的 actor 类型时，可以传递此信息。
 
@@ -65,7 +65,7 @@ Dapr actor 运行时为您管理分发方案和键范围设置。 这是由 acto
 * 默认情况下，Actors 被随机放入分区中，从而形成均匀的分布。
 * 由于 Actors 是随机放置的，因此可知，执行操作始终需要网络通信，包括方法调用数据的序列化和去序列化，产生延迟和开销。
 
-注: Dapr actor Placement 服务仅用于 actor 安置，因此，如果您的服务未使用 Dapr Actors，那么不需要。 The Placement service can run in all [hosting environments]({{< ref hosting >}}), including self-hosted and Kubernetes.
+注: Dapr actor Placement 服务仅用于 actor 安置，因此，如果您的服务未使用 Dapr Actors，那么不需要。 Placement服务可以运行在[托管环境]({{< ref hosting >}})，包括自托管和Kubernetes。
 
 ## Actor 通信
 
@@ -75,9 +75,9 @@ Dapr actor 运行时为您管理分发方案和键范围设置。 这是由 acto
 POST/GET/PUT/DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/<method/state/timers/reminders>
 ```
 
-您可以在请求主体中为 actor 方法提供任何数据，并且请求的响应在响应主体中，这是来自 actor 方法调用的数据。
+您可以在请求主体中为 actor 方法提供任何数据，且在actor调用的数据中包含该请求的响应信息。
 
-Refer to [Dapr Actor Features]({{< ref howto-actors.md >}}) for more details.
+更多信息请查阅： [Dapr Actor 特性]({{< ref howto-actors.md >}})
 
 ### 并发（Concurrency）
 
@@ -89,8 +89,8 @@ Dapr Actors 运行时提供了一个简单的基于回合的访问模型，用�
 
 <img src="/images/actors_background_communication.png" width=600>
 
-#### Reentrancy
-As an enhancement to the base actors in dapr, reentrancy can now be enabled as a preview feature. To learn more about it, see [actor reentrancy]({{<ref actor-reentrancy.md>}})
+#### 可重入性
+在Dapr中，作为基础actors的一个增强功能，可重入性现在可以在预览特性中启用了。 更多内容请参阅：[actor 可重入性]({{<ref actor-reentrancy.md>}})
 
 ### 基于回合的访问
 

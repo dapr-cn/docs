@@ -23,11 +23,11 @@ Dapr 使用 CloudEvents 为事件负载提供额外的上下文，从而启用�
 
 ## 发布原始消息
 
-Dapr apps are able to publish raw events to pub/sub topics without CloudEvent encapsulation, for compatibility with non-Dapr apps.
+Dapr 应用能够在没有云事件封装的情况下将原始事件发布到 pub/sub，以便与非 Dapr 应用兼容。
 
-<img src="/images/pubsub_publish_raw.png" alt="Diagram showing how to publish with Dapr when subscriber does not use Dapr or CloudEvent" width=1000>
+<img src="/images/pubsub_publish_raw.png" alt="图表展示了当订阅者没有使用Dapr或者云事件时如何用Dapr进行发布。" width=1000>
 
-To disable CloudEvent wrapping, set the `rawPayload` metadata to `true` as part of the publishing request. This allows subscribers to receive these messages without having to parse the CloudEvent schema.
+要禁用 CloudEvent 包装，请将 `rawPayload` 元数据设置为 `true` ，作为发布的一部分。 这允许订阅者接收这些消息，而不必分析 CloudEvent 。
 
 {{< tabs curl "Python SDK" "PHP SDK">}}
 
@@ -79,14 +79,14 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 ## 订阅原始消息
 
-Dapr apps are also able to subscribe to raw events coming from existing pub/sub topics that do not use CloudEvent encapsulation.
+Dapr 应用程序还能够订阅来自不使用 CloudEvent 封装的现有 pub/sub 的原始事件。
 
-<img src="/images/pubsub_subscribe_raw.png" alt="Diagram showing how to subscribe with Dapr when publisher does not use Dapr or CloudEvent" width=1000>
+<img src="/images/pubsub_subscribe_raw.png" alt="图表展示了当订阅者没有使用Dapr或者云事件时如何用Dapr进行发布。" width=1000>
 
 
-### Programmatically subscribe to raw events
+### 编程式订阅原始事件
 
-When subscribing programmatically, add the additional metadata entry for `rawPayload` so the Dapr sidecar automatically wraps the payloads into a CloudEvent that is compatible with current Dapr SDKs.
+在使用编程式订阅时，添加 `rawPayload` 元数据条目，以便 Dapr sidecar 自动将有效载荷包裹到与当前 Dapr SDK 兼容的 CloudEvent 中。
 
 {{< tabs "Python" "PHP SDK" >}}
 
@@ -149,9 +149,9 @@ $app->start();
 {{< /tabs >}}
 
 
-## Declaratively subscribe to raw events
+## 声明式订阅原始事件
 
-Subscription Custom Resources Definitions (CRDs) do not currently contain metadata attributes ([issue #3225](https://github.com/dapr/dapr/issues/3225)). At this time subscribing to raw events can only be done through programmatic subscriptions.
+Subscription Custom Resources Definitions (CRDs) 目前不包含元数据标签([issue #3225](https://github.com/dapr/dapr/issues/3225)). 故而，只能通过编程式订阅来订阅原始事件。
 
 ## 相关链接
 

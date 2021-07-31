@@ -7,7 +7,7 @@ description: >
   向Dapr Docs投稿的准则
 ---
 
-本指南包含有关对 [Dapr 文档库](https://github.com/dapr/docs) 的贡献信息。 请在对 Dapr docs 作出贡献之前，请先阅读以下准则。 This guide assumes you have already reviewed the [general guidance]({{< ref contributing-overview>}}) which applies to any Dapr project contributions.
+本指南包含有关对 [Dapr 文档库](https://github.com/dapr/docs) 的贡献信息。 请在对 Dapr docs 作出贡献之前，请先阅读以下准则。 本指南假定您已阅读了适用于任何Dapr项目贡献的[通用指南]({{< ref contributing-overview>}})。
 
 Dapr 文档已发布到 [docs.dapr.io](https://docs.dapr.io)。 因此，任何贡献都必须确保文档能够正确编译和发布。
 
@@ -46,7 +46,7 @@ Dapr 文档处理分支的方式与大多数代码存储库不同。 每个分�
 - 请确保文档引用该规范以获取使用 API 的示例。
 - 确保规范在名称，参数和术语方面与概念一致。 根据需要更新概念和规范。
 - 请避免重复该规范。 这个想法是为了给读者提供更多关于能力的信息和背景，以便他们可以尝试这个。 因此，尽可能提供更多的信息和实施细节。
-- Provide a link to the spec in the [Reference]({{<ref reference >}}) section.
+- 提供指向[参考资料]({{<ref reference >}})中规范的链接。
 - 在可能的情况下，参考一个实用的How-To文档。
 
 ### 贡献新的 How-To 指南

@@ -8,7 +8,7 @@ description: "状态管理构建块概览"
 
 ## 介绍
 
-Using state management, your application can store data as key/value pairs in the [supported state stores]({{< ref supported-state-stores.md >}}).
+通过状态管理构件，你的应用程序可以将数据存储为 [支持的状态存储引擎]({{< ref supported-state-stores.md >}})中的键/值对。
 
 当使用状态管理时，你的应用程序可以利用一些自己构建会很复杂，容易出错的功能，比如:
 
@@ -24,7 +24,7 @@ Using state management, your application can store data as key/value pairs in th
 
 ### 可插拔状态存储
 
-Dapr数据存储被建模为组件，可以在不修改你的服务代码的情况下进行替换。 See [supported state stores]({{< ref supported-state-stores >}}) to see the list.
+Dapr数据存储被建模为组件，可以在不修改你的服务代码的情况下进行替换。 请访问 [支持的状态存储引擎]({{< ref supported-state-stores >}})页面查看完整列表。
 
 ### 可配置的状态存储行为
 
@@ -34,7 +34,7 @@ Dapr允许开发人员在对于状态的操作请求中附加额外的元数据�
 
 默认情况下，您的应用程序应该假设数据存储是**最终一致**的，并使用**last-write-wins**并发模式。
 
-[Not all stores are created equal]({{< ref supported-state-stores.md >}}). 为了保证应用程序的可移植性，你可以了解下存储引擎的功能，使你的代码适应不同的存储引擎。
+[并非所有的存储引擎都一样]({{< ref supported-state-stores.md >}})。 为了保证应用程序的可移植性，你可以了解下存储引擎的功能，使你的代码适应不同的存储引擎。
 
 ### 并发（Concurrency）
 
@@ -48,7 +48,7 @@ Dapr之所以选择OCC，是因为在不少应用中，数据更新冲突都是�
 对于原生不支持ETags的存储引擎，要求相应的Dapr状态存储实现能够模拟ETags，并在处理状态时遵循Dapr状态管理API规范。 由于Dapr状态存储实现在技术上是底层数据存储引擎的客户端，所以这种模拟应该直接使用存储引擎提供的并发控制机制。
 {{% /alert %}}
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how to set concurrency options.
+阅读[API参考]({{< ref state_api.md >}})，了解如何设置并发选项。
 
 ### 一致性
 
@@ -56,20 +56,20 @@ Dapr同时支持**强一致性**和**最终一致性**，其中最终一致性�
 
 当使用强一致性时，Dapr会等待所有副本（或指定的quorums）确认后才会确认写入请求。 当最终使用一致性时，Dapr 将在基本数据存储接受写入请求后立即返回，即使这是单个副本。
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how to set consistency options.
+阅读[API参考]({{< ref state_api.md >}})，了解如何设置一致性选项。
 
 ### 批量操作
 
 Dapr 支持两种类型的批量操作 - **bulk** 或 **multi**。 您可以将几个相同类型的请求分组成批量(或批次)。 Dapr将请求作为单个请求批量提交给基础数据存储。 换句话说，批量（bulk）操作不是事务性的。 另一方面，您可以将不同类型的请求分组为多操作，作为原子事务处理。
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how use bulk and multi options.
+阅读 [API 参考]({{< ref state_api.md >}}) 以了解如何使用批量（bulk）选项和批次（multi）选项。
 
 ### Actor 状态
-事务性状态存储可用于存储 Actor 状态。 指定 Actor 要使用哪个状态存储， 在状态存储组件的元数据部分中指定属性 `actorStateStore` as `true` Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 Read the [API reference]({{< ref state_api.md >}}) to learn more about state stores for actors and the [actors API reference]({{< ref actors_api.md >}})
+事务性状态存储可用于存储 Actor 状态。 指定 Actor 要使用哪个状态存储， 在状态存储组件的元数据部分中指定属性 `actorStateStore` as `true` Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 阅读 [API 参考]({{< ref state_api.md >}}) 以了解更多关于 Actor 中的状态存储 和 [Actor API 参考]({{< ref actors_api.md >}})
 
 ### 直接查询状态存储
 
-Dapr保存和检索状态值，而不进行任何转换。 You can query and aggregate state directly from the [underlying state store]({{< ref query-state-store >}}).
+Dapr保存和检索状态值，而不进行任何转换。 您可以直接从 [基础状态存储]({{< ref query-state-store >}}) 中查询并聚合状态。
 
 例如，要在 Redis 中获取与 app ID“myApp”相关的所有状态 key，可以使用:
 
@@ -97,14 +97,14 @@ SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||tem
 
 ### 状态管理 API
 
-The API for state management can be found in the [state management API reference]({{< ref state_api.md >}}) which describes how to retrieve, save and delete state values by providing keys.
+状态管理API可以在 [状态管理 API 参考]({{< ref state_api.md >}}) 中找到。它描述了如何根据 key 来查询、保存和删除状态。
 
 ## 下一步
 * 遵循这些指南：
     * [指南：如何保存和获取状态]({{< ref howto-get-save-state.md >}})
     * [指南：如何创建一个有状态的服务]({{< ref howto-stateful-service.md >}})
     * [指南：如何在应用程序之间共享状态]({{< ref howto-share-state.md >}})
-* Try out the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) which shows how to use state management or try the samples in the [Dapr SDKs]({{< ref sdks >}})
-* List of [state store components]({{< ref supported-state-stores.md >}})
-* Read the [state management API reference]({{< ref state_api.md >}})
-* Read the [actors API reference]({{< ref actors_api.md >}})
+* 试试 [hello world 快速入门](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) ，它会显示如何使用状态管理或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
+* [状态存储组件]({{< ref supported-state-stores.md >}}) 列表
+* 阅读 [状态管理 API 引用]({{< ref state_api.md >}})
+* 阅读 [Actor API 引用]({{< ref actors_api.md >}})

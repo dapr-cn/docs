@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Support and versioning"
+title: "支持和版本"
 linkTitle: "Support"
 weight: 600
-description: "The support and versioning options available for Dapr"
+description: "Dapr可用的支持和版本控制"
 ---
 

@@ -6,7 +6,7 @@ description: "Dapr中间件设置的概述"
 weight: 10000
 ---
 
-Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 Dapr配置文件中定义了中件管道。 As with other [building block components]({{< ref component-schema.md >}}), middleware components are extensible and can be found in the [components-contrib repo](https://github.com/dapr/components-contrib/tree/master/middleware/http).
+Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 Dapr配置文件中定义了中件管道。 与其他[构建块组件]({{< ref component-schema.md >}})一样，中间件组件是可扩展的，可以在[components-contrib repo](https://github.com/dapr/components-contrib/tree/master/middleware/http)中找到。
 
 Dapr中的中间件使用`Component`文件描述，其schema如下:
 
@@ -26,9 +26,9 @@ spec:
     value: <VALUE>
 ...
 ```
-中间件类型由 `type` 字段决定。 组件设置值，如速率限制，OAuth 凭据和其他设置被放入 `metadata` 部分。 Even though metadata values can contain secrets in plain text, it is recommended that you use a [secret store]({{< ref component-secrets.md >}}).
+中间件类型由 `type` 字段决定。 组件设置值，如速率限制，OAuth 凭据和其他设置被放入 `metadata` 部分。 即使元数据值可以在纯文本中包含密钥，但建议您使用一个 [密钥存储]({{< ref component-secrets.md >}})。
 
-Next, a Dapr [configuration]({{< ref configuration-overview.md >}}) defines the pipeline of middleware components for your application.
+接下来，一个 Dapr [配置]({{< ref configuration-overview.md >}}) 定义了您应用程序的中间件组件管道.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

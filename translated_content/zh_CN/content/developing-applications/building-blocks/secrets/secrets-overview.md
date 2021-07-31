@@ -51,6 +51,6 @@ description: "密钥管理构建块概览"
 
 ## 限制访问密钥
 
-为了对访问密钥提供更精细的控制，Dapr 提供了定义范围和限制访问权限的能力。 Learn more about [using secret scoping]({{<ref secrets-scopes>}})
+为了对访问密钥提供更精细的控制，Dapr 提供了定义范围和限制访问权限的能力。 请参阅 [密钥的范围]({{<ref secrets-scopes>}})
 
 

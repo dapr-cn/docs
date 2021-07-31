@@ -83,7 +83,7 @@ dapr init -k --enable-mtls=false
 
 ### Wait for the installation to complete
 
- 您可以使用 `--want` 标志来等待安装完成。
+ 您可以使用 `--wait` 标志来等待安装完成。
 
  默认超时是 300s (5分钟)，但可以使用 `--timeout` 标志自定义超时。
 

@@ -6,4 +6,4 @@ weight: 500
 description: "用于使用特定后端状态存储的指南"
 ---
 
-Explore the **Operations** section to see a list of [supported state stores]({{<ref supported-state-stores.md>}}) and how to setup [state store components]({{<ref setup-state-store.md>}}).
+浏览 **操作** 部分，可查看 [受支持的状态存储]({{<ref supported-state-stores.md>}}) 以及如何安装 [状态存储组件]({{<ref setup-state-store.md>}})。
