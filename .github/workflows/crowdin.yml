@@ -1,0 +1,49 @@
+name: Crowdin Action
+
+on:
+  schedule:
+    - cron: "10 * * * *"
+  push:
+    branches: [v*/translate_site]
+
+jobs:
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: crowdin action
+        uses: crowdin/github-action@1.1.0
+        with:
+          upload_sources: true
+          upload_translations: false
+          download_translations: true
+          dryrun_action: false
+          localization_branch_name: l10n_crowdin_action
+          create_pull_request: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update content
+          committer: dapr-cn <dapr-cn@hotmail.com>
+          signoff: false
+          delete-branch: true
+          title: "Update crowdin translation"
+          labels: |
+            translation update
+            automated pr
+          assignees: |
+            newbe36524
+          reviewers: |
+            newbe36524
+          team-reviewers: |
+            owners
+            maintainers
