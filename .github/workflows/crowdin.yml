@@ -32,7 +32,7 @@ jobs:
           pull_request_labels: 'translation update, automated pr'
           # This is the name of the git branch to with pull request will be created.
           # If not specified default repository branch will be used.
-          pull_request_base_branch_name: 2_translate_site
+          pull_request_base_branch_name: v1.2/translate_site
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
