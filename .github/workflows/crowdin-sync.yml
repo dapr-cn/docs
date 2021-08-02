@@ -18,7 +18,7 @@ jobs:
       - name: update crowdin data
         run: |
           npm install -g @awesome-crowdin/crowdin-contributors
-          crowdin-contributors -p=444716 -o=- --maxContributors=100 --mimimumWordsContributed=100 -t=${{ secrets.CROWDIN_TOKEN }}
+          crowdin-contributors -p=444716 -o=- --maxContributors=100 --mimimumWordsContributed=100 -t=${{ secrets.CROWDIN_PERSONAL_TOKEN }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update crowdin data in README.md
