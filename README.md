@@ -1,7 +1,7 @@
 # Dapr 中文文档库
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-21-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-22-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -79,6 +79,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Stitch-Zhang"><img src="https://avatars.githubusercontent.com/u/61350804?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Stitch-Zhang</b></sub></a><br /><a href="#translation-Stitch-Zhang" title="Translation">🌍</a></td>
     <td align="center"><a href="http://www.cnblogs.com/stulzq"><img src="https://avatars.githubusercontent.com/u/13200155?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zhiqiang Li</b></sub></a><br /><a href="#translation-stulzq" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/doddgu"><img src="https://avatars.githubusercontent.com/u/7299249?v=4?s=100" width="100px;" alt=""/><br /><sub><b>鬼谷子</b></sub></a><br /><a href="#translation-doddgu" title="Translation">🌍</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://blog.cong.moe"><img src="https://avatars.githubusercontent.com/u/18305255?v=4?s=100" width="100px;" alt=""/><br /><sub><b>featherlight</b></sub></a><br /><a href="#translation-zcong1993" title="Translation">🌍</a></td>
   </tr>
 </table>
 
