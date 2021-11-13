@@ -35,17 +35,17 @@ spec:
 
 | Field                   | Required | Binding support |  Details | Example |
 |-------------------------|:--------:|------------|-----|---------|
-| gatewayAddr             | Y | Output | Zeebe gateway address                                                                     | `localhost:26500` | 
-| gatewayKeepAlive        | N | Output | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds  | `45s` | 
-| usePlainTextConnection  | N | Output | Whether to use a plain text connection or not                                             | `true,false` | 
-| caCertificatePath       | N | Output | The path to the CA cert                                                                    | `/path/to/ca-cert` | 
+| gatewayAddr             | Y | Output | Zeebe gateway address                                                                     | `localhost:26500` |
+| gatewayKeepAlive        | N | Output | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds  | `45s` |
+| usePlainTextConnection  | N | Output | Whether to use a plain text connection or not                                             | `true,false` |
+| caCertificatePath       | N | Output | The path to the CA cert                                                                    | `/path/to/ca-cert` |
 
 ## Binding support
 
 This component supports **output binding** with the following operations:
 
 - `topology`
-- `deploy-workflow`
+- `deploy-process`
 - `create-instance`
 - `cancel-instance`
 - `set-variables`
@@ -59,13 +59,13 @@ This component supports **output binding** with the following operations:
 
 ### Output binding
 
-Zeebe uses gRPC under the hood for the Zeebe client we use in this binding. Please consult the [gRPC API reference](https://stage.docs.zeebe.io/reference/grpc.html) for more information. 
+Zeebe uses gRPC under the hood for the Zeebe client we use in this binding. Please consult the [gRPC API reference](https://stage.docs.zeebe.io/reference/grpc.html) for more information.
 
 #### topology
 
 The `topology` operation obtains the current topology of the cluster the gateway is part of.
 
-To perform a `topology` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `topology` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -119,28 +119,25 @@ The response values are:
 - `replicationFactor` - configured replication factor for this cluster
 - `gatewayVersion` - gateway version
 
-#### deploy-workflow
+#### deploy-process
 
-The `deploy-workflow` operation deploys a single workflow to Zeebe.
+The `deploy-process` operation deploys a single process to Zeebe.
 
-To perform a `deploy-workflow` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `deploy-process` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
   "data": "YOUR_FILE_CONTENT",
   "metadata": {
-    "fileName": "products-process.bpmn",
-    "fileType": "bpmn"
+    "fileName": "products-process.bpmn"
   },
-  "operation": "deploy-workflow"
+  "operation": "deploy-process"
 }
 ```
 
 The metadata parameters are:
 
-- `fileName` - the name of the workflow file
-- `fileType` - (optional) the type of the file 'bpmn' or 'file'. If no type was given, the default will be recognized based on the file extension 
-  'bpmn' for file extension .bpmn, for all other files it will be set to 'file'
+- `fileName` - the name of the process file
 
 ##### Response
 
@@ -149,11 +146,11 @@ The binding returns a JSON with the following response:
 ```json
 {
   "key": 2251799813687320,
-  "workflows": [
+  "processes": [
     {
       "bpmnProcessId": "products-process",
       "version": 3,
-      "workflowKey": 2251799813685895,
+      "processDefinitionKey": 2251799813685895,
       "resourceName": "products-process.bpmn"
     }
   ]
@@ -163,23 +160,23 @@ The binding returns a JSON with the following response:
 The response values are:
 
 - `key` - the unique key identifying the deployment
-- `workflows` - a list of deployed workflows
-    - `bpmnProcessId` - the bpmn process ID, as parsed during deployment; together with the version forms a unique identifier for a specific 
-      workflow definition
+- `processes` - a list of deployed processes
+    - `bpmnProcessId` - the bpmn process ID, as parsed during deployment; together with the version forms a unique identifier for a specific
+      process definition
     - `version` - the assigned process version
-    - `workflowKey` - the assigned key, which acts as a unique identifier for this workflow
-    - `resourceName` - the resource name from which this workflow was parsed
+    - `processDefinitionKey` - the assigned key, which acts as a unique identifier for this process
+    - `resourceName` - the resource name from which this process was parsed
 
 #### create-instance
 
-The `create-instance` operation creates and starts an instance of the specified workflow. The workflow definition to use to create the instance can be 
-specified either using its unique key (as returned by the `deploy-workflow` operation), or using the BPMN process ID and a version.
+The `create-instance` operation creates and starts an instance of the specified process. The process definition to use to create the instance can be
+specified either using its unique key (as returned by the `deploy-process` operation), or using the BPMN process ID and a version.
 
-Note that only workflows with none start events can be started through this command.
+Note that only processes with none start events can be started through this command.
 
 ##### By BPMN process ID
 
-To perform a `create-instance` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `create-instance` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -197,22 +194,22 @@ To perform a `create-instance` operation, invoke the Zeebe command binding with 
 
 The data parameters are:
 
-- `bpmnProcessId` - the BPMN process ID of the workflow definition to instantiate
+- `bpmnProcessId` - the BPMN process ID of the process definition to instantiate
 - `version` - (optional, default: latest version) the version of the process to instantiate
 - `variables` - (optional) JSON document that will instantiate the variables for the root variable scope of the
-  workflow instance; it must be a JSON object, as variables will be mapped in a
+  process instance; it must be a JSON object, as variables will be mapped in a
   key-value fashion. e.g. { "a": 1, "b": 2 } will create two variables, named "a" and
   "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
   valid argument, as the root of the JSON document is an array and not an object
 
-##### By workflow key
+##### By process definition key
 
-To perform a `create-instance` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `create-instance` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
   "data": {
-    "workflowKey": 2251799813685895,
+    "processDefinitionKey": 2251799813685895,
     "variables": {
       "productId": "some-product-id",
       "productName": "some-product-name",
@@ -225,13 +222,12 @@ To perform a `create-instance` operation, invoke the Zeebe command binding with 
 
 The data parameters are:
 
-- `workflowKey` - the unique key identifying the workflow definition to instantiate
-- `variables` - (optional) JSON document that will instantiate the variables for the root variable scope of the 
-  workflow instance; it must be a JSON object, as variables will be mapped in a
+- `processDefinitionKey` - the unique key identifying the process definition to instantiate
+- `variables` - (optional) JSON document that will instantiate the variables for the root variable scope of the
+  process instance; it must be a JSON object, as variables will be mapped in a
   key-value fashion. e.g. { "a": 1, "b": 2 } will create two variables, named "a" and
   "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
   valid argument, as the root of the JSON document is an array and not an object
-
 
 ##### Response
 
@@ -239,30 +235,30 @@ The binding returns a JSON with the following response:
 
 ```json
 {
-  "workflowKey": 2251799813685895,
+  "processDefinitionKey": 2251799813685895,
   "bpmnProcessId": "products-process",
   "version": 3,
-  "workflowInstanceKey": 2251799813687851
+  "processInstanceKey": 2251799813687851
 }
 ```
 
 The response values are:
 
-- `workflowKey` - the key of the workflow definition which was used to create the workflow instance
-- `bpmnProcessId` - the BPMN process ID of the workflow definition which was used to create the workflow instance
-- `version` - the version of the workflow definition which was used to create the workflow instance
-- `workflowInstanceKey` - the unique identifier of the created workflow instance
+- `processDefinitionKey` - the key of the process definition which was used to create the process instance
+- `bpmnProcessId` - the BPMN process ID of the process definition which was used to create the process instance
+- `version` - the version of the process definition which was used to create the process instance
+- `processInstanceKey` - the unique identifier of the created process instance
 
 #### cancel-instance
 
-The `cancel-instance` operation cancels a running workflow instance.
+The `cancel-instance` operation cancels a running process instance.
 
-To perform a `cancel-instance` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `cancel-instance` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
   "data": {
-    "workflowInstanceKey": 2251799813687851
+    "processInstanceKey": 2251799813687851
   },
   "metadata": {},
   "operation": "cancel-instance"
@@ -271,7 +267,7 @@ To perform a `cancel-instance` operation, invoke the Zeebe command binding with 
 
 The data parameters are:
 
-- `workflowInstanceKey` - the workflow instance key
+- `processInstanceKey` - the process instance key
 
 ##### Response
 
@@ -279,9 +275,9 @@ The binding does not return a response body.
 
 #### set-variables
 
-The `set-variables` operation creates or updates variables for an element instance (e.g. workflow instance, flow element instance).
+The `set-variables` operation creates or updates variables for an element instance (e.g. process instance, flow element instance).
 
-To perform a `set-variables` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `set-variables` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -300,7 +296,7 @@ To perform a `set-variables` operation, invoke the Zeebe command binding with a 
 
 The data parameters are:
 
-- `elementInstanceKey` - the unique identifier of a particular element; can be the workflow instance key (as 
+- `elementInstanceKey` - the unique identifier of a particular element; can be the process instance key (as
   obtained during instance creation), or a given element, such as a service task (see elementInstanceKey on the job message)
 - `local` - (optional, default: `false`) if true, the variables will be merged strictly into the local scope (as indicated by
   elementInstanceKey); this means the variables is not propagated to upper scopes.
@@ -329,7 +325,7 @@ The response values are:
 
 The `resolve-incident` operation resolves an incident.
 
-To perform a `resolve-incident` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `resolve-incident` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -353,7 +349,7 @@ The binding does not return a response body.
 
 The `publish-message` operation publishes a single message. Messages are published to specific partitions computed from their correlation keys.
 
-To perform a `publish-message` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `publish-message` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -373,7 +369,7 @@ The data parameters are:
 - `messageName` - the name of the message
 - `correlationKey` - (optional) the correlation key of the message
 - `timeToLive` - (optional)  how long the message should be buffered on the broker
-- `messageId` - (optional) the unique ID of the message; can be omitted. only useful to ensure only one message with the given ID will ever 
+- `messageId` - (optional) the unique ID of the message; can be omitted. only useful to ensure only one message with the given ID will ever
   be published (during its lifetime)
 - `variables` - (optional) the message variables as a JSON document; to be valid, the root of the document must be an object, e.g. { "a": "foo" }.
   [ "foo" ] would not be valid
@@ -394,10 +390,10 @@ The response values are:
 
 #### activate-jobs
 
-The `activate-jobs` operation iterates through all known partitions round-robin and activates up to the requested maximum and streams them back to 
+The `activate-jobs` operation iterates through all known partitions round-robin and activates up to the requested maximum and streams them back to
 the client as they are activated.
 
-To perform a `activate-jobs` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `activate-jobs` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -423,7 +419,7 @@ The data parameters are:
 - `maxJobsToActivate` - the maximum jobs to activate by this request
 - `timeout` - (optional, default: 5 minutes) a job returned after this call will not be activated by another call until the timeout has been reached
 - `workerName` - (optional, default: `default`) the name of the worker activating the jobs, mostly used for logging purposes
-- `fetchVariables` - (optional) a list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the 
+- `fetchVariables` - (optional) a list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the
   scope of the job will be returned
 
 ##### Response
@@ -433,7 +429,7 @@ The binding returns a JSON with the following response:
 ```json
 [
   {
-    
+
   }
 ]
 ```
@@ -442,12 +438,12 @@ The response values are:
 
 - `key` - the key, a unique identifier for the job
 - `type` - the type of the job (should match what was requested)
-- `workflowInstanceKey` - the job's workflow instance key
-- `bpmnProcessId` - the bpmn process ID of the job workflow definition
-- `workflowDefinitionVersion` - the version of the job workflow definition
-- `workflowKey` - the key of the job workflow definition
+- `processInstanceKey` - the job's process instance key
+- `bpmnProcessId` - the bpmn process ID of the job process definition
+- `processDefinitionVersion` - the version of the job process definition
+- `processDefinitionKey` - the key of the job process definition
 - `elementId` - the associated task element ID
-- `elementInstanceKey` - the unique key identifying the associated task, unique within the scope of the workflow instance
+- `elementInstanceKey` - the unique key identifying the associated task, unique within the scope of the process instance
 - `customHeaders` - a set of custom headers defined during modelling; returned as a serialized JSON document
 - `worker` - the name of the worker which activated this job
 - `retries` - the amount of retries left to this job (should always be positive)
@@ -458,7 +454,7 @@ The response values are:
 
 The `complete-job` operation completes a job with the given payload, which allows completing the associated service task.
 
-To perform a `complete-job` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `complete-job` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -486,11 +482,11 @@ The binding does not return a response body.
 
 #### fail-job
 
-The `fail-job` operation marks the job as failed; if the retries argument is positive, then the job will be immediately activatable again, and a 
-worker could try again to process it. If it is zero or negative however, an incident will be raised, tagged with the given errorMessage, and the 
+The `fail-job` operation marks the job as failed; if the retries argument is positive, then the job will be immediately activatable again, and a
+worker could try again to process it. If it is zero or negative however, an incident will be raised, tagged with the given errorMessage, and the
 job will not be activatable until the incident is resolved.
 
-To perform a `fail-job` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `fail-job` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -508,7 +504,7 @@ The data parameters are:
 
 - `jobKey` - the unique job identifier, as obtained when activating the job
 - `retries` - the amount of retries the job should have left
-- `errorMessage ` - (optional) an message describing why the job failed this is particularly useful if a job runs out of retries and an 
+- `errorMessage ` - (optional) an message describing why the job failed this is particularly useful if a job runs out of retries and an
   incident is raised, as it this message can help explain why an incident was raised
 
 ##### Response
@@ -517,10 +513,10 @@ The binding does not return a response body.
 
 #### update-job-retries
 
-The `update-job-retries` operation updates the number of retries a job has left. This is mostly useful for jobs that have run out of retries, should the 
+The `update-job-retries` operation updates the number of retries a job has left. This is mostly useful for jobs that have run out of retries, should the
 underlying problem be solved.
 
-To perform a `update-job-retries` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `update-job-retries` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -544,10 +540,10 @@ The binding does not return a response body.
 
 #### throw-error
 
-The `throw-error` operation throw an error to indicate that a business error is occurred while processing the job. The error is identified 
-by an error code and is handled by an error catch event in the workflow with the same error code.
+The `throw-error` operation throw an error to indicate that a business error is occurred while processing the job. The error is identified
+by an error code and is handled by an error catch event in the process with the same error code.
 
-To perform a `throw-error` operation, invoke the Zeebe command binding with a `POST` method and the following JSON body:
+To perform a `throw-error` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
