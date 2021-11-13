@@ -57,7 +57,7 @@ jobs:
       - name: permissions
         #   https://stackoverflow.com/questions/11774397/git-push-error-unable-to-unlink-old-permission-denied/26950991#26950991
         run: |
-          chmod -R ug+w .
+          sudo chmod -R ug+w .
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
