@@ -28,7 +28,7 @@ jobs:
           ref: ${{ matrix.version_tag }}/translate_site
 
       - name: crowdin action
-        uses: crowdin/github-action@1.3.0
+        uses: crowdin/github-action@1.4.1
         with:
           upload_sources: true
           upload_translations: false
