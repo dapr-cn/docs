@@ -54,6 +54,28 @@ def update_source_core(branch: str):
 
 
 @task
+def update_files_for_building(c):
+    print("Updating files for building")
+    for branch in all_versions:
+        update_files_for_building_core(branch)
+    print("Files are updated")
+
+
+def update_files_for_building_core(branch):
+    docs_dir = f"{dapr_cn_base_dir}/{branch}/daprdocs"
+    github_action_dir = f"{dapr_cn_base_dir}/{branch}/.github/workflows/"
+    # copy update_config_zh.sh to docs directory
+    shutil.copy("./update_config_zh.sh", f"{docs_dir}/update_config_zh.sh")
+    # read content of zh-build.yml and replace %%tag%% to branch
+    with open("./zh-build.yml", "r") as f:
+        content = f.read()
+        content = content.replace("%%tag%%", f"{branch}/translate_site")
+        # write content to docs_dir zh-build.yml
+        with open(f"{github_action_dir}/zh-build.yml", "w") as fo:
+            fo.write(content)
+
+
+@task
 def update_all_submodules(c):
     print("Updating all submodules")
     repo = Repo(repo_base_dir)
