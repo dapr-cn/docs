@@ -58,12 +58,13 @@ jobs:
         #   https://stackoverflow.com/questions/11774397/git-push-error-unable-to-unlink-old-permission-denied/26950991#26950991
         run: |
           sudo chmod -R 777 .
+          git config core.filemode false
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          commit-message: "New Crowdin translations ${{ matrix.version_tag }}"
+          commit-message: "New Crowdin translations"
           signoff: false
           delete-branch: true
           branch: l10n_crowdin_action_${{ matrix.version_tag }}
