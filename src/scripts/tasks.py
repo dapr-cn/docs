@@ -24,43 +24,6 @@ def update_source(c):
         update_source_core(branch)
 
 
-@task
-def update_all_submodules(c):
-    print("Updating all submodules")
-    repo = Repo(repo_base_dir)
-    repo.submodule_update(init=True, recursive=True)
-    print("All submodules are updated")
-
-
-@task
-def commit_submodules(c):
-    print("Committing all submodules")
-    for tag in all_versions:
-        print(f"Committing {tag}")
-        commit_submodule_core(tag)
-        print(f"{tag} is committed")
-    # commit base repo
-    main_repo = Repo(repo_base_dir)
-    if main_repo.is_dirty():
-        main_repo.git.add("--all")
-        main_repo.git.commit("-m", "Update submodules")
-        main_repo.git.push("origin")
-        print("Changes are committed")
-    print("All submodules are committed")
-
-
-def commit_submodule_core(tag: str):
-    repo = Repo(f"{repo_base_dir}/src/dapr-cn/{tag}")
-    # check if there is any changes
-    if repo.is_dirty():
-        repo.git.add("--all")
-        repo.git.commit("-m", f"Update content for {tag}")
-        repo.git.push("origin")
-        print("Changes are committed")
-    else:
-        print("No changes found")
-
-
 def update_source_core(branch: str):
     content_dir = f"{dapr_cn_base_dir}/{branch}/content"
     # delete content dir if found
@@ -88,3 +51,55 @@ def update_source_core(branch: str):
                                 f"{content_dir}/contributing",
                                 dirs_exist_ok=True)
     print("sdk content is copied")
+
+
+@task
+def update_all_submodules(c):
+    print("Updating all submodules")
+    repo = Repo(repo_base_dir)
+    repo.submodule_update(init=True, recursive=True)
+    print("All submodules are updated")
+
+
+@task
+def clean_translations(c):
+    print("Cleaning all translations")
+    for branch in all_versions:
+        clean_translations_core(branch)
+    print("All translations are cleaned")
+
+
+def clean_translations_core(branch: str):
+    content_dir = f"{dapr_cn_base_dir}/{branch}/translated_content"
+    # delete content dir if found
+    if os.path.exists(content_dir):
+        shutil.rmtree(content_dir)
+
+
+@task
+def commit_all(c):
+    print("Committing all submodules")
+    for tag in all_versions:
+        print(f"Committing {tag}")
+        commit_submodule_core(tag)
+        print(f"{tag} is committed")
+    # commit base repo
+    main_repo = Repo(repo_base_dir)
+    if main_repo.is_dirty():
+        main_repo.git.add("--all")
+        main_repo.git.commit("-m", "Update submodules")
+        main_repo.git.push("origin")
+        print("Changes are committed")
+    print("All submodules are committed")
+
+
+def commit_submodule_core(tag: str):
+    repo = Repo(f"{repo_base_dir}/src/dapr-cn/{tag}")
+    # check if there is any changes
+    if repo.is_dirty():
+        repo.git.add("--all")
+        repo.git.commit("-m", f"Update content for {tag}")
+        repo.git.push("origin")
+        print("Changes are committed")
+    else:
+        print("No changes found")
