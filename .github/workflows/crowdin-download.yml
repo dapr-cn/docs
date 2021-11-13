@@ -38,17 +38,37 @@ jobs:
           dryrun_action: false
           crowdin_branch_name: ${{ matrix.version_tag }}_translate_site
 
-          # This is the name of the git branch that Crowdin will create when opening a pull request.
-          # This branch does NOT need to be manually created. It will be created automatically by the action.
-          localization_branch_name: l10n_crowdin_action_${{ matrix.version_tag }}
-          create_pull_request: true
-          pull_request_title: "New Crowdin translations"
-          pull_request_body: "New Crowdin pull request with translations"
-          pull_request_labels: "translation update, automated pr"
-          # This is the name of the git branch to with pull request will be created.
-          # If not specified default repository branch will be used.
-          pull_request_base_branch_name: ${{ matrix.version_tag }}/translate_site
+          # # This is the name of the git branch that Crowdin will create when opening a pull request.
+          # # This branch does NOT need to be manually created. It will be created automatically by the action.
+          # localization_branch_name: l10n_crowdin_action_${{ matrix.version_tag }}
+          # create_pull_request: false
+          # pull_request_title: "New Crowdin translations"
+          # pull_request_body: "New Crowdin pull request with translations"
+          # pull_request_labels: "translation update, automated pr"
+          # # This is the name of the git branch to with pull request will be created.
+          # # If not specified default repository branch will be used.
+          # pull_request_base_branch_name: ${{ matrix.version_tag }}/translate_site
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          commit-message: "New Crowdin translations"
+          signoff: false
+          delete-branch: true
+          branch: l10n_crowdin_action_${{ matrix.version_tag }}
+          base: ${{ matrix.version_tag }}/translate_site
+          title: "New Crowdin translations"
+          labels: |
+            automated pr
+          assignees: |
+            newbe36524
+          reviewers: |
+            newbe36524
+          team-reviewers: |
+            owners
+            maintainers
