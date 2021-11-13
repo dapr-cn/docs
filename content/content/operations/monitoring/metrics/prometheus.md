@@ -67,7 +67,7 @@ Once Prometheus is running, you'll be able to visit its dashboard by visiting `h
 ### Prerequisites
 
 - Kubernetes (> 1.14)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm 3](https://helm.sh/)
 
 ### Install Prometheus
@@ -111,7 +111,10 @@ dapr-prom-prometheus-server-694fd8d7c-q5d59         2/2     Running   0         
 ```
 
 ## Example
-<iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=2577" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=2577" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## References
 
