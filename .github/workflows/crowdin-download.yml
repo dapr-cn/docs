@@ -66,7 +66,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          commit-message: "New Crowdin translations"
+          commit-message: "New Crowdin translations ${{ matrix.version_tag }}"
           signoff: false
           delete-branch: true
           branch: l10n_crowdin_action_${{ matrix.version_tag }}
@@ -74,6 +74,7 @@ jobs:
           title: "New Crowdin translations"
           labels: |
             automated pr
+            ${{ matrix.version_tag }}
           assignees: |
             newbe36524
           reviewers: |
