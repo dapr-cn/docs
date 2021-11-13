@@ -1,0 +1,24 @@
+[submodule "src/source/v1.0"]
+	path = src/source/v1.0
+	url = https://github.com/dapr/docs.git
+	branch = v1.0
+[submodule "src/source/v1.1"]
+	path = src/source/v1.1
+	url = https://github.com/dapr/docs.git
+	branch = v1.1
+[submodule "src/source/v1.2"]
+	path = src/source/v1.2
+	url = https://github.com/dapr/docs.git
+	branch = v1.2
+[submodule "src/source/v1.3"]
+	path = src/source/v1.3
+	url = https://github.com/dapr/docs.git
+	branch = v1.3
+[submodule "src/source/v1.4"]
+	path = src/source/v1.4
+	url = https://github.com/dapr/docs.git
+	branch = v1.4
+[submodule "src/source/v1.5"]
+	path = src/source/v1.5
+	url = https://github.com/dapr/docs.git
+	branch = v1.5
