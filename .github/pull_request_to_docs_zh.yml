@@ -1,0 +1,51 @@
+name: create pull request to docs-zh
+
+on:
+  push:
+    branches:
+      - v1.1/publish_translate_site
+
+jobs:
+  delpoy_github:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout docs_zh
+        uses: actions/checkout@v2
+        with:
+          repository: dapr/docs-zh
+          ref: v1.1_content
+      - name: Checkout content
+        uses: actions/checkout@v2
+        with:
+          path: translated
+
+      - name: Copy content
+        run: |
+          rm -rf content
+          mkdir content
+          cp -r translated/translated_content/zh_CN/* content
+          mv content/content content/zh-hans
+          rm -rf translated
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.PAT_TO_DOCS_ZH }}
+          commit-message: Update content
+          committer: dapr-cn <dapr-cn@hotmail.com>
+          signoff: false
+          delete-branch: true
+          title: "Update content"
+          labels: |
+            content update
+            automated pr
+          assignees: |
+            newbe36524
+            skyao
+          reviewers: |
+            newbe36524
+            skyao
+          team-reviewers: |
+            owners
+            maintainers
