@@ -2,7 +2,7 @@
 type: docs
 title: "Dapr terminology and definitions"
 linkTitle: "Terminology"
-weight: 800
+weight: 900
 description: Definitions for common terms and acronyms in the Dapr documentation
 ---
 
@@ -18,4 +18,4 @@ This page details all of the common terms you may come across in the Dapr docs.
 | Dapr control plane | A collection of services that are part of a Dapr installation on a hosting platform such as a Kubernetes cluster. This allows Dapr-enabled applications to run on the platform and handles Dapr capabilities such as actor placement, Dapr sidecar injection, or certificate issuance/rollover. | [Self-hosted overview]({{< ref self-hosted-overview >}})<br />[Kubernetes overview]({{< ref kubernetes-overview >}})
 | Self-hosted | Windows/macOS/Linux machine(s) where you can run your applications with Dapr. Dapr provides the capability to run on machines in "self-hosted" mode. | [Self-hosted mode]({{< ref self-hosted-overview.md >}})
 | Service | A running application or binary. This can refer to your application or to a Dapr application.
-| Sidecar | A program that runs alongside your application as a separate process or container. | [Sidecar pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar)
+| Sidecar | A program that runs alongside your application as a separate process or container. | [Sidecar pattern](https://docs.microsoft.com/azure/architecture/patterns/sidecar)
