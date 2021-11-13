@@ -274,7 +274,7 @@ Will result in the following output:
 
 {{< code-snippet file="contributing-1.py" lang="python" marker="#SAMPLE" >}}
 
-Use the `replace-key-[token]` and `replace-value-[token]` parameters to limit the embedded snipped to a portion of the sample file. This is useful when you want abbreviate a portion of the code sample. Multiple replacements are supported with multiple values of `token`. 
+Use the `replace-key-[token]` and `replace-value-[token]` parameters to limit the embedded snipped to a portion of the sample file. This is useful when you want abbreviate a portion of the code sample. Multiple replacements are supported with multiple values of `token`.
 
 The shortcode below and code sample:
 
@@ -334,6 +334,8 @@ The shortcode would be:
 
 To create a button in a webpage, use the `button` shortcode.
 
+An optional "newtab" parameter will indicate if the page should open in a new tab. Options are "true" or "false". Default is "false", where the page will open in the same tab.
+
 #### Link to an external page
 
 ```
@@ -346,10 +348,10 @@ To create a button in a webpage, use the `button` shortcode.
 
 You can also reference pages in your button as well:
 ```
-{{</* button text="My Button" page="contributing" */>}}
+{{</* button text="My Button" page="contributing" newtab="true" */>}}
 ```
 
-{{< button text="My Button" page="contributing" >}}
+{{< button text="My Button" page="contributing" newtab="true" >}}
 
 #### Button colors
 
