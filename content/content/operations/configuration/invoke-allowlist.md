@@ -11,7 +11,10 @@ Access control enables the configuration of policies that restrict what operatio
 An access control policy is specified in configuration and be applied to Dapr sidecar for the *called* application. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applications to access to the called app.
 
 Watch this [video](https://youtu.be/j99RN_nxExA?t=1108) on how to apply access control list for service invocation.
+
+<div class="embed-responsive embed-responsive-16by9">
 <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=1108" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Concepts
 
@@ -260,9 +263,9 @@ The following steps run the Sentry service locally with mTLS enabled, set up nec
 
    {{% codetab %}}
    ```powershell
-   $env:DAPR_TRUST_ANCHORS=$(Get-Content $env:USERPROFILE\.dapr\certs\ca.crt)
-   $env:DAPR_CERT_CHAIN=$(Get-Content $env:USERPROFILE\.dapr\certs\issuer.crt)
-   $env:DAPR_CERT_KEY=$(Get-Content $env:USERPROFILE\.dapr\certs\issuer.key)
+   $env:DAPR_TRUST_ANCHORS=$(Get-Content -raw $env:USERPROFILE\.dapr\certs\ca.crt)
+   $env:DAPR_CERT_CHAIN=$(Get-Content -raw $env:USERPROFILE\.dapr\certs\issuer.crt)
+   $env:DAPR_CERT_KEY=$(Get-Content -raw $env:USERPROFILE\.dapr\certs\issuer.key)
    $env:NAMESPACE="default"
    ```
 
@@ -297,9 +300,9 @@ The following steps run the Sentry service locally with mTLS enabled, set up nec
 
    {{% codetab %}}
    ```powershell
-   $env:DAPR_TRUST_ANCHORS=$(Get-Content $env:USERPROFILE\.dapr\certs\ca.crt)
-   $env:DAPR_CERT_CHAIN=$(Get-Content $env:USERPROFILE\.dapr\certs\issuer.crt)
-   $env:DAPR_CERT_KEY=$(Get-Content $env:USERPROFILE\.dapr\certs\issuer.key)
+   $env:DAPR_TRUST_ANCHORS=$(Get-Content -raw $env:USERPROFILE\.dapr\certs\ca.crt)
+   $env:DAPR_CERT_CHAIN=$(Get-Content -raw $env:USERPROFILE\.dapr\certs\issuer.crt)
+   $env:DAPR_CERT_KEY=$(Get-Content -raw $env:USERPROFILE\.dapr\certs\issuer.key)
    $env:NAMESPACE="default"
    ```
    {{% /codetab %}}
