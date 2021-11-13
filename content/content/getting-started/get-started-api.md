@@ -101,7 +101,4 @@ Exit the redis-cli with:
 exit
 ```
 
-{{% alert color="primary" %}}
-[Next step: Define a component >>]({{< ref get-started-component.md >}})
-{{% /alert %}}
-
+<a class="btn btn-primary" href="{{< ref get-started-component.md >}}" role="button">Next step: Define a component >></a>
