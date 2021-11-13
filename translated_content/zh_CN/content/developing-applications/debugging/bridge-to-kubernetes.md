@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "Bridge to Kubernetes support for Dapr services"
+title: "Bridge to Kubernetes支持Dapr服务"
 linkTitle: "Bridge to Kubernetes"
 weight: 300
-description: "Debug Dapr apps locally which still connected to your Kubernetes cluster"
+description: "在本地调试与你的Kubernetes集群相连的Dapr应用程序"
 ---
 
-Bridge to Kubernetes allows you to run and debug code on your development computer, while still connected to your Kubernetes cluster with the rest of your application or services. This type of debugging is often called *local tunnel debugging*.
+Bridge to Kubernetes允许你在你的开发计算机上运行和调试代码，同时仍然与你的应用程序或服务的其他部分连接到你的Kubernetes集群。 这种类型的调试通常称为 *本地隧道调试*。
 
-{{< button text="Learn more about Bridge to Kubernetes" link="https://aka.ms/bridge-vscode-dapr" >}}
+{{< button text="了解更多关于Bridge to Kubernetes" link="https://aka.ms/bridge-vscode-dapr" >}}
 
-## Debug Dapr apps
+## 调试 Dapr 应用
 
-Bridge to Kubernetes supports debugging Dapr apps on your machine, while still having them interact with the services and applications running on your Kubernetes cluster. This example showcases Bridge to Kubernetes enabling a developer to debug the [distributed calculator quickstart](https://github.com/dapr/quickstarts/tree/master/distributed-calculator): <iframe width="560" height="315" src="https://www.youtube.com/embed/rxwg-__otso" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+Bridge to Kubernetes支持在你的机器上调试Dapr应用程序，同时还能让它们与Kubernetes集群上运行的服务和应用程序进行交互。 这个例子展示了Bridge to Kubernetes使开发人员能够调试[分布式计算器快速入门](https://github.com/dapr/quickstarts/tree/master/distributed-calculator)。 <iframe width="560" height="315" src="https://www.youtube.com/embed/rxwg-__otso" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 {{% alert title="Isolation mode" color="warning" %}}
-[Isolation mode](https://aka.ms/bridge-isolation-vscode-dapr) is currently not supported with Dapr apps. Make sure to launch Bridge to Kubernetes mode without isolation.
+[隔离模式](https://aka.ms/bridge-isolation-vscode-dapr)目前不支持Dapr应用程序。 确保在无隔离状态下启动Bridge to Kubernetes模式。
 {{% /alert %}}
 
 ## 深入阅读
 
-- [Bridge to Kubernetes documentation](https://code.visualstudio.com/docs/containers/bridge-to-kubernetes)
-- [VSCode integration]({{< ref vscode >}})
+- [桥接到Kubernetes的文档](https://code.visualstudio.com/docs/containers/bridge-to-kubernetes)
+- [VSCode 集成]({{< ref vscode >}})

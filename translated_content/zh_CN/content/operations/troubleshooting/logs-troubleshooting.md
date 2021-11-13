@@ -49,7 +49,7 @@ When running Dapr with the Dapr CLI, both your app's log output and the runtime'
 ```bash
 dapr run node myapp.js
 ℹ️  Starting Dapr with id Trackgreat-Lancer on port 56730
-✅  You are up and running!  
+✅  You are up and running! Both Dapr and your app logs will appear here.
 
 == APP == App listening on port 3000!
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="starting Dapr Runtime -- version 0.3.0-alpha -- commit b6f2810-dirty"

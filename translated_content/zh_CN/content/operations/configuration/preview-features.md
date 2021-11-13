@@ -7,13 +7,13 @@ description: "How to specify and enable preview features"
 ---
 
 ## 概述
-Some features in Dapr are considered experimental when they are first released. These features require explicit opt-in in order to be used. The opt-in is specified in Dapr's configuration.
+Dapr 中的某些功能在首次发布时被视为实验性功能。 这些功能需要明确的选择加入才能使用。 选择加入在 Dapr 的配置中指定。
 
-Currently, preview features are enabled on a per application basis when running on Kubernetes. A global scope may be introduced in the future should there be a use case for it.
+目前，在运行Kubernetes时，在每个应用程序的基础上启用预览功能。 如果今后有必要使用全局范围，则可引入全局范围。
 
-### Current preview features
-Below is a list of existing preview features:
-- [Actor Reentrancy]({{<ref actor-reentrancy.md>}})
+### 当前预览功能
+以下是现有预览功能列表：
+- [Actor可重入性]({{<ref actor-reentrancy.md>}})
 
 ## Configuration properties
 The `features` section under the `Configuration` spec contains the following properties:

@@ -73,7 +73,7 @@ spec:
 | --------- | --------------------------------------------- |
 | state（状态） | [State（状态）]({{< ref state_api.md>}})          |
 | invoke    | [服务调用]({{< ref service_invocation_api.md >}}) |
-| 秘密        | [秘密]({{< ref secrets_api.md >}})              |
+| 秘密        | [密钥]({{< ref secrets_api.md >}})              |
 | 绑定        | [输出绑定]({{< ref bindings_api.md >}})           |
 | publish   | [发布/订阅]({{< ref pubsub.md >}})                |
 | actor     | [Actors]({{< ref actors_api.md >}})           |

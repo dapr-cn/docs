@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Contributing with GitHub Codespaces"
+title: "使用 GitHub Codespaces 贡献"
 linkTitle: "GitHub Codespaces"
 weight: 2500
-description: "How to work with Dapr repos in GitHub Codespaces"
+description: "如何在 GitHub Codespaces 中与 Dapr 仓库协同工作"
 aliases:
-  - "/developing-applications/ides/codespaces/"
+  - "/zh-hans/developing-applications/ides/codespaces/"
 ---
 
-[GitHub Codespaces](https://github.com/features/codespaces) are the easiest way to get up and running for contributing to a Dapr repo. In as little as a single click, you can have an environment with all of the prerequisites ready to go in your browser.
+[GitHub Codespaces](https://github.com/features/codespaces) 是启动和运行 Dapr 环境最简单的方式。 只需点击一下，您就可以在浏览器中访问所有准备就绪的环境。
 
 {{% alert title="Private Beta" color="warning" %}}
 GitHub Codespaces目前处于内测阶段。 在 [这里](https://github.com/features/codespaces/signup) 注册。
@@ -26,21 +26,21 @@ GitHub Codespaces目前处于内测阶段。 在 [这里](https://github.com/fea
 
 <img src="/images/codespaces-create.png" alt="创建 Dapr Codespace 的截图" width="300" />
 
-If you haven't already forked the repo, creating the Codespace will also create a fork for you and use it inside the Codespace.
+如果您尚未 forked 仓库，创建代码空间还将为您创建一个 fork，并在 Codespace 内使用它。
 
 ### 支持的 Repo
 
 - [Dapr](https://github.com/dapr/dapr)
-- [Components-contrib](https://github.com/dapr/components-contrib)
+- [组件概念](https://github.com/dapr/components-contrib)
 - [Python SDK](https://github.com/dapr/python-sdk)
 
-### Developing Dapr Components in a Codespace
+### 在 Codespace 中开发 Dapr 组件
 
-Developing a new Dapr component requires working with both the [components-contrib](https://github.com/dapr/components-contrib) and [dapr](https://github.com/dapr/dapr) repos together under the `$GOPATH` tree for testing purposes. To facilitate this, the `/go/src/github.com/dapr` folder in the components-contrib Codespace will already be set up with your fork of components-contrib, and a clone of the dapr repo as described in the [component development documentation](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md). A few things to note in this configuration:
+开发新的 Dapr 组件需要与 [components-contrib](https://github.com/dapr/components-contrib) 和 [dapr](https://github.com/dapr/dapr) 一起存放在 `$GOPATH` 代码树下进行测试。 为了方便，在你的Codespace components-contrib 分支中已经设置好`/go/src/github.com/dapr`文件夹以及一个dapr的克隆版本，就像[组件开发文档](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md)中描述的一样。 在这个配置中需要注意以下事项：
 
-- The components-contrib and dapr repos only define Codespaces for the Linux amd64 environment at the moment.
-- The `/go/src/github.com/dapr/components-contrib` folder is a soft link to Codespace's default `/workspace/components-contrib` folder, so changes in one will be automatically reflected in the other.
-- Since the `/go/src/github.com/dapr/dapr` folder uses a clone of the official dapr repo rather than a fork, you will not be able to make a pull request from changes made in that folder directly. You can use the dapr Codespace separately for that PR, or if you would like to use the same Codespace for the dapr changes as well, you should remap the dapr repo origin to your fork in the components-contrib Codespace. For example, to use a dapr fork under `my-git-alias`:
+- Components-contrib 和dapr仓库目前仅支持Linux amd64环境的Codespaces。
+- `/go/src/github.com/dapr/components-contrib` 只是Codespace的默认 `/workspace/components-contrib` 文件夹的一个软链接，所以变更其中一个会自动对另一个产生影响。
+- 因为 `/go/src/github. om/dapr/dapr` 文件夹使用的是官方的 dapr repo 克隆而不是fork。 所以您无法直接在该文件夹中提出拉取请求。 您可以为此PR使用单独的 Dapr Codespace 或者如果您想要使用相同的 Codespace 。 你应该重新映射dapr库源到你的components-contrib Codespace中的fork。 例如，使用 `my-git-alias` 下的 dapr 分支：
 
 ```bash
 cd /go/src/github.com/dapr/dapr

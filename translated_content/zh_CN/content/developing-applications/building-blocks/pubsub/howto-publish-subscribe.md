@@ -133,7 +133,7 @@ kubectl apply -f subscription.yaml
 
 {{< /tabs >}}
 
-#### Example
+#### 示例
 
 {{< tabs Python Node PHP>}}
 

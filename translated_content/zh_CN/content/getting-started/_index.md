@@ -9,11 +9,11 @@ no_list: true
 
 欢迎来到 Dapr 的入门指南
 
-{{% alert title="Dapr Concepts" color="primary" %}}
-If you are looking for an introductory overview of Dapr and learn more about basic Dapr terminology, it is recommended to visit the [concepts section]({{<ref concepts>}}).
+{{% alert title="Dapr 概念" color="primary" %}}
+如果你想了解Dapr的介绍性概述，并学习更多关于Dapr的基本术语，建议访问[概念部分]({{<ref concepts>}})。
 {{% /alert %}}
 
-这篇入门指南将引导您完成安装，初始化和开始使用 Dapr 的一系列步骤。 The recommended way to get started with Dapr is to setup a local development environment (also referred to as [_self-hosted_ mode]({{< ref self-hosted >}})) which includes the Dapr CLI, Dapr sidecar binaries, and some default components that can help you start using Dapr quickly.
+这篇入门指南将引导您完成安装，初始化和开始使用 Dapr 的一系列步骤。 建议开始使用Dapr的方法是设置一个本地开发环境（也被称为[_self-hosted_模式]({{< ref self-hosted >}})），其中包括Dapr CLI、Dapr sidecar二进制文件以及一些可以帮助你快速开始使用Dapr的默认组件。
 
 这篇入门指南将包含如下的步骤：
 1. 安装 Dapr CLI

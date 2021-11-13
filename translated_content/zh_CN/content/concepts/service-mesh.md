@@ -4,15 +4,15 @@ title: "Dapr 和服务网格"
 linkTitle: "服务网格"
 weight: 100
 description: >
-  How Dapr compares to, and works with, service meshes
+  Dapr 如何与服务网格进行比较和工作
 ---
 
-Dapr uses a sidecar architecture, running as a separate process alongside the application and includes features such as service invocation, network security, and distributed tracing. This often raises the question: how does Dapr compare to service mesh solutions such as Linkerd, Istio and Open Service Mesh (OSM)?
+Dapr 使用 sidecar 架构，与应用程序一起作为单独的流程运行，包括服务调用、网络安全和分布式跟踪等功能。 这经常会引发一个问题：Dapr 与Linkerd 、Istio 或开放式服务网格(OSM) 等服务网格解决方案相比如何？
 
 ## Dapr 和服务网格的比较
-While Dapr and service meshes do offer some overlapping capabilities, **Dapr is not a service mesh**, where a service mesh is defined as a *networking* service mesh. 与专注于网络问题的服务网格不同，Dapr 专注于提供构建基块，使开发人员更容易将应用程序构建为微服务。 Dapr is developer-centric, versus service meshes which are infrastructure-centric.
+虽然 Dapr 和服务网格确实存在一些重叠功能，但 Dapr **不是服务网格** ，尤其服务网格被定义为 *"网络"* 服务网格。 与专注于网络问题的服务网格不同，Dapr 专注于提供构建基块，使开发人员更容易将应用程序构建为微服务。 Dapr 以开发人员为中心，而服务网格以基础设施为中心。
 
-In most cases, developers do not need to be aware that the application they are building will be deployed in an environment which includes a service mesh, since a service mesh intercepts network traffic. Service meshes are mostly managed and deployed by system operators, whereas Dapr building block APIs are intended to be used by developers explicitly in their code.
+在大多数情况下，开发人员不需要意识到他们正在构建的应用程序将部署在包括服务网格在内的环境中，因为服务网格会拦截网络流量。 服务网格大多由系统运营商管理和部署，而 Dapr 构建块 API 则打算由开发人员在其代码中明确使用。
 
 Dapr 与服务网格都有的一些常见功能包括：
 - 基于 mTLS 加密的服务到服务安全通信
@@ -20,9 +20,9 @@ Dapr 与服务网格都有的一些常见功能包括：
 - 服务到服务分布式跟踪
 - 故障重试恢复能力
 
- Importantly, Dapr provides service discovery and invocation via names, which is a developer-centric concern. This means that through Dapr's service invocation API, developers call a method on a service name, whereas service meshes deal with network concepts such as IP addresses and DNS addresses. 但是，Dapr 不提供路由或流量分配等关于流量控制的功能。 流量路由通常在应用程序的入口代理中处理，不必使用服务网格。 In addition, Dapr provides other application-level building blocks for state management, pub/sub messaging, actors, and more.
+ 重要的是，Dapr 以开发人员为中心，提供了通过名称进行服务发现和调用的方式。 也就是说，通过 Dapr 的服务调用 API，开发人员使用服务名称进行调用，而服务网格则需处理网络概念，如 IP 和 DNS 地址。 但是，Dapr 不提供路由或流量分配等关于流量控制的功能。 流量路由通常在应用程序的入口代理中处理，不必使用服务网格。 此外，Dapr 还提供了其他应用级别的构建块，如状态管理、发布/订阅 、参与者等。
 
-Another difference between Dapr and service meshes is observability (tracing and metrics). 服务网格在网络级别运行，并跟踪服务之间的网络调用。 Dapr does this with service invocation. Moreover, Dapr also provides observability (tracing and metrics) over pub/sub calls using trace IDs written into the Cloud Events envelope. This means that metrics and tracing with Dapr is more extensive than with a service mesh for applications that use both service-to-service invocation and pub/sub to communicate.
+Dapr 和服务网格之间的另一个区别是可观察性(跟踪和度量)。 服务网格在网络级别运行，并跟踪服务之间的网络调用。 Dapr 是通过服务调用的方式来实现的。 此外，Dapr 还使用写入 Cloud Events 信封的 trace ID，在 发布/订阅 中提供可观察性（跟踪和 metrics ）。 这意味着在应用程序中，使用 Dapr 进行度量和跟踪比使用“服务到服务调用”及“发布/订阅进行通信”的服务网格更易扩展。
 
 下图展示了 Dapr 和服务网格提供的重叠功能和独特功能：
 
@@ -35,11 +35,11 @@ Dapr 也适用于服务网格。 如果两者部署在一起，Dapr 和服务网
 - [Dapr 和 Linkerd](https://youtu.be/xxU68ewRmz8?t=142)
 - [Dapr 和 Istio](https://youtu.be/ngIDOQApx8g?t=335)
 
-## When to choose using Dapr, a service mesh, or both
-Should you be using Dapr, a service mesh, or both? 答案取决于您的需求。 If, for example, you are looking to use Dapr for one or more building blocks such as state management or pub/sub, and you are considering using a service mesh just for network security or observability, you may find that Dapr is a good fit and that a service mesh is not required.
+## 何时选择使用 Dapr、服务网格或者两者兼存
+您应该使用 Dapr、服务网格还是两者兼而有之？ 答案取决于您的需求。 例如，如果您希望将 Dapr 用于一个或多个构建块，例如状态管理或 发布/订阅，同时考虑仅针对网络安全或可观察性使用服务网格，那您可能会发现 Dapr 已经非常合适，并不需要使用服务网格。
 
-Typically you would use a service mesh with Dapr where there is a corporate policy that traffic on the network must be encrypted for all applications. For example, you may be using Dapr in only part of your application, and other services and processes that are not using Dapr in your application also need their traffic encrypted. In this scenario a service mesh is the better option, and most likely you should use mTLS and distributed tracing on the service mesh and disable this on Dapr.
+一个需要同时使用Dapr和服务网格的典型场景是：所有应用程序的通信作为一个整体策略，都需要进行加密处理的时候。 例如，您可能仅在应用程序的一部分中使用 Dapr，而应用程序中未使用 Dapr 的其他服务和处理也需要加密通信。 在这种场景下，使用服务网格是更好的选择。且最好您在服务网格中启用 mTLS 及分布式跟踪功能，并在Dapr中禁用掉它们。
 
 如果您为了A/B测试，需要进行流量拆分，使用服务网格将使您受益，因为Dapr并没有提供这些功能。
 
-In some cases, where you require capabilities that are unique to both, you will find it useful to leverage both Dapr and a service mesh; as mentioned above, there is no limitation to using them together.
+在某些情况下，如果您需要两者都独有的功能，您会发现同时使用Dapr和服务网格是很有用的 - 如上所述，同时使用它们是没有任何限制的。

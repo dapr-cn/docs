@@ -215,23 +215,23 @@ brew install dapr/tap/dapr-cli
 
 {{< /tabs >}}
 
-### Embedded code snippets
+### 嵌入代码片段
 
-Use the `code-snippet` shortcode to reference code snippets from the `static/code` directory.
+使用 `code-snippet` 快捷码从 `静态/代码` 目录中的引用代码片段。
 
 ```
 {{</* code-snippet file="myfile.py" lang="python" */>}}
 ```
 
 {{% alert title="Warning" color="warning" %}}
-All Dapr sample code should be self-contained in separate files, not in markdown. Use the techniques described here to highlight the parts of the sample code users should focus on.
+所有Dapr示例代码都应该在单独的文件中自成一体，而不是在Markdown中。 使用这里描述的技术来突出示例代码的部分用户应该关注的问题。
 {{% /alert %}}
 
-Use the `lang` (default `txt`) parameter to configure the language used for syntax highlighting.
+使用 `lang` (默认 `txt`) 参数来配置用于语法高亮的语言。
 
-Use the `marker` parameter to limit the embedded snipped to a portion of the sample file. This is useful when you want to show just a portion of a larger file. The typical way to do this is surround the interesting code with comments, and then pass the comment text into `marker`.
+使用 `marker` 参数限制嵌入式到部分示例文件中。 当您只想显示较大文件的一部分时，这是非常有用的。 典型的方法是用注释包围感兴趣的代码，然后将注释文本传递给`marker`。
 
-The shortcode below and code sample:
+下面的短代码和代码示例:
 
 ```
 {{</* code-snippet file="./contributing-1.py" lang="python" marker="#SAMPLE" */>}}
@@ -266,13 +266,13 @@ with DaprClient() as d:
 #SAMPLE
 ```
 
-Will result in the following output:
+将产生以下产出：
 
 {{< code-snippet file="contributing-1.py" lang="python" marker="#SAMPLE" >}}
 
 Use the `replace-key-[token]` and `replace-value-[token]` parameters to limit the embedded snipped to a portion of the sample file. This is useful when you want abbreviate a portion of the code sample. Multiple replacements are supported with multiple values of `token`.
 
-The shortcode below and code sample:
+下面的短代码和代码示例:
 
 ```
 {{</* code-snippet file="./contributing-2.py" lang="python" replace-key-imports="#IMPORTS" replace-value-imports="# Import statements"  */>}}
@@ -307,7 +307,7 @@ with DaprClient() as d:
         time.sleep(2)
 ```
 
-Will result in the following output:
+将产生以下产出：
 
 {{< code-snippet file="./contributing-2.py" lang="python" replace-key-imports="#IMPORTS" replace-value-imports="# Import statements"  >}}
 

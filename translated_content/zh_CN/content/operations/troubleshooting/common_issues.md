@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Common issues when running Dapr"
-linkTitle: "Common Issues"
+title: "运行 Dapr 时的常见问题"
+linkTitle: "常见问题"
 weight: 1000
-description: "Common issues and problems faced when running Dapr applications"
+description: "运行 Dapr 应用程序时面临的常见问题"
 ---
 
-## I don't see the Dapr sidecar injected to my pod
+## 我没有看到 Dapr sidecar 注入我的 pod 中
 
 There could be several reasons to why a sidecar will not be injected into a pod. First, check your deployment or pod YAML file, and check that you have the following annotations in the right place:
 

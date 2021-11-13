@@ -140,19 +140,9 @@ dapr --app-id myapp run python pythonState.py
 == DAPR == time="2021-01-06T21:34:33.9760387-08:00" level=info msg="API gRPC server is running on port 51656" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
 == DAPR == time="2021-01-06T21:34:33.9770372-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 172.9994ms" app_id=Braidbald-Boot scope=dapr.
 
-Checking if Dapr sidecar is listening on GRPC port 51656
-Dapr sidecar is up and running.
-Updating metadata for app command: python pythonState.py
-You are up and running! Both Dapr and your app logs will appear here.
-
-== APP == State has been stored
-== APP == Got value: b'myFirstValue' name: statestore, type: state.redis" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T21:34:33.9760387-08:00" level=info msg="API gRPC server is running on port 51656" app_id=Braidbald-Boot scope=dapr.runtime type=log ver=0.11.3
-== DAPR == time="2021-01-06T21:34:33.9770372-08:00" level=info msg="dapr initialized. Status: Running. Init Elapsed 172.9994ms" app_id=Braidbald-Boot scope=dapr.
-
  
 Updating metadata for app command: python pythonState.py
-You are up and running!  
+You are up and running! Both Dapr and your app logs will appear here.
 
 == APP == State has been stored
 == APP == Got value: b'myFirstValue'
@@ -190,7 +180,7 @@ dapr --app-id myapp run -- php state-example.php
 你应该会得到一个类似于下面的输出，它将同时显示Dapr和应用程序的日志:
 
 ```md
-✅  You're up and running!  
+✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T16:30:11.078777+01:00] APP.ALERT: State has been stored [] []
 
@@ -264,7 +254,7 @@ Starting Dapr with id Yakchocolate-Lord. HTTP Port: 59457. gRPC Port: 59458
 Checking if Dapr sidecar is listening on GRPC port 59458
 Dapr sidecar is up and running.
 Updating metadata for app command: python pythonState.py
-You're up and running!  
+You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == State has been stored
 == APP == Got value: b'value1'
@@ -306,7 +296,7 @@ dapr --app-id myapp run -- php state-example.php
 你应该会看到类似下面的输出:
 
 ```md
-✅  You're up and running!  
+✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T16:38:00.839201+01:00] APP.ALERT: State has been stored [] []
 
@@ -390,7 +380,7 @@ dapr --app-id myapp run python pythonState.py
 Checking if Dapr sidecar is listening on GRPC port 60614
 Dapr sidecar is up and running.
 Updating metadata for app command: python pythonState.py
-You're up and running!  
+You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == States have been stored
 == APP == Got items: [b'value1', b'value2']
@@ -435,7 +425,7 @@ dapr --app-id myapp run -- php state-example.php
 并看到以下输出:
 
 ```md
-✅  You're up and running!  
+✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T16:55:02.913801+01:00] APP.ALERT: States have been stored [] []
 
@@ -529,7 +519,7 @@ Starting Dapr with id Singerchecker-Player. HTTP Port: 59533. gRPC Port: 59534
 Checking if Dapr sidecar is listening on GRPC port 59534
 Dapr sidecar is up and running.
 Updating metadata for app command: python pythonState.py
-You're up and running!  
+You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == State transactions have been completed
 == APP == Got items: [b'value1', b'']
@@ -577,7 +567,7 @@ dapr --app-id myapp run -- php state-example.php
 观察到以下输出:
 
 ```md
-✅  You're up and running!  
+✅  You're up and running! Both Dapr and your app logs will appear here.
 
 == APP == [2021-02-12T17:10:06.837110+01:00] APP.ALERT: Transaction committed! [] []
 

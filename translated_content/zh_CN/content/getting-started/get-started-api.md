@@ -5,13 +5,13 @@ linkTitle: "使用 Dapr 的内置 API"
 weight: 30
 ---
 
-After running the `dapr init` command in the [previous step]({{<ref install-dapr-selfhost.md>}}), your local environment has the Dapr sidecar binaries as well as default component definitions for both state management and a message broker (both using Redis). 现在您可以通过使用 Dapr CLI 来运行 Dapr sidecar 并尝试使用状态API来存储和检索状态，从而尝试 Dapr 提供的一些功能。 You can learn more about the state building block and how it works in [these docs]({{< ref state-management >}}).
+在 [前一步]({{< ref install-dapr-selfhost. md>}})中运行了 `dapr init` 命令后， 您的本地环境有 Dapr sidecar 二进制文件以及默认组件定义的状态管理和消息中介者(都使用 Redis)。 现在您可以通过使用 Dapr CLI 来运行 Dapr sidecar 并尝试使用状态API来存储和检索状态，从而尝试 Dapr 提供的一些功能。 你可以在 [}}">这些文档]({{< ref state-management >}})中了解更多关于状态构建块及其工作原理的信息。
 
 您现在将运行sidecar并直接调用 API (模拟应用程序将做什么)。
 
 ## 第 1 步：运行Dapr sidecar
 
-One of the most useful Dapr CLI commands is [`dapr run`]({{< ref dapr-run.md >}}). 此命令与sidecar一起启动一个应用程序。 为了本教程的目的，您将在没有应用程序的情况下运行sidecar。
+最有用的 Dapr CLI 命令之一是 [`dapr run`]({{< ref dapr-run.md >}})。 此命令与sidecar一起启动一个应用程序。 为了本教程的目的，您将在没有应用程序的情况下运行sidecar。
 
 运行以下命令以启动 Dapr sidecar，它将在端口 3500 上监听名为 myapp 的空白应用程序：
 
