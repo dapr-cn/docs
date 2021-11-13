@@ -2,17 +2,30 @@ name: Download translation from Crowdin
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "0 0 * * *"
   push:
-    branches: [v*/translate_site]
+    branches:
+      - crowdin
 
 jobs:
   synchronize-with-crowdin:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version_tag:
+          - v1.0
+          - v1.1
+          - v1.2
+          - v1.3
+          - v1.4
+          - v1.5
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.version_tag }}/translate_site
 
       - name: crowdin action
         uses: crowdin/github-action@1.3.0
@@ -21,18 +34,18 @@ jobs:
           upload_translations: false
           download_translations: true
           dryrun_action: false
-          crowdin_branch_name: v1.2_translate_site
+          crowdin_branch_name: ${{ matrix.version_tag }}_translate_site
 
           # This is the name of the git branch that Crowdin will create when opening a pull request.
           # This branch does NOT need to be manually created. It will be created automatically by the action.
-          localization_branch_name: l10n_crowdin_action
+          localization_branch_name: l10n_crowdin_action_${{ matrix.version_tag }}
           create_pull_request: true
           pull_request_title: "New Crowdin translations"
           pull_request_body: "New Crowdin pull request with translations"
           pull_request_labels: "translation update, automated pr"
           # This is the name of the git branch to with pull request will be created.
           # If not specified default repository branch will be used.
-          pull_request_base_branch_name: v1.2/translate_site
+          pull_request_base_branch_name: ${{ matrix.version_tag }}/translate_site
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
