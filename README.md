@@ -179,6 +179,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/doddgu">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>doddgu</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>2372 words</b>
+                  </sub>
+              </td></tr><tr>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/charleszhn">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -189,19 +202,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>1727 words</b>
-                  </sub>
-              </td></tr><tr>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/doddgu">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>doddgu</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>1592 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
