@@ -6,7 +6,7 @@ weight: 20
 description: 了解有关 Actor 模式的更多信息
 ---
 
-The Dapr actor runtime provides support for [virtual actors]({{< ref actors-overview.md >}}) through following capabilities:
+Dapr actors 运行时提供了以下功能以支持[虚拟actors]({{< ref actors-overview.md >}}):
 
 ## 调用 Actor 方法
 
@@ -20,7 +20,7 @@ POST/GET/PUT/DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/meth
 
 更多信息，请查阅：[api 规范]({{< ref "actors_api.md#invoke-actor-method" >}})
 
-Alternatively, you can use the Dapr SDK in [.NET]({{< ref "dotnet-actors" >}}), [Java]({{< ref "java#actors" >}}), or [Python]({{< ref "python-actor" >}}).
+或者，您可以在 [.NET]({{< ref "dotnet-actors" >}}), [Java]({{< ref "java#actors" >}}), 或 [Python]({{< ref "python-actor" >}}) 中使用Dapr SDK 。
 
 ## Actor 状态管理
 
@@ -32,51 +32,51 @@ Actor 可以使用状态管理功能可靠地保存状态。 您可以通过 HTT
 
 Actors 可以通过 timer 或者 remider 自行注册周期性的任务.
 
-The functionality of timers and reminders is very similar. The main difference is that Dapr actor runtime is not retaining any information about timers after deactivation, while persisting the information about reminders using Dapr actor state provider.
+Timers 和 reminders 的功能非常相似。 主要的区别在于，Dapr actor运行时在停用后不保留任何有关 timer 的信息，而使用Dapr actor状态提供程序持久化有关 reminder 的信息。
 
-This distintcion allows users to trade off between light-weight but stateless timers vs. more resource-demanding but stateful reminders.
+这种区别允许用户在轻量级但无状态的timer和需要更多资源但有状态的reminder之间进行权衡。
 
-The scheduling configuration of timers and reminders is identical, as summarized below:
-
----
-`dueTime` is an optional parameter that sets time at which or time interval before the callback is invoked for the first time. If `dueTime` is omitted, the callback is invoked immediately after timer/reminder registration.
-
-Supported formats:
-- RFC3339 date format, e.g. `2020-10-02T15:00:00Z`
-- time.Duration format, e.g. `2h30m`
-- [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) format, e.g. `PT2H30M`
+Timer和reminder的调度配置是相同的，总结如下:
 
 ---
-`period` is an optional parameter that sets time interval between two consecutive callback invocations. When specified in `ISO 8601-1 duration` format, you can also configure the number of repetition in order to limit the total number of callback invocations. If `period` is omitted, the callback will be invoked only once.
+`dueTime` 是一个可选的参数，它设置了首次调用回调之前的时间或时间间隔。 如果忽略了 `dueTime` ，则在timer/reminder注册后立即调用回调。
 
-Supported formats:
-- time.Duration format, e.g. `2h30m`
-- [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) format, e.g. `PT2H30M`, `R5/PT1M30S`
-
----
-`ttl` is an optional parameter that sets time at which or time interval after which the timer/reminder will be expired and deleted. If `ttl` is omitted, no restrictions are applied.
-
-Supported formats:
-* RFC3339 date format, e.g. `2020-10-02T15:00:00Z`
-* time.Duration format, e.g. `2h30m`
-* [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) format. Example: `PT2H30M`
+支持的格式:
+- RFC3339 日期格式，例如 `2020-10-02T15:00:00Z`
+- time.Duration 格式，例如`2h30m`
+- [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) 格式，例如: `PT2H30M`
 
 ---
-The actor runtime validates correctess of the scheduling configuration and returns error on invalid input.
+`period`是一个可选参数，用于设置两个连续回调调用之间的时间间隔。 当以`ISO 8601-1 duration`格式指定时，您还可以配置重复次数，以限制回调调用的总次数。 如果`period`被省略，回调函数将只被调用一次。
 
-When you specify both the number of repetitions in `period` as well as `ttl`, the timer/reminder will be stopped when either condition is met.
+支持的格式:
+- time.Duration 格式，例如`2h30m`
+- [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) 格式, 例如 `PT2H30M`, `R5/PT1M30S`
+
+---
+`ttl` 是一个可选的参数，它设定时间或时间间隔，其后timer/reminder将到期并删除。 如果省略`ttl`，则不应用任何限制。
+
+支持的格式:
+* RFC3339 日期格式，例如 `2020-10-02T15:00:00Z`
+* time.Duration格式，例如 `2h30m`
+* [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) 格式。 示例： `PT2H30M`
+
+---
+Actor运行时验证调度配置的正确性并返回无效输入的错误。
+
+当您在 `period` 以及 `ttl`中同时指定重复次数， 当满足任何条件时，timer/reminder都将停止。
 
 ### Actor 计时器
 
 你可以通过 timer 在actor中注册一个回调。
 
-The Dapr actor runtime ensures that the callback methods respect the turn-based concurrency guarantees. This means that no other actor methods or timer/reminder callbacks will be in progress until this callback completes execution.
+Dapr actor运行时确保回调方法遵守基于回合的并发保证。 这意味着，在此回调完成执行之前，没有其他执行者的方法或timer/reminder回调将在进行中。
 
-The Dapr actor runtime saves changes made to the actor's state when the callback finishes. 如果在保存状态时发生错误，那么将取消激活该actor对象，并且将激活新实例。
+Dapr Actor 运行时在回调完成时保存对actor的状态所作的更改。 如果在保存状态时发生错误，那么将取消激活该actor对象，并且将激活新实例。
 
-当actor作为垃圾回收(GC)的一部分被停用时，所有 timer 都会停止。 在此之后，将不会再调用 timer 的回调。 Also, the Dapr actor runtime does not retain any information about the timers that were running before deactivation. 也就是说，重新启动 actor 后将会激活的 timer 完全取决于注册时登记的 timer。
+当actor作为垃圾回收(GC)的一部分被停用时，所有 timer 都会停止。 在此之后，将不会再调用 timer 的回调。 另外，Dapr actor运行时不会保留关于在停用之前正在运行的timer的任何信息。 也就是说，重新启动 actor 后将会激活的 timer 完全取决于注册时登记的 timer。
 
-You can create a timer for an actor by calling the HTTP/gRPC request to Dapr as shown below, or via Dapr SDK.
+您可以通过将 HTTP/gRPC 请求调用 Dapr 来为 actor 创建 timer。
 
 ```md
 POST/PUT http://localhost:3500/v1.0/actors/<actorType>/<actorId>/timers/<name>
@@ -84,7 +84,7 @@ POST/PUT http://localhost:3500/v1.0/actors/<actorType>/<actorId>/timers/<name>
 
 **示例**
 
-The timer parameters are specified in the request body.
+Timer 的 duetime 可以在请求主体中指定。
 
 下面的请求体配置了一个 timer, `dueTime` 9秒, `period` 3秒。 这意味着它将在9秒后首次触发，然后每3秒触发一次。
 ```json
@@ -94,14 +94,14 @@ The timer parameters are specified in the request body.
 }
 ```
 
-The following request body configures a timer with a `period` of 3 seconds (in ISO 8601 duration format). It also limits the number of invocations to 10. This means it will fire 10 times: first, immediately after registration, then every 3 seconds after that.
+下面的请求体配置一个timer，其`period`为3秒(采用ISO 8601 duration格式)。 它还将调用次数限制为10次。 这意味着它将在注册之后立即触发，然后每3秒触发一次。
 ```json
 {
   "period":"R10/PT3S",
 }
 ```
 
-The following request body configures a timer with a `period` of 3 seconds (in ISO 8601 duration format) and a `ttl` of 20 seconds. This means it fires immediately after registration, then every 3 seconds after that for the duration of 20 seconds.
+下面的请求体配置一个timer，其`period`为3秒(ISO 8601 duration 格式)，`ttl`为20秒。 这意味着它在注册后立即触发，然后每3秒触发一次，持续20秒。
 ```json
 {
   "period":"PT3S",
@@ -109,7 +109,7 @@ The following request body configures a timer with a `period` of 3 seconds (in I
 }
 ```
 
-The following request body configures a timer with a `dueTime` of 10 seconds, a `period` of 3 seconds, and a `ttl` of 10 seconds. It also limits the number of invocations to 4. This means it will first fire after 10 seconds, then every 3 seconds after that for the duration of 10 seconds, but no more than 4 times in total.
+下面的请求体配置一个timer:`dueTime`为10秒，`period`为3秒，`ttl`为10秒。 它还把调用次数限制在4次。 这意味着它会在10秒后第一次启动，然后每3秒启动一次，持续10秒，但总次数不超过4次。
 ```json
 {
   "dueTime":"10s",
@@ -128,15 +128,15 @@ DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/timers/<name>
 
 ### Actor reminders
 
-Reminders 是一种在指定时间内触发 *persistent* 回调的机制。 它们的功能类似于 timer。 But unlike timers, reminders are triggered under all circumstances until the actor explicitly unregisters them or the actor is explicitly deleted or the number in invocations is exhausted. Specifically, reminders are triggered across actor deactivations and failovers because the Dapr actor runtime persists the information about the actors' reminders using Dapr actor state provider.
+Reminders 是一种在指定时间内触发 *persistent* 回调的机制。 它们的功能类似于 timer。 但与 timer 不同，在所有情况下 reminders 都会触发，直到 actor 显式取消注册 reminders 或删除 actor 或者执行次数已经到达给定值。 具体而言， reminders 会在所有 actor 失活和故障时也会触发，因为Dapr Actors 运行时会将 reminders 信息持久化到 Dapr Actors 状态提供者中。
 
-You can create a persistent reminder for an actor by calling the HTTP/gRPC request to Dapr as shown below, or via Dapr SDK.
+您可以通过将 HTTP/gRPC 请求调用 Dapr 来为 actor 创建 reminders。
 
 ```md
 POST/PUT http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 ```
 
-The request structure for reminders is identical to those of actors. Please refer to the [actor timers examples]({{< ref "#actor-timers" >}}).
+请求reminder的结构与actors相同。 请参阅 [actor timers示例]({{< ref "#actor-timers" >}})。
 
 #### 检索 actor reminders
 
@@ -158,7 +158,7 @@ DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 
 ## Actor 运行时配置
 
-You can configure the Dapr actor runtime configuration to modify the default runtime behavior.
+您可以配置 Dapr actor运行时配置来修改默认的运行时行为。
 
 ### 配置参数
 - `actorIdleTimeout` - 停用 actor 之前的超时。 每当经过 `actorScanInterval` 会进行一次超时检查。 默认**：60分钟**

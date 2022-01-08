@@ -12,15 +12,15 @@ Dapr CLI 是您用于各种 Dapr 相关任务的主要工具。 您可以使用�
 {{< tabs Linux Windows MacOS Binaries>}}
 
 {{% codetab %}}
-### Install from Terminal
+### 从终端安装
 
 此命令将安装最新的 Linux Dapr CLI 到 `/usr/local/bin`：
 ```bash
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
 ```
 
-### Install without `sudo`
-If you do not have access to the `sudo` command or your username is not in the `sudoers` file you can install Dapr to an alternate directory via the `DAPR_INSTALL_DIR` environment variable.
+### 安装时不使用 `sudo`
+如果您无法访问 `sudo` 命令或您的用户名不在 `sudoers` 文件中，您可以通过 `DAPR_INSTALL_DIR` 环境变量来安装 Dapr 到另一个目录。
 
 ```bash
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | DAPR_INSTALL_DIR="$HOME/dapr" /bin/bash
@@ -28,14 +28,14 @@ wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O 
 {{% /codetab %}}
 
 {{% codetab %}}
-### Install from Command Prompt
+### 从命令提示安装
 此命令提示命令将安装最新的 Windows Dapr CLI 到 `C:\dapr` 并将此目录添加到用户PATH 环境变量。
 ```powershell
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
 ```
 
-### Install without administrative rights
-If you do not have admin rights you can install Dapr to an alternate directory via the `DAPR_INSTALL_DIR` environment variable.
+### 安装时没有管理权限
+如果您没有管理员权限，您可以通过 `DAPR_INSTALL_DIR` 环境变量安装达普到备用目录。
 
 ```powershell
 $script=iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList "", "$HOME/dapr"
@@ -43,32 +43,32 @@ $script=iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/inst
 {{% /codetab %}}
 
 {{% codetab %}}
-### Install from Terminal
+### 从终端安装
 此命令将安装最新的 darwin Dapr CLI 到 `/usr/local/bin`:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | /bin/bash
 ```
-#### Note for ARM64 Macs
-Support for ARM64 Macs is available as a Preview feature. When installing from the terminal, native ARM64 binaries are downloaded when available. For older releases, AMD64 binaries are downloaded, which must be run with Rosetta2 emulation enabled. To install Rosetta emulation:
+#### ARM64 Mac 的注释
+支持 ARM64 Mac 可作为预览功能提供。 从终端安装时，可下载本地 ARM64 二进制文件。 对于较旧版本，AMD64 二进制文件将被下载，这必须在启用 Rosetta2 仿真功能时运行。 要安装 Rosetta 仿真：
 ```bash
 softwareupdate --install-rosetta
 ```
 
-### Install from Homebrew
-You can install via [Homebrew](https://brew.sh):
+### 从 Homebrew 安装
+或者您可以通过 [Homebrew](https://brew.sh) 进行安装：
 ```bash
 brew install dapr/tap/dapr-cli
 ```
 
-#### Note for ARM64 Macs
-For ARM64 Macs, only Homebrew 3.0 and higher versions are supported. Please update Homebrew to 3.0.0 or higher and then run the command below:
+#### ARM64 Macs的说明
+ARM64架构的 Mac系统 只支持 Homebrew 3.0 和更高版本。 请更新 Homebrew 到 3.0.0 或更高版本，然后运行下面的命令：
 
 ```bash
 arch -arm64 brew install dapr/tap/dapr-cli
 ```
 
-### Install without `sudo`
-If you do not have access to the `sudo` command or your username is not in the `sudoers` file you can install Dapr to an alternate directory via the `DAPR_INSTALL_DIR` environment variable.
+### 安装时不使用 `sudo`
+如果您无法访问 `sudo` 命令或您的用户名不在 `sudoers` 文件中，您可以通过 `DAPR_INSTALL_DIR` 环境变量来安装 Dapr 到另一个目录。
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | DAPR_INSTALL_DIR="$HOME/dapr" /bin/bash
@@ -81,7 +81,7 @@ curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh 
 1. 从最新的 [Dapr Releases](https://github.com/dapr/cli/releases)中下载所需的 Dapr CLI
 2. 解压它(例如，dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip)
 3. 将其移动到你想要的位置。
-   - For Linux/MacOS `/usr/local/bin` is recommended.
+   - 建议用于 Linux/MacOS `/usr/local/bin`。
    - 对于Windows，创建一个目录并将其添加到系统PATH。 例如，通过编辑系统环境变量，创建一个名为 `C:\dapr` 的目录，并将此目录添加到您的用户PATH。
 {{% /codetab %}}
 {{< /tabs >}}

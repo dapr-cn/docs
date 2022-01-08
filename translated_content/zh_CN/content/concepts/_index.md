@@ -6,10 +6,10 @@ weight: 10
 description: "了解 Dapr 的主要特征和功能"
 ---
 
-Welcome to the Dapr concepts guide!
+欢迎来到Dapr概念指南！
 
 
 {{% alert title="Getting started with Dapr" color="primary" %}}
-If you are ready to jump in and start developing with Dapr, please visit the [getting started section]({{<ref getting-started>}}).
-{{< button text="Install Dapr" page="getting-started" >}}
+如果您准备投入并开始使用Dapr进行开发，请访问 [开始教程]({{<ref getting-started>}}).
+{{< button text="安装Dapr" page="getting-started" >}}
 {{% /alert %}}
