@@ -97,13 +97,13 @@ Dapr 可以与任何开发框架集成。 下面是一些已经和 Dapr 集成�
 
 #### Web
 
-| 语言                                           | 框架                                      | 说明                                                                                                                                      |
-| -------------------------------------------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [.NET]({{< ref dotnet >}})                   | [ASP.NET]({{< ref dotnet-aspnet.md >}}) | 带来状态路由控制器，从而完成来自其他应用的 发布/订阅 构建块。 Can also take advantage of [ASP.NET Core gRPC Services](https://docs.microsoft.com/aspnet/core/grpc/). |
-| [Java]({{< ref java >}})                     | [Spring Boot](https://spring.io/)       |                                                                                                                                         |
-| [Python]({{< ref python >}})                 | [Flask]({{< ref python-flask.md >}})    |                                                                                                                                         |
-| [Javascript](https://github.com/dapr/js-sdk) | [Express](http://expressjs.com/)        |                                                                                                                                         |
-| [PHP]({{< ref php >}})                       |                                         | 您可以使用 Apache, Nginx, 或 Caddyserver 进行托管                                                                                                 |
+| 语言                                           | 框架                                      | 说明                                                                                                           |
+| -------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [.NET]({{< ref dotnet >}})                   | [ASP.NET]({{< ref dotnet-aspnet.md >}}) | 带来状态路由控制器，从而完成来自其他应用的 发布/订阅 构建块。 也可以利用 [ASP.NET Core gRPC 服务](https://docs.microsoft.com/aspnet/core/grpc/)。 |
+| [Java]({{< ref java >}})                     | [Spring Boot](https://spring.io/)       |                                                                                                              |
+| [Python]({{< ref python >}})                 | [Flask]({{< ref python-flask.md >}})    |                                                                                                              |
+| [Javascript](https://github.com/dapr/js-sdk) | [Express](http://expressjs.com/)        |                                                                                                              |
+| [PHP]({{< ref php >}})                       |                                         | 您可以使用 Apache, Nginx, 或 Caddyserver 进行托管                                                                      |
 
 #### 集成和扩展
 

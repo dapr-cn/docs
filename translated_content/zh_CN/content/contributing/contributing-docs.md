@@ -330,7 +330,7 @@ Hugo can automatically embed YouTube videos using a shortcode:
 
 若要在网页上创建按钮，请使用 `button` 短码。
 
-An optional "newtab" parameter will indicate if the page should open in a new tab. Options are "true" or "false". Default is "false", where the page will open in the same tab.
+可选的"Newtab"参数将指示页面是否应在新的选项卡中打开。 选项为“true”或“false”。 默认情况为“false”，在同一个标签页中打开页面。
 
 #### 链接到外部文件
 
