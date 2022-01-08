@@ -21,12 +21,7 @@ jobs:
           - v1.2
           - v1.1
           - v1.0
-        sleep_time:
-          - 30
-          - 60
-          - 90
-          - 120
-          - 150
+          
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -34,7 +29,8 @@ jobs:
           ref: ${{ matrix.version_tag }}/translate_site
       - name: sleep
         run: |
-          sleep ${{ matrix.sleep_time }}
+          # sleep some time according to the version tag. e.g. v1.5 will sleep for 5*30 seconds
+          sleep $(($(echo ${{ matrix.version_tag }} | sed -e 's/v//' -e 's/\.//g')*30))
       - name: crowdin action
         uses: crowdin/github-action@1.4.1
         with:
