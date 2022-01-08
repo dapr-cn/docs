@@ -52,6 +52,8 @@ def update_source_core(branch: str):
                                 dirs_exist_ok=True)
     print("sdk content is copied")
 
+    print(f"{branch} source content is updated")
+
 
 @task
 def update_files_for_building(c):
@@ -80,8 +82,23 @@ def update_all_submodules(c):
     print("Updating all submodules")
     repo = Repo(repo_base_dir)
     repo.submodule_update(init=True, recursive=True)
-    print("All submodules are updated")
+    print("Submodules are updated")
 
+    print("Pull source content of dapr_cn")
+    for branch in all_versions:
+        repo = Repo(f"{dapr_cn_base_dir}/{branch}")
+        repo.git.pull("origin", f"{branch}/translate_site")
+        repo.submodule_update(init=True, recursive=True)
+        print(f"{branch} dapr_cn is updated")
+
+    print("Pull source content of dapr docs")
+    for branch in all_versions:
+        repo = Repo(f"{source_base_dir}/{branch}")
+        repo.git.pull("origin", branch)
+        repo.submodule_update(init=True, recursive=True)
+        print(f"{branch} dapr docs is updated")
+
+    print("Update all submodules done")
 
 @task
 def clean_translations(c):
