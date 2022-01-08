@@ -76,7 +76,7 @@ DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/timers/<name>
 
 ### Actor reminders
 
-Reminders 是一种在指定时间内触发 *persistent* 回调的机制。 它们的功能类似于 timer。 But unlike timers, reminders are triggered under all circumstances until the actor explicitly unregisters them or the actor is explicitly deleted or the number in invocations is exhausted. 具体而言， reminders 会在所有 actor 失活和故障时也会触发触发，因为Dapr Actors 运行时会将 reminders 信息持久化到 Dapr Actors 状态提供者中。
+Reminders 是一种在指定时间内触发 *persistent* 回调的机制。 它们的功能类似于 timer。 但与 timer 不同，在所有情况下 reminders 都会触发，直到 actor 显式取消注册 reminders 或删除 actor 或者执行次数已经到达给定值。 具体而言， reminders 会在所有 actor 失活和故障时也会触发触发，因为Dapr Actors 运行时会将 reminders 信息持久化到 Dapr Actors 状态提供者中。
 
 您可以通过将 HTTP/gRPC 请求调用 Dapr 来为 actor 创建 reminders。
 
@@ -110,18 +110,18 @@ Reminders 的 `duetime` 和回调函数可以在请求主体中指定。  到期
 }
 ```
 
-[ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) can also be used to specify `period`. The following request body configures a reminder with a `dueTime` 0 seconds an `period` of 15 seconds.
+[ISO 8601 持续时间](https://en.wikipedia.org/wiki/ISO_8601#Durations) 也可用来指定 `period`。 下面的请求体配置了一个 reminders, `dueTime` 0秒, `period` 15秒。
 ```json
 {
   "dueTime":"0h0m0s0ms",
   "period":"P0Y0M0W0DT0H0M15S"
 }
 ```
-The designators for zero are optional and the above `period` can be simplified to `PT15S`. ISO 8601 specifies multiple recurrence formats but only the duration format is currently supported.
+The designators for zero are optional and the above `period` can be simplified to `PT15S`. ISO 8601 指定多个重复格式，但目前只支持持续时间格式。
 
-#### Reminders with repetitions
+#### 带有重复次数的 reminders
 
-When configured with ISO 8601 durations, the `period` column also allows to specify number of times a reminder can run. The following request body will create a reminder that will execute for 5 number of times with a period of 15 seconds.
+当配置为 ISO 8601 持续时间时， `期间` 列还允许指定 reminders 可以运行的次数。 以下请求主体将创建一个 reminders ，该提醒将在 15 秒内执行 5 次。
 ```json
 {
   "dueTime":"0h0m0s0ms",
@@ -129,9 +129,9 @@ When configured with ISO 8601 durations, the `period` column also allows to spec
 }
 ```
 
-The number of repetitions i.e. the number of times the reminder is run should be a positive number.
+重复次数，即运行提醒的次数应该是正数。
 
-**Example**
+**例子**
 
 Watch this [video](https://www.youtube.com/watch?v=B_vkXqptpXY&t=1002s) for more information on using ISO 861 for Reminders
 
