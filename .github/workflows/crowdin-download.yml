@@ -16,19 +16,27 @@ jobs:
       fail-fast: false
       matrix:
         version_tag:
-          - v1.0
-          - v1.1
-          - v1.2
-          - v1.3
-          - v1.4
           - v1.5
+          - v1.4
+          - v1.3
+          - v1.2
+          - v1.1
+          - v1.0
+        sleep_time:
+          - 30
+          - 60
+          - 90
+          - 120
+          - 150
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{ matrix.version_tag }}/translate_site
-
+      - name: sleep
+        run: |
+          sleep ${{ matrix.sleep_time }}
       - name: crowdin action
         uses: crowdin/github-action@1.4.1
         with:
