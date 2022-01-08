@@ -25,7 +25,7 @@ description: "按照这些步骤在自托管模式下升级 Dapr，并确保顺�
    dapr init
    ```
 
-1. Ensure you are using the latest version of Dapr (v1.1.2) with:
+1. 确保您使用最新版本的 Dapr (1.1.2)
 
    ```bash
    $ dapr --version
