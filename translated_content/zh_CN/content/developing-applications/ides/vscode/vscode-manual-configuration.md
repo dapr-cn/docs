@@ -6,7 +6,7 @@ weight: 50000
 description: "如何手动设置Visual Studio Code调试"
 ---
 
-[Dapr VSCode扩展]({{< ref vscode-dapr-extension.md >})可以自动设置[VSCode调试](https://code.visualstudio.com/Docs/editor/debugging)。
+[Dapr VSCode扩展]({{< ref vscode-dapr-extension.md >}})可以自动设置[VSCode调试](https://code.visualstudio.com/Docs/editor/debugging)。
 
 如果你希望手动配置`[tasks.json](https://code.visualstudio.com/Docs/editor/tasks)`和`[launch.json](https://code.visualstudio.com/Docs/editor/debugging)`文件以使用Dapr，这些是步骤。
 
