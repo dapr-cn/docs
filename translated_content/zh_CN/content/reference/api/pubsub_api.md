@@ -82,7 +82,7 @@ GET http://localhost:<appPort>/dapr/subscribe
 
 A json encoded array of strings.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+Example:
 
 ```json
 [
