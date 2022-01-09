@@ -83,7 +83,7 @@ When sending an email, the metadata in the configuration and in the request is c
 
 The `emailTo`, `emailCc` and `emailBcc` fields can contain multiple email addresses separated by a semicolon.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+Example:
 ```json
 {
   "operation": "create",
