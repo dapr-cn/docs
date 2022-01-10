@@ -17,7 +17,7 @@ The `examples` directory contains code samples for users to run to try out speci
 
 ## Docs
 
-`daprdocs` 目录包含渲染到 [Dapr 文档](https://docs.dapr.io) 网站的 markdown 文件。 When the documentation website is built, this repo is cloned and configured so that its contents are rendered with the docs content. When writing docs, keep in mind:
+`daprdocs` 目录包含渲染到 [Dapr 文档](https://docs.dapr.io) 网站的 markdown 文件。 当文档网站建立后，该仓库会被克隆和配置，使其内容与文档内容一起呈现。 编写文档时牢记：
 
    - 除了这些规则外，还应遵循 [文档指南]({{< ref contributing-docs.md >}})。
    - All files and directories should be prefixed with `js-` to ensure all file/directory names are globally unique across all Dapr documentation.

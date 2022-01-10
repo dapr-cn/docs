@@ -8,16 +8,25 @@ description: "使用密钥存储构建块安全地获取密钥"
 
 这篇文章提供了关于如何在你的代码中使用 Dapr 的密钥 API 来充分利用 [密钥仓库构建块]({{<ref secrets-overview>}}) 的指导。 密钥 API 允许您从配置的密钥存储轻松获取应用程序代码中的密钥。
 
+## Example
+
+The below code example loosely describes an application that processes orders. In the example, there is an order processing service, which has a Dapr sidecar. The order processing service uses Dapr to store a secret in a local secret store.
+
+<img src="/images/building-block-secrets-management-example.png" width=1000 alt="Diagram showing secrets management of example service">
+
 ## 建立一个密钥存储
 
 在获取应用程序代码中的密钥之前，您必须配置一个密钥存储组件。 就本指南而言，作为一个示例，您将配置一个本地的密钥存储，该仓库使用本地的 JSON 文件来存储密钥。
-> 注意：此示例中使用的组件未被加密且不推荐用于生产部署。 您可以在[这里]({{<ref supported-secret-stores >}})找到其它替代项。
 
-创建一个名为 `mysecrets.json` 的文件，包含以下内容：
+{{% alert title="Warning" color="warning" %}}
+In a production-grade application, local secret stores are not recommended. You can find other alternatives [here]({{<ref supported-secret-stores >}}) to securely manage your secrets.
+{{% /alert %}}
+
+创建一个名为 `secrets.json` 的文件，包含以下内容：
 
 ```json
 {
-   "my-secret" : "I'm Batman"
+   "secret": "Order Processing pass key"
 }
 ```
 
@@ -27,145 +36,228 @@ description: "使用密钥存储构建块安全地获取密钥"
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: my-secrets-store
+  name: localsecretstore
   namespace: default
 spec:
   type: secretstores.local.file
   version: v1
   metadata:
   - name: secretsFile
-    value: <PATH TO SECRETS FILE>/mysecrets.json
+    value: secrets.json  #path to secrets file
   - name: nestedSeparator
     value: ":"
 ```
-
-请确保用您刚刚创建的 JSON 文件的路径替换 `<密钥路径>`。
 > Note: the path to the secret store JSON is relative to where you call `dapr run` from.
-
 
 要配置不同类型的密钥存储，请参阅关于 [如何配置密钥存储]({{<ref setup-secret-store>}}) 并审阅 [支持的密钥存储]({{<ref supported-secret-stores >}}) 查看不同密钥存储解决方案所需的具体细节。
 ## 获取密钥
 
-现在运行 Dapr sidecar (在没有应用程序的情况下)
+Run the Dapr sidecar with the application.
 
+{{< tabs Dotnet Java Python Go Javascript>}}
+
+{{% codetab %}}
 ```bash
-dapr run --app-id my-app --port 3500 --components-path ./components
+dapr run --app-id orderprocessingservice --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --components-path ./components dotnet run
 ```
+{{% /codetab %}}
 
-现在你可以通过使用密钥 API 调用 Dapr sidecar 来获得密钥：
+
+{{% codetab %}}
+```bash
+dapr run --app-id orderprocessingservice --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --components-path ./components mvn spring-boot:run
+```
+{{% /codetab %}}
+
+
+{{% codetab %}}
+```bash
+dapr run --app-id orderprocessingservice --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --components-path ./components python3 OrderProcessingService.py
+```
+{{% /codetab %}}
+
+
+{{% codetab %}}
+```bash
+dapr run --app-id orderprocessingservice --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --components-path ./components go run OrderProcessingService.go
+```
+{{% /codetab %}}
+
+
+{{% codetab %}}
+```bash
+dapr run --app-id orderprocessingservice --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --components-path ./components npm start
+```
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+Get the secret by calling the Dapr sidecar using the secrets API:
 
 ```bash
-curl http://localhost:3500/v1.0/secrets/my-secrets-store/my-secret
+curl http://localhost:3601/v1.0/secrets/localsecretstore/secret
 ```
 
 对于完整的 API 引用，请访问 [这里]({{< ref secrets_api.md >}})。
 
 ## 从你的代码调用密钥 API
 
-一旦您设置了一个密钥存储，您可以调用 Dapr 从您的应用程序代码中获取密钥。 以下是不同编程语言的几个示例：
+Once you have a secret store, call Dapr to get the secrets from your application code. Below are code examples that leverage Dapr SDKs for retrieving a secret.
 
-{{< tabs "Go" "Javascript" "Python" "Rust" "C#" "PHP" >}}
+{{< tabs Dotnet Java Python Go Javascript>}}
 
 {{% codetab %}}
-```Go
-import (
-  "fmt"
-  "net/http"
-)
+```csharp
+//dependencies
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Dapr.Client;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading;
+using System.Text.Json;
 
-func main() {
-  url := "http://localhost:3500/v1.0/secrets/my-secrets-store/my-secret"
-
-  res, err := http.Get(url)
-  if err != nil {
-    panic(err)
-  }
-  defer res.Body.Close()
-
-  body, _ := ioutil.ReadAll(res.Body)
-  fmt.Println(string(body))
+//code
+namespace EventService
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            string SECRET_STORE_NAME = "localsecretstore";
+            using var client = new DaprClientBuilder().Build();
+            //Using Dapr SDK to get a secret
+            var secret = await client.GetSecretAsync(SECRET_STORE_NAME, "secret");
+            Console.WriteLine($"Result: {string.Join(", ", secret)}");
+        }
+    }
 }
 ```
-
 {{% /codetab %}}
 
 {{% codetab %}}
 
-```javascript
-require('isomorphic-fetch');
-const secretsUrl = `http://localhost:3500/v1.0/secrets`;
+```java
+//dependencies
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.dapr.client.DaprClient;
+import io.dapr.client.DaprClientBuilder;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.Map;
 
-fetch(`${secretsUrl}/my-secrets-store/my-secret`)
-        .then((response) => {
-            if (!response.ok) {
-                throw "Could not get secret";
-            }
-            return response.text();
-        }).then((secret) => {
-            console.log(secret);
-        });
+
+//code
+@SpringBootApplication
+public class OrderProcessingServiceApplication {
+
+    private static final Logger log = LoggerFactory.getLogger(OrderProcessingServiceApplication.class);
+    private static final ObjectMapper JSON_SERIALIZER = new ObjectMapper();
+
+    private static final String SECRET_STORE_NAME = "localsecretstore";
+
+    public static void main(String[] args) throws InterruptedException, JsonProcessingException {
+        DaprClient client = new DaprClientBuilder().build();
+        //Using Dapr SDK to get a secret
+        Map<String, String> secret = client.getSecret(SECRET_STORE_NAME, "secret").block();
+        log.info("Result: " + JSON_SERIALIZER.writeValueAsString(secret));
+    }
+}
 ```
-
 {{% /codetab %}}
 
 {{% codetab %}}
 
 ```python
-import requests as req
+#dependencies 
+import random
+from time import sleep    
+import requests
+import logging
+from dapr.clients import DaprClient
+from dapr.clients.grpc._state import StateItem
+from dapr.clients.grpc._request import TransactionalStateOperation, TransactionOperationType
 
-resp = req.get("http://localhost:3500/v1.0/secrets/my-secrets-store/my-secret")
-print(resp.text)
+#code
+logging.basicConfig(level = logging.INFO)
+DAPR_STORE_NAME = "localsecretstore"
+key = 'secret'
+
+with DaprClient() as client:
+    #Using Dapr SDK to get a secret
+    secret = client.get_secret(store_name=DAPR_STORE_NAME, key=key)
+    logging.info('Result: ')
+    logging.info(secret.secret)
+    #Using Dapr SDK to get bulk secrets
+    secret = client.get_bulk_secret(store_name=DAPR_STORE_NAME)
+    logging.info('Result for bulk secret: ')
+    logging.info(sorted(secret.secrets.items()))
 ```
-
 {{% /codetab %}}
-
 
 {{% codetab %}}
 
-```rust
-#![deny(warnings)]
-use std::{thread};
+```go
+//dependencies 
+import (
+    "context"
+    "log"
 
-#[tokio::main]
-async fn main() -> Result<(), reqwest::Error> {
-    let res = reqwest::get("http://localhost:3500/v1.0/secrets/my-secrets-store/my-secret").await?;
-    let body = res.text().await?;
-    println!("Secret:{}", body);
+    dapr "github.com/dapr/go-sdk/client"
+)
 
-    thread::park();
+//code
+func main() {
+    client, err := dapr.NewClient()
+    SECRET_STORE_NAME := "localsecretstore"
+    if err != nil {
+        panic(err)
+    }
+    defer client.Close()
+    ctx := context.Background()
+     //Using Dapr SDK to get a secret
+    secret, err := client.GetSecret(ctx, SECRET_STORE_NAME, "secret", nil)
+    if secret != nil {
+        log.Println("Result : ")
+        log.Println(secret)
+    }
+    //Using Dapr SDK to get bulk secrets
+    secretBulk, err := client.GetBulkSecret(ctx, SECRET_STORE_NAME, nil)
 
-    Ok(())
+    if secret != nil {
+        log.Println("Result for bulk: ")
+        log.Println(secretBulk)
+    }
 }
 ```
-
 {{% /codetab %}}
 
 {{% codetab %}}
 
-```csharp
-var client = new HttpClient();
-var response = await client.GetAsync("http://localhost:3500/v1.0/secrets/my-secrets-store/my-secret");
-response.EnsureSuccessStatusCode();
+```javascript
+//dependencies 
+import { DaprClient, HttpMethod, CommunicationProtocolEnum } from 'dapr-client'; 
 
-string secret = await response.Content.ReadAsStringAsync();
-Console.WriteLine(secret);
+//code
+const daprHost = "127.0.0.1"; 
+
+async function main() {
+    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const SECRET_STORE_NAME = "localsecretstore";
+    //Using Dapr SDK to get a secret
+    var secret = await client.secret.get(SECRET_STORE_NAME, "secret");
+    console.log("Result: " + secret);
+    //Using Dapr SDK to get bulk secrets
+    secret = await client.secret.getBulk(SECRET_STORE_NAME);
+    console.log("Result for bulk: " + secret);
+}
+
+main();
 ```
-{{% /codetab %}}
-
-{{% codetab %}}
-
-```php
-<?php
-
-require_once __DIR__.'/vendor/autoload.php';
-
-$app = \Dapr\App::create();
-$app->run(function(\Dapr\SecretManager $secretManager, \Psr\Log\LoggerInterface $logger) {
-    $secret = $secretManager->retrieve(secret_store: 'my-secret-store', name: 'my-secret');
-    $logger->alert('got secret: {secret}', ['secret' => $secret]);
-});
-```
-
 {{% /codetab %}}
 
 {{< /tabs >}}

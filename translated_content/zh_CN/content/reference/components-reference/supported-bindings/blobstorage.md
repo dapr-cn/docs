@@ -41,7 +41,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 绑定支持 | 详情                                                                                                                                                                                   | Example                     |
+| 字段                | 必填 | 绑定支持 | 详情                                                                                                                                                                                   | 示例                          |
 | ----------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
 | storageAccount    | Y  | 输出   | Blob Storage 账户名称                                                                                                                                                                    | `myexmapleaccount`          |
 | storageAccessKey  | Y  | 输出   | Blob Storage 访问密钥                                                                                                                                                                    | `access-key`                |
@@ -190,7 +190,7 @@ The metadata parameters are:
 - `blobName` - the name of the blob
 - `includeMetadata`- (optional) defines if the user defined metadata should be returned or not, defaults to: false
 
-#### Example
+#### 示例
 
 {{< tabs Windows Linux >}}
 

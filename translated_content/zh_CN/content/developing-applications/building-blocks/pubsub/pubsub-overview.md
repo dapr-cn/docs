@@ -3,7 +3,7 @@ type: docs
 title: "发布和订阅概述"
 linkTitle: "概述"
 weight: 1000
-description: "Pub/Sub 构建块概述"
+description: "Overview of the Pub/Sub API building block"
 ---
 
 ## 介绍

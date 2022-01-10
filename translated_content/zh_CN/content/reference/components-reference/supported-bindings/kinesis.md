@@ -45,7 +45,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持         | 详情                                                                                                                                                                                                                           | Example                  |
+| 字段           | 必填 | 绑定支持         | 详情                                                                                                                                                                                                                           | 示例                       |
 | ------------ |:--:| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | mode         | N  | 输入           | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"` |
 | streamName   | Y  | Input/Output | The AWS Kinesis Stream Name                                                                                                                                                                                                  | `"stream"`               |

@@ -33,7 +33,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 详情                                  | Example                            |
+| 字段               | 必填 | 详情                                  | 示例                                 |
 | ---------------- |:--:| ----------------------------------- | ---------------------------------- |
 | hazelcastServers | Y  | A comma delimited string of servers | `"hazelcast:3000,hazelcast2:3000"` |
 | hazelcastMap     | Y  | Hazelcast Map configuration         | `"foo-map"`                        |

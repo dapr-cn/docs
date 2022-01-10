@@ -85,8 +85,9 @@ helm search repo dapr --devel --versions
 # create a values file to store variables
 touch values.yml
 cat << EOF >> values.yml
-global.ha.enabled: true
-
+global:
+  ha:
+    enabled: true
 EOF
 
 # run install/upgrade
@@ -187,3 +188,8 @@ To configure a tracing backend for Dapr visit [this]({{< ref "setup-tracing.md" 
 对于度量，Dapr在9090端口上暴露了一个Prometheus端点，可以被Prometheus收集。
 
 To setup Prometheus, Grafana and other monitoring tools with Dapr, visit [this]({{< ref "monitoring" >}}) link.
+
+## Best Practices
+Watch this video for a deep dive into the best practices for running Dapr in production with Kubernetes
+
+<div class="embed-responsive embed-responsive-16by9"> <iframe width="360" height="315" src="https://www.youtube.com/embed/_U9wJqq-H1g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>

@@ -35,7 +35,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                 | 必填 | 绑定支持 | 详情                                                                                         | Example                                   |
+| 字段                 | 必填 | 绑定支持 | 详情                                                                                         | 示例                                        |
 | ------------------ |:--:| ---- | ------------------------------------------------------------------------------------------ | ----------------------------------------- |
 | 终结点                | Y  | 输出   | GraphQL endpoint string See [here](#url-format) for more details                           | `"http://localhost:4000/graphql/graphql"` |
 | header:[HEADERKEY] | N  | 输出   | GraphQL header. Specify the header key in the `name`, and the header value in the `value`. | `"no-cache"` (see above)                  |

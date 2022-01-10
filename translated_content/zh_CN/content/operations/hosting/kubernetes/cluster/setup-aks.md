@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "设置 Azure Kubernetes 服务集群"
-linkTitle: "Azure Kubernetes Service"
+title: "Setup an Azure Kubernetes Service (AKS) cluster"
+linkTitle: "Azure Kubernetes Service (AKS)"
 weight: 2000
 description: >
   如何在 Azure Kubernetes 集群上设置 Dapr。

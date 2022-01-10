@@ -8,7 +8,7 @@ description: 通过 Dapr CLI 学习本地开发
 
 ## Dapr CLI
 
-*这篇文章是一篇与 .NET 相关的文章，另见 [使用 Docker 进行 Dapr 自托管]({{ ref self-hosted-overview.md }})*
+*这是一篇 .NET 使用指南，另见 [使用 Docker 进行 Dapr 自托管]({{< ref self-hosted-with-docker.md >}})*
 
 Dapr CLI 为您提供了一个很好的工作基础，通过初始化本地重新分配容器、拉取容器、放置服务和用于重新分配的组件清单。 这将使您能够在没有额外设置的新安装中处理以下构建块：
 

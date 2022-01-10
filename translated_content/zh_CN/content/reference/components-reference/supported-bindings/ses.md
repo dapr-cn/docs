@@ -49,7 +49,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持 | 详情                                                                                     | Example             |
+| 字段           | 必填 | 绑定支持 | 详情                                                                                     | 示例                  |
 | ------------ |:--:| ---- | -------------------------------------------------------------------------------------- | ------------------- |
 | region       | Y  | 输出   | The specific AWS region                                                                | `"eu-west-1"`       |
 | accessKey    | Y  | 输出   | 要访问此资源的 AWS 访问密钥                                                                       | `"key"`             |
@@ -83,7 +83,7 @@ When sending an email, the metadata in the configuration and in the request is c
 
 The `emailTo`, `emailCc` and `emailBcc` fields can contain multiple email addresses separated by a semicolon.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 ```json
 {
   "operation": "create",

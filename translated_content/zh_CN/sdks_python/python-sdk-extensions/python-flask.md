@@ -32,7 +32,7 @@ pip install flask-dapr-dev
 
 {{< /tabs >}}
 
-## Example
+## 示例
 
 ```python
 from flask import Flask

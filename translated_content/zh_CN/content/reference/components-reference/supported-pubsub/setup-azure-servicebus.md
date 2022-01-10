@@ -64,7 +64,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                              | 必填 | 详情                                                                                                                         | Example                                                                                                                                        |
+| 字段                              | 必填 | 详情                                                                                                                         | 示例                                                                                                                                             |
 | ------------------------------- |:--:| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | connectionString                | Y  | Shared access policy connection-string for the Service Bus                                                                 | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
 | timeoutInSec                    | N  | 发送消息和其他管理操作的超时时间。 默认值：`60`                                                                                                 | `30`                                                                                                                                           |

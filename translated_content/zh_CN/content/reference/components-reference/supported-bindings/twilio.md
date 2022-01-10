@@ -36,7 +36,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段         | 必填 | 绑定支持 | 详情                                   | Example          |
+| 字段         | 必填 | 绑定支持 | 详情                                   | 示例               |
 | ---------- |:--:| ---- | ------------------------------------ | ---------------- |
 | toNumber   | Y  | 输出   | The target number to send the sms to | `"111-111-1111"` |
 | fromNumber | Y  | 输出   | The sender phone number              | `"122-222-2222"` |

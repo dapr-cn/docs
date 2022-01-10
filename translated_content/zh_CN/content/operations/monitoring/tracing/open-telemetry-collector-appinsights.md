@@ -17,7 +17,7 @@ Dapr 使用 Zipkin API 与[OpenTelemetry Collector ](https://github.com/open-tel
 ### 设置 Application Insights
 
 1. 首先，您需要一个 Azure 帐户。 请参阅 [此处](https://azure.microsoft.com/free/) 申请 **免费** Azure 帐户的说明。
-2. Follow instructions [here](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource) to create a new Application Insights resource.
+2. 请按照 [此处](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource) 的说明创建新的 Application Insights 资源。
 3. 从 Application Insights 页面获取 Application Insights Intrumentation key。
 
 ### 运行 OpenTelemetry Collector 来推送到您的 Application Insights 实例

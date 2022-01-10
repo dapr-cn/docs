@@ -32,7 +32,7 @@ pip install dapr-ext-fastapi-dev
 
 {{< /tabs >}}
 
-## Example
+## 示例
 
 ```python
 from fastapi import FastAPI

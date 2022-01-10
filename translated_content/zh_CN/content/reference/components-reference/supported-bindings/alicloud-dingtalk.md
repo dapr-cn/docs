@@ -29,7 +29,7 @@ spec:
 以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
 ## 元数据字段规范
-| 字段  | 必填 | 绑定支持         | 详情                               | Example                                                      |
+| 字段  | 必填 | 绑定支持         | 详情                               | 示例                                                           |
 | --- |:--:| ------------ | -------------------------------- | ------------------------------------------------------------ |
 | id  | Y  | Input/Output | unique id                        | `"test_webhook_id"`                                          |
 | url | Y  | Input/Output | DingTalk's Webhook url           | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |

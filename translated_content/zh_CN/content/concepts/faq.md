@@ -24,7 +24,7 @@ Dapr 中的Actors基于同一个虚拟Actor概念， [Orleans](https://www.micro
 
 通过本地调用来创建一个新的 actor ，比如`http://localhost:3500/v1.0/actors/<actorType>/<actorId>/…`。 例如， `http://localhost:3500/v1.0/actors/myactor/50/method/getData` 将在新创建的以 id 为`50`的 `myactor` 上调用 `getData` 方法。
 
-Dapr 运行时 SDK 具有特定于语言的 actor 框架。 例如，.NET SDK 具有 C# Actors。 目标是所有 Dapr 语言 SDK 都具有Actor架。 当前 .NET， Java 和 Python SDK 具有Actor框架。
+Dapr 运行时 SDK 具有特定于语言的 actor 框架。 例如，.NET SDK 具有 C# Actors。 目标是所有 Dapr 语言 SDK 都具有Actor架。 Currently .NET, Java, Go and Python SDK have actor frameworks.
 
 ## 开发者语言 SDK 和框架
 

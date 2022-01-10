@@ -6,6 +6,7 @@ description: "How to authenticate Azure components using Azure AD and/or Managed
 aliases:
   - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
   - "/reference/components-reference/supported-secret-stores/azure-keyvault-managed-identity/"
+weight: 1000
 ---
 
 ## Common Azure authentication layer
@@ -36,7 +37,7 @@ To authenticate with Azure AD, you will need to add the following credentials as
 
 **Authenticating using client credentials:**
 
-| 字段                  | 必填 | 详情                                   | Example                                      |
+| 字段                  | 必填 | 详情                                   | 示例                                           |
 | ------------------- | -- | ------------------------------------ | -------------------------------------------- |
 | `azureTenantId`     | Y  | ID of the Azure AD tenant            | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`     |
 | `azureClientId`     | Y  | Client ID (application ID)           | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`     |
@@ -46,7 +47,7 @@ When running on Kubernetes, you can also use references to Kubernetes secrets fo
 
 **Authenticating using a PFX certificate:**
 
-| 字段                         | 必填                                                   | 详情                                                                      | Example                                                                                                                                                 |
+| 字段                         | 必填                                                   | 详情                                                                      | 示例                                                                                                                                                      |
 | -------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `azureTenantId`            | Y                                                    | ID of the Azure AD tenant                                               | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                                |
 | `azureClientId`            | Y                                                    | Client ID (application ID)                                              | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                                |
@@ -58,7 +59,7 @@ When running on Kubernetes, you can also use references to Kubernetes secrets fo
 
 **Authenticating with Managed Service Identities (MSI):**
 
-| 字段              | 必填 | 详情                         | Example                                  |
+| 字段              | 必填 | 详情                         | 示例                                       |
 | --------------- | -- | -------------------------- | ---------------------------------------- |
 | `azureClientId` | N  | Client ID (application ID) | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"` |
 

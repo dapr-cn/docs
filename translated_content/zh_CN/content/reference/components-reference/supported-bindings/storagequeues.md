@@ -40,7 +40,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                   | Example         |
+| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                   | 示例              |
 | ---------------- |:--:| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
 | storageAccount   | Y  | Input/Output | The Azure Storage account name                                                                                                                                                       | `"account1"`    |
 | storageAccessKey | Y  | Input/Output | The Azure Storage access key                                                                                                                                                         | `"accessKey"`   |
@@ -64,7 +64,7 @@ spec:
 
 字段名为 `ttlInSeconds`。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myStorageQueue \

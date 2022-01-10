@@ -40,7 +40,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段             | 必填 | 详情                                   | Example                   |
+| 字段             | 必填 | 详情                                   | 示例                        |
 | -------------- |:--:| ------------------------------------ | ------------------------- |
 | natsURL        | Y  | NATS 服务器地址 URL                       | "`nats://localhost:4222`" |
 | name           | N  | NATS connection name                 | `"my-conn-name"`          |
@@ -82,7 +82,7 @@ This installs a single NATS server into the `default` namespace. To interact wit
 - [Dapr组件的基本格式]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
 - [发布/订阅构建块]({{< ref pubsub >}})
-- [JetStream Documentation](https://docs.nats.io/jetstream/jetstream)
+- [JetStream Documentation](https://docs.nats.io/nats-concepts/jetstream)
 - [NATS CLI](https://github.com/nats-io/natscli)
 
 

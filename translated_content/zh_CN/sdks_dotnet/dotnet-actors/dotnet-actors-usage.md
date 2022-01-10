@@ -26,7 +26,7 @@ internal class MyActor : Actor, IMyActor, IRemindable
 
 ### 使用依赖输入
 
-Actors支持[依赖性注入](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection)到构造函数中的附加参数。 您定义的任何其他参数都将从依赖注入容器中得到它们的值。
+Actors支持[依赖注入](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection)附加参数到构造函数中。 您定义的任何其他参数都将从依赖注入容器中得到它们的值。
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -35,8 +35,6 @@ internal class MyActor : Actor, IMyActor, IRemindable
         : base(host)
     {
         ...
-    }
-}
     }
 }
 ```
@@ -58,7 +56,7 @@ public void ConfigureServices(IServiceCollection services)
 
 每个actor实例都有自己的依赖注入范围。 每个 actor 在执行完一个操作后，都会在内存中保留一段时间，在这段时间内，与 actor 相关的依赖注入作用域也被认为是活的。 当演员被停用时，该范围将被释放。
 
-如果一个actor在构造函数中注入一个 `IServiceProvider` ，该actor将收到一个与它的作用域相关联的 `IServiceProvider` 的引用。 `IServiceProvider` 可以用来在将来动态地解析服务。
+如果一个 actor 在构造函数中注入一个 `IServiceProvider` ，该 actor 将收到一个与它的作用域相关联的 `IServiceProvider` 的引用。 `IServiceProvider` 可以用来在将来动态地解析服务。
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -67,8 +65,6 @@ internal class MyActor : Actor, IMyActor, IRemindable
         : base(host)
     {
         ...
-    }
-}
     }
 }
 ```
@@ -109,7 +105,6 @@ internal class MyActor : Actor, IMyActor
 {
     // ...
 }
-}
 ```
 
 在上面的示例中，名称将是 `MyCustomActorTypename`。
@@ -124,7 +119,7 @@ Actor 注册是 `Startup.cs` 中 `ConfigureServices` 的一部分。 `ConfigureS
 
 在 `ConfigureServices` 中，您可以：
 
-- 注册 actor 运行时(`UseActors`)
+- 注册 actor 运行时(`AddActors`)
 - 注册 actor 类型(`options.Actors.RegisterActor<>`)
 - 配置 actor 运行时设置 `options`
 - 注册额外的服务类型以便将依赖注入到 Actors中(`services`)
@@ -193,7 +188,9 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseEndpoints(endpoints =>
     {
         // Register actors handlers that interface with the Dapr runtime.
-         
+        endpoints.MapActorsHandlers();
+    });
+}
 ```
 
 `UseRouting` 和 `UseEndpoints` 调用是配置路由所必需的。 在终结点中间件中添加 `MapActorsHandlers` 就是将 actors 配置为管道的一部分。
@@ -229,5 +226,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseEndpoints(endpoints =>
     {
         // Register actors handlers that interface with the Dapr runtime.
-         
+        endpoints.MapActorsHandlers();
+    });
+}
 ```

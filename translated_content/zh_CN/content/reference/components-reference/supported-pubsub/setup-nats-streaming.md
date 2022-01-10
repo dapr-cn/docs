@@ -60,7 +60,7 @@ NATS Streaming has been [deprecated](https://github.com/nats-io/nats-streaming-s
 
 ## 元数据字段规范
 
-| 字段                      | 必填 | 详情                                                                               | Example                         |
+| 字段                      | 必填 | 详情                                                                               | 示例                              |
 | ----------------------- |:--:| -------------------------------------------------------------------------------- | ------------------------------- |
 | natsURL                 | Y  | NATS 服务器地址 URL                                                                   | "`nats://localhost:4222`"       |
 | natsStreamingClusterID  | Y  | NATS cluster ID                                                                  | `"clusterId"`                   |
@@ -91,7 +91,7 @@ docker run -d --name nats-streaming -p 4222:4222 -p 8222:8222 nats-streaming
 {{% /codetab %}}
 
 {{% codetab %}}
-使用 [kubectl](https://docs.nats.io/nats-on-kubernetes/minimal-setup) 在 Kubernetes 上安装 NATS:
+使用 [kubectl](https://docs.nats.io/running-a-nats-service/introduction/running/nats-kubernetes/minimal-setup#minimal-nats-setup) 在 Kubernetes 上安装 NATS:
 
 ```bash
 # Single server NATS

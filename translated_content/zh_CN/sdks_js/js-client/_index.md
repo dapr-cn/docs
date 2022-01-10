@@ -124,7 +124,7 @@ async function start() {
 ```
 - 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
 
-### Publish & subscribe to messages
+### 发布 & 订阅消息
 
 ##### 发布消息
 
@@ -146,7 +146,7 @@ async function start() {
 }
 ```
 
-##### Subscribe to messages
+##### 订阅消息
 
 ```javascript
 import { DaprServer, CommunicationProtocolEnum } from "dapr-client";

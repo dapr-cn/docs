@@ -3,7 +3,7 @@ type: docs
 title: "对使用 .NET SDK 的 发布/订阅 进行故障排除。"
 linkTitle: "发布/订阅的故障排除"
 weight: 100000
-description: 试用 .NET 虚拟 Actor
+description: 对使用 .NET SDK 的 发布/订阅 进行故障排除。
 ---
 
 # 发布/订阅的故障排除
@@ -81,7 +81,7 @@ curl http://localhost:5000/dapr/subscribe -v
 200 状态代码表示成功。
 
 
-最后包含的 JSON blob 是`/dapr/subscribe`的输出，由Dapr运行时处理。 在这种情况下，它使用的是这个repo中的`ControllerSample` - 所以这是一个正确输出的例子。
+包含在 `/dapr/subscribe` 最后面输出的 JSON blob 是由 Dapr 运行时处理的。 在这种情况下，它使用的是这个repo中的`ControllerSample` - 所以这是一个正确输出的例子。
 
 ```json
 [
@@ -120,7 +120,7 @@ app.UseEndpoints(endpoints =>
 
 ### 选项 2：响应包含JSON，但它是空的（如 `[]`）
 
-如果JSON输出是一个空数组 (如 `[]`)，那么下面的处理程序将被注册，但没有任何 topic 终结点。
+如果 JSON 输出是一个空数组 (如 `[]`)，那么订阅处理程序将被注册，但不会注册 topic endpoints 。
 
 ---
 
@@ -130,6 +130,11 @@ app.UseEndpoints(endpoints =>
 [Topic("pubsub", "deposit")]
 [HttpPost("deposit")]
 public async Task<ActionResult> Deposit(...)
+
+// Using Pub/Sub routing
+[Topic("pubsub", "transactions", "event.type == \"withdraw.v2\"", 1)]
+[HttpPost("withdraw")]
+public async Task<ActionResult> Withdraw(...)
 ```
 
 在这个示例中，需要 `Topic` 和 `HttpPost` 属性，但其他细节可能不同。
@@ -154,8 +159,23 @@ endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
 
 ```json
 [
-    {"topic":"deposit","route":"deposit","pubsubName":"pubsub"},
-    {"topic":"withdraw","route":"withdraw","pubsubName":"pubsub"}
+  {
+    "pubsubName": "pubsub",
+    "topic": "deposit",
+    "route": "deposit"
+  },
+  {
+    "pubsubName": "pubsub",
+    "topic": "deposit",
+    "routes": {
+      "rules": [
+        {
+          "match": "event.type == \"withdraw.v2\"",
+          "path": "withdraw"
+        }
+      ]
+    }
+  }
 ]
 ```
 
@@ -234,7 +254,7 @@ info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
 
 如果路由日志条目中的信息是正确的，那么这意味着您的应用程序的行为是正确的。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例︰
 
 ```txt
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]

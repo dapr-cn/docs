@@ -3,7 +3,7 @@ type: docs
 title: "Dapr Actors 概述"
 linkTitle: "概述"
 weight: 10
-description: Dapr Actor 构建块概述
+description: "Overview of the actors API building block"
 aliases:
   - "/zh-hans/developing-applications/building-blocks/actors/actors-background"
 ---
@@ -15,7 +15,7 @@ aliases:
 
 大量 Actors 可以同时执行，但他们之间是相互独立执行的。
 
-Dapr includes a runtime that specifically implements the [Virtual Actor pattern](https://www.microsoft.com/research/project/orleans-virtual-actors/). 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
+Dapr 包含专门实现 [ 虚拟 actors 模式](https://www.microsoft.com/research/project/orleans-virtual-actors/) 的运行时。 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
 
 ### 何时使用 Actors？
 

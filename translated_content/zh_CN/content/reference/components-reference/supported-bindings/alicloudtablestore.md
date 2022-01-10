@@ -41,7 +41,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段             | 必填 | 绑定支持 | 详情                            | Example                                     |
+| 字段             | 必填 | 绑定支持 | 详情                            | 示例                                          |
 | -------------- | -- | ---- | ----------------------------- | ------------------------------------------- |
 | `终结点`          | Y  | 输出   | Alicloud Tablestore endpoint. | https://tablestore-cn-hangzhou.aliyuncs.com |
 | `accessKeyID`  | Y  | 输出   | 访问密钥 ID 凭据。                   |                                             |

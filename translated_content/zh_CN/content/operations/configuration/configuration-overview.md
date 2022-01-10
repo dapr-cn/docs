@@ -16,7 +16,7 @@ description: "关于 Dapr 配置以及如何设置应用程序选项的信息"
 也可以在运行 `dapr run` CLI 命令时，通过使用 `--config` 标志来制定 Dapr sidecar 所读取的配置文件所在的位置。
 
 #### Kubernetes 模式的 Sidecar
-在 Kubernetes 模式下，Dapr 可以通过集群中的一个配置 CRD 进行配置。 例如：
+在 Kubernetes 模式下，Dapr 可以通过集群中的一个配置 CRD 进行配置。 例如:
 
 ```bash
 kubectl apply -f myappconfig.yaml
@@ -41,7 +41,7 @@ Note: There are more [Kubernetes annotations]({{< ref "arguments-annotations-ove
 
 ### Sidecar 配置
 
-Dapr 应用 sidecar 提供以下配置选项；
+The following configuration settings can be applied to Dapr application sidecars:
 - [追踪](#tracing)
 - [度量](#metrics)
 - [中间件](#middleware)
@@ -166,7 +166,7 @@ spec:
 ```
 
 ## 控制平面配置
-在 Dapr 控制平面系统中，安装了一个名为`default` 的配置文件，用于应用全局配置。 这个配置仅在Dapr部署到Kubernetes中时生效。
+There is a single configuration file called `daprsystem` installed with the Dapr control plane system services that applies global settings. 这个配置仅在Dapr部署到Kubernetes中时生效。
 
 ### 控制平面配置列表
 在 Dapr 控制平面中，可以使用以下配置项：

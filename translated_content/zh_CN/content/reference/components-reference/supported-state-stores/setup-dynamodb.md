@@ -45,7 +45,7 @@ In order to use DynamoDB as a Dapr state store, the table must have a primary ke
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 详情                                                                                                                                                                        | Example                                      |
+| 字段           | 必填 | 详情                                                                                                                                                                        | 示例                                           |
 | ------------ |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | table        | Y  | name of the DynamoDB table to use                                                                                                                                         | `"mytable"`                                  |
 | accessKey    | N  | 具有SNS和SQS适当权限的AWS账户的ID。 可以用`secretKeyRef`来引用密钥。                                                                                                                           | `"AKIAIOSFODNN7EXAMPLE"`                     |

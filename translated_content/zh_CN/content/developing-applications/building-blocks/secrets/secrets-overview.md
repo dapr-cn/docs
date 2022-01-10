@@ -3,7 +3,7 @@ type: docs
 title: "密钥管理概览"
 linkTitle: "概述"
 weight: 1000
-description: "密钥管理构建块概览"
+description: "Overview of secrets management API building block"
 ---
 
 应用程序通常会通过使用专用的密钥存储来秘密存储敏感信息，如连接字符串、密钥和用于与数据库、服务和外部系统进行验证的令牌。
@@ -33,7 +33,7 @@ description: "密钥管理构建块概览"
 
 <img src="/images/secrets-overview-kubernetes-store.png" width=600>
 
-在 Azure 中，Dapr 可以配置为使用管理身份验证的 Azure Key Vault，以便获取密钥。 在下面的示例中，Azure Kubernetes 服务 (AKS) 集群被配置为使用托管标识。 Then Dapr uses [pod identities](https://docs.microsoft.com/azure/aks/operator-best-practices-identity#use-pod-identities) to retrieve secrets from Azure Key Vault on behalf of the application.
+在 Azure 中，Dapr 可以配置为使用管理身份验证的 Azure Key Vault，以便获取密钥。 在下面的示例中，Azure Kubernetes 服务 (AKS) 集群被配置为使用托管标识。 然后，Dapr 使用 [pod identities](https://docs.microsoft.com/azure/aks/operator-best-practices-identity#use-pod-identities) 代表应用程序从 Azure Key Vault 中检索机密。
 
 <img src="/images/secrets-overview-azure-aks-keyvault.png" width=600>
 

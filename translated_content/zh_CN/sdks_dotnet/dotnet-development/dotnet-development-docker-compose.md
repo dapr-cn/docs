@@ -8,7 +8,7 @@ description: 学习如何使用Docker-Compose进行本地开发
 
 ## Docker-Compose
 
-*这篇文章是一篇与 .NET 相关的文章，另见 [使用 Docker 进行 Dapr 自托管]({{ ref self-hosted-with-docker.md }}))*
+*这是一篇 .NET 使用指南，另见 [使用 Docker 进行 Dapr 自托管]({{< ref self-hosted-with-docker.md >}})*
 
 `docker-compose ` 是一个脚手架工具，它被包含在Docker的桌面版本中，可以用来一次同时运行多个容器。 它是将多个容器的生命周期自动化管理的一种方式，并为 Kubernetes 的应用程序提供类似于生产环境的开发体验。
 
@@ -35,7 +35,7 @@ description: 学习如何使用Docker-Compose进行本地开发
 
 Compose 文件应至少包含：
 
-- 容器使用的网络
+- 容器用于通信的网络
 - 每个服务的容器
 - 一个指定服务端口和app-id的`<service>-daprd` 边车容器。
 - 在容器中运行的其他依赖组件 (例如redis)

@@ -38,7 +38,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段     | 必填 | 绑定支持 | 详情                                   | Example                   |
+| 字段     | 必填 | 绑定支持 | 详情                                   | 示例                        |
 | ------ |:--:| ---- | ------------------------------------ | ------------------------- |
 | url    | Y  | 输出   | The URL for the InfluxDB instance    | `"http://localhost:8086"` |
 | token  | Y  | 输出   | The authorization token for InfluxDB | `"mytoken"`               |
