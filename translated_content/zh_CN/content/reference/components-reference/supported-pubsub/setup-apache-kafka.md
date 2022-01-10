@@ -45,7 +45,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                   | 必填 | 详情                                                                                                                                                                                  | Example                                                                                            |
+| 字段                   | 必填 | 详情                                                                                                                                                                                  | 示例                                                                                                 |
 | -------------------- |:--:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | brokers              | Y  | A comma-separated list of Kafka brokers.                                                                                                                                            | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"`                                         |
 | consumerGroup        | N  | A kafka consumer group to listen on. Each record published to a topic is delivered to one consumer within each consumer group subscribed to the topic.                              | `"group1"`                                                                                         |
@@ -122,7 +122,7 @@ The `secretKeyRef` above is referencing  a [kubernetes secrets store]({{< ref ku
 
 参数名是`partitionKey`。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partitionKey=key1 \

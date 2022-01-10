@@ -30,7 +30,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 绑定支持                                                                            | 详情                                           | Example |
+| 字段                | 必填 | 绑定支持                                                                            | 详情                                           | 示例      |
 | ----------------- |:--:| ------------------------------------------------------------------------------- | -------------------------------------------- | ------- |
 | namespace         | Y  | 输入                                                                              | The Kubernetes namespace to read events from | `"默认值"` |
 | resyncPeriodInSec | N  | Te period of time to refresh event list from Kubernetes API server. 默认值为 `"10"` | `"15"`                                       |         |

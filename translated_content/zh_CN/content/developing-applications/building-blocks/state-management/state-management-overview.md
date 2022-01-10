@@ -3,7 +3,7 @@ type: docs
 title: "状态管理概览"
 linkTitle: "概述"
 weight: 100
-description: "状态管理构建块概览"
+description: "Overview of the state management API building block"
 ---
 
 ## 介绍
@@ -18,7 +18,7 @@ When using state management, your application can leverage features that would o
 
 Your application can use Dapr's state management API to save, read and query key/value pairs using a state store component, as shown in the diagram below. For example, by using HTTP POST you can save or query key/value pairs and by using HTTP GET you can read a specific key and have its value returned.
 
-<img src="/images/state-management-overview.png" width=900>
+<img src="/images/state-management-overview.png" width=1000>
 
 ## 特性
 These are the features available as part of the state management API:
@@ -114,7 +114,7 @@ The state management API can be found in the [state management API reference]({{
     * [指南：创建一个有状态的服务]({{< ref howto-stateful-service.md >}})
     * [指南：如何在应用程序之间共享状态]({{< ref howto-share-state.md >}})
     * [How-To: Query state]({{< ref howto-state-query-api.md >}})
-    * [How-To: Encrypt application state]({{< ref howto-encrypt-state.md >}})
+    * [操作方法：加密应用程序 state]({{< ref howto-encrypt-state.md >}})
     * [State Time-to-Live]({{< ref state-store-ttl.md >}})
 * 试试 [hello world 快速入门](https://github.com/dapr/quickstarts/blob/master/hello-world/README.md) ，它会显示如何使用状态管理或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
 * [状态存储组件]({{< ref supported-state-stores.md >}}) 列表

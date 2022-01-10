@@ -145,7 +145,7 @@ You are now debugging multiple applications with Dapr!
 
 Below are the supported parameters for VS Code tasks. These parameters are equivalent to `daprd` arguments as detailed in [this reference]({{< ref arguments-annotations-overview.md >}}):
 
-| 参数                     | 说明                                                                                 | 必填                    | Example                                            |
+| 参数                     | 说明                                                                                 | 必填                    | 示例                                                 |
 | ---------------------- | ---------------------------------------------------------------------------------- | --------------------- | -------------------------------------------------- |
 | `allowedOrigins`       | Allowed HTTP origins (default "\*")                                              | No                    | `"allowedOrigins": "*"`                            |
 | `appId`                | 应用程序唯一 ID。 用于服务发现、状态封装 和 发布/订阅 消费者ID                                               | Yes                   | `"appId": "divideapp"`                             |

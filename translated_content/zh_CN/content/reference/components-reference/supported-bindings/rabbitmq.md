@@ -48,7 +48,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                      | Example                                                   |
+| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                      | 示例                                                        |
 | ---------------- |:--:| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | queueName        | Y  | Input/Output | The RabbitMQ queue name                                                                                                                                                                 | `"myqueue"`                                               |
 | host             | Y  | Input/Output | The RabbitMQ host address                                                                                                                                                               | `"amqp://[username][:password]@host.domain[:port]"`       |
@@ -75,7 +75,7 @@ spec:
 
 字段名为 `ttlInSeconds`。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 {{< tabs Windows Linux >}}
 {{% codetab %}}
@@ -120,7 +120,7 @@ To set priority at message level use the `metadata` section in the request body 
 
 The field name is `priority`.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 {{< tabs Windows Linux >}}
 {{% codetab %}}

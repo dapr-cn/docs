@@ -34,7 +34,7 @@ Actors 可以通过 timer 或者 remider 自行注册周期性的任务.
 
 Timers 和 reminders 的功能非常相似。 主要的区别在于，Dapr actor运行时在停用后不保留任何有关 timer 的信息，而使用Dapr actor状态提供程序持久化有关 reminder 的信息。
 
-这种区别允许用户在轻量级但无状态的timer和需要更多资源但有状态的reminder之间进行权衡。
+This distinction allows users to trade off between light-weight but stateless timers vs. more resource-demanding but stateful reminders.
 
 Timer和reminder的调度配置是相同的，总结如下:
 
@@ -58,7 +58,7 @@ Timer和reminder的调度配置是相同的，总结如下:
 
 支持的格式:
 * RFC3339 日期格式，例如 `2020-10-02T15:00:00Z`
-* time.Duration格式，例如 `2h30m`
+* time.Duration 格式，例如`2h30m`
 * [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) 格式。 示例： `PT2H30M`
 
 ---

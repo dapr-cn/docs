@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "设置 Google Kubernetes 服务集群"
-linkTitle: "谷歌Kubernetes引擎(GKE)"
+title: "Setup a Google Kubernetes Engine (GKE) cluster"
+linkTitle: "Google Kubernetes Engine (GKE)"
 weight: 3000
 description: "设置 Google Kubernetes 服务集群"
 ---

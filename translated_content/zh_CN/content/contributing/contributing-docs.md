@@ -79,7 +79,7 @@ description: "1+ SENTENCES DESCRIBING THE ARTICLE"
 ---
 ```
 
-#### Example
+#### 示例
 ```yaml
 ---
 type: docs
@@ -142,7 +142,7 @@ Docsy 和 Hugo 使用的 markdown 规范没有提供使用 markdown 语法来调
 ```
 > 请不要忘记设置 alt 属性，以保留视觉受损用户的文档可读。
 
-#### Example
+#### 示例
 
 此 HTML 将在 `overview.md` 页面上显示 `dapr-overview.png` 图片:
 ```md
@@ -169,7 +169,7 @@ Docsy 和 Hugo 使用的 markdown 规范没有提供使用 markdown 语法来调
 
 您所编写的所有内容都将被渲染为Markdown，因此您可以包含图像、代码块、YouTube视频等。
 
-#### Example
+#### 例子
 ````
 {{</* tabs Windows Linux MacOS>}}
 
@@ -317,7 +317,7 @@ Hugo can automatically embed YouTube videos using a shortcode:
 {{</* youtube [VIDEO ID] */>}}
 ```
 
-#### Example
+#### 示例
 
 给定视频：https://youtu.be/dQw4w9WgXcQ
 

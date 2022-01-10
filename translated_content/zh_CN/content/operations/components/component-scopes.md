@@ -91,7 +91,7 @@ curl -i -d '{ "message": "hello" }' \
 ```
 
 ## 使用 pub/sub 的命名空间
-Read [Pub/Sub and namespaces]({{< ref "component-scopes.md" >}}) for more information on scoping components.
+Read [Configure Pub/Sub components with multiple namespaces]({{< ref "pubsub-namespaces.md" >}}) for more information on using namespaces with pub/sub.
 
 ## 对具有作用域的组件的应用程序访问
 

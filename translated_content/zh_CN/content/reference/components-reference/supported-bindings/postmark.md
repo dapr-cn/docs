@@ -38,7 +38,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持 | 详情                                                                   | Example            |
+| 字段           | 必填 | 绑定支持 | 详情                                                                   | 示例                 |
 | ------------ |:--:| ---- | -------------------------------------------------------------------- | ------------------ |
 | accountToken | Y  | 输出   | The Postmark account token, this should be considered a secret value | `"account token"`  |
 | serverToken  | Y  | 输出   | The Postmark server token, this should be considered a secret value  | `"server token"`   |

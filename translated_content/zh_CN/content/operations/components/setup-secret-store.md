@@ -8,7 +8,7 @@ aliases:
   - "/zh-hans/operations/components/setup-state-store/secret-stores-overview/"
 ---
 
-Dapr integrates with secret stores to provide apps and other components with secure storage and access to secrets such as access keys and passwords. 每个密钥存储组件都有一个名称，这个名称用于访问密钥。
+Dapr 集成密钥存储，为应用程序和其他组件提供安全存储和访问，如访问密钥和密码。 每个密钥存储组件都有一个名称，这个名称用于访问密钥。
 
 与其他构建块组件一样，密钥存储组件是可扩展的，可以在[components-contrib 仓库](https://github.com/dapr/components-contrib)中找到。
 

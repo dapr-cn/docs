@@ -42,6 +42,7 @@ description: >
     - 对 Dapr 运行时的许多更改可能需要对 API 进行更改。 在此情况下，讨论潜在功能的最佳位置是 [Dapr repo](https://github.com/dapr/dapr)。
     - 其他的例子可以包括绑定、状态存储或全新的组件。
 
+
 ## Pull Requests
 
 所有的贡献都是通过拉请求来实现的。 要提交拟议的更改，请遵循此工作流程。
@@ -52,17 +53,52 @@ description: >
 1. 创建更改
     - 代码更改需要测试
 1. 更新有关更改的相关文档
-1. 提交并打开一个 PR
+1. Commit with [DCO sign-off]({{< ref "contributing-overview.md#developer-certificate-of-origin-signing-your-work" >}}) and open a PR
 1. 等待 CI 进程完成并确保所有检查都是绿色的
 1. 项目的维护者将被指定，您可以在几天内得到审查。
+
 
 #### 使用正在进行的 PRs 进行早期反馈
 
 在投入太多时间之前，一个好的沟通方式是创建一个 "Work-in-progress "的PR，并与你的审阅者分享。 标准的方法是在PR的标题中添加 "[WIP]" 前缀，并分配 **do-not-merge** 标签。 这将使查看您的 PR 的人知道它还没有准备好。
 
-### 使用第三方代码
+## 使用第三方代码
 
 - 第三方代码必须包含许可证。
+
+## Developer Certificate of Origin: Signing your work
+#### Every commit needs to be signed
+
+The Developer Certificate of Origin (DCO) is a lightweight way for contributors to certify that they wrote or otherwise have the right to submit the code they are contributing to the project. Here is the full text of the [DCO](https://developercertificate.org/), reformatted for readability:
+```
+By making a contribution to this project, I certify that:
+    (a) The contribution was created in whole or in part by me and I have the right to submit it under the open source license indicated in the file; or
+    (b) The contribution is based upon previous work that, to the best of my knowledge, is covered under an appropriate open source license and I have the right under that license to submit that work with modifications, whether created in whole or in part by me, under the same open source license (unless I am permitted to submit under a different license), as indicated in the file; or
+    (c) The contribution was provided directly to me by some other person who certified (a), (b) or (c) and I have not modified it.
+    (d) I understand and agree that this project and the contribution are public and that a record of the contribution (including all personal information I submit with it, including my sign-off) is maintained indefinitely and may be redistributed consistent with this project or the open source license(s) involved.
+```
+Contributors sign-off that they adhere to these requirements by adding a `Signed-off-by` line to commit messages.
+
+```
+This is my commit message
+Signed-off-by: Random J Developer <random@developer.example.org>
+```
+Git even has a `-s` command line option to append this automatically to your commit message:
+```
+$ git commit -s -m 'This is my commit message'
+```
+
+Each Pull Request is checked  whether or not commits in a Pull Request do contain a valid Signed-off-by line.
+
+#### I didn't sign my commit, now what?!
+
+No worries - You can easily replay your changes, sign them and force push them!
+
+```
+git checkout <branch-name>
+git commit --amend --no-edit --signoff
+git push --force-with-lease <remote-name> <branch-name>
+```
 
 ## 行为准则
 

@@ -52,7 +52,7 @@ The example configuration shown above, contain a username and password as plain-
 
 ## 元数据字段规范
 
-| 字段            | 必填 | 绑定支持 | 详情                                                                                                                                                     | Example             |
+| 字段            | 必填 | 绑定支持 | 详情                                                                                                                                                     | 示例                  |
 | ------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
 | host          | Y  | 输出   | The host where your SMTP server runs                                                                                                                   | `"smtphost"`        |
 | port          | Y  | 输出   | The port your SMTP server listens on                                                                                                                   | `"9999"`            |
@@ -87,7 +87,7 @@ When sending an email, the metadata in the configuration and in the request is c
 
 The `emailTo`, `emailCC` and `emailBCC` fields can contain multiple email addresses separated by a semicolon.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 ```json
 {
   "operation": "create",

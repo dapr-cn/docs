@@ -42,7 +42,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持 | 详情                      | Example             |
+| 字段           | 必填 | 绑定支持 | 详情                      | 示例                  |
 | ------------ |:--:| ---- | ----------------------- | ------------------- |
 | topicArn     | Y  | 输出   | The SNS topic name      | `"arn:::topicarn"`  |
 | region       | Y  | 输出   | The specific AWS region | `"us-east-1"`       |

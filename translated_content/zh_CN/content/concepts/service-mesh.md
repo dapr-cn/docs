@@ -2,12 +2,12 @@
 type: docs
 title: "Dapr 和服务网格"
 linkTitle: "服务网格"
-weight: 100
+weight: 900
 description: >
-  Dapr 如何与服务网格进行比较和工作
+  How Dapr compares to and works with service meshes
 ---
 
-Dapr 使用 sidecar 架构，与应用程序一起作为单独的流程运行，包括服务调用、网络安全和分布式跟踪等功能。 这经常会引发一个问题：Dapr 与Linkerd 、Istio 或开放式服务网格(OSM) 等服务网格解决方案相比如何？
+Dapr 使用 sidecar 架构，与应用程序一起作为单独的流程运行，包括服务调用、网络安全和分布式跟踪等功能。 This often raises the question: how does Dapr compare to service mesh solutions such as [Linkerd](https://linkerd.io/), [Istio](https://istio.io/) and [Open Service Mesh](https://openservicemesh.io/) among others?
 
 ## Dapr 和服务网格的比较
 虽然 Dapr 和服务网格确实存在一些重叠功能，但 Dapr **不是服务网格** ，尤其服务网格被定义为 *"网络"* 服务网格。 与专注于网络问题的服务网格不同，Dapr 专注于提供构建基块，使开发人员更容易将应用程序构建为微服务。 Dapr 以开发人员为中心，而服务网格以基础设施为中心。
@@ -34,10 +34,9 @@ Dapr 也适用于服务网格。 如果两者部署在一起，Dapr 和服务网
 如需了解更多关于同时运行Dapr及服务网格的信息，可参阅以下来自Dapr社区的相关资料：
 - [Dapr 和 Linkerd](https://youtu.be/xxU68ewRmz8?t=142)
 - [Dapr 和 Istio](https://youtu.be/ngIDOQApx8g?t=335)
+- Learn more about [running Dapr with Open Service Mesh (OSM)]({{<ref open-service-mesh>}}).
 
-Also, learn more about [running Dapr with Open Service Mesh (OSM)]({{<ref open-service-mesh>}}).
-
-## 何时选择使用 Dapr、服务网格或者两者兼存
+## When to use Dapr or a service mesh or both
 您应该使用 Dapr、服务网格还是两者兼而有之？ 答案取决于您的需求。 例如，如果您希望将 Dapr 用于一个或多个构建块，例如状态管理或 发布/订阅，同时考虑仅针对网络安全或可观察性使用服务网格，那您可能会发现 Dapr 已经非常合适，并不需要使用服务网格。
 
 一个需要同时使用Dapr和服务网格的典型场景是：所有应用程序的通信作为一个整体策略，都需要进行加密处理的时候。 例如，您可能仅在应用程序的一部分中使用 Dapr，而应用程序中未使用 Dapr 的其他服务和处理也需要加密通信。 在这种场景下，使用服务网格是更好的选择。且最好您在服务网格中启用 mTLS 及分布式跟踪功能，并在Dapr中禁用掉它们。

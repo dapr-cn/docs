@@ -43,7 +43,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段              | 必填 | 绑定支持                                                                                                                   | 详情                                                                                                                                                                                  | Example                                                    |
+| 字段              | 必填 | 绑定支持                                                                                                                   | 详情                                                                                                                                                                                  | 示例                                                         |
 | --------------- |:--:| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | topics          | N  | 输入                                                                                                                     | A comma-separated string of topics.                                                                                                                                                 | `"mytopic1,topic2"`                                        |
 | brokers         | Y  | Input/Output                                                                                                           | A comma-separated string of Kafka brokers.                                                                                                                                          | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"` |
@@ -69,7 +69,7 @@ When invoking the Kafka binding, its possible to provide an optional partition k
 
 The field name is `partitionKey`.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myKafka \

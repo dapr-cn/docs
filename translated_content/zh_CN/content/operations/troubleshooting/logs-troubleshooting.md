@@ -1,50 +1,50 @@
 ---
 type: docs
-title: "Configure and view Dapr Logs"
+title: "配置和查看 Dapr 日志"
 linkTitle: "日志"
 weight: 2000
-description: "Understand how logging works in Dapr and how to configure and view logs"
+description: "了解日志记录在 Dapr 中的工作原理以及如何配置和查看日志"
 ---
 
-This section will assist you in understanding how logging works in Dapr, configuring and viewing logs.
+本节将帮助您了解日志记录在 Dapr 中的工作原理，配置和查看日志。
 
 ## 概述
 
-Logs have different, configurable verbosity levels. The levels outlined below are the same for both system components and the Dapr sidecar process/container:
+日志具有不同的、可配置的详细级别。 下面列出的级别对于系统组件和 Dapr sidecar 进程/容器都是相同的：
 
 1. error
-2. warning
+2. warn
 3. info
 4. debug
 
-error produces the minimum amount of output, where debug produces the maximum amount. The default level is info, which provides a balanced amount of information for operating Dapr in normal conditions.
+error 产生最小输出量，debug 产生最大输出量。 默认级别是 info，它为在正常情况下操作 Dapr 提供均衡的信息量。
 
-To set the output level, you can use the `--log-level` command-line option. 例如:
+若要设置输出级别，可以使用 `--log-level` 命令行选项。 例如:
 
 ```bash
 ./daprd --log-level error
 ./placement --log-level debug
 ```
 
-This will start the Dapr runtime binary with a log level of `error` and the Dapr Actor Placement Service with a log level of `debug`.
+这将启动日志级别为 `error` 的 Dapr 运行时二进制文件和日志级别为 `debug`的 Dapr Actor 放置服务。
 
-## Logs in stand-alone mode
+## 独立模式的日志
 
-To set the log level when running your app with the Dapr CLI, pass the `log-level` param:
-
-```bash
-dapr run --log-level warning node myapp.js
-```
-
-As outlined above, every Dapr binary takes a `--log-level` argument. For example, to launch the placement service with a log level of warning:
+若要在 Dapr CLI 运行时设置日志级别，请通过 `log-level` 参数：
 
 ```bash
-./placement --log-level warning
+dapr run --log-level warn node myapp.js
 ```
 
-### Viewing Logs on Standalone Mode
+如上所述，每个 Dapr 二进制文件都采用 `--log-level` 参数。 例如，要启动日志级别为 warning 的放置服务，请执行以下操作：
 
-When running Dapr with the Dapr CLI, both your app's log output and the runtime's output will be redirected to the same session, for easy debugging. For example, this is the output when running Dapr:
+```bash
+./placement --log-level warn
+```
+
+### 在独立模式下查看日志
+
+使用 Dapr CLI 运行 Dapr 时， 您的应用的日志输出和运行时的输出都会被重定向到同一会话，以方便调试操作。 例如，这是运行 Dapr 时的输出：
 
 ```bash
 dapr run node myapp.js
@@ -60,7 +60,7 @@ dapr run node myapp.js
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="loaded component messagebus (pubsub.redis)"
 == DAPR == 2019/09/05 12:26:43 redis: connecting to localhost:6379
 == DAPR == 2019/09/05 12:26:43 redis: connected to localhost:6379 (localAddr: [::1]:56734, remAddr: [::1]:6379)
-== DAPR == time="2019-09-05T12:26:43-07:00" level=warning msg="failed to init input bindings: app channel not initialized"
+== DAPR == time="2019-09-05T12:26:43-07:00" level=warn msg="failed to init input bindings: app channel not initialized"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actor runtime started. actor idle timeout: 1h0m0s. actor scan interval: 30s"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actors: starting connection attempt to placement service at localhost:50005"
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="http server is running on port 56730"
@@ -69,48 +69,48 @@ dapr run node myapp.js
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actors: established connection to placement service at localhost:50005"
 ```
 
-## Logs in Kubernetes mode
+## Kubernetes模式的日志
 
-You can set the log level individually for every sidecar by providing the following annotation in your pod spec template:
+您可以通过在 Pod spec 模板中提供以下 annotation ，为每个 sidecar 单独设置日志级别：
 
 ```yml
 annotations:
   dapr.io/log-level: "debug"
 ```
 
-### Setting system pods log level
+### 设置系统 Pod 日志级别
 
-When deploying Dapr to your cluster using Helm 3.x, you can individually set the log level for every Dapr system component:
+使用 Helm 3.x 将 Dapr 部署到集群时，您可以为每个 Dapr 系统组件单独设置日志级别：
 
 ```bash
 helm install dapr dapr/dapr --namespace dapr-system --set <COMPONENT>.logLevel=<LEVEL>
 ```
 
-Components:
+组件:
 - dapr_operator
 - dapr_placement
 - dapr_sidecar_injector
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 ```bash
 helm install dapr dapr/dapr --namespace dapr-system --set dapr_operator.logLevel=error
 ```
 
-### Viewing Logs on Kubernetes
+### 查看 Kubernetes 日志
 
-Dapr logs are written to stdout and stderr. This section will guide you on how to view logs for Dapr system components as well as the Dapr sidecar.
+Dapr 日志被写入 stdout 和 stderr。 本节将指导您如何查看 Dapr 系统组件以及 Dapr sidecar的日志。
 
-#### Sidecar Logs
+#### Sidecar 日志
 
-When deployed in Kubernetes, the Dapr sidecar injector will inject a Dapr container named `daprd` into your annotated pod. In order to view logs for the sidecar, simply find the pod in question by running `kubectl get pods`:
+在 Kubernetes 中部署时，Dapr sidecar 注入器会将一个名为 `daprd` 的 Dapr 容器注入到带注释的 pod 中。 为了查看sidecar的日志，只需运行 `kubectl get pods`找到有问题的pod：
 
 ```bash
 NAME                                        READY     STATUS    RESTARTS   AGE
 addapp-74b57fb78c-67zm6                     2/2       Running   0          40h
 ```
 
-Next, get the logs for the Dapr sidecar container:
+接下来，获取 Dapr sidecar 容器的日志：
 
 ```bash
 kubectl logs addapp-74b57fb78c-67zm6 -c daprd
@@ -129,9 +129,9 @@ time="2019-09-04T02:52:27Z" level=info msg="dapr initialized. Status: Running. I
 time="2019-09-04T02:52:27Z" level=info msg="actors: established connection to placement service at dapr-placement.dapr-system.svc.cluster.local:80"
 ```
 
-#### System Logs
+#### 系统日志
 
-Dapr runs the following system pods:
+Dapr 运行以下系统 Pod：
 
 * Dapr operator
 * Dapr sidecar injector
@@ -141,40 +141,58 @@ Dapr runs the following system pods:
 
 ```Bash
 kubectl logs -l app=dapr-operator -n dapr-system
-time="2019-09-05T19:03:43Z" level=info msg="log level set to: info"
-time="2019-09-05T19:03:43Z" level=info msg="starting Dapr Operator -- version 0.3.0-alpha -- commit b6f2810-dirty"
-time="2019-09-05T19:03:43Z" level=info msg="Dapr Operator is started"
+
+I1207 06:01:02.891031 1 leaderelection.go:243] attempting to acquire leader lease dapr-system/operator.dapr.io...
+I1207 06:01:02.913696 1 leaderelection.go:253] successfully acquired lease dapr-system/operator.dapr.io
+time="2021-12-07T06:01:03.092529085Z" level=info msg="getting tls certificates" instance=dapr-operator-84bb47f895-dvbsj scope=dapr.operator type=log ver=unknown
+time="2021-12-07T06:01:03.092703283Z" level=info msg="tls certificates loaded successfully" instance=dapr-operator-84bb47f895-dvbsj scope=dapr.operator type=log ver=unknown
+time="2021-12-07T06:01:03.093062379Z" level=info msg="starting gRPC server" instance=dapr-operator-84bb47f895-dvbsj scope=dapr.operator.api type=log ver=unknown
+time="2021-12-07T06:01:03.093123778Z" level=info msg="Healthz server is listening on :8080" instance=dapr-operator-84bb47f895-dvbsj scope=dapr.operator type=log ver=unknown
+time="2021-12-07T06:01:03.497889776Z" level=info msg="starting webhooks" instance=dapr-operator-84bb47f895-dvbsj scope=dapr.operator type=log ver=unknown
+I1207 06:01:03.497944 1 leaderelection.go:243] attempting to acquire leader lease dapr-system/webhooks.dapr.io...
+I1207 06:01:03.516641 1 leaderelection.go:253] successfully acquired lease dapr-system/webhooks.dapr.io
+time="2021-12-07T06:01:03.526202227Z" level=info msg="Successfully patched webhook in CRD "subscriptions.dapr.io"" instance=dapr-operator-84bb47f895-dvbsj scope=dapr.operator type=log ver=unknown
 ```
 
-*Note: If Dapr is installed to a different namespace than dapr-system, simply replace the namespace to the desired one in the command above*
+*注意：如果 Dapr 安装到与 dapr-system 不同的命名空间，只需在上面的命令中将命名空间替换为所需的命名空间即可*
 
-#### Sidecar Injector Logs
+#### Sidecar 注入器日志
 
 ```Bash
 kubectl logs -l app=dapr-sidecar-injector -n dapr-system
-time="2019-09-03T21:01:12Z" level=info msg="log level set to: info"
-time="2019-09-03T21:01:12Z" level=info msg="starting Dapr Sidecar Injector -- version 0.3.0-alpha -- commit b6f2810-dirty"
-time="2019-09-03T21:01:12Z" level=info msg="Sidecar injector is listening on :4000, patching Dapr-enabled pods"
+
+time="2021-12-07T06:01:01.554859058Z" level=info msg="log level set to: info" instance=dapr-sidecar-injector-5d88fcfcf5-2gmvv scope=dapr.injector type=log ver=unknown
+time="2021-12-07T06:01:01.555114755Z" level=info msg="metrics server started on :9090/" instance=dapr-sidecar-injector-5d88fcfcf5-2gmvv scope=dapr.metrics type=log ver=unknown
+time="2021-12-07T06:01:01.555233253Z" level=info msg="starting Dapr Sidecar Injector -- version 1.5.1 -- commit c6daae8e9b11b3e241a9cb84c33e5aa740d74368" instance=dapr-sidecar-injector-5d88fcfcf5-2gmvv scope=dapr.injector type=log ver=unknown
+time="2021-12-07T06:01:01.557646524Z" level=info msg="Healthz server is listening on :8080" instance=dapr-sidecar-injector-5d88fcfcf5-2gmvv scope=dapr.injector type=log ver=unknown
+time="2021-12-07T06:01:01.621291968Z" level=info msg="Sidecar injector is listening on :4000, patching Dapr-enabled pods" instance=dapr-sidecar-injector-5d88fcfcf5-2gmvv scope=dapr.injector type=log ver=unknown
 ```
 
-*Note: If Dapr is installed to a different namespace than dapr-system, simply replace the namespace to the desired one in the command above*
+*注意：如果 Dapr 安装到与 dapr-system 不同的命名空间，只需在上面的命令中将命名空间替换为所需的命名空间即可*
 
-#### Viewing Placement Service Logs
+#### 查看放置服务日志
 
 ```Bash
-kubectl logs -l app=dapr-placement -n dapr-system
-time="2019-09-03T21:01:12Z" level=info msg="log level set to: info"
-time="2019-09-03T21:01:12Z" level=info msg="starting Dapr Placement Service -- version 0.3.0-alpha -- commit b6f2810-dirty"
-time="2019-09-03T21:01:12Z" level=info msg="placement Service started on port 50005"
-time="2019-09-04T00:21:57Z" level=info msg="host added: 10.244.1.89"
+kubectl logs -l app=dapr-placement-server -n dapr-system
+
+time="2021-12-04T05:08:05.733416791Z" level=info msg="starting Dapr Placement Service -- version 1.5.0 -- commit 83fe579f5dc93bef1ce3b464d3167a225a3aff3a" instance=dapr-placement-server-0 scope=dapr.placement type=log ver=unknown
+time="2021-12-04T05:08:05.733469491Z" level=info msg="log level set to: info" instance=dapr-placement-server-0 scope=dapr.placement type=log ver=1.5.0
+time="2021-12-04T05:08:05.733512692Z" level=info msg="metrics server started on :9090/" instance=dapr-placement-server-0 scope=dapr.metrics type=log ver=1.5.0
+time="2021-12-04T05:08:05.735207095Z" level=info msg="Raft server is starting on 127.0.0.1:8201..." instance=dapr-placement-server-0 scope=dapr.placement.raft type=log ver=1.5.0
+time="2021-12-04T05:08:05.735221195Z" level=info msg="mTLS enabled, getting tls certificates" instance=dapr-placement-server-0 scope=dapr.placement type=log ver=1.5.0
+time="2021-12-04T05:08:05.735265696Z" level=info msg="tls certificates loaded successfully" instance=dapr-placement-server-0 scope=dapr.placement type=log ver=1.5.0
+time="2021-12-04T05:08:05.735276396Z" level=info msg="placement service started on port 50005" instance=dapr-placement-server-0 scope=dapr.placement type=log ver=1.5.0
+time="2021-12-04T05:08:05.735553696Z" level=info msg="Healthz server is listening on :8080" instance=dapr-placement-server-0 scope=dapr.placement type=log ver=1.5.0
+time="2021-12-04T05:08:07.036850257Z" level=info msg="cluster leadership acquired" instance=dapr-placement-server-0 scope=dapr.placement type=log ver=1.5.0
+time="2021-12-04T05:08:07.036909357Z" level=info msg="leader is established." instance=dapr-placement-server-0 scope=dapr.placement type=log ver=1.5.0
 ```
 
-*Note: If Dapr is installed to a different namespace than dapr-system, simply replace the namespace to the desired one in the command above*
+*注意：如果 Dapr 安装到与 dapr-system 不同的命名空间，只需在上面的命令中将命名空间替换为所需的命名空间即可*
 
-### Non Kubernetes Environments
+### 非 Kubernetes 环境
 
 The examples above are specific specific to Kubernetes, but the principal is the same for any kind of container based environment: simply grab the container ID of the Dapr sidecar and/or system component (if applicable) and view its logs.
 
 ## 参考资料
 
-* [如何为Dapr sidecar和你的应用程序设置日志]({{< ref "logging.md" >}})
+* [如何在 Dapr 中设置日志记录]({{< ref "logging.md" >}})

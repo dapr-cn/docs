@@ -32,7 +32,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 详情                                 | Example                                                                                           |
+| 字段               | 必填 | 详情                                 | 示例                                                                                                |
 | ---------------- |:--:| ---------------------------------- | ------------------------------------------------------------------------------------------------- |
 | connectionString | Y  | PostgreSQL 的连接字符串                  | `"host=localhost user=postgres password=example port=5432 connect_timeout=10 database=dapr_test"` |
 | actorStateStore  | N  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"` | `"true"`, `"false"`                                                                               |

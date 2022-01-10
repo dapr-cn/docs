@@ -25,7 +25,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段  | 必填 | 绑定支持 | 详情                     | Example                                                    |
+| 字段  | 必填 | 绑定支持 | 详情                     | 示例                                                         |
 | --- |:--:| ---- | ---------------------- | ---------------------------------------------------------- |
 | url | Y  | 输出   | 要调用的 HTTP 终点的 base URL | `http://host:port/path`, `http://myservice:8000/customers` |
 
@@ -85,7 +85,7 @@ This component supports **output binding** with the following [HTTP methods/verb
 | status     | Y  | 状态说明                                                                 | `"200 OK"`, `"201 Created"` |
 | Headers*   | N  | 任何第一字母为大写字母的字段均作为请求头发送                                               | `"Content-Type"`            |
 
-#### Example
+#### 示例
 
 **请求 base URL**
 
@@ -146,7 +146,7 @@ curl -d '{ "operation": "get", "metadata": { "path": "/things/1234" } }' \
 }
 ```
 
-#### Example
+#### 例子
 
 **发布新记录**
 

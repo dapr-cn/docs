@@ -15,7 +15,7 @@ This endpoint lets you invoke a method in another Dapr enabled app.
 ### HTTP 请求
 
 ```
-POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method/<method-name>
+PATCH/POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method/<method-name>
 ```
 
 ### HTTP 响应码

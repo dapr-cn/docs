@@ -36,7 +36,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                   | 必填 | 详情                                                   | Example                                                                                                                                    |
+| 字段                   | 必填 | 详情                                                   | 示例                                                                                                                                         |
 | -------------------- |:--:| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | connectionString     | Y  | Event Hubs的连接地址                                      | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
 | storageAccountName   | Y  | 用于EventProcessorHost的存储账户名称                          | `"myeventhubstorage"`                                                                                                                      |

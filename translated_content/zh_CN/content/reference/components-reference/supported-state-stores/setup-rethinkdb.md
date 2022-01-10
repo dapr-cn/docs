@@ -53,7 +53,7 @@ Additionally, if the optional `archive` metadata is set to `true`, on each state
 
 ## 元数据字段规范
 
-| 字段       | 必填 | 详情                                       | Example                                                            |
+| 字段       | 必填 | 详情                                       | 示例                                                                 |
 | -------- |:--:| ---------------------------------------- | ------------------------------------------------------------------ |
 | address  | Y  | The address for RethinkDB server         | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
 | database | Y  | The database to use. Alpha-numerics only | `"dapr"`                                                           |

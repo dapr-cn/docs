@@ -39,7 +39,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 详情                                                             | Example                                      |
+| 字段                | 必填 | 详情                                                             | 示例                                           |
 | ----------------- |:--:| -------------------------------------------------------------- | -------------------------------------------- |
 | servers           | Y  | Comma delimited list of servers                                | `"zookeeper.default.svc.cluster.local:2181"` |
 | sessionTimeout    | Y  | The session timeout value                                      | `"5s"`                                       |

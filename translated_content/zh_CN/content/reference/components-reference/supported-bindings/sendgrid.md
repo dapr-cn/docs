@@ -38,7 +38,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段        | 必填 | 绑定支持 | 详情                                                                                                                         | Example                  |
+| 字段        | 必填 | 绑定支持 | 详情                                                                                                                         | 示例                       |
 | --------- |:--:| ---- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | apiKey    | Y  | 输出   | SendGrid API key, this should be considered a secret value                                                                 | `"apikey"`               |
 | emailFrom | N  | 输出   | If set this specifies the 'from' email address of the email message. Optional field, see [below](#example-request-payload) | `"me@example.com"`       |

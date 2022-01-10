@@ -43,7 +43,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段              | 必填 | 绑定支持 | 详情                                                                                                        | Example                                      |
+| 字段              | 必填 | 绑定支持 | 详情                                                                                                        | 示例                                           |
 | --------------- |:--:| ---- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | url             | Y  | 输出   | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"` |
 | pemPath         | Y  | 输出   | Path to the PEM file. Used with SSL connection                                                            | `"path/to/pem/file"`                         |

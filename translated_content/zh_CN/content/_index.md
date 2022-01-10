@@ -9,7 +9,7 @@ no_list: true
 
 
 {{% alert title="What is Dapr?" color="primary" %}}
-Dapr is a portable, event-driven runtime that makes it easy for any developer to build resilient, stateless and stateful applications that run on the cloud and edge and embraces the diversity of languages and developer frameworks. Leveraging the benefits of a sidecar architecture, Dapr helps you tackle the challenges that come with building microservices and keeps your code platform agnostic.
+Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种编程语言和开发框架。 Dapr利用侧边体结构的好处，帮助 你应对建造微型服务带来的挑战，并使你的代码平台具有敏捷性。
 {{< button text="Get started" page="getting-started" >}}
 {{% /alert %}}
 
@@ -27,7 +27,7 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>快速入门</b></h5>
-      <p class="card-text">A collection of tutorials with code samples to get you started quickly with Dapr.</p>
+      <p class="card-text">包含代码示例的教程集合，可帮助您快速开始使用 Dapr。</p>
       <a href="{{< ref quickstarts >}}" class="stretched-link"></a>
     </div>
   </div>
@@ -53,7 +53,7 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>构建块</b></h5>
-      <p class="card-text">Capabilities that solve common development challenges for distributed applications.</p>
+      <p class="card-text">为分布式应用程序解决相同开发挑战的 Dapr 功能.</p>
       <a href="{{< ref building-blocks-concept >}}" class="stretched-link"></a>
     </div>
   </div>
@@ -66,7 +66,7 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
   </div>
 </div>
 
-### Additional info
+### 更多信息
 
 <div class="card-deck">
   <div class="card">
@@ -85,7 +85,7 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
   </div>
 </div>
 
-### Tooling and resources
+### 技术与资源
 
 <div class="card-deck">
   <div class="card">
@@ -127,7 +127,7 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
         <b>.NET</b>
       </h5>
       <p class="card-text">
-        Learn more about the .NET SDK.
+        了解更多关于.NET SDK的信息。
       </p>
       <a href="{{< ref dotnet >}}" class="stretched-link"></a>
     </div>
@@ -139,9 +139,21 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
         <b>Python</b>
       </h5>
       <p class="card-text">
-        Learn more about the Python SDK.
+        了解更多关于Python SDK的信息。
       </p>
       <a href="{{< ref python >}}" class="stretched-link"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        <img src="/images/homepage/javascript.png" alt="JS logo" width=30>
+        <b>JavaScript</b>
+      </h5>
+      <p class="card-text">
+        了解更多关于JavaScript SDK的信息。
+      </p>
+      <a href="{{< ref js >}}" class="stretched-link"></a>
     </div>
   </div>
 </div>
@@ -155,7 +167,7 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
         <b>Java</b>
       </h5>
       <p class="card-text">
-        Learn more about the Java SDK.
+        了解更多关于Java SDK的信息。
       </p>
       <a href="{{< ref java >}}" class="stretched-link"></a>
     </div>
@@ -167,7 +179,7 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
         <b>Go</b>
       </h5>
       <p class="card-text">
-        Learn more about the Go SDK.
+        了解更多关于Go SDK的信息。
       </p>
       <a href="{{< ref go >}}" class="stretched-link"></a>
     </div>
@@ -179,7 +191,7 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
         <b>PHP</b>
       </h5>
       <p class="card-text">
-        Learn more about the PHP SDK.
+        了解更多关于PHP SDK的信息。
       </p>
       <a href="{{< ref php >}}" class="stretched-link"></a>
     </div>

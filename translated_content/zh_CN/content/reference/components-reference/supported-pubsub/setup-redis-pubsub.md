@@ -37,7 +37,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                    | 必填 | 详情                                                                                                                                                                                            | Example                                                         |
+| 字段                    | 必填 | 详情                                                                                                                                                                                            | 示例                                                              |
 | --------------------- |:--:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | redisHost             | Y  | Redis的连接地址. If `"redisType"` is `"cluster"` it can be multiple hosts separated by commas or just a single host                                                                                | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
 | redisPassword         | Y  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                                                                                                                         | `""`, `"KeFg23!"`                                               |

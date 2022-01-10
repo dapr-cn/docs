@@ -266,7 +266,7 @@ $app->start();
 
 {{< /tabs >}}
 
-## Common Expression Language (CEL)
+## 通用表达式语言(CEL)
 
 In these examples, depending on the type of the event (`event.type`), the application will be called on `/widgets`, `/gadgets` or `/products`. The expressions are written as [Common Expression Language (CEL)](https://github.com/google/cel-spec) where `event` represents the cloud event. Any of the attributes from the [CloudEvents core specification](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#required-attributes) can be referenced in the expression.
 
@@ -414,7 +414,7 @@ The following attributes are OPTIONAL to appear in CloudEvents. See the [Notatio
 - Constraints:
   - OPTIONAL
   - If present, MUST be a non-empty string
-- You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+- 示例:
   - A subscriber might register interest for when new blobs are created inside a blob-storage container. In this case, the event `source` identifies the subscription scope (storage container), the `type` identifies the "blob created" event, and the `id` uniquely identifies the event instance to distinguish separate occurrences of a same-named blob having been created; the name of the newly created blob is carried in `subject`:
     - `source`: https://example.com/storage/tenant/container
     - `subject`: mynewfile.jpg

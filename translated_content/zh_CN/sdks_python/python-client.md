@@ -63,7 +63,7 @@ with DaprClient() as d:
 - 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/state_store) for code samples and instructions to try out state management
 
-### Publish & subscribe to messages
+### 发布 & 订阅消息
 
 ##### 发布消息
 
@@ -74,7 +74,7 @@ with DaprClient() as d:
     resp = d.publish_event(pubsub_name='pubsub', topic='TOPIC_A', data='{"message":"Hello World"}')
 ```
 
-##### Subscribe to messages
+##### 订阅消息
 
 ```python
 from cloudevents.sdk.event import v1

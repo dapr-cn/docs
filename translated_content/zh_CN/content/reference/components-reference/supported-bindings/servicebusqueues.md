@@ -35,7 +35,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                                                                          | Example                        |
+| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                                                                          | 示例                             |
 | ---------------- |:--:| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
 | connectionString | Y  | Input/Output | The Service Bus connection string                                                                                                                                                                                                           | `"Endpoint=sb://************"` |
 | queueName        | Y  | Input/Output | The Service Bus queue name. Queue names are case-insensitive and will always be forced to lowercase.                                                                                                                                        | `"queuename"`                  |

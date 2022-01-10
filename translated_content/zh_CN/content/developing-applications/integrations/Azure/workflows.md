@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "使用Logic Apps构建工作流"
-linkTitle: "工作流"
-description: "学习如何使用 Dapr Workflow 和 Logic Apps 构建工作流"
-weight: 4000
+title: "Build workflow applications with Logic Apps"
+linkTitle: "Logic Apps workflows"
+description: "Learn how to build workflows applications using Dapr Workflows and Logic Apps runtime"
+weight: 3000
 ---
 
 Dapr Workflow 是一个轻量级主机，允许开发人员在本地运行云端本地工作流。 使用 [Azure Logic Apps](https://docs.microsoft.com/azure/logic-apps/logic-apps-overview) Workflow 引擎和 Dapr来运行或任何云端环境。
@@ -46,7 +46,7 @@ This allows users to start workflows using gRPC and HTTP endpoints through Dapr,
 
 - [Managed connectors](https://docs.microsoft.com/azure/connectors/apis-list#managed-connectors)
 
-## Example
+## 例子
 
 Dapr Workflows can be used as the orchestrator for many otherwise complex activities. For example, invoking an external endpoint, saving the data to a state store, publishing the result to a different app or invoking a binding can all be done by calling back into Dapr from the workflow itself.
 
@@ -216,7 +216,7 @@ Since Dapr supports many pluggable state stores and bindings, the workflow becom
 
    {{< /tabs >}}
 
-## Example
+## 示例
 
 Watch an example from the Dapr community call:
 

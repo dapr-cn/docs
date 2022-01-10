@@ -43,7 +43,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                   | 必填 | 绑定支持 | 详情                                                                                                                                                                                          | Example                |
+| 字段                   | 必填 | 绑定支持 | 详情                                                                                                                                                                                          | 示例                     |
 | -------------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
 | connectionString     | Y  | 输出   | The [EventHubs connection string](https://docs.microsoft.com/azure/event-hubs/authorize-access-shared-access-signature). 请注意，这是 EventHubs 本身，而不是 EventHubs 名称空间。 确保使用子 EventHub 共享访问策略连接字符串 | `"Endpoint=sb://****"` |
 | consumerGroup        | Y  | 输出   | The name of an [EventHubs Consumer Group](https://docs.microsoft.com/azure/event-hubs/event-hubs-features#consumer-groups) to listen on                                                     | `"group1"`             |

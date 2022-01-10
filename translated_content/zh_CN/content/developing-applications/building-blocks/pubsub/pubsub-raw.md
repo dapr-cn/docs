@@ -50,9 +50,7 @@ with DaprClient() as d:
         pubsub_name='pubsub',
         topic='TOPIC_A',
         data=json.dumps(req_data),
-        metadata=(
-                     ('rawPayload', 'true')
-                 )
+        publish_metadata={'rawPayload': 'true'}
     )
     # Print the request
     print(req_data, flush=True)
@@ -167,7 +165,7 @@ scopes:
 - app2
 ```
 
-## 相关链接
+## 下一步
 
 - 了解有关[如何发布和订阅]({{< ref howto-publish-subscribe.md >}})的详细信息
 - [pub/sub组件列表]({{< ref supported-pubsub >}})

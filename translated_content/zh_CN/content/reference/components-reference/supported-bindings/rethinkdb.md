@@ -33,7 +33,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段       | 必填 | 绑定支持 | 详情                          | Example                                                           |
+| 字段       | 必填 | 绑定支持 | 详情                          | 示例                                                                |
 | -------- |:--:| ---- | --------------------------- | ----------------------------------------------------------------- |
 | address  | Y  | 输入   | Address of RethinkDB server | `"27.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
 | database | Y  | 输入   | RethinDB database name      | `"dapr"`                                                          |

@@ -28,7 +28,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段       | 必填 | 绑定支持           | 详情                                                      | Example         |
+| 字段       | 必填 | 绑定支持           | 详情                                                      | 示例              |
 | -------- |:--:| -------------- | ------------------------------------------------------- | --------------- |
 | rootPath | Y  | Input / Output | The root path anchor to which files can be read / saved | `"/temp/files"` |
 
@@ -142,7 +142,7 @@ To perform a get file operation, invoke the Local Storage binding with a `POST` 
 }
 ```
 
-#### Example
+#### 示例
 
 {{< tabs Windows Linux >}}
 
@@ -186,7 +186,7 @@ If you only want to list the files beneath a particular directory below the `roo
 }
 ```
 
-#### Example
+#### 示例
 
 {{< tabs Windows Linux >}}
 

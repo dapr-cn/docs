@@ -34,7 +34,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持 | 详情                                                                                                                                                            | Example                                                                                                            |
+| 字段               | 必填 | 绑定支持 | 详情                                                                                                                                                            | 示例                                                                                                                 |
 | ---------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | connectionString | Y  | 输出   | The Azure SignalR connection string                                                                                                                           | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
 | hub              | N  | 输出   | Defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub") | `"myhub"`                                                                                                          |

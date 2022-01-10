@@ -2,7 +2,7 @@
 type: docs
 title: "Dapr的gRPC接口"
 linkTitle: "gRPC接口"
-weight: 1000
+weight: 6000
 description: "在应用程序中使用 Dapr gRPC API"
 ---
 
@@ -206,7 +206,7 @@ func main() {
 
     fmt.Println("Client starting...")
 
-    // and start...
+    // 启动......
     if err := s.Serve(lis); err != nil {
         log.Fatalf("failed to serve: %v", err)
     }

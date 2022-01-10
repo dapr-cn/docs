@@ -38,7 +38,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 详情                              | Example                   |
+| 字段           | 必填 | 详情                              | 示例                        |
 | ------------ |:--:| ------------------------------- | ------------------------- |
 | couchbaseURL | Y  | The URL of the Couchbase server | `"http://localhost:8091"` |
 | username     | Y  | The username for the database   | `"user"`                  |

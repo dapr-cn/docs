@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Getting started with the Dapr client Go SDK"
+title: "客户端"
 linkTitle: "客户端"
 weight: 20000
 description: How to get up and running with the Dapr Go SDK
@@ -23,7 +23,7 @@ import "github.com/dapr/go-sdk/client"
 
 ## 构建块
 
-The Go SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
+Go SDK允许您与所有的[Dapr构建块]({{< ref building-blocks >}})接口。
 
 ### 服务调用
 
@@ -46,9 +46,9 @@ resp, err = client.InvokeMethodWithContent(ctx, "app-id", "method-name", "post",
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
-### State Management
+### 状态管理
 
-For simple use-cases, Dapr client provides easy to use `Save`, `Get`, `Delete` methods:
+对于简单的use-cases，Dapr客户端提供了简单易用的 `Save`, `Get`, `Delete` 方法：
 
 ```go
 ctx := context.Background()
@@ -73,7 +73,7 @@ if err := client.DeleteState(ctx, store, "key1"); err != nil {
 }
 ```
 
-For more granular control, the Dapr Go client exposes `SetStateItem` type, which can be use to gain more control over the state operations and allow for multiple items to be saved at once:
+为了更细粒度的控制，Dapr Go 客户端暴露了 `SetState项` 类型。 它可以用来获得更多对状态操作的控制，并允许同时保存多个stateitems：
 
 ```go
 item1 := &dapr.SetStateItem{

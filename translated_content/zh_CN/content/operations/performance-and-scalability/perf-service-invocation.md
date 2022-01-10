@@ -1,28 +1,28 @@
 ---
 type: docs
-title: "Service invocation performance"
-linkTitle: "Service invocation performance"
+title: "服务调用性能"
+linkTitle: "服务调用性能"
 weight: 10000
 description: ""
 ---
 
-This article provides service invocation API performance benchmarks and resource utilization for the components needed to run Dapr in different hosting environments.
+本文提供了在不同托管环境中运行 Dapr 所需的组件的服务调用 API 性能基准和资源利用率。
 
-## System overview
+## 系统概述
 
-Dapr consists of a data plane, the sidecar that runs next to your app, and a control plane that configures the sidecars and provides capabilities such as cert and identity management.
+Dapr 由一个数据平面、在应用旁边运行的 sidecar 以及一个配置 sidecar 并提供证书和身份管理等功能的控制平面组成。
 
-### Self-hosted components
+### 自托管组件
 
-* Sidecar (data plane)
-* Sentry (optional, control plane)
+* Sidecar (数据平面)
+* Sentry（可选，控制平面）
 * Placement (optional, control plane)
 
-For more information see [overview of Dapr in self-hosted mode]({{< ref self-hosted-overview.md >}}).
+有关详细信息，请参阅 [自承载模式下的 Dapr 概述]({{< ref self-hosted-overview.md >}})。
 
-### Kubernetes components
+### Kubernetes组件
 
-* Sidecar (data plane)
+* Sidecar (数据平面)
 * Sentry (optional, control plane)
 * Placement (optional, control planee)
 * Operator (control plane)
