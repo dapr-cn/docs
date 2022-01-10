@@ -26,6 +26,7 @@ jobs:
         uses: crowdin/github-action@1.4.1
         with:
           upload_sources: true
+          upload_sources_args: "--delete-obsolete"
           upload_translations: false
           download_translations: false
           dryrun_action: false
