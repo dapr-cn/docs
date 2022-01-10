@@ -72,7 +72,7 @@ spec:
 
 字段名为 `ttlInSeconds`。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+Example:
 
 {{< tabs Windows Linux >}}
 {{% codetab %}}
@@ -117,7 +117,7 @@ To set priority at message level use the `metadata` section in the request body 
 
 The field name is `priority`.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+Example:
 
 {{< tabs Windows Linux >}}
 {{% codetab %}}
