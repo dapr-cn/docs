@@ -29,22 +29,24 @@ Patch support is for supported versions (current and previous).
 ## Supported versions
 The table below shows the versions of Dapr releases that have been tested together and form a "packaged" release. Any other combinations of releases are not supported.
 
-| 发布日期          |  Runtime   | CLI   | SDK                                                                       | Dashboard | 状态     |
-| ------------- |:----------:|:----- | ------------------------------------------------------------------------- | --------- | ------ |
-| 2021年2月17日    | 1.0.0</br> | 1.0.0 | Java 1.0.0 </br>Go 1.0.0 </br>PHP 1.0.0 </br>Python 1.0.0 </br>.NET 1.0.0 | 0.6.0     | 不受支持   |
-| 2021年3月4日     | 1.0.1</br> | 1.0.1 | Java 1.0.2 </br>Go 1.0.0 </br>PHP 1.0.0 </br>Python 1.0.0 </br>.NET 1.0.0 | 0.6.0     | 不受支持   |
-| 2021年4月1日     | 1.1.0</br> | 1.1.0 | Java 1.0.2 </br>Go 1.1.0 </br>PHP 1.0.0 </br>Python 1.1.0 </br>.NET 1.1.0 | 0.6.0     | 不受支持   |
-| 2021年4月6日     | 1.1.1</br> | 1.1.0 | Java 1.0.2 </br>Go 1.1.0 </br>PHP 1.0.0 </br>Python 1.1.0 </br>.NET 1.1.0 | 0.6.0     | 不受支持   |
-| 2021年4月16日    | 1.1.2</br> | 1.1.0 | Java 1.0.2 </br>Go 1.1.0 </br>PHP 1.0.0 </br>Python 1.1.0 </br>.NET 1.1.0 | 0.6.0     | 不受支持   |
-| 2021年5月26日    | 1.2.0</br> | 1.2.0 | Java 1.1.0 </br>Go 1.1.0 </br>PHP 1.1.0 </br>Python 1.1.0 </br>.NET 1.2.0 | 0.6.0     | 不受支持   |
-| Jun 16th 2021 | 1.2.1</br> | 1.2.0 | Java 1.1.0 </br>Go 1.1.0 </br>PHP 1.1.0 </br>Python 1.1.0 </br>.NET 1.2.0 | 0.6.0     | 不受支持   |
-| Jun 16th 2021 | 1.2.2</br> | 1.2.0 | Java 1.1.0 </br>Go 1.1.0 </br>PHP 1.1.0 </br>Python 1.1.0 </br>.NET 1.2.0 | 0.6.0     | 不受支持   |
-| Jul 26th 2021 |  1.3</br>  | 1.3.0 | Java 1.2.0 </br>Go 1.2.0 </br>PHP 1.1.0 </br>Python 1.2.0 </br>.NET 1.3.0 | 0.7.0     | 支持     |
-| Sep 14th 2021 | 1.3.1</br> | 1.3.0 | Java 1.2.0 </br>Go 1.2.0 </br>PHP 1.1.0 </br>Python 1.2.0 </br>.NET 1.3.0 | 0.7.0     | 支持     |
-| Sep 15th 2021 |  1.4</br>  | 1.4.0 | Java 1.3.0 </br>Go 1.2.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持     |
-| Sep 22nd 2021 | 1.4.1</br> | 1.4.0 | Java 1.3.0 </br>Go 1.2.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持     |
-| Sep 24th 2021 | 1.4.2</br> | 1.4.0 | Java 1.3.0 </br>Go 1.2.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持     |
-| Oct 7th 2021  | 1.4.3</br> | 1.4.0 | Java 1.3.0 </br>Go 1.2.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持（当前） |
+| 发布日期              |  Runtime   | CLI   | SDK                                                                       | Dashboard | 状态     |
+| ----------------- |:----------:|:----- | ------------------------------------------------------------------------- | --------- | ------ |
+| 2021年2月17日        | 1.0.0</br> | 1.0.0 | Java 1.0.0 </br>Go 1.0.0 </br>PHP 1.0.0 </br>Python 1.0.0 </br>.NET 1.0.0 | 0.6.0     | 不受支持   |
+| 2021年3月4日         | 1.0.1</br> | 1.0.1 | Java 1.0.2 </br>Go 1.0.0 </br>PHP 1.0.0 </br>Python 1.0.0 </br>.NET 1.0.0 | 0.6.0     | 不受支持   |
+| 2021年4月1日         | 1.1.0</br> | 1.1.0 | Java 1.0.2 </br>Go 1.1.0 </br>PHP 1.0.0 </br>Python 1.1.0 </br>.NET 1.1.0 | 0.6.0     | 不受支持   |
+| 2021年4月6日         | 1.1.1</br> | 1.1.0 | Java 1.0.2 </br>Go 1.1.0 </br>PHP 1.0.0 </br>Python 1.1.0 </br>.NET 1.1.0 | 0.6.0     | 不受支持   |
+| 2021年4月16日        | 1.1.2</br> | 1.1.0 | Java 1.0.2 </br>Go 1.1.0 </br>PHP 1.0.0 </br>Python 1.1.0 </br>.NET 1.1.0 | 0.6.0     | 不受支持   |
+| 2021年5月26日        | 1.2.0</br> | 1.2.0 | Java 1.1.0 </br>Go 1.1.0 </br>PHP 1.1.0 </br>Python 1.1.0 </br>.NET 1.2.0 | 0.6.0     | 不受支持   |
+| Jun 16th 2021     | 1.2.1</br> | 1.2.0 | Java 1.1.0 </br>Go 1.1.0 </br>PHP 1.1.0 </br>Python 1.1.0 </br>.NET 1.2.0 | 0.6.0     | 不受支持   |
+| Jun 16th 2021     | 1.2.2</br> | 1.2.0 | Java 1.1.0 </br>Go 1.1.0 </br>PHP 1.1.0 </br>Python 1.1.0 </br>.NET 1.2.0 | 0.6.0     | 不受支持   |
+| Jul 26th 2021     |  1.3</br>  | 1.3.0 | Java 1.2.0 </br>Go 1.2.0 </br>PHP 1.1.0 </br>Python 1.2.0 </br>.NET 1.3.0 | 0.7.0     | 支持     |
+| Sep 14th 2021     | 1.3.1</br> | 1.3.0 | Java 1.2.0 </br>Go 1.2.0 </br>PHP 1.1.0 </br>Python 1.2.0 </br>.NET 1.3.0 | 0.7.0     | 支持     |
+| Sep 15th 2021     |  1.4</br>  | 1.4.0 | Java 1.3.0 </br>Go 1.3.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持     |
+| Sep 22nd 2021     | 1.4.1</br> | 1.4.0 | Java 1.3.0 </br>Go 1.3.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持     |
+| Sep 24th 2021     | 1.4.2</br> | 1.4.0 | Java 1.3.0 </br>Go 1.3.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持     |
+| Oct 7th 2021      | 1.4.3</br> | 1.4.0 | Java 1.3.0 </br>Go 1.3.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持     |
+| December 6th 2021 | 1.4.4</br> | 1.4.0 | Java 1.3.0 </br>Go 1.3.0 </br>PHP 1.2.0 </br>Python 1.3.0 </br>.NET 1.4.0 | 0.8.0     | 支持（当前） |
+
 
 ## Upgrade paths
 After the 1.0 release of the runtime there may be situations where it is necessary to explicitly upgrade through an additional release to reach the desired target. For example an upgrade from v1.0 to v1.2 may need go pass through v1.1
@@ -58,16 +60,16 @@ General guidance on upgrading can be found for [self hosted mode]({{<ref self-ho
 | 1.0.0 or 1.0.1          | N/A                  | 1.1.2                  |
 |                         | 1.1.2                | 1.2.2                  |
 |                         | 1.2.2                | 1.3.1                  |
-|                         | 1.3.1                | 1.4.3                  |
+|                         | 1.3.1                | 1.4.4                  |
 | 1.1.0 to 1.1.2          | N/A                  | 1.2.2                  |
 |                         | 1.2.2                | 1.3.1                  |
-|                         | 1.3.1                | 1.4.3                  |
+|                         | 1.3.1                | 1.4.4                  |
 | 1.2.0 to 1.2.2          | N/A                  | 1.3.1                  |
-|                         | 1.3.1                | 1.4.3                  |
+|                         | 1.3.1                | 1.4.4                  |
 | 1.3.0                   | N/A                  | 1.3.1                  |
-|                         | 1.3.1                | 1.4.3                  |
-| 1.3.1                   | N/A                  | 1.4.3                  |
-| 1.4.0 to 1.4.2          | N/A                  | 1.4.3                  |
+|                         | 1.3.1                | 1.4.4                  |
+| 1.3.1                   | N/A                  | 1.4.4                  |
+| 1.4.0 to 1.4.3          | N/A                  | 1.4.4                  |
 
 
 ## Feature and deprecations
