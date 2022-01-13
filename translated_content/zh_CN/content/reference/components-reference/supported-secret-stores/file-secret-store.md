@@ -56,7 +56,7 @@ spec:
 
 仓库将加载文件并创建一个具有以下键值对的map:
 
-| 扁平键                       | 值                              |
+| 扁平键                       | value                          |
 | ------------------------- | ------------------------------ |
 | "redis"                   | "your redis password"          |
 | "connectionStrings:sql"   | "your sql connection string"   |
