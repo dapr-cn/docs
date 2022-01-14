@@ -74,7 +74,7 @@ A JSON array of state objects. Each state object is comprised with the following
 | 字段       | 说明                                                                                     |
 | -------- | -------------------------------------------------------------------------------------- |
 | key      | state key                                                                              |
-| 值        | state value, which can be any byte array                                               |
+| value    | state value, which can be any byte array                                               |
 | etag     | (optional) state ETag                                                                  |
 | metadata | (optional) additional key-value pairs to be passed to the state store                  |
 | options  | (optional) state operation options, see [state operation options](#optional-behaviors) |
@@ -341,7 +341,7 @@ Each state operation is comprised with the following fields:
 | 字段       | 说明                                                                                     |
 | -------- | -------------------------------------------------------------------------------------- |
 | key      | state key                                                                              |
-| 值        | state value, which can be any byte array                                               |
+| value    | state value, which can be any byte array                                               |
 | etag     | (optional) state ETag                                                                  |
 | metadata | (optional) additional key-value pairs to be passed to the state store                  |
 | options  | (optional) state operation options, see [state operation options](#optional-behaviors) |
