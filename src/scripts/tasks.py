@@ -67,13 +67,12 @@ files:
             for file in files:
                 target_root = root.replace(content_dir, "/content")
                 file_path = f"{target_root}/{file}"
-                if file_path.endswith(".md"):
-                    source = file_path.replace("\\", "/")
-                    f.write(f"    - source: {source}\n")
-                    translation = file_path.replace('/content', '/translated_content/%locale_with_underscore%') \
-                        .replace("\\", "/")
-                    f.write(
-                        f"      translation: {translation}\n")
+                source = file_path.replace("\\", "/")
+                f.write(f"    - source: {source}\n")
+                translation = file_path.replace('/content', '/translated_content/%locale_with_underscore%') \
+                    .replace("\\", "/")
+                f.write(
+                    f"      translation: {translation}\n")
 
     # update aliases
     # insert /zh-hans to every head of alias in the head of *.md files in content directory
