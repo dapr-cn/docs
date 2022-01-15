@@ -77,7 +77,7 @@ POST/GET/PUT/DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/<met
 
 您可以在请求主体中为 actor 方法提供任何数据，且在actor调用的数据中包含该请求的响应信息。
 
-Refer to [Dapr Actor Features]({{< ref actors-overview.md >}}) for more details.
+更多信息请查阅： [Dapr Actor 特性]({{< ref actors-overview.md >}})
 
 ### 并发（Concurrency）
 

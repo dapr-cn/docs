@@ -31,7 +31,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 如果您想要使用 MySQL 作为 Actor 存储，请在 yaml 上附上以下内容。
@@ -43,7 +43,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 详情                                                                  | Example                                                                                                                                                                                                                                                                  |
+| 字段               | 必填 | 详情                                                                  | 示例                                                                                                                                                                                                                                                                       |
 | ---------------- |:--:| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | connectionString | Y  | 用于连接到 MySQL 的连接字符串。 请不要将schema添加到连接字符串中。                            | [非SSL连接](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL 连接](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
 | schemaName       | N  | 要使用的schema名称。 如果指定的schema不存在，将会自动创建。 默认值为 `"dapr_state_store"`      | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                                       |

@@ -64,7 +64,7 @@ auth:
 
 上面的组件定义让Dapr从定义的秘密存储中提取一个名为 `redis-secret` 的密钥，并将密钥的值分配给组件中的 `redis-password` 密钥中的 `redisPassword` 欄位。
 
-## Example
+## 示例
 
 ### 引用一个Kubernetes密钥
 

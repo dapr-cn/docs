@@ -229,7 +229,7 @@ func main() {
 
     fmt.Println("Client starting...")
 
-    // 启动......
+    // and start...
     if err := s.Serve(lis); err != nil {
         log.Fatalf("failed to serve: %v", err)
     }

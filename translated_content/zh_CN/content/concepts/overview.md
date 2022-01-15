@@ -35,7 +35,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**服务调用**]({{<ref "service-invocation-overview.md">}}) | 跨服务调用允许进行远程方法调用(包括重试)，不管处于任何位置，只需该服务托管于受支持的环境即可。                                                                                                                                                                                                |
 | [**状态管理**]({{<ref "state-management-overview.md">}})   | 独立的状态管理，使用键/值对作为存储机制，可以轻松的使长时运行、高可用的有状态服务和无状态服务共同运行在您的应用程序中。 状态存储是可插拔的，目前支持使用Azure CosmosDB、 Azure SQL Server、 PostgreSQL,、AWS DynamoDB、Redis 作为状态存储介质。                                                                                         |
-| [**发布订阅**]({{<ref "pubsub-overview.md">}})             | 发布事件和订阅主题。 Dapr provides at least once message delivery guarantee.                                                                                                                                                                              |
+| [**发布订阅**]({{<ref "pubsub-overview.md">}})             | 发布事件和订阅主题。 Dapr 提供至少一次消息传递保证。                                                                                                                                                                                                                   |
 | [**资源绑定**]({{<ref "bindings-overview.md">}})           | Dapr的Bindings是建立在事件驱动架构的基础之上的。通过建立触发器与资源的绑定，可以从任何外部源（例如数据库，队列，文件系统等）接收和发送事件，而无需借助消息队列，即可实现灵活的业务场景。                                                                                                                                              |
 | [**Actors**]({{<ref "actors-overview.md">}})           | Actor模型 = 状态 + 行为 + 消息。一个应用/服务由多个Actor组成，每个Actor都是一个独立的运行单元，拥有隔离的运行空间，在隔离的空间内，其有独立的状态和行为，不被外界干预，Actor之间通过消息进行交互，而同一时刻，每个Actor只能被单个线程执行，这样既有效避免了数据共享和并发问题，又确保了应用的伸缩性。 Dapr 在Actor模式中提供了很多功能，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。 |
 | [**可观测性**]({{<ref "observability-concept.md">}})       | Dapr记录指标，日志，链路以调试和监视Dapr和用户应用的运行状况。 Dapr支持分布式跟踪，其使用W3C跟踪上下文标准和开放式遥测技术，可以轻松地诊断在生产环境中服务间的网络调用，并发送到不同的监视工具。                                                                                                                                        |
@@ -62,9 +62,9 @@ Dapr 可以托管在多种环境中，包括用于本地开发的自托管，或
 
 ## 开发者语言 SDK 和框架
 
-To make using Dapr more natural for different languages, it also includes [language specific SDKs]({{<ref sdks>}}) for C++, Go, Java, JavaScript, Python, Rust .NET and PHP. 这些 SDK 通过类型化的语言 API 而不是通过调用 http/gRPC API 来使用 Dapr 构建块中的功能，例如，保存状态，发布事件或创建Actor。 这使您能够以自己选择的语言编写无状态和有状态函数和 actors 的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言 actor 和功能支持。
+为了让不同的开发语言用户能够更加自然地使用到 Dapr ，它还提供了适用于 C++、Go、Java、JavaScript、Python、Rust、 .NET 和 PHP的 [SDK]({{<ref sdks>}})。 这些 SDK 通过类型化的语言 API 而不是通过调用 http/gRPC API 来使用 Dapr 构建块中的功能，例如，保存状态，发布事件或创建Actor。 这使您能够以自己选择的语言编写无状态和有状态函数和 actors 的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言 actor 和功能支持。
 
-### SDK
+### SDKs
 
 - **[C++ SDK](https://github.com/dapr/cpp-sdk)**
 - **[Go SDK](https://github.com/dapr/go-sdk)**
@@ -75,7 +75,7 @@ To make using Dapr more natural for different languages, it also includes [langu
 - **[.NET SDK](https://github.com/dapr/dotnet-sdk)**
 - **[PHP SDK](https://github.com/dapr/php-sdk)**
 
-> Note: Dapr is language agnostic and provides a [RESTful HTTP API]({{< ref api >}}) in addition to the protobuf clients.
+> 注意： Dapr 是语言无关的， 除了 protobuf 客户端外，还提供 [ RESTful HTTP API ]({{< ref api >}}) 。
 
 ### 开发框架
 Dapr 可以与任何开发框架集成。 下面是一些已经和 Dapr 集成的。
@@ -90,7 +90,7 @@ Dapr 很容易与Python [Flask](https://pypi.org/project/Flask/) 和 node [Expre
 在 Dapr [PHP-SDK](https://github.com/dapr/php-sdk) 您可以与 Apache, Nginx, 或者 Caddyserver 一起运行。
 
 #### Actors
-Dapr SDKs support for [virtual actors]({{< ref actors >}}) which are stateful objects that make concurrency simple, have method and state encapsulation, and are designed for scalable, distributed applications.
+Dapr SDK 支持 [virtual actors]({{< ref actors >}}) ，这是简化并发、具有方法和状态封装的有状态对象，设计用于可扩展的分布式应用程序。
 
 #### Azure Functions
 Dapr 通过扩展与 Azure Functions 运行时集成，使函数可以与 Dapr 无缝交互。 Azure Functions 提供事件驱动的编程模型， 而 Dapr 提供了云原生的构建块。 通过此扩展，您可以为无服务器和事件驱动的应用程序同时提供两者。 更多信息请阅读 [用于 Dapr 的 Azure Functions扩展](https://cloudblogs.microsoft.com/opensource/2020/07/01/announcing-azure-functions-extension-for-dapr/) 并访问 [Azure Functions 扩展](https://github.com/dapr/azure-functions-extension) 仓库以试用示例。
@@ -107,7 +107,7 @@ Dapr 有为 [运维](/operations/) 做专门设计。 通过 Dapr CLI 安装的 
 
 ### 以自托管模式在开发者本地机器上运行 Dapr
 
-Dapr can be configured to run on your local developer machine in [self-hosted mode]({{< ref self-hosted >}}). 每个运行的服务都有一个 Dapr 运行时进程 (或 sidecar) ，配置为使用状态存储， pub/sub，绑定组件和其他构建块。
+Dapr 可以配置为在开发人员本地计算机上以 [自托管模式]({{< ref self-hosted >}}) 运行。 每个运行的服务都有一个 Dapr 运行时进程 (或 sidecar) ，配置为使用状态存储， pub/sub，绑定组件和其他构建块。
 
 您可以使用 [Dapr CLI](https://github.com/dapr/cli#launch-dapr-and-your-app) 在本地机器上运行启用了 Dapr 的应用程序。 请使用 [入门示例]({{< ref getting-started >}})。
 
@@ -115,7 +115,7 @@ Dapr can be configured to run on your local developer machine in [self-hosted mo
 
 ### 以 Kubernetes 模式运行 dapr
 
-Dapr can be configured to run on any [Kubernetes cluster]({{< ref kubernetes >}}). 在 Kubernetes 中， `dapr-sidecar-injector` 和 `dapr-operator` 服务提供一流的集成，以将 Dapr 作为 sidecar 容器启动在与服务容器相同的 pod 中 ，并为在集群中部署的 Dapr 组件提供更新通知。
+Dapr 可以配置为在任何 [Kubernetes 集群]({{< ref kubernetes >}}) 上运行。 在 Kubernetes 中， `dapr-sidecar-injector` 和 `dapr-operator` 服务提供一流的集成，以将 Dapr 作为 sidecar 容器启动在与服务容器相同的 pod 中 ，并为在集群中部署的 Dapr 组件提供更新通知。
 
 `dapr-sentry` 服务是一个认证中心，它允许 Dapr sidecar 实例之间的相互 TLS 进行安全数据加密。 关于 `Sentry` 服务的更多信息请阅读 [安全概述]({{< ref "security-concept.md#dapr-to-dapr-communication" >}})
 

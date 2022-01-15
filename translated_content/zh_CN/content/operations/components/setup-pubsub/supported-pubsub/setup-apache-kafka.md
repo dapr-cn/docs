@@ -7,7 +7,7 @@ description: "关于Apache Kafka pubsub组件的详细文档"
 
 ## 配置
 
-要设置Apache Kafka pubsub，请创建一个`pubsub.kafka`类型的组件。 See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+要设置Apache Kafka pubsub，请创建一个`pubsub.kafka`类型的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,12 +33,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段              | 必填 | 详情                                                                                                                                                   | Example                                                     |
+| 字段              | 必填 | 详情                                                                                                                                                   | 示例                                                          |
 | --------------- |:--:| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | brokers         | Y  | 逗号分隔的kafka broker列表                                                                                                                                  | `localhost:9092`, `dapr-kafka.myapp.svc.cluster.local:9092` |
 | authRequired    | N  | 在Kafka broker上启用验证。 默认值为 `"false"`.                                                                                                                  | `"true"`, `"false"`                                         |
@@ -54,7 +54,7 @@ spec:
 
 参数名是`partitionKey`。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partitionKey=key1 \
@@ -82,5 +82,5 @@ To run Kafka on Kubernetes, you can use the [Helm Chart](https://github.com/helm
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md##step-1-setup-the-pubsub-component" >}}) for instructions on configuring pub/sub components
+- 阅读 [本指南]({{< ref "howto-publish-subscribe.md##step-1-setup-the-pubsub-component" >}})，了解配置 发布/订阅组件的说明
 - [发布/订阅构建块]({{< ref pubsub >}})

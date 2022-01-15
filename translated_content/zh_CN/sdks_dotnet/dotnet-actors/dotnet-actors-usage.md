@@ -37,8 +37,6 @@ internal class MyActor : Actor, IMyActor, IRemindable
         ...
     }
 }
-    }
-}
 ```
 
 一个 actor 类型应该有一个单一的`public`构造函数。 Actor 基础设施使用 [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#constructor-injection-behavior) 模式来构建 actor 实例。
@@ -67,8 +65,6 @@ internal class MyActor : Actor, IMyActor, IRemindable
         : base(host)
     {
         ...
-    }
-}
     }
 }
 ```
@@ -108,7 +104,6 @@ public Task<MyData> GetDataAsync()
 internal class MyActor : Actor, IMyActor
 {
     // ...
-}
 }
 ```
 
@@ -193,7 +188,9 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseEndpoints(endpoints =>
     {
         // Register actors handlers that interface with the Dapr runtime.
-         
+        endpoints.MapActorsHandlers();
+    });
+}
 ```
 
 `UseRouting` 和 `UseEndpoints` 调用是配置路由所必需的。 在终结点中间件中添加 `MapActorsHandlers` 就是将 actors 配置为管道的一部分。
@@ -229,5 +226,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseEndpoints(endpoints =>
     {
         // Register actors handlers that interface with the Dapr runtime.
-         
+        endpoints.MapActorsHandlers();
+    });
+}
 ```

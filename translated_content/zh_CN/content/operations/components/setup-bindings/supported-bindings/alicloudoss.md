@@ -30,12 +30,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段            | 必填 | 绑定支持 | 详情               | Example                              |
+| 字段            | 必填 | 绑定支持 | 详情               | 示例                                   |
 | ------------- | -- | ---- | ---------------- | ------------------------------------ |
 | `终结点`         | Y  | 输出   | Alicloud OSS 端点。 | https://oss-cn-hangzhou.aliyuncs.com |
 | `accessKeyID` | Y  | 输出   | 访问密钥 ID 凭据。      |                                      |
@@ -63,7 +63,7 @@ spec:
 默认情况下，会自动生成一个随机的UUID作为对象密钥。 参见下面所示的支持的元数据为对象设置密钥。
 {{% /alert %}}
 
-#### Example
+#### 示例
 
 **保存到一个随机生成的UUID文件**
 

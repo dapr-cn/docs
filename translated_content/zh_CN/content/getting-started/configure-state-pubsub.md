@@ -30,7 +30,7 @@ Dapr可以使用任何Redis实例--无论是在本地开发机器上的容器化
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
-作为初始化过程的一部分，Dapr CLI 会自动在自托管环境中安装 Redis。 You are all set and can skip to the \[next steps\](next steps)
+作为初始化过程的一部分，Dapr CLI 会自动在自托管环境中安装 Redis。 您都已设置完毕，可以跳转到\[下一步\](next steps)
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -127,10 +127,10 @@ spec:
       key: redis-password
 ```
 
-This example uses the the kubernetes secret that was created when setting up a cluster with the above instructions.
+这个例子使用了kubernetes secret，它是在使用上面的指令设置集群时创建的。
 
 {{% alert title="Other stores" color="primary" %}}
-如果使用 Redis 以外的其他状态存储，请参考 [}}">支持的状态存储]({{< ref supported-state-stores >}})，了解要设置哪些选项。
+如果使用 Redis 以外的其他状态存储，请参考 [支持的状态存储]({{< ref supported-state-stores >}})，了解要设置哪些选项。
 {{% /alert %}}
 
 ### 创建 发布/订阅 消息代理组件
@@ -155,10 +155,10 @@ spec:
       key: redis-password
 ```
 
-This example uses the the kubernetes secret that was created when setting up a cluster with the above instructions.
+这个例子使用了kubernetes secret，它是在使用上面的指令设置集群时创建的。
 
 {{% alert title="Other stores" color="primary" %}}
-如果使用 Redis 以外的 发布/订阅 消息代理，请参考 [}}">支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})，了解要设置哪些选项。
+如果使用 Redis 以外的 发布/订阅 消息代理，请参考 [支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})，了解要设置哪些选项。
 {{% /alert %}}
 
 ### 硬编码密码（不推荐）
@@ -210,7 +210,7 @@ spec:
 - 在你的应用程序文件夹中创建一个新的`components`目录，其中包含YAML文件，并提供`dapr run`命令的路径，标志为`--components-path`。
 
 {{% alert title="Self-hosted slim mode" color="primary" %}}
-如果你在 [Slim模式]({{< ref self-hosted-no-docker. md >}})下初始化了Dapr (不使用Docker)，你需要手动创建默认目录， 或者总是使用 `--components-path` 指定组件目录。
+如果你在 [Slim模式]({{< ref self-hosted-no-docker.md >}})下初始化了Dapr (不使用Docker)，你需要手动创建默认目录， 或者总是使用 `--components-path` 指定组件目录。
 {{% /alert %}}
 
 {{% /codetab %}}
