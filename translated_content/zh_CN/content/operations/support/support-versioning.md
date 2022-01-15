@@ -1,19 +1,19 @@
 ---
 type: docs
-title: "Versioning policy"
-linkTitle: "Versioning"
+title: "版本管理策略"
+linkTitle: "版本管理"
 weight: 1000
-description: "Dapr's versioning policies"
+description: "Dapr 的版本管理策略"
 ---
 
 ## 介绍
-Dapr is designed for future changes in the runtime, APIs and components with versioning schemes. This topic describes the versioning schemes and strategies for APIs, manifests such as components and Github repositories.
+Dapr 专为将来对运行时、API 和具有版本管理方案的组件进行更改而设计。 本主题描述了API、组件等清单和Github存储库的版本管理方案和策略。
 
-## Versioning
-Versioning is the process of assigning either unique version names or unique version numbers to unique states of computer software.
-- Versioning provides compatibility, explicit change control and handling changes, in particular breaking changes.
-- Dapr strives to be backwards compatible. If a breaking change is needed it’ll be [announced in advance]({{< ref "support-release-policy#feature-and-deprecations" >}}).
-- Deprecated features are done over multiple releases with both new and deprecated features working side-by-side.
+## 版本管理
+版本管理是为计算机软件的独特状态指定独特的版本名称或独特的版本号的过程。
+- 版本管理提供了兼容性、明确的变化控制和处理变化，特别是破坏性变化。
+- Dapr 努力做到向后兼容。 如果需要进行重大更改， [提前]({{< ref "support-release-policy#feature-and-deprecations" >}})宣布。
+- 已弃用的功能是在多个版本上完成的，新增功能和已弃用功能并行工作。
 
 
 Versioning refers to the following Dapr repos: dapr, CLI, stable language SDKs, dashboard, components-contrib, quickstarts, helm-charts and documentation.

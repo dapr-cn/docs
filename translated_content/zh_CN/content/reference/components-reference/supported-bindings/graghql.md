@@ -4,12 +4,12 @@ title: "GraphQL binding spec"
 linkTitle: "GraphQL"
 description: "Detailed documentation on the GraphQL binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/graphql/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/graphql/"
 ---
 
 ## 配置
 
-To setup GraphQL binding create a component of type `bindings.graphql`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. To separate normal config settings (e.g. endpoint) from headers, "header:" is used a prefix on the header names.
+To setup GraphQL binding create a component of type `bindings.graphql`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。 To separate normal config settings (e.g. endpoint) from headers, "header:" is used a prefix on the header names.
 
 
 ```yaml
@@ -30,7 +30,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范

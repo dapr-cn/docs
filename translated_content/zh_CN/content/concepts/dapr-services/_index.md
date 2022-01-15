@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Overview of the Dapr services"
-linkTitle: "Dapr services"
+title: "Dapr 服务概述"
+linkTitle: "Dapr 服务"
 weight: 800
-description: "Learn about the services that make up the Dapr runtime"
+description: "了解构成 Dapr 运行时的服务"
 ---
 

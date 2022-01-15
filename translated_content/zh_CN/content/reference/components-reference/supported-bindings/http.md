@@ -31,9 +31,9 @@ spec:
 
 ## 绑定支持
 
-This component supports **output binding** with the following [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html):
+此组件支持以下 [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) **输出绑定** ：
 
-- `create` : For backward compatibility and treated like a post
+- `create` : 为了向后的兼容，并被当作一个 post 请求处理
 - `get` : 读数据或者记录
 - `head` : 连接服务器但不返回响应正文
 - `post` ： 通常用于创建记录或发送命令

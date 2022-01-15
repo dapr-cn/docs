@@ -4,7 +4,7 @@ title: "限流"
 linkTitle: "限流"
 description: "使用限流中间件来限制每秒的请求"
 aliases:
-  - /developing-applications/middleware/supported-middleware/middleware-rate-limit/
+  - /zh-hans/developing-applications/middleware/supported-middleware/middleware-rate-limit/
 ---
 
 限流[HTTP 中间件]({{< ref middleware.md >}})允许限制每秒允许的最大 HTTP 请求数。 限流可以保护您的应用程序免受拒绝服务（DOS）攻击。 DOS攻击可以由恶意的第三方发起，也可以由你的软件中的错误发起（也就是 "友军 "DOS攻击）。

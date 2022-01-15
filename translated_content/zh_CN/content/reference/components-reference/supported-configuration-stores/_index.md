@@ -1,11 +1,11 @@
 ---
 type: docs
 title: "Configuration store component specs"
-linkTitle: "Configuration stores"
+linkTitle: "Configuration Store（配置存储）"
 weight: 4500
 description: The supported configuration stores that interface with Dapr
 aliases:
-  - "/operations/components/setup-secret-store/supported-configuration-stores/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-configuration-stores/"
 no_list: true
 ---
 

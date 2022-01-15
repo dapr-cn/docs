@@ -13,7 +13,7 @@ The [RethinkDB state store]({{<ref setup-rethinkdb.md>}}) supports transactions 
 
 To enable users to track change of the state of actors, this binding leverages RethinkDB's built-in capability to monitor RethinkDB table and event on change with both the `old` and `new` state. This binding creates a subscription on the Dapr state table and streams these changes using the Dapr input binding interface.
 
-To setup RethinkDB statechange binding create a component of type `bindings.rethinkdb.statechange`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup RethinkDB statechange binding create a component of type `bindings.rethinkdb.statechange`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml

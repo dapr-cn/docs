@@ -35,7 +35,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
@@ -63,15 +63,15 @@ docker run -d --name=dev-consul -e CONSUL_BIND_INTERFACE=eth0 consul
 {{% /codetab %}}
 
 {{% codetab %}}
-The easiest way to install Consul on Kubernetes is by using the [Helm chart](https://github.com/helm/charts/tree/master/stable/consul):
+在 Kubernetes 上安装 Consul 最简单的方法是使用 [Helm chart](https://github.com/helm/charts/tree/master/stable/consul)：
 
 ```
 helm install consul stable/consul
 ```
 
-This installs Consul into the `default` namespace. To interact with Consul, find the service with: `kubectl get svc consul`.
+这将把 Consul 安装到 `default` 命名空间。 要与 Consul 进行交互，请使用以下方法找到服务：`kubectl get svc consul`.
 
-For example, if installing using the example above, the Consul host address would be:
+例如，如果使用上面的例子安装，Consul主机地址将是：
 
 `consul.default.svc.cluster.local:8500`
 {{% /codetab %}}

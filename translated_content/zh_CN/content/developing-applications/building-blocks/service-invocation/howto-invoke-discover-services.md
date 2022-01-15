@@ -10,11 +10,11 @@ weight: 2000
 
 ## 示例:
 
-The below code examples loosely describes an application that processes orders. In the examples, there are two services - an order processing service and a checkout service. Both services have Dapr sidecars and the order processing service uses Dapr to invoke the checkout method in the checkout service.
+以下的示例简述了一个订单处理程序。 当前示例中，存两项服务：订单处理服务和结账服务。 两个服务都使用了 Dapr sidecars，订单处理服务委托Dapr 去调用结账服务的结账操作。
 
 <img src="/images/building-block-service-invocation-example.png" width=1000 height=500 alt="Diagram showing service invocation of example service">
 
-## 步骤 1: 为服务选择标识
+## 步骤 1: 创建服务标识
 
 Dapr 允许您为您的应用分配一个全局唯一ID。 此 ID 为您的应用程序封装了状态，不管它可能有多少实例。
 
@@ -411,7 +411,7 @@ curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -
 
 有关名称空间的更多信息，请参阅 [跨命名空间 API]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) 。
 
-## Step 3: View traces and logs
+## 步骤 3：跟踪和日志
 
 上面的示例显示了如何直接调用本地或 Kubernetes 中运行的其他服务。 Dapr 输出指标、跟踪和日志记录信息，允许您可视化服务之间的调用图、日志错误和可选地记录有效负载正文。
 

@@ -6,7 +6,7 @@ weight: 6000
 description: 所有支持的中间件组件的列表，这些组件可以注入到Dapr的处理管道中。
 no_list: true
 aliases:
-  - /developing-applications/middleware/supported-middleware/
+  - /zh-hans/developing-applications/middleware/supported-middleware/
 ---
 
 表格标题：

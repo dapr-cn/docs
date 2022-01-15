@@ -1,21 +1,21 @@
 ---
 type: docs
-title: "Azure Container Apps"
-linkTitle: "Azure Container Apps"
-description: "Learn how to run your Dapr applications on the Azure Container Apps serverless platform"
+title: "Azure 容器应用"
+linkTitle: "Azure 容器应用"
+description: "了解如何在 Azure 容器应用无服务器平台上运行 Dapr 应用程序"
 ---
 
-[Azure Container Apps](https://docs.microsoft.com/azure/container-apps/overview) is a serverless application hosting service where users do not see nor manage any underlying VMs, orchestrators, or other cloud infrastructure. Azure Container Apps enables you to run your application code packaged in multiple containers and is unopinionated about runtimes or programming models that are used.
+[Azure 容器应用](https://docs.microsoft.com/azure/container-apps/overview) 是一种无服务器应用程序托管服务，用户在其中看不到或管理任何基础 VM、业务流程协调程序或其他云基础结构。 Azure容器应用程序使您能够运行打包在多个容器中的应用程序代码，并且不区分所使用的运行时或编程模型。
 
 
-Dapr is built-in to Container Apps, enabling you to use the Dapr API building blocks without any manual deployment of the Dapr runtime. You simply deploy your services with their Dapr components.
+Dapr 内置于容器应用程序中，使您能够使用 Dapr API 构建基块，而无需手动部署 Dapr 运行时。 你只需将你的服务与Dapr组件一起部署。
 
 
 {{< button text="Learn more" link="https://docs.microsoft.com/azure/container-apps/overview" newtab="true" >}}
 
-## Tutorial
+## 教程
 
-Visit the [Azure docs](https://docs.microsoft.com/azure/container-apps/microservices-dapr) to try out a microservices tutorial, where you'll deploy two Dapr-enabled applications to Azure Container Apps.
+访问 [Azure 文档](https://docs.microsoft.com/azure/container-apps/microservices-dapr) 以试用微服务教程，在教程中，你将两个启用了 Dapr 的应用程序部署到 Azure 容器应用。
 
 
 

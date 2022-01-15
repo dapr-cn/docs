@@ -22,11 +22,11 @@ dapr list [flags]
 
 ### 参数
 
-| Name                 | 环境变量 | 默认值     | 说明                                                                          |
-| -------------------- | ---- | ------- | --------------------------------------------------------------------------- |
-| `--help`, `-h`       |      |         | 显示此帮助消息                                                                     |
-| `--kubernetes`, `-k` |      | `false` | 列出 Kubernetes 集群中的所有 Dapr pods                                              |
-| `--output`, `-o`     |      | `table` | The output format of the list. Valid values are: `json`, `yaml`, or `table` |
+| Name                 | 环境变量 | 默认值     | 说明                                     |
+| -------------------- | ---- | ------- | -------------------------------------- |
+| `--help`, `-h`       |      |         | 显示此帮助消息                                |
+| `--kubernetes`, `-k` |      | `false` | 列出 Kubernetes 集群中的所有 Dapr pods         |
+| `--output`, `-o`     |      | `table` | 列表的输出格式。 有效值为： `json`、 `yaml`或 `table` |
 
 ### 示例
 

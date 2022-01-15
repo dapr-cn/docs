@@ -5,7 +5,7 @@ linkTitle: "定义一个组件"
 weight: 40
 ---
 
-In the [previous step]({{<ref get-started-api.md>}}) you called the Dapr HTTP API to store and retrieve a state from a Redis backed state store. Dapr通过初始化时创建的默认组件定义文件得知，要使用你机器上本地配置好的Redis实例。
+在[前一步]({{<ref get-started-api.md>}})中，我们请求了Dapr HTTP API来从Redis中存储以及获取状态 Dapr通过初始化时创建的默认组件定义文件得知，要使用你机器上本地配置好的Redis实例。
 
 当构建一个应用程序时，你很可能会根据你想使用的构建块和特定的组件来定义自己的组建文件。
 
@@ -55,7 +55,7 @@ spec:
     value: ":"
 ```
 
-您可以看到上述的文件定义有一个 `type: secretstores.local.file` 字段值，其告诉Dapr使用本地文件组件作为密钥存储。 The metadata fields provide component specific information needed to work with this component (in this case, the path to the secret store JSON is relative to where you call `dapr run` from.)
+您可以看到上述的文件定义有一个 `type: secretstores.local.file` 字段值，其告诉Dapr使用本地文件组件作为密钥存储。 元数据字段提供了使用该组件所需的组件特定信息（在本例中，`dapr run`运行路径是密钥存储JSON的相对路径）。
 
 ## 第 3 步：运行Dapr sidecar
 

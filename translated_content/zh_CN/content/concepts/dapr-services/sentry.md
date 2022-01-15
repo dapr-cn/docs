@@ -1,26 +1,26 @@
 ---
 type: docs
-title: "Dapr Sentry control plane service overview"
+title: "Dapr Sentry 控制平面服务概述"
 linkTitle: "Sentry"
-description: "Overview of the Dapr sentry service"
+description: "Dapr sentry 服务概述"
 ---
 
-The Dapr Sentry service manages mTLS between services and acts as a certificate authority. It generates mTLS certificates and distributes them to any running sidecars. This allows sidecars to communicate with encrypted, mTLS traffic. For more information read the [sidecar-to-sidecar communication overview]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}).
+Dapr Sentry 服务管理服务之间的mTLS并作为证书颁发机构。 它生成 mTLS 证书，并将其分发给任何正在运行的Sidecar。 这允许 Sidecar 之间进行加密的 mTLS 流量通信。 更多信息查看 [sidecar-to-sidecar communication overview]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}).
 
 ## 自托管模式
 
-The sentry service Docker container is started automatically as part of [`dapr init`]({{< ref self-hosted-with-docker.md >}}). It can also be run manually as a process if you are running in [slim-init mode]({{< ref self-hosted-no-docker.md >}}).
+Sentry 服务的 Docker 容器作为 [`dapr init`]({{< ref self-hosted-with-docker.md >}}) 的一部分自动运行。 如果你以 [slim-init mode]({{< ref self-hosted-no-docker.md >}}) 模式运行，它也可以作为进程手动运行。
 
 <img src="/images/security-mTLS-sentry-selfhosted.png" width=1000>
 
-## Kubernetes mode
+## Kubernetes 模式
 
-The sentry service is deployed as part of `dapr init -k`, or via the Dapr Helm charts. For more information on running Dapr on Kubernetes, visit the [Kubernetes hosting page]({{< ref kubernetes >}}).
+Sentry服务作为`dapr init -k`或Dapr Helm charts的一部分被部署。 有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。
 
 <img src="/images/security-mTLS-sentry-kubernetes.png" width=1000>
 
 ## 深入阅读
 
-- [Security overview]({{< ref security-concept.md >}})
+- [安全性概述]({{< ref security-concept.md >}})
 - [自托管模式]({{< ref self-hosted-with-docker.md >}})
-- [Kubernetes mode]({{< ref kubernetes >}})
+- [Kubernetes 模式]({{< ref kubernetes >}})

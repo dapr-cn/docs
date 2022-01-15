@@ -5,7 +5,7 @@ linkTitle: "How-To: Debug with VSCode"
 weight: 20000
 description: "Learn how to configure VSCode to debug Dapr applications"
 aliases:
-  - /developing-applications/ides/vscode/vscode-manual-configuration/
+  - /zh-hans/developing-applications/ides/vscode/vscode-manual-configuration/
 ---
 
 ## 手动调试
@@ -152,23 +152,23 @@ Below are the supported parameters for VS Code tasks. These parameters are equiv
 | `appMaxConcurrency`    | 限制应用程序的并发量。 A valid value is any number larger than 0                              | No                    | `"appMaxConcurrency": -1`                          |
 | `appPort`              | 这个参数告诉Dapr你的应用程序正在监听哪个端口。                                                          | Yes                   | `"appPort": 4000`                                  |
 | `appProtocol`          | 告诉 Dapr 你的应用程序正在使用哪种协议。 Valid options are http and grpc. Default is http           | No                    | `"appProtocol": "http"`                            |
-| `appSsl`               | Sets the URI scheme of the app to https and attempts an SSL connection             | No                    | `"appSsl": true`                                   |
+| `appSsl`               | 将应用的 URI 方案设置为 https 并尝试 SSL 连接                                                    | No                    | `"appSsl": true`                                   |
 | `args`                 | Sets a list of arguments to pass on to the Dapr app                                | No                    | "args": []                                         |
-| `componentsPath`       | Path for components directory. If empty, components will not be loaded.            | No                    | `"componentsPath": "./components"`                 |
+| `componentsPath`       | Components 目录的路径. 如果为空，将不会加载组件。                                                    | No                    | `"componentsPath": "./components"`                 |
 | `config`               | 告诉 Dapr 要使用哪个配置 CRD                                                                | No                    | `"config": "./config"`                             |
-| `controlPlaneAddress`  | Address for a Dapr control plane                                                   | No                    | `"controlPlaneAddress": "http://localhost:1366/"`  |
-| `enableProfiling`      | Enable profiling                                                                   | No                    | `"enableProfiling": false`                         |
-| `enableMtls`           | Enables automatic mTLS for daprd to daprd communication channels                   | No                    | `"enableMtls": false`                              |
+| `controlPlaneAddress`  | Dapr 控制平面的地址                                                                       | No                    | `"controlPlaneAddress": "http://localhost:1366/"`  |
+| `enableProfiling`      | 启用性能分析                                                                             | No                    | `"enableProfiling": false`                         |
+| `enableMtls`           | 为 daprd 到 daprd 通信通道启用自动 mTLS                                                      | No                    | `"enableMtls": false`                              |
 | `grpcPort`             | gRPC port for the Dapr API to listen on (default “50001”)                          | Yes, if multiple apps | `"grpcPort": 50004`                                |
-| `httpPort`             | The HTTP port for the Dapr API                                                     | Yes                   | `"httpPort": 3502`                                 |
-| `internalGrpcPort`     | gRPC port for the Dapr Internal API to listen on                                   | No                    | `"internalGrpcPort": 50001`                        |
+| `httpPort`             | Dapr API 的 HTTP 端口                                                                 | Yes                   | `"httpPort": 3502`                                 |
+| `internalGrpcPort`     | 用于监听 Dapr 内部 API 的 gRPC 端口                                                         | No                    | `"internalGrpcPort": 50001`                        |
 | `logAsJson`            | Setting this parameter to true outputs logs in JSON format. 默认为 false              | No                    | `"logAsJson": false`                               |
 | `logLevel`             | 为 Dapr sidecar设置日志级别。 Allowed values are debug, info, warn, error. Default is info | No                    | `"logLevel": "debug"`                              |
 | `metricsPort`          | 设置 sidecar 度量服务器的端口。 Default is 9090                                               | Yes, if multiple apps | `"metricsPort": 9093`                              |
 | `mode`                 | Runtime mode for Dapr (default “standalone”)                                       | No                    | `"mode": "standalone"`                             |
-| `placementHostAddress` | Addresses for Dapr Actor Placement servers                                         | No                    | `"placementHostAddress": "http://localhost:1313/"` |
+| `placementHostAddress` | Dapr Actor 放置服务器的地址                                                                | No                    | `"placementHostAddress": "http://localhost:1313/"` |
 | `profilePort`          | The port for the profile server (default “7777”)                                   | No                    | `"profilePort": 7777`                              |
-| `sentryAddress`        | Address for the Sentry CA service                                                  | No                    | `"sentryAddress": "http://localhost:1345/"`        |
+| `sentryAddress`        | Sentry CA 服务地址                                                                     | No                    | `"sentryAddress": "http://localhost:1345/"`        |
 | `type`                 | Tells VS Code it will be a daprd task type                                         | Yes                   | `"type": "daprd"`                                  |
 
 

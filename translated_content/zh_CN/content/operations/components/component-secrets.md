@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "指南：在组件中引用密钥"
-linkTitle: "在组件中引用密钥"
+title: "指南：在组件中引用 Secret"
+linkTitle: "在组件中引用 Secret"
 weight: 400
-description: "如何从组件定义中安全地引用密钥"
+description: "如何从组件定义中安全地引用 Secret"
 ---
 
 ## 概述
@@ -14,13 +14,13 @@ description: "如何从组件定义中安全地引用密钥"
 
 在 Kubernetes 运行时，如果 `auth.secretStore` 为空，则假定使用Kubernetes 密钥存储。
 
-### 支持的密钥存储
+### 支持的 Secret stores
 
-Go to [this]({{< ref "howto-secrets.md" >}}) link to see all the secret stores supported by Dapr, along with information on how to configure and use them.
+转到 [此]({{< ref " howto-secrets. md" >}}) 链接，以查看 Dapr 支持的所有 secret stores，以及有关如何配置和使用它们的信息。
 
-## 引用密钥
+## 引用 Secret
 
-While you have the option to use plain text secrets (like MyPassword), as shown in the yaml below for the `value` of `redisPassword`, this is not recommended for production:
+虽然您可以选择使用明文密钥（如 MyPassword），如下面的 yaml 所示，用于 `redisPassword`的 `value` ，但不建议将其用于生产：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -38,9 +38,9 @@ spec:
     value: MyPassword
 ```
 
-Instead create the secret in your secret store and reference it in the component definition.  There are two cases for this shown below -- the "Secret contains an embedded key" and the "Secret is a string".
+相反，在您应该在 secret store 中创建 Secret，并在组件定义中引用它：  这有两种情况，如下所示 -- " Secret 包含一个嵌入的键 "和 " Secret 是一个字符串"。
 
-The "Secret contains an embedded key" case applies when there is a key embedded within the secret, i.e. the secret is **not** an entire connection string. This is shown in the following component definition yaml.
+" Secret 包含一个嵌入的键"的情况适用于在 Secret 中嵌入一个键，即 Secret **不是**整个连接字符串。 这显示在以下组件定义 yaml 中。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -62,11 +62,11 @@ auth:
   secretStore: <SECRET_STORE_NAME>
 ```
 
-`SECRET_STORE_NAME` 是已配置的 [秘钥存储组件]({{< ref supported-secret-stores >}}) 的名称。 当在 Kubernetes 中运行并使用 Kubernetes 密钥存储时，字段 `auth.SecretStore` 默认为 `kubernetes` 并且可以留空。
+`SECRET_STORE_NAME` 是已配置的 [ secret store 组件]({{< ref supported-secret-stores >}}) 的名称。 当在 Kubernetes 中运行并使用 Kubernetes secret store 时，字段 `auth.SecretStore` 默认为 `kubernetes` 并且可以留空。
 
-The above component definition tells Dapr to extract a secret named `redis-secret` from the defined `secretStore` and assign the value associated with the `redis-password` key embedded in the secret to the `redisPassword` field in the component. One use of this case is when your code is constructing a connection string, for example putting together a URL, a secret, plus other information as necessary, into a string.
+上面的组件定义告诉 Dapr 从定义的 `secretStore` 中提取名为 `redis-secret` 的Secret，并将与Secret中嵌入的 `redis-password` 值分配给组件中的 `redisPassword` 字段。 这种情况的一个用法是，当代码构造连接字符串时，例如，将 URL、Secret 以及其他必要信息组合到字符串中。
 
-On the other hand, the below "Secret is a string" case applies when there is NOT a key embedded in the secret. Rather, the secret is just a string. Therefore, in the `secretKeyRef` section both the secret `name` and the secret `key` will be identical. This is the case when the secret itself is an entire connection string with no embedded key whose value needs to be extracted. Typically a connection string consists of connection information, some sort of secret to allow connection, plus perhaps other information and does not require a separate "secret". This case is shown in the below component definition yaml.
+另一方面，当 Secret 中没有嵌入键值时，以下"Secret是字符串"情况就适用。 相反，这个 Secret 只是一个字符串。 因此，在" `secretKeyRef` "部分中，Secret 的 `name` 和 `key` 将完全相同。 当Secret本身是一个完整的连接字符串，没有需要提取其值的嵌入的键时，就是这种情况。 通常，连接字符串由连接信息、某种允许连接的机密以及可能的其他信息组成，不需要单独的"Secret"。 这种情况如下面的组件定义 yaml 所示。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -87,7 +87,7 @@ auth:
 secretStore: <SECRET_STORE_NAME>
 
 ```
-The above "Secret is a string" case yaml tells Dapr to extract a connection string named `asbNsConnstring` from the defined `secretStore` and assign the value to the `connectionString` field in the component since there is no key embedded in the "secret" from the `secretStore` because it is a plain string. This requires the secret `name` and secret `key` to be identical.
+上面的"Secret 是一个字符串"情况 yaml 告诉 Dapr 从定义的 `secretStore` 中提取名为 `asbNsConnstring` 的连接字符串，并将该值分配给组件中的 `connectionString` 字段，因为"Secret"中没有嵌入 `secretStore` 的键，因为它是纯字符串。 这要求 Secret `name` 和 `key` 相同。
 
 ## Example
 
@@ -100,7 +100,7 @@ The above "Secret is a string" case yaml tells Dapr to extract a connection stri
      kubectl create secret generic eventhubs-secret --from-literal=connectionString=*********
     ```
 
-2. 接下来，在您的绑定中引用该密钥：
+2. 接下来，在您的绑定中引用该 Secret：
     ```yaml
     apiVersion: dapr.io/v1alpha1
     kind: Component
@@ -124,13 +124,13 @@ The above "Secret is a string" case yaml tells Dapr to extract a connection stri
 
 ## 访问密钥的范围
 
-Dapr 可以使用其配置限制对密钥存储中的密钥的访问。 Read [How To: Use secret scoping]({{< ref "secrets-scopes.md" >}}) and  [How-To: Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}}) for more information. 这是推荐的使用 Dapr 限制访问密钥的方式。
+Dapr 可以使用其配置限制对 secret store 中的 Secret 的访问。 有关详细信息，请阅读 [如何：使用 Secret 范围]({{< ref "secrets-scopes.md" >}}) 和  [如何：限制可从 secret stores 读取的 Secret]({{< ref "secret-scope.md" >}})。 这是使用 Dapr 限制对 Secret 的访问的推荐方法。
 
 ## Kubernetes 权限
 
 ### 默认命名空间
 
-当在 Kubernetes 中运行时，Dapr 在安装过程中定义了默认的 Role 和 RoleBinding ，用于在 `default` 命名空间中从 Kubernetes 密钥存储中获取密钥。 对于启用了 Dapr 的应用程序，从`default`命名空间获取密钥，可以在组件中定义和引用一个密钥，如上例所示。
+当在 Kubernetes 中运行时，Dapr 在安装过程中定义了默认的 Role 和 RoleBinding ，用于在 `default` 命名空间中从 Kubernetes secret store 中获取 Secret。 对于启用了 Dapr 的应用程序，从`default`命名空间获取密钥，可以在组件中定义和引用一个密钥，如上例所示。
 
 ### 非默认命名空间
 
@@ -163,7 +163,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-这些资源给予了 Dapr 权限，从Kubernetes 密钥商店获取角色和 RoleBinding 定义的命名空间的密钥。
+这些资源给予了 Dapr 权限，从 Kubernetes 密钥商店获取角色和 RoleBinding 定义的命名空间的 Secret。
 
 {{% alert title="Note" color="warning" %}}
 在生产场景中，仅限Dapr访问某些秘密资源时，您可以使用 `resourceNames` 字段。 请参阅此 [链接](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) 获取更多解释。

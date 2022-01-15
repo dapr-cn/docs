@@ -7,12 +7,12 @@ description: "有关 upgrade CLI 命令的详细信息"
 
 ### 说明
 
-Upgrade or downgrade Dapr on supported hosting platforms.
+在支持的托管平台上升级或降级 Dapr。
 
 {{% alert title="Warning" color="warning" %}}
-Version steps should be done incrementally, including minor versions as you upgrade or downgrade.
+版本步骤应逐步进行，包括升级或降级时的小版本。
 
-Prior to downgrading, confirm components are backwards compatible and application code does ultilize APIs that are not supported in previous versions of Dapr.
+在降级之前，请确认组件向后兼容，并且应用程序代码确实会破坏以前版本的 Dapr 中不支持的 API。
 {{% /alert %}}
 
 ### 支持的平台
@@ -27,12 +27,12 @@ dapr upgrade [flags]
 
 ### 参数
 
-| Name                 | 环境变量 | 默认值      | 说明                                                                            |
-| -------------------- | ---- | -------- | ----------------------------------------------------------------------------- |
-| `--help`, `-h`       |      |          | 显示此帮助消息                                                                       |
-| `--kubernetes`, `-k` |      | `false`  | Upgrade/Downgrade Dapr in a Kubernetes cluster                                |
-| `--runtime-version`  |      | `latest` | The version of the Dapr runtime to upgrade/downgrade to, for example: `1.0.0` |
-| `--set`              |      |          | 在命令行上设置值 (可以用逗号指定多个或多个值: key1=val1,key2=val2)                                 |
+| Name                 | 环境变量 | 默认值      | 说明                                            |
+| -------------------- | ---- | -------- | --------------------------------------------- |
+| `--help`, `-h`       |      |          | 显示此帮助消息                                       |
+| `--kubernetes`, `-k` |      | `false`  | 更新/降级 Kubernetes 集群中的 dapr                    |
+| `--runtime-version`  |      | `latest` | 要升级/降级到的 Dapr 运行时版本，例如： `1.0.0`               |
+| `--set`              |      |          | 在命令行上设置值 (可以用逗号指定多个或多个值: key1=val1,key2=val2) |
 
 ### 示例
 

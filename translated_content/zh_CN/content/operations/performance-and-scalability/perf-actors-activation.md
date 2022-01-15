@@ -14,11 +14,11 @@ description: ""
 
 ### Kubernetes 组件
 
-* Sidecar (data plane)
-* Placement (required for actors, control plane mapping actor types to hosts)
-* Operator (control plane)
-* Sidecar Injector (control plane)
-* Sentry (optional, control plane)
+* Sidecar (数据平面)
+* Placement（ Actor 依赖，控制平面将 Actor 类型映射到主机）
+* Operator(控制平面)
+* Sidecar Injector（控制平面）
+* Sentry（可选，控制平面）
 
 ## Dapr v1.0 的性能摘要
 

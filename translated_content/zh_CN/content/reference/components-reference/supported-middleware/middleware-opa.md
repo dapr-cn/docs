@@ -4,7 +4,7 @@ title: "应用开放策略代理 (OPA) 策略"
 linkTitle: "开放策略代理 (OPA)"
 description: "使用中间件对传入的请求应用开放策略代理（OPA）策略。"
 aliases:
-  - /developing-applications/middleware/supported-middleware/middleware-opa/
+  - /zh-hans/developing-applications/middleware/supported-middleware/middleware-opa/
 ---
 
 The Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware.md >}}) applys [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. 这可以用来将可重用的授权策略应用到应用终结点。
