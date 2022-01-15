@@ -4,7 +4,7 @@ title: "AWS SQS binding spec"
 linkTitle: "AWS SQS"
 description: "Detailed documentation on the AWS SQS binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/sqs/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/sqs/"
 ---
 
 ## Component format

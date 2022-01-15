@@ -4,7 +4,7 @@ title: "GraphQL binding spec"
 linkTitle: "GraphQL"
 description: "Detailed documentation on the GraphQL binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/graphql/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/graphql/"
 ---
 
 ## Component format

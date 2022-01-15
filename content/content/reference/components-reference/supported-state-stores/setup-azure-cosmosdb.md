@@ -4,7 +4,7 @@ title: "Azure Cosmos DB"
 linkTitle: "Azure Cosmos DB"
 description: Detailed information on the Azure CosmosDB state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-azure-cosmosdb/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-azure-cosmosdb/"
 ---
 
 ## Component format

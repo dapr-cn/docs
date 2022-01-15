@@ -4,7 +4,7 @@ title: "Azure Table Storage "
 linkTitle: "Azure Table Storage "
 description: Detailed information on the Azure Table Storage state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-azure-tablestorage/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-azure-tablestorage/"
 ---
 
 ## Component format

@@ -5,7 +5,7 @@ linkTitle: "Bindings"
 weight: 3000
 description: The supported external bindings that interface with Dapr
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/"
 no_list: true
 ---
 

@@ -4,7 +4,7 @@ title: "Cloudstate"
 linkTitle: "Cloudstate"
 description: Detailed information on the Cloudstate state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-cloudstate/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-cloudstate/"
 ---
 
 ## Component format

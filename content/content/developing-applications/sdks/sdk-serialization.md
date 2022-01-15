@@ -5,7 +5,7 @@ linkTitle: "Serialization"
 description: "How Dapr serializes data within the SDKs"
 weight: 2000
 aliases:
-  - '/developing-applications/sdks/serialization/'
+  - '/zh-hans/developing-applications/sdks/serialization/'
 ---
 
 An SDK for Dapr should provide serialization for two use cases. First, for API objects sent through request and response payloads. Second, for objects to be persisted. For both these use cases, a default serialization is provided. In the Java SDK, it is the [DefaultObjectSerializer](https://dapr.github.io/java-sdk/io/dapr/serializer/DefaultObjectSerializer.html) class, providing JSON serialization.

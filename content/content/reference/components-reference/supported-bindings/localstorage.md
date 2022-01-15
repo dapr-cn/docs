@@ -4,7 +4,7 @@ title: "Local Storage binding spec"
 linkTitle: "Local Storage"
 description: "Detailed documentation on the Local Storage binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/localstorage/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/localstorage/"
 ---
 
 ## Component format

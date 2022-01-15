@@ -4,7 +4,7 @@ title: "Azure Key Vault secret store"
 linkTitle: "Azure Key Vault"
 description: Detailed information on the Azure Key Vault secret store component
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault/"
 ---
 
 {{% alert title="Note" color="primary" %}}

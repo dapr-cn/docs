@@ -5,7 +5,7 @@ linkTitle: "Bearer"
 description: "Use bearer middleware to secure HTTP endpoints by verifying bearer tokens"
 type: docs
 aliases:
-- /developing-applications/middleware/supported-middleware/middleware-bearer/
+- /zh-hans/developing-applications/middleware/supported-middleware/middleware-bearer/
 ---
 
 The bearer [HTTP middleware]({{< ref middleware.md >}}) verifies a [Bearer Token](https://tools.ietf.org/html/rfc6750) using [OpenID Connect](https://openid.net/connect/) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.

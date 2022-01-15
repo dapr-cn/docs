@@ -4,7 +4,7 @@ title: "Hazelcast"
 linkTitle: "Hazelcast"
 description: Detailed information on the Hazelcast state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-hazelcast/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-hazelcast/"
 ---
 
 ## Create a Dapr component
