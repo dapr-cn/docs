@@ -108,7 +108,7 @@ fluentd-sdrld                 1/1     Running   0          14s
 
 添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment

@@ -35,7 +35,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段          | 必填 | 详情                | Example        |
+| 字段          | 必填 | 详情                | 示例             |
 | ----------- |:--:| ----------------- | -------------- |
 | vaultName   | Y  | Azure Key Vault名称 | `"mykeyvault"` |
 | spnClientId | Y  | 你的托管标识客户端ID       | `"yourId"`     |

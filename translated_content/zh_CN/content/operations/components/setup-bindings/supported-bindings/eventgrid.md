@@ -7,7 +7,7 @@ description: "Azure Event Grid 绑定组件的详细文档"
 
 ## 配置
 
-要设置 Azure 事件网格（Event Grid）绑定，请创建一个类型为 `bindings.azure.eventgrid` 的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置 Azure 事件网格（Event Grid）绑定，请创建一个类型为 `bindings.azure.eventgrid` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 请参阅[这里](https://docs.microsoft.com/en-us/azure/event-grid/)了解 Azure Event Grid 文档。
 
@@ -46,12 +46,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                    | 必填 | 绑定支持 | 详情                                                                                                                                                      | Example                                |
+| 字段                    | 必填 | 绑定支持 | 详情                                                                                                                                                      | 示例                                     |
 | --------------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | tenantId              | Y  | 输入   | 创建这个事件网格事件订阅的 Azure 租户 id                                                                                                                               | `"tenentID"`                           |
 | subscriptionId        | Y  | 输入   | 创建这个事件网格事件订阅的 Azure 订阅 id                                                                                                                               | `"subscriptionId"`                     |

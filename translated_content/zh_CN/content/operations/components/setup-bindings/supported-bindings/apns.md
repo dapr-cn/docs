@@ -7,7 +7,7 @@ description: "有关 Apple 推送通知服务绑定组件的详细文档"
 
 ## 配置
 
-要设置Apple Push Notifications绑定，请创建一个类型为`bindings.apns`的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置Apple Push Notifications绑定，请创建一个类型为`bindings.apns`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -32,7 +32,7 @@ spec:
 ```
 ## 元数据字段规范
 
-| 字段          | 必填 | 绑定支持 | 详情                                                                         | Example            |
+| 字段          | 必填 | 绑定支持 | 详情                                                                         | 示例                 |
 | ----------- |:--:| ---- | -------------------------------------------------------------------------- | ------------------ |
 | 开发          | Y  | 输出   | 告诉绑定使用哪个APNs服务。 设置为 `true` 以用于开发环境， `false` 用于生产环境。 默认: `"true"`           | `"true"`           |
 | key-id      | Y  | 输出   | 来自 Apple 开发者门户的私钥的标识符。                                                     | `"private-key-id`" |

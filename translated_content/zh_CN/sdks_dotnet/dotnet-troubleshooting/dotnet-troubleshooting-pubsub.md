@@ -234,7 +234,7 @@ info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
 
 如果路由日志条目中的信息是正确的，那么这意味着您的应用程序的行为是正确的。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 ```txt
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]

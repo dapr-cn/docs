@@ -38,7 +38,7 @@ The `App` object can be used to create a server.
 
 ### Listen for service invocation requests
 
-The `InvokeServiceReqest` and `InvokeServiceResponse` objects can be used to handle incoming requests.
+`InvokeServiceReqest` 和 `InvokeServiceResponse` 对象可用于处理传入请求。
 
 A simple service that will listen and respond to requests will look like:
 

@@ -2,12 +2,12 @@
 type: docs
 title: "Kafka binding spec"
 linkTitle: "Kafka"
-description: "Detailed documentation on the Kafka binding component"
+description: "Kafka 组件绑定详细说明"
 ---
 
 ## 配置
 
-To setup Kafka binding create a component of type `bindings.kafka`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置 Kafka 绑定，请创建一个类型为 `bindings.kafka`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -39,11 +39,11 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 ## 元数据字段规范
 
-| 字段              | 必填 | 绑定支持         | 详情                                                                                     | Example                           |
+| 字段              | 必填 | 绑定支持         | 详情                                                                                     | 示例                                |
 | --------------- |:--:| ------------ | -------------------------------------------------------------------------------------- | --------------------------------- |
 | topics          | N  | 输入           | A comma separated string of topics                                                     | `"mytopic1,topic2"`               |
 | brokers         | Y  | Input/Output | A comma separated string of kafka brokers                                              | `"localhost:9092,localhost:9093"` |
@@ -63,13 +63,13 @@ spec:
 
 - `create`
 
-## Specifying a partition key
+## 指定分区键
 
-When invoking the Kafka binding, its possible to provide an optional partition key by using the `metadata` section in the request body.
+调用 Kafka 绑定时，可以使用请求正文中的 `metadata` 部分提供可选的分区键。
 
-The field name is `partitionKey`.
+字段名称为 `partitionKey`。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myKafka \

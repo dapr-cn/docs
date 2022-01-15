@@ -7,7 +7,7 @@ aliases:
   - /zh-hans/getting-started/install-dapr/
 ---
 
-Now that you have the [Dapr CLI installed]({{<ref install-dapr-cli.md>}}), it's time to initialize Dapr on your local machine using the CLI.
+现在，您已经安装了 [Dapr CLI]({{<ref install-dapr-cli.md>}})，是时候使用 CLI 在本地机器上初始化 Dapr 了。
 
 Dapr 与您的应用程序一起作为sidecar运行，在自托管模式下，这意味着它是您本地机器上的一个进程。 因此，初始化 Dapr 包括获取 Dapr sidecar 二进制文件并将其安装到本地.
 
@@ -19,7 +19,7 @@ Dapr 与您的应用程序一起作为sidecar运行，在自托管模式下，�
 1. 运行用于本地演员支持的**Dapr placement服务容器实例**
 
 {{% alert title="Docker" color="primary" %}}
-这种推荐的开发环境需要 [Docker](https://docs.docker.com/install/)。 It is possible to initialize Dapr without a dependency on Docker (see [this guidance]({{<ref self-hosted-no-docker.md>}})) but next steps in this guide assume the recommended development environment.
+这种推荐的开发环境需要 [Docker](https://docs.docker.com/install/)。 可以在不依赖 Docker 的情况下初始化 Dapr（[请参阅本指南]({{<ref self-hosted-no-docker.md>}})），但本指南中的后续步骤将假定使用推荐的开发环境。
 {{% /alert %}}
 
 ### 第 1 步：打开架起终端
@@ -70,7 +70,6 @@ docker ps
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                              NAMES
 0dda6684dc2e   openzipkin/zipkin        "/busybox/sh run.sh"     2 minutes ago   Up 2 minutes   9410/tcp, 0.0.0.0:9411->9411/tcp   dapr_zipkin
 9bf6ef339f50   redis                    "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:6379->6379/tcp             dapr_redis
-8d993e514150   daprio/dapr              "./placement"            2 minutes ago   Up 2 minutes   0.0.0.0:6050->50005/tcp            dapr_placement   2 minutes ago   Up 2 minutes   0.0.0.0:6379->6379/tcp             dapr_redis
 8d993e514150   daprio/dapr              "./placement"            2 minutes ago   Up 2 minutes   0.0.0.0:6050->50005/tcp            dapr_placement
 ```
 
@@ -110,5 +109,5 @@ explorer "%USERPROFILE%\.dapr\"
 
 {{< /tabs >}}
 
-[}}" role="button">Next step: Use the Dapr API >>]({{< ref get-started-api.md  mark=){.btn.btn-primary}
+[下一步：使用 Dapr API]({{< ref get-started-api.md >}})
 

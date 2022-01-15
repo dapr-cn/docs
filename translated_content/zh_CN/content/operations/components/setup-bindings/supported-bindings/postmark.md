@@ -7,7 +7,7 @@ description: "Detailed documentation on the Postmark binding component"
 
 ## 配置
 
-To setup Postmark binding create a component of type `bindings.postmark`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Postmark binding create a component of type `bindings.postmark`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -31,12 +31,12 @@ spec:
     value: "Hello!" # optional
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持 | 详情                                                                   | Example            |
+| 字段           | 必填 | 绑定支持 | 详情                                                                   | 示例                 |
 | ------------ |:--:| ---- | -------------------------------------------------------------------- | ------------------ |
 | accountToken | Y  | 输出   | The Postmark account token, this should be considered a secret value | `"account token"`  |
 | serverToken  | Y  | 输出   | The Postmark server token, this should be considered a secret value  | `"server token"`   |

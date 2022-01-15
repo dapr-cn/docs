@@ -22,5 +22,5 @@ no_list: true
 1. 完成一个组件的配置
 1. 探索 Dapr 的快速入门案例
 
-[}}" role="button">First step: Install the Dapr CLI >>]({{< ref install-dapr-cli.md  mark=){.btn.btn-primary}
+[第一步：安装Dapr CLI]({{< ref install-dapr-cli.md >}})
 

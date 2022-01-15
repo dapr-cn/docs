@@ -7,7 +7,7 @@ description: "Detailed documentation on the RabbitMQ binding component"
 
 ## 配置
 
-To setup RabbitMQ binding create a component of type `bindings.rabbitmq`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup RabbitMQ binding create a component of type `bindings.rabbitmq`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -39,12 +39,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                      | Example                                             |
+| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                      | 示例                                                  |
 | ---------------- |:--:| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | queueName        | Y  | Input/Output | The RabbitMQ queue name                                                                                                                                                                 | `"myqueue"`                                         |
 | host             | Y  | Input/Output | The RabbitMQ host address                                                                                                                                                               | `"amqp://[username][:password]@host.domain[:port]"` |
@@ -70,7 +70,7 @@ spec:
 
 字段名为 `ttlInSeconds`。
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 {{< tabs Windows Linux >}}
 {{% codetab %}}
@@ -115,7 +115,7 @@ To set priority at message level use the `metadata` section in the request body 
 
 The field name is `priority`.
 
-You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image. To run without Docker, see the getting started guide [here](https://kafka.apache.org/quickstart).
+示例:
 
 {{< tabs Windows Linux >}}
 {{% codetab %}}
