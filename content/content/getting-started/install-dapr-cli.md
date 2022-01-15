@@ -110,5 +110,5 @@ Flags:
 Use "dapr [command] --help" for more information about a command.
 ```
 
-<a class="btn btn-primary" href="{{< ref install-dapr-selfhost.md >}}" role="button">Next step: Initialize Dapr >></a>
+[Next step: Initialize Dapr]({{< ref install-dapr-selfhost.md >}})
 
