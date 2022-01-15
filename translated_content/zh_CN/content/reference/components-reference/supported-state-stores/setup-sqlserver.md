@@ -29,7 +29,7 @@ spec:
   - name: keyType
     value: <REPLACE-WITH-KEY-TYPE>  # Optional. defaults to "string"
   - name: keyLength
-    value: <KEY-LENGTH> # Optional. defaults to 200. Yo be used with "string" keyType
+    value: <KEY-LENGTH> # Optional. 默认值为 200。 Yo be used with "string" keyType
   - name: schema
     value: <SCHEMA> # Optional. defaults to "dbo"
   - name: indexedProperties
@@ -38,7 +38,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 If you wish to use SQL server as an [actor state store]({{< ref "state_api.md#configuring-state-store-for-actors" >}}), append the following to the yaml.
@@ -50,7 +50,7 @@ If you wish to use SQL server as an [actor state store]({{< ref "state_api.md#co
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 详情                                                                                                                                                                                    | Example                                                                                             |
+| 字段                | 必填 | 详情                                                                                                                                                                                    | 示例                                                                                                  |
 | ----------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | connectionString  | Y  | The connection string used to connect. If the connection string contains the database it must already exist. If the database is omitted a default database named `"Dapr"` is created. | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
 | tableName         | N  | The name of the table to use. Alpha-numeric with underscores. 默认值为 `"state"`                                                                                                          | `"table_name"`                                                                                      |

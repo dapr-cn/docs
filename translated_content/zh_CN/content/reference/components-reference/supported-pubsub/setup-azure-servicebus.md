@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## 配置
-To setup Azure Service Bus pubsub create a component of type `pubsub.azure.servicebus`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+To setup Azure Service Bus pubsub create a component of type `pubsub.azure.servicebus`. 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -59,12 +59,12 @@ spec:
 > __注意：__上述设置在使用该组件的所有主题中是通用的。
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                              | 必填 | 详情                                                                                                                         | Example                                                                                                                                        |
+| 字段                              | 必填 | 详情                                                                                                                         | 示例                                                                                                                                             |
 | ------------------------------- |:--:| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | connectionString                | Y  | Shared access policy connection-string for the Service Bus                                                                 | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
 | timeoutInSec                    | N  | 发送消息和其他管理操作的超时时间。 默认值：`60`                                                                                                 | `30`                                                                                                                                           |
@@ -91,4 +91,4 @@ spec:
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
 - [发布/订阅构建块]({{< ref pubsub >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
+- 阅读 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}})，了解配置 发布/订阅组件的说明

@@ -89,7 +89,7 @@ secretStore: <SECRET_STORE_NAME>
 ```
 The above "Secret is a string" case yaml tells Dapr to extract a connection string named `asbNsConnstring` from the defined `secretStore` and assign the value to the `connectionString` field in the component since there is no key embedded in the "secret" from the `secretStore` because it is a plain string. This requires the secret `name` and secret `key` to be identical.
 
-## Example
+## 示例
 
 ### 引用一个Kubernetes密钥
 

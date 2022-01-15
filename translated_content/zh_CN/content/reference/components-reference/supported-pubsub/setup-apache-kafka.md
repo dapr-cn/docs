@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-要设置Apache Kafka pubsub，请创建一个`pubsub.kafka`类型的组件。 See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. For details on using `secretKeyRef`, see the guide on [how to reference secrets in components]({{< ref component-secrets.md >}}).
+要设置Apache Kafka pubsub，请创建一个`pubsub.kafka`类型的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。 有关使用 `secretKeyRef`的详细信息，请参阅有[关如何在组件中引用Secret指南]({{< ref component-secrets.md >}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -41,16 +41,16 @@ spec:
 
 ## 元数据字段规范
 
-| 字段              | 必填 | 详情                                                                                                                                                                                  | Example                                                    |
-| --------------- |:--:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| brokers         | Y  | A comma-separated list of Kafka brokers.                                                                                                                                            | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"` |
-| consumerGroup   | N  | A kafka consumer group to listen on. Each record published to a topic is delivered to one consumer within each consumer group subscribed to the topic.                              | `"group1"`                                                 |
-| clientID        | N  | A user-provided string sent with every request to the Kafka brokers for logging, debugging, and auditing purposes. Defaults to `"sarama"`.                                          | `"my-dapr-app"`                                            |
-| authRequired    | Y  | Enable [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) authentication with the Kafka brokers.                                                        | `"true"`, `"false"`                                        |
-| saslUsername    | N  | The SASL username used for authentication. Only required if `authRequired` is set to `"true"`.                                                                                      | `"adminuser"`                                              |
-| saslPassword    | N  | The SASL password used for authentication. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}). Only required if `authRequired` is set to `"true"`. | `""`, `"KeFg23!"`                                          |
-| initialOffset   | N  | The initial offset to use if no offset was previously committed. Should be "newest" or "oldest". Defaults to "newest".                                                              | `"oldest"`                                                 |
-| maxMessageBytes | N  | The maximum size in bytes allowed for a single Kafka message. Defaults to 1024.                                                                                                     | `2048`                                                     |
+| 字段              | 必填 | 详情                                                                                                                                         | 示例                                                         |
+| --------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| brokers         | Y  | A comma-separated list of Kafka brokers.                                                                                                   | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"` |
+| consumerGroup   | N  | 监听 kafka 消费者组。 发布到主题的每条记录都会传递给订阅该主题的每个消费者组中的一个消费者。                                                                                         | `"group1"`                                                 |
+| clientID        | N  | A user-provided string sent with every request to the Kafka brokers for logging, debugging, and auditing purposes. Defaults to `"sarama"`. | `"my-dapr-app"`                                            |
+| authRequired    | Y  | 启用 [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) 对 Kafka broker 的身份验证。                                    | `"true"`, `"false"`                                        |
+| saslUsername    | N  | 用于身份验证的 SASL 用户名。 仅当 `authRequired` 设置为 `"true"`时才需要。                                                                                      | `"adminuser"`                                              |
+| saslPassword    | N  | 用于身份验证的 SASL 密码。 可以用`secretKeyRef`来[引用 Secret]({{< ref component-secrets.md >}})。 仅当 `authRequired` 设置为 `"true"`时才需要。                      | `""`, `"KeFg23!"`                                          |
+| initialOffset   | N  | 如果以前未提交任何偏移量，则要使用的初始偏移量。 应为"newest"或"oldest"。 默认为"newest"。                                                                                 | `"oldest"`                                                 |
+| maxMessageBytes | N  | 单条Kafka消息允许的最大消息的字节大小。 默认值为 1024。                                                                                                          | `2048`                                                     |
 
 ## 每次调用的元数据字段
 
@@ -60,7 +60,7 @@ spec:
 
 参数名是`partitionKey`。
 
-Example:
+示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partitionKey=key1 \
@@ -88,5 +88,5 @@ To run Kafka on Kubernetes, you can use any Kafka operator, such as [Strimzi](ht
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md##step-1-setup-the-pubsub-component" >}}) for instructions on configuring pub/sub components
+- 阅读 [本指南]({{< ref "howto-publish-subscribe.md##step-1-setup-the-pubsub-component" >}})，了解配置 发布/订阅组件的说明
 - [发布/订阅构建块]({{< ref pubsub >}})

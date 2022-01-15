@@ -26,7 +26,7 @@ To explicitly persist a state (ignoring any TTLs set for the key), specify a `tt
 
 Please refer to the TTL column in the tables at [state store components]({{< ref supported-state-stores >}}).
 
-## Example
+## 示例
 
 State TTL can be set in the metadata as part of the state store set request:
 

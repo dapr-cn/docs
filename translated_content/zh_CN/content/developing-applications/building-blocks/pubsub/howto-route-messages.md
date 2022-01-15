@@ -414,7 +414,7 @@ The following attributes are OPTIONAL to appear in CloudEvents. See the [Notatio
 - Constraints:
   - OPTIONAL
   - If present, MUST be a non-empty string
-- Example:
+- 示例:
   - A subscriber might register interest for when new blobs are created inside a blob-storage container. In this case, the event `source` identifies the subscription scope (storage container), the `type` identifies the "blob created" event, and the `id` uniquely identifies the event instance to distinguish separate occurrences of a same-named blob having been created; the name of the newly created blob is carried in `subject`:
     - `source`: https://example.com/storage/tenant/container
     - `subject`: mynewfile.jpg

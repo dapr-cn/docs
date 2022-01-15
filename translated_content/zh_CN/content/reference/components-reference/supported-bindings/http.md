@@ -25,15 +25,15 @@ spec:
 
 ## 元数据字段规范
 
-| 字段  | 必填 | 绑定支持 | 详情                     | Example                                                    |
+| 字段  | 必填 | 绑定支持 | 详情                     | 示例                                                         |
 | --- |:--:| ---- | ---------------------- | ---------------------------------------------------------- |
 | url | Y  | 输出   | 要调用的 HTTP 终点的 base URL | `http://host:port/path`, `http://myservice:8000/customers` |
 
 ## 绑定支持
 
-This component supports **output binding** with the following [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html):
+此组件支持以下 [HTTP methods/verbs](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) **输出绑定** ：
 
-- `create` : For backward compatibility and treated like a post
+- `create` : 为了向后的兼容，并被当作一个 post 请求处理
 - `get` : 读数据或者记录
 - `head` : 连接服务器但不返回响应正文
 - `post` ： 通常用于创建记录或发送命令
@@ -49,7 +49,7 @@ This component supports **output binding** with the following [HTTP methods/verb
 
 以上所有操作都支持以下元数据字段
 
-| 字段       | 必填 | 详情                          | Example                               |
+| 字段       | 必填 | 详情                          | 示例                                    |
 | -------- |:--:| --------------------------- | ------------------------------------- |
 | path     | N  | 追加到 base URL的路径。 用于访问特定的URI | `"/1234"`, `"/search?lastName=Jones"` |
 | Headers* | N  | 任何第一字母为大写字母的字段均作为请求头发送      | `"Content-Type"`, `"Accept"`          |
@@ -79,13 +79,13 @@ This component supports **output binding** with the following [HTTP methods/verb
 
 响应正文包含 HTTP 终结点返回的数据。  `data` 字段包含一个 HTTP 响应实体作为字节数组(通过curl Base64 编码). `metadata` 字段含有：
 
-| 字段         | 必填 | 详情                                                                   | Example                     |
+| 字段         | 必填 | 详情                                                                   | 示例                          |
 | ---------- |:--:| -------------------------------------------------------------------- | --------------------------- |
 | statusCode | Y  | [HTTP 状态代码](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
 | status     | Y  | 状态说明                                                                 | `"200 OK"`, `"201 Created"` |
 | Headers*   | N  | 任何第一字母为大写字母的字段均作为请求头发送                                               | `"Content-Type"`            |
 
-#### Example
+#### 示例
 
 **请求 base URL**
 
@@ -146,7 +146,7 @@ curl -d '{ "operation": "get", "metadata": { "path": "/things/1234" } }' \
 }
 ```
 
-#### Example
+#### 示例
 
 **发布新记录**
 
