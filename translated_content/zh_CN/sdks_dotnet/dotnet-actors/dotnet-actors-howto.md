@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "在.NET SDK中运行和使用 virtual actors 的例子。"
-linkTitle: "Example"
+linkTitle: "示例"
 weight: 300000
 description: 试用 .NET Dapr virtual actors
 ---
@@ -103,15 +103,15 @@ Dapr 使用 ASP.NET web 服务来托管 Actor 服务。 本节将会实现 `IMyA
 ### 创建 actor 服务项目并添加依赖
 
 ```bash
-# 创建 ASP.Net Web 服务来托管 Dapr actor
+# Create ASP.Net Web service to host Dapr actor
 dotnet new web -o MyActorService
 
 cd MyActorService
 
-# 添加 Dapr.Actors.AspNetCore nuget 包. 请从nuget.org添加最新的包版本
+# Add Dapr.Actors.AspNetCore nuget package. Please use the latest package version from nuget.org
 dotnet add package Dapr.Actors.AspNetCore -v 1.0.0
 
-# 添加 Actor 接口引用
+# Add Actor Interface reference
 dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
 
 cd ..

@@ -12,7 +12,7 @@ Dapr can be integrated with GitHub Actions via the [Dapr tool installer](https:/
 
 The `dapr/setup-dapr` action will install the specified version of the Dapr CLI on macOS, Linux and Windows runners. Once installed, you can run any [Dapr CLI command]({{< ref cli >}}) to manage your Dapr environments.
 
-## Example
+## 示例
 
 ```yaml
 - name: Install Dapr

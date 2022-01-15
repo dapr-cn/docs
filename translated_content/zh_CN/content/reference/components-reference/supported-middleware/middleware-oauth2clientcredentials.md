@@ -4,7 +4,7 @@ title: "OAuth2 client credentials"
 linkTitle: "OAuth2 client credentials"
 description: "使用 OAuth2 客户端认证中间件来保护HTTP端点的安全"
 aliases:
-  - /developing-applications/middleware/supported-middleware/middleware-oauth2clientcredentials/
+  - /zh-hans/developing-applications/middleware/supported-middleware/middleware-oauth2clientcredentials/
 ---
 
 OAuth2 客户端认证[HTTP中间件]({{< ref middleware.md >}})在 Web API 上启用 [OAuth2 客户端认证流程](https://tools.ietf.org/html/rfc6749#section-4.4)，而无需修改应用程序。 这种设计将认证/授权的关注点从应用中分离出来，因此应用操作者可以采用和配置认证/授权提供者，而不影响应用代码。
@@ -33,12 +33,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                  | 详情                                                                                         | Example                                            |
+| 字段                  | 详情                                                                                         | 示例                                                 |
 | ------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------- |
 | clientId            | 您的应用程序的客户端ID，它是作为OAuth平台托管的凭证的一部分而创建的                                                      |                                                    |
 | clientSecret        | 您的应用程序的客户密钥，它是作为OAuth平台托管的凭证的一部分而创建的。                                                      |                                                    |

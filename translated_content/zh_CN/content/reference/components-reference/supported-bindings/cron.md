@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-要设置 cron 绑定，请创建一个类型为 `bindings.cron` 的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置 cron 绑定，请创建一个类型为 `bindings.cron` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -28,7 +28,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段       | 必填 | 绑定支持         | 详情                                                | Example        |
+| 字段       | 必填 | 绑定支持         | 详情                                                | 示例             |
 | -------- |:--:| ------------ | ------------------------------------------------- | -------------- |
 | schedule | Y  | Input/Output | 要用的有效的 cron 时间表。 请参阅[这里](#schedule-format)了解更多详情。 | `"@every 15m"` |
 

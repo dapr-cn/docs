@@ -44,7 +44,7 @@ The Azure Key Vault secret store component supports authentication with Azure AD
 
 ## 元数据字段规范
 
-| 字段                 | 必填 | 详情                                                                       | Example                                                                                                     |
+| 字段                 | 必填 | 详情                                                                       | 示例                                                                                                          |
 | ------------------ |:--:| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
 | `vaultName`        | Y  | Azure Key Vault名称                                                        | `"mykeyvault"`                                                                                              |
 | `azureEnvironment` | N  | Optional name for the Azure environment if using a different Azure cloud | `"AZUREPUBLICCLOUD"` (default value), `"AZURECHINACLOUD"`, `"AZUREUSGOVERNMENTCLOUD"`, `"AZUREGERMANCLOUD"` |

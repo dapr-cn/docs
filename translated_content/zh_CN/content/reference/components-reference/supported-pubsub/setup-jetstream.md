@@ -4,7 +4,7 @@ title: "JetStream"
 linkTitle: "JetStream"
 description: "Detailed documentation on the NATS JetStream component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-jetstream/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-jetstream/"
 ---
 
 ## 配置
@@ -40,7 +40,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段             | 必填 | 详情                                   | Example                   |
+| 字段             | 必填 | 详情                                   | 示例                        |
 | -------------- |:--:| ------------------------------------ | ------------------------- |
 | natsURL        | Y  | NATS 服务器地址 URL                       | "`nats://localhost:4222`" |
 | name           | N  | NATS connection name                 | `"my-conn-name"`          |
@@ -80,7 +80,7 @@ This installs a single NATS server into the `default` namespace. To interact wit
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
+- 阅读 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}})，了解配置 发布/订阅组件的说明
 - [发布/订阅构建块]({{< ref pubsub >}})
 - [JetStream Documentation](https://docs.nats.io/jetstream/jetstream)
 - [NATS CLI](https://github.com/nats-io/natscli)

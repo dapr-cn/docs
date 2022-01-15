@@ -4,7 +4,7 @@ title: "Bearer"
 linkTitle: "Bearer"
 description: "使用 Bearer 中间件，通过验证 Bearer token 来确保 HTTP 端点的安全"
 aliases:
-  - /developing-applications/middleware/supported-middleware/middleware-bearer/
+  - /zh-hans/developing-applications/middleware/supported-middleware/middleware-bearer/
 ---
 
 [Bearer 中间件]({{< ref middleware.md >}})在 Web API 上使用 [OpenID Connect](https://openid.net/connect/) 来验证 [Bearer Token](https://tools.ietf.org/html/rfc6750) 而无须修改应用程序。 这种设计将认证/授权的关注点从应用中分离出来，因此应用操作者可以采用和配置认证/授权提供者，而不影响应用代码。
@@ -27,7 +27,7 @@ spec:
 ```
 ## 元数据字段规范
 
-| 字段        | 详情                                            | Example                                                           |
+| 字段        | 详情                                            | 示例                                                                |
 | --------- | --------------------------------------------- | ----------------------------------------------------------------- |
 | clientId  | 你的应用程序的客户端ID，它是作为OpenID Connect平台托管的凭证的一部分创建的 |                                                                   |
 | issuerURL | 服务的URL标识                                      | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
