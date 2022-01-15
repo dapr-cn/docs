@@ -4,7 +4,7 @@ title: "Couchbase"
 linkTitle: "Couchbase"
 description: Detailed information on the Couchbase state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-couchbase/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-couchbase/"
 ---
 
 ## Component format

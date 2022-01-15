@@ -4,7 +4,7 @@ title: "Azure Service Bus"
 linkTitle: "Azure Service Bus"
 description: "Detailed documentation on the Azure Service Bus pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-azure-servicebus/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-azure-servicebus/"
 ---
 
 ## Component format

@@ -4,7 +4,7 @@ title: "AWS DynamoDB binding spec"
 linkTitle: "AWS DynamoDB"
 description: "Detailed documentation on the AWS DynamoDB binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/dynamodb/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/dynamodb/"
 ---
 
 ## Component format

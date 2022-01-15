@@ -4,7 +4,7 @@ title: "MySQL"
 linkTitle: "MySQL"
 description: Detailed information on the MySQL state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-mysql/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-mysql/"
 ---
 
 ## Component format

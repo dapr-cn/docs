@@ -4,7 +4,7 @@ title: "Cassandra"
 linkTitle: "Cassandra"
 description: Detailed information on the Cassandra state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-cassandra/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-cassandra/"
 ---
 
 ## Component format

@@ -4,7 +4,7 @@ title: "Alibaba Cloud Tablestore binding spec"
 linkTitle: "Alibaba Cloud Tablestore"
 description: "Detailed documentation on the Alibaba Tablestore binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/alicloudtablestore/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/alicloudtablestore/"
 ---
 
 ## Component format

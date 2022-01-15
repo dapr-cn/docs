@@ -5,7 +5,7 @@ linkTitle: "How-To: Debug with VSCode"
 weight: 20000
 description:  "Learn how to configure VSCode to debug Dapr applications"
 aliases:
-  - /developing-applications/ides/vscode/vscode-manual-configuration/
+  - /zh-hans/developing-applications/ides/vscode/vscode-manual-configuration/
 ---
 
 ## Manual debugging

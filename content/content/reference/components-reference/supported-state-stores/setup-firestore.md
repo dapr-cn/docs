@@ -4,7 +4,7 @@ title: "GCP Firestore (Datastore mode)"
 linkTitle: "GCP Firestore"
 description: Detailed information on the GCP Firestore state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-firestore/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-firestore/"
 ---
 
 ## Component format

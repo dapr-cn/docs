@@ -4,7 +4,7 @@ title: "Alibaba Cloud Object Storage Service binding spec"
 linkTitle: "Alibaba Cloud Object Storage"
 description: "Detailed documentation on the Alibaba Cloud Object Storage binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/alicloudoss/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/alicloudoss/"
 ---
 
 ## Component format

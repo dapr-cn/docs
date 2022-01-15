@@ -5,7 +5,7 @@ linkTitle: "Arguments and annotations"
 description: "The arguments and annotations available when configuring Dapr in different environments"
 weight: 300
 aliases:
-  - "/operations/hosting/kubernetes/kubernetes-annotations/"
+  - "/zh-hans/operations/hosting/kubernetes/kubernetes-annotations/"
 ---
 
 This table is meant to help users understand the equivalent options for running Dapr sidecars in different contexts--via the [CLI]({{< ref cli-overview.md >}}) directly, via daprd, or on [Kubernetes]({{< ref kubernetes-overview.md >}}) via annotations.

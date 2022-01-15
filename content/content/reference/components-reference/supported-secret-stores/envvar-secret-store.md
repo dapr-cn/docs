@@ -4,7 +4,7 @@ title: "Local environment variables (for Development)"
 linkTitle: "Local environment variables"
 description: Detailed information on the local environment secret store component
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/envvar-secret-store/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/envvar-secret-store/"
 ---
 
 This Dapr secret store component uses locally defined environment variable and does not use authentication.

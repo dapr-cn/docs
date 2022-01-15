@@ -4,7 +4,7 @@ title: "Sentinel fault-tolerance middleware component"
 linkTitle: "Sentinel"
 description: "Use Sentinel middleware to guarantee the reliability and resiliency of your application"
 aliases:
-- /developing-applications/middleware/supported-middleware/middleware-sentinel/
+- /zh-hans/developing-applications/middleware/supported-middleware/middleware-sentinel/
 ---
 
 [Sentinel](https://github.com/alibaba/sentinel-golang) is a powerful fault-tolerance component that takes "flow" as the breakthrough point and covers multiple fields including flow control, traffic shaping, concurrency limiting, circuit breaking, and adaptive system protection to guarantee the reliability and resiliency of microservices.

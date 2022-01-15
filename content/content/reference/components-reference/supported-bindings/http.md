@@ -4,7 +4,7 @@ title: "HTTP binding spec"
 linkTitle: "HTTP"
 description: "Detailed documentation on the HTTP binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/http/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/http/"
 ---
 
 ## Setup Dapr component

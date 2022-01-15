@@ -4,7 +4,7 @@ title: "Azure Blob Storage"
 linkTitle: "Azure Blob Storage"
 description: Detailed information on the Azure Blob Store state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-azure-blobstorage/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-azure-blobstorage/"
 ---
 
 ## Component format

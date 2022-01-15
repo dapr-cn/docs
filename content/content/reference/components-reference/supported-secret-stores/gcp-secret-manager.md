@@ -4,7 +4,7 @@ title: "GCP Secret Manager"
 linkTitle: "GCP Secret Manager"
 description: Detailed information on the GCP Secret Manager secret store component
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/gcp-secret-manager/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/gcp-secret-manager/"
 ---
 
 ## Component format

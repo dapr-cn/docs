@@ -4,7 +4,7 @@ title: "RabbitMQ"
 linkTitle: "RabbitMQ"
 description: "Detailed documentation on the RabbitMQ pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-rabbitmq/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-rabbitmq/"
 ---
 
 ## Component format

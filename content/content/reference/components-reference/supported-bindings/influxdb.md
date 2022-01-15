@@ -4,7 +4,7 @@ title: "InfluxDB binding spec"
 linkTitle: "InfluxDB"
 description: "Detailed documentation on the InfluxDB binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/influxdb/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/influxdb/"
 ---
 
 ## Component format

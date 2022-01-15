@@ -4,7 +4,7 @@ title: "Azure Storage Queues binding spec"
 linkTitle: "Azure Storage Queues"
 description: "Detailed documentation on the Azure Storage Queues binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/storagequeues/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/storagequeues/"
 ---
 
 ## Component format

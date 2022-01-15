@@ -4,7 +4,7 @@ title: "RethinkDB binding spec"
 linkTitle: "RethinkDB"
 description: "Detailed documentation on the RethinkDB binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/rethinkdb/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/rethinkdb/"
 ---
 
 ## Component format

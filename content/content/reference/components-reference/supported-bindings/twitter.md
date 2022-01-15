@@ -4,7 +4,7 @@ title: "Twitter binding spec"
 linkTitle: "Twitter"
 description: "Detailed documentation on the Twitter binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/twitter/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/twitter/"
 ---
 
 ## Component format

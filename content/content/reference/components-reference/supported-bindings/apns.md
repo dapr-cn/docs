@@ -4,7 +4,7 @@ title: "Apple Push Notification Service binding spec"
 linkTitle: "Apple Push Notification Service"
 description: "Detailed documentation on the Apple Push Notification Service binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/apns/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/apns/"
 ---
 
 ## Component format

@@ -4,7 +4,7 @@ title: "Azure Event Hubs binding spec"
 linkTitle: "Azure Event Hubs"
 description: "Detailed documentation on the Azure Event Hubs binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/eventhubs/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/eventhubs/"
 ---
 
 ## Component format

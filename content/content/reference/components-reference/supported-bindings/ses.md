@@ -4,7 +4,7 @@ title: "AWS SES binding spec"
 linkTitle: "AWS SES"
 description: "Detailed documentation on the AWS SES binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/ses/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/ses/"
 ---
 
 ## Component format

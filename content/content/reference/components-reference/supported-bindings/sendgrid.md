@@ -4,7 +4,7 @@ title: "Twilio SendGrid binding spec"
 linkTitle: "Twilio SendGrid"
 description: "Detailed documentation on the Twilio SendGrid binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/sendgrid/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/sendgrid/"
 ---
 
 ## Component format

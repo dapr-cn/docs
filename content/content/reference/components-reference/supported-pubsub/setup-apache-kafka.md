@@ -4,7 +4,7 @@ title: "Apache Kafka"
 linkTitle: "Apache Kafka"
 description: "Detailed documentation on the Apache Kafka pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-apache-kafka/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-apache-kafka/"
 ---
 
 ## Component format
