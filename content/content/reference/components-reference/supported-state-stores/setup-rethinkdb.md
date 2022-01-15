@@ -4,7 +4,7 @@ title: "RethinkDB"
 linkTitle: "RethinkDB"
 description: Detailed information on the RethinkDB state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-rethinkdb/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-rethinkdb/"
 ---
 
 ## Component format

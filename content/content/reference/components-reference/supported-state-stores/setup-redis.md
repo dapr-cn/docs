@@ -4,7 +4,7 @@ title: "Redis"
 linkTitle: "Redis"
 description: Detailed information on the Redis state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-redis/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-redis/"
 ---
 
 ## Component format

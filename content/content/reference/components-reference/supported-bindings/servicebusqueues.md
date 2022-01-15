@@ -4,7 +4,7 @@ title: "Azure Service Bus Queues binding spec"
 linkTitle: "Azure Service Bus Queues"
 description: "Detailed documentation on the Azure Service Bus Queues binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/servicebusqueues/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/servicebusqueues/"
 ---
 
 ## Component format

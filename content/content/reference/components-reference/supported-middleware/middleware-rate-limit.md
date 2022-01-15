@@ -4,7 +4,7 @@ title: "Rate limiting"
 linkTitle: "Rate limiting"
 description: "Use rate limit middleware to limit requests per second"
 aliases:
-- /developing-applications/middleware/supported-middleware/middleware-rate-limit/
+- /zh-hans/developing-applications/middleware/supported-middleware/middleware-rate-limit/
 ---
 
 The rate limit [HTTP middleware]({{< ref middleware.md >}}) allows restricting the maximum number of allowed HTTP requests per second. Rate limiting can protect your application from denial of service (DOS) attacks. DOS attacks can be initiated by malicious 3rd parties but also by bugs in your software (a.k.a. a "friendly fire" DOS attack).

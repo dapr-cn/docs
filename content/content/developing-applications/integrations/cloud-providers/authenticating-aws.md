@@ -5,7 +5,7 @@ linkTitle: "Authenticating to AWS"
 weight: 10
 description: "Information about authentication and configuration options for AWS"
 aliases:
-  - /developing-applications/integrations/authenticating/authenticating-aws/
+  - /zh-hans/developing-applications/integrations/authenticating/authenticating-aws/
 ---
 
 All Dapr components using various AWS services (DynamoDB, SQS, S3, etc) use a standardized set of attributes for configuration, these are described below.

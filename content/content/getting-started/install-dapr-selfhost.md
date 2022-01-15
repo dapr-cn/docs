@@ -4,7 +4,7 @@ title: "Initialize Dapr in your local environment"
 linkTitle: "Init Dapr locally"
 weight: 20
 aliases:
-  - /getting-started/install-dapr/
+  - /zh-hans/getting-started/install-dapr/
 ---
 
 Now that you have the [Dapr CLI installed]({{<ref install-dapr-cli.md>}}), it's time to initialize Dapr on your local machine using the CLI. 

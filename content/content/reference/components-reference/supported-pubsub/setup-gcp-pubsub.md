@@ -4,8 +4,8 @@ title: "GCP Pub/Sub"
 linkTitle: "GCP Pub/Sub"
 description: "Detailed documentation on the GCP Pub/Sub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-gcp/"
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-gcp-pubsub/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-gcp/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-gcp-pubsub/"
 ---
 
 ## Create a Dapr component

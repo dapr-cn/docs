@@ -4,7 +4,7 @@ title: "Apply Open Policy Agent (OPA) policies"
 linkTitle: "Open Policy Agent (OPA)"
 description: "Use middleware to apply Open Policy Agent (OPA) policies on incoming requests"
 aliases:
-- /developing-applications/middleware/supported-middleware/middleware-opa/
+- /zh-hans/developing-applications/middleware/supported-middleware/middleware-opa/
 ---
 
 The Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware.md >}}) applys [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. This can be used to apply reusable authorization policies to app endpoints.

@@ -4,7 +4,7 @@ title: "GCP Storage Bucket binding spec"
 linkTitle: "GCP Storage Bucket"
 description: "Detailed documentation on the GCP Storage Bucket binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/gcpbucket/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/gcpbucket/"
 ---
 
 ## Component format

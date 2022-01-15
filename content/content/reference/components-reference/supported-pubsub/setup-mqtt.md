@@ -4,7 +4,7 @@ title: "MQTT"
 linkTitle: "MQTT"
 description: "Detailed documentation on the MQTT pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-mqtt/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-mqtt/"
 ---
 
 ## Component format

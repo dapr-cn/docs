@@ -4,7 +4,7 @@ title: "Pulsar"
 linkTitle: "Pulsar"
 description: "Detailed documentation on the Pulsar pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-pulsar/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-pulsar/"
 ---
 
 ## Component format

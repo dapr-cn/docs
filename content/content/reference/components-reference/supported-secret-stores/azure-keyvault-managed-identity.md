@@ -4,7 +4,7 @@ title: "Azure Key Vault with Managed Identities on Kubernetes"
 linkTitle: "Azure Key Vault w/ Managed Identity"
 description: How to configure Azure Key Vault and Kubernetes to use Azure Managed Identities to access secrets
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
 ---
 
 ## Component format

@@ -4,7 +4,7 @@ title: "MySQL binding spec"
 linkTitle: "MySQL"
 description: "Detailed documentation on the MySQL binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/mysql/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/mysql/"
 ---
 
 ## Component format

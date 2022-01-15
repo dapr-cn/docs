@@ -4,7 +4,7 @@ title: "Kubernetes secrets"
 linkTitle: "Kubernetes secrets"
 description: Detailed information on the Kubernetes secret store component
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/kubernetes-secret-store/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/kubernetes-secret-store/"
 ---
 
 ## Summary

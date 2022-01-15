@@ -5,7 +5,7 @@ linkTitle: "Pub/sub brokers"
 description: "Guidance on setting up different message brokers for Dapr Pub/Sub"
 weight: 2000
 aliases:
-  - "/operations/components/setup-pubsub/setup-pubsub-overview/"
+  - "/zh-hans/operations/components/setup-pubsub/setup-pubsub-overview/"
 ---
 
 Dapr integrates with pub/sub message buses to provide applications with the ability to create event-driven, loosely coupled architectures where producers send events to consumers via topics.

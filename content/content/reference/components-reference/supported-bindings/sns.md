@@ -4,7 +4,7 @@ title: "AWS SNS binding spec"
 linkTitle: "AWS SNS"
 description: "Detailed documentation on the AWS SNS binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/sns/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/sns/"
 ---
 
 ## Component format

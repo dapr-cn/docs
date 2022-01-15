@@ -5,7 +5,7 @@ linkTitle: "(optional) Configure state & pub/sub"
 weight: 80
 description: "Configure state store and pub/sub message broker components for Dapr"
 aliases:
-  - /getting-started/configure-redis/
+  - /zh-hans/getting-started/configure-redis/
 ---
 
 In order to get up and running with the state and pub/sub building blocks two components are needed:
