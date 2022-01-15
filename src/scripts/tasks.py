@@ -3,6 +3,7 @@ import os
 from invoke import task
 from git import Repo, GitCommandError
 import shutil
+import re
 
 source_base_dir = "../source"
 dapr_cn_base_dir = "../dapr-cn"
@@ -25,7 +26,8 @@ def update_source(c):
 
 
 def update_source_core(branch: str):
-    content_dir = f"{dapr_cn_base_dir}/{branch}/content"
+    branch_dir = f"{dapr_cn_base_dir}/{branch}"
+    content_dir = f"{branch_dir}/content"
     # delete content dir if found
     if os.path.exists(content_dir):
         shutil.rmtree(content_dir)
@@ -52,6 +54,60 @@ def update_source_core(branch: str):
                                 dirs_exist_ok=True)
     print("sdk content is copied")
 
+    # create crowdin.yml
+    with open(f"{branch_dir}/crowdin.yml", "w", encoding='utf8') as f:
+        f.write("""project_id_env: CROWDIN_PROJECT_ID
+api_token_env: CROWDIN_PERSONAL_TOKEN
+base_path: "./"
+preserve_hierarchy: true
+files:
+""")
+        # create an item for every file in content directory and append to crowdin.yml
+        for root, dirs, files in os.walk(content_dir):
+            for file in files:
+                target_root = root.replace(content_dir, "/content")
+                file_path = f"{target_root}/{file}"
+                if file_path.endswith(".md"):
+                    source = file_path.replace("\\", "/")
+                    f.write(f"    - source: {source}\n")
+                    translation = file_path.replace('/content', '/translated_content/%locale_with_underscore%') \
+                        .replace("\\", "/")
+                    f.write(
+                        f"      translation: {translation}\n")
+
+    # update aliases
+    # insert /zh-hans to every head of alias in the head of *.md files in content directory
+    for root, dirs, files in os.walk(content_dir):
+        # load file as markdown
+        for file in files:
+            if file.endswith(".md"):
+                with open(f"{root}/{file}", "r", encoding='utf8') as f:
+                    content = f.read()
+                # find all text between aliases: and --- of that
+                aliases_lines = re.findall(r"^aliases:.*?---", content, re.MULTILINE | re.DOTALL)
+                # split lines by new line
+                aliases_lines = [line.split("\n") for line in aliases_lines]
+                # flatten list
+                aliases_lines = [item for sublist in aliases_lines for item in sublist]
+                # filter line that starts with "- \"/", "- \'/" or "- /", skip blanks before
+                aliases_lines = [line for line in aliases_lines if
+                                 line.strip().startswith("- \"/") or line.strip().startswith(
+                                     "- \'/") or line.strip().startswith("- /")]
+                if aliases_lines:
+                    # create replacement map
+                    replacements = {}
+                    for line in aliases_lines:
+                        # insert /zh-hans before the first "/"
+                        index = line.find("/")
+                        if index != -1:
+                            replacements[line] = line[:index] + "/zh-hans" + line[index:]
+                    # replace all aliases: lines with the new lines
+                    for line in aliases_lines:
+                        content = content.replace(line, replacements[line])
+                    # write the new content to file
+                    with open(f"{root}/{file}", "w", encoding='utf8') as f:
+                        f.write(content)
+
     print(f"{branch} source content is updated")
 
 
@@ -64,8 +120,9 @@ def update_files_for_building(c):
 
 
 def update_files_for_building_core(branch):
-    docs_dir = f"{dapr_cn_base_dir}/{branch}/daprdocs"
-    github_action_dir = f"{dapr_cn_base_dir}/{branch}/.github/workflows/"
+    branch_dir = f"{dapr_cn_base_dir}/{branch}"
+    docs_dir = f"{branch_dir}/daprdocs"
+    github_action_dir = f"{branch_dir}/.github/workflows/"
     # copy update_config_zh.sh to docs directory
     shutil.copy("./update_config_zh.sh", f"{docs_dir}/update_config_zh.sh")
     # read content of zh-build.yml and replace %%tag%% to branch
@@ -87,18 +144,34 @@ def update_all_submodules(c):
     print("Pull source content of dapr_cn")
     for branch in all_versions:
         repo = Repo(f"{dapr_cn_base_dir}/{branch}")
+
+        print(f"check out {branch}/translate_site")
+        repo.git.checkout(f"{branch}/translate_site")
+
+        print(f"pull {branch}/translate_site")
         repo.git.pull("origin", f"{branch}/translate_site")
+
+        print(f"submodule update {branch}/translate_site")
         repo.submodule_update(init=True, recursive=True)
+
         print(f"{branch} dapr_cn is updated")
 
     print("Pull source content of dapr docs")
     for branch in all_versions:
         repo = Repo(f"{source_base_dir}/{branch}")
+
+        print(f"check out {branch}")
+        repo.git.checkout(branch)
+
+        print(f"pull {branch}")
         repo.git.pull("origin", branch)
+
+        print(f"submodule update {branch}")
         repo.submodule_update(init=True, recursive=True)
         print(f"{branch} dapr docs is updated")
 
     print("Update all submodules done")
+
 
 @task
 def clean_translations(c):
