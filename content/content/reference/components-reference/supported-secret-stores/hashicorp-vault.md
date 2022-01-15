@@ -4,7 +4,7 @@ title: "HashiCorp Vault"
 linkTitle: "HashiCorp Vault"
 description: Detailed information on the HashiCorp Vault secret store component
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/hashicorp-vault/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/hashicorp-vault/"
 ---
 
 ## Create the Vault component

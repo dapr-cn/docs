@@ -4,7 +4,7 @@ title: "SQL Server"
 linkTitle: "SQL Server"
 description: Detailed information on the SQL Server state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-sqlserver/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-sqlserver/"
 ---
 
 ## Component format

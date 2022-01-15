@@ -4,7 +4,7 @@ title: "MQTT binding spec"
 linkTitle: "MQTT"
 description: "Detailed documentation on the MQTT binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/mqtt/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/mqtt/"
 ---
 
 ## Component format

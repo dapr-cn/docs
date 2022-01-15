@@ -4,7 +4,7 @@ title: "Twilio SMS binding spec"
 linkTitle: "Twilio SMS"
 description: "Detailed documentation on the Twilio SMS binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/twilio/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/twilio/"
 ---
 
 ## Component format

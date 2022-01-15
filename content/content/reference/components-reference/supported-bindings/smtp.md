@@ -4,7 +4,7 @@ title: "SMTP binding spec"
 linkTitle: "SMTP"
 description: "Detailed documentation on the SMTP binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/smtp/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/smtp/"
 ---
 
 ## Component format

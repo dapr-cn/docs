@@ -4,7 +4,7 @@ title: "Cron binding spec"
 linkTitle: "Cron"
 description: "Detailed documentation on the cron binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/cron/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/cron/"
 ---
 
 ## Component format

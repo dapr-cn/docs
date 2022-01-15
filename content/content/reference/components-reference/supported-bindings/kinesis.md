@@ -4,7 +4,7 @@ title: "AWS Kinesis binding spec"
 linkTitle: "AWS Kinesis"
 description: "Detailed documentation on the AWS Kinesis binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/kinesis/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/kinesis/"
 ---
 ## Component format
 

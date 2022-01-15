@@ -4,7 +4,7 @@ title: "Azure Event Grid binding spec"
 linkTitle: "Azure Event Grid"
 description: "Detailed documentation on the Azure Event Grid binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/eventgrid/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/eventgrid/"
 ---
 
 ## Component format

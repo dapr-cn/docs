@@ -4,7 +4,7 @@ title: "PostgreSQL"
 linkTitle: "PostgreSQL"
 description: Detailed information on the PostgreSQL state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-postgresql/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-postgresql/"
 ---
 
 ## Create a Dapr component
