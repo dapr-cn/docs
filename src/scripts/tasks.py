@@ -108,6 +108,58 @@ files:
                     with open(f"{root}/{file}", "w", encoding='utf8') as f:
                         f.write(content)
 
+    # special handling for v1.0
+    if branch == "v1.0":
+        # update some html to avoid error in crowdin
+        for root, dirs, files in os.walk(content_dir):
+            for file in files:
+                if file.endswith(".md"):
+                    # update /content/getting-started/_index.md
+                    if file == "_index.md":
+                        with open(f"{root}/_index.md", "r", encoding='utf8') as f:
+                            content = f.read()
+                        content = content.replace(
+                            "<a class=\"btn btn-primary\" href=\"{{< ref install-dapr-cli.md >}}\" role=\"button\">First step: Install the Dapr CLI >></a>",
+                            "[First step: Install the Dapr CLI]({{< ref install-dapr-cli.md >}})")
+                        with open(f"{root}/_index.md", "w", encoding='utf8') as f:
+                            f.write(content)
+                    # update /content/getting-started/get-started-api.md
+                    if file == "get-started-api.md":
+                        with open(f"{root}/get-started-api.md", "r", encoding='utf8') as f:
+                            content = f.read()
+                        content = content.replace(
+                            "<a class=\"btn btn-primary\" href=\"{{< ref get-started-component.md >}}\" role=\"button\">Next step: Define a component >></a>",
+                            "[Next step: Define a component]({{< ref get-started-component.md >}})")
+                        with open(f"{root}/get-started-api.md", "w", encoding='utf8') as f:
+                            f.write(content)
+                    # update /content/getting-started/get-started-component.md
+                    if file == "get-started-component.md":
+                        with open(f"{root}/get-started-component.md", "r", encoding='utf8') as f:
+                            content = f.read()
+                        content = content.replace(
+                            "<a class=\"btn btn-primary\" href=\"{{< ref quickstarts.md >}}\" role=\"button\">Next step: Explore Dapr quickstarts >></a>",
+                            "[Next step: Explore Dapr quickstarts]({{< ref quickstarts.md >}})")
+                        with open(f"{root}/get-started-component.md", "w", encoding='utf8') as f:
+                            f.write(content)
+                    # update /content/getting-started/install-dapr-cli.md
+                    if file == "install-dapr-cli.md":
+                        with open(f"{root}/install-dapr-cli.md", "r", encoding='utf8') as f:
+                            content = f.read()
+                        content = content.replace(
+                            "<a class=\"btn btn-primary\" href=\"{{< ref install-dapr-selfhost.md >}}\" role=\"button\">Next step: Initialize Dapr >></a>",
+                            "[Next step: Initialize Dapr]({{< ref install-dapr-selfhost.md >}})")
+                        with open(f"{root}/install-dapr-cli.md", "w", encoding='utf8') as f:
+                            f.write(content)
+                    # update /content/getting-started/install-dapr-selfhost.md
+                    if file == "install-dapr-selfhost.md":
+                        with open(f"{root}/install-dapr-selfhost.md", "r", encoding='utf8') as f:
+                            content = f.read()
+                        content = content.replace(
+                            "<a class=\"btn btn-primary\" href=\"{{< ref get-started-api.md >}}\" role=\"button\">Next step: Use the Dapr API >></a>",
+                            "[Next step: Use the Dapr API]({{< ref get-started-api.md >}})")
+                        with open(f"{root}/install-dapr-selfhost.md", "w", encoding='utf8') as f:
+                            f.write(content)
+
     print(f"{branch} source content is updated")
 
 
