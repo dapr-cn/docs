@@ -4,7 +4,7 @@ title: "Azure Blob Storage binding spec"
 linkTitle: "Azure Blob Storage"
 description: "Detailed documentation on the Azure Blob Storage binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/blobstorage/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/blobstorage/"
 ---
 
 ## Component format

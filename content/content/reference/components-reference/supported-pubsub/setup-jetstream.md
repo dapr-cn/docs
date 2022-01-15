@@ -4,7 +4,7 @@ title: "JetStream"
 linkTitle: "JetStream"
 description: "Detailed documentation on the NATS JetStream component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-jetstream/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-jetstream/"
 ---
 
 ## Component format

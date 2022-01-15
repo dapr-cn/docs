@@ -4,7 +4,7 @@ title: "GCP Pub/Sub binding spec"
 linkTitle: "GCP Pub/Sub"
 description: "Detailed documentation on the GCP Pub/Sub binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/gcppubsub/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/gcppubsub/"
 ---
 
 ## Component format

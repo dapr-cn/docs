@@ -4,7 +4,7 @@ title: "Postmark binding spec"
 linkTitle: "Postmark"
 description: "Detailed documentation on the Postmark binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/postmark/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/postmark/"
 ---
 
 ## Component format

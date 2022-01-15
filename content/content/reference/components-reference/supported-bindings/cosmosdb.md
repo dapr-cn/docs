@@ -4,7 +4,7 @@ title: "Azure CosmosDB binding spec"
 linkTitle: "Azure CosmosDB"
 description: "Detailed documentation on the Azure CosmosDB binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/cosmosdb/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/cosmosdb/"
 ---
 
 ## Component format

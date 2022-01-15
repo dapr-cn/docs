@@ -4,8 +4,8 @@ title: "Authenticating to Azure"
 linkTitle: "Authenticating to Azure"
 description: "How to authenticate Azure components using Azure AD and/or Managed Identities"
 aliases:
-  - "/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
-  - "/reference/components-reference/supported-secret-stores/azure-keyvault-managed-identity/"
+  - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
+  - "/zh-hans/reference/components-reference/supported-secret-stores/azure-keyvault-managed-identity/"
 ---
 
 ## Common Azure authentication layer

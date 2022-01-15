@@ -5,7 +5,7 @@ linkTitle: "Secret stores"
 description: "Guidance on setting up different secret store components"
 weight: 3000
 aliases:
-  - "/operations/components/setup-state-store/secret-stores-overview/"
+  - "/zh-hans/operations/components/setup-state-store/secret-stores-overview/"
 ---
 
 Dapr integrates with secret stores to provide apps and other components with secure storage and access to secrets such as access keys and passwords. Each secret store component has a name and this name is used when accessing a secret.

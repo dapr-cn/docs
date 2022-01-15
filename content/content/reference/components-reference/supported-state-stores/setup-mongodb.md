@@ -4,7 +4,7 @@ title: "MongoDB"
 linkTitle: "MongoDB"
 description: Detailed information on the MongoDB state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-mongodb/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-mongodb/"
 ---
 
 ## Component format

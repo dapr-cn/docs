@@ -4,7 +4,7 @@ title: "Hazelcast"
 linkTitle: "Hazelcast"
 description: "Detailed documentation on the Hazelcast pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-hazelcast/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-hazelcast/"
 ---
 
 ## Component format

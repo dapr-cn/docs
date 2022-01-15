@@ -4,7 +4,7 @@ title: "In Memory"
 linkTitle: "In Memory"
 description: "Detailed documentation on the In Memory pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-inmemory/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-inmemory/"
 ---
 
 The In Memory pub/sub component is useful for development purposes and works inside of a single machine boundary.

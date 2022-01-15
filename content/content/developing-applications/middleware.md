@@ -5,8 +5,8 @@ linkTitle: "Middleware"
 weight: 50
 description: "Customize processing pipelines by adding middleware components"
 aliases:
-- /developing-applications/middleware/middleware-overview/
-- /concepts/middleware-concept/
+- /zh-hans/developing-applications/middleware/middleware-overview/
+- /zh-hans/concepts/middleware-concept/
 ---
 
 Dapr allows custom processing pipelines to be defined by chaining a series of middleware components. A request goes through all defined middleware components before it's routed to user code, and then goes through the defined middleware, in reverse order, before it's returned to the client, as shown in the following diagram.

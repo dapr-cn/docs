@@ -4,7 +4,7 @@ title: "Azure Event Hubs"
 linkTitle: "Azure Event Hubs"
 description: "Detailed documentation on the Azure Event Hubs pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-azure-eventhubs/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-azure-eventhubs/"
 ---
 
 ## Component format

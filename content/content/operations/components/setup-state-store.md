@@ -5,7 +5,7 @@ linkTitle: "State stores"
 description: "Guidance on setting up different state stores for Dapr state management"
 weight: 1000
 aliases:
-  - "/operations/components/setup-state-store/setup-state-store-overview/"
+  - "/zh-hans/operations/components/setup-state-store/setup-state-store-overview/"
 ---
 
 Dapr integrates with existing databases to provide apps with state management capabilities for CRUD operations, transactions and more. It also supports the configuration of multiple, named, state store components *per application*.

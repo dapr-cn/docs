@@ -4,7 +4,7 @@ title: "Kafka binding spec"
 linkTitle: "Kafka"
 description: "Detailed documentation on the Kafka binding component"
 aliases:
-  - "/operations/components/setup-bindings/supported-bindings/kafka/"
+  - "/zh-hans/operations/components/setup-bindings/supported-bindings/kafka/"
 ---
 
 ## Component format

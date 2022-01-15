@@ -4,7 +4,7 @@ title: "Aerospike"
 linkTitle: "Aerospike"
 description: Detailed information on the Aerospike state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-aerospike/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-aerospike/"
 ---
 
 ## Component format

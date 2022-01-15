@@ -4,7 +4,7 @@ title: "NATS Streaming"
 linkTitle: "NATS Streaming"
 description: "Detailed documentation on the NATS Streaming pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-nats-streaming/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-nats-streaming/"
 ---
 
 ## Component format

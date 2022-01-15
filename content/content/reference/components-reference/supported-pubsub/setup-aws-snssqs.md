@@ -4,7 +4,7 @@ title: "AWS SNS/SQS"
 linkTitle: "AWS SNS/SQS"
 description: "Detailed documentation on the AWS SNS/SQS pubsub component"
 aliases:
-  - "/operations/components/setup-pubsub/supported-pubsub/setup-aws-snssqs/"
+  - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-aws-snssqs/"
 ---
 
 ## Component format

@@ -4,7 +4,7 @@ title: "AWS DynamoDB"
 linkTitle: "AWS DynamoDB"
 description: Detailed information on the AWS DynamoDB state store component
 aliases:
-  - "/operations/components/setup-state-store/supported-state-stores/setup-dynamodb/"
+  - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-dynamodb/"
 ---
 
 ## Component format
