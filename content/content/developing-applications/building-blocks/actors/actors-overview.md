@@ -5,7 +5,7 @@ linkTitle: "Overview"
 weight: 10
 description: Overview of the actors building block
 aliases:
-  - "/developing-applications/building-blocks/actors/actors-background"
+  - "/zh-hans/developing-applications/building-blocks/actors/actors-background"
 ---
 
 ## Introduction 
