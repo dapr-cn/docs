@@ -3,7 +3,7 @@ type: docs
 title: "分析 & 调试"
 linkTitle: "调试"
 weight: 4000
-description: "Discover problems and issues such as concurrency, performance, cpu and memory usage through a profiling session"
+description: "通过分析会话发现问题和问题，如并发性、性能、Cpu 和内存使用情况"
 ---
 
 在任何实际方案中，应用都可能开始在资源峰值方面表现出不良行为。 在大多数情况下，CPU/内存峰值并不少见。

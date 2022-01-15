@@ -6,7 +6,7 @@ description: "关于 Actors API 的详细文档"
 weight: 500
 ---
 
-Dapr 提供原生、跨平台和跨语言 virtual actors 功能。 Besides the [language specific SDKs]({{<ref sdks>}}), a developer can invoke an actor using the API endpoints below.
+Dapr 提供原生、跨平台和跨语言 virtual actors 功能。 除了 [特定语言的 SDK]({{< ref sdks>}})，开发人员还可以使用下面的 API 端点调用参与者。
 
 ## 调用 dapr 的服务代码
 
@@ -179,14 +179,14 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders
 
 #### Request Body
 
-A JSON object with the following fields:
+具有以下字段的 JSON 对象：
 
-| 字段      | 说明                                                                                                                                                                                                |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| dueTime | Specifies the time after which the reminder is invoked, its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) format                                                   |
-| period  | Specifies the period between different invocations, its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) format or ISO 8601 duration format with optional recurrence. |
+| 字段      | 说明                                                                                                      |
+| ------- | ------------------------------------------------------------------------------------------------------- |
+| dueTime | 指定调用提醒的时间，其格式应 [时间。解析](https://pkg.go.dev/time#ParseDuration) 格式                                        |
+| period  | 指定不同调用之间的时间段，其格式应 [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) 格式或 ISO 8601 持续时间格式，可选重复。 |
 
-`period` field supports `time.Duration` format and ISO 8601 format (with some limitations). Only duration format of ISO 8601 duration `Rn/PnYnMnWnDTnHnMnS` is supported for `period`. Here `Rn/` specifies that the reminder will be invoked `n` number of times. It should be a positive integer greater than zero. If certain values are zero, the `period` can be shortened, for example 10 seconds can be specified in ISO 8601 duration as `PT10S`. If `Rn/` is not specified the reminder will run infinite number of times until deleted.
+`period` 字段支持 `time.Duration` 格式和 ISO 8601 格式(有一些限制)。 `period` 仅支持 ISO 8601 持续时间格式， `Rn/PnYnMnWnDTnHnMnS` 。 此处 `Rn/` 指定将调用提醒 `n ` 次。 它应该是一个大于零的正整数。 如果某些值为 0，则 `period` 可以缩短， 例如10秒持续时间可以在ISO 8601 中被指定为 `PT10S`。 如果未指定 `Rn/` ，则提醒将运行无限次，直到删除。
 
 以下指定 `dueTime` 的 3 秒和 7 秒的句点。
 ```json

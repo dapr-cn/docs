@@ -44,14 +44,14 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 
 ### Stable
 
-- The component must have component [certification tests](#certification-tests) validating functionality and resiliency
-- The component is maintained by Dapr maintainers and supported by the community
-- The component is well documented and tested
-- A maintainer will address component security, core functionality and test issues according to the Dapr support policy and issue a patch release that includes the patched stable component
+- 该组件必须有组件[认证测试](#certification-tests)，以验证功能和弹性
+- 该组件由Dapr维护者维护，并得到社区的支持
+- 该组件已有充分文档记录和测试
+- 维护人员将根据 Dapr 支持策略解决组件安全性、核心功能和测试问题，并发布包含修补的稳定组件的补丁版本
 
-### Previous Generally Available (GA) components
+### 以前的正式发布 （GA） 组件
 
-Any component that was previously certified as GA is allowed into Stable even if the new requirements are not met.
+任何以前被认证为 GA 的组件都允许进入稳定版，即使未满足新要求也是如此。
 
 ## 一致性测试
 
@@ -71,45 +71,45 @@ Any component that was previously certified as GA is allowed into Stable even if
 - 测试应该根据组件的规范来验证组件的功能行为和稳健性
 - 重现测试所需的所有细节都作为组件一致性测试文件的一部分加入
 
-## Certification tests
+## 认证测试
 
-Each stable component in the [components-contrib](https://github.com/dapr/components-contrib) repository must have a certification test plan and automated certification tests validating all features supported by the component via Dapr.
+每个稳定组件 [components-contrib](https://github.com/dapr/components-contrib) 存储库必须具有认证测试计划和自动认证测试，以验证该组件通过Dapr支持的所有功能。
 
-Test plan for stable components should include the following scenarios:
+稳定组件的测试计划应包括以下方案：
 
-- Client reconnection: in case the client library cannot connect to the service for a moment, Dapr sidecar should not require a restart once the service is back online.
-- Authentication options: validate the component can authenticate with all the supported options.
-- Validate resource provisioning: validate if the component automatically provisions resources on initialization, if applicable.
-- All scenarios relevant to the corresponding building block and component.
+- 客户端重新连接：如果客户端库暂时无法连接到服务，Dapr sidecar 在服务重新联机后不需要重新启动。
+- 身份验证选项：验证组件是否可以使用所有支持的选项进行身份验证。
+- 验证资源供应：验证该组件是否在初始化时自动供应资源（如果适用）。
+- 与相应的构建基块和组件相关的所有方案。
 
-The test plan must be approved by a Dapr maintainer and be published in a `README.md` file along with the component code.
+测试计划必须得到 Dapr 维护人员的批准，并与组件代码一起发布在 `README.md` 文件中。
 
 ### 测试要求
 
-- The tests should validate the functional behavior and robustness of the component based on the component specification, reflecting the scenarios from the test plan
-- The tests must run successfully as part of the continuous integration of the [components-contrib](https://github.com/dapr/components-contrib) repository
+- 测试应根据组件规范验证组件的功能行为和健壮性，反映测试计划中的场景
+- 测试必须作为[components-contrib](https://github.com/dapr/components-contrib)资源库的持续集成的一部分成功运行。
 
 
 ## 组件认证过程
 
-In order for a component to be certified, tests are run in an environment maintained by the Dapr project.
+为了对组件进行认证，测试在 Dapr 项目维护的环境中运行。
 
-### New component certification: Alpha->Beta
+### 新组件认证：Alpha->Beta
 
-For a new component requiring a certification change from Alpha to Beta, a request for component certification follows these steps:
-- Requestor creates an issue in the [components-contrib](https://github.com/dapr/components-contrib) repository for certification of the component with the current and the new certification levels
-- Requestor submits a PR to integrate the component with the defined conformance test suite, if not already included
-    - The user details the environment setup in the issue created, so a Dapr maintainer can setup the service in a managed environment
+对于需要将认证从 Alpha 更改为 Beta 的新组件，组件认证请求遵循以下步骤：
+- 请求者在[components-contrib](https://github.com/dapr/components-contrib)资源库中创建了一个问题，以便用当前和新的认证级别对该组件进行认证
+- 请求者提交 PR 以将组件与定义的一致性测试套件（如果尚未包含）集成
+    - 用户在创建的问题中详细说明了环境设置，以便Dapr维护者能够在受管理的环境中设置服务
     - 在环境设置完成后，Dapr维护者会审查PR，如果批准，就会合并该PR
-- Requestor submits a PR in the [docs](https://github.com/dapr/docs) repository, updating the component's certification level
+- 请求者在 [docs](https://github.com/dapr/docs) 存储库中提交 PR，从而更新组件的认证级别
 
-### New component certification: Beta->Stable
+### 新组件认证：Beta->稳定版
 
-For a new component requiring a certification change from Beta to Stable, a request for component certification follows these steps:
-- Requestor creates an issue in the [components-contrib](https://github.com/dapr/components-contrib) repository for certification of the component with the current and the new certification levels
-- Requestor submits a PR for the test plan as a `README.md` file in the component's source code directory
-    - The requestor details the test environment requirements in the created PR, including any manual steps or credentials needed
-    - A Dapr maintainer reviews the test plan, provides feedback or approves it, and eventually merges the PR
-- Requestor submits a PR for the automated certification tests, including scripts to provision resources when applicable
-- After the test environment setup is completed and credentials provisioned, Dapr maintainers review the PR and, if approved, merges the PR
-- Requestor submits a PR in the [docs](https://github.com/dapr/docs) repository, updating the component's certification level
+对于需要从 Beta 版更改为稳定版认证的新组件，组件认证请求遵循以下步骤：
+- 请求者在[components-contrib](https://github.com/dapr/components-contrib)资源库中创建了一个问题，以便用当前和新的认证级别对该组件进行认证
+- 请求者将测试计划的 PR 作为组件源代码目录中的 `README.md` 文件提交
+    - 请求者在创建的 PR 中详细说明测试环境要求，包括所需的任何手动步骤或凭据
+    - Dapr 维护者审查测试计划，提供反馈或批准它，并最终合并 PR
+- 请求者为自动认证测试提交 PR，包括用于在适用时预配资源的脚本
+- 在测试环境设置完成并配置凭据后，Dapr 维护人员将检查 PR，如果获得批准，则合并 PR
+- 请求者在 [docs](https://github.com/dapr/docs) 存储库中提交 PR，从而更新组件的认证级别

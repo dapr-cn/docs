@@ -16,45 +16,45 @@ Dapr 由一个数据平面、在应用旁边运行的 sidecar 以及一个配置
 
 * Sidecar (数据平面)
 * Sentry（可选，控制平面）
-* Placement (optional, control plane)
+* Placement（可选，控制平面）
 
 有关详细信息，请参阅 [自承载模式下的 Dapr 概述]({{< ref self-hosted-overview.md >}})。
 
 ### Kubernetes组件
 
 * Sidecar (数据平面)
-* Sentry (optional, control plane)
-* Placement (optional, control planee)
-* Operator (control plane)
-* Sidecar Injector (control plane)
+* Sentry（可选，控制平面）
+* Placement（可选，控制平面）
+* Operator（控制平面）
+* Sidecar Injector（控制平面）
 
-For more information see [overview of Dapr on Kubernetes]({{< ref kubernetes-overview.md >}}).
+有关更多信息，请参阅 [Kubernetes 上的 Dapr 概述]({{< ref kubernetes-overview.md >}}).
 
-## Performance summary for Dapr v1.0
+## Dapr v1.0 的性能摘要
 
-The service invocation API is a reverse proxy with built-in service discovery to connect to other services. This includes tracing, metrics, mTLS for in-transit encryption of traffic, together with resiliency in the form of retries for network partitions and connection errors.
+服务调用 API 是具有内置服务发现的反向代理，用于连接到其他服务。 这包括 tracing、metrics、用于传输中流量加密的 mTLS，以及对网络分区和连接错误提供弹性重试。
 
-Using service invocation you can call from HTTP to HTTP, HTTP to gRPC, gRPC to HTTP, and gRPC to gRPC. Dapr does not use HTTP for the communication between sidecars, always using gRPC, while carrying over the semantics of the protocol used when called from the app. Service invocation is the underlying mechanism of communicating with Dapr Actors.
+使用服务调用，您可以从 HTTP 调用到 HTTP，从 HTTP 调用到 gRPC，从 gRPC 调用到 HTTP，从 gRPC 调用到 gRPC。 Dapr 不使用 HTTP 进行 sidecar 之间的通信，而是始终使用 gRPC，同时继承从应用程序调用时所用协议的语义。 服务调用是与 Dapr Actor 通信的基本机制。
 
-For more information see [service invocation overview]({{< ref service-invocation-overview.md >}}).
+有关详细信息，请参 阅 [服务调用概述]({{< ref service-invocation-overview.md >}})。
 
-### Kubernetes performance test setup
+### Kubernetes性能测试设置
 
-The test was conducted on a 3 node Kubernetes cluster, using commodity hardware running 4 cores and 8GB of RAM, without any network acceleration. The setup included a load tester ([Fortio](https://github.com/fortio/fortio)) pod with a Dapr sidecar injected into it that called the service invocation API to reach a pod on a different node.
+该测试在3节点Kubernetes集群上进行，使用运行4个内核和8GB RAM的商用硬件，没有任何网络加速。 该设置包括一个负载测试器（[Fortio](https://github.com/fortio/fortio)）pod，其中注入了一个Dapr sidecar，调用服务调用API以访问不同节点上的pod。
 
-Test parameters:
+测试参数
 
-* 1000 requests per second
-* Sidecar limited to 0.5 vCPU
-* Sidecar mTLS enabled
-* Sidecar telemetry enabled (tracing with a sampling rate of 0.1)
-* Payload of 1KB
+* 每秒 1000 个请求
+* Sidecar 限制为 0.5 vCPU
+* Sidecar mTLS已启用
+* Sidecar遥测功能已启用(取样率为0.1)
+* 1KB的载荷量
 
-The baseline test included direct, non-encrypted traffic, without telemetry, directly from the load tester to the target app.
+基线测试包括直接从负载测试程序到目标应用的直接、非加密流量（无需遥测）。
 
-### Control plane performance
+### 控制平面性能
 
-The Dapr control plane uses a total of 0.009 vCPU and 61.6 Mb when running in non-HA mode, meaning a single replica per system compoment. When running in a highly available production setup, the Dapr control plane consumes ~0.02 vCPU and 185 Mb.
+在非 HA 模式下运行时，Dapr 控制平面总共使用 0.009 个 vCPU 和 61.6 Mb，这意味着每个系统组件只有一个副本。 在高可用性生产设置中运行时，Dapr 控制平面消耗约 0.02 个 vCPU 和 185 Mb。
 
 | Component (组件)   | vCPU  | Memory  |
 | ---------------- | ----- | ------- |
@@ -63,24 +63,24 @@ The Dapr control plane uses a total of 0.009 vCPU and 61.6 Mb when running in no
 | Sidecar Injector | 0.002 | 14.6 Mb |
 | 放置               | 0.001 | 20.9 Mb |
 
-There are a number of variants that affect the CPU and memory consumption for each of the system components. These variants are shown in the table below.
+有一些变体会影响每个系统组件的CPU和内存消耗。 下表列出了这些变体。
 
-| Component (组件)   | vCPU                                                                   | Memory                          |
-| ---------------- | ---------------------------------------------------------------------- | ------------------------------- |
-| Operator         | Number of pods requesting components, configurations and subscriptions |                                 |
-| Sentry           | Number of certificate requests                                         |                                 |
-| Sidecar Injector | Number of admission requests                                           |                                 |
-| 放置               | Number of actor rebalancing operations                                 | Number of connected actor hosts |
+| Component (组件)   | vCPU            | Memory        |
+| ---------------- | --------------- | ------------- |
+| Operator         | 请求组件、配置和订阅的容器次数 |               |
+| Sentry           | 证书请求次数          |               |
+| Sidecar Injector | Admission 请求次数  |               |
+| 放置               | Actor 重新平衡操作的次数 | 连接的 Actor 主机数 |
 
-### Data plane performance
+### 数据平面性能
 
-The Dapr sidecar uses 0.48 vCPU and 23Mb per 1000 requests per second. End-to-end, the Dapr sidecars (client and server) add ~1.40 ms to the 90th percentile latency, and ~2.10 ms to the 99th percentile latency. End-to-end here is a call from one app to another app receiving a response. This is shown by steps 1-7 in [this diagram]({{< ref service-invocation-overview.md >}}).
+Dapr sidecar 每秒1000 个请求使用 0.48 个 vCPU 和 23Mb 。 端到端，Dapr sidecar（客户端和服务器）在第 90 百分位延迟的基础上增加了约 1.40 毫秒，在第 99 百分位延迟的基础上增加了约 2.10 毫秒。 此处的端到端是从一个应用到另一个应用的调用，以接收响应。 这通过 [此图形]({{< ref service-invocation-overview.md >}}) 中的步骤1-7显示。
 
-This performance is on par or better than commonly used service meshes.
+这种性能优于通常使用的服务网格。
 
-### Latency
+### 延迟
 
-In the test setup, requests went through the Dapr sidecar both on the client side (serving requests from the load tester tool) and the server side (the target app). mTLS and telemetry (tracing with a sampling rate of 0.1) and metrics were enabled on the Dapr test, and disabled for the baseline test.
+在测试设置中，请求通过客户端（为来自负载测试器工具的请求提供服务）和服务器端（目标应用）通过 Dapr sidecar。 在 Dapr 测试上启用了 mTLS 和遥测（采样率为 0.1）和 metrics ，并在基线测试中禁用了这些功能。
 
 <img src="/images/perf_invocation_p90.png" alt="Latency for 90th percentile" />
 

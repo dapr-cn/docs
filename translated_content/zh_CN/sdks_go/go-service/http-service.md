@@ -1,27 +1,27 @@
 ---
-type: docs
-title: "Getting started with the Dapr HTTP Service SDK for Go"
-linkTitle: "HTTP Service"
+type: 文档
+title: "开始使用 Dapr HTTP Service SDK"
+linkTitle: "HTTP服务"
 weight: 10000
-description: How to get up and running with the Dapr HTTP Service SDK for Go
+description: 如何开始和运行 Dapr HTTP Service SDK for Go
 no_list: true
 ---
 
-### Prerequisite
-Start by importing Dapr Go service/http package:
+### 前期准备
+首先导入 Dapr Go service/http 包：
 
 ```go
 daprd "github.com/dapr/go-sdk/service/http"
 ```
 
-### Creating and Starting Service
-To create an HTTP Dapr service, first, create a Dapr callback instance with a specific address:
+### 创建和启动服务
+要创建 HTTP Dapr 服务，首先创建一个具有特定地址的 Dapr 回调实例：
 
 ```go
 s := daprd.NewService(":8080")
 ```
 
-Or with address and an existing http.ServeMux in case you want to combine existing server implementations:
+或者通过地址和现有的 http.ServeMux 来合并现有服务器实现：
 
 ```go
 mux := http.NewServeMux()
@@ -29,7 +29,7 @@ mux.HandleFunc("/", myOtherHandler)
 s := daprd.NewServiceWithMux(":8080", mux)
 ```
 
-Once you create a service instance, you can "attach" to that service any number of event, binding, and service invocation logic handlers as shown below. Onces the logic is defined, you are ready to start the service:
+一旦您创建了一个服务实例，您可以在该服务中“attach”以下显示的事件数量、绑定和服务调用逻辑处理程序。 定义逻辑后，即可启动服务：
 
 ```go
 if err := s.Start(); err != nil && err != http.ErrServerClosed {
@@ -37,8 +37,8 @@ if err := s.Start(); err != nil && err != http.ErrServerClosed {
 }
 ```
 
-### Event Handling
-To handle events from specific topic you need to add at least one topic event handler before starting the service:
+### 事件处理
+要处理来自特定主题的事件，您需要在启动服务之前至少添加一个主题事件处理程序：
 
 ```go
 sub := &common.Subscription{
@@ -52,7 +52,7 @@ if err != nil {
 }
 ```
 
-The handler method itself can be any method with the expected signature:
+处理程序方法本身可以是具有预期签名的任何方法：
 
 ```go
 func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err error) {
@@ -62,8 +62,8 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 }
 ```
 
-### Service Invocation Handler
-To handle service invocations you will need to add at least one service invocation handler before starting the service:
+### 服务调用处理
+要处理服务调用，您需要在启动服务之前添加至少一个服务调用处理程序：
 
 ```go
 if err := s.AddServiceInvocationHandler("/echo", echoHandler); err != nil {
@@ -71,7 +71,7 @@ if err := s.AddServiceInvocationHandler("/echo", echoHandler); err != nil {
 }
 ```
 
-The handler method itself can be any method with the expected signature:
+处理程序方法本身可以是具有预期签名的任何方法：
 
 
 ```go
@@ -87,7 +87,7 @@ func echoHandler(ctx context.Context, in *common.InvocationEvent) (out *common.C
 }
 ```
 
-### Binding Invocation Handler
+### 绑定调用处理
 
 ```go
 if err := s.AddBindingInvocationHandler("/run", runHandler); err != nil {
@@ -95,7 +95,7 @@ if err := s.AddBindingInvocationHandler("/run", runHandler); err != nil {
 }
 ```
 
-The handler method itself can be any method with the expected signature:
+处理程序方法本身可以是具有预期签名的任何方法：
 
 ```go
 func runHandler(ctx context.Context, in *common.BindingEvent) (out []byte, err error) {
@@ -105,4 +105,4 @@ func runHandler(ctx context.Context, in *common.BindingEvent) (out []byte, err e
 }
 ```
 ## 相关链接
-- [Go SDK Examples](https://github.com/dapr/go-sdk/tree/main/examples)
+- [Go SDK 示例](https://github.com/dapr/go-sdk/tree/main/examples)

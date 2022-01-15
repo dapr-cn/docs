@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Dapr Placement control plane service overview"
+title: "Dapr Placement 控制平面服务概述"
 linkTitle: "放置"
-description: "Overview of the Dapr placement service"
+description: "Dapr Placement 服务概述"
 ---
 
-The Dapr Placement service is used to calculate and distribute distributed hash tables for the location of [Dapr actors]({{< ref actors >}}) running in [self-hosted mode]({{< ref self-hosted >}}) or on [Kubernetes]({{< ref kubernetes >}}). This hash table maps actor IDs to pods or processes so a Dapr application can communicate with the actor.Anytime a Dapr application activates a Dapr actor, the placement updates the hash tables with the latest actor locations.
+Dapr Placement 服务用于计算和分发在 [自托管模式]({{< ref self-hosted >}}) 下或 [Kubernetes]({{< ref kubernetes >}})上运行 [Dapr Actor]({{< ref actors >}})位置的分布式哈希表。 此哈希表将 Actor ID映射到 Pod 或进程，这样 Dapr 应用程序就可以与 actor 通信。 任何时候 Dapr 应用程序激活 Dapr actor, 放置服务将会更新散列表中最新的 actor 位置。
 
 ## 自托管模式
 
-The placement service Docker container is started automatically as part of [`dapr init`]({{< ref self-hosted-with-docker.md >}}). It can also be run manually as a process if you are running in [slim-init mode]({{< ref self-hosted-no-docker.md >}}).
+Placement 服务的 Docker 容器作为 [`dapr init`]({{< ref self-hosted-with-docker.md >}}) 的一部分自动运行。 如果你以 [slim-init mode]({{< ref self-hosted-no-docker.md >}}) 模式运行，它也可以作为进程手动运行。
 
-## Kubernetes mode
+## Kubernetes 模式
 
-The placement service is deployed as part of `dapr init -k`, or via the Dapr Helm charts. For more information on running Dapr on Kubernetes, visit the [Kubernetes hosting page]({{< ref kubernetes >}}).
+Placement 服务作为`dapr init -k`或Dapr Helm charts的一部分被部署。 有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。

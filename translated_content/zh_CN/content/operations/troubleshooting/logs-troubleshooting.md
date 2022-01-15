@@ -191,7 +191,7 @@ time="2021-12-04T05:08:07.036909357Z" level=info msg="leader is established." in
 
 ### 非 Kubernetes 环境
 
-The examples above are specific specific to Kubernetes, but the principal is the same for any kind of container based environment: simply grab the container ID of the Dapr sidecar and/or system component (if applicable) and view its logs.
+上面的示例特定于 Kubernetes，但对于任何类型的基于容器的环境，主体都是相同的：只需获取 Dapr sidecar 和/或系统组件（如果适用）的容器 ID 并查看其日志即可。
 
 ## 参考资料
 

@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Dapr Sidecar Injector control plane service overview"
+title: "Dapr Sidecar Injector 控制平面服务概述"
 linkTitle: "Sidecar injector"
-description: "Overview of the Dapr sidecar injector process"
+description: "Dapr Sidecar Injector 过程概述"
 ---
 
-When running Dapr in [Kubernetes mode]({{< ref kubernetes >}}), a pod is created running the Dapr Sidecar Injector service, which looks for pods initialized with the [Dapr annotations]({{< ref arguments-annotations-overview.md >}}), and then creates another container in that pod for the [daprd service]({{< ref sidecar >}})
+当在 [Kubernetes 模式]({{< ref kubernetes >}}) 运行Dapr时，将会创建一个运行 Dapr Sidecar Injector 服务的Pod，他将会寻找通过 [Dapr annotations]({{< ref arguments-annotations-overview.md >}}) 初始化的pods，然后在该 pod 中为 [daprd service]({{< ref sidecar >}}) 创建另一个容器。
 
-## Running the sidecar injector
+## 运行 sidecar injector
 
-The sidecar injector service is deployed as part of `dapr init -k`, or via the Dapr Helm charts. For more information on running Dapr on Kubernetes, visit the [Kubernetes hosting page]({{< ref kubernetes >}}).
+Sidecar injector服务作为`dapr init -k`或Dapr Helm charts的一部分被部署。 有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。
 

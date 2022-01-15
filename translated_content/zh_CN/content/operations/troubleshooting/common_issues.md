@@ -203,7 +203,7 @@ export DAPR_HOST_IP=127.0.0.1
 - 您可能尚未提供 dapr `--components-path` ， `运行` 命令，或者未将组件放入操作系统的默认组件文件夹中。 有关详细信息，请阅读 [定义组件]({{< ref "get-started-component.md" >}}) 。
 - 组件 YAML 文件中可能存在语法问题。 使用 YAML 示例 [组件检查组件 YAML]({{< ref "components.md" >}})。
 
-## Service invocation is failing and my Dapr service is missing an appId (macOS)
+## 服务调用失败，我的 Dapr 服务缺少 appId （macOS）
 
 有些组织将采用能过滤所有UPD流量的软件，这是mDNS的基础。 通常，在MacOS上， `Microsoft Content Filter` 是罪魁祸首。
 

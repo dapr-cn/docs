@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-要设置Apple Push Notifications绑定，请创建一个类型为`bindings.apns`的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置Apple Push Notifications绑定，请创建一个类型为`bindings.apns`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

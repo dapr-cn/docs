@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Kubernetes Events binding create a component of type `bindings.kubernetes`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置 Kubernetes 事件绑定，请创建一个类型为 `bindings.kubernetes`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -30,18 +30,18 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 绑定支持                                                                            | 详情                                           | 示例      |
-| ----------------- |:--:| ------------------------------------------------------------------------------- | -------------------------------------------- | ------- |
-| namespace         | Y  | 输入                                                                              | The Kubernetes namespace to read events from | `"默认值"` |
-| resyncPeriodInSec | N  | Te period of time to refresh event list from Kubernetes API server. 默认值为 `"10"` | `"15"`                                       |         |
+| 字段                | 必填 | 绑定支持                                        | 详情                       | 示例      |
+| ----------------- |:--:| ------------------------------------------- | ------------------------ | ------- |
+| namespace         | Y  | 输入                                          | 要从中读取事件的 Kubernetes 命名空间 | `"默认值"` |
+| resyncPeriodInSec | N  | 从 Kubernetes API 服务器刷新事件列表的时间段。 默认值为 `"10"` | `"15"`                   |         |
 
 ## 绑定支持
 
-This component supports **input** binding interface.
+此组件支持 **输入** 绑定接口。
 
-## Output format
+## 输出格式
 
-Output received from the binding is of format `bindings.ReadResponse` with the `Data` field populated with the following structure:
+从绑定中收到的输出是格式 `bindings.ReadResponse`, 包含 `Data` 字段包含以下结构：
 
 ```json
  {
@@ -73,18 +73,18 @@ Output received from the binding is of format `bindings.ReadResponse` with the `
    }
  }
 ```
-Three different event types are available:
-- Add : Only the `newVal` field is populated, `oldVal` field is an empty `v1.Event`, `event` is `add`
-- Delete : Only the `oldVal` field is populated, `newVal` field is an empty `v1.Event`, `event` is `delete`
-- Update : Both the `oldVal` and `newVal` fields are populated,  `event` is `update`
+有三种不同的事件类型可供选择：
+- 添加 ：仅填充 `newVal` 字段， `oldVal` 字段为空 `v1.Event`， `event` 被 `add`
+- 删除 ：仅填充 `oldVal` 字段， `newVal` 字段为空 `v1.Event`， `event` 被 `delete`
+- 更新 ： `oldVal` 和 `newVal` 字段都已填充，  `event` 被 `update`
 
-## Required permissions
+## 所需权限
 
-For consuming `events` from Kubernetes, permissions need to be assigned to a User/Group/ServiceAccount using [RBAC Auth] mechanism of Kubernetes.
+为了消费来自 `Kubernetes` 的事件，需要使用 Kubernetes 的 [RBAC Auth] 机制将权限分配给用户/组/服务帐户。
 
-### Role
+### 角色
 
-One of the rules need to be of the form as below to give permissions to `get, watch` and `list` `events`. API Groups can be as restrictive as needed.
+其中一个规则需要采用以下格式，以授予 `get, watch` 和 `list` `events`权限。 API 组可以根据需要进行限制。
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1

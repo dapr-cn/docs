@@ -4,7 +4,7 @@ title: "Sentinel 容错中间件组件"
 linkTitle: "Sentinel"
 description: "使用 Sentinel 中间件来保证应用程序的可靠性和弹性"
 aliases:
-  - /developing-applications/middleware/supported-middleware/middleware-sentinel/
+  - /zh-hans/developing-applications/middleware/supported-middleware/middleware-sentinel/
 ---
 
 [Sentinel](https://github.com/alibaba/sentinel-golang) 是一个功能强大的容错组件，它以“流量”为切入点，从流量控制、流量整形、集群限流、熔断降级和系统自适应保护等多个维度来保证微服务的可靠性和弹性。

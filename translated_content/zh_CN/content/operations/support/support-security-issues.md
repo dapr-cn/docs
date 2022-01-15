@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Reporting security issues"
-linkTitle: "Reporting security issues"
+title: "反馈安全漏洞"
+linkTitle: "反馈安全漏洞"
 weight: 3000
-description: "How to report a security concern or vulnerability to the Dapr maintainers."
+description: "如何向 Dapr 维护者报告安全问题或漏洞。"
 ---
 
-The Dapr organization and team makes security a central focus of how we operate and design our software. From the Dapr binaries to the GitHub release processes, we take numerous steps to ensure user applications and data is secure. For more information visit the [security page]({{< ref security-concept.md >}}).
+Dapr组织和团队将安全性作为我们操作和设计软件的核心焦点。 从 Dapr 二进制文件到 GitHub 发布流程，我们采取许多步骤来确保用户应用程序和数据的安全。 详情请访问 [安全页面]({{< ref security-concept.md >}})。
 
-## Reporting security issues
+## 反馈安全漏洞
 
-To report a security issue, please privately email the [Dapr Maintainers (dapr@dapr.io)](mailto:dapr@dapr.io?subject=[Security%20Disclosure]:%20ISSUE%20TITLE)
+要报告安全问题，请私下发送电子邮件给 [Dapr 维护人员 （dapr@dapr.io）](mailto:dapr@dapr.io?subject=[Security%20Disclosure]:%20ISSUE%20TITLE)
 
-The Dapr maintainers will triage and respond ASAP and then patch and send an annoucement within 30 days.
+Dapr 维护人员将尽快进行分类和响应，然后在 30 天内修补并发送公告。

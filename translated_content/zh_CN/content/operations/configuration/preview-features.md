@@ -1,29 +1,29 @@
 ---
 type: docs
-title: "How-To: Enable preview features"
+title: "操作方法：启用预览功能"
 linkTitle: "Preview features"
 weight: 7000
-description: "How to specify and enable preview features"
+description: "如何指定和启用预览功能"
 ---
 
 ## 概述
-Preview features in Dapr are considered experimental when they are first released. These preview features require explicit opt-in in order to be used. 选择加入在 Dapr 的配置中指定。
+Dapr 中的预览功能在首次发布时被视为实验性功能。 这些预览功能需要显式选择加入才能使用。 选择加入在 Dapr 的配置中指定。
 
-Preview features are enabled on a per application basis by setting configuration when running an application instance.
+预览功能是通过在运行应用程序实例时设置配置来基于每个应用程序启用的。
 
-### Preview features
-The current list of preview features can be found [here]({{<ref support-preview-features>}}).
+### 预览功能
+当前的预览功能列表可以在[此处]({{<ref support-preview-features>}})找到。
 
-## Configuration properties
-The `features` section under the `Configuration` spec contains the following properties:
+## 配置属性
+`Configuration` sepc下的 `features` 部分包含以下属性：
 
-| 属性      | 数据类型   | 说明                                                       |
-| ------- | ------ | -------------------------------------------------------- |
-| name    | string | The name of the preview feature that is enabled/disabled |
-| enabled | bool   | Boolean specifying if the feature is enabled or disabled |
+| 属性      | 数据类型   | 说明              |
+| ------- | ------ | --------------- |
+| name    | string | 启用/禁用的预览功能的名称   |
+| enabled | bool   | 指定功能是启用还是禁用的布尔值 |
 
-## Enabling a preview feature
-Preview features are specified in the configuration. Here is an example of a full configuration that contains multiple features:
+## 启用预览功能
+预览功能在配置中指定。 下面是包含多个功能的完整配置的示例：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -42,14 +42,14 @@ spec:
       enabled: true
 ```
 
-### Standalone
-To enable preview features when running Dapr locally, either update the default configuration or specify a separate config file using `dapr run`.
+### 独立模式
+要在本地运行 Dapr 时启用预览功能，请更新默认配置或使用 `dapr run`指定单独的配置文件。
 
 The default Dapr config is created when you run `dapr init`, and is located at:
 - Windows: `%USERPROFILE%\.dapr\config.yaml`
 - Linux/macOS: `~/.dapr/config.yaml`
 
-Alternately, you can update preview features on all apps run locally by specifying the `--config` flag in `dapr run` and pointing to a separate Dapr config file:
+或者，您可以通过在 `dapr run` 中指定 `--config` 标志并指向单独的 Dapr 配置文件来更新本地运行的所有应用的预览功能：
 
 ```bash
 dapr run --app-id myApp --config ./previewConfig.yaml ./app
@@ -57,13 +57,13 @@ dapr run --app-id myApp --config ./previewConfig.yaml ./app
 
 
 ### Kubernetes
-In Kubernetes mode, the configuration must be provided via a configuration component. Using the same configuration as above, apply it via `kubectl`:
+在 Kubernetes 模式下，必须通过配置组件提供配置。 使用与上面相同的配置，通过 `kubectl`应用它：
 
 ```bash
 kubectl apply -f previewConfig.yaml
 ```
 
-This configuration component can then be referenced in any application by modifying the application's configuration to reference that specific configuration component via the `dapr.io/config` element. 例如:
+然后，可以通过修改应用程序的配置以通过 `dapr.io/config` 元素引用该特定配置组件，从而在任何应用程序中引用此配置组件。 例如:
 
 ```yaml
 apiVersion: apps/v1

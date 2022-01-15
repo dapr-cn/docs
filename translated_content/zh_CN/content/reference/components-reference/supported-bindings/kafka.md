@@ -2,14 +2,14 @@
 type: docs
 title: "Kafka binding spec"
 linkTitle: "Kafka"
-description: "Detailed documentation on the Kafka binding component"
+description: "Kafka 组件绑定详细说明"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/kafka/"
 ---
 
 ## 配置
 
-To setup Kafka binding create a component of type `bindings.kafka`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. For details on using `secretKeyRef`, see the guide on [how to reference secrets in components]({{< ref component-secrets.md >}}).
+要设置 Kafka 绑定，请创建一个类型为 `bindings.kafka`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。 有关使用 `secretKeyRef`的详细信息，请参阅有[关如何在组件中引用Secret指南]({{< ref component-secrets.md >}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -43,17 +43,17 @@ spec:
 
 ## 元数据字段规范
 
-| 字段              | 必填 | 绑定支持                                                                                                                   | 详情                                                                                                                                                                                  | 示例                                                         |
-| --------------- |:--:| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| topics          | N  | 输入                                                                                                                     | A comma-separated string of topics.                                                                                                                                                 | `"mytopic1,topic2"`                                        |
-| brokers         | Y  | Input/Output                                                                                                           | A comma-separated string of Kafka brokers.                                                                                                                                          | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"` |
-| consumerGroup   | N  | 输入                                                                                                                     | A kafka consumer group to listen on. Each record published to a topic is delivered to one consumer within each consumer group subscribed to the topic.                              | `"group1"`                                                 |
-| publishTopic    | Y  | 输出                                                                                                                     | The topic to publish to.                                                                                                                                                            | `"mytopic"`                                                |
-| authRequired    | Y  | Input/Output                                                                                                           | Enable [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) authentication with the Kafka brokers.                                                        | `"true"`, `"false"`                                        |
-| saslUsername    | N  | Input/Output                                                                                                           | The SASL username used for authentication. Only required if `authRequired` is set to `"true"`.                                                                                      | `"adminuser"`                                              |
-| saslPassword    | N  | Input/Output                                                                                                           | The SASL password used for authentication. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}). Only required if `authRequired` is set to `"true"`. | `""`, `"KeFg23!"`                                          |
-| initialOffset   | N  | The initial offset to use if no offset was previously committed. Should be "newest" or "oldest". Defaults to "newest". | `"oldest"`                                                                                                                                                                          |                                                            |
-| maxMessageBytes | N  | Input/Output                                                                                                           | The maximum size in bytes allowed for a single Kafka message. Defaults to 1024.                                                                                                     | `2048`                                                     |
+| 字段              | 必填 | 绑定支持                                                       | 详情                                                                                                                    | 示例                                                         |
+| --------------- |:--:| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| topics          | N  | 输入                                                         | 以逗号分隔的主题字符串。                                                                                                          | `"mytopic1,topic2"`                                        |
+| brokers         | Y  | Input/Output                                               | 以逗号分隔的 Kafka broker。                                                                                                  | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"` |
+| consumerGroup   | N  | 输入                                                         | 监听 kafka 消费者组。 发布到主题的每条记录都会传递给订阅该主题的每个消费者组中的一个消费者。                                                                    | `"group1"`                                                 |
+| publishTopic    | Y  | 输出                                                         | 要发布的主题。                                                                                                               | `"mytopic"`                                                |
+| authRequired    | Y  | Input/Output                                               | 启用 [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) 对 Kafka broker 的身份验证。               | `"true"`, `"false"`                                        |
+| saslUsername    | N  | Input/Output                                               | 用于身份验证的 SASL 用户名。 仅当 `authRequired` 设置为 `"true"`时才需要。                                                                 | `"adminuser"`                                              |
+| saslPassword    | N  | Input/Output                                               | 用于身份验证的 SASL 密码。 可以用`secretKeyRef`来[引用 Secret]({{< ref component-secrets.md >}})。 仅当 `authRequired` 设置为 `"true"`时才需要。 | `""`, `"KeFg23!"`                                          |
+| initialOffset   | N  | 如果以前未提交任何偏移量，则要使用的初始偏移量。 应为"newest"或"oldest"。 默认为"newest"。 | `"oldest"`                                                                                                            |                                                            |
+| maxMessageBytes | N  | Input/Output                                               | 单条Kafka消息允许的最大消息的字节大小。 默认值为 1024。                                                                                     | `2048`                                                     |
 
 ## 绑定支持
 
@@ -63,11 +63,11 @@ spec:
 
 - `create`
 
-## Specifying a partition key
+## 指定分区键
 
-When invoking the Kafka binding, its possible to provide an optional partition key by using the `metadata` section in the request body.
+调用 Kafka 绑定时，可以使用请求正文中的 `metadata` 部分提供可选的分区键。
 
-The field name is `partitionKey`.
+字段名称为 `partitionKey`。
 
 示例:
 

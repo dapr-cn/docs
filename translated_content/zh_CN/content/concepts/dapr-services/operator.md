@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Dapr Operator control plane service overview"
+title: "Dapr operator 控制平面服务概述"
 linkTitle: "Operator"
-description: "Overview of the Dapr operator service"
+description: "Dapr operator 服务概述"
 ---
 
-When running Dapr in [Kubernetes mode]({{< ref kubernetes >}}), a pod running the Dapr Operator service manages [Dapr component]({{< ref components >}}) updates and provides Kubernetes services endpoints for Dapr.
+当在 [Kubernetes 模式]({{< ref kubernetes >}})运行 Dapr 时，运行 Dapr Operator 服务的 pod 管理[ dapr 组件]({{< ref components >}}) 更新，并为 Dapr 提供 Kubernetes 服务端点。
 
-## Running the operator service
+## 运行Operator服务
 
-The operator service is deployed as part of `dapr init -k`, or via the Dapr Helm charts. For more information on running Dapr on Kubernetes, visit the [Kubernetes hosting page]({{< ref kubernetes >}}).
+Operator服务作为`dapr init -k`或Dapr Helm charts的一部分被部署。 有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。
