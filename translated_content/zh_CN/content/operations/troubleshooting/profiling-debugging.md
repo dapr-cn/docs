@@ -10,7 +10,7 @@ In any real world scenario, an app might start exhibiting undesirable behavior i
 
 Dapr allows users to start an on-demand profiling session using `pprof` through its profiling server endpoint and start an instrumentation session to discover problems and issues such as concurrency, performance, cpu and memory usage.
 
-## Enable profiling
+## 启用性能分析
 
 Dapr allows you to enable profiling in both Kubernetes and stand-alone modes.
 

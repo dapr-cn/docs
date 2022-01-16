@@ -83,7 +83,7 @@ GET http://localhost:<appPort>/dapr/subscribe
 
 A json encoded array of strings.
 
-Example:
+示例:
 
 ```json
 [

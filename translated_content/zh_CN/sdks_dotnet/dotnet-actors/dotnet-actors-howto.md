@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "在.NET SDK中运行和使用 virtual actors 的例子。"
-linkTitle: "Example"
+linkTitle: "示例"
 weight: 300000
 description: 试用 .NET Dapr virtual actors
 ---

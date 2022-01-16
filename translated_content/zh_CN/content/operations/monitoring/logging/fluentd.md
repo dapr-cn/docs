@@ -108,7 +108,7 @@ fluentd-sdrld                 1/1     Running   0          14s
 
 添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml.
 
-Example:
+示例:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment

@@ -38,10 +38,10 @@ spec:
 ```
 **TLS：** 如果Redis 实例支持公开证书的TLS，它可以配置为启用或禁用 TLS `true` 或 `fals`
 
-**Failover:** When set to `true` enables the failover feature. The redisHost should be the sentinel host address. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel)
+**Failover:** When set to `true` enables the failover feature. redisHost 应该是哨兵主机地址。 请参阅 [Redis Sentinel 文档](https://redis.io/topics/sentinel)
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 
@@ -54,50 +54,50 @@ If you wish to use Redis as an actor store, append the following to the yaml.
 
 ## 元数据字段规范
 
-| 字段                 | 必填 | 详情                                                                                             | Example                                                         |
-| ------------------ |:--:| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| redisHost          | Y  | Redis的连接地址                                                                                     | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
-| redisPassword      | Y  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                          | `""`, `"KeFg23!"`                                               |
-| consumerID         | N  | 消费组 ID                                                                                         | `"mygroup"`                                                     |
-| enableTLS          | N  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                                               | `"true"`, `"false"`                                             |
-| maxRetries         | N  | Maximum number of retries before giving up. Defaults to `3`                                    | `5`, `10`                                                       |
-| maxRetryBackoff    | N  | Minimum backoff between each retry. Defaults to `2` seconds                                    | `3000000000`                                                    |
-| failover           | N  | Property to enabled failover configuration. Needs sentinalMasterName to be set. 默认值为 `"false"` | `"true"`, `"false"`                                             |
-| sentinelMasterName | N  | The sentinel master name. See [Redis Sentinel Documentation](https://redis.io/topics/sentinel) | `""`,  `"127.0.0.1:6379"`                                       |
-| actorStateStore    | N  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"`                                                             | `"true"`, `"false"`                                             |
+| 字段                 | 必填 | 详情                                                               | 示例                                                              |
+| ------------------ |:--:| ---------------------------------------------------------------- | --------------------------------------------------------------- |
+| redisHost          | Y  | Redis的连接地址                                                       | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
+| redisPassword      | Y  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                            | `""`, `"KeFg23!"`                                               |
+| consumerID         | N  | 消费组 ID                                                           | `"mygroup"`                                                     |
+| enableTLS          | N  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                 | `"true"`, `"false"`                                             |
+| maxRetries         | N  | 放弃前的最大重试次数。 默认值为 `3`。                                            | `5`, `10`                                                       |
+| maxRetryBackoff    | N  | 每次重试之间的最小回退。 Defaults to `2` seconds                             | `3000000000`                                                    |
+| failover           | N  | 已启用故障转移配置的属性。 需要设置 sentinalMasterName。 默认值为 `"false"`            | `"true"`, `"false"`                                             |
+| sentinelMasterName | N  | 哨兵主名称。 请参阅 [Redis Sentinel 文档](https://redis.io/topics/sentinel) | `""`,  `"127.0.0.1:6379"`                                       |
+| actorStateStore    | N  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"`                               | `"true"`, `"false"`                                             |
 
-## Setup Redis
+## 安装 Redis
 
-Dapr can use any Redis instance - containerized, running on your local dev machine, or a managed cloud service. If you already have a Redis store, move on to the [Configuration](#configuration) section.
+Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机上的、容器化的还是托管在云上的。 If you already have a Redis store, move on to the [Configuration](#configuration) section.
 
 {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
-A Redis instance is automatically created as a Docker container when you run `dapr init`
+当您运行 dapr init `时，Redis 实例会自动创建为 Docker 容器`
 {{% /codetab %}}
 
 {{% codetab %}}
-We can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Kubernetes cluster. 这种方法需要[安装Helm](https://github.com/helm/helm#install)。
+我们可以使用 [Helm](https://helm.sh/) 在 Kubernetes 集群中快速创建一个 Redis 实例。 这种方法需要[安装Helm](https://github.com/helm/helm#install)。
 
-1. 安装 Redis 到你的集群： Note that we're explicitly setting an image tag to get a version greater than 5, which is what Dapr' pub/sub functionality requires. If you're intending on using Redis as just a state store (and not for pub/sub), you do not have to set the image version.
+1. 安装 Redis 到你的集群： 注意，我们显示地设置了一个镜像标签，以获得大于5的版本，这是Dapr的pub/sub功能的要求。 如果您打算将 Redis 仅用作状态存储（而不是用于发布/订阅），则不必设置映像版本。
     ```bash
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm install redis bitnami/redis
     ```
 
 2. 执行`kubectl get pods`来查看现在正在集群中运行的Redis容器。
-3. Add `redis-master:6379` as the `redisHost` in your [redis.yaml](#configuration) file. 例如:
+3. 在 [redis.yaml](#configuration) 文件中为 `redisHost` 添加 `redis-master：6379`。 例如:
     ```yaml
         metadata:
         - name: redisHost
           value: redis-master:6379
     ```
-4. Next, we'll get the Redis password, which is slightly different depending on the OS we're using:
+4. 接下来，我们将获取Redis密码，该密码根据我们使用的操作系统而略有不同：
     - **Windows**：执行`kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`，这将创建一个有你的加密后密码的文件。 接下来，执行`certutil -decode encoded.b64 password.txt`，它将把你的redis密码放在一个名为`password.txt`的文本文件中。 复制密码，删除这两个文件。
 
     - **Linux/MacOS**：执行 `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode`并复制输出的密码。
 
-    Add this password as the `redisPassword` value in your [redis.yaml](#configuration) file. 例如:
+    将此密码添加为 [redis.yaml](#configuration) 文件中 `redisPassword` 值。 例如:
     ```yaml
         metadata:
         - name: redisPassword
@@ -106,35 +106,42 @@ We can use [Helm](https://helm.sh/) to quickly create a Redis instance in our Ku
 {{% /codetab %}}
 
 {{% codetab %}}
-**Note**: this approach requires having an Azure Subscription.
+**注意**：此方法需要具有 Azure 订阅。
 
-1. Open [this link](https://ms.portal.azure.com/#create/Microsoft.Cache) to start the Azure Cache for Redis  creation flow. 如有必要，请登录。
-2. Fill out necessary information and **check the "Unblock port 6379" box**, which will allow us to persist state without SSL.
+1. 打开 [此链接](https://ms.portal.azure.com/#create/Microsoft.Cache) 启动 Azure Cache 用于 Redis 创建流程。 如有必要，请登录。
+2. 填写必要的信息并 **选中"Unblock port 6379"框**，这将使我们能够在没有SSL的情况下保留状态。
 3. 点击“创建”来启动您的 Redis 实例的部署。
-4. Once your instance is created, you'll need to grab the Host name (FQDN) and your access key.
-   - for the Host name navigate to the resources "Overview" and copy "Host name"
-   - for your access key navigate to "Access Keys" under "Settings" and copy your key.
-5. Finally, we need to add our key and our host to a `redis.yaml` file that Dapr can apply to our cluster. If you're running a sample, you'll add the host and key to the provided `redis.yaml`. If you're creating a project from the ground up, you'll create a `redis.yaml` file as specified in [Configuration](#configuration). Set the `redisHost` key to `[HOST NAME FROM PREVIOUS STEP]:6379` and the `redisPassword` key to the key you copied in step 4. **Note:** In a production-grade application, follow [secret management]({{< ref component-secrets.md >}}) instructions to securely manage your secrets.
+4. 创建实例后，您需要获取主机名 （FQDN） 和访问密钥。
+   - 为主机名称导航到资源 "概览 "并复制 "主机名称"。
+   - 为你的访问密钥导航到 "设置 "下的 "访问密钥 "并复制你的密钥。
+5. 最后，我们需要将我们的密钥和主机添加到一个`redis.yaml`文件中，以便Dapr可以应用到我们的集群。 如果正在运行示例，则需要将主机和密钥添加到提供的 `redis.yaml`。 如果要从头开始创建项目，则需要创建一个 `redis.yaml` 文件，如 [配置](#configuration)中指定的那样。 将 `redisHost` 键设置为 `[HOST NAME FROM PREVIOUS STEP]:6379` ， `redisPassword` 是您在步骤 4 中复制的密钥的密钥。 **注意：** 在生产级应用程序中，请按照 [秘钥管理]({{< ref component-secrets.md >}}) 说明安全地管理秘钥。
 
-> **NOTE:** Dapr pub/sub uses [Redis Streams](https://redis.io/topics/streams-intro) that was introduced by Redis 5.0, which isn't currently available on Azure Managed Redis Cache. Consequently, you can use Azure Managed Redis Cache only for state persistence. 
+> **注意：** Dapr 发布/订阅使用 Redis 5.0 引入的 redis Streams</a> ，该功能目前在 Azure 托管 Redis 缓存中不可用。 因此，只能将 Azure 托管 Redis 缓存用于状态持久性。 </p> 
+> 
+> {{% /codetab %}}</blockquote> 
+> 
+> {{% codetab %}}
+> 
+> [AWS Redis](https://aws.amazon.com/redis/) 
 > 
 > {{% /codetab %}}
-
-{{% codetab %}}
-[AWS Redis](https://aws.amazon.com/redis/)
-{{% /codetab %}}
-
-{{% codetab %}}
-[GCP Cloud MemoryStore](https://cloud.google.com/memorystore/)
-{{% /codetab %}}
-
-{{< /tabs >}}
-
-{{% alert title="Note" color="primary" %}}
-作为`dapr init`命令的一部分，Dapr CLI会在自托管模式下自动部署本地redis实例。
-{{% /alert %}}
-
-## 相关链接
-- [Dapr组件的基本格式]({{< ref component-schema >}})
-- 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
-- [状态管理构建块]({{< ref state-management >}})
+> 
+> {{% codetab %}}
+> 
+> [GCP Cloud MemoryStore](https://cloud.google.com/memorystore/) 
+> 
+> {{% /codetab %}}
+> 
+> {{< /tabs >}}
+> 
+> {{% alert title="Note" color="primary" %}}
+> 
+> 作为`dapr init`命令的一部分，Dapr CLI会在自托管模式下自动部署本地redis实例。 
+> 
+> {{% /alert %}}
+> 
+> ## 相关链接
+> 
+> - [Dapr组件的基本格式]({{< ref component-schema >}})
+> - 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
+> - [状态管理构建块]({{< ref state-management >}})

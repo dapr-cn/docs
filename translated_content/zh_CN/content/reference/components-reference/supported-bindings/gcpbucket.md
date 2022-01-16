@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup GCP Storage Bucket binding create a component of type `bindings.gcp.bucket`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup GCP Storage Bucket binding create a component of type `bindings.gcp.bucket`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -47,12 +47,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                              | 必填 | 绑定支持 | 详情                       | Example                                                                                          |
+| 字段                              | 必填 | 绑定支持 | 详情                       | 示例                                                                                               |
 | ------------------------------- |:--:| ---- | ------------------------ | ------------------------------------------------------------------------------------------------ |
 | bucket                          | Y  | 输出   | The bucket name          | `"mybucket"`                                                                                     |
 | type                            | Y  | 输出   | Tge GCP credentials type | `"service_account"`                                                                              |
