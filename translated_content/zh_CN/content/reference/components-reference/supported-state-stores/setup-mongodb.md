@@ -43,7 +43,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 如果您想要使用 MongoDB 作为 Actor 存储，请在 yaml 上附上以下内容。
@@ -56,7 +56,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               |      必填       | 详情                                                                               | Example                                                               |
+| 字段               |      必填       | 详情                                                                               | 示例                                                                    |
 | ---------------- |:-------------:| -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | 服务器              | Y<sup>*</sup> | The server to connect to, when using DNS SRV record                              | `"server.example.com"`                                                |
 | host             | Y<sup>*</sup> | 要连接的主机                                                                           | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |

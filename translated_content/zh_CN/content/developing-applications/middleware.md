@@ -5,8 +5,8 @@ linkTitle: "中间件"
 weight: 50
 description: "通过添加中间件组件自定义处理管道"
 aliases:
-  - /developing-applications/middleware/middleware-overview/
-  - /concepts/middleware-concept/
+  - /zh-hans/developing-applications/middleware/middleware-overview/
+  - /zh-hans/concepts/middleware-concept/
 ---
 
 Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 请求在路由到用户代码之前经过所有已定义的中间件组件，然后在返回到客户机之前，按相反顺序经过已定义的中间件，如下图中所示。

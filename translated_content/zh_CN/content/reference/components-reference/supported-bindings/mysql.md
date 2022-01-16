@@ -9,9 +9,9 @@ aliases:
 
 ## 配置
 
-To setup MySQL binding create a component of type `bindings.mysql`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+要设置 MySQL 绑定，请创建一个类型为 `bindings.mysql`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-The MySQL binding uses [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) internally.
+MySQL 绑定在内部使用[Go-MySQL-驱动程序](https://github.com/go-sql-driver/mysql) 。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -38,23 +38,23 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段              | 必填 | 绑定支持 | 详情                                                                                                        | Example                                      |
-| --------------- |:--:| ---- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| url             | Y  | 输出   | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"` |
-| pemPath         | Y  | 输出   | Path to the PEM file. Used with SSL connection                                                            | `"path/to/pem/file"`                         |
-| maxIdleConns    | N  | 输出   | The max idle connections. Integer greater than 0                                                          | `"10"`                                       |
-| maxOpenConns    | N  | 输出   | The max open connections. Integer greater than 0                                                          | `"10"`                                       |
-| connMaxLifetime | N  | 输出   | The max connection lifetime. Duration string                                                              | `"12s"`                                      |
-| connMaxIdleTime | N  | 输出   | The max connection idel time. Duration string                                                             | `"12s"`                                      |
+| 字段              | 必填 | 绑定支持 | 详情                                                                 | 示例                                           |
+| --------------- |:--:| ---- | ------------------------------------------------------------------ | -------------------------------------------- |
+| url             | Y  | 输出   | 以数据源名称 （DNS） 格式表示数据库连接。 请参阅 [此处](#ssl-connection-details) SSL 详细信息 | `"user:password@tcp(localhost:3306)/dbname"` |
+| pemPath         | Y  | 输出   | PEM 文件的路径。 用于SSL 连接                                                | `"path/to/pem/file"`                         |
+| maxIdleConns    | N  | 输出   | 最大空闲连接数。 大于 0 的整数                                                  | `"10"`                                       |
+| maxOpenConns    | N  | 输出   | 最大打开连接数。 大于 0 的整数                                                  | `"10"`                                       |
+| connMaxLifetime | N  | 输出   | 最长连接生存期。 持续时间字符串                                                   | `"12s"`                                      |
+| connMaxIdleTime | N  | 输出   | 最大连接空闲时间。 持续时间字符串                                                  | `"12s"`                                      |
 
 ### SSL connection
 
-If your server requires SSL your connection string must end of `&tls=custom` for example:
+如果您的服务器需要 SSL，则连接字符串必须以 `&tls=custom` 结尾，例如：
 ```bash
 "<user>:<password>@tcp(<server>:3306)/<database>?allowNativePasswords=true&tls=custom"
 ```
@@ -70,7 +70,7 @@ If your server requires SSL your connection string must end of `&tls=custom` for
 
 ### exec
 
-The `exec` operation can be used for DDL operations (like table creation), as well as `INSERT`, `UPDATE`, `DELETE` operations which return only metadata (e.g. number of affected rows).
+`exec` 操作可用于 DDL 操作（如表创建），以及 `INSERT`、 `UPDATE`、 `DELETE` 仅返回元数据的操作（例如受影响的行数）。
 
 **请求**
 
@@ -100,7 +100,7 @@ The `exec` operation can be used for DDL operations (like table creation), as we
 
 ### query
 
-The `query` operation is used for `SELECT` statements, which returns the metadata along with data in a form of an array of row values.
+`query` 操作用于 `SELECT` 语句，该语句以行值数组的形式返回元数据和数据。
 
 **请求**
 
@@ -134,7 +134,7 @@ The `query` operation is used for `SELECT` statements, which returns the metadat
 
 ### close
 
-Finally, the `close` operation can be used to explicitly close the DB connection and return it to the pool. This operation doesn't have any response.
+最后， `close` 操作可用于显式关闭数据库连接并将其返回到池中。 此操作没有任何响应。
 
 **请求**
 
@@ -144,7 +144,7 @@ Finally, the `close` operation can be used to explicitly close the DB connection
 }
 ```
 
-> Note, the MySQL binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
+> 请注意，MySQL绑定本身不会阻止SQL注入，就像任何数据库应用程序一样，在执行查询之前验证输入。
 
 ## 相关链接
 
