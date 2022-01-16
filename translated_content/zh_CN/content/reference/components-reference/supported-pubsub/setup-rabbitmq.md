@@ -39,12 +39,12 @@ spec:
     value: parallel
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 详情                                                                                                                                        | Example                           |
+| 字段                | 必填 | 详情                                                                                                                                        | 示例                                |
 | ----------------- |:--:| ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | host              | Y  | Rabbitmq 的连接地址                                                                                                                            | `amqp://user:pass@localhost:5672` |
 | durable           | N  | 是否使用[durable](https://www.rabbitmq.com/queues.html#durability)队列， 默认值为 `"false"` 默认值为 `"false"`                                           | `"true"`, `"false"`               |
@@ -91,6 +91,6 @@ helm install rabbitmq stable/rabbitmq
 
 
 ## 相关链接
-- [Basic schema for a Dapr component]({{< ref component-schema >}}) in the Related links section
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
+- 相关链接部分中的[Dapr组件的基本格式]({{< ref component-schema >}})
+- 阅读 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}})，了解配置 发布/订阅组件的说明
 - [发布/订阅构建块]({{< ref pubsub >}})

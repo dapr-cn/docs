@@ -36,7 +36,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 If you wish to use Redis as an actor store, append the following to the yaml.
@@ -53,7 +53,7 @@ Additionally, if the optional `archive` metadata is set to `true`, on each state
 
 ## 元数据字段规范
 
-| 字段       | 必填 | 详情                                       | Example                                                            |
+| 字段       | 必填 | 详情                                       | 示例                                                                 |
 | -------- |:--:| ---------------------------------------- | ------------------------------------------------------------------ |
 | address  | Y  | The address for RethinkDB server         | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
 | database | Y  | The database to use. Alpha-numerics only | `"dapr"`                                                           |

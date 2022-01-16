@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup SMTP binding create a component of type `bindings.smtp`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup SMTP binding create a component of type `bindings.smtp`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -45,12 +45,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The example configuration shown above, contain a username and password as plain-text strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+The example configuration shown above, contain a username and password as plain-text strings. 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段            | 必填 | 绑定支持 | 详情                                                                                     | Example             |
+| 字段            | 必填 | 绑定支持 | 详情                                                                                     | 示例                  |
 | ------------- |:--:| ---- | -------------------------------------------------------------------------------------- | ------------------- |
 | host          | Y  | 输出   | The host where your SMTP server runs                                                   | `"smtphost"`        |
 | port          | Y  | 输出   | The port your SMTP server listens on                                                   | `"9999"`            |
@@ -83,7 +83,7 @@ When sending an email, the metadata in the configuration and in the request is c
 
 The `emailTo`, `emailCC` and `emailBCC` fields can contain multiple email addresses separated by a semicolon.
 
-Example:
+示例:
 ```json
 {
   "operation": "create",

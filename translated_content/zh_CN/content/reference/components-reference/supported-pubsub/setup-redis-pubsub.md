@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-要设置Redis Streams pubsub，请创建一个类型为`pubsub.redis`的组件。 See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+要设置Redis Streams pubsub，请创建一个类型为`pubsub.redis`的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -32,21 +32,21 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 详情                                                                                                                           | Example                                                         |
-| ----------------- |:--:| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| redisHost         | Y  | Redis的连接地址                                                                                                                   | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
-| redisPassword     | Y  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                                                        | `""`, `"KeFg23!"`                                               |
-| consumerID        | N  | 消费组 ID                                                                                                                       | `"mygroup"`                                                     |
-| enableTLS         | N  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                                                                             | `"true"`, `"false"`                                             |
-| redeliverInterval | N  | The interval between checking for pending messages to redelivery. Defaults to `"60s"`. `"0"` disables redelivery.            | `"30s"`                                                         |
-| processingTimeout | N  | The amount time a message must be pending before attempting to redeliver it. Defaults to `"15s"`. `"0"` disables redelivery. | `"30s"`                                                         |
-| queueDepth        | N  | The size of the message queue for processing. 默认值为 `"100"`.                                                                  | `"1000"`                                                        |
-| 并发（Concurrency）   | N  | The number of concurrent workers that are processing messages. 默认值为 `"10"`.                                                  | `"15"`                                                          |
+| 字段                | 必填 | 详情                                               | 示例                                                              |
+| ----------------- |:--:| ------------------------------------------------ | --------------------------------------------------------------- |
+| redisHost         | Y  | Redis的连接地址                                       | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
+| redisPassword     | Y  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。            | `""`, `"KeFg23!"`                                               |
+| consumerID        | N  | 消费组 ID                                           | `"mygroup"`                                                     |
+| enableTLS         | N  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"` | `"true"`, `"false"`                                             |
+| redeliverInterval | N  | 检查待处理消息到重发的间隔。 默认为 `"60s"`. `"0"` 禁用重发。          | `"30s"`                                                         |
+| processingTimeout | N  | 在尝试重新发送消息之前必须等待的时间。 默认为 `"15s"`。 `"0"` 禁用重发。     | `"30s"`                                                         |
+| queueDepth        | N  | 用于处理的消息队列的大小。 默认值为 `"100"`.                      | `"1000"`                                                        |
+| 并发（Concurrency）   | N  | 正在处理消息的并发工作线程数。 默认值为 `"10"`.                     | `"15"`                                                          |
 
 ## 创建Redis实例
 
@@ -110,5 +110,5 @@ Dapr CLI将自动为你创建和设置一个Redis Streams实例。 当你执行`
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
+- 阅读 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}})，了解配置 发布/订阅组件的说明
 - [发布/订阅构建块]({{< ref pubsub >}})

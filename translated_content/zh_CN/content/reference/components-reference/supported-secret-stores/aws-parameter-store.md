@@ -38,7 +38,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 详情                                                                          | Example             |
+| 字段           | 必填 | 详情                                                                          | 示例                  |
 | ------------ |:--:| --------------------------------------------------------------------------- | ------------------- |
 | region       | Y  | The specific AWS region the AWS SSM Parameter Store instance is deployed in | `"us-east-1"`       |
 | accessKey    | Y  | 要访问此资源的 AWS 访问密钥                                                            | `"key"`             |
