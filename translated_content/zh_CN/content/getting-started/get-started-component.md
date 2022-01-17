@@ -65,7 +65,7 @@ spec:
 dapr run --app-id myapp --dapr-http-port 3500 --components-path ./my-components
 ```
 
-> If you encounter a error message stating the app ID is already in use, it may be that the sidecar you ran in the previous step is still running. Make sure you stop the sidecar before running the above command (e.g. using "Control-C").
+> 如果您遇到错误，说明应用程序ID已经在使用， 你在上一步中运行的sidecar可能仍在运行。 请确保您在运行上面的命令前，停止之前运行的sidecar (例如使用 "Control-C")。
 
 ## 第 4 步：获取一个密钥
 

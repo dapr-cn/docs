@@ -3,7 +3,7 @@ type: docs
 title: "Dapr Java SDK"
 linkTitle: "Java"
 weight: 1000
-description: Java SDK packages for developing Dapr applications
+description: 开发 Dapr 应用程序的 Java SDK 包
 ---
 
 ## 前提
