@@ -4,7 +4,7 @@ title: "大写请求实体"
 linkTitle: "Uppercase"
 description: "测试您的 HTTP 管道与大写中间件一起运行"
 aliases:
-  - /developing-applications/middleware/supported-middleware/middleware-uppercase/
+  - /zh-hans/developing-applications/middleware/supported-middleware/middleware-uppercase/
 ---
 
 The uppercase [HTTP middleware]({{< ref middleware.md >}}) converts the body of the request to uppercase letters and is used for testing that the pipeline is functioning. 它只应用于本地开发。

@@ -95,7 +95,7 @@ A JSON array of state objects. Each state object is comprised with the following
 
 None.
 
-### Example
+### 示例
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state/starwars \
@@ -157,7 +157,7 @@ GET http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 #### Response Body
 JSON-encoded value
 
-### Example
+### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/state/starwars/planet \
@@ -211,7 +211,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/bulk
 #### Response Body
 An array of JSON-encoded values
 
-### Example
+### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/state/myRedisStore/bulk \
@@ -286,7 +286,7 @@ DELETE http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 #### Response Body
 None.
 
-### Example
+### 示例
 
 ```shell
 curl -X "DELETE" http://localhost:3500/v1.0/state/starwars/planet -H "If-Match: xxxxxxx"

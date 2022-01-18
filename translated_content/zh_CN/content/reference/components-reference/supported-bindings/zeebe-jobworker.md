@@ -7,7 +7,7 @@ description: "Detailed documentation on the Zeebe JobWorker binding component"
 
 ## 配置
 
-To setup Zeebe JobWorker binding create a component of type `bindings.zeebe.jobworker`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Zeebe JobWorker binding create a component of type `bindings.zeebe.jobworker`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 See [this](https://docs.camunda.io/docs/product-manuals/concepts/job-workers) for Zeebe JobWorker documentation.
 
@@ -51,7 +51,7 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                     | 必填 | 绑定支持 | 详情                                                                                                                                                                                                                                                                                                      | Example                              |
+| 字段                     | 必填 | 绑定支持 | 详情                                                                                                                                                                                                                                                                                                      | 示例                                   |
 | ---------------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | gatewayAddr            | Y  | 输入   | Zeebe gateway address                                                                                                                                                                                                                                                                                   | `localhost:26500`                    |
 | gatewayKeepAlive       | N  | 输入   | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds                                                                                                                                                                                                                | `45s`                                |

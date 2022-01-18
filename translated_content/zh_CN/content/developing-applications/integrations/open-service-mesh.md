@@ -18,7 +18,7 @@ description: "Learn how to run both Open Service Mesh and Dapr on the same Kuber
 
 {{< button text="Deploy OSM and Dapr" link="https://docs.openservicemesh.io/docs/integrations/demo_dapr/" >}}
 
-## Example
+## 示例
 
 观看 OSM 团队在 05/18/2021 community call 中介绍 OSM 和 Dapr 集成： <iframe width="560" height="315" src="https://www.youtube.com/embed/LSYyTL0nS8Y?start=1916" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 

@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Twilio SendGrid binding create a component of type `bindings.twilio.sendgrid`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
+To setup Twilio SendGrid binding create a component of type `bindings.twilio.sendgrid`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -33,12 +33,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段        | 必填 | 绑定支持 | 详情                                                                                                                         | Example                  |
+| 字段        | 必填 | 绑定支持 | 详情                                                                                                                         | 示例                       |
 | --------- |:--:| ---- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | apiKey    | Y  | 输出   | SendGrid API key, this should be considered a secret value                                                                 | `"apikey"`               |
 | emailFrom | N  | 输出   | If set this specifies the 'from' email address of the email message. Optional field, see [below](#example-request-payload) | `"me@example.com"`       |
