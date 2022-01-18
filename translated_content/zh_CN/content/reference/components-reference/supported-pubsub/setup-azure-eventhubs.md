@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## 配置
-要安装 Azure Event Hubs pubsub，请创建一个类型为 `pubsub.azure.eventhubs` 的组件。 See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+要安装 Azure Event Hubs pubsub，请创建一个类型为 `pubsub.azure.eventhubs` 的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,12 +31,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                   | 必填 | 详情                                                   | Example                                                                                                                                    |
+| 字段                   | 必填 | 详情                                                   | 示例                                                                                                                                         |
 | -------------------- |:--:| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | connectionString     | Y  | Event Hubs的连接地址                                      | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` |
 | storageAccountName   | Y  | 用于EventProcessorHost的存储账户名称                          | `"myeventhubstorage"`                                                                                                                      |
@@ -62,13 +62,13 @@ Azure IoT Hub provides an [endpoint that is compatible with Event Hubs](https://
 
 The device-to-cloud events created by Azure IoT Hub devices will contain additional [IoT Hub System Properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-construct#system-properties-of-d2c-iot-hub-messages), and the Azure Event Hubs pubsub component for Dapr will return the following as part of the response metadata:
 
-| System Property Name                   | 说明                                                                                                                                                                                                                                |
-| -------------------------------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `iothub-connection-auth-generation-id` | The **connectionDeviceGenerationId** of the device that sent the message. See [IoT Hub device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties). |
-| `iothub-connection-auth-method`        | The authentication method used to authenticate the device that sent the message.                                                                                                                                                  |
-| `iothub-connection-device-id`          | The **deviceId** of the device that sent the message. See [IoT Hub device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties).                     |
-| `iothub-connection-module-id`          | The **moduleId** of the device that sent the message. See [IoT Hub device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties).                     |
-| `iothub-enqueuedtime`                  | The date and time in RFC3339 format that the device-to-cloud message was received by IoT Hub.                                                                                                                                     |
+| System Property Name                   | 说明                                                                                                                                                                                                |
+| -------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `iothub-connection-auth-generation-id` | 发送消息的设备的 **connectionDeviceGenerationId** See [IoT Hub device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties). |
+| `iothub-connection-auth-method`        | The authentication method used to authenticate the device that sent the message.                                                                                                                  |
+| `iothub-connection-device-id`          | 发送消息的设备的 **deviceId**。 See [IoT Hub device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties).                    |
+| `iothub-connection-module-id`          | 发送消息的设备的 **moduleId**。 See [IoT Hub device identity properties](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties).                    |
+| `iothub-enqueuedtime`                  | The date and time in RFC3339 format that the device-to-cloud message was received by IoT Hub.                                                                                                     |
 
 For example, the headers of a delivered HTTP subscription message would contain:
 
@@ -92,5 +92,5 @@ For example, the headers of a delivered HTTP subscription message would contain:
 
 ## 相关链接
 - [Dapr组件的基本格式]({{< ref component-schema >}})
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components
+- 阅读 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}})，了解配置 发布/订阅组件的说明
 - [发布/订阅构建块]({{< ref pubsub >}})

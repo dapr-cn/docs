@@ -91,7 +91,7 @@ Components:
 - dapr_placement
 - dapr_sidecar_injector
 
-Example:
+示例:
 
 ```bash
 helm install dapr dapr/dapr --namespace dapr-system --set dapr_operator.logLevel=error

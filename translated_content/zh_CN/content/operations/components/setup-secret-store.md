@@ -8,7 +8,7 @@ aliases:
   - "/zh-hans/operations/components/setup-state-store/secret-stores-overview/"
 ---
 
-Dapr integrates with secret stores to provide apps and other components with secure storage and access to secrets such as access keys and passwords. 每个密钥存储组件都有一个名称，这个名称用于访问密钥。
+Dapr 集成secret stores，为应用程序和其他组件提供安全存储和访问Secret，如访问键和密码。 每个密钥存储组件都有一个名称，这个名称用于访问密钥。
 
 与其他构建块组件一样，密钥存储组件是可扩展的，可以在[components-contrib 仓库](https://github.com/dapr/components-contrib)中找到。
 
@@ -33,7 +33,7 @@ spec:
 
 密钥存储的类型由`type`字段决定，连接地址和其他元数据等放在`.metadata`部分。
 
-Different [supported secret stores]({{< ref supported-secret-stores >}}) will have different specific fields that would need to be configured. 例如，当配置一个使用 AWS Secrets Manager秘密存储时，文件看起来就像这样：
+不同[支持的 secret stores]({{< ref supported-secret-stores >}}) 将有不同的特定字段需要配置。 例如，当配置一个使用 AWS Secrets Manager秘密存储时，文件看起来就像这样：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -78,7 +78,7 @@ kubectl apply -f secret-store.yaml
 
 ## 支持的密钥存储
 
-Visit the [secret stores reference]({{< ref supported-secret-stores >}}) for a full list of supported secret stores.
+访问 [ secret stores 参考]({{< ref supported-secret-stores >}}) 获取支持的secret stores完整列表。
 
 
 ## 相关链接

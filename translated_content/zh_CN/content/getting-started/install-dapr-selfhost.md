@@ -19,7 +19,7 @@ Dapr 与您的应用程序一起作为sidecar运行，在自托管模式下，�
 1. 运行用于本地演员支持的**Dapr placement服务容器实例**
 
 {{% alert title="Docker" color="primary" %}}
-这种推荐的开发环境需要 [Docker](https://docs.docker.com/install/)。 It is possible to initialize Dapr without a dependency on Docker (see [this guidance]({{<ref self-hosted-no-docker.md>}})) but next steps in this guide assume the recommended development environment.
+这种推荐的开发环境需要 [Docker](https://docs.docker.com/install/)。 可以在不依赖 Docker 的情况下初始化 Dapr（[请参阅本指南]({{<ref self-hosted-no-docker.md>}})），但本指南中的后续步骤将假定使用推荐的开发环境。
 {{% /alert %}}
 
 ### 第 1 步：打开架起终端
