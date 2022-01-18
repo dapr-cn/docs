@@ -133,7 +133,7 @@ kubectl apply -f subscription.yaml
 
 {{< /tabs >}}
 
-#### Example
+#### 示例
 
 {{< tabs Python Node PHP>}}
 
@@ -234,7 +234,7 @@ dapr --app-id app1 --app-port 3000 run -- php -S 0.0.0.0:3000 app1.php
 - `topic`: 订阅的主题
 - `route`：当消息来到该主题时，Dapr 需要调用哪个终结点
 
-#### Example
+#### 示例
 
 {{< tabs Python Node PHP>}}
 
@@ -387,7 +387,7 @@ Dapr 将在符合 Cloud Events v1.0 的信封中自动包装用户有效负载�
 
 为了告诉Dapr 消息处理成功，返回一个 `200 OK` 响应。 如果 Dapr 收到超过 `200` 的返回状态代码，或者你的应用崩溃，Dapr 将根据 At-Least-Once 语义尝试重新传递消息。
 
-#### Example
+#### 示例
 
 {{< tabs Python Node>}}
 

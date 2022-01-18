@@ -30,12 +30,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                 | 必填 | 详情                      | Example                                       |
+| 字段                 | 必填 | 详情                      | 示例                                            |
 | ------------------ |:--:| ----------------------- | --------------------------------------------- |
 | hosts              | Y  | 逗号分隔的 endpoints         | `"memcached.default.svc.cluster.local:11211"` |
 | maxIdleConnections | N  | 空闲连接的最大数量。 默认值为 `"2"`   | `"3"`                                         |

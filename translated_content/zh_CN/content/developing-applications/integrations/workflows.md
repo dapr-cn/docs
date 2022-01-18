@@ -46,7 +46,7 @@ This allows users to start workflows using gRPC and HTTP endpoints through Dapr,
 
 - [Managed connectors](https://docs.microsoft.com/en-us/azure/connectors/apis-list#managed-connectors)
 
-## Example
+## 示例
 
 Dapr Workflows can be used as the orchestrator for many otherwise complex activities. For example, invoking an external endpoint, saving the data to a state store, publishing the result to a different app or invoking a binding can all be done by calling back into Dapr from the workflow itself.
 
@@ -216,7 +216,7 @@ Since Dapr supports many pluggable state stores and bindings, the workflow becom
 
    {{< /tabs >}}
 
-## Example
+## 示例
 
 Watch an example from the Dapr community call: <iframe width="560" height="315" src="https://www.youtube.com/embed/7fP-0Ixmi-w?start=116" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 

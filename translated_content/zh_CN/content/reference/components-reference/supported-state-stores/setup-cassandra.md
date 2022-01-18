@@ -40,12 +40,12 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 详情                                    | Example                                    |
+| 字段                | 必填 | 详情                                    | 示例                                         |
 | ----------------- |:--:| ------------------------------------- | ------------------------------------------ |
 | hosts             | Y  | 主机的逗号分隔值                              | `"cassandra.cassandra.svc.cluster.local"`. |
 | port              | N  | 通信端口 默认值：`9042`                       | `"9042"`                                   |

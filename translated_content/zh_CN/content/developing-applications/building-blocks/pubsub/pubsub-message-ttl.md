@@ -30,7 +30,7 @@ Azure Service Bus 支持 [实体级别的 TTL]((https://docs.microsoft.com/en-us
 
 当非 Dapr 订阅者使用 Azure Service Bus 等组件时，也就是在本机处理消息 TTL，就收不到过期的消息。 在这方面，不需要额外的逻辑。
 
-## Example
+## 示例
 
 消息 TTL 可以设置在元数据中，作为发布请求的一部分：
 
