@@ -7,7 +7,7 @@ aliases:
   - /zh-hans/getting-started/install-dapr/
 ---
 
-Now that you have the [Dapr CLI installed]({{<ref install-dapr-cli.md>}}), it's time to initialize Dapr on your local machine using the CLI.
+现在，您已经安装了 [Dapr CLI]({{<ref install-dapr-cli.md>}})，是时候使用 CLI 在本地机器上初始化 Dapr 了。
 
 Dapr 与您的应用程序一起作为sidecar运行，在自托管模式下，这意味着它是您本地机器上的一个进程。 因此，初始化 Dapr 包括获取 Dapr sidecar 二进制文件并将其安装到本地.
 
