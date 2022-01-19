@@ -3,23 +3,23 @@ type: docs
 title: "JavaScript Client SDK"
 linkTitle: "客户端"
 weight: 500
-description: JavaScript Client SDK for developing Dapr applications
+description: 开发 Dapr 应用程序的 JavaScript SDK 包
 ---
 
 ## 前提
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Latest LTS version of Node or greater](https://nodejs.org/en/)
+- [最新LTS版本的Node或更高版本](https://nodejs.org/en/)
 
-## Installing and importing Dapr's JS SDK
+## 安装和导入 Dapr 的 JS SDK
 
-Install the SDK with npm:
+使用 npm 安装 SDK ：
 ```
 npm i dapr-client
 ```
 
-Import the libraries:
+导入库：
 ```javascript
 import { DaprClient, DaprServer, HttpMethod, CommunicationProtocolEnum } from "dapr-client";
 
@@ -37,15 +37,15 @@ const server = new DaprServer(serverHost, serverPort, daprHost, daprPort, Commun
 const client = new DaprClient(daprHost, daprPort, CommunicationProtocolEnum.GRPC);
 ```
 
-##### DaprClient Library
-A library that provides methods for how an application communicates with the Dapr sidecar.
+##### DaprClient 库
+一个提供应用程序如何与Dapr sidecar进行通信的方法的库。
 
-##### DaprServer Library
-A library for how an application registers bindings / routes with Dapr. The `startServer()` method is used to start the server and bind the routes.
+##### DaprServer 库
+一个用于应用程序如何向Dapr注册绑定/路由的库。 `startServer()`方法被用来启动服务器并绑定路由。
 
 ## 构建块
 
-The JavaScript SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
+JavaScript SDK允许您与的所有 [Dapr构建块]({{< ref building-blocks >}}) 进行交互。
 
 ### 调用服务
 
@@ -70,7 +70,7 @@ async function start() {
 ```
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
-### Save, get and delete application state
+### 保存、获取和删除应用程序状态
 
 ```javascript
 import { DaprClient, CommunicationProtocolEnum } from "dapr-client"; 
@@ -171,7 +171,7 @@ async function start() {
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
 
-### Interact with bindings
+### 与绑定交互
 
 **输出绑定**
 ```javascript
@@ -191,7 +191,7 @@ async function start() {
 }
 ```
 
-**Input Bindings**
+**输入绑定**
 ```javascript
 import { DaprServer, CommunicationProtocolEnum } from "dapr-client";;
 
@@ -237,4 +237,4 @@ async function start() {
 - 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
 
 ## 相关链接
-- [JavaScript SDK examples](https://github.com/dapr/js-sdk/tree/master/examples)
+- [JavaScript SDK 示例](https://github.com/dapr/js-sdk/tree/master/examples)

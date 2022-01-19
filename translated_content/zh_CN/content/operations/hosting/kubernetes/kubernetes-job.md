@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "Running Dapr with a Kubernetes Job"
+title: "使用 Kubernetes 作业运行 Dapr"
 linkTitle: "Kubernetes Jobs"
 weight: 60000
-description: "Use Dapr API in a Kubernetes Job context"
+description: "在 Kubernetes 作业上下文中使用 Dapr API"
 ---
 
 # Kubernetes Job
 
-The Dapr sidecar is designed to be a long running process, in the context of a [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) this behaviour can block your job completion. To address this issue the Dapr sidecar has an endpoint to `Shutdown` the sidecar.
+Dapr sidecar被设计为一个长时间运行的进程，在 [Kubernetes Job的上下文中，](https://kubernetes.io/docs/concepts/workloads/controllers/job/) 这种行为可能会阻止你的作业完成。 为了解决此问题，Dapr 边车有一个终结点，用于 `关闭` sidecar。
 
-When running a basic [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) you will need to call the `/shutdown` endpoint for the sidecar to gracefully stop and the job will be considered `Completed`.
+在运行基本 [Kubernetes 作业](https://kubernetes.io/docs/concepts/workloads/controllers/job/) 时，您需要调用 `/shutdown` 端点，以便 sidecar 正常停止，并且作业将被视为 `Completed`。
 
-When a job is finish without calling `Shutdown` your job will be in a `NotReady` state with only the `daprd` container running endlessly.
+当一个作业在没有调用 `Shutdown` 的情况下完成时，你的作业将处于 `NotReady` 状态，只有 `daprd` 容器在无休止地运行。
 
-Be sure and use the *POST* HTTP verb when calling the shutdown API.
+在调用关闭 API 时，请确保并使用" *POST* HTTP verb"。
 
 ```yaml
 apiVersion: batch/v1
@@ -35,7 +35,7 @@ spec:
       restartPolicy: Never
 ```
 
-You can also call the `Shutdown` from any of the Dapr SDK
+您还可以从任何 Dapr SDK 调用 `Shutdown`
 
 ```go
 package main

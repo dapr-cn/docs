@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Setup & configure mTLS certificates"
-linkTitle: "Setup & configure mTLS certificates"
+title: "设置 & 配置 mTLS 证书"
+linkTitle: "设置 & 配置 mTLS 证书"
 weight: 1000
-description: "Encrypt communication between applications using self-signed or user supplied x.509 certificates"
+description: "使用自签名或用户提供的 x.509 证书加密应用程序之间的通信"
 ---
 
 Dapr supports in-transit encryption of communication between Dapr instances using the Dapr control plane, Sentry service, which is a central Certificate Authority (CA).
