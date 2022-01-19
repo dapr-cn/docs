@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "How-To: Set-up New Relic for distributed tracing"
+title: "操作方法: 为分布式跟踪安装 New Relic"
 linkTitle: "New Relic"
 weight: 2000
-description: "Set-up New Relic for distributed tracing"
+description: "为分布式跟踪安装 New Relic"
 ---
 
 ## 先决条件
 
-- Perpetually [free New Relic account](https://newrelic.com/signup?ref=dapr), 100 GB/month of free data ingest, 1 free full access user, unlimited free basic users
+- 永久[免费的New Relic账户](https://newrelic.com/signup?ref=dapr)，100GB/月的免费数据摄取，1个免费全接入用户，无限制免费基本用户
 
-## Configure Dapr tracing
+## 配置 Dapr 跟踪
 
-Dapr natively captures metrics and traces that can be send directly to New Relic. The easiest way to export these is by configuring Dapr to send the traces to [New Relic's Trace API](https://docs.newrelic.com/docs/distributed-tracing/trace-api/report-zipkin-format-traces-trace-api/) using the Zipkin trace format.
+Dapr原生捕捉 metrics 和 traces ，可以直接发送到New Relic。 导出这些的最简单方法是将 Dapr 配置为使用 Zipkin 跟踪格式将跟踪发送到 [New Relic 的 Trace API](https://docs.newrelic.com/docs/distributed-tracing/trace-api/report-zipkin-format-traces-trace-api/) 。
 
-In order for the integration to send data to New Relic [Telemetry Data Platform](https://newrelic.com/platform/telemetry-data-platform), you need a [New Relic Insights Insert API key](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#insights-insert-key).
+为了使集成将数据发送到 New Relic [遥测数据平台](https://newrelic.com/platform/telemetry-data-platform)，您需要一个 [New Relic Insights Insert API 密钥](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#insights-insert-key)。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

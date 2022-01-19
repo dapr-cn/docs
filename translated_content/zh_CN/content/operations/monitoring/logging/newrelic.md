@@ -8,21 +8,21 @@ description: "Set-up New Relic for Dapr logging"
 
 ## 先决条件
 
-- Perpetually [free New Relic account](https://newrelic.com/signup?ref=dapr), 100 GB/month of free data ingest, 1 free full access user, unlimited free basic users
+- 永久[免费的New Relic账户](https://newrelic.com/signup?ref=dapr)，100GB/月的免费数据摄取，1个免费全接入用户，无限制免费基本用户
 
 ## 背景
 
-New Relic offers a [Fluent Bit](https://fluentbit.io/) output [plugin](https://github.com/newrelic/newrelic-fluent-bit-output) to easily forward your logs to [New Relic Logs](https://github.com/newrelic/newrelic-fluent-bit-output). This plugin is also provided in a standalone Docker image that can be installed in a Kubernetes cluster in the form of a DaemonSet, which we refer as the Kubernetes plugin.
+New Relic提供了一个 [Fluent Bit](https://fluentbit.io/) 输出 [插件](https://github.com/newrelic/newrelic-fluent-bit-output) ，可以轻松地将日志转发到 [New Relic Logs](https://github.com/newrelic/newrelic-fluent-bit-output)。 此插件也包含在一个独立的 Docker 映像中，该映像可以以 DaemonSet 的形式安装在 Kubernetes 集群中，我们称之为 Kubernetes 插件。
 
-This document explains how to install it in your cluster, either using a Helm chart (recommended), or manually by applying Kubernetes manifests.
+本文档介绍如何使用 Helm 图表（推荐）或通过应用 Kubernetes 清单手动将其安装到集群中。
 
 ## 安装
 
-### Install using the Helm chart (recommended)
+### 使用 Helm 图表进行安装（推荐）
 
-1. Install Helm following the official instructions.
+1. 按照官方说明安装 Helm。
 
-2. Add the New Relic official Helm chart repository following these instructions
+2. 按照这些说明添加 New Relic 官方 Helm 图表存储库
 
 3. Run the following command to install the New Relic Logging Kubernetes plugin via Helm, replacing the placeholder value YOUR_LICENSE_KEY with your [New Relic license key](https://docs.newrelic.com/docs/accounts/accounts-billing/account-setup/new-relic-license-key/):
 
