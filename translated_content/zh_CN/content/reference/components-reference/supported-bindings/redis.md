@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Redis binding create a component of type `bindings.redis`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 Redis 绑定，请创建一个类型为 `bindings.redis`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
