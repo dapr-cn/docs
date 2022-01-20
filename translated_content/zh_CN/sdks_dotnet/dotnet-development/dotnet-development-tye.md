@@ -41,7 +41,7 @@ extensions:
 # Services to run go here.
 services:
 
-  # 此名称将被用作 app-id. 对于.NET 项目，Tye 只需要项目文件的路径。
+  # The name will be used as the app-id. For a .NET project, Tye only needs the path to the project file.
 - name: orders
   project: orders/orders.csproj
 - name: products
