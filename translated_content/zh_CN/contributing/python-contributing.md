@@ -12,7 +12,7 @@ description: Dapr Python SDK贡献准则
 
 `examples`目录中包含了一些代码示例，供用户运行，以尝试各种Python SDK包和扩展的特定功能。 在写新的和更新的示例时，请牢记。
 
-- 所有的例子都应该可以在Windows、Linux和MacOS上运行。 While Python code is consistent among operating systems, any pre/post example commands should provide options through [codetabs]({{< ref "contributing-docs.md#tabbed-content" >}})
+- 所有的例子都应该可以在Windows、Linux和MacOS上运行。 虽然Python代码在操作系统中是一致的，但任何前/后示例命令都应该通过 [ codetabs ]({{< ref "contributing-docs.md#tabbed-content" >}}) 提供选项。
 - 包含下载/安装任何所需先决条件的步骤。 使用全新安装的操作系统的人，应该能够在没有错误的情况下启动这个例子并完成它。 指向外部下载页面的链接是正常的。
 
 ## Docs

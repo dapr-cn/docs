@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "Supported releases"
-linkTitle: "Supported releases"
+title: "支持的版本"
+linkTitle: "支持的版本"
 weight: 2000
-description: "Release support and upgrade policies"
+description: "发布支持和升级策略"
 ---
 
 ## 介绍
-This topic details the supported versions of Dapr releases, the upgrade policies and how deprecations and breaking changes are communicated.
+本主题详细介绍了 Dapr 版本受支持的版本、升级策略以及如何传达弃用和重大更改。
 
-Dapr releases use `MAJOR.MINOR.PATCH` versioning. For example 1.0.0
+Dapr 版本使用 `MAJOR.MINOR.PATCH` 版本控制。 例如 1.0.0
 
-  * A `PATCH` version is incremented for bug and security hot fixes.
-  * A `MINOR` version is updated as part of the regular release cadence, including new features, bug and security fixes.
-  * A `MAJOR` version is updated when there’s a non-backward compatible change to the runtime, such as an API change.  A `MAJOR` release can also occur then there is a considered a significant addition/change of functionality that needs to differentiate from the previous version.
+  * `PATCH` 版本会递增，以进行错误和安全热修复。
+  * `MINOR` 版本作为常规发布节奏的一部分进行更新，包括新功能，错误和安全修复。
+  * `MAJOR` 版本在运行时发生不向后兼容的更改（如 API 更改）时更新。  `MAJOR` 版本也可能发生，然后会考虑与先前版本区分开来的重大功能添加/更改。
 
-A supported release means;
+支持的版本意味着:
 
-- A hoxfix patch is released if the release has a critical issue such as a mainline broken scenario or a security issue. Each of these are reviewed on a case by case basis.
-- Issues are investigated for the supported releases. If a release is no longer supported, you need to upgrade to a newer release and determine if the issue is still relevant.
+- 如果发布版本存在关键问题（如主线损坏情况或安全问题），则会发布 hoxfix 修补程序。 其中每一项都是根据具体情况进行审查的。
+- 将调查受支持版本的问题。 如果某个版本不再受支持，则需要升级到较新的版本，并确定该问题是否仍然相关。
 
 From the 1.0.0 release onwards two (2) versions of Dapr are supported; the current and previous versions. Typically these are `MINOR`release updates. This means that there is a rolling window that moves forward for supported releases and it is your operational responsibility to remain up to date with these supported versions. If you have an older version of Dapr you may have to do intermediate upgrades to get to a supported version.
 

@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Contributing to the JavaScript SDK"
-linkTitle: "JavaScript SDK"
+title: "为 JavaScript SDK 做贡献"
+linkTitle: "Javascript SDK"
 weight: 3000
-description: Guidelines for contributing to the Dapr JavaScript SDK
+description: Dapr JavaScript SDK 贡献准则
 ---
 
-When contributing to the [JavaScript SDK](https://github.com/dapr/js-sdk) the following rules and best-practices should be followed.
+当对 [JavaScript SDK](https://github.com/dapr/js-sdk) 做出贡献时，应该遵循以下规则和最佳做法。
 
 ## 示例
 
-The `examples` directory contains code samples for users to run to try out specific functionality of the various JavaScript SDK packages and extensions. 在写新的和更新的示例时，请牢记。
+`examples`目录中包含了一些代码示例，供用户运行，以尝试各种JavaScript SDK包和扩展的特定功能。 在写新的和更新的示例时，请牢记。
 
-- 所有的例子都应该可以在Windows、Linux和MacOS上运行。 While JavaScript code is consistent among operating systems, any pre/post example commands should provide options through [codetabs]({{< ref "contributing-docs.md#tabbed-content" >}})
+- 所有的例子都应该可以在Windows、Linux和MacOS上运行。 虽然 JavaScript 代码在操作系统中是一致的，但任何前/后示例命令都应该通过 [codetabs]({{< ref "contributing-docs.md#tabbed-content" >}}) 提供选项。
 - 包含下载/安装任何所需先决条件的步骤。 使用全新安装的操作系统的人，应该能够在没有错误的情况下启动这个例子并完成它。 指向外部下载页面的链接是正常的。
 
 ## Docs
@@ -20,4 +20,4 @@ The `examples` directory contains code samples for users to run to try out speci
 `daprdocs` 目录包含渲染到 [Dapr 文档](https://docs.dapr.io) 网站的 markdown 文件。 当文档网站建立后，该仓库会被克隆和配置，使其内容与文档内容一起呈现。 编写文档时牢记：
 
    - 除了这些规则外，还应遵循 [文档指南]({{< ref contributing-docs.md >}})。
-   - All files and directories should be prefixed with `js-` to ensure all file/directory names are globally unique across all Dapr documentation.
+   - 所有文件和目录都应该以 `js-` 为前缀，以确保所有文件/目录名称在所有Dapr 文档中是全局唯一的。
