@@ -10,7 +10,7 @@ description: Dapr Java SDK 贡献准则
 
 ## 示例
 
-The `examples` directory contains code samples for users to run to try out specific functionality of the various Java SDK packages and extensions. 在写新的和更新的示例时，请牢记。
+`examples`目录中包含了一些代码示例，供用户运行，以尝试各种 Java SDK包和扩展的特定功能。 在写新的和更新的示例时，请牢记。
 
 - 所有的例子都应该可以在Windows、Linux和MacOS上运行。 虽然 Java 代码在操作系统中是一致的，但任何前/后示例命令都应该通过 [codetabs]({{< ref "contributing-docs.md#tabbed-content" >}}) 提供选项。
 - 包含下载/安装任何所需先决条件的步骤。 使用全新安装的操作系统的人，应该能够在没有错误的情况下启动这个例子并完成它。 指向外部下载页面的链接是正常的。
