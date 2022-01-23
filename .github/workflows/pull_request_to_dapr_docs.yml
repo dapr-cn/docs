@@ -16,8 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         version_tag:
-          - v1.0
-          # - v1.1
+          # - v1.0
+          - v1.1
           # - v1.2
           # - v1.3
           # - v1.4
@@ -48,13 +48,12 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.PAT_TO_DOCS_ZH }}
-          commit-message: Update content
+          commit-message: Update zh_hans translation content
           committer: newbe36524 <newbe36524@users.noreply.github.com>
           # https://github.com/apps/dco
           signoff: true
-          delete-branch: true
           push-to-fork: dapr-cn/docs
-          branch: ${{ matrix.version_tag }}
+          branch: translation_zh_hans_${{ matrix.version_tag }}
           title: "Update translation about zh_hans for ${{ matrix.version_tag }}"
           labels: |
             content update
