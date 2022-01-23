@@ -49,7 +49,7 @@ jobs:
           token: ${{ secrets.PAT_TO_DOCS_ZH }}
           commit-message: Update content
           committer: dapr-cn <dapr-cn@hotmail.com>
-          signoff: false
+          signoff: true
           delete-branch: true
           title: "[WIP] Update content"
           labels: |
