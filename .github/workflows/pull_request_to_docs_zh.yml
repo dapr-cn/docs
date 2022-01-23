@@ -16,6 +16,11 @@ jobs:
       matrix:
         version_tag:
           - v1.0
+          - v1.1
+          - v1.2
+          - v1.3
+          - v1.4
+          - v1.5
 
     steps:
       - name: Checkout docs_zh
@@ -49,9 +54,10 @@ jobs:
           token: ${{ secrets.PAT_TO_DOCS_ZH }}
           commit-message: Update content
           committer: newbe36524 <newbe36524@users.noreply.github.com>
+          # https://github.com/apps/dco
           signoff: true
           delete-branch: true
-          title: "[WIP] Update content"
+          title: "Update content for ${{ matrix.version_tag }}"
           labels: |
             content update
             automated pr
