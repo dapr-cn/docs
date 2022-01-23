@@ -48,7 +48,7 @@ jobs:
         with:
           token: ${{ secrets.PAT_TO_DOCS_ZH }}
           commit-message: Update content
-          committer: dapr-cn <dapr-cn@hotmail.com> 
+          committer: newbe36524 <newbe36524@users.noreply.github.com>
           signoff: true
           delete-branch: true
           title: "[WIP] Update content"
