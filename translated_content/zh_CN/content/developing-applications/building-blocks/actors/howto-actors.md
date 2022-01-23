@@ -34,7 +34,7 @@ Actors 可以通过 timer 或者 remider 自行注册周期性的任务.
 
 Timers 和 reminders 的功能非常相似。 主要的区别在于，Dapr actor运行时在停用后不保留任何有关 timer 的信息，而使用Dapr actor状态提供程序持久化有关 reminder 的信息。
 
-This distinction allows users to trade off between light-weight but stateless timers vs. more resource-demanding but stateful reminders.
+这种区别允许用户在轻量级但无状态的timer和需要更多资源但有状态的reminder之间进行权衡。
 
 Timer和reminder的调度配置是相同的，总结如下:
 
@@ -165,8 +165,8 @@ DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 - `actorScanInterval` - 指定扫描 Actors 以停用空闲 Actors 的频率时间间隔。 Actors 时间超过 actor_idle_timeout 的 Actors 将被取消激活。 默认**：30 秒**
 - `drainOngoingCallTimeout` - 在重定位 actor 的过程中的持续时间。 这指定等待当前活动 actor 方法完成多长时间。 如果没有当前 actor 方法调用，那么将忽略此时间。 默认**：60 秒**
 - `drainRebalancedActors` - 如果为 true，那么 Dapr 将等待`drainOngoingCallTimeout`的持续时间，以便在尝试停用一个 actor 之前, 允许当前的 actor 调用完成。 **默认: true**
-- `reentrancy` (ActorReentrancyConfig) - 配置一个 actor 的重入行为。 如果没有提供，重入是禁用的。 **Default: disabled** **Default: 0**
-- `remindersStoragePartitions` - Configure the number of partitions for actor's reminders. If not provided, all reminders are saved as a single record in actor's state store. **Default: 0**
+- `reentrancy` (ActorReentrancyConfig) - 配置一个 actor 的重入行为。 如果没有提供，重入是禁用的。 **默认值：disabled** **默认值：0**
+- `remindersStoragePartitions` - 配置执行组件 actor 的 reminders。 如果未提供，则所有 reminders 将作为单个记录保存在执行组件的状态存储中。 **默认: 0**
 
 {{< tabs Java Dotnet Python >}}
 
@@ -235,24 +235,24 @@ ActorRuntime.set_actor_config(
 
 更多详细信息请参阅 [Dapr SDK]({{< ref "developing-applications/sdks/#sdk-languages" >}}) 的文档和示例。
 
-## Partitioning reminders
+## Reminders 分区
 
 {{% alert title="Preview feature" color="warning" %}}
-Actor reminders partitioning is currently in [preview]({{< ref preview-features.md >}}). Use this feature if you are runnining into issues due to a high number of reminders registered.
+Actor reminders 分区当前处于 [preview]({{< ref preview-features.md >}})状态。 如果您由于注册了大量 reminders 而正在运行中的问题，请使用此功能。
 {{% /alert %}}
 
-Actor reminders are persisted and continue to be triggered after sidecar restarts. Prior to Dapr runtime version 1.3, reminders were persisted on a single record in the actor state store:
+Actor reminders 将持续存在，并在 sidecar 重新启动后继续触发。 在 Dapr 运行时版本 1.3 之前，reminders 保留在执行组件状态存储中的单个记录上：
 
 | Key                              | 值                                                                      |
 | -------------------------------- | ---------------------------------------------------------------------- |
 | `actors\|\|<actor type>` | `[ <reminder 1>, <reminder 2>, ... , <reminder n> ]` |
 
-Applications that register many reminders can experience the following issues:
+注册许多 reminders 的应用程序可能会遇到以下问题：
 
-* Low throughput on reminders registration and deregistration
-* Limit on total number of reminders registered based on the single record size limit on the state store
+* Reminders 注册和注销的吞吐量低
+* 根据状态存储上的单个记录大小限制对注册的 reminders 事项总数的限制
 
-Since version 1.3, applications can now enable partitioning of actor reminders in the state store. As data is distributed in multiple keys in the state store. First, there is a metadata record in `actors\|\|<actor type>\|\|metadata` that is used to store persisted configuration for a given actor type. Then, there are multiple records that stores subsets of the reminders for the same actor type.
+从版本 1.3 开始，应用程序现在可以在状态存储中启用对执行 actor reminders 进行分区。 As data is distributed in multiple keys in the state store. First, there is a metadata record in `actors\|\|<actor type>\|\|metadata` that is used to store persisted configuration for a given actor type. Then, there are multiple records that stores subsets of the reminders for the same actor type.
 
 | Key                                                                                           | 值                                                                                                                                         |
 | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |

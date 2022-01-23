@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "AWS认证"
-linkTitle: "AWS认证"
+title: "AWS身份验证"
+linkTitle: "AWS身份验证"
 weight: 10
-description: "关于AWS的认证和配置选项"
+description: "关于AWS的身份验证和配置选项"
 aliases:
   - /zh-hans/developing-applications/integrations/authenticating/authenticating-aws/
 ---
 
 所有使用AWS服务(如DynamoDB、SQS、S3等) 的Dapr组件都使用一套标准化的属性进行配置，这些属性描述如下。
 
-[这篇文章](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials)提供了关于（Dapr 使用的） AWS SDK如何处理证书的概述
+[这篇文章](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials)概述了Dapr 中 AWS SDK设置凭证的方法
 
-以下属性都不是必需的，因为AWS SDK可以使用上面链接中描述的默认供应链进行配置。 测试组件配置并检查Dapr运行时的日志输出以确保组件正确初始化是很重要的。
+以下属性都不是必需的，因为AWS SDK可以使用上面链接中描述的default provider chain进行配置。 测试组件配置并检查Dapr运行时的日志输出以确保组件正确初始化是很重要的。
 
 - `region`。要连接到哪个AWS区域。 在某些情况下(例如在自托管模式下运行Dapr时)，这个标志可以由环境变量`AWS_REGION`提供。 Since Dapr sidecar injection doesn't allow configuring environment variables on the Dapr sidecar, it is recommended to always set the `region` attribute in the component spec.
 - `endpoint`: The endpoint is normally handled internally by the AWS SDK. However, in some situations it might make sense to set it locally - for example if developing against [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html).
