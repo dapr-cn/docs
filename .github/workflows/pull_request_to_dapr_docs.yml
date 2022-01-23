@@ -35,7 +35,8 @@ jobs:
       - name: update docs_zh submodule
         run: |
           cd "translations/docs-zh"
-          git pull --ff-only
+          git checkout origin/${{ matrix.version_tag }}_content
+          git pull origin/${{ matrix.version_tag }}_content --ff-only
 
       - name: permissions
         #   https://stackoverflow.com/questions/11774397/git-push-error-unable-to-unlink-old-permission-denied/26950991#26950991
