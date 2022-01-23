@@ -54,7 +54,7 @@ jobs:
           signoff: true
           delete-branch: true
           push-to-fork: dapr-cn/docs
-          branch: ${{ matrix.version_tag }}/source
+          branch: ${{ matrix.version_tag }}
           title: "Update translation about zh_hans for ${{ matrix.version_tag }}"
           labels: |
             content update
