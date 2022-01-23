@@ -29,6 +29,7 @@ jobs:
         with:
           repository: dapr/docs
           ref: ${{ matrix.version_tag }}
+          submodules: true
 
 
       - name: update docs_zh submodule
@@ -51,7 +52,7 @@ jobs:
           # https://github.com/apps/dco
           signoff: true
           delete-branch: true
-          push-to-fork: dapr/docs
+          push-to-fork: dapr-cn/docs
           branch: ${{ matrix.version_tag }}/source
           title: "Update translation about zh_hans for ${{ matrix.version_tag }}"
           labels: |
