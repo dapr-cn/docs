@@ -49,11 +49,11 @@ description: >
 
 1. 确保有一个问题（bug或建议）被提出，这为你即将做出的贡献设定了期望。
 1. 分叉相关的repo并创建一个新的分支。
-    - Some Dapr repos support [Codespaces]({{< ref codespaces.md >}}) to provide an instant environment for you to build and test your changes.
+    - 某些 Dapr 存储库支持 [代码空间]({{< ref codespaces.md >}}) ，以便为您提供构建和测试更改的即时环境。
 1. 创建更改
     - 代码更改需要测试
 1. 更新有关更改的相关文档
-1. Commit with [DCO sign-off]({{< ref "contributing-overview.md#developer-certificate-of-origin-signing-your-work" >}}) and open a PR
+1. 使用 [DCO 签核]({{< ref "contributing-overview.md#developer-certificate-of-origin-signing-your-work" >}}) 提交并打开 PR
 1. 等待 CI 进程完成并确保所有检查都是绿色的
 1. 项目的维护者将被指定，您可以在几天内得到审查。
 
@@ -66,10 +66,10 @@ description: >
 
 - 第三方代码必须包含许可证。
 
-## Developer Certificate of Origin: Signing your work
-#### Every commit needs to be signed
+## Developer Certificate of Origin：签名您的工作
+#### 每个提交都需要签名
 
-The Developer Certificate of Origin (DCO) is a lightweight way for contributors to certify that they wrote or otherwise have the right to submit the code they are contributing to the project. Here is the full text of the [DCO](https://developercertificate.org/), reformatted for readability:
+开发人员原产地证书（DCO）是贡献者证明他们编写或以其他方式有权提交他们为项目贡献的代码的轻量级方式。 以下是 [DCO](https://developercertificate.org/)的全文，为便于阅读而重新格式化：
 ```
 By making a contribution to this project, I certify that:
     (a) The contribution was created in whole or in part by me and I have the right to submit it under the open source license indicated in the file; or

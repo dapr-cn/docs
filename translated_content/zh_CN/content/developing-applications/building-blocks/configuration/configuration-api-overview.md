@@ -3,7 +3,7 @@ type: docs
 title: "配置概览"
 linkTitle: "概述"
 weight: 1000
-description: "Overview of the configuration API building block"
+description: "Dapr 配置管理构建块概述"
 ---
 
 ## 介绍

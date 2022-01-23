@@ -1,69 +1,69 @@
 ---
 type: docs
-title: "Authenticating to Azure"
-linkTitle: "Authenticating to Azure"
-description: "How to authenticate Azure components using Azure AD and/or Managed Identities"
+title: "Azure认证"
+linkTitle: "Azure认证"
+description: "如何使用Azure AD和/或托管身份认证Azure组件"
 aliases:
   - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
   - "/zh-hans/reference/components-reference/supported-secret-stores/azure-keyvault-managed-identity/"
 weight: 1000
 ---
 
-## Common Azure authentication layer
+## 通用 Azure 身份验证层
 
-Certain Azure components for Dapr offer support for the *common Azure authentication layer*, which enables applications to access data stored in Azure resources by authenticating with Azure AD. Thanks to this, administrators can leverage all the benefits of fine-tuned permissions with RBAC (Role-Based Access Control), and applications running on certain Azure services such as Azure VMs, Azure Kubernetes Service, or many Azure platform services can leverage [Managed Service Identities (MSI)](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview).
+某些适用于 Dapr 的 Azure 组件支持 *通用 Azure 身份验证层*，这使得应用程序能够通过使用 Azure AD 进行身份验证来访问存储在 Azure 资源中的数据。 因此，管理员可以通过 RBAC（基于角色的访问控制）利用微调权限的所有优势，并且在某些 Azure 服务（如 Azure VM、Azure Kubernetes Service 或许多 Azure 平台服务）上运行的应用程序可以利用 [托管服务身份 （MSI）](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview)。
 
-Some Azure components offer alternative authentication methods, such as systems based on "master keys" or "shared keys". Whenever possible, it is recommended that you authenticate your Dapr components using Azure AD for increased security and ease of management, as well as for the ability to leverage MSI if your app is running on supported Azure services.
+有些 Azure 组件提供替代身份验证方法，例如基于"主密钥"或"共享密钥"的系统。 在可能的情况下，建议你使用 Azure AD 对 Dapr 组件进行身份验证，以提高安全性和易管理性，并且如果你的应用在受支持的 Azure 服务上运行，同时能够利用 MSI。
 
-> Currently, only a subset of Azure components for Dapr offer support for this authentication method. Over time, support will be expanded to all other Azure components for Dapr. You can track the progress of the work, component-by-component, on [this issue](https://github.com/dapr/components-contrib/issues/1103).
+> 目前，只有适用于 Dapr 的 Azure 组件的子集提供对此身份验证方法的支持。 随着时间的推移，支持将扩展到 Dapr 的所有其他 Azure 组件。 您可以在 [这个 issue](https://github.com/dapr/components-contrib/issues/1103) 上跟踪各个组件工作进度。
 
-### About authentication with Azure AD
+### 关于使用 Azure AD 进行身份验证
 
-Azure AD is Azure's identity and access management (IAM) solution, which is used to authenticate and authorize users and services.
+Azure AD 是 Azure 的身份和访问管理 （IAM） 解决方案，用于对用户和服务进行身份验证和授权。
 
-Azure AD is built on top of open standards such OAuth 2.0, which allows services (applications) to obtain access tokens to make requests to Azure services, including Azure Storage, Azure Key Vault, Cosmos DB, etc. In the Azure terminology, an application is also called a "Service Principal".
+Azure AD 构建在开放标准（如 OAuth 2.0）之上，该标准允许服务（应用程序）获取访问令牌以向 Azure 服务（包括 Azure 存储、Azure Key Vault、Cosmos DB 等）发出请求。 在 Azure 术语中，应用程序也称为"服务主体"。
 
-Many of the services listed above also support authentication using other systems, such as "master keys" or "shared keys". Although those are always valid methods to authenticate your application (and Dapr continues to support them, as explained in each component's reference page), using Azure AD when possible offers various benefits, including:
+上面列出的许多服务还支持使用其他系统进行身份验证，例如"主密钥"或"共享密钥"。 尽管这些方法始终是验证应用程序的有效方法（并且 Dapr 继续支持它们，如每个组件的参考页中所述），但尽可能使用 Azure AD 具有多种优势，包括：
 
-- The ability to leverage Managed Service Identities, which allow your application to authenticate with Azure AD, and obtain an access token to make requests to Azure services, without the need to use any credential. When your application is running on a supported Azure service (including, but not limited to, Azure VMs, Azure Kubernetes Service, Azure Web Apps, etc), an identity for your application can be assigned at the infrastructure level.  
-  This way, your code does not have to deal with credentials of any kind, removing the challenge of safely managing credentials, allowing greater separation of concerns between development and operations teams and reducing the number of people with access to credentials, and lastly simplifying operational aspects–especially when multiple environments are used.
-- Using RBAC (Role-Based Access Control) with supported services (such as Azure Storage and Cosmos DB), permissions given to an application can be fine-tuned, for example allowing restricting access to a subset of data or making it read-only.
-- Better auditing for access.
-- Ability to authenticate using certificates (optional).
+- 能够利用托管服务标识，这允许应用程序使用 Azure AD 进行身份验证，并获取访问令牌以向 Azure 服务发出请求，而无需使用任何凭据。 当应用程序在受支持的 Azure 服务（包括但不限于 Azure VM、Azure Kubernetes 服务、Azure Web 应用等）上运行时，可以在基础结构级别分配应用程序的身份。  
+  这样，您的代码就不必处理任何类型的凭据，消除了安全管理凭据带来的挑战，允许在开发和运营团队之间更好地分离关注点，并减少有权访问凭据的人数，最后简化操作方面 - 特别是在使用多个环境时。
+- 将 RBAC（基于角色的访问控制）与受支持的服务（如 Azure 存储和 Cosmos DB）结合使用时，可以微调授予应用程序的权限，例如允许限制对数据子集的访问或将其设置为只读。
+- 更好的访问审核。
+- 能够使用证书进行身份验证（可选）。
 
-## Credentials metadata fields
+## 凭据元数据字段
 
-To authenticate with Azure AD, you will need to add the following credentials as values in the metadata for your Dapr component (read the next section for how to create them). There are multiple options depending on the way you have chosen to pass the credentials to your Dapr service.
+若要使用 Azure AD 进行身份验证，需要将以下凭据添加为 Dapr 组件的元数据中的值（请阅读下一部分，了解如何创建它们）。 有多种选择，具体取决于您选择将凭据传递给 Dapr 服务的方式。
 
-**Authenticating using client credentials:**
+**使用客户端凭据进行身份验证：**
 
-| 字段                  | 必填 | 详情                                   | 示例                                           |
-| ------------------- | -- | ------------------------------------ | -------------------------------------------- |
-| `azureTenantId`     | Y  | ID of the Azure AD tenant            | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`     |
-| `azureClientId`     | Y  | Client ID (application ID)           | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`     |
-| `azureClientSecret` | Y  | Client secret (application password) | `"Ecy3XG7zVZK3/vl/a2NSB+a1zXLa8RnMum/IgD0E"` |
+| 字段                  | 必填 | 详情              | 示例                                           |
+| ------------------- | -- | --------------- | -------------------------------------------- |
+| `azureTenantId`     | Y  | Azure AD 租户ID   | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`     |
+| `azureClientId`     | Y  | 客户端 ID（应用程序 ID） | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`     |
+| `azureClientSecret` | Y  | 客户端密码（应用程序密码）   | `"Ecy3XG7zVZK3/vl/a2NSB+a1zXLa8RnMum/IgD0E"` |
 
-When running on Kubernetes, you can also use references to Kubernetes secrets for any or all of the values above.
+在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes 秘密的引用。
 
-**Authenticating using a PFX certificate:**
+**使用 PFX 证书进行身份验证：**
 
-| 字段                         | 必填                                                   | 详情                                                                      | 示例                                                                                                                                                      |
-| -------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `azureTenantId`            | Y                                                    | ID of the Azure AD tenant                                               | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                                |
-| `azureClientId`            | Y                                                    | Client ID (application ID)                                              | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                                |
-| `azureCertificate`         | One of `azureCertificate` and `azureCertificateFile` | Certificate and private key (in PFX/PKCS#12 format)                     | `"-----BEGIN PRIVATE KEY-----\n MIIEvgI... \n -----END PRIVATE KEY----- \n -----BEGIN CERTIFICATE----- \n MIICoTC... \n -----END CERTIFICATE-----` |
-| `azureCertificateFile`     | One of `azureCertificate` and `azureCertificateFile` | Path to the PFX/PKCS#12 file containing the certificate and private key | `"/path/to/file.pem"`                                                                                                                                   |
-| `azureCertificatePassword` | N                                                    | Password for the certificate if encrypted                               | `"password"`                                                                                                                                            |
+| 字段                         | 必填                                                   | 详情                         | 示例                                                                                                                                                      |
+| -------------------------- | ---------------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `azureTenantId`            | Y                                                    | Azure AD 租户的 ID            | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                                |
+| `azureClientId`            | Y                                                    | 客户端 ID（应用程序 ID）            | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                                |
+| `azureCertificate`         | One of `azureCertificate` and `azureCertificateFile` | 证书和私钥（PFX/PKCS#12 格式）      | `"-----BEGIN PRIVATE KEY-----\n MIIEvgI... \n -----END PRIVATE KEY----- \n -----BEGIN CERTIFICATE----- \n MIICoTC... \n -----END CERTIFICATE-----` |
+| `azureCertificateFile`     | One of `azureCertificate` and `azureCertificateFile` | 包含证书和私钥的 PFX/PKCS#12 文件的路径 | `"/path/to/file.pem"`                                                                                                                                   |
+| `azureCertificatePassword` | N                                                    | 证书的密码（如果已加密）               | `"password"`                                                                                                                                            |
 
-When running on Kubernetes, you can also use references to Kubernetes secrets for any or all of the values above.
+在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes 秘密的引用。
 
 **Authenticating with Managed Service Identities (MSI):**
 
-| 字段              | 必填 | 详情                         | 示例                                       |
-| --------------- | -- | -------------------------- | ---------------------------------------- |
-| `azureClientId` | N  | Client ID (application ID) | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"` |
+| 字段              | 必填 | 详情              | 示例                                       |
+| --------------- | -- | --------------- | ---------------------------------------- |
+| `azureClientId` | N  | 客户端 ID（应用程序 ID） | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"` |
 
-Using MSI you're not required to specify any value, although you may optionally pass `azureClientId` if needed.
+使用 MSI 时，不需要指定任何值，但如果需要，可以选择 `azureClientId` 。
 
 ### Aliases
 
