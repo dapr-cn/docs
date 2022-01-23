@@ -57,6 +57,8 @@ jobs:
           # https://github.com/apps/dco
           signoff: true
           delete-branch: true
+          branch: new_content_${{ matrix.version_tag }}
+          base: ${{ matrix.version_tag }}_content
           title: "Update content for ${{ matrix.version_tag }}"
           labels: |
             content update
