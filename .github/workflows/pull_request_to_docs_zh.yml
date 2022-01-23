@@ -1,23 +1,37 @@
-name: create pull request to docs-zh
+name: Sync translations from dapr-zh/docs
 
 on:
+  # schedule:
+  #   - cron: "10 1 * * *"
+  workflow_dispatch:
   push:
     branches:
-      - v1.1/publish_translate_site
+      - docs_zh
 
 jobs:
-  delpoy_github:
+  sync_zh_docs:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version_tag:
+          - v1.0
+          - v1.1
+          - v1.2
+          - v1.3
+          - v1.4
+          - v1.5
 
     steps:
       - name: Checkout docs_zh
         uses: actions/checkout@v2
         with:
           repository: dapr/docs-zh
-          ref: v1.1_content
+          ref: ${{ matrix.version_tag }}_content
       - name: Checkout content
         uses: actions/checkout@v2
         with:
+          ref: ${{ matrix.version_tag }}/translate_site
           path: translated
 
       - name: Copy content
@@ -28,15 +42,24 @@ jobs:
           mv content/content content/zh-hans
           rm -rf translated
 
+      - name: permissions
+        #   https://stackoverflow.com/questions/11774397/git-push-error-unable-to-unlink-old-permission-denied/26950991#26950991
+        run: |
+          sudo chmod -R 777 .
+          git config core.filemode false
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.PAT_TO_DOCS_ZH }}
           commit-message: Update content
-          committer: dapr-cn <dapr-cn@hotmail.com>
-          signoff: false
+          committer: newbe36524 <newbe36524@users.noreply.github.com>
+          # https://github.com/apps/dco
+          signoff: true
           delete-branch: true
-          title: "Update content"
+          branch: new_content_${{ matrix.version_tag }}
+          base: ${{ matrix.version_tag }}_content
+          title: "Update content for ${{ matrix.version_tag }}"
           labels: |
             content update
             automated pr
