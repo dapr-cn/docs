@@ -30,6 +30,7 @@ jobs:
           repository: dapr/docs
           ref: ${{ matrix.version_tag }}
           submodules: recursive
+          fetch-depth: 0
 
 
       - name: update docs_zh submodule
