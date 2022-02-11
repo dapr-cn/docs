@@ -257,13 +257,13 @@ DELETE http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### URL 参数
 
-| 参数              | 说明                                                                     |
-| --------------- | ---------------------------------------------------------------------- |
-| daprPort        | dapr 端口。                                                               |
-| storename       | `metadata.name` 用户配置的状态存储组件 yaml 中的字段。 请参阅上面提到的 Dapr State Store 配置结构。 |
-| key             | 所需状态的键                                                                 |
-| 并发（Concurrency） | (可选) *先写* 或 *后写*, 请参阅 [状态操作选项](#optional-behaviors)                    |
-| consistency     | (可选) *强一致性* 或 *最终一致性*, 请参阅 [状态操作选项](#optional-behaviors)               |
+| 参数          | 说明                                                                     |
+| ----------- | ---------------------------------------------------------------------- |
+| daprPort    | dapr 端口。                                                               |
+| storename   | `metadata.name` 用户配置的状态存储组件 yaml 中的字段。 请参阅上面提到的 Dapr State Store 配置结构。 |
+| key         | 所需状态的键                                                                 |
+| concurrency | (可选) *先写* 或 *后写*, 请参阅 [状态操作选项](#optional-behaviors)                    |
+| consistency | (可选) *强一致性* 或 *最终一致性*, 请参阅 [状态操作选项](#optional-behaviors)               |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -539,8 +539,8 @@ spec:
 
 Dapr uses Optimized Concurrency Control (OCC) with ETags. Dapr 对状态存储提出了以下可选要求：
 
-* 与 Dapr 兼容的状态存储可能支持使用 ETags 的开放式并发控制。 当 ETag 与 *保存* 或 *删除*  请求相关联时，仅当附加的 ETag 与数据库中的最新 ETag 匹配时，存储才允许更新。
-* 当写入请求中缺少ETag时，状态存储应以最后写入的方式处理这些请求。 This is to allow optimizations for high-throughput write scenarios in which data contingency is low or has no negative effects.
+* 与 Dapr 兼容的状态存储可能支持使用 ETags 的开放式并发控制。 When an ETag is associated with an *save* or *delete*  request, the store shall allow the update only if the attached ETag matches with the latest ETag in the database.
+* When ETag is missing in the write requests, the state store shall handle the requests in a last-write-wins fashion. This is to allow optimizations for high-throughput write scenarios in which data contingency is low or has no negative effects.
 * A store shall **always** return ETags when returning states to callers.
 
 ### Consistency

@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "Authenticate requests from Dapr using token authentication"
-linkTitle: "App API token authentication"
+title: "使用令牌认证来自 Dapr 的请求"
+linkTitle: "App API 令牌认证"
 weight: 4000
-description: "Require every incoming API request from Dapr to include an authentication token"
+description: "要求来自 Dapr 的每个传入 API 请求都包含身份验证令牌"
 ---
 
-For some building blocks such as pub/sub, service invocation and input bindings, Dapr communicates with an app over HTTP or gRPC. To enable the application to authenticate requests that are arriving from the Dapr sidecar, you can configure Dapr to send an API token as a header (in HTTP requests) or metadata (in gRPC requests).
+对于某些构建基块，例如发布/订阅、服务调用和输入绑定，Dapr 通过 HTTP 或 gRPC 与应用进行通信。 要使应用程序能够对从 Dapr sidecar 发出的请求进行身份验证，您可以将 Dapr 配置为将 API 令牌作为标头（在 HTTP 请求中）或元数据（在 gRPC 请求中）发送。
 
 ## 创建令牌
 
 Dapr 使用 [JWT](https://jwt.io/) 令牌进行 API 身份验证。
 
-> Note, while Dapr itself is actually not the JWT token issuer in this implementation, being explicit about the use of JWT standard enables federated implementations in the future (e.g. OAuth2).
+> 请注意，虽然 Dapr 本身并不是这个实现中的 JWT 令牌签发者，但明确使用 JWT 标准对未来联邦特性的实现 提供了支持(例如 OAuth2)。
 
 为了配置 API 身份验证，需要先使用任意 JWT 令牌兼容工具(如https://jwt.io/) 和 secret 来生成您的令牌。
 
 > 注意，这个 secret 仅仅用来生成令牌，Dapr 不需要知道或存储它
 
-## Configure app API token authentication in Dapr
+## 在 Dapr 中配置应用 API 令牌身份验证
 
 令牌认证配置在 Kubernetes 和 自托管 Dapr deployments 下稍有不同：
 
@@ -56,11 +56,11 @@ When deployed, the Dapr Sidecar Injector automatically creates a secret referenc
 
 ### 自托管
 
-To rotate the configured token in self-hosted, simply set the `APP_API_TOKEN` environment variable to the new value and restart the `daprd` process.
+如果需要更新已配置的令牌，只需将环境变量 `APR_API_TOKEN`设置为新值，然后重新启动 `daprd`进程。
 
 ### Kubernetes
 
-如果需要更新在 Kubernates 中已配置的令牌，更新先前在每个命名空间中创建的 secret 的令牌。 您可以使用 `kubectl patch` 命令执行此操作，但更简单的方法是，使用 manifest 更新每个命名空间中的这些对象:
+如果需要更新在 Kubernates 中已配置的令牌，则需要更新先前在每个命名空间中创建的 secret 的令牌。 您可以使用 `kubectl patch` 命令执行此操作，但更简单的方法是，使用 manifest 更新每个命名空间中的这些对象:
 
 ```yaml
 apiVersion: v1

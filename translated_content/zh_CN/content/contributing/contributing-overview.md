@@ -66,33 +66,33 @@ description: >
 
 - 第三方代码必须包含许可证。
 
-## Developer Certificate of Origin：签名您的工作
+## 开发者原产地证书：签署您的作品
 #### 每个提交都需要签名
 
 开发人员原产地证书（DCO）是贡献者证明他们编写或以其他方式有权提交他们为项目贡献的代码的轻量级方式。 以下是 [DCO](https://developercertificate.org/)的全文，为便于阅读而重新格式化：
 ```
-By making a contribution to this project, I certify that:
-    (a) The contribution was created in whole or in part by me and I have the right to submit it under the open source license indicated in the file; or
-    (b) The contribution is based upon previous work that, to the best of my knowledge, is covered under an appropriate open source license and I have the right under that license to submit that work with modifications, whether created in whole or in part by me, under the same open source license (unless I am permitted to submit under a different license), as indicated in the file; or
-    (c) The contribution was provided directly to me by some other person who certified (a), (b) or (c) and I have not modified it.
-    (d) I understand and agree that this project and the contribution are public and that a record of the contribution (including all personal information I submit with it, including my sign-off) is maintained indefinitely and may be redistributed consistent with this project or the open source license(s) involved.
+通过对本项目的贡献，我证明：
+    （a）贡献全部或部分由我创建，我有权根据文件中指示的开源许可证提交;或
+    （b）贡献基于先前的工作，据我所知，这些工作受适当的开源许可证的约束，并且我有权根据该许可证在同一开源许可证下提交该作品，无论是全部还是部分由我创建（除非我被允许以不同的许可证提交）， 如文件中所示;或
+    （c）捐款是由其他认证（a），（b）或（c）的人直接提供给我的，我没有修改它。
+    （d）我理解并同意，本项目和贡献是公开的，并且贡献的记录（包括我随之提交的所有个人信息，包括我的签名）将无限期地保留，并且可以根据本项目或所涉及的开源许可证进行重新分发。
 ```
-Contributors sign-off that they adhere to these requirements by adding a `Signed-off-by` line to commit messages.
+参与者通过添加 `Signed-off-by` 行来签署他们遵守这些要求。
 
 ```
 This is my commit message
 Signed-off-by: Random J Developer <random@developer.example.org>
 ```
-Git even has a `-s` command line option to append this automatically to your commit message:
+Git 甚至有一个 `-s` 命令行选项，可以自动将其附加到您的提交消息中：
 ```
 $ git commit -s -m 'This is my commit message'
 ```
 
-Each Pull Request is checked  whether or not commits in a Pull Request do contain a valid Signed-off-by line.
+检查每个拉取请求中的提交是否包含有效的" Signed-off-by"行。
 
-#### I didn't sign my commit, now what?!
+#### 我没有签署我的提交，现在该怎么办？！
 
-No worries - You can easily replay your changes, sign them and force push them!
+不用担心 - 您可以轻松重放更改，签名并强制推送！
 
 ```
 git checkout <branch-name>

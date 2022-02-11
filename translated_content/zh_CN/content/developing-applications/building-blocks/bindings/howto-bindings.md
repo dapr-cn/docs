@@ -10,7 +10,7 @@ weight: 300
 
 ## 示例︰
 
-The below code example loosely describes an application that processes orders. In the example, there is an order processing service which has a Dapr sidecar. The order processing service uses Dapr to invoke external resources, in this case a Kafka, via an output binding.
+下面的代码示例松散地描述了处理订单的应用程序。 在示例中，有一个订单处理服务，它具有 Dapr sidecar。 订单处理服务使用 Dapr 通过输出绑定调用外部资源，在本例中为 Kafka。
 
 <img src="/images/building-block-output-binding-example.png" width=1000 alt="Diagram showing bindings of example service">
 
@@ -20,7 +20,7 @@ The below code example loosely describes an application that processes orders. I
 
 就本指南的目的，您将使用 Kafka 绑定。 您可以在 [此处]({{< ref setup-bindings >}}) 找到不同绑定规范的列表。
 
-Create a new binding component with the name of `checkout`.
+创建一个名称为 `checkout`的新绑定组件。
 
 在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
 
@@ -89,9 +89,9 @@ spec:
 
 {{< /tabs >}}
 
-## 2. Send an event (Output binding)
+## 2. 发送事件（输出绑定）
 
-Below are code examples that leverage Dapr SDKs to interact with an output binding.
+下面是利用 Dapr SDK 与输出绑定交互的代码示例。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 
@@ -132,7 +132,7 @@ namespace EventService
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --app-ssl dotnet run
@@ -176,7 +176,7 @@ public class OrderProcessingServiceApplication {
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -210,7 +210,7 @@ while True:
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --app-protocol grpc python3 OrderProcessingService.py
@@ -254,7 +254,7 @@ func main() {
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
@@ -300,7 +300,7 @@ main();
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -312,13 +312,13 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 注: 在 Kubernetes 中运行时，使用 `kubectl apply -f binding.yaml` 将此文件应用于您的集群
 
-You can also invoke the output bindings endpoint using HTTP:
+还可以使用 HTTP 调用输出绑定端点：
 
 ```bash
 curl -X POST -H 'Content-Type: application/json' http://localhost:3601/v1.0/bindings/checkout -d '{ "data": { "orderId": "100" }, "operation": "create" }'
 ```
 
-As seen above, you invoked the `/binding` endpoint with the name of the binding to invoke, in our case its `checkout`. 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
+如上所示，您调用了 `/binding` 端点，其中包含要调用的绑定的名称，在我们的例子中，它是 `checkout`。 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
 
 您还会注意到，有一个 `operation` 字段告诉绑定您需要它执行的操作。 您可以查看 [这里]({{< ref supported-bindings >}}) 查看每个输出绑定都支持的操作。
 

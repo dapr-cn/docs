@@ -270,7 +270,7 @@ with DaprClient() as d:
 
 {{< code-snippet file="contributing-1.py" lang="python" marker="#SAMPLE" >}}
 
-Use the `replace-key-[token]` and `replace-value-[token]` parameters to limit the embedded snipped to a portion of the sample file. This is useful when you want abbreviate a portion of the code sample. Multiple replacements are supported with multiple values of `token`.
+使用 `replace-key-[token]` 和 `replace-value-[token]` 参数将嵌入的片段限制在样本文件的某个部分。 当您想要缩写代码示例的一部分时，这很有用。 支持使用多个 `token`的值进行多次替换。
 
 下面的短代码和代码示例:
 
@@ -311,8 +311,8 @@ with DaprClient() as d:
 
 {{< code-snippet file="./contributing-2.py" lang="python" replace-key-imports="#IMPORTS" replace-value-imports="# Import statements"  >}}
 
-### YouTube videos
-Hugo can automatically embed YouTube videos using a shortcode:
+### YouTube 视频
+Hugo可以使用短代码自动嵌入YouTube视频:
 ```
 {{</* youtube [VIDEO ID] */>}}
 ```
