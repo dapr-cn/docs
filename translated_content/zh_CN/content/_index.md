@@ -14,7 +14,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 {{% /alert %}}
 
 
-### Start developing with Dapr
+### 开始使用 Dapr 进行开发
 
 <div class="card-deck">
   <div class="card">
@@ -40,7 +40,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
   </div>
 </div>
 
-### Learn more about Dapr
+### 了解更多有关Dapr的信息
 
 <div class="card-deck">
   <div class="card">
@@ -59,7 +59,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>Operations</b></h5>
+      <h5 class="card-title"><b>操作</b></h5>
       <p class="card-text">关于在 Dapr 上运行您的应用程序的托管选项，最佳实践和其他指南</p>
       <a href="{{< ref operations >}}" class="stretched-link"></a>
     </div>

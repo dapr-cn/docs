@@ -46,9 +46,9 @@ spec:
 
 ## 创建Azure Event Hub
 
-Follow the instructions [here](https://docs.microsoft.com/azure/event-hubs/event-hubs-create) on setting up Azure Event Hubs. Since this implementation uses the Event Processor Host, you will also need an [Azure Storage Account](https://docs.microsoft.com/azure/storage/common/storage-account-create?tabs=azure-portal). Follow the instructions [here](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage) to manage the storage account access keys.
+请按照[此处](https://docs.microsoft.com/azure/event-hubs/event-hubs-create)的说明设置 Azure Event Hubs。 由于本实施例使用Event Processor Host，你还需要一个[Azure Storage Account](https://docs.microsoft.com/azure/storage/common/storage-account-create?tabs=azure-portal)。 请遵循[此处](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage)的说明来管理存储帐户访问密钥。
 
-See [here](https://docs.microsoft.com/azure/event-hubs/authorize-access-shared-access-signature) on how to get the Event Hubs connection string. 注意这不是Event Hubs命名空间。
+请参阅[这里](https://docs.microsoft.com/azure/event-hubs/authorize-access-shared-access-signature)，了解如何获取 Event Hubs 连接地址。 注意这不是Event Hubs命名空间。
 
 ### 为每个订阅者创建消费组
 
@@ -56,13 +56,13 @@ See [here](https://docs.microsoft.com/azure/event-hubs/authorize-access-shared-a
 
 注意：Dapr将消费组的名称传递给EventHub，因此没有在元数据中提供。
 
-## Subscribing to Azure IoT Hub Events
+## 订阅 Azure IoT Hub Events
 
-Azure IoT Hub provides an [endpoint that is compatible with Event Hubs](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-read-builtin#read-from-the-built-in-endpoint), so the Azure Event Hubs pubsub component can also be used to subscribe to Azure IoT Hub events.
+Azure IoT Hub 提供了一个与 [Event Hubs兼容的终结点](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-read-builtin#read-from-the-built-in-endpoint)，因此 Azure Event Hubs pubsub 组件也可用于订阅 Azure IoT Hub 的事件。
 
-The device-to-cloud events created by Azure IoT Hub devices will contain additional [IoT Hub System Properties](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-construct#system-properties-of-d2c-iot-hub-messages), and the Azure Event Hubs pubsub component for Dapr will return the following as part of the response metadata:
+由 Azure IoT Hub 设备创建的设备到云事件将包含其他 [IoT Hub System Properties](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-construct#system-properties-of-d2c-iot-hub-messages)，并且 Dapr 的 Azure Event Hubs pubsub 组件将返回以下内容作为响应元数据的一部分：
 
-| System Property Name                   | Description & Routing Query Keyword                                                                                                                                     |
+| 系统属性名称                                 | 路由查询关键字 & 说明                                                                                                                                                            |
 | -------------------------------------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `iothub-connection-auth-generation-id` | 发送消息的设备的 **connectionDeviceGenerationId** 请参阅 [IoT Hub 设备标识属性](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties)。 |
 | `iothub-connection-auth-method`        | **connectionAuthMethod** 用于验证发送消息的设备。                                                                                                                                   |
@@ -71,7 +71,7 @@ The device-to-cloud events created by Azure IoT Hub devices will contain additio
 | `iothub-enqueuedtime`                  | RFC3339 格式的 **enqueuedTime** 表示 IoT Hub 已收到设备到云的消息。                                                                                                                     |
 | `message-id`                           | 用户可设置的 AMQP **messageId**。                                                                                                                                              |
 
-For example, the headers of a delivered HTTP subscription message would contain:
+例如，已发送HTTP订阅消息的头部将包含：
 
 ```nodejs
 {

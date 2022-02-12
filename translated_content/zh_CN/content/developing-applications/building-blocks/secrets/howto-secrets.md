@@ -10,7 +10,7 @@ description: "使用密钥存储构建块安全地获取密钥"
 
 ## Example
 
-The below code example loosely describes an application that processes orders. In the example, there is an order processing service, which has a Dapr sidecar. The order processing service uses Dapr to store a secret in a local secret store.
+以下的示例简述了一个订单处理程序。 In the example, there is an order processing service, which has a Dapr sidecar. The order processing service uses Dapr to store a secret in a local secret store.
 
 <img src="/images/building-block-secrets-management-example.png" width=1000 alt="Diagram showing secrets management of example service">
 

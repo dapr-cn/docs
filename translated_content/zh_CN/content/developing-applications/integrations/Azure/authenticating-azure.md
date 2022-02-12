@@ -65,32 +65,32 @@ Azure AD 构建在开放标准（如 OAuth 2.0）之上，该标准允许服务�
 
 使用 MSI 时，不需要指定任何值，但如果需要，可以选择 `azureClientId` 。
 
-### Aliases
+### 别名
 
-For backwards-compatibility reasons, the following values in the metadata are supported as aliases, although their use is discouraged.
+出于向后兼容性的原因，支持将元数据中的以下值作为别名，但不建议使用它们。
 
-| Metadata key               | Aliases (supported but deprecated) |
-| -------------------------- | ---------------------------------- |
-| `azureTenantId`            | `spnTenantId`, `tenantId`          |
-| `azureClientId`            | `spnClientId`, `clientId`          |
-| `azureClientSecret`        | `spnClientSecret`, `clientSecret`  |
-| `azureCertificate`         | `spnCertificate`                   |
-| `azureCertificateFile`     | `spnCertificateFile`               |
-| `azureCertificatePassword` | `spnCertificatePassword`           |
+| 元数据键                       | 别名（支持但已弃用）                        |
+| -------------------------- | --------------------------------- |
+| `azureTenantId`            | `spnTenantId`, `tenantId`         |
+| `azureClientId`            | `spnClientId`, `clientId`         |
+| `azureClientSecret`        | `spnClientSecret`, `clientSecret` |
+| `azureCertificate`         | `spnCertificate`                  |
+| `azureCertificateFile`     | `spnCertificateFile`              |
+| `azureCertificatePassword` | `spnCertificatePassword`          |
 
-## Generating a new Azure AD application and Service Principal
+## 生成新的 Azure AD 应用程序和服务主体
 
-To start, create a new Azure AD application, which will also be used as Service Principal.
+首先，请创建一个新的 Azure AD 应用程序，该应用程序也将用作服务主体。
 
 前期准备:
 
 - [Azure Subscription](https://azure.microsoft.com/free/)
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
 - [jq](https://stedolan.github.io/jq/download/)
-- OpenSSL (included by default on all Linux and macOS systems, as well as on WSL)
-- The scripts below are optimized for a bash or zsh shell
+- OpenSSL（默认包含在所有 Linux 和 macOS 系统以及 WSL 上）
+- 下面的脚本针对 bash 或 zsh shell 进行了优化
 
-> If you haven't already, start by logging in to Azure using the Azure CLI:
+> 如果尚未登录，请先使用 Azure CLI 登录到 Azure：
 > 
 > ```sh
 > # Log in Azure
@@ -99,9 +99,9 @@ To start, create a new Azure AD application, which will also be used as Service 
 > az account set -s [your subscription id]
 > ```
 
-### Creating an Azure AD application
+### 创建 Azure AD 应用程序
 
-First, create the Azure AD application with:
+首先，使用以下命令创建 Azure AD 应用程序：
 
 ```sh
 # Friendly name for the application / Service Principal
@@ -119,7 +119,7 @@ APP_ID=$(az ad app create \
 
 {{% codetab %}}
 
-To create a **client secret**, then run this command. This will generate a random password based on the base64 charset and 40-characters long. Additionally, it will make the password valid for 2 years, before it will need to be rotated:
+若要创建 **客户端密钥**，请运行此命令。 这将基于 base64 字符集和 40 个字符长生成随机密码。 此外，它将使密码有效期为2年，然后才需要轮换：
 
 ```sh
 az ad app credential reset \
@@ -128,7 +128,7 @@ az ad app credential reset \
   --password $(openssl rand -base64 30)
 ```
 
-The ouput of the command above will be similar to this:
+上述命令的输出将类似于以下内容：
 
 ```json
 {
@@ -139,7 +139,7 @@ The ouput of the command above will be similar to this:
 }
 ```
 
-Take note of the values above, which you'll need to use in your Dapr components' metadata, to allow Dapr to authenticate with Azure:
+记下上述值，你需要在 Dapr 组件的元数据中使用这些值，以允许 Dapr 向 Azure 进行身份验证：
 
 - `appId` is the value for `azureClientId`
 - `password` is the value for `azureClientSecret` (this was randomly-generated)
@@ -148,7 +148,7 @@ Take note of the values above, which you'll need to use in your Dapr components'
 {{% /codetab %}}
 
 {{% codetab %}}
-If you'd rather use a **PFX (PKCS#12) certificate**, run this command which will create a self-signed certificate:
+如果要使用 **PFX （PKCS#12） 证书**，请运行以下命令，该命令将创建自签名证书：
 
 ```sh
 az ad app credential reset \
@@ -156,9 +156,9 @@ az ad app credential reset \
   --create-cert
 ```
 
-> Note: self-signed certificates are recommended for development only. For production, you should use certificates signed by a CA and imported with the `--cert` flag.
+> 注意：建议仅将自签名证书用于开发。 对于生产环境，应使用由 CA 签名并使用 `--cert` 标志导入的证书。
 
-The output of the command above should look like:
+上述命令的输出应如下所示：
 
 ```json
 {
@@ -170,12 +170,12 @@ The output of the command above should look like:
 }
 ```
 
-Take note of the values above, which you'll need to use in your Dapr components' metadata:
+记下上述值，您需要在 Dapr 组件的元数据中使用这些值：
 
-- `appId` is the value for `azureClientId`
-- `tenant` is the value for `azureTenantId`
-- The self-signed PFX certificate and private key are written in the file at the path specified in `fileWithCertAndPrivateKey`.  
-  Use the contents of that file as `azureCertificate` (or write it to a file on the server and use `azureCertificateFile`)
+- `appId` 是 `azureClientId` 的值
+- `tenant` 是 `azureTenantId` 的值
+- 自签名 PFX 证书和私钥写入文件中，位于 `fileWithCertAndPrivateKey`。  
+  将该文件的内容用作 `azureCertificate` （或将其写入服务器上的文件并使用 `azureCertificateFile`）
 
 > While the generated file has the `.pem` extension, it contains a certificate and private key encoded as PFX (PKCS#12).
 
@@ -183,9 +183,9 @@ Take note of the values above, which you'll need to use in your Dapr components'
 
 {{< /tabs >}}
 
-### Creating a Service Principal
+### 创建服务主体
 
-Once you have created an Azure AD application, create a Service Principal for that application, which will allow us to grant it access to Azure resources. 运行：
+创建 Azure AD 应用程序后，请为该应用程序创建服务主体，这将允许我们授予其对 Azure 资源的访问权限。 运行：
 
 ```sh
 SERVICE_PRINCIPAL_ID=$(az ad sp create \
@@ -194,31 +194,31 @@ SERVICE_PRINCIPAL_ID=$(az ad sp create \
 echo "Service Principal ID: ${SERVICE_PRINCIPAL_ID}"
 ```
 
-The output will be similar to:
+输出将类似于：
 
 ```text
-Service Principal ID: 1d0ccf05-5427-4b5e-8eb4-005ac5f9f163
+服务主体 ID： 1d0ccf05-5427-4b5e-8eb4-005ac5f9f163
 ```
 
-Note that the value above is the ID of the **Service Principal** which is different from the ID of application in Azure AD (client ID)! The former is defined within an Azure tenant and is used to grant access to Azure resources to an application. The client ID instead is used by your application to authenticate. To sum things up:
+请注意，上面的值是 **服务主体** 的 ID，它与 Azure AD 中的应用程序 ID（客户端 ID）不同！ 前者在 Azure 租户中定义，用于向应用程序授予对 Azure 资源的访问权限。 客户端ID反而被你的应用程序用来验证。 总结一下：
 
-- You'll use the client ID in Dapr manifests to configure authentication with Azure services
-- You'll use the Service Principal ID to grant permissions to an application to access Azure resources
+- 你将使用Dapr清单中的客户ID来配置Azure服务的认证。
+- 你将使用服务主体 ID 向应用程序授予访问 Azure 资源的权限
 
-Keep in mind that the Service Principal that was just created does not have access to any Azure resource by default. Access will need to be granted to each resource as needed, as documented in the docs for the components.
+请记住，默认情况下，刚创建的服务主体无权访问任何 Azure 资源。 需要根据需要授予对每个资源的访问权限，如组件的文档中所述。
 
-> Note: this step is different from the [official documentation](https://docs.microsoft.com/cli/azure/create-an-azure-service-principal-azure-cli) as the short-hand commands included there create a Service Principal that has broad read-write access to all Azure resources in your subscription.  
-> Not only doing that would grant our Service Principal more access than you are likely going to desire, but this also applies only to the Azure management plane (Azure Resource Manager, or ARM), which is irrelevant for Dapr anyways (all Azure components are designed to interact with the data plane of various services, and not ARM).
+> 注意：此步骤与 [官方文档](https://docs.microsoft.com/cli/azure/create-an-azure-service-principal-azure-cli) 不同，因为其中包含的速记命令会创建一个服务主体，该服务主体对订阅中的所有 Azure 资源具有广泛的读写访问权限。  
+> 这样做不仅会授予我们的服务主体比你可能需要的更多的访问权限，而且这也适用于 Azure 管理平面（Azure 资源管理器或 ARM），这与 Dapr 无关（所有 Azure 组件都设计为与各种服务的数据平面进行交互， 而不是 ARM）。
 
-### Example usage in a Dapr component
+### Dapr 组件中的用法示例
 
-In this example, you will set up an Azure Key Vault secret store component that uses Azure AD to authenticate.
+在此示例中，将设置使用 Azure AD 进行身份验证的 Azure Key Vault 机密存储组件。
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
-To use a **client secret**, create a file called `azurekeyvault.yaml` in the components directory, filling in with the details from the above setup process:
+若要使用 **客户端密钥**，请在组件目录中创建一个名为 `azurekeyvault.yaml` 的文件，并填写上述设置过程中的详细信息：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -240,7 +240,7 @@ spec:
     value : "[your_client_secret]"
 ```
 
-If you want to use a **certificate** saved on the local disk, instead, use:
+如果要使用保存在本地磁盘上的 **证书** ，请改用：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -264,11 +264,11 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-In Kubernetes, you store the client secret or the certificate into the Kubernetes Secret Store and then refer to those in the YAML file.
+在 Kubernetes 中，您将客户端密钥或证书存储到 Kubernetes 密钥存储中，然后引用 YAML 文件中的那些内容。
 
-To use a **client secret**:
+使用 **客户端密钥**：
 
-1. Create a Kubernetes secret using the following command:
+1. 使用以下命令创建一个kubernetes密钥:
 
    ```bash
    kubectl create secret generic [your_k8s_secret_name] --from-literal=[your_k8s_secret_key]=[your_client_secret]
@@ -278,9 +278,9 @@ To use a **client secret**:
     - `[your_k8s_secret_name]` is secret name in the Kubernetes secret store
     - `[your_k8s_secret_key]` is secret key in the Kubernetes secret store
 
-2. Create an `azurekeyvault.yaml` component file.
+2. 创建一个`azurekeyvault.yaml`组件文件.
 
-    The component yaml refers to the Kubernetes secretstore using `auth` property and  `secretKeyRef` refers to the client secret stored in the Kubernetes secret store.
+    组件 yaml 引用 Kubernetes secretstore，使用 `auth` 属性，  `secretKeyRef` 引用存储在 Kubernetes 密钥存储中的客户端密钥。
 
     ```yaml
     apiVersion: dapr.io/v1alpha1
@@ -306,15 +306,15 @@ To use a **client secret**:
       secretStore: kubernetes
     ```
 
-3. Apply the `azurekeyvault.yaml` component:
+3. 应用 `azurekeyvault.yaml` 组件：
 
     ```bash
     kubectl apply -f azurekeyvault.yaml
     ```
 
-To use a **certificate**:
+要使用 **证书**：
 
-1. Create a Kubernetes secret using the following command:
+1. 使用以下命令创建一个kubernetes密钥:
 
    ```bash
    kubectl create secret generic [your_k8s_secret_name] --from-file=[your_k8s_secret_key]=[pfx_certificate_file_fully_qualified_local_path]
@@ -324,9 +324,9 @@ To use a **certificate**:
     - `[your_k8s_secret_name]` is secret name in the Kubernetes secret store
     - `[your_k8s_secret_key]` is secret key in the Kubernetes secret store
 
-2. Create an `azurekeyvault.yaml` component file.
+2. 创建一个`azurekeyvault.yaml`组件文件.
 
-    The component yaml refers to the Kubernetes secretstore using `auth` property and  `secretKeyRef` refers to the certificate stored in the Kubernetes secret store.
+    组件 yaml 使用 `auth` 属性引用 Kubernetes secretstore，`secretKeyRef` 引用存储在 Kubernetes 密钥存储中的证书。
 
     ```yaml
     apiVersion: dapr.io/v1alpha1
@@ -352,7 +352,7 @@ To use a **certificate**:
       secretStore: kubernetes
     ```
 
-3. Apply the `azurekeyvault.yaml` component:
+3. 应用 `azurekeyvault.yaml` 组件：
 
     ```bash
     kubectl apply -f azurekeyvault.yaml
@@ -362,11 +362,11 @@ To use a **certificate**:
 
 {{< /tabs >}}
 
-## Using Managed Service Identities
+## 使用托管服务标识
 
-Using MSI, authentication happens automatically by virtue of your application running on top of an Azure service that has an assigned identity. For example, when you create an Azure VM or an Azure Kubernetes Service cluster and choose to enable a managed identity for that, an Azure AD application is created for you and automatically assigned to the service. Your Dapr services can then leverage that identity to authenticate with Azure AD, transparently and without you having to specify any credential.
+使用 MSI，认证会自动发生，因为应用程序运行在具有已分配身份的 Azure 服务之上。 例如，当你创建 Azure VM 或 Azure Kubernetes 服务群集并选择为其启用托管身份时，将为你创建一个 Azure AD 应用程序并自动分配给该服务。 然后，Dapr 服务可以透明地利用该身份向 Azure AD 进行身份验证，而无需指定任何凭据。
 
-To get started with managed identities, first you need to assign an identity to a new or existing Azure resource. The instructions depend on the service use. Below are links to the official documentation:
+若要开始使用托管标识，首先需要将标识分配给新的或现有的 Azure 资源。 说明取决于服务使用情况。 以下是官方文档的链接：
 
 - [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/azure/aks/use-managed-identity)
 - [Azure App Service](https://docs.microsoft.com/azure/app-service/overview-managed-identity) (including Azure Web Apps and Azure Functions)
@@ -374,9 +374,9 @@ To get started with managed identities, first you need to assign an identity to 
 - [Azure Virtual Machines Scale Sets (VMSS)](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vmss)
 - [Azure Container Instance (ACI)](https://docs.microsoft.com/azure/container-instances/container-instances-managed-identity)
 
-Other Azure application services may offer support for MSI; please check the documentation for those services to understand how to configure them.
+其他 Azure 应用程序服务可能提供对 MSI 的支持; 请查看这些服务的文档，了解如何配置它们。
 
-After assigning a managed identity to your Azure resource, you will have credentials such as:
+将托管身份分配给 Azure 资源后，你将拥有以下凭据：
 
 ```json
 {
@@ -387,11 +387,11 @@ After assigning a managed identity to your Azure resource, you will have credent
 }
 ```
 
-From the list above, take note of **`principalId`** which is the ID of the Service Principal that was created. You'll need that to grant access to Azure resources to your Service Principal.
+从上面的列表中，记下 **`principalId`** 这是创建的服务主体的 ID。 需要它才能向服务主体授予对 Azure 资源的访问权限。
 
-## Support for other Azure environments
+## 支持其他 Azure 环境
 
-By default, Dapr components are configured to interact with Azure resources in the "public cloud". If your application is deployed to another cloud, such as Azure China, Azure Government, or Azure Germany, you can enable that for supported components by setting the `azureEnvironment` metadata property to one of the supported values:
+默认情况下，Dapr 组件配置为与"公有云"中的 Azure 资源进行交互。 如果你的应用程序已部署到其他云（如 Azure 中国、Azure 政府或 Azure 德国），则可以通过将 `azureEnvironment` 元数据属性设置为受支持的值，为支持的组件启用该值：
 
 - Azure public cloud (default): `"AZUREPUBLICCLOUD"`
 - Azure China: `"AZURECHINACLOUD"`

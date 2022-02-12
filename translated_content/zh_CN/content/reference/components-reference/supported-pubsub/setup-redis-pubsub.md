@@ -47,7 +47,7 @@ spec:
 | redeliverInterval     | N  | 检查待处理消息到重发的间隔。 默认为 `"60s"`. `"0"` 禁用重发。                                               | `"30s"`                                                         |
 | processingTimeout     | N  | 在尝试重新发送消息之前必须等待的时间。 默认为 `"15s"`。 `"0"` 禁用重发。                                          | `"30s"`                                                         |
 | queueDepth            | N  | 用于处理的消息队列的大小。 默认值为 `"100"`.                                                           | `"1000"`                                                        |
-| 并发（Concurrency）       | N  | 正在处理消息的并发工作线程数。 默认值为 `"10"`.                                                          | `"15"`                                                          |
+| concurrency           | N  | 正在处理消息的并发工作线程数。 默认值为 `"10"`.                                                          | `"15"`                                                          |
 | redisType             | N  | Redis 的类型。 有两个有效的值，一个是 `"node"` 用于单节点模式，另一个是 `"cluster"` 用于 redis 集群模式。 默认为 `"node"`。 | `"cluster"`                                                     |
 | redisDB               | N  | 连接到 redis 后选择的数据库。 如果 `"redisType"` 是 `"cluster "` 此选项被忽略。 默认值为 `"0"`.                | `"0"`                                                           |
 | redisMaxRetries       | N  | 放弃前重试命令的最大次数。 默认值为不重试失败的命令。                                                           | `"5"`                                                           |

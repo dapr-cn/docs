@@ -113,7 +113,7 @@ namespace EventService
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
@@ -162,7 +162,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -196,7 +196,7 @@ while True:
         logging.info('Result after get: ' + result.data.decode('utf-8'))
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
@@ -244,7 +244,7 @@ func main() {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
@@ -297,7 +297,7 @@ function sleep(ms) {
 main();
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -379,7 +379,7 @@ namespace EventService
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
@@ -410,7 +410,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -434,7 +434,7 @@ with DaprClient() as client:
     client.delete_state(store_name=DAPR_STORE_NAME, key="order_1")
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
@@ -470,7 +470,7 @@ func main() {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
@@ -497,7 +497,7 @@ var main = function() {
 main();
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -554,7 +554,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -580,7 +580,7 @@ with DaprClient() as client:
     logging.info('Result after get bulk: ' + str(result)) 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
@@ -617,7 +617,7 @@ var main = function() {
 main();
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -706,7 +706,7 @@ namespace EventService
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
@@ -760,7 +760,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -806,7 +806,7 @@ while True:
     logging.info('Result: ' + str(result))
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
@@ -862,7 +862,7 @@ function sleep(ms) {
 main();
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start

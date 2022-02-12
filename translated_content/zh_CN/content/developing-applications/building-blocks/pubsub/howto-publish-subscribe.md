@@ -18,21 +18,21 @@ Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次
 
 ## 示例︰
 
-The below code example loosely describes an application that processes orders. In the example, there are two services - an order processing service and a checkout service. Both services have Dapr sidecars. The order processing service uses Dapr to publish a message to RabbitMQ and the checkout service subscribes to the topic in the message queue.
+以下的示例简述了一个订单处理程序。 当前示例中，存两项服务：订单处理服务和结账服务。 这两项服务都有Dapr sidecar。 订单处理服务使用 Dapr 向 RabbitMQ 发布消息，结账服务订阅消息队列中的主题。
 
 <img src="/images/building-block-pub-sub-example.png" width=1000 alt="Diagram showing state management of example service">
 
 ## 步骤 1: 设置 Pub/Sub 组件
-The following example creates applications to publish and subscribe to a topic called `orders`.
+然后发布一条消息给 `orders` 主题：
 
 第一步是设置 Pub/Sub 组件：
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
-The pubsub.yaml is created by default on your local machine when running `dapr init`. 在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yam` 或在 Windows 上打开`%UserProfile%\.dapr\components\pubsub.yaml` 组件文件以验证.
+默认情况下，pubsub.yaml 是在本地计算机上运行` dapr init`时 创建的。 在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yam` 或在 Windows 上打开`%UserProfile%\.dapr\components\pubsub.yaml` 组件文件以验证.
 
-In this example, RabbitMQ is used for publish and subscribe. Replace `pubsub.yaml` file contents with the below contents.
+在此示例中，RabbitMQ 用于发布和订阅。 将 `pubsub.yaml` 文件内容替换为以下内容。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -127,9 +127,9 @@ scopes:
 - checkout
 ```
 
-The example above shows an event subscription to topic `orders`, for the pubsub component `order_pub_sub`.
-- The `route` field tells Dapr to send all topic messages to the `/checkout` endpoint in the app.
-- The `scopes` field enables this subscription for apps with IDs `orderprocessing` and `checkout`.
+上面的示例显示了对主题 `orders`的事件订阅，用于 pubsub 组件 `order_pub_sub`。
+- `route` 告诉 Dapr 将所有主题消息发送到应用程序中的 `/checkout` 端点。
+- `scopes` 字段为具有 ID 的应用启用此订阅， `orderprocessing` 和 `checkout`。
 
 设置组件：
 
@@ -190,7 +190,7 @@ kubectl apply -f subscription.yaml
 
 {{< /tabs >}}
 
-Below are code examples that leverage Dapr SDKs to subscribe to a topic.
+下面是利用 Dapr SDK 订阅主题的代码示例。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 
@@ -222,7 +222,7 @@ namespace CheckoutService.controller
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 --app-ssl dotnet run
@@ -262,7 +262,7 @@ public class CheckoutServiceController {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 mvn spring-boot:run
@@ -291,7 +291,7 @@ def mytopic(event: v1.Event) -> None:
 app.run(6002)
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --app-protocol grpc -- python3 CheckoutService.py
@@ -336,7 +336,7 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 go run CheckoutService.go
@@ -376,7 +376,7 @@ async function start(orderId) {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 npm start
@@ -386,11 +386,11 @@ dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-por
 
 {{< /tabs >}}
 
-The `/checkout` endpoint matches the `route` defined in the subscriptions and this is where Dapr will send all topic messages to.
+`/checkout` 终结点与订阅中定义的 `route` 相匹配，这是 Dapr 将所有主题消息发送至的位置。
 
 ## 步骤 3: 发布主题
 
-Start an instance of Dapr with an app-id called `orderprocessing`:
+用名为 `orderprocessing` 的 app-id 启动一个 Dapr 实例：
 
 ```bash
 dapr run --app-id orderprocessing --dapr-http-port 3601
@@ -399,7 +399,7 @@ dapr run --app-id orderprocessing --dapr-http-port 3601
 
 {{% codetab %}}
 
-Then publish a message to the `orders` topic:
+然后发布一条消息给 `orders` 主题：
 
 ```bash
 dapr publish --publish-app-id orderprocessing --pubsub order_pub_sub --topic orders --data '{"orderId": "100"}'
@@ -407,14 +407,14 @@ dapr publish --publish-app-id orderprocessing --pubsub order_pub_sub --topic ord
 {{% /codetab %}}
 
 {{% codetab %}}
-Then publish a message to the `orders` topic:
+然后发布一条消息给 `orders` 主题：
 ```bash
 curl -X POST http://localhost:3601/v1.0/publish/order_pub_sub/orders -H "Content-Type: application/json" -d '{"orderId": "100"}'
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-Then publish a message to the `orders` topic:
+然后发布一条消息给 `orders` 主题：
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"orderId": "100"}' -Uri 'http://localhost:3601/v1.0/publish/order_pub_sub/orders'
 ```
@@ -424,7 +424,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"orderId"
 
 Dapr 将在符合 Cloud Events v1.0 的信封中自动包装用户有效负载，对 `datacontenttype` 属性使用 `Content-Type` 头值。
 
-Below are code examples that leverage Dapr SDKs to publish a topic.
+下面是利用 Dapr SDK 发布主题的代码示例。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 
@@ -466,7 +466,7 @@ namespace EventService
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --app-ssl dotnet run
@@ -516,7 +516,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -553,7 +553,7 @@ while True:
     logging.info('Published data: ' + str(orderId))
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --app-protocol grpc python3 OrderProcessingService.py
@@ -601,7 +601,7 @@ func main() {
 }
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
@@ -644,7 +644,7 @@ function sleep(ms) {
 main();
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -656,7 +656,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ## 步骤 4: ACK-ing 消息
 
-为了告诉Dapr 消息处理成功，返回一个 `200 OK` 响应。 If Dapr receives any other return status code than `200`, or if your app crashes, Dapr will attempt to redeliver the message following at-least-once semantics.
+为了告诉Dapr 消息处理成功，返回一个 `200 OK` 响应。 如果 Dapr 收到超过 `200` 的返回状态代码，或者你的应用崩溃，Dapr 将根据 At-Least-Once 语义尝试重新传递消息。
 
 ## 发送自定义 CloudEvent
 
@@ -669,21 +669,21 @@ Dapr 自动接收发布请求上发送的数据，并将其包装在CloudEvent 1
 {{< tabs "Dapr CLI" "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
-Publish a custom CloudEvent to the `orders` topic:
+将自定义 CloudEvent 发布到 `orders` 主题：
 ```bash
 dapr publish --publish-app-id orderprocessing --pubsub order_pub_sub --topic orders --data '{"specversion" : "1.0", "type" : "com.dapr.cloudevent.sent", "source" : "testcloudeventspubsub", "subject" : "Cloud Events Test", "id" : "someCloudEventId", "time" : "2021-08-02T09:00:00Z", "datacontenttype" : "application/cloudevents+json", "data" : {"orderId": "100"}}'
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-Publish a custom CloudEvent to the `orders` topic:
+将自定义 CloudEvent 发布到 `orders` 主题：
 ```bash
 curl -X POST http://localhost:3601/v1.0/publish/order_pub_sub/orders -H "Content-Type: application/cloudevents+json" -d '{"specversion" : "1.0", "type" : "com.dapr.cloudevent.sent", "source" : "testcloudeventspubsub", "subject" : "Cloud Events Test", "id" : "someCloudEventId", "time" : "2021-08-02T09:00:00Z", "datacontenttype" : "application/cloudevents+json", "data" : {"orderId": "100"}}'
 ```
 {{% /codetab %}}
 
 {{% codetab %}}
-Publish a custom CloudEvent to the `orders` topic:
+将自定义 CloudEvent 发布到 `orders` 主题：
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/cloudevents+json' -Body '{"specversion" : "1.0", "type" : "com.dapr.cloudevent.sent", "source" : "testcloudeventspubsub", "subject" : "Cloud Events Test", "id" : "someCloudEventId", "time" : "2021-08-02T09:00:00Z", "datacontenttype" : "application/cloudevents+json", "data" : {"orderId": "100"}}' -Uri 'http://localhost:3601/v1.0/publish/order_pub_sub/orders'
 ```
@@ -694,7 +694,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/cloudevents+json' -Body
 ## 下一步
 
 - 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)
-- Learn about [PubSub routing]({{< ref howto-route-messages >}})
+- 了解 [PubSub 路由]({{< ref howto-route-messages >}})
 - 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
 - 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: 使用输入绑定来触发应用程序"
-linkTitle: "How-To: Input bindings"
+linkTitle: "How-To: 输入绑定"
 description: "使用 Dapr 输入绑定来触发由事件驱动的程序"
 weight: 200
 ---
@@ -20,19 +20,19 @@ Dapr 绑定允许您 :
 
 ## 示例︰
 
-The below code example loosely describes an application that processes orders. In the example, there is an order processing service which has a Dapr sidecar. The checkout service uses Dapr to trigger the application via an input binding.
+下面的代码示例松散地描述了处理订单的应用程序。 在示例中，有一个订单处理服务，它具有 Dapr sidecar。 checkout 服务使用 Dapr 通过输入绑定触发应用程序。
 
 <img src="/images/building-block-input-binding-example.png" width=1000 alt="Diagram showing bindings of example service">
 
 ## 1. 创建绑定
 
-An input binding represents a resource that Dapr uses to read events from and push to your application.
+输入绑定表示 Dapr 用于从中读取事件并推送到应用程序的资源。
 
-就本指南的目的，您将使用 Kafka 绑定。 You can find a list of supported binding components [here]({{< ref setup-bindings >}}).
+就本指南的目的，您将使用 Kafka 绑定。 您可以在[此处]({{< ref setup-bindings >}})找到支持的绑定组件列表。
 
-Create a new binding component with the name of `checkout`.
+创建一个名称为 `checkout`的新绑定组件。
 
-Inside the `metadata` section, configure Kafka related properties, such as the topic to publish the message to and the broker.
+在 `metadata` 部分中，配置与 Kafka 相关的属性，例如要将消息发布到的主题和代理。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
@@ -99,11 +99,11 @@ spec:
 
 {{< /tabs >}}
 
-## 2. Listen for incoming events (input binding)
+## 2. 侦听传入事件（输入绑定）
 
 现在配置您的应用程序来接收传入事件。 如果使用 HTTP ，那么需要监听在文件 `metadata.name` 中指定的绑定名称所对应的`POST` 终结点。
 
-Below are code examples that leverage Dapr SDKs to demonstrate an output binding.
+下面是利用 Dapr SDK 演示输出绑定的代码示例。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 
@@ -133,7 +133,7 @@ namespace CheckoutService.controller
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 --app-ssl dotnet run
@@ -164,7 +164,7 @@ public class CheckoutServiceController {
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 mvn spring-boot:run
@@ -191,7 +191,7 @@ app.run(6002)
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --app-protocol grpc -- python3 CheckoutService.py
@@ -231,7 +231,7 @@ func main() {
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 go run CheckoutService.go
@@ -264,7 +264,7 @@ async function start() {
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
+导航到包含上述代码的目录，然后运行以下命令以启动 Dapr sidecar 并运行该应用程序：
 
 ```bash
 dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 dotnet npm start
@@ -280,11 +280,11 @@ dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-por
 
 ### 拒绝事件
 
-In order to tell Dapr that the event was not processed correctly in your application and schedule it for redelivery, return any response other than `200 OK`. 例如， `500 Error`。
+为了告诉 Dapr 您的应用程序中未正确处理该事件并安排重新传递，请返回除 `200 OK`以外的任何响应。 例如， `500 Error`。
 
-### Specifying a custom route
+### 指定自定义路由
 
-By default, incoming events will be sent to an HTTP endpoint that corresponds to the name of the input binding. You can override this by setting the following metadata property:
+默认情况下，传入事件将发送到与输入绑定的名称对应的 HTTP 终结点。 您可以通过设置以下元数据属性来覆盖此属性：
 
 ```yaml
 name: mybinding

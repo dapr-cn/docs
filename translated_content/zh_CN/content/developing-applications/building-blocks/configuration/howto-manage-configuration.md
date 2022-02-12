@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "How-To: Manage configuration from a store"
-linkTitle: "How-To: Manage configuration from a store"
+title: "操作方法：从存储管理配置"
+linkTitle: "操作方法：从存储中管理配置"
 weight: 2000
-description: "Learn how to get application configuration and subscribe for changes"
+description: "了解如何获取应用程序配置并订阅更改"
 ---
 
 ## 介绍
-This HowTo uses the Redis configuration store component as an example on how to retrieve a configuration item.
+本操作方法使用 Redis 配置存储组件作为示例来检索配置项目。
 
-*This API is currently in `Alpha` state and only available on gRPC. An HTTP1.1 supported version with this URL syntax `/v1.0/configuration` will be available before the API is certified into `Stable` state.*
+**此 API 目前在 `Alpha` 并且只能在 gRPC 上使用。 在将 API 认证为 `Stable` 状态之前，将提供具有此 URL 语法 `/v1.0/configuration` 的 HTTP1.1 支持版本。*
 
-## Step 1: Create a configuration item in store
+## 步骤 1：创建配置项目
 
 首先，在支持的配置存储中创建配置项目。 这可以是一个简单的键值项，具有您选择的任何键。 对于此示例，我们将使用 Redis 配置存储组件.
 
@@ -36,7 +36,7 @@ set myconfig "wookie"
 
 ### 配置 Dapr 配置存储
 
-Save the following component file, for example to the [default components folder]({{<ref "install-dapr-selfhost.md#step-5-verify-components-directory-has-been-initialized">}}) on your machine. You can use this as the Dapr component YAML for Kubernetes using `kubectl` or when running with the Dapr CLI. Note: The Redis configuration component has identical metadata to the Redis state store component, so you can simply copy and change the Redis state store component type if you already have a Redis state store YAML file.
+例如，将以下组件文件保存到计算机上 [默认组件文件夹]({{<ref "install-dapr-selfhost.md#step-5-verify-components-directory-has-been-initialized">}})。 您可以使用 `kubectl` 或使用 Dapr CLI 运行时将其用作 Kubernetes 的 Dapr 组件 YAML。 注意：Redis 配置组件具有与 Redis 状态存储组件相同的元数据，因此，如果您已有 Redis 状态存储 YAML 文件，则只需复制和更改 Redis 状态存储组件类型即可。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -89,7 +89,7 @@ client.GetConfigurationAlpha1({ StoreName: 'redisconfigstore', Keys = ['myconfig
 
 ### 监视配置项目
 
-Create a Dapr gRPC client from the [Dapr proto](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) using your [preferred language](https://grpc.io/docs/languages/). Then use the proto method `SubscribeConfigurationAlpha1` on your client stub to start subscribing to events. 该方法接受以下请求对象：
+使用您的[首选语言](https://grpc.io/docs/languages/)从 [Dapr proto](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) 创建 Dapr gRPC 客户端。 然后使用 proto 方法 `SubscribeConfigurationAlpha1` 开始订阅事件。 该方法接受以下请求对象：
 
 ```proto
 message SubscribeConfigurationRequest {
@@ -109,4 +109,4 @@ message SubscribeConfigurationRequest {
 使用此方法，您可以订阅给定配置存储的特定密钥中的更改。 gRPC 流因语言而异 - 有关用法，请参阅此处的 [gRPC 示例](https://grpc.io/docs/languages/) 。
 
 ## 下一步
-* Read [configuration API overview]({{< ref configuration-api-overview.md >}})
+* 阅读 [配置 API 概述]({{< ref configuration-api-overview.md >}})

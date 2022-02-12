@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Configure endpoint authorization with OAuth"
-linkTitle: "Configure endpoint authorization with OAuth"
+title: "使用 OAuth 配置终结点授权"
+linkTitle: "使用 OAuth 配置终结点授权"
 weight: 2000
-description: "Enable OAuth authorization on application endpoints for your web APIs"
+description: "在 Web API 的应用程序终结点上启用 OAuth 授权"
 ---
 
-Dapr OAuth 2.0 [middleware]({{< ref "middleware.md" >}}) allows you to enable [OAuth](https://oauth.net/2/) authorization on Dapr endpoints for your web APIs using the [Authorization Code Grant flow](https://tools.ietf.org/html/rfc6749#section-4.1). You can also inject authorization tokens into your endpoint APIs which can be used for authorization towards external APIs called by your APIs using the [Client Credentials Grant flow](https://tools.ietf.org/html/rfc6749#section-4.4). When the middleware is enabled any method invocation through Dapr needs to be authorized before getting passed to the user code.
+Dapr OAuth 2.0 [中间件]({{< ref "middleware.md" >}}) 允许您使用 [授权代码授予流](https://tools.ietf.org/html/rfc6749#section-4.1)在 Web API 的 Dapr 端点上启用 [OAuth](https://oauth.net/2/) 授权。 还可以将授权令牌注入到终结点 API 中，这些 API 可用于对 API 使用 [客户端凭据授予流](https://tools.ietf.org/html/rfc6749#section-4.4)调用的外部 API 进行授权。 When the middleware is enabled any method invocation through Dapr needs to be authorized before getting passed to the user code.
 
 The main difference between the two flows is that the `Authorization Code Grant flow` needs user interaction and authorizes a user where the `Client Credentials Grant flow` doesn't need a user interaction and authorizes a service/application.
 
