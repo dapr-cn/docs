@@ -130,7 +130,20 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>23533 words</b>
+                      <b>24297 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/betulasector">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>betulasector</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>20583 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -144,19 +157,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>20462 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/betulasector">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>betulasector</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>20339 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
