@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## 配置
-To setup JetStream pubsub create a component of type `pubsub.jetstream`. See \[this guide\]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+要设置 JetStream pubsub，请创建一个类型为 `pubsub.jetstream` 的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -43,9 +43,9 @@ spec:
 | 字段             | 必填 | 详情                                   | 示例                        |
 | -------------- |:--:| ------------------------------------ | ------------------------- |
 | natsURL        | Y  | NATS 服务器地址 URL                       | "`nats://localhost:4222`" |
-| name           | N  | NATS connection name                 | `"my-conn-name"`          |
+| name           | N  | NATS 连接名称                            | `"my-conn-name"`          |
 | durableName    | N  | [Durable name][]                     | `"my-durable"`            |
-| queueGroupName | N  | Queue group name                     | `"my-queue"`              |
+| queueGroupName | N  | 队列组名称                                | `"my-queue"`              |
 | startSequence  | N  | [Start Sequence][]                   | `1`                       |
 | startTime      | N  | [Start Time][] in Unix format        | `1630349391`              |
 | deliverAll     | N  | Set deliver all as [Replay Policy][] | `true`                    |

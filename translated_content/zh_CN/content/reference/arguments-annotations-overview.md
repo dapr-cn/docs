@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Dapr arguments and annotations for daprd, CLI, and Kubernetes"
-linkTitle: "Arguments and annotations"
+title: "Daprd, CLI 和 Kubernetes 的 Dapr 参数和注释"
+linkTitle: "参数和说明"
 description: "The arguments and annotations available when configuring Dapr in different environments"
 weight: 300
 aliases:
