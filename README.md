@@ -169,7 +169,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>45364 words</b>
+                      <b>45574 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -212,19 +212,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/doddgu">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>doddgu</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>2372 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/jerrold0607">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -234,7 +221,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>2340 words</b>
+                      <b>2441 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -247,7 +234,20 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>2028 words</b>
+                      <b>2423 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/doddgu">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>doddgu</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>2372 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
