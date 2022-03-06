@@ -169,7 +169,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>45574 words</b>
+                      <b>48567 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -221,7 +221,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>2441 words</b>
+                      <b>2485 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -303,6 +303,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/WisWang">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Hongzhi (WisWang)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>412 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/stulzq">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -353,7 +366,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>280 words</b>
                   </sub>
-              </td>
+              </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/codjust">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -366,7 +379,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>208 words</b>
                   </sub>
-              </td></tr><tr>
+              </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/ipfans">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
