@@ -199,6 +199,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/w_Y_">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>w_Y_</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>4627 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/herowk">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -212,19 +225,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/w_Y_">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>w_Y_</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>3470 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/jerrold0607">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -234,7 +234,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>2504 words</b>
+                      <b>2659 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -312,7 +312,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>510 words</b>
+                      <b>589 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
