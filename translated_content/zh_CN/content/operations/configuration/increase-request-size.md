@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "How-To: Handle large http body requests"
-linkTitle: "Http request body size"
+title: "指南：处理大型的http正文请求"
+linkTitle: "Http请求体的大小"
 weight: 6000
-description: "Configure http requests that are bigger than 4 MB"
+description: "配置大于4MB的http请求"
 ---
 
 默认情况下，Dapr 对请求正文大小的限制设置为 4 MB，但是您可以通过定义 `dapr.io/http-max-request-size` annotations 或 `--dapr-http-max-request-size` 标志来更改此限制。

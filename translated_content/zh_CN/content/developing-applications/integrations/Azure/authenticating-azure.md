@@ -57,7 +57,7 @@ Azure AD 构建在开放标准（如 OAuth 2.0）之上，该标准允许服务�
 
 在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes 秘密的引用。
 
-**Authenticating with Managed Service Identities (MSI):**
+**使用托管服务标识 （MSI） 进行身份验证：**
 
 | 字段              | 必填 | 详情              | 示例                                       |
 | --------------- | -- | --------------- | ---------------------------------------- |
@@ -177,7 +177,7 @@ az ad app credential reset \
 - 自签名 PFX 证书和私钥写入文件中，位于 `fileWithCertAndPrivateKey`。  
   将该文件的内容用作 `azureCertificate` （或将其写入服务器上的文件并使用 `azureCertificateFile`）
 
-> While the generated file has the `.pem` extension, it contains a certificate and private key encoded as PFX (PKCS#12).
+> 虽然生成的文件有 `.pem` 扩展名，但它包含了一个编码为PFX（PKCS#12）的证书和私钥。
 
 {{% /codetab %}}
 
@@ -320,9 +320,9 @@ spec:
    kubectl create secret generic [your_k8s_secret_name] --from-file=[your_k8s_secret_key]=[pfx_certificate_file_fully_qualified_local_path]
    ```
 
-    - `[pfx_certificate_file_fully_qualified_local_path]` is the path to the PFX file you obtained earlier
-    - `[your_k8s_secret_name]` is secret name in the Kubernetes secret store
-    - `[your_k8s_secret_key]` is secret key in the Kubernetes secret store
+    - `[pfx_certificate_file_fully_qualified_local_path]`是你在上面下载的PFX证书文件的路径
+    - `[your_k8s_secret_name]` 是Kubernetes秘密存储中的秘密名称。
+    - `[your_k8s_secret_key]` 是Kubernetes秘密存储中的秘密密钥。
 
 2. 创建一个`azurekeyvault.yaml`组件文件.
 
@@ -400,8 +400,8 @@ spec:
 
 ## 参考资料
 
-- [Azure AD app credential: Azure CLI reference](https://docs.microsoft.com/cli/azure/ad/app/credential)
-- [Azure Managed Service Identity (MSI) overview](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview)
+- [Azure AD app 凭据：Azure CLI 引用](https://docs.microsoft.com/cli/azure/ad/app/credential)
+- [Azure 托管服务标识 （MSI） 概述](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview)
 - [密钥构建块]({{< ref secrets >}})
 - [指南：获取密钥]({{< ref "howto-secrets.md" >}})
 - [指南：在Dapr组件中引用密钥]({{< ref component-secrets.md >}})

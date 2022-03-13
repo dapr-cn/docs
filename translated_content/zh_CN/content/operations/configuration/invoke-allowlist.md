@@ -10,11 +10,11 @@ description: "限制应用程序可以通过服务调用在\"调用\"应用程�
 
 访问控制策略在配置中指定，并应用于 Dapr sidecar </em> 被调用*的应用程序。 示例访问策略如下所示，对被调用应用的访问基于匹配的策略操作。 您可以为所有调用应用程序提供默认的全局操作，如果未指定访问控制策略，则默认行为是允许所有调用应用程序访问被调用的应用程序。</p>
 
-## 基础概念
+## 概念
 
 **TrustDomain** - "信任域"是用于管理信任关系的逻辑组。 每个应用程序都分配有一个信任域，可以在访问控制列表策略规范中指定。 如果未定义策略规范或指定了空信任域，则使用默认值"public"。 此信任域用于在 TLS 证书中生成应用程序的标识。
 
-**App Identity** - Dapr requests the sentry service to generate a [SPIFFE](https://spiffe.io/) id for all applications and this id is attached in the TLS cert. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched.
+**App Identity** - Dapr 需要哨兵服务来生成一个 [SPIFFE](https://spiffe.io/) id 给所有应用，并且这个id会附加在 TLS 证书中。 SPIFFE id 有如下格式: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`。  对应的规范中，信任域，命名空间 和 app ID 会从 SPIFFE id 的 TLS 证书中提取出来。   这些值会对应上规范中相应的值.。 如果三个值都能对应上，那更多的规范能进一步的校验。
 
 ## 配置属性
 
@@ -113,7 +113,7 @@ spec:
 
 使用此配置时，以下唯一方案是允许访问的，并且来自所有其他应用（包括 app1 或 app2 上的其他方法）的所有其他方法请求都将被拒绝
 * trustDomain = public, namespace = default, appID = app1, operation = op1, http verb = POST/PUT
-* trustDomain = "myDomain", namespace = "ns1", appID = app2, operation = op2 and application protocol is GRPC , only HTTP verbs POST/PUT on method op1 from appId = app1 are allowed and all other method requests from all other apps, including other methods on app1, are denied
+* trustDomain = "myDomain"， namespace = "ns1"， appID = app2， operation = op2，应用程序协议是 GRPC，只允许 HTTP POST/PUT 在 appId = app1时请求方法op1，而来自所有其他应用程序的所有方法， 以及app1上的其他方法，请求都会被拒绝
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -320,7 +320,7 @@ spec:
 
 您可以创建并应用上述配置文件 `nodeappconfig.yaml` 和 `pythonconfig.yaml` 由 [configuration]({{< ref "configuration-concept.md" >}}) 描述到 Kubernetes 部署。
 
-For example, below is how the pythonapp is deployed to Kubernetes in the default namespace with this pythonappconfig configuration file. Do the same for the nodeapp deployment and then look at the logs for the pythonapp to see the calls fail due to the **deny** operation action set in the nodeappconfig file. Change this action to **allow** and re-deploy the apps and you should then see this call succeed.
+例如，以下是通过这个pythonappconfig配置文件将pythonapp部署到Kubernetes的默认命名空间中。 部署nodeapp，然后查看pythonapp的日志，您会发现由于nodeappconfig文件中的action **deny** Post请求的设置，pythonapp的请求失败了。 将action改为 **allow** 之后再部署app，您会发现请求又会成功了。
 
 ```yaml
 apiVersion: apps/v1
@@ -350,7 +350,7 @@ spec:
  ```
 
 ## 社区示例
-Watch this [video](https://youtu.be/j99RN_nxExA?t=1108) on how to apply access control list for service invocation.
+观看这个 [视频](https://youtu. be/j99RN_nxExA? t=1108) ，了解如何为服务调用应用访问控制列表。
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=1108" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

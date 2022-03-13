@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "指南: 设置 Azure 监视器以搜索日志并收集指标"
+title: "操作方法: 设置 Azure 监视器以搜索日志并收集指标"
 linkTitle: "Azure Monitor"
 weight: 2000
-description: "使用Azure Monitor为Azure Kubernetes Service(AKS) 启用Dapr度量和日志"
+description: "使用 Azure Monitor 为 Azure Kubernetes Service(AKS) 启用 Dapr 度量和日志"
 ---
 
 ## 先决条件
 
 - [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/)
-- [对AKS中的容器启用 Azure Monitor。](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview)
+- [对 AKS 中的容器启用 Azure Monitor。](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm 3](https://helm.sh/)
 
@@ -21,9 +21,6 @@ description: "使用Azure Monitor为Azure Kubernetes Service(AKS) 启用Dapr度�
 $ kubectl get pods -n kube-system
 NAME                                                              READY   STATUS    RESTARTS   AGE
 ...
-$ kubectl get pods -n kube-system
-NAME                                                              READY   STATUS    RESTARTS   AGE
-...
 omsagent-75qjs                                                    1/1     Running   1          44h
 omsagent-c7c4t                                                    1/1     Running   0          44h
 omsagent-rs-74f488997c-dshpx                                      1/1     Running   1          44h
@@ -31,7 +28,7 @@ omsagent-smtk7                                                    1/1     Runnin
 ...
 ```
 
-2. 应用config map来启用Prometheus metrics endpoint抓取。
+2. 应用 config map 来启用 Prometheus metrics 端点抓取。
 
 您可以使用 [azm-config-map.yaml](/docs/azm-config-map.yaml) 来启用 Prometheus 度量端点抓取。
 
@@ -49,7 +46,7 @@ omsagent-smtk7                                                    1/1     Runnin
 ...
 ```
 
-应用config map：
+应用 config map：
 
 ```bash
 kubectl apply -f ./azm-config.map.yaml
@@ -65,11 +62,11 @@ helm install dapr dapr/dapr --namespace dapr-system --set global.logAsJson=true
 
 2. 启用 JSON 格式化日志到 Dapr sidecar 并添加 Prometheus 注释。
 
-> 注意: OMS Agent仅在replicaset具有Prometheus注释时才抓取指标。
+> 注意: OMS Agent 仅在 replicaset 具有 Prometheus 注解时才抓取指标。
 
-添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml.
+添加 `dapr.io/log-as-json: "true"` annotation 到 deployment yaml.
 
-示例:
+示例：
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -100,11 +97,11 @@ spec:
 
 ## 用 Azure Monitor 搜索度量和日志
 
-1. 前往Azure Monitor
+1. 前往 Azure Monitor
 
 2. 搜索 Dapr 日志
 
-下面是一个示例查询，用于解析JSON格式的日志和来自Dapr系统进程的查询日志。
+下面是一个示例查询，用于解析 JSON 格式的日志和来自 Dapr 系统进程的查询日志。
 
 ```
 ContainerLog
@@ -116,7 +113,7 @@ ContainerLog
 
 3. 搜索度量
 
-这个语句查询process_resident_memory_bytes Prometheus度量的Dapr系统进程，并呈现时间图
+这个语句查询 process_resident_memory_bytes Prometheus 度量的 Dapr 系统进程，并呈现时间图
 
 ```
 InsightsMetrics
@@ -130,6 +127,6 @@ InsightsMetrics
 
 # 参考资料
 
-* [使用Azure Monitor为容器配置普Prometheus度量数据抓取](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-prometheus-integration)
-* [配置用于容器的 Azure Monitor的代理数据收集](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-agent-config)
+* [使用 Azure Monitor 为容器配置 Prometheus 度量数据抓取](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-prometheus-integration)
+* [配置用于容器的 Azure Monitor 的代理数据收集](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-agent-config)
 * [Azure Monitor 查询](https://docs.microsoft.com/azure/azure-monitor/log-query/query-language)

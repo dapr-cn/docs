@@ -6,10 +6,10 @@ weight: 1000
 description: 开发 Dapr 应用程序的 Java SDK 包
 ---
 
-## 前提
+## 先决条件
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
+- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
 - JDK 11 或更高版本 - 已发布的 jar 与 Java 8 兼容：
     - [AdoptOpenJDK 11 - LTS](https://adoptopenjdk.net/)
     - [Oracle's JDK 15](https://www.oracle.com/java/technologies/javase-downloads.html)
@@ -67,7 +67,7 @@ dependencies {
 
 ## 构建块
 
-Java SDK允许您与的所有 [Dapr构建块]({{< ref building-blocks >}}) 进行交互。
+Java SDK 允许您与的所有 [Dapr 构建块]({{< ref building-blocks >}}) 进行交互。
 
 ### 调用服务
 
@@ -92,9 +92,9 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 ```
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
-- 请访问[Java SDK示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/invoke)，获取代码示例和说明，以试用服务调用。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/invoke)，获取代码示例和说明，以试用服务调用。
 
-### 保存 & 获取 应用程序状态
+### 保存 & 获取应用程序状态
 
 ```java
 import io.dapr.client.DaprClient;
@@ -165,7 +165,7 @@ public class SubscriberController {
 ```
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- 请访问[Java SDK示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/pubsub/http)，获取代码示例和说明，以试用发布订阅。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/pubsub/http)，获取代码示例和说明，以试用发布订阅。
 
 ### 与输出绑定交互
 
@@ -183,9 +183,9 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 ```
 
 - 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
-- 请访问[Java SDK示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/bindings/http)，获取代码示例和说明，以使用输出绑定。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/bindings/http)，获取代码示例和说明，以试用输出绑定。
 
-### 检索密钥
+### 检索秘密
 
 ```java
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -199,11 +199,11 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 }
 ```
 
-- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
-- 请访问[Java SDK示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/secrets)，获取代码示例和说明，以试用密钥检索。
+- 有关秘密的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/secrets)，获取代码示例和说明，以试用秘密检索。
 
-### Actors
-参与者是孤立的独立计算单元，具有单线程执行。 Dapr 提供了一个基于 [虚拟 Actor 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/)的 actor 实现，它提供了一个单线程编程模型，其中 actor 在不使用时被垃圾回收。 通过 Dapr 的实现，您可以根据 Actors 模型编写 Dapr Actor，而 Dapr 利用底层平台提供的可扩展性和可靠性保证。
+### Actor
+Actor 组件是具有单线程执行能力的隔离、独立的计算和状态单元。 Dapr 提供了一个基于 [虚拟 Actor 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/)的 actor 实现，它提供了一个单线程编程模型，其中 actor 在不使用时会进行垃圾回收。 通过 Dapr 的实现，您可以根据 Actor 模型编写 Dapr Actor，而 Dapr 则利用底层平台提供的可扩展性和可靠性。
 
 ```java
 import io.dapr.actors.ActorMethod;
@@ -225,8 +225,8 @@ public interface DemoActor {
 }
 ```
 
-- 有关 Actor 的完整指南，请访问 [操作方法：在Dapr中使用 Actor ]({{< ref howto-actors.md >}})。
-- 请访问[Java SDK示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors)，获取代码示例和说明，以试用 Actor。
+- 有关 Actor 的完整指南，请访问 [操作方法：在 Dapr 中使用 Actor ]({{< ref howto-actors.md >}})。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors)，获取代码示例和说明，以试用 Actor。
 
 ## 相关链接
 - [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples)

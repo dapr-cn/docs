@@ -7,7 +7,7 @@ description: 使用方式
 no_list: true
 ---
 
-有了 Dapr，您可以发布包括云事件的任何内容， 有了 Dapr，您可以发布包括云事件的任何内容， SDK包含一个简单的云事件实现，但是 您也可以只传递一个符合云事件规范的数组，或者使用另一个库。
+使用 Dapr，您可以发布任何内容，包括 cloud event。 SDK 包含一个简单的 cloud event 实现，但您也可以只传递符合 cloud event 规范的数组或使用其他库。
 
 ```php
 <?php
@@ -20,11 +20,11 @@ $app->post('/publish', function(\DI\FactoryInterface $factory) {
 });
 ```
 
-For more information about publish/subscribe, check out [the howto]({{< ref howto-publish-subscribe.md >}}).
+有关发布/订阅的详细信息，请查看[操作方法]({{< ref howto-publish-subscribe.md >}})。
 
 ## 数据内容类型
 
-PHP SDK 允许在构建自定义云端事件或发布原始 数据时设置数据内容类型。
+PHP SDK 允许在构建自定义 cloud event 或发布原始数据时设置数据内容类型。
 
 {{< tabs CloudEvent "Raw" >}}
 
@@ -50,7 +50,7 @@ $publisher->topic('my-topic')->publish($raw_data, content_type: 'application/oct
 
 {{% alert title="Binary data" color="warning" %}}
 
-Only `application/octet-steam` is supported for binary data.
+只有 `application/octet-steam` 支持二进制数据。
 
 {{% /alert %}}
 
@@ -58,6 +58,6 @@ Only `application/octet-steam` is supported for binary data.
 
 {{< /tabs >}}
 
-## 接收云事件
+## 接收 Cloud Event
 
-在订阅处理器中，您可以通过 DI 容器将 dapr\PubSub\Cloud Event</code> `或 <code>array` 注入到控制器中。 之前进行了一些验证以确保您有一个适当的事件。 如果您需要直接访问数据或者事件，请使用 array </ code>。</p>
+在订阅处理器中，您可以通过 DI 容器将 `dapr\PubSub\Cloud Event` 或 `array` 注入到控制器中。 前者会进行一些验证，以确保事件是正确的。 如果需要直接访问数据，或者事件不符合规范，请使用 `array`。

@@ -65,8 +65,8 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
 
 前期准备:
 
-1. Install the [Dapr CLI]({{< ref install-dapr-cli.md >}})
-2. [Azure blob storage account](https://docs.microsoft.com/azure/storage/blobs/storage-blob-create-account-block-blob?tabs=azure-portal)
+1. 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
+2. [Azure blob存储账户](https://docs.microsoft.com/azure/storage/blobs/storage-blob-create-account-block-blob?tabs=azure-portal)
 
 ### 自托管
 
@@ -226,5 +226,5 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
 
 ## 其他资源
 
-- [Blog announcement](https://cloudblogs.microsoft.com/opensource/2020/05/26/announcing-cloud-native-workflows-dapr-logic-apps/)
-- [Repo](https://github.com/dapr/workflows)
+- [博客公告](https://cloudblogs.microsoft.com/opensource/2020/05/26/announcing-cloud-native-workflows-dapr-logic-apps/)
+- [仓库](https://github.com/dapr/workflows)

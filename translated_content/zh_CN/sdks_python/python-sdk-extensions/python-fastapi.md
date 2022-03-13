@@ -3,7 +3,7 @@ type: docs
 title: "Dapr Python SDK 与 FastAPI 集成"
 linkTitle: "FastAPI"
 weight: 200000
-description: 如何创建基于 FastAPI 扩展的Dapr Python virtual actors
+description: 如何创建基于 FastAPI 扩展的 Dapr Python virtual actors
 ---
 
 Dapr Python SDK 使用 `dapr-ext-fastapi` 模块与 FastAPI 集成

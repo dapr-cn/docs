@@ -3,7 +3,7 @@ type: docs
 title: "分析 & 调试"
 linkTitle: "调试"
 weight: 4000
-description: "通过分析会话发现问题和问题，如并发性、性能、Cpu 和内存使用情况"
+description: "通过分析会话发现问题，如并发性、性能、cpu 和内存使用情况"
 ---
 
 在任何实际方案中，应用都可能开始在资源峰值方面表现出不良行为。 在大多数情况下，CPU/内存峰值并不少见。
@@ -24,7 +24,7 @@ dapr run --enable-profiling --profile-port 7777 python myapp.py
 
 ### Kubernetes
 
-要在 Kubernetes 中启用性能分析，只需将 `dapr.io/enable-profiling` annotation 添加到 Dapr 注释的 pod 中：
+要在 Kubernetes 中启用性能分析，只需将 `dapr.io/enable-profiling` 注解添加到有 Dapr 注解的 pod 中：
 
 ```yml
    annotations:
@@ -49,7 +49,7 @@ node-subscriber  3500          3000      node app.js  12s  2019-09-09 15:11.24  
 
 抓住 DAPR 端口，如果已按上述方式启用了性能分析，您现在可以开始使用 `pprof` 来分析 Dapr。 查看上面的 Kubernetes 示例，了解一些用于分析 Dapr 的有用命令。
 
-有关pprof的更多信息， [这里可以找到](https://github.com/google/pprof)。
+有关 pprof 的更多信息， [这里可以找到](https://github.com/google/pprof)。
 
 ### Kubernetes
 

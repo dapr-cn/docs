@@ -1,23 +1,23 @@
 ---
 type: docs
-title: "Getting started with the Dapr client Python SDK"
+title: "开始使用 Dapr 客户端 Python SDK"
 linkTitle: "客户端"
 weight: 10000
-description: How to get up and running with the Dapr Python SDK
+description: 如何使用 Dapr Python SDK 启动和运行
 ---
 
-The Dapr client package allows you to interact with other Dapr applications from a Python application.
+Dapr 客户端包允许您从 Python 应用程序中与其他 Dapr 应用程序进行交互。
 
 ## 前提
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- 安装[Python 3.7+](https://www.python.org/downloads/)
-- 安装[Dapr Python 模块]({{< ref "python#install-the0dapr-module" >}})
+- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
+- 安装 [Python 3.7+](https://www.python.org/downloads/)
+- 安装 [Dapr Python 模块]({{< ref "python#install-the0dapr-module" >}})
 
 ## 导入包
 
-The dapr package contains the `DaprClient` which will be used to create and use a client.
+Dapr 包包含 `DaprClient` ，该工具包将用于创建和使用客户端。
 
 ```python
 from dapr.clients import DaprClient
@@ -25,7 +25,7 @@ from dapr.clients import DaprClient
 
 ## 构建块
 
-The Python SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
+Python SDK 允许你与所有的 [Dapr 构建块]({{< ref building-blocks >}})交互。
 
 ### 调用服务
 
@@ -42,9 +42,9 @@ with DaprClient() as d:
 ```
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/invoke-simple) for code samples and instructions to try out service invocation
+- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/invoke-simple) ，了解代码样本和说明，尝试服务调用。
 
-### 保存 & 获取 应用程序状态
+### 保存 & 获取应用程序状态
 
 ```python
 from dapr.clients import DaprClient
@@ -61,7 +61,7 @@ with DaprClient() as d:
 ```
 
 - 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/state_store) for code samples and instructions to try out state management
+- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/state_store) ，了解代码样本和说明，以尝试使用状态管理。
 
 ### 发布 & 订阅消息
 
@@ -91,7 +91,7 @@ def mytopic(event: v1.Event) -> None:
 ```
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/pubsub-simple) for code samples and instructions to try out pub/sub
+- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/pubsub-simple)以获取代码样本和说明，尝试使用 pub/sub
 
 ### 与输出绑定交互
 
@@ -103,9 +103,9 @@ with DaprClient() as d:
 ```
 
 - 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/invoke-binding) for code samples and instructions to try out output bindings
+- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/invoke-binding)以获取代码样本和说明，尝试输出绑定。
 
-### 检索密钥
+### 检索秘密
 
 ```python
 from dapr.clients import DaprClient
@@ -115,7 +115,7 @@ with DaprClient() as d:
 ```
 
 - 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/secret_store) for code samples and instructions to try out retrieving secrets
+- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/secret_store)以获取代码样本和说明，以尝试检索秘密。
 
 ## 相关链接
-- [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples)
+- [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples)

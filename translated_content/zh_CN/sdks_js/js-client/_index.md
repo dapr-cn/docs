@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "JavaScript Client SDK"
+title: "JavaScript 客户端 SDK"
 linkTitle: "客户端"
 weight: 500
-description: 开发 Dapr 应用程序的 JavaScript SDK 包
+description: JavaScript 客户端 SDK，用于开发 Dapr 应用程序
 ---
 
-## 前提
+## 先决条件
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [最新LTS版本的Node或更高版本](https://nodejs.org/en/)
+- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
+- [最新 LTS 版本的 Node 或更高版本](https://nodejs.org/en/)
 
 ## 安装和导入 Dapr 的 JS SDK
 
@@ -19,7 +19,7 @@ description: 开发 Dapr 应用程序的 JavaScript SDK 包
 npm i dapr-client
 ```
 
-导入库：
+导入类库：
 ```javascript
 import { DaprClient, DaprServer, HttpMethod, CommunicationProtocolEnum } from "dapr-client";
 
@@ -37,15 +37,15 @@ const server = new DaprServer(serverHost, serverPort, daprHost, daprPort, Commun
 const client = new DaprClient(daprHost, daprPort, CommunicationProtocolEnum.GRPC);
 ```
 
-##### DaprClient 库
-一个提供应用程序如何与Dapr sidecar进行通信的方法的库。
+##### DaprClient 类库
+提供应用程序如何与 Dapr sidecar 进行通信的方法。
 
-##### DaprServer 库
-一个用于应用程序如何向Dapr注册绑定/路由的库。 `startServer()`方法被用来启动服务器并绑定路由。
+##### DaprServer 类库
+用于应用程序向 Dapr 注册绑定/路由。 `startServer()`方法被用来启动服务器并绑定路由。
 
 ## 构建块
 
-JavaScript SDK允许您与的所有 [Dapr构建块]({{< ref building-blocks >}}) 进行交互。
+JavaScript SDK 允许您与的所有 [Dapr 构建块]({{< ref building-blocks >}})进行交互。
 
 ### 调用服务
 
@@ -173,7 +173,7 @@ async function start() {
 
 ### 与绑定交互
 
-**输出绑定**
+**Output Bindings**
 ```javascript
 import { DaprClient, CommunicationProtocolEnum } from "dapr-client"; 
 
@@ -213,7 +213,7 @@ async function start() {
 
 - 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
 
-### 检索密钥
+### 检索秘密
 
 ```javascript
 import { DaprClient, CommunicationProtocolEnum } from "dapr-client"; 
@@ -234,7 +234,7 @@ async function start() {
   const response = await client.secret.getBulk(secretStoreName);
 }
 ```
-- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
+- 有关秘密的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
 
 ## 相关链接
 - [JavaScript SDK 示例](https://github.com/dapr/js-sdk/tree/master/examples)

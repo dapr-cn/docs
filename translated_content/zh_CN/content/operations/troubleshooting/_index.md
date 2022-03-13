@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Debugging and Troubleshooting"
+title: "调试和故障排除"
 linkTitle: "疑难解答"
-weight: 100
-description: "Tools, techniques and common problems to help users debug and diagnose issues with Dapr"
+weight: 700
+description: "工具、技术和常见问题，帮助用户调试和诊断 Dapr 问题"
 ---
 

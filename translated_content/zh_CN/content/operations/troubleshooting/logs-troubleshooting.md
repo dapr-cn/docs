@@ -26,9 +26,9 @@ error 产生最小输出量，debug 产生最大输出量。 默认级别是 inf
 ./placement --log-level debug
 ```
 
-这将启动日志级别为 `error` 的 Dapr 运行时二进制文件和日志级别为 `debug`的 Dapr Actor 放置服务。
+这将启动日志级别为 `error` 的 Dapr 运行时二进制文件和日志级别为 `debug` 的 Dapr Actor 放置服务。
 
-## 独立模式的日志
+## 以独立模式登录
 
 若要在 Dapr CLI 运行时设置日志级别，请通过 `log-level` 参数：
 
@@ -69,7 +69,7 @@ dapr run node myapp.js
 == DAPR == time="2019-09-05T12:26:43-07:00" level=info msg="actors: established connection to placement service at localhost:50005"
 ```
 
-## Kubernetes模式的日志
+## Kubernetes 模式下的日志
 
 您可以通过在 Pod spec 模板中提供以下 annotation ，为每个 sidecar 单独设置日志级别：
 
@@ -103,7 +103,7 @@ Dapr 日志被写入 stdout 和 stderr。 本节将指导您如何查看 Dapr �
 
 #### Sidecar 日志
 
-在 Kubernetes 中部署时，Dapr sidecar 注入器会将一个名为 `daprd` 的 Dapr 容器注入到带注释的 pod 中。 为了查看sidecar的日志，只需运行 `kubectl get pods`找到有问题的pod：
+在 Kubernetes 中部署时，Dapr sidecar 注入器会将一个名为 `daprd` 的 Dapr 容器注入到带注解的 pod 中。 为了查看 sidecar 的日志，只需运行 `kubectl get pods` 找到有问题的 pod：
 
 ```bash
 NAME                                        READY     STATUS    RESTARTS   AGE
@@ -137,7 +137,7 @@ Dapr 运行以下系统 Pod：
 * Dapr sidecar injector
 * Dapr placement service
 
-#### Operator Logs
+#### Operator 日志
 
 ```Bash
 kubectl logs -l app=dapr-operator -n dapr-system

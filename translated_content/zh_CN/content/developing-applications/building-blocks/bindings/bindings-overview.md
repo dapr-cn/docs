@@ -3,7 +3,7 @@ type: docs
 title: "绑定概述"
 linkTitle: "概述"
 weight: 100
-description: Overview of the bindings API building block
+description: Dapr 绑定API构建块概述
 ---
 
 ## 介绍

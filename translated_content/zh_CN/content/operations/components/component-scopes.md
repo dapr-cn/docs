@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: 限定组件作用范围在一或多个应用"
-linkTitle: "Scope access to components"
+linkTitle: "对组件的作用域访问"
 weight: 300
 description: "限制特定 Dapr 实例的组件访问"
 ---
@@ -116,7 +116,7 @@ scopes:
 - app2
 ```
 
-## Example
+## 示例
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8W-iBDNvCUM?start=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

@@ -14,7 +14,7 @@ Dapr 为本地调用实现 HTTP 和 gRPC API 。 gRPC适用于低延迟、高性
 
 Dapr 运行时实现 [proto服务](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) ，应用程序可以通过 gRPC 进行通信。
 
-In addition to calling Dapr via gRPC, Dapr supports service to service calls with gRPC by acting as a proxy. 在这里查看更多信息 []({{< ref howto-invoke-services-grpc.md >}})。
+除了通过 gRPC 调用 Dapr 之外，Dapr 还通过充当代理来支持使用 gRPC 的服务到服务调用。 在这里查看更多信息 []({{< ref howto-invoke-services-grpc.md >}})。
 
 ## Dapr 通过 gRPC 与应用程序通信的配置
 

@@ -8,7 +8,7 @@ description: "运行 Dapr 应用程序时面临的常见问题"
 
 ## 我没有看到 Dapr sidecar 注入我的 pod 中
 
-可能有几个原因可以解释为什么sidecar不会被注入pod。 首先，检查您的 deployment 或 pod YAML文件，并检查您在正确的地方有以下 annotations ：
+可能有几个原因可以解释为什么 sidecar 不会被注入 pod。 首先，检查您的 deployment 或 pod YAML 文件，并检查您在正确的地方有以下注解：
 
 ```yaml
 annotations:
@@ -17,7 +17,7 @@ annotations:
   dapr.io/app-port: "3000"
 ```
 
-### 示例部署：
+### 示例 deployment：
 
 ```yaml
 apiVersion: apps/v1
@@ -49,13 +49,13 @@ spec:
         imagePullPolicy: Always
 ```
 
-如果您的 pod spec模板注解正确，您仍然看不到 sidecar 注入， 请确保 Dapr 在 deployment 或 pod 之前被部署到集群中。
+如果您的 pod spec 模板注解正确，您仍然看不到 sidecar 注入， 请确保 Dapr 在 deployment 或 pod 之前被部署到集群中。
 
 如果情况如此，重新启动 pods 将解决问题。
 
-如果你在一个私有的 GKE 集群上部署 Dapr ，没有额外的步骤，sidecar注入就无法工作。 请参阅 [Setup a Google Kubernetes Engine cluster]({{< ref setup-gke.md >}})。
+如果你在一个私有的 GKE 集群上部署 Dapr ，没有额外的步骤，sidecar 注入就无法工作。 请参阅[设置 Google Kubernetes Engine 集群]({{< ref setup-gke.md >}})。
 
-为了进一步诊断任何问题，请检查Dapr sidecar注入器的日志：
+为了进一步诊断任何问题，请检查 Dapr sidecar 注入器的日志：
 
 ```bash
  kubectl logs -l app=dapr-sidecar-injector -n dapr-system
@@ -65,7 +65,7 @@ spec:
 
 ## 我的 pod 处于 CrashLoopBackoff 或其他由于 daprd sidecar 而失败的状态
 
-如果Dapr sidecar (`daprd`) 需要太长时间才能初始化， 这可能是Kubernetes健康检查失败的结果。
+如果 Dapr sidecar (`daprd`) 需要太长时间才能初始化， 这可能是 Kubernetes 健康检查失败的结果。
 
 如果您的 pod 处于失败状态，您应该检查以下内容：
 
@@ -73,7 +73,7 @@ spec:
 kubectl describe pod <name-of-pod>
 ```
 
-您可能会在命令输出结束时看到如下表：
+您可能会在命令输出的末尾看到如下所示的表：
 
 ```txt
   Normal   Created    7m41s (x2 over 8m2s)   kubelet, aks-agentpool-12499885-vmss000000  Created container daprd
@@ -86,12 +86,12 @@ kubectl describe pod <name-of-pod>
 
 消息为 `Container daprd failed liveness probe, will be restarted` 表示 Dapr sidecar 没有通过健康检查并将重新启动。 消息为 `Readiness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` 和 `Liveness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` 表示健康检查失败，因为无法连接到 sidecar。
 
-这个失败的最常见原因是组件(例如状态存储) 配置不正确，导致初始化时间过长。 当初始化需要很长时间时，运行状况检查可能会在sidecar记录任何有用的东西之前终止sidecar。
+这个失败的最常见原因是组件(例如状态存储) 配置不正确，导致初始化时间过长。 当初始化需要很长时间时，运行状况检查可能会在 sidecar 记录任何有用的东西之前终止 sidecar。
 
 要诊断出根本原因：
 
 - 显著增加 liveness probe 延迟 - [链接]({{< ref "arguments-annotations-overview.md" >}})
-- 将 sidecar 的日志级别设置为调试 - [链路]({{< ref "logs-troubleshooting.md#setting-the-sidecar-log-level" >}})
+- 将 sidecar 的日志级别设置为 debug - [链接]({{< ref "logs-troubleshooting.md#setting-the-sidecar-log-level" >}})
 - 查看日志以获取有意义的信息 - [链接]({{< ref "logs-troubleshooting.md#viewing-logs-on-kubernetes" >}})
 
 > 请记住，在解决问题后，将活动检查延迟和日志级别配置回到您想要的值。
@@ -106,7 +106,7 @@ kubectl describe pod <name-of-pod>
 kubectl get components
 ```
 
-如果没有状态存储组件，则意味着您需要设置一个。 更多详情请访问 [这里.]({{< ref "state-management" >}})
+如果没有状态存储组件，则意味着您需要设置一个。 更多详情请访问[这里.]({{< ref "state-management" >}})
 
 如果一切设置正确，请确保您的凭据正确。 搜索 Dapr 运行日志并查找任何状态存储错误：
 
@@ -116,7 +116,7 @@ kubectl logs <name-of-pod> daprd
 
 ## 我无法发布和接收事件
 
-您是否在集群中安装了Dapr 消息总线？
+您是否在集群中安装了 Dapr 消息总线？
 
 若要检查，使用 kubectl 获取组件列表:
 
@@ -156,7 +156,7 @@ kubectl logs <name-of-pod> daprd
 
 ## 我没有看到来自其他服务的任何传入事件或调用
 
-您是否指定了应用程序监听的端口？ 在 Kubernetes 中，请确保指定 `dapr.io/app-port` annotation:
+您是否指定了应用程序监听的端口？ 在 Kubernetes 中，请确保指定了 `dapr.io/app-port` 注解:
 
 ```yaml
 annotations:
@@ -169,7 +169,7 @@ annotations:
 
 ## 我的 Dapr 启用的应用程序的行为不正确
 
-第一件事是检查从 Dapr API返回的 HTTP 错误代码，如果有的话。 如果您仍然找不到问题，请尝试启用 `debug` Dapr 运行时的日志级别。 请参阅此处 []({{< ref "logs.md" >}}) 如何执行此操作。
+第一件事是检查从 Dapr API返回的 HTTP 错误代码，如果有的话。 如果您仍然找不到问题，请尝试为 Dapr 运行时启用 `debug` 日志级别。 请参阅此处 []({{< ref "logs.md" >}}) 如何执行此操作。
 
 您可能还想要查看您自己进程中的错误日志。 如果在 Kubernetes 上运行，请找到包含你的应用的 pod，然后执行以下操作：
 
@@ -185,9 +185,9 @@ kubectl logs <pod-name> <name-of-your-container>
 
 除非通过将名为 `DAPR_HOST_IP` 的环境变量设置为可访问的、可 ping 的地址来指定主机名，否则 Dapr 将遍历网络接口并选择它找到的第一个非环回地址。
 
-如上所述，为了告诉 Dapr 应使用什么主机名，只需设置一个名为 `DAPR_HOST_IP`的环境变量。
+如上所述，为了告诉 Dapr 应使用什么主机名，只需设置一个名为 `DAPR_HOST_IP` 的环境变量。
 
-下面的示例显示如何将主机IP环境设置为 `127.0.0.1`：
+下面的示例显示如何将主机 IP 环境变量设置为 `127.0.0.1`：
 
 **注意：对于版本 <= 0.4.0，请使用 `HOST_IP`**
 
@@ -200,14 +200,14 @@ export DAPR_HOST_IP=127.0.0.1
 这通常是由于以下问题之一
 
 - 您可能已经在本地定义了 `NAMESPACE` 环境变量，或者将组件部署到 Kubernetes 中的其他命名空间中。 检查您的应用和组件部署到哪个命名空间。 有关详细信息，请阅读 [将组件范围限定为一个或多个应用程序]({{< ref "component-scopes.md" >}}) 。
-- 您可能尚未提供 dapr `--components-path` ， `运行` 命令，或者未将组件放入操作系统的默认组件文件夹中。 有关详细信息，请阅读 [定义组件]({{< ref "get-started-component.md" >}}) 。
-- 组件 YAML 文件中可能存在语法问题。 使用 YAML 示例 [组件检查组件 YAML]({{< ref "components.md" >}})。
+- 您可能尚未提供 dapr `--components-path` 给 `run` 命令，或者未将组件放入操作系统的默认组件文件夹中。 有关详细信息，请阅读 [定义组件]({{< ref "get-started-component.md" >}}) 。
+- 组件 YAML 文件中可能存在语法问题。 使用 [YAML 示例]({{< ref "components.md" >}})检查组件 YAML。
 
 ## 服务调用失败，我的 Dapr 服务缺少 appId （macOS）
 
-有些组织将采用能过滤所有UPD流量的软件，这是mDNS的基础。 通常，在MacOS上， `Microsoft Content Filter` 是罪魁祸首。
+有些组织将采用能过滤所有 UPD 流量的软件，这是 mDNS 的基础。 通常，在MacOS上， `Microsoft Content Filter` 是罪魁祸首。
 
-为了让mDNS正常工作，请确认 `Micorosft Content Filter` 处于未激活状态。
+为了让 mDNS 正常工作，请确认 `Micorosft Content Filter` 处于未激活状态。
 
 - 打开终端
 - 输入 `mdatp system-extension network-filter disable` 并按下回车键。
@@ -217,7 +217,7 @@ export DAPR_HOST_IP=127.0.0.1
 
 > 有些组织将不时重新启用过滤器。 如果反复遇到缺少 app-id 值的情况，请先检查筛选器是否已重新启用，然后再进行更广泛的故障排除。
 
-## Admission webhook 拒绝了请求
+## Admission webhook 拒绝请求
 
 你可能会遇到与下面类似的错误，这是因为 admission webhook 具有一个允许服务账户创建或修改资源的列表。
 

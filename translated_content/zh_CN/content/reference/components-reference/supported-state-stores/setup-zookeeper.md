@@ -2,14 +2,14 @@
 type: docs
 title: "Zookeeper"
 linkTitle: "Zookeeper"
-description: Detailed information on the Zookeeper state store component
+description: Zookeeper 状态存储组件的详细信息
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-zookeeper/"
 ---
 
 ## 配置
 
-To setup Zookeeper state store create a component of type `state.zookeeper`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+要设置 Zookeeper 状态存储，请创建个类型为 `state.zookeeper` 的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -39,20 +39,20 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 详情                                                             | 示例                                           |
-| ----------------- |:--:| -------------------------------------------------------------- | -------------------------------------------- |
-| servers           | Y  | Comma delimited list of servers                                | `"zookeeper.default.svc.cluster.local:2181"` |
-| sessionTimeout    | Y  | The session timeout value                                      | `"5s"`                                       |
-| maxBufferSize     | N  | The maximum size of buffer. 默认值为 `"1048576"`                   | `"1048576"`                                  |
-| maxConnBufferSize | N  | The maximum size of connection buffer. Defaults to `"1048576`" | `"1048576"`                                  |
-| keyPrefixPath     | N  | The key prefix path in Zookeeper. 无默认值                         | `"dapr"`                                     |
+| 字段                | 必填 | 详情                          | 示例                                           |
+| ----------------- |:--:| --------------------------- | -------------------------------------------- |
+| servers           | Y  | 逗号分隔的服务器列表                  | `"zookeeper.default.svc.cluster.local:2181"` |
+| sessionTimeout    | Y  | 会话超时值                       | `"5s"`                                       |
+| maxBufferSize     | N  | 缓冲区的最大大小。 默认值为 `"1048576"`  | `"1048576"`                                  |
+| maxConnBufferSize | N  | 连接缓冲区的最大大小。 默认为 `"1048576"` | `"1048576"`                                  |
+| keyPrefixPath     | N  | Zookeeper 中的键前缀路径。 无默认值     | `"dapr"`                                     |
 
-## Setup Zookeeper
+## 设置 Zookeeper
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-You can run Zookeeper locally using Docker:
+您可以使用 Docker 在本地运行 Zookeeper：
 
 ```
 docker run --name some-zookeeper --restart always -d zookeeper
@@ -62,16 +62,16 @@ docker run --name some-zookeeper --restart always -d zookeeper
 {{% /codetab %}}
 
 {{% codetab %}}
-The easiest way to install Zookeeper on Kubernetes is by using the [Helm chart](https://github.com/helm/charts/tree/master/incubator/zookeeper):
+在 Kubernetes 上安装 Zookeeper 最简单的方法方法是使用 [Helm chart](https://github.com/helm/charts/tree/master/incubator/zookeeper)：
 
 ```
 helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
 helm install zookeeper incubator/zookeeper
 ```
 
-This installs Zookeeper into the `default` namespace. To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`.
+这将会把 Zookeeper 安装到 `default` 命名空间。 要与 Zookeeper 交互，使用 `kubectl get svc zookeeper` 找到 service。
 
-For example, if installing using the example above, the Zookeeper host address would be:
+例如，如果你使用上面的示例安装，Zookeeper 的主机地址将是：
 
 `zookeeper.default.svc.cluster.local:2181`
 {{% /codetab %}}

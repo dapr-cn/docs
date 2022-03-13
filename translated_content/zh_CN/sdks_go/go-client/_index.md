@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "客户端"
+title: "Dapr 客户端 Go SDK 入门"
 linkTitle: "客户端"
 weight: 20000
-description: 如何开始和运行 Dapr Go SDK
+description: 如何使用 Dapr Go SDK 启动和运行
 no_list: true
 ---
 
-Dapr 客户端包允许您与Go 应用程序的其他Dapr应用程序进行交互。
+Dapr 客户端包允许您与 Go 应用程序的其他 Dapr 应用程序进行交互。
 
 ## 先决条件
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
+- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
 - [开始安装](https://golang.org/doc/install)
 
 
@@ -23,32 +23,32 @@ import "github.com/dapr/go-sdk/client"
 
 ## 构建块
 
-Go SDK允许您与所有的[Dapr构建块]({{< ref building-blocks >}})接口。
+Go SDK 允许您与所有 [Dapr 构建块]({{< ref building-blocks >}}) 进行交互。
 
-### 服务调用
+### Service Invocation
 
-在运行着 Dapr sidecar 的服务上调用一个特定的方法，Dapr 客户端 Go SDK 提供了两个选项：
+要在使用 Dapr sidecar 运行的另一个服务上调用特定方法，Dapr 客户端 Go SDK 提供了两个选项：
 
 调用没有数据的服务：
 ```go
 resp, err := client.InvokeMethod(ctx, "app-id", "method-name", "post")
 ```
 
-调用有数据的服务：
+使用数据调用服务：
 ```go
-content := &dapr. ataContentPoor
+content := &dapr.DataContent{
     ContentType: "application/json",
-    Data: []byte(`Pop "id": "a123", "value": "demo", "valid": true }"),
+    Data:        []byte(`{ "id": "a123", "value": "demo", "valid": true }`),
 }
 
-resp, err = client. nvokeMethodWiContent(ctx, "app-id", "method-name", "post", content)
+resp, err = client.InvokeMethodWithContent(ctx, "app-id", "method-name", "post", content)
 ```
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
 ### 状态管理
 
-对于简单的use-cases，Dapr客户端提供了简单易用的 `Save`, `Get`, `Delete` 方法：
+对于简单的用例，Dapr客户端提供了易于使用的 `Save`, `Get`, `Delete` 方法：
 
 ```go
 ctx := context.Background()
@@ -73,7 +73,7 @@ if err := client.DeleteState(ctx, store, "key1"); err != nil {
 }
 ```
 
-为了更细粒度的控制，Dapr Go 客户端暴露了 `SetState项` 类型。 它可以用来获得更多对状态操作的控制，并允许同时保存多个stateitems：
+为了获得更精细的控制，Dapr Go 客户端公开了 `setStateItem` 类型 ，该类型可用于更好地控制状态操作，并允许一次保存多个项目：
 
 ```go
 item1 := &dapr.SetStateItem{
@@ -119,31 +119,31 @@ keys := []string{"key1", "key2", "key3"}
 items, err := client.GetBulkState(ctx, store, keys, nil,100)
 ```
 
-并且 `ExecuteStateTransaction` 方法来执行多个支持或删除交易操作。
+`ExecuteStateTransaction` 以事务方式执行多个 upsert 或删除操作的方法。
 
 ```go
 ops := make([]*dapr.StateOperation, 0)
 
-op1 := &dapr. tateOperation@un.org
-    Type：dapr.StateOperationTypeUpsert，
-    item： &dapr。 etStateItem@un
-        Key: "key1",
+op1 := &dapr.StateOperation{
+    Type: dapr.StateOperationTypeUpsert,
+    Item: &dapr.SetStateItem{
+        Key:   "key1",
         Value: []byte(data),
     },
 }
-op2 := &dapr. tateOperationPop
+op2 := &dapr.StateOperation{
     Type: dapr.StateOperationTypeDelete,
-    item: &dapr. etStateItem@un
-        Key: "key2",
+    Item: &dapr.SetStateItem{
+        Key:   "key2",
     },
 }
 ops = append(ops, op1, op2)
 meta := map[string]string{}
-err := testClient. xecuteStateTransaction(ctx, store, meta, ops)
+err := testClient.ExecuteStateTransaction(ctx, store, meta, ops)
 ```
 
 ### 发布消息
-要将数据发布到主题上，Dapr Go client提供了一个简单的方法：
+要将数据发布到主题上，Dapr Go 客户端提供了一个简单的方法：
 
 ```go
 data := []byte(`{ "id": "a123", "value": "abcdefg", "valid": true }`)
@@ -154,8 +154,8 @@ if err := client.PublishEvent(ctx, "component-name", "topic-name", data); err !=
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
 
-### 输出绑定
-Dapr Go client SDK 提供了两种方法来在Dapr-defined的绑定上调用一个操作。 Dapr 支持输入、输出和双向绑定。
+### Output Bindings
+Dapr Go 客户端 SDK 提供了两种方法来调用 Dapr 定义的绑定的操作。 Dapr 支持输入、输出和双向绑定。
 
 简单地说，只输出绑定：
 ```go

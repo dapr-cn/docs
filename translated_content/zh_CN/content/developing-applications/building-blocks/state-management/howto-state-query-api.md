@@ -3,7 +3,7 @@ type: docs
 title: "操作方法：查询状态"
 linkTitle: "操作方法：查询状态"
 weight: 250
-description: "API for querying state stores"
+description: "用于查询状态存储的API"
 ---
 
 {{% alert title="alpha" color="warning" %}}
@@ -66,7 +66,7 @@ curl -X POST -H "Content-Type: application/json" -d @query-api-examples/dataset.
 
 填充后，可以检查状态存储中的数据。 MongoDB UI的一部分下方的图像显示员工记录。
 <table><tr><td>
-    <img src="/images/state-management-query-mongodb-dataset.png" width=500 alt="Sample dataset" class="center">
+    <img src="/images/state-management-query-mongodb-dataset.png" width=500 alt="示例数据集" class="center">
 </td></tr></table>
 
 每个条目都有 `_id` 成员作为串联的对象键， `value` 包含 JSON 记录的成员。
@@ -363,7 +363,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
     }
 }
 ```
-And the result of this query is:
+此查询的结果是：
 ```json
 {
   "results": [

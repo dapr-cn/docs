@@ -38,13 +38,13 @@ spec:
 | **spec**           | -  | **关于组件资源的详细信息**                           |                    |
 | spec.type          | Y  | 组件类型                                      | `state.redis`      |
 | spec.version       | Y  | 组件版本                                      | `v1`               |
-| spec.initTimeout   | N  | 组件初始化的超时时间 Default is 5s                  | `5m`, `1h`, `20s`  |
+| spec.initTimeout   | N  | 组件初始化的超时时间 默认值为 5s                        | `5m`, `1h`, `20s`  |
 | spec.ignoreErrors  | N  | 如果组件加载失败，请告诉Dapr sidecar 继续初始化。 默认为 false | `false`            |
 | **spec.metadata**  | -  | **一个组件特定配置的键/值。 查看你的组件字段定义**              |                    |
 
 ### 特殊的元数据值
 
-元数据值可以包含一个 `{uuid}` 标签，当 Dapr sidecar 启动时，该标记将被随机生成的 UUID 所取代。 每个启动都会生成新的 UUID。 It can be used, for example, to have a pod on Kubernetes with multiple application instances consuming a [shared MQTT subscription]({{< ref "setup-mqtt.md" >}}). 下面是一个使用 ` {uuid}` 选项的示例。
+元数据值可以包含一个 `{uuid}` 标签，当 Dapr sidecar 启动时，该标记将被随机生成的 UUID 所取代。 每个启动都会生成新的 UUID。 它可以用来在 Kubernetes 上区分同一个 pod 的多个实例 ，比如 ["共享的 MQTT 订阅]({{< ref "setup-mqtt.md" >}})。 下面是一个使用 ` {uuid}` 选项的示例。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

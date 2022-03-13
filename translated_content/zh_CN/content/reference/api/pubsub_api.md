@@ -50,7 +50,7 @@ curl -X POST http://localhost:3500/v1.0/publish/pubsubName/deathStarStatus \
 
 如果要发送自己的自定义 CloundEvent，请使用 `Content-Type` 标头的 `application/cloudevents+json` 值。
 
-#### 元数据（Metadata）
+#### Metadata
 
 元数据可以通过请求 URL 中的查询参数发送。 它必须以 `metadata.` 如下所示。
 
@@ -100,7 +100,7 @@ GET http://localhost:<appPort>/dapr/subscribe
 
 > 请注意，所有订阅参数都是大小写敏感的。
 
-#### 元数据（Metadata）
+#### Metadata
 
 （可选）元数据可以通过请求正文发送。
 

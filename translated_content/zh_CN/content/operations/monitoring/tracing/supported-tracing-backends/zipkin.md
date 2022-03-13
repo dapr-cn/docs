@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "操作方法: 为分布式跟踪安装 Zipkin"
+title: "操作方法: 为分布式追踪安装 Zipkin"
 linkTitle: "Zipkin"
 weight: 3000
-description: "Set up Zipkin for distributed tracing"
+description: "设置 Zipkin 进行分布式追踪"
 ---
 
 ## 配置自托管模式
@@ -35,7 +35,7 @@ spec:
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-3. 默认情况下，使用 `dapr run`启动的应用程序，引用 `$HOME/.dapr/config.yaml` 或 `%USERPROFILE%\.dapr\config.yaml` 中的配置文件，并且可以使用 `--config` 参数用 Dapr CLI 覆盖：
+3. 默认情况下，使用 `dapr run` 启动的应用程序，引用 `$HOME/.dapr/config.yaml` 或 `%USERPROFILE%\.dapr\config.yaml` 中的配置文件，并且可以使用 `--config` 参数用 Dapr CLI 覆盖：
 
 ```bash
 dapr run --app-id mynode --app-port 3000 node app.js
@@ -45,7 +45,7 @@ dapr run --app-id mynode --app-port 3000 node app.js
 
 ## 配置 Kubernetes
 
-以下步骤向您展示了如何配置 Dapr 以将分布式跟踪数据发送到在 Kubernetes 集群中作为容器运行的 Zipkin，以及如何查看它们。
+以下步骤向您展示了如何配置 Dapr 以将分布式追踪数据发送到在 Kubernetes 集群中作为容器运行的 Zipkin，以及如何查看它们。
 
 ### 设置
 
@@ -61,7 +61,7 @@ kubectl create deployment zipkin --image openzipkin/zipkin
 kubectl expose deployment zipkin --type ClusterIP --port 9411
 ```
 
-接下来，在本地创建以下YAML文件：
+接下来，在本地创建以下 YAML 文件：
 
 * tracing.yaml configuration
 
@@ -84,14 +84,14 @@ spec:
 kubectl apply -f tracing.yaml
 ```
 
-为了启用您的 Dapr sidecar 的配置，请在您的pod spec模板中添加以下注释：
+为了启用您的 Dapr sidecar 的配置，请在您的 pod spec 模板中添加以下注解：
 
 ```yml
 annotations:
   dapr.io/config: "tracing"
 ```
 
-就这么简单！ 你的 sidecar 现在被配置为向Zipkin发送跟踪
+就这么简单！ 你的 sidecar 现在被配置为向 Zipkin 发送追踪。
 
 ### 查看追踪数据
 

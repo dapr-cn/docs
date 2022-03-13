@@ -6,9 +6,9 @@ description: "关于 Actors API 的详细文档"
 weight: 500
 ---
 
-Dapr 提供原生、跨平台和跨语言 virtual actors 功能。 除了 [特定语言的 SDK]({{< ref sdks>}})，开发人员还可以使用下面的 API 端点调用参与者。
+Dapr 提供原生、跨平台和跨语言的 virtual actors 功能。 除了 [特定语言的 SDK]({{< ref sdks>}})，开发人员还可以使用下面的 API 端点调用 Actor。
 
-## 调用 dapr 的服务代码
+## 外部应用调用 dapr
 
 ### 调用 actor 方法
 
@@ -41,7 +41,7 @@ POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId
 
 #### 示例
 
-对 actor 调用方法的示例:
+使用 actor 调用方法的示例:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/stormtrooper/50/method/shoot \

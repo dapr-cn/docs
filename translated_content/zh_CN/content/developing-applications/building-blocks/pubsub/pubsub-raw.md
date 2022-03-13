@@ -147,7 +147,7 @@ $app->start();
 
 ## 声明式订阅原始事件
 
-Similarly, you can subscribe to raw events declaratively by adding the `rawPayload` metadata entry to your Subscription Custom Resource Definition (CRD):
+同样，您可以通过将 `rawPayload` 元数据条目添加到订阅自定义资源定义 （CRD） 来声明方式订阅原始事件：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
