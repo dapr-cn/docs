@@ -14,9 +14,9 @@ This article provides guidance on running Dapr with Docker on a Windows/Linux/ma
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker-Compose](https://docs.docker.com/compose/install/) (可选)
 
-## Initialize Dapr environment
+## 初始化 Dapr 环境
 
-To initialize the Dapr control-plane containers and create a default configuration file, run:
+要初始化 Dapr 控制平面容器并创建默认配置文件，请运行：
 
 ```bash
 dapr init
@@ -30,7 +30,7 @@ The [`dapr run` CLI command]({{< ref dapr-run.md >}}) can be used to launch a Da
 dapr run --app-id myapp --app-port 5000 -- dotnet run
 ```
 
-This command will launch both the daprd sidecar binary and run `dotnet run`, launching your application.
+此命令将同时启动 daprd sidecar 程序并执行 `dotnet run` 以启动您的应用程序。
 
 ## Run app as a process and sidecar as a Docker container
 
@@ -40,7 +40,7 @@ Alternately, if you are running Dapr in a Docker container and your app as a pro
 The host networking driver for Docker is only supported on Linux hosts.
 {{% /alert %}}
 
-If you are running your Docker daemon on a Linux host, you can run the following to launch Dapr:
+如果您在 Linux 上运行 Docker，运行下述命令以启动 Dapr。
 
 ```shell
 docker run --net="host" --mount type=bind,source="$(pwd)"/components,target=/components daprio/daprd:edge ./daprd -app-id <my-app-id> -app-port <my-app-port>
@@ -150,9 +150,9 @@ services:
 
 ## 在 Kubernetes 运行
 
-If your deployment target is Kubernetes please use Dapr's first-class integration. Refer to the [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}}).
+如果您的部署目标是 Kubernetes，请使用 Dapr 的 first-class integration。 Refer to the [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}}).
 
-## Docker images
+## Docker 镜像
 
 Dapr 为不同的组件提供了许多预构建的 Docker 镜像，您应该为所需的二进制、架构和 标签/版本 选择相关镜像。
 
