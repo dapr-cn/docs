@@ -222,6 +222,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "wwbweibo",
+      "name": "wangweibo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20398347?v=4",
+      "profile": "http://www.wwbweibo.icu",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
