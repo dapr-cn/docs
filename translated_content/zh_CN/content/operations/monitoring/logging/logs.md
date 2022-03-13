@@ -20,7 +20,7 @@ Dapr 基于以下架构生成日志。
 | level    | 日志级别 (info/warn/debug/error) | `info`                     |
 | type     | 日志类型                         | `log`                      |
 | msg      | 日志消息                         | `hello dapr!`              |
-| 作用域      | 日志记录范围                       | `dapr.runtime`             |
+| scope    | 日志记录范围                       | `dapr.runtime`             |
 | instance | 容器名称                         | `dapr-pod-xxxxx`           |
 | app_id   | Dapr 应用 ID                   | `dapr-app`                 |
 | ver      | Dapr 运行时版本                   | `0.5.0`                    |

@@ -2,7 +2,7 @@
 type: docs
 title: "支持的密钥存储"
 linkTitle: "支持的密钥存储"
-weight: 50000
+weight: 30000
 description: Dapr支持对接的密钥仓库
 no_list: true
 ---

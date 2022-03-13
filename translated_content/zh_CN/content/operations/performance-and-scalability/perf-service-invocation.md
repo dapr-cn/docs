@@ -61,7 +61,7 @@ The Dapr control plane uses a total of 0.009 vCPU and 61.6 Mb when running in no
 | Operator         | 0.001 | 12.5 Mb |
 | Sentry           | 0.005 | 13.6 Mb |
 | Sidecar Injector | 0.002 | 14.6 Mb |
-| 放置               | 0.001 | 20.9 Mb |
+| Placement        | 0.001 | 20.9 Mb |
 
 There are a number of variants that affect the CPU and memory consumption for each of the system components. These variants are shown in the table below.
 
@@ -70,7 +70,7 @@ There are a number of variants that affect the CPU and memory consumption for ea
 | Operator         | Number of pods requesting components, configurations and subscriptions |                                 |
 | Sentry           | Number of certificate requests                                         |                                 |
 | Sidecar Injector | Number of admission requests                                           |                                 |
-| 放置               | Number of actor rebalancing operations                                 | Number of connected actor hosts |
+| Placement        | Number of actor rebalancing operations                                 | Number of connected actor hosts |
 
 ### Data plane performance
 

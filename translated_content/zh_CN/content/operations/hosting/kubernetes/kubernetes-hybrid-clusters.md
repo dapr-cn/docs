@@ -2,7 +2,7 @@
 type: docs
 title: "部署到 Linux/Windows Kubernetes 的混合集群"
 linkTitle: "Hybrid clusters"
-weight: 20000
+weight: 60000
 description: "如何在 Kubernetes 上运行带有 Windows 节点的 Dapr 应用"
 ---
 
