@@ -10,7 +10,7 @@ Access control enables the configuration of policies that restrict what operatio
 
 An access control policy is specified in configuration and be applied to Dapr sidecar for the *called* application. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applications to access to the called app.
 
-## 基础概念
+## Concepts
 
 **TrustDomain** - A "trust domain" is a logical group to manage trust relationships. Every application is assigned a trust domain which can be specified in the access control list policy spec. If no policy spec is defined or an empty trust domain is specified, then a default value "public" is used. This trust domain is used to generate the identity of the application in the TLS cert.
 
