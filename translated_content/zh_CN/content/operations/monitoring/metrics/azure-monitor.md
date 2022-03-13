@@ -21,9 +21,6 @@ description: "使用Azure Monitor为Azure Kubernetes Service(AKS) 启用Dapr度�
 $ kubectl get pods -n kube-system
 NAME                                                              READY   STATUS    RESTARTS   AGE
 ...
-$ kubectl get pods -n kube-system
-NAME                                                              READY   STATUS    RESTARTS   AGE
-...
 omsagent-75qjs                                                    1/1     Running   1          44h
 omsagent-c7c4t                                                    1/1     Running   0          44h
 omsagent-rs-74f488997c-dshpx                                      1/1     Running   1          44h

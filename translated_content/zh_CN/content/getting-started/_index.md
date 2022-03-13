@@ -9,7 +9,7 @@ no_list: true
 
 欢迎来到 Dapr 的入门指南
 
-{{% alert title="Dapr 概念" color="primary" %}}
+{{% alert title="Dapr Concepts" color="primary" %}}
 如果你想了解Dapr的介绍性概述，并学习更多关于Dapr的基本术语，建议访问[概念部分]({{<ref concepts>}})。
 {{% /alert %}}
 

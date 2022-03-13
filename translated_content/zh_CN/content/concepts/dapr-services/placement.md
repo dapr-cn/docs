@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Dapr placement service overview"
-linkTitle: "放置"
+linkTitle: "Placement"
 description: "Overview of the Dapr placement process"
 ---
 

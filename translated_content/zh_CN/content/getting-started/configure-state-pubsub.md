@@ -2,7 +2,7 @@
 type: docs
 title: "如何操作：配置 状态存储 和 发布/订阅 消息代理"
 linkTitle: "(可选) 配置 状态 & 发布/订阅"
-weight: 400
+weight: 80
 description: "配置Dapr的状态存储和 发布/订阅 消息代理"
 aliases:
   - /zh-hans/getting-started/configure-redis/
