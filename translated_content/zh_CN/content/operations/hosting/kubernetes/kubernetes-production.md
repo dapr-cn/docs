@@ -17,7 +17,7 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 | **Operator**         | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 100Mi |
 | **Sidecar Injector** | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 30Mi  |
 | **Sentry**           | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 30Mi  |
-| **放置**               | Limit: 1, Request: 250m   | Limit: 150Mi, Request: 75Mi  |
+| **Placement**        | Limit: 1, Request: 250m   | Limit: 150Mi, Request: 75Mi  |
 | **Dashboard**        | Limit: 200m, Request: 50m | Limit: 200Mi, Request: 20Mi  |
 
 ### Helm

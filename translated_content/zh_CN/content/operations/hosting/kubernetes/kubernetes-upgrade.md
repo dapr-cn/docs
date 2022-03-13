@@ -2,7 +2,7 @@
 type: docs
 title: "更新 Kubernetes 集群中的 Dapr"
 linkTitle: "升级 Dapr"
-weight: 50000
+weight: 30000
 description: "按照这些步骤升级 Kubernetes 上的 Dapr，并确保顺利升级."
 ---
 
