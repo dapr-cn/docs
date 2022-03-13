@@ -2,7 +2,7 @@
 type: docs
 title: "入门指南: 不使用 Docker 在自托管模式下运行 Dapr"
 linkTitle: "不使用 Docker 运行"
-weight: 50000
+weight: 30000
 description: "如何以自托管方式部署和运行 Dapr ，而无需在本地机器上安装 Docker"
 ---
 

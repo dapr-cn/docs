@@ -2,7 +2,7 @@
 type: docs
 title: "使用 Dapr .NET SDK 开发应用程序"
 linkTitle: "开发集成"
-weight: 40000
+weight: 50000
 description: 了解.NET Dapr应用程序的本地开发集成选项
 ---
 
