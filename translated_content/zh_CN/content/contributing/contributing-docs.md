@@ -83,10 +83,10 @@ description: "1+ SENTENCES DESCRIBING THE ARTICLE"
 ```yaml
 ---
 type: docs
-title: "服务调用概述"
-linkTitle: "概述"
+title: "Service invocation overview"
+linkTitle: "Overview"
 weight: 10
-description: "Dapr服务调用的快速概述，以及如何在应用程序中使用它来调用服务。"
+description: "A quick overview of Dapr service invocation and how to use it to invoke services within your application"
 ---
 ```
 
@@ -99,7 +99,7 @@ Front-matter 应填写所有字段，包括类型、标题、链接标题、权�
 
 根据 [styling conventions](#styling-conventions)，标题只能大写第一个字和专有名词，但 "How-To："除外。
     - "Getting started with Dapr service invocation"
-    - "How-To: 设置本地 Redis 实例"
+    - "How-To: Setup a local Redis instance"
 
 ### 引用其他页面
 Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-references/) 用于引用其他页面和部分。 如果某一页面被错误重命名或删除，它会中断构建。

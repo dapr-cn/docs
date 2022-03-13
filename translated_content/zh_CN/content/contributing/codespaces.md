@@ -31,7 +31,7 @@ GitHub Codespaces目前处于内测阶段。 在 [这里](https://github.com/fea
 ### 支持的 Repo
 
 - [Dapr](https://github.com/dapr/dapr)
-- [组件概念](https://github.com/dapr/components-contrib)
+- [Components-contrib](https://github.com/dapr/components-contrib)
 - [Python SDK](https://github.com/dapr/python-sdk)
 
 ### 在 Codespace 中开发 Dapr 组件

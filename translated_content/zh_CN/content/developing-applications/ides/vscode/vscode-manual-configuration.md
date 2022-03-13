@@ -2,7 +2,7 @@
 type: docs
 title: "Visual Studio Code手动调试配置"
 linkTitle: "手动调试"
-weight: 50000
+weight: 30000
 description: "如何手动设置Visual Studio Code调试"
 ---
 

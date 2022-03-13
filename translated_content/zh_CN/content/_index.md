@@ -12,7 +12,7 @@ no_list: true
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>基础概念</b></h5>
+      <h5 class="card-title"><b>Concepts</b></h5>
       <p class="card-text">开始了解 Dapr，包括其主要的特性及所提供的功能</p>
       <a href="{{< ref concepts >}}" class="stretched-link"></a>
     </div>
