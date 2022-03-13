@@ -1,9 +1,9 @@
 ---
 type: docs
 title: "指南：配置 Dapr 来使用 gRPC"
-linkTitle: "Use gRPC interface"
+linkTitle: "使用gRPC接口"
 weight: 5000
-description: "How to configure Dapr to use gRPC for low-latency, high performance scenarios"
+description: "如何配置Dapr以使用gRPC实现低延迟、高性能的场景"
 ---
 
 Dapr 为本地调用实现 HTTP 和 gRPC API 。 gRPC适用于低延迟、高性能的场景，并且使用原生客户端进行语言集成。

@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "How-To : 使用 Dapr 的 W3C 跟踪上下文"
+title: "How-To: 使用 Dapr 的 W3C 跟踪上下文"
 linkTitle: "How-To: 使用 W3C 跟踪上下文"
 weight: 20000
 description: 将 W3C 追踪标准与 Dapr 一起使用

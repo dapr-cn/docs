@@ -1,15 +1,15 @@
 ---
-type: 文档
-title: "开始 Dapr Service (Callback) SDK"
+type: docs
+title: "Dapr Service （Callback） SDK for Go 入门"
 linkTitle: "gRPC 服务"
 weight: 20000
-description: 如何开始和运行 Dapr Service (Callback) SDK
+description: 如何使用 Dapr Service （Callback） SDK for Go 启动和运行
 no_list: true
 ---
 
 ## Dapr gRPC Service SDK for Go
 
-### 前提条件
+### 先决条件
 首先导入 Dapr Go service/grpc 包：
 
 ```go

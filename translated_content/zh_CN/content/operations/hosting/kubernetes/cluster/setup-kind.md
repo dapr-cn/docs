@@ -1,28 +1,28 @@
 ---
 type: docs
-title: "Set up a KiND cluster"
+title: "设置 KiND 集群"
 linkTitle: "KiND"
 weight: 1100
 description: >
-  How to set up Dapr on a KiND cluster.
+  如何在 KiND 集群上设置 Dapr。
 ---
 
-# Set up a KiND cluster
+# 设置 KiND 集群
 
 ## 先决条件
 
 - [Docker](https://docs.docker.com/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 
-> 注意：对于Windows，在 BIOS 和 [安装 Hyper-V](https://docs.microsoft.com/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) 启用虚拟化（Vitualization）
+> 注意：对于 Windows，请在 BIOS 中启用虚拟化，并[安装 Hyper-V](https://docs.microsoft.com/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v)
 
-## Install and configure KiND
+## 安装并配置 KiND
 
-Make sure you follow one of the [Installation](https://kind.sigs.k8s.io/docs/user/quick-start) options for KiND.
+确保遵循 KiND 的 [安装](https://kind.sigs.k8s.io/docs/user/quick-start) 选项之一。
 
-In case you are using Docker Desktop, double-check that you have performed the recommended [settings](https://kind.sigs.k8s.io/docs/user/quick-start#settings-for-docker-desktop) (4 CPUs and 8 GiB of RAM available to Docker Engine).
+如果您使用的是 Docker Desktop，请检查您是否已执行建议的 [设置](https://kind.sigs.k8s.io/docs/user/quick-start#settings-for-docker-desktop) (Docker 引擎可用 4 个 CPU 和 8 GiB RAM)。
 
-## Configure and create the KiND cluster
+## 配置并创建 KiND 集群
 
 1. 创建名为 `kind-cluster-config.yaml` 的文件, 并粘贴以下内容:
 ```yaml
@@ -47,15 +47,15 @@ nodes:
 - role: worker
 ```
 
-This is going to request KiND to spin up a kubernetes cluster comprised of a control plane and two worker nodes. It also allows for future setup of ingresses and exposes container ports to the host machine.
+这将要求 KiND 启动一个由一个控制平面和两个工作节点组成的 kubernetes 集群。 它还允许将来设置 ingress 和向主机暴露容器端口。
 
-2. Run the `kind create cluster` providing the cluster configuration file:
+2. 运行 `kind create cluster` 并提供群集配置文件：
 
 ```bash
 kind create cluster --config kind-cluster-config.yaml
 ```
 
-Wait until the cluster is created, the output should look like this:
+等待集群创建完成，输出应如下所示：
 
 ```md
 Creating cluster "kind" ...
@@ -81,9 +81,9 @@ Thanks for using kind! 😊
 dapr init --kubernetes
 ```
 
-Once Dapr finishes initializing its core components are ready to be used on the cluster.
+Dapr 完成初始化后，其核心组件就可以在集群上使用。
 
-To verify the status of these components run:
+要验证这些组件的状态，请运行：
 ```bash
 dapr status -k
 ```
@@ -98,14 +98,14 @@ dapr status -k
   dapr-placement-server  dapr-system  True     Running  1         1.5.1    52s  2021-12-10 09:27.18
 ```
 
-2. Forward a port to [Dapr dashboard](https://docs.dapr.io/reference/cli/dapr-dashboard/):
+2. 将端口转发到 [Dapr 仪表板](https://docs.dapr.io/reference/cli/dapr-dashboard/)：
 
 ```bash
 dapr dashboard -k -p 9999
 ```
 
-So that you can validate that the setup finished successfully by navigating to `http://localhost:9999`.
+这样，您就可以通过导航到 `http://localhost:9999` 来验证安装是否成功完成。
 
 ## 下一步
-- [试用Dapr快速入门]({{< ref quickstarts.md >}})
+- [试用 Dapr 快速入门]({{< ref quickstarts.md >}})
 

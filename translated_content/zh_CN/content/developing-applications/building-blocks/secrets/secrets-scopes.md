@@ -8,7 +8,7 @@ description: "应用程序从秘钥存储介质中读取时，需要使用作用
 
 您可以阅读 [设置密钥仓库组件指南]({{< ref setup-secret-store >}}) 以配置应用程序的密钥仓库。 一旦配置完毕，默认情况下 *任何* 该仓库内定义的密钥都可以从 Dapr 应用程序访问。
 
-To limit the secrets to which the Dapr application has access to, you can define secret scopes by adding a secret scope policy to the application configuration with restrictive permissions. 按照 [这些说明]({{< ref configuration-concept.md >}}) 来定义应用程序配置。
+要限制 Dapr 应用程序访问密钥的话， 您可以通过向应用程序配置添加密钥作用域政策并限制权限来定义密钥作用域。 按照 [这些说明]({{< ref configuration-concept.md >}}) 来定义应用程序配置。
 
 密钥作用域适用于任何 [密钥仓库]({{< ref supported-secret-stores.md >}})， 是否是本地密钥仓库、Kubernetes 密钥仓库或公共云密钥仓库。 关于如何设置一个 [密钥仓库]({{< ref setup-secret-store.md >}}) 查看 [指南：获取密钥]({{< ref howto-secrets.md >}})
 
@@ -20,7 +20,7 @@ To limit the secrets to which the Dapr application has access to, you can define
 
 ## 场景1：拒绝访问所有密钥仓库
 
-In this example all secret access is denied to an application running on a Kubernetes cluster which has a configured [Kubernetes secret store]({{<ref kubernetes-secret-store>}}) named `mycustomsecretstore`. In the case of Kubernetes, aside from the user defined custom store, the default store named `kubernetes` is also addressed to ensure all secrets are denied access (See [here]({{<ref "kubernetes-secret-store.md#default-kubernetes-secret-store-component">}}) to learn more about the Kubernetes default secret store).
+在这个例子中，运行在Kubernetes集群上的应用程序的所有秘密访问都被拒绝，该集群有一个配置名为 `mycustomsecretstore`的 [Kubernetes秘密存储]({{< ref kubernetes-secret-store>}}) 。 在Kubernetes的情况下，除了用户定义的自定义存储之外，还解决了名为 `kubernetes` 的默认存储，以确保所有秘密被拒绝访问（参见 [这里]({{<ref "kubernetes-secret-store.md#default-kubernetes-secret-store-component">}}) 了解有关Kubernetes默认秘密存储的详细信息）。
 
 要添加此配置，请按照下面的步骤：
 

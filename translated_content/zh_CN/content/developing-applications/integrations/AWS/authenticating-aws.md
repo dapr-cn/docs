@@ -14,10 +14,10 @@ aliases:
 
 以下属性都不是必需的，因为AWS SDK可以使用上面链接中描述的default provider chain进行配置。 测试组件配置并检查Dapr运行时的日志输出以确保组件正确初始化是很重要的。
 
-- `region`。要连接到哪个AWS区域。 在某些情况下(例如在自托管模式下运行Dapr时)，这个标志可以由环境变量`AWS_REGION`提供。 Since Dapr sidecar injection doesn't allow configuring environment variables on the Dapr sidecar, it is recommended to always set the `region` attribute in the component spec.
-- `endpoint`: The endpoint is normally handled internally by the AWS SDK. However, in some situations it might make sense to set it locally - for example if developing against [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html).
+- `region`。要连接到哪个AWS区域。 在某些情况下(例如在自托管模式下运行Dapr时)，这个标志可以由环境变量`AWS_REGION`提供。 因为Dapr sidecar注入不允许配置Dapr sidecar上的环境变量。 建议在组件中始终设置 `region` 属性。
+- `endpoint`: endpoint 通常由AWS管理。 然而，在某些情况下，在本地设置endpoint可能是有意义的：例如，如果是针对[DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)进行开发，
 - `accessKey`: AWS Access key id.
-- `secretKey`: AWS Secret access key. Use together with `accessKey` to explicitly specify credentials.
+- `secretKey`: AWS Secret access key. 与`accessKey` 一起使用确定信任凭据。
 - `sessionToken`: AWS Session token. 与`accessKey`和`secretKey`一起使用。 当使用普通IAM用户的 access key和密钥时，通常不需要session token。
 
 ## 在组件清单文件中明确指定凭证的替代方法

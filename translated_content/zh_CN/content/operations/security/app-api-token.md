@@ -1,48 +1,48 @@
 ---
 type: docs
 title: "使用 token 认证来自 Dapr 的请求"
-linkTitle: "App API token认证"
+linkTitle: "应用 API 令牌身份验证"
 weight: 4000
-description: "要求来自 Dapr 的每个传入 API 请求都包含身份验证 token"
+description: "要求来自 Dapr 的每个传入 API 请求都包含身份验证令牌"
 ---
 
-对于某些构建基块，例如发布/订阅、服务调用和输入绑定，Dapr 通过 HTTP 或 gRPC 与应用进行通信。 要使应用程序能够对从 Dapr sidecar 发出的请求进行身份验证，您可以将 Dapr 配置为将 API token作为标头（在 HTTP 请求中）或元数据（在 gRPC 请求中）发送。
+对于某些构建基，例如发布/订阅、服务调用和输入绑定，Dapr 通过 HTTP 或 gRPC 与应用进行通信。 要使应用程序能够对从 Dapr sidecar 发出的请求进行身份验证，您可以将 Dapr 配置为将 API token作为标头（在 HTTP 请求中）或元数据（在 gRPC 请求中）发送。
 
-## 创建token
+## 创建令牌
 
-Dapr 使用 [JWT](https://jwt.io/) token 进行 API 身份验证。
+Dapr 使用 [JWT](https://jwt.io/) 令牌进行 API 身份验证。
 
 > 请注意，虽然 Dapr 本身并不是这个实现中的 JWT token 签发者，但明确使用 JWT 标准对未来联邦特性的实现 提供了支持(例如 OAuth2)。
 
-为了配置 API 身份验证，需要先使用任意 JWT token 兼容工具(如https://jwt.io/) 和 secret 来生成您的token。
+为了配置 API 身份验证，需要先使用任意 JWT token 兼容工具(如https://jwt.io/) 和秘密来生成您的令牌。
 
-> 注意，这个 secret 仅仅用来生成 token，Dapr 不需要知道或存储它
+> 注意，这个秘密仅仅用来生成令牌，Dapr 不需要知道或存储它
 
-## 在 Dapr 中配置应用 API token 身份验证
+## 在 Dapr 中配置应用 API 令牌身份验证
 
 令牌认证配置在 Kubernetes 和 自托管 Dapr deployments 下稍有不同：
 
 ### 自托管
 
-在自托管场景中， Dapr 查找是否存在 `APP_API_TOKEN` 环境变量。 如果设置了环境变量，当 `daprd`进程启动时，Dapr 会在调用应用时包含此token：
+在自托管场景中， Dapr 查找是否存在 `APP_API_TOKEN` 环境变量。 如果设置了环境变量，当 `daprd` 进程启动时，Dapr 会在调用应用时包含此令牌：
 
 ```shell
 export APP_API_TOKEN=<token>
 ```
 
-如果需要更新已配置的令牌，只需将 `APP_API_TOKEN` 环境变量设置为新值，然后重新启动 `daprd`进程。
+如果需要更新已配置的令牌，只需将 `APP_API_TOKEN` 环境变量设置为新值，然后重新启动 `daprd` 进程。
 
 ### Kubernetes
 
-在 Kubernetes deployment 里，Dapr 借助 Kubernetes secrets store 保存 JWT token。 从创建新 secret 开始：
+在 Kubernetes deployment 里，Dapr 借助 Kubernetes secrets store 保存 JWT token。 从创建新秘密开始：
 
 ```shell
 kubectl create secret generic app-api-token --from-literal=token=<token>
 ```
 
-> 注意，上述 secret 需要你希望开启应用 token 认证的命名空间中创建
+> 注意，上述秘密需要在你希望开启 Dapr token 认证的命名空间中创建
 
-指定 Dapr 在向应用发送请求时使用 token，请在您的 Deployment template spec 添加 annotation：
+若要指示 Dapr 在向应用发送请求时使用秘密中的令牌，请向 deployment 模板规范添加注解：
 
 ```yaml
 annotations:
@@ -50,17 +50,17 @@ annotations:
   dapr.io/app-token-secret: "app-api-token" # name of the Kubernetes secret
 ```
 
-当 Deployment 部署后，Dapr sidecar 注入器会自动创建一个 secret，并将实际值注入到 `APP_API_TOKEN` 环境变量中。
+当 Deployment 部署后，Dapr sidecar 注入器会自动创建一个秘密，并将实际值注入到 `APP_API_TOKEN` 环境变量中。
 
-## 更新token
+## 轮换令牌
 
 ### 自托管
 
-如果需要更新已配置的令牌，只需将环境变量 `APR_API_TOKEN`设置为新值，然后重新启动 `daprd`进程。
+如果需要更新已配置的令牌，只需将环境变量 `DAPR_API_TOKEN` 设置为新值，然后重新启动 `daprd` 进程。
 
 ### Kubernetes
 
-如果需要更新在 Kubernates 中已配置的令牌，则需要更新先前在每个命名空间中创建的 secret 的令牌。 您可以使用 `kubectl patch` 命令执行此操作，但更简单的方法是，使用 manifest 更新每个命名空间中的这些对象:
+如果需要更新在 Kubernates 中已配置的令牌，更新先前在每个命名空间中创建的 secret 的令牌。 您可以使用 `kubectl patch` 命令执行此操作，但更简单的方法是，使用 manifest 更新每个命名空间中的这些对象:
 
 ```yaml
 apiVersion: v1
@@ -72,7 +72,7 @@ data:
   token: <your-new-token>
 ```
 
-然后将其 apply 到每个命名空间：
+然后将其应用于每个命名空间：
 
 ```shell
 kubectl apply --file token-secret.yaml --namespace <namespace-name>
@@ -84,12 +84,12 @@ kubectl apply --file token-secret.yaml --namespace <namespace-name>
 kubectl rollout restart deployment/<deployment-name> --namespace <namespace-name>
 ```
 
-> 请注意，假设您的服务配置为多个副本，则 key 滚动过程不会导致任何停机。
+> 请注意，假设您的服务配置了多个副本，则密钥轮换过程不会导致任何停机时间。
 
 
 ## 验证来自 Dapr 的请求
 
-在 Dapr 中配置应用 token 身份验证后，*来自 Dapr* 的所有请求都包含 token：
+在 Dapr 中配置应用令牌身份验证后，*来自 Dapr* 的所有请求都包含令牌：
 
 ### HTTP
 
@@ -101,7 +101,7 @@ dapr-api-token: <token>
 
 ### gRPC
 
-当使用 gRPC 协议时，请检查入站 gRPC 请求的元数据（metadata）上的 API token ：
+当使用 gRPC 协议时，请检查入站 gRPC 请求的元数据（metadata）上的 API 令牌 ：
 
 ```shell
 dapr-api-token[0].
@@ -111,7 +111,7 @@ dapr-api-token[0].
 
 ### Kubernetes
 
-在Kubernetes，建议将 Secret 作为环境变量加载到您的 pod。 假定我们创建了一个名为 `app-api-token` 的Secret来保持 token：
+在 Kubernetes 中，建议将秘密作为环境变量挂载到 pod 中。 假定我们创建了一个名为 `app-api-token` 的秘密来保存令牌：
 
 ```
 containers:
@@ -124,7 +124,7 @@ containers:
 
 ### 自托管
 
-在自托管模式下，您可以将 token 设置为应用程序的环境变量 ：
+在自托管模式下，您可以将令牌设置为应用程序的环境变量 ：
 
 ```
 export APP_API_TOKEN=<my-app-token>
@@ -133,4 +133,4 @@ export APP_API_TOKEN=<my-app-token>
 ## 相关链接
 
 - 了解 [Dapr 安全概念]({{< ref security-concept.md >}})
-- 了解 [如何启用 API token身份验证在 Dapr]({{< ref api-token.md >}})
+- 了解[如何在 Dapr 中启用 API 令牌身份验证]({{< ref api-token.md >}})

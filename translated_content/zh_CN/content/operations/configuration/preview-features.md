@@ -45,7 +45,7 @@ spec:
 ### 独立模式
 要在本地运行 Dapr 时启用预览功能，请更新默认配置或使用 `dapr run`指定单独的配置文件。
 
-The default Dapr config is created when you run `dapr init`, and is located at:
+默认的Dapr配置是在您运行 `dapr init`时创建的，其位置在。
 - Windows: `%USERPROFILE%\.dapr\config.yaml`
 - Linux/macOS: `~/.dapr/config.yaml`
 

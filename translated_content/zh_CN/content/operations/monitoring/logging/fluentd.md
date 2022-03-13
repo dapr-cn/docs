@@ -3,7 +3,7 @@ type: docs
 title: "操作方法：在 Kubernetes 中搭建 Fluentd、Elastic search 和 Kibana"
 linkTitle: "FluentD"
 weight: 1000
-description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜索日志"
+description: "如何安装 Fluentd、Elastic Search 和 Kibana 以在 Kubernetes 中搜索日志"
 ---
 
 ## 先决条件
@@ -53,7 +53,7 @@ description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜�
     helm install kibana elastic/kibana -n dapr-monitoring
     ```
 
-5. 确保 Elastic Search 和 Kibana 正在您的Kubernetes 集群中运行。
+5. 确保 Elastic Search 和 Kibana 正在 Kubernetes 集群中运行。
 
     ```bash
     $ kubectl get pods -n dapr-monitoring
@@ -64,13 +64,13 @@ description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜�
 
 ## 安装 Fluentd
 
-1. 安装 config map 和 Fluentd 作为守护程序
+1. 安装 config map 和 Fluentd 为守护进程集
 
     下载这些配置文件：
     - [fluentd-config-map.yaml](/docs/fluentd-config-map.yaml)
     - [fluentd-dapr-with-rbac.yaml](/docs/fluentd-dapr-with-rbac.yaml)
 
-    > Note: If you already have Fluentd running in your cluster, please enable the nested json parser so that it can parse JSON-formatted logs from Dapr.
+    > 注意：如果您的集群中已经运行了 Fluentd，请启用嵌套的 json 解析器，以便它可以解析来自 Dapr 的 JSON 格式日志。
 
     将配置应用到您的集群：
 
@@ -79,7 +79,7 @@ description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜�
     kubectl apply -f ./fluentd-dapr-with-rbac.yaml
     ```
 
-2. Ensure that Fluentd is running as a daemonset. The number of FluentD instances should be the same as the number of cluster nodes. In the example below, there is only one node in the cluster:
+2. 确保 Fluentd 作为守护进程集运行。 FluentD 实例的数量应该与集群节点的数量相同。 在下面的例子中，集群中只有一个节点。
 
     ```bash
     $ kubectl get pods -n kube-system -w
@@ -102,7 +102,7 @@ description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜�
 
 2. 在 Dapr sidecar 中启用 JSON 格式化日志
 
-    添加 `dapr.io/log-as-json: "true"` annotation 到你的部署yaml. 例如:
+    添加 `dapr.io/log-as-json: "true"` annotation 到 deployment yaml。 例如：
 
     ```yaml
     apiVersion: apps/v1
@@ -146,39 +146,39 @@ description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜�
 
 3. 展开下拉菜单，然后单击 **管理→堆栈管理**
 
-    ![Stack Management item under Kibana Management menu options](/images/kibana-1.png)
+    ![Kibana 管理菜单选项下的堆栈管理项](/images/kibana-1.png)
 
 4. 在堆栈管理页面上，选择 **数据→索引管理** ，然后等待 `dapr-*` 被索引。
 
-    ![Index Management view on Kibana Stack Management page](/images/kibana-2.png)
+    !["Kibana 堆栈管理"页面上的"索引管理"视图](/images/kibana-2.png)
 
-5. 一旦`dapr-*` 被索引后，单击" **Kibana → 索引模式** "，然后单击" **创建索引模式** "按钮。
+5. 一旦 `dapr-*` 被索引后，单击"**Kibana → 索引模式**"，然后单击"**创建索引模式**"按钮。
 
-    ![Kibana create index pattern button](/images/kibana-3.png)
+    ![Kibana 创建索引模式按钮](/images/kibana-3.png)
 
 6. 通过在 **索引模式名称** 字段中键入 `dapr*` 来定义新的索引模式，然后单击 **下一步** 按钮继续。
 
-    ![Kibana define an index pattern page](/images/kibana-4.png)
+    ![Kibana 定义索引模式页面](/images/kibana-4.png)
 
 7. 通过 **"时间字段"** 下拉列表中选择 `@timestamp` 选项，配置要与新索引模式一起使用的主要时间字段。 单击 **创建索引模式** 按钮以完成索引模式的创建。
 
-    ![Kibana configure settings page for creating an index pattern](/images/kibana-5.png)
+    ![Kibana 配置用于创建索引模式的设置页面](/images/kibana-5.png)
 
 8. 应显示新创建的索引模式。 通过使用字段标签中的搜索框，确认感兴趣的字段，如 `scope`、`type`、`app_id`、`level` 等正在被索引。
 
     > 注意：如果您找不到索引字段，请稍候。 搜索所有索引字段所需的时间取决于运行 elastic search 的数据量和资源大小。
 
-    ![View of created Kibana index pattern](/images/kibana-6.png)
+    ![已创建的 Kibana 索引模式的视图](/images/kibana-6.png)
 
 9. 要浏览索引数据，请展开下拉菜单，然后单击 **分析→发现**。
 
-    ![Discover item under Kibana Analytics menu options](/images/kibana-7.png)
+    ![发现 Kibana Analytics 菜单选项下的项目](/images/kibana-7.png)
 
 10. 在搜索框中，键入查询字符串（如 `scope：*` ，然后单击" **刷新** "按钮以查看结果。
 
     > 注意：这可能需要很长时间。 返回所有结果所需的时间取决于运行 elastic search 的数据量和资源大小。
 
-    ![Using the search box in the Kibana Analytics Discover page](/images/kibana-8.png)
+    ![使用 Kibana Analytics Discover 页面中的搜索框](/images/kibana-8.png)
 
 ## 参考资料
 

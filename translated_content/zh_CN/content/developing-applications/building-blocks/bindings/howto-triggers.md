@@ -99,7 +99,7 @@ spec:
 
 {{< /tabs >}}
 
-## 2. 侦听传入事件（输入绑定）
+## 2. 监听传入事件（输入绑定）
 
 现在配置您的应用程序来接收传入事件。 如果使用 HTTP ，那么需要监听在文件 `metadata.name` 中指定的绑定名称所对应的`POST` 终结点。
 
@@ -302,5 +302,5 @@ spec:
 
 * [绑定构建块]({{< ref bindings >}})
 * [绑定 API]({{< ref bindings_api.md >}})
-* [Components concept]({{< ref components-concept.md >}})
-* [Supported bindings]({{< ref supported-bindings >}})
+* [组件概念]({{< ref components-concept.md >}})
+* [已支持的绑定]({{< ref supported-bindings >}})

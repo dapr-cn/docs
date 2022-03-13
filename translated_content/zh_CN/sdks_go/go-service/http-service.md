@@ -1,13 +1,13 @@
 ---
-type: 文档
-title: "开始使用 Dapr HTTP Service SDK"
-linkTitle: "HTTP服务"
+type: docs
+title: "Dapr HTTP Service SDK for Go 入门"
+linkTitle: "HTTP 服务"
 weight: 10000
-description: 如何开始和运行 Dapr HTTP Service SDK for Go
+description: 如何使用 Dapr HTTP Service SDK for Go 启动和运行
 no_list: true
 ---
 
-### 前期准备
+### 先决条件
 首先导入 Dapr Go service/http 包：
 
 ```go

@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Integrations with Azure"
+title: "与 Azure 的集成"
 linkTitle: "Azure"
 weight: 1500
-description: "Dapr integrations with Azure services"
+description: "Dapr 与 Azure 服务的集成"
 ---
 

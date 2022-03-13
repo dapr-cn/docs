@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "GCP Storage Bucket binding spec"
-linkTitle: "GCP Storage Bucket"
-description: "Detailed documentation on the GCP Storage Bucket binding component"
+title: "GCP 存储桶绑定规范"
+linkTitle: "GCP 存储桶"
+description: "关于本地存储桶绑定组件的详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/gcpbucket/"
 ---
 
 ## 配置
 
-To setup GCP Storage Bucket binding create a component of type `bindings.gcp.bucket`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 GCP 存储桶绑定，需要先创建一个类型为 `bindings.gcp.bucket` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -56,21 +56,21 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                              | 必填 | 绑定支持 | 详情                                                                                                                                                                                                                                                      | 示例                                                                                               |
-| ------------------------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| bucket                          | Y  | 输出   | The bucket name                                                                                                                                                                                                                                         | `"mybucket"`                                                                                     |
-| type                            | Y  | 输出   | Tge GCP credentials type                                                                                                                                                                                                                                | `"service_account"`                                                                              |
-| project_id                      | Y  | 输出   | GCP 项目 id                                                                                                                                                                                                                                               | `project_id`                                                                                     |
-| private_key_id                | Y  | 输出   | GCP 私钥 id                                                                                                                                                                                                                                               | `"privateKeyId"`                                                                                 |
-| private_key                     | Y  | 输出   | GCP凭证私钥 替换为x509证书                                                                                                                                                                                                                                       | `12345-12345`                                                                                    |
-| client_email                    | Y  | 输出   | GCP 客户端邮箱地址                                                                                                                                                                                                                                             | `"client@email.com"`                                                                             |
-| client_id                       | Y  | 输出   | GCP 客户端 id                                                                                                                                                                                                                                              | `0123456789-0123456789`                                                                          |
-| auth_uri                        | Y  | 输出   | Google帐户 OAuth 端点                                                                                                                                                                                                                                       | `https://accounts.google.com/o/oauth2/auth`                                                      |
-| token_uri                       | Y  | 输出   | Google帐户token地址                                                                                                                                                                                                                                         | `https://oauth2.googleapis.com/token`                                                            |
-| auth_provider_x509_cert_url | Y  | 输出   | GCP凭证证书地址                                                                                                                                                                                                                                               | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
-| client_x509_cert_url          | Y  | 输出   | GCP凭证项目x509证书地址                                                                                                                                                                                                                                         | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
-| decodeBase64                    | N  | 输出   | Configuration to decode base64 file content before saving to bucket storage. (保存有二进制内容的文件时)。 `true` is the only allowed positive value. Other positive variations like `"True", "1"` are not acceptable. Defaults to `false`                            | `true`, `false`                                                                                  |
-| encodeBase64                    | N  | 输出   | Configuration to encode base64 file content before return the content. (In case of opening a file with binary content). `true` is the only allowed positive value. Other positive variations like `"True", "1"` are not acceptable. Defaults to `false` | `true`, `false`                                                                                  |
+| 字段                              | 必填 | 绑定支持 | 详情                                                                                                                        | 示例                                                                                               |
+| ------------------------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| bucket                          | Y  | 输出   | 存储桶名称                                                                                                                     | `"mybucket"`                                                                                     |
+| type                            | Y  | 输出   | GCP 凭证类型                                                                                                                  | `"service_account"`                                                                              |
+| project_id                      | Y  | 输出   | GCP 项目 id                                                                                                                 | `project_id`                                                                                     |
+| private_key_id                | Y  | 输出   | GCP 私钥 id                                                                                                                 | `"privateKeyId"`                                                                                 |
+| private_key                     | Y  | 输出   | GCP凭证私钥 替换为x509证书                                                                                                         | `12345-12345`                                                                                    |
+| client_email                    | Y  | 输出   | GCP 客户端邮箱地址                                                                                                               | `"client@email.com"`                                                                             |
+| client_id                       | Y  | 输出   | GCP 客户端 id                                                                                                                | `0123456789-0123456789`                                                                          |
+| auth_uri                        | Y  | 输出   | Google帐户 OAuth 端点                                                                                                         | `https://accounts.google.com/o/oauth2/auth`                                                      |
+| token_uri                       | Y  | 输出   | Google帐户token地址                                                                                                           | `https://oauth2.googleapis.com/token`                                                            |
+| auth_provider_x509_cert_url | Y  | 输出   | GCP凭证证书地址                                                                                                                 | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
+| client_x509_cert_url          | Y  | 输出   | GCP凭证项目x509证书地址                                                                                                           | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
+| decodeBase64                    | N  | 输出   | 在保存到存储桶之前解码 base64 文件内容的配置。 (在打开带有二进制内容的文件时有用)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false`  | `true`, `false`                                                                                  |
+| encodeBase64                    | N  | 输出   | 在返回内容之前对 base64 文件内容进行编码的配置。 (在打开带有二进制内容的文件时有用)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false` | `true`, `false`                                                                                  |
 
 ## 绑定支持
 
@@ -81,9 +81,9 @@ spec:
 - `delete` : [Delete file](#delete-file)
 - `list`: [List file](#list-files)
 
-### Create file
+### 创建文件
 
-To perform a create operation, invoke the GCP Storage Bucket binding with a `POST` method and the following JSON body:
+要执行一个创建操作，需要一个 `POST` 方法和下面的 JSON 调用 GCP 存储桶绑定：
 
 > 注意：默认情况下，会随机生成一个UUID。 参见下面所示的支持的元数据设置名称
 
@@ -93,12 +93,12 @@ To perform a create operation, invoke the GCP Storage Bucket binding with a `POS
   "data": "YOUR_CONTENT"
 }
 ```
-The metadata parameters are:
-- `key` - (optional) the name of the object
-- `decodeBase64` - (optional) configuration to decode base64 file content before saving to storage
+元数据参数包括：
+- `key` - （可选）对象的名称
+- `decodeBase64` - （可选）在保存到存储之前解码 base64 文件内容的配置
 
 #### 示例
-##### Save text to a random generated UUID file
+##### 把文本保存到一个随机生成的 UUID 文件
 
 {{< tabs Windows Linux >}}
   {{% codetab %}}
@@ -117,7 +117,7 @@ The metadata parameters are:
 
 {{< /tabs >}}
 
-##### Save text to a specific file
+##### 保存文本到指定文件
 
 {{< tabs Windows Linux >}}
 
@@ -138,9 +138,9 @@ The metadata parameters are:
 {{< /tabs >}}
 
 
-##### Upload a file
+##### 上传文件
 
-To upload a file, pass the file contents as the data payload; you may want to encode this in e.g. Base64 for binary content.
+要上传文件，请将文件内容作为数据负载传递；你可能想用 Base64 来编码二进制内容。
 
 然后你就可以像平常一样上传了：
 
@@ -170,9 +170,9 @@ To upload a file, pass the file contents as the data payload; you may want to en
 }
 ```
 
-### Get object
+### 获取对象
 
-To perform a get file operation, invoke the GCP bucket binding with a `POST` method and the following JSON body:
+要执行获取文件操作，请使用 `POST` 方法和以下 JSON 调用 GCP 存储桶绑定：
 
 ```json
 {
@@ -183,10 +183,10 @@ To perform a get file operation, invoke the GCP bucket binding with a `POST` met
 }
 ```
 
-The metadata parameters are:
+元数据参数包括：
 
-- `key` - the name of the object
-- `encodeBase64` - (optional) configuration to encode base64 file content before return the content.
+- `key` - 对象的名称
+- ` encodeBase64 ` - （可选）在保存到存储之前编码 base64 文件内容的配置
 
 
 #### 示例
@@ -210,12 +210,12 @@ The metadata parameters are:
 
 #### 响应
 
-The response body contains the value stored in the object.
+响应正文包含存储在对象中的值。
 
 
-### Delete object
+### 删除对象
 
-To perform a delete object operation, invoke the GCP bucket binding with a `POST` method and the following JSON body:
+要执行删除对象操作，请使用 `POST` 方法和以下 JSON 调用 GCP 存储桶绑定：
 
 ```json
 {
@@ -233,7 +233,7 @@ The metadata parameters are:
 
 #### 示例
 
-##### Delete object
+##### 删除对象
 
 {{< tabs Windows Linux >}}
 
@@ -253,12 +253,12 @@ The metadata parameters are:
 {{< /tabs >}}
 
 #### 响应
-An HTTP 204 (No Content) and empty body will be retuned if successful.
+如果成功，将返回 HTTP 204（没有内容）和空报文体。
 
 
-### List objects
+### 列出对象
 
-To perform a list object operation, invoke the S3  binding with a `POST` method and the following JSON body:
+要执行列出对象操作，请使用 `POST` 和以下 JSON 调用 S3 绑定：
 
 ```json
 {
@@ -271,17 +271,17 @@ To perform a list object operation, invoke the S3  binding with a `POST` method 
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
-- `maxResults` - (optional) sets the maximum number of keys returned in the response. By default the action returns up to 1,000 key names. The response might contain fewer keys but will never contain more.
-- `prefix` - (optional) it can be used to filter objects starting with prefix.
-- `delimiter` - (optional)  it can be used to restrict the results to only the kobjects in the given "directory". Without the delimiter, the entire tree under the prefix is returned
+- `maxResults` - （可选）设置响应中返回的最大键数。 默认情况下，该操作最多返回 1000 个键名。 响应可能包含较少的键，但永远不会包含更多键
+- `prefix` - （可选）它可用于筛选以前缀开头的对象
+- ` delimiter ` - （可选）它可用于将结果限制为仅给定“目录”中的对象。 如果没有分隔符，将返回前缀下的所有对象
 
 #### 响应
 
-The response body contains the list of found objects.
+响应正文包含找到的对象列表。
 
-The list of objects will be returned as JSON array in the following form:
+对象列表将以以下格式的 JSON 数组返回：
 
 ```json
 [

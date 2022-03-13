@@ -3,21 +3,21 @@ type: docs
 title: "Dapr 客户端 .NET SDK入门"
 linkTitle: "客户端"
 weight: 20000
-description: 如何启动和运行Dapr .NET SDK
+description: 如何使用 Dapr .NET SDK 启动和运行
 no_list: true
 ---
 
-Dapr 客户端包允许您从.NET应用程序中与其他 Dapr 应用程序进行交互。
+Dapr 客户端包允许您从 .NET 应用程序中与其他 Dapr 应用程序进行交互。
 
 ## 先决条件
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
+- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
 - [.NET Core 3.1 或 .NET 5+](https://dotnet.microsoft.com/download) 已安装
 
 ## 构建块
 
-.NET SDK允许您与所有的[Dapr构建块]({{< ref building-blocks >}})接口。
+.NET SDK 允许您与所有的 [Dapr构建块]({{< ref building-blocks >}})接口进行交互。
 
 ### 调用服务
 
@@ -51,7 +51,7 @@ Console.WriteLine("Returned: id:{0} | Balance:{1}", account.Id, account.Balance)
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
-### 保存 & 获取 应用程序状态
+### 保存 & 获取应用程序状态
 
 ```csharp
 var client = new DaprClientBuilder().Build();
@@ -67,7 +67,7 @@ await client.DeleteStateAsync(storeName, stateKeyName, cancellationToken: cancel
 Console.WriteLine("Deleted State!");
 ```
 
-- 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
+- 有关状态操作的完整列表，请访问 [如何：获取 & 保存状态。]({{< ref howto-get-save-state.md >}})。
 
 ### 发布消息
 
@@ -80,7 +80,7 @@ Console.WriteLine("Published deposit event!");
 ```
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- 请访问[.NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe)，获取代码示例和说明，以试用 发布/订阅。
+- 请访问 [.NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe)，获取代码示例和说明，以试用发布/订阅。
 
 ### 与输出绑定交互
 
@@ -102,7 +102,7 @@ await client.InvokeBindingAsync("send-email", "create", email);
 
 - 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
 
-### 检索密钥
+### 检索秘密
 
 {{< tabs Multi-value-secret Single-value-secret >}}
 
@@ -138,7 +138,7 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 
 {{< /tabs >}}
 
-- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
+- 有关秘密的完整指南，请访问[如何：检索秘密]({{< ref howto-secrets.md >}})。
 
 ## 相关链接
 - [.NET SDK 示例](https://github.com/dapr/dotnet-sdk/tree/master/examples)

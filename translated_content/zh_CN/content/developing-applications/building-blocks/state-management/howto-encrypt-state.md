@@ -64,13 +64,13 @@ spec:
       key: mykey
 ```
 
-You now have a Dapr state store that's configured to fetch the encryption key from a secret named `mysecret`, containing the actual encryption key in a key named `mykey`. The actual encryption key *must* be an AES256 encryption key. Dapr will error and exit if the encryption key is invalid.
+现在你有一个Dapr状态存储，它被配置为从一个名为 `mysecret`的秘密中获取加密密钥，在一个名为 `mykey`的密钥中包含实际的加密密钥。 实际的加密密钥 *must* 是一个AES256加密密钥。 如果加密密钥无效，Dapr将出错并退出。
 
-*Note that the secret store does not have to support keys*
+*请注意，秘密存储不一定要支持keys*
 
-## Key rotation
+## 密钥轮换
 
-To support key rotation, Dapr provides a way to specify a secondary encryption key:
+为了支持密钥轮换，Dapr 提供了一种指定辅助加密密钥的方法：
 
 ```yaml
 metadata:
@@ -84,6 +84,6 @@ metadata:
       key: mykey2
 ```
 
-When Dapr starts, it will fetch the secrets containing the encryption keys listed in the `metadata` section. Dapr knows which state item has been encrypted with which key automatically, as it appends the `secretKeyRef.name` field to the end of the actual state key.
+当Dapr启动时，它将获取包含 `metadata` 部分中列出的加密密钥的秘密。 Dapr 知道哪个状态项已使用哪个密钥自动加密，因为它会将 `secretKeyRef.name` 字段附加到实际状态密钥的末尾。
 
-To rotate a key, simply change the `primaryEncryptionKey` to point to a secret containing your new key, and move the old primary encryption key to the `secondaryEncryptionKey`. New data will be encrypted using the new key, and old data that's retrieved will be decrypted using the secondary key. Any updates to data items encrypted using the old key will be re-encrypted using the new key.
+要轮换密钥，只需将 `primaryEncryptionKey` 更改为指向包含新密钥的机密，然后将旧的主加密密钥移动到 `secondaryEncryptionKey`。 新数据将使用新密钥进行加密，检索到的旧数据将使用辅助密钥进行解密。 对使用旧密钥加密的数据项的任何更新都将使用新密钥重新加密。

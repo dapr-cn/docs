@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "How-To: Invoke services using gRPC"
-linkTitle: "How-To: Invoke with gRPC"
+title: "操作方法：使用 gRPC 调用服务"
+linkTitle: "操作方法：使用 gRPC 调用"
 description: "入门指南指导如何使用 Dapr 服务在分布式应用程序中调用其它服务"
 weight: 3000
 ---
@@ -301,7 +301,7 @@ ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server.production")
 
 有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 篇文章。
 
- ## Related Links
+ ## 相关链接
 
 * [服务调用概述]({{< ref service-invocation-overview.md >}})
 * [服务调用 API 规范]({{< ref service_invocation_api.md >}})

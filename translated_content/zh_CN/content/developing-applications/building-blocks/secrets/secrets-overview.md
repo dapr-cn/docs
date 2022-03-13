@@ -3,7 +3,7 @@ type: docs
 title: "密钥管理概览"
 linkTitle: "概述"
 weight: 1000
-description: "Overview of secrets management API building block"
+description: "机密管理 API 构建基块概述"
 ---
 
 应用程序通常会通过使用专用的密钥存储来秘密存储敏感信息，如连接字符串、密钥和用于与数据库、服务和外部系统进行验证的令牌。

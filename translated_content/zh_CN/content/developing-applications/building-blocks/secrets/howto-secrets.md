@@ -10,16 +10,16 @@ description: "使用密钥存储构建块安全地获取密钥"
 
 ## Example
 
-以下的示例简述了一个订单处理程序。 In the example, there is an order processing service, which has a Dapr sidecar. The order processing service uses Dapr to store a secret in a local secret store.
+以下的示例简述了一个订单处理程序。 在这个例子中，有一个订单处理服务，它有一个Dapr sidecar。 订单处理服务使用Dapr将一个秘密存储在本地秘密存储中。
 
-<img src="/images/building-block-secrets-management-example.png" width=1000 alt="Diagram showing secrets management of example service">
+<img src="/images/building-block-secrets-management-example.png" width=1000 alt="显示示例服务的服务调用的图示">
 
 ## 建立一个密钥存储
 
 在获取应用程序代码中的密钥之前，您必须配置一个密钥存储组件。 就本指南而言，作为一个示例，您将配置一个本地的密钥存储，该仓库使用本地的 JSON 文件来存储密钥。
 
 {{% alert title="Warning" color="warning" %}}
-In a production-grade application, local secret stores are not recommended. You can find other alternatives [here]({{<ref supported-secret-stores >}}) to securely manage your secrets.
+在生产级应用程序中，不建议使用本地机密存储。 你可以在这里找到其他替代品 []({{<ref supported-secret-stores >}}) 来安全地管理你的秘密。
 {{% /alert %}}
 
 创建一个名为 `secrets.json` 的文件，包含以下内容：
@@ -47,12 +47,12 @@ spec:
   - name: nestedSeparator
     value: ":"
 ```
-> Note: the path to the secret store JSON is relative to where you call `dapr run` from.
+> 注意：秘密存储JSON的路径是相对于你调用 `dapr run ` 的地方。
 
 要配置不同类型的密钥存储，请参阅关于 [如何配置密钥存储]({{<ref setup-secret-store>}}) 并审阅 [支持的密钥存储]({{<ref supported-secret-stores >}}) 查看不同密钥存储解决方案所需的具体细节。
 ## 获取密钥
 
-Run the Dapr sidecar with the application.
+与应用程序一起运行 Dapr sidecar。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 
@@ -92,7 +92,7 @@ dapr run --app-id orderprocessingservice --app-port 6001 --dapr-http-port 3601 -
 
 {{< /tabs >}}
 
-Get the secret by calling the Dapr sidecar using the secrets API:
+通过使用secrets API调用Dapr sidecar获取秘密。
 
 ```bash
 curl http://localhost:3601/v1.0/secrets/localsecretstore/secret
@@ -102,7 +102,7 @@ curl http://localhost:3601/v1.0/secrets/localsecretstore/secret
 
 ## 从你的代码调用密钥 API
 
-Once you have a secret store, call Dapr to get the secrets from your application code. Below are code examples that leverage Dapr SDKs for retrieving a secret.
+一旦你有了秘密存储，就可以调用Dapr来从你的应用代码中获取秘密。 下面是利用 Dapr SDK 进行服务调用的代码示例。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 

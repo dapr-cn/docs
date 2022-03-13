@@ -6,16 +6,16 @@ weight: 1000
 description: "使用自签名或用户提供的 x.509 证书加密应用程序之间的通信"
 ---
 
-Dapr supports in-transit encryption of communication between Dapr instances using the Dapr control plane, Sentry service, which is a central Certificate Authority (CA).
+Dapr 支持使用 Dapr 控制平面，Sentry 服务 (中央证书颁发机构(CA)) 对 Dapr 实例之间的通讯进行传输时加密。
 
-Dapr allows operators and developers to bring in their own certificates, or instead let Dapr automatically create and persist self-signed root and issuer certificates.
+Dapr 允许运维和开发人员引入自己的证书，或者让 Dapr 自动创建和保留自签名的根证书和颁发者证书。
 
-For detailed information on mTLS, read the [security concepts section]({{< ref "security-concept.md" >}}).
+有关 mTLS 的详细信息，请阅读 [安全概念部分]({{< ref "security-concept.md" >}})。
 
-If custom certificates have not been provided, Dapr automatically creates and persist self-signed certs valid for one year. In Kubernetes, the certs are persisted to a secret that resides in the namespace of the Dapr system pods, accessible only to them. In self hosted mode, the certs are persisted to disk.
+如果没有提供自定义证书，Dapr 将会自动创建并保存有效期为一年的自签名的证书。 在 Kubernetes 中，证书被持久保存到 secret 中，该 secret 位于 Dapr 系统 pods 所在的命名空间中，只能被 Dapr 系统 pods 访问。 在自托管模式下，证书被持久化到硬盘。
 
-## Control plane Sentry service configuration
-The mTLS settings reside in a Dapr control plane configuration file. For example when you deploy the Dapr control plane to Kubernetes this configuration file is automatically created and then you can edit this. The following file shows the available settings for mTLS in a configuration resource, deployed in the `daprsystem` namespace:
+## 控制平面 Sentry 服务配置
+mTLS 设置驻留在 Dapr 控制平面配置文件中。 例如，当您部署 Dapr 控制平面到 Kubernetes， 会自动创建此配置文件，然后您可以对其进行编辑。 以下的文件展示了部署在 `daprsystem` 命名空间的配置源中可用的 mTLS 配置：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -30,25 +30,25 @@ spec:
     allowedClockSkew: "15m"
 ```
 
-The file here shows the default `daprsystem` configuration settings. The examples below show you how to change and apply this configuration to the control plane Sentry service either in Kubernetes and self hosted modes.
+此处展示了默认的 `daprsystem` 配置设置。 下面的示例向您展示了如何在 Kubernetes 和自托管模式下更改此配置并将其应用于控制平面 Sentry 服务。
 
 ## Kubernetes
 
-### Setting up mTLS with the configuration resource
+### 使用配置资源设置 mTLS
 
-In Kubernetes, Dapr creates a default control plane configuration resource with mTLS enabled. The Sentry service, the certificate authority system pod, is installed both with Helm and with the Dapr CLI using `dapr init --kubernetes`.
+在 Kubernetes 中，Dapr 创建一个开启了 mTLS 的默认控制平面配置资源。 Sentry 服务，即证书颁发机构系统 pod，通过 Helm 和 Dapr CLI 使用 `dapr init --kubernetes` 进行安装。
 
-You can view the control plane configuration resource with the following command:
+您可以使用如下命令查看控制平面配置资源：
 
 `kubectl get configurations/daprsystem --namespace <DAPR_NAMESPACE> -o yaml`.
 
-To make changes to the control plane configuration resource, run the following command to edit it:
+要对控制平面配置资源进行更改，请运行以下命令进行编辑：
 
 ```
 kubectl edit configurations/daprsystem --namespace <DAPR_NAMESPACE>
 ```
 
-Once the changes are saved, perform a rolling update to the control plane:
+一旦更改被保存，对控制平面执行滚动更新：
 
 ```
 kubectl rollout restart deploy/dapr-sentry -n <DAPR_NAMESPACE>
@@ -56,9 +56,9 @@ kubectl rollout restart deploy/dapr-operator -n <DAPR_NAMESPACE>
 kubectl rollout restart statefulsets/dapr-placement-server -n <DAPR_NAMESPACE>
 ```
 
-*Note: the control plane Sidecar Injector service does not need to be redeployed*
+*注意：控制平面 Sidecar 的 Injector 服务不需要重新部署*
 
-### Disabling mTLS with Helm
+### 使用 Helm 禁用 mTLS
 
 ```bash
 kubectl create ns dapr-system
@@ -70,27 +70,27 @@ helm install \
   dapr/dapr
 ```
 
-### Disabling mTLS with the CLI
+### 使用 CLI 禁用 mTLS
 
 ```
 dapr init --kubernetes --enable-mtls=false
 ```
 
-### Viewing logs
+### 查看日志
 
-In order to view the Sentry service logs, run the following command:
+要查看 sentry 服务日志，请运行如下命令：
 
 ```
 kubectl logs --selector=app=dapr-sentry --namespace <DAPR_NAMESPACE>
 ```
 
-### Bringing your own certificates
+### 自带证书
 
-Using Helm, you can provide the PEM encoded root cert, issuer cert and private key that will be populated into the Kubernetes secret used by the Sentry service.
+使用 Helm，您可以提供 PEM 编码的根证书，颁发者证书和私钥，这些证书将会填充到 Sentry 服务使用的 Kubernetes 秘密中。
 
-_Note: This example uses the OpenSSL command line tool, this is a widely distributed package, easily installed on Linux via the package manager. On Windows OpenSSL can be installed [using chocolatey](https://community.chocolatey.org/packages/openssl). On MacOS it can be installed using brew `brew install openssl`_
+_注意：此示例使用 OpenSSL 命令行工具，这是一个广泛发布的软件包，通过包管理器可以轻松的在 Linux 上安装。 在 Windwos 上，OpenSSL 可以 [使用 chocolatey ](https://community.chocolatey.org/packages/openssl) 安装。 在 MacOS上，可以使用 `brew install openssl` 安装。_
 
-Create config files for generating the certificates, this is necessary for generating v3 certificates with the SAN (Subject Alt Name) extension fields. First save the following to a file named `root.conf`:
+创建用于生成整数的配置文件，这对于使用 SAN (Subject Alt Name) 扩展字段生成 v3 证书是必须的。 首先保存以下内容到名为 `root.conf` 的文件中：
 
 ```ini
 [req]
@@ -113,13 +113,13 @@ subjectAltName = @alt_names
 DNS.1 = cluster.local
 ```
 
-Repeat this for `issuer.conf`, paste the same contents into the file, but add `pathlen:0` to the end of the basicConstraints line, as shown below:
+对 `issuer.conf` 重复此操作，粘贴同样的内容到文件中，但是添加 `pathlen: 0` 到 basicConstraints 行的末尾，如下所示：
 
 ```ini
 basicConstraints = critical, CA:true, pathlen:0
 ```
 
-Run the following to generate the root cert and key
+运行以下命令生成根证书和密钥：
 
 ```bash
 openssl ecparam -genkey -name prime256v1 | openssl ec -out root.key
@@ -127,7 +127,7 @@ openssl req -new -nodes -sha256 -key root.key -out root.csr -config root.conf -e
 openssl x509 -req -sha256 -days 365 -in root.csr -signkey root.key -outform PEM -out root.pem -extfile root.conf -extensions v3_req
 ```
 
-Next run the following to generate the issuer cert and key:
+接下来，运行以下命令生成颁发者证书和密钥：
 
 ```bash
 openssl ecparam -genkey -name prime256v1 | openssl ec -out issuer.key
@@ -135,7 +135,7 @@ openssl req -new -sha256 -key issuer.key -out issuer.csr -config issuer.conf -ex
 openssl x509 -req -in issuer.csr -CA root.pem -CAkey root.key -CAcreateserial -outform PEM -out issuer.pem -days 365 -sha256 -extfile issuer.conf -extensions v3_req
 ```
 
-Install Helm and pass the root cert, issuer cert and issuer key to Sentry via configuration:
+安装 Helm 并通过配置将根证书，颁发者证书和颁发者密钥传递给 Sentry：
 
 ```bash
 kubectl create ns dapr-system
@@ -149,54 +149,54 @@ helm install \
   dapr/dapr
 ```
 
-### Updating root or issuer certs
+### 更新根证书或者颁发证书
 
-If the Root or Issuer certs are about to expire, you can update them and restart the required system services.
+如果根证书或者颁发者证书即将过期，你可以更新他们并重启必要的系统服务。
 
-First, issue new certificates using the step above in [Bringing your own certificates](#bringing-your-own-certificates).
+首先，使用在 [携带您自己的证书](#bringing-your-own-certificates) 中的步骤颁发新证书。
 
-Now that you have the new certificates, you can update the Kubernetes secret that holds them. Edit the Kubernetes secret:
+现在，您有了新的证书，您可以更新保存他们的 Kubernetes 秘密。 编辑 Kubernetes secret：
 
 ```
 kubectl edit secret dapr-trust-bundle -n <DAPR_NAMESPACE>
 ```
 
-Replace the `ca.crt`, `issuer.crt` and `issuer.key` keys in the Kubernetes secret with their corresponding values from the new certificates. *__Note: The values must be base64 encoded__*
+将 Kubernetes secret 中的 `ca.crt`, `issuer.crt` 和 `issuer.key` 键替换为新证书中的相应值。 *__注意：值必须是 base64 编码的__*
 
-If you signed the new cert root with a different private key, restart all Dapr-enabled pods. The recommended way to do this is to perform a rollout restart of your deployment:
+如果您使用了不同的私钥对新证书进行签名，重启所有启用了 Dapr 的 Pod。 建议的方法是执行 deployment 的滚动重启：
 
 ```
 kubectl rollout restart deploy/myapp
 ```
-### Kubernetes video demo
-Watch this video to show how to update mTLS certificates on Kubernetes <iframe width="1280" height="720" src="https://www.youtube.com/embed/_U9wJqq-H1g" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+### Kubernetes 视频演示
+观看此视频，了解如何在 Kubernetes 上更新 mTLS 证书 <iframe width="1280" height="720" src="https://www.youtube.com/embed/_U9wJqq-H1g" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
 ## 自托管
-### Running the control plane Sentry service
+### 运行控制平面 Sentry 服务
 
-In order to run the Sentry service, you can either build from source, or download a release binary from [here](https://github.com/dapr/dapr/releases).
+为了运行 Sentry 服务，您可以从源码构建，或者从 [此处](https://github.com/dapr/dapr/releases) 下载发布的二进制文件。
 
-When building from source, please refer to [this](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md#build-the-dapr-binaries) guide on how to build Dapr.
+当从源码构建时，请参阅 Dapr 的 [这个](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md#build-the-dapr-binaries) 指南，了解如何构建 Dapr。
 
-Second, create a directory for the Sentry service to create the self signed root certs:
+然后，为 Sentry 服务创建目录以创建自签名的根证书：
 
 ```
 mkdir -p $HOME/.dapr/certs
 ```
 
-Run the Sentry service locally with the following command:
+使用以下的命令在本地运行 Sentry服务：
 
 ```bash
 ./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local
 ```
 
-If successful, the Sentry service runs and creates the root certs in the given directory. This command uses default configuration values as no custom config file was given. See below on how to start the Sentry service with a custom configuration.
+如果成功，Sentry 服务将会运行并在指定的目录创建根证书。 此命令使用默认配置值，因为未提供自定义配置文件。 请参阅下文，了解如何使用自定义配置启动 Sentry 服务。
 
-### Setting up mTLS with the configuration resource
+### 使用配置资源设置 mTLS
 
-#### Dapr instance configuration
+#### Dapr 实例配置
 
-When running Dapr in self hosted mode, mTLS is disabled by default. you can enable it by creating the following configuration file:
+当在自托管模式下运行 Dapr 时，默认情况下禁用 mTLS。 您可以通过创建如下的配置文件启用它：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -209,7 +209,7 @@ spec:
     enabled: true
 ```
 
-In addition to the Dapr configuration, you also need to provide the TLS certificates to each Dapr sidecar instance. You can do so by setting the following environment variables before running the Dapr instance:
+除了 Dapr 配置之外，您还需要为每个 Dapr sidecar 实例提供 TLS 证书。 为此，您可以在运行 Dapr 实例之前设置如下的环境变量：
 
 {{< tabs "Linux/MacOS" Windows >}}
 
@@ -235,21 +235,21 @@ $env:NAMESPACE="default"
 
 {{< /tabs >}}
 
-If using the Dapr CLI, point Dapr to the config file above to run the Dapr instance with mTLS enabled:
+如果使用 Dapr CLI，将 Dapr 指向上面的配置文件，以在启用 mTLS 的情况下运行 Dapr 实例：
 
 ```
 dapr run --app-id myapp --config ./config.yaml node myapp.js
 ```
 
-If using `daprd` directly, use the following flags to enable mTLS:
+如果直接使用 `daprd` ，使用如下参数启用 mTLS：
 
 ```bash
 daprd --app-id myapp --enable-mtls --sentry-address localhost:50001 --config=./config.yaml
 ```
 
-#### Sentry service configuration
+#### Sentry 服务配置
 
-Here's an example of a configuration for Sentry that changes the workload cert TTL to 25 seconds:
+下面是 Sentry 的配置示例，它将工作负载证书 TTL 更改为 25 秒：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -263,44 +263,44 @@ spec:
     workloadCertTTL: "25s"
 ```
 
-In order to start Sentry service with a custom config, use the following flag:
+要使用自定义配置启动 Sentry 服务，请使用以下标志：
 
 ```
 ./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local --config=./config.yaml
 ```
 
-### Bringing your own certificates
+### 自带证书
 
-In order to provide your own credentials, create ECDSA PEM encoded root and issuer certificates and place them on the file system. Tell the Sentry service where to load the certificates from using the `--issuer-credentials` flag.
+要提供您自己的凭据，创建 ECDSA PEM 编码的根证书和颁发者证书，并且将它们放在文件系统上。 使用 `--issuer-credentials` 标志告诉 Sentry 服务从何处加载证书。
 
-The next examples creates root and issuer certs and loads them with the Sentry service.
+接下来的示例创建根证书和颁发者证书，并使用哨兵服务加载他们。
 
-*Note: This example uses the step tool to create the certificates. You can install step tool from [here](https://smallstep.com/docs/getting-started/). Windows binaries available [here](https://github.com/smallstep/cli/releases)*
+*注意：此示例使用 step 工具创建证书。 您可以从 [此处](https://smallstep.com/docs/getting-started/) 安装 step 工具。 Windows 二进制文件在 [此处](https://github.com/smallstep/cli/releases)*
 
-Create the root certificate:
+创建根证书：
 
 ```bash
 step certificate create cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
 ```
 
-Create the issuer certificate:
+创建颁发者证书：
 
 ```bash
 step certificate create cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 8760h --no-password --insecure
 ```
 
-This creates the root and issuer certs and keys. Place `ca.crt`, `issuer.crt` and `issuer.key` in a desired path (`$HOME/.dapr/certs` in the example below), and launch Sentry:
+这将创建根证书和颁发者证书和密钥。 将 `ca.crt`, `issuer.crt` 和 `issuer.key` 放在所需的路径中 (在下面的实例中为 `$HOME/.dapr/certs`)，然后启动 Sentry：
 
 ```bash
 ./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local
 ```
 
-### Updating root or issuer certificates
+### 更新根证书或颁发者证书
 
-If the Root or Issuer certs are about to expire, you can update them and restart the required system services.
+如果根证书或者颁发者证书即将过期，你可以更新他们并重启必要的系统服务。
 
-First, issue new certificates using the step above in [Bringing your own certificates](#bringing-your-own-certificates).
+首先，使用在 [自带证书](#bringing-your-own-certificates) 中的步骤颁发新证书。
 
-Copy `ca.crt`, `issuer.crt` and `issuer.key` to the filesystem path of every configured system service, and restart the process or container. By default, system services will look for the credentials in `/var/run/dapr/credentials`.
+将 `ca.crt`, `issuer.crt` 和 `issuer.key` 复制到每个已配置的系统服务的文件系统路径，然后重启进程或容器。 默认情况下，系统服务将在 `/var/run/dapr/credentials` 中查找凭据。
 
-*Note:If you signed the cert root with a different private key, restart the Dapr instances.*
+*注意：如果您使用不同的私钥对证书根目录进行了签名，请重新启动 Dapr 实例。*

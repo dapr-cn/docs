@@ -6,7 +6,7 @@ weight: 1000
 description: "使用 Dapr 跟踪获取分布式应用程序的可见性"
 ---
 
-Dapr 使用 Zipkin 协议进行分布式跟踪和指标收集。 由于 Zipkin 协议无处不在，许多后端被开箱即用，例如 [Stackdriver](https://cloud.google.com/stackdriver)、 [Zipkin](https://zipkin.io)、 [New Relic](https://newrelic.com) 等。 Combining with the OpenTelemetry Collector, Dapr can export traces to many other backends including but not limted to [Azure Monitor](https://azure.microsoft.com/services/monitor/), [Datadog](https://www.datadoghq.com), Instana, [Jaeger](https://www.jaegertracing.io/), and [SignalFX](https://www.signalfx.com/).
+Dapr 使用 Zipkin 协议进行分布式跟踪和指标收集。 由于 Zipkin 协议无处不在，许多后端被开箱即用，例如 [Stackdriver](https://cloud.google.com/stackdriver)、 [Zipkin](https://zipkin.io)、 [New Relic](https://newrelic.com) 等。 在与OpenTelemetry Collector支持下，Dapr 可以将各种后端服务的链路导出，包括并不限于 [Azure Monitor](https://azure.microsoft.com/services/monitor/), [Datadog](https://www.datadoghq.com), Instana, [Jaeger](https://www.jaegertracing.io/), and [SignalFX](https://www.signalfx.com/).
 
 <img src="/images/tracing.png" width=600>
 

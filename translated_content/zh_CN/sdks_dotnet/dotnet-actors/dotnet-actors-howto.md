@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "在.NET SDK中运行和使用 virtual actors 的例子。"
-linkTitle: "Example"
+title: "在 .NET SDK中运行和使用 virtual actors 的例子。"
+linkTitle: "示例"
 weight: 300000
-description: 试用 .NET Dapr virtual actors
+description: 使用此示例试用 .NET Daprvirtual actor
 ---
 
-通过Dapr actor 程序包，您可以与.NET应用程序中的Dapr虚拟actor进行交互。
+通过 Dapr actor 包，您可以与 .NET 应用程序中的 Dapr virtual actor 进行交互。
 
 ## 先决条件
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [.NET Core 3.1 或 .NET 5+](https://dotnet.microsoft.com/download) 已安装
+- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
+- 安装有 [.NET Core 3.1 或 .NET 5+](https://dotnet.microsoft.com/download)
 
 ## 概述
 
-本文档描述了如何创建一个Actor(`MyActor`) 并从客户端程序调用其方法。
+本文档描述了如何创建 Actor(`MyActor`) 并从客户端程序调用其方法。
 
 ```
 MyActor --- MyActor.Interfaces
@@ -26,12 +26,11 @@ MyActor --- MyActor.Interfaces
          +- MyActorClient
 ```
 
-* **接口项目(\MyActor\MyActor.Interfaces).** 该项目包含了actor的接口定义。 Actor接口可以在任何项目中以任意的名称定义。 它定义了actor的实现和调用actor的客户端之间的约定。 由于客户端项目可能会依赖它，所以在一个和actor实现分隔开的程序集中定义通常是有意义的。
+* **接口项目(\MyActor\MyActor.Interfaces).** 该项目包含了 actor 的接口定义。 Actor 接口可以在任何项目中以任意的名称定义。 该接口定义了 actor 契约，该契约在 actor 实现和调用 actor 的客户端之间共享。 由于客户端项目可能依赖于它，因此在与 actor 实现分开的程序集中定义它通常是有意义的。
 
-* **Actor服务项目 (\MyActor\MyActorService)。** 该项目实现了Asp.Net Core web service，用于托管actor。 它包含了actor的实现，MyActor.cs。 Actor的实现是一个继承了基类Actor并且实现了Myactor.Interfaces项目中定义的接口的类。 Actor还必须提供接受一个ActorService实例和ActorId的构造函数，并将他们传递给基类。
+* **Actor服务项目 (\MyActor\MyActorService)。** 该项目实现了 Asp.Net Core web service，用于托管 actor。 它包含了 acto r的实现，MyActor.cs。 Actor 的实现是一个继承了基类 Actor 并且实现了 Myactor.Interfaces 项目中定义的接口的类。 Actor 类还必须实现一个构造函数，该构造函数接受 ActorService 实例和 ActorId，并将它们传递给 Actor 基类。
 
-* [Actor(TypeName = "MyCustomActorTypeName")] internal class MyActor : Actor, IMyActor
-    { // ... }
+* **Actor 客户端项目（\MyActor\MyActorClient）** 此项目包含调用 actor 接口中定义的 MyActor 方法的 actor 客户端的实现。
 
 ## 第 0 步：准备
 
@@ -39,13 +38,13 @@ MyActor --- MyActor.Interfaces
 
 ## 第 1 步：创建 actor 接口
 
-Actor接口定义了actor的实现和调用actor的客户端之间的约定。
+Actor 接口定义了 actor 契约，由 actor 实现和调用 actor 的客户端共享。
 
-Actor接口的定义需要满足以下要求：
+Actor 接口的定义需要满足以下要求：
 
-* Actor接口必须继承 `Dapr.Actors.IActor` 接口
-* Actor方法的返回值必须是`Task` 或者 `Task<object>`类型
-* Actor方法最多只能有一个参数
+* Actor 接口必须继承 `Dapr.Actors.IActor` 接口
+* Actor 方法的返回值必须是 `Task` 或者 `Task<object>` 类型
+* Actor 方法最多只能有一个参数
 
 ### 创建接口项目并添加依赖
 
@@ -61,7 +60,7 @@ dotnet add package Dapr.Actors -v 1.0.0
 cd ..
 ```
 
-### 定义IMyActor接口
+### 定义 IMyActor 接口
 
 定义 `IMyActor` 接口和 `MyData` 数据对象。 在 `Myactor.Interface` 项目中，将以下代码粘贴到 `Myactor.cs` 中。
 
@@ -119,7 +118,7 @@ cd ..
 
 ### 添加 actor 实现
 
-实现IMyActor接口并继承自 `Dapr.Actors.Actor` 。 下面的例子同样展示了如何使用Actor Reminders。 Actor如果要使用Reminders，则必须实现IRemindable接口 如果你不打算使用Reminder功能，你可以跳过下面代码中实现IRemindable接口和Reminder特定方法的操作。
+实现IMyActor接口并继承自 `Dapr.Actors.Actor` 。 下面的例子同样展示了如何使用 Actor Reminders。 Actor 如果要使用 Reminders，则必须实现 IRemindable 接口。 如果您不打算使用提醒功能，则可以跳过实现 IRemindable 和特定提醒方法，这些方法如下面的代码所示。
 
 在 `MyActorService` 项目中，将以下代码粘贴到 `MyActor.cs` 中。
 
@@ -261,9 +260,9 @@ namespace MyActorService
 
 Actor runtime 使用 ASP.NET Core `Startup.cs` 来配置。
 
-运行时使用ASP.NET Core依赖注入系统来注册actor类型和基本服务。 通过在 `ConfigureServices(...)` 中调用 `AddActors(...)` 方法来提供这种集成。 使用传递到 `AddActors(...)` 方法的委托来注册actor类型并配置actor运行时设置。 你可以在`ConfigureServices(...)`中为依赖注入注册额外的类型。 它们都可以被注入到你的Actor类型的构造器。
+运行时使用 ASP.NET Core 依赖注入系统来注册 actor 类型和基本服务。 通过在 `ConfigureServices(...)` 中调用 `AddActors(...)` 方法来提供这种集成。 使用传递到 `AddActors(...)` 方法的委托来注册 actor 类型并配置 actor 运行时设置。 你可以在 `ConfigureServices(...)` 中为依赖注入注册额外的类型。 这些都可用于注入到 Actor 类型的构造函数中。
 
-Actors通过Dapr runtime使用HTTP调用来实现。 此功能是应用程序的 HTTP 处理管道的一部分，在 `Configure(...)` 方法中的`UseEndpoint(...)` 注册。
+Actor 通过 Dapr 运行时的 HTTP 调用实现。 此功能是应用程序的 HTTP 处理管道的一部分，在 `Configure(...)` 方法中的 `UseEndpoint(...)` 注册。
 
 在 `MyActorService` 项目中，将以下代码粘贴到 `Startup.cs` 中。
 
@@ -315,7 +314,7 @@ namespace MyActorService
 
 ## 第 3 步：添加客户端
 
-创建一个简单的控制台应用来调用actor服务。 Dapr SDK 提供 Actor 代理客户端来调用Actor接口中定义的actor方法。
+创建一个简单的控制台应用来调用 actor 服务。 Dapr SDK 提供 Actor 代理客户端来调用 Actor 接口中定义的 actor 方法。
 
 ### 创建 actor 客户端项目并添加依赖
 
@@ -386,11 +385,11 @@ namespace MyActorClient
 
 ## 运行代码
 
-你已经创建的项目现在可以测试示例。
+您创建的项目现在可以测试示例。
 
 1. 运行 MyActorService
 
-    由于`MyActorService`正在托管 Actors，因此需要使用 Dapr CLI 来运行。
+    由于 `MyActorService` 正在托管 Actors，因此需要使用 Dapr CLI 来运行。
 
     ```bash
     cd MyActorService
@@ -445,11 +444,11 @@ namespace MyActorClient
     Got response: Success
     ```
 
-> 💡 这个示例依赖于几个假设。 ASP.NET Core Web 项目的默认监听端口是 5000，它被传递给 `dapr run` 作为 `--app-port 5000`。 Dapr sidecar 的默认HTTP端口是 3500。 我们告诉 sidecar 的 `MyActorService` 使用 3500，以便 `MyActorClient` 可以依赖默认值。
+> 💡 这个示例依赖于几个假设。 ASP.NET Core Web 项目的默认监听端口是 5000，它被作为 `--app-port 5000` 传递给 `dapr run` 。 Dapr sidecar 的默认 HTTP 端口是 3500。 我们告诉 `MyActorService` 的 sidecar 使用 3500，以便 `MyActorClient` 可以依赖默认值。
 
 现在您已经成功创建了 actor 服务和客户端。 查看相关链接部分了解更多信息。
 
 ## 相关链接
 
-- [.NET Dapr Actors 客户端指南]({{< ref dotnet-actors-client.md >}})
-- [.NET Dapr Actors 客户端指南]({{< ref dotnet-actors-usage.md >}})
+- [.NET Dapr Actor 客户端指南]({{< ref dotnet-actors-client.md >}})
+- [.NET Dapr Actor 使用指南]({{< ref dotnet-actors-usage.md >}})

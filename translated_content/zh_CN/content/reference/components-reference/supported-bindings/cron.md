@@ -50,7 +50,7 @@ Dapr cron 绑定支持以下格式：
 * `30 * * * * *` - 每 30 秒
 * `0 15 * * *` - 每 15 分钟
 * `0 30 3-6, 20-23 * *` - 每半小时在上午3-6点，晚上8-11点范围内
-* `CRON_TZ=America/New_York 0 30 04 * * *` - every day at 4:30am New York time
+* `CRON_TZ=America/New_York 0 30 04 * * *` - 在每天纽约时间凌晨 4:30
 
 > 您可以在[这里](https://en.wikipedia.org/wiki/Cron)了解更多关于cron和支持的格式
 
@@ -59,9 +59,9 @@ Dapr cron 绑定支持以下格式：
 * `@every 15 s` 的`s` 就是秒， `m` 为分钟， `g` 就是小时
 * `@daily` 或 `@hourly` 它是从绑定初始化之时起运行的
 
-## Listen to the cron binding
+## 监听 cron 绑定
 
-After setting up the cron binding, all you need to do is listen on an endpoint that matches the name of your component. Assume the [NAME] is `scheduled`. This will be made as a HTTP `POST` request. The below example shows how a simple Node.js Express application can receive calls on the `/scheduled` endpoint and write a message to the console.
+在设置了cron绑定之后，您需要做的就是监听与您的组件名称匹配的 endpoint。 假设 [NAME] `scheduled`。 这将作为一个 HTTP `POST` 请求。 下面的例子展示了一个简单的 Node.js Express 应用程序如何接收 `/scheduled` endpoint 上的调用，并将消息写入控制台。
 
 ```js
 app.post('/scheduled', async function(req, res){
@@ -70,7 +70,7 @@ app.post('/scheduled', async function(req, res){
 });
 ```
 
-When running this code, note that the `/scheduled` endpoint is called every five minutes by the Dapr sidecar.
+在运行这段代码时，请注意 `/scheduled` endpoint 每五分钟被 Dapr sidecar 调用一次。
 
 
 ## 绑定支持

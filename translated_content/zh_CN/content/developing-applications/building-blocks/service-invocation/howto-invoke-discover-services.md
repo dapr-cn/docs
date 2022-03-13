@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "入门指南：发现并调用服务"
-linkTitle: "How-To: Invoke with HTTP"
+linkTitle: "如何做：用HTTP进行调用"
 description: "入门指南指导如何使用 Dapr 服务在分布式应用程序中调用其它服务"
 weight: 2000
 ---
@@ -12,7 +12,7 @@ weight: 2000
 
 以下的示例简述了一个订单处理程序。 当前示例中，存两项服务：订单处理服务和结账服务。 两个服务都使用了 Dapr sidecars，订单处理服务委托Dapr 去调用结账服务的结账操作。
 
-<img src="/images/building-block-service-invocation-example.png" width=1000 height=500 alt="Diagram showing service invocation of example service">
+<img src="/images/building-block-service-invocation-example.png" width=1000 height=500 alt="显示示例服务的服务调用的图示">
 
 ## 步骤 1: 创建服务标识
 
@@ -137,7 +137,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 {{% codetab %}}
 
-### Set an app-id when deploying to Kubernetes
+### 在部署到Kubernetes时设置一个应用程序的ID
 
 在 Kubernetes 中，在您的pod 上设置 `dapr.io/app-id` 注解：
 
@@ -174,9 +174,9 @@ spec:
 
 要使用 Dapr 调用应用程序，您可以在任意 Dapr 实例中使用 `调用` API。
 
-The sidecar programming model encourages each application to interact with its own instance of Dapr. The Dapr sidecars discover and communicate with one another.
+Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr 边车实例会相互发现并进行通信。
 
-Below are code examples that leverage Dapr SDKs for service invocation.
+下面是利用 Dapr SDK 进行服务调用的代码示例。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 
@@ -363,37 +363,37 @@ main();
 
 {{< /tabs >}}
 
-### Additional URL formats
+### 其他URL格式
 
 要调用 "GET" 端点:
 ```bash
 curl http://localhost:3602/v1.0/invoke/checkout/method/checkout/100
 ```
 
-In order to avoid changing URL paths as much as possible, Dapr provides the following ways to call the service invocation API:
+为了尽可能避免改变URL路径，Dapr提供了以下方式来调用服务调用API。
 
 
-1. Change the address in the URL to `localhost:<dapr-http-port>`.
-2. Add a `dapr-app-id` header to specify the ID of the target service, or alternatively pass the ID via HTTP Basic Auth: `http://dapr-app-id:<service-id>@localhost:3602/path`.
+1. 将URL中的地址改为 `localhost:<dapr-http-port>`。
+2. 添加一个 `dapr-app-id` 头来指定目标服务的ID，或者通过HTTP Basic Auth传递ID。 `http://dapr-app-id。<service-id>@localhost:3602/path`。
 
-For example, the following command
+例如，以下命令
 ```bash
-curl http://localhost:3602/v1.0/invoke/checkout/method/checkout/100
+curl http://localhost:3500/v1.0/invoke/cart/method/add
 ```
 
-is equivalent to:
+等同于：
 
 ```bash
 curl -H 'dapr-app-id: checkout' 'http://localhost:3602/checkout/100' -X POST
 ```
 
-or:
+或：
 
 ```bash
-curl 'http://dapr-app-id:checkout@localhost:3602/checkout/100' -X POST
+curl -H 'dapr-app-id: checkout' 'http://localhost:3602/checkout/100' -X POST
 ```
 
-Using CLI:
+使用 CLI：
 
 ```bash
 dapr invoke --app-id checkout --method checkout/100
@@ -401,9 +401,9 @@ dapr invoke --app-id checkout --method checkout/100
 
 ### 命名空间
 
-When running on [namespace supported platforms]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}}), you include the namespace of the target app in the app ID: `checkout.production`
+当运行于[支持命名空间]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})的平台时，在您的 app ID 中包含命名空间：`myApp.production`
 
-For example, invoking the example service with a namespace would be:
+例如，调用包含名称空间的示例 python 服务:
 
 ```bash
 curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -X POST
@@ -417,7 +417,7 @@ curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -
 
 有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 篇文章。
 
- ## Related Links
+ ## 相关链接
 
 * [服务调用概述]({{< ref service-invocation-overview.md >}})
 * [服务调用 API 规范]({{< ref service_invocation_api.md >}})

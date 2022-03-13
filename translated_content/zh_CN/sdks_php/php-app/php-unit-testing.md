@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "Unit Testing"
-linkTitle: "Unit Testing"
+title: "单元测试"
+linkTitle: "单元测试"
 weight: 1000
-description: Unit Testing
+description: 单元测试
 no_list: true
 ---
 
-单元和集成测试是PHP SDK的一等公民。 使用 DI 容器、 mocks、 stubs、 和提供的 `\Dapr\Mocks\TestClient` 允许您进行非常精良的测试。
+单元和集成测试是 PHP SDK 的一等公民。 使用 DI 容器、 mocks、 stubs 和提供的 `\Dapr\Mocks\TestClient` 允许您进行非常细粒度的测试。
 
-## 测试Actors
+## 测试Actor
 
-对于actor，在测试actor时，我们有两件事要关注：
+对于 actor，在测试 actor 时，我们有两件事要关注：
 
 1. 根据初始状态返回的结果
 2. 基于初始状态的结果状态
@@ -20,7 +20,7 @@ no_list: true
 
 {{% codetab %}}
 
-这是一个测试非常简单的actor的示例，该actor更新其状态并返回特定值：
+下面是一个示例，测试一个非常简单的 actor，该 actor 组件更新其状态并返回特定值：
 
 ```php
 <?php
@@ -165,9 +165,9 @@ class TheTest extends \PHPUnit\Framework\TestCase
 
 {{< /tabs >}}
 
-## 测试Transactions
+## 测试事务
 
-建立事务时，您可能需要测试如何处理失败的事务。 为此，您需要注入异常并确保事务符合您的期望。
+在基于事务进行构建时，您可能希望测试如何处理失败的事务。 为此，您需要注入异常并确保事务符合您的期望。
 
 {{< tabs "integration test with TestClient" "unit test" >}}
 

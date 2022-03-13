@@ -1,34 +1,34 @@
 ---
 type: docs
-title: "在Kubernetes集群上部署Dapr"
-linkTitle: "Deploy Dapr"
+title: "在 Kubernetes 集群上部署 Dapr"
+linkTitle: "部署 Dapr"
 weight: 20000
-description: "按照这些步骤在Kubernetes上部署Dapr"
+description: "按照以下步骤在 Kubernetes 上部署 Dapr。"
 aliases:
   - /zh-hans/getting-started/install-dapr-kubernetes/
 ---
 
-你可以使用 Dapr CLI 或 Helm 在 Kubernetes 中部署 Dapr
+你可以使用 Dapr CLI 或 Helm 在 Kubernetes 中部署 Dapr。
 
-有关部署到Kubernetes集群的内容的更多信息，请阅读 [Kubernetes概述]({{< ref kubernetes-overview.md >}})。
+有关部署到 Kubernetes 集群的内容的更多信息，请阅读 [Kubernetes 概述]({{< ref kubernetes-overview.md >}})。
 
 ## 先决条件
 
-- Install [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 安装[kubectl](https://kubernetes.io/docs/tasks/tools/)
-- Kubernetes 集群 (如有需要可参考下文)
+- 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
+- 安装 [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- Kubernetes 集群（如果需要，请参阅下文）
 
 ### 创建集群
 
-你可以在任何 Kubernetes 集群上安装 Dapr. 下面的链接可以提供帮助: 下面的链接可以提供帮助:
+你可以在任何 Kubernetes 集群上安装 Dapr。 以下是一些有用的链接：
 
-- [Setup Minikube Cluster]({{< ref setup-minikube.md >}})
-- [Setup Azure Kubernetes Service Cluster]({{< ref setup-aks.md >}})
-- [Setup Google Cloud Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/quickstart)
-- [Setup Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
+- [设置 Minikube 集群]({{< ref setup-minikube.md >}})
+- [设置 Azure Kubernetes Service 集群]({{< ref setup-aks.md >}})
+- [设置 Google Cloud Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/quickstart)
+- [设置 Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
 {{% alert title="Hybrid clusters" color="primary" %}}
-Dapr CLI 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 如果你的应用程序有需要，你也可以将 Dapr 部署到 Windows 节点。 For more information see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{<ref kubernetes-hybrid-clusters>}}).
+Dapr CLI 和 Dapr Helm 图表都会自动关联地部署到带有标签 `kubernetes.io/os=linux` 的节点上。 如果你的应用程序有需要，你也可以将 Dapr 部署到 Windows 节点。 更多信息参见[部署到 Linux/Windows 混合型 Kubernetes 集群]({{<ref kubernetes-hybrid-clusters>}})。
 {{% /alert %}}
 
 
@@ -38,13 +38,13 @@ Dapr CLI 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernet
 
 ### 安装 Dapr
 
-`-k` 标志在当前上下文中初始化 Kubernetes 集群上的 Dapr.
+`-k` 标志在当前上下文中初始化 Kubernetes 集群上的 Dapr。
 
 {{% alert title="Ensure correct cluster is set" color="warning" %}}
-请确保设置了正确的 "目标" 集群。 检查 `kubectl 上下文 (kubectl config kubectl config get-contexts)` 以进行验证。 你可以使用 `kubectl config use-context <CONTEXT>`来设置其他的上下文。
+请确保设置了正确的 "目标" 集群。 检查 `kubectl context (kubectl config get-contexts)` 以进行验证。 你可以使用 `kubectl config use-context <CONTEXT>` 来设置其他的上下文。
 {{% /alert %}}
 
-在您的本地机器上运行以下命令，在您的集群上启动Dapr:
+在您的本地机器上运行以下命令，在您的集群上启动 Dapr：
 
 ```bash
 dapr init -k
@@ -59,15 +59,15 @@ dapr init -k
 
 ### 在自定义命名空间安装
 
-初始化 Dapr 时默认的命名空间是`dapr-system`。 你可以用 `-n` 标志来覆盖它。
+初始化 Dapr 时默认的命名空间是 `dapr-system`。 你可以用 `-n` 标志来覆盖它。
 
 ```bash
 dapr init -k -n mynamespace
 ```
 
-### 以高可用方式安装:
+### 在高可用模式下安装
 
-你可以在 [生产环境]({{< ref kubernetes-production.md >}}) 中，为在dapr-system 命名空间里的每个控制平面 pod 设置3个副本的方式运行 Dapr。
+你可以在 [生产环境]({{< ref kubernetes-production.md >}}) 中，为在 dapr-system 命名空间里的每个控制平面 pod 设置3个副本的方式运行 Dapr。
 
 ```bash
 dapr init -k --enable-ha=true
@@ -75,7 +75,7 @@ dapr init -k --enable-ha=true
 
 ### 关闭 mTLS
 
-Dapr is initialized by default with [mTLS]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}). 你可以用下面的命令关闭:
+Dapr 初始化默认开启 [mTLS]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}})。 您可以通过以下方式禁用它：
 
 ```bash
 dapr init -k --enable-mtls=false
@@ -118,7 +118,7 @@ dapr uninstall -k
     # See which chart versions are available
     helm search repo dapr --devel --versions
     ```
-3. 将 Dapr 图表安装在你的集群的 `dapr-system`命名空间中。
+3. 将 Dapr 图表安装在你的集群的 `dapr-system` 命名空间中。
 
     ```bash
     helm upgrade --install dapr dapr/dapr \
@@ -128,7 +128,7 @@ dapr uninstall -k
     --wait
     ```
 
-   以高可用的方式安装:
+   以高可用模式安装：
 
     ```bash
     helm upgrade --install dapr dapr/dapr \
@@ -140,7 +140,7 @@ dapr uninstall -k
     ```
 
 
-   有关使用 Helm 安装和升级 Dapr 的更多信息，请参阅 [Kubernetes上的生产环境部署指南]({{<ref kubernetes-production.md>}})。
+   有关使用 Helm 安装和升级 Dapr 的更多信息，请参阅 [Kubernetes 上的生产环境部署指南]({{<ref kubernetes-production.md>}})。
 
 ### 卸载 Kubernetes 上的 Dapr
 
@@ -151,11 +151,11 @@ helm uninstall dapr --namespace dapr-system
 ### 详情
 
 - 阅读[本指南]({{< ref kubernetes-production.md >}})，了解生产环境中推荐的 Helm 图表值。
-- 请参阅[本页面](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md)，了解有关Dapr Helm图表的详细信息。
+- 请参阅[本页面](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md)，了解有关 Dapr Helm 图表的详细信息。
 
 ## 安装验证
 
-当图表安装完成后，验证dapr-operator、dapr-placement、dapr-sidecar-injector和dapr-sentry 的pods是否在`dapr-system`命名空间中运行。
+安装完成后，验证 dapr-operator、dapr-placement、dapr-sidecar-injector 和 dapr-sentry 的pods是否在 `dapr-system` 命名空间中运行。
 
 ```bash
 kubectl get pods --namespace dapr-system
@@ -172,4 +172,4 @@ dapr-sentry-9435776c7f-8f7yd             1/1       Running   0          40s
 
 ## 下一步
 
-- [如何操作：配置 状态存储 和 发布/订阅 消息代理]({{< ref configure-state-pubsub.md >}})
+- [配置状态存储 & pubsub 消息代理]({{< ref configure-state-pubsub.md >}})
