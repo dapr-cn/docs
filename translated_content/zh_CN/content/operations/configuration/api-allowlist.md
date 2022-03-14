@@ -69,12 +69,12 @@ spec:
 
 参阅此与不同 Dapr API 相对应的值列表：
 
-| Name      | Dapr API                                      |
-| --------- | --------------------------------------------- |
-| state（状态） | [State（状态）]({{< ref state_api.md>}})          |
-| invoke    | [服务调用]({{< ref service_invocation_api.md >}}) |
-| 秘密        | [密钥]({{< ref secrets_api.md >}})              |
-| 绑定        | [输出绑定]({{< ref bindings_api.md >}})           |
-| publish   | [发布/订阅]({{< ref pubsub.md >}})                |
-| actor     | [Actors]({{< ref actors_api.md >}})           |
-| metadata  | [元数据（Metadata）]({{< ref metadata_api.md >}})  |
+| Name     | Dapr API                                                    |
+| -------- | ----------------------------------------------------------- |
+| state    | [State]({{< ref state_api.md>}})                            |
+| invoke   | [Service Invocation]({{< ref service_invocation_api.md >}}) |
+| secrets  | [Secrets]({{< ref secrets_api.md >}})                       |
+| bindings | [Output Bindings]({{< ref bindings_api.md >}})              |
+| publish  | [Pub/Sub]({{< ref pubsub.md >}})                            |
+| actors   | [Actors]({{< ref actors_api.md >}})                         |
+| metadata | [Metadata]({{< ref metadata_api.md >}})                     |
