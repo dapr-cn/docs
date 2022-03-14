@@ -45,7 +45,6 @@ Windows:
 
 ```powershell
 setx NAMESPACE "production"
-
 # run Dapr as usual
 ```
 {{% /codetab %}}
