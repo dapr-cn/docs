@@ -9,7 +9,7 @@ no_list: true
 
 Dapr 提供了一个很好的模块化方法来管理您的应用程序中的状态。 The best way to learn the basics is to visit [the howto]({{< ref howto-get-save-state.md >}}).
 
-## 元数据（Metadata）
+## Metadata
 
 许多状态组件允许您将元数据传递给组件，以控制组件的特定行为。 PHP SDK 允许您通过以下方式传递该元数据：
 
