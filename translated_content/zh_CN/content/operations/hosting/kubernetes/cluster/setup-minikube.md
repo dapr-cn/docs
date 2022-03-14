@@ -36,10 +36,10 @@ minikube start --cpus=4 --memory=4096
 3. 启用仪表盘和 ingress 插件
 
 ```bash
-# 启用 dashboard
+# Enable dashboard
 minikube addons enable dashboard
 
-# 启用 ingress
+# Enable ingress
 minikube addons enable ingress
 ```
 
@@ -59,20 +59,9 @@ minikube addons enable ingress
 $ kubectl get svc
 NAME                        TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)            AGE
 ...
-$ kubectl get svc
-NAME                        TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)            AGE
-...
 calculator-front-end        LoadBalancer   10.103.98.37     <pending>     80:30534/TCP       25h
 calculator-front-end-dapr   ClusterIP      10.107.128.226   <none>        80/TCP,50001/TCP   25h
 ...
-
-$ minikube service calculator-front-end
-|-----------|----------------------|-------------|---------------------------|
-| NAMESPACE |         NAME         | TARGET PORT |            URL            |
-|-----------|----------------------|-------------|---------------------------|
-| default   | calculator-front-end |             | http://192.168.64.7:30534 |
-|-----------|----------------------|-------------|---------------------------|
-  Opening kubernetes service  default/calculator-front-end in default browser...
 
 $ minikube service calculator-front-end
 |-----------|----------------------|-------------|---------------------------|

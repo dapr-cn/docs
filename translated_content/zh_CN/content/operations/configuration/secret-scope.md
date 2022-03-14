@@ -27,12 +27,12 @@ secrets:
 
 The following table lists the properties for secret scopes:
 
-| 属性        | 数据类型   | 说明                                                                                                               |
-| --------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
-| storeName | string | Name of the secret store component. Name of the secret store component. storeName must be unique within the list |
-| 默认权限      | string | Access modifier. Accepted values "allow" (default) or "deny"                                                     |
-| 允许的密钥     | list   | List of secret keys that can be accessed                                                                         |
-| 被拒绝的密钥    | list   | List of secret keys that cannot be accessed                                                                      |
+| 属性             | 数据类型   | 说明                                                                                                               |
+| -------------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| storeName      | string | Name of the secret store component. Name of the secret store component. storeName must be unique within the list |
+| 默认权限           | string | Access modifier. Accepted values "allow" (default) or "deny"                                                     |
+| allowedSecrets | list   | List of secret keys that can be accessed                                                                         |
+| deniedSecrets  | list   | List of secret keys that cannot be accessed                                                                      |
 
 When an `allowedSecrets` list is present with at least one element, only those secrets defined in the list can be accessed by the application.
 
@@ -40,14 +40,14 @@ When an `allowedSecrets` list is present with at least one element, only those s
 
 The `allowedSecrets` and `deniedSecrets` list values take priorty over the `defaultAccess`.
 
-| 场景               | 默认权限  | 允许的密钥  | 被拒绝的密钥 | 权限         |
-| ---------------- | ----- | ------ | ------ | ---------- |
-| 1 - 仅默认访问        | 拒绝/允许 | 为空     | 为空     | 拒绝/允许      |
-| 2 - 默认拒绝允许列表     | 拒绝    | ["s1"] | 为空     | 只能访问"s1"   |
-| 3 - 默认允许拒绝列表     | 允许    | 为空     | ["s1"] | 仅限"s1"无法访问 |
-| 4 - 默认允许允许列表     | 允许    | ["s1"] | 为空     | 只能访问"s1"   |
-| 5 - 默认拒绝拒绝列表     | 拒绝    | 为空     | ["s1"] | 拒绝         |
-| 6 - 两个列表的默认拒绝/允许 | 拒绝/允许 | ["s1"] | ["s2"] | 只能访问"s1"   |
+| 场景               | 默认权限  | allowedSecrets | deniedSecrets | 权限         |
+| ---------------- | ----- | -------------- | ------------- | ---------- |
+| 1 - 仅默认访问        | 拒绝/允许 | 为空             | 为空            | 拒绝/允许      |
+| 2 - 默认拒绝允许列表     | 拒绝    | ["s1"]         | 为空            | 只能访问"s1"   |
+| 3 - 默认允许拒绝列表     | 允许    | 为空             | ["s1"]        | 仅限"s1"无法访问 |
+| 4 - 默认允许允许列表     | 允许    | ["s1"]         | 为空            | 只能访问"s1"   |
+| 5 - 默认拒绝拒绝列表     | 拒绝    | 为空             | ["s1"]        | 拒绝         |
+| 6 - 两个列表的默认拒绝/允许 | 拒绝/允许 | ["s1"]         | ["s2"]        | 只能访问"s1"   |
 
 ## 示例
 
