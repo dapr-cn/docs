@@ -119,7 +119,20 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>127204 words</b>
+                      <b>127305 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/skyao">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Sky/敖小剑 (skyao)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>83083 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -133,19 +146,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>24297 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/skyao">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>Sky/敖小剑 (skyao)</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>57027 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -210,7 +210,20 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>4714 words</b>
+                      <b>5504 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/jerrold0607">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>jerrold0607</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>5452 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -224,19 +237,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>4314 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/jerrold0607">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>jerrold0607</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>4236 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
