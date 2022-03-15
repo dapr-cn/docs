@@ -1,26 +1,26 @@
 ---
 type: docs
-title: "指南：在组件中引用 Secret"
-linkTitle: "在组件中引用 Secret"
+title: "操作方法：在组件中引用秘密"
+linkTitle: "在组件中饮用秘密"
 weight: 400
-description: "如何从组件定义中安全地引用 Secret"
+description: "如何从组件定义中安全地引用秘密"
 ---
 
 ## 概述
 
-组件可以在组件定义中为 `spec.metadata` 部分引用密钥。
+组件可以在组件定义中为 `spec.metadata` 部分引用秘密。
 
-为了引用密钥，您需要设置 `auth.secretStore` 字段以指定密钥存储的名称。
+为了引用秘密，您需要设置 `auth.secretStore` 字段以指定秘密存储的名称。
 
-在 Kubernetes 运行时，如果 `auth.secretStore` 为空，则假定使用Kubernetes 密钥存储。
+在 Kubernetes 运行时，如果 `auth.secretStore` 为空，则假定使用 Kubernetes 秘密存储。
 
-### 支持的 Secret stores
+### 支持的秘密存储
 
-转到 [此]({{< ref " howto-secrets. md" >}}) 链接，以查看 Dapr 支持的所有 secret stores，以及有关如何配置和使用它们的信息。
+转到[此链接]({{< ref " howto-secrets. md" >}}) ，以查看 Dapr 支持的所有秘密存储，以及有关如何配置和使用它们的信息。
 
-## 引用 Secret
+## 引用秘密
 
-虽然您可以选择使用明文密钥（如 MyPassword），如下面的 yaml 所示，用于 `redisPassword`的 `value` ，但不建议将其用于生产：
+虽然您可以选择使用明文秘密（如 MyPassword），如下面的 yaml 所示，用于 `redisPassword`的 `value` ，但不建议将其用于生产：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -38,9 +38,9 @@ spec:
     value: MyPassword
 ```
 
-相反，在您应该在 secret store 中创建 Secret，并在组件定义中引用它：  这有两种情况，如下所示 -- " Secret 包含一个嵌入的键 "和 " Secret 是一个字符串"。
+相反，在您应该在秘密存储中创建秘密，并在组件定义中引用它。  下面显示了两种情况 - "秘密包含嵌入的密钥"和"秘密是字符串"。
 
-" Secret 包含一个嵌入的键"的情况适用于在 Secret 中嵌入一个键，即 Secret **不是**整个连接字符串。 这显示在以下组件定义 yaml 中。
+" 秘密包含嵌入的密钥"的情况适用于在秘密中嵌入一个密钥，即秘密**不是**整个连接字符串。 这显示在以下组件定义 yaml 中。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -62,11 +62,11 @@ auth:
   secretStore: <SECRET_STORE_NAME>
 ```
 
-`SECRET_STORE_NAME` 是已配置的 [ secret store 组件]({{< ref supported-secret-stores >}}) 的名称。 当在 Kubernetes 中运行并使用 Kubernetes secret store 时，字段 `auth.SecretStore` 默认为 `kubernetes` 并且可以留空。
+`SECRET_STORE_NAME` 是已配置的[秘密存储组件]({{< ref supported-secret-stores >}})的名称。 当在 Kubernetes 中运行并使用 Kubernetes 秘密存储时，字段 `auth.SecretStore` 默认为 `kubernetes` 并且可以留空。
 
-上面的组件定义告诉 Dapr 从定义的 `secretStore` 中提取名为 `redis-secret` 的Secret，并将与Secret中嵌入的 `redis-password` 值分配给组件中的 `redisPassword` 字段。 这种情况的一个用法是，当代码构造连接字符串时，例如，将 URL、Secret 以及其他必要信息组合到字符串中。
+上面的组件定义告诉 Dapr 从定义的 `secretStore` 中提取名为 `redis-secret` 的秘密，并将在秘密中嵌入的 `redis-password` 值分配给组件中的 `redisPassword` 字段。 这种情况的一个用法是，当代码构造连接字符串时，例如，将 URL、Secret 以及其他必要信息组合到字符串中。
 
-另一方面，当 Secret 中没有嵌入键值时，以下"Secret是字符串"情况就适用。 相反，这个 Secret 只是一个字符串。 因此，在" `secretKeyRef` "部分中，Secret 的 `name` 和 `key` 将完全相同。 当Secret本身是一个完整的连接字符串，没有需要提取其值的嵌入的键时，就是这种情况。 通常，连接字符串由连接信息、某种允许连接的机密以及可能的其他信息组成，不需要单独的"Secret"。 这种情况如下面的组件定义 yaml 所示。
+另一方面，当秘密中没有嵌入密钥时，以下"秘密是字符串"情况就适用。 相反，这个秘密只是一个字符串。 因此，在 `secretKeyRef` 部分中，秘密的 `name` 和 `key` 将完全相同。 当Secret本身是一个完整的连接字符串，没有需要提取其值的嵌入的键时，就是这种情况。 通常，连接字符串由连接信息、某种允许连接的机密以及可能的其他信息组成，不需要单独的"秘密"。 这种情况如下面的组件定义 yaml 所示。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -87,15 +87,15 @@ auth:
 secretStore: <SECRET_STORE_NAME>
 
 ```
-上面的"Secret 是一个字符串"情况 yaml 告诉 Dapr 从定义的 `secretStore` 中提取名为 `asbNsConnstring` 的连接字符串，并将该值分配给组件中的 `connectionString` 字段，因为"Secret"中没有嵌入 `secretStore` 的键，因为它是纯字符串。 这要求 Secret `name` 和 `key` 相同。
+上面"秘密是字符串"情况的 yaml 告诉 Dapr 从定义的 `secretStore` 中提取名为 `asbNsConnstring` 的连接字符串，并将该值分配给组件中的 `connectionString` 字段，因为"秘密"中没有嵌入 `secretStore` 的键，因为它是纯字符串。 这要求秘密的 `name` 和秘密的 `key` 相同。
 
-## Example
+## 示例
 
-### 引用一个Kubernetes密钥
+### 引用 Kubernetes 密钥
 
-下面的示例向您展示如何创建 Kubernetes 密钥来保持 Event Hubs 绑定的连接字符串。
+下面的示例演示如何创建 Kubernetes 秘密来保存 Event Hubs 绑定的连接字符串。
 
-1. 首先，创建Kubernetes密钥：
+1. 首先，创建 Kubernetes 秘密：
     ```bash
      kubectl create secret generic eventhubs-secret --from-literal=connectionString=*********
     ```
@@ -122,19 +122,19 @@ secretStore: <SECRET_STORE_NAME>
     kubectl apply -f ./eventhubs.yaml
     ```
 
-## 访问密钥的范围
+## 限制秘密访问范围
 
-Dapr 可以使用其配置限制对 secret store 中的 Secret 的访问。 有关详细信息，请阅读 [如何：使用 Secret 范围]({{< ref "secrets-scopes.md" >}}) 和  [如何：限制可从 secret stores 读取的 Secret]({{< ref "secret-scope.md" >}})。 这是使用 Dapr 限制对 Secret 的访问的推荐方法。
+Dapr 可以使用其配置限制对秘密存储中的秘密的访问。 有关详细信息，请阅读 [操作方法：使用秘密范围]({{< ref "secrets-scopes.md" >}}) 和 [操作方法：限制可从秘密存储读取的秘密]({{< ref "secret-scope.md" >}})。 这是使用 Dapr 限制对秘密的访问的推荐方法。
 
 ## Kubernetes 权限
 
 ### 默认命名空间
 
-当在 Kubernetes 中运行时，Dapr 在安装过程中定义了默认的 Role 和 RoleBinding ，用于在 `default` 命名空间中从 Kubernetes secret store 中获取 Secret。 对于启用了 Dapr 的应用程序，从`default`命名空间获取密钥，可以在组件中定义和引用一个密钥，如上例所示。
+当在 Kubernetes 中运行时，Dapr 在安装过程中定义了默认的 Role 和 RoleBinding ，用于在 `default` 命名空间中从 Kubernetes 秘密存储中获取秘密。 对于启用了 Dapr 的应用程序，从 `default` 命名空间获取秘密，可以在组件中定义和引用秘密，如上面的示例所示。
 
 ### 非默认命名空间
 
-如果您的 Dapr 启用的应用正在使用从非默认命名空间获取密钥的组件，在该命名空间应用以下资源：
+如果您的 Dapr 启用的应用正在使用从非默认命名空间获取秘密的组件，在该命名空间应用以下资源：
 
 ```yaml
 ---
@@ -163,13 +163,13 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-这些资源给予了 Dapr 权限，从 Kubernetes 密钥商店获取角色和 RoleBinding 定义的命名空间的 Secret。
+这些资源授予 Dapr 从 Role 和 RoleBinding 中定义的命名空间的 Kubernetes 秘密存储中获取秘密的权限。
 
 {{% alert title="Note" color="warning" %}}
-在生产场景中，仅限Dapr访问某些秘密资源时，您可以使用 `resourceNames` 字段。 请参阅此 [链接](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) 获取更多解释。
+在生产方案中，为了限制 Dapr 仅对某些秘密资源的访问，可以使用 ` resourceNames ` 字段。 有关进一步说明，请参阅[此链接](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources)。
 {{% /alert %}}
 
 ## 相关链接
 
-- [使用密钥作用域]({{< ref "secrets-scopes.md" >}})
-- [限制可以从密钥仓库中读取的密钥]({{< ref "secret-scope.md" >}})
+- [使用秘密作用域]({{< ref "secrets-scopes.md" >}})
+- [限制可以从秘密仓库中读取的秘密]({{< ref "secret-scope.md" >}})

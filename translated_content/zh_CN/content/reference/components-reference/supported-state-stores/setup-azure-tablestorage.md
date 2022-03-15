@@ -35,11 +35,11 @@ spec:
 
 ## 元数据字段规范
 
-| 字段          | 必填 | 详情                                                              | 示例                    |
-| ----------- |:--:| --------------------------------------------------------------- | --------------------- |
-| accountName | Y  | 存储帐户名称                                                          | `"mystorageaccount"`. |
-| accountKey  | Y  | 主要或次要存储密钥                                                       | `"key"`               |
-| tableName   | Y  | The name of the table to be used for Dapr state. 如果表不存在，将会自动创建. | `"table"`             |
+| 字段          | 必填 | 详情                               | 示例                    |
+| ----------- |:--:| -------------------------------- | --------------------- |
+| accountName | Y  | 存储帐户名称                           | `"mystorageaccount"`. |
+| accountKey  | Y  | 主要或次要存储密钥                        | `"key"`               |
+| tableName   | Y  | 要用于 Dapr 状态的表的名称。 如果表不存在，将会自动创建. | `"table"`             |
 
 ## 安装Azure Table Storage
 
@@ -79,7 +79,7 @@ curl -X POST http://localhost:3500/v1.0/state \
 
 ## 并发（Concurrency）
 
-Azure Table Storage state concurrency is achieved by using `ETag`s according to [the official documentation](https://docs.microsoft.com/azure/storage/common/storage-concurrency#managing-concurrency-in-table-storage).
+Azure Table Storage 状态并发是根据 [官方文档](https://docs.microsoft.com/azure/storage/common/storage-concurrency#managing-concurrency-in-table-storage) 使用 `ETag` 实现的。
 
 
 ## 相关链接

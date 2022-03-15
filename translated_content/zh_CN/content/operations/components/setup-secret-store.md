@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "密钥仓库组件"
-linkTitle: "Secret stores（密钥仓库）"
-description: "关于配置不同的密钥仓库组件的指南"
+title: "秘密存储组件"
+linkTitle: "秘密存储"
+description: "关于配置不同的秘密存储组件的指南"
 weight: 3000
 aliases:
   - "/zh-hans/operations/components/setup-state-store/secret-stores-overview/"
 ---
 
-Dapr 集成secret stores，为应用程序和其他组件提供安全存储和访问Secret，如访问键和密码。 每个 secret store 组件都有一个名称，这个名称用于访问 Secret。
+Dapr 集成秘密存储，为应用程序和其他组件提供安全存储和对秘密的访问，如访问密钥和密码。 每个秘密存储组件都有一个名称，访问秘密时将使用此名称。
 
-与其他构建块组件一样，密钥存储组件是可扩展的，可以在[components-contrib 仓库](https://github.com/dapr/components-contrib)中找到。
+与其他构建块组件一样，秘密存储组件是可扩展的，可以在 [components-contrib 仓库](https://github.com/dapr/components-contrib)中找到。
 
-Dapr中的密钥存储使用`Component`文件描述，其字段如下:
+Dapr 中的秘密存储使用 `Component` 文件描述，其字段如下:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,9 +31,9 @@ spec:
 ...
 ```
 
-密钥存储的类型由`type`字段决定，连接地址和其他元数据等放在`.metadata`部分。
+秘密存储的类型由 `type` 字段决定，连接地址和其他元数据等放在 `.metadata` 部分。
 
-不同[支持的 secret stores]({{< ref supported-secret-stores >}}) 将有不同的特定字段需要配置。 例如，当配置一个使用 AWS Secrets Manager秘密存储时，文件看起来就像这样：
+不同的 [受支持的秘密存储]({{< ref supported-secret-stores >}}) 将有不同的特定字段需要配置。 例如，配置使用 AWS Secrets Manager 的秘密存储时，文件将如下所示：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -57,13 +57,13 @@ spec:
 
 ## 应用配置
 
-一旦您创建了组件的 YAML 文件，按照以下说明来根据您的主机环境应用它：
+创建组件的 YAML 文件后，请按照以下说明根据您的主机环境应用该文件：
 
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-要在本地运行，创建一个包含YAML文件的`components`目录，并提供`dapr run`命令的路径，标志为`--components-path`。
+要在本地运行，创建一个包含 YAML 文件的 `components` 目录，并为 `dapr run` 命令提供路径，标志为 `--components-path`。
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -76,12 +76,12 @@ kubectl apply -f secret-store.yaml
 
 {{< /tabs >}}
 
-## 支持的密钥存储
+## 支持的秘密存储
 
-访问 [ secret stores 参考]({{< ref supported-secret-stores >}}) 获取支持的secret stores完整列表。
+访问 [ 秘密存储参考文档]({{< ref supported-secret-stores >}}) 获取支持的秘密存储的完整列表。
 
 
 ## 相关链接
 
-- [支持的密钥存储组件]({{< ref supported-secret-stores >}})
-- [密钥构建块]({{< ref secrets >}})
+- [支持的秘密存储组件]({{< ref supported-secret-stores >}})
+- [秘密构建块]({{< ref secrets >}})

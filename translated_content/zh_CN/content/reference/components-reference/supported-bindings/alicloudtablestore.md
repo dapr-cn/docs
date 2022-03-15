@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Alibaba Cloud Tablestore binding spec"
-linkTitle: "Alibaba Cloud Tablestore"
-description: "Detailed documentation on the Alibaba Tablestore binding component"
+title: "阿里云 Tablestore 绑定规范"
+linkTitle: "阿里云 Tablestore"
+description: "有关阿里云 Tablestore 绑定组件的详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/alicloudtablestore/"
 ---
 
 ## 配置
 
-To setup an Alibaba Cloud Tablestore binding create a component of type `bindings.alicloud.tablestore`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置阿里云 Tablestore 绑定，需要创建一个类型为 `bindings.alicloud.tablestore` 的组件。 看[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})如何创建和应用秘钥配置。 通过[引用 Secrets]({{< ref component-secrets.md >}}) 这个指南可以看到如何在 Dapr 组件中检索和使用 Secret。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -41,13 +41,13 @@ spec:
 
 ## 元数据字段规范
 
-| 字段             | 必填 | 绑定支持 | 详情                            | 示例                                          |
-| -------------- | -- | ---- | ----------------------------- | ------------------------------------------- |
-| `终结点`          | Y  | 输出   | Alicloud Tablestore endpoint. | https://tablestore-cn-hangzhou.aliyuncs.com |
-| `accessKeyID`  | Y  | 输出   | 访问密钥 ID 凭据。                   |                                             |
-| `accessKey`    | Y  | 输出   | 访问密钥凭据。                       |                                             |
-| `instanceName` | Y  | 输出   | Name of the instance.         |                                             |
-| `tableName`    | Y  | 输出   | Name of the table.            |                                             |
+| 字段             | 必填 | 绑定支持 | 详情                       | 示例                                          |
+| -------------- | -- | ---- | ------------------------ | ------------------------------------------- |
+| `终结点`          | Y  | 输出   | 阿里云 Tablestore endpoint。 | https://tablestore-cn-hangzhou.aliyuncs.com |
+| `accessKeyID`  | Y  | 输出   | 访问密钥 ID 凭据。              |                                             |
+| `accessKey`    | Y  | 输出   | 访问密钥凭据。                  |                                             |
+| `instanceName` | Y  | 输出   | 实例的名称。                   |                                             |
+| `tableName`    | Y  | 输出   | 表的名称。                    |                                             |
 
 ## 绑定支持
 
@@ -57,7 +57,7 @@ spec:
 
 ### 创建对象
 
-要执行创建对象操作，请使用`POST`方法和以下JSON调用绑定：
+要执行创建对象操作，请使用 `POST` 方法和以下 JSON 调用绑定：
 
 ```json
 {
@@ -70,12 +70,12 @@ spec:
 ```
 
 {{% alert title="Note" color="primary" %}}
-Note the `metadata.primaryKeys` field is mandatory.
+请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### Delete object
+### 删除对象
 
-To perform a delete object operation, invoke the binding with a `POST` method and the following JSON body:
+要执行删除对象操作，请使用 `POST` 方法和以下 JSON 调用绑定：
 
 ```json
 {
@@ -91,12 +91,12 @@ To perform a delete object operation, invoke the binding with a `POST` method an
 ```
 
 {{% alert title="Note" color="primary" %}}
-Note the `metadata.primaryKeys` field is mandatory.
+请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### List objects
+### 列出对象
 
-To perform a list objects operation, invoke the binding with a `POST` method and the following JSON body:
+要执行列出对象操作，请使用 `POST` 和以下 JSON 调用绑定：
 
 ```json
 {
@@ -113,12 +113,12 @@ To perform a list objects operation, invoke the binding with a `POST` method and
 ```
 
 {{% alert title="Note" color="primary" %}}
-Note the `metadata.primaryKeys` field is mandatory.
+请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### Get object
+### 获取对象
 
-To perform a get object operation, invoke the binding with a `POST` method and the following JSON body:
+要执行获取对象操作，请使用 `POST` 方法和以下 JSON 调用绑定：
 
 ```json
 {
@@ -133,7 +133,7 @@ To perform a get object operation, invoke the binding with a `POST` method and t
 ```
 
 {{% alert title="Note" color="primary" %}}
-Note the `metadata.primaryKeys` field is mandatory.
+请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
 ## 相关链接

@@ -2,16 +2,16 @@
 type: docs
 title: "AWS SSM Parameter Store"
 linkTitle: "AWS SSM Parameter Store"
-description: Detailed information on the AWS SSM Parameter Store - secret store component
+description: 详细介绍了关于 AWS SSM Parameter Store 密钥存储组件的信息
 aliases:
   - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/aws-parameter-store/"
 ---
 
 ## 配置
 
-To setup AWS SSM Parameter Store secret store create a component of type `secretstores.aws.parameterstore`. See [this guide]({{< ref "setup-secret-store.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置 AWS SSM Parameter Store 密钥仓库，请创建一个类型为`secretstores.aws.parameterstore`的组件。 有关如何创建和应用 secretstore 配置，请参阅[本指南]({{< ref "setup-secret-store.md#apply-the-configuration" >}})。 有关如何在 Dapr 组件中检索和使用 secret，请参阅 [引用 secrets]({{< ref component-secrets.md >}}) 指南。
 
-See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes.
+有关身份验证相关属性的信息，请参阅 [向 AWS 进行身份验证]({{< ref authenticating-aws.md >}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,20 +33,20 @@ spec:
     value: "[aws_session_token]"
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将密钥明文存储， 建议将密钥存储在本地，如[Kubernetes密钥存储]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 详情                                                                          | 示例                  |
-| ------------ |:--:| --------------------------------------------------------------------------- | ------------------- |
-| region       | Y  | The specific AWS region the AWS SSM Parameter Store instance is deployed in | `"us-east-1"`       |
-| accessKey    | Y  | 要访问此资源的 AWS 访问密钥                                                            | `"key"`             |
-| secretKey    | Y  | 要访问此资源的 AWS 密钥访问 Key                                                        | `"secretAccessKey"` |
-| sessionToken | N  | 要使用的 AWS 会话令牌                                                               | `"sessionToken"`    |
-## Create an AWS SSM Parameter Store instance
+| 字段           | 必填 | 详情                                      | 示例                  |
+| ------------ |:--:| --------------------------------------- | ------------------- |
+| region       | Y  | 部署 AWS SSM Parameter Store 实例的特定 AWS 区域 | `"us-east-1"`       |
+| accessKey    | Y  | 要访问此资源的 AWS 访问密钥                        | `"key"`             |
+| secretKey    | Y  | 要访问此资源的 AWS 密钥访问 Key                    | `"secretAccessKey"` |
+| sessionToken | N  | 要使用的 AWS 会话令牌                           | `"sessionToken"`    |
+## 创建 AWS SSM Parameter Store 实例
 
-Setup AWS SSM Parameter Store using the AWS documentation: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html.
+参考 AWS 文档设置AWS SSM Parameter Store：https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html。
 
 ## 相关链接
 - [密钥构建块]({{< ref secrets >}})

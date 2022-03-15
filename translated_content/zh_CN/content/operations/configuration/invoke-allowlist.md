@@ -1,50 +1,50 @@
 ---
 type: docs
-title: "如何：将访问控制列表配置应用于服务调用"
+title: "操作方法：将访问控制列表配置应用于服务调用"
 linkTitle: "服务调用访问控制"
 weight: 4000
-description: "限制应用程序可以通过服务调用在\"调用\"应用程序上执行什么操作"
+description: "限制 *调用* 应用程序可以通过服务调用在 *被调用* 应用程序上执行的操作"
 ---
 
-访问控制可以配置策略，限制*调用*应用程序可以通过服务调用对*被调用*应用程序执行哪些操作。 为了限制来自调用应用程序的特定操作和HTTP verbs 对被调用应用程序的访问，你可以在配置中定义一个访问控制策略规范。
+访问控制可以配置策略，限制*调用*应用程序可以通过服务调用对*被调用*应用程序执行哪些操作。 为了限制来自调用应用程序的特定操作和 HTTP verbs 对被调用应用程序的访问，你可以在配置中定义访问控制策略规范。
 
-访问控制策略在配置中指定，并应用于 Dapr sidecar </em> 被调用*的应用程序。 示例访问策略如下所示，对被调用应用的访问基于匹配的策略操作。 您可以为所有调用应用程序提供默认的全局操作，如果未指定访问控制策略，则默认行为是允许所有调用应用程序访问被调用的应用程序。</p>
+访问控制策略在配置中指定，并应用于*被调用* 应用程序的 Dapr sidecar。 示例访问策略如下所示，对被调用应用的访问基于匹配的策略操作。 您可以为所有调用应用程序提供默认的全局操作，如果未指定访问控制策略，则默认行为是允许所有调用应用程序访问被调用的应用程序。
 
 ## 概念
 
-**TrustDomain** - "信任域"是用于管理信任关系的逻辑组。 每个应用程序都分配有一个信任域，可以在访问控制列表策略规范中指定。 如果未定义策略规范或指定了空信任域，则使用默认值"public"。 此信任域用于在 TLS 证书中生成应用程序的标识。
+**TrustDomain** - "信任域"是用于管理信任关系的逻辑组。 每个应用程序都分配有一个信任域，可以在访问控制列表策略规范中指定。 如果未定义策略规范或指定了空信任域，则使用默认值 "public"。 此信任域用于在 TLS 证书中生成应用程序的标识。
 
-**App Identity** - Dapr 需要哨兵服务来生成一个 [SPIFFE](https://spiffe.io/) id 给所有应用，并且这个id会附加在 TLS 证书中。 SPIFFE id 有如下格式: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`。  对应的规范中，信任域，命名空间 和 app ID 会从 SPIFFE id 的 TLS 证书中提取出来。   这些值会对应上规范中相应的值.。 如果三个值都能对应上，那更多的规范能进一步的校验。
+**App Identity** - Dapr 需要 Sentry 服务来生成 [SPIFFE](https://spiffe.io/) id 给所有应用，并且这个 id 会附加在 TLS 证书中。 SPIFFE id 有如下格式: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`。  对应的规范中，信任域，命名空间 和 app ID 会从 SPIFFE id 的 TLS 证书中提取出来。   这些值会对应上规范中相应的值.。 如果这三者都匹配，则进一步匹配更具体的策略。
 
 ## 配置属性
 
 下表列出了访问控制、策略和操作的不同属性：
 
-### Access Control
+### 访问控制
 
 | 属性            | 数据类型   | 说明                             |
 | ------------- | ------ | ------------------------------ |
 | defaultAction | string | 没有其他策略匹配时的全局默认操作               |
-| trustDomain   | string | 分配给应用程序的信任域。 默认值为"public"。     |
+| trustDomain   | string | 分配给应用程序的信任域。 默认值为 "public"。    |
 | policies      | string | 用于确定调用应用程序可以对被调用的应用程序执行哪些操作的策略 |
 
-### Policies
+### 策略
 
-| 属性            | 数据类型   | 说明                              |
-| ------------- | ------ | ------------------------------- |
-| app           | string | 允许/拒绝服务调用的调用应用的AppId            |
-| namespace     | string | 需要与调用应用的命名空间匹配的命名空间值            |
-| trustDomain   | string | 需要与调用应用的信任域匹配的信任域。 默认值为"public" |
-| defaultAction | string | 应用级别的默认操作，以防找到应用但未匹配特定操作        |
-| operations    | string | 从调用应用允许的操作                      |
+| 属性            | 数据类型   | 说明                               |
+| ------------- | ------ | -------------------------------- |
+| app           | string | 允许/拒绝服务调用的调用应用的 AppId            |
+| namespace     | string | 需要与调用应用的命名空间匹配的命名空间值             |
+| trustDomain   | string | 需要与调用应用的信任域匹配的信任域。 默认值为 "public" |
+| defaultAction | string | 应用级别的默认操作，以防找到应用但未匹配特定操作         |
+| operations    | string | 允许的从调用应用发起的操作                    |
 
-### Operations
+### 操作
 
-| 属性       | 数据类型   | 说明                                                                  |
-| -------- | ------ | ------------------------------------------------------------------- |
-| name     | string | 被调用应用上允许的操作的路径名。 通配符"\*"可用于在匹配路径                                  |
-| httpVerb | list   | 列出调用应用程序可以使用的特定http verbs。 通配符"\*"可用于匹配任何 http verbs。 不用于 grpc 调用 |
-| action   | string | 访问修饰符。 接受的值"允许"（默认值）或"拒绝"                                           |
+| 属性       | 数据类型   | 说明                                                                   |
+| -------- | ------ | -------------------------------------------------------------------- |
+| name     | string | 被调用应用上允许的操作的路径名。 通配符"\*"可用于在匹配路径                                   |
+| httpVerb | list   | 列出调用应用程序可以使用的特定 http verbs。 通配符"\*"可用于匹配任何 http verbs。 不用于 grpc 调用 |
+| action   | string | 访问修饰符。 接受的值为 "allow"（默认值）或 "deny"                                    |
 
 ## 策略规则
 
@@ -87,7 +87,7 @@ spec:
 
 <font size=5>方案2：拒绝访问除信任域外的所有 trustDomain = public, namespace = default, appId = app1, operation = op1</font>
 
-在这种配置下，只有来自appId = app1的方法op1被允许，来自所有其他应用程序的所有其他方法请求，包括app1上的其他方法，都被拒绝。
+在这种配置下，只有来自 appId = app1 的方法 op1 被允许，来自所有其他应用程序的所有其他方法请求，包括 app1 上的其他方法，都被拒绝。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -113,7 +113,7 @@ spec:
 
 使用此配置时，以下唯一方案是允许访问的，并且来自所有其他应用（包括 app1 或 app2 上的其他方法）的所有其他方法请求都将被拒绝
 * trustDomain = public, namespace = default, appID = app1, operation = op1, http verb = POST/PUT
-* trustDomain = "myDomain"， namespace = "ns1"， appID = app2， operation = op2，应用程序协议是 GRPC，只允许 HTTP POST/PUT 在 appId = app1时请求方法op1，而来自所有其他应用程序的所有方法， 以及app1上的其他方法，请求都会被拒绝
+* trustDomain = "myDomain"， namespace = "ns1"， appID = app2， operation = op2，应用程序协议是 GRPC，只允许 HTTP POST/PUT 在 appId = app1 时请求方法 op1，而来自所有其他应用程序的所有方法， 以及 app1 上的其他方法，请求都会被拒绝
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -265,7 +265,7 @@ spec:
 
     {{< /tabs >}}
 
-3. 运行 daprd，为启用了 mTLS 的node.js应用启动 Dapr sidecar，并引用本地 Sentry 服务：
+3. 运行 daprd，为启用了 mTLS 的 node.js 应用启动 Dapr sidecar，并引用本地 Sentry 服务：
 
    ```bash
    daprd --app-id nodeapp --dapr-grpc-port 50002 -dapr-http-port 3501 --log-level debug --app-port 3000 --enable-mtls --sentry-address localhost:50001 --config nodeappconfig.yaml
@@ -320,7 +320,7 @@ spec:
 
 您可以创建并应用上述配置文件 `nodeappconfig.yaml` 和 `pythonconfig.yaml` 由 [configuration]({{< ref "configuration-concept.md" >}}) 描述到 Kubernetes 部署。
 
-例如，以下是通过这个pythonappconfig配置文件将pythonapp部署到Kubernetes的默认命名空间中。 部署nodeapp，然后查看pythonapp的日志，您会发现由于nodeappconfig文件中的action **deny** Post请求的设置，pythonapp的请求失败了。 将action改为 **allow** 之后再部署app，您会发现请求又会成功了。
+例如，以下是通过这个 pythonappconfig 配置文件将 pythonapp 部署到 Kubernetes 的默认命名空间中。 部署 nodeapp，然后查看 pythonapp 的日志，您会发现由于 nodeappconfig 文件中的 action **deny** Post 请求的设置，pythonapp 的请求失败了。 将 action 改为 **allow** 之后再部署 app，您会发现请求又会成功了。
 
 ```yaml
 apiVersion: apps/v1
@@ -349,8 +349,8 @@ spec:
         image: dapriosamples/hello-k8s-python:edge
  ```
 
-## 社区示例
-观看这个 [视频](https://youtu. be/j99RN_nxExA? t=1108) ，了解如何为服务调用应用访问控制列表。
+## 社区电话会议演示
+观看这个[视频](https://youtu. be/j99RN_nxExA? t=1108) ，了解如何为服务调用应用访问控制列表。
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=1108" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

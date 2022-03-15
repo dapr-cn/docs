@@ -25,7 +25,7 @@ import "github.com/dapr/go-sdk/client"
 
 Go SDK 允许您与所有 [Dapr 构建块]({{< ref building-blocks >}}) 进行交互。
 
-### Service Invocation
+### 服务调用
 
 要在使用 Dapr sidecar 运行的另一个服务上调用特定方法，Dapr 客户端 Go SDK 提供了两个选项：
 
@@ -154,7 +154,7 @@ if err := client.PublishEvent(ctx, "component-name", "topic-name", data); err !=
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
 
-### Output Bindings
+### 输出绑定
 Dapr Go 客户端 SDK 提供了两种方法来调用 Dapr 定义的绑定的操作。 Dapr 支持输入、输出和双向绑定。
 
 简单地说，只输出绑定：

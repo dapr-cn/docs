@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "组件schema"
-linkTitle: "组件schema"
+title: "组件模式"
+linkTitle: "组件模式"
 weight: 100
-description: "Dapr组件的基本 schema"
+description: "Dapr 组件的基本模式"
 ---
 
 Dapr 使用 [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/) 定义和注册组件。 所有组件都定义为 CRD，可应用于 Dapr 运行的任何托管环境，而不仅仅是 Kubernetes。
@@ -28,23 +28,23 @@ spec:
 
 ## 字段
 
-| 字段                 | 必填 | 详情                                        | 示例                 |
-| ------------------ |:--:| ----------------------------------------- | ------------------ |
-| apiVersion         | Y  | 您正在调用的Dapr版本(如果适用的话为 Kubernetes) API      | `dapr.io/v1alpha1` |
-| kind               | Y  | CRD的类型。 组件必须始终是 `Component`               | `Component (组件)`   |
-| **metadata**       | -  | **有关组件注册的信息**                             |                    |
-| metadata.name      | Y  | 组件的名称                                     | `prod-statestore`  |
-| metadata.namespace | N  | 主机环境的命名空间                                 | `myapp-namespace`  |
-| **spec**           | -  | **关于组件资源的详细信息**                           |                    |
-| spec.type          | Y  | 组件类型                                      | `state.redis`      |
-| spec.version       | Y  | 组件版本                                      | `v1`               |
-| spec.initTimeout   | N  | 组件初始化的超时时间 默认值为 5s                        | `5m`, `1h`, `20s`  |
-| spec.ignoreErrors  | N  | 如果组件加载失败，请告诉Dapr sidecar 继续初始化。 默认为 false | `false`            |
-| **spec.metadata**  | -  | **一个组件特定配置的键/值。 查看你的组件字段定义**              |                    |
+| 字段                 | 必填 | 详情                                         | 示例                 |
+| ------------------ |:--:| ------------------------------------------ | ------------------ |
+| apiVersion         | Y  | 您正在调用的 Dapr（以及 Kubernetes，如果适用）API 的版本     | `dapr.io/v1alpha1` |
+| kind               | Y  | CRD的类型。 组件必须始终是 `Component`                | `Component`        |
+| **metadata**       | -  | **有关组件注册的信息**                              |                    |
+| metadata.name      | Y  | 组件的名称                                      | `prod-statestore`  |
+| metadata.namespace | N  | 主机环境的命名空间                                  | `myapp-namespace`  |
+| **spec**           | -  | **关于组件资源的详细信息**                            |                    |
+| spec.type          | Y  | 组件类型                                       | `state.redis`      |
+| spec.version       | Y  | 组件版本                                       | `v1`               |
+| spec.initTimeout   | N  | 组件初始化的超时时间。 默认值为 5s                        | `5m`, `1h`, `20s`  |
+| spec.ignoreErrors  | N  | 如果组件加载失败，请告诉 Dapr sidecar 继续初始化。 默认为 false | `false`            |
+| **spec.metadata**  | -  | **特定于组件的配置的键/值对。 查看字段的组件定义**               |                    |
 
 ### 特殊的元数据值
 
-元数据值可以包含一个 `{uuid}` 标签，当 Dapr sidecar 启动时，该标记将被随机生成的 UUID 所取代。 每个启动都会生成新的 UUID。 它可以用来在 Kubernetes 上区分同一个 pod 的多个实例 ，比如 ["共享的 MQTT 订阅]({{< ref "setup-mqtt.md" >}})。 下面是一个使用 ` {uuid}` 选项的示例。
+元数据值可以包含一个 `{uuid}` 标签，当 Dapr sidecar 启动时，该标记将被随机生成的 UUID 所取代。 每个启动都会生成新的 UUID。 它可以用来在 Kubernetes 上区分同一个 pod 的多个实例 ，比如[共享的 MQTT 订阅]({{< ref "setup-mqtt.md" >}})。 下面是一个使用 ` {uuid}` 选项的示例。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -68,10 +68,10 @@ spec:
 ```
 
 ## 深入阅读
-- [Components concept]({{< ref components-concept.md >}})
-- [组件定义中的引用密钥]({{< ref component-secrets.md >}})
+- [组件概念]({{< ref components-concept.md >}})
+- [组件定义中的引用秘密]({{< ref component-secrets.md >}})
 - [支持的状态存储]({{< ref supported-state-stores >}})
-- [支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})
-- [支持的密钥存储]({{< ref supported-secret-stores >}})
-- [Supported bindings]({{< ref supported-bindings >}})
+- [支持的发布/订阅消息代理]({{< ref supported-pubsub >}})
+- [支持的秘密存储]({{< ref supported-secret-stores >}})
+- [已支持的绑定]({{< ref supported-bindings >}})
 - [设置组件作用域]({{< ref component-scopes.md >}})

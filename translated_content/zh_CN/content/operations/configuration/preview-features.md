@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "操作方法：启用预览功能"
-linkTitle: "Preview features"
+linkTitle: "预览功能"
 weight: 7000
 description: "如何指定和启用预览功能"
 ---
@@ -43,9 +43,9 @@ spec:
 ```
 
 ### 独立模式
-要在本地运行 Dapr 时启用预览功能，请更新默认配置或使用 `dapr run`指定单独的配置文件。
+要在本地运行 Dapr 时启用预览功能，请更新默认配置或使用 `dapr run` 指定单独的配置文件。
 
-默认的Dapr配置是在您运行 `dapr init`时创建的，其位置在。
+默认的 Dapr 配置是在您运行 `dapr init` 时创建的，其位置在：
 - Windows: `%USERPROFILE%\.dapr\config.yaml`
 - Linux/macOS: `~/.dapr/config.yaml`
 
@@ -57,7 +57,7 @@ dapr run --app-id myApp --config ./previewConfig.yaml ./app
 
 
 ### Kubernetes
-在 Kubernetes 模式下，必须通过配置组件提供配置。 使用与上面相同的配置，通过 `kubectl`应用它：
+在 Kubernetes 模式下，必须通过配置组件提供配置。 使用与上面相同的配置，通过 `kubectl` 应用它：
 
 ```bash
 kubectl apply -f previewConfig.yaml
