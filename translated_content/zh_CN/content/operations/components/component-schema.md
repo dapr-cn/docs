@@ -31,7 +31,7 @@ spec:
 | 字段                 | 必填 | 详情                                        | 示例                 |
 | ------------------ |:--:| ----------------------------------------- | ------------------ |
 | apiVersion         | Y  | 您正在调用的Dapr版本(如果适用的话为 Kubernetes) API      | `dapr.io/v1alpha1` |
-| kind               | Y  | CRD的类型。 组件必须始终是 `Component`               | `Component (组件)`   |
+| kind               | Y  | CRD的类型。 组件必须始终是 `Component`               | `Component`        |
 | **metadata**       | -  | **有关组件注册的信息**                             |                    |
 | metadata.name      | Y  | 组件的名称                                     | `prod-statestore`  |
 | metadata.namespace | N  | 主机环境的命名空间                                 | `myapp-namespace`  |
