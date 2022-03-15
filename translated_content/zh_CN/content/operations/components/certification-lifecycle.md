@@ -3,19 +3,19 @@ type: docs
 title: "认证生命周期"
 linkTitle: "认证生命周期"
 weight: 200
-description: "从提交到生产准备的组件认证生命周期"
+description: "组件认证生命周期，从提交到生产就绪"
 ---
 
 ## 概述
 
 Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都有接口定义。  所有的组件都是可插拔的，因此在理想的情况下，你可以用一个具有相同接口的组件换掉另一个。 用于生产的每个组件， 需要保持一套技术要求，以确保组件的功能兼容性和强度。
 
-一般来说，一个组件需要是：
-- 符合定义的Dapr接口
+通常，组件需要：
+- 符合定义的 Dapr 接口
 - 功能正确和强健
 - 完善的文档和维护
 
-为了确保一个组件符合Dapr设定的标准，在Dapr维护者管理的环境中，有一组针对组件的测试。 一旦测试持续通过，就可以确定一个组件的成熟度。
+为了确保组件符合 Dapr 设置的标准，在 Dapr 维护者托管环境中，有一组针对组件运行的测试。 一旦测试持续通过，就可以确定组件的成熟度级别。
 
 ## 认证级别
 
@@ -38,14 +38,14 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 ### Beta
 
 - 该组件必须通过为满足组件规范而定义的所有组件一致性测试
-- 组件的一致性测试已经在Dapr维护者管理的环境中运行
-- 该组件包含了由Dapr维护者审查和批准的一致性测试结果的记录，并具有特定组件-contrib版本
+- 组件的一致性测试已经在 Dapr 维护者管理的环境中运行
+- 该组件包含了由 Dapr 维护者审查和批准的一致性测试结果的记录，并具有特定 components-contrib 版本
 - 建议仅用于非业务关键型用途，因为在后续版本中可能会出现不兼容的变化
 
 ### Stable
 
 - 该组件必须有组件[认证测试](#certification-tests)，以验证功能和弹性
-- 该组件由Dapr维护者维护，并得到社区的支持
+- 该组件由 Dapr 维护者维护，并得到社区的支持
 - 该组件已有充分文档记录和测试
 - 维护人员将根据 Dapr 支持策略解决组件安全性、核心功能和测试问题，并发布包含修补的稳定组件的补丁版本
 
@@ -55,16 +55,16 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 
 ## 一致性测试
 
-[components-contrib](https://github.com/dapr/components-contrib)资源库中的每个组件都需要遵守由Dapr定义的一组接口。 一致性测试是对这些组件定义及其相关的支持服务运行的测试，这样组件就被测试为符合Dapr接口规范和行为。
+[components-contrib](https://github.com/dapr/components-contrib) 仓库中的每个组件都需要遵守由 Dapr 定义的一组接口。 一致性测试是对这些组件定义及其相关的支持服务运行的测试，这样组件就被测试为符合 Dapr 接口规范和行为。
 
-符合性测试是为以下构建块定义的:
+一致性测试是为以下构建块定义的：
 
 - 状态存储
-- 密钥存储
+- 秘密存储
 - 绑定
-- Pub/Sub
+- 发布/订阅
 
-要了解更多关于它们的信息，请看readme [这里](https://github.com/dapr/components-contrib/blob/master/tests/conformance/README.md)。
+要了解更多关于它们的信息，请看[这里](https://github.com/dapr/components-contrib/blob/master/tests/conformance/README.md)。
 
 ### 测试要求
 
@@ -73,21 +73,21 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 
 ## 认证测试
 
-每个稳定组件 [components-contrib](https://github.com/dapr/components-contrib) 存储库必须具有认证测试计划和自动认证测试，以验证该组件通过Dapr支持的所有功能。
+每个稳定组件 [components-contrib](https://github.com/dapr/components-contrib) 仓库必须具有认证测试计划和自动认证测试，以验证该组件通过 Dapr 支持的所有功能。
 
 稳定组件的测试计划应包括以下方案：
 
 - 客户端重新连接：如果客户端库暂时无法连接到服务，Dapr sidecar 在服务重新联机后不需要重新启动。
 - 身份验证选项：验证组件是否可以使用所有支持的选项进行身份验证。
 - 验证资源供应：验证该组件是否在初始化时自动供应资源（如果适用）。
-- 与相应的构建基块和组件相关的所有方案。
+- 与相应的构建块和组件相关的所有方案。
 
 测试计划必须得到 Dapr 维护人员的批准，并与组件代码一起发布在 `README.md` 文件中。
 
 ### 测试要求
 
 - 测试应根据组件规范验证组件的功能行为和健壮性，反映测试计划中的场景
-- 测试必须作为[components-contrib](https://github.com/dapr/components-contrib)资源库的持续集成的一部分成功运行。
+- 测试必须作为 [components-contrib](https://github.com/dapr/components-contrib) 仓库的持续集成的一部分成功运行。
 
 
 ## 组件认证过程
@@ -97,19 +97,19 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 ### 新组件认证：Alpha->Beta
 
 对于需要将认证从 Alpha 更改为 Beta 的新组件，组件认证请求遵循以下步骤：
-- 请求者在[components-contrib](https://github.com/dapr/components-contrib)资源库中创建了一个问题，以便用当前和新的认证级别对该组件进行认证
+- 请求者在 [components-contrib](https://github.com/dapr/components-contrib) 仓库中创建了一个问题，以便用当前和新的认证级别对该组件进行认证
 - 请求者提交 PR 以将组件与定义的一致性测试套件（如果尚未包含）集成
-    - 用户在创建的问题中详细说明了环境设置，以便Dapr维护者能够在受管理的环境中设置服务
-    - 在环境设置完成后，Dapr维护者会审查PR，如果批准，就会合并该PR
-- 请求者在 [docs](https://github.com/dapr/docs) 存储库中提交 PR，从而更新组件的认证级别
+    - 用户在创建的问题中详细说明了环境设置，以便 Dapr 维护者能够在受管理的环境中设置服务
+    - 在环境设置完成后，Dapr 维护者会审查 PR，如果批准，就会合并该 PR
+- 请求者在 [docs](https://github.com/dapr/docs) 仓库中提交 PR，从而更新组件的认证级别
 
-### 新组件认证：Beta->稳定版
+### 新组件认证：Beta->Stable
 
-对于需要从 Beta 版更改为稳定版认证的新组件，组件认证请求遵循以下步骤：
-- 请求者在[components-contrib](https://github.com/dapr/components-contrib)资源库中创建了一个问题，以便用当前和新的认证级别对该组件进行认证
+对于需要从 Beta 版更改为 Stable 认证的新组件，组件认证请求遵循以下步骤：
+- 请求者在 [components-contrib](https://github.com/dapr/components-contrib) 仓库中创建了一个问题，以便用当前和新的认证级别对该组件进行认证
 - 请求者将测试计划的 PR 作为组件源代码目录中的 `README.md` 文件提交
     - 请求者在创建的 PR 中详细说明测试环境要求，包括所需的任何手动步骤或凭据
     - Dapr 维护者审查测试计划，提供反馈或批准它，并最终合并 PR
 - 请求者为自动认证测试提交 PR，包括用于在适用时预配资源的脚本
 - 在测试环境设置完成并配置凭据后，Dapr 维护人员将检查 PR，如果获得批准，则合并 PR
-- 请求者在 [docs](https://github.com/dapr/docs) 存储库中提交 PR，从而更新组件的认证级别
+- 请求者在 [docs](https://github.com/dapr/docs) 仓库中提交 PR，从而更新组件的认证级别

@@ -212,21 +212,21 @@ spec:
     kubectl apply -f azurekeyvault.yaml
     ```
 
-To use a **certificate**:
+使用 **证书**：
 
-1. Create a Kubernetes secret using the following command:
+1. 使用以下命令创建 Kubernetes 秘密：
 
    ```bash
    kubectl create secret generic [your_k8s_secret_name] --from-file=[your_k8s_secret_key]=[pfx_certificate_file_fully_qualified_local_path]
    ```
 
-    - `[pfx_certificate_file_fully_qualified_local_path]` is the path of PFX file you obtained earlier
-    - `[your_k8s_secret_name]` is secret name in the Kubernetes secret store
-    - `[your_k8s_secret_key]` is secret key in the Kubernetes secret store
+    - `[pfx_certificate_file_fully_qualified_local_path]` 是您之前获得的 PFX 文件路径
+    - `[your_k8s_secret_name]` 是 Kubernetes 密钥存储中的秘密名称
+    - `[your_k8s_secret_key]` 是 Kubernetes 密钥存储中秘密的键
 
-2. Create an `azurekeyvault.yaml` component file.
+2. 创建一个 `azurekeyvault.yaml` 组件文件。
 
-    The component yaml refers to the Kubernetes secretstore using `auth` property and  `secretKeyRef` refers to the certificate stored in the Kubernetes secret store.
+    组件 yaml 使用 `auth` 属性引用 Kubernetes secretstore，`secretKeyRef` 引用存储在 Kubernetes 密钥存储中的证书。
 
     ```yaml
     apiVersion: dapr.io/v1alpha1
@@ -252,18 +252,18 @@ To use a **certificate**:
       secretStore: kubernetes
     ```
 
-3. Apply the `azurekeyvault.yaml` component:
+3. 应用`azurekeyvault.yaml`组件:
 
     ```bash
     kubectl apply -f azurekeyvault.yaml
     ```
 
-To use **Azure managed identity**:
+使用 **Azure managed identity**:
 
-1. Ensure your AKS cluster has managed identity enabled and follow the [guide for using managed identities](https://docs.microsoft.com/azure/aks/use-managed-identity).
-2. Create an `azurekeyvault.yaml` component file.
+1. 确保您的AKS集群启用了托管标识，并遵照了 [使用托管标识指南](https://docs.microsoft.com/azure/aks/use-managed-identity)。
+2. 创建 `azurekeyvault.yaml` 组件文件。
 
-    The component yaml refers to a particular KeyVault name. The managed identity you will use in a later step must be given read access to this particular KeyVault instance.
+    组件yaml应用特定的 KeyVault 名称。 在后续步骤中使用的托管标识必须被授予该 KeyVault 实例的读权限。
 
     ```yaml
     apiVersion: dapr.io/v1alpha1
@@ -279,12 +279,12 @@ To use **Azure managed identity**:
         value: "[your_keyvault_name]"
     ```
 
-3. Apply the `azurekeyvault.yaml` component:
+3. 应用`azurekeyvault.yaml`组件:
 
     ```bash
     kubectl apply -f azurekeyvault.yaml
     ```
-4. Create and use a managed identity / pod identity by following [this guide](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity#create-a-pod-identity). After creating an AKS pod identity, [give this identity read permissions on your desired KeyVault instance](https://docs.microsoft.com/azure/key-vault/general/assign-access-policy?tabs=azure-cli#assign-the-access-policy), and finally in your application deployment inject the pod identity via a label annotation:
+4. 按照 [本指南](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity#create-a-pod-identity) 创建和使用托管标识/Pod标识。 创建 AKS Pod 标识后，[ 授予该标识对所需的 KeyVault 实例的读权限](https://docs.microsoft.com/azure/key-vault/general/assign-access-policy?tabs=azure-cli#assign-the-access-policy)，最后，在您的应用程序 deployment 中通过标签注解注入 Pod 标识：
 
   ```yaml
   apiVersion: v1

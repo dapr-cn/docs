@@ -34,13 +34,13 @@ spec:
 | enableTLS | N  | 启用TLS  默认值为 `"false"`                      | `"true"`, `"false"` |
 
 
-### Delay queue
+### 延迟队列
 
-When invoking the Pulsar pub/sub, it's possible to provide an optional delay queue by using the `metadata` query parameters in the request url.
+当调用 Pulsar 发布/订阅时，在请求 url 中使用 `metadata` 查询参数来提供一个可选的延迟队列时可行的。
 
-These optional parameter names are `metadata.deliverAt` or `metadata.deliverAfter`:
-- `deliverAt`: Delay message to deliver at a specified time (RFC3339 format), e.g. `"2021-09-01T10:00:00Z"`
-- `deliverAfter`: Delay message to deliver after a specified amount of time, e.g.`"4h5m3s"`
+可选参数的名称为 `metadata.deliverAt` 或 `metadata.deliverAfter`
+- `deliverAt`: 延迟消息以在指定的时间投递 (RFC3339 格式)，例如 `"2021-09-01T10:00:00Z"`
+- `deliverAfter`:延迟消息在指定的时间后进行投递，例如 `"4h5m3s"`
 
 示例:
 
@@ -54,7 +54,7 @@ curl -X POST http://localhost:3500/v1.0/publish/myPulsar/myTopic?metadata.delive
       }'
 ```
 
-Or
+或者
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myPulsar/myTopic?metadata.deliverAfter='4h5m3s' \

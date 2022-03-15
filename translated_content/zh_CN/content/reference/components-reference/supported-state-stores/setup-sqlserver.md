@@ -41,7 +41,7 @@ spec:
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-如果您希望将 SQL server 用作 [actor 状态存储]({{< ref "state_api.md#configuring-state-store-for-actors" >}})，将以下内容追加到 yaml 文件。
+如果您想要使用 SQL Server 作为 [actor 状态存储]({{< ref "state_api.md#configuring-state-store-for-actors" >}}) ，请在 yaml 上附上以下内容。
 
 ```yaml
   - name: actorStateStore

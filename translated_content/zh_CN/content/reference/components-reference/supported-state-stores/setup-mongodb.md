@@ -56,19 +56,19 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               |      必填       | 详情                                                                               | 示例                                                                    |
-| ---------------- |:-------------:| -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| 服务器              | Y<sup>*</sup> | The server to connect to, when using DNS SRV record                              | `"server.example.com"`                                                |
-| host             | Y<sup>*</sup> | 要连接的主机                                                                           | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
-| username         |       N       | The username of the user to connect with (applicable in conjunction with `host`) | `"admin"`                                                             |
-| password         |       N       | The password of the user (applicable in conjunction with `host`)                 | `"password"`                                                          |
-| databaseName     |       N       | 要使用的数据库名称。 默认值为 `"daprStore"`                                                    | `"daprStore"`                                                         |
-| collectionName   |       N       | 要使用的收藏名称 默认值为 `"daprCollection"`                                                 | `"daprCollection"`                                                    |
-| writeconcern     |       N       | 要使用的写入保证                                                                         | `"majority"`                                                          |
-| readconcern      |       N       | 要使用的读取保证                                                                         | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
-| operationTimeout |       N       | 操作超时。 Defaults to `"5s"`                                                         | `"5s"`                                                                |
+| 字段               |      必填       | 详情                               | 示例                                                                    |
+| ---------------- |:-------------:| -------------------------------- | --------------------------------------------------------------------- |
+| server           | Y<sup>*</sup> | 使用 DNS SRV 记录时要连接的服务器            | `"server.example.com"`                                                |
+| host             | Y<sup>*</sup> | 要连接的主机                           | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
+| username         |       N       | 用于连接的用户的用户名 (适用于 `host`)         | `"admin"`                                                             |
+| password         |       N       | 用于连接的用户的密码 (适用于 `host`)          | `"password"`                                                          |
+| databaseName     |       N       | 要使用的数据库名称。 默认值为 `"daprStore"`    | `"daprStore"`                                                         |
+| collectionName   |       N       | 要使用的收藏名称 默认值为 `"daprCollection"` | `"daprCollection"`                                                    |
+| writeconcern     |       N       | 要使用的写入保证                         | `"majority"`                                                          |
+| readconcern      |       N       | 要使用的读取保证                         | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
+| operationTimeout |       N       | 操作超时。 默认为 `"5s"`                 | `"5s"`                                                                |
 
-> <sup>[*]</sup> The `server` and `host` fields are mutually exclusive. If neither or both are set, Dapr will return an error.
+> <sup>[*]</sup> `server` 和 `host` 的字段是互斥的。 如果两者都未设置，Dapr 将返回错误。
 
 ## 配置 MongoDB
 
@@ -83,7 +83,7 @@ docker run --name some-mongo -d mongo
 
 然后您可以使用 `localhost:27017` 与服务器交互。
 
-If you do not specify a `databaseName` value in your component definition, make sure to create a database named `daprStore`.
+如果在您的组件定义中未指定 `databaseName` 值，请确保创建了一个名为 `daprStore` 的数据库。
 
 {{% /codetab %}}
 

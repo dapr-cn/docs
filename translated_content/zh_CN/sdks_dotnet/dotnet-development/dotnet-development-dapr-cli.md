@@ -14,7 +14,7 @@ Dapr CLI 通过初始化本地 redis 容器、zipkin 容器、放置服务和 re
 
 - [服务调用]({{< ref service-invocation >}})
 - [状态存储]({{< ref state-management >}})
-- [Pub/Sub]({{< ref pubsub >}})
+- [发布/订阅]({{< ref pubsub >}})
 - [Actor]({{< ref actors >}})
 
 您可以用 `dapr run` 来运行 .NET 服务，作为您在本地开发的策略。 计划在每个服务上运行这些命令中的一个，以便启动你的应用程序。

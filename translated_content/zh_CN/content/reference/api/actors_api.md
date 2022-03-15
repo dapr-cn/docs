@@ -8,7 +8,7 @@ weight: 500
 
 Dapr 提供原生、跨平台和跨语言的 virtual actors 功能。 除了 [特定语言的 SDK]({{< ref sdks>}})，开发人员还可以使用下面的 API 端点调用 Actor。
 
-## 外部应用调用 dapr
+## 业务应用调用dapr
 
 ### 调用 actor 方法
 
@@ -69,9 +69,9 @@ curl -X POST http://localhost:3500/v1.0/actors/x-wing/33/method/fly \
 
 ### Actor 状态事务
 
-将 Actor 状态的变成以 multi-item transaction 的方式持久化
+以多项事务的方式将 actor 变更的状态持久化。
 
-***请注意，此操作取决于支持 multi-item transactions 的状态存储组件。***
+***请注意，该具体操作取决于支持多项事务的状态存储组件。***
 
 #### HTTP 请求
 
@@ -148,7 +148,7 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state/<key>
 | daprPort  | Dapr 端口。  |
 | actorType | Actor 类型。 |
 | actorId   | Actor ID  |
-| key       | 状态的 key   |
+| key       | 状态的键      |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -167,9 +167,9 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/state/location \
 }
 ```
 
-### 创建 actor reminders
+### 创建 actor reminder
 
-为 actor 创建一个持久化的 reminders。
+为 actor 创建一个持久化的 reminder。
 
 #### HTTP 请求
 
@@ -179,14 +179,14 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders
 
 #### Request Body
 
-具有以下字段的 JSON 对象：
+JSON 对象将具有以下字段：
 
-| 字段      | 说明                                                                                                      |
-| ------- | ------------------------------------------------------------------------------------------------------- |
-| dueTime | 指定调用提醒的时间，其格式应 [时间。解析](https://pkg.go.dev/time#ParseDuration) 格式                                        |
-| period  | 指定不同调用之间的时间段，其格式应 [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) 格式或 ISO 8601 持续时间格式，可选重复。 |
+| 字段      | 说明                                                                                                              |
+| ------- | --------------------------------------------------------------------------------------------------------------- |
+| dueTime | 指定调用reminder的时间，其格式应为 [time.ParseDuration](https://pkg.go.dev/time#ParseDuration)                               |
+| period  | 指定不同调用之间的时间间隔，其格式应 [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) 或 ISO 8601 持续时间格式并带有一个可选的重复调用参数。 |
 
-`period` 字段支持 `time.Duration` 格式和 ISO 8601 格式(有一些限制)。 `period` 仅支持 ISO 8601 持续时间格式， `Rn/PnYnMnWnDTnHnMnS` 。 此处 `Rn/` 指定将调用提醒 `n ` 次。 它应该是一个大于零的正整数。 如果某些值为 0，则 `period` 可以缩短， 例如10秒持续时间可以在ISO 8601 中被指定为 `PT10S`。 如果未指定 `Rn/` ，则提醒将运行无限次，直到删除。
+`period` 字段支持 `time.Duration` 格式和 ISO 8601 格式(有一些限制)。 `period` 仅支持 ISO 8601 持续时间格式， `Rn/PnYnMnWnDTnHnMnS` 。 此处 `Rn/` 指定将调用提醒 `n ` 次。 这里的 `n ` 应该为正整数。 如果某些值为 0，则 `period` 可以缩短， 例如10秒持续时间可以在ISO 8601 中被指定为 `PT10S`。 如果未指定 `Rn/` ，则提醒将运行无限次，直到删除。
 
 以下指定 `dueTime` 的 3 秒和 7 秒的句点。
 ```json
@@ -204,7 +204,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders
 }
 ```
 
-要将 reminders 配置为仅触发一次，应将 period 设置为空字符串。  以下指定一个 `dueTime` 3 秒，period 为空字符串，这意味着 reminders 将在 3 秒后立即执行，然后永远不会再次触发。
+要将 reminders 配置为仅触发一次，应将 period 设置为空字符串。  以下 `dueTime` 为 3 秒，period 为空字符串，这意味着 reminder 将在 3 秒后立即执行，然后永远不会再次触发。
 ```json
 {
   "dueTime":"0h0m3s0ms",
@@ -243,9 +243,9 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
     }'
 ```
 
-### 获取 actor reminders
+### 获取 actor reminder
 
-获取一个 actor 的 reminders。
+获取一个 actor 的 reminder。
 
 #### HTTP 请求
 
@@ -307,12 +307,12 @@ DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<
 
 #### URL 参数
 
-| 参数        | 说明                 |
-| --------- | ------------------ |
-| daprPort  | Dapr 端口。           |
-| actorType | Actor 类型。          |
-| actorId   | Actor ID           |
-| name      | 要删除 reminders 的名称。 |
+| 参数        | 说明                |
+| --------- | ----------------- |
+| daprPort  | Dapr 端口。          |
+| actorType | Actor 类型。         |
+| actorId   | Actor ID          |
+| name      | 要删除 reminder 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -323,9 +323,9 @@ curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/check
   -H "Content-Type: application/json"
 ```
 
-### 创建 Actor timers
+### 创建 Actor timer
 
-创建一个 actor 的 reminders。
+创建一个 actor 的 reminder。
 
 #### HTTP 请求
 
@@ -335,7 +335,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<n
 
 Body:
 
-以下指定 `dueTime` 的 3 秒和 7 秒的句点。
+以下明确了 `dueTime` 的 3 秒和 7 秒的 `period`。
 ```json
 {
   "dueTime":"0h0m3s0ms",
@@ -383,7 +383,7 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
     }'
 ```
 
-### 删除 Actor timers
+### 删除 Actor timer
 
 删除一个 actor 的 timer。
 
@@ -416,11 +416,11 @@ curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkReb
   -H "Content-Type: application/json"
 ```
 
-## Dapr 调用用户服务
+## Dapr 调用业务的应用服务
 
 ### 获取注册的 Actors
 
-获取此应用程序的注册的 Actors 类型和 Dapr actor 配置。
+获取此应用程序的注册的 actors 类型和 Dapr actor 配置。
 
 #### HTTP 请求
 
@@ -443,7 +443,7 @@ GET http://localhost:<appPort>/dapr/config
 
 #### 示例
 
-获取注册的 Actors 的示例:
+获取注册的 actors 的示例:
 
 ```shell
 curl -X GET http://localhost:3000/dapr/config \
@@ -456,9 +456,9 @@ curl -X GET http://localhost:3000/dapr/config \
 | 参数                      | 说明                                                                                                       |
 | ----------------------- | -------------------------------------------------------------------------------------------------------- |
 | entities                | 此应用程序支持的 actor 类型。                                                                                       |
-| actorIdleTimeout        | 指定在取消激活空闲 actor 之前要等待的时间。  如果没有 actor 方法被调用，并且没有触发任何 reminders ，那么 actor 将处于空闲状态。                        |
-| actorScanInterval       | 指定扫描 Actors 以停用空闲 Actors 的频率时间间隔。  Actors 时间超过 actorIdleTimeout 的 Actors 将被取消激活。                         |
-| drainOngoingCallTimeout | 在进行 Actor 重定位时使用的时间间隔。  这指定等待当前活动 actor 方法完成多长时间。  如果没有当前 actor 方法调用，那么将忽略此时间。                           |
+| actorIdleTimeout        | 指定在释放空闲 actor 之前要等待的时间。  如果没有 actor 方法被调用，并且没有触发任何 reminders ，那么 actor 将处于空闲状态。                          |
+| actorScanInterval       | 指定扫描 actors 以释放空闲 actors 的频率时间间隔。  Actors 时间超过 actorIdleTimeout 的 Actors 将被释放。                           |
+| drainOngoingCallTimeout | 在进行安全排干 actors 时的超时时间。  该值指定了在排干发生时，最长能等待active方法完成的时间。  如果没有当前 actor 方法被调用，那么将忽略此时间。                    |
 | drainRebalancedActors   | 布尔值。  如果为 true ，那么 Dapr 将等待 `drainOngoingCallTimeout` 以允许当前 actor 调用完成，然后再尝试停用 actor。  如果为 false ，则不会等待。 |
 
 ```json
