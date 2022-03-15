@@ -50,7 +50,7 @@ The `Content-Type` header tells Dapr which content type your data adheres to whe
 
 If you want to send your own custom CloundEvent, use the `application/cloudevents+json` value for the `Content-Type` header.
 
-#### 元数据（Metadata）
+#### Metadata
 
 Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.` as shown below.
 

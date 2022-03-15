@@ -42,7 +42,7 @@ GET http://localhost:<daprPort>/v1.0/metadata
 | Name                   | 数据类型                                                                  | 说明                                                                             |
 | ---------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | id                     | string                                                                | Application ID                                                                 |
-| actor                  | [Metadata API Response Registered Actor](#metadataapiresponseactor)[] | A json encoded array of Registered Actors metadata.                            |
+| actors                 | [Metadata API Response Registered Actor](#metadataapiresponseactor)[] | A json encoded array of Registered Actors metadata.                            |
 | extended.attributeName | string                                                                | List of custom attributes as key-value pairs, where key is the attribute name. |
 | 组件                     | [Metadata API Response Component](#metadataapiresponsecomponent)[]    | A json encoded array of loaded components metadata.                            |
 
