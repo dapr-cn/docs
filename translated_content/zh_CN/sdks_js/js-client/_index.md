@@ -173,7 +173,7 @@ async function start() {
 
 ### Interact with bindings
 
-**输出绑定**
+**Output Bindings**
 ```javascript
 import { DaprClient, CommunicationProtocolEnum } from "dapr-client"; 
 

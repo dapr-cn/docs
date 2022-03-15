@@ -2,7 +2,7 @@
 type: docs
 title: "Dapr 和服务网格"
 linkTitle: "服务网格"
-weight: 100
+weight: 700
 description: >
   Dapr 如何与服务网格进行比较和工作
 ---

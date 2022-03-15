@@ -25,7 +25,7 @@ import "github.com/dapr/go-sdk/client"
 
 The Go SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
 
-### 服务调用
+### Service Invocation
 
 To invoke a specific method on another service running with Dapr sidecar, the Dapr client Go SDK provides two options:
 
@@ -154,7 +154,7 @@ if err := client.PublishEvent(ctx, "component-name", "topic-name", data); err !=
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
 
-### 输出绑定
+### Output Bindings
 The Dapr Go client SDK provides two methods to invoke an operation on a Dapr-defined binding. Dapr supports input, output, and bidirectional bindings.
 
 For simple, output only biding:
