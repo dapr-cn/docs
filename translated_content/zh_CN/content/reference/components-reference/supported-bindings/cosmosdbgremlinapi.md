@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "Azure CosmosDBGremlinAPI binding spec"
+title: "Azure CosmosDBGremlinAPI 绑定规范"
 linkTitle: "Azure CosmosDBGremlinAPI"
-description: "Detailed documentation on the Azure CosmosDBGremlinAPI binding component"
+description: "有关 Azure CosmosDBGremlinAPI 绑定组件的详细文档"
 ---
 
 ## 配置
 
-To setup Azure CosmosDBGremlinAPI binding create a component of type `bindings.azure.cosmosdb.gremlinapi`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 Azure CosmosDBGremlinAPI 绑定，请创建一个类型为 `bindings.azure.cosmosdb.gremlinapi` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -34,13 +34,13 @@ spec:
 
 ## 元数据字段规范
 
-| 字段        | 必填 | 绑定支持 | 详情                                              | 示例                                             |
-| --------- |:--:| ---- | ----------------------------------------------- | ---------------------------------------------- |
-| url       | Y  | 输出   | The CosmosDBGremlinAPI url                      | `"wss://******.gremlin.cosmos.azure.com:443/"` |
-| masterKey | Y  | 输出   | The CosmosDBGremlinAPI account master key       | `"masterKey"`                                  |
-| database  | Y  | 输出   | The username of the CosmosDBGremlinAPI database | `"username"`                                   |
+| 字段        | 必填 | 绑定支持 | 详情                              | 示例                                             |
+| --------- |:--:| ---- | ------------------------------- | ---------------------------------------------- |
+| url       | Y  | 输出   | CosmosDBGremlinAPI url          | `"wss://******.gremlin.cosmos.azure.com:443/"` |
+| masterKey | Y  | 输出   | CosmosDBGremlinAPI 帐户 masterKey | `"masterKey"`                                  |
+| database  | Y  | 输出   | CosmosDBGremlinAPI 数据库的用户名      | `"username"`                                   |
 
-For more information see [Quickstart: Azure Cosmos Graph DB using Gremlin ](https://docs.microsoft.com/azure/cosmos-db/graph/create-graph-console).
+更多详细信息，请参阅[快速入门：在 Azure Cosmos Graph DB 中使用 Gremlin](https://docs.microsoft.com/azure/cosmos-db/graph/create-graph-console)。
 
 ## 绑定支持
 
