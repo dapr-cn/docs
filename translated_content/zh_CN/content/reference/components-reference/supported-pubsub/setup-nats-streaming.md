@@ -55,7 +55,7 @@ spec:
 {{% /alert %}}
 
 {{% alert title="Warning" color="warning" %}}
-NATS Streaming has been [deprecated](https://github.com/nats-io/nats-streaming-server/#warning--deprecation-notice-warning). Please consider using [NATS JetStream]({{< ref setup-jetstream >}}) going forward.
+NATS Streaming 已经被 [弃用](https://github.com/nats-io/nats-streaming-server/#warning--deprecation-notice-warning)。 请考虑使用 [NATS JetStream]({{< ref setup-jetstream >}}).
 {{% /alert %}}
 
 ## 元数据字段规范
@@ -114,4 +114,4 @@ kubectl apply -f https://raw.githubusercontent.com/nats-io/k8s/master/nats-strea
 - [Dapr组件的基本格式]({{< ref component-schema >}})
 - 阅读 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}})，了解配置 发布/订阅组件的说明
 - [发布/订阅构建块]({{< ref pubsub >}})
-- [NATS Streaming Deprecation Notice](https://github.com/nats-io/nats-streaming-server/#warning--deprecation-notice-warning)
+- [NATS Streaming 弃用通知](https://github.com/nats-io/nats-streaming-server/#warning--deprecation-notice-warning)
