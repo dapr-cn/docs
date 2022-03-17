@@ -473,7 +473,7 @@ curl -X GET http://localhost:3000/dapr/config \
 
 ### 停用 actor
 
-通过将 指定 actor Id 的 actor 保留到状态存储与来停用 actor
+停用指定 actor 并将 actor 实例的 actorId 持久化到状态存储中。
 
 #### HTTP 请求
 
@@ -501,7 +501,7 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 
 #### 示例
 
-取消激活 actor 的示例: 该示例取消激活 actorId 为 50 的 actor 类型为 stormtrooper
+停用 actor 的示例: 该示例停用 actorId 为 50 且类型为 stormtrooper 的 actor
 
 ```shell
 curl -X DELETE http://localhost:3000/actors/stormtrooper/50 \
@@ -510,7 +510,7 @@ curl -X DELETE http://localhost:3000/actors/stormtrooper/50 \
 
 ### 调用 actor 方法
 
-调用具有指定 methodName 的 actor 的方法，其中方法的参数传递到请求消息的主体中，并在响应消息的主体中提供返回值。  如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
+调用特定 methodName 的 actor 方法，其方法的参数会被传递到消息的请求体中，而返回值会在响应的消息体中。  如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
 #### HTTP 请求
 
@@ -539,14 +539,14 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
 
 #### 示例
 
-对 actor 调用方法的示例: 该示例调用 actorId 为 50 的 actor 类型 stormtrooper上的 performAction 方法
+对调用 actor 方法的示例: 该示例调用 methodName 为 performAction, actorId 为 50 且类型为 stormtrooper 的actor。
 
 ```shell
 curl -X POST http://localhost:3000/actors/stormtrooper/50/method/performAction \
   -H "Content-Type: application/json"
 ```
 
-### 调用 reminders
+### 调用 reminder
 
 调用具有指定的 reminderName 的 actor 的 reminders。  如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
@@ -566,12 +566,12 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/remind/<remin
 
 #### URL 参数
 
-| 参数           | 说明                 |
-| ------------ | ------------------ |
-| appPort      | 应用程序端口             |
-| actorType    | Actor 类型。          |
-| actorId      | Actor ID           |
-| reminderName | 要调用 reminders 的名称。 |
+| 参数           | 说明                |
+| ------------ | ----------------- |
+| appPort      | 应用程序端口            |
+| actorType    | Actor 类型。         |
+| actorId      | Actor ID          |
+| reminderName | 要调用 reminder 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -615,7 +615,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/timer/<timerN
 
 #### 示例
 
-为 actor 调用 timer 的示例: 该示例调用 actorId 为 50 的 actor 类型 stormtrooper 上的 checkRebels timer 方法
+为 actor 调用 timer 的示例: 该示例调用 actorId 为 50，actor 类型 stormtrooper 上名为 checkRebels timer 方法
 
 ```shell
 curl -X POST http://localhost:3000/actors/stormtrooper/50/method/timer/checkRebels \
@@ -624,7 +624,7 @@ curl -X POST http://localhost:3000/actors/stormtrooper/50/method/timer/checkRebe
 
 ### 健康检查
 
-探测应用程序以响应向 Dapr 发送的信号，用于表征该应用程序运行正常与否。 除了 `200` 以外的任何其他响应状态代码将被视为不健康的响应。
+探测应用程序的响应，并向 Dapr 发送信号，来表示该应用程序运行正常与否。 除了 `200` 以外的任何其他响应状态代码将被视为不健康的响应。
 
 不需要响应主体。
 
@@ -660,14 +660,14 @@ curl -X GET http://localhost:3000/healthz \
 
 ## 外部查询 actor 状态
 
-为了启用对 actor 状态的可见性并允许复杂的方案（如状态聚合），Dapr 在外部状态存储（如数据库）中保存 actor 状态。 因此，可以通过组成正确的键或查询来外部查询 actor 状态。
+为了启用对 actor 状态的可见性并允许复杂的方案（如状态聚合），Dapr 存储 actor 的桩体在外部状态存储（如数据库）中。 由此，可以通过键或查询来查询到 actor 状态。
 
-由 Dapr 为 Actors 创建的状态名称空间由以下项组成:
+由 Dapr 为 Actors 创建的状态命名空间由以下组成:
 - App ID - 表示给 Dapr 应用程序的唯一 ID。
 - Actor 类型 - 表示 actor 的类型。
 - Actor ID - 代表 actor 类型的 actor 实例的唯一ID。
-- Key - 特定状态值的键。 Actor ID 标识可以保存多个状态键。
+- Key - 特定状态值的键。 Actor ID 可以拥有多个状态键。
 
-下面的示例演示如何在 `myapp` 应用程序 ID 命名空间下为 actor 实例的状态构造状态名称空间： `myapp||cat||hobbit||food`
+下面的示例演示如何在一个在 App ID 命名空间 为`myapp` 下，构建一个键来表示actor 实例的状态：`myapp||cat||hobbit||food`
 
-在以上示例中，我们在 `myapp` 的应用标识名称空间下，为 actor ID 为 `hobbit` ( actor 类型为 `cat`) 获取状态键 `food`的值。
+在以上示例中，我们在 `myapp` 的应用的命名空间下，为 actor ID 为 `hobbit` 且 actor 类型为 `cat` 获取状态键 `food`的值。
