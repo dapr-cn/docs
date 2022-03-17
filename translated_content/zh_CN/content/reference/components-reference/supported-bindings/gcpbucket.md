@@ -226,9 +226,9 @@ spec:
 }
 ```
 
-The metadata parameters are:
+元数据参数包括：
 
-- `key` - the name of the object
+- `key` - 对象的名称
 
 
 #### 示例
