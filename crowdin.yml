@@ -115,6 +115,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/service-invocation/howto-invoke-discover-services.md
     - source: /content/content/developing-applications/building-blocks/service-invocation/howto-invoke-services-grpc.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/service-invocation/howto-invoke-services-grpc.md
+    - source: /content/content/developing-applications/building-blocks/service-invocation/service-invocation-namespaces.md
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/service-invocation/service-invocation-namespaces.md
     - source: /content/content/developing-applications/building-blocks/service-invocation/service-invocation-overview.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/service-invocation/service-invocation-overview.md
     - source: /content/content/developing-applications/building-blocks/service-invocation/_index.md
@@ -135,6 +137,18 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/state-store-ttl.md
     - source: /content/content/developing-applications/building-blocks/state-management/_index.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/_index.md
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/dataset.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/dataset.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query1.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query1.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query2.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query2.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query3-token.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query3-token.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query3.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query3.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/components/mongodb.yml
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/components/mongodb.yml
     - source: /content/content/developing-applications/building-blocks/state-management/query-state-store/query-cosmosdb-store.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-state-store/query-cosmosdb-store.md
     - source: /content/content/developing-applications/building-blocks/state-management/query-state-store/query-redis-store.md
@@ -185,6 +199,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/integrations/Azure/azure-api-management.md
     - source: /content/content/developing-applications/integrations/Azure/azure-functions.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/integrations/Azure/azure-functions.md
+    - source: /content/content/developing-applications/integrations/Azure/azure-kubernetes-service-extension.md
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/integrations/Azure/azure-kubernetes-service-extension.md
     - source: /content/content/developing-applications/integrations/Azure/workflows.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/integrations/Azure/workflows.md
     - source: /content/content/developing-applications/integrations/Azure/_index.md
@@ -287,6 +303,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/self-hosted/_index.md
     - source: /content/content/operations/hosting/serverless/_index.md
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/serverless/_index.md
+    - source: /content/content/operations/hosting/serverless/azure-container-apps/azure-container-apps-microservices-dapr.png
+      translation: /translated_content/%locale_with_underscore%/content/operations/hosting/serverless/azure-container-apps/azure-container-apps-microservices-dapr.png
     - source: /content/content/operations/hosting/serverless/azure-container-apps/index.md
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/serverless/azure-container-apps/index.md
     - source: /content/content/operations/monitoring/_index.md
@@ -567,6 +585,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-pubsub/setup-redis-pubsub.md
     - source: /content/content/reference/components-reference/supported-pubsub/_index.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-pubsub/_index.md
+    - source: /content/content/reference/components-reference/supported-secret-stores/alicloud-oos-parameter-store.md
+      translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-secret-stores/alicloud-oos-parameter-store.md
     - source: /content/content/reference/components-reference/supported-secret-stores/aws-parameter-store.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-secret-stores/aws-parameter-store.md
     - source: /content/content/reference/components-reference/supported-secret-stores/aws-secret-manager.md
@@ -611,6 +631,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-mongodb.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-mysql.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-mysql.md
+    - source: /content/content/reference/components-reference/supported-state-stores/setup-oci-objectstorage.md
+      translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-oci-objectstorage.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-postgresql.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-postgresql.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-redis.md
@@ -677,6 +699,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/sdks_go/go-service/_index.md
     - source: /content/sdks_java/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_java/_index.md
+    - source: /content/sdks_java/_index.mdbak
+      translation: /translated_content/%locale_with_underscore%/sdks_java/_index.mdbak
     - source: /content/sdks_js/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_js/_index.md
     - source: /content/sdks_js/js-actors/_index.md

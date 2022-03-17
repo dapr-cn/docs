@@ -3,10 +3,10 @@ name: github pages
 on:
   push:
     branches:
-      - "v1.5/translate_site"
+      - "v1.6/translate_site"
   pull_request:
     branches:
-      - "v1.5/translate_site"
+      - "v1.6/translate_site"
 
 jobs:
   build:

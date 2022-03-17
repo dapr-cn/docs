@@ -107,7 +107,7 @@ namespace EventService
                 //Using Dapr SDK to save and get state
                 await client.SaveStateAsync(DAPR_STORE_NAME, "order_1", orderId.ToString());
                 await client.SaveStateAsync(DAPR_STORE_NAME, "order_2", orderId.ToString());
-                var result = await client.GetStateAsync<string>(DAPR_STORE_NAME, orderId.ToString());
+                var result = await client.GetStateAsync<string>(DAPR_STORE_NAME, "order_1");
                 Console.WriteLine("Result after get: " + result);
             }
         }
@@ -333,7 +333,7 @@ Restart your sidecar and try retrieving state again to observe that state persis
 Begin by launching a Dapr sidecar:
 
 ```bash
-dapr --app-id orderprocessing --port 3601 run
+dapr --app-id orderprocessing --dapr-http-port 3601 run
 ```
 
 Then in a separate terminal save a key/value pair into your statestore:
