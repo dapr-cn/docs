@@ -135,6 +135,18 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/state-store-ttl.md
     - source: /content/content/developing-applications/building-blocks/state-management/_index.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/_index.md
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/dataset.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/dataset.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query1.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query1.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query2.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query2.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query3-token.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query3-token.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query3.json
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query3.json
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/components/mongodb.yml
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/components/mongodb.yml
     - source: /content/content/developing-applications/building-blocks/state-management/query-state-store/query-cosmosdb-store.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-state-store/query-cosmosdb-store.md
     - source: /content/content/developing-applications/building-blocks/state-management/query-state-store/query-redis-store.md
@@ -287,6 +299,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/self-hosted/_index.md
     - source: /content/content/operations/hosting/serverless/_index.md
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/serverless/_index.md
+    - source: /content/content/operations/hosting/serverless/azure-container-apps/azure-container-apps-microservices-dapr.png
+      translation: /translated_content/%locale_with_underscore%/content/operations/hosting/serverless/azure-container-apps/azure-container-apps-microservices-dapr.png
     - source: /content/content/operations/hosting/serverless/azure-container-apps/index.md
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/serverless/azure-container-apps/index.md
     - source: /content/content/operations/monitoring/_index.md
