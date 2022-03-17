@@ -21,6 +21,7 @@ all_versions = [
 
 @task
 def update_source(c):
+    # update source file in translation branches
     for branch in all_versions:
         update_source_core(branch)
 
@@ -164,6 +165,7 @@ files:
 
 @task
 def update_files_for_building(c):
+    # to update file to building in github action in dapr-cn/docs
     print("Updating files for building")
     for branch in all_versions:
         update_files_for_building_core(branch)
@@ -187,6 +189,7 @@ def update_files_for_building_core(branch):
 
 @task
 def update_all_submodules(c):
+    # to update all submodules when you want to sync source content to translate content
     print("Updating all submodules")
     repo = Repo(repo_base_dir)
     repo.submodule_update(init=True, recursive=True)
