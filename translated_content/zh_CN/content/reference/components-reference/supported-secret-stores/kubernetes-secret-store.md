@@ -10,7 +10,7 @@ aliases:
 ## 默认 Kubernetes 密钥仓库组件
 当 Dapr 部署到 Kubernetes 集群时，将自动预配名为 `kubernetes` 的密钥仓库。 此预配置的密钥仓库允许您使用原生 Kubernetes 密钥仓库，而无需为密钥仓库编写、部署或维护组件配置文件，对于希望简单地访问 Kubernetes 集群中原生密钥仓库的开发者来说非常有用。
 
-仍然可以为 Kubernetes 密钥仓库配置一个自定义的组件定义文件（详见下文）。 使用自定义方式可以使你的代码中引用的密钥仓库与托管平台解耦，因为密钥仓库不是固定的，可以自定义，从而使你的代码更加通用和便携。 此外，通过显式定义 Kubernetes 密钥仓库组件，您可以从本地 Dapr 自承载安装连接到 Kubernetes 密钥仓库。 这需要一个有效的 [`kubeconfig`](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 文件。
+仍然可以为 Kubernetes 密钥仓库配置一个自定义的组件定义文件（详见下文）。 Using a custom definition decouples referencing the secret store in your code from the hosting platform as the store name is not fixed and can be customized, keeping your code more generic and portable. 此外，通过显式定义 Kubernetes 密钥仓库组件，您可以从本地 Dapr 自承载安装连接到 Kubernetes 密钥仓库。 这需要一个有效的 [`kubeconfig`](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 文件。
 
 {{% alert title="Scoping secret store access" color="warning" %}}
 当使用 [secret scopes]({{<ref secrets-scopes.md>}}) 限制访问应用程序中 Secret 的时，请务必在作用域定义中包含默认密钥仓库，以便对其进行限制。

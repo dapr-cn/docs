@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Bindings API 引用"
-linkTitle: "绑定 API"
+linkTitle: "Bindings API"
 description: "关于 Bindings API 的详细文档"
 weight: 400
 ---

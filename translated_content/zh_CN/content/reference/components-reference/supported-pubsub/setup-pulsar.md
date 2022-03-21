@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## 配置
-要设置Pulsar pubsub，请创建一个`pubsub.pulsar`类型的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
+To setup Apache Pulsar pubsub create a component of type `pubsub.pulsar`. 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。 For more information on Apache Pulsar [read the docs](https://pulsar.apache.org/docs/en/concepts-overview/)
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -24,14 +24,17 @@ spec:
     value: "localhost:6650"
   - name: enableTLS
     value: "false"
+  - name: token
+    value: "eyJrZXlJZCI6InB1bHNhci1wajU0cXd3ZHB6NGIiLCJhbGciOiJIUzI1NiJ9.eyJzd"
 ```
 
 ## 元数据字段规范
 
-| 字段        | 必填 | 详情                                         | 示例                  |
-| --------- |:--:| ------------------------------------------ | ------------------- |
-| host      | Y  | Pulsar broker. 地址， 默认值是 `"localhost:6650"` | `"localhost:6650"`  |
-| enableTLS | N  | 启用TLS  默认值为 `"false"`                      | `"true"`, `"false"` |
+| 字段        | 必填 | 详情                                         | 示例                                                                                            |
+| --------- |:--:| ------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| host      | Y  | Pulsar broker. 地址， 默认值是 `"localhost:6650"` | `"localhost:6650"` OR `"http://pulsar-pj54qwwdpz4b-pulsar.ap-sg.public.pulsar.com:8080"`      |
+| enableTLS | 否  | 启用TLS  默认值为 `"false"`                      | `"true"`, `"false"`                                                                           |
+| token     | 否  | Enable Authentication.                     | [How to create pulsar token](https://pulsar.apache.org/docs/en/security-jwt/#generate-tokens) |
 
 
 ### 延迟队列
