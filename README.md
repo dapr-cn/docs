@@ -1,7 +1,7 @@
 # Dapr 中文文档库
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-26-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-27-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -79,6 +79,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/jerroldgao"><img src="https://avatars.githubusercontent.com/u/6866361?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jerrold Gao</b></sub></a><br /><a href="#translation-jerroldgao" title="Translation">🌍</a></td>
     <td align="center"><a href="http://www.wwbweibo.icu"><img src="https://avatars.githubusercontent.com/u/20398347?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wangweibo</b></sub></a><br /><a href="#translation-wwbweibo" title="Translation">🌍</a></td>
     <td align="center"><a href="https://www.cnblogs.com/wiswang"><img src="https://avatars.githubusercontent.com/u/18387458?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hongzhi</b></sub></a><br /><a href="#translation-WisWang" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://www.weyhd.com"><img src="https://avatars.githubusercontent.com/u/439390?v=4?s=100" width="100px;" alt=""/><br /><sub><b>geffzhang</b></sub></a><br /><a href="#translation-geffzhang" title="Translation">🌍</a></td>
   </tr>
 </table>
 
