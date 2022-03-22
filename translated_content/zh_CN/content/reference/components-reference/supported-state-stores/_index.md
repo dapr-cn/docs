@@ -11,10 +11,10 @@ no_list: true
 
 表格标题：
 
-> `状态`： [组件认证]({{<ref "certification-lifecycle.md">}}) 状态
+> `Status`: [Component certification]({{<ref "certification-lifecycle.md">}}) status
   - [Alpha]({{<ref "certification-lifecycle.md#alpha">}})
   - [Beta]({{<ref "certification-lifecycle.md#beta">}})
-  - [Stable]({{<ref "certification-lifecycle.md#stable">}}) > `Since`: 定义自哪个 Dapr 运行时版本开始，组件处于当前的状态。
+  - [Stable]({{<ref "certification-lifecycle.md#stable">}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
 
 > `组件版本`：代表组件的版本
 
@@ -59,3 +59,9 @@ Dapr 状态管理组件不同程度地支持以下存储:
 | [Azure CosmSDB]({{< ref setup-azure-cosmosdb.md >}})           | ✅    | ✅  | ✅    | ✅                                     | ✅                                     | ✅                                             | Stable | v1   | 1.0 |
 | [Azure SQL Server]({{< ref setup-sqlserver.md >}})             | ✅    | ✅  | ✅    | ❌                                     | ✅                                     | ❌                                             | Stable | v1   | 1.5 |
 | [Azure Table Storage]({{< ref setup-azure-tablestorage.md >}}) | ✅    | ❌  | ✅    | ❌                                     | ❌                                     | ❌                                             | Alpha  | v1   | 1.0 |
+
+### Oracle Cloud Infrastructure (OCI)
+
+| Name                                                         | CRUD | 事务 | ETag | [TTL]({{< ref state-store-ttl.md >}}) | [Actors]({{< ref howto-actors.md >}}) | [Query]({{< ref howto-state-query-api.md >}}) | 状态    | 组件版本 | 自从  |
+| ------------------------------------------------------------ | ---- | -- | ---- | ------------------------------------- | ------------------------------------- | --------------------------------------------- | ----- | ---- | --- |
+| [OCI Object Storage]({{< ref setup-oci-objectstorage.md >}}) | ✅    | ❌  | ✅    | ✅                                     | ❌                                     | ❌                                             | Alpha | v1   | 1.6 |

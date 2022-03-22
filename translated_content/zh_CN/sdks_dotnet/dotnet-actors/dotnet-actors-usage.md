@@ -10,7 +10,7 @@ description: 了解有关使用 .NET SDK 编写和运行 Actors
 
 ### ActorHost
 
-`ActorHost` 是所有 Actor 必备的构造参数，必须传递给基类构造函数。
+`ActorHost` 是所有Actors的必备构造参数，必须传递给基类构造函数。
 
 ```csharp
 internal class MyActor : Actor, IMyActor, IRemindable
@@ -39,9 +39,9 @@ internal class MyActor : Actor, IMyActor, IRemindable
 }
 ```
 
-Actor 类型应该有单个的 `public` 构造函数。 Actor 基础设施使用 [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#constructor-injection-behavior) 模式来构建 actor 实例。
+一个 actor 类型应该有一个单一的`public`构造函数。 Actor 基础设施使用 [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#constructor-injection-behavior) 模式来构建 actor 实例。
 
-你可以在 `Startup.cs` 中用依赖注入注册类型来使它们可用。 你可以[在这里](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?#service-registration-methods)阅读更多关于注册类型的不同方法 。
+你可以在 `Startup.cs` 中用依赖注入注册类型来使它们可用。 你可以阅读更多关于注册类型的不同方法 [这里](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?#service-registration-methods) 。
 
 ```csharp
 // In Startup.cs
@@ -54,7 +54,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-每个 actor 实例都有自己的依赖关系注入作用域。 每个 actor 在执行操作后，都会在内存中保留一段时间，在这段时间内，与该 actor 相关的依赖注入作用域也被认为是活的。 当 actor 被停用时，将释放该作用域。
+每个actor实例都有自己的依赖注入范围。 每个 actor 在执行完一个操作后，都会在内存中保留一段时间，在这段时间内，与 actor 相关的依赖注入作用域也被认为是活的。 当演员被停用时，该范围将被释放。
 
 如果 actor 在构造函数中注入 `IServiceProvider` ，该 actor 将收到一个与它的作用域相关联的 `IServiceProvider` 的引用。 `IServiceProvider` 可以用来在将来动态地解析服务。
 
@@ -69,15 +69,15 @@ internal class MyActor : Actor, IMyActor, IRemindable
 }
 ```
 
-使用该模式时，要注意避免创建许多实现 `IDisposable` 的 **transient** 服务的实例。 由于与 actor 相关联的作用域可以被认为是长期有效的，所以有可能在内存中积累许多服务。 更多信息请参见 [依赖注入指南](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines) 。
+在使用该模式时，要注意避免创建许多实现 `IDisposable` 的 **transient** 服务的实例。 由于与一个 actor 相关联的作用域可以被认为是长期有效的，所以有可能在内存中积累许多服务。 更多信息请参见 [依赖注入指南](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines) 。
 
 ### IDisposable 和 actors
 
-Actor 可以实现 `IDisposable` 或 `IAsyncDisposable` 。 建议您依靠依赖关系注入进行资源管理，而不是在应用程序代码中实现释放功能。 处置支持是为真正需要的罕见情况提供的。
+Actors可以实现 `IDisposable` 或 `IAsyncDisposable` 。 建议您依靠依赖注入进行资源管理，而不是在应用代码中实现处置功能。 在真正有必要的罕见情况下，提供处置支持。
 
 ### 日志
 
-在 actor 类的内部，你可以通过基类 `Actor` 上的属性来访问 `ILogger` 的实例。 该实例连接到 ASP.NET Core 日志系统，应该用于 actor 内部的所有日志记录。 在 [此处](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line) 阅读更多有关日志的信息。 您可以配置各种不同的日志格式和输出接收器。
+在 actor 类的内部，你可以通过基类 `Actor` 上的一个属性来访问 `ILogger` 的实例。 该实例连接到 ASP.NET Core 日志系统，应该用于 actor 内部的所有日志记录。 在 [此处](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line) 阅读更多有关日志的信息。 您可以配置各种不同的日志格式和输出接收器。
 
 您应该使用 *结构化日志* 与 *命名的占位符* 类似于下面的示例：
 
@@ -93,11 +93,11 @@ public Task<MyData> GetDataAsync()
 
 日志记录应该使用 [命名的占位符语法](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-message-template), 这种语法更加性能，能够更好地与日志系统集成。
 
-### 使用显式的 actor 类型名称
+### 使用显式的actor类型名称
 
-默认情况下，客户端所看到的 actor 的 *type* 来自 actor 实现类的名称。 默认名称将是类名 (不含命名空间)。
+默认情况下，客户端所看到的actor的 *type* 来自 actor 实现类的名称。 默认名称将是类名 (不含命名空间)。
 
-如果需要，可以通过将 `ActorAttribute` 属性附加到 actor 实现类来指定显式类型名称。
+如果需要，你可以通过向actor实现类附加一个 `ActorAttribute` 特性来指定一个显式的类型名称。
 
 ```csharp
 [Actor(TypeName = "MyCustomActorTypeName")]
@@ -111,18 +111,18 @@ internal class MyActor : Actor, IMyActor
 
 无需更改以运行时注册 actor类型的代码，只需通过属性提供值。
 
-## 在服务器上托管 Actor
+## 在服务器上托管 Actors
 
-### 注册 Actor
+### 注册 Actors
 
-Actor 注册是 `Startup.cs` 中 `ConfigureServices` 的一部分。 `ConfigureServices` 方法是用依赖注入注册服务的位置，注册 actor 类型集是 actor 服务注册的一部分。
+Actor 注册是 `Startup.cs` 中 `ConfigureServices` 的一部分。 `ConfigureServices`方法是用依赖注入注册服务的位置，注册 actor 类型集是 actor 服务注册的一部分。
 
 在 `ConfigureServices` 中，您可以：
 
 - 注册 actor 运行时(`AddActors`)
 - 注册 actor 类型(`options.Actors.RegisterActor<>`)
 - 配置 actor 运行时设置 `options`
-- 注册额外的服务类型以便将依赖注入到 Actors 中(`services`)
+- 注册额外的服务类型以便将依赖注入到 Actors中(`services`)
 
 ```csharp
 // In Startup.cs
@@ -150,7 +150,7 @@ public void ConfigureServices(IServiceCollection services)
 
 Actor 运行时使用 [System.Text.Json](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview) 将数据序列化到状态存储，并处理来自弱类型客户端的请求。
 
-默认情况下，actor 运行时使用基于 [JsonSerializerDefaults.Web](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializerdefaults?view=net-5.0) 的设置。
+默认情况下，actor运行时使用基于 [JsonSerializerDefaults.Web](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializerdefaults?view=net-5.0) 的设置。
 
 您可以配置 `JsonSerializerOptions` 作为 `ConfigureServices` 的一部分：
 
@@ -168,11 +168,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-### Actor 和路由
+### Actors 和 路由
 
-托管支持 actor 的 ASP.NET Core 使用[端点路由](https://docs.microsoft.com/en-us/aspnet/core/fundamenta ls/routing)系统。 .NET SDK 不提供支持托管 Actors 的早期 ASP.NET Core版本的遗留路由系统。
+ASP.NET Core 托管支持对 actors 使用[终结点路由](https://docs.microsoft.com/en-us/aspnet/core/fundamenta ls/routing) 系统。 .NET SDK 不提供支持托管 Actors 的早期 ASP.NET Core版本的遗留路由系统。
 
-由于 actors 使用端点路由，因此 actors HTTP 处理程序是中间件管道的一部分。 下面是 `Configure` 方法与 actor 一起设置中间件管道的最小示例。
+由于 actors 使用终结点路由，Actors HTTP处理程序是中间件管道的一部分。 下面是一个 `Configure` 方法与 actors一起设置中间件管道的最小示例。
 
 ```csharp
 // in Startup.cs
@@ -193,20 +193,20 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-`UseRouting` 和 `UseEndpoints` 的调用对于配置路由是必要的。 在端点中间件中添加 `MapActorsHandlers` 是将 actor 配置为管道的一部分。
+`UseRouting` 和 `UseEndpoints` 调用是配置路由所必需的。 在端点中间件中添加 `MapActorsHandlers` 是将 actor 配置为管道的一部分。
 
-这是一个最小的示例，它对 Actor 功能与以下功能一起存在是有效的：
+这只是一个最小的例子，它对 Actor 功能并存是有效的：
 
 - Controllers
 - Razor Pages
 - Blazor
 - gRPC 服务
 - Dapr 发布/订阅 处理
-- 其他端点，如健康检查
+- 其他终结点，如健康检查
 
-### 有问题的中间件
+### 问题中间件
 
-某些中间件可能会干扰 Dapr 请求到 actor 处理程序的路由。 特别是 `UseHttpsRedirection` 对于 Dapr 的默认配置是有问题的。 Dapr 默认会通过未加密的 HTTP 发送请求，然后会被 `UseHttpsRedirection` 中间件阻止。 这个中间件目前不能与 Dapr 一起使用。
+某些中间件可能会干扰 Dapr 请求到 actors 处理程序的路由。 特别是 `UseHttpsRedirection` 对于Dapr的默认配置是有问题的。 Dapr默认会通过未加密的HTTP发送请求，然后会被 `UseHttpsRedirection` 中间件阻止。 这个中间件目前不能与 Dapr 一起使用。
 
 ```csharp
 // in Startup.cs

@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## 配置
-若要安装 Azure Service Bus pubsub，请创建一个类型为 `pubsub.azure.servicebus`的组件。 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
+To setup Azure Service Bus pubsub create a component of type `pubsub.azure.servicebus`. 请参阅[本指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -45,7 +45,7 @@ spec:
   # - name: defaultMessageTimeToLiveInSec # Optional
   #   value: 10
   # - name: autoDeleteOnIdleInSec # Optional
-  #   value: 10
+  #   value: 3600
   # - name: maxReconnectionAttempts # Optional
   #   value: 30
   # - name: connectionRecoveryInSec # Optional
@@ -64,25 +64,28 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                              | 必填 | 详情                                                  | 示例                                                                                                                                             |
-| ------------------------------- |:--:| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| connectionString                | Y  | 服务总线共享访问策略连接字符串                                     | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
-| timeoutInSec                    | N  | 发送消息和其他管理操作的超时时间。 默认值：`60`                          | `30`                                                                                                                                           |
-| handlerTimeoutInSec             | N  | 调用应用handler的超时。 # 可选的。 默认值：`60`                     | `30`                                                                                                                                           |
-| disableEntityManagement         | N  | 设置为 "true "时，主题和订阅不会自动创建。 默认值为 `"false"`            | `"true"`, `"false"`                                                                                                                            |
-| maxDeliveryCount                | N  | 定义服务器发送消息的尝试次数。 由服务端默认设置                            | `10`                                                                                                                                           |
-| lockDurationInSec               | N  | 定义消息过期前被锁定的时长，以秒为单位。 由服务端默认设置                       | `30`                                                                                                                                           |
-| lockRenewalInSec                | N  | 定义缓冲消息锁的更新频率。 默认值：`20`.                             | `20`                                                                                                                                           |
-| maxActiveMessages               | N  | 定义一次要缓冲或处理的消息的最大数量。 默认值：`10000`                     | `2000`                                                                                                                                         |
-| maxActiveMessagesRecoveryInSec  | N  | 定义达到最大活跃消息限制后等待的时长(秒) 默认值：`2` 默认值：`2`               | `10`                                                                                                                                           |
-| maxConcurrentHandlers           | N  | 定义并发消息处理器的最大数量                                      | `10`                                                                                                                                           |
-| prefetchCount                   | N  | 定义预取消息的数量(用于高吞吐量/低延迟场景)                             | `5`                                                                                                                                            |
-| defaultMessageTimeToLiveInSec   | N  | 默认消息存活时间                                            | `10`                                                                                                                                           |
-| autoDeleteOnIdleInSec           | N  | 自动删除消息前等待的时间(秒)                                     | `10`                                                                                                                                           |
-| maxReconnectionAttempts         | N  | 定义重新连接尝试的最大次数。 默认值：`30`                             | `30`                                                                                                                                           |
-| connectionRecoveryInSec         | N  | 连接恢复尝试之间的等待时间（以秒为单位）。 默认值：`2`                       | `2`                                                                                                                                            |
-| publishMaxRetries               | N  | Azure Service Bus 以"过于忙碌"为响应以限制消息时的最大重试次数。 默认值：`5`  | `5`                                                                                                                                            |
-| publishInitialRetryInternalInMs | N  | Azure Service Bus 限制消息时初始指数退避的时间（以毫秒为单位）。 默认值：`500` | `500`                                                                                                                                          |
+| 字段                              | 必填 | 详情                                                                                                                         | 示例                                                                                                                                             |
+| ------------------------------- |:--:| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| connectionString                | Y  | Shared access policy connection-string for the Service Bus                                                                 | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`" |
+| timeoutInSec                    | N  | 发送消息和其他管理操作的超时时间。 默认值：`60`                                                                                                 | `30`                                                                                                                                           |
+| handlerTimeoutInSec             | N  | 调用应用handler的超时。 # 可选的。 默认值：`60`                                                                                            | `30`                                                                                                                                           |
+| disableEntityManagement         | N  | 设置为 "true "时，主题和订阅不会自动创建。 默认值为 `"false"`                                                                                   | `"true"`, `"false"`                                                                                                                            |
+| maxDeliveryCount                | N  | 定义服务器发送消息的尝试次数。 由服务端默认设置                                                                                                   | `10`                                                                                                                                           |
+| lockDurationInSec               | N  | 定义消息过期前被锁定的时长，以秒为单位。 由服务端默认设置                                                                                              | `30`                                                                                                                                           |
+| lockRenewalInSec                | N  | 定义缓冲消息锁的更新频率。 默认值：`20`.                                                                                                    | `20`                                                                                                                                           |
+| maxActiveMessages               | N  | 定义一次要缓冲或处理的消息的最大数量。 默认值：`10000`                                                                                            | `2000`                                                                                                                                         |
+| maxActiveMessagesRecoveryInSec  | N  | 定义达到最大活跃消息限制后等待的时长(秒) 默认值：`2` 默认值：`2`                                                                                      | `10`                                                                                                                                           |
+| maxConcurrentHandlers           | N  | 定义并发消息处理器的最大数量                                                                                                             | `10`                                                                                                                                           |
+| prefetchCount                   | N  | 定义预取消息的数量(用于高吞吐量/低延迟场景)                                                                                                    | `5`                                                                                                                                            |
+| defaultMessageTimeToLiveInSec   | N  | 默认消息存活时间                                                                                                                   | `10`                                                                                                                                           |
+| autoDeleteOnIdleInSec           | N  | Time in seconds to wait before auto deleting idle subscriptions.                                                           | `3600`                                                                                                                                         |
+| maxReconnectionAttempts         | N  | Defines the maximum number of reconnect attempts. Default: `30`                                                            | `30`                                                                                                                                           |
+| connectionRecoveryInSec         | N  | Time in seconds to wait between connection recovery attempts. Defaults: `2`                                                | `2`                                                                                                                                            |
+| publishMaxRetries               | N  | The max number of retries for when Azure Service Bus responds with "too busy" in order to throttle messages. Defaults: `5` | `5`                                                                                                                                            |
+| publishInitialRetryInternalInMs | N  | Time in milliseconds for the initial exponential backoff when Azure Service Bus throttle messages. Defaults: `500`         | `500`                                                                                                                                          |
+
+### Azure Active Directory (AAD) authentication
+The Azure Service Bus pubsub component supports authentication using all Azure Active Directory mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of AAD authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
 
 ## 消息元数据
 

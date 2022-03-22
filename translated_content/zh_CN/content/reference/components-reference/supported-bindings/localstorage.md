@@ -222,7 +222,7 @@ To perform a delete file operation, invoke the Local Storage binding with a `POS
 }
 ```
 
-#### Example
+#### 示例
 
 {{< tabs Windows Linux >}}
 

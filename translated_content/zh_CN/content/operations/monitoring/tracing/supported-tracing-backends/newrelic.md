@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "操作方法：为分布式追踪安装 New Relic"
+title: "How-To: Set-up New Relic for distributed tracing"
 linkTitle: "New Relic"
 weight: 2000
-description: "为分布式追踪安装 New Relic"
+description: "Set-up New Relic for distributed tracing"
 ---
 
 ## 先决条件
 
-- 永久[免费的 New Relic 账户](https://newrelic.com/signup?ref=dapr)，100GB/月的免费数据摄取，1个免费全接入用户，无限制免费基本用户
+- Perpetually [free New Relic account](https://newrelic.com/signup?ref=dapr), 100 GB/month of free data ingest, 1 free full access user, unlimited free basic users
 
-## 配置 Dapr 追踪
+## Configure Dapr tracing
 
-Dapr 原生捕捉 metrics 和 traces ，可以直接发送到 New Relic。 导出这些的最简单方法是将 Dapr 配置为使用 Zipkin 跟踪格式将跟踪发送到 [New Relic 的 Trace API](https://docs.newrelic.com/docs/distributed-tracing/trace-api/report-zipkin-format-traces-trace-api/)。
+Dapr natively captures metrics and traces that can be send directly to New Relic. The easiest way to export these is by configuring Dapr to send the traces to [New Relic's Trace API](https://docs.newrelic.com/docs/distributed-tracing/trace-api/report-zipkin-format-traces-trace-api/) using the Zipkin trace format.
 
-为了使集成将数据发送到 New Relic [遥测数据平台](https://newrelic.com/platform/telemetry-data-platform)，您需要一个 [New Relic Insights Insert API 密钥](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#insights-insert-key)。
+In order for the integration to send data to New Relic [Telemetry Data Platform](https://newrelic.com/platform/telemetry-data-platform), you need a [New Relic Insights Insert API key](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#insights-insert-key).
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,80 +33,103 @@ spec:
 
 New Relic 分布式追踪概览 ![New Relic Kubernetes Cluster Explorer App](/images/nr-distributed-tracing-overview.png)
 
-New Relic 分布式追踪详情 ![New Relic Kubernetes Cluster Explorer App](/images/nr-distributed-tracing-detail.png)
+New Relic Distributed Tracing details ![New Relic Kubernetes Cluster Explorer App](/images/nr-distributed-tracing-detail.png)
 
-## (可选) New Relic 指令
+## (optional) New Relic Instrumentation
 
-为了能将 New Relic 与 Dapr 的集成的数据送往 New Relic Telemetry Data Platform，你需要 [New Relic license key](https://docs.newrelic.com/docs/accounts/accounts-billing/account-setup/new-relic-license-key) 或者 [New Relic Insights Insert API key](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#insights-insert-key)。
+In order for the integrations to send data to New Relic Telemetry Data Platform, you either need a [New Relic license key](https://docs.newrelic.com/docs/accounts/accounts-billing/account-setup/new-relic-license-key) or [New Relic Insights Insert API key](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#insights-insert-key).
 
-### OpenTelemetry 指令
+### OpenTelemetry instrumentation
 
-使用不同语言的特定 OpenTelemetry 指令， 比如 [New Relic Telemetry SDK 和 OpenTelemetry .NET 支持](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet)。 在使用.NET的情况下，请使用 [OpenTelemetry Trace Exporter](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet/tree/main/src/NewRelic.OpenTelemetry) 来导出数据。 [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp-otel/Startup.cs)。
+Leverage the different language specific OpenTelemetry implementations, for example [New Relic Telemetry SDK and OpenTelemetry support for .NET](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet). In this case, use the [OpenTelemetry Trace Exporter](https://github.com/newrelic/newrelic-telemetry-sdk-dotnet/tree/main/src/NewRelic.OpenTelemetry). [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp-otel/Startup.cs)。
 
-### New Relic 代理
+### New Relic Language agent
 
-与 OpenTelemetry 指令类似，您还可以利用 New Relic 语言代理。 比如 [.NET Core New Relic 代理指令](https://docs.newrelic.com/docs/agents/net-agent/other-installation/install-net-agent-docker-container) 是 Docker 文件的一部分。 [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp/Dockerfile)。
+Similarly to the OpenTelemetry instrumentation, you can also leverage a New Relic language agent. 一个例子是 </a>.NET Core 的 New Relic 代理工具
+是Docker文件的一部分。 [查看示例](https://github.com/harrykimpel/quickstarts/blob/master/distributed-calculator/csharp/Dockerfile)。</p> 
 
-## （可选）启用 New Relic Kubernetes 集成
 
-如果 Dapr 和您的应用程序在 Kubernetes 环境中运行，您可以启用额外的指标和日志。
 
-安装 New Relic Kubernetes 集成的最简单方法是使用 [自动安装程序](https://one.newrelic.com/launcher/nr1-core.settings?pane=eyJuZXJkbGV0SWQiOiJrOHMtY2x1c3Rlci1leHBsb3Jlci1uZXJkbGV0Lms4cy1zZXR1cCJ9) 生成清单。 它不仅打包集成守护进程集，还捆绑了其他 New Relic Kubernetes 配置，如 [Kubernetes事件 ](https://docs.newrelic.com/docs/integrations/kubernetes-integration/kubernetes-events/install-kubernetes-events-integration)， [Prometheus OpenMetrics](https://docs.newrelic.com/docs/integrations/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/)，以及 [New Relic 日志监控](https://docs.newrelic.com/docs/logs)。
+## (optional) Enable New Relic Kubernetes integration
 
-### New Relic Kubernetes 集群 Explorer
+In case Dapr and your applications run in the context of a Kubernetes environment, you can enable additional metrics and logs.
 
-[New Relic Kubernetes Cluster Explorer](https://docs.newrelic.com/docs/integrations/kubernetes-integration/understand-use-data/kubernetes-cluster-explorer) 提供了 Kubernetes 集成所收集的所有数据和部署的独特可视化。
+The easiest way to install the New Relic Kubernetes integration is to use the [automated installer](https://one.newrelic.com/launcher/nr1-core.settings?pane=eyJuZXJkbGV0SWQiOiJrOHMtY2x1c3Rlci1leHBsb3Jlci1uZXJkbGV0Lms4cy1zZXR1cCJ9) to generate a manifest. It bundles not just the integration DaemonSets, but also other New Relic Kubernetes configurations, like [Kubernetes events](https://docs.newrelic.com/docs/integrations/kubernetes-integration/kubernetes-events/install-kubernetes-events-integration), [Prometheus OpenMetrics](https://docs.newrelic.com/docs/integrations/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/), and [New Relic log monitoring](https://docs.newrelic.com/docs/logs/ui-data/use-logs-ui/).
 
-这是个好的开始，你可以观察所有数据并且深入了解应用程序或者微服务中的性能问题或者偶发问题。
+
+
+### New Relic Kubernetes Cluster Explorer
+
+The [New Relic Kubernetes Cluster Explorer](https://docs.newrelic.com/docs/integrations/kubernetes-integration/understand-use-data/kubernetes-cluster-explorer) provides a unique visualization of the entire data and deployments of the data collected by the Kubernetes integration.
+
+It is a good starting point to observe all your data and dig deeper into any performance issues or incidents happening inside of the application or microservices.
 
 ![New Relic Kubernetes Cluster Explorer App](/images/nr-k8s-cluster-explorer-app.png)
 
-自动关联是 New Relic 可视化功能的一部分。
+Automated correlation is part of the visualization capabilities of New Relic.
 
-### 容器级别详细信息
+
+
+### Pod-level details
 
 ![New Relic K8s Pod Level Details](/images/nr-k8s-pod-level-details.png)
 
-### 上下文中的日志
+
+
+### Logs in Context
 
 ![New Relic K8s Logs In Context](/images/nr-k8s-logs-in-context.png)
 
-## New Relic 仪表板
 
-### Kubernetes 概览
+
+## New Relic Dashboards
+
+
+
+### Kubernetes Overview
 
 ![New Relic Dashboard Kubernetes Overview](/images/nr-dashboard-k8s-overview.png)
 
-### Dapr 系统服务
+
+
+### Dapr System Services
 
 ![New Relic Dashboard Dapr System Services](/images/nr-dashboard-dapr-system-services.png)
 
-### Dapr 指标
+
+
+### Dapr Metrics
 
 ![New Relic Dashboard Dapr Metrics 1](/images/nr-dashboard-dapr-metrics-1.png)
 
-## New Relic Grafana 集成
 
-New Relic 与 [Grafana Labs](https://grafana.com/) 一起协作，所以你可以用 [Telemetry Data Platform](https://newrelic.com/platform/telemetry-data-platform) 做为 Prometheus metrics 的数据源， 并在现有的仪表盘中查看他们，从而无缝地利用 New Relic 提供的可靠性，可扩展性和安全性。
 
-[Grafana 仪表板模板](https://github.com/dapr/dapr/blob/227028e7b76b7256618cd3236d70c1d4a4392c9a/grafana/README.md)监控 Dapr 系统服务和 sidecar，无需任何更改即可轻松使用。 New Relic 在 Grafana 中提供了一个 [给 Prometheus metrics 的原生端点](https://docs.newrelic.com/docs/integrations/grafana-integrations/set-configure/configure-new-relic-prometheus-data-source-grafana)。 让您可以轻松设置数据源：
+## New Relic Grafana integration
+
+New Relic teamed up with [Grafana Labs](https://grafana.com/) so you can use the [Telemetry Data Platform](https://newrelic.com/platform/telemetry-data-platform) as a data source for Prometheus metrics and see them in your existing dashboards, seamlessly tapping into the reliability, scale, and security provided by New Relic.
+
+[Grafana dashboard templates](https://github.com/dapr/dapr/blob/227028e7b76b7256618cd3236d70c1d4a4392c9a/grafana/README.md) to monitor Dapr system services and sidecars can easily be used without any changes. New Relic provides a [native endpoint for Prometheus metrics](https://docs.newrelic.com/docs/integrations/grafana-integrations/set-configure/configure-new-relic-prometheus-data-source-grafana) into Grafana. A datasource can easily be set-up:
 
 ![New Relic Grafana Data Source](/images/nr-grafana-datasource.png)
 
-可以从 Dapr 导入完全相同的仪表板模板，以可视化 Dapr 系统服务和 sidecar。
+And the exact same dashboard templates from Dapr can be imported to visualize Dapr system services and sidecars.
 
 ![New Relic Grafana Dashboard](/images/nr-grafana-dashboard.png)
 
-## New Relic 警报
 
-从 Dapr、Kubernetes 或任何在其上运行的服务收集的所有数据都可用于将警报和通知设置到您选择的首选频道中。 请参阅 [警报和智能](https://docs.newrelic.com/docs/alerts-applied-intelligence)。
 
-## 相关链接/参考资料
+## New Relic Alerts
 
-* [注册 New Relic 账户](https://newrelic.com/signup)
-* [Telemetry 数据平台](https://newrelic.com/platform/telemetry-data-platform)
-* [分布式追踪](https://docs.newrelic.com/docs/distributed-tracing/concepts/introduction-distributed-tracing/)
+All the data that is collected from Dapr, Kubernetes or any services that run on top of can be used to set-up alerts and notifications into the preferred channel of your choice. See [Alerts and Applied Intelligence](https://docs.newrelic.com/docs/alerts-applied-intelligence/new-relic-alerts/learn-alerts/alerts-ai-transition-guide-2022/).
+
+
+
+## Related Links/References
+
+* [New Relic Account Signup](https://newrelic.com/signup)
+* [Telemetry Data Platform](https://newrelic.com/platform/telemetry-data-platform)
+* [Distributed Tracing](https://docs.newrelic.com/docs/distributed-tracing/concepts/introduction-distributed-tracing/)
 * [New Relic Trace API](https://docs.newrelic.com/docs/distributed-tracing/trace-api/introduction-trace-api/)
-* [New Relic API 密钥类型](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/)
-* [New Relic OpenTelemetry 用户体验](https://blog.newrelic.com/product-news/opentelemetry-user-experience/)
-* [警报和应用智能](https://docs.newrelic.com/docs/alerts-applied-intelligence)
+* [Types of New Relic API keys](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/)
+* [New Relic OpenTelemetry User Experience](https://blog.newrelic.com/product-news/opentelemetry-user-experience/)
+* [Alerts and Applied Intelligence](https://docs.newrelic.com/docs/alerts-applied-intelligence/new-relic-alerts/learn-alerts/alerts-ai-transition-guide-2022/)

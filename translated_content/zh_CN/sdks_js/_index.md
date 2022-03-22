@@ -3,38 +3,38 @@ type: docs
 title: "JavaScript SDK"
 linkTitle: "JavaScript"
 weight: 1000
-description: 用于开发 Dapr 应用程序的 JavaScript SDK 包
+description: JavaScript SDK packages for developing Dapr applications
 no_list: true
 ---
 
-Dapr JS SDK 将允许您与 Dapr 进程进行交互，该进程抽象出几个常用功能，如服务到服务调用、状态管理、PubSub 等。
+The Dapr JS SDK will allow you to interface with the Dapr process that abstracts several commonly used functionalities such as Service-to-Service invocation, State Management, PubSub, and more.
 
 
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>客户端</b></h5>
-      <p class="card-text">创建一个 JavaScript 客户端，并与 Dapr sidecar 和其他 Dapr 应用程序进行交互。</p>
+      <p class="card-text">Create a JavaScript client and interact with a Dapr sidecar and other Dapr applications.</p>
       <a href="{{< ref js-client >}}" class="stretched-link"></a>
     </div>
   </div>
-  <!-- <div class="card">
+  <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>Actors</b></h5>
       <p class="card-text">Create virtual actors with state, reminders/timers, and methods in JavaScript.</p>
       <a href="{{< ref js-actors >}}" class="stretched-link"></a>
     </div>
-  </div> -->
+  </div>
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>示例</b></h5>
-      <p class="card-text">克隆 JavaScript SDK 仓库并尝试一些示例并快速入门。</p>
+      <p class="card-text">Clone the JavaScript SDK repo and try out some of the examples and get started quickly.</p>
       <a href="https://github.com/dapr/js-sdk/blob/master/documentation/examples.md" class="stretched-link"></a>
     </div>
   </div>
 </div>
 
 ### 可用软件包
-- [DaprClient]({{< ref "js-client#installing-and-importing-daprs-js-sdk" >}}) 用于说明您的应用程序如何与 Dapr sidecar 或其他 Dapr 驱动的应用程序进行交互。
+- [DaprClient]({{< ref "js-client#installing-and-importing-daprs-js-sdk" >}}) is a package that for how your application interacts with the Dapr sidecar, or other Dapr powered applications.
 
-- [DaprServer]({{< ref "js-client#installing-and-importing-daprs-js-sdk" >}}) 用于描述 Dapr sidecar 如何与您的应用程序交互、转发事件订阅、调用等。
+- [DaprServer]({{< ref "js-client#installing-and-importing-daprs-js-sdk" >}}) is a package for how the Dapr sidecar interacts with your application, forwarding event subscriptions, invokes and more.

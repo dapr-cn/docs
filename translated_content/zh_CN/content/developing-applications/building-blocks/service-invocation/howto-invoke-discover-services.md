@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "入门指南：发现并调用服务"
-linkTitle: "如何做：用HTTP进行调用"
+linkTitle: "How-To: Invoke with HTTP"
 description: "入门指南指导如何使用 Dapr 服务在分布式应用程序中调用其它服务"
 weight: 2000
 ---
@@ -14,7 +14,7 @@ weight: 2000
 
 <img src="/images/building-block-service-invocation-example.png" width=1000 height=500 alt="显示示例服务的服务调用的图示">
 
-## 步骤 1: 创建服务标识
+## 步骤 1: 为服务选择标识
 
 Dapr 允许您为您的应用分配一个全局唯一ID。 此 ID 为您的应用程序封装了状态，不管它可能有多少实例。
 
@@ -170,7 +170,7 @@ spec:
 
 {{< /tabs >}}
 
-## 步骤 2: 调用服务
+## Step 2: Invoke the service
 
 要使用 Dapr 调用应用程序，您可以在任意 Dapr 实例中使用 `调用` API。
 
@@ -363,31 +363,31 @@ main();
 
 {{< /tabs >}}
 
-### 其他URL格式
+### Additional URL formats
 
 要调用 "GET" 端点:
 ```bash
 curl http://localhost:3602/v1.0/invoke/checkout/method/checkout/100
 ```
 
-为了尽可能避免改变URL路径，Dapr提供了以下方式来调用服务调用API。
+In order to avoid changing URL paths as much as possible, Dapr provides the following ways to call the service invocation API:
 
 
-1. 将URL中的地址改为 `localhost:<dapr-http-port>`。
+1. Change the address in the URL to `localhost:<dapr-http-port>`.
 2. 添加一个 `dapr-app-id` 头来指定目标服务的ID，或者通过HTTP Basic Auth传递ID。 `http://dapr-app-id。<service-id>@localhost:3602/path`。
 
-例如，以下命令
+For example, the following command
 ```bash
-curl http://localhost:3500/v1.0/invoke/cart/method/add
+curl http://localhost:3602/v1.0/invoke/checkout/method/checkout/100
 ```
 
-等同于：
+is equivalent to:
 
 ```bash
 curl -H 'dapr-app-id: checkout' 'http://localhost:3602/checkout/100' -X POST
 ```
 
-或：
+or:
 
 ```bash
 curl -H 'dapr-app-id: checkout' 'http://localhost:3602/checkout/100' -X POST
@@ -411,13 +411,13 @@ curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -
 
 有关名称空间的更多信息，请参阅 [跨命名空间 API]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) 。
 
-## 步骤 3：跟踪和日志
+## Step 3: View traces and logs
 
 上面的示例显示了如何直接调用本地或 Kubernetes 中运行的其他服务。 Dapr 输出指标、跟踪和日志记录信息，允许您可视化服务之间的调用图、日志错误和可选地记录有效负载正文。
 
 有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 篇文章。
 
- ## 相关链接
+ ## Related Links
 
 * [服务调用概述]({{< ref service-invocation-overview.md >}})
 * [服务调用 API 规范]({{< ref service_invocation_api.md >}})

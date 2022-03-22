@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "阿里云钉钉绑定规范"
-linkTitle: "阿里云钉钉"
-description: "有关阿里云钉钉绑定组件的详细文档"
+title: "Alibaba Cloud DingTalk binding spec"
+linkTitle: "Alibaba Cloud DingTalk"
+description: "Detailed documentation on the Alibaba Cloud DingTalk binding component"
 ---
 
 ## 设置 Dapr 组件
-要设置阿里云钉钉绑定，需要创建一个类型为 `bindings.dingtalk.webhook` 的组件。 看[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})如何创建和应用秘钥配置。 通过[引用 Secrets]({{< ref component-secrets.md >}}) 这个指南可以看到如何在 Dapr 组件中检索和使用 Secret。
+To setup an Alibaba Cloud DingTalk binding create a component of type `bindings.dingtalk.webhook`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -29,11 +29,11 @@ spec:
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 ## 元数据字段规范
-| 字段     | 必填 | 绑定支持         | 详情             | 示例                                                           |
-| ------ |:--:| ------------ | -------------- | ------------------------------------------------------------ |
-| id     | Y  | Input/Output | 唯一标识           | `"test_webhook_id"`                                          |
-| url    | Y  | Input/Output | 钉钉的 Webhook    | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
-| secret | N  | Input/Output | 钉钉 Webhook 的秘钥 | `"****************"`                                         |
+| 字段  | 必填 | 绑定支持         | 详情                               | 示例                                                           |
+| --- |:--:| ------------ | -------------------------------- | ------------------------------------------------------------ |
+| id  | Y  | Input/Output | unique id                        | `"test_webhook_id"`                                          |
+| url | Y  | Input/Output | DingTalk's Webhook url           | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
+| 密钥  | N  | Input/Output | the secret of DingTalk's Webhook | `"****************"`                                         |
 
 ## 绑定支持
 
@@ -45,7 +45,7 @@ spec:
 
 ## 指定分区键
 
-示例: 按照[这里](https://developers.dingtalk.com/document/app/custom-robot-access)的说明设置 HTTP 请求
+Example: Follow the instructions [here](https://developers.dingtalk.com/document/app/custom-robot-access) on setting the data of payload
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myDingTalk \

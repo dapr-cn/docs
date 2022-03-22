@@ -3,32 +3,32 @@ type: docs
 title: "指南：设置状态生存时间 （TTL）"
 linkTitle: "指南：设置状态 TTL"
 weight: 500
-description: "通过生存时间管理状态。"
+description: "Manage state with time-to-live."
 ---
 
 ## 介绍
 
-Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可以为每个存储的状态设置生存时间，而这些状态在到期后不能被检索。
+Dapr enables per state set request time-to-live (TTL). This means that applications can set time-to-live per state stored, and these states cannot be retrieved after expiration.
 
-只有Dapr [状态存储组件]({{< ref supported-state-stores >}}) 的一个子集与状态TTL兼容。 对于支持的状态存储，只需在发布消息时设置 `ttlInSeconds` 元数据。 其他的状态存储将忽略这个值。
+Only a subset of Dapr [state store components]({{< ref supported-state-stores >}}) are compatible with state TTL. For supported state stores simply set the `ttlInSeconds` metadata when publishing a message. Other state stores will ignore this value.
 
-一些状态存储可以在每个表/容器的基础上指定一个默认的到期时间。 请参考这些 state stores 的官方文档，以利用所需的这一功能。 Dapr支持支持的状态存储的每状态TTL。
+Some state stores can specify a default expiration on a per-table/container basis. Please refer to the official documentation of these state stores to utilize this feature of desired. Dapr support per-state TTLs for supported state stores.
 
-## 原生状态 TTL 支持
+## Native state TTL support
 
-当状态存储组件中具有原生支持的状态实时性时，Dapr简单地转发实时性配置，不添加任何额外的逻辑，保持可预测的行为。 当组件对过期状态的处理方式不同时，这很有帮助。 当没有指定TTL时，将保留状态存储的默认行为。
+When state time-to-live has native support in the state store component, Dapr simply forwards the time-to-live configuration without adding any extra logic, keeping predictable behavior. This is helpful when the expired state is handled differently by the component. When a TTL is not specified the default behavior of the state store is retained.
 
-## 持久状态（忽略现有 TTL）
+## Persisting state (ignoring an existing TTL)
 
-若要显式保留状态（忽略为密钥设置的任何 TTL），请指定 `ttlInSeconds` 值 `-1`。
+To explicitly persist a state (ignoring any TTLs set for the key), specify a `ttlInSeconds` value of `-1`.
 
 ## 受支持的组件
 
-请参考 [状态存储组件]({{< ref supported-state-stores >}})的表格中的TTL列。
+Please refer to the TTL column in the tables at [state store components]({{< ref supported-state-stores >}}).
 
-## Example
+## 示例
 
-消息 TTL 可以设置在元数据中，作为发布请求的一部分：
+State TTL can be set in the metadata as part of the state store set request:
 
 {{< tabs Python "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -76,10 +76,10 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "
 
 {{< /tabs >}}
 
-参见 [本指南]({{< ref state_api.md >}}) 关于状态API的参考。
+See [this guide]({{< ref state_api.md >}}) for a reference on the state API.
 
 ## 相关链接
 
-- 了解如何 [使用键值对来持久保存状态]({{< ref howto-get-save-state.md >}})
+- Learn [how to use key value pairs to persist a state]({{< ref howto-get-save-state.md >}})
 - [状态存储组件]({{< ref supported-state-stores >}}) 列表
 - 阅读 [API 引用]({{< ref state_api.md >}})

@@ -107,5 +107,5 @@ dapr dashboard -k -p 9999
 这样，您就可以通过导航到 `http://localhost:9999` 来验证安装是否成功完成。
 
 ## 下一步
-- [试用 Dapr 快速入门]({{< ref quickstarts.md >}})
+- [试用Dapr快速入门]({{< ref quickstarts.md >}})
 

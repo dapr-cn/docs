@@ -9,12 +9,12 @@ no_list: true
 
 
 {{% alert title="What is Dapr?" color="primary" %}}
-Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种编程语言和开发框架。 Dapr利用侧边体结构的好处，帮助 你应对建造微型服务带来的挑战，并使你的代码平台具有敏捷性。
+Dapr is a portable, event-driven runtime that makes it easy for any developer to build resilient, stateless and stateful applications that run on the cloud and edge and embraces the diversity of languages and developer frameworks. Leveraging the benefits of a sidecar architecture, Dapr helps you tackle the challenges that come with building microservices and keeps your code platform agnostic.
 {{< button text="Get started" page="getting-started" >}}
 {{% /alert %}}
 
 
-### 开始使用 Dapr 进行开发
+### Start developing with Dapr
 
 <div class="card-deck">
   <div class="card">
@@ -27,20 +27,20 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>快速入门</b></h5>
-      <p class="card-text">包含代码示例的教程集合，可帮助您快速开始使用 Dapr。</p>
+      <p class="card-text">A collection of tutorials with code samples to get you started quickly with Dapr.</p>
       <a href="{{< ref quickstarts >}}" class="stretched-link"></a>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>概念</b></h5>
+      <h5 class="card-title"><b>Concepts</b></h5>
       <p class="card-text">开始了解 Dapr，包括其主要的特性及所提供的功能</p>
       <a href="{{< ref concepts >}}" class="stretched-link"></a>
     </div>
   </div>
 </div>
 
-### 了解更多有关Dapr的信息
+### Learn more about Dapr
 
 <div class="card-deck">
   <div class="card">
@@ -53,20 +53,20 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>构建块</b></h5>
-      <p class="card-text">为分布式应用程序解决相同开发挑战的 Dapr 功能.</p>
+      <p class="card-text">Capabilities that solve common development challenges for distributed applications.</p>
       <a href="{{< ref building-blocks-concept >}}" class="stretched-link"></a>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>操作</b></h5>
+      <h5 class="card-title"><b>Operations</b></h5>
       <p class="card-text">关于在 Dapr 上运行您的应用程序的托管选项，最佳实践和其他指南</p>
       <a href="{{< ref operations >}}" class="stretched-link"></a>
     </div>
   </div>
 </div>
 
-### 更多信息
+### Additional info
 
 <div class="card-deck">
   <div class="card">
@@ -85,14 +85,14 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
   </div>
 </div>
 
-### 技术与资源
+### Tooling and resources
 
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">
         <img src="/images/homepage/vscode.svg" alt="Visual Studio Code" width=40>
-        <b>IDE 集成</b>
+        <b>IDE Integrations</b>
       </h5>
       <p class="card-text">
         了解如何在你首选的开发环境中启用和运行 Dapr 应用
@@ -108,7 +108,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
     <div class="card-body">
       <h5 class="card-title">
         <img src="/images/homepage/code.svg" alt="Code icon" width=40>
-        <b>语言 SDK</b>
+        <b>Language SDKs</b>
       </h5>
       <p class="card-text">
         使用 Dapr SDKs 配合你擅长的开发语言，构建 Dapr 应用程序
@@ -127,7 +127,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
         <b>.NET</b>
       </h5>
       <p class="card-text">
-        了解更多关于 .NET SDK 的信息。
+        Learn more about the .NET SDK.
       </p>
       <a href="{{< ref dotnet >}}" class="stretched-link"></a>
     </div>
@@ -139,7 +139,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
         <b>Python</b>
       </h5>
       <p class="card-text">
-        了解更多关于 Python SDK 的信息。
+        Learn more about the Python SDK.
       </p>
       <a href="{{< ref python >}}" class="stretched-link"></a>
     </div>
@@ -167,7 +167,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
         <b>Java</b>
       </h5>
       <p class="card-text">
-        了解更多关于 Java SDK 的信息。
+        Learn more about the Java SDK.
       </p>
       <a href="{{< ref java >}}" class="stretched-link"></a>
     </div>
@@ -179,7 +179,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
         <b>Go</b>
       </h5>
       <p class="card-text">
-        了解更多关于 Go SDK 的信息。
+        Learn more about the Go SDK.
       </p>
       <a href="{{< ref go >}}" class="stretched-link"></a>
     </div>
@@ -191,7 +191,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
         <b>PHP</b>
       </h5>
       <p class="card-text">
-        了解更多关于 PHP SDK 的信息。
+        Learn more about the PHP SDK.
       </p>
       <a href="{{< ref php >}}" class="stretched-link"></a>
     </div>

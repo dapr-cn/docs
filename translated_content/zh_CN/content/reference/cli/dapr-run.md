@@ -7,7 +7,7 @@ description: "有关 run CLI 命令的详细信息"
 
 ### 说明
 
-并排运行 Dapr 和 (可选) 应用程序。 比较 daprd 参数、CLI 参数和 Kubernetes annotations的完整列表可以在[此处]({{< ref arguments-annotations-overview.md >}})找到。
+并排运行 Dapr 和 (可选) 应用程序。 A full list comparing daprd arguments, CLI arguments, and Kubernetes annotations can be found [here]({{< ref arguments-annotations-overview.md >}}).
 
 ### 支持的平台
 
@@ -36,10 +36,10 @@ dapr run [flags] [command]
 | `--help`, `-h`                 |                     |                                                                                          | 显示此帮助消息                                                                                      |
 | `--image`                      |                     |                                                                                          | 要在中生成代码的 image。 输入为： `repository/image`                                                      |
 | `--log-level`                  |                     | `info`                                                                                   | 日志详细程度。 有效值因为其中之一: `debug`, `info`, `warn`, `error`, `fatal`, or `panic`                     |
-| `--metrics-port`               | `DAPR_METRICS_PORT` | `9090`                                                                                   | Dapr 将 metrics 信息发送到的端口                                                                      |
+| `--metrics-port`               | `DAPR_METRICS_PORT` | `9090`                                                                                   | The port that Dapr sends its metrics information to                                          |
 | `--profile-port`               |                     | `7777`                                                                                   | 要侦听的性能检测服务的端口                                                                                |
 | `--unix-domain-socket`, `-u`   |                     |                                                                                          | Unix 域套接字目录挂载的路径。 如果指定，与Dapr sidecar 的通信使用unix域套接字，与使用TCP端口相比，延迟更低，吞吐量更大。 在 Windows 操作系统上不可用 |
-| `--dapr-http-max-request-size` |                     | `4`                                                                                      | 请求正文的最大尺寸，单位为MB。                                                                             |
+| `--dapr-http-max-request-size` |                     | `4`                                                                                      | Max size of request body in MB.                                                              |
 
 ### 示例
 

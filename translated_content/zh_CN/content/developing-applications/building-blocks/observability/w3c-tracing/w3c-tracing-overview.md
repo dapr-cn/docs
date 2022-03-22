@@ -60,12 +60,8 @@ Dapr 使用 W3C 追踪上下文对服务调用和 pub/sub 消息传递进行分�
    
         service A -> service B
         [ .. some code logic ..]
-        service A -> service B
-        [ .. some code logic ..]
         service A -> service C
         [ .. some code logic ..]
-        service A -> service D
-        [ .. some code logic ..] some code logic ..]
         service A -> service D
         [ .. some code logic ..]
 
@@ -73,7 +69,7 @@ Dapr 使用 W3C 追踪上下文对服务调用和 pub/sub 消息传递进行分�
 
      若要了解如何从响应中提取跟踪标头并将跟踪标头添加到请求中，请参阅 [如何使用跟踪上下文]({{< ref w3c-tracing >}}) 一文.
 
-2. 您已选择生成自己的跟踪上下文标头。 这是很少会遇到的。 在某些情况下，您可能专门选择将 W3C 跟踪标头添加到服务调用中，例如，如果您有一个当前不使用 Dapr 的现有应用程序。 在这种情况下，Dapr 仍然会为您传播跟踪上下文标头。 如果您决定自己生成跟踪标头，有三种方法可以实现：
+2. 您已选择生成自己的跟踪上下文标头。 这是很少会遇到的。 There may be occasions where you specifically chose to add W3C trace headers into a service call, for example if you have an existing application that does not currently use Dapr. 在这种情况下，Dapr 仍然会为您传播跟踪上下文标头。 如果您决定自己生成跟踪标头，有三种方法可以实现：
 
      1. 您可以使用行业标准的 OpenCensus/ OpenTelemetry SDKs 生成跟踪头，并将这些跟踪头传递到启用的Dapr 服务。 这是首选的建议。
 
@@ -85,7 +81,7 @@ Dapr 使用 W3C 追踪上下文对服务调用和 pub/sub 消息传递进行分�
 这些是 Dapr 为 HTTP 和 gRPC 生成和传播的特定跟踪上下文标头。
 
 ### 跟踪上下文 HTTP 标头格式
-当将HTTP响应的跟踪上下文头传播到HTTP请求时，您需要复制这些标头。
+When propagating a trace context header from an HTTP response to an HTTP request, these are the headers that you need to copy.
 
 #### Traceparent 标头
 Traceparent 头以所有供应商都能理解的通用格式在追踪系统中表示收到的请求。 下面是 Traceparent 标头的示例。

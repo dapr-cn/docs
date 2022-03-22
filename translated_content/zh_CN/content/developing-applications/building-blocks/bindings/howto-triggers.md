@@ -18,9 +18,9 @@ Dapr 绑定允许您 :
 
 更多关于绑定的信息，请查阅[概览]({{<ref bindings-overview.md>}})
 
-## 示例︰
+## 示例:
 
-下面的代码示例松散地描述了处理订单的应用程序。 在示例中，有一个订单处理服务，它具有 Dapr sidecar。 checkout 服务使用 Dapr 通过输入绑定触发应用程序。
+以下的示例简述了一个订单处理程序。 在示例中，有一个订单处理服务，它具有 Dapr sidecar。 checkout 服务使用 Dapr 通过输入绑定触发应用程序。
 
 <img src="/images/building-block-input-binding-example.png" width=1000 alt="Diagram showing bindings of example service">
 
@@ -282,9 +282,9 @@ dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-por
 
 为了告诉 Dapr 您的应用程序中未正确处理该事件并安排重新传递，请返回除 `200 OK`以外的任何响应。 例如， `500 Error`。
 
-### 指定自定义路由
+### Specifying a custom route
 
-默认情况下，传入事件将发送到与输入绑定的名称对应的 HTTP 终结点。 您可以通过设置以下元数据属性来覆盖此属性：
+By default, incoming events will be sent to an HTTP endpoint that corresponds to the name of the input binding. You can override this by setting the following metadata property:
 
 ```yaml
 name: mybinding
@@ -302,5 +302,5 @@ spec:
 
 * [绑定构建块]({{< ref bindings >}})
 * [绑定 API]({{< ref bindings_api.md >}})
-* [组件概念]({{< ref components-concept.md >}})
-* [已支持的绑定]({{< ref supported-bindings >}})
+* [Components concept]({{< ref components-concept.md >}})
+* [Supported bindings]({{< ref supported-bindings >}})

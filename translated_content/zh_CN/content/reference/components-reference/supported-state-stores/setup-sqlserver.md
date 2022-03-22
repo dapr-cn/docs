@@ -2,14 +2,14 @@
 type: docs
 title: "SQL Server"
 linkTitle: "SQL Server"
-description: SQL Server 状态存储组件的详细信息
+description: Detailed information on the SQL Server state store component
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-sqlserver/"
 ---
 
 ## 配置
 
-要设置 SQL Server 状态存储，请创建个类型为 `state.sqlserver` 的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+To setup SQL Server state store create a component of type `state.sqlserver`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
@@ -41,7 +41,7 @@ spec:
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-如果您想要使用 SQL Server 作为 [actor 状态存储]({{< ref "state_api.md#configuring-state-store-for-actors" >}}) ，请在 yaml 上附上以下内容。
+If you wish to use SQL server as an [actor state store]({{< ref "state_api.md#configuring-state-store-for-actors" >}}), append the following to the yaml.
 
 ```yaml
   - name: actorStateStore
@@ -50,33 +50,33 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 详情                                                                                                      | 示例                                                                                                                                            |
-| ----------------- |:--:| ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| connectionString  | Y  | 用于连接的连接字符串。 如果连接字符串包含数据库，则该数据库必须已存在。 如果数据库被省略，将会创建一个名为 `"Dapr"` 的默认数据库。                                 | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"`                                           |
-| tableName         | N  | 要使用的表名称。 带下划线的字母数字。 默认值为 `"state"`                                                                      | `"table_name"`                                                                                                                                |
-| keyType           | N  | 键使用的数据类型。 默认为 `"string"`                                                                                | `"string"`                                                                                                                                    |
-| keyLength         | N  | 键的最大长度。 与 `"string"` keyType 一起使用。 默认值为 `"200"`                                                         | `"200"`                                                                                                                                       |
-| schema            | N  | 要使用的schema名称。 默认为 `"dbo"`                                                                               | `"dapr"`,`"dbo"`                                                                                                                              |
-| indexedProperties | N  | 索引属性列表。                                                                                                 | `'[{"column": "transactionid", "property": "id", "type": "int"}, {"column": "customerid", "property": "customer", "type": "nvarchar(100)"}]'` |
-| actorStateStore   | N  | 指示 Dapr 是否应该将为 actor 状态存储配置该组件 ([更多信息]({{< ref "state_api.md#configuring-state-store-for-actors" >}}))。 | `"true"`                                                                                                                                      |
+| 字段                | 必填 | 详情                                                                                                                                                                                    | 示例                                                                                                                                            |
+| ----------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| connectionString  | Y  | The connection string used to connect. If the connection string contains the database it must already exist. If the database is omitted a default database named `"Dapr"` is created. | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"`                                           |
+| tableName         | N  | The name of the table to use. Alpha-numeric with underscores. 默认值为 `"state"`                                                                                                          | `"table_name"`                                                                                                                                |
+| keyType           | N  | The type of key used. Defaults to `"string"`                                                                                                                                          | `"string"`                                                                                                                                    |
+| keyLength         | N  | The max length of key. Used along with `"string"` keytype. 默认值为 `"200"`                                                                                                               | `"200"`                                                                                                                                       |
+| schema            | N  | The schema to use. Defaults to `"dbo"`                                                                                                                                                | `"dapr"`,`"dbo"`                                                                                                                              |
+| indexedProperties | N  | List of IndexedProperties.                                                                                                                                                            | `'[{"column": "transactionid", "property": "id", "type": "int"}, {"column": "customerid", "property": "customer", "type": "nvarchar(100)"}]'` |
+| actorStateStore   | N  | Indicates that Dapr should configure this component for the actor state store ([more information]({{< ref "state_api.md#configuring-state-store-for-actors" >}})).                    | `"true"`                                                                                                                                      |
 
 
-## 创建 Azure SQL 实例
+## Create Azure SQL instance
 
-按照 Azure 文档中有关如何创建 SQL 数据库的说明[进行操作](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) 。  必须在 Dapr 使用数据库之前创建数据库。
+[Follow the instructions](https://docs.microsoft.com/azure/sql-database/sql-database-single-database-get-started?tabs=azure-portal) from the Azure documentation on how to create a SQL database.  The database must be created before Dapr consumes it.  The database must be created before Dapr consumes it.  The database must be created before Dapr consumes it.
 
 **注意：SQL Server 状态存储还支持在 VM 和 Docker 中运行 SQL Server。**
 
-为了配置 SQL Server 作为状态存储，您需要如下属性：
+In order to setup SQL Server as a state store, you need the following properties:
 
-- **Connection String**: SQL Server 连接字符串。 例如： server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase;
-- **Schema**: 要使用的数据库模式 (default=dbo). 如果不存在将会被创建
-- **Table Name**: 数据库表名称。 如果不存在将会被创建
-- **Indexed Properties**: json 数据的可选属性，这些属性将会作为独立的列进行索引的保存
+- **Connection String**: The SQL Server connection string. For example: server=localhost;user id=sa;password=your-password;port=1433;database=mydatabase;
+- **Schema**: The database schema to use (default=dbo). Will be created if does not exist
+- **Table Name**: The database table name. Will be created if does not exist
+- **Indexed Properties**: Optional properties from json data which will be indexed and persisted as individual column
 
-### 创建专用用户
+### Create a dedicated user
 
-当使用专用用户 (不是 `sa`) 进行连接， 用户需要这些授权 - 即使该用户是所需数据的模式的所有者：
+When connecting with a dedicated user (not `sa`), these authorizations are required for the user - even when the user is owner of the desired database schema:
 
 - `CREATE TABLE`
 - `CREATE TYPE`

@@ -80,7 +80,7 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 </toolSet>
 ```
 
-（可选）您还可以为 sidecar 工具创建一个新条目，该条目可在许多项目中重复使用：
+Optionally, you may also create a new entry for a sidecar tool that can be reused across many projects:
 
 ```xml
 <toolSet name="External Tools">

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "创建 Azure Kubernetes 服务集群"
-linkTitle: "Azure Kubernetes Service （AKS）"
+linkTitle: "Azure Kubernetes Service (AKS)"
 weight: 2000
 description: >
   如何在 Azure Kubernetes 集群上设置 Dapr。
@@ -17,7 +17,7 @@ description: >
 
 ## 部署 Azure Kubernetes 服务集群
 
-本指南将引导你完成 Azure Kubernetes Service 集群的安装过程。 如果您需要更多信息，请参阅 [快速启动：使用 Azure CLI 部署 Azure Kubernetes Service (AKS) 集群](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough)
+本指南将告诉您安装 Azure Kubernetes 服务集群。 如果您需要更多信息，请参阅 [快速启动：使用 Azure CLI 部署 Azure Kubernetes Service (AKS) 集群](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough)
 
 1. 登录到 Azure
 
@@ -37,7 +37,7 @@ az account set -s [your_subscription_id]
 az group create --name [your_resource_group] --location [region]
 ```
 
-4. 创建 Azure Kubernetes Service 集群
+4. 创建 Azure Kubernetes 服务集群
 
 > **注意：** 要使用特定版本的 Kubernetes 请使用 `--kubernetes-version` (1.13.x 或需要更新版本)
 

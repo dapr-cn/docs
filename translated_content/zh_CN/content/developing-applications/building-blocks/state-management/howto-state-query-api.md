@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "操作方法：查询状态"
-linkTitle: "操作方法：查询状态"
+title: "指南：查询状态"
+linkTitle: "指南：查询状态"
 weight: 250
 description: "用于查询状态存储的API"
 ---
@@ -16,13 +16,19 @@ description: "用于查询状态存储的API"
 
 即使状态存储是键/值存储， `value` 也可能是具有自己的层次结构、键和值的 JSON 文档。 查询 API 允许您使用这些键和值来检索相应的文档。
 
-此查询 API 不支持查询存储在状态存储中的执行组件状态。 为此，您需要对特定数据库使用查询 API。 查看 [查询 actor 状态]({{< ref "state-management-overview.md#querying-actor-state" >}}).
+### Limitations
+The state query API has the following limitations:
+
+ - The API does not support querying of actor state stored in a state store. 为此，您需要对特定数据库使用查询 API。 查看 [查询 actor 状态]({{< ref "state-management-overview.md#querying-actor-state" >}}).
+ - The API does not work with Dapr [encrypted state stores]({{<ref howto-encrypt-state>}}) capability. Since the encryption is done by the Dapr runtime and stored as encrypted data, then this effectively prevents server side querying.
+
+
 
 您可以在 [相关链接]({{< ref "#related-links" >}}) 部分中找到更多信息。
 
 ## 查询状态
 
-您可以通过 HTTP POST/PUT 或 gRPC 提交查询请求。 请求的正文是包含 3 个条目的 JSON 映射： `filter`、 `sort` 和 `pagination`。
+您可以通过 HTTP POST/PUT 或 gRPC 提交查询请求。 The body of the request is the JSON map with 3 entries: `filter`, `sort`, and `page`.
 
 `filter` 是可选部分。 它以键/值操作树的形式指定查询条件，其中键是运算符，值是操作数。
 
@@ -39,7 +45,7 @@ description: "用于查询状态存储的API"
 
 `排序` 是可选部分，是 `key：order` 对的有序数组，其中 `key` 是状态存储中的键， `order` 是指示排序顺序的可选字符串： `"ASC"` ，降序 `"DESC"` 。 如果省略，则默认为升序。
 
-`pagination` 是一个可选部分，其中包含 `limit` 和 `token` 参数。 `limit` 设置页面大小。 `token` 是组件返回的迭代令牌，用于后续查询。
+The `page` is an optional section containing `limit` and `token` parameters. `limit` 设置页面大小。 `token` 是组件返回的迭代令牌，用于后续查询。
 
 为了获得一些背景知识，此查询请求将转换为本机查询语言，并由状态存储组件执行。
 
@@ -82,17 +88,15 @@ curl -X POST -H "Content-Type: application/json" -d @query-api-examples/dataset.
 This is the [query](../query-api-examples/query1.json):
 ```json
 {
-    "query": {
-        "filter": {
-            "EQ": { "value.state": "CA" }
-        },
-        "sort": [
-            {
-                "key": "value.person.id",
-                "order": "DESC"
-            }
-        ]
-    }
+    "filter": {
+        "EQ": { "value.state": "CA" }
+    },
+    "sort": [
+        {
+            "key": "value.person.id",
+            "order": "DESC"
+        }
+    ]
 }
 ```
 
@@ -181,10 +185,8 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 This is the [query](../query-api-examples/query2.json):
 ```json
 {
-    "query": {
-        "filter": {
-            "IN": { "value.person.org": [ "Dev Ops", "Hardware" ] }
-        }
+    "filter": {
+        "IN": { "value.person.org": [ "Dev Ops", "Hardware" ] }
     }
 }
 ```
@@ -221,36 +223,34 @@ This is the [query](../query-api-examples/query3.json):
 
 ```json
 {
-    "query": {
-        "filter": {
-            "OR": [
-                {
-                    "EQ": { "value.person.org": "Dev Ops" }
-                },
-                {
-                    "AND": [
-                        {
-                            "EQ": { "value.person.org": "Finance" }
-                        },
-                        {
-                            "IN": { "value.state": [ "CA", "WA" ] }
-                        }
-                    ]
-                }
-            ]
-        },
-        "sort": [
+    "filter": {
+        "OR": [
             {
-                "key": "value.state",
-                "order": "DESC"
+                "EQ": { "value.person.org": "Dev Ops" }
             },
             {
-                "key": "value.person.id"
+                "AND": [
+                    {
+                        "EQ": { "value.person.org": "Finance" }
+                    },
+                    {
+                        "IN": { "value.state": [ "CA", "WA" ] }
+                    }
+                ]
             }
-        ],
-        "pagination": {
-            "limit": 3
+        ]
+    },
+    "sort": [
+        {
+            "key": "value.state",
+            "order": "DESC"
+        },
+        {
+            "key": "value.person.id"
         }
+    ],
+    "page": {
+        "limit": 3
     }
 }
 ```
@@ -329,40 +329,52 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 
 ```json
 {
-    "query": {
-        "filter": {
-            "OR": [
-                {
-                    "EQ": { "value.person.org": "Dev Ops" }
-                },
-                {
-                    "AND": [
-                        {
-                            "EQ": { "value.person.org": "Finance" }
-                        },
-                        {
-                            "IN": { "value.state": [ "CA", "WA" ] }
-                        }
-                    ]
-                }
-            ]
-        },
-        "sort": [
+    "filter": {
+        "OR": [
             {
-                "key": "value.state",
-                "order": "DESC"
+                "EQ": { "value.person.org": "Dev Ops" }
             },
             {
-                "key": "value.person.id"
+                "AND": [
+                    {
+                        "EQ": { "value.person.org": "Finance" }
+                    },
+                    {
+                        "IN": { "value.state": [ "CA", "WA" ] }
+                    }
+                ]
             }
-        ],
-        "pagination": {
-            "limit": 3,
-            "token": "3"
+        ]
+    },
+    "sort": [
+        {
+            "key": "value.state",
+            "order": "DESC"
+        },
+        {
+            "key": "value.person.id"
         }
+    ],
+    "page": {
+        "limit": 3,
+        "token": "3"
     }
 }
 ```
+
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
+{{% codetab %}}
+```bash
+curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query3-token.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
+```
+{{% /codetab %}}
+{{% codetab %}}
+```powershell
+Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query3-token.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
+```
+{{% /codetab %}}
+{{< /tabs >}}
+
 此查询的结果是：
 ```json
 {

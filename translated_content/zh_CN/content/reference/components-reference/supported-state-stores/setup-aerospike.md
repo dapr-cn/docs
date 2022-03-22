@@ -39,7 +39,7 @@ spec:
 | --------- |:--:| --------------- | ------------------------------------------------------ |
 | hosts     | Y  | 数据库服务器主机名/端口    | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
 | namespace | Y  | Aerospike 命名空间。 | `"namespace"`                                          |
-| set       | N  | 数据库中的 setName   | `"myset"`                                              |
+| set       | N  | 数据库中的 setname   | `"myset"`                                              |
 
 ## 安装Aerospike
 

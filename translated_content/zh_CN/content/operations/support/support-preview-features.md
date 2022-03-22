@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "预览功能"
-linkTitle: "预览功能"
+title: "Preview features"
+linkTitle: "Preview features"
 weight: 4000
-description: "当前预览功能列表"
+description: "List of current preview features"
 ---
 
-Dapr 中的预览功能在首次发布时被视为实验性功能。 这些预览功能需要显式选择加入才能使用。 选择加入在 Dapr 的配置中指定。 有关详细信息，请参阅 [操作方法：启用预览功能]({{<ref preview-features>}}) 。
+Preview features in Dapr are considered experimental when they are first released. These preview features require explicit opt-in in order to be used. 选择加入在 Dapr 的配置中指定。 See [How-To: Enable preview features]({{<ref preview-features>}}) for information more information.
 
 
 ## 当前预览功能
-| 特性               | 说明                                                                                 | 设置                   | 文档                                                                              |
-| ---------------- | ---------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------- |
-| **Actor可重入性**    | 使 Actors 能够在同一调用链中被多次调用，从而允许在 Actor 之间回调。                                          | `Actor.Reentrancy`   | [Actor 可重入性]({{<ref actor-reentrancy>}})                                        |
-| **分区 actor 提醒**  | 允许在基础状态存储中的多个键之间对 actor reminders 进行分区，以提高规模和性能。                                   | `Actor.TypeMetadata` | [操作方法：Actor Reminders 分区]({{< ref "howto-actors.md#partitioning-reminders" >}}) |
-| **gRPC 代理**      | 允许通过 gRPC 代理，通过 Dapr 在 gRPC 服务上使用服务调用来调用端点，而无需使用 Dapr SDK。                         | `proxy.grpc`         | [操作方法：使用 gRPC 调用服务]({{<ref howto-invoke-services-grpc>}})                       |
-| **状态存储加密**       | 为状态存储启用自动客户端加密                                                                     | `State.Encryption`   | [操作方法：加密应用程序状态]({{<ref howto-encrypt-state>}})                                  |
-| **发布/订阅路由**      | 允许使用表达式将 Cloud Events 路由到应用程序中的不同 URI/路径和事件处理程序。                                   | `PubSub.Routing`     | [操作方法：发布消息并订阅主题]({{<ref howto-route-messages>}})                                |
-| **ARM64 Mac 支持** | Dapr CLI、sidecar 和 Dashboard 现在已针对 ARM64 Mac 进行了本地编译，并通过 Homebrew 进行了 Dapr CLI 安装。 | N/A                  | [安装 Dapr CLI]({{<ref install-dapr-cli>}})                                       |
+| 特性                            | 说明                                                                                                                                          | Setting              | Documentation                                                                             |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ----------------------------------------------------------------------------------------- |
+| **Actor可重入性**                 | Enables actors to be called multiple times in the same call chain allowing call backs between actors.                                       | `Actor.Reentrancy`   | [Actor可重入性]({{<ref actor-reentrancy>}})                                                   |
+| **Partition actor reminders** | Allows actor reminders to be partitioned across multiple keys in the underlying statestore in order to improve scale and performance.       | `Actor.TypeMetadata` | [How-To: Partition Actor Reminders]({{< ref "howto-actors.md#partitioning-reminders" >}}) |
+| **gRPC proxying**             | Enables calling endpoints using service invocation on gRPC services through Dapr via gRPC proxying, without requiring the use of Dapr SDKs. | `proxy.grpc`         | [How-To: Invoke services using gRPC]({{<ref howto-invoke-services-grpc>}})                |
+| **State store encryption**    | Enables automatic client side encryption for state stores                                                                                   | `State.Encryption`   | [How-To: Encrypt application state]({{<ref howto-encrypt-state>}})                        |
+| **Pub/Sub routing**           | Allow the use of expressions to route cloud events to different URIs/paths and event handlers in your application.                          | `PubSub.Routing`     | [指南：发布消息并订阅主题]({{<ref howto-route-messages>}})                                            |
+| **ARM64 Mac 支持**              | Dapr CLI、sidecar 和 Dashboard 现在已针对 ARM64 Mac 进行了本地编译，并通过 Homebrew 进行了 Dapr CLI 安装。                                                          | N/A                  | [安装 Dapr CLI]({{<ref install-dapr-cli>}})                                                 |

@@ -12,71 +12,71 @@ Dapr Workflow 是一个轻量级主机，允许开发人员在本地运行云端
 
 通过使用工作流引擎，可以以声明性、无代码的方式定义业务逻辑，因此当工作流发生变化时，应用程序代码不需要更改。 Dapr 工作流允许您在分布式应用程序中使用工作流以及这些附加好处：
 
-- **在任意位置运行工作流**：在本地计算机、企业内部、Kubernetes 或云中
-- **内置可观察性**：通过 Dapr 的跟踪、metrics 和 mTLS
-- 用于工作流中的 **gRPC 和 HTTP 终结点**
-- 启动基于 **Dapr 绑定** 事件的工作流
-- 通过**回调 Dapr** 来保存状态、发布消息等来协调复杂的工作流程。
+- **Run workflows anywhere**: on your local machine, on-premises, on Kubernetes or in the cloud
+- **Built-in observability**: tracing, metrics and mTLS through Dapr
+- **gRPC and HTTP endpoints** for your workflows
+- Kick off workflows based on **Dapr bindings** events
+- Orchestrate complex workflows by **calling back to Dapr** to save state, publish a message and more
 
-<img src="/images/workflows-diagram.png" width=500 alt="Dapr 工作流图表">
+<img src="/images/workflows-diagram.png" width=500 alt="Diagram of Dapr Workflows">
 
 ## 工作原理
 
-Dapr Workflows 托管一个实现 Dapr 客户端 API 的 gRPC 服务器。
+Dapr Workflows hosts a gRPC server that implements the Dapr Client API.
 
-这允许用户通过 Dapr 使用 gRPC 和 HTTP 终结点启动工作流，或使用 Dapr 绑定异步启动工作流。 工作流请求传入后，Dapr Workflows 将使用 Logic Apps SDK 来执行工作流。
+This allows users to start workflows using gRPC and HTTP endpoints through Dapr, or start a workflow asynchronously using Dapr bindings. Once a workflow request comes in, Dapr Workflows uses the Logic Apps SDK to execute the workflow.
 
-## 支持的工作流功能
+## Supported workflow features
 
-### 支持的操作和触发器
+### Supported actions and triggers
 
 - [HTTP](https://docs.microsoft.com/azure/connectors/connectors-native-http)
 - [Schedule](https://docs.microsoft.com/azure/logic-apps/concepts-schedule-automated-recurring-tasks-workflows)
 - [Request / Response](https://docs.microsoft.com/azure/connectors/connectors-native-reqres)
 
-### 支持的控制工作流
+### Supported control workflows
 
-- [所有控制工作流](https://docs.microsoft.com/azure/connectors/apis-list#control-workflow)
+- [All control workflows](https://docs.microsoft.com/azure/connectors/apis-list#control-workflow)
 
-### 支持的数据操作
+### Supported data manipulation
 
-- [所有数据操作](https://docs.microsoft.com/azure/connectors/apis-list#manage-or-manipulate-data)
+- [All data operations](https://docs.microsoft.com/azure/connectors/apis-list#manage-or-manipulate-data)
 
-### 不支持
+### Not supported
 
-- [已管理连接器](https://docs.microsoft.com/azure/connectors/apis-list#managed-connectors)
+- [Managed connectors](https://docs.microsoft.com/azure/connectors/apis-list#managed-connectors)
 
-## 例子
+## 示例
 
-Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如，调用外部终结点、将数据保存到状态存储、将结果发布到其他应用或调用绑定，所有这些都可以通过从工作流本身回调到 Dapr 来完成。
+Dapr Workflows can be used as the orchestrator for many otherwise complex activities. For example, invoking an external endpoint, saving the data to a state store, publishing the result to a different app or invoking a binding can all be done by calling back into Dapr from the workflow itself.
 
-这是由于 Dapr 作为工作流主机旁边的 sidecar 运行，就像它是其他应用程序一样。
+This is due to the fact Dapr runs as a sidecar next to the workflow host just as if it was any other app.
 
-检查 [workflow2.json](/code/workflow.json) 作为执行以下操作的工作流的示例：
+Examine [workflow2.json](/code/workflow.json) as an example of a workflow that does the following:
 
-1. 调用 Azure 函数以获取 JSON 响应
-2. 将结果保存到 Dapr 状态存储
-3. 将结果发送到 Dapr 绑定
-4. 将结果返回给调用方
+1. Calls into Azure Functions to get a JSON response
+2. Saves the result to a Dapr state store
+3. Sends the result to a Dapr binding
+4. Returns the result to the caller
 
-由于 Dapr 支持许多可插入的状态存储和绑定，因此工作流可以在不同环境（云、边缘或本地）之间移植，而无需用户更改代码 - *因为不涉及任何代码*。
+Since Dapr supports many pluggable state stores and bindings, the workflow becomes portable between different environments (cloud, edge or on-premises) without the user changing the code - *because there is no code involved*.
 
 ## Get started
 
 前期准备:
 
-1. 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-2. [Azure blob存储账户](https://docs.microsoft.com/azure/storage/blobs/storage-blob-create-account-block-blob?tabs=azure-portal)
+1. Install the [Dapr CLI]({{< ref install-dapr-cli.md >}})
+2. [Azure blob storage account](https://docs.microsoft.com/azure/storage/blobs/storage-blob-create-account-block-blob?tabs=azure-portal)
 
 ### 自托管
 
-1. 确保已初始化 Dapr 运行时：
+1. Make sure you have the Dapr runtime initialized:
 
     ```bash
     dapr init
     ```
 
-1. 设置包含 Azure 存储帐户凭据的环境变量：
+1. Set up the environment variables containing the Azure Storage Account credentials:
 
    {{< tabs Windows "macOS/Linux" >}}
 
@@ -96,7 +96,7 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
 
    {{< /tabs >}}
 
-1. 切换到工作流目录并运行示例运行时：
+1. Move to the workflows directory and run the sample runtime:
 
    ```bash
    cd src/Dapr.Workflows
@@ -104,7 +104,7 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
    dapr run --app-id workflows --protocol grpc --port 3500 --app-port    50003 -- dotnet run --workflows-path ../../samples
    ```
 
-1. 调用工作流：
+1. Invoke a workflow:
 
    ```bash
    curl http://localhost:3500/v1.0/invoke/workflows/method/workflow1
@@ -114,41 +114,41 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
 
 ### Kubernetes
 
-1. 确保你有一个正在运行的 Kubernetes 集群，并且 `kubectl` 在你的路径中 。
+1. Make sure you have a running Kubernetes cluster and `kubectl` in your path.
 
-1. 安装 Dapr CLI 后，运行：
+1. Once you have the Dapr CLI installed, run:
 
    ```bash
    dapr init --kubernetes
    ```
 
-1. 等到 Dapr 容器的状态为 `Running`。
+1. Wait until the Dapr pods have the status `Running`.
 
-1. 为工作流创建 Config Map：
+1. Create a Config Map for the workflow:
 
    ```bash
    kubectl create configmap workflows --from-file ./samples/workflow1.json
    ```
 
-1. 创建包含 Azure 存储帐户凭据的密钥。 将下面的帐户名和密钥值替换为实际凭据：
+1. Create a secret containing the Azure Storage Account credentials. Replace the account name and key values below with the actual credentials:
 
    ```bash
    kubectl create secret generic dapr-workflows    --from-literal=accountName=<YOUR-STORAGE-ACCOUNT-NAME>    --from-literal=accountKey=<YOUR-STORAGE-ACCOUNT-KEY>
    ```
 
-1. 部署 Dapr Worfklows：
+1. Deploy Dapr Worfklows:
 
    ```bash
    kubectl apply -f deploy/deploy.yaml
    ```
 
-1. 创建转发到 dapr 工作流容器的端口：
+1. Create a port-forward to the dapr workflows container:
 
    ```bash
    kubectl port-forward deploy/dapr-workflows-host 3500:3500
    ```
 
-1. 通过 Dapr 调用 Logic Apps：
+1. Invoke logic apps through Dapr:
 
    ```bash
    curl http://localhost:3500/v1.0/invoke/workflows/method/workflow1
@@ -156,13 +156,13 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
    {"value":"Hello from Logic App workflow running with Dapr!"}
    ```
 
-## 使用 Dapr 绑定调用工作流
+## Invoking workflows using Dapr bindings
 
-1. 首先，创建您选择的任何 [Dapr 绑定]({{< ref components-reference >}}) 。 查看 [这个]({{< ref howto-triggers >}}) 教程。
+1. First, create any [Dapr binding]({{< ref components-reference >}}) of your choice. See [this]({{< ref howto-triggers >}}) How-To tutorial.
 
-   为了使 Dapr 工作流能够从 Dapr 绑定事件启动工作流，只需使用您希望它触发的工作流的名称来命名绑定即可。
+   In order for Dapr Workflows to be able to start a workflow from a Dapr binding event, simply name the binding with the name of the workflow you want it to trigger.
 
-   下面是一个 Kafka 绑定示例，该绑定将触发名为 `workflow1` 的工作流：
+   Here's an example of a Kafka binding that will trigger a workflow named `workflow1`:
 
    ```yaml
    apiVersion: dapr.io/v1alpha1
@@ -182,12 +182,12 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
        value: "false"
    ```
 
-1. 接下来，应用 Dapr 组件：
+1. Next, apply the Dapr component:
 
    {{< tabs Self-hosted Kubernetes >}}
 
    {{% codetab %}}
-   将上面的绑定 yaml 文件放在应用程序根目录 `components` 中。
+   Place the binding yaml file above in a `components` directory at the    root of your application.
    {{% /codetab %}}
 
    {{% codetab %}}
@@ -198,16 +198,16 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
 
    {{< /tabs >}}
 
-1. 将事件发送到绑定组件后，请检查日志 Dapr 工作流以查看输出。
+1. Once an event is sent to the bindings component, check the logs Dapr Workflows to see the output.
 
    {{< tabs Self-hosted Kubernetes >}}
 
    {{% codetab %}}
-   在独立模式下，输出将打印到本地终端。
+   In standalone mode, the output will be printed to the local terminal.
    {{% /codetab %}}
 
    {{% codetab %}}
-   在 Kubernetes 上，运行以下命令：
+   On Kubernetes, run the following command:
 
    ```bash
    kubectl logs -l app=dapr-workflows-host -c host
@@ -218,7 +218,7 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
 
 ## 示例
 
-查看 Dapr 社区的示例：
+Watch an example from the Dapr community call:
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7fP-0Ixmi-w?start=116" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -226,5 +226,5 @@ Dapr Workflows 可用作许多复杂活动的业务流程协调程序。 例如�
 
 ## 其他资源
 
-- [博客公告](https://cloudblogs.microsoft.com/opensource/2020/05/26/announcing-cloud-native-workflows-dapr-logic-apps/)
-- [仓库](https://github.com/dapr/workflows)
+- [Blog announcement](https://cloudblogs.microsoft.com/opensource/2020/05/26/announcing-cloud-native-workflows-dapr-logic-apps/)
+- [Repo](https://github.com/dapr/workflows)

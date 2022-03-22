@@ -2,14 +2,14 @@
 type: docs
 title: "Azure SignalR binding spec"
 linkTitle: "Azure SignalR"
-description: "有关 Azure SignalR 绑定组件的详细文档"
+description: "Detailed documentation on the Azure SignalR binding component"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/signalr/"
 ---
 
 ## 配置
 
-若要设置 Azure SignalR 绑定，请创建一个类型为 `bindings.azure.signalr`的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+To setup Azure SignalR binding create a component of type `bindings.azure.signalr`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -34,10 +34,10 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持 | 详情                                                  | 示例                                                                                                                 |
-| ---------------- |:--:| ---- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| connectionString | Y  | 输出   | Azure SignalR 连接字符串                                 | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
-| hub              | N  | 输出   | 定义消息将被发送到的 Hub。 发布到输出绑定时，可以将 Hub 动态定义为元数据值（键为"Hub"） | `"myhub"`                                                                                                          |
+| 字段               | 必填 | 绑定支持 | 详情                                                                                                                                                            | 示例                                                                                                                 |
+| ---------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| connectionString | Y  | 输出   | The Azure SignalR connection string                                                                                                                           | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
+| hub              | N  | 输出   | Defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub") | `"myhub"`                                                                                                          |
 
 
 ## 绑定支持
@@ -48,12 +48,12 @@ spec:
 
 ## 补充资料
 
-默认情况下，Azure SignalR 输出绑定将向所有连接的用户广播消息。 为了缩小受众范围，有两个选项，这两个选项都可以在消息的"元数据"属性中进行配置：
+By default the Azure SignalR output binding will broadcast messages to all connected users. To narrow the audience there are two options, both configurable in the Metadata property of the message:
 
-- 组：将消息发送到特定的 Azure SignalR 组
-- 用户：将消息发送给特定的 Azure SignalR 用户
+- group: Sends the message to a specific Azure SignalR group
+- user: Sends the message to a specific Azure SignalR user
 
-发布到 Azure SignalR 输出绑定的应用程序应发送具有以下协定的消息：
+Applications publishing to an Azure SignalR output binding should send a message with the following contract:
 
 ```json
 {
