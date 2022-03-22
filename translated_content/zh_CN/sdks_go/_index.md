@@ -3,21 +3,21 @@ type: docs
 title: "Dapr Go SDK"
 linkTitle: "Go"
 weight: 1000
-description: 开发 Dapr 应用程序的 Go SDK 包
+description: Go SDK packages for developing Dapr applications
 no_list: true
 ---
 
-帮助在 Go 中构建 Dapr 应用程序的客户端库。 此客户端支持所有公共 Dapr API，同时专注于惯用的 Go 体验和开发人员的工作效率。
+A client library to help build Dapr applications in Go. This client supports all public Dapr APIs while focusing on idiomatic Go experiences and developer productivity.
 
 {{< cardpane >}}
-{{< card title="**客户端**">}}
-  使用 Go Client SDK 来调用公共 Dapr API
+{{< card title="**Client**">}}
+  Use the Go Client SDK for invoking public Dapr APIs
 
-  [**了解更多关于 Go SDK 的信息。**]({{< ref go-client >}})
+  [**Learn more about the Go Client SDK**]({{< ref go-client >}})
 {{< /card >}}
-{{< card title="**服务**">}}
-  使用 Dapr Service （Callback） SDK for Go 创建将由 Dapr 调用的服务。
+{{< card title="**Service**">}}
+  Use the Dapr Service (Callback) SDK for Go to create services that will be invoked by Dapr.
 
-  [**了解更多关于 Go Service (Callback) SDK**]({{< ref go-service >}})
+  [**Learn more about the Go Service (Callback) SDK**]({{< ref go-service >}})
 {{< /card >}}
 {{< /cardpane >}}

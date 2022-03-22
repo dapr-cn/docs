@@ -8,7 +8,7 @@ description: "使用密钥存储构建块安全地获取密钥"
 
 这篇文章提供了关于如何在你的代码中使用 Dapr 的密钥 API 来充分利用 [密钥仓库构建块]({{<ref secrets-overview>}}) 的指导。 密钥 API 允许您从配置的密钥存储轻松获取应用程序代码中的密钥。
 
-## Example
+## 示例
 
 以下的示例简述了一个订单处理程序。 在这个例子中，有一个订单处理服务，它有一个Dapr sidecar。 订单处理服务使用Dapr将一个秘密存储在本地秘密存储中。
 
@@ -47,7 +47,7 @@ spec:
   - name: nestedSeparator
     value: ":"
 ```
-> 注意：秘密存储JSON的路径是相对于你调用 `dapr run ` 的地方。
+> Note: the path to the secret store JSON is relative to where you call `dapr run` from.
 
 要配置不同类型的密钥存储，请参阅关于 [如何配置密钥存储]({{<ref setup-secret-store>}}) 并审阅 [支持的密钥存储]({{<ref supported-secret-stores >}}) 查看不同密钥存储解决方案所需的具体细节。
 ## 获取密钥

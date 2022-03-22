@@ -6,14 +6,14 @@ weight: 2000
 description: "在 Web API 的应用程序端点上启用 OAuth 授权"
 ---
 
-Dapr OAuth 2.0 [中间件]({{< ref "middleware.md" >}}) 允许您使用 [授权代码授予流](https://tools.ietf.org/html/rfc6749#section-4.1)在 Web API 的 Dapr 端点上启用 [OAuth](https://oauth.net/2/) 授权。 还可以将授权令牌注入到端点 API 中，这些 API 可用于对 API 使用 [客户端凭据授予流](https://tools.ietf.org/html/rfc6749#section-4.4)调用的外部 API 进行授权。 当中间件被启用时，任何通过 Dapr 进行的方法调用在被传递给用户代码之前都需要被授权。
+Dapr OAuth 2.0 [middleware]({{< ref "middleware.md" >}}) allows you to enable [OAuth](https://oauth.net/2/) authorization on Dapr endpoints for your web APIs using the [Authorization Code Grant flow](https://tools.ietf.org/html/rfc6749#section-4.1). 还可以将授权令牌注入到端点 API 中，这些 API 可用于对 API 使用 [客户端凭据授予流](https://tools.ietf.org/html/rfc6749#section-4.4)调用的外部 API 进行授权。 When the middleware is enabled any method invocation through Dapr needs to be authorized before getting passed to the user code.
 
-这两个流之间的主要区别在于， `授权代码授予流` 需要用户交互并授权用户，而 `客户端凭据授予流` 不需要用户交互并授权服务/应用程序。
+The main difference between the two flows is that the `Authorization Code Grant flow` needs user interaction and authorizes a user where the `Client Credentials Grant flow` doesn't need a user interaction and authorizes a service/application.
 
-## 在授权服务器上注册你的应用程序
+## Register your application with a authorization server
 
-不同的授权服务器提供不同的应用注册体验。 下面是一些示例：
-
+Different authorization servers provide different application registration experiences. Here are some samples:
+<!-- IGNORE_LINKS -->
 * [Azure AAD](https://docs.microsoft.com/azure/active-directory/develop/v1-protocols-oauth-code)
 * [Facebook](https://developers.facebook.com/apps)
 * [Fitbit](https://dev.fitbit.com/build/reference/web-api/oauth2/)
@@ -21,8 +21,8 @@ Dapr OAuth 2.0 [中间件]({{< ref "middleware.md" >}}) 允许您使用 [授权�
 * [Google APIs](https://console.developers.google.com/apis/credentials/consen)
 * [Slack](https://api.slack.com/docs/oauth)
 * [Twitter](http://apps.twitter.com/)
-
-要了解 Dapr OAuth 中间件，您需要收集以下信息：
+<!-- END_IGNORE -->
+To figure the Dapr OAuth middleware, you'll need to collect the following information:
 
 * Client ID (see [here](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
 * Client secret (see [here](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
@@ -30,10 +30,10 @@ Dapr OAuth 2.0 [中间件]({{< ref "middleware.md" >}}) 允许您使用 [授权�
 * Authorization URL
 * Token URL
 
-一些流行的授权服务器的授权/令牌 URL。
+Authorization/Token URLs of some of the popular authorization servers:
 
 <!-- IGNORE_LINKS -->
-| 服务器       | 授权网址                                                          | 令牌网址                                                                                      |
+| 服务器       | Authorization URL                                             | Token URL                                                                                 |
 | --------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Azure AAD | <https://login.microsoftonline.com/{tenant}/oauth2/authorize> | <https://login.microsoftonline.com/{tenant}/oauth2/token>                                 |
 | GitHub    | <https://github.com/login/oauth/authorize>                    | <https://github.com/login/oauth/access_token>                                             |
@@ -41,11 +41,11 @@ Dapr OAuth 2.0 [中间件]({{< ref "middleware.md" >}}) 允许您使用 [授权�
 | Twitter   | <https://api.twitter.com/oauth/authorize>                     | <https://api.twitter.com/oauth2/token>                                                    |
 <!-- END_IGNORE -->
 
-## 定义中间件组件定义
+## Define the middleware component definition
 
-### 定义授权代码授予组件
+### Define an Authorization Code Grant component
 
-OAuth 中间件（授权代码）由组件定义：
+An OAuth middleware (Authorization Code) is defined by a component:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -79,9 +79,9 @@ spec:
     value: "<set to true if you invoke an API method through Dapr from https origin>"
 ```
 
-### 为授权代码授予定义自定义管道
+### Define a custom pipeline for an Authorization Code Grant
 
-要使用 OAuth 中间件（授权代码），你应该创建一个 [自定义管道]({{< ref "middleware.md" >}}) 使用 [Dapr配置]({{< ref "configuration-overview" >}})，如以下样本所示：
+To use the OAuth middleware (Authorization Code), you should create a [custom pipeline]({{< ref "middleware.md" >}}) using [Dapr configuration]({{< ref "configuration-overview" >}}), as shown in the following sample:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -96,9 +96,9 @@ spec:
       type: middleware.http.oauth2
 ```
 
-### 定义客户端凭据授予组件
+### Define a Client Credentials Grant component
 
-OAuth（客户端凭据）中间件由组件定义：
+An OAuth (Client Credentials) middleware is defined by a component:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -136,9 +136,9 @@ spec:
     value: "<see comment>"
 ```
 
-### 为客户端凭据授予定义自定义管道
+### Define a custom pipeline for a Client Credentials Grant
 
-要使用 OAuth 中间件（授权代码），你应该创建一个 [自定义管道]({{< ref "middleware.md" >}}) 使用 [Dapr 配置]({{< ref "configuration-overview.md" >}})，如以下样本所示：
+To use the OAuth middleware (Client Credentials), you should create a [custom pipeline]({{< ref "middleware.md" >}}) using [Dapr configuration]({{< ref "configuration-overview.md" >}}), as shown in the following sample:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -155,7 +155,7 @@ spec:
 
 ## 应用配置
 
-要将上述配置（无论授予类型如何） 应用于 Dapr sidecar，请在 pod 规范中添加 `dapr.io/config` 注解：
+To apply the above configuration (regardless of grant type) to your Dapr sidecar, add a `dapr.io/config` annotation to your pod spec:
 
 ```yaml
 apiVersion: apps/v1
@@ -173,12 +173,12 @@ spec:
 ...
 ```
 
-## 访问访问令牌
+## Accessing the access token
 
-### 授权码
+### Authorization Code Grant
 
-一旦一切就绪，每当客户试图通过 Dapr sidecar 调用 API 方法（例如调用 *v1.0/invoke/* 端点），如果没有找到访问令牌，它将被重定向到授权的同意页。 否则，访问令牌将被写入 **authHeaderName** 头，并提供给应用程序代码使用。
+Once everything is in place, whenever a client tries to invoke an API method through Dapr sidecar (such as calling the *v1.0/invoke/* endpoint), it will be redirected to the authorization's consent page if an access token is not found. Otherwise, the access token is written to the **authHeaderName** header and made available to the app code.
 
-### 客户端凭据
+### Client Credentials Grant
 
-一旦一切就绪，每当客户端试图通过 Dapr sidecar 调用 API 方法（比如调用 *v1.0/invoke/* 端点）， 如果没有找到现有的有效访问令牌，它将检索到一个新的访问令牌。 访问令牌被写入 **headerName** 头，并提供给应用程序代码使用。 这样，应用就可以在调用中将授权标头中的令牌转发给请求该令牌的外部 API。
+Once everything is in place, whenever a client tries to invoke an API method through Dapr sidecar (such as calling the *v1.0/invoke/* endpoint), it will retrieve a new access token if an existing valid one is not found. The access token is written to the **headerName** header and made available to the app code. In that way the app can forward the token in the authorization header in calls towards the external API requesting that token.

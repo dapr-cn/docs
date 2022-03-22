@@ -2,14 +2,14 @@
 type: docs
 title: "Couchbase"
 linkTitle: "Couchbase"
-description: Couchbase 状态存储组件的详细信息
+description: Detailed information on the Couchbase state store component
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-couchbase/"
 ---
 
 ## 配置
 
-要设置 Couchbase 状态存储，请创建一个类型为`state.couchbase`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+To setup Couchbase state store create a component of type `state.couchbase`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
@@ -38,29 +38,29 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 详情                 | 示例                        |
-| ------------ |:--:| ------------------ | ------------------------- |
-| couchbaseURL | Y  | Couchbase 服务器的 URL | `"http://localhost:8091"` |
-| username     | Y  | 数据库的用户名            | `"user"`                  |
-| password     | Y  | 用于访问的密码            | `"password"`              |
-| bucketName   | Y  | 要写入的 bucket 名称     | `"bucket"`                |
+| 字段           | 必填 | 详情                              | 示例                        |
+| ------------ |:--:| ------------------------------- | ------------------------- |
+| couchbaseURL | Y  | The URL of the Couchbase server | `"http://localhost:8091"` |
+| username     | Y  | The username for the database   | `"user"`                  |
+| password     | Y  | The password for access         | `"password"`              |
+| bucketName   | Y  | The bucket name to write to     | `"bucket"`                |
 
-## 设置 Couchbase
+## Setup Couchbase
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-你可以使用 Docker 在本地运行 Couchbase：
+You can run Couchbase locally using Docker:
 
 ```
 docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase
 ```
 
-然后，您可以使用 `localhost:8091` 与服务器交互并开始服务器设置。
+You can then interact with the server using `localhost:8091` and start the server setup.
 {{% /codetab %}}
 
 {{% codetab %}}
-在 Kuberntes 上安装 Couchbase 最简单的方法是使用 [Helm chart](https://github.com/couchbase-partners/helm-charts#deploying-for-development-quick-start):
+The easiest way to install Couchbase on Kubernetes is by using the [Helm chart](https://github.com/couchbase-partners/helm-charts#deploying-for-development-quick-start):
 
 ```
 helm repo add couchbase https://couchbase-partners.github.io/helm-charts/

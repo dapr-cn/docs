@@ -30,7 +30,7 @@ pip install dapr
 
 {{% codetab %}}
 {{% alert title="Note" color="warning" %}}
-开发包将包含与 Dapr 运行时的预发布版本兼容的功能和行为。 在安装 dapr-dev 包之前，请务必卸载以前任意稳定版本的 Python SDK 扩展包。
+开发包包含的功能和行为将兼容此前发行的 Dapr 运行时。 在安装 dapr-dev 包之前，请务必卸载以前任意稳定版本的 Python SDK 扩展包。
 {{% /alert %}}
 
 ```bash
@@ -42,7 +42,7 @@ pip install dapr-dev
 
 ## 试试吧
 
-克隆 Python SDK 仓库来尝试一些 [示例](https://github.com/dapr/python-sdk/tree/master/examples)。
+克隆 Python SDK 仓库来尝试一些[示例](https://github.com/dapr/python-sdk/tree/master/examples)。
 
 ```bash
 git clone https://github.com/dapr/python-sdk.git

@@ -21,7 +21,7 @@ Dapr提供的状态管理功能包括一致性和并发选项。 在本指南中
 
 下面的代码例子粗略地描述了一个处理订单的应用程序。 在这个例子中，有一个订单处理服务，它有一个Dapr sidecar。 订单处理服务使用Dapr在Redis状态存储中存储状态。
 
-<img src="/images/building-block-state-management-example.png" width=1000 alt="显示示例服务的状态管理的图示">
+<img src="/images/building-block-state-management-example.png" width=1000 alt="Diagram showing state management of example service">
 
 ## 第一步：设置状态存储
 
@@ -105,7 +105,7 @@ namespace EventService
                 //Using Dapr SDK to save and get state
                 await client.SaveStateAsync(DAPR_STORE_NAME, "order_1", orderId.ToString());
                 await client.SaveStateAsync(DAPR_STORE_NAME, "order_2", orderId.ToString());
-                var result = await client.GetStateAsync<string>(DAPR_STORE_NAME, orderId.ToString());
+                var result = await client.GetStateAsync<string>(DAPR_STORE_NAME, "order_1");
                 Console.WriteLine("Result after get: " + result);
             }
         }
@@ -331,7 +331,7 @@ Restart your sidecar and try retrieving state again to observe that state persis
 首先启动一个Dapr sidecar：
 
 ```bash
-dapr --app-id orderprocessing --port 3601 run
+dapr --app-id orderprocessing --dapr-http-port 3601 run
 ```
 
 然后在一个单独的终端中保存一个键/值对到你的statestore中：
@@ -344,7 +344,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "
 Invoke-RestMethod -Uri 'http://localhost:3601/v1.0/state/statestore/order_1'
 ```
 
-你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
+Restart your sidecar and try retrieving state again to observe that state persists separately from the app.
 
 {{% /codetab %}}
 

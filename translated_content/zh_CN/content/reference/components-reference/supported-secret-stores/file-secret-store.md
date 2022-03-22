@@ -37,15 +37,15 @@ spec:
 
 ## 元数据字段规范
 
-| 字段              | 必填 | 详情                                             | 示例                    |
-| --------------- |:--:| ---------------------------------------------- | --------------------- |
-| secretsFile     | Y  | 存储密钥的文件路径                                      | `"path/to/file.json"` |
-| nestedSeparator | N  | 在将JSON层次结构扁平化为map时，被仓库使用 默认值为 `":"` 默认值为 `":"` | `":"`                 |
-| multiValued     | N  | 允许在平展 JSON 层次结构之前使用一个级别的多值键/值对。 默认值为 `"false"` | `"true"`              |
+| 字段              | 必填 | 详情                                                                                                | 示例                    |
+| --------------- |:--:| ------------------------------------------------------------------------------------------------- | --------------------- |
+| secretsFile     | Y  | 存储密钥的文件路径                                                                                         | `"path/to/file.json"` |
+| nestedSeparator | N  | 在将JSON层次结构扁平化为map时，被仓库使用 默认值为 `":"` 默认值为 `":"`                                                    | `":"`                 |
+| multiValued     | N  | Allows one level of multi-valued key/value pairs before flattening JSON hierarchy. 默认值为 `"false"` | `"true"`              |
 
 ## 设置 JSON 文件来保存密钥
 
-给定从 `secretsFile` 加载的以下 JSON：
+Given the following JSON loaded from `secretsFile`:
 
 ```json
 {
@@ -57,15 +57,15 @@ spec:
 }
 ```
 
-如果 `multiValued` 为 `"false"`，存储将为加载该文件，并创建一个如下键值对的map：
+If `multiValued` is `"false"`, the store will load the file and create a map with the following key value pairs:
 
-| 扁平键                       | 值                              |
+| 扁平键                       | value                          |
 | ------------------------- | ------------------------------ |
 | "redis"                   | "your redis password"          |
 | "connectionStrings:sql"   | "your sql connection string"   |
 | "connectionStrings:mysql" | "your mysql connection string" |
 
-使用扁平键 (`connectionStrings:sql`)来访问密钥。 返回如下的 JSON map：
+使用扁平键 (`connectionStrings:sql`)来访问密钥。 The following JSON map returned:
 
 ```json
 {
@@ -73,7 +73,7 @@ spec:
 }
 ```
 
-如果 `multiValued` 为 `"true"`，这应该改用顶级键。 在此示例中，`connectionString` 将会返回如下map：
+If `multiValued` is `"true"`, you would instead use the top level key. In this example, `connectionStrings` would return the following map:
 
 ```json
 {
@@ -82,7 +82,7 @@ spec:
 }
 ```
 
-顶层之后的嵌套结构将被平展。 在此示例中， `connectionString` 将返回以下map：
+Nested structures after the top level will be flattened. In this example, `connectionStrings` would return the following map:
 
 JSON from `secretsFile`:
 
@@ -107,7 +107,7 @@ JSON from `secretsFile`:
 }
 ```
 
-这对于模仿 Vault 或 Kubernetes 等为每个密钥返回多个键/值对的密钥存储非常有用。
+This is useful in order to mimic secret stores like Vault or Kubernetes that return multiple key/value pairs per secret key.
 
 ## 相关链接
 - [密钥构建块]({{< ref secrets >}})

@@ -3,6 +3,6 @@ type: docs
 title: "状态管理"
 linkTitle: "状态管理"
 weight: 20
-description: 创建长期运行的有状态服务
+description: 创建长期运行的状态服务
 ---
 

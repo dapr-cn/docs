@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-要设置阿里云 Tablestore 绑定，需要创建一个类型为 `bindings.alicloud.tablestore` 的组件。 看[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})如何创建和应用秘钥配置。 通过[引用 Secrets]({{< ref component-secrets.md >}}) 这个指南可以看到如何在 Dapr 组件中检索和使用 Secret。
+要设置阿里云 Tablestore 绑定，需要创建一个类型为 `bindings.alicloud.tablestore` 的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -57,7 +57,7 @@ spec:
 
 ### 创建对象
 
-要执行创建对象操作，请使用 `POST` 方法和以下 JSON 调用绑定：
+要执行创建对象操作，请使用`POST`方法和以下JSON调用绑定：
 
 ```json
 {
@@ -73,7 +73,7 @@ spec:
 请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### 删除对象
+### Delete object
 
 要执行删除对象操作，请使用 `POST` 方法和以下 JSON 调用绑定：
 
@@ -94,7 +94,7 @@ spec:
 请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### 列出对象
+### List objects
 
 要执行列出对象操作，请使用 `POST` 和以下 JSON 调用绑定：
 
@@ -116,7 +116,7 @@ spec:
 请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### 获取对象
+### Get object
 
 要执行获取对象操作，请使用 `POST` 方法和以下 JSON 调用绑定：
 

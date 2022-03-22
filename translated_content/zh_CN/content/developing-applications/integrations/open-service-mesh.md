@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "同时运行 Dapr 和 Open Service Mesh"
+title: "Running Dapr and Open Service Mesh together"
 linkTitle: "Open Service Mesh"
 weight: 4000
-description: "了解如何在同一 Kubernetes 集群上运行 Open Service Mesh 和 Dapr"
+description: "Learn how to run both Open Service Mesh and Dapr on the same Kubernetes cluster"
 ---
 
 ## 概述

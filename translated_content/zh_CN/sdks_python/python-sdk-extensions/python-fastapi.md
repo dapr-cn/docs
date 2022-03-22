@@ -3,7 +3,7 @@ type: docs
 title: "Dapr Python SDK 与 FastAPI 集成"
 linkTitle: "FastAPI"
 weight: 200000
-description: 如何创建基于 FastAPI 扩展的 Dapr Python virtual actors
+description: 如何创建基于 FastAPI 扩展的Dapr Python virtual actors
 ---
 
 Dapr Python SDK 使用 `dapr-ext-fastapi` 模块与 FastAPI 集成
@@ -33,6 +33,24 @@ pip install dapr-ext-fastapi-dev
 {{< /tabs >}}
 
 ## 示例
+
+### 订阅事件
+
+```python
+from fastapi import FastAPI
+from dapr.ext.fastapi import DaprApp
+
+
+app = FastAPI()
+dapr_app = DaprApp(app)
+
+
+@dapr_app.subscribe(pubsub='pubsub', topic='some_topic')
+def event_handler(event_data):
+    print(event_data)
+```
+
+### 创建 actor
 
 ```python
 from fastapi import FastAPI

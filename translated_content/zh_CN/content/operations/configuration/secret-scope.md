@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "操作方法：限制可从秘密存储读取的秘密"
-linkTitle: "限制秘密存储的访问"
+title: "How-To: Limit the secrets that can be read from secret stores"
+linkTitle: "Limit secret store access"
 weight: 3000
-description: "要限制 Dapr 应用程序可访问的秘密，用户可以通过使用限制性权限扩充现有的 CRD 来定义秘密作用域。"
+description: "To limit the secrets to which the Dapr application has access, users can define secret scopes by augmenting existing configuration CRD with restrictive permissions."
 ---
 
-除了对哪些应用程序可以访问一个给定的组件进行范围界定，例如一个秘密存储组件 (见 [对组件进行范围界定]({{< ref "component-scopes.md">}})) ，一个命名的秘密存储组件本身可以被范围界定为应用程序的一个或多个秘密。 通过定义 `allowedSecrets` 和/或 `deniedSecrets` 列表， 可以将应用程序限制为仅访问特定的秘密。
+In addition to scoping which applications can access a given component, for example a secret store component (see [Scoping components]({{< ref "component-scopes.md">}})), a named secret store component itself can be scoped to one or more secrets for an application. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets.
 
-按照 [这些说明]({{< ref "configuration-overview.md" >}}) 来定义配置 CRD。
+Follow [these instructions]({{< ref "configuration-overview.md" >}}) to define a configuration CRD.
 
-## 配置秘密访问
+## Configure secrets access
 
-`Configuration` spec下的 `secrets` 部分包含以下属性：
+The `secrets` section under the `Configuration` spec contains the following properties:
 
 ```yml
 secrets:
@@ -25,20 +25,20 @@ secrets:
       deniedSecrets: ["redis-password"]
 ```
 
-下面的表格给出了秘密作用域的属性：
+The following table lists the properties for secret scopes:
 
-| 属性             | 数据类型   | 说明                                  |
-| -------------- | ------ | ----------------------------------- |
-| storeName      | string | 秘密存储组件的名称。 storeName 在列表中必须是唯一的     |
-| 默认权限           | string | 访问修饰符。 接受的值为 "allow" (默认值) 或 "deny" |
-| allowedSecrets | list   | 可访问的密钥列表                            |
-| deniedSecrets  | list   | 无法访问的密钥列表                           |
+| 属性             | 数据类型   | 说明                                                                                                               |
+| -------------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| storeName      | string | Name of the secret store component. Name of the secret store component. storeName must be unique within the list |
+| 默认权限           | string | Access modifier. Accepted values "allow" (default) or "deny"                                                     |
+| allowedSecrets | list   | List of secret keys that can be accessed                                                                         |
+| deniedSecrets  | list   | List of secret keys that cannot be accessed                                                                      |
 
-当 `allowedSecrets` 列表中至少存在一个元素时，应用程序只能访问列表中定义的那些秘密。
+When an `allowedSecrets` list is present with at least one element, only those secrets defined in the list can be accessed by the application.
 
 ## 权限优先级
 
-`allowedSecrets` 和 `deniedSecrets` 列表值优先于 `defaultAccess`。
+The `allowedSecrets` and `deniedSecrets` list values take priorty over the `defaultAccess`.
 
 | 场景               | 默认权限  | allowedSecrets | deniedSecrets | 权限         |
 | ---------------- | ----- | -------------- | ------------- | ---------- |
@@ -53,9 +53,9 @@ secrets:
 
 ### 场景1：拒绝访问所有密钥仓库
 
-在 Kubernetes 集群中，默认情况下，本机 Kubernetes 密钥存储被添加到 Dapr 应用程序中。 在某些情况下，可能有必要拒绝某个应用程序访问 Dapr 密钥。 要添加此配置，请按照下面的步骤：
+In Kubernetes cluster, the native Kubernetes secret store is added to Dapr application by default. 在某些情况下，可能有必要拒绝某个应用程序访问 Dapr 密钥。 要添加此配置，请按照下面的步骤：
 
-定义下面 `appconfig.yaml`，并使用命令 `kubectl apply -f appconfig.yaml` 应用到 Kubernetes 集群。
+Define the following `appconfig.yaml` and apply it to the Kubernetes cluster using the command `kubectl apply -f appconfig.yaml`.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -69,17 +69,17 @@ spec:
         defaultAccess: deny
 ```
 
-对于需要拒绝访问 Kubernetes 秘密仓库的应用程序， 按照[这些说明]({{< ref kubernetes-overview >}})，并将以下注解添加到应用程序 pod 中。
+For applications that need to be deined access to the Kubernetes secret store, follow [these instructions]({{< ref kubernetes-overview >}}), and add the following annotation to the application pod.
 
 ```yaml
 dapr.io/config: appconfig
 ```
 
-定义后，应用程序不再能访问 Kubernetes 秘密存储。
+With this defined, the application no longer has access to Kubernetes secret store.
 
-### 场景2：只允许访问秘密仓库中的某些秘密
+### 场景2：只允许访问密钥仓库中的某些密钥
 
-要允许 Dapr 应用程序仅访问某些秘密，请定义以下 `config.yaml`：
+To allow a Dapr application to have access to only certain secrets, define the following `config.yaml`:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -94,11 +94,11 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-此示例定义了名为 vault 的秘密仓库配置。 秘密仓库的默认访问权限是 `deny`，而有些秘密可以通过应用程序基于 `allowedSecrets` 列表访问。 按照 [这些说明]({{< ref configuration-overview.md >}}) 将配置应用到 sidecar。
+This example defines configuration for secret store named vault. 密钥仓库的默认访问权限是`deny`，而有些密钥可以通过应用程序基于`allowedSecrets`列表访问。 按照 [这些说明]({{< ref configuration-overview.md >}}) 将配置应用到 sidecar。
 
-### 场景3：拒绝访问秘密仓库中的某些敏感秘密
+### 场景3：拒绝访问密钥仓库中的某些敏感密钥
 
-定义以下 `config.yaml`：
+定义以下 `config.yaml`:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -113,4 +113,4 @@ spec:
         deniedSecrets: ["secret1", "secret2"]
 ```
 
-上面的配置明确禁止从名为 vault 的秘密仓库访问 `secret1` 和 `secret2` ，但允许访问所有其他秘密。 按照 [这些说明]({{< ref configuration-overview.md >}}) 将配置应用到 sidecar。
+上面的配置明确禁止从名为 vault 的密钥仓库访问 `secret1` 和 `secret2` ，但允许访问所有其他密钥。 按照 [这些说明]({{< ref configuration-overview.md >}}) 将配置应用到 sidecar。

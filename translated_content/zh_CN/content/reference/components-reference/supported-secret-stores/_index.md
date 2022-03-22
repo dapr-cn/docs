@@ -11,10 +11,10 @@ no_list: true
 
 表格标题：
 
-> `状态`： [组件认证]({{<ref "certification-lifecycle.md">}}) 状态
+> `Status`: [Component certification]({{<ref "certification-lifecycle.md">}}) status
   - [Alpha]({{<ref "certification-lifecycle.md#alpha">}})
   - [Beta]({{<ref "certification-lifecycle.md#beta">}})
-  - [Stable]({{<ref "certification-lifecycle.md#stable">}}) > `Since`: 定义自哪个 Dapr 运行时版本开始，组件处于当前的状态。
+  - [Stable]({{<ref "certification-lifecycle.md#stable">}}) > `Since`: defines from which Dapr Runtime version, the component is in the current status
 
 > `组件版本`：代表组件的版本
 
@@ -45,3 +45,9 @@ no_list: true
 | Name                                             | 状态     | 组件版本 | 自从  |
 | ------------------------------------------------ | ------ | ---- | --- |
 | [Azure Key Vault]({{< ref azure-keyvault.md >}}) | Stable | v1   | 1.0 |
+
+### Alibaba Cloud
+
+| Name                                                                            | 状态    | 组件版本 | 自从  |
+| ------------------------------------------------------------------------------- | ----- | ---- | --- |
+| [AlibabaCloud OOS Parameter Store]({{< ref alicloud-oos-parameter-store.md >}}) | Alpha | v1   | 1.6 |

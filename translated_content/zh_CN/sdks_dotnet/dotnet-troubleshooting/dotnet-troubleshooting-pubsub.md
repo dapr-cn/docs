@@ -1,30 +1,30 @@
 ---
 type: docs
-title: "对使用 .NET SDK 的发布/订阅进行故障排除。"
+title: "对使用 .NET SDK 的 发布/订阅 进行故障排除。"
 linkTitle: "发布/订阅的故障排除"
 weight: 100000
-description: 对使用 .NET SDK 的发布/订阅进行故障排除。
+description: 对使用 .NET SDK 的 发布/订阅 进行故障排除。
 ---
 
 # 发布/订阅的故障排除
 
-发布/订阅最常见的问题是应用程序中的发布/订阅端点没有被调用。
+发布/订阅 最常见的问题是应用程序中的 发布/订阅 终结点没有被调用。
 
-这个问题有几个层次，有不同的解决方案。
+这个问题有几层有不同的解决方案：
 
 - 应用程序没有接收到任何来自 Dapr 的流量
-- 应用程序没有向 Dapr 注册发布/订阅端点
-- 发布/订阅端点在 Dapr 注册，但请求没有到达所需的端点
+- 应用程序没有向 Dapr 注册 发布/订阅 终结点
+- 发布/订阅 终结点在 Dapr 注册，但请求没有到达所需的终结点
 
 ## 第 1 步：打开日志
 
-**这一点很重要。 之后的步骤将取决于您能否看到日志输出。 ASP.NET Core 日志几乎没有默认日志设置，所以您需要更改它。**
+**这一点很重要。 之后的步骤将取决于您能否看到日志输出。 ASP.NET Core日志几乎没有默认日志设置，所以您需要更改它。**
 
 按照 [这里](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#debug-diagnostics)的描述，调整日志记录的详细程度，以包含 ASP.NET Core 的 `Information` 日志记录。 将 `Microsoft` 键的值设为 `Information`。
 
 ## 第 2 步：验证您可以接收来自 Dapr 的流量
 
-1. 像平常一样启动应用程序(`dapr run ...`)。 请确保您在命令行中包含 `--app-port` 参数。 Dapr需要知道您的应用程序正在监听流量。 默认情况下，ASP.NET Core 应用程序将在本地开发中通过5000端口监听 HTTP。
+1. 像平常一样启动应用程序(`dapr run ...`)。 请确保您在命令行中包含 `--app-port` 参数。 Dapr需要知道您的应用程序正在监听流量。 默认情况下，ASP.NET Core应用程序将在本地开发中通过5000端口监听HTTP。
 
 2. 等待 Dapr 完成启动
 
@@ -39,11 +39,11 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
 
 在初始化过程中，Dapr会对您的应用程序发出一些配置请求。 如果你找不到这些，那么这意味着出了问题。 请通过 issue 或 Discord 请求帮助 (包括日志)。 如果您看到向应用程序发出的请求，请继续第 3 步。
 
-## 第 3 步：验证端点注册
+## 第 3 步：验证终结点注册
 
 1. 像平常一样启动应用程序(`dapr run ...`)。
 
-2. 在命令行中使用 `curl`（或其他 HTTP 测试工具）来访问`/dapr/subscribe` 端点。
+2. 在命令行中使用`curl`（或其他HTTP测试工具）来访问`/dapr/subscribe`端点。
 
 下面是一个例子，假设你的应用程序的监听端口是5000。
 
@@ -141,7 +141,7 @@ public async Task<ActionResult> Withdraw(...)
 
 ---
 
-如果将路由用于发布/订阅，则应具有如下端点：
+如果你使用的是 发布/订阅 的路由，你应该有一个终结点，比如：
 
 ```C#
 endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
@@ -151,11 +151,11 @@ endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
 
 ---
 
-**在纠正这段代码并重新测试后，如果 JSON 输出仍然是空数组（像 `[]` ），那么请在这个仓库上打开一个问题，并包含 `Startup.cs` 的内容和你的发布/订阅端点。**
+**在纠正这段代码并重新测试后，如果JSON输出仍然是空数组（像 `[]` ），那么请在这个仓库上打开一个问题，并包含 `Startup.cs` 的内容和你的 发布/订阅 终结点。**
 
-## 第 4 步：验证端点是否可访问
+## 第 4 步：验证终结点是否可访问
 
-在这一步中，我们将验证用 发布/订阅注册的条目是否可以访问。 最后一步应该给您留下了一些 JSON 输出，如下所示：
+在这一步中，我们将验证用 发布/订阅 注册的条目是否可以访问。 最后一步应该给你留下一些JSON输出，比如下面：
 
 ```json
 [
@@ -183,9 +183,9 @@ endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
 
 1. 像平常一样启动应用程序(`dapr run ...`)。
 
-2. 在命令行使用 `curl` (或其他 HTTP 测试工具) 来访问一个注册了发布/订阅端点的路由。
+2. 在命令行使用 `curl` (或其他HTTP测试工具) 来访问一个注册了 发布/订阅 终结点的路由。
 
-下面是一个例子，假设您的应用程序的监听端口是5000，并且您的发布/订阅路由之一是 `withdraw`。
+下面是一个例子，假设您的应用程序的监听端口是5000，并且您的 发布/订阅 路由之一是`withdraw`。
 
 ```sh
 curl http://localhost:5000/withdraw -H 'Content-Type: application/json' -d '{}' -v
@@ -215,9 +215,9 @@ curl http://localhost:5000/withdraw -H 'Content-Type: application/json' -d '{}' 
 {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|5e9d7eee-4ea66b1e144ce9bb.","errors":{"Id":["The Id field is required."]}}* Closing connection 0
 ```
 
-根据 HTTP 400 和 JSON 有效载荷，该响应表明已到达端点，但由于验证错误，请求被拒绝。
+根据 HTTP 400 和 JSON 有效载荷，该响应表明已到达终结点，但由于验证错误，请求被拒绝。
 
-你也应该看看运行应用程序的控制台输出。 这是为清晰起见，去掉Dapr 日志头的输出示例。
+你也应该看看运行应用程序的控制台输出。 这是为清晰起见，去掉Dapr日志头的输出示例。
 
 ```
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
@@ -250,11 +250,11 @@ info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
 
 现在你已经掌握了解决这个问题所需的信息。
 
-### 选项0：路由选择正确的端点
+### 选项0：路由选择正确的终结点
 
 如果路由日志条目中的信息是正确的，那么这意味着您的应用程序的行为是正确的。
 
-示例︰
+示例:
 
 ```txt
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
@@ -277,8 +277,8 @@ dapr publish --pubsub pubsub --topic withdraw --data '{}'
 
 **如果您需要帮助理解这个问题，请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**
 
-### 选项 2：路由选择了错误的端点
+### 选项 2：路由选择了错误的终结点
 
-如果您在日志中看到 `Microsoft.AspNetCore.Routing.EndpointMiddleware` 的条目，但它包含了错误的端点，那么这意味着您有路由冲突。 所选择的端点将出现在日志中，以便让你了解造成冲突的原因。
+如果您在日志中看到 `Microsoft.AspNetCore.Routing.EndpointMiddleware` 的条目，但它包含了错误的端点，那么这意味着您有路由冲突。 所选择的终结点将出现在日志中，以便让你了解造成冲突的原因。
 
 **如果您需要帮助理解这个问题，请在此仓库中打开一个问题，并包含您的 `Startup.cs` 文件。**

@@ -1,19 +1,19 @@
 ---
 type: docs
-title: "Dapr 客户端 Go SDK 入门"
+title: "Getting started with the Dapr client Go SDK"
 linkTitle: "客户端"
 weight: 20000
-description: 如何使用 Dapr Go SDK 启动和运行
+description: How to get up and running with the Dapr Go SDK
 no_list: true
 ---
 
-Dapr 客户端包允许您与 Go 应用程序的其他 Dapr 应用程序进行交互。
+The Dapr client package allows you to interact with other Dapr applications from a Go application.
 
 ## 先决条件
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
-- [开始安装](https://golang.org/doc/install)
+- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
+- [Go installed](https://golang.org/doc/install)
 
 
 ## 导入包
@@ -23,18 +23,18 @@ import "github.com/dapr/go-sdk/client"
 
 ## 构建块
 
-Go SDK 允许您与所有 [Dapr 构建块]({{< ref building-blocks >}}) 进行交互。
+The Go SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
 
-### 服务调用
+### Service Invocation
 
-要在使用 Dapr sidecar 运行的另一个服务上调用特定方法，Dapr 客户端 Go SDK 提供了两个选项：
+To invoke a specific method on another service running with Dapr sidecar, the Dapr client Go SDK provides two options:
 
-调用没有数据的服务：
+Invoke a service without data:
 ```go
 resp, err := client.InvokeMethod(ctx, "app-id", "method-name", "post")
 ```
 
-使用数据调用服务：
+Invoke a service with data:
 ```go
 content := &dapr.DataContent{
     ContentType: "application/json",
@@ -46,9 +46,9 @@ resp, err = client.InvokeMethodWithContent(ctx, "app-id", "method-name", "post",
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
-### 状态管理
+### State Management
 
-对于简单的用例，Dapr客户端提供了易于使用的 `Save`, `Get`, `Delete` 方法：
+For simple use-cases, Dapr client provides easy to use `Save`, `Get`, `Delete` methods:
 
 ```go
 ctx := context.Background()
@@ -73,7 +73,7 @@ if err := client.DeleteState(ctx, store, "key1"); err != nil {
 }
 ```
 
-为了获得更精细的控制，Dapr Go 客户端公开了 `setStateItem` 类型 ，该类型可用于更好地控制状态操作，并允许一次保存多个项目：
+For more granular control, the Dapr Go client exposes `SetStateItem` type, which can be use to gain more control over the state operations and allow for multiple items to be saved at once:
 
 ```go
 item1 := &dapr.SetStateItem{
@@ -112,14 +112,14 @@ if err := client.SaveBulkState(ctx, store, item1, item2, item3); err != nil {
 }
 ```
 
-同样， `GetBulkState` 方法提供了在单个操作中检索多个状态项的方法：
+Similarly, `GetBulkState` method provides a way to retrieve multiple state items in a single operation:
 
 ```go
 keys := []string{"key1", "key2", "key3"}
 items, err := client.GetBulkState(ctx, store, keys, nil,100)
 ```
 
-`ExecuteStateTransaction` 以事务方式执行多个 upsert 或删除操作的方法。
+And the `ExecuteStateTransaction` method to execute multiple upsert or delete operations transactionally.
 
 ```go
 ops := make([]*dapr.StateOperation, 0)
@@ -142,8 +142,8 @@ meta := map[string]string{}
 err := testClient.ExecuteStateTransaction(ctx, store, meta, ops)
 ```
 
-### 发布消息
-要将数据发布到主题上，Dapr Go 客户端提供了一个简单的方法：
+### Publish Messages
+To publish data onto a topic, the Dapr Go client provides a simple method:
 
 ```go
 data := []byte(`{ "id": "a123", "value": "abcdefg", "valid": true }`)
@@ -154,15 +154,15 @@ if err := client.PublishEvent(ctx, "component-name", "topic-name", data); err !=
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
 
-### 输出绑定
-Dapr Go 客户端 SDK 提供了两种方法来调用 Dapr 定义的绑定的操作。 Dapr 支持输入、输出和双向绑定。
+### Output Bindings
+The Dapr Go client SDK provides two methods to invoke an operation on a Dapr-defined binding. Dapr supports input, output, and bidirectional bindings.
 
-简单地说，只输出绑定：
+For simple, output only biding:
 ```go
 in := &dapr.InvokeBindingRequest{ Name: "binding-name", Operation: "operation-name" }
 err = client.InvokeOutputBinding(ctx, in)
 ```
-要调用含量和元数据的方法：
+To invoke method with content and metadata:
 ```go
 in := &dapr.InvokeBindingRequest{
     Name:      "binding-name",
@@ -177,9 +177,9 @@ out, err := client.InvokeBinding(ctx, in)
 
 - 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
 
-### 密钥管理
+### Secret Management
 
-Dapr客户端还提供访问运行时的密钥，可以由任何数量的密钥存储支持(例如： Kubernetes Secs, HashiCorp Vault, or Azure KeyVault):
+The Dapr client also provides access to the runtime secrets that can be backed by any number of secrete stores (e.g. Kubernetes Secrets, HashiCorp Vault, or Azure KeyVault):
 
 ```go
 opt := map[string]string{
@@ -189,17 +189,17 @@ opt := map[string]string{
 secret, err := client.GetSecret(ctx, "store-name", "secret-name", opt)
 ```
 
-### 授权
+### Authentication
 
-默认情况下，Dapr依靠网络边界限制对其API的访问。 然而，如果目标Dapr API 使用基于令牌的身份验证配置，用户可以通过以下两种方式配置Go Dapr客户端：
+By default, Dapr relies on the network boundary to limit access to its API. If however the target Dapr API is configured with token-based authentication, users can configure the Go Dapr client with that token in two ways:
 
 **环境变量**
 
-如果定义了 DAPR_API_TOKEN环境变量，Dapr 将自动使用它来增加它的 Dapr API 调用来确保身份验证。
+If the DAPR_API_TOKEN environment variable is defined, Dapr will automatically use it to augment its Dapr API invocations to ensure authentication.
 
-**明确的方法**
+**Explicit Method**
 
-此外，用户还可以在任何 Dapr 客户端实例上明确地设置API令牌。 当用户代码需要为不同的Dapr API 端点创建多个客户端时，此方法是有用的。
+In addition, users can also set the API token explicitly on any Dapr client instance. This approach is helpful in cases when the user code needs to create multiple clients for different Dapr API endpoints.
 
 ```go
 func main() {
@@ -216,4 +216,4 @@ func main() {
 - 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
 
 ## 相关链接
-- [Go SDK 示例](https://github.com/dapr/go-sdk/tree/main/examples)
+- [Go SDK Examples](https://github.com/dapr/go-sdk/tree/main/examples)

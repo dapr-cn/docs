@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-要设置GCP Secret Manager密钥仓库，请创建一个类型为`secretstores.gcp.secretmanager`的组件。 有关如何创建和 secretstore 配置，请参阅[本指南]({{< ref "setup-secret-store#apply-the-configuration" >}})。 有关如何在 Dapr 组件中检索和使用 secret，请参阅 [引用 secrets]({{< ref component-secrets.md >}}) 指南。
+要设置GCP Secret Manager密钥仓库，请创建一个类型为`secretstores.gcp.secretmanager`的组件。 See [this guide]({{< ref "setup-secret-store#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -44,7 +44,7 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， 建议将密钥存储在本地，如[Kubernetes密钥存储]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
+以上示例将密钥明文存储， It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
 {{% /alert %}}
 
 ## 元数据字段规范

@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "build-info CLI 命令参考"
-linkTitle: "编译信息"
-description: "Dapr-cli 和 Daprd 可执行文件上的详细构建信息"
+title: "build-info CLI command reference"
+linkTitle: "build-info"
+description: "Detailed build information on dapr-cli and daprd executables"
 ---
 
 ### 说明
 
-获取 `dapr-cli` 和 `daprd` 可执行文件的版本和git 提交数据。
+Get the version and git commit data for `dapr-cli` and `daprd` executables.
 
 ### 支持的平台
 
@@ -19,6 +19,6 @@ description: "Dapr-cli 和 Daprd 可执行文件上的详细构建信息"
 dapr build-info
 ```
 
-### 相关事实
+### Related facts
 
-您可以通过调用 daprd --build-info</code> 命令 `直接获取 <code>daprd` 生成信息。
+You can get `daprd` build information directly by invoking `daprd --build-info` command.

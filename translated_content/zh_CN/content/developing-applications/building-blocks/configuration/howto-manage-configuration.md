@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "操作方法：从存储管理配置"
-linkTitle: "操作方法：从存储中管理配置"
+linkTitle: "操作方法：从存储管理配置"
 weight: 2000
 description: "了解如何获取应用程序配置并订阅更改"
 ---
@@ -10,6 +10,12 @@ description: "了解如何获取应用程序配置并订阅更改"
 本操作方法使用 Redis 配置存储组件作为示例来检索配置项目。
 
 **此 API 目前在 `Alpha` 并且只能在 gRPC 上使用。 在将 API 认证为 `Stable` 状态之前，将提供具有此 URL 语法 `/v1.0/configuration` 的 HTTP1.1 支持版本。*
+
+## 示例:
+
+下面的代码例子粗略地描述了一个处理订单的应用程序。 在这个例子中，有一个订单处理服务，它有一个Dapr sidecar。 The order processing service uses Dapr to retrieve the configuration from a Redis configuration store.
+
+<img src="/images/building-block-configuration-example.png" width=1000 alt="Diagram showing get configuration of example service">
 
 ## 步骤 1：创建配置项目
 
@@ -31,7 +37,7 @@ redis-cli -p 6379
 保存配置项目：
 
 ```
-set myconfig "wookie"
+MSET orderId1 "101||1" orderId2 "102||1"
 ```
 
 ### 配置 Dapr 配置存储
@@ -42,7 +48,7 @@ set myconfig "wookie"
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: redisconfigstore
+  name: configstore
 spec:
   type: configuration.redis
   metadata:
@@ -51,6 +57,104 @@ spec:
   - name: redisPassword
     value: <PASSWORD>
 ```
+
+### Get configuration items using Dapr SDKs
+
+{{< tabs Dotnet Java Python>}}
+
+{{% codetab %}}
+```csharp
+//dependencies
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Dapr.Client;
+
+//code
+namespace ConfigurationApi
+{
+    public class Program
+    {
+        private static readonly string CONFIG_STORE_NAME = "configstore";
+
+        [Obsolete]
+        public static async Task Main(string[] args)
+        {
+            using var client = new DaprClientBuilder().Build();
+            var configuration = await client.GetConfiguration(CONFIG_STORE_NAME, new List<string>() { "orderId1", "orderId2" });
+            Console.WriteLine($"Got key=\n{configuration[0].Key} -> {configuration[0].Value}\n{configuration[1].Key} -> {configuration[1].Value}");
+        }
+    }
+}
+```
+
+Navigate to the directory containing the above code and run the following command to launch the application along with a Dapr sidecar:
+
+```bash
+dapr run --app-id orderprocessing --components-path ./components -- dotnet run
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+```java
+//dependencies
+import io.dapr.client.DaprClientBuilder;
+import io.dapr.client.DaprPreviewClient;
+import io.dapr.client.domain.ConfigurationItem;
+import io.dapr.client.domain.GetConfigurationRequest;
+import io.dapr.client.domain.SubscribeConfigurationRequest;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+//code
+private static final String CONFIG_STORE_NAME = "configstore";
+
+public static void main(String[] args) throws Exception {
+    try (DaprPreviewClient client = (new DaprClientBuilder()).buildPreviewClient()) {
+      List<String> keys = new ArrayList<>();
+      keys.add("orderId1");
+      keys.add("orderId2");
+      GetConfigurationRequest req = new GetConfigurationRequest(CONFIG_STORE_NAME, keys);
+      try {
+        Mono<List<ConfigurationItem>> items = client.getConfiguration(req);
+        items.block().forEach(ConfigurationClient::print);
+      } catch (Exception ex) {
+        System.out.println(ex.getMessage());
+      }
+    }
+}
+```
+
+Navigate to the directory containing the above code and run the following command to launch the application along with a Dapr sidecar:
+
+```bash
+dapr run --app-id orderprocessing --components-path ./components mvn spring-boot:run
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+```python
+#dependencies
+from dapr.clients import DaprClient
+#code
+with DaprClient() as d:
+        CONFIG_STORE_NAME = 'configstore'
+        keys = ['orderId1', 'orderId2']
+        #Startup time for dapr
+        d.wait(20)
+        configuration = d.get_configuration(store_name=CONFIG_STORE_NAME, keys=[keys], config_metadata={})
+        print(f"Got key={configuration.items[0].key} value={configuration.items[0].value} version={configuration.items[0].version}")
+```
+
+Navigate to the directory containing the above code and run the following command to launch the application along with a Dapr sidecar:
+
+```bash
+dapr run --app-id orderprocessing --components-path ./components python3 OrderProcessingService.py
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
 
 ### 使用 gRPC API 获取配置项目
 
@@ -87,7 +191,7 @@ client.GetConfigurationAlpha1({ StoreName: 'redisconfigstore', Keys = ['myconfig
 
 {{< /tabs >}}
 
-### 监视配置项目
+##### 监视配置项目
 
 使用您的[首选语言](https://grpc.io/docs/languages/)从 [Dapr proto](https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto) 创建 Dapr gRPC 客户端。 然后使用 proto 方法 `SubscribeConfigurationAlpha1` 开始订阅事件。 该方法接受以下请求对象：
 
@@ -107,6 +211,24 @@ message SubscribeConfigurationRequest {
 ```
 
 使用此方法，您可以订阅给定配置存储的特定密钥中的更改。 gRPC 流因语言而异 - 有关用法，请参阅此处的 [gRPC 示例](https://grpc.io/docs/languages/) 。
+
+##### Stop watching configuration items
+
+After you have subscribed to watch configuration items, the gRPC-server stream starts. This stream thread does not close itself, and you have to do by explicitly call the `UnSubscribeConfigurationRequest` API. This method accepts the following request object:
+
+```proto
+// UnSubscribeConfigurationRequest is the message to stop watching the key-value configuration.
+message UnSubscribeConfigurationRequest {
+  // The name of configuration store.
+  string store_name = 1;
+  // Optional. The keys of the configuration item to stop watching.
+  // Store_name and keys should match previous SubscribeConfigurationRequest's keys and store_name.
+  // Once invoked, the subscription that is watching update for the key-value event is stopped
+  repeated string keys = 2;
+}
+```
+
+Using this unsubscribe method, you can stop watching configuration update events. Dapr locates the subscription stream based on the `store_name` and any optional keys supplied and closes it.
 
 ## 下一步
 * 阅读 [配置 API 概述]({{< ref configuration-api-overview.md >}})

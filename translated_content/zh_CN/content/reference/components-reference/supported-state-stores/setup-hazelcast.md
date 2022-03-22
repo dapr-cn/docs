@@ -2,14 +2,14 @@
 type: docs
 title: "Hazelcast"
 linkTitle: "Hazelcast"
-description: Hazelcast 状态存储组件的详细信息
+description: Detailed information on the Hazelcast state store component
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-hazelcast/"
 ---
 
 ## 创建 Dapr 组件
 
-要设置 Hazelcast 状态储存，请创建一个类型为 `state.hazelcast`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+To setup Hazelcast state store create a component of type `state.hazelcast`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,12 +33,12 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 详情               | 示例                                 |
-| ---------------- |:--:| ---------------- | ---------------------------------- |
-| hazelcastServers | Y  | 逗号分隔的服务器地址       | `"hazelcast:3000,hazelcast2:3000"` |
-| hazelcastMap     | Y  | Hazelcast Map 配置 | `"foo-map"`                        |
+| 字段               | 必填 | 详情                                  | 示例                                 |
+| ---------------- |:--:| ----------------------------------- | ---------------------------------- |
+| hazelcastServers | Y  | A comma delimited string of servers | `"hazelcast:3000,hazelcast2:3000"` |
+| hazelcastMap     | Y  | Hazelcast Map configuration         | `"foo-map"`                        |
 
-## 设置 Hazelcast
+## Setup Hazelcast
 
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 

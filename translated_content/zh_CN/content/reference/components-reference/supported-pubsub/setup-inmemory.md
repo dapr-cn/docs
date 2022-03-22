@@ -7,7 +7,7 @@ aliases:
   - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-inmemory/"
 ---
 
-内存中发布/订阅组件对于开发目的非常有用，并且可以在单个计算机边界内工作。
+The In Memory pub/sub component is useful for development purposes and works inside of a single machine boundary.
 
 ## 配置
 

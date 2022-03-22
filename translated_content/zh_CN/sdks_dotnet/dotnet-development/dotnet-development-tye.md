@@ -1,30 +1,30 @@
 ---
 type: docs
-title: "Dapr .NET SDK 与 Tye 项目集成"
+title: "Dapr .NET SDK 与 Tye 项目开发"
 linkTitle: "Tye项目"
 weight: 40000
-description: 学习如何使用 Tye 项目进行本地开发
+description: 学习使用 Tye 项目本地开发
 ---
 
-## Tye 项目
+## Tye项目
 
-[.NET Tye 项目](https://github.com/dotnet/tye/) 是一种微服务开发工具，旨在使多个 .NET 服务的运行变得容易。 Tye 使您能够将多个 .NET 服务、流程和容器镜像的配置存储为可运行的应用程序。
+[.NET Project Tye](https://github.com/dotnet/tye/) 是一种微服务开发工具，旨在使多个.NET 服务更容易运行。 Tye 使您能够将多个 .NET 服务、流程和容器镜像的配置存储为可运行的应用程序。
 
 Tye 对 .NET Dapr 开发者有利，因为：
 
-- Tye有能力将自动化的 dapr CLI 内置。
-- Tye 了解.NET的惯例，对 .NET 服务几乎不需要配置。
+- Tye有能力将自动化的dapr CLI内置。
+- Tye了解.NET的惯例，对.NET服务几乎不需要配置。
 - Tye可以管理你在容器中的依赖关系的生命周期
 
 优点/缺点:
-- **优点：** Tye 可以实现上述所有步骤的自动化。 您不再需要思考像端口或应用 Id 这样的概念。
-- **优点：**由于 Tye 也可以为您管理容器，您可以将这些作为应用程序定义的一部分，并停止你机器上长期运行的容器。
+- **优点：** Tye 可以实现上述所有步骤的自动化。 您不再需要思考像端口或应用ID这样的概念。
+- **优点：**由于Tye也可以为你管理容器，你可以将这些作为应用程序定义的一部分，并停止你机器上长期运行的容器。
 
 ### 使用 Tye
 
-按照 [Tye 入门](https://github.com/dotnet/tye/blob/master/docs/getting_started.md)来安装 `tye` CLI 并为您的应用程序创建 `tye.yaml`。
+按照[Tye入门](https://github.com/dotnet/tye/blob/master/docs/getting_started.md)来安装 `tye` CLI 并为您的应用程序创建`tye.yaml`。
 
-接下来按照 [Tye Dapr 配方](https://github.com/dotnet/tye/blob/master/docs/recipes/dapr.md) 中的步骤来添加Dapr。 请确保在 `tye.yaml` 中指定组件目录中包含 `components-path` 的相对路径。
+接下来按照 [Tye Dapr配方](https://github.com/dotnet/tye/blob/master/docs/recipes/dapr.md) 中的步骤来添加Dapr。 请确保在 `tye.yaml` 中指定组件目录中包含 `components-path` 的相对路径。
 
 接下来添加任何额外的容器依赖项，并将组件定义添加到你之前创建的文件夹中。
 
@@ -58,10 +58,10 @@ services:
 
 将 `tye.yaml` 和应用代码签入源代码控制
 
-您现在可以使用 `tye run` 从一个终端启动整个应用程序。 运行时，Tye 有一个仪表板在 `http://localhost:8000` 查看应用程序状态和日志。
+您现在可以使用 `tye run` 从一个终端启动整个应用程序。 运行时，Tye有一个仪表板在 `http://localhost:8000` 查看应用程序状态和日志。
 
 ### 下一步
 
-Tye 将您的服务按正常 .NET 进程在本地运行。 如果您需要调试，请使用调试器的附加功能将其附加到正在运行的进程中。 由于 Tye 具有 .NET 意识，它有能力[启动一个暂停的进程](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options)以进行启动调试。
+Tye 将您的服务按正常 .NET 进程在本地运行。 如果您需要调试，请使用调试器的附加功能将其附加到正在运行的进程中。 由于 Tye 具有 .NE T意识，它有能力[启动一个暂停的进程](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options)以进行启动调试。
 
 如果您想要在容器中进行本地测试，Tye 也有 [选项](https://github.com/dotnet/tye/blob/master/docs/reference/commandline/tye-run.md#options) 来运行您的服务。

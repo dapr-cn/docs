@@ -2,14 +2,14 @@
 type: docs
 title: "GCP Firestore (Datastore mode)"
 linkTitle: "GCP Firestore"
-description: GCP Firestore 状态存储的详细信息
+description: Detailed information on the GCP Firestore state store component
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-firestore/"
 ---
 
 ## 配置
 
-要设置 GCP Firestore 状态存储，请创建一个类型为 `state.gcp.firestore` 的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+To setup GCP Firestore state store create a component of type `state.gcp.firestore`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 
 ```yaml
@@ -52,31 +52,31 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                              | 必填 | 详情                            | 示例                                                      |
-| ------------------------------- |:--:| ----------------------------- | ------------------------------------------------------- |
-| type                            | Y  | 凭据类型                          | `"serviceaccount"`                                      |
-| project_id                      | Y  | 要使用的 GCP 项目 ID                | `"project-id"`                                          |
-| private_key_id                | Y  | 要使用的私钥ID                      | `"private-key-id"`                                      |
-| client_email                    | Y  | 客户端的电子邮件地址                    | `"eample@example.com"`                                  |
-| client_id                       | Y  | 用于身份验证的客户端 ID 值               | `"client-id"`                                           |
-| auth_uri                        | Y  | 要使用的身份验证 URI                  | `"https://accounts.google.com/o/oauth2/auth"`           |
-| token_uri                       | Y  | 用于查询身份验证令牌的令牌 URI             | `"https://oauth2.googleapis.com/token"`                 |
-| auth_provider_x509_cert_url | Y  | 身份验证提供程序证书 URL                | `"https://www.googleapis.com/oauth2/v1/certs"`          |
-| client_x509_cert_url          | Y  | 客户端证书 URL                     | `"https://www.googleapis.com/robot/v1/metadata/x509/x"` |
-| entity_kind                     | N  | 文件存储中的实体名称。 默认为 `"DaprState"` | `"DaprState"`                                           |
+| 字段                              | 必填 | 详情                                                      | 示例                                                      |
+| ------------------------------- |:--:| ------------------------------------------------------- | ------------------------------------------------------- |
+| type                            | Y  | The credentials type                                    | `"serviceaccount"`                                      |
+| project_id                      | Y  | The ID of the GCP project to use                        | `"project-id"`                                          |
+| private_key_id                | Y  | The ID of the prvate key to use                         | `"private-key-id"`                                      |
+| client_email                    | Y  | The email address for the client                        | `"eample@example.com"`                                  |
+| client_id                       | Y  | The client id value to use for authentication           | `"client-id"`                                           |
+| auth_uri                        | Y  | The authentication URI to use                           | `"https://accounts.google.com/o/oauth2/auth"`           |
+| token_uri                       | Y  | The token URI to query for Auth token                   | `"https://oauth2.googleapis.com/token"`                 |
+| auth_provider_x509_cert_url | Y  | The auth provider certificate URL                       | `"https://www.googleapis.com/oauth2/v1/certs"`          |
+| client_x509_cert_url          | Y  | The client certificate URL                              | `"https://www.googleapis.com/robot/v1/metadata/x509/x"` |
+| entity_kind                     | N  | The entity name in Filestore. Defaults to `"DaprState"` | `"DaprState"`                                           |
 
-## 设置 GCP Firestore
+## Setup GCP Firestore
 
 {{< tabs "Self-Hosted" "Google Cloud" >}}
 
 {{% codetab %}}
-您可以参照 [此处](https://cloud.google.com/datastore/docs/tools/datastore-emulator) 的说明，在本地使用 GCP Datastore 模拟器。
+You can use the GCP Datastore emulator to run locally using the instructions [here](https://cloud.google.com/datastore/docs/tools/datastore-emulator).
 
 然后您可以使用 `localhost:8081` 与服务器交互。
 {{% /codetab %}}
 
 {{% codetab %}}
-跟随 [此处](https://cloud.google.com/datastore/docs/quickstart) 的说明，开始设置 Google Cloud 中的 Firestore。
+Follow the instructions [here](https://cloud.google.com/datastore/docs/quickstart) to get started with setting up Firestore in Google Cloud.
 {{% /codetab %}}
 
 {{< /tabs >}}

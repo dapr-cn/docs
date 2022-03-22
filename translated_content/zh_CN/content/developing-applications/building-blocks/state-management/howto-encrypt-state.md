@@ -1,26 +1,26 @@
 ---
 type: docs
-title: "操作方法：加密应用程序 state"
-linkTitle: "操作方法：加密状态"
+title: "How-To: Encrypt application state"
+linkTitle: "How-To: Encrypt state"
 weight: 450
-description: "自动加密状态并管理密钥轮换"
+description: "Automatically encrypt state and manage key rotations"
 ---
 
 {{% alert title="Preview feature" color="warning" %}}
-状态存储加密目前为 [预览版]({{< ref preview-features.md >}})。
+State store encryption is currently in [preview]({{< ref preview-features.md >}}).
 {{% /alert %}}
 
 ## 介绍
 
-应用程序状态通常需要静态加密，以便在企业工作负载或受监管环境中提供更强的安全性。 Dapr提供基于AES256[的自动客户端加密](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)。
+Application state often needs to get encrypted at rest to provide stronger security in enterprise workloads or regulated environments. Dapr offers automatic client side encryption based on [AES256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
 
-除了自动加密之外，Dapr 还支持主密钥和辅助加密密钥，使开发人员和运营团队能够更轻松地启用密钥轮换策略。 所有 Dapr 状态存储都支持此功能。
+In addition to automatic encryption, Dapr supports primary and secondary encryption keys to make it easier for developers and ops teams to enable a key rotation strategy. This feature is supported by all Dapr state stores.
 
-加密密钥是从密钥中提取的，不能作为明文值提供在 `metadata` 部分。
+The encryption keys are fetched from a secret, and cannot be supplied as plaintext values on the `metadata` section.
 
-## 启用自动加密
+## Enabling automatic encryption
 
-1. 使用标准 [Dapr配置]({{< ref configuration-overview.md >}})启用状态加密预览功能：
+1. Enable the state encryption preview feature using a standard [Dapr Configuration]({{< ref configuration-overview.md >}}):
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,7 +33,7 @@ spec:
       enabled: true
 ```
 
-2. 将以下 `metadata` 部分添加到任何 Dapr 支持的状态存储中：
+2. Add the following `metadata` section to any Dapr supported state store:
 
 ```yaml
 metadata:
@@ -43,7 +43,7 @@ metadata:
     key: mykey # key is optional.
 ```
 
-例如，这是 Redis 加密状态存储的完整 YAML
+For example, this is the full YAML of a Redis encrypted state store
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -64,13 +64,13 @@ spec:
       key: mykey
 ```
 
-现在你有一个Dapr状态存储，它被配置为从一个名为 `mysecret`的秘密中获取加密密钥，在一个名为 `mykey`的密钥中包含实际的加密密钥。 实际的加密密钥 *must* 是一个AES256加密密钥。 如果加密密钥无效，Dapr将出错并退出。
+You now have a Dapr state store that's configured to fetch the encryption key from a secret named `mysecret`, containing the actual encryption key in a key named `mykey`. The actual encryption key *must* be an AES256 encryption key. Dapr will error and exit if the encryption key is invalid.
 
-*请注意，秘密存储不一定要支持keys*
+*Note that the secret store does not have to support keys*
 
-## 密钥轮换
+## Key rotation
 
-为了支持密钥轮换，Dapr 提供了一种指定辅助加密密钥的方法：
+To support key rotation, Dapr provides a way to specify a secondary encryption key:
 
 ```yaml
 metadata:
@@ -84,6 +84,10 @@ metadata:
       key: mykey2
 ```
 
-当Dapr启动时，它将获取包含 `metadata` 部分中列出的加密密钥的秘密。 Dapr 知道哪个状态项已使用哪个密钥自动加密，因为它会将 `secretKeyRef.name` 字段附加到实际状态密钥的末尾。
+When Dapr starts, it will fetch the secrets containing the encryption keys listed in the `metadata` section. Dapr knows which state item has been encrypted with which key automatically, as it appends the `secretKeyRef.name` field to the end of the actual state key.
 
-要轮换密钥，只需将 `primaryEncryptionKey` 更改为指向包含新密钥的机密，然后将旧的主加密密钥移动到 `secondaryEncryptionKey`。 新数据将使用新密钥进行加密，检索到的旧数据将使用辅助密钥进行解密。 对使用旧密钥加密的数据项的任何更新都将使用新密钥重新加密。
+To rotate a key, simply change the `primaryEncryptionKey` to point to a secret containing your new key, and move the old primary encryption key to the `secondaryEncryptionKey`. New data will be encrypted using the new key, and old data that's retrieved will be decrypted using the secondary key. Any updates to data items encrypted using the old key will be re-encrypted using the new key.
+
+## 相关链接
+ - [Security overview]({{< ref "security-concept.md" >}})
+ - [状态存储查询 API 实现指南](https://github.com/dapr/components-contrib/blob/master/state/Readme.md#implementing-state-query-api)

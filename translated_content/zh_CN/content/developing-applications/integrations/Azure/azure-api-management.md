@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "适用于 Azure API 管理的 Dapr 集成策略"
+title: "Dapr integration policies for Azure API Management"
 linkTitle: "Azure API 管理"
-description: "通过 Azure API 管理策略发布 Dapr 服务和组件的 API"
+description: "Publish APIs for Dapr services and components through Azure API Management policies"
 weight: 2000
 ---
 

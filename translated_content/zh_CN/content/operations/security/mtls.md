@@ -12,7 +12,7 @@ Dapr 允许运维和开发人员引入自己的证书，或者让 Dapr 自动创
 
 有关 mTLS 的详细信息，请阅读 [安全概念部分]({{< ref "security-concept.md" >}})。
 
-如果没有提供自定义证书，Dapr 将会自动创建并保存有效期为一年的自签名的证书。 在 Kubernetes 中，证书被持久保存到 secret 中，该 secret 位于 Dapr 系统 pods 所在的命名空间中，只能被 Dapr 系统 pods 访问。 在自托管模式下，证书被持久化到硬盘。
+如果没有提供自定义证书，Dapr 将会自动创建并保存有效期为一年的自签名的证书。 In Kubernetes, the certs are persisted to a secret that resides in the namespace of the Dapr system pods, accessible only to them. 在自托管模式下，证书被持久化到硬盘。
 
 ## 控制平面 Sentry 服务配置
 mTLS 设置驻留在 Dapr 控制平面配置文件中。 例如，当您部署 Dapr 控制平面到 Kubernetes， 会自动创建此配置文件，然后您可以对其进行编辑。 以下的文件展示了部署在 `daprsystem` 命名空间的配置源中可用的 mTLS 配置：
@@ -30,11 +30,11 @@ spec:
     allowedClockSkew: "15m"
 ```
 
-此处展示了默认的 `daprsystem` 配置设置。 下面的示例向您展示了如何在 Kubernetes 和自托管模式下更改此配置并将其应用于控制平面 Sentry 服务。
+The file here shows the default `daprsystem` configuration settings. 下面的示例向您展示了如何在 Kubernetes 和自托管模式下更改此配置并将其应用于控制平面 Sentry 服务。
 
 ## Kubernetes
 
-### 使用配置资源设置 mTLS
+### Setting up mTLS with the configuration resource
 
 在 Kubernetes 中，Dapr 创建一个开启了 mTLS 的默认控制平面配置资源。 Sentry 服务，即证书颁发机构系统 pod，通过 Helm 和 Dapr CLI 使用 `dapr init --kubernetes` 进行安装。
 
@@ -48,7 +48,7 @@ spec:
 kubectl edit configurations/daprsystem --namespace <DAPR_NAMESPACE>
 ```
 
-一旦更改被保存，对控制平面执行滚动更新：
+Once the changes are saved, perform a rolling update to the control plane:
 
 ```
 kubectl rollout restart deploy/dapr-sentry -n <DAPR_NAMESPACE>
@@ -58,7 +58,8 @@ kubectl rollout restart statefulsets/dapr-placement-server -n <DAPR_NAMESPACE>
 
 *注意：控制平面 Sidecar 的 Injector 服务不需要重新部署*
 
-### 使用 Helm 禁用 mTLS
+### Disabling mTLS with Helm
+*The control plane will continue to use mTLS*
 
 ```bash
 kubectl create ns dapr-system
@@ -70,27 +71,31 @@ helm install \
   dapr/dapr
 ```
 
-### 使用 CLI 禁用 mTLS
+### Disabling mTLS with the CLI
+*The control plane will continue to use mTLS*
 
 ```
 dapr init --kubernetes --enable-mtls=false
 ```
 
-### 查看日志
+### Viewing logs
 
 要查看 sentry 服务日志，请运行如下命令：
 
 ```
 kubectl logs --selector=app=dapr-sentry --namespace <DAPR_NAMESPACE>
 ```
-
-### 自带证书
+### Bringing your own certificates
 
 使用 Helm，您可以提供 PEM 编码的根证书，颁发者证书和私钥，这些证书将会填充到 Sentry 服务使用的 Kubernetes 秘密中。
 
-_注意：此示例使用 OpenSSL 命令行工具，这是一个广泛发布的软件包，通过包管理器可以轻松的在 Linux 上安装。 在 Windwos 上，OpenSSL 可以 [使用 chocolatey ](https://community.chocolatey.org/packages/openssl) 安装。 在 MacOS上，可以使用 `brew install openssl` 安装。_
+{{% alert title="Avoiding downtime" color="warning" %}}
+To avoid downtime when rotating expiring certificates always sign your certificates with the same private root key.
+{{% /alert %}}
 
-创建用于生成整数的配置文件，这对于使用 SAN (Subject Alt Name) 扩展字段生成 v3 证书是必须的。 首先保存以下内容到名为 `root.conf` 的文件中：
+_Note: This example uses the OpenSSL command line tool, this is a widely distributed package, easily installed on Linux via the package manager. On Windows OpenSSL can be installed [using chocolatey](https://community.chocolatey.org/packages/openssl). On MacOS it can be installed using brew `brew install openssl`_
+
+Create config files for generating the certificates, this is necessary for generating v3 certificates with the SAN (Subject Alt Name) extension fields. First save the following to a file named `root.conf`:
 
 ```ini
 [req]
@@ -113,29 +118,31 @@ subjectAltName = @alt_names
 DNS.1 = cluster.local
 ```
 
-对 `issuer.conf` 重复此操作，粘贴同样的内容到文件中，但是添加 `pathlen: 0` 到 basicConstraints 行的末尾，如下所示：
+Repeat this for `issuer.conf`, paste the same contents into the file, but add `pathlen:0` to the end of the basicConstraints line, as shown below:
 
 ```ini
 basicConstraints = critical, CA:true, pathlen:0
 ```
 
-运行以下命令生成根证书和密钥：
+Run the following to generate the root cert and key
 
 ```bash
+# skip the following line to reuse an existing root key, required for rotating expiring certificates
 openssl ecparam -genkey -name prime256v1 | openssl ec -out root.key
 openssl req -new -nodes -sha256 -key root.key -out root.csr -config root.conf -extensions v3_req
 openssl x509 -req -sha256 -days 365 -in root.csr -signkey root.key -outform PEM -out root.pem -extfile root.conf -extensions v3_req
 ```
 
-接下来，运行以下命令生成颁发者证书和密钥：
+Next run the following to generate the issuer cert and key:
 
 ```bash
+# skip the following line to reuse an existing issuer key, required for rotating expiring certificates
 openssl ecparam -genkey -name prime256v1 | openssl ec -out issuer.key
 openssl req -new -sha256 -key issuer.key -out issuer.csr -config issuer.conf -extensions v3_req
 openssl x509 -req -in issuer.csr -CA root.pem -CAkey root.key -CAcreateserial -outform PEM -out issuer.pem -days 365 -sha256 -extfile issuer.conf -extensions v3_req
 ```
 
-安装 Helm 并通过配置将根证书，颁发者证书和颁发者密钥传递给 Sentry：
+Install Helm and pass the root cert, issuer cert and issuer key to Sentry via configuration:
 
 ```bash
 kubectl create ns dapr-system
@@ -151,23 +158,99 @@ helm install \
 
 ### 更新根证书或者颁发证书
 
-如果根证书或者颁发者证书即将过期，你可以更新他们并重启必要的系统服务。
+If the Root or Issuer certs are about to expire, you can update them and restart the required system services.
 
-首先，使用在 [携带您自己的证书](#bringing-your-own-certificates) 中的步骤颁发新证书。
+{{% alert title="Avoiding downtime when rotating certificates" color="warning" %}}
+To avoid downtime when rotating expiring certificates your new certificates must be signed with the same private root key as the previous certificates. This is not currently possible using self-signed certificates generated by Dapr.
+{{% /alert %}}
 
-现在，您有了新的证书，您可以更新保存他们的 Kubernetes 秘密。 编辑 Kubernetes secret：
+#### Dapr-generated self-signed certificates
 
+1. Clear the existing Dapr Trust Bundle secret by saving the following YAML to a file (e.g. `clear-trust-bundle.yaml`) and applying this secret.
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dapr-trust-bundle
+  labels:
+    app: dapr-sentry
+data:
 ```
+
+```bash
+kubectl apply -f `clear-trust-bundle.yaml` -n <DAPR_NAMESPACE>
+```
+
+2. Restart the Dapr Sentry service. This will generate a new certificate bundle and update the `dapr-trust-bundle` Kubernetes secret.
+
+```bash
+kubectl rollout restart -n <DAPR_NAMESPACE> deployment/dapr-sentry
+```
+
+3. Once the Sentry service has been restarted, restart the rest of the Dapr control plane to pick up the new Dapr Trust Bundle.
+
+```bash
+kubectl rollout restart deploy/dapr-operator -n <DAPR_NAMESPACE>
+kubectl rollout restart statefulsets/dapr-placement-server -n <DAPR_NAMESPACE>
+```
+
+4. Restart your Dapr applications to pick up the latest trust bundle.
+
+{{% alert title="Potential application downtime with mTLS enabled." color="warning" %}}
+Restarts of deployments using service to service invocation using mTLS will fail until the callee service has also been restarted (thereby loading the new Dapr Trust Bundle). Additionally, the placement service will not be able to assign new actors (while existing actors remain unaffected) until applications have been restarted to load the new Dapr Trust Bundle.
+{{% /alert %}}
+
+```bash
+kubectl rollout restart deployment/mydaprservice1 kubectl deployment/myotherdaprservice2
+```
+
+#### Custom certificates (bring your own)
+
+First, issue new certificates using the step above in [Bringing your own certificates](#bringing-your-own-certificates).
+
+Now that you have the new certificates, use Helm to upgrade the certificates:
+
+```bash
+helm upgrade \
+  --set-file dapr_sentry.tls.issuer.certPEM=issuer.pem \
+  --set-file dapr_sentry.tls.issuer.keyPEM=issuer.key \
+  --set-file dapr_sentry.tls.root.certPEM=root.pem \
+  --namespace dapr-system \
+  dapr \
+  dapr/dapr
+```
+
+Alternatively, you can update the Kubernetes secret that holds them:
+
+```bash
 kubectl edit secret dapr-trust-bundle -n <DAPR_NAMESPACE>
 ```
 
-将 Kubernetes secret 中的 `ca.crt`, `issuer.crt` 和 `issuer.key` 键替换为新证书中的相应值。 *__注意：值必须是 base64 编码的__*
+Replace the `ca.crt`, `issuer.crt` and `issuer.key` keys in the Kubernetes secret with their corresponding values from the new certificates. *__Note: The values must be base64 encoded__*
 
-如果您使用了不同的私钥对新证书进行签名，重启所有启用了 Dapr 的 Pod。 建议的方法是执行 deployment 的滚动重启：
+If you signed the new cert root with the **same private key** the Dapr Sentry service will pick up the new certificates automatically. You can restart your application deployments using `kubectl rollout restart` with zero downtime. It is not necessary to restart all deployments at once, as long as deployments are restarted before original certificate expiration.
+
+If you signed the new cert root with a **different private key**, you must restart the Dapr Sentry service, followed by the remainder of the Dapr control plane service.
+
+```bash
+kubectl rollout restart deploy/dapr-sentry -n <DAPR_NAMESPACE>
+```
+
+Once Sentry has been completely restarted run:
+
+```bash
+kubectl rollout restart deploy/dapr-operator -n <DAPR_NAMESPACE>
+kubectl rollout restart statefulsets/dapr-placement-server -n <DAPR_NAMESPACE>
+```
+
+Next, you must restart all Dapr-enabled pods. The recommended way to do this is to perform a rollout restart of your deployment:
 
 ```
 kubectl rollout restart deploy/myapp
 ```
+
+You will experience potential downtime due to mismatching certificates until all deployments have successfully been restarted (and hence loaded the new Dapr certificates).
+
 ### Kubernetes 视频演示
 观看此视频，了解如何在 Kubernetes 上更新 mTLS 证书 <iframe width="1280" height="720" src="https://www.youtube.com/embed/_U9wJqq-H1g" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
 
@@ -176,7 +259,7 @@ kubectl rollout restart deploy/myapp
 
 为了运行 Sentry 服务，您可以从源码构建，或者从 [此处](https://github.com/dapr/dapr/releases) 下载发布的二进制文件。
 
-当从源码构建时，请参阅 Dapr 的 [这个](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md#build-the-dapr-binaries) 指南，了解如何构建 Dapr。
+When building from source, please refer to [this](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md#build-the-dapr-binaries) guide on how to build Dapr.
 
 然后，为 Sentry 服务创建目录以创建自签名的根证书：
 
@@ -190,13 +273,13 @@ mkdir -p $HOME/.dapr/certs
 ./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local
 ```
 
-如果成功，Sentry 服务将会运行并在指定的目录创建根证书。 此命令使用默认配置值，因为未提供自定义配置文件。 请参阅下文，了解如何使用自定义配置启动 Sentry 服务。
+如果成功，Sentry 服务将会运行并在指定的目录创建根证书。 This command uses default configuration values as no custom config file was given. 请参阅下文，了解如何使用自定义配置启动 Sentry 服务。
 
-### 使用配置资源设置 mTLS
+### Setting up mTLS with the configuration resource
 
-#### Dapr 实例配置
+#### Dapr instance configuration
 
-当在自托管模式下运行 Dapr 时，默认情况下禁用 mTLS。 您可以通过创建如下的配置文件启用它：
+When running Dapr in self hosted mode, mTLS is disabled by default. you can enable it by creating the following configuration file:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -209,7 +292,7 @@ spec:
     enabled: true
 ```
 
-除了 Dapr 配置之外，您还需要为每个 Dapr sidecar 实例提供 TLS 证书。 为此，您可以在运行 Dapr 实例之前设置如下的环境变量：
+除了 Dapr 配置之外，您还需要为每个 Dapr sidecar 实例提供 TLS 证书。 You can do so by setting the following environment variables before running the Dapr instance:
 
 {{< tabs "Linux/MacOS" Windows >}}
 
@@ -235,13 +318,13 @@ $env:NAMESPACE="default"
 
 {{< /tabs >}}
 
-如果使用 Dapr CLI，将 Dapr 指向上面的配置文件，以在启用 mTLS 的情况下运行 Dapr 实例：
+If using the Dapr CLI, point Dapr to the config file above to run the Dapr instance with mTLS enabled:
 
 ```
 dapr run --app-id myapp --config ./config.yaml node myapp.js
 ```
 
-如果直接使用 `daprd` ，使用如下参数启用 mTLS：
+If using `daprd` directly, use the following flags to enable mTLS:
 
 ```bash
 daprd --app-id myapp --enable-mtls --sentry-address localhost:50001 --config=./config.yaml
@@ -249,7 +332,7 @@ daprd --app-id myapp --enable-mtls --sentry-address localhost:50001 --config=./c
 
 #### Sentry 服务配置
 
-下面是 Sentry 的配置示例，它将工作负载证书 TTL 更改为 25 秒：
+Here's an example of a configuration for Sentry that changes the workload cert TTL to 25 seconds:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -269,27 +352,27 @@ spec:
 ./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local --config=./config.yaml
 ```
 
-### 自带证书
+### Bringing your own certificates
 
-要提供您自己的凭据，创建 ECDSA PEM 编码的根证书和颁发者证书，并且将它们放在文件系统上。 使用 `--issuer-credentials` 标志告诉 Sentry 服务从何处加载证书。
+In order to provide your own credentials, create ECDSA PEM encoded root and issuer certificates and place them on the file system. 使用 `--issuer-credentials` 标志告诉 Sentry 服务从何处加载证书。
 
 接下来的示例创建根证书和颁发者证书，并使用哨兵服务加载他们。
 
-*注意：此示例使用 step 工具创建证书。 您可以从 [此处](https://smallstep.com/docs/getting-started/) 安装 step 工具。 Windows 二进制文件在 [此处](https://github.com/smallstep/cli/releases)*
+*Note: This example uses the step tool to create the certificates. You can install step tool from [here](https://smallstep.com/docs/getting-started/). Windows binaries available [here](https://github.com/smallstep/cli/releases)*
 
-创建根证书：
+Create the root certificate:
 
 ```bash
 step certificate create cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
 ```
 
-创建颁发者证书：
+Create the issuer certificate:
 
 ```bash
 step certificate create cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 8760h --no-password --insecure
 ```
 
-这将创建根证书和颁发者证书和密钥。 将 `ca.crt`, `issuer.crt` 和 `issuer.key` 放在所需的路径中 (在下面的实例中为 `$HOME/.dapr/certs`)，然后启动 Sentry：
+This creates the root and issuer certs and keys. Place `ca.crt`, `issuer.crt` and `issuer.key` in a desired path (`$HOME/.dapr/certs` in the example below), and launch Sentry:
 
 ```bash
 ./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local
@@ -297,10 +380,19 @@ step certificate create cluster.local issuer.crt issuer.key --ca ca.crt --ca-key
 
 ### 更新根证书或颁发者证书
 
-如果根证书或者颁发者证书即将过期，你可以更新他们并重启必要的系统服务。
+If the Root or Issuer certs are about to expire, you can update them and restart the required system services.
 
-首先，使用在 [自带证书](#bringing-your-own-certificates) 中的步骤颁发新证书。
+To have Dapr generate new certificates, delete the existing certificates at `$HOME/.dapr/certs` and restart the sentry service to generate new certificates.
 
-将 `ca.crt`, `issuer.crt` 和 `issuer.key` 复制到每个已配置的系统服务的文件系统路径，然后重启进程或容器。 默认情况下，系统服务将在 `/var/run/dapr/credentials` 中查找凭据。
+```bash
+./sentry --issuer-credentials $HOME/.dapr/certs --trust-domain cluster.local --config=./config.yaml
+```
 
-*注意：如果您使用不同的私钥对证书根目录进行了签名，请重新启动 Dapr 实例。*
+To replace with your own certificates, first generate new certificates using the step above in [Bringing your own certificates](#bringing-your-own-certificates).
+
+Copy `ca.crt`, `issuer.crt` and `issuer.key` to the filesystem path of every configured system service, and restart the process or container. By default, system services will look for the credentials in `/var/run/dapr/credentials`. The examples above use `$HOME/.dapr/certs` as a custom location.
+
+*Note: If you signed the cert root with a different private key, restart the Dapr instances.*
+
+## Community call video on certificate rotation
+Watch this video on how to perform certificate rotation if your certicates are expiring. <iframe width="1280" height="720" src="https://www.youtube.com/watch?v=Hkcx9kBDrAc" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>

@@ -8,9 +8,9 @@ weight: 300
 
 使用绑定，可以调用外部资源，而无需绑定到特定的 SDK 或库。 有关显示输出绑定的完整示例，请访问此 [链接](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
-## 示例︰
+## 示例:
 
-下面的代码示例松散地描述了处理订单的应用程序。 在示例中，有一个订单处理服务，它具有 Dapr sidecar。 订单处理服务使用 Dapr 通过输出绑定调用外部资源，在本例中为 Kafka。
+以下的示例简述了一个订单处理程序。 在示例中，有一个订单处理服务，它具有 Dapr sidecar。 订单处理服务使用 Dapr 通过输出绑定调用外部资源，在本例中为 Kafka。
 
 <img src="/images/building-block-output-binding-example.png" width=1000 alt="Diagram showing bindings of example service">
 

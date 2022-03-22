@@ -16,7 +16,7 @@ Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次
 
 当发布消息时，必须指定所发送数据的内容类型。 除非指定, Dapr 将假定类型为 `text/plain`。 当使用 Dapr 的 HTTP API时，内容类型可以设置在 `Content-Type` 头中。 gRPC 客户端和 SDK 有一个专用的内容类型参数。
 
-## 示例︰
+## 示例:
 
 以下的示例简述了一个订单处理程序。 当前示例中，存两项服务：订单处理服务和结账服务。 这两项服务都有Dapr sidecar。 订单处理服务使用 Dapr 向 RabbitMQ 发布消息，结账服务订阅消息队列中的主题。
 
@@ -660,9 +660,9 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ## 发送自定义 CloudEvent
 
-Dapr 自动接收发布请求上发送的数据，并将其包装在CloudEvent 1.0 信封中。 如果您想使用自己自定义的 CloudEvent，请确保指定内容类型为 `application/ cloudevents+json`。
+Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
 
-[请在此处阅读有关内容类型](#content-types)，以及有关 [ Cloud Events 消息格式]({{< ref "pubsub-overview.md#cloud-events-message-format" >}})。
+Read about content types [here](#content-types), and about the [Cloud Events message format]({{< ref "pubsub-overview.md#cloud-events-message-format" >}}).
 
 #### 示例
 
@@ -694,7 +694,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/cloudevents+json' -Body
 ## 下一步
 
 - 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub-sub)
-- 了解 [PubSub 路由]({{< ref howto-route-messages >}})
+- Learn about [PubSub routing]({{< ref howto-route-messages >}})
 - 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
 - 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
