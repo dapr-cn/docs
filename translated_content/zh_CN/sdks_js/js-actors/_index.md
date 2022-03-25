@@ -1,30 +1,30 @@
 ---
-type: docs
-title: "JavaScript SDK for Actors"
+type: 文档
+title: "JavaScript SDK for Actor"
 linkTitle: "Actors"
 weight: 1000
-description: How to get up and running with Actors using the Dapr JavaScript SDK
+description: 如何使用 Dapr JavaScript SDK 启动和运行 Actor
 ---
 
-The Dapr actors package allows you to interact with Dapr virtual actors from a JavaScript application. The examples below demonstrate how to use the JavaScript SDK for interacting with virtual actors.
+通过 Dapr actor 包，您可以与 JavaScript 应用程序中的 Dapr virtual actor 进行交互。 下面的示例演示如何使用 JavaScript SDK 与 Dapr virtual actor 进行交互。
 
-For a more in-depth overview of Dapr actors, visit the [actors overview page]({{< ref actors-overview >}}).
+有关Dapr Actor 的更深入概述，请访问 [概述页面]({{< ref actors-overview >}})。
 
 ## 前提
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Latest LTS version of Node or greater](https://nodejs.org/en/)
-- [JavaScript NPM package installed](https://www.npmjs.com/package/dapr-client)
+- [NodeJS的最新LTS版本或更高版本](https://nodejs.org/en/)
+- [已安装 JavaScript NPM 包](https://www.npmjs.com/package/dapr-client)
 
-## Scenario
-The below code examples loosely describe the scenario of a Parking Garage Spot Monitoring System, which can be seen in this [video] by Mark Russinovich(https://www.youtube.com/watch?v=eJCu6a-x9uo&t=3785).
+## 场景
+下面的代码示例松散地描述了停车库点监控系统的场景，这可以在以下视频中看到 Mark Russinovich(https://www.youtube.com/watch?v=eJCu6a-x9uo&t=3785)
 
-A parking garage consists of hundreds of parking spaces, where each parking space includes a sensor that provides updates to a centralized monitoring system. The parking space sensors (our actors) detect if a parking space is occupied, or available.
+停车库由数百个停车位组成，每个停车位都包括一个传感器，该传感器为集中监控系统提供更新。 停车位传感器 ( 我们的 Actors) 检测停车位是否被占用或可用。
 
-To jump in and run this example yourself, clone the source code, which can be found in the [JavaScript SDK examples directory](https://github.com/dapr/js-sdk/tree/master/examples/http/actor-parking-sensor).
+要跳入并自行运行此示例，请克隆源代码，该源代码可在 [JavaScript SDK 示例目录中找到](https://github.com/dapr/js-sdk/tree/master/examples/http/actor-parking-sensor)。
 
-## Actor Interface
-The actor interface defines the contract that is shared between the actor implementation and the clients calling the actor. In the example below, we have created an interace for a parking garage sensor. Each sensor has 2 methods: `carEnter` and `carLeave`, which defines the state of the parking space:
+## Actor 接口
+该接口定义了 actor 契约，该契约在 actor 实现和调用 actor 的客户端之间共享。 在下面的示例中，我们为停车场传感器创建了交互 每个传感器有2种方法： `carEnter` 和 `carLeave`，它定义了停车位的状态：
 
 ```javascript
 export default interface ParkingSensorInterface {
@@ -33,8 +33,8 @@ export default interface ParkingSensorInterface {
 }
 ```
 
-## Actor Implementation
-An actor implementation defines a class by extending the base type `AbstractActor` and implements the actor interface. The following code describes what an actor implmentation consists of by implementing the methods defined in the `ParkingSensorInterface`. It also defines a few extra helper methods:
+## Actor 实现
+执行组件实现通过扩展基类型 ` AbstractActor ` 来定义类，并实现执行组件接口。 下面的代码通过实现 ` ParkingSensorInterface `中定义的方法，描述了执行组件的实现所包含的内容。 它还定义了一些额外的帮助器方法：
 
 ```javascript
 import { AbstractActor } from "dapr-client";
@@ -59,8 +59,8 @@ export default class ParkingSensorImpl extends AbstractActor implements ParkingS
 }
 ```
 
-## Registering Actors
-Initialize and register your actors by using the DaprServer package:
+## 注册 Actor
+使用 DaprServer 软件包初始化并注册您的 actors ：
 
 ```javascript
 import { DaprServer } from "dapr-server";
@@ -75,8 +75,8 @@ async function start() {
 }
 ```
 
-## Invoking Actors
-After Actors are registered, use the DaprClient to invoke methods on an actor. The client will call the actor methods defined in the actor interface.
+## 调用 Actor
+注册Actor后，使用DaprClient在Actor上调用方法。 该客户端将调用在 actor 接口文件中定义的方法。
 
 ```javascript
 import { DaprClient, DaprServer } from "dapr-client";
@@ -95,7 +95,7 @@ async function start() {
 }
 ```
 
-## Saving and Getting State
+## 保存和获取状态
 
 ```javascript
 import { DaprClient, DaprServer } from "dapr-client";
@@ -134,14 +134,14 @@ async function start() {
 ...
 ```
 
-## Actor Timers and Reminders
-The JS SDK supports actors that can schedule periodic work on themselves by registering either timers or reminders. The main difference between timers and reminders is that the Dapr actor runtime is not retaining any information about timers after deactivation, while persisting the information about reminders using the Dapr actor state provider.
+## Actor timer 和 reminder
+Actor 可以通过注册 timer 或 reminder 来安排自己的定期工作。 Timers 与 reminders 主要的区别在于，Dapr actor 运行时在停用后不保留任何有关 timer 的信息，而使用 Dapr actor 状态提供程序持久化有关 reminder 的信息。
 
 这种区别允许用户在轻量级但无状态的timer和需要更多资源但有状态的reminder之间进行权衡。
 
-The scheduling interface of timers and reminders is identical. For an more in-depth look at the scheduling configurations see the [actors timers and reminders docs]({{< ref "howto-actors.md#actor-timers-and-reminders" >}}).
+Timers 和 reminders 的调度接口定义是完全相同的。 有关调度配置的更深入了解，请参阅 [actors timers 和 reminders 的文档]({{< ref "howto-actors.md#actor-timers-and-reminders" >}})。
 
-### Actor Timers
+### Actor 计时器
 ```javascript
 import { DaprClient, DaprServer } from "dapr-client";
 import ParkingSensorImpl from "./ParkingSensorImpl";
@@ -166,7 +166,7 @@ async function start()
 }
 ```
 
-### Actor Reminders
+### Actor reminder
 ```javascript
 import { DaprClient, DaprServer } from "dapr-client";
 import ParkingSensorImpl from "./ParkingSensorImpl";
@@ -192,4 +192,4 @@ async function start()
 }
 ```
 
-- For a full guide on actors visit [How-To: Use virtual actors in Dapr]({{< ref howto-actors.md >}}).
+- 有关 Actor 的完整指南，请访问 [操作方法：在 Dapr 中使用 Actor ]({{< ref howto-actors.md >}})。
