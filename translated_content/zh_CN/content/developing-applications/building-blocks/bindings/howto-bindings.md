@@ -8,7 +8,8 @@ weight: 300
 
 使用绑定，可以调用外部资源，而无需绑定到特定的 SDK 或库。 有关显示输出绑定的完整示例，请访问此 [链接](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
-观看如何使用双向输出绑定的 [视频](https://www.bilibili.com/video/BV1EA411W71L?p=3&t=1960) 。 <iframe width="560" height="315" src="https://www.youtube.com/embed/ysklxm81MTs?start=1960" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+观看如何使用双向输出绑定的 [视频](https://www.bilibili.com/video/BV1EA411W71L?p=3&t=1960) 。
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ysklxm81MTs?start=1960" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ## 1. 创建绑定
