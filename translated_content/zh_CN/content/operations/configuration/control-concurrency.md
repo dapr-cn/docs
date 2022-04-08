@@ -12,7 +12,8 @@ description: "控制同时又多少个请求和实现可以同时调用你的应
 
 *Note that rate limiting per second can be achieved by using the **middleware.http.ratelimit** middleware. However, there is an imporant difference between the two approaches. The rate limit middlware is time bound and limits the number of requests per second, while the `app-max-concurrency` flag specifies the number of concurrent requests (and events) at any point of time. See [Rate limit middleware]({{< ref middleware-rate-limit.md >}}). * However, there is an imporant difference between the two approaches. The rate limit middlware is time bound and limits the number of requests per second, while the `app-max-concurrency` flag specifies the number of concurrent requests (and events) at any point of time. See [Rate limit middleware]({{< ref middleware-rate-limit.md >}}). *
 
-Watch this [video](https://youtu.be/yRI5g6o_jp8?t=1710) on how to control concurrency and rate limiting ". <iframe width="764" height="430" src="https://www.youtube.com/embed/yRI5g6o_jp8?t=1710" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+Watch this [video](https://youtu.be/yRI5g6o_jp8?t=1710) on how to control concurrency and rate limiting ".
+<iframe width="764" height="430" src="https://www.youtube.com/embed/yRI5g6o_jp8?t=1710" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 设置 app-max-concurrency
 
