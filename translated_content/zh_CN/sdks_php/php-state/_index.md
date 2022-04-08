@@ -7,7 +7,7 @@ description: 使用方式
 no_list: true
 ---
 
-Dapr 提供了一个很好的模块化方法来管理您的应用程序中的状态。 The best way to learn the basics is to visit [the howto]({{< ref howto-get-save-state.md >}}).
+Dapr 提供了一个很好的模块化方法来管理您的应用程序中的状态。 学习基础知识的最佳方法是访问 [howto]({{< ref howto-get-save-state.md >}})。
 
 ## Metadata
 
@@ -20,7 +20,7 @@ $app->run(
         $stateManager->save_state('statestore', new \Dapr\State\StateItem('key', 'value', metadata: ['port' => '112'])));
 ```
 
-This is an example of how you might pass the port metadata to [Cassandra]({{< ref setup-cassandra.md >}}).
+这是如何将端口元数据传递给 [cassandra]({{< ref setup-cassandra.md >}}) 的示例。
 
 每个状态操作都允许传递元数据。
 

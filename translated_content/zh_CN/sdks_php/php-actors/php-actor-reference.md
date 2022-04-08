@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "参考：actor"
-linkTitle: "Production Reference"
+linkTitle: "生产参考"
 weight: 1000
 description: 在生产中使用 PHP actor
 no_list: true

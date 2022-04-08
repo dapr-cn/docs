@@ -252,7 +252,9 @@ kubectl rollout restart deploy/myapp
 You will experience potential downtime due to mismatching certificates until all deployments have successfully been restarted (and hence loaded the new Dapr certificates).
 
 ### Kubernetes 视频演示
-观看此视频，了解如何在 Kubernetes 上更新 mTLS 证书 <iframe width="1280" height="720" src="https://www.youtube.com/embed/_U9wJqq-H1g" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+观看此视频，了解如何在 Kubernetes 上更新 mTLS 证书
+
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/_U9wJqq-H1g" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 自托管
 ### 运行控制平面 Sentry 服务
@@ -395,4 +397,6 @@ Copy `ca.crt`, `issuer.crt` and `issuer.key` to the filesystem path of every con
 *Note: If you signed the cert root with a different private key, restart the Dapr instances.*
 
 ## Community call video on certificate rotation
-Watch this video on how to perform certificate rotation if your certicates are expiring. <iframe width="1280" height="720" src="https://www.youtube.com/watch?v=Hkcx9kBDrAc" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+Watch this video on how to perform certificate rotation if your certicates are expiring.
+
+<iframe width="1280" height="720" src="https://www.youtube.com/watch?v=Hkcx9kBDrAc" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
