@@ -192,4 +192,5 @@ Dapr 默认启用追踪和度量。 *建议*在生产环境中为您的应用程
 ## 最佳实践
 观看此视频，深入了解使用 Kubernetes 中在生产环境中运行 Dapr 的最佳实践
 
-<div class="embed-responsive embed-responsive-16by9"> <iframe width="360" height="315" src="https://www.youtube.com/embed/_U9wJqq-H1g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+<div class="embed-responsive embed-responsive-16by9">
+<iframe width="360" height="315" src="https://www.youtube.com/embed/_U9wJqq-H1g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

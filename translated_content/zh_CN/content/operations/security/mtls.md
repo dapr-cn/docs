@@ -169,7 +169,9 @@ kubectl edit secret dapr-trust-bundle -n <DAPR_NAMESPACE>
 kubectl rollout restart deploy/myapp
 ```
 ### Kubernetes 视频演示
-观看此视频，了解如何在 Kubernetes 上更新 mTLS 证书 <iframe width="1280" height="720" src="https://www.youtube.com/embed/_U9wJqq-H1g" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen mark="crwd-mark"></iframe>
+观看此视频，了解如何在 Kubernetes 上更新 mTLS 证书
+
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/_U9wJqq-H1g" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 自托管
 ### 运行控制平面 Sentry 服务
