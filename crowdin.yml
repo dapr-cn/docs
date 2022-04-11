@@ -209,20 +209,28 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/sdks/sdk-serialization.md
     - source: /content/content/developing-applications/sdks/_index.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/sdks/_index.md
-    - source: /content/content/getting-started/configure-state-pubsub.md
-      translation: /translated_content/%locale_with_underscore%/content/getting-started/configure-state-pubsub.md
     - source: /content/content/getting-started/get-started-api.md
       translation: /translated_content/%locale_with_underscore%/content/getting-started/get-started-api.md
-    - source: /content/content/getting-started/get-started-component.md
-      translation: /translated_content/%locale_with_underscore%/content/getting-started/get-started-component.md
     - source: /content/content/getting-started/install-dapr-cli.md
       translation: /translated_content/%locale_with_underscore%/content/getting-started/install-dapr-cli.md
     - source: /content/content/getting-started/install-dapr-selfhost.md
       translation: /translated_content/%locale_with_underscore%/content/getting-started/install-dapr-selfhost.md
-    - source: /content/content/getting-started/quickstarts.md
-      translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts.md
     - source: /content/content/getting-started/_index.md
       translation: /translated_content/%locale_with_underscore%/content/getting-started/_index.md
+    - source: /content/content/getting-started/quickstarts/pubsub-quickstart.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts/pubsub-quickstart.md
+    - source: /content/content/getting-started/quickstarts/serviceinvocation-quickstart.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts/serviceinvocation-quickstart.md
+    - source: /content/content/getting-started/quickstarts/statemanagement-quickstart.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts/statemanagement-quickstart.md
+    - source: /content/content/getting-started/quickstarts/_index.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts/_index.md
+    - source: /content/content/getting-started/tutorials/configure-state-pubsub.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/tutorials/configure-state-pubsub.md
+    - source: /content/content/getting-started/tutorials/get-started-component.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/tutorials/get-started-component.md
+    - source: /content/content/getting-started/tutorials/_index.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/tutorials/_index.md
     - source: /content/content/operations/_index.md
       translation: /translated_content/%locale_with_underscore%/content/operations/_index.md
     - source: /content/content/operations/components/certification-lifecycle.md
@@ -253,6 +261,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/operations/configuration/control-concurrency.md
     - source: /content/content/operations/configuration/grpc.md
       translation: /translated_content/%locale_with_underscore%/content/operations/configuration/grpc.md
+    - source: /content/content/operations/configuration/increase-read-buffer-size.md
+      translation: /translated_content/%locale_with_underscore%/content/operations/configuration/increase-read-buffer-size.md
     - source: /content/content/operations/configuration/increase-request-size.md
       translation: /translated_content/%locale_with_underscore%/content/operations/configuration/increase-request-size.md
     - source: /content/content/operations/configuration/invoke-allowlist.md
