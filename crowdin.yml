@@ -515,12 +515,6 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/roadmap/_index.md
     - source: /content/contributing/dotnet-contributing.md
       translation: /translated_content/%locale_with_underscore%/contributing/dotnet-contributing.md
-    - source: /content/contributing/go-contributing.md
-      translation: /translated_content/%locale_with_underscore%/contributing/go-contributing.md
-    - source: /content/contributing/java-contributing.md
-      translation: /translated_content/%locale_with_underscore%/contributing/java-contributing.md
-    - source: /content/contributing/js-contributing.md
-      translation: /translated_content/%locale_with_underscore%/contributing/js-contributing.md
     - source: /content/contributing/python-contributing.md
       translation: /translated_content/%locale_with_underscore%/contributing/python-contributing.md
     - source: /content/sdks_dotnet/_index.md
@@ -553,24 +547,6 @@ files:
       translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-troubleshooting/dotnet-troubleshooting-pubsub.md
     - source: /content/sdks_dotnet/dotnet-troubleshooting/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-troubleshooting/_index.md
-    - source: /content/sdks_go/_index.md
-      translation: /translated_content/%locale_with_underscore%/sdks_go/_index.md
-    - source: /content/sdks_go/go-client/_index.md
-      translation: /translated_content/%locale_with_underscore%/sdks_go/go-client/_index.md
-    - source: /content/sdks_go/go-service/grpc-service.md
-      translation: /translated_content/%locale_with_underscore%/sdks_go/go-service/grpc-service.md
-    - source: /content/sdks_go/go-service/http-service.md
-      translation: /translated_content/%locale_with_underscore%/sdks_go/go-service/http-service.md
-    - source: /content/sdks_go/go-service/_index.md
-      translation: /translated_content/%locale_with_underscore%/sdks_go/go-service/_index.md
-    - source: /content/sdks_java/_index.md
-      translation: /translated_content/%locale_with_underscore%/sdks_java/_index.md
-    - source: /content/sdks_js/_index.md
-      translation: /translated_content/%locale_with_underscore%/sdks_js/_index.md
-    - source: /content/sdks_js/js-actors/_index.md
-      translation: /translated_content/%locale_with_underscore%/sdks_js/js-actors/_index.md
-    - source: /content/sdks_js/js-client/_index.md
-      translation: /translated_content/%locale_with_underscore%/sdks_js/js-client/_index.md
     - source: /content/sdks_php/php-serialization.md
       translation: /translated_content/%locale_with_underscore%/sdks_php/php-serialization.md
     - source: /content/sdks_php/_index.md
