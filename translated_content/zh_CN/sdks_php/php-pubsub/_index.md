@@ -20,7 +20,7 @@ $app->post('/publish', function(\DI\FactoryInterface $factory) {
 });
 ```
 
-For more information about publish/subscribe, check out [the howto]({{< ref howto-publish-subscribe.md >}}).
+有关发布/订阅的详细信息，请查看[操作方法]({{< ref howto-publish-subscribe.md >}})。
 
 ## 数据内容类型
 

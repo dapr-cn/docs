@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "JavaScript SDK for Actor"
 linkTitle: "Actors"
 weight: 1000

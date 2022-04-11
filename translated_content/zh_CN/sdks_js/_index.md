@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "JavaScript SDK"
 linkTitle: "JavaScript"
 weight: 1000

@@ -30,7 +30,7 @@ MyActor --- MyActor.Interfaces
 
 * **Actor服务项目 (\MyActor\MyActorService)。** 该项目实现了Asp.Net Core web service，用于托管actor。 它包含了actor的实现，MyActor.cs。 Actor的实现是一个继承了基类Actor并且实现了Myactor.Interfaces项目中定义的接口的类。 Actor还必须提供接受一个ActorService实例和ActorId的构造函数，并将他们传递给基类。
 
-* **The actor client project(\MyActor\MyActorClient)** This project contains the implementation of the actor client which calls MyActor's method defined in Actor Interfaces.
+* **Actor 客户端项目(\MyActor\MyActorClient)** 这个项目包含actor客户端的实现，它调用Actor接口中定义的MyActor的方法。
 
 ## 第 0 步：准备
 

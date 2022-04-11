@@ -1,5 +1,5 @@
 ---
-type: 文档
+type: docs
 title: "JavaScript 客户端 SDK"
 linkTitle: "客户端"
 weight: 500
@@ -183,7 +183,7 @@ async function start() {
   const topic = "topic-a";
   const message = { hello: "world" }
 
-  // 发布消息到主题
+  // Publish Message to Topic
   const response = await client.pubsub.publish(pubSubName, topic, message);
 }
 ```
@@ -204,7 +204,7 @@ async function start() {
   const pubSubName = "my-pubsub-name";
   const topic = "topic-a";
 
-  // 订阅主题
+  // Configure Subscriber for a Topic
   await server.pubsub.subscribe(pubSubName, topic, async (data: any) => console.log(`Got Data: ${JSON.stringify(data)}`));
 
   await server.start();
@@ -271,10 +271,10 @@ async function start() {
   const secretStoreName = "my-secret-store";
   const secretKey = "secret-key";
 
-  // 从密钥存储库中取回其中一个密钥
+  // Retrieve a single secret from secret store
   const response = await client.secret.get(secretStoreName, secretKey);
 
-  // 从密钥存储库中取回其所有密钥
+  // Retrieve all secrets from secret store
   const response = await client.secret.getBulk(secretStoreName);
 }
 ```
