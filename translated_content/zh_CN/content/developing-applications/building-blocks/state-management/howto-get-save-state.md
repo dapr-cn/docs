@@ -323,7 +323,7 @@ curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value
 curl http://localhost:3601/v1.0/state/statestore/order_1
 ```
 
-Restart your sidecar and try retrieving state again to observe that state persists separately from the app.
+你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 {{% /codetab %}}
 
 {{% codetab %}}

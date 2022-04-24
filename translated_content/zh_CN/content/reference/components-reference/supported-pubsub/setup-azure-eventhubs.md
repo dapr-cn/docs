@@ -89,7 +89,7 @@ Entity management is only possible when using [Azure Authentication]({{< ref "au
 
 Note: Dapr passes the name of the Consumer group to the EventHub and this is not supplied in the metadata.
 
-## Subscribing to Azure IoT Hub Events
+## 订阅 Azure IoT Hub Events
 
 Azure IoT Hub 提供了一个与 [Event Hubs兼容的终结点](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-read-builtin#read-from-the-built-in-endpoint)，因此 Azure Event Hubs pubsub 组件也可用于订阅 Azure IoT Hub 的事件。
 
@@ -104,7 +104,7 @@ Azure IoT Hub 提供了一个与 [Event Hubs兼容的终结点](https://docs.mic
 | `iothub-enqueuedtime`                  | RFC3339 格式的 **enqueuedTime** 表示 IoT Hub 已收到设备到云的消息。                                                                                                                     |
 | `message-id`                           | 用户可设置的 AMQP **messageId**。                                                                                                                                              |
 
-For example, the headers of a delivered HTTP subscription message would contain:
+例如，已发送HTTP订阅消息的头部将包含：
 
 ```nodejs
 {

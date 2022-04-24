@@ -43,7 +43,7 @@ spec:
 | redisUsername         | 否  | 输出   | Redis 主机的用户名。 默认为空. 确保您的 redis 服务器版本为 6 或更高版本，并且已正确创建 acl 规则。                                                             | `"username"`              |
 | enableTLS             | 否  | 输出   | If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS. 默认值为 `"false"` | `"true"`, `"false"`       |
 | failover              | N  | 输出   | 已启用故障转移配置的属性。 需要设置 sentinalMasterName。 默认值为 `"false"`                                                                     | `"true"`, `"false"`       |
-| sentinelMasterName    | N  | 输出   | 哨兵主名称。 See [Redis Sentinel Documentation](https://redis.io/docs/manual/sentinel/)                                         | `""`,  `"127.0.0.1:6379"` |
+| sentinelMasterName    | N  | 输出   | 哨兵主名称。 请参阅 [Redis Sentinel 文档](https://redis.io/docs/manual/sentinel/)                                                    | `""`,  `"127.0.0.1:6379"` |
 | redeliverInterval     | N  | 输出   | 检查待处理消息到重发的间隔。 默认为 `"60s"`. `"0"` 禁用重发。                                                                                   | `"30s"`                   |
 | processingTimeout     | N  | 输出   | 在尝试重新发送消息之前必须等待的时间。 默认为 `"15s"`。 `"0"` 禁用重发。                                                                              | `"30s"`                   |
 | redisType             | N  | 输出   | Redis 的类型。 有两个有效的值，一个是 `"node"` 用于单节点模式，另一个是 `"cluster"` 用于 redis 集群模式。 默认为 `"node"`。                                     | `"cluster"`               |
@@ -51,15 +51,15 @@ spec:
 | redisMaxRetries       | N  | 输出   | 放弃前重试命令的最大次数。 默认值为不重试失败的命令。                                                                                               | `"5"`                     |
 | redisMinRetryInterval | N  | 输出   | 每次重试之间 redis 命令的最小回退时间。 默认值为 `"8ms"`;  `"-1"` 禁用回退。                                                                       | `"8ms"`                   |
 | redisMaxRetryInterval | N  | 输出   | 每次重试之间 redis 命令的最大回退时间。 默认值为 `"512ms"`;`"-1"` 禁用回退。                                                                       | `"5s"`                    |
-| dialTimeout           | N  | 输出   | 建立新连接的拨号超时。 默认为 `"5s"`。                                                                                                   | `"5s"`                    |
-| readTimeout           | N  | 输出   | 套接字读取超时。 如果达到，redis命令将以超时的方式失败，而不是阻塞。 默认为 `"3s"`, `"-1"` 表示没有超时。                                                          | `"3s"`                    |
-| writeTimeout          | N  | 输出   | 套接字写入超时。 如果达到，redis命令将以超时的方式失败，而不是阻塞。 默认值为 readTimeout。                                                                   | `"3s"`                    |
-| poolSize              | N  | 输出   | 最大套接字连接数。 默认是每个CPU有10个连接，由 runtime.NumCPU 所述。                                                                             | `"20"`                    |
-| poolTimeout           | N  | 输出   | 如果所有连接都处于繁忙状态，客户端等待连接时间，超时后返回错误。 默认值为 readTimeout + 1 秒。                                                                  | `"5s"`                    |
-| maxConnAge            | N  | 输出   | 客户端退出（关闭）连接时的连接期限。 默认值是不关闭过期的连接。                                                                                          | `"30m"`                   |
-| minIdleConns          | N  | 输出   | 保持开放的最小空闲连接数，以避免创建新连接带来的性能下降。 默认值为 `"0"`.                                                                                 | `"2"`                     |
-| idleCheckFrequency    | N  | 输出   | 空闲连接后的空闲检查频率。 默认值为 `"1m"`。 `"-1"` 禁用空闲连接回收。                                                                               | `"-1"`                    |
-| idleTimeout           | N  | 输出   | 客户端关闭空闲连接的时间量。 应小于服务器的超时。 默认值为 `"5m"`。 `"-1"` 禁用空闲超时检查。                                                                   | `"10m"`                   |
+| dialTimeout           | 否  | 输出   | 建立新连接的拨号超时。 默认为 `"5s"`。                                                                                                   | `"5s"`                    |
+| readTimeout           | 否  | 输出   | 套接字读取超时。 如果达到，redis命令将以超时的方式失败，而不是阻塞。 默认为 `"3s"`, `"-1"` 表示没有超时。                                                          | `"3s"`                    |
+| writeTimeout          | 否  | 输出   | 套接字写入超时。 如果达到，redis命令将以超时的方式失败，而不是阻塞。 默认值为 readTimeout。                                                                   | `"3s"`                    |
+| poolSize              | 否  | 输出   | 最大套接字连接数。 默认是每个CPU有10个连接，由 runtime.NumCPU 所述。                                                                             | `"20"`                    |
+| poolTimeout           | 否  | 输出   | 如果所有连接都处于繁忙状态，客户端等待连接时间，超时后返回错误。 默认值为 readTimeout + 1 秒。                                                                  | `"5s"`                    |
+| maxConnAge            | 否  | 输出   | 客户端退出（关闭）连接时的连接期限。 默认值是不关闭过期的连接。                                                                                          | `"30m"`                   |
+| minIdleConns          | 否  | 输出   | 保持开放的最小空闲连接数，以避免创建新连接带来的性能下降。 默认值为 `"0"`.                                                                                 | `"2"`                     |
+| idleCheckFrequency    | 否  | 输出   | 空闲连接后的空闲检查频率。 默认值为 `"1m"`。 `"-1"` 禁用空闲连接回收。                                                                               | `"-1"`                    |
+| idleTimeout           | 否  | 输出   | 客户端关闭空闲连接的时间量。 应小于服务器的超时。 默认值为 `"5m"`。 `"-1"` 禁用空闲超时检查。                                                                   | `"10m"`                   |
 
 
 ## 绑定支持

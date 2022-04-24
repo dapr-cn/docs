@@ -22,7 +22,7 @@ Dapr 绑定允许您 :
 
 以下的示例简述了一个订单处理程序。 在示例中，有一个订单处理服务，它具有 Dapr sidecar。 checkout 服务使用 Dapr 通过输入绑定触发应用程序。
 
-<img src="/images/building-block-input-binding-example.png" width=1000 alt="Diagram showing bindings of example service">
+<img src="/images/building-block-input-binding-example.png" width=1000 alt="显示示例服务绑定的图示">
 
 ## 1. 创建绑定
 

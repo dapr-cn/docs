@@ -6,7 +6,7 @@ weight: 20000
 description: 如何使用 Dapr Python gRPC 扩展包启动和运行
 ---
 
-Dapr Python SDK 提供了一个内置的 gRPC 服务器扩展模块， `dapr.ext.grpc`，用于创建 Dapr 服务。
+Dapr Python SDK 提供了一个内置的 gRPC 服务器扩展模块 `dapr.ext.grpc`，用于创建 Dapr 服务。
 
 ## 安装
 
@@ -22,7 +22,7 @@ pip install dapr-ext-grpc
 
 {{% codetab %}}
 {{% alert title="Note" color="warning" %}}
-开发包包含的功能和行为将兼容此前发行的 Dapr 运行时。 在安装 dapr-dev 包之前，请务必卸载以前任意稳定版本的 dapr-ext-fastapi 的 Python SDK 扩展包。
+开发包包含的功能和行为将兼容此前发行的 Dapr 运行时。 在安装 dapr-dev 包之前，请务必卸载以前任意稳定版本的 Python SDK 扩展包。
 {{% /alert %}}
 
 ```bash
@@ -57,7 +57,7 @@ def mymethod(request: InvokeMethodRequest) -> InvokeMethodResponse:
 app.run(50051)
 ```
 
-完整的示例可以[在这里](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-simple)找到。
+完整的示例可以在 [这里](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-simple) 找到。
 
 ### 订阅主题
 
@@ -81,7 +81,7 @@ def mytopic_important(event: v1.Event) -> None:
 app.run(50051)
 ```
 
-完整的示例可以[在这里](https://github.com/dapr/python-sdk/blob/v1.0.0rc2/examples/pubsub-simple/subscriber.py)找到。
+完整的示例可以在 [这里](https://github.com/dapr/python-sdk/blob/v1.0.0rc2/examples/pubsub-simple/subscriber.py) 找到。
 
 ### 设置输入绑定触发器
 
@@ -97,7 +97,7 @@ def binding(request: BindingRequest):
 app.run(50051)
 ```
 
-完整的示例可以[在这里](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-binding)找到。
+完整的示例可以在 [这里](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-binding) 找到。
 
 ## 相关链接
 - [PyPi](https://pypi.org/project/dapr-ext-grpc/)

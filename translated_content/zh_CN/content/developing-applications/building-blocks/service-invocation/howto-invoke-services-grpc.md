@@ -305,7 +305,7 @@ ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server.production")
 
 * [服务调用概述]({{< ref service-invocation-overview.md >}})
 * [服务调用 API 规范]({{< ref service_invocation_api.md >}})
-* [gRPC proxying community call video](https://youtu.be/B_vkXqptpXY?t=70)
+* [gRPC 代理社区会议视频](https://youtu.be/B_vkXqptpXY?t=70)
 
 ## 社区示例
 观看此 [视频](https://youtu.be/B_vkXqptpXY?t=69) ，了解如何使用 Dapr 的 gRPC 代理功能：

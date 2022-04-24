@@ -27,13 +27,13 @@ To figure the Dapr OAuth middleware, you'll need to collect the following inform
 * Client ID (see [here](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
 * Client secret (see [here](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
 * Scopes (see [here](https://oauth.net/2/scope/))
-* Authorization URL
-* Token URL
+* 授权网址
+* 令牌网址
 
-Authorization/Token URLs of some of the popular authorization servers:
+一些流行的授权服务器的授权/令牌 URL。
 
 <!-- IGNORE_LINKS -->
-| 服务器       | Authorization URL                                             | Token URL                                                                                 |
+| 服务器       | 授权网址                                                          | 令牌网址                                                                                      |
 | --------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Azure AAD | <https://login.microsoftonline.com/{tenant}/oauth2/authorize> | <https://login.microsoftonline.com/{tenant}/oauth2/token>                                 |
 | GitHub    | <https://github.com/login/oauth/authorize>                    | <https://github.com/login/oauth/access_token>                                             |
@@ -45,7 +45,7 @@ Authorization/Token URLs of some of the popular authorization servers:
 
 ### 定义授权代码授予组件
 
-An OAuth middleware (Authorization Code) is defined by a component:
+OAuth 中间件（授权代码）由组件定义：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -81,7 +81,7 @@ spec:
 
 ### 为授权代码授予定义自定义管道
 
-To use the OAuth middleware (Authorization Code), you should create a [custom pipeline]({{< ref "middleware.md" >}}) using [Dapr configuration]({{< ref "configuration-overview" >}}), as shown in the following sample:
+要使用 OAuth 中间件（授权代码），你应该创建一个 [自定义管道]({{< ref "middleware.md" >}}) 使用 [Dapr配置]({{< ref "configuration-overview" >}})，如以下样本所示：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -98,7 +98,7 @@ spec:
 
 ### 定义客户端凭据授予组件
 
-An OAuth (Client Credentials) middleware is defined by a component:
+OAuth（客户端凭据）中间件由组件定义：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -138,7 +138,7 @@ spec:
 
 ### 为客户端凭据授予定义自定义管道
 
-To use the OAuth middleware (Client Credentials), you should create a [custom pipeline]({{< ref "middleware.md" >}}) using [Dapr configuration]({{< ref "configuration-overview.md" >}}), as shown in the following sample:
+要使用 OAuth 中间件（授权代码），你应该创建一个 [自定义管道]({{< ref "middleware.md" >}}) 使用 [Dapr 配置]({{< ref "configuration-overview.md" >}})，如以下样本所示：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -155,7 +155,7 @@ spec:
 
 ## 应用配置
 
-To apply the above configuration (regardless of grant type) to your Dapr sidecar, add a `dapr.io/config` annotation to your pod spec:
+要将上述配置（无论授予类型如何） 应用于 Dapr sidecar，请在 pod 规范中添加 `dapr.io/config` 注解：
 
 ```yaml
 apiVersion: apps/v1
@@ -177,8 +177,8 @@ spec:
 
 ### 授权码
 
-Once everything is in place, whenever a client tries to invoke an API method through Dapr sidecar (such as calling the *v1.0/invoke/* endpoint), it will be redirected to the authorization's consent page if an access token is not found. Otherwise, the access token is written to the **authHeaderName** header and made available to the app code.
+一旦一切就绪，每当客户试图通过 Dapr sidecar 调用 API 方法（例如调用 *v1.0/invoke/* 端点），如果没有找到访问令牌，它将被重定向到授权的同意页。 否则，访问令牌将被写入 **authHeaderName** 头，并提供给应用程序代码使用。
 
 ### 客户端凭据
 
-Once everything is in place, whenever a client tries to invoke an API method through Dapr sidecar (such as calling the *v1.0/invoke/* endpoint), it will retrieve a new access token if an existing valid one is not found. The access token is written to the **headerName** header and made available to the app code. In that way the app can forward the token in the authorization header in calls towards the external API requesting that token.
+一旦一切就绪，每当客户端试图通过 Dapr sidecar 调用 API 方法（比如调用 *v1.0/invoke/* 端点）， 如果没有找到现有的有效访问令牌，它将检索到一个新的访问令牌。 访问令牌被写入 **headerName** 头，并提供给应用程序代码使用。 这样，应用就可以在调用中将授权标头中的令牌转发给请求该令牌的外部 API。

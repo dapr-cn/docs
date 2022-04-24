@@ -49,17 +49,17 @@ Dapr之所以选择OCC，是因为在不少应用中，数据更新冲突都是�
 阅读[API参考]({{< ref state_api.md >}})，了解如何设置并发选项。
 
 ### 一致性
-Dapr supports both **strong consistency** and **eventual consistency**, with eventual consistency as the default behavior.
+Dapr同时支持**强一致性**和**最终一致性**，其中最终一致性为默认行为。
 
-When strong consistency is used, Dapr waits for all replicas (or designated quorums) to acknowledge before it acknowledges a write request. When eventual consistency is used, Dapr returns as soon as the write request is accepted by the underlying data store, even if this is a single replica.
+当使用强一致性时，Dapr会等待所有副本（或指定的quorums）确认后才会确认写入请求。 当最终使用一致性时，Dapr 将在基本数据存储接受写入请求后立即返回，即使这是单个副本。
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how to set consistency options.
+阅读[API参考]({{< ref state_api.md >}})，了解如何设置一致性选项。
 
 ### 批量操作
 
-Dapr 支持两种类型的批量操作 - **bulk** 或 **multi**。 You can group several requests of the same type into a bulk (or a batch). Dapr将批量操作的请求作为单个请求提交给底层数据存储。 In other words, bulk operations are not transactional. 另一方面，您可以将不同类型的请求分组为多操作，作为原子事务处理。
+Dapr 支持两种类型的批量操作 - **bulk** 或 **multi**。 您可以将几个相同类型的请求分组成批量(或批次)。 Dapr将批量操作的请求作为单个请求提交给底层数据存储。 换句话说，批量（bulk）操作不是事务性的。 另一方面，您可以将不同类型的请求分组为多操作，作为原子事务处理。
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how use bulk and multi options.
+阅读 [API 参考]({{< ref state_api.md >}}) 以了解如何使用批量（bulk）选项和批次（multi）选项。
 
 ### 状态加密
 Dapr支持客户端对应用程序状态的自动加密，并支持密钥轮换。 这在所有 Dapr 状态存储上都受支持。 有关详细信息，请阅读 [操作方法：加密应用程序状态]({{< ref howto-encrypt-state.md >}}) 主题。
@@ -67,8 +67,8 @@ Dapr支持客户端对应用程序状态的自动加密，并支持密钥轮换�
 ### 应用程序之间的共享状态
 在共享状态方面，不同的应用程序可能有不同的需求。 例如，在一个场景中，您可能想要封装某个应用程序中的所有状态，并让 Dapr 管理您的访问权限。 在不同的场景中，您可能需要两个在相同状态下工作的应用程序能够获得和保存相同的键值(keys)。 Dapr使状态能够被隔离到一个应用程序，在应用程序之间的状态存储中共享，或者让多个应用程序在不同的状态存储中共享状态。 有关更多详细信息，请阅读 [操作方法：在应用程序之间共享状态]({{< ref howto-share-state.md >}})
 
-### Actor state
-Transactional state stores can be used to store actor state. To specify which state store to be used for actors, specify value of property `actorStateStore` as `true` in the metadata section of the state store component. Actors state is stored with a specific scheme in transactional state stores, which allows for consistent querying. 只有一个单一的状态存储组件可以被用作所有角色的状态存储。 Read the [API reference]({{< ref state_api.md >}}) to learn more about state stores for actors and the [actors API reference]({{< ref actors_api.md >}})
+### Actor 状态
+事务性状态存储可用于存储 Actor 状态。 指定 Actor 要使用哪个状态存储， 在状态存储组件的元数据部分中指定属性 `actorStateStore` as `true` Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 Actor 状态与事务状态库中的具体计划一起储存，这样可以进行一致的查询。 只有一个单一的状态存储组件可以被用作所有角色的状态存储。 阅读 [API 参考]({{< ref state_api.md >}}) 以了解更多关于 Actor 中的状态存储 和 [Actor API 参考]({{< ref actors_api.md >}})
 
 ### 查询状态
 有两种方法来查询状态。
@@ -79,24 +79,24 @@ Transactional state stores can be used to store actor state. To specify which st
 查询API提供了一种查询在状态存储中使用状态管理保存的键/值数据的方法，而不考虑底层数据库或存储技术。 它是一个可选的状态管理API。 使用状态管理查询API，你可以对键/值数据进行过滤、排序和分页。 有关更多详细信息，请阅读 [操作方法：查询状态]({{< ref howto-state-query-api.md >}})。
 
 #### 直接查询状态存储
-Dapr saves and retrieves state values without any transformation. You can query and aggregate state directly from the [underlying state store]({{< ref query-state-store >}}). For example, to get all state keys associated with an application ID "myApp" in Redis, use:
+Dapr保存和检索状态值，而不进行任何转换。 您可以直接从 [基础状态存储]({{< ref query-state-store >}}) 中查询并聚合状态。 例如，要在 Redis 中获取与 app ID“myApp”相关的所有状态 key，可以使用:
 
 ```bash
 KEYS "myApp*"
 ```
 
 {{% alert title="Note on direct queries" color="primary" %}}
-Direct queries of the state store are not governed by Dapr concurrency control, since you are not calling through the Dapr runtime. What you see are snapshots of committed data which are acceptable for read-only queries across multiple actors, however writes should be done via the Dapr state management or actors APIs.
+对状态存储的直接查询不受 Dapr 并发控制，毕竟您没有通过 Dapr 运行时调用。 您看到的是提交数据的快照，对于跨多个 Actor 的只读查询是可以接受的，当然写操作应该通过 Dapr 状态管理或 Actor api 来执行。
 {{% /alert %}}
 
 ##### 查询 Actor 状态
-If the data store supports SQL queries, you can query an actor's state using SQL queries. For example use:
+如果数据存储支持 SQL 查询，您可以使用 SQL 查询 Actor 的状态。 例如使用：
 
 ```sql
 SELECT * FROM StateTable WHERE Id='<app-id>||<actor-type>||<actor-id>||<key>'
 ```
 
-You can also perform aggregate queries across actor instances, avoiding the common turn-based concurrency limitations of actor frameworks. For example, to calculate the average temperature of all thermometer actors, use:
+您还可以跨 Actor 实例执行聚合查询，避免 Actor 框架常见的基于回合的并发性限制。 例如，要计算所有温度计Actor的平均温度，使用:
 
 ```sql
 SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||temperature'
@@ -116,7 +116,7 @@ Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可
     * [指南：查询状态]({{< ref howto-state-query-api.md >}})
     * [指南：加密应用程序状态]({{< ref howto-encrypt-state.md >}})
     * [状态生存时间]({{< ref state-store-ttl.md >}})
-* Try out the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md) which shows how to use state management or try the samples in the [Dapr SDKs]({{< ref sdks >}})
+* 试试 [hello world 快速入门](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md) ，它会显示如何使用状态管理或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
 * [状态存储组件]({{< ref supported-state-stores.md >}}) 列表
 * 阅读 [状态管理 API 引用]({{< ref state_api.md >}})
 * 阅读 [Actor API 引用]({{< ref actors_api.md >}})

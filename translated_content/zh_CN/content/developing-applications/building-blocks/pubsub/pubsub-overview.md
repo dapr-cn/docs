@@ -93,7 +93,7 @@ Dapr 保证消息传递 at-least-once 语义。 这意味着，当应用程序�
 
 ### Topic 作用域（Topic scoping）
 
-默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅 topic，Dapr 提供了 topic 作用域限定。 This enables you to say which topics an application is allowed to publish and which topics an application is allowed to subscribe to. 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}}) 了解更多信息。
+默认情况下，支持Dapr发布/订阅组件的所有主题 (例如，Kafka、Redis、RabbitMQ) 都可用于配置该组件的每个应用程序。 为了限制哪个应用程序可以发布或订阅 topic，Dapr 提供了 topic 作用域限定。 这使您能够指出允许应用程序发布哪些主题以及允许应用程序订阅哪些主题。 查看 [发布/订阅主题范围]({{< ref pubsub-scopes.md >}}) 了解更多信息。
 
 ### 消息生存时间
 Dapr 可以在每个消息的基础上设置超时。 表示如果消息未从 Pub/Sub 组件读取，则消息将被丢弃。 这是为了防止未读消息的积累。 在队列中超过配置的 TTL 的消息就可以说它挂了。  查看 [发布/订阅 topic 限界]({{< ref pubsub-message-ttl.md >}}) 了解更多信息。
@@ -112,7 +112,7 @@ Dapr 可以在每个消息的基础上设置超时。 表示如果消息未从 P
 * 遵循这些指南：
     * [指南：发布消息并订阅主题]({{< ref howto-publish-subscribe.md >}})
     * [操作：配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
-* Try out the [Pub/Sub quickstart sample](https://github.com/dapr/quickstarts/tree/master/pub_sub)
+* 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub_sub)
 * 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
 * 了解 [消息存活时间（TTL）]({{< ref pubsub-message-ttl.md >}})
 * 学习 [不通过CloudEvent 进行 pubsub]({{< ref pubsub-raw.md >}})

@@ -98,7 +98,7 @@ Front-matter 应填写所有字段，包括类型、标题、链接标题、权�
 - `描述` 应该是 1-2 个句子，描述读者将在此文档中学习，完成或执行什么。
 
 根据 [styling conventions](#styling-conventions)，标题只能大写第一个字和专有名词，但 "How-To："除外。
-    - "Getting started with Dapr service invocation"
+    - “Dapr 服务调用入门”
     - "How-To: 设置本地 Redis 实例"
 
 ### 引用其他页面

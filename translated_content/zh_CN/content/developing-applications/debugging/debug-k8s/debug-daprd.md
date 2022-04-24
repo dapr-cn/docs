@@ -42,7 +42,7 @@ global:
 helm install dapr charts/dapr --namespace dapr-system --values values.yml --wait
 ```
 
-要启用 daprd 的调试模式，您需要在应用程序的部署文件中添加额外的注解 `dapr.io/enable-debug` 。 Let's use [quickstarts/hello-kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) as an example. 修改如下 'deploy/node.yaml'：
+要启用 daprd 的调试模式，您需要在应用程序的部署文件中添加额外的注解 `dapr.io/enable-debug` 。 让我们以 [quickstarts/hello-kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) 为例。 修改如下 'deploy/node.yaml'：
 
 ```diff
 diff --git a/hello-kubernetes/deploy/node.yaml b/hello-kubernetes/deploy/node.yaml
@@ -61,7 +61,7 @@ index 23185a6..6cdb0ae 100644
 
 `dapr.io/enable-debug` 注解将提示Dapr注入器将Dapr sidecar注入到调试模式。 您也可以使用注解 `dapr.io/debug-port`指定调试端口，否则默认端口将是“40000”。
 
-使用下面的命令来部署应用。 For the complete guide refer to the [Dapr Kubernetes Quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes):
+使用下面的命令来部署应用。 完整指南请参照 [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)。
 
 ```bash
 kubectl apply -f ./deploy/node.yaml

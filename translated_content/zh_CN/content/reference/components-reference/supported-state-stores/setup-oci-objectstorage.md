@@ -176,7 +176,7 @@ Note that expired state is not removed from the state store by this component. A
 
 OCI Object Storage state concurrency is achieved by using `ETag`s. Each object in OCI Object Storage is assigned a unique ETag when it is created or updated (aka replaced). When the `Set` and `Delete` requests for this state store specify the FirstWrite concurrency policy, then the request need to provide the actual ETag value for the state to be written or removed for the request to be successful.
 
-## Consistency
+## 一致性
 
 OCI Object Storage state does not support Transactions.
 

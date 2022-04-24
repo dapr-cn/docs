@@ -42,7 +42,7 @@ Dapr 控制平面和 sidecar 镜像来自公共的 [daprio Docker Hub](https://h
 
 ## 入门项
 
-You can see some examples [here](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) in the Kubernetes getting started quickstart.
+您可以 [在这里](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) 看到一些例子，在 Kubernetes 的入门示例中。
 
 ## 支持的版本
 只要 Kubernetes 符合 [Kubernetes Version Skew Policy](https://kubernetes.io/releases/version-skew-policy)，Dapr 就能被支持。

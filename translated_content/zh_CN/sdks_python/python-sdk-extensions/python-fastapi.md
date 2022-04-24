@@ -10,7 +10,7 @@ Dapr Python SDK 使用 `dapr-ext-fastapi` 模块与 FastAPI 集成
 
 ## 安装
 
-你可以通过下面的方式下载和安装 Dapr FastAPI 扩展模块：
+您可以通过下面的方式下载和安装 Dapr FastAPI 扩展模块：
 
 {{< tabs Stable Development>}}
 
@@ -50,7 +50,7 @@ def event_handler(event_data):
     print(event_data)
 ```
 
-### 创建 actor
+### 创建 Actor
 
 ```python
 from fastapi import FastAPI

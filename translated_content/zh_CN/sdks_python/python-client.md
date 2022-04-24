@@ -11,9 +11,9 @@ Dapr 客户端包允许您从 Python 应用程序中与其他 Dapr 应用程序�
 ## 前提
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- 安装[Python 3.7+](https://www.python.org/downloads/)
-- 安装[Dapr Python 模块]({{< ref "python#install-the0dapr-module" >}})
+- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
+- 安装 [Python 3.7+](https://www.python.org/downloads/)
+- 安装 [Dapr Python 模块]({{< ref "python#install-the0dapr-module" >}})
 
 ## 导入包
 
@@ -25,7 +25,7 @@ from dapr.clients import DaprClient
 
 ## 构建块
 
-Python SDK 允许你与所有的 [Dapr 构建块]({{< ref building-blocks >}})交互。
+Python SDK 允许你与所有的 [Dapr 构建块]({{< ref building-blocks >}}) 交互。
 
 ### 调用服务
 
@@ -41,10 +41,10 @@ with DaprClient() as d:
     resp = d.invoke_method('service-to-invoke', 'method-to-invoke', data='{"id":"100", "FirstName":"Value", "LastName":"Value"}', http_verb='post')
 ```
 
-- 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
+- 有关服务调用的完整指南，请访问 [如何调用服务]({{< ref howto-invoke-discover-services.md >}})。
 - 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/invoke-simple) ，了解代码样本和说明，尝试服务调用。
 
-### 保存 & 获取 应用程序状态
+### 保存和获取应用程序状态
 
 ```python
 from dapr.clients import DaprClient
@@ -60,7 +60,7 @@ with DaprClient() as d:
     d.delete_state(store_name="statestore", key="key1")
 ```
 
-- 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
+- 有关状态操作的完整列表，请访问 [如何获取和保存状态。]({{< ref howto-get-save-state.md >}})。
 - 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/state_store) ，了解代码样本和说明，以尝试使用状态管理。
 
 ### 查询应用状态（Alpha）
@@ -90,10 +90,10 @@ with DaprClient() as d:
         )
 ```
 
-- 有关状态存储查询选项的完整列表，请访问[操作方法：查询状态]({{< ref howto-state-query-api.md >}})。
+- 有关状态存储查询选项的完整列表，请访问 [如何查询状态]({{< ref howto-state-query-api.md >}})。
 - 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/state_store_query) ，了解代码样本和说明，以尝试使用状态管理。
 
-### 发布 & 订阅消息
+### 发布和订阅消息
 
 ##### 发布消息
 
@@ -129,8 +129,8 @@ def mytopic_important(event: v1.Event) -> None:
           ' content_type="{event.content_type}"',flush=True)
 ```
 
-- 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/pubsub-simple)以获取代码样本和说明，尝试使用发布/订阅
+- 有关状态操作的完整列表，请访问 [如何发布和订阅]({{< ref howto-publish-subscribe.md >}})。
+- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/pubsub-simple) 以获取代码样本和说明，尝试使用发布和订阅。
 
 ### 与输出绑定交互
 
@@ -141,8 +141,8 @@ with DaprClient() as d:
     resp = d.invoke_binding(name='kafkaBinding', operation='create', data='{"message":"Hello World"}')
 ```
 
-- 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
-- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/invoke-binding)以获取代码样本和说明，尝试输出绑定。
+- 有关输出绑定的完整指南，请访问 [如何使用绑定]({{< ref howto-bindings.md >}})。
+- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/invoke-binding) 以获取代码样本和说明，尝试输出绑定。
 
 ### 检索密钥
 
@@ -153,8 +153,8 @@ with DaprClient() as d:
     resp = d.get_secret(store_name='localsecretstore', key='secretKey')
 ```
 
-- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
-- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/secret_store)以获取代码样本和说明，以尝试检索秘密。
+- 有关密钥的完整指南，请访问 [如何检索密钥]({{< ref howto-secrets.md >}})。
+- 请访问 [Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/secret_store) 以获取代码样本和说明，以尝试检索秘密。
 
 ### 获取配置
 

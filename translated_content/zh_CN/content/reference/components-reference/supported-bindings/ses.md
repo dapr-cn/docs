@@ -51,7 +51,7 @@ spec:
 
 | 字段           | 必填 | 绑定支持 | 详情                                                                                     | 示例                  |
 | ------------ |:--:| ---- | -------------------------------------------------------------------------------------- | ------------------- |
-| region       | Y  | 输出   | The specific AWS region                                                                | `"eu-west-1"`       |
+| region       | Y  | 输出   | 指定的 AWS 区域（region）                                                                     | `"eu-west-1"`       |
 | accessKey    | Y  | 输出   | 要访问此资源的 AWS 访问密钥                                                                       | `"key"`             |
 | secretKey    | Y  | 输出   | 要访问此资源的 AWS 密钥访问 Key                                                                   | `"secretAccessKey"` |
 | sessionToken | 否  | 输出   | 要使用的 AWS 会话令牌                                                                          | `"sessionToken"`    |

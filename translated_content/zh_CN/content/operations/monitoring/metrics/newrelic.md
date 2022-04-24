@@ -30,7 +30,7 @@ New Relic 提供了 Prometheus OpenMetrics 集成。
 
 ## 查看指标
 
-![Dapr Metrics](/images/nr-metrics-1.png)
+![Dapr 指标](/images/nr-metrics-1.png)
 
 ![仪表盘](/images/nr-dashboard-dapr-metrics-1.png)
 

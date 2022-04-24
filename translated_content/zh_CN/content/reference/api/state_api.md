@@ -26,20 +26,20 @@ spec:
     value: <VALUE>
 ```
 
-| Setting         | 说明                                                                                     |
+| 设置              | 说明                                                                                     |
 | --------------- | -------------------------------------------------------------------------------------- |
 | `metadata.name` | The name of the state store.                                                           |
 | `spec/metadata` | An open key value pair metadata that allows a binding to define connection properties. |
 
 ## 关键方案
 
-Dapr state stores are key/value stores. To ensure data compatibility, Dapr requires these data stores follow a fixed key scheme. For general states, the key format is:
+Dapr 状态存储是键/值存储。 为了确保数据兼容性，Dapr 要求这些数据存储遵循固定的键方案。 对于常规状态，键格式为：
 
 ```
 <App ID>||<state key>
 ```
 
-For Actor states, the key format is:
+对于 Actor 状态，键格式为：
 
 ```
 <App ID>||<Actor type>||<Actor id>||<state key>
@@ -47,7 +47,7 @@ For Actor states, the key format is:
 
 ## 保存状态
 
-This endpoint lets you save an array of state objects.
+此终结点允许您保存状态对象数组。
 
 ### HTTP 请求
 
@@ -59,14 +59,14 @@ POST http://localhost:<daprPort>/v1.0/state/<storename>
 
 | 参数          | 说明                                                                                                                                                                           |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                                |
+| `daprPort`  | Dapr 端口。                                                                                                                                                                     |
 | `storename` | The `metadata.name` field in the user-configured `statestore.yaml` component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
 
 > All URL parameters are case-sensitive.
 
 #### 请求正文
 
-A JSON array of state objects. Each state object is comprised with the following fields:
+状态对象的 JSON 数组。 每个状态对象都包含以下字段：
 
 | 字段         | 说明                                                                                     |
 | ---------- | -------------------------------------------------------------------------------------- |
@@ -82,11 +82,11 @@ A JSON array of state objects. Each state object is comprised with the following
 
 #### 响应代码
 
-| 代码    | 说明                                                           |
-| ----- | ------------------------------------------------------------ |
-| `204` | State saved                                                  |
-| `400` | State store is missing or misconfigured or malformed request |
-| `500` | Failed to save state                                         |
+| 代码    | 说明                  |
+| ----- | ------------------- |
+| `204` | 状态已保存               |
+| `400` | 状态存储丢失、配置错误或请求格式不正确 |
+| `500` | 无法保存状态              |
 
 #### 响应正文
 
@@ -114,7 +114,7 @@ curl -X POST http://localhost:3500/v1.0/state/starwars \
 
 ## 获取状态
 
-This endpoint lets you get the state for a specific key.
+此终结点允许你获取特定键的状态。
 
 ### HTTP 请求
 
@@ -126,7 +126,7 @@ GET http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 | 参数            | 说明                                                                                                                                                                     |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`    | The Dapr port                                                                                                                                                          |
+| `daprPort`    | Dapr 端口。                                                                                                                                                               |
 | `storename`   | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
 | `key`         | The key of the desired state                                                                                                                                           |
 | `consistency` | (optional) Read consistency mode; see [state operation options](#optional-behaviors)                                                                                   |
@@ -138,22 +138,22 @@ GET http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### 响应代码
 
-| 代码    | 说明                                      |
-| ----- | --------------------------------------- |
-| `200` | Get state successful                    |
-| `204` | Key is not found                        |
-| `400` | State store is missing or misconfigured |
-| `500` | Get state failed                        |
+| 代码    | 说明          |
+| ----- | ----------- |
+| `200` | 获得状态成功      |
+| `204` | 找不到键        |
+| `400` | 状态存储丢失或配置错误 |
+| `500` | 获取状态失败      |
 
 #### 响应标头
 
-| Header | 说明                     |
-| ------ | ---------------------- |
-| `ETag` | ETag of returned value |
+| Header | 说明       |
+| ------ | -------- |
+| `ETag` | 返回值的ETag |
 
 #### 响应正文
 
-JSON-encoded value
+JSON 编码的值
 
 ### 示例
 
@@ -178,7 +178,7 @@ GET http://localhost:3500/v1.0/state/starwars/planet?metadata.partitionKey=mypar
 
 ## 获取批量状态
 
-This endpoint lets you get a list of values for a given list of keys.
+使用此终结点，可以获取给定键列表的值列表。
 
 ### HTTP 请求
 
@@ -190,7 +190,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/bulk
 
 | 参数          | 说明                                                                                                                                                                     |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                          |
+| `daprPort`  | Dapr 端口。                                                                                                                                                               |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
 | `metadata`  | (optional) Metadata as query parameters to the state store                                                                                                             |
 
@@ -200,15 +200,15 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/bulk
 
 #### 响应代码
 
-| 代码    | 说明                                      |
-| ----- | --------------------------------------- |
-| `200` | Get state successful                    |
-| `400` | State store is missing or misconfigured |
-| `500` | Get bulk state failed                   |
+| 代码    | 说明          |
+| ----- | ----------- |
+| `200` | 获得状态成功      |
+| `400` | 状态存储丢失或配置错误 |
+| `500` | 获取批量状态失败    |
 
 #### 响应正文
 
-An array of JSON-encoded values
+JSON 编码值的数组
 
 ### 示例
 
@@ -246,7 +246,7 @@ POST http://localhost:3500/v1.0/state/myRedisStore/bulk?metadata.partitionKey=my
 
 ## 删除状态
 
-This endpoint lets you delete the state for a specific key.
+此终结点允许你删除特定键的状态。
 
 ### HTTP 请求
 
@@ -256,33 +256,33 @@ DELETE http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### URL 参数
 
-| 参数            | 说明                                                                                                                                                                     |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`    | The Dapr port                                                                                                                                                          |
-| `storename`   | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
-| `key`         | The key of the desired state                                                                                                                                           |
-| `concurrency` | (optional) Either *first-write* or *last-write*; see [state operation options](#optional-behaviors)                                                                    |
-| `consistency` | (optional) Either *strong* or *eventual*; see [state operation options](#optional-behaviors)                                                                           |
+| 参数                | 说明                                                                                                                                                                     |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`        | Dapr 端口。                                                                                                                                                               |
+| `storename`       | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
+| `key`             | The key of the desired state                                                                                                                                           |
+| `并发（Concurrency）` | (optional) Either *first-write* or *last-write*; see [state operation options](#optional-behaviors)                                                                    |
+| `consistency`     | (optional) Either *strong* or *eventual*; see [state operation options](#optional-behaviors)                                                                           |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
 #### Request Headers
 
-| Header   | 说明                                                    |
-| -------- | ----------------------------------------------------- |
-| If-Match | (Optional) ETag associated with the key to be deleted |
+| Header | 说明                  |
+| ------ | ------------------- |
+| 如果匹配   | (可选) ETag与要删除的键相关联。 |
 
 ### HTTP 响应
 
 #### 响应代码
 
-| 代码    | 说明                                      |
-| ----- | --------------------------------------- |
-| `204` | Delete state successful                 |
-| `400` | State store is missing or misconfigured |
-| `500` | Delete state failed                     |
+| 代码    | 说明          |
+| ----- | ----------- |
+| `204` | 删除状态成功      |
+| `400` | 状态存储丢失或配置错误 |
+| `500` | 删除状态失败      |
 
-#### Response Body
+#### 响应正文
 
 None.
 
@@ -310,7 +310,7 @@ POST/PUT http://localhost:<daprPort>/v1.0-alpha1/state/<storename>/query
 
 | 参数          | 说明                                                                                                                                                                     |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                          |
+| `daprPort`  | Dapr 端口。                                                                                                                                                               |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
 | `metadata`  | (optional) Metadata as query parameters to the state store                                                                                                             |
 
@@ -318,15 +318,15 @@ POST/PUT http://localhost:<daprPort>/v1.0-alpha1/state/<storename>/query
 
 #### 响应代码
 
-| 代码    | 说明                                      |
-| ----- | --------------------------------------- |
-| `200` | 状态查询成功                                  |
-| `400` | State store is missing or misconfigured |
-| `500` | 状态查询失败                                  |
+| 代码    | 说明          |
+| ----- | ----------- |
+| `200` | 状态查询成功      |
+| `400` | 状态存储丢失或配置错误 |
+| `500` | 状态查询失败      |
 
 #### 响应正文
 
-An array of JSON-encoded values
+JSON 编码值的数组
 
 ### 示例
 
@@ -420,7 +420,7 @@ POST http://localhost:3500/v1.0-alpha1/state/myStore/query?metadata.partitionKey
 
 ## 状态事务
 
-Persists the changes to the state store as a multi-item transaction.
+将状态存储变成以 multi-item transaction 的方式持久化
 
 > This operation depends on a state store component that supports multi-item transactions.
 
@@ -434,17 +434,17 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/transaction
 
 #### HTTP 响应码
 
-| 代码    | 说明                                                           |
-| ----- | ------------------------------------------------------------ |
-| `204` | 请求成功                                                         |
-| `400` | State store is missing or misconfigured or malformed request |
-| `500` | 请求失败                                                         |
+| 代码    | 说明                  |
+| ----- | ------------------- |
+| `204` | 请求成功                |
+| `400` | 状态存储丢失、配置错误或请求格式不正确 |
+| `500` | 请求失败                |
 
 #### URL 参数
 
 | 参数          | 说明                                                                                                                                                                     |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                          |
+| `daprPort`  | Dapr 端口。                                                                                                                                                               |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
@@ -453,15 +453,15 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/transaction
 
 | 字段           | 说明                                                                     |
 | ------------ | ---------------------------------------------------------------------- |
-| `operations` | A JSON array of state operation                                        |
+| `operations` | 状态操作的 JSON 数组                                                          |
 | `metadata`   | (optional) The metadata for transaction that applies to all operations |
 
-Each state operation is comprised with the following fields:
+每个状态操作都包含以下字段：
 
 | 字段         | 说明                                                                                     |
 | ---------- | -------------------------------------------------------------------------------------- |
 | `key`      | State key                                                                              |
-| `value`    | State value, which can be any byte array                                               |
+| `值`        | State value, which can be any byte array                                               |
 | `etag`     | (optional) State ETag                                                                  |
 | `metadata` | (optional) Additional key-value pairs to be passed to the state store                  |
 | `options`  | (optional) State operation options; see [state operation options](#optional-behaviors) |
@@ -495,7 +495,7 @@ curl -X POST http://localhost:3500/v1.0/state/starwars/transaction \
 
 ## 为 Actor 配置状态存储
 
-Actors don't support multiple state stores and require a transactional state store to be used with Dapr. [View which services currently implement the transactional state store interface]({{< ref "supported-state-stores.md" >}}).
+Actor 不支持多个状态存储，并且需要将事务性的状态存储与 Dapr 一起使用。 [View which services currently implement the transactional state store interface]({{< ref "supported-state-stores.md" >}}).
 
 Specify which state store to be used for actors with a `true` value for the property `actorStateStore` in the metadata section of the `statestore.yaml` component file. For example, the following components yaml will configure Redis to be used as the state store for Actors.
 
@@ -522,7 +522,7 @@ spec:
 
 ### 关键方案
 
-A Dapr-compatible state store shall use the following key scheme:
+与 Dapr 兼容的状态存储应使用以下键方案：
 
 * *\<App ID>||\<state key>* key format for general states
 * *\<App ID>||\<Actor type>||\<Actor id>||\<state key>* key format for Actor states.
@@ -537,7 +537,7 @@ Dapr uses Optimized Concurrency Control (OCC) with ETags. Dapr makes the followi
 * When ETag is missing in the write requests, the state store shall handle the requests in a *last-write-wins* fashion. This allows optimizations for high-throughput write scenarios, in which data contingency is low or has no negative effects.
 * A store shall *always* return ETags when returning states to callers.
 
-### Consistency
+### 一致性
 
 Dapr allows clients to attach a consistency hint to *get*, *set*, and *delete* operation. Dapr supports two consistency levels: **strong** and **eventual**.
 

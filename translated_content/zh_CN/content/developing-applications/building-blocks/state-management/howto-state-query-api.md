@@ -16,11 +16,11 @@ description: "用于查询状态存储的API"
 
 即使状态存储是键/值存储， `value` 也可能是具有自己的层次结构、键和值的 JSON 文档。 查询 API 允许您使用这些键和值来检索相应的文档。
 
-### Limitations
-The state query API has the following limitations:
+### 限制
+状态查询 API 具有以下限制：
 
- - The API does not support querying of actor state stored in a state store. 为此，您需要对特定数据库使用查询 API。 查看 [查询 actor 状态]({{< ref "state-management-overview.md#querying-actor-state" >}}).
- - The API does not work with Dapr [encrypted state stores]({{<ref howto-encrypt-state>}}) capability. Since the encryption is done by the Dapr runtime and stored as encrypted data, then this effectively prevents server side querying.
+ - 此 API 不支持查询存储在状态存储中的 actor 状态。 为此，您需要对特定数据库使用查询 API。 查看 [查询 actor 状态]({{< ref "state-management-overview.md#querying-actor-state" >}}).
+ - 该 API 不适用于 Dapr [加密状态存储]({{<ref howto-encrypt-state>}})功能。 由于加密是由 Dapr 运行时完成并存储为加密数据，因此这有效地阻止了服务器端查询。
 
 
 
@@ -28,7 +28,7 @@ The state query API has the following limitations:
 
 ## 查询状态
 
-您可以通过 HTTP POST/PUT 或 gRPC 提交查询请求。 The body of the request is the JSON map with 3 entries: `filter`, `sort`, and `page`.
+您可以通过 HTTP POST/PUT 或 gRPC 提交查询请求。 请求的正文是包含 3 个条目的 JSON map： `filter`, `sort`, 和 `page`。
 
 `filter` 是可选部分。 它以键/值操作树的形式指定查询条件，其中键是运算符，值是操作数。
 
@@ -45,7 +45,7 @@ The state query API has the following limitations:
 
 `排序` 是可选部分，是 `key：order` 对的有序数组，其中 `key` 是状态存储中的键， `order` 是指示排序顺序的可选字符串： `"ASC"` ，降序 `"DESC"` 。 如果省略，则默认为升序。
 
-The `page` is an optional section containing `limit` and `token` parameters. `limit` 设置页面大小。 `token` 是组件返回的迭代令牌，用于后续查询。
+`page` 是可选部分，包含 `limit` 和 `token` 参数。 `limit` 设置页面大小。 `token` 是组件返回的迭代令牌，用于后续查询。
 
 为了获得一些背景知识，此查询请求将转换为本机查询语言，并由状态存储组件执行。
 
@@ -81,11 +81,11 @@ curl -X POST -H "Content-Type: application/json" -d @query-api-examples/dataset.
 
 现在，您可以运行查询。
 
-### Example 1
+### 示例 1
 
 首先，让我们查找加利福尼亚州的所有员工，并按其员工 ID 降序对他们进行排序。
 
-This is the [query](../query-api-examples/query1.json):
+这是 [查询](../query-api-examples/query1.json)：
 ```json
 {
     "filter": {
@@ -178,11 +178,11 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 }
 ```
 
-### Example 2
+### 示例 2
 
 现在，让我们查找"Dev Ops"和"Hardware"组织中的所有员工。
 
-This is the [query](../query-api-examples/query2.json):
+这是 [查询](../query-api-examples/query2.json)：
 ```json
 {
     "filter": {
@@ -213,13 +213,13 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 
 与前面的示例类似，结果是一个匹配键/值对的数组。
 
-### Example 3
+### 示例 3
 
 在此示例中，让我们查找"Dev Ops"部门的所有员工 以及居住在华盛顿州和加利福尼亚州的"财务"部门的员工。
 
 此外，让我们先按州（按字母降序）对结果进行排序，然后按员工 ID（升序）对结果进行排序。 另外，让我们一次最多处理 3 条记录。
 
-This is the [query](../query-api-examples/query3.json):
+这是 [查询](../query-api-examples/query3.json):
 
 ```json
 {

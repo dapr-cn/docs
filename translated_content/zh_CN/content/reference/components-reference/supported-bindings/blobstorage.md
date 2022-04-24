@@ -41,14 +41,14 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 绑定支持 | 详情                                                                                                                                                                                   | 示例                          |
-| ----------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| storageAccount    | Y  | 输出   | Blob Storage 账户名称                                                                                                                                                                    | `myexmapleaccount`          |
-| storageAccessKey  | Y  | 输出   | Blob Storage 访问密钥                                                                                                                                                                    | `access-key`                |
-| container         | Y  | 输出   | 要写入的Blob Storage容器名称                                                                                                                                                                 | `myexamplecontainer`        |
-| decodeBase64      | 否  | 输出   | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` is the only allowed positive value. Other positive variations like `"True", "1"` are not acceptable. Defaults to `false` | `true`, `false`             |
-| getBlobRetryCount | N  | 输出   | Specifies the maximum number of HTTP GET requests that will be made while reading from a RetryReader Defaults to `10`                                                                | `1`, `2`                    |
-| publicAccessLevel | N  | 输出   | Specifies whether data in the container may be accessed publicly and the level of access (only used if the container is created by Dapr). Defaults to `none`                         | `blob`, `container`, `none` |
+| 字段                | 必填 | 绑定支持 | 详情                                                                                                                                                           | 示例                          |
+| ----------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| storageAccount    | Y  | 输出   | Blob Storage 账户名称                                                                                                                                            | `myexmapleaccount`          |
+| storageAccessKey  | Y  | 输出   | Blob Storage 访问密钥                                                                                                                                            | `access-key`                |
+| container         | Y  | 输出   | 要写入的Blob Storage容器名称                                                                                                                                         | `myexamplecontainer`        |
+| decodeBase64      | 否  | 输出   | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false`                                | `true`, `false`             |
+| getBlobRetryCount | N  | 输出   | Specifies the maximum number of HTTP GET requests that will be made while reading from a RetryReader Defaults to `10`                                        | `1`, `2`                    |
+| publicAccessLevel | N  | 输出   | Specifies whether data in the container may be accessed publicly and the level of access (only used if the container is created by Dapr). Defaults to `none` | `blob`, `container`, `none` |
 
 ### Azure Active Directory (AAD) authentication
 The Azure Blob Storage binding component supports authentication using all Azure Active Directory mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of AAD authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
@@ -230,7 +230,7 @@ To perform a delete blob operation, invoke the Azure Blob Storage binding with a
 }
 ```
 
-The metadata parameters are:
+元数据参数包括：
 
 - `blobName` - the name of the blob
 - `deleteSnapshots` - (optional) required if the blob has associated snapshots. Specify one of the following two options:
@@ -298,7 +298,7 @@ The metadata parameters are:
 
 #### 响应
 
-An HTTP 204 (No Content) and empty body will be retuned if successful.
+如果成功，将返回 HTTP 204（没有内容）和空报文体。
 
 ### List blobs
 
@@ -322,11 +322,11 @@ To perform a list blobs operation, invoke the Azure Blob Storage binding with a 
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `maxResults` - (optional) specifies the maximum number of blobs to return, including all BlobPrefix elements. If the request does not specify maxresults the server will return up to 5,000 items.
 - `prefix` - (optional) filters the results to return only blobs whose names begin with the specified prefix.
-- `marker` - (optional) a string value that identifies the portion of the list to be returned with the next list operation. The operation returns a marker value within the response body if the list returned was not complete. The marker value may then be used in a subsequent call to request the next set of list items.
+- `marker` - (optional) a string value that identifies the portion of the list to be returned with the next list operation. The operation returns a marker value within the response body if the list returned was not complete. 然后，可以在后续调用中使用标记值来请求下一组数据。
 - `include` - (optional) Specifies one or more datasets to include in the response:
   - snapshots: Specifies that snapshots should be included in the enumeration. Snapshots are listed from oldest to newest in the response. Defaults to: false
   - metadata: Specifies that blob metadata be returned in the response. Defaults to: false

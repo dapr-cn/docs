@@ -29,7 +29,7 @@ POST http://localhost:<daprPort>/v1.0/publish/<pubsubname>/<topic>[?<metadata>]
 
 | 参数           | 说明                                               |
 | ------------ | ------------------------------------------------ |
-| `daprPort`   | The Dapr port                                    |
+| `daprPort`   | Dapr 端口。                                         |
 | `pubsubname` | The name of pubsub component                     |
 | `topic`      | The name of the topic                            |
 | `metadata`   | Query parameters for metadata as described below |
@@ -48,13 +48,13 @@ curl -X POST http://localhost:3500/v1.0/publish/pubsubName/deathStarStatus \
 
 `Content-Type` 标头告诉 Dapr 在构建 CloudEvent 信封时，您的数据遵循哪种内容类型。 The `Content-Type` header value populates the `datacontenttype` field in the CloudEvent.
 
-Unless specified, Dapr assumes `text/plain`. If your content type is JSON, use a `Content-Type` header with the value of `application/json`.
+不指定情况下， Dapr内容类型为 `text/plain`。 如果内容类型为 JSON，请使用值为 `application/json`的 `Content-Type` 标头。
 
 If you want to send your own custom CloudEvent, use the `application/cloudevents+json` value for the `Content-Type` header.
 
-#### Metadata
+#### 元数据
 
-Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.`, as shown below.
+元数据可以通过请求 URL 中的查询参数发送。 It must be prefixed with `metadata.`, as shown below.
 
 | 参数                      | 说明                                                                                                                                      |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -67,7 +67,7 @@ Metadata can be sent via query parameters in the request's URL. It must be prefi
 
 ### 为 Dapr 提供发现 topic 订阅的路由
 
-Dapr will invoke the following endpoint on user code to discover topic subscriptions:
+Dapr 将在用户代码上调用以下终结点以发现 topic 订阅：
 
 #### HTTP 请求
 
@@ -102,9 +102,9 @@ A JSON-encoded array of strings.
 
 > 请注意，所有订阅参数都是大小写敏感的。
 
-#### Metadata
+#### 元数据
 
-Optionally, metadata can be sent via the request body.
+（可选）元数据可以通过请求正文发送。
 
 | 参数           | 说明                                                              |
 | ------------ | --------------------------------------------------------------- |
@@ -112,9 +112,9 @@ Optionally, metadata can be sent via the request body.
 
 ### 为 Dapr 提供发布 topic 事件的路由
 
-In order to deliver topic events, a `POST` call will be made to user code with the route specified in the subscription response.
+为了发布 topic 事件，将使用订阅响应中指定的路由对用户代码进行 `POST` 调用。
 
-The following example illustrates this point, considering a subscription for topic `newOrder` with route `orders` on port 3000: `POST http://localhost:3000/orders`
+下面的例子说明了这一点，考虑到 topic `newOrder` 的订阅，`orders` 的路由为端口3000 ： `POST http://localhost:3000/orders`
 
 #### HTTP 请求
 
@@ -133,7 +133,7 @@ POST http://localhost:<appPort>/<path>
 
 #### Expected HTTP Response
 
-An HTTP 2xx response denotes successful processing of message.
+HTTP 2xx 响应表示消息处理成功。
 
 For richer response handling, a JSON-encoded payload body with the processing status can be sent:
 
@@ -146,9 +146,9 @@ For richer response handling, a JSON-encoded payload body with the processing st
 | 状态        | 说明                                       |
 | --------- | ---------------------------------------- |
 | `SUCCESS` | Message is processed successfully        |
-| `RETRY`   | Message to be retried by Dapr            |
+| `RETRY`   | 将由Dapr重试的消息                              |
 | `DROP`    | Warning is logged and message is dropped |
-| Others    | Error, message to be retried by Dapr     |
+| Others    | 错误，消息将由 Dapr 重试                          |
 
 Dapr assumes that a JSON-encoded payload response without `status` field or an empty payload responses with HTTP 2xx is a `SUCCESS`.
 

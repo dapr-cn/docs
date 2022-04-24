@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Quickstart: State Management"
-linkTitle: "State Management"
+linkTitle: "状态管理"
 weight: 70
 description: "Get started with Dapr's State Store"
 ---

@@ -20,7 +20,7 @@ Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次
 
 以下的示例简述了一个订单处理程序。 当前示例中，存两项服务：订单处理服务和结账服务。 这两项服务都有Dapr sidecar。 订单处理服务使用 Dapr 向 RabbitMQ 发布消息，结账服务订阅消息队列中的主题。
 
-<img src="/images/building-block-pub-sub-example.png" width=1000 alt="Diagram showing state management of example service">
+<img src="/images/building-block-pub-sub-example.png" width=1000 alt="显示示例服务的状态管理的图示">
 
 ## 步骤 1: 设置 Pub/Sub 组件
 然后发布一条消息给 `orders` 主题：
@@ -660,9 +660,9 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ## 发送自定义 CloudEvent
 
-Dapr automatically takes the data sent on the publish request and wraps it in a CloudEvent 1.0 envelope. If you want to use your own custom CloudEvent, make sure to specify the content type as `application/cloudevents+json`.
+Dapr 自动接收发布请求上发送的数据，并将其包装在CloudEvent 1.0 信封中。 如果您想使用自己自定义的 CloudEvent，请确保指定内容类型为 `application/ cloudevents+json`。
 
-Read about content types [here](#content-types), and about the [Cloud Events message format]({{< ref "pubsub-overview.md#cloud-events-message-format" >}}).
+[请在此处阅读有关内容类型](#content-types)，以及有关 [ Cloud Events 消息格式]({{< ref "pubsub-overview.md#cloud-events-message-format" >}})。
 
 #### 示例
 
@@ -693,7 +693,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/cloudevents+json' -Body
 
 ## 下一步
 
-- Try the [Pub/Sub quickstart sample](https://github.com/dapr/quickstarts/tree/master/pub_sub)
+- 试用 [发布/订阅快速入门示例](https://github. com/dapr/quickstarts/tree/master/pub_sub)
 - 了解 [PubSub 路由]({{< ref howto-route-messages >}})
 - 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})

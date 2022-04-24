@@ -91,7 +91,7 @@ docker run -d --name nats-streaming -p 4222:4222 -p 8222:8222 nats-streaming
 {{% /codetab %}}
 
 {{% codetab %}}
-Install NATS on Kubernetes by using the [kubectl](https://docs.nats.io/running-a-nats-service/introduction/running/nats-kubernetes/):
+使用 [kubectl](https://docs.nats.io/running-a-nats-service/introduction/running/nats-kubernetes/) 在 Kubernetes 上安装 NATS:
 
 ```bash
 # Single server NATS

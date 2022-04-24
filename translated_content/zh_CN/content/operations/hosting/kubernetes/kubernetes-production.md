@@ -37,7 +37,7 @@ For more info, read the [concept article on CPU and Memory resource units and th
 
 ## Sidecar 资源设置
 
-To set the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "arguments-annotations-overview.md" >}}). 与资源约束相关的具体注解如下:
+要为 Dapr sidecar 设置资源分配，请参阅[此处]({{< ref "arguments-annotations-overview.md" >}})。 与资源约束相关的具体注解如下:
 
 - `dapr.io/sidecar-cpu-limit`
 - `dapr.io/sidecar-memory-limit`
@@ -59,15 +59,15 @@ Since Dapr is intended to do much of the I/O heavy lifting for your app, it's ex
 
 {{% /alert %}}
 
-上面的CPU和内存限制是出于Dapr存在大量的I/O密集型操作的考虑。 It is strongly recommended that you use a monitoring tool to baseline the sidecar (and app) containers and tune these settings based on those baselines.
+上面的CPU和内存限制是出于Dapr存在大量的I/O密集型操作的考虑。 强烈建议你使用监控工具对 sidecar (和应用) 容器进行基准监控，并根据基准来调整这些设置。
 
 ## 高可用模式
 
-When deploying Dapr in a production-ready configuration, it's recommended to deploy with a highly available (HA) configuration of the control plane, which creates 3 replicas of each control plane pod in the dapr-system namespace. This configuration allows the Dapr control plane to retain 3 running instances and survive node failures and other outages.
+当在生产环境中部署 Dapr 时，建议使用控制平面的高可用 (HA) 配置进行部署，将会在 dapr-system 命名空间中为每个控制平面 pod 创建3个副本。 This configuration allows the Dapr control plane to retain 3 running instances and survive node failures and other outages.
 
-For a new Dapr deployment, the HA mode can be set with both the [Dapr CLI]({{< ref "kubernetes-deploy.md#install-in-highly-available-mode" >}}) and with [Helm charts]({{< ref "kubernetes-deploy.md#add-and-install-dapr-helm-chart" >}}).
+对于新部署的 Dapr ，高可用模式可以通过 [Dapr CLI]({{< ref "kubernetes-deploy.md#install-in-highly-available-mode" >}}) 和 [Helm charts]({{< ref "kubernetes-deploy.md#add-and-install-dapr-helm-chart" >}}) 来设置。
 
-For an existing Dapr deployment, enabling the HA mode requires additional steps. Please refer to [this paragraph]({{< ref "#enabling-high-availability-in-an-existing-dapr-deployment" >}}) for more details.
+对于已部署的 Dapr，启用高可用模式需要执行额外的步骤。 更多详细信息，请参阅 [本段]({{< ref "#enabling-high-availability-in-an-existing-dapr-deployment" >}}) 。
 
 ## 用Helm部署Dapr
 
@@ -129,7 +129,7 @@ Dapr支持零停机升级， 升级包括以下步骤： 升级包括以下步�
 
 ### 更新Dapr control plane
 
-See [steps to upgrade Dapr on a Kubernetes cluster]({{< ref "kubernetes-upgrade.md#helm" >}}).
+请参阅 [在 Kubernetes 集群上升级 Dapr 的步骤]({{< ref "kubernetes-upgrade.md#helm" >}})。
 
 ### 更新数据平面(sidecar)
 
@@ -164,9 +164,9 @@ Enabling HA mode for an existing Dapr deployment requires two steps:
    helm upgrade dapr ./charts/dapr -n dapr-system --set global.ha.enabled=true
    ```
 
-You delete the placement stateful set because, in the HA mode, the placement service adds [Raft](https://raft.github.io/) for leader election. However, Kubernetes only allows for limited fields in stateful sets to be patched, subsequently failing upgrade of the placement service.
+You delete the placement stateful set because, in the HA mode, the placement service adds [Raft](https://raft.github.io/) for leader election. 然而，Kubernetes 仅允许在状态集中更新有限的字段，从而导致 Placement 服务更新失败。
 
-Deletion of the existing placement stateful set is safe. The agents will reconnect and re-register with the newly created placement service, which will persist its table in Raft.
+删除现有的 Placement 状态集是安全的。 代理将重新连接并重新注册新创建的 Placement 服务，该服务会将表持久化在 Raft 中。
 
 ## 建议的安全配置
 
@@ -174,17 +174,17 @@ Deletion of the existing placement stateful set is safe. The agents will reconne
 
 建议生产环境的部署涵盖以下设置：
 
-1. **启用相互验证 (mTLS)**。 请注意，Dapr默认开启了mTLS。 For details on how to bring your own certificates, see [here]({{< ref "mtls.md#bringing-your-own-certificates" >}})
+1. **启用相互验证 (mTLS)**。 请注意，Dapr默认开启了mTLS。 有关如何携带自定义证书的详细信息，请参见 [这里]({{< ref "mtls.md#bringing-your-own-certificates" >}})。
 
-2. **启用Dapr to App API验证**。 这是你的应用程序和Dapr边车之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 See [enable API token authentication in Dapr]({{< ref "api-token.md" >}}) for details
+2. **启用Dapr to App API验证**。 这是你的应用程序和Dapr边车之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 有关详细信息，请参阅[在 Dapr 中启用 API 令牌身份验证]({{< ref "api-token.md" >}})
 
-3. **启用Dapr to App API验证**。 这是你的应用程序和Dapr边车之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 See [Authenticate requests from Dapr using token authentication]({{< ref "app-api-token.md" >}}) for details
+3. **启用Dapr to App API验证**。 这是你的应用程序和Dapr边车之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 请参阅 [使用令牌认证对来自 Dapr 的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
 
-4. 所有的组件YAML都应该把**密钥数据配置在密钥存储中**，而不是硬编码在YAML文件中。 See [here]({{< ref "component-secrets.md" >}}) on how to use secrets with Dapr components
+4. 所有的组件YAML都应该把**密钥数据配置在密钥存储中**，而不是硬编码在YAML文件中。 请参阅 [此处]({{< ref "component-secrets.md" >}}秘密)，了解如何在 Dapr 组件中使用秘密。
 
 5. Dapr **控制平面安装在一个专用的命名空间**上，如`dapr-system`。
 
-6. Dapr还支持**框定应用程序的组件范围**。 这不是必要的，可以根据您的安全需求启用。 See [here]({{< ref "component-scopes.md" >}}) for more info.
+6. Dapr还支持**框定应用程序的组件范围**。 这不是必要的，可以根据您的安全需求启用。 请参阅 [此处]({{< ref "component-scopes.md" >}}) 以获取更多信息。
 
 
 ## 追踪和度量配置
@@ -194,12 +194,12 @@ Dapr 默认启用追踪和度量。 *建议*在生产环境中为您的应用程
 如果你已经有了自己的可观察测性支持组件，你可以禁用Dapr的追踪和度量。
 
 ### 追踪
-To configure a tracing backend for Dapr visit [this]({{< ref "setup-tracing.md" >}}) link.
+要为 Dapr 配置追踪后端，请访问[这个]({{< ref "setup-tracing.md" >}})链接。
 
 ### 度量
 对于度量，Dapr在9090端口上暴露了一个Prometheus端点，可以被Prometheus收集。
 
-To setup Prometheus, Grafana and other monitoring tools with Dapr, visit [this]({{< ref "monitoring" >}}) link.
+要为 Dapr 配置 Prometheus、Grafana 和其他监控工具，请访问 [这个]({{< ref "monitoring" >}})链接。
 
 ## 最佳实践
 观看此视频，深入了解使用 Kubernetes 中在生产环境中运行 Dapr 的最佳实践

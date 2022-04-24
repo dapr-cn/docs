@@ -106,7 +106,7 @@ scopes:
 </div>
 
 ## 在服务调用时使用名称空间
-Read [Service invocation across namespaces]({{< ref "service-invocation-namespaces.md" >}}) for more information on using namespaces when calling between services.
+有关在服务间调用时使用命名空间的详细信息，请参阅 [跨命名空间的服务调用]({{< ref "service-invocation-namespaces.md" >}}) 。
 
 ## 使用 pub/sub 的命名空间
 阅读[配置具有多个命名空间的Pub/Sub组件]({{< ref "pubsub-namespaces.md" >}})以获得更多关于使用 pub/sub 命名空间的信息。

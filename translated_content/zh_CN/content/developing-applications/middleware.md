@@ -74,4 +74,4 @@ func (m *customMiddleware) GetHandler(metadata Metadata) (func(fasthttp.RequestH
 
 * [组件schema]({{< ref component-schema.md >}})
 * [配置概览]({{< ref configuration-overview.md >}})
-* [Middleware sample](https://github.com/dapr/samples/tree/master/middleware-oauth-google)
+* [中间件示例](https://github.com/dapr/samples/tree/master/middleware-oauth-google)

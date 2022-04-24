@@ -26,7 +26,7 @@ description: "限制应用程序可以通过服务调用在\"调用\"应用程�
 | ------------- | ------ | ------------------------------ |
 | defaultAction | string | 没有其他策略匹配时的全局默认操作               |
 | trustDomain   | string | 分配给应用程序的信任域。 默认值为 "public"。    |
-| policies      | string | 用于确定调用应用程序可以对被调用的应用程序执行哪些操作的策略 |
+| 策略            | string | 用于确定调用应用程序可以对被调用的应用程序执行哪些操作的策略 |
 
 ### 策略
 
@@ -36,7 +36,7 @@ description: "限制应用程序可以通过服务调用在\"调用\"应用程�
 | namespace     | string | 需要与调用应用的命名空间匹配的命名空间值             |
 | trustDomain   | string | 需要与调用应用的信任域匹配的信任域。 默认值为 "public" |
 | defaultAction | string | 应用级别的默认操作，以防找到应用但未匹配特定操作         |
-| operations    | string | 允许的从调用应用发起的操作                    |
+| 操作            | string | 允许的从调用应用发起的操作                    |
 
 ### 操作
 

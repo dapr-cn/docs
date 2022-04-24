@@ -13,9 +13,9 @@ description: "了解如何获取应用程序配置并订阅更改"
 
 ## 示例:
 
-下面的代码例子粗略地描述了一个处理订单的应用程序。 在这个例子中，有一个订单处理服务，它有一个Dapr sidecar。 The order processing service uses Dapr to retrieve the configuration from a Redis configuration store.
+下面的代码例子粗略地描述了一个处理订单的应用程序。 在这个例子中，有一个订单处理服务，它有一个Dapr sidecar。 订单处理服务使用 Dapr 从 Redis 配置存储中检索配置。
 
-<img src="/images/building-block-configuration-example.png" width=1000 alt="Diagram showing get configuration of example service">
+<img src="/images/building-block-configuration-example.png" width=1000 alt="显示获取示例服务配置的图示">
 
 ## 步骤 1：创建配置项目
 
@@ -58,7 +58,7 @@ spec:
     value: <PASSWORD>
 ```
 
-### Get configuration items using Dapr SDKs
+### 使用 Dapr SDK 获取配置项
 
 {{< tabs Dotnet Java Python>}}
 
@@ -88,7 +88,7 @@ namespace ConfigurationApi
 }
 ```
 
-Navigate to the directory containing the above code and run the following command to launch the application along with a Dapr sidecar:
+导航到包含上述代码的目录，然后运行以下命令以启动应用程序以及 Dapr sidecar：
 
 ```bash
 dapr run --app-id orderprocessing --components-path ./components -- dotnet run
@@ -125,7 +125,7 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-Navigate to the directory containing the above code and run the following command to launch the application along with a Dapr sidecar:
+导航到包含上述代码的目录，然后运行以下命令以启动应用程序以及 Dapr sidecar：
 
 ```bash
 dapr run --app-id orderprocessing --components-path ./components mvn spring-boot:run
@@ -146,7 +146,7 @@ with DaprClient() as d:
         print(f"Got key={configuration.items[0].key} value={configuration.items[0].value} version={configuration.items[0].version}")
 ```
 
-Navigate to the directory containing the above code and run the following command to launch the application along with a Dapr sidecar:
+导航到包含上述代码的目录，然后运行以下命令以启动应用程序以及 Dapr sidecar：
 
 ```bash
 dapr run --app-id orderprocessing --components-path ./components python3 OrderProcessingService.py
@@ -212,9 +212,9 @@ message SubscribeConfigurationRequest {
 
 使用此方法，您可以订阅给定配置存储的特定密钥中的更改。 gRPC 流因语言而异 - 有关用法，请参阅此处的 [gRPC 示例](https://grpc.io/docs/languages/) 。
 
-##### Stop watching configuration items
+##### 停止监视配置项
 
-After you have subscribed to watch configuration items, the gRPC-server stream starts. This stream thread does not close itself, and you have to do by explicitly call the `UnSubscribeConfigurationRequest` API. This method accepts the following request object:
+订阅监视配置项后，将启动 gRPC 服务器流。 此流不会自行关闭，您必须通过显式调用 ` UnSubscribeConfigurationRequest ` API 来执行此操作。 此方法接受以下请求对象：
 
 ```proto
 // UnSubscribeConfigurationRequest is the message to stop watching the key-value configuration.
@@ -228,7 +228,7 @@ message UnSubscribeConfigurationRequest {
 }
 ```
 
-Using this unsubscribe method, you can stop watching configuration update events. Dapr locates the subscription stream based on the `store_name` and any optional keys supplied and closes it.
+使用此取消订阅方法，可以停止监视配置更新事件。 Dapr 根据 `store_name` 和提供的任何可选密钥查找订阅流并将其关闭。
 
 ## 下一步
 * 阅读 [配置 API 概述]({{< ref configuration-api-overview.md >}})
