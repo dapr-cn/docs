@@ -46,7 +46,7 @@ Pub/sub的类型由`type`字段决定，连接地址和其他元数据等属性�
 ## 相关链接
 
 - Dapr [发布/订阅构建块概述]({{< ref pubsub-overview.md >}})
-- Try the [Pub/Sub quickstart sample](https://github.com/dapr/quickstarts/tree/master/pub_sub)
+- 试试 [Pub/Sub 快速启动示例](https://github.com/dapr/quickstarts/tree/master/pub_sub)
 - 阅读 [关于发布和订阅的指南]({{< ref howto-publish-subscribe.md >}})
 - 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})

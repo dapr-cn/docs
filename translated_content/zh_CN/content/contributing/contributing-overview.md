@@ -50,7 +50,7 @@ description: >
 1. 确保有一个问题（bug或建议）被提出，这为你即将做出的贡献设定了期望。
 1. 分叉相关的repo并创建一个新的分支。
     - 某些 Dapr 仓库支持 [Codespaces]({{< ref codespaces.md >}}) ，以便为您提供一个即时环境来构建和测试更改。
-    - See the [Developing Dapr docs](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md) for more information about setting up a Dapr development environment.
+    - 有关设置 Dapr 开发环境的详细信息，请参阅 [ 开发 Dapr 文档 ](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
 1. 创建更改
     - 代码更改需要测试
 1. 更新有关更改的相关文档

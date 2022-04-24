@@ -85,7 +85,7 @@ Dapr 使用 W3C 追踪上下文对服务调用和 pub/sub 消息传递进行分�
 这些是 Dapr 为 HTTP 和 gRPC 生成和传播的特定跟踪上下文标头。
 
 ### 跟踪上下文 HTTP 标头格式
-When propagating a trace context header from an HTTP response to an HTTP request, these are the headers that you need to copy.
+当将 HTTP 响应的跟踪上下文头传播到 HTTP 请求时，您需要复制这些标头。
 
 #### Traceparent 标头
 Traceparent 头以所有供应商都能理解的通用格式在追踪系统中表示收到的请求。 下面是 Traceparent 标头的示例。

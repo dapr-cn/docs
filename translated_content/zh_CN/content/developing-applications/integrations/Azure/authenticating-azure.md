@@ -47,13 +47,13 @@ Azure AD 构建在开放标准（如 OAuth 2.0）之上，该标准允许服务�
 
 **使用 PFX 证书进行身份验证：**
 
-| 字段                         | 必填                                                   | 详情                         | 示例                                                                                                                                                      |
-| -------------------------- | ---------------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `azureTenantId`            | Y                                                    | Azure AD 租户的 ID            | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                                |
-| `azureClientId`            | Y                                                    | 客户端 ID（应用程序 ID）            | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                                |
-| `azureCertificate`         | One of `azureCertificate` and `azureCertificateFile` | 证书和私钥（PFX/PKCS#12 格式）      | `"-----BEGIN PRIVATE KEY-----\n MIIEvgI... \n -----END PRIVATE KEY----- \n -----BEGIN CERTIFICATE----- \n MIICoTC... \n -----END CERTIFICATE-----` |
-| `azureCertificateFile`     | One of `azureCertificate` and `azureCertificateFile` | 包含证书和私钥的 PFX/PKCS#12 文件的路径 | `"/path/to/file.pem"`                                                                                                                                   |
-| `azureCertificatePassword` | N                                                    | 证书的密码（如果已加密）               | `"password"`                                                                                                                                            |
+| 字段                         | 必填                                              | 详情                         | 示例                                                                                                                                                      |
+| -------------------------- | ----------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `azureTenantId`            | Y                                               | Azure AD 租户的 ID            | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                                |
+| `azureClientId`            | Y                                               | 客户端 ID（应用程序 ID）            | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                                |
+| `azureCertificate`         | `azureCertificate` 和 `azureCertificateFile` 二选一 | 证书和私钥（PFX/PKCS#12 格式）      | `"-----BEGIN PRIVATE KEY-----\n MIIEvgI... \n -----END PRIVATE KEY----- \n -----BEGIN CERTIFICATE----- \n MIICoTC... \n -----END CERTIFICATE-----` |
+| `azureCertificateFile`     | `azureCertificate` 和 `azureCertificateFile` 二选一 | 包含证书和私钥的 PFX/PKCS#12 文件的路径 | `"/path/to/file.pem"`                                                                                                                                   |
+| `azureCertificatePassword` | 否                                               | 证书的密码（如果已加密）               | `"password"`                                                                                                                                            |
 
 在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes 秘密的引用。
 
@@ -61,7 +61,7 @@ Azure AD 构建在开放标准（如 OAuth 2.0）之上，该标准允许服务�
 
 | 字段              | 必填 | 详情              | 示例                                       |
 | --------------- | -- | --------------- | ---------------------------------------- |
-| `azureClientId` | N  | 客户端 ID（应用程序 ID） | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"` |
+| `azureClientId` | 否  | 客户端 ID（应用程序 ID） | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"` |
 
 使用 MSI 时，不需要指定任何值，但如果需要，可以选择 `azureClientId` 。
 
@@ -141,9 +141,9 @@ az ad app credential reset \
 
 记下上述值，你需要在 Dapr 组件的元数据中使用这些值，以允许 Dapr 向 Azure 进行身份验证：
 
-- `appId` is the value for `azureClientId`
-- `password` is the value for `azureClientSecret` (this was randomly-generated)
-- `tenant` is the value for `azureTenantId`
+- `appId` 是 `azureClientId` 的值
+- `password` 是 `azureClientSecret` 的值 (这是随机生成的)
+- `tenant` 是 `azureTenantId` 的值
 
 {{% /codetab %}}
 
@@ -274,9 +274,9 @@ spec:
    kubectl create secret generic [your_k8s_secret_name] --from-literal=[your_k8s_secret_key]=[your_client_secret]
    ```
 
-    - `[your_client_secret]` is the application's client secret as generated above
-    - `[your_k8s_secret_name]` is secret name in the Kubernetes secret store
-    - `[your_k8s_secret_key]` is secret key in the Kubernetes secret store
+    - `[your_client_secret]` 是上面生成的应用程序的客户端密钥
+    - `[your_k8s_secret_name]`是Kubernetes密钥仓库中的密钥名称
+    - `[your_k8s_secret_key]` 是 Kubernetes 密钥存储中的密钥
 
 2. 创建一个`azurekeyvault.yaml`组件文件.
 
@@ -368,8 +368,8 @@ spec:
 
 若要开始使用托管标识，首先需要将标识分配给新的或现有的 Azure 资源。 说明取决于服务使用情况。 以下是官方文档的链接：
 
-- [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/azure/aks/use-managed-identity)
-- [Azure App Service](https://docs.microsoft.com/azure/app-service/overview-managed-identity) (including Azure Web Apps and Azure Functions)
+- [Azure Kubernetes Service （AKS）](https://docs.microsoft.com/azure/aks/use-managed-identity)
+- [Azure App Service](https://docs.microsoft.com/azure/app-service/overview-managed-identity) （包括 Azure Web Apps 和 Azure Functions）
 - [Azure Virtual Machines (VM)](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm)
 - [Azure Virtual Machines Scale Sets (VMSS)](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vmss)
 - [Azure Container Instance (ACI)](https://docs.microsoft.com/azure/container-instances/container-instances-managed-identity)
@@ -393,8 +393,8 @@ spec:
 
 默认情况下，Dapr 组件配置为与"公有云"中的 Azure 资源进行交互。 如果你的应用程序已部署到其他云（如 Azure 中国、Azure 政府或 Azure 德国），则可以通过将 `azureEnvironment` 元数据属性设置为受支持的值，为支持的组件启用该值：
 
-- Azure public cloud (default): `"AZUREPUBLICCLOUD"`
-- Azure China: `"AZURECHINACLOUD"`
+- Azure 公有云 (默认): `"AZUREPUBLICCLOUD"`
+- Azure 中国: `"AZURECHINACLOUD"`
 - Azure Government: `"AZUREUSGOVERNMENTCLOUD"`
 - Azure Germany: `"AZUREGERMANCLOUD"`
 

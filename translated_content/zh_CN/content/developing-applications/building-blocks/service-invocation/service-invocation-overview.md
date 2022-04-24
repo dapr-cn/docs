@@ -39,9 +39,9 @@ Dapr 采用边车（Sidecar）、去中心化的架构。 要使用 Dapr 来调�
 ## 特性
 服务调用提供了一系列特性，使您可以方便地调用远程应用程序上的方法。
 
-### Namespace scoping
+### 命名空间作用域
 
-Applications can be scoped to namespaces for deployment and security, and you can call between services deployed to different namespaces. For more information, read the [Service invocation across namespaces]({{< ref "service-invocation-namespaces.md" >}}) article.
+应用程序的范围可以限定为命名空间以实现部署和安全性，并且可以在部署到不同命名空间的服务之间进行调用。 有关详细信息，请阅读 [ 跨命名空间服务调用]({{< ref "service-invocation-namespaces.md" >}}) 章节。
 
 ### 服务间安全性
 
@@ -68,7 +68,7 @@ Dapr 应用程序之间的所有调用都可以通过托管平台上的相互(mT
 
 ### 可插拔的服务发现
 
-Dapr can run on a variety of [hosting platforms]({{< ref hosting >}}). To enable service discovery and service invocation, Dapr uses pluggable [name resolution components]({{< ref supported-name-resolution >}}). 例如，Kubernetes 名称解析组件使用 Kubernetes DNS 服务来解析在集群中运行的其他应用程序的位置。 Self-hosted machines can use the mDNS name resolution component. The Consul name resolution component can be used in any hosting environment including Kubernetes or self-hosted.
+Dapr可以在各种 [托管平台上运行]({{< ref hosting >}})。 为了实现服务发现和服务调用，Dapr使用可插拔的 [名称解析组件]({{< ref supported-name-resolution >}})。 例如，Kubernetes 名称解析组件使用 Kubernetes DNS 服务来解析在集群中运行的其他应用程序的位置。 自承载计算机可以使用 mDNS 名称解析组件。 Consul 名称解析组件可用于任何托管环境，包括 Kubernetes 或自托管环境。
 
 ### 使用 mDNS 轮询负载均衡
 
@@ -78,7 +78,7 @@ Dapr 使用 mDNS 协议提供轮询负载均衡的服务调用请求，例如用
 
 <img src="/images/service-invocation-mdns-round-robin.png" width=600 alt="显示服务调用步骤的图表">
 
-**Note**: You can have N instances of the same app with the same app ID as app ID is unique per app. 而且您可以有多个此应用程序的实例，其中所有这些实例都有相同的 app ID。
+**注意**: 你可以有N个具有相同应用ID的同一应用实例，因为应用ID在每个应用中是唯一的。 而且您可以有多个此应用程序的实例，其中所有这些实例都有相同的 app ID。
 
 ### 具有可观测性的追踪和指标
 
@@ -90,11 +90,14 @@ Dapr 使用 mDNS 协议提供轮询负载均衡的服务调用请求，例如用
 
 ### gRPC代理
 
-Dapr allows users to keep their own proto services and work natively with gRPC. This means that you can use service invocation to call your existing gRPC apps without having to include any Dapr SDKs or include custom gRPC services. For more information, see the [how-to tutorial for Dapr and gRPC]({{< ref howto-invoke-services-grpc.md >}}).
+Dapr允许用户保留他们自己的proto服务，并与gRPC原生工作。 这意味着你可以使用服务调用你现有的gRPC应用程序，而不需要包括任何Dapr SDK或包括自定义gRPC服务。 有关详细信息，请参阅 Dapr 和 gRPC</a>的
+操作方法教程。</p> 
+
+
 
 ## 示例
 
-Following the above call sequence, suppose you have the applications as described in the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md), where a python app invokes a node.js app. 这种情况下，python应用将是“service A”，Node.js应用将是“service B”。
+按照上述调用顺序，假定您有 [Hello World 快速入门](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md)中描述的应用程序，在 python 应用程序调用一个 node.js 应用的地方。 这种情况下，python应用将是“service A”，Node.js应用将是“service B”。
 
 下面的图表展示本地机器上 API 调用的顺序 1-7：
 
@@ -108,12 +111,14 @@ Following the above call sequence, suppose you have the applications as describe
 6. Dapr 转发响应到 Python 的 Dapr sidecar
 7. Python 应用程序收到响应。
 
+
+
 ## 下一步
 
-- 遵循这些指南：
-  - [入门指南：发现并调用服务]({{< ref howto-invoke-discover-services.md >}})
+- 遵循这些指南： 
+    - [入门指南：发现并调用服务]({{< ref howto-invoke-discover-services.md >}})
   - [指南：配置 Dapr 来使用 gRPC]({{< ref grpc >}})
   - [操作方法：使用 gRPC 调用服务]({{< ref howto-invoke-services-grpc.md >}})
-- Try out the [hello world quickstart](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md) which shows how to use HTTP service invocation or try the samples in the [Dapr SDKs]({{< ref sdks >}})
+- 试试 [hello World 快速入门](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md) ，它会显示如何使用 HTTP 服务调用或试试 [Dapr SDK]({{< ref sdks >}}) 中的 Sample。
 - 阅读 [服务调用 API 规范]({{< ref service_invocation_api.md >}})
 - 了解 [服务调用性能]({{< ref perf-service-invocation.md >}}) 数字

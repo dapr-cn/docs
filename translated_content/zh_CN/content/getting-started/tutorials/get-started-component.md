@@ -10,9 +10,9 @@ When building an app, you'd most likely create your own component file definitio
 
 In this quickstart, you will create a component definition file to interact with the [Secrets building block]({{< ref secrets >}}):
 
-- Create a local JSON secret store.
-- Register the secret store with Dapr using a component definition file.
-- Obtain the secret using the Dapr HTTP API.
+- 创建本地 JSON 秘密存储.
+- 使用组件定义文件在 Dapr 注册密钥存储.
+- 使用 Dapr HTTP API 获取秘密.
 
 ## 第 1 步：创建一个 JSON 密钥存储
 
@@ -98,7 +98,7 @@ Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/secrets/my-secret-store/my-se
 {{% /codetab %}}
 {{< /tabs >}}
 
-**Output:**
+**输出:**
 
 ```json
 {"my-secret":"I'm Batman"}

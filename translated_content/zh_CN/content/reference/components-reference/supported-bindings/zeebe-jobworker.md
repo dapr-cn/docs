@@ -95,7 +95,7 @@ The Zeebe process engine has the ability to pass custom task headers to a job wo
 
 The binding will also pass the following job related variables as metadata. The values will be passed as string. The table contains also the original data type so that it can be converted back to the equivalent data type in the used programming language for the worker.
 
-| Metadata                           | Data type | 说明                                                                                              |
+| 元数据                                | Data type | 说明                                                                                              |
 | ---------------------------------- | --------- | ----------------------------------------------------------------------------------------------- |
 | X-Zeebe-Job-Key                    | int64     | The key, a unique identifier for the job                                                        |
 | X-Zeebe-Job-Type                   | string    | The type of the job (should match what was requested)                                           |

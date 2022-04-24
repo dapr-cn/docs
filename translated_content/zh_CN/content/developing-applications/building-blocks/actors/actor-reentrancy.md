@@ -91,4 +91,4 @@ func reentrantCallHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-目前，没有SDK支持actor的可重入性。 将来，在SDK中使用的处理可重入ID的方法可能有所不同。
+目前，没有 SDK 支持 actor 的可重入性。 将来，在SDK中使用的处理可重入ID的方法可能有所不同。

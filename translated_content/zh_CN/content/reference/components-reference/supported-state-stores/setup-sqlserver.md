@@ -33,7 +33,7 @@ spec:
   - name: schema
     value: <SCHEMA> # Optional. defaults to "dbo"
   - name: indexedProperties
-    value: <INDEXED-PROPERTIES> # Optional. List of IndexedProperties.
+    value: <INDEXED-PROPERTIES> # Optional. 索引属性列表。
 
 ```
 

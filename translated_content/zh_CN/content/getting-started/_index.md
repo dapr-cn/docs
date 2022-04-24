@@ -3,16 +3,16 @@ type: docs
 title: "开始使用 Dapr"
 linkTitle: "入门"
 weight: 20
-description: "Get up and running with Dapr in minutes"
+description: "在几分钟内启动并运行 Dapr"
 ---
 
 欢迎来到 Dapr 的入门指南
 
 {{% alert title="Dapr Concepts" color="primary" %}}
-If you are looking for an introductory overview of Dapr and learn more about basic Dapr terminology, we recommend starting with the [concepts section]({{<ref concepts>}}).
+如果您正在寻找 Dapr 的介绍性概述并想了解有关 Dapr 基本术语的更多信息，我们建议您从[概念部分]({{<ref concepts>}})开始。
 {{% /alert %}}
 
-Our getting started guide will walk you through a series of steps to install, initialize, experiment with, and start using Dapr.
+我们的入门指南将引导您完成一系列步骤，以安装、初始化、体验和开始使用 Dapr。
 
 <br>
 

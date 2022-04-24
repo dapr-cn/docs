@@ -3,7 +3,7 @@ type: docs
 title: "Health API reference"
 linkTitle: "健康状况 API"
 description: "关于健康状况 API 的详细文档"
-weight: 700
+weight: 100
 ---
 
 Dapr 提供可以指示其就绪或存活状况的健康检查探针

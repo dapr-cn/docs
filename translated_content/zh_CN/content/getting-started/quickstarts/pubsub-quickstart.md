@@ -38,7 +38,7 @@ Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quic
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Subscribe to topics
+### 步骤 3: 订阅主题
 
 In a terminal window, from the root of the Quickstarts clone directory navigate to the `order-processor` directory.
 
@@ -207,7 +207,7 @@ Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quic
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Subscribe to topics
+### 步骤 3: 订阅主题
 
 In a terminal window, from the root of the Quickstarts clone directory navigate to the `order-processor` directory.
 
@@ -363,7 +363,7 @@ Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quic
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Subscribe to topics
+### 步骤 3: 订阅主题
 
 In a terminal window, from the root of the Quickstarts clone directory navigate to the `order-processor` directory.
 
@@ -517,7 +517,7 @@ Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quic
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Subscribe to topics
+### 步骤 3: 订阅主题
 
 In a terminal window, from the root of the Quickstarts clone directory navigate to the `order-processor` directory.
 
@@ -677,7 +677,7 @@ Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quic
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Subscribe to topics
+### 步骤 3: 订阅主题
 
 In a terminal window, from the root of the Quickstarts clone directory navigate to the `order-processor` directory.
 
@@ -706,7 +706,7 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 }
 ```
 
-### Step 4: Publish a topic
+### 步骤 4: 发布主题
 
 In a new terminal window, from the root of the Quickstarts clone directory, navigate to the `checkout` directory.
 

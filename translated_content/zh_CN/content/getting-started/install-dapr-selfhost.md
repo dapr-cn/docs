@@ -17,10 +17,10 @@ Dapr runs as a sidecar alongside your application. In self-hosted mode, this mea
 
 Dapr initialization includes:
 
-1. Running a **Redis container instance** to be used as a local state store and message broker.
-1. Running a **Zipkin container instance** for observability.
-1. Creating a **default components folder** with component definitions for the above.
-1. Running a **Dapr placement service container instance** for local actor support.
+1. 运行一个用于状态存储和消息代理的** Redis 容器实例**.
+1. 运行一个用于提供可观察性的** Zipkin 容器实例**.
+1. 创建具有上述组件定义的**默认组件文件夹**.
+1. 运行用于本地 actor 支持的** Dapr placement 服务容器实例**.
 
 {{% alert title="Docker" color="primary" %}}
 The recommended development environment requires [Docker](https://docs.docker.com/install/). While you can [initialize Dapr without a dependency on Docker]({{<ref self-hosted-no-docker.md>}})), the next steps in this guide assume the recommended Docker development environment.
@@ -64,7 +64,7 @@ dapr init
 dapr --version
 ```
 
-**Output:**
+**输出:**
 
 `CLI version: {{% dapr-latest-version cli="true" %}}` <br> `Runtime version: {{% dapr-latest-version long="true" %}}`
 
@@ -76,7 +76,7 @@ As mentioned earlier, the `dapr init` command launches several containers that w
 docker ps
 ```
 
-**Output:**
+**输出:**
 
 <img src="/images/install-dapr-selfhost/docker-containers.png" width=800>
 
@@ -100,7 +100,7 @@ Verify by opening your components directory:
 ls $HOME/.dapr
 ```
 
-**Output:**
+**输出:**
 
 `bin  components  config.yaml`
 
@@ -114,7 +114,7 @@ ls $HOME/.dapr
 explorer "%USERPROFILE%\.dapr\"
 ```
 
-**Result:**
+**结果:**
 
 <img src="/images/install-dapr-selfhost/windows-view-components.png" width=600>
 

@@ -24,7 +24,7 @@ description: "应用程序从秘钥存储介质中读取时，需要使用作用
 
 要添加此配置，请按照下面的步骤：
 
-Define the following `appconfig.yaml` configuration and apply it to the Kubernetes cluster using the command `kubectl apply -f appconfig.yaml`.
+定义下面 `appconfig.yaml` 配置，并使用命令 `kubectl apply -f appconfig.yaml` 到 Kubernetes 集群。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -40,17 +40,17 @@ spec:
         defaultAccess: deny
 ```
 
-For applications that need to be denied access to the Kubernetes secret store, follow [these instructions]({{< ref kubernetes-overview.md >}}), and add the following annotation to the application pod.
+对于需要拒绝访问 Kubernetes 密钥仓库的应用程序， 按照 [这些说明]({{< ref kubernetes-overview.md >}})，并将以下注释添加到应用程序 pod 中。
 
 ```yaml
 dapr.io/config: appconfig
 ```
 
-With this defined, the application no longer has access to any secrets in the Kubernetes secret store.
+定义后，应用程序不再能访问 Kubernetes 密钥仓库的任何密钥。
 
 ## 场景2：只允许访问密钥仓库中的某些密钥
 
-This example uses a secret store that is named `vault`. For example this could be a Hashicorp secret store component that has been set on your application. To allow a Dapr application to have access to only certain secrets `secret1` and `secret2` in the `vault` secret store, define the following `appconfig.yaml`:
+这个示例使用一个名为 `vault` 的密钥仓库。 例如，这可能是已经设置在您的应用程序上的 Hashicorp 密钥仓库组件。 允许 Dapr 应用程序只访问在 `vault` 密钥仓库的 `secret1` 和 `secret2` 密钥， 需要定义下面的 `appconfig.yaml`:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -65,7 +65,7 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-This example defines configuration for secret store named `vault`. 密钥仓库的默认访问权限是`deny`，而有些密钥可以通过应用程序基于`allowedSecrets`列表访问。 Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
+此示例定义了名为 `vault` 的密钥仓库配置。 密钥仓库的默认访问权限是`deny`，而有些密钥可以通过应用程序基于`allowedSecrets`列表访问。 按照 [这些说明]({{< ref configuration-concept.md >}}) 将配置应用到 sidecar。
 
 ## 场景3：拒绝访问密钥仓库中的某些敏感密钥
 
@@ -84,11 +84,11 @@ spec:
         deniedSecrets: ["secret1", "secret2"]
 ```
 
-This example uses a secret store that is named `vault`. 上面的配置明确禁止从名为 vault 的密钥仓库访问 `secret1` 和 `secret2` ，但允许访问所有其他密钥。 Follow [these instructions]({{< ref configuration-concept.md >}}) to apply configuration to the sidecar.
+这个示例使用一个名为 `vault` 的密钥仓库。 上面的配置明确禁止从名为 vault 的密钥仓库访问 `secret1` 和 `secret2` ，但允许访问所有其他密钥。 按照 [这些说明]({{< ref configuration-concept.md >}}) 将配置应用到 sidecar。
 
 ## 权限优先级
 
-The `allowedSecrets` and `deniedSecrets` list values take priority over the `defaultAccess` policy.
+`allowedSecrets`和`deniedSecrets`列表值优先于`defaultAccess`策略。
 
 | 场景               | 默认权限  | 允许的密钥  | 被拒绝的密钥 | 权限         |
 | ---------------- | ----- | ------ | ------ | ---------- |

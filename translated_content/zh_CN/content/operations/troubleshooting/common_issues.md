@@ -91,15 +91,15 @@ helm upgrade --install dapr dapr/dapr \
 
 ## 我的 pod 处于 CrashLoopBackoff 或其他由于 daprd sidecar 而失败的状态
 
-If the Dapr sidecar (`daprd`) is taking too long to initialize, this might be surfaced as a failing health check by Kubernetes.
+如果 Dapr sidecar (`daprd`) 需要太长时间才能初始化， 这可能是 Kubernetes 健康检查失败的结果。
 
-If your pod is in a failed state you should check this:
+如果您的 pod 处于失败状态，您应该检查以下内容：
 
 ```bash
 kubectl describe pod <name-of-pod>
 ```
 
-You might see a table like the following at the end of the command output:
+您可能会在命令输出的末尾看到如下所示的表：
 
 ```txt
   Normal   Created    7m41s (x2 over 8m2s)   kubelet, aks-agentpool-12499885-vmss000000  Created container daprd
@@ -110,11 +110,11 @@ You might see a table like the following at the end of the command output:
   Warning  BackOff    3m2s (x18 over 6m48s)  kubelet, aks-agentpool-12499885-vmss000000  Back-off restarting failed container
 ```
 
-The message `Container daprd failed liveness probe, will be restarted` indicates at the Dapr sidecar has failed its health checks and will be restarted. The messages `Readiness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` and `Liveness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` show that the health check failed because no connection could be made to the sidecar.
+消息为 `Container daprd failed liveness probe, will be restarted` 表示 Dapr sidecar 没有通过健康检查并将重新启动。 消息为 `Readiness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` 和 `Liveness probe failed: Get http://10.244.1.10:3500/v1.0/healthz: dial tcp 10.244.1.10:3500: connect: connection refused` 表示健康检查失败，因为无法连接到 sidecar。
 
-The most common cause of this failure is that a component (such as a state store) is misconfigured and is causing initialization to take too long. When initialization takes a long time, it's possible that the health check could terminate the sidecar before anything useful is logged by the sidecar.
+这个失败的最常见原因是组件(例如状态存储) 配置不正确，导致初始化时间过长。 当初始化需要很长时间时，运行状况检查可能会在 sidecar 记录任何有用的东西之前终止 sidecar。
 
-To diagnose the root cause:
+要诊断出根本原因：
 
 - 显著增加 liveness probe 延迟 - [链接]({{< ref "arguments-annotations-overview.md" >}})
 - 将 sidecar 的日志级别设置为 debug - [链接]({{< ref "logs-troubleshooting.md#setting-the-sidecar-log-level" >}})
@@ -124,7 +124,7 @@ To diagnose the root cause:
 
 ## 我无法保存状态或获取状态
 
-Have you installed an Dapr State store in your cluster?
+您是否在集群中安装了 Dapr 状态存储？
 
 若要检查，使用 kubectl 获取组件列表:
 
@@ -132,9 +132,9 @@ Have you installed an Dapr State store in your cluster?
 kubectl get components
 ```
 
-If there isn't a state store component, it means you need to set one up. Visit [here]({{< ref "state-management" >}}) for more details.
+如果没有状态存储组件，则意味着您需要设置一个。 更多详情请访问[这里.]({{< ref "state-management" >}})
 
-If everything's set up correctly, make sure you got the credentials right. Search the Dapr runtime logs and look for any state store errors:
+如果一切设置正确，请确保您的凭据正确。 搜索 Dapr 运行日志并查找任何状态存储错误：
 
 ```bash
 kubectl logs <name-of-pod> daprd
@@ -142,37 +142,37 @@ kubectl logs <name-of-pod> daprd
 
 ## 我无法发布和接收事件
 
-Have you installed an Dapr Message Bus in your cluster?
+您是否在集群中安装了 Dapr 消息总线？
 
-To check, use kubectl get a list of components:
+若要检查，使用 kubectl 获取组件列表:
 
 ```bash
 kubectl get components
 ```
 
-If there isn't a pub/sub component, it means you need to set one up. Visit [here]({{< ref "pubsub" >}}) for more details.
+如果没有发布/订阅组件，则意味着您需要设置一个。 更多详情请访问 [这里.]({{< ref "pubsub" >}})
 
-If everything is set up correctly, make sure you got the credentials right. Search the Dapr runtime logs and look for any pub/sub errors:
-
-```bash
-kubectl logs <name-of-pod> daprd
-```
-
-## I'm getting 500 Error responses when calling Dapr
-
-This means there are some internal issue inside the Dapr runtime. To diagnose, view the logs of the sidecar:
+如果一切设置正确，请确保您的凭据正确。 搜索 Dapr 运行时日志并查找任何发布/订阅错误：
 
 ```bash
 kubectl logs <name-of-pod> daprd
 ```
 
-## I'm getting 404 Not Found responses when calling Dapr
+## 我在调用 Dapr 时收到 500 Error 响应
 
-This means you're trying to call an Dapr API endpoint that either doesn't exist or the URL is malformed. Look at the Dapr API reference [here]({{< ref "api" >}}) and make sure you're calling the right endpoint.
+这意味着 Dapr 运行时中存在一些内部问题。 若要诊断，查看sidecar的日志：
 
-## I don't see any incoming events or calls from other services
+```bash
+kubectl logs <name-of-pod> daprd
+```
 
-Have you specified the port your app is listening on? In Kubernetes, make sure the `dapr.io/app-port` annotation is specified:
+## 我在调用 Dapr 时收到 404 Found Error 响应
+
+这意味着您正在尝试调用不存在或 URL 格式不正确的 Dapr API 端点。 查看此处的 Dapr API 参考 []({{< ref "api" >}}) ，并确保调用正确的端点。
+
+## 我没有看到来自其他服务的任何传入事件或调用
+
+您是否指定了应用程序监听的端口？ 在 Kubernetes 中，请确保指定了 `dapr.io/app-port` 注解:
 
 ```yaml
 annotations:
@@ -181,55 +181,55 @@ annotations:
   dapr.io/app-port: "3000"
 ```
 
-If using Dapr Standalone and the Dapr CLI, make sure you pass the `--app-port` flag to the `dapr run` command.
+如果使用 Dapr 独立和Dapr CLI, 请确保您将 `--app-port` 标记传递到 `Dapr run` 命令。
 
-## My Dapr-enabled app isn't behaving correctly
+## 我的 Dapr 启用的应用程序的行为不正确
 
-The first thing to do is inspect the HTTP error code returned from the Dapr API, if any. If you still can't find the issue, try enabling `debug` log levels for the Dapr runtime. See [here]({{< ref "logs.md" >}}) how to do so.
+第一件事是检查从 Dapr API返回的 HTTP 错误代码，如果有的话。 如果您仍然找不到问题，请尝试为 Dapr 运行时启用 `debug` 日志级别。 请参阅此处 []({{< ref "logs.md" >}}) 如何执行此操作。
 
-You might also want to look at error logs from your own process. If running on Kubernetes, find the pod containing your app, and execute the following:
+您可能还想要查看您自己进程中的错误日志。 如果在 Kubernetes 上运行，请找到包含你的应用的 pod，然后执行以下操作：
 
 ```bash
 kubectl logs <pod-name> <name-of-your-container>
 ```
 
-If running in Standalone mode, you should see the stderr and stdout outputs from your app displayed in the main console session.
+如果在独立模式下运行，您应该看到应用程序在主控制台会话中显示的标准输出和标准输出结果。
 
-## I'm getting timeout/connection errors when running Actors locally
+## 我在本地运行 Actor 时出现超时/连接错误
 
-Each Dapr instance reports it's host address to the placement service. The placement service then distributes a table of nodes and their addresses to all Dapr instances. If that host address is unreachable, you are likely to encounter socket timeout errors or other variants of failing request errors.
+每个 Dapr 实例都会向放置服务报告其主机地址。 然后，放置服务将节点表及其地址分发到所有 Dapr 实例。 如果无法访问该主机地址，则可能会遇到套接字超时错误或失败请求错误的其他变体。
 
-Unless the host name has been specified by setting an environment variable named `DAPR_HOST_IP` to a reachable, pingable address, Dapr will loop over the network interfaces and select the first non-loopback address it finds.
+除非通过将名为 `DAPR_HOST_IP` 的环境变量设置为可访问的、可 ping 的地址来指定主机名，否则 Dapr 将遍历网络接口并选择它找到的第一个非环回地址。
 
-As described above, in order to tell Dapr what the host name should be used, simply set an environment variable with the name of `DAPR_HOST_IP`.
+如上所述，为了告诉 Dapr 应使用什么主机名，只需设置一个名为 `DAPR_HOST_IP` 的环境变量。
 
-The following example shows how to set the Host IP env var to `127.0.0.1`:
+下面的示例显示如何将主机 IP 环境变量设置为 `127.0.0.1`：
 
-**Note: for versions <= 0.4.0 use `HOST_IP`**
+**注意：对于版本 <= 0.4.0，请使用 `HOST_IP`**
 
 ```bash
 export DAPR_HOST_IP=127.0.0.1
 ```
 
-## None of my components are getting loaded when my application starts. I keep getting "Error component X cannot be found"
+## 当我的应用程序启动时，我的组件都没有加载。 我不断收到"Error component X cannot be found"
 
-This is usually due to one of the following issues
+这通常是由于以下问题之一
 
 - 您可能已经在本地定义了 `NAMESPACE` 环境变量，或者将组件部署到 Kubernetes 中的其他命名空间中。 检查您的应用和组件部署到哪个命名空间。 有关详细信息，请阅读 [将组件范围限定为一个或多个应用程序]({{< ref "component-scopes.md" >}}) 。
 - 您可能尚未提供 dapr `--components-path` 给 `run` 命令，或者未将组件放入操作系统的默认组件文件夹中。 有关详细信息，请阅读 [定义组件]({{< ref "get-started-component.md" >}}) 。
 - 组件 YAML 文件中可能存在语法问题。 使用 [YAML 示例]({{< ref "components.md" >}})检查组件 YAML。
 
-## Service invocation is failing and my Dapr service is missing an appId (macOS)
+## 服务调用失败，我的 Dapr 服务缺少 appId （macOS）
 
-Some organizations will implement software that filters out all UPD traffic, which is what mDNS is based on. Mostly commonly, on MacOS, `Microsoft Content Filter` is the culprit.
+有些组织将采用能过滤所有 UPD 流量的软件，这是 mDNS 的基础。 通常，在MacOS上， `Microsoft Content Filter` 是罪魁祸首。
 
-In order for mDNS to function properly, ensure `Micorosft Content Filter` is inactive.
+为了让 mDNS 正常工作，请确认 `Micorosft Content Filter` 处于未激活状态。
 
 - 打开终端
 - 输入 `mdatp system-extension network-filter disable` 并按下回车键。
 - 输入您的帐户密码。
 
-Microsoft Content Filter is disabled when the output is "Success".
+当输出为“成功”时，Microsoft Content Filter 被禁用。
 
 > 有些组织将不时重新启用过滤器。 如果反复遇到缺少 app-id 值的情况，请先检查筛选器是否已重新启用，然后再进行更广泛的故障排除。
 

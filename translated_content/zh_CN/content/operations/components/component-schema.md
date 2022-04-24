@@ -68,10 +68,10 @@ spec:
 ```
 
 ## 深入阅读
-- [Components concept]({{< ref components-concept.md >}})
+- [组件概念]({{< ref components-concept.md >}})
 - [组件定义中的引用密钥]({{< ref component-secrets.md >}})
 - [支持的状态存储]({{< ref supported-state-stores >}})
-- [支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})
+- [支持的发布/订阅消息代理]({{< ref supported-pubsub >}})
 - [支持的密钥存储]({{< ref supported-secret-stores >}})
-- [Supported bindings]({{< ref supported-bindings >}})
+- [支持的绑定]({{< ref supported-bindings >}})
 - [设置组件作用域]({{< ref component-scopes.md >}})

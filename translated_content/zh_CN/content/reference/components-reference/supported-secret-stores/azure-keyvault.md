@@ -38,7 +38,7 @@ spec:
 
 ## 使用 Azure AD 进行身份验证
 
-The Azure Key Vault secret store component supports authentication with Azure AD only. Before you enable this component, make sure you've read the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document and created an Azure AD application (also called Service Principal). Alternatively, make sure you have created a managed identity for your application platform.
+Azure Key Vault 密钥仓库组件仅支持使用 Azure AD 进行身份验证。 在启用此组件之前，请确保已经阅读了[Azure 身份验证]({{< ref authenticating-azure.md >}})文档，并创建了Azure AD应用程序（也称为服务委托）。 或者，请确保已为应用程序平台创建了托管标识。
 
 ## 元数据字段规范
 
@@ -48,7 +48,7 @@ The Azure Key Vault secret store component supports authentication with Azure AD
 | `azureEnvironment` | 否  | Azure 环境的可选名称（如果使用其他 Azure 云）                                                           | `"AZUREPUBLICCLOUD"` (default value), `"AZURECHINACLOUD"`, `"AZUREUSGOVERNMENTCLOUD"`, `"AZUREGERMANCLOUD"` |
 | Auth metadata      |    | See [Authenticating to Azure]({{< ref authenticating-azure.md >}}) for more information |                                                                                                             |
 
-Additionally, you must provide the authentication fields as explained in the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document.
+此外，必须提供身份验证字段，如 [Azure 身份验证]({{< ref authenticating-azure.md >}})文档中所述。
 
 ## Example: Create an Azure Key Vault and authorize a Service Principal
 
@@ -59,7 +59,7 @@ Additionally, you must provide the authentication fields as explained in the [Au
 - [jq](https://stedolan.github.io/jq/download/)
 - 下面的脚本针对 bash 或 zsh shell 进行了优化
 
-Make sure you have followed the steps in the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document to create  an Azure AD application (also called Service Principal). You will need the following values:
+请确保已按照 [Azure 身份验证]({{< ref authenticating-azure.md >}})文档中的步骤创建 Azure AD 应用程序（也称为服务主体）。 您将需要下列值:
 
 - `SERVICE_PRINCIPAL_ID`：为给定应用程序创建的服务主体的 ID
 
@@ -118,7 +118,7 @@ Other less restrictive roles like "Key Vault Secrets Officer" and "Key Vault Adm
 
 {{% codetab %}}
 
-To use a **client secret**, create a file called `azurekeyvault.yaml` in the components directory, filling in with the Azure AD application that you created following the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document:
+若要使用 **client secret**，请在组件目录中创建一个名为 `azurekeyvault.yaml` 的文件，并按照 [Azure 身份验证]({{< ref authenticating-azure.md >}})文档填写创建的 Azure AD 应用程序：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -140,7 +140,7 @@ spec:
     value : "[your_client_secret]"
 ```
 
-If you want to use a **certificate** saved on the local disk, instead, use this template, filling in with details of the Azure AD application that you created following the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document:
+如果您想使用本地磁盘上保存的 **证书** ，则使用此模板， 填写您按照 [Azure身份验证]({{< ref authenticating-azure.md >}}) 文档创建的 Azure AD 应用程序的详细信息：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -164,9 +164,9 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-In Kubernetes, you store the client secret or the certificate into the Kubernetes Secret Store and then refer to those in the YAML file. You will need the details of the Azure AD application that was created following the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document.
+在 Kubernetes 中，您将客户端密钥或证书存储到 Kubernetes 密钥存储中，然后引用 YAML 文件中的那些内容。 您将需要在 [身份验证Azure]({{< ref authenticating-azure.md >}}) 文档后创建的 Azure AD应用程序的详细信息。
 
-To use a **client secret**:
+使用 **客户端密钥**：
 
 1. 使用以下命令创建一个kubernetes密钥:
 
@@ -213,7 +213,7 @@ To use a **client secret**:
     kubectl apply -f azurekeyvault.yaml
     ```
 
-To use a **certificate**:
+要使用 **证书**：
 
 1. 使用以下命令创建 Kubernetes 秘密：
 
@@ -302,7 +302,7 @@ To use a **certificate**:
 
 ## 参考资料
 
-- [Authenticating to Azure]({{< ref authenticating-azure.md >}})
+- [Azure认证]({{< ref authenticating-azure.md >}})
 - [Azure CLI: keyvault commands](https://docs.microsoft.com/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-create)
 - [密钥构建块]({{< ref secrets >}})
 - [指南：获取密钥]({{< ref "howto-secrets.md" >}})

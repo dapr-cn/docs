@@ -119,7 +119,7 @@ In certain scenarios such as zero trust networks or when exposing the Dapr sidec
 Read [How-To: Selectively enable Dapr APIs on the Dapr sidecar]({{<ref "api-allowlist.md">}}) for more details.
 
 ## Secret scoping access policy
-To limit the secrets to which the Dapr application has access to, you can define secret scopes by adding a secret scope policy to the application configuration with restrictive permissions. Read [How To: Use secret scoping]({{<ref "secret-scope.md">}}) for more details.
+要限制 Dapr 应用程序访问密钥的话， 您可以通过向应用程序配置添加密钥作用域政策并限制权限来定义密钥作用域。 Read [How To: Use secret scoping]({{<ref "secret-scope.md">}}) for more details.
 
 ## Component application scoping access policy and secret usage
 Dapr components can be namespaced. That means a Dapr sidecar instance can only access the components that have been deployed to the same namespace. Read [How-To: Scope components to one or more applications using namespaces]({{<ref "component-scopes.md">}}) for more details.

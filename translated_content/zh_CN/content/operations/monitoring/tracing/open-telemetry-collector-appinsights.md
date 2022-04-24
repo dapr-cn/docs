@@ -55,7 +55,7 @@ spec:
         dapr.io/config: "appconfig"
 ```
 
-Some of the quickstarts such as [distributed calculator](https://github.com/dapr/quickstarts/tree/master/tutorials/distributed-calculator) already configure these settings, so if you are using those no additional settings are needed.
+一些快速入门案例，例如[分布式计算器](https://github.com/dapr/quickstarts/tree/master/tutorials/distributed-calculator)已经配置了这些设置，因此，如果您在使用这些时，则不需要进行其他的设置
 
 就这么简单！ 没有必要包含任何的 SDK 或分析您的应用程序代码来确定是否能够支持。 Dapr 自动为您的程序负责了分布式跟踪。
 
@@ -68,5 +68,5 @@ Some of the quickstarts such as [distributed calculator](https://github.com/dapr
 > **注**：只有通过 Dapr sidecar 暴露的 Dapr API 操作（如服务调用或事件发布）才会显示在 Application Map 拓扑中。
 
 ## 相关链接
-* Try out the [observability quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/observability/README.md)
+* 尝试访问[可观察性快速入门](https://github.com/dapr/quickstarts/tree/master/tutorials/observability/README.md)
 * 如何设置[追踪配置选项]({{< ref "configuration-overview.md#tracing" >}})

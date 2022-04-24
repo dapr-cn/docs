@@ -40,13 +40,13 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                   | 示例              |
-| ---------------- |:--:| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| storageAccount   | Y  | Input/Output | The Azure Storage account name                                                                                                                                                       | `"account1"`    |
-| storageAccessKey | Y  | Input/Output | The Azure Storage access key                                                                                                                                                         | `"accessKey"`   |
-| queue            | Y  | Input/Output | The name of the Azure Storage queue                                                                                                                                                  | `"myqueue"`     |
-| ttlInseconds     | 否  | 输出           | Parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. See [also](#specifying-a-ttl-per-message)                    | `"60"`          |
-| decodeBase64     | N  | 输出           | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` is the only allowed positive value. Other positive variations like `"True", "1"` are not acceptable. Defaults to `false` | `true`, `false` |
+| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                | 示例              |
+| ---------------- |:--:| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| storageAccount   | Y  | Input/Output | The Azure Storage account name                                                                                                                                    | `"account1"`    |
+| storageAccessKey | Y  | Input/Output | The Azure Storage access key                                                                                                                                      | `"accessKey"`   |
+| queue            | Y  | Input/Output | The name of the Azure Storage queue                                                                                                                               | `"myqueue"`     |
+| ttlInseconds     | 否  | 输出           | Parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. See [also](#specifying-a-ttl-per-message) | `"60"`          |
+| decodeBase64     | N  | 输出           | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false`                                     | `true`, `false` |
 
 ## 绑定支持
 

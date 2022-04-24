@@ -42,7 +42,7 @@ GET http://localhost:<daprPort>/v1.0/metadata
 | Name                   | 数据类型                                                                  | 说明                          |
 | ---------------------- | --------------------------------------------------------------------- | --------------------------- |
 | id                     | string                                                                | 应用 ID                       |
-| actors                 | [Metadata API Response Registered Actor](#metadataapiresponseactor)[] | 已注册 Actor 与元数据的 json 编码数组。  |
+| actor                  | [Metadata API Response Registered Actor](#metadataapiresponseactor)[] | 已注册 Actor 与元数据的 json 编码数组。  |
 | extended.attributeName | string                                                                | 作为键值对的自定义属性列表，其中 key 是属性名称。 |
 | 组件                     | [Metadata API Response Component](#metadataapiresponsecomponent)[]    | 加载的组件元数据的 json 编码数组。        |
 

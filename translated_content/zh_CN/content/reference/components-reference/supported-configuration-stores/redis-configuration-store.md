@@ -45,15 +45,15 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                 | 必填 | 详情                                                                                                                                                     | 示例                                                              |
-| ------------------ |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
-| redisHost          | Y  | Redis的连接地址                                                                                                                                             | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
-| redisPassword      | Y  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                                                                                  | `""`, `"KeFg23!"`                                               |
-| enableTLS          | 否  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                                                                                                       | `"true"`, `"false"`                                             |
-| maxRetries         | 否  | 放弃前的最大重试次数。 默认值为 `3`。                                                                                                                                  | `5`, `10`                                                       |
-| maxRetryBackoff    | N  | 每次重试之间的最小回退。 默认值为 2</code> 秒 `; <code>"-1"` 禁用回退。                                                                                                   | `3000000000`                                                    |
-| failover           | N  | 已启用故障转移配置的属性。 需要设置 sentinalMasterName。 redisHost 应该是哨兵主机地址。 See [Redis Sentinel Documentation](https://redis.io/docs/manual/sentinel/). 默认值为 `"false"` | `"true"`, `"false"`                                             |
-| sentinelMasterName | N  | 哨兵主名称。 See [Redis Sentinel Documentation](https://redis.io/docs/manual/sentinel/)                                                                      | `""`,  `"127.0.0.1:6379"`                                       |
+| 字段                 | 必填 | 详情                                                                                                                                          | 示例                                                              |
+| ------------------ |:--:| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| redisHost          | Y  | Redis的连接地址                                                                                                                                  | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
+| redisPassword      | Y  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                                                                       | `""`, `"KeFg23!"`                                               |
+| enableTLS          | 否  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                                                                                            | `"true"`, `"false"`                                             |
+| maxRetries         | 否  | 放弃前的最大重试次数。 默认值为 `3`。                                                                                                                       | `5`, `10`                                                       |
+| maxRetryBackoff    | N  | 每次重试之间的最小回退。 默认值为 2</code> 秒 `; <code>"-1"` 禁用回退。                                                                                        | `3000000000`                                                    |
+| failover           | N  | 已启用故障转移配置的属性。 需要设置 sentinalMasterName。 redisHost 应该是哨兵主机地址。 请参阅 [Redis Sentinel 文档](https://redis.io/docs/manual/sentinel/). 默认值为 `"false"` | `"true"`, `"false"`                                             |
+| sentinelMasterName | N  | 哨兵主名称。 请参阅 [Redis Sentinel 文档](https://redis.io/docs/manual/sentinel/)                                                                      | `""`,  `"127.0.0.1:6379"`                                       |
 
 
 ## 安装 Redis

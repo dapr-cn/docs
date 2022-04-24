@@ -12,7 +12,7 @@ In this article, you'll learn how you can call between services deployed to diff
 localhost:3500/v1.0/invoke/nodeapp/method/neworder
 ```
 
-Service invocation also supports calls across namespaces. 在所有受支持的托管平台上， Dapr 应用程序标识（ID）遵循包含了目标命名空间的有效 FQDN 格式。 You can specify both:
+服务调用也支持跨命名空间的调用。 在所有受支持的托管平台上， Dapr 应用程序标识（ID）遵循包含了目标命名空间的有效 FQDN 格式。 You can specify both:
 
 - The app ID (`nodeapp`), and
 - The namespace the app runs in (`production`).

@@ -10,11 +10,11 @@ description: JavaScript 客户端 SDK，用于开发 Dapr 应用程序
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [NodeJS的最新LTS版本或更高版本](https://nodejs.org/en/)
+- [Node.js 的最新 LTS 版本或更高版本](https://nodejs.org/en/)
 
 ## 安装和导入 Dapr 的 JS SDK
 
-使用 npm 安装 SDK ：
+使用 npm 安装 SDK：
 
 ```bash
 npm i dapr-client
@@ -41,9 +41,9 @@ const client = new DaprClient(daprHost, daprPort, CommunicationProtocolEnum.GRPC
 
 ## 运行
 
-要运行这些示例，您可以使用两种不同的协议与 Dapr sidecar 进行交互：HTTP (默认) 或 gRPC。
+要运行这些示例，您可以使用两种不同的协议与 Dapr Sidecar 进行交互：HTTP（默认）或 gRPC。
 
-### 使用 HTTP (默认)
+### 使用 HTTP（默认）
 
 ```javascript
 import { DaprClient, DaprServer } from "dapr-client";
@@ -52,7 +52,7 @@ const server= new DaprServer(appHost, appPort, daprHost, daprPort);
 ```
 
 ```bash
-# 使用 dapr 运行
+# 使用 dapr run 命令
 dapr run --app-id <example-sdk> --app-port 50051 --app-protocol http npm run start
 
 # 或者使用 npm 脚本
@@ -61,7 +61,7 @@ npm run start:dapr-http
 
 ### 使用 gRPC
 
-由于 HTTP 是默认设置，因此必须调整通信协议才能使用 gRPC。 你可以通过将额外的参数传递给客户端或服务器构造函数来执行此操作。
+由于 HTTP 是默认设置，因此必须调整通信协议才能使用 gRPC。 您可以通过向客户端或服务器构造函数传递一个额外的参数来做到这一点。
 
 ```javascript
 import { DaprClient, DaprServer, CommunicationProtocol } from "dapr-client";
@@ -70,7 +70,7 @@ const server= new DaprServer(appHost, appPort, daprHost, daprPort, Communication
 ```
 
 ```bash
-# 使用 dapr 运行
+# 使用 dapr run 命令
 dapr run --app-id <example-sdk> --app-port 50051 --app-protocol grpc npm run start
 
 # 或者使用 npm 脚本
@@ -78,14 +78,14 @@ npm run start:dapr-grpc
 ```
 
 ### DaprClient 类库
-该类库提供应用程序与 Dapr sidecar 进行通信的方法。
+该类库提供应用程序与 Dapr Sidecar 进行通信的方法。
 
 ### DaprServer 类库
-该类库用于应用程序向 Dapr 注册绑定/路由。 `start()`方法被用来启动服务器并绑定路由。
+该类库用于应用程序向 Dapr 注册绑定（Binding）或路由。 `start()` 方法用于启动服务器并绑定路由。
 
 ## 构建块
 
-JavaScript SDK 允许您与的所有 [Dapr 构建块]({{< ref building-blocks >}})进行交互。
+JavaScript SDK 允许您与的所有 [Dapr 构建块]({{< ref building-blocks >}}) 进行交互。
 
 ### 调用服务
 
@@ -109,7 +109,7 @@ async function start() {
 }
 ```
 
-- 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
+- 有关服务调用的完整指南，请访问 [如何调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
 ### 保存、获取和删除应用程序状态
 
@@ -164,9 +164,9 @@ async function start() {
 }
 ```
 
-- 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
+- 有关状态操作的完整列表，请访问 [如何获取和保存状态]({{< ref howto-get-save-state.md >}})。
 
-### 发布 & 订阅消息
+### 发布和订阅消息
 
 ##### 发布消息
 
@@ -211,11 +211,11 @@ async function start() {
 }
 ```
 
-- 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
+- 有关状态操作的完整列表，请访问 [如何发布和订阅]({{< ref howto-publish-subscribe.md >}})。
 
-### 与绑定交互
+### 与绑定（Binding）交互
 
-**输出绑定**
+**输出绑定（Ouput Binding）**
 
 ```javascript
 import { DaprClient } from "dapr-client"; 
@@ -234,7 +234,7 @@ async function start() {
 }
 ```
 
-**输入绑定**
+**输入绑定（Input Binding）**
 
 ```javascript
 import { DaprServer } from "dapr-client";;
@@ -255,7 +255,7 @@ async function start() {
 }
 ```
 
-- 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
+- 有关输出绑定的完整指南，请访问 [如何使用绑定]({{< ref howto-bindings.md >}})。
 
 ### 检索密钥
 
@@ -279,7 +279,7 @@ async function start() {
 }
 ```
 
-- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
+- 有关密钥的完整指南，请访问 [如何检索密钥]({{< ref howto-secrets.md >}})。
 
 ### 获取配置
 

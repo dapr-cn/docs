@@ -45,11 +45,11 @@ no_list: true
 
 ### Alibaba Cloud
 
-| Name                                                       | 输入<br>绑定 | 输出<br>绑定 | 状态    | 组件版本 | 自从  |
-| ---------------------------------------------------------- |:--------------:|:--------------:| ----- | ---- | --- |
-| [Alibaba Cloud DingTalk]({{< ref alicloud-dingtalk.md >}}) |       ✅        |       ✅        | Alpha | v1   | 1.2 |
-| [Alibaba Cloud OSS]({{< ref alicloudoss.md >}})            |                |       ✅        | Alpha | v1   | 1.0 |
-| [阿里云 Tablestore]({{< ref alicloudtablestore.md >}})        |                |       ✅        | Alpha | v1   | 1.5 |
+| Name                                                | 输入<br>绑定 | 输出<br>绑定 | 状态    | 组件版本 | 自从  |
+| --------------------------------------------------- |:--------------:|:--------------:| ----- | ---- | --- |
+| [阿里云钉钉]({{< ref alicloud-dingtalk.md >}})           |       ✅        |       ✅        | Alpha | v1   | 1.2 |
+| [Alibaba Cloud OSS]({{< ref alicloudoss.md >}})     |                |       ✅        | Alpha | v1   | 1.0 |
+| [阿里云 Tablestore]({{< ref alicloudtablestore.md >}}) |                |       ✅        | Alpha | v1   | 1.5 |
 
 ### Amazon Web Services (AWS)
 

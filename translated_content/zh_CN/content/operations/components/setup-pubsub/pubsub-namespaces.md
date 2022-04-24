@@ -12,7 +12,7 @@ description: "多个命名空间下使用Dapr Pub/Sub"
 命名空间是一个Dapr里的，用于确定应用程序和组件的作用范围概念。 这个例子使用的是Kubernetes的命名空间，然而Dapr组件的命名空间范围可以在任何支持的平台上使用。 有关确定组件范围的详细信息，请参阅[操作方法：将组件限定为一个或多个应用程序]({{< ref "component-scopes.md" >}}) 。
 {{% /alert %}}
 
-This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/pub_sub). Redis安装和其订阅者在`namespace-a`中，而发布者UI在`namespace-b`中。 如果Redis安装在另一个命名空间上，或者使用Azure ServiceBus、AWS SNS/SQS或GCP PubSub等云服务，该解决方案也同样奏效。
+这个例子使用了[发布订阅示例](https://github.com/dapr/quickstarts/tree/master/pub_sub)。 Redis安装和其订阅者在`namespace-a`中，而发布者UI在`namespace-b`中。 如果Redis安装在另一个命名空间上，或者使用Azure ServiceBus、AWS SNS/SQS或GCP PubSub等云服务，该解决方案也同样奏效。
 
 这是一个使用命名空间的示例图片。
 
@@ -33,7 +33,7 @@ This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/m
 ## 前提
 
 * [ Dapr 可安装在 Kubernetes 上的]({{< ref " kubernetes-deploy. md" >}})任何命名空间，因为 Dapr 工作在集群级别。
-* Checkout and cd into the directory for [PubSub quickstart](https://github.com/dapr/quickstarts/tree/master/pub_sub).
+* 将 [PubSub quickstart](https://github.com/dapr/quickstarts/tree/master/pub_sub) 示例 checkout下来并进入目录。
 
 ## 设置`namespace-a`
 
@@ -43,7 +43,7 @@ kubectl create namespace namespace-a
 kubectl config set-context --current --namespace=namespace-a
 ```
 
-Install Redis (master and slave) on `namespace-a`, following [these instructions]({{< ref "getting-started/tutorials/configure-state-pubsub.md" >}}).
+遵循[这些说明]({{< ref "getting-started/tutorials/configure-state-pubsub.md" >}})，在 `namespace-a` 上安装 Redis（主从）。
 
 现在，配置`deploy/redis.yaml`，注意包含`namespace-a`的主机名。
 

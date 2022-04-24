@@ -135,7 +135,7 @@ To perform a `deploy-process` operation, invoke the Zeebe command binding with a
 }
 ```
 
-The metadata parameters are:
+元数据参数包括：
 
 - `fileName` - the name of the process file
 
@@ -190,7 +190,7 @@ To perform a `create-instance` operation, invoke the Zeebe command binding with 
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `bpmnProcessId` - the BPMN process ID of the process definition to instantiate
 - `version` - (optional, default: latest version) the version of the process to instantiate
@@ -214,7 +214,7 @@ To perform a `create-instance` operation, invoke the Zeebe command binding with 
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `processDefinitionKey` - the unique key identifying the process definition to instantiate
 - `variables` - (optional) JSON document that will instantiate the variables for the root variable scope of the process instance; it must be a JSON object, as variables will be mapped in a key-value fashion. e.g. { "a": 1, "b": 2 } will create two variables, named "a" and "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the JSON document is an array and not an object
@@ -255,7 +255,7 @@ To perform a `cancel-instance` operation, invoke the Zeebe command binding with 
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `processInstanceKey` - the process instance key
 
@@ -284,7 +284,7 @@ To perform a `set-variables` operation, invoke the Zeebe command binding with a 
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `elementInstanceKey` - the unique identifier of a particular element; can be the process instance key (as obtained during instance creation), or a given element, such as a service task (see elementInstanceKey on the job message)
 - `local` - (optional, default: `false`) if true, the variables will be merged strictly into the local scope (as indicated by elementInstanceKey); this means the variables is not propagated to upper scopes. for example, let's say we have two scopes, '1' and '2', with each having effective variables as: 1 => `{ "foo" : 2 }`, and 2 => `{ "bar" : 1 }`. if we send an update request with elementInstanceKey = 2, variables `{ "foo" : 5 }`, and local is true, then scope 1 will be unchanged, and scope 2 will now be `{ "bar" : 1, "foo" 5 }`. if local was false, however, then scope 1 would be `{ "foo": 5 }`, and scope 2 would be `{ "bar" : 1 }`
@@ -320,7 +320,7 @@ To perform a `resolve-incident` operation, invoke the Zeebe command binding with
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `incidentKey` - the unique ID of the incident to resolve
 
@@ -347,7 +347,7 @@ To perform a `publish-message` operation, invoke the Zeebe command binding with 
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `messageName` - the name of the message
 - `correlationKey` - (optional) the correlation key of the message
@@ -393,7 +393,7 @@ To perform a `activate-jobs` operation, invoke the Zeebe command binding with a 
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `jobType` - the job type, as defined in the BPMN process (e.g. `<zeebe:taskDefinition type="fetch-products" />`)
 - `maxJobsToActivate` - the maximum jobs to activate by this request
@@ -450,7 +450,7 @@ To perform a `complete-job` operation, invoke the Zeebe command binding with a `
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `jobKey` - the unique job identifier, as obtained from the activate jobs response
 - `variables` - (optional) a JSON document representing the variables in the current task scope
@@ -477,7 +477,7 @@ To perform a `fail-job` operation, invoke the Zeebe command binding with a `POST
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `jobKey` - the unique job identifier, as obtained when activating the job
 - `retries` - the amount of retries the job should have left
@@ -504,7 +504,7 @@ To perform a `update-job-retries` operation, invoke the Zeebe command binding wi
 }
 ```
 
-The data parameters are:
+参数的含义是：
 
 - `jobKey` - the unique job identifier, as obtained through the activate-jobs operation
 - `retries` - the new amount of retries for the job; must be positive

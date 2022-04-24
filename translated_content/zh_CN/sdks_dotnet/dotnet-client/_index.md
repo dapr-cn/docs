@@ -67,7 +67,7 @@ await client.DeleteStateAsync(storeName, stateKeyName, cancellationToken: cancel
 Console.WriteLine("Deleted State!");
 ```
 
-### Query State (Alpha)
+### 查询状态（Alpha）
 
 ```csharp
 var query = "{" +
@@ -165,7 +165,7 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 
 - 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
 
-### Get Configuration Keys (Alpha)
+### 获取配置键（Alpha）
 ```csharp
 var client = new DaprClientBuilder().Build();
 

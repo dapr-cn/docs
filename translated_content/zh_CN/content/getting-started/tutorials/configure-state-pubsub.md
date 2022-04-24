@@ -67,7 +67,7 @@ For Kubernetes:
 Verify you have an [Azure subscription](https://azure.microsoft.com/free/).
 
 1. Open and log into the [Azure portal](https://ms.portal.azure.com/#create/Microsoft.Cache) to start the Azure Redis Cache creation flow.
-1. Fill out the necessary information.
+1. 填写必要的信息.
    - Dapr Pub/sub uses [Redis streams](https://redis.io/topics/streams-intro) introduced by Redis 5.0. To use Azure Redis Cache for Pub/sub, set the version to *(PREVIEW) 6*.
 1. Click **Create** to kickoff deployment of your Redis instance.
 1. Make note of the Redis instance hostname from the **Overview** page in Azure portal for later.

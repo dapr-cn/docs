@@ -37,7 +37,7 @@ spec:
 
 ## 支持的状态存储
 
-访问 [this reference]({{< ref supported-state-stores >}}) 查看所有支持的 Dapr 状态存储库。
+访问 [参考手册]({{< ref supported-state-stores >}}) 查看所有支持的 Dapr 状态存储库。
 
 ## 相关主题
 - [组件概念]({{< ref components-concept.md >}})

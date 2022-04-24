@@ -82,4 +82,4 @@ kubectl apply -f mybinding.yaml
 
 ## 相关链接
 - [绑定构建块]({{< ref bindings >}})
-- [Supported bindings]({{<ref supported-bindings >}})
+- [支持的绑定]({{<ref supported-bindings >}})

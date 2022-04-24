@@ -20,13 +20,13 @@ Hit the ground running with our Dapr quickstarts, complete with code samples aim
 
 ## 快速入门
 
-| 快速入门                                                              | 说明                                                                 |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [Service Invocation]({{< ref serviceinvocation-quickstart.md >}}) | Call a method on another service using the service invocation API. |
-| [发布与订阅]({{< ref pubsub-quickstart.md >}})                         | Send and receive messages using the publish and subscribe API.     |
-| [State Management]({{< ref statemanagement-quickstart.md >}})     | Create stateful applications using the state management API.       |
-| 绑定                                                                | Coming soon.                                                       |
-| Actors                                                            | Coming soon.                                                       |
-| 可观测性                                                              | Coming soon.                                                       |
-| Secrets Management                                                | Coming soon.                                                       |
-| Configuration (配置)                                                | Coming soon.                                                       |
+| 快速入门                                                | 说明                                                                 |
+| --------------------------------------------------- | ------------------------------------------------------------------ |
+| [服务调用]({{< ref serviceinvocation-quickstart.md >}}) | Call a method on another service using the service invocation API. |
+| [发布与订阅]({{< ref pubsub-quickstart.md >}})           | Send and receive messages using the publish and subscribe API.     |
+| [状态管理]({{< ref statemanagement-quickstart.md >}})   | Create stateful applications using the state management API.       |
+| 绑定                                                  | Coming soon.                                                       |
+| Actor                                               | Coming soon.                                                       |
+| 可观测性                                                | Coming soon.                                                       |
+| Secrets Management                                  | Coming soon.                                                       |
+| Configuration (配置)                                  | Coming soon.                                                       |

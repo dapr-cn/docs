@@ -191,7 +191,7 @@ JSON 对象将具有以下字段：
 
 If `Rn/` is not specified, the reminder will run an infinite number of times until deleted.
 
-The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
+以下指定 `dueTime` 的 3 秒和 7 秒的句点。
 
 ```json
 {
@@ -200,7 +200,7 @@ The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
 }
 ```
 
-A `dueTime` of 0 means to fire immediately. The following body means to fire immediately, then every 9 seconds.
+`dueTime` 为0表示立即执行。 以下正文是指立即执行，然后每 9 秒钟再执行一次。
 
 ```json
 {
@@ -209,7 +209,7 @@ A `dueTime` of 0 means to fire immediately. The following body means to fire imm
 }
 ```
 
-To configure the reminder to fire only once, the period should be set to empty string. The following specifies a `dueTime` of 3 seconds with a period of empty string, which means the reminder will fire in 3 seconds and then never fire again.
+To configure the reminder to fire only once, the period should be set to empty string. 以下指定一个 `dueTime` 3 秒，period 为空字符串，这意味着 reminders 将在 3 秒后立即执行，然后永远不会再次触发。
 
 ```json
 {
@@ -251,7 +251,7 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
 
 ### 获取 actor reminders
 
-Gets a reminder for an actor.
+获取一个 actor 的 reminders。
 
 #### HTTP 请求
 
@@ -284,7 +284,7 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
   "Content-Type: application/json"
 ```
 
-The above command returns the reminder:
+以上命令将返回 reminders:
 
 ```json
 {
@@ -296,7 +296,7 @@ The above command returns the reminder:
 
 ### 删除 actor reminders
 
-Deletes a reminder for an actor.
+删除一个 actor 的 reminders。
 
 #### HTTP 请求
 
@@ -331,7 +331,7 @@ curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/check
 
 ### 创建 Actor timers
 
-Creates a timer for an actor.
+创建一个 actor 的 reminders。
 
 #### HTTP 请求
 
@@ -341,7 +341,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<n
 
 Body:
 
-The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
+以下指定 `dueTime` 的 3 秒和 7 秒的句点。
 
 ```json
 {
@@ -350,7 +350,7 @@ The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
 }
 ```
 
-A `dueTime` of 0 means to fire immediately.  The following body means to fire immediately, then every 9 seconds.
+`dueTime` 为0表示立即执行。  以下正文是指立即执行，然后每 9 秒钟再执行一次。
 
 ```json
 {
@@ -393,7 +393,7 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
 
 ### 删除 Actor timers
 
-Deletes a timer for an actor.
+删除一个 actor 的 timer。
 
 #### HTTP 请求
 
@@ -451,14 +451,14 @@ GET http://localhost:<appPort>/dapr/config
 
 #### 示例
 
-Example of getting the registered actors:
+获取注册的 Actors 的示例:
 
 ```shell
 curl -X GET http://localhost:3000/dapr/config \
   -H "Content-Type: application/json"
 ```
 
-The above command returns the config (all fields are optional):
+以上命令返回配置 ( 所有字段都是可选的):
 
 | 参数                        | 说明                                                                                                       |
 | ------------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -480,7 +480,7 @@ The above command returns the config (all fields are optional):
 
 ### 停用 actor
 
-Deactivates an actor by persisting the instance of the actor to the state store with the specified actorId.
+通过将 指定 actor Id 的 actor 保留到状态存储与来停用 actor.
 
 #### HTTP 请求
 
@@ -522,7 +522,7 @@ Invokes a method for an actor with the specified `methodName` where:
 - Parameters to the method are passed in the body of the request message.
 - Return values are provided in the body of the response message.
 
-If the actor is not already running, the app side should [activate](#activating-an-actor) it.
+如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
 #### HTTP 请求
 
@@ -560,7 +560,7 @@ curl -X POST http://localhost:3000/actors/stormtrooper/50/method/performAction \
 
 ### 调用 reminders
 
-Invokes a reminder for an actor with the specified reminderName. 如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
+调用具有指定的 reminderName 的 actor 的 reminders。 如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
 #### HTTP 请求
 
@@ -598,7 +598,7 @@ curl -X POST http://localhost:3000/actors/stormtrooper/50/method/remind/checkReb
 
 ### 调用 timer
 
-Invokes a timer for an actor with the specified `timerName`. If the actor is not already running, the app side should [activate](#activating-an-actor) it.
+Invokes a timer for an actor with the specified `timerName`. 如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
 #### HTTP 请求
 
@@ -636,9 +636,9 @@ curl -X POST http://localhost:3000/actors/stormtrooper/50/method/timer/checkRebe
 
 ### 健康检查
 
-Probes the application for a response to signal to Dapr that the app is healthy and running. Any response status code other than `200` will be considered an unhealthy response.
+探测应用程序以响应向 Dapr 发送的信号，用于表征该应用程序运行正常与否。 Any response status code other than `200` will be considered an unhealthy response.
 
-A response body is not required.
+不需要响应主体。
 
 #### HTTP 请求
 
@@ -660,7 +660,7 @@ GET http://localhost:<appPort>/healthz
 
 #### 示例
 
-Example of getting a health check response from the app:
+从应用程序获取健康检查响应的示例：
 
 ```shell
 curl -X GET http://localhost:3000/healthz \
@@ -672,9 +672,9 @@ Conceptually, activating an actor means creating the actor's object and adding t
 
 ## 外部查询 actor 状态
 
-To enable visibility into the state of an actor and allow for complex scenarios like state aggregation, Dapr saves actor state in external state stores, such as databases. As such, it is possible to query for an actor state externally by composing the correct key or query.
+To enable visibility into the state of an actor and allow for complex scenarios like state aggregation, Dapr saves actor state in external state stores, such as databases. 因此，可以通过组成正确的键或查询来外部查询 actor 状态。
 
-The state namespace created by Dapr for actors is composed of the following items:
+由 Dapr 为 Actors 创建的状态名称空间由以下项组成:
 
 - App ID: Represents the unique ID given to the Dapr application.
 - Actor Type: Represents the type of the actor.
@@ -685,4 +685,4 @@ The following example shows how to construct a key for the state of an actor ins
 
 `myapp||cat||hobbit||food`
 
-In the example above, we are getting the value for the state key `food`, for the actor ID `hobbit` with an actor type of `cat`, under the App ID namespace of `myapp`.
+在以上示例中，我们在 `myapp` 的应用标识名称空间下，为 actor ID 为 `hobbit` ( actor 类型为 `cat`) 获取状态键 `food`的值。

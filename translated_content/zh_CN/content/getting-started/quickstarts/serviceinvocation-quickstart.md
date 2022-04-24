@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Quickstart: Service Invocation"
-linkTitle: "Service Invocation"
+linkTitle: "服务调用"
 weight: 70
 description: "Get started with Dapr's Service Invocation building block"
 ---

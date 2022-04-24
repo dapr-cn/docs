@@ -39,7 +39,7 @@ spec:
 - `create` : [创建文件](#create-file)
 - `get` : [获取文件](#get-file)
 - `list` : [List files](#list-files)
-- `delete` : [Delete file](#delete-file)
+- `delete` ：[删除文件](#delete-file)
 
 ### 创建文件
 

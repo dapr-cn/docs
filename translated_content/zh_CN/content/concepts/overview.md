@@ -21,7 +21,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 
 这就是Dapr所要解决的。 Dapr 将 *最佳实践* 编纂成开放、独立的 API（称为构建基块），使您能够使用所选的语言和框架构建可移植应用程序。 每个构建块都是完全独立的，您可以采用其中一个、多个或全部来构建你的应用。
 
-Using Dapr you can incrementally migrate your existing applications to a microservices architecture, thereby adopting cloud native patterns such scale out/in, resiliency and independent deployments.
+使用 Dapr，您可以将现有应用程序增量迁移到微服务架构，从而采用云原生模式，例如横向扩展/收缩（scale out/in）、弹性和独立部署。
 
 此外，Dapr 与平台无关，这意味着您可以在本地、任何 Kubernetes 集群、虚拟机或物理机以及 Dapr 集成的其他托管环境中运行应用程序。 这使得您能够在云平台和边缘计算中运行微服务应用。
 

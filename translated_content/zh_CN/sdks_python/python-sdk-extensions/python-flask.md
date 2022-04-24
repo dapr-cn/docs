@@ -6,7 +6,7 @@ weight: 300000
 description: 如何创建基于 Python FastAPI 的 Dapr 虚拟 actors
 ---
 
-Dapr Python SDK 使用 `flask-dapr` 模块提供与Flask 的集成
+Dapr Python SDK 使用 `flask-dapr` 模块提供与 Flask 的集成。
 
 ## 安装
 

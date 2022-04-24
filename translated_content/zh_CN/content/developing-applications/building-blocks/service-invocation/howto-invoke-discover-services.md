@@ -99,7 +99,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ```
 
-如果您的应用使用 SSL 连接，您可以告诉Dapr 在不安全的 SSL 连接中调用您的应用：
+If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection:
 
 ```bash
 
@@ -170,7 +170,7 @@ spec:
 
 {{< /tabs >}}
 
-## Step 2: Invoke the service
+## 步骤 2: 调用服务
 
 要使用 Dapr 调用应用程序，您可以在任意 Dapr 实例中使用 `调用` API。
 
@@ -367,7 +367,7 @@ main();
 
 要调用 "GET" 端点:
 ```bash
-curl http://localhost:3602/v1.0/invoke/checkout/method/checkout/100
+curl http://localhost:3500/v1.0/invoke/cart/method/add
 ```
 
 为了尽可能避免改变URL路径，Dapr提供了以下方式来调用服务调用API。

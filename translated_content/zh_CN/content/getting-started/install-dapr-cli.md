@@ -13,7 +13,7 @@ You'll use the Dapr CLI as the main tool for various Dapr-related tasks. You can
 - List running services.
 - Run the Dapr dashboard.
 
-The Dapr CLI works with both [self-hosted]({{< ref self-hosted >}}) and [Kubernetes]({{< ref Kubernetes >}}) environments.
+Dapr CLI 同时支持 [自托管]({{< ref self-hosted >}}) 和 [Kubernetes]({{< ref Kubernetes >}}) 环境。
 
 ### Step 1: Install the Dapr CLI
 
@@ -105,10 +105,10 @@ curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh 
 {{% /codetab %}}
 
 {{% codetab %}}
-Each release of Dapr CLI includes various OSes and architectures. You can manually download and install these binary versions.
+每次发行的Dapr CLI包括各种操作系统和架构。 You can manually download and install these binary versions.
 
-1. Download the desired Dapr CLI from the latest [Dapr Release](https://github.com/dapr/cli/releases).
-2. Unpack it (e.g. dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip).
+1. 从最新的 [Dapr Releases](https://github.com/dapr/cli/releases) 中下载所需的 Dapr CLI.
+2. 解压缩 (例如，dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip).
 3. 将其移动到你想要的位置。
    - For Linux/MacOS, we recommend `/usr/local/bin`.
    - 对于Windows，创建一个目录并将其添加到系统PATH。 例如:
@@ -119,7 +119,7 @@ Each release of Dapr CLI includes various OSes and architectures. You can manual
 
 {{< /tabs >}}
 
-### Step 2: Verify the installation
+### 步骤 2：验证安装
 
 Verify the CLI is installed by restarting your terminal/command prompt and running the following:
 
@@ -127,7 +127,7 @@ Verify the CLI is installed by restarting your terminal/command prompt and runni
 dapr
 ```
 
-**Output:**
+**输出:**
 
 ```md
          __
@@ -168,4 +168,4 @@ Flags:
 Use "dapr [command] --help" for more information about a command.
 ```
 
-{{< button text="Next step: Initialize Dapr >>" page="install-dapr-selfhost" >}}
+{{< button text="下一步: 初始化 Dapr >>" page="install-dapr-selfhost" >}}

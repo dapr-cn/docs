@@ -6,25 +6,25 @@ weight: 1000
 description: 如何使用 Dapr JavaScript SDK 启动和运行 Actor
 ---
 
-通过 Dapr actor 包，您可以与 JavaScript 应用程序中的 Dapr virtual actor 进行交互。 下面的示例演示如何使用 JavaScript SDK 与 Dapr virtual actor 进行交互。
+通过 Dapr Actor 包，您可以与 JavaScript 应用程序中的 Dapr 虚拟 Actor 进行交互。 下面的示例讲演示如何使用 JavaScript SDK 与 Dapr 虚拟 Actor 进行交互。
 
-有关Dapr Actor 的更深入概述，请访问 [概述页面]({{< ref actors-overview >}})。
+有关 Dapr Actor 的更深入说明，请访问 [概述页面]({{< ref actors-overview >}})。
 
 ## 前提
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [NodeJS的最新LTS版本或更高版本](https://nodejs.org/en/)
+- 初始化 [Dapr 环境]({{< ref install-dapr-selfhost.md >}})
+- [Node.js 的最新 LTS 版本或更高版本](https://nodejs.org/en/)
 - [已安装 JavaScript NPM 包](https://www.npmjs.com/package/dapr-client)
 
 ## 场景
-下面的代码示例松散地描述了停车库点监控系统的场景，这可以在以下视频中看到 Mark Russinovich(https://www.youtube.com/watch?v=eJCu6a-x9uo&t=3785)
+下面的代码示例粗略地描述了停车库点监控系统的场景，可以在 Mark Russinovich 的这个 [video] 中看到（https://www.youtube.com/watch?v=eJCu6a-x9uo&t=3785）。
 
-停车库由数百个停车位组成，每个停车位都包括一个传感器，该传感器为集中监控系统提供更新。 停车位传感器 ( 我们的 Actors) 检测停车位是否被占用或可用。
+停车库由数百个停车位组成，每个停车位都包括一个传感器，该传感器为集中监控系统提供更新。 停车位传感器（我们的 Actor）检测一个泊车位是否被占用，或是否可用。
 
-要跳入并自行运行此示例，请克隆源代码，该源代码可在 [JavaScript SDK 示例目录中找到](https://github.com/dapr/js-sdk/tree/master/examples/http/actor-parking-sensor)。
+要想自己运行这个例子，请克隆源代码，它可以在 [JavaScript SDK 示例目录](https://github.com/dapr/js-sdk/tree/master/examples/http/actor-parking-sensor) 中找到。
 
 ## Actor 接口
-该接口定义了 actor 契约，该契约在 actor 实现和调用 actor 的客户端之间共享。 在下面的示例中，我们为停车场传感器创建了交互 每个传感器有2种方法： `carEnter` 和 `carLeave`，它定义了停车位的状态：
+Actor 接口定义了 Actor 契约，由 Actor 实现和调用 Actor 的客户端共享。 在下面的例子中，我们为一个停车场的传感器创建了一个接口。 每个传感器有 2 种方法： `carEnter` 和 `carLeave`，它定义了停车位的状态：
 
 ```javascript
 export default interface ParkingSensorInterface {
@@ -34,7 +34,7 @@ export default interface ParkingSensorInterface {
 ```
 
 ## Actor 实现
-执行组件实现通过扩展基类型 ` AbstractActor ` 来定义类，并实现执行组件接口。 下面的代码通过实现 ` ParkingSensorInterface `中定义的方法，描述了执行组件的实现所包含的内容。 它还定义了一些额外的帮助器方法：
+Actor 实现通过扩展基本类型 `AbstractActor` 来定义一个类，并实现 Actor 接口。 下面的代码通过实现 `ParkingSensorInterface` 中定义的方法，描述了 Actor 的实现所包含的内容。 它还定义了一些额外的辅助方法：
 
 ```javascript
 import { AbstractActor } from "dapr-client";
@@ -60,7 +60,7 @@ export default class ParkingSensorImpl extends AbstractActor implements ParkingS
 ```
 
 ## 注册 Actor
-使用 DaprServer 软件包初始化并注册您的 actors ：
+使用 DaprServer 包初始化和注册您的 Actor：
 
 ```javascript
 import { DaprServer } from "dapr-server";
@@ -76,7 +76,7 @@ async function start() {
 ```
 
 ## 调用 Actor
-注册Actor后，使用DaprClient在Actor上调用方法。 该客户端将调用在 actor 接口文件中定义的方法。
+注册 Actor 后，使用 DaprClient 在 Actor 上调用方法。 该客户端将调用在 Actor 接口文件中定义的方法。
 
 ```javascript
 import { DaprClient, DaprServer } from "dapr-client";
@@ -134,14 +134,14 @@ async function start() {
 ...
 ```
 
-## Actor timer 和 reminder
-Actor 可以通过注册 timer 或 reminder 来安排自己的定期工作。 Timers 与 reminders 主要的区别在于，Dapr actor 运行时在停用后不保留任何有关 timer 的信息，而使用 Dapr actor 状态提供程序持久化有关 reminder 的信息。
+## Actor Timer 和 Reminder
+Actor 可以通过注册 Timer 或 Reminder 来安排自己的周期性任务。 Timer 与 Reminder 的主要的区别在于：Actor 运行时在停用后不保留任何有关 Timer 的信息，而会使用 Actor 状态组件来持久化有关 Reminder 的信息。
 
-这种区别允许用户在轻量级但无状态的timer和需要更多资源但有状态的reminder之间进行权衡。
+这种区别允许用户在轻量级但无状态的 Timer 和需要更多资源但有状态的 Reminder 之间进行权衡。
 
-Timers 和 reminders 的调度接口定义是完全相同的。 有关调度配置的更深入了解，请参阅 [actors timers 和 reminders 的文档]({{< ref "howto-actors.md#actor-timers-and-reminders" >}})。
+Timer 和 Reminder 的调度接口定义是完全相同的。 如需更深入地了解调度配置，请参阅 [Actor Timer 和 Reminder 文档]({{< ref "howto-actors.md#actor-timers-and-reminders" >}})。
 
-### Actor 计时器
+### Actor Timer
 ```javascript
 import { DaprClient, DaprServer } from "dapr-client";
 import ParkingSensorImpl from "./ParkingSensorImpl";
@@ -166,7 +166,7 @@ async function start()
 }
 ```
 
-### Actor reminder
+### Actor Reminder
 ```javascript
 import { DaprClient, DaprServer } from "dapr-client";
 import ParkingSensorImpl from "./ParkingSensorImpl";
@@ -192,4 +192,4 @@ async function start()
 }
 ```
 
-- 有关 Actor 的完整指南，请访问 [操作方法：在 Dapr 中使用 Actor ]({{< ref howto-actors.md >}})。
+- 有关 Actor 的完整指南，请访问 [如何在 Dapr 中使用 Actor]({{< ref howto-actors.md >}})。
