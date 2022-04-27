@@ -9,9 +9,9 @@ no_list: true
 
 Now that you've already initialized Dapr and experimented with some of Dapr's building blocks, walk through our more detailed tutorials.
 
-#### Before you begin
+#### 在您开始之前
 
-- [Set up your local Dapr environment]({{< ref "install-dapr-cli.md" >}}).
+- [设置你的本地Dapr环境]({{< ref "install-dapr-cli.md" >}})。
 - [Explore one of Dapr's building blocks via our quickstarts]({{< ref "getting-started/quickstarts/_index.md" >}}).
 
 ## Tutorials

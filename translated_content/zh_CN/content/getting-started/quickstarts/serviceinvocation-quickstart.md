@@ -20,17 +20,17 @@ Select your preferred language before proceeding with the Quickstart.
  <!-- Python -->
 {{% codetab %}}
 
-### Step 1: Pre-requisites
+### 第1步：先决条件
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Python 3.7+ installed](https://www.python.org/downloads/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [Python 3.7+ 已安装](https://www.python.org/downloads/).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
-### Step 2: Set up the environment
+### 第2步：设置环境
 
 Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
 
@@ -140,17 +140,17 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
  <!-- JavaScript -->
 {{% codetab %}}
 
-### Step 1: Pre-requisites
+### 第1步：先决条件
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - [Latest Node.js installed](https://nodejs.org/).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
-### Step 2: Set up the environment
+### 第2步：设置环境
 
 Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
 
@@ -166,7 +166,7 @@ In a terminal window, from the root of the Quickstart clone directory navigate t
 cd service_invocation/javascript/http/order-processor
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 npm install
@@ -193,7 +193,7 @@ In a new terminal window, from the root of the Quickstart clone directory naviga
 cd service_invocation/javascript/http/checkout
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 npm install
@@ -256,17 +256,17 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
  <!-- .NET -->
 {{% codetab %}}
 
-### Step 1: Pre-requisites
+### 第1步：先决条件
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
-### Step 2: Set up the environment
+### 第2步：设置环境
 
 Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
 
@@ -282,7 +282,7 @@ In a terminal window, from the root of the Quickstart clone directory navigate t
 cd service_invocation/csharp/http/order-processor
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 dotnet restore
@@ -311,7 +311,7 @@ In a new terminal window, from the root of the Quickstart clone directory naviga
 cd service_invocation/csharp/http/checkout
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 dotnet restore
@@ -375,11 +375,11 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
  <!-- Java -->
 {{% codetab %}}
 
-### Step 1: Pre-requisites
+### 第1步：先决条件
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - Java JDK 11 (or greater):
   - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
   - [OpenJDK](https://jdk.java.net/13/)
@@ -388,7 +388,7 @@ For this example, you will need:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
-### Step 2: Set up the environment
+### 第2步：设置环境
 
 Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
 
@@ -404,7 +404,7 @@ In a terminal window, from the root of the Quickstart clone directory navigate t
 cd service_invocation/java/http/order-processor
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 mvn clean install
@@ -431,7 +431,7 @@ In a new terminal window, from the root of the Quickstart clone directory naviga
 cd service_invocation/java/http/checkout
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 mvn clean install
@@ -492,17 +492,17 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
  <!-- Go -->
 {{% codetab %}}
 
-### Step 1: Pre-requisites
+### 第1步：先决条件
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - [Latest version of Go](https://go.dev/dl/).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
-### Step 2: Set up the environment
+### 第2步：设置环境
 
 Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
 
@@ -519,7 +519,7 @@ In a terminal window, from the root of the Quickstart clone directory navigate t
 cd service_invocation/go/http/order-processor
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 go build app.go
@@ -550,7 +550,7 @@ In a new terminal window, from the root of the Quickstart clone directory naviga
 cd service_invocation/go/http/checkout
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 go build app.go

@@ -10,7 +10,7 @@ Let's take a look at Dapr's [State Management building block]({{< ref state-mana
 
 <img src="/images/state-management-quickstart.png" width=1000 style="padding-bottom:15px;">
 
-Select your preferred language-specific Dapr SDK before proceeding with the Quickstart.
+在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
 {{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
  <!-- Python -->
@@ -18,10 +18,10 @@ Select your preferred language-specific Dapr SDK before proceeding with the Quic
 
 ### 前提
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Python 3.7+ installed](https://www.python.org/downloads/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [Python 3.7+ 已安装](https://www.python.org/downloads/).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 ### Step 1: Set up the environment
@@ -40,7 +40,7 @@ In a terminal window, navigate to the `order-processor` directory.
 cd state_management/python/sdk/order-processor
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 pip3 install -r requirements.txt
@@ -130,9 +130,9 @@ In the YAML file:
 
 ### 前提
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - [Latest Node.js installed](https://nodejs.org/download/).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
@@ -260,9 +260,9 @@ In the YAML file:
 
 ### 前提
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
@@ -375,9 +375,9 @@ In the YAML file:
 
 ### 前提
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - Java JDK 11 (or greater):
   - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
   - [OpenJDK](https://jdk.java.net/13/)
@@ -400,7 +400,7 @@ In a terminal window, navigate to the `order-processor` directory.
 cd state_management/java/sdk/order-processor
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 mvn clean install
@@ -495,9 +495,9 @@ In the YAML file:
 
 ### 前提
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - [Latest version of Go](https://go.dev/dl/).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
