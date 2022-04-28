@@ -147,7 +147,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>26161 words</b>
+                      <b>27764 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -442,7 +442,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                    </a>
                   <br />
                   <sub>
-                      <b>devonline</b>
+                      <b>七里听香 (devonline)</b>
                   </sub>
                   <br />
                   <sub>
