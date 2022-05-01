@@ -372,6 +372,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/qianjunakasumi">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>千橘 雫霞 (qianjunakasumi)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>300 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/Itoktsnhc">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -421,19 +434,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>192 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/qianjunakasumi">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>千橘 雫霞 (qianjunakasumi)</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>182 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
