@@ -75,6 +75,6 @@ spec:
 | invoke   | [Service Invocation]({{< ref service_invocation_api.md >}}) |
 | secrets  | [Secrets]({{< ref secrets_api.md >}})                       |
 | bindings | [Output Bindings]({{< ref bindings_api.md >}})              |
-| publish  | [Pub/Sub]({{< ref pubsub.md >}})                            |
-| actors   | [Actors]({{< ref actors_api.md >}})                         |
+| publish  | [Pub/sub（发布/订阅）]({{< ref pubsub.md >}})                     |
+| actors   | [参与者]({{< ref actors_api.md >}})                            |
 | metadata | [Metadata]({{< ref metadata_api.md >}})                     |
