@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Virtual Actors"
-linkTitle: "Actors"
+linkTitle: "参与者"
 weight: 1000
 description: 如何创建一个actor
 no_list: true
