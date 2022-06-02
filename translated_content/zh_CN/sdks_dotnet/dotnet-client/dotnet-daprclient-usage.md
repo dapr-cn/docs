@@ -8,7 +8,7 @@ description: 使用 DaprClient 的基本提示和建议
 
 ## 生命周期管理
 
-`DaprClient` 能够以TCP 套接口的形式访问网络资源，与 Dapr sidecar 通信。 `DaprClient` 实现 `IDisposable` 以支持主动的资源清理。
+A `DaprClient` holds access to networking resources in the form of TCP sockets used to communicate with the Dapr sidecar. `DaprClient` 实现 `IDisposable` 以支持主动的资源清理。
 
 为了获得最佳性能，请创建一个`DaprClient`的单一长期实例，并在整个应用程序中提供对该共享实例的访问权限。 `DaprClient` 实例是线程安全的并且允许共享的。
 
