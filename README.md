@@ -135,7 +135,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>121503 words</b>
+                      <b>123760 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -148,7 +148,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>37927 words</b>
+                      <b>40773 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -256,6 +256,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/RcXu">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Mr.Black (RcXu)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>1908 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/charleszhn">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -267,7 +280,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>1727 words</b>
                   </sub>
-              </td>
+              </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/WisWang">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -280,7 +293,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>1697 words</b>
                   </sub>
-              </td></tr><tr>
+              </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/webup">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -318,19 +331,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>1338 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/RcXu">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>Mr.Black (RcXu)</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>1280 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
