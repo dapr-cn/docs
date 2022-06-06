@@ -30,15 +30,6 @@ scrape_configs:
   - job_name: 'dapr'
 
     # Override the global default and scrape targets from this job every 5 seconds.
-    global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
-scrape_configs:
-  - job_name: 'dapr'
-
-    # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
 
     static_configs:
