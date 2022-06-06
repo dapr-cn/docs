@@ -28,9 +28,9 @@ error 产生最小输出量，debug 产生最大输出量。 默认级别是 inf
 
 这将启动日志级别为 `error` 的 Dapr 运行时二进制文件和日志级别为 `debug` 的 Dapr Actor 放置服务。
 
-## 以独立模式登录
+## 独立模式下的日志
 
-若要在 Dapr CLI 运行时设置日志级别，请通过 `log-level` 参数：
+若要在使用 Dapr CLI 运行应用时设置日志级别，请传递 `log-level` 参数：
 
 ```bash
 dapr run --log-level warn node myapp.js
@@ -71,7 +71,7 @@ dapr run node myapp.js
 
 ## Kubernetes 模式下的日志
 
-您可以通过在 Pod spec 模板中提供以下 annotation ，为每个 sidecar 单独设置日志级别：
+您可以通过在 Pod spec 模板中提供以下注解 ，为每个 sidecar 单独设置日志级别：
 
 ```yml
 annotations:

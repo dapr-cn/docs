@@ -84,8 +84,8 @@ spec:
 | publishMaxRetries               | 否  | Azure Service Bus 以"过于忙碌"为响应以限制消息时的最大重试次数。 默认值：`5`               | `5`                                                                                                                                            |
 | publishInitialRetryInternalInMs | 否  | Azure Service Bus 限制消息时初始指数退避的时间（以毫秒为单位）。 默认值：`500`              | `500`                                                                                                                                          |
 
-### Azure Active Directory (AAD) authentication
-The Azure Service Bus pubsub component supports authentication using all Azure Active Directory mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of AAD authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
+### Azure Active Directory (AAD) 认证
+The Azure Service Bus pubsub component supports authentication using all Azure Active Directory mechanisms. 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
 
 ## 消息元数据
 

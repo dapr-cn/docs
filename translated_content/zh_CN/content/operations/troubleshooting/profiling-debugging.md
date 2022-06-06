@@ -75,7 +75,7 @@ Handling connection for 7777
 
 现在连接已经建立，我们可以使用 `pprof` 来分析 Dapr 运行时。
 
-下面的示例将创建一个 `cpu.pprof` 文件，其中包含来自持续 120 秒的配置文件会话的示例：
+下面的示例将创建一个 `cpu.pprof` 文件，其中包含来自持续 120 秒的性能分析会话的采样：
 
 ```bash
 curl "http://localhost:7777/debug/pprof/profile?seconds=120" > cpu.pprof

@@ -77,12 +77,12 @@ Scope 是事件订阅需要创建或更新的资源的标识符。 Scope 可以�
 
 此组件支持 **输入和输出** 绑定接口。
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 ## 补充资料
 
-Event Grid Binding creates an [event subscription](https://docs.microsoft.com/azure/event-grid/concepts#event-subscriptions) when Dapr initializes. 您的服务主要需要获得权限才能启用此功能。
+在Dapr初始化时，Event Grid 绑定创建了一个[event subscription](https://docs.microsoft.com/azure/event-grid/concepts#event-subscriptions)。 您的服务主要需要获得权限才能启用此功能。
 
 ```bash
 # 首先确保 Azure Resource Manager 提供商已注册事件网格

@@ -27,12 +27,12 @@ secrets:
 
 下面的表格给出了秘密作用域的属性：
 
-| 属性        | 数据类型   | 说明                                                                                      |
-| --------- | ------ | --------------------------------------------------------------------------------------- |
-| storeName | string | 秘密存储组件的名称。 Name of the secret store component. storeName must be unique within the list |
-| 默认权限      | string | 访问修饰符。 接受的值为 "allow" (默认值) 或 "deny"                                                     |
-| 允许的密钥     | list   | 可访问的密钥列表                                                                                |
-| 被拒绝的密钥    | list   | 无法访问的密钥列表                                                                               |
+| 属性             | 数据类型   | 说明                                                                                      |
+| -------------- | ------ | --------------------------------------------------------------------------------------- |
+| storeName      | string | 秘密存储组件的名称。 Name of the secret store component. storeName must be unique within the list |
+| defaultAccess  | string | 访问修饰符。 接受的值为 "allow" (默认值) 或 "deny"                                                     |
+| allowedSecrets | list   | 可访问的密钥列表                                                                                |
+| 被拒绝的密钥         | list   | 无法访问的密钥列表                                                                               |
 
 当 `allowedSecrets` 列表中至少存在一个元素时，应用程序只能访问列表中定义的那些秘密。
 

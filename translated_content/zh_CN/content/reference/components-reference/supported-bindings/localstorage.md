@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To set up the Local Storage binding, create a component of type `bindings.localstorage`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+需要创建一个类型为`bindings.localstorage`的组件来设置本地存储绑定。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -28,13 +28,13 @@ spec:
 
 ## 元数据字段规范
 
-| 字段       | 必填 | 绑定支持           | 详情                                                      | 示例              |
-| -------- |:--:| -------------- | ------------------------------------------------------- | --------------- |
-| rootPath | Y  | Input / Output | The root path anchor to which files can be read / saved | `"/temp/files"` |
+| 字段       | 必填 | 绑定支持           | 详情             | 示例              |
+| -------- |:--:| -------------- | -------------- | --------------- |
+| rootPath | Y  | Input / Output | 可以 读/保存 文件的根目录 | `"/temp/files"` |
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的**输出绑定** ：
 
 - `create` : [创建文件](#create-file)
 - `get` : [获取文件](#get-file)
@@ -43,7 +43,7 @@ spec:
 
 ### 创建文件
 
-To perform a create file operation, invoke the Local Storage binding with a `POST` method and the following JSON body:
+使用发送如下JSON结构数据的 `POST`方法，调用本地存储绑定去演示如何创建一个文件操作：
 
 > 注意：默认情况下，会随机生成一个UUID。 参见下面所示的支持的元数据设置名称
 
@@ -97,9 +97,9 @@ To perform a create file operation, invoke the Local Storage binding with a `POS
 {{< /tabs >}}
 
 
-##### Save a binary file
+##### 保存二进制文件
 
-To upload a file, encode it as Base64. The binding should automatically detect the Base64 encoding.
+要上传文件，需要将其使用Base64编码。 绑定应该能够自动检测Base64编码。
 
 {{< tabs Windows Linux >}}
 
@@ -129,9 +129,9 @@ To upload a file, encode it as Base64. The binding should automatically detect t
 
 ```
 
-### Get file
+### 获取文件
 
-To perform a get file operation, invoke the Local Storage binding with a `POST` method and the following JSON body:
+使用发送如下JSON结构数据的`POST`方法，调用本地存储绑定去演示获取文件操作：
 
 ```json
 {
@@ -163,11 +163,11 @@ To perform a get file operation, invoke the Local Storage binding with a `POST` 
 
 #### 响应
 
-The response body contains the value stored in the file.
+响应正文包含文件中存储的值。
 
 ### List files
 
-To perform a list files operation, invoke the Local Storage binding with a `POST` method and the following JSON body:
+通过使用发送如下JSON结构数据 `POST` 方法调用本地存储绑定去演示获取文件列表操作：
 
 ```json
 {
@@ -175,7 +175,7 @@ To perform a list files operation, invoke the Local Storage binding with a `POST
 }
 ```
 
-If you only want to list the files beneath a particular directory below the `rootPath`, specify the relative directory name as the `fileName` in the metadata.
+如果你想获取在`rootPath`下某个特定目录里的文件列表，可以在元数据`fileName`字段中指定相对路径的目录名
 
 ```json
 {
@@ -207,11 +207,11 @@ If you only want to list the files beneath a particular directory below the `roo
 
 #### 响应
 
-The response is a JSON array of file names.
+响应正文是一个文件名的JOSN数组。
 
-### Delete file
+### 删除文件
 
-To perform a delete file operation, invoke the Local Storage binding with a `POST` method and the following JSON body:
+通过发送如下JOSN结构数据的 `POST` 方法调用本地存储绑定，演示如何删除一个文件操作：
 
 ```json
 {
@@ -243,11 +243,11 @@ To perform a delete file operation, invoke the Local Storage binding with a `POS
 
 #### 响应
 
-An HTTP 204 (No Content) and empty body will be returned if successful.
+请求成功，将返回HTTP 204状态码(无内容) 和空报文
 
 ## 元数据信息
 
-By default the Local Storage output binding auto generates a UUID as the file name. It is configurable in the metadata property of the message.
+默认，本地存储输出绑定自动生成一个UUID作为文件名。 它可以在消息的元数据属性中进行配置。
 
 ```json
 {

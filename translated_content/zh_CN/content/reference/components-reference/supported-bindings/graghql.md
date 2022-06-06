@@ -46,7 +46,7 @@ GraphQL 绑定在内部使用 [GraphQL 客户端](https://github.com/machinebox/
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `query`
 - `mutation`

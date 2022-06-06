@@ -18,7 +18,7 @@ Dapr 组件的名称空间（注意与 Kubernetes 名称空间概念区分），
 {{% codetab %}}
 在自托管模式下，开发人员可以通过设置 `NAMESPACE` 环境变量来指定 Dapr 实例的名称空间。 如果设置了 `NAMESPACE` 环境变量，Dapr 只会加载其元数据中指定相同名称空间的组件。
 
-例如，将此组件 `production` 命名空间中
+例如，在 `production` 命名空间中给定该组件
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -73,13 +73,13 @@ spec:
 {{< /tabs >}}
 
 {{% alert title="Note" color="primary" %}}
-The component YAML applied to namespace "A" can *reference* the implementation in namespace "B". For example, a component YAML for Redis in namespace "production-A" can point the Redis host address to the Redis instance deployed in namespace "production-B".
+应用于名称空间“A”的组件 YAML 可以*引用*在名称空间“B”中的实现 例如，在名称空间“production-A”的 Redis 组件 YAML 可以将 Redis 主机地址指向部署在名称空间“production-B”中的 Redis实例。
 
-See [Configure Pub/Sub components with multiple namespaces]({{< ref "pubsub-namespaces.md" >}}) for an example.
+有关示例，请参阅[使用多个名称空间配置 Pub/Sub 组件]({{< ref "pubsub-namespaces.md" >}})
 {{% /alert %}}
 
 ## 对具有作用域的组件的应用程序访问
-Developers and operators might want to limit access to one database from a certain application, or a specific set of applications. 为此，Dapr 允许您在组件 YAML 上指定</code>scopes`作用域。 Application scopes added to a component limit only the applications with specific IDs from using the component.</p>
+开发人员和运维人员可能希望将一个数据库的访问权限限制为某个应用程序或一组特定应用程序。 为此，Dapr 允许您在组件 YAML 上指定</code>scopes`作用域。 添加到组件的应用程序范围仅限制具有特定 ID 的应用程序使用该组件。</p>
 
 <p spaces-before="0">下面的示例演示如何给予两个启用的Dapr应用访问权限， 使用 <code>app1` 和 `app2` 两个应用程序可以访问名为 `statestore` 的 Redis 组件，这个组件部署在 `production` 命名空间
 

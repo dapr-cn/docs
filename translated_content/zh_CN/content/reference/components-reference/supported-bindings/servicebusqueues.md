@@ -41,8 +41,8 @@ spec:
 | queueName        | Y  | Input/Output | The Service Bus queue name. Queue names are case-insensitive and will always be forced to lowercase.                                                                                                                                        | `"queuename"`                  |
 | ttlInseconds     | 否  | 输出           | Parameter to set the default message [time to live](https://docs.microsoft.com/azure/service-bus-messaging/message-expiration). If this parameter is omitted, messages will expire after 14 days. See [also](#specifying-a-ttl-per-message) | `"60"`                         |
 
-### Azure Active Directory (AAD) authentication
-The Azure Service Bus Queues binding component supports authentication using all Azure Active Directory mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of AAD authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
+### Azure Active Directory (AAD) 认证
+The Azure Service Bus Queues binding component supports authentication using all Azure Active Directory mechanisms. 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
 
 ## 绑定支持
 

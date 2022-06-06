@@ -8,19 +8,19 @@ no_list: true
 欢迎来到 Dapr 文档库!
 
 
-{{% alert title="Dapr是什么？" color="primary" %}}
-Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种编程语言和开发框架。 通过sidecar架构的优势，Dapr 可帮助您 应对构建微服务带来的挑战，并保持代码平台非侵入性。
+{{% alert title="Dapr 是什么？" color="primary" %}}
+Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可在云平台或边缘计算中运行，它同时也支持多种编程语言和开发框架。 通过 sidecar 架构的优势，Dapr 可帮助您应对构建微服务带来的挑战，并保持代码平台的非侵入性。
 {{< button text="开始使用" page="getting-started" >}}
 {{% /alert %}}
 
 
-### 开始使用Dapr进行开发
+### 开始使用 Dapr 进行开发
 
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>入门</b></h5>
-      <p class="card-text">如何通过几分钟的时间，在你的操作环境中实现 Dapr 的启动与运行</p>
+      <h5 class="card-title"><b>开始</b></h5>
+      <p class="card-text">如何在几分钟内在您的环境中启动并运行 Dapr。</p>
       <a href="{{< ref getting-started >}}" class="stretched-link"></a>
     </div>
   </div>
@@ -34,26 +34,26 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>概念</b></h5>
-      <p class="card-text">开始了解 Dapr，包括其主要的特性及所提供的功能</p>
+      <p class="card-text">了解 Dapr，包括其主要特性和功能。</p>
       <a href="{{< ref concepts >}}" class="stretched-link"></a>
     </div>
   </div>
 </div>
 
-### 了解更多有关Dapr的信息
+### 了解更多有关 Dapr 的信息
 
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>开发应用</b></h5>
-      <p class="card-text">有关如何构建 Dapr 应用的工具，提示和信息</p>
+      <h5 class="card-title"><b>开发应用程序</b></h5>
+      <p class="card-text">有关如何使用 Dapr 构建应用程序的工具、提示和信息。</p>
       <a href="{{< ref developing-applications >}}" class="stretched-link"></a>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>构建块</b></h5>
-      <p class="card-text">具有解决分布式应用程序的常见开发难题的能力。</p>
+      <p class="card-text">解决分布式应用程序常见开发挑战的功能。</p>
       <a href="{{< ref building-blocks-concept >}}" class="stretched-link"></a>
     </div>
   </div>
@@ -95,7 +95,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
         <b>IDE 集成</b>
       </h5>
       <p class="card-text">
-        了解如何在你首选的开发环境中启用和运行 Dapr 应用
+        了解如何在您首选的集成开发环境中启动和运行 Dapr。
       </p>
       <a href="{{< ref ides >}}" class="stretched-link"></a>
     </div>
@@ -111,7 +111,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
         <b>语言 SDK</b>
       </h5>
       <p class="card-text">
-        使用 Dapr SDKs 配合你擅长的开发语言，构建 Dapr 应用程序
+        使用 Dapr SDK 以您的首选语言创建 Dapr 应用程序。
       </p>
       <a href="{{< ref sdks >}}" class="stretched-link"></a>
     </div>

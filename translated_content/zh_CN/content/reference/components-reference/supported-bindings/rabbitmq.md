@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup RabbitMQ binding create a component of type `bindings.rabbitmq`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置RabbitMQ绑定需要创建一个`bindings.rabbitmq`类型的组件： 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -48,17 +48,17 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                      | 示例                                                        |
-| ---------------- |:--:| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| queueName        | Y  | Input/Output | The RabbitMQ queue name                                                                                                                                                                 | `"myqueue"`                                               |
-| host             | Y  | Input/Output | The RabbitMQ host address                                                                                                                                                               | `"amqp://[username][:password]@host.domain[:port]"`       |
-| durable          | 否  | 输出           | Tells RabbitMQ to persist message in storage. 默认值为 `"false"`                                                                                                                            | `"true"`, `"false"`                                       |
-| deleteWhenUnused | 否  | Input/Output | Enables or disables auto-delete. 默认值为 `"false"`                                                                                                                                         | `"true"`, `"false"`                                       |
-| ttlInseconds     | N  | 输出           | Set the [default message time to live at RabbitMQ queue level](https://www.rabbitmq.com/ttl.html). 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 See [also](#specifying-a-ttl-per-message)           | `60`                                                      |
-| prefetchCount    | N  | 输入           | Set the [Channel Prefetch Setting (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch). 如果此参数为空，QOS 会设置为0为无限制。                                                           | `0`                                                       |
-| exclusive        | N  | Input/Output | Determines whether the topic will be an exclusive topic or not. 默认值为 `"false"`                                                                                                          | `"true"`, `"false"`                                       |
-| maxPriority      | N  | Input/Output | Parameter to set the [priority queue](https://www.rabbitmq.com/priority.html). 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 Value between 1 and 255. See [also](#specifying-a-priority-per-message) | `"1"`, `"10"`                                             |
-| contentType      | N  | Input/Output | The content type of the message. Defaults to "text/plain".                                                                                                                              | `"text/plain"`, `"application/cloudevent+json"` and so on |
+| 字段               | 必填 | 绑定支持  | 详情                                                                                                                                           | 示例                                                  |
+| ---------------- |:--:| ----- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| queueName        | Y  | 输入/输出 | RabbitMQ队列名                                                                                                                                  | `"myqueue"`                                         |
+| host             | Y  | 输入/输出 | RabbitMQ主机地址                                                                                                                                 | `"amqp://[username][:password]@host.domain[:port]"` |
+| durable          | 否  | 输出    | 告诉 RabbitMQ 将消息持久化到存储中。 默认值为 `"false"`                                                                                                       | `"true"`, `"false"`                                 |
+| deleteWhenUnused | 否  | 输入/输出 | 启用或禁用自动删除。 默认值为 `"false"`                                                                                                                    | `"true"`, `"false"`                                 |
+| ttlInseconds     | N  | 输出    | RabbitMQ队列级别的消息存活时间。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 [另见](#specifying-a-ttl-per-message)                                                    | `60`                                                |
+| prefetchCount    | N  | 输入    | 设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch) 如果此参数为空，QOS 会设置为0为无限制。                                        | `0`                                                 |
+| exclusive        | N  | 输入/输出 | 确定主题是否是一个独占主题。 默认值为 `"false"`                                                                                                                | `"true"`, `"false"`                                 |
+| maxPriority      | N  | 输入/输出 | 用于设置 [优先级队列](https://www.rabbitmq.com/priority.html)的参数。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 取值为1到255. [参见](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
+| contentType      | N  | 输入/输出 | 消息类型 默认为"text/plain"。                                                                                                                        | `"text/plain"`, `"application/cloudevent+json"`等等   |
 ## 绑定支持
 
 此组件支持 **输入和输出** 绑定接口。
@@ -112,13 +112,13 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
 {{< /tabs >}}
 
 
-## 相关链接
+## 指定每条消息的优先级
 
-Priority can be defined at the message level. If `maxPriority` parameter is set, high priority messages will have priority over other low priority messages.
+可以在消息级别制定优先级。 如果设置了`maxPriority` 参数，那么高优先级消息将优先于其他低优先级消息。
 
-To set priority at message level use the `metadata` section in the request body during the binding invocation.
+在绑定调用过程之，使用请求正文中的`元数据`设置消息的优先级。
 
-The field name is `priority`.
+字段名字是`priority`。
 
 示例:
 

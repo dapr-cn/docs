@@ -54,7 +54,7 @@ New Relic 分布式追踪详情 ![New Relic Kubernetes Cluster Explorer App](/im
 
 如果 Dapr 和您的应用程序在 Kubernetes 环境中运行，您可以启用额外的指标和日志。
 
-安装 New Relic Kubernetes 集成的最简单方法是使用 [自动安装程序](https://one.newrelic.com/launcher/nr1-core.settings?pane=eyJuZXJkbGV0SWQiOiJrOHMtY2x1c3Rlci1leHBsb3Jlci1uZXJkbGV0Lms4cy1zZXR1cCJ9) 生成清单。 It bundles not just the integration DaemonSets, but also other New Relic Kubernetes configurations, like [Kubernetes events](https://docs.newrelic.com/docs/integrations/kubernetes-integration/kubernetes-events/install-kubernetes-events-integration), [Prometheus OpenMetrics](https://docs.newrelic.com/docs/integrations/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/), and [New Relic log monitoring](https://docs.newrelic.com/docs/logs/ui-data/use-logs-ui/).
+安装 New Relic Kubernetes 集成的最简单方法是使用 [自动安装程序](https://one.newrelic.com/launcher/nr1-core.settings?pane=eyJuZXJkbGV0SWQiOiJrOHMtY2x1c3Rlci1leHBsb3Jlci1uZXJkbGV0Lms4cy1zZXR1cCJ9) 生成清单。 它不仅打包集成守护进程集，还捆绑了其他 New Relic Kubernetes 配置，如 [Kubernetes事件 ](https://docs.newrelic.com/docs/integrations/kubernetes-integration/kubernetes-events/install-kubernetes-events-integration)， [Prometheus OpenMetrics](https://docs.newrelic.com/docs/integrations/prometheus-integrations/get-started/send-prometheus-metric-data-new-relic/)，以及 [New Relic 日志监控](https://docs.newrelic.com/docs/logs/ui-data/use-logs-ui/)。
 
 
 
@@ -120,7 +120,7 @@ New Relic 与 [Grafana Labs](https://grafana.com/) 一起协作，所以你可�
 
 ## New Relic 警报
 
-从 Dapr、Kubernetes 或任何在其上运行的服务收集的所有数据都可用于将警报和通知设置到您选择的首选频道中。 See [Alerts and Applied Intelligence](https://docs.newrelic.com/docs/alerts-applied-intelligence/new-relic-alerts/learn-alerts/alerts-ai-transition-guide-2022/).
+从 Dapr、Kubernetes 或任何在其上运行的服务收集的所有数据都可用于将警报和通知设置到您选择的首选频道中。 请参阅 [警报和智能](https://docs.newrelic.com/docs/alerts-applied-intelligence/new-relic-alerts/learn-alerts/alerts-ai-transition-guide-2022/)。
 
 
 

@@ -81,11 +81,11 @@ stringData:
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 
-## 输出绑定支持的操作
+## 推送通知格式
 
 APNS 绑定是Apple Push Notification Service的通行证封装。 APNS绑定会直接将请求发送到APNS服务，不需要任何翻译。 因此，了解APNS服务所期望的推送通知的有效载荷非常重要。 有效载荷格式在[这里](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)有详细文档。
 

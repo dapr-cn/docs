@@ -63,9 +63,9 @@ spec:
 
 *注意：如果将 Dapr 安装到其他命名空间，请将上面的 dapr-system 替换为所需的命名空间*
 
-If you are deploying Dapr on Amazon EKS and using an overlay network such as Calico, you will need to set `hostNetwork` parameter to true, this is a limitation of EKS with such CNIs.
+如果您在 Amazon EKS 上部署 Dapr 并使用 Calico 等覆盖网络，则需要将 `hostNetwork` 参数设置为 true，这是 EKS 与此类 CNI 的限制。
 
-You can set this parameter using Helm `values.yaml` file:
+你可以使用Helm `values.yaml` 文件来设置这个参数。
 
 ```
 helm upgrade --install dapr dapr/dapr \
@@ -80,7 +80,7 @@ dapr_sidecar_injector:
   hostNetwork: true
 ```
 
-or using command line:
+或使用命令行：
 
 ```
 helm upgrade --install dapr dapr/dapr \
@@ -183,9 +183,9 @@ annotations:
 
 如果使用 Dapr 独立和Dapr CLI, 请确保您将 `--app-port` 标记传递到 `Dapr run` 命令。
 
-## 我的 Dapr 启用的应用程序的行为不正确
+## 我的启用了 Dapr 的应用程序的行为不正确
 
-第一件事是检查从 Dapr API返回的 HTTP 错误代码，如果有的话。 如果您仍然找不到问题，请尝试为 Dapr 运行时启用 `debug` 日志级别。 请参阅此处 []({{< ref "logs.md" >}}) 如何执行此操作。
+第一件事是检查从 Dapr API返回的 HTTP 错误代码，如果有的话。 如果您仍然找不到问题，请尝试为 Dapr 运行时启用 `debug` 日志级别。 请参阅 [此处]({{< ref "logs.md" >}}) 了解如何执行此操作。
 
 您可能还想要查看您自己进程中的错误日志。 如果在 Kubernetes 上运行，请找到包含你的应用的 pod，然后执行以下操作：
 

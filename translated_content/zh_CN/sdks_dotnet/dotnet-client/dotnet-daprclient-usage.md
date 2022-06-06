@@ -8,7 +8,7 @@ description: 使用 DaprClient 的基本提示和建议
 
 ## 生命周期管理
 
-`DaprClient` 能够以TCP 套接口的形式访问网络资源，与 Dapr sidecar 通信。 `DaprClient` 实现 `IDisposable` 以支持主动的资源清理。
+`DaprClient` 能够以TCP 套接字的形式访问网络资源，与 Dapr sidecar 通信。 `DaprClient` 实现 `IDisposable` 以支持主动的资源清理。
 
 为了获得最佳性能，请创建一个`DaprClient`的单一长期实例，并在整个应用程序中提供对该共享实例的访问权限。 `DaprClient` 实例是线程安全的并且允许共享的。
 
@@ -58,9 +58,9 @@ DaprClient 上执行异步操作的API接受一个可选的`CancellationToken`�
 
 `DaprClient` 上的许多方法使用 `System.Text.Json` 序列化器执行JSON序列化。 接受应用程序数据类型作为参数的方法将对其进行JSON序列化，除非文档另有明确说明。
 
-如果你有高级需求，值得阅读 [ System.Text.Json 文档](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview) Dapr .NET SDK 没有提供独特的序列化行为或自定义 - 它依赖于底层的序列化器将数据转换为应用程序的 .NET 类型。 Dapr .NET SDK 没有提供独特的序列化行为或自定义 - 它依赖于底层的序列化器将数据转换为应用程序的 .NET 类型。
+如果你有高级要求，值得阅读[System.Text.Json文档](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview) 。 Dapr .NET SDK 没有提供独特的序列化行为或自定义 - 它依赖于底层的序列化器将数据转换为应用程序的 .NET 类型。
 
-`DaprClient`被配置为使用来自 [JsonSerializerDefaults.Web](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializerdefaults?view=net-5.0) 配置的序列化器配置对象。 这意味着 `DaprClient` 将使用 `camelCase` 来命名属性，允许读取引号 (`"10.99"`)，并将不区分大小写地绑定属性。 这些设置与 ASP.NET Core 和 `System.Text.Json.Http` API 所使用的设置相同，并被设计为遵循可互操作的 Web 惯例。
+`DaprClient` 被配置为使用来自 [JsonSerializerDefaults.Web](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializerdefaults?view=net-5.0) 配置的序列化器配置对象。 这意味着 `DaprClient` 将使用 `camelCase` 来命名属性，允许读取引号 (`"10.99"`)，并将不区分大小写地绑定属性。 这些设置与 ASP.NET Core 和 `System.Text.Json.Http` API 所使用的设置相同，并被设计为遵循可互操作的 Web 惯例。
 
 `System.Text.Json`截至.NET 5.0，并没有很好地支持所有内置的F#语言功能。 如果你使用的是F#，你可能会想要使用一个添加了F#功能支持的转换器包，比如 [FSharp.SystemTextJson](https://github.com/Tarmil/FSharp.SystemTextJson) 。
 
@@ -98,18 +98,21 @@ await client.SaveStateAsync("mystatestore", "mykey", widget);
 考虑一下当你尝试使用 `Widget` 的派生类型时会发生什么。
 
 ```C#
-在这个例子中，我们使用的是 <code>SuperWidget</code> ，但变量的声明类型是 <code>Widget</code>。
+public class Widget
+{
+    public string Color { get; set; }
+}
+
+public class SuperWidget : Widget
+{
+    public bool HasSelfCleaningFeature { get; set; }
+}
+...
 
 // Storing a SuperWidget value as JSON in the state store
 Widget widget = new SuperWidget() { Color = "Green", HasSelfCleaningFeature = true, };
 await client.SaveStateAsync("mystatestore", "mykey", widget);
 ```
- ，但变量的声明类型是 Widget。
-
-// Storing a SuperWidget value as JSON in the state store
-Widget widget = new SuperWidget() { Color = "Green", HasSelfCleaningFeature = true, };
-await client.SaveStateAsync("mystatestore", "mykey", widget);
-</code>
 
 在这个例子中，我们使用的是 `SuperWidget` ，但变量的声明类型是 `Widget`。 由于JSON序列化器的行为是由声明的类型决定的，所以它只看到一个简单的 `Widget`，并将保存`{ "color": "Green" }`，而不是`{ "color": "Green", "hasSelfCleaningFeature": true }`。
 

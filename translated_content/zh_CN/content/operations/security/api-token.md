@@ -12,7 +12,7 @@ description: "Dapr 要求每个入站 API 请求都需要包含一个认证令�
 
 Dapr 使用 [JWT](https://jwt.io/) 令牌进行 API 身份验证。
 
-> 请注意，虽然 Dapr 本身并不是这个实现中的 JWT token 签发者，但明确使用 JWT 标准对未来联邦特性的实现 提供了支持(例如 OAuth2)。
+> 请注意，虽然 Dapr 本身并不是这个实现中的 JWT token 签发者，但明确使用 JWT 标准对未来联邦特性的实现提供了支持(例如 OAuth2)。
 
 为了配置 API 身份验证，需要先使用任意 JWT 令牌兼容工具(如https://jwt.io/) 和 secret 来生成您的令牌。
 

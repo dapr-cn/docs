@@ -62,7 +62,7 @@ spec:
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持以下操作的 **输出绑定**：
 
 - `exec`
 - `query`

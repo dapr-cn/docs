@@ -3,12 +3,12 @@ type: docs
 title: "Kubernetes生产环境配置指南"
 linkTitle: "生产环境配置指南"
 weight: 40000
-description: "Recommendations and practices for deploying Dapr to a Kubernetes cluster in a production-ready configuration"
+description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和做法"
 ---
 
 ## 集群能力要求
 
-For a production-ready Kubernetes cluster deployment, it is recommended you run a cluster of at least 3 worker nodes to support a highly-available control plane installation. Use the following resource settings as a starting point. Requirements will vary depending on cluster size and other factors, so perform individual testing to find the right values for your environment:
+对于生产环境部署的 Kubernetes 集群，建议你运行一个至少由3个工作节点组成的集群，以支持高可用的控制平面安装。 使用以下面的资源设置起步。 要求会根据集群大小和其他因素而有所不同，因此需要进行单独测试，以找到适合你的环境的值：
 
 | Deployment           | CPU                       | Memory                       |
 | -------------------- | ------------------------- | ---------------------------- |
@@ -19,7 +19,7 @@ For a production-ready Kubernetes cluster deployment, it is recommended you run 
 | **Dashboard**        | Limit: 200m, Request: 50m | Limit: 200Mi, Request: 20Mi  |
 
 {{% alert title="Note" color="primary" %}}
-For more info, read the [concept article on CPU and Memory resource units and their meaning](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes).
+有关更多信息，请阅读 [关于 CPU 和内存资源单元及其含义的概念文章](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes)。
 
 {{% /alert %}}
 
@@ -44,18 +44,18 @@ For more info, read the [concept article on CPU and Memory resource units and th
 - `dapr.io/sidecar-cpu-request`
 - `dapr.io/sidecar-memory-request`
 
-If not set, the Dapr sidecar will run without resource settings, which may lead to issues. 在生产环境下安装时，强烈建议调整这些配置。
+如果没有设置，Dapr sidecar 将在没有资源配置的情况下运行，这可能会引起问题。 在生产环境下安装时，强烈建议调整这些配置。
 
 有关在 Kubernetes 中配置资源的详细信息，请参见 [将内存资源分配给容器和 Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/)和 [将 CPU 资源分配给容器和 Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/)。
 
-Example settings for the Dapr sidecar in a production-ready setup:
+在生产环境中，Dapr sidecar 的设置示例：
 
 | CPU                        | Memory                        |
 | -------------------------- | ----------------------------- |
 | Limit: 300m, Request: 100m | Limit: 1000Mi, Request: 250Mi |
 
 {{% alert title="Note" color="primary" %}}
-Since Dapr is intended to do much of the I/O heavy lifting for your app, it's expected that the resources given to Dapr enable you to drastically reduce the resource allocations for the application.
+由于 Dapr 的目的是为了替你的应用程序完成大部分的 I/O 任务，因此给 Dapr 的资源能让您大幅减少其他应用程序的资源分配。
 
 {{% /alert %}}
 
@@ -63,7 +63,7 @@ Since Dapr is intended to do much of the I/O heavy lifting for your app, it's ex
 
 ## 高可用模式
 
-当在生产环境中部署 Dapr 时，建议使用控制平面的高可用 (HA) 配置进行部署，将会在 dapr-system 命名空间中为每个控制平面 pod 创建3个副本。 This configuration allows the Dapr control plane to retain 3 running instances and survive node failures and other outages.
+当在生产环境中部署 Dapr 时，建议使用控制平面的高可用 (HA) 配置进行部署，将会在 dapr-system 命名空间中为每个控制平面 pod 创建3个副本。 此配置允许 Dapr 控制平面保留 3 个正在运行的实例，并在节点故障和其他中断后继续存在。
 
 对于新部署的 Dapr ，高可用模式可以通过 [Dapr CLI]({{< ref "kubernetes-deploy.md#install-in-highly-available-mode" >}}) 和 [Helm charts]({{< ref "kubernetes-deploy.md#add-and-install-dapr-helm-chart" >}}) 来设置。
 
@@ -71,10 +71,10 @@ Since Dapr is intended to do much of the I/O heavy lifting for your app, it's ex
 
 ## 用Helm部署Dapr
 
-[Visit the full guide on deploying Dapr with Helm]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}}).
+[访问使用 Helm 部署 Dapr 的完整指南]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}})。
 
 ### 参数文件
-Instead of specifying parameters on the command line, it's recommended to create a values file. This file should be checked into source control so that you can track its changes.
+建议不要在命令行上指定参数，而是创建一个值文件。 应将此文件签入源代码管理，以便您可以跟踪其更改。
 
 关于您可以在 值文件中设置的所有可用选项的完整列表（或使用 `--set` 命令行选项），请参阅 https://github.com/dapr/dapr/blob/master/charts/dapr/README.md。
 
@@ -111,7 +111,7 @@ kubectl get pods --namespace dapr-system
 该命令将为dapr-system命名空间中每个控制平面service创建3个副本。
 
 {{% alert title="Note" color="primary" %}}
-The Dapr Helm chart automatically deploys with affinity for nodes with the label `kubernetes.io/os=linux`. 你可以将Dapr控制平面部署到Windows节点，但大多数用户应该不需要。 For more information see [Deploying to a Hybrid Linux/Windows K8s Cluster]({{< ref "kubernetes-hybrid-clusters.md" >}}).
+Dapr Helm Chart都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 你可以将Dapr控制平面部署到Windows节点，但大多数用户应该不需要。 更多信息参见[部署到 Linux/Windows Kubernetes 的混合集群]({{< ref "kubernetes-hybrid-clusters.md" >}})。
 
 {{% /alert %}}
 
@@ -150,21 +150,21 @@ nodeapp    3000      16h  2020-07-29 17:16.22
 
 ### 在现有 Dapr 部署中启用高可用
 
-Enabling HA mode for an existing Dapr deployment requires two steps:
+在现有 Dapr 部署中启用高可用模式需要两步：
 
-1. Delete the existing placement stateful set:
+1. 删除已有的 placement 有状态集合：
 
    ```bash
    kubectl delete statefulset.apps/dapr-placement-server -n dapr-system
    ```
 
-1. Issue the upgrade command:
+1. 执行升级命令：
 
    ```bash
    helm upgrade dapr ./charts/dapr -n dapr-system --set global.ha.enabled=true
    ```
 
-You delete the placement stateful set because, in the HA mode, the placement service adds [Raft](https://raft.github.io/) for leader election. 然而，Kubernetes 仅允许在状态集中更新有限的字段，从而导致 Placement 服务更新失败。
+您删除 Placement 状态集是因为在高可用模式下，Placement 服务为 Leader 选举添加 [Raft](https://raft.github.io/)。 然而，Kubernetes 仅允许在状态集中更新有限的字段，从而导致 Placement 服务更新失败。
 
 删除现有的 Placement 状态集是安全的。 代理将重新连接并重新注册新创建的 Placement 服务，该服务会将表持久化在 Raft 中。
 

@@ -36,25 +36,25 @@ dapr init [flags]
 
 ### 示例
 
-#### Self-hosted environment
+#### 自我托管环境
 
 ```bash
 dapr init
 ```
 
-You can also specify a specific runtime version. Be default, the latest version is used.
+您也可以指定一个特定runtime版本。 默认使用最新版本。
 
 ```bash
 dapr init --runtime-version 1.4.0
 ```
 
-Dapr can also run [Slim self-hosted mode]({{< ref self-hosted-no-docker.md >}}) without Docker.
+Dapr也可以在没有Docker环境的情况下运行 [Slim 自托管模式]({{< ref self-hosted-no-docker.md >}}) 。
 
 ```bash
 dapr init -s
 ```
 
-#### Kubernetes environment
+#### Kubernetes 环境
 
 ```bash
 dapr init -k
@@ -66,7 +66,7 @@ dapr init -k
 dapr init -k --wait --timeout 600
 ```
 
-You can also specify a specific runtime version.
+同样，您也可以指定一个特定的runtime版本。
 
 ```bash
 dapr init -k --runtime-version 1.4.0

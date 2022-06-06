@@ -74,7 +74,7 @@ spec:
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create` : [创建文件](#create-file)
 - `get` : [获取文件](#get-file)

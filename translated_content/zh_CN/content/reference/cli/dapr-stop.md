@@ -29,6 +29,6 @@ dapr stop [flags]
 ### 示例
 
 ```bash
-# Stop Dapr application
+# 停止 Dapr 应用
 dapr stop --app-id <ID>
 ```

@@ -52,8 +52,8 @@ spec:
 | collection      | Y  | 要使用的集合名称                           | `"collection"`                               |
 | actorStateStore | N  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"` | `"true"`, `"false"`                          |
 
-### Azure Active Directory (AAD) authentication
-The Azure Cosmos DB state store component supports authentication using all Azure Active Directory mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of AAD authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
+### Azure Active Directory (AAD) 认证
+The Azure Cosmos DB state store component supports authentication using all Azure Active Directory mechanisms. 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
 
 ## 安装Azure Cosmos DB
 

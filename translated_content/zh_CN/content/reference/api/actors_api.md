@@ -6,9 +6,9 @@ description: "关于 Actors API 的详细文档"
 weight: 500
 ---
 
-Dapr provides native, cross-platform, and cross-language virtual actor capabilities. 除了 [特定语言的 SDK]({{< ref sdks>}})，开发人员还可以使用下面的 API 端点调用 Actor。
+Dapr 提供原生、跨平台和跨语言的 virtual actors 功能。 除了 [特定语言的 SDK]({{< ref sdks>}})，开发人员还可以使用下面的 API 端点调用 Actor。
 
-## User service code calling Dapr
+## 业务应用调用dapr
 
 ### 调用 actor 方法
 
@@ -48,7 +48,7 @@ curl -X POST http://localhost:3500/v1.0/actors/stormtrooper/50/method/shoot \
   -H "Content-Type: application/json"
 ```
 
-You can provide the method parameters and values in the body of the request, for example in curl using `-d "{\"param\":\"value\"}"`. Example of invoking a method on an actor that takes parameters:
+你可以在请求正文中提供方法参数和值，例如，在 curl 中使用 `-d "{\"param\":\"value\"}"`. 在 actor 上调用带参数的方法的示例：
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/x-wing/33/method/fly \
@@ -70,7 +70,7 @@ curl -X POST http://localhost:3500/v1.0/actors/x-wing/33/method/fly \
 
 ### Actor 状态事务
 
-Persists the change to the state for an actor as a multi-item transaction.
+将 actor 的状态变更以 multi-item transaction 的方式持久化。
 
 ***请注意，此操作取决于支持 multi-item transactions 的状态存储组件。***
 
@@ -179,19 +179,19 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders
 
 JSON 对象将具有以下字段：
 
-| 字段        | 说明                                                                                                                                                                                         |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `dueTime` | Specifies the time after which the reminder is invoked. Its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration)                                                   |
-| `period`  | Specifies the period between different invocations. Its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) or ISO 8601 duration format with optional recurrence. |
+| 字段        | 说明                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| `dueTime` | 指定在该时间之后 Remider 被调用 格式应该为 [time.ParseDuration](https://pkg.go.dev/time#ParseDuration)                             |
+| `period`  | 指定不同调用之间的时间间隔。 格式应该为 [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) 或者 ISO 8601 持续时间格式并带有一个可选的重复调用参数。 |
 
-`period` field supports `time.Duration` format and ISO 8601 format with some limitations. For `period`, only duration format of ISO 8601 duration `Rn/PnYnMnWnDTnHnMnS` is supported. `Rn/` specifies that the reminder will be invoked `n` number of times.
+`period` 字段支持 `time.Duration` 格式和 ISO 8601 格式，但有一些限制。 对于 `period`, 仅支持 ISO 8601 持续时间格式 `Rn/PnYnMnWnDTnHnMnS`。 `Rn/` 指定 Reminder 将会被调用 `n` 次。
 
-- `n` should be a positive integer greater than 0.
-- If certain values are 0, the `period` can be shortened; for example, 10 seconds can be specified in ISO 8601 duration as `PT10S`.
+- `n` 应该是大于 0 的正整数。
+- 如果某些值为0， ` peroid ` 可以缩短；例如，10秒可以在 ISO 8601 持续时间中指定为 `PT10S`。
 
-If `Rn/` is not specified, the reminder will run an infinite number of times until deleted.
+如果未指定 `Rn/`，Reminder 将会无限次的运行，直到删除。
 
-以下指定 `dueTime` 的 3 秒和 7 秒的句点。
+以下指定 `dueTime` 为 3 秒， period 为 7 秒。
 
 ```json
 {
@@ -209,7 +209,7 @@ If `Rn/` is not specified, the reminder will run an infinite number of times unt
 }
 ```
 
-To configure the reminder to fire only once, the period should be set to empty string. 以下指定一个 `dueTime` 3 秒，period 为空字符串，这意味着 reminders 将在 3 秒后立即执行，然后永远不会再次触发。
+要将 reminders 配置为仅触发一次，应将 period 设置为空字符串。 以下指定一个 `dueTime` 3 秒，period 为空字符串，这意味着 reminders 将在 3 秒后立即执行，然后永远不会再次触发。
 
 ```json
 {
@@ -428,7 +428,7 @@ curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkReb
 
 ### 获取注册的 Actors
 
-Get the registered actors types for this app and the Dapr actor configuration settings.
+获取此应用程序注册的 Actors 类型和 Dapr actor 配置。
 
 #### HTTP 请求
 
@@ -508,7 +508,7 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 
 #### 示例
 
-The following example deactivates the actor type `stormtrooper` that has `actorId` of 50.
+以下示例停用 `actorId` 为 50 类型为`stormtrooper` 的Actor。
 
 ```shell
 curl -X DELETE http://localhost:3000/actors/stormtrooper/50 \
@@ -517,10 +517,10 @@ curl -X DELETE http://localhost:3000/actors/stormtrooper/50 \
 
 ### 调用 actor 方法
 
-Invokes a method for an actor with the specified `methodName` where:
+用指定的 `methodName` 调用 Actor 的方法，其中：
 
-- Parameters to the method are passed in the body of the request message.
-- Return values are provided in the body of the response message.
+- 该方法的参数在请求消息的正文中传递。
+- 返回值在响应消息的正文中提供。
 
 如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
@@ -551,7 +551,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
 
 #### 示例
 
-The following example calls the `performAction` method on the actor type `stormtrooper` that has `actorId` of 50.
+以下的示例在类型为 `stormtrooper`，`actorId` 为50的Actor上调用方法 `performAction`。
 
 ```shell
 curl -X POST http://localhost:3000/actors/stormtrooper/50/method/performAction \
@@ -589,7 +589,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/remind/<remin
 
 #### 示例
 
-The following example calls the `checkRebels` reminder method on the actor type `stormtrooper` that has `actorId` of 50.
+以下的示例在类型为 `stormtrooper`，`actorId` 为50的Actor上调用方法 `checkRebels`。
 
 ```shell
 curl -X POST http://localhost:3000/actors/stormtrooper/50/method/remind/checkRebels \
@@ -598,7 +598,7 @@ curl -X POST http://localhost:3000/actors/stormtrooper/50/method/remind/checkReb
 
 ### 调用 timer
 
-Invokes a timer for an actor with the specified `timerName`. 如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
+为具有指定 `timerName` 的 actor 调用 timer。 如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
 #### HTTP 请求
 
@@ -627,7 +627,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/timer/<timerN
 
 #### 示例
 
-The following example calls the `checkRebels` timer method on the actor type `stormtrooper` that has `actorId` of 50.
+以下的示例在类型为 `stormtrooper`，`actorId` 为50的Actor上调用timer方法 `checkRebels`。
 
 ```shell
 curl -X POST http://localhost:3000/actors/stormtrooper/50/method/timer/checkRebels \
@@ -636,7 +636,7 @@ curl -X POST http://localhost:3000/actors/stormtrooper/50/method/timer/checkRebe
 
 ### 健康检查
 
-探测应用程序以响应向 Dapr 发送的信号，用于表征该应用程序运行正常与否。 Any response status code other than `200` will be considered an unhealthy response.
+探测应用程序以响应向 Dapr 发送的信号，用于表征该应用程序运行正常与否。 除了 `200` 以外的任何其他响应状态代码将被视为不健康的响应。
 
 不需要响应主体。
 
@@ -668,20 +668,20 @@ curl -X GET http://localhost:3000/healthz \
 
 ## 激活 Actor
 
-Conceptually, activating an actor means creating the actor's object and adding the actor to a tracking table. [Review an example from the .NET SDK](https://github.com/dapr/dotnet-sdk/blob/6c271262231c41b21f3ca866eb0d55f7ce8b7dbc/src/Dapr.Actors/Runtime/ActorManager.cs#L199).
+在概念上，激活 actor 意味着创建 actor 的对象并将 actor 添加到跟踪表。 [查看.NET SDK 中的示例](https://github.com/dapr/dotnet-sdk/blob/6c271262231c41b21f3ca866eb0d55f7ce8b7dbc/src/Dapr.Actors/Runtime/ActorManager.cs#L199)。
 
 ## 外部查询 actor 状态
 
-To enable visibility into the state of an actor and allow for complex scenarios like state aggregation, Dapr saves actor state in external state stores, such as databases. 因此，可以通过组成正确的键或查询来外部查询 actor 状态。
+为了启用对 actor 状态的可见性并允许复杂的方案（如状态聚合），Dapr 在外部状态存储（如数据库）中保存 actor 状态。 因此，可以通过组成正确的键或查询来外部查询 actor 状态。
 
 由 Dapr 为 Actors 创建的状态名称空间由以下项组成:
 
-- App ID: Represents the unique ID given to the Dapr application.
-- Actor Type: Represents the type of the actor.
-- Actor ID: Represents the unique ID of the actor instance for an actor type.
-- Key: A key for the specific state value. Actor ID 标识可以保存多个状态键。
+- App ID: 表示给 Dapr 应用程序的唯一 ID。
+- Actor Type: 表示 actor 的类型。
+- Actor ID: 代表 actor 类型的 actor 实例的唯一ID。
+- Key: 特定状态值的键。 Actor ID 标识可以保存多个状态键。
 
-The following example shows how to construct a key for the state of an actor instance under the `myapp` App ID namespace:
+下面的例子展示了如何为 `myapp` App ID命名空间下的actor实例的状态构建一个Key。
 
 `myapp||cat||hobbit||food`
 

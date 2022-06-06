@@ -1,43 +1,43 @@
 ---
 type: docs
-title: "Service invocation across namespaces"
-linkTitle: "Service invocation namespaces"
+title: "跨命名空间的服务调用"
+linkTitle: "服务调用命名空间"
 weight: 1000
-description: "Call between services deployed to different namespaces"
+description: "部署到不同命名空间的服务之间的调用"
 ---
 
-In this article, you'll learn how you can call between services deployed to different namespaces. By default, service invocation supports invoking services within the *same* namespace by simply referencing the app ID (`nodeapp`):
+在本文中，你将了解如何在不同命名空间中部署的服务之间调用。 默认情况下，服务调用支持通过简单地引用应用 ID (`nodeapp`) 在 *相同的* 命名空间内调用服务：
 
 ```sh
 localhost:3500/v1.0/invoke/nodeapp/method/neworder
 ```
 
-服务调用也支持跨命名空间的调用。 在所有受支持的托管平台上， Dapr 应用程序标识（ID）遵循包含了目标命名空间的有效 FQDN 格式。 You can specify both:
+服务调用也支持跨命名空间的调用。 在所有受支持的托管平台上， Dapr 应用程序标识（ID）遵循包含了目标命名空间的有效 FQDN 格式。 您可以同时指定：
 
-- The app ID (`nodeapp`), and
-- The namespace the app runs in (`production`).
+- 应用 ID (`nodeapp`)，以及
+- 应用程序运行的命名空间（`production`）。
 
-**Example 1**
+**示例 1**
 
-Call the `neworder` method on the `nodeapp` in the `production` namespace:
+在 `production` 命名空间中的 `nodeapp` 上调用 `neworder` 方法：
 
 ```sh
 localhost:3500/v1.0/invoke/nodeapp.production/method/neworder
 ```
 
-When calling an application in a namespace using service invocation, you qualify it with the namespace. This proves useful in cross-namespace calls in a Kubernetes cluster.
+当使用服务调用在命名空间中调用应用程序时，您可以使用命名空间对其进行限定。 这在 Kubernetes 集群中的跨命名空间调用中被证明是有用的。
 
-**Example 2**
+**示例 2**
 
-Call the `ping` method on `myapp` scoped to the `production` namespace:
+在 `myapp` 上调用 `ping` 方法，范围为 `production` 命名空间：
 
 ```bash
 https://localhost:3500/v1.0/invoke/myapp.production/method/ping
 ```
 
-**Example 3**
+**示例 3**
 
-Call the same `ping` method as example 2 using a curl command from an external DNS address (in this case, `api.demo.dapr.team`) and supply the Dapr API token for authentication:
+使用来自外部 DNS 地址（在本例中为 `api.demo.dapr.team`）的 curl 命令调用与示例 2 相同的 `ping` 方法，并提供 Dapr API 令牌进行身份验证：
 
 MacOS/Linux:
 

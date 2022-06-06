@@ -54,7 +54,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-每个actor实例都有自己的依赖注入范围。 每个 actor 在执行完一个操作后，都会在内存中保留一段时间，在这段时间内，与 actor 相关的依赖注入作用域也被认为是活的。 当演员被停用时，该范围将被释放。
+每个 actor 实例都有自己的依赖关系注入作用域。 每个 actor 在执行完一个操作后，都会在内存中保留一段时间，在这段时间内，与 actor 相关的依赖注入作用域也被认为是活动的。 当 actor 被停用时，将释放该作用域。
 
 如果 actor 在构造函数中注入 `IServiceProvider` ，该 actor 将收到一个与它的作用域相关联的 `IServiceProvider` 的引用。 `IServiceProvider` 可以用来在将来动态地解析服务。
 
@@ -69,15 +69,15 @@ internal class MyActor : Actor, IMyActor, IRemindable
 }
 ```
 
-在使用该模式时，要注意避免创建许多实现 `IDisposable` 的 **transient** 服务的实例。 由于与一个 actor 相关联的作用域可以被认为是长期有效的，所以有可能在内存中积累许多服务。 更多信息请参见 [依赖注入指南](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines) 。
+在使用该模式时，要注意避免创建许多实现 `IDisposable` 的 **transient** 服务的实例。 由于与 actor 相关联的作用域可以被认为是长期有效的，所以有可能在内存中积累许多服务。 更多信息请参见 [依赖注入指南](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines) 。
 
 ### IDisposable 和 actors
 
-Actors可以实现 `IDisposable` 或 `IAsyncDisposable` 。 建议您依靠依赖注入进行资源管理，而不是在应用代码中实现处置功能。 在真正有必要的罕见情况下，提供处置支持。
+Actors可以实现 `IDisposable` 或 `IAsyncDisposable` 。 建议您依靠依赖注入进行资源管理，而不是在应用代码中实现处置功能。 处置支持是为真正需要的罕见情况提供的。
 
 ### 日志
 
-在 actor 类的内部，你可以通过基类 `Actor` 上的一个属性来访问 `ILogger` 的实例。 该实例连接到 ASP.NET Core 日志系统，应该用于 actor 内部的所有日志记录。 在 [此处](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line) 阅读更多有关日志的信息。 您可以配置各种不同的日志格式和输出接收器。
+在 actor 类的内部，你可以通过基类 `Actor` 上的属性来访问 `ILogger` 的实例。 该实例连接到 ASP.NET Core 日志系统，应该用于 actor 内部的所有日志记录。 在 [此处](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line) 阅读更多有关日志的信息。 您可以配置各种不同的日志格式和输出接收器。
 
 您应该使用 *结构化日志* 与 *命名的占位符* 类似于下面的示例：
 
@@ -195,7 +195,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 `UseRouting` 和 `UseEndpoints` 调用是配置路由所必需的。 在端点中间件中添加 `MapActorsHandlers` 是将 actor 配置为管道的一部分。
 
-这只是一个最小的例子，它对 Actor 功能并存是有效的：
+这是一个最小的示例，它对 Actor 功能与以下功能一起存在是有效的：
 
 - Controllers
 - Razor Pages

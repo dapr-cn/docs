@@ -39,7 +39,7 @@ spec:
 - `post` ： 通常用于创建记录或发送命令
 - `put` ： 更新数据或者记录
 - `patch` ： 有时用于更新记录的字段子集
-- `删除` : 删除数据或者记录
+- `delete` : 删除数据或者记录
 - `options` : 请求提供关于可用通信选项的信息(不常用)
 - `trace` ：用于调用请求消息的远程应用程序层回路（不常用）
 
@@ -132,7 +132,7 @@ curl -d '{ "operation": "get", "metadata": { "path": "/things/1234" } }' \
 要将数据发送到 HTTP 终结点，请调用带有 `POST`的 HTTP 绑定， `PUT`，或 `PATCH` 方法和以下 JSON 正文：
 
 {{% alert title="Note" color="primary" %}}
-以大写字母开头的任何元数据字段都作为请求头传递。 例如，默认 content type 是 `application/json; charset=utf-8`. This can be overridden be setting the `Content-Type` metadata field.
+以大写字母开头的任何元数据字段都作为请求头传递。 例如，默认 content type 是 `application/json; charset=utf-8`. 这个值可以被元数据的`Content-Type`字段设置的值所覆盖。
 {{% /alert %}}
 
 ```json

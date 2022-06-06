@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "Quickstart: Service Invocation"
+title: "快速入门：服务调用"
 linkTitle: "服务调用"
 weight: 70
-description: "Get started with Dapr's Service Invocation building block"
+description: "开始使用 Dapr 的服务调用构建块"
 ---
 
-With [Dapr's Service Invocation building block](https://docs.dapr.io/developing-applications/building-blocks/service-invocation), your application can communicate reliably and securely with other applications.
+通过 [Dapr的服务调用构建块](https://docs.dapr.io/developing-applications/building-blocks/service-invocation)，你的应用程序可以与其他应用程序进行可靠和安全的通信。
 
 <img src="/images/serviceinvocation-quickstart/service-invocation-overview.png" width=800 alt="显示服务调用步骤的图表" style="padding-bottom:25px;">
 
-Dapr offers several methods for service invocation, which you can choose depending on your scenario. For this Quickstart, you'll enable the checkout service to invoke a method using HTTP proxy in the order-processor service.
+Dapr 提供了几种服务调用方法，你可以根据你的方案选择这些方法。 在本快速入门中，你将启用 checkout 服务以HTTP 代理调用 order-processor 服务中的方法。
 
-Learn more about Dapr's methods for service invocation in the [overview article]({{< ref service-invocation-overview.md >}}).
+在 [概述文章]({{< ref service-invocation-overview.md >}}) 中了解更多关于 Dapr 的服务调用方法。
 
-Select your preferred language before proceeding with the Quickstart.
+在继续快速入门之前，请选择您首选的语言。
 
 {{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
  <!-- Python -->
@@ -32,27 +32,27 @@ Select your preferred language before proceeding with the Quickstart.
 
 ### 第2步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/service_invocation)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Run `order-processor` service
+### 第3步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart clone directory navigate to `order-processor` directory.
+在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/python/http/order-processor
 ```
 
-Install the dependencies and build the application:
+安装依赖项并构建应用程序：
 
 ```bash
 pip3 install -r requirements.txt 
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- python3 app.py
@@ -70,27 +70,27 @@ def getOrder():
 app.run(port=7001)
 ```
 
-### Step 4: Run `checkout` service
+### 第4步：运行 `checkout` 服务
 
-In a new terminal window, from the root of the Quickstart clone directory navigate to the `checkout` directory.
+在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/python/http/checkout
 ```
 
-Install the dependencies and build the application:
+安装依赖项并构建应用程序：
 
 ```bash
 pip3 install -r requirements.txt 
 ```
 
-Run the `checkout` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `checkout` 服务。
 
 ```bash
 dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- python3 app.py
 ```
 
-In the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
+在 `checkout` 服务中，您会注意到无需重写您的应用程序代码即可使用 Dapr 的服务调用。 您可以通过简单地添加 `dapr-app-id` 标头来启用服务调用，该标头指定目标服务的 ID。
 
 ```python
 headers = {'dapr-app-id': 'order-processor'}
@@ -101,11 +101,11 @@ result = requests.post(
     headers=headers
 )
 ```
-### Step 5: View the Service Invocation outputs
+### 第5步：查看服务调用输出
 
-Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
+Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话通信。 Dapr 实例随后会相互发现并进行通信。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 1}
@@ -120,7 +120,7 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 == APP == Order passed: {"orderId": 10}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 1}
@@ -145,22 +145,22 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 对于此示例，您将需要：
 
 - [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
-- [Latest Node.js installed](https://nodejs.org/).
+- [最新的Node.js已安装](https://nodejs.org/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第2步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/service_invocation)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Run `order-processor` service
+### 第3步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart clone directory navigate to `order-processor` directory.
+在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/javascript/http/order-processor
@@ -172,7 +172,7 @@ cd service_invocation/javascript/http/order-processor
 npm install
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-port 6001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- npm start
@@ -185,9 +185,9 @@ app.post('/orders', (req, res) => {
 });
 ```
 
-### Step 4: Run `checkout` service
+### 第4步：运行 `checkout` 服务
 
-In a new terminal window, from the root of the Quickstart clone directory navigate to the `checkout` directory.
+在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/javascript/http/checkout
@@ -199,13 +199,13 @@ cd service_invocation/javascript/http/checkout
 npm install
 ```
 
-Run the `checkout` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `checkout` 服务。
 
 ```bash
 dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- npm start
 ```
 
-In the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
+在 `checkout` 服务中，您会注意到无需重写您的应用程序代码即可使用 Dapr 的服务调用。 您可以通过简单地添加 `dapr-app-id` 标头来启用服务调用，该标头指定目标服务的 ID。
 
 ```javascript
 let axiosConfig = {
@@ -217,11 +217,11 @@ let axiosConfig = {
   console.log("Order passed: " + res.config.data);
 ```
 
-### Step 5: View the Service Invocation outputs
+### 第5步：查看服务调用输出
 
-Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
+Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话通信。 Dapr 实例随后会相互发现并进行通信。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 1}
@@ -236,7 +236,7 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 == APP == Order passed: {"orderId": 10}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 1}
@@ -261,22 +261,22 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 对于此示例，您将需要：
 
 - [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
-- [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
+- [.NET SDK 或 .NET 6 SDK 已安装](https://dotnet.microsoft.com/download).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第2步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/service_invocation)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Run `order-processor` service
+### 第3步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart clone directory navigate to `order-processor` directory.
+在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/csharp/http/order-processor
@@ -289,7 +289,7 @@ dotnet restore
 dotnet build
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- dotnet run
@@ -303,9 +303,9 @@ app.MapPost("/orders", async context => {
 });
 ```
 
-### Step 4: Run `checkout` service
+### 第4步：运行 `checkout` 服务
 
-In a new terminal window, from the root of the Quickstart clone directory navigate to the `checkout` directory.
+在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/csharp/http/checkout
@@ -318,13 +318,13 @@ dotnet restore
 dotnet build
 ```
 
-Run the `checkout` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `checkout` 服务。
 
 ```bash
 dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- dotnet run
 ```
 
-In the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
+在 `checkout` 服务中，您会注意到无需重写您的应用程序代码即可使用 Dapr 的服务调用。 您可以通过简单地添加 `dapr-app-id` 标头来启用服务调用，该标头指定目标服务的 ID。
 
 ```csharp
 var client = new HttpClient();
@@ -336,11 +336,11 @@ var response = await client.PostAsync($"{baseURL}/orders", content);
     Console.WriteLine("Order passed: " + order);
 ```
 
-### Step 5: View the Service Invocation outputs
+### 第5步：查看服务调用输出
 
-Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
+Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话通信。 Dapr 实例随后会相互发现并进行通信。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: Order { OrderId: 1 }
@@ -355,7 +355,7 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 == APP == Order passed: Order { OrderId: 10 }
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: Order { OrderId: 1 }
@@ -380,25 +380,25 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 对于此示例，您将需要：
 
 - [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
-- Java JDK 11 (or greater):
-  - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
+- Java JDK 11（或更高版本）：
+  - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11)，或
   - [OpenJDK](https://jdk.java.net/13/)
-- [Apache Maven](https://maven.apache.org/install.html), version 3.x.
+- [Apache Maven](https://maven.apache.org/install.html)，版本 3.x。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第2步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/service_invocation)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Run `order-processor` service
+### 第3步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart clone directory navigate to `order-processor` directory.
+在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/java/http/order-processor
@@ -410,7 +410,7 @@ cd service_invocation/java/http/order-processor
 mvn clean install
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --app-port 6001 --app-protocol http --dapr-http-port 3501 -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
@@ -423,9 +423,9 @@ public String processOrders(@RequestBody Order body) {
     }
 ```
 
-### Step 4: Run `checkout` service
+### 第4步：运行 `checkout` 服务
 
-In a new terminal window, from the root of the Quickstart clone directory navigate to the `checkout` directory.
+在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/java/http/checkout
@@ -437,13 +437,13 @@ cd service_invocation/java/http/checkout
 mvn clean install
 ```
 
-Run the `checkout` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `checkout` 服务。
 
 ```bash
 dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- java -jar target/CheckoutService-0.0.1-SNAPSHOT.jar
 ```
 
-In the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
+在 `checkout` 服务中，您会注意到无需重写您的应用程序代码即可使用 Dapr 的服务调用。 您可以通过简单地添加 `dapr-app-id` 标头来启用服务调用，该标头指定目标服务的 ID。
 
 ```java
 .header("Content-Type", "application/json")
@@ -453,11 +453,11 @@ HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandle
 System.out.println("Order passed: "+ orderId)
 ```
 
-### Step 5: View the Service Invocation outputs
+### 第5步：查看服务调用输出
 
-Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
+Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话通信。 Dapr 实例随后会相互发现并进行通信。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: 1
@@ -472,7 +472,7 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 == APP == Order passed: 10
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: 1
@@ -497,23 +497,23 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 对于此示例，您将需要：
 
 - [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
-- [Latest version of Go](https://go.dev/dl/).
+- [最新版本的Go](https://go.dev/dl/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第2步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/service_invocation).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/service_invocation)。
 
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 3: Run `order-processor` service
+### 第3步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart clone directory navigate to `order-processor` directory.
+在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/go/http/order-processor
@@ -525,13 +525,13 @@ cd service_invocation/go/http/order-processor
 go build app.go
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-port 5001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- go run app.go
 ```
 
-Each order is received via an HTTP POST request and processed by the `getOrder` function.
+每个订单都通过 HTTP POST 请求接收并由 `getOrder` 函数处理。
 
 ```go
 func getOrder(w http.ResponseWriter, r *http.Request) {
@@ -542,9 +542,9 @@ func getOrder(w http.ResponseWriter, r *http.Request) {
     log.Printf("Order received : %s", string(data))
 ```
 
-### Step 4: Run `checkout` service
+### 第4步：运行 `checkout` 服务
 
-In a new terminal window, from the root of the Quickstart clone directory navigate to the `checkout` directory.
+在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/go/http/checkout
@@ -556,13 +556,13 @@ cd service_invocation/go/http/checkout
 go build app.go
 ```
 
-Run the `checkout` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `checkout` 服务。
 
 ```bash
 dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- go run app.go
 ```
 
-In the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
+在 `checkout` 服务中，您会注意到无需重写您的应用程序代码即可使用 Dapr 的服务调用。 您可以通过简单地添加 `dapr-app-id` 标头来启用服务调用，该标头指定目标服务的 ID。
 
 ```go
 req.Header.Add("dapr-app-id", "order-processor")
@@ -570,11 +570,11 @@ req.Header.Add("dapr-app-id", "order-processor")
 response, err := client.Do(req)
 ```
 
-### Step 5: View the Service Invocation outputs
+### 第5步：查看服务调用输出
 
-Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
+Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话通信。 Dapr 实例随后会相互发现并进行通信。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed:  {"orderId":1}
@@ -589,7 +589,7 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 == APP == Order passed:  {"orderId":10}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received :  {"orderId":1}
@@ -608,16 +608,16 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 
 {{% /tabs %}}
 
-## Tell us what you think!
-We're continuously working to improve our Quickstart examples and value your feedback. Did you find this Quickstart helpful? Do you have suggestions for improvement?
+## 告诉我们您的想法
+我们一直在努力改进我们的快速入门示例，并重视你的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
 
-Join the discussion in our [discord channel](https://discord.gg/22ZtJrNe).
+加入我们的 [discord 频道](https://discord.gg/22ZtJrNe)中的讨论。
 
 ## 下一步
 
-- Learn more about [Service Invocation as a Dapr building block]({{< ref service-invocation-overview.md >}})
-- Learn more about how to invoke Dapr's Service Invocation with:
-    - [HTTP]({{< ref howto-invoke-discover-services.md >}}), or
+- 了解更多关于 [服务调用作为 Dapr 构建块]({{< ref service-invocation-overview.md >}})
+- 了解更多关于如何调用 Dapr 的服务调用：
+    - [HTTP]({{< ref howto-invoke-discover-services.md >}}), 或
     - [gRPC]({{< ref howto-invoke-services-grpc.md >}})
 
-{{< button text="Explore Dapr tutorials  >>" page="getting-started/tutorials/_index.md" >}}
+{{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

@@ -29,6 +29,6 @@ dapr components [flags]
 ### 示例
 
 ```bash
-# List Kubernetes components
+# 列出 Kubernetes 组件
 dapr components -k
 ```

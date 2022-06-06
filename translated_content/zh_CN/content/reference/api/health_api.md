@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Health API reference"
+title: "健康状态 API 参考"
 linkTitle: "健康状况 API"
 description: "关于健康状况 API 的详细文档"
 weight: 100
