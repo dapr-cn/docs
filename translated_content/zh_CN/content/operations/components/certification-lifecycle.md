@@ -57,7 +57,7 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 - 状态存储
 - 密钥存储
 - 绑定
-- Pub/Sub
+- Pub/sub（发布/订阅）
 
 要了解更多关于它们的信息，请看readme [这里](https://github.com/dapr/components-contrib/blob/master/tests/conformance/README.md)。
 

@@ -12,7 +12,7 @@ Dapr 不是一个服务网格。 虽然服务网侧重于细粒度网络控制�
 ## 性能基准
 Dapr项目的重点是性能，因为其固有的讨论是Dapr作为您的应用程序的侧面。 请参阅 [这里]({{< ref perf-service-invocation.md >}}) 以获取最新的性能数字。
 
-## Actors
+## 参与者
 
 ### Dapr，Orleans 和 Service Fabric Reliable Actors之间的关系是什么?
 
