@@ -14,8 +14,8 @@ Dapr CLI 为您提供了一个很好的工作基础，通过初始化本地重�
 
 - [调用逻辑]({{< ref service-invocation >}})
 - [状态存储]({{< ref state-management >}})
-- [Pub/Sub]({{< ref pubsub >}})
-- [Actors]({{< ref actors >}})
+- [Pub/sub（发布/订阅）]({{< ref pubsub >}})
+- [参与者]({{< ref actors >}})
 
 您可以用 `dapr run` 来运行.NET 服务，作为您在本地开发的策略。 为每个服务的这些命令，以便启动您的应用程序。
 
