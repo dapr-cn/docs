@@ -26,7 +26,7 @@ Dapr提供了帮助开发 .NET 应用程序各种包。 你可以使用他们来
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><b>Actors</b></h5>
+      <h5 class="card-title"><b>参与者</b></h5>
       <p class="card-text">在 .NET 中创建具有状态、reminders/timer 和方法的 virtual actors。</p>
       <a href="{{< ref dotnet-actors >}}" class="stretched-link"></a>
     </div>
