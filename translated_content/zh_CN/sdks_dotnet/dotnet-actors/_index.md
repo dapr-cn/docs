@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Dapr actors .NET SDK入门"
-linkTitle: "Actors"
+linkTitle: "参与者"
 weight: 40000
 description: 如何启动和运行Dapr .NET SDK
 ---
