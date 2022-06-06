@@ -17,7 +17,7 @@ Dapr 客户端包允许您从.NET应用程序中与其他 Dapr 应用程序进�
 
 ## 构建块
 
-.NET SDK允许您与所有的[Dapr构建块]({{< ref building-blocks >}})接口。
+.NET SDK 允许您与所有的 [Dapr构建块]({{< ref building-blocks >}})接口进行交互。
 
 ### 调用服务
 
@@ -105,7 +105,7 @@ Console.WriteLine("Published deposit event!");
 ```
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- 请访问[.NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe)，获取代码示例和说明，以试用 发布/订阅。
+- 请访问 [.NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe)，获取代码示例和说明，以试用发布/订阅。
 
 ### 与输出绑定交互
 

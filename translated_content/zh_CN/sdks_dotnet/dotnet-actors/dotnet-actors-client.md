@@ -36,7 +36,7 @@ public Task<MyData> GetDataAsync()
 为了与 actor 进行通信，你需要知道它的类型和id，对于强类型的客户端，需要知道它的一个接口。 `IActorProxyFactory` 上的所有API都需要一个 actor 类型和 actor id。
 
 - Actor 类型唯一地识别了 actor 在整个应用中的实现情况。
-- Actor id唯一地标识了该类型的一个实例。
+- Actor id 唯一标识该类型的实例。
 
 如果您没有actor id，并且想要与新的实例进行通信，您可以使用 `ActorId.CreateRandom()` 来创建一个随机的id。 由于随机 id 是一个加密的强标识符，所以当你与它交互时，运行时将创建一个新的 actor 实例。
 
@@ -44,7 +44,7 @@ public Task<MyData> GetDataAsync()
 
 ## Actor 客户端的两种风格
 
-Actor客户端支持两种不同风格的调用。*使用.NET接口的强类型*客户端和使用 `ActorProxy` 类的弱类型</em>客户端。
+Actor 客户端支持两种不同风格的调用：*使用 .NET 接口的强类型*客户端和使用 `ActorProxy` 类的*弱类型*客户端。
 
 由于 *强类型* 客户端基于.NET接口提供了强类型的典型优势，但是它们不能与非.NET Actors 一起工作。 您应该只在需要互操作或其他高级原因时才使用 *弱类型* 客户端。
 

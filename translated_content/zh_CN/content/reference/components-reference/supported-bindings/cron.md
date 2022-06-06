@@ -61,7 +61,7 @@ Dapr cron 绑定支持以下格式：
 
 ## 监听 cron 绑定
 
-在设置了cron绑定之后，您需要做的就是监听与您的组件名称匹配的 endpoint。 假设 [NAME] `scheduled`。 这将作为一个 HTTP `POST` 请求。 下面的例子展示了一个简单的 Node.js Express 应用程序如何接收 `/scheduled` endpoint 上的调用，并将消息写入控制台。
+在设置了cron绑定之后，您需要做的就是监听与您的组件名称匹配的 endpoint。 假设 [NAME] 是 `scheduled`。 这将作为一个 HTTP `POST` 请求。 下面的例子展示了一个简单的 Node.js Express 应用程序如何接收 `/scheduled` endpoint 上的调用，并将消息写入控制台。
 
 ```js
 app.post('/scheduled', async function(req, res){
@@ -77,7 +77,7 @@ app.post('/scheduled', async function(req, res){
 
 此组件支持 **输入和输出** 绑定接口。
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `delete`
 

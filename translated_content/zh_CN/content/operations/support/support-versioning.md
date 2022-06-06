@@ -24,7 +24,7 @@ Dapr 具有以下版本控制方案：
 - 发布 (GitHub 代码库 包括 dapr, CLI, SDKs 和 Helm Chart) 会具有 `MAJOR.MINOR.PATCH`
 - Documentation 和 Quickstarts 代码库会使用 Dapr 运行时代码库版本控制进行版本控制。
 - Dapr `Components` 会在 components-contrib GitHub 代码库中具有 `MAJOR` 。
-- Dapr `Manifests` with `MAJOR.MINOR`. These include subscriptions and configurations. These include subscriptions and configurations. 其中包括订阅和配置。
+- Dapr `Manifests` 具有 `MAJOR.MINOR`. 其中包括订阅和配置。
 
 请注意，Dapr API、二进制文件版本（运行时、CLI、SDK）和组件都是相互独立的。
 

@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Quickstart: State Management"
+title: "快速入门：状态管理"
 linkTitle: "状态管理"
 weight: 70
-description: "Get started with Dapr's State Store"
+description: "开始使用 Dapr 的状态存储"
 ---
 
-Let's take a look at Dapr's [State Management building block]({{< ref state-management >}}). In this Quickstart, you will save, get, and delete state using a Redis state store, but you can swap this out for any one of the [supported state stores]({{< ref supported-state-stores.md >}}).
+让我们看看Dapr的 [状态管理构建块]({{< ref state-management >}})。 在本快速入门中，您将使用 Redis 状态存储来保存、获取和删除状态，但您可以将其替换为任何一个 [受支持的状态存储]({{< ref supported-state-stores.md >}})。
 
 <img src="/images/state-management-quickstart.png" width=1000 style="padding-bottom:15px;">
 
@@ -24,17 +24,17 @@ Let's take a look at Dapr's [State Management building block]({{< ref state-mana
 - [Python 3.7+ 已安装](https://www.python.org/downloads/).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
-### Step 1: Set up the environment
+### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/state_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/state_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Manipulate service state
+### 第2步：操作服务状态
 
-In a terminal window, navigate to the `order-processor` directory.
+在终端窗口中，导航到 `order-processor` 目录。
 
 ```bash
 cd state_management/python/sdk/order-processor
@@ -46,13 +46,13 @@ cd state_management/python/sdk/order-processor
 pip3 install -r requirements.txt
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --components-path ../../../components/ -- python3 app.py
 ```
 
-The `order-processor` service writes, reads, and deletes an `orderId` key/value pair to the `statestore` instance [defined in the `statestore.yaml` component]({{< ref "#statestoreyaml-component-file" >}}). As soon as the service starts, it performs a loop.
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
 
 ```python
 with DaprClient() as client:
@@ -70,11 +70,11 @@ with DaprClient() as client:
     logging.info('Deleting Order: %s', order)
 ```
 
-### Step 3: View the order-processor outputs
+### 第3步：查看order-processor输出
 
-Notice, as specified in the code above, the code saves application state in the Dapr state store, reads it, then deletes it.
+请注意，正如上面代码中所指定的，代码将应用程序状态保存在 Dapr 状态存储中，读取它，然后将其删除。
 
-Order-processor output:
+Order-processor输出：
 ```
 == APP == INFO:root:Saving Order: {'orderId': '1'}
 == APP == INFO:root:Result after get: b"{'orderId': '1'}"
@@ -90,16 +90,16 @@ Order-processor output:
 == APP == INFO:root:Deleting Order: {'orderId': '4'}
 ```
 
-#### `statestore.yaml` component file
+#### `statestore.yaml` 组件文件
 
-When you run `dapr init`, Dapr creates a default Redis `statestore.yaml` and runs a Redis container on your local machine, located:
+当你运行 `dapr init`时，Dapr 会创建一个默认的 Redis `statestore.yaml` 并在你的本地机器上运行一个 Redis 容器，它位于：
 
-- On Windows, under `%UserProfile%\.dapr\components\statestore.yaml`
-- On Linux/MacOS, under `~/.dapr/components/statestore.yaml`
+- 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
+- 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out the [state store](/reference/components-reference/supported-state-stores/) without making code changes.
+使用 `statestore.yaml` 组件，您可以轻松换出 [状态存储](/reference/components-reference/supported-state-stores/) 而无需更改代码。
 
-The Redis `statestore.yaml` file included for this quickstart contains the following:
+本快速入门包含的 Redis `statestore.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -118,10 +118,10 @@ spec:
     value: "true"
 ```
 
-In the YAML file:
+在 YAML 文件中：
 
-- `metadata/name` is how your application talks to the component (called `DAPR_STORE_NAME` in the code sample).
-- `spec/metadata` defines the connection to the Redis instance used by the component.
+- `metadata/name` 是您的应用程序与组件通信的方式(在代码示例中称为 `DAPR_STORE_NAME`)。
+- `spec/metadata` 定义与组件使用的 Redis 实例的连接。
 
 {{% /codetab %}}
 
@@ -133,42 +133,42 @@ In the YAML file:
 对于此示例，您将需要：
 
 - [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
-- [Latest Node.js installed](https://nodejs.org/download/).
+- [最新的Node.js已安装](https://nodejs.org/download/)。
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-### Step 1: Set up the environment
+### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/state_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/state_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Manipulate service state
+### 第2步：操作服务状态
 
-In a terminal window, navigate to the `order-processor` directory.
+在终端窗口中，导航到 `order-processor` 目录。
 
 ```bash
 cd state_management/javascript/sdk/order-processor
 ```
 
-Install dependencies, which will include the `dapr-client` package from the JavaScript SDK:
+安装依赖项，其中将包括 JavaScript SDK 中的 `dapr-client` 包：
 
 ```bash
 npm install
 ```
 
-Verify you have the following files included in the service directory:
+验证服务目录中是否包含以下文件：
 
 - `package.json`
 - `package-lock.json`
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --components-path ../../../components/ -- npm run start
 ```
-The `order-processor` service writes, reads, and deletes an `orderId` key/value pair to the `statestore` instance [defined in the `statestore.yaml` component]({{< ref "#statestoreyaml-component-file" >}}). As soon as the service starts, it performs a loop.
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
 
 ```js
   const client = new DaprClient(DAPR_HOST, DAPR_HTTP_PORT);
@@ -195,11 +195,11 @@ The `order-processor` service writes, reads, and deletes an `orderId` key/value 
   });
 
 ```
-### Step 3: View the order-processor outputs
+### 第3步：查看order-processor输出
 
-Notice, as specified in the code above, the code saves application state in the Dapr state store, reads it, then deletes it.
+请注意，正如上面代码中所指定的，代码将应用程序状态保存在 Dapr 状态存储中，读取它，然后将其删除。
 
-Order-processor output:
+Order-processor输出：
 ```
 == APP == > order-processor@1.0.0 start
 == APP == > node index.js
@@ -220,16 +220,16 @@ Order-processor output:
 == APP == Deleting Order:  { orderId: 5 }
 ```
 
-#### `statestore.yaml` component file
+#### `statestore.yaml` 组件文件
 
-When you run `dapr init`, Dapr creates a default Redis `statestore.yaml` and runs a Redis container on your local machine, located:
+当你运行 `dapr init`时，Dapr 会创建一个默认的 Redis `statestore.yaml` 并在你的本地机器上运行一个 Redis 容器，它位于：
 
-- On Windows, under `%UserProfile%\.dapr\components\statestore.yaml`
-- On Linux/MacOS, under `~/.dapr/components/statestore.yaml`
+- 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
+- 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out the [state store](/reference/components-reference/supported-state-stores/) without making code changes.
+使用 `statestore.yaml` 组件，您可以轻松换出 [状态存储](/reference/components-reference/supported-state-stores/) 而无需更改代码。
 
-The Redis `statestore.yaml` file included for this quickstart contains the following:
+本快速入门包含的 Redis `statestore.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -248,10 +248,10 @@ spec:
     value: "true"
 ```
 
-In the YAML file:
+在 YAML 文件中：
 
-- `metadata/name` is how your application talks to the component (called `DAPR_STORE_NAME` in the code sample).
-- `spec/metadata` defines the connection to the Redis instance used by the component.
+- `metadata/name` 是您的应用程序与组件通信的方式(在代码示例中称为 `DAPR_STORE_NAME`)。
+- `spec/metadata` 定义与组件使用的 Redis 实例的连接。
 
 {{% /codetab %}}
 
@@ -263,39 +263,39 @@ In the YAML file:
 对于此示例，您将需要：
 
 - [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
-- [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
+- [.NET SDK 或 .NET 6 SDK 已安装](https://dotnet.microsoft.com/download).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-### Step 1: Set up the environment
+### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/state_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/state_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Manipulate service state
+### 第2步：操作服务状态
 
-In a terminal window, navigate to the `order-processor` directory.
+在终端窗口中，导航到 `order-processor` 目录。
 
 ```bash
 cd pub_sub/csharp/sdk/order-processor
 ```
 
-Recall NuGet packages:
+还原 NuGet 包：
 
 ```bash
 dotnet restore
 dotnet build
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --components-path ../../../components/ -- dotnet run
 ```
 
-The `order-processor` service writes, reads, and deletes an `orderId` key/value pair to the `statestore` instance [defined in the `statestore.yaml` component]({{< ref "#statestoreyaml-component-file" >}}). As soon as the service starts, it performs a loop.
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
 
 ```cs
 var client = new DaprClientBuilder().Build();
@@ -312,11 +312,11 @@ Console.WriteLine("Getting Order: " + result);
 await client.DeleteStateAsync(DAPR_STORE_NAME, orderId.ToString());
 Console.WriteLine("Deleting Order: " + order);
 ```
-### Step 3: View the order-processor outputs
+### 第3步：查看order-processor输出
 
-Notice, as specified in the code above, the code saves application state in the Dapr state store, reads it, then deletes it.
+请注意，正如上面代码中所指定的，代码将应用程序状态保存在 Dapr 状态存储中，读取它，然后将其删除。
 
-Order-processor output:
+Order-processor输出：
 ```
 == APP == Saving Order: Order { orderId = 1 }
 == APP == Getting Order: Order { orderId = 1 }
@@ -335,16 +335,16 @@ Order-processor output:
 == APP == Deleting Order: Order { orderId = 5 }
 ```
 
-#### `statestore.yaml` component file
+#### `statestore.yaml` 组件文件
 
-When you run `dapr init`, Dapr creates a default Redis `statestore.yaml` and runs a Redis container on your local machine, located:
+当你运行 `dapr init`时，Dapr 会创建一个默认的 Redis `statestore.yaml` 并在你的本地机器上运行一个 Redis 容器，它位于：
 
-- On Windows, under `%UserProfile%\.dapr\components\statestore.yaml`
-- On Linux/MacOS, under `~/.dapr/components/statestore.yaml`
+- 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
+- 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out the [state store](/reference/components-reference/supported-state-stores/) without making code changes.
+使用 `statestore.yaml` 组件，您可以轻松换出 [状态存储](/reference/components-reference/supported-state-stores/) 而无需更改代码。
 
-The Redis `statestore.yaml` file included for this quickstart contains the following:
+本快速入门包含的 Redis `statestore.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -363,10 +363,10 @@ spec:
     value: "true"
 ```
 
-In the YAML file:
+在 YAML 文件中：
 
-- `metadata/name` is how your application talks to the component (called `DAPR_STORE_NAME` in the code sample).
-- `spec/metadata` defines the connection to the Redis instance used by the component.
+- `metadata/name` 是您的应用程序与组件通信的方式(在代码示例中称为 `DAPR_STORE_NAME`)。
+- `spec/metadata` 定义与组件使用的 Redis 实例的连接。
 
 {{% /codetab %}}
 
@@ -378,23 +378,23 @@ In the YAML file:
 对于此示例，您将需要：
 
 - [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
-- Java JDK 11 (or greater):
-  - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
+- Java JDK 11（或更高版本）：
+  - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11)，或
   - [OpenJDK](https://jdk.java.net/13/)
-- [Apache Maven](https://maven.apache.org/install.html), version 3.x.
+- [Apache Maven](https://maven.apache.org/install.html)，版本 3.x。
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-### Step 1: Set up the environment
+### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/state_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/state_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Manipulate service state
+### 第2步：操作服务状态
 
-In a terminal window, navigate to the `order-processor` directory.
+在终端窗口中，导航到 `order-processor` 目录。
 
 ```bash
 cd state_management/java/sdk/order-processor
@@ -412,7 +412,7 @@ Run the `order-processor` publisher service alongside a Dapr sidecar.
 dapr run --app-id order-processor --components-path ../../../components -- java -jar target/order-processor-0.0.1-SNAPSHOT.jar
 ```
 
-The `order-processor` service writes, reads, and deletes an `orderId` key/value pair to the `statestore` instance [defined in the `statestore.yaml` component]({{< ref "#statestoreyaml-component-file" >}}). As soon as the service starts, it performs a loop.
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
 
 ```java
 try (DaprClient client = new DaprClientBuilder().build()) {
@@ -435,11 +435,11 @@ try (DaprClient client = new DaprClientBuilder().build()) {
     TimeUnit.MILLISECONDS.sleep(1000);
   }
 ```
-### Step 3: View the order-processor outputs
+### 第3步：查看order-processor输出
 
-Notice, as specified in the code above, the code saves application state in the Dapr state store, reads it, then deletes it.
+请注意，正如上面代码中所指定的，代码将应用程序状态保存在 Dapr 状态存储中，读取它，然后将其删除。
 
-Order-processor output:
+Order-processor输出：
 ```
 == APP == INFO:root:Saving Order: {'orderId': '1'}
 == APP == INFO:root:Result after get: b"{'orderId': '1'}"
@@ -455,14 +455,14 @@ Order-processor output:
 == APP == INFO:root:Deleting Order: {'orderId': '4'}
 ```
 
-#### `statestore.yaml` component file
+#### `statestore.yaml` 组件文件
 
-When you run `dapr init`, Dapr creates a default Redis `statestore.yaml` and runs a Redis container on your local machine, located:
+当你运行 `dapr init`时，Dapr 会创建一个默认的 Redis `statestore.yaml` 并在你的本地机器上运行一个 Redis 容器，它位于：
 
-- On Windows, under `%UserProfile%\.dapr\components\statestore.yaml`
-- On Linux/MacOS, under `~/.dapr/components/statestore.yaml`
+- 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
+- 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out the [state store](/reference/components-reference/supported-state-stores/) without making code changes.
+使用 `statestore.yaml` 组件，您可以轻松换出 [状态存储](/reference/components-reference/supported-state-stores/) 而无需更改代码。
 
 The Redis `statestore.yaml` file included for this Quickstart contains the following:
 
@@ -483,10 +483,10 @@ spec:
     value: "true"
 ```
 
-In the YAML file:
+在 YAML 文件中：
 
-- `metadata/name` is how your application talks to the component (called `DAPR_STORE_NAME` in the code sample).
-- `spec/metadata` defines the connection to the Redis instance used by the component.
+- `metadata/name` 是您的应用程序与组件通信的方式(在代码示例中称为 `DAPR_STORE_NAME`)。
+- `spec/metadata` 定义与组件使用的 Redis 实例的连接。
 
 {{% /codetab %}}
 
@@ -498,38 +498,38 @@ In the YAML file:
 对于此示例，您将需要：
 
 - [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
-- [Latest version of Go](https://go.dev/dl/).
+- [最新版本的Go](https://go.dev/dl/)。
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-### Step 1: Set up the environment
+### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/state_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/state_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Manipulate service state
+### 第2步：操作服务状态
 
-In a terminal window, navigate to the `order-processor` directory.
+在终端窗口中，导航到 `order-processor` 目录。
 
 ```bash
 cd state_management/go/sdk/order-processor
 ```
 
-Install the dependencies and build the application:
+安装依赖项并构建应用程序：
 
 ```bash
 go build app.go
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --components-path ../../../components -- go run app.go
 ```
 
-The `order-processor` service writes, reads, and deletes an `orderId` key/value pair to the `statestore` instance [defined in the `statestore.yaml` component]({{< ref "#statestoreyaml-component-file" >}}). As soon as the service starts, it performs a loop.
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
 
 ```go
   client, err := dapr.NewClient()
@@ -547,11 +547,11 @@ The `order-processor` service writes, reads, and deletes an `orderId` key/value 
   log.Print("Deleting Order: " + string(order))
 ```
 
-### Step 3: View the order-processor outputs
+### 第3步：查看order-processor输出
 
-Notice, as specified in the code above, the code saves application state in the Dapr state store, reads it, then deletes it.
+请注意，正如上面代码中所指定的，代码将应用程序状态保存在 Dapr 状态存储中，读取它，然后将其删除。
 
-Order-processor output:
+Order-processor输出：
 ```
 == APP == dapr client initializing for: 127.0.0.1:53689
 == APP == 2022/04/01 09:16:03 Saving Order: {"orderId":1}
@@ -571,16 +571,16 @@ Order-processor output:
 == APP == 2022/04/01 09:16:03 Deleting Order: {"orderId":5}
 ```
 
-#### `statestore.yaml` component file
+#### `statestore.yaml` 组件文件
 
-When you run `dapr init`, Dapr creates a default Redis `statestore.yaml` and runs a Redis container on your local machine, located:
+当你运行 `dapr init`时，Dapr 会创建一个默认的 Redis `statestore.yaml` 并在你的本地机器上运行一个 Redis 容器，它位于：
 
-- On Windows, under `%UserProfile%\.dapr\components\statestore.yaml`
-- On Linux/MacOS, under `~/.dapr/components/statestore.yaml`
+- 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
+- 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out the [state store](/reference/components-reference/supported-state-stores/) without making code changes.
+使用 `statestore.yaml` 组件，您可以轻松换出 [状态存储](/reference/components-reference/supported-state-stores/) 而无需更改代码。
 
-The Redis `statestore.yaml` file included for this Quickstart contains the following:
+本快速入门包含的 Redis `statestore.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -599,28 +599,28 @@ spec:
     value: "true"
 ```
 
-In the YAML file:
+在 YAML 文件中：
 
-- `metadata/name` is how your application talks to the component (called `DAPR_STORE_NAME` in the code sample).
-- `spec/metadata` defines the connection to the Redis instance used by the component.
+- `metadata/name` 是您的应用程序与组件通信的方式(在代码示例中称为 `DAPR_STORE_NAME`)。
+- `spec/metadata` 定义与组件使用的 Redis 实例的连接。
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Tell us what you think!
-We're continuously working to improve our Quickstart examples and value your feedback. Did you find this quickstart helpful? Do you have suggestions for improvement?
+## 告诉我们您的想法
+我们一直在努力改进我们的快速入门示例，并重视你的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
 
-Join the discussion in our [discord channel](https://discord.gg/22ZtJrNe).
+加入我们的 [discord 频道](https://discord.gg/22ZtJrNe)中的讨论。
 
 ## 下一步
 
-- Use Dapr State Management with HTTP instead of an SDK.
+- 使用 HTTP 而不是 SDK 的 Dapr 状态管理。
   - [Python](https://github.com/dapr/quickstarts/tree/master/state_management/python/http)
   - [JavaScript](https://github.com/dapr/quickstarts/tree/master/state_management/javascript/http)
   - [.NET](https://github.com/dapr/quickstarts/tree/master/state_management/csharp/http)
   - [Java](https://github.com/dapr/quickstarts/tree/master/state_management/java/http)
   - [Go](https://github.com/dapr/quickstarts/tree/master/state_management/go/http)
-- Learn more about [State Management building block]({{< ref state-management >}})
+- 了解更多关于 [状态管理构建块]({{< ref state-management >}})的信息
 
-{{< button text="Explore Dapr tutorials  >>" page="getting-started/tutorials/_index.md" >}}
+{{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

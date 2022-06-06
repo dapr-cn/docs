@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "Dapr Service (回调) SDK for Go 入门"
+title: "Go SDK 回调 Dapr 服务入门"
 linkTitle: "gRPC 服务"
 weight: 20000
-description: 如何使用 Dapr Service (回调) SDK for Go 启动和运行
+description: 如何使用 Go SDK 回调 Dapr 服务
 no_list: true
 ---
 
@@ -26,7 +26,7 @@ if err != nil {
     log.Fatalf("failed to start the server: %v", err)
 }
 ```
-或者通过地址和现有的 net.Listener ，如果您想要合并现有服务器监听器：
+如果您想要合并现有服务 listener，可使用现有的 net.Listener 的地址。
 
 ```go
 list, err := net.Listen("tcp", "localhost:0")
@@ -36,7 +36,7 @@ if err != nil {
 s := daprd.NewServiceWithListener(list)
 ```
 
-一旦你创建了一个服务实例，你就可以给该服务 "附加 "任何数量的事件、绑定和服务调用逻辑处理程序，如下所示。 定义逻辑后，即可启动服务：
+一旦你创建了一个服务实例，你就可以给该服务 "附加 "任何数量的事件、绑定和服务调用逻辑处理程序。 定义逻辑后，即可启动服务：
 
 ```go
 if err := s.Start(); err != nil {
@@ -45,7 +45,7 @@ if err := s.Start(); err != nil {
 ```
 
 ### 事件处理
-要处理来自特定主题的事件，您需要在启动服务之前至少添加一个主题事件处理程序：
+要处理来自特定 topic 的事件，您需要在启动服务之前至少添加一个 topic event handler：
 
 ```go
 sub := &common.Subscription{
@@ -57,7 +57,7 @@ if err := s.AddTopicEventHandler(sub, eventHandler); err != nil {
 }
 ```
 
-处理程序方法本身可以是具有预期签名的任何方法：
+handler 本身可以是具有预期签名的任何方法：
 
 ```go
 func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err error) {
@@ -68,7 +68,7 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 ```
 
 ### 服务调用处理
-要处理服务调用，您需要在启动服务之前添加至少一个服务调用处理程序：
+要处理服务调用，您需要在启动服务之前添加至少一个服务调用 handler：
 
 ```go
 if err := s.AddServiceInvocationHandler("echo", echoHandler); err != nil {

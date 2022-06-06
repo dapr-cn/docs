@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Quickstart: Define a component"
+title: "快速入门：定义组件"
 linkTitle: "定义一个组件"
 weight: 70
-description: "Create a component definition file to interact with the Secrets building block"
+description: "创建组件定义文件以与 Secrets 构建块进行交互"
 ---
 
-When building an app, you'd most likely create your own component file definitions, depending on the building block and specific component that you'd like to use.
+当构建一个应用程序时，你很可能会根据你想使用的构建块和特定的组件来定义自己的组建文件。
 
-In this quickstart, you will create a component definition file to interact with the [Secrets building block]({{< ref secrets >}}):
+在本快速入门中，您将创建一个组件定义文件以与 [Secrets 构建块]({{< ref secrets >}})进行交互：
 
 - 创建本地 JSON 秘密存储.
 - 使用组件定义文件在 Dapr 注册密钥存储.
@@ -16,7 +16,7 @@ In this quickstart, you will create a component definition file to interact with
 
 ## 第 1 步：创建一个 JSON 密钥存储
 
-Dapr supports [many types of secret stores]({{< ref supported-secret-stores >}}), but for this quickstart, create a local JSON file named `mysecrets.json` with the following secret:
+Dapr 支持 [多种类型的密钥存储]({{< ref supported-secret-stores >}})，但对于本快速入门，使用以下密钥创建一个名为 `mysecrets.json` 的本地 JSON 文件：
 
 ```json
 {
@@ -32,13 +32,13 @@ Dapr supports [many types of secret stores]({{< ref supported-secret-stores >}})
    mkdir my-components
    ```
 
-1. Navigate into this directory.
+1. 进入目录
 
    ```bash
    cd my-components
    ```
 
-1. Create a new file `localSecretStore.yaml` with the following contents:
+1. 创建一个新文件 `localSecretStore.yaml` ，内容如下：
 
    ```yaml
    apiVersion: dapr.io/v1alpha1
@@ -56,29 +56,29 @@ Dapr supports [many types of secret stores]({{< ref supported-secret-stores >}})
        value: ":"
    ```
 
-In the above file definition:
-- `type: secretstores.local.file` tells Dapr to use the local file component as a secret store.
-- The metadata fields provide component-specific information needed to work with this component. In this case, the secret store JSON path is relative to where you call `dapr run`.
+在上面的定义文件中：
+- `type: secretstores.local.file` 告诉Dapr使用本地文件组件作为密钥存储。
+- 元数据字段提供使用此组件所需的组件特定信息。 在这种情况下，密钥存储 JSON 路径相对于您调用 `dapr run` 的位置。
 
 ## 第 3 步：运行Dapr sidecar
 
-Launch a Dapr sidecar that will listen on port 3500 for a blank application named `myapp`:
+启动一个 Dapr sidecar，它将在端口 3500 上侦听名为 `myapp`的空白应用程序：
 
 ```bash
 dapr run --app-id myapp --dapr-http-port 3500 --components-path ./my-components
 ```
 
 {{% alert title="Tip" color="primary" %}}
-If an error message occurs, stating the `app-id` is already in use, you may need to stop any currently running Dapr sidecars. Stop the sidecar before running the next `dapr run` command by either:
+如果出现错误消息，说明 `app-id` 已在使用中，您可能需要停止任何当前正在运行的 Dapr sidecar。 在运行下一个 `dapr run` 命令之前停止sidecar：
 
-- Pressing Ctrl+C or Command+C.
-- Running the `dapr stop` command in the terminal.
+- 按 Ctrl+C 或 Command+C。
+- 在终端中运行 `dapr stop` 命令。
 
 {{% /alert %}}
 
 ## 第 4 步：获取一个密钥
 
-In a separate terminal, run:
+在独立的终端中运行：
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 {{% codetab %}}
@@ -104,4 +104,4 @@ Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/secrets/my-secret-store/my-se
 {"my-secret":"I'm Batman"}
 ```
 
-{{< button text="Next step: Set up a Pub/sub broker >>" page="pubsub-quickstart" >}}
+{{< button text="下一步：设置 Pub/sub（发布/订阅） 代理 >>" page="pubsub-quickstart" >}}

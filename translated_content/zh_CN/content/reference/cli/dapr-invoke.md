@@ -33,9 +33,9 @@ dapr invoke [flags]
 ### 示例
 
 ```bash
-# Invoke a sample method on target app with POST Verb
+# 使用POST方式调用目标应用上的sample方法
 dapr invoke --app-id target --method sample --data '{"key":"value"}'
 
-# Invoke a sample method on target app with GET Verb
+# 使用GET方式调动目标应用上的sample方法
 dapr invoke --app-id target --method sample --verb GET
 ```

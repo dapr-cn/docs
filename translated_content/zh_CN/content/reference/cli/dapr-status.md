@@ -29,6 +29,6 @@ dapr status -k
 ### 示例
 
 ```bash
-# Get status of Dapr services from Kubernetes
+# 从Kubernetes集群中获取Dapr服务的状态
 dapr status -k
 ```

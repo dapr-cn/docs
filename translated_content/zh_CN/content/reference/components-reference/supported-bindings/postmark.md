@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Postmark binding create a component of type `bindings.postmark`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置Postmark绑定需要创建一个 `bindings.postmark`类型的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -38,29 +38,29 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持 | 详情                                                                   | 示例                 |
-| ------------ |:--:| ---- | -------------------------------------------------------------------- | ------------------ |
-| accountToken | Y  | 输出   | The Postmark account token, this should be considered a secret value | `"account token"`  |
-| serverToken  | Y  | 输出   | The Postmark server token, this should be considered a secret value  | `"server token"`   |
-| emailFrom    | 否  | 输出   | If set this specifies the 'from' email address of the email message  | `"me@exmaple.com"` |
-| emailTo      | 否  | 输出   | If set this specifies the 'to' email address of the email message    | `"me@example.com"` |
-| emailCc      | N  | 输出   | If set this specifies the 'cc' email address of the email message    | `"me@example.com"` |
-| emailBcc     | N  | 输出   | If set this specifies the 'bcc' email address of the email message   | `"me@example.com"` |
-| subject      | N  | 输出   | If set this specifies the subject of the email message               | `"me@example.com"` |
+| 字段           | 必填 | 绑定支持 | 详情                            | 示例                 |
+| ------------ |:--:| ---- | ----------------------------- | ------------------ |
+| accountToken | Y  | 输出   | Postmark账号token，它可以被看做一个秘钥值   | `"account token"`  |
+| serverToken  | Y  | 输出   | Postmark服务端token，它可以被看做是一个秘钥值 | `"server token"`   |
+| emailFrom    | 否  | 输出   | 指定邮件信息的发件人地址                  | `"me@exmaple.com"` |
+| emailTo      | 否  | 输出   | 指定邮件信息的收件人地址                  | `"me@example.com"` |
+| emailCc      | N  | 输出   | 指定邮件信息的抄送人地址                  | `"me@example.com"` |
+| emailBcc     | N  | 输出   | 指定邮件信息的秘密抄送人地址                | `"me@example.com"` |
+| subject      | N  | 输出   | 指定邮件信息主题                      | `"me@example.com"` |
 
-You can specify any of the optional metadata properties on the output binding request too (e.g. `emailFrom`, `emailTo`, `subject`, etc.)
+你也可以在输出绑定上指定任何可选的元数据属性(例如：`emailFrom`, `emailTo`, `subject`, 等等)。
 
-Combined, the optional metadata properties in the component configuration and the request payload should at least contain the `emailFrom`, `emailTo` and `subject` fields, as these are required to send an email with success.
+总结起来，组件配置信息的可选元数据属性和请求负载应该至少包含 `emailFrom`, `emailTo` 和 `subject`字段，因为这些属性是成功发送邮件必需的。
 
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持以下操作的**输出绑定** ：
 
 - `create`
 
 
-## Example request payload
+## 请求负载示例
 
 ```json
 {

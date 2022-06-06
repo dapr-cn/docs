@@ -6,7 +6,7 @@ weight: 3000
 description: 为 Dapr JavaScript SDK 做贡献的指南
 ---
 
-当对 [JavaScript SDK](https://github.com/dapr/js-sdk) 做出贡献时，应该遵循以下规则和最佳做法。
+当对 [JavaScript SDK](https://github.com/dapr/js-sdk) 做出贡献时，应该遵循以下规则和最佳实践。
 
 ## 提交指南
 

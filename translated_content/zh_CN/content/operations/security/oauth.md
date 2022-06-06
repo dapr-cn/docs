@@ -22,11 +22,11 @@ Dapr OAuth 2.0 [中间件]({{< ref "middleware.md" >}}) 允许您使用 [授权�
 * [Slack](https://api.slack.com/docs/oauth)
 * [Twitter](http://apps.twitter.com/)
 <!-- END_IGNORE -->
-To figure the Dapr OAuth middleware, you'll need to collect the following information:
+为了指定Dapr授权中间件，你需要收集一下信息:
 
-* Client ID (see [here](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
-* Client secret (see [here](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
-* Scopes (see [here](https://oauth.net/2/scope/))
+* 客户端ID(参考 [这里](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
+* 客户端密钥(参考 [这里](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
+* 范围 (参考 [这里](https://oauth.net/2/scope/))
 * 授权网址
 * 令牌网址
 
@@ -81,7 +81,7 @@ spec:
 
 ### 为授权代码授予定义自定义管道
 
-要使用 OAuth 中间件（授权代码），你应该创建一个 [自定义管道]({{< ref "middleware.md" >}}) 使用 [Dapr配置]({{< ref "configuration-overview" >}})，如以下样本所示：
+要使用 OAuth 中间件（授权代码），你应该使用 [Dapr配置]({{< ref "configuration-overview" >}}) 创建一个 [自定义管道]({{< ref "middleware.md" >}}) ，如以下示例所示：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -138,7 +138,7 @@ spec:
 
 ### 为客户端凭据授予定义自定义管道
 
-要使用 OAuth 中间件（授权代码），你应该创建一个 [自定义管道]({{< ref "middleware.md" >}}) 使用 [Dapr 配置]({{< ref "configuration-overview.md" >}})，如以下样本所示：
+要使用 OAuth 中间件（授权代码），你应该使用 [Dapr 配置]({{< ref "configuration-overview.md" >}}) 创建一个 [自定义管道]({{< ref "middleware.md" >}})，如以下样本所示：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -179,6 +179,6 @@ spec:
 
 一旦一切就绪，每当客户试图通过 Dapr sidecar 调用 API 方法（例如调用 *v1.0/invoke/* 端点），如果没有找到访问令牌，它将被重定向到授权的同意页。 否则，访问令牌将被写入 **authHeaderName** 头，并提供给应用程序代码使用。
 
-### 客户端凭据
+### 客户端凭据授予
 
 一旦一切就绪，每当客户端试图通过 Dapr sidecar 调用 API 方法（比如调用 *v1.0/invoke/* 端点）， 如果没有找到现有的有效访问令牌，它将检索到一个新的访问令牌。 访问令牌被写入 **headerName** 头，并提供给应用程序代码使用。 这样，应用就可以在调用中将授权标头中的令牌转发给请求该令牌的外部 API。

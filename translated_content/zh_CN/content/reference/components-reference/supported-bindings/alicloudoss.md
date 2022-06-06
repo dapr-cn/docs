@@ -46,7 +46,7 @@ spec:
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 - `create`: [创建对象](#create-object)
 
 

@@ -9,9 +9,9 @@ aliases:
 
 ## 配置
 
-To setup AWS Kinesis binding create a component of type `bindings.aws.kinesis`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+需要创建一个类型为`bindings.aws.kinesis`的组件来设置 AWS Kinesis绑定。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [this](https://aws.amazon.com/kinesis/data-streams/getting-started/) for instructions on how to set up an AWS Kinesis data streams See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
+参阅[此处](https://aws.amazon.com/kinesis/data-streams/getting-started/) 了解关于如何设置AWS Kinesis数据流的介绍。阅读[Authenticating to AWS]({{< ref authenticating-aws.md >}}) 了解关于身份认证相关的属性信息。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -40,7 +40,7 @@ spec:
 
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
+以上示例将密钥明文存储， 推荐使用secret store 组件存储 Secret ， 恰如[这里]({{< ref component-secrets.md >}})所描述。
 {{% /alert %}}
 
 ## 元数据字段规范
@@ -59,7 +59,7 @@ spec:
 
 此组件支持 **输入和输出** 绑定接口。
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的**输出绑定**:
 
 - `create`
 ## 相关链接

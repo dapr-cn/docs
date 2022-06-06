@@ -38,21 +38,21 @@ spec:
 
 ### URL格式
 
-The PostgreSQL binding uses [pgx connection pool](https://github.com/jackc/pgx) internally so the `url` parameter can be any valid connection string, either in a `DSN` or `URL` format:
+PostgreSQL 绑定在内部使用[pgx 连接池](https://github.com/jackc/pgx) ，因此`url` 参数可以是任何有效的连接字符串，可以是`DSN` 或者`URL`格式：
 
-**Example DSN**
+**DSN示例**
 
 ```shell
 user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca
 ```
 
-**Example URL**
+**URL示例**
 
 ```shell
 postgres://dapr:secret@dapr.example.com:5432/dapr?sslmode=verify-ca
 ```
 
-Both methods also support connection pool configuration variables:
+这两种方法还支持连接池配置变量：
 
 - `pool_min_conns`: integer 0 or greater
 - `pool_max_conns`: integer greater than 0
@@ -63,7 +63,7 @@ Both methods also support connection pool configuration variables:
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持一下操作的**输出绑定**：
 
 - `exec`
 - `query`
@@ -99,7 +99,7 @@ Both methods also support connection pool configuration variables:
 }
 ```
 
-### query
+### 查询
 
 `query` 操作用于 `SELECT` 语句，该语句以行值数组的形式返回元数据和数据。
 
@@ -133,7 +133,7 @@ Both methods also support connection pool configuration variables:
 }
 ```
 
-### close
+### 关闭
 
 最后， `close` 操作可用于显式关闭数据库连接并将其返回到池中。 此操作没有任何响应。
 
@@ -146,7 +146,7 @@ Both methods also support connection pool configuration variables:
 ```
 
 
-> Note, the PostgreSql binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
+> 备注：PostgreSql绑定资深不会阻止SQL注入，需要像其他数据库应用一样，在执行查询之前验证输入。
 
 ## 相关链接
 

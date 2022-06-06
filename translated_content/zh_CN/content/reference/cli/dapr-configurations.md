@@ -31,6 +31,6 @@ dapr configurations [flags]
 ### 示例
 
 ```bash
-# List Kubernetes Dapr configurations
+# 列出 Kubernetes Dapr 配置项
 dapr configurations -k
 ```

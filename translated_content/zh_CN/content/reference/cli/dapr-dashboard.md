@@ -34,18 +34,18 @@ dapr dashboard [flags]
 ### 示例
 
 ```bash
-# Start dashboard locally
+# 启动本地仪表盘
 dapr dashboard
 
-# Start dashboard service locally on a specified port
+# 启动本地仪表盘并指定监听端口
 dapr dashboard -p 9999
 
-# Port forward to dashboard service running in Kubernetes
+# 端口转发到在Kubernetes集群中运行的仪表盘服务
 dapr dashboard -k
 
-# Port forward to dashboard service running in Kubernetes on all addresses on a specified port
+# 端口转发到在Kubernetes集群中运行的仪表盘服务，并且监听指定端口，不限定IP地址
 dapr dashboard -k -p 9999 --address 0.0.0.0
 
-# Port forward to dashboard service running in Kubernetes on a specified port
+# 端口转发到在Kubernetes集群中运行的仪表盘服务，并且监听指定端口
 dapr dashboard -k -p 9999
 ```

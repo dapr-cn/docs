@@ -1,70 +1,70 @@
 ---
 type: docs
-title: "Dapr extension for Azure Kubernetes Service (AKS)"
-linkTitle: "Dapr extension for Azure Kubernetes Service (AKS)"
-description: "Provision Dapr on your Azure Kubernetes Service (AKS) cluster with the Dapr extension"
+title: "Azure Kubernetes Service (AKS) 的 Dapr 扩展"
+linkTitle: "Azure Kubernetes Service (AKS) 的 Dapr 扩展"
+description: "使用 Dapr 扩展在 Azure Kubernetes Service （AKS） 集群上预配 Dapr"
 weight: 4000
 ---
 
 # 先决条件
-- [Azure subscription](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli-windows?tabs=azure-cli) and the ***aks-preview*** extension.
-- [Azure Kubernetes Service (AKS) cluster](https://docs.microsoft.com/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli)
+- [Azure Subscription](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli-windows?tabs=azure-cli) 和 ***aks-preview*** 扩展。
+- [Azure Kubernetes Service (AKS) 群集](https://docs.microsoft.com/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli)
 
-## Install Dapr using the AKS Dapr extension
-The recommended approach for installing Dapr on AKS is to use the AKS Dapr extension. The extension offers support for all native Dapr configuration capabilities through command-line arguments via the Azure CLI and offers the option of opting into automatic minor version upgrades of the Dapr runtime.
+## 使用 AKS Dapr 扩展安装 Dapr
+在 AKS 上安装 Dapr 的推荐方法是使用 AKS Dapr 扩展。 该扩展通过 Azure CLI 通过命令行参数支持所有本机 Dapr 配置功能，并提供选择自动升级 Dapr 运行时的次要版本升级的选项。
 
 {{% alert title="Note" color="warning" %}}
-If you install Dapr through the AKS extension, our recommendation is to continue using the extension for future management of Dapr instead of the Dapr CLI. Combining the two tools can cause conflicts and result in undesired behavior.
+如果您通过 AKS 扩展安装 Dapr，我们的建议是继续使用该扩展而不是 Dapr CLI 来管理 Dapr。 将这两种工具结合起来可能会导致冲突并导致不良行为。
 {{% /alert %}}
 
-### How the extension works
-The Dapr extension works by provisioning the Dapr control plane on your AKS cluster through the Azure CLI. The dapr control plane consists of:
+### 扩展的工作原理
+Dapr 扩展通过 Azure CLI 在 AKS 群集上预配 Dapr 控制面板来工作。 Dapr 控制面板包括：
 
-- **dapr-operator**: Manages component updates and Kubernetes services endpoints for Dapr (state stores, pub/subs, etc.)
-- **dapr-sidecar-injector**: Injects Dapr into annotated deployment pods and adds the environment variables `DAPR_HTTP_PORT` and `DAPR_GRPC_PORT`. This enables user-defined applications to communicate with Dapr without the need to hard-code Dapr port values.
-- **dapr-placement**: Used for actors only. 创建映射表，将 actor 实例映射到 pods。
-- **dapr-sentry**: Manages mTLS between services and acts as a certificate authority. For more information read the security overview.
+- **dapr-operator**: 为 Dapr 管理组件更新和 Kubernetes 服务端点 (状态存储、发布/订阅等)
+- **dapr-sidecar-injector**：将 Dapr 注入到注解的 deployment pod 中并添加环境变量 `DAPR_HTTP_PORT` 和 `DAPR_GRPC_PORT`。 这使用户定义的应用程序能够与 Dapr 进行通信，而无需对 Dapr 端口值进行硬编码。
+- **dapr-placement**: 仅用于 actor. 创建映射表，将 actor 实例映射到 pods。
+- **dapr-sentry**: 管理服务之间的 mTLS 并充当证书颁发机构。 有关更多信息，请阅读安全性概述。
 
-### Extension Prerequisites
-In order to use the AKS Dapr extension, you must first enable the `AKS-ExtensionManager` and `AKS-Dapr` feature flags on your Azure subscription.
+### 扩展先决条件
+要使用 AKS Dapr 扩展，必须首先在 Azure 订阅上启用 `AKS-ExtensionManager` 和 `AKS-Dapr` 功能标志。
 
-The below command will register the `AKS-ExtensionManager` and `AKS-Dapr` feature flags on your Azure subscription:
+以下命令将在您的 Azure 订阅上注册 `AKS-ExtensionManager` 和 `AKS-Dapr` 功能标志：
 
 ```bash
 az feature register --namespace "Microsoft.ContainerService" --name "AKS-ExtensionManager"
 az feature register --namespace "Microsoft.ContainerService" --name "AKS-Dapr"
 ```
 
-After a few minutes, check the status to show `Registered`. Confirm the registration status by using the az feature list command:
+几分钟后，检查状态以显示 `Registered`。 使用 az feature list 命令确认注册状态：
 
 ```bash
 az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/AKS-ExtensionManager')].{Name:name,State:properties.state}"
 az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/AKS-Dapr')].{Name:name,State:properties.state}"
 ```
 
-Next, refresh the registration of the `Microsoft.KubernetesConfiguration` and `Microsoft.ContainerService` resource providers by using the az provider register command:
+接下来，使用 az provider register 命令刷新 `Microsoft.KubernetesConfiguration` 和 `Microsoft.ContainerService` 资源提供程序的注册：
 
 ```bash
 az provider register --namespace Microsoft.KubernetesConfiguration
 az provider register --namespace Microsoft.ContainerService
 ```
 
-#### Enable the Azure CLI extension for cluster extensions
-You will also need the `k8s-extension` Azure CLI extension. Install this by running the following commands:
+#### 为集群扩展启用 Azure CLI 扩展
+您还需要 `k8s-extension` Azure CLI 扩展。 通过运行以下命令来安装它：
 
 ```bash
 az extension add --name k8s-extension
 ```
 
-If the `k8s-extension` extension is already present, you can update it to the latest version using the below command:
+如果 `k8s-extension` 扩展已经存在，您可以使用以下命令将其更新到最新版本：
 
 ```bash
 az extension update --name k8s-extension
 ```
 
-#### Create the extension and install Dapr on your AKS cluster
-After your subscription is registered to use Kubernetes extensions, install Dapr on your cluster by creating the Dapr extension. 例如:
+#### 在 AKS 群集上创建扩展并安装 Dapr
+在您的订阅注册为使用 Kubernetes 扩展后，通过创建 Dapr 扩展在集群上安装 Dapr。 例如:
 
 ```bash
 az k8s-extension create --cluster-type managedClusters \
@@ -74,16 +74,16 @@ az k8s-extension create --cluster-type managedClusters \
 --extension-type Microsoft.Dapr
 ```
 
-Additionally, Dapr can automatically update its minor version. To enable this, set the `--auto-upgrade-minor-version` parameter to true:
+此外，Dapr 可以自动更新其次要版本。 要启用此功能，请将 `--auto-upgrade-minor-version` 参数设置为 true：
 
 ```bash
 --auto-upgrade-minor-version true
 ```
 
-Once the k8-extension finishes provisioning, you can confirm that the Dapr control plane is installed on your AKS cluster by running:
+K8-extension 完成配置后，您可以通过运行以下命令确认 Dapr 控制面板已安装在您的 AKS 集群上：
 
 ```bash
 kubectl get pods -n dapr-system
 ```
 
-For further information such as configuration options and targeting specific versions of Dapr, see the official [AKS Dapr Extension Docs](https://docs.microsoft.com/azure/aks/dapr).
+有关配置选项和针对 Dapr 的特定版本等更多信息，请参阅官方 [AKS Dapr 扩展文档](https://docs.microsoft.com/azure/aks/dapr)。

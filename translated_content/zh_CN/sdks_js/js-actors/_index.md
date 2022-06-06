@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "JavaScript SDK for Actor"
+title: "使用 JavaScript SDK 运行 Actor"
 linkTitle: "Actor"
 weight: 1000
 description: 如何使用 Dapr JavaScript SDK 启动和运行 Actor
@@ -17,7 +17,7 @@ description: 如何使用 Dapr JavaScript SDK 启动和运行 Actor
 - [已安装 JavaScript NPM 包](https://www.npmjs.com/package/dapr-client)
 
 ## 场景
-下面的代码示例粗略地描述了停车库点监控系统的场景，可以在 Mark Russinovich 的这个 [video] 中看到（https://www.youtube.com/watch?v=eJCu6a-x9uo&t=3785）。
+下面的代码示例粗略地描述了停车库点监控系统的场景，可以在 Mark Russinovich 的这个 [视频](https://www.youtube.com/watch?v=eJCu6a-x9uo&t=3785) 中看到。
 
 停车库由数百个停车位组成，每个停车位都包括一个传感器，该传感器为集中监控系统提供更新。 停车位传感器（我们的 Actor）检测一个泊车位是否被占用，或是否可用。
 

@@ -38,7 +38,7 @@ spec:
 
 ## 通过输入绑定调用服务代码
 
-想要使用输入绑定触发应用的开发人员可以在 `POST` http 终结点上侦听以接收请求。路由名称与 `metadata.name`相同。
+想要使用输入绑定触发应用的开发人员可以在 `POST` http 端点上侦听以接收请求。路由名称与 `metadata.name`相同。
 
 如果应用程序要订阅绑定，在启动 Dapr 时，将会对应用程序的所有已定义输入绑定发送 `OPTIONS` 请求，并期望 `NOT FOUND (404)` 以外的状态码。
 
@@ -46,9 +46,9 @@ spec:
 
 ### 示例
 
-例如，以下是 Python 应用程序如何使用 Dapr API 兼容平台从 `Kafka` 预订事件。 请注意组件中的 metadata.name 值 `kafkaevent` 如何与 Python 代码中的 POST 路由名称匹配。
+例如，以下是 Python 应用程序如何使用 Dapr API 兼容平台从 `Kafka` 订阅事件。 请注意组件中的 metadata.name 值 `kafkaevent` 如何与 Python 代码中的 POST 路由名称匹配。
 
-#### Kafka Component
+#### Kafka 组件
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -83,9 +83,9 @@ def incoming():
     return "Kafka Event Processed!"
 ```
 
-### Binding 终结点
+### Binding 端点
 
-Dapr 将从 component Yaml 文件中发现 Bindings。 Dapr 在启动时调用此终结点，以确保应用可以处理此调用。 如果应用程序没有该终结点，那么 Dapr 将忽略。
+Dapr 将从 component yaml 文件中发现 Bindings。 Dapr 在启动时调用此端点，以确保应用可以处理此调用。 如果应用程序没有该终结点，那么 Dapr 将忽略。
 
 #### HTTP 请求
 
@@ -109,7 +109,7 @@ OPTIONS http://localhost:<appPort>/<name>
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-### Binding payload
+### Binding 有效负载
 
 为了提供绑定的输入，将使用 POST 调用到用户代码，并将绑定的名称作为URL路径。
 
@@ -138,7 +138,7 @@ POST http://localhost:<appPort>/<name>
 
 可选地，响应正文可用于直接绑定具有 state stores 或输出 Bindings 的输入绑定。
 
-**示例：** Dapr 将 `stateDataToStore` 存储到名为"stateStore"的状态存储中。 Dapr 将 `jsonObject` 发送到名为 "storage" 和 " queue" 的输出绑定。 如果未设置 `concurrency` ，那么将顺序发出 ( 以下示例显示这些操作并行执行)
+**示例：** Dapr 将 `stateDataToStore` 存储到名为"stateStore"的状态存储中。 Dapr 并行地将 `jsonObject` 发送到名为 "storage" 和 " queue" 的输出绑定。 如果未设置 `concurrency` ，那么将顺序发出 ( 以下示例显示这些操作并行执行)
 
 ```json
 {

@@ -98,7 +98,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ```
 
-### RoleBinding
+### 角色绑定
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1

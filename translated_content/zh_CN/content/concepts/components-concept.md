@@ -58,7 +58,7 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 
 ## 中间件
 
-Dapr 允许将自定义[中间件]({{<ref "middleware.md">}})插入到 HTTP 请求处理管道中。 中间件可以对HTTP请求进行额外的操作，如在请求被路由到用户代码之前，或在请求被返回给客户端之前，进行认证、加密和消息转换。 中间件组件与 [服务调用]({{<ref "service-invocation-overview.md">}}) 基础结构块一起使用。
+Dapr 允许将自定义[中间件]({{<ref "middleware.md">}})插入到 HTTP 请求处理管道中。 中间件可以对HTTP请求进行额外的操作，如在请求被路由到用户代码之前，或在响应被返回给客户端之前，进行认证、加密和消息转换。 中间件组件与 [服务调用]({{<ref "service-invocation-overview.md">}}) 基础结构块一起使用。
 
 - [支持的中间件组件列表]({{< ref supported-middleware >}})
 - [中间件的实现](https://github.com/dapr/components-contrib/tree/master/middleware)
