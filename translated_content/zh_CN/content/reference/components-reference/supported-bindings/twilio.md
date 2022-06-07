@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Twilio SMS binding create a component of type `bindings.twilio.sms`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置Twilio SMS绑定需要创建一个`bindings.twilio.sms`类型的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -36,16 +36,16 @@ spec:
 
 ## 元数据字段规范
 
-| 字段         | 必填 | 绑定支持 | 详情                                   | 示例               |
-| ---------- |:--:| ---- | ------------------------------------ | ---------------- |
-| toNumber   | Y  | 输出   | The target number to send the sms to | `"111-111-1111"` |
-| fromNumber | Y  | 输出   | The sender phone number              | `"122-222-2222"` |
-| accountSid | Y  | 输出   | The Twilio account SID               | `"account sid"`  |
-| authToken  | Y  | 输出   | The Twilio auth token                | `"auth token"`   |
+| 字段         | 必填 | 绑定支持 | 详情              | 示例               |
+| ---------- |:--:| ---- | --------------- | ---------------- |
+| toNumber   | Y  | 输出   | 要向其发送短信的目标号码    | `"111-111-1111"` |
+| fromNumber | Y  | 输出   | 发送人手机号码         | `"122-222-2222"` |
+| accountSid | Y  | 输出   | Twilio账号SID     | `"account sid"`  |
+| authToken  | Y  | 输出   | Twilio身份验证token | `"auth token"`   |
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 

@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Twilio SendGrid binding create a component of type `bindings.twilio.sendgrid`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置Twilio SendGrid绑定需要创建一个`bindings.twilio.sendgrid`类型的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -38,25 +38,25 @@ spec:
 
 ## 元数据字段规范
 
-| 字段        | 必填 | 绑定支持 | 详情                                                                                                                         | 示例                       |
-| --------- |:--:| ---- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| apiKey    | Y  | 输出   | SendGrid API key, this should be considered a secret value                                                                 | `"apikey"`               |
-| emailFrom | 否  | 输出   | If set this specifies the 'from' email address of the email message. Optional field, see [below](#example-request-payload) | `"me@example.com"`       |
-| emailTo   | 否  | 输出   | If set this specifies the 'to' email address of the email message. Optional field, see [below](#example-request-payload)   | `"me@example.com"`       |
-| emailCc   | 否  | 输出   | If set this specifies the 'cc' email address of the email message. Optional field, see [below](#example-request-payload)   | `"me@example.com"`       |
-| emailBcc  | N  | 输出   | If set this specifies the 'bcc' email address of the email message. Optional field, see [below](#example-request-payload)  | `"me@example.com"`       |
-| subject   | N  | 输出   | If set this specifies the subject of the email message. Optional field, see [below](#example-request-payload)              | `"subject of the email"` |
+| 字段        | 必填 | 绑定支持 | 详情                                                | 示例                       |
+| --------- |:--:| ---- | ------------------------------------------------- | ------------------------ |
+| apiKey    | Y  | 输出   | SendGrid API秘钥，这将被看做一个私密值。                        | `"apikey"`               |
+| emailFrom | 否  | 输出   | 指定邮件消息的发件人地址 可选参数，[参照](#example-request-payload)  | `"me@example.com"`       |
+| emailTo   | 否  | 输出   | 指定邮件信息的收件人地址 可选参数，[参照](#example-request-payload)  | `"me@example.com"`       |
+| emailCc   | 否  | 输出   | 指定邮件信息的抄送人地址 可选参数，[参照](#example-request-payload)  | `"me@example.com"`       |
+| emailBcc  | N  | 输出   | 指定邮件信息的秘密抄送地址 可选参数，[参照](#example-request-payload) | `"me@example.com"`       |
+| subject   | N  | 输出   | 指定邮件信息的主题。 可选参数，[参照](#example-request-payload)    | `"subject of the email"` |
 
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 
-## Example request payload
+## 请求负载示例
 
-You can specify any of the optional metadata properties on the output binding request too (e.g. `emailFrom`, `emailTo`, `subject`, etc.)
+您也可以在输出绑定请求上指定任何可选的元数据属性(例如 `emailFrom`、 `emailTo`、 `subject`等)
 
 ```json
 {

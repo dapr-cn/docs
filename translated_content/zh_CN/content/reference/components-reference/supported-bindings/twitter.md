@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Twitter binding create a component of type `bindings.twitter`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置Twitter绑定需要创建一个 `bindings.twitter`类型的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -37,24 +37,24 @@ spec:
 
 ## 元数据字段规范
 
-| 字段             | 必填 | 绑定支持         | 详情                          | 示例                 |
-| -------------- |:--:| ------------ | --------------------------- | ------------------ |
-| consumerKey    | Y  | Input/Output | Twitter API consumer key    | `"conusmerkey"`    |
-| consumerSecret | Y  | Input/Output | Twitter API consumer secret | `"conusmersecret"` |
-| accessToken    | Y  | Input/Output | Twitter API access token    | `"accesstoken"`    |
-| accessSecret   | Y  | Input/Output | Twitter API access secret   | `"accesssecret"`   |
+| 字段             | 必填 | 绑定支持  | 详情                | 示例                 |
+| -------------- |:--:| ----- | ----------------- | ------------------ |
+| consumerKey    | Y  | 输入/输出 | Twitter API消费者键值  | `"conusmerkey"`    |
+| consumerSecret | Y  | 输入/输出 | Twitter API 消费者密码 | `"conusmersecret"` |
+| accessToken    | Y  | 输入/输出 | Twitter API 访问令牌  | `"accesstoken"`    |
+| accessSecret   | Y  | 输入/输出 | Twitter API 访问密码  | `"accesssecret"`   |
 
 ## 绑定支持
 
 此组件支持 **输入和输出** 绑定接口。
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `get`
 
 ### 输入绑定
 
-For input binding, where the query matching Tweets are streamed to the user service, the above component has to also include a query:
+对于输入绑定，如果与Tweets正文匹配的查询将会流式的发送到用户服务，上述组件可以包含如下查询：
 
 ```yaml
   - name: query
@@ -62,9 +62,9 @@ For input binding, where the query matching Tweets are streamed to the user serv
 ```
 
 ### 输出绑定
-#### get
+#### 获取
 
-For output binding invocation the user code has to invoke the binding:
+对于输出绑定调用，用户代码必须使用如下方式调用绑定：
 
 ```shell
 POST http://localhost:3500/v1.0/bindings/twitter
@@ -86,14 +86,14 @@ Where the payload is:
 
 元数据参数包括：
 
-- `query` - any valid Twitter query (e.g. `dapr` or `dapr AND serverless`). See [Twitter docs](https://developer.twitter.com/en/docs/tweets/rules-and-filtering/overview/standard-operators) for more details on advanced query formats
-- `lang` - (optional, default: `en`) restricts result tweets to the given language using [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-- `result` - (optional, default: `recent`) specifies tweet query result type. Valid values include:
-  - `mixed` - both popular and real time results
-  - `recent` - most recent results
-  - `popular` - most popular results
+- `query` - 任何有效的Twitter 查询 (例如`dapr` 或者 `dapr AND serverless`)。 参照[Twitter 文档](https://developer.twitter.com/en/docs/tweets/rules-and-filtering/overview/standard-operators)了解进一步查询格式的细节。
+- `lang` - (可选项, 默认: `en`) 约束使用[ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)将结果推文转为给定的语言
+- `result` - (可选项, 默认: `recent`) 指定推文查询结果类型。 有效值包括：
+  - `mixed` - 流行和实时结果
+  - `recent` - 最近的结果
+  - `popular` - 最流行的结果
 
-You can see the example of the JSON data that Twitter binding returns [here](https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets)
+你可以查看[此处](https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets)了解Twitter 绑定返回的JSON数据样例
 
 ## 相关链接
 
