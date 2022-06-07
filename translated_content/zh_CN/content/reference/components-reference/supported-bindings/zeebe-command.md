@@ -7,9 +7,9 @@ description: "Detailed documentation on the Zeebe command binding component"
 
 ## 配置
 
-To setup Zeebe command binding create a component of type `bindings.zeebe.command`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 Zeebe 命令行绑定，需要创建一个类型为 `bindings.zeebe.command` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [this](https://docs.camunda.io/docs/product-manuals/zeebe/zeebe-overview) for Zeebe documentation.
+参照[此处](https://docs.camunda.io/docs/product-manuals/zeebe/zeebe-overview)了解Zeebe文档。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,16 +33,16 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                     | 必填 | 绑定支持 | 详情                                                                                       | 示例                 |
-| ---------------------- |:--:| ---- | ---------------------------------------------------------------------------------------- | ------------------ |
-| gatewayAddr            | Y  | 输出   | Zeebe gateway address                                                                    | `localhost:26500`  |
-| gatewayKeepAlive       | 否  | 输出   | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds | `45s`              |
-| usePlainTextConnection | 否  | 输出   | Whether to use a plain text connection or not                                            | `true,false`       |
-| caCertificatePath      | 否  | 输出   | The path to the CA cert                                                                  | `/path/to/ca-cert` |
+| 字段                     | 必填 | 绑定支持 | 详情                     | 示例                 |
+| ---------------------- |:--:| ---- | ---------------------- | ------------------ |
+| gatewayAddr            | Y  | 输出   | Zeebe网关地址              | `localhost:26500`  |
+| gatewayKeepAlive       | 否  | 输出   | 设置保持会话消息发送到网关的频率 默认45秒 | `45s`              |
+| usePlainTextConnection | 否  | 输出   | 是否使用纯文本连接              | `true,false`       |
+| caCertificatePath      | 否  | 输出   | CA 证书的路径               | `/path/to/ca-cert` |
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `topology`
 - `deploy-process`

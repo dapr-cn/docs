@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup Azure Service Bus Queues binding create a component of type `bindings.azure.servicebusqueues`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置Azure服务总线队列绑定需要创建一个`bindings.azure.servicebusqueues`类型的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,20 +35,20 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                                                                          | 示例                             |
-| ---------------- |:--:| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| connectionString | Y  | Input/Output | The Service Bus connection string                                                                                                                                                                                                           | `"Endpoint=sb://************"` |
-| queueName        | Y  | Input/Output | The Service Bus queue name. Queue names are case-insensitive and will always be forced to lowercase.                                                                                                                                        | `"queuename"`                  |
-| ttlInseconds     | 否  | 输出           | Parameter to set the default message [time to live](https://docs.microsoft.com/azure/service-bus-messaging/message-expiration). If this parameter is omitted, messages will expire after 14 days. See [also](#specifying-a-ttl-per-message) | `"60"`                         |
+| 字段               | 必填 | 绑定支持  | 详情                                                                                                                                                 | 示例                             |
+| ---------------- |:--:| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| connectionString | Y  | 输入/输出 | 服务总线连接字符串                                                                                                                                          | `"Endpoint=sb://************"` |
+| queueName        | Y  | 输入/输出 | The Service Bus queue name. 队列名称，不区分大小写并且总是强制为小写                                                                                                   | `"queuename"`                  |
+| ttlInseconds     | 否  | 输出    | 默认消息 [存活时间](https://docs.microsoft.com/azure/service-bus-messaging/message-expiration)。 如果省略此参数，则消息将在 14 天后过期。 [另见](#specifying-a-ttl-per-message) | `"60"`                         |
 
 ### Azure Active Directory (AAD) 认证
-The Azure Service Bus Queues binding component supports authentication using all Azure Active Directory mechanisms. 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
+Azure 服务总线队列绑定组件支持使用所有 Azure Active Directory 机制进行身份验证。 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
 
 ## 绑定支持
 
 此组件支持 **输入和输出** 绑定接口。
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 

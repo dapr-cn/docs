@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup AWS SNS binding create a component of type `bindings.aws.sns`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 AWS SNS绑定，请创建一个 `bindings.aws.sns` 类型的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 有关身份验证相关属性的信息，请参阅 [向 AWS 进行身份验证]({{< ref authenticating-aws.md >}})
 
@@ -44,7 +44,7 @@ spec:
 
 | 字段           | 必填 | 绑定支持 | 详情                   | 示例                  |
 | ------------ |:--:| ---- | -------------------- | ------------------- |
-| topicArn     | Y  | 输出   | The SNS topic name   | `"arn:::topicarn"`  |
+| topicArn     | Y  | 输出   | SNS话题名称              | `"arn:::topicarn"`  |
 | region       | Y  | 输出   | 指定的 AWS 区域（region）   | `"us-east-1"`       |
 | accessKey    | Y  | 输出   | 要访问此资源的 AWS 访问密钥     | `"key"`             |
 | secretKey    | Y  | 输出   | 要访问此资源的 AWS 密钥访问 Key | `"secretAccessKey"` |
@@ -52,7 +52,7 @@ spec:
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 
