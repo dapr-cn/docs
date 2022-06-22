@@ -51,7 +51,7 @@ spec:
 | accessKey    | N  | 具有SNS和SQS适当权限的AWS账户的ID。 可以用`secretKeyRef`来引用密钥。                                                                                            | `"AKIAIOSFODNN7EXAMPLE"`                     |
 | secretKey    | N  | AWS用户的密钥。 可以用`secretKeyRef`来引用密钥。                                                                                                          | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
 | region       | N  | AWS区域到实例。 有效区域请参见本页面：https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html。 确保 DynamoDB 在该区域可用。 | `"us-east-1"`                                |
-| 终结点          | N  | 该组件要使用的AWS端点， 仅用于本地开发。 仅用于本地开发。 当对生产环境的AWS，`endpoint`是不需要的。                                                                                | `"http://localhost:4566"`                    |
+| endpoint     | N  | 该组件要使用的AWS端点， 仅用于本地开发。 仅用于本地开发。 当对生产环境的AWS，`endpoint`是不需要的。                                                                                | `"http://localhost:4566"`                    |
 | sessionToken | N  | 要使用的 AWS 会话令牌。  只有当您使用临时安全凭证时才需要会话令牌。                                                                                                      | `"TOKEN"`                                    |
 
 ## 设置 AWS DynamoDB

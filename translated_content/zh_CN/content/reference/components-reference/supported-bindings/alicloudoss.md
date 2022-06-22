@@ -39,7 +39,7 @@ spec:
 
 | 字段            | 必填 | 绑定支持 | 详情               | 示例                                   |
 | ------------- | -- | ---- | ---------------- | ------------------------------------ |
-| `终结点`         | Y  | 输出   | Alicloud OSS 端点。 | https://oss-cn-hangzhou.aliyuncs.com |
+| `endpoint`    | Y  | 输出   | Alicloud OSS 端点。 | https://oss-cn-hangzhou.aliyuncs.com |
 | `accessKeyID` | Y  | 输出   | 访问密钥 ID 凭据。      |                                      |
 | `accessKey`   | Y  | 输出   | 访问密钥凭据。          |                                      |
 | `bucket`      | Y  | 输出   | 存储桶名称            |                                      |
