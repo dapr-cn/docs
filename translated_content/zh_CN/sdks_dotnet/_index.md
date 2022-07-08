@@ -46,7 +46,7 @@ Dapr提供了帮助开发 .NET 应用程序各种包。 你可以使用他们来
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><b>示例</b></h5>
-      <p class="card-text">克隆.NET SDK repo来尝试一些示例并快速开始。</p>
+      <p class="card-text">克隆 .NET SDK 仓库来尝试一些示例并快速入门。</p>
       <a href="https://github.com/dapr/dotnet-sdk/tree/master/examples" class="stretched-link"></a>
     </div>
   </div>

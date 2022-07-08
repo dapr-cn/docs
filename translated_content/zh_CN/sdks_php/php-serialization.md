@@ -11,7 +11,7 @@ Dapr 使用 JSON 序列化，因此发送/接收数据时会丢失(复杂) 类�
 
 ## 序列化（Serialization）
 
-当从控制器返回对象时，将对象传递到`DaprClient`， 或将对象存储在一个store中， 只有公共属性被扫描和序列化。 您可以通过自定义 `\Dapr\Serialization\ISerialization` 来实现。 例如，如果您想要创建一个序列化为字符串的 ID 类型，您可以这样做：
+当从控制器返回对象时，将对象传递到`DaprClient`， 或将对象存储在一个state store中， 只有公共属性被扫描和序列化。 您可以通过自定义 `\Dapr\Serialization\ISerialization` 来实现。 例如，如果您想要创建一个序列化为字符串的 ID 类型，您可以这样做：
 
 ```php
 <?php

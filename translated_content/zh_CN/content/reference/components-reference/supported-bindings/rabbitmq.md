@@ -50,15 +50,15 @@ spec:
 
 | 字段               | 必填 | 绑定支持  | 详情                                                                                                                                           | 示例                                                  |
 | ---------------- |:--:| ----- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| queueName        | Y  | 输入/输出 | RabbitMQ队列名                                                                                                                                  | `"myqueue"`                                         |
-| host             | Y  | 输入/输出 | RabbitMQ主机地址                                                                                                                                 | `"amqp://[username][:password]@host.domain[:port]"` |
+| queueName        | 是  | 输入/输出 | RabbitMQ队列名                                                                                                                                  | `"myqueue"`                                         |
+| host             | 是  | 输入/输出 | RabbitMQ主机地址                                                                                                                                 | `"amqp://[username][:password]@host.domain[:port]"` |
 | durable          | 否  | 输出    | 告诉 RabbitMQ 将消息持久化到存储中。 默认值为 `"false"`                                                                                                       | `"true"`, `"false"`                                 |
 | deleteWhenUnused | 否  | 输入/输出 | 启用或禁用自动删除。 默认值为 `"false"`                                                                                                                    | `"true"`, `"false"`                                 |
-| ttlInseconds     | N  | 输出    | RabbitMQ队列级别的消息存活时间。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 [另见](#specifying-a-ttl-per-message)                                                    | `60`                                                |
-| prefetchCount    | N  | 输入    | 设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch) 如果此参数为空，QOS 会设置为0为无限制。                                        | `0`                                                 |
-| exclusive        | N  | 输入/输出 | 确定主题是否是一个独占主题。 默认值为 `"false"`                                                                                                                | `"true"`, `"false"`                                 |
-| maxPriority      | N  | 输入/输出 | 用于设置 [优先级队列](https://www.rabbitmq.com/priority.html)的参数。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 取值为1到255. [参见](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
-| contentType      | N  | 输入/输出 | 消息类型 默认为"text/plain"。                                                                                                                        | `"text/plain"`, `"application/cloudevent+json"`等等   |
+| ttlInseconds     | 否  | 输出    | RabbitMQ队列级别的消息存活时间。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 [另见](#specifying-a-ttl-per-message)                                                    | `60`                                                |
+| prefetchCount    | 否  | 输入    | 设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch) 如果此参数为空，QOS 会设置为0为无限制。                                        | `0`                                                 |
+| exclusive        | 否  | 输入/输出 | 确定主题是否是一个独占主题。 默认值为 `"false"`                                                                                                                | `"true"`, `"false"`                                 |
+| maxPriority      | 否  | 输入/输出 | 用于设置 [优先级队列](https://www.rabbitmq.com/priority.html)的参数。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 取值为1到255. [参见](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
+| contentType      | 否  | 输入/输出 | 消息类型 默认为"text/plain"。                                                                                                                        | `"text/plain"`, `"application/cloudevent+json"`等等   |
 ## 绑定支持
 
 此组件支持 **输入和输出** 绑定接口。

@@ -1,6 +1,6 @@
 ---
-type: docs
-title: "Bindings component specs"
+type: 文档
+title: "绑定组件"
 linkTitle: "绑定"
 weight: 3000
 description: 支持与Dapr衔接的外部绑定
@@ -34,7 +34,7 @@ no_list: true
 | [本地存储]({{< ref localstorage.md >}})                   |                |       ✅        | Alpha  | v1   | 1.1 |
 | [MQTT]({{< ref mqtt.md >}})                           |       ✅        |       ✅        | Alpha  | v1   | 1.0 |
 | [MySQL]({{< ref mysql.md >}})                         |                |       ✅        | Alpha  | v1   | 1.0 |
-| [PostgreSql]({{< ref postgres.md >}})                 |                |       ✅        | Alpha  | v1   | 1.0 |
+| [PostgreSQL]({{< ref postgres.md >}})                 |                |       ✅        | Alpha  | v1   | 1.0 |
 | [Postmark]({{< ref postmark.md >}})                   |                |       ✅        | Alpha  | v1   | 1.0 |
 | [RabbitMQ]({{< ref rabbitmq.md >}})                   |       ✅        |       ✅        | Alpha  | v1   | 1.0 |
 | [Redis]({{< ref redis.md >}})                         |                |       ✅        | Alpha  | v1   | 1.0 |
@@ -48,7 +48,7 @@ no_list: true
 | Name                                                | 输入<br>绑定 | 输出<br>绑定 | 状态    | 组件版本 | 自从  |
 | --------------------------------------------------- |:--------------:|:--------------:| ----- | ---- | --- |
 | [阿里云钉钉]({{< ref alicloud-dingtalk.md >}})           |       ✅        |       ✅        | Alpha | v1   | 1.2 |
-| [Alibaba Cloud OSS]({{< ref alicloudoss.md >}})     |                |       ✅        | Alpha | v1   | 1.0 |
+| [阿里云OSS]({{< ref alicloudoss.md >}})                |                |       ✅        | Alpha | v1   | 1.0 |
 | [阿里云 Tablestore]({{< ref alicloudtablestore.md >}}) |                |       ✅        | Alpha | v1   | 1.5 |
 
 ### Amazon Web Services (AWS)

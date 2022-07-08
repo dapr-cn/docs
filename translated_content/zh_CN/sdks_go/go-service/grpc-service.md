@@ -76,7 +76,7 @@ if err := s.AddServiceInvocationHandler("echo", echoHandler); err != nil {
 }
 ```
 
-处理程序方法本身可以是具有预期签名的任何方法：
+handler 本身可以是具有预期签名的任何方法：
 
 ```go
 func echoHandler(ctx context.Context, in *common.InvocationEvent) (out *common.Content, err error) {
@@ -92,7 +92,7 @@ func echoHandler(ctx context.Context, in *common.InvocationEvent) (out *common.C
 ```
 
 ### 绑定调用处理
-若要处理绑定调用，需要在启动服务之前添加至少一个绑定调用处理程序：
+要处理服务调用，您需要在启动服务之前添加至少一个服务调用 handler：
 
 ```go
 if err := s.AddBindingInvocationHandler("run", runHandler); err != nil {
@@ -100,7 +100,7 @@ if err := s.AddBindingInvocationHandler("run", runHandler); err != nil {
 }
 ```
 
-处理程序方法本身可以是具有预期签名的任何方法：
+handler 本身可以是具有预期签名的任何方法：
 
 ```go
 func runHandler(ctx context.Context, in *common.BindingEvent) (out []byte, err error) {

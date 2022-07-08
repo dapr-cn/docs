@@ -29,11 +29,11 @@ spec:
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 ## 元数据字段规范
-| 字段  | 必填 | 绑定支持         | 详情             | 示例                                                           |
-| --- |:--:| ------------ | -------------- | ------------------------------------------------------------ |
-| id  | Y  | Input/Output | 唯一标识           | `"test_webhook_id"`                                          |
-| url | Y  | Input/Output | 钉钉的 Webhook    | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
-| 密钥  | 否  | Input/Output | 钉钉 Webhook 的秘钥 | `"****************"`                                         |
+| 字段     | 必填 | 绑定支持         | 详情             | 示例                                                           |
+| ------ |:--:| ------------ | -------------- | ------------------------------------------------------------ |
+| id     | 是  | Input/Output | 唯一标识           | `"test_webhook_id"`                                          |
+| url    | 是  | Input/Output | 钉钉的 Webhook    | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
+| secret | 否  | Input/Output | 钉钉 Webhook 的秘钥 | `"****************"`                                         |
 
 ## 绑定支持
 

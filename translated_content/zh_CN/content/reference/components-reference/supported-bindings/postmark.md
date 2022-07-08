@@ -40,13 +40,13 @@ spec:
 
 | 字段           | 必填 | 绑定支持 | 详情                            | 示例                 |
 | ------------ |:--:| ---- | ----------------------------- | ------------------ |
-| accountToken | Y  | 输出   | Postmark账号token，它可以被看做一个秘钥值   | `"account token"`  |
-| serverToken  | Y  | 输出   | Postmark服务端token，它可以被看做是一个秘钥值 | `"server token"`   |
+| accountToken | 是  | 输出   | Postmark账号token，它可以被看做一个秘钥值   | `"account token"`  |
+| serverToken  | 是  | 输出   | Postmark服务端token，它可以被看做是一个秘钥值 | `"server token"`   |
 | emailFrom    | 否  | 输出   | 指定邮件信息的发件人地址                  | `"me@exmaple.com"` |
 | emailTo      | 否  | 输出   | 指定邮件信息的收件人地址                  | `"me@example.com"` |
-| emailCc      | N  | 输出   | 指定邮件信息的抄送人地址                  | `"me@example.com"` |
-| emailBcc     | N  | 输出   | 指定邮件信息的秘密抄送人地址                | `"me@example.com"` |
-| subject      | N  | 输出   | 指定邮件信息主题                      | `"me@example.com"` |
+| emailCc      | 否  | 输出   | 指定邮件信息的抄送人地址                  | `"me@example.com"` |
+| emailBcc     | 否  | 输出   | 指定邮件信息的秘密抄送人地址                | `"me@example.com"` |
+| subject      | 否  | 输出   | 指定邮件信息主题                      | `"me@example.com"` |
 
 你也可以在输出绑定上指定任何可选的元数据属性(例如：`emailFrom`, `emailTo`, `subject`, 等等)。
 

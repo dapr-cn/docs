@@ -57,19 +57,19 @@ spec:
 
 | 字段                      | 必填 | 详情                                                            | 示例                                                                                                       |
 | ----------------------- |:--:| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| type                    | N  | GCP 凭证类型. 仅支持 `service_account` 。 默认值为 `service_account`。     | `service_account`                                                                                        |
-| project_id              | Y  | GCP 项目 id                                                     | `myproject-123`                                                                                          |
+| type                    | 否  | GCP 凭证类型. 仅支持 `service_account` 。 默认值为 `service_account`。     | `service_account`                                                                                        |
+| project_id              | 是  | GCP 项目 id                                                     | `myproject-123`                                                                                          |
 | identityProjectId       | 否  | 如果 GCP pubsub 项目与标识项目不同，请使用此属性指定标识项目                          | `"myproject-123"`                                                                                        |
 | privateKeyId            | 否  | 如果使用显式凭据，则此字段应包含服务帐户 json 文档中的 `private_key_id` 字段            | `"my-private-key"`                                                                                       |
-| privateKey              | N  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `private_key` 字段                 | `-----BEGIN PRIVATE KEY-----MIIBVgIBADANBgkqhkiG9w0B`                                                    |
-| clientEmail             | N  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `client_email` 字段                | `"myservice@myproject-123.iam.gserviceaccount.com"`                                                      |
-| clientId                | N  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `client_id` 字段                   | `106234234234`                                                                                           |
-| authUri                 | N  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `auth_uri` 字段                    | `https://accounts.google.com/o/oauth2/auth`                                                              |
-| tokenUri                | N  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `token_uri` 字段                   | `https://oauth2.googleapis.com/token`                                                                    |
-| authProviderX509CertUrl | N  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `auth_provider_x509_cert_url` 字段 | `https://www.googleapis.com/oauth2/v1/certs`                                                             |
-| clientX509CertUrl       | N  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `client_x509_cert_url` 字段        | `https://www.googleapis.com/robot/v1/metadata/x509/myserviceaccount%40myproject.iam.gserviceaccount.com` |
-| disableEntityManagement | N  | 当设置为`"true"`时，主题和订阅不会自动创建。 默认值为 `"false"`                     | `"true"`, `"false"`                                                                                      |
-| enableMessageOrdering   | N  | 当设置为 `"true"`时，将按顺序接收订阅的消息，具体取决于发布和权限配置。                      | `"true"`, `"false"`                                                                                      |
+| privateKey              | 否  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `private_key` 字段                 | `-----BEGIN PRIVATE KEY-----MIIBVgIBADANBgkqhkiG9w0B`                                                    |
+| clientEmail             | 否  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `client_email` 字段                | `"myservice@myproject-123.iam.gserviceaccount.com"`                                                      |
+| clientId                | 否  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `client_id` 字段                   | `106234234234`                                                                                           |
+| authUri                 | 否  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `auth_uri` 字段                    | `https://accounts.google.com/o/oauth2/auth`                                                              |
+| tokenUri                | 否  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `token_uri` 字段                   | `https://oauth2.googleapis.com/token`                                                                    |
+| authProviderX509CertUrl | 否  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `auth_provider_x509_cert_url` 字段 | `https://www.googleapis.com/oauth2/v1/certs`                                                             |
+| clientX509CertUrl       | 否  | 如果使用显式凭据，则此字段应包含服务帐户 json 中的 `client_x509_cert_url` 字段        | `https://www.googleapis.com/robot/v1/metadata/x509/myserviceaccount%40myproject.iam.gserviceaccount.com` |
+| disableEntityManagement | 否  | 当设置为`"true"`时，主题和订阅不会自动创建。 默认值为 `"false"`                     | `"true"`, `"false"`                                                                                      |
+| enableMessageOrdering   | 否  | 当设置为 `"true"`时，将按顺序接收订阅的消息，具体取决于发布和权限配置。                      | `"true"`, `"false"`                                                                                      |
 
 {{% alert title="Warning" color="warning" %}}
 如果 `enableMessageOrdering` 设置为"true"，则服务帐户上将需要角色/查看者或角色/pubsub.viewer 角色，以便在消息中未嵌入订单令牌的情况下保证排序。 如果未指定此角色，或者由于任何其他原因导致对 Subscription.Config（） 的调用失败，则按嵌入式订单令牌排序仍将正常运行。

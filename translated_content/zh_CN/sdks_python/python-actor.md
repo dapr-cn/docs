@@ -17,7 +17,7 @@ Dapr actor 包允许您从 Python 应用程序中与 Dapr virtual actor 进行�
 
 ## Actor 接口
 
-Actor 接口定义了 Actor 契约，由 Actor 实现和调用 Actor 的客户端共享。 因为客户端可能依赖于它，所以通常在一个与 Actor 实现分开的程序集中定义它是有意义的。
+该接口定义了 actor 契约，该契约在 actor 实现和调用 actor 的客户端之间共享。 因为客户端可能依赖于它，所以通常在一个与 actor 实现分开的程序集中定义它是有意义的。
 
 ```python
 from dapr.actor import ActorInterface, actormethod
@@ -30,15 +30,15 @@ class DemoActorInterface(ActorInterface):
 
 ## Actor 服务
 
-Actor 服务承载着虚拟 Actor。 它实现了一个派生自基类型 `Actor` 的类，并实现了 Actor 接口中定义的接口。
+Actor 服务承载着虚拟 Actor。 它实现了一个派生自基类型 `Actor` 的类，并实现了 actor 接口中定义的接口。
 
-可以使用 Dapr Actor 扩展之一创建 Actor：
-   - [FastAPI Actor 扩展]({{< ref python-fastapi.md >}})
-   - [Flask Actor 扩展]({{< ref python-flask.md >}})
+可以使用以下 Dapr Actor 扩展之一创建 Actor：
+   - [FastAPI actor 扩展]({{< ref python-fastapi.md >}})
+   - [Flask actor 扩展]({{< ref python-flask.md >}})
 
 ## Actor 客户端
 
-Actor 客户端包含 Actor 客户端的实现，它调用 Actor 接口中定义的 Actor 方法。
+Actor 客户端包含调用 Actor 接口中定义的 Actor 方法的 Actor 客户端实现。
 
 ```python
 import asyncio
@@ -56,4 +56,4 @@ async def main():
 
 ## 示例
 
-请访问 [本页](https://github.com/dapr/python-sdk/tree/release-1.0/examples/demo_actor) 以获得可运行的 Actor 样本。
+请访问 [本页](https://github.com/dapr/python-sdk/tree/release-1.0/examples/demo_actor) 以获得可运行的 Actor 示例。

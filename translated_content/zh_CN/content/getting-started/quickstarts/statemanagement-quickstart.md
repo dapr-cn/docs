@@ -52,7 +52,7 @@ pip3 install -r requirements.txt
 dapr run --app-id order-processor --components-path ../../../components/ -- python3 app.py
 ```
 
-`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行循环。
 
 ```python
 with DaprClient() as client:
@@ -168,7 +168,7 @@ npm install
 ```bash
 dapr run --app-id order-processor --components-path ../../../components/ -- npm run start
 ```
-`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行循环。
 
 ```js
   const client = new DaprClient(DAPR_HOST, DAPR_HTTP_PORT);
@@ -295,7 +295,7 @@ dotnet build
 dapr run --app-id order-processor --components-path ../../../components/ -- dotnet run
 ```
 
-`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行循环。
 
 ```cs
 var client = new DaprClientBuilder().Build();
@@ -412,7 +412,7 @@ Run the `order-processor` publisher service alongside a Dapr sidecar.
 dapr run --app-id order-processor --components-path ../../../components -- java -jar target/order-processor-0.0.1-SNAPSHOT.jar
 ```
 
-`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行循环。
 
 ```java
 try (DaprClient client = new DaprClientBuilder().build()) {
@@ -464,7 +464,7 @@ Order-processor输出：
 
 使用 `statestore.yaml` 组件，您可以轻松换出 [状态存储](/reference/components-reference/supported-state-stores/) 而无需更改代码。
 
-The Redis `statestore.yaml` file included for this Quickstart contains the following:
+本快速入门包含的 Redis `statestore.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -529,7 +529,7 @@ go build app.go
 dapr run --app-id order-processor --components-path ../../../components -- go run app.go
 ```
 
-`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行一个循环。
+`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行循环。
 
 ```go
   client, err := dapr.NewClient()
@@ -609,7 +609,7 @@ spec:
 {{< /tabs >}}
 
 ## 告诉我们您的想法
-我们一直在努力改进我们的快速入门示例，并重视你的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
+我们一直在努力改进我们的快速入门示例，并重视您的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
 
 加入我们的 [discord 频道](https://discord.gg/22ZtJrNe)中的讨论。
 

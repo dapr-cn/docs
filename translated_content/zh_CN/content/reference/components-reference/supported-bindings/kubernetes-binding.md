@@ -1,8 +1,8 @@
 ---
-type: docs
+type: 文档
 title: "Kubernetes Events binding spec"
 linkTitle: "Kubernetes 事件"
-description: "Detailed documentation on the Kubernetes Events binding component"
+description: "Kubernetes 事件绑定组件详细说明"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/kubernetes-binding/"
 ---
@@ -32,7 +32,7 @@ spec:
 
 | 字段                | 必填 | 绑定支持                                        | 详情                       | 示例      |
 | ----------------- |:--:| ------------------------------------------- | ------------------------ | ------- |
-| namespace         | Y  | 输入                                          | 要从中读取事件的 Kubernetes 命名空间 | `"默认值"` |
+| namespace         | 是  | 输入                                          | 要从中读取事件的 Kubernetes 命名空间 | `"默认值"` |
 | resyncPeriodInSec | 否  | 从 Kubernetes API 服务器刷新事件列表的时间段。 默认值为 `"10"` | `"15"`                   |         |
 
 ## 绑定支持

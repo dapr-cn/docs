@@ -62,19 +62,19 @@ NATS Streaming 已经被 [弃用](https://github.com/nats-io/nats-streaming-serv
 
 | 字段                      | 必填 | 详情                                                                               | 示例                              |
 | ----------------------- |:--:| -------------------------------------------------------------------------------- | ------------------------------- |
-| natsURL                 | Y  | NATS 服务器地址 URL                                                                   | "`nats://localhost:4222`"       |
-| natsStreamingClusterID  | Y  | NATS cluster ID                                                                  | `"clusterId"`                   |
-| subscriptionType        | Y  | 订阅类型， 订阅类型， 允许的值`"topic"`，`"queue"`                                              | `"topic"`                       |
+| natsURL                 | 是  | NATS 服务器地址 URL                                                                   | "`nats://localhost:4222`"       |
+| natsStreamingClusterID  | 是  | NATS cluster ID                                                                  | `"clusterId"`                   |
+| subscriptionType        | 是  | 订阅类型， 订阅类型， 允许的值`"topic"`，`"queue"`                                              | `"topic"`                       |
 | ackWaitTime             | 否  | 见[这里](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements) | `"300ms"`                       |
-| maxInFlight             | N  | 见[这里](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements) | `"25"`                          |
-| durableSubscriptionName | N  | [持久订阅](https://docs.nats.io/developing-with-nats-streaming/durables)识别名称         | `"my-durable"`                  |
-| deliverNew              | N  | 订阅策略： 只能使用一个， 订阅策略： 只能使用一个， 只发送新消息                                               | `"true"`, `"false"`             |
-| startAtSequence         | N  | 订阅策略： 只能使用一个， 设置期望的起始序列位置和状态                                                     | `"100000"`, `"230420"`          |
-| startWithLastReceived   | N  | 订阅策略： 只能使用一个， 将起始位置设置为最后接收的位置                                                    | `"true"`, `"false"`             |
-| deliverAll              | N  | 订阅策略： 只能使用一个， 传递所有可用消息                                                           | `"true"`, `"false"`             |
-| startAtTimeDelta        | N  | 订阅策略： 只能使用一个， 使用增量设置所需的起始时间位置和状态                                                 | `"10m"`, `"23s"`                |
-| startAtTime             | N  | 订阅策略： 只能使用一个， 设置所需的起始时间位置和状态                                                     | `"Feb 3, 2013 at 7:54pm (PST)"` |
-| startAtTimeDelta        | N  | 必须与`startAtTime`一起使用， 设置时间的格式 设置时间的格式                                            | `"Jan 2, 2006 at 3:04pm (MST)"` |
+| maxInFlight             | 否  | 见[这里](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements) | `"25"`                          |
+| durableSubscriptionName | 否  | [持久订阅](https://docs.nats.io/developing-with-nats-streaming/durables)识别名称         | `"my-durable"`                  |
+| deliverNew              | 否  | 订阅策略： 只能使用一个， 订阅策略： 只能使用一个， 只发送新消息                                               | `"true"`, `"false"`             |
+| startAtSequence         | 否  | 订阅策略： 只能使用一个， 设置期望的起始序列位置和状态                                                     | `"100000"`, `"230420"`          |
+| startWithLastReceived   | 否  | 订阅策略： 只能使用一个， 将起始位置设置为最后接收的位置                                                    | `"true"`, `"false"`             |
+| deliverAll              | 否  | 订阅策略： 只能使用一个， 传递所有可用消息                                                           | `"true"`, `"false"`             |
+| startAtTimeDelta        | 否  | 订阅策略： 只能使用一个， 使用增量设置所需的起始时间位置和状态                                                 | `"10m"`, `"23s"`                |
+| startAtTime             | 否  | 订阅策略： 只能使用一个， 设置所需的起始时间位置和状态                                                     | `"Feb 3, 2013 at 7:54pm (PST)"` |
+| startAtTimeDelta        | 否  | 必须与`startAtTime`一起使用， 设置时间的格式 设置时间的格式                                            | `"Jan 2, 2006 at 3:04pm (MST)"` |
 
 ## 创建NATS服务器
 

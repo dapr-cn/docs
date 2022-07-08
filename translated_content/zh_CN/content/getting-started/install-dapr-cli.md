@@ -71,7 +71,7 @@ curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh 
 
 **对于 ARM64 Mac：**
 
-ARM64 Macs 支持作为 *预览功能*提供。 当从终端安装时，一旦有原生ARM64二进制文件就会下载。 对于较旧的版本，将下载 AMD64 二进制文件，这些二进制文件必须在启用 Rosetta2 模拟器的情况下运行。
+ARM64 Macs 支持作为*预览功能*提供。 当从终端安装时，一旦有原生ARM64二进制文件就会下载。 对于较旧的版本，将下载 AMD64 二进制文件，这些二进制文件必须在启用 Rosetta2 模拟器的情况下运行。
 
 要安装 Rosetta 模拟器：
 

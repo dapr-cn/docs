@@ -40,23 +40,23 @@ spec:
 
 ## 元数据字段规范
 
-| 字段             | 必填 | 详情                                   | 示例                        |
-| -------------- |:--:| ------------------------------------ | ------------------------- |
-| natsURL        | Y  | NATS 服务器地址 URL                       | "`nats://localhost:4222`" |
-| name           | 否  | NATS 连接名称                            | `"my-conn-name"`          |
-| durableName    | 否  | [Durable name][]                     | `"my-durable"`            |
-| queueGroupName | 否  | 队列组名称                                | `"my-queue"`              |
-| startSequence  | N  | [Start Sequence][]                   | `1`                       |
-| startTime      | N  | [Start Time][] in Unix format        | `1630349391`              |
-| deliverAll     | N  | Set deliver all as [Replay Policy][] | `true`                    |
-| flowControl    | N  | [Flow Control][]                     | `true`                    |
+| 字段             | 必填 | 详情                  | 示例                        |
+| -------------- |:--:| ------------------- | ------------------------- |
+| natsURL        | 是  | NATS 服务器地址 URL      | "`nats://localhost:4222`" |
+| name           | 否  | NATS 连接名称           | `"my-conn-name"`          |
+| durableName    | 否  | [Durable name][]    | `"my-durable"`            |
+| queueGroupName | 否  | 队列组名称               | `"my-queue"`              |
+| startSequence  | 否  | [起始编号][]            | `1`                       |
+| startTime      | 否  | Unix 时间戳格式的[开始时间][] | `1630349391`              |
+| deliverAll     | 否  | 将全部交付设置为 [重播策略][]   | `true`                    |
+| flowControl    | 否  | [流量控制][]            | `true`                    |
 
 ## 创建NATS服务器
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-You can run a NATS Server with JetStream enabled locally using Docker:
+您可以使用 Docker 在本地启用 JetStream 运行 NATS 服务器：
 
 ```bash
 docker run -d -p 4222:4222 nats:latest -js
@@ -66,21 +66,21 @@ docker run -d -p 4222:4222 nats:latest -js
 {{% /codetab %}}
 
 {{% codetab %}}
-Install NATS JetStream on Kubernetes by using the [helm](https://github.com/nats-io/k8s/tree/main/helm/charts/nats#jetstream):
+使用 [helm](https://github. com/nats-io/k8s/tree/main/helm/charts/nats#jetstream)在 Kubernetes 上安装 NATS JetStream：
 
 ```bash
 helm repo add nats https://nats-io.github.io/k8s/helm/charts/
 helm install my-nats nats/nats
 ```
 
-This installs a single NATS server into the `default` namespace. To interact with NATS, find the service with: `kubectl get svc my-nats`.
+在`default` 命名空间安装单进程NATS服务。 要与NATS进行交互，请使用以下方法找到服务：`kubectl get svc my-nats`.
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Create JetStream
+## 创建 JetStream
 
-It is essential to create a NATS JetStream for a specific subject. For example, for a NATS server running locally use:
+为特定主题创建 NATS JetStream 至关重要。 例如，对于本地运行的 NATS 服务器，请使用：
 
 ```bash
 nats -s localhost:4222 stream add myStream --subjects mySubject
@@ -95,7 +95,7 @@ nats -s localhost:4222 stream add myStream --subjects mySubject
 
 
 [Durable name]: https://docs.nats.io/jetstream/concepts/consumers#durable-name
-[Start Sequence]: https://docs.nats.io/jetstream/concepts/consumers#deliverbystartsequence
-[Start Time]: https://docs.nats.io/jetstream/concepts/consumers#deliverbystarttime
-[Replay Policy]: https://docs.nats.io/jetstream/concepts/consumers#replaypolicy
-[Flow Control]: https://docs.nats.io/jetstream/concepts/consumers#flowcontrol
+[起始编号]: https://docs.nats.io/jetstream/concepts/consumers#deliverbystartsequence
+[开始时间]: https://docs.nats.io/jetstream/concepts/consumers#deliverbystarttime
+[重播策略]: https://docs.nats.io/jetstream/concepts/consumers#replaypolicy
+[流量控制]: https://docs.nats.io/jetstream/concepts/consumers#flowcontrol

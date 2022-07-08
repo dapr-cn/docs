@@ -7,9 +7,9 @@ description: "Detailed documentation on the Zeebe JobWorker binding component"
 
 ## 配置
 
-To setup Zeebe JobWorker binding create a component of type `bindings.zeebe.jobworker`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 Zeebe JobWorker绑定，需要创建一个类型为 `bindings.zeebe.jobworker` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [this](https://docs.camunda.io/docs/product-manuals/concepts/job-workers) for Zeebe JobWorker documentation.
+参照[此处](https://docs.camunda.io/docs/product-manuals/concepts/job-workers)了解Zeebe JobWorker文档。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -51,33 +51,33 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                     | 必填 | 绑定支持 | 详情                                                                                                                                                                                                                                                                                                      | 示例                                   |
-| ---------------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| gatewayAddr            | Y  | 输入   | Zeebe gateway address                                                                                                                                                                                                                                                                                   | `localhost:26500`                    |
-| gatewayKeepAlive       | 否  | 输入   | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds                                                                                                                                                                                                                | `45s`                                |
-| usePlainTextConnection | 否  | 输入   | Whether to use a plain text connection or not                                                                                                                                                                                                                                                           | `true,false`                         |
-| caCertificatePath      | 否  | 输入   | The path to the CA cert                                                                                                                                                                                                                                                                                 | `/path/to/ca-cert`                   |
-| workerName             | N  | 输入   | The name of the worker activating the jobs, mostly used for logging purposes                                                                                                                                                                                                                            | `products-worker`                    |
-| workerTimeout          | N  | 输入   | A job returned after this call will not be activated by another call until the timeout has been reached; defaults to 5 minutes                                                                                                                                                                          | `5m`                                 |
-| requestTimeout         | N  | 输入   | The request will be completed when at least one job is activated or after the requestTimeout. If the requestTimeout = 0, a default timeout is used. If the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated. Defaults to 10 seconds | `30s`                                |
-| jobType                | Y  | 输入   | the job type, as defined in the BPMN process (e.g. `<zeebe:taskDefinition type="fetch-products" />`)                                                                                                                                                                                              | `fetch-products`                     |
-| maxJobsActive          | N  | 输入   | Set the maximum number of jobs which will be activated for this worker at the same time. Defaults to 32                                                                                                                                                                                                 | `32`                                 |
-| concurrency            | N  | 输入   | The maximum number of concurrent spawned goroutines to complete jobs. Defaults to 4                                                                                                                                                                                                                     | `4`                                  |
-| pollInterval           | N  | 输入   | Set the maximal interval between polling for new jobs. Defaults to 100 milliseconds                                                                                                                                                                                                                     | `100ms`                              |
-| pollThreshold          | N  | 输入   | Set the threshold of buffered activated jobs before polling for new jobs, i.e. threshold * maxJobsActive. Defaults to 0.3                                                                                                                                                                               | `0.3`                                |
-| fetchVariables         | N  | 输入   | A list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned                                                                                                                                                  | `productId, productName, productKey` |
+| 字段                     | 必填 | 绑定支持 | 详情                                                                                                                          | 示例                                   |
+| ---------------------- |:--:| ---- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| gatewayAddr            | 是  | 输入   | Zeebe网关地址                                                                                                                   | `localhost:26500`                    |
+| gatewayKeepAlive       | 否  | 输入   | 设置保持会话消息发送到网关的频率 默认45秒                                                                                                      | `45s`                                |
+| usePlainTextConnection | 否  | 输入   | 是否使用纯文本连接                                                                                                                   | `true,false`                         |
+| caCertificatePath      | 否  | 输入   | CA 证书的路径                                                                                                                    | `/path/to/ca-cert`                   |
+| workerName             | 否  | 输入   | 激活作业的工作线程的名称，主要用于记录目的                                                                                                       | `products-worker`                    |
+| workerTimeout          | 否  | 输入   | 本次调用返回的作业在超时之前不会被另一个调用激活；默认为 5 分钟                                                                                           | `5m`                                 |
+| requestTimeout         | 否  | 输入   | 当至少一个作业被激活或在 requestTimeout 之后，该请求将完成。 如果 requestTimeout = 0，则使用默认超时。 如果 requestTimeout < 0，则禁用长轮询并立即完成请求，即使没有激活任何作业。 默认10秒 | `30s`                                |
+| jobType                | 是  | 输入   | 作业类型，在 BPMN 进程中定义（例如 `<zeebe:taskDefinition type="fetch-products" />`）                                                | `fetch-products`                     |
+| maxJobsActive          | 否  | 输入   | 设置同时为此工作线程激活的最大作业数。 默认值为 32。                                                                                                | `32`                                 |
+| concurrency            | 否  | 输入   | 完成作业的并发生成的 goroutine 的最大数量。 默认值为 4。                                                                                         | `4`                                  |
+| pollInterval           | 否  | 输入   | 设置轮询新作业的最大间隔。 默认100秒                                                                                                        | `100ms`                              |
+| pollThreshold          | 否  | 输入   | 设置在轮询新作业之前缓冲已激活作业的阈值，例如 threshold* maxJobsActive。 默认值为 0.3。                                                                 | `0.3`                                |
+| fetchVariables         | 否  | 输入   | 作为作业变量获取的变量列表；如果为空，则将返回作业激活时作业作用域内的所有可见变量                                                                                   | `productId, productName, productKey` |
 
 ## 绑定支持
 
-This component supports **input** binding interfaces.
+此组件支持 **输入** 绑定接口。
 
 ### 输入绑定
 
-#### Variables
+#### 变量
 
-The Zeebe process engine handles the process state as also process variables which can be passed on process instantiation or which can be updated or created during process execution. These variables can be passed to a registered job worker by defining the variable names as comma-separated list in the `fetchVariables` metadata field. The process engine will then pass these variables with its current values to the job worker implementation.
+Zeebe进程引擎也会将进程状态作为变量处理，这些进程变量可以在进程实例化时传递或者进程执行过程中被更新或者创建。 这些变量可以通过将变量名定义为在元数据`fetchVariables`字段中以逗号分隔的列表传递给已注册的作业。 然后，处理引擎会将这些变量以及他们当前的值传递给作业线程。
 
-If the binding will register three variables `productId`, `productName` and `productKey` then the worker will be called with the following JSON body:
+如果绑定要注册三个变量 `productId`、 `productName` 和 `productKey` ，那么将使用以下 JSON 格式数据调用 worker线程：
 
 ```json
 {
@@ -87,27 +87,27 @@ If the binding will register three variables `productId`, `productName` and `pro
 }
 ```
 
-Note: if the `fetchVariables` metadata field will not be passed, all process variables will be passed to the worker.
+注意：如果不传递 `fetchVariables` 元数据字段，那么所有进程变量都会传递给worker线程。
 
-#### Headers
+#### 请求头
 
-The Zeebe process engine has the ability to pass custom task headers to a job worker. These headers can be defined for every [service task](https://stage.docs.zeebe.io/bpmn-workflows/service-tasks/service-tasks.html). Task headers will be passed by the binding as metadata (HTTP headers) to the job worker.
+Zeebe进程引擎能够将自定义任务请求头传递给作业工作线程。 可以为每个 [服务任务](https://stage.docs.zeebe.io/bpmn-workflows/service-tasks/service-tasks.html)定义这些请求头。 任务请求头将通过绑定元数据（HTTP 请求头）传递给作业工作线程 。
 
-The binding will also pass the following job related variables as metadata. The values will be passed as string. The table contains also the original data type so that it can be converted back to the equivalent data type in the used programming language for the worker.
+绑定还将以下作业相关变量作为元数据传递。 这些值将作为字符串传递。 该表单还包含原始数据类型，以便可以将其转换回工作线程使用的编程语言中相同的数据类型。
 
-| 元数据                                | Data type | 说明                                                                                              |
-| ---------------------------------- | --------- | ----------------------------------------------------------------------------------------------- |
-| X-Zeebe-Job-Key                    | int64     | The key, a unique identifier for the job                                                        |
-| X-Zeebe-Job-Type                   | string    | The type of the job (should match what was requested)                                           |
-| X-Zeebe-Process-Instance-Key       | int64     | The job's process instance key                                                                  |
-| X-Zeebe-Bpmn-Process-Id            | string    | The bpmn process ID of the job process definition                                               |
-| X-Zeebe-Process-Definition-Version | int32     | The version of the job process definition                                                       |
-| X-Zeebe-Process-Definition-Key     | int64     | The key of the job process definition                                                           |
-| X-Zeebe-Element-Id                 | string    | The associated task element ID                                                                  |
-| X-Zeebe-Element-Instance-Key       | int64     | The unique key identifying the associated task, unique within the scope of the process instance |
-| X-Zeebe-Worker                     | string    | The name of the worker which activated this job                                                 |
-| X-Zeebe-Retries                    | int32     | The amount of retries left to this job (should always be positive)                              |
-| X-Zeebe-Deadline                   | int64     | When the job can be activated again, sent as a UNIX epoch timestamp                             |
+| 元数据                                | Data type | 说明                        |
+| ---------------------------------- | --------- | ------------------------- |
+| X-Zeebe-Job-Key                    | int64     | 键值，作业的唯一标识符               |
+| X-Zeebe-Job-Type                   | string    | 工作的类型（应与请求的内容相匹配）         |
+| X-Zeebe-Process-Instance-Key       | int64     | 作业的进程实例键                  |
+| X-Zeebe-Bpmn-Process-Id            | string    | 作业进程定义的bpmn进程ID           |
+| X-Zeebe-Process-Definition-Version | int32     | 作业进程定义的版本                 |
+| X-Zeebe-Process-Definition-Key     | int64     | 作业进程定义的键值                 |
+| X-Zeebe-Element-Id                 | string    | 关联的任务元素 ID                |
+| X-Zeebe-Element-Instance-Key       | int64     | 标识关联任务的唯一键，在进程实例范围内保持唯一   |
+| X-Zeebe-Worker                     | string    | 激活这个作业的工作线程名称             |
+| X-Zeebe-Retries                    | int32     | 该作业的重试次数（应始终为正值）          |
+| X-Zeebe-Deadline                   | int64     | 作业何时可以再次被激活，将以UNIX时间戳格式发送 |
 
 ## 相关链接
 

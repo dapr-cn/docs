@@ -2,7 +2,7 @@
 type: docs
 title: "MQTT binding spec"
 linkTitle: "MQTT"
-description: "Detailed documentation on the MQTT binding component"
+description: "MQTT 组件绑定详细说明"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/mqtt/"
 ---
@@ -41,18 +41,18 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                |    必填    | 绑定支持         | 详情                                                                                                                              | 示例                                                                                                 |
-| ----------------- |:--------:| ------------ | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| url               |    Y     | Input/Output | MQTT broker地址. 可以用`secretKeyRef`来引用密钥。 <br> 使用 **`tcp://`** URI 格式进行非 TLS 通信。 <br> 使用 **`ssl://`** URI 格式进行 TLS 通信。 | `"tcp://\[username\]\[:password\]@host.domain[:port]"`                                         |
-| topic             |    Y     | Input/Output | 监听或者发送事件目标topic                                                                                                                 | `"mytopic"`                                                                                        |
-| consumerID        |    否     | Input/Output | 用于连接到 MQTT 代理的客户端 ID。 默认为 Dapr 应用 ID。                                                                                           | `"myMqttClientApp"`                                                                                |
-| qos               |    否     | Input/Output | 表示消息的服务质量等级（QoS）， 默认值 0 默认值为 `0`。                                                                                               | `1`                                                                                                |
-| retain            |    N     | Input/Output | 定义消息是否被broker保存为指定主题的最后已知有效值 默认值为 `"false"` 默认值为 `"false"`.                                                                     | `"true"`, `"false"`                                                                                |
-| cleanSession      |    N     | Input/Output | 如果为 `"true"`，设置连接到 MQTT 代理的连接消息中的 `clean_session` 标志。 默认为 `"true"`。                                                             | `"true"`, `"false"`                                                                                |
-| caCert            | 使用TLS时需要 | Input/Output | 用于验证服务端TLS证书的PEM格式的Certificate Authority (CA) 证书                                                                                | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
-| clientCert        | 使用TLS时需要 | Input/Output | PEM格式的客户端TLS证书 必须同`clientKey`一起使用                                                                                               | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
-| clientKey         | 使用TLS时需要 | Input/Output | PEM格式的客户端TLS密钥。 必须同`clientCert`一起使用。 可以用`secretKeyRef`来引用密钥。                                                                    | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"` |
-| backOffMaxRetries |    N     | 输入           | 返回错误前重试处理消息的最大次数。 默认为`"0"`, 即不尝试重试。 可以指定为`“-1”` ，表示应该无限期地重试消息，直到它们被成功处理或应用程序关闭。 组件在每次重试之前将等待5秒钟。                                | `"3"`                                                                                              |
+| 字段                |    必填    | 绑定支持  | 详情                                                                                                                              | 示例                                                                                                 |
+| ----------------- |:--------:| ----- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| url               |    是     | 输入/输出 | MQTT broker地址. 可以用`secretKeyRef`来引用密钥。 <br> 使用 **`tcp://`** URI 格式进行非 TLS 通信。 <br> 使用 **`ssl://`** URI 格式进行 TLS 通信。 | `"tcp://\[username\]\[:password\]@host.domain[:port]"`                                         |
+| topic             |    是     | 输入/输出 | 监听或者发送事件目标topic                                                                                                                 | `"mytopic"`                                                                                        |
+| consumerID        |    否     | 输入/输出 | 用于连接到 MQTT 代理的客户端 ID。 默认为 Dapr 应用 ID。                                                                                           | `"myMqttClientApp"`                                                                                |
+| qos               |    否     | 输入/输出 | 表示消息的服务质量等级（QoS）， 默认值 0 默认值为 `0`。                                                                                               | `1`                                                                                                |
+| retain            |    否     | 输入/输出 | 定义消息是否被broker保存为指定主题的最后已知有效值 默认值为 `"false"` 默认值为 `"false"`.                                                                     | `"true"`, `"false"`                                                                                |
+| cleanSession      |    否     | 输入/输出 | 如果为 `"true"`，设置连接到 MQTT 代理的连接消息中的 `clean_session` 标志。 默认为 `"true"`。                                                             | `"true"`, `"false"`                                                                                |
+| caCert            | 使用TLS时需要 | 输入/输出 | 用于验证服务端TLS证书的PEM格式的Certificate Authority (CA) 证书                                                                                | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
+| clientCert        | 使用TLS时需要 | 输入/输出 | PEM格式的客户端TLS证书 必须同`clientKey`一起使用                                                                                               | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
+| clientKey         | 使用TLS时需要 | 输入/输出 | PEM格式的客户端TLS密钥。 必须同`clientCert`一起使用。 可以用`secretKeyRef`来引用密钥。                                                                    | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"` |
+| backOffMaxRetries |    否     | 输入    | 返回错误前重试处理消息的最大次数。 默认为`"0"`, 即不尝试重试。 可以指定为`“-1”` ，表示应该无限期地重试消息，直到它们被成功处理或应用程序关闭。 组件在每次重试之前将等待5秒钟。                                | `"3"`                                                                                              |
 
 ### 使用 TLS 通信
 

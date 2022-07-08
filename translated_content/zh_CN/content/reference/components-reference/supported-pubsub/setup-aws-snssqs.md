@@ -63,29 +63,29 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                             | 必填 | 详情                                                                                                                                                                                                                                                                                                                                                                                                       | 示例                                           |
-| ------------------------------ |:--:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| accessKey                      | Y  | ID of the AWS account/role with appropriate permissions to SNS and SQS (see below)                                                                                                                                                                                                                                                                                                                       | `"AKIAIOSFODNN7EXAMPLE"`                     |
-| secretKey                      | Y  | Secret for the AWS user/role. If using an `AssumeRole` access, you will also need to provide a `sessionToken`                                                                                                                                                                                                                                                                                            | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
-| region                         | Y  | The AWS region where the SNS/SQS assets are located or be created in. See [this page](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ugi&l=na) for valid regions. Ensure that SNS and SQS are available in that region                                                                                                                                              | `"us-east-1"`                                |
-| 终结点                            | 否  | 该组件要使用的AWS端点， 仅用于本地开发。 Only used for local development with, for example, [localstack](https://github.com/localstack/localstack). 当对生产环境的AWS，`endpoint`是不需要的。                                                                                                                                                                                                                                            | `"http://localhost:4566"`                    |
-| sessionToken                   | N  | 要使用的 AWS 会话令牌。  只有当您使用临时安全凭证时才需要会话令牌。                                                                                                                                                                                                                                                                                                                                                                    | `"TOKEN"`                                    |
-| messageReceiveLimit            | N  | Number of times a message is received, after processing of that message fails, that once reached, results in removing of that message from the queue. If `sqsDeadLettersQueueName` is specified, `messageReceiveLimit` is the number of times a message is received, after processing of that message fails, that once reached, results in moving of the message to the SQS dead-letters queue. 默认值：`10` | `10`                                         |
-| sqsDeadLettersQueueName        | N  | Name of the dead letters queue for this application                                                                                                                                                                                                                                                                                                                                                      | `"myapp-dlq"`                                |
-| messageVisibilityTimeout       | N  | 消息发送至订阅者后，隐藏接收请求的时间，以秒为单位。 默认值：`10`                                                                                                                                                                                                                                                                                                                                                                      | `10`                                         |
-| messageRetryLimit              | N  | 在处理消息失败后，从队列中删除该消息之前，重新发送消息的次数。 默认值：`10`                                                                                                                                                                                                                                                                                                                                                                 | `10`                                         |
-| messageWaitTimeSeconds         | N  | The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than `messageWaitTimeSeconds`. If no messages are available and the wait time expires, the call returns successfully with an empty list of messages. 默认值：`1`                                                                                | `1`                                          |
-| messageMaxNumber               | N  | Maximum number of messages to receive from the queue at a time. 默认值：`10`，最大值：`10`                                                                                                                                                                                                                                                                                                                        | `10`                                         |
-| fifo                           | N  | Use SQS FIFO queue to provide message ordering and deduplication.  Default: `"false"`. See further details about [SQS FIFO](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html)                                                                                                                                                                                 | `"true"`, `"false"`                          |
-| fifoMessageGroupID             | N  | If `fifo` is enabled, instructs Dapr to use a custom [Message Group ID](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html) for the pubsub deployment. This is not mandatory as Dapr creates a custom Message Group ID for each producer, thus ensuring ordering of messages per a Dapr producer. Default: `""`                               | `"app1-mgi"`                                 |
-| disableEntityManagement        | 否  | When set to true, SNS topics, SQS queues and the SQS subscriptions to SNS do not get created automatically. 默认值为 `"false"`                                                                                                                                                                                                                                                                               | `"true"`, `"false"`                          |
-| disableDeleteOnRetryLimit      | 否  | When set to true, after retrying and failing of `messageRetryLimit` times processing a message, reset the message visibility timeout so that other consumers can try processing, instead of deleting the message from SQS (the default behvior). 默认值为 `"false"`                                                                                                                                          | `"true"`, `"false"`                          |
-| assetsManagementTimeoutSeconds | 否  | Amount of time in seconds, for an AWS asset management operation, before it times out and cancelled. Asset management operations are any operations performed on STS, SNS and SQS, except message publish and consume operations that implement the default Dapr component retry behavior. The value can be set to any non-negative float/integer. Default: `5`                                          | `0.5`, `10`                                  |
+| 字段                             | 必填 | 详情                                                                                                                                                                                                                                                | 示例                                           |
+| ------------------------------ |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| accessKey                      | 是  | 具有SNS和SQS适当访问权限的AWS账户/角色的ID(参见下方)。                                                                                                                                                                                                                | `"AKIAIOSFODNN7EXAMPLE"`                     |
+| secretKey                      | 是  | AWS用户/角色的密钥。 如果使用`AssumeRole` 访问，还需要提供一个`sessionToken`                                                                                                                                                                                            | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
+| region                         | 是  | SNS/SQS 资产所在或创建于其中的 AWS 区域。 有关有效区域，请参考[本页](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ugi&l=na)。 确保 SNS 和 SQS 在该区域内是可用的。                                                                                 | `"us-east-1"`                                |
+| 终结点                            | 否  | 该组件要使用的AWS端点， 仅用于本地开发。 仅用于本地开发，例如同[localstack](https://github.com/localstack/localstack)一起使用。 当对生产环境的AWS，`endpoint`是不需要的。                                                                                                                         | `"http://localhost:4566"`                    |
+| sessionToken                   | 否  | 要使用的 AWS 会话令牌。  只有当您使用临时安全凭证时才需要会话令牌。                                                                                                                                                                                                             | `"TOKEN"`                                    |
+| messageReceiveLimit            | 否  | 在处理该消息失败后接收消息的次数，一旦达到次数限制，就会导致从队列中删除该消息。 如果指定`sqsDeadLettersQueueName`，`messageReceiveLimit` 指定在处理该消息失败后接收消息的次数，一旦达到次数限制，会将该消息转移到SQS 死信队列。 默认值：`10`                                                                                               | `10`                                         |
+| sqsDeadLettersQueueName        | 否  | 应用程序的死信队列的名称                                                                                                                                                                                                                                      | `"myapp-dlq"`                                |
+| messageVisibilityTimeout       | 否  | 消息发送至订阅者后，隐藏接收请求的时间，以秒为单位。 默认值：`10`                                                                                                                                                                                                               | `10`                                         |
+| messageRetryLimit              | 否  | 在处理消息失败后，从队列中删除该消息之前，重新发送消息的次数。 默认值：`10`                                                                                                                                                                                                          | `10`                                         |
+| messageWaitTimeSeconds         | 否  | 调用在返回之前等待消息到达队列的持续时间（以秒为单位）。 如果消息可用，则调用会早于 `messageWaitTimeSeconds`返回。 如果没有消息可用并且等待时间到期，则该调用成功返回一个空的消息列表。 默认值：`1`                                                                                                                                 | `1`                                          |
+| messageMaxNumber               | 否  | 每次从队列中接收消息的最大数量。 默认值：`10`，最大值：`10`                                                                                                                                                                                                                | `10`                                         |
+| fifo                           | 否  | 使用 SQS FIFO 队列提供消息排序和重复数据删除。  默认值为 `"false"`. 参照[SQS FIFO](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html)获取更多详细信息                                                                                   | `"true"`, `"false"`                          |
+| fifoMessageGroupID             | 否  | 如果启用 `fifo` ，则指示 Dapr 使用自定义[Message Group ID](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)进行 pubsub 部署。 这并不强制因为Dap会为每一个消息生产者创建自定义Message Group ID，以确保每个Dapr消息生产者的消息顺序。 默认值：`""` | `"app1-mgi"`                                 |
+| disableEntityManagement        | 否  | 当设置为 true 时，不会自动创建 SNS 主题、SQS 队列和 SQS 对 SNS 的订阅。 默认值为 `"false"`                                                                                                                                                                                   | `"true"`, `"false"`                          |
+| disableDeleteOnRetryLimit      | 否  | 当设置为true时，在处理消息失败并重试 `messageRetryLimit` 次数后，重置该消息的可见性超时，以便其他消费者可以尝试处理，而不是从SQS中删除该消息（默认如此）。 默认值为 `"false"`                                                                                                                                        | `"true"`, `"false"`                          |
+| assetsManagementTimeoutSeconds | 否  | 以秒为单位，AWS资产管理的操作时间，超时将被取消。 资产管理操作可以是在STS、SNS和SQS上的任何一种操作行为，实现默认Dapr组件重试行为的消息发布和消费操作除外。 取值可以是任何非负的单精度浮点数或者整数（float/integer）。 默认值：`5`                                                                                                               | `0.5`, `10`                                  |
 
 
-* Dapr created SNS topic and SQS queue names conform with [AWS specifications](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-queues.html). By default, Dapr creates an SQS queue name based on the consumer `app-id`, therefore Dapr might perform name standardization to meet with AWS specifications.
-* Using SQS FIFO (`fifo` metadata field set to `"true"`), per AWS specifications, provides message ordering and deduplication, but incurs a lower SQS processing throughput, among other caveats
-* Be aware that specifying `fifoMessageGroupID` limits the number of concurrent consumers of the FIFO queue used to only one but guarantees global ordering of messages published by the app's Dapr sidecars. See [this](https://aws.amazon.com/blogs/compute/solving-complex-ordering-challenges-with-amazon-sqs-fifo-queues/) post to better understand the topic of Message Group IDs and FIFO queues.
+* Dapr创建SNS话题和SQS队列名符合[AWS 规范](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-queues.html)。 默认情况下，Dapr 根据消费者 `app-id`创建一个 SQS 队列名称，因此 Dapr 可能会执行名称标准化以满足 AWS 规范。
+* 根据 AWS 规范，使用 SQS FIFO（`fifo` 元数据字段设置为 `“true”`）提供消息排序和排重，但会导致 SQS 消息处理吞吐量变低，以及其他警告。
+* 请注意，指定 `fifoMessageGroupID` 会将使用的 FIFO 队列的并发消费者数量限制为仅一个，但可以保证应用程序的 Dapr sidecars 发布的消息的全局有序。 请参阅 [这里](https://aws.amazon.com/blogs/compute/solving-complex-ordering-challenges-with-amazon-sqs-fifo-queues/) ， 以更好地理解 Message Group ID 和 FIFO 队列的主题。
 
 
 
@@ -94,15 +94,15 @@ spec:
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" >}}
 
 {{% codetab %}}
-对于本地开发来说，可以用[localstack项目](https://github.com/localstack/localstack)集成AWS SNS/SQS。 Follow the instructions [here](https://github.com/localstack/localstack#running) to run localstack.
+对于本地开发来说，可以用[localstack项目](https://github.com/localstack/localstack)集成AWS SNS/SQS。 按照 [此处](https://github. com/localstack/localstack#running)说明运行 localstack。
 
-To run localstack locally from the command line using Docker, apply the following cmd:
+要使用 Docker 命令行运行本地localstack，请应用以下 cmd：
 ```shell
 docker run --rm -it -p 4566:4566 -p 4571:4571 -e SERVICES="sts,sns,sqs" -e AWS_DEFAULT_REGION="us-east-1" localstack/localstack
 ```
 
 
-In order to use localstack with your pubsub binding, you need to provide the `endpoint` configuration in the component metadata. 当在AWS生产环境上运行时，`endpoint`是不需要的。
+为了将 localstack 与您的 pubsub 绑定一起使用，您需要在组件元数据中提供 `endpoint` 配置。 当在AWS生产环境上运行时，`endpoint`是不需要的。
 
 有关身份验证相关属性的信息，请参阅 [向 AWS 进行身份验证]({{< ref authenticating-aws.md >}})
 
@@ -128,7 +128,7 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-要在Kubernetes上运行localstack，可以应用以下配置。 Localstack is then reachable at the DNS name `http://localstack.default.svc.cluster.local:4566` (assuming this was applied to the default namespace) and this should be used as the `endpoint`
+要在Kubernetes上运行localstack，可以应用以下配置。 然后 Localstack 可以通过 DNS 名称 `http://localstack.default.svc.cluster.local:4566` 访问（假设这已应用于默认命名空间），这应该用作 `endpoint`
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -173,7 +173,7 @@ spec:
 {{% /codetab %}}
 
 {{% codetab %}}
-In order to run in AWS, you should create or assign an IAM user with permissions to the SNS and SQS services having a Policy such as:
+为了在 AWS 中运行，您应该创建或分配一个 IAM 用户，该用户有权访问具有以下策略的 SNS 和 SQS 服务：
 ```json
 {
   "Version": "2012-10-17",
@@ -208,7 +208,7 @@ In order to run in AWS, you should create or assign an IAM user with permissions
 使用`AWS account ID`和`AWS account secret`，并使用Kubernetes密钥和`secretKeyRef`将它们插入组件元数据中的`accessKey`和`secretKey`。
 
 
-Alternatively, if you want to provision the SNS and SQS assets using your own tool of choice (e.g. Terraform), while preventing Dapr from doing so dynamically, you need to enable `disableEntityManagement` and assign your Dapr-using application with an IAM Role having a Policy such as:
+或者，如果您希望使用自己选择的工具（例如 Terraform）预置 SNS 和 SQS 资产，同时防止 Dapr 动态执行此操作，则需要启用 ` disableEntityManagement ` ，并使用 IAM 角色分配使用 Dapr 的应用程序，该角色具有如下策略：
 
 ```json
 {
@@ -237,7 +237,7 @@ Alternatively, if you want to provision the SNS and SQS assets using your own to
 }
 ```
 
-If you are running your applications on an EKS cluster with dynamic assets creation (the default Dapr behavior)
+如果您在具有动态资产创建的 EKS 集群上运行应用程序（默认 Dapr 行为）
 {{% /codetab %}}
 
 {{< /tabs >}}
