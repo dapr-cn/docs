@@ -45,39 +45,44 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                   | 必填 | 详情                                                                                                                                                     | 示例                                                                                                 |
-| -------------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| brokers              | Y  | 逗号分隔的kafka broker列表.                                                                                                                                   | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"`                                         |
-| consumerGroup        | 否  | 监听 kafka 消费者组。 发布到主题的每条记录都会传递给订阅该主题的每个消费者组中的一个消费者。                                                                                                     | `"group1"`                                                                                         |
-| clientID             | 否  | 用户提供的字符串，随每个请求一起发送到 Kafka 代理，用于日志记录、调试和审计目的。 默认为 `"sarama"`。                                                                                           | `"my-dapr-app"`                                                                                    |
-| authRequired         | 否  | *Deprecated* Enable [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) authentication with the Kafka brokers.              | `"true"`, `"false"`                                                                                |
-| authType             | Y  | Configure or disable authentication. Supported values: `none`, `password`, `mtls`, or `oidc`                                                           | `"password"`, `"none"`                                                                             |
-| saslUsername         | N  | 用于身份验证的 SASL 用户名。 Only required if `authType` is set to `"password"`.                                                                                  | `"adminuser"`                                                                                      |
-| saslPassword         | N  | 用于身份验证的 SASL 密码。 可以用`secretKeyRef`来[引用 Secret]({{< ref component-secrets.md >}})。 Only required if `authType is set to`"password"`. |`""`,`"KeFg23!"` |                                                                                                    |
-| initialOffset        | N  | 如果以前未提交任何偏移量，则要使用的初始偏移量。 应为"newest"或"oldest"。 默认为"newest"。                                                                                             | `"oldest"`                                                                                         |
-| maxMessageBytes      | N  | 单条Kafka消息允许的最大消息的字节大小。 默认值为 1024。                                                                                                                      | `2048`                                                                                             |
-| consumeRetryInterval | N  | 尝试消费主题时重试的间隔。 将不带后缀的数字视为毫秒。 默认值为 100ms。                                                                                                                | `200ms`                                                                                            |
-| version              | N  | Kafka 集群版本。 默认值为 2.0.0.0                                                                                                                               | `0.10.2.0`                                                                                         |
-| caCert               | N  | 证书颁发机构证书，使用 TLS 时需要。 可以用`secretKeyRef`来引用密钥。                                                                                                           | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
-| clientCert           | N  | Client certificate, required for `authType` `mtls`. 可以用`secretKeyRef`来引用密钥。                                                                            | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
-| clientKey            | 否  | Client key, required for `authType` `mtls` Can be `secretKeyRef` to use a secret reference                                                             | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"` |
-| skipVerify           | 否  | 跳过 TLS 验证，不建议在生产中使用。 默认值为 `"false"`                                                                                                                    | `"true"`, `"false"`                                                                                |
-| disableTls           | 否  | Disable TLS for transport security. This is not recommended for use in production. 默认值为 `"false"`                                                      | `"true"`, `"false"`                                                                                |
-| oidcTokenEndpoint    | 否  | Full URL to an OAuth2 identity provider access token endpoint. Required when `authType` is set to `oidc`                                               | "https://identity.example.com/v1/token"                                                            |
-| oidcClientID         | 否  | The OAuth2 client ID that has been provisioned in the identity provider. Required when `authType is set to`oidc`|`dapr-kafka`                         |                                                                                                    |
-| oidcClientSecret     | 否  | The OAuth2 client secret that has been provisioned in the identity provider: Required when `authType` is set to `oidc`                                 | `"KeFg23!"`                                                                                        |
-| oidcScopes           | 否  | Comma-delimited list of OAuth2/OIDC scopes to request with the access token. Recommended when `authType` is set to `oidc`. Defaults to `"openid"`      | '"openid,kafka-prod"`                                                                             |
+| 字段                   | 必填 | 详情                                                                                                                                                                                                                                               | 示例                                                                                                 |
+| -------------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| brokers              | 是  | 逗号分隔的kafka broker列表.                                                                                                                                                                                                                             | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"`                                         |
+| consumerGroup        | 否  | 监听 kafka 消费者组。 发布到主题的每条记录都会传递给订阅该主题的每个消费者组中的一个消费者。                                                                                                                                                                                               | `"group1"`                                                                                         |
+| clientID             | 否  | 用户提供的字符串，随每个请求一起发送到 Kafka 代理，用于日志记录、调试和审计目的。 默认为 `"sarama"`。                                                                                                                                                                                     | `"my-dapr-app"`                                                                                    |
+| authRequired         | 否  | *已弃用* 启用 [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) 对 Kafka broker 的身份验证。                                                                                                                                    | `"true"`, `"false"`                                                                                |
+| authType             | 是  | 配置或禁用身份验证。 支持值包括： `none`, `password`, `mtls`, 或者 `oidc`                                                                                                                                                                                          | `"password"`, `"none"`                                                                             |
+| saslUsername         | 否  | 用于身份验证的 SASL 用户名。 只有将`authType`的值设置为`"password"`时才需要设置。                                                                                                                                                                                          | `"adminuser"`                                                                                      |
+| saslPassword         | 否  | 用于身份验证的 SASL 密码。 可以用`secretKeyRef`来[引用 Secret]({{< ref component-secrets.md >}})。 只有将`authType`的值设置为`"password"`时才需要设置。 |</code>""`,`"KeFg23!"`                                                                                                 |                                                                                                    |
+| initialOffset        | 否  | 如果以前未提交任何偏移量，则要使用的初始偏移量。 应为"newest"或"oldest"。 默认为"newest"。                                                                                                                                                                                       | `"oldest"`                                                                                         |
+| maxMessageBytes      | 否  | 单条Kafka消息允许的最大消息的字节大小。 默认值为 1024。                                                                                                                                                                                                                | `2048`                                                                                             |
+| consumeRetryInterval | 否  | 尝试消费主题时重试的间隔。 将不带后缀的数字视为毫秒。 默认值为 100ms。                                                                                                                                                                                                          | `200ms`                                                                                            |
+| version              | 否  | Kafka 集群版本。 默认值为 2.0.0.0                                                                                                                                                                                                                         | `0.10.2.0`                                                                                         |
+| caCert               | 否  | 证书颁发机构证书，使用 TLS 时需要。 可以用`secretKeyRef`来引用密钥。                                                                                                                                                                                                     | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
+| clientCert           | 否  | 客户端证书， `authType` `mtls`需要使用到该配置。 可以用`secretKeyRef`来引用密钥。                                                                                                                                                                                        | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
+| clientKey            | 否  | 客户端密钥，`authType` `mtls` 需要使用该配置，可以是`secretKeyRef`来使用一个秘密引用                                                                                                                                                                                       | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"` |
+| skipVerify           | 否  | 跳过 TLS 验证，不建议在生产中使用。 默认值为 `"false"`                                                                                                                                                                                                              | `"true"`, `"false"`                                                                                |
+| disableTls           | 否  | 为传输安全设置禁用 TLS 。 不建议在生产中使用。 默认值为 `"false"`                                                                                                                                                                                                        | `"true"`, `"false"`                                                                                |
+| oidcTokenEndpoint    | 否  | OAuth2 身份提供者访问令牌端点的完整 URL。 将`authType`的值设置为`oidc`时需要设置。                                                                                                                                                                                          | "https://identity.example.com/v1/token"                                                            |
+| oidcClientID         | 否  | 已在标识提供者中预配的 OAuth2 客户端 ID。 当 `authType` 设置为`oidc<code>时需要</td>
+  <td></td>
+</tr>
+<tr>
+  <td>oidcClientSecret</td>
+  <td align="center">否</td>
+  <td>已在身份提供者中配置的 OAuth2 客户端密码：当 <code>authType` 设置为 `oidc`时需要 | `"KeFg23!"`                                                                                        |
+| oidcScopes           | 否  | 使用访问令牌请求的 OAuth2/OIDC 范围的逗号分隔列表。 当 `authType` 设置为 `oidc`时推荐使用。 默认值为 `"openid"`                                                                                                                                                                   | '"openid,kafka-prod"`                                                                             |
 
 
 上面的 `secretKeyRef` 引用了一个 [kubernetes secrets 存储]({{< ref kubernetes-secret-store.md >}}) 来访问 tls 信息。 访问[此处]({{< ref setup-secret-store.md >}}) ，了解有关如何配置密钥存储组件的详细信息。
 
 ### 授权
 
-Kafka supports a variety of authentication schemes and Dapr supports several: SASL password, mTLS, OIDC/OAuth2. With the added authentication methods, the `authRequired` field has been deprecated from the v1.6 release and instead the `authType` field should be used. If `authRequired` is set to `true`, Dapr will attempt to configure `authType` correctly based on the value of `saslPassword`. There are four valid values for `authType`: `none`, `password`, `mtls`, and `oidc`. Note this is authentication only; authorization is still configured within Kafka.
+Kafka 支持多种身份验证模式，Dapr 支持几种：SASL 密码、mTLS、OIDC/OAuth2。 使用附加的身份验证方法， `authRequired` 字段已从 v1.6 版本中弃用 ，而应使用 `authType` 字段。 如果 `authRequired` 设置为 `true`，Dapr 将尝试根据 `saslPassword`的值正确配置 `authType` 。 `authType`有四个有效值： `none`, `password`, `mtls` 和 `oidc`。 请注意，这只是身份验证；授权仍然在 Kafka 中配置。
 
-#### None
+#### 无验证
 
-Setting `authType` to `none` will disable any authentication. This is *NOT* recommended in production.
+将 `authType` 设置为 `none` 将禁用任何身份验证。 在生产环境中不建议这样做。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -107,9 +112,9 @@ spec:
     value: "true"
 ```
 
-#### SASL Password
+#### SASL 密码
 
-Setting `authType` to `password` enables [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) authentication using the **PLAIN** mechanism. This requires setting the `saslUsername` and `saslPassword` fields.
+将 `authType` 设置为 `password` 使用 **PLAIN** 机制启用 [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) 身份验证。 这需要设置`saslUsername` 和 `saslPassword` 字段。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -147,9 +152,9 @@ spec:
       key: caCert
 ```
 
-#### Mutual TLS
+#### 双向 TLS
 
-Setting `authType` to `mtls` uses a x509 client certificate (the `clientCert` field) and key (the `clientKey` field) to authenticate. Note that mTLS as an authentication mechanism is distinct from using TLS to secure the transport layer via encryption. mTLS requires TLS transport (meaning `disableTls` must be `false`), but securing the transport layer does not require using mTLS. See [Communication using TLS](#communication-using-tls) for configuring underlying TLS transport.
+将 `authType` 设置为 `mtls` 使用 x509 客户端证书（ `clientCert` 字段）和密钥（ `clientKey` 字段）进行身份验证。 请注意，mTLS 作为一种身份验证机制不同于使用 TLS 加密来保护数据传输层。 mTLS 需要 TLS 传输（意味着 `disableTls` 必须为 `false`），但传输层保护不需要使用 mTLS。 有关底层 TLS 传输的配置信息，请参阅 [使用 TLS通信](#communication-using-tls)。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -189,9 +194,9 @@ spec:
     value: 0.10.2.0
 ```
 
-#### OAuth2 or OpenID Connect
+#### OAuth2 或 OpenID 连接
 
-Setting `authType` to `oidc` enables SASL authentication via the **OAUTHBEARER** mechanism. This supports specifying a bearer token from an external OAuth2 or [OIDC](https://en.wikipedia.org/wiki/OpenID) identity provider. Currenly only the **client_credentials** grant is supported. Configure `oidcTokenEndpoint` to the full URL for the identity provider access token endpoint. Set `oidcClientID` and `oidcClientSecret` to the client credentials provisioned in the identity provider. If `caCert` is specified in the component configuration, the certificate is appended to the system CA trust for verifying the identity provider certificate. Similarly, if `skipVerify` is specified in the component configuration, verification will also be skipped when accessing the identity provider. By default, the only scope requested for the token is `openid`; it is **highly** recommended that additional scopes be specified via `oidcScopes` in a comma-separated list and validated by the Kafka broker. If additional scopes are not used to narrow the validity of the access token, a compromised Kafka broker could replay the token to access other services as the Dapr clientID.
+将 `authType` 设置为 `oidc` 可以使用 **OAUTHBEARER** 机制启用 SASL 身份验证。 这支持从外部 OAuth2 或 [OIDC](https://en.wikipedia.org/wiki/OpenID) 身份提供者指定令牌持有者。 目前仅支持 **client_credentials** 授权。 配置 `oidcTokenEndpoint` 为身份提供者访问令牌端点的完整 URL。 将`oidcClientID` 和`oidcClientSecret` 设置为认证提供者预分配的客户端证书。 如果在组件配置信息中指定了`caCert`，那么证书将会到系统证书信任链，以便去验证身份认证提供者证书。 同样，如果组件配置信息中指定了 `skipVerify`，当访问身份认证提供者时也会跳过验证。 默认情况下，令牌唯一的请求范围是`openid`;**高度** 推荐使用`oidcScopes`字段来指定附加请求范围，它是以逗号分隔的列表并且通过Kafka代理验证。 如果不使用附加范围来限制access token的有效性，妥协的Kafka代理可以重放该token作为Dapr客户端ID去访问其他服务。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -235,7 +240,7 @@ spec:
 
 ### 使用 TLS 通信
 
-By default TLS is enabled to secure the transport layer to Kafka. To disable TLS, set `disableTls` to `true`. When TLS is enabled, you can control server certificate verification using `skipVerify` to disable verificaiton (*NOT* recommended in production environments) and `caCert` to specify a trusted TLS certificate authority (CA). If no `caCert` is specified, the system CA trust will be used. To also configure mTLS authentication, see the section under _Authentication_. Below is an example of a Kafka pubsub component configured to use transport layer TLS:
+默认情况下启用 TLS 以保护 Kafka 的传输层。 要禁用 TLS，请将 `disableTls` 设置为 `true`。 启用TLS后，你可以控制服务端证书验证，使用`skipVerify` 去禁用验证(在生产环境*不* 推荐) 并且使用`caCert`去指定一个信任的TLS证书颁发机构（CA）。 如果不指定`caCert`，将使用系统信任的CA。 要同时配置 mTLS 身份验证，请参阅 _身份验证_下的内容。 下面是一个配置使用传输层 TLS 的 Kafka pubsub 组件的示例：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -295,9 +300,9 @@ curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partiti
       }'
 ```
 
-### Message headers
+### 消息头
 
-All other metadata key/value pairs (that are not `partitionKey`) are set as headers in the Kafka message. Here is an example setting a `correlationId` for the message.
+所有其他元数据键/值对（不是 `partitionKey`）都设置为 Kafka 消息中的请求头。 下面是为消息设置 ` correlationId ` 的示例。
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.correlationId=myCorrelationID&metadata.partitionKey=key1 \
@@ -318,7 +323,7 @@ curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.correla
 {{% /codetab %}}
 
 {{% codetab %}}
-To run Kafka on Kubernetes, you can use any Kafka operator, such as [Strimzi](https://strimzi.io/docs/operators/latest/quickstart.html#ref-install-prerequisites-str).
+要在 Kubernetes 上运行 Kafka，您可以使用任何 Kafka Operator，例如 [Strimzi](https://strimzi.io/docs/operators/latest/quickstart.html#ref-install-prerequisites-str)。
 {{% /codetab %}}
 
 {{< /tabs >}}

@@ -6,7 +6,7 @@ weight: 30
 description: "运行 Dapr sidecar 并尝试使用状态 API"
 ---
 
-运行 [`dapr init`]({{<ref install-dapr-selfhost.md>}}) 加载你的本地环境。
+运行 [`dapr init`]({{<ref install-dapr-selfhost.md>}}) 加载你的本地环境：
 
 - Dapr sidecar 二进制文件。
 - 两者的默认 Redis 组件定义：
@@ -27,12 +27,12 @@ description: "运行 Dapr sidecar 并尝试使用状态 API"
 dapr run --app-id myapp --dapr-http-port 3500
 ```
 
-由于没有使用上述命令定义自定义组件文件夹，因此 Dapr 使用在 [`dapr init` flow]({{< ref install-dapr-selfhost.md >}}) 期间创建的默认组件定义，查看：
+由于没有使用上述命令定义自定义组件文件夹，因此 Dapr 将使用在 [`dapr init` flow]({{< ref install-dapr-selfhost.md >}}) 期间创建的默认组件定义，查看：
 
 - 在Windows上，在 `%UserProfile%\.dapr\components`
 - 在Linux/MacOS上，在 `~/.dapr/components`
 
-这些告诉 Dapr 使用 Redis 的本地 Docker 容器作为状态存储和消息代理。
+这些告诉 Dapr 使用本地的 Redis Docker 容器作为状态存储和消息代理。
 
 ### 第 2 步：保存状态
 
@@ -70,7 +70,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": 
 
 ### 第 3 步：获取状态
 
-通过使用状态管理 API，用 key `name` 来检索你刚刚存储在状态中的对象。 使用之前运行的同一 Dapr 实例运行以下代码。 :
+通过使用状态管理 API，用 key `name` 来检索你刚刚存储在状态中的对象。 使用之前运行的同一 Dapr 实例运行以下代码：
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 

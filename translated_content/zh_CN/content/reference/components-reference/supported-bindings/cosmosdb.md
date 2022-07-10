@@ -42,11 +42,11 @@ spec:
 
 | 字段           | 必填 | 绑定支持 | 详情                                                           | 示例                                          |
 | ------------ |:--:| ---- | ------------------------------------------------------------ | ------------------------------------------- |
-| url          | Y  | 输出   | CosmosDB 地址                                                  | `"https://******.documents.azure.com:443/"` |
-| masterKey    | Y  | 输出   | CosmosDB 账户主键                                                | `"master-key"`                              |
-| database     | Y  | 输出   | CosmosDB 数据库名                                                | `"OrderDb"`                                 |
-| collection   | Y  | 输出   | 数据库中容器的名称。                                                   | `"Orders"`                                  |
-| partitionKey | Y  | 输出   | 要从用作分区键的有效负载（要创建的文档）中提取键的名称。 此名称必须与创建 Cosmos DB 容器时指定的分区键匹配。 | `"OrderId"`, `"message"`                    |
+| url          | 是  | 输出   | CosmosDB 地址                                                  | `"https://******.documents.azure.com:443/"` |
+| masterKey    | 是  | 输出   | CosmosDB 账户主键                                                | `"master-key"`                              |
+| database     | 是  | 输出   | CosmosDB 数据库名                                                | `"OrderDb"`                                 |
+| collection   | 是  | 输出   | 数据库中容器的名称。                                                   | `"Orders"`                                  |
+| partitionKey | 是  | 输出   | 要从用作分区键的有效负载（要创建的文档）中提取键的名称。 此名称必须与创建 Cosmos DB 容器时指定的分区键匹配。 | `"OrderId"`, `"message"`                    |
 
 欲了解更多信息，请参阅 [Azure Cosmos DB 资源模型](https://docs.microsoft.com/azure/cosmos-db/account-databases-containers-items)。
 

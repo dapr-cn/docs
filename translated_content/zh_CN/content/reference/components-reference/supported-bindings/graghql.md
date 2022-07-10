@@ -37,7 +37,7 @@ spec:
 
 | 字段                 | 必填 | 绑定支持 | 详情                                                          | 示例                                        |
 | ------------------ |:--:| ---- | ----------------------------------------------------------- | ----------------------------------------- |
-| 终结点                | Y  | 输出   | GraphQL endpoint 详细信息请参阅[此处](#url-format)                   | `"http://localhost:4000/graphql/graphql"` |
+| 终结点                | 是  | 输出   | GraphQL endpoint 详细信息请参阅[此处](#url-format)                   | `"http://localhost:4000/graphql/graphql"` |
 | header:[HEADERKEY] | 否  | 输出   | GraphQL header. 指定 `name` 中的 header 键和 `value` 中的 header 值。 | `"no-cache"` （见上文）                        |
 
 ### Endpoint 和 Header 格式

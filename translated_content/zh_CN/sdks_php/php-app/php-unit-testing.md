@@ -7,7 +7,7 @@ description: 单元测试
 no_list: true
 ---
 
-单元和集成测试是PHP SDK的一等公民。 使用 DI 容器、 mocks、 stubs、 和提供的 `\Dapr\Mocks\TestClient` 允许您进行非常精良的测试。
+单元和集成测试是PHP SDK的一等公民。 使用 DI 容器、 mocks、 stubs 和提供的 `\Dapr\Mocks\TestClient` 允许您进行非常细粒度的测试。
 
 ## 测试Actors
 

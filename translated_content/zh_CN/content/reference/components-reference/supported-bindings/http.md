@@ -27,7 +27,7 @@ spec:
 
 | 字段  | 必填 | 绑定支持 | 详情                     | 示例                                                         |
 | --- |:--:| ---- | ---------------------- | ---------------------------------------------------------- |
-| url | Y  | 输出   | 要调用的 HTTP 终点的 base URL | `http://host:port/path`, `http://myservice:8000/customers` |
+| url | 是  | 输出   | 要调用的 HTTP 终点的 base URL | `http://host:port/path`, `http://myservice:8000/customers` |
 
 ## 绑定支持
 

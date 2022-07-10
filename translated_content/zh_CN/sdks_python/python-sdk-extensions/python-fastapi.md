@@ -50,7 +50,7 @@ def event_handler(event_data):
     print(event_data)
 ```
 
-### 创建 Actor
+### 创建 actor
 
 ```python
 from fastapi import FastAPI

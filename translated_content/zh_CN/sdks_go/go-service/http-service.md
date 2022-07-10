@@ -3,7 +3,7 @@ type: docs
 title: "Dapr HTTP 服务 SDK for Go 入门"
 linkTitle: "HTTP 服务"
 weight: 10000
-description: 如何使用 Dapr HTTP 服务 SDK for Go 启动和运行
+description: 如何使 Dapr HTTP 服务 SDK for Go 启动和运行
 no_list: true
 ---
 
@@ -21,7 +21,7 @@ daprd "github.com/dapr/go-sdk/service/http"
 s := daprd.NewService(":8080")
 ```
 
-或者通过地址和现有的 http.ServeMux 来合并现有服务器实现：
+如果想合并一个已存在的服务，可以用该服务的的地址和http.ServeMux:
 
 ```go
 mux := http.NewServeMux()
@@ -29,7 +29,7 @@ mux.HandleFunc("/", myOtherHandler)
 s := daprd.NewServiceWithMux(":8080", mux)
 ```
 
-一旦你创建了一个服务实例，你就可以给该服务 "附加 "任何数量的事件、绑定和服务调用逻辑处理程序，如下所示。 定义逻辑后，即可启动服务：
+一旦你创建了一个服务实例，你就可以给该服务 "附加 "任何数量的事件、绑定和服务调用逻辑处理程序，如下所示。 只要逻辑定义好，即可启动服务：
 
 ```go
 if err := s.Start(); err != nil && err != http.ErrServerClosed {
@@ -38,7 +38,7 @@ if err := s.Start(); err != nil && err != http.ErrServerClosed {
 ```
 
 ### 事件处理
-要处理来自特定主题的事件，您需要在启动服务之前至少添加一个主题事件处理程序：
+要处理来自特定主题的事件，您需要在启动服务之前至少添加一个主题事件handler：
 
 ```go
 sub := &common.Subscription{
@@ -52,7 +52,7 @@ if err != nil {
 }
 ```
 
-处理程序方法本身可以是具有预期签名的任何方法：
+handler 本身可以是具有预期签名的任何方法：
 
 ```go
 func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err error) {
@@ -63,7 +63,7 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 ```
 
 ### 服务调用处理
-要处理服务调用，您需要在启动服务之前添加至少一个服务调用处理程序：
+要处理服务调用，您需要在启动服务之前添加至少一个服务调用handler：
 
 ```go
 if err := s.AddServiceInvocationHandler("/echo", echoHandler); err != nil {
@@ -71,7 +71,7 @@ if err := s.AddServiceInvocationHandler("/echo", echoHandler); err != nil {
 }
 ```
 
-处理程序方法本身可以是具有预期签名的任何方法：
+handler 本身可以是具有预期签名的任何方法：
 
 
 ```go
@@ -95,7 +95,7 @@ if err := s.AddBindingInvocationHandler("/run", runHandler); err != nil {
 }
 ```
 
-处理程序方法本身可以是具有预期签名的任何方法：
+handler 本身可以是具有预期签名的任何方法：
 
 ```go
 func runHandler(ctx context.Context, in *common.BindingEvent) (out []byte, err error) {

@@ -45,15 +45,15 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持         | 详情                                                                                                                                                                                                                           | 示例                       |
-| ------------ |:--:| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| mode         | N  | 输入           | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"` |
-| streamName   | Y  | Input/Output | The AWS Kinesis Stream Name                                                                                                                                                                                                  | `"stream"`               |
-| consumerName | Y  | 输入           | The AWS Kinesis Consumer Name                                                                                                                                                                                                | `"myconsumer"`           |
-| region       | Y  | 输出           | The specific AWS region the AWS Kinesis instance is deployed in                                                                                                                                                              | `"us-east-1"`            |
-| accessKey    | Y  | 输出           | 要访问此资源的 AWS 访问密钥                                                                                                                                                                                                             | `"key"`                  |
-| secretKey    | Y  | 输出           | 要访问此资源的 AWS 密钥访问 Key                                                                                                                                                                                                         | `"secretAccessKey"`      |
-| sessionToken | N  | 输出           | 要使用的 AWS 会话令牌                                                                                                                                                                                                                | `"sessionToken"`         |
+| 字段           | 必填 | 绑定支持  | 详情                                                                                                                                                                 | 示例                       |
+| ------------ |:--:| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
+| mode         | 否  | 输入    | Kinesis 流模式。 ` shared `- 共享吞吐量， ` extended ` - 扩展/增强扇出方法。 更多细节 [参照这里](https://docs. aws. amazon. com/streams/latest/dev/building-consumers. html)。 默认值为 `"shared"` | `"shared"`, `"extended"` |
+| streamName   | 是  | 输入/输出 | AWS Kinesis 流名称                                                                                                                                                    | `"stream"`               |
+| consumerName | 是  | 输入    | AWS Kinesis 消费者名称                                                                                                                                                  | `"myconsumer"`           |
+| region       | 是  | 输出    | 部署 AWS Kinesis 实例的特定 AWS 区域                                                                                                                                        | `"us-east-1"`            |
+| accessKey    | 是  | 输出    | 要访问此资源的 AWS 访问密钥                                                                                                                                                   | `"key"`                  |
+| secretKey    | 是  | 输出    | 要访问此资源的 AWS 密钥访问 Key                                                                                                                                               | `"secretAccessKey"`      |
+| sessionToken | 否  | 输出    | 要使用的 AWS 会话令牌                                                                                                                                                      | `"sessionToken"`         |
 
 ## 绑定支持
 

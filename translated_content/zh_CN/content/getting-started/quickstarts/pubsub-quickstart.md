@@ -38,7 +38,7 @@ description: "开始使用 Dapr 的发布和订阅构建块"
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### 步骤 3: 订阅主题
+### 第3步：订阅topic
 
 在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
@@ -85,7 +85,7 @@ def orders_subscriber():
 app.run(port=5001)
 ```
 
-### 第4步：发布一个topic
+### 第4步：发布topic
 
 在新的终端窗口中，导航到 `checkout` 目录。
 
@@ -207,7 +207,7 @@ spec:
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### 步骤 3: 订阅主题
+### 第3步：订阅topic
 
 在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
@@ -238,7 +238,7 @@ dapr run --app-port 5001 --app-id order-processing --app-protocol http --dapr-ht
 server.pubsub.subscribe("order_pub_sub", "orders", (data) => console.log("Subscriber received: " + JSON.stringify(data)));
 ```
 
-### 第4步：发布一个topic
+### 第4步：发布topic
 
 在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
@@ -363,7 +363,7 @@ spec:
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### 步骤 3: 订阅主题
+### 第3步：订阅topic
 
 在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
@@ -396,7 +396,7 @@ app.MapPost("/orders", [Topic("order_pub_sub", "orders")] (Order order) => {
 public record Order([property: JsonPropertyName("orderId")] int OrderId);
 ```
 
-### 第4步：发布一个topic
+### 第4步：发布topic
 
 在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
@@ -517,7 +517,7 @@ spec:
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### 步骤 3: 订阅主题
+### 第3步：订阅topic
 
 在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
@@ -554,7 +554,7 @@ public Mono<ResponseEntity> getCheckout(@RequestBody(required = false) CloudEven
 }
 ```
 
-### 第4步：发布一个topic
+### 第4步：发布topic
 
 在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
@@ -677,7 +677,7 @@ scopes:
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### 步骤 3: 订阅主题
+### 第3步：订阅topic
 
 在终端窗口中，从快速入门克隆目录的根目录 导航到 `order-processor` 目录。
 
@@ -706,7 +706,7 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 }
 ```
 
-### 步骤 4: 发布主题
+### 第4步：发布topic
 
 在新终端窗口中，从快速入门克隆目录的根目录导航到 `checkout` 目录。
 
@@ -815,7 +815,7 @@ scopes:
 {{< /tabs >}}
 
 ## 告诉我们您的想法
-我们一直在努力改进我们的快速入门示例，并重视你的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
+我们一直在努力改进我们的快速入门示例，并重视您的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
 
 加入我们的 [discord 频道](https://discord.gg/22ZtJrNe)中的讨论。
 

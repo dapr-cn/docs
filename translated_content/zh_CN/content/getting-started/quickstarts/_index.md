@@ -3,14 +3,14 @@ type: docs
 title: "Dapr 快速入门"
 linkTitle: "Dapr 快速入门"
 weight: 70
-description: "试试Dapr的快速入门，这些示例代码旨帮助您快速上手Dapr"
+description: "试用Dapr的快速入门，这些示例代码旨帮助您快速上手Dapr"
 no_list: true
 ---
 
-通过我们的 Dapr 快速入门开始运行，其中包含旨在帮助你快速开始使用 Dapr 的代码示例。
+通过我们的Dapr快速入门，完成代码示例，让你快速开始使用Dapr。
 
 {{% alert title="Note" color="primary" %}}
- 我们正在积极致力于增加我们的快速入门库。 同时，你可以通过我们的[教程]({{< ref "getting-started/tutorials/_index.md" >}})探索Dapr。
+ 我们正在积极努力增加我们的快速入门库。 同时，你可以通过我们的[教程]({{< ref "getting-started/tutorials/_index.md" >}})探索Dapr。
 
 {{% /alert %}}
 

@@ -51,15 +51,15 @@ spec:
 
 | 字段           | 必填 | 绑定支持 | 详情                                | 示例                  |
 | ------------ |:--:| ---- | --------------------------------- | ------------------- |
-| region       | Y  | 输出   | 指定的 AWS 区域（region）                | `"eu-west-1"`       |
-| accessKey    | Y  | 输出   | 要访问此资源的 AWS 访问密钥                  | `"key"`             |
-| secretKey    | Y  | 输出   | 要访问此资源的 AWS 密钥访问 Key              | `"secretAccessKey"` |
+| region       | 是  | 输出   | 指定的 AWS 区域（region）                | `"eu-west-1"`       |
+| accessKey    | 是  | 输出   | 要访问此资源的 AWS 访问密钥                  | `"key"`             |
+| secretKey    | 是  | 输出   | 要访问此资源的 AWS 密钥访问 Key              | `"secretAccessKey"` |
 | sessionToken | 否  | 输出   | 要使用的 AWS 会话令牌                     | `"sessionToken"`    |
-| emailFrom    | N  | 输出   | 指定发件人地址 [另见](#example-request)    | `"me@example.com"`  |
-| emailTo      | N  | 输出   | 指定收件人地址。 [另见](#example-request)   | `"me@example.com"`  |
-| emailCc      | N  | 输出   | 指定抄送人地址。 [另见](#example-request)   | `"me@example.com"`  |
-| emailBcc     | N  | 输出   | 指定秘密抄送人地址。 [另见](#example-request) | `"me@example.com"`  |
-| subject      | N  | 输出   | 指定邮件信息的主题。 [另见](#example-request) | `"subject of mail"` |
+| emailFrom    | 否  | 输出   | 指定发件人地址 [另见](#example-request)    | `"me@example.com"`  |
+| emailTo      | 否  | 输出   | 指定收件人地址。 [另见](#example-request)   | `"me@example.com"`  |
+| emailCc      | 否  | 输出   | 指定抄送人地址。 [另见](#example-request)   | `"me@example.com"`  |
+| emailBcc     | 否  | 输出   | 指定秘密抄送人地址。 [另见](#example-request) | `"me@example.com"`  |
+| subject      | 否  | 输出   | 指定邮件信息的主题。 [另见](#example-request) | `"subject of mail"` |
 
 
 

@@ -99,7 +99,7 @@ spec:
 
 ### HTTP请求
 
-The `HTTPRequest` input contains all the relevant information about an incoming HTTP Request.
+`HTTPRequest` 输入包含有关传入 HTTP 请求的所有相关信息。
 
 ```go
 type Input struct {

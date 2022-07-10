@@ -1,21 +1,21 @@
 ---
 type: docs
-title: "教程：配置状态存储和发布/订阅消息代理"
-linkTitle: "配置状态 & 发布/订阅"
+title: "教程：配置状态存储和pub/sub消息代理"
+linkTitle: "配置 state & pub/sub"
 weight: 400
-description: "配置Dapr的状态存储和 发布/订阅 消息代理"
+description: "配置Dapr的状态存储和pub/sub消息代理"
 aliases:
   - /zh-hans/getting-started/tutorials/configure-redis/
 ---
 
-要启动并运行 状态 和 发布/订阅 构建块，您需要两个组件：
+要启动并运行状态和Pub/sub构建块，您需要两个组件：
 
 - 用于持久化和恢复的状态存储组件。
-- 作为发布/订阅的消息代理组件，用于异步式的消息传递。
+- 作为pub/sub的消息代理组件，用于异步式的消息传递。
 
 支持的组件的完整列表可以在这里找到：
 - [支持的状态存储]({{< ref supported-state-stores >}})
-- [支持的 发布/订阅 消息代理]({{< ref supported-pubsub >}})
+- [支持的pub/sub消息代理]({{< ref supported-pubsub >}})
 
 在本教程中，我们将描述如何启动和运行 Redis。
 
@@ -68,7 +68,7 @@ redis-replicas-1    1/1     Running   0          22s
 
 1. 打开并登录到 [Azure 门户](https://ms.portal.azure.com/#create/Microsoft.Cache) 来启动 Azure Redis 缓存创建流程。
 1. 填写必要的信息.
-   - Dapr 发布/订阅使用 [Redis streams](https://redis.io/topics/streams-intro) ，这是由Redis 5.0引入的。 若要将 Azure Redis 缓存用于 Pub/sub，请将版本设置为 *(PREVIEW) 6*。
+   - Dapr Pub/sub使用 [Redis streams](https://redis.io/topics/streams-intro) ，这是由Redis 5.0引入的。 若要将 Azure Redis 缓存用于 Pub/sub，请将版本设置为 *(PREVIEW) 6*。
 1. 点击 **创建** ，启动Redis实例的部署。
 1. 记下 Azure 门户中 **概述** 页面中的 Redis 实例主机名，以备后用。
    - 它看起来像 `xxxxxx.redis.cache.windows.net:6380`。
@@ -110,7 +110,7 @@ redis-replicas-1    1/1     Running   0          22s
 
 ### 第 2 步：配置 Dapr 组件
 
-Dapr 定义了用于使用组件构建块功能的资源。 这些步骤通过如何将你上面创建的资源连接到Dapr的 状态 和 发布/订阅 。
+Dapr 定义了用于使用组件构建块功能的资源。 这些步骤通过如何将你上面创建的资源连接到Dapr的 state 和 pub/sub 。
 
 #### 找到您的组件文件
 
@@ -196,7 +196,7 @@ spec:
 如果使用 Redis 以外的其他状态存储，请参考[支持的状态存储]({{< ref supported-state-stores >}})，了解要设置的选项信息。
 {{% /alert %}}
 
-#### 创建 发布/订阅 消息代理组件
+#### 创建 Pub/sub 消息代理组件
 
 创建名为 `redis-pubsub.yaml` 的文件，并粘贴以下内容：
 
