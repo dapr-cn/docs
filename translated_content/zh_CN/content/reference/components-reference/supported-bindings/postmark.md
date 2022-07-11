@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Postmark binding spec"
+title: "Postmark 绑定规范"
 linkTitle: "Postmark"
-description: "Detailed documentation on the Postmark binding component"
+description: "Postmark绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/postmark/"
 ---

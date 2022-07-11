@@ -41,14 +41,14 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                | 必填 | 绑定支持 | 详情                                                                                                                                                    | 示例                          |
-| ----------------- |:--:| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| storageAccount    | 是  | 输出   | Blob Storage 账户名称                                                                                                                                     | `myexmapleaccount`          |
-| storageAccessKey  | 是  | 输出   | Blob Storage 访问密钥                                                                                                                                     | `access-key`                |
-| container         | 是  | 输出   | 要写入的Blob Storage容器名称                                                                                                                                  | `myexamplecontainer`        |
-| decodeBase64      | 否  | 输出   | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false`                         | `true`, `false`             |
-| getBlobRetryCount | 否  | 输出   | 指定从 RetryReader 读取时发出的最大 HTTP GET 请求次数，默认为`10`                                                                                                        | `1`, `2`                    |
-| publicAccessLevel | 否  | 输出   | Specifies whether data in the container may be accessed publicly and the level of access (only used if the container is created by Dapr). 默认值为 `none` | `blob`, `container`, `none` |
+| 字段                | 必填 | 绑定支持 | 详情                                                                                                                            | 示例                          |
+| ----------------- |:--:| ---- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| storageAccount    | 是  | 输出   | Blob Storage 账户名称                                                                                                             | `myexmapleaccount`          |
+| storageAccessKey  | 是  | 输出   | Blob Storage 访问密钥                                                                                                             | `access-key`                |
+| container         | 是  | 输出   | 要写入的Blob Storage容器名称                                                                                                          | `myexamplecontainer`        |
+| decodeBase64      | 否  | 输出   | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false` | `true`, `false`             |
+| getBlobRetryCount | 否  | 输出   | 指定从 RetryReader 读取时发出的最大 HTTP GET 请求次数，默认为`10`                                                                                | `1`, `2`                    |
+| publicAccessLevel | 否  | 输出   | 指定是否可以公开访问容器中的数据以及访问级别(仅在由 Dapr 创建的容器中使用)。 默认值为 `none`                                                                        | `blob`, `container`, `none` |
 
 ### Azure Active Directory (AAD) 认证
 Azure Blob Storage绑定组件支持使用所有Azure Active Directory机制进行认证。 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。

@@ -37,7 +37,7 @@ spec:
 
 | 字段                 | 必填 | 绑定支持 | 详情                                                          | 示例                                        |
 | ------------------ |:--:| ---- | ----------------------------------------------------------- | ----------------------------------------- |
-| 终结点                | 是  | 输出   | GraphQL endpoint 详细信息请参阅[此处](#url-format)                   | `"http://localhost:4000/graphql/graphql"` |
+| endpoint           | 是  | 输出   | GraphQL endpoint 详细信息请参阅[此处](#url-format)                   | `"http://localhost:4000/graphql/graphql"` |
 | header:[HEADERKEY] | 否  | 输出   | GraphQL header. 指定 `name` 中的 header 键和 `value` 中的 header 值。 | `"no-cache"` （见上文）                        |
 
 ### Endpoint 和 Header 格式
@@ -51,7 +51,7 @@ GraphQL 绑定在内部使用 [GraphQL 客户端](https://github.com/machinebox/
 - `query`
 - `mutation`
 
-### query
+### 查询
 
 `query ` 操作用于 `query` 语句，该语句以行值数组的形式返回元数据和数据。
 

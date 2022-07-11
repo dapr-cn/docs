@@ -45,14 +45,14 @@ spec:
 
 | 字段              | 必填 | 绑定支持 | 详情                                                                 | 示例                                           |
 | --------------- |:--:| ---- | ------------------------------------------------------------------ | -------------------------------------------- |
-| url             | Y  | 输出   | 以数据源名称 （DNS） 格式表示数据库连接。 请参阅 [此处](#ssl-connection-details) SSL 详细信息 | `"user:password@tcp(localhost:3306)/dbname"` |
-| pemPath         | Y  | 输出   | PEM 文件的路径。 用于SSL 连接                                                | `"path/to/pem/file"`                         |
+| url             | 是  | 输出   | 以数据源名称 （DNS） 格式表示数据库连接。 请参阅 [此处](#ssl-connection-details) SSL 详细信息 | `"user:password@tcp(localhost:3306)/dbname"` |
+| pemPath         | 是  | 输出   | PEM 文件的路径。 用于SSL 连接                                                | `"path/to/pem/file"`                         |
 | maxIdleConns    | 否  | 输出   | 最大空闲连接数。 大于 0 的整数                                                  | `"10"`                                       |
 | maxOpenConns    | 否  | 输出   | 最大打开连接数。 大于 0 的整数                                                  | `"10"`                                       |
-| connMaxLifetime | N  | 输出   | 最长连接生存期。 持续时间字符串                                                   | `"12s"`                                      |
-| connMaxIdleTime | N  | 输出   | 最大连接空闲时间。 持续时间字符串                                                  | `"12s"`                                      |
+| connMaxLifetime | 否  | 输出   | 最长连接生存期。 持续时间字符串                                                   | `"12s"`                                      |
+| connMaxIdleTime | 否  | 输出   | 最大连接空闲时间。 持续时间字符串                                                  | `"12s"`                                      |
 
-### SSL connection
+### Ssl 连接
 
 如果您的服务器需要 SSL，则连接字符串必须以 `&tls=custom` 结尾，例如：
 ```bash
@@ -68,7 +68,7 @@ spec:
 - `query`
 - `close`
 
-### exec
+### 执行
 
 `exec` 操作可用于 DDL 操作（如表创建），以及 `INSERT`、 `UPDATE`、 `DELETE` 仅返回元数据的操作（例如受影响的行数）。
 
@@ -98,7 +98,7 @@ spec:
 }
 ```
 
-### query
+### 查询
 
 `query` 操作用于 `SELECT` 语句，该语句以行值数组的形式返回元数据和数据。
 
@@ -132,7 +132,7 @@ spec:
 }
 ```
 
-### close
+### 关闭
 
 最后， `close` 操作可用于显式关闭数据库连接并将其返回到池中。 此操作没有任何响应。
 

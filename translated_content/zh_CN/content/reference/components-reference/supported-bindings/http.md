@@ -81,8 +81,8 @@ spec:
 
 | 字段         | 必填 | 详情                                                                   | 示例                          |
 | ---------- |:--:| -------------------------------------------------------------------- | --------------------------- |
-| statusCode | Y  | [HTTP 状态代码](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
-| status     | Y  | 状态说明                                                                 | `"200 OK"`, `"201 Created"` |
+| statusCode | 是  | [HTTP 状态代码](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
+| status     | 是  | 状态说明                                                                 | `"200 OK"`, `"201 Created"` |
 | Headers*   | 否  | 任何第一字母为大写字母的字段均作为请求头发送                                               | `"Content-Type"`            |
 
 #### 示例

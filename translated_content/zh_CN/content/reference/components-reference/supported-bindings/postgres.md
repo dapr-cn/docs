@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "PostgrSQL binding spec"
+title: "PostgrSQL 绑定规范"
 linkTitle: "PostgreSQL"
-description: "Detailed documentation on the PostgreSQL binding component"
+description: "PostgreSQL 绑定组件的详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/postgres/"
 ---
@@ -34,7 +34,7 @@ spec:
 
 | 字段  | 必填 | 绑定支持 | 详情                                     | 示例                                                                                          |
 | --- |:--:| ---- | -------------------------------------- | ------------------------------------------------------------------------------------------- |
-| url | Y  | 输出   | Postgres连接字符串的写法，请参阅此处 [](#url-format) | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
+| url | 是  | 输出   | Postgres连接字符串的写法，请参阅此处 [](#url-format) | `"user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca"` |
 
 ### URL格式
 
@@ -54,11 +54,11 @@ postgres://dapr:secret@dapr.example.com:5432/dapr?sslmode=verify-ca
 
 这两种方法还支持连接池配置变量：
 
-- `pool_min_conns`: integer 0 or greater
-- `pool_max_conns`: integer greater than 0
-- `pool_max_conn_lifetime`: duration string
-- `pool_max_conn_idle_time`: duration string
-- `pool_health_check_period`: duration string
+- `pool_min_conns`：整数 0 或更大
+- `pool_max_conns`: 大于 0 的整数
+- `pool_max_conn_lifetime`：持续时间
+- `pool_max_conn_idle_time`：持续时间
+- `pool_health_check_period`: 持续时间
 
 
 ## 绑定支持
@@ -69,7 +69,7 @@ postgres://dapr:secret@dapr.example.com:5432/dapr?sslmode=verify-ca
 - `query`
 - `close`
 
-### exec
+### 执行
 
 `exec` 操作可用于 DDL 操作（如表创建），以及 `INSERT`、 `UPDATE`、 `DELETE` 仅返回元数据的操作（例如受影响的行数）。
 

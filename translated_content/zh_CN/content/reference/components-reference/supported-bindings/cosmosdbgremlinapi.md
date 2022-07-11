@@ -36,9 +36,9 @@ spec:
 
 | 字段        | 必填 | 绑定支持 | 详情                              | 示例                                                      |
 | --------- |:--:| ---- | ------------------------------- | ------------------------------------------------------- |
-| url       | Y  | 输出   | CosmosDBGremlinAPI url          | `"wss://******.gremlin.cosmos.azure.com:443/"`          |
-| masterKey | Y  | 输出   | CosmosDBGremlinAPI 帐户 masterKey | `"masterKey"`                                           |
-| username  | Y  | 输出   | CosmosDBGremlinAPI 数据库的用户名      | `"/dbs/<database_name>/colls/<graph_name>"` |
+| url       | 是  | 输出   | CosmosDBGremlinAPI url          | `"wss://******.gremlin.cosmos.azure.com:443/"`          |
+| masterKey | 是  | 输出   | CosmosDBGremlinAPI 账户 masterKey | `"masterKey"`                                           |
+| username  | 是  | 输出   | CosmosDBGremlinAPI 数据库的用户名      | `"/dbs/<database_name>/colls/<graph_name>"` |
 
 更多详细信息，请参阅[快速入门：在 Azure Cosmos Graph DB 中使用 Gremlin](https://docs.microsoft.com/azure/cosmos-db/graph/create-graph-console)。
 
