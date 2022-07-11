@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "MQTT binding spec"
+title: "MQTT绑定规范"
 linkTitle: "MQTT"
 description: "MQTT 组件绑定详细说明"
 aliases:

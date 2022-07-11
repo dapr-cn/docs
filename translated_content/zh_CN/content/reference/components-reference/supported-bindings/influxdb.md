@@ -40,10 +40,10 @@ spec:
 
 | 字段     | 必填 | 绑定支持 | 详情               | 示例                        |
 | ------ |:--:| ---- | ---------------- | ------------------------- |
-| url    | Y  | 输出   | InfluxDB 实例的 URL | `"http://localhost:8086"` |
-| token  | Y  | 输出   | InfluxDB 的授权令牌   | `"mytoken"`               |
-| org    | Y  | 输出   | InfluxDB 组织      | `"myorg"`                 |
-| bucket | Y  | 输出   | 要写入的存储桶名称        | `"mybucket"`              |
+| url    | 是  | 输出   | InfluxDB 实例的 URL | `"http://localhost:8086"` |
+| token  | 是  | 输出   | InfluxDB 的授权令牌   | `"mytoken"`               |
+| org    | 是  | 输出   | InfluxDB 组织      | `"myorg"`                 |
+| bucket | 是  | 输出   | 要写入的存储桶名称        | `"mybucket"`              |
 
 ## 绑定支持
 

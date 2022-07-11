@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Kafka binding spec"
+title: "Kafka 绑定规范"
 linkTitle: "Kafka"
 description: "Kafka 组件绑定详细说明"
 aliases:

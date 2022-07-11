@@ -45,12 +45,12 @@ spec:
 
 | 字段                   | 必填 | 绑定支持 | 详情                                                                                                                                                                          | 示例                     |
 | -------------------- |:--:| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| connectionString     | Y  | 输出   | [EventHubs 连接字符串](https://docs.microsoft.com/azure/event-hubs/authorize-access-shared-access-signature)。 请注意，这是 EventHubs 本身，而不是 EventHubs 名称空间。 确保使用子 EventHub 共享访问策略连接字符串 | `"Endpoint=sb://****"` |
-| consumerGroup        | Y  | 输出   | 要侦听的 [EventHubs 消费者组](https://docs.microsoft.com/azure/event-hubs/event-hubs-features#consumer-groups) 的名称                                                                  | `"group1"`             |
-| storageAccountName   | Y  | 输出   | 用于在Azure 存储检查点数据的帐户的名称                                                                                                                                                      | `"accountName"`        |
-| storageAccountKey    | Y  | 输出   | 用于在Azure 存储检查点数据的帐户的键                                                                                                                                                       | `"accountKey"`         |
-| storageContainerName | Y  | 输出   | 用于在Azure 存储检查点数据的帐户的容器名称                                                                                                                                                    | `"contianerName"`      |
-| partitionID          | N  | 输出   | 要发送和接收事件的分区的 ID                                                                                                                                                             | `0`                    |
+| connectionString     | 是  | 输出   | [EventHubs 连接字符串](https://docs.microsoft.com/azure/event-hubs/authorize-access-shared-access-signature)。 请注意，这是 EventHubs 本身，而不是 EventHubs 名称空间。 确保使用子 EventHub 共享访问策略连接字符串 | `"Endpoint=sb://****"` |
+| consumerGroup        | 是  | 输出   | 要侦听的 [EventHubs 消费者组](https://docs.microsoft.com/azure/event-hubs/event-hubs-features#consumer-groups) 的名称                                                                  | `"group1"`             |
+| storageAccountName   | 是  | 输出   | 用于在Azure 存储检查点数据的帐户的名称                                                                                                                                                      | `"accountName"`        |
+| storageAccountKey    | 是  | 输出   | 用于在Azure 存储检查点数据的帐户的键                                                                                                                                                       | `"accountKey"`         |
+| storageContainerName | 是  | 输出   | 用于在Azure 存储检查点数据的帐户的容器名称                                                                                                                                                    | `"contianerName"`      |
+| partitionID          | 否  | 输出   | 要发送和接收事件的分区的 ID                                                                                                                                                             | `0`                    |
 
 ## 绑定支持
 

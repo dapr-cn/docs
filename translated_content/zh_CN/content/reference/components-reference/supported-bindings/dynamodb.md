@@ -44,11 +44,11 @@ spec:
 
 | 字段           | 必填 | 绑定支持 | 详情                          | 示例                  |
 | ------------ |:--:| ---- | --------------------------- | ------------------- |
-| table        | Y  | 输出   | DynamoDB 表名称                | `"items"`           |
-| region       | Y  | 输出   | AWS DynamoDB 实例所部署的特定AWS 区域 | `"us-east-1"`       |
-| accessKey    | Y  | 输出   | 要访问此资源的 AWS 访问密钥            | `"key"`             |
-| secretKey    | Y  | 输出   | 要访问此资源的 AWS 密钥访问 Key        | `"secretAccessKey"` |
-| sessionToken | N  | 输出   | 要使用的 AWS 会话令牌               | `"sessionToken"`    |
+| table        | 是  | 输出   | DynamoDB 表名称                | `"items"`           |
+| region       | 是  | 输出   | AWS DynamoDB 实例所部署的特定AWS 区域 | `"us-east-1"`       |
+| accessKey    | 是  | 输出   | 要访问此资源的 AWS 访问密钥            | `"key"`             |
+| secretKey    | 是  | 输出   | 要访问此资源的 AWS 密钥访问 Key        | `"secretAccessKey"` |
+| sessionToken | 否  | 输出   | 要使用的 AWS 会话令牌               | `"sessionToken"`    |
 
 
 ## 绑定支持

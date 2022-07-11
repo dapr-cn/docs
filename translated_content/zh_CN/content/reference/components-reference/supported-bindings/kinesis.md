@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "AWS Kinesis binding spec"
+title: "AWS Kinesis绑定规范"
 linkTitle: "AWS Kinesis"
-description: "Detailed documentation on the AWS Kinesis binding component"
+description: "Detailed documentation on the AWS Kinesis 绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/kinesis/"
 ---
