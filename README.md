@@ -1,7 +1,7 @@
 # Dapr 中文文档库
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-27-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 目前进度： [![Crowdin](https://badges.crowdin.net/cndocsdapr/localized.svg)](https://crowdin.com/project/cndocsdapr)
@@ -80,6 +80,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://www.wwbweibo.icu"><img src="https://avatars.githubusercontent.com/u/20398347?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wangweibo</b></sub></a><br /><a href="#translation-wwbweibo" title="Translation">🌍</a></td>
     <td align="center"><a href="https://www.cnblogs.com/wiswang"><img src="https://avatars.githubusercontent.com/u/18387458?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hongzhi</b></sub></a><br /><a href="#translation-WisWang" title="Translation">🌍</a></td>
     <td align="center"><a href="https://www.weyhd.com"><img src="https://avatars.githubusercontent.com/u/439390?v=4?s=100" width="100px;" alt=""/><br /><sub><b>geffzhang</b></sub></a><br /><a href="#translation-geffzhang" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/zhi-gang-sun"><img src="https://avatars.githubusercontent.com/u/30427722?v=4?s=100" width="100px;" alt=""/><br /><sub><b>zhi-gang-sun</b></sub></a><br /><a href="#translation-zhi-gang-sun" title="Translation">🌍</a></td>
   </tr>
 </table>
 
@@ -134,7 +135,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>87737 words</b>
+                      <b>123763 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -147,7 +148,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>26161 words</b>
+                      <b>50784 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -190,6 +191,32 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/w_Y_">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>w_Y_</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>13065 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/RcXu">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>Mr.Black (RcXu)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>13722 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/geffzhang">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -203,19 +230,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/w_Y_">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>w_Y_</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>6887 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/jerroldgao">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -225,7 +239,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>6598 words</b>
+                      <b>8401 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -266,7 +280,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>1727 words</b>
                   </sub>
-              </td>
+              </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/WisWang">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -279,7 +293,20 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>1697 words</b>
                   </sub>
-              </td></tr><tr>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/webup">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>webup</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>2488 words</b>
+                  </sub>
+              </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/aikin-vip">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -333,6 +360,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/devonline">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>七里听香 (devonline)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>1750 words</b>
+                  </sub>
+              </td></tr><tr>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/stulzq">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -359,6 +399,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/qianjunakasumi">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>千橘 雫霞 (qianjunakasumi)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>306 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/Itoktsnhc">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -370,7 +423,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>293 words</b>
                   </sub>
-              </td></tr><tr>
+              </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/oudi">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -409,33 +462,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>192 words</b>
                   </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/qianjunakasumi">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>千橘 雫霞 (qianjunakasumi)</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>182 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/devonline">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>devonline</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>173 words</b>
-                  </sub>
-              </td>
+              </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/WeihanLi">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
