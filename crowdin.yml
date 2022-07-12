@@ -553,6 +553,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-middleware/middleware-opa.md
     - source: /content/content/reference/components-reference/supported-middleware/middleware-rate-limit.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-middleware/middleware-rate-limit.md
+    - source: /content/content/reference/components-reference/supported-middleware/middleware-routerchecker.md
+      translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-middleware/middleware-routerchecker.md
     - source: /content/content/reference/components-reference/supported-middleware/middleware-sentinel.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-middleware/middleware-sentinel.md
     - source: /content/content/reference/components-reference/supported-middleware/middleware-uppercase.md
