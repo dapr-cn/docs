@@ -1,8 +1,8 @@
-name: V1.6 Download translation from Crowdin
+name: V1.7 Download translation from Crowdin
 
 on:
   schedule:
-    - cron: "16 1 * * *"
+    - cron: "17 1 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         version_tag:
-          - v1.6
+          - v1.7
 
     steps:
       - name: Checkout

@@ -1,8 +1,8 @@
-name: V1.6 Update source to crowdin
+name: V1.7 Update source to crowdin
 
 on:
   schedule:
-    - cron: "16 0 * * *"
+    - cron: "17 0 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         version_tag:
-          - v1.6
+          - v1.7
 
     steps:
       - name: Checkout
