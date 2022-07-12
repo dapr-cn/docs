@@ -53,7 +53,7 @@ You can provide the method parameters and values in the body of the request, for
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/x-wing/33/method/fly \
-  -H "Content-Type: application/json"
+  -H "Content-Type: application/json" \
   -d '{
         "destination": "Hoth"
       }'
@@ -63,7 +63,7 @@ or
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/x-wing/33/method/fly \
-  -H "Content-Type: application/json"
+  -H "Content-Type: application/json" \
   -d "{\"destination\":\"Hoth\"}"
 ```
 
@@ -103,7 +103,7 @@ Parameter | Description
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/stormtrooper/50/state \
-  -H "Content-Type: application/json"
+  -H "Content-Type: application/json" \
   -d '[
        {
          "operation": "upsert",
@@ -242,7 +242,7 @@ Parameter | Description
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
-  -H "Content-Type: application/json"
+  -H "Content-Type: application/json" \
 -d '{
       "data": "someData",
       "dueTime": "1m",
@@ -383,7 +383,7 @@ Parameter | Description
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
-    -H "Content-Type: application/json"
+    -H "Content-Type: application/json" \
 -d '{
       "data": "someData",
       "dueTime": "1m",
@@ -468,6 +468,10 @@ Parameter | Description
 `actorScanInterval` | A duration which specifies how often to scan for actors to deactivate idle actors.  Actors that have been idle longer than the actorIdleTimeout will be deactivated.
 `drainOngoingCallTimeout` | A duration used when in the process of draining rebalanced actors.  This specifies how long to wait for the current active actor method to finish.  If there is no current actor method call, this is ignored.
 `drainRebalancedActors` | A bool.  If true, Dapr will wait for `drainOngoingCallTimeout` to allow a current actor call to complete before trying to deactivate an actor.  If false, do not wait.
+`reentrancy` | A configuration object that holds the options for actor reentrancy.
+`enabled` | A flag in the reentrancy configuration that is needed to enable reentrancy.
+`maxStackDepth` | A value in the reentrancy configuration that controls how many reentrant calls be made to the same actor.
+`entitiesConfig` | Array of entity configurations that allow per actor type settings. Any configuration defined here must have an entity that maps back into the root level entities.
 
 ```json
 {
@@ -475,7 +479,21 @@ Parameter | Description
   "actorIdleTimeout": "1h",
   "actorScanInterval": "30s",
   "drainOngoingCallTimeout": "30s",
-  "drainRebalancedActors": true
+  "drainRebalancedActors": true,
+  "reentrancy": {
+    "enabled": true,
+    "maxStackDepth": 32
+  },
+  "entitiesConfig": [
+      {
+          "entities": ["actorType1"],
+          "actorIdleTimeout": "1m",
+          "drainOngoingCallTimeout": "10s",
+          "reentrancy": {
+              "enabled": false
+          }
+      }
+  ]
 }
 ```
 
@@ -494,8 +512,8 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 Code | Description
 ---- | -----------
 200  | Request successful
+400  | Actor not found
 500  | Request failed
-404  | Actor not found
 
 #### URL Parameters
 

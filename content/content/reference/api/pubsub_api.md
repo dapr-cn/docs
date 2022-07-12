@@ -163,9 +163,9 @@ other | warning is logged and message to be retried
 
 ## Message envelope
 
-Dapr Pub/Sub adheres to version 1.0 of CloudEvents.
+Dapr pub/sub adheres to version 1.0 of CloudEvents.
 
 ## Related links
 
 * [How to publish to and consume topics]({{< ref howto-publish-subscribe.md >}})
-* [Sample for pub/sub](https://github.com/dapr/quickstarts/tree/master/pub_sub)
+* [Sample for pub/sub](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub)

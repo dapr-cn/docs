@@ -62,6 +62,10 @@ Parameter | Description
 `daprPort` | The Dapr port
 `storename` | The `metadata.name` field in the user-configured `statestore.yaml` component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above.
 
+The optional request metadata is passed via URL query parameters. For example,
+```
+POST http://localhost:3500/v1.0/state/myStore?metadata.contentType=application/json
+```
 > All URL parameters are case-sensitive.
 
 #### Request Body
@@ -77,6 +81,16 @@ Field | Description
 `options` | (optional) State operation options; see [state operation options](#optional-behaviors)
 
 > **ETag format:** Dapr runtime treats ETags as opaque strings. The exact ETag format is defined by the corresponding data store.
+
+#### Metadata
+
+Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.`, as shown below.
+
+Parameter | Description
+--------- | -----------
+`metadata.ttlInSeconds` | The number of seconds for the message to expire, as [described here]({{< ref state-store-ttl.md >}})
+
+> **TTL:** Only certain state stores support the TTL option, according the [supported state stores]({{< ref supported-state-stores.md >}}).
 
 ### HTTP Response
 
@@ -95,7 +109,7 @@ None.
 ### Example
 
 ```shell
-curl -X POST http://localhost:3500/v1.0/state/starwars \
+curl -X POST http://localhost:3500/v1.0/state/starwars?metadata.contentType=application/json \
   -H "Content-Type: application/json" \
   -d '[
         {
@@ -132,6 +146,11 @@ Parameter | Description
 `consistency` | (optional) Read consistency mode; see [state operation options](#optional-behaviors)
 `metadata` | (optional) Metadata as query parameters to the state store
 
+The optional request metadata is passed via URL query parameters. For example,
+```
+GET http://localhost:3500/v1.0/state/myStore/myKey?metadata.contentType=application/json
+```
+
 > Note, all URL parameters are case-sensitive.
 
 ### HTTP Response
@@ -158,8 +177,7 @@ JSON-encoded value
 ### Example
 
 ```shell
-curl http://localhost:3500/v1.0/state/starwars/planet \
-  -H "Content-Type: application/json"
+curl http://localhost:3500/v1.0/state/starwars/planet?metadata.contentType=application/json
 ```
 
 > The above command returns the state:
@@ -173,7 +191,7 @@ curl http://localhost:3500/v1.0/state/starwars/planet \
 To pass metadata as query parameter:
 
 ```
-GET http://localhost:3500/v1.0/state/starwars/planet?metadata.partitionKey=mypartitionKey
+GET http://localhost:3500/v1.0/state/starwars/planet?metadata.partitionKey=mypartitionKey&metadata.contentType=application/json
 ```
 
 ## Get bulk state
@@ -193,6 +211,11 @@ Parameter | Description
 `daprPort` | The Dapr port
 `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above.
 `metadata` | (optional) Metadata as query parameters to the state store
+
+The optional request metadata is passed via URL query parameters. For example,
+```
+POST/PUT http://localhost:3500/v1.0/state/myStore/bulk?metadata.partitionKey=mypartitionKey
+```
 
 > Note, all URL parameters are case-sensitive.
 
@@ -264,6 +287,11 @@ Parameter | Description
 `concurrency` | (optional) Either *first-write* or *last-write*; see [state operation options](#optional-behaviors)
 `consistency` | (optional) Either *strong* or *eventual*; see [state operation options](#optional-behaviors)
 
+The optional request metadata is passed via URL query parameters. For example,
+```
+DELETE http://localhost:3500/v1.0/state/myStore/myKey?metadata.contentType=application/json
+```
+
 > Note, all URL parameters are case-sensitive.
 
 #### Request Headers
@@ -289,7 +317,7 @@ None.
 ### Example
 
 ```shell
-curl -X "DELETE" http://localhost:3500/v1.0/state/starwars/planet -H "If-Match: xxxxxxx"
+curl -X DELETE http://localhost:3500/v1.0/state/starwars/planet -H "If-Match: xxxxxxx"
 ```
 
 ## Query state
@@ -314,6 +342,11 @@ Parameter | Description
 `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above.
 `metadata` | (optional) Metadata as query parameters to the state store
 
+The optional request metadata is passed via URL query parameters. For example,
+```
+POST http://localhost:3500/v1.0-alpha1/state/myStore/query?metadata.contentType=application/json
+```
+
 > Note, all URL parameters are case-sensitive.
 
 #### Response Codes
@@ -331,21 +364,21 @@ An array of JSON-encoded values
 ### Example
 
 ```shell
-curl http://localhost:3500/v1.0-alpha1/state/myStore/query \
+curl -X POST http://localhost:3500/v1.0-alpha1/state/myStore/query?metadata.contentType=application/json \
   -H "Content-Type: application/json" \
   -d '{
         "filter": {
           "OR": [
             {
-              "EQ": { "value.person.org": "Dev Ops" }
+              "EQ": { "person.org": "Dev Ops" }
             },
             {
               "AND": [
                 {
-                  "EQ": { "value.person.org": "Finance" }
+                  "EQ": { "person.org": "Finance" }
                 },
                 {
-                  "IN": { "value.state": [ "CA", "WA" ] }
+                  "IN": { "state": [ "CA", "WA" ] }
                 }
               ]
             }
@@ -353,11 +386,11 @@ curl http://localhost:3500/v1.0-alpha1/state/myStore/query \
         },
         "sort": [
           {
-            "key": "value.state",
+            "key": "state",
             "order": "DESC"
           },
           {
-            "key": "value.person.id"
+            "key": "person.id"
           }
         ],
         "page": {
@@ -420,9 +453,9 @@ POST http://localhost:3500/v1.0-alpha1/state/myStore/query?metadata.partitionKey
 
 ## State transactions
 
-Persists the changes to the state store as a multi-item transaction.
+Persists the changes to the state store as a [transactional operation]({{< ref "state-management-overview.md#transactional-operations" >}}).
 
-> This operation depends on a state store component that supports multi-item transactions.
+> This API depends on a state store component that supports transactions.
 
 Refer to the [state store component spec]({{< ref "supported-state-stores.md" >}}) for a full, current list of state stores that support transactions.
 
@@ -447,26 +480,39 @@ Parameter | Description
 `daprPort` | The Dapr port
 `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above.
 
+The optional request metadata is passed via URL query parameters. For example,
+```
+POST http://localhost:3500/v1.0/state/myStore/transaction?metadata.contentType=application/json
+```
+
 > Note, all URL parameters are case-sensitive.
 
 #### Request Body
 
 Field | Description
 ---- | -----------
-`operations` | A JSON array of state operation
-`metadata` | (optional) The metadata for transaction that applies to all operations
+`operations` | A JSON array of state `operation`
+`metadata` | (optional) The `metadata` for the transaction that applies to all operations
 
-Each state operation is comprised with the following fields:
+All transactional databases implement the following required operations:
 
-Field | Description
+Operation | Description
+--------- | -----------
+`upsert` | Adds or updates the value
+`delete` | Deletes the value
+
+Each operation has an associated `request` that is comprised of the following fields:
+
+Request | Description
 ---- | -----------
 `key` | State key
 `value` | State value, which can be any byte array
 `etag` | (optional) State ETag
-`metadata` | (optional) Additional key-value pairs to be passed to the state store
+`metadata` | (optional) Additional key-value pairs to be passed to the state store that apply for this operation
 `options` | (optional) State operation options; see [state operation options](#optional-behaviors)
 
 #### Examples
+The example below shows an `upsert` operation for `key1` and a `delete` operation for `key2`. This is applied to the partition named 'planet' in the state store. Both operations either succeed or fail in the transaction.
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state/starwars/transaction \

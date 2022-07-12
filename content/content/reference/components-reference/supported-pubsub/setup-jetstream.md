@@ -25,6 +25,10 @@ spec:
   metadata:
   - name: natsURL
     value: "nats://localhost:4222"
+  - name: jwt
+    value: "eyJhbGciOiJ...6yJV_adQssw5c" # Optional. Used for decentralized JWT authentication
+  - name: seedKey
+    value: "SUACS34K232O...5Z3POU7BNIL4Y" # Optional. Used for decentralized JWT authentication
   - name: name
     value: "connection name"
   - name: durableName
@@ -46,6 +50,8 @@ spec:
 | Field          | Required | Details | Example |
 |----------------|:--------:|---------|---------|
 | natsURL        |        Y | NATS server address URL   | "`nats://localhost:4222`"|
+| jwt            |        N | NATS decentralized authentication JWT | "`eyJhbGciOiJ...6yJV_adQssw5c`"|
+| seedKey        |        N | NATS decentralized authentication seed key | "`SUACS34K232O...5Z3POU7BNIL4Y`"|
 | name           |        N | NATS connection name | `"my-conn-name"`|
 | durableName    |        N | [Durable name] | `"my-durable"` |
 | queueGroupName |        N | Queue group name | `"my-queue"` |
@@ -73,11 +79,17 @@ Install NATS JetStream on Kubernetes by using the [helm](https://github.com/nats
 
 ```bash
 helm repo add nats https://nats-io.github.io/k8s/helm/charts/
-helm install my-nats nats/nats
+helm install --set nats.jetstream.enabled=true my-nats nats/nats
 ```
 
-This installs a single NATS server into the `default` namespace. To interact
-with NATS, find the service with: `kubectl get svc my-nats`.
+This installs a single NATS server into the `default` namespace. To interact with NATS, find the service with: 
+
+```bash
+kubectl get svc my-nats
+```
+
+For more information on helm chart settings, see the [Helm chart documentation](https://helm.sh/docs/helm/helm_install/). 
+
 {{% /codetab %}}
 
 {{< /tabs >}}
@@ -103,3 +115,4 @@ nats -s localhost:4222 stream add myStream --subjects mySubject
 [Start Time]: https://docs.nats.io/jetstream/concepts/consumers#deliverbystarttime
 [Replay Policy]: https://docs.nats.io/jetstream/concepts/consumers#replaypolicy
 [Flow Control]: https://docs.nats.io/jetstream/concepts/consumers#flowcontrol
+[Decentralized JWT Authentication/Authorization]: https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/jwt

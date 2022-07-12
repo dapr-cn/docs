@@ -7,7 +7,7 @@ aliases:
 - /zh-hans/developing-applications/middleware/supported-middleware/middleware-routerchecker/
 ---
 
-The RouterChecker HTTP [middleware]({{< ref middleware.md >}}) component leverages regexp to check the validity of HTTP request routing to prevent invalid routers from entering the Dapr cluster. In turn, filtering out bad requests, and reducing noise in the telemetry and log data.
+The RouterChecker HTTP [middleware]({{< ref middleware.md >}}) component leverages regexp to check the validity of HTTP request routing to prevent invalid routers from entering the Dapr cluster. In turn, the RouterChecker component filters out bad requests and reduces noise in the telemetry and log data.
 
 ## Component format
 
@@ -20,7 +20,7 @@ metadata:
   name: routerchecker 
 spec:
   type: middleware.http.routerchecker
-  version: v1
+  version: v1gi
   metadata:
   - name: rule
     value: "^[A-Za-z0-9/._-]+$"

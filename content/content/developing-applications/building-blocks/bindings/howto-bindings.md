@@ -6,31 +6,36 @@ description: "Invoke external systems with output bindings"
 weight: 300
 ---
 
-Output bindings enable you to invoke external resources without taking dependencies on special SDK or libraries.
-For a complete sample showing output bindings, visit this [link](https://github.com/dapr/quickstarts/tree/master/tutorials/bindings).
+With output bindings, you can invoke external resources. An optional payload and metadata can be sent with the invocation request.
 
-## Example:
+<img src="/images/howto-bindings/kafka-output-binding.png" width=1000 alt="Diagram showing bindings of example service">
 
-The below code example loosely describes an application that processes orders. In the example, there is an order processing service which has a Dapr sidecar. The order processing service uses Dapr to invoke external resources, in this case a Kafka, via an output binding.
+This guide uses a Kafka binding as an example. You can find your preferred binding spec from [the list of bindings components]({{< ref setup-bindings >}}). In this guide:
 
-<img src="/images/building-block-output-binding-example.png" width=1000 alt="Diagram showing bindings of example service">
+1. The example invokes the `/binding` endpoint with `checkout`, the name of the binding to invoke.
+1. The payload goes inside the mandatory `data` field, and can be any JSON serializable value.
+1. The `operation` field tells the binding what action it needs to take. For example, [the Kafka binding supports the `create` operation]({{< ref "kafka.md#binding-support" >}}).
+   - You can check [which operations (specific to each component) are supported for every output binding]({{< ref supported-bindings >}}).
 
-## 1. Create a binding
+{{% alert title="Note" color="primary" %}}
+ If you haven't already, [try out the bindings quickstart]({{< ref bindings-quickstart.md >}}) for a quick walk-through on how to use the bindings API.
 
-An output binding represents a resource that Dapr uses to invoke and send messages to.
+{{% /alert %}}
 
-For the purpose of this guide, you'll use a Kafka binding. You can find a list of the different binding specs [here]({{< ref setup-bindings >}}).
+## Create a binding
 
-Create a new binding component with the name of `checkout`.
+Create a `binding.yaml` file and save to a `components` sub-folder in your application directory.
 
-Inside the `metadata` section, configure Kafka related properties such as the topic to publish the message to and the broker.
+Create a new binding component named `checkout`. Within the `metadata` section, configure the following Kafka-related properties:
+
+- The topic to which you'll publish the message
+- The broker
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
-Create the following YAML file, named `binding.yaml`, and save this to a `components` sub-folder in your application directory.
-(Use the `--components-path` flag with `dapr run` to point to your custom components dir)
+Use the `--components-path` flag with `dapr run` to point to your custom components directory.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -60,8 +65,7 @@ spec:
 
 {{% codetab %}}
 
-To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [desired binding component]({{< ref setup-bindings >}}) in the yaml below (in this case kafka), save as `binding.yaml`, and run `kubectl apply -f binding.yaml`.
-
+To deploy the following `binding.yaml` file into a Kubernetes cluster, run `kubectl apply -f binding.yaml`.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -91,11 +95,11 @@ spec:
 
 {{< /tabs >}}
 
-## 2. Send an event (Output binding)
+## Send an event (output binding)
 
-Below are code examples that leverage Dapr SDKs to interact with an output binding.
+The code examples below leverage Dapr SDKs to invoke the output bindings endpoint on a running Dapr instance. 
 
-{{< tabs Dotnet Java Python Go Javascript>}}
+{{< tabs Dotnet Java Python Go JavaScript>}}
 
 {{% codetab %}}
 
@@ -117,9 +121,10 @@ namespace EventService
     {
         static async Task Main(string[] args)
         {
-           string BINDING_NAME = "checkout";
-		   string BINDING_OPERATION = "create";
-           while(true) {
+            string BINDING_NAME = "checkout";
+            string BINDING_OPERATION = "create";
+            while(true)
+            {
                 System.Threading.Thread.Sleep(5000);
                 Random random = new Random();
                 int orderId = random.Next(1,1000);
@@ -127,17 +132,11 @@ namespace EventService
                 //Using Dapr SDK to invoke output binding
                 await client.InvokeBindingAsync(BINDING_NAME, BINDING_OPERATION, orderId);
                 Console.WriteLine("Sending message: " + orderId);
-		    }
+            }
         }
     }
 }
 
-```
-
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
-
-```bash
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --app-ssl dotnet run
 ```
 
 {{% /codetab %}}
@@ -178,12 +177,6 @@ public class OrderProcessingServiceApplication {
 
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
-
-```bash
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
-```
-
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -210,12 +203,6 @@ while True:
     logging.basicConfig(level = logging.INFO)
     logging.info('Sending message: ' + str(orderId))
     
-```
-
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
-
-```bash
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --app-protocol grpc python3 OrderProcessingService.py
 ```
 
 {{% /codetab %}}
@@ -256,75 +243,53 @@ func main() {
     
 ```
 
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
-
-```bash
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
-```
-
 {{% /codetab %}}
 
 {{% codetab %}}
 
 ```javascript
 //dependencies
-
-import { DaprServer, DaprClient, CommunicationProtocolEnum } from 'dapr-client'; 
+import { DaprClient, CommunicationProtocolEnum } from "dapr-client";
 
 //code
-const daprHost = "127.0.0.1"; 
+const daprHost = "127.0.0.1";
 
-var main = function() {
-    for(var i=0;i<10;i++) {
-        sleep(5000);
-        var orderId = Math.floor(Math.random() * (1000 - 1) + 1);
-        start(orderId).catch((e) => {
+(async function () {
+    for (var i = 0; i < 10; i++) {
+        await sleep(2000);
+        const orderId = Math.floor(Math.random() * (1000 - 1) + 1);
+        try {
+            await sendOrder(orderId)
+        } catch (err) {
             console.error(e);
             process.exit(1);
-        });
+        }
     }
-}
+})();
 
-async function start(orderId) {
+async function sendOrder(orderId) {
     const BINDING_NAME = "checkout";
     const BINDING_OPERATION = "create";
     const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
     //Using Dapr SDK to invoke output binding
-    const result = await client.binding.send(BINDING_NAME, BINDING_OPERATION, { orderId: orderId });
+    const result = await client.binding.send(BINDING_NAME, BINDING_OPERATION, orderId);
     console.log("Sending message: " + orderId);
 }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-main();
-    
-```
-
-Navigate to the directory containing the above code, then run the following command to launch a Dapr sidecar and run the application:
-
-```bash
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
 ```
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-All that's left now is to invoke the output bindings endpoint on a running Dapr instance.
-
 You can also invoke the output bindings endpoint using HTTP:
 
 ```bash
-curl -X POST -H 'Content-Type: application/json' http://localhost:3601/v1.0/bindings/checkout -d '{ "data": { "orderId": "100" }, "operation": "create" }'
+curl -X POST -H 'Content-Type: application/json' http://localhost:3601/v1.0/bindings/checkout -d '{ "data": 100, "operation": "create" }'
 ```
-
-As seen above, you invoked the `/binding` endpoint with the name of the binding to invoke, in our case its `checkout`.
-The payload goes inside the mandatory `data` field, and can be any JSON serializable value.
-
-You'll also notice that there's an `operation` field that tells the binding what you need it to do.
-You can check [here]({{< ref supported-bindings >}}) which operations are supported for every output binding.
 
 Watch this [video](https://www.youtube.com/watch?v=ysklxm81MTs&feature=youtu.be&t=1960) on how to use bi-directional output bindings.
 

@@ -2,8 +2,8 @@
 type: docs
 title: "Quickstart: State Management"
 linkTitle: "State Management"
-weight: 70
-description: "Get started with Dapr's State Store"
+weight: 72
+description: "Get started with Dapr's State Management building block"
 ---
 
 Let's take a look at Dapr's [State Management building block]({{< ref state-management >}}). In this Quickstart, you will save, get, and delete state using a Redis state store, but you can swap this out for any one of the [supported state stores]({{< ref supported-state-stores.md >}}).
@@ -22,7 +22,9 @@ For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
 - [Python 3.7+ installed](https://www.python.org/downloads/).
-- [Docker Desktop](https://www.docker.com/products/docker-desktop).
+<!-- IGNORE_LINKS -->
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+<!-- END_IGNORE -->
 
 ### Step 1: Set up the environment
 
@@ -134,7 +136,9 @@ For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
 - [Latest Node.js installed](https://nodejs.org/download/).
+<!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
+<!-- END_IGNORE -->
 
 ### Step 1: Set up the environment
 
@@ -264,7 +268,9 @@ For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
 - [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
+<!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
+<!-- END_IGNORE -->
 
 ### Step 1: Set up the environment
 
@@ -279,7 +285,7 @@ git clone https://github.com/dapr/quickstarts.git
 In a terminal window, navigate to the `order-processor` directory.
 
 ```bash
-cd pub_sub/csharp/sdk/order-processor
+cd state_management/csharp/sdk/order-processor
 ```
 
 Recall NuGet packages:
@@ -380,9 +386,11 @@ For this example, you will need:
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
 - Java JDK 11 (or greater):
   - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
-  - [OpenJDK](https://jdk.java.net/13/)
+  - OpenJDK
 - [Apache Maven](https://maven.apache.org/install.html), version 3.x.
+<!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
+<!-- END_IGNORE -->
 
 ### Step 1: Set up the environment
 
@@ -406,7 +414,7 @@ Install the dependencies:
 mvn clean install
 ```
 
-Run the `order-processor` publisher service alongside a Dapr sidecar.
+Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
 dapr run --app-id order-processor --components-path ../../../components -- java -jar target/order-processor-0.0.1-SNAPSHOT.jar
@@ -499,7 +507,9 @@ For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
 - [Latest version of Go](https://go.dev/dl/).
+<!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
+<!-- END_IGNORE -->
 
 ### Step 1: Set up the environment
 

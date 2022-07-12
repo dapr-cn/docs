@@ -2,7 +2,7 @@
 type: docs
 title: "Quickstart: Service Invocation"
 linkTitle: "Service Invocation"
-weight: 70
+weight: 71
 description: "Get started with Dapr's Service Invocation building block"
 ---
 
@@ -178,7 +178,7 @@ npm install
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-port 6001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- npm start
+dapr run --app-port 5001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- npm start
 ```
 
 ```javascript
@@ -388,7 +388,7 @@ For this example, you will need:
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
 - Java JDK 11 (or greater):
   - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
-  - [OpenJDK](https://jdk.java.net/13/)
+  - OpenJDK
 - [Apache Maven](https://maven.apache.org/install.html), version 3.x.
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
@@ -420,7 +420,7 @@ mvn clean install
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id order-processor --app-port 6001 --app-protocol http --dapr-http-port 3501 -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
+dapr run --app-id order-processor --app-port 9001 --app-protocol http --dapr-http-port 3501 -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
 ```java
@@ -537,7 +537,7 @@ go build app.go
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-port 5001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- go run app.go
+dapr run --app-port 6001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- go run app.go
 ```
 
 Each order is received via an HTTP POST request and processed by the

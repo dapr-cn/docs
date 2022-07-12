@@ -93,6 +93,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/pubsub/howto-publish-subscribe.md
     - source: /content/content/developing-applications/building-blocks/pubsub/howto-route-messages.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/pubsub/howto-route-messages.md
+    - source: /content/content/developing-applications/building-blocks/pubsub/pubsub-cloudevents.md
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/pubsub/pubsub-cloudevents.md
     - source: /content/content/developing-applications/building-blocks/pubsub/pubsub-message-ttl.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/pubsub/pubsub-message-ttl.md
     - source: /content/content/developing-applications/building-blocks/pubsub/pubsub-overview.md
@@ -101,6 +103,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/pubsub/pubsub-raw.md
     - source: /content/content/developing-applications/building-blocks/pubsub/pubsub-scopes.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/pubsub/pubsub-scopes.md
+    - source: /content/content/developing-applications/building-blocks/pubsub/subscription-methods.md
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/pubsub/subscription-methods.md
     - source: /content/content/developing-applications/building-blocks/pubsub/_index.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/pubsub/_index.md
     - source: /content/content/developing-applications/building-blocks/secrets/howto-secrets.md
@@ -147,8 +151,10 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query3-token.json
     - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/query3.json
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/query3.json
-    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/components/mongodb.yml
-      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/components/mongodb.yml
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/components/mongodb/mongodb.yml
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/components/mongodb/mongodb.yml
+    - source: /content/content/developing-applications/building-blocks/state-management/query-api-examples/components/redis/redis.yml
+      translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-api-examples/components/redis/redis.yml
     - source: /content/content/developing-applications/building-blocks/state-management/query-state-store/query-cosmosdb-store.md
       translation: /translated_content/%locale_with_underscore%/content/developing-applications/building-blocks/state-management/query-state-store/query-cosmosdb-store.md
     - source: /content/content/developing-applications/building-blocks/state-management/query-state-store/query-redis-store.md
@@ -217,8 +223,12 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/getting-started/install-dapr-selfhost.md
     - source: /content/content/getting-started/_index.md
       translation: /translated_content/%locale_with_underscore%/content/getting-started/_index.md
+    - source: /content/content/getting-started/quickstarts/bindings-quickstart.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts/bindings-quickstart.md
     - source: /content/content/getting-started/quickstarts/pubsub-quickstart.md
       translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts/pubsub-quickstart.md
+    - source: /content/content/getting-started/quickstarts/secrets-quickstart.md
+      translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts/secrets-quickstart.md
     - source: /content/content/getting-started/quickstarts/serviceinvocation-quickstart.md
       translation: /translated_content/%locale_with_underscore%/content/getting-started/quickstarts/serviceinvocation-quickstart.md
     - source: /content/content/getting-started/quickstarts/statemanagement-quickstart.md
@@ -241,6 +251,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/operations/components/component-scopes.md
     - source: /content/content/operations/components/component-secrets.md
       translation: /translated_content/%locale_with_underscore%/content/operations/components/component-secrets.md
+    - source: /content/content/operations/components/component-updates.md
+      translation: /translated_content/%locale_with_underscore%/content/operations/components/component-updates.md
     - source: /content/content/operations/components/setup-bindings.md
       translation: /translated_content/%locale_with_underscore%/content/operations/components/setup-bindings.md
     - source: /content/content/operations/components/setup-secret-store.md
@@ -299,6 +311,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/kubernetes/cluster/setup-minikube.md
     - source: /content/content/operations/hosting/kubernetes/cluster/_index.md
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/kubernetes/cluster/_index.md
+    - source: /content/content/operations/hosting/self-hosted/self-hosted-airgap.md
+      translation: /translated_content/%locale_with_underscore%/content/operations/hosting/self-hosted/self-hosted-airgap.md
     - source: /content/content/operations/hosting/self-hosted/self-hosted-no-docker.md
       translation: /translated_content/%locale_with_underscore%/content/operations/hosting/self-hosted/self-hosted-no-docker.md
     - source: /content/content/operations/hosting/self-hosted/self-hosted-overview.md
@@ -361,6 +375,14 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/operations/performance-and-scalability/perf-service-invocation.md
     - source: /content/content/operations/performance-and-scalability/_index.md
       translation: /translated_content/%locale_with_underscore%/content/operations/performance-and-scalability/_index.md
+    - source: /content/content/operations/resiliency/policies.md
+      translation: /translated_content/%locale_with_underscore%/content/operations/resiliency/policies.md
+    - source: /content/content/operations/resiliency/resiliency-overview.md
+      translation: /translated_content/%locale_with_underscore%/content/operations/resiliency/resiliency-overview.md
+    - source: /content/content/operations/resiliency/targets.md
+      translation: /translated_content/%locale_with_underscore%/content/operations/resiliency/targets.md
+    - source: /content/content/operations/resiliency/_index.md
+      translation: /translated_content/%locale_with_underscore%/content/operations/resiliency/_index.md
     - source: /content/content/operations/security/api-token.md
       translation: /translated_content/%locale_with_underscore%/content/operations/security/api-token.md
     - source: /content/content/operations/security/app-api-token.md
@@ -381,6 +403,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/operations/support/support-versioning.md
     - source: /content/content/operations/support/_index.md
       translation: /translated_content/%locale_with_underscore%/content/operations/support/_index.md
+    - source: /content/content/operations/troubleshooting/api-logs-troubleshooting.md
+      translation: /translated_content/%locale_with_underscore%/content/operations/troubleshooting/api-logs-troubleshooting.md
     - source: /content/content/operations/troubleshooting/common_issues.md
       translation: /translated_content/%locale_with_underscore%/content/operations/troubleshooting/common_issues.md
     - source: /content/content/operations/troubleshooting/logs-troubleshooting.md
@@ -453,6 +477,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/reference/cli/dapr-mtls/dapr-mtls-expiry.md
     - source: /content/content/reference/cli/dapr-mtls/dapr-mtls-export.md
       translation: /translated_content/%locale_with_underscore%/content/reference/cli/dapr-mtls/dapr-mtls-export.md
+    - source: /content/content/reference/cli/dapr-mtls/dapr-mtls-renew-certificate.md
+      translation: /translated_content/%locale_with_underscore%/content/reference/cli/dapr-mtls/dapr-mtls-renew-certificate.md
     - source: /content/content/reference/cli/dapr-mtls/_index.md
       translation: /translated_content/%locale_with_underscore%/content/reference/cli/dapr-mtls/_index.md
     - source: /content/content/reference/components-reference/_index.md
@@ -627,6 +653,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-azure-tablestorage.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-cassandra.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-cassandra.md
+    - source: /content/content/reference/components-reference/supported-state-stores/setup-cockroachdb.md
+      translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-cockroachdb.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-consul.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-consul.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-couchbase.md
@@ -637,6 +665,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-firestore.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-hazelcast.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-hazelcast.md
+    - source: /content/content/reference/components-reference/supported-state-stores/setup-jetstream-kv.md
+      translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-jetstream-kv.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-memcached.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-memcached.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-mongodb.md
@@ -645,6 +675,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-mysql.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-oci-objectstorage.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-oci-objectstorage.md
+    - source: /content/content/reference/components-reference/supported-state-stores/setup-oracledatabase.md
+      translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-oracledatabase.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-postgresql.md
       translation: /translated_content/%locale_with_underscore%/content/reference/components-reference/supported-state-stores/setup-postgresql.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-redis.md
@@ -717,8 +749,14 @@ files:
       translation: /translated_content/%locale_with_underscore%/sdks_js/_index.md
     - source: /content/sdks_js/js-actors/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_js/js-actors/_index.md
+    - source: /content/sdks_js/js-client/dapr-client.jpg
+      translation: /translated_content/%locale_with_underscore%/sdks_js/js-client/dapr-client.jpg
     - source: /content/sdks_js/js-client/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_js/js-client/_index.md
+    - source: /content/sdks_js/js-server/dapr-server.jpg
+      translation: /translated_content/%locale_with_underscore%/sdks_js/js-server/dapr-server.jpg
+    - source: /content/sdks_js/js-server/_index.md
+      translation: /translated_content/%locale_with_underscore%/sdks_js/js-server/_index.md
     - source: /content/sdks_php/php-serialization.md
       translation: /translated_content/%locale_with_underscore%/sdks_php/php-serialization.md
     - source: /content/sdks_php/_index.md

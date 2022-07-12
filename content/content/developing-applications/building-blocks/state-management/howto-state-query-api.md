@@ -3,36 +3,28 @@ type: docs
 title: "How-To: Query state"
 linkTitle: "How-To: Query state"
 weight: 250
-description: "API for querying state stores"
+description: "Use the Query API for querying state stores"
 ---
 
 {{% alert title="alpha" color="warning" %}}
 The state query API is in **alpha** stage.
 {{% /alert %}}
 
-## Introduction
+With the state query API, you can retrieve, filter, and sort the key/value data stored in state store components. The query API is not a replacement for a complete query language.
 
-The state query API provides a way of querying the key/value data stored in state store components. This query API is not a replacement for a complete query language, and is focused on retrieving, filtering and sorting key/value data that you have saved through the state management APIs.
-
-Even though the state store is a key/value store, the `value` might be a JSON document with its own hierarchy, keys, and values.
-The query API allows you to use those keys and values to retrive corresponding documents.
-
-### Limitations
-The state query API has the following limitations:
-
- - The API does not support querying of actor state stored in a state store. For that you need to use the query API for the specific database. See [querying actor state]({{< ref "state-management-overview.md#querying-actor-state" >}}).
- - The API does not work with Dapr [encrypted state stores]({{<ref howto-encrypt-state>}}) capability. Since the encryption is done by the Dapr runtime and stored as encrypted data, then this effectively prevents server side querying. 
- 
- 
-
-You can find additional information in the [related links]({{< ref "#related-links" >}}) section.
+Even though the state store is a key/value store, the `value` might be a JSON document with its own hierarchy, keys, and values. The query API allows you to use those keys/values to retrieve corresponding documents.
 
 ## Querying the state
 
-You submit query requests via HTTP POST/PUT or gRPC.
-The body of the request is the JSON map with 3 entries: `filter`, `sort`, and `page`.
+Submit query requests via HTTP POST/PUT or gRPC. The body of the request is the JSON map with 3 _optional_ entries:
 
-The `filter` is an optional section. It specifies the query conditions in the form of a tree of key/value operations, where the key is the operator and the value is the operands.
+- `filter`
+- `sort`
+- `page`
+
+### `filter`
+
+The `filter` specifies the query conditions in the form of a tree, where each node represents either unary or multi-operand operation.
 
 The following operations are supported:
 
@@ -43,61 +35,99 @@ The following operations are supported:
 | `AND`    | []operation |  operation[0] AND operation[1] AND ... AND operation[n] |
 | `OR`     | []operation |  operation[0] OR operation[1] OR ... OR operation[n] |
 
-If `filter` section is omitted, the query returns all entries.
+The `key` in the operand is similar to the JSONPath notation. Each dot in the key indicates a nested JSON structure. For example, consider this structure:
 
-The `sort` is an optional section and is an ordered array of `key:order` pairs, where `key` is a key in the state store, and the `order` is an optional string indicating sorting order: `"ASC"` for ascending and `"DESC"` for descending. If omitted, ascending order is the default.
+```json
+{
+  "shape": {
+    "name": "rectangle",
+    "dimensions": {
+      "height": 24,
+      "width": 10
+    },
+    "color": {
+      "name": "red",
+      "code": "#FF0000"
+    }
+  }
+}
+```
 
-The `page` is an optional section containing `limit` and `token` parameters. `limit` sets the page size. `token` is an iteration token returned by the component, and is used in subsequent queries.
+To compare the value of the color code, the key will be `shape.color.code`. 
 
-For some background understanding, this query request is translated into the native query language and executed by the state store component.
+If the `filter` section is omitted, the query returns all entries.
+
+### `sort`
+
+The `sort` is an ordered array of `key:order` pairs, where:
+
+- `key` is a key in the state store
+- `order` is an optional string indicating sorting order:
+  - `"ASC"` for ascending
+  - `"DESC"` for descending  
+  If omitted, ascending order is the default.
+
+### `page`
+
+The `page` contains `limit` and `token` parameters.
+
+- `limit` sets the page size.
+- `token` is an iteration token returned by the component, used in subsequent queries.
+
+Behind the scenes, this query request is translated into the native query language and executed by the state store component.
 
 ## Example data and query
 
-Let's look at some real examples, starting with simple and progressing towards more complex ones.
+Let's look at some real examples, ranging from simple to complex.
 
-As a dataset, let's consider a [collection of with employee records](../query-api-examples/dataset.json) containing employee ID, organization, state, and city.
-Notice that this dataset is an array of key/value pairs where `key` is the unique ID, and the `value` is the JSON object with employee record.
-To better illustrate functionality, let's have organization name (org) and employee ID (id) as a nested JSON person object.
+As a dataset, consider a [collection of employee records](../query-api-examples/dataset.json) containing employee ID, organization, state, and city. Notice that this dataset is an array of key/value pairs, where:
 
-First, you need to create an instance of MongoDB, which is your state store.
+- `key` is the unique ID
+- `value` is the JSON object with employee record.
+
+To better illustrate functionality, organization name (org) and employee ID (id) are a nested JSON person object.
+
+Get started by creating an instance of MongoDB, which is your state store.
+
 ```bash
 docker run -d --rm -p 27017:27017 --name mongodb mongo:5
 ```
 
-Next is to start a Dapr application. Refer to this [component configuration file](../query-api-examples/components/mongodb.yml), which instructs Dapr to use MongoDB as its state store.
+Next, start a Dapr application. Refer to the [component configuration file](../query-api-examples/components/mongodb/mongodb.yml), which instructs Dapr to use MongoDB as its state store.
+
 ```bash
-dapr run --app-id demo --dapr-http-port 3500 --components-path query-api-examples/components
+dapr run --app-id demo --dapr-http-port 3500 --components-path query-api-examples/components/mongodb
 ```
 
-Now populate the state store with the employee dataset, so you can then query it later.
+Populate the state store with the employee dataset, so you can query it later.
+
 ```bash
 curl -X POST -H "Content-Type: application/json" -d @query-api-examples/dataset.json http://localhost:3500/v1.0/state/statestore
 ```
 
-Once populated, you can examine the data in the state store. The image below a section of the MongoDB UI displaying employee records.
-<table><tr><td>
-    <img src="/images/state-management-query-mongodb-dataset.png" width=500 alt="Sample dataset" class="center">
-</td></tr></table>
+Once populated, you can examine the data in the state store. In the image below, a section of the MongoDB UI displays employee records.
+
+<img src="/images/state-management-query-mongodb-dataset.png" width=500 alt="Sample dataset" class="center">
 
 Each entry has the `_id` member as a concatenated object key, and the `value` member containing the JSON record.
 
 The query API allows you to select records from this JSON structure.
 
-Now you can run the queries.
+Now you can run the example queries.
 
 ### Example 1
 
-First, let's find all employees in the state of California and sort them by their employee ID in descending order.
+First, find all employees in the state of California and sort them by their employee ID in descending order.
 
 This is the [query](../query-api-examples/query1.json):
 ```json
 {
     "filter": {
-        "EQ": { "value.state": "CA" }
+        "EQ": { "state": "CA" }
     },
     "sort": [
         {
-            "key": "value.person.id",
+            "key": "person.id",
             "order": "DESC"
         }
     ]
@@ -105,28 +135,38 @@ This is the [query](../query-api-examples/query1.json):
 ```
 
 An equivalent of this query in SQL is:
+
 ```sql
 SELECT * FROM c WHERE
-  value.state = "CA"
+  state = "CA"
 ORDER BY
-  value.person.id DESC
+  person.id DESC
 ```
 
 Execute the query with the following command:
+
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
+
 {{% codetab %}}
+
 ```bash
 curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query1.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
 ```
+
 {{% /codetab %}}
+
 {{% codetab %}}
+
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query1.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
 ```
+
 {{% /codetab %}}
+
 {{< /tabs >}}
 
 The query result is an array of matching key/value pairs in the requested order:
+
 ```json
 {
   "results": [
@@ -184,46 +224,57 @@ The query result is an array of matching key/value pairs in the requested order:
 
 ### Example 2
 
-Let's now find all employees from the "Dev Ops" and "Hardware" organizations.
+Now, find all employees from the "Dev Ops" and "Hardware" organizations.
 
 This is the [query](../query-api-examples/query2.json):
+
 ```json
 {
     "filter": {
-        "IN": { "value.person.org": [ "Dev Ops", "Hardware" ] }
+        "IN": { "person.org": [ "Dev Ops", "Hardware" ] }
     }
 }
 ```
 
 An equivalent of this query in SQL is:
+
 ```sql
 SELECT * FROM c WHERE
-  value.person.org IN ("Dev Ops", "Hardware")
+  person.org IN ("Dev Ops", "Hardware")
 ```
 
 Execute the query with the following command:
+
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
+
 {{% codetab %}}
+
 ```bash
 curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query2.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
 ```
+
 {{% /codetab %}}
+
 {{% codetab %}}
+
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query2.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
 ```
+
 {{% /codetab %}}
+
 {{< /tabs >}}
 
 Similar to the previous example, the result is an array of matching key/value pairs.
 
 ### Example 3
 
-In this example let's find all employees from the "Dev Ops" department
-and those employees from the "Finance" departing residing in the states of Washington and California.
+In this example, find:
 
-In addition, let's sort the results first by state in descending alphabetical order, and then by employee ID in ascending order.
-Also, let's process up to 3 records at a time.
+- All employees from the "Dev Ops" department.
+- Employees from the "Finance" departing residing in the states of Washington and California.
+
+In addition, sort the results first by state in descending alphabetical order, then by employee ID in ascending order. Let's process up to 3 records at a time.
 
 This is the [query](../query-api-examples/query3.json):
 
@@ -232,15 +283,15 @@ This is the [query](../query-api-examples/query3.json):
     "filter": {
         "OR": [
             {
-                "EQ": { "value.person.org": "Dev Ops" }
+                "EQ": { "person.org": "Dev Ops" }
             },
             {
                 "AND": [
                     {
-                        "EQ": { "value.person.org": "Finance" }
+                        "EQ": { "person.org": "Finance" }
                     },
                     {
-                        "IN": { "value.state": [ "CA", "WA" ] }
+                        "IN": { "state": [ "CA", "WA" ] }
                     }
                 ]
             }
@@ -248,11 +299,11 @@ This is the [query](../query-api-examples/query3.json):
     },
     "sort": [
         {
-            "key": "value.state",
+            "key": "state",
             "order": "DESC"
         },
         {
-            "key": "value.person.id"
+            "key": "person.id"
         }
     ],
     "page": {
@@ -262,31 +313,41 @@ This is the [query](../query-api-examples/query3.json):
 ```
 
 An equivalent of this query in SQL is:
+
 ```sql
 SELECT * FROM c WHERE
-  value.person.org = "Dev Ops" OR
-  (value.person.org = "Finance" AND value.state IN ("CA", "WA"))
+  person.org = "Dev Ops" OR
+  (person.org = "Finance" AND state IN ("CA", "WA"))
 ORDER BY
-  value.state DESC,
-  value.person.id ASC
+  state DESC,
+  person.id ASC
 LIMIT 3
 ```
 
 Execute the query with the following command:
+
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
+
 {{% codetab %}}
+
 ```bash
 curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query3.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
 ```
+
 {{% /codetab %}}
+
 {{% codetab %}}
+
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query3.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
 ```
+
 {{% /codetab %}}
+
 {{< /tabs >}}
 
 Upon successful execution, the state store returns a JSON object with a list of matching records and the pagination token:
+
 ```json
 {
   "results": [
@@ -338,15 +399,15 @@ The pagination token is used "as is" in the [subsequent query](../query-api-exam
     "filter": {
         "OR": [
             {
-                "EQ": { "value.person.org": "Dev Ops" }
+                "EQ": { "person.org": "Dev Ops" }
             },
             {
                 "AND": [
                     {
-                        "EQ": { "value.person.org": "Finance" }
+                        "EQ": { "person.org": "Finance" }
                     },
                     {
-                        "IN": { "value.state": [ "CA", "WA" ] }
+                        "IN": { "state": [ "CA", "WA" ] }
                     }
                 ]
             }
@@ -354,11 +415,11 @@ The pagination token is used "as is" in the [subsequent query](../query-api-exam
     },
     "sort": [
         {
-            "key": "value.state",
+            "key": "state",
             "order": "DESC"
         },
         {
-            "key": "value.person.id"
+            "key": "person.id"
         }
     ],
     "page": {
@@ -369,19 +430,27 @@ The pagination token is used "as is" in the [subsequent query](../query-api-exam
 ```
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
+
 {{% codetab %}}
+
 ```bash
 curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query3-token.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
 ```
+
 {{% /codetab %}}
+
 {{% codetab %}}
+
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query3-token.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
 ```
+
 {{% /codetab %}}
+
 {{< /tabs >}}
 
 And the result of this query is:
+
 ```json
 {
   "results": [
@@ -425,9 +494,21 @@ And the result of this query is:
   "token": "6"
 }
 ```
+
 That way you can update the pagination token in the query and iterate through the results until no more records are returned.
 
+## Limitations
+
+The state query API has the following limitations:
+
+- To query actor states stored in a state store, you need to use the query API for the specific database. See [querying actor state]({{< ref "state-management-overview.md#querying-actor-state" >}}).
+- The API does not work with Dapr [encrypted state stores]({{< ref howto-encrypt-state >}}) capability. Since the encryption is done by the Dapr runtime and stored as encrypted data, then this effectively prevents server side querying.
+
+You can find additional information in the [related links]({{< ref "#related-links" >}}) section.
+
 ## Related links
- - [Query API reference ]({{< ref "state_api.md#state-query" >}})
- - [State store components with those that implement query support]({{< ref supported-state-stores.md >}})
- - [State store query API implementation guide](https://github.com/dapr/components-contrib/blob/master/state/Readme.md#implementing-state-query-api)
+
+- Refer to the [query API reference]({{< ref "state_api.md#state-query" >}}).
+- See the [state store components that implement query support]({{< ref supported-state-stores.md >}}).
+- View the [state store query API implementation guide](https://github.com/dapr/components-contrib/blob/master/state/Readme.md#implementing-state-query-api).
+- See how to [query Redis state store]({{< ref "setup-redis.md#querying-json-objects" >}}).

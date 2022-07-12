@@ -54,10 +54,10 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 | Field              | Required | Details | Example |
 |--------------------|:--------:|---------|---------|
-| connectionString    | Y  | Connection-string for the Event Hub or the Event Hub namespace. Mutally exclusive with `eventHubNamespace` field. Not to be used when [Azure Authentication]({{< ref "authenticating-azure.md" >}}) is used | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` or `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key}"`
-| eventHubNamespace | Y | The Event Hub Namespace name. Mutally exclusive with `connectionString` field. To be used when [Azure Authentication]({{< ref "authenticating-azure.md" >}}) is used | `"namespace"` 
+| connectionString    | Y*  | Connection-string for the Event Hub or the Event Hub namespace. *Mutally exclusive with `eventHubNamespace` field. *Not to be used when [Azure Authentication]({{< ref "authenticating-azure.md" >}}) is used | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` or `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key}"`
+| eventHubNamespace | N* | The Event Hub Namespace name. *Mutally exclusive with `connectionString` field. *To be used when [Azure Authentication]({{< ref "authenticating-azure.md" >}}) is used | `"namespace"` 
 | storageAccountName  | Y  | Storage account name to use for the EventProcessorHost   |`"myeventhubstorage"`
-| storageAccountKey   | Y  | Storage account key  to use for the EventProcessorHost. Can be `secretKeyRef` to use a secret reference   | `"112233445566778899"`
+| storageAccountKey   | Y*  | Storage account key  to use for the EventProcessorHost. Can be `secretKeyRef` to use a secret reference. *Omit if using [Azure Authentication]({{< ref "authenticating-azure.md" >}}) and AAD authentication to the storage account is preferred.    | `"112233445566778899"`
 | storageContainerName | Y | Storage container name for the storage account name.  | `"myeventhubstoragecontainer"`
 | enableEntityManagement | N | Boolean value to allow management of EventHub namespace. Default: `false` | `"true", "false"`
 | resourceGroupName | N | Name of the resource group the event hub namespace is a part of. Needed when entity management is enabled | `"test-rg"`
@@ -67,6 +67,45 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ### Azure Active Directory (AAD) authentication
 The Azure Event Hubs pubsub component supports authentication using all Azure Active Directory mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of AAD authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
+
+#### Example Configuration
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: eventhubs-pubsub
+  namespace: default
+spec:
+  type: pubsub.azure.eventhubs
+  version: v1
+  metadata:
+  # Azure Authentication Used
+  - name: azureTenantId
+    value: "***"
+  - name: azureClientId
+    value: "***"
+  - name: azureClientSecret
+    value: "***"
+  - name: eventHubNamespace 
+    value: "namespace"
+  - name: enableEntityManagement
+    value: "false"
+    ## The following four properties are needed only if enableEntityManagement is set to true
+  - name: resourceGroupName
+    value: "test-rg"
+  - name: subscriptionID
+    value: "value of Azure subscription ID"
+  - name: partitionCount
+    value: "1"
+  - name: messageRetentionInDays
+  ## Subscriber attributes
+  - name: storageAccountName
+    value: "myeventhubstorage"
+  - name: storageAccountKey
+    value: "112233445566778899"
+  - name: storageContainerName
+    value: "myeventhubstoragecontainer"
+```
 
 ## Create an Azure Event Hub
 

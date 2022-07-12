@@ -10,6 +10,8 @@ aliases:
 ## Component format
 To setup Azure Service Bus pubsub create a component of type `pubsub.azure.servicebus`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
 
+### Connection String Authentication
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -20,8 +22,10 @@ spec:
   type: pubsub.azure.servicebus
   version: v1
   metadata:
-  - name: connectionString # Required
+  - name: connectionString # Required when not using Azure Authentication.
     value: "Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}"
+  # - name: consumerID # Optional: defaults to the app's own ID
+  #   value: "{identifier}" 
   # - name: timeoutInSec # Optional
   #   value: 60
   # - name: handlerTimeoutInSec # Optional
@@ -67,6 +71,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | Field              | Required | Details | Example |
 |--------------------|:--------:|---------|---------|
 | connectionString   | Y  | Shared access policy connection-string for the Service Bus  | "`Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}`"
+| consumerID         | N        | Consumer ID a.k.a consumer tag organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer. In other words, a message is processed only once by one of the consumers in the group. If the consumer ID is not set, the Dapr runtime sets it to the Dapr application ID (appId). |
 | timeoutInSec       | N  | Timeout for sending messages and management operations. Default: `60` |`30`
 | handlerTimeoutInSec| N  |  Timeout for invoking app handler. # Optional. Default: `60` | `30`
 | disableEntityManagement | N  | When set to true, topics and subscriptions do not get created automatically. Default: `"false"` | `"true"`, `"false"`
@@ -83,9 +88,31 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | connectionRecoveryInSec | N  |Time in seconds to wait between connection recovery attempts. Defaults: `2` | `2`
 | publishMaxRetries | N  | The max number of retries for when Azure Service Bus responds with "too busy" in order to throttle messages. Defaults: `5` | `5`
 | publishInitialRetryInternalInMs | N  | Time in milliseconds for the initial exponential backoff when Azure Service Bus throttle messages. Defaults: `500` | `500`
+| namespaceName| N | Parameter to set the name of the Service Bus namespace. Required if using AAD authentication. | `"namespace"` |
 
 ### Azure Active Directory (AAD) authentication
 The Azure Service Bus pubsub component supports authentication using all Azure Active Directory mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of AAD authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
+
+#### Example Configuration
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: servicebus-pubsub
+  namespace: default
+spec:
+  type: pubsub.azure.servicebus
+  version: v1
+  metadata:
+  - name: namespaceName # Required when using Azure Authentication.
+    value: "servicebusnamespace"
+  - name: azureTenantId
+    value: "***"
+  - name: azureClientId
+    value: "***"
+  - name: azureClientSecret
+    value: "***"
+```
 
 ## Message metadata
 
