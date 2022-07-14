@@ -200,7 +200,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>14469 words</b>
+                      <b>14839 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
