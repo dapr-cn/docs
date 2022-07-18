@@ -135,7 +135,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>123763 words</b>
+                      <b>131680 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -200,7 +200,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>14839 words</b>
+                      <b>14892 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -282,6 +282,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/devonline">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>七里听香 (devonline)</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>3078 words</b>
+                  </sub>
+              </td>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/WisWang">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -357,19 +370,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>615 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/devonline">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>七里听香 (devonline)</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>1750 words</b>
                   </sub>
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
