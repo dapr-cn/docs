@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Kubernetes DNS name resolution provider spec"
+title: "Kubernetes DNS 名称解析提供方规范"
 linkTitle: "Kubernetes DNS"
-description: Detailed information on the Kubernetes DNS name resolution component
+description: 有关 Kubernetes DNS 名称解析组件的详细信息
 ---
 
 ## 配置格式
@@ -20,4 +20,4 @@ Kubernetes DNS 名称解析是在 Dapr 的 [Kubernetes 模式]({{< ref kubernete
 ## 相关链接
 
 - [服务调用构建块]({{< ref service-invocation >}})
-- [Kubernetes DNS docs](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+- [Kubernetes DNS 文档](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
