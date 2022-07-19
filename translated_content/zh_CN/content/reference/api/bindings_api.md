@@ -12,7 +12,7 @@ Dapr 为应用程序提供双向绑定功能，并提供与不同云/本地服�
 
 ## Bindings 结构
 
-Dapr 绑定 yaml 文件具有以下结构:
+Dapr Bingding yaml 文件具有以下结构:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -38,7 +38,7 @@ spec:
 
 ## 通过输入绑定调用服务代码
 
-想要使用输入绑定触发应用的开发人员可以在 `POST` http 端点上侦听以接收请求。路由名称与 `metadata.name`相同。
+想要使用输入绑定触发应用的开发人员可以在 `POST` http 端点上监听以接收请求。路由名称与 `metadata.name`相同。
 
 如果应用程序要订阅绑定，在启动 Dapr 时，将会对应用程序的所有已定义输入绑定发送 `OPTIONS` 请求，并期望 `NOT FOUND (404)` 以外的状态码。
 
@@ -111,7 +111,7 @@ OPTIONS http://localhost:<appPort>/<name>
 
 ### Binding 有效负载
 
-为了提供绑定的输入，将使用 POST 调用到用户代码，并将绑定的名称作为URL路径。
+为了提供绑定的输入，将使用 POST 调用到用户代码，并将绑定的名称作为 URL 路径。
 
 #### HTTP 请求
 
@@ -153,7 +153,7 @@ POST http://localhost:<appPort>/<name>
 
 ## 调用输出绑定
 
-此端点允许您调用一个 Dapr 输出绑定。 Dapr 绑定支持各种操作，例如 `创建`。
+此端点允许您调用 Dapr 输出绑定。 Dapr 绑定支持各种操作，例如 `create`。
 
 请参阅每个绑定 [不同的规范]({{< ref supported-bindings >}}) ，以查看支持的操作列表。
 

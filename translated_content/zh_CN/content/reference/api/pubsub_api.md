@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Pub/sub API 参考"
+title: "Pub/sub API 参考文档"
 linkTitle: "Pub/Sub API"
 description: "有关发布/订阅 API 的详细文档"
 weight: 300
@@ -8,7 +8,7 @@ weight: 300
 
 ## 将消息发布到给定主题
 
-此终结点允许您将数据发布到正在侦听 `topic` 的多个消费者。 Dapr 保证此端点的至少一次语义。
+此端点允许您将数据发布到正在监听 `topic` 的多个消费者。 Dapr 保证此端点的至少一次（At-Least-Once ）语义。
 
 ### HTTP 请求
 
@@ -18,12 +18,12 @@ POST http://localhost:<daprPort>/v1.0/publish/<pubsubname>/<topic>[?<metadata>]
 
 ### HTTP 响应码
 
-| 代码  | 说明                      |
-| --- | ----------------------- |
-| 204 | 消息已发送                   |
-| 403 | 消息被访问控制禁止               |
-| 404 | 没有给定的 pubsubb 名称或 topic |
-| 500 | 发送失败                    |
+| 代码  | 说明                     |
+| --- | ---------------------- |
+| 204 | 消息已发送                  |
+| 403 | 消息被访问控制禁止              |
+| 404 | 没有给定的 pubsub 名称或 topic |
+| 500 | 发送失败                   |
 
 ### URL 参数
 
@@ -48,7 +48,7 @@ curl -X POST http://localhost:3500/v1.0/publish/pubsubName/deathStarStatus \
 
 `Content-Type` 标头告诉 Dapr 在构建 CloudEvent 信封时，您的数据遵循哪种内容类型。 `Content-Type` 标头值在填充 CloudEvent 中的 `datacontenttype` 字段。
 
-不指定情况下， Dapr内容类型为 `text/plain`。 如果内容类型为 JSON，请使用值为 `application/json`的 `Content-Type` 标头。
+不指定情况下， Dapr 内容类型为 `text/plain`。 如果内容类型为 JSON，请使用值为 `application/json`的 `Content-Type` 标头。
 
 如果要发送自己的自定义 CloundEvent，请使用 `application/cloudevents+json` 作为 `Content-Type` 标头值。
 
@@ -67,7 +67,7 @@ curl -X POST http://localhost:3500/v1.0/publish/pubsubName/deathStarStatus \
 
 ### 为 Dapr 提供发现 topic 订阅的路由
 
-Dapr 将在用户代码上调用以下终结点以发现 topic 订阅：
+Dapr 将在用户代码上调用以下端点以发现 topic 订阅：
 
 #### HTTP 请求
 
@@ -131,7 +131,7 @@ POST http://localhost:<appPort>/<path>
 | `appPort` | 应用程序端口     |
 | `path`    | 订阅配置中的路由路径 |
 
-#### 预期响应
+#### 预期的 HTTP 响应
 
 HTTP 2xx 响应表示消息处理成功。
 
@@ -146,7 +146,7 @@ HTTP 2xx 响应表示消息处理成功。
 | 状态        | 说明              |
 | --------- | --------------- |
 | `SUCCESS` | 消息已成功处理         |
-| `RETRY`   | 将由Dapr重试的消息     |
+| `RETRY`   | 将由 Dapr 重试的消息   |
 | `DROP`    | 警告被记录下来，信息被删除   |
 | Others    | 错误，消息将由 Dapr 重试 |
 

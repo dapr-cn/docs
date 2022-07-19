@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Twitter binding spec"
+title: "Twitter 绑定规范"
 linkTitle: "Twitter"
-description: "Detailed documentation on the Twitter binding component"
+description: "Twitter 绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/twitter/"
 ---
@@ -37,12 +37,12 @@ spec:
 
 ## 元数据字段规范
 
-| 字段             | 必填 | 绑定支持  | 详情                | 示例                 |
-| -------------- |:--:| ----- | ----------------- | ------------------ |
-| consumerKey    | Y  | 输入/输出 | Twitter API消费者键值  | `"conusmerkey"`    |
-| consumerSecret | Y  | 输入/输出 | Twitter API 消费者密码 | `"conusmersecret"` |
-| accessToken    | Y  | 输入/输出 | Twitter API 访问令牌  | `"accesstoken"`    |
-| accessSecret   | Y  | 输入/输出 | Twitter API 访问密码  | `"accesssecret"`   |
+| 字段             | 必填 | 绑定支持  | 详情                    | 示例                 |
+| -------------- |:--:| ----- | --------------------- | ------------------ |
+| consumerKey    | 是  | 输入/输出 | Twitter API消费者键值      | `"conusmerkey"`    |
+| consumerSecret | 是  | 输入/输出 | Twitter API 消费者secret | `"conusmersecret"` |
+| accessToken    | 是  | 输入/输出 | Twitter API 访问令牌      | `"accesstoken"`    |
+| accessSecret   | 是  | 输入/输出 | Twitter API 访问密码      | `"accesssecret"`   |
 
 ## 绑定支持
 
@@ -70,7 +70,7 @@ spec:
 POST http://localhost:3500/v1.0/bindings/twitter
 ```
 
-Where the payload is:
+有效负载为：
 
 ```json
 {

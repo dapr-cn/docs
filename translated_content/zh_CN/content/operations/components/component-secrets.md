@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "指南：在组件中引用密钥"
+title: "操作方法：在组件中引用密钥"
 linkTitle: "在组件中引用密钥"
 weight: 400
 description: "如何从组件定义中安全地引用密钥"
@@ -12,7 +12,7 @@ description: "如何从组件定义中安全地引用密钥"
 
 为了引用密钥，您需要设置 `auth.secretStore` 字段以指定密钥存储的名称。
 
-在 Kubernetes 运行时，如果 `auth.secretStore` 为空，则假定使用Kubernetes 密钥存储。
+在 Kubernetes 运行时，如果 `auth.secretStore` 为空，则假定使用 Kubernetes 密钥存储。
 
 ### 支持的密钥存储
 
@@ -20,7 +20,7 @@ description: "如何从组件定义中安全地引用密钥"
 
 ## 引用密钥
 
-虽然您可以选择使用明文秘密（如 MyPassword），如下面的 yaml 所示，用于 `redisPassword`的 `value` ，但不建议将其用于生产：
+虽然您可以选择使用明文秘密（如 MyPassword），如下面的 yaml 所示，用于 `redisPassword` 的 `value` ，但不建议将其用于生产：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -66,7 +66,7 @@ auth:
 
 上面的组件定义告诉 Dapr 从定义的 `secretStore` 中提取名为 `redis-secret` 的秘密，并将在秘密中嵌入的 `redis-password` 值分配给组件中的 `redisPassword` 字段。 这种情况的一个用法是，当代码构造连接字符串时，例如，将 URL、Secret 以及其他必要信息组合到字符串中。
 
-另一方面，当秘密中没有嵌入密钥时，以下"秘密是字符串"情况就适用。 相反，这个秘密只是一个字符串。 因此，在 `secretKeyRef` 部分中，秘密的 `name` 和 `key` 将完全相同。 当Secret本身是一个完整的连接字符串，没有需要提取其值的嵌入的键时，就是这种情况。 通常，连接字符串由连接信息、某种允许连接的机密以及可能的其他信息组成，不需要单独的"秘密"。 这种情况如下面的组件定义 yaml 所示。
+另一方面，当秘密中没有嵌入密钥时，以下"秘密是字符串"情况就适用。 相反，这个秘密只是一个字符串。 因此，在 `secretKeyRef` 部分中，秘密的 `name` 和 `key` 将完全相同。 当 Secret 本身是一个完整的连接字符串，没有需要提取其值的嵌入的键时，就是这种情况。 通常，连接字符串由连接信息、某种允许连接的机密以及可能的其他信息组成，不需要单独的"秘密"。 这种情况如下面的组件定义 yaml 所示。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -91,11 +91,11 @@ secretStore: <SECRET_STORE_NAME>
 
 ## 示例
 
-### 引用一个Kubernetes密钥
+### 引用 Kubernetes 密钥
 
 下面的示例向您展示如何创建 Kubernetes 密钥来保持 Event Hubs 绑定的连接字符串。
 
-1. 首先，创建Kubernetes密钥：
+1. 首先，创建 Kubernetes 密钥：
     ```bash
      kubectl create secret generic eventhubs-secret --from-literal=connectionString=*********
     ```
@@ -163,10 +163,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-这些资源给予了 Dapr 权限，从Kubernetes 密钥商店获取角色和 RoleBinding 定义的命名空间的密钥。
+这些资源给予了 Dapr 权限，从 Kubernetes 密钥商店获取角色和 RoleBinding 定义的命名空间的密钥。
 
 {{% alert title="Note" color="warning" %}}
-在生产场景中，仅限Dapr访问某些秘密资源时，您可以使用 `resourceNames` 字段。 请参阅此 [链接](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) 获取更多解释。
+在生产场景中，仅限 Dapr 访问某些秘密资源时，您可以使用 `resourceNames` 字段。 请参阅此 [链接](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) 获取更多解释。
 {{% /alert %}}
 
 ## 相关链接

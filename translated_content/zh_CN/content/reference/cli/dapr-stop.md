@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "stop CLI 命令参考"
+title: "stop CLI 命令参考文档"
 linkTitle: "stop"
 description: "有关 stop CLI 命令的详细信息"
 ---

@@ -45,7 +45,7 @@ spec:
       protocol: http
 ```
 
-### 启用特定的gRPC API
+### 启用特定的 gRPC API
 
 以下示例使状态 `v1` gRPC API 并阻止所有其他：
 

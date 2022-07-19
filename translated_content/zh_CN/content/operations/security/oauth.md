@@ -22,7 +22,7 @@ Dapr OAuth 2.0 [中间件]({{< ref "middleware.md" >}}) 允许您使用 [授权�
 * [Slack](https://api.slack.com/docs/oauth)
 * [Twitter](http://apps.twitter.com/)
 <!-- END_IGNORE -->
-为了指定Dapr授权中间件，你需要收集一下信息:
+为了指定 Dapr 授权中间件，你需要收集一下信息:
 
 * 客户端ID(参考 [这里](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
 * 客户端密钥(参考 [这里](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))

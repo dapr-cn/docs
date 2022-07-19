@@ -44,6 +44,6 @@ export      从 Kubernetes 中导出根证书、签发密钥到本地文件
 ### 示例
 
 ```bash
-# Check if mTLS is enabled
+# 检查 mTLS 是否被启用
 dapr mtls -k
 ```

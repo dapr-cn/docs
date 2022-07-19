@@ -34,7 +34,7 @@ Dapr HTTP API 根据 [REST API 指南](https://github.com/microsoft/api-guidelin
 基于这些准则：
 - 当预期旧版本会弃用时，API 的 `MAJOR` 版本将递增。 任何此类弃用会宣布且给出可行的升级路径。
 - 对于任何其他更改， `MINOR` 版本 *可能*会递增。 例如，对发送到 API 的消息的 JSON 结构的更改。 可以在[此处](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#123-definition-of-a-breaking-change)查看对 API 的破坏性改变的定义 。
-- 实验性 API 包含一个"alpha"后缀，用于表示其实验状态。 例如 v1.0alpha、v2.0alpha 等。
+- 实验性 API 包含一个 "alpha" 后缀，用于表示其实验状态。 例如 v1.0alpha、v2.0alpha 等。
 
 ## Dapr 运行时
 Dapr 发布使用 `MAJOR.MINOR.PATCH` 格式做版本控制。 例如 1.0.0. 有关版本控制的详细信息，请参阅 [支持的版本]({{< ref support-release-policy.md >}}) 。
@@ -62,11 +62,11 @@ SDK 中的样本或者样例版本会跟随该代码库。
 
 有关组件版本控制的详细信息，请阅读 [版本 2 及更高版本的组件](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md#version-2-and-beyond-of-a-component)
 
-### 组件架构
+### 组件模式
 
 组件 YAML 的版本控制有两种形式：
 - 组件清单的版本控制， 即 `apiVersion`。
-- 组件实现的版本， Version for the component implementation. The `.spec.version`
+- 组件实现的版本。 `.spec.version`
 
 组件清单在 `.spec.metadata` 字段中包含实现的架构，其中 `.type` 字段表示具体实现组件
 
@@ -90,13 +90,13 @@ spec:
 组件 YAML 清单的版本为 `dapr.io/v1alpha1`。
 
 ### 组件实现版本
-组件具体实现的版本由 `.spec.version` 字段确定，如上面的示例所示。 `.spec.version` 字段在架构实例中是必需的，如果不存在，则无法加载组件。 对于 Dapr 1.0.0 的发布，所有组件都标记为 `v1`。组件实现版本仅针对不向后兼容的更改递增。
+组件具体实现的版本由 `.spec.version` 字段确定，如上面的示例所示。 `.spec.version` 字段在模式实例中是必需的，如果不存在，则无法加载组件。 对于 Dapr 1.0.0 的发布，所有组件都标记为 `v1`。组件实现版本仅针对不向后兼容的更改递增。
 
 ### 组件弃用
 组件的弃用将提前两（2）个版本宣布。 弃用组件会导致组件版本的主要版本更新。 在 2 个版本之后，该组件将从 Dapr 运行时中取消注册，尝试加载它将引发致命异常。
 
 ## 快速入门和示例
-快速入门在[ Quickstarts 代码库](https://github.com/dapr/quickstarts)随运行时一起进行版本控制，其中相应版本的表位于示例代码库的首页上。  用户应使用运行时版本相对应的快速入门。
+快速入门在 [ Quickstarts 代码库](https://github.com/dapr/quickstarts)随运行时一起进行版本控制，其中相应版本的表位于示例代码库的首页上。  用户应使用运行时版本相对应的快速入门。
 
 [样例代码库](https://github.com/dapr/samples)中的每个样例都根据具体情况进行版本控制，具体取决于样例维护者。 如果与运行时版本落后太多，或者一年内都没被维护的样例将被删除。
 

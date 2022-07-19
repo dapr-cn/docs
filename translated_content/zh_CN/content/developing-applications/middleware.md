@@ -9,7 +9,7 @@ aliases:
   - /zh-hans/concepts/middleware-concept/
 ---
 
-Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 请求在路由到用户代码之前经过所有已定义的中间件组件，然后在返回到客户机之前，按相反顺序经过已定义的中间件，如下图中所示。
+Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 请求在路由到用户代码之前经过所有已定义的中间件组件，然后在返回到客户端之前，按相反顺序经过已定义的中间件，如下图中所示。
 
 <img src="/images/middleware.png" width=800>
 
@@ -34,7 +34,7 @@ spec:
       type: middleware.http.uppercase
 ```
 
-与其他构建块组件一样，中间件组件是可扩展的，可以在[支持的中间件参考]({{< ref supported-middleware >}})和 [components-contrib 仓库](https://github.com/dapr/components-contrib/tree/master/middleware/http)中找到。
+与其他构建块组件一样，中间件组件是可扩展的，可以在[支持的中间件参考文档]({{< ref supported-middleware >}})和 [components-contrib 仓库](https://github.com/dapr/components-contrib/tree/master/middleware/http)中找到。
 
 {{< button page="supported-middleware" text="See all middleware components">}}
 
@@ -68,10 +68,10 @@ func (m *customMiddleware) GetHandler(metadata Metadata) (func(fasthttp.RequestH
 
 您的中间件组件可以贡献到 [components-contrib 仓库](https://github.com/dapr/components-contrib/tree/master/middleware)。
 
-在接受了 components-contrib 变更后，针对 [Dapr 运行时仓库](https://github.com/dapr/dapr) 提交另一个 pull 请求，以注册新的中间件类型。 您需要修改[runtime.WithHTTPMiddleware](https://github.com/dapr/dapr/blob/f4d50b1369e416a8f7b93e3e226c4360307d1313/cmd/daprd/main.go#L394-L424)</strong>方法中的**[cmd/daprd/main.go](https://github.com/dapr/dapr/blob/master/cmd/daprd/main.go)方法，将您的中间件注册到Dapr的运行时。
+在接受了 components-contrib 变更后，针对 [Dapr 运行时仓库](https://github.com/dapr/dapr) 提交另一个 pull 请求，以注册新的中间件类型。 您需要修改 [runtime.WithHTTPMiddleware](https://github.com/dapr/dapr/blob/f4d50b1369e416a8f7b93e3e226c4360307d1313/cmd/daprd/main.go#L394-L424)</strong>方法中的**[cmd/daprd/main.go](https://github.com/dapr/dapr/blob/master/cmd/daprd/main.go) 方法，将您的中间件注册到 Dapr 的运行时。
 
 ## 相关链接
 
-* [组件schema]({{< ref component-schema.md >}})
+* [组件 schema]({{< ref component-schema.md >}})
 * [配置概览]({{< ref configuration-overview.md >}})
 * [中间件示例](https://github.com/dapr/samples/tree/master/middleware-oauth-google)

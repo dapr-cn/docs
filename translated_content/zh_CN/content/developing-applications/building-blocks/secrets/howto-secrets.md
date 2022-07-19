@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "指南：获取密钥"
-linkTitle: "指南：获取密钥"
+title: "操作方式：获取密钥"
+linkTitle: "操作方式：获取密钥"
 weight: 2000
 description: "使用密钥存储构建块安全地获取密钥"
 ---
@@ -10,7 +10,7 @@ description: "使用密钥存储构建块安全地获取密钥"
 
 ## 示例
 
-以下的示例简述了一个订单处理程序。 在这个例子中，有一个订单处理服务，它有一个Dapr sidecar。 订单处理服务使用Dapr将一个秘密存储在本地秘密存储中。
+以下的示例简述了一个订单处理程序。 在这个例子中，有一个订单处理服务，它有一个 Dapr sidecar。 订单处理服务使用 Dapr 将一个秘密存储在本地秘密存储中。
 
 <img src="/images/building-block-secrets-management-example.png" width=1000 alt="显示示例服务的服务调用的图示">
 
@@ -102,7 +102,7 @@ curl http://localhost:3601/v1.0/secrets/localsecretstore/secret
 
 ## 从你的代码调用密钥 API
 
-一旦你有了秘密存储，就可以调用Dapr来从你的应用代码中获取秘密。 下面是利用 Dapr SDK 进行服务调用的代码示例。
+一旦你有了秘密存储，就可以调用 Dapr 来从你的应用代码中获取秘密。 下面是利用 Dapr SDK 进行服务调用的代码示例。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 

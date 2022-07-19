@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "list CLI 命令参考"
+title: "list CLI 命令参考文档"
 linkTitle: "list"
 description: "有关 list CLI 命令的详细信息"
 ---

@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "status CLI 命令参考"
+title: "status CLI 命令参考文档"
 linkTitle: "status"
 description: "有关 status CLI 命令的详细信息"
 ---

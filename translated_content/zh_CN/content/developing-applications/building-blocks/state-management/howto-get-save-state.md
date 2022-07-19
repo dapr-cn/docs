@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "指南：保存和获取状态"
-linkTitle: "指南：如何保存和获取状态"
+title: "操作方法：保存并获取状态"
+linkTitle: "操作方法：如何保存和获取状态"
 weight: 200
 description: "使用键值对来持久化状态"
 ---
@@ -10,36 +10,36 @@ description: "使用键值对来持久化状态"
 
 状态管理是任何应用程序最常见的需求之一：无论是新是旧，是单体还是微服务。 与不同的数据库库打交道，进行测试，处理重试和故障是很费时费力的。
 
-Dapr提供的状态管理功能包括一致性和并发选项。 在本指南中，我们将从基础知识开始。使用键/值状态API来允许应用程序保存，获取和删除状态。
+Dapr 提供的状态管理功能包括一致性和并发选项。 在本指南中，我们将从基础知识开始。使用键/值状态 API 来允许应用程序保存，获取和删除状态。
 
 ## 前提
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
+- 初始化[ Dapr 环境]({{< ref install-dapr-selfhost.md >}})
 
 ## 示例:
 
-下面的代码例子粗略地描述了一个处理订单的应用程序。 在这个例子中，有一个订单处理服务，它有一个Dapr sidecar。 订单处理服务使用Dapr在Redis状态存储中存储状态。
+下面的代码例子粗略地描述了一个处理订单的应用程序。 在这个例子中，有一个订单处理服务（order processing service），它有一个 Dapr sidecar。 订单处理服务使用 Dapr 在 Redis 状态存储中存储状态。
 
 <img src="/images/building-block-state-management-example.png" width=1000 alt="显示示例服务的状态管理的图示">
 
 ## 第一步：设置状态存储
 
-状态存储组件代表Dapr用来与数据库进行通信的资源。
+状态存储组件代表 Dapr 用来与数据库进行通信的资源。
 
-本手册演示使用Redis状态存储，在[支持列表]({{< ref supported-state-stores >}})中的所有状态存储均可使用。
+本手册演示使用 Redis 状态存储，在[支持列表]({{< ref supported-state-stores >}})中的所有状态存储均可使用。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes>}}
 
 {{% codetab %}}
-当在单机模式下使用`dapr init`时，Dapr CLI会自动提供一个状态存储(Redis)，并在`components`目录中创建相关的YAML，在Linux/MacOS上位于`$HOME/.dapr/components`，在Windows上位于`%USERPROFILE%/.dapr/components`。
+当在单机模式下使用 `dapr init` 时，Dapr CLI 会自动提供一个状态存储(Redis)，并在 `components` 目录中创建相关的YAML，在 Linux/MacOS 上位于`$HOME/.dapr/components`，在 Windows 上位于`%USERPROFILE%/.dapr/components`。
 
-如果需要切换使用的状态存储引擎，用你选择的文件替换`/components`下的YAML文件`statestore.yaml`。
+如果需要切换使用的状态存储引擎，用你选择的文件替换 `/components` 下的YAML文件 `statestore.yaml`。
 {{% /codetab %}}
 
 {{% codetab %}}
 
-若要部署在Kubernetes集群中，请在以下所示的yaml文件中对[期望状态存储组件]({{< ref supported-state-stores >}})的`metadata`进行连接信息填充，保存为`statestore.yaml`，然后运行`kubectl apply -f statestore.yaml`。
+若要部署在 Kubernetes 集群中，请在以下所示的 yaml 文件中对[所需的状态存储组件]({{< ref supported-state-stores >}})的 `metadata` 进行连接信息填充，保存为 `statestore.yaml`，然后运行 `kubectl apply -f statestore.yaml`。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -56,7 +56,7 @@ spec:
   - name: redisPassword
     value: ""
 ```
-如何在Kubernetes中设置状态存储，请查阅[这里]({{< ref "setup-state-store" >}})。
+如何在 Kubernetes 中设置状态存储，请查阅[这里]({{< ref "setup-state-store" >}})。
 
 {{% /codetab %}}
 
@@ -64,10 +64,10 @@ spec:
 
 ## 第二步：保存和检索单个状态
 
-下面的例子显示了如何使用Dapr状态构建块来保存和检索单个的键/值对。
+下面的例子显示了如何使用 Dapr 状态构建块来保存和检索单个的键/值对。
 
 {{% alert title="Note" color="warning" %}}
-设置一个app-id是很重要的，因为状态键是以这个值为前缀的。 如果你不设置，就会在运行期间为你自动生成一个值，而到下次运行命令时又会生成一个新的值，你将因此无法再访问以前保存的状态。
+设置 app-id 是很重要的，因为状态键是以这个值为前缀的。 如果你不设置，就会在运行期间为你自动生成一个值，而到下次运行命令时又会生成一个新的值，你将因此无法再访问以前保存的状态。
 {{% /alert %}}
 
 下面是利用 Dapr SDK 保存和检索单个状态的代码示例。
@@ -313,7 +313,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 dapr run --app-id orderprocessing --dapr-http-port 3601
 ```
 
-然后在一个单独的终端中保存一个键/值对到你的statestore中：
+然后在一个单独的终端中保存一个键/值对到你的 statestore 中：
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value": "250"}]' http://localhost:3601/v1.0/state/statestore
 ```
@@ -323,18 +323,18 @@ curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value
 curl http://localhost:3601/v1.0/state/statestore/order_1
 ```
 
-你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
+你也可以重启你的 sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 {{% /codetab %}}
 
 {{% codetab %}}
 
-首先启动一个Dapr sidecar：
+首先启动一个 Dapr sidecar：
 
 ```bash
 dapr --app-id orderprocessing --dapr-http-port 3601 run
 ```
 
-然后在一个单独的终端中保存一个键/值对到你的statestore中：
+然后在一个单独的终端中保存一个键/值对到你的 statestore 中：
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "order_1", "value": "250"}]' -Uri 'http://localhost:3601/v1.0/state/statestore'
 ```
@@ -353,7 +353,7 @@ Invoke-RestMethod -Uri 'http://localhost:3601/v1.0/state/statestore/order_1'
 
 ## 第三步：删除状态
 
-下面是利用Dapr SDKs删除状态的代码例子。
+下面是利用 Dapr SDKs 删除状态的代码例子。
 
 {{< tabs Dotnet Java Python Go Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -514,7 +514,7 @@ curl -X DELETE 'http://localhost:3601/v1.0/state/statestore/order_1'
 {{% /codetab %}}
 
 {{% codetab %}}
-用上面运行的同一个Dapr实例运行：
+用上面运行的同一个 Dapr 实例运行：
 ```powershell
 Invoke-RestMethod -Method Delete -Uri 'http://localhost:3601/v1.0/state/statestore/order_1'
 ```
@@ -655,7 +655,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 {{% /codetab %}}
 
 {{% codetab %}}
-用上面运行的同一个Dapr实例将两个键/值对保存到你的状态存储中。
+用上面运行的同一个 Dapr 实例将两个键/值对保存到你的状态存储中。
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value": "250"}, { "key": "order_2", "value": "550"}]' http://localhost:3601/v1.0/state/statestore
 ```
@@ -667,7 +667,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"keys":["order_1", "order_
 {{% /codetab %}}
 
 {{% codetab %}}
-用上面运行的同一个Dapr实例将两个键/值对保存到你的状态存储中。
+用上面运行的同一个 Dapr 实例将两个键/值对保存到你的状态存储中。
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": "order_1", "value": "250"}, { "key": "order_2", "value": "550"}]' -Uri 'http://localhost:3601/v1.0/state/statestore'
 ```
@@ -684,7 +684,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 ## 第五步：执行状态事务性操作
 
 {{% alert title="Note" color="warning" %}}
-状态事务性操作需要一个支持multi-item transactions的状态存储引擎。 完整列表请查阅[受支持的状态存储]({{< ref supported-state-stores >}})。 请注意，在自托管环境中创建的默认Redis容器是支持的。
+状态事务性操作需要一个支持 multi-item transactions 的状态存储引擎。 完整列表请查阅[受支持的状态存储]({{< ref supported-state-stores >}})。 请注意，在自托管环境中创建的默认 Redis 容器是支持的。
 {{% /alert %}}
 
 下面是利用 Dapr SDK 执行状态事务的代码示例。
@@ -900,7 +900,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 {{% /codetab %}}
 
 {{% codetab %}}
-在上面运行的同一个Dapr实例中，执行两个状态事务。
+在上面运行的同一个 Dapr 实例中，执行两个状态事务。
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"operations": [{"operation":"upsert", "request": {"key": "order_1", "value": "250"}}, {"operation":"delete", "request": {"key": "order_2"}}]}' http://localhost:3601/v1.0/state/statestore/transaction
 ```
@@ -912,7 +912,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"keys":["order_1", "order_
 {{% /codetab %}}
 
 {{% codetab %}}
-用上面运行的同一个Dapr实例将两个键/值对保存到你的状态存储中。
+用上面运行的同一个 Dapr 实例将两个键/值对保存到你的状态存储中。
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"operations": [{"operation":"upsert", "request": {"key": "order_1", "value": "250"}}, {"operation":"delete", "request": {"key": "order_2"}}]}' -Uri 'http://localhost:3601/v1.0/state/statestore'
 ```
@@ -928,6 +928,6 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 
 ## 下一步
 
-- 请查阅[状态API参考手册]({{< ref state_api.md >}})
-- 尝试一个 [Dapr SDKs]({{< ref sdks >}})
-- 构建一个 [状态服务]({{< ref howto-stateful-service.md >}})
+- 请查阅[状态 API 参考手册]({{< ref state_api.md >}})
+- 尝试 [Dapr SDKs]({{< ref sdks >}})
+- 构建[有状态服务]({{< ref howto-stateful-service.md >}})

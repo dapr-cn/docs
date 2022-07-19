@@ -3,7 +3,7 @@ type: docs
 title: "操作方法：在 Kubernetes 中搭建 Fluentd、Elastic search 和 Kibana"
 linkTitle: "FluentD"
 weight: 1000
-description: "如何在Kubernetes安装Fluentd、Elastic Search和Kibana来搜索日志"
+description: "如何在 Kubernetes 中安装 Fluentd、Elastic Search 和 Kibana 来搜索日志"
 ---
 
 ## 先决条件

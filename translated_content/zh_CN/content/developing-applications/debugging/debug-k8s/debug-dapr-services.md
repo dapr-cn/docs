@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Kubernetes中的Dapr调试面板"
+title: "Kubernetes 中的 Dapr 调试面板"
 linkTitle: "Dapr control plane (Dapr 控制面板)"
 weight: 1000
-description: "在Kubernetes中如何在Dapr控制面板中进行调试"
+description: "在 Kubernetes 中如何在 Dapr 控制面板中进行调试"
 ---
 
 ## 概述
 
-有时候，我们需要知道在Dapr控制面板中发生了什么(aka. Kubernetes服务)，包括 `dapr-sidecar-injector`, `dapr-operator`, `dapr-placement`, and `dapr-sentry`，特别是当你诊断你的Dapr应用时想要知道是不是Dapr自身存在什么错误。 此外，你可能正在为Kubernetes中的Dapr开发一个新功能，并且想调试你的代码。
+有时候，我们需要知道在 Dapr 控制面板中发生了什么(aka. Kubernetes服务)，包括 `dapr-sidecar-injector`, `dapr-operator`, `dapr-placement`, and `dapr-sentry`，特别是当你诊断你的 Dapr 应用时想要知道是不是 Dapr 自身存在什么错误。 此外，你可能正在为 Kubernetes 中的 Dapr 开发一个新功能，并且想调试你的代码。
 
-这份指南将展示在Kubernetes集群中如何使用Dapr调试二进制文件对Dapr服务进行调试。
+这份指南将展示在 Kubernetes 集群中如何使用 Dapr 调试二进制文件对 Dapr 服务进行调试。
 
-## 调试Dapr Kubernetes服务
+## 调试 Dapr Kubernetes 服务
 
 ### 前提
 
@@ -20,9 +20,9 @@ description: "在Kubernetes中如何在Dapr控制面板中进行调试"
 - 设置您的 [开发环境](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
 -  [Helm](https://github.com/helm/helm/releases)
 
-### 1. 构建Dapr调试二进制文件
+### 1. 构建 Dapr 调试二进制文件
 
-为了调试 Dapr Kubernetes 服务，需要重新构建所有的Dapr 二进制文件 和 Docker 镜像来禁用编译器优化。 要做到这一点，请运行以下命令：
+为了调试 Dapr Kubernetes 服务，需要重新构建所有的 Dapr 二进制文件 和 Docker 镜像来禁用编译器优化。 要做到这一点，请运行以下命令：
 
 ```bash
 git clone https://github.com/dapr/dapr.git
@@ -31,13 +31,13 @@ make release GOOS=linux GOARCH=amd64 DEBUG=1
 ```
 > Windows：下载 [MingGW](https://sourceforge.net/projects/mingw/files/MinGW/Extension/make/mingw32-make-3.80-3/) ，并使用 `ming32-make.exe` 而不是 `make`。
 
-在上述命令中，“DEBUG”设定为“1”可禁用编译器优化。 'GOOS=linux' 和 'GOARCH=amd64' 也是必要的，因为二进制文件将在下一步中打包到基于 Linux 的Docker图像。
+在上述命令中，“DEBUG” 设定为“1”可禁用编译器优化。 'GOOS=linux' 和 'GOARCH=amd64' 也是必要的，因为二进制文件将在下一步中打包到基于 Linux 的 Docker 镜像。
 
-可以在“dapr”目录下的'dist/linux_amd64/debug'子目录下找到二进制文件。
+可以在 “dapr” 目录下的 'dist/linux_amd64/debug' 子目录下找到二进制文件。
 
-### 2. 构建Dapr调试Docker镜像
+### 2. 构建 Dapr 调试 Docker 镜像
 
-使用下面的命令将调试二进制文件打包成Docker镜像。 在此之前，你需要登录到你的docker账号，如果还没有docker账号，可以在"https://hub.docker.com/"中注册。
+使用下面的命令将调试二进制文件打包成 Docker 镜像。 在此之前，你需要登录到你的 docker 账号，如果还没有 docker 账号，可以在 "https://hub.docker.com/" 中注册。
 
 ```bash
 export DAPR_TAG=dev
@@ -46,17 +46,17 @@ docker login
 make docker-push DEBUG=1
 ```
 
-一旦Dapr镜像构建完成并推送到Docker hub中，你就已经做好了在你的Kubernetes中重新安装Dapr的准备。
+一旦 Dapr 镜像构建完成并推送到 Docker hub 中，你就已经做好了在你的 Kubernetes 中重新安装 Dapr 的准备。
 
-### 3. 安装Dapr调试二进制文件
+### 3. 安装 Dapr 调试二进制文件
 
-如果您的Kubernetes集群中已经安装了Dapr，请先卸载它：
+如果您的 Kubernetes 集群中已经安装了 Dapr，请先卸载它：
 
 ```bash
 dapr uninstall -k
 ```
 
-我们将使用"helm"来安装 Dapr 调试二进制文件。 接下来的章节，我们将使用Dapr Operator来演示在Kubernetes环境中如何配置、安装和调试Dapr服务。
+我们将使用 "helm" 来安装 Dapr 调试二进制文件。 接下来的章节，我们将使用 Dapr Operator 来演示在 Kubernetes 环境中如何配置、安装和调试 Dapr 服务。
 
 首先配置名为 `values.yml` 的文件。
 
@@ -71,10 +71,10 @@ dapr_operator:
 ```
 
 {{% alert title="Notice" color="primary" %}}
-如果你需要调试Dapr服务的启动阶段， 可以将配置中的 `initialDelaySeconds` 设定到一个很长的时间值，例如："3000" 秒。 除此之外的情况，请将其配置为一个短时间值，如："3"秒。
+如果你需要调试 Dapr 服务的启动阶段， 可以将配置中的 `initialDelaySeconds` 设定到一个很长的时间值，例如："3000" 秒。 除此之外的情况，请将其配置为一个短时间值，如："3"秒。
 {{% /alert %}}
 
-然后进入到"dapr"目录中，如果你没有这个目录，请参照本指南开始的说明，从GithHub中克隆下来。然后执行下面的命令:
+然后进入到 "dapr" 目录中，如果你没有这个目录，请参照本指南开始的说明，从 GithHub 中克隆下来。然后执行下面的命令:
 
 ```bash
 helm install dapr charts/dapr --namespace dapr-system --values values.yml --wait
@@ -82,7 +82,7 @@ helm install dapr charts/dapr --namespace dapr-system --values values.yml --wait
 
 ### 4. 转发调试端口
 
-要调试目标 Dapr 服务 (在这种情况下为 Dapr Operator)，其预配置的调试端口需要是对你的 IDE 可见。 为了做到这一点，我们需要首先找到目标Dapr服务的节点：
+要调试目标 Dapr 服务 (在这种情况下为 Dapr Operator)，其预配置的调试端口需要是对你的 IDE 可见。 为了做到这一点，我们需要首先找到目标 Dapr 服务的节点：
 
 ```bash
 $ kubectl get pods -n dapr-system -o wide
@@ -104,10 +104,10 @@ Forwarding from 127.0.0.1:40000 -> 40000
 Forwarding from [::1]:40000 -> 40000
 ```
 
-全部完成！ 现在您可以从您喜欢的IDE中使用40000端口开启远程调试了。
+全部完成！ 现在您可以从您喜欢的 IDE 中使用40000端口开启远程调试了。
 
 ## 相关链接
 
-- [Kubernetes上的 Dapr 概述]({{< ref kubernetes-overview >}})
+- [Kubernetes 上的 Dapr 概述]({{< ref kubernetes-overview >}})
 - [将 dapr 部署到 Kubernetes 集群]({{< ref kubernetes-deploy >}})
 - [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)

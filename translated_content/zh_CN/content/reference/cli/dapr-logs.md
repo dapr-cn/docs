@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "logs CLI 命令参考"
+title: "logs CLI 命令参考文档"
 linkTitle: "logs"
 description: "有关 logs CLI 命令的详细信息"
 ---

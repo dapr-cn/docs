@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "How-To: 限定组件作用范围在一或多个应用"
+title: "操作方法: 限定组件作用范围在一或多个应用"
 linkTitle: "对组件的访问范围"
 weight: 300
 description: "限制特定 Dapr 实例的组件访问"
@@ -73,13 +73,13 @@ spec:
 {{< /tabs >}}
 
 {{% alert title="Note" color="primary" %}}
-应用于名称空间“A”的组件 YAML 可以*引用*在名称空间“B”中的实现 例如，在名称空间“production-A”的 Redis 组件 YAML 可以将 Redis 主机地址指向部署在名称空间“production-B”中的 Redis实例。
+应用于名称空间“A”的组件 YAML 可以*引用*在名称空间“B”中的实现 例如，在名称空间 “production-A” 的 Redis 组件 YAML 可以将 Redis 主机地址指向部署在名称空间 “production-B” 中的 Redis 实例。
 
 有关示例，请参阅[使用多个名称空间配置 Pub/Sub 组件]({{< ref "pubsub-namespaces.md" >}})
 {{% /alert %}}
 
 ## 对具有作用域的组件的应用程序访问
-开发人员和运维人员可能希望将一个数据库的访问权限限制为某个应用程序或一组特定应用程序。 为此，Dapr 允许您在组件 YAML 上指定</code>scopes`作用域。 添加到组件的应用程序范围仅限制具有特定 ID 的应用程序使用该组件。</p>
+开发人员和运维人员可能希望将一个数据库的访问权限限制为某个应用程序或一组特定应用程序。 为此，Dapr 允许您在组件 YAML 上指定 </code>scopes` 作用域。 添加到组件的应用程序范围仅限制具有特定 ID 的应用程序使用该组件。</p>
 
 <p spaces-before="0">下面的示例演示如何给予两个启用的Dapr应用访问权限， 使用 <code>app1` 和 `app2` 两个应用程序可以访问名为 `statestore` 的 Redis 组件，这个组件部署在 `production` 命名空间
 

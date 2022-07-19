@@ -68,6 +68,6 @@ spec:
 
 ## 参考资料
 
-* [如何：在本地运行Prometheus]({{< ref prometheus.md >}})
+* [操作方法：在本地运行 Prometheus]({{< ref prometheus.md >}})
 * [如何：设置 Prometheus 和 Grafana 以获取指标]({{< ref grafana.md >}})
 * [如何: 设置 Azure 监视器以搜索日志并收集 Dapr 的指标]({{< ref azure-monitor.md >}})

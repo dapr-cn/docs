@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "如何: 使用秘钥的作用域限定"
-linkTitle: "如何: 使用秘钥的作用域限定"
+title: "操作方法: 使用秘钥的作用域限定"
+linkTitle: "操作方法: 使用秘钥的作用域限定"
 weight: 3000
 description: "应用程序从秘钥存储介质中读取时，需要使用作用域来限定"
 ---
@@ -20,7 +20,7 @@ description: "应用程序从秘钥存储介质中读取时，需要使用作用
 
 ## 场景1：拒绝访问所有密钥仓库
 
-在这个例子中，运行在Kubernetes集群上的应用程序的所有秘密访问都被拒绝，该集群有一个配置名为 `mycustomsecretstore`的 [Kubernetes秘密存储]({{< ref kubernetes-secret-store>}}) 。 在Kubernetes的情况下，除了用户定义的自定义存储之外，还解决了名为 `kubernetes` 的默认存储，以确保所有秘密被拒绝访问（参见 [这里]({{<ref "kubernetes-secret-store.md#default-kubernetes-secret-store-component">}}) 了解有关Kubernetes默认秘密存储的详细信息）。
+在这个例子中，运行在 Kubernetes 集群上的应用程序的所有秘密访问都被拒绝，该集群有一个配置名为 `mycustomsecretstore`的 [Kubernetes 秘密存储]({{< ref kubernetes-secret-store>}}) 。 在Kubernetes的情况下，除了用户定义的自定义存储之外，还解决了名为 `kubernetes` 的默认存储，以确保所有秘密被拒绝访问（参见 [这里]({{<ref "kubernetes-secret-store.md#default-kubernetes-secret-store-component">}}) 了解有关Kubernetes默认秘密存储的详细信息）。
 
 要添加此配置，请按照下面的步骤：
 
@@ -65,7 +65,7 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-此示例定义了名为 `vault` 的密钥仓库配置。 密钥仓库的默认访问权限是`deny`，而有些密钥可以通过应用程序基于`allowedSecrets`列表访问。 按照 [这些说明]({{< ref configuration-concept.md >}}) 将配置应用到 sidecar。
+此示例定义了名为 `vault` 的密钥仓库配置。 密钥仓库的默认访问权限是 `deny`，而有些密钥可以通过应用程序基于 `allowedSecrets` 列表访问。 按照 [这些说明]({{< ref configuration-concept.md >}}) 将配置应用到 sidecar。
 
 ## 场景3：拒绝访问密钥仓库中的某些敏感密钥
 

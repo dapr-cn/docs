@@ -1,8 +1,8 @@
 ﻿---
 type: docs
-title: "Zeebe command binding spec"
-linkTitle: "Zeebe command"
-description: "Detailed documentation on the Zeebe command binding component"
+title: "Zeebe 命令行绑定规范"
+linkTitle: "Zeebe 命令行"
+description: "Zeebe 命令行绑定组件详细文档"
 ---
 
 ## 配置
@@ -35,7 +35,7 @@ spec:
 
 | 字段                     | 必填 | 绑定支持 | 详情                     | 示例                 |
 | ---------------------- |:--:| ---- | ---------------------- | ------------------ |
-| gatewayAddr            | Y  | 输出   | Zeebe网关地址              | `localhost:26500`  |
+| gatewayAddr            | 是  | 输出   | Zeebe网关地址              | `localhost:26500`  |
 | gatewayKeepAlive       | 否  | 输出   | 设置保持会话消息发送到网关的频率 默认45秒 | `45s`              |
 | usePlainTextConnection | 否  | 输出   | 是否使用纯文本连接              | `true,false`       |
 | caCertificatePath      | 否  | 输出   | CA 证书的路径               | `/path/to/ca-cert` |
@@ -61,7 +61,7 @@ spec:
 
 我们在绑定中使用的Zeebe客户端在底层使用gRPC协议。 请参阅[gRPC API 参考](https://stage.docs.zeebe.io/reference/grpc.html) 了解更多信息。
 
-#### 拓扑
+#### topology
 
 `topology` 操作将获取当前网关所属集群的拓扑结构。
 
@@ -119,7 +119,7 @@ spec:
 - ` replicationFactor ` - 为此群集配置的复制因子
 - `gatewayVersion` - 网关版本
 
-#### 部署过程
+#### deploy-process
 
 `deploy-process` 操作将单个进程部署到 Zeebe。
 
@@ -166,9 +166,9 @@ spec:
     - `processDefinitionKey` - 配置的键值，此进程唯一标识符
     - `resourceName` - 进程解析的资源名称
 
-#### 创建实例
+#### create-instance
 
-`create-instance` 操作创建并启动一个指定进程实例。 该进程定义可以指定，或者使用唯一键值(例如， 通过 `deploy-process` 操作返回)，或者使用BPMN进程ID和版本号来创建实例。
+`create-instance` 操作将创建并启动一个指定进程实例。 该进程定义可以指定，或者使用唯一键值(例如， 通过 `deploy-process` 操作返回)，或者使用BPMN进程ID和版本号来创建实例。
 
 请注意，只有没有启动事件的进程才能通过此命令启动。
 
@@ -239,9 +239,9 @@ spec:
 - ` version ` - 进程定义用于创建进程实例的版本
 - `processInstanceKey` - 创建的进程实例的唯一标识符
 
-#### 取消实例
+#### cancel-instance
 
-`cancel-instance` 操作取消正在运行的进程实例。
+`cancel-instance` 执行将取消正在运行的进程实例。
 
 为了演示`create-instance` 操作，使用发送如下JSON结构数据的`POST` 方法调用Zeebe命令行绑定：
 
@@ -263,7 +263,7 @@ spec:
 
 绑定不返回响应正文。
 
-#### 设置变量
+#### set-variables
 
 `set-variables`操作为元素实例(例如进程实例、元素流实例)创建或更新变量。
 
@@ -304,9 +304,9 @@ spec:
 
 - `key` - 设置变量命令的唯一键值
 
-#### 解决事件
+#### resolve-incident
 
-`resolve-incident` 操作解决一个事件。
+`resolve-incident` 操作将解决一个事件。
 
 为了演示`create-instance` 操作，使用发送如下JSON结构数据的`POST` 方法调用Zeebe命令行绑定：
 
@@ -328,9 +328,9 @@ spec:
 
 绑定不返回响应正文。
 
-#### 发布消息
+#### publish-message
 
-`publish-message` 操作发布一条单个消息。 消息将被发布到根据它们相关键计算而指定的特定分区。
+`publish-message` 操作发布一条消息。 消息将被发布到根据它们相关键计算而指定的特定分区。
 
 为了演示`publish-message` 操作，使用发送如下JSON结构数据的`POST` 方法调用Zeebe命令行绑定：
 
@@ -369,7 +369,7 @@ spec:
 
 - `key` - 已发布消息的唯一 ID
 
-#### 激活作业
+#### activate-jobs
 
 `activate-jobs` 操作循环遍历所有已知分区，并激活到请求的最大值，并在激活后，将它们流式返回给客户端。
 
@@ -429,7 +429,7 @@ spec:
 - ` deadline ` - 作业何时可以再次被激活，将以UNIX时间戳格式发送
 - ` variables ` - JSON 文档，在激活时计算，由任务作用域内所有可见变量组成
 
-#### 完结作业
+#### complete-job
 
 `complete-job` 操作使用给定的有效负载完结作业，这将允许完结关联的服务任务。
 
@@ -459,7 +459,7 @@ spec:
 
 绑定不返回响应正文。
 
-#### 失败作业
+#### fail-job
 
 `fail-job` 操作将作业标记为失败；如果重试次数参数为正，则作业将立即再次激活，并且工作线程可以再次尝试处理它。 但是如果它为零或负数，将会引发事件，并且使用给定的错误信息进行标记，并且在事件解决之前，作业将无法被激活。
 
@@ -487,7 +487,7 @@ spec:
 
 绑定不返回响应正文。
 
-#### 更新作业重试次数
+#### update-job-retries
 
 `update-job-retries` 操作更新作业剩余的重试次数。 如果解决了潜在问题，这对于重试次数已用完的作业非常有用。
 
@@ -513,7 +513,7 @@ spec:
 
 绑定不返回响应正文。
 
-#### 抛出错误
+#### throw-error
 
 `throw-error` 操作抛出一个错误表示在处理作业时发生了业务错误。 该错误定义为一个错误码并且被进程中具有相同错误码的错误捕捉事件处理。
 

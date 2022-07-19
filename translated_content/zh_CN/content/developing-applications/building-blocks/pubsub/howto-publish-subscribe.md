@@ -1,36 +1,36 @@
 ---
 type: docs
-title: "指南：发布消息并订阅主题"
-linkTitle: "How-To: Publish & subscribe"
+title: "操作方法：发布消息并订阅主题"
+linkTitle: "操作方法：发布 & 订阅"
 weight: 2000
 description: "了解如何使用一个服务向主题发送消息，并在另一个服务中订阅该主题"
 ---
 
 ## 介绍
 
-Pub/Sub 是一个分布式系统中的常见模式，它有许多服务用于解偶、异步消息传递。 使用Pub/Sub，您可以在事件消费者与事件生产者解偶的场景中启用。
+Pub/Sub 是分布式系统中的常见模式，其中有许多服务希望利用解耦的异步消息传递。 使用 Pub/Sub，您可以启用事件消费者与事件生产者分离的场景。
 
-Dapr 提供了一个可扩展的 Pub/Sub 系统（保证消息至少传递一次），允许开发者发布和订阅主题。 Dapr 为 Pub/Sub 提供组件，使操作者能够使用他们所喜欢的基础设施，例如 Redis Streams 和 Kafka 等。
+Dapr 提供了一个可扩展的 Pub/Sub 系统，具有 At-Least-Once 保证，允许开发人员发布和订阅主题。 Dapr 为 Pub/Sub 提供组件，使运维人员能够使用他们所喜欢的基础设施，例如 Redis Streams 和 Kafka 等。
 
-## 步骤 1: 设置 Pub/Sub 组件
+## 内容类型
 
-当发布消息时，必须指定所发送数据的内容类型。 除非指定, Dapr 将假定类型为 `text/plain`。 当使用 Dapr 的 HTTP API时，内容类型可以设置在 `Content-Type` 头中。 gRPC 客户端和 SDK 有一个专用的内容类型参数。
+发布消息时，指定所发送数据的内容类型非常重要。 除非指定, Dapr 将假定类型为 `text/plain`。 当使用 Dapr 的 HTTP API 时，内容类型可以设置在 `Content-Type` 头中。 gRPC 客户端和 SDK 有一个专用的内容类型参数。
 
-## 示例:
+## 示例
 
-以下的示例简述了一个订单处理程序。 当前示例中，存两项服务：订单处理服务和结账服务。 这两项服务都有Dapr sidecar。 订单处理服务使用 Dapr 向 RabbitMQ 发布消息，结账服务订阅消息队列中的主题。
+下面的代码示例粗略地描述了一个处理订单的应用程序。 在示例中，有两个服务 - 订单处理服务和结帐服务。 这两项服务都有 Dapr sidecar。 订单处理服务使用 Dapr 向 RabbitMQ 发布消息，结账服务订阅消息队列中的主题。
 
 <img src="/images/building-block-pub-sub-example.png" width=1000 alt="显示示例服务的状态管理的图示">
 
 ## 步骤 1: 设置 Pub/Sub 组件
-然后发布一条消息给 `orders` 主题：
+下面的示例创建应用程序来发布和订阅名为 `orders` 的主题。
 
 第一步是设置 Pub/Sub 组件：
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
-默认情况下，pubsub.yaml 是在本地计算机上运行` dapr init`时 创建的。 在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yam` 或在 Windows 上打开`%UserProfile%\.dapr\components\pubsub.yaml` 组件文件以验证.
+默认情况下，pubsub.yaml 是在本地计算机上运行 ` dapr init` 时创建的。 通过在 Windows 上打开 `%UserProfile%\.dapr\components\pubsub.yaml` 下的组件文件或在 Linux/MacOS 上打开 `~/.dapr/components/pubsub.yaml` 来验证。
 
 在此示例中，RabbitMQ 用于发布和订阅。 将 `pubsub.yaml` 文件内容替换为以下内容。
 
@@ -99,19 +99,19 @@ scopes:
 
 ## 步骤 2: 订阅主题
 
-Dapr 允许两种方法订阅主题：
+Dapr 提供两种订阅主题的方法：
 
-- **声明式**，其中定义在外部文件中。
-- **编程方式**，订阅在用户代码中定义
+- **声明式**，其中订阅定义在外部文件中。
+- **编程式**，订阅在用户代码中定义
 
 {{% alert title="Note" color="primary" %}}
- 声明和编程方式都支持相同的功能。 声明的方式从用户代码中移除对 Dapr 的依赖性，并允许使用现有应用程序订阅主题。 编程方法在用户代码中实现订阅。
+ 声明式和编程式都支持相同的功能。 声明式方法从代码中删除了 Dapr 依赖项，并允许例如现有应用程序订阅主题，而无需更改代码。 编程式方法在代码中实现订阅。
 
 {{% /alert %}}
 
 ### 声明式订阅
 
-您可以使用以下自定义资源定义 （CRD） 订阅主题。 创建名为 `subscription.yaml` 的文件并粘贴以下内容:
+您可以使用以下自定义资源定义 （Custom Resources Definition/CRD） 来订阅主题。 创建名为 `subscription.yaml` 的文件并粘贴以下内容:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -127,7 +127,7 @@ scopes:
 - checkout
 ```
 
-上面的示例显示了对主题 `orders`的事件订阅，用于 pubsub 组件 `order_pub_sub`。
+上面的示例显示了对主题 `orders` 的事件订阅，用于 pubsub 组件 `order_pub_sub`。
 - `route` 告诉 Dapr 将所有主题消息发送到应用程序中的 `/checkout` 端点。
 - `scopes` 字段为具有 ID 的应用启用此订阅， `orderprocessing` 和 `checkout`。
 
@@ -182,7 +182,7 @@ dapr run --app-id myapp --components-path ./myComponents -- npm start
 {{% /codetab %}}
 
 {{% codetab %}}
-在 Kubernetes 中，将 CRD 保存到文件中并将其应用于群集：
+在 Kubernetes 中，将 CRD 保存到文件中并将其应用于集群：
 ```bash
 kubectl apply -f subscription.yaml
 ```
@@ -386,7 +386,7 @@ dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-por
 
 {{< /tabs >}}
 
-`/checkout` 终结点与订阅中定义的 `route` 相匹配，这是 Dapr 将所有主题消息发送至的位置。
+`/checkout` 端点与订阅中定义的 `route` 相匹配，这是 Dapr 将所有主题消息发送至的位置。
 
 ## 步骤 3: 发布主题
 
@@ -656,11 +656,11 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ## 步骤 4: ACK-ing 消息
 
-为了告诉Dapr 消息处理成功，返回一个 `200 OK` 响应。 如果 Dapr 收到超过 `200` 的返回状态代码，或者你的应用崩溃，Dapr 将根据 At-Least-Once 语义尝试重新传递消息。
+为了告诉 Dapr 消息处理成功，返回一个 `200 OK` 响应。 如果 Dapr 收到除 `200` 的返回状态代码，或者应用崩溃，Dapr 将根据 At-Least-Once 语义尝试重新传递消息。
 
 ## 发送自定义 CloudEvent
 
-Dapr 自动接收发布请求上发送的数据，并将其包装在CloudEvent 1.0 信封中。 如果您想使用自己自定义的 CloudEvent，请确保指定内容类型为 `application/ cloudevents+json`。
+Dapr 自动接收发布请求上发送的数据，并将其包装在 CloudEvent 1.0 信封中。 如果您想使用自己自定义的 CloudEvent，请确保指定内容类型为 `application/ cloudevents+json`。
 
 [请在此处阅读有关内容类型](#content-types)，以及有关 [ Cloud Events 消息格式]({{< ref "pubsub-overview.md#cloud-events-message-format" >}})。
 
@@ -698,5 +698,5 @@ Invoke-RestMethod -Method Post -ContentType 'application/cloudevents+json' -Body
 - 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
 - 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
-- Pub/sub组件是可扩展的， [这里]({{< ref setup-pubsub >}})有支持的pub/sub组件列表，实现可以在[components-contrib repo](https://github.com/dapr/components-contrib)中找到。
-- 阅读 [API 引用]({{< ref pubsub_api.md >}})
+- [发布/订阅组件]({{< ref setup-pubsub >}})列表
+- 阅读 [API 参考文档]({{< ref pubsub_api.md >}})

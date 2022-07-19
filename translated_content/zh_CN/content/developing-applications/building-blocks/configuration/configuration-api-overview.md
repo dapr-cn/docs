@@ -12,7 +12,7 @@ description: "Dapr 配置管理构建块概述"
 
 <img src="/images/configuration-api-overview.png" width=900>
 
-值得注意的是，此配置 API 不应与 [Dapr sidecar和控制平面配置]({{<ref "configuration-overview">}}) 混淆，后者用于在 Dapr sidecar 实例或已安装的 Dapr 控制平面上设置策略和设置。
+值得注意的是，此配置 API 不应与 [Dapr sidecar 和控制平面配置]({{<ref "configuration-overview">}}) 混淆，后者用于在 Dapr sidecar 实例或已安装的 Dapr 控制平面上设置策略和设置。
 
 ## 特性
 

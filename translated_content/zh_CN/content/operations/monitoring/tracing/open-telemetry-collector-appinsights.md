@@ -3,7 +3,7 @@ type: docs
 title: "使用 OpenTelemetry Collector 来收集追踪信息，发送至 AppInsights"
 linkTitle: "为 Azure AppInsights 使用 OpenTelemetry"
 weight: 1000
-description: "如何使用OpenTelemetry Collector将追踪事件推送到 Azure Application Insights。"
+description: "如何使用 OpenTelemetry Collector 将追踪事件推送到 Azure Application Insights。"
 ---
 
 Dapr 使用 Zipkin API 与[OpenTelemetry Collector ](https://github.com/open-telemetry/opentelemetry-collector) 进行集成。 本指南通过一个示例，使用 Dapr 通过 OpenTelemetry Collector 将跟踪事件推送到 Azure Application Insights。
@@ -36,7 +36,7 @@ Dapr 使用 Zipkin API 与[OpenTelemetry Collector ](https://github.com/open-tel
 
 ### 部署你的应用，并启用应用跟踪功能
 
-在 Kubernetes 模式下运行时，通过将`dapr.io/config`注解添加到要参与分布式跟踪的容器中，从而来应用`appconfig`配置，示例配置如下所示
+在 Kubernetes 模式下运行时，通过将 `dapr.io/config` 注解添加到要参与分布式跟踪的容器中，从而来应用 `appconfig` 配置，示例配置如下所示
 
 ```yaml
 apiVersion: apps/v1

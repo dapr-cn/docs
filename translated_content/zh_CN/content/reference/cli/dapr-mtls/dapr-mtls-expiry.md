@@ -29,6 +29,6 @@ dapr mtls expiry [flags]
 ### 示例
 
 ```bash
-# Check expiry of Kubernetes certs
+# 检查 Kubernetes 证书的过期时间
 dapr mtls expiry
 ```

@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "操作：配置具有多个命名空间的 Pub/Sub 组件"
+title: "操作方法：配置具有多个命名空间的 Pub/Sub 组件"
 linkTitle: "Multiple namespaces"
 weight: 20000
-description: "多个命名空间下使用Dapr Pub/Sub"
+description: "多个命名空间下使用 Dapr Pub/Sub"
 ---
 
-在某些场景下，应用程序分布在不同的命名空间，并通过PubSub共享一个队列或主题。 在这种情况下，必须在每个命名空间上都提供PubSub组件。
+在某些场景下，应用程序分布在不同的命名空间，并通过发布订阅共享队列或主题。 在这种情况下，必须在每个命名空间上都提供发布订阅组件。
 
 {{% alert title="Note" color="primary" %}}
-命名空间是一个Dapr里的，用于确定应用程序和组件的作用范围概念。 这个例子使用的是Kubernetes的命名空间，然而Dapr组件的命名空间范围可以在任何支持的平台上使用。 有关确定组件范围的详细信息，请参阅[操作方法：将组件限定为一个或多个应用程序]({{< ref "component-scopes.md" >}}) 。
+命名空间是用于确定应用程序和组件作用域的 Dapr 概念。 这个例子使用的是Kubernetes的命名空间，然而Dapr组件的命名空间范围可以在任何支持的平台上使用。 有关确定组件范围的详细信息，请参阅[操作方法：将组件限定为一个或多个应用程序]({{< ref "component-scopes.md" >}}) 。
 {{% /alert %}}
 
-这个例子使用了[发布订阅示例](https://github.com/dapr/quickstarts/tree/master/pub_sub)。 Redis安装和其订阅者在`namespace-a`中，而发布者UI在`namespace-b`中。 如果Redis安装在另一个命名空间上，或者使用Azure ServiceBus、AWS SNS/SQS或GCP PubSub等云服务，该解决方案也同样奏效。
+这个例子使用了[发布订阅示例](https://github.com/dapr/quickstarts/tree/master/pub_sub)。 Redis安装和其订阅者在`namespace-a`中，而发布者UI在`namespace-b`中。 如果 Redis 安装在另一个命名空间上，或者使用 Azure ServiceBus、AWS SNS/SQS 或 GCP PubSub 等云服务，该解决方案也同样奏效。
 
 这是一个使用命名空间的示例图片。
 
@@ -37,7 +37,7 @@ description: "多个命名空间下使用Dapr Pub/Sub"
 
 ## 设置`namespace-a`
 
-创建命名空间并用kubectl切入。
+创建命名空间并切换 kubectl 以使用它。
 ```
 kubectl create namespace namespace-a
 kubectl config set-context --current --namespace=namespace-a
@@ -62,28 +62,28 @@ spec:
     value: "YOUR_PASSWORD"
 ```
 
-将资源部署到`namespace-a`：
+将资源部署到 `namespace-a`：
 ```
 kubectl apply -f deploy/redis.yaml
 kubectl apply -f deploy/node-subscriber.yaml
 kubectl apply -f deploy/python-subscriber.yaml
 ```
 
-## 设置`namespace-b`
+## 设置 `namespace-b`
 
-创建命名空间并用kubectl切入。
+创建命名空间并切换 kubectl 以使用它。
 ```
 kubectl create namespace namespace-b
 kubectl config set-context --current --namespace=namespace-b
 ```
 
-将资源部署到`namespace-b`，包括Redis组件:
+将资源部署到 `namespace-b`，包括 Redis 组件：
 ```
 kubectl apply -f deploy/redis.yaml
 kubectl apply -f deploy/react-form.yaml
 ```
 
-现在，找到react-form的IP地址，在浏览器上打开它，并将消息发布到每个主题（A、B、C）。
+现在，找到 react-form 的IP地址，在浏览器上打开它，并将消息发布到每个主题（A、B、C）。
 ```
 kubectl get service -A
 ```
@@ -95,7 +95,7 @@ kubectl get service -A
 kubectl config set-context --current --namespace=namespace-a
 ```
 
-查找POD名称：
+查找 POD 名称：
 ```
 kubectl get pod # 复制POD名称并在接下来的命令中使用。
 ```
@@ -106,7 +106,7 @@ kubectl logs node-subscriber-XYZ node-subscriber
 kubectl logs python-subscriber-XYZ python-subscriber
 ```
 
-浏览器上发布的消息应该会显示在相应用户的日志中。 Node.js订阅者接收的消息类型为 "A "和 "B"，而Python订阅者接收的消息类型为 "A "和 "C"。
+浏览器上发布的消息应该会显示在相应用户的日志中。 Node.js订阅者接收的消息类型为 "A" 和 "B"，而 Python 订阅者接收的消息类型为 "A" 和 "C"。
 
 ## 清理
 

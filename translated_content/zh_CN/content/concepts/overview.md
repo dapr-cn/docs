@@ -38,9 +38,9 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
 | [**服务调用**]({{<ref "service-invocation-overview.md">}})              | 跨服务调用允许进行远程方法调用(包括重试)，不管处于任何位置，只需该服务托管于受支持的环境即可。                                                                                                               |
 | [**状态管理**]({{<ref "state-management-overview.md">}})                | 独立的状态管理，使用键/值对作为存储和查询机制，可以轻松的使长时运行、高可用的有状态服务和无状态服务共同运行在您的应用程序中。 状态存储是可插拔的，示例包括 AWS DynamoDB、Azure CosmosDB、Azure SQL Server、GCP Firebase、PostgreSQL 或 Redis 等。 |
 | [**发布订阅**]({{<ref "pubsub-overview.md">}})                          | 在服务之间发布事件和订阅主题，使事件驱动的架构能够简化水平可伸缩性，并使其能够灵活应对故障。 Dapr 提供至少一次(at-least-once)消息传递保证，消息TTL，消费者组和其他高级功能。                                                             |
-| [**资源绑定**]({{<ref "bindings-overview.md">}})                        | Dapr的Bindings是建立在事件驱动架构的基础之上的。通过建立触发器与资源的绑定，可以从任何外部源（例如数据库，队列，文件系统等）接收和发送事件，而无需借助消息队列，即可实现灵活的业务场景。                                                             |
-| [**Actors**]({{<ref "actors-overview.md">}})                        | 状态和无状态对象的模式，使并发简单，方法和状态封装。 Dapr 在Actor模式中提供了很多功能，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。                                                          |
-| [**可观测性**]({{<ref "observability-concept.md">}})                    | Dapr记录指标，日志，链路以调试和监视Dapr和用户应用的运行状况。 Dapr支持分布式跟踪，其使用W3C跟踪上下文标准和开放式遥测技术，可以轻松地诊断在生产环境中服务间的网络调用，并发送到不同的监视工具。                                                       |
+| [**资源绑定**]({{<ref "bindings-overview.md">}})                        | Dapr 的 Bindings 是建立在事件驱动架构的基础之上的。通过建立触发器与资源的绑定，可以从任何外部源（例如数据库，队列，文件系统等）接收和发送事件，而无需借助消息队列，即可实现灵活的业务场景。                                                          |
+| [**Actors**]({{<ref "actors-overview.md">}})                        | 状态和无状态对象的模式，使并发简单，方法和状态封装。 Dapr 在 Actor 模式中提供了很多功能，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。                                                        |
+| [**可观测性**]({{<ref "observability-concept.md">}})                    | Dapr记录指标，日志，链路以调试和监视 Dapr 和用户应用的运行状况。 Dapr 支持分布式跟踪，其使用 W3C 跟踪上下文标准和开放式遥测技术，可以轻松地诊断在生产环境中服务间的网络调用，并发送到不同的监视工具。                                                  |
 | [**秘密**]({{<ref "secrets-overview.md">}})                           | Dapr 提供了密钥管理，支持与公有云和本地的 Secret 存储集成，以供应用检索使用。                                                                                                                  |
 | [**Configuration (配置)**]({{<ref "configuration-api-overview.md">}}) | 配置 API 使您能够从配置存储中检索和订阅应用程序配置项。                                                                                                                                 |
 
@@ -52,7 +52,7 @@ Dapr以 sidecar 架构的方式公开其API，可以是容器，也可以是进�
 
 ## 托管环境
 
-Dapr可以在多种环境中托管，包括在Windows/Linux/MacOS机器上的自托管以进行本地开发；在Kubernetes或生产环境中的物理机或虚拟机器集群上托管。
+Dapr可以在多种环境中托管，包括在 Windows/Linux/MacOS 机器上的自托管以进行本地开发；在 Kubernetes 或生产环境中的物理机或虚拟机器集群上托管。
 
 ### 自托管模式本地开发
 
@@ -125,4 +125,4 @@ Dapr 专为 [运维]({{< ref operations >}}) 和安全性而设计。 Dapr sidec
 
 通过 Dapr CLI 安装的[仪表板](https://github.com/dapr/dashboard)提供了基于 Web 的 UI，使您能够查看运行 Dapr 应用程序的信息、日志等。
 
-[监控工具支持]({{< ref monitoring >}}) 提供 Dapr 系统服务和sidecar 的更深入的可见性，Dapr 的 [可观测性能力]({{<ref "observability-concept.md">}}) 提供了对应用程序的深入了解，例如追踪和度量。
+[监控工具支持]({{< ref monitoring >}}) 提供 Dapr 系统服务和 sidecar 的更深入的可见性，Dapr 的 [可观测性能力]({{<ref "observability-concept.md">}}) 提供了对应用程序的深入了解，例如追踪和度量。

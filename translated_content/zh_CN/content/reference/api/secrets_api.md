@@ -2,13 +2,13 @@
 type: docs
 title: "密钥 API 参考"
 linkTitle: "Secret API"
-description: "有关Secret API的详细文档"
+description: "有关 Secret API 的详细文档"
 weight: 600
 ---
 
-## 获取Secret
+## 获取 Secret
 
-使用此终结点，可以获取指定 secret store 的 Secret 值。
+使用此端点，可以获取指定 secret store 的 Secret 值。
 
 ### HTTP 请求
 
@@ -108,9 +108,9 @@ curl http://localhost:3500/v1.0/secrets/vault/db-secret?metadata.version_id=15&m
 curl http://localhost:3500/v1.0/secrets/vault/db-secret?metadata.version_id=15&?metadata.namespace=production
 ```
 
-## 获取批量Secret
+## 获取批量 Secret
 
-使用此终结点可以获取 secret store 中的所有Secret密钥存储。 建议在为 Dapr 配置密钥存储时使用 [token身份验证]({{<ref "api-token.md">}})。
+使用此端点可以获取 secret store 中的所有 Secret 密钥存储。 建议在为 Dapr 配置密钥存储时使用 [token 身份验证]({{<ref "api-token.md">}})。
 
 ### HTTP 请求
 

@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "How-To: 使用输入绑定来触发应用程序"
-linkTitle: "How-To: 输入绑定"
+title: "操作方法：使用输入绑定来触发应用程序"
+linkTitle: "操作方法： 输入绑定"
 description: "使用 Dapr 输入绑定来触发由事件驱动的程序"
 weight: 200
 ---
@@ -30,7 +30,7 @@ Dapr 绑定允许您 :
 
 就本指南的目的，您将使用 Kafka 绑定。 您可以在[此处]({{< ref setup-bindings >}})找到支持的绑定组件列表。
 
-创建一个名称为 `checkout`的新绑定组件。
+创建一个名称为 `checkout` 的新绑定组件。
 
 在 `metadata` 部分中，配置与 Kafka 相关的属性，例如要将消息发布到的主题和代理。
 
@@ -101,7 +101,7 @@ spec:
 
 ## 2. 监听传入事件（输入绑定）
 
-现在配置您的应用程序来接收传入事件。 如果使用 HTTP ，那么需要监听在文件 `metadata.name` 中指定的绑定名称所对应的`POST` 终结点。
+现在配置您的应用程序来接收传入事件。 如果使用 HTTP ，那么需要监听在文件 `metadata.name` 中指定的绑定名称所对应的 `POST` 终结点。
 
 下面是利用 Dapr SDK 演示输出绑定的代码示例。
 
@@ -280,11 +280,11 @@ dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-por
 
 ### 拒绝事件
 
-为了告诉 Dapr 您的应用程序中未正确处理该事件并安排重新传递，请返回除 `200 OK`以外的任何响应。 例如， `500 Error`。
+为了告诉 Dapr 您的应用程序中未正确处理该事件并安排重新传递，请返回除 `200 OK` 以外的任何响应。 例如， `500 Error`。
 
 ### 指定自定义路由
 
-默认情况下，传入事件将发送到与输入绑定的名称对应的 HTTP 终结点。 您可以通过设置以下元数据属性来覆盖此属性：
+默认情况下，传入事件将发送到与输入绑定的名称对应的 HTTP 端点。 您可以通过设置以下元数据属性来覆盖此属性：
 
 ```yaml
 name: mybinding
@@ -302,5 +302,5 @@ spec:
 
 * [绑定构建块]({{< ref bindings >}})
 * [绑定 API]({{< ref bindings_api.md >}})
-* [Components concept]({{< ref components-concept.md >}})
+* [组件概念]({{< ref components-concept.md >}})
 * [Supported bindings]({{< ref supported-bindings >}})

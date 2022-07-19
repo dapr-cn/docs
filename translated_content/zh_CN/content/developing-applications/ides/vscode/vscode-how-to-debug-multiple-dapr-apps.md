@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "如何操作：使用 Visual Studio 代码调试Dapr"
-linkTitle: "如何操作：用 VSCode 调试"
+title: "操作方法：使用 Visual Studio 代码调试 Dapr"
+linkTitle: "操作方法：使用 VSCode 调试"
 weight: 20000
-description: "了解如何配置VSCode来调试Dapr应用程序"
+description: "了解如何配置 VSCode 来调试 Dapr 应用程序"
 aliases:
   - /zh-hans/development-applications/ides/vscode/vscode-manual-configuration/
 ---
 
 ## 手动调试
 
-开发 Dapr应用程序时，通常使用 Dapr CLI 来启动你的 Dapr 服务，就像这样：
+开发 Dapr 应用程序时，通常使用 Dapr CLI 来启动你的 Dapr 服务，就像这样：
 
 ```bash
 dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
@@ -18,12 +18,12 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 将调试器附加到您的服务中的一种方法是先从命令行中运行符合正确参数的 daprd，然后启动您的代码并附加调试器。 虽然这完全是一个可以接受的解决方案，但它也需要一些额外的步骤，以及对那些可能想要克隆你的仓库并点击 "play "按钮开始调试的开发人员进行一些指导。
 
-如果您的应用程序是一组微服务，每个程序都有Dapr sidecar，那么在Visual Studio代码中将其一起调试将会更加有意义。 本章将使用 [Hello world quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world) 来演示如何使用 [VSCode 调试](https://code.visualstudio.com/Docs/editor/debugging) 来配置 VSCode 调试多个Dapr 应用程序。
+如果您的应用程序是一组微服务，每个程序都有 Dapr sidecar，那么在 Visual Studio 代码中将其一起调试将会更加有意义。  本章将使用 [Hello world quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world) 来演示如何使用 [VSCode 调试](https://code.visualstudio.com/Docs/editor/debugging) 来配置 VSCode 调试多个Dapr 应用程序。
 
 ## 先决条件
 
 - 安装 [Dapr 扩展]({{< ref vscode-dapr-extension.md >}})。 您将使用它稍后提供的 [功能](https://code.visualstudio.com/docs/editor/tasks)。
-- 如果还未clone项目，clone [hello world quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world)
+- 如果还未 clone 项目，clone [hello world quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world)
 
 ## 步骤 1：配置 launch.json
 
@@ -72,13 +72,13 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 - `${workspaceFolder}` 是一个VS代码的变量引用。 这是在VS Code中打开的工作区的路径。
 - `preLaunchTask` 和 `postDebugTask` 参数是指启动应用程序之前和之后运行的程序配置。 有关如何配置这些选项，请参阅步骤 2。
 
-关于VSCode调试参数的更多信息，见 [VS Code启动属性](https://code.visualstudio.com/Docs/editor/debugging#_launchjson-attributes)。
+关于 VSCode 调试参数的更多信息，见 [VS Code 启动属性](https://code.visualstudio.com/Docs/editor/debugging#_launchjson-attributes)。
 
 ## 步骤 2：配置 task.json
 
-对于每个 [在 `.vscode/launch.json` 中定义的任务](https://code.visualstudio.com/docs/editor/tasks) ，必须在 `.vscode/task.json`中存在一个相应的任务定义。
+对于每个[在 `.vscode/launch.json` 中定义的任务](https://code.visualstudio.com/docs/editor/tasks) ，必须在 `.vscode/task.json` 中存在一个相应的任务定义。
 
-对于快速入门，每个服务都需要一个任务来启动具有 `daprd` 类型的 Dapr 边车，以及一个使用 `daprd-down`停止边车的任务。 参数 `appId`, `httpPort`, `metricsPort`, `label` 和 `type` 是必须的。 还有其他的可选参数，请看这里的 [参考表](#daprd-parameter-table")。
+对于快速入门，每个服务都需要一个任务来启动具有 `daprd` 类型的 Dapr 边车，以及一个使用 `daprd-down` 停止边车的任务。 参数 `appId`, `httpPort`, `metricsPort`, `label` 和 `type` 是必须的。 还有其他的可选参数，请看这里的 [参考表](#daprd-parameter-table")。
 
 ```json
 {
@@ -135,7 +135,7 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 ## 步骤 4：启动调试会话
 
-现在你可以通过在VS Code调试器中找到你在上一步定义的复合命令名称，在调试模式下运行应用程序。
+现在你可以通过在 VS Code 调试器中找到你在上一步定义的复合命令名称，在调试模式下运行应用程序。
 
 <img src="/images/vscode-launch-configuration.png" width=400 >
 
@@ -174,5 +174,5 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 ## 相关链接
 
-- [Dapr Visual Studio Core扩展概述]({{< ref vscode-dapr-extension.md >}})
+- [Dapr Visual Studio Core 扩展概述]({{< ref vscode-dapr-extension.md >}})
 - [Visual Studio Code 调试](https://code.visualstudio.com/docs/editor/debugging)

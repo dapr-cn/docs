@@ -82,7 +82,7 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
         - name: redisHost
           value: redis-master:6379
     ```
-4. 接下来，我们将获取Redis密码，该密码根据我们使用的操作系统而略有不同：
+4. 接下来，我们将获取 Redis 密码，该密码根据我们使用的操作系统而略有不同：
     - **Windows**：执行`kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" > encoded.b64`，这将创建一个有你的加密后密码的文件。 接下来，执行`certutil -decode encoded.b64 password.txt`，它将把你的redis密码放在一个名为`password.txt`的文本文件中。 复制密码，删除这两个文件。
 
     - **Linux/MacOS**：执行 `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode`并复制输出的密码。
@@ -126,6 +126,6 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > 
 > ## 相关链接
 > 
-> - [Dapr组件的基本格式]({{< ref component-schema >}})
-> - 有关如何将 Redis 用作配置存储的说明，请阅读 [操作方法：从存储]({{< ref "howto-manage-configuration" >}}) 管理配置。
+> - [Dapr 组件的基本格式]({{< ref component-schema >}})
+> - 有关如何将 Redis 用作配置存储的说明，请阅读 [操作方法：管理存储中的配置]({{< ref "howto-manage-configuration" >}}) 。
 > - [配置构建基块]({{< ref configuration-api-overview >}})

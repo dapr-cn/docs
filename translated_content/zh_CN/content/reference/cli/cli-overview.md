@@ -6,7 +6,7 @@ description: "Dapr CLI 命令的详细信息"
 weight: 10
 ---
 
-Dapr CLI 允许您在本地开发机或Kubernetes集群上安装Dapr。 提供调试支持，启动和管理 Dapr 实例。
+Dapr CLI 允许您在本地开发机或Kubernetes 集群上安装 Dapr。 提供调试支持，启动和管理 Dapr 实例。
 
 ```bash
 

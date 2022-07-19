@@ -14,7 +14,7 @@ description: >
 这是开发者的额外负担：必须维护此代码，即使它不属于应用程序核心逻辑的一部分，甚至有时还需要了解监视工具 API，使用额外的 SDK 等操作。 此检测需求可能会增加应用程序的可移植性难度，比如在不同地方部署时，该应用程序可能需要不同的检测代码。 例如，不同的云提供者提供不同的监控解决方案，而在本地部署中可能要求一个本地解决方案。
 
 ## 通过 Dapr 进行观测
-当程序利用 Dapr 构建块执行服务到服务调用和 pub/sub 消息的应用程序时，Dapr 在 [分布式跟踪]({{<ref tracing>}})方面提供了优势。 由于这种服务间通信流经 Dapr sidecar，sidecar 处于独特的位置，可以减少应用级别遥测的负担。
+当程序利用 Dapr 构建块执行服务到服务调用和 pub/sub 消息的应用程序时，Dapr 在 [分布式跟踪]({{<ref tracing>}}) 方面提供了优势。 由于这种服务间通信流经 Dapr sidecar，sidecar 处于独特的位置，可以减少应用级别遥测的负担。
 
 ### 分布式跟踪
 Dapr 可以[配置发送跟踪数据]({{<ref setup-tracing.md>}})，并且由于 Dapr 使用广泛采用的协议（如 [Zipkin](https://zipkin.io) 协议）进行跟踪，因此可以轻松地集成多个 [监控后端]({{<ref supported-tracing-backends>}})。
@@ -41,4 +41,4 @@ Dapr 生成 [日志]({{<ref "logs.md">}})，以提供 sidecar 操作的可见性
 指标（Metrics）是在一段时间内收集和存储的一系列度量值和计数。 [Dapr 指标]({{<ref "metrics">}}) 提供监控功能，以了解 Dapr sidecar 和系统服务的行为。 例如，Dapr sidecar 和用户应用之间的服务指标可以展示调用延迟、流量故障、请求的错误率等。 Dapr [系统服务度量指标](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md) 显示边车注入失败以及系统服务的健康状态，包括CPU使用情况、actor位置数量等。
 
 ### 健康状态
-Dapr sidecar 暴露了 [健康检查]({{<ref sidecar-health.md>}})的 HTTP 终结点。 通过此终结点，可以探测 Dapr 进程或 sidecar，以确定它的准备度和活跃度，并采取相应的行动。
+Dapr sidecar 暴露了 [健康检查]({{<ref sidecar-health.md>}})的 HTTP 端点。 通过此端点，可以探测 Dapr 进程或 sidecar，以确定它的准备度和活跃度，并采取相应的行动。

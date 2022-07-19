@@ -14,7 +14,7 @@ Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可
 
 在 Kafka 等组件中，可以通过[文档中](https://kafka.apache.org/documentation/#topicconfigs_retention.ms) `retention.ms` 在主题配置 TTL。 在 Dapr 中使用 TTL 消息时，使用 Kafka 的应用程序现在除了每个主题外，还可以设定每条消息的 TTL。
 
-## 本机消息TTL支持
+## 本机消息 TTL 支持
 
 当消息的 TTL 在 Pub/Sub 组件中得到本机支持时，Dapr 仅仅 TTL 的配置，不会增加任何额外的逻辑，保持可预见的行为。 当组件以不同方式处理过期消息时，这是很有帮助的。 例如，使用 Azure Service Bus 时，过期的消息存储在死信队列中，而不仅仅是删除。
 
@@ -26,7 +26,7 @@ Azure Service Bus 支持 [实体级别的 TTL](https://docs.microsoft.com/azure/
 
 ## 非 Dapr 订阅者
 
-如果订阅者不使用 Dapr 消费消息，则不会自动丢弃过期消息，因为过期时间是通过 Dapr 运行时在 Dapr sidecar 收到消息时处理的。 虽然，订阅者依然可以通过在CloudEvent中的 `expiration` 属性上添加代码来删掉过期消息。遵循 [RFC3339](https://tools.ietf.org/html/rfc3339) 格式.
+如果订阅者不使用 Dapr 消费消息，则不会自动丢弃过期消息，因为过期时间是通过 Dapr 运行时在 Dapr sidecar 收到消息时处理的。 虽然，订阅者依然可以通过在 CloudEvent 中的 `expiration` 属性上添加代码来删掉过期消息。遵循 [RFC3339](https://tools.ietf.org/html/rfc3339) 格式.
 
 当非 Dapr 订阅者使用 Azure Service Bus 等组件时，也就是在本机处理消息 TTL，就收不到过期的消息。 在这方面，不需要额外的逻辑。
 
@@ -86,5 +86,5 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 - 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
 - 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
-- [pub/sub组件列表]({{< ref supported-pubsub >}})
-- 阅读 [API 引用]({{< ref pubsub_api.md >}})
+- [pub/sub 组件列表]({{< ref supported-pubsub >}})
+- 阅读 [API 参考文档]({{< ref pubsub_api.md >}})

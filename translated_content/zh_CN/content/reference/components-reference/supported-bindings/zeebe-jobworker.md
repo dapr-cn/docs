@@ -1,8 +1,8 @@
 ﻿---
 type: docs
-title: "Zeebe JobWorker binding spec"
+title: "Zeebe JobWorker 绑定规范"
 linkTitle: "Zeebe JobWorker"
-description: "Detailed documentation on the Zeebe JobWorker binding component"
+description: "Zeebe JobWorker 绑定组件详细文档"
 ---
 
 ## 配置
@@ -95,19 +95,19 @@ Zeebe进程引擎能够将自定义任务请求头传递给作业工作线程。
 
 绑定还将以下作业相关变量作为元数据传递。 这些值将作为字符串传递。 该表单还包含原始数据类型，以便可以将其转换回工作线程使用的编程语言中相同的数据类型。
 
-| 元数据                                | Data type | 说明                        |
-| ---------------------------------- | --------- | ------------------------- |
-| X-Zeebe-Job-Key                    | int64     | 键值，作业的唯一标识符               |
-| X-Zeebe-Job-Type                   | string    | 工作的类型（应与请求的内容相匹配）         |
-| X-Zeebe-Process-Instance-Key       | int64     | 作业的进程实例键                  |
-| X-Zeebe-Bpmn-Process-Id            | string    | 作业进程定义的bpmn进程ID           |
-| X-Zeebe-Process-Definition-Version | int32     | 作业进程定义的版本                 |
-| X-Zeebe-Process-Definition-Key     | int64     | 作业进程定义的键值                 |
-| X-Zeebe-Element-Id                 | string    | 关联的任务元素 ID                |
-| X-Zeebe-Element-Instance-Key       | int64     | 标识关联任务的唯一键，在进程实例范围内保持唯一   |
-| X-Zeebe-Worker                     | string    | 激活这个作业的工作线程名称             |
-| X-Zeebe-Retries                    | int32     | 该作业的重试次数（应始终为正值）          |
-| X-Zeebe-Deadline                   | int64     | 作业何时可以再次被激活，将以UNIX时间戳格式发送 |
+| 元数据                                | 数据类型   | 说明                        |
+| ---------------------------------- | ------ | ------------------------- |
+| X-Zeebe-Job-Key                    | int64  | 键值，作业的唯一标识符               |
+| X-Zeebe-Job-Type                   | string | 工作的类型（应与请求的内容相匹配）         |
+| X-Zeebe-Process-Instance-Key       | int64  | 作业的进程实例键                  |
+| X-Zeebe-Bpmn-Process-Id            | string | 作业进程定义的bpmn进程ID           |
+| X-Zeebe-Process-Definition-Version | int32  | 作业进程定义的版本                 |
+| X-Zeebe-Process-Definition-Key     | int64  | 作业进程定义的键值                 |
+| X-Zeebe-Element-Id                 | string | 关联的任务元素 ID                |
+| X-Zeebe-Element-Instance-Key       | int64  | 标识关联任务的唯一键，在进程实例范围内保持唯一   |
+| X-Zeebe-Worker                     | string | 激活这个作业的工作线程名称             |
+| X-Zeebe-Retries                    | int32  | 该作业的重试次数（应始终为正值）          |
+| X-Zeebe-Deadline                   | int64  | 作业何时可以再次被激活，将以UNIX时间戳格式发送 |
 
 ## 相关链接
 

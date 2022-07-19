@@ -99,7 +99,7 @@ helm install dapr dapr/dapr --namespace dapr-system --set dapr_operator.logLevel
 
 ### 查看 Kubernetes 日志
 
-Dapr 日志被写入 stdout 和 stderr。 本节将指导您如何查看 Dapr 系统组件以及 Dapr sidecar的日志。
+Dapr 日志被写入 stdout 和 stderr。 本节将指导您如何查看 Dapr 系统组件以及 Dapr sidecar 的日志。
 
 #### Sidecar 日志
 

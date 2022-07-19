@@ -7,10 +7,10 @@ weight: 3000
 ---
 
 {{% alert title="Preview feature" color="warning" %}}
-gRPC 代理目前处于[预览]({{< ref preview-features.md >}})。
+gRPC 代理目前处于[预览]({{< ref preview-features.md >}}) 状态。
 {{% /alert %}}
 
-本文介绍如何使用 Dapr 通过 gRPC 连接服务。 通过使用 Dapr 的 gRPC 代理功能，您可以使用现有的基于原型的 gRPC 服务，并让流量通过 Dapr sidecar。 这样做可以为开发人员带来以下 [Dapr 服务调用]({{< ref service-invocation-overview.md >}}) 好处：
+本文介绍如何使用 Dapr 通过 gRPC 连接服务。 通过使用 Dapr 的 gRPC 代理功能，您可以使用现有的基于 proto 的 gRPC 服务，并让流量通过 Dapr sidecar。 这样做可以为开发人员带来以下 [Dapr 服务调用]({{< ref service-invocation-overview.md >}}) 好处：
 
 1. 双向认证
 2. 追踪
@@ -66,7 +66,7 @@ func main() {
 }
 ```
 
-此Go应用程序实现了Greeter proto 服务，并暴露了 `sayHello` 方法 。
+此 Go 应用程序实现了Greeter proto 服务，并暴露了 `sayHello` 方法 。
 
 ### 使用 Dapr CLI 运行 gRPC 服务器
 
@@ -93,11 +93,11 @@ spec:
 dapr run --app-id server --app-port 50051 --config config.yaml -- go run main.go
 ```
 
-使用Dapr CLI，我们使用--app-id标志，为应用程序、`server` 分配一个唯一的id。
+使用 Dapr CLI，我们使用 --app-id 标志，为应用程序、`server` 分配一个唯一的 id。
 
 ## 步骤 2: 调用服务
 
-以下示例演示如何从 gRPC 客户端使用 Dapr 发现 Greeter 服务。 请注意，客户端不是直接在端口 `50051`调用目标服务，而是通过端口 `50007` 调用其本地 Dapr sidecar，然后提供服务调用的所有功能，包括服务发现、跟踪、mTLS 和重试。
+以下示例演示如何从 gRPC 客户端使用 Dapr 发现 Greeter 服务。 请注意，客户端不是直接在端口 `50051` 调用目标服务，而是通过端口 `50007` 调用其本地 Dapr sidecar，然后提供服务调用的所有功能，包括服务发现、跟踪、mTLS 和重试。
 
 ```go
 package main
