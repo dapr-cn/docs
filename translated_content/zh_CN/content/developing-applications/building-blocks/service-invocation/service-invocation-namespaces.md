@@ -3,10 +3,10 @@ type: docs
 title: "跨命名空间的服务调用"
 linkTitle: "服务调用命名空间"
 weight: 1000
-description: "部署到不同命名空间的服务之间的调用"
+description: "部署到不同命名空间的服务间调用"
 ---
 
-在本文中，你将了解如何在不同命名空间中部署的服务之间调用。 默认情况下，服务调用支持通过简单地引用应用 ID (`nodeapp`) 在 *相同的* 命名空间内调用服务：
+在本文中，你将了解如何在不同命名空间中部署的服务之间进行调用。 默认情况下，服务调用支持通过简单地引用应用 ID (`nodeapp`) 在 *相同的* 命名空间内调用服务：
 
 ```sh
 localhost:3500/v1.0/invoke/nodeapp/method/neworder

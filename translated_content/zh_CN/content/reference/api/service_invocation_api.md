@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "服务调用 API 参考"
+title: "服务调用 API 参考文档"
 linkTitle: "服务调用 API"
 description: "有关服务调用 API 的详细文档"
 weight: 100
 ---
 
-Dapr为用户提供了调用具有唯一ID的其他应用程序的能力。 这种功能允许应用程序通过命名的标识符进行交互，并将服务发现的负担放在Dapr运行时上。
+Dapr 为用户提供了调用具有唯一 Id 的其他应用程序的能力。 这种功能允许应用程序通过命名的标识符进行交互，并将服务发现的负担放在 Dapr 运行时上。
 
 ## 在一个远程 dapr 应用程序上调用方法
 
@@ -63,9 +63,9 @@ PATCH/POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method
 
 ### 被调用的服务收到的请求
 
-一旦你的服务代码调用了另一个启用Dapr的应用程序中的方法，Dapr将把请求连标头和正文一起发送到 `<method-name>` 端点上的应用程序。
+一旦你的服务代码调用了另一个启用Dapr的应用程序中的方法，Dapr 将把请求连标头和正文一起发送到 `<method-name>` 端点上的应用程序。
 
-被调用的的 Dapr 应用需要侦听并响应该端点上的请求。
+被调用的的 Dapr 应用需要监听并响应该端点上的请求。
 
 ### 跨命名空间调用
 
@@ -89,7 +89,7 @@ curl http://localhost:3500/v1.0/invoke/mathService/method/add \
   -d '{ "arg1": 10, "arg2": 23}'
 ```
 
-`mathService` 服务需要侦听 `/add` 终结点才能接收和处理请求。
+`mathService` 服务需要监听 `/add` 端点才能接收和处理请求。
 
 对于 Node 应用，如下所示：
 
@@ -105,9 +105,9 @@ app.post('/add', (req, res) => {
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 ```
 
-> 来自远程终结点的响应将在响应正文中返回。
+> 来自远程端点的响应将在响应正文中返回。
 
-当您的服务侦听更多嵌套路径时（例如 `/api/v1/add`），Dapr 实现了一个完全反向代理，因此您可以将所有必要的路径片段附加到请求 URL，如下所示：
+当您的服务监听更多嵌套路径时（例如 `/api/v1/add`），Dapr 实现了一个完全反向代理，因此您可以将所有必要的路径片段附加到请求 URL，如下所示：
 
 `http://localhost:3500/v1.0/invoke/mathService/method/api/v1/add`
 
@@ -118,4 +118,4 @@ app.listen(port, () => console.log(`Listening on port ${port}!`));
 在此 URL 中， `testing` 是 `mathService` 运行的命名空间。
 
 ## 下一步
-- [入门指南：发现并调用服务]({{< ref howto-invoke-discover-services.md >}})
+- [操作方法：发现并调用服务]({{< ref howto-invoke-discover-services.md >}})

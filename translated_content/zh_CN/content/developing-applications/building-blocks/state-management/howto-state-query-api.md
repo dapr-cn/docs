@@ -55,7 +55,7 @@ description: "用于查询状态存储的API"
 
 作为数据集，[让我们考虑一个包含员工记录](../query-api-examples/dataset.json) 包含员工 ID、组织、州和城市的员工记录的集合。 请注意，此数据集是一个键/值对数组，其中 `key` 是唯一 ID， `value` 是具有员工记录的 JSON 对象。 为了更好地说明功能，让我们将组织名称 （org） 和员工 ID （id） 作为嵌套的 JSON 人员对象。
 
-首先，您需要创建MongoDB的实例，这是您的状态存储。
+首先，您需要创建 MongoDB 的实例，这是您的状态存储。
 ```bash
 docker run -d --rm -p 27017:27017 --name mongodb mongo:5
 ```

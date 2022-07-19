@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "init CLI 命令参考"
+title: "init CLI 命令参考文档"
 linkTitle: "init"
 description: "有关 init CLI 命令的详细信息"
 ---

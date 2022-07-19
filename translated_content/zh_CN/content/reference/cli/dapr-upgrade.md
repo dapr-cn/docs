@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "upgrade CLI 命令参考"
+title: "upgrade CLI 命令参考文档"
 linkTitle: "upgrade"
 description: "有关 upgrade CLI 命令的详细信息"
 ---

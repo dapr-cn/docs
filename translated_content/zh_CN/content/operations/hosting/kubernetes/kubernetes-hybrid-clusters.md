@@ -12,9 +12,9 @@ Kubernetes 使用了一个叫做节点亲和性的概念，这样你就可以表
 
 ## 前提
 
-您需要一个带有Windows节点的 Kubernetes 集群。 许多 Kubernetes 提供商支持自动配置启用 Windows 的 Kubernetes 集群。
+您需要一个带有 Windows 节点的 Kubernetes 集群。 许多 Kubernetes 提供商支持自动配置启用 Windows 的 Kubernetes 集群。
 
-1. 按照您的首选提供商的说明来设置一个带有Windows功能的集群。
+1. 按照您的首选提供商的说明来设置一个带有 Windows 功能的集群。
 
 - [在 Azure AKS 上设置 Windows](https://docs.microsoft.com/azure/aks/windows-container-cli)
 - [在 AWS EKS 上设置 Windows](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)
@@ -35,9 +35,9 @@ Kubernetes 使用了一个叫做节点亲和性的概念，这样你就可以表
 
 如果您正在使用 Dapr CLI 或通过 Helm Chart 安装， 只需遵循正常的部署程序：[ 在 Kubernetes 集群上安装 Dapr]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >}})
 
-关联性将被自动设置为 `kubernetes.io/os=linux`。 这对于大多数用户来说是足够的，因为Kubernetes至少需要一个Linux节点池。
+关联性将被自动设置为 `kubernetes.io/os=linux`。 这对于大多数用户来说是足够的，因为 Kubernetes 至少需要一个Linux节点池。
 
-> **注意：** Dapr 控制面板容器是为windows和linux构建和测试的，但是，我们一般建议使用linux 控制面板容器。 它们往往较小，用户基础也大得多。
+> **注意：** Dapr 控制面板容器是为windows和linux构建和测试的，但是，我们一般建议使用 linux 控制面板容器。 它们往往较小，用户基础也大得多。
 
 如果您理解以上内容，但想要将 Dapr 控制面板部署到Windows，您可以通过设置这样做：
 
@@ -48,9 +48,9 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 ## 安装 Dapr 应用程序
 
 ### Windows 应用程序
-为了在 Windows 上启动 Dapr 应用程序，您需要首先创建一个安装应用程序的 Docker 容器。 指南见 [开始：为容器准备 Windows](https://docs.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment)。 一旦你拥有一个带有应用程序的Docker container，创建一个 deployment YAML 文件，节点亲和性设置为 kubernetes.io/os: windows。
+为了在 Windows 上启动 Dapr 应用程序，您需要首先创建一个安装应用程序的 Docker 容器。 指南见 [开始：为容器准备 Windows](https://docs.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment)。 一旦你拥有一个带有应用程序的 Docker container，创建一个 deployment YAML 文件，节点亲和性设置为 kubernetes.io/os: windows。
 
-1. 创建一个 deployment YAML
+1. 创建 deployment YAML
 
    这里是一个示例 deployment ，节点关联性设置为“windows”。 根据您的应用程序的需要修改。
    ```yaml
@@ -102,7 +102,7 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 ### Linux 应用程序
 如果您已经在 Linux 上有运行的 dapr 应用程序， 您仍然需要像以上添加亲和性规则，只不过要选择 linux 亲和性。
 
-1. 创建一个 deployment YAML
+1. 创建 deployment YAML
 
    这里是一个示例 deployment，节点亲和性设置为“linux”。 根据您的应用程序的需要修改。
    ```yaml

@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Kubernetes生产环境配置指南"
+title: "Kubernetes 生产环境配置指南"
 linkTitle: "生产环境配置指南"
 weight: 40000
 description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和做法"
@@ -25,14 +25,14 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 
 ### Helm
 
-使用 Helm 安装 Dapr 时，没有默认限制/请求值。 每个组件都有一个`resources`选项(例如，`dapr_dashboard.resources`)，你可以用它来调整Dapr控制平面以适应你的环境。 [Helm chart readme](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md)有详细的信息和示例。 在本机/开发环境安装的时候，你可以跳过配置`resources`选项。
+使用 Helm 安装 Dapr 时，没有默认限制/请求值。 每个组件都有一个 `resources` 选项(例如，`dapr_dashboard.resources`)，你可以用它来调整 Dapr 控制平面以适应你的环境。 [Helm chart readme](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md)有详细的信息和示例。 在本机/开发环境安装的时候，你可以跳过配置 `resources` 选项。
 
 ### 可选组件
 
-下面的 Dapr 控制平面deployment是可选的：
+下面的 Dapr 控制平面 deployment 是可选的：
 
 - **Placement**-用于Dapr Actors
-- **Sentry** - 用于服务间调用的mTLS
+- **Sentry** - 用于服务间调用的 mTLS
 - **Dashboard** - 用于集群的操作视图
 
 ## Sidecar 资源设置
@@ -78,7 +78,7 @@ description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和
 
 关于您可以在 值文件中设置的所有可用选项的完整列表（或使用 `--set` 命令行选项），请参阅 https://github.com/dapr/dapr/blob/master/charts/dapr/README.md。
 
-你也可以不使用`helm install`或`helm upgrade`，如下图所示，你可以运行`helm upgrade --install` - 这将动态地决定是安装还是升级。
+你也可以不使用 `helm install` 或 `helm upgrade`，如下图所示，你可以运行 `helm upgrade --install` - 这将动态地决定是安装还是升级。
 
 ```bash
 # add/update the helm repo
@@ -108,38 +108,38 @@ helm install dapr dapr/dapr \
 kubectl get pods --namespace dapr-system
 ```
 
-该命令将为dapr-system命名空间中每个控制平面service创建3个副本。
+该命令将为 dapr-system 命名空间中每个控制平面 service 创建3个副本。
 
 {{% alert title="Note" color="primary" %}}
-Dapr Helm Chart都会自动关联地部署到带有标签`kubernetes.io/os=linux`的节点上。 你可以将Dapr控制平面部署到Windows节点，但大多数用户应该不需要。 更多信息参见[部署到 Linux/Windows Kubernetes 的混合集群]({{< ref "kubernetes-hybrid-clusters.md" >}})。
+Dapr Helm Chart 都会自动关联地部署到带有标签 `kubernetes.io/os=linux` 的节点上。 你可以将 Dapr 控制平面部署到 Windows 节点，但大多数用户应该不需要。 更多信息参见[部署到 Linux/Windows Kubernetes 的混合集群]({{< ref "kubernetes-hybrid-clusters.md" >}})。
 
 {{% /alert %}}
 
 ## 用 Helm 升级 Dapr
 
-Dapr支持零停机升级， 升级包括以下步骤： 升级包括以下步骤：
+Dapr 支持零停机升级， 升级包括以下步骤： 升级包括以下步骤：
 
 1. 升级CLI版本(可选但推荐)
-2. 更新Dapr control plane
+2. 更新 Dapr 控制平面
 3. 更新数据平面(Dapr sidecars)
 
 ### 升级CLI
 
 要升级 Dapr CLI，[下载 CLI 的最新版本](https://github.com/dapr/cli/releases)，并确保它在您的当前路径中。
 
-### 更新Dapr control plane
+### 更新 Dapr 控制平面
 
 请参阅 [在 Kubernetes 集群上升级 Dapr 的步骤]({{< ref "kubernetes-upgrade.md#helm" >}})。
 
 ### 更新数据平面(sidecar)
 
-最后一步是更新正在运行Dapr的pod，以接替新版本的Dapr运行时。 要完成这一步，只需对有`dapr.io/enabled`注解的任何deployment发送rollout restart命令即可。
+最后一步是更新正在运行 Dapr 的 pod，以接替新版本的 Dapr 运行时。 要完成这一步，只需对有 `dapr.io/enabled` 注解的任何 deployment 发送 rollout restart 命令即可。
 
 ```bash
 kubectl rollout restart deploy/<Application deployment name>
 ```
 
-要查看所有已启用Dapr的deployment列表，您可以使用[Dapr Dashboard](https://github.com/dapr/dashboard)或使用Dapr CLI运行以下命令。
+要查看所有已启用 Dapr 的 deployment 列表，您可以使用 [Dapr Dashboard](https://github.com/dapr/dashboard) 或使用 Dapr CLI 运行以下命令。
 
 ```bash
 dapr list -k
@@ -170,17 +170,17 @@ nodeapp    3000      16h  2020-07-29 17:16.22
 
 ## 建议的安全配置
 
-当正确配置时，Dapr可确保安全通信， 它还可以通过一些内置的功能使你的应用更加安全。 它还可以通过一些内置的功能使你的应用更加安全。
+当正确配置时，Dapr 可确保安全通信， 它还可以通过一些内置的功能使你的应用更加安全。 它还可以通过一些内置的功能使你的应用更加安全。
 
 建议生产环境的部署涵盖以下设置：
 
-1. **启用相互验证 (mTLS)**。 请注意，Dapr默认开启了mTLS。 有关如何携带自定义证书的详细信息，请参见 [这里]({{< ref "mtls.md#bringing-your-own-certificates" >}})。
+1. **启用相互验证 (mTLS)**。 请注意，Dapr 默认开启 mTLS。 有关如何携带自定义证书的详细信息，请参见 [这里]({{< ref "mtls.md#bringing-your-own-certificates" >}})。
 
-2. **启用Dapr to App API验证**。 这是你的应用程序和Dapr边车之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 有关详细信息，请参阅[在 Dapr 中启用 API 令牌身份验证]({{< ref "api-token.md" >}})
+2. **启用 Dapr to App API 验证**。 这是你的应用程序和 Dapr sidecar 之间的通信。 这能确保 Dapr 知道它正在与授权的应用程序通信。 有关详细信息，请参阅[在 Dapr 中启用 API 令牌身份验证]({{< ref "api-token.md" >}})
 
-3. **启用Dapr to App API验证**。 这是你的应用程序和Dapr边车之间的通信。 这能确保Dapr知道它正在与授权的应用程序通信。 请参阅 [使用令牌认证对来自 Dapr 的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
+3. **启用 Dapr to App API 验证**。 这是你的应用程序和 Dapr sidecar 之间的通信。 这能确保 Dapr 知道它正在与授权的应用程序通信。 请参阅 [使用令牌认证对来自 Dapr 的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
 
-4. 所有的组件YAML都应该把**密钥数据配置在密钥存储中**，而不是硬编码在YAML文件中。 请参阅 [此处]({{< ref "component-secrets.md" >}}秘密)，了解如何在 Dapr 组件中使用秘密。
+4. 所有的组件 YAML 都应该把**密钥数据配置在密钥存储中**，而不是硬编码在 YAML 文件中。 请参阅 [此处]({{< ref "component-secrets.md" >}}秘密)，了解如何在 Dapr 组件中使用秘密。
 
 5. Dapr **控制平面安装在一个专用的命名空间**上，如`dapr-system`。
 
@@ -189,15 +189,15 @@ nodeapp    3000      16h  2020-07-29 17:16.22
 
 ## 追踪和度量配置
 
-Dapr 默认启用追踪和度量。 *建议*在生产环境中为您的应用程序和Dapr控制平面设置分布式追踪和度量。
+Dapr 默认启用追踪和度量。 *建议*在生产环境中为您的应用程序和 Dapr 控制平面设置分布式追踪和度量。
 
-如果你已经有了自己的可观察测性支持组件，你可以禁用Dapr的追踪和度量。
+如果你已经有了自己的可观察测性支持组件，你可以禁用 Dapr 的追踪和度量。
 
 ### 追踪
 要为 Dapr 配置追踪后端，请访问[这个]({{< ref "setup-tracing.md" >}})链接。
 
 ### 度量
-对于度量，Dapr在9090端口上暴露了一个Prometheus端点，可以被Prometheus收集。
+对于度量，Dapr 在9090端口上暴露了一个 Prometheus 端点，可以被 Prometheus 收集。
 
 要为 Dapr 配置 Prometheus、Grafana 和其他监控工具，请访问 [这个]({{< ref "monitoring" >}})链接。
 

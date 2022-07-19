@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Twilio SMS binding spec"
+title: "Twilio SMS绑定规范"
 linkTitle: "Twilio SMS"
-description: "Detailed documentation on the Twilio SMS binding component"
+description: "Twilio SMS绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/twilio/"
 ---
@@ -38,10 +38,10 @@ spec:
 
 | 字段         | 必填 | 绑定支持 | 详情              | 示例               |
 | ---------- |:--:| ---- | --------------- | ---------------- |
-| toNumber   | Y  | 输出   | 要向其发送短信的目标号码    | `"111-111-1111"` |
-| fromNumber | Y  | 输出   | 发送人手机号码         | `"122-222-2222"` |
-| accountSid | Y  | 输出   | Twilio账号SID     | `"account sid"`  |
-| authToken  | Y  | 输出   | Twilio身份验证token | `"auth token"`   |
+| toNumber   | 是  | 输出   | 要向其发送短信的目标号码    | `"111-111-1111"` |
+| fromNumber | 是  | 输出   | 发送人手机号码         | `"122-222-2222"` |
+| accountSid | 是  | 输出   | Twilio账号SID     | `"account sid"`  |
+| authToken  | 是  | 输出   | Twilio身份验证token | `"auth token"`   |
 
 ## 绑定支持
 

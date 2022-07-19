@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "使用输出绑定调用不同的资源"
-linkTitle: "How-To: 绑定"
+linkTitle: "操作方法: 绑定"
 description: "使用 Dapr 输出绑定调用外部系统"
 weight: 300
 ---
@@ -20,9 +20,9 @@ weight: 300
 
 就本指南的目的，您将使用 Kafka 绑定。 您可以在 [此处]({{< ref setup-bindings >}}) 找到不同绑定规范的列表。
 
-创建一个名称为 `checkout`的新绑定组件。
+创建一个名称为 `checkout` 的新绑定组件。
 
-在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的topics和代理。
+在 `metadata` 部分中，配置 Kafka 相关属性，如要将消息发布到其的 topic 和代理。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 

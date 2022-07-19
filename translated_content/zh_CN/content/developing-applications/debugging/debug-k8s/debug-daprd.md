@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "在Kubernetes模式下调试Dapr"
+title: "在 Kubernetes 模式下调试 Dapr"
 linkTitle: "Dapr sidecar"
 weight: 2000
-description: "如何在你的Kubernetes集群中调试Dapr sidecar(daprd)"
+description: "如何在你的 Kubernetes 集群中调试 Dapr sidecar(daprd)"
 ---
 
 
 ## 概述
 
-有时有必要了解 Dapr sidecar（daprd） 中发生了什么，它作为 sidecar 运行在您的应用程序旁边，尤其是当您诊断您的 Dapr 应用程序并想知道 Dapr 本身是否出了问题时。 此外，你可能正在为Kubernetes中的Dapr开发一个新功能，并且想调试你的代码。
+有时有必要了解 Dapr sidecar（daprd） 中发生了什么，它作为 sidecar 运行在您的应用程序旁边，尤其是当您诊断您的 Dapr 应用程序并想知道 Dapr 本身是否出了问题时。 此外，你可能正在为 Kubernetes 中的 Dapr 开发一个新功能，并且想调试你的代码。
 
-本指南将涵盖如何使用内置的Dapr调试来调试您的 Kubernetes pod 中的 Dapr sidecar 。
+本指南将涵盖如何使用内置的 Dapr 调试来调试您的 Kubernetes pod 中的 Dapr sidecar 。
 
 ## 前提
 
@@ -21,12 +21,12 @@ description: "如何在你的Kubernetes集群中调试Dapr sidecar(daprd)"
 
 ## 在调试模式下初始化 Dapr
 
-如果您的Kubernetes集群中已经安装了Dapr，请先卸载它：
+如果您的 Kubernetes 集群中已经安装了 Dapr，请先卸载它：
 
 ```bash
 dapr uninstall -k
 ```
-我们将使用"helm"来安装 Dapr 调试二进制文件。 了解更多信息，请参阅 [使用 helm 安装]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}})。
+我们将使用 "helm" 来安装 Dapr 调试二进制文件。 了解更多信息，请参阅 [使用 helm 安装]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}})。
 
 首先配置名为 `values.yml` 的文件。
 
@@ -36,7 +36,7 @@ global:
    tag: "dev-linux-amd64"
 ```
 
-然后进入到"dapr"目录中，如果你没有这个目录，请参照本指南开始的说明，从GithHub中克隆下来。然后执行下面的命令:
+然后进入到 "dapr" 目录中，如果你没有这个目录，请参照本指南开始的说明，从 GithHub 中克隆下来。然后执行下面的命令:
 
 ```bash
 helm install dapr charts/dapr --namespace dapr-system --values values.yml --wait
@@ -59,7 +59,7 @@ index 23185a6..6cdb0ae 100644
        - name: node
 ```
 
-`dapr.io/enable-debug` 注解将提示Dapr注入器将Dapr sidecar注入到调试模式。 您也可以使用注解 `dapr.io/debug-port`指定调试端口，否则默认端口将是“40000”。
+`dapr.io/enable-debug` 注解将提示 Dapr 注入器将 Dapr sidecar 注入到调试模式。 您也可以使用注解 `dapr.io/debug-port`指定调试端口，否则默认端口将是“40000”。
 
 使用下面的命令来部署应用。 完整指南请参照 [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)。
 
@@ -67,7 +67,7 @@ index 23185a6..6cdb0ae 100644
 kubectl apply -f ./deploy/node.yaml
 ```
 
-下面的命令显示目标应用程序的pod名称：
+下面的命令显示目标应用程序的 pod 名称：
 
 ```bash
 $ kubectl get pods
@@ -85,11 +85,11 @@ Forwarding from 127.0.0.1:40000 -> 40000
 Forwarding from [::1]:40000 -> 40000
 ```
 
-全部完成！ 现在您可以从您喜欢的IDE中使用40000端口开启远程调试了。
+全部完成！ 现在您可以从您喜欢的 IDE 中使用40000端口开启远程调试了。
 
 ## 相关链接
 
 - [Kubernetes上的 Dapr 概述]({{< ref kubernetes-overview >}})
 - [将 dapr 部署到 Kubernetes 集群]({{< ref kubernetes-deploy >}})
-- [在Kubernetees中调试Dapr服务]({{< ref debug-dapr-services >}})
+- [在 Kubernetees 中调试 Dapr 服务]({{< ref debug-dapr-services >}})
 - [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)

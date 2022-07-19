@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "操作方法：加密应用程序 state"
+title: "操作方法：加密应用程序状态"
 linkTitle: "操作方法：加密状态"
 weight: 450
 description: "自动加密状态并管理密钥轮换"
@@ -12,7 +12,7 @@ description: "自动加密状态并管理密钥轮换"
 
 ## 介绍
 
-应用程序状态通常需要静态加密，以便在企业工作负载或受监管环境中提供更强的安全性。 Dapr提供基于AES256[的自动客户端加密](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)。
+应用程序状态通常需要静态加密，以便在企业工作负载或受监管环境中提供更强的安全性。 Dapr 提供基于 AES256 [的自动客户端加密](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)。
 
 除了自动加密之外，Dapr 还支持主密钥和辅助加密密钥，使开发人员和运营团队能够更轻松地启用密钥轮换策略。 所有 Dapr 状态存储都支持此功能。
 
@@ -20,7 +20,7 @@ description: "自动加密状态并管理密钥轮换"
 
 ## 启用自动加密
 
-1. 使用标准 [Dapr配置]({{< ref configuration-overview.md >}})启用状态加密预览功能：
+1. 使用标准 [Dapr 配置]({{< ref configuration-overview.md >}})启用状态加密预览功能：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -64,7 +64,7 @@ spec:
       key: mykey
 ```
 
-现在你有一个Dapr状态存储，它被配置为从一个名为 `mysecret`的秘密中获取加密密钥，在一个名为 `mykey`的密钥中包含实际的加密密钥。 实际的加密密钥 *must* 是一个AES256加密密钥。 如果加密密钥无效，Dapr将出错并退出。
+现在你有一个 Dapr 状态存储，它被配置为从一个名为 `mysecret` 的秘密中获取加密密钥，在一个名为 `mykey` 的密钥中包含实际的加密密钥。 实际的加密密钥 *必须* 是 AES256 加密密钥。 如果加密密钥无效，Dapr 将出错并退出。
 
 *请注意，秘密存储不一定要支持keys*
 

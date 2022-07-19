@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Metadata API 参考"
+title: "Metadata API 参考文档"
 linkTitle: "Metadata API"
 description: "有关元数据 API 的详细文档"
 weight: 800
 ---
 
-Dapr 有一个 metadata API，它返回有关 sidecar 的信息，从而实现运行时可发现性。 元数据终结点返回加载的组件和激活的 Actors（如果存在）的列表。
+Dapr 有一个 metadata API，它返回有关 sidecar 的信息，从而实现运行时可发现性。 元数据端点返回加载的组件和激活的 Actors（如果存在）的列表。
 
 Dapr metadata API 还允许您以键值对的格式存储其他信息。
 
@@ -14,7 +14,7 @@ Dapr metadata API 还允许您以键值对的格式存储其他信息。
 
 ## 获取 Dapr sidecar 信息
 
-获取元数据终结点提供的 Dapr sidecar 信息。
+获取元数据端点提供的 Dapr sidecar 信息。
 
 ### HTTP 请求
 
@@ -58,8 +58,8 @@ GET http://localhost:<daprPort>/v1.0/metadata
 | Name    | 数据类型   | 说明    |
 | ------- | ------ | ----- |
 | name    | string | 组件名称. |
-| type    | string | 组件类型. |
-| version | string | 组件版本. |
+| type    | string | 组件类型。 |
+| version | string | 组件版本。 |
 
 ### 示例
 

@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Azure Storage Queues binding spec"
-linkTitle: "Azure Storage Queues"
-description: "Detailed documentation on the Azure Storage Queues binding component"
+title: "Azure 存储队列绑定规范"
+linkTitle: "Azure存储队列"
+description: "Azure 存储队列绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/storagequeues/"
 ---
@@ -42,11 +42,11 @@ spec:
 
 | 字段               | 必填 | 绑定支持  | 详情                                                                                                                            | 示例              |
 | ---------------- |:--:| ----- | ----------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| storageAccount   | Y  | 输入/输出 | Azure存储账户                                                                                                                     | `"account1"`    |
-| storageAccessKey | Y  | 输入/输出 | Azure存储访问秘钥                                                                                                                   | `"accessKey"`   |
-| queue            | Y  | 输入/输出 | Azure存储队列名                                                                                                                    | `"myqueue"`     |
+| storageAccount   | 是  | 输入/输出 | Azure存储账户                                                                                                                     | `"account1"`    |
+| storageAccessKey | 是  | 输入/输出 | Azure存储访问秘钥                                                                                                                   | `"accessKey"`   |
+| queue            | 是  | 输入/输出 | Azure存储队列名                                                                                                                    | `"myqueue"`     |
 | ttlInseconds     | 否  | 输出    | 设置默认消息存活时间。 如果省略此参数，则消息将在 10 分钟后过期。 [另见](#specifying-a-ttl-per-message)                                                       | `"60"`          |
-| decodeBase64     | N  | 输出    | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false` | `true`, `false` |
+| decodeBase64     | 否  | 输出    | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false` | `true`, `false` |
 
 ## 绑定支持
 

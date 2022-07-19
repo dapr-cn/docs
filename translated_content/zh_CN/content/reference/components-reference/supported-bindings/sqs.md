@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "AWS SQS binding spec"
+title: "AWS SQS 绑定规范"
 linkTitle: "AWS SQS"
-description: "Detailed documentation on the AWS SQS binding component"
+description: "AWS SQS 绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/sqs/"
 ---
@@ -44,11 +44,11 @@ spec:
 
 | 字段           | 必填 | 绑定支持  | 详情                   | 示例                  |
 | ------------ |:--:| ----- | -------------------- | ------------------- |
-| queueName    | Y  | 输入/输出 | SQS 队列名称             | `"myqueue"`         |
-| region       | Y  | 输入/输出 | 指定的 AWS 区域（region）   | `"us-east-1"`       |
-| accessKey    | Y  | 输入/输出 | 要访问此资源的 AWS 访问密钥     | `"key"`             |
-| secretKey    | Y  | 输入/输出 | 要访问此资源的 AWS 密钥访问 Key | `"secretAccessKey"` |
-| sessionToken | N  | 输入/输出 | 要使用的 AWS 会话令牌        | `"sessionToken"`    |
+| queueName    | 是  | 输入/输出 | SQS 队列名称             | `"myqueue"`         |
+| region       | 是  | 输入/输出 | 指定的 AWS 区域（region）   | `"us-east-1"`       |
+| accessKey    | 是  | 输入/输出 | 要访问此资源的 AWS 访问密钥     | `"key"`             |
+| secretKey    | 是  | 输入/输出 | 要访问此资源的 AWS 密钥访问 Key | `"secretAccessKey"` |
+| sessionToken | 否  | 输入/输出 | 要使用的 AWS 会话令牌        | `"sessionToken"`    |
 
 
 ## 绑定支持

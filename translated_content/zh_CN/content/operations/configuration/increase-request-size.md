@@ -26,7 +26,7 @@ dapr run --dapr-http-max-request-size 16 node app.js
 
 {{% codetab %}}
 
-在Kubernetes中，需要在deployment YAML文件中设置以下注解:
+在 Kubernetes 中，需要在 deployment YAML 文件中设置以下注解:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -57,4 +57,4 @@ spec:
 {{< /tabs >}}
 
 ## 相关链接
-- [Dapr Kubernetes pod annotations规范]({{< ref arguments-annotations-overview.md >}})
+- [Dapr Kubernetes pod annotations 规范]({{< ref arguments-annotations-overview.md >}})

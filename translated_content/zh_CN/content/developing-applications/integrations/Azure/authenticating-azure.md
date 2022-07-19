@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Azure认证"
-linkTitle: "Azure认证"
-description: "如何使用Azure AD和/或托管身份认证Azure组件"
+title: "Azure 认证"
+linkTitle: "Azure 认证"
+description: "如何使用 Azure AD 和/或托管身份认证 Azure 组件"
 aliases:
   - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/"
   - "/zh-hans/reference/components-reference/supported-secret-stores/azure-keyvault-managed-identity/"
@@ -37,13 +37,13 @@ Azure AD 构建在开放标准（如 OAuth 2.0）之上，该标准允许服务�
 
 **使用客户端凭据进行身份验证：**
 
-| 字段                  | 必填 | 详情              | 示例                                           |
-| ------------------- | -- | --------------- | -------------------------------------------- |
-| `azureTenantId`     | Y  | Azure AD 租户ID   | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`     |
-| `azureClientId`     | Y  | 客户端 ID（应用程序 ID） | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`     |
-| `azureClientSecret` | Y  | 客户端密码（应用程序密码）   | `"Ecy3XG7zVZK3/vl/a2NSB+a1zXLa8RnMum/IgD0E"` |
+| 字段                  | 必填 | 详情                 | 示例                                           |
+| ------------------- | -- | ------------------ | -------------------------------------------- |
+| `azureTenantId`     | Y  | Azure AD 租户 ID     | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`     |
+| `azureClientId`     | Y  | 客户端 ID（应用程序 ID）    | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`     |
+| `azureClientSecret` | Y  | 客户端 secret（应用程序密码） | `"Ecy3XG7zVZK3/vl/a2NSB+a1zXLa8RnMum/IgD0E"` |
 
-在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes 秘密的引用。
+在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes secret 的引用。
 
 **使用 PFX 证书进行身份验证：**
 

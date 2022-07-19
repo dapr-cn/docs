@@ -25,7 +25,7 @@ Dapr 使用 CloudEvents 为事件负载提供额外的上下文，从而启用�
 
 Dapr 应用能够在没有云事件封装的情况下将原始事件发布到 pub/sub，以便与非 Dapr 应用兼容。
 
-<img src="/images/pubsub_publish_raw.png" alt="图表展示了当订阅者没有使用Dapr或者云事件时如何用Dapr进行发布。" width=1000>
+<img src="/images/pubsub_publish_raw.png" alt="图表展示了当订阅者没有使用 Dapr 或者 CloudEvent 时如何用 Dapr 进行发布。" width=1000>
 
 要禁用 CloudEvent 包装，请将 `rawPayload` 元数据设置为 `true` ，作为发布的一部分。 这允许订阅者接收这些消息，而不必分析 CloudEvent 。
 
@@ -79,9 +79,9 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 Dapr 应用程序还能够订阅来自不使用 CloudEvent 封装的现有 pub/sub 的原始事件。
 
-<img src="/images/pubsub_subscribe_raw.png" alt="图表展示了当订阅者没有使用Dapr或者云事件时如何用Dapr进行发布。" width=1000>
+<img src="/images/pubsub_subscribe_raw.png" alt="图表展示了当订阅者没有使用 Dapr 或者 CloudEvent 时如何用 Dapr 进行发布。" width=1000>
 
-### 编程式订阅原始事件
+### 以编程方式订阅原始事件
 
 在使用编程式订阅时，添加 `rawPayload` 元数据条目，以便 Dapr sidecar 自动将有效载荷包裹到与当前 Dapr SDK 兼容的 CloudEvent 中。
 
@@ -168,5 +168,5 @@ scopes:
 ## 下一步
 
 - 了解有关[如何发布和订阅]({{< ref howto-publish-subscribe.md >}})的详细信息
-- [pub/sub组件列表]({{< ref supported-pubsub >}})
-- 阅读 [API 引用]({{< ref pubsub_api.md >}})
+- [pub/sub 组件列表]({{< ref supported-pubsub >}})
+- 阅读 [API 参考手册]({{< ref pubsub_api.md >}})

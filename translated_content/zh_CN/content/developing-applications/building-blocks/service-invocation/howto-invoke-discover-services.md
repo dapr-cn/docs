@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "入门指南：发现并调用服务"
-linkTitle: "如何做：用HTTP进行调用"
+title: "操作方法：使用 HTTP 调用服务"
+linkTitle: "操作方法：使用 HTTP 调用"
 description: "入门指南指导如何使用 Dapr 服务在分布式应用程序中调用其它服务"
 weight: 2000
 ---
 
-本文介绍如何使用唯一的应用程序 ID 部署每个服务，以便其他服务可以使用服务调用 API 发现和调用这些终结点。
+本文介绍如何使用唯一的应用程序 ID 部署每个服务，以便其他服务可以使用服务调用 API 发现和调用这些端点。
 
-## 示例:
+## 示例
 
-以下的示例简述了一个订单处理程序。 当前示例中，存两项服务：订单处理服务和结账服务。 两个服务都使用了 Dapr sidecars，订单处理服务委托Dapr 去调用结账服务的结账操作。
+以下的示例简述了一个订单处理程序。 当前示例中，存两项服务：订单处理服务和结账服务。 两个服务都使用了 Dapr sidecars，订单处理服务（order processing service ）使用 Dapr 来调用结账服务（checkout service）的 checkou 方法。
 
 <img src="/images/building-block-service-invocation-example.png" width=1000 height=500 alt="显示示例服务的服务调用的图示">
 
-## 步骤 1: 为服务选择标识
+## 步骤 1: 为服务选择 ID
 
-Dapr 允许您为您的应用分配一个全局唯一ID。 此 ID 为您的应用程序封装了状态，不管它可能有多少实例。
+Dapr 允许您为您的应用分配一个全局唯一 ID。 此 ID 为您的应用程序封装了状态，不管它可能有多少实例。
 
 
 {{< tabs Dotnet Java Python Go Javascript Kubernetes>}}
@@ -32,7 +32,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ```
 
-如果您的应用使用 SSL 连接，您可以告诉Dapr 在不安全的 SSL 连接中调用您的应用：
+如果您的应用使用 SSL 连接，您可以告诉 Dapr 在不安全的 SSL 连接中调用您的应用：
 
 ```bash
 
@@ -76,7 +76,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ```
 
-如果您的应用使用 SSL 连接，您可以告诉Dapr 在不安全的 SSL 连接中调用您的应用：
+如果您的应用使用 SSL 连接，您可以告诉 Dapr 在不安全的 SSL 连接中调用您的应用：
 
 ```bash
 
@@ -122,7 +122,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ```
 
-如果您的应用使用 SSL 连接，您可以告诉Dapr 在不安全的 SSL 连接中调用您的应用：
+如果您的应用使用 SSL 连接，您可以告诉 Dapr 在不安全的 SSL 连接中调用您的应用：
 
 ```bash
 
@@ -137,9 +137,9 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 {{% codetab %}}
 
-### 在部署到Kubernetes时设置一个应用程序的ID
+### 在部署到 Kubernetes 时设置一个应用程序的 ID
 
-在 Kubernetes 中，在您的pod 上设置 `dapr.io/app-id` 注解：
+在 Kubernetes 中，在您的 pod 上设置 `dapr.io/app-id` 注解：
 
 ```yaml
 apiVersion: apps/v1
@@ -172,9 +172,9 @@ spec:
 
 ## 步骤 2: 调用服务
 
-要使用 Dapr 调用应用程序，您可以在任意 Dapr 实例中使用 `调用` API。
+要使用 Dapr 调用应用程序，您可以在任意 Dapr 实例中使用 `invoke` API。
 
-Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr 边车实例会相互发现并进行通信。
+Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例对话。 Dapr sidecar 实例会相互发现并进行通信。
 
 下面是利用 Dapr SDK 进行服务调用的代码示例。
 
@@ -363,18 +363,18 @@ main();
 
 {{< /tabs >}}
 
-### 其他URL格式
+### 其他 URL 格式
 
 要调用 "GET" 端点:
 ```bash
 curl http://localhost:3500/v1.0/invoke/cart/method/add
 ```
 
-为了尽可能避免改变URL路径，Dapr提供了以下方式来调用服务调用API。
+为了尽可能避免改变 URL 路径，Dapr 提供了以下方式来调用服务调用API。
 
 
-1. 将URL中的地址改为 `localhost:<dapr-http-port>`。
-2. 添加一个 `dapr-app-id` 头来指定目标服务的ID，或者通过HTTP Basic Auth传递ID。 `http://dapr-app-id。<service-id>@localhost:3602/path`。
+1. 将 URL 中的地址改为 `localhost:<dapr-http-port>`。
+2. 添加一个 `dapr-app-id` header 来指定目标服务的ID，或者通过 HTTP Basic Auth 传递 ID。 `http://dapr-app-id:<service-id>@localhost:3602/path`。
 
 例如，以下命令
 ```bash
@@ -401,15 +401,15 @@ dapr invoke --app-id checkout --method checkout/100
 
 ### 命名空间
 
-当运行于[支持命名空间]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})的平台时，在您的 app ID 中包含命名空间：`myApp.production`
+当运行于[支持命名空间]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})的平台时，在您的 app ID 中包含命名空间：`checkout.production`
 
-例如，调用包含名称空间的示例 python 服务:
+例如，调用包含命名空间的示例 python 服务:
 
 ```bash
 curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -X POST
 ```
 
-有关名称空间的更多信息，请参阅 [跨命名空间 API]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) 。
+有关命名空间的更多信息，请参阅 [跨命名空间 API]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) 。
 
 ## 步骤 3：跟踪和日志
 

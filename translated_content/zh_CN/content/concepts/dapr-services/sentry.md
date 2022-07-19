@@ -15,7 +15,7 @@ Dapr Sentry 服务管理服务之间的 mTLS，并充当证书颁发机构。 �
 
 ## Kubernetes 模式
 
-Sentry 服务作为 `dapr init -k` 的一部分部署，或者通过 Dapr Helm 图表部署。 有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。
+Sentry 服务作为 `dapr init -k` 的一部分部署，或者通过 Dapr Helm chart 部署。 有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。
 
 <img src="/images/security-mTLS-sentry-kubernetes.png" width=1000>
 

@@ -23,7 +23,7 @@ docker run -d --name jaeger \
 ```
 
 
-接下来，在本地创建以下YAML文件：
+接下来，在本地创建以下 YAML 文件：
 
 * **config.yaml**: 注意, 因为我们正在使用 Zipkin 协议 来与 Jaeger 通信, 我们指定 `zipkin` 追踪部分 配置设置 `endpointAddress` 来定位Jaeger 实例。
 
@@ -151,7 +151,7 @@ spec:
       endpointAddress: "http://jaeger-collector.default.svc.cluster.local:9411/api/v2/spans"
 ```
 
-最后，部署Dapr组件和配置文件：
+最后，部署 Dapr 组件和配置文件：
 
 ```bash
 kubectl apply -f tracing.yaml
@@ -164,11 +164,11 @@ annotations:
   dapr.io/config: "tracing"
 ```
 
-就这么简单！ 您的 Dapr sidecar 现已配置为Jaeger使用。
+就这么简单！ 您的 Dapr sidecar 现已配置为Jaeger 使用。
 
 ### 查看追踪数据
 
-要查看 traces 数据，请连接到Jaeger服务并打开 UI：
+要查看 traces 数据，请连接到 Jaeger 服务并打开 UI：
 
 ```bash
 kubectl port-forward svc/jaeger-query 16686

@@ -7,10 +7,10 @@ description: "按照这些步骤在自托管模式下升级 Dapr，并确保顺�
 ---
 
 
-1. 卸载当前的Dapr部署：
+1. 卸载当前的 Dapr 部署：
 
    {{% alert title="Note" color="warning" %}}
-   这将删除默认 `$HOME/.dapr` 目录、 二进制文件和所有容器 (dapr_redis、 dapr_placement 和 dapr_zipkin)。 如果docker 命令需要sudo，Linux 用户需要运行 `sudo` 。
+   这将删除默认 `$HOME/.dapr` 目录、 二进制文件和所有容器 (dapr_redis、 dapr_placement 和 dapr_zipkin)。 如果 docker 命令需要 sudo，Linux 用户需要运行 `sudo` 。
    {{% /alert %}}
 
    ```bash

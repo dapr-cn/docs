@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "completion CLI 命令参考"
+title: "completion CLI 命令参考文档"
 linkTitle: "completion"
 description: "有关 completion CLI 命令的详细信息"
 ---

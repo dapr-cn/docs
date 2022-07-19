@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "应用和控制平面配置"
-linkTitle: "Configuration (配置)"
+linkTitle: "配置"
 weight: 400
 description: "更改 Dapr 应用程序 sidecar 的行为或 Dapr 控制平面服务的全局行为"
 ---

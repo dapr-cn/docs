@@ -8,7 +8,7 @@ description: "运行 Dapr 应用程序时面临的常见问题"
 
 ## 我没有看到 Dapr sidecar 注入我的 pod 中
 
-可能有几个原因可以解释为什么 sidecar 不会被注入 pod。 首先，检查您的 deployment 或 pod YAML 文件，并检查您在正确的地方有以下注解：
+可能有几个原因可以解释为什么 sidecar 未能被注入 pod。 首先，检查您的 deployment 或 pod YAML 文件，并检查您在正确的地方有以下注解：
 
 ```yaml
 annotations:
@@ -89,7 +89,7 @@ helm upgrade --install dapr dapr/dapr \
   --set dapr_sidecar_injector.hostNetwork=true
 ```
 
-## 我的 pod 处于 CrashLoopBackoff 或其他由于 daprd sidecar 而失败的状态
+## Pod 处于 CrashLoopBackoff 或其他由于 daprd sidecar 而失败的状态
 
 如果 Dapr sidecar (`daprd`) 需要太长时间才能初始化， 这可能是 Kubernetes 健康检查失败的结果。
 
@@ -160,7 +160,7 @@ kubectl logs <name-of-pod> daprd
 
 ## 我在调用 Dapr 时收到 500 Error 响应
 
-这意味着 Dapr 运行时中存在一些内部问题。 若要诊断，查看sidecar的日志：
+这意味着 Dapr 运行时中存在一些内部问题。 若要诊断，查看 sidecar 的日志：
 
 ```bash
 kubectl logs <name-of-pod> daprd
@@ -181,11 +181,11 @@ annotations:
   dapr.io/app-port: "3000"
 ```
 
-如果使用 Dapr 独立和Dapr CLI, 请确保您将 `--app-port` 标记传递到 `Dapr run` 命令。
+如果使用 Dapr 独立和 Dapr CLI, 请确保您将 `--app-port` 标记传递到 `Dapr run` 命令。
 
 ## 我的启用了 Dapr 的应用程序的行为不正确
 
-第一件事是检查从 Dapr API返回的 HTTP 错误代码，如果有的话。 如果您仍然找不到问题，请尝试为 Dapr 运行时启用 `debug` 日志级别。 请参阅 [此处]({{< ref "logs.md" >}}) 了解如何执行此操作。
+第一件事是检查从 Dapr API 返回的 HTTP 错误代码，如果有的话。 如果您仍然找不到问题，请尝试为 Dapr 运行时启用 `debug` 日志级别。 请参阅 [此处]({{< ref "logs.md" >}}) 了解如何执行此操作。
 
 您可能还想要查看您自己进程中的错误日志。 如果在 Kubernetes 上运行，请找到包含你的应用的 pod，然后执行以下操作：
 
@@ -221,13 +221,13 @@ export DAPR_HOST_IP=127.0.0.1
 
 ## 服务调用失败，我的 Dapr 服务缺少 appId （macOS）
 
-有些组织将采用能过滤所有 UPD 流量的软件，这是 mDNS 的基础。 通常，在MacOS上， `Microsoft Content Filter` 是罪魁祸首。
+有些组织将采用能过滤所有 UPD 流量的软件，这是 mDNS 的基础。 通常，在 MacOS上， `Microsoft Content Filter` 是罪魁祸首。
 
 为了让 mDNS 正常工作，请确认 `Micorosft Content Filter` 处于未激活状态。
 
 - 打开终端
 - 输入 `mdatp system-extension network-filter disable` 并按下回车键。
-- 输入您的帐户密码。
+- 输入您的账号密码。
 
 当输出为“成功”时，Microsoft Content Filter 被禁用。
 

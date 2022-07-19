@@ -30,6 +30,6 @@ dapr mtls export [flags]
 ### 示例
 
 ```bash
-# Check expiry of Kubernetes certs
+# 导出 Kubernetes 证书
 dapr mtls export -o ./certs
 ```

@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "在Kubernetes集群上部署Dapr"
+title: "在 Kubernetes 集群上部署 Dapr"
 linkTitle: "Deploy Dapr"
 weight: 20000
-description: "按照这些步骤在Kubernetes上部署Dapr"
+description: "按照这些步骤在 Kubernetes 上部署 Dapr"
 aliases:
   - /zh-hans/getting-started/install-dapr-kubernetes/
 ---
@@ -20,7 +20,7 @@ aliases:
 
 ### 创建集群
 
-你可以在任何 Kubernetes 集群上安装 Dapr. 下面的链接可以提供帮助: 下面的链接可以提供帮助:
+您可以在任何 Kubernetes 集群上安装 Dapr。 下面的链接可以提供帮助:
 
 - [Setup KiNd Cluster]({{< ref setup-kind.md >}})
 - [Setup Minikube Cluster]({{< ref setup-minikube.md >}})
@@ -45,7 +45,7 @@ Dapr CLI 和 Dapr Helm 图表都会自动关联地部署到带有标签`kubernet
 请确保设置了正确的 "目标" 集群。 检查 `kubectl 上下文 (kubectl config kubectl config get-contexts)` 以进行验证。 你可以使用 `kubectl config use-context <CONTEXT>`来设置其他的上下文。
 {{% /alert %}}
 
-在您的本地机器上运行以下命令，在您的集群上启动Dapr:
+在您的本地机器上运行以下命令，在您的集群上启动 Dapr:
 
 ```bash
 dapr init -k
@@ -119,7 +119,7 @@ dapr uninstall -k
     # See which chart versions are available
     helm search repo dapr --devel --versions
     ```
-3. 将 Dapr 图表安装在你的集群的 `dapr-system`命名空间中。
+3. 将 Dapr 图表安装在你的集群的 `dapr-system` 命名空间中。
 
     ```bash
     helm upgrade --install dapr dapr/dapr \

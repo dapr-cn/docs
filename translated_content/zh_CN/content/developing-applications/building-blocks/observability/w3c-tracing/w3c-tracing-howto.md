@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "How-To : 使用 Dapr 的 W3C 跟踪上下文"
-linkTitle: "How-To: 使用 W3C 跟踪上下文"
+title: "操作方法：使用 Dapr 的 W3C 跟踪上下文"
+linkTitle: "操作方法：使用 W3C 跟踪上下文"
 weight: 20000
 description: 将 W3C 追踪标准与 Dapr 一起使用
 ---
@@ -24,7 +24,7 @@ OpenCensus Go SDK 提供 [ochttp](https://pkg.go.dev/go.opencensus.io/plugin/och
 f := tracecontext.HTTPFormat{}
 sc, ok := f.SpanContextFromRequest(req)
 ```
-#### 对于gRPC 调用
+#### 对于 gRPC 调用
 在 gRPC 调用返回时检索追踪上下文头部， 您可以将响应头的引用作为gRPC 调用选项传递给响应头，这个选项包含响应头：
 
 ```go
@@ -64,7 +64,7 @@ if (response.Headers.TryGetValues("tracestate", out values2))
 }
 ```
 
-#### 对于gRPC 调用
+#### 对于 gRPC 调用
 要从 gRPC 响应检索跟踪上下文，可以使用 [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) ResponseHeadersAsync 方法。
 
 ```csharp
@@ -91,7 +91,7 @@ traceContext := span.SpanContext()
 f.SpanContextToRequest(traceContext, req)
 ```
 
-#### 对于gRPC 调用
+#### 对于 gRPC 调用
 
 ```go
 traceContext := span.SpanContext()
@@ -117,7 +117,7 @@ req.Headers.Add("tracestate", tracestateValue);
 HttpResponseMessage response = await client.SendAsync(req);
 ```
 
-#### 对于gRPC 调用
+#### 对于 gRPC 调用
 要在 gRPC 调用元数据中传递跟踪上下文，您可以使用 [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) ResponseHeadersAsync 方法。
 
 ```csharp
@@ -144,7 +144,7 @@ using var call = client.InvokeServiceAsync(req, headers);
 
 #### 1. 获取 OpenCensus Go SDK
 
-先决条件:OpenCensus Go 库需要 Go 1.8 或更高版本。 有关安装的详细信息，请访问 [这里](https://pkg.go.dev/go.opencensus.io?tab=overview)。
+先决条件：OpenCensus Go 库需要 Go 1.8 或更高版本。 有关安装的详细信息，请访问 [这里](https://pkg.go.dev/go.opencensus.io?tab=overview)。
 
 #### 2. 导入包 "go.openensuss.io/trace"
 `$ go get -u go.opencensus.io`
@@ -192,7 +192,7 @@ opencensus::trace::Span span = opencensus::trace::Span::StartSpan(
 var span = tracer.SpanBuilder("cache.Get").StartScopedSpan();
 ```
 
-## 把它和一个Go 示例一起放在一起
+## 将所有内容与 Go 示例放在一起
 
 ### 在 Dapr 中配置跟踪
 首先需要在 Dapr 中启用跟踪配置。 提到此步骤是为了完整地从启用跟踪到调用具有跟踪上下文的 Dapr。 创建一个部署配置 yaml ，例如 `appconfig.yaml` 具有以下配置。
@@ -207,7 +207,7 @@ spec:
     samplingRate: "1"
 ```
 
-在 Kubernetes中，您可以应用以下配置 :
+在 Kubernetes 中，您可以应用以下配置 :
 
 ```bash
 kubectl apply -f appconfig.yaml
@@ -287,9 +287,9 @@ import (
 
 ## 相关链接
 
-- [可观察性概念]({{< ref observability-concept.md >}})
+- [可观测性概念]({{< ref observability-concept.md >}})
 - [用于分布式跟踪的 W3C 跟踪上下文]({{< ref w3c-tracing >}})
 - [如何使用 OpenTelemetry 为分布式跟踪设置 Application Insights]({{< ref open-telemetry-collector.md >}})
 - [如何设置 Zipkin 以进行分布式跟踪]({{< ref zipkin.md >}})
 - [W3C 跟踪上下文规范](https://www.w3.org/TR/trace-context/)
-- [可观察性 快速开始](https://github.com/dapr/quickstarts/tree/master/tutorials/observability)
+- [可观察性快速开始](https://github.com/dapr/quickstarts/tree/master/tutorials/observability)

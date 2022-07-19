@@ -3,12 +3,12 @@ type: docs
 title: "用远程开发容器开发 Dapr 应用程序"
 linkTitle: "远程开发容器"
 weight: 50000
-description: "如何设置带有Dapr的远程开发容器环境"
+description: "如何设置带有 Dapr 的远程开发容器环境"
 ---
 
-Visual Studio Code [远程容器扩展](https://code.visualstudio.com/docs/remote/containers)可让您将Docker容器用作全功能的开发环境，而无需在本地文件系统中安装任何其他框架或软件包。
+Visual Studio Code [远程容器扩展](https://code.visualstudio.com/docs/remote/containers)可让您将 Docker 容器用作全功能的开发环境，而无需在本地文件系统中安装任何其他框架或软件包。
 
-Dapr为NodeJS和C#预先构建了Docker远程容器。 您可以选择您的一个选择来选择一个随时制作的环境。 注意这些预制容器自动更新到最新的 Dapr 版本。
+Dapr 为 NodeJS 和 C# 预先构建了 Docker 远程容器。 您可以选择一个现成的环境。 请注意，这些预构建的容器会自动更新到最新的 Dapr 版本。
 
 ### 设置远程开发容器
 

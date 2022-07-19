@@ -3,7 +3,7 @@ type: docs
 title: "安全"
 linkTitle: "Security"
 weight: 600
-description: Dapr在设计时是如何考虑安全的
+description: Dapr 在设计时是如何考虑安全的
 ---
 
 安全是 Dapr 的基础。 本文介绍在分布式应用程序中使用 Dapr 时的安全功能和能力。 这些可分为：
@@ -50,9 +50,9 @@ Dapr 包括一个"默认开启"，自动相互 TLS，为 Dapr sidecar之间的�
 当新的 Dapr sidecar 初始化时，它首先检查 mTLS 是否启用。 如果是，则生成 ECDSA 私钥和证书签名请求，然后通过 gRPC 接口发送到 Sentry。 Dapr sidecar 和 Sentry 之间的通信使用信任链证书进行身份验证，该证书由 Dapr Sidecar Injector 系统服务注入到每个 Dapr 实例中。
 
 ### 配置 mTLS
-编辑与 Dapr 一起部署的默认配置中的 `spec.mtls.enabled` 字段，可以关闭/开启相互TLS。
+编辑与 Dapr 一起部署的默认配置中的 `spec.mtls.enabled` 字段，可以关闭/开启双向 TLS。
 
-这既可用于 Kubernetes 模式，也可以用于自托管模式。 有关如何做到这一点的详细信息，[在这里]({{< ref mtls.md >}})。
+这既可用于 Kubernetes 模式，也可以用于自托管模式。 有关如何做到这一点的详细信息，可以在 [在这里]({{< ref mtls.md >}}) 找到。
 
 #### 自托管模式下的 mTLS
 下图显示了 Sentry 系统服务如何根据运维人员提供或由 Sentry 服务生成的根证书/颁发者证书（这些证书存储在文件中）为应用程序颁发证书。
@@ -72,7 +72,7 @@ Dapr 包括一个"默认开启"，自动相互 TLS，为 Dapr sidecar之间的�
 为了防止在任何 IP 地址上调用 Dapr sidecar，尤其是在 Kubernetes 等生产环境中，Dapr 将其监听 IP 地址限制为仅本地主机。 在 v1.4 版本之前，默认情况下，任何 Dapr sidecar 都可以调用集群中的任何其他 sidecar。 这不再可能，需要显式启用。 如果您需要启用其他地址，请使用 [dapr-listen-addresses](https://docs.dapr.io/reference/arguments-annotations-overview/) 设置。
 
 ## 保护 Dapr 到应用程序的通信
-Dapr sidecar通过 **localhost** 运行在应用程序附近，建议在与应用程序相同的网络边界下运行。 尽管当今许多云原生系统将 pod 级别（例如在 Kubernetes 上）视为受信任的安全边界，但 Dapr 为应用程序提供了使用令牌的 API 级别身份验证。 此功能保证即使在 localhost 上，也只有经过身份验证的应用程序可以调用 Dapr，同样，在 Dapr 回调时应用程序也可以检查。 有关配置 API 令牌安全性的更多详细信息，请阅读，
+Dapr sidecar 通过 **localhost** 运行在应用程序附近，建议在与应用程序相同的网络边界下运行。 尽管当今许多云原生系统将 pod 级别（例如在 Kubernetes 上）视为受信任的安全边界，但 Dapr 为应用程序提供了使用令牌的 API 级别身份验证。 此功能保证即使在 localhost 上，也只有经过身份验证的应用程序可以调用 Dapr，同样，在 Dapr 回调时应用程序也可以检查。 有关配置 API 令牌安全性的更多详细信息，请阅读，
 
 - [使用 API 令牌来验证从应用程序到 Dapr 的请求]({{< ref api-token.md >}})。
 - [使用 API 令牌来验证从 Dapr 到应用程序的请求。]({{< ref app-api-token.md >}})
@@ -83,14 +83,14 @@ Dapr sidecar通过 **localhost** 运行在应用程序附近，建议在与应�
 
 启用 mTLS 时， Sentry 将根证书和颁发者证书写入 Kubernetes secret，该密钥的作用域限定为部署控制平面的名称空间。 在自托管模式下，Sentry 将证书写入可配置的文件系统路径下。
 
-在 Kubernetes 中，当 Dapr 系统服务启动时，它们会自动装载包含根证书和颁发证书的 secret，并使用这些secret 来加固 Dapr sidecar 使用的 gRPC 服务器。
+在 Kubernetes 中，当 Dapr 系统服务启动时，它们会自动装载包含根证书和颁发证书的 secret，并使用这些 secret 来加固 Dapr sidecar 使用的 gRPC 服务器。
 
 在自托管模式下，每个系统服务都可以装载文件系统路径以获取证书。
 
 当 Dapr sidecar 初始化时，它使用挂载的叶证书和颁发者私钥对系统 pod 进行身份验证。 这些作为环境变量挂载在 sidecar 容器上。
 
 ### Kubernetes 中系统服务的 mTLS
-下图显示了 Dapr Sidecar 与 Dapr Sentry（证书颁发机构）、Placement（Actor 安置）和 Kubernetes Operator 系统服务之间的安全通信
+下图显示了 Dapr Sidecar 与 Dapr Sentry（证书颁发机构）、Placement（Actor placement）和 Kubernetes Operator 系统服务之间的安全通信
 
 <img src="/images/security-mTLS-dapr-system-services.png" width=1000>
 </br>
@@ -178,7 +178,7 @@ Dapr 组件可以使用 Dapr 的内置秘密管理功能来管理秘密。 阅�
 
 完整的报告可以在找到 [这里](/docs/Dapr-february-2021-security-audit-report.pdf)。
 
-测试期间修复了两个问题，一个是关键问题，一个是高优先级问题。 截至2021年2月16日，Dapr有0个严重问题，0个高风险，0个中度风险，2个低风险，2个信息级别问题。
+测试期间修复了两个问题，一个是关键问题，一个是高优先级问题。 截至2021年2月16日，Dapr 有0个严重问题，0个高风险，0个中度风险，2个低风险，2个信息级别问题。
 
 ### 2020年6月
 

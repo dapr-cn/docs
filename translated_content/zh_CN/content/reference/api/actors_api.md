@@ -6,9 +6,9 @@ description: "关于 Actors API 的详细文档"
 weight: 500
 ---
 
-Dapr 提供原生、跨平台和跨语言的 virtual actors 功能。 除了 [特定语言的 SDK]({{< ref sdks>}})，开发人员还可以使用下面的 API 端点调用 Actor。
+Dapr 提供原生、跨平台和跨语言的 virtual actor 功能。 除了 [特定语言的 SDK]({{< ref sdks>}})，开发人员还可以使用下面的 API 端点调用 Actor。
 
-## 业务应用调用dapr
+## 业务应用调用 Dapr
 
 ### 调用 actor 方法
 
@@ -200,7 +200,7 @@ JSON 对象将具有以下字段：
 }
 ```
 
-`dueTime` 为0表示立即执行。 以下正文是指立即执行，然后每 9 秒钟再执行一次。
+`dueTime` 为 0 表示立即执行。 以下正文是指立即执行，然后每 9 秒钟再执行一次。
 
 ```json
 {
@@ -251,7 +251,7 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
 
 ### 获取 actor reminders
 
-获取一个 actor 的 reminders。
+获取 actor 的 reminder。
 
 #### HTTP 请求
 
@@ -268,12 +268,12 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<nam
 
 #### URL 参数
 
-| 参数          | 说明                 |
-| ----------- | ------------------ |
-| `daprPort`  | Dapr 端口。           |
-| `actorType` | Actor 类型。          |
-| `actorId`   | Actor ID           |
-| `name`      | 要获取 reminders 的名称。 |
+| 参数          | 说明                |
+| ----------- | ----------------- |
+| `daprPort`  | Dapr 端口。          |
+| `actorType` | Actor 类型。         |
+| `actorId`   | Actor ID          |
+| `name`      | 要获取 reminder 的名称。 |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -284,7 +284,7 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
   "Content-Type: application/json"
 ```
 
-以上命令将返回 reminders:
+以上命令将返回 reminder:
 
 ```json
 {
@@ -296,7 +296,7 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
 
 ### 删除 actor reminders
 
-删除一个 actor 的 reminders。
+删除 actor 的 reminder。
 
 #### HTTP 请求
 
@@ -329,9 +329,9 @@ curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/check
   -H "Content-Type: application/json"
 ```
 
-### 创建 Actor timers
+### 创建 Actor timer
 
-创建一个 actor 的 reminders。
+为 actor 创建 timer。
 
 #### HTTP 请求
 
@@ -391,9 +391,9 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
     }'
 ```
 
-### 删除 Actor timers
+### 删除 Actor timer
 
-删除一个 actor 的 timer。
+删除 actor 的 timer。
 
 #### HTTP 请求
 
@@ -451,7 +451,7 @@ GET http://localhost:<appPort>/dapr/config
 
 #### 示例
 
-获取注册的 Actors 的示例:
+获取注册的 Actor 的示例:
 
 ```shell
 curl -X GET http://localhost:3000/dapr/config \
@@ -464,7 +464,7 @@ curl -X GET http://localhost:3000/dapr/config \
 | ------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `entities`                | 此应用程序支持的 actor 类型。                                                                                       |
 | `actorIdleTimeout`        | 指定在释放空闲 actor 之前要等待的时间。  如果没有 actor 方法被调用，并且没有触发任何 reminders ，那么 actor 将处于空闲状态。                          |
-| `actorScanInterval`       | 指定扫描 actors 以释放空闲 actors 的频率时间间隔。  Actors 时间超过 actorIdleTimeout 的 Actors 将被释放。                           |
+| `actorScanInterval`       | 指定扫描 actors 以释放空闲 actor 的频率时间间隔。  空闲时间超过 actorIdleTimeout 的 Actor 将被停用。                                  |
 | `drainOngoingCallTimeout` | 在进行安全排干 actors 时的超时时间。  该值指定了在排干发生时，最长能等待active方法完成的时间。  如果没有当前 actor 方法调用，那么将忽略此时间。                     |
 | `drainRebalancedActors`   | 布尔值。  如果为 true ，那么 Dapr 将等待 `drainOngoingCallTimeout` 以允许当前 actor 调用完成，然后再尝试停用 actor。  如果为 false ，则不会等待。 |
 
@@ -558,9 +558,9 @@ curl -X POST http://localhost:3000/actors/stormtrooper/50/method/performAction \
   -H "Content-Type: application/json"
 ```
 
-### 调用 reminders
+### 调用 reminder
 
-调用具有指定的 reminderName 的 actor 的 reminders。 如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
+调用具有指定的 reminderName 的 actor 的 reminder。 如果 actor 尚未运行，那么应用程序方应先[激活](#activating-an-actor)它。
 
 #### HTTP 请求
 
@@ -674,7 +674,7 @@ curl -X GET http://localhost:3000/healthz \
 
 为了启用对 actor 状态的可见性并允许复杂的方案（如状态聚合），Dapr 在外部状态存储（如数据库）中保存 actor 状态。 因此，可以通过组成正确的键或查询来外部查询 actor 状态。
 
-由 Dapr 为 Actors 创建的状态名称空间由以下项组成:
+由 Dapr 为 Actor 创建的状态名称空间由以下项组成:
 
 - App ID: 表示给 Dapr 应用程序的唯一 ID。
 - Actor Type: 表示 actor 的类型。

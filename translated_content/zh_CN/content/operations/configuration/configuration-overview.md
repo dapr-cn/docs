@@ -72,7 +72,7 @@ tracing:
 
 `samplingRate` 用来控制调用链追踪是否启用。 要禁用采样率 , 可以在配置文件中设置 `samplingRate : "0"` 。 SamplingRate 的有效值在0到1之间。 系统将根据采样率配置的数值决定一条 trace span 是否要被采样。 如果设置 `samplingRate : "1"` ，将会对所有的调用链进行采样。 默认情况下，采样率配置为 (0.0001)，即每10,000条请求中会有一条被采样。
 
-更多信息请参见 [可观察性分布式追踪]({{< ref " tracing-overview. md" >}}) 。
+更多信息请参见 [可观测性分布式追踪]({{< ref " tracing-overview. md" >}}) 。
 
 #### 度量
 
@@ -95,7 +95,7 @@ metrics:
 
 #### 中间件
 
-中间件配置用于配置一系列可命名的HTTP管道处理器。`Configuration` spec 下的`httpPipeline` 部分包含以下的配置属性：
+中间件配置用于配置一系列可命名的 Http 管道处理器。`Configuration` spec 下的 `httpPipeline` 部分包含以下的配置属性：
 
 ```yml
 httpPipeline:
@@ -106,7 +106,7 @@ httpPipeline:
       type: middleware.http.uppercase
 ```
 
-下面的表格给出了HTTP 处理器可配置的属性
+下面的表格给出了 HTTP 处理器可配置的属性
 
 | 属性   | 数据类型   | 说明        |
 | ---- | ------ | --------- |
