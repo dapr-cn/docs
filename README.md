@@ -386,12 +386,12 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/stulzq">
+                  <a href="https://crowdin.com/profile/MregXN">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
-                      <b>stulzq</b>
+                      <b>MregXN</b>
                   </sub>
                   <br />
                   <sub>
@@ -399,12 +399,12 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/MregXN">
+                  <a href="https://crowdin.com/profile/stulzq">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
-                      <b>MregXN</b>
+                      <b>stulzq</b>
                   </sub>
                   <br />
                   <sub>
