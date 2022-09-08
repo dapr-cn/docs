@@ -37,7 +37,7 @@ dapr configurations -k
     dapr.io/app-port: "3000"
     dapr.io/config: "myappconfig"
 ```
-Note: There are more [Kubernetes annotations]({{< ref "kubernetes-annotations.md" >}}) available to configure the Dapr sidecar on activation by sidecar Injector system service.
+注意：有更多的 [Kubernetes 注解]({{< ref "kubernetes-annotations.md" >}})可用于在通过 sidecar Injector 系统服务激活时配置 Dapr sidecar。
 
 ### Sidecar 配置
 
@@ -113,15 +113,15 @@ httpPipeline:
 | name | string | 中间件组件的名称。 |
 | type | string | 中间件组件的类型。 |
 
-See [Middleware pipelines]({{< ref "middleware-concept.md" >}}) for more information
+请参阅 [}}">中间件pipelines]({{< ref "middleware-concept.md" >}}) 一节以获取更多信息。
 
 #### 限定作用域的密钥储存控制
 
 See the [Scoping secrets]({{< ref "secret-scope.md" >}}) guide for information and examples on how to scope secrets to an application.
 
-#### 服务间调用的访问控制
+#### 服务间调用的允许列表访问控制
 
-See the [Allow lists for service invocation]({{< ref "invoke-allowlist.md" >}}) guide for information and examples on how to set allow lists.
+请参阅 [}}">服务间调用允许列表]({{< ref "invoke-allowlist.md" >}}) 了解更多信息，以及如何设置允许列表的例子。
 
 ### Sidecar 配置示例
 下面的yaml内容展示了一个可以被应用于Dapr sidecar的配置文件：

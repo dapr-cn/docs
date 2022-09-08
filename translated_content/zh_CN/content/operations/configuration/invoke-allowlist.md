@@ -8,7 +8,7 @@ description: "限制应用程序可以通过服务调用在\"调用\"应用程�
 
 Access control enables the configuration of policies that restrict what operations *calling* applications can perform, via service invocation, on the *called* application. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration.
 
-An access control policy is specified in configuration and be applied to Dapr sidecar for the *called* application. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applicatons to access to the called app.
+An access control policy is specified in configuration and be applied to Dapr sidecar for the *called* application. Example access policies are shown below and access to the called app is based on the matched policy action. 您可以为所有调用应用程序提供默认的全局操作，如果没有指定访问控制策略，则默认行为是允许所有调用应用程序访问被调用的应用程序。
 
 Watch this [video](https://youtu.be/j99RN_nxExA?t=1108) on how to apply access control list for service invocation.
 <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=1108" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
