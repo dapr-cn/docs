@@ -20,40 +20,43 @@ spec:
   type: pubsub.azure.servicebus
   version: v1
   metadata:
-  - name: connectionString # Required
+  - name: connectionString # 必须
     value: "Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}"
-  # - name: timeoutInSec # Optional
+  # - name: timeoutInSec # 可选
   #   value: 60
-  # - name: handlerTimeoutInSec # Optional
+  # - name: handlerTimeoutInSec # 可选
   #   value: 60
-  # - name: disableEntityManagement # Optional
+  # - name: disableEntityManagement # 可选
   #   value: "false"
-  # - name: maxDeliveryCount # Optional
+  # - name: maxDeliveryCount # 可选
   #   value: 3
-  # - name: lockDurationInSec # Optional
+  # - name: lockDurationInSec # 可选
   #   value: 60
-  # - name: lockRenewalInSec # Optional
+  # - name: lockRenewalInSec # 可选
   #   value: 20
-  # - name: maxActiveMessages # Optional
+  # - name: maxActiveMessages # 可选
   #   value: 2000
-  # - name: maxActiveMessagesRecoveryInSec # Optional
+  # - name: maxActiveMessagesRecoveryInSec # 可选
   #   value: 2
-  # - name: maxConcurrentHandlers # Optional
+  # - name: maxConcurrentHandlers # 可选
   #   value: 10
-  # - name: prefetchCount # Optional
+  # - name: prefetchCount # 可选
   #   value: 5
-  # - name: defaultMessageTimeToLiveInSec # Optional
+  # - name: defaultMessageTimeToLiveInSec # 可选
   #   value: 10
-  # - name: autoDeleteOnIdleInSec # Optional
+  # - name: autoDeleteOnIdleInSec # 可选
   #   value: 3600
-  # - name: maxReconnectionAttempts # Optional
+  # - name: maxReconnectionAttempts # 可选
   #   value: 30
-  # - name: connectionRecoveryInSec # Optional
+  # - name: connectionRecoveryInSec # 可选
   #   value: 2
-  # - name: publishMaxRetries # Optional
+  # - name: publishMaxRetries # 可选
   #   value: 5
-  # - name: publishInitialRetryInternalInMs # Optional
+  # - name: publishInitialRetryInternalInMs # 可选
   #   value: 500
+ 
+Text
+XPath: /pre/code
 ```
 
 > __注意：__上述设置在使用该组件的所有主题中是通用的。
