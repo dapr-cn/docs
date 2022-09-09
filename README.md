@@ -269,6 +269,19 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
+                  <a href="https://crowdin.com/profile/liye">
+                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
+                   </a>
+                  <br />
+                  <sub>
+                      <b>liye</b>
+                  </sub>
+                  <br />
+                  <sub>
+                      <b>2051 words</b>
+                  </sub>
+              </td></tr><tr>
+              <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/charleszhn">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
@@ -280,7 +293,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>1727 words</b>
                   </sub>
-              </td></tr><tr>
+              </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/devonline">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -358,7 +371,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>1264 words</b>
                   </sub>
-              </td>
+              </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/qianjunakasumi">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -371,7 +384,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <sub>
                       <b>791 words</b>
                   </sub>
-              </td></tr><tr>
+              </td>
               <td style="text-align:center; vertical-align: top;">
                   <a href="https://crowdin.com/profile/Danvic.Wang">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
@@ -386,12 +399,12 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/stulzq">
+                  <a href="https://crowdin.com/profile/MregXN">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
-                      <b>stulzq</b>
+                      <b>MregXN</b>
                   </sub>
                   <br />
                   <sub>
@@ -399,12 +412,12 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/MregXN">
+                  <a href="https://crowdin.com/profile/stulzq">
                     <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
                    </a>
                   <br />
                   <sub>
-                      <b>MregXN</b>
+                      <b>stulzq</b>
                   </sub>
                   <br />
                   <sub>
@@ -448,19 +461,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   <br />
                   <sub>
                       <b>280 words</b>
-                  </sub>
-              </td>
-              <td style="text-align:center; vertical-align: top;">
-                  <a href="https://crowdin.com/profile/liye">
-                    <img style="width: 58px" src="https://i2.wp.com/crowdin.com/images/user-picture.png?ssl=1"/>
-                   </a>
-                  <br />
-                  <sub>
-                      <b>liye</b>
-                  </sub>
-                  <br />
-                  <sub>
-                      <b>228 words</b>
                   </sub>
               </td></tr><tr>
               <td style="text-align:center; vertical-align: top;">
