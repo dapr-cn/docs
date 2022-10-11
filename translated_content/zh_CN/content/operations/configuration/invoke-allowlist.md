@@ -1,76 +1,76 @@
 ---
 type: docs
-title: "如何：将访问控制列表配置应用于服务调用"
+title: "指南：将访问控制列表配置应用于服务调用"
 linkTitle: "服务调用访问控制"
 weight: 4000
-description: "限制应用程序可以通过服务调用在\"调用\"应用程序上执行什么操作"
+description: "限制应用程序可以通过“服务调用”在“被调用的应用程序”上执行什么操作"
 ---
 
-Access control enables the configuration of policies that restrict what operations *calling* applications can perform, via service invocation, on the *called* application. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration.
+访问控制可以通过配置策略来限制*调用*应用程序通过服务调用，可以对*被调用*的应用程序执行哪些操作。 如需限制来自调用应用程序的特定操作和 HTTP 请求方法访问被调用的应用程序，你可以在配置中定义访问控制策略规范。
 
-An access control policy is specified in configuration and be applied to Dapr sidecar for the *called* application. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applicatons to access to the called app.
+访问控制策略在配置中指定，并被应用于*被调用* 应用程序的 Dapr sidecar。 示例访问策略如下所示，基于匹配的策略访问被调用的应用。 您可以为所有调用应用程序提供默认的全局操作，如果没有指定访问控制策略，则默认行为是允许所有调用应用程序访问被调用的应用程序。
 
-Watch this [video](https://youtu.be/j99RN_nxExA?t=1108) on how to apply access control list for service invocation.
+观看这个[视频](https://youtu. be/j99RN_nxExA? t=1108) ，了解如何为服务调用设置访问控制列表。
 <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=1108" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Concepts
+## 基础概念
 
-**TrustDomain** - A "trust domain" is a logical group to manage trust relationships. Every application is assigned a trust domain which can be specified in the access control list policy spec. If no policy spec is defined or an empty trust domain is specified, then a default value "public" is used. This trust domain is used to generate the identity of the application in the TLS cert.
+**信任域** - “信任域”是用于管理信任关系的逻辑组。 每个应用程序都分配有一个信任域，可以在访问控制列表策略规范中指定。 如果未定义策略规范或指定了空信任域，则使用默认值 "public"。 此信任域用于在 TLS 证书中生成应用程序的标识。
 
-**App Identity** - Dapr requests the sentry service to generate a [SPIFFE](https://spiffe.io/) id for all applications and this id is attached in the TLS cert. The SPIFFE id is of the format: `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched.
+**应用标识** - Dapr 需要通过 Sentry 服务来生成 [SPIFFE](https://spiffe.io/) id 给所有应用，并且这个 id 会附加在 TLS 证书中。 SPIFFE ID 的格式为： `**spiffe://\<trustdomain>/ns/\<namespace\>/\<appid\>**`。 对于匹配的策略，将从调用应用的 TLS 证书中的 SPIFFE ID 中提取调用应用的信任域、命名空间和应用 ID 值。 这些值与策略规范中指定的信任域、命名空间和应用程序 ID 值进行匹配。 如果这三者都匹配，则进一步匹配更具体的策略。
 
-## Configuration properties
+## 配置属性
 
-The following tables lists the different properties for access control, policies and operations:
+下表列出了访问控制、策略和操作的不同属性：
 
-### Access Control
+### 访问控制
 
-| 属性            | 数据类型   | 说明                                                                             |
-| ------------- | ------ | ------------------------------------------------------------------------------ |
-| defaultAction | string | Global default action when no other policy is matched                          |
-| trustDomain   | string | Trust domain assigned to the application. Default is "public".                 |
-| policies      | string | Policies to determine what operations the calling app can do on the called app |
+| 属性            | 数据类型   | 说明                             |
+| ------------- | ------ | ------------------------------ |
+| defaultAction | string | 没有其他策略匹配时的全局默认操作               |
+| trustDomain   | string | 分配给应用程序的信任域。 默认值为 "public"。    |
+| policies      | string | 用于确定调用应用程序可以对被调用的应用程序执行哪些操作的策略 |
 
-### Policies
+### 策略
 
-| 属性            | 数据类型   | 说明                                                                                                  |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| app           | string | AppId of the calling app to allow/deny service invocation from                                      |
-| namespace     | string | Namespace value that needs to be matched with the namespace of the calling app                      |
-| trustDomain   | string | Trust domain that needs to be matched with the trust domain of the calling app. Default is "public" |
-| defaultAction | string | App level default action in case the app is found but no specific operation is matched              |
-| operations    | string | operations that are allowed from the calling app                                                    |
+| 属性            | 数据类型   | 说明                               |
+| ------------- | ------ | -------------------------------- |
+| app           | string | 允许/拒绝服务调用的调用应用的 AppId            |
+| namespace     | string | 需要与调用应用的命名空间匹配的命名空间值             |
+| trustDomain   | string | 需要与调用应用的信任域匹配的信任域。 默认值为 "public" |
+| defaultAction | string | 应用级别的默认操作，以防找到应用但未匹配特定操作         |
+| operations    | string | 允许的从调用应用发起的操作                    |
 
-### Operations
+### 操作
 
-| 属性       | 数据类型   | 说明                                                                                                                                           |
-| -------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| name     | string | Path name of the operations allowed on the called app. 通配符"\*"可用于在匹配路径                                                                     |
-| httpVerb | list   | List specific http verbs that can be used by the calling app. Wildcard "\*" can be used to match any http verb. Unused for grpc invocation |
-| action   | string | Access modifier. Accepted values "allow" (default) or "deny"                                                                                 |
+| 属性       | 数据类型   | 说明                                                                 |
+| -------- | ------ | ------------------------------------------------------------------ |
+| name     | string | 被调用应用上允许的操作的路径名。 通配符“\*”可用于在路径下匹配                                |
+| httpVerb | list   | 列出调用应用程序可以使用的特定 http 请求方法。 通配符“\*”可用于匹配任何 http 请求方法。 不适用 grpc 调用 |
+| action   | string | 访问修饰符。 接受的值为 "allow"（默认值）或 "deny"                                  |
 
-## Policy rules
+## 策略规则
 
-1. If no access policy is specified, the default behavior is to allow all apps to access to all methods on the called app
-2. If no global default action is specified and no app specific policies defined, the empty access policy is treated like no access policy specified and the default behavior is to allow all apps to access to all methods on the called app.
-3. If no global default action is specified but some app specific policies have been defined, then we resort to a more secure option of assuming the global default action to deny access to all methods on the called app.
-4. If an access policy is defined and if the incoming app credentials cannot be verified, then the global default action takes effect.
-5. If either the trust domain or namespace of the incoming app do not match the values specified in the app policy, the app policy is ignored and the global default action takes effect.
+1. 如果未指定访问策略，则默认行为是允许所有应用访问被调用应用上的所有方法
+2. 如果未指定全局默认操作，也没有定义特定于应用的策略，则空访问策略将被视为未指定访问策略，默认行为是允许所有应用访问被调用应用上的所有方法。
+3. 如果未指定全局默认操作，但已定义了某些特定于应用的策略，则我们采用更安全的选项，即假定全局默认操作以拒绝访问被调用应用上的所有方法。
+4. 如果定义了访问策略，并且无法验证传入的应用程序凭据，则全局默认操作将生效。
+5. 如果传入应用的信任域或命名空间与应用策略中指定的值不匹配，则会忽略应用策略，并且全局默认操作将生效。
 
-## Policy priority
+## 策略优先级
 
-The action corresponding to the most specific policy matched takes effect as ordered below:
-1. Specific HTTP verbs in the case of HTTP or the operation level action in the case of GRPC.
-2. The default action at the app level
-3. The default action at the global level
+根据具体策略的匹配程度，对应的操作将按以下顺序生效：
+1. HTTP 请求中特定 HTTP 请求方法或 GRPC 请求中操作级别操作。
+2. 应用级别的默认操作
+3. 全局级别的默认操作
 
-## Example scenarios
+## 示例
 
-Below are some example scenarios for using access control list for service invocation. See [configuration guidance]({{< ref "configuration-concept.md" >}}) to understand the available configuration settings for an application sidecar.
+以下是使用访问控制列表进行服务调用的一些示例。 请参阅 [配置指南]({{< ref "configuration-concept.md" >}}) 以了解应用程序 sidecar 的可用配置设置。
 
 <font size=5>方案1：拒绝访问所有应用，除非 trustDomain = public, namespace = default, appId = app1</font>
 
-With this configuration, all calling methods with appId = app1 are allowed and all other invocation requests from other applications are denied
+使用此配置时，将允许所有 appId = app1 的调用方法，并拒绝来自其他应用程序的所有其他调用请求
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -88,9 +88,9 @@ spec:
       namespace: "default"
 ```
 
-<font size=5>方案2：拒绝访问除信任域外的所有 trustDomain = public, namespace = default, appId = app1, operation = op1</font>
+<font size=5>方案2：拒绝访问所有应用，除非 trustDomain = public, namespace = default, appId = app1, operation = op1</font>
 
-With this configuration, only method op1 from appId = app1 is allowed and all other method requests from all other apps, including other methods on app1, are denied
+在这种配置下，只有来自 appId = app1 的 op1 方法被允许，所有来自其他应用程序的其他方法请求，包括 app1 上的其他方法，都将被拒绝。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -112,11 +112,11 @@ spec:
         action: allow
 ```
 
-<font size=5>方案 3：拒绝访问所有应用，除非匹配 HTTP 的特定动词和 GRPC 的操作</font>
+<font size=5>方案 3：拒绝访问所有应用，除非匹配 HTTP 的特定方法和 GRPC 的操作</font>
 
-With this configuration, the only scenarios below are allowed access and and all other method requests from all other apps, including other methods on app1 or app2, are denied
+使用此配置时，只有以下的方案是允许访问的，并且来自所有其他应用（包括 app1 或 app2 上的其他方法）的所有不在方案内的方法请求都将被拒绝
 * trustDomain = public, namespace = default, appID = app1, operation = op1, http verb = POST/PUT
-* trustDomain = "myDomain", namespace = "ns1", appID = app2, operation = op2 and application protocol is GRPC , only HTTP verbs POST/PUT on method op1 from appId = app1 are allowed and all other method requests from all other apps, including other methods on app1, are denied
+* trustDomain = “myDomain”， namespace = “ns1”， appID = app2， operation = op2 并且应用程序协议是 GRPC ， 只允许来自 appId = app1 的的 HTTP POST/PUT 方法，并且拒绝来自所有其他应用（包括 app1 上的其他方法）以外的所有其他方法请求
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -145,7 +145,7 @@ spec:
         action: allow
 ```
 
-<font size=5>Scenario 4: Allow access to all methods except trustDomain = public, namespace = default, appId = app1, operation = /op1/*, all http verbs</font>
+<font size=5>方案 4：允许适用所有所有 HTTP method访问所有方法，除非 trustDomain = public、namespace = default、appId = app1、operation = /op1/*</font>
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

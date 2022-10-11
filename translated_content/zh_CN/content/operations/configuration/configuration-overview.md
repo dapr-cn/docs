@@ -37,7 +37,7 @@ dapr configurations -k
     dapr.io/app-port: "3000"
     dapr.io/config: "myappconfig"
 ```
-Note: There are more [Kubernetes annotations]({{< ref "kubernetes-annotations.md" >}}) available to configure the Dapr sidecar on activation by sidecar Injector system service.
+注意：有更多的 [Kubernetes 注解]({{< ref "kubernetes-annotations.md" >}})可用于在通过 sidecar Injector 系统服务激活时配置 Dapr sidecar。
 
 ### Sidecar 配置
 
@@ -72,7 +72,7 @@ tracing:
 
 `samplingRate` 用来控制调用链追踪是否启用。 要禁用采样率 , 可以在配置文件中设置 `samplingRate : "0"` 。 SamplingRate 的有效值在0到1之间。 系统将根据采样率配置的数值决定一条 trace span 是否要被采样。 如果设置 `samplingRate : "1"` ，将会对所有的调用链进行采样。 默认情况下，采样率配置为 (0.0001)，即每10,000条请求中会有一条被采样。
 
-See [Observability distributed tracing]({{< ref "tracing-overview.md" >}}) for more information
+请参阅 [}}">分布式可观测性追踪]({{< ref "tracing-overview.md" >}}) 了解更多信息。
 
 #### 度量
 
@@ -91,7 +91,7 @@ metrics:
 | --------- | ------- | --------- |
 | `enabled` | boolean | 是否启用度量功能。 |
 
-See [metrics documentation]({{< ref "metrics-overview.md" >}}) for more information
+请参阅 [}}">度量文档]({{< ref "metrics-overview.md" >}}) 了解更多信息。
 
 #### 中间件
 
@@ -113,15 +113,15 @@ httpPipeline:
 | name | string | 中间件组件的名称。 |
 | type | string | 中间件组件的类型。 |
 
-See [Middleware pipelines]({{< ref "middleware-concept.md" >}}) for more information
+请参阅 [}}">中间件pipelines]({{< ref "middleware-concept.md" >}}) 一节以获取更多信息。
 
 #### 限定作用域的密钥储存控制
 
-See the [Scoping secrets]({{< ref "secret-scope.md" >}}) guide for information and examples on how to scope secrets to an application.
+请参阅 [}}">Scoping secrets]({{< ref "secret-scope.md" >}}) 指南查看更多信息，以及如何为应用程序设置密钥作用域的例子。
 
-#### 服务间调用的访问控制
+#### 服务间调用的允许列表访问控制
 
-See the [Allow lists for service invocation]({{< ref "invoke-allowlist.md" >}}) guide for information and examples on how to set allow lists.
+请参阅 [}}">服务间调用允许列表]({{< ref "invoke-allowlist.md" >}}) 了解更多信息，以及如何设置允许列表的例子。
 
 ### Sidecar 配置示例
 下面的yaml内容展示了一个可以被应用于Dapr sidecar的配置文件：
@@ -173,7 +173,7 @@ spec:
 | allowedClockSkew | string | 证书到期时，基于本地时钟偏差给出的额外过期时间。 默认值为15分钟。 |
 | workloadCertTTL  | string | 证书有效时间。 默认值为 24 小时。                |
 
-See the [Mutual TLS]({{< ref "mtls.md" >}}) HowTo and [security concepts]({{< ref "security-concept.md" >}}) for more information.
+请参阅 [}}">TLS双向认证]({{< ref "mtls.md" >}}) 和 [}}">安全概念]({{< ref "security-concept.md" >}}) 了解更多信息。
 
 ### 控制平面配置示例
 

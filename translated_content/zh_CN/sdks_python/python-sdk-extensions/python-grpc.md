@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Getting started with the Dapr Python gRPC service extension"
+title: "开始使用 Dapr Python gRPC 进行服务扩展"
 linkTitle: "gRPC"
 weight: 20000
-description: How to get up and running with the Dapr Python gRPC extension package
+description: 如何使用 Dapr Python gRPC 扩展包启动和运行
 ---
 
-The Dapr Python SDK provides a built in gRPC server extension module, `dapr.ext.grpc`, for creating Dapr services.
+Dapr Python SDK 提供了一个内置的 gRPC 服务器扩展模块 `dapr.ext.grpc`，用于创建 Dapr 服务。
 
 ## 安装
 
-You can download and install the Dapr gRPC server extension module with:
+您可以使用以下命令下载并安装 Dapr gRPC 服务器扩展模块：
 
 {{< tabs Stable Development>}}
 
@@ -34,13 +34,13 @@ pip3 install dapr-ext-grpc-dev
 
 ## 示例
 
-The `App` object can be used to create a server.
+`App` 对象可以用来创建服务器。
 
-### Listen for service invocation requests
+### 监听服务调用请求状态
 
 `InvokeServiceReqest` 和 `InvokeServiceResponse` 对象可用于处理传入请求。
 
-A simple service that will listen and respond to requests will look like:
+一个将侦听和响应请求的简单服务将如下所示：
 
 ```python
 from dapr.ext.grpc import App, InvokeServiceRequest, InvokeServiceResponse
@@ -57,9 +57,9 @@ def mymethod(request: InvokeServiceRequest) -> InvokeServiceResponse:
 app.run(50051)
 ```
 
-A full sample can be found [here](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-simple).
+完整的示例可以在 [这里](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-simple) 找到。
 
-### Subscribe to a topic
+### 订阅主题
 
 ```python
 from cloudevents.sdk.event import v1
@@ -74,9 +74,9 @@ def mytopic(event: v1.Event) -> None:
 app.run(50051)
 ```
 
-A full sample can be found [here](https://github.com/dapr/python-sdk/blob/v1.0.0rc2/examples/pubsub-simple/subscriber.py).
+完整的示例可以在 [这里](https://github.com/dapr/python-sdk/blob/v1.0.0rc2/examples/pubsub-simple/subscriber.py) 找到。
 
-### Setup input binding trigger
+### 设置输入绑定触发器
 
 ```python
 from dapr.ext.grpc import App, BindingRequest
@@ -90,7 +90,7 @@ def binding(request: BindingRequest):
 app.run(50051)
 ```
 
-A full sample can be found [here](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-binding).
+完整的示例可以在 [这里](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-binding) 找到。
 
 ## 相关链接
 - [PyPi](https://pypi.org/project/dapr-ext-grpc/)
