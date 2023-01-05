@@ -267,6 +267,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "liuyangc3",
+      "name": "Yang Liu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6705844?v=4",
+      "profile": "https://github.com/liuyangc3",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -274,5 +283,6 @@
   "projectOwner": "dapr-cn",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
