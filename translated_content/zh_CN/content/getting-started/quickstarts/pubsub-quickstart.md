@@ -9,7 +9,7 @@ description: "开始使用 Dapr 的发布和订阅构建块"
 让我们看看Dapr的 [发布和订阅(Pub/sub) 构建块]({{< ref pubsub >}})。 在本快速入门中，您将运行发布者微服务和订阅者微服务，以演示 Dapr 如何启用发布/订阅模式。
 
 1. 使用发布者服务，开发人员可以重复向topic发布消息。
-1. [Pub/sub 组件](https://docs.dapr.io/concepts/components-concept/#pubsub-brokers)队列或代理这些消息。 我们下面的例子使用Redis，你可以使用RabbitMQ、Kafka等。
+1. [Pub/sub 组件](https://docs.dapr.io/concepts/components-concept/#pubsub-brokers)对这些消息进行排队或代理。 我们下面的例子使用Redis，你可以使用RabbitMQ、Kafka等。
 1. 该topic的订阅者从队列中提取消息并对其进行处理。
 
 <img src="/images/pubsub-quickstart/pubsub-diagram.png" width=800 style="padding-bottom:15px;">

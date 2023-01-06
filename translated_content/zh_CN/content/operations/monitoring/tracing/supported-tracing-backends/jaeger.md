@@ -6,13 +6,13 @@ weight: 3000
 description: "为分布式跟踪安装 Jaeger"
 ---
 
-Dapr supports the Zipkin protocol. Since Jaeger is compatible with Zipkin, the Zipkin protocol can be used to communication with Jaeger.
+Dapr 支持 Zipkin 协议。 由于 Jaeger 与 Zipkin 兼容，Zipkin 协议可用于与 Jaeger 通信。
 
 ## 配置自托管模式
 
 ### 设置
 
-The simplest way to start Jaeger is to use the pre-built all-in-one Jaeger image published to DockerHub:
+启动 Jaeger 的最简单方式是使用发布到 DockerHub 的 Jaeger 全家桶镜像：
 
 ```bash
 docker run -d --name jaeger \
@@ -47,18 +47,18 @@ dapr run --app-id mynode --app-port 3000 node app.js --config config.yaml
 ```
 
 ### 查看 Traces
-To view traces, in your browser go to http://localhost:16686 to see the Jaeger UI.
+要查看分布式追踪，在您的浏览器中请访问 http://localhost:16686，您会看到 Jaeger UI。
 
 ## 配置 Kubernetes
 以下步骤可向您展示如何配置 Dapr 将分布式跟踪数据发送给 Jaeger，该数据作为 Dapr 中的容器运行，以及如何查看它们。
 
 ### 设置
 
-First create the following YAML file to install Jaeger, file name is `jaeger-operator.yaml`
+首先创建以下 YAML 文件来安装 Jaeger，文件名为 `jaeger-operator.yaml`。
 
-#### Development and test
+#### 开发和测试
 
-By default, the allInOne Jaeger image uses memory as the backend storage and it is not recommended to use this in a production environment.
+默认情况下，allInOne Jaeger 镜像使用内存作为后端存储，不建议在生产环境中使用这种方式。
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -76,8 +76,8 @@ spec:
         base-path: /jaeger
 ```
 
-#### Production
-Jaeger uses Elasticsearch as the backend storage, and you can create a secret in k8s cluster to access Elasticsearch server with access control.
+#### 生产
+Jaeger 使用 Elasticsearch 作为后端存储，您可以在 k8s 集群中创建一个密钥，以访问具有访问控制的 Elasticsearch 服务器。
 
 
 ```shell
@@ -115,7 +115,7 @@ spec:
         server-urls: http://elasticsearch:9200
 ```
 
-The pictures are as follows, include Elasticsearch and Grafana tracing data:
+图片如下，包括 Elasticsearch 和 Grafana 的追踪数据。
 
 ![jaeger-storage-es](/images/jaeger_storage_elasticsearch.png)
 

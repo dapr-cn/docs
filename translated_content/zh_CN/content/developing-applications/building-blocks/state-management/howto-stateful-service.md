@@ -19,7 +19,7 @@ When you run `dapr init` in self-hosted mode, Dapr creates a default Redis `stat
 - 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
 - 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out underlying components without application code changes.
+使用 `statestore.yaml` 组件，您可以轻松更换底层组件，而无需更改应用程序代码。
 
 See a [list of supported state stores]({{< ref supported-state-stores >}}).
 

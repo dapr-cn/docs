@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "State store component specs"
+title: "State store 组件规范"
 linkTitle: "State stores"
 description: "Dapr支持的状态存储组件"
 weight: 1000

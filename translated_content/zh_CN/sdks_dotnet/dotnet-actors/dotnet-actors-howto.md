@@ -30,7 +30,7 @@ MyActor --- MyActor.Interfaces
 
 * **Actor服务项目 (\MyActor\MyActorService)。** 该项目实现了Asp.Net Core web service，用于托管actor。 它包含了actor的实现，MyActor.cs。 Actor的实现是一个继承了基类Actor并且实现了Myactor.Interfaces项目中定义的接口的类。 Actor还必须提供接受一个ActorService实例和ActorId的构造函数，并将他们传递给基类。
 
-* **The actor client project(\MyActor\MyActorClient)** This project contains the implementation of the actor client which calls MyActor's method defined in Actor Interfaces.
+* **Actor 客户端项目(\MyActor\MyActorClient)** 这个项目包含actor客户端的实现，它调用Actor接口中定义的MyActor的方法。
 
 ## 第 0 步：准备
 
@@ -102,15 +102,15 @@ Dapr 使用 ASP.NET web 服务来托管 Actor 服务。 本节将会实现 `IMyA
 ### 创建 actor 服务项目并添加依赖
 
 ```bash
-# Create ASP.Net Web service to host Dapr actor
+# 创建 ASP.Net Web 服务来托管 Dapr actor
 dotnet new web -o MyActorService
 
 cd MyActorService
 
-# Add Dapr.Actors.AspNetCore nuget package. Please use the latest package version from nuget.org
+# 添加 Dapr.Actors.AspNetCore nuget 包. 请从nuget.org添加最新的包版本
 dotnet add package Dapr.Actors.AspNetCore -v 1.0.0
 
-# Add Actor Interface reference
+# 添加 Actor 接口引用
 dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
 
 cd ..
@@ -319,15 +319,16 @@ namespace MyActorService
 ### 创建 actor 客户端项目并添加依赖
 
 ```bash
-# Create Actor's Client
+# 创建 Actor 客户端
 dotnet new console -o MyActorClient
 
 cd MyActorClient
 
-# Add Dapr.Actors nuget package. Please use the latest package version from nuget.org
+# 添加 Dapr.Actors nuget 包。 Please use the latest package version from nuget.org
+请从nuget.org添加最新的包版本
 dotnet add package Dapr.Actors -v 1.0.0
 
-# Add Actor Interface reference
+# 添加 Actor 接口引用
 dotnet add reference ../MyActor.Interfaces/MyActor.Interfaces.csproj
 
 cd ..

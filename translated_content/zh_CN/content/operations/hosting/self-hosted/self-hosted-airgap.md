@@ -2,7 +2,7 @@
 type: docs
 title: "How-To: Run Dapr in an offline or airgap environment"
 linkTitle: "Run in offline or airgap"
-weight: 30000
+weight: 50000
 description: "How to deploy and run Dapr in self-hosted mode in an airgap environment"
 ---
 
@@ -16,7 +16,7 @@ Before airgap initialization, it is required to download a Dapr Installer Bundle
 1.  Download the [Dapr Installer Bundle](https://github.com/dapr/installer-bundle/releases) for the specific release version. For example, daprbundle_linux_amd64.tar.gz, daprbundle_windows_amd64.zip.
 2. Unpack it.
 3. To install Dapr CLI copy the `daprbundle/dapr (dapr.exe for Windows)` binary to the desired location:
-   * For Linux/MacOS - `/usr/local/bin`
+   * 用于 Linux/MacOS - `/usr/local/bin`
    * 对于Windows，创建一个目录并将其添加到系统PATH。 For example create a directory called `c:\dapr` and add this directory to your path, by editing your system environment variable.
 
    > Note: If Dapr CLI is not moved to the desired location, you can use local `dapr` CLI binary in the bundle. The steps above is to move it to the usual location and add it to the path.

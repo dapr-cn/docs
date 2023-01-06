@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "AWS SES binding spec"
+title: "AWS SES 绑定规范"
 linkTitle: "AWS SES"
-description: "Detailed documentation on the AWS SES binding component"
+description: "AWS SES 绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/ses/"
 ---
 
 ## 配置
 
-To setup AWS binding create a component of type `bindings.aws.ses`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 AWS 绑定，请创建一个类型为 `bindings.aws.ses` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
+有关身份验证相关属性的信息，请参阅 [向 AWS 进行身份验证]({{< ref authenticating-aws.md >}})
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -49,31 +49,31 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持 | 详情                                                                                     | 示例                  |
-| ------------ |:--:| ---- | -------------------------------------------------------------------------------------- | ------------------- |
-| region       | Y  | 输出   | The specific AWS region                                                                | `"eu-west-1"`       |
-| accessKey    | Y  | 输出   | 要访问此资源的 AWS 访问密钥                                                                       | `"key"`             |
-| secretKey    | Y  | 输出   | 要访问此资源的 AWS 密钥访问 Key                                                                   | `"secretAccessKey"` |
-| sessionToken | N  | 输出   | 要使用的 AWS 会话令牌                                                                          | `"sessionToken"`    |
-| emailFrom    | N  | 输出   | If set, this specifies the email address of the sender. See [also](#example-request)   | `"me@example.com"`  |
-| emailTo      | N  | 输出   | If set, this specifies the email address of the receiver. See [also](#example-request) | `"me@example.com"`  |
-| emailCc      | N  | 输出   | If set, this specifies the email address to CC in. See [also](#example-request)        | `"me@example.com"`  |
-| emailBcc     | N  | 输出   | If set, this specifies email address to BCC in. See [also](#example-request)           | `"me@example.com"`  |
-| subject      | N  | 输出   | If set, this specifies the subject of the email message. See [also](#example-request)  | `"subject of mail"` |
+| 字段           | 必填 | 绑定支持 | 详情                                | 示例                  |
+| ------------ |:--:| ---- | --------------------------------- | ------------------- |
+| region       | 是  | 输出   | 指定的 AWS 区域（region）                | `"eu-west-1"`       |
+| accessKey    | 是  | 输出   | 要访问此资源的 AWS 访问密钥                  | `"key"`             |
+| secretKey    | 是  | 输出   | 要访问此资源的 AWS 密钥访问 Key              | `"secretAccessKey"` |
+| sessionToken | 否  | 输出   | 要使用的 AWS 会话令牌                     | `"sessionToken"`    |
+| emailFrom    | 否  | 输出   | 指定发件人地址 [另见](#example-request)    | `"me@example.com"`  |
+| emailTo      | 否  | 输出   | 指定收件人地址。 [另见](#example-request)   | `"me@example.com"`  |
+| emailCc      | 否  | 输出   | 指定抄送人地址。 [另见](#example-request)   | `"me@example.com"`  |
+| emailBcc     | 否  | 输出   | 指定秘密抄送人地址。 [另见](#example-request) | `"me@example.com"`  |
+| subject      | 否  | 输出   | 指定邮件信息的主题。 [另见](#example-request) | `"subject of mail"` |
 
 {{% alert title="Important" color="warning" %}}
-When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernetes), if you're using a node/pod that has already been attached to an IAM policy defining access to AWS resources, you **must not** provide AWS access-key, secret-key, and tokens in the definition of the component spec you're using.
+当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。
 {{% /alert %}}
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持一下操作的**输出绑定**：
 
 - `create`
 
-## Example request
+## 请求示例
 
-You can specify any of the following optional metadata properties with each request:
+您可以为每个请求指定以下任何可选元数据属性：
 
 - `emailFrom`
 - `emailTo`
@@ -81,9 +81,9 @@ You can specify any of the following optional metadata properties with each requ
 - `emailBcc`
 - `subject`
 
-When sending an email, the metadata in the configuration and in the request is combined. The combined set of metadata must contain at least the `emailFrom`, `emailTo`, `emailCc`, `emailBcc` and `subject` fields.
+发送电子邮件时，配置和请求中的元数据会合并。 元数据的合集必须至少包含 `emailFrom`、 `emailTo`、 `emailCc`、 `emailBcc` 和 `subject` 字段。
 
-The `emailTo`, `emailCc` and `emailBcc` fields can contain multiple email addresses separated by a semicolon.
+`emailTo`、 `emailCc` 和 `emailBcc` 字段可以包含多个电子邮件地址，以分号分隔。
 
 示例:
 ```json
@@ -97,7 +97,7 @@ The `emailTo`, `emailCc` and `emailBcc` fields can contain multiple email addres
   "data": "Testing Dapr SMTP Binding"
 }
 ```
-The `emailTo`, `emailCc` and `emailBcc` fields can contain multiple email addresses separated by a semicolon.
+`emailTo`、 `emailCc` 和 `emailBcc` 字段可以包含多个电子邮件地址，以分号分隔。
 ## 相关链接
 
 - [Dapr组件的基本格式]({{< ref component-schema >}})

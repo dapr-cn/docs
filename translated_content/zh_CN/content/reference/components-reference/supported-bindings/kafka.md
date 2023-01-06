@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Kafka binding spec"
+title: "Kafka 绑定规范"
 linkTitle: "Kafka"
 description: "Kafka 组件绑定详细说明"
 aliases:
@@ -47,36 +47,36 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                  | 必填 | 绑定支持         | 详情                                                                                                                    | 示例                                                         |
-| ------------------- |:--:| ------------ | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| topics              | N  | 输入           | 以逗号分隔的主题字符串。                                                                                                          | `"mytopic1,topic2"`                                        |
-| brokers             | Y  | Input/Output | 以逗号分隔的 Kafka broker。                                                                                                  | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"` |
-| clientID            | N  | Input/Output | A user-provided string sent with every request to the Kafka brokers for logging, debugging, and auditing purposes.    | `"my-dapr-app"`                                            |
-| consumerGroup       | N  | 输入           | 监听 kafka 消费者组。 发布到主题的每条记录都会传递给订阅该主题的每个消费者组中的一个消费者。                                                                    | `"group1"`                                                 |
-| consumeRetryEnabled | N  | Input/Output | Enable consume retry by setting to `"true"`. Default to `false` in Kafka binding component.                           | `"true"`, `"false"`                                        |
-| publishTopic        | Y  | 输出           | 要发布的主题。                                                                                                               | `"mytopic"`                                                |
-| authRequired        | N  | *Deprecated* | 启用 [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) 对 Kafka broker 的身份验证。               | `"true"`, `"false"`                                        |
-| authType            | Y  | Input/Output | 配置或禁用身份验证。 支持值包括： `none`, `password`, `mtls`, 或者 `oidc`                                                               | `"password"`, `"none"`                                     |
-| saslUsername        | N  | Input/Output | 用于身份验证的 SASL 用户名。 仅当 `authRequired` 设置为 `"true"`时才需要。                                                                 | `"adminuser"`                                              |
-| saslPassword        | N  | Input/Output | 用于身份验证的 SASL 密码。 可以用`secretKeyRef`来[引用 Secret]({{< ref component-secrets.md >}})。 仅当 `authRequired` 设置为 `"true"`时才需要。 | `""`, `"KeFg23!"`                                          |
-| initialOffset       | N  | 输入           | 如果以前未提交任何偏移量，则要使用的初始偏移量。 应为"newest"或"oldest"。 默认为"newest"。                                                            | `"oldest"`                                                 |
-| maxMessageBytes     | N  | Input/Output | 单条Kafka消息允许的最大消息的字节大小。 默认值为 1024。                                                                                     | `2048`                                                     |
-| oidcTokenEndpoint   | N  | Input/Output | OAuth2 身份提供者访问令牌端点的完整 URL。 将`authType`的值设置为`oidc`时需要设置。                                                               | "https://identity.example.com/v1/token"                    |
-| oidcClientID        | N  | Input/Output | 已在标识提供者中预配的 OAuth2 客户端 ID。 将`authType`的值设置为`oidc`时需要设置。                                                               | `dapr-kafka`                                               |
-| oidcClientSecret    | N  | Input/Output | 已在身份提供者中配置的 OAuth2 客户端密码：当 `authType` 设置为 `oidc`时需要                                                                   | `"KeFg23!"`                                                |
-| oidcScopes          | N  | Input/Output | 使用访问令牌请求的 OAuth2/OIDC 范围的逗号分隔列表。 当 `authType` 设置为 `oidc`时推荐使用。 默认值为 `"openid"`                                        | `"openid,kafka-prod"`                                      |
+| 字段                  | 必填 | 绑定支持  | 详情                                                                                                                    | 示例                                                         |
+| ------------------- |:--:| ----- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| topics              | 否  | 输入    | 以逗号分隔的主题字符串。                                                                                                          | `"mytopic1,topic2"`                                        |
+| brokers             | 是  | 输入/输出 | 以逗号分隔的 Kafka broker。                                                                                                  | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"` |
+| clientID            | 否  | 输入/输出 | 用户提供的字符串，随每个请求一起发送到 Kafka 代理，用于日志记录、调试和审计目的。                                                                          | `"my-dapr-app"`                                            |
+| consumerGroup       | 否  | 输入    | 监听 kafka 消费者组。 发布到主题的每条记录都会传递给订阅该主题的每个消费者组中的一个消费者。                                                                    | `"group1"`                                                 |
+| consumeRetryEnabled | 否  | 输入/输出 | 通过设置为 `"true"`启用消费重试。 在 Kafka 绑定组件中默认为 `false`。                                                                       | `"true"`, `"false"`                                        |
+| publishTopic        | 是  | 输出    | 要发布的主题。                                                                                                               | `"mytopic"`                                                |
+| authRequired        | 否  | *已废弃* | 启用 [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) 对 Kafka broker 的身份验证。               | `"true"`, `"false"`                                        |
+| authType            | 是  | 输入/输出 | 配置或禁用身份验证。 支持值包括： `none`, `password`, `mtls`, 或者 `oidc`                                                               | `"password"`, `"none"`                                     |
+| saslUsername        | 否  | 输入/输出 | 用于身份验证的 SASL 用户名。 仅当 `authRequired` 设置为 `"true"`时才需要。                                                                 | `"adminuser"`                                              |
+| saslPassword        | 否  | 输入/输出 | 用于身份验证的 SASL 密码。 可以用`secretKeyRef`来[引用 Secret]({{< ref component-secrets.md >}})。 仅当 `authRequired` 设置为 `"true"`时才需要。 | `""`, `"KeFg23!"`                                          |
+| initialOffset       | 否  | 输入    | 如果以前未提交任何偏移量，则要使用的初始偏移量。 应为"newest"或"oldest"。 默认为"newest"。                                                            | `"oldest"`                                                 |
+| maxMessageBytes     | 否  | 输入/输出 | 单条Kafka消息允许的最大消息的字节大小。 默认值为 1024。                                                                                     | `2048`                                                     |
+| oidcTokenEndpoint   | 否  | 输入/输出 | OAuth2 身份提供者访问令牌端点的完整 URL。 将`authType`的值设置为`oidc`时需要设置。                                                               | "https://identity.example.com/v1/token"                    |
+| oidcClientID        | 否  | 输入/输出 | 已在标识提供者中预配的 OAuth2 客户端 ID。 将`authType`的值设置为`oidc`时需要设置。                                                               | `dapr-kafka`                                               |
+| oidcClientSecret    | 否  | 输入/输出 | 已在身份提供者中配置的 OAuth2 客户端密码：当 `authType` 设置为 `oidc`时需要                                                                   | `"KeFg23!"`                                                |
+| oidcScopes          | 否  | 输入/输出 | 使用访问令牌请求的 OAuth2/OIDC 范围的逗号分隔列表。 当 `authType` 设置为 `oidc`时推荐使用。 默认值为 `"openid"`                                        | `"openid,kafka-prod"`                                      |
 
 ## 绑定支持
 
 此组件支持 **输入和输出** 绑定接口。
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 
-## Authentication
+## 鉴权
 
-Kafka 支持多种身份验证模式，Dapr 支持几种：SASL 密码、mTLS、OIDC/OAuth2。 [Learn more about Kafka's authentication method for both the Kafka binding and Kafka pub/sub components]({{< ref "setup-apache-kafka.md#authentication" >}}).
+Kafka 支持多种身份验证模式，Dapr 支持几种：SASL 密码、mTLS、OIDC/OAuth2。 [详细更多关于 Kafka 对 Kafka 绑定和 Kafka 发布/订阅组件]({{< ref "setup-apache-kafka.md#authentication" >}})的身份验证方法。
 
 ## 指定分区键
 
@@ -102,7 +102,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
 
 ### 响应
 
-An HTTP 204 (No Content) and empty body will be returned if successful.
+请求成功，将返回HTTP 204状态码(无内容) 和空报文
 
 ## 相关链接
 

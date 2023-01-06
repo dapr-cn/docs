@@ -1,30 +1,30 @@
 ---
 type: docs
-title: "JavaScript Client SDK"
+title: "JavaScript 客户端 SDK"
 linkTitle: "客户端"
 weight: 500
-description: JavaScript Client SDK for developing Dapr applications
+description: JavaScript 客户端 SDK，用于开发 Dapr 应用程序
 ---
 
 ## 介绍
 
-The Dapr Client allows you to communicate with the Dapr Sidecar and get access to its client facing features such as  Publishing Events, Invoking Output Bindings, State Management, Secret Management, and much more.
+Dapr客户端允许您与Dapr Sidecar进行通信，并访问其面向客户端的功能，例如发布事件，调用输出绑定，状态管理，机密管理等等。
 
 ## 前提
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Latest LTS version of Node or greater](https://nodejs.org/en/)
+- [Node.js 的最新 LTS 版本或更高版本](https://nodejs.org/en/)
 
-## Installing and importing Dapr's JS SDK
+## 安装和导入 Dapr 的 JS SDK
 
-1. Install the SDK with `npm`:
+1. 使用 `npm` 安装 SDK：
 
 ```bash
 npm i dapr-client --save
 ```
 
-2. Import the libraries:
+2. 导入类库：
 
 ```javascript
 import { DaprClient, DaprServer, HttpMethod, CommunicationProtocolEnum } from "dapr-client";
@@ -79,11 +79,11 @@ npm run start:dapr-grpc
 
 ## 构建块
 
-The JavaScript Client SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}) focusing on Client to Sidecar features.
+JavaScript Client SDK允许您与所有专注于客户端到Sidecar功能的[Dapr构建块]({{< ref building-blocks >}})进行交互。
 
-### Invocation API
+### 调用 API
 
-#### Invoke a Service
+#### 调用服务
 
 ```javascript
 import { DaprClient, HttpMethod } from "dapr-client"; 
@@ -113,9 +113,9 @@ start().catch((e) => {
 > 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
 
-### State Management API
+### 状态管理 API
 
-#### Save, Get and Delete application state
+#### 保存、获取和删除应用程序状态
 
 ```javascript
 import { DaprClient } from "dapr-client"; 
@@ -249,7 +249,7 @@ start().catch((e) => {
 });
 ```
 
-##### Subscribe to messages
+##### 订阅消息
 
 ```javascript
 import { DaprServer } from "dapr-client";
@@ -276,9 +276,9 @@ async function start() {
 
 ### 绑定 API
 
-#### Invoke Output Binding
+#### 调用输出绑定
 
-**Output Bindings**
+**输出绑定**
 
 ```javascript
 import { DaprClient } from "dapr-client"; 
@@ -364,4 +364,4 @@ start().catch((e) => {
 
 ## 相关链接
 
-- [JavaScript SDK examples](https://github.com/dapr/js-sdk/tree/master/examples)
+- [JavaScript SDK 示例](https://github.com/dapr/js-sdk/tree/master/examples)

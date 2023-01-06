@@ -55,16 +55,16 @@ spec:
 
 | 字段                    | 必填 | 绑定支持 | 详情                                                                                                                                                      | 示例                                     |
 | --------------------- |:--:| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| tenantId              | Y  | 输入   | 创建这个事件网格事件订阅的 Azure 租户 id                                                                                                                               | `"tenentID"`                           |
-| subscriptionId        | Y  | 输入   | 创建这个事件网格事件订阅的 Azure 订阅 id                                                                                                                               | `"subscriptionId"`                     |
-| clientId              | Y  | 输入   | 由绑定来创建或更新事件网格事件订阅的客户端 id                                                                                                                                | `"clientId"`                           |
-| clientSecret          | Y  | 输入   | 由绑定来创建或更新事件网格事件订阅的客户端 id                                                                                                                                | `"clientSecret"`                       |
-| subscriberEndpoint    | Y  | 输入   | 事件网格将进行握手并发送云端事件的 https 端点。 如果您没有在 ingress 上重写URL， 其形式应该是： `https://[YOUR HOSTNAME]/api/events`。如果测试您的本地机器， 您可以使用 [ngrok](https://ngrok.com) 来创建一个公共端点。 | `"https://[YOUR HOSTNAME]/api/events"` |
-| handshakePort         | Y  | 输入   | 输入绑定将侦听握手和事件的容器端口                                                                                                                                       | `"9000"`                               |
-| scope                 | Y  | 输入   | 事件订阅需要创建或更新的资源标识符。 请参阅[这里](#scope)了解更多详情。                                                                                                               | `"/subscriptions/{subscriptionId}/"`   |
-| eventSubscriptionName | N  | 输入   | 事件订阅的名称。 事件订阅名称长度必须在3到64个字符之间，并且只能使用字母数字                                                                                                                | `"name"`                               |
-| accessKey             | Y  | 输出   | 将事件网格事件发布到自定义 topic 的访问密钥                                                                                                                               | `"accessKey"`                          |
-| topicEndpoint         | Y  | 输出   | 输出绑定应该在其中发布事件的 topic 端点                                                                                                                                 | `"topic-endpoint"`                     |
+| tenantId              | 是  | 输入   | 创建这个事件网格事件订阅的 Azure 租户 id                                                                                                                               | `"tenentID"`                           |
+| subscriptionId        | 是  | 输入   | 创建这个事件网格事件订阅的 Azure 订阅 id                                                                                                                               | `"subscriptionId"`                     |
+| clientId              | 是  | 输入   | 由绑定来创建或更新事件网格事件订阅的客户端 id                                                                                                                                | `"clientId"`                           |
+| clientSecret          | 是  | 输入   | 由绑定来创建或更新事件网格事件订阅的客户端 id                                                                                                                                | `"clientSecret"`                       |
+| subscriberEndpoint    | 是  | 输入   | 事件网格将进行握手并发送云端事件的 https 端点。 如果您没有在 ingress 上重写URL， 其形式应该是： `https://[YOUR HOSTNAME]/api/events`。如果测试您的本地机器， 您可以使用 [ngrok](https://ngrok.com) 来创建一个公共端点。 | `"https://[YOUR HOSTNAME]/api/events"` |
+| handshakePort         | 是  | 输入   | 输入绑定将侦听握手和事件的容器端口                                                                                                                                       | `"9000"`                               |
+| scope                 | 是  | 输入   | 事件订阅需要创建或更新的资源标识符。 请参阅[这里](#scope)了解更多详情。                                                                                                               | `"/subscriptions/{subscriptionId}/"`   |
+| eventSubscriptionName | 否  | 输入   | 事件订阅的名称。 事件订阅名称长度必须在3到64个字符之间，并且只能使用字母数字                                                                                                                | `"name"`                               |
+| accessKey             | 是  | 输出   | 将事件网格事件发布到自定义 topic 的访问密钥                                                                                                                               | `"accessKey"`                          |
+| topicEndpoint         | 是  | 输出   | 输出绑定应该在其中发布事件的 topic 端点                                                                                                                                 | `"topic-endpoint"`                     |
 
 ### Scope
 
@@ -82,7 +82,7 @@ Scope 是事件订阅需要创建或更新的资源的标识符。 Scope 可以�
 - `create`
 ## 补充资料
 
-Event Grid Binding creates an [event subscription](https://docs.microsoft.com/azure/event-grid/concepts#event-subscriptions) when Dapr initializes. 您的服务主要需要获得权限才能启用此功能。
+在Dapr初始化时，Event Grid 绑定创建了一个[event subscription](https://docs.microsoft.com/azure/event-grid/concepts#event-subscriptions)。 您的服务主要需要获得权限才能启用此功能。
 
 ```bash
 # 首先确保 Azure Resource Manager 提供商已注册事件网格
@@ -136,7 +136,7 @@ helm install nginx-ingress ingress-nginx/ingress-nginx -f ./dapr-annotations.yam
 kubectl get svc -l component=controller -o jsonpath='Public IP is: {.items[0].status.loadBalancer.ingress[0].ip}{"\n"}'
 ```
 
-If deploying to Azure Kubernetes Service, you can follow [the official MS documentation for rest of the steps](https://docs.microsoft.com/azure/aks/ingress-tls)
+如果部署到 Azure Kubernetes 服务, 你可以参照 [MS官方文档进行余下步骤](https://docs.microsoft.com/azure/aks/ingress-tls)
 - 添加一条记录到你的 DNS 区域
 - 安装证书管理器
 - 创建 CA 集群发行者（issuer）

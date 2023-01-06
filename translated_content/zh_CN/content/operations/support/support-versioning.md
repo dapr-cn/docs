@@ -1,76 +1,76 @@
 ---
 type: docs
-title: "Versioning policy"
-linkTitle: "Versioning"
+title: "版本控制策略"
+linkTitle: "版本控制"
 weight: 1000
-description: "Dapr's versioning policies"
+description: "Dapr 的版本控制策略"
 ---
 
 ## 介绍
-Dapr is designed for future changes in the runtime, APIs and components with versioning schemes. This topic describes the versioning schemes and strategies for APIs, manifests such as components and Github repositories.
+Dapr 专为将来对运行时、API 和具有版本管理方案的组件进行更改而设计。 本主题描述了API、组件等清单和 Github 存储库的版本管理方案和策略。
 
-## Versioning
-Versioning is the process of assigning either unique version names or unique version numbers to unique states of computer software.
-- Versioning provides compatibility, explicit change control and handling changes, in particular breaking changes.
-- Dapr strives to be backwards compatible. If a breaking change is needed it’ll be [announced in advance]({{< ref "support-release-policy#feature-and-deprecations" >}}).
-- Deprecated features are done over multiple releases with both new and deprecated features working side-by-side.
+## 版本控制
+版本控制是为计算机软件的唯一状态分配唯一版本名称或唯一版本号的过程。
+- 版本控制提供了兼容性、显式变更控制和处理变化，特别是破坏性变更。
+- Dapr 努力做到向后兼容。 如果需要进行破坏性改变，将会 [提前宣布]({{< ref "support-release-policy#feature-and-deprecations" >}})。
+- 已弃用的功能是在多个版本上完成的，新增功能和已弃用功能并行工作。
 
 
-Versioning refers to the following Dapr repos: dapr, CLI, stable language SDKs, dashboard, components-contrib, quickstarts, helm-charts and documentation.
+版本控制是指以下 Dapr 代码库：dapr、CLI、稳定语言 SDK、dashboard、components-contrib、quickstarts、helm-charts 和 documentation。
 
-Dapr has the following versioning schemes:
-- Dapr `HTTP API` versioned with `MAJOR.MINOR`
-- Dapr `GRPC API` with `MAJOR`
-- Releases (GitHub repositories including dapr, CLI, SDKs and Helm Chart) with `MAJOR.MINOR.PATCH`
-- Documentation and Quickstarts repositories are versioned with the Dapr runtime repository versioning.
-- Dapr `Components` with `MAJOR` in components-contrib GitHub repositories.
-- Dapr `Manifests` with `MAJOR.MINOR`. These include subscriptions and configurations. These include subscriptions and configurations. These include subscriptions and configurations.
+Dapr 具有以下版本控制方案：
+- Dapr `HTTP API` 会具有 `MAJOR.MINOR` 版本
+- Dapr `GRPC API` 会具有 `MAJOR`
+- 发布 (GitHub 代码库 包括 dapr, CLI, SDKs 和 Helm Chart) 会具有 `MAJOR.MINOR.PATCH`
+- Documentation 和 Quickstarts 代码库会使用 Dapr 运行时代码库版本控制进行版本控制。
+- Dapr `Components` 会在 components-contrib GitHub 代码库中具有 `MAJOR` 。
+- Dapr `Manifests` with `MAJOR.MINOR`. These include subscriptions and configurations. These include subscriptions and configurations. 其中包括订阅和配置。
 
-Note that the Dapr APIs,  binaries releases (runtime, CLI, SDKs) and components are all independent from one another.
+请注意，Dapr API、二进制文件版本（运行时、CLI、SDK）和组件都是相互独立的。
 
 ## Dapr HTTP API
-The Dapr HTTP API is versioned according to these [REST API guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#71-url-structure).
+Dapr HTTP API 根据 [REST API 指南](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#71-url-structure) 进行版本控制。
 
-Based to the these guidelines;
-- A `MAJOR` version of the API is incremented when a deprecation is expected of the older version. Any such deprecation will be communicated and an upgrade path made available.
-- A `MINOR` versions *may* be incremented for any other changes. For example a change to the JSON schema of the message sent to the API. The definition of a breaking change to the API can be viewed [here](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#123-definition-of-a-breaking-change).
-- Experimental APIs include an “alpha” suffix to denote for their alpha status. For example v1.0alpha, v2.0alpha, etc.
+基于这些准则：
+- 当预期旧版本会弃用时，API 的 `MAJOR` 版本将递增。 任何此类弃用会宣布且给出可行的升级路径。
+- 对于任何其他更改， `MINOR` 版本 *可能*会递增。 例如，对发送到 API 的消息的 JSON 结构的更改。 可以在[此处](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#123-definition-of-a-breaking-change)查看对 API 的破坏性改变的定义 。
+- 实验性 API 包含一个 "alpha" 后缀，用于表示其实验状态。 例如 v1.0alpha、v2.0alpha 等。
 
 ## Dapr 运行时
-Dapr releases use `MAJOR.MINOR.PATCH` versioning. For example 1.0.0. Read [Supported releases]({{< ref support-release-policy.md >}}) for more on the versioning of releases.
+Dapr 发布使用 `MAJOR.MINOR.PATCH` 格式做版本控制。 例如 1.0.0. 有关版本控制的详细信息，请参阅 [支持的版本]({{< ref support-release-policy.md >}}) 。
 
 ## Helm Charts
-Helm charts in the [helm-charts repo](https://github.com/dapr/helm-charts) are versioned with the Dapr runtime. The Helm charts are used in the [Kubernetes deployment]({{< ref "kubernetes-deploy#install-with-helm-advanced" >}})
+Helm charts 在 [helm-charts 代码库](https://github.com/dapr/helm-charts) 中与 Dapr 运行时一起进行版本控制。 Helm Chart 用于 [Kubernetes 部署]({{< ref "kubernetes-deploy#install-with-helm-advanced" >}})
 
-## Language SDKs, CLI and dashboard
-The Dapr language SDKs, CLI and dashboard are versioned independently from the Dapr runtime and can be released at different schedules. See this [table]({{< ref "support-release-policy#supported-versions" >}}) to show the compatibility between versions of the SDKs, CLI, dashboard and runtime. Each new release on the runtime lists the corresponding supported SDKs, CLI and Dashboard.
+## 语言 SDK、CLI 和仪表板
+Dapr 语言 SDK、CLI 和仪表板的版本独立于 Dapr 运行时，可以按不同的计划发布。 请参阅此 [表]({{< ref "support-release-policy#supported-versions" >}}) ，以显示 SDK、CLI、仪表板和运行时版本之间的兼容性。 运行时上的每个新发布都列出了相应的受支持的 SDK、CLI 和仪表板。
 
-SDKs, CLIs and Dashboard are versioning follows a `MAJOR.MINOR.PATCH` format. A major version is incremented when there’s a non-backwards compatible change in an SDK (for example, changing a parameter on a client method. A minor version is updated for new features and bug fixes and the patch version is incremented in case of bug or security hot fixes.
+SDK、CLI 和仪表板的版本控制遵循 `MAJOR.MINOR.PATCH` 格式。 当 SDK 中存在不向后兼容的更改（例如，更改客户端方法上的参数）时，主要版本将递增。 次要版本将针对新功能和错误修复进行更新，而在出现错误或安全热修复时，patch 版本将递增。
 
-Samples and examples in SDKs version with that repo.
+SDK 中的样本或者样例版本会跟随该代码库。
 
 ## 组件
-Components are implemented in the components-contrib repository and follow a `MAJOR` versioning scheme. The version for components adheres to major versions (vX), as patches and non-breaking changes are added to the latest major version. The version is incremented when there’s a non-backwards compatible change in a component interface, for example, changing an existing method in the State Store interface.
+组件在 components-contrib 代码库中实现，并遵循 `MAJOR` 版本控制方案。 组件版本会被加入到 major 版本（vX）中 ，补丁与非破坏性更改都会被加到最新的 major 版本中。 当组件接口中存在非向后兼容的更改时，major 版本将递增，例如，更改现有状态存储接口中的方法。
 
-The [components-contrib](https://github.com/dapr/components-contrib/) repo release is a flat version across all components inside.  That is, a version for the components-contrib repo release is made up of all the schemas for the components inside it. A new version of Dapr does not mean there is a new release of components-contrib if there are no component changes.
+[components-contrib](https://github.com/dapr/components-contrib/) 代码库版本是内部所有组件的统一版本。  也就是说，组件代码库版本由其中所有组件的发布的架构组合而成。 新版本的 Dapr 并不意味着 components-contrib 有新发布版本。
 
-注意：组件具有能生产使用的版本周期：Alpha、Beta 和 Stable。 These statuses are not related to their versioning. The tables of supported components shows both their versions and their status.
+注意：组件具有能生产使用的版本周期：Alpha、Beta 和 Stable。 这些版本周期与其版本控制无关。 受支持组件的表显示其版本和版本周期。
 * [状态存储组件]({{< ref supported-state-stores.md >}}) 列表
 * [pub/sub组件列表]({{< ref supported-pubsub.md >}})
-* List of [secret store components]({{< ref supported-secret-stores.md >}})
-* List of [binding components]({{< ref supported-bindings.md >}})
+* [安全存储组件]({{< ref supported-secret-stores.md >}})列表
+* [绑定组件列表]({{< ref supported-bindings.md >}})
 
-For more information on component versioning  read [Version 2 and beyond of a component](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md#version-2-and-beyond-of-a-component)
+有关组件版本控制的详细信息，请阅读 [版本 2 及更高版本的组件](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md#version-2-and-beyond-of-a-component)
 
-### Component schemas
+### 组件模式
 
-Versioning for component YAMLs comes in two forms:
-- Versioning for the component manifest. The `apiVersion`
-- Version for the component implementation. Version for the component implementation. The `.spec.version`
+组件 YAML 的版本控制有两种形式：
+- 组件清单的版本控制， 即 `apiVersion`。
+- 组件实现的版本。 Version for the component implementation. The `.spec.version`
 
-A component manifest includes the schema for an implementation in the `.spec.metadata` field, with the `.type` field denoting the implementation
+组件清单在 `.spec.metadata` 字段中包含实现的架构，其中 `.type` 字段表示具体实现组件
 
-See the comments in the example below:
+请参阅以下示例中的注释：
 ```yaml
 apiVersion: dapr.io/v1alpha1 # <-- This is the version of the component manifest
 kind: Component
@@ -86,19 +86,19 @@ spec:
     value: general-kenobi
 ```
 
-### Component manifest version
-The Component YAML manifest is versioned with `dapr.io/v1alpha1`.
+### 组件清单版本
+组件 YAML 清单的版本为 `dapr.io/v1alpha1`。
 
-### Component implementation version
-The version for a component implementation is determined by the `.spec.version` field as can be seen in the example above. The `.spec.version` field is mandatory in a schema instance and the component fails to load if this is not present. For the release of Dapr 1.0.0 all components are marked as `v1`.The component implementation version is incremented only for non-backward compatible changes.
+### 组件实现版本
+组件具体实现的版本由 `.spec.version` 字段确定，如上面的示例所示。 `.spec.version` 字段在模式实例中是必需的，如果不存在，则无法加载组件。 对于 Dapr 1.0.0 的发布，所有组件都标记为 `v1`。组件实现版本仅针对不向后兼容的更改递增。
 
-### Component deprecations
-Deprecations of components will be announced two (2) releases ahead. Deprecation of a component, results in major version update of the component version. After 2 releases, the component is unregistered from the Dapr runtime, and trying to load it will throw a fatal exception.
+### 组件弃用
+组件的弃用将提前两（2）个版本宣布。 弃用组件会导致组件版本的主要版本更新。 在 2 个版本之后，该组件将从 Dapr 运行时中取消注册，尝试加载它将引发致命异常。
 
-## Quickstarts and Samples
-Quickstarts in the [Quickstarts repo](https://github.com/dapr/quickstarts) are versioned with the runtime, where a table of corresponding versions is on the front page of the samples repo.  Users should only use Quickstarts corresponding to the version of the runtime being run.
+## 快速入门和示例
+快速入门在 [ Quickstarts 代码库](https://github.com/dapr/quickstarts)随运行时一起进行版本控制，其中相应版本的表位于示例代码库的首页上。  用户应使用运行时版本相对应的快速入门。
 
-Samples in the [Samples repo](https://github.com/dapr/samples) are each versioned on a case by case basis depending on the sample maintainer. Samples that become very out of date with the runtime releases (many versions behind) or have not been maintained for more than 1 year will be removed.
+[样例代码库](https://github.com/dapr/samples)中的每个样例都根据具体情况进行版本控制，具体取决于样例维护者。 如果与运行时版本落后太多，或者一年内都没被维护的样例将被删除。
 
 ## 相关链接
-* Read the [Supported releases]({{< ref support-release-policy.md >}})
+* 阅读[支持的版本]({{< ref support-release-policy.md >}})

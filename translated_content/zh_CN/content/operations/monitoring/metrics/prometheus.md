@@ -1,25 +1,25 @@
 ---
 type: docs
-title: "How-To: Observe metrics with Prometheus"
+title: "操作方法：使用 Prometheus 观察指标"
 linkTitle: "Prometheus"
 weight: 4000
-description: "Use Prometheus to collect time-series data relating to the execution of the Dapr runtime itself"
+description: "使用 Prometheus 来收集与 Dapr 运行时本身的执行有关的时间序列数据"
 ---
 
-## Setup Prometheus Locally
-To run Prometheus on your local machine, you can either [install and run it as a process](#install) or run it as a [Docker container](#Run-as-Container).
+## 在本地安装 Prometheus
+要在本地机器上运行 Prometheus，你可以[安装并作为进程](#install)运行，或者作为 [Docker 容器](#Run-as-Container)运行。
 
-### Install
+### 安装
 {{% alert title="Note" color="warning" %}}
-You don't need to install Prometheus if you plan to run it as a Docker container. Please refer to the [Container](#run-as-container) instructions.
+如果你计划以 Docker 容器的形式运行 Prometheus，则无需安装它。 请参考[容器](#run-as-container)说明。
 {{% /alert %}}
 
-To install Prometheus, follow the steps outlined [here](https://prometheus.io/docs/prometheus/latest/getting_started/) for your OS.
+要安装 Prometheus，请按照[这里](https://prometheus.io/docs/prometheus/latest/getting_started/)概述的适用于你的操作系统的步骤。
 
-### Configure
-Now you've installed Prometheus, you need to create a configuration.
+### 配置
+现在你已经安装了 Prometheus，你需要创建一个配置。
 
-Below is an example Prometheus configuration, save this to a file i.e. `/tmp/prometheus.yml` or `C:\Temp\prometheus.yml`
+下面是一个 Prometheus 配置的例子，将其保存到一个文件中，即 `/tmp/prometheus.yml` 或 `C：\Temp\prometheus.yml`
 ```yaml
 global:
   scrape_interval:     15s # By default, scrape targets every 15 seconds.
@@ -36,32 +36,32 @@ scrape_configs:
       - targets: ['localhost:9090'] # Replace with Dapr metrics port if not default
 ```
 
-### Run as Process
-Run Prometheus with your configuration to start it collecting metrics from the specified targets.
+### 作为进程运行
+用你的配置运行 Prometheus，以启动它从指定目标收集指标。
 ```bash
 ./prometheus --config.file=/tmp/prometheus.yml --web.listen-address=:8080
 ```
-> We change the port so it doesn't conflict with Dapr's own metrics endpoint.
+> 我们改变端口，这样就不会与 Dapr 自己的度量端点冲突。
 
-If you are not currently running a Dapr application, the target will show as offline. In order to start collecting metrics you must start Dapr with the metrics port matching the one provided as the target in the configuration.
+如果你目前没有运行 Dapr 应用程序，则目标将显示为脱机。 为了启动收集指标，你必须用符合配置中提供的目标的指标端口启动 Dapr。
 
-Once Prometheus is running, you'll be able to visit its dashboard by visiting `http://localhost:8080`.
+一旦 Prometheus 运行，您将能够通过访问 `http://localhost:8080` 来访问其仪表板。
 
-### Run as Container
-To run Prometheus as a Docker container on your local machine, first ensure you have [Docker](https://docs.docker.com/install/) installed and running.
+### 作为容器运行
+要在你的本地机器上作为 Docker 容器运行 Prometheus，首先要确保你已经安装和运行 [Docker](https://docs.docker.com/install/)。
 
-Then you can run Prometheus as a Docker container using:
+然后你可以使用 Docker 容器来运行 Prometheus。
 ```bash
 docker run \
     --net=host \
     -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
     prom/prometheus --config.file=/etc/prometheus/prometheus.yml --web.listen-address=:8080
 ```
-`--net=host` ensures that the Prometheus instance will be able to connect to any Dapr instances running on the host machine. `--net=host` ensures that the Prometheus instance will be able to connect to any Dapr instances running on the host machine. If you plan to run your Dapr apps in containers as well, you'll need to run them on a shared Docker network and update the configuration with the correct target address.
+`--net=host` 确保 Prometheus 实例将能够连接到主机上运行的任何 Dapr 实例。 `--net=host` ensures that the Prometheus instance will be able to connect to any Dapr instances running on the host machine. If you plan to run your Dapr apps in containers as well, you'll need to run them on a shared Docker network and update the configuration with the correct target address.
 
-Once Prometheus is running, you'll be able to visit its dashboard by visiting `http://localhost:8080`.
+一旦 Prometheus 运行，您将能够通过访问 `http://localhost:8080` 来访问其仪表板。
 
-## Setup Prometheus on Kubernetes
+## 在 Kubernetes 上部署 Prometheus
 
 ### 先决条件
 
@@ -69,15 +69,15 @@ Once Prometheus is running, you'll be able to visit its dashboard by visiting `h
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm 3](https://helm.sh/)
 
-### Install Prometheus
+### 安装 Prometheus
 
-1.  First create namespace that can be used to deploy the Grafana and Prometheus monitoring tools
+1.  首先创建命名空间，可用于部署 Grafana 和 Prometheus 监控工具
 
 ```bash
 kubectl create namespace dapr-monitoring
 ```
 
-2. Install Prometheus
+2. 安装 Prometheus
 
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -85,7 +85,7 @@ helm repo update
 helm install dapr-prom prometheus-community/prometheus -n dapr-monitoring
 ```
 
-If you are Minikube user or want to disable persistent volume for development purposes, you can disable it by using the following command.
+如果您正在使用 minikube 或者想要禁用持久化卷来开发，您可以使用以下命令禁用它：
 
 ```bash
 helm install dapr-prom prometheus-community/prometheus -n dapr-monitoring
@@ -94,7 +94,7 @@ helm install dapr-prom prometheus-community/prometheus -n dapr-monitoring
 
 3. 校验
 
-Ensure Prometheus is running in your cluster.
+确保 Prometheus 正在群集中运行。
 
 ```bash
 kubectl get pods -n dapr-monitoring
@@ -117,5 +117,5 @@ dapr-prom-prometheus-server-694fd8d7c-q5d59         2/2     Running   0         
 
 ## 参考资料
 
-* [Prometheus Installation](https://github.com/prometheus-community/helm-charts)
-* [Prometheus Query Language](https://prometheus.io/docs/prometheus/latest/querying/basics/)
+* [安装 Prometheus](https://github.com/prometheus-community/helm-charts)
+* [Prometheus 查询语言](https://prometheus.io/docs/prometheus/latest/querying/basics/)

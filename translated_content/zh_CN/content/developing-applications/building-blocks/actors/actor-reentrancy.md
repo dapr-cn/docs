@@ -1,13 +1,13 @@
 ---
 type: docs
 title: "如何：在Dapr中启用 Actor 的可重入性"
-linkTitle: "如何：Actor的可重入性"
+linkTitle: "How-To: Actor reentrancy"
 weight: 30
 description: 了解更多关于 actor 可重入性
 ---
 
 ## Actor可重入性
-虚拟 actor 模式的核心原则是 actor 执行的单线程性质。 Without reentrancy, the Dapr runtime locks on all actor requests, even those that are in the same call chain. 第二个请求要到第一个请求完成后才能开始。 This means an actor cannot call itself, or have another actor call into it even if it is part of the same chain. Reentrancy solves this by allowing requests from the same chain, or context, to re-enter into an already locked actor. This is especially useful in scenarios where an actor wants to call a method on itself or when actors are used in workflows where other actors are used to perform work, and they then call back onto the coordinating actor. Examples of chains that reentrancy allows are shown below:
+虚拟 actor 模式的核心原则是 actor 执行的单线程性质。 在不重入的情况下，Dapr 运行时会锁定所有Actor 组件请求，甚至包括位于同一调用链中的请求。 第二个请求要到第一个请求完成后才能开始。 这意味着一个actor不能调用自己，或者让另一个actor调用它，即使它是同一链的一部分。 可重入性通过允许来自同一链或同一上下文的请求重新进入已锁定的 actor 来解决这个问题。 这在以下情况下特别有用：Actor 想要调用自身上的方法，或者在工作流中使用Actor，其中其他Actors 用于执行工作，然后他们回调协调参与者。 可重入性的调用链示例如下：
 
 ```
 Actor A -> Actor A
@@ -16,13 +16,13 @@ ActorA -> Actor B -> Actor A
 
 通过可重入性，可以在不牺牲虚拟 actor 单线程行为的情况下，支持更复杂的 actor 调用。
 
-<img src="/images/actor-reentrancy.png" width=1000 height=500 alt="Diagram showing reentrancy for a coordinator workflow actor calling worker actors or an actor calling an method on itself">
+<img src="/images/actor-reentrancy.png" width=1000 height=500 alt="显示调用工作角色的协调工作流 actor 或在其自身上调用方法的actor 的重入关系的图示">
 
-The `maxStackDepth` parameter sets a value that controls how many reentrant calls be made to the same actor. By default this is set to 32, which is more than sufficient in most cases.
+`maxStackDepth` 参数设置一个值，该值控制对同一参与者进行多少次可重入调用。 默认情况下，此值设置为 32，这在大多数情况下已足够。
 
-## Enable Actor Reentrancy with Actor Configuration
+## 使用 Actor 配置启用 Actor 可重入性
 
-The actor that will be reentrant must provide configuration to use reentrancy. 这是由 `GET /dapr/config`的 actor 终结点完成的，类似于其他 actor 配置元素。
+将重入的Actor 必须提供配置才能使用重入。 这是由 `GET /dapr/config`的 actor 终结点完成的，类似于其他 actor 配置元素。
 
 {{< tabs Dotnet Python Go >}}
 
@@ -77,7 +77,7 @@ def do_something_reentrant():
 
 {{% codetab %}}
 
-Here is a snippet of an actor written in Golang providing the reentrancy configuration via the HTTP API. Reentrancy has not yet been included into the Go SDK.
+这是一个用 Golang 编写的 actor 配置代码片段，通过 HTTP API 提供重入配置。 可重入性尚未包含在 Go SDK 中。
 
 ```go
 type daprConfig struct {
@@ -108,7 +108,7 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 ### 重入请求处理
 重入请求的关键是名为`Dapr-Reentrancy-Id`的请求头。 该请求头的值用于匹配请求与他们的执行链，允许他们绕过actor的锁定。
 
-Dapr运行时为每一个指定了重新入配置项的actor请求创建了该请求头。 请求头一旦创建，即被锁定于该actor，且必须传递给后续的所有请求。 Below are the snippets of code from an actor handling this:
+Dapr运行时为每一个指定了重新入配置项的actor请求创建了该请求头。 请求头一旦创建，即被锁定于该actor，且必须传递给后续的所有请求。 以下是处理此问题的 actor 的代码片段：
 
 ```go
 func reentrantCallHandler(w http.ResponseWriter, r *http.Request) {
@@ -134,7 +134,7 @@ func reentrantCallHandler(w http.ResponseWriter, r *http.Request) {
 
 {{< /tabs >}}
 
-Watch this [video](https://www.youtube.com/watch?v=QADHQ5v-gww&list=PLcip_LgkYwzuF-OV6zKRADoiBvUvGhkao&t=674s) on how to use actor reentrancy.
+观看此 [视频](https://www. youtube. com/watch? v=Qadhq5v-gww& list=Plcip_LgkYwzuF-Ov6zKRADoiBvUvGhkao& t=674s) ，了解如何使用Actor 可重入性。
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QADHQ5v-gww?start=674" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>

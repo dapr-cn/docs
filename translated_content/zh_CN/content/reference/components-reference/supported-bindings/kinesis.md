@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "AWS Kinesis binding spec"
+title: "AWS Kinesis绑定规范"
 linkTitle: "AWS Kinesis"
-description: "Detailed documentation on the AWS Kinesis binding component"
+description: "Detailed documentation on the AWS Kinesis 绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/kinesis/"
 ---
 
 ## 配置
 
-To setup AWS Kinesis binding create a component of type `bindings.aws.kinesis`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+需要创建一个类型为`bindings.aws.kinesis`的组件来设置 AWS Kinesis绑定。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [this](https://aws.amazon.com/kinesis/data-streams/getting-started/) for instructions on how to set up an AWS Kinesis data streams See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
+参阅[此处](https://aws.amazon.com/kinesis/data-streams/getting-started/) 了解关于如何设置AWS Kinesis数据流的介绍。阅读[Authenticating to AWS]({{< ref authenticating-aws.md >}}) 了解关于身份认证相关的属性信息。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -45,25 +45,25 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持         | 详情                                                                                                                                                                                                                           | 示例                       |
-| ------------ |:--:| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| mode         | N  | 输入           | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"` |
-| streamName   | Y  | Input/Output | The AWS Kinesis Stream Name                                                                                                                                                                                                  | `"stream"`               |
-| consumerName | Y  | 输入           | The AWS Kinesis Consumer Name                                                                                                                                                                                                | `"myconsumer"`           |
-| region       | Y  | 输出           | The specific AWS region the AWS Kinesis instance is deployed in                                                                                                                                                              | `"us-east-1"`            |
-| accessKey    | Y  | 输出           | 要访问此资源的 AWS 访问密钥                                                                                                                                                                                                             | `"key"`                  |
-| secretKey    | Y  | 输出           | 要访问此资源的 AWS 密钥访问 Key                                                                                                                                                                                                         | `"secretAccessKey"`      |
-| sessionToken | N  | 输出           | 要使用的 AWS 会话令牌                                                                                                                                                                                                                | `"sessionToken"`         |
+| 字段           | 必填 | 绑定支持  | 详情                                                                                                                                                                 | 示例                       |
+| ------------ |:--:| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
+| mode         | 否  | 输入    | Kinesis 流模式。 ` shared `- 共享吞吐量， ` extended ` - 扩展/增强扇出方法。 更多细节 [参照这里](https://docs. aws. amazon. com/streams/latest/dev/building-consumers. html)。 默认值为 `"shared"` | `"shared"`, `"extended"` |
+| streamName   | 是  | 输入/输出 | AWS Kinesis 流名称                                                                                                                                                    | `"stream"`               |
+| consumerName | 是  | 输入    | AWS Kinesis 消费者名称                                                                                                                                                  | `"myconsumer"`           |
+| region       | 是  | 输出    | 部署 AWS Kinesis 实例的特定 AWS 区域                                                                                                                                        | `"us-east-1"`            |
+| accessKey    | 是  | 输出    | 要访问此资源的 AWS 访问密钥                                                                                                                                                   | `"key"`                  |
+| secretKey    | 是  | 输出    | 要访问此资源的 AWS 密钥访问 Key                                                                                                                                               | `"secretAccessKey"`      |
+| sessionToken | 否  | 输出    | 要使用的 AWS 会话令牌                                                                                                                                                      | `"sessionToken"`         |
 
 {{% alert title="Important" color="warning" %}}
-When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernetes), if you're using a node/pod that has already been attached to an IAM policy defining access to AWS resources, you **must not** provide AWS access-key, secret-key, and tokens in the definition of the component spec you're using.
+当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。
 {{% /alert %}}
 
 ## 绑定支持
 
 此组件支持 **输入和输出** 绑定接口。
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 ## 相关链接

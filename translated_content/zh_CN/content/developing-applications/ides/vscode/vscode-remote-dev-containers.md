@@ -2,7 +2,7 @@
 type: docs
 title: "用远程开发容器开发 Dapr 应用程序"
 linkTitle: "远程开发容器"
-weight: 30000
+weight: 50000
 description: "如何设置带有Dapr的远程开发容器环境"
 ---
 

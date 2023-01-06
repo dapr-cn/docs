@@ -35,11 +35,11 @@ Dapr 文档处理分支的方式与大多数代码存储库不同。 每个分�
 - **假设一个新的开发者受众** - 一些明显的步骤可能看起来很难。 例如: 现在将环境变量 Dapr 设置为值 X。最好给读者一个明确的命令来做这个，而不是让他们自己去想办法。
 - **使用现在时** - 避免使用 "这个命令将安装 redis"这样的句子，因为这意味着操作是在未来发生。 请改为使用 " 此命令安装 redis" (现在时态) 。
 
-## Diagrams and images
-It is strongly encouraged to create diagrams and images where ever possible for documentation pages. All diagrams are kept in a Dapr Diagrams Deck, which has guidance on style and icons. The diagram images are saved as PNG files into the [images folder](/images). Diagrams should be;
-- Saved as PNG files with a high resolution
-- Named using the convention of a concept or building block so that they are grouped. For example `service-invocation-overview.png`. Also see Images guidance section below.
-- Added to the correct section in the `Dapr-Diagrams.pptx` deck so that they can be amended and updated.
+## 图表和图像
+强烈建议尽可能为文档页面创建图表和图像。 所有图表都保存在 Dapr Diagrams Deck 中，其中包含样式和图标指南。 图表图像以 PNG 文件的形式保存到 [images 文件夹](/images)中。 图表应该是;
+- 另存为高分辨率的PNG文件
+- 使用概念或构建块的约定命名，以便将它们分组。 例如 `service-invocation-overview.png`。 另请参阅下面的图像指南部分。
+- 添加到 `Dapr-Diagrams.pptx` Deck 中的正确部分，以便可以修改和更新它们。
 
 {{< button text="Download the Dapr Diagrams Deck" link="/presentations/Dapr-Diagrams.pptx.zip" >}}
 
@@ -90,10 +90,10 @@ description: "1+ SENTENCES DESCRIBING THE ARTICLE"
 ```yaml
 ---
 type: docs
-title: "Service invocation overview"
-linkTitle: "Overview"
+title: "服务调用概述"
+linkTitle: "概述"
 weight: 10
-description: "A quick overview of Dapr service invocation and how to use it to invoke services within your application"
+description: "Dapr服务调用的快速概述，以及如何在应用程序中使用它来调用服务。"
 ---
 ```
 
@@ -105,8 +105,8 @@ Front-matter 应填写所有字段，包括类型、标题、链接标题、权�
 - `描述` 应该是 1-2 个句子，描述读者将在此文档中学习，完成或执行什么。
 
 根据 [styling conventions](#styling-conventions)，标题只能大写第一个字和专有名词，但 "How-To："除外。
-    - "Getting started with Dapr service invocation"
-    - "How-To: Setup a local Redis instance"
+    - "Dapr 服务调用入门"
+    - "How-To: 设置本地 Redis 实例"
 
 ### 引用其他页面
 Hugo `ref` 和 `relref` [shortcodes](https://gohugo.io/content-management/cross-references/) 用于引用其他页面和部分。 如果某一页面被错误重命名或删除，它会中断构建。
@@ -277,7 +277,7 @@ with DaprClient() as d:
 
 {{< code-snippet file="contributing-1.py" lang="python" marker="#SAMPLE" >}}
 
-Use the `replace-key-[token]` and `replace-value-[token]` parameters to limit the embedded snipped to a portion of the sample file. This is useful when you want abbreviate a portion of the code sample. Multiple replacements are supported with multiple values of `token`.
+使用 `replace-key-[token]` 和 `replace-value-[token]` 参数，以将嵌入的截图限制为示例文件的一部分。 当您想要缩写代码示例的一部分时，这很有用。 支持使用多个 `token` 的值进行多次替换。
 
 下面的短代码和代码示例:
 
@@ -318,8 +318,8 @@ with DaprClient() as d:
 
 {{< code-snippet file="./contributing-2.py" lang="python" replace-key-imports="#IMPORTS" replace-value-imports="# Import statements"  >}}
 
-### YouTube videos
-Hugo can automatically embed YouTube videos using a shortcode:
+### YouTube 视频
+Hugo 可以使用短代码自动嵌入 YouTube 视频:
 ```
 {{</* youtube [VIDEO ID] */>}}
 ```

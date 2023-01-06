@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Pub/sub brokers component specs"
+title: "发布/订阅代理组件规范"
 linkTitle: "Pub/Sub 代理"
 weight: 2000
 description: Dapr支持的发布/订阅消息代理

@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## 配置
-To set up NATS Streaming pub/sub, create a component of type `pubsub.natsstreaming`. See [the how-to guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+要设置NATS Streaming pubsub，请创建类型为 `pubsub.natsstreaming` 的组件。 请参阅[指南]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}})，了解如何创建和应用 pubsub 配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -51,43 +51,43 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to [use a secret store for the secrets]({{< ref component-secrets.md >}}).
+以上示例将密钥明文存储， 建议 [为秘钥使用secret store]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 {{% alert title="Warning" color="warning" %}}
-NATS Streaming has been [deprecated](https://github.com/nats-io/nats-streaming-server/#warning--deprecation-notice-warning). Consider using [NATS JetStream]({{< ref setup-jetstream >}}) going forward.
+NATS Streaming 已经被 [弃用](https://github.com/nats-io/nats-streaming-server/#warning--deprecation-notice-warning)。 请考虑使用 [NATS JetStream]({{< ref setup-jetstream >}}).
 {{% /alert %}}
 
 ## 元数据字段规范
 
 | 字段                      | 必填 | 详情                                                                               | 示例                              |
 | ----------------------- |:--:| -------------------------------------------------------------------------------- | ------------------------------- |
-| natsURL                 | Y  | NATS 服务器地址 URL                                                                   | "`nats://localhost:4222`"       |
-| natsStreamingClusterID  | Y  | NATS cluster ID                                                                  | `"clusterId"`                   |
-| subscriptionType        | Y  | 订阅类型， 订阅类型， 允许的值`"topic"`，`"queue"`                                              | `"topic"`                       |
-| ackWaitTime             | N  | 见[这里](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements) | `"300ms"`                       |
-| maxInFlight             | N  | 见[这里](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements) | `"25"`                          |
-| durableSubscriptionName | N  | [持久订阅](https://docs.nats.io/developing-with-nats-streaming/durables)识别名称         | `"my-durable"`                  |
-| deliverNew              | N  | 订阅策略： 只能使用一个， 订阅策略： 只能使用一个， 只发送新消息                                               | `"true"`, `"false"`             |
-| startAtSequence         | N  | 订阅策略： 只能使用一个， 设置期望的起始序列位置和状态                                                     | `"100000"`, `"230420"`          |
-| startWithLastReceived   | N  | 订阅策略： 只能使用一个， 将起始位置设置为最后接收的位置                                                    | `"true"`, `"false"`             |
-| deliverAll              | N  | 订阅策略： 只能使用一个， 传递所有可用消息                                                           | `"true"`, `"false"`             |
-| startAtTimeDelta        | N  | 订阅策略： 只能使用一个， 使用增量设置所需的起始时间位置和状态                                                 | `"10m"`, `"23s"`                |
-| startAtTime             | N  | 订阅策略： 只能使用一个， 设置所需的起始时间位置和状态                                                     | `"Feb 3, 2013 at 7:54pm (PST)"` |
-| startAtTimeFormat       | N  | 必须与`startAtTime`一起使用， 设置时间的格式 设置时间的格式                                            | `"Jan 2, 2006 at 3:04pm (MST)"` |
+| natsURL                 | 是  | NATS 服务器地址 URL                                                                   | "`nats://localhost:4222`"       |
+| natsStreamingClusterID  | 是  | NATS 集群 ID                                                                       | `"clusterId"`                   |
+| subscriptionType        | 是  | 订阅类型， 订阅类型， 允许的值`"topic"`，`"queue"`                                              | `"topic"`                       |
+| ackWaitTime             | 否  | 见[这里](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements) | `"300ms"`                       |
+| maxInFlight             | 否  | 见[这里](https://docs.nats.io/developing-with-nats-streaming/acks#acknowledgements) | `"25"`                          |
+| durableSubscriptionName | 否  | [持久订阅](https://docs.nats.io/developing-with-nats-streaming/durables)识别名称         | `"my-durable"`                  |
+| deliverNew              | 否  | 订阅策略： 只能使用一个， 订阅策略： 只能使用一个， 只发送新消息                                               | `"true"`, `"false"`             |
+| startAtSequence         | 否  | 订阅策略： 只能使用一个， 设置期望的起始序列位置和状态                                                     | `"100000"`, `"230420"`          |
+| startWithLastReceived   | 否  | 订阅策略： 只能使用一个， 将起始位置设置为最后接收的位置                                                    | `"true"`, `"false"`             |
+| deliverAll              | 否  | 订阅策略： 只能使用一个， 传递所有可用消息                                                           | `"true"`, `"false"`             |
+| startAtTimeDelta        | 否  | 订阅策略： 只能使用一个， 使用增量设置所需的起始时间位置和状态                                                 | `"10m"`, `"23s"`                |
+| startAtTime             | 否  | 订阅策略： 只能使用一个， 设置所需的起始时间位置和状态                                                     | `"Feb 3, 2013 at 7:54pm (PST)"` |
+| startAtTimeFormat       | 否  | 必须与`startAtTime`一起使用， 设置时间的格式 设置时间的格式                                            | `"Jan 2, 2006 at 3:04pm (MST)"` |
 
 ## 创建NATS服务器
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-Run a NATS server locally using Docker:
+在本地使用 Docker运行NATS 服务器：
 
 ```bash
 docker run -d --name nats-streaming -p 4222:4222 -p 8222:8222 nats-streaming
 ```
 
-Interact with the server using the client port: `localhost:4222`.
+使用客户端端口与服务器交互： `localhost:4222`。
 {{% /codetab %}}
 
 {{% codetab %}}
@@ -101,7 +101,7 @@ kubectl apply -f https://raw.githubusercontent.com/nats-io/k8s/master/nats-serve
 kubectl apply -f https://raw.githubusercontent.com/nats-io/k8s/master/nats-streaming-server/single-server-stan.yml
 ```
 
-This installs a single NATS-Streaming and NATS into the `default` namespace. To interact with NATS, find the service with:
+这将单个NATS-Streaming和Nats安装到`default`命名空间。 要与 NATS 交互，请使用以下命令查找服务：
 
 ```bash
 kubectl get svc stan
@@ -117,7 +117,7 @@ kubectl get svc stan
 
 ## 相关链接
 
-- [Basic schema for a Dapr component]({{< ref component-schema >}}).
-- Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components.
-- [Pub/Sub building block]({{< ref pubsub >}}).
-- [NATS Streaming Deprecation Notice](https://github.com/nats-io/nats-streaming-server/#warning--deprecation-notice-warning).
+- [Dapr 组件的基本架构]({{< ref component-schema >}})。
+- 阅读 [本指南]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}})，了解配置 发布/订阅组件的说明.
+- [Pub/Sub 构建块]({{< ref pubsub >}})。
+- [NATS 流式处理弃用通知](https://github.com/nats-io/nats-streaming-server/#warning--deprecation-notice-warning)。

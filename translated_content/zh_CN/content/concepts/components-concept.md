@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "组件"
-linkTitle: "组件"
+linkTitle: "Components"
 weight: 300
 description: "被用于构建块和应用程序的模块化功能"
 ---
@@ -12,24 +12,24 @@ Dapr 使用模块化设计，将功能作为组件来提供。 每个组件都�
 
  您可以使用 `dapr components` CLI 命令查看当前托管环境中可用的组件列表。
 
-## Component specification
+## 组件规范
 
-Each component has a specification (or spec) that it conforms to. Components are configured at design-time with a YAML file which is stored in either a `components/local` folder within your solution, or globally in the `.dapr` folder created when invoking `dapr init`. These YAML files adhere to the generic [Dapr component schema]({{<ref "component-schema.md">}}), but each is specific to the component specification.
+每个组件都有一个符合的规范（或规范）。 组件在设计时使用 YAML 文件进行配置，该文件存储在解决方案中的 `components/local` 文件夹中，或者全局存储在调用 `dapr init`时创建的 `.dapr` 文件夹中。 这些 YAML 文件遵循通用的 [Dapr 组件模式]({{<ref "component-schema.md">}})，但每个文件都特定于组件规范。
 
-It is important to understand that the component spec values, particularly the spec `metadata`, can change between components of the same component type, for example between different state stores, and that some design-time spec values can be overridden at runtime when making requests to a component's API. As a result, it is strongly recommended to review a [component's specs]({{<ref "components-reference">}}), paying particular attention to the sample payloads for requests to set the metadata used to interact with the component.
+重要的是要理解组件规范值，特别是规范 `metadata`，可以在相同组件类型的组件之间更改，例如在不同的状态存储之间，并且一些设计时规范值可以在运行时被覆盖对组件 API 的请求。 因此，强烈建议查看 [组件的规格]({{<ref "components-reference">}})，特别注意请求设置用于与组件交互的元数据的示例有效负载。
 
-## Available component types
+## 可用的组件类型
 
 以下是 Dapr 提供的组件类型：
 
-### State stores
+### 状态存储
 
 状态存储组件是存储键值对的数据存储（数据库、文件、内存），其作为 [状态管理]({{< ref "state-management-overview.md" >}}) 的构建模块之一。
 
 - [状态存储列表]({{< ref supported-state-stores >}})
 - [状态存储的实现](https://github.com/dapr/components-contrib/tree/master/state)
 
-### Name resolution
+### 命名解析
 
 命名解析组件与[服务调用]({{<ref "service-invocation-overview.md">}})构建块配合使用，与托管环境集成以提供服务到服务的发现。 例如，Kubernetes 命名解析组件与 Kubernetes DNS 服务集成，自托管使用 mDNS，VM 集群可以使用 Consul 命名解析组件。
 
@@ -57,7 +57,7 @@ It is important to understand that the component spec values, particularly the s
 - [支持的密钥存储]({{< ref supported-secret-stores >}})
 - [密钥存储实现](https://github.com/dapr/components-contrib/tree/master/secretstores)
 
-### Configuration Store（配置存储）
+### 配置存储
 
 配置存储用于保存应用数据，配置可在应用启动或者配置更改的时候被应用读取。 配置存储支持动态加载（热更新）
 
@@ -66,7 +66,7 @@ It is important to understand that the component spec values, particularly the s
 
 ### 中间件
 
-Dapr 允许将自定义[中间件]({{<ref "middleware.md">}})插入到 HTTP 请求处理管道中。 Middleware can perform additional actions on an HTTP request, such as authentication, encryption and message transformation before the request is routed to the user code, or before the response is returned to the client. 中间件组件与 [服务调用]({{<ref "service-invocation-overview.md">}}) 基础结构块一起使用。
+Dapr 允许将自定义[中间件]({{<ref "middleware.md">}})插入到 HTTP 请求处理管道中。 中间件可以在请求被路由到用户代码之前或在响应返回给客户端之前对 HTTP 请求执行额外的操作，例如身份验证、加密和消息转换。 中间件组件与 [服务调用]({{<ref "service-invocation-overview.md">}}) 基础结构块一起使用。
 
 - [支持的中间件组件列表]({{< ref supported-middleware >}})
 - [中间件的实现](https://github.com/dapr/components-contrib/tree/master/middleware)

@@ -58,22 +58,22 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               |       必填       | 详情                                                                               | 示例                                                                    |
-| ---------------- |:--------------:| -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| 服务器              | Y<sup>*</sup>  | The server to connect to, when using DNS SRV record                              | `"server.example.com"`                                                |
-| host             | Y<sup>*</sup>  | 要连接的主机                                                                           | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
-| username         |       N        | The username of the user to connect with (applicable in conjunction with `host`) | `"admin"`                                                             |
-| password         |       N        | The password of the user (applicable in conjunction with `host`)                 | `"password"`                                                          |
-| databaseName     |       N        | 要使用的数据库名称。 默认值为 `"daprStore"`                                                    | `"daprStore"`                                                         |
-| collectionName   |       N        | 要使用的收藏名称 默认值为 `"daprCollection"`                                                 | `"daprCollection"`                                                    |
-| writeconcern     |       N        | 要使用的写入保证                                                                         | `"majority"`                                                          |
-| readconcern      |       N        | 要使用的读取保证                                                                         | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
-| operationTimeout |       N        | 操作超时。 Defaults to `"5s"`                                                         | `"5s"`                                                                |
-| params           | N<sup>**</sup> | Additional parameters to use                                                     | `"?authSource=daprStore&ssl=true"`                                |
+| 字段               |       必填       | 详情                               | 示例                                                                    |
+| ---------------- |:--------------:| -------------------------------- | --------------------------------------------------------------------- |
+| server           | 是<sup>*</sup>  | 使用 DNS SRV 记录时要连接的服务器            | `"server.example.com"`                                                |
+| host             | 是<sup>*</sup>  | 要连接的主机                           | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
+| username         |       否        | 用于连接的用户的用户名 (适用于 `host`)         | `"admin"`                                                             |
+| password         |       否        | 用于连接的用户的密码 (适用于 `host`)          | `"password"`                                                          |
+| databaseName     |       否        | 要使用的数据库名称。 默认值为 `"daprStore"`    | `"daprStore"`                                                         |
+| collectionName   |       否        | 要使用的收藏名称 默认值为 `"daprCollection"` | `"daprCollection"`                                                    |
+| writeconcern     |       否        | 要使用的写入保证                         | `"majority"`                                                          |
+| readconcern      |       否        | 要使用的读取保证                         | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
+| operationTimeout |       否        | 操作超时。 默认为 `"5s"`                 | `"5s"`                                                                |
+| params           | 否<sup>**</sup> | 附加参数：                            | `"?authSource=daprStore&ssl=true"`                                |
 
-> <sup>[*]</sup> The `server` and `host` fields are mutually exclusive. If neither or both are set, Dapr will return an error.
+> <sup>[*]</sup> `server` 和 `host` 的字段是互斥的。 如果两者都未设置，Dapr 将返回错误。
 
-> <sup>[**]</sup> The `params` field accepts a query string that specifies connection specific options as `<name>=<value>` pairs, separated by `"&"` and prefixed with `"?"`. e.g. to use "daprStore" db as authentication database and enabling SSL/TLS in connection, specify params as `"?authSource=daprStore&ssl=true"`. See [the mongodb manual](https://docs.mongodb.com/manual/reference/connection-string/#std-label-connections-connection-options) for the list of available options and their use cases.
+> <sup>[**]</sup> `params` 字段接受一个查询字符串，该字符串指定连接特定选项为 `<name>=<value>` 对，以 `"&"` 分隔并以 `"?" 为前缀`. 例如，要将“daprStore”数据库用作身份验证数据库并启用 SSL/TLS 连接，请将参数指定为 `"?authSource=daprStore&ssl=true"`。 有关可用选项及其用例的列表，请参阅 [mongodb 手册](https://docs.mongodb.com/manual/reference/connection-string/#std-label-connections-connection-options)。
 
 ## 配置 MongoDB
 
@@ -88,7 +88,7 @@ docker run --name some-mongo -d mongo
 
 然后您可以使用 `localhost:27017` 与服务器交互。
 
-If you do not specify a `databaseName` value in your component definition, make sure to create a database named `daprStore`.
+如果在您的组件定义中未指定 `databaseName` 值，请确保创建了一个名为 `daprStore` 的数据库。
 
 {{% /codetab %}}
 

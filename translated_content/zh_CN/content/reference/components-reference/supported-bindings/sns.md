@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "AWS SNS binding spec"
+title: "AWS SNS绑定规范"
 linkTitle: "AWS SNS"
-description: "Detailed documentation on the AWS SNS binding component"
+description: "AWS SNS 绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/sns/"
 ---
 
 ## 配置
 
-To setup AWS SNS binding create a component of type `bindings.aws.sns`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 AWS SNS绑定，请创建一个 `bindings.aws.sns` 类型的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
-See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes
+有关身份验证相关属性的信息，请参阅 [向 AWS 进行身份验证]({{< ref authenticating-aws.md >}})
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -42,21 +42,21 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持 | 详情                      | 示例                  |
-| ------------ |:--:| ---- | ----------------------- | ------------------- |
-| topicArn     | Y  | 输出   | The SNS topic name      | `"arn:::topicarn"`  |
-| region       | Y  | 输出   | The specific AWS region | `"us-east-1"`       |
-| accessKey    | Y  | 输出   | 要访问此资源的 AWS 访问密钥        | `"key"`             |
-| secretKey    | Y  | 输出   | 要访问此资源的 AWS 密钥访问 Key    | `"secretAccessKey"` |
-| sessionToken | N  | 输出   | 要使用的 AWS 会话令牌           | `"sessionToken"`    |
+| 字段           | 必填 | 绑定支持 | 详情                   | 示例                  |
+| ------------ |:--:| ---- | -------------------- | ------------------- |
+| topicArn     | 是  | 输出   | SNS话题名称              | `"arn:::topicarn"`  |
+| region       | 是  | 输出   | 指定的 AWS 区域（region）   | `"us-east-1"`       |
+| accessKey    | 是  | 输出   | 要访问此资源的 AWS 访问密钥     | `"key"`             |
+| secretKey    | 是  | 输出   | 要访问此资源的 AWS 密钥访问 Key | `"secretAccessKey"` |
+| sessionToken | 否  | 输出   | 要使用的 AWS 会话令牌        | `"sessionToken"`    |
 
 {{% alert title="Important" color="warning" %}}
-When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernetes), if you're using a node/pod that has already been attached to an IAM policy defining access to AWS resources, you **must not** provide AWS access-key, secret-key, and tokens in the definition of the component spec you're using.
+当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。
 {{% /alert %}}
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持一下操作的**输出绑定**：
 
 - `create`
 

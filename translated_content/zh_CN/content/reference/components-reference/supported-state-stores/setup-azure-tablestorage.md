@@ -35,11 +35,11 @@ spec:
 
 ## 元数据字段规范
 
-| 字段          | 必填 | 详情                                                              | 示例                    |
-| ----------- |:--:| --------------------------------------------------------------- | --------------------- |
-| accountName | Y  | 存储帐户名称                                                          | `"mystorageaccount"`. |
-| accountKey  | Y  | 主要或次要存储密钥                                                       | `"key"`               |
-| tableName   | Y  | The name of the table to be used for Dapr state. 如果表不存在，将会自动创建. | `"table"`             |
+| 字段          | 必填 | 详情                               | 示例                    |
+| ----------- |:--:| -------------------------------- | --------------------- |
+| accountName | 是  | 存储帐户名称                           | `"mystorageaccount"`. |
+| accountKey  | 是  | 主要或次要存储密钥                        | `"key"`               |
+| tableName   | 是  | 要用于 Dapr 状态的表的名称。 如果表不存在，将会自动创建. | `"table"`             |
 
 ## 安装Azure Table Storage
 

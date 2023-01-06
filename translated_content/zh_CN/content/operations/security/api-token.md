@@ -10,7 +10,7 @@ description: "Dapr 要求每个入站 API 请求都需要包含一个认证令�
 
 ## 创建令牌
 
-Dapr uses shared tokens for API authentication. You are free to define the API token to use.
+Dapr 使用共享令牌进行 API 身份验证。 您可以自由定义要使用的 API 令牌。
 
 Although Dapr does not impose any format for the shared token, a good idea is to generate a random byte sequence and encode it to Base64. For example, this command generates a random 32-byte key and encodes that as Base64:
 
@@ -40,7 +40,7 @@ In a Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the 
 kubectl create secret generic dapr-api-token --from-literal=token=<token>
 ```
 
-> Note, the above secret needs to be created in each namespace in which you want to enable Dapr token authentication.
+> 注意，上述秘密需要在你希望开启 Dapr token 认证的命名空间中创建.
 
 指定 Dapr 使用该密钥来保护其公有 API，需要在你的 Deployment template spec 中添加 annotation：
 
@@ -139,5 +139,5 @@ export DAPR_API_TOKEN=<my-dapr-token>
 
 ## 相关链接
 
-- Learn about [Dapr security concepts]({{< ref security-concept.md >}})
-- Learn [HowTo authenticate requests from Dapr using token authentication]({{< ref app-api-token.md >}})
+- 了解 [Dapr 安全概念]({{< ref security-concept.md >}})
+- 了解 [如何通过令牌认证来自 Dapr 的请求]({{< ref app-api-token.md >}})

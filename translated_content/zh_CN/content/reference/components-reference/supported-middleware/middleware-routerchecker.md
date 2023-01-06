@@ -1,17 +1,17 @@
 ---
 type: docs
-title: "RouterChecker http request routing"
+title: "RouterChecker http请求路由"
 linkTitle: "RouterChecker"
-description: "Use routerchecker middleware to block invalid http request routing"
+description: "使用routerchecker中间件拦截无效的http请求路由"
 aliases:
   - /zh-hans/developing-applications/middleware/supported-middleware/middleware-routerchecker/
 ---
 
-The RouterChecker HTTP [middleware]({{< ref middleware.md >}}) component leverages regexp to check the validity of HTTP request routing to prevent invalid routers from entering the Dapr cluster. In turn, the RouterChecker component filters out bad requests and reduces noise in the telemetry and log data.
+RouterChecker HTTP[middleware]({{< ref middleware.md >}}) 组件利用正则表达式去检查HTTP请求路由的有效性，防止无效路由进入Dapr集群。 反过来，RouterChecker 组件过滤掉错误请求并减少遥测和日志数据中的噪音。
 
 ## 配置
 
-The RouterChecker applies a set of rules to the incoming HTTP request. You define these rules in the component metadata using regular expressions. In the following example, the HTTP request RouterChecker is set to validate all requests message against the `^[A-Za-z0-9/._-]+$`: regex.
+RouterChecker 将一组规则应用于传入的 HTTP 请求。 您可以使用正则表达式在组件元数据中定义这些规则。 在以下示例中，HTTP 请求 RouterChecker 设置为针对 `^[A-Za-z0-9/._-]+$`：正则表达式验证所有请求消息。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -26,7 +26,7 @@ spec:
     value: "^[A-Za-z0-9/._-]+$"
 ```
 
-In this example, the above definition would result in the following PASS/FAIL cases:
+在此示例中，上述定义将导致以下 PASS/FAIL 情况：
 
 ```shell
 PASS /v1.0/invoke/demo/method/method
@@ -44,9 +44,9 @@ FAIL /v1.0/invoke/demo.default/method/"$(curl
 
 ## 元数据字段规范
 
-| 字段   | 详情                                                                 | 示例                   |
-| ---- | ------------------------------------------------------------------ | -------------------- |
-| rule | the regexp expression to be used by the HTTP request RouterChecker | `^[A-Za-z0-9/._-]+$` |
+| 字段   | 详情                             | 示例                   |
+| ---- | ------------------------------ | -------------------- |
+| rule | hTTP 请求 RouterChecker 使用的正则表达式 | `^[A-Za-z0-9/._-]+$` |
 
 ## Dapr配置
 

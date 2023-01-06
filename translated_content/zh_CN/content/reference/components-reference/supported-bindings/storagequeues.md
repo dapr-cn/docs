@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Azure Storage Queues binding spec"
+title: "Azure 存储队列绑定规范"
 linkTitle: "Azure Storage Queues"
-description: "Detailed documentation on the Azure Storage Queues binding component"
+description: "Azure 存储队列绑定组件详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/storagequeues/"
 ---
 
 ## 配置
 
-To setup Azure Storage Queues binding create a component of type `bindings.azure.storagequeues`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 Azure 存储队列绑定，需要创建一个类型为 `bindings.azure.storagequeues` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -40,13 +40,13 @@ spec:
 
 ## 元数据字段规范
 
-| 字段               | 必填 | 绑定支持         | 详情                                                                                                                                                                                   | 示例              |
-| ---------------- |:--:| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| storageAccount   | Y  | Input/Output | The Azure Storage account name                                                                                                                                                       | `"account1"`    |
-| storageAccessKey | Y  | Input/Output | The Azure Storage access key                                                                                                                                                         | `"accessKey"`   |
-| queue            | Y  | Input/Output | The name of the Azure Storage queue                                                                                                                                                  | `"myqueue"`     |
-| ttlInseconds     | N  | 输出           | Parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. See [also](#specifying-a-ttl-per-message)                    | `"60"`          |
-| decodeBase64     | N  | 输出           | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` is the only allowed positive value. Other positive variations like `"True", "1"` are not acceptable. Defaults to `false` | `true`, `false` |
+| 字段               | 必填 | 绑定支持         | 详情                                                                                                                            | 示例              |
+| ---------------- |:--:| ------------ | ----------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| storageAccount   | 是  | Input/Output | Azure存储账户                                                                                                                     | `"account1"`    |
+| storageAccessKey | 是  | Input/Output | Azure存储访问秘钥                                                                                                                   | `"accessKey"`   |
+| queue            | 是  | Input/Output | Azure存储队列名                                                                                                                    | `"myqueue"`     |
+| ttlInseconds     | 否  | 输出           | 设置默认消息存活时间。 如果省略此参数，则消息将在 10 分钟后过期。 [另见](#specifying-a-ttl-per-message)                                                       | `"60"`          |
+| decodeBase64     | 否  | 输出           | 配置在保存到Blob Storage之前对base64文件内容进行解码。 (保存有二进制内容的文件时)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false` | `true`, `false` |
 
 ## 绑定支持
 

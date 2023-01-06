@@ -13,7 +13,7 @@ description: "安装 Dapr CLI 作为运行 Dapr 相关任务的主要工具"
 - 列出正在运行的服务。
 - 运行 Dapr 仪表板。
 
-The Dapr CLI works with both [self-hosted]({{< ref self-hosted >}}) and [Kubernetes]({{< ref Kubernetes >}}) environments.
+Dapr CLI 同时支持 [自托管]({{< ref self-hosted >}}) 和 [Kubernetes]({{< ref Kubernetes >}}) 环境。
 
 ### 第 1 步：安装 Dapr CLI
 
@@ -98,7 +98,7 @@ arch -arm64 brew install dapr/tap/dapr-cli
 ```
 
 #### 安装时不使用 `sudo`
-如果您无法访问 `sudo` 命令或您的用户名不在 `sudoers` 文件中，您可以通过 `DAPR_INSTALL_DIR` 环境变量来安装 Dapr 到另一个目录。 This directory must already exist and be accessible by the current user.
+如果您无法访问 `sudo` 命令或您的用户名不在 `sudoers` 文件中，您可以通过 `DAPR_INSTALL_DIR` 环境变量来安装 Dapr 到另一个目录。 该目录必须已经存在并且当前用户可以访问。
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | DAPR_INSTALL_DIR="$HOME/dapr" /bin/bash
@@ -107,7 +107,7 @@ curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh 
 {{% /codetab %}}
 
 {{% codetab %}}
-Each release of Dapr CLI includes various OSes and architectures. 您可以手动下载并安装这些二进制版本。
+每次发行的Dapr CLI包括各种操作系统和架构。 您可以手动下载并安装这些二进制版本。
 
 1. 从最新的 [Dapr Releases](https://github.com/dapr/cli/releases) 中下载所需的 Dapr CLI.
 2. 解压缩 (例如，dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip).
@@ -121,7 +121,7 @@ Each release of Dapr CLI includes various OSes and architectures. 您可以手�
 
 {{< /tabs >}}
 
-### Step 2: Verify the installation
+### 步骤 2：验证安装
 
 通过重新启动您的终端/命令提示和运行以下操作来验证CLI：
 
@@ -170,4 +170,4 @@ Flags:
 Use "dapr [command] --help" for more information about a command.
 ```
 
-{{< button text="Next step: Initialize Dapr >>" page="install-dapr-selfhost" >}}
+{{< button text="下一步: 初始化 Dapr >>" page="install-dapr-selfhost" >}}

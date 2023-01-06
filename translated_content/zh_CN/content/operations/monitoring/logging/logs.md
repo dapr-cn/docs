@@ -90,13 +90,13 @@ API logging enables you to see the API calls from your application to the Dapr s
 
 ## 日志收集器
 
-如果您在 Kubernetes 集群中运行 Dapr ，那么 [Fluentd](https://www.fluentd.org/) 是一个受欢迎的容器日志收集器。 您可以将 Fluentd 与 [json 解析器插件](https://docs.fluentd.org/parser/json) 一起使用，以解析 Dapr JSON 格式的日志。 This [how-to]({{< ref fluentd.md >}}) shows how to configure the Fluentd in your cluster.
+如果您在 Kubernetes 集群中运行 Dapr ，那么 [Fluentd](https://www.fluentd.org/) 是一个受欢迎的容器日志收集器。 您可以将 Fluentd 与 [json 解析器插件](https://docs.fluentd.org/parser/json) 一起使用，以解析 Dapr JSON 格式的日志。 这个 [指南]({{< ref fluentd.md >}}) 展示了如何在集群中配置 Fluentd。
 
 如果您使用 Azure Kubernetes 服务 您可以使用默认OMS Agent和 Azure Monitor收集日志，而不需要安装 Fluentd。
 
 ## 搜索引擎
 
-如果使用 [Fluentd](https://www.fluentd.org/)，我们建议使用 Elastic Search 和 Kibana。 This [how-to]({{< ref fluentd.md >}}) shows how to set up Elastic Search and Kibana in your Kubernetes cluster.
+如果使用 [Fluentd](https://www.fluentd.org/)，我们建议使用 Elastic Search 和 Kibana。 这个 [指南]({{< ref fluentd.md >}}) 展示了如何在 Kubernetes 集群中设置 Elastic Search 和 Kibana。
 
 如果您正在使用 Azure Kubernetes 服务，您可以使用[针对容器的 Azure monitor](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview) 而不会安装任何额外的监视工具。 也可以阅读 [如何为容器启用 Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-onboard)
 
@@ -104,5 +104,5 @@ API logging enables you to see the API calls from your application to the Dapr s
 
 - [How-to : 设置 Fleuntd, Elastic search 和 Kibana]({{< ref fluentd.md >}})
 - [How-to：在 Azure Kubernetes 服务中设置Azure Monitor。]({{< ref azure-monitor.md >}})
-- [Configure and view Dapr Logs]({{< ref "logs-troubleshooting.md" >}})
+- [配置和查看 Dapr 日志]({{< ref "logs-troubleshooting.md" >}})
 - [Configure and view Dapr API Logs]({{< ref "api-logs-troubleshooting.md" >}})

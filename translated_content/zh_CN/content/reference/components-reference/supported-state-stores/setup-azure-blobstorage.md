@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-To setup the Azure Blob Storage state store create a component of type `state.azure.blobstorage`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+要设置 Azure Blob Storage 状态存储，请创建一个类型为`state.azure.blobstorage`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,58 +35,58 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                 |            必填             | 详情                                                                                                       | 示例                                                                                                          |
-| ------------------ |:-------------------------:| -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| accountName        |             Y             | 存储帐户名称                                                                                                   | `"mystorageaccount"`.                                                                                       |
-| accountKey         | Y (unless using Azure AD) | 主要或次要存储密钥                                                                                                | `"key"`                                                                                                     |
-| containerName      |             Y             | Dapr 状态的容器名称， 如果容器不存在，将会自动创建.                                                                            | `"container"`                                                                                               |
-| `azureEnvironment` |             N             | Optional name for the Azure environment if using a different Azure cloud                                 | `"AZUREPUBLICCLOUD"` (default value), `"AZURECHINACLOUD"`, `"AZUREUSGOVERNMENTCLOUD"`, `"AZUREGERMANCLOUD"` |
-| ContentType        |             N             | The blob's content type                                                                                  | `"text/plain"`                                                                                              |
-| ContentMD5         |             N             | The blob's MD5 hash                                                                                      | `"vZGKbMRDAnMs4BIwlXaRvQ=="`                                                                                |
-| ContentEncoding    |             N             | The blob's content encoding                                                                              | `"UTF-8"`                                                                                                   |
-| ContentLanguage    |             N             | The blob's content language                                                                              | `"en-us"`                                                                                                   |
-| ContentDisposition |             N             | The blob's content disposition. Conveys additional information about how to process the response payload | `"attachment"`                                                                                              |
-| CacheControl       |             N             | The blob's cache control                                                                                 | `"no-cache"`                                                                                                |
+| 字段                 |        必填        | 详情                            | 示例                                                                                                          |
+| ------------------ |:----------------:| ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| accountName        |        是         | 存储帐户名称                        | `"mystorageaccount"`.                                                                                       |
+| accountKey         | 是（除非使用 Azure AD） | 主要或次要存储密钥                     | `"key"`                                                                                                     |
+| containerName      |        是         | Dapr 状态的容器名称， 如果容器不存在，将会自动创建. | `"container"`                                                                                               |
+| `azureEnvironment` |        否         | Azure 环境的可选名称（如果使用其他 Azure 云） | `"AZUREPUBLICCLOUD"` (default value), `"AZURECHINACLOUD"`, `"AZUREUSGOVERNMENTCLOUD"`, `"AZUREGERMANCLOUD"` |
+| ContentType        |        否         | Blob 的内容类型                    | `"text/plain"`                                                                                              |
+| ContentMD5         |        否         | Blob 的 MD5 哈希                 | `"vZGKbMRDAnMs4BIwlXaRvQ=="`                                                                                |
+| ContentEncoding    |        否         | Blob 的内容编码                    | `"UTF-8"`                                                                                                   |
+| ContentLanguage    |        否         | Blob 的内容语言                    | `"en-us"`                                                                                                   |
+| ContentDisposition |        否         | Blob 的内容处置。 传达有关如何处理响应负载的额外信息 | `"attachment"`                                                                                              |
+| CacheControl       |        否         | Blob 的缓存控制                    | `"no-cache"`                                                                                                |
 
-## Setup Azure Blob Storage
+## 设置 Azure Blob Storage
 
 [请遵循 Azure 文档中关于如何创建 Azure Storage Account的说明](https://docs.microsoft.com/azure/storage/common/storage-account-create?tabs=azure-portal)。
 
-如果你想创建一个容器供Dapr使用，你可以事先这样做。 However, the Blob Storage state provider will create one for you automatically if it doesn't exist.
+如果你想创建一个容器供Dapr使用，你可以事先这样做。 然而，如果它不存在，Blob Storage 提供程序将会为您自动创建一个。
 
 要将 Azure Blob Storage配置为状态存储，你需要如下属性：
 
 - **AccountName**：存储账户名称 举例：**mystorageaccount** 举例：**mystorageaccount**
-- **accountKey**: Primary or secondary storage account key.
+- **accountKey**: 主要或者次要的的存储账号密钥。
 - **ContainerName**：用于Dapr状态的容器名称。 如果容器不存在，将会自动创建.
 
-### Authenticating with Azure AD
+### 使用 Azure AD 进行身份验证
 
-This component supports authentication with Azure AD as an alternative to use account keys. Whenever possible, it is recommended that you use  Azure AD for authentication in production systems, to take advantage of better security, fine-tuned access control, and the ability to use managed identities for apps running on Azure.
+此组件支持使用 Azure AD 进行身份验证，作为使用账号密钥的替代方法。 为了利用更好的安全性、微调的访问控制以及在 Azure 上运行的引用程序使用托管表示的功能，建议您在生产系统中使用 Azure AD 进行身份验证。
 
-> The following scripts are optimized for a bash or zsh shell and require the following apps installed:
+> 以下的脚本针对 base 和 zsh 进行了优化，并且需要安装以下应用程序：
 > 
 > - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
 > - [jq](https://stedolan.github.io/jq/download/)
 > 
-> You must also be authenticated with Azure in your Azure CLI.
+> 您还必须在 Azure CLI 中通过 Azure 身份验证。
 
-1. To get started with using Azure AD for authenticating the Blob Storage state store component, make sure you've created an Azure AD application and a Service Principal as explained in the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document.  
-   Once done, set a variable with the ID of the Service Principal that you created:
+1. 若要开始使用 Azure AD 对 Blob 存储状态存储组件进行身份验证，请确保已创建 Azure AD 应用程序和服务主体，如 [向 Azure]({{< ref authenticating-azure.md >}}) 身份验证文档中所述。  
+   完成后，使用创建的服务主体的 ID 设置一个变量：
 
   ```sh
   SERVICE_PRINCIPAL_ID="[your_service_principal_object_id]"
   ```
 
-2. Set the following variables with the name of your Azure Storage Account and the name of the Resource Group where it's located:
+2. 使用 Azure 存储帐户的名称及其所在资源组的名称设置以下变量：
 
   ```sh
   STORAGE_ACCOUNT_NAME="[your_storage_account_name]"
   RG_NAME="[your_resource_group_name]"
   ```
 
-3. Using RBAC, assign a role to our Service Principal so it can access data inside the Storage Account.  
-   In this case, you are assigning the "Storage blob Data Contributor" role, which has broad access; other more restrictive roles can be used as well, depending on your application.
+3. 使用 RBAC，将角色分配给服务主体，以便它可以访问存储帐户内的数据。  
+   在这种情况下，将分配"Storage blob Data Contributor"角色，该角色具有广泛的访问权限。也可以使用其他限制性更强的角色，具体取决于您的应用程序。
 
   ```sh
   RG_ID=$(az group show --resource-group ${RG_NAME} | jq -r ".id")
@@ -96,7 +96,7 @@ This component supports authentication with Azure AD as an alternative to use ac
     --scope "${RG_ID}/providers/Microsoft.Storage/storageAccounts/${STORAGE_ACCOUNT_NAME}"
   ```
 
-When authenticating your component using Azure AD, the `accountKey` field is not required. Instead, please specify the required credentials in the component's metadata (if any) according to the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document.
+使用 Azure AD 对组件进行身份验证时，不需要 `accountKey` 字段。 相反，请根据 [向 Azure进行身份验证]({{< ref authenticating-azure.md >}}) 文档，在组件的元数据 (如果有) 中指定所需的凭据。
 
 例如:
 
@@ -151,7 +151,7 @@ curl -X POST http://localhost:3500/v1.0/state \
       ]'
 ```
 
-This creates the blob file in the container with `key` as filename and `value` as the contents of file.
+这将在容器中创建文件名为 `key`，`value` 为内容的 blob 文件。
 
 ## 并发（Concurrency）
 

@@ -7,7 +7,7 @@ aliases:
   - /zh-hans/developing-applications/middleware/supported-middleware/middleware-opa/
 ---
 
-The Open Policy Agent (OPA) [HTTP middleware]({{< ref middleware.md >}}) applys [OPA Policies](https://www.openpolicyagent.org/) to incoming Dapr HTTP requests. 这可以用来将可重用的授权策略应用到应用终结点。
+开放策略代理（OPA） [HTTP middleware]({{< ref middleware.md >}})将[OPA 策略](https://www.openpolicyagent.org/)应用到传入的 Dapr HTTP 请求中。 这可以用来将可重用的授权策略应用到应用终结点。
 
 ## 配置
 
@@ -99,7 +99,7 @@ spec:
 
 ### HTTP请求
 
-The `HTTPRequest` input contains all the relevant information about an incoming HTTP Request.
+`HTTPRequest` 输入包含有关传入 HTTP 请求的所有相关信息。
 
 ```go
 type Input struct {

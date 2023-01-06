@@ -1,6 +1,6 @@
 ---
 type: docs
-title: "Secret store component specs"
+title: "Secret store组件规范"
 linkTitle: "Secret stores（密钥仓库）"
 weight: 4000
 description: Dapr支持对接的密钥仓库

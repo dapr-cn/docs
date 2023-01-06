@@ -6,26 +6,26 @@ weight: 2000
 description: "了解如何使用一个服务向主题发送消息，并在另一个服务中订阅该主题"
 ---
 
-Now that you've learned what the Dapr pub/sub building block provides, learn how it can work in your service. The below code example loosely describes an application that processes orders with two services, each with Dapr sidecars:
+现在，你已了解 Dapr 发布/订阅 构建块提供的功能，请了解它如何在你的服务中工作。 下面的示例代码粗略地描述了一个使用两个服务处理订单的应用程序，每个服务都使用 Dapr sidecars：
 
-- A checkout service using Dapr to subscribe to the topic in the message queue.
-- An order processing service using Dapr to publish a message to RabbitMQ.
+- 使用 Dapr 订阅消息队列中主题的结帐服务。
+- 使用 Dapr 向 RabbitMQ 发布消息的订单处理服务。
 
 
-<img src="/images/building-block-pub-sub-example.png" width=1000 alt="Diagram showing state management of example service">
+<img src="/images/building-block-pub-sub-example.png" width=1000 alt="显示示例服务的状态管理的图示">
 
-Dapr automatically wraps the user payload in a CloudEvents v1.0 compliant envelope, using `Content-Type` header value for `datacontenttype` attribute. [Learn more about messages with CloudEvents.]({{< ref pubsub-cloudevents.md >}})
+Dapr automatically wraps the user payload in a CloudEvents v1.0 compliant envelope, using `Content-Type` header value for `datacontenttype` attribute. [了解有关使用 CloudEvents消息的更多信息。]({{< ref pubsub-cloudevents.md >}})
 
-The following example demonstrates how your applications publish and subscribe to a topic called `orders`.
+下面的示例演示应用程序如何发布和订阅名为 `orders`的主题。
 
 {{% alert title="Note" color="primary" %}}
  If you haven't already, [try out the pub/sub quickstart]({{< ref pubsub-quickstart.md >}}) for a quick walk-through on how to use pub/sub.
 
 {{% /alert %}}
 
-## Set up the Pub/Sub component
+## 设置 发布/订阅 组件
 
-The first step is to set up the pub/sub component:
+第一步是设置 发布/订阅 组件：
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
@@ -35,7 +35,7 @@ The first step is to set up the pub/sub component:
 - 在Windows上，在 `%UserProfile%\.dapr\components\pubsub.yaml`
 - 在Linux/MacOS上，在 `~/.dapr/components/pubsub.yaml`
 
-使用 `pubsub.yaml` 组件，您可以轻松更换底层组件，而无需更改应用程序代码。 In this example, RabbitMQ is used.
+使用 `pubsub.yaml` 组件，您可以轻松更换底层组件，而无需更改应用程序代码。 在此示例中，我们使用 RabbitMQ。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -640,7 +640,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 {{< /tabs >}}
 
-## Message acknowledgement and retries
+## 消息确认和重试
 
 为了告诉Dapr 消息处理成功，返回一个 `200 OK` 响应。 如果 Dapr 收到超过 `200` 的返回状态代码，或者你的应用崩溃，Dapr 将根据 At-Least-Once 语义尝试重新传递消息。
 
@@ -648,5 +648,5 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 - Try the [pub/sub tutorial](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub).
 - Learn about [messaging with CloudEvents]({{< ref pubsub-cloudevents.md >}}) and when you might want to [send messages without CloudEvents]({{< ref pubsub-raw.md >}}).
-- Review the list of [pub/sub components]({{< ref setup-pubsub >}}).
-- Read the [API reference]({{< ref pubsub_api.md >}}).
+- 查看 [发布/订阅 组件列表]({{< ref setup-pubsub >}})。
+- 阅读 [API 参考手册]({{< ref pubsub_api.md >}})。

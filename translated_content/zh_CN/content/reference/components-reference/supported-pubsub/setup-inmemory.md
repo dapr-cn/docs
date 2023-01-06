@@ -2,12 +2,12 @@
 type: docs
 title: "In Memory"
 linkTitle: "In Memory"
-description: "Detailed documentation on the In Memory pubsub component"
+description: "关于In Memory pubsub组件的详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-pubsub/supported-pubsub/setup-inmemory/"
 ---
 
-The In Memory pub/sub component is useful for development purposes and works inside of a single machine boundary.
+内存中发布/订阅组件对于开发目的非常有用，并且可以在单个计算机边界内工作。
 
 ## 配置
 
@@ -23,7 +23,7 @@ spec:
   metadata: []
 ```
 
-> Note: in-memory does not require any specific metadata for the component to work, however spec.metadata is a required field.
+> 注意：in-memory的组件不需要任何特定的元数据才能工作，但是 spec.metadata 是必填字段。
 
 ## 相关链接
 - 相关链接部分中的[Dapr组件的基本格式]({{< ref component-schema >}})

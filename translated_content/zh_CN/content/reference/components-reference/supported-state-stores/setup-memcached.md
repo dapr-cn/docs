@@ -37,9 +37,9 @@ spec:
 
 | 字段                 | 必填 | 详情                      | 示例                                            |
 | ------------------ |:--:| ----------------------- | --------------------------------------------- |
-| hosts              | Y  | 逗号分隔的 endpoints         | `"memcached.default.svc.cluster.local:11211"` |
-| maxIdleConnections | N  | 空闲连接的最大数量。 默认值为 `"2"`   | `"3"`                                         |
-| timeout            | N  | 调用超时时间。 默认值为 `"1000ms"` | `"1000ms"`                                    |
+| hosts              | 是  | 逗号分隔的 endpoints         | `"memcached.default.svc.cluster.local:11211"` |
+| maxIdleConnections | 否  | 空闲连接的最大数量。 默认值为 `"2"`   | `"3"`                                         |
+| timeout            | 否  | 调用超时时间。 默认值为 `"1000ms"` | `"1000ms"`                                    |
 
 ## 设置 Memcached
 

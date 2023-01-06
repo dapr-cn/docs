@@ -2,7 +2,7 @@
 type: docs
 title: "教程：配置状态存储和pub/sub消息代理"
 linkTitle: "配置 state & pub/sub"
-weight: 80
+weight: 400
 description: "配置Dapr的状态存储和 发布/订阅 消息代理"
 aliases:
   - /zh-hans/getting-started/tutorials/configure-redis/

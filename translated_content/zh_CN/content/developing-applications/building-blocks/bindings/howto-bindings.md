@@ -6,9 +6,9 @@ description: "使用 Dapr 输出绑定调用外部系统"
 weight: 300
 ---
 
-With output bindings, you can invoke external resources. 可选的有效负载和元数据可与调用请求一起发送。
+使用输出绑定，您可以调用外部资源。 可选的有效负载和元数据可与调用请求一起发送。
 
-<img src="/images/howto-bindings/kafka-output-binding.png" width=1000 alt="Diagram showing bindings of example service">
+<img src="/images/howto-bindings/kafka-output-binding.png" width=1000 alt="显示示例服务绑定的图示">
 
 This guide uses a Kafka binding as an example. You can find your preferred binding spec from [the list of bindings components]({{< ref setup-bindings >}}). In this guide:
 

@@ -14,7 +14,7 @@ In this guide, you'll learn the basics of using the key/value state API to allow
 
 The code example below _loosely_ describes an application that processes orders with an order processing service which has a Dapr sidecar. 订单处理服务使用Dapr在Redis状态存储中存储状态。
 
-<img src="/images/building-block-state-management-example.png" width=1000 alt="Diagram showing state management of example service">
+<img src="/images/building-block-state-management-example.png" width=1000 alt="显示示例服务的状态管理的图示">
 
 ## Set up a state store
 
@@ -31,7 +31,7 @@ When you run `dapr init` in self-hosted mode, Dapr creates a default Redis `stat
 - 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
 - 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out underlying components without application code changes.
+使用 `statestore.yaml` 组件，您可以轻松更换底层组件，而无需更改应用程序代码。
 
 {{% /codetab %}}
 
@@ -319,7 +319,7 @@ curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value
 curl http://localhost:3601/v1.0/state/statestore/order_1
 ```
 
-Restart your sidecar and try retrieving state again to observe that state persists separately from the app.
+你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 
 {{% /codetab %}}
 
@@ -343,13 +343,13 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "
 Invoke-RestMethod -Uri 'http://localhost:3601/v1.0/state/statestore/order_1'
 ```
 
-Restart your sidecar and try retrieving state again to observe that state persists separately from the app.
+你也可以重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Delete state
+## 删除状态
 
 下面是利用Dapr SDKs删除状态的代码例子。
 

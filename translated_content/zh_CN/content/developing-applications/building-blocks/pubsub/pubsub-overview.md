@@ -3,12 +3,12 @@ type: docs
 title: "发布和订阅概述"
 linkTitle: "概述"
 weight: 1000
-description: "Overview of the pub/sub API building block"
+description: "发布/订阅 API 构建块概述"
 ---
 
-## Publish and subscribe pattern
+## 发布和订阅模式
 
-The publish and subscribe pattern (pub/sub) enables microservices to communicate with each other using messages for event-driven architectures.
+发布和订阅模式（发布/订阅）使微服务能够使用事件驱动架构的消息进行相互通信。
 
 - The producer, or **publisher**, writes messages to an input channel and sends them to a topic, unaware which application will receive them.
 - The consumer, or **subscriber**, subscribes to the topic and receives messages from an output channel, unaware which service produced these messages.
@@ -19,18 +19,18 @@ An intermediary message broker copies each message from a publisher's input chan
 
 <br></br>
 
-## Pub/sub API in Dapr
+## Dapr 中的 发布/订阅 API
 
 The pub/sub API in Dapr:
-- Provides a platform-agnostic API to send and receive messages.
-- Offers at-least-once message delivery guarantee.
-- Integrates with various message brokers and queuing systems.
+- 提供与平台无关的 API 来发送和接收消息。
+- 提供至少一次的消息传递保证。
+- 与各种消息代理和队列系统集成。
 
 The specific message broker used by your service is pluggable and configured as a Dapr pub/sub component at runtime. This removes the dependency from your service and makes your service more portable and flexible to changes.
 
-When using pub/sub in Dapr:
+在 Dapr 中使用 发布/订阅 时：
 
-1. Your service makes a network call to a Dapr pub/sub building block API.
+1. 您的服务通过网络调用 Dapr 发布/订阅 构建块的 API。
 1. The pub/sub building block makes calls into a Dapr pub/sub component that encapsulates a specific message broker.
 1. To receive messages on a topic, Dapr subscribes to the pub/sub component on behalf of your service with a topic and delivers the messages to an endpoint on your service when they arrive.
 
@@ -77,24 +77,24 @@ In principle, Dapr considers a message successfully delivered once the subscribe
 
 Dapr applications can subscribe to published topics via two methods that support the same features: declarative and programmatic.
 
-| Subscription method | 说明                                                                                                   |
-| ------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Declarative**     | Subscription is defined in an **external file**. 声明式方法会从您的代码中移除 Dapr 依赖，并允许现有的应用程序订阅 topics，而无需更改代码。 |
-| **Programmatic**    | Subscription is defined in the **user code**. 编程方法在用户代码中实现订阅。                                        |
+| 订阅方法             | 说明                                                                                                   |
+| ---------------- | ---------------------------------------------------------------------------------------------------- |
+| **Declarative**  | Subscription is defined in an **external file**. 声明式方法会从您的代码中移除 Dapr 依赖，并允许现有的应用程序订阅 topics，而无需更改代码。 |
+| **Programmatic** | Subscription is defined in the **user code**. 编程方法在用户代码中实现订阅。                                        |
 
 For more information, read [about the subscriptions in Subscription Methods]({{< ref subscription-methods.md >}}).
 
-### Message routing
+### 消息路由
 
 Dapr provides [content-based routing](https://www.enterpriseintegrationpatterns.com/ContentBasedRouter.html) pattern. [Pub/sub routing]({{< ref howto-route-messages.md >}}) is an implementation of this pattern that allows developers to use expressions to route [CloudEvents](https://cloudevents.io) based on their contents to different URIs/paths and event handlers in your application. If no route matches, an optional default route is used. This is useful as your applications expands to support multiple event versions or special cases.
 
-This feature is available to both the declarative and programmatic subscription approaches.
+声明式和编程式订阅方法都可以使用这一功能。
 
 For more information on message routing, read [Dapr pub/sub API reference]({{< ref "pubsub_api.md#provide-routes-for-dapr-to-deliver-topic-events" >}})
 
 ### 消息传递
 
-Dapr guarantees at-least-once semantics for message delivery. When an application publishes a message to a topic using the pub/sub API, Dapr ensures the message is delivered *at least once* to every subscriber.
+Dapr 保证消息传递 at-least-once 语义。 When an application publishes a message to a topic using the pub/sub API, Dapr ensures the message is delivered *at least once* to every subscriber.
 
 ### 消费者群体和竞争性消费者模式
 
@@ -105,32 +105,32 @@ Dapr automatically handles the burden of dealing with concepts like consumer gro
 
 Similarly, if two different applications (with different app-IDs) subscribe to the same topic, Dapr delivers each message to *only one instance of **each** application*.
 
-### Scoping topics for added security
+### 限制主题作用域以增加安全性
 
-By default, all topic messages associated with an instance of a pub/sub component are available to every application configured with that component. You can limit which application can publish or subscribe to topics with Dapr topic scoping. For more information, read: [pub/sub topic scoping]({{< ref pubsub-scopes.md >}}).
+By default, all topic messages associated with an instance of a pub/sub component are available to every application configured with that component. You can limit which application can publish or subscribe to topics with Dapr topic scoping. 有关详细信息，请阅读： [发布/订阅 主题作用域限制]({{< ref pubsub-scopes.md >}})。
 
 ### 消息生存时间
 
-Dapr can set a timeout message on a per-message basis, meaning that if the message is not read from the pub/sub component, then the message is discarded. This timeout message prevents a build up of unread messages. If a message has been in the queue longer than the configured TTL, it is marked as dead. For more information, read [pub/sub message TTL]({{< ref pubsub-message-ttl.md >}}).
+Dapr 可以为每条消息设置超时时间。这意味着如果消息在超时时间内未从 发布/订阅 组件中读取，则消息将被丢弃。 设置超时时间可防止未读消息的堆积。 If a message has been in the queue longer than the configured TTL, it is marked as dead. For more information, read [pub/sub message TTL]({{< ref pubsub-message-ttl.md >}}).
 
 ## Try out pub/sub
 
-### Quickstarts and tutorials
+### 快速入门和教程
 
 Want to put the Dapr pub/sub API to the test? Walk through the following quickstart and tutorials to see pub/sub in action:
 
-| Quickstart/tutorial                                                                   | 说明                                           |
+| 快速入门/教程                                                                               | 说明                                           |
 | ------------------------------------------------------------------------------------- | -------------------------------------------- |
 | [Pub/sub quickstart]({{< ref pubsub-quickstart.md >}})                                | 使用发布和订阅 API 发送和接收消息。                         |
 | [Pub/sub tutorial](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub) | 演示如何使用Dapr启用 发布-订阅 应用程序。 使用Redis作为 发布-订阅 组件。 |
 
 ### Start using pub/sub directly in your app
 
-Want to skip the quickstarts? Not a problem. You can try out the pub/sub building block directly in your application to publish messages and subscribe to a topic. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the pub/sub API starting with [the pub/sub how-to guide]({{< ref howto-publish-subscribe.md >}}).
+想跳过快速入门？ 没问题。 You can try out the pub/sub building block directly in your application to publish messages and subscribe to a topic. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the pub/sub API starting with [the pub/sub how-to guide]({{< ref howto-publish-subscribe.md >}}).
 
 ## 下一步
 
 - Learn about [messaging with CloudEvents]({{< ref pubsub-cloudevents.md >}}) and when you might want to [send messages without CloudEvents]({{< ref pubsub-raw.md >}}).
 - Follow [How-To: Configure pub/sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}}).
-- Review the list of [pub/sub components]({{< ref setup-pubsub >}}).
-- Read the [API reference]({{< ref pubsub_api.md >}}).
+- 查看 [发布/订阅 组件列表]({{< ref setup-pubsub >}})。
+- 阅读 [API 参考文档]({{< ref pubsub_api.md >}}).

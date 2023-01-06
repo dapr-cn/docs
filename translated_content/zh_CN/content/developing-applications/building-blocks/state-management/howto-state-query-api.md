@@ -115,11 +115,11 @@ curl -X POST -H "Content-Type: application/json" -d @query-api-examples/dataset.
 
 Now you can run the example queries.
 
-### Example 1
+### 示例 1
 
 First, find all employees in the state of California and sort them by their employee ID in descending order.
 
-This is the [query](../query-api-examples/query1.json):
+这是 [查询](../query-api-examples/query1.json)：
 ```json
 {
     "filter": {
@@ -222,11 +222,11 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 }
 ```
 
-### Example 2
+### 示例 2
 
 Now, find all employees from the "Dev Ops" and "Hardware" organizations.
 
-This is the [query](../query-api-examples/query2.json):
+这是 [查询](../query-api-examples/query2.json)：
 
 ```json
 {
@@ -267,7 +267,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 
 与前面的示例类似，结果是一个匹配键/值对的数组。
 
-### Example 3
+### 示例 3
 
 In this example, find:
 
@@ -276,7 +276,7 @@ In this example, find:
 
 In addition, sort the results first by state in descending alphabetical order, then by employee ID in ascending order. Let's process up to 3 records at a time.
 
-This is the [query](../query-api-examples/query3.json):
+这是 [查询](../query-api-examples/query3.json):
 
 ```json
 {

@@ -36,10 +36,10 @@ minikube start --cpus=4 --memory=4096
 3. 启用仪表盘和 ingress 插件
 
 ```bash
-# Enable dashboard
+# 启用 dashboard
 minikube addons enable dashboard
 
-# Enable ingress
+# 启用 ingress
 minikube addons enable ingress
 ```
 

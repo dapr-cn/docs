@@ -37,7 +37,7 @@ dapr configurations -k
     dapr.io/app-port: "3000"
     dapr.io/config: "myappconfig"
 ```
-Note: There are more [Kubernetes annotations]({{< ref "arguments-annotations-overview.md" >}}) available to configure the Dapr sidecar on activation by sidecar Injector system service.
+注意：有更多的 [Kubernetes 注解]({{< ref "arguments-annotations-overview.md" >}})可用于在通过 sidecar Injector 系统服务激活时配置 Dapr sidecar。
 
 ### Sidecar 配置
 
@@ -72,7 +72,7 @@ tracing:
 
 `samplingRate` 用来控制调用链追踪是否启用。 要禁用采样率 , 可以在配置文件中设置 `samplingRate : "0"` 。 SamplingRate 的有效值在0到1之间。 系统将根据采样率配置的数值决定一条 trace span 是否要被采样。 如果设置 `samplingRate : "1"` ，将会对所有的调用链进行采样。 默认情况下，采样率配置为 (0.0001)，即每10,000条请求中会有一条被采样。
 
-See [Observability distributed tracing]({{< ref "tracing-overview.md" >}}) for more information
+更多信息请参见 [可观测性分布式追踪]({{< ref " tracing-overview. md" >}}) 。
 
 #### 度量
 
@@ -91,7 +91,7 @@ metrics:
 | --------- | ------- | --------- |
 | `enabled` | boolean | 是否启用度量功能。 |
 
-See [metrics documentation]({{< ref "metrics-overview.md" >}}) for more information
+有关详细信息，请参阅 [指标文档]({{< ref " metrics-overview. md" >}})
 
 #### 中间件
 
@@ -113,19 +113,19 @@ httpPipeline:
 | name | string | 中间件组件的名称。 |
 | type | string | 中间件组件的类型。 |
 
-See [Middleware pipelines]({{< ref "middleware.md" >}}) for more information
+更多信息见 [中间件管道]({{< ref " middleware. md" >}}) 。
 
 #### 限定作用域的密钥储存控制
-See the [Scoping secrets]({{< ref "secret-scope.md" >}}) guide for information and examples on how to scope secrets to an application.
+请参阅 [秘密范围]({{< ref "secret-scope.md" >}}) 指南，了解如何将秘密范围化到一个应用程序的信息和例子。
 
-#### Access Control allow lists for building block APIs
-See the [selectively enable Dapr APIs on the Dapr sidecar]({{< ref "api-allowlist.md" >}}) guide for information and examples on how to set ACLs on the building block APIs lists.
+#### 构建块 API 的访问控制允许列表
+请参阅 [选择性地启用 Dapr sidecar 上的 Dapr APIs]({{< ref "api-allowlist.md" >}}) 指南，了解如何在构建块 API 列表上设置 ACL 的信息和例子。
 
-#### Access Control allow lists for service invocation API
-See the [Allow lists for service invocation]({{< ref "invoke-allowlist.md" >}}) guide for information and examples on how to set allow lists with ACLs which using service invocation API.
+#### 服务调用 API 的访问控制允许列表
+有关如何使用服务调用 API 的 ACL 设置允许列表的信息和示例，请参阅 [服务调用的允许列表]({{< ref "invoke-allowlist.md" >}}) 指南。
 
-#### Turning on preview features
-See the [preview features]({{< ref "preview-features.md" >}}) guide for information and examples on how to opt-in to preview features for a release. Preview feature enable new capabilities to be added that still need more time until they become generally available (GA) in the runtime.
+#### 启用预览功能
+请参阅 [预览功能]({{< ref "preview-features.md" >}}) 指南，了解关于如何选择加入某个版本的预览功能的信息和例子。 预览功能可以增加新的功能，这些功能在运行时成为普遍可用（GA）之前还需要更多时间。
 
 ### Sidecar 配置示例
 下面的yaml内容展示了一个可以被应用于Dapr sidecar的配置文件：
@@ -177,7 +177,7 @@ spec:
 | allowedClockSkew | string | 证书到期时，基于本地时钟偏差给出的额外过期时间。 默认值为15分钟。 |
 | workloadCertTTL  | string | 证书有效时间。 默认值为 24 小时。                |
 
-See the [Mutual TLS]({{< ref "mtls.md" >}}) HowTo and [security concepts]({{< ref "security-concept.md" >}}) for more information.
+更多信息请参见 [Mutual TLS]({{< ref " mtls. md" >}}) 指南 和 [安全概念]({{< ref " security-concept. md" >}}) 。
 
 ### 控制平面配置示例
 

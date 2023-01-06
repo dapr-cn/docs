@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "使用 JavaScript SDK 运行 Actor"
-linkTitle: "参与者"
+linkTitle: "Actors"
 weight: 1000
 description: 如何使用 Dapr JavaScript SDK 启动和运行 Actor
 ---
@@ -13,7 +13,7 @@ description: 如何使用 Dapr JavaScript SDK 启动和运行 Actor
 ## 前提
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Latest LTS version of Node or greater](https://nodejs.org/en/)
+- [Node.js 的最新 LTS 版本或更高版本](https://nodejs.org/en/)
 - [已安装 JavaScript NPM 包](https://www.npmjs.com/package/dapr-client)
 
 ## 场景
@@ -194,4 +194,4 @@ async function start()
 }
 ```
 
-- For a full guide on actors visit [How-To: Use virtual actors in Dapr]({{< ref howto-actors.md >}}).
+- 有关 Actor 的完整指南，请访问 [如何在 Dapr 中使用 Actor]({{< ref howto-actors.md >}})。

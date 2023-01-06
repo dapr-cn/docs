@@ -2,7 +2,7 @@
 type: docs
 title: "在自托管的环境中卸载 Dapr"
 linkTitle: "卸载 Dapr"
-weight: 60000
+weight: 20000
 description: "从本地机器中删除 Dapr 的步骤"
 ---
 

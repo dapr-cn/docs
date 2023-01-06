@@ -21,21 +21,21 @@ dapr invoke [flags]
 
 ### 参数
 
-| Name                | 环境变量     | 默认值    | 说明                                                    |
-| ------------------- | -------- | ------ | ----------------------------------------------------- |
-| `--app-id`, `-a`    | `APP_ID` |        | 要调用的应用程序 Id                                           |
-| `--help`, `-h`      |          |        | 显示此帮助消息                                               |
-| `--method`, `-m`    |          |        | 调用的方法                                                 |
-| `--data`, `-d`      |          |        | JSON 序列化数据字符串（可选）                                     |
-| `--data-file`, `-f` |          |        | A file containing the JSON serialized data (optional) |
-| `--verb`, `-v`      |          | `POST` | 要使用的 HTTP 谓词                                          |
+| Name                | 环境变量     | 默认值    | 说明                   |
+| ------------------- | -------- | ------ | -------------------- |
+| `--app-id`, `-a`    | `APP_ID` |        | 要调用的应用程序 Id          |
+| `--help`, `-h`      |          |        | 显示此帮助消息              |
+| `--method`, `-m`    |          |        | 调用的方法                |
+| `--data`, `-d`      |          |        | JSON 序列化数据字符串（可选）    |
+| `--data-file`, `-f` |          |        | 包含 JSON 序列化数据的文件（可选） |
+| `--verb`, `-v`      |          | `POST` | 要使用的 HTTP 谓词         |
 
 ### 示例
 
 ```bash
-# Invoke a sample method on target app with POST Verb
+# 使用POST方式调用目标应用上的sample方法
 dapr invoke --app-id target --method sample --data '{"key":"value"}'
 
-# Invoke a sample method on target app with GET Verb
+# 使用GET方式调动目标应用上的sample方法
 dapr invoke --app-id target --method sample --verb GET
 ```

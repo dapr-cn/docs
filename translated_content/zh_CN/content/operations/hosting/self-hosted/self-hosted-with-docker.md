@@ -6,7 +6,7 @@ weight: 20000
 description: "如何使用 Docker 在自托管模式下部署和运行 Dapr"
 ---
 
-This article provides guidance on running Dapr with Docker on a Windows/Linux/macOS machine or VM.
+本文提供有关在 Windows/Linux/macOS 或 VM 上使用 Docker 运行 Dapr 的指南。
 
 ## 先决条件
 
@@ -22,9 +22,9 @@ This article provides guidance on running Dapr with Docker on a Windows/Linux/ma
 dapr init
 ```
 
-## Run both app and sidecar as a process
+## 将应用和 sidecar 作为进程运行
 
-The [`dapr run` CLI command]({{< ref dapr-run.md >}}) can be used to launch a Dapr sidecar along with your application:
+[`dapr run` CLI 命令行]({{< ref dapr-run.md >}}) 用于启动 Dapr sidecar 和您的应用程序：
 
 ```bash
 dapr run --app-id myapp --app-port 5000 -- dotnet run
@@ -32,12 +32,12 @@ dapr run --app-id myapp --app-port 5000 -- dotnet run
 
 此命令将同时启动 daprd sidecar 程序并执行 `dotnet run` 以启动您的应用程序。
 
-## Run app as a process and sidecar as a Docker container
+## 将应用作为进程运行，将 sidecar 作为 Docker 容器运行
 
-Alternately, if you are running Dapr in a Docker container and your app as a process on the host machine, then you need to configure Docker to use the host network so that Dapr and the app can share a localhost network interface.
+如果您在 Docker 容器中运行 Dapr，并且您的应用程序在主机上作为一个进程运行，那么您需要配置一下 Docker 来使用主机网络，这样Dapr和应用程序就可以共享一个 localhost 网络接口。
 
 {{% alert title="Note" color="warning" %}}
-The host networking driver for Docker is only supported on Linux hosts.
+Docker 的主机网络驱动只在 Linux 主机上支持。
 {{% /alert %}}
 
 如果您在 Linux 上运行 Docker，运行下述命令以启动 Dapr。
@@ -48,7 +48,7 @@ docker run --net="host" --mount type=bind,source="$(pwd)"/components,target=/com
 
 然后，你可以在主机上运行你的应用程序，他们应该通过localhost网络接口连接。
 
-## Run both app and Dapr in a single Docker container
+## 在单个 Docker 容器中同时运行应用和 Dapr
 > 仅用于开发目的
 
 不建议在同一容器内运行 Dapr 运行时和应用程序。 但是，对于本地开发的场景，可以这样做。
@@ -80,7 +80,7 @@ CMD ["run", "--app-id", "nodeapp", "--app-port", "3000", "node", "app.js"]
 
 ## 在 Docker 网络运行
 
-If you have multiple instances of Dapr running in Docker containers and want them to be able to communicate with each other *i.e. for service invocation*, then you'll need to create a shared Docker network and make sure those Dapr containers are attached to it.
+如果您有多个 Dapr 实例运行在在 Docker 容器中，并且希望他们能够互相通讯 *例如，服务调用*，那么您就需要创建一个共享的 Docker 网络，并且确保这些 Dapr 容器与之相连。
 
 您可以使用以下方法创建一个简单的Docker网络:
 ```bash
@@ -94,9 +94,9 @@ docker run --net=my-dapr-network ...
 
 ## 使用 Docker-Compose 运行
 
-[Docker Compose](https://docs.docker.com/compose/) can be used to define multi-container application configurations. 如果您希望在没有Kubernetes的情况下，在本地使用Dapr sidecars运行多个应用程序，那么建议使用Docker Compose定义（`docker-compose.yml`）。
+[Docker Compose](https://docs.docker.com/compose/) 可以用来定义多容器应用配置。 如果您希望在没有Kubernetes的情况下，在本地使用Dapr sidecars运行多个应用程序，那么建议使用Docker Compose定义（`docker-compose.yml`）。
 
-The syntax and tooling of Docker Compose is outside the scope of this article, however, it is recommended you refer to the [official Docker documentation](https://docs.docker.com/compose/) for further details.
+Docker Compose 的语法和工具超出了本文的范围，但是，建议你参考[官方 Docker 文档](https://docs.docker.com/compose/)了解更多细节。
 
 为了使用Dapr和Docker Compose运行您的应用程序，您需要在您的`docker-compose.yml`中定义sidecar模式。 例如:
 
@@ -151,11 +151,11 @@ services:
 
 ## 在 Kubernetes 运行
 
-如果您的部署目标是 Kubernetes，请使用 Dapr 的 first-class integration。 Refer to the [Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}}).
+如果您的部署目标是 Kubernetes，请使用 Dapr 的 first-class integration。 请参阅 [Dapr on Kubernetes 文档]({{< ref "kubernetes-overview.md" >}})。
 
-## Name resolution
+## 名称解析
 
-Dapr by default uses mDNS as the name resolution component in self-hosted mode for service invocation. If you are running Dapr on virtual machines or where mDNS is not available, then you can use the [HashiCorp Consul]({{< ref setup-nr-consul.md >}}) component for name resolution.
+默认情况下，Dapr 使用 mDNS 作为自托管模式下的名称解析组件进行服务调用。 如果您在虚拟机或者其他不支持 mTLS 的场景下运行 Dapr，您可以使用 [HashiCorp Consul]({{< ref setup-nr-consul.md >}}) 组件用于名称解析。
 
 ## Docker 镜像
 

@@ -14,17 +14,17 @@ The Dapr Server will allow you to receive communication from the Dapr Sidecar an
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Latest LTS version of Node or greater](https://nodejs.org/en/)
+- [Node.js 的最新 LTS 版本或更高版本](https://nodejs.org/en/)
 
-## Installing and importing Dapr's JS SDK
+## 安装和导入 Dapr 的 JS SDK
 
-1. Install the SDK with `npm`:
+1. 使用 `npm` 安装 SDK：
 
 ```bash
 npm i dapr-client --save
 ```
 
-2. Import the libraries:
+2. 导入类库：
 
 ```javascript
 import { DaprServer, CommunicationProtocolEnum } from "dapr-client";
@@ -93,7 +93,7 @@ npm run start:dapr-grpc
 
 The JavaScript Server SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}) focusing on Sidecar to App features.
 
-### Invocation API
+### 调用 API
 
 #### Listen to an Invocation
 
@@ -125,7 +125,7 @@ start().catch((e) => {
 
 ### PubSub API
 
-#### Subscribe to messages
+#### 订阅消息
 
 ```javascript
 import { DaprServer } from "dapr-client";
@@ -187,4 +187,4 @@ start().catch((e) => {
 
 ## 相关链接
 
-- [JavaScript SDK examples](https://github.com/dapr/js-sdk/tree/master/examples)
+- [JavaScript SDK 示例](https://github.com/dapr/js-sdk/tree/master/examples)

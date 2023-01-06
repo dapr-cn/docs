@@ -20,13 +20,13 @@ no_list: true
 
 ## 快速入门
 
-| 快速入门                                                              | 说明                                                                                                           |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| [发布与订阅]({{< ref pubsub-quickstart.md >}})                         | Asynchronous communication between two services using messaging.                                             |
-| [Service Invocation]({{< ref serviceinvocation-quickstart.md >}}) | Asynchronous communication between two services using HTTP.                                                  |
-| [State Management]({{< ref statemanagement-quickstart.md >}})     | Store a service's data as key/value pairs in supported state stores.                                         |
-| [绑定]({{< ref bindings-quickstart.md >}})                          | Work with external systems using input bindings to respond to events and output bindings to call operations. |
-| [密钥管理]({{< ref secrets-quickstart.md >}})                         | Securely fetch secrets.                                                                                      |
-| 参与者                                                               | 敬请期待。                                                                                                        |
-| 可观测性                                                              | 敬请期待。                                                                                                        |
-| Configuration (配置)                                                | 敬请期待。                                                                                                        |
+| 快速入门                                                | 说明                                                                                                           |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [发布与订阅]({{< ref pubsub-quickstart.md >}})           | Asynchronous communication between two services using messaging.                                             |
+| [服务调用]({{< ref serviceinvocation-quickstart.md >}}) | Asynchronous communication between two services using HTTP.                                                  |
+| [状态管理]({{< ref statemanagement-quickstart.md >}})   | Store a service's data as key/value pairs in supported state stores.                                         |
+| [绑定]({{< ref bindings-quickstart.md >}})            | Work with external systems using input bindings to respond to events and output bindings to call operations. |
+| [密钥管理]({{< ref secrets-quickstart.md >}})           | Securely fetch secrets.                                                                                      |
+| Actors                                              | 敬请期待。                                                                                                        |
+| 可观测性                                                | 敬请期待。                                                                                                        |
+| Configuration (配置)                                  | 敬请期待。                                                                                                        |

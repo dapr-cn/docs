@@ -22,7 +22,7 @@ Policies can then be applied to [targets]({{< ref "targets.md" >}}), which inclu
 
 - [Apps]({{< ref "targets.md#apps" >}}) via service invocation
 - [组件]({{< ref "targets.md#components" >}})
-- [参与者]({{< ref "targets.md#actors" >}})
+- [Actors]({{< ref "targets.md#actors" >}})
 
 Additionally, resiliency policies can be [scoped to specific apps]({{< ref "component-scopes.md#application-access-to-components-with-scopes" >}}).
 
@@ -165,5 +165,5 @@ spec:
 ```
 
 ## 相关链接
- - [Policies]({{< ref "policies.md" >}})
+ - [策略]({{< ref "policies.md" >}})
  - [Targets]({{< ref "targets.md" >}})

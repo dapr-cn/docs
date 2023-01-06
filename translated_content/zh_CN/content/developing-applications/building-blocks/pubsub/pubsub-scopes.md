@@ -164,7 +164,7 @@ spec:
 
 ## 下一步
 
-- Learn [how to configure pub/sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
+- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
 - [pub/sub组件列表]({{< ref supported-pubsub >}})
 - 阅读 [API 引用]({{< ref pubsub_api.md >}})

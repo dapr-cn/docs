@@ -7,12 +7,12 @@ description: "有关 upgrade CLI 命令的详细信息"
 
 ### 说明
 
-Upgrade or downgrade Dapr on supported hosting platforms.
+在支持的托管平台上升级或降级 Dapr。
 
 {{% alert title="Warning" color="warning" %}}
-Version steps should be done incrementally, including minor versions as you upgrade or downgrade.
+在执行升级或者降级时，目标版本级别应该逐步进行，包括小版本。
 
-Prior to downgrading, confirm components are backwards compatible and application code does ultilize APIs that are not supported in previous versions of Dapr.
+在降级之前，请确认组件是向后兼容的，并且应用程序代码确实已经移除了以前版本Dapr 中不支持的 API。
 {{% /alert %}}
 
 ### 支持的平台
@@ -27,30 +27,30 @@ dapr upgrade [flags]
 
 ### 参数
 
-| Name                 | 环境变量 | 默认值      | 说明                                                                            |
-| -------------------- | ---- | -------- | ----------------------------------------------------------------------------- |
-| `--help`, `-h`       |      |          | 显示此帮助消息                                                                       |
-| `--kubernetes`, `-k` |      | `false`  | Upgrade/Downgrade Dapr in a Kubernetes cluster                                |
-| `--runtime-version`  |      | `latest` | The version of the Dapr runtime to upgrade/downgrade to, for example: `1.0.0` |
-| `--set`              |      |          | 在命令行上设置值 (可以用逗号指定多个或多个值: key1=val1,key2=val2)                                 |
+| Name                 | 环境变量 | 默认值      | 说明                                            |
+| -------------------- | ---- | -------- | --------------------------------------------- |
+| `--help`, `-h`       |      |          | 显示此帮助消息                                       |
+| `--kubernetes`, `-k` |      | `false`  | 更新/降级 Kubernetes 集群中的 dapr                    |
+| `--runtime-version`  |      | `latest` | 要升级/降级到的 Dapr 运行时版本，例如： `1.0.0`               |
+| `--set`              |      |          | 在命令行上设置值 (可以用逗号指定多个或多个值: key1=val1,key2=val2) |
 
 ### 示例
 
 ```bash
-# Upgrade Dapr in Kubernetes to latest version
+# 在Kubernetes集群中，升级 Dapr到最新版本
 dapr upgrade -k
 
-# Upgrade or downgrade to a specified version of Dapr runtime in Kubernetes
+# 在Kubernetes集群中，升级或降级 Dapr runtime 到一个指定版本
 dapr upgrade -k --runtime-version 1.2
 
-# Upgrade or downgrade to a specified version of Dapr runtime in Kubernetes with value set
+# 在Kubernetes集群中，升级或降级 Dapr runtime 到一个指定版本，并且进行值设定
 dapr upgrade -k --runtime-version 1.2 --set global.logAsJson=true
 ```
-### Warning messages
-This command can issue warning messages.
+### 警告信息
+此命令可以发出警告消息。
 
-#### Root certificate renewal warning
-If the mtls root certificate deployed to the Kubernetes cluster expires in under 30 days the following warning message is displayed:
+#### 根证书续订警告
+如果部署到 Kubernetes 集群的 mtls 根证书在 30 天内过期，则会显示以下警告消息：
 
 ```
 Dapr root certificate of your Kubernetes cluster expires in <n> days. Expiry date: <date:time> UTC. 

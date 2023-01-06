@@ -9,7 +9,7 @@ aliases:
 
 ## 配置
 
-要设置阿里云 Tablestore 绑定，需要创建一个类型为 `bindings.alicloud.tablestore` 的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置阿里云 Tablestore 绑定，需要创建一个类型为 `bindings.alicloud.tablestore` 的组件。 请参阅 [本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}}) 了解如何创建和应用 secretstore 配置。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -43,11 +43,11 @@ spec:
 
 | 字段             | 必填 | 绑定支持 | 详情                       | 示例                                          |
 | -------------- | -- | ---- | ------------------------ | ------------------------------------------- |
-| `终结点`          | Y  | 输出   | 阿里云 Tablestore endpoint。 | https://tablestore-cn-hangzhou.aliyuncs.com |
-| `accessKeyID`  | Y  | 输出   | 访问密钥 ID 凭据。              |                                             |
-| `accessKey`    | Y  | 输出   | 访问密钥凭据。                  |                                             |
-| `instanceName` | Y  | 输出   | 实例的名称。                   |                                             |
-| `tableName`    | Y  | 输出   | 表的名称。                    |                                             |
+| `终结点`          | 是  | 输出   | 阿里云 Tablestore endpoint。 | https://tablestore-cn-hangzhou.aliyuncs.com |
+| `accessKeyID`  | 是  | 输出   | 访问密钥 ID 凭据。              |                                             |
+| `accessKey`    | 是  | 输出   | 访问密钥凭据。                  |                                             |
+| `instanceName` | 是  | 输出   | 实例的名称。                   |                                             |
+| `tableName`    | 是  | 输出   | 表的名称。                    |                                             |
 
 ## 绑定支持
 
@@ -73,7 +73,7 @@ spec:
 请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### Delete object
+### 删除对象
 
 要执行删除对象操作，请使用 `POST` 方法和以下 JSON 调用绑定：
 
@@ -94,7 +94,7 @@ spec:
 请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### List objects
+### 列出对象
 
 要执行列出对象操作，请使用 `POST` 和以下 JSON 调用绑定：
 
@@ -116,7 +116,7 @@ spec:
 请注意，`metadata.primaryKeys` 是必填字段。
 {{% /alert %}}
 
-### Get object
+### 获取对象
 
 要执行获取对象操作，请使用 `POST` 方法和以下 JSON 调用绑定：
 

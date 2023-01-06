@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Getting started with the Dapr actor Python SDK"
+title: "开始使用 Dapr actor Python SDK"
 linkTitle: "Actor"
 weight: 20000
-description: How to get up and running with the Dapr Python SDK
+description: 如何使用 Dapr Python SDK 启动和运行
 ---
 
-The Dapr actor package allows you to interact with Dapr virtual actors from a Python application.
+Dapr actor 包允许您从 Python 应用程序中与 Dapr virtual actor 进行交互。
 
 ## 前提
 
@@ -15,9 +15,9 @@ The Dapr actor package allows you to interact with Dapr virtual actors from a Py
 - 安装[Python 3.7+](https://www.python.org/downloads/)
 - 安装[Dapr Python 模块]({{< ref "python#install-the0dapr-module" >}})
 
-## Actor interface
+## Actor 接口
 
-The interface defines the actor contract that is shared between the actor implementation and the clients calling the actor. Because a client may depend on it, it typically makes sense to define it in an assembly that is separate from the actor implementation.
+Actor 接口定义了 Actor 契约，由 Actor 实现和调用 Actor 的客户端共享。 因为客户端可能依赖于它，所以通常在一个与 Actor 实现分开的程序集中定义它是有意义的。
 
 ```python
 from dapr.actor import ActorInterface, actormethod
@@ -28,17 +28,17 @@ class DemoActorInterface(ActorInterface):
         ...
 ```
 
-## Actor services
+## Actor 服务
 
-An actor service hosts the virtual actor. It is implemented a class that derives from the base type `Actor` and implements the interfaces defined in the actor interface.
+Actor 服务承载着虚拟 Actor。 它实现了一个派生自基类型 `Actor` 的类，并实现了 Actor 接口中定义的接口。
 
-Actors can be created using one of the Dapr actor extensions:
-   - [FastAPI actor extension]({{< ref python-fastapi.md >}})
-   - [Flask actor extension]({{< ref python-flask.md >}})
+可以使用以下 Dapr Actor 扩展之一创建 Actor：
+   - [FastAPI Actor 扩展]({{< ref python-fastapi.md >}})
+   - [Flask Actor 扩展]({{< ref python-flask.md >}})
 
-## Actor client
+## Actor 客户端
 
-An actor client contains the implementation of the actor client which calls the actor methods defined in the actor interface.
+Actor 客户端包含调用 Actor 接口中定义的 Actor 方法的 Actor 客户端实现。
 
 ```python
 import asyncio
@@ -54,6 +54,6 @@ async def main():
     resp = await proxy.GetMyData()
 ```
 
-## Sample
+## 示例
 
-Visit [this page](https://github.com/dapr/python-sdk/tree/release-1.0/examples/demo_actor) for a runnable actor sample.
+访问 [本页](https://github.com/dapr/python-sdk/tree/release-1.0/examples/demo_actor) 以获取可运行的 actor 示例。

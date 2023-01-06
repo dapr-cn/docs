@@ -2,7 +2,7 @@
 type: docs
 title: "入门指南: 不使用 Docker 在自托管模式下运行 Dapr"
 linkTitle: "不使用 Docker 运行"
-weight: 30000
+weight: 50000
 description: "如何以自托管方式部署和运行 Dapr ，而无需在本地机器上安装 Docker"
 ---
 
@@ -33,7 +33,7 @@ dapr init --slim
 
 ## 启用 actors
 
-placement 服务必须在本地运行才能启动 actor。 Also, a [transactional state store that supports ETags]({{< ref "supported-state-stores.md" >}}) must be enabled to use actors, for example, [Redis configured in self-hosted mode](https://redis.io/topics/quickstart).
+placement 服务必须在本地运行才能启动 actor。 此外, 必须启用 [支持 ETags 的事务状态存储]({{< ref "supported-state-stores.md" >}}) 来使用 actor，例如，[Redis 配置为自托管模式](https://redis.io/topics/quickstart)。
 
 Linux/MacOS 默认情况下， `placement` 二进制文件安装在 `/$HOME/. dapr/bin` 目录下， Windows 在 `%USERPROFILE%\.dapr\bin` 目录下。
 
@@ -51,7 +51,7 @@ INFO[0001] leader is established.                        instance=Nicoletaz-L10.
 
 ```
 
-From here on you can follow the sample example created for the [java-sdk](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors), [python-sdk](https://github.com/dapr/python-sdk/tree/master/examples/demo_actor) or [dotnet-sdk]({{< ref "dotnet-actors-howto.md" >}}) for running an application with Actors enabled.
+至此，你可以跟随为 [java-sdk](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors), [python-sdk](https://github.com/dapr/python-sdk/tree/master/examples/demo_actor) 或者 [dotnet-sdk]({{< ref "dotnet-actors-howto.md" >}}) 创建的简单示例来运行一个启用了 Actors 的程序。
 
 更新状态存储配置文件使 Redis host 地址和密码和您的设置相同。 此外，为了使它能够作为一个actor状态存储，还添加了类似于[示例Java Redis组件](https://github.com/dapr/java-sdk/blob/master/examples/components/state/redis.yaml)定义的元数据部分。
 
@@ -63,4 +63,4 @@ From here on you can follow the sample example created for the [java-sdk](https:
 
 ## 清理
 
-Follow the uninstall [instructions]({{< ref "install-dapr-selfhost.md#uninstall-dapr-in-a-self-hosted-mode" >}}) to remove the binaries.
+按照卸载 [说明]({{< ref "install-dapr-selfhost.md#uninstall-dapr-in-a-self-hosted-mode" >}}) 来移除二进制文件。

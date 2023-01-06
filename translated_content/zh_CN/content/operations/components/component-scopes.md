@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "How-To: 限定组件作用范围在一或多个应用"
-linkTitle: "Scope access to components"
+linkTitle: "对组件的访问范围"
 weight: 300
 description: "限制特定 Dapr 实例的组件访问"
 ---
@@ -45,6 +45,7 @@ Windows:
 
 ```powershell
 setx NAMESPACE "production"
+
 # run Dapr as usual
 ```
 {{% /codetab %}}
@@ -72,7 +73,7 @@ spec:
 {{< /tabs >}}
 
 {{% alert title="Note" color="primary" %}}
-应用于名称空间“A”的组件 YAML 可以*引用*在名称空间“B”中的实现 例如，在名称空间“production-A”的 Redis 组件 YAML 可以将 Redis 主机地址指向部署在名称空间“production-B”中的 Redis实例。
+应用于名称空间“A”的组件 YAML 可以*引用*在名称空间“B”中的实现 例如，在名称空间 “production-A” 的 Redis 组件 YAML 可以将 Redis 主机地址指向部署在名称空间 “production-B” 中的 Redis 实例。
 
 有关示例，请参阅[使用多个名称空间配置 Pub/Sub 组件]({{< ref "pubsub-namespaces.md" >}})
 {{% /alert %}}

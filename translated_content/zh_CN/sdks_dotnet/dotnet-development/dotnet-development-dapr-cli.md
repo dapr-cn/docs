@@ -2,7 +2,7 @@
 type: docs
 title: "Dapr .NET SDK 与 Dapr CLI 进行开发"
 linkTitle: "Dapr CLI"
-weight: 30000
+weight: 50000
 description: 通过 Dapr CLI 学习本地开发
 ---
 
@@ -10,16 +10,16 @@ description: 通过 Dapr CLI 学习本地开发
 
 *这是一篇 .NET 使用指南，另见 [使用 Docker 进行 Dapr 自托管]({{< ref self-hosted-with-docker.md >}})*
 
-Dapr CLI 为您提供了一个很好的工作基础，通过初始化本地重新分配容器、拉取容器、放置服务和用于重新分配的组件清单。 这将使您能够在没有额外设置的新安装中处理以下构建块：
+Dapr CLI 通过初始化本地 redis 容器、zipkin 容器、放置服务和 redis 的组件清单，为您提供了良好的工作基础。 这将使您能够在没有额外设置的新安装中处理以下构建块：
 
 - [调用逻辑]({{< ref service-invocation >}})
 - [状态存储]({{< ref state-management >}})
 - [Pub/sub（发布/订阅）]({{< ref pubsub >}})
-- [参与者]({{< ref actors >}})
+- [Actors]({{< ref actors >}})
 
 您可以用 `dapr run` 来运行.NET 服务，作为您在本地开发的策略。 为每个服务的这些命令，以便启动您的应用程序。
 
-- **好处：** ，这是很容易设置，因为它的默认Dapr安装的一部分
+- **好处：** 这是很容易设置，因为它的默认Dapr安装的一部分
 - **坏处：** 这在你的机器上使用长期运行的 docker 容器，这可能是不可取的
 - **坏处：** 这种方法的可伸缩性很差，因为它需要每个服务运行一个单独的命令
 

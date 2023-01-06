@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "快速入门：状态管理"
-linkTitle: "State Management"
+linkTitle: "状态管理"
 weight: 72
 description: "Get started with Dapr's State Management building block"
 ---
@@ -54,7 +54,7 @@ pip3 install -r requirements.txt
 dapr run --app-id order-processor --components-path ../../../components/ -- python3 app.py
 ```
 
-`order-processor` 服务向 [定义在 `statestore.yaml` 组件]({{< ref "#statestoreyaml-component-file" >}}) 中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行循环。
+`order-processor` 服务向定义在 [ `statestore.yaml` ]({{< ref "#statestoreyaml-component-file" >}}) 组件中的 `statestore` 实例 写入、读取和删除 `orderId` 键/值对。 一旦服务启动，它就会执行循环。
 
 ```python
 with DaprClient() as client:
@@ -99,7 +99,7 @@ Order-processor输出：
 - 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
 - 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-使用 `statestore.yaml` 组件，您可以轻松换出 [状态存储](/reference/components-reference/supported-state-stores/) 而无需更改代码。
+使用 `statestore.yaml` 组件，您可以轻松更换 [状态存储](/reference/components-reference/supported-state-stores/) 而无需更改代码。
 
 本快速入门包含的 Redis `statestore.yaml` 文件包含以下内容：
 

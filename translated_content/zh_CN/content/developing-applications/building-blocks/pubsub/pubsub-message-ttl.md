@@ -19,7 +19,7 @@ Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可
 当消息的 TTL 在 Pub/Sub 组件中得到本机支持时，Dapr 仅仅 TTL 的配置，不会增加任何额外的逻辑，保持可预见的行为。 当组件以不同方式处理过期消息时，这是很有帮助的。 例如，使用 Azure Service Bus 时，过期的消息存储在死信队列中，而不仅仅是删除。
 
 {{% alert title="Note" color="primary" %}}
- You can also set message TTL for a given message broker at creation. Look at the specific characteristic of the component that you are using to see if this is suitable.
+ 您还可以在创建时为给定的消息代理设置消息 TTL。 Look at the specific characteristic of the component that you are using to see if this is suitable.
 
 {{% /alert %}}
 
@@ -90,6 +90,6 @@ $app->run(function(\DI\FactoryInterface $factory) {
 ## 下一步
 
 - 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})
-- Learn [how to configure pub/sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
+- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
 - [pub/sub组件列表]({{< ref supported-pubsub >}})
 - 阅读 [API 引用]({{< ref pubsub_api.md >}})

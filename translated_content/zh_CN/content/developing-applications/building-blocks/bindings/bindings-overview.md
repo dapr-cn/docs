@@ -6,18 +6,18 @@ weight: 100
 description: Dapr 绑定API构建块概述
 ---
 
-Using Dapr's bindings API, you can trigger your app with events coming in from external systems and interface with external systems. With the bindings API, you can:
+使用 Dapr 的绑定 API，你可以使用来自外部系统的事件触发应用，并与外部系统交互。 使用绑定 API，您可以：
 
 - Avoid the complexities of connecting to and polling from messaging systems, such as queues and message buses.
 - Focus on business logic, instead of the implementation details of interacting with a system.
-- Keep your code free from SDKs or libraries.
-- Handle retries and failure recovery.
+- 使代码不受 SDK 或库的跟踪.
+- 处理重试和故障恢复.
 - Switch between bindings at runtime.
 - Build portable applications with environment-specific bindings set-up and no required code changes.
 
-For example, with bindings, your microservice can respond to incoming Twilio/SMS messages without:
+例如，通过 bindings，您的微服务可以响应传入的 Twilio/SMS 消息，而无需：
 
-- Adding or configuring a third-party Twilio SDK
+- 添加或配置第三方 Twilio SDK
 - Worrying about polling from Twilio (or using WebSockets, etc.)
 
 {{% alert title="Note" color="primary" %}}
@@ -44,29 +44,29 @@ Read the [Create an event-driven app using input bindings guide]({{< ref howto-t
 
 ## 输出绑定
 
-With output bindings, you can invoke external resources. 可选的有效负载和元数据可与调用请求一起发送。
+使用输出绑定，您可以调用外部资源。 可选的有效负载和元数据可与调用请求一起发送。
 
-To invoke an output binding:
+调用输出绑定：
 
 1. Define the component YAML that describes the binding type and its metadata (connection info, etc.).
-2. Use the HTTP endpoint or gRPC method to invoke the binding with an optional payload.
+2. 使用 HTTP 端点或 gRPC 方法调用具有可选有效负载的绑定.
 
 Read the [Use output bindings to interface with external resources guide]({{< ref howto-bindings.md >}}) to get started with output bindings.
 
-## Try out bindings
+## 试用绑定
 
-### Quickstarts and tutorials
+### 快速入门和教程
 
-Want to put the Dapr bindings API to the test? Walk through the following quickstart and tutorials to see bindings in action:
+Want to put the Dapr bindings API to the test? 浏览以下快速入门和教程以查看 绑定 的实际应用：
 
-| Quickstart/tutorial                                                                     | 说明                                                                                                           |
+| 快速入门/教程                                                                                 | 说明                                                                                                           |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | [Bindings quickstart]({{< ref bindings-quickstart.md >}})                               | Work with external systems using input bindings to respond to events and output bindings to call operations. |
 | [Bindings tutorial](https://github.com/dapr/quickstarts/tree/master/tutorials/bindings) | 演示如何使用Dapr创建与其他组件的输入和输出绑定。 使用与Kafka的绑定。                                                                      |
 
 ### Start using bindings directly in your app
 
-Want to skip the quickstarts? Not a problem. You can try out the bindings building block directly in your application to invoke output bindings and trigger input bindings. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the bindings API starting with [the input bindings how-to guide]({{< ref howto-triggers.md >}}).
+想跳过快速入门？ 没问题。 您可以直接在应用程序中尝试 绑定 构建块，以调用输出绑定并触发输入绑定。 After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the bindings API starting with [the input bindings how-to guide]({{< ref howto-triggers.md >}}).
 
 ## 下一步
 

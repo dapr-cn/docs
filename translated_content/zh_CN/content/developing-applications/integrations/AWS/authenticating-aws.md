@@ -8,20 +8,20 @@ aliases:
   - /zh-hans/developing-applications/integrations/authenticating/authenticating-aws/
 ---
 
-All Dapr components using various AWS services (DynamoDB, SQS, S3, etc) use a standardized set of attributes for configuration. See [how the AWS SDK (which Dapr uses) handles credentials](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials).
+所有使用 AWS 服务(如DynamoDB、SQS、S3等) 的 Dapr 组件都使用一套标准化的属性进行配置。 查阅[AWS 开发工具包（Dapr 使用）如何处理凭证](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials)。
 
-None of the following attributes are required, since you can configure the AWS SDK using the default provider chain, described in the link above. Test the component configuration and inspect the log output from the Dapr runtime to ensure that components initialize correctly.
+以下属性都不是必需的，因为您可以使用默认提供商链配置 AWS 开发工具包，如上面的链接中所述。 测试组件配置并检查 Dapr 运行时的日志输出，以确保组件正确初始化。
 
-| Attribute      | 说明                                                                                                                                                                                                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `region`       | Which AWS region to connect to. 在某些情况下(例如在自托管模式下运行Dapr时)，这个标志可以由环境变量`AWS_REGION`提供。 Since Dapr sidecar injection doesn't allow configuring environment variables on the Dapr sidecar, it is recommended to always set the `region` attribute in the component spec.      |
-| `终结点`          | The endpoint is normally handled internally by the AWS SDK. However, in some situations it might make sense to set it locally - for example if developing against [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html). |
-| `accessKey`    | AWS Access key id.                                                                                                                                                                                                                                                       |
-| `secretKey`    | AWS Secret access key. Use together with `accessKey` to explicitly specify credentials.                                                                                                                                                                                  |
-| `sessionToken` | AWS Session token. 与`accessKey`和`secretKey`一起使用。 当使用普通IAM用户的 access key和密钥时，通常不需要session token。                                                                                                                                                                          |
+| 属性             | 说明                                                                                                                                                                            |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `region`       | 要连接到哪个 AWS 区域。 在某些情况下(例如在自托管模式下运行Dapr时)，这个标志可以由环境变量`AWS_REGION`提供。 因为 Dapr sidecar 注入不允许配置 Dapr sidecar 上的环境变量。 建议在组件中始终设置 `region` 属性。                                       |
+| `终结点`          | 终端节点通常由 AWS 开发工具包在内部处理。 然而，在某些情况下，在本地设置 endpoint 可能是有意义的：例如，如果是针对 [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html) 进行开发， |
+| `accessKey`    | AWS 访问密钥 ID：                                                                                                                                                                  |
+| `secretKey`    | AWS Secret access key. 与`accessKey` 一起使用确定信任凭据。                                                                                                                               |
+| `sessionToken` | AWS Session token. 与`accessKey`和`secretKey`一起使用。 当使用普通IAM用户的 access key和密钥时，通常不需要session token。                                                                               |
 
 {{% alert title="Important" color="warning" %}}
-When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernetes), if you're using a node/pod that has already been attached to an IAM policy defining access to AWS resources, you **must not** provide AWS access-key, secret-key, and tokens in the definition of the component spec you're using.
+当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。
 {{% /alert %}}
 
 ## 在组件清单文件中明确指定凭证的替代方法
@@ -78,4 +78,4 @@ AWS_PROFILE=myprofile awshelper daprd...
 
 在Windows上，环境变量需要在启动`awshelper`命令之前进行设置，不支持如上所示的内联操作。
 
-For more information, see [how the AWS SDK (which Dapr uses) handles credentials](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials).
+有关更多信息，请参阅 [AWS 开发工具包（Dapr 使用）如何处理](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials)凭证。

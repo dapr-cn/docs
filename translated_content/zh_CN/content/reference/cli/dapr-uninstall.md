@@ -37,7 +37,7 @@ dapr uninstall [flags]
 dapr uninstall
 ```
 
-You can also use option `--all` to remove .dapr directory, Redis, Placement and Zipkin containers
+你也可以使用选项 `--all` 去移除 .dapr 目录，以及 Redis、Placement 和 Zipkin 容器。
 
 ```bash
 dapr uninstall --all

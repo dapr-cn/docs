@@ -9,9 +9,9 @@ aliases:
 
 ## 配置
 
-要设置AWS Secrets Manager密钥仓库，请创建一个类型为`secretstores.aws.secretmanager`的组件。 See [this guide]({{< ref "setup-secret-store.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置AWS Secrets Manager密钥仓库，请创建一个类型为`secretstores.aws.secretmanager`的组件。 有关如何创建和应用密钥库配置，请参阅[本指南]({{< ref "setup-secret-store.md#apply-the-configuration" >}})。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
-See [Authenticating to AWS]({{< ref authenticating-aws.md >}}) for information about authentication-related attributes.
+有关身份验证相关属性的信息，请参阅 [向 AWS 进行身份验证]({{< ref authenticating-aws.md >}})。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -33,20 +33,20 @@ spec:
     value: "[aws_session_token]"
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将密钥明文存储， 建议将密钥存储在本地，如[Kubernetes密钥存储]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
 ## 元数据字段规范
 
 | 字段           | 必填 | 详情                                 | 示例                  |
 | ------------ |:--:| ---------------------------------- | ------------------- |
-| region       | Y  | AWS Secrets Manager 实例所部署的特定AWS 区域 | `"us-east-1"`       |
-| accessKey    | Y  | 要访问此资源的 AWS 访问密钥                   | `"key"`             |
-| secretKey    | Y  | 要访问此资源的 AWS 密钥访问 Key               | `"secretAccessKey"` |
-| sessionToken | N  | 要使用的 AWS 会话令牌                      | `"sessionToken"`    |
+| region       | 是  | AWS Secrets Manager 实例所部署的特定AWS 区域 | `"us-east-1"`       |
+| accessKey    | 是  | 要访问此资源的 AWS 访问密钥                   | `"key"`             |
+| secretKey    | 是  | 要访问此资源的 AWS 密钥访问 Key               | `"secretAccessKey"` |
+| sessionToken | 否  | 要使用的 AWS 会话令牌                      | `"sessionToken"`    |
 
 {{% alert title="Important" color="warning" %}}
-When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernetes), if you're using a node/pod that has already been attached to an IAM policy defining access to AWS resources, you **must not** provide AWS access-key, secret-key, and tokens in the definition of the component spec you're using.
+当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。
 {{% /alert %}}
 
 ## 创建一个AWS Secrets Manager实例

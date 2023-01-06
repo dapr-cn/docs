@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "参考：actor"
-linkTitle: "Production Reference"
+linkTitle: "生产参考"
 weight: 1000
 description: 在生产中使用 PHP actor
 no_list: true
@@ -128,7 +128,7 @@ actor方法的执行效率非常高， `php-fpm` and `nginx`, 或 IIS 在 Window
 
 ## 版本状态
 
-`ActorState`对象中的变量名直接对应于存储库中的键名。 这意味着如果更改一个变量的类型或名称，可能会出现错误。 为了解决这个问题，您可能需要对状态进行版本控制 因此，您需要重写状态的加载和存储方式。 There are many ways to approach this, one such solution might be something like this:
+`ActorState`对象中的变量名直接对应于存储库中的键名。 这意味着如果更改一个变量的类型或名称，可能会出现错误。 为了解决这个问题，您可能需要对状态进行版本控制 因此，您需要重写状态的加载和存储方式。 有很多方法可以解决这个问题，其中有一个解决方案可能是这样的：
 
 ```php
 <?php

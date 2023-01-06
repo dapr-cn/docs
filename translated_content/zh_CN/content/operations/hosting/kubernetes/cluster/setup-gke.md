@@ -21,7 +21,7 @@ $ gcloud services enable container.googleapis.com && \
 更多选项请参阅 [Google 云SDK 文档](https://cloud.google.com/sdk/gcloud/reference/container/clusters/create)， 或者通过 [云控制台](https://console.cloud.google.com/kubernetes) 创建集群以获取更多交互体验。
 
 {{% alert title="For private GKE clusters" color="warning" %}}
-Sidecar injection will not work for private clusters without extra steps. An automatically created firewall rule for master access does not open port 4000. This is needed for Dapr sidecar injection.
+Sidecar 注入不适用于没有额外步骤的私有集群。 为 master 节点自动创建的防火墙规则不会打开4000端口。 这是 Dapr sidecar 注入所必需的。
 
 审查相关防火墙规则：
 ```bash

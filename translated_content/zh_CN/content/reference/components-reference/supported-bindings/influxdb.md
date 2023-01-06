@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "InfluxDB binding spec"
+title: "InfluxDB 绑定规范"
 linkTitle: "InfluxDB"
-description: "Detailed documentation on the InfluxDB binding component"
+description: "有关 InfluxDB 绑定组件的详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/influxdb/"
 ---
 
 ## 配置
 
-To setup InfluxDB binding create a component of type `bindings.influx`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 InfluxDB 绑定，请创建一个类型为 `bindings.influx` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -38,23 +38,23 @@ spec:
 
 ## 元数据字段规范
 
-| 字段     | 必填 | 绑定支持 | 详情                                   | 示例                        |
-| ------ |:--:| ---- | ------------------------------------ | ------------------------- |
-| url    | Y  | 输出   | The URL for the InfluxDB instance    | `"http://localhost:8086"` |
-| token  | Y  | 输出   | The authorization token for InfluxDB | `"mytoken"`               |
-| org    | Y  | 输出   | The InfluxDB organization            | `"myorg"`                 |
-| bucket | Y  | 输出   | Bucket name to write to              | `"mybucket"`              |
+| 字段     | 必填 | 绑定支持 | 详情               | 示例                        |
+| ------ |:--:| ---- | ---------------- | ------------------------- |
+| url    | 是  | 输出   | InfluxDB 实例的 URL | `"http://localhost:8086"` |
+| token  | 是  | 输出   | InfluxDB 的授权令牌   | `"mytoken"`               |
+| org    | 是  | 输出   | InfluxDB 组织      | `"myorg"`                 |
+| bucket | 是  | 输出   | 要写入的存储桶名称        | `"mybucket"`              |
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持如下操作的 **输出绑定** ：
 
 - `create`
 - `query`
 
-### Query
+### 查询
 
-In order to query InfluxDB, use a `query` operation along with a `raw` key in the call's metadata, with the query as the value:
+为了查询 InfluxDB，在调用的元数据中使用 `query` 操作和 `raw` 键，查询结果为：
 
 ```
 curl -X POST http://localhost:3500/v1.0/bindings/myInfluxBinding \

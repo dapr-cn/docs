@@ -3,20 +3,20 @@ type: docs
 title: "定义一个组件"
 linkTitle: "定义一个组件"
 weight: 70
-description: "Create a component definition file to interact with the secrets building block"
+description: "创建组件定义文件以与 Secrets 构建块进行交互"
 ---
 
 当构建一个应用程序时，你很可能会根据你想使用的构建块和特定的组件来定义自己的组建文件。
 
-In this tutorial, you will create a component definition file to interact with the [secrets building block API]({{< ref secrets >}}):
+在本快速入门中，您将创建一个组件定义文件以与 [Secrets 构建块]({{< ref secrets >}})进行交互：
 
-- 创建本地 JSON 秘密存储.
-- 使用组件定义文件在 Dapr 注册密钥存储.
+- 创建本地 JSON 机密存储。
+- 使用组件定义文件向 Dapr 注册机密存储。
 - 使用 Dapr HTTP API 获取秘密.
 
 ## 第 1 步：创建一个 JSON 密钥存储
 
-Dapr supports [many types of secret stores]({{< ref supported-secret-stores >}}), but for this tutorial, create a local JSON file named `mysecrets.json` with the following secret:
+Dapr 支持 [多种类型的机密存储]({{< ref supported-secret-stores >}})，但在本教程中，请使用以下机密创建一个名为 `mysecrets.json` 的本地 JSON 文件：
 
 ```json
 {

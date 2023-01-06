@@ -34,8 +34,8 @@ spec:
 
 | 字段               | 必填 | 详情                                 | 示例                                                                                                |
 | ---------------- |:--:| ---------------------------------- | ------------------------------------------------------------------------------------------------- |
-| connectionString | Y  | PostgreSQL 的连接字符串                  | `"host=localhost user=postgres password=example port=5432 connect_timeout=10 database=dapr_test"` |
-| actorStateStore  | N  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"` | `"true"`, `"false"`                                                                               |
+| connectionString | 是  | PostgreSQL 的连接字符串                  | `"host=localhost user=postgres password=example port=5432 connect_timeout=10 database=dapr_test"` |
+| actorStateStore  | 否  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"` | `"true"`, `"false"`                                                                               |
 
 
 如果您想要使用 PostgreSQL 作为 Actor 存储，请在 yaml 上附上以下内容。

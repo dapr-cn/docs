@@ -2,14 +2,14 @@
 type: docs
 title: "JetStream KV"
 linkTitle: "JetStream KV"
-description: Detailed information on the JetStream KV state store component
+description: 关于JetStream KV状态存储组件的详细信息
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-nats-jetstream-kv/"
 ---
 
 ## 配置
 
-To setup a JetStream KV state store create a component of type `state.jetstream`. 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
+要设置 JetStream KV 状态储存，请创建一个类型为 `state.jetstream`的组件。 请参阅[本指南]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}})，了解如何创建和应用状态存储配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -35,21 +35,21 @@ spec:
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件， [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
-## Spec metadatafield
+## 元数据字段规范
 
-| 字段      | 必填 | 详情                                         | 示例                               |
-| ------- |:--:| ------------------------------------------ | -------------------------------- |
-| natsURL | Y  | NATS 服务器地址 URL                             | "`nats://localhost:4222`"        |
-| jwt     | N  | NATS decentralized authentication JWT      | "`eyJhbGciOiJ...6yJV_adQssw5c`"  |
-| seedKey | N  | NATS decentralized authentication seed key | "`SUACS34K232O...5Z3POU7BNIL4Y`" |
-| bucket  | Y  | JetStream KV bucket name                   | `"<bucketName>"`           |
+| 字段      | 必填 | 详情                 | 示例                               |
+| ------- |:--:| ------------------ | -------------------------------- |
+| natsURL | 是  | NATS 服务器地址 URL     | "`nats://localhost:4222`"        |
+| jwt     | 否  | NATS 去中心化身份验证 JWT  | "`eyJhbGciOiJ...6yJV_adQssw5c`"  |
+| seedKey | 否  | NATS 去中心化身份验证秘钥种子。 | "`SUACS34K232O...5Z3POU7BNIL4Y`" |
+| bucket  | 是  | JetStream KV 桶名称   | `"<bucketName>"`           |
 
 ## 创建NATS服务器
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-You can run a NATS Server with JetStream enabled locally using Docker:
+您可以使用 Docker 在本地启用 JetStream 运行 NATS 服务器：
 
 ```bash
 docker run -d -p 4222:4222 nats:latest -js
@@ -59,21 +59,21 @@ docker run -d -p 4222:4222 nats:latest -js
 {{% /codetab %}}
 
 {{% codetab %}}
-Install NATS JetStream on Kubernetes by using the [helm](https://github.com/nats-io/k8s/tree/main/helm/charts/nats#jetstream):
+使用 [helm](https://github. com/nats-io/k8s/tree/main/helm/charts/nats#jetstream)在 Kubernetes 上安装 NATS JetStream：
 
 ```bash
 helm repo add nats https://nats-io.github.io/k8s/helm/charts/
 helm install my-nats nats/nats
 ```
 
-This installs a single NATS server into the `default` namespace. To interact with NATS, find the service with: `kubectl get svc my-nats`.
+在`default` 命名空间安装单进程NATS服务。 要与NATS进行交互，请使用以下方法找到服务：`kubectl get svc my-nats`.
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Creating a JetStream KV bucket
+## 创建 JetStream KV 存储桶
 
-It is necessary to create a key value bucket, this can easily done via NATS CLI.
+有必要创建一个键值存储桶，这可以通过 NATS CLI 轻松完成。
 
 ```bash
 nats kv add <bucketName>
@@ -83,6 +83,6 @@ nats kv add <bucketName>
 - [Dapr组件的基本格式]({{< ref component-schema >}})
 - 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
 - [状态管理构建块]({{< ref state-management >}})
-- [JetStream Documentation](https://docs.nats.io/nats-concepts/jetstream)
-- [Key Value Store Documentation](https://docs.nats.io/nats-concepts/jetstream/key-value-store)
-- [NATS CLI](https://github.com/nats-io/natscli)
+- [JetStream 文档](https://docs.nats.io/nats-concepts/jetstream)
+- [键值对存储温度](https://docs.nats.io/nats-concepts/jetstream/key-value-store)
+- [NATCLI](https://github.com/nats-io/natscli)

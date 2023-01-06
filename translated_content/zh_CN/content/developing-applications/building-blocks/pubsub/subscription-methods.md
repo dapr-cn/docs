@@ -10,7 +10,7 @@ description: "Learn more about the methods by which Dapr allows you to subscribe
 
 Dapr applications can subscribe to published topics via two methods that support the same features: declarative and programmatic.
 
-| Subscription method                                                                  | 说明                                                                                                   |
+| 订阅方法                                                                                 | 说明                                                                                                   |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
 | [**Declarative**]({{< ref "subscription-methods.md#declarative-subscriptions" >}})   | Subscription is defined in an **external file**. 声明式方法会从您的代码中移除 Dapr 依赖，并允许现有的应用程序订阅 topics，而无需更改代码。 |
 | [**Programmatic**]({{< ref "subscription-methods.md#programmatic-subscriptions" >}}) | Subscription is defined in the **application code**. 编程方法在用户代码中实现订阅。                                 |
@@ -366,7 +366,7 @@ func main() {
 
 ## 下一步
 
-* Try out the [pub/sub Quickstart]({{< ref pubsub-quickstart.md >}})
+* 尝试 [发布/订阅快速入门]({{< ref pubsub-quickstart.md >}})
 * Follow: [How-To: Configure pub/sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
 * Learn more about [declarative and programmatic subscription methods]({{< ref subscription-methods >}}).
 * 了解 [Topic 作用域]({{< ref pubsub-scopes.md >}})

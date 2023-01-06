@@ -47,15 +47,15 @@ spec:
 
 | 字段                | 必填 | 详情                                    | 示例                                         |
 | ----------------- |:--:| ------------------------------------- | ------------------------------------------ |
-| hosts             | Y  | 主机的逗号分隔值                              | `"cassandra.cassandra.svc.cluster.local"`. |
-| port              | N  | 通信端口 默认值：`9042`                       | `"9042"`                                   |
-| username          | Y  | 数据库用户名。 无默认值                          | `"user"`                                   |
-| password          | Y  | 用户密码                                  | `"password"`                               |
-| consistency       | N  | 一致性值                                  | `"All"`, `"Quorum"`                        |
-| table             | N  | 表名称 默认值为 `"items"`                    | `"items"`, `"tab"`                         |
-| keyspace          | N  | 要使用的cassandra keyspace。 默认值为 `"dapr"` | `"dapr"`                                   |
-| protoVersion      | N  | 客户端的 proto 版本。 默认值为 `"4"`             | `"3"`, `"4"`                               |
-| replicationFactor | N  | 调用的副本因子。 默认值为 `"1"`                   | `"3"`                                      |
+| hosts             | 是  | 主机的逗号分隔值                              | `"cassandra.cassandra.svc.cluster.local"`. |
+| port              | 否  | 通信端口 默认值：`9042`                       | `"9042"`                                   |
+| username          | 是  | 数据库用户名。 无默认值                          | `"user"`                                   |
+| password          | 是  | 用户密码                                  | `"password"`                               |
+| consistency       | 否  | 一致性值                                  | `"All"`, `"Quorum"`                        |
+| table             | 否  | 表名称 默认值为 `"items"`                    | `"items"`, `"tab"`                         |
+| keyspace          | 否  | 要使用的cassandra keyspace。 默认值为 `"dapr"` | `"dapr"`                                   |
+| protoVersion      | 否  | 客户端的 proto 版本。 默认值为 `"4"`             | `"3"`, `"4"`                               |
+| replicationFactor | 否  | 调用的副本因子。 默认值为 `"1"`                   | `"3"`                                      |
 
 ## 配置 Cassandra
 

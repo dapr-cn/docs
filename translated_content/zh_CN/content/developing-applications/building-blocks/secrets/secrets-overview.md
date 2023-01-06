@@ -55,15 +55,15 @@ description: "机密管理 API 构建基块概述"
 
 ## Try out secrets management
 
-### Quickstarts and tutorials
+### 快速入门和教程
 
 Want to put the Dapr secrets management API to the test? Walk through the following quickstart and tutorials to see Dapr secrets in action:
 
-| Quickstart/tutorial                                                                            | 说明                                                                                                        |
+| 快速入门/教程                                                                                        | 说明                                                                                                        |
 | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | [Secrets management quickstart]({{< ref secrets-quickstart.md >}})                             | Retrieve secrets in the application code from a configured secret store using the secrets management API. |
 | [Secret Store tutorial](https://github.com/dapr/quickstarts/tree/master/tutorials/secretstore) | 演示使用Dapr Secrets API来访问密钥存储。                                                                              |
 
 ### Start managing secrets directly in your app
 
-Want to skip the quickstarts? Not a problem. You can try out the secret management building block directly in your application to retrieve and manage secrets. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the secrets management API starting with [the secrets how-to guide]({{< ref howto-secrets.md >}}).
+想跳过快速入门？ 没问题。 You can try out the secret management building block directly in your application to retrieve and manage secrets. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the secrets management API starting with [the secrets how-to guide]({{< ref howto-secrets.md >}}).

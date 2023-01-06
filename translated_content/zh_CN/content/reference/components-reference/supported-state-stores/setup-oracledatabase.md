@@ -2,16 +2,16 @@
 type: docs
 title: "Oracle Database"
 linkTitle: "Oracle Database"
-description: Detailed information on the Oracle Database state store component
+description: Oracle Database 状态存储组件的详细信息
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-oracledatabase/"
 ---
 
 ## 配置
 
-Create a component properties yaml file, for example called `oracle.yaml` (but it could be named anything ), paste the following and replace the `<CONNECTION STRING>` value with your connection string. The connection string is a standard Oracle Database connection string, composed as: `"oracle://user/password@host:port/servicename"` for example `"oracle://demo:demo@localhost:1521/xe"`.
+创建一个组件属性 yaml 文件，例如称为 `oracle.yaml` （但它可以命名为任何内容），粘贴以下内容并将 `<CONNECTION STRING>` 值替换为连接字符串。 连接字符串是标准的 Oracle 数据库连接字符串，由以下形式组成： `“oracle://user/password@host:port/servicename”` 例如 `“oracle://demo:demo@localhost:1521/xe”`。
 
-In case you connect to the database using an Oracle Wallet, you should specify a value for the `oracleWalletLocation` property, for example: `"/home/app/state/Wallet_daprDB/"`; this should refer to the local file system directory that contains the file `cwallet.sso` that is extracted from the Oracle Wallet archive file.
+如果您使用Oracle钱包连接到数据库，则应为 `oracleWalletLocation` 属性指定一个值，例如： `“/home/app/state/Wallet_daprDB/”`;这应该是指包含从 Oracle 钱包存档文件中提取的文件 `cwallet.sso` 的本地文件系统目录。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -36,18 +36,18 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                   | 必填 | 详情                                                                                                      | 示例                                                                                                                                                                                                                                                        |
-| -------------------- |:--:| ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| connectionString     | Y  | The connection string for Oracle Database                                                               | `"oracle://user/password@host:port/servicename"` for example `"oracle://demo:demo@localhost:1521/xe"` or for Autonomous Database `"oracle://states_schema:State12345pw@adb.us-ashburn-1.oraclecloud.com:1522/k8j2agsqjsw_daprdb_low.adb.oraclecloud.com"` |
-| oracleWalletLocation | N  | Location of the contents of an Oracle Wallet file (required to connect to Autonomous Database on OCI)   | `"/home/app/state/Wallet_daprDB/"`                                                                                                                                                                                                                        |
-| tableName            | N  | Name of the database table in which this instance of the state store records the data default `"STATE"` | `"MY_APP_STATE_STORE"`                                                                                                                                                                                                                                    |
+| 字段                   | 必填 | 详情                                  | 示例                                                                                                                                                                                                                                                        |
+| -------------------- |:--:| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| connectionString     | 是  | Oracle 数据库的连接字符串                    | `"oracle://user/password@host:port/servicename"` for example `"oracle://demo:demo@localhost:1521/xe"` or for Autonomous Database `"oracle://states_schema:State12345pw@adb.us-ashburn-1.oraclecloud.com:1522/k8j2agsqjsw_daprdb_low.adb.oraclecloud.com"` |
+| oracleWalletLocation | 否  | Oracle 钱包文件内容的位置（连接到 OCI 上的自治数据库需要） | `"/home/app/state/Wallet_daprDB/"`                                                                                                                                                                                                                        |
+| tableName            | 否  | 此状态存储实例记录默认数据数据库表的名称 `“STATE”`      | `"MY_APP_STATE_STORE"`                                                                                                                                                                                                                                    |
 
-## What Happens at Runtime?
-When the state store component initializes, it connects to the Oracle Database and checks if a table with the name specified with `tableName` exists. If it does not, it creates this table (with columns Key, Value, Binary_YN, ETag, Creation_Time, Update_Time, Expiration_time).
+## 运行时会发生什么？
+当状态存储组件初始化时，连接到Oracle数据库并检查`tableName`指定的表是否存在。 如果不存在，就创建这个表（使用Key, Value, Binary_YN, ETag, Creation_Time, Update_Time, Expiration_time列）。
 
-Every state entry is represented by a record in the database table. The `key` property provided in the request is used to determine the name of the object stored literally in the KEY column. The `value` is stored as the content of the object. Binary content is stored as Base64 encoded text. Each object is assigned a unique ETag value whenever it is created or updated.
+每个状态条目都由数据表中的一条记录表示。 在请求中提供属性`key`用来决定在KEY列中存储的对象的名称。 `value` 作为对象内容存储。 二进制内容存储为Base64编码文本。 每当创建或更新时，每个对象都会为分配一个唯一的 ETag 值。
 
-For example, the following operation
+例如，以下操作
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state \
@@ -60,24 +60,24 @@ curl -X POST http://localhost:3500/v1.0/state \
       ]'
 ```
 
-creates the following records in table STATE:
+在 STATE表 中创建以下记录：
 
 | KEY     | VALUE | CREATION_TIME       | BINARY_YN | ETAG                                 |
 | ------- | ----- | ------------------- | --------- | ------------------------------------ |
-| nihilus | darth | 2022-02-14T22:11:00 | N         | 79dfb504-5b27-43f6-950f-d55d5ae0894f |
+| nihilus | darth | 2022-02-14T22:11:00 | 否         | 79dfb504-5b27-43f6-950f-d55d5ae0894f |
 
 
-Dapr uses a fixed key scheme with *composite keys* to partition state across applications. For general states, the key format is: `App-ID||state key`. The Oracle Database state store maps this key in its entirety to the KEY column.
+Dapr使用固定键模式使用*composite keys* 去区分跨应用程序状态。 对于常规状态，关键格式为： `App-ID||state key`。 Oracle 数据库状态存储将此密钥完整映射到 KEY 列。
 
-You can easily inspect all state stored with SQL queries against the `tableName` table, for example the STATE table.
+您可以轻松地根据 ` tableName ` 表（例如 STATE 表）使用 SQL 查询存储的所有状态。
 
 
-## Time To Live and State Expiration
-The Oracle Database state store component supports Dapr's Time To Live logic that ensures that state cannot be retrieved after it has expired. See [this How To on Setting State Time To Live]({{< ref "state-store-ttl.md" >}}) for details.
+## 生存时间和状态过期
+Oracle 数据库状态存储组件支持 Dapr 的生存时间逻辑，该逻辑可确保状态过期后无法检索。 有关详细信息，请参阅 [如何设置状态生存时间]({{< ref "state-store-ttl.md" >}})。
 
-The Oracle Database does not have native support for a Time-To-Live setting. The implementation in this component uses a column called `EXPIRATION_TIME` to hold the time after which the record is considered *expired*. The value in this column is set only when a TTL was specified in a `Set` request. It is calculated as the current UTC timestamp with the TTL period added to it. When state is retrieved through a call to `Get`, this component checks if it has the `EXPIRATION_TIME` set and if so, it checks whether it is in the past. In that case, no state is returned.
+Oracle 数据库没有对设置生存时间的原生支持。 此组件中的实现是使用名为 `EXPIRATION_TIME` 的列来保存一个时间，超过该时间后记录被视为 * 过期 *。 该列的值只有在`Set` 请求指定了TTL时设置。 它以当前UTC时间戳来计算，并添加了TTL周期。 当通过调用</code>Get`检索状态时，此组件会检查它是否设置了 <code>EXPIRATION_TIME` ，如果是，则检查它是否是过期的。 在这种情况下，不会返回任何状态。
 
-The following operation :
+以下操作：
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state \
@@ -91,15 +91,15 @@ curl -X POST http://localhost:3500/v1.0/state \
       ]'
 ```
 
-creates the following object:
+创建以下对象：
 
 | KEY       | VALUE     | CREATION_TIME       | EXPIRATION_TIME     | BINARY_YN | ETAG                                 |
 | --------- | --------- | ------------------- | ------------------- | --------- | ------------------------------------ |
-| temporary | ephemeral | 2022-03-31T22:11:00 | 2022-03-31T22:13:00 | N         | 79dfb504-5b27-43f6-950f-d55d5ae0894f |
+| temporary | ephemeral | 2022-03-31T22:11:00 | 2022-03-31T22:13:00 | 否         | 79dfb504-5b27-43f6-950f-d55d5ae0894f |
 
-with the EXPIRATION_TIME set to a timestamp 2 minutes (120 seconds) (later than the CREATION_TIME)
+将EXPIRATION_TIME设置为一个时间戳 2 分钟（120 秒）（晚于CREATION_TIME）
 
-Note that expired state is not removed from the state store by this component. An application operator may decide to run a periodic job that does a form of garbage collection in order to explicitly remove all state records with an EXPIRATION_TIME in the past. The SQL statement for collecting the expired garbage records:
+请注意，此组件不会从状态存储中删除过期状态。 应用程序operator可能决定运行执行某种形式的垃圾回收的定时任务，以便显式删除所有具有EXPIRATION_TIME并且已经过期的状态记录。 用于收集过期垃圾记录的 SQL 语句：
    ```SQL
     delete dapr_state 
     where  expiration_time < SYS_EXTRACT_UTC(SYSTIMESTAMP);
@@ -107,55 +107,55 @@ Note that expired state is not removed from the state store by this component. A
 
 ## 并发（Concurrency）
 
-Concurrency in the Oracle Database state store is achieved by using `ETag`s. Each piece of state recorded in the Oracle Database state store is assigned a unique ETag - a generated, unique string stored in the column ETag - when it is created or updated. Note: the column UPDATE_TIME is also updated whenever a `Set` operation is performed on an existing record.
+Oracle 数据库状态存储中的并发是通过使用 `ETag`实现的。 在创建或更新 Oracle 数据库状态存储中记录的每个状态片段时，都会为其分配一个唯一的 ETag（存储在列 ETag 中的生成的唯一字符串）。 注： 每当对现有记录执行 `Set` 操作时，也会更新UPDATE_TIME列。
 
-Only when the `Set` and `Delete` requests for this state store specify the *FirstWrite* concurrency policy, then the request needs to provide the actual ETag value for the state to be written or removed for the request to be successful. If a different or no concurrency policy is specified, then no check is performed on the ETag value.
+仅当对该状态存储的 `Set` 和 `Delete` 请求指定 *FirstWrite* 并发策略时，请求需要提供实际的 ETag 值，以便请求成功写入或删除状态。 如果指定了不同的并发策略或未指定并发策略，则不会对 ETag 值执行检查。
 
-## Consistency
+## 一致性
 
-The Oracle Database state store supports Transactions. Multiple `Set` and `Delete` commands can be combined in a request that is processed as a single, atomic transaction.
+Oracle 数据库状态存储支持事务。 多个 `Set` 和 `Delete`命令可以合并到一个单个原子事务处理的请求中。
 
-Note: simple `Set` and `Delete` operations are a transaction on their own; when a `Set` or `Delete` requests returns an HTTP-20X result, the database transaction has been committed successfully.
+注意：简单的 `Set` 和 `Delete` 操作本身就是一个事务; 当 `Set` 或 `Delete` 请求返回 HTTP-20X 结果时，数据库事务已成功提交。
 
-## Query
+## 查询
 
-Oracle Database state store does not currently support the Query API.
+Oracle 数据库状态存储当前不支持查询 API。
 
 
 
-## Create an Oracle Database and User Schema
+## 创建 Oracle 数据库和用户架构
 
 {{< tabs "Self-Hosted" "Autonomous Database on OCI">}}
 
 {{% codetab %}}
 
-1. Run an instance of Oracle Database. You can run a local instance of Oracle Database in Docker CE with the following command - or of course use an existing Oracle Database:
+1. 运行 Oracle 数据库的实例。 您可以使用以下命令在Docker CE中运行Oracle数据库的本地实例 - 或者当然可以使用现有的Oracle数据库：
      ```bash
      docker run -d -p 1521:1521 -e ORACLE_PASSWORD=TheSuperSecret1509! gvenzl/oracle-xe
      ```
-    This example does not describe a production configuration because it sets the password for users `SYS` and `SYSTEM` in plain text.
+    此示例不描述生产配置，因为它为 用户`SYS` 和`SYSTEM` 以纯文本格式设置密码。
 
-     When the output from the conmmand indicates that the container is running, learn the container id using the `docker ps` command. Then start a shell session using:
+     当 conmmand 的输出指示容器正在运行时，请使用 `docker ps` 命令查询容器 Id。 然后使用以下命令启动 shell 会话：
      ```bash
      docker exec -it <container id> /bin/bash
      ```
-     and subsequently run the SQL*Plus client, connecting to the database as the SYS user:
+     并随后运行 SQL*Plus 客户端，以 SYS 用户身份连接到数据库：
      ```bash
      sqlplus sys/TheSuperSecret1509! as sysdba
      ```
 
-2. Create a database schema for state data. Create a new user schema - for example called *dapr* - for storing state data. Grant this user (schema) privileges for creating a table and storing data in the associated tablespace.
+2. 为状态数据创建数据库架构。 创建一个新的用户架构（例如，称为 *dapr* ）来存储状态数据。 授予此用户（schema）创建表和在关联的表空间中存储数据的特权。
 
-    To create a new user schema in Oracle Database, run the following SQL command:
+    若要在 Oracle 数据库中创建新的用户架构，请运行以下 SQL 命令：
 
     ```SQL
     create user dapr identified by DaprPassword4239 default tablespace users quota unlimited on users;
     grant create session, create table to dapr;
     ```
 
-3. (optional) Create table for storing state records. The Oracle Database state store component checks if the table for storing state already exists in the database user schema it connects to and if it does not, it creates that table. However, instead of having the Oracle Database state store component create the table for storing state records at run time, you can also create the table in advance. That gives you - or the DBA for the database - more control over the physical configuration of the table. This also means you do not have to grant the *create table* privilege to the user schema.
+3. （可选）创建用于存储状态记录的表。 Oracle 数据库状态存储组件检查用于存储状态的表是否已存在于它连接到的数据库用户架构中，如果没有，它将创建该表。 但是，您也可以提前创建表，而不是让 Oracle 数据库状态存储组件在运行时创建用于存储状态记录的表。 这使您（或数据库的 DBA）能够更好地控制表的物理配置。 这也意味着您不必给用户架构授予 *create table* 权限。
 
-    Run the following DDL statement to create the table for storing the state in the *dapr* database user schema :
+    运行以下 DDL 语句以创建用于在 *dapr* 数据库用户架构中存储状态的表：
 
     ```SQL
     CREATE TABLE dapr_state (
@@ -172,22 +172,22 @@ Oracle Database state store does not currently support the Query API.
 
 {{% codetab %}}
 
-1. Create a free (or paid for) Autonomous Transaction Processing (ATP) or ADW (Autonomous Data Warehouse) instance on Oracle Cloud Infrastructure, as described in the [OCI documentation for the always free autonomous database](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/autonomous-always-free.html#GUID-03F9F3E8-8A98-4792-AB9C-F0BACF02DC3E).
+1. 在 Oracle 云基础设施上创建免费（或付费）自治事务处理 （ATP） 或 ADW（自治数据仓库）实例，如 [OCI 文档适用于始终免费的自治数据库](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/autonomous-always-free.html#GUID-03F9F3E8-8A98-4792-AB9C-F0BACF02DC3E)文档中所述。
 
-    You need to provide the password for user ADMIN. You use this account (initially at least) for database administration activities. You can work both in the web based SQL Developer tool, from its desktop counterpart or from any of a plethora of database development tools.
+    您需要为用户 ADMIN 提供密码。 您使用将此账户用于数据库管理活动（至少在开始时）。 您可以在基于Web的SQL Developer工具中，从其桌面对应工具或从大量数据库开发工具中的任何一个中工作。
 
-2. Create a schema for state data. Create a new user schema in the Oracle Database for storing state data - for example using the ADMIN account. Grant this new user (schema) privileges for creating a table and storing data in the associated tablespace.
+2. 为状态数据创建架构。 在 Oracle 数据库中创建新的用户架构以存储状态数据 - 例如，使用 ADMIN 账户。 授予此新用户（schema）创建表和在关联的表空间中存储数据的特权。
 
-    To create a new user schema in Oracle Database, run the following SQL command:
+    若要在 Oracle 数据库中创建新的用户架构，请运行以下 SQL 命令：
 
     ```SQL
     create user dapr identified by DaprPassword4239 default tablespace users quota unlimited on users;
     grant create session, create table to dapr;
     ```
 
-3. (optional) Create table for storing state records. The Oracle Database state store component checks if the table for storing state already exists in the database user schema it connects to and if it does not, it creates that table. However, instead of having the Oracle Database state store component create the table for storing state records at run time, you can also create the table in advance. That gives you - or the DBA for the database - more control over the physical configuration of the table. This also means you do not have to grant the *create table* privilege to the user schema.
+3. （可选）创建用于存储状态记录的表。 Oracle 数据库状态存储组件检查用于存储状态的表是否已存在于它连接到的数据库用户架构中，如果没有，它将创建该表。 但是，您也可以提前创建表，而不是让 Oracle 数据库状态存储组件在运行时创建用于存储状态记录的表。 这使您（或数据库的 DBA）能够更好地控制表的物理配置。 这也意味着您不必给用户架构授予 *create table* 权限。
 
-    Run the following DDL statement to create the table for storing the state in the *dapr* database user schema :
+    运行以下 DDL 语句以创建用于在 *dapr* 数据库用户架构中存储状态的表：
 
     ```SQL
     CREATE TABLE dapr_state (

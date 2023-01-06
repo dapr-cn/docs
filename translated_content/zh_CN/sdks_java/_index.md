@@ -3,25 +3,25 @@ type: docs
 title: "Dapr Java SDK"
 linkTitle: "Java"
 weight: 1000
-description: Java SDK packages for developing Dapr applications
+description: 开发 Dapr 应用程序的 Java SDK 包
 ---
 
 ## 前提
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- JDK 11 or above - the published jars are compatible with Java 8:
+- JDK 11 或更高版本 - 已发布的 jar 与 Java 8 兼容：
     - [AdoptOpenJDK 11 - LTS](https://adoptopenjdk.net/)
     - [Oracle's JDK 15](https://www.oracle.com/java/technologies/javase-downloads.html)
     - [Oracle's JDK 11 - LTS](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
     - [OpenJDK](https://openjdk.java.net/)
-- Install one of the following build tools for Java:
+- 安装以下 Java 构建工具之一：
     - [Maven 3.x](https://maven.apache.org/install.html)
     - [Gradle 6.x](https://gradle.org/install/)
 
-## Importing Dapr's Java SDK
+## 导入 Dapr 的 Java SDK
 
-For a Maven project, add the following to your `pom.xml` file:
+对于 Maven 项目，请将以下内容添加到 `pom.xml` 文件中：
 ```xml
 <project>
   ...
@@ -51,7 +51,7 @@ For a Maven project, add the following to your `pom.xml` file:
 </project>
 ```
 
-For a Gradle project, add the following to your `build.gradle` file:
+对于 Gradle 项目，请将以下内容添加到 `build.gradle` 文件中：
 
 ```java
 dependencies {
@@ -77,7 +77,7 @@ dependencies {
 
 ## 构建块
 
-The Java SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
+Java SDK 允许您与的所有 [Dapr 构建块]({{< ref building-blocks >}}) 进行交互。
 
 ### 调用服务
 
@@ -102,7 +102,7 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 ```
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/invoke) for code samples and instructions to try out service invocation
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/invoke)，获取代码示例和说明，以试用服务调用。
 
 ### 保存 & 获取 应用程序状态
 
@@ -125,9 +125,9 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 ```
 
 - 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/state) for code samples and instructions to try out state management
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/state)，获取代码示例和说明，以试用状态管理。
 
-### Publish & subscribe to messages
+### 发布 & 订阅消息
 
 ##### 发布消息
 
@@ -142,7 +142,7 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 }
 ```
 
-##### Subscribe to messages
+##### 订阅消息
 
 ```java
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -175,7 +175,7 @@ public class SubscriberController {
 ```
 
 - 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/pubsub/http) for code samples and instructions to try out pub/sub
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/pubsub/http)，获取代码示例和说明，以试用发布订阅。
 
 ### 与输出绑定交互
 
@@ -193,7 +193,7 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 ```
 
 - 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/bindings/http) for code samples and instructions to try out output bindings
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/bindings/http)，获取代码示例和说明，以试用输出绑定。
 
 ### 检索密钥
 
@@ -210,10 +210,10 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 ```
 
 - 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/secrets) for code samples and instructions to try out retrieving secrets
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/secrets)，获取代码示例和说明，以试用秘密检索。
 
-### 参与者
-参与者是孤立的独立计算单元，具有单线程执行。 Dapr provides an actor implementation based on the [Virtual Actor pattern](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/), which provides a single-threaded programming model and where actors are garbage collected when not in use. With Dapr's implementaiton, you write your Dapr actors according to the Actor model, and Dapr leverages the scalability and reliability that the underlying platform provides.
+### Actors
+参与者是孤立的独立计算单元，具有单线程执行。 Dapr 提供了一个基于 [虚拟 Actor 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/)的 actor 实现，它提供了一个单线程编程模型，其中 actor 在不使用时会进行垃圾回收。 通过 Dapr 的实现，您可以根据 Actor 模型编写 Dapr Actor，而 Dapr 则利用底层平台提供的可扩展性和可靠性。
 
 ```java
 import io.dapr.actors.ActorMethod;
@@ -235,8 +235,8 @@ public interface DemoActor {
 }
 ```
 
-- For a full guide on actors visit [How-To: Use virtual actors in Dapr]({{< ref howto-actors.md >}}).
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors) for code samples and instructions to try actors
+- 有关 Actor 的完整指南，请访问 [操作方法：在 Dapr 中使用 Actor ]({{< ref howto-actors.md >}})。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors)，获取代码示例和说明，以试用 Actor。
 
 ### 获取 & 订阅应用程序配置
 
@@ -340,4 +340,4 @@ try (DaprClient client = builder.build(); DaprPreviewClient previewClient = buil
 - Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/querystate) for complete code sample.
 
 ## 相关链接
-- [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples)
+- [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples)
