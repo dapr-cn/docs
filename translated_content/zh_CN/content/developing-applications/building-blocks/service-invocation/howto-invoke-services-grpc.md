@@ -1,25 +1,25 @@
 ---
 type: docs
-title: "How-To: Invoke services using gRPC"
-linkTitle: "How-To: Invoke with gRPC"
+title: "操作方法：使用 gRPC 调用服务"
+linkTitle: "操作方法：使用 gRPC 调用"
 description: "入门指南指导如何使用 Dapr 服务在分布式应用程序中调用其它服务"
 weight: 3000
 ---
 
-This article describe how to use Dapr to connect services using gRPC. By using Dapr's gRPC proxying capability, you can use your existing proto based gRPC services and have the traffic go through the Dapr sidecar. Doing so yields the following [Dapr service invocation]({{< ref service-invocation-overview.md >}}) benefits to developers:
+本文介绍如何使用 Dapr 通过 gRPC 连接服务。 通过使用 Dapr 的 gRPC 代理功能，您可以使用现有的基于 proto 的 gRPC 服务，并让流量通过 Dapr sidecar。 这样做可以为开发人员带来以下 [Dapr 服务调用]({{< ref service-invocation-overview.md >}}) 好处：
 
-1. Mutual authentication
+1. 双向认证
 2. 追踪
 3. 度量
-4. Access lists
-5. Network level resiliency
-6. API token based authentication
+4. 访问列表
+5. 网络层弹性
+6. 基于 API 令牌的身份验证
 
-## Step 1: Run a gRPC server
+## 步骤 1：运行 gRPC 服务器
 
-The following example is taken from the [hello world grpc-go example](https://github.com/grpc/grpc-go/tree/master/examples/helloworld).
+以下示例摘自 [hello world grpc-go 示例](https://github.com/grpc/grpc-go/tree/master/examples/helloworld)。
 
-Note this example is in Go, but applies to all programming languages supported by gRPC.
+请注意，此示例在 Go 中，但适用于 gRPC 支持的所有编程语言。
 
 ```go
 package main
@@ -62,19 +62,19 @@ func main() {
 }
 ```
 
-This Go app implements the Greeter proto service and exposes a `SayHello` method.
+此 Go 应用程序实现了Greeter proto 服务，并暴露了 `sayHello` 方法 。
 
-### Run the gRPC server using the Dapr CLI
+### 使用 Dapr CLI 运行 gRPC 服务器
 
 ```bash
 dapr run --app-id server --app-port 50051 -- go run main.go
 ```
 
-Using the Dapr CLI, we're assigning a unique id to the app, `server`, using the `--app-id` flag.
+使用 Dapr CLI，我们使用`--app-id`标志，为应用程序、`server` 分配一个唯一的 id。
 
-## Step 2: Invoke the service
+## 步骤 2: 调用服务
 
-The following example shows you how to discover the Greeter service using Dapr from a gRPC client. Notice that instead of invoking the target service directly at port `50051`, the client is invoking its local Dapr sidecar over port `50007` which then provides all the capabilities of service invocation including service discovery, tracing, mTLS and retries.
+以下示例演示如何从 gRPC 客户端使用 Dapr 发现 Greeter 服务。 请注意，客户端不是直接在端口 `50051` 调用目标服务，而是通过端口 `50007` 调用其本地 Dapr sidecar，然后提供服务调用的所有功能，包括服务发现、跟踪、mTLS 和重试。
 
 ```go
 package main
@@ -115,13 +115,13 @@ func main() {
 }
 ```
 
-The following line tells Dapr to discover and invoke an app named `server`:
+下面这行告诉 Dapr 发现并调用名为 `server` 的应用：
 
 ```go
 ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server")
 ```
 
-All languages supported by gRPC allow for adding metadata. Here are a few examples:
+gRPC 支持的所有语言都允许添加元数据。 以下是几个例子：
 
 {{< tabs Java Dotnet Python JavaScript Ruby "C++">}}
 
@@ -179,17 +179,17 @@ context.AddMetadata("dapr-app-id", "Darth Sidious");
 
 {{< /tabs >}}
 
-### Run the client using the Dapr CLI
+### 使用 Dapr CLI 运行客户端
 
 ```bash
 dapr run --app-id client --dapr-grpc-port 50007 -- go run main.go
 ```
 
-### View telemetry
+### 查看遥测
 
-If you're running Dapr locally with Zipkin installed, open the browser at `http://localhost:9411` and view the traces between the client and server.
+如果您在本地运行 Dapr 并安装了 Zipkin，请在 `http://localhost:9411` 打开浏览器并查看客户端和服务器之间的跟踪。
 
-## Deploying to Kubernetes
+## 部署到 Kubernetes
 
 Set the following Dapr annotations on your deployment:
 
@@ -219,13 +219,13 @@ spec:
 ```
 *如果应用程序使用 SSL 连接，那么可以使用 `app-ssl: "true"` 注解 (完整列表 [此处]({{< ref arguments-annotations-overview.md >}})) 告知 Dapr 在不安全的 SSL 连接上调用应用程序。*
 
-The `dapr.io/app-protocol: "grpc"` annotation tells Dapr to invoke the app using gRPC.
+`dapr.io/app-protocol："grpc"` 该语句告诉 Dapr 使用 gRPC 调用应用。
 
 ### 命名空间
 
 当运行于[支持命名空间]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})的平台时，在您的 app ID 中包含命名空间：`myApp.production`
 
-For example, invoking the gRPC server on a different namespace:
+例如，在不同的命名空间上调用 gRPC 服务器：
 
 ```go
 ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server.production")
@@ -233,20 +233,20 @@ ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server.production")
 
 有关名称空间的更多信息，请参阅 [跨命名空间 API]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) 。
 
-## Step 3: View traces and logs
+## 步骤 3：跟踪和日志
 
 上面的示例显示了如何直接调用本地或 Kubernetes 中运行的其他服务。 Dapr 输出指标、跟踪和日志记录信息，允许您可视化服务之间的调用图、日志错误和可选地记录有效负载正文。
 
 有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 篇文章。
 
- ## Related Links
+ ## 相关链接
 
 * [服务调用概述]({{< ref service-invocation-overview.md >}})
 * [服务调用 API 规范]({{< ref service_invocation_api.md >}})
-* [gRPC proxying community call video](https://youtu.be/B_vkXqptpXY?t=70)
+* [gRPC 代理社区会议视频](https://youtu.be/B_vkXqptpXY?t=70)
 
 ## 社区示例
-Watch this [video](https://youtu.be/B_vkXqptpXY?t=69) on how to use Dapr's gRPC proxying capability:
+观看此 [视频](https://youtu.be/B_vkXqptpXY?t=69) ，了解如何使用 Dapr 的 gRPC 代理功能：
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/B_vkXqptpXY?start=69" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

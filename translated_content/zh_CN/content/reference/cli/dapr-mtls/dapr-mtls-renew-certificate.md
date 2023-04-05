@@ -1,13 +1,13 @@
 ---
 type: docs
-title: "mtls renew certificate CLI command reference"
-linkTitle: "mtls renew certificate"
-description: "Detailed information on the mtls renew certificate CLI command"
+title: "mtls 续订证书 CLI 命令参考"
+linkTitle: "mtls 续费证书"
+description: "有关 mtls 续订证书 CLI 命令的详细信息"
 weight: 3000
 ---
 
 ### 说明
-This command can be used to renew expiring Dapr certificates. For example the Dapr Sentry service can generate default root and issuer certificates used by applications. For more information see [secure Dapr to Dapr communication]({{< ref "#secure-dapr-to-dapr-communication" >}})
+此命令可用于续订即将过期的 Dapr 证书。 例如，Dapr Sentry 服务可以生成应用程序使用的默认根证书和颁发者证书。 有关详细信息，请参阅 [ Dapr 到 Dapr安全通信]({{< ref "#secure-dapr-to-dapr-communication" >}})
 
 ### 支持的平台
 
@@ -21,52 +21,52 @@ dapr mtls renew-certificate [flags]
 
 ### 参数
 
-| Name                          | 环境变量 | 默认值      | 说明                                                                                           |
-| ----------------------------- | ---- | -------- | -------------------------------------------------------------------------------------------- |
-| `--help`, `-h`                |      |          | help for renew-certificate                                                                   |
-| `--kubernetes`, `-k`          |      | `false`  | supprted platform|                                                                           |
-| `--valid-until`               |      | 365 days | Validity for newly created certificates                                                      |
-| `--restart`                   |      | false    | Restarts Dapr control plane services (Sentry service, Operator service and Placement server) |
-| `--timeout`                   |      | 300 sec  | The timeout for the certificate renewal process                                              |
-| `--ca-root-certificate`       |      |          | File path to user provided PEM root certificate                                              |
-| `--issuer-public-certificate` |      |          | File path to user provided PEM issuer certificate                                            |
-| `--issuer-private-key`        |      |          | File path to user provided PEM issue private key                                             |
-| `--private-key`               |      |          | User provided root.key file which is used to generate root certificate                       |
+| 名称                            | 环境变量 | 默认值     | 说明                                                |
+| ----------------------------- | ---- | ------- | ------------------------------------------------- |
+| `--help`, `-h`                |      |         | 续订证书的帮助                                           |
+| `--kubernetes`, `-k`          |      | `false` | 支持平台                                              |
+| `--valid-until`               |      | 365 天   | 新创建的证书的有效期                                        |
+| `--restart`                   |      | false   | 重新启动 Dapr 控制平面服务（Sentry服务、Operator服务和 Placemen服务） |
+| `--timeout`                   |      | 300 秒   | 证书续订进程的超时时间                                       |
+| `--ca-root-certificate`       |      |         | 用户提供的 PEM 根证书的文件路径                                |
+| `--issuer-public-certificate` |      |         | 用户提供的 PEM 颁发者证书的文件路径                              |
+| `--issuer-private-key`        |      |         | 用户提供的 PEM 颁发私钥的文件路径                               |
+| `--private-key`               |      |         | 用户提供的root.key文件，用于生成根证书                           |
 
 ### 示例
 
-#### Renew certificates by generating brand new certificates
-Generates new root and issuer certificates for the Kubernetes cluster with a default validity of 365 days. The certificates are not applied to the Dapr control plane.
+#### 通过生成全新的证书续订证书
+为 Kubernetes 集群生成新的根证书和颁发者证书，默认有效期为 365 天。 证书不应用于 Dapr 控制平面。
 ```bash
 dapr mtls renew-certificate -k
 ```
-Generates new root and issuer certificates for the Kubernetes cluster with a default validity of 365 days and restarts the Dapr control plane services.
+为 Kubernetes 集群生成新的根证书和颁发者证书，默认有效期为 365 天，并重新启动 Dapr 控制平面服务。
 ```bash
 dapr mtls renew-certificate -k --restart
 ```
-Generates new root and issuer certificates for the Kubernetes cluster with a given validity time.
+为 Kubernetes 集群生成具有给定有效期的新根证书和颁发者证书。
 ```bash
 dapr mtls renew-certificate -k --valid-until <no of days>
 ```
-Generates new root and issuer certificates for the Kubernetes cluster with a given validity time and restarts the Dapr control place services.
+为 Kubernetes 集群生成具有给定有效期的新根证书和颁发者证书，并重新启动 Dapr 控制平面服务。
 ```bash
 dapr mtls renew-certificate -k --valid-until <no of days> --restart
 ```
-#### Renew certificate by using user provided certificates
-Rotates certificates for the Kubernetes cluster with the provided ca.pem, issuer.pem and issuer.key file paths and restarts the Dapr control plane services
+#### 使用用户提供的证书续订证书
+使用提供的 ca.pem、issuer.pem 和issuer.key 文件路径，轮换 Kubernetes 集群的证书并重新启动 Dapr 控制平面服务
 ```bash
 dapr mtls renew-certificate -k --ca-root-certificate <ca.pem> --issuer-private-key <issuer.key> --issuer-public-certificate <issuer.pem> --restart
 ```
-Rotates certificates for the Kubernetes cluster with the provided ca.pem, issuer.pem and issuer.key file paths.
+使用提供的 ca.pem、issuer.pem 和 issuer.key文件路径轮换 Kubernetes 集群的证书。
 ```bash
 dapr mtls renew-certificate -k --ca-root-certificate <ca.pem> --issuer-private-key <issuer.key> --issuer-public-certificate <issuer.pem>
 ```
-#### Renew certificates by generating brand new certificates using the provided root private key
-Uses existing private root.key to generate new root and issuer certificates for the Kubernetes cluster with a given validity time for created certs.
+#### 通过使用提供的根私有秘钥生成全新的证书来续订证书
+使用现有的私有 root.key为 Kubernetes 集群生成新的根证书和颁发者证书，并为创建的证书提供给定的有效期。
 ```bash
 dapr mtls renew-certificate -k --private-key myprivatekey.key --valid-until <no of days>
 ```
-Uses the existing private root.key to generate new root and issuer certificates for the Kubernetes cluster.
+使用现有的root.key为 Kubernetes 集群生成新的根证书和颁发者证书。
 ```bash
 dapr mtls renew-certificate -k --private-key myprivatekey.key
 ```

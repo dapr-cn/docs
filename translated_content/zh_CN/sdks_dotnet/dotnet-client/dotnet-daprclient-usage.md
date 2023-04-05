@@ -8,7 +8,7 @@ description: 使用 DaprClient 的基本提示和建议
 
 ## 生命周期管理
 
-A `DaprClient` holds access to networking resources in the form of TCP sockets used to communicate with the Dapr sidecar. `DaprClient` 实现 `IDisposable` 以支持主动的资源清理。
+`DaprClient` 能够以TCP 套接字的形式访问网络资源，与 Dapr sidecar 通信。 `DaprClient` 实现 `IDisposable` 以支持主动的资源清理。
 
 为了获得最佳性能，请创建一个`DaprClient`的单一长期实例，并在整个应用程序中提供对该共享实例的访问权限。 `DaprClient` 实例是线程安全的并且允许共享的。
 
@@ -98,21 +98,18 @@ await client.SaveStateAsync("mystatestore", "mykey", widget);
 考虑一下当你尝试使用 `Widget` 的派生类型时会发生什么。
 
 ```C#
-public class Widget
-{
-    public string Color { get; set; }
-}
-
-public class SuperWidget : Widget
-{
-    public bool HasSelfCleaningFeature { get; set; }
-}
-...
+在这个例子中，我们使用的是 <code>SuperWidget</code> ，但变量的声明类型是 <code>Widget</code>。
 
 // Storing a SuperWidget value as JSON in the state store
 Widget widget = new SuperWidget() { Color = "Green", HasSelfCleaningFeature = true, };
 await client.SaveStateAsync("mystatestore", "mykey", widget);
 ```
+ ，但变量的声明类型是 Widget。
+
+// Storing a SuperWidget value as JSON in the state store
+Widget widget = new SuperWidget() { Color = "Green", HasSelfCleaningFeature = true, };
+await client.SaveStateAsync("mystatestore", "mykey", widget);
+</code>
 
 在这个例子中，我们使用的是 `SuperWidget` ，但变量的声明类型是 `Widget`。 由于JSON序列化器的行为是由声明的类型决定的，所以它只看到一个简单的 `Widget`，并将保存`{ "color": "Green" }`，而不是`{ "color": "Green", "hasSelfCleaningFeature": true }`。
 

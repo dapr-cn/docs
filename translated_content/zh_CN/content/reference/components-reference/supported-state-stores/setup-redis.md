@@ -46,7 +46,7 @@ spec:
 {{% /alert %}}
 
 
-If you wish to use Redis as an actor store, append the following to the yaml.
+如果您想要使用 RethinkDB 作为 Actor 存储，请在 yaml 上附上以下内容。
 
 ```yaml
   - name: actorStateStore
@@ -55,36 +55,36 @@ If you wish to use Redis as an actor store, append the following to the yaml.
 
 ## 元数据字段规范
 
-| 字段                    | 必填 | 详情                                                                                                                                                                                                         | 示例                                                              |
-| --------------------- |:--:| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| redisHost             | Y  | Redis的连接地址                                                                                                                                                                                                 | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
-| redisPassword         | Y  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                                                                                                                                      | `""`, `"KeFg23!"`                                               |
-| redisUsername         | N  | Redis 主机的用户名。 默认为空. 确保您的 redis 服务器版本为 6 或更高版本，并且已正确创建 acl 规则。                                                                                                                                              | `""`, `"default"`                                               |
-| consumerID            | N  | 消费组 ID                                                                                                                                                                                                     | `"mygroup"`                                                     |
-| enableTLS             | N  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                                                                                                                                                           | `"true"`, `"false"`                                             |
-| maxRetries            | N  | 放弃前的最大重试次数。 默认值为 `3`。                                                                                                                                                                                      | `5`, `10`                                                       |
-| maxRetryBackoff       | N  | 每次重试之间的最小回退。 默认值为 2</code> 秒 `; <code>"-1"` 禁用回退。                                                                                                                                                       | `3000000000`                                                    |
-| failover              | N  | 已启用故障转移配置的属性。 需要设置 sentinalMasterName。 redisHost 应该是哨兵主机地址。 请参阅 [Redis Sentinel 文档](https://redis.io/docs/manual/sentinel/). 默认值为 `"false"`                                                                | `"true"`, `"false"`                                             |
-| sentinelMasterName    | N  | 哨兵主名称。 请参阅 [Redis Sentinel 文档](https://redis.io/docs/manual/sentinel/)                                                                                                                                     | `""`,  `"127.0.0.1:6379"`                                       |
-| redeliverInterval     | N  | 检查待处理消息到重发的间隔。 默认为 `"60s"`. `"0"` 禁用重发。                                                                                                                                                                    | `"30s"`                                                         |
-| processingTimeout     | N  | 在尝试重新发送消息之前必须等待的时间。 默认为 `"15s"`。 `"0"` 禁用重发。                                                                                                                                                               | `"30s"`                                                         |
-| redisType             | N  | Redis 的类型。 有两个有效的值，一个是 `"node"` 用于单节点模式，另一个是 `"cluster"` 用于 redis 集群模式。 默认为 `"node"`。                                                                                                                      | `"cluster"`                                                     |
-| redisDB               | N  | 连接到 redis 后选择的数据库。 如果 `"redisType"` 是 `"cluster "` 此选项被忽略。 默认值为 `"0"`.                                                                                                                                     | `"0"`                                                           |
-| redisMaxRetries       | N  | Alias for `maxRetries`. If both values are set `maxRetries` is ignored.                                                                                                                                    | `"5"`                                                           |
-| redisMinRetryInterval | N  | 每次重试之间 redis 命令的最小回退时间。 默认值为 `"8ms"`;  `"-1"` 禁用回退。                                                                                                                                                        | `"8ms"`                                                         |
-| redisMaxRetryInterval | N  | Alias for `maxRetryBackoff`. If both values are set `maxRetryBackoff` is ignored.                                                                                                                          | `"5s"`                                                          |
-| dialTimeout           | N  | 建立新连接的拨号超时。 默认为 `"5s"`。                                                                                                                                                                                    | `"5s"`                                                          |
-| readTimeout           | N  | 套接字读取超时。 如果达到，redis命令将以超时的方式失败，而不是阻塞。 默认为 `"3s"`, `"-1"` 表示没有超时。                                                                                                                                           | `"3s"`                                                          |
-| writeTimeout          | N  | 套接字写入超时。 如果达到，redis命令将以超时的方式失败，而不是阻塞。 默认值为 readTimeout。                                                                                                                                                    | `"3s"`                                                          |
-| poolSize              | N  | 最大套接字连接数。 默认是每个CPU有10个连接，由 runtime.NumCPU 所述。                                                                                                                                                              | `"20"`                                                          |
-| poolTimeout           | N  | 如果所有连接都处于繁忙状态，客户端等待连接时间，超时后返回错误。 默认值为 readTimeout + 1 秒。                                                                                                                                                   | `"5s"`                                                          |
-| maxConnAge            | N  | 客户端退出（关闭）连接时的连接期限。 默认值是不关闭过期的连接。                                                                                                                                                                           | `"30m"`                                                         |
-| minIdleConns          | N  | 保持开放的最小空闲连接数，以避免创建新连接带来的性能下降。 默认值为 `"0"`.                                                                                                                                                                  | `"2"`                                                           |
-| idleCheckFrequency    | N  | 空闲连接后的空闲检查频率。 默认值为 `"1m"`。 `"-1"` 禁用空闲连接回收。                                                                                                                                                                | `"-1"`                                                          |
-| idleTimeout           | N  | 客户端关闭空闲连接的时间量。 应小于服务器的超时。 默认值为 `"5m"`。 `"-1"` 禁用空闲超时检查。                                                                                                                                                    | `"10m"`                                                         |
-| actorStateStore       | N  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"`                                                                                                                                                                         | `"true"`, `"false"`                                             |
-| ttlInseconds          | N  | Allows specifying a default Time-to-live (TTL) in seconds that will be applied to every state store request unless TTL is explicitly defined via the [request metadata]({{< ref "state-store-ttl.md" >}}). | `600`                                                           |
-| queryIndexes          | N  | Indexing schemas for querying JSON objects                                                                                                                                                                 | see [Querying JSON objects](#querying-json-objects)             |
+| 字段                    | 必填 | 详情                                                                                                                                          | 示例                                                              |
+| --------------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| redisHost             | 是  | Redis的连接地址                                                                                                                                  | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
+| redisPassword         | 是  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                                                                       | `""`, `"KeFg23!"`                                               |
+| redisUsername         | 否  | Redis 主机的用户名。 默认为空. 确保您的 redis 服务器版本为 6 或更高版本，并且已正确创建 acl 规则。                                                                               | `""`, `"default"`                                               |
+| consumerID            | 否  | 消费组 ID                                                                                                                                      | `"mygroup"`                                                     |
+| enableTLS             | 否  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                                                                                            | `"true"`, `"false"`                                             |
+| maxRetries            | 否  | 放弃前的最大重试次数。 默认值为 `3`。                                                                                                                       | `5`, `10`                                                       |
+| maxRetryBackoff       | 否  | 每次重试之间的最小回退。 默认值为 2</code> 秒 `; <code>"-1"` 禁用回退。                                                                                        | `3000000000`                                                    |
+| failover              | 否  | 已启用故障转移配置的属性。 需要设置 sentinalMasterName。 redisHost 应该是哨兵主机地址。 请参阅 [Redis Sentinel 文档](https://redis.io/docs/manual/sentinel/). 默认值为 `"false"` | `"true"`, `"false"`                                             |
+| sentinelMasterName    | 否  | 哨兵主名称。 请参阅 [Redis Sentinel 文档](https://redis.io/docs/manual/sentinel/)                                                                      | `""`,  `"127.0.0.1:6379"`                                       |
+| redeliverInterval     | 否  | 检查待处理消息到重发的间隔。 默认为 `"60s"`. `"0"` 禁用重发。                                                                                                     | `"30s"`                                                         |
+| processingTimeout     | 否  | 在尝试重新发送消息之前必须等待的时间。 默认为 `"15s"`。 `"0"` 禁用重发。                                                                                                | `"30s"`                                                         |
+| redisType             | 否  | Redis 的类型。 有两个有效的值，一个是 `"node"` 用于单节点模式，另一个是 `"cluster"` 用于 redis 集群模式。 默认为 `"node"`。                                                       | `"cluster"`                                                     |
+| redisDB               | 否  | 连接到 redis 后选择的数据库。 如果 `"redisType"` 是 `"cluster "` 此选项被忽略。 默认值为 `"0"`.                                                                      | `"0"`                                                           |
+| redisMaxRetries       | 否  | `maxRetrie` 的别名。 如果两个值都被设置了，则忽略 `maxRetries`。                                                                                               | `"5"`                                                           |
+| redisMinRetryInterval | 否  | 每次重试之间 redis 命令的最小回退时间。 默认值为 `"8ms"`;  `"-1"` 禁用回退。                                                                                         | `"8ms"`                                                         |
+| redisMaxRetryInterval | 否  | `maxRetryBackoff` 的别名。 如果两个值都被设置了，则忽略 `maxRetryBackoff`。                                                                                    | `"5s"`                                                          |
+| dialTimeout           | 否  | 建立新连接的拨号超时。 默认为 `"5s"`。                                                                                                                     | `"5s"`                                                          |
+| readTimeout           | 否  | 套接字读取超时。 如果达到，redis命令将以超时的方式失败，而不是阻塞。 默认为 `"3s"`, `"-1"` 表示没有超时。                                                                            | `"3s"`                                                          |
+| writeTimeout          | 否  | 套接字写入超时。 如果达到，redis命令将以超时的方式失败，而不是阻塞。 默认值为 readTimeout。                                                                                     | `"3s"`                                                          |
+| poolSize              | 否  | 最大套接字连接数。 默认是每个CPU有10个连接，由 runtime.NumCPU 所述。                                                                                               | `"20"`                                                          |
+| poolTimeout           | 否  | 如果所有连接都处于繁忙状态，客户端等待连接时间，超时后返回错误。 默认值为 readTimeout + 1 秒。                                                                                    | `"5s"`                                                          |
+| maxConnAge            | 否  | 客户端退出（关闭）连接时的连接期限。 默认值是不关闭过期的连接。                                                                                                            | `"30m"`                                                         |
+| minIdleConns          | 否  | 保持开放的最小空闲连接数，以避免创建新连接带来的性能下降。 默认值为 `"0"`.                                                                                                   | `"2"`                                                           |
+| idleCheckFrequency    | 否  | 空闲连接后的空闲检查频率。 默认值为 `"1m"`。 `"-1"` 禁用空闲连接回收。                                                                                                 | `"-1"`                                                          |
+| idleTimeout           | 否  | 客户端关闭空闲连接的时间量。 应小于服务器的超时。 默认值为 `"5m"`。 `"-1"` 禁用空闲超时检查。                                                                                     | `"10m"`                                                         |
+| actorStateStore       | 否  | 是否将此状态存储给 Actor 使用。 默认值为 `"false"`                                                                                                          | `"true"`, `"false"`                                             |
+| ttlInseconds          | 否  | 允许按秒指定默认的生存时间 (TTL)，这将应用到每个状态存储请求，除非通过 [请求元数据]({{< ref "state-store-ttl.md" >}}) 显示指定。                                                      | `600`                                                           |
+| queryIndexes          | 否  | 用于查询 JSON 对象的索引格式                                                                                                                           | 请参阅 [查询 JSON 对象](#querying-json-objects)                        |
 
 ## 安装 Redis
 
@@ -155,13 +155,13 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > 
 > {{< /tabs >}}
 > 
-> ## Querying JSON objects (optional)
+> ## 查询 JSON 对象（可选）
 > 
-> In addition to supporting storing and querying state data as key/value pairs, the Redis state store optionally supports querying of JSON objects to meet more complex querying or filtering requirements. To enable this feature, the following steps are required:
+> 除了支持以键/值对的形式存储和查询状态数据外，Redis 状态存储还可以选择支持查询 JSON 对象以满足更复杂的查询或过滤要求。 要启用此功能，需要执行以下步骤：
 > 
-> 1. The Redis store must support Redis modules and specifically both Redisearch and RedisJson. If you are deploying and running Redis then load [redisearch](https://oss.redis.com/redisearch/) and [redisjson](https://oss.redis.com/redisjson/) modules when deploying the Redis service. ``
+> 1. Redis 存储必须支持 Redis 模块，特别是 Redisearch 和 RedisJson。 如果您正在部署和运行 Redis，则在部署 Redis 服务时加载 [个 redisearch](https://oss.redis.com/redisearch/) 和 [redisjson](https://oss.redis.com/redisjson/) 模块。 ``
 > 
-> 2. Specify `queryIndexes` entry in the metadata of the component config. The value of the `queryIndexes` is a JSON array of the following format:
+> 2. 在组件配置的元数据中指定 `queryIndexes` 条目。 `queryIndexes` 的值是如下格式的JSON数组：
 > 
 > ```json
 > [
@@ -179,16 +179,16 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > ]
 > ```
 > 
-> 3. When calling state management API, add the following metadata to the API calls:
+> 3. 调用状态管理 API 时，将以下元数据添加到 API 调用中：
 > 
-> - [Save State]({{< ref "state_api.md#save-state" >}}), [Get State]({{< ref "state_api.md#get-state" >}}), [Delete State]({{< ref "state_api.md#delete-state" >}}): 
->     - add `metadata.contentType=application/json` URL query parameter to HTTP API request
->     - add `"contentType": "application/json"` pair to the metadata of gRPC API request
-> - [Query State]({{< ref "state_api.md#query-state" >}}): 
->     - add `metadata.contentType=application/json&metadata.queryIndexName=<indexing name>` URL query parameters to HTTP API request
->     - add `"contentType" : "application/json"` and `"queryIndexName" : "<indexing name>"` pairs to the metadata of gRPC API request
+> - [保存状态]({{< ref "state_api.md#save-state" >}}), [获取状态]({{< ref "state_api.md#get-state" >}}), [删除状态]({{< ref "state_api.md#delete-state" >}}): 
+>     - 将 `metadata.contentType=application/json` URL 请求参数添加到 HTTP API 请求
+>     - 将 `"contentType": "application/json"` 添加到 gRPC API 请求的元数据中
+> - [查询状态]({{< ref "state_api.md#query-state" >}})： 
+>     - 将 `metadata.contentType=application/json&metadata.queryIndexName=<indexing name>` URL 请求参数添加到 HTTP API 请求
+>     - 将`"contentType" : "application/json"`和`"queryIndexName" : "<indexing name>"`对添加到gRPC API请求的元数据中
 > 
-> Consider an example where you store documents like that:
+> 考虑一个这样存储文档的示例：
 > 
 > ```json
 > {
@@ -203,7 +203,7 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > }
 > ```
 > 
-> The component config file containing corresponding indexing schema looks like that:
+> 该文档配置文件包含如下格式的索引结构：
 > 
 > ```yaml
 > apiVersion: dapr.io/v1alpha1
@@ -246,27 +246,27 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 >       ]
 > ```
 > 
-> Consecutively, you can now store, retrieve, and query these documents.
+> 现在，您现在可以存储、检索和查询这些文档。
 > 
-> Consider the example from ["How-To: Query state"]({{< ref "howto-state-query-api.md#example-data-and-query" >}}) guide. Let's run it with Redis.
+> 考虑 ["如何查询状态"]({{< ref "howto-state-query-api.md#example-data-and-query" >}}) 指南中的示例。 让我们用 Redis 运行它。
 > 
 > {{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" "Redis Enterprise Cloud" "Alibaba Cloud" >}}
 > 
 > {{% codetab %}}
 > 
-> If you are using a self-hosted deployment of Dapr, a Redis instance without the JSON module is automatically created as a Docker container when you run `dapr init`.
+> 如果您使用的是 Dapr 的自托管部署，则在您运行 `dapr init`时，会自动将不带 JSON 模块的 Redis 实例创建为 Docker 容器。
 > 
-> Alternatively, you can create an instance of Redis by running the following command:
+> 或者，您可以通过运行以下命令来创建 Redis 实例：
 > 
 > ```bash
 >  docker run -p 6379:6379 --name redis --rm redis
 > ```
 > 
-> The Redis container that gets created on dapr init or via the above command, cannot be used with state store query API alone. You can run redislabs/rejson docker image on a different port(than the already installed Redis is using) to work with they query API.
+> 在 dapr init 或通过上述命令创建的 Redis 容器不能单独与状态存储查询 API 一起使用。 您可以在不同的端口上运行 redislabs/rejson docker 映像（与已安装的 Redis 正在使用的端口不同）以使用它们查询 API。
 > 
-> > Note: `redislabs/rejson` has support only for amd64 architecture.
+> > 注意： `redislabs/rejson` 仅支持 amd64 架构。
 > 
-> Use following command to create an instance of redis compatiable with query API.
+> 使用以下命令创建一个与查询 API 兼容的 redis 实例。
 > 
 > ```bash
 > docker run -p 9445:9445 --name rejson --rm redislabs/rejson:2.0.6
@@ -276,15 +276,15 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > 
 > {{% codetab %}}
 > 
-> Follow instructions for [Redis deployment in Kubernetes](#setup-redis) with one extra detail.
+> 遵循[在Kubernetes中部署Redis ](#setup-redis) 的说明以及额外的细节信息
 > 
-> When installing Redis Helm package, provide a configuration file that specifies container image and enables required modules:
+> 安装 Redis Helm 包时，提供一个配置文件，指定容器镜像并启用所需模块：
 > 
 > ```bash
 > helm install redis bitnami/redis -f values.yaml
 > ```
 > 
-> where `values.yaml` looks like:
+> 其中 `values.yaml` 看起来像：
 > 
 > ```yaml
 > image:
@@ -307,7 +307,7 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > 
 > {{% alert title="Note" color="warning" %}}
 > 
-> Azure Redis managed service does not support the RedisJson module and cannot be used with query. 
+> Azure Redis 托管服务不支持 RedisJson 模块，不能与查询一起使用。 
 > 
 > {{% /alert %}}
 > 
@@ -315,11 +315,11 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > 
 > {{% codetab %}}
 > 
-> Follow instructions for [Redis deployment in AWS](#setup-redis). 
+> 遵循[在AWS中部署Redis](#setup-redis)说明。 
 > 
 > {{% alert title="Note" color="primary" %}}
 > 
-> For query support you need to enable RediSearch and RedisJson. 
+> 对于查询支持，您需要启用 RediSearch 和 RedisJson。 
 > 
 > {{% /alert %}}
 > 
@@ -333,7 +333,7 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > 
 > {{% alert title="Note" color="warning" %}}
 > 
-> Memory Store does not support modules and cannot be used with query. 
+> 内存存储不支持模块，不能与查询一起使用。 
 > 
 > {{% /alert %}}
 > 
@@ -343,7 +343,7 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > 
 > {{% codetab %}}
 > 
-> [Redis Enterprise Cloud](https://docs.redis.com/latest/rc/) 
+> [Redis 企业云](https://docs.redis.com/latest/rc/) 
 > 
 > {{% /codetab %}}
 > 
@@ -351,14 +351,14 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > 
 >
 <!-- IGNORE_LINKS -->
-[Alibaba Cloud](https://www.alibabacloud.com/product/apsaradb-for-redis)
+[阿里云](https://www.alibabacloud.com/product/apsaradb-for-redis)
 <!-- END_IGNORE -->
 > 
 > {{% /codetab %}}
 > 
 > {{< /tabs >}}
 > 
-> 接下来是启动 Dapr 应用程序。 Refer to this [component configuration file](../../../../developing-applications/building-blocks/state-management/query-api-examples/components/redis/redis.yml), which contains query indexing schemas. Make sure to modify the `redisHost` to reflect the local forwarding port which `redislabs/rejson` uses.
+> 接下来是启动 Dapr 应用程序。 请参阅此 [组件配置文件](../../../../developing-applications/building-blocks/state-management/query-api-examples/components/redis/redis.yml)，其中包含查询索引格式。 确保修改 `redisHost` ，反射到`redislabs/rejson` 使用的本地转发端口。
 > 
 > ```bash
 > dapr run --app-id demo --dapr-http-port 3500 --components-path query-api-examples/components/redis
@@ -371,13 +371,13 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 >   http://localhost:3500/v1.0/state/querystatestore?metadata.contentType=application/json
 > ```
 > 
-> To make sure the data has been properly stored, you can retrieve a specific object
+> 为确保数据已正确存储，您可以检索特定对象
 > 
 > ```bash
 > curl http://localhost:3500/v1.0/state/querystatestore/1?metadata.contentType=application/json
 > ```
 > 
-> The result will be:
+> 这样结果会是：
 > 
 > ```json
 > {
@@ -390,9 +390,9 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > }
 > ```
 > 
-> Now, let's find all employees in the state of California and sort them by their employee ID in descending order.
+> 现在，让我们查找加利福尼亚州的所有员工，并按其员工 ID 降序对他们进行排序。
 > 
-> This is the [query](../../../../developing-applications/building-blocks/state-management/query-api-examples/query1.json):
+> 这是 [查询](../../../../developing-applications/building-blocks/state-management/query-api-examples/query1.json)：
 > 
 > ```json
 > {
@@ -415,7 +415,7 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 >   'http://localhost:3500/v1.0-alpha1/state/querystatestore/query?metadata.contentType=application/json&metadata.queryIndexName=orgIndx'
 > ```
 > 
-> The result will be:
+> 这样结果会是：
 > 
 > ```json
 > {
@@ -472,7 +472,7 @@ Dapr 可以使用任意的 Redis 实例 - 无论它是运行在本地开发机�
 > }
 > ```
 > 
-> The query syntax and documentation is available [here]({{< ref howto-state-query-api.md >}})
+> 查询语法和文档参阅[此处]({{< ref howto-state-query-api.md >}})
 > 
 > ## 相关链接
 > 

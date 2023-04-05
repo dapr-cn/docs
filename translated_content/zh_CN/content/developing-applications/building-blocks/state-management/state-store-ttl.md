@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "State Time-to-Live (TTL)"
+title: "状态生存时间（TTL）。"
 linkTitle: "State TTL"
 weight: 500
 description: "Manage state with TTL."
 ---
 
-Dapr enables per state set request time-to-live (TTL). This means that applications can set time-to-live per state stored, and these states cannot be retrieved after expiration.
+Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可以为每个存储的状态设置生存时间，并且在过期后无法检索这些状态。
 
-For [supported state stores]({{< ref supported-state-stores >}}), you simply set the `ttlInSeconds` metadata when publishing a message. Other state stores will ignore this value. For some state stores, you can specify a default expiration on a per-table/container basis.
+For [supported state stores]({{< ref supported-state-stores >}}), you simply set the `ttlInSeconds` metadata when publishing a message. 其他的状态存储将忽略这个值。 For some state stores, you can specify a default expiration on a per-table/container basis.
 
-## Native state TTL support
+## 原生状态 TTL 支持
 
-When state TTL has native support in the state store component, Dapr forwards the TTL configuration without adding any extra logic, maintaining predictable behavior. This is helpful when the expired state is handled differently by the component.
+When state TTL has native support in the state store component, Dapr forwards the TTL configuration without adding any extra logic, maintaining predictable behavior. 当组件对过期状态的处理方式不同时，这很有帮助。
 
 When a TTL is not specified, the default behavior of the state store is retained.
 
-## Persisting state (ignoring an existing TTL)
+## 持久状态（忽略现有 TTL）
 
-To explicitly persist a state (ignoring any TTLs set for the key), specify a `ttlInSeconds` value of `-1`.
+若要显式保留状态（忽略为密钥设置的任何 TTL），请指定 `ttlInSeconds` 值 `-1`。
 
 ## 受支持的组件
 
@@ -77,6 +77,6 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "
 ## 相关链接
 
 - See [the state API reference guide]({{< ref state_api.md >}}).
-- Learn [how to use key value pairs to persist a state]({{< ref howto-get-save-state.md >}}).
-- List of [state store components]({{< ref supported-state-stores >}}).
-- Read the [API reference]({{< ref state_api.md >}}).
+- 了解如何 [使用键值对来持久保存状态]({{< ref howto-get-save-state.md >}}).
+- [状态存储组件]({{< ref supported-state-stores >}}) 列表.
+- 阅读 [API 引用]({{< ref state_api.md >}}).

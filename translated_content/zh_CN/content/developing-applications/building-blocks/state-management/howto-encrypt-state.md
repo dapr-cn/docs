@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "How-To: Encrypt application state"
-linkTitle: "How-To: Encrypt state"
+title: "操作方法：加密应用程序状态"
+linkTitle: "操作方法：加密状态"
 weight: 450
-description: "Automatically encrypt state and manage key rotations"
+description: "自动加密状态并管理密钥轮换"
 ---
 
 Encrypt application state at rest to provide stronger security in enterprise workloads or regulated environments. Dapr offers automatic client-side encryption based on [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) in [Galois/Counter Mode (GCM)](https://en.wikipedia.org/wiki/Galois/Counter_Mode), supporting keys of 128, 192, and 256-bits.
 
-In addition to automatic encryption, Dapr supports primary and secondary encryption keys to make it easier for developers and ops teams to enable a key rotation strategy. This feature is supported by all Dapr state stores.
+除了自动加密之外，Dapr 还支持主密钥和辅助加密密钥，使开发人员和运营团队能够更轻松地启用密钥轮换策略。 所有 Dapr 状态存储都支持此功能。
 
 The encryption keys are always fetched from a secret, and cannot be supplied as plaintext values on the `metadata` section.
 
-## Enabling automatic encryption
+## 启用自动加密
 
-Add the following `metadata` section to any Dapr supported state store:
+将以下 `metadata` 部分添加到任何 Dapr 支持的状态存储中：
 
 ```yaml
 metadata:
@@ -24,7 +24,7 @@ metadata:
     key: mykey # key is optional.
 ```
 
-For example, this is the full YAML of a Redis encrypted state store:
+例如，这是 Redis 加密状态存储的完整 YAML:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -56,11 +56,11 @@ openssl rand 16 | hexdump -v -e '/1 "%02x"'
 # Result will be similar to "cb321007ad11a9d23f963bff600d58e0"
 ```
 
-*Note that the secret store does not have to support keys.*
+*请注意，秘密存储不一定要支持keys.*
 
-## Key rotation
+## 密钥轮换
 
-To support key rotation, Dapr provides a way to specify a secondary encryption key:
+为了支持密钥轮换，Dapr 提供了一种指定辅助加密密钥的方法：
 
 ```yaml
 metadata:
@@ -92,6 +92,6 @@ when you rotate a key, data encrypted with the old key is not automatically re-e
 
 ## 相关链接
 
-- [Security overview]({{< ref "security-concept.md" >}})
+- [安全性概述]({{< ref "security-concept.md" >}})
 - [状态存储查询 API 实现指南](https://github.com/dapr/components-contrib/blob/master/state/Readme.md#implementing-state-query-api)
 - [State store components]({{< ref "supported-state-stores.md" >}})

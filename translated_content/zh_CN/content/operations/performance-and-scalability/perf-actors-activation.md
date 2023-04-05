@@ -1,56 +1,56 @@
 ---
 type: docs
-title: "Actors activation performance"
-linkTitle: "Actors activation performance"
+title: "Actor 激活性能"
+linkTitle: "Actor 激活性能"
 weight: 20000
 description: ""
 ---
 
-This article provides service invocation API performance benchmarks and resource utilization for actors in Dapr on Kubernetes.
+本文为 Kubernetes 上的 Dapr 中的 Actor 提供了服务调用 API 性能基准和资源利用率。
 
-## System overview
+## 系统概述
 
-For applications using actors in Dapr there are two aspects to be considered. First, is the routing of actor invocations handled by Dapr sidecar. Second, is the actors runtime that is implemented and handled on the application side and depends on the SDK. For now, the performance tests are using the Java SDK to provide an actors runtime in the application.
+对于在 Dapr 中使用 Actor 的应用程序，需要考虑两个方面。 首先是路由，由 Dapr sidecar 处理 actor 调用的路由。 其次是 actor 运行时，actor 运行时是在应用程序端实现和处理的，并依赖于 SDK。 目前，性能测试使用 Java SDK 在应用程序中提供 Actor 运行时。
 
-### Kubernetes components
+### Kubernetes 组件
 
-* Sidecar (data plane)
-* Placement (required for actors, control plane mapping actor types to hosts)
-* Operator (control plane)
-* Sidecar Injector (control plane)
-* Sentry (optional, control plane)
+* Sidecar (数据平面)
+* Placement（ Actor 需要，控制平面将 Actor 类型映射到主机）
+* Operator(控制平面)
+* Sidecar Injector（控制平面）
+* Sentry（可选，控制平面）
 
-## Performance summary for Dapr v1.0
+## Dapr v1.0 的性能摘要
 
-The actors API in Dapr sidecar will identify which hosts are registered for a given actor type and route the request to the appropriate host for a given actor ID. The host runs an instance of the application and uses the Dapr SDK (.Net, Java, Python or PHP) to handle actors requests via HTTP.
+Dapr sidecar 中的 actor API 将标识哪些主机是为给定 actor 类型注册的，并将请求路由到给定 actor ID 的相应主机。 主机运行应用程序的实例，并使用 Dapr SDK（.Net，Java，Python 或 PHP）通过 HTTP 处理 Actor 请求。
 
-This test uses invokes actors via Dapr's HTTP API directly.
+此测试使用直接通过 Dapr 的 HTTP API 调用 actor。
 
-For more information see [actors overview]({{< ref actors-overview.md >}}).
+有关详细信息，请参阅 [Actor 概述]({{< ref actors-overview.md >}})。
 
-### Kubernetes performance test setup
+### Kubernetes 性能测试设置
 
-The test was conducted on a 3 node Kubernetes cluster, using commodity hardware running 4 cores and 8GB of RAM, without any network acceleration. The setup included a load tester ([Fortio](https://github.com/fortio/fortio)) pod with a Dapr sidecar injected into it that called the service invocation API to reach a pod on a different node.
+该测试在3节点 Kubernetes 集群上进行，使用运行4个内核和8GB RAM 的商用硬件，没有任何网络加速。 该设置包括一个负载测试器（[Fortio](https://github.com/fortio/fortio)）pod，其中注入了一个 Dapr sidecar，调用服务调用 API 以访问不同节点上的 pod。
 
-Test parameters:
+测试参数
 
-* 500 requests per second
-* 1 replica
-* 1 minute duration
-* Sidecar limited to 0.5 vCPU
-* mTLS enabled
-* Sidecar telemetry enabled (tracing with a sampling rate of 0.1)
-* Payload of an empty JSON object: `{}`
+* 每秒500个请求
+* 1 个副本
+* 1 分钟持续时间
+* Sidecar 限制为 0.5 vCPU
+* 启用 mTLS
+* Sidecar 遥测功能启用 (tracing 取样率为 0.1)
+* 空 JSON 对象的负载: `{}`
 
-### Results
+### 结果
 
-* The actual throughput was ~500 qps.
-* The tp90 latency was ~3ms.
-* The tp99 latency was ~6.2ms.
-* Dapr app consumed ~523m CPU and ~304.7Mb of Memory
-* Dapr sidecar consumed 2m CPU and ~18.2Mb of Memory
-* No app restarts
-* No sidecar restarts
+* 实际吞吐量约为 500 qps。
+* Tp90 延迟约为 3 毫秒。
+* Tp99 延迟约为 6.2 毫秒。
+* Dapr 应用程序消耗约 523m CPU 和 304Mb 内存
+* Dapr sidecar 消耗 2m CPU 和 18.2Mb 内存
+* 无应用重启
+* 无 sidecar 重启
 
 ## 相关链接
-* For more information see [overview of Dapr on Kubernetes]({{< ref kubernetes-overview.md >}})
+* 有关更多信息，请参阅 [Kubernetes 上的 Dapr 概述]({{< ref kubernetes-overview.md >}})

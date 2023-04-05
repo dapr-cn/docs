@@ -74,7 +74,7 @@ spec:
 ## 相关链接
 
 - [使用 OAuth 配置 API 授权]({{< ref oauth >}})
-- [Middleware OAuth sample (interactive)](https://github.com/dapr/samples/tree/master/middleware-oauth-google)
+- [中间件 OAuth 示例（交互式）](https://github.com/dapr/samples/tree/master/middleware-oauth-google)
 - [中间件]({{< ref middleware.md >}})
 - [配置概念]({{< ref configuration-concept.md >}})
 - [配置概览]({{< ref configuration-overview.md >}})

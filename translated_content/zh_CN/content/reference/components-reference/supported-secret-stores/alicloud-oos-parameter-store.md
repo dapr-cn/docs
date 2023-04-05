@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "AlibabaCloud OOS Parameter Store"
-linkTitle: "AlibabaCloud OOS Parameter Store"
-description: Detailed information on the AlibabaCloud OOS Parameter Store - secret store component
+title: "阿里云 OOS 参数存储"
+linkTitle: "阿里云 OOS 参数存储"
+description: 有关阿里云 OOS 参数存储 -secret store 组件的详细信息
 aliases:
   - "/zh-hans/operations/components/setup-secret-store/supported-secret-stores/alibabacloud-oos-parameter-store/"
 ---
 
 ## 配置
 
-To setup AlibabaCloud OOS Parameter Store secret store create a component of type `secretstores.alicloud.parameterstore`. See [this guide]({{< ref "setup-secret-store.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置 阿里云 OOS 参数存储secret store，请创建一个类型为`secretstores.alicloud.parameterstore`的组件。 有关如何创建和应用密钥库配置，请参阅[本指南]({{< ref "setup-secret-store.md#apply-the-configuration" >}})。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -32,21 +32,21 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将密钥明文存储， 建议将密钥存储在本地，如[Kubernetes密钥存储]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段              | 必填 | 详情                                                                               | 示例                  |
-| --------------- |:--:| -------------------------------------------------------------------------------- | ------------------- |
-| regionId        | Y  | The specific region the AlibabaCloud OOS Parameter Store instance is deployed in | `"cn-hangzhou"`     |
-| accessKeyId     | Y  | The AlibabaCloud Access Key ID to access this resource                           | `"accessKeyId"`     |
-| accessKeySecret | Y  | The AlibabaCloud Access Key Secret to access this resource                       | `"accessKeySecret"` |
-| securityToken   | N  | The AlibabaCloud Security Token to use                                           | `"securityToken"`   |
+| 字段              | 必填 | 详情                    | 示例                  |
+| --------------- |:--:| --------------------- | ------------------- |
+| regionId        | 是  | 阿里云 OOS 参数存储实例部署的特定区域 | `"cn-hangzhou"`     |
+| accessKeyId     | 是  | 用于访问此资源的阿里云访问密钥 ID    | `"accessKeyId"`     |
+| accessKeySecret | 是  | 访问此资源的阿里云访问密钥密钥       | `"accessKeySecret"` |
+| securityToken   | 否  | 要使用的阿里云安全token        | `"securityToken"`   |
 
-## Create an AlibabaCloud OOS Parameter Store instance
+## 创建阿里云OOS参数存储实例
 
-Setup AlibabaCloud OOS Parameter Store using the AlibabaCloud documentation: https://www.alibabacloud.com/help/en/doc-detail/186828.html.
+使用阿里云文档设置阿里云OOS参数存储：https://www.alibabacloud.com/help/en/doc-detail/186828.html。
 
 ## 相关链接
 

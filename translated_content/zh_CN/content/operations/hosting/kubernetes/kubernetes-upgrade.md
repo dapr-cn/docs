@@ -2,7 +2,7 @@
 type: docs
 title: "更新 Kubernetes 集群中的 Dapr"
 linkTitle: "升级 Dapr"
-weight: 30000
+weight: 50000
 description: "按照这些步骤升级 Kubernetes 上的 Dapr，并确保顺利升级."
 ---
 
@@ -11,12 +11,12 @@ description: "按照这些步骤升级 Kubernetes 上的 Dapr，并确保顺利�
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - [Helm 3](https://github.com/helm/helm/releases) (如果使用 Helm)
 
-## Upgrade existing cluster to {{% dapr-latest-version long="true" %}}
+## 升级现有集群到 {{% dapr-latest-version long="true" %}}
 有两种方法可以使用Dapr CLI或Helm升级Kubernetes集群上的Dapr control plane。
 
 ### Dapr CLI
 
-The example below shows how to upgrade to version {{% dapr-latest-version long="true" %}}:
+下面的示例展示了如何升级到版本 {{% dapr-latest-version long="true" %}}：
 
   ```bash
   dapr upgrade -k --runtime-version={{% dapr-latest-version long="true" %}}
@@ -42,18 +42,18 @@ The CustomResourceDefinition "configurations.dapr.io" is invalid: spec.preserveU
 kubectl replace -f https://raw.githubusercontent.com/dapr/dapr/5a15b3e0f093d2d0938b12f144c7047474a290fe/charts/dapr/crds/configuration.yaml
 ```
 
-Then proceed with the `dapr upgrade --runtime-version {{% dapr-latest-version long="true" %}} -k` command as above.
+然后继续执行 `dapr upgrade --runtime-version {{% dapr-latest-version long="true" %}} -k` 。
 
 ### Helm
 
 从1.0.0版本开始，使用Helm升级Dapr不再是一个破坏性的动作，因为现有的证书值将自动被重新使用。
 
-1. Upgrade Dapr from 1.0.0 (or newer) to any [NEW VERSION] > 1.0.0:
+1. 将 Dapr 从1.0.0 (或更新) 升级到任何[新版本] > v1.0.0。
 
-   *Helm does not handle upgrading CRDs, so you need to perform that manually. CRDs are backward-compatible and should only be installed forward.*
-> Note: The Dapr version is included in the commands below.
+   *Helm 并不处理 CRD 的更新，所以您需要手动执行。 CRD 是向后兼容的，并且应当只能向前安装。*
+> 注意：Dapr 版本包含在下面的命令行中。
 
-   For version {{% dapr-latest-version long="true" %}}:
+   对于版本 {{% dapr-latest-version long="true" %}}：
 
    ```bash
    kubectl replace -f https://raw.githubusercontent.com/dapr/dapr/v{{% dapr-latest-version long="true" %}}/charts/dapr/crds/components.yaml
@@ -92,9 +92,9 @@ Then proceed with the `dapr upgrade --runtime-version {{% dapr-latest-version lo
 
 4. 全部完成！
 
-#### Upgrading existing Dapr to enable high availability mode
+#### 升级现有 Dapr 以启用高可用模式
 
-Enabling HA mode in an existing Dapr deployment requires additional steps. Please refer to [this paragraph]({{< ref "kubernetes-production.md#enabling-high-availability-in-an-existing-dapr-deployment" >}}) for more details.
+在现有 Dapr 部署中启用高可用模式需要额外的步骤。 更多详细信息，请参阅 [本段]({{< ref "kubernetes-production.md#enabling-high-availability-in-an-existing-dapr-deployment" >}}) 。
 
 
 ## 下一步

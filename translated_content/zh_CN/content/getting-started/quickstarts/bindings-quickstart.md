@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "Quickstart: Input & Output Bindings"
+title: "快速入门：输入 & 输出绑定"
 linkTitle: "绑定"
 weight: 74
-description: "Get started with Dapr's Binding building block"
+description: "开始使用 Dapr 的绑定构建块"
 ---
 
-Let's take a look at Dapr's [Bindings building block]({{< ref bindings >}}). Using bindings, you can:
+Let's take a look at Dapr's [Bindings building block]({{< ref bindings >}}). 使用绑定，你可以：
 
-- Trigger your app with events coming in from external systems.
+- 使用来自外部系统的事件触发你的应用；
 - Interface with external systems.
 
 In this Quickstart, you will schedule a batch script to run every 10 seconds using an input [Cron](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/) binding. The script processes a JSON file and outputs data to a SQL database using the [PostgreSQL](https://docs.dapr.io/reference/components-reference/supported-bindings/postgres) Dapr binding.
@@ -33,13 +33,13 @@ In this Quickstart, you will schedule a batch script to run every 10 seconds usi
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/bindings).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run PostgreSQL Docker container locally
+### 第 2 步：在本地运行 PostgreSQL Docker 容器
 
 Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker container on your machine. The Quickstart sample includes a Docker Compose file to locally customize, build, run, and initialize the `postgres` container with a default `orders` table.
 
@@ -49,26 +49,26 @@ In a terminal window, from the root of the Quickstarts clone directory, navigate
 cd quickstarts/bindings/db
 ```
 
-Run the following command to set up the container:
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
 ```
 
-Verify that the container is running locally.
+验证容器是否正在本地运行。
 
 ```bash
 docker ps
 ```
 
-The output should include:
+输出应包括：
 
 ```bash
 CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS                    NAMES
 55305d1d378b   postgres   "docker-entrypoint.s…"   3 seconds ago   Up 2 seconds   0.0.0.0:5432->5432/tcp   sql_db
 ```
 
-### Step 3: Schedule a Cron job and write to the database
+### 第 3 步：预定一个 Cron 任务并写入数据库
 
 In a new terminal window, navigate to the SDK directory.
 
@@ -115,7 +115,7 @@ with DaprClient() as d:
     return resp
 ```
 
-### Step 4: View the output of the job
+### 第 4 步：查看任务输出
 
 Notice, as specified above, the code invokes the output binding with the `OrderId`, `Customer`, and `Price` as a payload.
 
@@ -153,7 +153,7 @@ At the `orders=#` prompt, select all rows:
 select * from orders;
 ```
 
-The output should look like this:
+输出显示应该如下方所示：
 
 ```
  orderid |  customer  | price
@@ -235,13 +235,13 @@ spec:
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/bindings).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run PostgreSQL Docker container locally
+### 第 2 步：在本地运行 PostgreSQL Docker 容器
 
 Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker container on your machine. The Quickstart sample includes a Docker Compose file to locally customize, build, run, and initialize the `postgres` container with a default `orders` table.
 
@@ -251,26 +251,26 @@ In a terminal window, from the root of the Quickstarts clone directory, navigate
 cd quickstarts/bindings/db
 ```
 
-Run the following command to set up the container:
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
 ```
 
-Verify that the container is running locally.
+验证容器是否正在本地运行。
 
 ```bash
 docker ps
 ```
 
-The output should include:
+输出应包括：
 
 ```bash
 CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS                    NAMES
 55305d1d378b   postgres   "docker-entrypoint.s…"   3 seconds ago   Up 2 seconds   0.0.0.0:5432->5432/tcp   sql_db
 ```
 
-### Step 3: Schedule a Cron job and write to the database
+### 第 3 步：预定一个 Cron 任务并写入数据库
 
 In a new terminal window, navigate to the SDK directory.
 
@@ -318,7 +318,7 @@ async function processBatch(){
 }
 ```
 
-### Step 4: View the output of the job
+### 第 4 步：查看任务输出
 
 Notice, as specified above, the code invokes the output binding with the `OrderId`, `Customer`, and `Price` as a payload.
 
@@ -355,7 +355,7 @@ At the `orders=#` prompt, select all rows:
 select * from orders;
 ```
 
-The output should look like this:
+输出显示应该如下方所示：
 
 ```
  orderid |  customer  | price
@@ -437,13 +437,13 @@ spec:
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/bindings).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run PostgreSQL Docker container locally
+### 第 2 步：在本地运行 PostgreSQL Docker 容器
 
 Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker container on your machine. The Quickstart sample includes a Docker Compose file to locally customize, build, run, and initialize the `postgres` container with a default `orders` table.
 
@@ -453,26 +453,26 @@ In a terminal window, from the root of the Quickstarts clone directory, navigate
 cd quickstarts/bindings/db
 ```
 
-Run the following command to set up the container:
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
 ```
 
-Verify that the container is running locally.
+验证容器是否正在本地运行。
 
 ```bash
 docker ps
 ```
 
-The output should include:
+输出应包括：
 
 ```bash
 CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS                    NAMES
 55305d1d378b   postgres   "docker-entrypoint.s…"   3 seconds ago   Up 2 seconds   0.0.0.0:5432->5432/tcp   sql_db
 ```
 
-### Step 3: Schedule a Cron job and write to the database
+### 第 3 步：预定一个 Cron 任务并写入数据库
 
 In a new terminal window, navigate to the SDK directory.
 
@@ -521,7 +521,7 @@ foreach(Order ord in ordersArray?.orders ?? new Order[] {}){
 await client.InvokeBindingAsync(bindingName: sqlBindingName, operation: "exec", data: "", metadata: command);
 ```
 
-### Step 4: View the output of the job
+### 第 4 步：查看任务输出
 
 Notice, as specified above, the code invokes the output binding with the `OrderId`, `Customer`, and `Price` as a payload.
 
@@ -559,7 +559,7 @@ At the `orders=#` prompt, select all rows:
 select * from orders;
 ```
 
-The output should look like this:
+输出显示应该如下方所示：
 
 ```
  orderid |  customer  | price
@@ -644,13 +644,13 @@ spec:
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/bindings).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run PostgreSQL Docker container locally
+### 第 2 步：在本地运行 PostgreSQL Docker 容器
 
 Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker container on your machine. The Quickstart sample includes a Docker Compose file to locally customize, build, run, and initialize the `postgres` container with a default `orders` table.
 
@@ -660,26 +660,26 @@ In a terminal window, from the root of the Quickstarts clone directory, navigate
 cd quickstarts/bindings/db
 ```
 
-Run the following command to set up the container:
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
 ```
 
-Verify that the container is running locally.
+验证容器是否正在本地运行。
 
 ```bash
 docker ps
 ```
 
-The output should include:
+输出应包括：
 
 ```bash
 CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS                    NAMES
 55305d1d378b   postgres   "docker-entrypoint.s…"   3 seconds ago   Up 2 seconds   0.0.0.0:5432->5432/tcp   sql_db
 ```
 
-### Step 3: Schedule a Cron job and write to the database
+### 第 3 步：预定一个 Cron 任务并写入数据库
 
 In a new terminal window, navigate to the SDK directory.
 
@@ -731,7 +731,7 @@ try (DaprClient client = new DaprClientBuilder().build()) {
 }
 ```
 
-### Step 4: View the output of the job
+### 第 4 步：查看任务输出
 
 Notice, as specified above, the code invokes the output binding with the `OrderId`, `Customer`, and `Price` as a payload.
 
@@ -769,7 +769,7 @@ At the `orders=#` prompt, select all rows:
 select * from orders;
 ```
 
-The output should look like this:
+输出显示应该如下方所示：
 
 ```
  orderid |  customer  | price
@@ -851,13 +851,13 @@ spec:
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/bindings).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run PostgreSQL Docker container locally
+### 第 2 步：在本地运行 PostgreSQL Docker 容器
 
 Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker container on your machine. The Quickstart sample includes a Docker Compose file to locally customize, build, run, and initialize the `postgres` container with a default `orders` table.
 
@@ -867,26 +867,26 @@ In a terminal window, from the root of the Quickstarts clone directory, navigate
 cd quickstarts/bindings/db
 ```
 
-Run the following command to set up the container:
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
 ```
 
-Verify that the container is running locally.
+验证容器是否正在本地运行。
 
 ```bash
 docker ps
 ```
 
-The output should include:
+输出应包括：
 
 ```bash
 CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS         PORTS                    NAMES
 55305d1d378b   postgres   "docker-entrypoint.s…"   3 seconds ago   Up 2 seconds   0.0.0.0:5432->5432/tcp   sql_db
 ```
 
-### Step 3: Schedule a Cron job and write to the database
+### 第 3 步：预定一个 Cron 任务并写入数据库
 
 In a new terminal window, navigate to the SDK directory.
 
@@ -944,7 +944,7 @@ func sqlOutput(order Order) (err error) {
 }
 ```
 
-### Step 4: View the output of the job
+### 第 4 步：查看任务输出
 
 Notice, as specified above, the code invokes the output binding with the `OrderId`, `Customer`, and `Price` as a payload.
 
@@ -981,7 +981,7 @@ At the `orders=#` prompt, select all rows:
 select * from orders;
 ```
 
-The output should look like this:
+输出显示应该如下方所示：
 
 ```
  orderid |  customer  | price

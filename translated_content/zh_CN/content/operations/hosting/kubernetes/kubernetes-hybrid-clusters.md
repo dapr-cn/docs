@@ -2,11 +2,11 @@
 type: docs
 title: "部署到 Linux/Windows Kubernetes 的混合集群"
 linkTitle: "Hybrid clusters"
-weight: 60000
-description: "How to run Dapr apps on Kubernetes clusters with Windows nodes"
+weight: 20000
+description: "如何在具有 Windows 节点的 Kubernetes 集群上运行 Dapr 应用"
 ---
 
-Dapr supports running on Kubernetes clusters with Windows nodes. 您可以只在 Windows 上运行您的 Dapr 微服务，或只在 Linux 上运行，或者两者兼而有之。 这对那些可能会将遗留应用零散迁移到 Dapr Kubernetes 集群的用户很有帮助。
+Dapr 支持在带有 windows 节点的 kubernetes 集群上运行。 您可以只在 Windows 上运行您的 Dapr 微服务，或只在 Linux 上运行，或者两者兼而有之。 这对那些可能会将遗留应用零散迁移到 Dapr Kubernetes 集群的用户很有帮助。
 
 Kubernetes 使用了一个叫做节点亲和性的概念，这样你就可以表示你的应用是想在 Linux 节点还是 Windows 节点上启动。 当部署到一个同时拥有 Windows 和 Linux 节点的集群时，你必须为你的应用提供亲和性规则，否则 Kubernetes 调度器可能会在错误的节点类型上启动你的应用。
 
@@ -33,11 +33,11 @@ Kubernetes 使用了一个叫做节点亲和性的概念，这样你就可以表
    ```
 ## 安装 Dapr 控制面板
 
-If you are installing using the Dapr CLI or via a helm chart, simply follow the normal deployment procedures: [Installing Dapr on a Kubernetes cluster]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >}})
+如果您正在使用 Dapr CLI 或通过 Helm Chart 安装， 只需遵循正常的部署程序：[ 在 Kubernetes 集群上安装 Dapr]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >}})
 
 关联性将被自动设置为 `kubernetes.io/os=linux`。 这对于大多数用户来说是足够的，因为Kubernetes至少需要一个Linux节点池。
 
-> **Note:** Dapr control plane containers are built and tested for both Windows and Linux, however, we generally recommend using the Linux control plane containers. 它们往往较小，用户基础也大得多。
+> **注意：** Dapr 控制面板容器是为windows和linux构建和测试的，但是，我们一般建议使用 linux 控制面板容器。 它们往往较小，用户基础也大得多。
 
 如果您理解以上内容，但想要将 Dapr 控制面板部署到Windows，您可以通过设置这样做：
 
@@ -101,7 +101,7 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 
 ### Linux 应用程序
 
-If you already have a Dapr application that runs on Linux, you'll still need to add affinity rules as above, but choose Linux affinity instead.
+如果您已经在 Linux 上有运行的 dapr 应用程序， 您仍然需要像以上添加亲和性规则，只不过要选择 linux 亲和性。
 
 1. 创建一个 deployment YAML
 

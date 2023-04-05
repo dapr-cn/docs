@@ -161,14 +161,14 @@ DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 您可以配置 Dapr actor运行时配置来修改默认的运行时行为。
 
 ### 配置参数
-- `entities` - The actor types supported by this host.
+- `entities` - 此主机支持的Actor 类型。
 - `actorIdleTimeout` - 停用 actor 之前的超时。 每当经过 `actorScanInterval` 会进行一次超时检查。 默认**：60分钟**
 - `actorScanInterval` - 指定扫描 Actors 以停用空闲 Actors 的频率时间间隔。 Actors 时间超过 actor_idle_timeout 的 Actors 将被取消激活。 默认**：30 秒**
 - `drainOngoingCallTimeout` - 在重定位 actor 的过程中的持续时间。 这指定等待当前活动 actor 方法完成多长时间。 如果没有当前 actor 方法调用，那么将忽略此时间。 默认**：60 秒**
 - `drainRebalancedActors` - 如果为 true，那么 Dapr 将等待`drainOngoingCallTimeout`的持续时间，以便在尝试停用一个 actor 之前, 允许当前的 actor 调用完成。 **默认: true**
-- `reentrancy` (ActorReentrancyConfig) - 配置一个 actor 的重入行为。 如果没有提供，重入是禁用的。 **Default: disabled** **Default: 0**
-- `remindersStoragePartitions` - Configure the number of partitions for actor's reminders. If not provided, all reminders are saved as a single record in actor's state store. **Default: 0**
-- `entitiesConfig` - Configure each actor type individually with an array of configurations. Any entity specified in the individual entity configurations must also be specified in the top level `entities` field. **Default: None**
+- `reentrancy` (ActorReentrancyConfig) - 配置一个 actor 的重入行为。 如果没有提供，重入是禁用的。 **默认值：disabled** **默认值：0**
+- `remindersStoragePartitions` - 配置 actor reminder 的分区数量。 如果未提供，则所有 reminder 将作为单个记录保存在 actor 的状态存储中。 **默认: 0**
+- `entityConfig` - 使用一组配置单独配置每个参与者类型。 在单个实体配置中指定的任何实体也必须在顶级 `实体` 字段中指定。 **Default: None**
 
 {{< tabs Java Dotnet Python Go >}}
 
@@ -283,39 +283,39 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 
 更多详细信息请参阅 [Dapr SDK]({{< ref "developing-applications/sdks/#sdk-languages" >}}) 的文档和示例。
 
-## Partitioning reminders
+## Reminder 分区
 
 {{% alert title="Preview feature" color="warning" %}}
-Actor reminders partitioning is currently in [preview]({{< ref preview-features.md >}}). Use this feature if you are runnining into issues due to a high number of reminders registered.
+Actor reminder 分区当前处于 [preview]({{< ref preview-features.md >}}) 状态。 如果您由于注册了大量 reminder 而遇到问题，请使用此功能。
 {{% /alert %}}
 
-Actor reminders are persisted and continue to be triggered after sidecar restarts. Prior to Dapr runtime version 1.3, reminders were persisted on a single record in the actor state store:
+Actor reminder 将持续存在，并在 sidecar 重新启动后继续触发。 在 Dapr 运行时版本 1.3 之前，reminder 保留在 actor 状态存储中的单个记录上：
 
-| Key                              | 值                                                                      |
+| 键                                | 值                                                                      |
 | -------------------------------- | ---------------------------------------------------------------------- |
 | `actors\|\|<actor type>` | `[ <reminder 1>, <reminder 2>, ... , <reminder n> ]` |
 
-Applications that register many reminders can experience the following issues:
+注册许多 reminder 的应用程序可能会遇到以下问题：
 
-* Low throughput on reminders registration and deregistration
-* Limit on total number of reminders registered based on the single record size limit on the state store
+* Reminder 注册和注销的吞吐量低
+* 对注册的 reminder 总数的限制是基于状态存储上的单个记录大小的限制。
 
-Since version 1.3, applications can now enable partitioning of actor reminders in the state store. As data is distributed in multiple keys in the state store. First, there is a metadata record in `actors\|\|<actor type>\|\|metadata` that is used to store persisted configuration for a given actor type. Then, there are multiple records that stores subsets of the reminders for the same actor type.
+从版本 1.3 开始，应用程序现在可以在状态存储中启用 actor reminder 分区。 由于数据分布在状态存储中的多个键中。 首先， `actors\|\|<actor type>\|\|metadata` 中的元数据记录被用于存储给定 actor 类型的持久化配置。 然后，同一 actor 类型的 reminder 子集被存储在多个记录中。
 
-| Key                                                                                           | 值                                                                                                                                         |
+| 键                                                                                             | 值                                                                                                                                         |
 | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `actors\|\|<actor type>\|\|metadata`                                                | `{ "id": <actor metadata identifier>, "actorRemindersMetadata": { "partitionCount": <number of partitions for reminders> } }` |
 | `actors\|\|<actor type>\|\|<actor metadata identifier>\|\|reminders\|\|1` | `[ <reminder 1-1>, <reminder 1-2>, ... , <reminder 1-n> ]`                                                              |
 | `actors\|\|<actor type>\|\|<actor metadata identifier>\|\|reminders\|\|2` | `[ <reminder 1-1>, <reminder 1-2>, ... , <reminder 1-m> ]`                                                              |
 | ...                                                                                           | ...                                                                                                                                       |
 
-If the number of partitions is not enough, it can be changed and Dapr's sidecar will automatically redistribute the reminders's set.
+如果分区数量不够，可以更改它，Dapr 的 sidecar 将自动重新分发 reminder 的设置。
 
-### Enabling actor reminders partitioning
-Actor reminders partitioning is currently in preview, so enabling it is a two step process.
+### 启用 actor reminder 分区
+Actor reminder 分区当前处于预览阶段，所以启动它仅需两步处理。
 
 #### 预览功能配置
-Before using reminders partitioning, actor type metadata must be enabled in Dapr. 有关预览配置的更多信息，请参阅 [在Dapr中选择预览功能的完整指南]({{< ref preview-features.md >}})。 Below is an example of the configuration:
+在使用 reminder 分区之前，必须在 Dapr 中启用 actor 类型元数据。 有关预览配置的更多信息，请参阅 [在Dapr中选择预览功能的完整指南]({{< ref preview-features.md >}})。 以下是配置示例：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -329,7 +329,7 @@ spec:
 ```
 
 #### Actor 运行时配置
-Once actor type metadata is enabled as an opt-in preview feature, the actor runtime must also provide the appropriate configuration to partition actor reminders. 这是由 `GET /dapr/config`的 actor 终结点完成的，类似于其他 actor 配置元素。
+当以可选预览功能启用 actor 类型元数据时，actor 运行时还必须提供适当的配置来对 actor reminder 进行分区。 这是由 `GET /dapr/config`的 actor 终结点完成的，类似于其他 actor 配置元素。
 
 {{< tabs Java Dotnet Python Go >}}
 
@@ -415,7 +415,7 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 
 {{< /tabs >}}
 
-The following, is an example of a valid configuration for reminder partitioning:
+以下是 reminder 分区的有效配置示例：
 
 ```json
 {
@@ -424,11 +424,11 @@ The following, is an example of a valid configuration for reminder partitioning:
 }
 ```
 
-#### Handling configuration changes
-For production scenarios, there are some points to be considered before enabling this feature:
+#### 处理配置更改
+对于生产方案，在启用此功能之前需要考虑以下几点：
 
-* Enabling actor type metadata can only be reverted if the number of partitions remains zero, otherwise the reminders' set will be reverted to an previous state.
-* Number of partitions can only be increased and not decreased. This allows Dapr to automatically redistribute the data on a rolling restart where one or more partition configurations might be active.
+* 仅当分区数保持为零时，才能还原启用（即从启用改为禁用）actor 类型元数据，否则 reminder 集合将还原到以前的状态。
+* 分区数只能增加，不能减少。 这允许 Dapr 在滚动重启时自动重新分发数据，其中一个或多个分区配置可能处于活动状态。
 
 #### 例子
-* [Actor reminder partitioning community call video](https://youtu.be/ZwFOEUYe1WA?t=1493)
+* [Actor reminder 分区 community call 视频](https://youtu.be/ZwFOEUYe1WA?t=1493)

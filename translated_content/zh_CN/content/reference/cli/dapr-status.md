@@ -29,15 +29,15 @@ dapr status -k
 ### 示例
 
 ```bash
-# Get status of Dapr services from Kubernetes
+# 从Kubernetes集群中获取Dapr服务的状态
 dapr status -k
 ```
 
-### Warning messages
-This command can issue warning messages.
+### 警告信息
+此命令可以发出警告消息。
 
-#### Root certificate renewal warning
-If the mtls root certificate deployed to the Kubernetes cluster expires in under 30 days the following warning message is displayed:
+#### 根证书续订警告
+如果部署到 Kubernetes 集群的 mtls 根证书在 30 天内过期，则会显示以下警告消息：
 
 ```
 Dapr root certificate of your Kubernetes cluster expires in <n> days. Expiry date: <date:time> UTC. 

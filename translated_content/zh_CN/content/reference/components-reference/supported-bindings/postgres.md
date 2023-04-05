@@ -2,7 +2,7 @@
 type: docs
 title: "PostgrSQL binding spec"
 linkTitle: "PostgreSQL"
-description: "Detailed documentation on the PostgreSQL binding component"
+description: "PostgreSQL 绑定组件的详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/postgres/"
 ---
@@ -38,27 +38,27 @@ spec:
 
 ### URL格式
 
-The PostgreSQL binding uses [pgx connection pool](https://github.com/jackc/pgx) internally so the `url` parameter can be any valid connection string, either in a `DSN` or `URL` format:
+PostgreSQL 绑定在内部使用[pgx 连接池](https://github.com/jackc/pgx) ，因此`url` 参数可以是任何有效的连接字符串，可以是`DSN` 或者`URL`格式：
 
-**Example DSN**
+**DSN示例**
 
 ```shell
 user=dapr password=secret host=dapr.example.com port=5432 dbname=dapr sslmode=verify-ca
 ```
 
-**Example URL**
+**URL示例**
 
 ```shell
 postgres://dapr:secret@dapr.example.com:5432/dapr?sslmode=verify-ca
 ```
 
-Both methods also support connection pool configuration variables:
+这两种方法还支持连接池配置变量：
 
-- `pool_min_conns`: integer 0 or greater
-- `pool_max_conns`: integer greater than 0
-- `pool_max_conn_lifetime`: duration string
-- `pool_max_conn_idle_time`: duration string
-- `pool_health_check_period`: duration string
+- `pool_min_conns`：整数 0 或更大
+- `pool_max_conns`: 大于 0 的整数
+- `pool_max_conn_lifetime`：持续时间
+- `pool_max_conn_idle_time`：持续时间
+- `pool_health_check_period`: 持续时间
 
 
 ## 绑定支持
@@ -69,7 +69,7 @@ Both methods also support connection pool configuration variables:
 - `query`
 - `close`
 
-### exec
+### 执行
 
 `exec` 操作可用于 DDL 操作（如表创建），以及 `INSERT`、 `UPDATE`、 `DELETE` 仅返回元数据的操作（例如受影响的行数）。
 
@@ -99,7 +99,7 @@ Both methods also support connection pool configuration variables:
 }
 ```
 
-### query
+### 查询
 
 `query` 操作用于 `SELECT` 语句，该语句以行值数组的形式返回元数据和数据。
 
@@ -133,7 +133,7 @@ Both methods also support connection pool configuration variables:
 }
 ```
 
-### close
+### 关闭
 
 最后， `close` 操作可用于显式关闭数据库连接并将其返回到池中。 此操作没有任何响应。
 
@@ -146,7 +146,7 @@ Both methods also support connection pool configuration variables:
 ```
 
 
-> Note, the PostgreSql binding itself doesn't prevent SQL injection, like with any database application, validate the input before executing query.
+> 备注：PostgreSql绑定资深不会阻止SQL注入，需要像其他数据库应用一样，在执行查询之前验证输入。
 
 ## 相关链接
 

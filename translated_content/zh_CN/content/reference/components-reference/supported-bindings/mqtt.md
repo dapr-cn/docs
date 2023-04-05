@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "MQTT binding spec"
+title: "MQTT绑定规范"
 linkTitle: "MQTT"
-description: "Detailed documentation on the MQTT binding component"
+description: "MQTT 组件绑定详细说明"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/mqtt/"
 ---
 
 ## 配置
 
-To setup MQTT binding create a component of type `bindings.mqtt`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+需要创建一个`bindings.mqtt`类型的组件去设置MQTT绑定。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -41,22 +41,22 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                |    必填    | 绑定支持         | 详情                                                                                                                                                                                                                                                                                            | 示例                                                                                                 |
-| ----------------- |:--------:| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| url               |    Y     | Input/Output | MQTT broker地址. 可以用`secretKeyRef`来引用密钥。 <br> Use the **`tcp://`** URI scheme for non-TLS communication. <br> Use the **`ssl://`** URI scheme for TLS communication.                                                                                                                | `"tcp://\[username\]\[:password\]@host.domain[:port]"`                                         |
-| topic             |    Y     | Input/Output | The topic to listen on or send events to.                                                                                                                                                                                                                                                     | `"mytopic"`                                                                                        |
-| consumerID        |    N     | Input/Output | The client ID used to connect to the MQTT broker. Defaults to the Dapr app ID.                                                                                                                                                                                                                | `"myMqttClientApp"`                                                                                |
-| qos               |    N     | Input/Output | 表示消息的服务质量等级（QoS）， 默认值 0 Defaults to `0`.                                                                                                                                                                                                                                                      | `1`                                                                                                |
-| retain            |    N     | Input/Output | 定义消息是否被broker保存为指定主题的最后已知有效值 默认值为 `"false"` 默认值为 `"false"`.                                                                                                                                                                                                                                   | `"true"`, `"false"`                                                                                |
-| cleanSession      |    N     | Input/Output | Sets the `clean_session` flag in the connection message to the MQTT broker if `"true"`. Defaults to `"true"`.                                                                                                                                                                                 | `"true"`, `"false"`                                                                                |
-| caCert            | 使用TLS时需要 | Input/Output | Certificate Authority (CA) certificate in PEM format for verifying server TLS certificates.                                                                                                                                                                                                   | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
-| clientCert        | 使用TLS时需要 | Input/Output | TLS client certificate in PEM format. Must be used with `clientKey`.                                                                                                                                                                                                                          | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
-| clientKey         | 使用TLS时需要 | Input/Output | TLS client key in PEM format. Must be used with `clientCert`. 可以用`secretKeyRef`来引用密钥。                                                                                                                                                                                                         | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"` |
-| backOffMaxRetries |    N     | 输入           | 返回错误前重试处理消息的最大次数。 Defaults to `"0"`, which means that no retries will be attempted. `"-1"` can be specified to indicate that messages should be retried indefinitely until they are successfully processed or the application is shutdown. The component will wait 5 seconds between retries. | `"3"`                                                                                              |
+| 字段                |    必填    | 绑定支持  | 详情                                                                                                                              | 示例                                                                                                 |
+| ----------------- |:--------:| ----- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| url               |    是     | 输入/输出 | MQTT broker地址. 可以用`secretKeyRef`来引用密钥。 <br> 使用 **`tcp://`** URI 格式进行非 TLS 通信。 <br> 使用 **`ssl://`** URI 格式进行 TLS 通信。 | `"tcp://\[username\]\[:password\]@host.domain[:port]"`                                         |
+| topic             |    是     | 输入/输出 | 监听或者发送事件目标topic                                                                                                                 | `"mytopic"`                                                                                        |
+| consumerID        |    否     | 输入/输出 | 用于连接到 MQTT 代理的客户端 ID。 默认为 Dapr 应用 ID。                                                                                           | `"myMqttClientApp"`                                                                                |
+| qos               |    否     | 输入/输出 | 表示消息的服务质量等级（QoS）， 默认值 0 默认值为 `0`。                                                                                               | `1`                                                                                                |
+| retain            |    否     | 输入/输出 | 定义消息是否被broker保存为指定主题的最后已知有效值 默认值为 `"false"` 默认值为 `"false"`.                                                                     | `"true"`, `"false"`                                                                                |
+| cleanSession      |    否     | 输入/输出 | 如果为 `"true"`，设置连接到 MQTT 代理的连接消息中的 `clean_session` 标志。 默认为 `"true"`。                                                             | `"true"`, `"false"`                                                                                |
+| caCert            | 使用TLS时需要 | 输入/输出 | 用于验证服务端TLS证书的PEM格式的Certificate Authority (CA) 证书                                                                                | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
+| clientCert        | 使用TLS时需要 | 输入/输出 | PEM格式的客户端TLS证书 必须同`clientKey`一起使用                                                                                               | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
+| clientKey         | 使用TLS时需要 | 输入/输出 | PEM格式的客户端TLS密钥。 必须同`clientCert`一起使用。 可以用`secretKeyRef`来引用密钥。                                                                    | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"` |
+| backOffMaxRetries |    否     | 输入    | 返回错误前重试处理消息的最大次数。 默认为`"0"`, 即不尝试重试。 可以指定为`“-1”` ，表示应该无限期地重试消息，直到它们被成功处理或应用程序关闭。 组件在每次重试之前将等待5秒钟。                                | `"3"`                                                                                              |
 
 ### 使用 TLS 通信
 
-To configure communication using TLS, ensure that the MQTT broker (e.g. mosquitto) is configured to support certificates and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. 例如:
+要配置使用TLS进行通信，确保MQTT代理(例如mosquitto)配置为支持证书并且在组件配置中提供了`caCert`, `clientCert`, `clientKey`元数据。 例如:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -92,11 +92,11 @@ auth:
   secretStore: <SECRET_STORE_NAME>
 ```
 
-Note that while the `caCert` and `clientCert` values may not be secrets, they can be referenced from a Dapr secret store as well for convenience.
+备注： `caCert` 和 `clientCert`的值可能不是私密的，为了便利，他们也可以被Dapr秘钥存储引用。
 
 ### 消费共享主题
 
-当消费一个共享主题时，每个消费者必须有一个唯一的标识符。 By default, the application ID is used to uniquely identify each consumer and publisher. In self-hosted mode, invoking each `dapr run` with a different application ID is sufficient to have them consume from the same shared topic. However, on Kubernetes, multiple instances of an application pod will share the same application ID, prohibiting all instances from consuming the same topic. To overcome this, configure the component's `consumerID` metadata with a `{uuid}` tag, which will give each instance a randomly generated `consumerID` value on start up. 例如:
+当消费一个共享主题时，每个消费者必须有一个唯一的标识符。 默认情况下，应用程序 ID 用于唯一标识每个消费者和发布者。 在自我托管模式中，用不同的应用程序ID调用每个 `dapr run` ，就足以让它们从同一个共享主题中消费。 然而在Kubernetes上，一个有多个应用实例的pod共享同一个应用Id，这阻碍了所有实例消费同一个主题。 为了克服这个问题，请用`{uuid}`标签配置组件的`ConsumerID`元数据，使每个实例在启动时有一个随机生成的`ConsumerID`值。 例如:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -132,7 +132,7 @@ spec:
 
 此组件支持 **输入和输出** 绑定接口。
 
-字段名为 `ttlInSeconds`。
+该组件支持以下操作的 **输出**：
 
 - `create`
 

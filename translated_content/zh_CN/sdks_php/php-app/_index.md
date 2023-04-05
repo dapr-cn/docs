@@ -1,9 +1,9 @@
 ---
 type: docs
-title: "The App"
+title: "App"
 linkTitle: "App"
 weight: 1000
-description: Using the App Class
+description: 使用 App 类
 no_list: true
 ---
 

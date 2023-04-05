@@ -8,7 +8,7 @@ weight: 1000
 
 ### 说明
 
-Export the root Certificate Authority (CA), issuer cert and issuer key to local files
+将根证书颁发机构 （CA）、颁发者证书和颁发者密钥导出到本地文件
 
 ### 支持的平台
 
@@ -30,15 +30,15 @@ dapr mtls export [flags]
 ### 示例
 
 ```bash
-# Check expiry of Kubernetes certs
+# 导出 Kubernetes 证书
 dapr mtls export -o ./certs
 ```
 
-### Warning messages
-This command can issue warning messages.
+### 警告信息
+此命令可以发出警告消息。
 
-#### Root certificate renewal warning
-If the mtls root certificate deployed to the Kubernetes cluster expires in under 30 days the following warning message is displayed:
+#### 根证书续订警告
+如果部署到 Kubernetes 集群的 mtls 根证书在 30 天内过期，则会显示以下警告消息：
 
 ```
 Dapr root certificate of your Kubernetes cluster expires in <n> days. Expiry date: <date:time> UTC. 

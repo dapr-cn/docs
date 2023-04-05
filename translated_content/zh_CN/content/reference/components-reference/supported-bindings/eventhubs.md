@@ -45,21 +45,21 @@ spec:
 
 | 字段                   | 必填 | 绑定支持 | 详情                                                                                                                                                                          | 示例                           |
 | -------------------- |:--:| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| connectionString     | Y  | 输出   | [EventHubs 连接字符串](https://docs.microsoft.com/azure/event-hubs/authorize-access-shared-access-signature)。 请注意，这是 EventHubs 本身，而不是 EventHubs 名称空间。 确保使用子 EventHub 共享访问策略连接字符串 | `"Endpoint=sb://****"`       |
-| consumerGroup        | Y  | 输出   | 要侦听的 [EventHubs 消费者组](https://docs.microsoft.com/azure/event-hubs/event-hubs-features#consumer-groups) 的名称                                                                  | `"group1"`                   |
-| storageAccountName   | Y  | 输出   | 用于在Azure 存储检查点数据的帐户的名称                                                                                                                                                      | `"accountName"`              |
-| storageAccountKey    | Y* | 输出   | The account key for the Azure Storage account to persist checkpoints data on. ***Not required if using AAD authentication.**                                                | `"accountKey"`               |
-| storageContainerName | Y  | 输出   | 用于在Azure 存储检查点数据的帐户的容器名称                                                                                                                                                    | `"containerName"`            |
-| partitionID          | N  | 输出   | 要发送和接收事件的分区的 ID                                                                                                                                                             | `0`                          |
-| eventHub             | N  | 输出   | The name of the EventHubs hub. **Required if using AAD authentication.**                                                                                                    | `eventHubsNamespace-hubName` |
-| eventHubNamespace    | N  | 输出   | The name of the EventHubs namespace. **Required if using AAD authentication.**                                                                                              | `eventHubsNamespace`         |
+| connectionString     | 是  | 输出   | [EventHubs 连接字符串](https://docs.microsoft.com/azure/event-hubs/authorize-access-shared-access-signature)。 请注意，这是 EventHubs 本身，而不是 EventHubs 名称空间。 确保使用子 EventHub 共享访问策略连接字符串 | `"Endpoint=sb://****"`       |
+| consumerGroup        | 是  | 输出   | 要侦听的 [EventHubs 消费者组](https://docs.microsoft.com/azure/event-hubs/event-hubs-features#consumer-groups) 的名称                                                                  | `"group1"`                   |
+| storageAccountName   | 是  | 输出   | 用于在Azure 存储检查点数据的帐户的名称                                                                                                                                                      | `"accountName"`              |
+| storageAccountKey    | 是* | 输出   | 用于在Azure 存储checkpoint数据的账户的key. ***如果使用 AAD 身份验证，则不需要。**                                                                                                                    | `"accountKey"`               |
+| storageContainerName | 是  | 输出   | 用于在Azure 存储检查点数据的帐户的容器名称                                                                                                                                                    | `"containerName"`            |
+| partitionID          | 否  | 输出   | 要发送和接收事件的分区的 ID                                                                                                                                                             | `0`                          |
+| eventHub             | 否  | 输出   | EventHubs 中心的名称。 **如果使用 AAD 身份验证，则为必需。**                                                                                                                                    | `eventHubsNamespace-hubName` |
+| eventHubNamespace    | 否  | 输出   | EventHubs 命名空间的名称。 **如果使用 AAD 身份验证，则为必需。**                                                                                                                                  | `eventHubsNamespace`         |
 
 ### Azure Active Directory (AAD) 认证
 Azure 事件中心 pubsub 组件支持使用所有 Azure Active Directory 机制进行身份验证。 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持以下操作的**输出绑定** ：
 
 - `create`
 
@@ -69,7 +69,7 @@ Azure IoT Hub 提供了一个[兼容 Event Hubs 的终结点](https://docs.micro
 
 由 Azure IoT Hub 设备创建的设备到云事件将包含其他 [IoT Hub System Properties](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-construct#system-properties-of-d2c-iot-hub-messages)，并且 Dapr 的 Azure Event Hubs 绑定将返回以下内容作为响应元数据的一部分：
 
-| System Property Name                   | Description & Routing Query Keyword                                                                                                                                     |
+| 系统属性名称                                 | 路由查询关键字 & 说明                                                                                                                                                            |
 | -------------------------------------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `iothub-connection-auth-generation-id` | 发送消息的设备的 **connectionDeviceGenerationId** 请参阅 [IoT Hub 设备标识属性](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#device-identity-properties)。 |
 | `iothub-connection-auth-method`        | **connectionAuthMethod** 用于验证发送消息的设备。                                                                                                                                   |

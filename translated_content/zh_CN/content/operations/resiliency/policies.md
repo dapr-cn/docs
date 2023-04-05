@@ -1,12 +1,12 @@
 ---
 type: docs
-title: "Policies"
-linkTitle: "Policies"
+title: "策略"
+linkTitle: "策略"
 weight: 4500
 description: "Configure resiliency policies for timeouts, retries and circuit breakers"
 ---
 
-### Policies
+### 策略
 
 You define timeouts, retries and circuit breaker policies under `policies`. Each policy is given a name so you can refer to them from the `targets` section in the resiliency spec.
 
@@ -73,7 +73,7 @@ Circuit breakers (CBs) policies are used when other applications/services/compon
 
 | Retry option              | 说明                                                                                                                                                                                          |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `maxRequests`             | The maximum number of requests allowed to pass through when the CB is half-open (recovering from failure). Defaults to `1`.                                                                 |
+| `maxRequests`             | The maximum number of requests allowed to pass through when the CB is half-open (recovering from failure). 默认值为 `1`。                                                                        |
 | `interval`                | The cyclical period of time used by the CB to clear its internal counts. If set to 0 seconds, this never clears. Defaults to `0s`.                                                          |
 | `timeout`                 | The period of the open state (directly after failure) until the CB switches to half-open. Defaults to `60s`.                                                                                |
 | `trip`                    | A Common Expression Language (CEL) statement that is evaluated by the CB. When the statement evaluates to true, the CB trips and becomes open. Default is `consecutiveFailures > 5`.     |

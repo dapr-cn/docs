@@ -60,30 +60,30 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                         | 必填 | 详情                                                                                                                                                                                                                                                                                                                 | 示例                                |
-| -------------------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- |
-| host                       | Y  | Rabbitmq 的连接地址                                                                                                                                                                                                                                                                                                     | `amqp://user:pass@localhost:5672` |
-| consumerID                 | N  | Consumer ID a.k.a consumer tag organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer, i.e. a message is processed only once by one of the consumers in the group. If the consumer ID is not set, the dapr runtime will set it to the dapr application ID. |                                   |
-| durable                    | N  | 是否使用[durable](https://www.rabbitmq.com/queues.html#durability)队列， 默认值为 `"false"` 默认值为 `"false"`                                                                                                                                                                                                                    | `"true"`, `"false"`               |
-| deletedWhenUnused          | N  | 是否应将队列配置为 [自动删除](https://www.rabbitmq.com/queues.html) 默认值为 `"true"`                                                                                                                                                                                                                                               | `"true"`, `"false"`               |
-| autoAck                    | N  | 队列的消费者是否应该[auto-ack](https://www.rabbitmq.com/confirms.html)消息 默认值为 `"false"` 默认值为 `"false"`                                                                                                                                                                                                                       | `"true"`, `"false"`               |
-| deliveryMode               | N  | 发布消息时的持久化模式， 默认值为 `"0"`. 值为`"2"`时RabbitMQ会进行持久化，其他值反之                                                                                                                                                                                                                                                              | `"0"`, `"2"`                      |
-| requeueInFailure           | N  | 在发送[否定应答](https://www.rabbitmq.com/nack.html)失败的情况下，是否进行重排。 默认值为 `"false"`                                                                                                                                                                                                                                         | `"true"`, `"false"`               |
-| prefetchCount              | N  | Number of messages to [prefetch](https://www.rabbitmq.com/consumer-prefetch.html). 生产环境中需要考虑设置一个非零值。 该值默认为`"0"`，这意味着所有可用消息都将被预先提取                                                                                                                                                                                  | `"2"`                             |
-| reconnectWait              | N  | 如果发生连接失败，在重新连接之前需要等待多长时间（秒）                                                                                                                                                                                                                                                                                        | `"0"`                             |
-| concurrencyMode            | N  | 默认值是`parallel`，表示允许并行处理多个消息（如果配置了`app-max-concurrency`，最大并行数会受到该值限制）, 设置为`single`可禁用并行处理， 大多数情况下没必要去这么做 设置为`single`可禁用并行处理， 大多数情况下没必要去这么做                                                                                                                                                                          | `parallel`, `single`              |
-| backOffPolicy              | N  | 重试策略，`"constant"`是一个总是返回相同的退避延迟的退避策略。 `"exponential"` 是一种退避策略，它使用呈指数级增长的随机化函数增加每次重试尝试的退避周期。 默认为 `"constant"`。                                                                                                                                                                                                      | `constant`、`exponential`          |
-| backOffDuration            | N  | 固定间隔仅在策略恒定时生效。 有两种有效的格式，一种是带有单位后缀格式的分数，另一种是将以毫秒为单位处理的纯数字格式。 有效的时间单位为"ns"、"us"（或"μs"）、"ms"、"s"、"m"、"h"。 默认为 `"5s"`。                                                                                                                                                                                                 | `"5s"`、`"5000"`                   |
-| backOffInitialInterval     | N  | 重试时的回退初始间隔。 仅当策略是指数型时才生效。 有两种有效的格式，一种是带有单位后缀格式的分数，另一种是将以毫秒为单位处理的纯数字格式。 有效的时间单位为"ns"、"us"（或"μs"）、"ms"、"s"、"m"、"h"。 默认值为 `"500"`                                                                                                                                                                                     | `"50"`                            |
-| backOffMaxInterval         | N  | 重试时的回退初始间隔。 仅当策略是指数型时才生效。 有两种有效的格式，一种是带有单位后缀格式的分数，另一种是将以毫秒为单位处理的纯数字格式。 有效的时间单位为"ns"、"us"（或"μs"）、"ms"、"s"、"m"、"h"。 默认为 `"60s"`                                                                                                                                                                                      | `"60000"`                         |
-| backOffMaxRetries          | N  | 返回错误前重试处理消息的最大次数。 默认为 `"0"` 这意味着组件不会重试处理消息。 `"-1"` 将无限期重试，直到处理完消息或关闭应用程序。 任何正数都被视为最大重试计数。                                                                                                                                                                                                                          | `"3"`                             |
-| backOffRandomizationFactor | N  | 随机系数，介于 1 和 0 之间，包括 0 但不是 1。 随机间隔 = 重试间隔 * （1 ±backOffRandomizationFactor）。 默认值为 `"0.5"`.                                                                                                                                                                                                                          | `"0.5"`                           |
-| backOffMultiplier          | N  | 策略的退避倍数。 通过将间隔乘以倍数来递增间隔。 默认值为 `"1.5"`                                                                                                                                                                                                                                                                              | `"1.5"`                           |
-| backOffMaxElapsedTime      | N  | 在 MaxElapsedTime 之后，ExponentialBackOff 返回 Stop。 有两种有效的格式，一种是带有单位后缀格式的分数，另一种是将以毫秒为单位处理的纯数字格式。 有效的时间单位为"ns"、"us"（或"μs"）、"ms"、"s"、"m"、"h"。 默认为 `"15m"`                                                                                                                                                                | `"15m"`                           |
-| enableDeadLetter           | N  | 启用转发功能 不能处理的信息会被转发到一个死信主题。 默认值为 `"false"`                                                                                                                                                                                                                                                                          | `"true"`, `"false"`               |
-| maxLen                     | N  | 队列及其死信队列的最大消息数（如果启用了死信）。 如果同时设置了 `maxLen` 和 `maxLenBytes` ，则两者都适用; 将强制执行首先达到的限制。  默认为无限制。                                                                                                                                                                                                                          | `"1000"`                          |
-| maxLenBytes                | N  | 队列及其死信队列的最大长度（以字节为单位）（如果启用了死信）。 如果同时设置了 `maxLen` 和 `maxLenBytes` ，则两者都适用; 将强制执行首先达到的限制。  默认为无限制。                                                                                                                                                                                                                   | `"1048576"`                       |
-| exchangeKind               | N  | Exchange kind of the rabbitmq exchange.  Defaults to `"fanout"`.                                                                                                                                                                                                                                                   | `"fanout"`,`"topic"`              |
+| 字段                         | 必填 | 详情                                                                                                                                                  | 示例                                |
+| -------------------------- |:--:| --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| host                       | 是  | Rabbitmq 的连接地址                                                                                                                                      | `amqp://user:pass@localhost:5672` |
+| consumerID                 | 否  | 消费者ID，也叫做消费者标签，将一个或多个消费者组成一个组。 具有相同消费者 ID 的消费者作为一个虚拟消费者工作，即消息仅由组中的消费者处理一次。 如果未设置使用者 ID，Dapr 运行时会将其设置为 Dapr 应用程序 ID 。                                |                                   |
+| durable                    | 否  | 是否使用[durable](https://www.rabbitmq.com/queues.html#durability)队列， 默认值为 `"false"` 默认值为 `"false"`                                                     | `"true"`, `"false"`               |
+| deletedWhenUnused          | 否  | 是否应将队列配置为 [自动删除](https://www.rabbitmq.com/queues.html) 默认值为 `"true"`                                                                                | `"true"`, `"false"`               |
+| autoAck                    | 否  | 队列的消费者是否应该[auto-ack](https://www.rabbitmq.com/confirms.html)消息 默认值为 `"false"` 默认值为 `"false"`                                                        | `"true"`, `"false"`               |
+| deliveryMode               | 否  | 发布消息时的持久化模式， 默认值为 `"0"`. 值为`"2"`时RabbitMQ会进行持久化，其他值反之                                                                                               | `"0"`, `"2"`                      |
+| requeueInFailure           | 否  | 在发送[否定应答](https://www.rabbitmq.com/nack.html)失败的情况下，是否进行重排。 默认值为 `"false"`                                                                          | `"true"`, `"false"`               |
+| prefetchCount              | 否  | [prefecth](https://www.rabbitmq.com/consumer-prefetch.html)的消息数量。 生产环境中需要考虑设置一个非零值。 该值默认为`"0"`，这意味着所有可用消息都将被预先提取                                    | `"2"`                             |
+| reconnectWait              | 否  | 如果发生连接失败，在重新连接之前需要等待多长时间（秒）                                                                                                                         | `"0"`                             |
+| concurrencyMode            | 否  | 默认值是`parallel`，表示允许并行处理多个消息（如果配置了`app-max-concurrency`，最大并行数会受到该值限制）, 设置为`single`可禁用并行处理， 大多数情况下没必要去这么做 设置为`single`可禁用并行处理， 大多数情况下没必要去这么做           | `parallel`, `single`              |
+| backOffPolicy              | 否  | 重试策略，`"constant"`是一个总是返回相同的退避延迟的退避策略。 `"exponential"` 是一种退避策略，它使用呈指数级增长的随机化函数增加每次重试尝试的退避周期。 默认为 `"constant"`。                                       | `constant`、`exponential`          |
+| backOffDuration            | 否  | 固定间隔仅在策略恒定时生效。 有两种有效的格式，一种是带有单位后缀格式的分数，另一种是将以毫秒为单位处理的纯数字格式。 有效的时间单位为"ns"、"us"（或"μs"）、"ms"、"s"、"m"、"h"。 默认为 `"5s"`。                                  | `"5s"`、`"5000"`                   |
+| backOffInitialInterval     | 否  | 重试时的回退初始间隔。 仅当策略是指数型时才生效。 有两种有效的格式，一种是带有单位后缀格式的分数，另一种是将以毫秒为单位处理的纯数字格式。 有效的时间单位为"ns"、"us"（或"μs"）、"ms"、"s"、"m"、"h"。 默认值为 `"500"`                      | `"50"`                            |
+| backOffMaxInterval         | 否  | 重试时的回退初始间隔。 仅当策略是指数型时才生效。 有两种有效的格式，一种是带有单位后缀格式的分数，另一种是将以毫秒为单位处理的纯数字格式。 有效的时间单位为"ns"、"us"（或"μs"）、"ms"、"s"、"m"、"h"。 默认为 `"60s"`                       | `"60000"`                         |
+| backOffMaxRetries          | 否  | 返回错误前重试处理消息的最大次数。 默认为 `"0"` 这意味着组件不会重试处理消息。 `"-1"` 将无限期重试，直到处理完消息或关闭应用程序。 任何正数都被视为最大重试计数。                                                           | `"3"`                             |
+| backOffRandomizationFactor | 否  | 随机系数，介于 1 和 0 之间，包括 0 但不是 1。 随机间隔 = 重试间隔 * （1 ±backOffRandomizationFactor）。 默认值为 `"0.5"`.                                                           | `"0.5"`                           |
+| backOffMultiplier          | 否  | 策略的退避倍数。 通过将间隔乘以倍数来递增间隔。 默认值为 `"1.5"`                                                                                                               | `"1.5"`                           |
+| backOffMaxElapsedTime      | 否  | 在 MaxElapsedTime 之后，ExponentialBackOff 返回 Stop。 有两种有效的格式，一种是带有单位后缀格式的分数，另一种是将以毫秒为单位处理的纯数字格式。 有效的时间单位为"ns"、"us"（或"μs"）、"ms"、"s"、"m"、"h"。 默认为 `"15m"` | `"15m"`                           |
+| enableDeadLetter           | 否  | 启用转发功能 不能处理的信息会被转发到一个死信主题。 默认值为 `"false"`                                                                                                           | `"true"`, `"false"`               |
+| maxLen                     | 否  | 队列及其死信队列的最大消息数（如果启用了死信）。 如果同时设置了 `maxLen` 和 `maxLenBytes` ，则两者都适用; 将强制执行首先达到的限制。  默认为无限制。                                                           | `"1000"`                          |
+| maxLenBytes                | 否  | 队列及其死信队列的最大长度（以字节为单位）（如果启用了死信）。 如果同时设置了 `maxLen` 和 `maxLenBytes` ，则两者都适用; 将强制执行首先达到的限制。  默认为无限制。                                                    | `"1048576"`                       |
+| exchangeKind               | 否  | Rabbitmq交换机的类型  默认为 `"fanout"`。                                                                                                                     | `"fanout"`,`"topic"`              |
 
 
 ### 退避策略介绍
@@ -124,8 +124,8 @@ helm install rabbitmq stable/rabbitmq
 
 {{< /tabs >}}
 
-## Use topic exchange to route messages
-Setting `exchangeKind` to `"topic"` uses the topic exchanges, which are commonly used for the multicast routing of messages. Messages with a `routing key` will be routed to one or many queues based on the `routing key` defined in the metadata when subscribing. The routing key is defined by the `routingKey` metadata. For example, if an app is configured with a routing key `keyA`:
+## 使用topic交换来路由消息
+将 `exchangeKind` 设置为 `"topic"` 使用topic交换信息，通常用于消息的多播路由。 在订阅时，将根据元数据中定义的`routing key`，将具有 `routing key`的消息路由到一个或多个队列。 路由键由 ` routingKey ` 元数据定义。 例如，如果应用配置了路由键 `keyA`：
 ```
 apiVersion: dapr.io/v1alpha1
 kind: Subscription
@@ -138,7 +138,7 @@ spec:
   metadata:
     routingKey: keyA
 ```
-It will receive messages with routing key `keyA`, and messages with other routing keys are not received.
+它将接收带有路由键 `keyA`的消息，而不会接收带有其他路由键的消息。
 ```
 // publish messages with routing key `keyA`, and these will be received by the above example.
 client.PublishEvent(context.Background(), "pubsub", "B", []byte("this is a message"), dapr.PublishEventWithMetadata(map[string]string{"routingKey": "keyA"}))
@@ -146,7 +146,7 @@ client.PublishEvent(context.Background(), "pubsub", "B", []byte("this is a messa
 client.PublishEvent(context.Background(), "pubsub", "B", []byte("this is another message"), dapr.PublishEventWithMetadata(map[string]string{"routingKey": "keyB"}))
 ```
 
-For more information see [rabbitmq exchanges](https://www.rabbitmq.com/tutorials/amqp-concepts.html#exchanges).
+有关更多信息，请参阅 [rabbitmq 交换机](https://www.rabbitmq.com/tutorials/amqp-concepts.html#exchanges)。
 
 ## 相关链接
 - 相关链接部分中的[Dapr组件的基本格式]({{< ref component-schema >}})

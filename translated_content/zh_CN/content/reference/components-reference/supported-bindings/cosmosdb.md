@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "Azure Cosmos DB binding spec"
+title: "Azure Cosmos DB 绑定规范"
 linkTitle: "Azure Cosmos DB"
-description: "Detailed documentation on the Azure Cosmos DB binding component"
+description: "Azure Cosmos DB 绑定组件的详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/cosmosdb/"
 ---
 
 ## 配置
 
-To setup Azure Cosmos DB binding create a component of type `bindings.azure.cosmosdb`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
+要设置 Azure Cosmos DB 绑定，请创建一个类型为 `bindings.azure.cosmosdb` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。
 
 
 ```yaml
@@ -40,38 +40,45 @@ spec:
 
 ## 元数据字段规范
 
-| 字段           | 必填 | 绑定支持 | 详情                                                                                                                      | 示例                                          |
-| ------------ |:--:| ---- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| url          | Y  | 输出   | The Cosmos DB url                                                                                                       | `"https://******.documents.azure.com:443/"` |
-| masterKey    | Y  | 输出   | The Cosmos DB account master key                                                                                        | `"master-key"`                              |
-| database     | Y  | 输出   | The name of the Cosmos DB database                                                                                      | `"OrderDb"`                                 |
-| collection   | Y  | 输出   | 数据库中容器的名称。                                                                                                              | `"Orders"`                                  |
-| partitionKey | Y  | 输出   | 要从用作分区键的有效负载（要创建的文档）中提取键的名称。 This name must match the partition key specified upon creation of the Cosmos DB container. | `"OrderId"`, `"message"`                    |
+| 字段           | 必填 | 绑定支持 | 详情                                                           | 示例                                          |
+| ------------ |:--:| ---- | ------------------------------------------------------------ | ------------------------------------------- |
+| url          | 是  | 输出   | Cosmos DB 地址                                                 | `"https://******.documents.azure.com:443/"` |
+| masterKey    | 是  | 输出   | Cosmos DB 账户主键                                               | `"master-key"`                              |
+| database     | 是  | 输出   | Cosmos DB 数据库名                                               | `"OrderDb"`                                 |
+| collection   | 是  | 输出   | 数据库中容器的名称。                                                   | `"Orders"`                                  |
+| partitionKey | 是  | 输出   | 要从用作分区键的有效负载（要创建的文档）中提取键的名称。 此名称必须与创建 Cosmos DB 容器时指定的分区键匹配。 | `"OrderId"`, `"message"`                    |
 
-For more information see [Azure Cosmos DB resource model](https://docs.microsoft.com/azure/cosmos-db/account-databases-containers-items).
+欲了解更多信息，请参阅 [Azure Cosmos DB 资源模型](https://docs.microsoft.com/azure/cosmos-db/account-databases-containers-items)。
 
-### Azure Active Directory (Azure AD) authentication
+### Azure Active Directory (Azure AD) 认证
 
-The Azure Cosmos DB binding component supports authentication using all Azure Active Directory mechanisms. 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
+Azure Cosmos DB绑定组件支持使用所有Azure Active Directory机制进行认证。 更多信息和相关组件的元数据字段根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
 
-You can read additional information for setting up Cosmos DB with Azure AD authentication in the [section below](#setting-up-cosmos-db-for-authenticating-with-azure-ad).
+您可以在</a>下面的
+部分中阅读有关使用 Azure AD 身份验证设置 Cosmos DB 的其他信息。</p> 
+
+
 
 ## 绑定支持
 
-字段名为 `ttlInSeconds`。
+该组件支持以下操作的 **输出绑定**：
 
 - `create`
 
+
+
 ## 生产使用的最佳实践
 
-Azure Cosmos DB shares a strict metadata request rate limit across all databases in a single Azure Cosmos DB account. New connections to Azure Cosmos DB assume a large percentage of the allowable request rate limit. (See the [Cosmos DB documentation](https://docs.microsoft.com/azure/cosmos-db/sql/troubleshoot-request-rate-too-large#recommended-solution-3))
+Azure Cosmos DB 在单个 Azure Cosmos DB 账户下的所有数据库中共享严格的元数据请求速率限制。 对 Azure Cosmos DB 的新连接承担了很大比例的允许请求率限制。 （请参阅 [Cosmos DB 文档](https://docs.microsoft.com/azure/cosmos-db/sql/troubleshoot-request-rate-too-large#recommended-solution-3)）
 
-Therefore several strategies must be applied to avoid simultaneous new connections to Azure Cosmos DB:
+因此，必须应用多种策略来避免同时连接到 Azure Cosmos DB：
 
-- Ensure sidecars of applications only load the Azure Cosmos DB component when they require it to avoid unnecessary database connections. 这可以通过[将组件的范围限定为特定应用程序]({{< ref component-scopes.md >}}#application-access-to-components-with-scopes)来完成。
-- Choose deployment strategies that sequentially deploy or start your applications to minimize bursts in new connections to your Azure Cosmos DB accounts.
-- Avoid reusing the same Azure Cosmos DB account for unrelated databases or systems (even outside of Dapr). Distinct Azure Cosmos DB accounts have distinct rate limits.
-- Increase the `initTimeout` value to allow the component to retry connecting to Azure Cosmos DB during side car initialization for up to 5 minutes. 默认值是 `5s` ，应该增加。 使用 Kubernetes 时，增加此值可能还需要更新您的 [Readiness 和 Liveness 探针](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)。
+- 确保应用程序的 sidecar 仅在需要时加载 Azure Cosmos DB 组件，以避免不必要的数据库连接。 这可以通过[将组件的范围限定为特定应用程序]({{< ref component-scopes.md >}}#application-access-to-components-with-scopes)来完成。
+- 选择按顺序部署或启动应用程序的部署策略，以最大程度地减少 Azure Cosmos DB 账户新连接造成的影响。
+- 避免对不相关的数据库或系统（甚至在 Dapr 外部）重用同一 Azure Cosmos DB 账户。 不同的 Azure Cosmos DB 账户具有不同的速率限制。
+- 增加 `initTimeout` 值，以允许组件在 sidecar 初始化期间重试连接到 Azure Cosmos DB，最长5分钟。 默认值是 `5s` ，应该增加。 使用 Kubernetes 时，增加此值可能还需要更新您的 [Readiness 和 Liveness 探针](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)。
+
+
 
 ```yaml
 spec:
@@ -81,31 +88,44 @@ spec:
   metadata:
 ```
 
+
+
+
 ## 日期格式
 
 **输出绑定** `创建` 操作需要以下键存在于要创建的每个文档的有效负载中：
 
 - `id`: 要创建的文档的唯一 ID
-- `<partitionKey>`: 通过组件定义中 `spec.partitionKey` 指定的分区键的名称。 This must also match the partition key specified upon creation of the Cosmos DB container.
+- `<partitionKey>`: 通过组件定义中 `spec.partitionKey` 指定的分区键的名称。 这还必须与创建 Cosmos DB 容器时指定的分区键匹配。
 
-## Setting up Cosmos DB for authenticating with Azure AD
 
-When using the Dapr Cosmos DB binding and authenticating with Azure AD, you need to perform a few additional steps to set up your environment.
+
+## 设置 Cosmos DB 以使用 Azure AD 进行身份验证
+
+当使用Dapr Cosmos DB绑定组件并使用Azure AD进行身份认证时，你需要执行一些额外的步骤去设置你的环境。
 
 前期准备:
 
-- You need a Service Principal created as per the instructions in the [authenticating to Azure]({{< ref authenticating-azure.md >}}) page. You need the ID of the Service Principal for the commands below (note that this is different from the client ID of your application, or the value you use for `azureClientId` in the metadata).
+- 您需要按照[向Azure进行身份验证]({{< ref authenticating-azure.md >}}) 中的说明创建服务主体。 使用下列命令，需要服务主体的ID（注意 一点，这与应用的客户端ID或者在metadata中设置的`azureClientId` 的值都不同）。
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
 - [jq](https://stedolan.github.io/jq/download/)
-- The scripts below are optimized for a bash or zsh shell
+- 下面的脚本针对 bash 或 zsh shell 进行了优化
 
-> When using the Cosmos DB binding, you **don't** need to create stored procedures as you do in the case of the Cosmos DB state store.
 
-### Granting your Azure AD application access to Cosmos DB
 
-> You can find more information on the [official documentation](https://docs.microsoft.com/azure/cosmos-db/how-to-setup-rbac), including instructions to assign more granular permissions.
+> 使用 Cosmos DB 绑定时，您 **不** 需要像在 Cosmos DB 状态存储中那样创建存储过程。
 
-In order to grant your application permissions to access data stored in Cosmos DB, you need to assign it a custom role for the Cosmos DB data plane. In this example you're going to use a built-in role, "Cosmos DB Built-in Data Contributor", which grants your application full read-write access to the data; you can optionally create custom, fine-tuned roles following the instructions in the official docs.
+
+
+### 授予 Azure AD 应用程序对 Cosmos DB 的访问权限
+
+
+
+> 你可以在[official documentation](https://docs.microsoft.com/azure/cosmos-db/how-to-setup-rbac), 查询到更多信息，包括分配更多精细权限的说明。
+
+为了授予您的应用程序访问存储在 Cosmos DB 中的数据的权限，你需要为其分配 Cosmos DB 数据平面的自定义角色。 在此示例中，你将使用内置角色“Cosmos DB 内置数据参与者”，该角色授予应用程序对数据的完全读写访问权限; 您可以选择按照官方文档中的说明创建自定义的微调角色。
+
+
 
 ```sh
 # Name of the Resource Group that contains your Cosmos DB
@@ -125,6 +145,9 @@ az cosmosdb sql role assignment create \
   --principal-id "$PRINCIPAL_ID" \
   --role-definition-id "$ROLE_ID"
 ```
+
+
+
 
 ## 相关链接
 

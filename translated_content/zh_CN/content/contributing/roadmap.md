@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Dapr 路线图"
-linkTitle: "路线图"
+linkTitle: "Roadmap"
 description: "Dapr 路线图是帮助了解整个 Dapr 项目开展的工具"
 weight: 1100
 no_list: true
@@ -10,7 +10,7 @@ no_list: true
 
 Dapr 鼓励社区帮助确定优先级。 GitHub 项目委员会可查看和提供对拟议问题的反馈，并在整个开发中跟踪这些问题。
 
-[<img src="/images/roadmap.png" alt="Screenshot of the Dapr Roadmap board" width=500 >](https://aka.ms/dapr/roadmap)
+[<img src="/images/roadmap.png" alt="Dapr 路线图面板的屏幕截图" width=500 >](https://aka.ms/dapr/roadmap)
 
 {{< button text="View the backlog" link="https://aka.ms/dapr/roadmap" color="primary" >}}
 <br />

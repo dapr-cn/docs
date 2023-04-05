@@ -7,7 +7,7 @@ description: >
   为任何Dapr项目资源库做出贡献的通用指南
 ---
 
-Thank you for your interest in Dapr! 感谢您对 Dapr的兴趣! 本文档提供了有关如何通过问题和拉取请求对 [Dapr 项目](https://github.com/dapr) 作出贡献的指南。 贡献还可以通过多种方式来实现，如举办线下活动，参加社区会议，评论问题或拉取请求等。
+感谢您对 Dapr 的关注！ 感谢您对 Dapr的兴趣! 本文档提供了有关如何通过问题和拉取请求对 [Dapr 项目](https://github.com/dapr) 作出贡献的指南。 贡献还可以通过多种方式来实现，如举办线下活动，参加社区会议，评论问题或拉取请求等。
 
 了解有关社区参与和社区成员的更多信息，请参阅 [Dapr community repository](https://github.com/dapr/community)。
 
@@ -49,7 +49,7 @@ Thank you for your interest in Dapr! 感谢您对 Dapr的兴趣! 本文档提供
 
 1. 确保有一个问题（bug或建议）被提出，这为你即将做出的贡献设定了期望。
 1. 分叉相关的repo并创建一个新的分支。
-    - Some Dapr repos support [Codespaces]({{< ref codespaces.md >}}) to provide an instant environment for you to build and test your changes.
+    - 某些 Dapr 仓库支持 [Codespaces]({{< ref codespaces.md >}}) ，以便为您提供一个即时环境来构建和测试更改。
     - 有关设置 Dapr 开发环境的详细信息，请参阅 [ 开发 Dapr 文档 ](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
 1. 创建更改
     - 代码更改需要测试

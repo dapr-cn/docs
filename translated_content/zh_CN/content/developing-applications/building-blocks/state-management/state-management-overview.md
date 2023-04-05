@@ -53,20 +53,20 @@ Data update conflicts are rare in many applications, since clients are naturally
 
 如果您的应用程序在书面请求中省略了ETags，Dapr会在处理请求时跳过ETags校验。 This enables the **last-write-wins** pattern, compared to the **first-write-wins** pattern with ETags.
 
-{{% alert title="Note on ETags" color="primary" %}}
+{{% alert title="ETag 注意事项" color="primary" %}}
 For stores that don't natively support ETags, the corresponding Dapr state store implementation is expected to simulate ETags and follow the Dapr state management API specification when handling states. Since Dapr state store implementations are technically clients to the underlying data store, simulation should be straightforward, using the concurrency control mechanisms provided by the store.
 {{% /alert %}}
 
 阅读[API参考]({{< ref state_api.md >}})，了解如何设置并发选项。
 
-#### Consistency
+#### 一致性
 
-Dapr supports both **strong consistency** and **eventual consistency**, with eventual consistency as the default behavior.
+Dapr 同时支持**强一致性**和**最终一致性**，其中最终一致性为默认行为。
 
 - **Strong consistency**: Dapr waits for all replicas (or designated quorums) to acknowledge before it acknowledges a write request.
 - **Eventual consistency**: Dapr returns as soon as the write request is accepted by the underlying data store, even if this is a single replica.
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how to set consistency options.
+阅读[API参考]({{< ref state_api.md >}})，了解如何设置一致性选项。
 
 ### Setting content type
 
@@ -79,7 +79,7 @@ Setting the content type is _optional_, and the component decides whether to mak
 
 ### Multiple operations
 
-Dapr supports two types of multi-read or multi-write operations: **bulk** or **transactional**. Read the [API reference]({{< ref state_api.md >}}) to learn how use bulk and multi options.
+Dapr supports two types of multi-read or multi-write operations: **bulk** or **transactional**. 阅读 [API 参考]({{< ref state_api.md >}}) 以了解如何使用批量（bulk）选项和批次（multi）选项。
 
 #### Bulk read operations
 
@@ -89,13 +89,13 @@ You can group multiple read requests into a bulk (or batch) operation. In the bu
 
 You can group write, update, and delete operations into a request, which are then handled as an atomic transaction. The request will succeed or fail as a transactional set of operations.
 
-### Actor state
+### Actor 状态
 
-Transactional state stores can be used to store actor state. To specify which state store to use for actors, specify value of property `actorStateStore` as `true` in the state store component's metadata section. Actors state is stored with a specific scheme in transactional state stores, allowing for consistent querying. 只有一个单一的状态存储组件可以被用作所有角色的状态存储。 Read the [state API reference]({{< ref state_api.md >}}) and the [actors API reference]({{< ref actors_api.md >}}) to learn more about state stores for actors.
+事务性状态存储可用于存储 Actor 状态。 To specify which state store to use for actors, specify value of property `actorStateStore` as `true` in the state store component's metadata section. Actors state is stored with a specific scheme in transactional state stores, allowing for consistent querying. 只有一个单一的状态存储组件可以被用作所有角色的状态存储。 Read the [state API reference]({{< ref state_api.md >}}) and the [actors API reference]({{< ref actors_api.md >}}) to learn more about state stores for actors.
 
 ### 状态加密
 
-Dapr supports automatic client encryption of application state with support for key rotations. 这在所有 Dapr 状态存储上都受支持。 有关详细信息，请阅读 [操作方法：加密应用程序状态]({{< ref howto-encrypt-state.md >}}) 主题。
+Dapr 支持客户端对应用程序状态的自动加密，并支持密钥轮换。 这在所有 Dapr 状态存储上都受支持。 有关详细信息，请阅读 [操作方法：加密应用程序状态]({{< ref howto-encrypt-state.md >}}) 主题。
 
 ### 应用程序之间的共享状态
 
@@ -122,7 +122,7 @@ Using the _optional_ state management [query API]({{< ref "reference/api/state_a
 
 #### 直接查询状态存储
 
-Dapr saves and retrieves state values without any transformation. You can query and aggregate state directly from the [underlying state store]({{< ref query-state-store >}}). For example, to get all state keys associated with an application ID "myApp" in Redis, use:
+Dapr保存和检索状态值，而不进行任何转换。 您可以直接从 [基础状态存储]({{< ref query-state-store >}}) 中查询并聚合状态。 例如，要在 Redis 中获取与 app ID“myApp”相关的所有状态 key，可以使用:
 
 ```bash
 KEYS "myApp*"
@@ -134,21 +134,21 @@ Since you aren't calling through the Dapr runtime, direct queries of the state s
 
 ##### 查询 Actor 状态
 
-If the data store supports SQL queries, you can query an actor's state using SQL queries. 例如:
+如果数据存储支持 SQL 查询，您可以使用 SQL 查询 Actor 的状态。 例如:
 
 ```sql
 SELECT * FROM StateTable WHERE Id='<app-id>||<actor-type>||<actor-id>||<key>'
 ```
 
-You can also avoid the common turn-based concurrency limitations of actor frameworks by performing aggregate queries across actor instances. For example, to calculate the average temperature of all thermometer actors, use:
+You can also avoid the common turn-based concurrency limitations of actor frameworks by performing aggregate queries across actor instances. 例如，要计算所有温度计Actor的平均温度，使用:
 
 ```sql
 SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||temperature'
 ```
 
-### State Time-to-Live (TTL)
+### 状态生存时间（TTL）。
 
-Dapr enables [per state set request time-to-live (TTL)]({{< ref state-store-ttl.md >}}). This means that applications can set time-to-live per state stored, and these states cannot be retrieved after expiration.
+Dapr enables [per state set request time-to-live (TTL)]({{< ref state-store-ttl.md >}}). 这意味着应用程序可以为每个存储的状态设置生存时间，并且在过期后无法检索这些状态。
 
 ### 状态管理 API
 
@@ -156,19 +156,19 @@ The state management API can be found in the [state management API reference]({{
 
 ## Try out state management
 
-### Quickstarts and tutorials
+### 快速入门和教程
 
 Want to put the Dapr state management API to the test? Walk through the following quickstart and tutorials to see state management in action:
 
-| Quickstart/tutorial                                                                            | 说明                                                                                                                         |
-| ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| [State management quickstart]({{< ref statemanagement-quickstart.md >}})                       | 使用状态管理 API 创建有状态应用程序。                                                                                                      |
-| [Hello World](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world)           | _Recommended_ <br> Demonstrates how to run Dapr locally. 重点介绍服务调用和状态管理。                                              |
-| [Hello Kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) | _Recommended_ <br> Demonstrates how to run Dapr in Kubernetes. Highlights service invocation and _state management_. |
+| 快速入门/教程                                                                                        | 说明                                                                                               |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [State management quickstart]({{< ref statemanagement-quickstart.md >}})                       | 使用状态管理 API 创建有状态应用程序。                                                                            |
+| [Hello World](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world)           | _推荐_ <br> 演示如何在本地运行 Dapr。 重点介绍服务调用和状态管理。                                                   |
+| [Hello Kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) | _推荐_ <br> 演示如何在 Kubernetes 中运行 Dapr。 Highlights service invocation and _state management_. |
 
 ### Start using state management directly in your app
 
-Want to skip the quickstarts? Not a problem. You can try out the state management building block directly in your application. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the state management API starting with [the state management how-to guide]({{< ref howto-get-save-state.md >}}).
+想跳过快速入门？ 没问题。 You can try out the state management building block directly in your application. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the state management API starting with [the state management how-to guide]({{< ref howto-get-save-state.md >}}).
 
 ## 下一步
 

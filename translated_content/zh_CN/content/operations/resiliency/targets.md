@@ -10,7 +10,7 @@ description: "Apply resiliency policies to apps, components and actors"
 Named policies are applied to targets. Dapr supports three target types that apply all Dapr building block APIs:
 - `apps`
 - `组件`
-- `actors`
+- `actor`
 
 #### Apps
 
@@ -66,7 +66,7 @@ spec:
 `inbound` operations are calls from the sidecar to your application, such as:
 
 - Subscriptions when delivering a message.
-- Input bindings.
+- 输入绑定.
 
 > Some components may have built-in retry capabilities and are configured on a per-component basis.
 
@@ -103,7 +103,7 @@ spec:
           circuitBreaker: general
 ```
 
-#### 参与者
+#### Actors
 
 With the `actors` target, you can apply `retry`, `timeout`, and `circuitBreaker` policies to actor operations.
 

@@ -19,7 +19,7 @@ Dapr提供了帮助开发 PHP 应用程序各种包。 你可以使用他们来�
 ### 可选条件
 
 - [Docker](https://www.docker.com/)
-- [xdebug](http://xdebug.org/) -- for debugging
+- [xdebug](http://xdebug. org/) --用于调试
 
 ## 初始化您的项目
 

@@ -7,7 +7,7 @@ aliases:
   - /zh-hans/developing-applications/middleware/supported-middleware/middleware-uppercase/
 ---
 
-The uppercase [HTTP middleware]({{< ref middleware.md >}}) converts the body of the request to uppercase letters and is used for testing that the pipeline is functioning. 它只应用于本地开发。
+大写 [HTTP midleware]({{< ref middleware.md >}}) 将请求的正文转换为大写字母，并被用于测试管道是否能正常运行。 它只应用于本地开发。
 
 ## 配置
 

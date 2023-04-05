@@ -8,7 +8,7 @@ weight: 2000
 
 ### 说明
 
-Checks the expiry of the root Certificate Authority (CA) certificate
+检查根证书颁发机构 （CA） 证书的过期时间
 
 ### 支持的平台
 
@@ -29,6 +29,6 @@ dapr mtls expiry [flags]
 ### 示例
 
 ```bash
-# Check expiry of Kubernetes certs
+# 检查 Kubernetes 证书的过期时间
 dapr mtls expiry
 ```

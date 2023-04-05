@@ -1,15 +1,15 @@
 ---
 type: docs
-title: "GraphQL binding spec"
+title: "GraphQL 绑定规范"
 linkTitle: "GraphQL"
-description: "Detailed documentation on the GraphQL binding component"
+description: "有关 GraphQL 绑定组件的详细文档"
 aliases:
   - "/zh-hans/operations/components/setup-bindings/supported-bindings/graphql/"
 ---
 
 ## 配置
 
-To setup GraphQL binding create a component of type `bindings.graphql`. 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。 To separate normal config settings (e.g. endpoint) from headers, "header:" is used a prefix on the header names.
+要设置 GraphQL 绑定，请创建一个类型为 `bindings.graphql` 的组件。 请参阅[本指南]({{< ref "howto-bindings.md#1-create-a-binding" >}})，了解如何创建和应用绑定配置。 为了将常规配置设置（例如 endpoint）与 header 分开，在 header 名称上使用前缀 "header:"。
 
 
 ```yaml
@@ -35,25 +35,25 @@ spec:
 
 ## 元数据字段规范
 
-| 字段                 | 必填 | 绑定支持 | 详情                                                                                         | 示例                                        |
-| ------------------ |:--:| ---- | ------------------------------------------------------------------------------------------ | ----------------------------------------- |
-| 终结点                | Y  | 输出   | GraphQL endpoint string See [here](#url-format) for more details                           | `"http://localhost:4000/graphql/graphql"` |
-| header:[HEADERKEY] | N  | 输出   | GraphQL header. Specify the header key in the `name`, and the header value in the `value`. | `"no-cache"` (see above)                  |
+| 字段                 | 必填 | 绑定支持 | 详情                                                          | 示例                                        |
+| ------------------ |:--:| ---- | ----------------------------------------------------------- | ----------------------------------------- |
+| 终结点                | 是  | 输出   | GraphQL endpoint 详细信息请参阅[此处](#url-format)                   | `"http://localhost:4000/graphql/graphql"` |
+| header:[HEADERKEY] | 否  | 输出   | GraphQL header. 指定 `name` 中的 header 键和 `value` 中的 header 值。 | `"no-cache"` （见上文）                        |
 
-### Endpoint and Header format
+### Endpoint 和 Header 格式
 
-The GraphQL binding uses [GraphQL client](https://github.com/machinebox/graphql) internally.
+GraphQL 绑定在内部使用 [GraphQL 客户端](https://github.com/machinebox/graphql) 。
 
 ## 绑定支持
 
 字段名为 `ttlInSeconds`。
 
-- `query`
+- `查询`
 - `mutation`
 
-### query
+### 查询
 
-The `query` operation is used for `query` statements, which returns the metadata along with data in a form of an array of row values.
+`query ` 操作用于 `query` 语句，该语句以行值数组的形式返回元数据和数据。
 
 **请求**
 

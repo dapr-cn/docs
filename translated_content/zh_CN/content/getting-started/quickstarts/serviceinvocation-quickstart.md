@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "快速入门：服务调用"
-linkTitle: "Service Invocation"
+linkTitle: "服务调用"
 weight: 71
 description: "开始使用 Dapr 的服务调用构建块"
 ---

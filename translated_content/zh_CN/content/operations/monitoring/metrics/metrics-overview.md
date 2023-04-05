@@ -3,7 +3,7 @@ type: docs
 title: "度量"
 linkTitle: "度量"
 weight: 4000
-description: "Observing Dapr metrics in Kubernetes"
+description: "在 Kubernetes 中观察 Dapr 指标"
 ---
 
 Dapr exposes a [Prometheus](https://prometheus.io/) metrics endpoint that you can scrape to:
@@ -17,7 +17,7 @@ The metrics endpoint is enabled by default. You can disable it by passing the co
 
 默认指标端口为 `9090`。 You can override this by passing the command line argument `--metrics-port` to Daprd.
 
-You can also disable the metrics exporter for a specific application by setting the `dapr.io/enable-metrics: "false"` annotation to your application deployment. With the metrics exporter disabled, `daprd` will not open the metrics listening port.
+You can also disable the metrics exporter for a specific application by setting the `dapr.io/enable-metrics: "false"` annotation to your application deployment. 当禁用 metrics exporter 后，`daprd` 将不会打开指标的监听端口。
 
 The follow example shows metrics are explicitly enabled with the port specified as "9090".
 
@@ -74,7 +74,7 @@ spec:
 
 By default, each Dapr system process emits Go runtime/process metrics and have their own metrics:
 
-- [Dapr metric list](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md)
+- [Dapr 指标列表](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md)
 
 ## 参考资料
 

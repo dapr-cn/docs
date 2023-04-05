@@ -1,16 +1,16 @@
 ---
 type: docs
-title: "Authenticate requests from Dapr using token authentication"
-linkTitle: "App API token authentication"
+title: "使用 token 认证来自 Dapr 的请求"
+linkTitle: "应用 API 令牌身份验证"
 weight: 4000
-description: "Require every incoming API request from Dapr to include an authentication token"
+description: "要求来自 Dapr 的每个传入 API 请求都包含身份验证令牌"
 ---
 
-For some building blocks such as pub/sub, service invocation and input bindings, Dapr communicates with an app over HTTP or gRPC. To enable the application to authenticate requests that are arriving from the Dapr sidecar, you can configure Dapr to send an API token as a header (in HTTP requests) or metadata (in gRPC requests).
+对于某些构建块，例如发布/订阅、服务调用和输入绑定，Dapr 通过 HTTP 或 gRPC 与应用进行通信。 要使应用程序能够对从 Dapr sidecar 发出的请求进行身份验证，您可以将 Dapr 配置为将 API token 作为标头（在 HTTP 请求中）或元数据（在 gRPC 请求中）发送。
 
 ## 创建令牌
 
-Dapr uses shared tokens for API authentication. You are free to define the API token to use.
+Dapr 使用共享令牌进行 API 身份验证。 您可以自由定义要使用的 API 令牌。
 
 Although Dapr does not impose any format for the shared token, a good idea is to generate a random byte sequence and encode it to Base64. For example, this command generates a random 32-byte key and encodes that as Base64:
 
@@ -18,13 +18,13 @@ Although Dapr does not impose any format for the shared token, a good idea is to
 openssl rand 16 | base64
 ```
 
-## Configure app API token authentication in Dapr
+## 在 Dapr 中配置应用 API 令牌身份验证
 
 令牌认证配置在 Kubernetes 和 自托管 Dapr deployments 下稍有不同：
 
 ### 自托管
 
-In self-hosting scenario, Dapr looks for the presence of `APP_API_TOKEN` environment variable. If that environment variable is set when the `daprd` process launches, Dapr includes the token when calling an app:
+在自托管场景中， Dapr 查找是否存在 `APP_API_TOKEN` 环境变量。 If that environment variable is set when the `daprd` process launches, Dapr includes the token when calling an app:
 
 ```shell
 export APP_API_TOKEN=<token>
@@ -40,9 +40,9 @@ In a Kubernetes deployment, Dapr leverages Kubernetes secrets store to hold the 
 kubectl create secret generic app-api-token --from-literal=token=<token>
 ```
 
-> Note, the above secret needs to be created in each namespace in which you want to enable app token authentication
+> 注意，上述 secret 需要在你希望开启 Dapr token 认证的命名空间中创建
 
-To indicate to Dapr to use the token in the secret when sending requests to the app, add an annotation to your Deployment template spec:
+若要指示 Dapr 在向应用发送请求时使用秘密中的令牌，请向 deployment 模板规范添加注解：
 
 ```yaml
 annotations:
@@ -50,7 +50,7 @@ annotations:
   dapr.io/app-token-secret: "app-api-token" # name of the Kubernetes secret
 ```
 
-When deployed, the Dapr Sidecar Injector automatically creates a secret reference and injects the actual value into `APP_API_TOKEN` environment variable.
+当 Deployment 部署后，Dapr sidecar 注入器会自动创建一个秘密，并将实际值注入到 `APP_API_TOKEN` 环境变量中。
 
 ## 更新令牌
 
@@ -86,7 +86,7 @@ kubectl rollout restart deployment/<deployment-name> --namespace <namespace-name
 
 > Assuming your service is configured with more than one replica, the key rotation process does not result in any downtime.
 
-## Authenticating requests from Dapr
+## 验证来自 Dapr 的请求
 
 Once app token authentication is configured in Dapr, all requests *coming from Dapr* include the token.
 
@@ -100,7 +100,7 @@ dapr-api-token: <token>
 
 ### gRPC
 
-When using gRPC protocol, inspect the incoming calls for the API token on the gRPC metadata:
+当使用 gRPC 协议时，请检查入站 gRPC 请求的元数据（metadata）上的 API 令牌 ：
 
 ```text
 dapr-api-token[0].
@@ -110,7 +110,7 @@ dapr-api-token[0].
 
 ### Kubernetes
 
-In Kubernetes, it's recommended to mount the secret to your pod as an environment variable. Assuming we created a secret with the name `app-api-token` to hold the token:
+在 Kubernetes 中，建议将秘密作为环境变量挂载到 pod 中。 假定我们创建了一个名为 `app-api-token` 的秘密来保存令牌：
 
 ```yaml
 containers:
@@ -131,5 +131,5 @@ export APP_API_TOKEN=<my-app-token>
 
 ## 相关链接
 
-- Learn about [Dapr security concepts]({{< ref security-concept.md >}})
-- Learn [HowTo Enable API token authentication in Dapr]({{< ref api-token.md >}})
+- 了解 [Dapr 安全概念]({{< ref security-concept.md >}})
+- 了解[如何在 Dapr 中启用 API 令牌身份验证]({{< ref api-token.md >}})

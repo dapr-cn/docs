@@ -9,10 +9,10 @@ description: "多个命名空间下使用Dapr Pub/Sub"
 在某些场景下，应用程序分布在不同的命名空间，并通过PubSub共享一个队列或主题。 在这种情况下，必须在每个命名空间上都提供PubSub组件。
 
 {{% alert title="Note" color="primary" %}}
-命名空间是一个Dapr里的，用于确定应用程序和组件的作用范围概念。 这个例子使用的是Kubernetes的命名空间，然而Dapr组件的命名空间范围可以在任何支持的平台上使用。 Read [How-To: Scope components to one or more applications]({{< ref "component-scopes.md" >}}) for more information on scoping components.
+命名空间是一个Dapr里的，用于确定应用程序和组件的作用范围概念。 这个例子使用的是Kubernetes的命名空间，然而Dapr组件的命名空间范围可以在任何支持的平台上使用。 有关确定组件范围的详细信息，请参阅[操作方法：将组件限定为一个或多个应用程序]({{< ref "component-scopes.md" >}}) 。
 {{% /alert %}}
 
-This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub). Redis安装和其订阅者在`namespace-a`中，而发布者UI在`namespace-b`中。 如果Redis安装在另一个命名空间上，或者使用Azure ServiceBus、AWS SNS/SQS或GCP PubSub等云服务，该解决方案也同样奏效。
+这个例子使用了[发布订阅示例](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub)。 Redis安装和其订阅者在`namespace-a`中，而发布者UI在`namespace-b`中。 如果Redis安装在另一个命名空间上，或者使用Azure ServiceBus、AWS SNS/SQS或GCP PubSub等云服务，该解决方案也同样奏效。
 
 这是一个使用命名空间的示例图片。
 
@@ -32,8 +32,8 @@ This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/m
 
 ## 前提
 
-* [Dapr installed on Kubernetes]({{< ref "kubernetes-deploy.md" >}}) in any namespace since Dapr works at the cluster level.
-* Checkout and cd into the directory for [PubSub quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub).
+* [ Dapr 可安装在 Kubernetes 上的]({{< ref " kubernetes-deploy. md" >}})任何命名空间，因为 Dapr 工作在集群级别。
+* 将 [PubSub quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub) 示例 checkout下来并进入目录。
 
 ## 设置`namespace-a`
 

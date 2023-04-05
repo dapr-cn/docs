@@ -23,13 +23,13 @@ dapr list [flags]
 ### 参数
 
 
-| Name                     | 环境变量 | 默认值       | 说明                                                                                        |
-| ------------------------ | ---- | --------- | ----------------------------------------------------------------------------------------- |
-| `--all-namespaces`, `-A` |      | `false`   | List all Dapr pods in all namespaces (optional)                                           |
-| `--help`, `-h`           |      |           | 显示此帮助消息                                                                                   |
-| `--kubernetes`, `-k`     |      | `false`   | List all Dapr pods in a Kubernetes cluster (optional)                                     |
-| `--namespace`, `-n`      |      | `default` | List the Dapr pods in the defined namespace in Kubernetes. Only with `-k` flag (optional) |
-| `--output`, `-o`         |      | `table`   | The output format of the list. Valid values are: `json`, `yaml`, or `table`               |
+| Name                     | 环境变量 | 默认值       | 说明                                                     |
+| ------------------------ | ---- | --------- | ------------------------------------------------------ |
+| `--all-namespaces`, `-A` |      | `false`   | 列出所有命名空间中的所有 Dapr Pod（可选）                              |
+| `--help`, `-h`           |      |           | 显示此帮助消息                                                |
+| `--kubernetes`, `-k`     |      | `false`   | 列出 Kubernetes 集群中的所有 Dapr pod（可选）                      |
+| `--namespace`, `-n`      |      | `default` | 列出 在Kubernetes 中定义的命名空间中 Dapr pod。 仅与 `-k` 标志共同起作用（可选） |
+| `--output`, `-o`         |      | `table`   | 列表的输出格式。 有效值为： `json`、 `yaml`或 `table`                 |
 
 ### 示例
 
@@ -50,11 +50,11 @@ dapr list -k --namespace default
 dapr list -k --all-namespaces
 ```
 
-### Warning messages - Kubernetes Mode
-This command can issue warning messages.
+### 警告消息 - Kubernetes 模式
+此命令可以发出警告消息。
 
-#### Root certificate renewal warning
-If the mtls root certificate deployed to the Kubernetes cluster expires in under 30 days the following warning message is displayed:
+#### 根证书续订警告
+如果部署到 Kubernetes 集群的 mtls 根证书在 30 天内过期，则会显示以下警告消息：
 
 ```
 Dapr root certificate of your Kubernetes cluster expires in <n> days. Expiry date: <date:time> UTC. 

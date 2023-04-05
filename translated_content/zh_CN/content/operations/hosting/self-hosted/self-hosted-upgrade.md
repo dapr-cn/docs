@@ -2,7 +2,7 @@
 type: docs
 title: "在自托管环境中升级 Dapr 的步骤"
 linkTitle: "升级 Dapr"
-weight: 50000
+weight: 40000
 description: "按照这些步骤在自托管模式下升级 Dapr，并确保顺利升级"
 ---
 
@@ -17,7 +17,7 @@ description: "按照这些步骤在自托管模式下升级 Dapr，并确保顺�
    dapr uninstall --all
    ```
 
-1. Download and install the latest CLI by visiting [this guide]({{< ref install-dapr-cli.md >}}).
+1. 通过访问[本指南]({{< ref install-dapr-cli.md >}})下载并安装最新的 CLI。
 
 1. 初始化 Dapr 运行时：
 
@@ -25,7 +25,7 @@ description: "按照这些步骤在自托管模式下升级 Dapr，并确保顺�
    dapr init
    ```
 
-1. Ensure you are using the latest version of Dapr (v{{% dapr-latest-version long="true" %}})) with:
+1. 确保您使用了 Dapr 的最新版本 (v{{% dapr-latest-version long="true" %}}))：
 
    ```bash
    $ dapr --version

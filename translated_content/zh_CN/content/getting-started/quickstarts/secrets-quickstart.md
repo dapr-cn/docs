@@ -29,7 +29,7 @@ Dapr provides a dedicated secrets API that allows developers to retrieve secrets
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/secrets_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/secrets_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -135,7 +135,7 @@ Order-processor输出：
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/secrets_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/secrets_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -248,7 +248,7 @@ Order-processor输出：
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/secrets_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/secrets_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -360,7 +360,7 @@ Order-processor输出：
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/secrets_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/secrets_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -465,7 +465,7 @@ Order-processor输出：
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/secrets_management).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/secrets_management)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git

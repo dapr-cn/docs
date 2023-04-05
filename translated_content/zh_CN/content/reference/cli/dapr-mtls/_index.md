@@ -30,9 +30,9 @@ dapr mtls [command]
 ### 可用命令
 
 ```txt
-expiry              Checks the expiry of the root Certificate Authority (CA) certificate
-export              Export the root Certificate Authority (CA), issuer cert and issuer key to local files
-renew-certificate   Rotates the existing root Certificate Authority (CA), issuer cert and issuer key
+expiry 检查根证书颁发机构 （CA） 证书的到期时间
+export 导出根证书颁发机构 （CA）、颁发者证书和颁发者密钥到本地文件
+renew-certificate 轮换现有的根证书颁发机构 （CA）、颁发者证书和颁发者密钥
 ```
 
 ### 命令参考
@@ -50,11 +50,11 @@ renew-certificate   Rotates the existing root Certificate Authority (CA), issuer
 dapr mtls -k
 ```
 
-### Warning messages
-This command can issue warning messages.
+### 警告信息
+此命令可以发出警告消息。
 
-#### Root certificate renewal warning
-If the mtls root certificate deployed to the Kubernetes cluster expires in under 30 days the following warning message is displayed:
+#### 根证书续订警告
+如果部署到 Kubernetes 集群的 mtls 根证书在 30 天内过期，则会显示以下警告消息：
 
 ```
 Dapr root certificate of your Kubernetes cluster expires in <n> days. Expiry date: <date:time> UTC. 

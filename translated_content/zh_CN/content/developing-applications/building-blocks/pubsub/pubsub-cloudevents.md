@@ -6,7 +6,7 @@ weight: 2100
 description: "Learn why Dapr uses CloudEvents, how they work in Dapr pub/sub, and how to create CloudEvents."
 ---
 
-To enable message routing and provide additional context with each message, Dapr uses the [CloudEvents 1.0 specification](https://github.com/cloudevents/spec/tree/v1.0) as its message format. Any message sent by an application to a topic using Dapr is automatically wrapped in a CloudEvents envelope, using the [`Content-Type` header value]({{< ref "pubsub-overview.md#content-types" >}}) for `datacontenttype` attribute.
+为了启用消息路由并为每条消息提供其他上下文，Dapr 使用 [cloudEvents 1.0](https://github.com/cloudevents/spec/tree/v1.0) 规范作为其消息格式。 Any message sent by an application to a topic using Dapr is automatically wrapped in a CloudEvents envelope, using the [`Content-Type` header value]({{< ref "pubsub-overview.md#content-types" >}}) for `datacontenttype` attribute.
 
 Dapr 使用 CloudEvents 为事件负载提供额外的上下文，从而启用以下功能：
 
@@ -25,7 +25,7 @@ Dapr implements the following CloudEvents fields when creating a message topic.
 - `traceparent`
 - `datacontenttype` (optional)
 
-The following example demonstrates an `orders` topic message sent by Dapr that includes a W3C `traceid` unique to the message, the `data` and the fields for the CloudEvent where the data content is serialized as JSON.
+以下示例演示了 Dapr 发送的 `orders` 主题的消息，其中包括消息独有的 W3C `traceid` 、 `data` 以及将数据内容序列化为 JSON 的 CloudEvent 的字段。
 
 ```json
 {
@@ -62,7 +62,7 @@ As another example of a v1.0 CloudEvent, the following shows data as XML content
 
 ## Publish your own CloudEvent
 
-If you want to use your own CloudEvent, make sure to specify the [`datacontenttype`]({{< ref "pubsub-overview.md#setting-message-content-types" >}}) as `application/cloudevents+json`.
+如果您想使用自己自定义的 CloudEvent，请确保指定[`datacontenttype`]({{< ref "pubsub-overview.md#setting-message-content-types" >}}) 为 `application/cloudevents+json`.
 
 ### 示例
 
@@ -102,8 +102,8 @@ Invoke-RestMethod -Method Post -ContentType 'application/cloudevents+json' -Body
 
 ## 下一步
 
-- Learn why you might [not want to use CloudEvents]({{< ref pubsub-raw.md >}})
-- Try out the [pub/sub Quickstart]({{< ref pubsub-quickstart.md >}})
+- 了解为什么您可能 [不需要使用CloudEvents]({{< ref pubsub-raw.md >}})
+- 尝试 [发布/订阅快速入门]({{< ref pubsub-quickstart.md >}})
 - Pub/sub组件是可扩展的， [这里]({{< ref setup-pubsub >}})有支持的pub/sub组件列表，实现可以在[components-contrib repo](https://github.com/dapr/components-contrib)中找到。
 - 阅读 [API 引用]({{< ref pubsub_api.md >}})
 

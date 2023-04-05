@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "入门指南：发现并调用服务"
-linkTitle: "How-To: Invoke with HTTP"
+linkTitle: "操作方法：使用 HTTP 调用"
 description: "入门指南指导如何使用 Dapr 服务在分布式应用程序中调用其它服务"
 weight: 2000
 ---
@@ -366,32 +366,32 @@ main();
 
 {{< /tabs >}}
 
-### Additional URL formats
+### 其他 URL 格式
 
 要调用 "GET" 端点:
 
 ```bash
-curl http://localhost:3602/v1.0/invoke/checkout/method/checkout/100
+curl http://localhost:3500/v1.0/invoke/cart/method/add
 ```
 
 To avoid changing URL paths as much as possible, Dapr provides the following ways to call the service invocation API:
 
-1. Change the address in the URL to `localhost:<dapr-http-port>`.
+1. 将 URL 中的地址改为 `localhost:<dapr-http-port>`。
 2. 添加一个 `dapr-app-id` 头来指定目标服务的ID，或者通过HTTP Basic Auth传递ID。 `http://dapr-app-id。<service-id>@localhost:3602/path`。
 
 For example, the following command:
 
 ```bash
-curl http://localhost:3602/v1.0/invoke/checkout/method/checkout/100
+curl http://localhost:3500/v1.0/invoke/cart/method/add
 ```
 
-is equivalent to:
+等同于：
 
 ```bash
 curl -H 'dapr-app-id: checkout' 'http://localhost:3602/checkout/100' -X POST
 ```
 
-or:
+或：
 
 ```bash
 curl -H 'dapr-app-id: checkout' 'http://localhost:3602/checkout/100' -X POST

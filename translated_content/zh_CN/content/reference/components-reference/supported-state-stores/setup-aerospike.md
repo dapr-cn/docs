@@ -37,9 +37,9 @@ spec:
 
 | 字段        | 必填 | 详情              | 示例                                                     |
 | --------- |:--:| --------------- | ------------------------------------------------------ |
-| hosts     | Y  | 数据库服务器主机名/端口    | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
-| namespace | Y  | Aerospike 命名空间。 | `"namespace"`                                          |
-| set       | N  | 数据库中的 setname   | `"myset"`                                              |
+| hosts     | 是  | 数据库服务器主机名/端口    | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
+| namespace | 是  | Aerospike 命名空间。 | `"namespace"`                                          |
+| set       | 否  | 数据库中的 setname   | `"myset"`                                              |
 
 ## 安装Aerospike
 

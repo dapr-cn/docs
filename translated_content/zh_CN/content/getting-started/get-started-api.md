@@ -12,7 +12,7 @@ In this guide, you'll simulate an application by running the sidecar and calling
 - Read/get the state object.
 - Delete the state object.
 
-[通过我们的概念文档了解更多关于状态构建块以及它是如何工作的]({{< ref state-management >}})。
+通过我们的[概念文档]({{< ref state-management >}})了解更多关于状态构建块以及它是如何工作的。
 
 ### 前提
 
@@ -29,7 +29,7 @@ The [`dapr run`]({{< ref dapr-run.md >}}) command launches an application, toget
 dapr run --app-id myapp --dapr-http-port 3500
 ```
 
-Since no custom component folder was defined with the above command, Dapr uses the default component definitions created during the [`dapr init` flow]({{< ref "install-dapr-selfhost.md#step-5-verify-components-directory-has-been-initialized" >}}).
+由于没有使用上述命令定义自定义组件文件夹，因此 Dapr 将使用在 [`dapr init` ]({{< ref "install-dapr-selfhost.md#step-5-verify-components-directory-has-been-initialized" >}}) 期间创建的默认组件定义。
 
 ### 第 2 步：保存状态
 

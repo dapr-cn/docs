@@ -6,11 +6,11 @@ description: "关于设置Dapr绑定组件的指南"
 weight: 4000
 ---
 
-Dapr integrates with external resources to allow apps to both be triggered by external events and interact with the resources. Each binding component has a name and this name is used when interacting with the resource.
+Dapr 与外部资源集成，允许应用同时被外部事件触发并与资源交互。 每个绑定组件都有一个名称，此名称用于与资源进行交互。
 
-As with other building block components, binding components are extensible and can be found in the [components-contrib repo](https://github.com/dapr/components-contrib).
+与其他构建块组件一样，绑定存储组件是可扩展的，可以在 [components-contrib 仓库](https://github.com/dapr/components-contrib)中找到。
 
-A binding in Dapr is described using a `Component` file with the following fields:
+在 Dapr 中描述的绑定使用了 `Component` 文件，具有以下字段：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -29,9 +29,9 @@ spec:
 ...
 ```
 
-The type of binding is determined by the `type` field, and things like connection strings and other metadata are put in the `.metadata` section.
+绑定类型由 `type` 字段确定，连接字符串和其他元数据等内容放在 `.metadata` 部分中。
 
-Different [supported bindings]({{< ref supported-bindings >}}) will have different specific fields that would need to be configured. For example, when configuring a binding for [Azure Blob Storage]({{< ref blobstorage>}}), the file would look like this:
+不同的 [支持的绑定]({{< ref supported-bindings >}}) 将有不同的特定字段需要配置。 例如，当配置 [Azure Blob Storage]({{< ref blobstorage>}}) 的绑定时，文件看起来就像这样：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -78,7 +78,7 @@ kubectl apply -f mybinding.yaml
 
 ## Supported bindings
 
-Visit the [bindings reference]({{< ref supported-bindings >}}) for a full list of supported resources.
+访问 [绑定参考文档]({{< ref supported-bindings >}}) 获取支持资源的完整列表。
 
 ## 相关链接
 - [绑定构建块]({{< ref bindings >}})

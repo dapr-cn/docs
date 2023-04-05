@@ -21,19 +21,19 @@ dapr publish [flags]
 
 ### 参数
 
-| Name                     | 环境变量 | 默认值             | 说明                                                    |
-| ------------------------ | ---- | --------------- | ----------------------------------------------------- |
-| `--publish-app-id`, `-i` |      | 代表您要发布的应用程序的 ID |                                                       |
-| `--pubsub`, `-p`         |      | Pub/sub 组件的名称   |                                                       |
-| `--topic`, `-t`          |      |                 | 待发布的 topic                                            |
-| `--data`, `-d`           |      |                 | JSON 序列化数据字符串（可选）                                     |
-| `--data-file`, `-f`      |      |                 | A file containing the JSON serialized data (optional) |
-| `--help`, `-h`           |      |                 | 显示此帮助消息                                               |
+| Name                     | 环境变量 | 默认值             | 说明                   |
+| ------------------------ | ---- | --------------- | -------------------- |
+| `--publish-app-id`, `-i` |      | 代表您要发布的应用程序的 ID |                      |
+| `--pubsub`, `-p`         |      | Pub/sub 组件的名称   |                      |
+| `--topic`, `-t`          |      |                 | 待发布的 topic           |
+| `--data`, `-d`           |      |                 | JSON 序列化数据字符串（可选）    |
+| `--data-file`, `-f`      |      |                 | 包含 JSON 序列化数据的文件（可选） |
+| `--help`, `-h`           |      |                 | 显示此帮助消息              |
 
 
 ### 示例
 
 ```bash
-# Publish to sample topic in target pubsub
+# 发布到目标 pubsub 中的 sample 主题
 dapr publish --publish-app-id appId --topic sample --pubsub target --data '{"key":"value"}'
 ```

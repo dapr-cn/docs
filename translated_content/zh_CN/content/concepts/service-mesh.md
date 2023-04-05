@@ -7,7 +7,7 @@ description: >
   Dapr 与服务网格的比较和配合使用
 ---
 
-Dapr 使用 sidecar 架构，与应用程序一起作为单独的流程运行，包括服务调用、网络安全和分布式跟踪等功能。 这往往会引起一个问题：Dapr与服务网格解决方案如 [Linkerd](https://linkerd.io/), [Istio](https://istio.io/) 和 [Open Service Mesh](https://openservicemesh.io/) 等相比如何？
+Dapr 使用 sidecar 架构，与应用程序一起作为单独的进程运行，包括服务调用、网络安全和分布式跟踪等功能。 这往往会引起一个问题：Dapr与服务网格解决方案如 [Linkerd](https://linkerd.io/), [Istio](https://istio.io/) 和 [Open Service Mesh](https://openservicemesh.io/) 等相比如何？
 
 ## Dapr 和服务网格的比较
 虽然 Dapr 和服务网格确实存在一些重叠功能，但 Dapr **不是服务网格** ，尤其服务网格被定义为 *"网络"* 服务网格。 与专注于网络问题的服务网格不同，Dapr 专注于提供构建基块，使开发人员更容易将应用程序构建为微服务。 Dapr 以开发人员为中心，而服务网格以基础设施为中心。

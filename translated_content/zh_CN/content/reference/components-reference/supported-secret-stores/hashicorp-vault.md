@@ -9,7 +9,7 @@ aliases:
 
 ## 创建 Vault 组件
 
-要设置HashiCorp Vault密钥仓库，请创建一个类型为`secretstores.hashicorp.vault`的组件。 See [this guide]({{< ref "setup-secret-store.md#apply-the-configuration" >}}) on how to create and apply a secretstore configuration. See this guide on [referencing secrets]({{< ref component-secrets.md >}}) to retrieve and use the secret with Dapr components.
+要设置HashiCorp Vault密钥仓库，请创建一个类型为`secretstores.hashicorp.vault`的组件。 有关如何创建和应用密钥库配置，请参阅[本指南]({{< ref "setup-secret-store.md#apply-the-configuration" >}})。 请参阅本指南 [引用密钥]({{< ref component-secrets.md >}}) 来检索和使用Dapr组件的密钥。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -47,25 +47,25 @@ spec:
     value: "map"
 ```
 {{% alert title="Warning" color="warning" %}}
-以上示例将密钥明文存储， It is recommended to use a local secret store such as [Kubernetes secret store]({{< ref kubernetes-secret-store.md >}}) or a [local file]({{< ref file-secret-store.md >}}) to bootstrap secure key storage.
+以上示例将密钥明文存储， 建议将密钥存储在本地，如[Kubernetes密钥存储]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| 字段                  | 必填 | 详情                                                                                                                                                                                                                              | 示例                         |
-| ------------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| vaultAddr           | N  | Vault服务器的地址 默认值为 `"https://127.0.0.1:8200"`                                                                                                                                                                                     | `"https://127.0.0.1:8200"` |
-| caCert              | N  | Certificate Authority只使用其中一个选项。 要使用的加密cacerts                                                                                                                                                                                   | `"cacerts"`                |
-| caPath              | N  | Certificate Authority只使用其中一个选项。 CA证书文件的路径                                                                                                                                                                                       | `"path/to/cacert/file"`    |
-| caPem               | N  | Certificate Authority只使用其中一个选项。 要是用的加密cacert pem                                                                                                                                                                                | `"encodedpem"`             |
-| skipVerify          | N  | 跳过 TLS 验证。 默认值为 `"false"`                                                                                                                                                                                                       | `"true"`, `"false"`        |
-| tlsServerName       | N  | TLS 配置服务器名称                                                                                                                                                                                                                     | `"tls-server"`             |
-| vaultTokenMountPath | Y  | 包含token的文件路径                                                                                                                                                                                                                    | `"path/to/file"`           |
-| vaultToken          | Y  | [Token](https://learn.hashicorp.com/tutorials/vault/tokens) for authentication within Vault.                                                                                                                                    | `"tokenValue"`             |
-| vaultKVPrefix       | N  | 仓库前缀 默认值为 `"dapr"`                                                                                                                                                                                                              | `"dapr"`, `"myprefix"`     |
-| vaultKVUsePrefix    | N  | If false, vaultKVPrefix is forced to be empty. If the value is not given or set to true, vaultKVPrefix is used when accessing the vault. Setting it to false is needed to be able to use the BulkGetSecret method of the store. | `"true"`, `"false"`        |
-| enginePath          | N  | The [engine](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) path in vault. Defaults to `"secret"`                                                                                                                        | `"kv"`, `"any"`            |
-| vaultValueType      | N  | Vault value type. `map` means to parse the value into `map[string]string`, `text` means to use the value as a string. Defaults to `"map"`                                                                                       | `"map"`, `"text"`          |
+| 字段                  | 必填 | 详情                                                                                                                   | 示例                         |
+| ------------------- |:--:| -------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| vaultAddr           | 否  | Vault服务器的地址 默认值为 `"https://127.0.0.1:8200"`                                                                          | `"https://127.0.0.1:8200"` |
+| caCert              | 否  | Certificate Authority只使用其中一个选项。 要使用的加密cacerts                                                                        | `"cacerts"`                |
+| caPath              | 否  | Certificate Authority只使用其中一个选项。 CA证书文件的路径                                                                            | `"path/to/cacert/file"`    |
+| caPem               | 否  | Certificate Authority只使用其中一个选项。 要是用的加密cacert pem                                                                     | `"encodedpem"`             |
+| skipVerify          | 否  | 跳过 TLS 验证。 默认值为 `"false"`                                                                                            | `"true"`, `"false"`        |
+| tlsServerName       | 否  | TLS 配置服务器名称                                                                                                          | `"tls-server"`             |
+| vaultTokenMountPath | 是  | 包含token的文件路径                                                                                                         | `"path/to/file"`           |
+| vaultToken          | 是  | [令牌](https://learn.hashicorp.com/tutorials/vault/tokens) ，用于在 Vault 中进行身份验证。                                         | `"tokenValue"`             |
+| vaultKVPrefix       | 否  | 仓库前缀 默认值为 `"dapr"`                                                                                                   | `"dapr"`, `"myprefix"`     |
+| vaultKVUsePrefix    | 否  | 如果为 false，vaultKVPrefix 将强制为空。 如果未给出该值或设置为 true，则在 vault 时将使用 vaultKVPrefix。 为了使用存储的 BulkGetSecret 方法，需要将其设置为 false。 | `"true"`, `"false"`        |
+| enginePath          | 否  | Vault内[engine](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) 路径. 默认值为 `"secret"`                             | `"kv"`, `"any"`            |
+| vaultValueType      | 否  | Vault值类型。 `map` 表示将值解析为 `map[string]string`， `text` 表示将值用作字符串。 默认值为 `"map"`                                          | `"map"`, `"text"`          |
 
 ## 设置 Hashicorp Vault实例
 

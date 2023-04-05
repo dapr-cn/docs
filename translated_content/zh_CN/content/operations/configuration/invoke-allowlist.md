@@ -6,68 +6,68 @@ weight: 4000
 description: "限制应用程序可以通过服务调用在\"调用\"应用程序上执行什么操作"
 ---
 
-Access control enables the configuration of policies that restrict what operations *calling* applications can perform, via service invocation, on the *called* application. To limit access to a called applications from specific operations and HTTP verbs from the calling applications, you can define an access control policy specification in configuration.
+访问控制可以配置策略，限制*调用*应用程序可以通过服务调用对*被调用*应用程序执行哪些操作。 为了限制来自调用应用程序的特定操作和 HTTP verbs 对被调用应用程序的访问，你可以在配置中定义访问控制策略规范。
 
-An access control policy is specified in configuration and be applied to Dapr sidecar for the *called* application. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applications to access to the called app.
+访问控制策略在配置中指定，并应用于*被调用* 应用程序的 Dapr sidecar。 示例访问策略如下所示，对被调用应用的访问基于匹配的策略操作。 您可以为所有调用应用程序提供默认的全局操作，如果未指定访问控制策略，则默认行为是允许所有调用应用程序访问被调用的应用程序。
 
-## Concepts
+## 基础概念
 
-**TrustDomain** - A "trust domain" is a logical group to manage trust relationships. Every application is assigned a trust domain which can be specified in the access control list policy spec. If no policy spec is defined or an empty trust domain is specified, then a default value "public" is used. This trust domain is used to generate the identity of the application in the TLS cert.
+**TrustDomain** - "信任域"是用于管理信任关系的逻辑组。 每个应用程序都分配有一个信任域，可以在访问控制列表策略规范中指定。 如果未定义策略规范或指定了空信任域，则使用默认值 "public"。 此信任域用于在 TLS 证书中生成应用程序的标识。
 
-**App Identity** - Dapr requests the sentry service to generate a [SPIFFE](https://spiffe.io/) id for all applications and this id is attached in the TLS cert. SPIFFE id 的格式为：`**spiffe://\&#060;trustdomain&#062;/ns/\&#060;namespace\&#062;/\&#060;appid\&#062;**`. For matching policies, the trust domain, namespace and app ID values of the calling app are extracted from the SPIFFE id in the TLS cert of the calling app. These values are matched against the trust domain, namespace and app ID values specified in the policy spec. If all three of these match, then more specific policies are further matched.
+**App Identity** - Dapr 需要 Sentry 服务来生成 [SPIFFE](https://spiffe.io/) id 给所有应用，并且这个 id 会附加在 TLS 证书中。 SPIFFE id 的格式为：`**spiffe://\&#060;trustdomain&#062;/ns/\&#060;namespace\&#062;/\&#060;appid\&#062;**`.  对应的规范中，信任域，命名空间 和 app ID 会从 SPIFFE id 的 TLS 证书中提取出来。   这些值会对应上规范中相应的值.。 如果这三者都匹配，则进一步匹配更具体的策略。
 
-## Configuration properties
+## 配置属性
 
-The following tables lists the different properties for access control, policies and operations:
+下表列出了访问控制、策略和操作的不同属性：
 
-### Access Control
+### 访问控制
 
-| 属性            | 数据类型   | 说明                                                                             |
-| ------------- | ------ | ------------------------------------------------------------------------------ |
-| defaultAction | string | Global default action when no other policy is matched                          |
-| trustDomain   | string | Trust domain assigned to the application. Default is "public".                 |
-| policies      | string | Policies to determine what operations the calling app can do on the called app |
+| 属性            | 数据类型   | 说明                             |
+| ------------- | ------ | ------------------------------ |
+| defaultAction | string | 没有其他策略匹配时的全局默认操作               |
+| trustDomain   | string | 分配给应用程序的信任域。 默认值为 "public"。    |
+| policies      | string | 用于确定调用应用程序可以对被调用的应用程序执行哪些操作的策略 |
 
-### Policies
+### 策略
 
-| 属性            | 数据类型   | 说明                                                                                                  |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| app           | string | AppId of the calling app to allow/deny service invocation from                                      |
-| namespace     | string | Namespace value that needs to be matched with the namespace of the calling app                      |
-| trustDomain   | string | Trust domain that needs to be matched with the trust domain of the calling app. Default is "public" |
-| defaultAction | string | App level default action in case the app is found but no specific operation is matched              |
-| operations    | string | operations that are allowed from the calling app                                                    |
+| 属性            | 数据类型   | 说明                               |
+| ------------- | ------ | -------------------------------- |
+| app           | string | 允许/拒绝服务调用的调用应用的 AppId            |
+| namespace     | string | 需要与调用应用的命名空间匹配的命名空间值             |
+| trustDomain   | string | 需要与调用应用的信任域匹配的信任域。 默认值为 "public" |
+| defaultAction | string | 应用级别的默认操作，以防找到应用但未匹配特定操作         |
+| operations    | string | 允许的从调用应用发起的操作                    |
 
-### Operations
+### 操作
 
-| 属性       | 数据类型   | 说明                                                                                                                                                                 |
-| -------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| name     | string | Path name of the operations allowed on the called app. Wildcard "\*" can be used in a path to match. Wildcard "\**" can be used to match under multiple paths. |
-| httpVerb | list   | List specific http verbs that can be used by the calling app. Wildcard "\*" can be used to match any http verb. Unused for grpc invocation.                      |
-| action   | string | Access modifier. Accepted values "allow" (default) or "deny"                                                                                                       |
+| 属性       | 数据类型   | 说明                                                                                                                           |
+| -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| name     | string | 被调用应用上允许的操作的路径名。 Wildcard "\*" can be used in a path to match. Wildcard "\**" can be used to match under multiple paths. |
+| httpVerb | list   | 列出调用应用程序可以使用的特定 http verbs。 通配符"\*"可用于匹配任何 http verbs。 不用于 grpc 调用.                                                        |
+| action   | string | 访问修饰符。 接受的值为 "allow"（默认值）或 "deny"                                                                                            |
 
-## Policy rules
+## 策略规则
 
-1. If no access policy is specified, the default behavior is to allow all apps to access to all methods on the called app
-2. If no global default action is specified and no app specific policies defined, the empty access policy is treated like no access policy specified and the default behavior is to allow all apps to access to all methods on the called app.
-3. If no global default action is specified but some app specific policies have been defined, then we resort to a more secure option of assuming the global default action to deny access to all methods on the called app.
-4. If an access policy is defined and if the incoming app credentials cannot be verified, then the global default action takes effect.
-5. If either the trust domain or namespace of the incoming app do not match the values specified in the app policy, the app policy is ignored and the global default action takes effect.
+1. 如果未指定访问策略，则默认行为是允许所有应用访问被调用应用上的所有方法
+2. 如果未指定全局默认操作，也没有定义特定于应用的策略，则空访问策略将被视为未指定访问策略，默认行为是允许所有应用访问被调用应用上的所有方法。
+3. 如果未指定全局默认操作，但已定义了某些特定于应用的策略，则我们采用更安全的选项，即假定全局默认操作以拒绝访问被调用应用上的所有方法。
+4. 如果定义了访问策略，并且无法验证传入的应用程序凭据，则全局默认操作将生效。
+5. 如果传入应用的信任域或命名空间与应用策略中指定的值不匹配，则会忽略应用策略，并且全局默认操作将生效。
 
-## Policy priority
+## 策略优先级
 
-The action corresponding to the most specific policy matched takes effect as ordered below:
-1. Specific HTTP verbs in the case of HTTP or the operation level action in the case of GRPC.
-2. The default action at the app level
-3. The default action at the global level
+与匹配的最具体策略对应的操作将按以下顺序生效：
+1. HTTP 情况下的特定 HTTP verbs 或 GRPC 情况下的操作级别操作。
+2. 应用级别的默认操作
+3. 全局级别的默认操作
 
-## Example scenarios
+## 示例方案
 
-Below are some example scenarios for using access control list for service invocation. See [configuration guidance]({{< ref "configuration-concept.md" >}}) to understand the available configuration settings for an application sidecar.
+以下是使用访问控制列表进行服务调用的一些示例方案。 请参阅 [配置指南]({{< ref "configuration-concept.md" >}}) 以了解应用程序 sidecar 的可用配置设置。
 
 <font size=5>方案1：拒绝访问所有应用，除非 trustDomain = public, namespace = default, appId = app1</font>
 
-With this configuration, all calling methods with appId = app1 are allowed and all other invocation requests from other applications are denied
+使用此配置时，将允许所有 appId = app1 的调用方法，并拒绝来自其他应用程序的所有其他调用请求
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -87,7 +87,7 @@ spec:
 
 <font size=5>方案2：拒绝访问除信任域外的所有 trustDomain = public, namespace = default, appId = app1, operation = op1</font>
 
-With this configuration, only method op1 from appId = app1 is allowed and all other method requests from all other apps, including other methods on app1, are denied
+在这种配置下，只有来自 appId = app1 的方法 op1 被允许，来自所有其他应用程序的所有其他方法请求，包括 app1 上的其他方法，都被拒绝。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -111,9 +111,9 @@ spec:
 
 <font size=5>方案 3：拒绝访问所有应用，除非匹配 HTTP 的特定动词和 GRPC 的操作</font>
 
-With this configuration, the only scenarios below are allowed access and and all other method requests from all other apps, including other methods on app1 or app2, are denied
+使用此配置时，以下唯一方案是允许访问的，并且来自所有其他应用（包括 app1 或 app2 上的其他方法）的所有其他方法请求都将被拒绝
 * trustDomain = public, namespace = default, appID = app1, operation = op1, http verb = POST/PUT
-* trustDomain = "myDomain", namespace = "ns1", appID = app2, operation = op2 and application protocol is GRPC , only HTTP verbs POST/PUT on method op1 from appId = app1 are allowed and all other method requests from all other apps, including other methods on app1, are denied
+* trustDomain = "myDomain"， namespace = "ns1"， appID = app2， operation = op2，应用程序协议是 GRPC，只允许 HTTP POST/PUT 在 appId = app1 时请求方法 op1，而来自所有其他应用程序的所有方法， 以及 app1 上的其他方法，请求都会被拒绝
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -142,7 +142,7 @@ spec:
         action: allow
 ```
 
-<font size=5>Scenario 4: Allow access to all methods except trustDomain = public, namespace = default, appId = app1, operation = /op1/*, all http verbs</font>
+<font size=5>方案 4：允许访问除 trustDomain = public、namespace = default、appId = app1、operation = /op1/* 之外的所有方法，所有 http verbs</font>
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -164,9 +164,9 @@ spec:
         action: deny
 ```
 
-<font size=5>Scenario 5: Allow access to all methods for trustDomain = public, namespace = ns1, appId = app1 and deny access to all methods for trustDomain = public, namespace = ns2, appId = app1</font>
+<font size=5>方案 5：允许访问 trustDomain = public、namespace = ns1、appId = app1 的所有方法，并拒绝访问 trustDomain = public、namespace = ns2、appId = app1 的所有方法</font>
 
-This scenario shows how applications with the same app ID but belonging to different namespaces can be specified
+此方案显示如何指定具有相同应用 ID 但属于不同命名空间的应用程序
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -188,7 +188,7 @@ spec:
       namespace: "ns2"
 ```
 
-<font size=5>Scenario 6: Allow access to all methods except trustDomain = public, namespace = default, appId = app1, operation = /op1/**/a, all http verbs</font>
+<font size=5>方案 6：允许访问除 trustDomain = public、namespace = default、appId = app1、operation =/op1/**/a之外的所有方法，所有 http verbs</font>
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -210,11 +210,11 @@ spec:
         action: deny
 ```
 
-## Hello world examples
+## Hello world 示例
 
-These examples show how to apply access control to the [hello world](https://github.com/dapr/quickstarts#quickstarts) quickstart samples where a python app invokes a node.js app. Access control lists rely on the Dapr [Sentry service]({{< ref "security-concept.md" >}}) to generate the TLS certificates with a SPIFFE id for authentication, which means the Sentry service either has to be running locally or deployed to your hosting environment such as a Kubernetes cluster.
+这些示例演示如何将访问控制应用于 [hello world](https://github.com/dapr/quickstarts#quickstarts) 快速入门示例，其中 python 应用调用 node.js 应用。 访问控制列表依赖于 Dapr [Sentry 服务]({{< ref "security-concept.md" >}}) 来生成具有 SPIFFE ID 进行身份验证的 TLS 证书，这意味着 Sentry 服务必须在本地运行或部署到您的托管环境（如 Kubernetes 集群）。
 
-The nodeappconfig example below shows how to **deny** access to the `neworder` method from the `pythonapp`, where the python app is in the `myDomain` trust domain and `default` namespace. The nodeapp is in the `public` trust domain.
+下面的 nodeappconfig 示例显示了如何 **拒绝** 从 `pythonapp`访问 `neworder` 方法，其中 python 应用位于 `myDomain` 信任域中，并且命名空间为 `default` 。 nodeapp 位于 `public` 信任域中。
 
 **nodeappconfig.yaml**
 
@@ -258,11 +258,11 @@ spec:
 ### 自托管模式
 此示例使用 [hello world](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world/README.md) 快速入门。
 
-The following steps run the Sentry service locally with mTLS enabled, set up necessary environment variables to access certificates, and then launch both the node app and python app each referencing the Sentry service to apply the ACLs.
+以下步骤在启用 mTLS 的情况下在本地运行 Sentry 服务，设置必要的环境变量以访问证书，然后启动节点应用和 python 应用，每个应用都引用 Sentry 服务来应用 ACL。
 
- 1. Follow these steps to run the [Sentry service in self-hosted mode]({{< ref "mtls.md" >}}) with mTLS enabled
+ 1. 按照以下步骤在启用了 mTLS 的情况下运行 [自托管模式 Sentry 服务]({{< ref "mtls.md" >}})
 
- 2. In a command prompt, set these environment variables:
+ 2. 在命令提示符下，设置以下环境变量：
 
     {{< tabs "Linux/MacOS" Windows >}}
 
@@ -288,19 +288,19 @@ The following steps run the Sentry service locally with mTLS enabled, set up nec
 
     {{< /tabs >}}
 
-3. Run daprd to launch a Dapr sidecar for the node.js app with mTLS enabled, referencing the local Sentry service:
+3. 运行 daprd，为启用了 mTLS 的 node.js 应用启动 Dapr sidecar，并引用本地 Sentry 服务：
 
    ```bash
    daprd --app-id nodeapp --dapr-grpc-port 50002 -dapr-http-port 3501 --log-level debug --app-port 3000 --enable-mtls --sentry-address localhost:50001 --config nodeappconfig.yaml
    ```
 
-4. Run the node app in a separate command prompt:
+4. 在单独的命令提示符下运行 node 应用：
 
    ```bash
    node app.js
    ```
 
-5. In another command prompt, set these environment variables:
+5. 在另一个命令提示符下，设置以下环境变量：
 
    {{< tabs "Linux/MacOS" Windows >}}
 
@@ -324,26 +324,26 @@ The following steps run the Sentry service locally with mTLS enabled, set up nec
 
    {{< /tabs >}}
 
-6. Run daprd to launch a Dapr sidecar for the python app with mTLS enabled, referencing the local Sentry service:
+6. 运行 daprd 为启用了 mTLS 的 python 应用启动 Dapr sidecar，引用本地 Sentry 服务：
 
    ```bash
    daprd --app-id pythonapp   --dapr-grpc-port 50003 --metrics-port 9092 --log-level debug --enable-mtls --sentry-address localhost:50001 --config pythonappconfig.yaml
    ```
 
-7. Run the python app in a separate command prompt:
+7. 在单独的命令提示符下运行 python 应用：
 
    ```bash
    python app.py
    ```
 
-8. You should see the calls to the node app fail in the python app command prompt based due to the **deny** operation action in the nodeappconfig file. Change this action to **allow** and re-run the apps and you should then see this call succeed.
+8. 你应该看到，由于 nodeappconfig 文件中的 **deny** 操作动作，在基于 python 应用程序的命令提示中，对 node 应用程序的调用失败。 将此操作更改为 **allow** 并重新运行应用，然后应看到此调用成功。
 
-### Kubernetes mode
+### Kubernetes 模式
 此示例使用 [hello kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes/README.md) 快速入门。
 
-You can create and apply the above configuration files `nodeappconfig.yaml` and `pythonappconfig.yaml` as described in the [configuration]({{< ref "configuration-concept.md" >}}) to the Kubernetes deployments.
+您可以创建并应用上述配置文件 `nodeappconfig.yaml` 和 `pythonconfig.yaml` 由 [configuration]({{< ref "configuration-concept.md" >}}) 描述到 Kubernetes 部署。
 
-For example, below is how the pythonapp is deployed to Kubernetes in the default namespace with this pythonappconfig configuration file. Do the same for the nodeapp deployment and then look at the logs for the pythonapp to see the calls fail due to the **deny** operation action set in the nodeappconfig file. Change this action to **allow** and re-deploy the apps and you should then see this call succeed.
+例如，以下是通过这个 pythonappconfig 配置文件将 pythonapp 部署到 Kubernetes 的默认命名空间中。 部署 nodeapp，然后查看 pythonapp 的日志，您会发现由于 nodeappconfig 文件中的 action **deny** Post 请求的设置，pythonapp 的请求失败了。 将 action 改为 **allow** 之后再部署 app，您会发现请求又会成功了。
 
 ```yaml
 apiVersion: apps/v1
@@ -373,7 +373,7 @@ spec:
 ```
 
 ## 社区示例
-Watch this [video](https://youtu.be/j99RN_nxExA?t=1108) on how to apply access control list for service invocation.
+观看这个[视频](https://youtu. be/j99RN_nxExA? t=1108) ，了解如何为服务调用应用访问控制列表。
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="688" height="430" src="https://www.youtube.com/embed/j99RN_nxExA?start=1108" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

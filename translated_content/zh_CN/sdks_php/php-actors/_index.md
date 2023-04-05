@@ -1,23 +1,23 @@
 ---
 type: docs
-title: "Virtual Actors"
-linkTitle: "参与者"
+title: "Virtual Actor"
+linkTitle: "Actors"
 weight: 1000
 description: 如何创建一个actor
 no_list: true
 ---
 
-If you're new to the actor pattern, the best place to learn about the actor pattern is in the [Actor Overview.]({{< ref actors-overview.md >}})
+如果您不熟悉 actor 模式，了解 actor 模式的最佳位置是 [Actor 概述]({{< ref actors-overview.md >}})。
 
-在PHP SDK中，角色有两个方面，即客户端和actor（也称为运行时）。 As a client of an actor, you'll interact with a remote actor via the `ActorProxy` class. This class generates a proxy class on-the-fly using one of several configured strategies.
+在PHP SDK中，角色有两个方面，即客户端和actor（也称为运行时）。 作为 actor 的客户端，你将通过 `ActorProxy` 类与远程 actor 交互。 此类使用多个已配置策略中的一个来动态生成代理类。
 
-When writing an actor, state can be managed for you. You can hook into the actor lifecycle, and define reminders and timers. This gives you considerable power for handling all types of problems that the actor pattern is suited for.
+编写 actor 时，可以为您管理状态。 您可以挂钩到 actor 生命周期，并定义提示器和计时器。 这为您提供了相当大的能力来处理 Actor 模式适合的所有类型的问题。
 
-## The Actor Proxy
+## Actor 代理
 
-Whenever you want to communicate with an actor, you'll need to get a proxy object to do so. The proxy is responsible for serializing your request, deserializing the response, and returning it to you, all while obeying the contract defined by the specified interface.
+每当你想要与 actor 通信时，你都需要一个代理对象来执行此操作。 代理负责序列化请求，反序列化响应，并将其返回，同时遵守指定接口定义的约束。
 
-In order to create the proxy, you'll first need an interface to define how and what you send and receive from an actor. For example, if you want to communicate with a counting actor that solely keeps track of counts, you might define the interface as follows:
+为了创建代理，您首先需要一个接口来定义从 actor 发送和接收的方式和内容。 例如，如果要与仅跟踪计数的计数 actor 进行通信，则可以按定义接口如下：
 
 ```php
 <?php
@@ -28,7 +28,7 @@ interface ICount {
 }
 ```
 
-It's a good idea to put this interface in a shared library that the actor and clients can both access (if both are written in PHP). The `DaprType` attribute tells the DaprClient the name of the actor to send to. It should match the implementation's `DaprType`, though you can override the type if needed.
+最好将此接口放在一个共享库中，参与者和客户端都可以访问该库（如果两者都是用 PHP 编写的）。 `DaprType` 属性告诉 DaprClient 要发送到的 actor 的名称。 它应该与实现的 `DaprType` 相匹配，尽管你可以根据需要覆盖这个类型。
 
 ```php
 <?php
@@ -38,11 +38,11 @@ $app->run(function(\Dapr\Actors\ActorProxy $actorProxy) {
 });
 ```
 
-## Writing Actors
+## 编写 Actor
 
-To create an actor, you need to implement the interface you defined earlier and also add the `DaprType` attribute. All actors *must* implement `IActor`, however there's an `Actor` base class that implements the boilerplate making your implementation much simpler.
+要创建 actor，您需要实现之前定义的接口，并添加 `DaprType` 属性。 所有的Actor都*必须* 实现 `IActor`，但是有一个 `Actor` 基类来实现样板，使您的实现更加简单。
 
-Here's the counter actor:
+这是一个计数器 actor：
 
 ```php
 <?php
@@ -62,21 +62,21 @@ class Counter extends \Dapr\Actors\Actor implements ICount {
 }
 ```
 
-The most important bit is the constructor. It takes at least one argument with the name of `id` which is the id of the actor. Any additional arguments are injected by the DI container, including any `ActorState` you want to use.
+最重要的一点是构造函数。 它至少需要一个参数，其名称为 `id` ，这是 actor 的id。 任何其他参数都由 DI 容器注入，包括任何要使用的 `ActorState` 。
 
-### Actor Lifecycle
+### Actor 的生命周期
 
-An actor is instantiated via the constructor on every request targeting that actor type. You can use it to calculate ephemeral state or handle any kind of request-specific startup you require, such as setting up other clients or connections.
+Actor 通过构造函数在每个针对该 actor 类型的请求中被实例化。 你可以用它来计算临时状态，或者处理你所需要的任何一种特定请求的启动，例如设置其他客户端或连接。
 
-After the actor is instantiated, the `on_activation()` method may be called. The `on_activation()` method is called any time the actor "wakes up" or when it is created for the first time. It is not called on every request.
+在 actor 被实例化之后， `on_activation()` 方法可能被调用。 `on_activation()` 方法在 actor 每次"唤醒"或首次创建时调用。 并非在每个请求上调用。
 
-Next, the actor method is called. This may be from a timer, reminder, or from a client. You may perform any work that needs to be done and/or throw an exception.
+接下来，调用 actor 方法。 这可能来自计时器、提醒或客户端。 您可以执行任何需要完成的工作和/或抛出异常。
 
-Finally, the result of the work is returned to the caller. After some time (depending on how you've configured the service), the actor will be deactivated and `on_deactivation()` will be called. This may not be called if the host dies, daprd crashes, or some other error occurs which prevents it from being called successfully.
+最后，工作结果将返回给调用方。 一段时间后（取决于您配置服务的方式），actor 将被停用，并且 `on_deactivation()` 将被调用。 如果主机死机、daprd 崩溃或发生阻止其成功调用的其他错误，则可能不会调用此操作。
 
-## Actor State
+## Actor 状态
 
-Actor state is a "Plain Old PHP Object" (POPO) that extends `ActorState`. The `ActorState` base class provides a couple of useful methods. Here's an example implementation:
+Actor 状态是一个 "Plain Old PHP Object" (POPO)，它继承自 `ActorState`。 `ActorState` 基类提供了几个有用的方法。 下面是一个示例实现：
 
 ```php
 <?php
@@ -85,15 +85,15 @@ class CountState extends \Dapr\Actors\ActorState {
 }
 ```
 
-## Registering an Actor
+## 注册 Actor
 
-Dapr expects to know what actors a service may host at startup. You need to add it to the configuration:
+Dapr 希望知道服务在启动时可以托管哪些 actor。 您需要将其添加到配置中：
 
 {{< tabs "Production" "Development" >}}
 
 {{% codetab %}}
 
-If you want to take advantage of pre-compiled dependency injection, you need to use a factory:
+如果要利用预编译的依赖关系注入，则需要使用工厂：
 
 ```php
 <?php
@@ -104,7 +104,7 @@ return [
 ];
 ```
 
-All that is required to start the app:
+启动应用程序所需的所有内容：
 
 ```php
 <?php
@@ -129,7 +129,7 @@ return [
 ];
 ```
 
-All that is required to start the app:
+启动应用程序所需的所有内容：
 
 ```php
 <?php

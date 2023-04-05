@@ -1,9 +1,9 @@
 ---
-type: docs
-title: "Dapr Java SDK"
-linkTitle: "Java"
-weight: 1000
-description: Java SDK packages for developing Dapr applications
+类型：文档
+标题：“Dapr Java SDK”
+链接标题：“Java”
+权重：1000
+开发 Dapr 应用程序的 Java SDK 包
 ---
 
 ## Pre-requisites
@@ -214,7 +214,7 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 - Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/secrets) for code samples and instructions to try out retrieving secrets
 
 ### Actors
-参与者是孤立的独立计算单元，具有单线程执行。 Dapr provides an actor implementation based on the [Virtual Actor pattern](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/), which provides a single-threaded programming model and where actors are garbage collected when not in use. With Dapr's implementaiton, you write your Dapr actors according to the Actor model, and Dapr leverages the scalability and reliability that the underlying platform provides. 
+参与者是孤立的独立计算单元，具有单线程执行。 Dapr provides an actor implementation based on the [Virtual Actor pattern](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/), which provides a single-threaded programming model and where actors are garbage collected when not in use. 通过 Dapr 的实现，您可以根据 Actor 模型编写 Dapr Actor，而 Dapr 则利用底层平台提供的可扩展性和可靠性。 
 
 ```java
 import io.dapr.actors.ActorMethod;

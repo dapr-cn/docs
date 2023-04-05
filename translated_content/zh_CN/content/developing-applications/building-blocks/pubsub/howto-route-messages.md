@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "How-To: Route messages to different event handlers"
-linkTitle: "How-To: Route events"
+title: "操作方法：将消息路由到不同的事件处理程序"
+linkTitle: "操作方法：路由事件"
 weight: 2300
-description: "Learn how to route messages from a topic to different event handlers based on CloudEvent fields"
+description: "了解如何根据 CloudEvent 字段将消息从主题路由到不同的事件处理程序"
 ---
 
 {{% alert title="Preview feature" color="warning" %}}
 Pub/sub message routing is currently in [preview]({{< ref preview-features.md >}}).
 {{% /alert %}}
 
-Pub/sub routing is an implementation of [content-based routing](https://www.enterpriseintegrationpatterns.com/ContentBasedRouter.html), a messaging pattern that utilizes a DSL instead of imperative application code. With pub/sub routing, you use expressions to route [CloudEvents](https://cloudevents.io) (based on their contents) to different URIs/paths and event handlers in your application. If no route matches, then an optional default route is used. This proves useful as your applications expand to support multiple event versions or special cases.
+Pub/sub routing is an implementation of [content-based routing](https://www.enterpriseintegrationpatterns.com/ContentBasedRouter.html), a messaging pattern that utilizes a DSL instead of imperative application code. With pub/sub routing, you use expressions to route [CloudEvents](https://cloudevents.io) (based on their contents) to different URIs/paths and event handlers in your application. 如果没有匹配的路由，那么将使用一个可选的默认路由。 This proves useful as your applications expand to support multiple event versions or special cases.
 
 While routing can be implemented with code, keeping routing rules external from the application can improve portability.
 
 This feature is available to both the [declarative and programmatic subscription approaches]({{< ref subscription-methods.md >}}).
 
-## Enable message routing
+## 启用信息路由
 
 To enable this preview feature, add the `PubSub.Routing` feature entry to your application configuration:
 
@@ -31,9 +31,9 @@ spec:
       enabled: true
 ```
 
-Learn more about enabling [preview features]({{< ref preview-features >}}).
+了解更多关于启用 [预览功能]({{< ref preview-features >}}) 的信息。
 
-## Declarative subscription
+## 声明式订阅
 
 For declarative subscriptions, use `dapr.io/v2alpha1` as the `apiVersion`. Here is an example of `subscriptions.yaml` using routing:
 
@@ -57,7 +57,7 @@ scopes:
   - app2
 ```
 
-## Programmatic subscription
+## 编程式订阅
 
 In the programmatic approach, the `routes` structure is returned instead of `route`. The JSON structure matches the declarative YAML:
 
@@ -268,7 +268,7 @@ $app->start();
 
 {{< /tabs >}}
 
-## Common Expression Language (CEL)
+## 通用表达式语言(CEL)
 
 In these examples, depending on the `event.type`, the application will be called on:
 
@@ -276,9 +276,9 @@ In these examples, depending on the `event.type`, the application will be called
 - `/gadgets`
 - `/products`
 
-The expressions are written as [Common Expression Language (CEL)](https://github.com/google/cel-spec) where `event` represents the cloud event. Any of the attributes from the [CloudEvents core specification](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#required-attributes) can be referenced in the expression.
+表达式写成 [通用表达式语言（CEL）](https://github.com/google/cel-spec) 其中 `event` 代表 cloud event。 [CloudEvents 核心规范](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#required-attributes) 中的任何属性都可以在表达式中引用。
 
-### Example expressions
+### 表达式示例
 
 Match "important" messages:
 
@@ -302,25 +302,25 @@ event.type == "mymessage.v1"
 event.type == "mymessage.v2"
 ```
 
-## CloudEvent attributes
+## CloudEvent 属性
 
-For reference, the following attributes are from the CloudEvents specification.
+作为参考，以下属性来自 CloudEvents 规范。
 
 ### Event Data
 
 #### data
 
-As defined by the term **data**, CloudEvents _may_ include domain-specific information about the occurrence. When present, this information will be encapsulated within `data`.
+As defined by the term **data**, CloudEvents _may_ include domain-specific information about the occurrence. 如果存在，该信息将被封装在 `data`中。
 
 - **Description:** The event payload. This specification places no restriction on the information type. It is encoded into a media format, specified by the `datacontenttype` attribute (e.g. application/json), and adheres to the `dataschema` format when those respective attributes are present.
-- **Constraints:**
-  - OPTIONAL
+- **约束：**
+  - 可选的
 
 {{% alert title="Limitation" color="warning" %}}
 Currently, you can only access the attributes inside data if it is nested JSON values and not JSON escaped in a string.
 {{% /alert %}}
 
-### REQUIRED Attributes
+### 必需的属性
 
 The following attributes are **required** in all CloudEvents:
 
@@ -328,13 +328,13 @@ The following attributes are **required** in all CloudEvents:
 
 - **Type:** `String`
 - **Description:** Identifies the event. Producers _must_ ensure that `source` + `id` are unique for each distinct event. If a duplicate event is re-sent (e.g. due to a network error), it may have the same `id`. Consumers may assume that events with identical `source` and `id` are duplicates.
-- **Constraints:**
-  - REQUIRED
+- **约束：**
+  - 必需的
   - Must be a non-empty string
   - Must be unique within the scope of the producer
-- **Examples:**
-  - An event counter maintained by the producer
-  - A UUID
+- **示例:**
+  - 一个由生产者维护的事件计数器
+  - 一个 UUID
 
 #### source
 
@@ -354,15 +354,15 @@ The following attributes are **required** in all CloudEvents:
 
   A source may include more than one producer. In this case, the producers _must_ collaborate to ensure that `source` + `id` are unique for each distinct event.
 
-- **Constraints:**
-  - REQUIRED
+- **约束：**
+  - 必需的
   - Must be a non-empty URI-reference
-  - An absolute URI is RECOMMENDED
-- **Examples:**
+  - 建议使用绝对 URI
+- **示例:**
   - Internet-wide unique URI with a DNS authority:
     - https://github.com/cloudevents
     - mailto:cncf-wg-serverless@lists.cncf.io
-  - Universally-unique URN with a UUID:
+  - 具有 UUID 的普遍唯一的 URN。
     - urn:uuid:6e8bc430-9c3a-11d9-9669-0800200c9a66
   - Application-specific identifiers:
     - /cloudevents/spec/pull/123
@@ -372,29 +372,29 @@ The following attributes are **required** in all CloudEvents:
 #### specversion
 
 - **Type:** `String`
-- **Description:** The version of the CloudEvents specification used by the event. This enables the interpretation of the context. Compliant event producers _must_ use a value of `1.0` when referring to this version of the specification.
+- **Description:** The version of the CloudEvents specification used by the event. 这使人们能够对背景进行解释。 Compliant event producers _must_ use a value of `1.0` when referring to this version of the specification.
 
   Currently, this attribute only includes the 'major' and 'minor' version numbers. This allows patch changes to the specification to be made without changing this property's value in the serialization.
 
   Note: for 'release candidate' releases, a suffix might be used for testing purposes.
 
-- **Constraints:**
-  - REQUIRED
+- **约束：**
+  - 必需的
   - Must be a non-empty string
 
 #### type
 
 - **Type:** `String`
 - **Description:** Contains a value describing the event type related to the originating occurrence. Often, this attribute is used for routing, observability, policy enforcement, etc. The format is producer-defined and might include information like the version of the `type`. See [Versioning of CloudEvents in the Primer](https://github.com/cloudevents/spec/blob/v1.0.1/primer.md#versioning-of-cloudevents) for more information.
-- **Constraints:**
-  - REQUIRED
+- **约束：**
+  - 必需的
   - Must be a non-empty string
   - Should be prefixed with a reverse-DNS name. The prefixed domain dictates the organization, which defines the semantics of this event type.
-- **Examples:**
-  - com.github.pull_request.opened
-  - com.example.object.deleted.v2
+- **示例:**
+  - com.github.pull_request. opened
+  - com.example.object.delete.v2
 
-### OPTIONAL Attributes
+### OPTIONAL属性
 
 The following attributes are **optional** to appear in CloudEvents. See the [Notational Conventions](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#notational-conventions) section for more information on the definition of OPTIONAL.
 
@@ -413,8 +413,8 @@ The following attributes are **optional** to appear in CloudEvents. See the [Not
 
   When translating an event message with no `datacontenttype` attribute to a different format or protocol binding, the target `datacontenttype` should be set explicitly to the implied `datacontenttype` of the source.
 
-- **Constraints:**
-  - OPTIONAL
+- **约束：**
+  - 可选的
   - If present, must adhere to the format specified in [RFC 2046](https://tools.ietf.org/html/rfc2046)
 - For Media Type examples, see [IANA Media Types](http://www.iana.org/assignments/media-types/media-types.xhtml)
 
@@ -422,8 +422,8 @@ The following attributes are **optional** to appear in CloudEvents. See the [Not
 
 - **Type:** `URI`
 - **Description:** Identifies the schema that `data` adheres to. Incompatible changes to the schema should be reflected by a different URI. See [Versioning of CloudEvents in the Primer](https://github.com/cloudevents/spec/blob/v1.0.1/primer.md#versioning-of-cloudevents) for more information.
-- **Constraints:**
-  - OPTIONAL
+- **约束：**
+  - 可选的
   - If present, must be a non-empty URI
 
 #### subject
@@ -433,8 +433,8 @@ The following attributes are **optional** to appear in CloudEvents. See the [Not
 
   Identifying the subject of the event in context metadata (opposed to only in the `data` payload) is helpful in generic subscription filtering scenarios, where middleware is unable to interpret the `data` content. In the above example, the subscriber might only be interested in blobs with names ending with '.jpg' or '.jpeg'. With the `subject` attribute, you can construct a simple and efficient string-suffix filter for that subset of events.
 
-- **Constraints:**
-  - OPTIONAL
+- **约束：**
+  - 可选的
   - If present, must be a non-empty string
 - **Example:**  
   A subscriber might register interest for when new blobs are created inside a blob-storage container. In this case:
@@ -450,17 +450,17 @@ The following attributes are **optional** to appear in CloudEvents. See the [Not
 
 - **Type:** `Timestamp`
 - **Description:** Timestamp of when the occurrence happened. If the time of the occurrence cannot be determined, then this attribute may be set to some other time (such as the current time) by the CloudEvents producer. However, all producers for the same `source` _must_ be consistent in this respect. In other words, either they all use the actual time of the occurrence or they all use the same algorithm to determine the value used.
-- **Constraints:**
-  - OPTIONAL
+- **约束：**
+  - 可选的
   - If present, must adhere to the format specified in [RFC 3339](https://tools.ietf.org/html/rfc3339)
 
 {{% alert title="Limitation" color="warning" %}}
-Currently, comparisons to time (e.g. before or after "now") are not supported.
+目前，不支持对时间的比较（如 "现在"之前或之后）。
 {{% /alert %}}
 
 ## 社区示例
 
-Watch [this video](https://www.youtube.com/watch?v=QqJgRmbH82I&t=1063s) on how to use message routing with pub/sub:
+观看 [这个视频](https://www. youtube. com/watch? v=QqJgRmbH82I& t=1063s) 关于如何使用 pub/sub 的消息路由。
 
 <p class="embed-responsive embed-responsive-16by9">
 <iframe width="688" height="430" src="https://www.youtube.com/embed/QqJgRmbH82I?start=1063" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -471,5 +471,5 @@ Watch [this video](https://www.youtube.com/watch?v=QqJgRmbH82I&t=1063s) on how t
 - Try the [pub/sub routing sample](https://github.com/dapr/samples/tree/master/pub-sub-routing).
 - Learn about [topic scoping]({{< ref pubsub-scopes.md >}}) and [message time-to-live]({{< ref pubsub-message-ttl.md >}}).
 - [Configure pub/sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}}).
-- Review the list of [pub/sub components]({{< ref setup-pubsub >}}).
-- Read the [API reference]({{< ref pubsub_api.md >}}).
+- 查看 [发布/订阅 组件列表]({{< ref setup-pubsub >}})。
+- 阅读 [API 参考文档]({{< ref pubsub_api.md >}}).

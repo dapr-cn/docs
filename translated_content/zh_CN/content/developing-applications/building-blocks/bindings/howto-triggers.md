@@ -14,7 +14,7 @@ Input bindings are ideal for event-driven processing, data pipelines, or general
 - 在不更改代码的情况下替换绑定
 - 关注业务逻辑而不是事件资源实现
 
-<img src="/images/howto-triggers/kafka-input-binding.png" width=1000 alt="Diagram showing bindings of example service">
+<img src="/images/howto-triggers/kafka-input-binding.png" width=1000 alt="显示示例服务绑定的图示">
 
 This guide uses a Kafka binding as an example. You can find your preferred binding spec from [the list of bindings components]({{< ref setup-bindings >}}). In this guide:
 
@@ -256,9 +256,9 @@ Tell Dapr you've successfully processed an event in your application by returnin
 
 Tell Dapr the event was not processed correctly in your application and schedule it for redelivery by returning any response other than `200 OK`. 例如， `500 Error`。
 
-### Specifying a custom route
+### 指定自定义路由
 
-By default, incoming events will be sent to an HTTP endpoint that corresponds to the name of the input binding. You can override this by setting the following metadata property in `binding.yaml`:
+默认情况下，传入事件将发送到与输入绑定的名称对应的 HTTP 端点。 You can override this by setting the following metadata property in `binding.yaml`:
 
 ```yaml
 name: mybinding
