@@ -10,31 +10,7 @@
 	path = src/source/v1.3
 	url = https://github.com/dapr/docs.git
 	branch = v1.3
-[submodule "src/source/v1.4"]
-	path = src/source/v1.4
-	url = https://github.com/dapr/docs.git
-	branch = v1.4
-[submodule "src/source/v1.5"]
-	path = src/source/v1.5
-	url = https://github.com/dapr/docs.git
-	branch = v1.5
-[submodule "src/dapr-cn/v1.5"]
-	path = src/dapr-cn/v1.5
-	url = https://github.com/dapr-cn/docs.git
-	branch = v1.5/translate_site
-[submodule "src/source/v1.6"]
-	path = src/source/v1.6
-	url = https://github.com/dapr/docs.git
-	branch = v1.6
 [submodule "src/dapr-cn/v1.6"]
 	path = src/dapr-cn/v1.6
 	url = https://github.com/dapr-cn/docs.git
 	branch = v1.6/translate_site
-[submodule "src/source/v1.7"]
-	path = src/source/v1.7
-	url = https://github.com/dapr/docs.git
-	branch = v1.7
-[submodule "src/dapr-cn/v1.7"]
-	path = src/dapr-cn/v1.7
-	url = https://github.com/dapr-cn/docs.git
-	branch = v1.7/translate_site
