@@ -1,0 +1,248 @@
+---
+type: docs
+title: "Kubernetes 生产环境配置指南"
+linkTitle: "生产环境配置指南"
+weight: 40000
+description: "在生产环境中将 Dapr 部署到 Kubernetes 集群的建议和做法"
+---
+
+## Cluster and capacity requirements
+
+Dapr support for Kubernetes is aligned with [Kubernetes Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/).
+
+For a production-ready Kubernetes cluster deployment, we recommended you run a cluster of at least 3 worker nodes to support a highly-available control plane installation.
+
+Use the following resource settings as a starting point. Requirements will vary depending on cluster size, number of pods, and other factors, so you should perform individual testing to find the right values for your environment:
+
+| Deployment           | CPU                       | Memory                       |
+| -------------------- | ------------------------- | ---------------------------- |
+| **Operator**         | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 100Mi |
+| **Sidecar Injector** | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 30Mi  |
+| **Sentry**           | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 30Mi  |
+| **Placement**        | Limit: 1, Request: 250m   | Limit: 150Mi, Request: 75Mi  |
+| **Dashboard**        | Limit: 200m, Request: 50m | Limit: 200Mi, Request: 20Mi  |
+
+{{% alert title="Note" color="primary" %}}
+For more info, read the [concept article on CPU and Memory resource units and their meaning](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes).
+{{% /alert %}}
+
+### Helm
+
+When installing Dapr using Helm, no default limit/request values are set. Each component has a `resources` option (for example, `dapr_dashboard.resources`), which you can use to tune the Dapr control plane to fit your environment.
+
+The [Helm chart readme](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md) has detailed information and examples.
+
+For local/dev installations, you might simply want to skip configuring the `resources` options.
+
+### 可选组件
+
+The following Dapr control plane deployments are optional:
+
+- **Placement**: needed to use Dapr Actors
+- **Sentry**: needed for mTLS for service to service invocation
+- **Dashboard**: needed to get an operational view of the cluster
+
+## Sidecar 资源设置
+
+To set the resource assignments for the Dapr sidecar, see the annotations [here]({{< ref "arguments-annotations-overview.md" >}}). The specific annotations related to resource constraints are:
+
+- `dapr.io/sidecar-cpu-limit`
+- `dapr.io/sidecar-memory-limit`
+- `dapr.io/sidecar-cpu-request`
+- `dapr.io/sidecar-memory-request`
+
+If not set, the Dapr sidecar will run without resource settings, which may lead to issues. For a production-ready setup it is strongly recommended to configure these settings.
+
+For more details on configuring resource in Kubernetes see [Assign Memory Resources to Containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) and [Assign CPU Resources to Containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/).
+
+Example settings for the Dapr sidecar in a production-ready setup:
+
+| CPU                        | Memory                        |
+| -------------------------- | ----------------------------- |
+| Limit: 300m, Request: 100m | Limit: 1000Mi, Request: 250Mi |
+
+{{% alert title="Note" color="primary" %}}
+Since Dapr is intended to do much of the I/O heavy lifting for your app, it's expected that the resources given to Dapr enable you to drastically reduce the resource allocations for the application.
+{{% /alert %}}
+
+The CPU and memory limits above account for the fact that Dapr is intended to support a high number of I/O bound operations. It is strongly recommended that you use a monitoring tool to get a baseline for the sidecar (and app) containers and tune these settings based on those baselines.
+
+## 高可用模式
+
+When deploying Dapr in a production-ready configuration, it is recommend to deploy with a highly available (HA) configuration of the control plane, which creates 3 replicas of each control plane pod in the dapr-system namespace. This configuration allows the Dapr control plane to retain 3 running instances and survive individual node failures and other outages.
+
+For a new Dapr deployment, the HA mode can be set with both the [Dapr CLI]({{< ref "kubernetes-deploy.md#install-in-highly-available-mode" >}}) and with [Helm charts]({{< ref "kubernetes-deploy.md#add-and-install-dapr-helm-chart" >}}).
+
+For an existing Dapr deployment, enabling the HA mode requires additional steps. Please refer to [this paragraph]({{< ref "#enabling-high-availability-in-an-existing-dapr-deployment" >}}) for more details.
+
+## 用 Helm 部署 Dapr
+
+[Visit the full guide on deploying Dapr with Helm]({{< ref "kubernetes-deploy.md#install-with-helm-advanced" >}}).
+
+### 参数文件
+
+Instead of specifying parameters on the command line, it's recommended to create a values file. This file should be checked into source control so that you can track its changes.
+
+For a full list of all available options you can set in the values file (or by using the `--set` command-line option), see https://github.com/dapr/dapr/blob/master/charts/dapr/README.md.
+
+Instead of using either `helm install` or `helm upgrade` as shown below, you can also run `helm upgrade --install` - this will dynamically determine whether to install or upgrade.
+
+```bash
+# Add/update a official Dapr Helm repo.
+helm repo add dapr https://dapr.github.io/helm-charts/
+# or add/update a private Dapr Helm repo.
+helm repo add dapr http://helm.custom-domain.com/dapr/dapr/ \
+   --username=xxx --password=xxx
+helm repo update
+
+# See which chart versions are available
+helm search repo dapr --devel --versions
+
+# create a values file to store variables
+touch values.yml
+cat << EOF >> values.yml
+global:
+  ha:
+    enabled: true
+EOF
+
+# run install/upgrade
+helm install dapr dapr/dapr \
+  --version=<Dapr chart version> \
+  --namespace dapr-system \
+  --create-namespace \
+  --values values.yml \
+  --wait
+
+# verify the installation
+kubectl get pods --namespace dapr-system
+```
+
+This command will run 3 replicas of each control plane service in the dapr-system namespace.
+
+{{% alert title="Note" color="primary" %}}
+The Dapr Helm chart automatically deploys with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy the Dapr control plane to Windows nodes, but most users should not need to. For more information see [Deploying to a Hybrid Linux/Windows K8s Cluster]({{< ref "kubernetes-hybrid-clusters.md" >}}).
+
+{{% /alert %}}
+
+## 用 Helm 升级 Dapr
+
+Dapr supports zero-downtime upgrades. The upgrade path includes the following steps:
+
+1. Upgrading a CLI version (optional but recommended)
+2. Updating the Dapr control plane
+3. Updating the data plane (Dapr sidecars)
+
+### 升级 CLI
+
+To upgrade the Dapr CLI, [download the latest version](https://github.com/dapr/cli/releases) of the CLI and ensure it's in your path.
+
+### 更新 Dapr control plane
+
+See [steps to upgrade Dapr on a Kubernetes cluster]({{< ref "kubernetes-upgrade.md#helm" >}}).
+
+### 更新数据平面（sidecar）
+
+The last step is to update pods that are running Dapr to pick up the new version of the Dapr runtime. To do that, simply issue a rollout restart command for any deployment that has the `dapr.io/enabled` annotation:
+
+```bash
+kubectl rollout restart deploy/<Application deployment name>
+```
+
+To see a list of all your Dapr enabled deployments, you can either use the [Dapr Dashboard](https://github.com/dapr/dashboard) or run the following command using the Dapr CLI:
+
+```bash
+dapr list -k
+
+APP ID     APP PORT  AGE  CREATED
+nodeapp    3000      16h  2020-07-29 17:16.22
+```
+
+### 在现有 Dapr 部署中启用高可用
+
+Enabling HA mode for an existing Dapr deployment requires two steps:
+
+1. Delete the existing placement stateful set:
+
+   ```bash
+   kubectl delete statefulset.apps/dapr-placement-server -n dapr-system
+   ```
+
+1. 执行升级命令：
+
+   ```bash
+   helm upgrade dapr ./charts/dapr -n dapr-system --set global.ha.enabled=true
+   ```
+
+You delete the placement stateful set because, in the HA mode, the placement service adds [Raft](https://raft.github.io/) for leader election. However, Kubernetes only allows for limited fields in stateful sets to be patched, subsequently failing upgrade of the placement service.
+
+Deletion of the existing placement stateful set is safe. The agents will reconnect and re-register with the newly created placement service, which will persist its table in Raft.
+
+## 建议的安全配置
+
+When properly configured, Dapr ensures secure communication. It can also make your application more secure with a number of built-in features.
+
+It is recommended that a production-ready deployment includes the following settings:
+
+1. **Mutual Authentication (mTLS)** should be enabled. Note that Dapr has mTLS on by default. For details on how to bring your own certificates, see [here]({{< ref "mtls.md#bringing-your-own-certificates" >}})
+
+2. **启用 Dapr to App API 验证**。 这是你的应用程序和 Dapr sidecar 之间的通信。 这能确保 Dapr 知道它正在与授权的应用程序通信。 有关详细信息，请参阅[在 Dapr 中启用 API 令牌身份验证]({{< ref "api-token.md" >}})
+
+3. **启用 Dapr to App API 验证**。 这是你的应用程序和 Dapr sidecar 之间的通信。 这能确保 Dapr 知道它正在与授权的应用程序通信。 请参阅 [使用令牌认证对来自 Dapr 的请求进行认证]({{< ref "app-api-token.md" >}}) 了解详情
+
+4. 所有的组件 YAML 都应该把**密钥数据配置在密钥存储中**，而不是硬编码在 YAML 文件中。 请参阅 [此处]({{< ref "component-secrets.md" >}}秘密)，了解如何在 Dapr 组件中使用秘密。
+
+5. The Dapr **control plane is installed on a dedicated namespace** such as `dapr-system`.
+
+6. Dapr also supports **scoping components for certain applications**. This is not a required practice, and can be enabled according to your security needs. 请参阅 [此处]({{< ref "component-scopes.md" >}}) 以获取更多信息。
+
+## Service account tokens
+
+By default, Kubernetes mounts a volume containing a [Service Account token](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) in each container. Applications can use this token, whose permissions vary depending on the configuration of the cluster and namespace, among other things, to perform API calls against the Kubernetes control plane.
+
+When creating a new Pod (or a Deployment, StatefulSet, Job, etc), you can disable auto-mounting the Service Account token by setting `automountServiceAccountToken: false` in your pod's spec.
+
+It is recommended that you consider deploying your apps with `automountServiceAccountToken: false` to improve the security posture of your pods, unless your apps depend on having a Service Account token. For example, you may need a Service Account token if:
+
+- You are using Dapr components that interact with the Kubernetes APIs, for example the [Kubernetes secret store]({{< ref "kubernetes-secret-store.md" >}}) or the [Kubernetes Events binding]{{< ref "kubernetes-binding.md" >}}).  
+  Note that initializing Dapr components using [component secrets]({{< ref "component-secrets.md" >}}) stored as Kubernetes secrets does **not** require a Service Account token, so you can still set `automountServiceAccountToken: false` in this case. Only calling the Kubernetes secret store at runtime, using the [Secrets management]({{< ref "secrets-overview.md" >}}) building block, is impacted.
+- Your own application needs to interact with the Kubernetes APIs.
+
+Because of the reasons above, Dapr does not set `automountServiceAccountToken: false` automatically for you. However, in all situations where the Service Account is not required by your solution, it is recommended that you set this option in the pods spec.
+
+## Tracing and metrics configuration
+
+Dapr has tracing and metrics enabled by default. It is *recommended* that you set up distributed tracing and metrics for your applications and the Dapr control plane in production.
+
+If you already have your own observability set-up, you can disable tracing and metrics for Dapr.
+
+### Tracing
+
+To configure a tracing backend for Dapr visit [this]({{< ref "setup-tracing.md" >}}) link.
+
+### Metrics
+
+For metrics, Dapr exposes a Prometheus endpoint listening on port 9090 which can be scraped by Prometheus.
+
+To setup Prometheus, Grafana and other monitoring tools with Dapr, visit [this]({{< ref "monitoring" >}}) link.
+
+## Injector watchdog
+
+The Dapr Operator service includes an _injector watchdog_ which can be used to detect and remediate situations where your application's pods may be deployed without the Dapr sidecar (the `daprd` container) when they should have been. For example, it can assist with recovering the applications after a total cluster failure.
+
+The injector watchdog is disabled by default when running Dapr in Kubernetes mode and it is recommended that you consider enabling it with values that are appropriate for your specific situation.
+
+Refer to the documentation for the [Dapr operator]({{< ref operator >}}) service for more details on the injector watchdog and how to enable it.
+
+## Configuring seccompProfile for sidecar containers
+
+By default, the Dapr sidecar Injector injects a sidecar without any `seccompProfile`. However, to have Dapr sidecar container run successfully in a namespace with [Restricted](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted) profile, the sidecar container needs to have `securityContext.seccompProfile.Type` to not be `nil`.
+
+Refer to [this]({{< ref "arguments-annotations-overview.md" >}}) documentation to set appropriate `seccompProfile` on sidecar container according to which profile it is running with.
+
+## Best Practices
+
+Watch this video for a deep dive into the best practices for running Dapr in production with Kubernetes
+
+<div class="embed-responsive embed-responsive-16by9">
+<iframe width="360" height="315" src="https://www.youtube-nocookie.com/embed/_U9wJqq-H1g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

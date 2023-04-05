@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Go SDK 回调 Dapr 服务入门"
-linkTitle: "Service (服务)"
+linkTitle: "服务"
 weight: 20000
 description: 如何使用 Go SDK 回调 Dapr 服务
 no_list: true

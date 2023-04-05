@@ -7,8 +7,8 @@ description: 如何使 Dapr HTTP 服务 SDK for Go 启动和运行
 no_list: true
 ---
 
-### 先决条件
-首先导入 Dapr Go service/http 包：
+### Prerequisite
+Start by importing Dapr Go service/http package:
 
 ```go
 daprd "github.com/dapr/go-sdk/service/http"
@@ -43,8 +43,8 @@ if err := s.Start(); err != nil && err != http.ErrServerClosed {
 ```go
 sub := &common.Subscription{
     PubsubName: "messages",
-    Topic: "topic1",
-    Route: "/events",
+    Topic:      "topic1",
+    Route:      "/events",
 }
 err := s.AddTopicEventHandler(sub, eventHandler)
 if err != nil {
@@ -62,8 +62,24 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 }
 ```
 
+Optionally, you can use [routing rules](https://docs.dapr.io/developing-applications/building-blocks/pubsub/howto-route-messages/) to send messages to different handlers based on the contents of the CloudEvent.
+
+```go
+sub := &common.Subscription{
+    PubsubName: "messages",
+    Topic:      "topic1",
+    Route:      "/important",
+    Match:      `event.type == "important"`,
+    Priority:   1,
+}
+err := s.AddTopicEventHandler(sub, importantHandler)
+if err != nil {
+    log.Fatalf("error adding topic subscription: %v", err)
+}
+```
+
 ### 服务调用处理
-要处理服务调用，您需要在启动服务之前添加至少一个服务调用handler：
+To handle service invocations you will need to add at least one service invocation handler before starting the service:
 
 ```go
 if err := s.AddServiceInvocationHandler("/echo", echoHandler); err != nil {

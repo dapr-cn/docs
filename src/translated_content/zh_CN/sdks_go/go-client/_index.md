@@ -7,16 +7,16 @@ description: 如何使用 Dapr Go SDK 启动和运行
 no_list: true
 ---
 
-Dapr client允许您的 Go 应用程序与其他 Dapr 应用程序进行交互。
+The Dapr client package allows you to interact with other Dapr applications from a Go application.
 
-## 先决条件
+## Prerequisites
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Go已安装](https://golang.org/doc/install)
+- [Go installed](https://golang.org/doc/install)
 
 
-## 导入包
+## 导入客户端包
 ```go
 import "github.com/dapr/go-sdk/client"
 ```
@@ -25,7 +25,7 @@ import "github.com/dapr/go-sdk/client"
 
 Go SDK 允许您与所有 [Dapr 构建块]({{< ref building-blocks >}}) 进行交互。
 
-### 服务调用
+### Service Invocation
 
 要在 Dapr sidecar 运行的服务上调用特定方法，Dapr 客户端 Go SDK 提供了两个选项：
 
@@ -56,19 +56,19 @@ data := []byte("hello")
 store := "my-store" // defined in the component YAML 
 
 // save state with the key key1, default options: strong, last-write
-if err := client.SaveState(ctx, store, "key1", data); err != nil {
+if err := client.SaveState(ctx, store, "key1", data, nil); err != nil {
     panic(err)
 }
 
 // get state for key key1
-item, err := client.GetState(ctx, store, "key1")
+item, err := client.GetState(ctx, store, "key1", nil)
 if err != nil {
     panic(err)
 }
 fmt.Printf("data [key:%s etag:%s]: %s", item.Key, item.Etag, string(item.Value))
 
 // delete state for key key1
-if err := client.DeleteState(ctx, store, "key1"); err != nil {
+if err := client.DeleteState(ctx, store, "key1", nil); err != nil {
     panic(err)
 }
 ```
@@ -152,7 +152,7 @@ if err := client.PublishEvent(ctx, "component-name", "topic-name", data); err !=
 }
 ```
 
-- 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
+- For a full list of state operations visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
 
 ### 输出绑定
 Dapr Go Client SDK 提供了两种方法来调用 Dapr 定义好的绑定操作方法。 Dapr 支持输入、输出和双向绑定。
@@ -175,7 +175,7 @@ out, err := client.InvokeBinding(ctx, in)
 ```
 
 
-- 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
+- For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
 
 ### 密钥管理
 
@@ -193,7 +193,7 @@ secret, err := client.GetSecret(ctx, "store-name", "secret-name", opt)
 
 默认情况下，Dapr依靠网络边界限制对其API的访问。 然而，如果Dapr API 使用了基于令牌的身份验证配置，用户可以通过以下两种方式配置Go Dapr客户端鉴权：
 
-**环境变量**
+**Environment Variable**
 
 如果定义了 DAPR_API_TOKEN 环境变量，Dapr 将自动使用它来做 Dapr API 调用时的鉴权。
 
@@ -213,7 +213,7 @@ func main() {
 ```
 
 
-- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
+- For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
 
 ## 相关链接
 - [Go SDK 示例](https://github.com/dapr/go-sdk/tree/main/examples)

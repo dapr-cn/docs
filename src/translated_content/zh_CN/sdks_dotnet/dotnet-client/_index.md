@@ -3,25 +3,25 @@ type: docs
 title: "Dapr 客户端 .NET SDK入门"
 linkTitle: "客户端"
 weight: 20000
-description: 如何启动和运行Dapr .NET SDK
+description: 如何使用 Dapr .NET SDK 启动和运行
 no_list: true
 ---
 
-Dapr 客户端包允许您从.NET应用程序中与其他 Dapr 应用程序进行交互。
+The Dapr client package allows you to interact with other Dapr applications from a .NET application.
 
-## 先决条件
+{{% alert title="Note" color="primary" %}}
+ If you haven't already, [try out one of the quickstarts]({{< ref quickstarts >}}) for a quick walk-through on how to use the Dapr .NET SDK with an API building block.
 
-- 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [.NET Core 3.1 或 .NET 5+](https://dotnet.microsoft.com/download) 已安装
+{{% /alert %}}
+
 
 ## 构建块
 
-.NET SDK允许您与所有的[Dapr构建块]({{< ref building-blocks >}})接口。
+The .NET SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
 
 ### 调用服务
 
-您可以使用 `DaprClient` 或 `System.Net.Http.HttpClient` 调用您的服务。
+You can either use the `DaprClient` or `System.Net.Http.HttpClient` to invoke your services.
 
 {{< tabs SDK HTTP>}}
 
@@ -51,7 +51,7 @@ Console.WriteLine("Returned: id:{0} | Balance:{1}", account.Id, account.Balance)
 
 - 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
-### 保存 & 获取 应用程序状态
+### 保存和获取应用程序状态
 
 ```csharp
 var client = new DaprClientBuilder().Build();
@@ -67,6 +67,31 @@ await client.DeleteStateAsync(storeName, stateKeyName, cancellationToken: cancel
 Console.WriteLine("Deleted State!");
 ```
 
+### 查询状态（Alpha）
+
+```csharp
+var query = "{" +
+                "\"filter\": {" +
+                    "\"EQ\": { \"value.Id\": \"1\" }" +
+                "}," +
+                "\"sort\": [" +
+                    "{" +
+                        "\"key\": \"value.Balance\"," +
+                        "\"order\": \"DESC\"" +
+                    "}" +
+                "]" +
+            "}";
+
+var client = new DaprClientBuilder().Build();
+var queryResponse = await client.QueryStateAsync<Account>("querystore", query, cancellationToken: cancellationToken);
+
+Console.WriteLine($"Got {queryResponse.Results.Count}");
+foreach (var account in queryResponse.Results)
+{
+    Console.WriteLine($"Account: {account.Data.Id} has {account.Data.Balance}");
+}
+```
+
 - 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
 
 ### 发布消息
@@ -79,8 +104,8 @@ await client.PublishEventAsync(pubsubName, "deposit", eventData, cancellationTok
 Console.WriteLine("Published deposit event!");
 ```
 
-- 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-- 请访问[.NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe)，获取代码示例和说明，以试用 发布/订阅。
+- For a full list of state operations visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
+- Visit [.NET SDK examples](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe) for code samples and instructions to try out pub/sub
 
 ### 与输出绑定交互
 
@@ -100,9 +125,9 @@ var email = new
 await client.InvokeBindingAsync("send-email", "create", email);
 ```
 
-- 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
+- For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
 
-### 检索密钥
+### Retrieve secrets
 
 {{< tabs Multi-value-secret Single-value-secret >}}
 
@@ -138,7 +163,114 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 
 {{< /tabs >}}
 
-- 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
+- For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
+
+### 获取配置键（Alpha）
+```csharp
+var client = new DaprClientBuilder().Build();
+
+// Retrieve a specific set of keys.
+var specificItems = await client.GetConfiguration("configstore", new List<string>() { "key1", "key2" });
+Console.WriteLine($"Here are my values:\n{specificItems[0].Key} -> {specificItems[0].Value}\n{specificItems[1].Key} -> {specificItems[1].Value}");
+
+// Retrieve all configuration items by providing an empty list.
+var specificItems = await client.GetConfiguration("configstore", new List<string>());
+Console.WriteLine($"I got {configItems.Count} entires!");
+foreach (var item in configItems)
+{
+    Console.WriteLine($"{item.Key} -> {item.Value}")
+}
+```
+
+### Subscribe to Configuration Keys (Alpha)
+```csharp
+var client = new DaprClientBuilder().Build();
+
+// The Subscribe Configuration API returns a wrapper around an IAsyncEnumerable<IEnumerable<ConfigurationItem>>.
+// Iterate through it by accessing its Source in a foreach loop. The loop will end when the stream is severed
+// or if the cancellation token is cancelled.
+var subscribeConfigurationResponse = await daprClient.SubscribeConfiguration(store, keys, metadata, cts.Token);
+await foreach (var items in subscribeConfigurationResponse.Source.WithCancellation(cts.Token))
+{
+    foreach (var item in items)
+    {
+        Console.WriteLine($"{item.Key} -> {item.Value}")
+    }
+}
+```
+
+### Manage workflow instances (Alpha)
+
+```csharp
+var daprClient = new DaprClientBuilder().Build();
+
+string instanceId = "MyWorkflowInstance1";
+string workflowComponentName = "dapr"; // alternatively, this could be the name of a workflow component defined in yaml
+string workflowName = "MyWorkflowDefinition";
+var input = new { name = "Billy", age = 30 }; // Any JSON-serializable value is OK
+
+// Start workflow
+var startResponse = await daprClient.StartWorkflowAsync(instanceId, workflowComponentName, workflowName, input);
+
+// Terminate workflow
+await daprClient.TerminateWorkflowAsync(instanceId, workflowComponentName);
+
+// Get workflow metadata
+var getResponse = await daprClient.GetWorkflowAsync(instanceId, workflowComponentName, workflowName);
+```
+
+## Sidecar APIs
+### Sidecar Health
+The .NET SDK provides a way to poll for the sidecar health, as well as a convenience method to wait for the sidecar to be ready.
+
+#### Poll for health
+This health endpoint returns true when both the sidecar and your application are up (fully initialized).
+
+```csharp
+var client = new DaprClientBuilder().Build();
+
+var isDaprReady = await client.CheckHealthAsync();
+
+if (isDaprReady) 
+{
+    // Execute Dapr dependent code.
+}
+```
+
+#### Poll for health (outbound)
+This health endpoint returns true when Dapr has initialized all its components, but may not have finished setting up a communication channel with your application.
+
+This is best used when you want to utilize a Dapr component in your startup path, for instance, loading secrets from a secretstore.
+
+```csharp
+var client = new DaprClientBuilder().Build();
+
+var isDaprComponentsReady = await client.CheckOutboundHealthAsync();
+
+if (isDaprComponentsReady) 
+{
+    // Execute Dapr component dependent code.
+}
+```
+
+#### Wait for sidecar
+The `DaprClient` also provides a helper method to wait for the sidecar to become healthy (components only). When using this method, it is recommended to include a `CancellationToken` to allow for the request to timeout. Below is an example of how this is used in the `DaprSecretStoreConfigurationProvider`.
+
+```csharp
+// Wait for the Dapr sidecar to report healthy before attempting use Dapr components.
+using (var tokenSource = new CancellationTokenSource(sidecarWaitTimeout))
+{
+    await client.WaitForSidecarAsync(tokenSource.Token);
+}
+
+// Perform Dapr component operations here i.e. fetching secrets.
+```
+
+### Shutdown the sidecar
+```csharp
+var client = new DaprClientBuilder().Build();
+await client.ShutdownSidecarAsync();
+```
 
 ## 相关链接
-- [.NET SDK 示例](https://github.com/dapr/dotnet-sdk/tree/master/examples)
+- [.NET SDK examples](https://github.com/dapr/dotnet-sdk/tree/master/examples)

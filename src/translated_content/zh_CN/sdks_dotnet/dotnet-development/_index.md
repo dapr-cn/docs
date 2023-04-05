@@ -3,32 +3,32 @@ type: docs
 title: "使用 Dapr .NET SDK 开发应用程序"
 linkTitle: "开发集成"
 weight: 40000
-description: 了解.NET Dapr应用程序的本地开发集成选项
+description: 了解.NET Dapr 应用程序的本地开发集成选项
 ---
 
-## 一次思考多个
+## Thinking more than one at a time
 
-使用您最喜欢的 IDE 或编辑器启动应用程序通常假定您只需要运行一件事——您正在调试的应用程序。 然而，开发微服务对你思考本地的开发流程提出了挑战*一次不止一个*。 微服务应用程序包含多个您可能需要同时运行的服务以及依赖于状态存储来管理。
+Using your favorite IDE or editor to launch an application typically assumes that you only need to run one thing: the application you're debugging. However, developing microservices challenges you to think about your local development process for *more than one at a time*. A microservices application has multiple services that you might need running simultaneously, and dependencies (like state stores) to manage.
 
 为您的开发进程添加 Dapr 意味着您需要管理以下问题：
 
-- 要运行的每个服务
-- 每项服务的 Dapr sidecar
-- Dapr 组件和配置清单
-- 状态存储等其他依赖项
-- 可选：Actors 的 Dapr placement 服务
+- Each service you want to run
+- A Dapr sidecar for each service
+- Dapr component and configuration manifests
+- Additional dependencies such as state stores
+- optional: the Dapr placement service for actors
 
-本文档将假设您正在构建生产应用程序，并希望创建一套可重复且强大的开发实践。 这里的指导是一般性的，适用于任何使用 Dapr 的 .NET服务器应用程序（包括Actors）。
+This document assumes that you're building a production application, and want to create a repeatable and robust set of development practices. 这里的指导是一般性的，适用于任何使用 Dapr 的 .NET服务器应用程序（包括Actors）。
 
 ## 管理组件
 
-你有两种主要的方法来存储组件定义，以便用Dapr进行本地开发：
+您可以使用 Dapr 存储组件定义以进行本地开发，主要有两种方法：
 
-- 使用默认位置(`~/.dapr/components`)
+- Use the default location (`~/.dapr/components`)
 - 使用您自己的位置
 
-在你的源代码库中创建一个文件夹来存储组件和配置，将为你提供一个版本和分享这些定义的方法。 这里提供的指导将假设你在应用程序源代码旁边创建了一个文件夹来存储这些文件。
+在源代码仓库库中创建一个文件夹来存储组件和配置，将为您提供一种对这些定义进行版本控制和共享的方法。 这里提供的指导将假设你在应用程序源代码旁边创建了一个文件夹来存储这些文件。
 
-## 开发选择
+## 开发选项
 
-选择其中一个链接来了解你可以在本地开发场景中使用的工具。 这些文章从最低投资到最高投资排序。 您可能需要阅读所有这些内容，以便全面了解您的选择。
+选择其中一个链接，了解可在本地开发方案中使用的工具。 这些文章按从最低投入到最高投入的顺序排列。 您可能需要阅读所有这些内容，以便全面了解您的选择。

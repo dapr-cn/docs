@@ -7,11 +7,11 @@ description: 开发 Dapr 应用程序的 PHP SDK 包
 no_list: true
 ---
 
-Dapr提供了帮助开发 PHP 应用程序各种包。 你可以使用他们来创建 PHP 客户端、服务器和 virtual actors。
+Dapr offers an SDK to help with the development of PHP applications. Using it, you can create PHP clients, servers, and virtual actors with Dapr.
 
-## 设置
+## Setting up
 
-### 先决条件
+### Prerequisites
 
 - [Composer](https://getcomposer.org/)
 - [PHP 8](https://www.php.net/)
@@ -21,9 +21,9 @@ Dapr提供了帮助开发 PHP 应用程序各种包。 你可以使用他们来�
 - [Docker](https://www.docker.com/)
 - [xdebug](http://xdebug. org/) --用于调试
 
-## 初始化您的项目
+## 初始化项目
 
-在您想要创建服务的目录中，运行 `composer init` 并确认命令执行。 安装 `dapr/php-sdk` 和您可能希望使用的其他依赖项。
+在您想要创建服务的目录中，运行 `composer init` 并确认命令执行。 Install with `composer require dapr/php-sdk` and any other dependencies you may wish to use.
 
 ## 配置服务
 
@@ -77,7 +77,7 @@ return [
 ];
 ```
 
-## 创建一个服务
+## 创建服务
 
 修改`index.php`，内容如下:
 
@@ -95,15 +95,15 @@ $app->get('/hello/{name}', function(string $name) {
 $app->start();
 ```
 
-## 试试吧
+## Try it out
 
-用` dapr init `初始化dapr，然后用` dapr run -a dev -p 3000-php -S 0.0.0.0:3000 `启动项目。
+用` dapr init `初始化 dapr，然后用` dapr run -a dev -p 3000-php -S 0.0.0.0:3000 `启动项目。
 
 现在，您可以打开网络浏览器访问[ http://localhost:3000/ hello/world ](http://localhost:3000/hello/world)用您的名字，宠物的名字或您想要的任何名称替换` world `。
 
-恭喜，你已经建立了你的Dapr 服务！ 我很高兴看到您会怎么做！
+恭喜，你已经建立了你的第一个 Dapr 服务！ 我很高兴看到您会怎么做！
 
 ## 更多信息
 
 - [Packagist](https://packagist.org/packages/dapr/php-sdk)
-- [Dapr SDK 序列化]({{< ref sdk-serialization.md >}})
+- [Dapr SDK serialization]({{< ref sdk-serialization.md >}})

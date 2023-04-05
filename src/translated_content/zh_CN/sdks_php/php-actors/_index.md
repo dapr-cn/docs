@@ -3,17 +3,17 @@ type: docs
 title: "Virtual Actor"
 linkTitle: "Actors"
 weight: 1000
-description: 如何创建一个actor
+description: 如何创建 actor
 no_list: true
 ---
 
-如果您不熟悉 actor 模式，了解 actor 模式的最佳位置是 [Actor 概述]({{< ref actors-overview.md >}})。
+If you're new to the actor pattern, the best place to learn about the actor pattern is in the [Actor Overview.]({{< ref actors-overview.md >}})
 
-在PHP SDK中，角色有两个方面，即客户端和actor（也称为运行时）。 作为 actor 的客户端，你将通过 `ActorProxy` 类与远程 actor 交互。 此类使用多个已配置策略中的一个来动态生成代理类。
+在 PHP SDK 中，actor 有两个方面，即客户端和 Actor(也称为运行时)。 作为 actor 的客户端，你将通过 `ActorProxy` 类与远程 actor 交互。 此类使用多个已配置策略中的一个来动态生成代理类。
 
 编写 actor 时，可以为您管理状态。 您可以挂钩到 actor 生命周期，并定义提示器和计时器。 这为您提供了相当大的能力来处理 Actor 模式适合的所有类型的问题。
 
-## Actor 代理
+## The Actor Proxy
 
 每当你想要与 actor 通信时，你都需要一个代理对象来执行此操作。 代理负责序列化请求，反序列化响应，并将其返回，同时遵守指定接口定义的约束。
 
