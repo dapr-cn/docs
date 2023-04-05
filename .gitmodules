@@ -1,4 +1,0 @@
-[submodule "src/source/v1.3"]
-	path = src/source/v1.3
-	url = https://github.com/dapr/docs.git
-	branch = v1.3
