@@ -1,4 +1,4 @@
-name: V1.7 Download translation from Crowdin
+name: Download translation from Crowdin
 
 on:
   schedule:
