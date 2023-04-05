@@ -1,21 +1,19 @@
 ---
 type: docs
-title: "Dapr actor .NET 使用指南"
-linkTitle: "Actors 客户端"
+title: "The IActorProxyFactory interface"
+linkTitle: "Actor 客户端"
 weight: 100000
-description: 了解有关使用 actor client 与 .NET SDK 的所有信息
+description: Learn how to create actor clients with the IActorProxyFactory interface
 ---
 
-## 使用 IActorProxyFactory
-
-在 `Actor` 类或其他 ASP.NET Core 项目中，您应该使用 `IActorProxyFactory` 接口来创建 actor 客户端。
+Inside of an `Actor` class or an ASP.NET Core project, the `IActorProxyFactory` interface is recommended to create actor clients.
 
 `AddActors(...)` 方法将通过 ASP.NET Core 依赖注入注册 actor 服务。
 
-- 在 actor 实例之外，`IActorProxyFactory` 实例可以通过依赖注入作为单例服务使用。
-- 在一个 actor 实例中，`IActorProxyFactory` 实例作为一个属性(`this.ProxyFactory`)可用。
+- **Outside of an actor instance:** The `IActorProxyFactory` instance is available through dependency injection as a singleton service.
+- **Inside an actor instance:** The `IActorProxyFactory` instance is available as a property (`this.ProxyFactory`).
 
-下面是一个在 actor 内部创建代理的例子。
+下面是在 actor 内部创建代理的例子：
 
 ```csharp
 public Task<MyData> GetDataAsync()
@@ -27,30 +25,35 @@ public Task<MyData> GetDataAsync()
 }
 ```
 
-> 💡对于一个非依赖注入的应用程序，你可以使用 `ActorProxy` 上静态方法。 当你需要配置自定义设置时，这些方法容易出错，应尽量避免。
+In this guide, you will learn how to use `IActorProxyFactory`.
 
-本文档中的指导将集中在 `IActorProxyFactory` 上。 `ActorProxy` 的静态方法功能是相同的，除了集中管理配置的能力。
+{{% alert title="Tip" color="primary" %}}
+For a non-dependency-injected application, you can use the static methods on `ActorProxy`. Since the `ActorProxy` methods are error prone, try to avoid using them when configuring custom settings.
+{{% /alert %}}
 
-## 识别 actor
+## Identifying an actor
 
-为了与 actor 进行通信，你需要知道它的类型和id，对于强类型的客户端，需要知道它的一个接口。 `IActorProxyFactory` 上的所有API都需要一个 actor 类型和 actor id。
+All of the APIs on `IActorProxyFactory` will require an actor _type_ and actor _id_ to communicate with an actor. For strongly-typed clients, you also need one of its interfaces.
 
-- Actor 类型唯一地识别了 actor 在整个应用中的实现情况。
-- Actor id唯一地标识了该类型的一个实例。
+- **Actor type** uniquely identifies the actor implementation across the whole application.
+- **Actor id** uniquely identifies an instance of that type.
 
-如果您没有actor id，并且想要与新的实例进行通信，您可以使用 `ActorId.CreateRandom()` 来创建一个随机的id。 由于随机 id 是一个加密的强标识符，所以当你与它交互时，运行时将创建一个新的 actor 实例。
+If you don't have an actor `id` and want to communicate with a new instance, create a random id with `ActorId.CreateRandom()`. Since the random id is a cryptographically strong identifier, the runtime will create a new actor instance when you interact with it.
 
-你可以使用 `ActorReference` 类型与其他actor交换 actor类型和actor id作为消息的一部分。
+You can use the type `ActorReference` to exchange an actor type and actor id with other actors as part of messages.
 
-## Actor 客户端的两种风格
+## Two styles of actor client
 
-Actor客户端支持两种不同风格的调用。*使用.NET接口的强类型*客户端和使用 `ActorProxy` 类的弱类型</em>客户端。
+The actor client supports two different styles of invocation:
 
-由于 *强类型* 客户端基于.NET接口提供了强类型的典型优势，但是它们不能与非.NET Actors 一起工作。 您应该只在需要互操作或其他高级原因时才使用 *弱类型* 客户端。
+| Actor client style | 说明                                                                                                                                           |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Strongly-typed     | Strongly-typed clients are based on .NET interfaces and provide the typical benefits of strong-typing. They don't work with non-.NET actors. |
+| Weakly-typed       | Weakly-typed clients use the `ActorProxy` class. It is recommended to use these only when required for interop or other advanced reasons.    |
 
-### 使用强类型客户端
+### Using a strongly-typed client
 
-使用 `CreateActorProxy<>` 来创建一个强类型的客户端，比如下面的例子。 `CreateActorProxy<>` 需要一个actor接口类型，并将返回该接口的实例。
+The following example uses the `CreateActorProxy<>` method to create a strongly-typed client. `CreateActorProxy<>` requires an actor interface type, and will return an instance of that interface.
 
 ```csharp
 // Create a proxy for IOtherActor to type OtherActor with a random id
@@ -64,7 +67,7 @@ await proxy.DoSomethingGreat();
 
 ### 使用弱类型客户端
 
-使用 `Create` 方法来创建一个弱类型客户端，比如下面的例子。 `Create` 返回一个 `ActorProxy` 的实例。
+The following example uses the `Create` method to create a weakly-typed client. `Create` returns an instance of `ActorProxy`.
 
 ```csharp
 // Create a proxy for type OtherActor with a random id
@@ -76,9 +79,9 @@ var proxy = this.ProxyFactory.Create(ActorId.CreateRandom(), "OtherActor");
 await proxy.InvokeMethodAsync("DoSomethingGreat");
 ```
 
-由于 `ActorProxy` 是一个弱类型的代理，你需要将 actor 方法名作为一个字符串传入。
+Since `ActorProxy` is a weakly-typed proxy, you need to pass in the actor method name as a string.
 
-您也可以使用 `ActorProxy` 来调用带有请求消息和响应消息的方法。 请求和响应消息将使用 `System.Text.Json` 序列化器序列化。
+You can also use `ActorProxy` to invoke methods with both a request and a response message. Request and response messages will be serialized using the `System.Text.Json` serializer.
 
 ```csharp
 // Create a proxy for type OtherActor with a random id
@@ -91,4 +94,21 @@ var request = new MyRequest() { Message = "Hi, it's me.", };
 var response = await proxy.InvokeMethodAsync<MyRequest, MyResponse>("DoSomethingGreat", request);
 ```
 
-使用弱类型代理时，您有责任定义正确的 actor 方法名称和消息类型。 当使用强类型代理时，这是为你完成的，因为名称和类型是接口定义的一部分。
+When using a weakly-typed proxy, you _must_ proactively define the correct actor method names and message types. When using a strongly-typed proxy, these names and types are defined for you as part of the interface definition.
+
+### Actor method invocation exception details
+
+The actor method invocation exception details are surfaced to the caller and the callee, providing an entry point to track down the issue. Exception details include:
+ - Method name
+ - Line number
+ - Exception type
+ - UUID
+
+You use the UUID to match the exception on the caller and callee side. Below is an example of exception details:
+```
+Dapr.Actors.ActorMethodInvocationException: Remote Actor Method Exception, DETAILS: Exception: NotImplementedException, Method Name: ExceptionExample, Line Number: 14, Exception uuid: d291a006-84d5-42c4-b39e-d6300e9ac38b
+```
+
+## 下一步
+
+[Learn how to author and run actors with `ActorHost`]({{< ref dotnet-actors-usage.md >}}).

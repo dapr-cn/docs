@@ -2,54 +2,54 @@
 type: docs
 title: "JavaScript 客户端 SDK"
 linkTitle: "客户端"
-weight: 500
+weight: 1000
 description: JavaScript 客户端 SDK，用于开发 Dapr 应用程序
 ---
 
-## 介绍
+## Introduction
 
-Dapr客户端允许您与Dapr Sidecar进行通信，并访问其面向客户端的功能，例如发布事件，调用输出绑定，状态管理，机密管理等等。
+The Dapr Client allows you to communicate with the Dapr Sidecar and get access to its client facing features such as Publishing Events, Invoking Output Bindings, State Management, Secret Management, and much more.
 
 ## 前提
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Node.js 的最新 LTS 版本或更高版本](https://nodejs.org/en/)
+- [Latest LTS version of Node or greater](https://nodejs.org/en/)
 
-## 安装和导入 Dapr 的 JS SDK
+## Installing and importing Dapr's JS SDK
 
 1. 使用 `npm` 安装 SDK：
 
 ```bash
-npm i dapr-client --save
+npm i @dapr/dapr --save
 ```
 
-2. 导入类库：
+2. Import the libraries:
 
-```javascript
-import { DaprClient, DaprServer, HttpMethod, CommunicationProtocolEnum } from "dapr-client";
+```typescript
+import { DaprClient, DaprServer, HttpMethod, CommunicationProtocolEnum } from "@dapr/dapr";
 
 const daprHost = "127.0.0.1"; // Dapr Sidecar Host
 const daprPort = "3500"; // Dapr Sidecar Port of this Example Server
 const serverHost = "127.0.0.1"; // App Host of this Example Server
-const serverPort = "50051"; // App Port of this Example Server 
+const serverPort = "50051"; // App Port of this Example Server
 
 // HTTP Example
-const client = new DaprClient(daprHost, daprPort);
+const client = new DaprClient({ daprHost, daprPort });
 
 // GRPC Example
-const client = new DaprClient(daprHost, daprPort, CommunicationProtocolEnum.GRPC);
+const client = new DaprClient({ daprHost, daprPort, communicationProtocol: CommunicationProtocolEnum.GRPC });
 ```
 
-## 运行
+## Running
 
-要运行这些示例，您可以使用两种不同的协议与 Dapr Sidecar 进行交互：HTTP（默认）或 gRPC。
+To run the examples, you can use two different protocols to interact with the Dapr sidecar: HTTP (default) or gRPC.
 
-### 使用 HTTP（默认）
+### Using HTTP (default)
 
-```javascript
-import { DaprClient } from "dapr-client";
-const client = new DaprClient(daprHost, daprPort);
+```typescript
+import { DaprClient } from "@dapr/dapr";
+const client = new DaprClient({ daprHost, daprPort });
 ```
 
 ```bash
@@ -62,11 +62,11 @@ npm run start:dapr-http
 
 ### 使用 gRPC
 
-由于 HTTP 是默认设置，因此必须调整通信协议才能使用 gRPC。 您可以通过向客户端或服务器构造函数传递一个额外的参数来做到这一点。
+Since HTTP is the default, you will have to adapt the communication protocol to use gRPC. You can do this by passing an extra argument to the client or server constructor.
 
-```javascript
-import { DaprClient, CommunicationProtocol } from "dapr-client";
-const client = new DaprClient(daprHost, daprPort, CommunicationProtocol.GRPC);
+```typescript
+import { DaprClient, CommunicationProtocol } from "@dapr/dapr";
+const client = new DaprClient({ daprHost, daprPort, communicationProtocol: CommunicationProtocol.GRPC });
 ```
 
 ```bash
@@ -77,31 +77,87 @@ dapr run --app-id example-sdk --app-protocol grpc -- npm run start
 npm run start:dapr-grpc
 ```
 
+## General
+
+### Increasing Body Size
+
+You can increase the body size that is used by the application to communicate with the sidecar by using a`DaprClient`'s option.
+
+```typescript
+import { DaprClient, CommunicationProtocol } from "@dapr/dapr";
+
+// Allow a body size of 10Mb to be used
+// The default is 4Mb
+const client = new DaprClient({
+  daprHost,
+  daprPort,
+  communicationProtocol: CommunicationProtocol.HTTP,
+  maxBodySizeMb: 10,
+});
+```
+
+### Proxying Requests
+
+By proxying requests, we can utilize the unique capabilities that Dapr brings with its sidecar architecture such as service discovery, logging, etc., enabling us to instantly "upgrade" our gRPC services. This feature of gRPC proxying was demonstrated in [community call 41](https://www.youtube.com/watch?v=B_vkXqptpXY&t=71s).
+
+#### Creating a Proxy
+
+To perform gRPC proxying, simply create a proxy by calling the `client.proxy.create()` method:
+
+```typescript
+// As always, create a client to our dapr sidecar
+// this client takes care of making sure the sidecar is started, that we can communicate, ...
+const clientSidecar = new DaprClient({ daprHost, daprPort, communicationProtocol: CommunicationProtocol.GRPC });
+
+// Create a Proxy that allows us to use our gRPC code
+const clientProxy = await clientSidecar.proxy.create<GreeterClient>(GreeterClient);
+```
+
+We can now call the methods as defined in our `GreeterClient` interface (which in this case is from the [Hello World example](https://github.com/grpc/grpc-go/blob/master/examples/helloworld/helloworld/helloworld.proto))
+
+#### Behind the Scenes (Technical Working)
+
+![Architecture](assets/architecture.png)
+
+1. The gRPC service gets started in Dapr. We tell Dapr which port this gRPC server is running on through `--app-port` and give it a unique Dapr app ID with `--app-id <APP_ID_HERE>`
+2. We can now call the Dapr Sidecar through a client that will connect to the Sidecar
+3. Whilst calling the Dapr Sidecar, we provide a metadata key named `dapr-app-id` with the value of our gRPC server booted in Dapr (e.g. `server` in our example)
+4. Dapr will now forward the call to the gRPC server configured
+
 ## 构建块
 
-JavaScript Client SDK允许您与所有专注于客户端到Sidecar功能的[Dapr构建块]({{< ref building-blocks >}})进行交互。
+The JavaScript Client SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}) focusing on Client to Sidecar features.
 
-### 调用 API
+### Invocation API
 
-#### 调用服务
+#### Invoke a Service
 
-```javascript
-import { DaprClient, HttpMethod } from "dapr-client"; 
+```typescript
+import { DaprClient, HttpMethod } from "@dapr/dapr";
 
-const daprHost = "127.0.0.1"; 
-const daprPort = "3500"; 
+const daprHost = "127.0.0.1";
+const daprPort = "3500";
 
 async function start() {
-  const client = new DaprClient(daprHost, daprPort); 
+  const client = new DaprClient({ daprHost, daprPort });
 
   const serviceAppId = "my-app-id";
   const serviceMethod = "say-hello";
 
   // POST Request
-  const response = await client.invoker.invoke(serviceAppId , serviceMethod , HttpMethod.POST, { hello: "world" });
+  const response = await client.invoker.invoke(serviceAppId, serviceMethod, HttpMethod.POST, { hello: "world" });
+
+  // POST Request with headers
+  const response = await client.invoker.invoke(
+    serviceAppId,
+    serviceMethod,
+    HttpMethod.POST,
+    { hello: "world" },
+    { headers: { "X-User-ID": "123" } },
+  );
 
   // GET Request
-  const response = await client.invoker.invoke(serviceAppId , serviceMethod , HttpMethod.GET);
+  const response = await client.invoker.invoke(serviceAppId, serviceMethod, HttpMethod.GET);
 }
 
 start().catch((e) => {
@@ -112,33 +168,43 @@ start().catch((e) => {
 
 > 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
+### State Management API
 
-### 状态管理 API
+#### Save, Get and Delete application state
 
-#### 保存、获取和删除应用程序状态
+```typescript
+import { DaprClient } from "@dapr/dapr";
 
-```javascript
-import { DaprClient } from "dapr-client"; 
-
-const daprHost = "127.0.0.1"; 
-const daprPort = "3500"; 
+const daprHost = "127.0.0.1";
+const daprPort = "3500";
 
 async function start() {
-  const client = new DaprClient(daprHost, daprPort); 
+  const client = new DaprClient({ daprHost, daprPort });
 
   const serviceStoreName = "my-state-store-name";
 
   // Save State
-  const response = await client.state.save(serviceStoreName, [
+  const response = await client.state.save(
+    serviceStoreName,
+    [
+      {
+        key: "first-key-name",
+        value: "hello",
+        metadata: {
+          foo: "bar",
+        },
+      },
+      {
+        key: "second-key-name",
+        value: "world",
+      },
+    ],
     {
-      key: "first-key-name",
-      value: "hello"
+      metadata: {
+        ttlInSeconds: "3", // this should override the ttl in the state item
+      },
     },
-    {
-      key: "second-key-name",
-      value: "world"
-    }
-  ]);
+  );
 
   // Get State
   const response = await client.state.get(serviceStoreName, "first-key-name");
@@ -152,15 +218,15 @@ async function start() {
       operation: "upsert",
       request: {
         key: "first-key-name",
-        value: "new-data"
-      }
+        value: "new-data",
+      },
     },
     {
       operation: "delete",
       request: {
-        key: "second-key-name"
-      }
-    }
+        key: "second-key-name",
+      },
+    },
   ]);
 
   // Delete State
@@ -175,42 +241,41 @@ start().catch((e) => {
 
 > 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
 
-
 #### Query State API
 
-```javascript
-import { DaprClient } from "dapr-client";
+```typescript
+import { DaprClient } from "@dapr/dapr";
 
 async function start() {
-  const client = new DaprClient(daprHost, daprPort);
+  const client = new DaprClient({ daprHost, daprPort });
 
   const res = await client.state.query("state-mongodb", {
     filter: {
       OR: [
         {
-          EQ: { "person.org": "Dev Ops" }
+          EQ: { "person.org": "Dev Ops" },
         },
         {
-          "AND": [
+          AND: [
             {
-              "EQ": { "person.org": "Finance" }
+              EQ: { "person.org": "Finance" },
             },
             {
-              "IN": { "state": ["CA", "WA"] }
-            }
-          ]
-        }
-      ]
+              IN: { state: ["CA", "WA"] },
+            },
+          ],
+        },
+      ],
     },
     sort: [
       {
         key: "state",
-        order: "DESC"
-      }
+        order: "DESC",
+      },
     ],
     page: {
-      limit: 10
-    }
+      limit: 10,
+    },
   });
 
   console.log(res);
@@ -226,21 +291,74 @@ start().catch((e) => {
 
 #### 发布消息
 
-```javascript
-import { DaprClient } from "dapr-client"; 
+```typescript
+import { DaprClient } from "@dapr/dapr";
 
-const daprHost = "127.0.0.1"; 
-const daprPort = "3500"; 
+const daprHost = "127.0.0.1";
+const daprPort = "3500";
 
 async function start() {
-  const client = new DaprClient(daprHost, daprPort); 
+  const client = new DaprClient({ daprHost, daprPort });
 
   const pubSubName = "my-pubsub-name";
   const topic = "topic-a";
-  const message = { hello: "world" }
 
-  // Publish Message to Topic
-  const response = await client.pubsub.publish(pubSubName, topic, message);
+  // Publish message to topic as text/plain
+  // Note, the content type is inferred from the message type unless specified explicitly
+  const response = await client.pubsub.publish(pubSubName, topic, "hello, world!");
+  // If publish fails, response contains the error
+  console.log(response);
+
+  // Publish message to topic as application/json
+  await client.pubsub.publish(pubSubName, topic, { hello: "world" });
+
+  // Publish a JSON message as plain text
+  const options = { contentType: "text/plain" };
+  await client.pubsub.publish(pubSubName, topic, { hello: "world" }, options);
+
+  // Publish message to topic as application/cloudevents+json
+  // You can also use the cloudevent SDK to create cloud events https://github.com/cloudevents/sdk-javascript
+  const cloudEvent = {
+    specversion: "1.0",
+    source: "/some/source",
+    type: "example",
+    id: "1234",
+  };
+  await client.pubsub.publish(pubSubName, topic, cloudEvent);
+
+  // Publish a cloudevent as raw payload
+  const options = { metadata: { rawPayload: true } };
+  await client.pubsub.publish(pubSubName, topic, "hello, world!", options);
+
+  // Publish multiple messages to a topic as text/plain
+  await client.pubsub.publishBulk(pubSubName, topic, ["message 1", "message 2", "message 3"]);
+
+  // Publish multiple messages to a topic as application/json
+  await client.pubsub.publishBulk(pubSubName, topic, [
+    { hello: "message 1" },
+    { hello: "message 2" },
+    { hello: "message 3" },
+  ]);
+
+  // Publish multiple messages with explicit bulk publish messages
+  const bulkPublishMessages = [
+    {
+      entryID: "entry-1",
+      contentType: "application/json",
+      event: { hello: "foo message 1" },
+    },
+    {
+      entryID: "entry-2",
+      contentType: "application/cloudevents+json",
+      event: { ...cloudEvent, data: "foo message 2", datacontenttype: "text/plain" },
+    },
+    {
+      entryID: "entry-3",
+      contentType: "text/plain",
+      event: "foo message 3",
+    },
+  ];
+  await client.pubsub.publishBulk(pubSubName, topic, bulkPublishMessages);
 }
 
 start().catch((e) => {
@@ -249,45 +367,20 @@ start().catch((e) => {
 });
 ```
 
-##### 订阅消息
+### Bindings API
 
-```javascript
-import { DaprServer } from "dapr-client";
-
-const daprHost = "127.0.0.1"; // Dapr Sidecar Host
-const daprPort = "3500"; // Dapr Sidecar Port of this Example Server
-const serverHost = "127.0.0.1"; // App Host of this Example Server
-const serverPort = "50051"; // App Port of this Example Server "
-
-async function start() {
-  const server = new DaprServer(serverHost, serverPort, daprHost, daprPort);
-
-  const pubSubName = "my-pubsub-name";
-  const topic = "topic-a";
-
-  // Configure Subscriber for a Topic
-  await server.pubsub.subscribe(pubSubName, topic, async (data: any) => console.log(`Got Data: ${JSON.stringify(data)}`));
-
-  await server.start();
-}
-```
-
-> 有关状态操作的完整列表，请访问 [如何: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
-
-### 绑定 API
-
-#### 调用输出绑定
+#### Invoke Output Binding
 
 **输出绑定**
 
-```javascript
-import { DaprClient } from "dapr-client"; 
+```typescript
+import { DaprClient } from "@dapr/dapr";
 
-const daprHost = "127.0.0.1"; 
-const daprPort = "3500"; 
+const daprHost = "127.0.0.1";
+const daprPort = "3500";
 
 async function start() {
-  const client = new DaprClient(daprHost, daprPort); 
+  const client = new DaprClient({ daprHost, daprPort });
 
   const bindingName = "my-binding-name";
   const bindingOperation = "create";
@@ -302,20 +395,20 @@ start().catch((e) => {
 });
 ```
 
-> 有关输出绑定的完整指南，请访问 [如何：使用绑定]({{< ref howto-bindings.md >}})。
+> For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
 
 ### Secret API
 
-#### 检索密钥
+#### Retrieve secrets
 
-```javascript
-import { DaprClient } from "dapr-client"; 
+```typescript
+import { DaprClient } from "@dapr/dapr";
 
-const daprHost = "127.0.0.1"; 
-const daprPort = "3500"; 
+const daprHost = "127.0.0.1";
+const daprPort = "3500";
 
 async function start() {
-  const client = new DaprClient(daprHost, daprPort); 
+  const client = new DaprClient({ daprHost, daprPort });
 
   const secretStoreName = "my-secret-store";
   const secretKey = "secret-key";
@@ -333,26 +426,22 @@ start().catch((e) => {
 });
 ```
 
-> 有关密钥的完整指南，请访问[如何：检索密钥]({{< ref howto-secrets.md >}})。
+> For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
 
 ### Configuration API
 
 #### Get Configuration Keys
 
-```javascript
-import { DaprClient } from "dapr-client";
+```typescript
+import { DaprClient } from "@dapr/dapr";
 
 const daprHost = "127.0.0.1";
 const daprAppId = "example-config";
 
 async function start() {
+  const client = new DaprClient({ daprHost, daprPort: process.env.DAPR_HTTP_PORT });
 
-  const client = new DaprClient(
-    daprHost,
-    process.env.DAPR_HTTP_PORT
-  );
-
-  const config = await client.configuration.get('config-store', ['key1', 'key2']);
+  const config = await client.configuration.get("config-store", ["key1", "key2"]);
   console.log(config);
 }
 
@@ -362,6 +451,55 @@ start().catch((e) => {
 });
 ```
 
+### Distributed Lock API
+
+#### Try Lock and Unlock APIs
+
+```typescript
+import { CommunicationProtocolEnum, DaprClient } from "@dapr/dapr";
+import { LockStatus } from "@dapr/dapr/types/lock/UnlockResponse";
+
+const daprHost = "127.0.0.1";
+const daprPortDefault = "3500";
+
+async function start() {
+  const client = new DaprClient({ daprHost, daprPort });
+
+  const storeName = "redislock";
+  const resourceId = "resourceId";
+  const lockOwner = "owner1";
+  let expiryInSeconds = 1000;
+
+  console.log(`Acquiring lock on ${storeName}, ${resourceId} as owner: ${lockOwner}`);
+  const tryLockResponse = await client.lock.tryLock(storeName, resourceId, lockOwner, expiryInSeconds);
+  console.log(tryLockResponse);
+
+  console.log(`Unlocking on ${storeName}, ${resourceId} as owner: ${lockOwner}`);
+  const unlockResponse = await client.lock.unlock(storeName, resourceId, lockOwner);
+  console.log("Unlock API response: " + getResponseStatus(unlockResponse.status));
+}
+
+function getResponseStatus(status: LockStatus) {
+  switch (status) {
+    case LockStatus.Success:
+      return "Success";
+    case LockStatus.LockDoesNotExist:
+      return "LockDoesNotExist";
+    case LockStatus.LockBelongsToOthers:
+      return "LockBelongsToOthers";
+    default:
+      return "InternalError";
+  }
+}
+
+start().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
+```
+
+> For a full guide on distributed locks visit [How-To: Use Distributed Locks]({{< ref howto-use-distributed-lock.md >}}).
+
 ## 相关链接
 
-- [JavaScript SDK 示例](https://github.com/dapr/js-sdk/tree/master/examples)
+- [JavaScript SDK examples](https://github.com/dapr/js-sdk/tree/master/examples)

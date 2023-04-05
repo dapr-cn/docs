@@ -7,7 +7,7 @@ description: 开发 Dapr 应用程序的 Go SDK 包
 no_list: true
 ---
 
-这是用来构建 Dapr 应用程序的Go语言的 client 库。 此 client 支持所有公共 Dapr API，同时专注于惯用的 Go 体验和开发人员的工作效率。
+A client library to help build Dapr applications in Go. This client supports all public Dapr APIs while focusing on idiomatic Go experiences and developer productivity.
 
 {{< cardpane >}}
 {{< card title="**Client**">}}
