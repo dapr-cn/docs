@@ -22,10 +22,6 @@
 	path = src/source/v1.5
 	url = https://github.com/dapr/docs.git
 	branch = v1.5
-[submodule "src/dapr-cn/v1.1"]
-	path = src/dapr-cn/v1.1
-	url = https://github.com/dapr-cn/docs.git
-	branch = v1.1/translate_site
 [submodule "src/dapr-cn/v1.2"]
 	path = src/dapr-cn/v1.2
 	url = https://github.com/dapr-cn/docs.git
