@@ -65,3 +65,26 @@ require_once __DIR__ . '/vendor/autoload.php';
 $app = \Dapr\App::create(configure: fn(\DI\ContainerBuilder $builder) => $builder->enableCompilation(__DIR__));
 $result = $app->run(fn(\Dapr\DaprClient $client) => $client->get('/invoke/other-app/method/my-method'));
 ```
+
+## Using in other frameworks
+
+A `DaprClient` object is provided, in fact, all the sugar used by the `App` object is built on the `DaprClient`.
+
+```php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$clientBuilder = \Dapr\Client\DaprClient::clientBuilder();
+
+// you can customize (de)serialization or comment out to use the default JSON serializers.
+$clientBuilder = $clientBuilder->withSerializationConfig($yourSerializer)->withDeserializationConfig($yourDeserializer);
+
+// you can also pass it a logger
+$clientBuilder = $clientBuilder->withLogger($myLogger);
+
+// and change the url of the sidecar, for example, using https
+$clientBuilder = $clientBuilder->useHttpClient('https://localhost:3800') 
+```
+
+There are several functions you can call before 

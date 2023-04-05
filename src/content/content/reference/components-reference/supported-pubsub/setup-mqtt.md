@@ -16,7 +16,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: mqtt-pubsub
-  namespace: default
 spec:
   type: pubsub.mqtt
   version: v1
@@ -28,9 +27,7 @@ spec:
   - name: retain
     value: "false"
   - name: cleanSession
-    value: "true"
-  - name: backOffMaxRetries
-    value: "0"
+    value: "false"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -42,14 +39,26 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | Field              | Required | Details | Example |
 |--------------------|:--------:|---------|---------|
 | url    | Y  | Address of the MQTT broker. Can be `secretKeyRef` to use a secret reference. <br> Use the **`tcp://`** URI scheme for non-TLS communication. <br> Use the **`ssl://`** URI scheme for TLS communication. | `"tcp://[username][:password]@host.domain[:port]"`
-| consumerID | N | The client ID used to connect to the MQTT broker. Defaults to the Dapr app ID. | `"myMqttClientApp"`
-| qos    | N  | Indicates the Quality of Service Level (QoS) of the message. Defaults to `0`. |`1`
+| consumerID | N | The client ID used to connect to the MQTT broker for the consumer connection. Defaults to the Dapr app ID.<br>Note: if `producerID` is not set, `-consumer` is appended to this value for the consumer connection | `"myMqttClientApp"`
+| producerID | N | The client ID used to connect to the MQTT broker for the producer connection. Defaults to `{consumerID}-producer`. | `"myMqttProducerApp"`
+| qos    | N  | Indicates the Quality of Service Level (QoS) of the message ([more info](https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels/)). Defaults to `1`. |`0`, `1`, `2`
 | retain | N  | Defines whether the message is saved by the broker as the last known good value for a specified topic. Defaults to `"false"`.  | `"true"`, `"false"`
-| cleanSession | N | Sets the `clean_session` flag in the connection message to the MQTT broker if `"true"`. Defaults to `"true"`.  | `"true"`, `"false"`
+| cleanSession | N | Sets the `clean_session` flag in the connection message to the MQTT broker if `"true"` ([more info](http://www.steves-internet-guide.com/mqtt-clean-sessions-example/)). Defaults to `"false"`.  | `"true"`, `"false"`
 | caCert | Required for using TLS | Certificate Authority (CA) certificate in PEM format for verifying server TLS certificates. | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`
 | clientCert  | Required for using TLS | TLS client certificate in PEM format. Must be used with `clientKey`. | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`
 | clientKey | Required for using TLS | TLS client key in PEM format. Must be used with `clientCert`. Can be `secretKeyRef` to use a secret reference. | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"`
-| backOffMaxRetries | N | The maximum number of retries to process the message before returning an error. Defaults to `"0"`, which means that no retries will be attempted. `"-1"` can be specified to indicate that messages should be retried indefinitely until they are successfully processed or the application is shutdown. The component will wait 5 seconds between retries. | `"3"`
+
+### Enabling message delivery retries
+
+The MQTT pub/sub component has no built-in support for retry strategies. This means that the sidecar sends a message to the service only once. If the service marks the message as not processed, the message won't be acknowledged back to the broker. Only if broker resends the message, would it would be retried.
+
+To make Dapr use more spohisticated retry policies, you can apply a [retry resiliency policy]({{< ref "policies.md#retries" >}}) to the MQTT pub/sub component.
+
+There is a crucial difference between the two ways of retries:
+
+1. Re-delivery of unacknowledged messages is completely dependent on the broker. Dapr does not guarantee it. Some brokers like [emqx](https://www.emqx.io/), [vernemq](https://vernemq.com/) etc. support it but it not a part of [MQTT3 spec](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718103).
+
+2. Using a [retry resiliency policy]({{< ref "policies.md#retries" >}}) makes the same Dapr sidecar retry redelivering the messages. So it is the same Dapr sidecar and the same app receiving the same message.
 
 ### Communication using TLS
 
@@ -60,7 +69,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: mqtt-pubsub
-  namespace: default
 spec:
   type: pubsub.mqtt
   version: v1
@@ -73,8 +81,6 @@ spec:
     value: "false"
   - name: cleanSession
     value: "false"
-  - name: backoffMaxRetries
-    value: "0"
   - name: caCert
     value: ${{ myLoadedCACert }}
   - name: clientCert
@@ -98,7 +104,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: mqtt-pubsub
-  namespace: default
 spec:
   type: pubsub.mqtt
   version: v1
@@ -112,14 +117,14 @@ spec:
     - name: retain
       value: "false"
     - name: cleanSession
-      value: "false"
-    - name: backoffMaxRetries
-      value: "0"
+      value: "true"
 ```
 
 {{% alert title="Warning" color="warning" %}}
 The above example uses secrets as plain strings. It is recommended to use a secret store for the secrets as described [here]({{< ref component-secrets.md >}}).
 {{% /alert %}}
+
+Note that in the case, the value of the consumer ID is random every time Dapr restarts, so we are setting `cleanSession` to true as well.
 
 ## Create a MQTT broker
 
@@ -129,7 +134,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 You can run a MQTT broker [locally using Docker](https://hub.docker.com/_/eclipse-mosquitto):
 
 ```bash
-docker run -d -p 1883:1883 -p 9001:9001 --name mqtt eclipse-mosquitto:1.6.9
+docker run -d -p 1883:1883 -p 9001:9001 --name mqtt eclipse-mosquitto:1.6
 ```
 
 You can then interact with the server using the client port: `mqtt://localhost:1883`
@@ -157,7 +162,7 @@ spec:
     spec:
       containers:
         - name: mqtt
-          image: eclipse-mosquitto:1.6.9
+          image: eclipse-mosquitto:1.6
           imagePullPolicy: IfNotPresent
           ports:
             - name: default

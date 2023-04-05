@@ -63,14 +63,14 @@ scopes:
   - checkout
 ```
 
-You can override this file with another [pubsub component]({{< ref setup-pubsub >}}) by creating a components directory (in this example, `myComponents`) containing the file and using the flag `--components-path` with the `dapr run` CLI command.
+You can override this file with another [pubsub component]({{< ref setup-pubsub >}}) by creating a components directory (in this example, `myComponents`) containing the file and using the flag `--resources-path` with the `dapr run` CLI command.
 
 {{< tabs Dotnet Java Python Go Javascript >}}
 
 {{% codetab %}}
 
 ```bash
-dapr run --app-id myapp --components-path ./myComponents -- dotnet run
+dapr run --app-id myapp --resources-path ./myComponents -- dotnet run
 ```
 
 {{% /codetab %}}
@@ -78,7 +78,7 @@ dapr run --app-id myapp --components-path ./myComponents -- dotnet run
 {{% codetab %}}
 
 ```bash
-dapr run --app-id myapp --components-path ./myComponents -- mvn spring-boot:run
+dapr run --app-id myapp --resources-path ./myComponents -- mvn spring-boot:run
 ```
 
 {{% /codetab %}}
@@ -86,7 +86,7 @@ dapr run --app-id myapp --components-path ./myComponents -- mvn spring-boot:run
 {{% codetab %}}
 
 ```bash
-dapr run --app-id myapp --components-path ./myComponents -- python3 app.py
+dapr run --app-id myapp --resources-path ./myComponents -- python3 app.py
 ```
 
 {{% /codetab %}}
@@ -94,7 +94,7 @@ dapr run --app-id myapp --components-path ./myComponents -- python3 app.py
 {{% codetab %}}
 
 ```bash
-dapr run --app-id myapp --components-path ./myComponents -- go run app.go
+dapr run --app-id myapp --resources-path ./myComponents -- go run app.go
 ```
 
 {{% /codetab %}}
@@ -102,7 +102,7 @@ dapr run --app-id myapp --components-path ./myComponents -- go run app.go
 {{% codetab %}}
 
 ```bash
-dapr run --app-id myapp --components-path ./myComponents -- npm start
+dapr run --app-id myapp --resources-path ./myComponents -- npm start
 ```
 {{% /codetab %}}
 
@@ -118,7 +118,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: order-pub-sub
-  namespace: default
 spec:
   type: pubsub.rabbitmq
   version: v1
@@ -156,13 +155,14 @@ Learn more in the [declarative and programmatic subscriptions doc]({{< ref subsc
 Create a file named `subscription.yaml` and paste the following:
 
 ```yaml
-apiVersion: dapr.io/v1alpha1
+apiVersion: dapr.io/v2alpha1
 kind: Subscription
 metadata:
   name: order-pub-sub
 spec:
   topic: orders
-  route: /checkout
+  routes: 
+    default: /checkout
   pubsubname: order-pub-sub
 scopes:
 - orderprocessing
@@ -334,7 +334,7 @@ dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-por
 
 ```javascript
 //dependencies
-import { DaprServer, CommunicationProtocolEnum } from 'dapr-client'; 
+import { DaprServer, CommunicationProtocolEnum } from '@dapr/dapr'; 
 
 //code
 const daprHost = "127.0.0.1"; 
@@ -358,7 +358,7 @@ async function start(orderId) {
     await server.pubsub.subscribe("order-pub-sub", "orders", async (orderId) => {
         console.log(`Subscriber received: ${JSON.stringify(orderId)}`)
     });
-    await server.startServer();
+    await server.start();
 }
 ```
 
@@ -599,7 +599,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 ```javascript
 //dependencies
-import { DaprServer, DaprClient, CommunicationProtocolEnum } from 'dapr-client'; 
+import { DaprServer, DaprClient, CommunicationProtocolEnum } from '@dapr/dapr'; 
 
 const daprHost = "127.0.0.1"; 
 

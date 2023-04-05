@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Azure Cosmos DB"
-linkTitle: "Azure Cosmos DB"
-description: Detailed information on the Azure Cosmos DB state store component
+title: "Azure Cosmos DB (SQL API)"
+linkTitle: "Azure Cosmos DB (SQL API)"
+description: Detailed information on the Azure Cosmos DB (SQL API) state store component
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-azure-cosmosdb/"
 ---
@@ -16,7 +16,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: <NAME>
-  namespace: <NAMESPACE>
 spec:
   type: state.azure.cosmosdb
   version: v1
@@ -47,7 +46,7 @@ If you wish to use Cosmos DB as an actor store, append the following to the yam
 | Field              | Required | Details | Example |
 |--------------------|:--------:|---------|---------|
 | url                | Y        | The Cosmos DB url | `"https://******.documents.azure.com:443/"`.
-| masterKey          | Y        | The key to authenticate to the Cosmos DB account | `"key"`
+| masterKey          | Y*        | The key to authenticate to the Cosmos DB account. Only required when not using Azure AD authentication. | `"key"`
 | database           | Y        | The name of the database  | `"db"`
 | collection         | Y        | The name of the collection (container) | `"collection"`
 | actorStateStore    | N         | Consider this state store for actors. Defaults to `"false"` | `"true"`, `"false"`
@@ -67,7 +66,7 @@ You can read additional information for setting up Cosmos DB with Azure AD aut
 In order to setup Cosmos DB as a state store, you need the following properties:
 
 - **URL**: the Cosmos DB url. for example: `https://******.documents.azure.com:443/`
-- **Master Key**: The key to authenticate to the Cosmos DB account
+- **Master Key**: The key to authenticate to the Cosmos DB account. Skip this if using Azure AD authentication.
 - **Database**: The name of the database
 - **Collection**: The name of the collection (or container)
 
@@ -167,62 +166,6 @@ az cosmosdb sql role assignment create \
   --scope "/" \
   --principal-id "$PRINCIPAL_ID" \
   --role-definition-id "$ROLE_ID"
-```
-
-### Creating the stored procedures for Dapr
-
-When using Cosmos DB as a state store for Dapr, we need to create two stored procedures in your collection. When you configure the state store using a "master key", Dapr creates those for you, automatically. However, when your state store authenticates with Cosmos DB using Azure AD, because of limitations in the platform we are not able to do it automatically.
-
-If you are using Azure AD to authenticate your Cosmos DB state store and have not created the stored procedures (or if you are using an outdated version of them), your Dapr sidecar will fail to start and you will see an error similar to this in your logs:
-
-```text
-Dapr requires stored procedures created in Cosmos DB before it can be used as state store. Those stored procedures are currently not existing or are using a different version than expected. When you authenticate using Azure AD we cannot automatically create them for you: please start this state store with a Cosmos DB master key just once so we can create the stored procedures for you; otherwise, you can check our docs to learn how to create them yourself: https://aka.ms/dapr/cosmosdb-aad
-```
-
-To fix this issue, you have two options:
-
-1. Configure your component to authenticate with the "master key" just once, to have Dapr automatically initialize the stored procedures for you. While you need to use a "master key" the first time you launch your application, you should be able to remove that and use Azure AD credentials (including Managed Identities) after.
-2. Alternatively, you can follow the steps below to create the stored procedures manually. These steps must be performed before you can start your application the first time.
-
-To create the stored procedures manually, you can use the commands below.
-
-First, download the code of the stored procedures for the version of Dapr that you're using. This will create two `.js` files in your working directory:
-
-```sh
-# Set this to the version of Dapr that you're using
-DAPR_VERSION="release-{{% dapr-latest-version short="true" %}}"
-curl -LfO "https://raw.githubusercontent.com/dapr/components-contrib/${DAPR_VERSION}/state/azure/cosmosdb/storedprocedures/__daprver__.js"
-curl -LfO "https://raw.githubusercontent.com/dapr/components-contrib/${DAPR_VERSION}/state/azure/cosmosdb/storedprocedures/__dapr_v2__.js"
-```
-
-> You won't need to update the code for the stored procedures every time you update Dapr. Although the code for the stored procedures doesn't change often, sometimes we may make updates to that: when that happens, if you're using Azure AD authentication your Dapr sidecar will fail to launch until you update the stored procedures, re-running the commands above.
-
-Then, using the Azure CLI create the stored procedures in Cosmos DB, for your account, database, and collection (or container):
-
-```sh
-# Name of the Resource Group that contains your Cosmos DB
-RESOURCE_GROUP="..."
-# Name of your Cosmos DB account
-ACCOUNT_NAME="..."
-# Name of your database in the Cosmos DB account
-DATABASE_NAME="..."
-# Name of the container (collection) in your database
-CONTAINER_NAME="..."
-
-az cosmosdb sql stored-procedure create \
-  --resource-group "$RESOURCE_GROUP" \
-  --account-name "$ACCOUNT_NAME" \
-  --database-name "$DATABASE_NAME" \
-  --container-name "$CONTAINER_NAME" \
-  --name "__daprver__" \
-  --body @__daprver__.js
-az cosmosdb sql stored-procedure create \
-  --resource-group "$RESOURCE_GROUP" \
-  --account-name "$ACCOUNT_NAME" \
-  --database-name "$DATABASE_NAME" \
-  --container-name "$CONTAINER_NAME" \
-  --name "__dapr_v2__" \
-  --body @__dapr_v2__.js
 ```
 
 ## Related links

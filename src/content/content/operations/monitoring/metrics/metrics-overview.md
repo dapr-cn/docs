@@ -1,25 +1,26 @@
 ---
 type: docs
-title: "Metrics"
-linkTitle: "Metrics"
+title: "Configure metrics"
+linkTitle: "Configure metrics"
 weight: 4000
-description: "Observing Dapr metrics in Kubernetes"
+description: "Enable or disable Dapr metrics "
 ---
 
-Dapr exposes a [Prometheus](https://prometheus.io/) metrics endpoint that you can scrape to:
+By default, each Dapr system process emits Go runtime/process metrics and has their own [Dapr metrics](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md).
 
-- Gain a greater understanding of how Dapr is behaving.
-- Set up alerts for specific conditions.
+## Prometheus endpoint
+The Dapr sidecars exposes a [Prometheus](https://prometheus.io/) metrics endpoint that you can scrape to gain a greater understanding of how Dapr is behaving.
 
-## Configuration
+## Configuring metrics using the CLI
 
-The metrics endpoint is enabled by default. You can disable it by passing the command line argument `--enable-metrics=false` to Dapr system processes.
+The metrics application endpoint is enabled by default. You can disable it by passing the command line argument `--enable-metrics=false`.
 
 The default metrics port is `9090`. You can override this by passing the command line argument `--metrics-port` to Daprd. 
 
-You can also disable the metrics exporter for a specific application by setting the `dapr.io/enable-metrics: "false"` annotation to your application deployment. With the metrics exporter disabled, `daprd` will not open the metrics listening port.
+## Configuring metrics in Kubernetes
+You can also enable/disable the metrics for a specific application by setting the `dapr.io/enable-metrics: "false"` annotation on your application deployment. With the metrics exporter disabled, `daprd` does not open the metrics listening port.
 
-The follow example shows metrics are explicitly enabled with the port specified as "9090".
+The following Kubernetes deployment example shows how metrics are explicitly enabled with the port specified as "9090".
 
 ```yaml
 apiVersion: apps/v1
@@ -52,7 +53,8 @@ spec:
         imagePullPolicy: Always
 ```
 
-To disable the metrics collection in the Dapr side cars running in a specific namespace:
+## Configuring metrics using application configuration
+You can also enable metrics via application configuration. To disable the metrics collection in the Dapr sidecars running in a specific namespace:
 
 - Use the `metrics` spec configuration.
 - Set `enabled: false` to disable the metrics in the Dapr runtime.
@@ -70,14 +72,38 @@ spec:
     enabled: false
 ```
 
-## Metrics
+## High cardinality metrics
 
-By default, each Dapr system process emits Go runtime/process metrics and have their own metrics:
+Depending on your use case, some metrics emitted by Dapr might contain values that have a high cardinality. This might cause increased memory usage for the Dapr process/container and incur expensive egress costs in certain cloud environments. To mitigate this issue, you can set regular expressions for every metric exposed by the Dapr sidecar. [See a list of all Dapr metrics](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md).
 
-- [Dapr metric list](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md)
+The following example shows how to apply a regular expression for the label `method` in the metric `dapr_runtime_service_invocation_req_sent_total`:
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Configuration
+metadata:
+  name: daprConfig
+spec:
+  metric:
+      enabled: true
+      rules:
+      - name: dapr_runtime_service_invocation_req_sent_total
+        labels:
+        - name: method
+          regex:
+            "orders/": "orders/.+"
+```
+
+When this configuration is applied, a recorded metric with the `method` label of `orders/a746dhsk293972nz` will be replaced with `orders/`.
+
+### Watch the demo
+
+Watch [this video to walk through handling high cardinality metrics](https://youtu.be/pOT8teL6j_k?t=1524):
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/pOT8teL6j_k?start=1524" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 ## References
 
 * [Howto: Run Prometheus locally]({{< ref prometheus.md >}})
 * [Howto: Set up Prometheus and Grafana for metrics]({{< ref grafana.md >}})
-* [Howto: Set up Azure monitor to search logs and collect metrics for Dapr]({{< ref azure-monitor.md >}})

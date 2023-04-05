@@ -11,12 +11,14 @@ aliases:
 
 To setup Kafka binding create a component of type `bindings.kafka`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration. For details on using `secretKeyRef`, see the guide on [how to reference secrets in components]({{< ref component-secrets.md >}}).
 
+All component metadata field values can carry [templated metadata values]({{< ref "component-schema.md#templated-metadata-values" >}}), which are resolved on Dapr sidecar startup.
+For example, you can choose to use `{namespace}` as the `consumerGroup`, to enable using the same `appId` in different namespaces using the same topics as described in [this article]({{< ref "howto-namespace.md#with-namespace-consumer-groups">}}).
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: kafka-binding
-  namespace: default
 spec:
   type: bindings.kafka
   version: v1

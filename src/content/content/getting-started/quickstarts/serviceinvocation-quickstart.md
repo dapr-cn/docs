@@ -56,8 +56,10 @@ pip3 install -r requirements.txt
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- python3 app.py
+dapr run --app-port 8001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- python3 app.py
 ```
+
+> **Note**: Since Python3.exe is not defined in Windows, you may need to use `python app.py` instead of `python3 app.py`.
 
 ```py
 @app.route('/orders', methods=['POST'])
@@ -68,7 +70,7 @@ def getOrder():
         'ContentType': 'application/json'}
 
 
-app.run(port=7001)
+app.run(port=8001)
 ```
 
 ### Step 4: Run `checkout` service
@@ -92,6 +94,8 @@ Run the `checkout` service alongside a Dapr sidecar.
 dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- python3 app.py
 ```
 
+> **Note**: Since Python3.exe is not defined in Windows, you may need to use `python app.py` instead of `python3 app.py`.
+
 In the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
 
 ```python
@@ -103,7 +107,22 @@ result = requests.post(
     headers=headers
 )
 ```
-### Step 5: View the Service Invocation outputs
+
+### Step 5: Use with Multi-App Run
+
+You can run the Dapr applications in this quickstart with the [Multi-App Run template]({{< ref multi-app-dapr-run >}}). Instead of running two separate `dapr run` commands for the `order-processor` and `checkout` applications, run the following command:
+
+```sh
+dapr run -f .
+```
+
+To stop all applications, run:
+
+```sh
+dapr stop -f .
+```
+
+### Step 6: View the Service Invocation outputs
 
 Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
 
@@ -217,11 +236,25 @@ let axiosConfig = {
       "dapr-app-id": "order-processor"
   }
 };
-  const res = await axios.post(`${DAPR_HOST}:${DAPR_HTTP_PORT}/orders`, order , axiosConfig);
-  console.log("Order passed: " + res.config.data);
+const res = await axios.post(`${DAPR_HOST}:${DAPR_HTTP_PORT}/orders`, order , axiosConfig);
+console.log("Order passed: " + res.config.data);
 ```
 
-### Step 5: View the Service Invocation outputs
+### Step 5: Use with Multi-App Run
+
+You can run the Dapr applications in this quickstart with the [Multi-App Run template]({{< ref multi-app-dapr-run >}}). Instead of running two separate `dapr run` commands for the `order-processor` and `checkout` applications, run the following command:
+
+```sh
+dapr run -f .
+```
+
+To stop all applications, run:
+
+```sh
+dapr stop -f .
+```
+
+### Step 6: View the Service Invocation outputs
 
 Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
 
@@ -300,11 +333,13 @@ Run the `order-processor` service alongside a Dapr sidecar.
 dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- dotnet run
 ```
 
+Below is the working code block from the order processor's `Program.cs` file.
+
 ```csharp
-app.MapPost("/orders", async context => {
-    var data = await context.Request.ReadFromJsonAsync<Order>();
-    Console.WriteLine("Order received : " + data);
-    await context.Response.WriteAsync(data.ToString());
+app.MapPost("/orders", (Order order) =>
+{
+    Console.WriteLine("Order received : " + order);
+    return order.ToString();
 });
 ```
 
@@ -330,7 +365,7 @@ Run the `checkout` service alongside a Dapr sidecar.
 dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- dotnet run
 ```
 
-In the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
+In the Program.cs file for the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
 
 ```csharp
 var client = new HttpClient();
@@ -342,7 +377,21 @@ var response = await client.PostAsync($"{baseURL}/orders", content);
     Console.WriteLine("Order passed: " + order);
 ```
 
-### Step 5: View the Service Invocation outputs
+### Step 5: Use with Multi-App Run
+
+You can run the Dapr applications in this quickstart with the [Multi-App Run template]({{< ref multi-app-dapr-run >}}). Instead of running two separate `dapr run` commands for the `order-processor` and `checkout` applications, run the following command:
+
+```sh
+dapr run -f .
+```
+
+To stop all applications, run:
+
+```sh
+dapr stop -f .
+```
+
+### Step 6: View the Service Invocation outputs
 
 Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
 
@@ -387,7 +436,7 @@ For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
 - Java JDK 11 (or greater):
-  - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
+  - [Oracle JDK](https://www.oracle.com/java/technologies/downloads), or
   - OpenJDK
 - [Apache Maven](https://maven.apache.org/install.html), version 3.x.
 <!-- IGNORE_LINKS -->
@@ -461,7 +510,21 @@ HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandle
 System.out.println("Order passed: "+ orderId)
 ```
 
-### Step 5: View the Service Invocation outputs
+### Step 5: Use with Multi-App Run
+
+You can run the Dapr applications in this quickstart with the [Multi-App Run template]({{< ref multi-app-dapr-run >}}). Instead of running two separate `dapr run` commands for the `order-processor` and `checkout` applications, run the following command:
+
+```sh
+dapr run -f .
+```
+
+To stop all applications, run:
+
+```sh
+dapr stop -f .
+```
+
+### Step 6: View the Service Invocation outputs
 
 Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
 
@@ -531,13 +594,13 @@ cd service_invocation/go/http/order-processor
 Install the dependencies:
 
 ```bash
-go build app.go
+go build .
 ```
 
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-port 6001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- go run app.go
+dapr run --app-port 6001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- go run .
 ```
 
 Each order is received via an HTTP POST request and processed by the
@@ -550,6 +613,7 @@ func getOrder(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	log.Printf("Order received : %s", string(data))
+}
 ```
 
 ### Step 4: Run `checkout` service
@@ -564,13 +628,13 @@ cd service_invocation/go/http/checkout
 Install the dependencies:
 
 ```bash
-go build app.go
+go build .
 ```
 
 Run the `checkout` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- go run app.go
+dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- go run .
 ```
 
 In the `checkout` service, you'll notice there's no need to rewrite your app code to use Dapr's service invocation. You can enable service invocation by simply adding the `dapr-app-id` header, which specifies the ID of the target service.
@@ -581,7 +645,21 @@ req.Header.Add("dapr-app-id", "order-processor")
 response, err := client.Do(req)
 ```
 
-### Step 5: View the Service Invocation outputs
+### Step 5: Use with Multi-App Run
+
+You can run the Dapr applications in this quickstart with the [Multi-App Run template]({{< ref multi-app-dapr-run >}}). Instead of running two separate `dapr run` commands for the `order-processor` and `checkout` applications, run the following command:
+
+```sh
+dapr run -f .
+```
+
+To stop all applications, run:
+
+```sh
+dapr stop -f .
+```
+
+### Step 6: View the Service Invocation outputs
 
 Dapr invokes an application on any Dapr instance. In the code, the sidecar programming model encourages each application to talk to its own instance of Dapr. The Dapr instances then discover and communicate with one another.
 
@@ -615,6 +693,7 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 == APP == Order received :  {"orderId":10}
 ```
 
+
 {{% /codetab %}}
 
 {{% /tabs %}}
@@ -622,7 +701,7 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 ## Tell us what you think!
 We're continuously working to improve our Quickstart examples and value your feedback. Did you find this Quickstart helpful? Do you have suggestions for improvement?
 
-Join the discussion in our [discord channel](https://discord.gg/22ZtJrNe).
+Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).
 
 ## Next Steps
 

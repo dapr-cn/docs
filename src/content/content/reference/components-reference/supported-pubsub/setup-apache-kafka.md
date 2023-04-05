@@ -11,12 +11,14 @@ aliases:
 
 To setup Apache Kafka pubsub create a component of type `pubsub.kafka`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration. For details on using `secretKeyRef`, see the guide on [how to reference secrets in components]({{< ref component-secrets.md >}}).
 
+All component metadata field values can carry [templated metadata values]({{< ref "component-schema.md#templated-metadata-values" >}}), which are resolved on Dapr sidecar startup.
+For example, you can choose to use `{namespace}` as the `consumerGroup` to enable using the same `appId` in different namespaces using the same topics as described in [this article]({{< ref "howto-namespace.md#with-namespace-consumer-groups">}}).
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: kafka-pubsub
-  namespace: default
 spec:
   type: pubsub.kafka
   version: v1
@@ -24,7 +26,7 @@ spec:
   - name: brokers # Required. Kafka broker connection setting
     value: "dapr-kafka.myapp.svc.cluster.local:9092"
   - name: consumerGroup # Optional. Used for input bindings.
-    value: "group1"
+    value: "{namespace}"
   - name: clientID # Optional. Used as client tracing ID by Kafka brokers.
     value: "my-dapr-app-id"
   - name: authType # Required.
@@ -35,6 +37,8 @@ spec:
     secretKeyRef:
       name: kafka-secrets
       key: saslPasswordSecret
+  - name: saslMechanism
+    value: "SHA-512"
   - name: maxMessageBytes # Optional.
     value: 1024
   - name: consumeRetryInterval # Optional.
@@ -56,6 +60,7 @@ spec:
 | authType            | Y | Configure or disable authentication. Supported values: `none`, `password`, `mtls`, or `oidc` | `"password"`, `"none"`
 | saslUsername        | N | The SASL username used for authentication. Only required if `authType` is set to `"password"`. | `"adminuser"`
 | saslPassword        | N | The SASL password used for authentication. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}). Only required if `authType is set to `"password"`. | `""`, `"KeFg23!"`
+| saslMechanism      | N | The SASL Authentication Mechanism you wish to use. Only required if `authType` is set to `"password"`. Defaults to `PLAINTEXT` | `"SHA-512", "SHA-256", "PLAINTEXT"`
 | initialOffset       | N | The initial offset to use if no offset was previously committed. Should be "newest" or "oldest". Defaults to "newest". | `"oldest"`
 | maxMessageBytes     | N | The maximum size in bytes allowed for a single Kafka message. Defaults to 1024. | `2048`
 | consumeRetryInterval | N | The interval between retries when attempting to consume topics. Treats numbers without suffix as milliseconds. Defaults to 100ms. | `200ms` |
@@ -88,7 +93,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: kafka-pubsub-noauth
-  namespace: default
 spec:
   type: pubsub.kafka
   version: v1
@@ -107,21 +111,19 @@ spec:
     value: 200ms
   - name: version # Optional.
     value: 0.10.2.0
-  - name: disableTls 
+  - name: disableTls
     value: "true"
 ```
 
 #### SASL Password
 
-Setting `authType` to `password` enables [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) authentication using the **PLAIN** mechanism. This requires setting
-the `saslUsername` and `saslPassword` fields. 
+Setting `authType` to `password` enables [SASL](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) authentication. This requires setting the `saslUsername` and `saslPassword` fields.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: kafka-pubsub-sasl
-  namespace: default
 spec:
   type: pubsub.kafka
   version: v1
@@ -140,6 +142,8 @@ spec:
     secretKeyRef:
       name: kafka-secrets
       key: saslPasswordSecret
+  - name: saslMechanism
+    value: "SHA-512"
   - name: maxMessageBytes # Optional.
     value: 1024
   - name: consumeRetryInterval # Optional.
@@ -163,7 +167,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: kafka-pubsub-mtls
-  namespace: default
 spec:
   type: pubsub.kafka
   version: v1
@@ -198,13 +201,13 @@ spec:
 
 #### OAuth2 or OpenID Connect
 
-Setting `authType` to `oidc` enables SASL authentication via the **OAUTHBEARER** mechanism. This supports specifying a bearer token from an external OAuth2 or [OIDC](https://en.wikipedia.org/wiki/OpenID) identity provider. Currently, only the **client_credentials** grant is supported. 
+Setting `authType` to `oidc` enables SASL authentication via the **OAUTHBEARER** mechanism. This supports specifying a bearer token from an external OAuth2 or [OIDC](https://en.wikipedia.org/wiki/OpenID) identity provider. Currently, only the **client_credentials** grant is supported.
 
-Configure `oidcTokenEndpoint` to the full URL for the identity provider access token endpoint. 
+Configure `oidcTokenEndpoint` to the full URL for the identity provider access token endpoint.
 
-Set `oidcClientID` and `oidcClientSecret` to the client credentials provisioned in the identity provider. 
+Set `oidcClientID` and `oidcClientSecret` to the client credentials provisioned in the identity provider.
 
-If `caCert` is specified in the component configuration, the certificate is appended to the system CA trust for verifying the identity provider certificate. Similarly, if `skipVerify` is specified in the component configuration, verification will also be skipped when accessing the identity provider. 
+If `caCert` is specified in the component configuration, the certificate is appended to the system CA trust for verifying the identity provider certificate. Similarly, if `skipVerify` is specified in the component configuration, verification will also be skipped when accessing the identity provider.
 
 By default, the only scope requested for the token is `openid`; it is **highly** recommended that additional scopes be specified via `oidcScopes` in a comma-separated list and validated by the Kafka broker. If additional scopes are not used to narrow the validity of the access token,
 a compromised Kafka broker could replay the token to access other services as the Dapr clientID.
@@ -214,7 +217,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: kafka-pubsub
-  namespace: default
 spec:
   type: pubsub.kafka
   version: v1
@@ -252,7 +254,7 @@ spec:
 ### Communication using TLS
 
 By default TLS is enabled to secure the transport layer to Kafka. To disable TLS, set `disableTls` to `true`. When TLS is enabled, you can
-control server certificate verification using `skipVerify` to disable verificaiton (*NOT* recommended in production environments) and `caCert` to
+control server certificate verification using `skipVerify` to disable verification (*NOT* recommended in production environments) and `caCert` to
 specify a trusted TLS certificate authority (CA). If no `caCert` is specified, the system CA trust will be used. To also configure mTLS authentication,
 see the section under _Authentication_.
 Below is an example of a Kafka pubsub component configured to use transport layer TLS:
@@ -262,7 +264,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: kafka-pubsub
-  namespace: default
 spec:
   type: pubsub.kafka
   version: v1
@@ -294,6 +295,21 @@ spec:
 auth:
   secretStore: <SECRET_STORE_NAME>
 ```
+
+## Sending and receiving multiple messages
+
+Apache Kafka component supports sending and receiving multiple messages in a single operation using the bulk Pub/sub API.
+
+### Configuring bulk subscribe
+
+When subscribing to a topic, you can configure `bulkSubscribe` options. Refer to [Subscribing messages in bulk]({{< ref "pubsub-bulk#subscribing-messages-in-bulk" >}}) for more details. Learn more about [the bulk subscribe API]({{< ref pubsub-bulk.md >}}).
+
+Apache Kafka supports the following bulk metadata options:
+
+| Configuration | Default |
+|----------|---------|
+| `maxBulkAwaitDurationMs` | `10000` (10s) |
+| `maxBulkSubCount` | `80` |
 
 ## Per-call metadata fields
 
@@ -339,7 +355,7 @@ To run without Docker, see the getting started guide [here](https://kafka.apache
 {{% /codetab %}}
 
 {{% codetab %}}
-To run Kafka on Kubernetes, you can use any Kafka operator, such as [Strimzi](https://strimzi.io/docs/operators/latest/quickstart.html#ref-install-prerequisites-str).
+To run Kafka on Kubernetes, you can use any Kafka operator, such as [Strimzi](https://strimzi.io/quickstarts/).
 {{% /codetab %}}
 
 {{< /tabs >}}

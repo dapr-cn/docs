@@ -10,7 +10,7 @@ description: >
 Dapr is a portable, event-driven runtime that makes it easy for any developer to build resilient, stateless and stateful applications that run on the cloud and edge and embraces the diversity of languages and developer frameworks.
 
 <div class="embed-responsive embed-responsive-16by9">
-  <iframe width="1120" height="630" src="https://www.youtube.com/embed/9o9iDAgYBA8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="1120" height="630" src="https://www.youtube-nocookie.com/embed/9o9iDAgYBA8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## Any language, any framework, anywhere
@@ -35,14 +35,17 @@ Each of these building block APIs is independent, meaning that you can use one, 
 
 | Building Block | Description |
 |----------------|-------------|
-| [**Service-to-service invocation**]({{<ref "service-invocation-overview.md">}})  | Resilient service-to-service invocation enables method calls, including retries, on remote services, wherever they are located in the supported hosting environment.
-|  [**State management**]({{<ref "state-management-overview.md">}}) | With state management for storing and querying key/value pairs, long-running, highly available, stateful services can be easily written alongside stateless services in your application. The state store is pluggable and examples include AWS DynamoDB, Azure CosmosDB, Azure SQL Server, GCP Firebase, PostgreSQL or Redis, among others.
-| [**Publish and subscribe**]({{<ref "pubsub-overview.md">}}) | Publishing events and subscribing to topics between services enables event-driven architectures to simplify horizontal scalability and make them resilient to failure. Dapr provides at-least-once message delivery guarantee, message TTL, consumer groups and other advance features.
-| [**Resource bindings**]({{<ref "bindings-overview.md">}}) | Resource bindings with triggers builds further on event-driven architectures for scale and resiliency by receiving and sending events to and from any external source such as databases, queues, file systems, etc.
-| [**Actors**]({{<ref "actors-overview.md">}}) | A pattern for stateful and stateless objects that makes concurrency simple, with method and state encapsulation. Dapr provides many capabilities in its actor runtime, including concurrency, state, and life-cycle management for actor activation/deactivation, and timers and reminders to wake up actors.
-|  [**Observability**]({{<ref "observability-concept.md">}}) | Dapr emits metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr supports distributed tracing to easily diagnose and serve inter-service calls in production using the W3C Trace Context standard and Open Telemetry to send to different monitoring tools.
-| [**Secrets**]({{<ref "secrets-overview.md">}}) | The secrets management API integrates with public cloud and local secret stores to retrieve the secrets for use in application code.
-| [**Configuration**]({{<ref "configuration-api-overview.md">}})  | The configuration API enables you to retrieve and subscribe to application configuration items from configuration stores. 
+| [**Service-to-service invocation**]({{< ref "service-invocation-overview.md" >}})  | Resilient service-to-service invocation enables method calls, including retries, on remote services, wherever they are located in the supported hosting environment.
+|  [**State management**]({{< ref "state-management-overview.md" >}}) | With state management for storing and querying key/value pairs, long-running, highly available, stateful services can be easily written alongside stateless services in your application. The state store is pluggable and examples include AWS DynamoDB, Azure CosmosDB, Azure SQL Server, GCP Firebase, PostgreSQL or Redis, among others.
+| [**Publish and subscribe**]({{< ref "pubsub-overview.md" >}}) | Publishing events and subscribing to topics between services enables event-driven architectures to simplify horizontal scalability and make them resilient to failure. Dapr provides at-least-once message delivery guarantee, message TTL, consumer groups and other advance features.
+| [**Resource bindings**]({{< ref "bindings-overview.md" >}}) | Resource bindings with triggers builds further on event-driven architectures for scale and resiliency by receiving and sending events to and from any external source such as databases, queues, file systems, etc.
+| [**Actors**]({{< ref "actors-overview.md" >}}) | A pattern for stateful and stateless objects that makes concurrency simple, with method and state encapsulation. Dapr provides many capabilities in its actor runtime, including concurrency, state, and life-cycle management for actor activation/deactivation, and timers and reminders to wake up actors.
+|  [**Observability**]({{< ref "observability-concept.md" >}}) | Dapr emits metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr supports distributed tracing to easily diagnose and serve inter-service calls in production using the W3C Trace Context standard and Open Telemetry to send to different monitoring tools.
+| [**Secrets**]({{< ref "secrets-overview.md" >}}) | The secrets management API integrates with public cloud and local secret stores to retrieve the secrets for use in application code.
+| [**Configuration**]({{< ref "configuration-api-overview.md" >}})  | The configuration API enables you to retrieve and subscribe to application configuration items from configuration stores. 
+| [**Distributed lock**]({{< ref "distributed-lock-api-overview.md" >}})  | The distributed lock API enables your application to acquire a lock for any resource that gives it exclusive access until either the lock is released by the application, or a lease timeout occurs. 
+| [**Workflows**]({{< ref "workflow-overview.md" >}}) | `/v1.0-alpha1/workflow` | The workflow API can be combined with other Dapr building blocks to define long running, persistent processes or data flows that span multiple microservices using Dapr workflows or workflow components. 
+
 
 ## Sidecar architecture
 
@@ -52,7 +55,7 @@ Dapr exposes its HTTP and gRPC APIs as a sidecar architecture, either as a conta
 
 ## Hosting environments
 
-Dapr can be hosted in multiple environments, including self-hosted on a Windows/Linux/macOS machines for local developement and on Kubernetes or clusters of physical or virtual machines in production.
+Dapr can be hosted in multiple environments, including self-hosted on a Windows/Linux/macOS machines for local development and on Kubernetes or clusters of physical or virtual machines in production.
 
 ### Self-hosted local development
 
@@ -60,7 +63,7 @@ In [self-hosted mode]({{< ref self-hosted-overview.md >}}) Dapr runs as a separa
 
 You can use the [Dapr CLI](https://github.com/dapr/cli#launch-dapr-and-your-app) to run a Dapr-enabled application on your local machine. The diagram below show Dapr's local development environment when configured with the CLI `init` command. Try this out with the [getting started samples]({{< ref getting-started >}}). 
 
-<img src="/images/overview_standalone.png" width=1200 alt="Architecture diagram of Dapr in self-hosted mode">
+<img src="/images/overview-standalone.png" width=1200 alt="Architecture diagram of Dapr in self-hosted mode">
 
 ### Kubernetes
 
@@ -68,11 +71,13 @@ Kubernetes can be used for either local development (for example with [minikube]
 
 Dapr has control plane services. The `dapr-sidecar-injector` and `dapr-operator` services provide first-class integration to launch Dapr as a sidecar container in the same pod as the service container and provide notifications of Dapr component updates provisioned in the cluster.
 
+<!-- IGNORE_LINKS -->
 The `dapr-sentry` service is a certificate authority that enables mutual TLS between Dapr sidecar instances for secure data encryption, as well as providing identity via [Spiffe](https://spiffe.io/). For more information on the `Sentry` service, read the [security overview]({{< ref "security-concept.md#dapr-to-dapr-communication" >}})
+<!-- END_IGNORE -->
 
 Deploying and running a Dapr-enabled application into your Kubernetes cluster is as simple as adding a few annotations to the deployment schemes. Visit the [Dapr on Kubernetes docs]({{< ref kubernetes >}})
 
-<img src="/images/overview_kubernetes.png" width=1200 alt="Architecture diagram of Dapr in Kubernetes mode">
+<img src="/images/overview-kubernetes.png" width=1200 alt="Architecture diagram of Dapr in Kubernetes mode">
 
 ### Clusters of physical or virtual machines
 
@@ -106,10 +111,10 @@ Dapr can be used from any developer framework. Here are some that have been inte
 
 | Language | Frameworks | Description |
 |----------|------------|-------------|
-| [.NET]({{< ref dotnet >}}) | [ASP.NET Core]({{< ref dotnet-aspnet.md >}}) | Brings stateful routing controllers that respond to pub/sub events from other services. Can also take advantage of [ASP.NET Core gRPC Services](https://docs.microsoft.com/aspnet/core/grpc/).
-| [Java]({{< ref java >}}) | [Spring Boot](https://spring.io/)
-| [Python]({{< ref python >}}) | [Flask]({{< ref python-flask.md >}})
-| [Javascript](https://github.com/dapr/js-sdk) | [Express](http://expressjs.com/)
+| [.NET]({{< ref dotnet >}}) | [ASP.NET Core](https://github.com/dapr/dotnet-sdk/tree/master/examples/AspNetCore) | Brings stateful routing controllers that respond to pub/sub events from other services. Can also take advantage of [ASP.NET Core gRPC Services](https://docs.microsoft.com/aspnet/core/grpc/).
+| [Java]({{< ref java >}}) | [Spring Boot](https://spring.io/) | Build Spring boot applications with Dapr APIs
+| [Python]({{< ref python >}}) | [Flask]({{< ref python-flask.md >}}) | Build Flask applications with Dapr APIs
+| [Javascript](https://github.com/dapr/js-sdk) | [Express](http://expressjs.com/) | Build Express applications with Dapr APIs
 | [PHP]({{< ref php >}}) | | You can serve with Apache, Nginx, or Caddyserver.
 
 #### Integrations and extensions

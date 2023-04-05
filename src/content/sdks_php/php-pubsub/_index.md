@@ -12,12 +12,8 @@ you can also just pass an array that conforms to the cloud event spec or use ano
 
 ```php
 <?php
-$app->post('/publish', function(\DI\FactoryInterface $factory) {
-    // create a new publisher that publishes to my-pub-sub component
-    $publisher = $factory->make(\Dapr\PubSub\Publish::class, ['pubsub' => 'my-pubsub']);
-    
-    // publish that something happened to my-topic
-    $publisher->topic('my-topic')->publish(['something' => 'happened']);
+$app->post('/publish', function(\Dapr\Client\DaprClient $daprClient) {
+    $daprClient->publishEvent(pubsubName: 'pubsub', topicName: 'my-topic', data: ['something' => 'happened']);
 });
 ```
 
@@ -45,9 +41,9 @@ $event->data_content_type = 'application/xml';
 ```php
 <?php
 /**
- * @var \Dapr\PubSub\Publish $publisher 
+ * @var \Dapr\Client\DaprClient $daprClient 
  */
-$publisher->topic('my-topic')->publish($raw_data, content_type: 'application/octet-stream');
+$daprClient->publishEvent(pubsubName: 'pubsub', topicName: 'my-topic', data: $raw_data, contentType: 'application/octet-stream');
 ```
 
 {{% alert title="Binary data" color="warning" %}}

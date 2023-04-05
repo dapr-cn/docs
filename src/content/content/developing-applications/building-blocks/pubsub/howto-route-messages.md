@@ -6,32 +6,11 @@ weight: 2300
 description: "Learn how to route messages from a topic to different event handlers based on CloudEvent fields"
 ---
 
-{{% alert title="Preview feature" color="warning" %}}
-Pub/sub message routing is currently in [preview]({{< ref preview-features.md >}}).
-{{% /alert %}}
-
 Pub/sub routing is an implementation of [content-based routing](https://www.enterpriseintegrationpatterns.com/ContentBasedRouter.html), a messaging pattern that utilizes a DSL instead of imperative application code. With pub/sub routing, you use expressions to route [CloudEvents](https://cloudevents.io) (based on their contents) to different URIs/paths and event handlers in your application. If no route matches, then an optional default route is used. This proves useful as your applications expand to support multiple event versions or special cases.
 
 While routing can be implemented with code, keeping routing rules external from the application can improve portability.
 
 This feature is available to both the [declarative and programmatic subscription approaches]({{< ref subscription-methods.md >}}).
-
-## Enable message routing
-
-To enable this preview feature, add the `PubSub.Routing` feature entry to your application configuration:
-
-```yaml
-apiVersion: dapr.io/v1alpha1
-kind: Configuration
-metadata:
-  name: pubsubroutingconfig
-spec:
-  features:
-    - name: PubSub.Routing
-      enabled: true
-```
-
-Learn more about enabling [preview features]({{< ref preview-features >}}).
 
 ## Declarative subscription
 
@@ -289,8 +268,11 @@ has(event.data.important) && event.data.important == true
 Match deposits greater than $10,000:
 
 ```javascript
-event.type == "deposit" && event.data.amount > 10000
+event.type == "deposit" && int(event.data.amount) > 10000
 ```
+{{% alert title="Note" color="primary" %}}
+By default the numeric values ​​are written as double-precision floating-point. There are no automatic arithmetic conversions for numeric values. In this case, if `event.data.amount` is not cast as integer, the match is not performed. For more information, see the [CEL documentation](https://github.com/google/cel-spec/blob/master/doc/langdef.md).
+{{% /alert %}}
 
 Match multiple versions of a message:
 
@@ -468,7 +450,7 @@ Currently, comparisons to time (e.g. before or after "now") are not supported.
 Watch [this video](https://www.youtube.com/watch?v=QqJgRmbH82I&t=1063s) on how to use message routing with pub/sub:
 
 <p class="embed-responsive embed-responsive-16by9">
-<iframe width="688" height="430" src="https://www.youtube.com/embed/QqJgRmbH82I?start=1063" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="688" height="430" src="https://www.youtube-nocookie.com/embed/QqJgRmbH82I?start=1063" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 
 ## Next steps

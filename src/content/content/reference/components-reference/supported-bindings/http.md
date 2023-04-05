@@ -14,13 +14,24 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: <NAME>
-  namespace: <NAMESPACE>
 spec:
   type: bindings.http
   version: v1
   metadata:
   - name: url
     value: http://something.com
+  - name: MTLSRootCA
+    value: /Users/somepath/root.pem # OPTIONAL <path to root CA> or <pem encoded string>
+  - name: MTLSClientCert
+    value: /Users/somepath/client.pem # OPTIONAL <path to client cert> or <pem encoded string>
+  - name: MTLSClientKey
+    value: /Users/somepath/client.key # OPTIONAL <path to client key> or <pem encoded string>
+  - name: securityToken # OPTIONAL <token to include as a header on HTTP requests>
+    secretKeyRef:
+      name: mysecret
+      key: mytoken
+  - name: securityTokenHeader
+    value: "Authorization: Bearer" # OPTIONAL <header name for the security token>
 ```
 
 ## Spec metadata fields
@@ -28,6 +39,11 @@ spec:
 | Field              | Required | Binding support | Details | Example |
 |--------------------|:--------:|--------|--------|---------|
 | url                | Y        | Output |The base URL of the HTTP endpoint to invoke | `http://host:port/path`, `http://myservice:8000/customers`
+| MTLSRootCA         | N        | Output |Path to root ca certificate or pem encoded string |
+| MTLSClientCert     | N        | Output |Path to client certificate or pem encoded string  |
+| MTLSClientKey      | N        | Output |Path client private key or pem encoded string |
+| securityToken      | N        | Output |The value of a token to be added to an HTTP request as a header. Used together with `securityTokenHeader` |
+| securityTokenHeader| N        | Output |The name of the header for `securityToken` on an HTTP request that | 
 
 ## Binding support
 
@@ -169,6 +185,142 @@ curl -d '{ "operation": "post", "data": "YOUR_BASE_64_CONTENT", "metadata": { "p
 
 {{< /tabs >}}
 
+## Using HTTPS
+
+The HTTP binding can also be used with HTTPS endpoints by configuring the Dapr sidecar to trust the server's SSL certificate.
+
+
+1. Update the binding URL to use `https` instead of `http`.
+1. Refer [How-To: Install certificates in the Dapr sidecar]({{< ref install-certificates >}}), to install the SSL certificate in the sidecar.
+
+### Example
+
+#### Update the binding component
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: <NAME>
+  namespace: <NAMESPACE>
+spec:
+  type: bindings.http
+  version: v1
+  metadata:
+  - name: url
+    value: https://my-secured-website.com # Use HTTPS
+```
+
+#### Install the SSL certificate in the sidecar
+
+
+{{< tabs Self-Hosted Kubernetes >}}
+
+{{% codetab %}}
+When the sidecar is not running inside a container, the SSL certificate can be directly installed on the host operating system.
+
+Below is an example when the sidecar is running as a container. The SSL certificate is located on the host computer at `/tmp/ssl/cert.pem`.
+
+```yaml
+version: '3'
+services:
+  my-app:
+    # ...
+  dapr-sidecar:
+    image: "daprio/daprd:1.8.0"
+    command: [
+      "./daprd",
+     "-app-id", "myapp",
+     "-app-port", "3000",
+     ]
+    volumes:
+        - "./components/:/components"
+        - "/tmp/ssl/:/certificates" # Mount the certificates folder to the sidecar container at /certificates
+    environment:
+      - "SSL_CERT_DIR=/certificates" # Set the environment variable to the path of the certificates folder
+    depends_on:
+      - my-app
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+The sidecar can read the SSL certificate from a variety of sources. See [How-to: Mount Pod volumes to the Dapr sidecar]({{< ref kubernetes-volume-mounts >}}) for more. In this example, we store the SSL certificate as a Kubernetes secret.
+
+```bash
+kubectl create secret generic myapp-cert --from-file /tmp/ssl/cert.pem
+```
+
+The YAML below is an example of the Kubernetes deployment that mounts the above secret to the sidecar and sets `SSL_CERT_DIR` to install the certificates.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: default
+  labels:
+    app: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "myapp"
+        dapr.io/app-port: "8000"
+        dapr.io/volume-mounts: "cert-vol:/certificates" # Mount the certificates folder to the sidecar container at /certificates
+        dapr.io/env: "SSL_CERT_DIR=/certificates" # Set the environment variable to the path of the certificates folder
+    spec:
+      volumes:
+        - name: cert-vol
+          secret:
+            secretName: myapp-cert
+...
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+#### Invoke the binding securely
+
+{{< tabs Windows Linux >}}
+
+{{% codetab %}}
+```bash
+curl -d "{ \"operation\": \"get\" }" \
+      https://localhost:<dapr-port>/v1.0/bindings/<binding-name>
+```
+{{% /codetab %}}
+
+{{% codetab %}}
+```bash
+curl -d '{ "operation": "get" }' \
+      https://localhost:<dapr-port>/v1.0/bindings/<binding-name>
+```
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+## Using mTLS or enabling client TLS authentication along with HTTPS
+You can configure the HTTP binding to use mTLS or client TLS authentication along with HTTPS by providing the `MTLSRootCA`, `MTLSClientCert`, and `MTLSClientKey` metadata fields in the binding component.
+
+These fields can be passed as a file path or as a pem encoded string. 
+- If the file path is provided, the file is read and the contents are used. 
+- If the pem encoded string is provided, the string is used as is.
+When these fields are configured, the Dapr sidecar uses the provided certificate to authenticate itself with the server during the TLS handshake process.
+
+### When to use:
+You can use this when the server with which the HTTP binding is configured to communicate requires mTLS or client TLS authentication.
+
+
 ## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
@@ -176,3 +328,4 @@ curl -d '{ "operation": "post", "data": "YOUR_BASE_64_CONTENT", "metadata": { "p
 - [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})
 - [How-To: Use bindings to interface with external resources]({{< ref howto-bindings.md >}})
 - [Bindings API reference]({{< ref bindings_api.md >}})
+- [How-To: Install certificates in the Dapr sidecar]({{< ref install-certificates >}})

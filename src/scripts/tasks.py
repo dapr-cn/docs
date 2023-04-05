@@ -5,32 +5,12 @@ from git import Repo, GitCommandError
 import shutil
 import re
 
-source_base_dir = "../source"
-dapr_cn_base_dir = "../dapr-cn"
+source_base_dir = "../source_docs"
 repo_base_dir = "../../"
-
-all_versions = [
-    "v1.0",
-    "v1.1",
-    "v1.2",
-    "v1.3",
-    "v1.4",
-    "v1.5",
-    "v1.6",
-    "v1.7",
-]
-
 
 @task
 def update_source(c):
-    # update source file in translation branches
-    for branch in all_versions:
-        update_source_core(branch)
-
-
-def update_source_core(branch: str):
-    branch_dir = f"{dapr_cn_base_dir}/{branch}"
-    content_dir = f"{branch_dir}/content"
+    content_dir = f"../content"
     # delete content dir if found
     if os.path.exists(content_dir):
         shutil.rmtree(content_dir)
@@ -39,29 +19,44 @@ def update_source_core(branch: str):
     print("content directory is clear")
 
     # copy dapr main content
-    source_content_dir = f"{source_base_dir}/{branch}/daprdocs/content/en/"
+    source_content_dir = f"{source_base_dir}/daprdocs/content/en/"
     shutil.copytree(source_content_dir, f"{content_dir}/content")
     print("dapr content is copied")
 
+
+#   [[module.mounts]]
+#     source = "../sdkdocs/dotnet/daprdocs/content/en/dotnet-sdk-docs"
+#     target = "content/developing-applications/sdks/dotnet"
+#     lang = "en"
+#   [[module.mounts]]
+#     source = "../sdkdocs/pluggable-components/dotnet/daprdocs/content/en/dotnet-sdk-docs"
+#     target = "content/developing-applications/develop-components/pluggable-components/pluggable-components-sdks/pluggable-components-dotnet"
+#     lang = "en"
     # copy sdk docs
-    source_sdk_dir = f"{source_base_dir}/{branch}/sdkdocs"
+    source_sdk_dir = f"{source_base_dir}/sdkdocs"
     # copy each sdk docs to content directory
-    for sdk_dir in os.listdir(source_sdk_dir):
-        sdk_dir_path = f"{source_sdk_dir}/{sdk_dir}"
+    for sdk_name in os.listdir(source_sdk_dir):
+        sdk_dir_path = f"{source_sdk_dir}/{sdk_name}"
         if os.path.isdir(sdk_dir_path):
-            shutil.copytree(f"{sdk_dir_path}/daprdocs/content/en/{sdk_dir}-sdk-docs", f"{content_dir}/sdks_{sdk_dir}/")
-            # copy contribute if sdk-contributing found
-            if os.path.exists(f"{sdk_dir_path}/daprdocs/content/en/{sdk_dir}-sdk-contributing"):
-                shutil.copytree(f"{sdk_dir_path}/daprdocs/content/en/{sdk_dir}-sdk-contributing",
-                                f"{content_dir}/contributing",
-                                dirs_exist_ok=True)
+            if sdk_name == "pluggable-components":
+                for pluggable_components_sdk_name in os.listdir(sdk_dir_path):
+                    component_dir = f"{sdk_dir_path}/{pluggable_components_sdk_name}"
+                    if os.path.isdir(component_dir):
+                        shutil.copytree(f"{component_dir}/daprdocs/content/en/{pluggable_components_sdk_name}-sdk-docs", f"{content_dir}/pluggable-components/{pluggable_components_sdk_name}/")
+            else:
+                shutil.copytree(f"{sdk_dir_path}/daprdocs/content/en/{sdk_name}-sdk-docs", f"{content_dir}/sdks_{sdk_name}/")
+                # copy contribute if sdk-contributing found
+                if os.path.exists(f"{sdk_dir_path}/daprdocs/content/en/{sdk_name}-sdk-contributing"):
+                    shutil.copytree(f"{sdk_dir_path}/daprdocs/content/en/{sdk_name}-sdk-contributing",
+                                    f"{content_dir}/contributing",
+                                    dirs_exist_ok=True)
     print("sdk content is copied")
 
     # create crowdin.yml
-    with open(f"{branch_dir}/crowdin.yml", "w", encoding='utf8') as f:
+    with open(f"{repo_base_dir}/crowdin.yml", "w", encoding='utf8') as f:
         f.write("""project_id_env: CROWDIN_PROJECT_ID
 api_token_env: CROWDIN_PERSONAL_TOKEN
-base_path: "./"
+base_path: "./src/"
 preserve_hierarchy: true
 files:
 """)
@@ -110,164 +105,25 @@ files:
                     with open(f"{root}/{file}", "w", encoding='utf8') as f:
                         f.write(content)
 
-    # special handling for v1.0
-    if branch == "v1.0":
-        # update some html to avoid error in crowdin
-        for root, dirs, files in os.walk(content_dir):
-            for file in files:
-                if file.endswith(".md"):
-                    # update /content/getting-started/_index.md
-                    if file == "_index.md":
-                        with open(f"{root}/_index.md", "r", encoding='utf8') as f:
-                            content = f.read()
-                        content = content.replace(
-                            "<a class=\"btn btn-primary\" href=\"{{< ref install-dapr-cli.md >}}\" role=\"button\">First step: Install the Dapr CLI >></a>",
-                            "[First step: Install the Dapr CLI]({{< ref install-dapr-cli.md >}})")
-                        with open(f"{root}/_index.md", "w", encoding='utf8') as f:
-                            f.write(content)
-                    # update /content/getting-started/get-started-api.md
-                    if file == "get-started-api.md":
-                        with open(f"{root}/get-started-api.md", "r", encoding='utf8') as f:
-                            content = f.read()
-                        content = content.replace(
-                            "<a class=\"btn btn-primary\" href=\"{{< ref get-started-component.md >}}\" role=\"button\">Next step: Define a component >></a>",
-                            "[Next step: Define a component]({{< ref get-started-component.md >}})")
-                        with open(f"{root}/get-started-api.md", "w", encoding='utf8') as f:
-                            f.write(content)
-                    # update /content/getting-started/get-started-component.md
-                    if file == "get-started-component.md":
-                        with open(f"{root}/get-started-component.md", "r", encoding='utf8') as f:
-                            content = f.read()
-                        content = content.replace(
-                            "<a class=\"btn btn-primary\" href=\"{{< ref quickstarts.md >}}\" role=\"button\">Next step: Explore Dapr quickstarts >></a>",
-                            "[Next step: Explore Dapr quickstarts]({{< ref quickstarts.md >}})")
-                        with open(f"{root}/get-started-component.md", "w", encoding='utf8') as f:
-                            f.write(content)
-                    # update /content/getting-started/install-dapr-cli.md
-                    if file == "install-dapr-cli.md":
-                        with open(f"{root}/install-dapr-cli.md", "r", encoding='utf8') as f:
-                            content = f.read()
-                        content = content.replace(
-                            "<a class=\"btn btn-primary\" href=\"{{< ref install-dapr-selfhost.md >}}\" role=\"button\">Next step: Initialize Dapr >></a>",
-                            "[Next step: Initialize Dapr]({{< ref install-dapr-selfhost.md >}})")
-                        with open(f"{root}/install-dapr-cli.md", "w", encoding='utf8') as f:
-                            f.write(content)
-                    # update /content/getting-started/install-dapr-selfhost.md
-                    if file == "install-dapr-selfhost.md":
-                        with open(f"{root}/install-dapr-selfhost.md", "r", encoding='utf8') as f:
-                            content = f.read()
-                        content = content.replace(
-                            "<a class=\"btn btn-primary\" href=\"{{< ref get-started-api.md >}}\" role=\"button\">Next step: Use the Dapr API >></a>",
-                            "[Next step: Use the Dapr API]({{< ref get-started-api.md >}})")
-                        with open(f"{root}/install-dapr-selfhost.md", "w", encoding='utf8') as f:
-                            f.write(content)
-
-    print(f"{branch} source content is updated")
-
 
 @task
 def update_files_for_building(c):
-    # to update file to building in github action in dapr-cn/docs
-    print("Updating files for building")
-    for branch in all_versions:
-        update_files_for_building_core(branch)
-    print("Files are updated")
-
-
-def update_files_for_building_core(branch):
-    branch_dir = f"{dapr_cn_base_dir}/{branch}"
-    docs_dir = f"{branch_dir}/daprdocs"
-    github_action_dir = f"{branch_dir}/.github/workflows/"
+    docs_dir = f"./source_docs/daprdocs"
+    github_action_dir = f"./source_docs/.github/workflows/"
     # copy update_config_zh.sh to docs directory
     shutil.copy("./update_config_zh.sh", f"{docs_dir}/update_config_zh.sh")
     # read content of zh-build.yml and replace %%tag%% to branch
     with open("./zh-build.yml", "r") as f:
         content = f.read()
-        content = content.replace("%%tag%%", f"{branch}/translate_site")
+        content = content.replace("%%tag%%", f"main")
         # write content to docs_dir zh-build.yml
         with open(f"{github_action_dir}/zh-build.yml", "w") as fo:
             fo.write(content)
 
 
 @task
-def update_all_submodules(c):
-    # to update all submodules when you want to sync source content to translate content
-    print("Updating all submodules")
-    repo = Repo(repo_base_dir)
-    repo.submodule_update(init=True, recursive=True)
-    print("Submodules are updated")
-
-    print("Pull source content of dapr_cn")
-    for branch in all_versions:
-        repo = Repo(f"{dapr_cn_base_dir}/{branch}")
-
-        print(f"check out {branch}/translate_site")
-        repo.git.checkout(f"{branch}/translate_site")
-
-        print(f"pull {branch}/translate_site")
-        repo.git.pull("origin", f"{branch}/translate_site")
-
-        print(f"submodule update {branch}/translate_site")
-        repo.submodule_update(init=True, recursive=True)
-
-        print(f"{branch} dapr_cn is updated")
-
-    print("Pull source content of dapr docs")
-    for branch in all_versions:
-        repo = Repo(f"{source_base_dir}/{branch}")
-
-        print(f"check out {branch}")
-        repo.git.checkout(branch)
-
-        print(f"pull {branch}")
-        repo.git.pull("origin", branch)
-
-        print(f"submodule update {branch}")
-        repo.submodule_update(init=True, recursive=True)
-        print(f"{branch} dapr docs is updated")
-
-    print("Update all submodules done")
-
-
-@task
 def clean_translations(c):
-    print("Cleaning all translations")
-    for branch in all_versions:
-        clean_translations_core(branch)
-    print("All translations are cleaned")
-
-
-def clean_translations_core(branch: str):
-    content_dir = f"{dapr_cn_base_dir}/{branch}/translated_content"
+    content_dir = f"translated_content"
     # delete content dir if found
     if os.path.exists(content_dir):
         shutil.rmtree(content_dir)
-
-
-@task
-def commit_all(c):
-    print("Committing all submodules")
-    for tag in all_versions:
-        print(f"Committing {tag}")
-        commit_submodule_core(tag)
-        print(f"{tag} is committed")
-    # commit base repo
-    main_repo = Repo(repo_base_dir)
-    if main_repo.is_dirty():
-        main_repo.git.add("--all")
-        main_repo.git.commit("-m", "Update submodules")
-        main_repo.git.push("origin")
-        print("Changes are committed")
-    print("All submodules are committed")
-
-
-def commit_submodule_core(tag: str):
-    repo = Repo(f"{repo_base_dir}/src/dapr-cn/{tag}")
-    # check if there is any changes
-    if repo.is_dirty():
-        repo.git.add("--all")
-        repo.git.commit("-m", f"Update content for {tag}")
-        repo.git.push("origin")
-        print("Changes are committed")
-    else:
-        print("No changes found")

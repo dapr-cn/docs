@@ -9,11 +9,11 @@ no_list: true
 
 The Dapr client package allows you to interact with other Dapr applications from a .NET application.
 
-## Prerequisites
+{{% alert title="Note" color="primary" %}}
+ If you haven't already, [try out one of the quickstarts]({{< ref quickstarts >}}) for a quick walk-through on how to use the Dapr .NET SDK with an API building block.
 
-- [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
-- Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
-- [.NET Core 3.1 or .NET 5+](https://dotnet.microsoft.com/download) installed
+{{% /alert %}}
+
 
 ## Building blocks
 
@@ -65,6 +65,31 @@ Console.WriteLine($"Got State: {state.Size} {state.Color}");
 
 await client.DeleteStateAsync(storeName, stateKeyName, cancellationToken: cancellationToken);
 Console.WriteLine("Deleted State!");
+```
+
+### Query State (Alpha)
+
+```csharp
+var query = "{" +
+                "\"filter\": {" +
+                    "\"EQ\": { \"value.Id\": \"1\" }" +
+                "}," +
+                "\"sort\": [" +
+                    "{" +
+                        "\"key\": \"value.Balance\"," +
+                        "\"order\": \"DESC\"" +
+                    "}" +
+                "]" +
+            "}";
+
+var client = new DaprClientBuilder().Build();
+var queryResponse = await client.QueryStateAsync<Account>("querystore", query, cancellationToken: cancellationToken);
+
+Console.WriteLine($"Got {queryResponse.Results.Count}");
+foreach (var account in queryResponse.Results)
+{
+    Console.WriteLine($"Account: {account.Data.Id} has {account.Data.Balance}");
+}
 ```
 
 - For a full list of state operations visit [How-To: Get & save state]({{< ref howto-get-save-state.md >}}).
@@ -139,6 +164,114 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 {{< /tabs >}}
 
 - For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
+
+### Get Configuration Keys (Alpha)
+```csharp
+var client = new DaprClientBuilder().Build();
+
+// Retrieve a specific set of keys.
+var specificItems = await client.GetConfiguration("configstore", new List<string>() { "key1", "key2" });
+Console.WriteLine($"Here are my values:\n{specificItems[0].Key} -> {specificItems[0].Value}\n{specificItems[1].Key} -> {specificItems[1].Value}");
+
+// Retrieve all configuration items by providing an empty list.
+var specificItems = await client.GetConfiguration("configstore", new List<string>());
+Console.WriteLine($"I got {configItems.Count} entires!");
+foreach (var item in configItems)
+{
+    Console.WriteLine($"{item.Key} -> {item.Value}")
+}
+```
+
+### Subscribe to Configuration Keys (Alpha)
+```csharp
+var client = new DaprClientBuilder().Build();
+
+// The Subscribe Configuration API returns a wrapper around an IAsyncEnumerable<IEnumerable<ConfigurationItem>>.
+// Iterate through it by accessing its Source in a foreach loop. The loop will end when the stream is severed
+// or if the cancellation token is cancelled.
+var subscribeConfigurationResponse = await daprClient.SubscribeConfiguration(store, keys, metadata, cts.Token);
+await foreach (var items in subscribeConfigurationResponse.Source.WithCancellation(cts.Token))
+{
+    foreach (var item in items)
+    {
+        Console.WriteLine($"{item.Key} -> {item.Value}")
+    }
+}
+```
+
+### Manage workflow instances (Alpha)
+
+```csharp
+var daprClient = new DaprClientBuilder().Build();
+
+string instanceId = "MyWorkflowInstance1";
+string workflowComponentName = "dapr"; // alternatively, this could be the name of a workflow component defined in yaml
+string workflowName = "MyWorkflowDefinition";
+var input = new { name = "Billy", age = 30 }; // Any JSON-serializable value is OK
+
+// Start workflow
+var startResponse = await daprClient.StartWorkflowAsync(instanceId, workflowComponentName, workflowName, input);
+
+// Terminate workflow
+await daprClient.TerminateWorkflowAsync(instanceId, workflowComponentName);
+
+// Get workflow metadata
+var getResponse = await daprClient.GetWorkflowAsync(instanceId, workflowComponentName, workflowName);
+```
+
+## Sidecar APIs
+### Sidecar Health
+The .NET SDK provides a way to poll for the sidecar health, as well as a convenience method to wait for the sidecar to be ready.
+
+#### Poll for health
+This health endpoint returns true when both the sidecar and your application are up (fully initialized).
+
+```csharp
+var client = new DaprClientBuilder().Build();
+
+var isDaprReady = await client.CheckHealthAsync();
+
+if (isDaprReady) 
+{
+    // Execute Dapr dependent code.
+}
+```
+
+#### Poll for health (outbound)
+This health endpoint returns true when Dapr has initialized all its components, but may not have finished setting up a communication channel with your application.
+
+This is best used when you want to utilize a Dapr component in your startup path, for instance, loading secrets from a secretstore.
+
+```csharp
+var client = new DaprClientBuilder().Build();
+
+var isDaprComponentsReady = await client.CheckOutboundHealthAsync();
+
+if (isDaprComponentsReady) 
+{
+    // Execute Dapr component dependent code.
+}
+```
+
+#### Wait for sidecar
+The `DaprClient` also provides a helper method to wait for the sidecar to become healthy (components only). When using this method, it is recommended to include a `CancellationToken` to
+allow for the request to timeout. Below is an example of how this is used in the `DaprSecretStoreConfigurationProvider`.
+
+```csharp
+// Wait for the Dapr sidecar to report healthy before attempting use Dapr components.
+using (var tokenSource = new CancellationTokenSource(sidecarWaitTimeout))
+{
+    await client.WaitForSidecarAsync(tokenSource.Token);
+}
+
+// Perform Dapr component operations here i.e. fetching secrets.
+```
+
+### Shutdown the sidecar
+```csharp
+var client = new DaprClientBuilder().Build();
+await client.ShutdownSidecarAsync();
+```
 
 ## Related links
 - [.NET SDK examples](https://github.com/dapr/dotnet-sdk/tree/master/examples)

@@ -46,7 +46,7 @@ Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker c
 In a terminal window, from the root of the Quickstarts clone directory, navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following command to set up the container:
@@ -73,7 +73,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS       
 In a new terminal window, navigate to the SDK directory.
 
 ```bash
-cd quickstarts/bindings/python/sdk/batch
+cd bindings/python/sdk/batch
 ```
 
 Install the dependencies:
@@ -85,8 +85,10 @@ pip3 install -r requirements.txt
 Run the `batch-sdk` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id batch-sdk --app-port 50051 --components-path ../../../components -- python3 app.py
+dapr run --app-id batch-sdk --app-port 50051 --resources-path ../../../components -- python3 app.py
 ```
+
+> **Note**: Since Python3.exe is not defined in Windows, you may need to use `python app.py` instead of `python3 app.py`.
 
 The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
 
@@ -100,19 +102,22 @@ The `batch-sdk` service uses the PostgreSQL output binding defined in the [`bind
 
 ```python
 with DaprClient() as d:
-        sqlCmd = ('insert into orders (orderid, customer, price) values ' +
-                  '(%s, \'%s\', %s)' % (order_line['orderid'],
-                                        order_line['customer'],
-                                        order_line['price']))
-        payload = {'sql': sqlCmd}
+    sqlCmd = ('insert into orders (orderid, customer, price) values ' +
+              '(%s, \'%s\', %s)' % (order_line['orderid'],
+                                    order_line['customer'],
+                                    order_line['price']))
+    payload = {'sql': sqlCmd}
 
-        print(sqlCmd, flush=True)
+    print(sqlCmd, flush=True)
 
-  try:
-    # Insert order using Dapr output binding via HTTP Post
-    resp = d.invoke_binding(binding_name=sql_binding, operation='exec',
-                            binding_metadata=payload, data='')
-    return resp
+    try:
+        # Insert order using Dapr output binding via HTTP Post
+        resp = d.invoke_binding(binding_name=sql_binding, operation='exec',
+                                binding_metadata=payload, data='')
+        return resp
+    except Exception as e:
+        print(e, flush=True)
+        raise SystemExit(e)
 ```
 
 ### Step 4: View the output of the job
@@ -132,7 +137,7 @@ Your output binding's `print` statement output:
 In a new terminal, verify the same data has been inserted into the database. Navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following to start the interactive Postgres CLI:
@@ -248,7 +253,7 @@ Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker c
 In a terminal window, from the root of the Quickstarts clone directory, navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following command to set up the container:
@@ -275,7 +280,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS       
 In a new terminal window, navigate to the SDK directory.
 
 ```bash
-cd quickstarts/bindings/javascript/sdk/batch
+cd bindings/javascript/sdk/batch
 ```
 
 Install the dependencies:
@@ -287,7 +292,7 @@ npm install
 Run the `batch-sdk` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id batch-sdk --app-port 5002 --dapr-http-port 3500 --components-path ../../../components -- node index.js 
+dapr run --app-id batch-sdk --app-port 5002 --dapr-http-port 3500 --resources-path ../../../components -- node index.js 
 ```
 
 The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
@@ -334,7 +339,7 @@ Your output binding's `print` statement output:
 In a new terminal, verify the same data has been inserted into the database. Navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following to start the interactive Postgres CLI:
@@ -450,7 +455,7 @@ Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker c
 In a terminal window, from the root of the Quickstarts clone directory, navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following command to set up the container:
@@ -477,7 +482,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS       
 In a new terminal window, navigate to the SDK directory.
 
 ```bash
-cd quickstarts/bindings/csharp/sdk/batch
+cd bindings/csharp/sdk/batch
 ```
 
 Install the dependencies:
@@ -490,7 +495,7 @@ dotnet build batch.csproj
 Run the `batch-sdk` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id batch-sdk --app-port 7002 --components-path ../../../components -- dotnet run
+dapr run --app-id batch-sdk --app-port 7002 --resources-path ../../../components -- dotnet run
 ```
 
 The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
@@ -538,7 +543,7 @@ Your output binding's `print` statement output:
 In a new terminal, verify the same data has been inserted into the database. Navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following to start the interactive Postgres CLI:
@@ -635,7 +640,7 @@ For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
 - Java JDK 11 (or greater):
-  - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
+  - [Oracle JDK](https://www.oracle.com/java/technologies/downloads), or
   - OpenJDK
 - [Apache Maven](https://maven.apache.org/install.html), version 3.x.
 <!-- IGNORE_LINKS -->
@@ -657,7 +662,7 @@ Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker c
 In a terminal window, from the root of the Quickstarts clone directory, navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following command to set up the container:
@@ -684,7 +689,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS       
 In a new terminal window, navigate to the SDK directory.
 
 ```bash
-cd quickstarts/bindings/java/sdk/batch
+cd bindings/java/sdk/batch
 ```
 
 Install the dependencies:
@@ -696,7 +701,7 @@ mvn clean install
 Run the `batch-sdk` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id batch-sdk --app-port 8080 --components-path ../../../components -- java -jar target/BatchProcessingService-0.0.1-SNAPSHOT.jar
+dapr run --app-id batch-sdk --app-port 8080 --resources-path ../../../components -- java -jar target/BatchProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
 The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
@@ -748,7 +753,7 @@ Your output binding's `print` statement output:
 In a new terminal, verify the same data has been inserted into the database. Navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following to start the interactive Postgres CLI:
@@ -864,7 +869,7 @@ Run the [PostgreSQL instance](https://www.postgresql.org/) locally in a Docker c
 In a terminal window, from the root of the Quickstarts clone directory, navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following command to set up the container:
@@ -891,26 +896,26 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED         STATUS       
 In a new terminal window, navigate to the SDK directory.
 
 ```bash
-cd quickstarts/bindings/go/sdk/batch
+cd bindings/go/sdk/batch
 ```
 
 Install the dependencies:
 
 ```bash
-go build app.go
+go build .
 ```
 
 Run the `batch-sdk` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id batch-sdk --app-port 6002 --dapr-http-port 3502 --dapr-grpc-port 60002 --components-path ../../../components -- go run app.go 
+dapr run --app-id batch-sdk --app-port 6002 --dapr-http-port 3502 --dapr-grpc-port 60002 --resources-path ../../../components -- go run .
 ```
 
 The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
 
 ```go
-	// Triggered by Dapr input binding
-	r.HandleFunc("/"+cronBindingName, processBatch).Methods("POST")
+// Triggered by Dapr input binding
+r.HandleFunc("/"+cronBindingName, processBatch).Methods("POST")
 ```
 
 The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgres.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table.
@@ -960,7 +965,7 @@ Your output binding's `print` statement output:
 In a new terminal, verify the same data has been inserted into the database. Navigate to the `bindings/db` directory.
 
 ```bash
-cd quickstarts/bindings/db
+cd bindings/db
 ```
 
 Run the following to start the interactive Postgres CLI:
@@ -1054,7 +1059,7 @@ In the YAML file:
 
 We're continuously working to improve our Quickstart examples and value your feedback. Did you find this quickstart helpful? Do you have suggestions for improvement?
 
-Join the discussion in our [discord channel](https://discord.gg/22ZtJrNe).
+Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).
 
 ## Next steps
 

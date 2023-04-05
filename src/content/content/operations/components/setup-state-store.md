@@ -3,7 +3,7 @@ type: docs
 title: "State stores components"
 linkTitle: "State stores"
 description: "Guidance on setting up different state stores for Dapr state management"
-weight: 1000
+weight: 600
 aliases:
   - "/zh-hans/operations/components/setup-state-store/setup-state-store-overview/"
 ---
@@ -19,7 +19,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: statestore
-  namespace: default
 spec:
   type: state.<DATABASE>
   version: v1

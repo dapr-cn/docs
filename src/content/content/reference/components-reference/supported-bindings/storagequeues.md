@@ -17,21 +17,26 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: <NAME>
-  namespace: <NAMESPACE>
 spec:
   type: bindings.azure.storagequeues
   version: v1
   metadata:
-  - name: storageAccount
+  - name: accountName
     value: "account1"
-  - name: storageAccessKey
+  - name: accountKey
     value: "***********"
-  - name: queue
+  - name: queueName
     value: "myqueue"
-  - name: ttlInSeconds
-    value: "60"
-  - name: decodeBase64
-    value: "false"
+# - name: ttlInSeconds
+#   value: "60"
+# - name: decodeBase64
+#   value: "false"
+# - name: encodeBase64
+#   value: "false"
+# - name: endpoint
+#   value: "http://127.0.0.1:10001"
+# - name: visibilityTimeout
+#   value: "30s"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -42,11 +47,18 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 | Field              | Required | Binding support |  Details | Example |
 |--------------------|:--------:|------------|-----|---------|
-| storageAccount | Y | Input/Output |  The Azure Storage account name | `"account1"` |
-| storageAccessKey | Y | Input/Output | The Azure Storage access key | `"accessKey"` |
-| queue | Y | Input/Output | The name of the Azure Storage queue | `"myqueue"` |
-| ttlInSeconds | N | Output | Parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. See [also](#specifying-a-ttl-per-message) | `"60"` |
-| decodeBase64 | N | Output | Configuration to decode base64 file content before saving to Blob Storage. (In case of saving a file with binary content). `true` is the only allowed positive value. Other positive variations like `"True", "1"` are not acceptable. Defaults to `false` | `true`, `false` |
+| `accountName` | Y | Input/Output | The name of the Azure Storage account | `"account1"` |
+| `accountKey` | Y* | Input/Output | The access key of the Azure Storage account. Only required when not using Azure AD authentication. | `"access-key"` |
+| `queueName` | Y | Input/Output | The name of the Azure Storage queue | `"myqueue"` |
+| `ttlInSeconds` | N | Output | Parameter to set the default message time to live. If this parameter is omitted, messages will expire after 10 minutes. See [also](#specifying-a-ttl-per-message) | `"60"` |
+| `decodeBase64` | N | Output | Configuration to decode base64 file content before saving to Storage Queues. (In case of saving a file with binary content). Defaults to `false` | `true`, `false` |
+| `encodeBase64` | N | Output | If enabled base64 encodes the data payload before uploading to Azure storage queues. Default `false`. | `true`, `false` |
+| `endpoint` | N | Input/Output | Optional custom endpoint URL. This is useful when using the [Azurite emulator](https://github.com/Azure/azurite) or when using custom domains for Azure Storage (although this is not officially supported). The endpoint must be the full base URL, including the protocol (`http://` or `https://`), the IP or FQDN, and optional port. | `"http://127.0.0.1:10001"` or `"https://accountName.queue.example.com"` |
+| `visibilityTimeout` | N | Input | Allows setting a custom queue visibility timeout to avoid immediate retrying of recently failed messages. Defaults to 30 seconds. | "100s" |
+
+### Azure Active Directory (Azure AD) authentication
+
+The Azure Storage Queue binding component supports authentication using all Azure Active Directory mechanisms. See the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}) to learn more about the relevant component metadata fields based on your choice of Azure AD authentication mechanism.
 
 ## Binding support
 
@@ -79,6 +91,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myStorageQueue \
         "operation": "create"
       }'
 ```
+
 ## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})

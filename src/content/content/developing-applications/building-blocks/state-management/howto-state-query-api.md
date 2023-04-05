@@ -16,7 +16,7 @@ Even though the state store is a key/value store, the `value` might be a JSON do
 
 ## Querying the state
 
-Submit query requests via HTTP POST/PUT or gRPC. The body of the request is the JSON map with 3 _optional_ entries:
+Submit query requests via HTTP POST/PUT or gRPC. The body of the request is the JSON map with 3 entries:
 
 - `filter`
 - `sort`
@@ -96,7 +96,7 @@ docker run -d --rm -p 27017:27017 --name mongodb mongo:5
 Next, start a Dapr application. Refer to the [component configuration file](../query-api-examples/components/mongodb/mongodb.yml), which instructs Dapr to use MongoDB as its state store.
 
 ```bash
-dapr run --app-id demo --dapr-http-port 3500 --components-path query-api-examples/components/mongodb
+dapr run --app-id demo --dapr-http-port 3500 --resources-path query-api-examples/components/mongodb
 ```
 
 Populate the state store with the employee dataset, so you can query it later.
@@ -510,5 +510,5 @@ You can find additional information in the [related links]({{< ref "#related-lin
 
 - Refer to the [query API reference]({{< ref "state_api.md#state-query" >}}).
 - See the [state store components that implement query support]({{< ref supported-state-stores.md >}}).
-- View the [state store query API implementation guide](https://github.com/dapr/components-contrib/blob/master/state/Readme.md#implementing-state-query-api).
+- View the [state store query API implementation guide](https://github.com/dapr/components-contrib/blob/master/state/README.md#implementing-state-query-api).
 - See how to [query Redis state store]({{< ref "setup-redis.md#querying-json-objects" >}}).

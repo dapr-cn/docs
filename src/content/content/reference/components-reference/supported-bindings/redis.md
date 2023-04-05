@@ -17,7 +17,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: <NAME>
-  namespace: <NAMESPACE>
 spec:
   type: bindings.redis
   version: v1
@@ -67,10 +66,14 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 This component supports **output binding** with the following operations:
 
 - `create`
+- `get`
+- `delete`
+
+### create
 
 You can store a record in Redis using the `create` operation. This sets a key to hold a value. If the key already exists, the value is overwritten.
 
-### Request
+#### Request
 
 ```json
 {
@@ -85,13 +88,63 @@ You can store a record in Redis using the `create` operation. This sets a key to
 }
 ```
 
-### Response
+#### Response
 
 An HTTP 204 (No Content) and empty body is returned if successful.
+
+### get
+
+You can get a record in Redis using the `get` operation. This gets a key that was previously set.
+
+#### Request
+
+```json
+{
+  "operation": "get",
+  "metadata": {
+    "key": "key1"
+  },
+  "data": {
+  }
+}
+```
+
+#### Response
+
+```json
+{
+  "data": {
+    "Hello": "World",
+    "Lorem": "Ipsum"
+  }
+}
+```
+
+### delete
+
+You can delete a record in Redis using the `delete` operation. Returns success whether the key exists or not.
+
+#### Request
+
+```json
+{
+  "operation": "delete",
+  "metadata": {
+    "key": "key1"
+  }
+}
+```
+
+#### Response
+
+An HTTP 204 (No Content) and empty body is returned if successful.
+
 
 ## Create a Redis instance
 
 Dapr can use any Redis instance - containerized, running on your local dev machine, or a managed cloud service, provided the version of Redis is 5.0.0 or later.
+
+*Note: Dapr does not support Redis >= 7. It is recommended to use Redis 6*
 
 {{< tabs "Self-Hosted" "Kubernetes" "AWS" "GCP" "Azure">}}
 
@@ -106,7 +159,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 1. Install Redis into your cluster.
     ```bash
     helm repo add bitnami https://charts.bitnami.com/bitnami
-    helm install redis bitnami/redis
+    helm install redis bitnami/redis --set image.tag=6.2
     ```
 
 2. Run `kubectl get pods` to see the Redis containers now running in your cluster.

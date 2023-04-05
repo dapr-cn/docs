@@ -63,6 +63,36 @@ with DaprClient() as d:
 - For a full list of state operations visit [How-To: Get & save state]({{< ref howto-get-save-state.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/state_store) for code samples and instructions to try out state management
 
+### Query application state (Alpha)
+
+```python
+    from dapr import DaprClient
+
+    query = '''
+    {
+        "filter": {
+            "EQ": { "state": "CA" }
+        },
+        "sort": [
+            {
+                "key": "person.id",
+                "order": "DESC"
+            }
+        ]
+    }
+    '''
+
+    with DaprClient() as d:
+        resp = d.query_state(
+            store_name='state_store',
+            query=query,
+            states_metadata={"metakey": "metavalue"},  # optional
+        )
+```
+
+- For a full list of state store query options visit [How-To: Query state]({{< ref howto-state-query-api.md >}}).
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/state_store_query) for code samples and instructions to try out state store querying.
+
 ### Publish & subscribe to messages
 
 ##### Publish messages
@@ -71,7 +101,7 @@ with DaprClient() as d:
 from dapr.clients import DaprClient
 
 with DaprClient() as d:
-    resp = d.publish_event(pubsub_name='pubsub', topic='TOPIC_A', data='{"message":"Hello World"}')
+    resp = d.publish_event(pubsub_name='pubsub', topic_name='TOPIC_A', data='{"message":"Hello World"}')
 ```
 
 ##### Subscribe to messages
@@ -83,8 +113,17 @@ import json
 
 app = App()
 
+# Default subscription for a topic
 @app.subscribe(pubsub_name='pubsub', topic='TOPIC_A')
 def mytopic(event: v1.Event) -> None:
+    data = json.loads(event.Data())
+    print(f'Received: id={data["id"]}, message="{data ["message"]}"' 
+          ' content_type="{event.content_type}"',flush=True)
+
+# Specific handler using Pub/Sub routing
+@app.subscribe(pubsub_name='pubsub', topic='TOPIC_A',
+               rule=Rule("event.type == \"important\"", 1))
+def mytopic_important(event: v1.Event) -> None:
     data = json.loads(event.Data())
     print(f'Received: id={data["id"]}, message="{data ["message"]}"' 
           ' content_type="{event.content_type}"',flush=True)
@@ -99,7 +138,7 @@ def mytopic(event: v1.Event) -> None:
 from dapr.clients import DaprClient
 
 with DaprClient() as d:
-    resp = d.invoke_binding(name='kafkaBinding', operation='create', data='{"message":"Hello World"}')
+    resp = d.invoke_binding(binding_name='kafkaBinding', operation='create', data='{"message":"Hello World"}')
 ```
 
 - For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
@@ -116,6 +155,49 @@ with DaprClient() as d:
 
 - For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/secret_store) for code samples and instructions to try out retrieving secrets
+
+### Get configuration
+
+```python
+from dapr.clients import DaprClient
+
+with DaprClient() as d:
+    # Get Configuration
+    configuration = d.get_configuration(store_name='configurationstore', keys=['orderId'], config_metadata={})
+```
+
+### Subscribe to configuration
+
+```python
+import asyncio
+from time import sleep
+from dapr.clients import DaprClient
+
+async def executeConfiguration():
+    with DaprClient() as d:
+        storeName = 'configurationstore'
+
+        key = 'orderId'
+
+        # Wait for sidecar to be up within 20 seconds.
+        d.wait(20)
+
+        # Subscribe to configuration by key.
+        configuration = await d.subscribe_configuration(store_name=storeName, keys=[key], config_metadata={})
+        while True:
+            if configuration != None:
+                items = configuration.get_items()
+                for key, item in items:
+                    print(f"Subscribe key={key} value={item.value} version={item.version}", flush=True)
+            else:
+                print("Nothing yet")
+        sleep(5)
+
+asyncio.run(executeConfiguration())
+```
+
+- For a full list of state operations visit [How-To: Get & save state]({{< ref howto-manage-configuration.md >}}).
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/configuration) for code samples and instructions to try out state management
 
 ## Related links
 - [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples)

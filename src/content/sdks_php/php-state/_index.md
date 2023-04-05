@@ -17,12 +17,16 @@ behavior. The PHP SDK allows you to pass that metadata through:
 
 ```php
 <?php
+// using the state manager
 $app->run(
     fn(\Dapr\State\StateManager $stateManager) => 
         $stateManager->save_state('statestore', new \Dapr\State\StateItem('key', 'value', metadata: ['port' => '112'])));
+
+// using the DaprClient
+$app->run(fn(\Dapr\Client\DaprClient $daprClient) => $daprClient->saveState(storeName: 'statestore', key: 'key', value: 'value', metadata: ['port' => '112']))
 ```
 
-This is an example of how you might pass the port metadata to [Cassandra]({{< ref setup-cassandra.md >}}). 
+This is an example of how you might pass the port metadata to [Cassandra]({{< ref setup-cassandra.md >}}).
 
 Every state operation allows passing metadata.
 
@@ -51,8 +55,8 @@ the load on the state store at the expense of performance. The default is `10`.
 
 ## Prefix
 
-Hardcoded key names are useful, but why not make state objects more reusable? When committing a transaction or saving
-an object to state, you can pass a prefix that is applied to every key in the object.
+Hardcoded key names are useful, but why not make state objects more reusable? When committing a transaction or saving an
+object to state, you can pass a prefix that is applied to every key in the object.
 
 {{< tabs "Transaction prefix" "StateManager prefix" >}}
 

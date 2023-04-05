@@ -17,7 +17,6 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: <NAME>
-  namespace: <NAMESPACE>
 spec:
   type: state.mongodb
   version: v1
@@ -34,9 +33,9 @@ spec:
     value: <REPLACE-WITH-DATABASE-NAME> # Optional. default: "daprStore"
   - name: collectionName
     value: <REPLACE-WITH-COLLECTION-NAME> # Optional. default: "daprCollection"
-  - name: writeconcern
+  - name: writeConcern
     value: <REPLACE-WITH-WRITE-CONCERN> # Optional.
-  - name: readconcern
+  - name: readConcern
     value: <REPLACE-WITH-READ-CONCERN> # Optional.
   - name: operationTimeout
     value: <REPLACE-WITH-OPERATION-TIMEOUT> # Optional. default: "5s"
@@ -66,8 +65,8 @@ If you wish to use MongoDB as an actor store, append the following to the yaml.
 | password           | N        | The password of the user (applicable in conjunction with `host`) | `"password"`
 | databaseName       | N        | The name of the database to use. Defaults to `"daprStore"` | `"daprStore"`
 | collectionName     | N        | The name of the collection to use. Defaults to `"daprCollection"` | `"daprCollection"`
-| writeconcern       | N        | The write concern to use | `"majority"`
-| readconcern        | N        | The read concern to use  | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"`
+| writeConcern       | N        | The write concern to use | `"majority"`
+| readConcern        | N        | The read concern to use  | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"`
 | operationTimeout   | N        | The timeout for the operation. Defaults to `"5s"` | `"5s"`
 | params             | N<sup>**</sup> | Additional parameters to use | `"?authSource=daprStore&ssl=true"`
 
@@ -112,6 +111,10 @@ The username is `admin` by default.
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+### TTLs and cleanups
+
+This state store supports [Time-To-Live (TTL)]({{< ref state-store-ttl.md >}}) for records stored with Dapr. When storing data using Dapr, you can set the `ttlInSeconds` metadata property to indicate when the data should be considered "expired".
 
 ## Related links
 - [Basic schema for a Dapr component]({{< ref component-schema >}})

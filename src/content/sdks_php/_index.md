@@ -24,7 +24,7 @@ Dapr offers an SDK to help with the development of PHP applications. Using it, y
 ## Initialize your project
 
 In a directory where you want to create your service, run `composer init` and answer the questions.
-Install `dapr/php-sdk` and any other dependencies you may wish to use.
+Install with `composer require dapr/php-sdk` and any other dependencies you may wish to use.
 
 ## Configure your service
 

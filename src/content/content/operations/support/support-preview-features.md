@@ -5,20 +5,45 @@ linkTitle: "Preview features"
 weight: 4000
 description: "List of current preview features"
 ---
-Preview features in Dapr are considered experimental when they are first released. 
+Preview features in Dapr are considered experimental when they are first released.
 
 Runtime preview features require explicit opt-in in order to be used. The runtime opt-in is specified in a preview setting feature in Dapr's application configuration. See [How-To: Enable preview features]({{<ref preview-features>}}) for more information.
 
 For CLI there is no explicit opt-in, just the version that this was first made available.
 
-
 ## Current preview features
-| Feature | Description | Setting | Documentation | Version introduced |
-| ---------- |-------------|---------|---------------|-----------------|
-| **Partition actor reminders** | Allows actor reminders to be partitioned across multiple keys in the underlying statestore in order to improve scale and performance. | `Actor.TypeMetadata` | [How-To: Partition Actor Reminders]({{< ref "howto-actors.md#partitioning-reminders" >}}) | v1.4 |
-| **Pub/Sub routing** | Allow the use of expressions to route cloud events to different URIs/paths and event handlers in your application. | `PubSub.Routing` | [How-To: Publish a message and subscribe to a topic]({{<ref howto-route-messages>}}) | v1.4 |
-| **ARM64 Mac Support** | Dapr CLI, sidecar, and Dashboard are now natively compiled for ARM64 Macs, along with Dapr CLI installation via Homebrew. | N/A | [Install the Dapr CLI]({{<ref install-dapr-cli>}}) | v1.5 |
-| **--image-registry** flag with Dapr CLI| In self hosted mode you can set this flag to specify any private registry to pull the container images required to install Dapr| N/A | [init CLI command reference]({{<ref "dapr-init.md#self-hosted-environment" >}}) | v1.7 |
-| **Resiliency** | Allows configuring of fine-grained policies for retries, timeouts and circuitbreaking. | `Resiliency` | [Configure Resiliency Policies]({{<ref "resiliency-overview">}}) | v1.7 |
-| **Service invocation without default `content-type`** | When enabled removes the default service invocation content-type header value `application/json` when no content-type is provided. This will become the default behavior in release v1.9.0. This requires you to explictly set content-type headers where required for your apps. | `ServiceInvocation.NoDefaultContentType` | [Service Invocation]({{<ref "service_invocation_api.md#request-contents" >}}) | v1.7 |
 
+| Feature | Description | Setting | Documentation | Version introduced |
+| --- | --- | --- | --- | --- |
+| **App Middleware** | Allow middleware components to be executed when making service-to-service calls | N/A | [App Middleware]({{<ref "middleware.md#app-middleware" >}}) | v1.9 |
+| **Streaming for HTTP service invocation** | Enables (partial) support for using streams in HTTP service invocation; see below for more details. | `ServiceInvocationStreaming` | [Details]({{< ref "support-preview-features.md#streaming-for-http-service-invocation" >}}) | v1.10 |
+| **App health checks** | Allows configuring app health checks | `AppHealthCheck` | [App health checks]({{<ref "app-health.md" >}}) | v1.9 |
+| **Pluggable components** | Allows creating self-hosted gRPC-based components written in any language that supports gRPC. The following component APIs are supported: State stores, Pub/sub, Bindings | N/A | [Pluggable components concept]({{<ref "components-concept#pluggable-components" >}})| v1.9  |
+| **Multi-App Run** | Configure multiple Dapr applications from a single configuration file and run from a single command | `dapr run -f` | [Multi-App Run]({{< ref multi-app-dapr-run.md >}}) | v1.10 |
+| **Workflows** | Author workflows as code to automate and orchestrate tasks within your application, like messaging, state management, and failure handling | N/A | [Workflows concept]({{< ref "components-concept#workflows" >}})| v1.10  |
+
+### Streaming for HTTP service invocation
+
+Running Dapr with the `ServiceInvocationStreaming` feature flag enables partial support for handling data as a stream in HTTP service invocation. This can offer improvements in performance and memory utilization when using Dapr to invoke another service using HTTP with large request or response bodies.
+
+The table below summarizes the current state of support for streaming in HTTP service invocation in Dapr, including the impact of enabling `ServiceInvocationStreaming`, in the example where "app A" is invoking "app B" using Dapr. There are six steps in the data flow, with various levels of support for handling data as a stream:
+
+<img src="/images/service-invocation-simple.webp" width=600 alt="Diagram showing the steps of service invocation described in the table below" />
+
+| Step | Handles data as a stream | Dapr 1.10 | Dapr 1.10 with<br/>`ServiceInvocationStreaming` |
+|:---:|---|:---:|:---:|
+| 1 |  Request: "App A" to "Dapr sidecar A | <span role="img" aria-label="No">❌</span> | <span role="img" aria-label="No">❌</span> |
+| 2 |  Request: "Dapr sidecar A" to "Dapr sidecar B | <span role="img" aria-label="No">❌</span> | <span role="img" aria-label="Yes">✅</span> |
+| 3 |  Request: "Dapr sidecar B" to "App B" | <span role="img" aria-label="Yes">✅</span> | <span role="img" aria-label="Yes">✅</span> |
+| 4 |  Response: "App B" to "Dapr sidecar B" | <span role="img" aria-label="Yes">✅</span> | <span role="img" aria-label="Yes">✅</span> |
+| 5 |  Response: "Dapr sidecar B" to "Dapr sidecar A | <span role="img" aria-label="No">❌</span> | <span role="img" aria-label="Yes">✅</span> |
+| 6 |  Response: "Dapr sidecar A" to "App A | <span role="img" aria-label="No">❌</span> | <span role="img" aria-label="Yes">✅</span> |
+
+Important notes:
+
+- `ServiceInvocationStreaming` needs to be applied on caller sidecars only.  
+  In the example above, streams are used for HTTP service invocation if `ServiceInvocationStreaming` is applied to the configuration of "app A" and its Dapr sidecar, regardless of whether the feature flag is enabled for "app B" and its sidecar.
+- When `ServiceInvocationStreaming` is enabled, you should make sure that all services your app invokes using Dapr ("app B") are updated to Dapr 1.10, even if `ServiceInvocationStreaming` is not enabled for those sidecars.  
+  Invoking an app using Dapr 1.9 or older is still possible, but those calls may fail if you have applied a Dapr Resiliency policy with retries enabled.
+
+> Full support for streaming for HTTP service invocation will be completed in a future Dapr version.

@@ -29,6 +29,15 @@ Install the latest Linux Dapr CLI to `/usr/local/bin`:
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
 ```
 
+##### Installing a specific CLI version
+
+The following example shows how to install CLI version `{{% dapr-latest-version cli="true" %}}`. You can also install release candidates by specifying the version (for example, `1.10.0-rc.3`).
+
+```bash
+wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash -s 1.9.1
+```
+
+
 #### Install without `sudo`
 
 If you do not have access to the `sudo` command or your username is not in the `sudoers` file, you can install Dapr to an alternate directory via the `DAPR_INSTALL_DIR` environment variable. This directory must already exist and be accessible by the current user.
@@ -37,13 +46,21 @@ If you do not have access to the `sudo` command or your username is not in the `
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | DAPR_INSTALL_DIR="$HOME/dapr" /bin/bash
 ```
 
+##### Installing a specific CLI version without `sudo`
+
+The following example shows how to install CLI version `{{% dapr-latest-version cli="true" %}}`. You can also install release candidates by specifying the version (for example, `1.10.0-rc.3`).
+
+```bash
+wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | DAPR_INSTALL_DIR="$HOME/dapr" /bin/bash -s 1.9.1
+```
+
 {{% /codetab %}}
 
 {{% codetab %}}
 
 #### Install from Command Prompt
 
-Install the latest windows Dapr cli to `C:\dapr` and add this directory to the User PATH environment variable:
+Install the latest windows Dapr cli to `$Env:SystemDrive\dapr` and add this directory to the User PATH environment variable:
 
 ```powershell
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
@@ -51,13 +68,56 @@ powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master
 
 **Note:** Updates to PATH might not be visible until you restart your terminal application.
 
-#### Install without administrative rights
+##### Installing a specific CLI version
 
-If you do not have admin rights, you can install Dapr to an alternate directory via the `DAPR_INSTALL_DIR` environment variable.
+The following example shows how to install CLI version `{{% dapr-latest-version cli="true" %}}`. You can also install release candidates by specifying the version (for example, `1.10.0-rc.3`).
 
 ```powershell
-$script=iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList "", "$HOME/dapr"
+powershell -Command "$script=iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList 1.9.1"
 ```
+
+#### Install without administrative rights
+
+If you do not have admin rights, you can install Dapr to an alternate directory via the `DAPR_INSTALL_DIR` environment variable. The script below creates the directory if it does not exist.
+
+```powershell
+$Env:DAPR_INSTALL_DIR = "<your_alt_install_dir_path>"
+$script=iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList "", "$Env:DAPR_INSTALL_DIR"
+```
+
+#### Installing a specific CLI version without administrative rights
+
+The following example shows how to install CLI version `{{% dapr-latest-version cli="true" %}}`. You can also install release candidates by specifying the version (for example, `1.10.0-rc.3`).
+
+```powershell
+$Env:DAPR_INSTALL_DIR = "<your_alt_install_dir_path>"
+$script=iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1; $block=[ScriptBlock]::Create($script); invoke-command -ScriptBlock $block -ArgumentList "1.9.1", "$Env:DAPR_INSTALL_DIR"
+```
+
+#### Install using winget
+
+Install the latest Windows Dapr CLI to `$Env:SystemDrive\dapr` and add this directory to the user PATH environment variable:
+
+```powershell
+winget install Dapr.CLI
+```
+
+**For preview releases:**
+
+Install the latest preview release:
+
+```powershell
+winget install Dapr.CLI.Preview
+```
+
+#### Install using MSI installer
+
+Each release of the Dapr CLI also includes an installer for Windows. You can manually download the MSI:
+
+1. Download the MSI package `dapr.msi` from latest [Dapr release](https://github.com/dapr/cli/releases).
+2. Navigate to the downloaded MSI file and double-click the file to run it.
+3. Follow the installation prompts to accept the license and the installation directory. The selected folder is added to the user PATH environment variable. The default value is set to `$Env:SystemDrive\dapr`.
+4. Click `Install` to start the installation. You will see a final message once the installation is complete.
 
 {{% /codetab %}}
 
@@ -71,9 +131,17 @@ Install the latest Darwin Dapr CLI to `/usr/local/bin`:
 curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | /bin/bash
 ```
 
+##### Installing a specific CLI version
+
+The following example shows how to install CLI version `{{% dapr-latest-version cli="true" %}}`. You can also install release candidates by specifying the version (for example, `1.10.0-rc.3`).
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | /bin/bash -s 1.9.1
+```
+
 **For ARM64 Macs:**
 
-ARM64 Macs support is available as a *preview feature*. When installing from the terminal, native ARM64 binaries are downloaded once available. For older releases, AMD64 binaries are downloaded and must be run with Rosetta2 emulation enabled.
+When installing from the terminal, native ARM64 binaries are available. 
 
 To install Rosetta emulation:
 
@@ -91,7 +159,7 @@ brew install dapr/tap/dapr-cli
 
 **For ARM64 Macs:**
 
-For ARM64 Macs, only Homebrew 3.0 and higher versions are supported. Please update Homebrew to 3.0.0 or higher and then run the command below:
+For ARM64 Macs, Homebrew 3.0 and higher versions are supported. Update Homebrew to 3.0.0 or higher and then run the command below:
 
 ```bash
 arch -arm64 brew install dapr/tap/dapr-cli
@@ -102,6 +170,14 @@ If you do not have access to the `sudo` command or your username is not in the `
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | DAPR_INSTALL_DIR="$HOME/dapr" /bin/bash
+```
+
+##### Installing a specific CLI version without `sudo`
+
+The following example shows how to install CLI version `{{% dapr-latest-version cli="true" %}}`. You can also install release candidates by specifying the version (for example, `1.10.0-rc.3`).
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | DAPR_INSTALL_DIR="$HOME/dapr" -s 1.9.1
 ```
 
 {{% /codetab %}}
@@ -162,6 +238,7 @@ Available Commands:
   stop           Stop Dapr instances and their associated apps. . Supported platforms: Self-hosted
   uninstall      Uninstall Dapr runtime. Supported platforms: Kubernetes and self-hosted
   upgrade        Upgrades a Dapr control plane installation in a cluster. Supported platforms: Kubernetes
+  version        Print the Dapr runtime and CLI version
 
 Flags:
   -h, --help      help for dapr
