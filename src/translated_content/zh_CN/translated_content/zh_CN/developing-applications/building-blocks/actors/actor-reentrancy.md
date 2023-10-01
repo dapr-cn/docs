@@ -133,8 +133,6 @@ func reentrantCallHandler(w http.ResponseWriter, r *http.Request) {
 {{% /codetab %}}
 
 {{< /tabs >}}
-
-观看此 [视频](https://www. youtube. com/watch? v=Qadhq5v-gww& list=Plcip_LgkYwzuF-Ov6zKRADoiBvUvGhkao& t=674s) ，了解如何使用Actor 可重入性。
 <div class="embed-responsive embed-responsive-16by9">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/QADHQ5v-gww?start=674" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>

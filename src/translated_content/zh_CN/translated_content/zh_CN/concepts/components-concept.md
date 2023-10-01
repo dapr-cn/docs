@@ -100,7 +100,7 @@ Lock components are used as a distributed lock to provide mutually exclusive acc
 - [List of supported locks]({{< ref supported-locks >}})
 - [Lock implementations](https://github.com/dapr/components-contrib/tree/master/lock)
 
-### Workflows
+### 工作流
 
 A [workflow]({{< ref workflow-overview.md >}}) is custom application logic that defines a reliable business process or data flow. Workflow components are workflow runtimes (or engines) that run the business logic written for that workflow and store their state into a state store.  
 

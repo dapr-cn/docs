@@ -8,7 +8,7 @@ aliases:
   - '/zh-hans/developing-applications/sdks/serialization/'
 ---
 
-An SDK for Dapr should provide serialization for two use cases. First, for API objects sent through request and response payloads. Second, for objects to be persisted. For both these use cases, a default serialization is provided. In the Java SDK, it is the [DefaultObjectSerializer](https://dapr.github.io/java-sdk/io/dapr/serializer/DefaultObjectSerializer.html) class, providing JSON serialization.
+Dapr 的 SDK 为下面两种情况提供序列化： 首先是对于通过请求和响应的有效载荷传递的 API 对象， 其次，对于要持久化的对象。 对于这两种情况，SDK 都提供了默认的序列化实现。 在 Java SDK 中，由 [DefaultObjectSerializer](https://dapr.github.io/java-sdk/io/dapr/serializer/DefaultObjectSerializer.html) 这个类提供 JSON 序列化功能。
 
 ## 调用逻辑
 
@@ -68,7 +68,7 @@ Content-Length: 12
 
 在这种情况下，对象也会被序列化为 `byte[]` 类型，而输入绑定会按原样接收原始的 `byte[]`，并将其反序列化为预期的对象类型。
 
-* Output binding:
+* 输出绑定:
 ```java
     DaprClient client = (new DaprClientBuilder()).build();
     client.invokeBinding("sample", "My Message").block();
@@ -130,8 +130,8 @@ public String actorMethod(String message) {
 
 Dapr 的默认序列化工具是 JSON 序列化工具，其期望如下:
 
-1. Use of basic [JSON data types](https://www.w3schools.com/js/js_json_datatypes.asp) for cross-language and cross-platform compatibility: string, number, array, boolean, null and another JSON object. Every complex property type in application's serializable objects (DateTime, for example), should be represented as one of the JSON's basic types.
-2. Data persisted with the default serializer should be saved as JSON objects too, without extra quotes or encoding. The example below shows how a string and a JSON object would look like in a Redis store.
+1. 使用基本的[JSON数据类型](https://www.w3schools.com/js/js_json_datatypes.asp)来实现跨语言和跨平台的兼容性：字符串、数字、数组、布尔值、空值和另一个 JSON 对象。 应用程序的可序列化对象中的每一个复杂的属性类型（例如DateTime），都应该被表示为JSON的基本类型之一。
+2. 用默认序列化工具持久化的数据也应该被保存为JSON对象，不需要额外的引号或编码。 下面的例子显示了一个字符串和一个JSON对象在Redis存储中的样子。
 ```bash
 redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||message
 "This is a message to be saved and retrieved."
@@ -140,7 +140,7 @@ redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928
  redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||mydata
 {"value":"My data value."}
 ```
-3. Custom serializers must serialize object to `byte[]`.
+3. 自定义序列化工具必须将对象序列化为`byte[]`类型。
 4. 自定义序列化工具必须将`byte[]`反序列化为对象。
 5. 当用户提供一个自定义的序列化工具时，它应该以`byte[]`的形式被传输或持久化， 持久化时，也应当编码为Base64字符串， 大多数JSON库都能够完成这个功能。
 ```bash
