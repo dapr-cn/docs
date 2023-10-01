@@ -3,10 +3,18 @@ api_token_env: CROWDIN_PERSONAL_TOKEN
 base_path: "./src/"
 preserve_hierarchy: true
 files:
-    - source: /content/sdks_java/_index.mdbak
-      translation: /translated_content/%locale_with_underscore%/sdks_java/_index.mdbak
     - source: /content/sdks_java/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_java/_index.md
+    - source: /content/pluggable-components/go/_index.md
+      translation: /translated_content/%locale_with_underscore%/pluggable-components/go/_index.md
+    - source: /content/pluggable-components/go/go-advanced/_index.md
+      translation: /translated_content/%locale_with_underscore%/pluggable-components/go/go-advanced/_index.md
+    - source: /content/pluggable-components/go/go-bindings/_index.md
+      translation: /translated_content/%locale_with_underscore%/pluggable-components/go/go-bindings/_index.md
+    - source: /content/pluggable-components/go/go-state-store/_index.md
+      translation: /translated_content/%locale_with_underscore%/pluggable-components/go/go-state-store/_index.md
+    - source: /content/pluggable-components/go/go-pub-sub/_index.md
+      translation: /translated_content/%locale_with_underscore%/pluggable-components/go/go-pub-sub/_index.md
     - source: /content/pluggable-components/dotnet/_index.md
       translation: /translated_content/%locale_with_underscore%/pluggable-components/dotnet/_index.md
     - source: /content/pluggable-components/dotnet/dotnet-state-store/_index.md
@@ -45,6 +53,10 @@ files:
       translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-troubleshooting/_index.md
     - source: /content/sdks_dotnet/dotnet-troubleshooting/dotnet-troubleshooting-pubsub.md
       translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-troubleshooting/dotnet-troubleshooting-pubsub.md
+    - source: /content/sdks_dotnet/dotnet-workflow/_index.md
+      translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-workflow/_index.md
+    - source: /content/sdks_dotnet/dotnet-workflow/dotnet-workflow-howto.md
+      translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-workflow/dotnet-workflow-howto.md
     - source: /content/sdks_dotnet/dotnet-development/dotnet-development-tye.md
       translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-development/dotnet-development-tye.md
     - source: /content/sdks_dotnet/dotnet-development/dotnet-development-docker-compose.md
@@ -115,6 +127,10 @@ files:
       translation: /translated_content/%locale_with_underscore%/sdks_python/python-sdk-extensions/python-fastapi.md
     - source: /content/sdks_python/python-sdk-extensions/python-flask.md
       translation: /translated_content/%locale_with_underscore%/sdks_python/python-sdk-extensions/python-flask.md
+    - source: /content/sdks_python/python-sdk-extensions/python-workflow-ext/_index.md
+      translation: /translated_content/%locale_with_underscore%/sdks_python/python-sdk-extensions/python-workflow-ext/_index.md
+    - source: /content/sdks_python/python-sdk-extensions/python-workflow-ext/python-workflow.md
+      translation: /translated_content/%locale_with_underscore%/sdks_python/python-sdk-extensions/python-workflow-ext/python-workflow.md
     - source: /content/content/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/_index.md
     - source: /content/content/reference/arguments-annotations-overview.md
@@ -147,6 +163,18 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/api/service_invocation_api.md
     - source: /content/content/reference/api/workflow_api.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/api/workflow_api.md
+    - source: /content/content/reference/resource-specs/httpendpoints-schema.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/resource-specs/httpendpoints-schema.md
+    - source: /content/content/reference/resource-specs/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/resource-specs/_index.md
+    - source: /content/content/reference/resource-specs/component-schema.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/resource-specs/component-schema.md
+    - source: /content/content/reference/resource-specs/configuration-schema.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/resource-specs/configuration-schema.md
+    - source: /content/content/reference/resource-specs/resiliency-schema.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/resource-specs/resiliency-schema.md
+    - source: /content/content/reference/resource-specs/subscription-schema.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/resource-specs/subscription-schema.md
     - source: /content/content/reference/environment/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/environment/_index.md
     - source: /content/content/reference/components-reference/_index.md
@@ -185,6 +213,16 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-name-resolution/_index.md
     - source: /content/content/reference/components-reference/supported-name-resolution/nr-kubernetes.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-name-resolution/nr-kubernetes.md
+    - source: /content/content/reference/components-reference/supported-cryptography/kubernetes-secrets.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-cryptography/kubernetes-secrets.md
+    - source: /content/content/reference/components-reference/supported-cryptography/json-web-key-sets.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-cryptography/json-web-key-sets.md
+    - source: /content/content/reference/components-reference/supported-cryptography/azure-key-vault.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-cryptography/azure-key-vault.md
+    - source: /content/content/reference/components-reference/supported-cryptography/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-cryptography/_index.md
+    - source: /content/content/reference/components-reference/supported-cryptography/local-storage.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-cryptography/local-storage.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-jetstream-kv.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-jetstream-kv.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-firestore.md
@@ -241,8 +279,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-sqlite.md
     - source: /content/content/reference/components-reference/supported-configuration-stores/redis-configuration-store.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-configuration-stores/redis-configuration-store.md
-    - source: /content/content/reference/components-reference/supported-configuration-stores/postgres-configuration-store.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-configuration-stores/postgres-configuration-store.md
+    - source: /content/content/reference/components-reference/supported-configuration-stores/postgresql-configuration-store.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-configuration-stores/postgresql-configuration-store.md
     - source: /content/content/reference/components-reference/supported-configuration-stores/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-configuration-stores/_index.md
     - source: /content/content/reference/components-reference/supported-configuration-stores/azure-appconfig-configuration-store.md
@@ -323,6 +361,10 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/gcpbucket.md
     - source: /content/content/reference/components-reference/supported-bindings/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/_index.md
+    - source: /content/content/reference/components-reference/supported-bindings/postgresql.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/postgresql.md
+    - source: /content/content/reference/components-reference/supported-bindings/kitex.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/kitex.md
     - source: /content/content/reference/components-reference/supported-bindings/ses.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/ses.md
     - source: /content/content/reference/components-reference/supported-bindings/mysql.md
@@ -339,8 +381,6 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/blobstorage.md
     - source: /content/content/reference/components-reference/supported-bindings/rethinkdb.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/rethinkdb.md
-    - source: /content/content/reference/components-reference/supported-bindings/postgres.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/postgres.md
     - source: /content/content/reference/components-reference/supported-bindings/gcppubsub.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/gcppubsub.md
     - source: /content/content/reference/components-reference/supported-bindings/storagequeues.md
@@ -353,6 +393,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/cosmosdb.md
     - source: /content/content/reference/components-reference/supported-bindings/graghql.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/graghql.md
+    - source: /content/content/reference/components-reference/supported-bindings/wasm.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/wasm.md
     - source: /content/content/reference/components-reference/supported-bindings/zeebe-jobworker.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-bindings/zeebe-jobworker.md
     - source: /content/content/reference/components-reference/supported-bindings/smtp.md
@@ -459,6 +501,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/getting-started/tutorials/_index.md
     - source: /content/content/getting-started/quickstarts/secrets-quickstart.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/getting-started/quickstarts/secrets-quickstart.md
+    - source: /content/content/getting-started/quickstarts/actors-quickstart.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/getting-started/quickstarts/actors-quickstart.md
     - source: /content/content/getting-started/quickstarts/workflow-quickstart.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/getting-started/quickstarts/workflow-quickstart.md
     - source: /content/content/getting-started/quickstarts/statemanagement-quickstart.md
@@ -471,6 +515,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/getting-started/quickstarts/configuration-quickstart.md
     - source: /content/content/getting-started/quickstarts/serviceinvocation-quickstart.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/getting-started/quickstarts/serviceinvocation-quickstart.md
+    - source: /content/content/getting-started/quickstarts/cryptography-quickstart.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/getting-started/quickstarts/cryptography-quickstart.md
     - source: /content/content/getting-started/quickstarts/pubsub-quickstart.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/getting-started/quickstarts/pubsub-quickstart.md
     - source: /content/content/getting-started/quickstarts/resiliency/resiliency-state-quickstart.md
@@ -579,6 +625,12 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/resiliency/resiliency-overview.md
     - source: /content/content/operations/resiliency/targets.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/resiliency/targets.md
+    - source: /content/content/operations/resiliency/health-checks/app-health.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/resiliency/health-checks/app-health.md
+    - source: /content/content/operations/resiliency/health-checks/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/resiliency/health-checks/_index.md
+    - source: /content/content/operations/resiliency/health-checks/sidecar-health.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/resiliency/health-checks/sidecar-health.md
     - source: /content/content/operations/components/setup-state-store.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/components/setup-state-store.md
     - source: /content/content/operations/components/middleware.md
@@ -599,18 +651,20 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/components/component-updates.md
     - source: /content/content/operations/components/setup-bindings.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/components/setup-bindings.md
-    - source: /content/content/operations/components/component-schema.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/components/component-schema.md
     - source: /content/content/operations/components/setup-pubsub/pubsub-namespaces.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/components/setup-pubsub/pubsub-namespaces.md
     - source: /content/content/operations/components/setup-pubsub/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/components/setup-pubsub/_index.md
+    - source: /content/content/operations/support/alpha-apis.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/support/alpha-apis.md
     - source: /content/content/operations/support/support-preview-features.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/support/support-preview-features.md
     - source: /content/content/operations/support/support-versioning.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/support/support-versioning.md
     - source: /content/content/operations/support/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/support/_index.md
+    - source: /content/content/operations/support/breaking-changes-and-deprecations.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/support/breaking-changes-and-deprecations.md
     - source: /content/content/operations/support/support-release-policy.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/support/support-release-policy.md
     - source: /content/content/operations/support/support-security-issues.md
@@ -657,44 +711,50 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/troubleshooting/profiling-debugging.md
     - source: /content/content/operations/troubleshooting/logs-troubleshooting.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/troubleshooting/logs-troubleshooting.md
-    - source: /content/content/operations/monitoring/_index.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/_index.md
-    - source: /content/content/operations/monitoring/tracing/jaeger.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/tracing/jaeger.md
-    - source: /content/content/operations/monitoring/tracing/setup-tracing.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/tracing/setup-tracing.md
-    - source: /content/content/operations/monitoring/tracing/_index.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/tracing/_index.md
-    - source: /content/content/operations/monitoring/tracing/zipkin.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/tracing/zipkin.md
-    - source: /content/content/operations/monitoring/tracing/newrelic.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/tracing/newrelic.md
-    - source: /content/content/operations/monitoring/tracing/otel-collector/open-telemetry-collector.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/tracing/otel-collector/open-telemetry-collector.md
-    - source: /content/content/operations/monitoring/tracing/otel-collector/open-telemetry-collector-appinsights.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/tracing/otel-collector/open-telemetry-collector-appinsights.md
-    - source: /content/content/operations/monitoring/tracing/otel-collector/_index.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/tracing/otel-collector/_index.md
-    - source: /content/content/operations/monitoring/metrics/metrics-overview.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/metrics/metrics-overview.md
-    - source: /content/content/operations/monitoring/metrics/grafana.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/metrics/grafana.md
-    - source: /content/content/operations/monitoring/metrics/_index.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/metrics/_index.md
-    - source: /content/content/operations/monitoring/metrics/azure-monitor.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/metrics/azure-monitor.md
-    - source: /content/content/operations/monitoring/metrics/newrelic.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/metrics/newrelic.md
-    - source: /content/content/operations/monitoring/metrics/prometheus.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/metrics/prometheus.md
-    - source: /content/content/operations/monitoring/logging/fluentd.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/logging/fluentd.md
-    - source: /content/content/operations/monitoring/logging/_index.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/logging/_index.md
-    - source: /content/content/operations/monitoring/logging/logs.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/logging/logs.md
-    - source: /content/content/operations/monitoring/logging/newrelic.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/monitoring/logging/newrelic.md
+    - source: /content/content/operations/observability/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/_index.md
+    - source: /content/content/operations/observability/tracing/setup-tracing.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/setup-tracing.md
+    - source: /content/content/operations/observability/tracing/datadog.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/datadog.md
+    - source: /content/content/operations/observability/tracing/tracing-overview.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/tracing-overview.md
+    - source: /content/content/operations/observability/tracing/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/_index.md
+    - source: /content/content/operations/observability/tracing/w3c-tracing-overview.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/w3c-tracing-overview.md
+    - source: /content/content/operations/observability/tracing/zipkin.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/zipkin.md
+    - source: /content/content/operations/observability/tracing/newrelic.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/newrelic.md
+    - source: /content/content/operations/observability/tracing/otel-collector/open-telemetry-collector.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/otel-collector/open-telemetry-collector.md
+    - source: /content/content/operations/observability/tracing/otel-collector/open-telemetry-collector-appinsights.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/otel-collector/open-telemetry-collector-appinsights.md
+    - source: /content/content/operations/observability/tracing/otel-collector/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/otel-collector/_index.md
+    - source: /content/content/operations/observability/tracing/otel-collector/open-telemetry-collector-jaeger.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/tracing/otel-collector/open-telemetry-collector-jaeger.md
+    - source: /content/content/operations/observability/metrics/metrics-overview.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/metrics/metrics-overview.md
+    - source: /content/content/operations/observability/metrics/grafana.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/metrics/grafana.md
+    - source: /content/content/operations/observability/metrics/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/metrics/_index.md
+    - source: /content/content/operations/observability/metrics/azure-monitor.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/metrics/azure-monitor.md
+    - source: /content/content/operations/observability/metrics/newrelic.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/metrics/newrelic.md
+    - source: /content/content/operations/observability/metrics/prometheus.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/metrics/prometheus.md
+    - source: /content/content/operations/observability/logging/fluentd.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/logging/fluentd.md
+    - source: /content/content/operations/observability/logging/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/logging/_index.md
+    - source: /content/content/operations/observability/logging/logs.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/logging/logs.md
+    - source: /content/content/operations/observability/logging/newrelic.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/operations/observability/logging/newrelic.md
     - source: /content/content/developing-applications/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/_index.md
     - source: /content/content/developing-applications/local-development/_index.md
@@ -719,26 +779,28 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/local-development/ides/vscode/_index.md
     - source: /content/content/developing-applications/integrations/gRPC-integration.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/gRPC-integration.md
-    - source: /content/content/developing-applications/integrations/open-service-mesh.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/open-service-mesh.md
     - source: /content/content/developing-applications/integrations/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/_index.md
     - source: /content/content/developing-applications/integrations/github_actions.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/github_actions.md
     - source: /content/content/developing-applications/integrations/autoscale-keda.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/autoscale-keda.md
-    - source: /content/content/developing-applications/integrations/Azure/workflows.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/workflows.md
     - source: /content/content/developing-applications/integrations/Azure/azure-functions.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/azure-functions.md
     - source: /content/content/developing-applications/integrations/Azure/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/_index.md
-    - source: /content/content/developing-applications/integrations/Azure/authenticating-azure.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/authenticating-azure.md
     - source: /content/content/developing-applications/integrations/Azure/azure-api-management.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/azure-api-management.md
     - source: /content/content/developing-applications/integrations/Azure/azure-kubernetes-service-extension.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/azure-kubernetes-service-extension.md
+    - source: /content/content/developing-applications/integrations/Azure/azure-authentication/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/azure-authentication/_index.md
+    - source: /content/content/developing-applications/integrations/Azure/azure-authentication/howto-mi.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/azure-authentication/howto-mi.md
+    - source: /content/content/developing-applications/integrations/Azure/azure-authentication/authenticating-azure.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/azure-authentication/authenticating-azure.md
+    - source: /content/content/developing-applications/integrations/Azure/azure-authentication/howto-aad.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/Azure/azure-authentication/howto-aad.md
     - source: /content/content/developing-applications/integrations/AWS/authenticating-aws.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/integrations/AWS/authenticating-aws.md
     - source: /content/content/developing-applications/integrations/AWS/_index.md
@@ -755,14 +817,28 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/debugging/debug-k8s/debug-dapr-services.md
     - source: /content/content/developing-applications/building-blocks/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/_index.md
+    - source: /content/content/developing-applications/building-blocks/cryptography/howto-cryptography.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/cryptography/howto-cryptography.md
+    - source: /content/content/developing-applications/building-blocks/cryptography/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/cryptography/_index.md
+    - source: /content/content/developing-applications/building-blocks/cryptography/cryptography-overview.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/cryptography/cryptography-overview.md
+    - source: /content/content/developing-applications/building-blocks/actors/actors-features-concepts.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/actors/actors-features-concepts.md
     - source: /content/content/developing-applications/building-blocks/actors/actors-overview.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/actors/actors-overview.md
     - source: /content/content/developing-applications/building-blocks/actors/howto-actors.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/actors/howto-actors.md
+    - source: /content/content/developing-applications/building-blocks/actors/howto-actors-partitioning.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/actors/howto-actors-partitioning.md
+    - source: /content/content/developing-applications/building-blocks/actors/actors-timers-reminders.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/actors/actors-timers-reminders.md
     - source: /content/content/developing-applications/building-blocks/actors/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/actors/_index.md
     - source: /content/content/developing-applications/building-blocks/actors/actor-reentrancy.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/actors/actor-reentrancy.md
+    - source: /content/content/developing-applications/building-blocks/actors/actors-runtime-config.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/actors/actors-runtime-config.md
     - source: /content/content/developing-applications/building-blocks/pubsub/pubsub-raw.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/pubsub/pubsub-raw.md
     - source: /content/content/developing-applications/building-blocks/pubsub/pubsub-scopes.md
@@ -847,6 +923,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/service-invocation/service-invocation-overview.md
     - source: /content/content/developing-applications/building-blocks/service-invocation/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/service-invocation/_index.md
+    - source: /content/content/developing-applications/building-blocks/service-invocation/howto-invoke-non-dapr-endpoints.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/service-invocation/howto-invoke-non-dapr-endpoints.md
     - source: /content/content/developing-applications/building-blocks/service-invocation/service-invocation-namespaces.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/service-invocation/service-invocation-namespaces.md
     - source: /content/content/developing-applications/building-blocks/service-invocation/howto-invoke-discover-services.md
@@ -879,16 +957,6 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/bindings/howto-bindings.md
     - source: /content/content/developing-applications/building-blocks/bindings/howto-triggers.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/bindings/howto-triggers.md
-    - source: /content/content/developing-applications/building-blocks/observability/app-health.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/observability/app-health.md
-    - source: /content/content/developing-applications/building-blocks/observability/tracing-overview.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/observability/tracing-overview.md
-    - source: /content/content/developing-applications/building-blocks/observability/_index.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/observability/_index.md
-    - source: /content/content/developing-applications/building-blocks/observability/w3c-tracing-overview.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/observability/w3c-tracing-overview.md
-    - source: /content/content/developing-applications/building-blocks/observability/sidecar-health.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/building-blocks/observability/sidecar-health.md
     - source: /content/content/developing-applications/develop-components/develop-middleware.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/developing-applications/develop-components/develop-middleware.md
     - source: /content/content/developing-applications/develop-components/_index.md

@@ -11,7 +11,11 @@ Your application can use Dapr's state management API to save, read, and query ke
 - Use **HTTP POST** to save or query key/value pairs.
 - Use **HTTP GET** to read a specific key and have its value returned.
 
-<img src="/images/state-management-overview.png" width=1000>
+<img src="/images/state-management-overview.png" width=1000 style="padding-bottom:25px;">
+
+[The following overview video and demo](https://www.youtube.com/live/0y7ne6teHT4?si=2_xX6mkU3UCy2Plr&t=6607) demonstrates how Dapr state management works. 
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0y7ne6teHT4?si=2_xX6mkU3UCy2Plr&amp;start=6607" title="YouTube video player" style="padding-bottom:25px;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Features
 
@@ -92,6 +96,9 @@ You can group write, update, and delete operations into a request, which are the
 ### Actor state
 
 Transactional state stores can be used to store actor state. To specify which state store to use for actors, specify value of property `actorStateStore` as `true` in the state store component's metadata section. Actors state is stored with a specific scheme in transactional state stores, allowing for consistent querying. Only a single state store component can be used as the state store for all actors. Read the [state API reference]({{< ref state_api.md >}}) and the [actors API reference]({{< ref actors_api.md >}}) to learn more about state stores for actors.
+
+#### Time to Live (TTL) on actor state
+You should always set the TTL metadata field (`ttlInSeconds`), or the equivalent API call in your chosen SDK when saving actor state to ensure that state eventually removed. Read [actors overview]({{< ref actors-overview.md >}}) for more information.
 
 ### State encryption
 

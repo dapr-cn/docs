@@ -11,11 +11,11 @@ This article provides guidance on running Dapr with Podman on a Windows/Linux/ma
 ## Prerequisites
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
-- [Podman](https://podman.io/getting-started/installation.html)
+- [Podman](https://podman-desktop.io/downloads)
 
 ## Initialize Dapr environment
 
-To initialize the Dapr control-plane containers and create a default configuration file, run:
+To initialize the Dapr control plane containers and create a default configuration file, run:
 
 ```bash
 dapr init --container-runtime podman

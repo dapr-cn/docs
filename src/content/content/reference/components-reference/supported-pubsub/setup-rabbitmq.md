@@ -9,6 +9,8 @@ aliases:
 
 ## Component format
 
+To set up RabbitMQ pub/sub, create a component of type `pubsub.rabbitmq`. See the [pub/sub broker component file]({{< ref setup-pubsub.md >}}) to learn how ConsumerID is automatically generated. Read the [How-to: Publish and Subscribe guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pub/sub configuration.
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -18,8 +20,16 @@ spec:
   type: pubsub.rabbitmq
   version: v1
   metadata:
-  - name: host
+  - name: connectionString
     value: "amqp://localhost:5672"
+  - name: protocol
+    value: amqp  
+  - name: hostname
+    value: localhost 
+  - name: username
+    value: username
+  - name: password
+    value: password  
   - name: consumerID
     value: myapp
   - name: durable
@@ -48,6 +58,10 @@ spec:
     value: 10485760
   - name: exchangeKind
     value: fanout
+  - name: saslExternal
+    value: false
+  - name: ttlInSeconds
+    value: 60
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -58,8 +72,12 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 | Field              | Required | Details | Example |
 |--------------------|:--------:|---------|---------|
-| host               | Y        | Connection-string for the rabbitmq host  | `amqp://user:pass@localhost:5672`
-| consumerID         | N        | Consumer ID a.k.a consumer tag organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer, i.e. a message is processed only once by one of the consumers in the group. If the consumer ID is not set, the dapr runtime will set it to the dapr application ID. |
+| connectionString | Y* | The RabbitMQ connection string. *Mutally exclusive with protocol, hostname, username, password field | `amqp://user:pass@localhost:5672` |
+| protocol | N* | The RabbitMQ protocol. *Mutally exclusive with connectionString field | `amqp` |
+| hostname | N* | The RabbitMQ hostname. *Mutally exclusive with connectionString field | `localhost` |
+| username | N* | The RabbitMQ username. *Mutally exclusive with connectionString field | `username` |
+| password | N* | The RabbitMQ password. *Mutally exclusive with connectionString field | `password` |
+| consumerID         | N        | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. |
 | durable            | N        | Whether or not to use [durable](https://www.rabbitmq.com/queues.html#durability) queues. Defaults to `"false"`  | `"true"`, `"false"`
 | deletedWhenUnused  | N        | Whether or not the queue should be configured to [auto-delete](https://www.rabbitmq.com/queues.html) Defaults to `"true"` | `"true"`, `"false"`
 | autoAck  | N        | Whether or not the queue consumer should [auto-ack](https://www.rabbitmq.com/confirms.html) messages. Defaults to `"false"` | `"true"`, `"false"`
@@ -73,9 +91,11 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | maxLen      | N        | The maximum number of messages of a queue and its dead letter queue (if dead letter enabled). If both `maxLen` and `maxLenBytes` are set then both will apply; whichever limit is hit first will be enforced.  Defaults to no limit. | `"1000"` |
 | maxLenBytes      | N        | Maximum length in bytes of a queue and its dead letter queue (if dead letter enabled). If both `maxLen` and `maxLenBytes` are set then both will apply; whichever limit is hit first will be enforced.  Defaults to no limit. | `"1048576"` |
 | exchangeKind      | N        | Exchange kind of the rabbitmq exchange.  Defaults to `"fanout"`. | `"fanout"`,`"topic"` |
-| caCert | Required for using TLS | Input/Output | Certificate Authority (CA) certificate in PEM format for verifying server TLS certificates. | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`
-| clientCert  | Required for using TLS | Input/Output | TLS client certificate in PEM format. Must be used with `clientKey`. | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`
-| clientKey | Required for using TLS | Input/Output | TLS client key in PEM format. Must be used with `clientCert`. Can be `secretKeyRef` to use a secret reference. | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"`
+| saslExternal      | N        | With TLS, should the username be taken from an additional field (for example, CN). See [RabbitMQ Authentication Mechanisms](https://www.rabbitmq.com/access-control.html#mechanisms).  Defaults to `"false"`. | `"true"`, `"false"` |
+| ttlInSeconds      | N        | Set message TTL at the component level, which can be overwritten by message level TTL per request. | `"60"` |
+| caCert | Required for using TLS | Certificate Authority (CA) certificate in PEM format for verifying server TLS certificates. | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`
+| clientCert  | Required for using TLS | TLS client certificate in PEM format. Must be used with `clientKey`. | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`
+| clientKey | Required for using TLS  | TLS client key in PEM format. Must be used with `clientCert`. Can be `secretKeyRef` to use a secret reference. | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"`
 
 
 ## Communication using TLS
@@ -121,6 +141,8 @@ spec:
     value: 10485760
   - name: exchangeKind
     value: fanout
+  - name: saslExternal
+    value: false
   - name: caCert
     value: ${{ myLoadedCACert }}
   - name: clientCert
@@ -354,7 +376,7 @@ To set a priority on a message, add the publish metadata key `maxPriority` to th
 {{% codetab %}}
 
 ```bash
-curl -X POST http://localhost:3601/v1.0/publish/order-pub-sub/orders?metadata.maxPriority=3 -H "Content-Type: application/json" -d '{"orderId": "100"}'
+curl -X POST http://localhost:3601/v1.0/publish/order-pub-sub/orders?metadata.priority=3 -H "Content-Type: application/json" -d '{"orderId": "100"}'
 ```
 
 {{% /codetab %}}
@@ -368,7 +390,7 @@ with DaprClient() as client:
             topic_name=TOPIC_NAME,
             data=json.dumps(orderId),
             data_content_type='application/json',
-            metadata= { 'maxPriority': '3' })
+            metadata= { 'priority': '3' })
 ```
 
 {{% /codetab %}}
@@ -376,7 +398,7 @@ with DaprClient() as client:
 {{% codetab %}}
 
 ```javascript
-await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId, { 'maxPriority': '3' });
+await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId, { 'priority': '3' });
 ```
 
 {{% /codetab %}}
@@ -384,11 +406,19 @@ await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId, { 'maxPriority': '
 {{% codetab %}}
 
 ```go
-client.PublishEvent(ctx, PUBSUB_NAME, TOPIC_NAME, []byte(strconv.Itoa(orderId)), map[string]string{"maxPriority": "3"})
+client.PublishEvent(ctx, PUBSUB_NAME, TOPIC_NAME, []byte(strconv.Itoa(orderId)), map[string]string{"priority": "3"})
 ```
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+## Time-to-live
+
+You can set a time-to-live (TTL) value at either the message or component level. Set default component-level TTL using the component spec `ttlInSeconds` field in your component. 
+
+{{% alert title="Note" color="primary" %}}
+If you set both component-level and message-level TTL, the default component-level TTL is ignored in favor of the message-level TTL.
+{{% /alert %}}
 
 ## Related links
 

@@ -5,6 +5,11 @@ linkTitle: ".NET"
 weight: 1000
 description: .NET SDK packages for developing Dapr applications
 no_list: true
+cascade:
+  github_repo: https://github.com/dapr/dotnet-sdk
+  github_subdir: daprdocs/content/en/dotnet-sdk-docs
+  path_base_for_github_subdir: content/en/developing-applications/sdks/dotnet/
+  github_branch: master
 ---
 
 Dapr offers a variety of packages to help with the development of .NET applications. Using them you can create .NET clients, servers, and virtual actors with Dapr.
@@ -55,6 +60,13 @@ Put the Dapr .NET SDK to the test. Walk through the .NET quickstarts and tutoria
       <h5 class="card-title"><b>Actors</b></h5>
       <p class="card-text">Create virtual actors with state, reminders/timers, and methods in .NET.</p>
       <a href="{{< ref dotnet-actors >}}" class="stretched-link"></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><b>Workflow</b></h5>
+      <p class="card-text">Create and manage workflows that work with other Dapr APIs in .NET.</p>
+      <a href="{{< ref dotnet-workflow >}}" class="stretched-link"></a>
     </div>
   </div>
 </div>
