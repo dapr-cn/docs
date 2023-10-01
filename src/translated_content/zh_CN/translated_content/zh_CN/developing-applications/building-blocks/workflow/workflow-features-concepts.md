@@ -8,7 +8,7 @@ description: "Learn more about the Dapr Workflow features and concepts"
 
 Now that you've learned about the [workflow building block]({{< ref workflow-overview.md >}}) at a high level, let's deep dive into the features and concepts included with the Dapr Workflow engine and SDKs. Dapr Workflow exposes several core features and concepts which are common across all supported languages.
 
-## Workflows
+## 工作流
 
 Dapr Workflows are functions you write that define a series of steps or tasks to be executed in a particular order. The Dapr Workflow engine takes care of coordinating and managing the execution of the steps, including managing failures and retries. If the app hosting your workflows is scaled out across multiple machines, the workflow engine may also load balance the execution of workflows and their tasks across multiple machines.
 

@@ -4,16 +4,16 @@ title: "概述"
 linkTitle: "概述"
 weight: 100
 description: >
-  Introduction to the Distributed Application Runtime
+  分布式应用运行时介绍
 ---
 
-Dapr is a portable, event-driven runtime that makes it easy for any developer to build resilient, stateless and stateful applications that run on the cloud and edge and embraces the diversity of languages and developer frameworks.
+Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员能够轻松构建出弹性的、无状态和有状态的应用程序，并可运行在云平台或边缘计算中，它同时也支持多种编程语言和开发框架。
 
 <div class="embed-responsive embed-responsive-16by9">
   <iframe width="1120" height="630" src="https://www.youtube-nocookie.com/embed/9o9iDAgYBA8" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-## Any language, any framework, anywhere
+## 任何语言，任何框架，任何地方
 
 <img src="/images/overview.png" width=1200>
 
@@ -33,18 +33,18 @@ Dapr is a portable, event-driven runtime that makes it easy for any developer to
 
 每个构建块 API 都是独立的，这意味着您可以采用其中一个、多个或全部来构建应用。 目前，可用的构建块如下：
 
-| 构建块                                                                               | 说明                                                                                                                                                                                                                                                                                                                                           |
-| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Service-to-service invocation**]({{< ref "service-invocation-overview.md" >}}) | Resilient service-to-service invocation enables method calls, including retries, on remote services, wherever they are located in the supported hosting environment.                                                                                                                                                                         |
-| [**状态管理**]({{< ref "state-management-overview.md" >}})                            | With state management for storing and querying key/value pairs, long-running, highly available, stateful services can be easily written alongside stateless services in your application. The state store is pluggable and examples include AWS DynamoDB, Azure CosmosDB, Azure SQL Server, GCP Firebase, PostgreSQL or Redis, among others. |
-| [**Publish and subscribe**]({{< ref "pubsub-overview.md" >}})                     | Publishing events and subscribing to topics between services enables event-driven architectures to simplify horizontal scalability and make them resilient to failure. Dapr provides at-least-once message delivery guarantee, message TTL, consumer groups and other advance features.                                                      |
-| [**Resource bindings**]({{< ref "bindings-overview.md" >}})                       | Resource bindings with triggers builds further on event-driven architectures for scale and resiliency by receiving and sending events to and from any external source such as databases, queues, file systems, etc.                                                                                                                          |
-| [**Actors**]({{< ref "actors-overview.md" >}})                                    | A pattern for stateful and stateless objects that makes concurrency simple, with method and state encapsulation. Dapr provides many capabilities in its actor runtime, including concurrency, state, and life-cycle management for actor activation/deactivation, and timers and reminders to wake up actors.                                |
-| [**可观测性**]({{< ref "observability-concept.md" >}})                                | Dapr emits metrics, logs, and traces to debug and monitor both Dapr and user applications. Dapr supports distributed tracing to easily diagnose and serve inter-service calls in production using the W3C Trace Context standard and Open Telemetry to send to different monitoring tools.                                                   |
-| [**Secrets**]({{< ref "secrets-overview.md" >}})                                  | The secrets management API integrates with public cloud and local secret stores to retrieve the secrets for use in application code.                                                                                                                                                                                                         |
-| [**Configuration**]({{< ref "configuration-api-overview.md" >}})                  | The configuration API enables you to retrieve and subscribe to application configuration items from configuration stores.                                                                                                                                                                                                                    |
-| [**Distributed lock**]({{< ref "distributed-lock-api-overview.md" >}})            | The distributed lock API enables your application to acquire a lock for any resource that gives it exclusive access until either the lock is released by the application, or a lease timeout occurs.                                                                                                                                         |
-| [**Workflows**]({{< ref "workflow-overview.md" >}})                               | `/v1.0-alpha1/workflow` | The workflow API can be combined with other Dapr building blocks to define long running, persistent processes or data flows that span multiple microservices using Dapr workflows or workflow components.                                                                                                          |
+| 构建块                                                        | 说明                                                                                                                                                          |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**服务间调用**]({{< ref "service-invocation-overview.md" >}})  | 服务间调用允许进行远程方法调用(包括重试)，无论远程服务处于任何位置，只需该服务托管于受支持的环境即可。                                                                                                        |
+| [**状态管理**]({{< ref "state-management-overview.md" >}})     | 通过采用存储和查询键/值对机制的状态管理，可以轻松的使长时运行、高可用的有状态服务和无状态服务共同运行在您的应用程序中。 状态存储是可插拔的，示例包括 AWS DynamoDB、Azure CosmosDB、Azure SQL Server、GCP Firebase、PostgreSQL 或 Redis 等。 |
+| [**发布与订阅**]({{< ref "pubsub-overview.md" >}})              | 在服务之间发布事件和订阅主题，使事件驱动的架构能够简化水平可伸缩性，并使其能够灵活应对故障。 Dapr 提供至少一次的消息传递保证，消息TTL，消费者组等高级功能。                                                                          |
+| [**资源绑定**]({{< ref "bindings-overview.md" >}})             | 通过接收和发送事件到任何外部来源，如数据库、队列、文件系统等，带触发器的资源绑定进一步加强了事件驱动架构的规模和弹性。                                                                                                 |
+| [**Actors**]({{< ref "actors-overview.md" >}})             | 一种用于有状态和无状态对象的模式，它通过对方法和状态的封装使并发变得简单。 Dapr 在 Actor 模式中提供了很多功能，包括并发，状态管理，用于 actor 激活/停用的生命周期管理，以及唤醒 actor 的计时器和提醒器。                                          |
+| [**可观测性**]({{< ref "observability-concept.md" >}})         | Dapr会发出各种指标、日志、链路以调试和监控 Dapr 和用户应用的运行状况。 Dapr 支持分布式跟踪，通过使用 W3C 跟踪上下文标准和 Open Telemetry 发送到不同的监控工具，以方便诊断和服务于生产中的服务间调用。                                       |
+| [**密钥**]({{< ref "secrets-overview.md" >}})                | Dapr 提供了密钥管理，支持与公有云和本地的 Secret 存储集成，以供应用检索使用。                                                                                                               |
+| [**配置**]({{< ref "configuration-api-overview.md" >}})      | 配置 API 使您能够从配置存储中检索和订阅应用程序配置项。                                                                                                                              |
+| [**分布式锁**]({{< ref "distributed-lock-api-overview.md" >}}) | 分布式锁 API 使应用程序能够获取任何资源的锁，该资源会授予其独占访问权限，直到应用程序释放锁或发生租约超时。                                                                                                    |
+| [**工作流**]({{< ref "workflow-overview.md" >}})              | `/v1.0-alpha1/工作流` |工作流 API 可以与其他 Dapr 构建块结合使用，做到使用 Dapr 工作流或工作流组件定义跨多个微服务的长时间运行的持久进程或数据流。                                                                  |
 
 
 ## Sidecar 架构
@@ -55,9 +55,9 @@ Dapr 以 sidecar 架构的方式公开其 HTTP 和 gRPC API，无论是作为容
 
 ## 托管环境
 
-Dapr can be hosted in multiple environments, including self-hosted on a Windows/Linux/macOS machines for local development and on Kubernetes or clusters of physical or virtual machines in production.
+Dapr可以在多种环境中托管，包括在 Windows/Linux/MacOS 机器上的自托管以进行本地开发，和在 Kubernetes 或生产环境中的物理机或虚拟机器集群上托管。
 
-### Self-hosted local development
+### 自托管模式本地开发
 
 在 [自托管模式下]({{< ref self-hosted-overview.md >}}) Dapr 作为一个独立的 sidecar 进程运行，服务代码可以通过 HTTP 或 gRPC 调用。 每个正在运行的服务都有一个 Dapr 运行时进程（或 sidecar），该进程配置为使用状态存储、发布/订阅、绑定组件和其他构建块。
 
@@ -67,9 +67,9 @@ Dapr can be hosted in multiple environments, including self-hosted on a Windows/
 
 ### Kubernetes
 
-Kubernetes 既可用于本地开发（例如使用 [minikube](https://minikube.sigs.k8s.io/docs/), [k3S](https://k3s.io/)），也可用于 [生产]({{< ref kubernetes >}})。 In container hosting environments such as Kubernetes, Dapr runs as a sidecar container with the application container in the same pod.
+Kubernetes 既可用于本地开发（例如使用 [minikube](https://minikube.sigs.k8s.io/docs/), [k3S](https://k3s.io/)），也可用于 [生产]({{< ref kubernetes >}})。 在容器托管环境（如 Kubernetes）中，Dapr 作为 sidecar 容器运行，和应用程序容器在同一个 pod 中。
 
-Dapr有控制平面服务。 The `dapr-sidecar-injector` and `dapr-operator` services provide first-class integration to launch Dapr as a sidecar container in the same pod as the service container and provide notifications of Dapr component updates provisioned in the cluster.
+Dapr有控制平面服务。 在 Kubernetes 中， `dapr-sidecar-injector` 和 `dapr-operator` 服务提供一流的集成，以将 Dapr 作为 sidecar 容器启动在与服务容器相同的 pod 中 ，并为在集群中部署的 Dapr 组件提供更新通知。
 
 <!-- IGNORE_LINKS -->
 `dapr-sentry` 服务是一个证书颁发机构，它支持 Dapr sidecar 实例之间的相互 TLS 以实现安全的数据加密，并通过 [Spiffe](https://spiffe.io/) 提供身份。 关于 `Sentry` 服务的更多信息请阅读 [安全概述]({{< ref "security-concept.md#dapr-to-dapr-communication" >}})
@@ -89,7 +89,7 @@ Dapr有控制平面服务。 The `dapr-sidecar-injector` and `dapr-operator` ser
 
 Dapr提供了各种SDK和框架，使您可以轻松地用您喜欢的语言开始开发Dapr。
 
-### Dapr SDKs
+### Dapr SDK列表
 
 为了使不同语言的人更自然地使用Dapr，它还包括 [特定语言的 SDK]({{<ref sdks>}})，可用于：
 - C++
@@ -103,24 +103,24 @@ Dapr提供了各种SDK和框架，使您可以轻松地用您喜欢的语言开�
 
 这些 SDK 通过类型化语言 API 暴露 Dapr 构建块的功能，而不是调用 http/gRPC API。 这使您能够用您选择的语言编写无状态和有状态函数以及actor的组合。 由于这些 SDK 共享 Dapr 运行时，因此您可以获得跨语言的 actor 和功能支持。
 
-### Developer frameworks
+### 开发框架
 
-Dapr can be used from any developer framework. 下面是一些已经和 Dapr 集成的：
+Dapr 可以与任何开发框架集成。 下面是一些已经和 Dapr 集成的：
 
 #### Web
 
-| Language                                     | 框架                                                                                 | 说明                                                                                                                                                                                             |
-| -------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [.NET]({{< ref dotnet >}})                   | [ASP.NET Core](https://github.com/dapr/dotnet-sdk/tree/master/examples/AspNetCore) | Brings stateful routing controllers that respond to pub/sub events from other services. Can also take advantage of [ASP.NET Core gRPC Services](https://docs.microsoft.com/aspnet/core/grpc/). |
-| [Java]({{< ref java >}})                     | [Spring Boot](https://spring.io/)                                                  | Build Spring boot applications with Dapr APIs                                                                                                                                                  |
-| [Python]({{< ref python >}})                 | [Flask]({{< ref python-flask.md >}})                                               | Build Flask applications with Dapr APIs                                                                                                                                                        |
-| [Javascript](https://github.com/dapr/js-sdk) | [Express](http://expressjs.com/)                                                   | Build Express applications with Dapr APIs                                                                                                                                                      |
-| [PHP]({{< ref php >}})                       |                                                                                    | 可以使用 Apache, Nginx, 或 Caddyserver 提供服务。                                                                                                                                                        |
+| 语言                                           | 框架                                                                                 | 说明                                                                                                       |
+| -------------------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| [.NET]({{< ref dotnet >}})                   | [ASP.NET Core](https://github.com/dapr/dotnet-sdk/tree/master/examples/AspNetCore) | 提供有状态路由控制器，相应来自其他服务的发布/订阅事件。 也可以利用 [ASP.NET Core gRPC 服务](https://docs.microsoft.com/aspnet/core/grpc/)。 |
+| [Java]({{< ref java >}})                     | [Spring Boot](https://spring.io/)                                                  | 使用 Dapr API 构建 Spring boot应用程序。                                                                          |
+| [Python]({{< ref python >}})                 | [Flask]({{< ref python-flask.md >}})                                               | 使用 Dapr API 构建 Flask 应用程序。                                                                               |
+| [Javascript](https://github.com/dapr/js-sdk) | [Express](http://expressjs.com/)                                                   | 使用 Dapr API 构建 Express 应用程序。                                                                             |
+| [PHP]({{< ref php >}})                       |                                                                                    | 可以使用 Apache, Nginx, 或 Caddyserver 提供服务。                                                                  |
 
 #### 集成和扩展
 
-Visit the [integrations]({{< ref integrations >}}) page to learn about some of the first-class support Dapr has for various frameworks and external products, including:
-- Public cloud services
+访问 [集成]({{< ref integrations >}}) 页面以了解 Dapr 对各种框架和外部产品的一些一流支持，包括：
+- 公共云服务
 - Visual Studio Code
 - GitHub
 

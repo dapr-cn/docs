@@ -4,6 +4,11 @@ title: "Dapr Java SDK"
 linkTitle: "Java"
 weight: 1000
 description: 开发 Dapr 应用程序的 Java SDK 包
+cascade:
+  github_repo: https://github.com/dapr/java-sdk
+  github_subdir: daprdocs/content/en/java-sdk-docs
+  path_base_for_github_subdir: content/en/developing-applications/sdks/java/
+  github_branch: master
 ---
 
 ## 前提
@@ -31,19 +36,19 @@ For a Maven project, add the following to your `pom.xml` file:
     <dependency>
       <groupId>io.dapr</groupId>
       <artifactId>dapr-sdk</artifactId>
-      <version>1.7.1</version>
+      <version>1.9.0</version>
     </dependency>
     <!-- Dapr's SDK for Actors (optional). -->
     <dependency>
       <groupId>io.dapr</groupId>
       <artifactId>dapr-sdk-actors</artifactId>
-      <version>1.7.1</version>
+      <version>1.9.0</version>
     </dependency>
     <!-- Dapr's SDK integration with SpringBoot (optional). -->
     <dependency>
       <groupId>io.dapr</groupId>
       <artifactId>dapr-sdk-springboot</artifactId>
-      <version>1.7.1</version>
+      <version>1.9.0</version>
     </dependency>
     ...
   </dependencies>
@@ -57,11 +62,11 @@ For a Maven project, add the following to your `pom.xml` file:
 dependencies {
 ...
     // Dapr's core SDK with all features, except Actors.
-    compile('io.dapr:dapr-sdk:1.7.1')
+    compile('io.dapr:dapr-sdk:1.9.0')
     // Dapr's SDK for Actors (optional).
-    compile('io.dapr:dapr-sdk-actors:1.7.1')
+    compile('io.dapr:dapr-sdk-actors:1.9.0')
     // Dapr's SDK integration with SpringBoot (optional).
-    compile('io.dapr:dapr-sdk-springboot:1.7.1')
+    compile('io.dapr:dapr-sdk-springboot:1.9.0')
 }
 ```
 
