@@ -2,7 +2,7 @@
 type: docs
 title: "Quickstart: Configuration"
 linkTitle: Configuration
-weight: 76
+weight: 77
 description: Get started with Dapr's Configuration building block
 ---
 
@@ -64,7 +64,7 @@ pip3 install -r requirements.txt
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-port 6001 -- python3 app.py
+dapr run --app-id order-processor --resources-path ../../../components/ --app-port 6001 -- python3 app.py
 ```
 
 > **Note**: Since Python3.exe is not defined in Windows, you may need to use `python app.py` instead of `python3 app.py`.
@@ -90,7 +90,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 Run the `order-processor` service again:
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-port 6001 -- python3 app.py
+dapr run --app-id order-processor --resources-path ../../../components/ --app-port 6001 -- python3 app.py
 ```
 
 > **Note**: Since Python3.exe is not defined in Windows, you may need to use `python app.py` instead of `python3 app.py`.
@@ -187,7 +187,7 @@ npm install
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
+dapr run --app-id order-processor --resources-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
 ```
 
 The expected output:
@@ -209,7 +209,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 Run the `order-processor` service again:
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
+dapr run --app-id order-processor --resources-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
 ```
 
 The app will return the updated configuration values:
@@ -309,7 +309,7 @@ dotnet build
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id order-processor-http --components-path ../../../components/ --app-port 7001 -- dotnet run --project .
+dapr run --app-id order-processor-http --resources-path ../../../components/ --app-port 7001 -- dotnet run --project .
 ```
 
 The expected output:
@@ -331,7 +331,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 Run the `order-processor` service again:
 
 ```bash
-dapr run --app-id order-processor-http --components-path ../../../components/ --app-port 7001 -- dotnet run --project .
+dapr run --app-id order-processor-http --resources-path ../../../components/ --app-port 7001 -- dotnet run --project .
 ```
 
 The app will return the updated configuration values:
@@ -428,7 +428,7 @@ mvn clean install
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
+dapr run --app-id order-processor --resources-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
 The expected output:
@@ -450,7 +450,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 Run the `order-processor` service again:
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
+dapr run --app-id order-processor --resources-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
 The app will return the updated configuration values:
@@ -537,7 +537,7 @@ cd configuration/go/sdk/order-processor
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-id order-processor --app-port 6001 --components-path ../../../components -- go run .
+dapr run --app-id order-processor --app-port 6001 --resources-path ../../../components -- go run .
 ```
 
 The expected output:
@@ -560,7 +560,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 Run the `order-processor` service again:
 
 ```bash
-dapr run --app-id order-processor --app-port 6001 --components-path ../../../components -- go run .
+dapr run --app-id order-processor --app-port 6001 --resources-path ../../../components -- go run .
 ```
 
 The app will return the updated configuration values:
@@ -619,6 +619,12 @@ case <-ctx.Done():
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+## Demo
+
+Watch this video [demoing the Configuration API quickstart](https://youtu.be/EcE6IGuX9L8?t=94):
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EcE6IGuX9L8?start=94" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Tell us what you think!
 

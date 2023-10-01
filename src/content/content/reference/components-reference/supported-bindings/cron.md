@@ -23,13 +23,16 @@ spec:
   metadata:
   - name: schedule
     value: "@every 15m" # valid cron schedule
+  - name: direction
+    value: "input"
 ```
 
 ## Spec metadata fields
 
 | Field              | Required | Binding support |  Details | Example |
 |--------------------|:--------:|-------|--------|---------|
-| schedule | Y | Input|  The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"`
+| `schedule` | Y | Input|  The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"`
+| `direction` | N | Input|  The direction of the binding | `"input"`
 
 ### Schedule Format
 
@@ -69,7 +72,7 @@ app.post('/scheduled', async function(req, res){
 });
 ```
   
-When running this code, note that the `/scheduled` endpoint is called every five minutes by the Dapr sidecar.
+When running this code, note that the `/scheduled` endpoint is called every fifteen minutes by the Dapr sidecar.
 
 
 ## Binding support

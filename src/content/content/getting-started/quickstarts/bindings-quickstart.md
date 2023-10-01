@@ -11,7 +11,7 @@ Let's take a look at Dapr's [Bindings building block]({{< ref bindings >}}). Usi
 - Trigger your app with events coming in from external systems.
 - Interface with external systems.
 
-In this Quickstart, you will schedule a batch script to run every 10 seconds using an input [Cron](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/) binding. The script processes a JSON file and outputs data to a SQL database using the [PostgreSQL](https://docs.dapr.io/reference/components-reference/supported-bindings/postgres) Dapr binding.
+In this Quickstart, you will schedule a batch script to run every 10 seconds using an input [Cron]({{< ref cron.md >}}) binding. The script processes a JSON file and outputs data to a SQL database using the [PostgreSQL]({{< ref postgresql.md >}}) Dapr binding.
 
 <img src="/images/bindings-quickstart/bindings-quickstart.png" width=800 style="padding-bottom:15px;">
 
@@ -90,7 +90,7 @@ dapr run --app-id batch-sdk --app-port 50051 --resources-path ../../../component
 
 > **Note**: Since Python3.exe is not defined in Windows, you may need to use `python app.py` instead of `python3 app.py`.
 
-The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
+The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your application by the Dapr sidecar.
 
 ```python
 # Triggered by Dapr input binding
@@ -98,7 +98,7 @@ The code inside the `process_batch` function is executed every 10 seconds (defin
 def process_batch():
 ```
 
-The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgres.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table. 
+The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgresql.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table. 
 
 ```python
 with DaprClient() as d:
@@ -140,7 +140,7 @@ In a new terminal, verify the same data has been inserted into the database. Nav
 cd bindings/db
 ```
 
-Run the following to start the interactive Postgres CLI:
+Run the following to start the interactive *psql* CLI:
 
 ```bash
 docker exec -i -t postgres psql --username postgres  -p 5432 -h localhost --no-password
@@ -189,20 +189,22 @@ spec:
   metadata:
   - name: schedule
     value: "@every 10s" # valid cron schedule
+  - name: direction
+    value: "input" # direction of the cron binding
 ```
 
 **Note:** The `metadata` section of `binding-cron.yaml` contains a [Cron expression]({{< ref cron.md >}}) that specifies how often the binding is invoked.
 
-#### `component\binding-postgres.yaml` component file
+#### `component\binding-postgresql.yaml` component file
 
 When you execute the `dapr run` command and specify the component path, the Dapr sidecar:
 
-- Initiates the PostgreSQL [binding building block]({{< ref postgres.md >}})
-- Connects to PostgreSQL using the settings specified in the `binding-postgres.yaml` file
+- Initiates the PostgreSQL [binding building block]({{< ref postgresql.md >}})
+- Connects to PostgreSQL using the settings specified in the `binding-postgresql.yaml` file
 
-With the `binding-postgres.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
+With the `binding-postgresql.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
 
-The PostgreSQL `binding-postgres.yaml` file included for this Quickstart contains the following:
+The PostgreSQL `binding-postgresql.yaml` file included for this Quickstart contains the following:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -211,11 +213,13 @@ metadata:
   name: sqldb
   namespace: quickstarts
 spec:
-  type: bindings.postgres
+  type: bindings.postgresql
   version: v1
   metadata:
   - name: url # Required
     value: "user=postgres password=docker host=localhost port=5432 dbname=orders pool_min_conns=1 pool_max_conns=10"
+  - name: direction
+    value: "output" # direction of the postgresql binding
 ```
 
 In the YAML file:
@@ -295,7 +299,7 @@ Run the `batch-sdk` service alongside a Dapr sidecar.
 dapr run --app-id batch-sdk --app-port 5002 --dapr-http-port 3500 --resources-path ../../../components -- node index.js 
 ```
 
-The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
+The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your application by the Dapr sidecar.
 
 ```javascript
 async function start() {
@@ -304,7 +308,7 @@ async function start() {
 }
 ```
 
-The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgres.yaml`]({{< ref "##componentsbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table. 
+The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgresql.yaml`]({{< ref "##componentsbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table. 
 
 ```javascript
 async function processBatch(){
@@ -391,20 +395,22 @@ spec:
   metadata:
   - name: schedule
     value: "@every 10s" # valid cron schedule
+  - name: direction
+    value: "input" # direction of the cron binding
 ```
 
 **Note:** The `metadata` section of `binding-cron.yaml` contains a [Cron expression]({{< ref cron.md >}}) that specifies how often the binding is invoked.
 
-#### `component\binding-postgres.yaml` component file
+#### `component\binding-postgresql.yaml` component file
 
 When you execute the `dapr run` command and specify the component path, the Dapr sidecar:
 
-- Initiates the PostgreSQL [binding building block]({{< ref postgres.md >}})
-- Connects to PostgreSQL using the settings specified in the `binding-postgres.yaml` file
+- Initiates the PostgreSQL [binding building block]({{< ref postgresql.md >}})
+- Connects to PostgreSQL using the settings specified in the `binding-postgresql.yaml` file
 
-With the `binding-postgres.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
+With the `binding-postgresql.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
 
-The PostgreSQL `binding-postgres.yaml` file included for this Quickstart contains the following:
+The PostgreSQL `binding-postgresql.yaml` file included for this Quickstart contains the following:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -413,11 +419,13 @@ metadata:
   name: sqldb
   namespace: quickstarts
 spec:
-  type: bindings.postgres
+  type: bindings.postgresql
   version: v1
   metadata:
   - name: url # Required
     value: "user=postgres password=docker host=localhost port=5432 dbname=orders pool_min_conns=1 pool_max_conns=10"
+  - name: direction
+    value: "output" # direction of the postgresql binding
 ```
 
 In the YAML file:
@@ -498,7 +506,7 @@ Run the `batch-sdk` service alongside a Dapr sidecar.
 dapr run --app-id batch-sdk --app-port 7002 --resources-path ../../../components -- dotnet run
 ```
 
-The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
+The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your application by the Dapr sidecar.
 
 ```csharp
 app.MapPost("/" + cronBindingName, async () => {
@@ -506,7 +514,7 @@ app.MapPost("/" + cronBindingName, async () => {
 });
 ```
 
-The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgres.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table. 
+The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgresql.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table. 
 
 ```csharp
 // ...
@@ -595,20 +603,22 @@ spec:
   metadata:
   - name: schedule
     value: "@every 10s" # valid cron schedule
+  - name: direction
+    value: "input" # direction of the cron binding
 ```
 
 **Note:** The `metadata` section of `binding-cron.yaml` contains a [Cron expression]({{< ref cron.md >}}) that specifies how often the binding is invoked.
 
-#### `component\binding-postgres.yaml` component file
+#### `component\binding-postgresql.yaml` component file
 
 When you execute the `dapr run` command and specify the component path, the Dapr sidecar:
 
-- Initiates the PostgreSQL [binding building block]({{< ref postgres.md >}})
-- Connects to PostgreSQL using the settings specified in the `binding-postgres.yaml` file
+- Initiates the PostgreSQL [binding building block]({{< ref postgresql.md >}})
+- Connects to PostgreSQL using the settings specified in the `binding-postgresql.yaml` file
 
-With the `binding-postgres.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
+With the `binding-postgresql.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
 
-The PostgreSQL `binding-postgres.yaml` file included for this Quickstart contains the following:
+The PostgreSQL `binding-postgresql.yaml` file included for this Quickstart contains the following:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -617,11 +627,13 @@ metadata:
   name: sqldb
   namespace: quickstarts
 spec:
-  type: bindings.postgres
+  type: bindings.postgresql
   version: v1
   metadata:
   - name: url # Required
     value: "user=postgres password=docker host=localhost port=5432 dbname=orders pool_min_conns=1 pool_max_conns=10"
+  - name: direction
+    value: "output" # direction of the postgresql binding
 ```
 
 In the YAML file:
@@ -704,14 +716,14 @@ Run the `batch-sdk` service alongside a Dapr sidecar.
 dapr run --app-id batch-sdk --app-port 8080 --resources-path ../../../components -- java -jar target/BatchProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
+The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your application by the Dapr sidecar.
 
 ```java
 @PostMapping(path = cronBindingPath, consumes = MediaType.ALL_VALUE)
 public ResponseEntity<String> processBatch() throws IOException, Exception
 ```
 
-The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgres.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table. 
+The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgresql.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table. 
 
 ```java
 try (DaprClient client = new DaprClientBuilder().build()) {
@@ -805,20 +817,22 @@ spec:
   metadata:
   - name: schedule
     value: "@every 10s" # valid cron schedule
+  - name: direction
+    value: "input" # direction of the cron binding
 ```
 
 **Note:** The `metadata` section of `binding-cron.yaml` contains a [Cron expression]({{< ref cron.md >}}) that specifies how often the binding is invoked.
 
-#### `component\binding-postgres.yaml` component file
+#### `component\binding-postgresql.yaml` component file
 
 When you execute the `dapr run` command and specify the component path, the Dapr sidecar:
 
-- Initiates the PostgreSQL [binding building block]({{< ref postgres.md >}})
-- Connects to PostgreSQL using the settings specified in the `binding-postgres.yaml` file
+- Initiates the PostgreSQL [binding building block]({{< ref postgresql.md >}})
+- Connects to PostgreSQL using the settings specified in the `binding-postgresql.yaml` file
 
-With the `binding-postgres.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
+With the `binding-postgresql.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
 
-The PostgreSQL `binding-postgres.yaml` file included for this Quickstart contains the following:
+The PostgreSQL `binding-postgresql.yaml` file included for this Quickstart contains the following:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -827,11 +841,13 @@ metadata:
   name: sqldb
   namespace: quickstarts
 spec:
-  type: bindings.postgres
+  type: bindings.postgresql
   version: v1
   metadata:
   - name: url # Required
     value: "user=postgres password=docker host=localhost port=5432 dbname=orders pool_min_conns=1 pool_max_conns=10"
+  - name: direction
+    value: "output" # direction of the postgresql binding
 ```
 
 In the YAML file:
@@ -911,14 +927,14 @@ Run the `batch-sdk` service alongside a Dapr sidecar.
 dapr run --app-id batch-sdk --app-port 6002 --dapr-http-port 3502 --dapr-grpc-port 60002 --resources-path ../../../components -- go run .
 ```
 
-The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your Flask application by the Dapr sidecar.
+The code inside the `process_batch` function is executed every 10 seconds (defined in [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) in the `components` directory). The binding trigger looks for a route called via HTTP POST in your application by the Dapr sidecar.
 
 ```go
 // Triggered by Dapr input binding
 r.HandleFunc("/"+cronBindingName, processBatch).Methods("POST")
 ```
 
-The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgres.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table.
+The `batch-sdk` service uses the PostgreSQL output binding defined in the [`binding-postgresql.yaml`]({{< ref "#componentbinding-postgresyaml-component-file" >}}) component to insert the `OrderId`, `Customer`, and `Price` records into the `orders` table.
 
 ```go
 func sqlOutput(order Order) (err error) {
@@ -1017,20 +1033,22 @@ spec:
   metadata:
   - name: schedule
     value: "@every 10s" # valid cron schedule
+  - name: direction
+    value: "input" # direction of the cron binding
 ```
 
 **Note:** The `metadata` section of `binding-cron.yaml` contains a [Cron expression]({{< ref cron.md >}}) that specifies how often the binding is invoked.
 
-#### `component\binding-postgres.yaml` component file
+#### `component\binding-postgresql.yaml` component file
 
 When you execute the `dapr run` command and specify the component path, the Dapr sidecar:
 
-- Initiates the PostgreSQL [binding building block]({{< ref postgres.md >}})
-- Connects to PostgreSQL using the settings specified in the `binding-postgres.yaml` file
+- Initiates the PostgreSQL [binding building block]({{< ref postgresql.md >}})
+- Connects to PostgreSQL using the settings specified in the `binding-postgresql.yaml` file
 
-With the `binding-postgres.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
+With the `binding-postgresql.yaml` component, you can easily swap out the backend database [binding]({{< ref supported-bindings.md >}}) without making code changes.
 
-The PostgreSQL `binding-postgres.yaml` file included for this Quickstart contains the following:
+The PostgreSQL `binding-postgresql.yaml` file included for this Quickstart contains the following:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -1039,11 +1057,13 @@ metadata:
   name: sqldb
   namespace: quickstarts
 spec:
-  type: bindings.postgres
+  type: bindings.postgresql
   version: v1
   metadata:
   - name: url # Required
     value: "user=postgres password=docker host=localhost port=5432 dbname=orders pool_min_conns=1 pool_max_conns=10"
+  - name: direction
+    value: "output" # direction of the postgresql binding
 ```
 
 In the YAML file:

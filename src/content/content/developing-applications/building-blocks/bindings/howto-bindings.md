@@ -6,6 +6,7 @@ description: "Invoke external systems with output bindings"
 weight: 300
 ---
 
+
 With output bindings, you can invoke external resources. An optional payload and metadata can be sent with the invocation request.
 
 <img src="/images/howto-bindings/kafka-output-binding.png" width=1000 alt="Diagram showing bindings of example service">
@@ -30,6 +31,8 @@ Create a new binding component named `checkout`. Within the `metadata` section, 
 
 - The topic to which you'll publish the message
 - The broker
+
+When creating the binding component, [specify the supported `direction` of the binding]({{< ref "bindings_api.md#binding-direction-optional" >}}). 
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
@@ -58,7 +61,9 @@ spec:
   - name: publishTopic
     value: sample
   - name: authRequired
-    value: "false"
+    value: false
+  - name: direction
+    value: output
 ```
 
 {{% /codetab %}}
@@ -88,7 +93,9 @@ spec:
   - name: publishTopic
     value: sample
   - name: authRequired
-    value: "false"
+    value: false
+  - name: direction
+    value: output
 ```
 
 {{% /codetab %}}
@@ -270,7 +277,11 @@ const daprHost = "127.0.0.1";
 async function sendOrder(orderId) {
     const BINDING_NAME = "checkout";
     const BINDING_OPERATION = "create";
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const client = new DaprClient({
+        daprHost,
+        daprPort: process.env.DAPR_HTTP_PORT,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+    });
     //Using Dapr SDK to invoke output binding
     const result = await client.binding.send(BINDING_NAME, BINDING_OPERATION, orderId);
     console.log("Sending message: " + orderId);

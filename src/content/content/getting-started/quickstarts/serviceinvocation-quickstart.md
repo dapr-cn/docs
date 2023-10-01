@@ -298,7 +298,7 @@ Dapr invokes an application on any Dapr instance. In the code, the sidecar progr
 For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
+- [.NET SDK or .NET 7 SDK installed](https://dotnet.microsoft.com/download).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
@@ -600,7 +600,7 @@ go build .
 Run the `order-processor` service alongside a Dapr sidecar.
 
 ```bash
-dapr run --app-port 6001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- go run .
+dapr run --app-port 6006 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- go run .
 ```
 
 Each order is received via an HTTP POST request and processed by the

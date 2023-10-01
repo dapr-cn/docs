@@ -64,6 +64,3 @@ jobs:
             newbe36524
           reviewers: |
             newbe36524
-          team-reviewers: |
-            owners
-            maintainers

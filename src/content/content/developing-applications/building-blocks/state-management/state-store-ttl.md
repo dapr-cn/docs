@@ -16,9 +16,15 @@ When state TTL has native support in the state store component, Dapr forwards th
 
 When a TTL is not specified, the default behavior of the state store is retained.
 
-## Persisting state (ignoring an existing TTL)
+## Explicit persistence bypassing globally defined TTL
 
-To explicitly persist a state (ignoring any TTLs set for the key), specify a `ttlInSeconds` value of `-1`.
+Persisting state applies to all state stores that let you specify a default TTL used for all data, either:
+- Setting a global TTL value via a Dapr component, or 
+- When creating the state store outside of Dapr and setting a global TTL value. 
+
+When no specific TTL is specified, the data expires after that global TTL period of time. This is not facilitated by Dapr.
+
+In addition, all state stores also support the option to _explicitly_ persist data. This means you can ignore the default database policy (which may have been set outside of Dapr or via a Dapr Component) to indefinitely retain a given database record. You can do this by setting `ttlInSeconds` to the value of `-1`. This value indicates to ignore any TTL value set.
 
 ## Supported components
 
@@ -28,9 +34,11 @@ Refer to the TTL column in the [state store components guide]({{< ref supported-
 
 You can set state TTL in the metadata as part of the state store set request:
 
-{{< tabs Python "HTTP API (Bash)" "HTTP API (PowerShell)">}}
+{{< tabs Python ".NET" Go "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
+
+<!--python-->
 
 ```python
 #dependencies
@@ -52,6 +60,59 @@ To launch a Dapr sidecar and run the above example application, you'd then run a
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+<!--dotnet-->
+
+```csharp
+// dependencies
+
+using Dapr.Client;
+
+// code
+
+await client.SaveStateAsync(storeName, stateKeyName, state, metadata: new Dictionary<string, string>() { 
+    { 
+        "ttlInSeconds", "120" 
+    } 
+});
+```
+
+To launch a Dapr sidecar and run the above example application, you'd then run a command similar to the following:
+
+```bash
+dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+<!--go-->
+
+```go
+// dependencies
+
+import (
+	dapr "github.com/dapr/go-sdk/client"
+)
+
+// code
+
+md := map[string]string{"ttlInSeconds": "120"}
+if err := client.SaveState(ctx, store, "key1", []byte("hello world"), md); err != nil {
+   panic(err)
+}
+```
+
+To launch a Dapr sidecar and run the above example application, you'd then run a command similar to the following:
+
+```bash
+dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run .
 ```
 
 {{% /codetab %}}

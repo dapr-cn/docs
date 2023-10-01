@@ -12,7 +12,7 @@ Now that you've learned what the Dapr pub/sub building block provides, learn how
 - An order processing service using Dapr to publish a message to RabbitMQ.
 
 
-<img src="/images/building-block-pub-sub-example.png" width=1000 alt="Diagram showing state management of example service">
+<img src="/images/pubsub-howto-overview.png" width=1000 alt="Diagram showing state management of example service">
 
 Dapr automatically wraps the user payload in a CloudEvents v1.0 compliant envelope, using `Content-Type` header value for `datacontenttype` attribute. [Learn more about messages with CloudEvents.]({{< ref pubsub-cloudevents.md >}})
 
@@ -122,8 +122,16 @@ spec:
   type: pubsub.rabbitmq
   version: v1
   metadata:
-  - name: host
+  - name: connectionString
     value: "amqp://localhost:5672"
+  - name: protocol
+    value: amqp  
+  - name: hostname
+    value: localhost 
+  - name: username
+    value: username
+  - name: password
+    value: password 
   - name: durable
     value: "false"
   - name: deletedWhenUnused
@@ -178,7 +186,7 @@ Place `subscription.yaml` in the same directory as your `pubsub.yaml` component.
 
 Below are code examples that leverage Dapr SDKs to subscribe to the topic you defined in `subscription.yaml`.
 
-{{< tabs Dotnet Java Python Go Javascript>}}
+{{< tabs Dotnet Java Python Go JavaScript>}}
 
 {{% codetab %}}
 
@@ -347,13 +355,15 @@ start().catch((e) => {
 });
 
 async function start(orderId) {
-    const server = new DaprServer(
-        serverHost, 
-        serverPort, 
-        daprHost, 
-        process.env.DAPR_HTTP_PORT, 
-        CommunicationProtocolEnum.HTTP
-    );
+    const server = new DaprServer({
+        serverHost,
+        serverPort,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+        clientOptions: {
+          daprHost,
+          daprPort: process.env.DAPR_HTTP_PORT,
+        },
+    });
     //Subscribe to a topic
     await server.pubsub.subscribe("order-pub-sub", "orders", async (orderId) => {
         console.log(`Subscriber received: ${JSON.stringify(orderId)}`)
@@ -617,7 +627,11 @@ var main = function() {
 async function start(orderId) {
     const PUBSUB_NAME = "order-pub-sub"
     const TOPIC_NAME  = "orders"
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const client = new DaprClient({
+        daprHost,
+        daprPort: process.env.DAPR_HTTP_PORT, 
+        communicationProtocol: CommunicationProtocolEnum.HTTP
+    });
     console.log("Published data:" + orderId)
     //Using Dapr SDK to publish a topic
     await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId);
@@ -643,6 +657,12 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 ## Message acknowledgement and retries
 
 In order to tell Dapr that a message was processed successfully, return a `200 OK` response. If Dapr receives any other return status code than `200`, or if your app crashes, Dapr will attempt to redeliver the message following at-least-once semantics.
+
+## Demo video
+
+Watch [this demo video](https://youtu.be/1dqe1k-FXJQ?si=s3gvWxRxeOsmXuE1) to learn more about pub/sub messaging with Dapr.
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/1dqe1k-FXJQ?si=s3gvWxRxeOsmXuE1" title="YouTube video player" style="padding-bottom:25px;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Next steps
 
