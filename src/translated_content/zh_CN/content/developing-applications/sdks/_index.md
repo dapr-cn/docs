@@ -29,16 +29,16 @@ Dapr SDK是将Dapr应用到您的应用程序中最简单的方法。 选择你�
 
 ## SDK 语言
 
-| 语言                                       | 状态             | 客户端 SDK |                                                                  服务扩展                                                                   | Actor SDK |
-| ---------------------------------------- |:-------------- |:-------:|:---------------------------------------------------------------------------------------------------------------------------------------:|:---------:|
-| [.NET]({{< ref dotnet >}})               | Stable         |    ✔    |                                                [ASP.NET Core]({{< ref dotnet-aspnet >}})                                                |     ✔     |
-| [Python]({{< ref python >}})             | Stable         |    ✔    | [gRPC]({{< ref python-grpc.md >}}) <br />[FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |     ✔     |
-| [Java]({{< ref java >}})                 | Stable         |    ✔    |                                                               Spring Boot                                                               |     ✔     |
-| [Go]({{< ref go >}})                     | Stable         |    ✔    |                                                                    ✔                                                                    |     ✔     |
-| [PHP]({{< ref php >}})                   | Stable         |    ✔    |                                                                    ✔                                                                    |     ✔     |
-| [Javascript]({{< ref js >}})             | Stable         |    ✔    |                                                                                                                                         |     ✔     |
-| [C++](https://github.com/dapr/cpp-sdk)   | In development |    ✔    |                                                                                                                                         |           |
-| [Rust](https://github.com/dapr/rust-sdk) | In development |    ✔    |                                                                                                                                         |           |
+| 语言                                       | 状态             | 客户端 SDK |                                                                  服务扩展                                                                   | Actor SDK | 工作流 |
+| ---------------------------------------- |:-------------- |:-------:|:---------------------------------------------------------------------------------------------------------------------------------------:|:---------:|-----|
+| [.NET]({{< ref dotnet >}})               | Stable         |    ✔    |                                                [ASP.NET Core]({{< ref dotnet-aspnet >}})                                                |     ✔     |  ✔    |
+| [Python]({{< ref python >}})             | Stable         |    ✔    | [gRPC]({{< ref python-grpc.md >}}) <br />[FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}}) |     ✔     |   ✔  |
+| [Java]({{< ref java >}})                 | Stable         |    ✔    |                                                               Spring Boot                                                               |     ✔     |     |
+| [Go]({{< ref go >}})                     | Stable         |    ✔    |                                                                    ✔                                                                    |     ✔     |     |
+| [PHP]({{< ref php >}})                   | Stable         |    ✔    |                                                                    ✔                                                                    |     ✔     |     |
+| [Javascript]({{< ref js >}})             | Stable         |    ✔    |                                                                                                                                         |     ✔     |     |
+| [C++](https://github.com/dapr/cpp-sdk)   | In development |    ✔    |                                                                                                                                         |           |     |
+| [Rust](https://github.com/dapr/rust-sdk) | In development |    ✔    |                                                                                                                                         |           |     |
 
 ## 深入阅读
 
