@@ -116,7 +116,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>452634 words</b>
+                      <b>452745 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
@@ -129,7 +129,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
                   </sub>
                   <br />
                   <sub>
-                      <b>139027 words</b>
+                      <b>143501 words</b>
                   </sub>
               </td>
               <td style="text-align:center; vertical-align: top;">
