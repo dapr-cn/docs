@@ -21,29 +21,31 @@ spec:
   version: v1
   metadata:
     - name: development
-      value: <bool>
+      value: "<bool>"
     - name: key-id
-      value: <APPLE_KEY_ID>
+      value: "<APPLE_KEY_ID>"
     - name: team-id
-      value: <APPLE_TEAM_ID>
+      value: "<APPLE_TEAM_ID>"
     - name: private-key
       secretKeyRef:
         name: <SECRET>
-        key: <SECRET-KEY-NAME>
+        key: "<SECRET-KEY-NAME>"
 ```
 ## 元数据字段规范
 
-| Field       | 必填 | 绑定支持   | 详情                                                                                                                                                        | 示例                 |
-| ----------- |:--:| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| development | 是  | Output | Tells the binding which APNs service to use. Set to `"true"` to use the development service or `"false"` to use the production service. Default: `"true"` | `"true"`           |
-| key-id      | 是  | 输出     | 来自 Apple 开发者门户的私钥的标识符。                                                                                                                                    | `"private-key-id`" |
-| team-id     | 是  | 输出     | 来自 Apple 开发者门户的组织或作者的标识符。                                                                                                                                 | `"team-id"`        |
-| private-key | 是  | 输出     | 是一个PKCS #8格式的私钥。 其目的是将私钥存储在密钥存储中，而不是直接暴露在配置中。 请参阅[这里](#private-key)了解更多详情。                                                                                | `"pem file"`       |
+| Field         | Required | 绑定支持   | 详情                                                                                                                                                        | 示例                 |
+| ------------- |:--------:| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `development` |    是     | Output | Tells the binding which APNs service to use. Set to `"true"` to use the development service or `"false"` to use the production service. Default: `"true"` | `"true"`           |
+| `key-id`      |    是     | 输出     | 来自 Apple 开发者门户的私钥的标识符。                                                                                                                                    | `"private-key-id`" |
+| `team-id`     |    是     | 输出     | 来自 Apple 开发者门户的组织或作者的标识符。                                                                                                                                 | `"team-id"`        |
+| `private-key` |    是     | 输出     | 是一个PKCS #8格式的私钥。 其目的是将私钥存储在密钥存储中，而不是直接暴露在配置中。 请参阅[这里](#private-key)了解更多详情。                                                                                | `"pem file"`       |
 
 ### Private key
+
 APNS绑定需要一个加密私钥，以便为APNS服务生成认证令牌。 私钥可以从Apple开发者门户生成，并以PKCS #8文件的形式提供，私钥以PEM格式存储。 私钥应该存储在Dapr的密钥存储中，而不是直接存储在绑定的配置文件中。
 
 APNS绑定的配置文件示例如下所示：
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -63,7 +65,9 @@ spec:
       name: apns-secrets
       key: private-key
 ```
+
 如果使用Kubernetes，一个示例的密钥配置可能是这样的：
+
 ```yaml
 apiVersion: v1
 kind: Secret

@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "Implementing a .NET input/output binding component"
+title: "实现一个.NET输入/输出绑定组件"
 linkTitle: "绑定"
 weight: 1000
-description: How to create an input/output binding with the Dapr pluggable components .NET SDK
+description: 如何使用 Dapr 可插拔组件 .NET SDK 创建输入/输出绑定
 no_list: true
 is_preview: true
 ---
 
-Creating a binding component requires just a few basic steps.
+创建一个绑定组件只需要几个基本步骤。
 
-## Add bindings namespaces
+## 添加绑定命名空间
 
-Add `using` statements for the bindings related namespaces.
+添加 `using` 语句来引用与绑定相关的命名空间。
 
 ```csharp
 using Dapr.PluggableComponents.Components;
 using Dapr.PluggableComponents.Components.Bindings;
 ```
 
-## Input bindings: Implement `IInputBinding`
+## 输入绑定: 实现`IInputBinding`
 
-Create a class that implements the `IInputBinding` interface.
+创建一个实现`IInputBinding`接口的类。
 
 ```csharp
 internal sealed class MyBinding : IInputBinding
@@ -38,7 +38,7 @@ internal sealed class MyBinding : IInputBinding
 }
 ```
 
-Calls to the `ReadAsync()` method are "long-lived", in that the method is not expected to return until canceled (for example, via the `cancellationToken`). As messages are read from the underlying store of the component, they are delivered to the Dapr runtime via the `deliveryHandler` callback. Delivery allows the component to receive notification if/when the application (served by the Dapr runtime) acknowledges processing of the message.
+对 `ReadAsync()` 方法的调用是“长时间运行”的，即该方法不会在取消之前返回（例如，通过 `cancellationToken`）。 当消息从组件的底层存储中被读取时，它们通过`deliveryHandler`回调函数传递给 Dapr 运行时。 Delivery 允许组件在应用程序（由 Dapr 运行时提供服务）确认处理消息后，接收通知。
 
 ```csharp
     public async Task ReadAsync(MessageDeliveryHandler<InputBindingReadRequest, InputBindingReadResponse> deliveryHandler, CancellationToken cancellationToken = default)
@@ -71,9 +71,9 @@ Calls to the `ReadAsync()` method are "long-lived", in that the method is not ex
     }
 ```
 
-## Output bindings: Implement `IOutputBinding`
+## 输出绑定: 实现`IOutputBinding`
 
-Create a class that implements the `IOutputBinding` interface.
+创建一个实现`IOutputBinding`接口的类。
 
 ```csharp
 internal sealed class MyBinding : IOutputBinding
@@ -95,9 +95,9 @@ internal sealed class MyBinding : IOutputBinding
 }
 ```
 
-## Input and output binding components
+## 输入和输出绑定组件
 
-A component can be _both_ an input _and_ output binding, simply by implementing both interfaces.
+一个组件可以通过实现两个接口，_同时_成为输入和输出绑定。
 
 ```csharp
 internal sealed class MyBinding : IInputBinding, IOutputBinding
@@ -108,9 +108,9 @@ internal sealed class MyBinding : IInputBinding, IOutputBinding
 }
 ```
 
-## Register binding component
+## 注册绑定组件
 
-In the main program file (for example, `Program.cs`), register the binding component in an application service.
+在主程序文件中（例如，`Program.cs`），将绑定组件注册到应用程序服务中。
 
 ```csharp
 using Dapr.PluggableComponents;
@@ -128,5 +128,5 @@ app.Run();
 ```
 
 {{% alert title="Note" color="primary" %}}
-A component that implements both `IInputBinding` and `IOutputBinding` will be registered as both an input and output binding.
+实现`IInputBinding`和`IOutputBinding`接口的组件将同时注册为输入和输出绑定。
 {{% /alert %}}

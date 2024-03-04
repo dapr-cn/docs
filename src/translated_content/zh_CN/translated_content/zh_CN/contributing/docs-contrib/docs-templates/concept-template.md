@@ -1,30 +1,30 @@
 ---
 type: docs
-title: "Conceptual article template"
+title: "概念文章模板"
 linkTitle: "Conceptual template"
 weight: 10
-description: Suggested template and guidance for creating a concept article
+description: 创建概念文章的建议模板和指南
 ---
 
 
-## Contributing a new conceptual or overview article
+## 贡献新的概念或概述文章
 
-Conceptual (or overview) articles answer the questions:
+概念性（或概述）文章回答以下问题：
 
-- Why should you care about this feature?
-- What problems does it help you solve?
+- 你为什么要关心这个功能？
+- 它能帮他们解决什么问题?
 
-While a component, API, or SDK spec may help readers understand how to use or work with these features, a conceptual article provides more depth and context. Link off to the spec article, but try not to simply repeat the spec.
+虽然组件、API或SDK规范可以帮助读者了解如何使用或处理这些功能，但概念文章提供了更深入的内容和背景。 链接到规范文章，但尽量不要简单重复规范。
 
-When naming your conceptual article, make sure it is consistent with the spec in terms of names, parameters, and terminology. Make sure you update both as needed.
+在命名概念文章时，请确保其在名称、参数和术语方面与规范一致。 确保根据需要更新两者。
 
 {{% alert title="Note" color="primary" %}}
-This template is only a suggestion. Feel free to change based on your document's purpose.
+这个模板只是一个建议。 根据您的文档目的随意更改。
 {{% /alert %}}
 
-Learn more about [contributing to the Dapr docs]({{< ref contributing-docs.md >}}), like [front-matter]({{< ref "contributing-docs.md#front-matter" >}}) and [shortcodes]({{< ref "contributing-docs.md#shortcodes" >}}).
+了解有关[贡献给 Dapr 文档]({{< ref contributing-docs.md >}})的更多信息，如[front-matter]({{< ref "contributing-docs.md#front-matter" >}})和[shortcodes]({{< ref "contributing-docs.md#shortcodes" >}})。
 
-### Template
+### 模板
 
 ```md
 ---

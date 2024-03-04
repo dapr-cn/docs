@@ -6,24 +6,30 @@ weight: 20000
 description: "如何在具有 Windows 节点的 Kubernetes 集群上运行 Dapr 应用"
 ---
 
-Dapr 支持在带有 windows 节点的 kubernetes 集群上运行。 You can run your Dapr microservices exclusively on Windows, exclusively on Linux, or a combination of both. This is helpful to users who may be doing a piecemeal migration of a legacy application into a Dapr Kubernetes cluster.
+Dapr supports running your microservices on Kubernetes clusters on:
+- Windows
+- Linux
+- A combination of both
 
-Kubernetes 使用了一个叫做节点亲和性的概念，这样你就可以表示你的应用是想在 Linux 节点还是 Windows 节点上启动。 当部署到一个同时拥有 Windows 和 Linux 节点的集群时，你必须为你的应用提供亲和性规则，否则 Kubernetes 调度器可能会在错误的节点类型上启动你的应用。
+This is especially helpful during a piecemeal migration of a legacy application into a Dapr Kubernetes cluster.
 
-## 前提
+Kubernetes uses a concept called **node affinity** to denote whether you want your application to be launched on a Linux node or a Windows node. 当部署到一个同时拥有 Windows 和 Linux 节点的集群时，你必须为你的应用提供亲和性规则，否则 Kubernetes 调度器可能会在错误的节点类型上启动你的应用。
 
-您需要一个带有 Windows 节点的 Kubernetes 集群。 许多 Kubernetes 提供商支持自动配置启用 Windows 的 Kubernetes 集群。
+## 前期准备
 
-1. Follow your preferred provider's instructions for setting up a cluster with Windows enabled
+Before you begin, set up a Kubernetes cluster with Windows nodes. 许多 Kubernetes 提供商支持自动配置启用 Windows 的 Kubernetes 集群。
 
-- [Setting up Windows on Azure AKS](https://docs.microsoft.com/azure/aks/windows-container-cli)
-- [Setting up Windows on AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)
-- [Setting up Windows on Google Cloud GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster-windows)
+1. Follow your preferred provider's instructions for setting up a cluster with Windows enabled.
 
-2. 搭建好集群后，您应该看到它同时具有可用的 Windows 和 Linux 节点
+   - [Setting up Windows on Azure AKS](https://docs.microsoft.com/azure/aks/windows-container-cli)
+   - [Setting up Windows on AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html)
+   - [Setting up Windows on Google Cloud GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster-windows)
+
+1. Once you have set up the cluster, verify that both Windows and Linux nodes are available.
 
    ```bash
    kubectl get nodes -o wide
+
    NAME                                STATUS   ROLES   AGE     VERSION   INTERNAL-IP    EXTERNAL-IP      OS-IMAGE                         KERNEL-VERSION      CONTAINER-RUNTIME
    aks-nodepool1-11819434-vmss000000   Ready    agent   6d      v1.17.9   10.240.0.4     <none>        Ubuntu 16.04.6    LTS               4.15.0-1092-azure   docker://3.0.10+azure
    aks-nodepool1-11819434-vmss000001   Ready    agent   6d      v1.17.9   10.240.0.35    <none>        Ubuntu 16.04.6    LTS               4.15.0-1092-azure   docker://3.0.10+azure
@@ -31,28 +37,31 @@ Kubernetes 使用了一个叫做节点亲和性的概念，这样你就可以表
    akswin000000                        Ready    agent   6d      v1.17.9   10.240.0.66    <none>        Windows Server 2019    Datacenter   10.0.17763.1339     docker://19.3.5
    akswin000001                        Ready    agent   6d      v1.17.9   10.240.0.97    <none>        Windows Server 2019    Datacenter   10.0.17763.1339     docker://19.3.5
    ```
-## 安装 Dapr 控制面板
 
-如果您正在使用 Dapr CLI 或通过 Helm Chart 安装， 只需遵循正常的部署程序：[ 在 Kubernetes 集群上安装 Dapr]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >}})
+## Install the Dapr control plane
+
+If you are installing using the Dapr CLI or via a Helm chart, simply follow the normal deployment procedures: [Installing Dapr on a Kubernetes cluster]({{< ref "install-dapr-selfhost.md#installing-Dapr-on-a-kubernetes-cluster" >}})
 
 关联性将被自动设置为 `kubernetes.io/os=linux`。 这对于大多数用户来说是足够的，因为 Kubernetes 至少需要一个Linux节点池。
 
-> **注意：** Dapr 控制面板容器是为windows和linux构建和测试的，但是，我们一般建议使用 linux 控制面板容器。 它们往往较小，用户基础也大得多。
+{{% alert title="Note" color="primary" %}}
+Dapr control plane containers are built and tested for both Windows and Linux. However, it's recommended to use the Linux control plane containers, which tend to be smaller and have a much larger user base.
 
 如果您了解上述内容，但希望将 Dapr 控制平面部署到 Windows，则可以通过设置：
 
-```
+```sh
 helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 ```
+{{% /alert %}}
 
-## 安装 Dapr 应用程序
+## Install Dapr applications
 
 ### Windows applications
-为了在 Windows 上启动 Dapr 应用程序，您需要首先创建一个安装应用程序的 Docker 容器。 指南见 [开始：为容器准备 Windows](https://docs.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment)。 一旦你拥有一个带有应用程序的 Docker container，创建一个 deployment YAML 文件，节点亲和性设置为 kubernetes.io/os: windows。
 
-1. Create a deployment YAML
+1. [Follow the Microsoft documentation to create a Docker Windows container with your application installed](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment?tabs=dockerce).
 
-   Here is a sample deployment with nodeAffinity set to "windows". Modify as needed for your application.
+1. Once you've created a Docker container with your application, create a deployment YAML file with the node affinity set to `kubernetes.io/os: windows`. In the example `deploy_windows.yaml` deployment file below:
+
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
@@ -91,9 +100,8 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
                      values:
                      - windows
    ```
-   This deployment yaml will be the same as any other dapr application, with an additional spec.template.spec.affinity section as shown above.
 
-2. 部署到您的 Kubernetes 集群
+1. Deploy the YAML file to your Kubernetes cluster.
 
    ```bash
    kubectl apply -f deploy_windows.yaml
@@ -101,11 +109,10 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 
 ### Linux 应用程序
 
-如果您已经在 Linux 上有运行的 dapr 应用程序， 您仍然需要像以上添加亲和性规则，只不过要选择 linux 亲和性。
+If you already have a Dapr application that runs on Linux, you still need to add affinity rules.
 
-1. Create a deployment YAML
+1. Create a deployment YAML file with the node affinity set to `kubernetes.io/os: linux`. In the example `deploy_linux.yaml` deployment file below:
 
-   Here is a sample deployment with nodeAffinity set to "linux". Modify as needed for your application.
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
@@ -145,13 +152,17 @@ helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
                      - linux
    ```
 
-2. 部署到您的 Kubernetes 集群
+1. Deploy the YAML to your Kubernetes cluster.
 
    ```bash
    kubectl apply -f deploy_linux.yaml
    ```
 
-## 清理
+That's it!
+
+## Clean up
+
+To remove the deployments from this guide, run the following commands:
 
 ```bash
 kubectl delete -f deploy_linux.yaml

@@ -24,7 +24,7 @@ dapr mtls renew-certificate [flags]
 | 名称                            | 环境变量 | 默认值     | 说明                                                |
 | ----------------------------- | ---- | ------- | ------------------------------------------------- |
 | `--help`, `-h`                |      |         | 续订证书的帮助                                           |
-| `--kubernetes`, `-k`          |      | `false` | 支持平台                                              |
+| `--kubernetes`, `-k`          |      | `false` | supported platform|                               |
 | `--valid-until`               |      | 365 天   | 新创建的证书的有效期                                        |
 | `--restart`                   |      | false   | 重新启动 Dapr 控制平面服务（Sentry服务、Operator服务和 Placemen服务） |
 | `--timeout`                   |      | 300 秒   | 证书续订进程的超时时间                                       |
@@ -33,7 +33,7 @@ dapr mtls renew-certificate [flags]
 | `--issuer-private-key`        |      |         | 用户提供的 PEM 颁发私钥的文件路径                               |
 | `--private-key`               |      |         | 用户提供的root.key文件，用于生成根证书                           |
 
-### Examples
+### 示例
 
 #### 通过生成全新的证书续订证书
 为 Kubernetes 集群生成新的根证书和颁发者证书，默认有效期为 365 天。 证书不应用于 Dapr 控制平面。

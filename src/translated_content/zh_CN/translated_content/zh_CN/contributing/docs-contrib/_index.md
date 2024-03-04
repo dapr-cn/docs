@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Docs contributing guide"
+title: "文档贡献指南"
 linkTitle: "文档"
 weight: 400
-description: How to contribute to the Dapr docs
+description: 如何为 Dapr 文档做贡献
 ---
 

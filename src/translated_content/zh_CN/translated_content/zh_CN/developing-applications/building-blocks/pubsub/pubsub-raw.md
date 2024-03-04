@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "Publishing & subscribing messages without CloudEvents"
+title: "发布 & 订阅消息而不使用CloudEvents"
 linkTitle: "Messages without CloudEvents"
 weight: 2200
-description: "Learn when you might not use CloudEvents and how to disable them."
+description: "学习何时不使用CloudEvents以及如何禁用它们。"
 ---
 
-When adding Dapr to your application, some services may still need to communicate via pub/sub messages not encapsulated in CloudEvents, due to either compatibility reasons or some apps not using Dapr. These are referred to as "raw" pub/sub messages. Dapr enables apps to [publish and subscribe to raw events]({{< ref "pubsub-cloudevents.md#publishing-raw-messages" >}}) not wrapped in a CloudEvent for compatibility.
+当添加 Dapr 到你的应用时，由于兼容性原因或某些应用程序不使用 Dapr，一些服务可能仍需要通过未封装在 CloudEvents 中的发布/订阅消息进行通信。 这些被称为“原始”发布/订阅消息。 Dapr 使应用程序能够 [发布和订阅原始事件]({{< ref "pubsub-cloudevents.md#publishing-raw-messages" >}}) 未包装在 CloudEvent 中以实现兼容性。
 
-## Publishing raw messages
+## 发布原始消息
 
-Dapr apps are able to publish raw events to pub/sub topics without CloudEvent encapsulation, for compatibility with non-Dapr apps.
+Dapr 应用能够在没有 CloudEvent 封装的情况下将原始事件发布到 pub/sub，以便与非 Dapr 应用兼容。
 
-<img src="/images/pubsub_publish_raw.png" alt="Diagram showing how to publish with Dapr when subscriber does not use Dapr or CloudEvent" width=1000>
+<img src="/images/pubsub_publish_raw.png" alt="图表展示了当订阅者没有使用 Dapr 或者 CloudEvent 时如何用 Dapr 进行发布。" width=1000>
 
 {{% alert title="Warning" color="warning" %}}
 不使用 CloudEvents 将禁用对追踪、每个 messageId 的事件重复数据删除、content-type 元数据以及使用 CloudEvent 架构构建的任何其他功能的支持。
 {{% /alert %}}
 
-To disable CloudEvent wrapping, set the `rawPayload` metadata to `true` as part of the publishing request. This allows subscribers to receive these messages without having to parse the CloudEvent schema.
+要禁用 CloudEvent 包装，请将 `rawPayload` 元数据设置为 `true` ，作为发布的一部分。 这允许订阅者接收这些消息，而不必分析 CloudEvent 。
 
 {{< tabs curl "Python SDK" "PHP SDK">}}
 
@@ -66,15 +66,15 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 {{< /tabs >}}
 
-## Subscribing to raw messages
+## 订阅原始消息
 
-Dapr apps are also able to subscribe to raw events coming from existing pub/sub topics that do not use CloudEvent encapsulation.
+Dapr 应用程序还能够订阅来自不使用 CloudEvent 封装的现有 pub/sub 的原始事件。
 
-<img src="/images/pubsub_subscribe_raw.png" alt="Diagram showing how to subscribe with Dapr when publisher does not use Dapr or CloudEvent" width=1000>
+<img src="/images/pubsub_subscribe_raw.png" alt="图表展示了当发布者没有使用 Dapr 或者 CloudEvent 时如何用 Dapr 进行订阅。" width=1000>
 
 ### 以编程方式订阅原始事件
 
-When subscribing programmatically, add the additional metadata entry for `rawPayload` so the Dapr sidecar automatically wraps the payloads into a CloudEvent that is compatible with current Dapr SDKs.
+在使用编程式订阅时，添加 `rawPayload` 元数据条目，以便 Dapr sidecar 自动将有效载荷包裹到与当前 Dapr SDK 兼容的 CloudEvent 中。
 
 {{< tabs "Python" "PHP SDK" >}}
 
@@ -136,18 +136,19 @@ $app->start();
 
 {{< /tabs >}}
 
-## Declaratively subscribe to raw events
+## 声明式订阅原始事件
 
-Similarly, you can subscribe to raw events declaratively by adding the `rawPayload` metadata entry to your subscription specification.
+同样，您可以通过将 `rawPayload` 元数据条目添加到您的订阅规范中，以声明方式订阅原始事件。
 
 ```yaml
-apiVersion: dapr.io/v1alpha1
+apiVersion: dapr.io/v2alpha1
 kind: Subscription
 metadata:
   name: myevent-subscription
 spec:
   topic: deathStarStatus
-  route: /dsstatus
+  routes: 
+    default: /dsstatus
   pubsubname: pubsub
   metadata:
     rawPayload: "true"
@@ -158,6 +159,6 @@ scopes:
 
 ## 下一步
 
-- Learn more about [publishing and subscribing messages]({{< ref pubsub-overview.md >}})
+- 了解有关 [发布和订阅消息]({{< ref pubsub-overview.md >}})的更多信息
 - [发布/订阅组件列表]({{< ref supported-pubsub >}})
 - 阅读 [API 参考文档]({{< ref pubsub_api.md >}})

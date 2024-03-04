@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## Component format
-To setup JetStream pubsub create a component of type `pubsub.jetstream`. See \[this guide\]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+To set up JetStream pub/sub, create a component of type `pubsub.jetstream`. See the [pub/sub broker component file]({{< ref setup-pubsub.md >}}) to learn how ConsumerID is automatically generated. Read the [How-to: Publish and Subscribe guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pub/sub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -36,9 +36,9 @@ spec:
   - name: streamName
     value: "my-stream"
   - name: durableName 
-    value: "my-durable"
+    value: "my-durable-subscription"
   - name: queueGroupName
-    value: "my-queue"
+    value: "my-queue-group"
   - name: startSequence
     value: 1
   - name: startTime # In Unix format
@@ -73,33 +73,33 @@ spec:
 
 ## 元数据字段规范
 
-| Field             | 必填 | 详情                                         | 示例                               |
-| ----------------- |:--:| ------------------------------------------ | -------------------------------- |
-| natsURL           | 是  | NATS server address URL                    | `"nats://localhost:4222"`        |
-| jwt               | 否  | NATS 去中心化身份验证 JWT                          | `"eyJhbGciOiJ...6yJV_adQssw5c"`  |
-| seedKey           | 否  | NATS 去中心化身份验证秘钥种子。                         | `"SUACS34K232O...5Z3POU7BNIL4Y"` |
-| tls_client_cert | 否  | NATS TLS Client Authentication Certificate | `"/path/to/tls.crt"`             |
-| tls_client_key  | 否  | NATS TLS Client Authentication Key         | `"/path/to/tls.key"`             |
-| token             | 否  | [NATS token based authentication][]        | `"my-token"`                     |
-| name              | 否  | NATS connection name                       | `"my-conn-name"`                 |
-| streamName        | 否  | Name of the JetStream Stream to bind to    | `"my-stream"`                    |
-| durableName       | 否  | [Durable name][]                           | `"my-durable"`                   |
-| queueGroupName    | 否  | Queue group name                           | `"my-queue"`                     |
-| startSequence     | 否  | [Start Sequence][]                         | `1`                              |
-| startTime         | 否  | [Start Time][] in Unix format              | `1630349391`                     |
-| flowControl       | 否  | [Flow Control][]                           | `true`                           |
-| ackWait           | 否  | [Ack Wait][]                               | `10s`                            |
-| maxDeliver        | 否  | [Max Deliver][]                            | `15`                             |
-| backOff           | 否  | [BackOff][]                                | `"50ms, 1s, 5s, 10s"`            |
-| maxAckPending     | 否  | [Max Ack Pending][]                        | `5000`                           |
-| replicas          | 否  | [Replicas][]                               | `3`                              |
-| memoryStorage     | 否  | [Memory Storage][]                         | `false`                          |
-| rateLimit         | 否  | [Rate Limit][]                             | `1024`                           |
-| heartbeat         | 否  | [Heartbeat][]                              | `10s`                            |
-| ackPolicy         | 否  | [Ack Policy][]                             | `explicit`                       |
-| deliverPolicy     | 否  | One of: all, last, new, sequence, time     | `all`                            |
-| domain            | 否  | [JetStream Leafondes]                      | `HUB`                            |
-| apiPrefix         | 否  | [JetStream Leafnodes]                      | `PREFIX`                         |
+| Field             | Required | 详情                                         | 示例                               |
+| ----------------- |:--------:| ------------------------------------------ | -------------------------------- |
+| natsURL           |    是     | NATS server address URL                    | `"nats://localhost:4222"`        |
+| jwt               |    否     | NATS 去中心化身份验证 JWT                          | `"eyJhbGciOiJ...6yJV_adQssw5c"`  |
+| seedKey           |    否     | NATS 去中心化身份验证秘钥种子。                         | `"SUACS34K232O...5Z3POU7BNIL4Y"` |
+| tls_client_cert |    否     | NATS TLS Client Authentication Certificate | `"/path/to/tls.crt"`             |
+| tls_client_key  |    否     | NATS TLS Client Authentication Key         | `"/path/to/tls.key"`             |
+| token             |    否     | [NATS token based authentication][]        | `"my-token"`                     |
+| name              |    否     | NATS connection name                       | `"my-conn-name"`                 |
+| streamName        |    否     | Name of the JetStream Stream to bind to    | `"my-stream"`                    |
+| durableName       |    否     | [Durable name][]                           | `"my-durable"`                   |
+| queueGroupName    |    否     | Queue group name                           | `"my-queue"`                     |
+| startSequence     |    否     | [Start Sequence][]                         | `1`                              |
+| startTime         |    否     | [Start Time][] in Unix format              | `1630349391`                     |
+| flowControl       |    否     | [Flow Control][]                           | `true`                           |
+| ackWait           |    否     | [Ack Wait][]                               | `10s`                            |
+| maxDeliver        |    否     | [Max Deliver][]                            | `15`                             |
+| backOff           |    否     | [BackOff][]                                | `"50ms, 1s, 5s, 10s"`            |
+| maxAckPending     |    否     | [Max Ack Pending][]                        | `5000`                           |
+| replicas          |    否     | [Replicas][]                               | `3`                              |
+| memoryStorage     |    否     | [Memory Storage][]                         | `false`                          |
+| rateLimit         |    否     | [Rate Limit][]                             | `1024`                           |
+| heartbeat         |    否     | [Heartbeat][]                              | `10s`                            |
+| ackPolicy         |    否     | [Ack Policy][]                             | `explicit`                       |
+| deliverPolicy     |    否     | One of: all, last, new, sequence, time     | `all`                            |
+| domain            |    否     | [JetStream Leafondes]                      | `HUB`                            |
+| apiPrefix         |    否     | [JetStream Leafnodes]                      | `PREFIX`                         |
 
 ## 创建NATS服务器
 
@@ -141,6 +141,31 @@ It is essential to create a NATS JetStream for a specific subject. For example, 
 
 ```bash
 nats -s localhost:4222 stream add myStream --subjects mySubject
+```
+
+## Example: Competing consumers pattern
+
+Let's say you'd like each message to be processed by only one application or pod with the same app-id. Typically, the `consumerID` metadata spec helps you define competing consumers.
+
+Since `consumerID` is not supported in NATS JetStream, you need to specify `durableName` and `queueGroupName` to achieve the competing consumers pattern. For example:
+
+```yml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: pubsub
+spec:
+  type: pubsub.jetstream
+  version: v1
+  metadata:
+  - name: name
+    value: "my-conn-name"
+  - name: streamName
+    value: "my-stream"
+  - name: durableName 
+    value: "my-durable-subscription"
+  - name: queueGroupName
+    value: "my-queue-group"
 ```
 
 ## 相关链接

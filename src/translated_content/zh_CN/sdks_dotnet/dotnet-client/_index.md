@@ -7,21 +7,21 @@ description: 如何使用 Dapr .NET SDK 启动和运行
 no_list: true
 ---
 
-The Dapr client package allows you to interact with other Dapr applications from a .NET application.
+Dapr 客户端包允许您从 .NET 应用程序中与其他 Dapr 应用程序进行交互。
 
 {{% alert title="Note" color="primary" %}}
- If you haven't already, [try out one of the quickstarts]({{< ref quickstarts >}}) for a quick walk-through on how to use the Dapr .NET SDK with an API building block.
+ 如果您还没有， [试用其中一个快速入门]({{< ref quickstarts >}}) 快速了解如何将 Dapr .NET SDK 与 API 构建块一起使用。
 
 {{% /alert %}}
 
 
 ## 构建块
 
-The .NET SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
+.NET SDK 允许您与所有的 [Dapr构建块]({{< ref building-blocks >}})接口进行交互。
 
 ### 调用服务
 
-You can either use the `DaprClient` or `System.Net.Http.HttpClient` to invoke your services.
+您可以使用 `DaprClient` 或 `System.Net.Http.HttpClient` 调用您的服务。
 
 {{< tabs SDK HTTP>}}
 
@@ -104,8 +104,8 @@ await client.PublishEventAsync(pubsubName, "deposit", eventData, cancellationTok
 Console.WriteLine("Published deposit event!");
 ```
 
-- For a full list of state operations visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
-- Visit [.NET SDK examples](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe) for code samples and instructions to try out pub/sub
+- 有关状态操作的完整列表，请访问[操作方法: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
+- 请访问[.NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/client/PublishSubscribe)，获取代码示例和说明，以试用 Pub/sub（发布/订阅）。
 
 ### 与输出绑定交互
 
@@ -125,9 +125,9 @@ var email = new
 await client.InvokeBindingAsync("send-email", "create", email);
 ```
 
-- For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
+- 有关输出绑定的完整指南，请访问[操作方法：使用绑定]({{< ref howto-bindings.md >}})。
 
-### Retrieve secrets
+### 检索秘密
 
 {{< tabs Multi-value-secret Single-value-secret >}}
 
@@ -163,9 +163,9 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 
 {{< /tabs >}}
 
-- For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
+- 有关密钥的完整指南，请访问[操作方法：检索密钥]({{< ref howto-secrets.md >}})。
 
-### 获取配置键（Alpha）
+### 获取配置键
 ```csharp
 var client = new DaprClientBuilder().Build();
 
@@ -182,7 +182,7 @@ foreach (var item in configItems)
 }
 ```
 
-### Subscribe to Configuration Keys (Alpha)
+### 订阅配置键
 ```csharp
 var client = new DaprClientBuilder().Build();
 
@@ -199,7 +199,65 @@ await foreach (var items in subscribeConfigurationResponse.Source.WithCancellati
 }
 ```
 
-### Manage workflow instances (Alpha)
+### 分布式锁（Alpha）
+
+#### 获取锁
+
+```csharp
+using System;
+using Dapr.Client;
+
+namespace LockService
+{
+    class Program
+    {
+        [Obsolete("Distributed Lock API is in Alpha, this can be removed once it is stable.")]
+        static async Task Main(string[] args)
+        {
+            var daprLockName = "lockstore";
+            var fileName = "my_file_name";
+            var client = new DaprClientBuilder().Build();
+
+            // Locking with this approach will also unlock it automatically, as this is a disposable object
+            await using (var fileLock = await client.Lock(DAPR_LOCK_NAME, fileName, "random_id_abc123", 60))
+            {
+                if (fileLock.Success)
+                {
+                    Console.WriteLine("Success");
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to lock {fileName}.");
+                }
+            }
+        }
+    }
+}
+```
+
+#### 释放现有锁
+
+```csharp
+using System;
+using Dapr.Client;
+
+namespace LockService
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var daprLockName = "lockstore";
+            var client = new DaprClientBuilder().Build();
+
+            var response = await client.Unlock(DAPR_LOCK_NAME, "my_file_name", "random_id_abc123"));
+            Console.WriteLine(response.status);
+        }
+    }
+}
+```
+
+### 管理工作流实例（Alpha）
 
 ```csharp
 var daprClient = new DaprClientBuilder().Build();
@@ -220,11 +278,11 @@ var getResponse = await daprClient.GetWorkflowAsync(instanceId, workflowComponen
 ```
 
 ## Sidecar APIs
-### Sidecar Health
-The .NET SDK provides a way to poll for the sidecar health, as well as a convenience method to wait for the sidecar to be ready.
+### Sidecar 健康
+.NET SDK 提供了一种方式来轮询 sidecar 的健康状态，以及一个方便的方法来等待 sidecar 就绪。
 
-#### Poll for health
-This health endpoint returns true when both the sidecar and your application are up (fully initialized).
+#### 健康轮询
+当旁车和您的应用程序都处于运行状态（完全初始化）时，此健康端点返回true。
 
 ```csharp
 var client = new DaprClientBuilder().Build();
@@ -237,10 +295,10 @@ if (isDaprReady)
 }
 ```
 
-#### Poll for health (outbound)
-This health endpoint returns true when Dapr has initialized all its components, but may not have finished setting up a communication channel with your application.
+#### 健康轮询 (出站)
+当 Dapr 初始化所有组件时，此健康端点返回 true，但可能尚未完成与您的应用程序建立通信渠道的设置。
 
-This is best used when you want to utilize a Dapr component in your startup path, for instance, loading secrets from a secretstore.
+当您希望在启动路径中利用Dapr组件时，这是最佳选择，例如从secretstore加载密钥。
 
 ```csharp
 var client = new DaprClientBuilder().Build();
@@ -253,8 +311,8 @@ if (isDaprComponentsReady)
 }
 ```
 
-#### Wait for sidecar
-The `DaprClient` also provides a helper method to wait for the sidecar to become healthy (components only). When using this method, it is recommended to include a `CancellationToken` to allow for the request to timeout. Below is an example of how this is used in the `DaprSecretStoreConfigurationProvider`.
+#### 等待 sidecar
+`DaprClient`还提供了一个辅助方法，用于等待 sidecar 变为健康状态（仅适用于组件）。 在使用该方法时，建议包括一个`CancellationToken`以便请求超时。 下面是一个示例，展示了如何在`DaprSecretStoreConfigurationProvider`中使用它。
 
 ```csharp
 // Wait for the Dapr sidecar to report healthy before attempting use Dapr components.
@@ -266,11 +324,11 @@ using (var tokenSource = new CancellationTokenSource(sidecarWaitTimeout))
 // Perform Dapr component operations here i.e. fetching secrets.
 ```
 
-### Shutdown the sidecar
+### 关闭 sidecar
 ```csharp
 var client = new DaprClientBuilder().Build();
 await client.ShutdownSidecarAsync();
 ```
 
 ## 相关链接
-- [.NET SDK examples](https://github.com/dapr/dotnet-sdk/tree/master/examples)
+- [.NET SDK 示例](https://github.com/dapr/dotnet-sdk/tree/master/examples)

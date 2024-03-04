@@ -9,6 +9,8 @@ aliases:
 
 ## Component format
 
+To set up RabbitMQ pub/sub, create a component of type `pubsub.rabbitmq`. See the [pub/sub broker component file]({{< ref setup-pubsub.md >}}) to learn how ConsumerID is automatically generated. Read the [How-to: Publish and Subscribe guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pub/sub configuration.
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -18,8 +20,16 @@ spec:
   type: pubsub.rabbitmq
   version: v1
   metadata:
-  - name: host
+  - name: connectionString
     value: "amqp://localhost:5672"
+  - name: protocol
+    value: amqp  
+  - name: hostname
+    value: localhost 
+  - name: username
+    value: username
+  - name: password
+    value: password  
   - name: consumerID
     value: myapp
   - name: durable
@@ -48,6 +58,14 @@ spec:
     value: 10485760
   - name: exchangeKind
     value: fanout
+  - name: saslExternal
+    value: false
+  - name: ttlInSeconds
+    value: 60
+  - name: clientName
+    value: {podName}
+  - name: heartBeat
+    value: 10s
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -56,26 +74,34 @@ spec:
 
 ## 元数据字段规范
 
-| Field             |    必填    | 详情                                                                                                                                                                                                                                                    | 示例                                                                                                                                                                                                                  |
-| ----------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| host              |    是     | Connection-string for the rabbitmq host                                                                                                                                                                                                               | `amqp://user:pass@localhost:5672`                                                                                                                                                                                   |
-| consumerID        |    否     | 消费者ID，也叫做消费者标签，将一个或多个消费者组成一个组。 具有相同消费者 ID 的消费者作为一个虚拟消费者工作，即消息仅由组中的消费者处理一次。 如果未设置使用者 ID，Dapr 运行时会将其设置为 Dapr 应用程序 ID 。                                                                                                                                  |                                                                                                                                                                                                                     |
-| durable           |    否     | Whether or not to use [durable](https://www.rabbitmq.com/queues.html#durability) queues. 默认值为 `"false"`                                                                                                                                               | `"true"`, `"false"`                                                                                                                                                                                                 |
-| deletedWhenUnused |    否     | Whether or not the queue should be configured to [auto-delete](https://www.rabbitmq.com/queues.html) Defaults to `"true"`                                                                                                                             | `"true"`, `"false"`                                                                                                                                                                                                 |
-| autoAck           |    否     | Whether or not the queue consumer should [auto-ack](https://www.rabbitmq.com/confirms.html) messages. 默认值为 `"false"`                                                                                                                                  | `"true"`, `"false"`                                                                                                                                                                                                 |
-| deliveryMode      |    否     | Persistence mode when publishing messages. Defaults to `"0"`. RabbitMQ treats `"2"` as persistent, all other numbers as non-persistent                                                                                                                | `"0"`, `"2"`                                                                                                                                                                                                        |
-| requeueInFailure  |    否     | Whether or not to requeue when sending a [negative acknowledgement](https://www.rabbitmq.com/nack.html) in case of a failure. 默认值为 `"false"`                                                                                                          | `"true"`, `"false"`                                                                                                                                                                                                 |
-| prefetchCount     |    否     | Number of messages to [prefetch](https://www.rabbitmq.com/consumer-prefetch.html). Consider changing this to a non-zero value for production environments. Defaults to `"0"`, which means that all available messages will be pre-fetched.            | `"2"`                                                                                                                                                                                                               |
-| publisherConfirm  |    否     | If enabled, client waits for [publisher confirms](https://www.rabbitmq.com/confirms.html#publisher-confirms) after publishing a message. 默认值为 `"false"`                                                                                               | `"true"`, `"false"`                                                                                                                                                                                                 |
-| reconnectWait     |    否     | How long to wait (in seconds) before reconnecting if a connection failure occurs                                                                                                                                                                      | `"0"`                                                                                                                                                                                                               |
-| concurrencyMode   |    否     | `parallel` is the default, and allows processing multiple messages in parallel (limited by the `app-max-concurrency` annotation, if configured). Set to `single` to disable parallel processing. In most situations there's no reason to change this. | `parallel`, `single`                                                                                                                                                                                                |
-| enableDeadLetter  |    否     | Enable forwarding Messages that cannot be handled to a dead-letter topic. 默认值为 `"false"`                                                                                                                                                              | `"true"`, `"false"`                                                                                                                                                                                                 |
-| maxLen            |    否     | The maximum number of messages of a queue and its dead letter queue (if dead letter enabled). If both `maxLen` and `maxLenBytes` are set then both will apply; whichever limit is hit first will be enforced.  Defaults to no limit.                  | `"1000"`                                                                                                                                                                                                            |
-| maxLenBytes       |    否     | Maximum length in bytes of a queue and its dead letter queue (if dead letter enabled). If both `maxLen` and `maxLenBytes` are set then both will apply; whichever limit is hit first will be enforced.  Defaults to no limit.                         | `"1048576"`                                                                                                                                                                                                         |
-| exchangeKind      |    否     | Exchange kind of the rabbitmq exchange.  Defaults to `"fanout"`.                                                                                                                                                                                      | `"fanout"`,`"topic"`                                                                                                                                                                                                |
-| caCert            | 使用TLS时需要 | 输入/输出                                                                                                                                                                                                                                                 | Certificate Authority (CA) certificate in PEM format for verifying server TLS certificates. | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`                              |
-| clientCert        | 使用TLS时需要 | 输入/输出                                                                                                                                                                                                                                                 | TLS client certificate in PEM format. Must be used with `clientKey`. | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`                                                     |
-| clientKey         | 使用TLS时需要 | 输入/输出                                                                                                                                                                                                                                                 | TLS client key in PEM format. Must be used with `clientCert`. Can be `secretKeyRef` to use a secret reference. | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"` |
+| Field             | Required | 详情                                                                                                                                                                                                                                                                                                                                      | 示例                                                                                                 |
+| ----------------- |:--------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| connectionString  |    Y*    | The RabbitMQ connection string. *Mutally exclusive with protocol, hostname, username, password field                                                                                                                                                                                                                                    | `amqp://user:pass@localhost:5672`                                                                  |
+| protocol          |    N*    | The RabbitMQ protocol. *Mutally exclusive with connectionString field                                                                                                                                                                                                                                                                   | `amqp`                                                                                             |
+| hostname          |    N*    | The RabbitMQ hostname. *Mutally exclusive with connectionString field                                                                                                                                                                                                                                                                   | `localhost`                                                                                        |
+| username          |    N*    | The RabbitMQ username. *Mutally exclusive with connectionString field                                                                                                                                                                                                                                                                   | `username`                                                                                         |
+| password          |    N*    | The RabbitMQ password. *Mutally exclusive with connectionString field                                                                                                                                                                                                                                                                   | `password`                                                                                         |
+| consumerID        |    否     | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. |                                                                                                    |
+| durable           |    否     | Whether or not to use [durable](https://www.rabbitmq.com/queues.html#durability) queues. 默认值为 `"false"`                                                                                                                                                                                                                                 | `"true"`, `"false"`                                                                                |
+| deletedWhenUnused |    否     | Whether or not the queue should be configured to [auto-delete](https://www.rabbitmq.com/queues.html) Defaults to `"true"`                                                                                                                                                                                                               | `"true"`, `"false"`                                                                                |
+| autoAck           |    否     | Whether or not the queue consumer should [auto-ack](https://www.rabbitmq.com/confirms.html) messages. 默认值为 `"false"`                                                                                                                                                                                                                    | `"true"`, `"false"`                                                                                |
+| deliveryMode      |    否     | Persistence mode when publishing messages. Defaults to `"0"`. RabbitMQ treats `"2"` as persistent, all other numbers as non-persistent                                                                                                                                                                                                  | `"0"`, `"2"`                                                                                       |
+| requeueInFailure  |    否     | Whether or not to requeue when sending a [negative acknowledgement](https://www.rabbitmq.com/nack.html) in case of a failure. 默认值为 `"false"`                                                                                                                                                                                            | `"true"`, `"false"`                                                                                |
+| prefetchCount     |    否     | Number of messages to [prefetch](https://www.rabbitmq.com/consumer-prefetch.html). Consider changing this to a non-zero value for production environments. Defaults to `"0"`, which means that all available messages will be pre-fetched.                                                                                              | `"2"`                                                                                              |
+| publisherConfirm  |    否     | If enabled, client waits for [publisher confirms](https://www.rabbitmq.com/confirms.html#publisher-confirms) after publishing a message. 默认值为 `"false"`                                                                                                                                                                                 | `"true"`, `"false"`                                                                                |
+| reconnectWait     |    否     | How long to wait (in seconds) before reconnecting if a connection failure occurs                                                                                                                                                                                                                                                        | `"0"`                                                                                              |
+| concurrencyMode   |    否     | `parallel` is the default, and allows processing multiple messages in parallel (limited by the `app-max-concurrency` annotation, if configured). Set to `single` to disable parallel processing. In most situations there's no reason to change this.                                                                                   | `parallel`, `single`                                                                               |
+| enableDeadLetter  |    否     | Enable forwarding Messages that cannot be handled to a dead-letter topic. 默认值为 `"false"`                                                                                                                                                                                                                                                | `"true"`, `"false"`                                                                                |
+| maxLen            |    否     | The maximum number of messages of a queue and its dead letter queue (if dead letter enabled). If both `maxLen` and `maxLenBytes` are set then both will apply; whichever limit is hit first will be enforced.  Defaults to no limit.                                                                                                    | `"1000"`                                                                                           |
+| maxLenBytes       |    否     | Maximum length in bytes of a queue and its dead letter queue (if dead letter enabled). If both `maxLen` and `maxLenBytes` are set then both will apply; whichever limit is hit first will be enforced.  Defaults to no limit.                                                                                                           | `"1048576"`                                                                                        |
+| exchangeKind      |    否     | Exchange kind of the rabbitmq exchange.  Defaults to `"fanout"`.                                                                                                                                                                                                                                                                        | `"fanout"`,`"topic"`                                                                               |
+| saslExternal      |    否     | With TLS, should the username be taken from an additional field (for example, CN). See [RabbitMQ Authentication Mechanisms](https://www.rabbitmq.com/access-control.html#mechanisms).  Defaults to `"false"`.                                                                                                                           | `"true"`, `"false"`                                                                                |
+| ttlInSeconds      |    否     | Set message TTL at the component level, which can be overwritten by message level TTL per request.                                                                                                                                                                                                                                      | `"60"`                                                                                             |
+| caCert            | 使用TLS时需要 | Certificate Authority (CA) certificate in PEM format for verifying server TLS certificates.                                                                                                                                                                                                                                             | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
+| clientCert        | 使用TLS时需要 | TLS client certificate in PEM format. Must be used with `clientKey`.                                                                                                                                                                                                                                                                    | `"-----BEGIN CERTIFICATE-----\n<base64-encoded DER>\n-----END CERTIFICATE-----"`           |
+| clientKey         | 使用TLS时需要 | TLS client key in PEM format. Must be used with `clientCert`. Can be `secretKeyRef` to use a secret reference.                                                                                                                                                                                                                          | `"-----BEGIN RSA PRIVATE KEY-----\n<base64-encoded PKCS8>\n-----END RSA PRIVATE KEY-----"` |
+| clientName        |    否     | This RabbitMQ [client-provided connection name](https://www.rabbitmq.com/connections.html#client-provided-names) is a custom identifier. If set, the identifier is mentioned in RabbitMQ server log entries and management UI. Can be set to {uuid}, {podName}, or {appID}, which is replaced by Dapr runtime to the real value.        | `"app1"`, `{uuid}`, `{podName}`, `{appID}`                                                         |
+| heartBeat         |    否     | Defines the heartbeat interval with the server, detecting the aliveness of the peer TCP connection with the RabbitMQ server. Defaults to `10s` .                                                                                                                                                                                        | `"10s"`                                                                                            |
 
 
 ## Communication using TLS
@@ -121,6 +147,8 @@ spec:
     value: 10485760
   - name: exchangeKind
     value: fanout
+  - name: saslExternal
+    value: false
   - name: caCert
     value: ${{ myLoadedCACert }}
   - name: clientCert
@@ -351,7 +379,7 @@ To set a priority on a message, add the publish metadata key `maxPriority` to th
 {{% codetab %}}
 
 ```bash
-curl -X POST http://localhost:3601/v1.0/publish/order-pub-sub/orders?metadata.maxPriority=3 -H "Content-Type: application/json" -d '{"orderId": "100"}'
+curl -X POST http://localhost:3601/v1.0/publish/order-pub-sub/orders?metadata.priority=3 -H "Content-Type: application/json" -d '{"orderId": "100"}'
 ```
 
 {{% /codetab %}}
@@ -365,7 +393,7 @@ with DaprClient() as client:
             topic_name=TOPIC_NAME,
             data=json.dumps(orderId),
             data_content_type='application/json',
-            metadata= { 'maxPriority': '3' })
+            metadata= { 'priority': '3' })
 ```
 
 {{% /codetab %}}
@@ -373,7 +401,7 @@ with DaprClient() as client:
 {{% codetab %}}
 
 ```javascript
-await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId, { 'maxPriority': '3' });
+await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId, { 'priority': '3' });
 ```
 
 {{% /codetab %}}
@@ -381,11 +409,37 @@ await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId, { 'maxPriority': '
 {{% codetab %}}
 
 ```go
-client.PublishEvent(ctx, PUBSUB_NAME, TOPIC_NAME, []byte(strconv.Itoa(orderId)), map[string]string{"maxPriority": "3"})
+client.PublishEvent(ctx, PUBSUB_NAME, TOPIC_NAME, []byte(strconv.Itoa(orderId)), map[string]string{"priority": "3"})
 ```
 {{% /codetab %}}
 
 {{< /tabs >}}
+
+## Use quorum queues
+
+By default, Dapr creates `classic` queues. To create `quorum` queues, add the following metadata to your pub/sub [subscription]({{< ref subscription-schema.md >}})
+
+```yaml
+apiVersion: dapr.io/v2alpha1
+kind: Subscription
+metadata:
+  name: pubsub
+spec:
+  topic: checkout
+  routes: 
+    default: /orders
+  pubsubname: order-pub-sub
+  metadata:
+    queueType: quorum
+```
+
+## Time-to-live
+
+You can set a time-to-live (TTL) value at either the message or component level. Set default component-level TTL using the component spec `ttlInSeconds` field in your component.
+
+{{% alert title="Note" color="primary" %}}
+If you set both component-level and message-level TTL, the default component-level TTL is ignored in favor of the message-level TTL.
+{{% /alert %}}
 
 ## 相关链接
 

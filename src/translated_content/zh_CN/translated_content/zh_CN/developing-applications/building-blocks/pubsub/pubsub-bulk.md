@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "Publish and subscribe to bulk messages"
-linkTitle: "Publish and subscribe to bulk messages"
+title: "发布和订阅批量消息"
+linkTitle: "发布和订阅批量消息"
 weight: 7100
-description: "Learn how to use the bulk publish and subscribe APIs in Dapr."
+description: "了解如何在 Dapr 中使用批量发布和订阅 API。"
 ---
 
 {{% alert title="alpha" color="warning" %}}
-The bulk publish and subscribe APIs are in **alpha** stage.
+批量发布和订阅 API 位于 **alpha** 阶段。
 {{% /alert %}}
 
-With the bulk publish and subscribe APIs, you can publish and subscribe to multiple messages in a single request. When writing applications that need to send or receive a large number of messages, using bulk operations allows achieving high throughput by reducing the overall number of requests between the Dapr sidecar, the application, and the underlying pub/sub broker.
+使用批量发布和订阅API，您可以在一个请求中发布和订阅多个消息。 当编写需要发送或接收大量消息的应用程序时，使用批量操作可以通过减少 Dapr sidecar、应用程序和底层发布/订阅代理之间的请求总数来实现高吞吐量。
 
-## Publishing messages in bulk
+## 批量发布消息
 
-### Restrictions when publishing messages in bulk
+### 批量发布消息时的限制
 
-The bulk publish API allows you to publish multiple messages to a topic in a single request. It is *non-transactional*, i.e., from a single bulk request, some messages can succeed and some can fail. If any of the messages fail to publish, the bulk publish operation returns a list of failed messages.
+批量发布API允许您在单个请求中发布多条消息到一个主题。 它是 *个非事务性*，即从一个单一的批量请求中，一些消息可以成功，一些消息可以失败。 如果任何消息发布失败，批量发布操作将返回一个失败消息列表。
 
-The bulk publish operation also does not guarantee any ordering of messages.
+批量发布操作也不能保证消息的顺序。
 
 ### 示例
 
@@ -81,13 +81,13 @@ async function start() {
     {
       entryID: "entry-2",
       contentType: "application/cloudevents+json",
-      event: { 
+      event: {
         specversion: "1.0",
         source: "/some/source",
         type: "example",
-        id: "1234", 
-        data: "foo message 2", 
-        datacontenttype: "text/plain" 
+        id: "1234",
+        data: "foo message 2",
+        datacontenttype: "text/plain"
       },
     },
     {
@@ -115,7 +115,7 @@ using System.Collections.Generic;
 using Dapr.Client;
 
 const string PubsubName = "my-pubsub-name";
-const string TopicName = "topic-a";        
+const string TopicName = "topic-a";
 IReadOnlyList<object> BulkPublishData = new List<object>() {
     new { Id = "17", Amount = 10m },
     new { Id = "18", Amount = 20m },
@@ -130,10 +130,10 @@ if (res == null) {
 }
 if (res.FailedEntries.Count > 0)
 {
-    Console.WriteLine("Some events failed to be published!");   
+    Console.WriteLine("Some events failed to be published!");
     foreach (var failedEntry in res.FailedEntries)
     {
-        Console.WriteLine("EntryId: " + failedEntry.Entry.EntryId + " Error message: " + 
+        Console.WriteLine("EntryId: " + failedEntry.Entry.EntryId + " Error message: " +
                           failedEntry.ErrorMessage);
     }
 }
@@ -205,7 +205,7 @@ func main() {
         {
             "entryId": "b1f40bd6-4af2-11ed-b878-0242ac120002",
             "event":  {
-                "message": "second JSON message"   
+                "message": "second JSON message"
             },
             "contentType": "application/json"
         }
@@ -236,7 +236,7 @@ curl -X POST http://localhost:3500/v1.0-alpha1/publish/bulk/my-pubsub-name/topic
         {
             "entryId": "b1f40bd6-4af2-11ed-b878-0242ac120002",
             "event":  {
-                "message": "second JSON message"   
+                "message": "second JSON message"
             },
             "contentType": "application/json"
         },
@@ -258,7 +258,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Uri 'http://loca
         {
             "entryId": "b1f40bd6-4af2-11ed-b878-0242ac120002",
             "event":  {
-                "message": "second JSON message"   
+                "message": "second JSON message"
             },
             "contentType": "application/json"
         },
@@ -269,14 +269,14 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Uri 'http://loca
 
 {{< /tabs >}}
 
-## Subscribing messages in bulk
+## 批量订阅消息
 
-The bulk subscribe API allows you to subscribe multiple messages from a topic in a single request. As we know from [How to: Publish & Subscribe to topics]({{< ref howto-publish-subscribe.md >}}), there are two ways to subscribe to topic(s):
+批量订阅API允许您在单个请求中从一个主题订阅多条消息。 正如我们从 [如何：发布 & 订阅主题]({{< ref howto-publish-subscribe.md >}})中所了解的那样，有两种订阅主题的方式：
 
-- **Declaratively** - subscriptions are defined in an external file.
-- **Programmatically** - subscriptions are defined in code.
+- **声明式**，其中订阅定义在外部文件中。
+- **编程方式**，订阅在用户代码中定义
 
-To Bulk Subscribe to topic(s), we just need to use `bulkSubscribe` spec attribute, something like following:
+要批量订阅主题，我们只需要使用 `bulkSubscribe` spec属性，类似以下方式:
 
 ```yaml
 apiVersion: dapr.io/v2alpha1
@@ -285,7 +285,7 @@ metadata:
   name: order-pub-sub
 spec:
   topic: orders
-  routes: 
+  routes:
     default: /checkout
   pubsubname: order-pub-sub
   bulkSubscribe:
@@ -297,39 +297,46 @@ scopes:
 - checkout
 ```
 
-In the example above, `bulkSubscribe` is _optional_. If you use `bulkSubscribe`, then:
-- `enabled` is mandatory and enables or disables bulk subscriptions on this topic
-- You can optionally configure the max number of messages (`maxMessagesCount`) delivered in a bulk message. Default value of `maxMessagesCount` for components not supporting bulk subscribe is 100 i.e. for default bulk events between App and Dapr. Please refer [How components handle publishing and subscribing to bulk messages]({{< ref pubsub-bulk >}}). If a component supports bulk subscribe, then default value for this parameter can be found in that component doc. Please refer [Supported components]({{< ref pubsub-bulk >}}).
-- You can optionally provide the max duration to wait (`maxAwaitDurationMs`) before a bulk message is sent to the app. Default value of `maxAwaitDurationMs` for components not supporting bulk subscribe is 1000 i.e. for default bulk events between App and Dapr. Please refer [How components handle publishing and subscribing to bulk messages]({{< ref pubsub-bulk >}}). If a component supports bulk subscribe, then default value for this parameter can be found in that component doc. Please refer [Supported components]({{< ref pubsub-bulk >}}).
+在上面的示例中， `bulkSubscribe` 是 _可选的_。 如果您使用 `bulkSubscribe`，那么：
+- `enabled` 是必填的，并且在此主题上启用或禁用批量订阅
+- 您可以选择配置每个批量消息中传递的最大消息数（`maxMessagesCount`）。 不支持批量订阅的组件的 `maxMessagesCount` 的默认值为100，即默认情况下 App 和 Dapr 之间的批量事件数量为100。 请参考 [如何处理组件发布和订阅批量消息]({{< ref pubsub-bulk >}})。 如果组件支持批量订阅，则可以在该组件文档中找到此参数的默认值。
+- 您可以选择提供最长等待时间（`maxAwaitDurationMs`）在批量消息发送到应用程序之前。 不支持批量订阅的组件的 `maxAwaitDurationMs` 的默认值为1000，即默认情况下 App 和 Dapr 之间的批量事件。 请参考 [如何处理组件发布和订阅批量消息]({{< ref pubsub-bulk >}})。 如果组件支持批量订阅，则可以在该组件文档中找到此参数的默认值。
 
-The application receives an `EntryId` associated with each entry (individual message) in the bulk message. This `EntryId` must be used by the app to communicate the status of that particular entry. If the app fails to notify on an `EntryId` status, it's considered a `RETRY`.
+应用程序收到一个 `EntryId` 与批量消息中的每个条目（单个消息）相关联。 这 `EntryId` 必须由应用程序用于传达该特定条目的状态。 如果应用程序在 `EntryId` 的状态上未能通知，那么它将被视为 `RETRY`。
 
-A JSON-encoded payload body with the processing status against each entry needs to be sent:
+需要发送一个带有每个条目处理状态的JSON编码的负载主体：
 
 ```json
 {
-  "statuses": {
-    "entryId": "<entryId>",
+  "statuses":
+  [
+    {
+    "entryId": "<entryId1>",
     "status": "<status>"
-  }
+    },
+    {
+    "entryId": "<entryId2>",
+    "status": "<status>"
+    }
+  ]
 }
 ```
 
-Possible status values:
+可能的状态值:
 
-| Status    | 说明                                       |
-| --------- | ---------------------------------------- |
-| `SUCCESS` | Message is processed successfully        |
-| `RETRY`   | Message to be retried by Dapr            |
-| `DROP`    | Warning is logged and message is dropped |
+| 状态        | 说明            |
+| --------- | ------------- |
+| `SUCCESS` | 消息已成功处理       |
+| `RETRY`   | 将由 Dapr 重试的消息 |
+| `DROP`    | 警告被记录下来，信息被删除 |
 
-Please refer [Expected HTTP Response for Bulk Subscribe]({{< ref pubsub_api.md >}}) for further insights on response.
+请参考 [预期的批量订阅 HTTP 响应]({{< ref pubsub_api.md >}}) 以获取有关响应的更多见解。
 
 ### 示例
 
-Please refer following code samples for how to use Bulk Subscribe:
+有关如何使用批量订阅，请参阅以下代码示例：
 
-{{< tabs Java Javascript "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
+{{< tabs "Java" "JavaScript" ".NET" >}}
 
 {{% codetab %}}
 
@@ -382,13 +389,20 @@ import { DaprServer } from "@dapr/dapr";
 const pubSubName = "orderPubSub";
 const topic = "topicbulk";
 
-const DAPR_HOST = process.env.DAPR_HOST || "127.0.0.1";
-const DAPR_HTTP_PORT = process.env.DAPR_HTTP_PORT || "3502";
-const SERVER_HOST = process.env.SERVER_HOST || "127.0.0.1";
-const SERVER_PORT = process.env.APP_PORT || 5001;
+const daprHost = process.env.DAPR_HOST || "127.0.0.1";
+const daprPort = process.env.DAPR_HTTP_PORT || "3502";
+const serverHost = process.env.SERVER_HOST || "127.0.0.1";
+const serverPort = process.env.APP_PORT || 5001;
 
 async function start() {
-    const server = new DaprServer(SERVER_HOST, SERVER_PORT, DAPR_HOST, DAPR_HTTP_PORT);
+    const server = new DaprServer({
+        serverHost,
+        serverPort,
+        clientOptions: {
+            daprHost,
+            daprPort,
+        },
+    });
 
     // Publish multiple messages to a topic with default config.
     await client.pubsub.bulkSubscribeWithDefaultConfig(pubSubName, topic, (data) => console.log("Subscriber received: " + JSON.stringify(data)));
@@ -401,20 +415,92 @@ async function start() {
 
 {{% /codetab %}}
 
+{{% codetab %}}
+
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using Dapr.AspNetCore;
+using Dapr;
+
+namespace DemoApp.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class BulkMessageController : ControllerBase
+{
+    private readonly ILogger<BulkMessageController> logger;
+
+    public BulkMessageController(ILogger<BulkMessageController> logger)
+    {
+        this.logger = logger;
+    }
+
+    [BulkSubscribe("messages", 10, 10)]
+    [Topic("pubsub", "messages")]
+    public ActionResult<BulkSubscribeAppResponse> HandleBulkMessages([FromBody] BulkSubscribeMessage<BulkMessageModel<BulkMessageModel>> bulkMessages)
+    {
+        List<BulkSubscribeAppResponseEntry> responseEntries = new List<BulkSubscribeAppResponseEntry>();
+        logger.LogInformation($"Received {bulkMessages.Entries.Count()} messages");
+        foreach (var message in bulkMessages.Entries)
+        {
+            try
+            {
+                logger.LogInformation($"Received a message with data '{message.Event.Data.MessageData}'");
+                responseEntries.Add(new BulkSubscribeAppResponseEntry(message.EntryId, BulkSubscribeAppResponseStatus.SUCCESS));
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                responseEntries.Add(new BulkSubscribeAppResponseEntry(message.EntryId, BulkSubscribeAppResponseStatus.RETRY));
+            }
+        }
+        return new BulkSubscribeAppResponse(responseEntries);
+    }
+    public class BulkMessageModel
+    {
+        public string MessageData { get; set; }
+    }
+}
+```
+
+{{% /codetab %}}
+
 {{< /tabs >}}
-## How components handle publishing and subscribing to bulk messages
+## 组件如何处理发布和订阅批量消息
 
-Some pub/sub brokers support sending and receiving multiple messages in a single request. When a component supports bulk publish or subscribe operations, Dapr runtime uses them to further optimize the communication between the Dapr sidecar and the underlying pub/sub broker.
+对于事件发布/订阅，涉及到两种网络传输方式。
+1. 从/到 *应用* 到/从 *Dapr*。
+1. 从/到 *Dapr* 到/从 *Pubsub Broker*。
 
-For components that do not have bulk publish or subscribe support, Dapr runtime uses the regular publish and subscribe APIs to send and receive messages one by one. This is still more efficient than directly using the regular publish or subscribe APIs, because applications can still send/receive multiple messages in a single request to/from Dapr.
+这些是可以优化的机会。 当进行优化时，会进行批量请求，从而减少总的调用次数，提高吞吐量，提供更好的延迟。
 
-## Watch the demo
+启用批量发布和/或批量订阅后，应用程序与 Dapr sidecar（上述第 1 点）之间的通信将得到优化，以便 **所有组件**。
 
-Watch [this video for an demo on bulk pub/sub](https://youtu.be/BxiKpEmchgQ?t=1170):
+从 Dapr sidecar 到 pub/sub broker 的优化取决于多个因素，例如：
+- Broker必须本质上支持批量发布/订阅
+- 必须更新Dapr 组件以支持 broker 提供的批量 API
+
+目前，以下组件已更新以支持此级别的优化：
+
+|    Component     | 批量发布 | 批量订阅 |
+|:----------------:|:----:| ---- |
+|      Kafka       | Yes  | Yes  |
+| Azure Servicebus | Yes  | Yes  |
+| Azure Eventhubs  | Yes  | Yes  |
+
+## 例子
+
+观看以下关于批量发布/订阅的演示和介绍。
+
+### [KubeCon Europe 2023演示](https://youtu.be/WMBAo-UNg6o)
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/WMBAo-UNg6o" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+### [Dapr 社区电话会议 #77 演示](https://youtu.be/BxiKpEmchgQ?t=1170)
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/BxiKpEmchgQ?start=1170" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## 相关链接
 
-- List of [supported pub/sub components]({{< ref supported-pubsub >}})
+- 列表 [支持的发布/订阅组件]({{< ref supported-pubsub >}})
 - 阅读 [API 参考文档]({{< ref pubsub_api.md >}})

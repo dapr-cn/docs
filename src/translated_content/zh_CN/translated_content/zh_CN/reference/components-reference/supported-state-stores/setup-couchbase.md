@@ -37,12 +37,12 @@ spec:
 
 ## 元数据字段规范
 
-| Field        | 必填 | 详情                              | 示例                        |
-| ------------ |:--:| ------------------------------- | ------------------------- |
-| couchbaseURL | 是  | The URL of the Couchbase server | `"http://localhost:8091"` |
-| username     | 是  | 数据库的用户名                         | `"user"`                  |
-| password     | 是  | 用于访问的密码                         | `"password"`              |
-| bucketName   | 是  | 要写入的 bucket 名称                  | `"bucket"`                |
+| Field        | Required | 详情                              | 示例                        |
+| ------------ |:--------:| ------------------------------- | ------------------------- |
+| couchbaseURL |    是     | The URL of the Couchbase server | `"http://localhost:8091"` |
+| username     |    是     | 数据库的用户名                         | `"user"`                  |
+| password     |    是     | 用于访问的密码                         | `"password"`              |
+| bucketName   |    是     | 要写入的 bucket 名称                  | `"bucket"`                |
 
 ## 设置 Couchbase
 

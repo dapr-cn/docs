@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "Logging in JavaScript SDK"
+title: "JavaScript SDK 中的日志记录"
 linkTitle: "Logging"
 weight: 4000
-description: Configuring logging in JavaScript SDK
+description: 在 JavaScript SDK 中配置日志记录
 ---
 
-## Introduction
+## 介绍
 
-The JavaScript SDK comes with a out-of-box `Console` based logger. The SDK emits various internal logs to help users understand the chain of events and troubleshoot problems. A consumer of this SDK can customize the verbosity of the log, as well as provide their own implementation for the logger.
+JavaScript SDK带有一个开箱即用的`Console`日志记录器。 SDK会发出各种内部日志，帮助用户理解事件链并解决问题。 使用此 SDK 的消费者可以自定义日志的详细程度，以及为日志记录器提供自己的实现。
 
-## Configure log level
+## 配置日志级别
 
-There are five levels of logging in **descending order of importance** - `error`, `warn`, `info`, `verbose`, and `debug`. Setting the log to a level means that the logger will emit all the logs that are at least as important as the mentioned level. For example, setting to `verbose` log means that the SDK will not emit `debug` level logs. The default log level is `info`.
+日志的重要性按照**降序**分为五个级别 - `error`、`warn`、`info`、`verbose`和`debug`。 将日志级别设置为某个级别意味着记录器将输出所有至少与所提及级别一样重要的日志。 例如，将日志设置为`verbose`意味着SDK不会输出`debug`级别的日志。 日志级别的默认值是 `info`。
 
-### Dapr Client
+### Dapr 客户端
 
 ```js
 import { CommunicationProtocolEnum, DaprClient, LogLevel } from "@dapr/dapr";
@@ -28,9 +28,9 @@ const client = new DaprClient({
 });
 ```
 
-> For more details on how to use the Client, see [JavaScript Client]({{< ref js-client >}}).
+> 有关如何使用客户端的更多详细信息，请参阅 [JavaScript 客户端]({{< ref js-client >}}).
 
-### DaprServer
+### Dapr服务器
 
 ```ts
 import { CommunicationProtocolEnum, DaprServer, LogLevel } from "@dapr/dapr";
@@ -47,15 +47,15 @@ const server = new DaprServer({
 });
 ```
 
-> For more details on how to use the Server, see [JavaScript Server]({{< ref js-server >}}).
+> 有关如何使用服务器的更多详细信息，请参阅 [JavaScript 服务器]({{< ref js-server >}}).
 
-## Custom LoggerService
+## 自定义LoggerService
 
-The JavaScript SDK uses the in-built `Console` for logging. To use a custom logger like Winston or Pino, you can implement the `LoggerService` interface.
+JavaScript SDK使用内置的`Console`进行日志记录。 要使用像Winston或Pino这样的自定义日志记录器，您可以实现`LoggerService`接口。
 
-### Winston based logging:
+### 基于Winston的日志记录：
 
-Create a new implementation of `LoggerService`.
+创建一个新的`LoggerService`的实现。
 
 ```ts
 import { LoggerService } from "@dapr/dapr";
@@ -88,7 +88,7 @@ export class WinstonLoggerService implements LoggerService {
 }
 ```
 
-Pass the new implementation to the SDK.
+将新的实现传递给SDK。
 
 ```ts
 import { CommunicationProtocolEnum, DaprClient, LogLevel } from "@dapr/dapr";

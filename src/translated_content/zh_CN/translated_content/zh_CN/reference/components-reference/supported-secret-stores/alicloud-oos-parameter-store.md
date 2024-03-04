@@ -36,12 +36,21 @@ spec:
 
 ## 元数据字段规范
 
-| Field           | 必填 | 详情                    | 示例                  |
-| --------------- |:--:| --------------------- | ------------------- |
-| regionId        | 是  | 阿里云 OOS 参数存储实例部署的特定区域 | `"cn-hangzhou"`     |
-| accessKeyId     | 是  | 用于访问此资源的阿里云访问密钥 ID    | `"accessKeyId"`     |
-| accessKeySecret | 是  | 访问此资源的阿里云访问密钥密钥       | `"accessKeySecret"` |
-| securityToken   | 否  | 要使用的阿里云安全token        | `"securityToken"`   |
+| Field           | Required | 详情                                                                               | 示例                  |
+| --------------- |:--------:| -------------------------------------------------------------------------------- | ------------------- |
+| regionId        |    是     | The specific region the AlibabaCloud OOS Parameter Store instance is deployed in | `"cn-hangzhou"`     |
+| accessKeyId     |    是     | The AlibabaCloud Access Key ID to access this resource                           | `"accessKeyId"`     |
+| accessKeySecret |    是     | The AlibabaCloud Access Key Secret to access this resource                       | `"accessKeySecret"` |
+| securityToken   |    否     | The AlibabaCloud Security Token to use                                           | `"securityToken"`   |
+
+## Optional per-request metadata properties
+
+The following [optional query parameters]({{< ref "secrets_api.md#query-parameters" >}}) can be provided when retrieving secrets from this secret store:
+
+| Query Parameter       | 说明                                                                                                    |
+| --------------------- | ----------------------------------------------------------------------------------------------------- |
+| `metadata.version_id` | Version for the given secret key                                                                      |
+| `metadata.path`       | (For bulk requests only) The path from the metadata. If not set, defaults to root path (all secrets). |
 
 ## 创建阿里云OOS参数存储实例
 

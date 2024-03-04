@@ -6,6 +6,11 @@ description: "通过 Azure API 管理策略发布 Dapr 服务和组件的 API"
 weight: 2000
 ---
 
-Azure API Management (APIM) is a way to create consistent and modern API gateways for back-end services, including those built with Dapr. Dapr support can be enabled in self-hosted API Management gateways to allow them to forward requests to Dapr services, send messages to Dapr Pub/Sub topics, or trigger Dapr output bindings. For more information, read the guide on [API Management Dapr Integration policies](https://docs.microsoft.com/azure/api-management/api-management-dapr-policies) and try out the [Dapr & Azure API Management Integration Demo](https://github.com/dapr/samples/tree/master/dapr-apim-integration).
+[Azure API Management](https://learn.microsoft.com/azure/api-management/api-management-key-concepts) 是为后端服务创建一致和现代 API 网关的一种方式，包括与 Dapr 一起构建的网关。 您可以在自托管的 API 管理网关中启用 Dapr 支持，以允许它们：
+- 将请求转发到 Dapr 服务
+- 向 Dapr Pub/Sub 主题发送消息
+- 触发 Dapr 输出绑定
 
-{{< button text="了解更多" link="https://docs.microsoft.com/azure/api-management/api-management-dapr-policies" >}}
+尝试使用[Dapr & Azure API Management Integration sample](https://github.com/dapr/samples/tree/master/dapr-apim-integration)。
+
+{{< button text="了解更多关于Dapr集成策略" link="https://docs.microsoft.com/azure/api-management/api-management-dapr-policies" >}}

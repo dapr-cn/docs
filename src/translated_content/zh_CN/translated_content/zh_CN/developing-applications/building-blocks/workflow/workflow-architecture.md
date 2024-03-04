@@ -1,184 +1,188 @@
 ---
 type: docs
-title: "Workflow architecture"
-linkTitle: "Workflow architecture"
+title: "工作流架构"
+linkTitle: "工作流架构"
 weight: 4000
-description: "The Dapr Workflow engine architecture"
+description: "Dapr 工作流引擎架构"
 ---
 
-[Dapr Workflows]({{< ref "workflow-overview.md" >}}) allow developers to define workflows using ordinary code in a variety of programming languages. The workflow engine runs inside of the Dapr sidecar and orchestrates workflow code deployed as part of your application. This article describes:
+{{% alert title="Note" color="primary" %}}
+Dapr Workflow is currently in beta. [See known limitations for {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
+{{% /alert %}}
 
-- The architecture of the Dapr Workflow engine
-- How the workflow engine interacts with application code
-- How the workflow engine fits into the overall Dapr architecture
+[Dapr 工作流]({{< ref "workflow-overview.md" >}}) 允许开发人员使用各种编程语言的普通代码定义工作流。 工作流引擎在 Dapr sidecar 中运行，并协调作为应用程序一部分部署的工作流代码。 本文介绍：
 
-For more information on how to author Dapr Workflows in your application, see [How to: Author a workflow]({{< ref "workflow-overview.md" >}}).
+- Dapr 工作流引擎的架构
+- 工作流引擎如何与应用程序代码交互
+- 工作流引擎如何融入整个 Dapr 架构
 
-The Dapr Workflow engine is internally powered by Dapr's actor runtime. The following diagram illustrates the Dapr Workflow architecture in Kubernetes mode:
+有关如何在应用程序中创建 Dapr 工作流的更多信息，请参阅 [指南：如何创建工作流]({{< ref "workflow-overview.md" >}})。
 
-<img src="/images/workflow-overview/workflows-architecture-k8s.png" width=800 alt="Diagram showing how the workflow architecture works in Kubernetes mode">
+Dapr 工作流引擎由 Dapr 的 actor 运行时提供内部支持。 下图展示了 Kubernetes 模式下的 Dapr 工作流架构：
 
-To use the Dapr Workflow building block, you write workflow code in your application using the Dapr Workflow SDK, which internally connects to the sidecar using a gRPC stream. This registers the workflow and any workflow activities, or tasks that workflows can schedule.
+<img src="/images/workflow-overview/workflows-architecture-k8s.png" width=800 alt="工作流架构在 Kubernetes 模式下的工作原理图">
 
-The engine is embedded directly into the sidecar and implemented using the [`durabletask-go`](https://github.com/microsoft/durabletask-go) framework library. This framework allows you to swap out different storage providers, including a storage provider created for Dapr that leverages internal actors behind the scenes. Since Dapr Workflows use actors, you can store workflow state in state stores.
+要使用 Dapr 工作流构建模块，您需要使用 Dapr 工作流 SDK 在应用程序中编写工作流代码，该代码内部使用 gRPC 流连接到 sidecar。 这将注册工作流和任何工作流活动，或工作流可以安排的任务。
 
-## Sidecar interactions
+该引擎直接嵌入到 sidecar 中，并使用 [`durabletask-go`](https://github.com/microsoft/durabletask-go) 框架库实现。 这个框架允许你更换不同的存储提供商，包括为 Dapr 创建的存储提供商，它在幕后利用内部 actor。 由于 Dapr 工作流使用 Actor，因此可以在状态存储中存储工作流状态。
 
-When a workflow application starts up, it uses a workflow authoring SDK to send a gRPC request to the Dapr sidecar and get back a stream of workflow work items, following the [server streaming RPC pattern](https://grpc.io/docs/what-is-grpc/core-concepts/#server-streaming-rpc). These work items can be anything from "start a new X workflow" (where X is the type of a workflow) to "schedule activity Y with input Z to run on behalf of workflow X".
+## Sidecar 交互
 
-The workflow app executes the appropriate workflow code and then sends a gRPC request back to the sidecar with the execution results.
+当工作流应用程序启动时，它会使用工作流创作 SDK 向 Dapr sidecar 发送 gRPC 请求，并按照 [服务器流 RPC 模式](https://grpc.io/docs/what-is-grpc/core-concepts/#server-streaming-rpc)取回工作流工作项流。 这些工作项可以是 "启动一个新的 X 工作流"（其中 X 是工作流的类型），也可以是 "安排输入为 Z 的活动 Y 以代表工作流 X 运行"。
 
-<img src="/images/workflow-overview/workflow-engine-protocol.png" alt="Dapr Workflow Engine Protocol" />
+工作流应用程序执行相应的工作流代码，然后将 gRPC 请求和执行结果发回 sidecar。
 
-All interactions happen over a single gRPC channel and are initiated by the application, which means the application doesn't need to open any inbound ports. The details of these interactions are internally handled by the language-specific Dapr Workflow authoring SDK.
+<img src="/images/workflow-overview/workflow-engine-protocol.png" alt="Dapr 工作流引擎协议" />
 
-### Differences between workflow and actor sidecar interactions
+所有交互都通过单个 gRPC 通道进行，并由应用程序启动，这意味着应用程序无需打开任何入站（inbound）端口。 这些交互的细节由特定语言的 Dapr 工作流创作 SDK 在内部处理。
 
-If you're familiar with Dapr actors, you may notice a few differences in terms of how sidecar interactions works for workflows compared to actors.
+### 工作流与 actor sidecar 交互的区别
 
-| Actors                                                                                                                                | 工作流                                                                                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Actors can interact with the sidecar using either HTTP or gRPC.                                                                       | Workflows only use gRPC. Due to the workflow gRPC protocol's complexity, an SDK is _required_ when implementing workflows.                                                                         |
-| Actor operations are pushed to application code from the sidecar. This requires the application to listen on a particular _app port_. | For workflows, operations are _pulled_ from the sidecar by the application using a streaming protocol. The application doesn't need to listen on any ports to run workflows.                       |
-| Actors explicitly register themselves with the sidecar.                                                                               | Workflows do not register themselves with the sidecar. The embedded engine doesn't keep track of workflow types. This responsibility is instead delegated to the workflow application and its SDK. |
+如果你熟悉 Dapr actor，你可能会注意到工作流中的 sidecar 交互方式与 actor 有一些不同。
 
-## Workflow distributed tracing
+| Actors                                                | 工作流                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------- |
+| Actor 可以使用 HTTP 或 gRPC 与 sidecar 进行交互。                | 工作流只使用 gRPC。 由于工作流 gRPC 协议的复杂性，在实施工作流时， _需要_ SDK。          |
+| Actor 操作是从 sidecar 推送到应用程序代码。 这就要求应用程序监听特定的 _应用程序端口_。 | 对于工作流，操作是由应用程序使用流协议从挎斗_拉_。 应用程序无需监听任何端口即可运行工作流。            |
+| Actor 显式地向 sidecar 注册自己。                              | 工作流不会向 Sidecar 注册自身。 嵌入式引擎不会跟踪工作流类型。 此责任将委派给工作流应用程序及其 SDK。 |
 
-The `durabletask-go` core used by the workflow engine writes distributed traces using Open Telemetry SDKs. These traces are captured automatically by the Dapr sidecar and exported to the configured Open Telemetry provider, such as Zipkin.
+## 工作流分布式跟踪
 
-Each workflow instance managed by the engine is represented as one or more spans. There is a single parent span representing the full workflow execution and child spans for the various tasks, including spans for activity task execution and durable timers. Workflow activity code also has access to the trace context, allowing distributed trace context to flow to external services that are invoked by the workflow.
+工作流引擎使用的 `durabletask-go` 内核使用 Open Telemetry SDK 写入分布式跟踪。 这些跟踪由 Dapr Sidecar 自动捕获，并导出到配置的 Open Telemetry 提供程序，例如 Zipkin。
 
-## Internal workflow actors
+引擎管理的每个工作流实例都表示为一个或多个 span。 有一个父 span 代表整个工作流程的执行，子 span 代表各种任务，包括活动任务执行 span 和持久定时器 span。 工作流活动代码还可以访问跟踪上下文，从而允许分布式跟踪上下文流向工作流调用的外部服务。
 
-There are two types of actors that are internally registered within the Dapr sidecar in support of the workflow engine:
+## 内部工作流 Actor
 
-- `dapr.internal.wfengine.workflow`
-- `dapr.internal.wfengine.activity`
+有两种类型的 actor 在 Dapr sidea中内部注册以支持工作流引擎：
 
-The following diagram demonstrates how internal workflow actors operate in a Kubernetes scenario:
+- `dapr.internal.{namespace}.{appID}.workflow`
+- `dapr.internal.{namespace}.{appID}.activity`
 
-<img src="/images/workflow-overview/workflow-execution.png" alt="Diagram demonstrating internally registered actors across a cluster" />
+`{namespace}` 值是 Dapr 命名空间，如果没有配置命名空间，默认值为 `default`。 `{appID}` 值是应用程序的 ID。 例如，如果您有一个名为 "wfapp" 的工作流应用程序，那么工作流 actor 的类型将是 `dapr.internal.default.wfapp.workflow` ，活动 actor 的类型将是 `dapr.internal.default.wfapp.activity`。
 
-Just like user-defined actors, internal workflow actors are distributed across the cluster by the actor placement service. They also maintain their own state and make use of reminders. However, unlike actors that live in application code, these _internal_ actors are embedded into the Dapr sidecar. Application code is completely unaware that these actors exist.
+下图展示了内部工作流 actor 在 Kubernetes 场景中的运行方式：
 
-There are two types of actors registered by the Dapr sidecar for workflow: the _workflow_ actor and the _activity_ actor. The next sections will go into more details on each.
+<img src="/images/workflow-overview/workflow-execution.png" alt="展示整个集群内部注册 actor 的示意图" />
 
-### Workflow actors
+与用户定义的 actor 一样，内部工作流 actor 也是通过 actor placement 服务分布在整个集群中的。 它们还能保持自己的状态，并利用提醒功能。 不过，与应用程序代码中的 actor 不同，这些 _内部_ actor 被嵌入到 Dapr sidecar中。 应用程序代码完全不知道这些 actor 的存在。
 
-A new instance of the `dapr.internal.wfengine.workflow` actor is activated for every workflow instance that gets created. The ID of the _workflow_ actor is the ID of the workflow. This internal actor stores the state of the workflow as it progresses and determines the node on which the workflow code executes via the actor placement service.
+{{% alert title="Note" color="primary" %}}
+内部工作流 actor 类型仅在应用使用 Dapr 工作流 SDK 注册工作流后注册。 如果应用从不注册工作流，则永远不会注册内部工作流 actor。
+{{% /alert %}}
 
-Each workflow actor saves its state using the following keys in the configured state store:
+### 工作流 actor
 
-| Key              | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `inbox-NNNNNN`   | A workflow's inbox is effectively a FIFO queue of _messages_ that drive a workflow's execution. Example messages include workflow creation messages, activity task completion messages, etc. Each message is stored in its own key in the state store with the name `inbox-NNNNNN` where `NNNNNN` is a 6-digit number indicating the ordering of the messages. These state keys are removed once the corresponding messages are consumed by the workflow. |
-| `history-NNNNNN` | A workflow's history is an ordered list of events that represent a workflow's execution history. Each key in the history holds the data for a single history event. Like an append-only log, workflow history events are only added and never removed (except when a workflow performs a "continue as new" operation, which purges all history and restarts a workflow with a new input).                                                                 |
-| `customStatus`   | Contains a user-defined workflow status value. There is exactly one `customStatus` key for each workflow actor instance.                                                                                                                                                                                                                                                                                                                                  |
-| `metadata`       | Contains meta information about the workflow as a JSON blob and includes details such as the length of the inbox, the length of the history, and a 64-bit integer representing the workflow generation (for cases where the instance ID gets reused). The length information is used to determine which keys need to be read or written to when loading or saving workflow state updates.                                                                 |
+工作流 actor 负责管理应用程序中运行的所有工作流的状态和放置。 每创建一个工作流实例，就会激活一个新的工作流 actor 实例。 工作流 actor 的 ID 就是工作流的 ID。 这个内部 actor 在工作流进行过程中存储工作流程的状态，并通过 actor 放置服务确定工作流代码的执行节点。
+
+每个工作流 actor 都使用配置的状态存储中的以下键保存其状态：
+
+| 键                | 说明                                                                                                                                                                  |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `inbox-NNNNNN`   | 工作流的收件箱实际上是一个由 _消息_ 组成的先进先出队列，用于驱动工作流的执行。 示例消息包括工作流创建消息、活动任务完成消息等。 每条消息都用自己的键存储在状态存储中，名称为 ` inbox-NNNNNN`，这里的 `NNNNNN` 是一个 6 位数字，指示消息的顺序。 一旦工作流消费了相应的信息，这些状态键就会被移除。 |
+| `history-NNNNNN` | 工作流的历史记录是一个有序的事件列表，代表了工作流的执行历史。 历史记录中的每个键都保存单个历史记录事件的数据。 与仅附加日志一样，工作流历史事件只会添加而不会删除（除非工作流执行了 "continue as new" 操作，该操作会清除所有历史事件，并以新输入重新启动工作流）。                        |
+| `customStatus`   | 包含用户定义的工作流状态值。 每个工作流 actor 实例都有一个 `customStatus` 键。                                                                                                                 |
+| `metadata`       | 以 JSON blob 的形式包含工作流的元信息，其中包括 inbox 长度、历史记录长度以及代表工作流生成的 64 位整数（适用于实例 ID 被重复使用的情况）等详细信息。 在加载或保存工作流状态更新时，长度信息用于确定需要读取或写入哪些键。                                          |
 
 {{% alert title="Warning" color="warning" %}}
-In the [Alpha release of the Dapr Workflow engine]({{< ref support-preview-features.md >}}), workflow actor state will remain in the state store even after a workflow has completed. Creating a large number of workflows could result in unbounded storage usage. In a future release, data retention policies will be introduced that can automatically purge the state store of old workflow state.
+在 [Alpha 版本的 Dapr 工作流引擎]({{< ref support-preview-features.md >}})中，即使工作流已完成，工作流 actor 的状态仍会保留在状态存储中。 创建大量工作流可能会导致存储空间的无限制使用。 在未来的版本中，将引入数据保留策略，可自动清除状态存储中的旧工作流状态。
 {{% /alert %}}
 
-The following diagram illustrates the typical lifecycle of a workflow actor.
+下图说明了工作流 actor 的典型生命周期。
 
-<img src="/images/workflow-overview/workflow-actor-flowchart.png" alt="Dapr Workflow Actor Flowchart" />
+<img src="/images/workflow-overview/workflow-actor-flowchart.png" alt="Dapr 工作流程 actor 流程图" />
 
-To summarize:
+总的来说：
 
-1. A workflow actor is activated when it receives a new message.
-1. New messages then trigger the associated workflow code (in your application) to run and return an execution result back to the workflow actor.
-1. Once the result is received, the actor schedules any tasks as necessary.
-1. After scheduling, the actor updates its state in the state store.
-1. Finally, the actor goes idle until it receives another message. During this idle time, the sidecar may decide to unload the workflow actor from memory.
+1. 工作流 actor 在收到新消息时被激活。
+1. 然后，新消息会触发相关的工作流代码（在您的应用程序中）运行，并将执行结果返回给工作流 actor。
+1. 一旦收到结果，actor 就会根据需要安排任务。
+1. 调度结束后，actor 会更新状态存储中的状态。
+1. 最后，actor 进入空闲状态，直到收到另一条消息。 在此空闲时间内，sidecar 可能会决定从内存中卸载工作流 actor。
 
-### Activity actors
+### 活动 actor
 
-A new instance of the `dapr.internal.wfengine.activity` actor is activated for every activity task that gets scheduled by a workflow. The ID of the _activity_ actor is the ID of the workflow combined with a sequence number (sequence numbers start with 0). For example, if a workflow has an ID of `876bf371` and is the third activity to be scheduled by the workflow, it's ID will be `876bf371#2` where `2` is the sequence number.
+活动 actor 负责管理所有工作流活动调用的状态和放置。 工作流调度的每个活动任务都会激活一个新的活动 actor 实例。 活动 actor 的 ID 是工作流的 ID 与序列号（序列号从 0 开始）的组合。 例如，如果工作流的 ID 为 `876bf371` 并且是工作流要计划的第三个活动，其 ID 将是 `876bf371::2` ，这里的 `2` 是序列号。
 
-Each activity actor stores a single key into the state store:
+每个活动 actor 将单个键存储到状态存储中：
 
-| Key             | 说明                                                                                                                                                                                                                                                            |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `activityreq-N` | The key contains the activity invocation payload, which includes the serialized activity input data. The `N` value is a 64-bit unsigned integer that represents the _generation_ of the workflow, a concept which is outside the scope of this documentation. |
+| 键               | 说明                                             |
+| --------------- | ---------------------------------------------- |
+| `activityState` | 这个键包含活动调用有效负载，其中包括序列化的活动输入数据。 活动调用完成后，该键将自动删除。 |
 
-{{% alert title="Warning" color="warning" %}}
-In the [Alpha release of the Dapr Workflow engine]({{< ref support-preview-features.md >}}), activity actor state will remain in the state store even after the activity task has completed. Scheduling a large number of workflow activities could result in unbounded storage usage. In a future release, data retention policies will be introduced that can automatically purge the state store of completed activity state.
-{{% /alert %}}
+下图说明了活动 actor 的典型生命周期。
 
-The following diagram illustrates the typical lifecycle of an activity actor.
+<img src="/images/workflow-overview/workflow-activity-actor-flowchart.png" alt="工作流活动 actor 流程图" />
 
-<img src="/images/workflow-overview/workflow-activity-actor-flowchart.png" alt="Workflow Activity Actor Flowchart" />
+活动 actor 是短暂的：
 
-Activity actors are short-lived:
+1. 当工作流 actor 调度活动任务时，活动 actor 就会被激活。
+1. 然后，活动 actor 会立即调用工作流应用程序，调用相关的活动代码。
+1. 一旦活动代码运行完毕并返回结果，活动 actor 就会向父工作流 actor 发送一条包含执行结果的消息。
+1. 发送结果后，将触发工作流以继续执行下一步。
 
-1. Activity actors are activated when a workflow actor schedules an activity task.
-1. Activity actors then immediately call into the workflow application to invoke the associated activity code.
-1. Once the activity code has finished running and has returned its result, the activity actor sends a message to the parent workflow actor with the execution results.
-1. Once the results are sent, the workflow is triggered to move forward to its next step.
+### 提醒使用和执行保证
 
-### Reminder usage and execution guarantees
+Dapr 工作流通过使用 [actor reminders]({{< ref "howto-actors.md#actor-timers-and-reminders" >}}) 来从瞬时系统故障中恢复，从而确保工作流的容错性。 在调用应用程序工作流代码之前，工作流或活动 actor 将创建一个新的提醒。 如果应用程序代码不间断地执行，则会删除提醒。 但是，如果承载相关工作流或活动的节点或 sidecar 崩溃，提醒会重新激活相应的 actor，并重新执行。
 
-The Dapr Workflow ensures workflow fault-tolerance by using [actor reminders]({{< ref "howto-actors.md#actor-timers-and-reminders" >}}) to recover from transient system failures. Prior to invoking application workflow code, the workflow or activity actor will create a new reminder. If the application code executes without interruption, the reminder is deleted. However, if the node or the sidecar hosting the associated workflow or activity crashes, the reminder will reactivate the corresponding actor and the execution will be retried.
-
-<img src="/images/workflow-overview/workflow-actor-reminder-flow.png" width=600 alt="Diagram showing the process of invoking workflow actors" />
+<img src="/images/workflow-overview/workflow-actor-reminder-flow.png" width=600 alt="调用工作流 actor 流程图" />
 
 {{% alert title="Important" color="warning" %}}
-Too many active reminders in a cluster may result in performance issues. If your application is already using actors and reminders heavily, be mindful of the additional load that Dapr Workflows may add to your system.
+集群中的活动提醒太多可能会导致性能问题。 如果您的应用程序已经在大量使用 actor 和提醒，请注意 Dapr 工作流可能会给您的系统增加额外负担。
 {{% /alert %}}
 
-### State store usage
+### 状态存储使用情况
 
-Dapr Workflows use actors internally to drive the execution of workflows. Like any actors, these internal workflow actors store their state in the configured state store. Any state store that supports actors implicitly supports Dapr Workflow.
+Dapr 工作流在内部使用 actor 来驱动工作流的执行。 与其他 actor 一样，这些内部工作流 actor 也会在配置的状态存储中存储其状态。 任何支持 actor 的状态存储都隐式支持 Dapr 工作流。
 
-As discussed in the [workflow actors]({{< ref "workflow-architecture.md#workflow-actors" >}}) section, workflows save their state incrementally by appending to a history log. The history log for a workflow is distributed across multiple state store keys so that each "checkpoint" only needs to append the newest entries.
+正如 [工作流 actor]({{< ref "workflow-architecture.md#workflow-actors" >}}) 部分所述，工作流通过附加到历史日志来增量保存其状态。 工作流的历史日志分布在多个状态存储键上，因此每个 "检查点" 只需添加最新条目。
 
-The size of each checkpoint is determined by the number of concurrent actions scheduled by the workflow before it goes into an idle state. [Sequential workflows]({{< ref "workflow-overview.md#task-chaining" >}}) will therefore make smaller batch updates to the state store, while [fan-out/fan-in workflows]({{< ref "workflow-overview.md#fan-outfan-in" >}}) will require larger batches. The size of the batch is also impacted by the size of inputs and outputs when workflows [invoke activities]({<< ref "workflow-features-concepts.md#workflow-activities" >>}) or [child workflows]({{< ref "workflow-features-concepts.md#child-workflows" >}}).
+每个检查点的大小取决于工作流在进入空闲状态前调度的并发操作的数量。 [因此，顺序工作流]({{< ref "workflow-overview.md#task-chaining" >}}) 将对状态存储进行较小批量的更新，而 [扇出/扇入工作流]({{< ref "workflow-overview.md#fan-outfan-in" >}}) 则需要较大批量的更新。 当工作流 [调用活动]({{< ref "workflow-features-concepts.md#workflow-activities" >}}) 或 [子工作流]({{< ref "workflow-features-concepts.md#child-workflows" >}})时，批量的大小也会受到输入和输出大小的影响。
 
-<img src="/images/workflow-overview/workflow-state-store-interactions.png" width=600 alt="Diagram of workflow actor state store interactions" />
+<img src="/images/workflow-overview/workflow-state-store-interactions.png" width=600 alt="工作流 actor 状态存储交互图" />
 
-Different state store implementations may implicitly put restrictions on the types of workflows you can author. For example, the Azure Cosmos DB state store limits item sizes to 2 MB of UTF-8 encoded JSON ([source](https://learn.microsoft.com/azure/cosmos-db/concepts-limits#per-item-limits)). The input or output payload of an activity or child workflow is stored as a single record in the state store, so a item limit of 2 MB means that workflow and activity inputs and outputs can't exceed 2 MB of JSON-serialized data.
+不同的状态存储实现可能会隐式限制您可以创作的工作流类型。 例如，Azure Cosmos DB 状态存储将项目大小限制为 2 MB 的 UTF-8 编码 JSON ([source](https://learn.microsoft.com/azure/cosmos-db/concepts-limits#per-item-limits))。 活动或子工作流的输入或输出有效载荷在状态存储中存储为单条记录，因此项目限制为 2 MB 意味着工作流和活动的输入和输出不能超过 2 MB 的 JSON 序列化数据。
 
-Similarly, if a state store imposes restrictions on the size of a batch transaction, that may limit the number of parallel actions that can be scheduled by a workflow.
+同样，如果状态存储对批处理事务的大小设置了限制，就会限制工作流可以调度的并行操作的数量。
 
-## Workflow scalability
+## 工作流可扩展性
 
-Because Dapr Workflows are internally implemented using actors, Dapr Workflows have the same scalability characteristics as actors. The placement service:
+由于 Dapr 工作流在内部使用 actor 实现，因此 Dapr 工作流具有与 actor 相同的可扩展性。 安置服务：
 
-- Doesn't distinguish between workflow actors and actors you define in your application
-- Will load balance workflows using the same algorithms that it uses for actors
+- 不区分工作流 actor 和在应用程序中定义的 actor
+- 将使用与 actor 相同的算法对工作流进行负载平衡
 
-The expected scalability of a workflow is determined by the following factors:
+工作流的预期可伸缩性由以下因素决定：
 
-- The number of machines used to host your workflow application
-- The CPU and memory resources available on the machines running workflows
-- The scalability of the state store configured for actors
-- The scalability of the actor placement service and the reminder subsystem
+- 用于托管工作流应用程序的机器数量
+- 运行工作流的机器上可用的 CPU 和内存资源
+- 为 actor 配置的状态存储的可扩展性
+- Actor 安置服务和提醒子系统的可扩展性
 
-The implementation details of the workflow code in the target application also plays a role in the scalability of individual workflow instances. Each workflow instance executes on a single node at a time, but a workflow can schedule activities and child workflows which run on other nodes.
+目标应用程序中工作流代码的实施细节也会影响单个工作流实例的可扩展性。 每个工作流实例一次只能在一个节点上执行，但工作流可以调度在其他节点上运行的活动和子工作流。
 
-Workflows can also schedule these activities and child workflows to run in parallel, allowing a single workflow to potentially distribute compute tasks across all available nodes in the cluster.
+工作流还可以安排这些活动和子工作流并行运行，从而使单个工作流有可能将计算任务分配到集群中的所有可用节点上。
 
-<img src="/images/workflow-overview/workflow-actor-scale-out.png" width=800 alt="Diagram of workflow and activity actors scaled out across multiple Dapr instances" />
+<img src="/images/workflow-overview/workflow-actor-scale-out.png" width=800 alt="跨多个 Dapr 实例的工作流和活动 actor 示意图" />
 
 {{% alert title="Important" color="warning" %}}
-Currently, there are no global limits imposed on workflow and activity concurrency. A runaway workflow could therefore potentially consume all resources in a cluster if it attempts to schedule too many tasks in parallel. Use care when authoring Dapr Workflows that schedule large batches of work in parallel.
+目前，对工作流和活动并发没有全局限制。 因此，如果失控的工作流尝试并行调度太多任务，则可能会消耗群集中的所有资源。 在编写并行调度大批量工作的 Dapr 工作流时，请务必谨慎。
 
-Also, the Dapr Workflow engine requires that all instances of each workflow app register the exact same set of workflows and activities. In other words, it's not possible to scale certain workflows or activities independently. All workflows and activities within an app must be scaled together.
+此外，Dapr 工作流引擎要求每个工作流应用程序的所有实例都注册完全相同的工作流和活动集。 换句话说，无法独立扩展某些工作流程或活动。 应用程序中的所有工作流和活动都必须一起扩展。
 {{% /alert %}}
 
-Workflows don't control the specifics of how load is distributed across the cluster. For example, if a workflow schedules 10 activity tasks to run in parallel, all 10 tasks may run on as many as 10 different compute nodes or as few as a single compute node. The actual scale behavior is determined by the actor placement service, which manages the distribution of the actors that represent each of the workflow's tasks.
+工作流无法控制负载如何在集群中分配的具体细节。 例如，如果一个工作流安排了 10 个并行运行的活动任务，那么所有 10 个任务可能在多达 10 个不同的计算节点上运行，也可能只在一个计算节点上运行。 实际缩放行为由 actor 放置服务确定，该服务管理表示工作流每个任务的 actor 的分布。
 
-## Workflow latency
+## 工作流延迟
 
-In order to provide guarantees around durability and resiliency, Dapr Workflows frequently write to the state store and rely on reminders to drive execution. Dapr Workflows therefore may not be appropriate for latency-sensitive workloads. Expected sources of high latency include:
+为了提供有关持久性和弹性的保证，Dapr 工作流经常写入状态存储，并依靠提醒来推动执行。 因此，Dapr 工作流可能不适合对延迟敏感的工作负载。 高延迟的预期来源包括：
 
-- Latency from the state store when persisting workflow state.
-- Latency from the state store when rehydrating workflows with large histories.
-- Latency caused by too many active reminders in the cluster.
-- Latency caused by high CPU usage in the cluster.
+- 持久化工作流状态时来自状态存储的延迟。
+- 在对具有大量历史记录的工作流进行处理时，状态存储会产生延迟。
+- 集群中活动提醒过多造成的延迟。
+- 集群中的高 CPU 使用率导致的延迟。
 
-See the [Reminder usage and execution guarantees section]({{< ref "workflow-architecture.md#reminder-usage-and-execution-guarantees" >}}) for more details on how the design of workflow actors may impact execution latency.
+有关工作流 actor 的设计如何影响执行延迟的更多详情，请参阅 [Reminder 使用和执行保证部分]({{< ref "workflow-architecture.md#reminder-usage-and-execution-guarantees" >}})。
 
 ## 下一步
 
@@ -186,7 +190,10 @@ See the [Reminder usage and execution guarantees section]({{< ref "workflow-arch
 
 ## 相关链接
 
-- [Workflow overview]({{< ref workflow-overview.md >}})
-- [Workflow API reference]({{< ref workflow_api.md >}})
-- [Try out the Workflow quickstart]({{< ref workflow-quickstart.md >}})
-- [Try out the .NET example](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow)
+- [工作流概述]({{< ref workflow-overview.md >}})
+- [工作流 API 参考文档]({{< ref workflow_api.md >}})
+- [试用工作流快速入门]({{< ref workflow-quickstart.md >}})
+- Try out the following examples:
+   - [Python](https://github.com/dapr/python-sdk/tree/master/examples/demo_workflow)
+   - [.NET](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow)
+   - [Java](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/workflows)

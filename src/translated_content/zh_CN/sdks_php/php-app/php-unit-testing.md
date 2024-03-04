@@ -7,13 +7,13 @@ description: 单元测试
 no_list: true
 ---
 
-Unit and integration tests are first-class citizens with the PHP SDK. Using the DI container, mocks, stubs, and the provided `\Dapr\Mocks\TestClient` allows you to have very fine-grained tests.
+单元和集成测试是 PHP SDK 的一等公民。 使用 DI 容器、 mocks、 stubs 和提供的 `\Dapr\Mocks\TestClient` 允许您进行非常细粒度的测试。
 
-## Testing Actors
+## 测试 Actor
 
 对于 actor，在测试 actor 时，我们有两件事要关注：
 
-1. The returned result based on an initial state
+1. 根据初始状态返回的结果
 2. 基于初始状态的结果状态
 
 {{< tabs "integration test with TestClient" "unit test" >}}

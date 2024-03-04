@@ -1,46 +1,47 @@
 ---
 type: docs
-title: "Dead Letter Topics"
-linkTitle: "Dead Letter Topics"
+title: "死信主题"
+linkTitle: "死信主题"
 weight: 4000
-description: "Use subscription dead letter topics to forward undeliverable messages"
+description: "使用订阅死信主题转发无法送达的邮件"
 ---
 
-## Introduction
+## 介绍
 
-There are times when applications might not be able to handle messages for a variety of reasons. For example, there could be transient issues retrieving data needed to process a message or the app business logic fails returning an error.  Dead letter topics are used to forward messages that cannot be delivered to a subscribing app. This eases the pressure on app by freeing them from dealing with these failed messages, allowing developers to write code that reads from the dead letter topic and either fixes the message and resends this, or abandons it completely.
+有时候应用程序可能因为各种原因无法处理消息。 例如，可能出现临时问题，无法检索处理消息所需的数据，或者应用程序的业务逻辑失败并返回错误。  死信主题用于转发无法传递给订阅应用程序的消息。 这样可以减轻应用的压力，使其不必处理这些失败的消息，允许开发者编写从死信主题中读取的代码，要么修复消息并重新发送，要么完全放弃它。
 
-Dead letter topics are typically used in along with a retry resiliency policy and a dead letter subscription that handles the required logic for dealing with the messages forwarded from the dead letter topic.
+死信主题通常与重试弹性策略和处理来自死信主题转发的消息所需逻辑的死信订阅一起使用。
 
-When a dead letter topic is set, any message that failed to be delivered to an app for a configured topic is put on the dead letter topic to be forwarded to a subscription that handles these messages. This could be the same app or a completely different one.
+当设置了死信主题时，任何未能成功传递到配置主题的应用程序的消息都会被放置在死信主题上，以便转发到处理这些消息的订阅。 这可能是同一个应用程序，也可能是完全不同的应用程序。
 
-Dapr enables dead letter topics for all of it's pub/sub components, even if the underlying system does not support this feature natively. For example the [AWS SNS Component]({{< ref "setup-aws-snssqs" >}}) has a dead letter queue and [RabbitMQ]({{< ref "setup-rabbitmq" >}}) has the dead letter topics. You will need to ensure that you configure components like this appropriately.
+Dapr 使所有 pub/sub 组件都能启用死信主题，即使底层系统不原生支持此功能。 例如， [AWS SNS 组件]({{< ref "setup-aws-snssqs" >}}) 具有死信队列，而 [RabbitMQ]({{< ref "setup-rabbitmq" >}}) 具有死信主题。 您需要确保适当配置此类组件。
 
-The diagram below is an example of how dead letter topics work. First a message is sent from a publisher on an `orders` topic. Dapr receives the message on behalf of a subscriber application, however the orders topic message fails to be delivered to the `/checkout` endpoint on the application, even after retries. As a result of the failure to deliver, the message is forwarded to the `poisonMessages` topic which delivers this to the `/failedMessages` endpoint to be processed, in this case on the same application. The `failedMessages` processing code could drop the message or resend a new message.
+下面的图表是死信主题如何工作的一个例子。 首先，从发布者发送一条消息到一个 `orders` 主题。 Dapr 代表订阅者应用程序接收消息，但 orders 主题消息无法传递到 `/checkout` 应用程序上的终结点，即使在重试后也是如此。 由于无法传递，消息将转发到 `poisonMessages` 主题，将其传递给 `/failedMessages` 要处理的端点，在本例中为同一应用程序。 处理代码可能会丢弃消息或重新发送新消息的 `failedMessages`。
 
 <img src="/images/pubsub_deadletter.png" width=1200>
 
-## Configuring a dead letter topic with a declarative subscription
+## 使用声明性订阅配置死信主题
 
-The following YAML shows how to configure a subscription with a dead letter topic named `poisonMessages` for messages consumed from the `orders` topic. This subscription is scoped to an app with a `checkout` ID.
+以下 YAML 显示了如何配置具有名称为 `poisonMessages` 的死信主题的订阅，以消耗从 `orders` 主题中的消息。 此订阅适用于具有 `checkout` ID的应用程序。
 
 ```yaml
-apiVersion: dapr.io/v1alpha1
+apiVersion: dapr.io/v2alpha1
 kind: Subscription
 metadata:
   name: order
 spec:
   topic: orders
-  route: /checkout
+  routes: 
+    default: /checkout
   pubsubname: pubsub
   deadLetterTopic: poisonMessages
 scopes:
 - checkout
 ```
 
-## Configuring a dead letter topic with programmatic subscription
+## 使用声明性订阅配置死信主题
 
-The JSON returned from the `/subscribe` endpoint shows how to configure a dead letter topic named `poisonMessages` for messages consumed from the `orders` topic.
+从 `/subscribe` 接口返回了如何配置`poisonMessages`为`orders` 主题消的死信队列。
 
 ```javascript
 app.get('/dapr/subscribe', (_req, res) => {
@@ -55,11 +56,11 @@ app.get('/dapr/subscribe', (_req, res) => {
 });
 ```
 
-## Retries and dead letter topics
+## 重试和死信主题
 
-By default, when a dead letter topic is set, any failing message immediately goes to the dead letter topic.  As a result it is recommend to always have a retry policy set when using dead letter topics in a subscription. To enable the retry of a message before sending it to the dead letter topic, apply a [retry resiliency policy]({{< ref "policies.md#retries" >}}) to the pub/sub component.
+默认情况下，当设置了死信主题时，任何失败的消息都会立即发送到死信主题。  因此，在使用订阅中的死信主题时，建议始终设置重试策略。 要在将消息发送到死信主题之前启用消息重试，请应用 [重试复原策略]({{< ref "policies.md#retries" >}}) 到 pub/sub 组件。
 
-This example shows how to set a constant retry policy named `pubsubRetry`, with 10 maximum delivery attempts applied every 5 seconds for the `pubsub` pub/sub component.
+此示例演示如何设置名为 `pubsubRetry`，每 5 秒应用 10 次最大投放尝试 `pubsub` 发布/订阅组件。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -80,31 +81,34 @@ spec:
           retry: pubsubRetry
 ```
 
-## Configuring a subscription for handling the dead letter topics
+## 配置订阅以处理死信主题
 
-Remember to now configure a subscription to handling the dead letter topics. For example you can create another declarative subscription to receive these on the same or a different application. The example below shows the checkout application subscribing to the `poisonMessages` topic with another subscription and sending these to be handled by the `/failedmessages` endpoint.
+请记住现在配置一个订阅来处理死信主题。 例如，您可以创建另一个声明性订阅以在相同或不同的应用程序上接收这些内容。 下面的示例显示了订阅 `poisonMessages` 主题，并将这些主题发送给 `/failedmessages` 端点。
 
 ```yaml
-apiVersion: dapr.io/v1alpha1
+apiVersion: dapr.io/v2alpha1
 kind: Subscription
 metadata:
   name: deadlettertopics
 spec:
   topic: poisonMessages
-  route: /failedMessages
+  routes: 
+    rules:
+      - match:
+        path: /failedMessages
   pubsubname: pubsub
 scopes:
 - checkout
 ```
 
-## Demo
+## 例子
 
-Watch [this video for an overview of the dead letter topics](https://youtu.be/wLYYOJLt_KQ?t=69):
+[观看此视频了解死信主题的概述](https://youtu.be/wLYYOJLt_KQ?t=69)：
 
 <iframe width="360" height="315" src="https://www.youtube-nocookie.com/embed/wLYYOJLt_KQ?start=69" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ## 下一步
 
-- For more information on resiliency policies, read [Resiliency overview]({{< ref resiliency-overview.md >}}).
-- For more information on topic subscriptions, read [Declarative and programmatic subscription methods]({{< ref "pubsub-overview.md#message-subscription" >}}).
+- 要获取有关弹性策略的更多信息，请阅读 [弹性概述]({{< ref resiliency-overview.md >}})。
+- 有关主题订阅的更多信息，请阅读 [声明性和编程性订阅方法]({{< ref "pubsub-overview.md#message-subscription" >}})。

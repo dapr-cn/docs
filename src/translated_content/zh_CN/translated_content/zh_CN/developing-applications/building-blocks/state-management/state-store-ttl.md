@@ -1,36 +1,44 @@
 ---
 type: docs
-title: "State Time-to-Live (TTL)"
+title: "状态生存时间（TTL）"
 linkTitle: "State TTL"
 weight: 500
-description: "Manage state with TTL."
+description: "使用 TTL 管理状态。"
 ---
 
-Dapr enables per state set request time-to-live (TTL). This means that applications can set time-to-live per state stored, and these states cannot be retrieved after expiration.
+Dapr 允许对每个状态设置请求的生存时间(TTL)。 这意味着应用程序可以为每个存储的状态设置生存时间，并且在过期后无法检索这些状态。
 
-For [supported state stores]({{< ref supported-state-stores >}}), you simply set the `ttlInSeconds` metadata when publishing a message. 其他的状态存储将忽略这个值。 For some state stores, you can specify a default expiration on a per-table/container basis.
+为 [支持的状态存储]({{< ref supported-state-stores >}})，您只需设置 `ttlInSeconds` 元数据。 其他的状态存储将忽略这个值。 对于一些状态存储，您可以在每个表/容器的基础上指定一个默认的到期时间。
 
-## Native state TTL support
+## 原生状态 TTL 支持
 
-When state TTL has native support in the state store component, Dapr forwards the TTL configuration without adding any extra logic, maintaining predictable behavior. This is helpful when the expired state is handled differently by the component.
+当状态 TTL 在状态存储组件中具有本机支持时，Dapr 会转发 TTL 配置，而不会添加任何额外逻辑，保持可预测的行为。 当组件对过期状态的处理方式不同时，这很有帮助。
 
-When a TTL is not specified, the default behavior of the state store is retained.
+当没有指定TTL时，将保留状态存储的默认行为。
 
-## Persisting state (ignoring an existing TTL)
+## 绕过全局定义的 TTL 进行显式持久化
 
-若要显式保留状态（忽略为密钥设置的任何 TTL），请指定 `ttlInSeconds` 值 `-1`。
+持久状态适用于允许您指定用于所有数据的默认 TTL 的所有状态存储，或者：
+- 通过 Dapr 组件设置全局 TTL 值，或
+- 在 Dapr 之外创建状态存储并设置全局 TTL 值时。
+
+当未指定特定的 TTL 时，数据将在全局 TTL 时间段之后过期。 Dapr 没有促进这一点。
+
+此外，所有状态存储还支持选择 _显式_ 持久化数据。 这意味着您可以忽略默认的数据库策略（可能是在 Dapr 外部设置的，或通过 Dapr 组件设置的），以无限期地保留给定的数据库记录。 您可以通过将`ttlInSeconds`设置为`-1`来实现此目的。 此值表示忽略任何设置的TTL值。
 
 ## 受支持的组件
 
-Refer to the TTL column in the [state store components guide]({{< ref supported-state-stores >}}).
+请参阅 TTL 列 [状态存储组件指南]({{< ref supported-state-stores >}}).
 
 ## 示例
 
-You can set state TTL in the metadata as part of the state store set request:
+您可以在状态存储设置请求的元数据中设置状态TTL：
 
-{{< tabs Python "HTTP API (Bash)" "HTTP API (PowerShell)">}}
+{{< tabs Python ".NET" Go "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
+
+<!--python-->
 
 ```python
 #dependencies
@@ -48,10 +56,63 @@ with DaprClient() as client:
 
 ```
 
-To launch a Dapr sidecar and run the above example application, you'd then run a command similar to the following:
+要启动 Dapr sidecar 并运行上述示例应用程序，然后运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+<!--dotnet-->
+
+```csharp
+// dependencies
+
+using Dapr.Client;
+
+// code
+
+await client.SaveStateAsync(storeName, stateKeyName, state, metadata: new Dictionary<string, string>() { 
+    { 
+        "ttlInSeconds", "120" 
+    } 
+});
+```
+
+要启动 Dapr sidecar 并运行上述示例应用程序，然后运行类似以下命令：
+
+```bash
+dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+<!--go-->
+
+```go
+// dependencies
+
+import (
+    dapr "github.com/dapr/go-sdk/client"
+)
+
+// code
+
+md := map[string]string{"ttlInSeconds": "120"}
+if err := client.SaveState(ctx, store, "key1", []byte("hello world"), md); err != nil {
+   panic(err)
+}
+```
+
+要启动 Dapr sidecar 并运行上述示例应用程序，然后运行类似以下命令：
+
+```bash
+dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run .
 ```
 
 {{% /codetab %}}
@@ -76,7 +137,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "
 
 ## 相关链接
 
-- See [the state API reference guide]({{< ref state_api.md >}}).
-- Learn [how to use key value pairs to persist a state]({{< ref howto-get-save-state.md >}}).
-- List of [state store components]({{< ref supported-state-stores >}}).
-- Read the [API reference]({{< ref state_api.md >}}).
+- [状态 API 参考指南]({{< ref state_api.md >}}).
+- 了解如何 [使用键值对来持久保存状态]({{< ref howto-get-save-state.md >}}).
+- [状态存储组件]({{< ref supported-state-stores >}}) 列表.
+- 阅读 [API 参考手册]({{< ref state_api.md >}})。

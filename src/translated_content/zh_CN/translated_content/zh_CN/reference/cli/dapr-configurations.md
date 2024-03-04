@@ -31,7 +31,7 @@ dapr configurations [flags]
 | `--output`, `-o`         |      | `list`  | Output format (options: json or yaml or list) |
 | `--help`, `-h`           |      |         | 显示此帮助消息                                       |
 
-### Examples
+### 示例
 
 ```bash
 # List Dapr configurations in all namespaces in Kubernetes mode

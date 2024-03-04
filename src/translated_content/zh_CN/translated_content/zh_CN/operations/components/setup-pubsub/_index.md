@@ -41,6 +41,8 @@ Pub/sub 的类型由 `type` 字段决定，连接地址和其他元数据等属�
 根据你使用的发布/订阅消息总线及其配置方式，主题可能会被自动创建。 即使消息总线支持自动创建主题，在生产环境中禁用它也是一种常见的治理做法。 你可能会需要使用 CLI、管理控制台或请求表单来手动创建应用所需的主题。
 {{% /alert %}}
 
+While all pub/sub components support `consumerID` metadata, the runtime creates a consumer ID if you do not supply one. All component metadata field values can carry [templated metadata values]({{< ref "component-schema.md#templated-metadata-values" >}}), which are resolved on Dapr sidecar startup. For example, you can choose to use `{namespace}` as the `consumerGroup` to enable using the same `appId` in different namespaces using the same topics as described in [this article]({{< ref "howto-namespace.md#with-namespace-consumer-groups">}}).
+
 请访问[本指南]({{< ref " howto-publish-subscribe. md#step-3-publish-a-topic" >}}) ，了解配置和使用发布/订阅组件的说明。
 
 ## 相关链接

@@ -35,7 +35,7 @@ dapr upgrade [flags]
 | `--set`              |      |          | 在命令行上设置值 (可以指定多个值或者用逗号分隔: key1=val1,key2=val2)                        |
 | `--image-registry`   |      |          | Pulls container images required by Dapr from the given image registry |
 
-### Examples
+### 示例
 
 ```bash
 # 在Kubernetes集群中，升级 Dapr到最新版本

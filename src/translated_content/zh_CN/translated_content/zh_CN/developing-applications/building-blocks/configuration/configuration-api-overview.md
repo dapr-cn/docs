@@ -6,42 +6,47 @@ weight: 1000
 description: "Dapr 配置管理构建块概述"
 ---
 
-Consuming application configuration is a common task when writing applications. Frequently, configuration stores are used to manage this configuration data. A configuration item is often dynamic in nature and tightly coupled to the needs of the application that consumes it.
+在编写应用程序时，消费应用程序配置是一项常见任务。 配置存储通常用于管理这些配置数据。 配置项目通常具有动态性质，并且与消费它的应用程序的需求紧密耦合。
 
-For example, application configuration can include:
-- Names of secrets
-- Different identifiers
-- Partition or consumer IDs
-- Names of databases to connect to, etc
+例如，应用程序配置可包括
+- Secrets 名称
+- 不同的标识符
+- 分区或消费者 ID
+- 要连接的数据库名称等
 
-Usually, configuration items are stored as key/value items in a state store or database. Developers or operators can change application configuration at runtime in the configuration store. Once changes are made, a service is notified to load the new configuration.
+通常，配置项以键/值项的形式存储在状态存储或数据库中。 开发人员或操作人员可在运行时更改配置存储区中的应用程序配置。 一旦做出更改，就会通知服务加载新配置。
 
-Configuration data is read-only from the application API perspective, with updates to the configuration store made through operator tooling. With Dapr's configuration API, you can:
-- Consume configuration items that are returned as read-only key/value pairs
-- Subscribe to changes whenever a configuration item changes
+从应用程序接口的角度来看，配置数据是只读的，通过操作员工具对配置存储进行更新。 使用 Dapr 的配置 API，您可以
+- 使用以只读键/值对形式返回的配置项
+- 每当配置项发生变化时，都会订阅更改
 
 <img src="/images/configuration-api-overview.png" width=900>
 
 {{% alert title="Note" color="primary" %}}
- The Configuration API should not be confused with the [Dapr sidecar and control plane configuration]({{< ref "configuration-overview" >}}), which is used to set policies and settings on Dapr sidecar instances or the installed Dapr control plane.
+ 配置 API 不应与 [Dapr sidecar 和控制平面配置]({{< ref "configuration-overview" >}})混淆，后者用于在 Dapr sidecar 实例或已安装的 Dapr 控制平面上设置策略和设置。
 {{% /alert %}}
 
-## Try out configuration
+## 试用配置API
 
-### Quickstart
+### 快速入门
 
-Want to put the Dapr configuration API to the test? Walk through the following quickstart to see the configuration API in action:
+想测试一下 Dapr 配置 API 吗？ 通过下面的快速入门，了解配置 API 的运行情况：
 
-| Quickstart                                                          | 说明                                                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [Configuration quickstart]({{< ref configuration-quickstart.md >}}) | Get configuration items or subscribe to configuration changes using the configuration API. |
+| 快速入门                                              | 说明                     |
+| ------------------------------------------------- | ---------------------- |
+| [配置快速入门]({{< ref configuration-quickstart.md >}}) | 使用配置 API 获取配置项或订阅配置更改。 |
 
-### Start using the configuration API directly in your app
+### 开始直接在应用程序中使用配置应用程序接口
 
-Want to skip the quickstarts? Not a problem. You can try out the configuration building block directly in your application to read and manage configuration data. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the configuration API starting with [the configuration how-to guide]({{< ref howto-manage-configuration.md >}}).
+想跳过快速入门？ 没问题。 您可以直接在应用程序中试用配置构建模块，以读取和管理配置数据。 [Dapr 安装完成后]({{< ref "getting-started/_index.md" >}})，您可以从 [配置方法指南]({{< ref howto-manage-configuration.md >}})开始使用配置 API。
 
+## 观看演示
+
+观看 [使用 Dapr 配置构建模块的演示](https://youtu.be/tNq-n1XQuLA?t=496)
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/tNq-n1XQuLA?start=496" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## 下一步
-Follow these guides on:
-- [How-To: Read application configuration from a configuration store]({{< ref howto-manage-configuration.md >}})
+关注以下指南：
+- [操作方法：从配置存储中读取应用程序配置]({{< ref howto-manage-configuration.md >}})
 

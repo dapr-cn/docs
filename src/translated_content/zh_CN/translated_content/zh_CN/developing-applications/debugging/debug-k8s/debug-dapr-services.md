@@ -8,7 +8,7 @@ description: "在 Kubernetes 中如何在 Dapr 控制面板中进行调试"
 
 ## 概述
 
-Sometimes it is necessary to understand what's going on in Dapr control plane (aka, Kubernetes services), including `dapr-sidecar-injector`, `dapr-operator`, `dapr-placement`, and `dapr-sentry`, especially when you diagnose your Dapr application and wonder if there's something wrong in Dapr itself. Additionally, you may be developing a new feature for Dapr on Kubernetes and want to debug your code.
+有时候，我们需要知道在 Dapr 控制面板中发生了什么(aka. Kubernetes服务)，包括 `dapr-sidecar-injector`, `dapr-operator`, `dapr-placement`, and `dapr-sentry`，特别是当你诊断你的 Dapr 应用时想要知道是不是 Dapr 自身存在什么错误。 此外，你可能正在为 Kubernetes 中的 Dapr 开发一个新功能，并且想调试你的代码。
 
 这份指南将展示在 Kubernetes 集群中如何使用 Dapr 调试二进制文件对 Dapr 服务进行调试。
 
@@ -16,8 +16,8 @@ Sometimes it is necessary to understand what's going on in Dapr control plane (a
 
 ### 前提
 
-- Familiarize yourself with [this guide]({{< ref kubernetes-deploy.md >}}) to learn how to deploy Dapr to your Kubernetes cluster.
-- Setup your [dev environment](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
+- 阅读 [本指南]({{< ref kubernetes-deploy.md >}}) 来学习如何将 Dapr 部署到您的 Kubernetes 集群。
+- 设置您的 [开发环境](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)
 -  [Helm](https://github.com/helm/helm/releases)
 
 ### 1. 构建 Dapr 调试二进制文件
@@ -109,5 +109,5 @@ Forwarding from [::1]:40000 -> 40000
 ## 相关链接
 
 - [Kubernetes 上的 Dapr 概述]({{< ref kubernetes-overview >}})
-- [Deploy Dapr to a Kubernetes cluster]({{< ref kubernetes-deploy >}})
+- [将 dapr 部署到 Kubernetes 集群]({{< ref kubernetes-deploy >}})
 - [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)

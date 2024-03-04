@@ -30,7 +30,7 @@ dapr invoke [flags]
 | `--data-file`, `-f` |          |        | 包含 JSON 序列化数据的文件（可选）         |
 | `--verb`, `-v`      |          | `POST` | 要使用的 HTTP 谓词                 |
 
-### Examples
+### 示例
 
 ```bash
 # 使用POST方式调用目标应用上的sample方法

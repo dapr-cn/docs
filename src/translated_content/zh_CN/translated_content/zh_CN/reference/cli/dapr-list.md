@@ -31,7 +31,7 @@ dapr list [flags]
 | `--namespace`, `-n`      |      | `default` | 列出 在Kubernetes 中定义的命名空间中 Dapr pod。 仅与 `-k` 标志共同起作用（可选）                      |
 | `--output`, `-o`         |      | `table`   | The output format of the list. Valid values are: `json`, `yaml`, or `table` |
 
-### Examples
+### 示例
 
 ```bash
 # List Dapr instances in self-hosted mode

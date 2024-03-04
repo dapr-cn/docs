@@ -9,8 +9,7 @@ aliases:
 
 ## Component format
 
-To setup Etcd state store create a component of type `state.etcd`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
-
+To setup an Etcd state store create a component of type `state.etcd`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -19,7 +18,9 @@ metadata:
   name: <NAME>
 spec:
   type: state.etcd
-  version: v1
+  # Supports v1 and v2. Users should always use v2 by default. There is no
+  # migration path from v1 to v2, see `versioning` below.
+  version: v2
   metadata:
   - name: endpoints
     value: <CONNECTION STRING> # Required. Example: 192.168.0.1:2379,192.168.0.2:2379,192.168.0.3:2379
@@ -39,16 +40,23 @@ spec:
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件，参考 [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
+
+### 版本控制
+
+Dapr has 2 versions of the Etcd state store component: `v1` and `v2`. It is recommended to use `v2`, as `v1` is deprecated.
+
+While `v1` and `v2` have the same metadata fields, `v1` causes data inconsistencies in apps when using [Actor TTLs]({{< ref "actors_api.md#ttl" >}}) from Dapr v1.12. `v1` and `v2` are incompatible with no data migration path for `v1` to `v2` on an existing active Etcd cluster and `keyPrefixPath`. If you are using `v1`, you should continue to use `v1` until you create a new Etcd cluster or use a different `keyPrefixPath`.
+
 ## 元数据字段规范
 
-| Field         | 必填 | 详情                                                                                                                             | 示例                                                     |
-| ------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
-| endpoints     | 是  | Connection string to Etcd server                                                                                               | `"192.168.0.1:2379,192.168.0.2:2379,192.168.0.3:2379"` |
-| keyPrefixPath | 否  | Key prefix path in Etcd. Default is `""`                                                                                       | `"dapr"`                                               |
-| tlsEnable     | 否  | Whether to enable tls                                                                                                          | `"false"`                                              |
-| ca            | 否  | Contents of Etcd server CA file. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}).          | `"-----BEGIN CERTIFICATE-----\nMIIC9TCCA..."`         |
-| cert          | 否  | Contents of Etcd server certificate file. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}). | `"-----BEGIN CERTIFICATE-----\nMIIDUTCC..."`          |
-| key           | 否  | Contents of Etcd server key file. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}).         | `"-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIB..."`      |
+| Field           | Required | 详情                                                                                                                                        | 示例                                                     |
+| --------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `endpoints`     |    是     | Connection string to the Etcd cluster                                                                                                     | `"192.168.0.1:2379,192.168.0.2:2379,192.168.0.3:2379"` |
+| `keyPrefixPath` |    否     | Key prefix path in Etcd. Default is no prefix.                                                                                            | `"dapr"`                                               |
+| `tlsEnable`     |    否     | Whether to enable TLS for connecting to Etcd.                                                                                             | `"false"`                                              |
+| `ca`            |    否     | CA certificate for connecting to Etcd, PEM-encoded. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}).  | `"-----BEGIN CERTIFICATE-----\nMIIC9TCCA..."`         |
+| `cert`          |    否     | TLS certificate for connecting to Etcd, PEM-encoded. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}). | `"-----BEGIN CERTIFICATE-----\nMIIDUTCC..."`          |
+| `key`           |    否     | TLS key for connecting to Etcd, PEM-encoded. Can be `secretKeyRef` to use a [secret reference]({{< ref component-secrets.md >}}).         | `"-----BEGIN PRIVATE KEY-----\nMIIEpAIB..."`          |
 
 ## Setup Etcd
 
@@ -58,7 +66,7 @@ spec:
 
 You can run Etcd database locally using Docker Compose. Create a new file called `docker-compose.yml` and add the following contents as an example:
 
-```
+```yaml
 version: '2'
 services:
   etcd:
@@ -67,15 +75,16 @@ services:
       - "2379:2379"
     command: etcd --listen-client-urls http://0.0.0.0:2379 --advertise-client-urls http://0.0.0.0:2379```
 ```
+
 Save the `docker-compose.yml` file and run the following command to start the Etcd server:
 
-```
+```sh
 docker-compose up -d
 ```
 
 This starts the Etcd server in the background and expose the default Etcd port of `2379`. You can then interact with the server using the `etcdctl` command-line client on `localhost:12379`. For example:
 
-```
+```sh
 etcdctl --endpoints=localhost:2379 put mykey myvalue
 ```
 
@@ -92,6 +101,7 @@ Follow the [Bitnami instructions](https://github.com/bitnami/charts/tree/main/bi
 {{< /tabs >}}
 
 ## 相关链接
+
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - 阅读 [本指南]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) 以获取配置状态存储组件的说明
 - [状态管理构建块]({{< ref state-management >}})

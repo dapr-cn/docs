@@ -54,13 +54,13 @@ spec:
 
 ## 元数据字段规范
 
-| Field         | 必填  | 绑定支持   | 详情                                                                                  | 示例                                           |
-| ------------- |:---:| ------ | ----------------------------------------------------------------------------------- | -------------------------------------------- |
-| `queueName`   |  是  | Output | Name of the existing Cloudflare Queue                                               | `"mydaprqueue"`                              |
-| `key`         |  是  | 输出     | Ed25519 private key, PEM-encoded                                                    | *See example above*                          |
-| `cfAccountID` | Y/N | 输出     | Cloudflare account ID. Required to have Dapr manage the worker.                     | `"456789abcdef8b5588f3d134f74ac"def`         |
-| `cfAPIToken`  | Y/N | 输出     | API token for Cloudflare. Required to have Dapr manage the Worker.                  | `"secret-key"`                               |
-| `workerUrl`   | Y/N | 输出     | URL of the Worker. Required if the Worker has been pre-provisioned outside of Dapr. | `"https://mydaprqueue.mydomain.workers.dev"` |
+| Field         | Required | 绑定支持   | 详情                                                                                  | 示例                                           |
+| ------------- |:--------:| ------ | ----------------------------------------------------------------------------------- | -------------------------------------------- |
+| `queueName`   |    是     | Output | Name of the existing Cloudflare Queue                                               | `"mydaprqueue"`                              |
+| `key`         |    是     | 输出     | Ed25519 private key, PEM-encoded                                                    | *See example above*                          |
+| `cfAccountID` |   Y/N    | 输出     | Cloudflare account ID. Required to have Dapr manage the worker.                     | `"456789abcdef8b5588f3d134f74ac"def`         |
+| `cfAPIToken`  |   Y/N    | 输出     | API token for Cloudflare. Required to have Dapr manage the Worker.                  | `"secret-key"`                               |
+| `workerUrl`   |   Y/N    | 输出     | URL of the Worker. Required if the Worker has been pre-provisioned outside of Dapr. | `"https://mydaprqueue.mydomain.workers.dev"` |
 
 > When you configure Dapr to create your Worker for you, you may need to set a longer value for the `initTimeout` property of the component, to allow enough time for the Worker script to be deployed. For example: `initTimeout: "120s"`
 

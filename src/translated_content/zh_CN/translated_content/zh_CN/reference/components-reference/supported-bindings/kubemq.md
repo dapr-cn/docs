@@ -22,21 +22,24 @@ spec:
   version: v1
   metadata:
     - name: address
-      value: localhost:50000
+      value: "localhost:50000"
     - name: channel
-      value: queue1
+      value: "queue1"
+    - name: direction
+      value: "input, output"
 ```
 
 ## 元数据字段规范
 
-| Field              | 必填 | 详情                                                                                                                           | 示例                                     |
-| ------------------ |:--:| ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| address            | 是  | Address of the KubeMQ server                                                                                                 | `"localhost:50000"`                    |
-| channel            | 是  | The Queue channel name                                                                                                       | `queue1`                               |
-| authToken          | 否  | Auth JWT token for connection. Check out [KubeMQ Authentication](https://docs.kubemq.io/learn/access-control/authentication) | `ew...`                                |
-| autoAcknowledged   | 否  | Sets if received queue message is automatically acknowledged                                                                 | `true` or `false` (default is `false`) |
-| pollMaxItems       | 否  | Sets the number of messages to poll on every connection                                                                      | `1`                                    |
-| pollTimeoutSeconds | 否  | Sets the time in seconds for each poll interval                                                                              | `3600`                                 |
+| Field                | Required | 详情                                                                                                                           | 示例                                           |
+| -------------------- |:--------:| ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `address`            |    是     | Address of the KubeMQ server                                                                                                 | `"localhost:50000"`                          |
+| `channel`            |    是     | The Queue channel name                                                                                                       | `"queue1"`                                   |
+| `authToken`          |    否     | Auth JWT token for connection. Check out [KubeMQ Authentication](https://docs.kubemq.io/learn/access-control/authentication) | `"ew..."`                                    |
+| `autoAcknowledged`   |    否     | Sets if received queue message is automatically acknowledged                                                                 | `"true"` or `"false"` (default is `"false"`) |
+| `pollMaxItems`       |    否     | Sets the number of messages to poll on every connection                                                                      | `"1"`                                        |
+| `pollTimeoutSeconds` |    否     | Sets the time in seconds for each poll interval                                                                              | `"3600"`                                     |
+| `direction`          |    否     | The direction of the binding                                                                                                 | `"input"`, `"output"`, `"input, output"`     |
 
 ## 绑定支持
 
@@ -48,7 +51,7 @@ This component supports both **input and output** binding interfaces.
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-1. Obtain KubeMQ Key by visiting [https://account.kubemq.io/login/register](https://account.kubemq.io/login/register) and register for a key.
+1. [Obtain KubeMQ Key](https://docs.kubemq.io/getting-started/quick-start#obtain-kubemq-license-key).
 2. Wait for an email confirmation with your Key
 
 You can run a KubeMQ broker with Docker:
@@ -61,7 +64,7 @@ You can then interact with the server using the client port: `localhost:50000`
 {{% /codetab %}}
 
 {{% codetab %}}
-1. Obtain KubeMQ Key by visiting [https://account.kubemq.io/login/register](https://account.kubemq.io/login/register) and register for a key.
+1. [Obtain KubeMQ Key](https://docs.kubemq.io/getting-started/quick-start#obtain-kubemq-license-key).
 2. Wait for an email confirmation with your Key
 
 Then Run the following kubectl commands:

@@ -22,7 +22,7 @@ openssl rand 16 | base64
 
 令牌认证配置在 Kubernetes 和 自托管 Dapr deployments 下稍有不同：
 
-### Self-hosted
+### Self-hosted (自托管)
 
 在自托管场景中， Dapr 查找是否存在 `APP_API_TOKEN` 环境变量。 If that environment variable is set when the `daprd` process launches, Dapr includes the token when calling an app:
 
@@ -54,13 +54,13 @@ annotations:
 
 ## 轮换令牌
 
-### Self-hosted
+### Self-hosted (自托管)
 
 To rotate the configured token in self-hosted, update the `APP_API_TOKEN` environment variable to the new value and restart the `daprd` process.
 
 ### Kubernetes
 
-To rotate the configured token in Kubernates, update the previously-created secret with the new token in each namespace. You can do that using `kubectl patch` command, but a simpler way to update these in each namespace is by using a manifest:
+To rotate the configured token in Kubernetes, update the previously-created secret with the new token in each namespace. You can do that using `kubectl patch` command, but a simpler way to update these in each namespace is by using a manifest:
 
 ```yaml
 apiVersion: v1
@@ -121,7 +121,7 @@ containers:
       name: app-api-token
 ```
 
-### Self-hosted
+### Self-hosted (自托管)
 
 在自托管模式下，您可以将 token 设置为应用程序的环境变量 ：
 

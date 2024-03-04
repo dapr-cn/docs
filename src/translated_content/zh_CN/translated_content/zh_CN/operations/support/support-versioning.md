@@ -6,7 +6,7 @@ weight: 1000
 description: "Dapr 的版本控制策略"
 ---
 
-## Introduction
+## 介绍
 Dapr is designed for future changes in the runtime, APIs and components with versioning schemes. This topic describes the versioning schemes and strategies for APIs, manifests such as components and Github repositories.
 
 ## 版本控制
@@ -49,7 +49,7 @@ SDK、CLI 和仪表板的版本控制遵循 `MAJOR.MINOR.PATCH` 格式。 当 SD
 
 SDK 中的样本或者样例版本会跟随该代码库。
 
-## Components
+## 组件
 组件在 components-contrib 代码库中实现，并遵循 `MAJOR` 版本控制方案。 组件版本会被加入到 major 版本（vX）中 ，补丁与非破坏性更改都会被加到最新的 major 版本中。 当组件接口中存在非向后兼容的更改时，major 版本将递增，例如，更改现有状态存储接口中的方法。
 
 [components-contrib](https://github.com/dapr/components-contrib/) 代码库版本是内部所有组件的统一版本。  也就是说，组件代码库版本由其中所有组件的发布的架构组合而成。 新版本的 Dapr 并不意味着 components-contrib 有新发布版本。
@@ -57,8 +57,12 @@ SDK 中的样本或者样例版本会跟随该代码库。
 注意：组件具有能生产使用的版本周期：Alpha、Beta 和 Stable。 这些版本周期与其版本控制无关。 受支持组件的表显示其版本和版本周期。
 * List of [state store components]({{< ref supported-state-stores.md >}})
 * [pub/sub 组件列表]({{< ref supported-pubsub.md >}})
-* [安全存储组件]({{< ref supported-secret-stores.md >}})列表
 * [绑定组件列表]({{< ref supported-bindings.md >}})
+* [安全存储组件]({{< ref supported-secret-stores.md >}})列表
+* List of [configuration store components]({{< ref supported-configuration-stores.md >}})
+* List of [lock components]({{< ref supported-locks.md >}})
+* List of [crytpography components]({{< ref supported-cryptography.md >}})
+* List of [middleware components]({{< ref supported-middleware.md >}})
 
 有关组件版本控制的详细信息，请阅读 [版本 2 及更高版本的组件](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md#version-2-and-beyond-of-a-component)
 
@@ -95,6 +99,8 @@ spec:
 ### 组件弃用
 组件的弃用将提前两（2）个版本宣布。 弃用组件会导致组件版本的主要版本更新。 在 2 个版本之后，该组件将从 Dapr 运行时中取消注册，尝试加载它将引发致命异常。
 
+Component deprecations and removal are announced in the release notes.
+
 ## 快速入门和示例
 快速入门在 [ Quickstarts 代码库](https://github.com/dapr/quickstarts)随运行时一起进行版本控制，其中相应版本的表位于示例代码库的首页上。  用户应使用运行时版本相对应的快速入门。
 
@@ -102,3 +108,4 @@ spec:
 
 ## 相关链接
 * 阅读[支持的版本]({{< ref support-release-policy.md >}})
+* Read the [Breaking Changes and Deprecation Policy]({{< ref breaking-changes-and-deprecations.md >}})

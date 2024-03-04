@@ -1,17 +1,18 @@
 ---
 type: docs
-title: "Pluggable components SDKs"
+title: "可插拔组件 SDK"
 linkTitle: "SDK"
 weight: 2000
-description: "Develop pluggable components in your favorite language"
+description: "用您喜欢的语言开发可插拔组件"
 no_list: true
 is_preview: true
 ---
 
-The Dapr SDKs are the easiest way for you to create pluggable components. Choose your favorite language and start creating components in minutes.
+Dapr SDK 是创建可插拔组件的最简单方法。 选择你最喜欢的语言，并在几分钟内开始创建组件。
 
-## Pluggable components SDKs
+## 可插拔组件 SDK
 
 | 语言                                              |       状态       |
 | ----------------------------------------------- |:--------------:|
+| [Go]({{< ref pluggable-components-go >}})       | In development |
 | [.NET]({{< ref pluggable-components-dotnet >}}) | In development |

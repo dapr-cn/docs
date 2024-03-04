@@ -42,14 +42,14 @@ If the optional `archive` metadata is set to `true`, on each state change, the R
 
 ## 元数据字段规范
 
-| Field    | 必填 | 详情                               | 示例                                                                 |
-| -------- |:--:| -------------------------------- | ------------------------------------------------------------------ |
-| address  | 是  | The address for RethinkDB server | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
-| database | 是  | 要使用的数据库。 仅限字母数字                  | `"dapr"`                                                           |
-| table    | 否  | 要使用的表名                           | `"table"`                                                          |
-| username | 否  | 连接使用的用户名                         | `"user"`                                                           |
-| password | 否  | 连接使用的密码                          | `"password"`                                                       |
-| archive  | 否  | 是否存档表                            | `"true"`, `"false"`                                                |
+| Field    | Required | 详情                               | 示例                                                                 |
+| -------- |:--------:| -------------------------------- | ------------------------------------------------------------------ |
+| address  |    是     | The address for RethinkDB server | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
+| database |    是     | 要使用的数据库。 仅限字母数字                  | `"dapr"`                                                           |
+| table    |    否     | 要使用的表名                           | `"table"`                                                          |
+| username |    否     | 连接使用的用户名                         | `"user"`                                                           |
+| password |    否     | 连接使用的密码                          | `"password"`                                                       |
+| archive  |    否     | 是否存档表                            | `"true"`, `"false"`                                                |
 
 ## 设置 RethinkDB
 

@@ -1,105 +1,117 @@
 ---
 type: docs
-title: Workflow overview
+title: 工作流程概述
 linkTitle: 概述
 weight: 1000
-description: "Overview of Dapr Workflow"
+description: "Dapr 工作流程概述"
 ---
 
 {{% alert title="Note" color="primary" %}}
-Dapr Workflow is currently in alpha.
+Dapr 工作流目前处于 beta 阶段。 [查看 {{% dapr-latest-version cli="true" %}} 的已知限制]({{< ref "#limitations" >}})。
 {{% /alert %}}
 
-Dapr Workflow makes orchestrating the logic required for messaging, state management, and failure handling across various microservices easier for developers. Dapr Workflow enables you to create long running, fault-tolerant, stateful applications. Prior to Dapr Workflow, you'd often need to build ad-hoc workflows in custom, complex code in order to achieve long running, fault-tolerant, stateful applications.
+Dapr 工作流使开发人员可以轻松地以可靠的方式编写业务逻辑和集成。 由于 Dapr 工作流是有状态的，因此支持长期运行和容错的应用程序，是协调微服务的理想选择。 Dapr 工作流可与其他 Dapr 构建块无缝协作，例如服务调用、发布/订阅、状态管理和绑定。
 
-The durable, resilient Dapr Workflow capability:
+持久、可复原的 Dapr 工作流功能：
 
-- Offers a built-in workflow runtime for driving Dapr Workflow execution
-- Provides SDKs for authoring workflows in code, using any language
-- Provides HTTP and gRPC APIs for managing workflows (start, query, suspend/resume, terminate)
-- Integrates with any other workflow runtime via workflow components
+- 提供内置工作流运行时，用于驱动 Dapr 工作流的执行。
+- 提供 SDK，可使用任何语言以代码编写工作流。
+- 提供 HTTP 和 gRPC 应用程序接口，用于管理工作流（启动、查询、暂停/继续、引发事件、终止、清除）。
+- 通过工作流组件与任何其他工作流运行时集成。
 
-<img src="/images/workflow-overview/workflow-overview.png" width=800 alt="Diagram showing basics of Dapr Workflow">
+<img src="/images/workflow-overview/workflow-overview.png" width=800 alt="Dapr 工作流程基础示意图">
 
-Some example scenarios that Dapr Workflow can perform are:
+Dapr 工作流程可以执行的一些示例场景包括：
 
-- Order processing involving inventory management, payment systems, shipping, etc.
-- HR onboarding workflows coordinating tasks across multiple departments and participants.
-- Orchestrating the roll-out of digital menu updates in a national restaurant chain.
-- Image processing workflows involving API-based classification and storage.
+- 订单处理涉及库存管理、支付系统和配送服务之间的编排。
+- 人力资源入职工作流程，协调跨多个部门和参与者的任务。
+- 在一家全国性连锁餐厅协调推出数字菜单更新。
+- 涉及基于 API 的分类和存储的图像处理工作流。
+
+## 特性
+
+### 工作流和活动
+
+使用 Dapr 工作流，可以编写活动，然后在工作流中协调这些活动。 工作流活动包括：
+
+- 工作流中的基本工作单元
+- 用于调用其他 （Dapr） 服务、与状态存储和发布/订阅代理交互。
+
+[详细了解工作流活动。]({{< ref "workflow-features-concepts.md##workflow-activities" >}})
+
+### 子工作流
+
+除活动外，您还可以编写工作流，将其他工作流安排为子工作流。 子工作流独立于启动它的父工作流，并支持自动重试策略。
+
+[详细了解子工作流。]({{< ref "workflow-features-concepts.md#child-workflows" >}})
+
+### 计时器和提醒器
+
+与 Dapr actor 相同，您可以在任何时间范围内安排类似提醒的持久延迟。
+
+[了解有关工作流计时器的详细信息]({{< ref "workflow-features-concepts.md#durable-timers" >}}) 和 [提醒]({{< ref "workflow-architecture.md#reminder-usage-and-execution-guarantees" >}})
+
+### 用于管理工作流的工作流 HTTP 调用
+
+使用工作流代码创建应用程序并使用 Dapr 运行该应用程序时，可以调用驻留在应用程序中的特定工作流。 每个单独的工作流可以是：
+
+- 通过 POST 请求启动或终止
+- 通过 POST 请求触发，以传送指定事件
+- 暂停，然后通过 POST 请求恢复
+- 通过 POST 请求从状态存储中清除
+- 通过 GET 请求查询工作流状态
+
+[详细了解如何使用 HTTP 调用管理工作流。]({{< ref workflow_api.md >}})
+
+## 工作流模式
+
+Dapr 工作流简化了微服务体系结构中复杂的有状态协调要求。 下面几节将介绍几种可受益于 Dapr 工作流的应用模式。
+
+了解更多有关 [不同类型的工作流模式]({{< ref workflow-patterns.md >}})
+
+## 工作流 SDK
+
+Dapr 工作流 _创作 SDK_ 是特定于语言的 SDK，其中包含用于实现工作流逻辑的类型和函数。 工作流逻辑位于应用程序中，由通过 gRPC 流在 Dapr Sidecar 中运行的 Dapr 工作流引擎进行编排。
+
+### 支持的 SDK
+
+您可以使用以下 SDK 创作工作流。
+
+| 语言栈    | 包                                                                                           |
+| ------ | ------------------------------------------------------------------------------------------- |
+| Python | [dapr-ext-workflow](https://github.com/dapr/python-sdk/tree/master/ext/dapr-ext-workflow)   |
+| .NET   | [Dapr.Workflow](https://www.nuget.org/profiles/dapr.io)                                     |
+| Java   | [io.dapr.workflows](https://dapr.github.io/java-sdk/io/dapr/workflows/package-summary.html) |
+
+## 试用工作流
+
+### 快速入门和教程
+
+想要测试工作流？ 通过以下快速入门和教程了解工作流的实际操作：
+
+| 快速入门/教程                                                                                                           | 说明                                                |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [Workflow quickstart]({{< ref workflow-quickstart.md >}})                                                         | 运行具有四个工作流活动的工作流应用程序，以查看 Dapr 工作流的运行情况             |
+| [工作流 Python SDK 示例](https://github.com/dapr/python-sdk/tree/master/examples/demo_workflow)                        | 了解如何创建 Dapr 工作流并使用 Python `DaprClient` 包调用它。      |
+| [工作流 .NET SDK 示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow)                               | 了解如何创建 Dapr 工作流并使用 ASP.NET Core Web API 调用它。      |
+| [工作流 Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/workflows) | 了解如何创建 Dapr 工作流并使用 Java `io.dapr.workflows` 包调用它。 |
 
 
-## Features
+### 直接在应用中开始使用工作流
 
-### Workflows and activities
+想跳过快速入门？ 没问题。 您可以直接在应用程序中试用工作流构建模块。 [Dapr 安装完成后]({{< ref install-dapr-cli.md >}})，您可以开始使用工作流，从 [如何编写工作流]({{< ref howto-author-workflow.md >}})开始。
 
-With Dapr Workflow, you can write activites and then compose those activities together into a workflow. Workflow activities are:
-- The basic unit of work in a workflow
-- The tasks that get orchestrated in the business process
+## 局限性
 
-[Learn more about workflow activities.]({{< ref "workflow-features-concepts.md##workflow-activities" >}})
+使用 Dapr 工作流处于 beta 阶段，存在以下限制：
 
-### Child workflows
+- **状态存储:** 对于 Dapr Workflow 的 {{% dapr-latest-version cli="true" %}} beta 版本，使用 NoSQL 数据库作为状态存储会导致在存储内部状态方面存在限制。 例如，CosmosDB 在单个请求中仅有100个状态的最大单个操作项限制。
 
-In addition to activities, you can write workflows to schedule other workflows as child workflows. A child workflow is independent of the parent workflow that started it and support automatic retry policies.
+- **水平扩展：**对于 Dapr Workflow 的 {{% dapr-latest-version cli="true" %}} beta 版本，如果您将 Dapr sidecars 或应用程序 pods 扩展到超过 2 个，则工作流执行的并发性会下降。 建议测试1或2个实例，不要超过2个。
 
-[Learn more about child workflows.]({{< ref "workflow-features-concepts.md#child-workflows" >}})
+## 观看演示
 
-### Timers and reminders
-
-Same as Dapr actors, you can schedule reminder-like durable delays for any time range.
-
-[Learn more about workflow timers]({{< ref "workflow-features-concepts.md#durable-timers" >}}) and [reminders]({{< ref "workflow-architecture.md#reminder-usage-and-execution-guarantees" >}})
-
-### Workflow HTTP calls to manage a workflow
-
-When you create an application with workflow code and run it with Dapr, you can call specific workflows that reside in the application. Each individual workflow can be:
-
-- Started or terminated through a POST request
-- Queried through a GET request
-
-[Learn more about how manage a workflow using HTTP calls.]({{< ref workflow_api.md >}})
-
-### Manage other workflow runtimes with workflow components
-
-You can call other workflow runtimes (for example, Temporal and Netflix Conductor) by writing your own workflow component.
-
-## Workflow patterns
-
-Dapr Workflow simplifies complex, stateful coordination requirements in microservice architectures. The following sections describe several application patterns that can benefit from Dapr Workflow.
-
-Learn more about [different types of workflow patterns](todo)
-
-## Workflow SDKs
-
-The Dapr Workflow _authoring SDKs_ are language-specific SDKs that contain types and functions to implement workflow logic. The workflow logic lives in your application and is orchestrated by the Dapr Workflow engine running in the Dapr sidecar via a gRPC stream.
-
-### Supported SDKs
-
-You can use the following SDKs to author a workflow.
-
-| Language stack | Package                                                 |
-| -------------- | ------------------------------------------------------- |
-| .NET           | [Dapr.Workflow](https://www.nuget.org/profiles/dapr.io) |
-
-## Try out workflows
-
-### Quickstarts and tutorials
-
-Want to put workflows to the test? Walk through the following quickstart and tutorials to see workflows in action:
-
-| Quickstart/tutorial                                                                           | 说明                                                                                           |
-| --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| [Workflow quickstart]({{< ref workflow-quickstart.md >}})                                     | Run a .NET workflow application with four workflow activities to see Dapr Workflow in action |
-| [Workflow .NET SDK example](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow) | Learn how to create a Dapr Workflow and invoke it using ASP.NET Core web APIs.               |
-
-### Start using workflows directly in your app
-
-Want to skip the quickstarts? Not a problem. You can try out the workflow building block directly in your application. After [Dapr is installed]({{< ref install-dapr-cli.md >}}), you can begin using  workflows, starting with [how to author a workflow]({{< ref howto-author-workflow.md >}}).
-
-## Watch the demo
-
-Watch [this video for an overview on Dapr Workflow](https://youtu.be/s1p9MNl4VGo?t=131):
+观看 [视频，了解 Dapr 工作流程](https://youtu.be/s1p9MNl4VGo?t=131)概述：
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/s1p9MNl4VGo?start=131" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -109,5 +121,8 @@ Watch [this video for an overview on Dapr Workflow](https://youtu.be/s1p9MNl4VGo
 
 ## 相关链接
 
-- [Workflow API reference]({{< ref workflow_api.md >}})
-- [Try out the .NET example](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow)
+- [工作流 API 参考文档]({{< ref workflow_api.md >}})
+- 试用完整的 SDK 示例：
+  - [.NET 示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow)
+  - [Python 示例](https://github.com/dapr/python-sdk/tree/master/examples/demo_workflow)
+  - [Java 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/workflows)

@@ -30,6 +30,10 @@ This example uses the [PubSub sample](https://github.com/dapr/quickstarts/tree/m
 | Python subscriber       | X           |             |
 | React UI publisher      |             | X           |
 
+{{% alert title="Note" color="primary" %}}
+All pub/sub components support limiting pub/sub topics to specific applications using [namespace or component scopes]({{< ref pubsub-scopes.md >}}).
+{{% /alert %}}
+
 ## 前提
 
 * [Dapr installed on Kubernetes]({{< ref "kubernetes-deploy.md" >}}) in any namespace since Dapr works at the cluster level.

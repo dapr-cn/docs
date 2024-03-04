@@ -8,13 +8,13 @@ description: 学习如何使用 Docker-Compose 进行本地开发
 
 ## Docker-Compose
 
-*Consider this to be a .NET companion to the [Dapr Self-Hosted with Docker Guide]({{< ref self-hosted-with-docker.md >}})*.
+*这是一篇 .NET 使用指南，另见 [使用 Docker 进行 Dapr 自托管]({{< ref self-hosted-with-docker.md >}})*
 
 `docker-compose` 是 Docker Desktop 附带的 CLI 工具，可用于一次运行多个容器。 它是一种将多个容器的生命周期自动化在一起的方法，并为面向 Kubernetes 的应用程序提供了类似于生产环境的开发体验。
 
-- **Pro:** Since `docker-compose` manages containers for you, you can make dependencies part of the application definition and stop the long-running containers on your machine.
-- **Con:** most investment required, services need to be containerized to get started.
-- **Con:** can be difficult to debug and troubleshoot if you are unfamilar with Docker.
+- **优点：** 由于 `docker-compose` 为您管理容器，因此我们可以将依赖关系作为应用程序定义的一部分，并停止在机器上的长时间运行的容器。
+- **缺点：** 需要更多资源，服务需要被容器化才能使用。
+- **缺点：** 如果不熟悉 Docker，则可能很难调试和排除故障。
 
 ### 使用 Docker-Compose
 
@@ -26,7 +26,7 @@ description: 学习如何使用 Docker-Compose 进行本地开发
 
 总结一下方法：
 
-- Create a `Dockerfile` for each service
+- 为每个服务创建一个 `Dockerfile`
 - 创建一个 `docker-compose.yaml` 并将其添加到源码仓库中
 
 要了解如何编写 `docker-compose.yaml` ，请查阅： [Hello, docker-compose sample](https://github.com/dapr/samples/tree/master/hello-docker-compose) 。

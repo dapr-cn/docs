@@ -23,16 +23,21 @@ spec:
     value: "https://oapi.dingtalk.com/robot/send?access_token=******"
   - name: secret
     value: "****************"
+  - name: direction
+    value: "input, output"
 ```
+
 {{% alert title="Warning" color="warning" %}}
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件，参考 [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
+
 ## 元数据字段规范
-| Field | 必填 | 绑定支持  | 详情             | 示例                                                           |
-| ----- |:--:| ----- | -------------- | ------------------------------------------------------------ |
-| id    | 是  | 输入/输出 | unique id      | `"test_webhook_id"`                                          |
-| url   | 是  | 输入/输出 | 钉钉的 Webhook    | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
-| 密钥    | 否  | 输入/输出 | 钉钉 Webhook 的秘钥 | `"****************"`                                         |
+| Field       | Required | 绑定支持  | 详情                               | 示例                                                           |
+| ----------- |:--------:| ----- | -------------------------------- | ------------------------------------------------------------ |
+| `id`        |    是     | 输入/输出 | Unique id                        | `"test_webhook_id"`                                          |
+| `url`       |    是     | 输入/输出 | 钉钉的 Webhook                      | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
+| `密钥`        |    否     | 输入/输出 | The secret of DingTalk's Webhook | `"****************"`                                         |
+| `direction` |    否     | 输入/输出 | The direction of the binding     | `"input"`, `"output"`, `"input, output"`                     |
 
 ## 绑定支持
 

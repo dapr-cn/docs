@@ -28,26 +28,19 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>
 
 #### 查询参数
 
-一些 secret stores 有 **optional** 元数据属性。 元数据使用查询参数：
+Some secret stores support **optional**, per-request metadata properties. Use query parameters to provide those properties. For example:
 
 ```
 GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>?metadata.version_id=15
 ```
 
-##### GCP Secret Manager
-以下可选 meta 可以提供给 GCP Secret Manager 组件
+Observe that not all secret stores support the same set of parameters. For example:
+- Hashicorp Vault, GCP Secret Manager and AWS Secret Manager support the `version_id` parameter
+- Only AWS Secret Manager supports the `version_stage` parameter
+- Only Kubernetes Secrets supports the `namespace` parameter Check each [secret store's documentation]({{< ref supported-secret-stores.md >}}) for the list of supported parameters.
 
-| Query Parameter     | 说明           |
-| ------------------- | ------------ |
-| metadata.version_id | 给定 Secret 版本 |
 
-##### AWS Secret Manager
-以下可选 meta 可提供给 AWS Secret Manager组件
 
-| Query Parameter        | 说明                  |
-| ---------------------- | ------------------- |
-| metadata.version_id    | 给定 Secret 版本        |
-| metadata.version_stage | 给定 Secret key 的版本阶段 |
 
 ### HTTP 响应
 
@@ -98,20 +91,14 @@ The above example demonstrates a response from a secret store with name/value se
 | 403  | 拒绝访问                          |
 | 500  | 未能获取 Secret 或未定义 secret store |
 
-### Examples
+### 示例
 
 ```shell
-curl http://localhost:3500/v1.0/secrets/vault/db-secret
+curl http://localhost:3500/v1.0/secrets/mySecretStore/db-secret
 ```
 
 ```shell
-curl http://localhost:3500/v1.0/secrets/vault/db-secret?metadata.version_id=15&metadata.version_stage=AAA
-```
-
-> 注意，如果部署到非默认命名空间中，上述查询还必须包含命名空间元数据（例如 `production` 如下）
-
-```shell
-curl http://localhost:3500/v1.0/secrets/vault/db-secret?metadata.version_id=15&?metadata.namespace=production
+curl http://localhost:3500/v1.0/secrets/myAwsSecretStore/db-secret?metadata.version_id=15&metadata.version_stage=production
 ```
 
 ## 获取批量 Secret
@@ -167,7 +154,7 @@ curl http://localhost:3500/v1.0/secrets/kubernetes/bulk
 | 403  | 拒绝访问                          |
 | 500  | 未能获取 Secret 或未定义 secret store |
 
-### Examples
+### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/secrets/vault/bulk

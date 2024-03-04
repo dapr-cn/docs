@@ -7,20 +7,20 @@ description: >
   Dapr 与服务网格的比较和配合使用
 ---
 
-Dapr 使用 sidecar 架构，与应用程序一起作为单独的进程运行，包括服务调用、网络安全和分布式跟踪等功能。 This often raises the question: how does Dapr compare to service mesh solutions such as [Linkerd](https://linkerd.io/), [Istio](https://istio.io/) and [Open Service Mesh](https://openservicemesh.io/) among others?
+Dapr 使用 sidecar 架构，与应用程序一起作为单独的进程运行，包括服务调用、网络安全和分布式跟踪等功能。 这往往会引起一个问题：Dapr与服务网格解决方案如 [Linkerd](https://linkerd.io/), [Istio](https://istio.io/) 和 [Open Service Mesh](https://openservicemesh.io/) 等相比如何？
 
-## How Dapr and service meshes compare
+## Dapr 和服务网格的比较
 虽然 Dapr 和服务网格确实存在一些重叠功能，但 Dapr **不是服务网格** ，尤其服务网格被定义为 *"网络"* 服务网格。 与专注于网络问题的服务网格不同，Dapr 专注于提供构建块，使开发人员更容易将应用程序构建为微服务。 Dapr 以开发人员为中心，而服务网格以基础设施为中心。
 
 在大多数情况下，开发人员不需要意识到他们正在构建的应用程序将部署在包括服务网格在内的环境中，因为服务网格会拦截网络流量。 服务网格大多由系统运维人员管理和部署，而 Dapr 构建块 API 则打算由开发人员在其代码中明确使用。
 
 Dapr 与服务网格都有的一些常见功能包括：
-- Secure service-to-service communication with mTLS encryption
-- Service-to-service metric collection
-- Service-to-service distributed tracing
-- Resiliency through retries
+- 基于 mTLS 加密的服务到间安全通信
+- 服务间度量指标收集
+- 服务间分布式跟踪
+- 通过重试实现复原能力
 
- Importantly, Dapr provides service discovery and invocation via names, which is a developer-centric concern. This means that through Dapr's service invocation API, developers call a method on a service name, whereas service meshes deal with network concepts such as IP addresses and DNS addresses. However, Dapr does not provide capabilities for traffic behavior such as routing or traffic splitting. Traffic routing is often addressed with ingress proxies to an application and does not have to use a service mesh. In addition, Dapr provides other application-level building blocks for state management, pub/sub messaging, actors, and more.
+ 重要的是，Dapr 以开发人员为中心，提供了通过名称进行服务发现和调用的方式。 也就是说，通过 Dapr 的服务调用 API，开发人员使用服务名称进行调用，而服务网格则需处理网络概念，如 IP 和 DNS 地址。 但是，Dapr 不提供路由或流量分配等关于流量控制的功能。 流量路由通常在应用程序的入口代理中处理，不必使用服务网格。 此外，Dapr 还提供了其他应用级别的构建块，如状态管理、发布/订阅 、actor等。
 
 Dapr 和服务网格之间的另一个区别是可观察性(跟踪和度量)。 服务网格在网络级别运行，并跟踪服务间的网络调用。 Dapr 是通过服务调用的方式来实现的。 此外，Dapr 还使用写入 Cloud Events 信封的 trace ID，在发布/订阅中提供可观察性（跟踪和 metrics ）。 这意味着，对于同时使用服务间调用和发布/订阅进行通信的应用程序，使用 Dapr 的指标和跟踪比使用服务网格更广泛。
 
@@ -32,14 +32,12 @@ Dapr 和服务网格之间的另一个区别是可观察性(跟踪和度量)。 
 Dapr 也适用于服务网格。 如果两者部署在一起，Dapr 和服务网格的 sidecar 都在应用环境中运行。 在这种情况下，建议 mTLS 加密和分布式跟踪功能仅在 Dapr 或服务网格中的一方进行配置。
 
 如需了解更多关于同时运行 Dapr 及服务网格的信息，可参阅以下来自 Dapr 社区的相关资料：
-- General overview and a demo of [Dapr and Linkerd](https://youtu.be/xxU68ewRmz8?t=142)
+- [Dapr 和 Linkerd](https://youtu.be/xxU68ewRmz8?t=142) 的概述和演示
 - 运行 dapr 和 Istio</a>
 
- 的演示</li> 
+ 的演示</li> </ul> 
   
-  - 了解更多关于[一起使用 Open Service Mesh（OSM）和 Dapr 的信息]({{<ref open-service-mesh>}})。</ul> 
-
-
+  
 
 ## 何时选择使用 Dapr、服务网格或者并存
 

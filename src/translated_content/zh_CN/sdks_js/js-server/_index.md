@@ -1,22 +1,22 @@
 ---
 type: docs
-title: "JavaScript Server SDK"
-linkTitle: "服务器"
+title: "JavaScript 服务器 SDK"
+linkTitle: "Server"
 weight: 2000
-description: JavaScript Server SDK for developing Dapr applications
+description: 用于开发 Dapr 应用程序的 JavaScript 服务器 SDK
 ---
 
-## Introduction
+## 介绍
 
-The Dapr Server will allow you to receive communication from the Dapr Sidecar and get access to its server facing features such as: Subscribing to Events, Receiving Input Bindings, and much more.
+Dapr 服务器将允许您从 Dapr Sidecar 接收通信，并访问其面向服务器的功能，例如：订阅事件、接收输入绑定等等。
 
 ## 前提
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Latest LTS version of Node or greater](https://nodejs.org/en/)
+- [Node.js 的最新 LTS 版本或更高版本](https://nodejs.org/en/)
 
-## Installing and importing Dapr's JS SDK
+## 安装和导入 Dapr 的 JS SDK
 
 1. 使用 `npm` 安装 SDK：
 
@@ -24,7 +24,7 @@ The Dapr Server will allow you to receive communication from the Dapr Sidecar an
 npm i @dapr/dapr --save
 ```
 
-2. Import the libraries:
+2. 导入类库：
 
 ```typescript
 import { DaprServer, CommunicationProtocolEnum } from "@dapr/dapr";
@@ -57,11 +57,11 @@ const server = new DaprServer({
 });
 ```
 
-## Running
+## 运行
 
-To run the examples, you can use two different protocols to interact with the Dapr sidecar: HTTP (default) or gRPC.
+要运行这些示例，您可以使用两种不同的协议与 Dapr Sidecar 进行交互：HTTP（默认）或 gRPC。
 
-### Using HTTP (built-in express webserver)
+### 使用 HTTP（内置 express webserver）
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -87,15 +87,15 @@ dapr run --app-id example-sdk --app-port 50051 --app-protocol http -- npm run st
 npm run start:dapr-http
 ```
 
-> ℹ️ **Note:** The `app-port` is required here, as this is where our server will need to bind to. Dapr will check for the application to bind to this port, before finishing start-up.
+> ℹ️ **注意：**在这里需要填写`app-port`，因为这是我们的服务器需要绑定的地方。 Dapr 在完成启动之前，将检查是否有应用程序绑定到该端口。
 
-### Using HTTP (bring your own express webserver)
+### 使用 HTTP（自带的 express webserver）
 
-Instead of using the built-in web server for Dapr sidecar to application communication, you can also bring your own instance. This is helpful in scenarios like when you are building a REST API back-end and want to integrate Dapr directly in it.
+除了使用内置的 Web 服务器进行 Dapr sidecar 与应用程序的通信之外，您还可以自带实例。 这在诸如构建 REST API 后端并希望直接集成 Dapr 的情况下非常有帮助。
 
-Note, this is currently available for [`express`](https://www.npmjs.com/package/express) only.
+注意，目前仅适用于[`express`](https://www.npmjs.com/package/express)。
 
-> 💡 Note: when using a custom web-server, the SDK will configure server properties like max body size, and add new routes to it. The routes are unique on their own to avoid any collisions with your application, but it's not guaranteed to not collide.
+> 💡 注意：当使用自定义的Web服务器时，SDK将配置服务器属性，如最大body大小，并添加新的路由到其中。 这些路由本身是唯一的，以避免与您的应用程序发生冲突，但不能保证不会发生碰撞。
 
 ```typescript
 import { DaprServer, CommunicationProtocolEnum } from "@dapr/dapr";
@@ -122,7 +122,7 @@ const daprServer = new DaprServer({
 await daprServer.start();
 ```
 
-After configuring the above, you can call your custom endpoint as you normally would:
+在配置完上述内容后，您可以像平常一样调用您的自定义终端点：
 
 ```typescript
 const res = await fetch(`http://127.0.0.1:50002/my-custom-endpoint`);
@@ -131,7 +131,7 @@ const json = await res.json();
 
 ### 使用 gRPC
 
-Since HTTP is the default, you will have to adapt the communication protocol to use gRPC. You can do this by passing an extra argument to the client or server constructor.
+由于 HTTP 是默认设置，因此必须调整通信协议才能使用 gRPC。 您可以通过向客户端或服务器构造函数传递一个额外的参数来做到这一点。
 
 ```typescript
 import { DaprServer, CommunicationProtocol } from "@dapr/dapr";
@@ -158,15 +158,15 @@ dapr run --app-id example-sdk --app-port 50051 --app-protocol grpc -- npm run st
 npm run start:dapr-grpc
 ```
 
-> ℹ️ **Note:** The `app-port` is required here, as this is where our server will need to bind to. Dapr will check for the application to bind to this port, before finishing start-up.
+> ℹ️ **注意：**在这里需要填写`app-port`，因为这是我们的服务器需要绑定的地方。 Dapr 在完成启动之前，将检查是否有应用程序绑定到该端口。
 
 ## 构建块
 
-The JavaScript Server SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}) focusing on Sidecar to App features.
+JavaScript Server SDK 允许您与所有 [Dapr 构建块]({{< ref building-blocks >}}) 专注于 Sidecar 到 App 功能。
 
-### Invocation API
+### 调用 API
 
-#### Listen to an Invocation
+#### 侦听调用
 
 ```typescript
 import { DaprServer, DaprInvokerCallbackContent } from "@dapr/dapr";
@@ -208,21 +208,21 @@ start().catch((e) => {
 
 > 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
-### PubSub API
+### Pub/Sub API
 
 #### 订阅消息
 
-Subscribing to messages can be done in several ways to offer flexibility of receiving messages on your topics:
+订阅消息可以通过多种方式进行，以提供在您的主题上灵活接收消息的能力：
 
-- Direct subscription through the `subscribe` method
-- Direct susbcription with options through the `subscribeWithOptions` method
-- Subscription afterwards through the `susbcribeOnEvent` method
+- 通过`subscribe`方法直接订阅
+- 通过`subscribeWithOptions`方法直接订阅并选择选项
+- 之后通过`susbcribeOnEvent`方法订阅
 
-Each time an event arrives, we pass its body as `data` and the headers as `headers`, which can contain properties of the event publisher (e.g., a device ID from IoT Hub)
+每次事件到达时，我们将其正文作为`data`传递，并将头部作为`headers`，其中可以包含事件发布者的属性（例如来自IoT Hub的设备ID）
 
-> Dapr requires subscriptions to be set up on startup, but in the JS SDK we allow event handlers to be added afterwards as well, providing you the flexibility of programming.
+> Dapr 在启动时需要设置订阅，但在 JS SDK 中我们也允许在之后添加事件处理程序，为您提供编程的灵活性。
 
-An example is provided below
+下面提供了一个示例
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -269,17 +269,17 @@ async function start() {
 }
 ```
 
-> For a full list of state operations visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
+> 有关状态操作的完整列表，请访问[操作方法: 发布 & 订阅]({{< ref howto-publish-subscribe.md >}})。
 
-#### Subscribe with SUCCESS/RETRY/DROP status
+#### 以 SUCCESS/RETRY/DROP 状态订阅
 
-Dapr supports [status codes for retry logic](https://docs.dapr.io/reference/api/pubsub_api/#expected-http-response) to specify what should happen after a message gets processed.
+Dapr支持[重试逻辑的状态码](https://docs.dapr.io/reference/api/pubsub_api/#expected-http-response)，以指定消息在处理后应该发生什么。
 
-> ⚠️ The JS SDK allows multiple callbacks on the same topic, we handle priority of status on `RETRY` > `DROP` > `SUCCESS` and default to `SUCCESS`
+> ⚠️ JS SDK 允许对同一主题进行多次回调，我们处理 status 的优先级 `重试` > `落` > `成功` 并默认为 `成功`
 
-> ⚠️ Make sure to [configure resiliency](https://docs.dapr.io/operations/resiliency/resiliency-overview/) in your application to handle `RETRY` messages
+> ⚠️ 确保在您的应用程序中[配置弹性](https://docs.dapr.io/operations/resiliency/resiliency-overview/)以处理`RETRY`消息
 
-In the JS SDK we support these messages through the `DaprPubSubStatusEnum` enum. To ensure Dapr will retry we configure a Resiliency policy as well.
+在JS SDK中，我们通过`DaprPubSubStatusEnum`枚举来支持这些消息。 为了确保 Dapr 会进行重试，我们需要配置一个弹性策略。
 
 \*\*components/resiliency.yaml`
 
@@ -349,11 +349,11 @@ async function start() {
 }
 ```
 
-#### Subscribe to messages rule based
+#### 订阅基于规则的消息
 
-Dapr [supports routing messages](https://docs.dapr.io/developing-applications/building-blocks/pubsub/howto-route-messages/) to different handlers (routes) based on rules.
+Dapr [支持根据规则将消息路由](https://docs.dapr.io/developing-applications/building-blocks/pubsub/howto-route-messages/)到不同的处理程序（路由器）。
 
-> E.g., you are writing an application that needs to handle messages depending on their "type" with Dapr, you can send them to different routes `handlerType1` and `handlerType2` with the default route being `handlerDefault`
+> 例如，您正在编写一个应用程序，需要根据其"type"处理消息。使用Dapr，您可以将它们发送到不同的路由`handlerType1`和`handlerType2`，默认路由为`handlerDefault`。
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -408,15 +408,15 @@ async function start() {
 }
 ```
 
-#### Bulk Subscribe to messages
+#### 批量订阅消息
 
-Bulk Subscription is supported and is available through following API:
+批量订阅得到支持，并可通过以下API使用：
 
-- Bulk subscription through the `subscribeBulk` method: `maxMessagesCount` and `maxAwaitDurationMs` are optional; and if not provided, default values for related components will be used.
+- 通过`subscribeBulk`方法进行批量订阅： `maxMessagesCount`和`maxAwaitDurationMs`是可选的；如果不提供，将使用相关组件的默认值。
 
-While listening for messages, the application receives messages from Dapr in bulk. However, like regular subscribe, the callback function receives a single message at a time, and the user can choose to return a `DaprPubSubStatusEnum` value to acknowledge successfully, retry, or drop the message. The default behavior is to return a success response.
+在监听消息时，应用程序会批量接收来自 Dapr 的消息。 然而，就像普通的订阅一样，回调函数每次只接收一条消息，用户可以选择返回`DaprPubSubStatusEnum`值来确认成功、重试或丢弃消息。 默认行为是返回成功响应。
 
-Please refer [this document](https://v1-10.docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-bulk/) for more details.
+请参考[此文档](https://v1-10.docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-bulk/)了解更多详情。
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -460,21 +460,21 @@ async function start() {
 }
 ```
 
-#### Dead Letter Topics
+#### 死信主题
 
-Dapr supports [dead letter topic](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-deadletter/). This means that when a message fails to be processed, it gets sent to a dead letter queue. E.g., when a message fails to be handled on `/my-queue` it will be sent to `/my-queue-failed`. E.g., when a message fails to be handled on `/my-queue` it will be sent to `/my-queue-failed`.
+Dapr支持[死信主题](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-deadletter/)。 这意味着当消息处理失败时，它会被发送到死信队列。 例如，当一个消息无法在`/my-queue`上处理时，它将被发送到`/my-queue-failed`。 例如，当一个消息无法在`/my-queue`上处理时，它将被发送到`/my-queue-failed`。
 
-You can use the following options with `subscribeWithOptions` method:
+您可以在`subscribeWithOptions`方法中使用以下选项：
 
-- `deadletterTopic`: Specify a deadletter topic name (note: if none is provided we create one named `deadletter`)
-- `deadletterCallback`: The method to trigger as handler for our deadletter
+- `deadletterTopic`: 指定一个死信主题名称（注意：如果没有提供，则创建一个名为`deadletter`的主题）
+- `deadletterCallback`: 触发我们的死信处理程序的方法
 
-Implementing Deadletter support in the JS SDK can be done by either
+通过以下两种方式可以在JS SDK中实现死信支持
 
-- Passing the `deadletterCallback` as an option
-- By subscribing to route manually with `subscribeToRoute`
+- 将`deadletterCallback`作为选项传递
+- 通过使用`subscribeToRoute`手动订阅路由
 
-An example is provided below
+下面提供了一个示例
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -522,9 +522,9 @@ async function start() {
 }
 ```
 
-### Bindings API
+### 绑定 API
 
-#### Receive an Input Binding
+#### 接收输入绑定
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -559,13 +559,13 @@ start().catch((e) => {
 });
 ```
 
-> For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
+> 有关输出绑定的完整指南，请访问[操作方法：使用绑定]({{< ref howto-bindings.md >}})。
 
-### Configuration API
+### 配置 API
 
-> 💡 The configuration API is currently only available through gRPC
+> 💡 配置 API 目前只能通过 gRPC 获得
 
-#### Getting a configuration value
+#### 获取配置值
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -590,7 +590,7 @@ start().catch((e) => {
 });
 ```
 
-#### Subscribing to Key Changes
+#### 订阅关键变更
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -622,4 +622,4 @@ start().catch((e) => {
 
 ## 相关链接
 
-- [JavaScript SDK examples](https://github.com/dapr/js-sdk/tree/main/examples)
+- [JavaScript SDK 示例](https://github.com/dapr/js-sdk/tree/main/examples)

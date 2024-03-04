@@ -1,10 +1,10 @@
 ---
 type: docs
-title: "Advanced uses of the Dapr pluggable components .NET SDK"
+title: "Dapr 可插拔组件 .NET SDK 的高级用途"
 linkTitle: "Advanced"
 weight: 2000
-description: How to use advanced techniques with with the Dapr pluggable components .NET SDK
+description: 如何使用 Dapr 可插拔组件 .NET SDK 的高级技术
 is_preview: true
 ---
 
-While not typically needed by most, these guides show advanced ways to can configure your .NET pluggable components.
+虽然大多数人通常不需要，但这些指南展示了如何高级配置您的.NET可插入组件。

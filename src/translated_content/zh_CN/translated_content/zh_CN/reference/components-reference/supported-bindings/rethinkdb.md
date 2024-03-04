@@ -15,7 +15,6 @@ The [RethinkDB state store]({{<ref setup-rethinkdb.md>}}) supports transactions 
 
 要设置RethinkDB状态变更绑定需要创建一个`bindings.rethinkdb.statechange`类型的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
-
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -26,17 +25,20 @@ spec:
   version: v1
   metadata:
   - name: address
-    value: <REPLACE-RETHINKDB-ADDRESS> # Required, e.g. 127.0.0.1:28015 or rethinkdb.default.svc.cluster.local:28015).
+    value: "<REPLACE-RETHINKDB-ADDRESS>" # Required, e.g. 127.0.0.1:28015 or rethinkdb.default.svc.cluster.local:28015).
   - name: database
-    value: <REPLACE-RETHINKDB-DB-NAME> # Required, e.g. dapr (alpha-numerics only)
+    value: "<REPLACE-RETHINKDB-DB-NAME>" # Required, e.g. dapr (alpha-numerics only)
+  - name: direction 
+    value: "<DIRECTION-OF-RETHINKDB-BINDING>"
 ```
 
 ## 元数据字段规范
 
-| Field    | 必填 | 绑定支持  | 详情                          | 示例                                                                |
-| -------- |:--:| ----- | --------------------------- | ----------------------------------------------------------------- |
-| address  | 是  | Input | Address of RethinkDB server | `"27.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
-| database | 是  | Input | RethinDB数据库名                | `"dapr"`                                                          |
+| Field       | Required | 绑定支持  | 详情                          | 示例                                                                |
+| ----------- |:--------:| ----- | --------------------------- | ----------------------------------------------------------------- |
+| `address`   |    是     | Input | Address of RethinkDB server | `"27.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
+| `database`  |    是     | Input | RethinDB数据库名                | `"dapr"`                                                          |
+| `direction` |    否     | Input | Direction of the binding    | `"input"`                                                         |
 
 ## 绑定支持
 

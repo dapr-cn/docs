@@ -1,23 +1,23 @@
 ---
 type: docs
-title: "Policies"
+title: "Resiliency policies"
 linkTitle: "Policies"
-weight: 4500
+weight: 200
 description: "Configure resiliency policies for timeouts, retries, and circuit breakers"
 ---
 
 Define timeouts, retries, and circuit breaker policies under `policies`. Each policy is given a name so you can refer to them from the `targets` section in the resiliency spec.
 
-> Note: Dapr offers default retries for specific APIs. [See here]({{< ref "#override-default-retries" >}}) to learn how you can overwrite default retry logic with user defined retry policies.
+> Note: Dapr offers default retries for specific APIs. [See here]({{< ref "#overriding-default-retries" >}}) to learn how you can overwrite default retry logic with user defined retry policies.
 
-## Timeouts
+## 超时
 
-Timeouts can be used to early-terminate long-running operations. If you've exceeded a timeout duration:
+Timeouts are optional policies that can be used to early-terminate long-running operations. If you've exceeded a timeout duration:
 
 - The operation in progress is terminated (if possible).
 - An error is returned.
 
-Valid values are of the form accepted by Go's [time.ParseDuration](https://pkg.go.dev/time#ParseDuration), for example: `15s`, `2m`, `1h30m`.
+Valid values are of the form accepted by Go's [time.ParseDuration](https://pkg.go.dev/time#ParseDuration), for example: `15s`, `2m`, `1h30m`. Timeouts have no set maximum value.
 
 示例︰
 
@@ -30,6 +30,8 @@ spec:
       important: 60s
       largeResponse: 10s
 ```
+
+If you don't specify a timeout value, the policy does not enforce a time and defaults to whatever you set up per the request client.
 
 ## Retries
 
@@ -69,6 +71,8 @@ spec:
         maxRetries: -1 # Retry indefinitely
 ```
 
+
+
 ## Circuit Breakers
 
 Circuit Breaker (CB) policies are used when other applications/services/components are experiencing elevated failure rates. CBs monitor the requests and shut off all traffic to the impacted service when a certain criteria is met ("open" state). By doing this, CBs give the service time to recover from their outage instead of flooding it with events. The CB can also allow partial traffic through to see if the system has healed ("half-open" state). Once requests resume being successful, the CB gets into "closed" state and allows traffic to completely resume.
@@ -95,7 +99,7 @@ spec:
 
 ## Overriding default retries
 
-Dapr provides default retries for certain request failures and transient errors.  Within a resiliency spec, you have the option to override Dapr's default retry logic by defining policies with reserved, named keywords. For example, defining a policy with the name `DaprBuiltInServiceRetries`, overrides the default retries for failures between sidecars via service-to-service requests. Policy overrides are not applied to specific targets.
+Dapr provides default retries for any unsuccessful request, such as failures and transient errors. Within a resiliency spec, you have the option to override Dapr's default retry logic by defining policies with reserved, named keywords. For example, defining a policy with the name `DaprBuiltInServiceRetries`, overrides the default retries for failures between sidecars via service-to-service requests. Policy overrides are not applied to specific targets.
 
 > Note: Although you can override default values with more robust retries, you cannot override with lesser values than the provided default value, or completely remove default retries. This prevents unexpected downtime.
 
@@ -103,9 +107,9 @@ Below is a table that describes Dapr's default retries and the policy keywords t
 
 | Capability             | Override Keyword                 | Default Retry Behavior                                                                                                                        | 说明                                                                                                                                                                |
 | ---------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Service Invocation     | DaprBuiltInServiceRetries        | Per call retries are performed with a backoff interval of 1 second, up to a threshold of 3 times.                                             | Sidecar-to-sidecar requests (a service invocation method call) that fail and result in a gRPC code `Unavailable` or `Unauthenticated`                             |
+| 服务调用                   | DaprBuiltInServiceRetries        | Per call retries are performed with a backoff interval of 1 second, up to a threshold of 3 times.                                             | Sidecar-to-sidecar requests (a service invocation method call) that fail and result in a gRPC code `Unavailable` or `Unauthenticated`                             |
 | Actors                 | DaprBuiltInActorRetries          | Per call retries are performed with a backoff interval of 1 second, up to a threshold of 3 times.                                             | Sidecar-to-sidecar requests (an actor method call) that fail and result in a gRPC code `Unavailable` or `Unauthenticated`                                         |
-| Actor Reminders        | DaprBuiltInActorReminderRetries  | Per call retries are performed with an exponential backoff with an initial interval of 500ms, up to a maximum of 60s for a duration of 15mins | Requests that fail to persist an actor reminder to a state store                                                                                                  |
+| Actor Reminder         | DaprBuiltInActorReminderRetries  | Per call retries are performed with an exponential backoff with an initial interval of 500ms, up to a maximum of 60s for a duration of 15mins | Requests that fail to persist an actor reminder to a state store                                                                                                  |
 | Initialization Retries | DaprBuiltInInitializationRetries | Per call retries are performed 3 times with an exponential backoff, an initial interval of 500ms and for a duration of 10s                    | Failures when making a request to an application to retrieve a given spec. For example, failure to retrieve a subscription, component or resiliency specification |
 
 
@@ -293,6 +297,6 @@ The table below is a break down of which policies are applied when attempting to
 
 ## 下一步
 
-Try out one of the Resiliency quickstarts:
+试一试复原力快速入门课程：
 - [Resiliency: Service-to-service]({{< ref resiliency-serviceinvo-quickstart.md >}})
-- [Resiliency: State Management]({{< ref resiliency-state-quickstart.md >}})
+- [复原能力：状态管理]({{< ref resiliency-state-quickstart.md >}})

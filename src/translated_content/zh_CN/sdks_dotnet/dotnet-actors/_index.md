@@ -2,8 +2,8 @@
 type: docs
 title: "Dapr actors .NET SDK"
 linkTitle: "Actors"
-weight: 40000
-description: 如何使用 Dapr .NET SDK 启动和运行
+weight: 50000
+description: 使用Dapr actors .NET SDK快速启动和运行
 ---
 
 通过Dapr actor 程序包，您可以与.NET应用程序中的Dapr virtual actors进行交互。

@@ -22,17 +22,21 @@ spec:
   version: v1
   metadata:
   - name: namespace
-    value: <NAMESPACE>
+    value: "<NAMESPACE>"
   - name: resyncPeriodInSec
     value: "<seconds>"
+  - name: direction
+    value: "input"
 ```
 
 ## 元数据字段规范
 
-| Field             | 必填 | 绑定支持  | 详情                                                  | 示例          |
-| ----------------- |:--:| ----- | --------------------------------------------------- | ----------- |
-| namespace         | 是  | Input | The Kubernetes namespace to read events from        | `"default"` |
-| resyncPeriodInSec | 否  | Input | 从 Kubernetes API 服务器刷新事件列表的时间周期。 Defaults to `"10"` | `"15"`      |
+| Field               | Required | 绑定支持  | 详情                                                                                                      | 示例                      |
+| ------------------- |:--------:| ----- | ------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `namespace`         |    是     | Input | The Kubernetes namespace to read events from                                                            | `"default"`             |
+| `resyncPeriodInSec` |    否     | Input | 从 Kubernetes API 服务器刷新事件列表的时间周期。 Defaults to `"10"`                                                     | `"15"`                  |
+| `direction`         |    否     | Input | The direction of the binding                                                                            | `"input"`               |
+| `kubeconfigPath`    |    否     | Input | The path to the kubeconfig file. If not specified, the binding uses the default in-cluster config value | `"/path/to/kubeconfig"` |
 
 ## 绑定支持
 

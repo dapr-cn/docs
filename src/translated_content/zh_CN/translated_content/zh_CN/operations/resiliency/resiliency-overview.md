@@ -2,23 +2,31 @@
 type: docs
 title: "概述"
 linkTitle: "概述"
-weight: 4500
+weight: 100
 description: "Configure Dapr retries, timeouts, and circuit breakers"
 ---
 
 Dapr provides a capability for defining and applying fault tolerance resiliency policies via a [resiliency spec]({{< ref "resiliency-overview.md#complete-example-policy" >}}). Resiliency specs are saved in the same location as components specs and are applied when the Dapr sidecar starts. The sidecar determines how to apply resiliency policies to your Dapr API calls. In self-hosted mode, the resiliency spec must be named `resiliency.yaml`. In Kubernetes Dapr finds the named resiliency specs used by your application. Within the resiliency spec, you can define policies for popular resiliency patterns, such as:
 
-- [Timeouts]({{< ref "policies.md#timeouts" >}})
-- [Retries/back-offs]({{< ref "policies.md#retries" >}})
-- [Circuit breakers]({{< ref "policies.md#circuit-breakers" >}})
+- [超时]({{< ref "policies.md#timeouts" >}})
+- [重试/取消]({{< ref "policies.md#retries" >}})
+- [断路器]({{< ref "policies.md#circuit-breakers" >}})
 
 Policies can then be applied to [targets]({{< ref "targets.md" >}}), which include:
 
 - [Apps]({{< ref "targets.md#apps" >}}) via service invocation
-- [Components]({{< ref "targets.md#components" >}})
+- [组件]({{< ref "targets.md#components" >}})
 - [Actors]({{< ref "targets.md#actors" >}})
 
 Additionally, resiliency policies can be [scoped to specific apps]({{< ref "component-scopes.md#application-access-to-components-with-scopes" >}}).
+
+## Demo video
+
+Learn more about [how to write resilient microservices with Dapr](https://youtu.be/uC-4Q5KFq98?si=JSUlCtcUNZLBM9rW).
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/uC-4Q5KFq98?si=JSUlCtcUNZLBM9rW" title="YouTube 视频播放器" style="padding-bottom:25px;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+## Resiliency policy structure
 
 Below is the general structure of a resiliency policy:
 
@@ -51,7 +59,7 @@ spec:
       # components and their applied policies here
 ```
 
-### Complete example policy
+## Complete example policy
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -163,14 +171,12 @@ spec:
 Watch this video for how to use [resiliency](https://www.youtube.com/watch?t=184&v=7D6HOU3Ms6g&feature=youtu.be):
 
 <div class="embed-responsive embed-responsive-16by9">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/sembed/7D6HOU3Ms6g?start=184" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/7D6HOU3Ms6g?start=184" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
- - [Policies]({{< ref "policies.md" >}})
- - [Targets]({{< ref "targets.md" >}})
-
 ## 下一步
-
-Try out one of the Resiliency quickstarts:
+Learn more about resiliency policies and targets:
+ - [Policies]({{< ref "policies.md" >}})
+ - [Targets]({{< ref "targets.md" >}}) Try out one of the Resiliency quickstarts:
 - [Resiliency: Service-to-service]({{< ref resiliency-serviceinvo-quickstart.md >}})
-- [Resiliency: State Management]({{< ref resiliency-state-quickstart.md >}})
+- [复原能力：状态管理]({{< ref resiliency-state-quickstart.md >}})

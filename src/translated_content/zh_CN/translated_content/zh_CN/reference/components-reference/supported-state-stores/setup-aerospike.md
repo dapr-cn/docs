@@ -34,11 +34,11 @@ spec:
 
 ## 元数据字段规范
 
-| Field     | 必填 | 详情                                | 示例                                                     |
-| --------- |:--:| --------------------------------- | ------------------------------------------------------ |
-| hosts     | 是  | Host name/port of database server | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
-| namespace | 是  | Aerospike 命名空间。                   | `"namespace"`                                          |
-| set       | 否  | 数据库中的 setName                     | `"myset"`                                              |
+| Field     | Required | 详情                                | 示例                                                     |
+| --------- |:--------:| --------------------------------- | ------------------------------------------------------ |
+| hosts     |    是     | Host name/port of database server | `"localhost:3000"`, `"aerospike:3000,aerospike2:3000"` |
+| namespace |    是     | Aerospike 命名空间。                   | `"namespace"`                                          |
+| set       |    否     | 数据库中的 setName                     | `"myset"`                                              |
 
 ## 安装Aerospike
 

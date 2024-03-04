@@ -34,11 +34,20 @@ spec:
 
 ## 元数据字段规范
 
-| Field           | 必填 | 详情                                                               | 示例                  |
-| --------------- |:--:| ---------------------------------------------------------------- | ------------------- |
-| region          | 是  | The specific region the HuaweiCloud CSMS instance is deployed in | `"cn-north-4"`      |
-| accessKey       | 是  | The HuaweiCloud Access Key to access this resource               | `"accessKey"`       |
-| secretAccessKey | 是  | The HuaweiCloud Secret Access Key to access this resource        | `"secretAccessKey"` |
+| Field           | Required | 详情                                                               | 示例                  |
+| --------------- |:--------:| ---------------------------------------------------------------- | ------------------- |
+| region          |    是     | The specific region the HuaweiCloud CSMS instance is deployed in | `"cn-north-4"`      |
+| accessKey       |    是     | The HuaweiCloud Access Key to access this resource               | `"accessKey"`       |
+| secretAccessKey |    是     | The HuaweiCloud Secret Access Key to access this resource        | `"secretAccessKey"` |
+
+## Optional per-request metadata properties
+
+The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided when retrieving secrets from this secret store:
+
+| Query Parameter       | 说明                                |
+| --------------------- | --------------------------------- |
+| `metadata.version_id` | Version for the given secret key. |
+
 
 ## Setup HuaweiCloud Cloud Secret Management Service (CSMS) instance
 

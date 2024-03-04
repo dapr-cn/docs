@@ -26,7 +26,7 @@ dapr mtls expiry [flags]
 | -------------- | ---- | --- | ---- |
 | `--help`, `-h` |      |     | 帮助信息 |
 
-### Examples
+### 示例
 
 ```bash
 # 检查 Kubernetes 证书的过期时间

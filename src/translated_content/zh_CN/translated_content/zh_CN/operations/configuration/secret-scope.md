@@ -3,12 +3,12 @@ type: docs
 title: "指南：限制密钥存储访问"
 linkTitle: "限制密钥存储的访问"
 weight: 3000
-description: "要限制 Dapr 应用程序可访问的密钥，用户可以通过使用secret scopes扩充现有的 CRD 来定义密钥作用域。"
+description: "To limit the secrets to which the Dapr application has access, users can define secret scopes by augmenting existing configuration resource with restrictive permissions."
 ---
 
 In addition to scoping which applications can access a given component, for example a secret store component (see [Scoping components]({{< ref "component-scopes.md">}})), a named secret store component itself can be scoped to one or more secrets for an application. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets.
 
-按照 [这些说明]({{< ref "configuration-overview.md" >}}) 来定义配置 CRD。
+Follow [these instructions]({{< ref "configuration-overview.md" >}}) to define a configuration resource.
 
 ## Configure secrets access
 
@@ -44,7 +44,7 @@ secrets:
 | -------------------------------------- | ------------- | -------------- | ------------- | ---------- |
 | 1 - Only default access                | deny/allow    | empty          | empty         | deny/allow |
 | 2 - Default deny with allowed list     | deny          | ["s1"]         | 空             | 只能访问"s1"   |
-| 3 - Default allow with deneied list    | allow         | 空              | ["s1"]        | 仅限"s1"无法访问 |
+| 3 - Default allow with denied list     | allow         | 空              | ["s1"]        | 仅限"s1"无法访问 |
 | 4 - Default allow with allowed list    | allow         | ["s1"]         | 空             | 只能访问"s1"   |
 | 5 - Default deny with denied list      | deny          | 空              | ["s1"]        | deny       |
 | 6 - Default deny/allow with both lists | deny/allow    | ["s1"]         | ["s2"]        | 只能访问"s1"   |
@@ -69,7 +69,7 @@ spec:
         defaultAccess: deny
 ```
 
-对于需要拒绝访问 Kubernetes 秘密仓库的应用程序， 按照[这些说明]({{< ref kubernetes-overview >}})，并将以下注解添加到应用程序 pod 中。
+For applications that need to be denied access to the Kubernetes secret store, follow [these instructions]({{< ref kubernetes-overview >}}), and add the following annotation to the application pod.
 
 ```yaml
 dapr.io/config: appconfig

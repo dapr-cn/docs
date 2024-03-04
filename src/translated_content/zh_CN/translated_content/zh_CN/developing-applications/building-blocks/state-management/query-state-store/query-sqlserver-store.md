@@ -6,71 +6,71 @@ weight: 3000
 description: "使用 SQL Server 作为后端状态存储"
 ---
 
-Dapr doesn't transform state values while saving and retrieving states. Dapr requires all state store implementations to abide by a certain key format scheme (see [the state management spec]({{< ref state_api.md >}}). You can directly interact with the underlying store to manipulate the state data, such as:
+Dapr 在保存和检索状态时不会转换状态值。 Dapr 要求所有的状态存储实现都要遵守特定的密钥格式 (参见[Dapr 状态管理规范]({{< ref state_api.md >}}))。 您可以直接与底层存储交互，以操纵状态数据，例如：
 
-- Querying states.
-- Creating aggregated views.
-- Making backups.
+- 查询状态。
+- 创建聚合视图。
+- 制作备份。
 
-## Connect to SQL Server
+## 连接到 SQL Server
 
-The easiest way to connect to your SQL Server instance is to use the:
+连接到 SQL Server 实例的最简单方法是使用以下方法：
 
-- [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download-azure-data-studio) (Windows, macOS, Linux)
+- [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download-azure-data-studio)（Windows，macOS，Linux）
 - [SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms) (Windows)
 
 {{% alert title="Note" color="primary" %}}
-When you configure an Azure SQL database for Dapr, you need to specify the exact table name to use. The following Azure SQL samples assume you've already connected to the right database with a table named "states".
+为 Dapr 配置 Azure SQL 数据库时，需要明确指定要使用的表名。 下面的 Azure SQL 示例假设您已经连接到了一个名为 "states" 的正确数据库。
 
 {{% /alert %}}
 
-## List keys by App ID
+## 通过 App ID 列出键
 
-To get all state keys associated with application "myapp", use the query:
+要获取与应用程序 "myapp" 关联的所有状态，请使用查询：
 
 ```sql
 SELECT * FROM states WHERE [Key] LIKE 'myapp||%'
 ```
 
-The above query returns all rows with id containing "myapp||", which is the prefix of the state keys.
+上面的查询返回所有id，也就是状态键前缀为 "myapp||" 的记录。
 
-## Get specific state data
+## 获取特定状态数据
 
-To get the state data by a key "balance" for the application "myapp", use the query:
+例如，要获取应用程序 "myapp" 的键 "balance" 的状态数据，请使用以下查询:
 
 ```sql
 SELECT * FROM states WHERE [Key] = 'myapp||balance'
 ```
 
-Read the **Data** field of the returned row. To get the state version/ETag, use the command:
+读取返回行的 **Data** 字段。 要获取状态 version/ETag ，请使用以下命令:
 
 ```sql
 SELECT [RowVersion] FROM states WHERE [Key] = 'myapp||balance'
 ```
 
-## Get filtered state data
+## 获取过滤后的状态数据
 
-To get all state data where the value "color" in json data equals to "blue", use the query:
+执行下面的查询，以获取 json 数据中 "color" 值等于 "blue" 的所有状态数据：
 
 ```sql
 SELECT * FROM states WHERE JSON_VALUE([Data], '$.color') = 'blue'
 ```
 
-## Read actor state
+## 读取Actor 状态
 
-To get all the state keys associated with an actor with the instance ID "leroy" of actor type "cat" belonging to the application with ID "mypets", use the command:
+要获取应用ID为 "myets"，实例ID为 "leroy"，actor 类型为 "cat" 的相关联所有 actor 的状态键，请使用以下命令:
 
 ```sql
 SELECT * FROM states WHERE [Key] LIKE 'mypets||cat||leroy||%'
 ```
 
-To get a specific actor state such as "food", use the command:
+要获取特定 actor 状态（如 "food"） ，请使用以下命令:
 
 ```sql
 SELECT * FROM states WHERE [Key] = 'mypets||cat||leroy||food'
 ```
 
 {{% alert title="Warning" color="warning" %}}
-You should not manually update or delete states in the store. All writes and delete operations should be done via the Dapr runtime. **The only exception:** it is often required to delete actor records in a state store, _once you know that these are no longer in use_, to prevent a build up of unused actor instances that may never be loaded again.
+不应手动更新或删除存储中的状态。 所有的写入和删除操作都应该通过 Dapr 运行时来完成。 **唯一的例外：**通常需要在状态存储中删除 Actor 记录，_一旦您知道这些不再使用_，以防止未使用的 Actor 实例的累积，这些实例可能永远不会再次加载。
 
 {{% /alert %}}

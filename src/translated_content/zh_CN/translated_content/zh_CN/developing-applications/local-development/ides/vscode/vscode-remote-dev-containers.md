@@ -1,32 +1,102 @@
 ---
 type: docs
-title: "Developing Dapr applications with remote dev containers"
-linkTitle: "Remote dev containers"
+title: "使用 Dev Containers 开发 Dapr 应用程序"
+linkTitle: "Dev Containers"
 weight: 50000
-description: "How to setup a remote dev container environment with Dapr"
+description: "如何使用 Dapr 设置一个带有容器化开发环境"
 ---
 
-The Visual Studio Code [Remote Containers extension](https://code.visualstudio.com/docs/remote/containers) lets you use a Docker container as a full-featured development environment without installing any additional frameworks or packages to your local filesystem.
+Visual Studio Code [Dev Containers扩展](https://code.visualstudio.com/docs/remote/containers)允许您使用一个自包含的Docker容器作为完整的开发环境，而无需在本地文件系统中安装任何额外的包、库或工具。
 
-Dapr 为 NodeJS 和 C# 预先构建了 Docker 远程容器。 您可以选择一个现成的环境。 请注意，这些预构建的容器会自动更新到最新的 Dapr 版本。
+Dapr 已经为 C# 和 JavaScript/TypeScript 构建了预置的容器；您可以选择其中一个，以获得一个现成的环境。 请注意，这些预构建的容器会自动更新到最新的 Dapr 版本。
 
-### 设置远程开发容器
+我们还发布了一个开发容器功能，可以在任何开发容器中安装 Dapr CLI。
 
-#### Prerequisites
-<!-- IGNORE_LINKS -->
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-<!-- END_IGNORE -->
+## 设置开发环境
+
+### 前期准备
+
+- [Docker Desktop](https://docs.docker.com/desktop/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [VSCode 远程开发扩展包](https://aka.ms/vscode-remote/download/extension)
 
-#### 创建远程 Dapr 容器
-1. Open your application workspace in VS Code
-2. 在 command palette 中 (CTRL+SHIFT+P) 输入并选择 `Remote-Containers: Add Development Container Configuration Files...` <br /><img src="/images/vscode-remotecontainers-addcontainer.png" alt="添加远程容器的截图" width="700" />
+### 使用 Dev Container 功能添加 Dapr CLI
+
+您可以使用[Dev Container 功能](https://containers.dev/features)在任何 Dev 容器中安装 Dapr CLI。
+
+要做到这一点，编辑您的`devcontainer.json`文件，并在`"features"`部分中添加两个对象：
+
+```json
+"features": {
+    // Install the Dapr CLI
+    "ghcr.io/dapr/cli/dapr-cli:0": {},
+    // Enable Docker (via Docker-in-Docker)
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    // Alternatively, use Docker-outside-of-Docker (uses Docker in the host)
+    //"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+}
+```
+
+保存 JSON 文件并（重新）构建托管开发环境的容器后，您将拥有可用的 Dapr CLI（和 Docker），并且可以通过在容器中运行以下命令来安装 Dapr：
+
+```sh
+dapr init
+```
+
+#### 示例：为 Dapr 创建 Java 开发容器
+
+这是一个示例，用于创建一个基于[官方 Java 17 Dev Container 镜像](https://github.com/devcontainers/images/tree/main/src/java)的使用 Dapr 的 Java 应用程序的开发容器。
+
+将此内容放入您的项目中的文件`.devcontainer/devcontainer.json`中：
+
+```json
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java
+{
+    "name": "Java",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    "image": "mcr.microsoft.com/devcontainers/java:0-17",
+
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "none",
+            "installMaven": "false",
+            "installGradle": "false"
+        },
+        // Install the Dapr CLI
+        "ghcr.io/dapr/cli/dapr-cli:0": {},
+        // Enable Docker (via Docker-in-Docker)
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        // Alternatively, use Docker-outside-of-Docker (uses Docker in the host)
+        //"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    }
+
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "java -version",
+
+    // Configure tool-specific properties.
+    // "customizations": {},
+
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
+}
+```
+
+然后，使用VS Code命令面板（`CTRL + SHIFT + P`或Mac上的`CMD + SHIFT + P`），选择`Dev Containers: Rebuild and Reopen in Container`。
+
+### 使用预构建的开发容器（C# 和 JavaScript/TypeScript）
+
+1. 在 VS 代码中打开您的应用程序工作区（workspace）
+2. 在命令命令面板中（`CTRL + SHIFT + P`或Mac上的`CMD + SHIFT + P`），输入并选择`Dev Containers: Add Development Container Configuration Files...` <br /><img src="/images/vscode-remotecontainers-addcontainer.png" alt="添加远程容器的截图" width="700" />
 3. 输入 `dapr` 来过滤列表到可用的 Dapr 远程容器，并选择符合您应用程序的语言容器。 请注意，您可能需要选择 `Show All Definitions...` <br /><img src="/images/vscode-remotecontainers-daprcontainers.png" alt="添加 dapr 容器的截图" width="700" />
-4. 按照提示在容器中重新编译您的应用程序。 <br /><img src="/images/vscode-remotecontainers-reopen.png" alt="在开发容器中重新打开应用程序的截图" width="700" />
+4. 按照提示重新在容器中打开您的工作空间。 <br /><img src="/images/vscode-remotecontainers-reopen.png" alt="在开发容器中重新打开应用程序的截图" width="700" />
 
 #### 示例
-观看有关如何使用应用程序的 Dapr VS 代码远程容器的 [视频](https://www.bilibili.com/video/BV1QK4y1p7fn?p=8&t=120)。
+
+看这个 [视频](https://www.youtube.com/watch?v=D2dO4aGpHcg&t=120) 关于如何将 Dapr Dev 容器与您的应用程序一起使用。
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/D2dO4aGpHcg?start=120" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

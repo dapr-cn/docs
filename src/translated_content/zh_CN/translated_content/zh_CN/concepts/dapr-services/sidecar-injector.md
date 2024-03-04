@@ -5,7 +5,7 @@ linkTitle: "Sidecar injector"
 description: "Dapr Sidecar Injector 进程概述"
 ---
 
-When running Dapr in [Kubernetes mode]({{< ref kubernetes >}}), a pod is created running the Dapr Sidecar Injector service, which looks for pods initialized with the [Dapr annotations]({{< ref arguments-annotations-overview.md >}}), and then creates another container in that pod for the [daprd service]({{< ref sidecar >}})
+当在 [Kubernetes 模式]({{< ref kubernetes >}}) 下运行 Dapr 时，将会创建一个运行 Dapr Sidecar Injector 服务的 Pod，该服务将会查找使用 [Dapr annotations]({{< ref arguments-annotations-overview.md >}}) 初始化的 pod，然后在该 pod 中为 [daprd 服务]({{< ref sidecar >}})创建另一个容器。
 
 ## 运行 sidecar injector
 

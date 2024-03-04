@@ -8,7 +8,7 @@ description: "如何使用 Docker 在自托管模式下部署和运行 Dapr"
 
 This article provides guidance on running Dapr with Docker on a Windows/Linux/macOS machine or VM.
 
-## Prerequisites
+## 前期准备
 
 - [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - [Docker](https://docs.docker.com/get-docker/)
@@ -16,7 +16,7 @@ This article provides guidance on running Dapr with Docker on a Windows/Linux/ma
 
 ## 初始化 Dapr 环境
 
-要初始化 Dapr 控制平面容器并创建默认配置文件，请运行：
+To initialize the Dapr control plane containers and create a default configuration file, run:
 
 ```bash
 dapr init

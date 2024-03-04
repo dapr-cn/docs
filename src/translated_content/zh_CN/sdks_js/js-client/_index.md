@@ -6,17 +6,17 @@ weight: 1000
 description: JavaScript 客户端 SDK，用于开发 Dapr 应用程序
 ---
 
-## Introduction
+## 介绍
 
-The Dapr Client allows you to communicate with the Dapr Sidecar and get access to its client facing features such as Publishing Events, Invoking Output Bindings, State Management, Secret Management, and much more.
+Dapr客户端允许您与Dapr Sidecar进行通信，并访问其面向客户端的功能，例如发布事件，调用输出绑定，状态管理，机密管理等等。
 
 ## 前提
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Latest LTS version of Node or greater](https://nodejs.org/en/)
+- [Node.js 的最新 LTS 版本或更高版本](https://nodejs.org/en/)
 
-## Installing and importing Dapr's JS SDK
+## 安装和导入 Dapr 的 JS SDK
 
 1. 使用 `npm` 安装 SDK：
 
@@ -24,7 +24,7 @@ The Dapr Client allows you to communicate with the Dapr Sidecar and get access t
 npm i @dapr/dapr --save
 ```
 
-2. Import the libraries:
+2. 导入类库：
 
 ```typescript
 import { DaprClient, DaprServer, HttpMethod, CommunicationProtocolEnum } from "@dapr/dapr";
@@ -41,11 +41,11 @@ const client = new DaprClient({ daprHost, daprPort });
 const client = new DaprClient({ daprHost, daprPort, communicationProtocol: CommunicationProtocolEnum.GRPC });
 ```
 
-## Running
+## 运行
 
-To run the examples, you can use two different protocols to interact with the Dapr sidecar: HTTP (default) or gRPC.
+要运行这些示例，您可以使用两种不同的协议与 Dapr Sidecar 进行交互：HTTP（默认）或 gRPC。
 
-### Using HTTP (default)
+### 使用 HTTP（默认）
 
 ```typescript
 import { DaprClient } from "@dapr/dapr";
@@ -62,7 +62,7 @@ npm run start:dapr-http
 
 ### 使用 gRPC
 
-Since HTTP is the default, you will have to adapt the communication protocol to use gRPC. You can do this by passing an extra argument to the client or server constructor.
+由于 HTTP 是默认设置，因此必须调整通信协议才能使用 gRPC。 您可以通过向客户端或服务器构造函数传递一个额外的参数来做到这一点。
 
 ```typescript
 import { DaprClient, CommunicationProtocol } from "@dapr/dapr";
@@ -77,11 +77,11 @@ dapr run --app-id example-sdk --app-protocol grpc -- npm run start
 npm run start:dapr-grpc
 ```
 
-## General
+## 通用
 
-### Increasing Body Size
+### 增加 Body 大小
 
-You can increase the body size that is used by the application to communicate with the sidecar by using a`DaprClient`'s option.
+您可以通过使用`DaprClient`的选项来增加应用程序与侧车通信时使用的主体大小。
 
 ```typescript
 import { DaprClient, CommunicationProtocol } from "@dapr/dapr";
@@ -96,13 +96,13 @@ const client = new DaprClient({
 });
 ```
 
-### Proxying Requests
+### 代理请求
 
-By proxying requests, we can utilize the unique capabilities that Dapr brings with its sidecar architecture such as service discovery, logging, etc., enabling us to instantly "upgrade" our gRPC services. This feature of gRPC proxying was demonstrated in [community call 41](https://www.youtube.com/watch?v=B_vkXqptpXY&t=71s).
+通过代理请求，我们可以利用 Dapr 的 sidecar 架构带来的独特功能，如服务发现、日志记录等，使我们能够立即"升级"我们的 gRPC 服务。 Grpc 代理的这一特性在 [社区电话会议 41](https://www.youtube.com/watch?v=B_vkXqptpXY&t=71s)进行了演示.
 
-#### Creating a Proxy
+#### 创建代理
 
-To perform gRPC proxying, simply create a proxy by calling the `client.proxy.create()` method:
+要执行gRPC代理，只需调用`client.proxy.create()`方法创建一个代理：
 
 ```typescript
 // As always, create a client to our dapr sidecar
@@ -113,24 +113,24 @@ const clientSidecar = new DaprClient({ daprHost, daprPort, communicationProtocol
 const clientProxy = await clientSidecar.proxy.create<GreeterClient>(GreeterClient);
 ```
 
-We can now call the methods as defined in our `GreeterClient` interface (which in this case is from the [Hello World example](https://github.com/grpc/grpc-go/blob/master/examples/helloworld/helloworld/helloworld.proto))
+现在我们可以调用在我们的`GreeterClient`接口中定义的方法（在这个例子中是来自[Hello World示例](https://github.com/grpc/grpc-go/blob/master/examples/helloworld/helloworld/helloworld.proto)）
 
-#### Behind the Scenes (Technical Working)
+#### 幕后原理（技术工作）
 
-![Architecture](assets/architecture.png)
+![软件架构](assets/architecture.png)
 
-1. The gRPC service gets started in Dapr. We tell Dapr which port this gRPC server is running on through `--app-port` and give it a unique Dapr app ID with `--app-id <APP_ID_HERE>`
-2. We can now call the Dapr Sidecar through a client that will connect to the Sidecar
-3. Whilst calling the Dapr Sidecar, we provide a metadata key named `dapr-app-id` with the value of our gRPC server booted in Dapr (e.g. `server` in our example)
-4. Dapr will now forward the call to the gRPC server configured
+1. gRPC 服务在 Dapr 中启动。 我们告诉 Dapr 这个 gRPC 服务器通过哪个端口运行 `--app-port` 并为其提供唯一的 Dapr 应用程序 ID `--app-id <APP_ID_HERE>`
+2. 现在我们可以通过一个客户端来调用 Dapr Sidecar，该客户端将连接到 Sidecar
+3. 在调用 Dapr Sidecar 时，我们提供一个名为 `dapr-app-id` 的元数据键，其值为我们在 Dapr 中启动的 gRPC 服务器的名称（例如，在我们的示例中为 `server`）
+4. Dapr 现在会将调用转发到配置的 gRPC 服务器
 
 ## 构建块
 
-The JavaScript Client SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}) focusing on Client to Sidecar features.
+JavaScript Client SDK允许您与所有专注于客户端到Sidecar功能的[Dapr构建块]({{< ref building-blocks >}})进行交互。
 
-### Invocation API
+### 调用 API
 
-#### Invoke a Service
+#### 调用服务
 
 ```typescript
 import { DaprClient, HttpMethod } from "@dapr/dapr";
@@ -168,9 +168,9 @@ start().catch((e) => {
 
 > 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
-### State Management API
+### 状态管理 API
 
-#### Save, Get and Delete application state
+#### 保存、获取和删除应用程序状态
 
 ```typescript
 import { DaprClient } from "@dapr/dapr";
@@ -241,7 +241,7 @@ start().catch((e) => {
 
 > 有关状态操作的完整列表，请访问 [如何：获取 & 保存 状态。]({{< ref howto-get-save-state.md >}})。
 
-#### Query State API
+#### 查询状态：
 
 ```typescript
 import { DaprClient } from "@dapr/dapr";
@@ -287,7 +287,7 @@ start().catch((e) => {
 });
 ```
 
-### PubSub API
+### Pub/Sub API
 
 #### 发布消息
 
@@ -367,9 +367,9 @@ start().catch((e) => {
 });
 ```
 
-### Bindings API
+### 绑定 API
 
-#### Invoke Output Binding
+#### 调用输出绑定
 
 **输出绑定**
 
@@ -395,11 +395,11 @@ start().catch((e) => {
 });
 ```
 
-> For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
+> 有关输出绑定的完整指南，请访问[操作方法：使用绑定]({{< ref howto-bindings.md >}})。
 
-### Secret API
+### 密钥 API
 
-#### Retrieve secrets
+#### 检索密钥
 
 ```typescript
 import { DaprClient } from "@dapr/dapr";
@@ -426,11 +426,11 @@ start().catch((e) => {
 });
 ```
 
-> For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
+> 有关密钥的完整指南，请访问[操作方法：检索密钥]({{< ref howto-secrets.md >}})。
 
-### Configuration API
+### 配置 API
 
-#### Get Configuration Keys
+#### 获取配置键
 
 ```typescript
 import { DaprClient } from "@dapr/dapr";
@@ -451,9 +451,99 @@ start().catch((e) => {
 });
 ```
 
-### Distributed Lock API
+### 加密 API
 
-#### Try Lock and Unlock APIs
+> 对加密 API 的支持仅在 JavaScript SDK 中的 gRPC 客户端上可用。
+
+```typescript
+import { createReadStream, createWriteStream } from "node:fs";
+import { readFile, writeFile } from "node:fs/promises";
+import { pipeline } from "node:stream/promises";
+
+import { DaprClient, CommunicationProtocolEnum } from "@dapr/dapr";
+
+const daprHost = "127.0.0.1";
+const daprPort = "50050"; // Dapr Sidecar Port of this example server
+
+async function start() {
+  const client = new DaprClient({
+    daprHost,
+    daprPort,
+    communicationProtocol: CommunicationProtocolEnum.GRPC,
+  });
+
+  // Encrypt and decrypt a message using streams
+  await encryptDecryptStream(client);
+
+  // Encrypt and decrypt a message from a buffer
+  await encryptDecryptBuffer(client);
+}
+
+async function encryptDecryptStream(client: DaprClient) {
+  // First, encrypt the message
+  console.log("== Encrypting message using streams");
+  console.log("Encrypting plaintext.txt to ciphertext.out");
+
+  await pipeline(
+    createReadStream("plaintext.txt"),
+    await client.crypto.encrypt({
+      componentName: "crypto-local",
+      keyName: "symmetric256",
+      keyWrapAlgorithm: "A256KW",
+    }),
+    createWriteStream("ciphertext.out"),
+  );
+
+  // Decrypt the message
+  console.log("== Decrypting message using streams");
+  console.log("Encrypting ciphertext.out to plaintext.out");
+  await pipeline(
+    createReadStream("ciphertext.out"),
+    await client.crypto.decrypt({
+      componentName: "crypto-local",
+    }),
+    createWriteStream("plaintext.out"),
+  );
+}
+
+async function encryptDecryptBuffer(client: DaprClient) {
+  // Read "plaintext.txt" so we have some content
+  const plaintext = await readFile("plaintext.txt");
+
+  // First, encrypt the message
+  console.log("== Encrypting message using buffers");
+
+  const ciphertext = await client.crypto.encrypt(plaintext, {
+    componentName: "crypto-local",
+    keyName: "my-rsa-key",
+    keyWrapAlgorithm: "RSA",
+  });
+
+  await writeFile("test.out", ciphertext);
+
+  // Decrypt the message
+  console.log("== Decrypting message using buffers");
+  const decrypted = await client.crypto.decrypt(ciphertext, {
+    componentName: "crypto-local",
+  });
+
+  // The contents should be equal
+  if (plaintext.compare(decrypted) !== 0) {
+    throw new Error("Decrypted message does not match original message");
+  }
+}
+
+start().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
+```
+
+> 有关加密的完整指南，请访问 [操作方法：加密]({{< ref howto-cryptography.md >}}).
+
+### 分布式锁 API
+
+#### 尝试锁定和解锁API
 
 ```typescript
 import { CommunicationProtocolEnum, DaprClient } from "@dapr/dapr";
@@ -471,8 +561,8 @@ async function start() {
   let expiryInSeconds = 1000;
 
   console.log(`Acquiring lock on ${storeName}, ${resourceId} as owner: ${lockOwner}`);
-  const tryLockResponse = await client.lock.tryLock(storeName, resourceId, lockOwner, expiryInSeconds);
-  console.log(tryLockResponse);
+  const lockResponse = await client.lock.lock(storeName, resourceId, lockOwner, expiryInSeconds);
+  console.log(lockResponse);
 
   console.log(`Unlocking on ${storeName}, ${resourceId} as owner: ${lockOwner}`);
   const unlockResponse = await client.lock.unlock(storeName, resourceId, lockOwner);
@@ -498,8 +588,58 @@ start().catch((e) => {
 });
 ```
 
-> For a full guide on distributed locks visit [How-To: Use Distributed Locks]({{< ref howto-use-distributed-lock.md >}}).
+> 有关分布式锁的完整指南，请访问 [操作方法：使用分布式锁]({{< ref howto-use-distributed-lock.md >}}).
+
+### 工作流 API
+
+#### 工作流管理
+
+```typescript
+import { DaprClient } from "@dapr/dapr";
+
+async function start() {
+  const client = new DaprClient();
+
+  // Start a new workflow instance
+  const instanceId = await client.workflow.start("OrderProcessingWorkflow", {
+    Name: "Paperclips",
+    TotalCost: 99.95,
+    Quantity: 4,
+  });
+  console.log(`Started workflow instance ${instanceId}`);
+
+  // Get a workflow instance
+  const workflow = await client.workflow.get(instanceId);
+  console.log(
+    `Workflow ${workflow.workflowName}, created at ${workflow.createdAt.toUTCString()}, has status ${
+      workflow.runtimeStatus
+    }`,
+  );
+  console.log(`Additional properties: ${JSON.stringify(workflow.properties)}`);
+
+  // Pause a workflow instance
+  await client.workflow.pause(instanceId);
+  console.log(`Paused workflow instance ${instanceId}`);
+
+  // Resume a workflow instance
+  await client.workflow.resume(instanceId);
+  console.log(`Resumed workflow instance ${instanceId}`);
+
+  // Terminate a workflow instance
+  await client.workflow.terminate(instanceId);
+  console.log(`Terminated workflow instance ${instanceId}`);
+
+  // Purge a workflow instance
+  await client.workflow.purge(instanceId);
+  console.log(`Purged workflow instance ${instanceId}`);
+}
+
+start().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
+```
 
 ## 相关链接
 
-- [JavaScript SDK examples](https://github.com/dapr/js-sdk/tree/master/examples)
+- [JavaScript SDK 示例](https://github.com/dapr/js-sdk/tree/master/examples)

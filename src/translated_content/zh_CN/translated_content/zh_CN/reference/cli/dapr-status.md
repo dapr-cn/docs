@@ -26,7 +26,7 @@ dapr status -k
 | `--help`, `-h`       |      |         | 显示此帮助消息                        |
 | `--kubernetes`, `-k` |      | `false` | 显示 Kubernetes 集群上 Dapr 服务的运行状况 |
 
-### Examples
+### 示例
 
 ```bash
 # 从Kubernetes集群中获取Dapr服务的状态

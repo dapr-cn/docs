@@ -10,7 +10,7 @@ A common scenario in distributed computing is to only allow for a given number o
 
 *请注意，对于来自 Dapr 的每个事件，即发布/订阅事件、来自其他服务的直接调用、绑定事件等，此速率限制是有保证的。 Dapr 无法对来自Dapr外部的应用程序的请求强制应用并发策略。*
 
-*请注意，每秒速率限制可以通过使用中间件 **middleware.http.ratelimit** 来实现。 但是，这两种方法之间存在着明显的差异。 速率限制中间件存在时间限制以及每秒请求数限制，而 `app-max-concurrency` 标志指定了任意时间点上的并发请求（和事件）的数量。 请参阅 [速率限制中间件]({{< ref middleware-rate-limit.md >}})。 *
+*请注意，每秒速率限制可以通过使用中间件 **middleware.http.ratelimit** 来实现。 However, there is an important difference between the two approaches. The rate limit middleware is time bound and limits the number of requests per second, while the `app-max-concurrency` flag specifies the number of concurrent requests (and events) at any point of time. 请参阅 [速率限制中间件]({{< ref middleware-rate-limit.md >}})。 *
 
 观看此 [视频](https://youtu.be/yRI5g6o_jp8?t=1710) ，了解如何控制并发和速率限制”。
 

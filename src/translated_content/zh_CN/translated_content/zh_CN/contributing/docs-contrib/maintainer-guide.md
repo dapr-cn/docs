@@ -1,109 +1,109 @@
 ---
 type: docs
-title: "Maintainer guide"
-linkTitle: "Maintainer guide"
+title: "维护者指南"
+linkTitle: "维护者指南"
 weight: 20
-description: "Get started as a Dapr docs maintainer and approver."
+description: "开始作为 Dapr 文档的维护者和批准者。"
 ---
 
-In this guide, you’ll learn how to perform routine Dapr docs maintainer and approver responsibilities. In order to successfully accomplish these tasks, you need either approver or maintainer status in the [`dapr/docs`](https://github.com/dapr/docs) repo.
+在本指南中，您将学习如何执行常规 Dapr 文档维护者和批准者的责任。 为了成功完成这些任务，您需要在 [`dapr/docs`](https://github.com/dapr/docs) 存储库中拥有审批者或维护者身份。
 
-To learn how to contribute to Dapr docs, review the [Contributor guide]({{< ref contributing-docs.md >}}).
+要了解如何为 Dapr 文档做出贡献，请查看 [投稿人指南]({{< ref contributing-docs.md >}}).
 
 ## 分支指南
 
-The Dapr docs handles branching differently than most code repositories. Instead of a `main` branch, every branch is labeled to match the major and minor version of a runtime release.
+Dapr 文档处理分支的方式与大多数代码仓库不同。 没有 `main` 分支，而是给每个分支贴上标签，以匹配运行时版本的主版本和次要版本。
 
-For the full list, visit the [Docs repo](https://github.com/dapr/docs#branch-guidance).
+完整列表，请访问 [Docs repo](https://github.com/dapr/docs#branch-guidance)
 
-Read the [contributor's guide]({{< ref "contributing-docs.md#branch-guidance" >}}) for more information about release branches.
+阅读 [贡献者指南]({{< ref "contributing-docs.md#branch-guidance" >}}) 有关发布分支的详细信息。
 
-## Upmerge from current release branch to the pre-release branch
+## 从当前发布分支向上合并到预发布分支
 
-As a docs approver or maintainer, you need to perform routine upmerges to keep the pre-release branch aligned with updates to the current release branch. It is recommended to upmerge the current branch into the pre-release branch on a weekly basis.
+作为文档审批者或维护者，您需要执行例行的上行合并，以使预发布分支与当前发布分支的更新保持一致。 建议每周将当前分支合并到预发布分支。
 
-For the following steps, treat `v1.0` as the current release and `v1.1` as the upcoming release.
+对于以下步骤，请将`v1.0`视为当前版本，将`v1.1`视为即将发布的版本。
 
-1. Open Visual Studio Code to the Dapr docs repo.
-1. From your local repo, switch to the latest branch (`v1.0`) and synchronize changes:
+1. 打开 Visual Studio Code 到 Dapr 文档存储库。
+1. 从您的本地存储库切换到最新的分支（`v1.0`）并同步更改：
 
    ```bash
    git pull upstream v1.0
    git push origin v1.0
    ```
 
-1. Switch to the upcoming branch (`v1.1`) and synchronize changes:
+1. 切换到即将到来的分支（`v1.1`）并同步更改：
 
    ```bash
    git pull upstream v1.1
    git push origin v1.1
    ```
 
-1. Create a new branch based off of the upcoming release:
+1. 基于即将发布的版本创建一个新分支：
 
    ```bash
    git checkout -b upmerge_MM-DD
    ```
 
-1. Open a terminal and stage a merge from the latest release into the upmerge branch:
+1. 打开终端并暂存从最新版本到 upmerge 分支的合并：
 
    ```bash
    git merge --no-ff --no-commit v1.0
    ```
 
-1. In the terminal, make sure included files look accurate. Inspect any merge conflicts in VS Code. Remove configuration changes or version information that does not need to be merged.
-1. Commit the staged changes and push to the upmerge branch (`upmerge_MM-DD`).
-1. Open a PR from the upmerge branch to the upcoming release branch (`v1.1`).
-1. Review the PR and double check that no unintended changes were pushed to the upmerge branch.
+1. 在终端中，确保包含的文件看起来准确无误。 检查 VS Code 中的任何合并冲突。 删除不需要合并的配置更改或版本信息。
+1. 提交已暂存的更改并推送到 upmerge 分支（`upmerge_MM-DD`）。
+1. 从 upmerge 分支向即将发布的分支（`v1.1`）打开一个 PR。
+1. 审查 PR 并仔细检查是否有意外更改被推送到了 upmerge 分支。
 
-## Release process
+## 发布流程
 
-Dapr docs must align with features and updates included in the Dapr project release. Leading up to the Dapr release date, make sure:
+Dapr 文档必须与 Dapr 项目发布中包含的功能和更新保持一致。 在 Dapr 发布日期前，请确保：
 
-- All new features or updates have been sufficiently documented and reviewed.
-- Docs PRs for the upcoming release point to the release branch.
+- 所有新功能或更新都已经充分记录和审查。
+- 即将发布的文档 PR 指向发布分支。
 
-For the following steps, treat `v1.0` as the latest release and `v1.1` as the upcoming release.
+对于以下步骤，请将`v1.0`视为当前版本，将`v1.1`视为即将发布的版本。
 
-The release process for docs requires the following:
+文档发布流程需要以下步骤：
 
-- An upmerge of the latest release into the upcoming release branch
-- An update to the latest and upcoming release Hugo configuration files
-- A new Azure Static Web App for the next version
-- A new DNS entry for the next version's website
-- A new git branch for the next version
+- 将最新版本合并到即将发布的版本分支中
+- 更新到最新和即将发布的 Hugo 配置文件
+- 为下一个版本创建一个新的Azure静态Web应用程序
+- 下一个版本网站的新DNS条目
+- 为下一个版本创建一个新的git分支
 
-### Upmerge
+### 向上合并
 
-First, perform a [docs upmerge](#upmerge-from-current-release-branch-to-the-pre-release-branch) from the latest release to the upcoming release branch.
+首先，从最新版本执行[文档 upmerge](#upmerge-from-current-release-branch-to-the-pre-release-branch)到即将发布的版本分支。
 
-### Update Hugo Configuration
+### 更新 Hugo 配置
 
-After upmerge, prepare the docs branches for the release. In two separate PRs, you need to:
+upmerge 后，为发布准备 docs 分支。 在两个单独的 PR 中，您需要：
 
-- Archive the latest release.
-- Bring the preview/release branch as the current, live version of the docs.
+- 存档最新版本。
+- 将预览/发布分支作为当前文档的实时版本。
 
-#### Latest release
+#### 最新发行版
 
-These steps will prepare the latest release branch for archival.
+这些步骤将准备最新的发布分支进行归档。
 
-1. Open VS Code to the Dapr docs repo.
-1. Switch to the latest branch (`v1.0`) and synchronize changes:
+1. 打开 VS Code 到 Dapr 文档存储库。
+1. 从您的本地存储库切换到最新的分支（`v1.0`）并同步更改：
 
    ```bash
    git pull upstream v1.0
    git push origin v1.0
    ```
 
-1. Create a new branch based off of the latest release:
+1. 基于最新发布的版本创建一个新分支：
 
    ```bash
    git checkout -b release_v1.0
    ```
 
-1. In VS Code, navigate to `/daprdocs/config.toml`.
-1. Add the following TOML to the `# Versioning` section (around line 154):
+1. 在 VS Code 中，导航到 `/daprdocs/config.toml`。
+1. 将以下TOML添加到`# Versioning`部分（大约在第154行附近）：
 
    ```toml
    version_menu = "v1.0"
@@ -122,32 +122,32 @@ These steps will prepare the latest release branch for archival.
      url = "https://v1-0.docs.dapr.io"
    ```
 
-1. Delete `.github/workflows/website-root.yml`.
-1. Commit the staged changes and push to your branch (`release_v1.0`).
-1. Open a PR from `release_v1.0` to `v1.0`.
-1. Have a docs maintainer or approver review. Wait to merge the PR until release.
+1. 删除`.github/workflows/website-root.yml`。
+1. 提交已暂存的更改并推送到您的分支（`release_v1.0`）。
+1. 从 `release_v1.0` 到 `v1.0` 打开一个 PR。
+1. 请让文档维护者或批准者审查。 等待发布之前合并PR。
 
-#### Upcoming release
+#### 未来发布
 
-These steps will prepare the upcoming release branch for promotion to latest release.
+这些步骤将准备即将发布的分支以便提升为最新版本。
 
-1. Open VS Code to the Dapr docs repo.
-1. Switch to the upcoming release branch (`v1.1`) and synchronize changes:
+1. 打开 VS Code 到 Dapr 文档存储库。
+1. 从您的本地存储库切换到即将发布的版本分支（`v1.1`）并同步更改：
 
    ```bash
    git pull upstream v1.1
    git push origin v1.1
    ```
 
-1. Create a new branch based off of the upcoming release:
+1. 基于即将发布的版本创建一个新分支：
 
    ```bash
    git checkout -b release_v1.1
    ```
 
-1. In VS Code, navigate to `/daprdocs/config.toml`.
-1. Update line 1 to `baseURL - https://docs.dapr.io/`.
-1. Update the `# Versioning` section (around line 154) to display the correct versions and tags:
+1. 在 VS Code 中，导航到 `/daprdocs/config.toml`。
+1. 将第 1 行更新为 `baseURL - https://docs.dapr.io/`.
+1. 更新`# Versioning`部分（大约在第154行附近），以显示正确的版本和标签：
 
    ```toml
    # Versioning
@@ -167,8 +167,8 @@ These steps will prepare the upcoming release branch for promotion to latest rel
      url = "https://v1-0.docs.dapr.io"
    ```
 
-1. Navigate to `.github/workflows/website-root.yml`.
-1. Update the branches which trigger the workflow:
+1. 导航到`.github/workflows/website-root.yml`。
+1. 更新触发工作流程的分支：
 
    ```yml
    name: Azure Static Web App Root
@@ -183,63 +183,63 @@ These steps will prepare the upcoming release branch for promotion to latest rel
          - v1.1
    ```
 
-1. Navigate to `/README.md`.
-1. Update the versions table:
+1. 导航至`/README.md`。
+1. 更新版本表：
 
 ```markdown
-| Branch                                                       | Website                    | Description                                                                                      |
+| 分支                                                         | 网站                       | 描述                                                                                           |
 | ------------------------------------------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------ |
-| [v1.1](https://github.com/dapr/docs) (primary)               | https://docs.dapr.io       | Latest Dapr release documentation. Typo fixes, clarifications, and most documentation goes here. |
-| [v1.2](https://github.com/dapr/docs/tree/v1.2) (pre-release) | https://v1-2.docs.dapr.io/ | Pre-release documentation. Doc updates that are only applicable to v1.2+ go here.                |
+| [v1.1](https://github.com/dapr/docs) (primary)               | https://docs.dapr.io       | 最新 Dapr 发行版文档。 拼写错误修正，澄清和大部分文档在这里。 |
+| [v1.2](https://github.com/dapr/docs/tree/v1.2) (pre-release) | https://v1-2.docs.dapr.io/ | 预发布文档. 仅适用于 v1.2+ 的文档更新在此处进行。                |
 ```
 
-1. In VS Code, search for any `v1.0` references and replace them with `v1.1` as applicable.
-1. Commit the staged changes and push to your branch (`release_v1.1`).
-1. Open a PR from `release/v1.1` to `v1.1`.
-1. Have a docs maintainer or approver review. Wait to merge the PR until release.
+1. 在 VS Code 中，搜索任何 `v1.0` 引用，并根据需要将其替换为 `v1.1`。
+1. 提交已暂存的更改并推送到您的分支（`release_v1.1`）。
+1. 从 `release_v1.1` 到 `v1.1` 打开一个 PR。
+1. 请让文档维护者或批准者审查。 等待发布之前合并PR。
 
-### Create new website for future release
+### 为未来发布创建新网站
 
-Next, create a new website for the future Dapr release, which you point to from the latest website. To do this, you'll need to:
+接下来，为将来的 Dapr 发布创建一个新网站，您可以从最新的网站指向它。 为此，您需要：
 
-- Deploy an Azure Static Web App.
-- Configure DNS via request from CNCF.
+- 部署到 Azure Static Web Apps
+- 通过CNCF的请求配置DNS。
 
-These steps require authentication.
+这些步骤需要身份验证。
 
-#### Deploy Azure Static Web App
+#### 部署到 Azure Static Web Apps
 
-Deploy a new Azure Static Web App for the future Dapr release. For this example, we use v1.2 as the future release.
+为将来的 Dapr 版本部署新的 Azure Static Web 应用。 在这个例子中，我们使用v1.2作为未来的发布版本。
 
 {{% alert title="Important" color="primary" %}}
-You need Microsoft employee access to create a new Azure Static Web App.
+需要 Microsoft 员工访问权限才能创建新的 Azure 静态 Web 应用。
 {{% /alert %}}
 
-1. Use Azure PIM to [elevate into the Owner role](https://eng.ms/docs/cloud-ai-platform/devdiv/devdiv-azure-service-dmitryr/azure-devex-philon/dapr/dapr/assets/azure) for the Dapr Prod subscription.
-1. Navigate to the [docs-website](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/resource/subscriptions/38875a89-0178-4f27-a141-dc6fc01f183d/resourceGroups/docs-website/overview) resource group.
-1. Select **+ Create** and search for **Static Web App**. Select **Create**.
-1. Enter in the following information:
+1. 使用 Azure PIM 执行以下操作 [提升为“所有者”角色](https://eng.ms/docs/cloud-ai-platform/devdiv/devdiv-azure-service-dmitryr/azure-devex-philon/dapr/dapr/assets/azure) 用于 Dapr Prod 订阅。
+1. 导航到[docs-website](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/resource/subscriptions/38875a89-0178-4f27-a141-dc6fc01f183d/resourceGroups/docs-website/overview)资源组。
+1. 选择 **+ Create** 并搜索 **Static Web App**。 点击**Create**。
+1. 输入以下信息：
    - Subscription: `Dapr Prod`
    - Resource Group: `docs-website`
    - Name: `daprdocs-v1-2`
    - Hosting Plan: `Free`
    - Region: `West US 2`
    - Source: `Other`
-1. Select **Review + create**, and then deploy the static web app.
-1. Wait for deployment, and navigate to the new static web app resource.
-1. Select **Manage deployment token** and copy the value.
-1. Navigate to the docs repo **Secrets management** page under **Settings** and create a new secret named `AZURE_STATIC_WEB_APPS_V1_2`, and provide the value of the deployment token.
+1. 选择 **Review + create**，然后部署静态 Web 应用。
+1. 等待部署，并导航到新的静态 Web 应用资源。
+1. 选择**Manage deployment token**并复制该值。
+1. 导航到文档存储库 **Secrets management** 页面下 **设置** 并创建一个名为 `AZURE_STATIC_WEB_APPS_V1_2`，并提供部署令牌的值。
 
-#### Configure DNS
+#### 配置 DNS
 
 {{% alert title="Important" color="primary" %}}
- This section can only be completed on a Secure Admin Workstation (SAW). If you do not have a SAW device, ask a team member with one to assist.
+ 此部分只能在 Secure Admin Workstation（SAW）上完成。 如果您没有SAW设备，请向拥有该设备的团队成员寻求帮助。
 
 {{% /alert %}}
 
-1. Ensure you are a member of the `DMAdaprweb` security group in IDWeb.
-1. Navigate to [https://prod.msftdomains.com/dns/form?environment=0](https://prod.msftdomains.com/dns/form?environment=0) on a SAW
-1. Enter the following details in the left-hand pane:
+1. 确保您是IDWeb中`DMAdaprweb`安全组的成员。
+1. 在SAW上导航至[https://prod.msftdomains.com/dns/form?environment=0](https://prod.msftdomains.com/dns/form?environment=0)
+1. 在左侧窗格中输入以下详细信息：
    - Team Owning Alias: `DMAdaprweb`
    - Business Justification/Notes: `Configuring DNS for new Dapr docs website`
    - Environment: `Internet/Public-facing`
@@ -247,40 +247,40 @@ You need Microsoft employee access to create a new Azure Static Web App.
    - Action: `Add`
    - Incident ID: Leave blank
 
-1. Back in the new static web app you just deployed, navigate to the **Custom domains** blade and select **+ Add**
-1. Enter `v1-2.docs.dapr.io` under **Domain name**. Click **Next**.
-1. Keep **Hostname record type** as `CNAME`, and copy the value of **Value**.
-1. Back in the domain portal, enter the following information in the main pane:
+1. 在您刚刚部署的新静态 Web 应用程序中，导航到 **Custom domains** 部分，并选择 **+ Add**
+1. 进入 `v1-2.docs.dapr.io` 下 **Domain name**. 点击 **下一个**。
+1. 保持 **主机名记录类型** 为 `CNAME`，并复制 **值** 的数值。
+1. 返回域门户，在主窗格中输入以下信息：
    - Name: `v1-2.docs`
    - Type: `CNAME`
-   - Data: Value you just copied from the static web app
+   - Data：您刚从静态网站应用程序中复制的值
 
-1. Click **Submit** in the top right corner.
-1. Wait for two emails:
-   - One saying your request was received.
-   - One saying the request was completed.
-1. Back in the Azure Portal, click **Add**. You may need to click a couple times to account for DNS delay.
-1. An SSL is now generated for you and the DNS record is saved. This may take 2-3 minutes.
-1. Navigate to `https://v1-2.docs.dapr.io` and verify a blank website loads correctly.
+1. 点击**提交**在右上角。
+1. 等待两封电子邮件：
+   - 一个说你的请求已收到。
+   - 一个说请求已经完成。
+1. 回到 Azure 门户，单击 **Add**。 您可能需要点击几次以解决DNS延迟。
+1. 现在为您生成了一个TLS证书，并保存了DNS记录。 这可能需要 2-3 分钟。
+1. 导航到 `https://v1-2.docs.dapr.io` 并验证空白网站是否正确加载。
 
-### Configure future website branch
+### 配置未来的网站分支
 
-1. Open VS Code to the Dapr docs repo.
-1. Switch to the upcoming release branch (`v1.1`) and synchronize changes:
+1. 打开 VS Code 到 Dapr 文档存储库。
+1. 从您的本地存储库切换到即将发布的版本分支（`v1.1`）并同步更改：
 
    ```bash
    git pull upstream v1.1
    git push origin v1.1
    ```
 
-1. Create a new branch based on `v1.1` and name it `v1.2`:
+1. 基于`v1.1`创建一个新分支，并将其命名为`v1.2`：
 
   ```bash
   git checkout -b release_v1.1
   ```
 
-1. Rename `.github/workflows/website-v1-1.yml` to `.github/workflows/website-v1-2.yml`.
-1. Open `.github/workflows/website-v1-2.yml` in VS Code and update the name, trigger, and deployment target to 1.2:
+1. 将`.github/workflows/website-v1-1.yml`重命名为`.github/workflows/website-v1-2.yml`。
+1. 在 VS Code 中打开 `.github/workflows/website-v1-2.yml` 并将名称、触发器和部署目标更新为 1.2：
 
    ```yml
    name: Azure Static Web App v1.2
@@ -307,13 +307,13 @@ You need Microsoft employee access to create a new Azure Static Web App.
           skip_deploy_on_missing_secrets: true
    ```
 
-1. Navigate to `daprdocs/config.toml` and update the `baseURL` to point to the new preview website:
+1. 导航至`daprdocs/config.toml`并更新`baseURL`指向新的预览网站：
 
    ```toml
    baseURL = "https://v1-2.docs.dapr.io"
    ```
 
-1. Update the `# GitHub Information` and `# Versioning` sections (around line 148) to display the correct versions and tags:
+1. 更新`# GitHub Information`和`# Versioning`部分（大约在第148行附近），以显示正确的版本和标签:
 
    ```toml
    # GitHub Information
@@ -339,48 +339,48 @@ You need Microsoft employee access to create a new Azure Static Web App.
      url = "https://v1-0.docs.dapr.io"
    ```
 
-1. Commit the staged changes and push to the v1.2 branch.
-1. Navigate to the [docs Actions page](https://github.com/dapr/docs/actions) and make sure the build & release successfully completed.
-1. Navigate to the new `https://v1-2.docs.dapr.io` website and verify that the new version is displayed.
+1. 提交暂存更改并推送到 v1.2 分支。
+1. 导航到[docs Actions 页面](https://github.com/dapr/docs/actions)，确保构建和发布成功完成。
+1. 导航到新的 `https://v1-2.docs.dapr.io` 网站，并验证新版本是否显示。
 
-### On the new Dapr release date
+### 在 Dapr 发布的那天
 
-1. Wait for all code/containers/Helm charts to be published.
-1. Merge the the PR from `release_v1.0` to `v1.0`. Delete the release/v1.0 branch.
-1. Merge the the PR from `release_v1.1` to `v1.1`. Delete the release/v1.1 branch.
+1. 等待所有代码/容器/Helm charts 发布。
+1. 合并从 `release_v1.0` 到 `v1.0` 的 PR。 删除 release/v1.0 分支。
+1. 合并来自 `release_v1.1` 到 `v1.1` 的 PR。 删除 release/v1.1 分支。
 
-Congrats on the new docs release! 🚀 🎉 🎈
+祝贺新文档发布！ 🚀 🎉 🎈
 
-## Pull in SDK doc updates
+## 拉取SDK文档更新
 
-SDK docs live in each of the SDK repos. Changes made to the SDK docs are pushed to the relevant SDK repo. For example, to update the Go SDK docs, you push changes to the `dapr/go-sdk` repo. Until you pull the latest `dapr/go-sdk` commit into the `dapr/docs` current version branch, your Go SDK docs updates won't be reflected on the Dapr docs site.
+SDK文档存储在每个SDK存储库中。 对 SDK 文档所做的更改已推送到相关的 SDK 存储库。 例如，要更新 Go SDK 文档，您需要将更改推送到 `dapr/go-sdk` 存储库。 直到您将最新的 `dapr/go-sdk` 提交到 `dapr/docs` 当前版本分支中，您的 Go SDK 文档更新将不会在 Dapr 文档站点上反映出来。
 
-To bring updates to the SDK docs live to the Dapr docs site, you need to perform a straightforward `git pull`. This example refers to the Go SDK, but applies to all SDKs.
+要将 SDK 文档的更新实时带到 Dapr 文档站点，您需要执行一个简单的 `git pull`。 这个示例是关于 Go SDK 的，但适用于所有 SDK。
 
-1. Pull the latest upstream into your local `dapr/docs` version branch.
+1. 将最新的上游拉入到您本地的`dapr/docs`版本分支。
 
-1. Change into the root of the `dapr/docs` directory.
+1. 切换到 `dapr/docs` 目录的根目录。
 
-1. Change into the Go SDK repo. This command takes you out of the `dapr/docs` context and into the `dapr/go-sdk` context.
+1. 切换到 Go SDK 存储库。 此命令将带您退出 `dapr/docs` 上下文并进入 `dapr/go-sdk` 的上下文。
 
    ```bash
    cd sdkdocs/go
    ```
 
-1. Switch to the `main` branch in `dapr/go-sdk`.
+1. 切换到 `dapr/go-sdk` 中的 `main` 分支。
 
    ```bash
    git checkout main
    ```
 
-1. Pull the latest Go SDK commit.
+1. 拉取最新的Go SDK提交。
 
    ```bash
    git pull upstream main
    ```
 
-1. Change into the `dapr/docs` context to commit, push, and create a PR.
+1. 切换到 `dapr/docs` 上下文以提交、推送和创建 PR。
 
 ## 下一步
 
-For guidance on contributing to Dapr docs, read the [Contributor Guide]({{< ref contributing-docs.md >}}).
+有关为 Dapr 文档做出贡献的指南，请阅读 [投稿人指南]({{< ref contributing-docs.md >}}).

@@ -51,19 +51,19 @@ spec:
 
 ## 元数据字段规范
 
-| Field         | 必填 | 绑定支持   | 详情                                                                    | 示例                  |
-| ------------- |:--:| ------ | --------------------------------------------------------------------- | ------------------- |
-| host          | 是  | Output | The host where your SMTP server runs                                  | `"smtphost"`        |
-| port          | 是  | 输出     | SMTP服务端监听端口                                                           | `"9999"`            |
-| user          | 是  | 输出     | 要对 SMTP 服务器进行身份验证的用户                                                  | `"user"`            |
-| password      | 是  | 输出     | The password of the user                                              | `"password"`        |
-| skipTLSVerify | 否  | 输出     | 如果设置为 true，则不会验证 SMPT 服务器的 TLS 证书。 默认值为 `"false"`                     | `"true"`, `"false"` |
-| emailFrom     | 否  | Output | 指定发件人地址 [另见](#example-request)                                        | `"me@example.com"`  |
-| emailTo       | 否  | Output | 指定收件人地址。 [另见](#example-request)                                       | `"me@example.com"`  |
-| emailCc       | 否  | Output | 指定抄送人地址。 [另见](#example-request)                                       | `"me@example.com"`  |
-| emailBcc      | 否  | Output | 指定秘密抄送人地址。 [另见](#example-request)                                     | `"me@example.com"`  |
-| subject       | 否  | Output | 指定邮件信息的主题。 [另见](#example-request)                                     | `"subject of mail"` |
-| priority      | 否  | Output | 指定邮件信息的优先级(X-Priority)，从 1(最低) 到 5(最高)(默认值：3)。 [另见](#example-request) | `"1"`               |
+| Field           | Required | 绑定支持   | 详情                                                                    | 示例                  |
+| --------------- |:--------:| ------ | --------------------------------------------------------------------- | ------------------- |
+| `host`          |    是     | Output | The host where your SMTP server runs                                  | `"smtphost"`        |
+| `port`          |    是     | 输出     | SMTP服务端监听端口                                                           | `"9999"`            |
+| `user`          |    是     | 输出     | 要对 SMTP 服务器进行身份验证的用户                                                  | `"user"`            |
+| `password`      |    是     | 输出     | The password of the user                                              | `"password"`        |
+| `skipTLSVerify` |    否     | 输出     | 如果设置为 true，则不会验证 SMPT 服务器的 TLS 证书。 默认值为 `"false"`                     | `"true"`, `"false"` |
+| `emailFrom`     |    否     | Output | 指定发件人地址 [另见](#example-request)                                        | `"me@example.com"`  |
+| `emailTo`       |    否     | Output | 指定收件人地址。 [另见](#example-request)                                       | `"me@example.com"`  |
+| `emailCc`       |    否     | Output | 指定抄送人地址。 [另见](#example-request)                                       | `"me@example.com"`  |
+| `emailBcc`      |    否     | Output | 指定秘密抄送人地址。 [另见](#example-request)                                     | `"me@example.com"`  |
+| `subject`       |    否     | Output | 指定邮件信息的主题。 [另见](#example-request)                                     | `"subject of mail"` |
+| `priority`      |    否     | Output | 指定邮件信息的优先级(X-Priority)，从 1(最低) 到 5(最高)(默认值：3)。 [另见](#example-request) | `"1"`               |
 
 ## 绑定支持
 

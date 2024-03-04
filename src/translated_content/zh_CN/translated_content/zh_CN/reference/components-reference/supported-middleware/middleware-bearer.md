@@ -7,7 +7,7 @@ aliases:
   - /zh-hans/developing-applications/middleware/supported-middleware/middleware-bearer/
 ---
 
-The bearer [HTTP middleware]({{< ref middleware.md >}}) verifies a [Bearer Token](https://tools.ietf.org/html/rfc6750) using [OpenID Connect](https://openid.net/connect/) on a Web API without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
+The bearer [HTTP middleware]({{< ref middleware.md >}}) verifies a [Bearer Token](https://tools.ietf.org/html/rfc6750) using [OpenID Connect](https://openid.net/connect/) on a Web API, without modifying the application. This design separates authentication/authorization concerns from the application, so that application operators can adopt and configure authentication/authorization providers without impacting the application code.
 
 ## Component format
 
@@ -20,17 +20,30 @@ spec:
   type: middleware.http.bearer
   version: v1
   metadata:
-  - name: clientId
-    value: "<your client ID>"
-  - name: issuerURL
-    value: "https://accounts.google.com"
+    - name: audience
+      value: "<your token audience; i.e. the application's client ID>"
+    - name: issuer
+      value: "<your token issuer, e.g. 'https://accounts.google.com'>"
+
+    # Optional values
+    - name: jwksURL
+      value: "<JWKS URL, e.g. 'https://accounts.google.com/.well-known/openid-configuration'>"
 ```
+
 ## 元数据字段规范
 
-| Field     | 详情                                                                                                            | 示例                                                                |
-| --------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| clientId  | The client ID of your application that is created as part of a credential hosted by a OpenID Connect platform |                                                                   |
-| issuerURL | 服务的URL标识                                                                                                      | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
+| Field      | Required | 详情                                                                                                                                                                                                             | 示例                                                               |
+| ---------- |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `audience` |    是     | The audience expected in the tokens. Usually, this corresponds to the client ID of your application that is created as part of a credential hosted by a OpenID Connect platform.                               |                                                                  |
+| `issuer`   |    是     | The issuer authority, which is the value expected in the issuer claim in the tokens.                                                                                                                           | `"https://accounts.google.com"`                                  |
+| `jwksURL`  |    否     | Address of the JWKS (JWK Set containing the public keys for verifying tokens). If empty, will try to fetch the URL set in the OpenID Configuration document `<issuer>/.well-known/openid-configuration`. | `"https://accounts.google.com/.well-known/openid-configuration"` |
+
+Common values for `issuer` include:
+
+- Auth0: `https://{domain}`, where `{domain}` is the domain of your Auth0 application
+- Microsoft Entra ID: `https://login.microsoftonline.com/{tenant}/v2.0`, where `{tenant}` should be replaced with the tenant ID of your application, as a UUID
+- Google: `https://accounts.google.com`
+- Salesforce (Force.com): `https://login.salesforce.com`
 
 ## Dapr 配置
 

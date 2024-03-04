@@ -13,7 +13,7 @@ Dapr actor 包允许您从 Python 应用程序中与 Dapr virtual actor 进行�
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
 - 安装[Python 3.7+](https://www.python.org/downloads/)
-- 安装[Dapr Python 模块]({{< ref "python#install-the0dapr-module" >}})
+- [Dapr Python package]({{< ref "python#installation" >}}) installed
 
 ## Actor 接口
 

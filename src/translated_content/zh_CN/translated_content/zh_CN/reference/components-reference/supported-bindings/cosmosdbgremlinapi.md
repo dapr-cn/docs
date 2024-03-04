@@ -9,7 +9,6 @@ description: "Detailed documentation on the Azure Cosmos DB (Gremlin API) bindin
 
 To setup an Azure Cosmos DB (Gremlin API) binding create a component of type `bindings.azure.cosmosdb.gremlinapi`. See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
-
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -20,12 +19,12 @@ spec:
   version: v1
   metadata:
   - name: url
-    value: wss://******.gremlin.cosmos.azure.com:443/
+    value: "wss://******.gremlin.cosmos.azure.com:443/"
   - name: masterKey
-    value: *****
+    value: "*****"
   - name: username
-    value: *****
-  ```
+    value: "*****"
+```
 
 {{% alert title="Warning" color="warning" %}}
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件，参考 [这里]({{< ref component-secrets.md >}})。
@@ -33,11 +32,11 @@ spec:
 
 ## 元数据字段规范
 
-| Field       | 必填 | 绑定支持   | 详情                                     | 示例                                                      |
-| ----------- |:--:| ------ | -------------------------------------- | ------------------------------------------------------- |
-| `url`       | 是  | Output | The Cosmos DB url for Gremlin APIs     | `"wss://******.gremlin.cosmos.azure.com:443/"`          |
-| `masterKey` | 是  | 输出     | The Cosmos DB account master key       | `"masterKey"`                                           |
-| `username`  | 是  | 输出     | The username of the Cosmos DB database | `"/dbs/<database_name>/colls/<graph_name>"` |
+| Field       | Required | 绑定支持   | 详情                                     | 示例                                                      |
+| ----------- |:--------:| ------ | -------------------------------------- | ------------------------------------------------------- |
+| `url`       |    是     | Output | The Cosmos DB url for Gremlin APIs     | `"wss://******.gremlin.cosmos.azure.com:443/"`          |
+| `masterKey` |    是     | 输出     | The Cosmos DB account master key       | `"masterKey"`                                           |
+| `username`  |    是     | 输出     | The username of the Cosmos DB database | `"/dbs/<database_name>/colls/<graph_name>"` |
 
 For more information see [Quickstart: Azure Cosmos Graph DB using Gremlin](https://docs.microsoft.com/azure/cosmos-db/graph/create-graph-console).
 

@@ -6,7 +6,7 @@ weight: 2000
 description: "配置 IntelliJ 社区版以使用 Dapr 进行调试"
 ---
 
-When developing Dapr applications, you typically use the Dapr CLI to start your 'Daprized' service similar to this:
+开发 Dapr 应用程序时，你通常使用 Dapr CLI 来启动你的 Dapr 服务，就像这样：
 
 ```bash
 dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
@@ -21,7 +21,7 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 让我们开始吧！
 
-## Add Dapr as an 'External Tool'
+## 添加 Dapr 作为 "External Tool"
 
 首先，退出 IntelliJ 后再修改配置文件。
 
@@ -54,11 +54,11 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 {{< /tabs >}}
 
-> The configuration file location is different for version 2019.3 or prior. See [here](https://www.jetbrains.com/help/idea/2019.3/tuning-the-ide.html#config-directory) for more details.
+> 2019.3或更早版本的配置文件位置不同， 更多详情请参见[这里](https://www.jetbrains.com/help/idea/2019.3/tuning-the-ide.html#config-directory)。
 
 如有需要，请在路径中更改 IntelliJ 版本。
 
-创建或编辑 `<CONFIG PATH>/tools/External\ Tools.xml` 中的文件（如有需要，请更改路径中的 IntelliJ 版本）。 The `<CONFIG PATH>` is OS dependent as seen above.
+创建或编辑 `<CONFIG PATH>/tools/External\ Tools.xml` 中的文件（如有需要，请更改路径中的 IntelliJ 版本）。 这 `<CONFIG PATH>` 如上所述，取决于操作系统。
 
 添加一个新的 `<tool></tool>` 条目:
 
@@ -119,8 +119,8 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 现在，添加程序参数和环境变量: 这些端口需要与上面 "External Tool" 条目中定义的端口相匹配。
 
-* Command line arguments for this example: `-p 3000`
-* Environment variables for this example: `DAPR_HTTP_PORT=3005;DAPR_GRPC_PORT=52000`
+* 本例的命令行参数：`-p 3000`
+* 本例的环境变量：`DAPR_HTTP_PORT=3005;DAPR_GRPC_PORT=52000`
 
 ![编辑运行配置](/images/intellij_edit_run_configuration.png)
 
@@ -128,7 +128,7 @@ dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 
 以上一次性配置完成后，在 IntelliJ 中使用 Dapr 调试 Java 应用程序需要两个步骤：
 
-1. Start `dapr` via `Tools` -> `External Tool` in IntelliJ.
+1. 通过 IntelliJ 中的 `Tools` -> `External Tool` 启动 `dapr`。
 
 ![作为“外部工具”运行 Dapr](/images/intellij_start_dapr.png)
 

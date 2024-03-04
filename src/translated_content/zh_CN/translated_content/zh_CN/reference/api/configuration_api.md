@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Configuration API reference"
-linkTitle: "Configuration API"
+linkTitle: "配置 API"
 description: "Detailed documentation on the configuration API"
 weight: 100
 ---
@@ -13,28 +13,28 @@ This endpoint lets you get configuration from a store.
 ### HTTP Request
 
 ```
-GET http://localhost:<daprPort>/v1.0-alpha1/configuration/<storename>
+GET http://localhost:<daprPort>/v1.0/configuration/<storename>
 ```
 
 #### URL 参数
 
-| Parameter   | 说明                                                                                                        |
-| ----------- | --------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                             |
-| `storename` | The `metadata.name` field component file. Refer to the [component schema]({{< ref component-schema.md>}}) |
+| Parameter   | 说明                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                           |
+| `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
 
 #### 查询参数
 
 If no query parameters are provided, all configuration items are returned. To specify the keys of the configuration items to get, use one or more `key` query parameters. For example:
 
 ```
-GET http://localhost:<daprPort>/v1.0-alpha1/configuration/mystore?key=config1&key=config2
+GET http://localhost:<daprPort>/v1.0/configuration/mystore?key=config1&key=config2
 ```
 
 To retrieve all configuration items:
 
 ```
-GET http://localhost:<daprPort>/v1.0-alpha1/configuration/mystore
+GET http://localhost:<daprPort>/v1.0/configuration/mystore
 ```
 
 #### 请求正文
@@ -58,13 +58,17 @@ JSON-encoded value of key/value pairs for each configuration item.
 ### 示例
 
 ```shell
-curl -X GET 'http://localhost:3500/v1.0-alpha1/configuration/mystore?key=myConfigKey' 
+curl -X GET 'http://localhost:3500/v1.0/configuration/mystore?key=myConfigKey' 
 ```
 
 > The above command returns the following JSON:
 
 ```json
-[{"key":"myConfigKey","value":"myConfigValue"}]
+{
+    "myConfigKey": {
+        "value":"myConfigValue"
+    }
+}
 ```
 
 ## Subscribe Configuration
@@ -74,28 +78,28 @@ This endpoint lets you subscribe to configuration changes. Notifications happen 
 ### HTTP 请求
 
 ```
-GET http://localhost:<daprPort>/v1.0-alpha1/configuration/<storename>/subscribe
+GET http://localhost:<daprPort>/v1.0/configuration/<storename>/subscribe
 ```
 
 #### URL 参数
 
-| Parameter   | 说明                                                                                                        |
-| ----------- | --------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                             |
-| `storename` | The `metadata.name` field component file. Refer to the [component schema]({{< ref component-schema.md>}}) |
+| Parameter   | 说明                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                           |
+| `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
 
 #### 查询参数
 
 If no query parameters are provided, all configuration items are subscribed to. To specify the keys of the configuration items to subscribe to, use one or more `key` query parameters. For example:
 
 ```
-GET http://localhost:<daprPort>/v1.0-alpha1/configuration/mystore/subscribe?key=config1&key=config2
+GET http://localhost:<daprPort>/v1.0/configuration/mystore/subscribe?key=config1&key=config2
 ```
 
 To subscribe to all changes:
 
 ```
-GET http://localhost:<daprPort>/v1.0-alpha1/configuration/mystore/subscribe
+GET http://localhost:<daprPort>/v1.0/configuration/mystore/subscribe
 ```
 
 #### 请求正文
@@ -119,7 +123,7 @@ JSON-encoded value
 ### 示例
 
 ```shell
-curl -X GET 'http://localhost:3500/v1.0-alpha1/configuration/mystore/subscribe?key=myConfigKey' 
+curl -X GET 'http://localhost:3500/v1.0/configuration/mystore/subscribe?key=myConfigKey' 
 ```
 
 > The above command returns the following JSON:
@@ -139,16 +143,16 @@ This endpoint lets you unsubscribe to configuration changes.
 ### HTTP Request
 
 ```
-GET http://localhost:<daprPort>/v1.0-alpha1/configuration/<storename>/<subscription-id>/unsubscribe
+GET http://localhost:<daprPort>/v1.0/configuration/<storename>/<subscription-id>/unsubscribe
 ```
 
 #### URL 参数
 
-| Parameter         | 说明                                                                                                        |
-| ----------------- | --------------------------------------------------------------------------------------------------------- |
-| `daprPort`        | The Dapr port                                                                                             |
-| `storename`       | The `metadata.name` field component file. Refer to the [component schema]({{< ref component-schema.md>}}) |
-| `subscription-id` | The value from the `id` field returned from the response of the subscribe endpoint                        |
+| Parameter         | 说明                                                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------------- |
+| `daprPort`        | The Dapr port                                                                                           |
+| `storename`       | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
+| `subscription-id` | The value from the `id` field returned from the response of the subscribe endpoint                      |
 
 #### 查询参数
 
@@ -170,7 +174,7 @@ None
 
 #### 响应正文
 
-```
+```json
 {
     "ok" : true
 }
@@ -179,7 +183,25 @@ None
 ### 示例
 
 ```shell
-curl -X GET 'http://localhost:3500/v1.0-alpha1/configuration/mystore/bf3aa454-312d-403c-af95-6dec65058fa2/unsubscribe' 
+curl -X GET 'http://localhost:3500/v1.0-alpha1/configuration/mystore/bf3aa454-312d-403c-af95-6dec65058fa2/unsubscribe'
+```
+
+> The above command returns the following JSON:
+
+In case of successful operation:
+
+```json
+{
+  "ok": true
+}
+```
+In case of unsuccessful operation:
+
+```json
+{
+  "ok": false,
+  "message": "<dapr returned error message>"
+}
 ```
 
 ## Optional application (user code) routes
@@ -196,11 +218,11 @@ POST http://localhost:<appPort>/configuration/<store-name>/<key>
 
 #### URL 参数
 
-| Parameter   | 说明                                                                                                        |
-| ----------- | --------------------------------------------------------------------------------------------------------- |
-| `appPort`   | The application port                                                                                      |
-| `storename` | The `metadata.name` field component file. Refer to the [component schema]({{< ref component-schema.md>}}) |
-| `key`       | The key subscribed to                                                                                     |
+| Parameter   | 说明                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------- |
+| `appPort`   | The application port                                                                                    |
+| `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
+| `key`       | The key subscribed to                                                                                   |
 
 #### 请求正文
 

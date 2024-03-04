@@ -25,7 +25,7 @@ spec:
   - name: maxIdleConnections
     value: <REPLACE-WITH-MAX-IDLE-CONNECTIONS> # Optional. default: "2"
   - name: timeout
-    value: <REPLACE-WITH-TIMEOUT> # Optional. default: "1000ms"
+    value: <REPLACE-WITH-TIMEOUT> # Optional. default: "1000"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -34,11 +34,11 @@ spec:
 
 ## 元数据字段规范
 
-| Field              | 必填 | 详情                        | 示例                                            |
-| ------------------ |:--:| ------------------------- | --------------------------------------------- |
-| hosts              | 是  | Comma delimited endpoints | `"memcached.default.svc.cluster.local:11211"` |
-| maxIdleConnections | 否  | 空闲连接的最大数量。 默认值为 `"2"`     | `"3"`                                         |
-| timeout            | 否  | 调用超时时间。 默认值为 `"1000ms"`   | `"1000ms"`                                    |
+| Field              | Required | 详情                                                              | 示例                                            |
+| ------------------ |:--------:| --------------------------------------------------------------- | --------------------------------------------- |
+| hosts              |    是     | Comma delimited endpoints                                       | `"memcached.default.svc.cluster.local:11211"` |
+| maxIdleConnections |    否     | 空闲连接的最大数量。 默认值为 `"2"`                                           | `"3"`                                         |
+| timeout            |    否     | The timeout for the calls in milliseconds. Defaults to `"1000"` | `"1000"`                                      |
 
 ## 设置 Memcached
 

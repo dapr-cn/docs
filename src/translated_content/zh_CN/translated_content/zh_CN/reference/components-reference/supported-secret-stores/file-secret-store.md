@@ -36,11 +36,11 @@ spec:
 
 ## 元数据字段规范
 
-| Field           | 必填 | 详情                                                                                                                                                         | 示例                    |
-| --------------- |:--:| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| secretsFile     | 是  | The path to the file where secrets are stored                                                                                                              | `"path/to/file.json"` |
-| nestedSeparator | 否  | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"`                                                                           | `":"`                 |
-| multiValued     | 否  | `"true"` sets the `multipleKeyValuesPerSecret` behavior. Allows one level of multi-valued key/value pairs before flattening JSON hierarchy. 默认值为 `"false"` | `"true"`              |
+| Field           | Required | 详情                                                                                                                                                         | 示例                    |
+| --------------- |:--------:| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| secretsFile     |    是     | The path to the file where secrets are stored                                                                                                              | `"path/to/file.json"` |
+| nestedSeparator |    否     | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"`                                                                           | `":"`                 |
+| multiValued     |    否     | `"true"` sets the `multipleKeyValuesPerSecret` behavior. Allows one level of multi-valued key/value pairs before flattening JSON hierarchy. 默认值为 `"false"` | `"true"`              |
 
 ## 设置 JSON 文件来保存密钥
 

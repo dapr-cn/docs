@@ -9,14 +9,14 @@ description: "如何在你的 Kubernetes 集群中调试 Dapr sidecar(daprd)"
 
 ## 概述
 
-Sometimes it is necessary to understand what's going on in the Dapr sidecar (daprd), which runs as a sidecar next to your application, especially when you diagnose your Dapr application and wonder if there's something wrong in Dapr itself. Additionally, you may be developing a new feature for Dapr on Kubernetes and want to debug your code.
+有时有必要了解 Dapr sidecar（daprd） 中发生了什么，它作为 sidecar 运行在您的应用程序旁边，尤其是当您诊断您的 Dapr 应用程序并想知道 Dapr 本身是否出了问题时。 此外，你可能正在为 Kubernetes 中的 Dapr 开发一个新功能，并且想调试你的代码。
 
-本指南将涵盖如何使用内置的 Dapr 调试来调试您的 Kubernetes pod 中的 Dapr sidecar 。
+这份指南将展示如何使用内置的 Dapr 调试功能来调试 Kubernetes pods 中的 Dapr sidecar。 要了解如何在 Kubernetes 中查看日志和排查 Dapr 问题，请参阅 [配置和查看 Dapr 日志指南]({{< ref "logs-troubleshooting.md#logs-in-kubernetes-mode" >}})
 
 ## 前提
 
-- Refer to [this guide]({{< ref kubernetes-deploy.md >}}) to learn how to deploy Dapr to your Kubernetes cluster.
-- Follow [this guide]({{< ref "debug-dapr-services.md">}}) to build the Dapr debugging binaries you will be deploying in the next step.
+- 阅读 [Kubernetes部署指南]({{< ref kubernetes-deploy.md >}}) 来学习如何将 Dapr 部署到您的 Kubernetes 集群。
+- 请按照 [调试dapr服务指南]({{< ref "debug-dapr-services.md">}}) ，以构建下一步将部署的 Dapr 调试二进制文件。
 
 
 ## 在调试模式下初始化 Dapr
@@ -87,9 +87,65 @@ Forwarding from [::1]:40000 -> 40000
 
 全部完成！ 现在您可以从您喜欢的 IDE 中使用40000端口开启远程调试了。
 
+## 常用的`kubectl`命令
+
+在调试 daprd 和在 Kubernetes 上运行的应用程序时，请使用以下常见的 `kubectl` 命令。
+
+获取所有 pod、事件和服务：
+
+```bash
+kubectl get all
+kubectl get all --n <namespace>
+kubectl get all --all-namespaces
+```
+
+获取每个特定的:
+
+```bash
+kubectl get pods
+```
+
+```bash
+kubectl get events --n <namespace>
+kubectl get events --sort-by=.metadata.creationTimestamp --n <namespace>
+```
+
+```bash
+kubectl get services
+```
+
+检查日志
+
+```bash
+kubectl logs <podId> daprd
+kubectl logs <podId> <myAppContainerName>
+kuebctl logs <deploymentId> daprd
+kubectl logs <deploymentId> <myAppContainerName>
+```
+
+```bash
+kubectl describe pod <podId>
+kubectl describe deploy <deployId>
+kubectl describe replicaset <replicasetId>
+```
+
+通过运行以下命令重新启动一个 pod：
+
+```bash
+kubectl delete pod <podId>
+```
+
+这会导致`replicaset`控制器在删除后重新启动pod。
+
+## 观看演示
+
+在[Dapr 社区通话＃36](https://youtu.be/pniLPRbuLD8?si=bGid7oYSp9cThtiI&t=838)中查看有关在 Kubernetes 上排除故障 Dapr 的演示。 
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/pniLPRbuLD8?si=bGid7oYSp9cThtiI&amp;start=838" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ## 相关链接
 
 - [Kubernetes 上的 Dapr 概述]({{< ref kubernetes-overview >}})
-- [Deploy Dapr to a Kubernetes cluster]({{< ref kubernetes-deploy >}})
+- [将 dapr 部署到 Kubernetes 集群]({{< ref kubernetes-deploy >}})
 - [在 Kubernetees 中调试 Dapr 服务]({{< ref debug-dapr-services >}})
 - [Dapr Kubernetes 快速入门](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)

@@ -22,25 +22,35 @@ spec:
   version: v1
   metadata:
   - name: queueName
-    value: queue1
+    value: "queue1"
   - name: host
-    value: amqp://[username][:password]@host.domain[:port]
+    value: "amqp://[username][:password]@host.domain[:port]"
   - name: durable
-    value: true
+    value: "true"
   - name: deleteWhenUnused
-    value: false
+    value: "false"
   - name: ttlInSeconds
-    value: 60
+    value: "60"
   - name: prefetchCount
-    value: 0
+    value: "0"
   - name: exclusive
-    value: false
+    value: "false"
   - name: maxPriority
-    value: 5
+    value: "5"
   - name: contentType
     value: "text/plain"
   - name: reconnectWaitInSeconds
-    value: 5
+    value: "5"
+  - name: externalSasl
+    value: "false"
+  - name: caCert
+    value: "null"
+  - name: clientCert
+    value: "null"
+  - name: clientKey
+    value: "null"
+  - name: direction 
+    value: "input, output"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -49,18 +59,26 @@ spec:
 
 ## 元数据字段规范
 
-| Field                  | 必填 | 绑定支持  | 详情                                                                                                                                                                                                              | 示例                                                  |
-| ---------------------- |:--:| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| queueName              | 是  | 输入/输出 | The RabbitMQ queue name                                                                                                                                                                                         | `"myqueue"`                                         |
-| host                   | 是  | 输入/输出 | RabbitMQ主机地址                                                                                                                                                                                                    | `"amqp://[username][:password]@host.domain[:port]"` |
-| durable                | 否  | 输出    | 告诉 RabbitMQ 将消息持久化到存储中。 默认值为 `"false"`                                                                                                                                                                          | `"true"`, `"false"`                                 |
-| deleteWhenUnused       | 否  | 输入/输出 | 启用或禁用自动删除。 默认值为 `"false"`                                                                                                                                                                                       | `"true"`, `"false"`                                 |
-| ttlInSeconds           | 否  | 输出    | RabbitMQ队列级别的消息存活时间。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 [另见](#specifying-a-ttl-per-message)                                                                                                                       | `60`                                                |
-| prefetchCount          | 否  | Input | 设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch) 如果此参数为空，QOS 会设置为0为无限制。                                                                                                           | `0`                                                 |
-| exclusive              | 否  | 输入/输出 | 确定主题是否是一个独占主题。 默认值为 `"false"`                                                                                                                                                                                   | `"true"`, `"false"`                                 |
-| maxPriority            | 否  | 输入/输出 | 用于设置 [优先级队列](https://www.rabbitmq.com/priority.html)的参数。 If this parameter is omitted, queue will be created as a general queue instead of a priority queue. 取值为1到255. [参见](#specifying-a-priority-per-message) | `"1"`, `"10"`                                       |
-| contentType            | 否  | 输入/输出 | 消息类型 默认为"text/plain"。                                                                                                                                                                                           | `"text/plain"`, `"application/cloudevent+json"`等等   |
-| reconnectWaitInSeconds | 否  | 输入/输出 | Represents the duration in seconds that the client should wait before attempting to reconnect to the server after a disconnection occurs. Defaults to `"5"`.                                                    | `"5"`, `"10"`                                       |
+> When a new RabbitMQ message gets published, all values from the associated metadata are added to the message's header values.
+
+| Field                    | Required | 绑定支持  | 详情                                                                                                                                                                                                              | 示例                                                                                                                    |
+| ------------------------ |:--------:| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `queueName`              |    是     | 输入/输出 | The RabbitMQ queue name                                                                                                                                                                                         | `"myqueue"`                                                                                                           |
+| `host`                   |    是     | 输入/输出 | RabbitMQ主机地址                                                                                                                                                                                                    | `"amqp://[username][:password]@host.domain[:port]"` or with TLS: `"amqps://[username][:password]@host.domain[:port]"` |
+| `durable`                |    否     | 输出    | 告诉 RabbitMQ 将消息持久化到存储中。 默认值为 `"false"`                                                                                                                                                                          | `"true"`, `"false"`                                                                                                   |
+| `deleteWhenUnused`       |    否     | 输入/输出 | 启用或禁用自动删除。 默认值为 `"false"`                                                                                                                                                                                       | `"true"`, `"false"`                                                                                                   |
+| `ttlInSeconds`           |    否     | 输出    | RabbitMQ队列级别的消息存活时间。 如果此参数为空，消息将不会过期，继续在队列上存在，直到处理完毕。 [另见](#specifying-a-ttl-per-message)                                                                                                                       | `60`                                                                                                                  |
+| `prefetchCount`          |    否     | Input | 设置 [通道预取设置 (QoS)](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch) 如果此参数为空，QOS 会设置为0为无限制。                                                                                                           | `0`                                                                                                                   |
+| `exclusive`              |    否     | 输入/输出 | 确定主题是否是一个独占主题。 默认值为 `"false"`                                                                                                                                                                                   | `"true"`, `"false"`                                                                                                   |
+| `maxPriority`            |    否     | 输入/输出 | 用于设置 [优先级队列](https://www.rabbitmq.com/priority.html)的参数。 If this parameter is omitted, queue will be created as a general queue instead of a priority queue. 取值为1到255. [参见](#specifying-a-priority-per-message) | `"1"`, `"10"`                                                                                                         |
+| `contentType`            |    否     | 输入/输出 | 消息类型 默认为"text/plain"。                                                                                                                                                                                           | `"text/plain"`, `"application/cloudevent+json"`等等                                                                     |
+| `reconnectWaitInSeconds` |    否     | 输入/输出 | Represents the duration in seconds that the client should wait before attempting to reconnect to the server after a disconnection occurs. Defaults to `"5"`.                                                    | `"5"`, `"10"`                                                                                                         |
+| `externalSasl`           |    否     | 输入/输出 | With TLS, should the username be taken from an additional field (e.g. CN.) See [RabbitMQ Authentication Mechanisms](https://www.rabbitmq.com/access-control.html#mechanisms).  Defaults to `"false"`.           | `"true"`, `"false"`                                                                                                   |
+| `caCert`                 |    否     | 输入/输出 | The CA certificate to use for TLS connection. Defaults to `null`.                                                                                                                                               | `"-----BEGIN CERTIFICATE-----\nMI..."`                                                                               |
+| `clientCert`             |    否     | 输入/输出 | The client certificate to use for TLS connection. Defaults to `null`.                                                                                                                                           | `"-----BEGIN CERTIFICATE-----\nMI..."`                                                                               |
+| `clientKey`              |    否     | 输入/输出 | The client key to use for TLS connection. Defaults to `null`.                                                                                                                                                   | `"-----BEGIN PRIVATE KEY-----\nMI..."`                                                                               |
+| `direction`              |    否     | 输入/输出 | The direction of the binding.                                                                                                                                                                                   | `"input"`, `"output"`, `"input, output"`                                                                              |
+
 ## 绑定支持
 
 此组件支持 **输入和输出** 绑定接口。

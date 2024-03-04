@@ -6,15 +6,15 @@ weight: 2300
 description: "了解如何根据 CloudEvent 字段将消息从主题路由到不同的事件处理程序"
 ---
 
-Pub/sub routing is an implementation of [content-based routing](https://www.enterpriseintegrationpatterns.com/ContentBasedRouter.html), a messaging pattern that utilizes a DSL instead of imperative application code. With pub/sub routing, you use expressions to route [CloudEvents](https://cloudevents.io) (based on their contents) to different URIs/paths and event handlers in your application. If no route matches, then an optional default route is used. This proves useful as your applications expand to support multiple event versions or special cases.
+发布/订阅路由是 [基于内容的路由](https://www.enterpriseintegrationpatterns.com/ContentBasedRouter.html)，一种利用 DSL 而不是命令式应用程序代码的消息传递模式。 使用 pub/sub 路由，您可以使用表达式将 [CloudEvents](https://cloudevents.io) （根据其内容）路由到您应用程序中的不同 URI/路径和事件处理程序。 如果没有匹配的路由，那么将使用一个可选的默认路由。 当你的应用程序扩展到支持多个事件版本或特殊情况时，这就变得非常有用。
 
-While routing can be implemented with code, keeping routing rules external from the application can improve portability.
+路由可以用代码来实现，然而，将路由规则保持在应用程序的外部可以提高可移植性。
 
-This feature is available to both the [declarative and programmatic subscription approaches]({{< ref subscription-methods.md >}}).
+此功能可供 [声明式和程序化订阅方法]({{< ref subscription-methods.md >}}).
 
-## Declarative subscription
+## 声明式订阅
 
-For declarative subscriptions, use `dapr.io/v2alpha1` as the `apiVersion`. Here is an example of `subscriptions.yaml` using routing:
+对于声明性订阅，请使用 `dapr.io/v2alpha1` 作为 `apiVersion`。 下面是一个 `subscriptions.yaml` 使用路由的例子。
 
 ```yaml
 apiVersion: dapr.io/v2alpha1
@@ -36,9 +36,9 @@ scopes:
   - app2
 ```
 
-## Programmatic subscription
+## 编程式订阅
 
-In the programmatic approach, the `routes` structure is returned instead of `route`. The JSON structure matches the declarative YAML:
+在程序化方法中，返回的是 `routes` 结构，而不是 `route`。 JSON 结构与声明性 YAML 相匹配
 
 {{< tabs Python Node "C#" Go PHP>}}
 
@@ -247,34 +247,34 @@ $app->start();
 
 {{< /tabs >}}
 
-## Common Expression Language (CEL)
+## 通用表达式语言(CEL)
 
-In these examples, depending on the `event.type`, the application will be called on:
+在这些示例中，取决于 `event.type`，应用程序将被调用：
 
 - `/widgets`
 - `/gadgets`
 - `/products`
 
-The expressions are written as [Common Expression Language (CEL)](https://github.com/google/cel-spec) where `event` represents the cloud event. Any of the attributes from the [CloudEvents core specification](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#required-attributes) can be referenced in the expression.
+表达式写成 [通用表达式语言（CEL）](https://github.com/google/cel-spec) 其中 `event` 代表 cloud event。 [CloudEvents 核心规范](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#required-attributes) 中的任何属性都可以在表达式中引用。
 
-### Example expressions
+### 表达式示例
 
-Match "important" messages:
+匹配 "important" 信息:
 
 ```javascript
 has(event.data.important) && event.data.important == true
 ```
 
-Match deposits greater than $10,000:
+匹配大于10,000美元的存款:
 
 ```javascript
 event.type == "deposit" && int(event.data.amount) > 10000
 ```
 {{% alert title="Note" color="primary" %}}
-By default the numeric values ​​are written as double-precision floating-point. There are no automatic arithmetic conversions for numeric values. In this case, if `event.data.amount` is not cast as integer, the match is not performed. For more information, see the [CEL documentation](https://github.com/google/cel-spec/blob/master/doc/langdef.md).
+默认情况下，数值以双精度浮点数的形式表示。 数值之间没有自动算术转换。 在这种情况下，如果 `event.data.amount` 没有转换为整数，则不会进行匹配。 有关更多信息，请参阅 [CEL 文档](https://github.com/google/cel-spec/blob/master/doc/langdef.md)。
 {{% /alert %}}
 
-Match multiple versions of a message:
+匹配一个信息的多个版本:
 
 ```javascript
 event.type == "mymessage.v1"
@@ -284,7 +284,7 @@ event.type == "mymessage.v1"
 event.type == "mymessage.v2"
 ```
 
-## CloudEvent attributes
+## CloudEvent 属性
 
 作为参考，以下属性来自 CloudEvents 规范。
 
@@ -292,155 +292,155 @@ event.type == "mymessage.v2"
 
 #### data
 
-As defined by the term **data**, CloudEvents _may_ include domain-specific information about the occurrence. 如果存在，该信息将被封装在 `data`中。
+由术语定义的 **data**、CloudEvents _可能_ 包括有关事件的特定于域的信息。 如果存在，该信息将被封装在 `data`中。
 
-- **Description:** The event payload. This specification places no restriction on the information type. It is encoded into a media format, specified by the `datacontenttype` attribute (e.g. application/json), and adheres to the `dataschema` format when those respective attributes are present.
-- **Constraints:**
-  - OPTIONAL
+- **描述：** 事件负载。 本规范没有对这种信息的类型作出任何限制。 它被编码成由 `datacontenttype` 属性指定的媒体格式（例如application/json），并且当这些各自的属性存在时，遵守 `dataschema` 格式。
+- **约束：**
+  - 可选的
 
 {{% alert title="Limitation" color="warning" %}}
-Currently, you can only access the attributes inside data if it is nested JSON values and not JSON escaped in a string.
+目前，只有当数据是嵌套的JSON 值而不是在字符串中转义的 JSON 时，才有可能访问数据内部的属性。
 {{% /alert %}}
 
 ### 必需的属性
 
-The following attributes are **required** in all CloudEvents:
+以下属性在所有CloudEvents中都是 **必需的** ：
 
 #### id
 
-- **Type:** `String`
-- **Description:** Identifies the event. Producers _must_ ensure that `source` + `id` are unique for each distinct event. If a duplicate event is re-sent (e.g. due to a network error), it may have the same `id`. Consumers may assume that events with identical `source` and `id` are duplicates.
-- **Constraints:**
-  - REQUIRED
-  - Must be a non-empty string
-  - Must be unique within the scope of the producer
-- **Examples:**
-  - An event counter maintained by the producer
-  - A UUID
+- **类型**：`字符串`
+- **描述:** 识别事件。 生产者 _必须_ 确保 `source` + `id` 对于每个不同的事件都是唯一的。 如果一个重复的事件被重新发送（例如，由于 网络错误），它可能具有相同的 `id`。 使用者可能会认为具有相同 `source` 和 `id` 事件是重复的。
+- **约束：**
+  - 必需的
+  - 必须是一个非空的字符串
+  - 在生产者的范围内必须是唯一的。
+- **示例:**
+  - 一个由生产者维护的事件计数器
+  - 一个 UUID
 
 #### source
 
-- **Type:** `URI-reference`
-- **Description:** Identifies the context in which an event happened. Often this includes information such as:
-  - The type of the event source
-  - The organization publishing the event
-  - The process that produced the event
+- **类型：** `URI 引用`
+- **描述：** 标识事件发生的上下文。 通常包括以下信息:
+  - 事件源的类型
+  - 发布事件的组织
+  - 生成事件的过程
 
-  The exact syntax and semantics behind the data encoded in the URI is defined by the event producer.
+  URI中编码的数据背后的确切语法和语义是由 事件生产者定义的。
 
-  Producers _must_ ensure that `source` + `id` are unique for each distinct event.
+  生产者 _必须_ 确保 `source` + `id` 对于每个不同的事件都是唯一的。
 
-  An application may:
-  - Assign a unique `source` to each distinct producer, making it easier to produce unique IDs and preventing other producers from having the same `source`.
-  - Use UUIDs, URNs, DNS authorities, or an application-specific scheme to create unique `source` identifiers.
+  一个应用程序可能：
+  - 分配唯一的 `source` 为每个不同的生产者，从而更容易生成唯一的 ID，并防止其他生产者拥有相同的 ID `source`.
+  - 使用UUID、URN、DNS授权或应用程序特定的方案来创建唯一的 `source` 标识符。
 
-  A source may include more than one producer. In this case, the producers _must_ collaborate to ensure that `source` + `id` are unique for each distinct event.
+  一个来源可以包括一个以上的生产者。 在这种情况下，生产者 _必须_ 合作确保每个不同的事件的 `source` + `id` 都是唯一的。
 
-- **Constraints:**
-  - REQUIRED
-  - Must be a non-empty URI-reference
-  - An absolute URI is RECOMMENDED
-- **Examples:**
-  - Internet-wide unique URI with a DNS authority:
+- **约束：**
+  - 必需的
+  - 必须是一个非空的 URI-reference
+  - 建议使用绝对 URI
+- **示例:**
+  - 具有 DNS 权限的互联网范围的唯一 URI。
     - https://github.com/cloudevents
     - mailto:cncf-wg-serverless@lists.cncf.io
-  - Universally-unique URN with a UUID:
+  - 具有 UUID 的普遍唯一的 URN。
     - urn:uuid:6e8bc430-9c3a-11d9-9669-0800200c9a66
-  - Application-specific identifiers:
+  - 特定应用的标识符:
     - /cloudevents/spec/pull/123
     - /sensors/tn-1234567/alerts
     - 1-555-123-4567
 
 #### specversion
 
-- **Type:** `String`
-- **Description:** The version of the CloudEvents specification used by the event. This enables the interpretation of the context. Compliant event producers _must_ use a value of `1.0` when referring to this version of the specification.
+- **类型**：`字符串`
+- **描述：** 事件使用的 CloudEvents 规范版本。 这使人们能够对背景进行解释。 合规事件生成者 _必须_ 使用值 `1.0` 当引用此版本的规范时。
 
-  Currently, this attribute only includes the 'major' and 'minor' version numbers. This allows patch changes to the specification to be made without changing this property's value in the serialization.
+  目前，这个属性只包括 '主要' 和 '次要' 版本数字。 这允许对规范进行 '补丁' 修改而不改变序列化中这个属性的值。
 
-  Note: for 'release candidate' releases, a suffix might be used for testing purposes.
+  注意：对于 'release candidate' 发布版本，可能会使用一个后缀来测试 目的。
 
-- **Constraints:**
-  - REQUIRED
-  - Must be a non-empty string
+- **约束：**
+  - 必需的
+  - 必须是一个非空的字符串
 
 #### type
 
-- **Type:** `String`
-- **Description:** Contains a value describing the event type related to the originating occurrence. Often, this attribute is used for routing, observability, policy enforcement, etc. The format is producer-defined and might include information like the version of the `type`. See [Versioning of CloudEvents in the Primer](https://github.com/cloudevents/spec/blob/v1.0.1/primer.md#versioning-of-cloudevents) for more information.
-- **Constraints:**
-  - REQUIRED
-  - Must be a non-empty string
-  - Should be prefixed with a reverse-DNS name. The prefixed domain dictates the organization, which defines the semantics of this event type.
-- **Examples:**
-  - com.github.pull_request.opened
-  - com.example.object.deleted.v2
+- **类型**：`字符串`
+- **描述：** 包含一个值，该值描述与原始事件相关的事件类型。 通常，此属性用于路由、可观测性、策略执行等。 该格式由生产者定义，可能包含以下信息： `type`. 更多信息请参见 [Primer 中的 CloudEvents 的版本控制](https://github.com/cloudevents/spec/blob/v1.0.1/primer.md#versioning-of-cloudevents) 。
+- **约束：**
+  - 必需的
+  - 必须是一个非空的字符串
+  - 应该以反向 DNS 名称为前缀。 前缀域指示定义此事件类型的语义组织。
+- **示例:**
+  - com.github.pull_request. opened
+  - com.example.object.delete.v2
 
 ### OPTIONAL属性
 
-The following attributes are **optional** to appear in CloudEvents. See the [Notational Conventions](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#notational-conventions) section for more information on the definition of OPTIONAL.
+以下出现在CloudEvents中属性是 **选填的**。 参见 [Notational Conventions](https://github.com/cloudevents/spec/blob/v1.0.1/spec.md#notational-conventions) 部分，了解更多关于 OPTIONAL 定义的信息 。
 
 #### datacontenttype
 
-- **Type:** `String` per [RFC 2046](https://tools.ietf.org/html/rfc2046)
-- **Description:** Content type of `data` value. This attribute enables `data` to carry any type of content, whereby format and encoding might differ from that of the chosen event format.
+- **类型：** `字符串` [RFC 2046](https://tools.ietf.org/html/rfc2046)
+- **描述：**` data` 的内容类型 值。 这个属性使 `data` 能够 携带任何类型的内容，其格式和编码可能与所选事件格式的 不同。
 
-  For example, an event rendered using the [JSON envelope](https://github.com/cloudevents/spec/blob/v1.0.1/json-format.md#3-envelope) format might carry an XML payload in `data`. The consumer is informed by this attribute being set to `"application/xml"`.
+  例如，使用 [JSON 信封](https://github.com/cloudevents/spec/blob/v1.0.1/json-format.md#3-envelope) 格式呈现的事件可能在 `data`中携带 XML 负载。 此属性设置为 `"application/xml"`，通知消费者。
 
-  The rules for how `data` content is rendered for different `datacontenttype` values are defined in the event format specifications. For example, the JSON event format defines the relationship in [section 3.1](https://github.com/cloudevents/spec/blob/v1.0.1/json-format.md#31-handling-of-data).
+  如何操作的规则 `data` 内容呈现为不同的 `datacontenttype` 值在事件格式规范中定义。 例如，JSON 事件格式定义了 [第3.1节](https://github.com/cloudevents/spec/blob/v1.0.1/json-format.md#31-handling-of-data).
 
-  For some binary mode protocol bindings, this field is directly mapped to the respective protocol's content-type metadata property. You can find normative rules for the binary mode and the content-type metadata mapping in the respective protocol.
+  对于一些二进制模式的协议绑定，这个字段被直接映射到 各自协议的内容类型元数据属性。 你可以在相应的协议中找到二进制模式和内容类型元数据映射的规范性规则。
 
-  In some event formats, you may omit the `datacontenttype` attribute. For example, if a JSON format event has no `datacontenttype` attribute, it's implied that the `data` is a JSON value conforming to the `"application/json"` media type. In other words: a JSON-format event with no `datacontenttype` is exactly equivalent to one with `datacontenttype="application/json"`.
+  在某些事件格式中，您可以省略 `datacontenttype` 属性。 例如，如果 JSON 格式事件没有 `dataconttype` 属性，则 暗示 `data` 是符合"application/json" 媒体类型的 JSON 值。 换句话说：没有 `datacontenttype` 的 JSON 格式事件与 `datacontenttype="application/json"`的事件完全等效。
 
-  When translating an event message with no `datacontenttype` attribute to a different format or protocol binding, the target `datacontenttype` should be set explicitly to the implied `datacontenttype` of the source.
+  当把一个没有 `datacontenttype` 属性的事件消息翻译成一个 不同的格式或协议绑定。目标 `datacontenttype` 应该被 明确地设置为源的隐含 `datacontenttype` 。
 
-- **Constraints:**
-  - OPTIONAL
-  - If present, must adhere to the format specified in [RFC 2046](https://tools.ietf.org/html/rfc2046)
-- For Media Type examples, see [IANA Media Types](http://www.iana.org/assignments/media-types/media-types.xhtml)
+- **约束：**
+  - 可选的
+  - 如果存在，必须遵守 [RFC 2046](https://tools.ietf.org/html/rfc2046)的格式。
+- 媒体类型的例子见 [IANA媒体类型](http://www.iana.org/assignments/media-types/media-types.xhtml)
 
 #### dataschema
 
-- **Type:** `URI`
-- **Description:** Identifies the schema that `data` adheres to. Incompatible changes to the schema should be reflected by a different URI. See [Versioning of CloudEvents in the Primer](https://github.com/cloudevents/spec/blob/v1.0.1/primer.md#versioning-of-cloudevents) for more information.
-- **Constraints:**
-  - OPTIONAL
-  - If present, must be a non-empty URI
+- **类型：** `URI`
+- **描述：** 识别符合 `data` 的模式。 对模式的不兼容的改变应该由一个不同的URI来反映。 更多信息请参见 [Primer 中的 CloudEvents 的版本控制](https://github.com/cloudevents/spec/blob/v1.0.1/primer.md#versioning-of-cloudevents) 。
+- **约束：**
+  - 可选的
+  - 如果存在，必须是一个非空的 URI
 
 #### subject
 
-- **Type:** `String`
-- **Description:** This describes the event subject in the context of the event producer (identified by `source`). In publish-subscribe scenarios, a subscriber will typically subscribe to events emitted by a `source`. The `source` identifier alone might not be sufficient as a qualifier for any specific event if the `source` context has internal sub-structure.
+- **类型**：`字符串`
+- **描述：** 这描述了事件生产者（由 `source`标识）的事件主题。 在发布-订阅场景中，订阅者通常会订阅由 `source`发出的事件。 如果 `source` 的标识符本身可能不足以作为任何特定事件的限定符，因为 `source` 的上下文有内部子结构。
 
-  Identifying the subject of the event in context metadata (opposed to only in the `data` payload) is helpful in generic subscription filtering scenarios, where middleware is unable to interpret the `data` content. In the above example, the subscriber might only be interested in blobs with names ending with '.jpg' or '.jpeg'. With the `subject` attribute, you can construct a simple and efficient string-suffix filter for that subset of events.
+  在上下文元数据中标识事件的主题（而不是仅在 `data` payload） 在通用订阅过滤场景中很有帮助，其中中间件无法解释 `data` 内容。 在上面的示例中，订阅者可能只对以'.jpg'或'.jpeg'结尾的 blob 感兴趣。 使用 `subject` 属性，您可以为该事件子集构建一个简单高效的字符串后缀过滤器。
 
-- **Constraints:**
-  - OPTIONAL
-  - If present, must be a non-empty string
-- **Example:**  
-  A subscriber might register interest for when new blobs are created inside a blob-storage container. In this case:
-  - The event `source` identifies the subscription scope (storage container)
-  - The event `type` identifies the "blob created" event
-  - The event `id` uniquely identifies the event instance to distinguish separately created occurrences of a same-named blob.
+- **约束：**
+  - 可选的
+  - 如果存在，必须是一个非空的字符串
+- **示例：**  
+  当一个订阅者注册了对在 blob 存储容器内创建新 blob 的兴趣时。 本例中：
+  - 事件的 `source` 用于标识订阅范围（存储容器）
+  - 事件 `type` 用于标识“blob created”事件
+  - 事件的 ` Id` 是唯一标识事件实例的，用于区分同名 blob 的独立创建的发生次数。
 
-  The name of the newly created blob is carried in `subject`:
+  新创建的 blob 的名称在 `subject`中传递：
   - `source`: https://example.com/storage/tenant/container
   - `subject`: mynewfile.jpg
 
 #### time
 
-- **Type:** `Timestamp`
-- **Description:** Timestamp of when the occurrence happened. If the time of the occurrence cannot be determined, then this attribute may be set to some other time (such as the current time) by the CloudEvents producer. However, all producers for the same `source` _must_ be consistent in this respect. In other words, either they all use the actual time of the occurrence or they all use the same algorithm to determine the value used.
-- **Constraints:**
-  - OPTIONAL
-  - If present, must adhere to the format specified in [RFC 3339](https://tools.ietf.org/html/rfc3339)
+- **类型：** `时间戳`
+- **描述：** 发生的时间戳。 如果无法确定发生的时间，则云事件生产者可以将此属性设置为其他时间（例如当前时间）。 但是，所有生产者都一样 `source` _必须_ 在这方面要保持一致。 换句话来说，要么它们都使用实际发生的时间，要么它们都使用相同的算法来确定使用的数值。
+- **约束：**
+  - 可选的
+  - 如果存在，必须遵守 [RFC 3339](https://tools.ietf.org/html/rfc3339)的格式。
 
 {{% alert title="Limitation" color="warning" %}}
 目前，不支持对时间的比较（如 "现在"之前或之后）。
 {{% /alert %}}
 
-## Community call demo
+## 社区示例
 
 观看 [这个视频](https://www. youtube. com/watch? v=QqJgRmbH82I& t=1063s) 关于如何使用 pub/sub 的消息路由。
 
@@ -450,8 +450,8 @@ The following attributes are **optional** to appear in CloudEvents. See the [Not
 
 ## 下一步
 
-- Try the [pub/sub routing sample](https://github.com/dapr/samples/tree/master/pub-sub-routing).
-- Learn about [topic scoping]({{< ref pubsub-scopes.md >}}) and [message time-to-live]({{< ref pubsub-message-ttl.md >}}).
-- [Configure pub/sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}}).
-- Review the list of [pub/sub components]({{< ref setup-pubsub >}}).
-- Read the [API reference]({{< ref pubsub_api.md >}}).
+- 尝试 [pub/sub 路由示例](https://github.com/dapr/samples/tree/master/pub-sub-routing)。
+- 了解 [主题范围]({{< ref pubsub-scopes.md >}}) 和 [消息存活时间]({{< ref pubsub-message-ttl.md >}})。
+- [使用多个命名空间配置发布/订阅组件]({{< ref pubsub-namespaces.md >}})。
+- 查看 [发布/订阅 组件列表]({{< ref setup-pubsub >}})。
+- 阅读 [API 参考手册]({{< ref pubsub_api.md >}})。

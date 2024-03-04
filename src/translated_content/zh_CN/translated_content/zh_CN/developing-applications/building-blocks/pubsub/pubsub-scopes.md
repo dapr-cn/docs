@@ -1,19 +1,19 @@
 ---
 type: docs
-title: "Scope Pub/sub topic access"
+title: "限定 Pub/Sub 主题访问权限"
 linkTitle: "Scope topic access"
 weight: 6000
-description: "Use scopes to limit pub/sub topics to specific applications"
+description: "使用范围（scopes）限制 Pub/Sub 主题到特定的应用程序"
 ---
 
-## Introduction
+## 介绍
 
-[Namespaces or component scopes]({{< ref component-scopes.md >}}) can be used to limit component access to particular applications. These application scopes added to a component limit only the applications with specific IDs to be able to use the component.
+[名称空间或组件作用域（scopes）]({{< ref component-scopes.md >}}) 可用于限制对特定应用程序的组件访问。 添加到组件的这些应用程序作用域仅限制具有特定 ID 的应用程序才能使用该组件。
 
 除了此常规组件范围外，对于 pub/sub 组件，还可以限制以下操作：
-- Which topics which can be used (published or subscribed)
-- Which applications are allowed to publish to specific topics
-- Which applications are allowed to subscribe to specific topics
+- 哪些主题可以使用（发布或订阅）
+- 哪些应用程序被允许发布到特定主题
+- 哪些应用程序被允许订阅特定主题
 
 这称为 **pub/sub 主题作用域限定**。
 
@@ -21,18 +21,21 @@ description: "Use scopes to limit pub/sub topics to specific applications"
 
 要使用这个主题范围，可以设置一个 pub/sub 组件的三个元数据属性：
 - `spec.metadata.publishingScopes`
-  - A semicolon-separated list of applications & comma-separated topic lists, allowing that app to publish to that list of topics
-  - If nothing is specified in `publishingScopes` (default behavior), all apps can publish to all topics
-  - To deny an app the ability to publish to any topic, leave the topics list blank (`app1=;app2=topic2`)
-  - For example, `app1=topic1;app2=topic2,topic3;app3=` will allow app1 to publish to topic1 and nothing else, app2 to publish to topic2 and topic3 only, and app3 to publish to nothing.
+  - 分号分隔应用程序列表& 逗号分隔的主题列表允许该 app 发布信息到主题列表
+  - 如果在 `publishingScopes` (缺省行为) 中未指定任何内容，那么所有应用程序可以发布到所有主题
+  - 要拒绝应用程序发布信息到任何主题，请将主题列表留空 (`app1=;app2=topic2`)
+  - 例如， `app1=topic1;app2=topic2,topic3;app3=` 允许 app1 发布信息至 topic1 ，app2 允许发布信息到 topic2 和 topic3 ，app3 不允许发布信息到任何主题。
 - `spec.metadata.subscriptionScopes`
-  - A semicolon-separated list of applications & comma-separated topic lists, allowing that app to subscribe to that list of topics
+  - 分号分隔应用程序列表& 逗号分隔的主题列表允许该 app 订阅主题列表
   - 如果在 `subscriptionScopes` (缺省行为) 中未指定任何内容，那么所有应用程序都可以订阅所有主题
   - 例如， `app1=topic1;app2=topic2,topic3` 允许 app1 订阅 topic1 ，app2 可以订阅 topic2 和 topic3
 - `spec.metadata.allowedTopics`
-  - A comma-separated list of allowed topics for all applications.
+  - 一个逗号分隔的允许主题列表，对所有应用程序。
   - 如果未设置 `allowedTopics` (缺省行为) ，那么所有主题都有效。 `subscriptionScopes` 和 `publishingScopes` 如果存在则仍然生效。
   - `publishingScopes`或`subscriptionScopes`可以与`allowedTopics`一起使用，以添加粒度限制
+- `spec.metadata.protectedTopics`
+  - 一个逗号分隔的受保护主题列表，对所有应用程序。
+  - 如果主题被标记为受保护，则必须通过以下方式显式授予应用程序发布或订阅权限 `publishingScopes` 或 `subscriptionScopes` 发布/订阅它。
 
 这些元数据属性可用于所有 pub/sub 组件。 以下示例使用 Redis 作为 pub/sub 组件。
 
@@ -78,12 +81,12 @@ spec:
 | app2 |        |        |        |
 | app3 | X      |        |        |
 
-> Note: If an application is not listed (e.g. app1 in subscriptionScopes) it is allowed to subscribe to all topics. Because `allowedTopics` is not used and app1 does not have any subscription scopes, it can also use additional topics not listed above.
+> 注意: 如果应用程序未列出 ( 例如， subscriptionScopes 中的 app1) ，那么允许订阅所有主题。 因为 `allowedTopics` 未使用，而 app1 任何订阅范围，因此它还可以使用上面未列出的其他主题。
 
 ## 示例 2: 限制允许的主题
 
 当 Dapr 应用程序给主题发送信息时，主题将自动创建。 在某些情况下，这个主题的创建应该得到管理。 例如:
-- A bug in a Dapr application on generating the topic name can lead to an unlimited amount of topics created
+- Dapr 应用程序中有关生成主题名称的错误可能会导致创建无限数量的主题
 - 简化主题名称和总数，防止主题无限增长
 
 在这些情况下，可以使用 `allowedTopics`。
@@ -152,6 +155,50 @@ spec:
 | app2 | X |   |   |
 | app3 | X | X |   |
 
+## 示例4：将主题标记为受保护
+
+如果您的主题涉及敏感数据，则必须在 `publishingScopes` 和 `subscriptionScopes` 以确保它无法读取或写入该主题。 或者，您可以将主题指定为“protected”（使用 `protectedTopics`）并仅授予真正需要访问的特定应用程序访问权限。
+
+以下是三个应用程序和三个主题的示例，其中两个是受保护的:
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: pubsub
+spec:
+  type: pubsub.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    value: "localhost:6379"
+  - name: redisPassword
+    value: ""
+  - name: protectedTopics
+    value: "A,B"
+  - name: publishingScopes
+    value: "app1=A,B;app2=B"
+  - name: subscriptionScopes
+    value: "app1=A,B;app2=B"
+```
+
+在上面的示例中，主题A和主题B被标记为受保护。 因此，即使 `app3` 未列在 `publishingScopes` 或 `subscriptionScopes`，它无法与这些主题交互。
+
+下表显示允许哪些应用程序发布到主题中:
+
+|      | A | B | C |
+| ---- | - | - | - |
+| app1 | X | X |   |
+| app2 |   | X |   |
+| app3 |   |   | X |
+
+下表显示哪些应用程序允许订阅主题：
+
+|      | A | B | C |
+| ---- | - | - | - |
+| app1 | X | X |   |
+| app2 |   | X |   |
+| app3 |   |   | X |
+
 
 ## 例子
 
@@ -161,7 +208,7 @@ spec:
 
 ## 下一步
 
-- Learn [how to configure pub/sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
+- 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
 - 了解 [消息存活时间]({{< ref pubsub-message-ttl.md >}})
 - [发布/订阅组件列表]({{< ref supported-pubsub >}})
 - 阅读 [API 参考文档]({{< ref pubsub_api.md >}})

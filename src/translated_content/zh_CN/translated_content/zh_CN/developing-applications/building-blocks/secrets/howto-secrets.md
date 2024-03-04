@@ -6,24 +6,24 @@ weight: 2000
 description: "使用密钥存储构建块安全地获取密钥"
 ---
 
-Now that you've learned [what the Dapr secrets building block provides]({{< ref secrets-overview >}}), learn how it can work in your service. This guide demonstrates how to call the secrets API and retrieve secrets in your application code from a configured secret store.
+现在，你已了解 [Dapr secrets 构建块提供的功能]({{< ref secrets-overview >}})，请了解它如何在你的服务中工作。 本指南演示了如何调用密钥 API，并从配置的密钥存储中检索应用程序代码中的密钥。
 
-<img src="/images/howto-secrets/secrets-mgmt-overview.png" width=1000 alt="Diagram showing secrets management of example service.">
+<img src="/images/howto-secrets/secrets-mgmt-overview.png" width=1000 alt="显示示例服务的secrets管理的图示。">
 
 {{% alert title="Note" color="primary" %}}
- If you haven't already, [try out the secrets management quickstart]({{< ref secrets-quickstart.md >}}) for a quick walk-through on how to use the secrets API.
+ 如果你还没有， [试用 secrets 管理快速入门t]({{< ref secrets-quickstart.md >}}) 快速演练如何使用 secrets API。
 
 {{% /alert %}}
 
-## Set up a secret store
+## 设置密钥存储
 
-Before retrieving secrets in your application's code, you must configure a secret store component. This example configures a secret store that uses a local JSON file to store secrets.
+在获取应用程序代码中的密钥之前，您必须配置一个密钥存储组件。 此示例配置了一个密钥存储，使用本地 JSON 文件来存储密钥。
 
 {{% alert title="Warning" color="warning" %}}
-In a production-grade application, local secret stores are not recommended. [Find alternatives]({{< ref supported-secret-stores >}}) to securely manage your secrets.
+在生产级应用程序中，不建议使用本地密钥存储。 [寻找替代方案]({{< ref supported-secret-stores >}}) 以安全地管理您的secrets。
 {{% /alert %}}
 
-In your project directory, create a file named `secrets.json` with the following contents:
+在您的项目目录中，创建一个名为 `secrets.json` 的文件，并将以下内容添加到文件中：
 
 ```json
 {
@@ -31,7 +31,7 @@ In your project directory, create a file named `secrets.json` with the following
 }
 ```
 
-Create a new directory named `components`. Navigate into that directory and create a component file named `local-secret-store.yaml` with the following contents:
+创建一个名为 `components`的新目录。 导航到该目录并创建一个名为 `local-secret-store.yaml` 包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -49,27 +49,27 @@ spec:
 ```
 
 {{% alert title="Warning" color="warning" %}}
-The path to the secret store JSON is relative to where you call `dapr run`.
+密钥存储 JSON 的路径是相对于您调用 `dapr run`的位置。
 {{% /alert %}}
 
-For more information:
+了解更多信息：
 
-- See how to [configure a different kind of secret store]({{< ref setup-secret-store >}}).
-- Review [supported secret stores]({{< ref supported-secret-stores >}}) to see specific details required for different secret store solutions.
+- 了解如何 [配置不同类型的密钥存储]({{< ref setup-secret-store >}}).
+- 查看 [支持的密钥存储]({{< ref supported-secret-stores >}}) ，以查看不同密钥存储解决方案所需的具体详细信息。
 
 ## 获取密钥
 
-Get the secret by calling the Dapr sidecar using the secrets API:
+通过使用secrets API调用Dapr sidecar获取秘密。
 
 ```bash
 curl http://localhost:3601/v1.0/secrets/localsecretstore/secret
 ```
 
-See a [full API reference]({{< ref secrets_api.md >}}).
+查看 [完整的 API 参考]({{< ref secrets_api.md >}}).
 
 ## 从你的代码调用密钥 API
 
-Now that you've set up the local secret store, call Dapr to get the secrets from your application code. Below are code examples that leverage Dapr SDKs for retrieving a secret.
+现在您已经设置好了本地密钥存储，可以调用 Dapr 从您的应用程序代码中获取密钥。 下面是利用 Dapr SDK 检索密钥的代码示例。
 
 {{< tabs Dotnet Java Python Go Javascript>}}
 
@@ -218,7 +218,11 @@ import { DaprClient, HttpMethod, CommunicationProtocolEnum } from '@dapr/dapr';
 const daprHost = "127.0.0.1"; 
 
 async function main() {
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const client = new DaprClient({
+        daprHost,
+        daprPort: process.env.DAPR_HTTP_PORT,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+    });
     const SECRET_STORE_NAME = "localsecretstore";
     //Using Dapr SDK to get a secret
     var secret = await client.secret.get(SECRET_STORE_NAME, "secret");
@@ -237,7 +241,7 @@ main();
 
 ## 相关链接
 
-- Review the [Dapr secrets API features]({{< ref secrets-overview >}}).
-- Learn how to [use secrets scopes]({{< ref secrets-scopes >}})
-- Read the [secrets API reference]({{< ref secrets_api >}}) and review the [supported secrets]({{< ref supported-secret-stores >}}).
-- Learn how to [set up different secret store components]({{< ref setup-secret-store >}}) and how to [reference secrets in your component]({{< ref component-secrets >}}).
+- 查看 [个 Dapr secrets API 功能]({{< ref secrets-overview >}})。
+- [学习如何使用密钥范围]({{< ref secrets-scopes >}})
+- 阅读 [密钥 API 参考]({{< ref secrets_api >}}) 并查看 [支持的密钥]({{< ref supported-secret-stores >}})。
+- 了解如何 [设置不同的机密钥存储组件]({{< ref setup-secret-store >}}) 以及如何 [引用组件中的密钥]({{< ref component-secrets >}}).

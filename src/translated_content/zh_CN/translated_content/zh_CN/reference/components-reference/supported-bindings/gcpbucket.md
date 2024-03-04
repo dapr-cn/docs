@@ -22,31 +22,31 @@ spec:
   version: v1
   metadata:
   - name: bucket
-    value: mybucket
+    value: "mybucket"
   - name: type
-    value: service_account
+    value: "service_account"
   - name: project_id
-    value: project_111
+    value: "project_111"
   - name: private_key_id
-    value: *************
+    value: "*************"
   - name: client_email
-    value: name@domain.com
+    value: "name@domain.com"
   - name: client_id
-    value: '1111111111111111'
+    value: "1111111111111111"
   - name: auth_uri
-    value: https://accounts.google.com/o/oauth2/auth
+    value: "https://accounts.google.com/o/oauth2/auth"
   - name: token_uri
-    value: https://oauth2.googleapis.com/token
+    value: "https://oauth2.googleapis.com/token"
   - name: auth_provider_x509_cert_url
-    value: https://www.googleapis.com/oauth2/v1/certs
+    value: "https://www.googleapis.com/oauth2/v1/certs"
   - name: client_x509_cert_url
-    value: https://www.googleapis.com/robot/v1/metadata/x509/<project-name>.iam.gserviceaccount.com
+    value: "https://www.googleapis.com/robot/v1/metadata/x509/<project-name>.iam.gserviceaccount.com"
   - name: private_key
-    value: PRIVATE KEY
+    value: "PRIVATE KEY"
   - name: decodeBase64
-    value: <bool>
+    value: "<bool>"
   - name: encodeBase64
-    value: <bool>
+    value: "<bool>"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -55,21 +55,21 @@ spec:
 
 ## 元数据字段规范
 
-| Field                           | 必填 | 绑定支持   | 详情                                                                                                                        | 示例                                                                                               |
-| ------------------------------- |:--:| ------ | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| bucket                          | 是  | Output | The bucket name                                                                                                           | `"mybucket"`                                                                                     |
-| type                            | 是  | 输出     | GCP 凭证类型                                                                                                                  | `"service_account"`                                                                              |
-| project_id                      | 是  | 输出     | GCP project id                                                                                                            | `projectId`                                                                                      |
-| private_key_id                | 是  | 输出     | GCP private key id                                                                                                        | `"privateKeyId"`                                                                                 |
-| private_key                     | 是  | 输出     | GCP credentials private key. Replace with x509 cert                                                                       | `12345-12345`                                                                                    |
-| client_email                    | 是  | Output | GCP client email                                                                                                          | `"client@email.com"`                                                                             |
-| client_id                       | 是  | Output | GCP client id                                                                                                             | `0123456789-0123456789`                                                                          |
-| auth_uri                        | 是  | Output | Google account OAuth endpoint                                                                                             | `https://accounts.google.com/o/oauth2/auth`                                                      |
-| token_uri                       | 是  | Output | Google account token uri                                                                                                  | `https://oauth2.googleapis.com/token`                                                            |
-| auth_provider_x509_cert_url | 是  | Output | GCP credentials cert url                                                                                                  | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
-| client_x509_cert_url          | 是  | Output | GCP credentials project x509 cert url                                                                                     | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
-| decodeBase64                    | 否  | Output | 在保存到存储桶之前解码 base64 文件内容的配置。 (在打开带有二进制内容的文件时有用)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false`  | `true`, `false`                                                                                  |
-| encodeBase64                    | 否  | Output | 在返回内容之前对 base64 文件内容进行编码的配置。 (在打开带有二进制内容的文件时有用)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false` | `true`, `false`                                                                                  |
+| Field                         | Required | 绑定支持   | 详情                                                                                                                        | 示例                                                                                               |
+| ----------------------------- |:--------:| ------ | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `bucket`                      |    是     | Output | The bucket name                                                                                                           | `"mybucket"`                                                                                     |
+| `type`                        |    是     | 输出     | GCP 凭证类型                                                                                                                  | `"service_account"`                                                                              |
+| `project_id`                  |    是     | 输出     | GCP project id                                                                                                            | `projectId`                                                                                      |
+| `private_key_id`              |    是     | 输出     | GCP private key id                                                                                                        | `"privateKeyId"`                                                                                 |
+| `private_key`                 |    是     | 输出     | GCP credentials private key. Replace with x509 cert                                                                       | `12345-12345`                                                                                    |
+| `client_email`                |    是     | Output | GCP client email                                                                                                          | `"client@email.com"`                                                                             |
+| `client_id`                   |    是     | Output | GCP client id                                                                                                             | `0123456789-0123456789`                                                                          |
+| `auth_uri`                    |    是     | Output | Google account OAuth endpoint                                                                                             | `https://accounts.google.com/o/oauth2/auth`                                                      |
+| `token_uri`                   |    是     | Output | Google account token uri                                                                                                  | `https://oauth2.googleapis.com/token`                                                            |
+| `auth_provider_x509_cert_url` |    是     | Output | GCP credentials cert url                                                                                                  | `https://www.googleapis.com/oauth2/v1/certs`                                                     |
+| `client_x509_cert_url`        |    是     | Output | GCP credentials project x509 cert url                                                                                     | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
+| `decodeBase64`                |    否     | Output | 在保存到存储桶之前解码 base64 文件内容的配置。 (在打开带有二进制内容的文件时有用)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false`  | `true`, `false`                                                                                  |
+| `encodeBase64`                |    否     | Output | 在返回内容之前对 base64 文件内容进行编码的配置。 (在打开带有二进制内容的文件时有用)。 `true` 是唯一允许的正值。 其他正值，如 `"True"，"1"<code> 是不允许的。 默认值为 <code>false` | `true`, `false`                                                                                  |
 
 ## 绑定支持
 
@@ -96,7 +96,7 @@ spec:
 - `key` - (optional) the name of the object
 - `decodeBase64` - （可选）在保存到存储之前解码 base64 文件内容的配置
 
-#### Examples
+#### 示例
 ##### Save text to a random generated UUID file
 
 {{< tabs Windows Linux >}}
@@ -230,7 +230,7 @@ The response body will contain the following JSON:
 - `key` - 对象的名称
 
 
-#### Examples
+#### 示例
 
 ##### 删除对象
 

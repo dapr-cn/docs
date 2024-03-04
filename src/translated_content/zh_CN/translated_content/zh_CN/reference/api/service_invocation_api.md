@@ -6,16 +6,28 @@ description: "有关服务调用 API 的详细文档"
 weight: 100
 ---
 
-Dapr provides users with the ability to call other applications that have unique ids. This functionality allows apps to interact with one another via named identifiers and puts the burden of service discovery on the Dapr runtime.
+Dapr provides users with the ability to call other applications that are using Dapr with a unique named identifier (appId), or HTTP endpoints that are not using Dapr. This allows applications to interact with one another via named identifiers and puts the burden of service discovery on the Dapr runtime.
 
-## Invoke a method on a remote dapr app
+## Invoke a method on a remote Dapr app
 
 此端点允许你在另一个启用了 Dapr 的应用中调用方法。
 
 ### HTTP Request
 
 ```
-PATCH/POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method/<method-name>
+PATCH/POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appID>/method/<method-name>
+```
+
+## Invoke a method on a non-Dapr endpoint
+
+This endpoint lets you invoke a method on a non-Dapr endpoint using an `HTTPEndpoint` resource name, or a Fully Qualified Domain Name (FQDN) URL.
+
+### HTTP Request
+
+```
+PATCH/POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<HTTPEndpoint name>/method/<method-name>
+
+PATCH/POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<FQDN URL>/method/<method-name>
 ```
 
 ### HTTP 响应码
@@ -33,11 +45,13 @@ PATCH/POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method
 
 ### URL 参数
 
-| Parameter   | 说明                    |
-| ----------- | --------------------- |
-| daprPort    | the Dapr port         |
-| appId       | 与远程应用关联的应用 ID         |
-| method-name | 要在远程应用上调用的方法或 url 的名称 |
+| Parameter         | 说明                                                                 |
+| ----------------- | ------------------------------------------------------------------ |
+| daprPort          | the Dapr port                                                      |
+| appID             | 与远程应用关联的应用 ID                                                      |
+| HTTPEndpoint name | the HTTPEndpoint resource associated with the external endpoint    |
+| FQDN URL          | Fully Qualified Domain Name URL to invoke on the external endpoint |
+| method-name       | 要在远程应用上调用的方法或 url 的名称                                              |
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
@@ -63,9 +77,9 @@ PATCH/POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/invoke/<appId>/method
 
 ### 被调用的服务收到的请求
 
-一旦你的服务代码调用了另一个启用Dapr的应用程序中的方法，Dapr 将把请求连标头和正文一起发送到 `<method-name>` 端点上的应用程序。
+Once your service code invokes a method in another Dapr enabled app or non-Dapr endpoint, Dapr sends the request, along with the headers and body, on the `<method-name>` endpoint.
 
-被调用的的 Dapr 应用需要监听并响应该端点上的请求。
+The Dapr app or non-Dapr endpoint being invoked will need to be listening for and responding to requests on that endpoint.
 
 ### 跨命名空间调用
 
@@ -116,6 +130,20 @@ app.listen(port, () => console.log(`Listening on port ${port}!`));
 `http://localhost:3500/v1.0/invoke/mathService.testing/method/api/v1/add`
 
 在此 URL 中， `testing` 是 `mathService` 运行的命名空间。
+
+#### Non-Dapr Endpoint Example
+
+If the `mathService` service was a non-Dapr application, then it could be invoked using service invocation via an `HTTPEndpoint`, as well as a Fully Qualified Domain Name (FQDN) URL.
+
+```shell
+curl http://localhost:3500/v1.0/invoke/mathHTTPEndpoint/method/add \
+  -H "Content-Type: application/json"
+  -d '{ "arg1": 10, "arg2": 23}'
+
+curl http://localhost:3500/v1.0/invoke/http://mathServiceURL.com/method/add \
+  -H "Content-Type: application/json"
+  -d '{ "arg1": 10, "arg2": 23}'
+```
 
 ## 下一步
 - [操作方法：发现并调用服务]({{< ref howto-invoke-discover-services.md >}})

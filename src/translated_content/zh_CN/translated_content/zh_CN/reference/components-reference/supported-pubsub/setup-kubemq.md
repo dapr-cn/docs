@@ -9,7 +9,7 @@ aliases:
 
 ## Component format
 
-To setup KubeMQ pub/sub, create a component of type `pubsub.kubemq`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pub/sub configuration.
+To set up KubeMQ pub/sub, create a component of type `pubsub.kubemq`. See the [pub/sub broker component file]({{< ref setup-pubsub.md >}}) to learn how ConsumerID is automatically generated. Read the [How-to: Publish and Subscribe guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pub/sub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -24,25 +24,28 @@ spec:
       value: localhost:50000
     - name: store
       value: false
+    - name: consumerID
+      value: channel1
 ```
 
 ## 元数据字段规范
 
-| Field             | 必填 | 详情                                                                                                                          | 示例                                     |
-| ----------------- |:--:| --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| address           | 是  | Address of the KubeMQ server                                                                                                | `"localhost:50000"`                    |
-| store             | 否  | type of pubsub, true: pubsub persisted (EventsStore), false: pubsub in-memory (Events)                                      | `true` or `false` (default is `false`) |
-| clientID          | 否  | Name for client id connection                                                                                               | `sub-client-12345`                     |
-| authToken         | 否  | Auth JWT token for connection Check out [KubeMQ Authentication](https://docs.kubemq.io/learn/access-control/authentication) | `ew...`                                |
-| group             | 否  | Subscriber group for load balancing                                                                                         | `g1`                                   |
-| disableReDelivery | 否  | Set if message should be re-delivered in case of error coming from application                                              | `true` or `false` (default is `false`) |
+| Field             | Required | 详情                                                                                                                                                                                                                                                                                                                                      | 示例                                     |
+| ----------------- |:--------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| address           |    是     | Address of the KubeMQ server                                                                                                                                                                                                                                                                                                            | `"localhost:50000"`                    |
+| store             |    否     | type of pubsub, true: pubsub persisted (EventsStore), false: pubsub in-memory (Events)                                                                                                                                                                                                                                                  | `true` or `false` (default is `false`) |
+| consumerID        |    否     | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. | `"channel1"`                           |
+| clientID          |    否     | Name for client id connection                                                                                                                                                                                                                                                                                                           | `sub-client-12345`                     |
+| authToken         |    否     | Auth JWT token for connection Check out [KubeMQ Authentication](https://docs.kubemq.io/learn/access-control/authentication)                                                                                                                                                                                                             | `ew...`                                |
+| group             |    否     | Subscriber group for load balancing                                                                                                                                                                                                                                                                                                     | `g1`                                   |
+| disableReDelivery |    否     | Set if message should be re-delivered in case of error coming from application                                                                                                                                                                                                                                                          | `true` or `false` (default is `false`) |
 
 ## Create a KubeMQ broker
 
 {{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
-1. Obtain KubeMQ Key by visiting [https://account.kubemq.io/login/register](https://account.kubemq.io/login/register) and register for a key.
+1. [Obtain KubeMQ Key](https://docs.kubemq.io/getting-started/quick-start#obtain-kubemq-license-key).
 2. Wait for an email confirmation with your Key
 
 You can run a KubeMQ broker with Docker:
@@ -55,7 +58,7 @@ You can then interact with the server using the client port: `localhost:50000`
 {{% /codetab %}}
 
 {{% codetab %}}
-1. Obtain KubeMQ Key by visiting [https://account.kubemq.io/login/register](https://account.kubemq.io/login/register) and register for a key.
+1. [Obtain KubeMQ Key](https://docs.kubemq.io/getting-started/quick-start#obtain-kubemq-license-key).
 2. Wait for an email confirmation with your Key
 
 Then Run the following kubectl commands:

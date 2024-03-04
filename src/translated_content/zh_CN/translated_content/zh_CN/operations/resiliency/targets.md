@@ -2,8 +2,8 @@
 type: docs
 title: "Targets"
 linkTitle: "Targets"
-weight: 4500
-description: "Apply resiliency policies to apps, components and actors"
+weight: 300
+description: "Apply resiliency policies to targets including apps, components and actors"
 ---
 
 ### Targets
@@ -34,7 +34,7 @@ specs:
 ```
 
 
-#### Components
+#### 组件
 
 With the `components` target, you can apply `retry`, `timeout` and `circuitBreaker` policies to component operations.
 
@@ -132,6 +132,6 @@ spec:
 
 ## 下一步
 
-Try out one of the Resiliency quickstarts:
+试一试复原力快速入门课程：
 - [Resiliency: Service-to-service]({{< ref resiliency-serviceinvo-quickstart.md >}})
-- [Resiliency: State Management]({{< ref resiliency-state-quickstart.md >}})
+- [复原能力：状态管理]({{< ref resiliency-state-quickstart.md >}})

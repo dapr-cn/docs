@@ -34,7 +34,7 @@ spec:
 
 阅读 [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) 以获取配置状态存储组件的说明.
 
-## Supported state stores
+## 支持的状态存储
 
 访问 [参考手册]({{< ref supported-state-stores >}}) 查看所有支持的 Dapr 状态存储库。
 
@@ -42,4 +42,4 @@ spec:
 - [Component concept]({{< ref components-concept.md >}})
 - [状态管理概览]({{< ref state-management >}})
 - [状态管理 API 规范]({{< ref state_api.md >}})
-- [Supported state stores]({{< ref supported-state-stores >}})
+- [支持的状态存储]({{< ref supported-state-stores >}})

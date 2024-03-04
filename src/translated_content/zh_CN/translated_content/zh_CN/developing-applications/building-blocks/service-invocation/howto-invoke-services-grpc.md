@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "How-To: Invoke services using gRPC"
+title: "操作方法：使用 gRPC 调用服务"
 linkTitle: "How-To: Invoke with gRPC"
-description: "Call between services using service invocation"
-weight: 3000
+description: "使用 servcie invocation 在服务之间调用"
+weight: 30
 ---
 
-This article describe how to use Dapr to connect services using gRPC.
+本文介绍如何使用 Dapr 通过 gRPC 连接服务。
 
-By using Dapr's gRPC proxying capability, you can use your existing proto-based gRPC services and have the traffic go through the Dapr sidecar. Doing so yields the following [Dapr service invocation]({{< ref service-invocation-overview.md >}}) benefits to developers:
+通过使用 Dapr 的 gRPC 代理功能，您可以使用现有的基于 proto 的 gRPC 服务，并让流量通过 Dapr sidecar。 这样做可以为开发人员带来以下 [Dapr 服务调用]({{< ref service-invocation-overview.md >}}) 好处：
 
-1. Mutual authentication
-2. Tracing
+1. 双向认证
+2. 追踪
 3. Metrics
 4. 访问列表
 5. 网络层弹性
 6. 基于 API 令牌的身份验证
 
-Dapr allows proxying all kinds of gRPC invocations, including unary and [stream-based](#proxying-of-streaming-rpcs) ones.
+Dapr 允许代理各种 gRPC 调用，包括一元和 [基于流](#proxying-of-streaming-rpcs) 的调用。
 
-## Step 1: Run a gRPC server
+## 步骤 1：运行 gRPC 服务器
 
-The following example is taken from the ["hello world" grpc-go example](https://github.com/grpc/grpc-go/tree/master/examples/helloworld). Although this example is in Go, the same concepts apply to all programming languages supported by gRPC.
+以下示例摘自 [hello world grpc-go 示例](https://github.com/grpc/grpc-go/tree/master/examples/helloworld)。 尽管这个例子是用Go语言编写的，但是相同的概念适用于所有支持gRPC的编程语言。
 
 ```go
 package main
@@ -64,19 +64,19 @@ func main() {
 }
 ```
 
-This Go app implements the Greeter proto service and exposes a `SayHello` method.
+此 Go 应用程序实现了Greeter proto 服务，并暴露了 `sayHello` 方法。
 
-### Run the gRPC server using the Dapr CLI
+### 使用 Dapr CLI 运行 gRPC 服务器
 
 ```bash
 dapr run --app-id server --app-port 50051 -- go run main.go
 ```
 
-Using the Dapr CLI, we're assigning a unique id to the app, `server`, using the `--app-id` flag.
+使用 Dapr CLI，我们正在为应用分配一个唯一的 ID， `server`，使用 `--app-id` 标志。
 
 ## 步骤 2: 调用服务
 
-The following example shows you how to discover the Greeter service using Dapr from a gRPC client. Notice that instead of invoking the target service directly at port `50051`, the client is invoking its local Dapr sidecar over port `50007` which then provides all the capabilities of service invocation including service discovery, tracing, mTLS and retries.
+以下示例演示如何从 gRPC 客户端使用 Dapr 发现 Greeter 服务。 请注意，客户端不是直接在端口 `50051` 调用目标服务，而是通过端口 `50007` 调用其本地 Dapr sidecar，然后提供服务调用的所有功能，包括服务发现、跟踪、mTLS 和重试。
 
 ```go
 package main
@@ -117,13 +117,13 @@ func main() {
 }
 ```
 
-The following line tells Dapr to discover and invoke an app named `server`:
+下面这行告诉 Dapr 发现并调用名为 `server` 的应用：
 
 ```go
 ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server")
 ```
 
-All languages supported by gRPC allow for adding metadata. Here are a few examples:
+gRPC 支持的所有语言都允许添加元数据。 以下是几个例子：
 
 {{< tabs Java Dotnet Python JavaScript Ruby "C++">}}
 
@@ -189,11 +189,11 @@ dapr run --app-id client --dapr-grpc-port 50007 -- go run main.go
 
 ### 查看遥测
 
-If you're running Dapr locally with Zipkin installed, open the browser at `http://localhost:9411` and view the traces between the client and server.
+如果您在本地运行 Dapr 并安装了 Zipkin，请在 `http://localhost:9411` 打开浏览器并查看客户端和服务器之间的跟踪。
 
-### Deploying to Kubernetes
+### 部署到 Kubernetes
 
-Set the following Dapr annotations on your deployment:
+在 deployment 中设置以下 Dapr 注解:
 
 ```yaml
 apiVersion: apps/v1
@@ -219,15 +219,16 @@ spec:
         dapr.io/app-port: "50051"
 ...
 ```
-*If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection with the `app-ssl: "true"` annotation (full list [here]({{< ref arguments-annotations-overview.md >}}))*
 
-The `dapr.io/app-protocol: "grpc"` annotation tells Dapr to invoke the app using gRPC.
+`dapr.io/app-protocol："grpc"` annotation 告诉 Dapr 使用 gRPC 调用应用。
 
-### Namespaces
+如果您的应用程序使用 TLS 连接，您可以使用 `app-protocol: "grpcs"` 注解告知 Dapr 在 TLS 上调用您的应用程序（完整列表 [请查看]({{< ref arguments-annotations-overview.md >}})）。 请注意，Dapr 不会验证应用程序提供的 TLS 证书。
+
+### 命名空间
 
 当运行于[支持命名空间]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})的平台时，在您的 app ID 中包含命名空间：`myApp.production`
 
-For example, invoking the gRPC server on a different namespace:
+例如，在不同的命名空间上调用 gRPC 服务器：
 
 ```go
 ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server.production")
@@ -235,17 +236,17 @@ ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server.production")
 
 有关名称空间的更多信息，请参阅 [跨命名空间 API]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) 。
 
-## Step 3: View traces and logs
+## 步骤 3：跟踪和日志
 
 上面的示例显示了如何直接调用本地或 Kubernetes 中运行的其他服务。 Dapr 输出指标、跟踪和日志记录信息，允许您可视化服务之间的调用图、日志错误和可选地记录有效负载正文。
 
 有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 篇文章。
 
-## Proxying of streaming RPCs
+## 流式RPC的代理
 
-When using Dapr to proxy streaming RPC calls using gRPC, you must set an additional metadata option `dapr-stream` with value `true`.
+当使用 Dapr 作为代理流处理 RPC 进行 gRPC 调用时，你需要设置额外的元数据选项 `dapr-stream` 为 `true`
 
-For example:
+例如:
 
 {{< tabs Go Java Dotnet Python JavaScript Ruby "C++">}}
 
@@ -305,23 +306,23 @@ context.AddMetadata("dapr-stream", "true");
 
 {{< /tabs >}}
 
-### Streaming gRPCs and Resiliency
+### 流式传输 gRPC 和弹性
 
-When proxying streaming gRPCs, due to their long-lived nature, [resiliency]({{< ref "resiliency-overview.md" >}}) policies are applied on the "initial handshake" only. As a consequence:
+当代理流式gRPC时，由于其长期存在性质，仅在"初始握手"上应用 [弹性]({{< ref "resiliency-overview.md" >}}) 策略。 因此：
 
-- If the stream is interrupted after the initial handshake, it will not be automatically re-established by Dapr. Your application will be notified that the stream has ended, and will need to recreate it.
-- Retry policies only impact the initial connection "handshake". If your resiliency policy includes retries, Dapr will detect failures in establishing the initial connection to the target app and will retry until it succeeds (or until the number of retries defined in the policy is exhausted).
-- Likewise, timeouts defined in resiliency policies only apply to the initial "handshake". After the connection has been established, timeouts do not impact the stream anymore.
+- 如果在初始握手之后，流被中断，Dapr 将不会自动重新建立连接。 您的应用程序将收到通知，流已结束，并且需要重新创建它。
+- 重试策略只影响初始连接“握手”。 如果您的弹性策略包括重试，Dapr 将检测到与目标应用程序建立初始连接时的故障，并将重试直到成功（或直到策略中定义的重试次数用尽）。
+- 同样，弹性策略中定义的超时仅适用于初始的“握手”过程。 连接建立后，超时不再影响流。
 
 ## 相关链接
 
-* [Service invocation overview]({{< ref service-invocation-overview.md >}})
+* [服务调用概述]({{< ref service-invocation-overview.md >}})
 * [服务调用 API 规范]({{< ref service_invocation_api.md >}})
-* [gRPC proxying community call video](https://youtu.be/B_vkXqptpXY?t=70)
+* [gRPC 代理社区会议视频](https://youtu.be/B_vkXqptpXY?t=70)
 
-## Community call demo
+## 社区示例
 
-Watch this [video](https://youtu.be/B_vkXqptpXY?t=69) on how to use Dapr's gRPC proxying capability:
+观看此 [视频](https://youtu.be/B_vkXqptpXY?t=69) ，了解如何使用 Dapr 的 gRPC 代理功能：
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/B_vkXqptpXY?start=69" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

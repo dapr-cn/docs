@@ -54,19 +54,19 @@ spec:
 
 ## 元数据字段规范
 
-| Field                           | 必填 | 详情                                                                                          | 示例                                                    |
-| ------------------------------- |:--:| ------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| instancePrincipalAuthentication | 否  | 指示是否使用基于实例主体的身份验证的布尔值。 默认值为 `"false"`                                                       | `"true"` 或者  `"false"` .                              |
-| configFileAuthentication        | 否  | 指示是否通过配置文件提供身份凭证详细信息的布尔值。 默认值： `"false"` 当 instancePrincipalAuthentication 为 true 时不需要也不使用。 | `"true"` 或者  `"false"` .                              |
-| configFilePath                  | 否  | OCI 配置文件的完整路径名。 无默认值 当 instancePrincipalAuthentication 为 true 时不会使用。 注意：不支持 ~/ 前缀。          | `"/home/apps/configuration-files/myOCIConfig.txt"`.   |
-| configFileProfile               | 否  | 配置文件中要使用的配置文件的名称。 默认值： `"DEFAULT"`， 当 instancePrincipalAuthentication 为真时不使用。               | `"DEFAULT"` 或者  `"PRODUCTION"` .                      |
-| tenancyOCID                     | 是  | OCI 租户标识符。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。                             | `"ocid1.tenancy.oc1..aaaaaaaag7c7sljhsdjhsdyuwe723"`. |
-| userOCID                        | 是  | OCI 账户的 OCID（此账户需要访问 OCI 对象存储的权限）。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。     | `"ocid1.user.oc1..aaaaaaaaby4oyyyuqwy7623yuwe76"`     |
-| fingerPrint                     | 是  | 公钥的指纹。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。                                 | `"02:91:6c:49:e2:94:21:15:a7:6b:0e:a7:34:e1:3d:1b"`   |
-| privateKey                      | 是  | RSA 密钥对的私钥。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。                            | `"MIIEoyuweHAFGFG2727as+7BTwQRAIW4V"`                 |
-| region                          | 是  | OCI 分区。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。                                | `"us-ashburn-1"`                                      |
-| bucketName                      | 是  | 读写的存储桶名称（必要时创建）                                                                             | `"application-state-store-bucket"`                    |
-| compartmentOCID                 | 是  | 包含存储桶的隔间的 OCID                                                                              | `"ocid1.compartment.oc1..aaaaaaaacsssekayyuq7asjh78"` |
+| Field                           | Required | 详情                                                                                          | 示例                                                    |
+| ------------------------------- |:--------:| ------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| instancePrincipalAuthentication |    否     | 指示是否使用基于实例主体的身份验证的布尔值。 默认值为 `"false"`                                                       | `"true"` 或者  `"false"` .                              |
+| configFileAuthentication        |    否     | 指示是否通过配置文件提供身份凭证详细信息的布尔值。 默认值： `"false"` 当 instancePrincipalAuthentication 为 true 时不需要也不使用。 | `"true"` 或者  `"false"` .                              |
+| configFilePath                  |    否     | OCI 配置文件的完整路径名。 无默认值 当 instancePrincipalAuthentication 为 true 时不会使用。 注意：不支持 ~/ 前缀。          | `"/home/apps/configuration-files/myOCIConfig.txt"`.   |
+| configFileProfile               |    否     | 配置文件中要使用的配置文件的名称。 默认值： `"DEFAULT"`， 当 instancePrincipalAuthentication 为真时不使用。               | `"DEFAULT"` 或者  `"PRODUCTION"` .                      |
+| tenancyOCID                     |    是     | OCI 租户标识符。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。                             | `"ocid1.tenancy.oc1..aaaaaaaag7c7sljhsdjhsdyuwe723"`. |
+| userOCID                        |    是     | OCI 账户的 OCID（此账户需要访问 OCI 对象存储的权限）。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。     | `"ocid1.user.oc1..aaaaaaaaby4oyyyuqwy7623yuwe76"`     |
+| fingerPrint                     |    是     | 公钥的指纹。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。                                 | `"02:91:6c:49:e2:94:21:15:a7:6b:0e:a7:34:e1:3d:1b"`   |
+| privateKey                      |    是     | RSA 密钥对的私钥。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。                            | `"MIIEoyuweHAFGFG2727as+7BTwQRAIW4V"`                 |
+| region                          |    是     | OCI 分区。 当 instancePrincipalAuthentication 为 true 时，既不需要也不使用。                                | `"us-ashburn-1"`                                      |
+| bucketName                      |    是     | 读写的存储桶名称（必要时创建）                                                                             | `"application-state-store-bucket"`                    |
+| compartmentOCID                 |    是     | 包含存储桶的隔间的 OCID                                                                              | `"ocid1.compartment.oc1..aaaaaaaacsssekayyuq7asjh78"` |
 
 ## 设置 OCI 对象存储
 OCI 对象存储状态存储需要与 Oracle 云进行交互。 状态存储支持两种不同的身份验证方法。 一个基于标识（用户或服务账户），另一个是实例主体身份验证，利用授予运行应用程序工作负荷的计算实例的权限。 注意：资源主题身份认证--用于非实例资源例如serverless函数 -- 目前还不支持。

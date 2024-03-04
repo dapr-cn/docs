@@ -6,37 +6,37 @@ weight: 300
 description: "对可伸缩的副本使用状态管理"
 ---
 
-In this article, you'll learn how to create a stateful service which can be horizontally scaled, using opt-in concurrency and consistency models. Consuming the state management API frees developers from difficult state coordination, conflict resolution, and failure handling.
+在这篇文章中，你将了解到如何创建一个可以水平扩展的有状态服务，使用选入并发和一致性模型。 使用状态管理API可以使开发人员摆脱繁琐的状态协调、冲突解决和故障处理。
 
-## Set up a state store
+## 建立一个状态存储
 
-状态存储组件代表 Dapr 用来与数据库进行通信的资源。 For the purpose of this guide, we'll use the default Redis state store.
+状态存储组件代表 Dapr 用来与数据库进行通信的资源。 在本指南中，我们将使用默认的 Redis 状态存储。
 
 ### 使用 Dapr CLI
 
-When you run `dapr init` in self-hosted mode, Dapr creates a default Redis `statestore.yaml` and runs a Redis state store on your local machine, located:
+当你在自托管模式下运行 `dapr init` 时，Dapr 会创建一个默认的 Redis `statestore.yaml` 并在你的本地机器上运行一个 Redis 状态存储，它位于:
 
-- On Windows, under `%UserProfile%\.dapr\components\statestore.yaml`
+- 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
 - 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out underlying components without application code changes.
+使用 `statestore.yaml` 组件，您可以轻松更换底层组件，而无需更改应用程序代码。
 
-See a [list of supported state stores]({{< ref supported-state-stores >}}).
+查看 [支持的状态存储列表]({{< ref supported-state-stores >}}).
 
 ### Kubernetes
 
-See [how to setup different state stores on Kubernetes]({{<ref setup-state-store>}}).
+看 [如何在 Kubernetes 上设置不同的状态存储]({{<ref setup-state-store>}}).
 
-## Strong and eventual consistency
+## 强一致性和最终一致性
 
-Using strong consistency, Dapr makes sure that the underlying state store:
+使用强一致性，Dapr 确保底层状态存储：
 
-- Returns the response once the data has been written to all replicas.
-- Receives an ACK from a quorum before writing or deleting state.
+- 数据写入所有副本后返回响应。
+- 在写入或删除状态之前，从法定人数那里接收到一个 ACK。
 
-For get requests, Dapr ensures the store returns the most up-to-date data consistently among replicas. 除非在对状态 API 的请求中另有指定，否则默认为最终一致性。
+对于 get 请求，Dapr 确保存储在副本之间始终返回最新的数据。 除非在对状态 API 的请求中另有指定，否则默认为最终一致性。
 
-The following examples illustrate how to save, get, and delete state using strong consistency. The example is written in Python, but is applicable to any programming language.
+下面的例子说明了如何使用强一致性保存、获取和删除状态。 该示例是用 Python 编写的，但适用于任何编程语言。
 
 ### 保存状态
 
@@ -73,31 +73,31 @@ dapr_state_url = "http://localhost:3500/v1.0/state/{}".format(store_name)
 response = requests.delete(dapr_state_url + "/key1", headers={"consistency":"strong"})
 ```
 
-If the `concurrency` option hasn't been specified, the default is last-write concurrency mode.
+如果未指定`concurrency`选项，则默认为最后写入并发模式。
 
-## First-write-wins and last-write-wins
+## First-write-wins 和 Last-write-wins
 
-Dapr allows developers to opt-in for two common concurrency patterns when working with data stores:
+Dapr 允许开发人员在处理数据存储时选择两种常见的并发模式：
 
-- **First-write-wins**: useful in situations where you have multiple instances of an application, all writing to the same key concurrently.
-- **Last-write-wins**: Default mode for Dapr.
+- **First-write-wins**: 在有多个应用程序实例，同时向同一个键进行写入的情况下，First-Write-Wins 策略非常有用。
+- **Last-write-wins**: Dapr 的默认模式。
 
-Dapr uses version numbers to determine whether a specific key has been updated. You can:
+Dapr 使用版本号来确定一个特定的键是否已经更新。 你可以:
 
-1. Retain the version number when reading the data for a key.
-1. Use the version number during updates such as writes and deletes.
+1. 读取密钥数据时保留版本号。
+1. 在更新时（例如写入和删除操作）使用版本号。
 
-If the version information has changed since the version number was retrieved, an error is thrown, requiring you to perform another read to get the latest version information and state.
+如果版本信息在检索版本号后发生了变化，就会抛出一个错误，需要您执行另一个读取操作以获取最新的版本信息和状态。
 
-Dapr utilizes ETags to determine the state's version number. ETags are returned from state requests in an `ETag` header. Using ETags, your application knows that a resource has been updated since the last time they checked by erroring during an ETag mismatch.
+Dapr利用 ETags 来确定状态的版本号。 ETags 标签从状态相关请求中以 `ETag` 头返回。 使用 ETags，您的应用程序知道自上次检查以来资源已经被更新，因为在 ETag 不匹配时出现错误。
 
-The following example shows how to:
+以下示例显示如何：
 
-- Get an ETag.
-- Use the ETag to save state.
-- Delete the state.
+- 获取一个 ETag。
+- 使用 ETag 保存状态。
+- 删除状态。
 
-The following example is written in Python, but is applicable to any programming language.
+该示例是用 Python 编写的，但适用于任何编程语言。
 
 ```python
 import requests
@@ -115,7 +115,7 @@ response = requests.delete(dapr_state_url + "/key1", headers={"If-Match": "{}".f
 
 ### 处理版本不匹配引起的失败
 
-In the following example, you'll see how to retry a save state operation when the version has changed:
+在下面的例子中，您将看到在版本发生变化时如何重试保存状态操作:
 
 ```python
 import requests

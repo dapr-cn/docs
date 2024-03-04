@@ -7,13 +7,13 @@ description: 如何使用 Dapr Go SDK 启动和运行
 no_list: true
 ---
 
-The Dapr client package allows you to interact with other Dapr applications from a Go application.
+Dapr client允许您的 Go 应用程序与其他 Dapr 应用程序进行交互。
 
-## Prerequisites
+## 前期准备
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- [Go installed](https://golang.org/doc/install)
+- [Go 已安装](https://golang.org/doc/install)
 
 
 ## 导入客户端包
@@ -25,7 +25,7 @@ import "github.com/dapr/go-sdk/client"
 
 Go SDK 允许您与所有 [Dapr 构建块]({{< ref building-blocks >}}) 进行交互。
 
-### Service Invocation
+### 服务调用
 
 要在 Dapr sidecar 运行的服务上调用特定方法，Dapr 客户端 Go SDK 提供了两个选项：
 
@@ -44,7 +44,7 @@ content := &dapr.DataContent{
 resp, err = client.InvokeMethodWithContent(ctx, "app-id", "method-name", "post", content)
 ```
 
-- 有关服务调用的完整指南，请访问 [如何：调用服务]({{< ref howto-invoke-discover-services.md >}})。
+有关服务调用的完整指南，请访问 [操作方法：调用服务]({{< ref howto-invoke-discover-services.md >}})。
 
 ### 状态管理
 
@@ -142,6 +142,45 @@ meta := map[string]string{}
 err := testClient.ExecuteStateTransaction(ctx, store, meta, ops)
 ```
 
+使用`QueryState`从您的状态存储中检索、过滤和排序键/值数据。
+
+```go
+// Define the query string
+query := `{
+    "filter": {
+        "EQ": { "value.Id": "1" }
+    },
+    "sort": [
+        {
+            "key": "value.Balance",
+            "order": "DESC"
+        }
+    ]
+}`
+
+// Use the client to query the state
+queryResponse, err := c.QueryState(ctx, "querystore", query)
+if err != nil {
+    log.Fatal(err)
+}
+
+fmt.Printf("Got %d\n", len(queryResponse))
+
+for _, account := range queryResponse {
+    var data Account
+    err := account.Unmarshal(&data)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Account: %s has %f\n", data.ID, data.Balance)
+}
+```
+
+> **注意：**查询状态 API 目前处于 alpha 阶段
+
+有关状态管理的完整指南，请访问 [操作方法：保存 & 获取状态]({{< ref howto-get-save-state.md >}}).
+
 ### 发布消息
 要将数据发布到主题上，Dapr Go 客户端提供了一个简单的方法：
 
@@ -152,17 +191,32 @@ if err := client.PublishEvent(ctx, "component-name", "topic-name", data); err !=
 }
 ```
 
-- For a full list of state operations visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
+要一次发布多条消息， `PublishEvents` 可以使用的方法：
+
+```go
+events := []string{"event1", "event2", "event3"}
+res := client.PublishEvents(ctx, "component-name", "topic-name", events)
+if res.Error != nil {
+    panic(res.Error)
+}
+```
+
+有关发布/订阅的完整指南，请访问 [操作方法：发布 & 订阅]({{< ref howto-publish-subscribe.md >}}).
 
 ### 输出绑定
+
+
 Dapr Go Client SDK 提供了两种方法来调用 Dapr 定义好的绑定操作方法。 Dapr 支持输入、输出和双向绑定。
 
 比如，输出绑定：
+
 ```go
 in := &dapr.InvokeBindingRequest{ Name: "binding-name", Operation: "operation-name" }
 err = client.InvokeOutputBinding(ctx, in)
 ```
+
 调用带有内容和元数据的方法。
+
 ```go
 in := &dapr.InvokeBindingRequest{
     Name:      "binding-name",
@@ -174,8 +228,69 @@ in := &dapr.InvokeBindingRequest{
 out, err := client.InvokeBinding(ctx, in)
 ```
 
+有关输出绑定的完整指南，请访问[操作方法：使用绑定]({{< ref howto-bindings.md >}})。
 
-- For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
+### Actors
+
+使用Dapr Go客户端SDK编写actor。
+
+```go
+// MyActor represents an example actor type.
+type MyActor struct {
+    actors.Actor
+}
+
+// MyActorMethod is a method that can be invoked on MyActor.
+func (a *MyActor) MyActorMethod(ctx context.Context, req *actors.Message) (string, error) {
+    log.Printf("Received message: %s", req.Data)
+    return "Hello from MyActor!", nil
+}
+
+func main() {
+    // Create a Dapr client
+    daprClient, err := client.NewClient()
+    if err != nil {
+        log.Fatal("Error creating Dapr client: ", err)
+    }
+
+    // Register the actor type with Dapr
+    actors.RegisterActor(&MyActor{})
+
+    // Create an actor client
+    actorClient := actors.NewClient(daprClient)
+
+    // Create an actor ID
+    actorID := actors.NewActorID("myactor")
+
+    // Get or create the actor
+    err = actorClient.SaveActorState(context.Background(), "myactorstore", actorID, map[string]interface{}{"data": "initial state"})
+    if err != nil {
+        log.Fatal("Error saving actor state: ", err)
+    }
+
+    // Invoke a method on the actor
+    resp, err := actorClient.InvokeActorMethod(context.Background(), "myactorstore", actorID, "MyActorMethod", &actors.Message{Data: []byte("Hello from client!")})
+    if err != nil {
+        log.Fatal("Error invoking actor method: ", err)
+    }
+
+    log.Printf("Response from actor: %s", resp.Data)
+
+    // Wait for a few seconds before terminating
+    time.Sleep(5 * time.Second)
+
+    // Delete the actor
+    err = actorClient.DeleteActor(context.Background(), "myactorstore", actorID)
+    if err != nil {
+        log.Fatal("Error deleting actor: ", err)
+    }
+
+    // Close the Dapr client
+    daprClient.Close()
+}
+```
+
+有关 Actors 的完整指南，请访问 [Actors 构建基块文档]({{< ref actors >}}).
 
 ### 密钥管理
 
@@ -189,11 +304,11 @@ opt := map[string]string{
 secret, err := client.GetSecret(ctx, "store-name", "secret-name", opt)
 ```
 
-### 鉴权
+#### 鉴权
 
 默认情况下，Dapr依靠网络边界限制对其API的访问。 然而，如果Dapr API 使用了基于令牌的身份验证配置，用户可以通过以下两种方式配置Go Dapr客户端鉴权：
 
-**Environment Variable**
+**环境变量**
 
 如果定义了 DAPR_API_TOKEN 环境变量，Dapr 将自动使用它来做 Dapr API 调用时的鉴权。
 
@@ -213,7 +328,104 @@ func main() {
 ```
 
 
-- For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
+有关密钥的完整指南，请访问[操作方法：检索密钥]({{< ref howto-secrets.md >}})。
+
+### 分布式锁
+
+Dapr 客户端使用锁提供对资源的互斥访问。 使用锁，您可以：
+
+- 提供对数据库行、表或整个数据库的访问权限
+- 锁定从队列中按顺序读取信息
+
+```go
+package main
+
+import (
+    "fmt"
+
+    dapr "github.com/dapr/go-sdk/client"
+)
+
+func main() {
+    client, err := dapr.NewClient()
+    if err != nil {
+        panic(err)
+    }
+    defer client.Close()
+
+    resp, err := client.TryLockAlpha1(ctx, "lockstore", &dapr.LockRequest{
+            LockOwner:         "random_id_abc123",
+            ResourceID:      "my_file_name",
+            ExpiryInSeconds: 60,
+        })
+
+    fmt.Println(resp.Success)
+}
+```
+
+有关分布式锁的完整指南，请访问 [操作方法：使用锁]({{< ref howto-use-distributed-lock.md >}}).
+
+### 配置
+
+使用 Dapr 客户端 Go SDK，您可以使用以只读键/值对形式返回的配置项目，并订阅配置项目的更改。
+
+#### 获取配置
+
+```go
+    items, err := client.GetConfigurationItem(ctx, "example-config", "mykey")
+    if err != nil {
+        panic(err)
+    }
+    fmt.Printf("get config = %s\n", (*items).Value)
+```
+
+#### 配置订阅
+
+```go
+go func() {
+    if err := client.SubscribeConfigurationItems(ctx, "example-config", []string{"mySubscribeKey1", "mySubscribeKey2", "mySubscribeKey3"}, func(id string, items map[string]*dapr.ConfigurationItem) {
+        for k, v := range items {
+            fmt.Printf("get updated config key = %s, value = %s \n", k, v.Value)
+        }
+        subscribeID = id
+    }); err != nil {
+        panic(err)
+    }
+}()
+```
+
+有关配置的完整指南，请访问 [操作方法：从应用商店管理配置]({{< ref howto-manage-configuration.md >}}).
+
+### 密码学
+
+使用 Dapr 客户端 Go SDK，您可以使用高级的 `Encrypt` 和 `Decrypt` 密码学 API 在处理数据流时进行文件的加密和解密。
+
+加密
+
+```go
+// Encrypt the data using Dapr
+out, err := sdkClient.Encrypt(context.Background(), rf, dapr.EncryptOptions{
+    // These are the 3 required parameters
+    ComponentName: "mycryptocomponent",
+    KeyName:        "mykey",
+    Algorithm:     "RSA",
+})
+if err != nil {
+    panic(err)
+}
+```
+
+加密
+
+```go
+// Decrypt the data using Dapr
+out, err := sdkClient.Decrypt(context.Background(), rf, dapr.EncryptOptions{
+    // Only required option is the component name
+    ComponentName: "mycryptocomponent",
+})
+```
+
+有关密码学的完整指南，请访问 [操作方法：使用加密 API]({{< ref howto-cryptography.md >}}).
 
 ## 相关链接
-- [Go SDK 示例](https://github.com/dapr/go-sdk/tree/main/examples)
+[Go SDK 示例](https://github.com/dapr/go-sdk/tree/main/examples)

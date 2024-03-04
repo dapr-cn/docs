@@ -1,21 +1,21 @@
 ---
 type: docs
-title: "Quickstart: Configuration"
+title: "快速入门：配置"
 linkTitle: 配置
-weight: 76
-description: Get started with Dapr's Configuration building block
+weight: 77
+description: 开始使用 Dapr 的配置构建块
 ---
 
-Let's take a look at Dapr's [Configuration building block]({{< ref configuration-api-overview.md >}}). A configuration item is often dynamic in nature and tightly coupled to the needs of the application that consumes it. Configuration items are key/value pairs containing configuration data, such as:
+让我们来看看 Dapr 的 [配置构建块]({{< ref configuration-api-overview.md >}})。 配置项目通常具有动态性质，并且与消费它的应用程序的需求紧密耦合。 配置项是包含配置数据的键/值对，例如
 - App ids
 - Partition keys
-- Database names, etc
+- 数据库名称等
 
-In this quickstart, you'll run an `order-processor` microservice that utilizes the Configuration API. The service:
-1. Gets configuration items from the configuration store.
-1. Subscribes for configuration updates.
+在本快速入门中，你将运行 `order-processor` 利用配置 API 的微服务。 该服务：
+1. 从配置存储中获取配置项。
+1. 订阅配置更新。
 
-<img src="/images/configuration-quickstart/configuration-quickstart-flow.png" width=1000 alt="Diagram that demonstrates the flow of the configuration API quickstart with key/value pairs used.">
+<img src="/images/configuration-quickstart/configuration-quickstart-flow.png" width=1000 alt="该图演示了使用键/值对的配置 API 快速入门的流程。">
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
@@ -27,29 +27,29 @@ In this quickstart, you'll run an `order-processor` microservice that utilizes t
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Python 3.7+ installed](https://www.python.org/downloads/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [Python 3.7+ 已安装](https://www.python.org/downloads/).
 <!-- IGNORE_LINKS --> 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/configuration).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-Once cloned, open a new terminal and run the following command to set values for configuration items `orderId1` and `orderId2`.
+克隆后，打开一个新的终端并运行以下命令来设置配置项的值 `orderId1` 和 `orderId2`。
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "101" orderId2 "102"
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-From the root of the Quickstarts clone directory, navigate to the `order-processor` directory.
+从快速入门克隆目录的根目录导航到 `order-processor` 目录。
 
 ```bash
 cd configuration/python/sdk/order-processor
@@ -64,12 +64,12 @@ pip3 install -r requirements.txt
 与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-port 6001 -- python3 app.py
+dapr run --app-id order-processor --resources-path ../../../components/ --app-port 6001 -- python3 app.py
 ```
 
-> **Note**: Since Python3.exe is not defined in Windows, you may need to use `python app.py` instead of `python3 app.py`.
+> **注意：** 由于Python3.exe在Windows中未定义，您可能需要使用 `python app.py` 替代 `python3 app.py`。
 
-The expected output:
+预期输出：
 
 ```
 == APP == Configuration for orderId1 : value: "101"
@@ -79,23 +79,23 @@ The expected output:
 == APP == App unsubscribed from config changes
 ```
 
-### (Optional) Step 3: Update configuration item values
+### （可选）步骤 3：更新配置项值
 
-Once the app has unsubscribed, try updating the configuration item values. Change the `orderId1` and `orderId2` values using the following command:
+应用程序取消订阅后，请尝试更新配置项的值。 使用以下命令更改 `orderId1` 和 `orderId2` 的值：
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 ```
 
-Run the `order-processor` service again:
+再次运行 `order-processo` 服务：
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-port 6001 -- python3 app.py
+dapr run --app-id order-processor --resources-path ../../../components/ --app-port 6001 -- python3 app.py
 ```
 
-> **Note**: Since Python3.exe is not defined in Windows, you may need to use `python app.py` instead of `python3 app.py`.
+> **注意：** 由于Python3.exe在Windows中未定义，您可能需要使用 `python app.py` 替代 `python3 app.py`。
 
-The app will return the updated configuration values:
+该应用程序将返回更新后的配置值：
 
 ```
 == APP == Configuration for orderId1 : value: "103"
@@ -104,14 +104,14 @@ The app will return the updated configuration values:
 == APP ==
 ```
 
-### The `order-processor` service
+### `order-processor` 服务
 
-The `order-processor` service includes code for:
-- Getting the configuration items from the config store
-- Subscribing to configuration updates (which you made in the CLI earlier)
-- Unsubscribing from configuration updates and exiting the app after 20 seconds of inactivity.
+`order-processo` 服务包括以下代码：
+- 从配置存储中获取配置项
+- 订阅配置更新（您之前在命令行工具中进行的更新）
+- 在20秒不活动后，取消订阅配置更新并退出应用程序。
 
-Get configuration items:
+获取配置项目:
 
 ```python
 # Get config items from the config store
@@ -120,14 +120,14 @@ for config_item in CONFIGURATION_ITEMS:
     print(f"Configuration for {config_item} : {config.items[config_item]}", flush=True)
 ```
 
-Subscribe to configuration updates:
+订阅配置更新:
 
 ```python
 # Subscribe for configuration changes
 configuration = await client.subscribe_configuration(DAPR_CONFIGURATION_STORE, CONFIGURATION_ITEMS)
 ```
 
-Unsubscribe from configuration updates and exit the application:
+取消订阅配置更新并退出应用程序：
 
 ```python
 # Unsubscribe from configuration updates
@@ -150,29 +150,29 @@ if unsubscribed == True:
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Python 3.7+ installed](https://www.python.org/downloads/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [Python 3.7+ 已安装](https://www.python.org/downloads/).
 <!-- IGNORE_LINKS --> 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/configuration).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-Once cloned, open a new terminal and run the following command to set values for configuration items `orderId1` and `orderId2`.
+克隆后，打开一个新的终端并运行以下命令来设置配置项的值 `orderId1` 和 `orderId2`。
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "101" orderId2 "102"
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-From the root of the Quickstarts clone directory, navigate to the `order-processor` directory.
+从快速入门克隆目录的根目录导航到 `order-processor` 目录。
 
 ```bash
 cd configuration/javascript/sdk/order-processor
@@ -184,13 +184,13 @@ cd configuration/javascript/sdk/order-processor
 npm install
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
+dapr run --app-id order-processor --resources-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
 ```
 
-The expected output:
+预期输出：
 
 ```
 == APP == Configuration for orderId1: {"key":"orderId1","value":"101","version":"","metadata":{}}
@@ -198,35 +198,35 @@ The expected output:
 == APP == App unsubscribed to config changes
 ```
 
-### (Optional) Step 3: Update configuration item values
+### （可选）步骤 3：更新配置项值
 
-Once the app has unsubscribed, try updating the configuration item values. Change the `orderId1` and `orderId2` values using the following command:
+应用程序取消订阅后，请尝试更新配置项的值。 使用以下命令更改 `orderId1` 和 `orderId2` 的值：
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 ```
 
-Run the `order-processor` service again:
+再次运行 `order-processo` 服务：
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
+dapr run --app-id order-processor --resources-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
 ```
 
-The app will return the updated configuration values:
+该应用程序将返回更新后的配置值：
 
 ```
 == APP == Configuration for orderId1: {"key":"orderId1","value":"103","version":"","metadata":{}}
 == APP == Configuration for orderId2: {"key":"orderId2","value":"104","version":"","metadata":{}}
 ```
 
-### The `order-processor` service
+### `order-processor` 服务
 
-The `order-processor` service includes code for:
-- Getting the configuration items from the config store
-- Subscribing to configuration updates (which you made in the CLI earlier)
-- Unsubscribing from configuration updates and exiting the app after 20 seconds of inactivity.
+`order-processo` 服务包括以下代码：
+- 从配置存储中获取配置项
+- 订阅配置更新（您之前在命令行工具中进行的更新）
+- 在20秒不活动后，取消订阅配置更新并退出应用程序。
 
-Get configuration items:
+获取配置项目:
 
 ```javascript
 // Get config items from the config store
@@ -237,7 +237,7 @@ Get configuration items:
   });
 ```
 
-Subscribe to configuration updates:
+订阅配置更新:
 
 ```javascript
 // Subscribe to config updates
@@ -251,7 +251,7 @@ try {
   );
 ```
 
-Unsubscribe from configuration updates and exit the application:
+取消订阅配置更新并退出应用程序：
 
 ```javascript
 // Unsubscribe to config updates and exit app after 20 seconds
@@ -271,48 +271,48 @@ setTimeout(() => {
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [.NET SDK 或 .NET 6 SDK 已安装](https://dotnet.microsoft.com/download).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/configuration).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-Once cloned, open a new terminal and run the following command to set values for configuration items `orderId1` and `orderId2`.
+克隆后，打开一个新的终端并运行以下命令来设置配置项的值 `orderId1` 和 `orderId2`。
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "101" orderId2 "102"
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-From the root of the Quickstarts clone directory, navigate to the `order-processor` directory.
+从快速入门克隆目录的根目录导航到 `order-processor` 目录。
 
 ```bash
 cd configuration/csharp/sdk/order-processor
 ```
 
-Recall NuGet packages:
+还原 NuGet 包：
 
 ```bash
 dotnet restore
 dotnet build
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
-dapr run --app-id order-processor-http --components-path ../../../components/ --app-port 7001 -- dotnet run --project .
+dapr run --app-id order-processor-http --resources-path ../../../components/ --app-port 7001 -- dotnet run --project .
 ```
 
-The expected output:
+预期输出：
 
 ```
 == APP == Configuration for orderId1: {"Value":"101","Version":"","Metadata":{}}
@@ -320,35 +320,35 @@ The expected output:
 == APP == App unsubscribed from config changes
 ```
 
-### (Optional) Step 3: Update configuration item values
+### （可选）步骤 3：更新配置项值
 
-Once the app has unsubscribed, try updating the configuration item values. Change the `orderId1` and `orderId2` values using the following command:
+应用程序取消订阅后，请尝试更新配置项的值。 使用以下命令更改 `orderId1` 和 `orderId2` 的值：
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 ```
 
-Run the `order-processor` service again:
+再次运行 `order-processo` 服务：
 
 ```bash
-dapr run --app-id order-processor-http --components-path ../../../components/ --app-port 7001 -- dotnet run --project .
+dapr run --app-id order-processor-http --resources-path ../../../components/ --app-port 7001 -- dotnet run --project .
 ```
 
-The app will return the updated configuration values:
+该应用程序将返回更新后的配置值：
 
 ```
 == APP == Configuration for orderId1: {"Value":"103","Version":"","Metadata":{}}
 == APP == Configuration for orderId2: {"Value":"104","Version":"","Metadata":{}}
 ```
 
-### The `order-processor` service
+### `order-processor` 服务
 
-The `order-processor` service includes code for:
-- Getting the configuration items from the config store
-- Subscribing to configuration updates (which you made in the CLI earlier)
-- Unsubscribing from configuration updates and exiting the app after 20 seconds of inactivity.
+`order-processo` 服务包括以下代码：
+- 从配置存储中获取配置项
+- 订阅配置更新（您之前在命令行工具中进行的更新）
+- 在20秒不活动后，取消订阅配置更新并退出应用程序。
 
-Get configuration items:
+获取配置项目:
 
 ```csharp
 // Get config from configuration store
@@ -360,14 +360,14 @@ foreach (var item in config.Items)
 }
 ```
 
-Subscribe to configuration updates:
+订阅配置更新:
 
 ```csharp
 // Subscribe to config updates
 SubscribeConfigurationResponse subscribe = await client.SubscribeConfiguration(DAPR_CONFIGURATION_STORE, CONFIGURATION_ITEMS);
 ```
 
-Unsubscribe from configuration updates and exit the application:
+取消订阅配置更新并退出应用程序：
 
 ```csharp
 // Unsubscribe to config updates and exit the app
@@ -388,32 +388,32 @@ try
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- Java JDK 11 (or greater):
-  - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11), or
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- Java JDK 11（或更高版本）：
+  - [Oracle JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11)，或
   - OpenJDK
-- [Apache Maven](https://maven.apache.org/install.html), version 3.x.
+- [Apache Maven](https://maven.apache.org/install.html)，版本 3.x。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/configuration).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-Once cloned, open a new terminal and run the following command to set values for configuration items `orderId1` and `orderId2`.
+克隆后，打开一个新的终端并运行以下命令来设置配置项的值 `orderId1` 和 `orderId2`。
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "101" orderId2 "102"
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-From the root of the Quickstarts clone directory, navigate to the `order-processor` directory.
+从快速入门克隆目录的根目录导航到 `order-processor` 目录。
 
 ```bash
 cd configuration/java/sdk/order-processor
@@ -425,13 +425,13 @@ cd configuration/java/sdk/order-processor
 mvn clean install
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
+dapr run --app-id order-processor --resources-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-The expected output:
+预期输出：
 
 ```
 == APP == Configuration for orderId1: {'value':'101'}
@@ -439,35 +439,35 @@ The expected output:
 == APP == App unsubscribed to config changes
 ```
 
-### (Optional) Step 3: Update configuration item values
+### （可选）步骤 3：更新配置项值
 
-Once the app has unsubscribed, try updating the configuration item values. Change the `orderId1` and `orderId2` values using the following command:
+应用程序取消订阅后，请尝试更新配置项的值。 使用以下命令更改 `orderId1` 和 `orderId2` 的值：
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 ```
 
-Run the `order-processor` service again:
+再次运行 `order-processo` 服务：
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
+dapr run --app-id order-processor --resources-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-The app will return the updated configuration values:
+该应用程序将返回更新后的配置值：
 
 ```
 == APP == Configuration for orderId1: {'value':'103'}
 == APP == Configuration for orderId2: {'value':'104'}
 ```
 
-### The `order-processor` service
+### `order-processor` 服务
 
-The `order-processor` service includes code for:
-- Getting the configuration items from the config store
-- Subscribing to configuration updates (which you made in the CLI earlier)
-- Unsubscribing from configuration updates and exiting the app after 20 seconds of inactivity.
+`order-processo` 服务包括以下代码：
+- 从配置存储中获取配置项
+- 订阅配置更新（您之前在命令行工具中进行的更新）
+- 在20秒不活动后，取消订阅配置更新并退出应用程序。
 
-Get configuration items:
+获取配置项目:
 
 ```java
 // Get config items from the config store
@@ -478,7 +478,7 @@ try (DaprPreviewClient client = (new DaprClientBuilder()).buildPreviewClient()) 
     }
 ```
 
-Subscribe to configuration updates:
+订阅配置更新:
 
 ```java
 // Subscribe for config changes
@@ -486,7 +486,7 @@ Flux<SubscribeConfigurationResponse> subscription = client.subscribeConfiguratio
         CONFIGURATION_ITEMS.toArray(String[]::new));
 ```
 
-Unsubscribe from configuration updates and exit the application:
+取消订阅配置更新并退出应用程序：
 
 ```java
 // Unsubscribe from config changes
@@ -506,41 +506,41 @@ if (unsubscribe.getIsUnsubscribed()) {
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Latest version of Go](https://go.dev/dl/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [最新版本的Go](https://go.dev/dl/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/configuration).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-Once cloned, open a new terminal and run the following command to set values for configuration items `orderId1` and `orderId2`.
+克隆后，打开一个新的终端并运行以下命令来设置配置项的值 `orderId1` 和 `orderId2`。
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "101" orderId2 "102"
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-From the root of the Quickstarts clone directory, navigate to the `order-processor` directory.
+从快速入门克隆目录的根目录导航到 `order-processor` 目录。
 
 ```bash
 cd configuration/go/sdk/order-processor
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
-dapr run --app-id order-processor --app-port 6001 --components-path ../../../components -- go run .
+dapr run --app-id order-processor --app-port 6001 --resources-path ../../../components -- go run .
 ```
 
-The expected output:
+预期输出：
 
 ```
 == APP == Configuration for orderId1: {"Value":"101","Version":"","Metadata":null}
@@ -549,35 +549,35 @@ The expected output:
 == APP == App unsubscribed to config changes
 ```
 
-### (Optional) Step 3: Update configuration item values
+### （可选）步骤 3：更新配置项值
 
-Once the app has unsubscribed, try updating the configuration item values. Change the `orderId1` and `orderId2` values using the following command:
+应用程序取消订阅后，请尝试更新配置项的值。 使用以下命令更改 `orderId1` 和 `orderId2` 的值：
 
 ```bash
 docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 ```
 
-Run the `order-processor` service again:
+再次运行 `order-processo` 服务：
 
 ```bash
-dapr run --app-id order-processor --app-port 6001 --components-path ../../../components -- go run .
+dapr run --app-id order-processor --app-port 6001 --resources-path ../../../components -- go run .
 ```
 
-The app will return the updated configuration values:
+该应用程序将返回更新后的配置值：
 
 ```
 == APP == Configuration for orderId1: {"Value":"103","Version":"","Metadata":null}
 == APP == Configuration for orderId2: {"Value":"104","Version":"","Metadata":null}
 ```
 
-### The `order-processor` service
+### `order-processor` 服务
 
-The `order-processor` service includes code for:
-- Getting the configuration items from the config store
-- Subscribing to configuration updates (which you made in the CLI earlier)
-- Unsubscribing from configuration updates and exiting the app after 20 seconds of inactivity.
+`order-processo` 服务包括以下代码：
+- 从配置存储中获取配置项
+- 订阅配置更新（您之前在命令行工具中进行的更新）
+- 在20秒不活动后，取消订阅配置更新并退出应用程序。
 
-Get configuration items:
+获取配置项目:
 
 ```go
 // Get config items from config store
@@ -589,7 +589,7 @@ for _, item := range CONFIGURATION_ITEMS {
 }
 ```
 
-Subscribe to configuration updates:
+订阅配置更新:
 
 ```go
 // Subscribe for config changes
@@ -603,7 +603,7 @@ err = client.SubscribeConfigurationItems(ctx, DAPR_CONFIGURATION_STORE, CONFIGUR
 })
 ```
 
-Unsubscribe from configuration updates and exit the application:
+取消订阅配置更新并退出应用程序：
 
 ```go
 // Unsubscribe to config updates and exit app after 20 seconds
@@ -620,20 +620,26 @@ case <-ctx.Done():
 
 {{< /tabs >}}
 
-## Tell us what you think!
+## 例子
 
-We're continuously working to improve our Quickstart examples and value your feedback. 您觉得此快速入门有帮助吗？ Do you have suggestions for improvement?
+观看此视频 [演示配置 API 快速入门](https://youtu.be/EcE6IGuX9L8?t=94):
 
-Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EcE6IGuX9L8?start=94" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+## 告诉我们您的想法
+
+我们一直在努力改进我们的快速入门示例，并重视您的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
+
+加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238)中的讨论。
 
 ## 下一步
 
-- Use Dapr Configuration with HTTP instead of an SDK.
+- 使用 HTTP 而不是 SDK 的 Dapr 配置。
   - [Python](https://github.com/dapr/quickstarts/tree/master/configuration/python/http)
   - [JavaScript](https://github.com/dapr/quickstarts/tree/master/configuration/javascript/http)
   - [.NET](https://github.com/dapr/quickstarts/tree/master/configuration/csharp/http)
   - [Java](https://github.com/dapr/quickstarts/tree/master/configuration/java/http)
   - [Go](https://github.com/dapr/quickstarts/tree/master/configuration/go/http)
-- Learn more about [Configuration building block]({{< ref configuration-api-overview >}})
+- 详细了解 [配置构建基块]({{< ref configuration-api-overview >}})
 
-{{< button text="Explore Dapr tutorials  >>" page="getting-started/tutorials/_index.md" >}}
+{{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

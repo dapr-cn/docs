@@ -6,68 +6,74 @@ weight: 100
 description: "Dapr Sidecar 进程概述"
 ---
 
-Dapr使用 [sidecar模式]({{< ref " concepts/overview. md#sidecar-architecture" >}})，这意味着Dapr API在单独的进程Dapr sidecar上运行和公开，与您的应用程序一起运行。 The Dapr sidecar process is named `daprd` and is launched in different ways depending on the hosting environment.
+Dapr使用 [sidecar模式]({{< ref " concepts/overview. md#sidecar-architecture" >}})，这意味着Dapr API在单独的进程Dapr sidecar上运行和公开，与您的应用程序一起运行。 Dapr sidecar 进程名为`daprd` ，并且根据不同的宿主环境有不同的启动方式。
 
-The Dapr sidecar exposes:
+Dapr sidecar 提供了：
 
-- [Building block APIs]({{<ref building-blocks-concept>}}) used by your application business logic
-- A [metadata API]({{<ref metadata_api>}}) for discoverability of capabilities and to set attributes
-- A [health API]({{<ref sidecar-health>}}) to determine health status and sidecar readiness and liveness
+- [构建块 API]({{<ref building-blocks-concept>}}) 供应用程序业务调用
+- [元数据 API]({{<ref metadata_api>}}) 用于发现能力和设置属性
+- [健康检查 API]({{<ref sidecar-health>}}) ，以确定健康状况、sidecar 就绪状态和有效性
 
-The Dapr sidecar will reach readiness state once the application is accessible on its configured port. The application cannot access the Dapr components during application start up/initialization.
+一旦应用程序可以通过其配置的端口访问，Dapr sidecar 就会进入就绪状态。 在应用程序启动/初始化期间，应用程序无法访问 Dapr 组件。
 
 <img src="/images/overview-sidecar-apis.png" width=700>
 
-The sidecar APIs are called from your application over local http or gRPC endpoints.
+Sidecar API 是通过本地 http 或 gRPC 端点从应用程序调用的。
 <img src="/images/overview-sidecar-model.png" width=700>
 
-## Self-hosted with `dapr run`
+## 使用 `dapr run` 进行自托管
 
-When Dapr is installed in [self-hosted mode]({{<ref self-hosted>}}), the `daprd` binary is downloaded and placed under the user home directory (`$HOME/.dapr/bin` for Linux/macOS or `%USERPROFILE%\.dapr\bin\` for Windows).
+当以 [自托管模式]({{<ref self-hosted>}}) 安装 Dapr 时, `daprd` 二进制文件被下载到用户主目录下 (Linux/MacOS 下是 `$HOME/.dapr/bin`， Windows 下是 `%USERPROFILE%\.dapr\bin`)。
 
-In self-hosted mode, running the Dapr CLI [`run` command]({{< ref dapr-run.md >}}) launches the `daprd` executable with the provided application executable. This is the recommended way of running the Dapr sidecar when working locally in scenarios such as development and testing.
+在自托管模式下，运行 Dapr CLI [`run` 命令]({{< ref dapr-run.md >}}) 启动 `daprd` 可执行文件和提供的应用程序可执行文件。 这是在开发和测试等场景中本地运行 Dapr sidecar 的推荐方法。
 
-You can find the various arguments that the CLI exposes to configure the sidecar in the [Dapr run command reference]({{<ref dapr-run>}}).
+您可以在 [Dapr run 命令参考]({{<ref dapr-run>}})中找到 CLI 用于配置 sidecar 的各种参数。
 
-## 带 `dapr-sidecar-injector` 的 kubernetes
+## 使用 `dapr-sidecar-injector 的 Kubernetes`
 
-On [Kubernetes]({{< ref kubernetes.md >}}), the Dapr control plane includes the [dapr-sidecar-injector service]({{< ref kubernetes-overview.md >}}), which watches for new pods with the `dapr.io/enabled` annotation and injects a container with the `daprd` process within the pod. In this case, sidecar arguments can be passed through annotations as outlined in the **Kubernetes annotations** column in [this table]({{<ref arguments-annotations-overview>}}).
+在 [Kubernetes]({{< ref kubernetes.md >}})上，Dapr 控制平面包括 [dapr-sidecar-injector 服务]({{< ref kubernetes-overview.md >}})，它监视带有 `dapr.io/enabled` annotations 的新 pod，并在 pod 中注入一个包含 `daprd` 进程的容器。 在这种情况下，sidecar 参数可以通过在 [此表]({{<ref arguments-annotations-overview>}}) 所述的 **Kubernetes annotations ** 列中的 annotations 传递。
 
 ## 直接运行 sidecar
 
-In most cases you do not need to run `daprd` explicitly, as the sidecar is either launched by the [CLI]({{<ref cli-overview>}}) (self-hosted mode) or by the dapr-sidecar-injector service (Kubernetes). For advanced use cases (debugging, scripted deployments, etc.) the `daprd` process can be launched directly.
+在大多数情况下，你不需要明确运行 `daprd` ，因为 sidecar 是由 [CLI]({{<ref cli-overview>}}) （自托管模式）或 dapr-sidecar-injector 服务（Kubernetes）启动的。 对于高级用例（调试、脚本部署等），可直接启动 `daprd` 进程。
 
-For a detailed list of all available arguments run `daprd --help` or see this [table]({{< ref arguments-annotations-overview.md >}}) which outlines how the `daprd` arguments relate to the CLI arguments and Kubernetes annotations.
+如需所有可用参数的详细列表，请运行 `daprd --help` ，或查看 [表]({{< ref arguments-annotations-overview.md >}}) ，其中概述了 `daprd` 参数与 CLI 参数和 Kubernetes 注释的关系。
 
 ### 示例
 
-1. Start a sidecar alongside an application by specifying its unique ID.
+1. 通过指定应用程序的唯一 ID 来启动 sidecar。
 
-   **Note:** `--app-id` is a required field, and cannot contain dots.
+   **注意：** `--app-id` 为必填字段，不能包含点。
 
    ```bash
    daprd --app-id myapp
    ```
 
-2. 指定应用程序要监听的端口
+1. 指定应用程序要监听的端口
 
    ```bash
    daprd --app-id --app-port 5000
    ```
 
-3. If you are using several custom resources and want to specify the location of the resource definition files, use the `--resources-path` argument:
+1. 如果要使用多个自定义资源并指定资源定义文件的位置，请使用 `--resources-path` 参数：
 
    ```bash
    daprd --app-id myapp --resources-path <PATH-TO-RESOURCES-FILES>
    ```
 
-4. 在运行应用时启用 Prometheus 指标的收集
+1. 如果已将组件和其他资源（例如弹性策略、订阅或配置）整理到单独的文件夹或共享文件夹中，则可以指定多个资源路径：
+
+   ```bash
+   daprd --app-id myapp --resources-path <PATH-1-TO-RESOURCES-FILES> --resources-path <PATH-2-TO-RESOURCES-FILES>
+   ```
+
+1. 在运行应用时启用 Prometheus 指标的收集
 
    ```bash
    daprd --app-id myapp --enable-metrics
    ```
 
-5. 只监听 IPv4 和 IPv6 循环
+1. 只监听 IPv4 和 IPv6 循环
 
    ```bash
    daprd --app-id myapp --dapr-listen-addresses '127.0.0.1,[::1]'

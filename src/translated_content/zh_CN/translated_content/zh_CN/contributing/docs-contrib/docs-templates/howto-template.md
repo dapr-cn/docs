@@ -1,30 +1,30 @@
 ---
 type: docs
-title: "How-to guide template"
+title: "操作方法指南文章模板"
 linkTitle: "How-to template"
 weight: 30
-description: Suggested template and guidance for creating a how-to guide
+description: 创建操作方法指南的建议模板和指南
 ---
 
-## Contributing a new how-to guide
+## 贡献新的 How-To 指南
 
-How-to guides provide step-by-step practical guidance to readers who wish to:
+操作方法指南为希望的读者提供逐步实用指导:
 
-- Enable a feature
-- Integrate a technology
-- Use Dapr in a specific scenario
+- 启用一个功能
+- 集成一项技术
+- 在特定场景中使用 Dapr
 
-How-to guides can be considered "next-level", self-guided docs compared to quickstarts. How-to scenarios will take longer and can be more easily applied to the reader's individual project or environment.
+"操作方法"指南可以被视为比快速入门更高级的、自助指导文档。 操作方法场景将需要更长的时间，并且更容易应用于读者的个人项目或环境。
 
-When naming your how-to document, include the sub-directory name in the file name. If you need to create a new sub-directory, make sure it's descriptive and includes the relevant component or concept name. For example, _pubsub-namespaces_.
+在命名操作方法文档时，文件名中包含子目录名称。 如果您需要创建一个新的子目录，请确保它具有描述性，并包含相关组件或概念名称。 例如，_pubsub-namespaces_。
 
 {{% alert title="Note" color="primary" %}}
-This template is only a suggestion. Feel free to change based on your document's purpose.
+这个模板只是一个建议。 根据您的文档目的随意更改。
 {{% /alert %}}
 
-Learn more about [contributing to the Dapr docs]({{< ref contributing-docs.md >}}), like [front-matter]({{< ref "contributing-docs.md#front-matter" >}}) and [shortcodes]({{< ref "contributing-docs.md#shortcodes" >}}).
+了解有关[贡献给 Dapr 文档]({{< ref contributing-docs.md >}})的更多信息，如[front-matter]({{< ref "contributing-docs.md#front-matter" >}})和[shortcodes]({{< ref "contributing-docs.md#shortcodes" >}})。
 
-### Template
+### 模板
 
 ```md
 ---

@@ -7,7 +7,7 @@ description: 如何配置序列化
 no_list: true
 ---
 
-Dapr uses JSON serialization and thus (complex) type information is lost when sending/receiving data.
+Dapr 使用 JSON 序列化，因此发送/接收数据时会丢失(复杂) 类型信息。
 
 ## Serialization
 

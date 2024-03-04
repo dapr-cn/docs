@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "Multiple services in a .NET Dapr pluggable component"
+title: ".NET Dapr 可插拔组件中的多个服务"
 linkTitle: "Multiple services"
 weight: 1000
-description: How to expose multiple services from a .NET pluggable component
+description: 如何从一个.NET可插拔组件中公开多个服务
 no_list: true
 is_preview: true
 ---
 
-A pluggable component can host multiple components of varying types. You might do this:
-- To minimize the number of sidecars running in a cluster
-- To group related components that are likely to share libraries and implementation, such as:
-   - A database exposed both as a general state store, and
-   - Output bindings that allow more specific operations.
+一个可插拔的组件可以承载多个不同类型的组件。 你可以这样做：
+- 尽量减少集群中运行的 sidecar 数量
+- 将可能共享库和实现的相关组件分组，例如：
+   - 一个同时作为通用状态存储和数据库暴露的
+   - 允许进行更具体操作的输出绑定。
 
-Each Unix Domain Socket can manage calls to one component of each type. To host multiple components of the _same_ type, you can spread those types across multiple sockets. The SDK binds each socket to a "service", with each service composed of one or more component types.
+每个 Unix 域套接字都可以管理对每种类型的一个组件的调用。 要承载 _相同_ 类型，您可以将这些类型分布在多个套接字中。 SDK 将每个套接字绑定到一个“服务”，每个服务由一个或多个组件类型组成。
 
-## Registering multiple services
+## 注册多个服务
 
-Each call to `RegisterService()` binds a socket to a set of registered components, where one of each type of component can be registered per service.
+每次调用`RegisterService()`都会将套接字绑定到一组已注册的组件，每个服务可以注册每种类型的组件中的一个。
 
 ```csharp
 var app = DaprPluggableComponentsApplication.Create();
@@ -56,9 +56,9 @@ class AnotherStateStore : IStateStore
 }
 ```
 
-## Configuring Multiple Components
+## 配置多个组件
 
-Configuring Dapr to use the hosted components is the same as for any single component - the component YAML refers to the associated socket.
+配置 Dapr 使用托管组件与任何单个组件的配置方式相同 - 组件的 YAML 引用关联的套接字。
 
 ```yaml
 #

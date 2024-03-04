@@ -6,7 +6,7 @@ weight: 50000
 description: "如何以自托管方式部署和运行 Dapr ，而无需在本地机器上安装 Docker"
 ---
 
-## Prerequisites
+## 前期准备
 
 - [安装 Dapr CLI]({{< ref "install-dapr-selfhost.md#installing-dapr-cli" >}})
 

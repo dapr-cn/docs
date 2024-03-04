@@ -18,13 +18,13 @@ In self hosted mode the Dapr configuration is a configuration file, for example 
 
 #### Kubernetes 模式的 Sidecar
 
-在 Kubernetes 模式下，Dapr 可以通过集群中的一个配置 CRD 进行配置。 例如:
+In Kubernetes mode the Dapr configuration is a Configuration resource, that is applied to the cluster. 例如:
 
 ```bash
 kubectl apply -f myappconfig.yaml
 ```
 
-您也可以使用 Dapr CLI 工具列举查看当前的配置 CRD 列表：
+You can use the Dapr CLI to list the Configuration resources
 
 ```bash
 dapr configurations -k
@@ -47,8 +47,8 @@ dapr configurations -k
 以下配置设置可以应用于 Dapr 应用程序 sidecar：
 
 - [Tracing](#tracing)
-- [度量](#metrics)
-- [Logging](#logging)
+- [Metrics](#metrics)
+- [日志](#logging)
 - [中间件](#middleware)
 - [Scope secret store access](#scope-secret-store-access)
 - [Access Control allow lists for building block APIs](#access-control-allow-lists-for-building-block-apis)
@@ -79,11 +79,19 @@ tracing:
 | `samplingRate`           | string | Set sampling rate for tracing to be enabled or disabled.       |
 | `标准输出`                   | bool   | True write more verbose information to the traces              |
 | `otel.endpointAddress`   | string | Set the Open Telemetry (OTEL) server address to send traces to |
-| `otel.isSecure`          | bool   | Is the connection to the endpoint address encryped             |
+| `otel.isSecure`          | bool   | Is the connection to the endpoint address encrypted            |
 | `otel.protocol`          | string | Set to `http` or `grpc` protocol                               |
 | `zipkin.endpointAddress` | string | Set the Zipkin server address to send traces to                |
 
 `samplingRate` 用来控制调用链追踪是否启用。 要禁用采样率 , 可以在配置文件中设置 `samplingRate : "0"` 。 SamplingRate 的有效值在0到1之间。 系统将根据采样率配置的数值决定一条 trace span 是否要被采样。 如果设置 `samplingRate : "1"` ，将会对所有的调用链进行采样。 默认情况下，采样率配置为 (0.0001)，即每10,000条请求中会有一条被采样。
+
+The OpenTelemetry (otel) endpoint can also be configured via an environment variables. The presence of the OTEL_EXPORTER_OTLP_ENDPOINT environment variable turns on tracing for the sidecar.
+
+| 环境变量                          | 说明                                                              |
+| ----------------------------- | --------------------------------------------------------------- |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | Sets the Open Telemetry (OTEL) server address, turns on tracing |
+| `OTEL_EXPORTER_OTLP_INSECURE` | Sets the connection to the endpoint as unencrypted (true/false) |
+| `OTEL_EXPORTER_OTLP_PROTOCOL` | Transport protocol (`grpc`, `http/protobuf`, `http/json`)       |
 
 See [Observability distributed tracing]({{< ref "tracing-overview.md" >}}) for more information.
 
@@ -120,7 +128,7 @@ metric:
 
 See [metrics documentation]({{< ref "metrics-overview.md" >}}) for more information.
 
-#### Logging
+#### 日志
 
 The logging section can be used to configure how logging works in the Dapr Runtime.
 
@@ -212,7 +220,7 @@ See the [preview features]({{< ref "preview-features.md" >}}) guide for informat
 
 ### Sidecar 配置示例
 
-The following yaml shows an example configuration file that can be applied to an applications' Dapr sidecar.
+The following YAML shows an example configuration file that can be applied to an applications' Dapr sidecar.
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -258,21 +266,27 @@ spec:
             action: allow
 ```
 
-## 控制平面配置
+## Control plane configuration
 
 There is a single configuration file called `daprsystem` installed with the Dapr control plane system services that applies global settings. This is only set up when Dapr is deployed to Kubernetes.
 
-### 控制平面配置列表
+### Control plane configuration settings
 
-A Dapr control plane configuration can configure the following settings:
+A Dapr control plane configuration contains the following sections:
 
-| Property         | 数据类型   | 说明                                                                                                              |
-| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
-| enabled          | bool   | Set mtls to be enabled or disabled                                                                              |
-| allowedClockSkew | string | The extra time to give for certificate expiry based on possible clock skew on a machine. Default is 15 minutes. |
-| workloadCertTTL  | string | Time a certificate is valid for. Default is 24 hours                                                            |
+- [`mtls`](#mtls-mutual-tls) for mTLS (Mutual TLS)
 
-See the [Mutual TLS]({{< ref "mtls.md" >}}) HowTo and [security concepts]({{< ref "security-concept.md" >}}) for more information.
+### mTLS (Mutual TLS)
+
+The `mtls` section contains properties for mTLS.
+
+| Property           | 数据类型   | 说明                                                                                                                                                                                                                       |
+| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `enabled`          | bool   | If true, enables mTLS for communication between services and apps in the cluster.                                                                                                                                        |
+| `allowedClockSkew` | string | Allowed tolerance when checking the expiration of TLS certificates, to allow for clock skew. Follows the format used by [Go's time.ParseDuration](https://pkg.go.dev/time#ParseDuration). Default is `15m` (15 minutes). |
+| `workloadCertTTL`  | string | How long a certificate TLS issued by Dapr is valid for. Follows the format used by [Go's time.ParseDuration](https://pkg.go.dev/time#ParseDuration). Default is `24h` (24 hours).                                        |
+
+See the [mTLS how-to]({{< ref "mtls.md" >}}) and [security concepts]({{< ref "security-concept.md" >}}) for more information.
 
 ### 控制平面配置示例
 
@@ -280,7 +294,7 @@ See the [Mutual TLS]({{< ref "mtls.md" >}}) HowTo and [security concepts]({{< re
 apiVersion: dapr.io/v1alpha1
 kind: Configuration
 metadata:
-  name: default
+  name: daprsystem
   namespace: default
 spec:
   mtls:

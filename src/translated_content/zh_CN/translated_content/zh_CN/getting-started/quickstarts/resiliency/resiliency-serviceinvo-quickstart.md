@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Quickstart: Service-to-service resiliency"
+title: "快速入门：服务到服务的弹性"
 linkTitle: "Resiliency: Service-to-service"
 weight: 120
-description: "Get started with Dapr's resiliency capabilities via the service invocation API"
+description: "通过服务调用API开始使用Dapr的弹性能力"
 ---
 
-Observe Dapr resiliency capabilities by simulating a system failure. In this Quickstart, you will:
+通过模拟系统故障来观察 Dapr 的弹性能力。 在本快速入门中，您将：
 
-- Run two microservice applications: `checkout` and `order-processor`. `checkout` will continuously make Dapr service invocation requests to `order-processor`.
-- Trigger the resiliency spec by simulating a system failure.
-- Remove the failure to allow the microservice application to recover.
+- 运行两个微服务应用程序： `checkout` 和 `order-processor`。 `checkout` 将持续进行 Dapr 服务调用请求到 `order-processor`。
+- 通过模拟系统故障来触发弹性规范。
+- 去除故障以允许微服务应用程序恢复。
 
-<img src="/images/resiliency-quickstart-svc-invoke.png" width="1000" alt="Diagram showing the resiliency applied to Dapr APIs" />
+<img src="/images/resiliency-quickstart-svc-invoke.png" width="1000" alt="显示应用于 Dapr API 的弹性的图示" />
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
@@ -24,8 +24,8 @@ Observe Dapr resiliency capabilities by simulating a system failure. In this Qui
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Python 3.7+ installed](https://www.python.org/downloads/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [Python 3.7+ 已安装](https://www.python.org/downloads/).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
@@ -40,33 +40,33 @@ git clone https://github.com/dapr/quickstarts.git
 
 ### Step 2: Run `order-processor` service
 
-In a terminal window, from the root of the Quickstart directory, navigate to `order-processor` directory.
+在终端窗口中，从快速入门目录的根目录，导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/python/http/order-processor
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+在 Dapr sidecar 旁边运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-port 8001 --app-id order-processor  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3501 -- python3 app.py
 ```
 
-### Step 3: Run the `checkout` service application
+### 步骤 3：运行 `checkout` 服务应用程序
 
-In a new terminal window, from the root of the Quickstart directory, navigate to the `checkout` directory.
+在新终端窗口中，从 Quickstart 目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/python/http/checkout
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 pip3 install -r requirements.txt
@@ -78,7 +78,7 @@ pip3 install -r requirements.txt
 dapr run  --app-id checkout --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3500 -- python3 app.py
 ```
 
-The Dapr sidecar then loads the resiliency spec located in the resources directory:
+然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
    ```yaml
    apiVersion: dapr.io/v1alpha1
@@ -109,10 +109,10 @@ The Dapr sidecar then loads the resiliency spec located in the resources directo
            circuitBreaker: simpleCB
    ```
 
-### Step 4: View the Service Invocation outputs
-When both services and sidecars are running, notice how orders are passed from the `checkout` service to the `order-processor` service using Dapr service invoke.
+### 第4步：查看服务调用输出
+当服务和 sidecar 都在运行时，请注意订单是如何从 `checkout` 服务于 `order-processor` 使用 Dapr 服务调用的服务。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 1}
@@ -121,7 +121,7 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order passed: {"orderId": 4}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 1}
@@ -130,10 +130,10 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order received: {"orderId": 4}
 ```
 
-### Step 5: Introduce a fault
-Simulate a fault by stopping the `order-processor` service. Once the instance is stopped, service invoke operations from the `checkout` service begin to fail.
+### 步骤 5：引入故障
+通过停止 `order-processor` 服务。 实例停止后，服务将从 `checkout` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines the `order-processor` service as a resiliency target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `order-processor` 服务定义为弹性目标，所有失败的请求将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -143,19 +143,19 @@ Since the `resiliency.yaml` spec defines the `order-processor` service as a resi
         circuitBreaker: simpleCB
 ```
 
-In the `order-processor` window, stop the service:
+在 `order-processor` 窗口中，停止服务：
 
 ```script
 CTRL + C
 ```
 
-Once the first request fails, the retry policy titled `retryForever` is applied:
+一旦第一个请求失败，将应用重试策略标题为 `retryForever` 。
 
 ```bash
 INFO[0005] Error processing operation endpoint[order-processor, order-processor:orders]. Retrying...  
 ```
 
-Retries will continue for each failed request indefinitely, in 5 second intervals.
+重试将无限期地对每个失败的请求进行，每隔5秒一次。
 
 ```yaml
 retryForever:
@@ -164,7 +164,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略 `simpleCB`将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0025] Circuit breaker "order-processor:orders" changed state from closed to open  
@@ -178,7 +178,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0030] Circuit breaker "order-processor:orders" changed state from open to half-open  
@@ -187,19 +187,19 @@ INFO[0030] Circuit breaker "order-processor:orders" changed state from open to h
 INFO[0030] Circuit breaker "order-processor:orders" changed state from half-open to open     
 ```
 
-This half-open/open behavior will continue for as long as the `order-processor` service is stopped.
+只要停止 `order-processor` 服务，这种半开/开放行为将继续下去。
 
-### Step 6: Remove the fault
+### 第6步：移除故障
 
-Once you restart the `order-processor` service, the application will recover seamlessly, picking up where it left off with accepting order requests.
+一旦您重新启动 `order-processor` 服务，应用程序将无缝恢复，继续接受订单请求。
 
-In the `order-processor` service terminal, restart the application:
+在 `order-processor` 服务终端上，重新启动应用程序：
 
 ```bash
 dapr run --app-port 8001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- python3 app.py
 ```
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 5}
@@ -210,7 +210,7 @@ dapr run --app-port 8001 --app-id order-processor --app-protocol http --dapr-htt
 == APP == Order passed: {"orderId": 10}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 5}
@@ -230,7 +230,7 @@ dapr run --app-port 8001 --app-id order-processor --app-protocol http --dapr-htt
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - [最新的Node.js已安装](https://nodejs.org/download/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
@@ -244,35 +244,35 @@ dapr run --app-port 8001 --app-id order-processor --app-protocol http --dapr-htt
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart directory, navigate to `order-processor` directory.
+在终端窗口中，从快速入门目录的根目录， 导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/javascript/http/order-processor
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 npm install
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+在 Dapr sidecar 旁边运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-port 5001 --app-id order-processor  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3501 -- npm start
 ```
 
-### Step 3: Run the `checkout` service application
+### 步骤 3：运行 `checkout` 服务应用程序
 
-In a new terminal window, from the root of the Quickstart directory, navigate to the `checkout` directory.
+在新终端窗口中，从 Quickstart 目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/javascript/http/checkout
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 npm install
@@ -284,7 +284,7 @@ npm install
 dapr run --app-id checkout  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3500 -- npm start
 ```
 
-The Dapr sidecar then loads the resiliency spec located in the resources directory:
+然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
 
    ```yaml
@@ -316,10 +316,10 @@ The Dapr sidecar then loads the resiliency spec located in the resources directo
            circuitBreaker: simpleCB
    ```
 
-### Step 4: View the Service Invocation outputs
-When both services and sidecars are running, notice how orders are passed from the `checkout` service to the `order-processor` service using Dapr service invoke.
+### 第4步：查看服务调用输出
+当服务和 sidecar 都在运行时，请注意订单是如何从 `checkout` 服务于 `order-processor` 使用 Dapr 服务调用的服务。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 1}
@@ -328,7 +328,7 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order passed: {"orderId": 4}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 1}
@@ -337,10 +337,10 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order received: {"orderId": 4}
 ```
 
-### Step 5: Introduce a fault
-Simulate a fault by stopping the `order-processor` service. Once the instance is stopped, service invoke operations from the `checkout` service begin to fail.
+### 步骤 5：引入故障
+通过停止 `order-processor` 服务。 实例停止后，服务将从 `checkout` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines the `order-processor` service as a resiliency target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `order-processor` 服务定义为弹性目标，所有失败的请求将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -350,7 +350,7 @@ Since the `resiliency.yaml` spec defines the `order-processor` service as a resi
         circuitBreaker: simpleCB
 ```
 
-In the `order-processor` window, stop the service:
+在 `order-processor` 窗口中，停止服务：
 
 {{< tabs "MacOs" "Windows" >}}
 
@@ -377,13 +377,13 @@ CTRL + C
 {{< /tabs >}}
 
 
-Once the first request fails, the retry policy titled `retryForever` is applied:
+一旦第一个请求失败，将应用重试策略标题为 `retryForever` 。
 
 ```bash
 INFO[0005] Error processing operation endpoint[order-processor, order-processor:orders]. Retrying...  
 ```
 
-Retries will continue for each failed request indefinitely, in 5 second intervals.
+重试将无限期地对每个失败的请求进行，每隔5秒一次。
 
 ```yaml
 retryForever:
@@ -392,7 +392,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略 `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0025] Circuit breaker "order-processor:orders" changed state from closed to open  
@@ -406,7 +406,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0030] Circuit breaker "order-processor:orders" changed state from open to half-open  
@@ -415,19 +415,19 @@ INFO[0030] Circuit breaker "order-processor:orders" changed state from open to h
 INFO[0030] Circuit breaker "order-processor:orders" changed state from half-open to open     
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 6: Remove the fault
+### 第6步：移除故障
 
-Once you restart the `order-processor` service, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动 `order-processor` 服务，应用程序将无缝恢复，继续接受订单请求。
 
-In the `order-processor` service terminal, restart the application:
+在 `order-processor` 服务终端上，重新启动应用程序：
 
 ```bash
 dapr run --app-port 5001 --app-id order-processor  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3501 -- npm start
 ```
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 5}
@@ -438,7 +438,7 @@ dapr run --app-port 5001 --app-id order-processor  --resources-path ../../../res
 == APP == Order passed: {"orderId": 10}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 5}
@@ -458,8 +458,8 @@ dapr run --app-port 5001 --app-id order-processor  --resources-path ../../../res
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [.NET SDK 或 .NET 6 SDK 已安装](https://dotnet.microsoft.com/download).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
@@ -472,37 +472,37 @@ dapr run --app-port 5001 --app-id order-processor  --resources-path ../../../res
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart directory, navigate to `order-processor` directory.
+在终端窗口中，从快速入门目录的根目录， 导航到 `order-processor` 目录。
 
 
 ```bash
 cd service_invocation/csharp/http/order-processor
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 dotnet restore
 dotnet build
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-port 7001 --app-id order-processor  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3501 -- dotnet run
 ```
 
-### Step 3: Run the `checkout` service application
+### 步骤 3：运行 `checkout` 服务应用程序
 
-In a new terminal window, from the root of the Quickstart directory, navigate to the `checkout` directory.
+在新终端窗口中，从 Quickstart 目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/csharp/http/checkout
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 dotnet restore
@@ -515,7 +515,7 @@ dotnet build
 dapr run  --app-id checkout  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3500 -- dotnet run
 ```
 
-The Dapr sidecar then loads the resiliency spec located in the resources directory:
+然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
    ```yaml
    apiVersion: dapr.io/v1alpha1
@@ -546,10 +546,10 @@ The Dapr sidecar then loads the resiliency spec located in the resources directo
            circuitBreaker: simpleCB
    ```
 
-### Step 4: View the Service Invocation outputs
-When both services and sidecars are running, notice how orders are passed from the `checkout` service to the `order-processor` service using Dapr service invoke.
+### 第4步：查看服务调用输出
+当服务和 sidecar 都在运行时，请注意订单是如何从 `checkout` 服务于 `order-processor` 使用 Dapr 服务调用的服务。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 1}
@@ -558,7 +558,7 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order passed: {"orderId": 4}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 1}
@@ -567,10 +567,10 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order received: {"orderId": 4}
 ```
 
-### Step 5: Introduce a fault
-Simulate a fault by stopping the `order-processor` service. Once the instance is stopped, service invoke operations from the `checkout` service begin to fail.
+### 步骤 5：引入故障
+通过停止 `order-processor` 服务。 实例停止后，服务将从 `checkout` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines the `order-processor` service as a resiliency target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `order-processor` 服务定义为弹性目标，所有失败的请求将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -580,7 +580,7 @@ Since the `resiliency.yaml` spec defines the `order-processor` service as a resi
         circuitBreaker: simpleCB
 ```
 
-In the `order-processor` window, stop the service:
+在 `order-processor` 窗口中，停止服务：
 
 {{< tabs "MacOs" "Windows" >}}
 
@@ -607,13 +607,13 @@ CTRL + C
 {{< /tabs >}}
 
 
-Once the first request fails, the retry policy titled `retryForever` is applied:
+一旦第一个请求失败，将应用重试策略标题为 `retryForever` 。
 
 ```bash
 INFO[0005] Error processing operation endpoint[order-processor, order-processor:orders]. Retrying...  
 ```
 
-Retries will continue for each failed request indefinitely, in 5 second intervals.
+重试将无限期地对每个失败的请求进行，每隔5秒一次。
 
 ```yaml
 retryForever:
@@ -622,7 +622,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略， `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0025] Circuit breaker "order-processor:orders" changed state from closed to open  
@@ -636,7 +636,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0030] Circuit breaker "order-processor:orders" changed state from open to half-open  
@@ -645,19 +645,19 @@ INFO[0030] Circuit breaker "order-processor:orders" changed state from open to h
 INFO[0030] Circuit breaker "order-processor:orders" changed state from half-open to open     
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 6: Remove the fault
+### 第6步：移除故障
 
-Once you restart the `order-processor` service, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动 `order-processor` 服务，应用程序将无缝恢复，继续接受订单请求。
 
-In the `order-processor` service terminal, restart the application:
+在 `order-processor` 服务终端上，重新启动应用程序：
 
 ```bash
 dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-http-port 3501 -- dotnet run
 ```
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 5}
@@ -668,7 +668,7 @@ dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-htt
 == APP == Order passed: {"orderId": 10}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 5}
@@ -688,11 +688,11 @@ dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-htt
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- Java JDK 11 (or greater):
-  - [Oracle JDK](https://www.oracle.com/java/technologies/downloads), or
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- Java JDK 11（或更高版本）：
+  - [Oracle JDK](https://www.oracle.com/java/technologies/downloads)，或
   - OpenJDK
-- [Apache Maven](https://maven.apache.org/install.html), version 3.x.
+- [Apache Maven](https://maven.apache.org/install.html)，版本 3.x。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
@@ -705,35 +705,35 @@ dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-htt
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart directory, navigate to `order-processor` directory.
+在终端窗口中，从快速入门目录的根目录， 导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/java/http/order-processor
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 mvn clean install
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+在 Dapr sidecar 旁边运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor  --resources-path ../../../resources/ --app-port 9001 --app-protocol http --dapr-http-port 3501 -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-### Step 3: Run the `checkout` service application
+### 步骤 3：运行 `checkout` 服务应用程序
 
-In a new terminal window, from the root of the Quickstart directory, navigate to the `checkout` directory.
+在新终端窗口中，从 Quickstart 目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/java/http/checkout
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 mvn clean install
@@ -745,7 +745,7 @@ mvn clean install
 dapr run --app-id checkout  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3500 -- java -jar target/CheckoutService-0.0.1-SNAPSHOT.jar
 ```
 
-The Dapr sidecar then loads the resiliency spec located in the resources directory:
+然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
 
    ```yaml
@@ -777,10 +777,10 @@ The Dapr sidecar then loads the resiliency spec located in the resources directo
            circuitBreaker: simpleCB
    ```
 
-### Step 4: View the Service Invocation outputs
-When both services and sidecars are running, notice how orders are passed from the `checkout` service to the `order-processor` service using Dapr service invoke.
+### 第4步：查看服务调用输出
+当服务和 sidecar 都在运行时，请注意订单是如何从 `checkout` 服务于 `order-processor` 使用 Dapr 服务调用的服务。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 1}
@@ -789,7 +789,7 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order passed: {"orderId": 4}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 1}
@@ -798,10 +798,10 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order received: {"orderId": 4}
 ```
 
-### Step 5: Introduce a fault
-Simulate a fault by stopping the `order-processor` service. Once the instance is stopped, service invoke operations from the `checkout` service begin to fail.
+### 步骤 5：引入故障
+通过停止 `order-processor` 服务。 实例停止后，服务将从 `checkout` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines the `order-processor` service as a resiliency target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `order-processor` 服务定义为弹性目标，所有失败的请求将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -811,7 +811,7 @@ Since the `resiliency.yaml` spec defines the `order-processor` service as a resi
         circuitBreaker: simpleCB
 ```
 
-In the `order-processor` window, stop the service:
+在 `order-processor` 窗口中，停止服务：
 
 {{< tabs "MacOs" "Windows" >}}
 
@@ -838,13 +838,13 @@ CTRL + C
 {{< /tabs >}}
 
 
-Once the first request fails, the retry policy titled `retryForever` is applied:
+一旦第一个请求失败，将应用重试策略标题为 `retryForever` 。
 
 ```bash
 INFO[0005] Error processing operation endpoint[order-processor, order-processor:orders]. Retrying...  
 ```
 
-Retries will continue for each failed request indefinitely, in 5 second intervals.
+重试将无限期地对每个失败的请求进行，每隔5秒一次。
 
 ```yaml
 retryForever:
@@ -853,7 +853,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略 `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0025] Circuit breaker "order-processor:orders" changed state from closed to open  
@@ -867,7 +867,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0030] Circuit breaker "order-processor:orders" changed state from open to half-open  
@@ -876,19 +876,19 @@ INFO[0030] Circuit breaker "order-processor:orders" changed state from open to h
 INFO[0030] Circuit breaker "order-processor:orders" changed state from half-open to open     
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 6: Remove the fault
+### 第6步：移除故障
 
-Once you restart the `order-processor` service, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动 `order-processor` 服务，应用程序将无缝恢复，继续接受订单请求。
 
-In the `order-processor` service terminal, restart the application:
+在 `order-processor` 服务终端上，重新启动应用程序：
 
 ```bash
 dapr run --app-id order-processor  --resources-path ../../../resources/ --app-port 9001 --app-protocol http --dapr-http-port 3501 -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 5}
@@ -899,7 +899,7 @@ dapr run --app-id order-processor  --resources-path ../../../resources/ --app-po
 == APP == Order passed: {"orderId": 10}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 5}
@@ -919,8 +919,8 @@ dapr run --app-id order-processor  --resources-path ../../../resources/ --app-po
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Latest version of Go](https://go.dev/dl/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [最新版本的Go](https://go.dev/dl/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
@@ -933,35 +933,35 @@ dapr run --app-id order-processor  --resources-path ../../../resources/ --app-po
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run the `order-processor` service
+### 第2步：运行 `order-processor` 服务
 
-In a terminal window, from the root of the Quickstart directory, navigate to `order-processor` directory.
+在终端窗口中，从快速入门目录的根目录， 导航到 `order-processor` 目录。
 
 ```bash
 cd service_invocation/go/http/order-processor
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 go build .
 ```
 
-Run the `order-processor` service alongside a Dapr sidecar.
+与 Dapr sidecar 一起运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-port 6001 --app-id order-processor  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3501 -- go run .
 ```
 
-### Step 3: Run the `checkout` service application
+### 步骤 3：运行 `checkout` 服务应用程序
 
-In a new terminal window, from the root of the Quickstart directory, navigate to the `checkout` directory.
+在新终端窗口中，从 Quickstart 目录的根目录导航到 `checkout` 目录。
 
 ```bash
 cd service_invocation/go/http/checkout
 ```
 
-Install dependencies:
+安装依赖项：
 
 ```bash
 go build .
@@ -973,7 +973,7 @@ go build .
 dapr run  --app-id checkout  --resources-path ../../../resources/  --app-protocol http --dapr-http-port 3500 -- go run .
 ```
 
-The Dapr sidecar then loads the resiliency spec located in the resources directory:
+然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
 
    ```yaml
@@ -1005,10 +1005,10 @@ The Dapr sidecar then loads the resiliency spec located in the resources directo
            circuitBreaker: simpleCB
    ```
 
-### Step 4: View the Service Invocation outputs
-When both services and sidecars are running, notice how orders are passed from the `checkout` service to the `order-processor` service using Dapr service invoke.
+### 第4步：查看服务调用输出
+当服务和 sidecar 都在运行时，请注意订单是如何从 `checkout` 服务于 `order-processor` 使用 Dapr 服务调用的服务。
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 1}
@@ -1017,7 +1017,7 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order passed: {"orderId": 4}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 1}
@@ -1026,10 +1026,10 @@ When both services and sidecars are running, notice how orders are passed from t
 == APP == Order received: {"orderId": 4}
 ```
 
-### Step 5: Introduce a fault
-Simulate a fault by stopping the `order-processor` service. Once the instance is stopped, service invoke operations from the `checkout` service begin to fail.
+### 步骤 5：引入故障
+通过停止 `order-processor` 服务。 实例停止后，服务将从 `checkout` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines the `order-processor` service as a resiliency target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `order-processor` 服务定义为弹性目标，所有失败的请求将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -1039,7 +1039,7 @@ Since the `resiliency.yaml` spec defines the `order-processor` service as a resi
         circuitBreaker: simpleCB
 ```
 
-In the `order-processor` window, stop the service:
+在 `order-processor` 窗口中，停止服务：
 
 {{< tabs "MacOs" "Windows" >}}
 
@@ -1066,13 +1066,13 @@ CTRL + C
 {{< /tabs >}}
 
 
-Once the first request fails, the retry policy titled `retryForever` is applied:
+一旦第一个请求失败，将应用重试策略标题为 `retryForever` 。
 
 ```bash
 INFO[0005] Error processing operation endpoint[order-processor, order-processor:orders]. Retrying...  
 ```
 
-Retries will continue for each failed request indefinitely, in 5 second intervals.
+重试将无限期地对每个失败的请求进行，每隔5秒一次。
 
 ```yaml
 retryForever:
@@ -1081,7 +1081,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略 `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0025] Circuit breaker "order-processor:orders" changed state from closed to open  
@@ -1095,7 +1095,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0030] Circuit breaker "order-processor:orders" changed state from open to half-open  
@@ -1104,19 +1104,19 @@ INFO[0030] Circuit breaker "order-processor:orders" changed state from open to h
 INFO[0030] Circuit breaker "order-processor:orders" changed state from half-open to open     
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 6: Remove the fault
+### 第6步：移除故障
 
-Once you restart the `order-processor` service, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动 `order-processor` 服务，应用程序将无缝恢复，继续接受订单请求。
 
-In the `order-processor` service terminal, restart the application:
+在 `order-processor` 服务终端上，重新启动应用程序：
 
 ```bash
 dapr run --app-port 6001 --app-id order-processor  --resources-path ../../../resources/ --app-protocol http --dapr-http-port 3501 -- go run .
 ```
 
-`checkout` service output:
+`checkout` 服务输出：
 
 ```
 == APP == Order passed: {"orderId": 5}
@@ -1127,7 +1127,7 @@ dapr run --app-port 6001 --app-id order-processor  --resources-path ../../../res
 == APP == Order passed: {"orderId": 10}
 ```
 
-`order-processor` service output:
+`order-processor` 服务输出：
 
 ```
 == APP == Order received: {"orderId": 5}
@@ -1142,12 +1142,12 @@ dapr run --app-port 6001 --app-id order-processor  --resources-path ../../../res
 
 {{< /tabs >}}
 
-## Tell us what you think!
-We're continuously working to improve our Quickstart examples and value your feedback. 您觉得此快速入门有帮助吗？ Do you have suggestions for improvement?
+## 告诉我们您的想法
+我们一直在努力改进我们的快速入门示例，并重视您的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
 
-Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).
+加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238)中的讨论。
 
 ## 下一步
-Visit [this](https://docs.dapr.io/operations/resiliency/resiliency-overview//) link for more information about Dapr resiliency.
+访问 [此](https://docs.dapr.io/operations/resiliency/resiliency-overview//) 链接以获取有关 Dapr 弹性的更多信息。
 
-{{< button text="Explore Dapr tutorials  >>" page="getting-started/tutorials/_index.md" >}}
+{{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

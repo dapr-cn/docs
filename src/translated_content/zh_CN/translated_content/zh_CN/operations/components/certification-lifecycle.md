@@ -12,7 +12,7 @@ Certification lifecycle only applies to built-in components and does not apply t
 
 ## 概述
 
-Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition. All of the components are interchangeable, so that in ideal scenarios, you can swap out one component with the same interface for another. Each component used in production maintains a certain set of technical requirements to ensure functional compatibility and robustness.
+Dapr 采用模块化设计，功能以组件形式交付。 每个组件都有接口定义。 All of the components are interchangeable, so that in ideal scenarios, you can swap out one component with the same interface for another. Each component used in production maintains a certain set of technical requirements to ensure functional compatibility and robustness.
 
 In general a component needs to be:
 
@@ -47,6 +47,12 @@ All components start at the Alpha stage.
 - 组件的一致性测试已经在 Dapr 维护者管理的环境中运行
 - 该组件包含了由 Dapr 维护者审查和批准的一致性测试结果的记录，并具有特定 components-contrib 版本
 - 建议仅用于非业务关键型用途，因为在后续版本中可能会出现不兼容的变化
+
+{{% alert title="Note" color="primary" %}}
+A component may skip the Beta stage and conformance test requirement per the discretion of the Maintainer if:
+- The component is a binding
+- The certification tests are comprehensive
+{{% /alert %}}
 
 ### Stable
 

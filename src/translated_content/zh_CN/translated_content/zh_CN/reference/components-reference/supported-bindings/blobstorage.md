@@ -40,19 +40,19 @@ spec:
 
 ## 元数据字段规范
 
-| Field               | 必填 | 绑定支持   | 详情                                                                                                                                                                                                                                                                                                                                        | 示例                          |
-| ------------------- |:--:| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `accountName`       | 是  | 输入/输出  | The name of the Azure Storage account                                                                                                                                                                                                                                                                                                     | `"myexmapleaccount"`        |
-| `accountKey`        | Y* | 输入/输出  | The access key of the Azure Storage account. Only required when not using Azure AD authentication.                                                                                                                                                                                                                                        | `"access-key"`              |
-| `containerName`     | 是  | 输出     | 要写入的Blob Storage容器名称                                                                                                                                                                                                                                                                                                                      | `myexamplecontainer`        |
-| `终结点`               | 否  | 输入/输出  | Optional custom endpoint URL. This is useful when using the [Azurite emulator](https://github.com/Azure/azurite) or when using custom domains for Azure Storage (although this is not officially supported). The endpoint must be the full base URL, including the protocol (`http://` or `https://`), the IP or FQDN, and optional port. | `"http://127.0.0.1:10000"`  |
-| `decodeBase64`      | 否  | 输出     | Configuration to decode base64 file content before saving to Blob Storage. (In case of saving a file with binary content). 默认值为 `false`                                                                                                                                                                                                   | `true`, `false`             |
-| `getBlobRetryCount` | 否  | Output | Specifies the maximum number of HTTP GET requests that will be made while reading from a RetryReader Defaults to `10`                                                                                                                                                                                                                     | `1`, `2`                    |
-| `publicAccessLevel` | 否  | Output | Specifies whether data in the container may be accessed publicly and the level of access (only used if the container is created by Dapr). Defaults to `none`                                                                                                                                                                              | `blob`, `container`, `none` |
+| Field               | Required | 绑定支持   | 详情                                                                                                                                                                                                                                                                                                                                        | 示例                          |
+| ------------------- |:--------:| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `accountName`       |    是     | 输入/输出  | The name of the Azure Storage account                                                                                                                                                                                                                                                                                                     | `"myexmapleaccount"`        |
+| `accountKey`        |    Y*    | 输入/输出  | The access key of the Azure Storage account. Only required when not using Microsoft Entra ID authentication.                                                                                                                                                                                                                              | `"access-key"`              |
+| `containerName`     |    是     | 输出     | 要写入的Blob Storage容器名称                                                                                                                                                                                                                                                                                                                      | `myexamplecontainer`        |
+| `endpoint`          |    否     | 输入/输出  | Optional custom endpoint URL. This is useful when using the [Azurite emulator](https://github.com/Azure/azurite) or when using custom domains for Azure Storage (although this is not officially supported). The endpoint must be the full base URL, including the protocol (`http://` or `https://`), the IP or FQDN, and optional port. | `"http://127.0.0.1:10000"`  |
+| `decodeBase64`      |    否     | 输出     | Configuration to decode base64 file content before saving to Blob Storage. (In case of saving a file with binary content). 默认值为 `false`                                                                                                                                                                                                   | `true`, `false`             |
+| `getBlobRetryCount` |    否     | Output | Specifies the maximum number of HTTP GET requests that will be made while reading from a RetryReader Defaults to `10`                                                                                                                                                                                                                     | `1`, `2`                    |
+| `publicAccessLevel` |    否     | Output | Specifies whether data in the container may be accessed publicly and the level of access (only used if the container is created by Dapr). Defaults to `none`                                                                                                                                                                              | `blob`, `container`, `none` |
 
-### Azure Active Directory (AAD) 认证
+### Microsoft Entra ID authentication
 
-Azure Blob Storage绑定组件支持使用所有Azure Active Directory机制进行认证。 关于更多信息和相关组件的元数据字段请根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
+The Azure Blob Storage binding component supports authentication using all Microsoft Entra ID mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of Microsoft Entra ID authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
 
 ## 绑定支持
 
@@ -76,7 +76,7 @@ To perform a create blob operation, invoke the Azure Blob Storage binding with a
 }
 ```
 
-#### Examples
+#### 示例
 
 
 ##### Save text to a random generated UUID blob
@@ -237,7 +237,7 @@ The metadata parameters are:
   - include: Delete the base blob and all of its snapshots
   - only: 只删除blob的快照而不删除blob本身
 
-#### Examples
+#### 示例
 
 ##### 删除blob
 
@@ -329,9 +329,9 @@ The data parameters are:
 - `marker` - (可选项) 一个字符串值，用于标识下一次列表操作将返回的列表部分。 如果列表数据没有读取完成，本次操作将在响应正文中返回一个标记值。 The marker value may then be used in a subsequent call to request the next set of list items.
 - `include` - (可选项) 指定包含在响应正文中的一个或多个数据集:
   - snapshots: Specifies that snapshots should be included in the enumeration. Snapshots are listed from oldest to newest in the response. Defaults to: false
-  - metadata: 指定在响应正文中返回的blob元数据。 默认为: false
+  - metadata: 指定在响应正文中返回的blob元数据。 Defaults to: false
   - uncommittedBlobs: 为已经上传但是还未使用Put Block List提交的块数据指定blob，同样包含在响应正文中。 默认为: false
-  - copy: 2012-02-12以及更新的版本。 指定应该在响应正文中包含的与任何当前或先前Blob副本操作相关的元数据。 默认为: false
+  - copy: 2012-02-12以及更新的版本。 指定应该在响应正文中包含的与任何当前或先前Blob副本操作相关的元数据。 Defaults to: false
   - deleted: 2017-07-29以及更新版本。 指定应该在响应正文中包含的被软删除的blob。 默认为: false
 
 #### 响应

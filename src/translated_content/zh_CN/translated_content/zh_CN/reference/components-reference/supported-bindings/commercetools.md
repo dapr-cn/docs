@@ -21,33 +21,33 @@ spec:
   version: v1
   metadata:
   - name: region # required.
-    value: region
+    value: "region"
   - name: provider # required.
-    value: provider (gcp/aws)
+    value: "gcp"
   - name: projectKey # required.
-    value: project-key
+    value: "<project-key>"
   - name: clientID # required.
-    value: *****************
+    value: "*****************"
   - name: clientSecret # required.
-    value: *****************
+    value: "*****************"
   - name: scopes # required.
-    value: scopes
-
+    value: "<project-scopes>"
 ```
+
 {{% alert title="Warning" color="warning" %}}
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件，参考 [这里]({{< ref component-secrets.md >}})。
 {{% /alert %}}
 
 ## 元数据字段规范
 
-| Field        | 必填 | 绑定支持   | 详情                                              | 示例                             |
-| ------------ |:--:| ------ | ----------------------------------------------- | ------------------------------ |
-| region       | 是  | Output | The region of the commercetools project         | `"europe-west1"`               |
-| provider     | 是  | 输出     | The cloud provider, either gcp or aws           | `"gcp"`                        |
-| projectKey   | 是  | 输出     | The commercetools project key                   | `"project-key"`                |
-| clientID     | 是  | 输出     | The commercetools client ID for the project     | `"client ID"`                  |
-| clientSecret | 是  | 输出     | The commercetools client secret for the project | `"client secret"`              |
-| scopes       | 是  | Output | The commercetools scopes for the project        | `"manage_project:project-key"` |
+| Field          | Required | 绑定支持   | 详情                                              | 示例                             |
+| -------------- |:--------:| ------ | ----------------------------------------------- | ------------------------------ |
+| `region`       |    是     | Output | The region of the commercetools project         | `"europe-west1"`               |
+| `provider`     |    是     | 输出     | The cloud provider, either gcp or aws           | `"gcp"`, `"aws"`               |
+| `projectKey`   |    是     | 输出     | The commercetools project key                   |                                |
+| `clientID`     |    是     | 输出     | The commercetools client ID for the project     |                                |
+| `clientSecret` |    是     | 输出     | The commercetools client secret for the project |                                |
+| `scopes`       |    是     | Output | The commercetools scopes for the project        | `"manage_project:project-key"` |
 
 For more information see [commercetools - Creating an API Client](https://docs.commercetools.com/getting-started/create-api-client#create-an-api-client) and [commercetools - Regions](https://docs.commercetools.com/api/general-concepts#regions).
 
@@ -56,7 +56,6 @@ For more information see [commercetools - Creating an API Client](https://docs.c
 该组件支持如下操作的 **输出绑定** ：
 
 - `create`
-
 
 ## 相关链接
 

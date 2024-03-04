@@ -33,7 +33,7 @@ dapr publish [flags]
 | `--unix-domain-socket`, `-u` |      |                                                              | The path to the unix domain socket (optional) |
 
 
-### Examples
+### 示例
 
 ```bash
 # Publish to sample topic in target pubsub via a publishing app

@@ -38,13 +38,13 @@ spec:
 
 ## 元数据字段规范
 
-| Field             | 必填 | 详情                                | 示例                                           |
-| ----------------- |:--:| --------------------------------- | -------------------------------------------- |
-| servers           | 是  | Comma delimited list of servers   | `"zookeeper.default.svc.cluster.local:2181"` |
-| sessionTimeout    | 是  | 会话超时值                             | `"5s"`                                       |
-| maxBufferSize     | 否  | 缓冲区的最大大小。 Defaults to `"1048576"` | `"1048576"`                                  |
-| maxConnBufferSize | 否  | 连接缓冲区的最大大小。 默认为 `"1048576"`       | `"1048576"`                                  |
-| keyPrefixPath     | 否  | Zookeeper 中的键前缀路径。 No default     | `"dapr"`                                     |
+| Field             | Required | 详情                                | 示例                                           |
+| ----------------- |:--------:| --------------------------------- | -------------------------------------------- |
+| servers           |    是     | Comma delimited list of servers   | `"zookeeper.default.svc.cluster.local:2181"` |
+| sessionTimeout    |    是     | 会话超时值                             | `"5s"`                                       |
+| maxBufferSize     |    否     | 缓冲区的最大大小。 Defaults to `"1048576"` | `"1048576"`                                  |
+| maxConnBufferSize |    否     | 连接缓冲区的最大大小。 默认为 `"1048576"`       | `"1048576"`                                  |
+| keyPrefixPath     |    否     | Zookeeper 中的键前缀路径。 No default     | `"dapr"`                                     |
 
 ## 设置 Zookeeper
 

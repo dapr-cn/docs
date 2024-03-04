@@ -36,12 +36,12 @@ spec:
 
 ## 元数据字段规范
 
-| Field   | 必填 | 详情                      | 示例                               |
-| ------- |:--:| ----------------------- | -------------------------------- |
-| natsURL | 是  | NATS server address URL | "`nats://localhost:4222`"        |
-| jwt     | 否  | NATS 去中心化身份验证 JWT       | "`eyJhbGciOiJ...6yJV_adQssw5c`"  |
-| seedKey | 否  | NATS 去中心化身份验证秘钥种子。      | "`SUACS34K232O...5Z3POU7BNIL4Y`" |
-| bucket  | 是  | JetStream KV 桶名称        | `"<bucketName>"`           |
+| Field   | Required | 详情                      | 示例                               |
+| ------- |:--------:| ----------------------- | -------------------------------- |
+| natsURL |    是     | NATS server address URL | "`nats://localhost:4222`"        |
+| jwt     |    否     | NATS 去中心化身份验证 JWT       | "`eyJhbGciOiJ...6yJV_adQssw5c`"  |
+| seedKey |    否     | NATS 去中心化身份验证秘钥种子。      | "`SUACS34K232O...5Z3POU7BNIL4Y`" |
+| bucket  |    是     | JetStream KV 桶名称        | `"<bucketName>"`           |
 
 ## 创建NATS服务器
 

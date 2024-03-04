@@ -1,27 +1,27 @@
 ---
 type: docs
-title: "Implementing a .NET pub/sub component"
+title: "实现一个.NET pub/sub（发布/订阅）组件"
 linkTitle: "Pub/sub"
 weight: 1000
-description: How to create a pub/sub with the Dapr pluggable components .NET SDK
+description: 如何使用 Dapr 可插拔组件 .NET SDK 创建一个发布/订阅
 no_list: true
 is_preview: true
 ---
 
-Creating a pub/sub component requires just a few basic steps.
+创建一个Pub/sub组件只需要几个基本步骤。
 
-## Add pub/sub namespaces
+## 添加 pub/sub 命名空间
 
-Add `using` statements for the pub/sub related namespaces.
+添加 `using` 语句来引用与Pub/sub（发布/订阅）相关的命名空间。
 
 ```csharp
 using Dapr.PluggableComponents.Components;
 using Dapr.PluggableComponents.Components.PubSub;
 ```
 
-## Implement `IPubSub`
+## 实现 `IPubSub的`
 
-Create a class that implements the `IPubSub` interface.
+创建一个类，实现 `IPubSub的` 接口。
 
 ```csharp
 internal sealed class MyPubSub : IPubSub
@@ -43,7 +43,7 @@ internal sealed class MyPubSub : IPubSub
 }
 ```
 
-Calls to the `PullMessagesAsync()` method are "long-lived", in that the method is not expected to return until canceled (for example, via the `cancellationToken`). The "topic" from which messages should be pulled is passed via the `topic` argument, while the delivery to the Dapr runtime is performed via the `deliveryHandler` callback. Delivery allows the component to receive notification if/when the application (served by the Dapr runtime) acknowledges processing of the  message.
+对 `PullMessagesAsync()` 方法的调用是“长时间运行”的，即该方法不会在取消之前返回（例如，通过 `cancellationToken`）。 "topic"从中拉取消息的方式是通过`topic`参数传递，而将消息传递给Dapr运行时是通过`deliveryHandler`回调函数执行的。 Delivery 允许组件在应用程序（由 Dapr 运行时提供服务）确认处理消息后，接收通知。
 
 ```csharp
     public async Task PullMessagesAsync(PubSubPullMessagesTopic topic, MessageDeliveryHandler<string?, PubSubPullMessagesResponse> deliveryHandler, CancellationToken cancellationToken = default)
@@ -80,9 +80,9 @@ Calls to the `PullMessagesAsync()` method are "long-lived", in that the method i
     }
 ```
 
-## Register pub/sub component
+## 注册pub/sub组件
 
-In the main program file (for example, `Program.cs`), register the pub/sub component with an application service.
+在主程序文件中（例如，`Program.cs`），将pub/sub组件注册到应用程序服务中。
 
 ```csharp
 using Dapr.PluggableComponents;

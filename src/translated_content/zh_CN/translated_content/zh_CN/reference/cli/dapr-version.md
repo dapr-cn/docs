@@ -26,7 +26,7 @@ dapr version [flags]
 | `--help`, `-h`   |      |     | 显示此帮助消息                       |
 | `--output`, `-o` |      |     | Output format (options: json) |
 
-### Examples
+### 示例
 
 ```bash
 # Version for Dapr CLI and runtime

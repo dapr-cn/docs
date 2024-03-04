@@ -2,15 +2,15 @@
 type: docs
 title: "开始使用 Dapr Python gRPC 进行服务扩展"
 linkTitle: "gRPC"
-weight: 20000
-description: 如何使用 Dapr Python gRPC 扩展包启动和运行
+weight: 100000
+description: 如何使用 Dapr Python gRPC 扩展启动和运行
 ---
 
 Dapr Python SDK 提供了一个内置的 gRPC 服务器扩展模块 `dapr.ext.grpc`，用于创建 Dapr 服务。
 
 ## 安装
 
-您可以使用以下命令下载并安装 Dapr gRPC 服务器扩展模块：
+你可以通过下面的方式下载和安装 Dapr gRPC 服务器扩展模块：
 
 {{< tabs Stable Development>}}
 
@@ -22,7 +22,7 @@ pip install dapr-ext-grpc
 
 {{% codetab %}}
 {{% alert title="Note" color="warning" %}}
-开发包将包含与 Dapr 运行时的预发布版本兼容的功能和行为。 在安装 dapr-dev 包之前，请务必卸载以前任意稳定版本的 Python SDK 扩展包。
+开发包将包含与 Dapr 运行时的预发布版本兼容的功能和行为。 在安装 `dapr-dev` 包之前，请务必卸载任何稳定版本的 Python SDK 扩展。
 {{% /alert %}}
 
 ```bash
@@ -61,7 +61,7 @@ app.run(50051)
 
 ### 订阅主题
 
-When subscribing to a topic, you can instruct dapr whether the event delivered has been accepted, or whether it should be dropped, or retried later.
+当订阅一个主题时，您可以指示 Dapr 是否接受已传递的事件，或者是否应该丢弃它，或稍后重试。
 
 ```python
 from typing import Optional
@@ -96,7 +96,7 @@ def mytopic_wildcard(event: v1.Event) -> None:
 app.run(50051)
 ```
 
-A full sample can be found [here](https://github.com/dapr/python-sdk/blob/v1.0.0rc2/examples/pubsub-simple/subscriber.py).
+完整的示例可以在 [这里](https://github.com/dapr/python-sdk/blob/v1.0.0rc2/examples/pubsub-simple/subscriber.py) 找到。
 
 ### 设置输入绑定触发器
 
@@ -112,7 +112,7 @@ def binding(request: BindingRequest):
 app.run(50051)
 ```
 
-A full sample can be found [here](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-binding).
+完整的示例可以在 [这里](https://github.com/dapr/python-sdk/tree/v1.0.0rc2/examples/invoke-binding) 找到。
 
 ## 相关链接
 - [PyPi](https://pypi.org/project/dapr-ext-grpc/)
