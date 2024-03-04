@@ -6,26 +6,26 @@ weight: 600
 description: Dapr 在设计时是如何考虑安全的
 ---
 
-Security is fundamental to Dapr. 本文介绍在分布式应用程序中使用 Dapr 时的安全功能和能力。 These can be divided into:
+安全是 Dapr 的基础。 本文介绍在分布式应用程序中使用 Dapr 时的安全功能和能力。 这些可以分为：
 
-- Secure communication with service invocation and pub/sub APIs.
-- Security policies on components and applied through configuration.
-- Operational security practices.
-- State security, focusing on data at rest.
+- 使用服务调用和发布/订阅 APIs 安全通信.
+- 组件的安全策略，并通过配置应用。
+- 操作安全实践。
+- 状态安全，专注于静态数据。
 
 一个示例应用程序用于说明 Dapr 中许多可用的安全功能。
 
-# Secure communication
+# 安全通信
 
-Dapr 提供服务调用 API 的端到端安全，支持对应用程序使用 Dapr 进行身份验证和设置端点访问策略。 This is shown in the diagram below.
+Dapr 提供服务调用 API 的端到端安全，支持对应用程序使用 Dapr 进行身份验证和设置端点访问策略。 如下图所示。
 
 <img src="/images/security-end-to-end-communication.png" width=1000>
 
-## Service invocation scoping access policy
+## 服务调用范围访问策略
 
 Dapr 应用程序可以被限定在命名空间中以进行部署和确保安全。 你可以在被部署到不同命名空间的服务间调用。 请阅读 [跨命名空间服务调用]({{< ref "service-invocation-namespaces.md" >}}) 了解详情。
 
-Dapr 应用程序可以限制哪些操作可以被调用，包括允许（或拒绝）哪些应用程序可以调用它。 Read [How-To: Apply access control list configuration for service invocation]({{< ref invoke-allowlist.md >}}) for more details.
+Dapr 应用程序可以限制哪些操作可以被调用，包括允许（或拒绝）哪些应用程序可以调用它。 请阅读 [操作方法：为服务调用应用访问控制列表配置]({{< ref invoke-allowlist.md >}}) 以了解更多详细信息。
 
 ## Pub/Sub topic 范围的访问策略
 
@@ -81,11 +81,11 @@ Dapr 包含一个“默认开启”的自动 mTLS，它为 Dapr sidecar 之间�
 
 ### 在 Dapr 上阻止 IP 地址
 
-为了防止在任何 IP 地址上调用 Dapr sidecars（尤其是在 Kubernetes 等生产环境中），Dapr 将其侦听 IP 地址限制为 `localhost`。 Use the [dapr-listen-addresses]({{<ref arguments-annotations-overview>}}) setting you need to enable other addresses.
+To prevent Dapr sidecars from being called on any IP address (especially in production environments such as Kubernetes), Dapr restricts its listening IP addresses to `localhost`. Use the [dapr-listen-addresses]({{<ref arguments-annotations-overview>}}) setting if you need to enable access from external addresses.
 
 ## 保护 Dapr 到应用程序的通信
 
-The Dapr sidecar runs close to the application through `localhost`, and is recommended to run under the same network boundary as the app. 尽管当今许多云原生系统将 pod 级别（例如在 Kubernetes 上）视为受信任的安全边界，但 Dapr 为应用程序提供了使用令牌的 API 级别身份验证。 此功能保证，即使在 `localhost`上：
+Dapr sidecar 通过 `localhost` 运行在应用程序附近，建议在与应用程序相同的网络边界下运行。 尽管当今许多云原生系统将 pod 级别（例如在 Kubernetes 上）视为受信任的安全边界，但 Dapr 为应用程序提供了使用令牌的 API 级别身份验证。 此功能保证，即使在 `localhost`上：
 
 - 只有经过身份验证的应用程序才能调用 Dapr
 - 应用程序可以检查 Dapr 是否正在回调它
@@ -124,11 +124,11 @@ Dapr 为运维人员管理 mTLS 证书和执行 OAuth 策略而设计。
 
 ## mTLS 证书部署和轮换
 
-Dapr 允许运维和开发人员引入自己的证书，或者让 Dapr 自动创建和保留自签名的根证书和颁发者证书。 Read [Setup & configure mTLS certificates]({{< ref mtls.md >}}) for more details.
+Dapr 允许运维和开发人员引入自己的证书，或者让 Dapr 自动创建和保留自签名的根证书和颁发者证书。 请阅读 [设置 & 配置 mTLS 证书]({{< ref mtls.md >}}) 了解更多详细信息。
 
 ## 使用 OAuth 的中间件端点授权
 
-借助 Dapr OAuth 2.0 中间件，您可以在 Dapr 端点上为 API 启用 OAuth 授权。 Read [Configure endpoint authorization with OAuth]({{< ref oauth.md >}}) for details. Dapr 还有其他中间件组件，可用于 OpenID Connect 和 OPA 策略。 有关更多详细信息， [请阅读 支持的中间件]({{< ref supported-middleware.md >}})。
+借助 Dapr OAuth 2.0 中间件，您可以在 Dapr 端点上为 API 启用 OAuth 授权。 请阅读 [使用 OAuth 配置端点授权]({{< ref oauth.md >}}) 以了解详细信息。 Dapr 还有其他中间件组件，可用于 OpenID Connect 和 OPA 策略。 有关更多详细信息， [请阅读 支持的中间件]({{< ref supported-middleware.md >}})。
 
 ## 网络安全
 
@@ -144,23 +144,23 @@ Dapr 有一套广泛的安全策略，您可以将其应用于您的应用程序
 
 <img src="/images/security-dapr-API-scoping.png" width=1000>
 
-Read [How-To: Selectively enable Dapr APIs on the Dapr sidecar]({{< ref api-allowlist.md >}}) for more details.
+请阅读 [操作方法：在 Dapr sidecar 上选择性地启用 Dapr API ]({{< ref api-allowlist.md >}}) 以了解更多详细信息。
 
 ## 秘密范围访问策略
 
-要限制 Dapr 应用程序对机密的访问，您可以定义机密范围。 将机密作用域策略添加到具有限制性权限的应用程序配置。 Read [How To: Use secret scoping]({{< ref secret-scope.md >}}) for more details.
+要限制 Dapr 应用程序对机密的访问，您可以定义机密范围。 将机密作用域策略添加到具有限制性权限的应用程序配置。 请阅读 [操作方法：使用秘密范围]({{< ref secret-scope. md >}}) 了解更多详细信息。
 
 ## 组件应用程序范围访问策略和秘密使用
 
-Dapr 组件是受限于命名空间的。 这意味着 Dapr sidecar 的实例只能访问部署到同一命名空间的组件。 Read [How-To: Scope components to one or more applications using namespaces]({{< ref component-scopes.md >}}) for more details.
+Dapr 组件是受限于命名空间的。 这意味着 Dapr sidecar 的实例只能访问部署到同一命名空间的组件。 请阅读 [操作方法：使用命名空间将组件范围限定到一个或多个应用程序]({{< ref component-scopes.md >}}) 以了解更多详细信息。
 
-Dapr 允许您指定哪些应用程序可以使用特定组件并拒绝其他组件，从而为组件提供应用程序级别的范围。 Read [restricting application access to components with scopes]({{< ref "component-scopes.md#application-access-to-components-with-scopes" >}}) for more details.
+Dapr 允许您指定哪些应用程序可以使用特定组件并拒绝其他组件，从而为组件提供应用程序级别的范围。 请阅读 [限制应用程序访问组件的范围]({{< ref "component-scopes.md#application-access-to-components-with-scopes" >}}) 以获取更多详细信息。
 
-Dapr 组件可以使用 Dapr 的内置秘密管理功能来管理秘密。 Read the [secret store overview]({{< ref secrets-overview.md >}}) and [How-To: Reference secrets in components]({{< ref component-secrets.md >}}) for more details.
+Dapr 组件可以使用 Dapr 的内置秘密管理功能来管理秘密。 阅读 [秘密存储概述]({{< ref secrets-overview.md >}}) 和 [操作方法：在组件中引用秘密]({{< ref component-secrets.md >}}) 以了解更多详细信息。
 
-## Bindings security
+## 绑定安全性
 
-Authentication with a binding target is configured by the binding’s configuration file. Generally, you should configure the minimum required access rights. For example, if you only read from a binding target, you should configure the binding to use an account with read-only access rights.
+具有绑定目标的身份验证由绑定的配置文件配置。 通常，应配置所需的最低访问权限。 例如，如果仅从绑定目标读取，则应配置绑定以使用具有只读访问权限的帐户。
 
 # 状态安全性
 
@@ -207,9 +207,39 @@ Dapr 组件可以使用配置的身份验证方法与底层状态存储进行身
 
 Dapr 威胁模型如下：
 
-<img src="/images/security-threat-model.png" alt="Dapr threat model" width=1000>
+<img src="/images/security-threat-model.png" alt="Dapr 威胁模型" width=1000>
 
 ## 安全审核
+
+### 2023 年 9 月
+
+2023 年 9 月，Dapr 完成了由 Ada Logic 主持的安全审计。
+
+审核是具有以下目标的整体安全审核：
+
+- 正式化 Dapr 的威胁模型
+- 执行手动代码审查
+- 根据形式化的威胁模型评估 Daprs 模糊测试套件
+- 对 Dapr 进行 SLSA 评审。
+
+您可以 [在这里](/docs/Dapr-september-2023-security-audit-report.pdf) 找到完整的报告。
+
+审计发现7个问题，没有一个问题具有高度或严重严重性。 一个 CVE 是从第三方依赖项中的问题分配给 Dapr Components Contrib 的。
+
+### 2023年6月
+
+2023 年 6 月，Dapr 完成了由 Ada Logic 主持的安全审计。
+
+审计取得了以下成果：
+
+- OSS-模糊集成
+- 39 个新的 Dapr 模糊器
+- Dapr 运行时、kit 和 Components-contrib 的模糊测试覆盖率
+- 审核完成后，所有模糊器都会持续运行
+
+您可以 [在这里](/docs/Dapr-june-2023-fuzzing-audit-report.pdf) 找到完整的报告。
+
+审计过程中发现了3个问题。
 
 ### 2021 年 2 月
 
@@ -217,11 +247,11 @@ Dapr 威胁模型如下：
 
 测试的重点是：
 
-- Dapr runtime codebase evaluation since last audit
-- Access control lists
-- Secrets management
-- Penetration testing
-- Validating fixes for previous high/medium issues
+- 自上次审计以来的 Dapr 运行时间代码基础评估
+- 访问控制列表
+- 秘密管理
+- 渗透测试
+- 验证以前高/中问题的修复
 
 完整的报告可以在[这里](/docs/Dapr-february-2021-security-audit-report. pdf)找到。
 
@@ -231,27 +261,27 @@ Dapr 威胁模型如下：
 
 ### 2020年6月
 
-In June 2020, Dapr underwent a security audit from Cure53, a CNCF-approved cybersecurity firm.
+2020 年 6 月，Dapr 接受了 CNCF 批准的网络安全公司 Cure53 的安全审计。
 
 测试的重点是：
 
-- Dapr runtime codebase evaluation
-- Dapr components codebase evaluation
-- Dapr CLI codebase evaluation
-- Privilege escalation
-- Traffic spoofing
-- Secrets management
+- Dapr 运行时代码库评估
+- Dapr 组件代码基础评估
+- Dapr CLI 代码基础评估
+- 权限升级
+- 流量欺骗
+- 秘密管理
 - RBAC
-- Validating base assumptions: mTLS, scopes, API authentication
-- Orchestration hardening (Kubernetes)
-- DoS attacks
-- Penetration testing
+- 验证基本假设：mTLS、范围、API 身份验证
+- 编排强化 ( Kubernetes)
+- DoS 攻击
+- 渗透测试
 
-The full report can be found [here](/docs/Dapr-july-2020-security-audit-report.pdf).
+可以 [在这里](/docs/Dapr-july-2020-security-audit-report.pdf) 找到完整的报告。
 
-## Reporting a security issue
+## 报告安全问题
 
-Visit [this page]({{< ref support-security-issues.md >}}) to report a security issue to the Dapr maintainers.
+访问 [本页]({{< ref support-security-issues.md >}}) 向 Dapr 维护者报告安全问题。
 
 ## 相关链接
 

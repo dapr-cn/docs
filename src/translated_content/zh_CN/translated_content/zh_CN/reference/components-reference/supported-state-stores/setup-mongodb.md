@@ -57,7 +57,7 @@ spec:
 
 ## 元数据字段规范
 
-| Field            |       必填       | 详情                                                                | 示例                                                                    |
+| Field            |    Required    | 详情                                                                | 示例                                                                    |
 | ---------------- |:--------------:| ----------------------------------------------------------------- | --------------------------------------------------------------------- |
 | server           | 是<sup>*</sup>  | The server to connect to, when using DNS SRV record               | `"server.example.com"`                                                |
 | host             | 是<sup>*</sup>  | The host to connect to                                            | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |

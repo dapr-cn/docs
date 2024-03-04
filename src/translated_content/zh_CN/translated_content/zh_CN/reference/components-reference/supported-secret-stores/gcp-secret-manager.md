@@ -48,18 +48,26 @@ spec:
 
 ## 元数据字段规范
 
-| Field                           | 必填 | 详情                       | 示例                                                                                                 |
-| ------------------------------- |:--:| ------------------------ | -------------------------------------------------------------------------------------------------- |
-| type                            | 是  | The type of the account. | `"serviceAccount"`                                                                                 |
-| project_id                      | 是  | 与此组件相关联的项目 ID。           | `"project_id"`                                                                                     |
-| private_key_id                | 否  | 私钥ID                     | `"privatekey"`                                                                                     |
-| client_email                    | 是  | 客户端电子邮件地址                | `"client@example.com"`                                                                             |
-| client_id                       | 否  | 客户端的 ID                  | `"11111111"`                                                                                       |
-| auth_uri                        | 否  | 认证URI                    | `"https://accounts.google.com/o/oauth2/auth"`                                                      |
-| token_uri                       | 否  | 认证token URI              | `"https://oauth2.googleapis.com/token"`                                                            |
-| auth_provider_x509_cert_url | 否  | 认证提供者的证书URL              | `"https://www.googleapis.com/oauth2/v1/certs"`                                                     |
-| client_x509_cert_url          | 否  | 客户端的证书 URL               | `"https://www.googleapis.com/robot/v1/metadata/x509/<project-name>.iam.gserviceaccount.com"` |
-| private_key                     | 是  | 认证用的私钥                   | `"privateKey"`                                                                                     |
+| Field                           | Required | 详情                                             | 示例                                                                                                 |
+| ------------------------------- |:--------:| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| type                            |    是     | The type of the account.                       | `"service_account"`                                                                                |
+| project_id                      |    是     | The project ID associated with this component. | `"project_id"`                                                                                     |
+| private_key_id                |    否     | The private key ID                             | `"privatekey"`                                                                                     |
+| client_email                    |    是     | The client email address                       | `"client@example.com"`                                                                             |
+| client_id                       |    否     | The ID of the client                           | `"11111111"`                                                                                       |
+| auth_uri                        |    否     | The authentication URI                         | `"https://accounts.google.com/o/oauth2/auth"`                                                      |
+| token_uri                       |    否     | The authentication token URI                   | `"https://oauth2.googleapis.com/token"`                                                            |
+| auth_provider_x509_cert_url |    否     | The certificate URL for the auth provider      | `"https://www.googleapis.com/oauth2/v1/certs"`                                                     |
+| client_x509_cert_url          |    否     | The certificate URL for the client             | `"https://www.googleapis.com/robot/v1/metadata/x509/<project-name>.iam.gserviceaccount.com"` |
+| private_key                     |    是     | The private key for authentication             | `"privateKey"`                                                                                     |
+
+## Optional per-request metadata properties
+
+The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided to the GCP Secret Manager component:
+
+| Query Parameter       | 说明                                |
+| --------------------- | --------------------------------- |
+| `metadata.version_id` | Version for the given secret key. |
 
 ## 设置GCP Secret Manager实例
 

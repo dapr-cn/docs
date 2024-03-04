@@ -9,10 +9,9 @@ aliases:
 
 ## Component format
 
-To setup Azure Service Bus Queues pubsub create a component of type `pubsub.azure.servicebus.queues`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration.
+To set up Azure Service Bus Queues pub/sub, create a component of type `pubsub.azure.servicebus.queues`. See the [pub/sub broker component file]({{< ref setup-pubsub.md >}}) to learn how ConsumerID is automatically generated. Read the [How-to: Publish and Subscribe guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pub/sub configuration.
 
-> This component uses queues on Azure Service Bus; see the official documentation for the differences between [topics and queues](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-queues-topics-subscriptions).  
-> For using topics, see the [Azure Service Bus Topics pubsub component]({{< ref "setup-azure-servicebus-topics" >}}).
+> This component uses queues on Azure Service Bus; see the official documentation for the differences between [topics and queues](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-queues-topics-subscriptions). For using topics, see the [Azure Service Bus Topics pubsub component]({{< ref "setup-azure-servicebus-topics" >}}).
 
 ### 连接字符串认证
 
@@ -25,9 +24,11 @@ spec:
   type: pubsub.azure.servicebus.queues
   version: v1
   metadata:
-  # Required when not using Azure AD Authentication
+  # Required when not using Microsoft Entra ID Authentication
   - name: connectionString
     value: "Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}"
+  # - name: consumerID # Optional
+  #   value: channel1
   # - name: timeoutInSec # Optional
   #   value: 60
   # - name: handlerTimeoutInSec # Optional
@@ -66,29 +67,30 @@ spec:
 
 ## 元数据字段规范
 
-| Field                             | 必填 | 详情                                                                                                                                                                                                                                                                                    | 示例                                   |
-| --------------------------------- |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `connectionString`                | 是  | Shared access policy connection string for the Service Bus. Required unless using Azure AD authentication.                                                                                                                                                                            | See example above                    |
-| `namespaceName`                   | 否  | Parameter to set the address of the Service Bus namespace, as a fully-qualified domain name. Required if using Azure AD authentication.                                                                                                                                               | `"namespace.servicebus.windows.net"` |
-| `timeoutInSec`                    | 否  | Timeout for sending messages and for management operations. Default: `60`                                                                                                                                                                                                             | `30`                                 |
-| `handlerTimeoutInSec`             | 否  | Timeout for invoking the app's handler. Default: `60`                                                                                                                                                                                                                                 | `30`                                 |
-| `lockRenewalInSec`                | 否  | Defines the frequency at which buffered message locks will be renewed. Default: `20`.                                                                                                                                                                                                 | `20`                                 |
-| `maxActiveMessages`               | 否  | Defines the maximum number of messages to be processing or in the buffer at once. This should be at least as big as the maximum concurrent handlers. Default: `1000`                                                                                                                  | `2000`                               |
-| `maxConcurrentHandlers`           | 否  | Defines the maximum number of concurrent message handlers. Default: `0` (unlimited)                                                                                                                                                                                                   | `10`                                 |
-| `disableEntityManagement`         | 否  | When set to true, queues and subscriptions do not get created automatically. 默认值为 `"false"`                                                                                                                                                                                           | `"true"`, `"false"`                  |
-| `defaultMessageTimeToLiveInSec`   | 否  | Default message time to live, in seconds. Used during subscription creation only.                                                                                                                                                                                                     | `10`                                 |
-| `autoDeleteOnIdleInSec`           | 否  | Time in seconds to wait before auto deleting idle subscriptions. Used during subscription creation only. Default: `0` (disabled)                                                                                                                                                      | `3600`                               |
-| `maxDeliveryCount`                | 否  | Defines the number of attempts the server will make to deliver a message. Used during subscription creation only. Default set by server.                                                                                                                                              | `10`                                 |
-| `lockDurationInSec`               | 否  | Defines the length in seconds that a message will be locked for before expiring. Used during subscription creation only. Default set by server.                                                                                                                                       | `30`                                 |
-| `minConnectionRecoveryInSec`      | 否  | Minimum interval (in seconds) to wait before attempting to reconnect to Azure Service Bus in case of a connection failure. Default: `2`                                                                                                                                               | `5`                                  |
-| `maxConnectionRecoveryInSec`      | 否  | Maximum interval (in seconds) to wait before attempting to reconnect to Azure Service Bus in case of a connection failure. After each attempt, the component waits a random number of seconds, increasing every time, between the minimum and the maximum. Default: `300` (5 minutes) | `600`                                |
-| `maxRetriableErrorsPerSec`        | 否  | Maximum number of retriable errors that are processed per second. If a message fails to be processed with a retriable error, the component adds a delay before it starts processing another message, to avoid immediately re-processing messages that have failed. Default: `10`      | `10`                                 |
-| `publishMaxRetries`               | 否  | The max number of retries for when Azure Service Bus responds with "too busy" in order to throttle messages. Defaults: `5`                                                                                                                                                            | `5`                                  |
-| `publishInitialRetryIntervalInMs` | 否  | Time in milliseconds for the initial exponential backoff when Azure Service Bus throttle messages. Defaults: `500`                                                                                                                                                                    | `500`                                |
+| Field                             | Required | 详情                                                                                                                                                                                                                                                                                                                                      | 示例                                   |
+| --------------------------------- |:--------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `connectionString`                |    是     | Shared access policy connection string for the Service Bus. Required unless using Microsoft Entra ID authentication.                                                                                                                                                                                                                    | See example above                    |
+| `consumerID`                      |    否     | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. | `"channel1"`                         |
+| `namespaceName`                   |    否     | Parameter to set the address of the Service Bus namespace, as a fully-qualified domain name. Required if using Microsoft Entra ID authentication.                                                                                                                                                                                       | `"namespace.servicebus.windows.net"` |
+| `timeoutInSec`                    |    否     | Timeout for sending messages and for management operations. Default: `60`                                                                                                                                                                                                                                                               | `30`                                 |
+| `handlerTimeoutInSec`             |    否     | Timeout for invoking the app's handler. Default: `60`                                                                                                                                                                                                                                                                                   | `30`                                 |
+| `lockRenewalInSec`                |    否     | Defines the frequency at which buffered message locks will be renewed. Default: `20`.                                                                                                                                                                                                                                                   | `20`                                 |
+| `maxActiveMessages`               |    否     | Defines the maximum number of messages to be processing or in the buffer at once. This should be at least as big as the maximum concurrent handlers. Default: `1000`                                                                                                                                                                    | `2000`                               |
+| `maxConcurrentHandlers`           |    否     | Defines the maximum number of concurrent message handlers. Default: `0` (unlimited)                                                                                                                                                                                                                                                     | `10`                                 |
+| `disableEntityManagement`         |    否     | When set to true, queues and subscriptions do not get created automatically. 默认值为 `"false"`                                                                                                                                                                                                                                             | `"true"`, `"false"`                  |
+| `defaultMessageTimeToLiveInSec`   |    否     | Default message time to live, in seconds. Used during subscription creation only.                                                                                                                                                                                                                                                       | `10`                                 |
+| `autoDeleteOnIdleInSec`           |    否     | Time in seconds to wait before auto deleting idle subscriptions. Used during subscription creation only. Default: `0` (disabled)                                                                                                                                                                                                        | `3600`                               |
+| `maxDeliveryCount`                |    否     | Defines the number of attempts the server will make to deliver a message. Used during subscription creation only. Default set by server.                                                                                                                                                                                                | `10`                                 |
+| `lockDurationInSec`               |    否     | Defines the length in seconds that a message will be locked for before expiring. Used during subscription creation only. Default set by server.                                                                                                                                                                                         | `30`                                 |
+| `minConnectionRecoveryInSec`      |    否     | Minimum interval (in seconds) to wait before attempting to reconnect to Azure Service Bus in case of a connection failure. Default: `2`                                                                                                                                                                                                 | `5`                                  |
+| `maxConnectionRecoveryInSec`      |    否     | Maximum interval (in seconds) to wait before attempting to reconnect to Azure Service Bus in case of a connection failure. After each attempt, the component waits a random number of seconds, increasing every time, between the minimum and the maximum. Default: `300` (5 minutes)                                                   | `600`                                |
+| `maxRetriableErrorsPerSec`        |    否     | Maximum number of retriable errors that are processed per second. If a message fails to be processed with a retriable error, the component adds a delay before it starts processing another message, to avoid immediately re-processing messages that have failed. Default: `10`                                                        | `10`                                 |
+| `publishMaxRetries`               |    否     | The max number of retries for when Azure Service Bus responds with "too busy" in order to throttle messages. Defaults: `5`                                                                                                                                                                                                              | `5`                                  |
+| `publishInitialRetryIntervalInMs` |    否     | Time in milliseconds for the initial exponential backoff when Azure Service Bus throttle messages. Defaults: `500`                                                                                                                                                                                                                      | `500`                                |
 
-### Azure Active Directory (AAD) 认证
+### Microsoft Entra ID authentication
 
-The Azure Service Bus Queues pubsub component supports authentication using all Azure Active Directory mechanisms, including Managed Identities. 关于更多信息和相关组件的元数据字段请根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
+The Azure Service Bus Queues pubsub component supports authentication using all Microsoft Entra ID mechanisms, including Managed Identities. For further information and the relevant component metadata fields to provide depending on the choice of Microsoft Entra ID authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
 
 #### 配置示例
 
@@ -119,7 +121,7 @@ Azure Service Bus messages extend the Dapr message format with additional contex
 
 ### Sending a message with metadata
 
-To set Azure Service Bus metadata when sending a message, set the query parameters on the HTTP request or the gRPC metadata as documented [here](https://docs.dapr.io/reference/api/pubsub_api/#metadata).
+To set Azure Service Bus metadata when sending a message, set the query parameters on the HTTP request or the gRPC metadata as documented [here]({{< ref "pubsub_api.md#metadata" >}}).
 
 - `metadata.MessageId`
 - `metadata.CorrelationId`
@@ -132,11 +134,14 @@ To set Azure Service Bus metadata when sending a message, set the query paramete
 - `metadata.ScheduledEnqueueTimeUtc`
 - `metadata.ReplyToSessionId`
 
-> **Note:** The `metadata.MessageId` property does not set the `id` property of the cloud event returned by Dapr and should be treated in isolation.
+{{% alert title="Note" color="primary" %}}
+- The `metadata.MessageId` property does not set the `id` property of the cloud event returned by Dapr and should be treated in isolation.
+- The `metadata.ScheduledEnqueueTimeUtc` property supports the [RFC1123](https://www.rfc-editor.org/rfc/rfc1123) and [RFC3339](https://www.rfc-editor.org/rfc/rfc3339) timestamp formats.
+{{% /alert %}}
 
 ### Receiving a message with metadata
 
-When Dapr calls your application, it will attach Azure Service Bus message metadata to the request using either HTTP headers or gRPC metadata. In addition to the [settable metadata listed above](#sending-a-message-with-metadata), you can also access the following read-only message metadata.
+When Dapr calls your application, it attaches Azure Service Bus message metadata to the request using either HTTP headers or gRPC metadata. In addition to the [settable metadata listed above](#sending-a-message-with-metadata), you can also access the following read-only message metadata.
 
 - `metadata.DeliveryCount`
 - `metadata.LockedUntilUtc`
@@ -146,7 +151,9 @@ When Dapr calls your application, it will attach Azure Service Bus message metad
 
 To find out more details on the purpose of any of these metadata properties, please refer to [the official Azure Service Bus documentation](https://docs.microsoft.com/rest/api/servicebus/message-headers-and-properties#message-headers).
 
-> Note: that all times are populated by the server and are not adjusted for clock skews.
+{{% alert title="Note" color="primary" %}}
+All times are populated by the server and are not adjusted for clock skews.
+{{% /alert %}}
 
 ## Sending and receiving multiple messages
 

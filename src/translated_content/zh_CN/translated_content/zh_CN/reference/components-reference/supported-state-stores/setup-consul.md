@@ -39,13 +39,13 @@ spec:
 
 ## 元数据字段规范
 
-| Field         | 必填 | 详情                                          | 示例                                        |
-| ------------- |:--:| ------------------------------------------- | ----------------------------------------- |
-| datacenter    | 是  | 数据中心                                        | `"dc1"`                                   |
-| httpAddr      | 是  | Consul 服务器地址                                | `"consul.default.svc.cluster.local:8500"` |
-| aclToken      | 否  | 请求 ACL 令牌。 默认值 `""`                         | `"token"`                                 |
-| scheme        | 否  | Scheme 是Consul服务器的 URI scheme。 默认值 `"http"` | `"http"`                                  |
-| keyPrefixPath | 否  | Consul中的密钥前缀路径. 默认值 `""`                    | `"dapr"`                                  |
+| Field         | Required | 详情                                          | 示例                                        |
+| ------------- |:--------:| ------------------------------------------- | ----------------------------------------- |
+| datacenter    |    是     | 数据中心                                        | `"dc1"`                                   |
+| httpAddr      |    是     | Consul 服务器地址                                | `"consul.default.svc.cluster.local:8500"` |
+| aclToken      |    否     | 请求 ACL 令牌。 默认值 `""`                         | `"token"`                                 |
+| scheme        |    否     | Scheme 是Consul服务器的 URI scheme。 默认值 `"http"` | `"http"`                                  |
+| keyPrefixPath |    否     | Consul中的密钥前缀路径. 默认值 `""`                    | `"dapr"`                                  |
 
 ## 搭建 Hashicorp Consul
 

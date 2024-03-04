@@ -30,17 +30,17 @@ spec:
 
 ## 元数据字段规范
 
-| Field             | 必填 | 绑定支持   | 详情                           | 示例 |
-| ----------------- | -- | ------ | ---------------------------- | -- |
-| `AccessKeyID`     | 是  | Output | 访问密钥 ID 凭据。                  |    |
-| `AccessKeySecret` | 是  | 输出     | Access key credential secret |    |
-| `Endpoint`        | 是  | 输出     | Alicloud SLS endpoint.       |    |
+| Field             | Required | 绑定支持   | 详情                           | 示例 |
+| ----------------- | -------- | ------ | ---------------------------- | -- |
+| `AccessKeyID`     | 是        | Output | 访问密钥 ID 凭据。                  |    |
+| `AccessKeySecret` | 是        | 输出     | Access key credential secret |    |
+| `Endpoint`        | 是        | 输出     | Alicloud SLS endpoint.       |    |
 
 ## 绑定支持
 
 该组件支持如下操作的 **输出绑定** ：
-- `create`: [Create object](#create-object)
 
+- `create`: [Create object](#create-object)
 
 ### Request format
 

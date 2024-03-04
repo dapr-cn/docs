@@ -6,175 +6,186 @@ weight: 100
 description: "状态管理 API 构建块概述"
 ---
 
-Your application can use Dapr's state management API to save, read, and query key/value pairs in the [supported state stores]({{< ref supported-state-stores.md >}}). Using a state store component, you can build stateful, long running applications that save and retrieve their state (like a shopping cart or a game's session state). For example, in the diagram below:
+您的应用程序可以使用 Dapr 的状态管理 API 来保存、读取和查询 [支持的状态存储]({{< ref supported-state-stores.md >}}). 使用状态存储组件，您可以构建有状态的、长期运行的应用程序，保存和检索它们的状态（如购物车或游戏的会话状态）。 例如，在下图中：
 
-- Use **HTTP POST** to save or query key/value pairs.
-- Use **HTTP GET** to read a specific key and have its value returned.
+- 使用 **HTTP POST** 来保存或查询键/值对。
+- 使用 **HTTP GET** 读取特定键并返回其值。
 
-<img src="/images/state-management-overview.png" width=1000>
+<img src="/images/state-management-overview.png" width=1000 style="padding-bottom:25px;">
 
-## Features
+[以下概述视频和演示](https://www.youtube.com/live/0y7ne6teHT4?si=2_xX6mkU3UCy2Plr&t=6607) 演示了 Dapr 状态管理的工作原理。 
 
-With the state management API building block, your application can leverage features that are typically complicated and error-prone to build, including:
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0y7ne6teHT4?si=2_xX6mkU3UCy2Plr&amp;start=6607" title="YouTube 视频播放器" style="padding-bottom:25px;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-- Setting the choices on concurrency control and data consistency.
-- Performing bulk update operations [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) including multiple transactional operations.
-- Querying and filtering the key/value data.
+## 特性
 
-These are the features available as part of the state management API:
+使用状态管理 API 构建块，您的应用程序可以利用一些通常很复杂且容易出错的功能，包括:
 
-### Pluggable state stores
+- 设置并发控制和数据一致性选项。
+- 执行批量更新操作 [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) 包括多个事务性操作。
+- 查询和过滤键/值数据。
+
+以下是作为状态管理 API 的一部分提供的功能：
+
+### 可插拔状态存储
 
 Dapr数据存储被建模为组件，可以在不修改你的服务代码的情况下进行替换。 请访问 [支持的状态存储引擎]({{< ref supported-state-stores >}})页面查看完整列表。
 
 ### 可配置的状态存储行为
 
-With Dapr, you can include additional metadata in a state operation request that describes how you expect the request to be handled. 你可以附加以下：
+使用Dapr，您可以在状态操作请求中包含附加的元数据，用以描述您期望如何处理该请求。 你可以附加以下：
 
-- Concurrency requirements
-- Consistency requirements
+- 并发要求
+- 一致性要求
 
-By default, your application should assume a data store is **eventually consistent** and uses a **last-write-wins concurrency pattern**.
+默认情况下，您的应用程序应该假设数据存储是 **最终一致** 的，并使用 **last-write-wins** 并发模式。
 
-[并非所有的存储引擎都一样]({{< ref supported-state-stores.md >}})。 To ensure your application's portability, you can query the metadata capabilities of the store and make your code adaptive to different store capabilities.
+[并非所有的存储引擎都一样]({{< ref supported-state-stores.md >}})。 为了保证应用程序的可移植性，你可以了解下存储引擎的功能，使你的代码适应不同的存储引擎。
 
 #### 并发
 
-Dapr supports Optimistic Concurrency Control (OCC) using ETags. When a state value is requested, Dapr always attaches an ETag property to the returned state. When the user code:
+Dapr支持使用ETags的乐观并发控制（OCC）。 当请求状态值时，Dapr始终会将一个ETag属性附加到返回的状态中。 当用户代码:
 
-- **Updates a state**, it's expected to attach the ETag through the request body.
-- **Deletes a state**, it’s expected to attach the ETag through the `If-Match` header.
+- **更新状态**，预计通过请求正文附加ETag。
+- **删除状态**，预计通过`If-Match`头部附加ETag。
 
-The `write` operation succeeds when the provided ETag matches the ETag in the state store.
+只有当提供的ETag与状态存储中的ETag匹配时，`write`操作才能成功。
 
-##### Why Dapr chooses optimistic concurrency control (OCC)
+##### 为什么Dapr选择乐观并发控制（OCC）
 
-Data update conflicts are rare in many applications, since clients are naturally partitioned by business contexts to operate on different data. However, if your application chooses to use ETags, mismatched ETags may cause a request rejection. It's recommended you use a retry policy in your code to compensate for conflicts when using ETags.
+在许多应用中，数据更新冲突很少发生，因为客户端是按业务上下文自然分割的，可以对不同的数据进行操作。 然而，如果您的应用程序选择使用ETags，不匹配的ETags可能会导致请求被拒绝。 建议你在代码中使用重试策略来补偿在使用ETags时发生的冲突。
 
-如果您的应用程序在写入请求中省略了 ETag，Dapr 会在处理请求时跳过 ETag 校验。 This enables the **last-write-wins** pattern, compared to the **first-write-wins** pattern with ETags.
+如果您的应用程序在写入请求中省略了 ETag，Dapr 会在处理请求时跳过 ETag 校验。 这与ETags的**last-write-wins**模式相比，基本上可以实现**first-write-wins**模式。
 
 {{% alert title="ETag 注意事项" color="primary" %}}
-For stores that don't natively support ETags, the corresponding Dapr state store implementation is expected to simulate ETags and follow the Dapr state management API specification when handling states. Since Dapr state store implementations are technically clients to the underlying data store, simulation should be straightforward, using the concurrency control mechanisms provided by the store.
+对于原生不支持ETags的存储引擎，要求相应的Dapr状态存储实现能够模拟ETags，并在处理状态时遵循Dapr状态管理API规范。 由于Dapr状态存储实现在技术上是底层数据存储引擎的客户端，因此这种模拟应该直接使用存储引擎提供的并发控制机制。
 {{% /alert %}}
 
-Read the [API reference]({{< ref state_api.md >}}) to learn how to set concurrency options.
+阅读 [API 参考]({{< ref state_api.md >}}) 了解如何设置并发选项。
 
 #### 一致性
 
 Dapr 同时支持**强一致性**和**最终一致性**，其中最终一致性为默认行为。
 
-- **Strong consistency**: Dapr waits for all replicas (or designated quorums) to acknowledge before it acknowledges a write request.
-- **Eventual consistency**: Dapr returns as soon as the write request is accepted by the underlying data store, even if this is a single replica.
+- **强一致性**：Dapr在确认写入请求之前等待所有副本（或指定的quorums）确认。
+- **最终一致性**: Dapr 在基础数据存储接受写入请求后立即返回，即使这是单个副本。
 
 阅读[API参考]({{< ref state_api.md >}})，了解如何设置一致性选项。
 
-### Setting content type
+### 设置 content type
 
-State store components may maintain and manipulate data differently, depending on the content type. Dapr supports passing content type in [state management API](#state-management-api) as part of request metadata.
+状态存储组件可能根据内容类型以不同方式维护和操作数据。 Dapr 支持将内容类型作为请求元数据的一部分传递给[状态管理 API](#state-management-api)。
 
-Setting the content type is _optional_, and the component decides whether to make use of it. Dapr only provides the means of passing this information to the component.
+设置内容类型是_可选的_，组件决定是否使用它。 Dapr 只提供将此信息传递给组件的手段。
 
-- **With the HTTP API**: Set content type via URL query parameter `metadata.contentType`. For example, `http://localhost:3500/v1.0/state/store?metadata.contentType=application/json`.
-- **With the gRPC API**: Set content type by adding key/value pair `"contentType" : <content type>` to the request metadata.
+- **通过HTTP API**：通过URL查询参数`metadata.contentType`设置内容类型。 例如，`http://localhost:3500/v1.0/state/store?metadata.contentType=application/json`。
+- **使用 gRPC API**：通过添加键/值对来设置内容类型 `“contentType”： <content type>` 添加到请求元数据。
 
-### Multiple operations
+### 多个操作
 
-Dapr supports two types of multi-read or multi-write operations: **bulk** or **transactional**. Read the [API reference]({{< ref state_api.md >}}) to learn how use bulk and multi options.
+Dapr 支持两种类型的多读或多写操作： **bulk** 或 **transactional**。 阅读 [API 参考]({{< ref state_api.md >}}) 以了解如何使用批量（bulk）选项和批次（multi）选项。
 
-#### Bulk read operations
+#### 批量读取操作
 
-You can group multiple read requests into a bulk (or batch) operation. In the bulk operation, Dapr submits the read requests as individual requests to the underlying data store, and returns them as a single result.
+您可以将多个读请求分组成一个批量操作。 在批量操作中，Dapr 将读取请求作为单独的请求提交给底层数据存储，并将它们作为单个结果返回。
 
-#### Transactional operations
+#### 事务性操作
 
-You can group write, update, and delete operations into a request, which are then handled as an atomic transaction. The request will succeed or fail as a transactional set of operations.
+您可以将写入、更新和删除操作分组到一个请求中，然后作为一个原子事务处理。 请求将作为一组事务操作成功或失败。
 
-### Actor state
+### Actor 状态
 
-事务性状态存储可用于存储 Actor 状态。 To specify which state store to use for actors, specify value of property `actorStateStore` as `true` in the state store component's metadata section. Actors state is stored with a specific scheme in transactional state stores, allowing for consistent querying. 只有一个单一的状态存储组件可以被用作所有角色的状态存储。 Read the [state API reference]({{< ref state_api.md >}}) and the [actors API reference]({{< ref actors_api.md >}}) to learn more about state stores for actors.
+事务性状态存储可用于存储 Actor 状态。 要为 Actors 指定使用哪种状态存储，请在状态存储组件的元数据部分将属性 `actorStateStore` 的值指定为 `true`。 Actors 的状态以特定的方案存储在事务性状态存储区中，以便进行一致的查询。 只有一个单一的状态存储组件可以被用作所有角色的状态存储。 请阅读 [state API 参考]({{< ref state_api.md >}}) 和 [actors API 参考]({{< ref actors_api.md >}}) ，了解有关 Actors 状态存储的更多信息。
+
+#### Actor状态的生存时间（TTL）
+您应始终设置 TTL 元数据字段（`ttlInSeconds`），或在保存 actor 状态时使用您选择的 SDK 中的等效 API 调用，以确保状态最终被移除。 读 [ Actors 概述]({{< ref actors-overview.md >}}) 了解更多信息。
 
 ### 状态加密
 
-Dapr supports automatic client encryption of application state with support for key rotations. This is supported on all Dapr state stores. For more info, read the [How-To: Encrypt application state]({{< ref howto-encrypt-state.md >}}) topic.
+Dapr 支持客户端对应用程序状态的自动加密，并支持密钥轮换。 这在所有 Dapr 状态存储上都受支持。 有关详细信息，请阅读 [操作方法：加密应用程序状态]({{< ref howto-encrypt-state.md >}}) 主题。
 
 ### 应用程序之间的共享状态
 
-Different applications' needs vary when it comes to sharing state. In one scenario, you may want to encapsulate all state within a given application and have Dapr manage the access for you. In another scenario, you may want two applications working on the same state to get and save the same keys.
+在共享状态时，不同的应用程序的需求各不相同。 在一个场景中，您可能想要封装某个应用程序中的所有状态，并让 Dapr 管理您的访问权限。 在另一种情况下，您可能希望两个在相同状态下工作的应用程序能够获得和保存相同的键值。
 
-Dapr enables states to be:
+Dapr 可以使状态成为:
 
-- Isolated to an application.
-- Shared in a state store between applications.
-- Shared between multiple applications across different state stores.
+- 隔离到一个应用程序。
+- 在应用程序之间的状态存储中共享。
+- 在不同状态存储之间共享，供多个应用程序使用。
 
-For more details read [How-To: Share state between applications]({{< ref howto-share-state.md >}}),
+有关更多详细信息，请阅读 [操作方法：在应用程序之间共享状态]({{< ref howto-share-state.md >}})
 
-### Querying state
+### 启用发件箱模式
 
-There are two ways to query the state:
+Dapr使开发人员能够使用outbox模式，在事务性状态存储和任何消息代理之间实现单个事务。 要获取更多信息，请阅读 [如何启用事务性发件箱消息]({{< ref howto-outbox.md >}})
 
-- Using the state management query API provided in Dapr runtime.
-- Querying state store directly with the store's native SDK.
+### 查询状态
 
-#### Query API
+有两种方法来查询状态。
 
-Using the _optional_ state management [query API]({{< ref "reference/api/state_api.md#query-state" >}}), you can query the key/value data saved in state stores, regardless of underlying database or storage technology. With the state management query API, you can filter, sort, and paginate the key/value data. For more details read [How-To: Query state]({{< ref howto-state-query-api.md >}}).
+- 使用 Dapr 运行时提供的 状态管理查询API 。
+- 直接使用存储的本机 SDK 查询状态存储。
 
-#### Querying state store directly
+#### 查询API
 
-Dapr saves and retrieves state values without any transformation. You can query and aggregate state directly from the [underlying state store]({{< ref query-state-store >}}). For example, to get all state keys associated with an application ID "myApp" in Redis, use:
+使用 _可选的_ 状态管理 [查询 API]({{< ref "reference/api/state_api.md#query-state" >}})，您可以查询保存在状态存储中的键/值数据，而不考虑基础数据库或存储技术。 使用状态管理查询API，你可以对键/值数据进行过滤、排序和分页。 有关更多详细信息，请阅读 [操作方法：查询状态]({{< ref howto-state-query-api.md >}})。
+
+#### 直接查询状态存储
+
+Dapr保存和检索状态值，而不进行任何转换。 您可以直接从 [基础状态存储]({{< ref query-state-store >}}) 中查询并聚合状态。 例如，要在 Redis 中获取与 app ID“myApp”相关的所有状态 key，可以使用:
 
 ```bash
 KEYS "myApp*"
 ```
 
 {{% alert title="Note on direct queries" color="primary" %}}
-Since you aren't calling through the Dapr runtime, direct queries of the state store are not governed by Dapr concurrency control. What you see are snapshots of committed data acceptable for read-only queries across multiple actors. Writes should be done via the Dapr state management or actors APIs.
+由于您没有通过 Dapr 运行时调用，因此对状态存储的直接查询不受 Dapr 并发控制的约束。 您看到的是跨多个 actor 的只读查询中可接受的已提交数据的快照。 写入应通过 Dapr 状态管理或 actors API 完成。
 {{% /alert %}}
 
-##### Querying actor state
+##### 查询 Actor 状态
 
-If the data store supports SQL queries, you can query an actor's state using SQL queries. For example:
+如果数据存储支持 SQL 查询，您可以使用 SQL 查询 Actor 的状态。 例如:
 
 ```sql
 SELECT * FROM StateTable WHERE Id='<app-id>||<actor-type>||<actor-id>||<key>'
 ```
 
-You can also avoid the common turn-based concurrency limitations of actor frameworks by performing aggregate queries across actor instances. For example, to calculate the average temperature of all thermometer actors, use:
+您还可以通过执行跨 actor 实例的聚合查询来避免 actor 框架的常见的基于轮询的并发限制。 例如，要计算所有温度计Actor的平均温度，使用:
 
 ```sql
 SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||temperature'
 ```
 
-### State Time-to-Live (TTL)
+### 状态生存时间（TTL）
 
-Dapr enables [per state set request time-to-live (TTL)]({{< ref state-store-ttl.md >}}). This means that applications can set time-to-live per state stored, and these states cannot be retrieved after expiration.
+Dapr 启用 [每个状态设置请求生存时间 （TTL）]({{< ref state-store-ttl.md >}}). 这意味着应用程序可以为每个存储的状态设置生存时间，并且在过期后无法检索这些状态。
 
 ### 状态管理 API
 
-The state management API can be found in the [state management API reference]({{< ref state_api.md >}}), which describes how to retrieve, save, delete, and query state values by providing keys.
+状态管理 API 可以在 [状态管理 API 参考]({{< ref state_api.md >}})，它描述了如何通过提供键来检索、保存、删除和查询状态值。
 
-## Try out state management
+## 试用状态管理
 
-### Quickstarts and tutorials
+### 快速入门和教程
 
-Want to put the Dapr state management API to the test? Walk through the following quickstart and tutorials to see state management in action:
+想测试一下 Dapr 状态管理 API 吗？ 浏览以下快速入门和教程以查看状态管理的实际应用：
 
-| 快速入门/教程                                                                                              | 说明                                                                                                                         |
-| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| [State management quickstart]({{< ref statemanagement-quickstart.md >}})                             | Create stateful applications using the state management API.                                                               |
-| [Hello World](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world)                 | _Recommended_ <br> Demonstrates how to run Dapr locally. 重点介绍服务调用和状态管理。                                              |
-| [Hello World Kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) | _Recommended_ <br> Demonstrates how to run Dapr in Kubernetes. Highlights service invocation and _state management_. |
+| 快速入门/教程                                                                                              | 说明                                                           |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [状态管理快速入门]({{< ref statemanagement-quickstart.md >}})                                                | 使用状态管理 API 创建有状态应用程序。                                        |
+| [Hello World](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world)                 | _推荐_ <br> 演示如何在本地运行 Dapr。 重点介绍服务调用和状态管理。               |
+| [Hello World Kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) | _推荐_ <br> 演示如何在 Kubernetes 中运行 Dapr。 重点介绍服务调用和 _状态管理_。 |
 
-### Start using state management directly in your app
+### 直接在应用中开始使用状态管理
 
-Want to skip the quickstarts? Not a problem. You can try out the state management building block directly in your application. After [Dapr is installed]({{< ref "getting-started/_index.md" >}}), you can begin using the state management API starting with [the state management how-to guide]({{< ref howto-get-save-state.md >}}).
+想跳过快速入门？ 没问题。 您可以直接在应用程序中尝试状态管理构建块。 后 [已安装 Dapr]({{< ref "getting-started/_index.md" >}})，您可以开始使用 状态管理 API，从 [状态管理操作指南]({{< ref howto-get-save-state.md >}}).
 
 ## 下一步
 
-- Start working through the state management how-to guides, starting with:
-  - [How-To: Save and get state]({{< ref howto-get-save-state.md >}})
-  - [How-To: Build a stateful service]({{< ref howto-stateful-service.md >}})
-- Review the list of [state store components]({{< ref supported-state-stores.md >}})
-- Read the [state management API reference]({{< ref state_api.md >}})
-- Read the [actors API reference]({{< ref actors_api.md >}})
+- 开始阅读状态管理操作方法指南，从以下开始:
+  - [指南：保存和获取状态]({{< ref howto-get-save-state.md >}})
+  - [指南：创建一个有状态的服务]({{< ref howto-stateful-service.md >}})
+- 查看列表 [状态存储组件]({{< ref supported-state-stores.md >}})
+- 阅读 [状态管理 API 参考]({{< ref state_api.md >}})
+- 阅读 [actors API 参考]({{< ref actors_api.md >}})

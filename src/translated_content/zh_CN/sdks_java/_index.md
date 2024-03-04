@@ -15,18 +15,18 @@ cascade:
 
 - 安装 [Dapr CLI]({{< ref install-dapr-cli.md >}})
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- JDK 11 or above - the published jars are compatible with Java 8:
+- JDK 11 或更高版本 - 已发布的 jar 与 Java 8 兼容：
     - [AdoptOpenJDK 11 - LTS](https://adoptopenjdk.net/)
     - [Oracle's JDK 15](https://www.oracle.com/java/technologies/javase-downloads.html)
     - [Oracle's JDK 11 - LTS](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
     - [OpenJDK](https://openjdk.java.net/)
-- Install one of the following build tools for Java:
+- 安装以下 Java 构建工具之一：
     - [Maven 3.x](https://maven.apache.org/install.html)
     - [Gradle 6.x](https://gradle.org/install/)
 
 ## 导入 Dapr 的 Java SDK
 
-For a Maven project, add the following to your `pom.xml` file:
+对于 Maven 项目，请将以下内容添加到 `pom.xml` 文件中：
 ```xml
 <project>
   ...
@@ -227,7 +227,7 @@ public class SubscriberController {
 ```
 
 ##### Bulk Publish Messages
-> Note: API is in Alpha stage
+> 注意：API 处于 Alpha 阶段
 
 
 ```java
@@ -255,7 +255,7 @@ class Solution {
 }
 ```
 
-- For a full guide on publishing messages and subscribing to a topic [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
+- 有关发布消息和订阅主题的完整指南 [操作方法：发布 & 订阅]({{< ref howto-publish-subscribe.md >}}).
 - 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/pubsub/http)，获取代码示例和说明，以试用发布订阅。
 
 ### 与输出绑定交互
@@ -273,10 +273,10 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 }
 ```
 
-- For a full guide on output bindings visit [How-To: Output bindings]({{< ref howto-bindings.md >}}).
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/bindings/http) for code samples and instructions to try out output bindings.
+- 有关输出绑定的完整指南，请访问 [操作方法：输出绑定]({{< ref howto-bindings.md >}}).
+- 访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/bindings/http) 获取代码示例和说明以试用输出绑定。
 
-### Interact with input bindings
+### 与输入绑定交互
 
 ```java
 import org.springframework.web.bind.annotation.*;
@@ -295,10 +295,10 @@ public class myClass {
 }
 ```
 
-- For a full guide on input bindings, visit [How-To: Input bindings]({{< ref howto-triggers >}}).
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/bindings/http) for code samples and instructions to try out input bindings.
+- 有关输入绑定的完整指南，请访问 [操作方法：输入绑定]({{< ref howto-triggers >}}).
+- 访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/bindings/http) 获取代码示例和说明以试用输入绑定。
 
-### Retrieve secrets
+### 检索密钥
 
 ```java
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -312,8 +312,8 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
 }
 ```
 
-- For a full guide on secrets visit [How-To: Retrieve secrets]({{< ref howto-secrets.md >}}).
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/secrets) for code samples and instructions to try out retrieving secrets
+- 有关密钥的完整指南，请访问[操作方法：检索密钥]({{< ref howto-secrets.md >}})。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/secrets)，获取代码示例和说明，以试用秘密检索。
 
 ### Actors
 Actor 是具有单线程执行的隔离、独立的计算和状态单元。 Dapr 提供了一个基于 [虚拟 Actor 模式](https://www.microsoft.com/en-us/research/project/orleans-virtual-actors/)的 actor 实现，它提供了一个单线程编程模型，其中 actor 在不使用时会进行垃圾回收。 通过 Dapr 的实现，您可以根据 Actor 模型编写 Dapr Actor，而 Dapr 则利用底层平台提供的可扩展性和可靠性。
@@ -338,12 +338,12 @@ public interface DemoActor {
 }
 ```
 
-- For a full guide on actors visit [How-To: Use virtual actors in Dapr]({{< ref howto-actors.md >}}).
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors) for code samples and instructions to try actors
+- 有关 Actor 的完整指南，请访问 [操作方法：在 Dapr 中使用 Actor ]({{< ref howto-actors.md >}})。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/actors)，获取代码示例和说明，以试用 Actor。
 
-### Get & Subscribe to application configurations
+### 获取 & 订阅应用程序配置
 
-> Note this is a preview API and thus will only be accessible via the DaprPreviewClient interface and not the normal DaprClient interface
+> 请注意，这是一个预览 API，因此只能通过 DaprPreviewClient 接口访问，而不是通过普通的 DaprClient 接口访问
 
 ```java
 import io.dapr.client.DaprClientBuilder;
@@ -371,12 +371,12 @@ try (DaprPreviewClient client = (new DaprClientBuilder()).buildPreviewClient()) 
 }
 ```
 
-- For a full list of configuration operations visit [How-To: Manage configuration from a store]({{< ref howto-manage-configuration.md >}}).
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/configuration) for code samples and instructions to try out different configuration operations.
+- 有关配置操作的完整列表，请访问[操作方法：从存储管理配置]({{< ref howto-manage-configuration.md >}})。
+- 请访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/configuration)，获取代码示例和说明，以尝试不同的配置操作。
 
-### Query saved state
+### 查询保存的状态
 
-> Note this is a preview API and thus will only be accessible via the DaprPreviewClient interface and not the normal DaprClient interface
+> 请注意，这是一个预览 API，因此只能通过 DaprPreviewClient 接口访问，而不是通过普通的 DaprClient 接口访问
 
 ```java
 import io.dapr.client.DaprClient;
@@ -405,9 +405,9 @@ try (DaprClient client = builder.build(); DaprPreviewClient previewClient = buil
         third.setPropertyType("apartment");
         third.setId("1003");
         ...
-        Listing fourth = new Listing();
-        fourth.setPropertyType("apartment");
-        fourth.setId("1001");
+        Listing third = new Listing();
+        third.setPropertyType("apartment");
+        third.setId("1003");
         ...
         Map<String, String> meta = new HashMap<>();
         meta.put("contentType", "application/json");
@@ -442,8 +442,8 @@ try (DaprClient client = builder.build(); DaprPreviewClient previewClient = buil
 }
 
 ```
-- For a full list of configuration operations visit [How-To: Query state]({{< ref howto-state-query-api.md >}}).
-- Visit [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/querystate) for complete code sample.
+- 有关配置操作的完整列表，请访问 [操作方法：查询状态]({{< ref howto-state-query-api.md >}}).
+- 访问 [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/querystate) 获取完整的代码示例。
 
 ## 相关链接
-- [Java SDK examples](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples)
+- [Java SDK 示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples)

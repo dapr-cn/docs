@@ -26,7 +26,23 @@ spec:
   type: secretstores.local.env
   version: v1
   metadata:
+    # - name: prefix
+    #   value: "MYAPP_"
 ```
+
+## 元数据字段规范
+
+| Field    | Required | 详情                                                                                                                                                                                                                                        | 示例         |
+| -------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `prefix` |    否     | If set, limits operations to environment variables with the given prefix. The prefix is removed from the returned secrets' names.<br>The matching is case-insensitive on Windows and case-sensitive on all other operating systems. | `"MYAPP_"` |
+
+## Notes
+
+For security reasons, this component cannot be used to access these environment variables:
+
+- `APP_API_TOKEN`
+- Any variable whose name begins with the `DAPR_` prefix
+
 ## 相关链接
 - [Secrets building block]({{< ref secrets >}})
 - [指南：获取密钥]({{< ref "howto-secrets.md" >}})

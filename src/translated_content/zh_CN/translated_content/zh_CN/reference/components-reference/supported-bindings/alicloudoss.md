@@ -36,18 +36,18 @@ spec:
 
 ## 元数据字段规范
 
-| Field         | 必填 | 绑定支持   | 详情                     | 示例                                   |
-| ------------- | -- | ------ | ---------------------- | ------------------------------------ |
-| `终结点`         | 是  | Output | Alicloud OSS endpoint. | https://oss-cn-hangzhou.aliyuncs.com |
-| `accessKeyID` | 是  | 输出     | 访问密钥 ID 凭据。            |                                      |
-| `accessKey`   | 是  | 输出     | 访问密钥凭据。                |                                      |
-| `bucket`      | 是  | 输出     | 存储桶名称                  |                                      |
+| Field         | Required | 绑定支持   | 详情                     | 示例                                   |
+| ------------- | -------- | ------ | ---------------------- | ------------------------------------ |
+| `endpoint`    | 是        | Output | Alicloud OSS endpoint. | https://oss-cn-hangzhou.aliyuncs.com |
+| `accessKeyID` | 是        | 输出     | 访问密钥 ID 凭据。            |                                      |
+| `accessKey`   | 是        | 输出     | 访问密钥凭据。                |                                      |
+| `bucket`      | 是        | 输出     | 存储桶名称                  |                                      |
 
 ## 绑定支持
 
 该组件支持如下操作的 **输出绑定** ：
-- `create`: [Create object](#create-object)
 
+- `create`: [Create object](#create-object)
 
 ### Create object
 

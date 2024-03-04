@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Quickstart: Service-to-component resiliency"
+title: "快速入门：服务到组件的弹性"
 linkTitle: "Resiliency: Service-to-component"
 weight: 110
-description: "Get started with Dapr's resiliency capabilities via the state management API"
+description: "通过状态管理API开始使用Dapr的弹性能力"
 ---
 
-Observe Dapr resiliency capabilities by simulating a system failure. In this Quickstart, you will:
+通过模拟系统故障来观察 Dapr 的弹性能力。 在本快速入门中，您将：
 
-- Execute a microservice application that continuously persists and retrieves state via Dapr's state management API.
-- Trigger resiliency policies by simulating a system failure.
-- Resolve the failure and the microservice application will resume.
+- 执行一个微服务应用程序，通过 Dapr 的状态管理 API 持续地存储和检索状态。
+- 通过模拟系统故障来触发弹性策略。
+- 解决故障，微服务应用程序将恢复。
 
-<img src="/images/resiliency-quickstart-svc-component.png" width="1000" alt="Diagram showing the resiliency applied to Dapr APIs" />
+<img src="/images/resiliency-quickstart-svc-component.png" width="1000" alt="显示应用于 Dapr API 的弹性的图示" />
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
@@ -24,15 +24,15 @@ Observe Dapr resiliency capabilities by simulating a system failure. In this Qui
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Python 3.7+ installed](https://www.python.org/downloads/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [Python 3.7+ 已安装](https://www.python.org/downloads/).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/resiliency).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/resiliency)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -44,15 +44,15 @@ git clone https://github.com/dapr/quickstarts.git
 cd ../state_management/python/sdk/order-processor
 ```
 
-Install dependencies
+安装依赖项：
 
 ```bash
 pip3 install -r requirements.txt 
 ```
 
-### Step 2: Run the application
+### 步骤 2：运行应用程序
 
-Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar then loads the resiliency spec located in the resources directory:
+与 Dapr sidecar 一起运行 `order-processor` 服务。 然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
 
    ```yaml
@@ -89,7 +89,7 @@ Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar the
 dapr run --app-id order-processor --resources-path ../../../resources/ -- python3
 ```
 
-Once the application has started, the `order-processor`service writes and reads `orderId` key/value pairs to the `statestore` Redis instance [defined in the `statestore.yaml` component]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
+应用程序启动后， `order-processor`服务写入和读取 `orderId` 键/值对 `状态存储` Redis 实例 [定义于 `statestore.yaml` 元件]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
 
 ```bash
 == APP == Saving Order:  { orderId: '1' }
@@ -102,11 +102,11 @@ Once the application has started, the `order-processor`service writes and reads 
 == APP == Getting Order:  { orderId: '4' }
 ```
 
-### Step 3: Introduce a fault
+### 步骤 3：引入故障
 
-Simulate a fault by stopping the Redis container instance that was initialized when executing `dapr init` on your development machine. Once the instance is stopped, write and read operations from the `order-processor` service begin to fail.
+在执行 `dapr init` 时，通过停止在开发机器上初始化的 Redis 容器实例来模拟故障。 实例停止后，从 `order-processor` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines `statestore` as a component target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `statestore` 定义为组件目标，所有失败的请求都将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -117,19 +117,19 @@ Since the `resiliency.yaml` spec defines `statestore` as a component target, all
           circuitBreaker: simpleCB
 ```
 
-In a new terminal window, run the following command to stop Redis:
+在新的终端窗口中，运行以下命令以停止Redis：
 
 ```bash
 docker stop dapr_redis
 ```
 
-Once Redis is stopped, the requests begin to fail and the retry policy titled `retryForever` is applied. The output below shows the logs from the `order-processor` service:
+一旦停止Redis，请求将开始失败，并应用名为 `retryForever` 的重试策略。 下面的输出显示了来自 `order-processor` 服务：
 
 ```bash
 INFO[0006] Error processing operation component[statestore] output. Retrying...
 ```
 
-As per the `retryForever` policy, retries will continue for each failed request indefinitely, in 5 second intervals.
+根据 `retryForever` 策略，每个失败的请求都会无限期地重试，间隔为5秒。
 
 ```yaml
 retryForever:
@@ -138,7 +138,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略， `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0026] Circuit breaker "simpleCB-statestore" changed state from closed to open
@@ -152,7 +152,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0031] Circuit breaker "simpleCB-statestore" changed state from open to half-open  
@@ -161,11 +161,11 @@ INFO[0036] Circuit breaker "simpleCB-statestore" changed state from open to half
 INFO[0036] Circuit breaker "simpleCB-statestore" changed state from half-open to closed  
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 3: Remove the fault
+### 第3步：移除故障
 
-Once you restart the Redis container on your machine, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动您机器上的Redis容器，应用程序将无缝恢复，继续接受订单请求。
 
 ```bash
 docker start dapr_redis
@@ -194,7 +194,7 @@ INFO[0036] Recovered processing operation component[statestore] output.
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
 - [最新的Node.js已安装](https://nodejs.org/download/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
@@ -202,7 +202,7 @@ INFO[0036] Recovered processing operation component[statestore] output.
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/resiliency).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/resiliency)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -214,15 +214,15 @@ git clone https://github.com/dapr/quickstarts.git
 cd ../state_management/javascript/sdk/order-processor
 ```
 
-Install dependencies
+安装依赖项：
 
 ```bash
 npm install
 ```
 
-### Step 2: Run the application
+### 步骤 2：运行应用程序
 
-Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar then loads the resiliency spec located in the resources directory:
+与 Dapr sidecar 一起运行 `order-processor` 服务。 然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
 
    ```yaml
@@ -258,7 +258,7 @@ Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar the
 dapr run --app-id order-processor --resources-path ../../../resources/ -- npm start
 ```
 
-Once the application has started, the `order-processor`service writes and reads `orderId` key/value pairs to the `statestore` Redis instance [defined in the `statestore.yaml` component]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
+应用程序启动后， `order-processor`服务写入和读取 `orderId` 键/值对 `状态存储` Redis 实例 [定义于 `statestore.yaml` 元件]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
 
 ```bash
 == APP == Saving Order:  { orderId: '1' }
@@ -271,11 +271,11 @@ Once the application has started, the `order-processor`service writes and reads 
 == APP == Getting Order:  { orderId: '4' }
 ```
 
-### Step 3: Introduce a fault
+### 步骤 3：引入故障
 
-Simulate a fault by stopping the Redis container instance that was initialized when executing `dapr init` on your development machine. Once the instance is stopped, write and read operations from the `order-processor` service begin to fail.
+在执行 `dapr init` 时，通过停止在开发机器上初始化的 Redis 容器实例来模拟故障。 实例停止后，从 `order-processor` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines `statestore` as a component target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `statestore` 定义为组件目标，所有失败的请求都将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -286,19 +286,19 @@ Since the `resiliency.yaml` spec defines `statestore` as a component target, all
           circuitBreaker: simpleCB
 ```
 
-In a new terminal window, run the following command to stop Redis:
+在新的终端窗口中，运行以下命令以停止Redis：
 
 ```bash
 docker stop dapr_redis
 ```
 
-Once Redis is stopped, the requests begin to fail and the retry policy titled `retryForever` is applied. The output below shows the logs from the `order-processor` service:
+一旦停止Redis，请求将开始失败，并应用名为 `retryForever` 的重试策略。 下面的输出显示了来自 `order-processor` 服务：
 
 ```bash
 INFO[0006] Error processing operation component[statestore] output. Retrying...
 ```
 
-As per the `retryForever` policy, retries will continue for each failed request indefinitely, in 5 second intervals.
+根据 `retryForever` 策略，每个失败的请求都会无限期地重试，间隔为5秒。
 
 ```yaml
 retryForever:
@@ -307,7 +307,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略， `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0026] Circuit breaker "simpleCB-statestore" changed state from closed to open
@@ -321,7 +321,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0031] Circuit breaker "simpleCB-statestore" changed state from open to half-open  
@@ -330,11 +330,11 @@ INFO[0036] Circuit breaker "simpleCB-statestore" changed state from open to half
 INFO[0036] Circuit breaker "simpleCB-statestore" changed state from half-open to closed  
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 3: Remove the fault
+### 第3步：移除故障
 
-Once you restart the Redis container on your machine, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动您机器上的Redis容器，应用程序将无缝恢复，继续接受订单请求。
 
 ```bash
 docker start dapr_redis
@@ -363,15 +363,15 @@ INFO[0036] Recovered processing operation component[statestore] output.
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [.NET SDK 或 .NET 6 SDK 已安装](https://dotnet.microsoft.com/download).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/resiliency).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/resiliency)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -383,16 +383,16 @@ git clone https://github.com/dapr/quickstarts.git
 cd ../state_management/csharp/sdk/order-processor
 ```
 
-Install dependencies
+安装依赖项：
 
 ```bash
 dotnet restore
 dotnet build
 ```
 
-### Step 2: Run the application
+### 步骤 2：运行应用程序
 
-Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar then loads the resiliency spec located in the resources directory:
+与 Dapr sidecar 一起运行 `order-processor` 服务。 然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
    ```yaml
    apiVersion: dapr.io/v1alpha1
@@ -427,7 +427,7 @@ Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar the
 dapr run --app-id order-processor --resources-path ../../../resources/ -- dotnet run
 ```
 
-Once the application has started, the `order-processor`service writes and reads `orderId` key/value pairs to the `statestore` Redis instance [defined in the `statestore.yaml` component]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
+应用程序启动后， `order-processor`服务写入和读取 `orderId` 键/值对 `状态存储` Redis 实例 [定义于 `statestore.yaml` 元件]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
 
 ```bash
 == APP == Saving Order:  { orderId: '1' }
@@ -440,11 +440,11 @@ Once the application has started, the `order-processor`service writes and reads 
 == APP == Getting Order:  { orderId: '4' }
 ```
 
-### Step 3: Introduce a fault
+### 步骤 3：引入故障
 
-Simulate a fault by stopping the Redis container instance that was initialized when executing `dapr init` on your development machine. Once the instance is stopped, write and read operations from the `order-processor` service begin to fail.
+在执行 `dapr init` 时，通过停止在开发机器上初始化的 Redis 容器实例来模拟故障。 实例停止后，从 `order-processor` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines `statestore` as a component target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `statestore` 定义为组件目标，所有失败的请求都将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -455,19 +455,19 @@ Since the `resiliency.yaml` spec defines `statestore` as a component target, all
           circuitBreaker: simpleCB
 ```
 
-In a new terminal window, run the following command to stop Redis:
+在新的终端窗口中，运行以下命令以停止Redis：
 
 ```bash
 docker stop dapr_redis
 ```
 
-Once Redis is stopped, the requests begin to fail and the retry policy titled `retryForever` is applied. The output below shows the logs from the `order-processor` service:
+一旦停止Redis，请求将开始失败，并应用名为 `retryForever` 的重试策略。 下面的输出显示了来自 `order-processor` 服务：
 
 ```bash
 INFO[0006] Error processing operation component[statestore] output. Retrying...
 ```
 
-As per the `retryForever` policy, retries will continue for each failed request indefinitely, in 5 second intervals.
+根据 `retryForever` 策略，每个失败的请求都会无限期地重试，间隔为5秒。
 
 ```yaml
 retryForever:
@@ -476,7 +476,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略， `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0026] Circuit breaker "simpleCB-statestore" changed state from closed to open
@@ -490,7 +490,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0031] Circuit breaker "simpleCB-statestore" changed state from open to half-open  
@@ -499,11 +499,11 @@ INFO[0036] Circuit breaker "simpleCB-statestore" changed state from open to half
 INFO[0036] Circuit breaker "simpleCB-statestore" changed state from half-open to closed  
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 3: Remove the fault
+### 第3步：移除故障
 
-Once you restart the Redis container on your machine, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动您机器上的Redis容器，应用程序将无缝恢复，继续接受订单请求。
 
 ```bash
 docker start dapr_redis
@@ -532,18 +532,18 @@ INFO[0036] Recovered processing operation component[statestore] output.
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- Java JDK 11 (or greater):
-  - [Oracle JDK](https://www.oracle.com/java/technologies/downloads), or
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- Java JDK 11（或更高版本）：
+  - [Oracle JDK](https://www.oracle.com/java/technologies/downloads), 或
   - OpenJDK
-- [Apache Maven](https://maven.apache.org/install.html), version 3.x.
+- [Apache Maven](https://maven.apache.org/install.html)，版本 3.x。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/resiliency).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/resiliency)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -555,15 +555,15 @@ git clone https://github.com/dapr/quickstarts.git
 cd ../state_management/java/sdk/order-processor
 ```
 
-Install dependencies
+安装依赖项：
 
 ```bash
 mvn clean install
 ```
 
-### Step 2: Run the application
+### 步骤 2：运行应用程序
 
-Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar then loads the resiliency spec located in the resources directory:
+与 Dapr sidecar 一起运行 `order-processor` 服务。 然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
    ```yaml
    apiVersion: dapr.io/v1alpha1
@@ -598,7 +598,7 @@ Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar the
 dapr run --app-id order-processor --resources-path ../../../resources/ -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-Once the application has started, the `order-processor`service writes and reads `orderId` key/value pairs to the `statestore` Redis instance [defined in the `statestore.yaml` component]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
+应用程序启动后， `order-processor`服务写入和读取 `orderId` 键/值对 `状态存储` Redis 实例 [定义于 `statestore.yaml` 元件]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
 
 ```bash
 == APP == Saving Order:  { orderId: '1' }
@@ -611,11 +611,11 @@ Once the application has started, the `order-processor`service writes and reads 
 == APP == Getting Order:  { orderId: '4' }
 ```
 
-### Step 3: Introduce a fault
+### 步骤 3：引入故障
 
-Simulate a fault by stopping the Redis container instance that was initialized when executing `dapr init` on your development machine. Once the instance is stopped, write and read operations from the `order-processor` service begin to fail.
+在执行 `dapr init` 时，通过停止在开发机器上初始化的 Redis 容器实例来模拟故障。 实例停止后，从 `order-processor` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines `statestore` as a component target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `statestore` 定义为组件目标，所有失败的请求都将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -626,19 +626,19 @@ Since the `resiliency.yaml` spec defines `statestore` as a component target, all
           circuitBreaker: simpleCB
 ```
 
-In a new terminal window, run the following command to stop Redis:
+在新的终端窗口中，运行以下命令以停止Redis：
 
 ```bash
 docker stop dapr_redis
 ```
 
-Once Redis is stopped, the requests begin to fail and the retry policy titled `retryForever` is applied. The output below shows the logs from the `order-processor` service:
+一旦停止Redis，请求将开始失败，并应用名为 `retryForever` 的重试策略。 下面的输出显示了来自 `order-processor` 服务：
 
 ```bash
 INFO[0006] Error processing operation component[statestore] output. Retrying...
 ```
 
-As per the `retryForever` policy, retries will continue for each failed request indefinitely, in 5 second intervals.
+根据 `retryForever` 策略，每个失败的请求都会无限期地重试，间隔为5秒。
 
 ```yaml
 retryForever:
@@ -647,7 +647,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略， `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0026] Circuit breaker "simpleCB-statestore" changed state from closed to open
@@ -661,7 +661,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0031] Circuit breaker "simpleCB-statestore" changed state from open to half-open  
@@ -670,11 +670,11 @@ INFO[0036] Circuit breaker "simpleCB-statestore" changed state from open to half
 INFO[0036] Circuit breaker "simpleCB-statestore" changed state from half-open to closed  
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 3: Remove the fault
+### 第3步：移除故障
 
-Once you restart the Redis container on your machine, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动您机器上的Redis容器，应用程序将无缝恢复，继续接受订单请求。
 
 ```bash
 docker start dapr_redis
@@ -703,15 +703,15 @@ INFO[0036] Recovered processing operation component[statestore] output.
 
 对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Latest version of Go](https://go.dev/dl/).
+- [Dapr CLI和初始化环境](https://docs.dapr.io/getting-started)。
+- [最新版本的Go](https://go.dev/dl/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
 ### 第1步：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/resiliency).
+克隆[快速入门存储库中提供的示例](https://github.com/dapr/quickstarts/tree/master/resiliency)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -723,15 +723,15 @@ git clone https://github.com/dapr/quickstarts.git
 cd ../state_management/go/sdk/order-processor
 ```
 
-Install dependencies
+安装依赖项：
 
 ```bash
 go build .
 ```
 
-### Step 2: Run the application
+### 步骤 2：运行应用程序
 
-Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar then loads the resiliency spec located in the resources directory:
+与 Dapr sidecar 一起运行 `order-processor` 服务。 然后 Dapr sidecar 加载位于资源目录中的弹性规范：
 
    ```yaml
    apiVersion: dapr.io/v1alpha1
@@ -766,7 +766,7 @@ Run the `order-processor` service alongside a Dapr sidecar. The Dapr sidecar the
 dapr run --app-id order-processor --resources-path ../../../resources -- go run .
 ```
 
-Once the application has started, the `order-processor`service writes and reads `orderId` key/value pairs to the `statestore` Redis instance [defined in the `statestore.yaml` component]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
+应用程序启动后， `order-processor`服务写入和读取 `orderId` 键/值对 `状态存储` Redis 实例 [定义于 `statestore.yaml` 元件]({{< ref "statemanagement-quickstart.md#statestoreyaml-component-file" >}}).
 
 ```bash
 == APP == Saving Order:  { orderId: '1' }
@@ -779,11 +779,11 @@ Once the application has started, the `order-processor`service writes and reads 
 == APP == Getting Order:  { orderId: '4' }
 ```
 
-### Step 3: Introduce a fault
+### 步骤 3：引入故障
 
-Simulate a fault by stopping the Redis container instance that was initialized when executing `dapr init` on your development machine. Once the instance is stopped, write and read operations from the `order-processor` service begin to fail.
+在执行 `dapr init` 时，通过停止在开发机器上初始化的 Redis 容器实例来模拟故障。 实例停止后，从 `order-processor` 服务开始失败。
 
-Since the `resiliency.yaml` spec defines `statestore` as a component target, all failed requests will apply retry and circuit breaker policies:
+由于 `resiliency.yaml` 规范将 `statestore` 定义为组件目标，所有失败的请求都将应用重试和断路器策略：
 
 ```yaml
   targets:
@@ -794,19 +794,19 @@ Since the `resiliency.yaml` spec defines `statestore` as a component target, all
           circuitBreaker: simpleCB
 ```
 
-In a new terminal window, run the following command to stop Redis:
+在新的终端窗口中，运行以下命令以停止Redis：
 
 ```bash
 docker stop dapr_redis
 ```
 
-Once Redis is stopped, the requests begin to fail and the retry policy titled `retryForever` is applied. The output belows shows the logs from the `order-processor` service:
+一旦停止Redis，请求将开始失败，并应用名为 `retryForever` 的重试策略。 下面的输出显示了来自 `order-processor` 服务：
 
 ```bash
 INFO[0006] Error processing operation component[statestore] output. Retrying...
 ```
 
-As per the `retryForever` policy, retries will continue for each failed request indefinitely, in 5 second intervals.
+根据 `retryForever` 策略，每个失败的请求都会无限期地重试，间隔为5秒。
 
 ```yaml
 retryForever:
@@ -815,7 +815,7 @@ retryForever:
   maxRetries: -1 
 ```
 
-Once 5 consecutive retries have failed, the circuit breaker policy, `simpleCB`, is tripped and the breaker opens, halting all requests:
+一旦连续失败5次重试，断路器策略， `simpleCB`，将被触发，断路器打开，停止所有请求：
 
 ```bash
 INFO[0026] Circuit breaker "simpleCB-statestore" changed state from closed to open
@@ -829,7 +829,7 @@ circuitBreakers:
   trip: consecutiveFailures >= 5
 ```
 
-After 5 seconds has surpassed, the circuit breaker will switch to a half-open state, allowing one request through to verify if the fault has been resolved. If the request continues to fail, the circuit will trip back to the open state.
+超过5秒后，断路器将切换到半开状态，允许一个请求通过以验证故障是否已解决。 如果请求继续失败，将会跳回到打开状态。
 
 ```bash
 INFO[0031] Circuit breaker "simpleCB-statestore" changed state from open to half-open  
@@ -838,11 +838,11 @@ INFO[0036] Circuit breaker "simpleCB-statestore" changed state from open to half
 INFO[0036] Circuit breaker "simpleCB-statestore" changed state from half-open to closed  
 ```
 
-This half-open/open behavior will continue for as long as the Redis container is stopped.
+只要停止 Redis 容器，这种半开/开放行为将继续下去。
 
-### Step 3: Remove the fault
+### 第3步：移除故障
 
-Once you restart the Redis container on your machine, the application will recover seamlessly, picking up where it left off.
+一旦您重新启动您机器上的Redis容器，应用程序将无缝恢复，继续接受订单请求。
 
 ```bash
 docker start dapr_redis
@@ -866,13 +866,13 @@ INFO[0036] Recovered processing operation component[statestore] output.
 
 {{< /tabs >}}
 
-## Tell us what you think!
-We're continuously working to improve our Quickstart examples and value your feedback. 您觉得此快速入门有帮助吗？ Do you have suggestions for improvement?
+## 告诉我们您的想法
+我们一直在努力改进我们的快速入门示例，并重视您的反馈。 您觉得此快速入门有帮助吗？ 您有改进的建议吗？
 
-Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).
+加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238)中的讨论。
 
 ## 下一步
 
-Learn more about [the resiliency feature]({{< ref resiliency-overview.md >}}) and how it works with Dapr's building block APIs.
+了解有关的 [弹性功能]({{< ref resiliency-overview.md >}}) 以及它如何与Dapr的构建块API一起工作。
 
-{{< button text="Explore Dapr tutorials  >>" page="getting-started/tutorials/_index.md" >}}
+{{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

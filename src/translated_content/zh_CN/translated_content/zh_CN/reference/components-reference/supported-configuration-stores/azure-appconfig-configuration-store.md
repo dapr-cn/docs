@@ -40,7 +40,7 @@ spec:
   - name: azureCertificateFile # Optional
     value : "[pfx_certificate_file_fully_qualified_local_path]"
   - name: subscribePollInterval # Optional
-    value: #Optional [Expected format example - 1s|1m|1h]
+    value: #Optional [Expected format example - 30s]
 
 ```
 
@@ -50,14 +50,14 @@ spec:
 
 ## 元数据字段规范
 
-| Field                 | 必填 | 详情                                                                                                                                                                                                                                                                                                 | 示例                                                                                                       |
-| --------------------- |:--:| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| connectionString      | Y* | Connection String for the Azure App Configuration instance. 无默认值 Can be `secretKeyRef` to use a secret reference. *Mutally exclusive with host field. *Not to be used when [Azure Authentication](https://docs.dapr.io/developing-applications/integrations/azure/authenticating-azure/) is used | `Endpoint=https://foo.azconfig.io;Id=osOX-l9-s0:sig;Secret=00000000000000000000000000000000000000000000` |
-| host                  | N* | Endpoint for the Azure App Configuration instance. 无默认值 *Mutally exclusive with connectionString field. *To be used when [Azure Authentication](https://docs.dapr.io/developing-applications/integrations/azure/authenticating-azure/) is used                                                   | `https://dapr.azconfig.io`                                                                               |
-| maxRetries            | 否  | 放弃前的最大重试次数。 默认值为 `3`。                                                                                                                                                                                                                                                                              | `5`, `10`                                                                                                |
-| retryDelay            | 否  | RetryDelay specifies the initial amount of delay to use before retrying an operation. The delay increases exponentially with each retry up to the maximum specified by MaxRetryDelay. Defaults to `4` seconds; `"-1"` disables delay between retries.                                              | `4000000000`                                                                                             |
-| maxRetryDelay         | 否  | MaxRetryDelay specifies the maximum delay allowed before retrying an operation. Typically the value is greater than or equal to the value specified in RetryDelay. Defaults to `120` seconds; `"-1"` disables the limit                                                                            | `120000000000`                                                                                           |
-| subscribePollInterval | 否  | subscribePollInterval specifies the poll interval for polling the subscribed keys for any changes. Default polling interval is set to `24` hours.                                                                                                                                                  |                                                                                                          |
+| Field                 | Required | 详情                                                                                                                                                                                                                                                                                                                      | 示例                                                                                                       |
+| --------------------- |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| connectionString      |    Y*    | Connection String for the Azure App Configuration instance. 无默认值 Can be `secretKeyRef` to use a secret reference. *Mutally exclusive with host field. *Not to be used when [Azure Authentication](https://docs.dapr.io/developing-applications/integrations/azure/azure-authentication/authenticating-azure/) is used | `Endpoint=https://foo.azconfig.io;Id=osOX-l9-s0:sig;Secret=00000000000000000000000000000000000000000000` |
+| host                  |    N*    | Endpoint for the Azure App Configuration instance. 无默认值 *Mutally exclusive with connectionString field. *To be used when [Azure Authentication](https://docs.dapr.io/developing-applications/integrations/azure/azure-authentication/authenticating-azure/) is used                                                   | `https://dapr.azconfig.io`                                                                               |
+| maxRetries            |    否     | 放弃前的最大重试次数。 默认值为 `3`。                                                                                                                                                                                                                                                                                                   | `5`, `10`                                                                                                |
+| retryDelay            |    否     | RetryDelay specifies the initial amount of delay to use before retrying an operation. The delay increases exponentially with each retry up to the maximum specified by MaxRetryDelay. Defaults to `4` seconds; `"-1"` disables delay between retries.                                                                   | `4s`                                                                                                     |
+| maxRetryDelay         |    否     | MaxRetryDelay specifies the maximum delay allowed before retrying an operation. Typically the value is greater than or equal to the value specified in RetryDelay. Defaults to `120` seconds; `"-1"` disables the limit                                                                                                 | `120s`                                                                                                   |
+| subscribePollInterval |    否     | subscribePollInterval specifies the poll interval in nanoseconds for polling the subscribed keys for any changes. This will be updated in the future to Go Time format. Default polling interval is set to `24` hours.                                                                                                  | `30s`                                                                                                    |
 
 **Note**: either `host` or `connectionString` must be specified.
 
@@ -65,11 +65,11 @@ spec:
 
 Access an App Configuration instance using its connection string, which is available in the Azure portal. Since connection strings contain credential information, you should treat them as secrets and [use a secret store]({{< ref component-secrets.md >}}).
 
-## Authenticating with Azure AD
+## Authenticating with Microsoft Entra ID
 
-The Azure App Configuration configuration store component also supports authentication with Azure AD. Before you enable this component:
+The Azure App Configuration configuration store component also supports authentication with Microsoft Entra ID. Before you enable this component:
 - Read the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document.
-- Create an Azure AD application (also called Service Principal).
+- Create an Microsoft Entra ID application (also called Service Principal).
 - Alternatively, create a managed identity for your application platform.
 
 ## Set up Azure App Configuration
@@ -100,7 +100,7 @@ The Azure App Configuration store component supports the following optional `lab
 The label can be populated using query parameters in the request URL:
 
 ```bash
-GET curl http://localhost:<daprPort>/v1.0-alpha1/configuration/<store-name>?key=<key name>&metadata.label=<label value>
+GET curl http://localhost:<daprPort>/v1.0/configuration/<store-name>?key=<key name>&metadata.label=<label value>
 ```
 
 ## 相关链接

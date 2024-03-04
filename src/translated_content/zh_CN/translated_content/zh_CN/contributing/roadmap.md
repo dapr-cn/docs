@@ -8,7 +8,7 @@ no_list: true
 ---
 
 
-Dapr encourages the community to help with prioritization. A GitHub project board is available to view and provide feedback on proposed issues and track them across development.
+Dapr 鼓励社区帮助确定优先级。 GitHub 项目委员会可查看和提供对拟议问题的反馈，并在整个开发中跟踪这些问题。
 
 [<img src="/images/roadmap.png" alt="Dapr 路线图面板的屏幕截图" width=500 >](https://aka.ms/dapr/roadmap)
 

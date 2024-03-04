@@ -6,7 +6,7 @@ weight: 3000
 description: 如何使用 Dapr JavaScript SDK 启动和运行 Actor
 ---
 
-The Dapr actors package allows you to interact with Dapr virtual actors from a JavaScript application. The examples below demonstrate how to use the JavaScript SDK for interacting with virtual actors.
+通过 Dapr Actor 包，您可以与 JavaScript 应用程序中的 Dapr 虚拟 Actor 进行交互。 下面的示例讲演示如何使用 JavaScript SDK 与 Dapr 虚拟 Actor 进行交互。
 
 有关 Dapr Actor 的更深入说明，请访问 [概述页面]({{< ref actors-overview >}})。
 
@@ -19,11 +19,11 @@ The Dapr actors package allows you to interact with Dapr virtual actors from a J
 
 ## 场景
 
-The below code examples loosely describe the scenario of a Parking Garage Spot Monitoring System, which can be seen in this [video](https://www.youtube.com/watch?v=eJCu6a-x9uo&t=3785) by Mark Russinovich.
+下面的代码示例粗略地描述了停车库点监控系统的场景，可以在这个[Mark Russinovich 提供的视频中看到](https://www.youtube.com/watch?v=eJCu6a-x9uo&t=3785)。
 
-停车库由数百个停车位组成，每个停车位都包括一个传感器，该传感器为集中监控系统提供更新。 The parking space sensors (our actors) detect if a parking space is occupied or available.
+停车库由数百个停车位组成，每个停车位都包括一个传感器，该传感器为集中监控系统提供更新。 停车位传感器（我们的 Actor）检测一个泊车位是否被占用，或是否可用。
 
-To jump in and run this example yourself, clone the source code, which can be found in the [JavaScript SDK examples directory](https://github.com/dapr/js-sdk/tree/main/examples/http/actor-parking-sensor).
+要想自己运行这个例子，请克隆源代码，它可以在 [JavaScript SDK 示例目录](https://github.com/dapr/js-sdk/tree/main/examples/http/actor-parking-sensor) 中找到。
 
 ## Actor 接口
 
@@ -38,9 +38,9 @@ export default interface ParkingSensorInterface {
 
 ## Actor 实现
 
-An actor implementation defines a class by extending the base type `AbstractActor` and implementing the actor interface (`ParkingSensorInterface` in this case).
+一个 actor 实现通过扩展基本类型 `AbstractActor` 来定义一个类，并实现 actor 接口（在这种情况下是 `ParkingSensorInterface`）。
 
-The following code describes an actor implementation along with a few helper methods.
+下面的代码描述了一个演员实现以及几个辅助方法。
 
 ```ts
 import { AbstractActor } from "@dapr/dapr";
@@ -68,11 +68,11 @@ export default class ParkingSensorImpl extends AbstractActor implements ParkingS
 }
 ```
 
-### Configuring Actor Runtime
+### 配置Actor运行时
 
-To configure actor runtime, use the `DaprClientOptions`. The various parameters and their default values are documented at [How-to: Use virtual actors in Dapr](https://docs.dapr.io/developing-applications/building-blocks/actors/howto-actors/#configuration-parameters).
+要配置 actor 运行时，请使用 `DaprClientOptions`。 各种参数及其默认值在[如何使用 Dapr 中的虚拟 actor](https://docs.dapr.io/developing-applications/building-blocks/actors/howto-actors/#configuration-parameters)中有文档记录。
 
-Note, the timeouts and intervals should be formatted as [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) strings.
+注意，超时和间隔应以[time.ParseDuration](https://pkg.go.dev/time#ParseDuration)字符串的格式进行格式化。
 
 ```typescript
 import { CommunicationProtocolEnum, DaprClient, DaprServer } from "@dapr/dapr";
@@ -105,7 +105,7 @@ const client = new DaprClient(clientOptions);
 
 ## 注册 Actor
 
-Initialize and register your actors by using the `DaprServer` package:
+通过使用`DaprServer`包初始化和注册您的Actor：
 
 ```typescript
 import { DaprServer } from "@dapr/dapr";
@@ -134,9 +134,9 @@ const resRegisteredActors = await server.actor.getRegisteredActors();
 console.log(`Registered Actors: ${JSON.stringify(resRegisteredActors)}`);
 ```
 
-## Invoking Actor Methods
+## 调用 Actor 的方法:
 
-After Actors are registered, create a Proxy object that implements `ParkingSensorInterface` using the `ActorProxyBuilder`. You can invoke the actor methods by directly calling methods on the Proxy object. Internally, it translates to making a network call to the Actor API and fetches the result back.
+注册完 Actors 后，使用 `ActorProxyBuilder` 创建一个实现 `ParkingSensorInterface` 的代理对象。 您可以通过直接在代理对象上调用方法来调用 actor 的方法。 在内部，它会调用 Actor API 进行网络请求，并获取结果返回。
 
 ```typescript
 import { ActorId, DaprClient } from "@dapr/dapr";
@@ -160,7 +160,7 @@ const actor = builder.build(new ActorId("my-actor"));
 await actor.carEnter();
 ```
 
-## Using states with Actor
+## 使用状态与Actor
 
 ```ts
 import { AbstractActor } from "@dapr/dapr";
@@ -191,13 +191,13 @@ export default class ActorStateExample extends AbstractActor implements ActorSta
 
 ## Actor Timer 和 Reminder
 
-The JS SDK supports actors that can schedule periodic work on themselves by registering either timers or reminders. The main difference between timers and reminders is that the Dapr actor runtime does not retain any information about timers after deactivation, but persists reminders information using the Dapr actor state provider.
+Actor 可以通过注册 Timer 或 Reminder 来安排自己的周期性任务。 定时器和提醒的主要区别在于，Dapr actor 运行时在停用后不保留任何有关定时器的信息，而使用 Dapr actor 状态提供程序持久化提醒的信息。
 
-This distinction allows users to trade off between light-weight but stateless timers versus more resource-demanding but stateful reminders.
+这种区别允许用户在轻量级但无状态的timer和需要更多资源但有状态的reminder之间进行权衡。
 
-The scheduling interface of timers and reminders is identical. For an more in-depth look at the scheduling configurations see the [actors timers and reminders docs]({{< ref "howto-actors.md#actor-timers-and-reminders" >}}).
+Timer 和 Reminder 的调度接口定义是完全相同的。 如需更深入地了解调度配置，请参阅 [Actor Timer 和 Reminder 文档]({{< ref "howto-actors.md#actor-timers-and-reminders" >}})。
 
-### Actor Timers
+### Actor Timer
 
 ```typescript
 // ...
@@ -218,7 +218,7 @@ await actor.registerActorTimer(
 await actor.unregisterActorTimer("timer-id");
 ```
 
-### Actor Reminders
+### Actor Reminder
 
 ```typescript
 // ...
@@ -238,7 +238,7 @@ await actor.registerActorReminder(
 await actor.unregisterActorReminder("reminder-id");
 ```
 
-To handle the callback, you need to override the default `receiveReminder` implementation in your actor. For example, from our original actor implementation:
+要处理回调，您需要在您的actor中重写默认的`receiveReminder`实现。 例如，从我们的原始actor实现：
 
 ```ts
 export default class ParkingSensorImpl extends AbstractActor implements ParkingSensorInterface {
@@ -255,4 +255,4 @@ export default class ParkingSensorImpl extends AbstractActor implements ParkingS
 }
 ```
 
-For a full guide on actors, visit [How-To: Use virtual actors in Dapr]({{< ref howto-actors.md >}}).
+有关 Actor 的完整指南，请访问 [操作方法：在 Dapr 中使用 Actor ]({{< ref howto-actors.md >}})。

@@ -3,20 +3,20 @@ type: docs
 title: "操作方法：查询状态"
 linkTitle: "操作方法：查询状态"
 weight: 250
-description: "Use the Query API for querying state stores"
+description: "使用查询API查询状态存储"
 ---
 
 {{% alert title="alpha" color="warning" %}}
 状态查询 API 处于 **alpha** 阶段。
 {{% /alert %}}
 
-With the state query API, you can retrieve, filter, and sort the key/value data stored in state store components. The query API is not a replacement for a complete query language.
+使用状态查询 API，您可以检索、过滤和排序存储在状态存储组件中的键/值数据。 查询 API 不能替代完整的查询语言。
 
-即使状态存储是键/值存储， `value` 也可能是具有自己的层次结构、键和值的 JSON 文档。 The query API allows you to use those keys/values to retrieve corresponding documents.
+即使状态存储是键/值存储， `value` 也可能是具有自己的层次结构、键和值的 JSON 文档。 查询 API 允许您使用这些键和值来检索相应的文档。
 
 ## Querying the state
 
-Submit query requests via HTTP POST/PUT or gRPC. The body of the request is the JSON map with 3 entries:
+您可以通过 HTTP POST/PUT 或 gRPC 提交查询请求。 请求的正文是包含 3 个条目的 JSON 映射:
 
 - `filter`
 - `sort`
@@ -24,18 +24,23 @@ Submit query requests via HTTP POST/PUT or gRPC. The body of the request is the 
 
 ### `filter`
 
-The `filter` specifies the query conditions in the form of a tree, where each node represents either unary or multi-operand operation.
+`filter` 指定查询条件的形式，其中每个节点代表一元或多元操作。
 
-The following operations are supported:
+支持以下操作：
 
-| Operator | Operands    | 说明                                                           |
-| -------- | ----------- | ------------------------------------------------------------ |
-| `EQ`     | key:value   | key == value                                                 |
-| `IN`     | key:[]value | key == value[0] OR key == value[1] OR ... OR key == value[n] |
-| `AND`    | []operation | operation[0] AND operation[1] AND ... AND operation[n]       |
-| `OR`     | []operation | operation[0] OR operation[1] OR ... OR operation[n]          |
+| 运算符   | 操作数         | 说明                                                           |
+| ----- | ----------- | ------------------------------------------------------------ |
+| `EQ`  | key:value   | key == value                                                 |
+| `NEQ` | key:value   | key != value                                                 |
+| `GT`  | key:value   | key > value                                                  |
+| `GTE` | key:value   | key >= value                                                 |
+| `LT`  | key:value   | key < value                                                  |
+| `LTE` | key:value   | key <= value                                                 |
+| `IN`  | key:[]value | key == value[0] OR key == value[1] OR ... OR key == value[n] |
+| `AND` | []operation | operation[0] AND operation[1] AND ... AND operation[n]       |
+| `OR`  | []operation | operation[0] OR operation[1] OR ... OR operation[n]          |
 
-The `key` in the operand is similar to the JSONPath notation. Each dot in the key indicates a nested JSON structure. For example, consider this structure:
+操作数中的`key`与JSONPath表示法类似。 键中的每个点表示一个嵌套的JSON结构。 例如，考虑这个结构：
 
 ```json
 {
@@ -53,73 +58,73 @@ The `key` in the operand is similar to the JSONPath notation. Each dot in the ke
 }
 ```
 
-To compare the value of the color code, the key will be `shape.color.code`.
+要比较颜色代码的值，键将是`shape.color.code`。
 
-If the `filter` section is omitted, the query returns all entries.
+如果省略 `filter` 部分，则查询将返回所有条目。
 
 ### `sort`
 
-The `sort` is an ordered array of `key:order` pairs, where:
+`sort` 是一个有序数组，其中包含 `key:order` 对，其中：
 
-- `key` is a key in the state store
-- `order` is an optional string indicating sorting order:
-  - `"ASC"` for ascending
-  - `"DESC"` for descending  
-    If omitted, ascending order is the default.
+- `key` 是状态存储中的键
+- `order` 是一个可选字符串，表示排序顺序：
+  - `"ASC"` 表示升序
+  - `"DESC"`用于降序  
+    如果省略，升序是默认值。
 
 ### `page`
 
-The `page` contains `limit` and `token` parameters.
+`page` 包含 `limit` 和 `token` 参数。
 
-- `limit` sets the page size.
-- `token` is an iteration token returned by the component, used in subsequent queries.
+- `limit` 设置页面大小。
+- `token` 是组件返回的迭代令牌，用于后续查询。
 
-Behind the scenes, this query request is translated into the native query language and executed by the state store component.
+在后台，此查询请求被转换为本机查询语言，并由状态存储组件执行。
 
-## Example data and query
+## 示例数据和查询
 
-Let's look at some real examples, ranging from simple to complex.
+让我们看一些真实例子，从简单到复杂。
 
-As a dataset, consider a [collection of employee records](../query-api-examples/dataset.json) containing employee ID, organization, state, and city. Notice that this dataset is an array of key/value pairs, where:
+作为数据集，考虑包含员工记录的[集合](../query-api-examples/dataset.json)，其中包含员工 ID、组织、州和城市。 请注意，此数据集是一个键/值对数组，其中：
 
-- `key` is the unique ID
-- `value` is the JSON object with employee record.
+- `key` 是唯一的 ID
+- `value` 是具有员工记录的 JSON 对象。
 
-To better illustrate functionality, organization name (org) and employee ID (id) are a nested JSON person object.
+为了更好地说明功能，组织名称（org）和员工ID（id）作为嵌套的JSON人员对象。
 
-Get started by creating an instance of MongoDB, which is your state store.
+首先，您需要创建 MongoDB 的实例，这是您的状态存储。
 
 ```bash
 docker run -d --rm -p 27017:27017 --name mongodb mongo:5
 ```
 
-Next, start a Dapr application. Refer to the [component configuration file](../query-api-examples/components/mongodb/mongodb.yml), which instructs Dapr to use MongoDB as its state store.
+接下来，启动一个 Dapr 应用程序。 请参阅 [组件配置文件](../query-api-examples/components/mongodb/mongodb.yml)，其中指示 Dapr 使用 MongoDB 作为其状态存储。
 
 ```bash
 dapr run --app-id demo --dapr-http-port 3500 --resources-path query-api-examples/components/mongodb
 ```
 
-Populate the state store with the employee dataset, so you can query it later.
+使用员工数据集填充状态存储，以便以后可以查询它。
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d @query-api-examples/dataset.json http://localhost:3500/v1.0/state/statestore
 ```
 
-Once populated, you can examine the data in the state store. In the image below, a section of the MongoDB UI displays employee records.
+填充后，可以检查状态存储中的数据。 在下面的图像中，MongoDB UI的一部分显示员工记录。
 
-<img src="/images/state-management-query-mongodb-dataset.png" width=500 alt="Sample dataset" class="center">
+<img src="/images/state-management-query-mongodb-dataset.png" width=500 alt="示例数据集" class="center">
 
-Each entry has the `_id` member as a concatenated object key, and the `value` member containing the JSON record.
+每个条目都有 `_id` 成员作为串联的对象键， `value` 包含 JSON 记录的成员。
 
-The query API allows you to select records from this JSON structure.
+查询 API 允许您从此 JSON 结构中选择记录。
 
-Now you can run the example queries.
+现在，您可以运行示例查询。
 
-### Example 1
+### 示例 1
 
-First, find all employees in the state of California and sort them by their employee ID in descending order.
+首先，找到加利福尼亚州的所有员工，并按其员工 ID 降序排序。
 
-This is the [query](../query-api-examples/query1.json):
+这是 [查询](../query-api-examples/query1.json)：
 ```json
 {
     "filter": {
@@ -134,7 +139,7 @@ This is the [query](../query-api-examples/query1.json):
 }
 ```
 
-An equivalent of this query in SQL is:
+在 SQL 中，此查询的等效项是：
 
 ```sql
 SELECT * FROM c WHERE
@@ -143,7 +148,7 @@ ORDER BY
   person.id DESC
 ```
 
-Execute the query with the following command:
+使用以下命令执行查询：
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
 
@@ -165,7 +170,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 
 {{< /tabs >}}
 
-The query result is an array of matching key/value pairs in the requested order:
+查询结果是按请求的顺序排列的匹配键/值对的数组：
 
 ```json
 {
@@ -222,11 +227,11 @@ The query result is an array of matching key/value pairs in the requested order:
 }
 ```
 
-### Example 2
+### 示例 2
 
-Now, find all employees from the "Dev Ops" and "Hardware" organizations.
+现在，让我们查找"Dev Ops"和"Hardware"组织中的所有员工。
 
-This is the [query](../query-api-examples/query2.json):
+这是 [查询](../query-api-examples/query2.json):
 
 ```json
 {
@@ -236,14 +241,14 @@ This is the [query](../query-api-examples/query2.json):
 }
 ```
 
-An equivalent of this query in SQL is:
+在 SQL 中，此查询的等效项是：
 
 ```sql
 SELECT * FROM c WHERE
   person.org IN ("Dev Ops", "Hardware")
 ```
 
-Execute the query with the following command:
+使用以下命令执行查询：
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
 
@@ -265,18 +270,18 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 
 {{< /tabs >}}
 
-Similar to the previous example, the result is an array of matching key/value pairs.
+与前面的示例类似，结果是一个匹配键/值对的数组。
 
-### Example 3
+### 示例 3
 
-In this example, find:
+在这个示例中，查找：
 
-- All employees from the "Dev Ops" department.
-- Employees from the "Finance" departing residing in the states of Washington and California.
+- "Dev Ops" 部门的所有员工。
+- 来自“Finance”部门的员工居住在华盛顿州和加利福尼亚州。
 
-In addition, sort the results first by state in descending alphabetical order, then by employee ID in ascending order. Let's process up to 3 records at a time.
+此外，让我们先按州（按字母降序）对结果进行排序，然后按员工 ID（升序）对结果进行排序。 另外，让我们一次最多处理 3 条记录。
 
-This is the [query](../query-api-examples/query3.json):
+这是 [查询](../query-api-examples/query3.json):
 
 ```json
 {
@@ -312,7 +317,7 @@ This is the [query](../query-api-examples/query3.json):
 }
 ```
 
-An equivalent of this query in SQL is:
+在 SQL 中，此查询的等效项是：
 
 ```sql
 SELECT * FROM c WHERE
@@ -324,7 +329,7 @@ ORDER BY
 LIMIT 3
 ```
 
-Execute the query with the following command:
+使用以下命令执行查询：
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
 
@@ -346,7 +351,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 
 {{< /tabs >}}
 
-Upon successful execution, the state store returns a JSON object with a list of matching records and the pagination token:
+成功执行后，状态存储将返回一个 JSON 对象，其中包含匹配记录列表和分页标记：
 
 ```json
 {
@@ -392,7 +397,7 @@ Upon successful execution, the state store returns a JSON object with a list of 
 }
 ```
 
-The pagination token is used "as is" in the [subsequent query](../query-api-examples/query3-token.json) to get the next batch of records:
+分页标记在 [后续查询](../query-api-examples/query3-token.json) 中"按原样"使用，以获取下一批记录：
 
 ```json
 {
@@ -449,7 +454,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 
 {{< /tabs >}}
 
-And the result of this query is:
+此查询的结果是：
 
 ```json
 {
@@ -495,20 +500,20 @@ And the result of this query is:
 }
 ```
 
-That way you can update the pagination token in the query and iterate through the results until no more records are returned.
+这样，您可以更新查询中的分页令牌并循环访问结果，直到不再返回任何记录。
 
-## Limitations
+## 局限性
 
-The state query API has the following limitations:
+状态查询 API 具有以下限制：
 
-- To query actor states stored in a state store, you need to use the query API for the specific database. See [querying actor state]({{< ref "state-management-overview.md#querying-actor-state" >}}).
-- The API does not work with Dapr [encrypted state stores]({{< ref howto-encrypt-state >}}) capability. Since the encryption is done by the Dapr runtime and stored as encrypted data, then this effectively prevents server side querying.
+- 要查询存储在状态存储中的 actor 状态，您需要对特定数据库使用查询 API。 查看 [查询 actor 状态]({{< ref "state-management-overview.md#querying-actor-state" >}}).
+- 该 API 不适用于 Dapr [加密状态存储]({{< ref howto-encrypt-state >}})功能。 由于加密是由 Dapr 运行时完成并存储为加密数据，因此这有效地阻止了服务器端查询。
 
-You can find additional information in the [related links]({{< ref "#related-links" >}}) section.
+您可以在 [相关链接]({{< ref "#related-links" >}}) 部分中找到更多信息。
 
 ## 相关链接
 
-- Refer to the [query API reference]({{< ref "state_api.md#state-query" >}}).
-- See the [state store components that implement query support]({{< ref supported-state-stores.md >}}).
-- View the [state store query API implementation guide](https://github.com/dapr/components-contrib/blob/master/state/README.md#implementing-state-query-api).
-- See how to [query Redis state store]({{< ref "setup-redis.md#querying-json-objects" >}}).
+- 请参阅 [查询 API 参考]({{< ref "state_api.md#state-query" >}}).
+- 请参阅 [实现查询支持的状态存储组件]({{< ref supported-state-stores.md >}}).
+- 查看 [状态存储查询 API 实现指南](https://github.com/dapr/components-contrib/blob/master/state/README.md#implementing-state-query-api).
+- 了解如何 [查询 Redis 状态存储]({{< ref "setup-redis.md#querying-json-objects" >}}).

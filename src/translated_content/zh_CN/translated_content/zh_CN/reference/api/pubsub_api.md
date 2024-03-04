@@ -178,7 +178,7 @@ A JSON-encoded array of strings.
     "topic": "newOrder",
     "route": "/orders",
     "metadata": {
-      "rawPayload": "true",
+      "rawPayload": "true"
     }
   }
 ]
@@ -259,10 +259,17 @@ An HTTP 2xx response denotes that entries (individual messages) inside this bulk
 
 ```json
 {
-  "statuses": {
-    "entryId": "<entryId>",
+  "statuses": 
+  [ 
+    {
+    "entryId": "<entryId1>",
     "status": "<status>"
-  }
+    }, 
+    {
+    "entryId": "<entryId2>",
+    "status": "<status>"
+    } 
+  ]
 }
 ```
 

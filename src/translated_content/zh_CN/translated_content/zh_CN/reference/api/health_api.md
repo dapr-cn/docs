@@ -31,7 +31,7 @@ GET http://localhost:<daprPort>/v1.0/healthz
 | --------- | ------- |
 | daprPort  | Dapr 端口 |
 
-### Examples
+### 示例
 
 ```shell
 curl -i http://localhost:3500/v1.0/healthz

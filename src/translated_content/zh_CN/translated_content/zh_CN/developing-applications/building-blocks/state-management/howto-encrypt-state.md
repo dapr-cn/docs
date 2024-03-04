@@ -6,15 +6,15 @@ weight: 450
 description: "自动加密状态并管理密钥轮换"
 ---
 
-Encrypt application state at rest to provide stronger security in enterprise workloads or regulated environments. Dapr offers automatic client-side encryption based on [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) in [Galois/Counter Mode (GCM)](https://en.wikipedia.org/wiki/Galois/Counter_Mode), supporting keys of 128, 192, and 256-bits.
+对应用程序静态状态进行加密，以在企业工作负载或受监管的环境中提供更强大的安全性。 Dapr 基于 [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) 在 [Galois/Counter Mode (GCM)](https://en.wikipedia.org/wiki/Galois/Counter_Mode) 上提供自动客户端端加密，支持 128、192 和 256 位密钥。
 
-In addition to automatic encryption, Dapr supports primary and secondary encryption keys to make it easier for developers and ops teams to enable a key rotation strategy. This feature is supported by all Dapr state stores.
+除了自动加密之外，Dapr 还支持主密钥和辅助加密密钥，使开发人员和运营团队能够更轻松地启用密钥轮换策略。 所有 Dapr 状态存储都支持此功能。
 
-The encryption keys are always fetched from a secret, and cannot be supplied as plaintext values on the `metadata` section.
+加密密钥始终从一个密钥中提取，并且不能作为明文值提供在 `metadata` 部分。
 
-## Enabling automatic encryption
+## 启用自动加密
 
-Add the following `metadata` section to any Dapr supported state store:
+将以下 `metadata` 部分添加到任何 Dapr 支持的状态存储中：
 
 ```yaml
 metadata:
@@ -24,7 +24,7 @@ metadata:
     key: mykey # key is optional.
 ```
 
-For example, this is the full YAML of a Redis encrypted state store:
+例如，这是 Redis 加密状态存储的完整 YAML:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -45,20 +45,20 @@ spec:
       key: mykey
 ```
 
-You now have a Dapr state store configured to fetch the encryption key from a secret named `mysecret`, containing the actual encryption key in a key named `mykey`.
+现在你有一个 Dapr 状态存储，它被配置为从一个名为 `mysecret` 的秘密中获取加密密钥，在一个名为 `mykey` 的密钥中包含实际的加密密钥。
 
-The actual encryption key *must* be a valid, hex-encoded encryption key. While 192-bit and 256-bit keys are supported, it's recommended you use 128-bit encryption keys. Dapr errors and exists if the encryption key is invalid.
+实际的加密密钥 *必须* 是有效的、十六进制编码的加密密钥。 虽然支持192位和256位密钥，但建议您使用128位加密密钥。 如果加密密钥无效，Dapr 将出错并退出。
 
-For example, you can generate a random, hex-encoded 128-bit (16-byte) key with:
+例如，您可以使用以下方法生成一个随机的十六进制编码的128位（16字节）密钥：
 
 ```sh
 openssl rand 16 | hexdump -v -e '/1 "%02x"'
 # Result will be similar to "cb321007ad11a9d23f963bff600d58e0"
 ```
 
-*Note that the secret store does not have to support keys.*
+*请注意，密钥存储不一定要支持keys.*
 
-## Key rotation
+## 密钥轮换
 
 为了支持密钥轮换，Dapr 提供了一种指定辅助加密密钥的方法：
 
@@ -74,24 +74,24 @@ metadata:
       key: mykey2
 ```
 
-When Dapr starts, it fetches the secrets containing the encryption keys listed in the `metadata` section. Dapr automatically knows which state item has been encrypted with which key, as it appends the `secretKeyRef.name` field to the end of the actual state key.
+当Dapr启动时，它将获取包含 `metadata` 部分中列出的加密密钥的秘密。 Dapr 自动知道哪个状态项已被哪个密钥加密，因为它会将 `secretKeyRef.name` 字段附加到实际状态密钥的末尾。
 
-To rotate a key,
+要旋转密钥，
 
-1. Change the `primaryEncryptionKey` to point to a secret containing your new key.
-1. Move the old primary encryption key to the `secondaryEncryptionKey`.
+1. 将`primaryEncryptionKey`更改为指向包含您新密钥的秘密。
+1. 将旧的主加密密钥移动到`secondaryEncryptionKey`。
 
-New data will be encrypted using the new key, and any retrieved old data  will be decrypted using the secondary key.
+新数据将使用新密钥进行加密，检索到的旧数据将使用辅助密钥进行解密。
 
-Any updates to data items encrypted with the old key will be re-encrypted using the new key.
+对使用旧密钥加密的数据项的任何更新都将使用新密钥重新加密。
 
 {{% alert title="Note" color="primary" %}}
-when you rotate a key, data encrypted with the old key is not automatically re-encrypted unless your application writes it again. If you remove the rotated key (the now-secondary encryption key), you will not be able to access data that was encrypted with that.
+当您旋转密钥时，使用旧密钥加密的数据不会自动重新加密，除非您的应用程序再次写入它。 如果您移除旋转的密钥（现在是次要的加密密钥），您将无法访问使用该密钥加密的数据。
 
 {{% /alert %}}
 
 ## 相关链接
 
-- [Security overview]({{< ref "security-concept.md" >}})
-- [State store query API implementation guide](https://github.com/dapr/components-contrib/blob/master/state/README.md#implementing-state-query-api)
-- [State store components]({{< ref "supported-state-stores.md" >}})
+- [安全概述]({{< ref "security-concept.md" >}})
+- [状态存储查询 API 实现指南](https://github.com/dapr/components-contrib/blob/master/state/README.md#implementing-state-query-api)
+- [状态存储组件]({{< ref "supported-state-stores.md" >}})

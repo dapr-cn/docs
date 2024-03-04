@@ -68,6 +68,8 @@ POST http://localhost:3500/v1.0/state/myStore?metadata.contentType=application/j
 ```
 > All URL parameters are case-sensitive.
 
+> Since `||` is a reserved string it cannot be used in the `<state key>` field.
+
 #### 请求正文
 
 A JSON array of state objects. Each state object is comprised with the following fields:

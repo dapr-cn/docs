@@ -23,20 +23,21 @@ spec:
   version: v1
   metadata:
   - name: streamName
-    value: KINESIS_STREAM_NAME # Kinesis stream name
+    value: "KINESIS_STREAM_NAME" # Kinesis stream name
   - name: consumerName
-    value: KINESIS_CONSUMER_NAME # Kinesis consumer name
+    value: "KINESIS_CONSUMER_NAME" # Kinesis consumer name
   - name: mode
-    value: shared # shared - Shared throughput or extended - Extended/Enhanced fanout
+    value: "shared" # shared - Shared throughput or extended - Extended/Enhanced fanout
   - name: region
-    value: AWS_REGION #replace
+    value: "AWS_REGION" #replace
   - name: accessKey
-    value: AWS_ACCESS_KEY # replace
+    value: "AWS_ACCESS_KEY" # replace
   - name: secretKey
-    value: AWS_SECRET_KEY #replace
+    value: "AWS_SECRET_KEY" #replace
   - name: sessionToken
-    value: *****************
-
+    value: "*****************"
+  - name: direction
+    value: "input, output"
 ```
 {{% alert title="Warning" color="warning" %}}
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件，参考 [这里]({{< ref component-secrets.md >}})。
@@ -44,15 +45,16 @@ spec:
 
 ## 元数据字段规范
 
-| Field        | 必填 | 绑定支持   | 详情                                                                                                                                                                                                                           | 示例                       |
-| ------------ |:--:| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| mode         | 否  | Input  | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"` |
-| streamName   | 是  | 输入/输出  | AWS Kinesis 流名称                                                                                                                                                                                                              | `"stream"`               |
-| consumerName | 是  | Input  | AWS Kinesis 消费者名称                                                                                                                                                                                                            | `"myconsumer"`           |
-| region       | 是  | 输出     | 部署 AWS Kinesis 实例的特定 AWS 区域                                                                                                                                                                                                  | `"us-east-1"`            |
-| accessKey    | 是  | 输出     | 要访问此资源的 AWS 访问密钥                                                                                                                                                                                                             | `"key"`                  |
-| secretKey    | 是  | Output | 要访问此资源的 AWS 密钥访问 Key                                                                                                                                                                                                         | `"secretAccessKey"`      |
-| sessionToken | 否  | Output | 要使用的 AWS 会话令牌                                                                                                                                                                                                                | `"sessionToken"`         |
+| Field          | Required | 绑定支持   | 详情                                                                                                                                                                                                                           | 示例                                       |
+| -------------- |:--------:| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `mode`         |    否     | Input  | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"`                 |
+| `streamName`   |    是     | 输入/输出  | AWS Kinesis 流名称                                                                                                                                                                                                              | `"stream"`                               |
+| `consumerName` |    是     | Input  | AWS Kinesis 消费者名称                                                                                                                                                                                                            | `"myconsumer"`                           |
+| `region`       |    是     | 输出     | 部署 AWS Kinesis 实例的特定 AWS 区域                                                                                                                                                                                                  | `"us-east-1"`                            |
+| `accessKey`    |    是     | 输出     | The AWS Access Key to access this resource                                                                                                                                                                                   | `"key"`                                  |
+| `secretKey`    |    是     | Output | The AWS Secret Access Key to access this resource                                                                                                                                                                            | `"secretAccessKey"`                      |
+| `sessionToken` |    否     | Output | The AWS session token to use                                                                                                                                                                                                 | `"sessionToken"`                         |
+| `direction`    |    否     | 输入/输出  | The direction of the binding                                                                                                                                                                                                 | `"input"`, `"output"`, `"input, output"` |
 
 {{% alert title="Important" color="warning" %}}
 当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。

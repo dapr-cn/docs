@@ -35,6 +35,10 @@ spec:
     value: "jill@dapr.io" # optional
   - name: emailBcc
     value: "bob@dapr.io" # optional
+  - name: dynamicTemplateId
+    value: "d-123456789" # optional
+  - name: dynamicTemplateData
+    value: '{"customer":{"name":"John Smith"}}' # optional
   - name: apiKey
     value: "YOUR_API_KEY" # required, this is your SendGrid key
 ```
@@ -45,17 +49,16 @@ spec:
 
 ## 元数据字段规范
 
-| Field         | 必填 | 绑定支持   | 详情                                                                                                                                              | 示例                       |
-| ------------- |:--:| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| apiKey        | 是  | Output | SendGrid API key, this should be considered a secret value                                                                                      | `"apikey"`               |
-| emailFrom     | 否  | 输出     | 指定邮件消息的发件人地址 Only a single email address is allowed. 可选参数，[参照](#example-request-payload)                                                        | `"me@example.com"`       |
-| emailFromName | 否  | 输出     | If set this specifies the 'from' name of the email message. 可选参数，[参照](#example-request-payload)                                                 | `"me"`                   |
-| emailTo       | 否  | 输出     | If set this specifies the 'to' email address of the email message. Only a single email address is allowed. 可选参数，[参照](#example-request-payload)  | `"me@example.com"`       |
-| emailToName   | 否  | 输出     | If set this specifies the 'to' name of the email message. 可选参数，[参照](#example-request-payload)                                                   | `"me"`                   |
-| emailCc       | 否  | Output | If set this specifies the 'cc' email address of the email message. Only a single email address is allowed. 可选参数，[参照](#example-request-payload)  | `"me@example.com"`       |
-| emailBcc      | 否  | Output | If set this specifies the 'bcc' email address of the email message. Only a single email address is allowed. 可选参数，[参照](#example-request-payload) | `"me@example.com"`       |
-| subject       | 否  | Output | If set this specifies the subject of the email message. 可选参数，[参照](#example-request-payload)                                                     | `"subject of the email"` |
-
+| Field           | Required | 绑定支持   | 详情                                                                                                                                              | 示例                       |
+| --------------- |:--------:| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `apiKey`        |    是     | Output | SendGrid API key, this should be considered a secret value                                                                                      | `"apikey"`               |
+| `emailFrom`     |    否     | 输出     | 指定邮件消息的发件人地址 Only a single email address is allowed. 可选参数，[参照](#example-request-payload)                                                        | `"me@example.com"`       |
+| `emailFromName` |    否     | 输出     | If set this specifies the 'from' name of the email message. 可选参数，[参照](#example-request-payload)                                                 | `"me"`                   |
+| `emailTo`       |    否     | 输出     | If set this specifies the 'to' email address of the email message. Only a single email address is allowed. 可选参数，[参照](#example-request-payload)  | `"me@example.com"`       |
+| `emailToName`   |    否     | 输出     | If set this specifies the 'to' name of the email message. 可选参数，[参照](#example-request-payload)                                                   | `"me"`                   |
+| `emailCc`       |    否     | Output | If set this specifies the 'cc' email address of the email message. Only a single email address is allowed. 可选参数，[参照](#example-request-payload)  | `"me@example.com"`       |
+| `emailBcc`      |    否     | Output | If set this specifies the 'bcc' email address of the email message. Only a single email address is allowed. 可选参数，[参照](#example-request-payload) | `"me@example.com"`       |
+| `subject`       |    否     | Output | If set this specifies the subject of the email message. 可选参数，[参照](#example-request-payload)                                                     | `"subject of the email"` |
 
 ## 绑定支持
 
@@ -75,6 +78,21 @@ spec:
     "subject": "An email from Dapr SendGrid binding"
   },
   "data": "<h1>Testing Dapr Bindings</h1>This is a test.<br>Bye!"
+}
+```
+
+## Dynamic templates
+If a dynamic template is used, a `dynamicTemplateId` needs to be provided and then the `dynamicTemplateData` is used:
+
+```json
+{
+  "operation": "create",
+  "metadata": {
+    "emailTo": "changeme@example.net",
+    "subject": "An template email from Dapr SendGrid binding",
+    "dynamicTemplateId": "d-123456789",
+    "dynamicTemplateData": "{\"customer\":{\"name\":\"John Smith\"}}"
+  }
 }
 ```
 

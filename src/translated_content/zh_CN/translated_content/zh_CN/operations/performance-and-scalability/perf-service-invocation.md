@@ -54,7 +54,7 @@ Dapr 由一个数据平面、在应用旁边运行的 sidecar 以及一个配置
 
 ### 控制平面性能
 
-在非 HA 模式下运行时，Dapr 控制平面总共使用 0.009 个 vCPU 和 61.6 Mb，这意味着每个系统组件只有一个副本。 在高可用性生产设置中运行时，Dapr 控制平面消耗约 0.02 个 vCPU 和 185 Mb。
+The Dapr control plane uses a total of 0.009 vCPU and 61.6 Mb when running in non-HA mode, meaning a single replica per system component. 在高可用性生产设置中运行时，Dapr 控制平面消耗约 0.02 个 vCPU 和 185 Mb。
 
 | Component        | vCPU  | Memory  |
 | ---------------- | ----- | ------- |

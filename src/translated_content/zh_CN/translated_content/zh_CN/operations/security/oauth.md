@@ -14,7 +14,7 @@ Dapr OAuth 2.0 [middleware]({{< ref "middleware.md" >}}) allows you to enable [O
 
 不同的授权服务器提供不同的应用注册体验。 下面是一些示例：
 <!-- IGNORE_LINKS -->
-* [Azure AAD](https://docs.microsoft.com/azure/active-directory/develop/v1-protocols-oauth-code)
+* [Microsoft Entra ID](https://docs.microsoft.com/azure/active-directory/develop/v1-protocols-oauth-code)
 * [Facebook](https://developers.facebook.com/apps)
 * [Fitbit](https://dev.fitbit.com/build/reference/web-api/oauth2/)
 * [GitHub](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
@@ -22,7 +22,7 @@ Dapr OAuth 2.0 [middleware]({{< ref "middleware.md" >}}) allows you to enable [O
 * [Slack](https://api.slack.com/docs/oauth)
 * [Twitter](http://apps.twitter.com/)
 <!-- END_IGNORE -->
-To figure the Dapr OAuth middleware, you'll need to collect the following information:
+To configure the Dapr OAuth middleware, you'll need to collect the following information:
 
 * 客户端ID(参考 [这里](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
 * 客户端密钥(参考 [这里](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/))
@@ -33,12 +33,12 @@ To figure the Dapr OAuth middleware, you'll need to collect the following inform
 一些流行的授权服务器的授权/令牌 URL。
 
 <!-- IGNORE_LINKS -->
-| 服务器       | 授权网址                                                          | 令牌网址                                                                                      |
-| --------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Azure AAD | <https://login.microsoftonline.com/{tenant}/oauth2/authorize> | <https://login.microsoftonline.com/{tenant}/oauth2/token>                                 |
-| GitHub    | <https://github.com/login/oauth/authorize>                    | <https://github.com/login/oauth/access_token>                                             |
-| 谷歌        | <https://accounts.google.com/o/oauth2/v2/auth>                | <https://accounts.google.com/o/oauth2/token> <https://www.googleapis.com/oauth2/v4/token> |
-| Twitter   | <https://api.twitter.com/oauth/authorize>                     | <https://api.twitter.com/oauth2/token>                                                    |
+| Server             | 授权网址                                                          | 令牌网址                                                                                      |
+| ------------------ | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Microsoft Entra ID | <https://login.microsoftonline.com/{tenant}/oauth2/authorize> | <https://login.microsoftonline.com/{tenant}/oauth2/token>                                 |
+| GitHub             | <https://github.com/login/oauth/authorize>                    | <https://github.com/login/oauth/access_token>                                             |
+| 谷歌                 | <https://accounts.google.com/o/oauth2/v2/auth>                | <https://accounts.google.com/o/oauth2/token> <https://www.googleapis.com/oauth2/v4/token> |
+| Twitter            | <https://api.twitter.com/oauth/authorize>                     | <https://api.twitter.com/oauth2/token>                                                    |
 <!-- END_IGNORE -->
 
 ## 定义中间件组件定义

@@ -10,6 +10,7 @@ aliases:
 ## Component format
 
 To setup Redis configuration store create a component of type `configuration.redis`. See [this guide]({{< ref "howto-manage-configuration.md#configure-a-dapr-configuration-store" >}}) on how to create and apply a configuration store configuration.
+
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -20,19 +21,11 @@ spec:
   version: v1
   metadata:
   - name: redisHost
-    value: <HOST>
+    value: <address>:6379
   - name: redisPassword
-    value: <PASSWORD>
+    value: **************
   - name: enableTLS
-    value: <bool> # Optional. Allowed: true, false.
-  - name: failover
-    value: <bool> # Optional. Allowed: true, false.
-  - name: sentinelMasterName
-    value: <string> # Optional
-  - name: maxRetries
-    value: # Optional
-  - name: maxRetryBackoff
-    value: # Optional
+    value: <bool>
 
 ```
 
@@ -43,16 +36,28 @@ spec:
 
 ## 元数据字段规范
 
-| Field              | 必填 | 详情                                                                                                                                          | 示例                                                              |
-| ------------------ |:--:| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| redisHost          | 是  | Connection-string for the redis host                                                                                                        | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
-| redisPassword      | 是  | Redis的密码 无默认值 可以用`secretKeyRef`来引用密钥。                                                                                                       | `""`, `"KeFg23!"`                                               |
-| enableTLS          | 否  | 如果Redis实例支持使用公共证书的TLS，可以配置为启用或禁用。 默认值为 `"false"`                                                                                            | `"true"`, `"false"`                                             |
-| maxRetries         | 否  | 放弃前的最大重试次数。 默认值为 `3`。                                                                                                                       | `5`, `10`                                                       |
-| maxRetryBackoff    | 否  | Maximum backoff between each retry. 默认值为 2</code> 秒 `; <code>"-1"` 禁用回退。                                                                 | `3000000000`                                                    |
-| failover           | 否  | 已启用故障转移配置的属性。 需要设置 sentinalMasterName。 redisHost 应该是哨兵主机地址。 请参阅 [Redis Sentinel 文档](https://redis.io/docs/manual/sentinel/). 默认值为 `"false"` | `"true"`, `"false"`                                             |
-| sentinelMasterName | 否  | 哨兵主名称。 See [Redis Sentinel Documentation](https://redis.io/docs/manual/sentinel/)                                                           | `""`,  `"127.0.0.1:6379"`                                       |
-
+| Field                 | Required | 详情     | 示例                                                                                                                                                                        |
+| --------------------- |:--------:| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| redisHost             |    是     | Output | The Redis host address | `"localhost:6379"`                                                                                                                               |
+| redisPassword         |    是     | Output | The Redis password | `"password"`                                                                                                                                         |
+| redisUsername         |    否     | Output | Redis 主机的用户名。 默认为空. Make sure your Redis server version is 6 or above, and have created acl rule correctly. | `"username"`                                                |
+| enableTLS             |    否     | Output | `enableTLS` - 如果 Redis 实例支持使用公用证书的 TLS ，那么可以将其配置为启用或禁用 TLS。 Defaults to `"false"` | `"true"`, `"false"`                                                                   |
+| failover              |    否     | Output | 已启用故障转移配置的属性。 Needs sentinelMasterName to be set. Defaults to `"false"` | `"true"`, `"false"`                                                                             |
+| sentinelMasterName    |    否     | Output | The Sentinel master name. See [Redis Sentinel Documentation](https://redis.io/docs/reference/sentinel-clients/) | `""`,  `"127.0.0.1:6379"`                               |
+| redisType             |    否     | Output | The type of Redis. There are two valid values, one is `"node"` for single node mode, the other is `"cluster"` for Redis cluster mode. Defaults to `"node"`. | `"cluster"` |
+| redisDB               |    否     | Output | Database selected after connecting to Redis. If `"redisType"` is `"cluster"`, this option is ignored. Defaults to `"0"`. | `"0"`                                          |
+| redisMaxRetries       |    否     | Output | Maximum number of times to retry commands before giving up. Default is to not retry failed commands.  | `"5"`                                                             |
+| redisMinRetryInterval |    否     | Output | Minimum backoff for Redis commands between each retry. Default is `"8ms"`;  `"-1"` disables backoff. | `"8ms"`                                                            |
+| redisMaxRetryInterval |    否     | Output | Maximum backoff for Redis commands between each retry. Default is `"512ms"`;`"-1"` disables backoff. | `"5s"`                                                             |
+| dialTimeout           |    否     | Output | Dial timeout for establishing new connections. Defaults to `"5s"`.  | `"5s"`                                                                                              |
+| readTimeout           |    否     | Output | Timeout for socket reads. If reached, Redis commands fail with a timeout instead of blocking. Defaults to `"3s"`, `"-1"` for no timeout. | `"3s"`                         |
+| writeTimeout          |    否     | Output | Timeout for socket writes. If reached, Redis commands fail with a timeout instead of blocking. Defaults is readTimeout. | `"3s"`                                          |
+| poolSize              |    否     | Output | Maximum number of socket connections. Default is 10 connections per every CPU as reported by runtime.NumCPU. | `"20"`                                                     |
+| poolTimeout           |    否     | Output | Amount of time client waits for a connection if all connections are busy before returning an error. Default is readTimeout + 1 second. | `"5s"`                           |
+| maxConnAge            |    否     | Output | Connection age at which the client retires (closes) the connection. Default is to not close aged connections. | `"30m"`                                                   |
+| minIdleConns          |    否     | Output | Minimum number of idle connections to keep open in order to avoid the performance degradation associated with creating new connections. Defaults to `"0"`. | `"2"`        |
+| idleCheckFrequency    |    否     | Output | Frequency of idle checks made by idle connections reaper. Default is `"1m"`. `"-1"` disables idle connections reaper. | `"-1"`                                            |
+| idleTimeout           |    否     | Output | Amount of time after which the client closes idle connections. Should be less than server's timeout. Default is `"5m"`. `"-1"` disables idle timeout check. | `"10m"`     |
 
 ## 安装 Redis
 

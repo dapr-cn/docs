@@ -1,8 +1,8 @@
 ---
 type: docs
-title: "Local development"
-linkTitle: "Local development"
+title: "本地开发"
+linkTitle: "本地开发"
 weight: 40
-description: "Capabilities for developing Dapr applications locally"
+description: "在本地开发 Dapr 应用程序的功能"
 ---
 

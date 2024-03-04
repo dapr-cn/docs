@@ -44,21 +44,40 @@ dapr init [flags]
 | N/A                   | DAPR_HELM_REPO_USERNAME     | A username for a private Helm chart | The username required to access the private Dapr Helm chart. If it can be accessed publicly, this env variable does not need to be set                                                                                                                      |
 | N/A                   | DAPR_HELM_REPO_PASSWORD     | A password for a private Helm chart | The password required to access the private Dapr Helm chart. If it can be accessed publicly, this env variable does not need to be set|                                                                                                                     |
 | `--container-runtime` |                               | `docker`                            | Used to pass in a different container runtime other than Docker. Supported container runtimes are: `docker`, `podman`                                                                                                                                       |
-### Examples
+| `--dev`               |                               |                                     | Creates Redis and Zipkin deployments when run in Kubernetes.                                                                                                                                                                                                |
 
-#### 自我托管环境
 
-通过拉取Placement、Redis 和 Zipkin 的容器映像来安装 Dapr。 默认情况下，这些映像是从 Docker Hub提取的。 若要切换到 Dapr Github 容器注册表作为默认注册表，请将 `DAPR_DEFAULT_IMAGE_REGISTRY` 环境变量值设置为 `GHCR`。 若要切换回 Docker Hub作为默认注册表，请取消设置此环境变量。
+### 示例
+
+{{< tabs "Self-hosted" "Kubernetes" >}}
+
+{{% codetab %}}
+
+**Install**
+
+Install Dapr by pulling container images for Placement, Redis, and Zipkin. By default, these images are pulled from Docker Hub.
 
 ```bash
 dapr init
 ```
 
+Dapr can also run [Slim self-hosted mode]({{< ref self-hosted-no-docker.md >}}), without Docker.
+
+```bash
+dapr init -s
+```
+
+> 若要切换到 Dapr Github 容器注册表作为默认注册表，请将 `DAPR_DEFAULT_IMAGE_REGISTRY` 环境变量值设置为 `GHCR`。 若要切换回 Docker Hub作为默认注册表，请取消设置此环境变量。
+
+**Specify a runtime version**
+
 You can also specify a specific runtime version. Be default, the latest version is used.
 
 ```bash
-dapr init --runtime-version 1.4.0
+dapr init --runtime-version 1.13.0
 ```
+
+**Install with image variant**
 
 You can also install Dapr with a particular image variant, for example: [mariner]({{< ref "kubernetes-deploy.md#using-mariner-based-images" >}}).
 
@@ -66,11 +85,7 @@ You can also install Dapr with a particular image variant, for example: [mariner
 dapr init --image-variant mariner
 ```
 
-Dapr can also run [Slim self-hosted mode]({{< ref self-hosted-no-docker.md >}}) without Docker.
-
-```bash
-dapr init -s
-```
+**Use Dapr Installer Bundle**
 
 In an offline or airgap environment, you can [download a Dapr Installer Bundle](https://github.com/dapr/installer-bundle/releases) and use this to install Dapr instead of pulling images from the network.
 
@@ -84,17 +99,17 @@ Dapr can also run in slim self-hosted mode without Docker in an airgap environme
 dapr init -s --from-dir <path-to-installer-bundle-directory>
 ```
 
-You can also specify a private registry to pull container images from. These images need to be published to private registries as shown below to enable Dapr CLI to pull them successfully via the `dapr init` command -
+**Specify private registry**
+
+You can also specify a private registry to pull container images from. These images need to be published to private registries as shown below to enable Dapr CLI to pull them successfully via the `dapr init` command:
 
 1. Dapr 运行时容器镜像（dapr） （通常运行Placement） - dapr/dapr：<version>
 2. Redis 容器镜像（rejson） - dapr/3rdparty/rejson
 3. Zipkin 容器镜像（zipkin） - dapr/3rdparty/zipkin
 
-> 所有Dapr 使用的镜像都需要位于 `dapr` 路径下。
+All the required images used by Dapr needs to be under the `dapr` path. 第三方镜像必须发布到 `dapr/3rdparty` 路径下。
 
-> 第三方镜像必须发布到 `dapr/3rdparty` 路径下。
-
-> image-registry uri follows this format - `docker.io/<username>`
+`image-registry` uri follows the `docker.io/<username>` format.
 
 ```bash
 dapr init --image-registry docker.io/username
@@ -111,7 +126,37 @@ You can specify a different container runtime while setting up Dapr. If you omit
 dapr init --container-runtime podman
 ```
 
-#### Kubernetes 环境
+**Use Docker network**
+
+You can deploy local containers into Docker networks, which is useful for deploying into separate networks or when using Docker Compose for local development to deploy applications.
+
+Create the Docker network.
+
+```bash
+docker network create mynet
+```
+
+Initialize Dapr and specify the created Docker network.
+
+```bash
+dapr init --network mynet
+```
+
+Verify all containers are running in the specified network.
+
+```bash
+docker ps 
+```
+
+Uninstall Dapr from that Docker network.
+
+```bash
+dapr uninstall --all --network mynet
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
 
 ```bash
 dapr init -k
@@ -145,3 +190,7 @@ Scenario 2 : dapr image hosted under a new/different directory in private regist
 ```bash
 dapr init -k --image-registry docker.io/username/<directory-name>
 ```
+
+{{% /codetab %}}
+
+{{< /tabs >}}

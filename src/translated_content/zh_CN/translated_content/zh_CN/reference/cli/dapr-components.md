@@ -31,7 +31,7 @@ dapr components [flags]
 | `--namespace`            |      |         | 列出指定命名空间中的所有组件                                |
 | `--output`, `-o`         |      | `list`  | Output format (options: json or yaml or list) |
 
-### Examples
+### 示例
 
 ```bash
 # List Dapr components in all namespaces in Kubernetes mode

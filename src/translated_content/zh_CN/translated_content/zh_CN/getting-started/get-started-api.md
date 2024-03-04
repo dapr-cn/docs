@@ -6,24 +6,24 @@ weight: 30
 description: "运行 Dapr sidecar 并尝试使用状态 API"
 ---
 
-In this guide, you'll simulate an application by running the sidecar and calling the API directly. After running Dapr using the Dapr CLI, you'll:
+在本指南中，您将通过运行 sidecar 并直接调用 API 来模拟应用程序。 使用 Dapr CLI 运行 Dapr 后，您将：
 
-- Save a state object.
-- Read/get the state object.
-- Delete the state object.
+- 保存状态对象。
+- 阅读/获取状态对象。
+- 删除状态对象。
 
 通过我们的[概念文档]({{< ref state-management >}})了解更多关于状态构建块以及它是如何工作的。
 
 ### 前提
 
-- [Install  Dapr CLI]({{< ref install-dapr-cli.md >}}).
-- [Run `dapr init`]({{< ref install-dapr-selfhost.md>}}).
+- [安装 Dapr CLI]({{< ref install-dapr-cli.md >}}).
+- [运行 `dapr init`]({{< ref install-dapr-selfhost.md>}}).
 
-### Step 1: Run the Dapr sidecar
+### 第 1 步：运行 Dapr sidecar
 
-The [`dapr run`]({{< ref dapr-run.md >}}) command launches an application, together with a sidecar.
+运行 [`dapr run`]({{< ref dapr-run.md >}}) 命令可启动一个应用程序，并与 sidecar 一起运行。
 
-Launch a Dapr sidecar that will listen on port 3500 for a blank application named `myapp`:
+启动一个 Dapr sidecar，它将在端口 3500 上侦听名为 `myapp`的空白应用程序：
 
 ```bash
 dapr run --app-id myapp --dapr-http-port 3500
@@ -31,9 +31,9 @@ dapr run --app-id myapp --dapr-http-port 3500
 
 由于没有使用上述命令定义自定义组件文件夹，因此 Dapr 将使用在 [`dapr init` ]({{< ref "install-dapr-selfhost.md#step-5-verify-components-directory-has-been-initialized" >}}) 期间创建的默认组件定义。
 
-### Step 2: Save state
+### 第 2 步：保存状态
 
-Update the state with an object. 新状态将如下所示：
+更新对象的状态。 新状态将如下所示：
 
 ```json
 [
@@ -44,9 +44,9 @@ Update the state with an object. 新状态将如下所示：
 ]
 ```
 
-Notice, that objects contained in the state each have a `key` assigned with the value `name`. 您将在下一步中使用该 key。
+注意, 状态中包含的对象有一个值为 `name` 的 `key`。 您将在下一步中使用该 key。
 
-Save a new state object using the following command:
+使用以下命令保存一个新的状态对象:
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 {{% codetab %}}
@@ -67,9 +67,9 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": 
 
 {{< /tabs >}}
 
-### Step 3: Get state
+### 第 3 步：获取状态
 
-Retrieve the object you just stored in the state by using the state management API with the key `name`. In the same terminal window, run the following command:
+通过使用状态管理 API，用 key `name` 来检索你刚刚存储在状态中的对象。 在同一个终端窗口中，运行以下命令：
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -91,44 +91,44 @@ Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/state/statestore/name'
 
 {{< /tabs >}}
 
-### Step 4: See how the state is stored in Redis
+### 第 4 步：查看状态在 Redis 中的存储方式
 
-Look in the Redis container and verify Dapr is using it as a state store. Use the Redis CLI with the following command:
+在 Redis 容器中查看并验证Dapr 正在使用它作为状态存储。 通过以下命令使用 Redis CLI：
 
 ```bash
 docker exec -it dapr_redis redis-cli
 ```
 
-List the Redis keys to see how Dapr created a key value pair with the app-id you provided to `dapr run` as the key's prefix:
+列出Redis keys以查看Dapr如何创建一个键值对(您提供给 `dapr run` 的app-id 作为key的前缀)：
 
 ```bash
 keys *
 ```
 
-**Output:**  
+**输出：**  
 `1) "myapp||name"`
 
-View the state values by running:
+查看运行时状态值：
 
 ```bash
 hgetall "myapp||name"
 ```
 
-**Output:**  
+**输出:**  
 `1) "data"`  
 `2) "\"Bruce Wayne\""`  
 `3) "version"`  
 `4) "1"`
 
-Exit the Redis CLI with:
+退出 Redis CLI，使用：
 
 ```bash
 exit
 ```
 
-### Step 5: Delete state
+### 第三步：删除状态
 
-In the same terminal window, delete the`name` state object from the state store.
+在同一个终端窗口中，从状态存储中删除`name` 状态对象。
 
 {{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -150,4 +150,4 @@ Invoke-RestMethod -Method Delete -ContentType 'application/json' -Uri 'http://lo
 
 {{< /tabs >}}
 
-{{< button text="Next step: Dapr Quickstarts >>" page="getting-started/quickstarts" >}}
+{{< button text="下一步：Dapr 快速入门 >>" page="getting-started/quickstarts" >}}

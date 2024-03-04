@@ -1,56 +1,63 @@
 ---
 type: docs
-title: "创建 Azure Kubernetes 服务集群"
+title: "Set up an Azure Kubernetes Service (AKS) cluster"
 linkTitle: "Azure Kubernetes Service （AKS）"
 weight: 2000
 description: >
-  如何在 Azure Kubernetes 集群上设置 Dapr。
+  Learn how to set up an Azure Kubernetes Cluster
 ---
 
-# 设置 Azure Kubernetes 服务集群
+This guide walks you through installing an Azure Kubernetes Service (AKS) cluster. If you need more information, refer to [Quickstart: Deploy an AKS cluster using the Azure CLI](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough)
 
-## Prerequisites
+## 前期准备
 
-- [Docker](https://docs.docker.com/install/)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)
+- Install:
+   - [Docker](https://docs.docker.com/install/)
+   - [kubectl](https://kubernetes.io/docs/tasks/tools/)
+   - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
 
-## 部署 Azure Kubernetes 服务集群
+## Deploy an AKS cluster
 
-This guide walks you through installing an Azure Kubernetes Service cluster. If you need more information, refer to [Quickstart: Deploy an Azure Kubernetes Service (AKS) cluster using the Azure CLI](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough)
+1. In the terminal, log into Azure.
 
-1. Login to Azure
+   ```bash
+   az login
+   ```
 
-```bash
-az login
-```
+1. Set your default subscription:
 
-2. 设置默认订阅
+   ```bash
+   az account set -s [your_subscription_id]
+   ```
 
-```bash
-az account set -s [your_subscription_id]
-```
+1. Create a resource group.
 
-3. 创建资源组
+   ```bash
+   az group create --name [your_resource_group] --location [region]
+   ```
 
-```bash
-az group create --name [your_resource_group] --location [region]
-```
+1. Create an AKS cluster. To use a specific version of Kubernetes, use `--kubernetes-version` (1.13.x or newer version required).
 
-4. 创建 Azure Kubernetes Service 集群
+   ```bash
+   az aks create --resource-group [your_resource_group] --name [your_aks_cluster_name] --node-count 2 --enable-addons http_application_routing --generate-ssh-keys
+   ```
 
-> **注意：** 要使用特定版本的 Kubernetes 请使用 `--kubernetes-version` (1.13.x 或需要更新版本)
+1. Get the access credentials for the AKS cluster.
 
-```bash
-az aks create --resource-group [your_resource_group] --name [your_aks_cluster_name] --node-count 2 --enable-addons http_application_routing --generate-ssh-keys
-```
+   ```bash
+   az aks get-credentials -n [your_aks_cluster_name] -g [your_resource_group]
+   ```
 
-5. 获取 Azure Kubernetes 集群的访问凭据
+## AKS Edge Essentials
+To create a single-machine K8s/K3s Linux-only cluster using Azure Kubernetes Service (AKS) Edge Essentials, you can follow the quickstart guide available at [AKS Edge Essentials quickstart guide](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-quickstart).
 
-```bash
-az aks get-credentials -n [your_aks_cluster_name] -g [your_resource_group]
-```
+{{% alert title="Note" color="primary" %}}
+AKS Edge Essentials does not come with a default storage class, which may cause issues when deploying Dapr. To avoid this, make sure to enable the **local-path-provisioner** storage class on the cluster before deploying Dapr. If you need more information, refer to [Local Path Provisioner on AKS EE](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-howto-use-storage-local-path).
+{{% /alert %}}
 
-## 下一步
+## 相关链接
 
-{{< button text="Install Dapr using the AKS Dapr extension >>" page="azure-kubernetes-service-extension" >}}
+- Learn more about [the Dapr extension for AKS]({{< ref azure-kubernetes-service-extension >}})
+   - [Install the Dapr extension for AKS](https://learn.microsoft.com/azure/aks/dapr)
+   - [Configure the Dapr extension for AKS](https://learn.microsoft.com/azure/aks/dapr-settings)
+   - [Deploy and run workflows with the Dapr extension for AKS](https://learn.microsoft.com/azure/aks/dapr-workflow)

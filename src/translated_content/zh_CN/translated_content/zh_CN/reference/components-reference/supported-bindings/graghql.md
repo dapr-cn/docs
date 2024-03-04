@@ -22,11 +22,11 @@ spec:
   version: v1
   metadata:
     - name: endpoint
-      value:  http://localhost:8080/v1/graphql
+      value: "http://localhost:8080/v1/graphql"
     - name: header:x-hasura-access-key
-      value: adminkey
+      value: "adminkey"
     - name: header:Cache-Control
-      value: no-cache
+      value: "no-cache"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -35,10 +35,11 @@ spec:
 
 ## 元数据字段规范
 
-| Field              | 必填 | 绑定支持   | 详情                                                               | 示例                                        |
-| ------------------ |:--:| ------ | ---------------------------------------------------------------- | ----------------------------------------- |
-| 终结点                | 是  | Output | GraphQL endpoint string See [here](#url-format) for more details | `"http://localhost:4000/graphql/graphql"` |
-| header:[HEADERKEY] | 否  | 输出     | GraphQL header. 指定 `name` 中的 header 键和 `value` 中的 header 值。      | `"no-cache"` （见上文）                        |
+| 字段                       | Required | 绑定支持   | 详情                                                                                                      | 示例                                        |
+| ------------------------ |:--------:| ------ | ------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `endpoint`               |    是     | Output | GraphQL endpoint string See [here](#url-format) for more details                                        | `"http://localhost:4000/graphql/graphql"` |
+| `header:[HEADERKEY]`     |    否     | 输出     | GraphQL header. 指定 `name` 中的 header 键和 `value` 中的 header 值。                                             | `"no-cache"` （见上文）                        |
+| `variable:[VARIABLEKEY]` |    否     | Output | GraphQL query variable. Specify the variable name in the `name`, and the variable value in the `value`. | `"123"` (see below)                       |
 
 ### Endpoint and Header format
 
@@ -62,6 +63,18 @@ in := &dapr.InvokeBindingRequest{
 Name:      "example.bindings.graphql",
 Operation: "query",
 Metadata: map[string]string{ "query": `query { users { name } }`},
+}
+```
+
+To use a `query` that requires [query variables](https://graphql.org/learn/queries/#variables), add a key-value pair to the `metadata` map, wherein every key corresponding to a query variable is the variable name prefixed with `variable:`
+
+```golang
+in := &dapr.InvokeBindingRequest{
+Name: "example.bindings.graphql",
+Operation: "query",
+Metadata: map[string]string{ 
+  "query": `query HeroNameAndFriends($episode: string!) { hero(episode: $episode) { name } }`,
+  "variable:episode": "JEDI",
 }
 ```
 

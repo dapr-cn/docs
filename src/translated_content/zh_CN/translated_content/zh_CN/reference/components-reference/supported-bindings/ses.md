@@ -48,17 +48,17 @@ spec:
 
 ## 元数据字段规范
 
-| Field        | 必填 | 绑定支持   | 详情                                | 示例                  |
-| ------------ |:--:| ------ | --------------------------------- | ------------------- |
-| region       | 否  | Output | 指定的 AWS 区域（region）                | `"eu-west-1"`       |
-| accessKey    | 否  | 输出     | 要访问此资源的 AWS 访问密钥                  | `"key"`             |
-| secretKey    | 否  | 输出     | 要访问此资源的 AWS 密钥访问 Key              | `"secretAccessKey"` |
-| sessionToken | 否  | 输出     | 要使用的 AWS 会话令牌                     | `"sessionToken"`    |
-| emailFrom    | 否  | 输出     | 指定发件人地址 [另见](#example-request)    | `"me@example.com"`  |
-| emailTo      | 否  | Output | 指定收件人地址。 [另见](#example-request)   | `"me@example.com"`  |
-| emailCc      | 否  | Output | 指定抄送人地址。 [另见](#example-request)   | `"me@example.com"`  |
-| emailBcc     | 否  | Output | 指定秘密抄送人地址。 [另见](#example-request) | `"me@example.com"`  |
-| subject      | 否  | Output | 指定邮件信息的主题。 [另见](#example-request) | `"subject of mail"` |
+| Field          | Required | 绑定支持   | 详情                                                | 示例                  |
+| -------------- |:--------:| ------ | ------------------------------------------------- | ------------------- |
+| `region`       |    否     | Output | 指定的 AWS 区域（region）                                | `"eu-west-1"`       |
+| `accessKey`    |    否     | 输出     | The AWS Access Key to access this resource        | `"key"`             |
+| `secretKey`    |    否     | 输出     | The AWS Secret Access Key to access this resource | `"secretAccessKey"` |
+| `sessionToken` |    否     | 输出     | The AWS session token to use                      | `"sessionToken"`    |
+| `emailFrom`    |    否     | 输出     | 指定发件人地址 [另见](#example-request)                    | `"me@example.com"`  |
+| `emailTo`      |    否     | Output | 指定收件人地址。 [另见](#example-request)                   | `"me@example.com"`  |
+| `emailCc`      |    否     | Output | 指定抄送人地址。 [另见](#example-request)                   | `"me@example.com"`  |
+| `emailBcc`     |    否     | Output | 指定秘密抄送人地址。 [另见](#example-request)                 | `"me@example.com"`  |
+| `subject`      |    否     | Output | 指定邮件信息的主题。 [另见](#example-request)                 | `"subject of mail"` |
 
 {{% alert title="Important" color="warning" %}}
 当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。

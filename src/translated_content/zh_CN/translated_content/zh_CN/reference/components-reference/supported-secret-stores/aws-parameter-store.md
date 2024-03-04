@@ -30,6 +30,8 @@ spec:
     value: "[aws_secret_key]"
   - name: sessionToken
     value: "[aws_session_token]"
+  - name: prefix
+    value: "[secret_name]"
 ```
 {{% alert title="Warning" color="warning" %}}
 以上示例将密钥明文存储， 建议将密钥存储在本地，如[Kubernetes密钥存储]({{< ref kubernetes-secret-store.md >}})或 [本地文件]({{< ref file-secret-store.md >}})来安全地存储密钥。
@@ -37,12 +39,13 @@ spec:
 
 ## 元数据字段规范
 
-| Field        | 必填 | 详情                                                                          | 示例                  |
-| ------------ |:--:| --------------------------------------------------------------------------- | ------------------- |
-| region       | 是  | The specific AWS region the AWS SSM Parameter Store instance is deployed in | `"us-east-1"`       |
-| accessKey    | 是  | 要访问此资源的 AWS 访问密钥                                                            | `"key"`             |
-| secretKey    | 是  | 要访问此资源的 AWS 密钥访问 Key                                                        | `"secretAccessKey"` |
-| sessionToken | 否  | 要使用的 AWS 会话令牌                                                               | `"sessionToken"`    |
+| Field        | Required | 详情                                                                              | 示例                  |
+| ------------ |:--------:| ------------------------------------------------------------------------------- | ------------------- |
+| region       |    是     | The specific AWS region the AWS SSM Parameter Store instance is deployed in     | `"us-east-1"`       |
+| accessKey    |    是     | The AWS Access Key to access this resource                                      | `"key"`             |
+| secretKey    |    是     | The AWS Secret Access Key to access this resource                               | `"secretAccessKey"` |
+| sessionToken |    否     | The AWS session token to use                                                    | `"sessionToken"`    |
+| prefix       |    否     | Allows you to specify more than one SSM parameter store secret store component. | `"prefix"`          |
 
 {{% alert title="Important" color="warning" %}}
 当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: "Distributed Lock API reference"
-linkTitle: "Distributed Lock API"
+linkTitle: "分布式锁 API"
 description: "Detailed documentation on the distributed lock API"
 weight: 800
 ---
@@ -64,7 +64,7 @@ The lock endpoint returns the following payload:
 }
 ```
 
-### Examples
+### 示例
 
 ```shell
 curl -X POST http://localhost:3500/v1.0-alpha/lock/redisStore \
@@ -140,7 +140,7 @@ The `status` field contains the following response codes:
 | 2    | Lock belongs to another owner |
 | 3    | Internal error                |
 
-### Examples
+### 示例
 
 ```shell
 curl -X POST http://localhost:3500/v1.0-alpha/unlock/redisStore \

@@ -46,6 +46,9 @@ spec:
   # Optional Input Binding Metadata
   - name: eventSubscriptionName
     value: "[EventSubscriptionName]"
+  # Optional metadata
+  - name: direction
+    value: "input, output"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -54,18 +57,19 @@ spec:
 
 ## 元数据字段规范
 
-| Field                   | 必填 | 绑定支持   | 详情                                                                                                                                                                                                                                                                                                                                       | 示例                                       |
-| ----------------------- |:--:| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `accessKey`             | 是  | Output | The Access Key to be used for publishing an Event Grid Event to a custom topic                                                                                                                                                                                                                                                           | `"accessKey"`                            |
-| `topicEndpoint`         | 是  | 输出     | The topic endpoint in which this output binding should publish events                                                                                                                                                                                                                                                                    | `"topic-endpoint"`                       |
-| `azureTenantId`         | 是  | Input  | The Azure tenant ID of the Event Grid resource                                                                                                                                                                                                                                                                                           | `"tenentID"`                             |
-| `azureSubscriptionId`   | 是  | Input  | The Azure subscription ID of the Event Grid resource                                                                                                                                                                                                                                                                                     | `"subscriptionId"`                       |
-| `azureClientId`         | 是  | Input  | The client ID that should be used by the binding to create or update the Event Grid Event Subscription and to authenticate incoming messages                                                                                                                                                                                             | `"clientId"`                             |
-| `azureClientSecret`     | 是  | Input  | The client id that should be used by the binding to create or update the Event Grid Event Subscription and to authenticate incoming messages                                                                                                                                                                                             | `"clientSecret"`                         |
-| `subscriberEndpoint`    | 是  | Input  | The HTTPS endpoint of the webhook Event Grid sends events (formatted as Cloud Events) to. If you're not re-writing URLs on ingress, it should be in the form of: `"https://[YOUR HOSTNAME]/<path>"`<br/>If testing on your local machine, you can use something like [ngrok](https://ngrok.com) to create a public endpoint. | `"https://[YOUR HOSTNAME]/<path>"` |
-| `handshakePort`         | 是  | Input  | The container port that the input binding listens on when receiving events on the webhook                                                                                                                                                                                                                                                | `"9000"`                                 |
-| `scope`                 | 是  | Input  | The identifier of the resource to which the event subscription needs to be created or updated. See the [scope section](#scope) for more details                                                                                                                                                                                          | `"/subscriptions/{subscriptionId}/"`     |
-| `eventSubscriptionName` | 否  | Input  | The name of the event subscription. Event subscription names must be between 3 and 64 characters long and should use alphanumeric letters only                                                                                                                                                                                           | `"name"`                                 |
+| Field                   | Required | 绑定支持   | 详情                                                                                                                                                                                                                                                                                                                                       | 示例                                       |
+| ----------------------- |:--------:| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `accessKey`             |    是     | Output | The Access Key to be used for publishing an Event Grid Event to a custom topic                                                                                                                                                                                                                                                           | `"accessKey"`                            |
+| `topicEndpoint`         |    是     | 输出     | The topic endpoint in which this output binding should publish events                                                                                                                                                                                                                                                                    | `"topic-endpoint"`                       |
+| `azureTenantId`         |    是     | Input  | The Azure tenant ID of the Event Grid resource                                                                                                                                                                                                                                                                                           | `"tenentID"`                             |
+| `azureSubscriptionId`   |    是     | Input  | The Azure subscription ID of the Event Grid resource                                                                                                                                                                                                                                                                                     | `"subscriptionId"`                       |
+| `azureClientId`         |    是     | Input  | The client ID that should be used by the binding to create or update the Event Grid Event Subscription and to authenticate incoming messages                                                                                                                                                                                             | `"clientId"`                             |
+| `azureClientSecret`     |    是     | Input  | The client id that should be used by the binding to create or update the Event Grid Event Subscription and to authenticate incoming messages                                                                                                                                                                                             | `"clientSecret"`                         |
+| `subscriberEndpoint`    |    是     | Input  | The HTTPS endpoint of the webhook Event Grid sends events (formatted as Cloud Events) to. If you're not re-writing URLs on ingress, it should be in the form of: `"https://[YOUR HOSTNAME]/<path>"`<br/>If testing on your local machine, you can use something like [ngrok](https://ngrok.com) to create a public endpoint. | `"https://[YOUR HOSTNAME]/<path>"` |
+| `handshakePort`         |    是     | Input  | The container port that the input binding listens on when receiving events on the webhook                                                                                                                                                                                                                                                | `"9000"`                                 |
+| `scope`                 |    是     | Input  | The identifier of the resource to which the event subscription needs to be created or updated. See the [scope section](#scope) for more details                                                                                                                                                                                          | `"/subscriptions/{subscriptionId}/"`     |
+| `eventSubscriptionName` |    否     | Input  | The name of the event subscription. Event subscription names must be between 3 and 64 characters long and should use alphanumeric letters only                                                                                                                                                                                           | `"name"`                                 |
+| `direction`             |    否     | 输入/输出  | The direction of the binding                                                                                                                                                                                                                                                                                                             | `"input"`, `"output"`, `"input, output"` |
 
 ### Scope
 
@@ -86,9 +90,9 @@ Scope 是事件订阅需要创建或更新的资源的标识符。 The scope can
 
 - `create`: publishes a message on the Event Grid topic
 
-## Azure AD credentials
+## Microsoft Entra ID credentials
 
-The Azure Event Grid binding requires an Azure AD application and service principal for two reasons:
+The Azure Event Grid binding requires an Microsoft Entra ID application and service principal for two reasons:
 
 - Creating an [event subscription](https://docs.microsoft.com/azure/event-grid/concepts#event-subscriptions) when Dapr is started (and updating it if the Dapr configuration changes)
 - Authenticating messages delivered by Event Hubs to your application.
@@ -102,7 +106,7 @@ Requirements:
 - [Microsoft.Graph module for PowerShell](https://learn.microsoft.com/powershell/microsoftgraph/installation) for PowerShell installed:  
   `Install-Module Microsoft.Graph -Scope CurrentUser -Repository PSGallery -Force`
 
-For the first purpose, you will need to [create an Azure Service Principal](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal). After creating it, take note of the Azure AD application's **clientID** (a UUID), and run the following script with the Azure CLI:
+For the first purpose, you will need to [create an Azure Service Principal](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal). After creating it, take note of the Microsoft Entra ID application's **clientID** (a UUID), and run the following script with the Azure CLI:
 
 ```bash
 # Set the client ID of the app you created
@@ -136,7 +140,7 @@ Connect-MgGraph -Scopes "Application.Read.All","Application.ReadWrite.All"
 ./setup-eventgrid-sp.ps1 $clientId
 ```
 
-> Note: if your directory does not have a Service Principal for the application "Microsoft.EventGrid", you may need to run the command `Connect-MgGraph` and sign in as an admin for the Azure AD tenant (this is related to permissions on the Azure AD directory, and not the Azure subscription). Otherwise, please ask your tenant's admin to sign in and run this PowerShell command: `New-MgServicePrincipal -AppId "4962773b-9cdb-44cf-a8bf-237846a00ab7"` (the UUID is a constant)
+> Note: if your directory does not have a Service Principal for the application "Microsoft.EventGrid", you may need to run the command `Connect-MgGraph` and sign in as an admin for the Microsoft Entra ID tenant (this is related to permissions on the Microsoft Entra ID directory, and not the Azure subscription). Otherwise, please ask your tenant's admin to sign in and run this PowerShell command: `New-MgServicePrincipal -AppId "4962773b-9cdb-44cf-a8bf-237846a00ab7"` (the UUID is a constant)
 
 ### 本地测试
 

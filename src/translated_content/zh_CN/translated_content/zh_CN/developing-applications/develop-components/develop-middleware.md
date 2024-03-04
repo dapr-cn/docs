@@ -1,21 +1,21 @@
 ---
 type: docs
-title: "How to: Author middleware components"
+title: "如何：编写中间件组件"
 linkTitle: "Middleware components"
 weight: 200
-description: "Learn how to develop middleware components"
+description: "学习如何开发中间件组件"
 aliases:
   - /zh-hans/developing-applications/middleware/middleware-overview/
   - /zh-hans/concepts/middleware-concept/
 ---
 
-Dapr allows custom processing pipelines to be defined by chaining a series of middleware components. In this guide, you'll learn how to create a middleware component. To learn how to configure an existing middleware component, see [Configure middleware components]({{< ref middleware.md >}})
+Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 在本指南中，您将了解如何创建一个中间件组件。 要了解如何配置现有中间件组件，请参阅 [配置中间件组件]({{< ref middleware.md >}})
 
-## Writing a custom HTTP middleware
+## 编写自定义HTTP中间件
 
-HTTP middlewares in Dapr wrap standard Go [net/http](https://pkg.go.dev/net/http) handler functions.
+Dapr 中间件在 Dapr 中包装标准的 Go [net/http](https://pkg.go.dev/net/http) 处理函数。
 
-Your middleware needs to implement a middleware interface, which defines a **GetHandler** method that returns a [**http.Handler**](https://pkg.go.dev/net/http#Handler) callback and an **error**:
+您的中间件需要实现一个中间件接口，该接口定义了一个 **GetHandler** 返回 [**http.Handler**](https://pkg.go.dev/net/http#Handler) callback 和 **error**:
 
 ```go
 type Middleware interface {
@@ -23,9 +23,9 @@ type Middleware interface {
 }
 ```
 
-The handler receives a `next` callback that should be invoked to continue processing the request.
+处理程序接收一个`next`回调，应该被调用以继续处理请求。
 
-Your handler implementation can include an inbound logic, outbound logic, or both:
+您的 handler 实现可以包含任何入站（inbound）逻辑和出站（outbound）逻辑或两者兼有：
 
 ```go
 
@@ -50,4 +50,4 @@ func (m *customMiddleware) GetHandler(metadata middleware.Metadata) (func(next h
 
 - [组件schema]({{< ref component-schema.md >}})
 - [配置概览]({{< ref configuration-overview.md >}})
-- [API middleware sample](https://github.com/dapr/samples/tree/master/middleware-oauth-google)
+- [API 中间件示例](https://github.com/dapr/samples/tree/master/middleware-oauth-google)

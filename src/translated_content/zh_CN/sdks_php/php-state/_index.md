@@ -7,7 +7,7 @@ description: 使用方式
 no_list: true
 ---
 
-Dapr offers a great modular approach to using state in your application. The best way to learn the basics is to visit [the howto]({{< ref howto-get-save-state.md >}}).
+Dapr 提供了一个很好的模块化方法来管理您的应用程序中的状态。 学习基础知识的最佳方法是访问 [howto]({{< ref howto-get-save-state.md >}})。
 
 ## Metadata
 
@@ -50,7 +50,7 @@ $app->run(fn(\Dapr\Client\DaprClient $daprClient) => $daprClient->saveState(stor
 
 ## 前缀
 
-硬编码的键名很有用，但是为什么不让状态对象可复用性更高呢？ When committing a transaction or saving an object to state, you can pass a prefix that is applied to every key in the object.
+硬编码的键名很有用，但是为什么不让状态对象可复用性更高呢？ 当提交事务或保存对象为状态时，您可以传递一个应用于对象中每个键的前缀。
 
 {{< tabs "Transaction prefix" "StateManager prefix" >}}
 

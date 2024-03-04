@@ -7,7 +7,7 @@ description: 使用方式
 no_list: true
 ---
 
-With Dapr, you can publish anything, including cloud events. The SDK contains a simple cloud event implementation, but you can also just pass an array that conforms to the cloud event spec or use another library.
+使用 Dapr，您可以发布任何内容，包括 cloud events。 SDK 包含一个简单的 cloud event 实现，但您也可以只传递符合 cloud event 规范的数组或使用其他库。
 
 ```php
 <?php
@@ -18,7 +18,7 @@ $app->post('/publish', function(\Dapr\Client\DaprClient $daprClient) {
 
 有关发布/订阅的详细信息，请查看[操作方法]({{< ref howto-publish-subscribe.md >}})。
 
-## Data content type
+## 数据内容类型
 
 PHP SDK 允许在构建自定义 cloud event 或发布原始数据时设置数据内容类型。
 

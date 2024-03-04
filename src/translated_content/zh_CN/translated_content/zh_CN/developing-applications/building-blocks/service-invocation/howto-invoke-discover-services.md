@@ -3,42 +3,38 @@ type: docs
 title: "操作方法：使用 HTTP 调用服务"
 linkTitle: "操作方法：使用 HTTP 调用"
 description: "使用 servcie invocation 在服务之间调用"
-weight: 2000
+weight: 20
 ---
 
-This article demonstrates how to deploy services each with an unique application ID for other services to discover and call endpoints on them using service invocation over HTTP.
+本文介绍如何使用唯一的应用程序 ID 部署每个服务，以便其他服务可以使用服务调用 API 发现和调用这些端点。
 
-<img src="/images/building-block-service-invocation-example.png" width=1000 height=500 alt="Diagram showing service invocation of example service">
+<img src="/images/building-block-service-invocation-example.png" width=1000 height=500 alt="显示示例服务的服务调用的图示">
 
 {{% alert title="Note" color="primary" %}}
  If you haven't already, [try out the service invocation quickstart]({{< ref serviceinvocation-quickstart.md >}}) for a quick walk-through on how to use the service invocation API.
 
 {{% /alert %}}
 
-## Choose an ID for your service
+## 为您的服务选择一个ID
 
-Dapr allows you to assign a global, unique ID for your app. This ID encapsulates the state for your application, regardless of the number of instances it may have.
+Dapr 允许您为您的应用分配一个全局唯一ID。 此 ID 为您的应用程序封装了状态，不管它可能有多少实例。
 
-{{< tabs Dotnet Java Python Go Javascript Kubernetes>}}
+{{< tabs Python JavaScript ".NET" Java Go Kubernetes >}}
 
 {{% codetab %}}
 
 ```bash
+dapr run  --app-id checkout --app-protocol http --dapr-http-port 3500 -- python3 checkout/app.py
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 dotnet run
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
-
+dapr run --app-id order-processor --app-port 8001  --app-protocol http --dapr-http-port 3501 -- python3 order-processor/app.py
 ```
 
-If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection:
+如果您的应用程序使用TLS，您可以通过设置 `--app-protocol https`，告诉Dapr通过TLS连接调用您的应用程序。
 
 ```bash
+dapr run  --app-id checkout --app-protocol https --dapr-http-port 3500 -- python3 checkout/app.py
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 --app-ssl dotnet run
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --app-ssl dotnet run
-
+dapr run --app-id order-processor --app-port 8001 --app-protocol https --dapr-http-port 3501 -- python3 order-processor/app.py
 ```
 
 {{% /codetab %}}
@@ -46,21 +42,17 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 {{% codetab %}}
 
 ```bash
+dapr run  --app-id checkout --app-protocol http --dapr-http-port 3500 -- npm start
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 mvn spring-boot:run
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
-
+dapr run --app-id order-processor --app-port 5001  --app-protocol http --dapr-http-port 3501 -- npm start
 ```
 
-If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection:
+如果您的应用程序使用TLS，您可以通过设置 `--app-protocol https`，告诉Dapr通过TLS连接调用您的应用程序。
 
 ```bash
+dapr run  --app-id checkout --dapr-http-port 3500 --app-protocol https -- npm start
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 --app-ssl mvn spring-boot:run
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --app-ssl mvn spring-boot:run
-
+dapr run --app-id order-processor --app-port 5001 --dapr-http-port 3501 --app-protocol https -- npm start
 ```
 
 {{% /codetab %}}
@@ -68,21 +60,17 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 {{% codetab %}}
 
 ```bash
+dapr run  --app-id checkout --app-protocol http --dapr-http-port 3500 -- dotnet run
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 -- python3 CheckoutService.py
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
-
+dapr run --app-id order-processor --app-port 7001 --app-protocol http --dapr-http-port 3501 -- dotnet run
 ```
 
-If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection:
+如果您的应用程序使用TLS，您可以通过设置 `--app-protocol https`，告诉Dapr通过TLS连接调用您的应用程序。
 
 ```bash
+dapr run  --app-id checkout --dapr-http-port 3500 --app-protocol https -- dotnet run
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 --app-ssl -- python3 CheckoutService.py
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --app-ssl -- python3 OrderProcessingService.py
-
+dapr run --app-id order-processor --app-port 7001 --dapr-http-port 3501 --app-protocol https -- dotnet run
 ```
 
 {{% /codetab %}}
@@ -90,21 +78,17 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 {{% codetab %}}
 
 ```bash
+dapr run --app-id checkout --app-protocol http --dapr-http-port 3500 -- java -jar target/CheckoutService-0.0.1-SNAPSHOT.jar
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 go run CheckoutService.go
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
-
+dapr run --app-id order-processor --app-port 9001 --app-protocol http --dapr-http-port 3501 -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection:
+如果您的应用程序使用TLS，您可以通过设置 `--app-protocol https`，告诉Dapr通过TLS连接调用您的应用程序。
 
 ```bash
+dapr run --app-id checkout --dapr-http-port 3500 --app-protocol https -- java -jar target/CheckoutService-0.0.1-SNAPSHOT.jar
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 --app-ssl go run CheckoutService.go
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --app-ssl go run OrderProcessingService.go
-
+dapr run --app-id order-processor --app-port 9001 --dapr-http-port 3501 --app-protocol https -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
 {{% /codetab %}}
@@ -112,30 +96,26 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 {{% codetab %}}
 
 ```bash
+dapr run --app-id checkout --dapr-http-port 3500 -- go run .
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 npm start
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
-
+dapr run --app-id order-processor --app-port 6006 --app-protocol http --dapr-http-port 3501 -- go run .
 ```
 
-If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection:
+如果您的应用程序使用TLS，您可以通过设置 `--app-protocol https`，告诉Dapr通过TLS连接调用您的应用程序。
 
 ```bash
+dapr run --app-id checkout --dapr-http-port 3500 --app-protocol https -- go run .
 
-dapr run --app-id checkout --app-port 6002 --dapr-http-port 3602 --dapr-grpc-port 60002 --app-ssl npm start
-
-dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 --app-ssl npm start
-
+dapr run --app-id order-processor --app-port 6006 --dapr-http-port 3501 --app-protocol https -- go run .
 ```
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-### Set an app-id when deploying to Kubernetes
+### 在部署到 Kubernetes 时设置一个应用程序的 ID
 
-In Kubernetes, set the `dapr.io/app-id` annotation on your pod:
+在 Kubernetes 中，为您的 pod 设置 `dapr.io/app-id` 注解:
 
 ```yaml
 apiVersion: apps/v1
@@ -156,105 +136,24 @@ spec:
         app: <language>-app
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "orderprocessingservice"
+        dapr.io/app-id: "order-processor"
         dapr.io/app-port: "6001"
 ...
 ```
 
-*If your app uses an SSL connection, you can tell Dapr to invoke your app over an insecure SSL connection with the `app-ssl: "true"` annotation (full list [here]({{< ref arguments-annotations-overview.md >}}))*
+如果您的应用程序使用 TLS 连接，您可以使用 `app-protocol: "https"` 注解告知 Dapr 在 TLS 上调用您的应用程序（完整列表 [请查看]({{< ref arguments-annotations-overview.md >}})）。 请注意，Dapr 不会验证应用程序提供的 TLS 证书。
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Invoke the service
+## 调用服务
 
-To invoke an application using Dapr, you can use the `invoke` API on any Dapr instance. The sidecar programming model encourages each application to interact with its own instance of Dapr. The Dapr sidecars discover and communicate with one another.
+要使用 Dapr 来调用应用程序，请在任意 Dapr 实例上使用 `invoke` API。 Sidecar 编程模型鼓励每个应用程序与自己的 Dapr 实例交互。 Dapr sidecar 之间相互发现并进行通信。
 
 Below are code examples that leverage Dapr SDKs for service invocation.
 
-{{< tabs Dotnet Java Python Go Javascript>}}
-
-{{% codetab %}}
-
-```csharp
-//dependencies
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Dapr.Client;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading;
-
-//code
-namespace EventService
-{
-  class Program
-   {
-       static async Task Main(string[] args)
-       {
-          while(true) {
-               System.Threading.Thread.Sleep(5000);
-               Random random = new Random();
-               int orderId = random.Next(1,1000);
-               using var client = new DaprClientBuilder().Build();
-
-               //Using Dapr SDK to invoke a method
-               var result = client.CreateInvokeMethodRequest(HttpMethod.Get, "checkout", "checkout/" + orderId);
-               await client.InvokeMethodAsync(result);
-               Console.WriteLine("Order requested: " + orderId);
-               Console.WriteLine("Result: " + result);
-        }
-       }
-   }
-}
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-
-```java
-//dependencies
-import io.dapr.client.DaprClient;
-import io.dapr.client.DaprClientBuilder;
-import io.dapr.client.domain.HttpExtension;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-//code
-@SpringBootApplication
-public class OrderProcessingServiceApplication {
-
-    private static final Logger log = LoggerFactory.getLogger(OrderProcessingServiceApplication.class);
-
-    public static void main(String[] args) throws InterruptedException{
-        while(true) {
-            TimeUnit.MILLISECONDS.sleep(5000);
-            Random random = new Random();
-            int orderId = random.nextInt(1000-1) + 1;
-            DaprClient daprClient = new DaprClientBuilder().build();
-            //Using Dapr SDK to invoke a method
-            var result = daprClient.invokeMethod(
-                    "checkout",
-                    "checkout/" + orderId,
-                    null,
-                    HttpExtension.GET,
-                    String.class
-            );
-            log.info("Order requested: " + orderId);
-            log.info("Result: " + result);
-        }
-    }
-}
-```
-
-{{% /codetab %}}
+{{< tabs Python JavaScript ".NET" Java  Go >}}
 
 {{% codetab %}}
 
@@ -263,20 +162,18 @@ public class OrderProcessingServiceApplication {
 import random
 from time import sleep
 import logging
-from dapr.clients import DaprClient
+import requests
 
 #code
 logging.basicConfig(level = logging.INFO) 
 while True:
     sleep(random.randrange(50, 5000) / 1000)
     orderId = random.randint(1, 1000)
-    with DaprClient() as daprClient:
-        #Using Dapr SDK to invoke a method
-        result = daprClient.invoke_method(
-            "checkout",
-               f"checkout/{orderId}",
-               data=b'',
-               http_verb="GET"
+        #Invoke a service
+        result = requests.post(
+           url='%s/orders' % (base_url),
+           data=json.dumps(order),
+           headers=headers
         )    
     logging.basicConfig(level = logging.INFO)
     logging.info('Order requested: ' + str(orderId))
@@ -287,50 +184,9 @@ while True:
 
 {{% codetab %}}
 
-```go
-//dependencies
-import (
-    "context"
-    "log"
-    "math/rand"
-    "time"
-    "strconv"
-    dapr "github.com/dapr/go-sdk/client"
-
-)
-
-//code
-type Order struct {
-    orderName string
-    orderNum  string
-}
-
-func main() {
-    for i := 0; i < 10; i++ {
-        time.Sleep(5000)
-        orderId := rand.Intn(1000-1) + 1
-        client, err := dapr.NewClient()
-        if err != nil {
-            panic(err)
-        }
-        defer client.Close()
-        ctx := context.Background()
-        //Using Dapr SDK to invoke a method
-        result, err := client.InvokeMethod(ctx, "checkout", "checkout/" + strconv.Itoa(orderId), "get")
-        log.Println("Order requested: " + strconv.Itoa(orderId))
-        log.Println("Result: ")
-        log.Println(result)
-    }
-}
-```
-
-{{% /codetab %}}
-
-{{% codetab %}}
-
 ```javascript
 //dependencies
-import { DaprClient, HttpMethod, CommunicationProtocolEnum } from '@dapr/dapr'; 
+import axios from "axios";
 
 //code
 const daprHost = "127.0.0.1"; 
@@ -346,13 +202,11 @@ var main = function() {
     }
 }
 
-async function start(orderId) {
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
-    //Using Dapr SDK to invoke a method
-    const result = await client.invoker.invoke('checkoutservice' , "checkout/" + orderId , HttpMethod.GET);
+    //Invoke a service
+    const result = await axios.post('order-processor' , "orders/" + orderId , axiosConfig);
     console.log("Order requested: " + orderId);
-    console.log("Result: " + result);
-}
+    console.log("Result: " + result.config.data);
+
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -363,50 +217,202 @@ main();
 
 {{% /codetab %}}
 
+{{% codetab %}}
+
+```csharp
+//dependencies
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading;
+
+//code
+namespace EventService
+{
+  class Program
+   {
+       static async Task Main(string[] args)
+       {
+          while(true) {
+               await Task.Delay(5000)
+               var random = new Random();
+               var orderId = random.Next(1,1000);
+
+               //Using Dapr SDK to invoke a method
+               var order = new Order("1");
+               var orderJson = JsonSerializer.Serialize<Order>(order);
+               var content = new StringContent(orderJson, Encoding.UTF8, "application/json");
+
+               var httpClient = DaprClient.CreateInvokeHttpClient();
+               await httpClient.PostAsJsonAsync($"http://order-processor/orders", content);               
+               Console.WriteLine("Order requested: " + orderId);
+               Console.WriteLine("Result: " + result);
+        }
+       }
+   }
+}
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+```java
+//dependencies
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+//code
+@SpringBootApplication
+public class CheckoutServiceApplication {
+    private static final HttpClient httpClient = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_2)
+            .connectTimeout(Duration.ofSeconds(10))
+            .build();
+
+    public static void main(String[] args) throws InterruptedException, IOException {
+        while (true) {
+            TimeUnit.MILLISECONDS.sleep(5000);
+            Random random = new Random();
+            int orderId = random.nextInt(1000 - 1) + 1;
+
+            // Create a Map to represent the request body
+            Map<String, Object> requestBody = new HashMap<>();
+            requestBody.put("orderId", orderId);
+            // Add other fields to the requestBody Map as needed
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .POST(HttpRequest.BodyPublishers.ofString(new JSONObject(requestBody).toString()))
+                    .uri(URI.create(dapr_url))
+                    .header("Content-Type", "application/json")
+                    .header("dapr-app-id", "order-processor")
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            System.out.println("Order passed: " + orderId);
+            TimeUnit.MILLISECONDS.sleep(1000);
+
+            log.info("Order requested: " + orderId);
+            log.info("Result: " + response.body());
+        }
+    }
+}
+```
+
+{{% /codetab %}}
+
+{{% codetab %}}
+
+```go
+package main
+
+import (
+    "fmt"
+    "io"
+    "log"
+    "math/rand"
+    "net/http"
+    "os"
+    "time"
+)
+
+func main() {
+    daprHttpPort := os.Getenv("DAPR_HTTP_PORT")
+    if daprHttpPort == "" {
+        daprHttpPort = "3500"
+    }
+
+    client := &http.Client{
+        Timeout: 15 * time.Second,
+    }
+
+    for i := 0; i < 10; i++ {
+        time.Sleep(5000)
+        orderId := rand.Intn(1000-1) + 1
+
+        url := fmt.Sprintf("http://localhost:%s/checkout/%v", daprHttpPort, orderId)
+        req, err := http.NewRequest(http.MethodGet, url, nil)
+        if err != nil {
+            panic(err)
+        }
+
+        // Adding target app id as part of the header
+        req.Header.Add("dapr-app-id", "order-processor")
+
+        // Invoking a service
+        resp, err := client.Do(req)
+        if err != nil {
+            log.Fatal(err.Error())
+        }
+
+        b, err := io.ReadAll(resp.Body)
+        if err != nil {
+            panic(err)
+        }
+
+        fmt.Println(string(b))
+    }
+}
+```
+
+{{% /codetab %}}
+
 {{< /tabs >}}
 
 ### 其他 URL 格式
 
-To invoke a 'GET' endpoint:
+要调用 'GET' 端点:
 
 ```bash
 curl http://localhost:3500/v1.0/invoke/cart/method/add
 ```
 
-To avoid changing URL paths as much as possible, Dapr provides the following ways to call the service invocation API:
+为了尽可能避免改变 URL 路径，Dapr 提供了以下方式来调用服务调用API：
 
-1. Change the address in the URL to `localhost:<dapr-http-port>`.
+1. 将URL中的地址更改为 `localhost:<dapr-http-port>`。
 2. 添加一个 `dapr-app-id` header 来指定目标服务的ID，或者通过 HTTP Basic Auth 传递 ID。 `http://dapr-app-id:<service-id>@localhost:3602/path`。
 
-For example, the following command:
+例如，以下命令:
 
 ```bash
 curl http://localhost:3500/v1.0/invoke/cart/method/add
 ```
 
-is equivalent to:
+等同于：
 
 ```bash
 curl -H 'dapr-app-id: checkout' 'http://localhost:3602/checkout/100' -X POST
 ```
 
-or:
+或者:
 
 ```bash
 curl -H 'dapr-app-id: checkout' 'http://localhost:3602/checkout/100' -X POST
 ```
 
-Using CLI:
+使用 CLI：
 
 ```bash
 dapr invoke --app-id checkout --method checkout/100
 ```
 
-### Namespaces
+### 命名空间
 
-When running on [namespace supported platforms]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}}), you include the namespace of the target app in the app ID. For example, following the `<app>.<namespace>` format, use `checkout.production`.
+当运行于 [支持命名空间的平台]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})，在您的 app ID 中包含目标应用的命名空间。 例如，按照格式 `<app>.<namespace>` ，使用 `checkout.production`。
 
-Using this example, invoking the service with a namespace would look like:
+使用此示例，调用带有命名空间的服务将如下所示:
 
 ```bash
 curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -X POST
@@ -414,17 +420,17 @@ curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -
 
 有关名称空间的更多信息，请参阅 [跨命名空间 API]({{< ref "service_invocation_api.md#cross-namespace-invocation" >}}) 。
 
-## View traces and logs
+## 查看跟踪和日志
 
-Our example above showed you how to directly invoke a different service running locally or in Kubernetes. Dapr:
+上面的示例显示了如何直接调用本地或 Kubernetes 中运行的其他服务。 Dapr:
 
-- Outputs metrics, tracing, and logging information,
-- Allows you to visualize a call graph between services and log errors, and
-- Optionally, log the payload body.
+- 输出指标、追踪和日志信息，
+- 允许您可视化服务之间的调用图并记录错误日志，以及
+- （可选）记录有效负载正文。
 
-For more information on tracing and logs, see the [observability]({{< ref observability-concept.md >}}) article.
+有关跟踪和日志的更多信息，请参阅 [可观察性]({{< ref observability-concept.md >}}) 文章。
 
 ## 相关链接
 
-- [Service invocation overview]({{< ref service-invocation-overview.md >}})
+- [服务调用概述]({{< ref service-invocation-overview.md >}})
 - [服务调用 API 规范]({{< ref service_invocation_api.md >}})

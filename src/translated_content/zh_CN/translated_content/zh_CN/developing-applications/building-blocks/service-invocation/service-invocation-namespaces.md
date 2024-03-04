@@ -1,20 +1,20 @@
 ---
 type: docs
-title: "How to: Service invocation across namespaces"
+title: "如何：跨命名空间进行服务调用"
 linkTitle: "How to: Service invocation namespaces"
-weight: 1000
+weight: 50
 description: "部署到不同命名空间的服务间调用"
 ---
 
-In this article, you'll learn how you can call between services deployed to different namespaces. By default, service invocation supports invoking services within the *same* namespace by simply referencing the app ID (`nodeapp`):
+在本文中，你将了解如何在不同命名空间中部署的服务之间进行调用。 默认情况下，服务调用支持通过简单地引用应用 ID (`nodeapp`) 在 *相同的* 命名空间内调用服务：
 
 ```sh
 localhost:3500/v1.0/invoke/nodeapp/method/neworder
 ```
 
-服务调用也支持跨命名空间的调用。 On all supported hosting platforms, Dapr app IDs conform to a valid FQDN format that includes the target namespace. 您可以同时指定：
+服务调用也支持跨命名空间的调用。 在所有受支持的托管平台上， Dapr 应用程序标识（ID）遵循包含了目标命名空间的有效 FQDN 格式。 您可以同时指定：
 
-- The app ID (`nodeapp`), and
+- 应用 ID (`nodeapp`)，以及
 - 应用程序运行的命名空间（`production`）。
 
 **示例 1**

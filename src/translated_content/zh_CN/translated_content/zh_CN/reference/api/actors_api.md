@@ -74,6 +74,15 @@ curl -X POST http://localhost:3500/v1.0/actors/x-wing/33/method/fly \
 
 ***请注意，该具体操作取决于支持多项事务的状态存储组件。***
 
+#### TTL
+
+With the [`ActorStateTTL` feature enabled]({{< ref "support-preview-features.md" >}}), actor clients can set the `ttlInSeconds` field in the transaction metadata to have the state expire after that many seconds. If the `ttlInSeconds` field is not set, the state will not expire.
+
+Keep in mind when building actor applications with this feature enabled; Currently, all actor SDKs will preserve the actor state in their local cache even after the state has expired. This means that the actor state will not be removed from the local cache if the TTL has expired until the actor is restarted or deactivated. This behaviour will be changed in a future release.
+
+See the Dapr Community Call 80 recording for more details on actor state TTL.
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kVpQYkGemRc?start=28" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 #### HTTP 请求
 
 ```
@@ -100,6 +109,8 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state
 
 #### 示例
 
+> Note, the following example uses the `ttlInSeconds` field, which requires the [`ActorStateTTL` feature enabled]]({{< ref "support-preview-features.md" >}}).
+
 ```shell
 curl -X POST http://localhost:3500/v1.0/actors/stormtrooper/50/state \
   -H "Content-Type: application/json" \
@@ -108,7 +119,10 @@ curl -X POST http://localhost:3500/v1.0/actors/stormtrooper/50/state \
          "operation": "upsert",
          "request": {
            "key": "key1",
-           "value": "myData"
+           "value": "myData",
+           "metadata": {
+             "ttlInSeconds": "3600"
+           }
          }
        },
        {
@@ -175,7 +189,7 @@ curl http://localhost:3500/v1.0/actors/stormtrooper/50/state/location \
 POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 ```
 
-#### 请求正文
+#### Reminder request body
 
 JSON 对象将具有以下字段：
 
@@ -237,7 +251,7 @@ JSON 对象将具有以下字段：
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
@@ -277,7 +291,7 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<nam
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
@@ -322,7 +336,7 @@ DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/checkRebels \
@@ -339,7 +353,8 @@ curl -X DELETE http://localhost:3500/v1.0/actors/stormtrooper/50/reminders/check
 POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<name>
 ```
 
-Body:
+#### Timer request body:
+The format for the timer request body is the same as for [actor reminders]({{< ref "#reminder-request-body" >}}). For example:
 
 以下指定 `dueTime` 为 3 秒， period 为 7 秒。
 
@@ -378,7 +393,7 @@ Body:
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 ```shell
 curl http://localhost:3500/v1.0/actors/stormtrooper/50/timers/checkRebels \
@@ -449,7 +464,7 @@ GET http://localhost:<appPort>/dapr/config
 | --------- | ------ |
 | `appPort` | 应用程序端口 |
 
-#### Examples
+#### 示例
 
 获取注册的 Actor 的示例:
 
@@ -471,6 +486,16 @@ curl -X GET http://localhost:3000/dapr/config \
 | `enabled`                 | 启用可重入所需的重入配置中的标志。                                                                                        |
 | `maxStackDepth`           | 可重入配置中的一个值，用于控制对同一actor进行多少次可重入调用。                                                                       |
 | `entitiesConfig`          | 允许每个actor类型设置的实体配置数组。 此处定义的任何配置都必须具有映射回根级实体的实体。                                                          |
+
+
+{{% alert title="Note" color="primary" %}}
+Actor settings in configuration for timeouts and intervals use [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) format. You can use string formats to represent durations. For example:
+- `1h30m` or `1.5h`: A duration of 1 hour and 30 minutes
+- `1d12h`: A duration of 1 day and 12 hours
+- `500ms`: A duration of 500 milliseconds
+- `-30m`: A negative duration of 30 minutes
+
+{{% /alert %}}
 
 ```json
 {
@@ -524,7 +549,7 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 以下示例停用 `actorId` 为 50 类型为`stormtrooper` 的Actor。
 
@@ -567,7 +592,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 以下的示例在类型为 `stormtrooper`，`actorId` 为50的Actor上调用方法 `performAction`。
 
@@ -605,7 +630,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/remind/<remin
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 以下的示例在类型为 `stormtrooper`，`actorId` 为50的Actor上调用方法 `checkRebels`。
 
@@ -643,7 +668,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/timer/<timerN
 
 > 注意：所有的 URL 参数都是大小写敏感的。
 
-#### Examples
+#### 示例
 
 以下的示例在类型为 `stormtrooper`，`actorId` 为50的Actor上调用timer方法 `checkRebels`。
 
@@ -676,7 +701,7 @@ GET http://localhost:<appPort>/healthz
 | --------- | ------ |
 | `appPort` | 应用程序端口 |
 
-#### Examples
+#### 示例
 
 从应用程序获取健康检查响应的示例：
 

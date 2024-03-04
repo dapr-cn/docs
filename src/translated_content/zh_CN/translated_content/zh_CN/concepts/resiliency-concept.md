@@ -1,46 +1,46 @@
 ---
 type: docs
-title: "Resiliency"
-linkTitle: "Resiliency"
+title: "弹性"
+linkTitle: "弹性"
 weight: 400
-description: "Configure policies and monitor app and sidecar health"
+description: "配置策略并监控应用程序和边车的健康状况"
 ---
 
-Distributed applications are commonly comprised of many microservices, with dozens - sometimes hundreds - of instances scaling across underlying infrastructure. As these distributed solutions grow in size and complexity, the potential for system failures inevitably increases. Service instances can fail or become unresponsive due to any number of issues, including hardware failures, unexpected throughput, or application lifecycle events, such as scaling out and application restarts. Designing and implementing a self-healing solution with the ability to detect, mitigate, and respond to failure is critical.
+分布式应用通常由许多微服务组成，在底层基础设施上扩展数十个（有时是数百个）实例。 随着这些分布式解决方案的规模和复杂性不断增加，系统发生故障的可能性也不可避免地增加。 由于硬件故障、意外吞吐量或应用程序生命周期事件（如扩展和应用程序重启）等各种原因，服务实例可能会出现故障或无响应。 设计和实施具有检测、缓解和应对故障能力的自愈解决方案至关重要。
 
-## Resiliency Policies
-<img src="/images/resiliency_diagram.png" width="1200" alt="Diagram showing the resiliency applied to Dapr APIs" />
+## 复原力政策
+<img src="/images/resiliency_diagram.png" width="1200" alt="显示应用于 Dapr API 的复原能力的图表" />
 
-Dapr provides a capability for defining and applying fault tolerance resiliency policies to your application. You can define policies for following resiliency patterns:
+Dapr 提供了为应用程序定义和应用容错弹性策略的功能。 您可以为以下复原模式定义策略：
 
-- Timeouts
-- Retries/back-offs
-- Circuit breakers
+- 超时
+- 重试/取消
+- 断路器
 
-These policies can be applied to any Dapr API calls when calling components with a [resiliency spec]({{< ref resiliency-overview >}}).
+在调用具有 [复原力规范]({{< ref resiliency-overview >}})的组件时，这些策略可应用于任何 Dapr API 调用。
 
-## App Health Checks
-<img src="/images/observability-app-health.webp" width="800" alt="Diagram showing the app health feature. Running Dapr with app health enabled causes Dapr to periodically probe the app for its health" />
+## 应用程序健康检查
+<img src="/images/observability-app-health.webp" width="800" alt="显示应用程序健康功能的示意图 在启用应用程序健康状况的情况下运行 Dapr，会导致 Dapr 定期探测应用程序的健康状况" />
 
-Applications can become unresponsive for a variety of reasons. For example, they are too busy to accept new work, could have crashed, or be in a deadlock state. Sometimes the condition can be transitory or persistent.
+应用程序无法响应的原因有很多。 例如，它们太忙，无法接受新工作，可能已经崩溃，或处于死锁状态。 有时这种情况可能是暂时的或持续的。
 
-Dapr provides a capability for monitoring app health through probes that check the health of your application and react to status changes. When an unhealthy app is detected, Dapr stops accepting new work on behalf of the application.
+Dapr 可通过探针监控应用程序的健康状况，探针可检查应用程序的健康状况并对状态变化做出反应。 检测到不健康的应用程序时，Dapr 会停止代表该应用程序接受新工作。
 
-Read more on how to apply [app health checks]({{< ref app-health >}}) to your application.
+了解更多有关如何将 [应用程序健康检查]({{< ref app-health >}}) 应用程序的信息。
 
-## Sidecar Health Checks
-<img src="/images/sidecar-health.png" width="800" alt="Diagram showing the app health feature. Running Dapr with app health enabled causes Dapr to periodically probe the app for its health" />
+## Sidecar 健康检查
+<img src="/images/sidecar-health.png" width="800" alt="显示应用程序健康功能的示意图 在启用应用程序健康状况的情况下运行 Dapr，会导致 Dapr 定期探测应用程序的健康状况" />
 
-Dapr provides a way to determine its health using an [HTTP `/healthz` endpoint]({{< ref health_api.md >}}). With this endpoint, the *daprd* process, or sidecar, can be:
+Dapr 提供了一种使用 [HTTP `/healthz` 端点确定其健康状况的方法]({{< ref health_api.md >}})。 有了这个端点， *daprd* 进程或 sidecar 就可以：
 
-- Probed for its health
-- Determined for readiness and liveness
+- 检测其健康状况
+- 确定是否准备就绪和有效
 
-Read more on about how to apply [dapr health checks]({{< ref sidecar-health >}}) to your application.
+了解更多有关如何将 [dapr 健康检查]({{< ref sidecar-health >}}) 应用于您的申请的信息。
 
 ## 下一步
 
-- [Learn more about resiliency]({{< ref resiliency-overview.md >}})
-- Try out one of the Resiliency quickstarts:
-  - [Resiliency: Service-to-service]({{< ref resiliency-serviceinvo-quickstart.md >}})
-  - [Resiliency: State Management]({{< ref resiliency-state-quickstart.md >}})
+- [了解有关复原力的更多信息]({{< ref resiliency-overview.md >}})
+- 试一试复原力快速入门课程：
+  - [复原能力：服务到服务]({{< ref resiliency-serviceinvo-quickstart.md >}})
+  - [复原能力：状态管理]({{< ref resiliency-state-quickstart.md >}})

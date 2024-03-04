@@ -1,28 +1,28 @@
 ---
 type: docs
-title: "Dapr Visual Studio Code extension overview"
-linkTitle: "Dapr extension"
+title: "Dapr Visual Studio Code 扩展概述"
+linkTitle: "Dapr 扩展"
 weight: 10000
-description: "How to develop and run Dapr applications with the Dapr extension"
+description: "如何使用Dapr扩展来开发和运行Dapr应用程序"
 ---
 
 
-Dapr offers a *preview* [Dapr Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) for local development which enables users a variety of features related to better managing their Dapr applications and debugging of your Dapr applications for all supported Dapr languages which are .NET, Go, PHP, Python and Java.
+Dapr 为本地开发提供了*预览版* [ Dapr Visual Studio Code 扩展](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr)，使用户能够获得与更好地管理其 Dapr 应用程序和调试您的 Dapr 应用程序有关的各种功能，这些 Dapr 语言包括 .NET、Go、PHP、Python 和 Java。
 
 <a href="vscode:extension/ms-azuretools.vscode-dapr" class="btn btn-primary" role="button">在 VSCode 中打开</a>
 
-## Features
+## 特性
 
-### Scaffold Dapr debugging tasks
+### Dapr 调试任务脚手架
 
 Dapr 扩展可以帮助您使用 Visual Studio Code 的 [内置调试功能](https://code.visualstudio.com/Docs/editor/debugging) 来调试您的应用程序。
 
 使用 `Dapr: Scaffold Dapr Tasks` [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) 操作，你可以更新你现有的 `task.json` 和 `launch.json` 文件，在你开始调试时启动并配置 Dapr sidecar。
 
-1. Make sure you have a launch configuration set for your app. ([Learn more](https://code.visualstudio.com/Docs/editor/debugging))
-2. Open the Command Palette with `Ctrl+Shift+P`
-3. Select `Dapr: Scaffold Dapr Tasks`
-4. Run your app and the Dapr sidecar with `F5` or via the Run view.
+1. 请确保您的应用程序有一个启动配置。 ([了解更多](https://code.visualstudio.com/Docs/editor/debugging))
+2. 使用 `Ctrl+Shift+P 打开Command Palette`
+3. 选择 `Dapr: Scaffold Dapr Tasks`
+4. 用 `F5` 或通过运行视图运行你的应用程序和 Dapr sidecar。
 
 ### Dapr 组件脚手架
 
@@ -30,10 +30,10 @@ Dapr 扩展可以帮助您使用 Visual Studio Code 的 [内置调试功能](htt
 
 若要创建一个专用的组件文件夹，默认 `statestore`, `pubsub`, 和 `zipkin` 组件, 使用 `Dapr: Scaffold Dapr Components` [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) 操作。
 
-1. Open your application directory in Visual Studio Code
-2. Open the Command Palette with `Ctrl+Shift+P`
+1. 在 Visual Studio Code 中打开您的应用程序目录
+2. 使用 `Ctrl+Shift+P 打开Command Palette`
 3. 选择 `Dapr: Scaffold Dapr Components`
-4. Run your application with `dapr run --resources-path ./components -- ...`
+4. 使用 `dapr run --resources-path ./components -- ...`运行你的应用程序
 
 ### 查看正在运行的 Dapr 应用程序
 

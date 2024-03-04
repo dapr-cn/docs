@@ -22,9 +22,9 @@ spec:
   version: v1
   metadata:
   - name: connectionString
-    value: Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;
+    value: "Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"
   - name: hub  # Optional
-    value: <hub name>
+    value: "<hub name>"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -33,18 +33,18 @@ spec:
 
 ## 元数据字段规范
 
-| Field              | 必填 | 绑定支持   | 详情                                                                                                 | 示例                                                                                                                 |
-| ------------------ |:--:| ------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `connectionString` | 是  | Output | The Azure SignalR connection string                                                                | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
-| `hub`              | 否  | 输出     | 定义消息将被发送到的 Hub。 发布到输出绑定时，可以将 Hub 动态定义为元数据值（键为"Hub"）                                                | `"myhub"`                                                                                                          |
-| `终结点`              | 否  | 输出     | Endpoint of Azure SignalR; required if not included in the `connectionString` or if using Azure AD | `https://<your-azure-signalr>.service.signalr.net`                                                           |
-| `accessKey`        | 否  | 输出     | Access key                                                                                         | `your-access-key`                                                                                                  |
+| Field              | Required | 绑定支持   | 详情                                                                                                           | 示例                                                                                                                 |
+| ------------------ |:--------:| ------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `connectionString` |    是     | Output | The Azure SignalR connection string                                                                          | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
+| `hub`              |    否     | 输出     | 定义消息将被发送到的 Hub。 发布到输出绑定时，可以将 Hub 动态定义为元数据值（键为"Hub"）                                                          | `"myhub"`                                                                                                          |
+| `endpoint`         |    否     | 输出     | Endpoint of Azure SignalR; required if not included in the `connectionString` or if using Microsoft Entra ID | `"https://<your-azure-signalr>.service.signalr.net"`                                                         |
+| `accessKey`        |    否     | 输出     | Access key                                                                                                   | `"your-access-key"`                                                                                                |
 
-### Azure Active Directory (Azure AD) authentication
+### Microsoft Entra ID authentication
 
-The Azure SignalR binding component supports authentication using all Azure Active Directory mechanisms. See the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}) to learn more about the relevant component metadata fields based on your choice of Azure AD authentication mechanism.
+The Azure SignalR binding component supports authentication using all Microsoft Entra ID mechanisms. See the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}) to learn more about the relevant component metadata fields based on your choice of Microsoft Entra ID authentication mechanism.
 
-You have two options to authenticate this component with Azure AD:
+You have two options to authenticate this component with Microsoft Entra ID:
 
 - Pass individual metadata keys:
   - `endpoint` for the endpoint
@@ -52,7 +52,7 @@ You have two options to authenticate this component with Azure AD:
 - Pass a connection string with `AuthType=aad` specified:
   - System-assigned managed identity: `Endpoint=https://<servicename>.service.signalr.net;AuthType=aad;Version=1.0;`
   - User-assigned managed identity: `Endpoint=https://<servicename>.service.signalr.net;AuthType=aad;ClientId=<clientid>;Version=1.0;`
-  - Azure AD application: `Endpoint=https://<servicename>.service.signalr.net;AuthType=aad;ClientId=<clientid>;ClientSecret=<clientsecret>;TenantId=<tenantid>;Version=1.0;`  
+  - Microsoft Entra ID application: `Endpoint=https://<servicename>.service.signalr.net;AuthType=aad;ClientId=<clientid>;ClientSecret=<clientsecret>;TenantId=<tenantid>;Version=1.0;`  
     Note that you cannot use a connection string if your application's ClientSecret contains a `;` character.
 
 ## 绑定支持

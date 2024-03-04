@@ -1,13 +1,15 @@
 ---
 type: docs
-title: "MySQL"
-linkTitle: "MySQL"
+title: "MySQL & MariaDB"
+linkTitle: "MySQL & MariaDB"
 description: MySQL 状态存储组件的详细信息
 aliases:
   - "/zh-hans/operations/components/setup-state-store/supported-state-stores/setup-mysql/"
 ---
 
 ## Component format
+
+The MySQL state store components allows connecting to both MySQL and MariaDB databases. In this document, we refer to "MySQL" to indicate both databases.
 
 To setup MySQL state store create a component of type `state.mysql`. See [this guide]({{< ref "howto-get-save-state.md#step-1-setup-a-state-store" >}}) on how to create and apply a state store configuration.
 
@@ -48,14 +50,15 @@ spec:
 
 ## 元数据字段规范
 
-| Field              | 必填 | 详情                                                                                                                                                                  | 示例                                                                                                                                                                                                                                                                                           |
-| ------------------ |:--:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `connectionString` | 是  | The connection string to connect to MySQL. Do not add the schema to the connection string                                                                           | [Non SSL connection](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL Connection](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
-| `schemaName`       | 否  | 要使用的schema名称。 如果指定的schema不存在，将会自动创建。 默认值为 `"dapr_state_store"`                                                                                                      | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                                                           |
-| `tableName`        | 否  | 要使用的表名。 如果对应的表不存在，将被自动创建。 默认值为 `"state"`                                                                                                                            | `"table_name"`, `"dapr_state"`                                                                                                                                                                                                                                                               |
-| `timeoutInSeconds` | 否  | Timeout for all database operations. Defaults to `20`                                                                                                               | `30`                                                                                                                                                                                                                                                                                         |
-| `pemPath`          | 否  | Full path to the PEM file to use for [enforced SSL Connection](#enforced-ssl-connection) required if pemContents is not provided. Cannot be used in K8s environment | `"/path/to/file.pem"`, `"C:\path\to\file.pem"`                                                                                                                                                                                                                                            |
-| `pemContents`      | 否  | Contents of PEM file to use for [enforced SSL Connection](#enforced-ssl-connection) required if pemPath is not provided. Can be used in K8s environment             | `"pem value"`                                                                                                                                                                                                                                                                                |
+| Field                      | Required | 详情                                                                                                                                                                  | 示例                                                                                                                                                                                                                                                                                           |
+| -------------------------- |:--------:| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `connectionString`         |    是     | The connection string to connect to MySQL. Do not add the schema to the connection string                                                                           | [Non SSL connection](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL Connection](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
+| `schemaName`               |    否     | 要使用的schema名称。 如果指定的schema不存在，将会自动创建。 默认值为 `"dapr_state_store"`                                                                                                      | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                                                           |
+| `tableName`                |    否     | 要使用的表名。 如果对应的表不存在，将被自动创建。 默认值为 `"state"`                                                                                                                            | `"table_name"`, `"dapr_state"`                                                                                                                                                                                                                                                               |
+| `timeoutInSeconds`         |    否     | Timeout for all database operations. Defaults to `20`                                                                                                               | `30`                                                                                                                                                                                                                                                                                         |
+| `pemPath`                  |    否     | Full path to the PEM file to use for [enforced SSL Connection](#enforced-ssl-connection) required if pemContents is not provided. Cannot be used in K8s environment | `"/path/to/file.pem"`, `"C:\path\to\file.pem"`                                                                                                                                                                                                                                            |
+| `pemContents`              |    否     | Contents of PEM file to use for [enforced SSL Connection](#enforced-ssl-connection) required if pemPath is not provided. Can be used in K8s environment             | `"pem value"`                                                                                                                                                                                                                                                                                |
+| `cleanupIntervalInSeconds` |    否     | Interval, in seconds, to clean up rows with an expired TTL. Default: `3600` (that is 1 hour). Setting this to values <=0 disables the periodic cleanup.             | `1800`, `-1`                                                                                                                                                                                                                                                                                 |
 
 ## 设置 MySQL
 
@@ -131,6 +134,17 @@ docker run --name dapr-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d
 ### Enforced SSL 连接
 
 如果你的服务器需要 SSL 加密，那么连接字符串必须以 `&tls=custom` 结尾。例如, `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"`。 您必须使用完整的PEM文件路径替换 `<PEM PATH>` 。 与 MySQL 的连接至少需要1.2版本及以上的 TLS。
+
+### TTLs and cleanups
+
+This state store supports [Time-To-Live (TTL)]({{< ref state-store-ttl.md >}}) for records stored with Dapr. When storing data using Dapr, you can set the `ttlInSeconds` metadata property to indicate when the data should be considered "expired".
+
+Because MySQL doesn't have built-in support for TTLs, this is implemented in Dapr by adding a column in the state table indicating when the data is to be considered "expired". Records that are "expired" are not returned to the caller, even if they're still physically stored in the database. A background "garbage collector" periodically scans the state table for expired rows and deletes them.
+
+The interval at which the deletion of expired records happens is set with the `cleanupIntervalInSeconds` metadata property, which defaults to 3600 seconds (that is, 1 hour).
+
+- Longer intervals require less frequent scans for expired rows, but can require storing expired records for longer, potentially requiring more storage space. If you plan to store many records in your state table, with short TTLs, consider setting `cleanupIntervalInSeconds` to a smaller value, for example `300` (300 seconds, or 5 minutes).
+- If you do not plan to use TTLs with Dapr and the MySQL state store, you should consider setting `cleanupIntervalInSeconds` to a value <= 0 (e.g. `0` or `-1`) to disable the periodic cleanup and reduce the load on the database.
 
 ## 相关链接
 - [Basic schema for a Dapr component]({{< ref component-schema >}})

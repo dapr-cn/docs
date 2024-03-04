@@ -6,42 +6,44 @@ description: "使用 Dapr 输入绑定来触发由事件驱动的程序"
 weight: 200
 ---
 
-With input bindings, you can trigger your application when an event from an external resource occurs. An external resource could be a queue, messaging pipeline, cloud-service, filesystem, etc. An optional payload and metadata may be sent with the request.
+通过输入绑定，您可以在外部资源发生事件时触发应用程序。 一个外部资源可以是队列、消息管道、云服务、文件系统等。 可选择随请求发送有效载荷和元数据。
 
-Input bindings are ideal for event-driven processing, data pipelines, or generally reacting to events and performing further processing. Dapr input bindings allow you to:
+输入绑定对于事件驱动的处理，数据管道或通常对事件作出反应并执行进一步处理非常理想。 Dapr 输入绑定允许您:
 
-- Receive events without including specific SDKs or libraries
-- Replace bindings without changing your code
-- Focus on business logic and not the event resource implementation
+- 接收不包含特定 SDK 或库的事件
+- 在不更改代码的情况下替换绑定
+- 关注业务逻辑而不是事件资源实现
 
 <img src="/images/howto-triggers/kafka-input-binding.png" width=1000 alt="显示示例服务绑定的图示">
 
-This guide uses a Kafka binding as an example. You can find your preferred binding spec from [the list of bindings components]({{< ref setup-bindings >}}). In this guide:
+本指南以 Kafka 绑定为例。 您可以从 [绑定组件列表]({{< ref setup-bindings >}})中找到自己喜欢的绑定规范。 在本指南中
 
-1. The example invokes the `/binding` endpoint with `checkout`, the name of the binding to invoke.
-1. The payload goes inside the mandatory `data` field, and can be any JSON serializable value.
-1. The `operation` field tells the binding what action it needs to take. For example, [the Kafka binding supports the `create` operation]({{< ref "kafka.md#binding-support" >}}).
-   - You can check [which operations (specific to each component) are supported for every output binding]({{< ref supported-bindings >}}).
+1. 该示例调用了 `/binding` 端点，其中 `checkout`，即要调用的绑定名称。
+1. 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
+1. `operation` 字段告诉绑定需要采取什么操作。 例如， [，Kafka 绑定支持 `create` 操作]({{< ref "kafka.md#binding-support" >}})。
+   - 您可以查看 [，了解每个输出绑定]({{< ref supported-bindings >}})支持哪些操作（针对每个组件）。
 
 {{% alert title="Note" color="primary" %}}
- If you haven't already, [try out the bindings quickstart]({{< ref bindings-quickstart.md >}}) for a quick walk-through on how to use the bindings API.
+ 如果您还没有， [尝试使用绑定快速入门]({{< ref bindings-quickstart.md >}}) ，快速了解如何使用绑定 API。
 
 {{% /alert %}}
 
-## Create a binding
+## 创建绑定
 
-Create a `binding.yaml` file and save to a `components` sub-folder in your application directory.
+创建 `binding.yaml` 文件，并保存到应用程序目录下的 `components` 子文件夹中。
 
-Create a new binding component named `checkout`. Within the `metadata` section, configure the following Kafka-related properties:
+创建一个新的绑定组件，名为 `checkout`。 在 `元数据` 部分，配置以下 Kafka 相关属性：
 
-- The topic to which you'll publish the message
-- The broker
+- 您要发布信息的主题
+- Broker
+
+创建绑定组件时， [指定绑定的支持 `direction`]({{< ref "bindings_api.md#binding-direction-optional" >}})。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
-Use the `--resources-path` flag with the `dapr run` command to point to your custom resources directory.
+使用 `--resources-path` 标志与 `dapr run` 命令一起使用，指向您的自定义资源目录。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -64,14 +66,16 @@ spec:
   - name: publishTopic
     value: sample
   - name: authRequired
-    value: "false"
+    value: false
+  - name: direction
+    value: input
 ```
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-To deploy into a Kubernetes cluster, run `kubectl apply -f binding.yaml`.
+要将部署到 Kubernetes 集群中，请运行 `kubectl apply -f binding.yaml`。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -94,20 +98,22 @@ spec:
   - name: publishTopic
     value: sample
   - name: authRequired
-    value: "false"
+    value: false
+  - name: direction
+    value: input
 ```
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Listen for incoming events (input binding)
+## 监听传入事件 (输入绑定)
 
-Configure your application to receive incoming events. If you're using HTTP, you need to:
-- Listen on a `POST` endpoint with the name of the binding, as specified in `metadata.name` in the `binding.yaml` file.
-- Verify your application allows Dapr to make an `OPTIONS` request for this endpoint.
+现在配置您的应用程序来接收传入事件。 如果您正在使用HTTP，您需要：
+- 收听 `POST` 终结点替换为绑定的名称，如 `metadata.name` 在 `binding.yaml` 文件。
+- 验证您的应用程序允许 Dapr 为此端点进行 `OPTIONS` 请求。
 
-Below are code examples that leverage Dapr SDKs to demonstrate an output binding.
+下面是利用 Dapr SDK 展示输出绑定的代码示例。
 
 {{< tabs Dotnet Java Python Go JavaScript>}}
 
@@ -237,9 +243,17 @@ start().catch((e) => {
 });
 
 async function start() {
-    const server = new DaprServer(serverHost, serverPort, daprHost, daprPort, CommunicationProtocolEnum.HTTP);
+    const server = new DaprServer({
+        serverHost,
+        serverPort,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+        clientOptions: {
+            daprHost,
+            daprPort, 
+        }
+    });
     await server.binding.receive('checkout', async (orderId) => console.log(`Received Message: ${JSON.stringify(orderId)}`));
-    await server.startServer();
+    await server.start();
 }
 
 ```
@@ -248,17 +262,17 @@ async function start() {
 
 {{< /tabs >}}
 
-### ACK-ing an event
+### ACK一个事件
 
-Tell Dapr you've successfully processed an event in your application by returning a `200 OK` response from your HTTP handler.
+通过从您的 HTTP 处理程序返回一个 `200 OK` 响应，告诉 Dapr 您已成功处理了应用程序中的事件。
 
 ### 拒绝事件
 
-Tell Dapr the event was not processed correctly in your application and schedule it for redelivery by returning any response other than `200 OK`. For example, a `500 Error`.
+告诉 Dapr 事件在您的应用程序中未正确处理，并通过返回任何与 `200 OK`不同的响应来安排重新交付。 例如，一个 `500 错误`。
 
 ### 指定自定义路由
 
-By default, incoming events will be sent to an HTTP endpoint that corresponds to the name of the input binding. You can override this by setting the following metadata property in `binding.yaml`:
+默认情况下，传入事件将发送到与输入绑定的名称对应的 HTTP 端点。 您可以通过在 `binding.yaml`中设置以下元数据属性来覆盖此设置：
 
 ```yaml
 name: mybinding
@@ -269,9 +283,9 @@ spec:
     value: /onevent
 ```
 
-### Event delivery Guarantees
+### 事件传递保证
 
-Event delivery guarantees are controlled by the binding implementation. Depending on the binding implementation, the event delivery can be exactly once or at least once.
+事件传递保证由绑定实现控制。 根据绑定实现，事件传递可以正好一次或至少一次。
 
 ## 参考
 

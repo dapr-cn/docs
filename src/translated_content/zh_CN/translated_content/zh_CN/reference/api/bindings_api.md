@@ -36,6 +36,50 @@ spec:
 
 > **Note:** In production never place passwords or secrets within Dapr component files. For information on securely storing and retrieving secrets using secret stores refer to [Setup Secret Store]({{< ref setup-secret-store >}})
 
+### Binding direction (optional)
+
+In some scenarios, it would be useful to provide additional information to Dapr to indicate the direction supported by the binding component.
+
+Providing the binding `direction` helps the Dapr sidecar avoid the `"wait for the app to become ready"` state, where it waits indefinitely for the application to become available. This decouples the lifecycle dependency between the Dapr sidecar and the application.
+
+You can specify the `direction` field as part of the component's metadata. The valid values for this field are:
+- `"input"`
+- `"output"`
+- `"input, output"`
+
+{{% alert title="Note" color="primary" %}}
+It is highly recommended that all bindings should include the `direction` property.
+{{% /alert %}}
+
+Here a few scenarios when the `"direction"` metadata field could help:
+
+- When an application (detached from the sidecar) runs as a serverless workload and is scaled to zero, the `"wait for the app to become ready"` check done by the Dapr sidecar becomes pointless.
+
+- If the detached Dapr sidecar is scaled to zero and the application reaches the sidecar (before even starting an HTTP server), the `"wait for the app to become ready"` deadlocks the app and the sidecar into waiting for each other.
+
+### 示例
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: kafkaevent
+spec:
+  type: bindings.kafka
+  version: v1
+  metadata:
+  - name: brokers
+    value: "http://localhost:5050"
+  - name: topics
+    value: "someTopic"
+  - name: publishTopic
+    value: "someTopic2"
+  - name: consumerGroup
+    value: "group1"
+  - name: "direction"
+    value: "input, output"
+```
+
 ## 通过输入绑定调用服务代码
 
 想要使用输入绑定触发应用的开发人员可以在 `POST` http 端点上监听以接收请求。路由名称与 `metadata.name`相同。
@@ -44,7 +88,7 @@ spec:
 
 `metadata` 部分是开放式键/值元数据对，它允许绑定定义连接属性以及组件实现独有的定制属性。
 
-### Examples
+### 示例
 
 例如，以下是 Python 应用程序如何使用 Dapr API 兼容平台从 `Kafka` 订阅事件。 请注意组件中的 metadata.name 值 `kafkaevent` 如何与 Python 代码中的 POST 路由名称匹配。
 

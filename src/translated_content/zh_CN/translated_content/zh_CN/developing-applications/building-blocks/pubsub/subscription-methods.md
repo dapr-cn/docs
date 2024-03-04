@@ -1,46 +1,47 @@
 ---
 type: docs
-title: "Declarative and programmatic subscription methods"
+title: "声明式和编程式订阅方法"
 linkTitle: "Subscription methods"
 weight: 3000
-description: "Learn more about the methods by which Dapr allows you to subscribe to topics."
+description: "了解 Dapr 允许您订阅主题的方法。"
 ---
 
-## Pub/sub API subscription methods
+## Pub/sub API订阅方法
 
-Dapr applications can subscribe to published topics via two methods that support the same features: declarative and programmatic.
+Dapr 应用程序可以通过两种方法订阅发布的主题，这两种方法支持相同的功能：声明式和编程式。
 
-| 订阅方法                                                                                 | 说明                                                                                                                                                                                                               |
-| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Declarative**]({{< ref "subscription-methods.md#declarative-subscriptions" >}})   | Subscription is defined in an **external file**. The declarative approach removes the Dapr dependency from your code and allows for existing applications to subscribe to topics, without having to change code. |
-| [**Programmatic**]({{< ref "subscription-methods.md#programmatic-subscriptions" >}}) | Subscription is defined in the **application code**. The programmatic approach implements the subscription in your code.                                                                                         |
+| 订阅方法                                                                        | 说明                                                                   |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [**声明式**]({{< ref "subscription-methods.md#declarative-subscriptions" >}})  | 订阅定义在 **外部文件**中. 声明式方法会从您的代码中移除 Dapr 依赖，并允许现有的应用程序订阅 topics，而无需更改代码。 |
+| [**编程式**]({{< ref "subscription-methods.md#programmatic-subscriptions" >}}) | 订阅定义在 **应用代码**中. 编程式方法在代码中实现订阅。                                      |
 
-The examples below demonstrate pub/sub messaging between a `checkout` app and an `orderprocessing` app via the `orders` topic. The examples demonstrate the same Dapr pub/sub component used first declaratively, then programmatically.
+以下示例演示了 `checkout` app 和 `orderprocessing` 应用程序通过 `orders` 主题通信。 示例演示了相同的 Dapr 发布/订阅组件，首先以声明方式使用，然后以编程方式使用。
 
-### Declarative subscriptions
+### 声明式订阅
 
-You can subscribe declaratively to a topic using an external component file. This example uses a YAML component file named `subscription.yaml`:
+您可以使用外部组件文件来声明式地订阅主题。 此示例使用名为 `subscription.yaml`的YAML组件文件：
 
 ```yaml
-apiVersion: dapr.io/v1alpha1
+apiVersion: dapr.io/v2alpha1
 kind: Subscription
 metadata:
   name: order
 spec:
   topic: orders
-  route: /checkout
+  routes:
+    default: /checkout
   pubsubname: pubsub
 scopes:
 - orderprocessing
 - checkout
 ```
 
-Here the subscription called `order`:
-- Uses the pub/sub component called `pubsub` to subscribes to the topic called `orders`.
-- Sets the `route` field to send all topic messages to the `/checkout` endpoint in the app.
-- Sets `scopes` field to scope this subscription for access only by apps with IDs `orderprocessing` and `checkout`.
+这里的订阅称为 `order`：
+- 使用Pub/sub（发布/订阅）组件 `pubsub` 订阅名为 `orders`的主题。
+- 将 `order` 字段设置为将所有主题消息发送到应用中的 `/checkout` 端点。
+- 设置 `scopes` 字段为具有 ID 的应用可以启用此订阅， `orderprocessing` 和 `checkout`。
 
-When running Dapr, set the YAML component file path to point Dapr to the component.
+在运行 Dapr 时，将 YAML 组件文件路径设置为指向组件的 Dapr。
 
 {{< tabs ".NET" Java Python JavaScript Go Kubernetes>}}
 
@@ -86,7 +87,7 @@ dapr run --app-id myapp --resources-path ./myComponents -- go run app.go
 
 {{% codetab %}}
 
-In Kubernetes, apply the component to the cluster:
+在 Kubernetes 中，将该组件应用到集群中:
 
 ```bash
 kubectl apply -f subscription.yaml
@@ -96,7 +97,7 @@ kubectl apply -f subscription.yaml
 
 {{< /tabs >}}
 
-In your application code, subscribe to the topic specified in the Dapr pub/sub component.
+在您的应用程序代码中，订阅 Dapr pub/sub 组件中指定的主题。
 
 {{< tabs ".NET" Java Python JavaScript Go >}}
 
@@ -182,11 +183,15 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 
 {{< /tabs >}}
 
-The `/checkout` endpoint matches the `route` defined in the subscriptions and this is where Dapr sends all topic messages to.
+`/checkout` 端点与订阅中定义的 `route` 相匹配，这是 Dapr 将所有主题消息发送至的位置。
 
 ### 编程方式订阅
 
-The programmatic approach returns the `routes` JSON structure within the code, unlike the declarative approach's `route` YAML structure. In the example below, you define the values found in the [declarative YAML subscription](#declarative-subscriptions) above within the application code.
+动态编程方法返回 `routes` 代码中的 JSON 结构，与声明式方法的 `routes` YAML 结构相对应。
+
+> **注意：** 编程订阅只在应用程序启动时读取一次。 你不能 _动态_ 添加新的编程订阅，仅在编译时添加新的编程订阅。
+
+在下面的示例中，您将定义在 [声明性 YAML 订阅](#declarative-subscriptions) 上面的应用程序代码。
 
 {{< tabs ".NET" Java Python JavaScript Go>}}
 
@@ -202,13 +207,22 @@ public async Task<ActionResult<Order>>Checkout(Order order, [FromServices] DaprC
 }
 ```
 
-or
+或者
 
 ```csharp
 // Dapr subscription in [Topic] routes orders topic to this route
 app.MapPost("/checkout", [Topic("pubsub", "orders")] (Order order) => {
     Console.WriteLine("Subscriber received : " + order);
     return Results.Ok(order);
+});
+```
+
+上面定义的这两个处理程序还需要映射到配置 `dapr/subscribe` 端点。 这是在定义端点时在应用程序启动代码中完成的。
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapSubscribeHandler();
 });
 ```
 
@@ -307,6 +321,7 @@ app.listen(port, () => console.log(`consumer app listening on port ${port}!`))
 ```go
 package main
 
+import (
     "encoding/json"
     "fmt"
     "log"
@@ -369,10 +384,10 @@ func main() {
 ## 下一步
 
 * 尝试 [发布/订阅快速入门]({{< ref pubsub-quickstart.md >}})
-* Follow: [How-To: Configure pub/sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
-* Learn more about [declarative and programmatic subscription methods]({{< ref subscription-methods >}}).
+* 跟随 [操作方法：使用多个命名空间配置pub/sub组件]({{< ref pubsub-namespaces.md >}})。
+* 详细了解 [声明式和程序化订阅方法]({{< ref subscription-methods >}}).
 * 了解 [主题作用域]({{< ref pubsub-scopes.md >}})
-* Learn about [message TTL]({{< ref pubsub-message-ttl.md >}})
-* Learn more about [pub/sub with and without CloudEvent]({{< ref pubsub-cloudevents.md >}})
+* 了解 [消息 TTL]({{< ref pubsub-message-ttl.md >}})
+* 详细了解 [CloudEvent 的发布/订阅]({{< ref pubsub-cloudevents.md >}})
 * [pub/sub 组件列表]({{< ref supported-pubsub.md >}})
-* Read the [pub/sub API reference]({{< ref pubsub_api.md >}})
+* 阅读 [API 参考手册]({{< ref pubsub_api.md >}})

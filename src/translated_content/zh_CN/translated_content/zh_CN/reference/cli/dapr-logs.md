@@ -29,7 +29,7 @@ dapr logs [flags]
  | `--namespace`, `-n`  |          | `default` | 部署应用程序的 Kubernetes 名称空间                      |
  | `--pod-name`, `-p`   |          |           | Kubernetes 中的 pod 的名称，以防您的应用程序具有多个 pod (可选)  |
 
-### Examples
+### 示例
 
 ```bash
 # 从custom命名空间的sample应用中的名称为target的Pod中拉取日志

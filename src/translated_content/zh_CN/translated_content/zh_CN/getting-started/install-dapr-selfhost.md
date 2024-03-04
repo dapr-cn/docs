@@ -8,44 +8,44 @@ aliases:
   - /zh-hans/getting-started/set-up-dapr/install-dapr/
 ---
 
-Now that you've [installed the Dapr CLI]({{<ref install-dapr-cli.md>}}), use the CLI to initialize Dapr on your local machine.
+现在您已经 [安装了 Dapr CLI]({{<ref install-dapr-cli.md>}})，使用 CLI 在本地计算机上初始化 Dapr。
 
 Dapr 作为 sidecar 与您的应用程序一起运行。 在自托管模式下，这意味着它是本地计算机上的一个进程。 通过初始化 Dapr，您可以：
 
-- Fetch and install the Dapr sidecar binaries locally.
-- Create a development environment that streamlines application development with Dapr.
+- 在本地获取并安装 Dapr sidecar 二进制文件。
+- 创建一个开发环境，用Dapr简化应用开发。
 
 Dapr 初始化包括：
 
-1. Running a **Redis container instance** to be used as a local state store and message broker.
-1. Running a **Zipkin container instance** for observability.
-1. Creating a **default components folder** with component definitions for the above.
-1. Running a **Dapr placement service container instance** for local actor support.
+1. 运行一个用于状态存储和消息代理的** Redis 容器实例**.
+1. 运行一个用于提供可观察性的** Zipkin 容器实例**.
+1. 创建具有上述组件定义的**默认组件文件夹**.
+1. 运行用于本地 actor 支持的** Dapr placement 服务容器实例**.
 
 {{% alert title="Docker" color="primary" %}}
 推荐的开发环境需要 [Docker](https://docs.docker.com/install/)。 虽然你可以 [在不依赖Docker的情况下初始化Dapr]({{<ref self-hosted-no-docker.md>}})，但本指南接下来的步骤都是假设推荐的Docker开发环境。
 
-You can also install [Podman](https://podman.io/) in place of Docker. Read more about [initializing Dapr using Podman]({{<ref dapr-init.md>}}).
+您还可以安装 [Podman](https://podman.io/) 代替 Docker。 阅读更多关于 [使用 Podman 初始化 Dapr]({{<ref dapr-init.md>}}).
 {{% /alert %}}
 
-### Step 1: Open an elevated terminal
+### 第 1 步：打开提升权限终端
 
 {{< tabs "Linux/MacOS" "Windows">}}
 
 {{% codetab %}}
 
-You will need to use `sudo` for this quickstart if:
+在以下情况下，您将需要使用 `sudo` 进行此快速入门：
 
-- You run your Docker commands with `sudo`, or
+- 您使用 `sudo`运行 Docker 命令，或者
 - 安装路径为 `/usr/local/bin` （默认安装路径）。
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-Run Windows Terminal or command prompt as administrator.
+以管理员身份运行 Windows 终端或命令提示符。
 
-1. Right click on the Windows Terminal or command prompt icon.
+1. 右键单击 Windows 终端或命令提示符图标。
 1. 选择 **以管理员身份运行**。
 
 {{% /codetab %}}
@@ -54,7 +54,7 @@ Run Windows Terminal or command prompt as administrator.
 
 ### 第 2 步：运行 init CLI 命令
 
-Install the latest Dapr runtime binaries:
+安装最新的 Dapr 运行时二进制程序:
 
 ```bash
 dapr init
@@ -66,32 +66,32 @@ dapr init
 dapr --version
 ```
 
-**Output:**
+**输出:**
 
 `CLI version: {{% dapr-latest-version cli="true" %}}` <br> `Runtime version: {{% dapr-latest-version long="true" %}}`
 
 ### 第 4 步：验证容器是否运行
 
-As mentioned earlier, the `dapr init` command launches several containers that will help you get started with Dapr. Verify you have container instances with `daprio/dapr`, `openzipkin/zipkin`, and `redis` images running:
+如上所述， `dapr init` 命令启动了几个容器，这将有助于你开始使用 Dapr。 验证您有是否有运行 `daprio/dapr`、 `openzipkin/zipkin` 和 `redis` 映像的容器实例：
 
 ```bash
 docker ps
 ```
 
-**Output:**
+**输出:**
 
 <img src="/images/install-dapr-selfhost/docker-containers.png" width=800>
 
 ### 第 5 步：验证组件目录已初始化
 
-On `dapr init`, the CLI also creates a default components folder that contains several YAML files with definitions for a state store, Pub/sub, and Zipkin. The Dapr sidecar will read these components and use:
+在 `dapr init`上，CLI 还会创建一个默认组件文件夹，其中包含多个 YAML 文件，其中包含状态存储、Pub/sub（发布/订阅）和 Zipkin 的定义。 Dapr sidecar 将读取这些组件并使用：
 
-- The Redis container for state management and messaging.
+- 用于状态管理和消息传递的 Redis 容器。
 - 用于收集trace的 Zipkin 容器。
 
-Verify by opening your components directory:
+通过打开您的组件目录进行验证：
 
-- On Windows, under `%UserProfile%\.dapr`
+- 在Windows上，在 `%UserProfile%\.dapr`
 - 在Linux/MacOS上，在 `~/.dapr`
 
 {{< tabs "Linux/MacOS" "Windows">}}
@@ -102,7 +102,7 @@ Verify by opening your components directory:
 ls $HOME/.dapr
 ```
 
-**Output:**
+**输出:**
 
 `bin  components  config.yaml`
 
@@ -116,7 +116,7 @@ ls $HOME/.dapr
 explorer "%USERPROFILE%\.dapr\"
 ```
 
-**Result:**
+**结果:**
 
 <img src="/images/install-dapr-selfhost/windows-view-components.png" width=600>
 
@@ -126,5 +126,5 @@ explorer "%USERPROFILE%\.dapr\"
 
 <br>
 
-{{< button text="Next step: Use the Dapr API >>" page="getting-started/get-started-api.md" >}}
+{{< button text="下一步：使用 Dapr API >>" page="getting-started/get-started-api.md" >}}
 

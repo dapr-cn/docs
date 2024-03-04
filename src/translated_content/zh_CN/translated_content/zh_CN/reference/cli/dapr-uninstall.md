@@ -30,7 +30,7 @@ dapr uninstall [flags]
 | `--namespace`, `-n`   |      | `dapr-system` | 要卸载 Dapr 的 Kubernetes 命名空间                                                                                                                              |
 | `--container-runtime` |      | `docker`      | Used to pass in a different container runtime other than Docker. Supported container runtimes are: `docker`, `podman`                                   |
 
-### Examples
+### 示例
 
 #### Uninstall from self-hosted mode
 

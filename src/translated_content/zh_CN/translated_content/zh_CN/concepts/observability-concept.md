@@ -4,45 +4,71 @@ title: "可观测性"
 linkTitle: "可观测性"
 weight: 500
 description: >
-  Observe applications through tracing, metrics, logs and health
+  通过跟踪、指标、日志和健康状况观察应用程序
 ---
 
-When building an application, understanding how the system is behaving is an important part of operating it - this includes having the ability to observe the internal calls of an application, gauging its performance and becoming aware of problems as soon as they occur. This is challenging for any system, but even more so for a distributed system comprised of multiple microservices where a flow, made of several calls, may start in one microservice but continue in another. 可观察性不仅在生产环境中至关重要，在发开期间也同样有用，可以了解瓶颈所在，提高性能并在整个微服务范围内进行基本的调试。
+在构建应用程序时，了解系统行为是操作应用程序的一个重要而又具有挑战性的部分，例如：
+- 观察应用程序的内部调用
+- 衡量其性能
+- 一旦出现问题，立即意识到问题的存在
 
-While some data points about an application can be gathered from the underlying infrastructure (for example memory consumption, CPU usage), other meaningful information must be collected from an "application-aware" layer–one that can show how an important series of calls is executed across microservices. 这通常意味着开发人员必须添加一些代码来检测应用程序以实现此目的。 Often, instrumentation code is simply meant to send collected data such as traces and metrics to observability tools or services that can help store, visualize and analyze all this information.
+对于由多个微服务组成的分布式系统来说，这一点尤其具有挑战性，因为由多个调用组成的流程可能从一个微服务开始，然后在另一个微服务中继续。
 
-Having to maintain this code, which is not part of the core logic of the application, is a burden on the developer, sometimes requiring understanding the observability tools' APIs, using additional SDKs etc. 此检测需求可能会增加应用程序的可移植性难度，比如在不同地方部署时，该应用程序可能需要不同的检测代码。 For example, different cloud providers offer different observability tools and an on-premises deployment might require a self-hosted solution.
+在生产环境中，应用程序的可观察性至关重要，而在开发过程中也非常有用：
+- 了解瓶颈
+- 提高性能
+- 跨微服务执行基本调试
+
+虽然可以从底层基础架构（内存消耗、CPU 使用率）收集有关应用程序的某些数据点，但必须从 "应用程序感知 "层收集其他有意义的信息--该层可以显示重要的一系列调用是如何在微服务间执行的。 通常情况下，您需要添加一些代码来检测应用程序，然后将收集到的数据（如跟踪和指标）发送到可观察性工具或服务，这些工具或服务可以帮助存储、可视化和分析所有这些信息。
+
+维护此检测代码（不是应用程序核心逻辑的一部分）需要了解可观测性工具的 API、使用其他 SDK 等。 此检测还可能给应用程序带来可移植性挑战，需要根据应用程序的部署位置进行不同的检测。 例如：
+- 不同的云提供商提供不同的可观测性工具
+- 本地部署可能需要自托管解决方案
 
 ## 通过 Dapr 进行观测
 
-When building an application which leverages Dapr API building blocks to perform service-to-service calls and pub/sub messaging, Dapr offers an advantage with respect to [distributed tracing]({{<ref tracing>}}). Because this inter-service communication flows through the Dapr runtime (or "sidecar"), Dapr is in a unique position to offload the burden of application-level instrumentation.
+当您利用 Dapr API 构建模块执行服务对服务调用、pub/sub 消息传递和其他 API 时，Dapr 在 [分布式跟踪]({{< ref tracing >}})方面具有优势。 由于这种服务间通信是通过 Dapr 运行时（或 "sidecar"）进行的，因此 Dapr 在卸载应用程序级检测负担方面具有独特的优势。
 
-### Distributed tracing
+### 分布式跟踪
 
-Dapr can be [configured to emit tracing data]({{<ref setup-tracing.md>}}), and because Dapr does so using the widely adopted protocols of [Open Telemetry (OTEL)](https://opentelemetry.io/) and [Zipkin](https://zipkin.io), it can be easily integrated with multiple observability tools.
+可对 Dapr 进行 [配置，以便使用 [Open Telemetry (OTEL)](https://opentelemetry.io/) 和 [Zipkin](https://zipkin.io)等广泛采用的协议发送跟踪数据]({{< ref setup-tracing.md >}})。 这使得它很容易与多种可观测性工具集成。
 
 <img src="/images/observability-tracing.png" width=1000 alt="使用 Dapr 进行分布式跟踪">
 
-### Automatic tracing context generation
+### 自动生成跟踪上下文
 
-Dapr uses [W3C tracing]({{<ref w3c-tracing-overview>}}) specification for tracing context, included as part Open Telemetry (OTEL), to generate and propagate the context header for the application or propagate user-provided context headers. This means that you get tracing by default with Dapr.
+Dapr 使用 [W3C 跟踪]({{< ref tracing >}}) 跟踪上下文规范（作为开放遥测 (OTEL) 的一部分）来生成和传播应用程序的上下文标头，或传播用户提供的上下文标头。 这意味着 Dapr 默认会进行跟踪。
 
-## Observability for the Dapr sidecar and control plane
+## Dapr sidecar 和控制平面的可观测性
 
-You also want to be able to observe Dapr itself, by collecting metrics on performance, throughput and latency and logs emitted by the Dapr sidecar, as well as the Dapr control plane services. Dapr sidecars have a health endpoint that can be probed to indicate their health status.
+您还可以通过以下方式观察 Dapr 本身：
+- 生成由 Dapr 副卡和 Dapr 控制平面服务发出的日志
+- 收集有关性能、吞吐量和延迟的指标
+- 使用健康端点探针显示 Dapr sidecar 健康状况
 
-<img src="/images/observability-sidecar.png" width=1000 alt="Dapr sidecar metrics, logs and health checks">
+<img src="/images/observability-sidecar.png" width=1000 alt="Dapr sidecar 指标、日志和健康检查">
 
-### Logging
+### 日志
 
-Dapr generates [logs]({{<ref "logs.md">}}) to provide visibility into sidecar operation and to help users identify issues and perform debugging. Log events contain warning, error, info, and debug messages produced by Dapr system services. Dapr can also be configured to send logs to collectors such as [Fluentd]({{< ref fluentd.md >}}), [Azure Monitor]({{< ref azure-monitor.md >}}), and other observability tools, so that logs can be searched and analyzed to provide insights.
+Dapr 生成 [日志]({{< ref logs.md >}})：
+- 提供 sidecar 运行的可见性
+- 帮助用户发现问题并进行调试
+
+日志事件包含由 Dapr 系统服务生成的警告，错误，信息和调试消息。 您还可以配置 Dapr，将日志发送到收集器，如 [Open Telemetry Collector]({{< ref otel-collector >}}), [Fluentd]({{< ref fluentd.md >}}), [New Relic]({{< ref "operations/observability/logging/newrelic.md" >}}), [Azure Monitor]({{< ref azure-monitor.md >}})以及其他可观察性工具，这样就可以搜索和分析日志，提供见解。
 
 ### Metrics
 
-Metrics are the series of measured values and counts that are collected and stored over time. [Dapr metrics]({{<ref "metrics">}}) provide monitoring capabilities to understand the behavior of the Dapr sidecar and control plane. For example, the metrics between a Dapr sidecar and the user application show call latency, traffic failures, error rates of requests, etc. Dapr [control plane metrics](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md) show sidecar injection failures and the health of control plane services, including CPU usage, number of actor placements made, etc.
+指标（Metrics）是在一段时间内收集和存储的一系列度量值和计数。 [Dapr 指标]({{< ref metrics >}}) 提供监控功能，以了解 Dapr 边车和控制平面的行为。 例如，Dapr sidecar 和用户应用之间的服务指标可以展示调用延迟、流量故障、请求的错误率等。
 
-### Health checks
+Dapr [系统服务指标](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md) 显示 sidecar 注入失败和控制平面的健康状态，包括CPU使用情况、actor placement 数量等。
 
-The Dapr sidecar exposes an HTTP endpoint for [health checks]({{<ref sidecar-health.md>}}). With this API, user code or hosting environments can probe the Dapr sidecar to determine its status and identify issues with sidecar readiness.
+### 健康检查
 
-Conversely, Dapr can be configured to probe for the [health of your application]({{<ref app-health.md >}}), and react to changes in the app's health, including stopping pub/sub subscriptions and short-circuiting service invocation calls.
+Dapr sidecar 暴露了 [健康检查]({{< ref sidecar-health.md >}})的 HTTP 端点。 有了这个应用程序接口，用户代码或托管环境就可以探测 Dapr 侧载程序，以确定其状态，并找出侧载程序就绪性方面的问题。
+
+相反，Dapr 可配置为探测应用程序 [的健康状况]({{< ref app-health.md >}})，并对应用程序的健康状况变化做出反应，包括停止发布/子订阅和短路服务调用调用。
+
+## 下一步
+
+- [进一步了解使用 Dapr 进行开发时的可观察性]({{< ref tracing >}})
+- [进一步了解使用 Dapr 运行时的可观察性]({{< ref tracing >}})

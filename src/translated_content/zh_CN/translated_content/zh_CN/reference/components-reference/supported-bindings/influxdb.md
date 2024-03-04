@@ -22,13 +22,13 @@ spec:
   version: v1
   metadata:
   - name: url # Required
-    value: <INFLUX-DB-URL>
+    value: "<INFLUX-DB-URL>"
   - name: token # Required
-    value: <TOKEN>
+    value: "<TOKEN>"
   - name: org # Required
-    value: <ORG>
+    value: "<ORG>"
   - name: bucket # Required
-    value: <BUCKET>
+    value: "<BUCKET>"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -37,12 +37,12 @@ spec:
 
 ## 元数据字段规范
 
-| Field  | 必填 | 绑定支持   | 详情                                | 示例                        |
-| ------ |:--:| ------ | --------------------------------- | ------------------------- |
-| url    | 是  | Output | The URL for the InfluxDB instance | `"http://localhost:8086"` |
-| token  | 是  | 输出     | InfluxDB 的授权令牌                    | `"mytoken"`               |
-| org    | 是  | 输出     | InfluxDB 组织                       | `"myorg"`                 |
-| bucket | 是  | 输出     | 要写入的存储桶名称                         | `"mybucket"`              |
+| Field    | Required | 绑定支持   | 详情                                | 示例                        |
+| -------- |:--------:| ------ | --------------------------------- | ------------------------- |
+| `url`    |    是     | Output | The URL for the InfluxDB instance | `"http://localhost:8086"` |
+| `token`  |    是     | 输出     | InfluxDB 的授权令牌                    | `"mytoken"`               |
+| `org`    |    是     | 输出     | InfluxDB 组织                       | `"myorg"`                 |
+| `bucket` |    是     | 输出     | 要写入的存储桶名称                         | `"mybucket"`              |
 
 ## 绑定支持
 

@@ -22,7 +22,7 @@ dapr completion [command]
 | -------------- | ---- | --- | ------- |
 | `--help`, `-h` |      |     | 显示此帮助消息 |
 
-### Examples
+### 示例
 
 #### Installing bash completion on macOS using Homebrew
 

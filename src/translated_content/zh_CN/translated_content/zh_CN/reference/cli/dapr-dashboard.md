@@ -31,7 +31,7 @@ dapr dashboard [flags]
 | `--port`, `-p`       |      | `8080`        | The local port on which to serve Dapr dashboard                       |
 | `--version`, `-v`    |      | `false`       | Print the version for Dapr dashboard                                  |
 
-### Examples
+### 示例
 
 ```bash
 # 启动本地仪表盘

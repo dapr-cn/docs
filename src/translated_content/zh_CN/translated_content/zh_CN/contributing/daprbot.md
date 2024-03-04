@@ -1,29 +1,29 @@
 ---
 type: docs
-title: "Dapr bot reference"
+title: "Dapr 机器人参考"
 linkTitle: "Dapr bot"
 weight: 15
-description: "List of Dapr bot capabilities."
+description: "Dapr 机器人功能列表。"
 ---
 
-Dapr bot is a GitHub script that helps with common tasks in the Dapr organization. It is set up individually for each repository ([example](https://github.com/dapr/dapr/blob/master/.github/workflows/dapr-bot.yml)) and can be configured to run on specific events. This reference covers the Dapr bot capabilities from the `dapr` and `components-contrib` repositories only.
+Dapr 机器人由一系列命令触发，帮助 Dapr 组织完成常见任务。 它是为每个存储库单独设置的（[示例](https://github.com/dapr/dapr/blob/master/.github/workflows/dapr-bot.yml)），可以配置为在特定事件上运行。 以下是命令列表和它们所实现的存储库列表。
 
-## Command reference
+## 命令参考
 
-| Command          | Target                | 说明                                                                                                             | Who can use                                                                                     | Repository                   |
-| ---------------- | --------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------- |
-| `/assign`        | Issue                 | Assigns an issue to a user or group of users                                                                   | Anyone                                                                                          | `dapr`, `components-contrib` |
-| `/ok-to-test`    | Pull request          | `dapr`: trigger end to end tests <br/> `components-contrib`: trigger conformance and certification tests | Users listed in the [bot](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js) | `dapr`, `components-contrib` |
-| `/ok-to-perf`    | Pull request          | Trigger performance tests.                                                                                     | Users listed in the [bot](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js) | `dapr`                       |
-| `/make-me-laugh` | Issue or pull request | Posts a random joke                                                                                            | Users listed in the [bot](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js) | `dapr`, `components-contrib` |
+| 命令               | 目标                    | 说明                                                           | 谁可以使用                                                                             | 仓库                                     |
+| ---------------- | --------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------- | -------------------------------------- |
+| `/assign`        | Issue                 | 将问题分配给一个用户或一组用户                                              | 任何人                                                                               | `dapr`, `components-contrib`, `go-sdk` |
+| `/ok-to-test`    | Pull requests         | `dapr`: 触发端到端测试 <br/> `components-contrib`: 触发一致性和认证测试 | 列在[机器人](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js)中的用户 | `dapr`, `components-contrib`           |
+| `/ok-to-perf`    | Pull requests         | 触发性能测试。                                                      | 列在[机器人](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js)中的用户 | `dapr`                                 |
+| `/make-me-laugh` | Issue 或者 pull request | 发布一个随机笑话                                                     | 列在[机器人](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js)中的用户 | `dapr`, `components-contrib`           |
 
-## Label reference
+## 标签参考
 
-You can query issues created by the Dapr bot by using the `created-by/dapr-bot` label ([query](https://github.com/search?q=org%3Adapr%20is%3Aissue%20label%3Acreated-by%2Fdapr-bot%20&type=issues)).
+您可以使用 Dapr 机器人创建的问题 `created-by/dapr-bot` 标签 （[查询](https://github.com/search?q=org%3Adapr%20is%3Aissue%20label%3Acreated-by%2Fdapr-bot%20&type=issues)).
 
-| Label                    | Target                | What does it do?                                                 | Repository           |
-| ------------------------ | --------------------- | ---------------------------------------------------------------- | -------------------- |
-| `docs-needed`            | Issue                 | Creates a new issue in `dapr/docs` to track doc work             | `dapr`               |
-| `sdk-needed`             | Issue                 | Creates new issues across the SDK repos to track SDK work        | `dapr`               |
-| `documentation required` | Issue or pull request | Creates a new issue in `dapr/docs` to track doc work             | `components-contrib` |
-| `new component`          | Issue or pull request | Creates a new issue in `dapr/dapr` to register the new component | `components-contrib` |
+| 标签                       | 目标                    | 它是做什么的?                           | 仓库                   |
+| ------------------------ | --------------------- | --------------------------------- | -------------------- |
+| `docs-needed`            | Issue                 | 在 `dapr/docs` 中创建一个新问题以跟踪文档工作     | `dapr`               |
+| `sdk-needed`             | Issue                 | 在SDK存储库中创建新问题以跟踪SDK工作             | `dapr`               |
+| `documentation required` | Issue 或者 pull request | 在 `dapr/docs` 中创建一个新问题以跟踪文档工作     | `components-contrib` |
+| `new component`          | Issue 或者 pull request | 在 `dapr/dapr` 中创建一个新 issue 来注册新组件 | `components-contrib` |

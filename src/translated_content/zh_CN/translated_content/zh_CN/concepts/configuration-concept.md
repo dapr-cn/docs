@@ -6,7 +6,7 @@ weight: 400
 description: "更改 Dapr 应用程序 sidecar 的行为或 Dapr 控制平面服务的全局行为"
 ---
 
-Dapr配置是能够更改单个Dapr应用程序的行为及Dapr控制平台系统服务全局行为的设置和策略。 For example, you can set an ACL policy on the application sidecar configuration which indicates which methods can be called from another application, or on the Dapr control plane configuration you can change the certificate renewal period for all certificates that are deployed to application sidecar instances.
+Dapr配置是能够更改单个Dapr应用程序的行为及Dapr控制平台系统服务全局行为的设置和策略。 例如，您可以在应用程序 sidecar 配置上设置 ACL 策略，该策略表明可以从其他应用程序调用哪些方法，或者在 Dapr 控制平面配置上，您可以更改部署到应用程序 sidecar 实例的所有证书的证书续订期。
 
 配置以 YAML 文件的形式进行定义和部署。 下面显示了一个捕获所有样本追踪信息的应用程序配置示例，它演示了如何设置一个收集度量信息去向的追踪结点。
 

@@ -21,23 +21,23 @@ spec:
   version: v1
   metadata:
   - name: gatewayAddr
-    value: <host>:<port>
+    value: "<host>:<port>"
   - name: gatewayKeepAlive
-    value: 45s
+    value: "45s"
   - name: usePlainTextConnection
-    value: true
+    value: "true"
   - name: caCertificatePath
-    value: /path/to/ca-cert
+    value: "/path/to/ca-cert"
 ```
 
 ## 元数据字段规范
 
-| Field                  | 必填 | 绑定支持   | 详情                     | 示例                 |
-| ---------------------- |:--:| ------ | ---------------------- | ------------------ |
-| gatewayAddr            | 是  | Output | Zeebe gateway address  | `localhost:26500`  |
-| gatewayKeepAlive       | 否  | 输出     | 设置保持会话消息发送到网关的频率 默认45秒 | `45s`              |
-| usePlainTextConnection | 否  | 输出     | 是否使用纯文本连接              | `true,false`       |
-| caCertificatePath      | 否  | 输出     | CA 证书的路径               | `/path/to/ca-cert` |
+| Field                    | Required | 绑定支持   | 详情                     | 示例                   |
+| ------------------------ |:--------:| ------ | ---------------------- | -------------------- |
+| `gatewayAddr`            |    是     | Output | Zeebe gateway address  | `"localhost:26500"`  |
+| `gatewayKeepAlive`       |    否     | 输出     | 设置保持会话消息发送到网关的频率 默认45秒 | `"45s"`              |
+| `usePlainTextConnection` |    否     | 输出     | 是否使用纯文本连接              | `"true"`, `"false"`  |
+| `caCertificatePath`      |    否     | 输出     | CA 证书的路径               | `"/path/to/ca-cert"` |
 
 ## 绑定支持
 
@@ -45,6 +45,7 @@ spec:
 
 - `topology`
 - `deploy-process`
+- `deploy-resource`
 - `create-instance`
 - `cancel-instance`
 - `set-variables`
@@ -120,9 +121,13 @@ spec:
 
 #### deploy-process
 
-`deploy-process` 操作将单个进程部署到 Zeebe。
+Deprecated alias of 'deploy-resource'.
 
-为了演示`deploy-process`操作，通过使用发送如下JSON格式数据的`POST` 方法调用Zeebe命令行绑定：
+#### deploy-resource
+
+The `deploy-resource` operation deploys a single resource to Zeebe. A resource can be a process (BPMN) or a decision and a decision requirement (DMN).
+
+To perform a `deploy-resource` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
 ```json
 {
@@ -130,40 +135,102 @@ spec:
   "metadata": {
     "fileName": "products-process.bpmn"
   },
-  "operation": "deploy-process"
+  "operation": "deploy-resource"
 }
 ```
 
 The metadata parameters are:
 
-- `fileName` - 进程文件的名称
+- `fileName` - the name of the resource file
 
 ##### 响应
 
 绑定返回一个如下JSON结构的数据：
 
+{{< tabs "BPMN" "DMN" >}}
+
+{{% codetab %}}
+
 ```json
 {
-  "key": 2251799813687320,
-  "processes": [
+  "key": 2251799813685252,
+  "deployments": [
     {
-      "bpmnProcessId": "products-process",
-      "version": 3,
-      "processDefinitionKey": 2251799813685895,
-      "resourceName": "products-process.bpmn"
+      "Metadata": {
+        "Process": {
+          "bpmnProcessId": "products-process",
+          "version": 2,
+          "processDefinitionKey": 2251799813685251,
+          "resourceName": "products-process.bpmn"
+        }
+      }
     }
   ]
 }
 ```
 
+{{% /codetab %}}
+
+{{% codetab %}}
+
+```json
+{
+  "key": 2251799813685253,
+  "deployments": [
+    {
+      "Metadata": {
+        "Decision": {
+          "dmnDecisionId": "products-approval",
+          "dmnDecisionName": "Products approval",
+          "version": 1,
+          "decisionKey": 2251799813685252,
+          "dmnDecisionRequirementsId": "Definitions_0c98xne",
+          "decisionRequirementsKey": 2251799813685251
+        }
+      }
+    },
+    {
+      "Metadata": {
+        "DecisionRequirements": {
+          "dmnDecisionRequirementsId": "Definitions_0c98xne",
+          "dmnDecisionRequirementsName": "DRD",
+          "version": 1,
+          "decisionRequirementsKey": 2251799813685251,
+          "resourceName": "products-approval.dmn"
+        }
+      }
+    }
+  ]
+}
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
 响应值为：
 
 - `key` - the unique key identifying the deployment
-- ` processes ` - 已部署进程的列表
-    - `bpmnProcessId` - the bpmn process ID, as parsed during deployment; together with the version forms a unique identifier for a specific process definition
-    - `version` - 分配的进程版本
-    - `processDefinitionKey` - 配置的键值，此进程唯一标识符
-    - `resourceName` - 进程解析的资源名称
+- `deployments` - a list of deployed resources, e.g. processes
+    - `metadata` - deployment metadata, each deployment has only one metadata
+        - `process`- metadata of a deployed process
+            - `bpmnProcessId` - the bpmn process ID, as parsed during deployment; together with the version forms a unique identifier for a specific process definition
+            - `version` - 分配的进程版本
+            - `processDefinitionKey` - 配置的键值，此进程唯一标识符
+            - `resourceName` - 进程解析的资源名称
+        - `decision` - metadata of a deployed decision
+            - `dmnDecisionId` - the dmn decision ID, as parsed during deployment; together with the versions forms a unique identifier for a specific decision
+            - `dmnDecisionName` - the dmn name of the decision, as parsed during deployment
+            - `version` - the assigned decision version
+            - `decisionKey` - the assigned decision key, which acts as a unique identifier for this decision
+            - `dmnDecisionRequirementsId` - the dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment
+            - `decisionRequirementsKey` - the assigned key of the decision requirements graph that this decision is part of
+        - `decisionRequirements` -  metadata of a deployed decision requirements
+            - `dmnDecisionRequirementsId` - the dmn decision requirements ID, as parsed during deployment; together with the versions forms a unique identifier for a specific decision
+            - `dmnDecisionRequirementsName` - the dmn name of the decision requirements, as parsed during deployment
+            - `version` - the assigned decision requirements version
+            - `decisionRequirementsKey` - the assigned decision requirements key, which acts as a unique identifier for this decision requirements
+            - `resourceName` - the resource name from which this decision requirements was parsed
 
 #### create-instance
 
@@ -171,9 +238,15 @@ The metadata parameters are:
 
 请注意，只有没有启动事件的进程才能通过此命令启动。
 
-##### 使用BPMN进程ID
+Typically, process creation and execution are decoupled. This means that the command creates a new process instance and immediately responds with the process instance id. The execution of the process occurs after the response is sent. However, there are use cases that need to collect the results of a process when its execution is complete. By defining the `withResult` property, the command allows to "synchronously" execute processes and receive the results via a set of variables. The response is sent when the process execution is complete.
+
+For more information please visit the [official documentation](https://docs.camunda.io/docs/components/concepts/process-instance-creation/).
 
 为了演示`create-instance` 操作，使用发送如下JSON结构数据的`POST` 方法调用Zeebe命令行绑定：
+
+{{< tabs "By BPMN process ID" "By process definition key" "Synchronous execution" >}}
+
+{{% codetab %}}
 
 ```json
 {
@@ -189,15 +262,9 @@ The metadata parameters are:
 }
 ```
 
-The data parameters are:
+{{% /codetab %}}
 
-- `bpmnProcessId` - the BPMN process ID of the process definition to instantiate
-- `version` - (可选项, 默认: 最新版本) 进程实例的版本
-- `variables` - (可选参数) JSON文档，将为根变量实例化的作用范围仅限于进程实例的变量；它必须是一个JSON对象，因为它将作为键值对进行映射。 例如 { "a": 1, "b": 2 } 将创建两个变量，分别命名为 "a" 和 "b"，以及它们的关联值。 [{ "a": 1, "b": 2 }] 不会是 有效参数，因为 JSON 文档的根是数组而不是对象
-
-##### 使用进程定义的键值
-
-为了演示`create-instance` 操作，使用发送如下JSON结构数据的`POST` 方法调用Zeebe命令行绑定：
+{{% codetab %}}
 
 ```json
 {
@@ -213,10 +280,40 @@ The data parameters are:
 }
 ```
 
+{{% /codetab %}}
+
+{{% codetab %}}
+
+```json
+{
+  "data": {
+    "bpmnProcessId": "products-process",
+    "variables": {
+      "productId": "some-product-id",
+      "productName": "some-product-name",
+      "productKey": "some-product-key"
+    },
+    "withResult": true,
+    "requestTimeout": "30s",
+    "fetchVariables": ["productId"]
+  },
+  "operation": "create-instance"
+}
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
 The data parameters are:
 
+- `bpmnProcessId` - the BPMN process ID of the process definition to instantiate
 - `processDefinitionKey` - the unique key identifying the process definition to instantiate
+- `version` - (可选项, 默认: 最新版本) 进程实例的版本
 - `variables` - (可选参数) JSON文档，将为根变量实例化的作用范围仅限于进程实例的变量；它必须是一个JSON对象，因为它将作为键值对进行映射。 例如 { "a": 1, "b": 2 } 将创建两个变量，分别命名为 "a" 和 "b"，以及它们的关联值。 [{ "a": 1, "b": 2 }] 不会是 有效参数，因为 JSON 文档的根是数组而不是对象
+- `withResult` - (optional, default: false) if set to true, the process will be instantiated and executed synchronously
+- `requestTimeout` - (optional, only used if withResult=true) timeout the request will be closed if the process is not completed before the requestTimeout.   If requestTimeout = 0, uses the generic requestTimeout configured in the gateway.
+- `fetchVariables` - (optional, only used if withResult=true) list of names of variables to be included in `variables` property of the response. If empty, all visible variables in the root scope will be returned.
 
 ##### 响应
 
@@ -227,7 +324,8 @@ The data parameters are:
   "processDefinitionKey": 2251799813685895,
   "bpmnProcessId": "products-process",
   "version": 3,
-  "processInstanceKey": 2251799813687851
+  "processInstanceKey": 2251799813687851,
+  "variables": "{\"productId\":\"some-product-id\"}"
 }
 ```
 
@@ -237,6 +335,7 @@ The data parameters are:
 - `bpmnProcessId` - 进程定义的用于创建进程实例的 BPMN 进程 ID
 - ` version ` - 进程定义用于创建进程实例的版本
 - `processInstanceKey` - 创建的进程实例的唯一标识符
+- `variables` - (optional, only if withResult=true was used in the request) JSON document consists of visible variables in the root scope; returned as a serialized JSON document
 
 #### cancel-instance
 
@@ -249,7 +348,6 @@ The data parameters are:
   "data": {
     "processInstanceKey": 2251799813687851
   },
-  "metadata": {},
   "operation": "cancel-instance"
 }
 ```
@@ -278,7 +376,6 @@ The data parameters are:
       "productKey": "some-product-key"
     }
   },
-  "metadata": {},
   "operation": "set-variables"
 }
 ```
@@ -314,7 +411,6 @@ The data parameters are:
   "data": {
     "incidentKey": 2251799813686123
   },
-  "metadata": {},
   "operation": "resolve-incident"
 }
 ```
@@ -335,14 +431,17 @@ The data parameters are:
 
 ```json
 {
-  "messageName": "",
-  "correlationKey": "2",
-  "timeToLive": "1m",
-  "variables": {
-    "productId": "some-product-id",
-    "productName": "some-product-name",
-    "productKey": "some-product-key"
-  }
+  "data": {
+    "messageName": "product-message",
+    "correlationKey": "2",
+    "timeToLive": "1m",
+    "variables": {
+      "productId": "some-product-id",
+      "productName": "some-product-name",
+      "productKey": "some-product-key"
+    },
+  },  
+  "operation": "publish-message"
 }
 ```
 
@@ -385,9 +484,9 @@ The data parameters are:
       "productId",
       "productName",
       "productKey"
-    ]
+    ],
+    "requestTimeout": "30s"
   },
-  "metadata": {},
   "operation": "activate-jobs"
 }
 ```
@@ -399,6 +498,7 @@ The data parameters are:
 - `timeout` -（可选，默认值：5 分钟）直到达到超时时间，否则本次调用返回的作业，将不会被下一次调用激活。
 - `workerName` -（可选，默认值： `default`）激活作业的工作线程的名称，主要用于记录目的
 - `fetchVariables` -（可选）将作为作业变量获取的变量列表；如果为空，则将返回激活时的作业作用域内所有的可见变量。
+- `requestTimeout` - (optional) the request will be completed when at least one job is activated or after the requestTimeout. If the requestTimeout = 0, a default timeout is used. If the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.
 
 ##### 响应
 
@@ -407,7 +507,19 @@ The data parameters are:
 ```json
 [
   {
-
+    "key": 2251799813685267,
+    "type": "fetch-products",
+    "processInstanceKey": 2251799813685260,
+    "bpmnProcessId": "products",
+    "processDefinitionVersion": 1,
+    "processDefinitionKey": 2251799813685249,
+    "elementId": "Activity_test",
+    "elementInstanceKey": 2251799813685266,
+    "customHeaders": "{\"process-header-1\":\"1\",\"process-header-2\":\"2\"}",
+    "worker": "test", 
+    "retries": 1,
+    "deadline": 1694091934039,
+    "variables":"{\"productId\":\"some-product-id\"}"
   }
 ]
 ```
@@ -426,7 +538,7 @@ The data parameters are:
 - `worker` - 激活这个作业的工作线程名称
 - ` retries` - 该作业的重试次数（应始终为正值）
 - ` deadline ` - 作业何时可以再次被激活，将以UNIX时间戳格式发送
-- ` variables ` - JSON 文档，在激活时计算，由任务作用域内所有可见变量组成
+- `variables` - computed at activation time, consisting of all visible variables to the task scope; returned as a serialized JSON document
 
 #### complete-job
 
@@ -444,7 +556,6 @@ The data parameters are:
       "productKey": "some-product-key"
     }
   },
-  "metadata": {},
   "operation": "complete-job"
 }
 ```
@@ -469,9 +580,14 @@ The data parameters are:
   "data": {
     "jobKey": 2251799813685739,
     "retries": 5,
-    "errorMessage": "some error occurred"
+    "errorMessage": "some error occurred",
+    "retryBackOff": "30s",
+    "variables": {
+      "productId": "some-product-id",
+      "productName": "some-product-name",
+      "productKey": "some-product-key"
+    }
   },
-  "metadata": {},
   "operation": "fail-job"
 }
 ```
@@ -480,7 +596,9 @@ The data parameters are:
 
 - `jobKey` - the unique job identifier, as obtained when activating the job
 - ` retries ` - 作业剩余的重试次数
-- `errorMessage` - （可选）描述作业失败原因的信息，如果作业重试次数用完并引发事件，此信息将特别有用，因为这条信息可以帮助解释引发事件的原因
+- `errorMessage` - (optional) a message describing why the job failed this is particularly useful if a job runs out of retries and an incident is raised, as it this message can help explain why an incident was raised
+- `retryBackOff` - (optional) the back-off timeout for the next retry
+- `variables` - (optional) JSON document that will instantiate the variables at the local scope of the job's associated task; it must be a JSON object, as variables will be mapped in a key-value fashion. e.g. { "a": 1, "b": 2 } will create two variables, named "a" and "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the JSON document is an array and not an object.
 
 ##### 响应
 
@@ -498,7 +616,6 @@ The data parameters are:
     "jobKey": 2251799813686172,
     "retries": 10
   },
-  "metadata": {},
   "operation": "update-job-retries"
 }
 ```
@@ -525,12 +642,11 @@ The data parameters are:
     "errorCode": "product-fetch-error",
     "errorMessage": "The product could not be fetched"
   },
-  "metadata": {},
   "operation": "throw-error"
 }
 ```
 
-参数的含义是：
+The data parameters are:
 
 - `jobKey` - the unique job identifier, as obtained when activating the job
 - `errorCode` - 将与错误捕获事件匹配的错误代码

@@ -3,71 +3,71 @@ type: docs
 title: "Azure Cosmos DB"
 linkTitle: "Azure Cosmos DB"
 weight: 1000
-description: "Use Azure Cosmos DB as a state store"
+description: "使用 azure Cosmos DB 作为状态存储"
 ---
 
-Dapr doesn't transform state values while saving and retrieving states. Dapr requires all state store implementations to abide by a certain key format scheme (see [the state management spec]({{< ref state_api.md >}}). You can directly interact with the underlying store to manipulate the state data, such as:
+Dapr 在保存和检索状态时不会转换状态值。 Dapr 要求所有的状态存储实现都要遵守特定的密钥格式 (参见[Dapr 状态管理规范]({{< ref state_api.md >}}))。 您可以直接与底层存储交互，以操纵状态数据，例如：
 
-- Querying states.
-- Creating aggregated views.
-- Making backups.
+- 查询状态。
+- 创建聚合视图。
+- 制作备份。
 
 {{% alert title="Note" color="primary" %}}
-Azure Cosmos DB is a multi-modal database that supports multiple APIs. The default Dapr Cosmos DB state store implementation uses the [Azure Cosmos DB SQL API](https://docs.microsoft.com/azure/cosmos-db/sql-query-getting-started).
+Azure Cosmos DB 是一个支持多种 API 的多模数据库。 默认的 Dapr Cosmos DB 状态存储实现使用 [Azure Cosmos DB SQL API](https://docs.microsoft.com/azure/cosmos-db/sql-query-getting-started).
 
 {{% /alert %}}
 
-## Connect to Azure Cosmos DB
+## 连接到 Azure Cosmos DB
 
-To connect to your Cosmos DB instance, you can either:
+要连接到您的 Cosmos DB 实例，您可以选择以下任一方式：
 
-- Use the Data Explorer on [Azure Management Portal](https://portal.azure.com).
-- Use [various SDKs and tools](https://docs.microsoft.com/azure/cosmos-db/mongodb-introduction).
+- 在[Azure管理门户](https://portal.azure.com)上使用数据浏览器。
+- 使用[各种SDK和工具](https://docs.microsoft.com/azure/cosmos-db/mongodb-introduction)。
 
 {{% alert title="Note" color="primary" %}}
-When you configure an Azure Cosmos DB for Dapr, specify the exact database and collection to use. The following Cosmos DB [SQL API](https://docs.microsoft.com/azure/cosmos-db/sql-query-getting-started) samples assume you've already connected to the right database and a collection named "states".
+当你为 Dapr 配置 Azure Cosmos DB 时，需要指定要使用的确切数据库和集合。 下面的 Cosmos DB [SQL API](https://docs.microsoft.com/azure/cosmos-db/sql-query-getting-started) 示例假设你已经连接到了正确的数据库和一个名为 "states" 的集合。
 
 {{% /alert %}}
 
-## List keys by App ID
+## 通过 App ID 列出键
 
-To get all state keys associated with application "myapp", use the query:
+要获取与应用程序 "myapp" 关联的所有状态，请使用查询：
 
 ```sql
 SELECT * FROM states WHERE CONTAINS(states.id, 'myapp||')
 ```
 
-The above query returns all documents with an id containing "myapp-", which is the prefix of the state keys.
+上面的查询返回所有id，也就是状态键前缀为 "myapp-" 的记录。
 
-## Get specific state data
+## 获取特定状态数据
 
-To get the state data by a key "balance" for the application "myapp", use the query:
+例如，要获取应用程序 "myapp" 的键 "balance" 的状态数据，请使用以下查询:
 
 ```sql
 SELECT * FROM states WHERE states.id = 'myapp||balance'
 ```
 
-Read the **value** field of the returned document. To get the state version/ETag, use the command:
+读取返回文档的 **value** 字段。 要获取状态 version/ETag ，请使用以下命令:
 
 ```sql
 SELECT states._etag FROM states WHERE states.id = 'myapp||balance'
 ```
 
-## Read actor state
+## 读取Actor 状态
 
-To get all the state keys associated with an actor with the instance ID "leroy" of actor type "cat" belonging to the application with ID "mypets", use the command:
+要获取应用ID为 "myets"，实例ID为 "leroy"，actor 类型为 "cat" 的相关联所有 actor 的状态键，请使用以下命令:
 
 ```sql
 SELECT * FROM states WHERE CONTAINS(states.id, 'mypets||cat||leroy||')
 ```
 
-And to get a specific actor state such as "food", use the command:
+要获取特定 actor 状态（如 "food"） ，请使用以下命令:
 
 ```sql
 SELECT * FROM states WHERE states.id = 'mypets||cat||leroy||food'
 ```
 
 {{% alert title="Warning" color="warning" %}}
-You should not manually update or delete states in the store. All writes and delete operations should be done via the Dapr runtime. **The only exception:** it is often required to delete actor records in a state store, _once you know that these are no longer in use_, to prevent a build up of unused actor instances that may never be loaded again.
+不应手动更新或删除存储中的状态。 所有的写入和删除操作都应该通过 Dapr 运行时来完成。 **唯一的例外：**通常需要在状态存储中删除 Actor 记录，_一旦您知道这些不再使用_，以防止未使用的 Actor 实例的累积，这些实例可能永远不会再次加载。
 
 {{% /alert %}}

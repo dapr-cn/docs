@@ -6,114 +6,154 @@ weight: 300
 description: "构建模块和应用所使用的模块化功能"
 ---
 
-Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition. All of the components are interchangeable so that you can swap out one component with the same interface for another.
+Dapr 采用模块化设计，功能以组件形式交付。 每个组件都有接口定义。 所有组件都是可互换的，因此您可以将组件换成具有相同接口的另一个组件。
 
-You can contribute implementations and extend Dapr's component interfaces capabilities via:
+您可以通过以下方式贡献实现并扩展 Dapr 的组件接口功能：
 
-- The [components-contrib repository](https://github.com/dapr/components-contrib)
-- [Pluggable components]({{<ref "components-concept.md#built-in-and-pluggable-components" >}}).
+- [components-contrib 仓库](https://github.com/dapr/components-contrib)
+- [可插拔组件]({{< ref "components-concept.md#built-in-and-pluggable-components" >}}).
 
-A building block can use any combination of components. For example, the [actors]({{< ref "actors-overview.md" >}}) and the [state management]({{< ref "state-management-overview.md" >}}) building blocks both use [state components](https://github.com/dapr/components-contrib/tree/master/state).
+构建块可以使用组件的任意组合。 例如， [actor]({{< ref "actors-overview.md" >}}) 构建块和 [状态管理]({{< ref "state-management-overview.md" >}}) 构建块都使用 [状态组件](https://github.com/dapr/components-contrib/tree/master/state)。
 
-As another example, the [pub/sub]({{< ref "pubsub-overview.md" >}}) building block uses [pub/sub components](https://github.com/dapr/components-contrib/tree/master/pubsub).
+再比如，[Pub/Sub]({{< ref "pubsub-overview.md" >}}) 构建块使用 [ Pub/Sub 组件](https://github.com/dapr/components-contrib/tree/master/pubsub)。
 
-You can get a list of current components available in the hosting environment using the `dapr components` CLI command.
+您可以使用 `dapr components` CLI 命令查看当前托管环境中可用的组件列表。
+
+{{% alert title="Note" color="primary" %}}
+对于将数据返回到应用的任何组件，建议相应地设置 Dapr Sidecar 的内存容量（进程或容器），以避免潜在的 OOM 恐慌。 例如，在 Docker 中使用 `--memory ` 选择。 对于 Kubernetes，请使用 `dapr.io/sidecar-memory-limit` 注解。 对于进程，这取决于操作系统和/或进程编排工具。
+{{% /alert %}}
 
 ## 组件规范
 
-Each component has a specification (or spec) that it conforms to. Components are configured at design-time with a YAML file which is stored in either:
+每个组件都有一个符合的规范。 组件在设计时使用存储在以下任一位置的 YAML 文件进行配置：
 
-- A `components/local` folder within your solution, or
-- Globally in the `.dapr` folder created when invoking `dapr init`.
+- 解决方案中的 `components/local` 文件夹，或
+- 调用 `dapr init` 时创建的全局 `.dapr` 文件夹.
 
-These YAML files adhere to the generic [Dapr component schema]({{< ref "component-schema.md" >}}), but each is specific to the component specification.
+这些 YAML 文件遵循通用的
+Dapr 组件模式/a>，但每个文件都特定于组件规范。</p> 
 
-It is important to understand that the component spec values, particularly the spec `metadata`, can change between components of the same component type, for example between different state stores, and that some design-time spec values can be overridden at runtime when making requests to a component's API. As a result, it is strongly recommended to review a [component's specs]({{< ref "components-reference" >}}), paying particular attention to the sample payloads for requests to set the metadata used to interact with the component.
+重要的是要理解组件规范值，特别是规范 `metadata`，可以在相同组件类型的组件之间更改，例如在不同的状态存储之间，并且一些设计时规范值可以在运行时被覆盖对组件 API 的请求。 因此，强烈建议查看 [组件规范]({{< ref "components-reference" >}})，请特别注意请求的示例有效负载，以设置用于与组件交互的元数据。
 
-The diagram below shows some examples of the components for each component type
+下图显示了每种组件类型的一些组件示例
+
 <img src="/images/concepts-components.png" width=1200>
 
-## Built-in and pluggable components
 
-Dapr has built-in components that are included as part of the runtime. These are public components that are developed and donated by the community and are available to use in every release.
 
-Dapr also allows for users to create their own private components called pluggable components. These are components that are self-hosted (process or container), do not need to be written in Go, exist outside the Dapr runtime, and are able to "plug" into Dapr to utilize the building block APIs.
+## 内置和可插拔组件
 
-Where possible, donating built-in components to the Dapr project and community is encouraged.
+Dapr 具有内置组件，作为运行时的一部分而被包含在内。 这些是由社区开发和捐赠的公共组件，可在每个版本中使用。 
 
-However, pluggable components are ideal for scenarios where you want to create your own private components that are not included into the Dapr project. For example:
-- Your component may be specific to your company or pose IP concerns, so it cannot be included in the Dapr component repo.
-- You want decouple your component updates from the Dapr release cycle.
+Dapr 还允许用户创建自己的私有组件，称为可插拔组件。 这些组件是自托管的（进程或容器），不需要用 Go 编写，存在于 Dapr 运行时之外，并且能够“插入”到 Dapr 中以利用构建块 API。
 
-For more information read [Pluggable components overview]({{< ref "pluggable-components-overview" >}})
+在可能的情况下，鼓励向 Dapr 项目和社区捐赠内置组件。
 
-## Available component types
+不过，可插拔组件非常适合想要创建自己的私有组件的方案，这些组件不包含在 Dapr 项目中。 例如：
 
-The following are the component types provided by Dapr:
+- 你的组件可能特定于你的公司或带来 IP 问题，因此它不能包含在 Dapr component 存储库中。
+- 您希望组件更新与 Dapr 发布周期解耦。
+
+有关更多信息，请阅读 [可插拔组件概述]({{< ref "pluggable-components-overview" >}})
+
+
+
+## 可用的组件类型
+
+以下是 Dapr 提供的组件：
+
+
 
 ### 状态存储
 
-State store components are data stores (databases, files, memory) that store key-value pairs as part of the [state management]({{< ref "state-management-overview.md" >}}) building block.
+状态存储组件是存储键值对的数据存储（数据库、文件、内存），是[状态管理]({{< ref "state-management-overview.md" >}})构建块的一部分。
 
-- [List of state stores]({{< ref supported-state-stores >}})
-- [State store implementations](https://github.com/dapr/components-contrib/tree/master/state)
+- [状态存储列表]({{< ref supported-state-stores >}})
+- [状态存储实现](https://github.com/dapr/components-contrib/tree/master/state)
+
+
 
 ### 名称解析
 
-Name resolution components are used with the [service invocation]({{< ref "service-invocation-overview.md" >}}) building block to integrate with the hosting environment and provide service-to-service discovery. For example, the Kubernetes name resolution component integrates with the Kubernetes DNS service, self-hosted uses mDNS and clusters of VMs can use the Consul name resolution component.
+名称解析组件与[服务调用]({{< ref "service-invocation-overview.md" >}})构建块配合使用，与托管环境集成以提供服务到服务的发现。 例如，Kubernetes 名称解析组件与 Kubernetes DNS 服务集成，自托管使用 mDNS，VM 集群可以使用 Consul 名称解析组件。
 
-- [List of name resolution components]({{< ref supported-name-resolution >}})
-- [Name resolution implementations](https://github.com/dapr/components-contrib/tree/master/nameresolution)
+- [名称解析组件列表]({{< ref supported-name-resolution >}})
+- [名称解析实现](https://github.com/dapr/components-contrib/tree/master/nameresolution)
+
+
 
 ### 发布/订阅代理
 
-Pub/sub broker components are message brokers that can pass messages to/from services as part of the [publish & subscribe]({{< ref pubsub-overview.md >}}) building block.
+发布/订阅组件是消息分发器，可以作为应用程序之间进行消息[发布 & 订阅]({{< ref pubsub-overview.md >}}) 构建块。
 
-- [List of pub/sub brokers]({{< ref supported-pubsub >}})
-- [Pub/sub broker implementations](https://github.com/dapr/components-contrib/tree/master/pubsub)
+- [发布/订阅代理列表]({{< ref supported-pubsub >}})
+- [发布/订阅代理实现](https://github.com/dapr/components-contrib/tree/master/pubsub)
+
+
 
 ### 绑定
 
-External resources can connect to Dapr in order to trigger a method on an application or be called from an application as part of the [bindings]({{< ref bindings-overview.md >}}) building block.
+外部资源可以连接到 Dapr，以便触发应用程序的方法，或者被应用程序调用，是[绑定]({{< ref bindings-overview.md >}})构建块的一部分。
 
-- [List of supported bindings]({{< ref supported-bindings >}})
-- [Binding implementations](https://github.com/dapr/components-contrib/tree/master/bindings)
+- [支持的绑定列表]({{< ref supported-bindings >}})
+- [绑定实现](https://github.com/dapr/components-contrib/tree/master/bindings)
+
+
 
 ### 秘密存储
 
-A [secret]({{< ref "secrets-overview.md" >}}) is any piece of private information that you want to guard against unwanted access. Secrets stores are used to store secrets that can be retrieved and used in applications.
+[秘密]({{< ref "secrets-overview.md" >}})是任何你想保护的私人信息，以防止不需要的访问。 秘密存储用来存储可在应用中检索和使用的密钥。
 
-- [List of supported secret stores]({{< ref supported-secret-stores >}})
-- [Secret store implementations](https://github.com/dapr/components-contrib/tree/master/secretstores)
+- [支持的秘密存储]({{< ref supported-secret-stores >}})
+- [秘密存储实现](https://github.com/dapr/components-contrib/tree/master/secretstores)
+
+
 
 ### 配置存储
 
-Configuration stores are used to save application data, which can then be read by application instances on startup or notified of when changes occur. This allows for dynamic configuration.
+配置存储用于保存应用数据，配置可在应用启动或者配置更改的时候被应用读取。 配置存储支持动态加载（热更新）。
 
-- [List of supported configuration stores]({{< ref supported-configuration-stores >}})
-- [Configuration store implementations](https://github.com/dapr/components-contrib/tree/master/configuration)
+- [支持的配置存储列表]({{< ref supported-configuration-stores >}})
+- [配置存储的实现](https://github.com/dapr/components-contrib/tree/master/configuration)
 
-### Locks
 
-Lock components are used as a distributed lock to provide mutually exclusive access to a resource such as a queue or database.
 
-- [List of supported locks]({{< ref supported-locks >}})
-- [Lock implementations](https://github.com/dapr/components-contrib/tree/master/lock)
+### 锁
+
+锁组件用作分布式锁，以提供对资源（如队列或数据库）的互斥访问。
+
+- [支持的锁列表]({{< ref supported-locks >}})
+- [锁实现](https://github.com/dapr/components-contrib/tree/master/lock)
+
+
 
 ### 工作流
 
-A [workflow]({{< ref workflow-overview.md >}}) is custom application logic that defines a reliable business process or data flow. Workflow components are workflow runtimes (or engines) that run the business logic written for that workflow and store their state into a state store.  
+[工作流程]({{< ref workflow-overview.md >}}) 是定义可靠业务流程或数据流的自定义应用程序逻辑。 工作流组件是工作流运行时（或引擎），运行为该工作流编写的业务逻辑并将其状态存储到状态存储中。  
 
 <!--- [List of supported workflows]()
 - [Workflow implementations](https://github.com/dapr/components-contrib/tree/master/workflows)-->
 
+
+
+### 加密
+
+[加密]({{< ref cryptography-overview.md >}}) 组件用于执行加密操作，包括加密和解密消息，而无需向应用程序公开密钥。
+
+- [支持的加密组件列表]({{< ref supported-cryptography >}})
+- [加密实现](https://github.com/dapr/components-contrib/tree/master/crypto)
+
+
+
 ### 中间件
 
-Dapr allows custom [middleware]({{< ref "middleware.md" >}}) to be plugged into the HTTP request processing pipeline. Middleware can perform additional actions on an HTTP request (such as authentication, encryption, and message transformation) before the request is routed to the user code, or the response is returned to the client. The middleware components are used with the [service invocation]({{< ref "service-invocation-overview.md" >}}) building block.
+Dapr 允许自定义 [中间件]({{< ref "middleware.md" >}}) 以插入到 HTTP 请求处理管道中。 中间件可以在将请求路由到用户代码或将响应返回到客户端之前对 HTTP 请求执行其他操作（例如身份验证、加密和消息转换）。 中间件组件与 [服务调用]({{< ref "service-invocation-overview.md" >}}) 构建块一起使用。
 
-- [List of supported middleware components]({{< ref supported-middleware >}})
-- [Middleware implementations](https://github.com/dapr/components-contrib/tree/master/middleware)
+- [支持的中间件组件列表]({{< ref supported-middleware >}})
+- [中间件实现](https://github.com/dapr/components-contrib/tree/master/middleware)
 
-{{% alert title="Note" color="primary" %}}
-Since pluggable components are not required to be written in Go, they follow a different implementation process than built-in Dapr components. For more information on developing built-in components, read [developing new components](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md).
+{{% alert title="Note" color="primary" %}} 
+
+由于可插拔组件不需要用 Go 编写，因此它们遵循与内置 Dapr 组件不同的实现过程。 有关开发内置组件的详细信息，请阅读 [开发新组件](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md). 
+
 {{% /alert %}}

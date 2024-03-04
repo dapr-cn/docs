@@ -11,7 +11,6 @@ aliases:
 
 要设置 Azure Cosmos DB 绑定，请创建一个类型为 `bindings.azure.cosmosdb` 的组件。 See [this guide]({{< ref "howto-bindings.md#1-create-a-binding" >}}) on how to create and apply a binding configuration.
 
-
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -22,15 +21,15 @@ spec:
   version: v1
   metadata:
   - name: url
-    value: https://******.documents.azure.com:443/
+    value: "https://******.documents.azure.com:443/"
   - name: masterKey
-    value: *****
+    value: "*****"
   - name: database
-    value: db
+    value: "OrderDb"
   - name: collection
-    value: collection
+    value: "Orders"
   - name: partitionKey
-    value: message
+    value: "<message>"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -39,19 +38,19 @@ spec:
 
 ## 元数据字段规范
 
-| Field        | 必填 | 绑定支持   | 详情                                                           | 示例                                          |
-| ------------ |:--:| ------ | ------------------------------------------------------------ | ------------------------------------------- |
-| url          | 是  | Output | Cosmos DB 地址                                                 | `"https://******.documents.azure.com:443/"` |
-| masterKey    | 是  | 输出     | Cosmos DB 账户主键                                               | `"master-key"`                              |
-| database     | 是  | 输出     | Cosmos DB 数据库名                                               | `"OrderDb"`                                 |
-| collection   | 是  | 输出     | 数据库中容器的名称。                                                   | `"Orders"`                                  |
-| partitionKey | 是  | 输出     | 要从用作分区键的有效负载（要创建的文档）中提取键的名称。 此名称必须与创建 Cosmos DB 容器时指定的分区键匹配。 | `"OrderId"`, `"message"`                    |
+| Field          | Required | 绑定支持   | 详情                                                           | 示例                                          |
+| -------------- |:--------:| ------ | ------------------------------------------------------------ | ------------------------------------------- |
+| `url`          |    是     | Output | Cosmos DB 地址                                                 | `"https://******.documents.azure.com:443/"` |
+| `masterKey`    |    是     | 输出     | Cosmos DB 账户主键                                               | `"master-key"`                              |
+| `database`     |    是     | 输出     | Cosmos DB 数据库名                                               | `"OrderDb"`                                 |
+| `collection`   |    是     | 输出     | 数据库中容器的名称。                                                   | `"Orders"`                                  |
+| `partitionKey` |    是     | 输出     | 要从用作分区键的有效负载（要创建的文档）中提取键的名称。 此名称必须与创建 Cosmos DB 容器时指定的分区键匹配。 | `"OrderId"`, `"message"`                    |
 
 欲了解更多信息，请参阅 [Azure Cosmos DB 资源模型](https://docs.microsoft.com/azure/cosmos-db/account-databases-containers-items)。
 
-### Azure Active Directory (Azure AD) 认证
+### Microsoft Entra ID authentication
 
-Azure Cosmos DB绑定组件支持使用所有Azure Active Directory机制进行认证。 关于更多信息和相关组件的元数据字段请根据选择的AAD认证机制，参考[Azure认证文档]({{< ref authenticating-azure.md >}})。
+The Azure Cosmos DB binding component supports authentication using all Microsoft Entra ID mechanisms. For further information and the relevant component metadata fields to provide depending on the choice of Microsoft Entra ID authentication mechanism, see the [docs for authenticating to Azure]({{< ref authenticating-azure.md >}}).
 
 您可以在</a>下面的
 部分中阅读有关使用 Azure AD 身份验证设置 Cosmos DB 的其他信息。</p> 

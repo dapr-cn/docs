@@ -6,17 +6,17 @@ weight: 200
 description: "使用键值对来持久化状态"
 ---
 
-State management is one of the most common needs of any new, legacy, monolith, or microservice application. Dealing with and testing different database libraries and handling retries and faults can be both difficult and time consuming.
+状态管理是任何应用程序最常见的需求之一：无论是新是旧，是单体还是微服务。 处理和测试不同的数据库库，并处理重试和故障可能既困难又耗时。
 
-In this guide, you'll learn the basics of using the key/value state API to allow an application to save, get, and delete state.
+在本指南中，您将学习如何使用键/值状态 API 的基础知识，以允许应用程序保存、获取和删除状态。
 
 ## 示例
 
-The code example below _loosely_ describes an application that processes orders with an order processing service which has a Dapr sidecar. 订单处理服务使用 Dapr 在 Redis 状态存储中存储状态。
+下面的代码示例_粗略地_描述了一个处理订单的应用程序，该应用程序使用具有 Dapr sidecar 的订单处理服务。 订单处理服务使用 Dapr 在 Redis 状态存储中存储状态。
 
 <img src="/images/building-block-state-management-example.png" width=1000 alt="显示示例服务的状态管理的图示">
 
-## Set up a state store
+## 建立一个状态存储
 
 状态存储组件代表 Dapr 用来与数据库进行通信的资源。
 
@@ -26,18 +26,18 @@ The code example below _loosely_ describes an application that processes orders 
 
 {{% codetab %}}
 
-When you run `dapr init` in self-hosted mode, Dapr creates a default Redis `statestore.yaml` and runs a Redis state store on your local machine, located:
+当你在自托管模式下运行 `dapr init` 时，Dapr 会创建一个默认的 Redis `statestore.yaml` 并在你的本地机器上运行一个 Redis 状态存储，它位于:
 
-- On Windows, under `%UserProfile%\.dapr\components\statestore.yaml`
+- 在Windows上，在 `%UserProfile%\.dapr\components\statestore.yaml`
 - 在Linux/MacOS上，在 `~/.dapr/components/statestore.yaml`
 
-With the `statestore.yaml` component, you can easily swap out underlying components without application code changes.
+使用 `statestore.yaml` 组件，您可以轻松更换底层组件，而无需更改应用程序代码。
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-To deploy this into a Kubernetes cluster, fill in the `metadata` connection details of your [state store component]({{< ref supported-state-stores >}}) in the YAML below, save as `statestore.yaml`, and run `kubectl apply -f statestore.yaml`.
+要将其部署到 Kubernetes 集群中，请填写 `元数据` 您的连接详细信息 [状态存储组件]({{< ref supported-state-stores >}}) 在下面的 YAML 中，另存为 `statestore.yaml`，然后运行 `kubectl apply -f statestore.yaml`.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -54,19 +54,19 @@ spec:
     value: ""
 ```
 
-See [how to setup different state stores on Kubernetes]({{< ref "setup-state-store" >}}).
+看 [如何在 Kubernetes 上设置不同的状态存储]({{< ref "setup-state-store" >}}).
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
 {{% alert title="Important" color="warning" %}}
-Set an `app-id`, as the state keys are prefixed with this value. If you don't set an `app-id`, one is generated for you at runtime. The next time you run the command, a new `app-id` is generated and you will no longer have access to the previously saved state.
+设置一个`app-id`，因为状态键是以这个值为前缀的。 如果您不设置`app-id`，系统会在运行时为您生成一个。 下次运行该命令时，将生成一个新的`app-id`，您将不再能访问先前保存的状态。
 {{% /alert %}}
 
-## Save and retrieve a single state
+## 保存和检索单个状态
 
-The following example shows how to save and retrieve a single key/value pair using the Dapr state management API.
+以下示例演示如何使用 Dapr 状态管理 API 保存和检索单个键/值对。
 
 {{< tabs Dotnet Java Python Go Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -109,7 +109,7 @@ namespace EventService
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
@@ -157,7 +157,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -190,7 +190,7 @@ while True:
         logging.info('Result after get: ' + result.data.decode('utf-8'))
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
@@ -238,7 +238,7 @@ func main() {
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
@@ -266,7 +266,11 @@ var main = function() {
 }
 
 async function start(orderId) {
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const client = new DaprClient({
+        daprHost,
+        daprPort: process.env.DAPR_HTTP_PORT,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+    });
     const STATE_STORE_NAME = "statestore";
     //Using Dapr SDK to save and get state
     await client.state.save(STATE_STORE_NAME, [
@@ -290,7 +294,7 @@ function sleep(ms) {
 main();
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -300,49 +304,49 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 {{% codetab %}}
 
-Launch a Dapr sidecar:
+启动 Dapr sidecar：
 
 ```bash
 dapr run --app-id orderprocessing --dapr-http-port 3601
 ```
 
-In a separate terminal, save a key/value pair into your statestore:
+在一个单独的终端中，将一个键/值对保存到你的状态存储中：
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value": "250"}]' http://localhost:3601/v1.0/state/statestore
 ```
 
-Now get the state you just saved:
+现在获取你刚才保存的状态：
 
 ```bash
 curl http://localhost:3601/v1.0/state/statestore/order_1
 ```
 
-Restart your sidecar and try retrieving state again to observe that state persists separately from the app.
+重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-Launch a Dapr sidecar:
+启动 Dapr sidecar：
 
 ```bash
 dapr --app-id orderprocessing --dapr-http-port 3601 run
 ```
 
-In a separate terminal, save a key/value pair into your statestore:
+在一个单独的终端中，将一个键/值对保存到你的状态存储中：
 
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "order_1", "value": "250"}]' -Uri 'http://localhost:3601/v1.0/state/statestore'
 ```
 
-Now get the state you just saved:
+现在获取你刚才保存的状态：
 
 ```powershell
 Invoke-RestMethod -Uri 'http://localhost:3601/v1.0/state/statestore/order_1'
 ```
 
-Restart your sidecar and try retrieving state again to observe that state persists separately from the app.
+重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 
 {{% /codetab %}}
 
@@ -350,7 +354,7 @@ Restart your sidecar and try retrieving state again to observe that state persis
 
 ## 删除状态
 
-Below are code examples that leverage Dapr SDKs for deleting the state.
+下面是利用 Dapr SDKs 删除状态的代码例子。
 
 {{< tabs Dotnet Java Python Go Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -376,7 +380,7 @@ namespace EventService
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
@@ -406,7 +410,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -429,7 +433,7 @@ with DaprClient() as client:
     client.delete_state(store_name=DAPR_STORE_NAME, key="order_1")
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
@@ -464,7 +468,7 @@ func main() {
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
@@ -483,14 +487,19 @@ const daprHost = "127.0.0.1";
 var main = function() {
     const STATE_STORE_NAME = "statestore";
     //Using Dapr SDK to save and get state
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const client = new DaprClient({
+        daprHost,
+        daprPort: process.env.DAPR_HTTP_PORT,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+    });
+
     await client.state.delete(STATE_STORE_NAME, "order_1"); 
 }
 
 main();
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -500,33 +509,33 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 {{% codetab %}}
 
-With the same Dapr instance running from above, run:
+用上面运行的同一个Dapr实例运行：
 
 ```bash
 curl -X DELETE 'http://localhost:3601/v1.0/state/statestore/order_1'
 ```
 
-Try getting state again. Note that no value is returned.
+再次尝试获取状态。 请注意，不会返回任何值。
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-With the same Dapr instance running from above, run:
+用上面运行的同一个Dapr实例运行：
 
 ```powershell
 Invoke-RestMethod -Method Delete -Uri 'http://localhost:3601/v1.0/state/statestore/order_1'
 ```
 
-Try getting state again. Note that no value is returned.
+再次尝试获取状态。 请注意，不会返回任何值。
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Save and retrieve multiple states
+## 保存和检索多个状态
 
-Below are code examples that leverage Dapr SDKs for saving and retrieving multiple states.
+下面是利用 Dapr SDK 保存和检索多个状态的代码示例。
 
 {{< tabs Dotnet Java Python Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -551,7 +560,7 @@ namespace EventService
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
@@ -584,7 +593,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -610,7 +619,7 @@ with DaprClient() as client:
     logging.info('Result after get bulk: ' + str(result)) 
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
@@ -630,7 +639,12 @@ var main = function() {
     const STATE_STORE_NAME = "statestore";
     var orderId = 100;
     //Using Dapr SDK to save and retrieve multiple states
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const client = new DaprClient({
+        daprHost,
+        daprPort: process.env.DAPR_HTTP_PORT,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+    });
+
     await client.state.save(STATE_STORE_NAME, [
         {
             key: "order_1",
@@ -647,7 +661,7 @@ var main = function() {
 main();
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -657,13 +671,13 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 {{% codetab %}}
 
-With the same Dapr instance running from above, save two key/value pairs into your statestore:
+用上面运行的同一个Dapr实例将两个键/值对保存到你的状态存储中。
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value": "250"}, { "key": "order_2", "value": "550"}]' http://localhost:3601/v1.0/state/statestore
 ```
 
-Now get the states you just saved:
+现在获取你刚才保存的状态：
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"keys":["order_1", "order_2"]}' http://localhost:3601/v1.0/state/statestore/bulk
@@ -673,13 +687,13 @@ curl -X POST -H "Content-Type: application/json" -d '{"keys":["order_1", "order_
 
 {{% codetab %}}
 
-With the same Dapr instance running from above, save two key/value pairs into your statestore:
+用上面运行的同一个Dapr实例将两个键/值对保存到你的状态存储中。
 
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": "order_1", "value": "250"}, { "key": "order_2", "value": "550"}]' -Uri 'http://localhost:3601/v1.0/state/statestore'
 ```
 
-Now get the states you just saved:
+现在获取你刚才保存的状态：
 
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["order_1", "order_2"]}' -Uri 'http://localhost:3601/v1.0/state/statestore/bulk'
@@ -689,13 +703,13 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 
 {{< /tabs >}}
 
-## Perform state transactions
+## 执行状态事务性操作
 
 {{% alert title="Note" color="primary" %}}
-State transactions require a state store that supports multi-item transactions. See the [supported state stores page]({{< ref supported-state-stores >}}) for a full list.
+状态事务性操作需要一个支持multi-item transactions的状态存储引擎。 查看完整列表，请访问[支持的状态存储引擎]({{< ref supported-state-stores >}})页面。
 {{% /alert %}}
 
-Below are code examples that leverage Dapr SDKs for performing state transactions.
+下面是利用 Dapr SDK 执行状态事务的代码示例。
 
 {{< tabs Dotnet Java Python Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
@@ -743,7 +757,7 @@ namespace EventService
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
@@ -796,7 +810,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
@@ -842,7 +856,7 @@ while True:
     logging.info('Result: ' + str(result))
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
@@ -870,7 +884,12 @@ var main = function() {
 }
 
 async function start(orderId) {
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const client = new DaprClient({
+        daprHost,
+        daprPort: process.env.DAPR_HTTP_PORT,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+    });
+
     const STATE_STORE_NAME = "statestore";
     //Using Dapr SDK to save and retrieve multiple states
     await client.state.transaction(STATE_STORE_NAME, [
@@ -897,7 +916,7 @@ function sleep(ms) {
 main();
 ```
 
-To launch a Dapr sidecar for the above example application, run a command similar to the following:
+要启动上述示例应用程序的 Dapr sidecar，请运行类似以下命令：
 
 ```bash
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
@@ -907,13 +926,13 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 
 {{% codetab %}}
 
-With the same Dapr instance running from above, perform two state transactions:
+在上面运行的同一个Dapr实例中，执行两个状态事务。
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"operations": [{"operation":"upsert", "request": {"key": "order_1", "value": "250"}}, {"operation":"delete", "request": {"key": "order_2"}}]}' http://localhost:3601/v1.0/state/statestore/transaction
 ```
 
-Now see the results of your state transactions:
+现在可以看到你的状态事务操作的结果:
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"keys":["order_1", "order_2"]}' http://localhost:3601/v1.0/state/statestore/bulk
@@ -923,13 +942,13 @@ curl -X POST -H "Content-Type: application/json" -d '{"keys":["order_1", "order_
 
 {{% codetab %}}
 
-With the same Dapr instance running from above, save two key/value pairs into your statestore:
+用上面运行的同一个Dapr实例将两个键/值对保存到你的状态存储中。
 
 ```powershell
-Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"operations": [{"operation":"upsert", "request": {"key": "order_1", "value": "250"}}, {"operation":"delete", "request": {"key": "order_2"}}]}' -Uri 'http://localhost:3601/v1.0/state/statestore'
+Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"operations": [{"operation":"upsert", "request": {"key": "order_1", "value": "250"}}, {"operation":"delete", "request": {"key": "order_2"}}]}' -Uri 'http://localhost:3601/v1.0/state/statestore/transaction'
 ```
 
-Now see the results of your state transactions:
+现在可以看到你的状态事务操作的结果:
 
 ```powershell
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["order_1", "order_2"]}' -Uri 'http://localhost:3601/v1.0/state/statestore/bulk'
@@ -941,6 +960,6 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 
 ## 下一步
 
-- Read the full [State API reference]({{< ref state_api.md >}})
+- 请查阅[状态 API 参考手册]({{< ref state_api.md >}})
 - 尝试 [Dapr SDKs]({{< ref sdks >}})
 - 构建[有状态服务]({{< ref howto-stateful-service.md >}})

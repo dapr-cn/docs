@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Implementing a Go pub/sub component"
+title: "实现一个Go pub/sub组件"
 linkTitle: "Pub/sub"
 weight: 1000
-description: How to create a pub/sub component with the Dapr pluggable components Go SDK
+description: 如何使用 Dapr 可插拔组件 Go SDK 创建发布/订阅组件
 no_list: true
 is_preview: true
 ---
 
-Creating a pub/sub component requires just a few basic steps.
+创建一个Pub/sub组件只需要几个基本步骤。
 
-## Import pub/sub packages
+## 导入pub/sub包
 
-Create the file `components/pubsub.go` and add `import` statements for the pub/sub related packages.
+创建文件`components/pubsub.go`并添加与Pub/sub相关的`import`语句。
 
 ```go
 package components
@@ -23,9 +23,9 @@ import (
 )
 ```
 
-## Implement the `PubSub` interface
+## 实现 `PubSub` 接口
 
-Create a type that implements the `PubSub` interface.
+创建一个实现`PubSub`接口的类型。
 
 ```go
 type MyPubSubComponent struct {
@@ -53,7 +53,7 @@ func (component *MyPubSubComponent) Subscribe(ctx context.Context, req pubsub.Su
 }
 ```
 
-Calls to the `Subscribe()` method are expected to set up a long-lived mechanism for retrieving messages but immediately return `nil` (or an error, if that mechanism could not be set up). The mechanism should end when canceled (for example, via the `ctx.Done()` or `ctx.Err() != nil`). The "topic" from which messages should be pulled is passed via the `req` argument, while the delivery to the Dapr runtime is performed via the `handler` callback. The callback doesn't return until the application (served by the Dapr runtime) acknowledges processing of the message.
+调用`Subscribe()`方法应该设置一个长期存在的机制来获取消息，但立即返回`nil`（或错误，如果无法设置该机制）。 当被取消时（例如，通过`ctx.Done()`或`ctx.Err() != nil`），机制应该结束。 "topic"从中拉取消息的方式是通过`req`参数传递，而将消息传递给Dapr运行时是通过`handler`回调函数执行的。 回调函数在应用程序（由 Dapr 运行时提供服务）确认处理消息后才返回。
 
 ```go
 func (component *MyPubSubComponent) Subscribe(ctx context.Context, req pubsub.SubscribeRequest, handler pubsub.Handler) error {
@@ -84,9 +84,9 @@ func (component *MyPubSubComponent) Subscribe(ctx context.Context, req pubsub.Su
 }
 ```
 
-## Register pub/sub component
+## 注册pub/sub组件
 
-In the main application file (for example, `main.go`), register the pub/sub component with the application.
+在主应用程序文件中（例如，`main.go`），将pub/sub组件注册到应用程序。
 
 ```go
 package main
@@ -107,7 +107,7 @@ func main() {
 ```
 
 ## 下一步
-- [Advanced techniques with the pluggable components Go SDK]({{< ref go-advanced >}})
-- Learn more about implementing:
-  - [绑定]({{< ref go-bindings >}})
+- [Dapr 可插拔组件 Go SDK 的高级技巧]({{< ref go-advanced >}})
+- 详细了解如何实现：
+  - [Bindings（绑定）]({{< ref go-bindings >}})
   - [State]({{< ref go-state-store >}})

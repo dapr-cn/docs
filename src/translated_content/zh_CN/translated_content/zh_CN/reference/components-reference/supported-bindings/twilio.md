@@ -21,13 +21,13 @@ spec:
   version: v1
   metadata:
   - name: toNumber # required.
-    value: 111-111-1111
+    value: "111-111-1111"
   - name: fromNumber # required.
-    value: 222-222-2222
+    value: "222-222-2222"
   - name: accountSid # required.
-    value: *****************
+    value: "*****************"
   - name: authToken # required.
-    value: *****************
+    value: "*****************"
 ```
 {{% alert title="Warning" color="warning" %}}
 以上示例将密钥明文存储， 更推荐的方式是使用 Secret 组件，参考 [这里]({{< ref component-secrets.md >}})。
@@ -35,12 +35,12 @@ spec:
 
 ## 元数据字段规范
 
-| Field      | 必填 | 绑定支持   | 详情                                   | 示例               |
-| ---------- |:--:| ------ | ------------------------------------ | ---------------- |
-| toNumber   | 是  | Output | The target number to send the sms to | `"111-111-1111"` |
-| fromNumber | 是  | 输出     | 发送人手机号码                              | `"122-222-2222"` |
-| accountSid | 是  | 输出     | Twilio账号SID                          | `"account sid"`  |
-| authToken  | 是  | 输出     | Twilio身份验证token                      | `"auth token"`   |
+| Field        | Required | 绑定支持   | 详情                                   | 示例               |
+| ------------ |:--------:| ------ | ------------------------------------ | ---------------- |
+| `toNumber`   |    是     | Output | The target number to send the sms to | `"111-111-1111"` |
+| `fromNumber` |    是     | 输出     | 发送人手机号码                              | `"222-222-2222"` |
+| `accountSid` |    是     | 输出     | Twilio账号SID                          | `"account sid"`  |
+| `authToken`  |    是     | 输出     | Twilio身份验证token                      | `"auth token"`   |
 
 ## 绑定支持
 

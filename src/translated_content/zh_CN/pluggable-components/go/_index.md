@@ -1,29 +1,29 @@
 ---
 type: docs
-title: "Getting started with the Dapr pluggable components Go SDK"
+title: "使用 Dapr 可插拔组件 Go SDK 入门"
 linkTitle: "Go"
 weight: 1000
-description: How to get up and running with the Dapr pluggable components Go SDK
+description: 如何使用 Dapr 可插拔组件 Go SDK 快速启动和运行
 no_list: true
 is_preview: true
 ---
 
-Dapr offers packages to help with the development of Go pluggable components.
+Dapr 提供了帮助开发 Go 可插拔组件的包。
 
-## Prerequisites
+## 前期准备
 
-- [Go 1.19](https://go.dev/dl/) or later
-- [Dapr 1.9 CLI]({{< ref install-dapr-cli.md >}}) or later
+- [Go 1.19](https://go.dev/dl/) 或更高版本
+- [Dapr 1.9 CLI]({{< ref install-dapr-cli.md >}}) 或更高版本
 - 初始化[Dapr环境]({{< ref install-dapr-selfhost.md >}})
-- Linux, Mac, or Windows (with WSL)
+- Linux、Mac 或 Windows（使用 WSL）
 
 {{% alert title="Note" color="primary" %}}
-Development of Dapr pluggable components on Windows requires WSL. Not all languages and SDKs expose Unix Domain Sockets on "native" Windows.
+在 Windows 上开发 Dapr 可插拔组件需要 WSL。 并非所有语言和 SDK 都在“本机”Windows 上公开 Unix 域套接字。
 {{% /alert %}}
 
-## Application creation
+## 应用程序创建
 
-Creating a pluggable component starts with an empty Go application.
+创建一个可插拔组件始于一个空的Go应用程序。
 
 ```bash
 mkdir example
@@ -31,17 +31,17 @@ cd component
 go mod init example
 ```
 
-## Import Dapr packages
+## 导入 Dapr 包
 
-Import the Dapr pluggable components SDK package.
+导入 Dapr 可插拔组件 SDK 包。
 
 ```bash
 go get github.com/dapr-sandbox/components-go-sdk@v0.1.0
 ```
 
-## Create main package
+## 创建 main 包
 
-In `main.go`, import the Dapr plugggable components package and run the application.
+在`main.go`中，导入Dapr可插拔组件包并运行应用程序。
 
 ```go
 package main
@@ -55,41 +55,41 @@ func main() {
 }
 ```
 
-This creates an application with no components. You will need to implement and register one or more components.
+这将创建一个没有组件的应用程序。 您需要实现并注册一个或多个组件。
 
-## Implement and register components
+## 实现和注册组件
 
- - [Implementing an input/output binding component]({{< ref go-bindings >}})
- - [Implementing a pub/sub component]({{< ref go-pub-sub >}})
- - [Implementing a state store component]({{< ref go-state-store >}})
+ - [实现一个输入/输出绑定组件]({{< ref go-bindings >}})
+ - [实现一个pub/sub组件]({{< ref go-pub-sub >}})
+ - [实现一个状态存储组件]({{< ref go-state-store >}})
 
 {{% alert title="Note" color="primary" %}}
-Only a single component of each type can be registered with an individual service. However, [multiple components of the same type can be spread across multiple services]({{< ref go-advanced >}}).
+每种类型的单个组件只能注册到单个服务。 然而 [同一类型的多个组件可以分布在多个服务中]({{< ref go-advanced >}}).
 {{% /alert %}}
 
-## Test components locally
+## 在本地测试组件
 
-### Create the Dapr components socket directory
+### 创建 Dapr 组件的 socket 目录
 
-Dapr communicates with pluggable components via Unix Domain Sockets files in a common directory. By default, both Dapr and pluggable components use the `/tmp/dapr-components-sockets` directory. You should create this directory if it does not already exist.
+Dapr通过在一个公共目录中使用Unix域套接字文件与可插拔组件进行通信。 默认情况下，Dapr 和可插拔组件都使用 `/tmp/dapr-components-sockets` 目录。 如果该目录尚不存在，您应该创建该目录。
 
 ```bash
 mkdir /tmp/dapr-components-sockets
 ```
 
-### Start the pluggable component
+### 启动可插拔组件
 
-Pluggable components can be tested by starting the application on the command line.
+可插拔组件可以通过在命令行上启动应用程序进行测试。
 
-To start the component, in the application directory:
+要启动组件，在应用程序目录中执行以下操作：
 
 ```bash
 go run main.go
 ```
 
-### Configure Dapr to use the pluggable component
+### 配置 Dapr 以使用可插拔组件
 
-To configure Dapr to use the component, create a component YAML file in the resources directory. For example, for a state store component:
+要配置Dapr使用该组件，请在资源目录中创建一个组件YAML文件。 例如，对于一个状态存储组件：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -106,23 +106,23 @@ spec:
     value: value2
 ```
 
-Any `metadata` properties will be passed to the component via its `Store.Init(metadata state.Metadata)` method when the component is instantiated.
+任何`metadata`属性将在组件实例化时通过其`Store.Init(metadata state.Metadata)`方法传递给组件。
 
-### Start Dapr
+### 启动 Dapr
 
-To start Dapr (and, optionally, the service making use of the service):
+要启动 Dapr（以及可选地使用该服务的服务）：
 
 ```bash
 dapr run --app-id <app id> --resources-path <resources path> ...
 ```
 
-At this point, the Dapr sidecar will have started and connected via Unix Domain Socket to the component. You can then interact with the component either:
-- Through the service using the component (if started), or
-- By using the Dapr HTTP or gRPC API directly
+此时，Dapr sidecar 将已经启动并通过 Unix Domain Socket 连接到组件。 然后你可以通过组件进行交互：
+- 通过使用组件的服务（如果已启动），或者
+- 通过直接使用 Dapr 的 HTTP 或 gRPC API
 
-## Create container
+## 创建容器
 
-Pluggable components are deployed as containers that run as sidecars to the application (like Dapr itself). A typical `Dockerfile` for creating a Docker image for a Go application might look like:
+可插拔组件被部署为容器，作为应用程序的 sidecar 运行（如 Dapr 本身）。 创建用于Go应用程序的Docker镜像的典型`Dockerfile`可能如下所示：
 
 ```dockerfile
 FROM golang:1.20-alpine AS builder
@@ -151,19 +151,19 @@ USER app
 CMD ["/app"]
 ```
 
-Build the image:
+构建镜像：
 
 ```bash
 docker build -f Dockerfile -t <image name>:<tag> .
 ```
 
 {{% alert title="Note" color="primary" %}}
-Paths for `COPY` operations in the `Dockerfile` are relative to the Docker context passed when building the image, while the Docker context itself will vary depending on the needs of the application being built. In the example above, the assumption is that the Docker context is the component application directory.
+`Dockerfile` 中的 `COPY` 操作的路径是相对于构建镜像时传递的 Docker 上下文的，而 Docker 上下文本身会根据正在构建的应用程序的需求而变化。 在上面的示例中，假设 Docker 上下文是组件应用程序目录。
 {{% /alert %}}
 
 ## 下一步
-- [Advanced techniques with the pluggable components Go SDK]({{< ref go-advanced >}})
-- Learn more about implementing:
+- [Dapr 可插拔组件 Go SDK 的高级技巧]({{< ref go-advanced >}})
+- 详细了解如何实现：
   - [绑定]({{< ref go-bindings >}})
   - [State]({{< ref go-state-store >}})
   - [Pub/sub]({{< ref go-pub-sub >}})

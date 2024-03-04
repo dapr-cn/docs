@@ -1,14 +1,14 @@
 ---
 type: docs
-title: "How to: Horizontally scale subscribers with StatefulSets"
+title: "如何使用 StatefulSets 水平扩展订阅者"
 linkTitle: "How to: Horizontally scale subscribers with StatefulSets"
 weight: 6000
-description: "Learn how to subscribe with StatefulSet and scale horizontally with consistent consumer IDs"
+description: "学习如何使用StatefulSet进行订阅，并使用一致的消费者ID进行水平扩展"
 ---
 
-Unlike Deployments, where Pods are ephemeral, [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) allows deployment of stateful applications on Kubernetes by keeping a sticky identity for each Pod.
+与 Deployment 不同，Pod在Deployments中是短暂的， [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) 允许在Kubernetes上部署有状态的应用程序，为每个Pod保持一个固定的标识。
 
-Below is an example of a StatefulSet with Dapr:
+以下是一个带有 Dapr 的 StatefulSet 示例：
 ```yaml
 apiVersion: apps/v1
 kind: StatefulSet
@@ -37,14 +37,14 @@ spec:
         imagePullPolicy: Always
 ```
 
-When subscribing to a pub/sub topic via Dapr, the application can define the `consumerID`, which determines the subscriber's position in the queue or topic. With the StatefulSets sticky identity of Pods, you can have a unique `consumerID` per Pod, allowing each horizontal scale of the subscriber application. Dapr keeps track of the name of each Pod, which can be used when declaring components using the `{podName}` marker.
+当通过 Dapr 订阅 pub/sub 主题时，应用程序可以定义 `consumerID`，该 consumerID 决定了订阅者在队列或主题中的位置。 使用 Pod 的 StatefulSets 粘性标识，你可以拥有一个唯一的 `consumerID` 每个 Pod，允许订阅者应用程序的每个水平缩放。 Dapr 会跟踪每个 Pod 的名称，在使用 `{podName}` 标记。
 
-On scaling the number of subscribers of a given topic, each Dapr component has unique settings that determine the behavior. Usually, there are two options for multiple consumers:
+在扩展给定主题的订阅者数量时，每个 Dapr 组件都有确定其行为的唯一设置。 通常，对于多个消费者，有两个选项：
 
- - Broadcast: each message published to the topic will be consumed by all subscribers.
- - Shared: a message is consumed by any subscriber (but not all).
+ - 广播：发布到主题的每条消息都将被所有订阅者消费。
+ - 共享：消息被任何订阅者消费（但不是全部）。
 
-Kafka isolates each subscriber by `consumerID` with its own position in the topic. When an instance restarts, it reuses the same `consumerID` and continues from its last known position, without skipping messages. The component below demonstrates how a Kafka component can be used by multiple Pods:
+Kafka 通过以下方式隔离每个订阅者 `consumerID` 在主题中有自己的位置。 当实例重新启动时，它将重用相同的 `consumerID` ，并从其上次已知的位置继续，而不跳过消息。 下面的组件演示了如何让多个 Pod 使用 Kafka 组件：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -63,7 +63,7 @@ spec:
     value: "false"
 ```
 
-The MQTT3 protocol has shared topics, allowing multiple subscribers to "compete" for messages from the topic, meaning a message is only processed by one of them. 例如:
+MQTT3协议具有共享主题，允许多个订阅者对主题的消息进行"竞争"，这意味着消息只会被其中一个订阅者处理。 例如:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -88,7 +88,7 @@ spec:
 
 ## 下一步
 
-- Try the [pub/sub tutorial](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub).
-- Learn about [messaging with CloudEvents]({{< ref pubsub-cloudevents.md >}}) and when you might want to [send messages without CloudEvents]({{< ref pubsub-raw.md >}}).
-- Review the list of [pub/sub components]({{< ref setup-pubsub >}}).
-- Read the [API reference]({{< ref pubsub_api.md >}}).
+- 尝试 [pub/sub 教程](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub)。
+- 了解 [使用 CloudEvents 进行消息传递]({{< ref pubsub-cloudevents.md >}}) 以及您可能想要 [在没有 CloudEvents 的情况下发送消息]({{< ref pubsub-raw.md >}}).
+- 查看 [发布/订阅 组件列表]({{< ref setup-pubsub >}})。
+- 阅读 [API 参考手册]({{< ref pubsub_api.md >}})。

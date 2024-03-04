@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Application Environment of a .NET Dapr pluggable component"
-linkTitle: "Application environment"
+title: "一个 .NET Dapr 可插拔组件的应用环境"
+linkTitle: "应用程序环境"
 weight: 1000
-description: How to configure the environment of a .NET pluggable component
+description: 如何配置 .NET 可插拔组件的环境
 no_list: true
 is_preview: true
 ---
 
-A .NET Dapr pluggable component application can be configured for dependency injection, logging, and configuration values similarly to ASP.NET applications.  The `DaprPluggableComponentsApplication` exposes a similar set of configuration properties to that exposed by `WebApplicationBuilder`.
+一个.NET Dapr可插拔组件应用可以像ASP.NET应用程序一样配置依赖注入、日志记录和配置值。  `DaprPluggableComponentsApplication` 暴露了与 `WebApplicationBuilder`相似的配置属性集。
 
-## Dependency injection
+## 使用依赖输入
 
-Components registered with services can participate in dependency injection. Arguments in the components constructor will be injected during creation, assuming those types have been registered with the application. You can register them through the `IServiceCollection` exposed by `DaprPluggableComponentsApplication`.
+使用服务注册的组件可以参与依赖注入。 在组件的构造函数中，参数将在创建过程中进行注入，假设这些类型已经在应用程序中注册。 您可以通过 `DaprPluggableComponentsApplication`提供的 `IServiceCollection` 进行注册。
 
 ```csharp
 var app = DaprPluggableComponentsApplication.Create();
@@ -52,15 +52,15 @@ class MyStateStore : IStateStore
 ```
 
 {{% alert title="Warning" color="warning" %}}
-Use of `IServiceCollection.AddScoped()` is not recommended. Such instances' lifetimes are bound to a single gRPC method call, which does not match the lifetime of an individual component instance.
+不推荐使用 `IServiceCollection.AddScoped()` 。 这些实例的生命周期与单个 gRPC 方法调用绑定，这与单个组件实例的生命周期不匹配。
 {{% /alert %}}
 
-## Logging
+## 日志
 
-.NET Dapr pluggable components can use the [standard .NET logging mechanisms](https://learn.microsoft.com/en-us/dotnet/core/extensions/logging). The `DaprPluggableComponentsApplication` exposes an `ILoggingBuilder`, through which it can be configured.
+.NET Dapr可插拔组件可以使用 [标准的.NET日志机制](https://learn.microsoft.com/en-us/dotnet/core/extensions/logging)。 DaprPluggableComponentsApplication `通过` 暴露了一个 `ILoggingBuilder`，通过它可以进行配置。
 
 {{% alert title="Note" color="primary" %}}
-Like with ASP.NET, logger services (for example, `ILogger<T>`) are pre-registered.
+与ASP.NET一样，日志记录器服务（例如， `ILogger<T>`）已预先注册。
 {{% /alert %}}
 
 ```csharp
@@ -91,9 +91,9 @@ class MyStateStore : IStateStore
 }
 ```
 
-## Configuration Values
+## 配置值
 
-Since .NET pluggable components are built on ASP.NET, they can use its [standard configuration mechanisms](https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration) and default to the same set of [pre-registered providers](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0#default-application-configuration-sources). The `DaprPluggableComponentsApplication` exposes an `IConfigurationManager` through which it can be configured.
+由于.NET可插拔组件是构建在ASP.NET上的，它们可以使用其[标准配置机制](https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration)，并默认使用相同的[预注册提供程序](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0#default-application-configuration-sources)。 `DaprPluggableComponentsApplication` 通过一个 `IConfigurationManager` 暴露出来，通过它可以进行配置。
 
 ```csharp
 var app = DaprPluggableComponentsApplication.Create();

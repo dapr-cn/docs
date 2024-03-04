@@ -9,7 +9,7 @@ aliases:
 
 ## Component format
 
-To setup MQTT pubsub create a component of type `pubsub.mqtt`. See [this guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pubsub configuration
+To set up MQTT pub/sub, create a component of type `pubsub.mqtt`. See the [pub/sub broker component file]({{< ref setup-pubsub.md >}}) to learn how ConsumerID is automatically generated. Read the [How-to: Publish and Subscribe guide]({{< ref "howto-publish-subscribe.md#step-1-setup-the-pubsub-component" >}}) on how to create and apply a pub/sub configuration.
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -28,6 +28,8 @@ spec:
     value: "false"
   - name: cleanSession
     value: "false"
+  - name: consumerID
+    value: "channel1"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -36,7 +38,7 @@ spec:
 
 ## 元数据字段规范
 
-| Field        |    必填    | 详情                                                                                                                                                                                                                      | 示例                                                                                                 |
+| Field        | Required | 详情                                                                                                                                                                                                                      | 示例                                                                                                 |
 | ------------ |:--------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | url          |    是     | Address of the MQTT broker. Can be `secretKeyRef` to use a secret reference. <br> Use the **`tcp://`** URI scheme for non-TLS communication. <br> Use the **`ssl://`** URI scheme for TLS communication.    | `"tcp://[username][:password]@host.domain[:port]"`                                                 |
 | consumerID   |    否     | The client ID used to connect to the MQTT broker for the consumer connection. Defaults to the Dapr app ID.<br>Note: if `producerID` is not set, `-consumer` is appended to this value for the consumer connection | `"myMqttClientApp"`                                                                                |
@@ -62,7 +64,7 @@ There is a crucial difference between the two ways of retries:
 
 ### Communication using TLS
 
-To configure communication using TLS, ensure that the MQTT broker (e.g. mosquitto) is configured to support certificates and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. For example:
+To configure communication using TLS, ensure that the MQTT broker (for example, mosquitto) is configured to support certificates and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. For example:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

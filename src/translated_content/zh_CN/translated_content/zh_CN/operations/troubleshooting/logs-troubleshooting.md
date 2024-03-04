@@ -71,6 +71,8 @@ dapr run node myapp.js
 
 ## Kubernetes 模式下的日志
 
+> [Learn how to debug `daprd` on Kubernetes.]({{< ref "debug-daprd.md" >}})
+
 您可以通过在 Pod spec 模板中提供以下注解 ，为每个 sidecar 单独设置日志级别：
 
 ```yml

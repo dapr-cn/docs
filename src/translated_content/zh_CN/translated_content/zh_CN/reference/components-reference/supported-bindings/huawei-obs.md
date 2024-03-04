@@ -20,16 +20,16 @@ spec:
   type: bindings.huawei.obs
   version: v1
   - name: bucket
-    value: <your-bucket-name>
+    value: "<your-bucket-name>"
   - name: endpoint
-    value: <obs-bucket-endpoint>
+    value: "<obs-bucket-endpoint>"
   - name: accessKey
-    value: <your-access-key>
+    value: "<your-access-key>"
   - name: secretKey
-    value: <your-secret-key>
+    value: "<your-secret-key>"
   # optional fields
   - name: region
-    value: <your-bucket-region>
+    value: "<your-bucket-region>"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -38,14 +38,13 @@ spec:
 
 ## 元数据字段规范
 
-| Field     | 必填 | 绑定支持   | 详情                                                 | 示例                                   |
-| --------- |:--:| ------ | -------------------------------------------------- | ------------------------------------ |
-| bucket    | 是  | Output | The name of the Huawei OBS bucket to write to      | `"My-OBS-Bucket"`                    |
-| 终结点       | 是  | 输出     | The specific Huawei OBS endpoint                   | `"obs.cn-north-4.myhuaweicloud.com"` |
-| accessKey | 是  | 输出     | The Huawei Access Key (AK) to access this resource | `"************"`                     |
-| secretKey | 是  | 输出     | The Huawei Secret Key (SK) to access this resource | `"************"`                     |
-| region    | 否  | 输出     | The specific Huawei region of the bucket           | `"cn-north-4"`                       |
-
+| Field       | Required | 绑定支持   | 详情                                                 | 示例                                   |
+| ----------- |:--------:| ------ | -------------------------------------------------- | ------------------------------------ |
+| `bucket`    |    是     | Output | The name of the Huawei OBS bucket to write to      | `"My-OBS-Bucket"`                    |
+| `endpoint`  |    是     | 输出     | The specific Huawei OBS endpoint                   | `"obs.cn-north-4.myhuaweicloud.com"` |
+| `accessKey` |    是     | 输出     | The Huawei Access Key (AK) to access this resource | `"************"`                     |
+| `secretKey` |    是     | 输出     | The Huawei Secret Key (SK) to access this resource | `"************"`                     |
+| `region`    |    否     | 输出     | The specific Huawei region of the bucket           | `"cn-north-4"`                       |
 
 ## 绑定支持
 
@@ -70,7 +69,7 @@ To perform a create operation, invoke the Huawei OBS binding with a `POST` metho
 }
 ```
 
-#### Examples
+#### 示例
 ##### Save text to a random generated UUID file
 
 {{< tabs Windows Linux >}}
@@ -215,7 +214,7 @@ The metadata parameters are:
 - `key` - 对象的名称
 
 
-#### Examples
+#### 示例
 
 ##### 删除对象
 

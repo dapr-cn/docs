@@ -23,13 +23,16 @@ spec:
   metadata:
   - name: schedule
     value: "@every 15m" # valid cron schedule
+  - name: direction
+    value: "input"
 ```
 
 ## 元数据字段规范
 
-| Field    | 必填 | 绑定支持  | 详情                                                                            | 示例             |
-| -------- |:--:| ----- | ----------------------------------------------------------------------------- | -------------- |
-| schedule | 是  | Input | The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"` |
+| Field       | Required | 绑定支持  | 详情                                                                            | 示例             |
+| ----------- |:--------:| ----- | ----------------------------------------------------------------------------- | -------------- |
+| `schedule`  |    是     | Input | The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"` |
+| `direction` |    否     | Input | The direction of the binding                                                  | `"input"`      |
 
 ### 计划格式
 
@@ -69,7 +72,7 @@ app.post('/scheduled', async function(req, res){
 });
 ```
 
-在运行这段代码时，请注意 `/scheduled` endpoint 每五分钟被 Dapr sidecar 调用一次。
+When running this code, note that the `/scheduled` endpoint is called every fifteen minutes by the Dapr sidecar.
 
 
 ## 绑定支持

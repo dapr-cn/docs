@@ -1,24 +1,24 @@
 ---
 type: docs
-title: "Quickstart guide template"
+title: "快速入门指南文章模板"
 linkTitle: "Quickstart template"
 weight: 20
-description: Suggested template and guidance for creating a quickstart guide
+description: 创建快速入门指南的建议模板和指南
 ---
 
-## Contributing a new quickstart guide
+## 贡献新的 quickstart 指南
 
-Dapr quickstart guides consist of quick instructions that walk readers through a prepared quickstart, saved to the [dapr/quickstarts repo](https://github.com/dapr/quickstarts). These quickstarts package an entire feature or building block in one place, making it easy for the reader to experience how it works without compromising their own project.
+Dapr 快速入门指南由快速指令组成，引导读者完成准备好的快速入门，保存在 [dapr/quickstarts 存储库](https://github.com/dapr/quickstarts)。 这些快速入门将整个功能或构建块打包在一个地方，使读者能够体验其工作方式，而不会影响他们自己的项目。
 
-The quickstart instructions should be succinct, direct, and clear. The sole purpose of a quickstart guide is to simply instruct a reader through the prepared quickstart. If you'd like to explain the concepts behind the quickstart, direct the reader to a concept article for more context.
+快速入门说明应该简洁、直接和清晰。 快速入门指南的唯一目的就是简单地指导读者完成准备好的快速入门。 如果您想解释快速入门背后的概念，请将读者引导至一个概念文章以获取更多上下文。
 
 {{% alert title="Note" color="primary" %}}
-This template is only a suggestion. Feel free to change based on your document's purpose.
+这个模板只是一个建议。 根据您的文档目的随意更改。
 {{% /alert %}}
 
-Learn more about [contributing to the Dapr docs]({{< ref contributing-docs.md >}}), like [front-matter]({{< ref "contributing-docs.md#front-matter" >}}) and [shortcodes]({{< ref "contributing-docs.md#shortcodes" >}}).
+了解有关[贡献给 Dapr 文档]({{< ref contributing-docs.md >}})的更多信息，如[front-matter]({{< ref "contributing-docs.md#front-matter" >}})和[shortcodes]({{< ref "contributing-docs.md#shortcodes" >}})。
 
-### Template
+### 模板
 
 ```md
 ---
@@ -72,7 +72,7 @@ Include code snippets where possible.
 
 ## Tell us what you think!
 
-We're continuously working to improve our Quickstart examples and value your feedback. 您觉得此快速入门有帮助吗？ Do you have suggestions for improvement?
+We're continuously working to improve our Quickstart examples and value your feedback. Did you find this quickstart helpful? Do you have suggestions for improvement?
 
 Join the discussion in our [discord channel](https://discord.gg/22ZtJrNe).
 

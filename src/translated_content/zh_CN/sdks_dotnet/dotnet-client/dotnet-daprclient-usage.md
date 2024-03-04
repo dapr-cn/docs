@@ -6,9 +6,9 @@ weight: 100000
 description: 使用 DaprClient 的基本提示和建议
 ---
 
-## Lifetime management
+## 生命周期管理
 
-A `DaprClient` holds access to networking resources in the form of TCP sockets used to communicate with the Dapr sidecar. `DaprClient` implements `IDisposable` to support eager cleanup of resources.
+`DaprClient` 能够以TCP 套接字的形式访问网络资源，与 Dapr sidecar 通信。 `DaprClient` 实现了 `IDisposable` ，以支持对资源的迫切清理。
 
 为了获得最佳性能，请创建 `DaprClient` 的单一长期实例，并在整个应用程序中提供对该共享实例的访问。 `DaprClient` 实例是线程安全的，旨在共享。
 
@@ -26,19 +26,21 @@ var daprClient = new DaprClientBuilder()
 
 `DaprClientBuilder` 包含以下各项的设置：
 
-- The HTTP endpoint of the Dapr sidecar
-- The gRPC endpoint of the Dapr sidecar
-- The `JsonSerializerOptions` object used to configure JSON serialization
-- The `GrpcChannelOptions` object used to configure gRPC
-- The API Token used to authenticate requests to the sidecar
+- Dapr sidecar 的 HTTP 端点
+- Dapr sidecar 的 gRPC 端点
+- 用于配置 JSON 序列化的 `JsonSerializerOptions` 对象
+- 用于配置 gRPC 的 `GrpcChannelOptions` 对象
+- 用于验证请求到 sidecar 的 API 令牌
 
 SDK 将读取以下环境变量来配置默认值：
 
-- `DAPR_HTTP_PORT`: used to find the HTTP endpoint of the Dapr sidecar
-- `DAPR_GRPC_PORT`: 用于查找 Dapr sidecar 的 gRPC 端点
+- `DAPR_HTTP_ENDPOINT`：用于查找Dapr sidecar的HTTP端点，示例：`https://dapr-api.mycompany.com`
+- `DAPR_GRPC_ENDPOINT`：用于查找 Dapr sidecar 的 gRPC 端点，示例：`https://dapr-grpc-api.mycompany.com`
+- `DAPR_HTTP_PORT`：如果未设置`DAPR_HTTP_ENDPOINT`，则用于查找Dapr sidecar的HTTP本地端点
+- `DAPR_GRPC_PORT`：如果未设置`DAPR_GRPC_ENDPOINT`，则用于查找Dapr sidecar的本地gRPC端点
 - `DAPR_API_TOKEN`: 用于设置 API 令牌
 
-### Configuring gRPC channel options
+### 配置 gRPC 通道选项
 
 Dapr使用 `CancellationToken` 进行取消，这依赖于 gRPC 通道选项的配置。 如果您需要自己配置这些选项，请确保启用 [ThrowOperationCanceledOnCancellation 设置](https://grpc.github.io/grpc/csharp-dotnet/api/Grpc.Net.Client.GrpcChannelOptions.html#Grpc_Net_Client_GrpcChannelOptions_ThrowOperationCanceledOnCancellation)。
 
@@ -56,7 +58,7 @@ DaprClient 上执行异步操作的 API 接受一个可选的 `CancellationToken
 
 ## 了解 DaprClient JSON 序列化
 
-Many methods on `DaprClient` perform JSON serialization using the `System.Text.Json` serializer. 接受应用程序数据类型作为参数的方法将对其进行 JSON 序列化，除非文档另有明确说明。
+许多方法在`DaprClient`上使用`System.Text.Json`序列化器执行JSON序列化。 接受应用程序数据类型作为参数的方法将对其进行 JSON 序列化，除非文档另有明确说明。
 
 如果你有高级要求，值得阅读[System.Text.Json文档](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview) 。 Dapr .NET SDK 没有提供独特的序列化行为或自定义 - 它依赖于底层的序列化器将数据转换为应用程序的 .NET 类型。
 
@@ -68,7 +70,7 @@ Many methods on `DaprClient` perform JSON serialization using the `System.Text.J
 
 如果您使用映射到 JSON 类型系统的特性集，您使用 JSON 序列化和 `DaprClient` 的体验将会很顺利。 这些都是一般准则，在可以应用的地方会简化你的代码。
 
-- Avoid inheritance and polymorphism
+- 避免继承和多态性
 - 不要试图用循环引用来序列化数据。
 - 不要将复杂或昂贵的逻辑放在构造函数或属性访问器中
 - 使用 .NET 类型，干净利落地映射到 JSON 类型（数字类型，字符串，`DateTime`）
@@ -138,7 +140,7 @@ catch (DaprException ex)
 
 最常见的故障案例将与以下情况有关：
 
-- Incorrect configuration of Dapr component
+- Dapr 组件配置不正确
 - 暂时性故障，如网络问题
 - 无效数据，如未能反序列化 JSON
 

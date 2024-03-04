@@ -1,37 +1,37 @@
 ---
 type: docs
-title: "How to: Implement pluggable components"
+title: "如何实现可插拔组件"
 linkTitle: "Implement pluggable components"
 weight: 1100
-description: "Learn how to author and implement pluggable components"
+description: "学习如何编写和实现可插拔组件"
 ---
 
-In this guide, you'll learn why and how to implement a [pluggable component]({{< ref pluggable-components-overview >}}). To learn how to configure and register a pluggable component, refer to [How to: Register a pluggable component]({{< ref pluggable-components-registration.md >}})
+在本指南中，您将了解为什么以及如何实现 [可插拔组件]({{< ref pluggable-components-overview >}}). 要了解如何配置和注册可插拔组件，请参阅 [如何：注册可插入组件]({{< ref pluggable-components-registration.md >}})
 
-## Implement a pluggable component
+## 实现一个可插拔组件
 
-In order to implement a pluggable component, you need to implement a gRPC service in the component. Implementing the gRPC service requires three steps:
+为了实现可插拔组件，您需要在组件中实现一个 gRPC 服务。 实现 gRPC 服务需要三个步骤：
 
-### Find the proto definition file
+### 查找 proto 定义文件
 
-Proto definitions are provided for each supported service interface (state store, pub/sub, bindings).
+为每个支持的服务接口（状态存储、发布/订阅、绑定、密钥存储）提供了Proto定义。
 
-Currently, the following component APIs are supported:
+目前支持以下组件API：
 
 - 状态存储
-- Pub/sub
+- Pub/sub（发布/订阅）
 - 绑定
+- 秘密存储
+[概念]({{< ref "bindings-overview" >}}), 输入指南/a>, [输出指南]({{< ref "howto-bindings" >}}), [API 规范]({{< ref "bindings_api" >}})</td> </tr> 
 
-|  Component  |    数据类型    | gRPC definition  |                       Built-in Reference Implementation                        | Docs                                                                                                                                                                          |
-|:-----------:|:----------:|:----------------:|:------------------------------------------------------------------------------:| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| State Store |  `state`   |  [state.proto]   |  [Redis](https://github.com/dapr/components-contrib/tree/master/state/redis)   | [concept]({{< ref "state-management-overview" >}}), [howto]({{< ref "howto-get-save-state" >}}), [api spec]({{< ref "state_api" >}})                                          |
-|   Pub/sub   |  `pubsub`  |  [pubsub.proto]  |  [Redis](https://github.com/dapr/components-contrib/tree/master/pubsub/redis)  | [concept]({{< ref "pubsub-overview" >}}), [howto]({{< ref "howto-publish-subscribe" >}}), [api spec]({{< ref "pubsub_api" >}})                                                |
-|     绑定      | `bindings` | [bindings.proto] | [Kafka](https://github.com/dapr/components-contrib/tree/master/bindings/kafka) | [concept]({{< ref "bindings-overview" >}}), [input howto]({{< ref "howto-triggers" >}}), [output howto]({{< ref "howto-bindings" >}}), [api spec]({{< ref "bindings_api" >}}) |
+</tbody> </table> 
 
-Below is a snippet of the gRPC service definition for pluggable component state stores ([state.proto]):
+以下是可插拔组件状态存储的 gRPC 服务定义片段（[state.proto]）:
+
+
 
 ```protobuf
-// StateStore service provides a gRPC interface for state store components.
+// StateStore 服务为状态存储组件提供 gRPC 接口。
 service StateStore {
   // Initializes the state store component with the given metadata.
   rpc Init(InitRequest) returns (InitResponse) {}
@@ -57,75 +57,92 @@ service StateStore {
 }
 ```
 
-The interface for the `StateStore` service exposes a total of 9 methods:
 
-- 2 methods for initialization and components capability advertisement (Init and Features)
-- 1 method for health-ness or liveness check (Ping)
-- 3 methods for CRUD (Get, Set, Delete)
-- 3 methods for bulk CRUD operations (BulkGet, BulkSet, BulkDelete)
+`StateStore` 服务的接口公开了总共 9 个方法：
 
-### Create service scaffolding
+- 2 种初始化方法和组件功能通告（Init 和 Features）
+- 1种用于健康性或活动性检查的方法 (Ping)
+- CRUD 的 3 种方法（获取、设置、删除）
+- 批量 CRUD 操作的 3 种方法（BulkGet、BulkSet、BulkDelete）
 
-Use [protocol buffers and gRPC tools](https://grpc.io) to create the necessary scaffolding for the service. Learn more about these tools via [the gRPC concepts documentation](https://grpc.io/docs/what-is-grpc/core-concepts/).
 
-These tools generate code targeting [any gRPC-supported language](https://grpc.io/docs/what-is-grpc/introduction/#protocol-buffer-versions). This code serves as the base for your server and it provides:
-- Functionality to handle client calls
-- Infrastructure to:
-  - Decode incoming requests
-  - Execute service methods
-  - Encode service responses
 
-The generated code is incomplete. It is missing:
+### 创建服务脚手架
 
-- A concrete implementation for the methods your target service defines (the core of your pluggable component).
-- Code on how to handle Unix Socket Domain integration, which is Dapr specific.
-- Code handling integration with your downstream services.
+用 [协议缓冲区和 gRPC 工具](https://grpc.io) 为服务创建必要的基架。 通过[gRPC概念文档](https://grpc.io/docs/what-is-grpc/core-concepts/)了解这些工具的更多信息。
 
-Learn more about filling these gaps in the next step.
+这些工具生成代码定位 [任何 gRPC 支持的语言](https://grpc.io/docs/what-is-grpc/introduction/#protocol-buffer-versions). 此代码作为您的服务器的基础，并提供：
 
-### Define the service
+- 处理客户端调用的功能
+- 基础设施包括： 
+    - 解码传入请求
+  - 执行服务方法
+  - 编码服务响应
 
-Provide a concrete implementation of the desired service. Each component has a gRPC service definition for its core functionality which is the same as the core component interface. For example:
+生成的代码不完整。 它缺少：
+
+- 您的目标服务定义的方法的具体实现（可插拔组件的核心）。
+- 有关如何处理 Unix 套接字域集成的代码，这是特定于 Dapr 的。
+- 处理与您的下游服务集成的代码。
+
+在下一步中详细了解如何填补这些空白。
+
+
+
+### 定义服务
+
+提供所需服务的具体实现。 每个组件都有一个 gRPC 服务定义，用于其核心功能，与核心组件接口相同。 例如：
 
 - **状态存储**
-
-   A pluggable state store **must** provide an implementation of the `StateStore` service interface.
-
-   In addition to this core functionality, some components might also expose functionality under other **optional** services. For example, you can add extra functionality by defining the implementation for a `QueriableStateStore` service and a `TransactionalStateStore` service.
+  
+  可插拔的状态存储**必须**提供`StateStore`服务接口的实现。 
+  
+  除了这个核心功能之外，一些组件还可能在其他**可选**服务下公开功能。 例如，您可以通过定义 `QueriableStateStore` 服务和 `TransactionalStateStore` 服务的实现来添加额外功能。
 
 - **Pub/sub**
-
-   Pluggable pub/sub components only have a single core service interface defined ([pubsub.proto]). They have no optional service interfaces.
+  
+  可插拔的发布/订阅组件只定义了一个单一的核心服务接口 [pubsub.proto](https://github.com/dapr/dapr/blob/master/dapr/proto/components/v1/pubsub.proto)。 它们没有可选的服务接口。
 
 - **绑定**
+  
+  可插拔的输入和输出绑定在 [bindings.proto](https://github.com/dapr/dapr/blob/master/dapr/proto/components/v1/bindings.proto) 上有一个单一的核心服务定义。 它们没有可选的服务接口。
 
-   Pluggable input and output bindings have a single core service definition on [bindings.proto]. They have no optional service interfaces.
+- **密钥存储**
+  
+  可插拔的密钥存储在[secretstore.proto](https://github.com/dapr/dapr/blob/master/dapr/proto/components/v1/secretstore.proto)上有一个单一的核心服务定义。 它们没有可选的服务接口。
 
-After generating the above state store example's service scaffolding code using gRPC and protocol buffers tools, you can define concrete implementations for the 9 methods defined under `service StateStore`, along with code to initialize and communicate with your dependencies.
+在使用 gRPC 和协议缓冲区工具生成上述状态存储示例的服务脚手架代码后，您可以为`service StateStore`下定义的 9 个方法定义具体实现，以及用于初始化和与您的依赖项通信的代码。
 
-This concrete implementation and auxiliary code are the **core** of your pluggable component. They define how your component behaves when handling gRPC requests from Dapr.
+这个具体的实现和辅助代码是您可插拔组件的**核心**。 它们定义了组件在处理来自 Dapr 的 gRPC 请求时的行为方式。
 
-## Returning semantic errors
 
-Returning semantic errors are also part of the pluggable component protocol. The component must return specific gRPC codes that have semantic meaning for the user application, those errors are used to a variety of situations from concurrency requirements to informational only.
 
-| Error                    | gRPC error code            | Source component | 说明                                             |
-| ------------------------ | -------------------------- | ---------------- | ---------------------------------------------- |
-| ETag Mismatch            | `codes.FailedPrecondition` | State store      | Error mapping to meet concurrency requirements |
-| ETag Invalid             | `codes.InvalidArgument`    | State store      |                                                |
-| Bulk Delete Row Mismatch | `codes.Internal`           | State store      |                                                |
+## 返回语义错误
 
-Learn more about concurrency requirements in the [State Management overview]({{< ref "state-management-overview.md#concurrency" >}}).
+返回语义错误也是可插拔组件协议的一部分。 组件必须返回具有语义意义的特定 gRPC 代码，这些错误用于从并发要求到仅供信息使用的各种情况。
 
-The following examples demonstrate how to return an error in your own pluggable component, changing the messages to suit your needs.
+| 错误       | gRPC错误代码                   | 源组件  | 说明            |
+| -------- | -------------------------- | ---- | ------------- |
+| ETag不匹配  | `codes.FailedPrecondition` | 状态存储 | 映射错误，无法满足并发需求 |
+| ETag 无效  | `codes.InvalidArgument`    | 状态存储 |               |
+| 批量删除行不匹配 | `codes.Internal`           | 状态存储 |               |
+
+
+在 [状态管理概述]({{< ref "state-management-overview.md#concurrency" >}}).
+
+以下示例演示如何在您自己的可插拔组件中返回错误，更改消息以满足您的需求。
 
 {{< tabs ".NET" "Java" "Go" >}}
  <!-- .NET -->
 {{% codetab %}}
 
-> **Important:** In order to use .NET for error mapping, first install the [`Google.Api.CommonProtos` NuGet package](https://www.nuget.org/packages/Google.Api.CommonProtos/).
 
-**Etag Mismatch**
+
+> **重要:** 为了使用.NET进行错误映射，请首先安装[`Google.Api.CommonProtos` NuGet包](https://www.nuget.org/packages/Google.Api.CommonProtos/)。
+
+**Etag不匹配**
+
+
 
 ```csharp
 var badRequest = new BadRequest();
@@ -149,7 +166,10 @@ metadata.Add("grpc-status-details-bin", status.ToByteArray());
 throw new RpcException(new Grpc.Core.Status(baseStatusCode, "fake-err-msg"), metadata);
 ```
 
-**Etag Invalid**
+
+**Etag 无效**
+
+
 
 ```csharp
 var badRequest = new BadRequest();
@@ -174,7 +194,10 @@ metadata.Add("grpc-status-details-bin", status.ToByteArray());
 throw new RpcException(new Grpc.Core.Status(baseStatusCode, "fake-err-msg"), metadata);
 ```
 
-**Bulk Delete Row Mismatch**
+
+**批量删除行不匹配**
+
+
 
 ```csharp
 var errorInfo = new Google.Rpc.ErrorInfo();
@@ -194,20 +217,24 @@ metadata.Add("grpc-status-details-bin", status.ToByteArray());
 throw new RpcException(new Grpc.Core.Status(baseStatusCode, "fake-err-msg"), metadata);
 ```
 
+
 {{% /codetab %}}
 
  <!-- Java -->
 {{% codetab %}}
 
-Just like the [Dapr Java SDK](https://github.com/tmacam/dapr-java-sdk/), the Java Pluggable Components SDK uses [Project Reactor](https://projectreactor.io/), which provides an asynchronous API for Java.
+就像 [Dapr Java SDK](https://github.com/tmacam/dapr-java-sdk/) 一样，Java Pluggable Components SDK 使用 [Project Reactor](https://projectreactor.io/)，为 Java 提供了异步 API。
 
-Errors can be returned directly by:
-1. Calling the `.error()` method in the `Mono` or `Flux` that your method returns
-1. Providing the appropriate exception as parameter.
+错误可以直接返回:
 
-You can also raise an exception, as long as it is captured and fed back to your resulting `Mono` or `Flux`.
+1. 在您的方法返回的`Mono`或`Flux`中调用`.error()`方法
+1. 提供适当的异常作为参数。 
 
-**ETag Mismatch**
+您也可以引发异常，只要它被捕获并反馈到您的结果`Mono`或`Flux`中。
+
+**ETag不匹配**
+
+
 
 ```java
 final Status status = Status.newBuilder()
@@ -221,7 +248,10 @@ final Status status = Status.newBuilder()
 return Mono.error(StatusProto.toStatusException(status));
 ```
 
-**ETag Invalid**
+
+**ETag 无效**
+
+
 
 ```java
 final Status status = Status.newBuilder()
@@ -235,7 +265,10 @@ final Status status = Status.newBuilder()
 return Mono.error(StatusProto.toStatusException(status));
 ```
 
-**Bulk Delete Row Mismatch**
+
+**批量删除行不匹配**
+
+
 
 ```java
 final Status status = Status.newBuilder()
@@ -251,12 +284,15 @@ final Status status = Status.newBuilder()
 return Mono.error(StatusProto.toStatusException(status));
 ```
 
+
 {{% /codetab %}}
 
  <!-- Go -->
 {{% codetab %}}
 
-**ETag Mismatch**
+**Etag不匹配**
+
+
 
 ```go
 st := status.New(codes.FailedPrecondition, "fake-err-msg")
@@ -270,7 +306,10 @@ br.FieldViolations = append(br.FieldViolations, v)
 st, err := st.WithDetails(br)
 ```
 
-**ETag Invalid**
+
+**ETag 无效**
+
+
 
 ```go
 st := status.New(codes.InvalidArgument, "fake-err-msg")
@@ -284,7 +323,10 @@ br.FieldViolations = append(br.FieldViolations, v)
 st, err := st.WithDetails(br)
 ```
 
-**Bulk Delete Row Mismatch**
+
+**批量删除行不匹配**
+
+
 
 ```go
 st := status.New(codes.Internal, "fake-err-msg")
@@ -296,12 +338,15 @@ br.Metadata = map[string]string{
 st, err := st.WithDetails(br)
 ```
 
+
 {{% /codetab %}}
 
 {{< /tabs >}}
 
+
+
 ## 下一步
 
-- Get started with developing .NET pluggable component using this [sample code](https://github.com/dapr/samples/tree/master/pluggable-components-dotnet-template)
-- [Review the pluggable components overview]({{< ref pluggable-components-overview.md >}})
-- [Learn how to register your pluggable component]({{< ref pluggable-components-registration >}})
+- 开始使用此开发 .NET 可插入组件 [示例代码](https://github.com/dapr/samples/tree/master/pluggable-components-dotnet-template)
+- [查看可插拔组件概述]({{< ref pluggable-components-overview.md >}})
+- [学习如何注册您的可插拔组件]({{< ref pluggable-components-registration >}})

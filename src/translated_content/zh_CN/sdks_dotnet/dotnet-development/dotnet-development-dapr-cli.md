@@ -8,7 +8,7 @@ description: 学习使用 Dapr CLI 进行本地开发
 
 ## Dapr CLI
 
-*Consider this to be a .NET companion to the [Dapr Self-Hosted with Docker Guide]({{< ref self-hosted-with-docker.md >}})*.
+*这是一篇 .NET 使用指南，另见 [使用 Docker 进行 Dapr 自托管]({{< ref self-hosted-with-docker.md >}})*
 
 Dapr CLI 通过初始化本地 redis 容器、zipkin 容器、放置服务和 redis 的组件清单，为您提供了良好的工作基础。 这将使您能够在全新安装中使用以下构建块，而无需进行其他设置：
 

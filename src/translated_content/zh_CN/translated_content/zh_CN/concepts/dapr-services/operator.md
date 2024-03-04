@@ -5,47 +5,47 @@ linkTitle: "Operator"
 description: "Dapr operator 服务概述"
 ---
 
-When running Dapr in [Kubernetes mode]({{< ref kubernetes >}}), a pod running the Dapr Operator service manages [Dapr component]({{< ref components >}}) updates and provides Kubernetes services endpoints for Dapr.
+在 [Kubernetes 模式下运行 Dapr 时]({{< ref kubernetes >}})，运行 Dapr Operator 服务的 pod 管理 [Dapr 组件]({{< ref components >}}) 更新，并为 Dapr 提供 Kubernetes 服务端点。
 
-## Running the operator service
+## 运行 Operator 服务
 
 Operator 服务作为 `dapr init -k` 或 Dapr Helm charts的一部分被部署。 有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。
 
-## Additional configuration options
+## 其他配置选项
 
-The operator service includes additional configuration options.
+operator 服务还包括其他配置选项。
 
 ### Injector watchdog
 
-The operator service includes an _injector watchdog_ feature which periodically polls all pods running in your Kubernetes cluster and confirms that the Dapr sidecar is injected in those which have the `dapr.io/enabled=true` annotation. It is primarily meant to address situations where the [Injector service]({{< ref sidecar-injector >}}) did not successfully inject the sidecar (the `daprd` container) into pods.
+Operator 服务包括 _injector watchdog_ 功能，它会定期轮询在 Kubernetes 集群中运行的所有 pod，并确认 Dapr sidecar 已注入到具有 `dapr.io/enabled=true` 注释的 pod 中。 它主要是为了解决以下情况： [Injector 服务]({{< ref sidecar-injector >}}) 未成功注入 sidecar（ `dapr` 容器）放入 pod 中。
 
 
-The injector watchdog can be useful in a few situations, including:
+Injector watchdog 在几种情况下很有用，包括：
 
-- Recovering from a Kubernetes cluster completely stopped. When a cluster is completely stopped and then restarted (including in the case of a total cluster failure), pods are restarted in a random order. If your application is restarted before the Dapr control plane (specifically the Injector service) is ready, the Dapr sidecar may not be injected into your application's pods, causing your application to behave unexpectedly.
+- 从完全停止的 Kubernetes 集群中恢复。 当集群完全停止然后重新启动时（包括集群完全失效的情况），pod 会以随机顺序重新启动。 如果在 Dapr 控制平面（特别是 Injector 服务）准备就绪之前重新启动应用程序，Dapr sidecar 卡可能无法注入到应用程序的 pod 中，从而导致应用程序出现意外行为。
 
-- Addressing potential random failures with the sidecar injector, such as transient failures within the Injector service.
-
-
-If the watchdog detects a pod that does not have a sidecar when it should have had one, it deletes it. Kubernetes will then re-create the pod, invoking the Dapr sidecar injector again.
-
-The injector watchdog feature is **disabled by default**.
-
-You can enable it by passing the `--watch-interval` flag to the `operator` command, which can take one of the following values:
+- 解决 sidecar injector 的潜在随机故障，如 injector 服务内的瞬时故障。
 
 
-- `--watch-interval=0`: disables the injector watchdog (default value if the flag is omitted).
-- `--watch-interval=<interval>`: the injector watchdog is enabled and polls all pods at the given interval; the value for the interval is a string that includes the unit. For example: `--watch-interval=10s` (every 10 seconds) or `--watch-interval=2m` (every 2 minutes).
-- `--watch-interval=once`: the injector watchdog runs only once when the operator service is started.
+如果 watchdog 检测到一个 pod 在应该有 sidecar 的情况下没有 sidecar，就会将其删除。 然后，Kubernetes 将重新创建 pod，再次调用 Dapr sidecar 注入器。
 
-If you're using Helm, you can configure the injector watchdog with the [`dapr_operator.watchInterval` option](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md#dapr-operator-options), which has the same values as the command line flags.
+**默认禁用 injector watchdog 功能**。
+
+您可以通过向 `operator` 命令传递 `--watch-interval` 标志来启用它，该标志可以取以下值之一：
 
 
-> The injector watchdog is safe to use when the operator service is running in HA (High Availability) mode with more than one replica. In this case, Kubernetes automatically elects a "leader" instance which is the only one that runs the injector watchdog service.
+- `--watch-interval=0`：禁用 injector watchdog（省略该标志时的默认值）。
+- `--watch-interval=<interval>`：启用 injector watchdog ，并以给定的间隔轮询所有 pod；间隔值是一个包含单位的字符串。 例如： `--watch-interval=10s` （每 10 秒一次）或 `--watch-interval=2m` （每 2 分钟一次）。
+- `-watch-interval=once`：injector watchdog 仅在操作员服务启动时运行一次。
 
-> However, when in HA mode, if you configure the injector watchdog to run "once", the watchdog polling is actually started every time an instance of the operator service is elected as leader. This means that, should the leader of the operator service crash and a new leader be elected, that would trigger the injector watchdog again.
+如果使用 Helm，可以使用 [`dapr_operator.watchInterval` 选项](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md#dapr-operator-options)配置 ，其值与命令行标志相同。
 
-Watch this video for an overview of the injector watchdog:
+
+> 当 operator 服务在具有多个副本的 HA（高可用性）模式下运行时，可安全使用 injector watchdog。 在这种情况下，Kubernetes 会自动选出一个 "leader "实例，它是唯一一个运行 injector watchdog 服务的实例。
+
+> 但是，在 HA 模式下，如果将 injector watchdog 置为运行 "一次"，则每次操作员服务实例被选为 leader 时，watchdog 轮询都会实际启动。 这意味着，如果 operator 服务的 leader 崩溃，而新的 leader 又被选出，这将再次触发 injector watchdog。
+
+观看此视频，了解 injector watchdog 的概况：
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="360" height="315" src="https://www.youtube-nocookie.com/embed/ecFvpp24lpo?start=1848" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

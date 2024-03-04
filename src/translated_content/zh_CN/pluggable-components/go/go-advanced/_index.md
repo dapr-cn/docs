@@ -1,21 +1,21 @@
 ---
 type: docs
-title: "Advanced uses of the Dapr pluggable components .Go SDK"
+title: "Dapr 可插拔组件 .Go SDK 的高级用法"
 linkTitle: "Advanced"
 weight: 2000
-description: How to use advanced techniques with the Dapr pluggable components Go SDK
+description: 如何使用 Dapr 可插拔组件 Go SDK 的高级技术
 is_preview: true
 ---
 
-While not typically needed by most, these guides show advanced ways you can configure your Go pluggable components.
+虽然大多数人通常不需要这些指南，但这些指南展示了配置 Go 可插拔组件的高级方法。
 
-## Component lifetime
+## 组件生命周期
 
-Pluggable components are registered by passing a "factory method" that is called for each configured Dapr component of that type associated with that socket. The method returns the instance associated with that Dapr component (whether shared or not). This allows multiple Dapr components of the same type to be configured with different sets of metadata, when component operations need to be isolated from one another, etc.
+可插拔组件通过传递一个"工厂方法"进行注册，该方法将在与该套接字关联的每个配置的 Dapr 组件的每个类型中调用。 该方法返回与该 Dapr 组件关联的实例（无论是共享的还是非共享的）。 这样可以允许将同一类型的多个Dapr组件配置为具有不同的元数据集，当组件操作需要彼此隔离时等。
 
-## Registering multiple services
+## 注册多个服务
 
-Each call to `Register()` binds a socket to a registered pluggable component. One of each component type (input/output binding, pub/sub, and state store) can be registered per socket.
+每次调用`Register()`都会将套接字绑定到一个已注册的可插拔组件。 每个套接字可以注册每种组件类型（输入/输出绑定、发布/订阅和状态存储）的一个实例。
 
 ```go
 func main() {
@@ -35,11 +35,11 @@ func main() {
 }
 ```
 
-In the example above, a state store and output binding is registered with the socket `service-a` while another state store is registered with the socket `service-b`.
+在上面的示例中，一个状态存储和输出绑定被注册到套接字`service-a`，而另一个状态存储被注册到套接字`service-b`。
 
-## Configuring Multiple Components
+## 配置多个组件
 
-Configuring Dapr to use the hosted components is the same as for any single component - the component YAML refers to the associated socket. For example, to configure Dapr state stores for the two components registered above (to sockets `service-a` and `service-b`), you create two configuration files, each referencing their respective socket.
+配置 Dapr 使用托管组件与任何单个组件的配置方式相同 - 组件的 YAML 引用关联的套接字。 例如，要为上面注册的两个组件（`service-a` 和 `service-b`）配置 Dapr 状态存储，您需要创建两个配置文件，分别引用它们各自的 socket。
 
 ```yaml
 #
@@ -70,7 +70,7 @@ spec:
 ```
 
 ## 下一步
-- Learn more about implementing:
+- 了解更多关于实施的内容：
   - [绑定]({{< ref go-bindings >}})
   - [State]({{< ref go-state-store >}})
   - [Pub/sub]({{< ref go-pub-sub >}})

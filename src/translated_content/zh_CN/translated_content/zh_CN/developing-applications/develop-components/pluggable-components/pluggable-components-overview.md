@@ -1,65 +1,65 @@
 ---
 type: docs
-title: "Pluggable components overview"
+title: "查看可插拔组件概述"
 linkTitle: "概述"
 weight: 1000
-description: "Overview of pluggable component anatomy and supported component types"
+description: "可插拔组件剖析和支持的组件类型概述"
 ---
 
-Pluggable components are components that are not included as part the runtime, as opposed to the built-in components included with `dapr init`. You can configure Dapr to use pluggable components that leverage the building block APIs, but are registered differently from the [built-in Dapr components](https://github.com/dapr/components-contrib).
+可插拔组件是不作为运行时的一部分包含的组件，与`dapr init`中包含的内置组件相对。 您可以将 Dapr 配置为使用利用构建块 API 的可插拔组件，但注册方式与 [内置 Dapr 组件](https://github.com/dapr/components-contrib).
 
 <img src="/images/concepts-building-blocks.png" width=400>
 
-## Pluggable components vs. built-in components
+## 可插拔组件 vs. 内置组件
 
-Dapr provides two approaches for registering and creating components:
+Dapr 提供了两种注册和创建组件的方法:
 
-- The built-in components included in the runtime and found in the [components-contrib repository ](https://github.com/dapr/components-contrib).
-- Pluggable components which are deployed and registered independently.
+- 运行时包含的内置组件，并在 [components-contrib 仓库](https://github.com/dapr/components-contrib) 中找到。
+- 可插拔组件是独立部署和注册的。
 
-While both registration options leverage Dapr's building block APIs, each has a different implementation processes.
+虽然两种注册选项都利用了 Dapr 的构建块 API，但每种实现过程都不同。
 
-| Component details              | [Built-in Component](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md) | Pluggable Components                                                                                                      |
-| ------------------------------ |:--------------------------------------------------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------- |
-| **语言**                         | Can only be written in Go                                                                                 | [Can be written in any gRPC-supported language](https://grpc.io/docs/what-is-grpc/introduction/#protocol-buffer-versions) |
-| **Where it runs**              | As part of the Dapr runtime executable                                                                    | As a distinct process or container in a pod. Runs separate from Dapr itself.                                              |
-| **Registers with Dapr**        | Included into the Dapr codebase                                                                           | Registers with Dapr via Unix Domain Sockets (using gRPC )                                                                 |
-| **Distribution**               | Distributed with Dapr release. New features added to component are aligned with Dapr releases             | Distributed independently from Dapr itself. New features can be added when needed and follows its own release cycle.      |
-| **How component is activated** | Dapr starts runs the component (automatic)                                                                | User starts component (manual)                                                                                            |
+| 组件详情           | [内置组件](https://github.com/dapr/components-contrib/blob/master/docs/developing-component.md) | 可插拔组件                                                                                        |
+| -------------- |:------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------- |
+| **语言**         | 只能用Go语言编写                                                                                   | [可以用任何支持gRPC的语言编写](https://grpc.io/docs/what-is-grpc/introduction/#protocol-buffer-versions) |
+| **它在哪里运行**     | 作为 Dapr 运行时可执行文件的一部分                                                                        | 作为 pod 中的一个独特进程或容器。 独立于 Dapr 本身运行。                                                           |
+| **使用 Dapr 注册** | 包含在 Dapr 代码库中                                                                               | 通过 Unix 域套接字（使用 gRPC）注册到 Dapr                                                                |
+| **发行版**        | 随 Dapr 发行版分发。 组件新增功能与 Dapr 发布保持一致                                                           | 独立于 Dapr 本身进行分发。 在需要时可以添加新功能，并遵循其自己的发布周期。                                                    |
+| **组件如何被激活**    | Dapr 启动运行组件 (自动)                                                                            | 用户启动组件（手动）                                                                                   |
 
-## Why create a pluggable component?
+## 为什么创建可插拔组件?
 
-Pluggable components prove useful in scenarios where:
+可插拔组件在以下情况下非常有用：
 
-- You require a private component.
-- You want to keep your component separate from the Dapr release process.
-- You are not as familiar with Go, or implementing your component in Go is not ideal.
+- 您需要一个私有组件。
+- 您希望将组件与 Dapr 发布流程保持分离。
+- 您对Go不太熟悉，或者在Go中实现您的组件并不理想。
 
-## Features
+## 特性
 
-### Implement a pluggable component
+### 实现一个可插拔组件
 
-In order to implement a pluggable component, you need to implement a gRPC service in the component. Implementing the gRPC service requires three steps:
+为了实现可插拔组件，您需要在组件中实现一个 gRPC 服务。 实现 gRPC 服务需要三个步骤：
 
-1. Find the proto definition file
-1. Create service scaffolding
-1. Define the service
+1. 查找 proto 定义文件
+1. 创建服务脚手架
+1. 定义服务
 
-Learn more about [how to develop and implement a pluggable component]({{< ref develop-pluggable.md >}})
+了解更多 [如何开发和实现可插拔组件]({{< ref develop-pluggable.md >}})
 
-### Leverage multiple building blocks for a component
+### 利用一个组件来充当多个构建块
 
-In addition to implementing multiple gRPC services from the same component (for example `StateStore`, `QueriableStateStore`, `TransactionalStateStore` etc.), a pluggable component can also expose implementations for other component interfaces. This means that a single pluggable component can simultaneously function as a state store, pub/sub, and input or output binding. In other words, you can implement multiple component interfaces into a pluggable component and expose them as gRPC services.
+除了从同一组件实现多个 gRPC 服务（例如 `StateStore`, `QueriableStateStore`, `TransactionalStateStore` 等），可插拔组件还可以公开其他组件接口的实现。 这意味着一个可插拔组件可以同时作为状态存储、发布/订阅和输入或输出绑定的函数。 换句话说，您可以将多个组件接口实现为可插拔组件，并将它们公开为 gRPC 服务。
 
-While exposing multiple component interfaces on the same pluggable component lowers the operational burden of deploying multiple components, it makes implementing and debugging your component harder. If in doubt, stick to a "separation of concerns" by merging multiple components interfaces into the same pluggable component only when necessary.
+将多个组件接口暴露在同一个可插拔组件上会降低部署多个组件的操作负担，但会使您的组件实现和调试变得更加困难。 如果有疑问，请坚持“关注点分离”的原则，只在必要时将多个组件接口合并到同一个可插拔组件中。
 
-## Operationalize a pluggable component
+## 实现一个可插拔组件
 
-Built-in components and pluggable components share one thing in common: both need a [component specification]({{< ref "components-concept.md#component-specification" >}}). Built-in components do not require any extra steps to be used: Dapr is ready to use them automatically.
+内置组件和可插拔组件有一个共同点：两者都需要 [组件规格]({{< ref "components-concept.md#component-specification" >}}). 内置组件不需要任何额外的步骤即可使用：Dapr 已准备好自动使用它们。
 
-In contrast, pluggable components require additional steps before they can communicate with Dapr. You need to first run the component and facilitate Dapr-component communication to kick off the registration process.
+相比之下，可插拔组件需要额外的步骤才能与 Dapr 通信。 您需要首先运行组件并促进 Dapr 组件之间的通信，以启动注册过程。
 
 ## 下一步
 
-- [Implement a pluggable component]({{< ref develop-pluggable.md >}})
-- [Pluggable component registration]({{< ref "pluggable-components-registration" >}})
+- [实现一个可插拔组件]({{< ref develop-pluggable.md >}})
+- [可插拔组件注册]({{< ref "pluggable-components-registration" >}})

@@ -1,41 +1,44 @@
 ---
 type: docs
-title: "How-To: Use output bindings to interface with external resources"
-linkTitle: "How-To: Output bindings"
-description: "Invoke external systems with output bindings"
+title: "操作方法：使用输出绑定连接外部资源"
+linkTitle: "操作方法：输出绑定"
+description: "通过输出绑定调用外部系统"
 weight: 300
 ---
 
-使用输出绑定，您可以调用外部资源。 An optional payload and metadata can be sent with the invocation request.
 
-<img src="/images/howto-bindings/kafka-output-binding.png" width=1000 alt="Diagram showing bindings of example service">
+使用输出绑定，您可以调用外部资源。 调用请求可发送可选的有效载荷和元数据。
 
-This guide uses a Kafka binding as an example. You can find your preferred binding spec from [the list of bindings components]({{< ref setup-bindings >}}). In this guide:
+<img src="/images/howto-bindings/kafka-output-binding.png" width=1000 alt="示例服务绑定示意图">
 
-1. The example invokes the `/binding` endpoint with `checkout`, the name of the binding to invoke.
-1. The payload goes inside the mandatory `data` field, and can be any JSON serializable value.
-1. The `operation` field tells the binding what action it needs to take. For example, [the Kafka binding supports the `create` operation]({{< ref "kafka.md#binding-support" >}}).
-   - You can check [which operations (specific to each component) are supported for every output binding]({{< ref supported-bindings >}}).
+本指南以 Kafka 绑定为例。 您可以从 [绑定组件列表]({{< ref setup-bindings >}})中找到自己喜欢的绑定规范。 在本指南中
+
+1. 该示例调用了 `/binding` 端点，其中 `checkout`，即要调用的绑定名称。
+1. 有效载荷位于必需的 `data` 字段中，并且可以是任何 JSON 可序列化的值。
+1. `operation` 字段告诉绑定需要采取什么操作。 例如， [，Kafka 绑定支持 `create` 操作]({{< ref "kafka.md#binding-support" >}})。
+   - 您可以查看 [，了解每个输出绑定]({{< ref supported-bindings >}})支持哪些操作（针对每个组件）。
 
 {{% alert title="Note" color="primary" %}}
- If you haven't already, [try out the bindings quickstart]({{< ref bindings-quickstart.md >}}) for a quick walk-through on how to use the bindings API.
+ 如果您还没有， [尝试使用绑定快速入门]({{< ref bindings-quickstart.md >}}) ，快速了解如何使用绑定 API。
 
 {{% /alert %}}
 
-## Create a binding
+## 创建绑定
 
-Create a `binding.yaml` file and save to a `components` sub-folder in your application directory.
+创建 `binding.yaml` 文件，并保存到应用程序目录下的 `components` 子文件夹中。
 
-Create a new binding component named `checkout`. Within the `metadata` section, configure the following Kafka-related properties:
+创建一个新的绑定组件，名为 `checkout`。 在 `元数据` 部分，配置以下 Kafka 相关属性：
 
-- The topic to which you'll publish the message
-- The broker
+- 您要发布信息的主题
+- Broker
+
+创建绑定组件时， [指定绑定的支持 `direction`]({{< ref "bindings_api.md#binding-direction-optional" >}})。
 
 {{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
-Use the `--resources-path` flag with `dapr run` to point to your custom resources directory.
+使用 `--resources-path` 标志和 `dapr run` 指向自定义资源目录。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -58,14 +61,16 @@ spec:
   - name: publishTopic
     value: sample
   - name: authRequired
-    value: "false"
+    value: false
+  - name: direction
+    value: output
 ```
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-To deploy the following `binding.yaml` file into a Kubernetes cluster, run `kubectl apply -f binding.yaml`.
+要将以下 `binding.yaml` 文件部署到 Kubernetes 集群，请运行 `kubectl apply -f binding.yaml`。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -88,16 +93,18 @@ spec:
   - name: publishTopic
     value: sample
   - name: authRequired
-    value: "false"
+    value: false
+  - name: direction
+    value: output
 ```
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Send an event (output binding)
+## 发送事件（输出绑定）
 
-The code examples below leverage Dapr SDKs to invoke the output bindings endpoint on a running Dapr instance.
+下面的代码示例利用 Dapr SDK 在运行中的 Dapr 实例上调用输出绑定端点。
 
 {{< tabs Dotnet Java Python Go JavaScript>}}
 
@@ -270,7 +277,11 @@ const daprHost = "127.0.0.1";
 async function sendOrder(orderId) {
     const BINDING_NAME = "checkout";
     const BINDING_OPERATION = "create";
-    const client = new DaprClient(daprHost, process.env.DAPR_HTTP_PORT, CommunicationProtocolEnum.HTTP);
+    const client = new DaprClient({
+        daprHost,
+        daprPort: process.env.DAPR_HTTP_PORT,
+        communicationProtocol: CommunicationProtocolEnum.HTTP,
+    });
     //Using Dapr SDK to invoke output binding
     const result = await client.binding.send(BINDING_NAME, BINDING_OPERATION, orderId);
     console.log("Sending message: " + orderId);
@@ -285,13 +296,13 @@ function sleep(ms) {
 
 {{< /tabs >}}
 
-You can also invoke the output bindings endpoint using HTTP:
+还可以使用 HTTP 调用输出绑定端点：
 
 ```bash
-curl -X POST -H 'Content-Type: application/json' http://localhost:3601/v1.0/bindings/checkout -d '{ "data": 100, "operation": "create" }'
+curl -X POST -H 'Content-Type: application/json' http://localhost:3601/v1.0/bindings/checkout -d '{ "data"：100, "operation"："create" }'
 ```
 
-Watch this [video](https://www.youtube.com/watch?v=ysklxm81MTs&feature=youtu.be&t=1960) on how to use bi-directional output bindings.
+观看如何使用双向输出绑定的 [视频](https://www.bilibili.com/video/Bv1EA411W71L?p=3&t=1960) 。
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ysklxm81MTs?start=1960" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -300,5 +311,5 @@ Watch this [video](https://www.youtube.com/watch?v=ysklxm81MTs&feature=youtu.be&
 ## 参考
 
 - [Binding API]({{< ref bindings_api.md >}})
-- [Binding components]({{< ref bindings >}})
-- [Binding detailed specifications]({{< ref supported-bindings >}})
+- [绑定组件]({{< ref bindings >}})
+- [绑定详细规范]({{< ref supported-bindings >}})

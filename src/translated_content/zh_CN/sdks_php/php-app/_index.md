@@ -7,7 +7,7 @@ description: 使用 App 类
 no_list: true
 ---
 
-In PHP, there is no default router. Thus, the `\Dapr\App` class is provided. It uses [Nikic's FastRoute](https://github.com/nikic/FastRoute) under the hood. However, you are free to use any router or framework that you'd like. Just check out the `add_dapr_routes()` method in the `App` class to see how actors and subscriptions are implemented.
+在 PHP 中没有默认路由器。 因此，提供了 `\Dapr\App` 类。 在后台使用了 [Nikic's FastRoute](https://github.com/nikic/FastRoute)。 然而，你可以自由地使用任何你喜欢的路由或框架。 只需查看 `App` 类中的 `add_dapr_routes()` 方法，即可了解如何实现 actor 和 订阅。
 
 每个应用都应该以 `App::create()` 开头，它需要两个参数，第一个是现有的DI 容器， 第二个是回调到 `ContainerBuilder` 并添加您自己的配置。
 
@@ -28,7 +28,7 @@ $app->get('/test/{id}', fn(string $id) => $id);
 $app->start();
 ```
 
-## Returning from a controller
+## 从控制器返回
 
 从控制器返回任何数据都会被序列化为 json 对象。 您也可以请求 Psr Response对象并返回该对象，允许您自定义 headers 并控制整个响应：
 
@@ -60,9 +60,9 @@ $app = \Dapr\App::create(configure: fn(\DI\ContainerBuilder $builder) => $builde
 $result = $app->run(fn(\Dapr\DaprClient $client) => $client->get('/invoke/other-app/method/my-method'));
 ```
 
-## Using in other frameworks
+## 在其他框架中使用
 
-A `DaprClient` object is provided, in fact, all the sugar used by the `App` object is built on the `DaprClient`.
+一个`DaprClient`对象被提供，事实上，`App`对象使用的所有功能都是基于`DaprClient`构建的。
 
 ```php
 <?php
@@ -81,4 +81,4 @@ $clientBuilder = $clientBuilder->withLogger($myLogger);
 $clientBuilder = $clientBuilder->useHttpClient('https://localhost:3800') 
 ```
 
-There are several functions you can call before 
+在调用之前，您可以调用几个函数 

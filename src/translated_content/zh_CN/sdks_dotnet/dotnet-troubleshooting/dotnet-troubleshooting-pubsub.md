@@ -8,15 +8,15 @@ description: 对使用 .NET SDK 的发布/订阅进行故障排除。
 
 # 发布/订阅的故障排除
 
-The most common problem with pub/sub is that the pub/sub endpoint in your application is not being called.
+发布/订阅 最常见的问题是应用程序中的 发布/订阅 端点没有被调用。
 
 这个问题有几个层次，有不同的解决方案。
 
-- The application is not receiving any traffic from Dapr
-- The application is not registering pub/sub endpoints with Dapr
-- The pub/sub endpoints are registered with Dapr, but the request is not reaching the desired endpoint
+- 应用程序没有接收到任何来自 Dapr 的流量
+- 应用程序没有向 Dapr 注册 发布/订阅 终结点
+- 发布/订阅 终结点在 Dapr 注册，但请求没有到达所需的终结点
 
-## Step 1: Turn up the logs
+## 第 1 步：打开日志
 
 **这一点很重要。 之后的步骤将取决于您能否看到日志输出。 ASP.NET Core 日志几乎没有默认日志设置，所以您需要更改它。**
 
@@ -24,11 +24,11 @@ The most common problem with pub/sub is that the pub/sub endpoint in your applic
 
 ## 第 2 步：验证您可以接收来自 Dapr 的流量
 
-1. Start the application as you would normally (`dapr run ...`). Make sure that you're including an `--app-port` argument in the commandline. Dapr needs to know that your application is listening for traffic. By default an ASP.NET Core application will listen for HTTP on port 5000 in local development.
+1. 像平常一样启动应用程序(`dapr run ...`)。 请确保您在命令行中包含 `--app-port` 参数。 Dapr需要知道您的应用程序正在监听流量。 默认情况下，ASP.NET Core 应用程序将在本地开发中通过5000端口监听 HTTP。
 
-2. Wait for Dapr to finish starting
+2. 等待 Dapr 完成启动
 
-3. Examine the logs
+3. 检查日志
 
 你应该看到一个日志条目，如：
 
@@ -41,7 +41,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
 
 ## 第 3 步：验证端点注册
 
-1. Start the application as you would normally (`dapr run ...`).
+1. 像平常一样启动应用程序(`dapr run ...`)。
 
 2. 在命令行中使用 `curl`（或其他 HTTP 测试工具）来访问`/dapr/subscribe` 端点。
 
@@ -94,7 +94,7 @@ curl http://localhost:5000/dapr/subscribe -v
 
 有了这个命令的输出，你就可以诊断问题或进入下一步了。
 
-### Option 0: The response was a 200 included some pub/sub entries
+### 选项0：响应是200，其中包含一些 Pub/sub（发布/订阅） 条目。
 
 **如果您在 JSON 输出中有此测试的条目，那么问题就会在其他地方出现，然后转到步骤 2。**
 
@@ -181,7 +181,7 @@ endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
 
 保留此输出，因为我们将使用 `route` 信息来测试应用程序。
 
-1. Start the application as you would normally (`dapr run ...`).
+1. 像平常一样启动应用程序(`dapr run ...`)。
 
 2. 在命令行使用 `curl` (或其他HTTP测试工具) 来访问一个注册了 发布/订阅 端点的路由。
 
@@ -245,7 +245,7 @@ info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
 
 此条目显示：
 
-- Routing executed
+- 路由已执行
 - 路由选择 `ControllerSample.Controllers.SampleController.Withdraw (ControllerSample)` 终结点
 
 现在你已经掌握了解决这个问题所需的信息。

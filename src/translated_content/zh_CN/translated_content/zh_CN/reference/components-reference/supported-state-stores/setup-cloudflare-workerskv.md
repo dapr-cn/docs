@@ -51,14 +51,14 @@ spec:
 
 ## 元数据字段规范
 
-| Field           | 必填  | 详情                                                                                  | 示例                                        |
-| --------------- |:---:| ----------------------------------------------------------------------------------- | ----------------------------------------- |
-| `kvNamespaceID` |  是  | ID of the pre-created Workers KV namespace                                          | `"123456789abcdef8b5588f3d134f74ac"`      |
-| `workerName`    |  是  | Name of the Worker to connect to                                                    | `"mydaprkv"`                              |
-| `key`           |  是  | Ed25519 private key, PEM-encoded                                                    | *See example above*                       |
-| `cfAccountID`   | Y/N | Cloudflare account ID. Required to have Dapr manage the worker.                     | `"456789abcdef8b5588f3d134f74ac"def`      |
-| `cfAPIToken`    | Y/N | API token for Cloudflare. Required to have Dapr manage the Worker.                  | `"secret-key"`                            |
-| `workerUrl`     | Y/N | URL of the Worker. Required if the Worker has been pre-provisioned outside of Dapr. | `"https://mydaprkv.mydomain.workers.dev"` |
+| Field           | Required | 详情                                                                                  | 示例                                        |
+| --------------- |:--------:| ----------------------------------------------------------------------------------- | ----------------------------------------- |
+| `kvNamespaceID` |    是     | ID of the pre-created Workers KV namespace                                          | `"123456789abcdef8b5588f3d134f74ac"`      |
+| `workerName`    |    是     | Name of the Worker to connect to                                                    | `"mydaprkv"`                              |
+| `key`           |    是     | Ed25519 private key, PEM-encoded                                                    | *See example above*                       |
+| `cfAccountID`   |   Y/N    | Cloudflare account ID. Required to have Dapr manage the worker.                     | `"456789abcdef8b5588f3d134f74ac"def`      |
+| `cfAPIToken`    |   Y/N    | API token for Cloudflare. Required to have Dapr manage the Worker.                  | `"secret-key"`                            |
+| `workerUrl`     |   Y/N    | URL of the Worker. Required if the Worker has been pre-provisioned outside of Dapr. | `"https://mydaprkv.mydomain.workers.dev"` |
 
 > When you configure Dapr to create your Worker for you, you may need to set a longer value for the `initTimeout` property of the component, to allow enough time for the Worker script to be deployed. For example: `initTimeout: "120s"`
 

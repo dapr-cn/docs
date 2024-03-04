@@ -34,6 +34,8 @@ spec:
       value: "false"
     - name: backOffMaxRetries
       value: "0"
+    - name: direction
+      value: "input, output"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -42,7 +44,7 @@ spec:
 
 ## 元数据字段规范
 
-| Field               |    必填    | 绑定支持  | 详情                                                                                                                                                                                                                                                                                                                                                          | 示例                                                 |
+| Field               | Required | 绑定支持  | 详情                                                                                                                                                                                                                                                                                                                                                          | 示例                                                 |
 | ------------------- |:--------:| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | `url`               |    是     | 输入/输出 | Address of the MQTT broker. Can be `secretKeyRef` to use a secret reference. <br> Use the **`tcp://`** URI scheme for non-TLS communication. <br> Use the **`ssl://`** URI scheme for TLS communication.                                                                                                                                        | `"tcp://[username][:password]@host.domain[:port]"` |
 | `topic`             |    是     | 输入/输出 | 监听或者发送事件目标topic                                                                                                                                                                                                                                                                                                                                             | `"mytopic"`                                        |
@@ -53,6 +55,7 @@ spec:
 | `clientCert`        | 使用TLS时需要 | 输入/输出 | TLS client certificate in PEM format. Must be used with `clientKey`.                                                                                                                                                                                                                                                                                        | See example below                                  |
 | `clientKey`         | 使用TLS时需要 | 输入/输出 | TLS client key in PEM format. Must be used with `clientCert`. Can be `secretKeyRef` to use a secret reference.                                                                                                                                                                                                                                              | See example below                                  |
 | `backOffMaxRetries` |    否     | Input | The maximum number of retries to process the message before returning an error. Defaults to `"0"`, which means that no retries will be attempted. `"-1"` can be specified to indicate that messages should be retried indefinitely until they are successfully processed or the application is shutdown. The component will wait 5 seconds between retries. | `"3"`                                              |
+| `direction`         |    否     | 输入/输出 | The direction of the binding                                                                                                                                                                                                                                                                                                                                | `"input"`, `"output"`, `"input, output"`           |
 
 ### Communication using TLS
 

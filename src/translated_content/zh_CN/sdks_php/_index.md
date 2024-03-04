@@ -7,11 +7,11 @@ description: 开发 Dapr 应用程序的 PHP SDK 包
 no_list: true
 ---
 
-Dapr offers an SDK to help with the development of PHP applications. Using it, you can create PHP clients, servers, and virtual actors with Dapr.
+Dapr 提供了帮助开发 PHP 应用的 SDK。 你可以使用他们来创建 PHP 客户端、服务器和 virtual actors。
 
-## Setting up
+## 安装指南
 
-### Prerequisites
+### 前期准备
 
 - [Composer](https://getcomposer.org/)
 - [PHP 8](https://www.php.net/)
@@ -23,7 +23,7 @@ Dapr offers an SDK to help with the development of PHP applications. Using it, y
 
 ## 初始化项目
 
-在您想要创建服务的目录中，运行 `composer init` 并确认命令执行。 Install with `composer require dapr/php-sdk` and any other dependencies you may wish to use.
+在您想要创建服务的目录中，运行 `composer init` 并确认命令执行。 使用 `composer require dapr/php-sdk` 安装，并安装您可能希望使用的其他依赖项。
 
 ## 配置服务
 
@@ -95,7 +95,7 @@ $app->get('/hello/{name}', function(string $name) {
 $app->start();
 ```
 
-## Try it out
+## 试试吧
 
 用` dapr init `初始化 dapr，然后用` dapr run -a dev -p 3000-php -S 0.0.0.0:3000 `启动项目。
 
@@ -106,4 +106,4 @@ $app->start();
 ## 更多信息
 
 - [Packagist](https://packagist.org/packages/dapr/php-sdk)
-- [Dapr SDK serialization]({{< ref sdk-serialization.md >}})
+- [Dapr SDK 序列化]({{< ref sdk-serialization.md >}})

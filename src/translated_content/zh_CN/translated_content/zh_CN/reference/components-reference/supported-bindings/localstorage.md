@@ -22,14 +22,14 @@ spec:
   version: v1
   metadata:
   - name: rootPath
-    value: <string>
+    value: "<string>"
 ```
 
 ## 元数据字段规范
 
-| Field    | 必填 | 绑定支持  | 详情             | 示例              |
-| -------- |:--:| ----- | -------------- | --------------- |
-| rootPath | 是  | 输入/输出 | 可以 读/保存 文件的根目录 | `"/temp/files"` |
+| Field      | Required | 绑定支持   | 详情                                                      | 示例              |
+| ---------- |:--------:| ------ | ------------------------------------------------------- | --------------- |
+| `rootPath` |    是     | Output | The root path anchor to which files can be read / saved | `"/temp/files"` |
 
 ## 绑定支持
 
@@ -53,7 +53,7 @@ spec:
 }
 ```
 
-#### Examples
+#### 示例
 
 
 ##### Save text to a random generated UUID file
@@ -262,6 +262,5 @@ The response body will contain the following JSON:
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [绑定构建块]({{< ref bindings >}})
-- [如何通过 input binding 触发应用]({{< ref howto-triggers.md >}})
 - [How-To：使用绑定与外部资源进行交互]({{< ref howto-bindings.md >}})
 - [Bindings API 引用]({{< ref bindings_api.md >}})

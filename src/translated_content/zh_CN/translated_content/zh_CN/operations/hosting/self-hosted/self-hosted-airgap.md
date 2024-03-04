@@ -17,7 +17,7 @@ Before airgap initialization, it is required to download a Dapr Installer Bundle
 2. Unpack it.
 3. To install Dapr CLI copy the `daprbundle/dapr (dapr.exe for Windows)` binary to the desired location:
    * For Linux/MacOS - `/usr/local/bin`
-   * For Windows, create a directory and add this to your System PATH. For example create a directory called `c:\dapr` and add this directory to your path, by editing your system environment variable.
+   * 对于 Windows，请创建一个目录并将其添加到系统路径中。 For example create a directory called `c:\dapr` and add this directory to your path, by editing your system environment variable.
 
    > Note: If Dapr CLI is not moved to the desired location, you can use local `dapr` CLI binary in the bundle. The steps above is to move it to the usual location and add it to the path.
 

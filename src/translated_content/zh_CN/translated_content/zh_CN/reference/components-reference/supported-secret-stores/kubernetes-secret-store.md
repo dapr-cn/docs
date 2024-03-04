@@ -32,7 +32,20 @@ spec:
 ```
 
 ## 元数据字段规范
-For the Kubernetes secret store component, there are no metadata attributes.
+
+| Field              | Required | 详情                                                                                                                                                       | 示例                      |
+| ------------------ |:--------:| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `defaultNamespace` |    否     | Default namespace to retrieve secrets from. If unset, the `namespace` must be specified in each request metadata or via environment variable `NAMESPACE` | `"default-ns"`          |
+| `kubeconfigPath`   |    否     | The path to the kubeconfig file. If not specified, the store uses the default in-cluster config value                                                    | `"/path/to/kubeconfig"` |
+
+
+## Optional per-request metadata properties
+
+The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided to Kubernetes secret store component:
+
+| Query Parameter      | 说明                                                                               |
+| -------------------- | -------------------------------------------------------------------------------- |
+| `metadata.namespace` | The namespace of the secret. If not specified, the namespace of the pod is used. |
 
 ## 相关链接
 - [Secrets building block]({{< ref secrets >}})

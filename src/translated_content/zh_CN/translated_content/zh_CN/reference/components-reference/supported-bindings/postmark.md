@@ -37,15 +37,15 @@ spec:
 
 ## 元数据字段规范
 
-| Field        | 必填 | 绑定支持   | 详情                                                                   | 示例                 |
-| ------------ |:--:| ------ | -------------------------------------------------------------------- | ------------------ |
-| accountToken | 是  | Output | The Postmark account token, this should be considered a secret value | `"account token"`  |
-| serverToken  | 是  | 输出     | Postmark服务端token，它可以被看做是一个秘钥值                                        | `"server token"`   |
-| emailFrom    | 否  | 输出     | 指定邮件信息的发件人地址                                                         | `"me@exmaple.com"` |
-| emailTo      | 否  | 输出     | 指定邮件信息的收件人地址                                                         | `"me@example.com"` |
-| emailCc      | 否  | 输出     | 指定邮件信息的抄送人地址                                                         | `"me@example.com"` |
-| emailBcc     | 否  | Output | 指定邮件信息的秘密抄送人地址                                                       | `"me@example.com"` |
-| subject      | 否  | Output | 指定邮件信息主题                                                             | `"me@example.com"` |
+| Field          | Required | 绑定支持   | 详情                                                                   | 示例                 |
+| -------------- |:--------:| ------ | -------------------------------------------------------------------- | ------------------ |
+| `accountToken` |    是     | Output | The Postmark account token, this should be considered a secret value | `"account token"`  |
+| `serverToken`  |    是     | 输出     | Postmark服务端token，它可以被看做是一个秘钥值                                        | `"server token"`   |
+| `emailFrom`    |    否     | 输出     | 指定邮件信息的发件人地址                                                         | `"me@exmaple.com"` |
+| `emailTo`      |    否     | 输出     | 指定邮件信息的收件人地址                                                         | `"me@example.com"` |
+| `emailCc`      |    否     | 输出     | 指定邮件信息的抄送人地址                                                         | `"me@example.com"` |
+| `emailBcc`     |    否     | Output | 指定邮件信息的秘密抄送人地址                                                       | `"me@example.com"` |
+| `subject`      |    否     | Output | 指定邮件信息主题                                                             | `"me@example.com"` |
 
 你也可以在输出绑定上指定任何可选的元数据属性(例如：`emailFrom`, `emailTo`, `subject`, 等等)。
 

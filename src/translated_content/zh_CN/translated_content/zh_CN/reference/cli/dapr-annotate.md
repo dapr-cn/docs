@@ -19,17 +19,16 @@ Add Dapr annotations to a Kubernetes configuration. This enables you to add/chan
 dapr annotate [flags] CONFIG-FILE
 ```
 
-### Flags
+### 参数
 
 | 名称                                   | 环境变量 | 默认值     | 说明                                                                                                                                                                                                     |
 | ------------------------------------ | ---- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--kubernetes, -k`                   |      |         | Apply annotations to Kubernetes resources. 必填                                                                                                                                                          |
+| `--kubernetes, -k`                   |      |         | Apply annotations to Kubernetes resources. Required                                                                                                                                                    |
 | `--api-token-secret`                 |      |         | The secret to use for the API token                                                                                                                                                                    |
 | `--app-id, -a`                       |      |         | The app id to annotate                                                                                                                                                                                 |
 | `--app-max-concurrency`              |      | `-1`    | The maximum number of concurrent requests to allow                                                                                                                                                     |
 | `--app-port, -p`                     |      | `-1`    | The port to expose the app on                                                                                                                                                                          |
-| `--app-protocol`                     |      |         | The protocol to use for the app                                                                                                                                                                        |
-| `--app-ssl`                          |      | `false` | Enable SSL for the app                                                                                                                                                                                 |
+| `--app-protocol`                     |      |         | The protocol to use for the app: `http` (default), `grpc`, `https`, `grpcs`, `h2c`                                                                                                                     |
 | `--app-token-secret`                 |      |         | The secret to use for the app token                                                                                                                                                                    |
 | `--config, -c`                       |      |         | The config file to annotate                                                                                                                                                                            |
 | `--cpu-limit`                        |      |         | The CPU limit to set for the sidecar. See valid values [here](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/).                                       |
@@ -69,7 +68,7 @@ dapr annotate [flags] CONFIG-FILE
 If an application ID is not provided using `--app-id, -a`, an ID is generated using the format `<namespace>-<kind>-<name>`.
 {{% /alert %}}
 
-### Examples
+### 示例
 
 ```bash 
 # Annotate the first deployment found in the input

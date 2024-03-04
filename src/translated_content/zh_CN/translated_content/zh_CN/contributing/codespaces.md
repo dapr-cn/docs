@@ -3,44 +3,44 @@ type: docs
 title: "使用 GitHub Codespaces 进行贡献"
 linkTitle: "GitHub Codespaces"
 weight: 60
-description: "How to contribute to the Dapr project with GitHub Codespaces"
+description: "如何使用 GitHub Codespaces 为 Dapr 项目做出贡献"
 aliases:
   - "/zh-hans/contributing/codespaces/"
   - "/zh-hans/developing-applications/ides/codespaces/"
 ---
 
-[GitHub Codespaces](https://github.com/features/codespaces) is the easiest way to get up and running for contributing to a Dapr repo. In as little as a single click, you can have an environment with all of the prerequisites ready to go in your browser.
+[GitHub Codespaces](https://github.com/features/codespaces) 是启动和运行 Dapr 环境最简单的方式。 只需点击一下，您就可以在浏览器中访问所有准备就绪的环境。
 
-## Features
+## 特性
 
-- **Click and Run**: Get a dedicated and sandboxed environment with all of the required frameworks and packages ready to go.
-- **Usage-based Billing**: Only pay for the time you spend developing in the Codespaces. Environments are spun down automatically when not in use.
-- **Portable**: Run in your browser or in Visual Studio Code, or connect to it using SSH.
+- **单击并运行**: 获得一个专用和沙盒化的环境，并且所有所需的框架和包都已准备就绪。
+- **基于使用情况的计费**: 只为您在 Codespace 上花费的开发时间支付费用。 环境在不使用时自动关闭。
+- **便携**: 在您的浏览器或 Visual Studio Code 中运行，或使用 SSH 连接。
 
 ## 在 Codespace 中打开 Dapr
 
-To open a Dapr repository in a Codespace, select "Code" from the repo homepage and "Open with Codespaces":
+要在 Codespace 中打开一个Dapr 仓库，只需从repo 主页中选择"Code"和"Open with Codespaces"：
 
 <img src="/images/codespaces-create.png" alt="Screenshot of creating a Dapr Codespace" width="300" />
 
 如果您尚未 fork 仓库，创建 Codespace 还将为您创建一个 fork，并在 Codespace 内使用它。
 
-## Supported repos
+## 支持的仓库
 
 - [dapr/dapr](https://github.com/dapr/dapr)
 - [dapr/components-contrib](https://github.com/dapr/components-contrib)
 - [dapr/cli](https://github.com/dapr/cli)
 - [dapr/python-sdk](https://github.com/dapr/python-sdk)
 
-## Developing Dapr Components in a Codespace
+## 在 Codespace 中开发 Dapr 组件
 
-Developing a new Dapr component requires working with both the [dapr/components-contrib](https://github.com/dapr/components-contrib) and [dapr/dapr](https://github.com/dapr/dapr) repos. It is recommended to place both folders inside the `/workspaces` directory, side-by-side.
+开发新的 Dapr 组件需要与 [components-contrib](https://github.com/dapr/components-contrib) 和 [dapr](https://github.com/dapr/dapr) 一起存放在 代码树下进行测试。 建议将两个文件夹都放在`/workspaces`目录中，相邻放置。
 
-### If you created a Codespace from `dapr/dapr`
+### 如果您从 `dapr/dapr` 创建了一个 Codespace
 
-If your Codespaces was started from the `dapr/dapr` repo or a fork of that, you will need to clone the `dapr/components-contrib` repository (or your fork of that) inside `/workspaces/components-contrib`.
+如果您的 Codespaces 是从 `dapr/dapr` 存储库或其分支启动的，则需要在 `/workspaces/components-contrib` 内克隆 `dapr/components-contrib` 存储库（或其分支）。
 
-First, make sure you've authenticated with the GitHub CLI:
+首先，请确保您已通过 GitHub CLI 进行了身份验证：
 
 ```sh
 # Run this command and follow the prompts
@@ -48,7 +48,7 @@ First, make sure you've authenticated with the GitHub CLI:
 gh auth login
 ```
 
-Clone the repo:
+克隆存储库：
 
 ```sh
 # If you want to use your fork of dapr/components-contrib, replace this with your fork (e.g. "yourusername/components-contrib")
@@ -58,17 +58,17 @@ cd /workspaces
 gh repo clone "$REPO" /workspaces/components-contrib
 ```
 
-Then, add the folder to current workspace:
+然后，将文件夹添加到当前工作区：
 
 ```sh
 code -a /workspaces/components-contrib
 ```
 
-### If you created a Codespace from `dapr/components-contrib`
+### 如果您从 `dapr/components-contrib` 创建了一个 Codespace
 
-If your Codespaces was started from the `dapr/components-contrib` repo or a fork of that, you will need to clone the `dapr/dapr` repository (or your fork of that) inside `/workspaces/dapr`.
+如果您的 Codespaces 是从 `dapr/components-contrib` 存储库或其分支启动的，则需要在 `/workspaces/dapr` 内克隆 `dapr/dapr` 存储库（或其分支）。
 
-First, make sure you've authenticated with the GitHub CLI:
+首先，请确保您已通过 GitHub CLI 进行了身份验证：
 
 ```sh
 # Run this command and follow the prompts
@@ -76,7 +76,7 @@ First, make sure you've authenticated with the GitHub CLI:
 gh auth login
 ```
 
-Clone the repo:
+克隆存储库：
 
 ```sh
 # If you want to use your fork of dapr/dapr, replace this with your fork (e.g. "yourusername/dapr")
@@ -86,7 +86,7 @@ cd /workspaces
 gh repo clone "$REPO" /workspaces/dapr
 ```
 
-Then, add the folder to current workspace:
+然后，将文件夹添加到当前工作区：
 
 ```sh
 code -a /workspaces/dapr
@@ -95,5 +95,5 @@ code -a /workspaces/dapr
 
 ## 相关链接
 <!-- IGNORE_LINKS -->
-- [GitHub documentation](https://docs.github.com/codespaces/overview)
+- [GitHub文档](https://docs.github.com/codespaces/overview)
 <!-- END_IGNORE -->

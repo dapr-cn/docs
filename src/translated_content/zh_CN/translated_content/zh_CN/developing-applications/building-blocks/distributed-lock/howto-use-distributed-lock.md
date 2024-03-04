@@ -1,28 +1,28 @@
 ---
 type: docs
-title: "How-To: Use a lock"
-linkTitle: "How-To: Use a lock"
+title: "方法：使用锁"
+linkTitle: "方法：使用锁"
 weight: 2000
-description: "Learn how to use distributed locks to provide exclusive access to a resource"
+description: "学习如何使用分布式锁来提供对资源的独占访问权限"
 ---
 
-Now that you've learned what the Dapr distributed lock API building block provides, learn how it can work in your service. In this guide, an example application acquires a lock using the Redis lock component to demonstrate how to lock resources. For a list of supported lock stores, see [this reference page](/reference/components-reference/supported-locks/).
+现在，你已了解 Dapr 分布式锁 构建块提供的功能，请了解它如何在你的服务中工作。 在本指南中，一个示例应用程序将使用 Redis 锁组件获取一个锁，以演示如何锁定资源。 有关支持的锁存储列表，请参见 [本参考页](/reference/components-reference/supported-locks/)。
 
-In the diagram below, two instances of the same application acquire a lock, where one instance is successful and the other is denied.
+在下图中，同一应用程序的两个实例获取了一个锁，其中一个实例成功，另一个实例被拒绝。
 
-<img src="/images/building-block-lock-example.png" width=1000 alt="The diagram below shows two instances of the same application acquiring a lock, where one instance is successful and the other is denied">
+<img src="/images/building-block-lock-example.png" width=1000 alt="下图显示了同一应用程序的两个实例获取锁的情况，其中一个实例成功，另一个实例被拒绝">
 
-The diagram below shows two instances of the same application, where one instance releases the lock and the other instance is then able to acquire the lock.
+下图显示的是同一个应用程序的两个实例，其中一个实例释放了锁，另一个实例就能获取锁。
 
-<img src="/images/building-block-lock-unlock-example.png" width=1000 alt="Diagram showing releasing a lock from multiple instances of same application">
+<img src="/images/building-block-lock-unlock-example.png" width=1000 alt="从同一应用程序的多个实例释放锁的示意图">
 
-The diagram below shows two instances of different applications, acquiring different locks on the same resource.
+下图显示了不同应用程序的两个实例，它们在同一资源上获取了不同的锁。
 
-<img src="/images/building-block-lock-multiple-example.png" width=1000 alt="The diagram below shows two instances of different applications, acquiring different locks on the same resource">
+<img src="/images/building-block-lock-multiple-example.png" width=1000 alt="下图显示了不同应用程序的两个实例，它们在同一资源上获取了不同的锁。">
 
-### Configure a lock component
+### 配置锁组件
 
-Save the following component file to the [default components folder]({{< ref "install-dapr-selfhost.md#step-5-verify-components-directory-has-been-initialized" >}}) on your machine.
+将以下组件文件保存到 [默认组件文件夹]({{< ref "install-dapr-selfhost.md#step-5-verify-components-directory-has-been-initialized" >}}) 中。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -31,6 +31,7 @@ metadata:
   name: lockstore
 spec:
   type: lock.redis
+  version: v1
   metadata:
   - name: redisHost
     value: localhost:6379
@@ -38,7 +39,7 @@ spec:
     value: <PASSWORD>
 ```
 
-### Acquire lock
+### 获取锁
 
 {{< tabs HTTP Dotnet Go >}}
 
@@ -119,7 +120,7 @@ func main() {
 
 {{< /tabs >}}
 
-### Unlock existing lock
+### 释放现有锁
 
 {{< tabs HTTP Dotnet Go >}}
 
@@ -190,4 +191,4 @@ func main() {
 
 ## 下一步
 
-Read [the distributed lock API overview]({{< ref distributed-lock-api-overview.md >}}) to learn more.
+请阅读 [分布式锁 API 概述]({{< ref distributed-lock-api-overview.md >}}) 了解更多信息。

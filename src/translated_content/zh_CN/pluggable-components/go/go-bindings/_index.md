@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Implementing a Go input/output binding component"
+title: "实现一个Go输入/输出绑定组件"
 linkTitle: "绑定"
 weight: 1000
-description: How to create an input/output binding with the Dapr pluggable components Go SDK
+description: 如何使用 Dapr 可插拔组件 Go SDK 创建一个输入/输出绑定
 no_list: true
 is_preview: true
 ---
 
-Creating a binding component requires just a few basic steps.
+创建一个绑定组件只需要几个基本步骤。
 
-## Import bindings packages
+## 导入绑定包
 
-Create the file `components/inputbinding.go` and add `import` statements for the state store related packages.
+创建文件`components/inputbinding.go`并添加与状态存储相关的`import`语句。
 
 ```go
 package components
@@ -23,9 +23,9 @@ import (
 )
 ```
 
-## Input bindings: Implement the `InputBinding` interface
+## 输入绑定: 实现`InputBinding`接口
 
-Create a type that implements the `InputBinding` interface.
+创建一个实现`InputBinding`接口的类型。
 
 ```go
 type MyInputBindingComponent struct {
@@ -40,7 +40,7 @@ func (component *MyInputBindingComponent) Read(ctx context.Context, handler bind
 }
 ```
 
-Calls to the `Read()` method are expected to set up a long-lived mechanism for retrieving messages but immediately return `nil` (or an error, if that mechanism could not be set up). The mechanism should end when canceled (for example, via the `ctx.Done() or ctx.Err() != nil`). As messages are read from the underlying store of the component, they are delivered to the Dapr runtime via the `handler` callback, which does not return until the application (served by the Dapr runtime) acknowledges processing of the message.
+调用`Read()`方法应该设置一个长期存在的机制来获取消息，但立即返回`nil`（或错误，如果无法设置该机制）。 当被取消时（例如，通过`ctx.Done()或ctx.Err() != nil`），机制应该结束。 当消息从组件的底层存储中读取时，它们通过`handler`回调函数传递给Dapr运行时，直到应用程序（由Dapr运行时提供服务）确认处理消息后才返回。
 
 ```go
 func (b *MyInputBindingComponent) Read(ctx context.Context, handler bindings.Handler) error {
@@ -71,9 +71,9 @@ func (b *MyInputBindingComponent) Read(ctx context.Context, handler bindings.Han
 }
 ```
 
-## Output bindings: Implement the `OutputBinding` interface
+## 输出绑定: 实现`OutputBinding`接口
 
-Create a type that implements the `OutputBinding` interface.
+创建一个实现`OutputBinding`接口的类型。
 
 ```go
 type MyOutputBindingComponent struct {
@@ -92,13 +92,13 @@ func (component *MyOutputBindingComponent) Operations() []bindings.OperationKind
 }
 ```
 
-## Input and output binding components
+## 输入和输出绑定组件
 
-A component can be _both_ an input _and_ output binding. Simply implement both interfaces and register the component as both binding types.
+一个组件可以通过实现两个接口，_同时_成为输入和输出绑定。 只需实现两个接口并将组件注册为两种绑定类型。
 
-## Register binding component
+## 注册绑定组件
 
-In the main application file (for example, `main.go`), register the binding component with the application.
+在主应用程序文件中（例如，`main.go`），将绑定组件注册到应用程序。
 
 ```go
 package main
@@ -125,7 +125,7 @@ func main() {
 ```
 
 ## 下一步
-- [Advanced techniques with the pluggable components Go SDK]({{< ref go-advanced >}})
-- Learn more about implementing:
+- [Dapr 可插拔组件 Go SDK 的高级技巧]({{< ref go-advanced >}})
+- 了解更多关于实施的内容：
   - [State]({{< ref go-state-store >}})
   - [Pub/sub]({{< ref go-pub-sub >}})

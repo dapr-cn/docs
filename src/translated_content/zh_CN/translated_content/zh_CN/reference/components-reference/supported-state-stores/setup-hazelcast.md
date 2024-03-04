@@ -32,10 +32,10 @@ spec:
 
 ## 元数据字段规范
 
-| Field            | 必填 | 详情               | 示例                                 |
-| ---------------- |:--:| ---------------- | ---------------------------------- |
-| hazelcastServers | 是  | 逗号分隔的服务器地址       | `"hazelcast:3000,hazelcast2:3000"` |
-| hazelcastMap     | 是  | Hazelcast Map 配置 | `"foo-map"`                        |
+| Field            | Required | 详情               | 示例                                 |
+| ---------------- |:--------:| ---------------- | ---------------------------------- |
+| hazelcastServers |    是     | 逗号分隔的服务器地址       | `"hazelcast:3000,hazelcast2:3000"` |
+| hazelcastMap     |    是     | Hazelcast Map 配置 | `"foo-map"`                        |
 
 ## 设置 Hazelcast
 

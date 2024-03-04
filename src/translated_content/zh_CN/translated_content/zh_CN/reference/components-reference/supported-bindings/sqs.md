@@ -23,16 +23,17 @@ spec:
   version: v1
   metadata:
   - name: queueName
-    value: items
+    value: "items"
   - name: region
-    value: us-west-2
+    value: "us-west-2"
   - name: accessKey
-    value: *****************
+    value: "*****************"
   - name: secretKey
-    value: *****************
+    value: "*****************"
   - name: sessionToken
-    value: *****************
-
+    value: "*****************"
+  - name: direction 
+    value: "input, output"
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -41,13 +42,14 @@ spec:
 
 ## 元数据字段规范
 
-| Field        | 必填 | 绑定支持  | 详情                   | 示例                  |
-| ------------ |:--:| ----- | -------------------- | ------------------- |
-| queueName    | 是  | 输入/输出 | The SQS queue name   | `"myqueue"`         |
-| region       | 是  | 输入/输出 | 指定的 AWS 区域（region）   | `"us-east-1"`       |
-| accessKey    | 是  | 输入/输出 | 要访问此资源的 AWS 访问密钥     | `"key"`             |
-| secretKey    | 是  | 输入/输出 | 要访问此资源的 AWS 密钥访问 Key | `"secretAccessKey"` |
-| sessionToken | 否  | 输入/输出 | 要使用的 AWS 会话令牌        | `"sessionToken"`    |
+| Field          | Required | 绑定支持  | 详情                                                | 示例                                       |
+| -------------- |:--------:| ----- | ------------------------------------------------- | ---------------------------------------- |
+| `queueName`    |    是     | 输入/输出 | The SQS queue name                                | `"myqueue"`                              |
+| `region`       |    是     | 输入/输出 | 指定的 AWS 区域（region）                                | `"us-east-1"`                            |
+| `accessKey`    |    是     | 输入/输出 | The AWS Access Key to access this resource        | `"key"`                                  |
+| `secretKey`    |    是     | 输入/输出 | The AWS Secret Access Key to access this resource | `"secretAccessKey"`                      |
+| `sessionToken` |    否     | 输入/输出 | The AWS session token to use                      | `"sessionToken"`                         |
+| `direction`    |    否     | 输入/输出 | The direction of the binding                      | `"input"`, `"output"`, `"input, output"` |
 
 {{% alert title="Important" color="warning" %}}
 当在 EKS (AWS Kubernetes) 上与您的应用程序一起运行 Dapr sidecar (daprd) 时，如果您使用的node/pod 已附加到定义 AWS 资源访问权限的 IAM 策略，那么您 **不能**在正在使用的组件规范的定义中提供 AWS access-key、secret-key 和token。
