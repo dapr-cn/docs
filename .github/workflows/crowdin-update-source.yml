@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: crowdin action
-        uses: crowdin/github-action@1.19.0
+        uses: crowdin/github-action@v1.19.0
         with:
           upload_sources: true
           upload_sources_args: "--delete-obsolete"
