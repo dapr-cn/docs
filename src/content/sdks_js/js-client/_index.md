@@ -77,6 +77,34 @@ dapr run --app-id example-sdk --app-protocol grpc -- npm run start
 npm run start:dapr-grpc
 ```
 
+### Environment Variables
+
+##### Dapr Sidecar Endpoints
+
+You can use the `DAPR_HTTP_ENDPOINT` and `DAPR_GRPC_ENDPOINT` environment variables to set the Dapr
+Sidecar's HTTP and gRPC endpoints respectively. When these variables are set, the `daprHost`
+and `daprPort` don't have to be set in the options argument of the constructor, the client will parse them automatically
+out of the provided endpoints.
+
+```typescript
+import { DaprClient, CommunicationProtocol } from "@dapr/dapr";
+
+// Using HTTP, when DAPR_HTTP_ENDPOINT is set
+const client = new DaprClient();
+
+// Using gRPC, when DAPR_GRPC_ENDPOINT is set
+const client = new DaprClient({ communicationProtocol: CommunicationProtocol.GRPC });
+```
+
+If the environment variables are set, but `daprHost` and `daprPort` values are passed to the
+constructor, the latter will take precedence over the environment variables.
+
+##### Dapr API Token
+
+You can use the `DAPR_API_TOKEN` environment variable to set the Dapr API token. When this variable
+is set, the `daprApiToken` doesn't have to be set in the options argument of the constructor,
+the client will get it automatically.
+
 ## General
 
 ### Increasing Body Size
@@ -436,10 +464,13 @@ start().catch((e) => {
 import { DaprClient } from "@dapr/dapr";
 
 const daprHost = "127.0.0.1";
-const daprAppId = "example-config";
 
 async function start() {
-  const client = new DaprClient({ daprHost, daprPort: process.env.DAPR_HTTP_PORT });
+  const client = new DaprClient({
+    daprHost,
+    daprPort: process.env.DAPR_GRPC_PORT,
+    communicationProtocol: CommunicationProtocolEnum.GRPC,
+  });
 
   const config = await client.configuration.get("config-store", ["key1", "key2"]);
   console.log(config);
@@ -449,6 +480,58 @@ start().catch((e) => {
   console.error(e);
   process.exit(1);
 });
+```
+
+Sample output:
+
+```log
+{
+   items: {
+     key1: { key: 'key1', value: 'foo', version: '', metadata: {} },
+     key2: { key: 'key2', value: 'bar2', version: '', metadata: {} }
+   }
+}
+```
+
+#### Subscribe to Configuration Updates
+
+```typescript
+import { DaprClient } from "@dapr/dapr";
+
+const daprHost = "127.0.0.1";
+
+async function start() {
+  const client = new DaprClient({
+    daprHost,
+    daprPort: process.env.DAPR_GRPC_PORT,
+    communicationProtocol: CommunicationProtocolEnum.GRPC,
+  });
+
+  // Subscribes to config store changes for keys "key1" and "key2"
+  const stream = await client.configuration.subscribeWithKeys("config-store", ["key1", "key2"], async (data) => {
+    console.log("Subscribe received updates from config store: ", data);
+  });
+
+  // Wait for 60 seconds and unsubscribe.
+  await new Promise((resolve) => setTimeout(resolve, 60000));
+  stream.stop();
+}
+
+start().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
+```
+
+Sample output:
+
+```log
+Subscribe received updates from config store:  {
+  items: { key2: { key: 'key2', value: 'bar', version: '', metadata: {} } }
+}
+Subscribe received updates from config store:  {
+  items: { key1: { key: 'key1', value: 'foobar', version: '', metadata: {} } }
+}
 ```
 
 ### Cryptography API

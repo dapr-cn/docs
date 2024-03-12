@@ -5,6 +5,12 @@ preserve_hierarchy: true
 files:
     - source: /content/sdks_java/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_java/_index.md
+    - source: /content/sdks_java/java-client/_index.md
+      translation: /translated_content/%locale_with_underscore%/sdks_java/java-client/_index.md
+    - source: /content/sdks_java/java-workflow/java-workflow-howto.md
+      translation: /translated_content/%locale_with_underscore%/sdks_java/java-workflow/java-workflow-howto.md
+    - source: /content/sdks_java/java-workflow/_index.md
+      translation: /translated_content/%locale_with_underscore%/sdks_java/java-workflow/_index.md
     - source: /content/pluggable-components/go/_index.md
       translation: /translated_content/%locale_with_underscore%/pluggable-components/go/_index.md
     - source: /content/pluggable-components/go/go-advanced/_index.md
@@ -65,6 +71,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-development/_index.md
     - source: /content/sdks_dotnet/dotnet-development/dotnet-development-dapr-cli.md
       translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-development/dotnet-development-dapr-cli.md
+    - source: /content/sdks_dotnet/dotnet-actors/dotnet-actors-serialization.md
+      translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-actors/dotnet-actors-serialization.md
     - source: /content/sdks_dotnet/dotnet-actors/dotnet-actors-howto.md
       translation: /translated_content/%locale_with_underscore%/sdks_dotnet/dotnet-actors/dotnet-actors-howto.md
     - source: /content/sdks_dotnet/dotnet-actors/_index.md
@@ -93,6 +101,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/sdks_js/js-client/_index.md
     - source: /content/sdks_js/js-examples/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_js/js-examples/_index.md
+    - source: /content/sdks_js/js-workflow/_index.md
+      translation: /translated_content/%locale_with_underscore%/sdks_js/js-workflow/_index.md
     - source: /content/sdks_js/js-actors/_index.md
       translation: /translated_content/%locale_with_underscore%/sdks_js/js-actors/_index.md
     - source: /content/sdks_js/js-server/_index.md
@@ -151,6 +161,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/api/bindings_api.md
     - source: /content/content/reference/api/health_api.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/api/health_api.md
+    - source: /content/content/reference/api/cryptography_api.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/api/cryptography_api.md
     - source: /content/content/reference/api/placement_api.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/api/placement_api.md
     - source: /content/content/reference/api/actors_api.md
@@ -177,6 +189,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/resource-specs/resiliency-schema.md
     - source: /content/content/reference/resource-specs/subscription-schema.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/resource-specs/subscription-schema.md
+    - source: /content/content/reference/errors/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/errors/_index.md
     - source: /content/content/reference/environment/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/environment/_index.md
     - source: /content/content/reference/components-reference/_index.md
@@ -185,6 +199,10 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-locks/redis-lock.md
     - source: /content/content/reference/components-reference/supported-locks/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-locks/_index.md
+    - source: /content/content/reference/components-reference/supported-workflow-backend/actor-workflow-backend.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-workflow-backend/actor-workflow-backend.md
+    - source: /content/content/reference/components-reference/supported-workflow-backend/_index.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-workflow-backend/_index.md
     - source: /content/content/reference/components-reference/supported-middleware/middleware-routeralias.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-middleware/middleware-routeralias.md
     - source: /content/content/reference/components-reference/supported-middleware/middleware-uppercase.md
@@ -213,6 +231,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-name-resolution/nr-mdns.md
     - source: /content/content/reference/components-reference/supported-name-resolution/_index.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-name-resolution/_index.md
+    - source: /content/content/reference/components-reference/supported-name-resolution/nr-sqlite.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-name-resolution/nr-sqlite.md
     - source: /content/content/reference/components-reference/supported-name-resolution/nr-kubernetes.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-name-resolution/nr-kubernetes.md
     - source: /content/content/reference/components-reference/supported-cryptography/kubernetes-secrets.md
@@ -259,6 +279,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-redis.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-couchbase.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-couchbase.md
+    - source: /content/content/reference/components-reference/supported-state-stores/setup-postgresql-v2.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-postgresql-v2.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-rethinkdb.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-rethinkdb.md
     - source: /content/content/reference/components-reference/supported-state-stores/_index.md
@@ -267,6 +289,8 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-azure-blobstorage.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-etcd.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-etcd.md
+    - source: /content/content/reference/components-reference/supported-state-stores/setup-postgresql-v1.md
+      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-postgresql-v1.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-azure-cosmosdb.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-azure-cosmosdb.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-cockroachdb.md
@@ -275,8 +299,6 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-inmemory.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-consul.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-consul.md
-    - source: /content/content/reference/components-reference/supported-state-stores/setup-postgresql.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-postgresql.md
     - source: /content/content/reference/components-reference/supported-state-stores/setup-sqlite.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-state-stores/setup-sqlite.md
     - source: /content/content/reference/components-reference/supported-configuration-stores/redis-configuration-store.md
@@ -439,8 +461,6 @@ files:
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-pubsub/setup-solace-amqp.md
     - source: /content/content/reference/components-reference/supported-pubsub/setup-aws-snssqs.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-pubsub/setup-aws-snssqs.md
-    - source: /content/content/reference/components-reference/supported-pubsub/setup-nats-streaming.md
-      translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/components-reference/supported-pubsub/setup-nats-streaming.md
     - source: /content/content/reference/cli/dapr-completion.md
       translation: /translated_content/%locale_with_underscore%/translated_content/%locale_with_underscore%/reference/cli/dapr-completion.md
     - source: /content/content/reference/cli/dapr-annotate.md

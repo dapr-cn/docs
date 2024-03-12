@@ -25,7 +25,7 @@ In the Python example project, the `app.py` file contains the setup of the app, 
 ## Prerequisites
 - [Dapr CLI]({{< ref install-dapr-cli.md >}}) installed
 - Initialized [Dapr environment]({{< ref install-dapr-selfhost.md >}})
-- [Python 3.7+](https://www.python.org/downloads/) installed
+- [Python 3.8+](https://www.python.org/downloads/) installed
 - [Dapr Python package]({{< ref "python#installation" >}}) and the [workflow extension]({{< ref "python-workflow/_index.md" >}}) installed
 - Verify you're using the latest proto bindings
 
@@ -95,6 +95,7 @@ dapr run --app-id orderapp --app-protocol grpc --dapr-grpc-port 50001 --resource
 == APP == New counter value is: 1122!
 
 == APP == Get response from hello_world_wf after terminate call: Terminated
+== APP == Get response from child_wf after terminate call: Terminated
 == APP == Instance Successfully Purged
 ```
 
@@ -181,5 +182,5 @@ The sample then demonstrated terminating a workflow by:
 ```
 
 ## Next steps
-- [Learn more about Dapr workflow]({{< ref workflow >}})
+- [Learn more about Dapr workflow]({{< ref workflow-overview.md >}})
 - [Workflow API reference]({{< ref workflow_api.md >}})

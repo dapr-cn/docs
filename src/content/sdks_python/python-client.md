@@ -25,11 +25,91 @@ The `dapr` package contains the `DaprClient`, which is used to create and use a 
 from dapr.clients import DaprClient
 ```
 
+## Initialising the client
+You can initialise a Dapr client in multiple ways:
+
+#### Default values:
+When you initialise the client without any parameters it will use the default values for a Dapr 
+sidecar instance (`127.0.0.1:50001`).
+```python
+from dapr.clients import DaprClient
+
+with DaprClient() as d:
+    # use the client
+```
+
+#### Specifying an endpoint on initialisation:  
+When passed as an argument in the constructor, the gRPC endpoint takes precedence over any 
+configuration or environment variable.
+
+```python
+from dapr.clients import DaprClient
+
+with DaprClient("mydomain:50051?tls=true") as d:
+    # use the client
+```  
+
+#### Environment variables:  
+
+##### Dapr Sidecar Endpoints
+You can use the standardised `DAPR_GRPC_ENDPOINT` environment variable to
+specify the gRPC endpoint. When this variable is set, the client can be initialised 
+without any arguments:
+
+```bash
+export DAPR_GRPC_ENDPOINT="mydomain:50051?tls=true"
+```
+```python
+from dapr.clients import DaprClient
+
+with DaprClient() as d:
+    # the client will use the endpoint specified in the environment variables
+```  
+
+The legacy environment variables `DAPR_RUNTIME_HOST`, `DAPR_HTTP_PORT` and `DAPR_GRPC_PORT` are 
+also supported, but `DAPR_GRPC_ENDPOINT` takes precedence.
+
+##### Dapr API Token
+If your Dapr instance is configured to require the `DAPR_API_TOKEN` environment variable, you can
+set it in the environment and the client will use it automatically.  
+You can read more about Dapr API token authentication [here](https://docs.dapr.io/operations/security/api-token/).
+
+##### Health timeout
+On client initialisation, a health check is performed against the Dapr sidecar (`/healthz/outboud`).
+The client will wait for the sidecar to be up and running before proceeding.  
+
+The default timeout is 60 seconds, but it can be overridden by setting the `DAPR_HEALTH_TIMEOUT`
+environment variable.
+
+
+## Error handling
+Initially, errors in Dapr followed the [Standard gRPC error model](https://grpc.io/docs/guides/error/#standard-error-model). However, to provide more detailed and informative error messages, in version 1.13 an enhanced error model has been introduced which aligns with the gRPC [Richer error model](https://grpc.io/docs/guides/error/#richer-error-model). In response, the Python SDK implemented `DaprGrpcError`, a custom exception class designed to improve the developer experience.  
+It's important to note that the transition to using `DaprGrpcError` for all gRPC status exceptions is a work in progress. As of now, not every API call in the SDK has been updated to leverage this custom exception. We are actively working on this enhancement and welcome contributions from the community.
+
+Example of handling `DaprGrpcError` exceptions when using the Dapr python-SDK:
+
+```python
+try:
+    d.save_state(store_name=storeName, key=key, value=value)
+except DaprGrpcError as err:
+    print(f'Status code: {err.code()}')
+    print(f"Message: {err.message()}")
+    print(f"Error code: {err.error_code()}")
+    print(f"Error info(reason): {err.error_info.reason}")
+    print(f"Resource info (resource type): {err.resource_info.resource_type}")
+    print(f"Resource info (resource name): {err.resource_info.resource_name}")
+    print(f"Bad request (field): {err.bad_request.field_violations[0].field}")
+    print(f"Bad request (description): {err.bad_request.field_violations[0].description}")
+```
+
+
 ## Building blocks
 
 The Python SDK allows you to interface with all of the [Dapr building blocks]({{< ref building-blocks >}}).
 
 ### Invoke a service
+
+The Dapr Python SDK provides a simple API for invoking services via either HTTP or gRPC (deprecated). The protocol can be selected by setting the `DAPR_API_METHOD_INVOCATION_PROTOCOL` environment variable, defaulting to HTTP when unset. GRPC service invocation in Dapr is deprecated and GRPC proxying is recommended as an alternative.
 
 ```python 
 from dapr.clients import DaprClient
@@ -42,6 +122,12 @@ with DaprClient() as d:
     # invoke a 'POST' method (HTTP only)    
     resp = d.invoke_method('service-to-invoke', 'method-to-invoke', data='{"id":"100", "FirstName":"Value", "LastName":"Value"}', http_verb='post')
 ```
+
+The base endpoint for HTTP api calls is specified in the `DAPR_HTTP_ENDPOINT` environment variable.
+If this variable is not set, the endpoint value is derived from the `DAPR_RUNTIME_HOST` and `DAPR_HTTP_PORT` variables, whose default values are `127.0.0.1` and `3500` accordingly.
+
+The base endpoint for gRPC calls is the one used for the client initialisation ([explained above](#initialising-the-client)).
+
 
 - For a full guide on service invocation visit [How-To: Invoke a service]({{< ref howto-invoke-discover-services.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/invoke-simple) for code samples and instructions to try out service invocation.

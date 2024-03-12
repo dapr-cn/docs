@@ -123,7 +123,7 @@ def update_files_for_building(c):
 
 @task
 def clean_translations(c):
-    content_dir = f"translated_content"
+    content_dir = f"../translated_content"
     # delete content dir if found
     if os.path.exists(content_dir):
         shutil.rmtree(content_dir)
