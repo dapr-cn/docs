@@ -33,7 +33,7 @@ jobs:
           # sleep some time according to the version tag. e.g. v1.5 will sleep for 5*30 seconds
           sleep $(($(echo ${{ matrix.version_tag }} | sed -e 's/v//' -e 's/\.//g')*30))
       - name: crowdin action
-        uses: crowdin/github-action@1.4.1
+        uses: crowdin/github-action@1.19.0
         with:
           upload_sources: false
           upload_translations: false

@@ -19,7 +19,7 @@ jobs:
         run: |
           rm -rf translated_content
       - name: crowdin action
-        uses: crowdin/github-action@1.4.1
+        uses: crowdin/github-action@1.19.0
         with:
           upload_sources: false
           upload_translations: false
