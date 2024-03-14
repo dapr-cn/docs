@@ -3,7 +3,6 @@ type: docs
 title: "Bearer"
 linkTitle: "Bearer"
 description: "Use bearer middleware to secure HTTP endpoints by verifying bearer tokens"
-type: docs
 aliases:
 - /zh-hans/developing-applications/middleware/supported-middleware/middleware-bearer/
 ---
