@@ -83,4 +83,4 @@ spec:
 - [Sentinel Github](https://github.com/alibaba/sentinel-golang)
 - [Middleware]({{< ref middleware.md >}})
 - [Dapr configuration]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview\.md >}})
+- [Configuration overview]({{< ref configuration-overview.md >}})

@@ -13,7 +13,7 @@ Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。
 
 ## Configure API middleware pipelines
 
-When launched, a Dapr sidecar constructs a middleware processing pipeline for incoming HTTP calls. By default, the pipeline consists of the [tracing]({{< ref tracing-overview\.md >}}) and CORS middlewares. Additional middlewares, configured by a Dapr [Configuration]({{< ref configuration-concept.md >}}), can be added to the pipeline in the order they are defined. The pipeline applies to all Dapr API endpoints, including state, pub/sub, service invocation, bindings, secrets, configuration, distributed lock, etc.
+When launched, a Dapr sidecar constructs a middleware processing pipeline for incoming HTTP calls. By default, the pipeline consists of the [tracing]({{< ref tracing-overview.md >}}) and CORS middlewares. Additional middlewares, configured by a Dapr [Configuration]({{< ref configuration-concept.md >}}), can be added to the pipeline in the order they are defined. The pipeline applies to all Dapr API endpoints, including state, pub/sub, service invocation, bindings, secrets, configuration, distributed lock, etc.
 
 A request goes through all the defined middleware components before it's routed to user code, and then goes through the defined middleware, in reverse order, before it's returned to the client, as shown in the following diagram.
 
@@ -69,5 +69,5 @@ spec:
 
 - [Learn how to author middleware components]({{< ref develop-middleware.md >}})
 - [Component schema]({{< ref component-schema.md >}})
-- [Configuration overview]({{< ref configuration-overview\.md >}})
+- [Configuration overview]({{< ref configuration-overview.md >}})
 - [API middleware sample](https://github.com/dapr/samples/tree/master/middleware-oauth-google)

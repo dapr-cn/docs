@@ -81,4 +81,4 @@ Only operations going through Dapr API exposed by Dapr sidecar (for example, ser
 ## Related links
 
 - Try out the [observability quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/observability/README.md)
-- Learn how to set [tracing configuration options]({{< ref "configuration-overview\.md#tracing" >}})
+- Learn how to set [tracing configuration options]({{< ref "configuration-overview.md#tracing" >}})

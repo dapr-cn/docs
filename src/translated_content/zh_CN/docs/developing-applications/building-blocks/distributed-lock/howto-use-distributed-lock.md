@@ -191,4 +191,4 @@ func main() {
 
 ## 下一步
 
-阅读 [分布式锁 API 概述]({{< ref distributed-lock-api-overview\.md >}}) 了解更多信息。
+阅读 [分布式锁 API 概述]({{< ref distributed-lock-api-overview.md >}}) 了解更多信息。

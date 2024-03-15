@@ -99,7 +99,7 @@ Dapr支持两种类型的多读或多写操作：**bulk**或**transactional**。
 
 #### Actor状态的生存时间（TTL）
 
-您应始终设置 TTL 元数据字段（`ttlInSeconds`），或在保存 actor 状态时使用您选择的 SDK 中的等效 API 调用，以确保状态最终被移除。 阅读[Actors概述]({{< ref actors-overview\.md >}})以获取更多信息。
+您应始终设置 TTL 元数据字段（`ttlInSeconds`），或在保存 actor 状态时使用您选择的 SDK 中的等效 API 调用，以确保状态最终被移除。 阅读[Actors概述]({{< ref actors-overview.md >}})以获取更多信息。
 
 ### 状态加密
 

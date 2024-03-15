@@ -7,7 +7,7 @@ description: 如何使用 Dapr JavaScript SDK 启动和运行工作流
 ---
 
 {{% alert title="注意" color="primary" %}}
-Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview\.md#limitations" >}}).
+Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
 {{% /alert %}}
 
 让我们创建一个 Dapr 工作流，并使用控制台调用它。 通过[提供的工作流示例](https://github.com/dapr/js-sdk/tree/main/examples/workflow)，您将：
@@ -160,5 +160,5 @@ INFO[0006] dc040bea-6436-4051-9166-c9294f9d2201: 'sequence' completed with a COM
 
 ## 下一步
 
-- [了解更多关于Dapr工作流]({{< ref workflow-overview\.md >}})
+- [了解更多关于Dapr工作流]({{< ref workflow-overview.md >}})
 - [Workflow API 参考文档]({{< ref workflow_api.md >}})

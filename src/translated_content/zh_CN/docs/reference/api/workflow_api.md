@@ -7,7 +7,7 @@ weight: 900
 ---
 
 {{% alert title="注意" color="primary" %}}
-Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview\.md#limitations" >}}).
+Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
 {{% /alert %}}
 
 Dapr provides users with the ability to interact with workflows and comes with a built-in `dapr` component.
@@ -274,5 +274,5 @@ However, Dapr comes with a built-in `dapr` workflow component that is built on D
 
 ## Next Steps
 
-- [Workflow API overview]({{< ref workflow-overview\.md >}})
+- [Workflow API overview]({{< ref workflow-overview.md >}})
 - [Route user to workflow patterns ]({{< ref workflow-patterns.md >}})

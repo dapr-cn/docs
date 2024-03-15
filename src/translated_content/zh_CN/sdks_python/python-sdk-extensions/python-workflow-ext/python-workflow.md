@@ -186,5 +186,5 @@ Dapr 然后暂停并恢复工作流：
 
 ## 下一步
 
-- [了解更多关于Dapr工作流]({{< ref workflow-overview\.md >}})
+- [了解更多关于Dapr工作流]({{< ref workflow-overview.md >}})
 - [Workflow API 参考文档]({{< ref workflow_api.md >}})

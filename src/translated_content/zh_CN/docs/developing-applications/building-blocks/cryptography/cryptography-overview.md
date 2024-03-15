@@ -84,6 +84,6 @@ Dapr 密码学构建块包括两种组件：
 
 ## 相关链接
 
-- [密码学概述]({{< ref cryptography-overview\.md >}})
+- [密码学概述]({{< ref cryptography-overview.md >}})
 - [支持的加密组件列表]({{< ref supported-cryptography >}})
 - [密码学 API 参考文档]({{< ref cryptography_api >}})

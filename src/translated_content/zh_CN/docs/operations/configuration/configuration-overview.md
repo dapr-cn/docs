@@ -40,7 +40,7 @@ A Dapr sidecar can apply a specific configuration by using a `dapr.io/config` an
     dapr.io/config: "myappconfig"
 ```
 
-Note: There are more [Kubernetes annotations]({{< ref "arguments-annotations-overview\.md" >}}) available to configure the Dapr sidecar on activation by sidecar Injector system service.
+Note: There are more [Kubernetes annotations]({{< ref "arguments-annotations-overview.md" >}}) available to configure the Dapr sidecar on activation by sidecar Injector system service.
 
 ### Sidecar configuration settings
 
@@ -96,7 +96,7 @@ turns on tracing for the sidecar.
 | `OTEL_EXPORTER_OTLP_INSECURE` | Sets the connection to the endpoint as unencrypted (true/false) |
 | `OTEL_EXPORTER_OTLP_PROTOCOL` | Transport protocol (`grpc`, `http/protobuf`, `http/json`)       |
 
-See [Observability distributed tracing]({{< ref "tracing-overview\.md" >}}) for more information.
+See [Observability distributed tracing]({{< ref "tracing-overview.md" >}}) for more information.
 
 #### Metrics
 
@@ -120,7 +120,7 @@ The following table lists the properties for metrics:
 | `rules`                     | array   | Named rule to filter metrics. Each rule contains a set of `labels` to filter on and a `regex` expression to apply to the metrics path.                                                                                                                                                                                                                                                                                                          |
 | `http.increasedCardinality` | boolean | When set to true, in the Dapr HTTP server each request path causes the creation of a new "bucket" of metrics. This can cause issues, including excessive memory consumption, when there many different requested endpoints (such as when interacting with RESTful APIs).<br>In Dapr 1.13 the default value is `true` (to preserve the behavior of Dapr <= 1.12), but will change to `false` in Dapr 1.14. |
 
-To mitigate high memory usage and egress costs associated with [high cardinality metrics]({{< ref "metrics-overview\.md#high-cardinality-metrics" >}}) with the HTTP server, you should set the `metrics.http.increasedCardinality` property to `false`.
+To mitigate high memory usage and egress costs associated with [high cardinality metrics]({{< ref "metrics-overview.md#high-cardinality-metrics" >}}) with the HTTP server, you should set the `metrics.http.increasedCardinality` property to `false`.
 
 Using rules, you can set regular expressions for every metric exposed by the Dapr sidecar. 例如：
 
@@ -135,7 +135,7 @@ metrics:
           "orders/": "orders/.+"
 ```
 
-See [metrics documentation]({{< ref "metrics-overview\.md" >}}) for more information.
+See [metrics documentation]({{< ref "metrics-overview.md" >}}) for more information.
 
 #### Logging
 
@@ -246,7 +246,7 @@ spec:
 
 You can optionally specify a version to disallow by adding it at the end of the component name. For example, `state.in-memory/v1` disables initializing components of type `state.in-memory` and version `v1`, but does not disable a (hypothetical) `v2` version of the component.
 
-> Note: One special note applies to the component type `secretstores.kubernetes`. When you add that component to the denylist, Dapr forbids the creation of _additional_ components of type `secretstores.kubernetes`. However, it does not disable the built-in Kubernetes secret store, which is created by Dapr automatically and is used to store secrets specified in Components specs. If you want to disable the built-in Kubernetes secret store, you need to use the `dapr.io/disable-builtin-k8s-secret-store` [annotation]({{< ref arguments-annotations-overview\.md >}}).
+> Note: One special note applies to the component type `secretstores.kubernetes`. When you add that component to the denylist, Dapr forbids the creation of _additional_ components of type `secretstores.kubernetes`. However, it does not disable the built-in Kubernetes secret store, which is created by Dapr automatically and is used to store secrets specified in Components specs. If you want to disable the built-in Kubernetes secret store, you need to use the `dapr.io/disable-builtin-k8s-secret-store` [annotation]({{< ref arguments-annotations-overview.md >}}).
 
 #### Turning on preview features
 

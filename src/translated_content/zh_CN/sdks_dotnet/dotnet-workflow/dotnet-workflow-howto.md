@@ -171,4 +171,4 @@ info: WorkflowConsoleApp.Activities.NotifyActivity[0]
 ## 下一步
 
 - [尝试 Dapr 快速入门]({{< ref workflow-quickstart.md >}})
-- [了解有关Dapr Workflow的更多信息]({{< ref workflow-overview\.md >}})
+- [了解有关Dapr Workflow的更多信息]({{< ref workflow-overview.md >}})

@@ -6,7 +6,7 @@ weight: 77
 description: 开始使用 Dapr 的配置构建块
 ---
 
-让我们来看看 Dapr 的[配置构建块]({{< ref configuration-api-overview\.md >}})。 配置项目通常具有动态性质，并且与消费它的应用程序的需求紧密耦合。 配置项是包含配置数据的键/值对，例如
+让我们来看看 Dapr 的[配置构建块]({{< ref configuration-api-overview.md >}})。 配置项目通常具有动态性质，并且与消费它的应用程序的需求紧密耦合。 配置项是包含配置数据的键/值对，例如
 
 - App ids
 - Partition keys

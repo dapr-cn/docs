@@ -8,7 +8,7 @@ description: To limit the secrets to which the Dapr application has access, user
 
 In addition to scoping which applications can access a given component, for example a secret store component (see [Scoping components]({{< ref "component-scopes.md">}})), a named secret store component itself can be scoped to one or more secrets for an application. By defining `allowedSecrets` and/or `deniedSecrets` list, applications can be restricted to access only specific secrets.
 
-Follow [these instructions]({{< ref "configuration-overview\.md" >}}) to define a configuration resource.
+Follow [these instructions]({{< ref "configuration-overview.md" >}}) to define a configuration resource.
 
 ## Configure secrets access
 
@@ -94,7 +94,7 @@ spec:
         allowedSecrets: ["secret1", "secret2"]
 ```
 
-This example defines configuration for secret store named vault. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-overview\.md >}}) to apply configuration to the sidecar.
+This example defines configuration for secret store named vault. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.
 
 ### 场景3：拒绝访问密钥仓库中的某些敏感密钥
 
@@ -113,4 +113,4 @@ spec:
         deniedSecrets: ["secret1", "secret2"]
 ```
 
-The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-overview\.md >}}) to apply configuration to the sidecar.
+The above configuration explicitly denies access to `secret1` and `secret2` from the secret store named vault while allowing access to all other secrets. Follow [these instructions]({{< ref configuration-overview.md >}}) to apply configuration to the sidecar.

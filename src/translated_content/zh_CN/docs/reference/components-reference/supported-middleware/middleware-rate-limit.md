@@ -61,4 +61,4 @@ spec:
 - [Control max concurrently]({{< ref control-concurrency.md >}})
 - [Middleware]({{< ref middleware.md >}})
 - [Dapr configuration]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview\.md >}})
+- [Configuration overview]({{< ref configuration-overview.md >}})

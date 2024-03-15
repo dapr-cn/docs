@@ -60,7 +60,7 @@ For example, `from a gateway service to a Dapr-enabled service A`.
 
 An external gateway ingress calls Dapr, which generates the trace headers and calls `service A`. `Service A` then calls `service B` and further Dapr-enabled services.
 
-You must propagate the headers from `service A` to `service B`. For example: `Ingress -> service A -> propagate trace headers -> service B`. This is similar to [case 2]({{< ref "tracing-overview\.md#multiple-sequential-service-invocation-calls" >}}).
+You must propagate the headers from `service A` to `service B`. For example: `Ingress -> service A -> propagate trace headers -> service B`. This is similar to [case 2]({{< ref "tracing-overview.md#multiple-sequential-service-invocation-calls" >}}).
 
 ##### Pub/sub messages
 

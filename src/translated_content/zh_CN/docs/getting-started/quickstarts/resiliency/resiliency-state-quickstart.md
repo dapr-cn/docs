@@ -892,6 +892,6 @@ INFO[0036] Recovered processing operation component[statestore] output.
 
 ## 下一步
 
-了解有关[弹性功能]({{< ref resiliency-overview\.md >}})以及它如何与Dapr的构建块API一起工作。
+了解有关[弹性功能]({{< ref resiliency-overview.md >}})以及它如何与Dapr的构建块API一起工作。
 
 {{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

@@ -28,7 +28,7 @@ Dapr 包括一个专门实现了[虚拟 Actor 模式](https://www.microsoft.com/
 
 ## Dapr Actors vs. Dapr 工作流程
 
-Dapr actors 以状态管理和服务调用 API 为基础，创建有状态的、长期运行的、具有身份标识的对象。 [Dapr 工作流]({{< ref workflow-overview\.md >}}) 和 Dapr Actors 是相关的，工作流建立在 Actors 之上，提供了更高层次的抽象，可以协调一组 Actors，实施常见的工作流模式，并代表您管理 Actors 的生命周期。
+Dapr actors 以状态管理和服务调用 API 为基础，创建有状态的、长期运行的、具有身份标识的对象。 [Dapr 工作流]({{< ref workflow-overview.md >}}) 和 Dapr Actors 是相关的，工作流建立在 Actors 之上，提供了更高层次的抽象，可以协调一组 Actors，实施常见的工作流模式，并代表您管理 Actors 的生命周期。
 
 Dapr Actors 旨在提供一种在分布式系统中封装状态和行为的方法。 客户端应用程序可根据需要激活 actor。 当一个 actor 被激活时，它会被分配一个唯一的身份，这样它就能在多次调用中保持自己的状态。 这使得 Actors 在构建有状态、可扩展和容错的分布式应用程序时非常有用。
 
@@ -50,7 +50,7 @@ Dapr Actors 旨在提供一种在分布式系统中封装状态和行为的方�
 
 当您需要定义和协调涉及多个服务和组件的复杂工作流时，可以使用 Dapr 工作流。 例如，使用 [聊天应用程序示例]({{< ref "#when-to-use-dapr-actors" >}})，您可以使用 Dapr 工作流来定义应用程序的整体工作流，如如何注册新用户、如何发送和接收消息，以及应用程序如何处理错误和异常。
 
-[了解有关 Dapr 工作流以及如何在应用程序中使用工作流的更多信息。]({{< ref workflow-overview\.md >}})
+[了解有关 Dapr 工作流以及如何在应用程序中使用工作流的更多信息。]({{< ref workflow-overview.md >}})
 
 ## 特性
 

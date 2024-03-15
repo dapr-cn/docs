@@ -65,7 +65,7 @@ DaprClient client = new DaprClientBuilder().build()
 
 ## 构建块
 
-Java SDK 允许您与所有的[Dapr构建块]({{< ref building-blocks >}})}进行接口交互。
+Java SDK 允许您与所有的[Dapr构建块]({{< ref building-blocks >}})进行接口交互。
 
 ### 调用服务
 
@@ -615,9 +615,9 @@ public class DemoWorkflowClient {
 ```
 
 - 查看工作流程的完整指南，请访问：
-  - [操作方法：管理工作流]({{< ref howto-author-workflow\.md >}}).
-  - [操作方法：管理工作流]({{< ref howto-manage-workflow\.md >}}).
-- [了解有关如何使用Java SDK与工作流的更多信息]({{< ref java-workflow\.md >}})。
+  - [操作方法：管理工作流]({{< ref howto-author-workflow.md >}}).
+  - [操作方法：管理工作流]({{< ref howto-manage-workflow.md >}}).
+- [了解有关如何使用Java SDK与工作流的更多信息]({{< ref java-workflow.md >}})。
 
 ## Sidecar APIs
 

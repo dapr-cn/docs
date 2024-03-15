@@ -80,7 +80,7 @@ time="2022-03-16T18:32:03.359097916Z" level=info msg="HTTP API Called" method="P
 
 ## API logging configuration
 
-Using the [Dapr Configuration spec]({{< ref "configuration-overview\.md" >}}#sidecar-configuration), you can configure the default behavior of API logging in Dapr runtimes.
+Using the [Dapr Configuration spec]({{< ref "configuration-overview.md" >}}#sidecar-configuration), you can configure the default behavior of API logging in Dapr runtimes.
 
 ### Enable API logging by default
 

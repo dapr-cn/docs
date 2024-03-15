@@ -495,6 +495,6 @@ func encryptDecryptFile(client dapr.Client) {
 ## 下一步
 
 - 探索 [使用加密 API 进行加密和解密的更多示例]({{< ref howto-cryptography.md >}})
-- 了解有关[密码学作为 Dapr 构建块的更多信息]({{< ref cryptography-overview\.md >}})
+- 了解有关[密码学作为 Dapr 构建块的更多信息]({{< ref cryptography-overview.md >}})
 
 {{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

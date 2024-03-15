@@ -6,7 +6,7 @@ weight: 100
 description: Dapr Sidecar 进程概述
 ---
 
-Dapr使用[sidecar模式]({{< ref "concepts/overview\.md#sidecar-architecture" >}})，这意味着Dapr API在与应用程序一起运行的单独进程，即Dapr sidecar，上运行和公开。 Dapr sidecar 进程名为 `daprd` ，并且根据不同的宿主环境有不同的启动方式。
+Dapr使用[sidecar模式]({{< ref "concepts/overview.md#sidecar-architecture" >}})，这意味着Dapr API在与应用程序一起运行的单独进程，即Dapr sidecar，上运行和公开。 Dapr sidecar 进程名为 `daprd` ，并且根据不同的宿主环境有不同的启动方式。
 
 Dapr sidecar 提供了：
 
@@ -30,13 +30,13 @@ Sidecar API 是通过本地 http 或 gRPC 端点从应用程序调用的。 <img
 
 ## 使用 `dapr-sidecar-injector` 的 Kubernetes
 
-在[Kubernetes]({{< ref kubernetes.md >}})上，Dapr控制面板包括[dapr-sidecar-injector服务]({{< ref kubernetes-overview\.md >}})，它监视带有`dapr.io/enabled`注解的新pod，并在pod中注入一个包含`daprd`进程的容器。 在这种情况下，sidecar参数可以通过在**Kubernetes annotations**列中的[此表]({{<ref arguments-annotations-overview>}}) 中所述的注解传递。
+在[Kubernetes]({{< ref kubernetes.md >}})上，Dapr控制面板包括[dapr-sidecar-injector服务]({{< ref kubernetes-overview.md >}})，它监视带有`dapr.io/enabled`注解的新pod，并在pod中注入一个包含`daprd`进程的容器。 在这种情况下，sidecar参数可以通过在**Kubernetes annotations**列中的[此表]({{<ref arguments-annotations-overview>}}) 中所述的注解传递。
 
 ## 直接运行 sidecar
 
 在大多数情况下，您不需要显式运行 `daprd` ，因为 sidecar 由 [CLI]({{<ref cli-overview>}}) （自托管模式）或 dapr-sidecar-injector 服务（Kubernetes）启动。 对于高级用例（调试、脚本部署等） `daprd` 进程可以直接启动。
 
-要获取所有可用参数的详细列表，请运行 `daprd --help` 或查看这个[表]({{< ref arguments-annotations-overview\.md >}})，该表概述了`daprd`参数与CLI参数和Kubernetes注解的关系。
+要获取所有可用参数的详细列表，请运行 `daprd --help` 或查看这个[表]({{< ref arguments-annotations-overview.md >}})，该表概述了`daprd`参数与CLI参数和Kubernetes注解的关系。
 
 ### 示例
 

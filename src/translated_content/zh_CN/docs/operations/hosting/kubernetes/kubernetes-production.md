@@ -42,7 +42,7 @@ The following Dapr control plane deployments are optional:
 
 ## Sidecar resource settings
 
-[Set the resource assignments for the Dapr sidecar using the supported annotations]({{< ref "arguments-annotations-overview\.md" >}}). The specific annotations related to **resource constraints** are:
+[Set the resource assignments for the Dapr sidecar using the supported annotations]({{< ref "arguments-annotations-overview.md" >}}). The specific annotations related to **resource constraints** are:
 
 - `dapr.io/sidecar-cpu-limit`
 - `dapr.io/sidecar-memory-limit`
@@ -235,7 +235,7 @@ It's recommended that you consider deploying your apps with `automountServiceAcc
 Thus, Dapr does not set `automountServiceAccountToken: false` automatically for you. However, in all situations where the Service Account is not required by your solution, it's recommended that you set this option in the pods spec.
 
 {{% alert title="Note" color="primary" %}}
-Initializing Dapr components using [component secrets]({{< ref "component-secrets.md" >}}) stored as Kubernetes secrets does **not** require a Service Account token, so you can still set `automountServiceAccountToken: false` in this case. Only calling the Kubernetes secret store at runtime, using the [Secrets management]({{< ref "secrets-overview\.md" >}}) building block, is impacted.
+Initializing Dapr components using [component secrets]({{< ref "component-secrets.md" >}}) stored as Kubernetes secrets does **not** require a Service Account token, so you can still set `automountServiceAccountToken: false` in this case. Only calling the Kubernetes secret store at runtime, using the [Secrets management]({{< ref "secrets-overview.md" >}}) building block, is impacted.
 {{% /alert %}}
 
 ## Tracing and metrics configuration
@@ -266,7 +266,7 @@ Refer to the [Dapr operator service documentation]({{< ref operator >}}) for mor
 
 By default, the Dapr sidecar injector injects a sidecar without any `seccompProfile`. However, for the Dapr sidecar container to run successfully in a namespace with the [Restricted](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted) profile, the sidecar container needs `securityContext.seccompProfile.Type` to not be `nil`.
 
-Refer to [the Arguments and Annotations overview]({{< ref "arguments-annotations-overview\.md" >}}) to set the appropriate `seccompProfile` on the sidecar container.
+Refer to [the Arguments and Annotations overview]({{< ref "arguments-annotations-overview.md" >}}) to set the appropriate `seccompProfile` on the sidecar container.
 
 ## Best Practices
 

@@ -7,10 +7,10 @@ description: 了解有关 Dapr 工作流特性和概念的详细信息
 ---
 
 {{% alert title="注意" color="primary" %}}
-Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview\.md#limitations" >}}).
+Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
 {{% /alert %}}
 
-现在，您已经在高级别上了解了 [工作流构建块]({{< ref workflow-overview\.md >}}) ，让我们深入探讨 Dapr 工作流引擎和 SDK 所包含的特性和概念。 Dapr 工作流暴露了几个核心特性和概念，这些特性和概念在所有支持的语言中都是通用的。
+现在，您已经在高级别上了解了 [工作流构建块]({{< ref workflow-overview.md >}}) ，让我们深入探讨 Dapr 工作流引擎和 SDK 所包含的特性和概念。 Dapr 工作流暴露了几个核心特性和概念，这些特性和概念在所有支持的语言中都是通用的。
 
 {{% alert title="注意" color="primary" %}}
 有关工作流状态管理的更多信息，请参阅[工作流架构指南]({{< ref workflow-architecture.md >}})。
@@ -109,7 +109,7 @@ Dapr 工作流程允许您为任何时间范围（包括分钟、天甚至年）
 
 ## 重试策略
 
-工作流支持活动和子工作流的持久重试策略。 工作流重试策略与[Dapr弹性策略]({{< ref "resiliency-overview\.md" >}})在以下方面是独立和不同的。
+工作流支持活动和子工作流的持久重试策略。 工作流重试策略与[Dapr弹性策略]({{< ref "resiliency-overview.md" >}})在以下方面是独立和不同的。
 
 - 工作流重试策略由工作流作者在代码中配置，而 Dapr 弹性策略则由应用运维人员在 YAML 中配置。
 - 工作流重试策略是持久的，可在应用程序重启时保持状态，而 Dapr 弹性策略不是持久的，必须在应用程序重启后重新应用。
@@ -499,7 +499,7 @@ task.Await(nil)
 ## 相关链接
 
 - [尝试使用快速入门来体验 Dapr 工作流]({{< ref workflow-quickstart.md >}})
-- [Dapr概述]({{< ref workflow-overview\.md >}})
+- [Dapr概述]({{< ref workflow-overview.md >}})
 - [Workflow API 参考文档]({{< ref workflow_api.md >}})
 - 试用以下示例:
   - [Python](https://github.com/dapr/python-sdk/tree/master/examples/demo_workflow)

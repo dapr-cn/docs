@@ -18,6 +18,8 @@ jobs:
       - name: remove old files
         run: |
           rm -rf translated_content
+          mkdir -p translated_content/zh_CN
+          cp -r content/* translated_content/zh_CN
       - name: crowdin action
         uses: crowdin/github-action@v1.19.0
         with:

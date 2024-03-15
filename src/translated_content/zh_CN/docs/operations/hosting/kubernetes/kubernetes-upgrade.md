@@ -129,6 +129,6 @@ As of version 1.0.0 onwards, existing certificate values will automatically be r
 
 ## Related links
 
-- [Dapr on Kubernetes]({{< ref kubernetes-overview\.md >}})
+- [Dapr on Kubernetes]({{< ref kubernetes-overview.md >}})
 - [More on upgrading Dapr with Helm]({{< ref "kubernetes-production.md#upgrade-dapr-with-helm" >}})
 - [Dapr production guidelines]({{< ref kubernetes-production.md >}})

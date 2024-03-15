@@ -6,7 +6,7 @@ weight: 2100
 description: 了解 Dapr 为何使用 CloudEvents，它们如何在 Dapr 发布/订阅中工作，以及如何创建 CloudEvents。
 ---
 
-为了启用消息路由并为每个消息提供附加上下文，Dapr使用[CloudEvents 1.0规范](https://github.com/cloudevents/spec/tree/v1.0)作为其消息格式。 任何通过 Dapr 发送到 topic 的应用程序消息都会自动被包装在 CloudEvents 信封中，使用 [`Content-Type` 头部的值]({{< ref "pubsub-overview\.md#content-types" >}}) 作为 `datacontenttype` 属性。
+为了启用消息路由并为每个消息提供附加上下文，Dapr使用[CloudEvents 1.0规范](https://github.com/cloudevents/spec/tree/v1.0)作为其消息格式。 任何通过 Dapr 发送到 topic 的应用程序消息都会自动被包装在 CloudEvents 信封中，使用 [`Content-Type` 头部的值]({{< ref "pubsub-overview.md#content-types" >}}) 作为 `datacontenttype` 属性。
 
 Dapr 使用 CloudEvents 为事件负载提供额外的上下文，从而启用以下功能：
 
@@ -162,13 +162,13 @@ await Task.Delay(TimeSpan.FromSeconds(1));
 ```
 
 {{% alert title="重要" color="warning" %}}
-虽然你可以替换 `traceid`/`traceparent` 和 `tracestate`，否则可能会干扰跟踪事件，并在跟踪工具中报告不一致的结果。 推荐使用Open Telemetry进行分布式跟踪。 [了解更多关于分布式追踪。]({{< ref tracing-overview\.md >}})
+虽然你可以替换 `traceid`/`traceparent` 和 `tracestate`，否则可能会干扰跟踪事件，并在跟踪工具中报告不一致的结果。 推荐使用Open Telemetry进行分布式跟踪。 [了解更多关于分布式追踪。]({{< ref tracing-overview.md >}})
 
 {{% /alert %}}
 
 ## 发布您自己的 CloudEvent
 
-如果您想使用自己的CloudEvent，请确保将[`datacontenttype`]({{< ref "pubsub-overview\.md#setting-message-content-types" >}})指定为`application/cloudevents+json`。
+如果您想使用自己的CloudEvent，请确保将[`datacontenttype`]({{< ref "pubsub-overview.md#setting-message-content-types" >}})指定为`application/cloudevents+json`。
 
 如果由应用程序创建的CloudEvent不包含CloudEvent规范中的 [个最低要求字段](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#required-attributes) ，则该消息将被拒绝。 如果缺少以下字段，Dapr将添加到CloudEvent中：
 
@@ -226,7 +226,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/cloudevents+json' -Body
 
 ## 下一步
 
-- 了解为什么您可能[不需要使用CloudEvents]({{< ref pubsub-raw\.md >}})
+- 了解为什么您可能[不需要使用CloudEvents]({{< ref pubsub-raw.md >}})
 - 尝试[Pub/Sub快速入门]({{< ref pubsub-quickstart.md >}})
 - [发布/订阅组件列表]({{< ref setup-pubsub >}})
 - Read the [API reference]({{< ref pubsub_api.md >}})

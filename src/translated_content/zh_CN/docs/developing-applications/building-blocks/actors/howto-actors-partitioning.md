@@ -196,4 +196,4 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 ## 相关链接
 
 - [Actors API参考]({{< ref actors_api.md >}})
-- [Actors概述]({{< ref actors-overview\.md >}})
+- [Actors概述]({{< ref actors-overview.md >}})

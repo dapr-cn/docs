@@ -90,5 +90,5 @@ In the gRPC API calls, trace context is passed through `grpc-trace-bin` header.
 
 ## Related Links
 
-- [Learn more about distributed tracing in Dapr]({{< ref tracing-overview\.md >}})
+- [Learn more about distributed tracing in Dapr]({{< ref tracing-overview.md >}})
 - [W3C Trace Context specification](https://www.w3.org/TR/trace-context/)

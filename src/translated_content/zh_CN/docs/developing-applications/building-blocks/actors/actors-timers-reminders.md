@@ -195,4 +195,4 @@ Protobuf serialization will become the default format in Dapr 1.14
 ## 相关链接
 
 - [Actors API参考]({{< ref actors_api.md >}})
-- [Actors概述]({{< ref actors-overview\.md >}})
+- [Actors概述]({{< ref actors-overview.md >}})

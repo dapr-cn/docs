@@ -506,7 +506,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 
 状态查询 API 具有以下限制：
 
-- 要查询存储在状态存储中的 actor 状态，您需要对特定数据库使用查询 API。 参见[查询 actor 状态]({{< ref "state-management-overview\.md#querying-actor-state" >}})。
+- 要查询存储在状态存储中的 actor 状态，您需要对特定数据库使用查询 API。 参见[查询 actor 状态]({{< ref "state-management-overview.md#querying-actor-state" >}})。
 - 该 API 不适用于 Dapr [加密状态存储]({{< ref howto-encrypt-state >}})功能。 由于加密是由 Dapr 运行时完成并存储为加密数据，因此这有效地阻止了服务器端查询。
 
 您可以在[相关链接]({{< ref "#related-links" >}})部分找到更多信息。

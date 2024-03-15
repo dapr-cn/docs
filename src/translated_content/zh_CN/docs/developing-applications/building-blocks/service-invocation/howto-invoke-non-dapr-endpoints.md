@@ -8,7 +8,7 @@ weight: 40
 
 本文演示如何使用Dapr通过HTTP调用非Dapr端点。
 
-使用 Dapr 的服务调用 API，您可以与使用或不使用 Dapr 的端点进行通信。 使用 Dapr 调用不使用 Dapr 的端点不仅提供了一致的 API，还提供以下[Dapr服务调用]({{< ref service-invocation-overview\.md >}})的好处：
+使用 Dapr 的服务调用 API，您可以与使用或不使用 Dapr 的端点进行通信。 使用 Dapr 调用不使用 Dapr 的端点不仅提供了一致的 API，还提供以下[Dapr服务调用]({{< ref service-invocation-overview.md >}})的好处：
 
 - 应用弹性策略的能力
 - 使用跟踪 & metrics的可观测性
@@ -137,7 +137,7 @@ spec:
 ## 相关链接
 
 - [HTTPEndpoint reference]({{< ref httpendpoints-schema.md >}})
-- [服务调用概述]({{< ref service-invocation-overview\.md >}})
+- [服务调用概述]({{< ref service-invocation-overview.md >}})
 - [服务调用API规范]({{< ref service_invocation_api.md >}})
 
 ## 社区示例

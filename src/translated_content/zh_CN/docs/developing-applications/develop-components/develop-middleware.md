@@ -49,5 +49,5 @@ func (m *customMiddleware) GetHandler(metadata middleware.Metadata) (func(next h
 ## 相关链接
 
 - [Component schema]({{< ref component-schema.md >}})
-- [Configuration overview]({{< ref configuration-overview\.md >}})
+- [Configuration overview]({{< ref configuration-overview.md >}})
 - [API middleware sample](https://github.com/dapr/samples/tree/master/middleware-oauth-google)

@@ -164,6 +164,6 @@ scopes:
 
 ## 下一步
 
-- 了解有关[发布和订阅消息]({{< ref pubsub-overview\.md >}})
+- 了解有关[发布和订阅消息]({{< ref pubsub-overview.md >}})
 - List of [pub/sub components]({{< ref supported-pubsub >}})
 - Read the [API reference]({{< ref pubsub_api.md >}})

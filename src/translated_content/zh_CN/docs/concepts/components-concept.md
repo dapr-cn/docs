@@ -13,9 +13,9 @@ Dapr采用模块化设计，功能以组件形式交付。 每个组件都有接
 - [components-contrib代码库](https://github.com/dapr/components-contrib)
 - [可插拔组件]({{< ref "components-concept.md#built-in-and-pluggable-components" >}})。
 
-构建块可以使用组件的任意组合。 例如，[Actors]({{< ref "actors-overview\.md" >}})和[状态管理]({{< ref "state-management-overview\.md" >}})构建块都使用[state components](https://github.com/dapr/components-contrib/tree/master/state)。
+构建块可以使用组件的任意组合。 例如，[Actors]({{< ref "actors-overview.md" >}})和[状态管理]({{< ref "state-management-overview.md" >}})构建块都使用[state components](https://github.com/dapr/components-contrib/tree/master/state)。
 
-作为另一个例子，[发布/订阅]({{< ref "pubsub-overview\.md" >}}) 构建块使用[发布/订阅组件](https://github.com/dapr/components-contrib/tree/master/pubsub)。
+作为另一个例子，[发布/订阅]({{< ref "pubsub-overview.md" >}}) 构建块使用[发布/订阅组件](https://github.com/dapr/components-contrib/tree/master/pubsub)。
 
 您可以使用 `dapr components` CLI 命令查看当前托管环境中可用组件的列表。
 
@@ -66,14 +66,14 @@ Dapr 还允许用户创建自己的私有组件，称为可插拔组件。 这�
 
 ### 状态存储
 
-状态存储组件是存储键值对的数据存储（数据库、文件、内存），其作为[状态管理]({{< ref "state-management-overview\.md" >}})的构建块之一。
+状态存储组件是存储键值对的数据存储（数据库、文件、内存），其作为[状态管理]({{< ref "state-management-overview.md" >}})的构建块之一。
 
 - [状态存储列表]({{< ref supported-state-stores >}})
 - [状态存储实现](https://github.com/dapr/components-contrib/tree/master/state)
 
 ### 命名解析
 
-命名解析组件与[服务调用]({{< ref "service-invocation-overview\.md" >}})构建块配合使用，与托管环境集成以提供服务到服务的发现。 例如，Kubernetes 命名解析组件与 Kubernetes DNS 服务集成，自托管使用 mDNS，VM 集群可以使用 Consul 命名解析组件。
+命名解析组件与[服务调用]({{< ref "service-invocation-overview.md" >}})构建块配合使用，与托管环境集成以提供服务到服务的发现。 例如，Kubernetes 命名解析组件与 Kubernetes DNS 服务集成，自托管使用 mDNS，VM 集群可以使用 Consul 命名解析组件。
 
 - [名称解析组件列表]({{< ref supported-name-resolution >}})
 - [名称解析实现](https://github.com/dapr/components-contrib/tree/master/nameresolution)
@@ -87,14 +87,14 @@ Dapr 还允许用户创建自己的私有组件，称为可插拔组件。 这�
 
 ### 绑定
 
-外部资源可以连接到Dapr，以便触发应用程序上的方法或作为[绑定]({{< ref bindings-overview\.md >}})构建块的一部分从应用程序调用。
+外部资源可以连接到Dapr，以便触发应用程序上的方法或作为[绑定]({{< ref bindings-overview.md >}})构建块的一部分从应用程序调用。
 
 - [支持的绑定列表]({{< ref supported-bindings >}})
 - [绑定实现](https://github.com/dapr/components-contrib/tree/master/bindings)
 
 ### Secret stores（密钥存储）
 
-一个[秘密]({{< ref "secrets-overview\.md" >}})是任何你想保护的私人信息，以防止不需要的访问。 秘密存储用来存储可在应用中检索和使用的密钥。
+一个[秘密]({{< ref "secrets-overview.md" >}})是任何你想保护的私人信息，以防止不需要的访问。 秘密存储用来存储可在应用中检索和使用的密钥。
 
 - [支持的密钥存储列表]({{< ref supported-secret-stores >}})
 - [密钥存储实现](https://github.com/dapr/components-contrib/tree/master/secretstores)
@@ -115,21 +115,21 @@ Dapr 还允许用户创建自己的私有组件，称为可插拔组件。 这�
 
 ### Workflows
 
-一个[工作流程]({{< ref workflow-overview\.md >}})是定义可靠业务流程或数据流的自定义应用程序逻辑。 工作流组件是工作流运行时（或引擎），运行为该工作流编写的业务逻辑并将其状态存储到状态存储中。
+一个[工作流程]({{< ref workflow-overview.md >}})是定义可靠业务流程或数据流的自定义应用程序逻辑。 工作流组件是工作流运行时（或引擎），运行为该工作流编写的业务逻辑并将其状态存储到状态存储中。
 
 <!--- [List of supported workflows]()
 - [Workflow implementations](https://github.com/dapr/components-contrib/tree/master/workflows)-->
 
 ### Cryptography
 
-[加密]({{< ref cryptography-overview\.md >}})组件用于执行加密操作，包括加密和解密消息，而不会将密钥暴露给您的应用程序。
+[加密]({{< ref cryptography-overview.md >}})组件用于执行加密操作，包括加密和解密消息，而不会将密钥暴露给您的应用程序。
 
 - [支持的加密组件列表]({{< ref supported-cryptography >}})
 - [加密实现](https://github.com/dapr/components-contrib/tree/master/crypto)
 
 ### 中间件
 
-Dapr允许将自定义[中间件]({{< ref "middleware.md" >}})插入到HTTP请求处理管道中。 中间件可以在将请求路由到用户代码或将响应返回到客户端之前对 HTTP 请求执行其他操作（例如身份验证、加密和消息转换）。 中间件组件与[服务调用]({{< ref "service-invocation-overview\.md" >}})构建块一起使用。
+Dapr允许将自定义[中间件]({{< ref "middleware.md" >}})插入到HTTP请求处理管道中。 中间件可以在将请求路由到用户代码或将响应返回到客户端之前对 HTTP 请求执行其他操作（例如身份验证、加密和消息转换）。 中间件组件与[服务调用]({{< ref "service-invocation-overview.md" >}})构建块一起使用。
 
 - [支持的中间件组件列表]({{< ref supported-middleware >}})
 - [中间件实现](https://github.com/dapr/components-contrib/tree/master/middleware)

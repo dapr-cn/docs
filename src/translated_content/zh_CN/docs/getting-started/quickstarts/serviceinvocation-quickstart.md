@@ -15,7 +15,7 @@ Dapr 提供了几种服务调用方法，你可以根据你的方案选择这些
 - [使用 Multi-App Run 模板文件同时运行此示例中的所有应用程序]({{< ref "#run-using-multi-app-run" >}})，或者
 - [一次只运行一个应用程序]({{< ref "#run-one-application-at-a-time" >}})
 
-在[概述文章]({{< ref service-invocation-overview\.md >}})中了解更多关于Dapr的服务调用方法。
+在[概述文章]({{< ref service-invocation-overview.md >}})中了解更多关于Dapr的服务调用方法。
 
 ## 使用多应用程序运行
 
@@ -1468,7 +1468,7 @@ Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程
 
 ## 下一步
 
-- 在[概述文章]({{< ref service-invocation-overview\.md >}})中了解更多关于Dapr的服务调用方法。
+- 在[概述文章]({{< ref service-invocation-overview.md >}})中了解更多关于Dapr的服务调用方法。
 - 了解更多关于如何调用 Dapr 的服务调用：
   - [HTTP]({{< ref howto-invoke-discover-services.md >}}), or
   - [gRPC]({{< ref howto-invoke-services-grpc.md >}})

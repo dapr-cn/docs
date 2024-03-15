@@ -62,4 +62,4 @@ targets: # Required
 
 ## Related links
 
-[Learn more about resiliency policies and targets]({{< ref resiliency-overview\.md >}})
+[Learn more about resiliency policies and targets]({{< ref resiliency-overview.md >}})

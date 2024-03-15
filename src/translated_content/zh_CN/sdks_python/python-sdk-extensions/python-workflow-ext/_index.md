@@ -42,4 +42,4 @@ pip3 install dapr-ext-workflow-dev
 
 ## 下一步
 
-{{< button text="使用 Dapr 工作流 Python SDK 入门" page="python-workflow\.md" >}}
+{{< button text="使用 Dapr 工作流 Python SDK 入门" page="python-workflow.md" >}}

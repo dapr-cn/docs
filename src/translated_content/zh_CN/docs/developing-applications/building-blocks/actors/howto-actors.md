@@ -40,4 +40,4 @@ POST/GET/PUT/DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/meth
 
 - 请参考[Dapr SDK文档和示例]({{< ref "developing-applications/sdks/#sdk-languages" >}})。
 - [Actors API参考]({{< ref actors_api.md >}})
-- [Actors概述]({{< ref actors-overview\.md >}})
+- [Actors概述]({{< ref actors-overview.md >}})

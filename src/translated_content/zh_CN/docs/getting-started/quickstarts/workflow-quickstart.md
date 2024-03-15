@@ -7,10 +7,10 @@ description: 开始使用 Dapr 工作流构建块
 ---
 
 {{% alert title="注意" color="primary" %}}
-Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview\.md#limitations" >}}).
+Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
 {{% /alert %}}
 
-让我们来看看 Dapr 的[Workflow构建块]({{< ref workflow-overview\.md >}})。 在这个快速入门中，您将创建一个简单的控制台应用程序，以演示Dapr的工作流编程模型和工作流管理API。
+让我们来看看 Dapr 的[Workflow构建块]({{< ref workflow-overview.md >}})。 在这个快速入门中，您将创建一个简单的控制台应用程序，以演示Dapr的工作流编程模型和工作流管理API。
 
 在本指南中，您将：
 
@@ -1349,7 +1349,7 @@ func restockInventory(daprClient client.Client, inventory []InventoryItem) error
 
 ## 下一步
 
-- 使用任何编程语言[HTTP而不是SDK]({{< ref howto-manage-workflow\.md >}})设置Dapr工作流
+- 使用任何编程语言[HTTP而不是SDK]({{< ref howto-manage-workflow.md >}})设置Dapr工作流
 - 浏览更详细的 [.NET SDK 示例工作流程](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow)
 - 了解有关[Dapr 构建块的 Workflow]({{< ref workflow-overview >}})
 

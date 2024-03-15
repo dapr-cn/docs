@@ -6,7 +6,7 @@ weight: 2000
 description: 学习如何加密和解密文件
 ---
 
-现在您已经阅读了 [Dapr密码学构建块]({{< ref cryptography-overview\.md >}})，让我们通过使用SDK与密码学API一起进行演示。
+现在您已经阅读了 [Dapr密码学构建块]({{< ref cryptography-overview.md >}})，让我们通过使用SDK与密码学API一起进行演示。
 
 {{% alert title="注意" color="primary" %}}
 Dapr密码学目前处于alpha阶段。

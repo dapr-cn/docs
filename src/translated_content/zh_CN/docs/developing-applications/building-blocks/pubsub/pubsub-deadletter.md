@@ -110,5 +110,5 @@ scopes:
 
 ## 下一步
 
-- 要获取有关弹性策略的更多信息，请阅读 [弹性概述]({{< ref resiliency-overview\.md >}})。
-- 有关主题订阅的更多信息，请阅读 [声明性和编程性订阅方法]({{< ref "pubsub-overview\.md#message-subscription" >}})。
+- 要获取有关弹性策略的更多信息，请阅读 [弹性概述]({{< ref resiliency-overview.md >}})。
+- 有关主题订阅的更多信息，请阅读 [声明性和编程性订阅方法]({{< ref "pubsub-overview.md#message-subscription" >}})。

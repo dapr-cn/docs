@@ -7,10 +7,10 @@ description: 管理和运行工作流
 ---
 
 {{% alert title="注意" color="primary" %}}
-Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview\.md#limitations" >}}).
+Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
 {{% /alert %}}
 
-现在，您已经[在应用程序中编写了工作流及其活动]({{< ref howto-author-workflow\.md >}})，可以使用HTTP API调用来启动、终止和获取有关工作流的信息。 更多信息，请阅读 [工作流 API 参考]({{< ref workflow_api.md >}})。
+现在，您已经[在应用程序中编写了工作流及其活动]({{< ref howto-author-workflow.md >}})，可以使用HTTP API调用来启动、终止和获取有关工作流的信息。 更多信息，请阅读 [工作流 API 参考]({{< ref workflow_api.md >}})。
 
 {{< tabs Python JavaScript ".NET" Java Go HTTP >}}
 
@@ -18,7 +18,7 @@ Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-versi
 
 {{% codetab %}}
 
-在代码中管理工作流。 在[编写工作流]({{< ref "howto-author-workflow\.md#write-the-application" >}})指南中的工作流示例中，工作流是使用以下API在代码中注册的：
+在代码中管理工作流。 在[编写工作流]({{< ref "howto-author-workflow.md#write-the-application" >}})指南中的工作流示例中，工作流是使用以下API在代码中注册的：
 
 - **start_workflow**: 启动一个工作流实例
 - **get_workflow**: 获取工作流的状态信息
@@ -69,7 +69,7 @@ d.terminate_workflow(instance_id=instanceId, workflow_component=workflowComponen
 
 {{% codetab %}}
 
-在代码中管理工作流。 在[编写工作流]({{< ref "howto-author-workflow\.md#write-the-application" >}})指南中的工作流示例中，工作流是使用以下API在代码中注册的：
+在代码中管理工作流。 在[编写工作流]({{< ref "howto-author-workflow.md#write-the-application" >}})指南中的工作流示例中，工作流是使用以下API在代码中注册的：
 
 - **client.workflow\.start**: 启动一个工作流实例
 - **client.workflow\.get**: 获取工作流的状态信息
@@ -142,7 +142,7 @@ start().catch((e) => {
 
 {{% codetab %}}
 
-在代码中管理工作流。 在`OrderProcessingWorkflow`示例中，来自[编写工作流]({{< ref "howto-author-workflow\.md#write-the-application" >}})指南，工作流在代码中注册。 现在，您可以启动、终止正在运行的工作流程，并获取相关信息：
+在代码中管理工作流。 在`OrderProcessingWorkflow`示例中，来自[编写工作流]({{< ref "howto-author-workflow.md#write-the-application" >}})指南，工作流在代码中注册。 现在，您可以启动、终止正在运行的工作流程，并获取相关信息：
 
 ```csharp
 string orderId = "exampleOrderId";
@@ -325,7 +325,7 @@ type RaiseEventWorkflowRequest struct {
 
 {{% codetab %}}
 
-使用 HTTP 调用管理工作流。 下面的示例插入了 [编写工作流示例]({{< ref "howto-author-workflow\.md#write-the-workflow" >}}) 中的属性，并随机设置了实例 ID 号。
+使用 HTTP 调用管理工作流。 下面的示例插入了 [编写工作流示例]({{< ref "howto-author-workflow.md#write-the-workflow" >}}) 中的属性，并随机设置了实例 ID 号。
 
 ### 启动工作流
 

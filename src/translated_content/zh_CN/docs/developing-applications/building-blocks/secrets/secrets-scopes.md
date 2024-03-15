@@ -44,7 +44,7 @@ spec:
         defaultAccess: deny
 ```
 
-对于需要拒绝访问Kubernetes密钥存储的应用程序，请按照[这些说明]({{< ref kubernetes-overview\.md >}})，并将以下注解添加到应用程序pod中：
+对于需要拒绝访问Kubernetes密钥存储的应用程序，请按照[这些说明]({{< ref kubernetes-overview.md >}})，并将以下注解添加到应用程序pod中：
 
 ```yaml
 dapr.io/config: appconfig

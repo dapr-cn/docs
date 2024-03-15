@@ -93,7 +93,7 @@ func main() {
 
 ## 批量状态存储
 
-虽然需要状态存储来支持 [批量操作]({{< ref "state-management-overview\.md#bulk-read-operations" >}})，它们的实现按顺序委托给各个操作方法。
+虽然需要状态存储来支持 [批量操作]({{< ref "state-management-overview.md#bulk-read-operations" >}})，它们的实现按顺序委托给各个操作方法。
 
 ## 事务性状态存储
 

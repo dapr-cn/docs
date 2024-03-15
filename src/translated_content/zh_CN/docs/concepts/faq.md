@@ -19,7 +19,7 @@ Dapr项目的重点是性能，因为其固有的讨论是Dapr作为您的应用
 ### Dapr，Orleans 和 Service Fabric Reliable Actors之间的关系是什么?
 
 Dapr 中的 actor 基于 [Orleans](https://www.microsoft.com/research/project/orleans-virtual-actors/) 启动的相同虚拟 actor 概念，这意味着它们在调用时被激活，并在一段时间后被停用。 如果您熟悉Orleans，那你就会很熟悉Dapr中 C# 的actor。 Dapr C# Actors 基于 [Service Fabric Reliable Actors](https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-actors-introduction)（也来自 Orleans），使您能够在 Service Fabric 中使用 Reliable Actors，并将其迁移到其他托管平台，例如 Kubernetes 或其他本地环境。
-Dapr 不仅仅是 Actors。 它为您提供了一套最佳实践构建块，以构建到任何微服务应用程序中。 查看[Dapr概述]({{< ref overview\.md >}})。
+Dapr 不仅仅是 Actors。 它为您提供了一套最佳实践构建块，以构建到任何微服务应用程序中。 查看[Dapr概述]({{< ref overview.md >}})。
 
 ### Dapr 和 actor 框架之间的差异
 

@@ -7,17 +7,17 @@ description: Dapr 工作流引擎架构
 ---
 
 {{% alert title="注意" color="primary" %}}
-Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview\.md#limitations" >}}).
+Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
 {{% /alert %}}
 
-[Dapr工作流]({{< ref "workflow-overview\.md" >}})允许开发人员使用各种编程语言的普通代码定义工作流。 工作流引擎在 Dapr sidecar 中运行，并协调作为应用程序一部分部署的工作流代码。 本文介绍：
+[Dapr工作流]({{< ref "workflow-overview.md" >}})允许开发人员使用各种编程语言的普通代码定义工作流。 工作流引擎在 Dapr sidecar 中运行，并协调作为应用程序一部分部署的工作流代码。 本文介绍：
 
 - Dapr 工作流引擎的架构
 - 工作流引擎如何与应用程序代码交互
 - 工作流引擎如何融入整个 Dapr 架构
 - 不同的工作流后端如何与工作流引擎配合工作
 
-有关如何在应用程序中创建 Dapr 工作流的更多信息，请参阅 [指南：如何创建工作流]({{< ref "workflow-overview\.md" >}})。
+有关如何在应用程序中创建 Dapr 工作流的更多信息，请参阅 [指南：如何创建工作流]({{< ref "workflow-overview.md" >}})。
 
 Dapr 工作流引擎由 Dapr 的 actor 运行时提供内部支持。 下图展示了 Kubernetes 模式下的 Dapr 工作流架构：
 
@@ -137,7 +137,7 @@ Dapr 工作流在内部使用 actor 来驱动工作流的执行。 与其他 act
 
 正如 [工作流 actor](workflow-architecture.md#workflow-actors) 部分所述，工作流通过附加到历史日志来增量保存其状态。 工作流的历史日志分布在多个状态存储键上，因此每个 "检查点" 只需添加最新条目。
 
-每个检查点的大小取决于工作流在进入空闲状态前调度的并发操作的数量。 [顺序工作流]({{< ref "workflow-overview\.md#task-chaining" >}})将因此对状态存储进行较小批量更新，而[扇出/扇入工作流]({{< ref "workflow-overview\.md#fan-outfan-in" >}})将需要较大批量更新。 批处理的大小也受到工作流[调用活动]({{< ref "workflow-features-concepts.md#workflow-activities" >}})或[子工作流]({{< ref "workflow-features-concepts.md#child-workflows" >}})的输入和输出大小的影响。
+每个检查点的大小取决于工作流在进入空闲状态前调度的并发操作的数量。 [顺序工作流]({{< ref "workflow-overview.md#task-chaining" >}})将因此对状态存储进行较小批量更新，而[扇出/扇入工作流]({{< ref "workflow-overview.md#fan-outfan-in" >}})将需要较大批量更新。 批处理的大小也受到工作流[调用活动]({{< ref "workflow-features-concepts.md#workflow-activities" >}})或[子工作流]({{< ref "workflow-features-concepts.md#child-workflows" >}})的输入和输出大小的影响。
 
 <img src="/images/workflow-overview/workflow-state-store-interactions.png" width=600 alt="Diagram of workflow actor state store interactions"/>
 
@@ -207,11 +207,11 @@ spec:
 
 ## 下一步
 
-{{< button text="管理工作流程 >>" page="howto-author-workflow\.md" >}}
+{{< button text="管理工作流程 >>" page="howto-author-workflow.md" >}}
 
 ## 相关链接
 
-- [Dapr概述]({{< ref workflow-overview\.md >}})
+- [Dapr概述]({{< ref workflow-overview.md >}})
 - [Workflow API 参考文档]({{< ref workflow_api.md >}})
 - [尝试 Dapr 快速入门]({{< ref workflow-quickstart.md >}})
 - 试用以下示例:

@@ -7,7 +7,7 @@ description: 学习如何开发和编写工作流
 ---
 
 {{% alert title="注意" color="primary" %}}
-Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview\.md#limitations" >}}).
+Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
 {{% /alert %}}
 
 本文简要概述了如何创作由 Dapr 工作流引擎执行的工作流。
@@ -1095,11 +1095,11 @@ func TestActivity(ctx workflow.ActivityContext) (any, error) {
 
 现在您已经编写了工作流程，请学习如何管理它。
 
-{{< button text="管理工作流程 >>" page="howto-manage-workflow\.md" >}}
+{{< button text="管理工作流程 >>" page="howto-manage-workflow.md" >}}
 
 ## 相关链接
 
-- [Dapr概述]({{< ref workflow-overview\.md >}})
+- [Dapr概述]({{< ref workflow-overview.md >}})
 - [Workflow API 参考文档]({{< ref workflow_api.md >}})
 - 试用完整的 SDK 示例：
   - [Python示例](https://github.com/dapr/python-sdk/tree/master/examples/demo_workflow)

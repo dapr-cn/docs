@@ -6,7 +6,7 @@ weight: 100
 description: Configure Dapr retries, timeouts, and circuit breakers
 ---
 
-Dapr provides a capability for defining and applying fault tolerance resiliency policies via a [resiliency spec]({{< ref "resiliency-overview\.md#complete-example-policy" >}}). Resiliency specs are saved in the same location as components specs and are applied when the Dapr sidecar starts. The sidecar determines how to apply resiliency policies to your Dapr API calls. In self-hosted mode, the resiliency spec must be named `resiliency.yaml`. In Kubernetes Dapr finds the named resiliency specs used by your application. Within the resiliency spec, you can define policies for popular resiliency patterns, such as:
+Dapr provides a capability for defining and applying fault tolerance resiliency policies via a [resiliency spec]({{< ref "resiliency-overview.md#complete-example-policy" >}}). Resiliency specs are saved in the same location as components specs and are applied when the Dapr sidecar starts. The sidecar determines how to apply resiliency policies to your Dapr API calls. In self-hosted mode, the resiliency spec must be named `resiliency.yaml`. In Kubernetes Dapr finds the named resiliency specs used by your application. Within the resiliency spec, you can define policies for popular resiliency patterns, such as:
 
 - [Timeouts]({{< ref "policies.md#timeouts" >}})
 - [Retries/back-offs]({{< ref "policies.md#retries" >}})

@@ -141,7 +141,7 @@ spec:
 ...
 ```
 
-如果您的应用程序使用TLS连接，您可以使用`app-protocol: "https"`注解告知Dapr通过TLS调用您的应用程序（完整列表[在这里]({{< ref arguments-annotations-overview\.md >}})）。 请注意，Dapr 不会验证应用程序提供的 TLS 证书。
+如果您的应用程序使用TLS连接，您可以使用`app-protocol: "https"`注解告知Dapr通过TLS调用您的应用程序（完整列表[在这里]({{< ref arguments-annotations-overview.md >}})）。 请注意，Dapr 不会验证应用程序提供的 TLS 证书。
 
 {{% /codetab %}}
 
@@ -432,5 +432,5 @@ curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -
 
 ## 相关链接
 
-- [服务调用概述]({{< ref service-invocation-overview\.md >}})
+- [服务调用概述]({{< ref service-invocation-overview.md >}})
 - [服务调用API规范]({{< ref service_invocation_api.md >}})

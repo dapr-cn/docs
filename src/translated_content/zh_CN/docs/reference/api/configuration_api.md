@@ -257,5 +257,5 @@ A list of configuration items for a given subscription id. Configuration items c
 
 ## Next Steps
 
-- [Configuration API overview]({{< ref configuration-api-overview\.md >}})
+- [Configuration API overview]({{< ref configuration-api-overview.md >}})
 - [How-To: Manage configuration from a store]({{< ref howto-manage-configuration.md >}})

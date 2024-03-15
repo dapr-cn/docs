@@ -8,7 +8,7 @@ aliases:
   - /zh-hans/developing-applications/building-blocks/actors/actors-background
 ---
 
-现在，您已经在高级别上了解了 [actor构建块]({{< ref "actors-overview\.md" >}}) ，让我们深入探讨Dapr中包含的actor的特性和概念。
+现在，您已经在高级别上了解了 [actor构建块]({{< ref "actors-overview.md" >}}) ，让我们深入探讨Dapr中包含的actor的特性和概念。
 
 ## Actor 生命周期
 
@@ -101,5 +101,5 @@ Dapr Actor 运行时通过在回合开始时获取每个 actor 的锁并在回�
 ## 相关链接
 
 - [Actors API参考]({{< ref actors_api.md >}})
-- [Actors概述]({{< ref actors-overview\.md >}})
+- [Actors概述]({{< ref actors-overview.md >}})
 - [操作方法: 在 Dapr 中使用 virtual actors]({{< ref howto-actors.md >}})

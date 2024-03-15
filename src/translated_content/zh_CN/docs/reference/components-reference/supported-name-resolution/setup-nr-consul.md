@@ -7,7 +7,7 @@ description: Detailed information on the HashiCorp Consul name resolution compon
 
 ## Configuration format
 
-Hashicorp Consul is setup within the [Dapr Configuration]({{< ref configuration-overview\.md >}}).
+Hashicorp Consul is setup within the [Dapr Configuration]({{< ref configuration-overview.md >}}).
 
 Within the config, add a `nameResolution` spec and set the `component` field to `"consul"`.
 

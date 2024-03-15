@@ -102,7 +102,7 @@ Dapr 工作流 _创作 SDK_ 是特定于语言的 SDK，其中包含用于实现
 
 ### 直接在应用中开始使用工作流
 
-想跳过快速入门？ Not a problem. 您可以直接在应用程序中试用工作流构建模块。 在安装[Dapr命令行工具]({{< ref install-dapr-cli.md >}})之后，您可以开始使用工作流，从[如何编写工作流]({{< ref howto-author-workflow\.md >}})开始。
+想跳过快速入门？ Not a problem. 您可以直接在应用程序中试用工作流构建模块。 在安装[Dapr命令行工具]({{< ref install-dapr-cli.md >}})之后，您可以开始使用工作流，从[如何编写工作流]({{< ref howto-author-workflow.md >}})开始。
 
 ## 局限性
 

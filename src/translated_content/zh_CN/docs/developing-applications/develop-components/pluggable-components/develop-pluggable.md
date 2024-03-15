@@ -122,7 +122,7 @@ service StateStore {
 | ETag 无效  | `codes.InvalidArgument`    | 状态存储 |               |
 | 批量删除行不匹配 | `codes.Internal`           | 状态存储 |               |
 
-在[状态管理概述]({{< ref "state-management-overview\.md#concurrency" >}})中了解更多关于并发要求的信息。
+在[状态管理概述]({{< ref "state-management-overview.md#concurrency" >}})中了解更多关于并发要求的信息。
 
 以下示例演示如何在您自己的可插拔组件中返回错误，更改消息以满足您的需求。
 
@@ -315,5 +315,5 @@ st, err := st.WithDetails(br)
 ## 下一步
 
 - Get started with developing .NET pluggable component using this [sample code](https://github.com/dapr/samples/tree/master/pluggable-components-dotnet-template)
-- [查看可插拔组件概述]({{< ref pluggable-components-overview\.md >}})
+- [查看可插拔组件概述]({{< ref pluggable-components-overview.md >}})
 - [了解如何注册您的可插拔组件]({{< ref pluggable-components-registration >}})

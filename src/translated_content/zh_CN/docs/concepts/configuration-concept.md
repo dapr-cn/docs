@@ -40,7 +40,7 @@ spec:
     allowedClockSkew: "15m"
 ```
 
-访问[配置选项概述]({{\<ref "configuration-overview\.md">}})获取配置选项的列表。
+访问[配置选项概述]({{\<ref "configuration-overview.md">}})获取配置选项的列表。
 
 {{% alert title="注意" color="primary" %}}
 Dapr 应用程序和控制平面配置不应与配置构建块 API 混淆，后者使应用程序能够从配置存储组件中检索键/值数据。 阅读[配置构建块]({{< ref configuration-api-overview >}}) 以获取更多信息。

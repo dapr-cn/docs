@@ -43,7 +43,7 @@ Dapr提供了一种使用[HTTP `/healthz`端点]({{< ref health_api.md >}})来�
 
 ## 下一步
 
-- [了解更多关于弹性的信息]({{< ref resiliency-overview\.md >}})
+- [了解更多关于弹性的信息]({{< ref resiliency-overview.md >}})
 - 试一试复原力快速入门课程：
   - [弹性：服务到服务]({{< ref resiliency-serviceinvo-quickstart.md >}})
   - [状态管理：[State management\*\*]({{< ref "resiliency-state-quickstart.md" >}})]({{< ref resiliency-state-quickstart.md >}})

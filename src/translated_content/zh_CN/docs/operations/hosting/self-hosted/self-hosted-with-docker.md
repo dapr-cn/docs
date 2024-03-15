@@ -155,7 +155,7 @@ To further learn how to run Dapr with Docker Compose, see the [Docker-Compose Sa
 ## Run on Kubernetes
 
 If your deployment target is Kubernetes please use Dapr's first-class integration. Refer to the
-[Dapr on Kubernetes docs]({{< ref "kubernetes-overview\.md" >}}).
+[Dapr on Kubernetes docs]({{< ref "kubernetes-overview.md" >}}).
 
 ## Name resolution
 

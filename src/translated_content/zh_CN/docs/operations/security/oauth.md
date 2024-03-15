@@ -148,7 +148,7 @@ spec:
 ### Define a custom pipeline for a Client Credentials Grant
 
 To use the OAuth middleware (Client Credentials), you should create a [custom pipeline]({{< ref "middleware.md" >}})
-using [Dapr configuration]({{< ref "configuration-overview\.md" >}}), as shown in the following sample:
+using [Dapr configuration]({{< ref "configuration-overview.md" >}}), as shown in the following sample:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

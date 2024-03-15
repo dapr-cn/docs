@@ -916,7 +916,7 @@ func SendAlert(ctx workflow.ActivityContext) (any, error) {
 
 ## 外部系统交互
 
-在某些情况下，工作流可能需要暂停并等待外部系统执行某些操作。 例如，工作流可能需要暂停，等待收到付款。 在这种情况下，支付系统可能会在收到付款时将事件发布到发布/订阅主题，并且该主题的监听器可以使用[发起事件工作流 API]({{< ref "howto-manage-workflow\.md#raise-an-event" >}})。
+在某些情况下，工作流可能需要暂停并等待外部系统执行某些操作。 例如，工作流可能需要暂停，等待收到付款。 在这种情况下，支付系统可能会在收到付款时将事件发布到发布/订阅主题，并且该主题的监听器可以使用[发起事件工作流 API]({{< ref "howto-manage-workflow.md#raise-an-event" >}})。
 
 另一种非常常见的情况是工作流需要暂停并等待人工操作，例如在审批采购订单时。 Dapr Workflow通过[外部事件]({{< ref "workflow-features-concepts.md#external-events" >}})特性来支持这种事件模式。
 
@@ -1280,7 +1280,7 @@ func PlaceOrder(ctx workflow.ActivityContext) (any, error) {
 
 {{< /tabs >}}
 
-传递事件以恢复工作流执行的代码是工作流的外部代码。 工作流事件可通过 [raise event]({{< ref "howto-manage-workflow\.md#raise-an-event" >}}) 工作流管理 API 传递到等待中的工作流实例，如下例所示:
+传递事件以恢复工作流执行的代码是工作流的外部代码。 工作流事件可通过 [raise event]({{< ref "howto-manage-workflow.md#raise-an-event" >}}) 工作流管理 API 传递到等待中的工作流实例，如下例所示:
 
 {{< tabs Python JavaScript ".NET" Java Go >}}
 
@@ -1380,7 +1380,7 @@ func raiseEvent() {
 ## 相关链接
 
 - [尝试使用 Dapr Workflows 快速入门]({{< ref workflow-quickstart.md >}})
-- [Dapr概述]({{< ref workflow-overview\.md >}})
+- [Dapr概述]({{< ref workflow-overview.md >}})
 - [Workflow API 参考文档]({{< ref workflow_api.md >}})
 - 试用以下示例:
   - [Python](https://github.com/dapr/python-sdk/tree/master/examples/demo_workflow)

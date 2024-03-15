@@ -23,9 +23,9 @@ Two different binaries are installed:
 - `daprd`
 - `placement`
 
-The `placement` binary is needed to enable [actors]({{< ref "actors-overview\.md" >}}) in a Dapr self-hosted installation.
+The `placement` binary is needed to enable [actors]({{< ref "actors-overview.md" >}}) in a Dapr self-hosted installation.
 
-In slim init mode, no default components (such as Redis) are installed for state management or pub/sub. This means that, aside from [service invocation]({{< ref "service-invocation-overview\.md" >}}), no other building block functionality is available "out-of-the-box" on install. Instead, you can set up your own environment and custom components.
+In slim init mode, no default components (such as Redis) are installed for state management or pub/sub. This means that, aside from [service invocation]({{< ref "service-invocation-overview.md" >}}), no other building block functionality is available "out-of-the-box" on install. Instead, you can set up your own environment and custom components.
 
 Actor-based service invocation is possible if a state store is configured, as explained in the following sections.
 

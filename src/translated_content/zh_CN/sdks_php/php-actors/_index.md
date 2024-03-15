@@ -8,7 +8,7 @@ no_list: true
 ---
 
 如果您不熟悉 actor 模式，了解 actor 模式的最佳位置是
-[Actor 概述]({{< ref actors-overview\.md >}})
+[Actor 概述]({{< ref actors-overview.md >}})
 
 在 PHP SDK 中，actor 有两个方面，即客户端和 Actor(也称为运行时)。 作为 actor 的客户端，你将通过 `ActorProxy` 类与远程 actor 交互。 此类使用多个已配置策略中的一个来动态生成代理类。
 

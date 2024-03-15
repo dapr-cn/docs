@@ -54,7 +54,7 @@ description: |
 3. 创建更改
    - 代码更改需要测试
 4. 更新和更改相关的文档
-5. 提交带有[DCO签名]({{< ref "contributing-overview\.md#developer-certificate-of-origin-signing-your-work" >}})的提交并打开PR
+5. 提交带有[DCO签名]({{< ref "contributing-overview.md#developer-certificate-of-origin-signing-your-work" >}})的提交并打开PR
 6. 等待 CI 过程完成，确保所有检查均为绿色
 7. 将会分配项目的维护者，预计会在几天内审查。
 

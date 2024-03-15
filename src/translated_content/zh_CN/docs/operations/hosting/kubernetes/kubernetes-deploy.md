@@ -8,7 +8,7 @@ aliases:
   - /zh-hans/getting-started/install-dapr-kubernetes/
 ---
 
-When [setting up Dapr on Kubernetes]({{< ref kubernetes-overview\.md >}}), you can use either the Dapr CLI or Helm.
+When [setting up Dapr on Kubernetes]({{< ref kubernetes-overview.md >}}), you can use either the Dapr CLI or Helm.
 
 {{% alert title="Hybrid clusters" color="primary" %}}
 Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for nodes with the label `kubernetes.io/os=linux`. You can deploy Dapr to Windows nodes if your application requires it. For more information, see [Deploying to a hybrid Linux/Windows Kubernetes cluster]({{< ref kubernetes-hybrid-clusters >}}).

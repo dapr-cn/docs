@@ -398,8 +398,8 @@ def main():
 ```
 
 - 了解更多关于编写和管理工作流的信息：
-  - [操作方法：编写工作流]({{< ref howto-author-workflow\.md >}}).
-  - [操作方法：管理工作流]({{< ref howto-manage-workflow\.md >}}).
+  - [操作方法：编写工作流]({{< ref howto-author-workflow.md >}}).
+  - [操作方法：管理工作流]({{< ref howto-manage-workflow.md >}}).
 - 访问[Python SDK示例](https://github.com/dapr/python-sdk/blob/master/examples/demo_workflow/app.py)获取代码示例和指南，尝试使用Dapr工作流。
 
 ## 相关链接

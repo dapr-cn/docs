@@ -667,6 +667,6 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 ## 下一步
 
 - 尝试一下[pub/sub（发布/订阅）教程](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub)。
-- 了解[messaging with CloudEvents]({{< ref pubsub-cloudevents.md >}})以及您可能想要[在没有CloudEvents的情况下发送消息]({{< ref pubsub-raw\.md >}})。
+- 了解[messaging with CloudEvents]({{< ref pubsub-cloudevents.md >}})以及您可能想要[在没有CloudEvents的情况下发送消息]({{< ref pubsub-raw.md >}})。
 - 查看列表 [发布/订阅组件]({{< ref setup-pubsub >}})。
 - 阅读[API参考]({{< ref pubsub_api.md >}})。

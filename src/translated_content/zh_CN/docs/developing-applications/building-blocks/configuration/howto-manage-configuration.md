@@ -695,4 +695,4 @@ Invoke-RestMethod -Uri 'http://localhost:<DAPR_HTTP_PORT>/v1.0/configuration/con
 
 ## 下一步
 
-- 阅读[Dapr配置]({{< ref configuration-api-overview\.md >}})
+- 阅读[Dapr配置]({{< ref configuration-api-overview.md >}})

@@ -462,7 +462,7 @@ POST http://localhost:3500/v1.0-alpha1/state/myStore/query?metadata.partitionKey
 
 ## State transactions
 
-Persists the changes to the state store as a [transactional operation]({{< ref "state-management-overview\.md#transactional-operations" >}}).
+Persists the changes to the state store as a [transactional operation]({{< ref "state-management-overview.md#transactional-operations" >}}).
 
 > This API depends on a state store component that supports transactions.
 
@@ -712,5 +712,5 @@ The following is an example walk-through of an ETag usage when _setting_/_deleti
 
 ## Next Steps
 
-- [State management overview]({{< ref state-management-overview\.md >}})
+- [State management overview]({{< ref state-management-overview.md >}})
 - [How-To: Save & get state]({{< ref howto-get-save-state.md >}})

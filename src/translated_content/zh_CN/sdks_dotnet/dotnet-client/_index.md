@@ -16,7 +16,7 @@ Dapr 客户端包允许您从 .NET 应用程序中与其他 Dapr 应用程序进
 
 ## 构建块
 
-.NET SDK 允许您与所有的[Dapr构建块]({{< ref building-blocks >}})}进行接口交互。
+.NET SDK 允许您与所有的[Dapr构建块]({{< ref building-blocks >}})进行接口交互。
 
 ### 调用服务
 

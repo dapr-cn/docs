@@ -21,7 +21,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       <p class="card-text">如何通过几分钟的时间，在你的操作环境中实现 Dapr 的启动与运行</p>
       
       
-      <a href="{{< ref getting-started ></a>
+      <a href="{{< ref getting-started >}}">}}"></a>
     </div>
   </div>
   <div class="card">
@@ -30,7 +30,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       <p class="card-text">包含代码示例的教程集合，可帮助您快速开始使用 Dapr。</p>
       
       
-      <a href="{{< ref quickstarts ></a>
+      <a href="{{< ref quickstarts >}}"></a>
     </div>
   </div>
   <div class="card">
@@ -39,7 +39,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       <p class="card-text">开始了解 Dapr，包括其主要的特性及所提供的功能</p>
       
       
-      <a href="{{< ref concepts ></a>
+      <a href="{{< ref concepts >}}"></a>
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       <p class="card-text">有关如何构建 Dapr 应用的工具，提示和信息</p>
       
       
-      <a href="{{< ref developing-applications ></a>
+      <a href="{{< ref developing-applications >}}"></a>
     </div>
   </div>
   <div class="card">
@@ -62,7 +62,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       <p class="card-text">解决分布式应用程序常见开发挑战的功能。</p>
       
       
-      <a href="{{< ref building-blocks-concept ></a>
+      <a href="{{< ref building-blocks-concept >}}"></a>
     </div>
   </div>
   <div class="card">
@@ -71,7 +71,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       <p class="card-text">关于在 Dapr 上运行您的应用程序的托管选项，最佳实践和其他指南</p>
       
       
-      <a href="{{< ref operations ></a>
+      <a href="{{< ref operations >}}"></a>
     </div>
   </div>
 </div>
@@ -85,7 +85,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       <p class="card-text">关于 Dapr API，CLI，资源绑定及更多内容的详细文档</p>
       
       
-      <a href="{{< ref reference ></a>
+      <a href="{{< ref reference >}}"></a>
     </div>
   </div>
   <div class="card">
@@ -94,7 +94,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       <p class="card-text">如何为 Dapr 及其相关项目做出贡献</p>
       
       
-      <a href="{{< ref contributing ></a>
+      <a href="{{< ref contributing >}}"></a>
     </div>
   </div>
 </div>
@@ -114,7 +114,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       </p>
       
       
-      <a href="{{< ref ides ></a>
+      <a href="{{< ref ides >}}"></a>
     </div>
   </div>
 </div>
@@ -132,7 +132,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       </p>
       
       
-      <a href="{{< ref sdks ></a>
+      <a href="{{< ref sdks >}}"></a>
     </div>
   </div>
 </div>
@@ -150,7 +150,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       </p>
       
       
-      <a href="{{< ref dotnet ></a>
+      <a href="{{< ref dotnet >}}"></a>
     </div>
   </div>
   <div class="card">
@@ -165,7 +165,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       </p>
       
       
-      <a href="{{< ref python ></a>
+      <a href="{{< ref python >}}"></a>
     </div>
   </div>
   <div class="card">
@@ -180,7 +180,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       </p>
       
       
-      <a href="{{< ref js ></a>
+      <a href="{{< ref js >}}"></a>
     </div>
   </div>
 </div>
@@ -198,7 +198,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       </p>
       
       
-      <a href="{{< ref java ></a>
+      <a href="{{< ref java >}}"></a>
     </div>
   </div>
   <div class="card">
@@ -213,7 +213,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       </p>
       
       
-      <a href="{{< ref go ></a>
+      <a href="{{< ref go >}}"></a>
     </div>
   </div>
   <div class="card">
@@ -228,7 +228,7 @@ Dapr 是一个可移植的、事件驱动的运行时，它使任何开发人员
       </p>
       
       
-      <a href="{{< ref php ></a>
+      <a href="{{< ref php >}}"></a>
     </div>
   </div>
 </div>

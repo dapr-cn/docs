@@ -8,7 +8,7 @@ weight: 30
 
 本文介绍如何使用 Dapr 通过 gRPC 连接服务。
 
-通过使用 Dapr 的 gRPC 代理功能，您可以使用现有的基于 proto 的 gRPC 服务，并让流量通过 Dapr sidecar。 这样做可以为开发人员带来以下[Dapr服务调用]({{< ref service-invocation-overview\.md >}})的好处：
+通过使用 Dapr 的 gRPC 代理功能，您可以使用现有的基于 proto 的 gRPC 服务，并让流量通过 Dapr sidecar。 这样做可以为开发人员带来以下[Dapr服务调用]({{< ref service-invocation-overview.md >}})的好处：
 
 1. 双向认证
 2. 追踪
@@ -235,7 +235,7 @@ spec:
 
 `dapr.io/app-protocol: "grpc"` 注解告诉 Dapr 使用 gRPC 调用应用。
 
-如果您的应用程序使用TLS连接，您可以使用`app-protocol: "grpcs"`注解告知Dapr通过TLS调用您的应用程序（完整列表[在这里]({{< ref arguments-annotations-overview\.md >}})）。 请注意，Dapr 不会验证应用程序提供的 TLS 证书。
+如果您的应用程序使用TLS连接，您可以使用`app-protocol: "grpcs"`注解告知Dapr通过TLS调用您的应用程序（完整列表[在这里]({{< ref arguments-annotations-overview.md >}})）。 请注意，Dapr 不会验证应用程序提供的 TLS 证书。
 
 ### 命名空间
 
@@ -343,7 +343,7 @@ context.AddMetadata("dapr-stream", "true");
 
 ## 相关链接
 
-- [服务调用概述]({{< ref service-invocation-overview\.md >}})
+- [服务调用概述]({{< ref service-invocation-overview.md >}})
 - [服务调用API规范]({{< ref service_invocation_api.md >}})
 - [gRPC代理社区会议视频](https://youtu.be/B_vkXqptpXY?t=70)
 

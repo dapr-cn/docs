@@ -108,4 +108,4 @@ Watch the demo on using installing SSL certificates and securely using the HTTP 
 
 - [HTTP binding spec]({{< ref http.md >}})
 - [(Kubernetes) How-to: Mount Pod volumes to the Dapr sidecar]({{< ref kubernetes-volume-mounts.md >}})
-- [Dapr Kubernetes pod annotations spec]({{< ref arguments-annotations-overview\.md >}})
+- [Dapr Kubernetes pod annotations spec]({{< ref arguments-annotations-overview.md >}})

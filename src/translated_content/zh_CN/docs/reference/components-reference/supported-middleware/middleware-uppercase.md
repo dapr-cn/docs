@@ -45,4 +45,4 @@ spec:
 
 - [Middleware]({{< ref middleware.md >}})
 - [Configuration concept]({{< ref configuration-concept.md >}})
-- [Configuration overview]({{< ref configuration-overview\.md >}})
+- [Configuration overview]({{< ref configuration-overview.md >}})
