@@ -5,7 +5,7 @@ linkTitle: list
 description: Detailed information on the list CLI command
 ---
 
-### 说明
+### Description
 
 List all Dapr instances.
 
@@ -22,7 +22,7 @@ dapr list [flags]
 
 ### Flags
 
-| Name                     | Environment Variable | Default   | 说明                                                                                                           |
+| Name                     | Environment Variable | Default   | Description                                                                                                  |
 | ------------------------ | -------------------- | --------- | ------------------------------------------------------------------------------------------------------------ |
 | `--all-namespaces`, `-A` |                      | `false`   | List all Dapr pods in all namespaces (optional)                                           |
 | `--help`, `-h`           |                      |           | Print this help message                                                                                      |

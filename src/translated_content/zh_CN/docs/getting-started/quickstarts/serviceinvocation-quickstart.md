@@ -21,7 +21,7 @@ Dapr 提供了几种服务调用方法，你可以根据你的方案选择这些
 
 在继续快速入门之前，请选择您首选的语言。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -173,7 +173,7 @@ result = requests.post(
 )
 ```
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -318,7 +318,7 @@ const res = await axios.post(`${DAPR_HOST}:${DAPR_HTTP_PORT}/orders`, order , ax
 console.log("Order passed: " + res.config.data);
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -466,7 +466,7 @@ var response = await client.PostAsync($"{baseURL}/orders", content);
     Console.WriteLine("Order passed: " + order);
 ```
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -612,7 +612,7 @@ HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandle
 System.out.println("Order passed: "+ orderId)
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -756,7 +756,7 @@ req.Header.Add("dapr-app-id", "order-processor")
 response, err := client.Do(req)
 ```
 
-
+{{% /codetab %}}
 
 {{% /tabs %}}
 
@@ -764,7 +764,7 @@ response, err := client.Do(req)
 
 在继续快速入门之前，请选择您首选的语言。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -908,7 +908,7 @@ Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程
 == APP == Order received: {"orderId": 10}
 ```
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -1043,7 +1043,7 @@ Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程
 == APP == Order received: {"orderId": 10}
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -1183,7 +1183,7 @@ Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程
 == APP == Order received: Order { OrderId: 10 }
 ```
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -1319,7 +1319,7 @@ Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程
 == APP == Order received: 10
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -1456,7 +1456,7 @@ Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程
 == APP == Order received :  {"orderId":10}
 ```
 
-
+{{% /codetab %}}
 
 {{% /tabs %}}
 
@@ -1466,7 +1466,7 @@ Dapr 在任何 Dapr 实例上调用应用程序。 在代码中，Sidecar 编程
 
 加入我们的[discord频道](https://discord.com/channels/778680217417809931/953427615916638238)参与讨论。
 
-## Next Steps
+## 下一步
 
 - 在[概述文章]({{< ref service-invocation-overview\.md >}})中了解更多关于Dapr的服务调用方法。
 - 了解更多关于如何调用 Dapr 的服务调用：

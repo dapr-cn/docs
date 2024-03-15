@@ -78,7 +78,7 @@ dapr run --app-id wfapp --dapr-grpc-port 4001 --dapr-http-port 3500
 
 运行以下命令以启动工作流。
 
-
+{{< tabs "Linux/MacOS" "Windows">}}
 
 {{% codetab %}}
 
@@ -88,7 +88,7 @@ curl -i -X POST http://localhost:3500/v1.0-beta1/workflows/dapr/OrderProcessingW
   -d '{"Name": "Paperclips", "TotalCost": 99.95, "Quantity": 1}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -98,7 +98,7 @@ curl -i -X POST http://localhost:3500/v1.0-beta1/workflows/dapr/OrderProcessingW
   -d '{"Name": "Paperclips", "TotalCost": 99.95, "Quantity": 1}'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

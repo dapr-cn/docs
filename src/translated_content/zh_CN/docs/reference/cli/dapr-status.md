@@ -5,7 +5,7 @@ linkTitle: status
 description: Detailed information on the status CLI command
 ---
 
-### 说明
+### Description
 
 Show the health status of Dapr services.
 
@@ -21,7 +21,7 @@ dapr status -k
 
 ### Flags
 
-| Name                 | Environment Variable | Default | 说明                                                            |
+| Name                 | Environment Variable | Default | Description                                                   |
 | -------------------- | -------------------- | ------- | ------------------------------------------------------------- |
 | `--help`, `-h`       |                      |         | Print this help message                                       |
 | `--kubernetes`, `-k` |                      | `false` | Show the health status of Dapr services on Kubernetes cluster |

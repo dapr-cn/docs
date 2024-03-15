@@ -14,7 +14,7 @@ For more information on different types of Volumes, check the [Kubernetes docume
 
 You can set the following annotations in your deployment YAML:
 
-| Annotation                 | 说明                           |
+| Annotation                 | Description                  |
 | -------------------------- | ---------------------------- |
 | `dapr.io/volume-mounts`    | For read-only volume mounts  |
 | `dapr.io/volume-mounts-rw` | For read-write volume mounts |
@@ -25,7 +25,7 @@ Within the official container images, Dapr runs as a process with user ID (UID) 
 
 Although you can mount a Volume in any folder within the Dapr sidecar container, prevent conflicts and ensure smooth operations going forward by placing all mountpoints within one of the following locations, or in a subfolder within them:
 
-| Location | 说明                                                                                                      |
+| Location | Description                                                                                             |
 | -------- | ------------------------------------------------------------------------------------------------------- |
 | `/mnt`   | Recommended for Volumes containing persistent data that the Dapr sidecar process can read and/or write. |
 | `/tmp`   | Recommended for Volumes containing temporary data, such as scratch disks.                               |
@@ -127,6 +127,6 @@ Since any type of Kubernetes Volume can be attached to the sidecar, you can use 
    GET http://localhost:<daprPort>/v1.0/secrets/local-secret-store/my-secret
    ```
 
-## 相关链接
+## Related links
 
 [Dapr Kubernetes pod annotations spec]({{< ref arguments-annotations-overview\.md >}})

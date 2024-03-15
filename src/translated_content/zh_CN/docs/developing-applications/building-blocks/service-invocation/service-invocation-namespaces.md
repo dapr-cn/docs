@@ -39,7 +39,7 @@ https://localhost:3500/v1.0/invoke/myapp.production/method/ping
 
 使用来自外部 DNS 地址（在本例中为 `api.demo.dapr.team`）的 curl 命令调用与示例 2 相同的 `ping` 方法，并提供 Dapr API 令牌进行身份验证：
 
-MacOS/Linux:
+MacOS/Linux：
 
 ```
 curl -i -d '{ "message": "hello" }' \

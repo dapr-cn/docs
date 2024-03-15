@@ -69,7 +69,7 @@ description: 了解如何使用Managed Identities
 
 以下示例演示在Azure KeyVault secrets组件中设置系统管理或用户分配的身份。
 
-
+{{< tabs "System-managed" "User-assigned" "Kubernetes" >}}
 
  <!-- system managed -->
 
@@ -92,7 +92,7 @@ spec:
 
 在这个示例中，系统管理的身份查找服务身份并与`mykeyvault`保险库进行通信。 接下来，将您的系统托管标识授予所需服务的访问权限。
 
-
+{{% /codetab %}}
 
  <!-- user assigned -->
 
@@ -117,7 +117,7 @@ spec:
 
 一旦您在组件的YAML中设置了`azureClientId`属性，您可以授予您的用户分配的身份对您的服务的访问权限。
 
-
+{{% /codetab %}}
 
  <!-- k8s -->
 
@@ -125,7 +125,7 @@ spec:
 
 对于在Kubernetes或AKS中的组件配置，请参考[Workload Identity指南](https://learn.microsoft.com/azure/aks/workload-identity-overview?tabs=dotnet)。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

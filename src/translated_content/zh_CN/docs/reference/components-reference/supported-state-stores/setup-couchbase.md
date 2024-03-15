@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field        | Required | Details                         | 如何使用Dapr扩展来开发和运行Dapr应用程序  |
+| Field        | Required | Details                         | Example                   |
 | ------------ | :------: | ------------------------------- | ------------------------- |
 | couchbaseURL |     Y    | The URL of the Couchbase server | `"http://localhost:8091"` |
 | username     |     Y    | The username for the database   | `"user"`                  |
@@ -45,7 +45,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Setup Couchbase
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 You can run Couchbase locally using Docker:
@@ -66,11 +66,11 @@ helm install couchbase/couchbase-operator
 helm install couchbase/couchbase-cluster
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

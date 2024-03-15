@@ -54,7 +54,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                         | Required | Binding support | Details                                                                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                   |
+| Field                         | Required | Binding support | Details                                                                                                                                                                                                                                                                         | Example                                                                                    |
 | ----------------------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `bucket`                      |     Y    | Output          | The bucket name                                                                                                                                                                                                                                                                 | `"mybucket"`                                                                               |
 | `type`                        |     Y    | Output          | Tge GCP credentials type                                                                                                                                                                                                                                                        | `"service_account"`                                                                        |
@@ -101,13 +101,15 @@ The metadata parameters are:
 
 ##### Save text to a random generated UUID file
 
-
+{{< tabs Windows Linux >}}
+{{% codetab %}}
+On Windows, utilize cmd prompt (PowerShell has different escaping mechanism)
 
 ```bash
 curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -116,13 +118,13 @@ curl -d '{ "operation": "create", "data": "Hello World" }' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ##### Save text to a specific file
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -131,7 +133,7 @@ curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\", \"metadata\": {
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -140,7 +142,7 @@ curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "key": "m
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -150,7 +152,7 @@ To upload a file, pass the file contents as the data payload; you may want to en
 
 Then you can upload it as you would normally:
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -158,7 +160,7 @@ Then you can upload it as you would normally:
 curl -d "{ \"operation\": \"create\", \"data\": \"(YOUR_FILE_CONTENTS)\", \"metadata\": { \"key\": \"my-test-file.jpg\" } }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -167,7 +169,7 @@ curl -d '{ "operation": "create", "data": "$(cat my-test-file.jpg)", "metadata":
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -199,9 +201,9 @@ The metadata parameters are:
 - `key` - the name of the object
 - `encodeBase64` - (optional) configuration to encode base64 file content before return the content.
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -209,7 +211,7 @@ The metadata parameters are:
 curl -d '{ \"operation\": \"get\", \"metadata\": { \"key\": \"my-test-file.txt\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -218,7 +220,7 @@ curl -d '{ "operation": "get", "metadata": { "key": "my-test-file.txt" }}' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -247,7 +249,7 @@ The metadata parameters are:
 
 ##### Delete object
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -255,7 +257,7 @@ The metadata parameters are:
 curl -d '{ \"operation\": \"delete\", \"metadata\": { \"key\": \"my-test-file.txt\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -264,7 +266,7 @@ curl -d '{ "operation": "delete", "metadata": { "key": "my-test-file.txt" }}' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -334,7 +336,7 @@ The list of objects will be returned as JSON array in the following form:
 ]
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

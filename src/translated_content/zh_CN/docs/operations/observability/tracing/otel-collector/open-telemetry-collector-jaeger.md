@@ -47,7 +47,7 @@ spec:
 ```
 
 To launch the application referring to the new YAML configuration file, use
-the `--config` option. For example:
+the `--config` option. 例如：
 
 ```bash
 dapr run --app-id myapp --app-port 3000 node app.js --config config.yaml
@@ -134,7 +134,8 @@ kubectl port-forward svc/jaeger-query 16686 -n observability
 
 In your browser, go to `http://localhost:16686` and you will see the Jaeger UI.
 
-
+![jaeger](/images/jaeger_ui.png)
+{{% /codetab %}}
 
 {{< /tabs >}}
 

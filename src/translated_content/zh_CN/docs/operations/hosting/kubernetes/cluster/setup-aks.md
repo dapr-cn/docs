@@ -56,7 +56,7 @@ To create a single-machine K8s/K3s Linux-only cluster using Azure Kubernetes Ser
 AKS Edge Essentials does not come with a default storage class, which may cause issues when deploying Dapr. To avoid this, make sure to enable the **local-path-provisioner** storage class on the cluster before deploying Dapr. If you need more information, refer to [Local Path Provisioner on AKS EE](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-howto-use-storage-local-path).
 {{% /alert %}}
 
-## 相关链接
+## Related links
 
 - Learn more about [the Dapr extension for AKS]({{< ref azure-kubernetes-service-extension >}})
   - [Install the Dapr extension for AKS](https://learn.microsoft.com/azure/aks/dapr)

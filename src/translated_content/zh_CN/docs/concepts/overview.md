@@ -1,7 +1,7 @@
 ---
 type: docs
-title: Overview
-linkTitle: Overview
+title: 概述
+linkTitle: 概述
 weight: 100
 description: |
   分布式应用运行时介绍

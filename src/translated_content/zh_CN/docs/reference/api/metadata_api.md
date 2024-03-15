@@ -17,7 +17,7 @@ Dapr has a metadata API that returns information about the sidecar allowing runt
 
 ## Metadata API
 
-### Components
+### 组件
 
 Each loaded component provides its name, type and version and also information about supported features in the form of component capabilities.
 These features are available for the [state store]({{< ref supported-state-stores.md >}}) and [binding]({{< ref supported-bindings.md >}}) component types. The table below shows the component type and the list of capabilities for a given version. This list might grow in future and only represents the capabilities of the loaded components.
@@ -51,7 +51,7 @@ The metadata API allows you to store additional attribute information in the for
 
 Gets the Dapr sidecar information provided by the Metadata Endpoint.
 
-### Usecase:
+### 使用案例：
 
 The Get Metadata API can be used for discovering different capabilities supported by loaded components. It can help operators in determining which components to provision, for required capabilities.
 
@@ -63,13 +63,13 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 ### URL Parameters
 
-| Parameter | 说明             |
+| Parameter | Description    |
 | --------- | -------------- |
 | daprPort  | The Dapr port. |
 
 ### HTTP Response Codes
 
-| Code | 说明                                             |
+| Code | Description                                    |
 | ---- | ---------------------------------------------- |
 | 200  | Metadata information returned                  |
 | 500  | Dapr could not return the metadata information |
@@ -78,7 +78,7 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 **Metadata API Response Object**
 
-| Name                    | Type                                                                                                                         | 说明                                                                                                                   |
+| Name                    | Type                                                                                                                         | Description                                                                                                          |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | id                      | string                                                                                                                       | Application ID                                                                                                       |
 | runtimeVersion          | string                                                                                                                       | Version of the Dapr runtime                                                                                          |
@@ -92,14 +92,14 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 <a id="metadataapiresponseactor"></a>**Metadata API Response Registered Actor**
 
-| Name  | Type    | 说明                         |
+| Name  | Type    | Description                |
 | ----- | ------- | -------------------------- |
 | type  | string  | The registered actor type. |
 | count | integer | Number of actors running.  |
 
 <a id="metadataapiresponsecomponent"></a>**Metadata API Response Component**
 
-| Name         | Type   | 说明                                                          |
+| Name         | Type   | Description                                                 |
 | ------------ | ------ | ----------------------------------------------------------- |
 | name         | string | Name of the component.                                      |
 | type         | string | Component type.                                             |
@@ -108,13 +108,13 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 <a id="metadataapiresponsehttpendpoint"></a>**Metadata API Response HttpEndpoint**
 
-| Name | Type   | 说明                        |
+| Name | Type   | Description               |
 | ---- | ------ | ------------------------- |
 | name | string | Name of the HttpEndpoint. |
 
 <a id="metadataapiresponsesubscription"></a>**Metadata API Response Subscription**
 
-| Name            | Type                                                                                                                                    | 说明                                              |
+| Name            | Type                                                                                                                                    | Description                                     |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | pubsubname      | string                                                                                                                                  | Name of the pub/sub.                            |
 | topic           | string                                                                                                                                  | Topic name.                                     |
@@ -124,14 +124,14 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 <a id="metadataapiresponsesubscriptionrules"></a>**Metadata API Response Subscription Rules**
 
-| Name  | Type   | 说明                                                                                                                                                                 |
+| Name  | Type   | Description                                                                                                                                                        |
 | ----- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | match | string | CEL expression to match the message, see https\://docs.dapr.io/developing-applications/building-blocks/pubsub/howto-route-messages/#common-expression-language-cel |
 | path  | string | Path to route the message if the match expression is true.                                                                                                         |
 
 <a id="metadataapiresponseappconnectionproperties"></a>**Metadata API Response AppConnectionProperties**
 
-| Name           | Type                                                                                                      | 说明                                                        |
+| Name           | Type                                                                                                      | Description                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | port           | integer                                                                                                   | Port on which the app is listening.                       |
 | protocol       | string                                                                                                    | Protocol used by the app.                                 |
@@ -141,7 +141,7 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 <a id="metadataapiresponseappconnectionpropertieshealth"></a>**Metadata API Response AppConnectionProperties Health**
 
-| Name                | Type    | 说明                                                                         |
+| Name                | Type    | Description                                                                |
 | ------------------- | ------- | -------------------------------------------------------------------------- |
 | healthCheckPath     | string  | Health check path, applicable for HTTP protocol.                           |
 | healthProbeInterval | string  | Time between each health probe, in go duration format.                     |
@@ -227,7 +227,7 @@ curl http://localhost:3500/v1.0/metadata
 
 Adds a custom label to the Dapr sidecar information stored by the Metadata endpoint.
 
-### Usecase:
+### 使用案例：
 
 The metadata endpoint is, for example, used by the Dapr CLI when running dapr in self hosted mode to store the PID of the process hosting the sidecar and store the command used to run the application.  Applications can also add attributes as keys after startup.
 
@@ -239,7 +239,7 @@ PUT http://localhost:<daprPort>/v1.0/metadata/attributeName
 
 ### URL Parameters
 
-| Parameter     | 说明                                                                  |
+| Parameter     | Description                                                         |
 | ------------- | ------------------------------------------------------------------- |
 | daprPort      | The Dapr port.                                                      |
 | attributeName | Custom attribute name. This is they key name in the key-value pair. |
@@ -262,7 +262,7 @@ attributeValue
 
 ### HTTP Response Codes
 
-| Code | 说明                                                 |
+| Code | Description                                        |
 | ---- | -------------------------------------------------- |
 | 204  | Custom attribute added to the metadata information |
 

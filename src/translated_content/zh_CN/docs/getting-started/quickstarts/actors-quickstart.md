@@ -10,7 +10,7 @@ description: 开始使用 Dapr 的 Actors 构建块
 
 当前，您可以使用.NET SDK来体验 actor 的快速入门。
 
-
+{{< tabs ".NET" >}}
 
  <!-- .NET -->
 
@@ -243,7 +243,7 @@ dapr run --app-id actorclient -- dotnet run
 - [`ISmartDevice`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/interfaces/ISmartDevice.cs): 每个`SmartDetectorActor`的方法定义和共享数据类型
 - [`IController`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/interfaces/IController.cs): `ControllerActor`的方法定义和共享数据类型
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

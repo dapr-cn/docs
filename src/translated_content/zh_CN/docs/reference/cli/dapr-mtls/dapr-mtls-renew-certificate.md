@@ -6,7 +6,7 @@ description: Detailed information on the mtls renew certificate CLI command
 weight: 3000
 ---
 
-### 说明
+### Description
 
 This command can be used to renew expiring Dapr certificates. For example the Dapr Sentry service can generate default root and issuer certificates used by applications. For more information see [secure Dapr to Dapr communication]({{< ref "#secure-dapr-to-dapr-communication" >}})
 
@@ -22,7 +22,7 @@ dapr mtls renew-certificate [flags]
 
 ### Flags
 
-| Name                          | Environment Variable | Default  | 说明                                                                                                              |   |
+| Name                          | Environment Variable | Default  | Description                                                                                                     |   |
 | ----------------------------- | -------------------- | -------- | --------------------------------------------------------------------------------------------------------------- | - |
 | `--help`, `-h`                |                      |          | help for renew-certificate                                                                                      |   |
 | `--kubernetes`, `-k`          |                      | `false`  | supported platform                                                                                              |   |

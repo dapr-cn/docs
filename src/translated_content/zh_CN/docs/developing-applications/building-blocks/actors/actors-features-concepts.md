@@ -70,7 +70,7 @@ POST/GET/PUT/DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/<met
 
 请参考[Dapr Actor 功能]({{< ref howto-actors.md >}})了解更多详情。
 
-### Concurrency
+### 并发
 
 Dapr Actor 运行时提供了一个简单的基于回合的访问模型，用于访问 Actor 方法。 这意味着任何时候都不能有一个以上的线程在一个 actor 对象的代码内活动。 基于回合的访问大大简化了并发系统，因为不需要同步数据访问机制。 这也意味着系统的设计必须考虑到每个 actor 实例的单线程访问性质。
 

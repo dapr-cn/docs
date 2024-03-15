@@ -244,7 +244,7 @@ Tracing and metrics are enabled in Dapr by default. It's recommended that you se
 
 If you already have your own observability setup, you can disable tracing and metrics for Dapr.
 
-### Tracing
+### 追踪
 
 [Configure a tracing backend for Dapr]({{< ref "setup-tracing.md" >}}).
 
@@ -275,7 +275,7 @@ Watch this video for a deep dive into the best practices for running Dapr in pro
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="360" height="315" src="https://www.youtube-nocookie.com/embed/_U9wJqq-H1g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## 相关链接
+## Related links
 
 - [Deploy Dapr on Kubernetes]({{< ref kubernetes-deploy.md >}})
 - [Upgrade Dapr on Kubernetes]({{< ref kubernetes-upgrade.md >}})

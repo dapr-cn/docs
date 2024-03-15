@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 工作流程概述
-linkTitle: Overview
+linkTitle: 概述
 weight: 1000
 description: Dapr 工作流程概述
 ---

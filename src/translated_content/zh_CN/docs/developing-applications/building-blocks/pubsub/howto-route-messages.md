@@ -40,7 +40,7 @@ scopes:
 
 在编程式订阅的方法中，返回的是 `routes` 结构而不是 `route`。 JSON 结构与声明性 YAML 相匹配
 
-
+{{< tabs Python Node "C#" Go PHP>}}
 
 {{% codetab %}}
 
@@ -83,7 +83,7 @@ def ds_subscriber():
 app.run()
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -125,7 +125,7 @@ app.post('/products', (req, res) => {
 app.listen(port, () => console.log(`consumer app listening on port ${port}!`))
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -155,7 +155,7 @@ app.listen(port, () => console.log(`consumer app listening on port ${port}!`))
         }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -223,7 +223,7 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -252,7 +252,7 @@ $app->post('/products', function(
 $app->start();
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -441,7 +441,7 @@ event.type == "mymessage.v2"
   - 如果存在，必须是一个非空的字符串
 
 - **示例：**\
-  订阅者可能会在一个 blob-storage 容器内创建新的 blob 时注册兴趣。 In this case:
+  订阅者可能会在一个 blob-storage 容器内创建新的 blob 时注册兴趣。 本例中：
   - 事件的 `source` 用于标识订阅范围（存储容器）
   - 事件 `type` 用于标识“blob created”事件
   - 事件的 `id` 是唯一标识事件实例的，用于区分同名 blob 的独立创建的发生次数。
@@ -461,7 +461,7 @@ event.type == "mymessage.v2"
 目前，不支持对时间的比较（如 "现在"之前或之后）。
 {{% /alert %}}
 
-## Community call demo
+## 社区示例
 
 查看[此视频](https://www.youtube.com/watch?v=QqJgRmbH82I\&t=1063s)以了解如何使用发布/订阅进行消息路由：
 

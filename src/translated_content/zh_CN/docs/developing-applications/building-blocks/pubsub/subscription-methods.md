@@ -44,7 +44,7 @@ scopes:
 
 在运行 Dapr 时，将 YAML 组件文件路径设置为指向组件的 Dapr。
 
-
+{{< tabs ".NET" Java Python JavaScript Go Kubernetes>}}
 
 {{% codetab %}}
 
@@ -52,7 +52,7 @@ scopes:
 dapr run --app-id myapp --resources-path ./myComponents -- dotnet run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -60,7 +60,7 @@ dapr run --app-id myapp --resources-path ./myComponents -- dotnet run
 dapr run --app-id myapp --resources-path ./myComponents -- mvn spring-boot:run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -68,7 +68,7 @@ dapr run --app-id myapp --resources-path ./myComponents -- mvn spring-boot:run
 dapr run --app-id myapp --resources-path ./myComponents -- python3 app.py
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -76,7 +76,7 @@ dapr run --app-id myapp --resources-path ./myComponents -- python3 app.py
 dapr run --app-id myapp --resources-path ./myComponents -- npm start
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -84,7 +84,7 @@ dapr run --app-id myapp --resources-path ./myComponents -- npm start
 dapr run --app-id myapp --resources-path ./myComponents -- go run app.go
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -94,13 +94,13 @@ dapr run --app-id myapp --resources-path ./myComponents -- go run app.go
 kubectl apply -f subscription.yaml
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 在您的应用程序代码中，订阅 Dapr pub/sub 组件中指定的主题。
 
-
+{{< tabs ".NET" Java Python JavaScript Go >}}
 
 {{% codetab %}}
 
@@ -113,7 +113,7 @@ public void getCheckout([FromBody] int orderId)
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -131,7 +131,7 @@ public Mono<Void> getCheckout(@RequestBody(required = false) CloudEvent<String> 
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -145,7 +145,7 @@ def checkout(event: v1.Event) -> None:
     logging.info('Subscriber received: ' + str(data))
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -162,7 +162,7 @@ app.post('/checkout', (req, res) => {
 });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -180,7 +180,7 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -194,7 +194,7 @@ func eventHandler(ctx context.Context, e *common.TopicEvent) (retry bool, err er
 
 在下面的示例中，您将在应用程序代码中定义在[声明性YAML订阅](#declarative-subscriptions)上方找到的值。
 
-
+{{< tabs ".NET" Java Python JavaScript Go>}}
 
 {{% codetab %}}
 
@@ -227,7 +227,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -247,7 +247,7 @@ public Mono<Void> handleMessage(@RequestBody(required = false) CloudEvent<String
   });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -277,7 +277,7 @@ def ds_subscriber():
 app.run()
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -315,7 +315,7 @@ app.post('/orders', (req, res) => {
 app.listen(port, () => console.log(`consumer app listening on port ${port}!`))
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -379,17 +379,17 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## Next Steps
+## 下一步
 
 - 尝试[Pub/Sub快速入门]({{< ref pubsub-quickstart.md >}})
 - 跟随：[操作方法：使用多个命名空间配置pub/sub组件]({{< ref pubsub-namespaces.md >}})
 - 详细了解[声明式和程序化订阅方法]({{< ref subscription-methods >}})。
-- Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
+- 了解[topic范围]({{< ref pubsub-scopes.md >}})
 - 了解关于[消息TTL]({{< ref pubsub-message-ttl.md >}})
 - 详细了解 [Pub/sub（发布/订阅）与CloudEvent的发布/订阅]({{< ref pubsub-cloudevents.md >}})
-- List of [pub/sub components]({{< ref supported-pubsub.md >}})
+- 支持的[发布/订阅组件]({{< ref supported-pubsub.md >}})
 - 阅读[pub/sub API参考]({{< ref pubsub_api.md >}})

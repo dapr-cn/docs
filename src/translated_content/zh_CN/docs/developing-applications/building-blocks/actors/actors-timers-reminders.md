@@ -162,7 +162,9 @@ DELETE http://localhost:3500/v1.0/actors/<actorType>/<actorId>/reminders/<name>
 
 Actor提醒数据默认以JSON序列化。 Dapr v1.13及以上版本支持使用protobuf序列化格式来处理提醒数据，这可以根据吞吐量和负载大小带来显著的性能提升，使开发人员能够获得更高的吞吐量和更低的延迟。 另一个好处是将较小的数据存储在 actor 底层数据库中，这可以在使用某些云数据库时实现成本优化。 使用protobuf序列化的限制是无法再查询提醒数据。
 
-
+{{% alert title="Note" color="primary" %}}
+Protobuf serialization will become the default format in Dapr 1.14
+{{% /alert %}}
 
 在 Dapr 1.12.x 及之前的版本中，以 protobuf 格式保存的提醒数据无法读取。 建议在 Dapr v1.13 中测试此功能，并在将其投入生产之前，验证它与您的数据库是否按预期工作。
 

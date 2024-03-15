@@ -34,7 +34,7 @@ specs:
         circuitBreaker: general
 ```
 
-#### Components
+#### 组件
 
 With the `components` target, you can apply `retry`, `timeout` and `circuitBreaker` policies to component operations.
 
@@ -116,7 +116,7 @@ When using a `circuitBreaker` policy for the `actors` target, you can specify ho
 
 You can also specify a cache size for the number of circuit breakers to keep in memory with the `circuitBreakerCacheSize` property, providing an integer value, e.g. `5000`.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序
+Example
 
 ```yaml
 spec:
@@ -132,7 +132,7 @@ spec:
 
 ## 下一步
 
-试一试复原力快速入门课程：
+Try out one of the Resiliency quickstarts:
 
-- [弹性：服务到服务]({{< ref resiliency-serviceinvo-quickstart.md >}})
-- [状态管理：[State management\*\*]({{< ref "resiliency-state-quickstart.md" >}})]({{< ref resiliency-state-quickstart.md >}})
+- [Resiliency: Service-to-service]({{< ref resiliency-serviceinvo-quickstart.md >}})
+- [Resiliency: State Management]({{< ref resiliency-state-quickstart.md >}})

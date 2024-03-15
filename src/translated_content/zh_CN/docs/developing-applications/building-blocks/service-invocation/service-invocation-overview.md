@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 服务调用概述
-linkTitle: Overview
+linkTitle: 概述
 weight: 10
 description: 服务调用 API 构建块概述
 ---
@@ -16,7 +16,7 @@ description: 服务调用 API 构建块概述
 - **缓解请求超时或失败。** 如何处理重试和暂时性错误？
 - **实施可观测性和跟踪。** 如何使用跟踪来查看具有指标的调用图，以诊断生产中的问题？
 
-## Service invocation API
+## 服务调用API
 
 Dapr 通过提供一个类似于具有内置服务发现的反向代理的服务调用 API 来解决这些挑战，同时利用内置的分布式跟踪、metrics、错误处理、加密等功能。
 
@@ -87,7 +87,7 @@ Dapr 使用 Sidecar 架构。 使用 Dapr 调用应用程序:
 
 Dapr 使用 mDNS 协议提供轮询负载均衡的服务调用请求，例如用于本地或多个联网的物理机器。
 
-下面的图表显示了这个工作原理的一个例子。 如果您有1个应用程序实例，其中包含app ID为`FrontEnd`，以及3个app ID为`Cart`的应用程序实例，并且您从`FrontEnd`应用程序调用`Cart`应用程序，Dapr会在这3个实例之间进行轮询。 这些实例可以在同一机器上或不同的机器上。 。
+下面的图表显示了这个工作原理的一个例子。 如果您有1个应用程序实例，其中包含app ID为`FrontEnd`，以及3个app ID为`Cart`的应用程序实例，并且您从`FrontEnd`应用程序调用`Cart`应用程序，Dapr会在这3个实例之间进行轮询。 这些实例可以在同一机器上或不同的机器上。 .
 
 <img src="/images/service-invocation-mdns-round-robin.png" width=600 alt="Diagram showing the steps of service invocation" style="padding-bottom:25px;">
 

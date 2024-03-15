@@ -48,7 +48,7 @@ When a request arrives without a trace ID, Dapr creates a new one. Otherwise, it
 
 These are the specific trace context headers that are generated and propagated by Dapr for HTTP and gRPC.
 
-
+{{< tabs "HTTP" "gRPC" >}}
 
  <!-- HTTP -->
 
@@ -76,7 +76,7 @@ tracestate: congo=t61rcWkgMzE
 
 [Learn more about the tracestate fields details](https://www.w3.org/TR/trace-context/#tracestate-header).
 
-
+{{% /codetab %}}
 
  <!-- gRPC -->
 
@@ -84,7 +84,7 @@ tracestate: congo=t61rcWkgMzE
 
 In the gRPC API calls, trace context is passed through `grpc-trace-bin` header.
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

@@ -74,7 +74,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field             |        Required        | Details                                                                                                                                                                                                                                                                                                                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                   |
+| Field             |        Required        | Details                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                                    |
 | ----------------- | :--------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | connectionString  |           Y\*          | The RabbitMQ connection string. \*Mutally exclusive with protocol, hostname, username, password field                                                                                                                                                                                                                                                                         | `amqp://user:pass@localhost:5672`                                                          |
 | protocol          |           N\*          | The RabbitMQ protocol. \*Mutally exclusive with connectionString field                                                                                                                                                                                                                                                                                                        | `amqp`                                                                                     |
@@ -105,7 +105,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Communication using TLS
 
-To configure communication using TLS, ensure that the RabbitMQ nodes have TLS enabled and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. For example:
+To configure communication using TLS, ensure that the RabbitMQ nodes have TLS enabled and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. 例如：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -174,7 +174,7 @@ There is a crucial difference between the two ways to retry messages:
 
 ## Create a RabbitMQ server
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 You can run a RabbitMQ server locally using Docker:
@@ -199,7 +199,8 @@ This will install RabbitMQ into the `default` namespace. To interact with Rabbit
 
 For example, if installing using the example above, the RabbitMQ server client address would be:
 
-
+`rabbitmq.default.svc.cluster.local:5672`
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -275,7 +276,7 @@ spec:
 
 ### Programmatic priority queue example
 
-
+{{< tabs Python JavaScript Go>}}
 
 {{% codetab %}}
 
@@ -295,7 +296,7 @@ def subscribe():
     return jsonify(subscriptions)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -323,7 +324,7 @@ app.get('/dapr/subscribe', (req, res) => {
 })
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -367,7 +368,7 @@ func configureSubscribeHandler(w http.ResponseWriter, _ *http.Request) {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -375,7 +376,7 @@ func configureSubscribeHandler(w http.ResponseWriter, _ *http.Request) {
 
 To set a priority on a message, add the publish metadata key `maxPriority` to the publish endpoint or SDK method.
 
-
+{{< tabs "HTTP API (Bash)" Python JavaScript Go>}}
 
 {{% codetab %}}
 
@@ -383,7 +384,7 @@ To set a priority on a message, add the publish metadata key `maxPriority` to th
 curl -X POST http://localhost:3601/v1.0/publish/order-pub-sub/orders?metadata.priority=3 -H "Content-Type: application/json" -d '{"orderId": "100"}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -397,7 +398,7 @@ with DaprClient() as client:
             metadata= { 'priority': '3' })
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -405,7 +406,7 @@ with DaprClient() as client:
 await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId, { 'priority': '3' });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -413,7 +414,7 @@ await client.pubsub.publish(PUBSUB_NAME, TOPIC_NAME, orderId, { 'priority': '3' 
 client.PublishEvent(ctx, PUBSUB_NAME, TOPIC_NAME, []byte(strconv.Itoa(orderId)), map[string]string{"priority": "3"})
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -443,7 +444,7 @@ You can set a time-to-live (TTL) value at either the message or component level.
 If you set both component-level and message-level TTL, the default component-level TTL is ignored in favor of the message-level TTL.
 {{% /alert %}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}}) in the Related links section
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

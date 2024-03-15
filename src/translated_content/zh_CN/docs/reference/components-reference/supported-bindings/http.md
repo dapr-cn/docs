@@ -46,7 +46,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field                 | Required | Binding support | Details                                                                                                                                   | 如何使用Dapr扩展来开发和运行Dapr应用程序                                   |                                                                        |                                                          |
+| Field                 | Required | Binding support | Details                                                                                                                                   | Example                                                    |                                                                        |                                                          |
 | --------------------- | :------: | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------- |
 | `url`                 |     Y    | Output          | The base URL of the HTTP endpoint to invoke                                                                                               | `http://host:port/path`, `http://myservice:8000/customers` |                                                                        |                                                          |
 | `maxResponseBodySize` |     N    | Output          | Maximum length of the response to read. A whole number is interpreted as bytes; units such as `Ki, Mi, Gi` (SI) or \`k | M                                                          | G`(decimal) can be added for convenience. The default value is`100Mi\` | "1Gi", "100Mi", "20Ki", "200" (bytes) |
@@ -110,7 +110,7 @@ This component supports **output binding** with the following [HTTP methods/verb
 
 All of the operations above support the following metadata fields
 
-| Field                                 | Required | Details                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序              |
+| Field                                 | Required | Details                                                                 | Example                               |
 | ------------------------------------- | :------: | ----------------------------------------------------------------------- | ------------------------------------- |
 | `path`                                |     N    | The path to append to the base URL. Used for accessing specific URIs.   | `"/1234"`, `"/search?lastName=Jones"` |
 | Field with a capitalized first letter |     N    | Any fields that have a capital first letter are sent as request headers | `"Content-Type"`, `"Accept"`          |
@@ -140,17 +140,17 @@ Optionally, a path can be specified to interact with resource URIs:
 
 The response body contains the data returned by the HTTP endpoint.  The `data` field contains the HTTP response body as a byte slice (Base64 encoded via curl). The `metadata` field contains:
 
-| Field                                 | Required | Details                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序    |
+| Field                                 | Required | Details                                                                         | Example                     |
 | ------------------------------------- | :------: | ------------------------------------------------------------------------------- | --------------------------- |
 | `statusCode`                          |     Y    | The [HTTP status code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) | `200`, `404`, `503`         |
 | `status`                              |     Y    | The status description                                                          | `"200 OK"`, `"201 Created"` |
 | Field with a capitalized first letter |     N    | Any fields that have a capital first letter are sent as request headers         | `"Content-Type"`            |
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
 **Requesting the base URL**
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -159,7 +159,7 @@ curl -d "{ \"operation\": \"get\" }" \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -168,13 +168,13 @@ curl -d '{ "operation": "get" }' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 **Requesting a specific path**
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -183,7 +183,7 @@ curl -d "{ \"operation\": \"get\", \"metadata\": { \"path\": \"/things/1234\" } 
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -192,7 +192,7 @@ curl -d '{ "operation": "get", "metadata": { "path": "/things/1234" } }' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -216,11 +216,11 @@ For example, the default content type is `application/json; charset=utf-8`. This
 }
 ```
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
 **Posting a new record**
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -229,7 +229,7 @@ curl -d "{ \"operation\": \"post\", \"data\": \"YOUR_BASE_64_CONTENT\", \"metada
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -238,7 +238,7 @@ curl -d '{ "operation": "post", "data": "YOUR_BASE_64_CONTENT", "metadata": { "p
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -249,7 +249,7 @@ The HTTP binding can also be used with HTTPS endpoints by configuring the Dapr s
 1. Update the binding URL to use `https` instead of `http`.
 2. If you need to add a custom TLS certificate, refer [How-To: Install certificates in the Dapr sidecar]({{< ref install-certificates >}}), to install the TLS certificates in the sidecar.
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 #### Update the binding component
 
@@ -269,7 +269,7 @@ spec:
 
 #### Install the TLS certificate in the sidecar
 
-
+{{< tabs Self-Hosted Kubernetes >}}
 
 {{% codetab %}}
 When the sidecar is not running inside a container, the TLS certificate can be directly installed on the host operating system.
@@ -297,7 +297,7 @@ services:
       - my-app
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -340,13 +340,13 @@ spec:
 ...
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 #### Invoke the binding securely
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -355,7 +355,7 @@ curl -d "{ \"operation\": \"get\" }" \
       https://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -364,7 +364,7 @@ curl -d '{ "operation": "get" }' \
       https://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -393,7 +393,7 @@ For more details see [the Go `RenegotiationSupport` documentation](https://pkg.g
 
 You can use this when the server with which the HTTP binding is configured to communicate requires mTLS or client TLS authentication.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

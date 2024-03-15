@@ -50,13 +50,14 @@ dapr run --app-id myapp --dapr-http-port 3500
 
 使用以下命令保存一个新的状态对象:
 
-
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
+{{% codetab %}}
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "name", "value": "Bruce Wayne"}]' http://localhost:3500/v1.0/state/statestore
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -64,7 +65,7 @@ curl -X POST -H "Content-Type: application/json" -d '[{ "key": "name", "value": 
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": "name", "value": "Bruce Wayne"}]' -Uri 'http://localhost:3500/v1.0/state/statestore'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -72,7 +73,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": 
 
 通过使用状态管理 API，用 key `name` 来检索你刚刚存储在状态中的对象。 在同一个终端窗口中，运行以下命令：
 
-
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
 
@@ -80,7 +81,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": 
 curl http://localhost:3500/v1.0/state/statestore/name 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -88,7 +89,7 @@ curl http://localhost:3500/v1.0/state/statestore/name
 Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/state/statestore/name'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -131,7 +132,7 @@ exit
 
 在同一个终端窗口中，从状态存储中删除`name`状态对象。
 
-
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
 
@@ -139,7 +140,7 @@ exit
 curl -v -X DELETE -H "Content-Type: application/json" http://localhost:3500/v1.0/state/statestore/name
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -147,7 +148,7 @@ curl -v -X DELETE -H "Content-Type: application/json" http://localhost:3500/v1.0
 Invoke-RestMethod -Method Delete -ContentType 'application/json' -Uri 'http://localhost:3500/v1.0/state/statestore/name'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

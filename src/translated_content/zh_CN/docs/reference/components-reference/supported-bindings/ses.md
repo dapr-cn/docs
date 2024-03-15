@@ -48,17 +48,17 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field          | Required | Binding support | Details                                                                                | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| -------------- | :------: | --------------- | -------------------------------------------------------------------------------------- | ------------------------ |
-| `region`       |     N    | Output          | The specific AWS region                                                                | `"eu-west-1"`            |
-| `accessKey`    |     N    | Output          | The AWS Access Key to access this resource                                             | `"key"`                  |
-| `secretKey`    |     N    | Output          | The AWS Secret Access Key to access this resource                                      | `"secretAccessKey"`      |
-| `sessionToken` |     N    | Output          | The AWS session token to use                                                           | `"sessionToken"`         |
-| `emailFrom`    |     N    | Output          | If set, this specifies the email address of the sender. See [also](#example-request)   | `"me@example.com"`       |
-| `emailTo`      |     N    | Output          | If set, this specifies the email address of the receiver. See [also](#example-request) | `"me@example.com"`       |
-| `emailCc`      |     N    | Output          | If set, this specifies the email address to CC in. See [also](#example-request)        | `"me@example.com"`       |
-| `emailBcc`     |     N    | Output          | If set, this specifies email address to BCC in. See [also](#example-request)           | `"me@example.com"`       |
-| `subject`      |     N    | Output          | If set, this specifies the subject of the email message. See [also](#example-request)  | `"subject of mail"`      |
+| Field          | Required | Binding support | Details                                                                                | Example             |
+| -------------- | :------: | --------------- | -------------------------------------------------------------------------------------- | ------------------- |
+| `region`       |     N    | Output          | The specific AWS region                                                                | `"eu-west-1"`       |
+| `accessKey`    |     N    | Output          | The AWS Access Key to access this resource                                             | `"key"`             |
+| `secretKey`    |     N    | Output          | The AWS Secret Access Key to access this resource                                      | `"secretAccessKey"` |
+| `sessionToken` |     N    | Output          | The AWS session token to use                                                           | `"sessionToken"`    |
+| `emailFrom`    |     N    | Output          | If set, this specifies the email address of the sender. See [also](#example-request)   | `"me@example.com"`  |
+| `emailTo`      |     N    | Output          | If set, this specifies the email address of the receiver. See [also](#example-request) | `"me@example.com"`  |
+| `emailCc`      |     N    | Output          | If set, this specifies the email address to CC in. See [also](#example-request)        | `"me@example.com"`  |
+| `emailBcc`     |     N    | Output          | If set, this specifies email address to BCC in. See [also](#example-request)           | `"me@example.com"`  |
+| `subject`      |     N    | Output          | If set, this specifies the subject of the email message. See [also](#example-request)  | `"subject of mail"` |
 
 {{% alert title="Important" color="warning" %}}
 When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernetes), if you're using a node/pod that has already been attached to an IAM policy defining access to AWS resources, you **must not** provide AWS access-key, secret-key, and tokens in the definition of the component spec you're using.\
@@ -84,7 +84,7 @@ When sending an email, the metadata in the configuration and in the request is c
 
 The `emailTo`, `emailCc` and `emailBcc` fields can contain multiple email addresses separated by a semicolon.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```json
 {
@@ -100,7 +100,7 @@ The `emailTo`, `emailCc` and `emailBcc` fields can contain multiple email addres
 
 The `emailTo`, `emailCc` and `emailBcc` fields can contain multiple email addresses separated by a semicolon.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

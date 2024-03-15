@@ -78,7 +78,7 @@ The above example uses secrets as plain strings. It is recommended to use [a sec
 
 ## Spec metadata fields
 
-| Field                          | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                     |
+| Field                          | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Example                                      |
 | ------------------------------ | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | accessKey                      |     Y    | ID of the AWS account/role with appropriate permissions to SNS and SQS (see below)                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `"AKIAIOSFODNN7EXAMPLE"`                     |
 | secretKey                      |     Y    | Secret for the AWS user/role. If using an `AssumeRole` access, you will also need to provide a `sessionToken`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"` |
@@ -99,7 +99,7 @@ The above example uses secrets as plain strings. It is recommended to use [a sec
 | assetsManagementTimeoutSeconds |     N    | Amount of time in seconds, for an AWS asset management operation, before it times out and cancelled. Asset management operations are any operations performed on STS, SNS and SQS, except message publish and consume operations that implement the default Dapr component retry behavior. The value can be set to any non-negative float/integer. Default: `5`                                                                                                                                                                                                               | `0.5`, `10`                                  |
 | concurrencyMode                |     N    | When messages are received in bulk from SQS, call the subscriber sequentially (“single” message at a time), or concurrently (in “parallel”). Default: `"parallel"`                                                                                                                                                                                                                                                                                                                                                                      | `"single"`, `"parallel"`                     |
 
-### 附加信息
+### Additional info
 
 #### Conforming with AWS specifications
 
@@ -153,7 +153,7 @@ Consider potential contention scenarios when using SNS/SQS with Dapr, and config
 
 ## Create an SNS/SQS instance
 
-
+{{< tabs "Self-Hosted" "Kubernetes" "AWS" >}}
 
 {{% codetab %}}
 For local development, the [localstack project](https://github.com/localstack/localstack) is used to integrate AWS SNS/SQS. Follow [these instructions](https://github.com/localstack/localstack#running) to run localstack.
@@ -188,7 +188,7 @@ spec:
       value: us-east-1
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 To run localstack on Kubernetes, you can apply the configuration below. Localstack is then reachable at the DNS name `http://localstack.default.svc.cluster.local:4566` (assuming this was applied to the default namespace), which should be used as the `endpoint`.
@@ -234,7 +234,7 @@ spec:
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 In order to run in AWS, create or assign an IAM user with permissions to the SNS and SQS services, with a policy like:
@@ -307,7 +307,7 @@ In the above example, you are running your applications on an EKS cluster with d
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Pub/Sub building block overview and how-to guides]({{< ref pubsub >}})

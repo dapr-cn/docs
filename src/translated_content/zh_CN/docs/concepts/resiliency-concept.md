@@ -1,7 +1,7 @@
 ---
 type: docs
-title: Resiliency
-linkTitle: Resiliency
+title: 弹性
+linkTitle: 弹性
 weight: 400
 description: 配置策略并监控应用程序和 sidecar 的健康状况
 ---

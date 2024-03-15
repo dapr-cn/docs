@@ -5,7 +5,7 @@ linkTitle: logs
 description: Detailed information on the logs CLI command
 ---
 
-### 说明
+### Description
 
 Get Dapr sidecar logs for an application.
 
@@ -21,7 +21,7 @@ dapr logs [flags]
 
 ### Flags
 
-| Name                 | Environment Variable | Default   | 说明                                                                                                          |
+| Name                 | Environment Variable | Default   | Description                                                                                                 |
 | -------------------- | -------------------- | --------- | ----------------------------------------------------------------------------------------------------------- |
 | `--app-id`, `-a`     | `APP_ID`             |           | The application id for which logs are needed                                                                |
 | `--help`, `-h`       |                      |           | Print this help message                                                                                     |

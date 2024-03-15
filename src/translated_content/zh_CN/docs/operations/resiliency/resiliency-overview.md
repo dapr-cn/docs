@@ -20,7 +20,7 @@ Policies can then be applied to [targets]({{< ref "targets.md" >}}), which inclu
 
 Additionally, resiliency policies can be [scoped to specific apps]({{< ref "component-scopes.md#application-access-to-components-with-scopes" >}}).
 
-## Demo video
+## 演示视频
 
 Learn more about [how to write resilient microservices with Dapr](https://youtu.be/uC-4Q5KFq98?si=JSUlCtcUNZLBM9rW).
 
@@ -166,7 +166,7 @@ spec:
           circuitBreaker: pubsubCB
 ```
 
-## 相关链接
+## Related links
 
 Watch this video for how to use [resiliency](https://www.youtube.com/watch?t=184\&v=7D6HOU3Ms6g\&feature=youtu.be):
 
@@ -181,5 +181,5 @@ Learn more about resiliency policies and targets:
 - [Policies]({{< ref "policies.md" >}})
 - [Targets]({{< ref "targets.md" >}})
   Try out one of the Resiliency quickstarts:
-- [弹性：服务到服务]({{< ref resiliency-serviceinvo-quickstart.md >}})
-- [状态管理：[State management\*\*]({{< ref "resiliency-state-quickstart.md" >}})]({{< ref resiliency-state-quickstart.md >}})
+- [Resiliency: Service-to-service]({{< ref resiliency-serviceinvo-quickstart.md >}})
+- [Resiliency: State Management]({{< ref resiliency-state-quickstart.md >}})

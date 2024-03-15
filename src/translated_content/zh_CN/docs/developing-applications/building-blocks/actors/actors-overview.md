@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Actor 概述
-linkTitle: Overview
+linkTitle: 概述
 weight: 10
 description: Dapr Actor API 构建块概述
 aliases:
@@ -84,7 +84,7 @@ Actor 的状态比对象的生命周期更久，因为状态存储在 Dapr 运�
 
 [了解有关调用actor方法的更多信息。]({{< ref "actors-features-concepts.md#actor-communication" >}})
 
-#### Concurrency
+#### 并发
 
 Dapr Actor 运行时提供了一个简单的基于回合的访问模型，用于访问 Actor 方法。 基于回合的访问大大简化了并发系统，因为不需要同步数据访问机制。
 

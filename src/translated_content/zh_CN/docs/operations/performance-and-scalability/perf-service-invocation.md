@@ -60,7 +60,7 @@ When running in a highly available production setup, the Dapr control plane cons
 
 | Component        | vCPU  | Memory  |
 | ---------------- | ----- | ------- |
-| 运算符              | 0.001 | 12.5 Mb |
+| Operator         | 0.001 | 12.5 Mb |
 | Sentry           | 0.005 | 13.6 Mb |
 | Sidecar Injector | 0.002 | 14.6 Mb |
 | Placement        | 0.001 | 20.9 Mb |
@@ -69,7 +69,7 @@ There are a number of variants that affect the CPU and memory consumption for ea
 
 | Component        | vCPU                                                                   | Memory                          |
 | ---------------- | ---------------------------------------------------------------------- | ------------------------------- |
-| 运算符              | Number of pods requesting components, configurations and subscriptions |                                 |
+| Operator         | Number of pods requesting components, configurations and subscriptions |                                 |
 | Sentry           | Number of certificate requests                                         |                                 |
 | Sidecar Injector | Number of admission requests                                           |                                 |
 | Placement        | Number of actor rebalancing operations                                 | Number of connected actor hosts |

@@ -92,7 +92,7 @@ class CountState extends \Dapr\Actors\ActorState {
 
 Dapr 希望知道服务在启动时可以托管哪些 actor。 您需要将其添加到配置中：
 
-
+{{< tabs "Production" "Development" >}}
 
 {{% codetab %}}
 
@@ -120,7 +120,8 @@ $app = \Dapr\App::create(
 $app->start();
 ```
 
-
+{{% /codetab %}}
+{{% codetab %}}
 
 ```php
 <?php
@@ -142,3 +143,5 @@ $app = \Dapr\App::create(configure: fn(\DI\ContainerBuilder $builder) => $builde
 $app->start();
 ```
 
+{{% /codetab %}}
+{{< /tabs >}}

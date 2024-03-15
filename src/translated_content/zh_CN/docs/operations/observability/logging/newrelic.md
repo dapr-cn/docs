@@ -16,7 +16,7 @@ New Relic offers a [Fluent Bit](https://fluentbit.io/) output [plugin](https://g
 
 This document explains how to install it in your cluster, either using a Helm chart (recommended), or manually by applying Kubernetes manifests.
 
-## 安装
+## Installation
 
 ### Install using the Helm chart (recommended)
 

@@ -10,7 +10,7 @@ Access control enables the configuration of policies that restrict what operatio
 
 An access control policy is specified in configuration and be applied to Dapr sidecar for the _called_ application. Example access policies are shown below and access to the called app is based on the matched policy action. You can provide a default global action for all calling applications and if no access control policy is specified, the default behavior is to allow all calling applications to access to the called app.
 
-## 概念
+## Concepts
 
 **TrustDomain** - A "trust domain" is a logical group to manage trust relationships. Every application is assigned a trust domain which can be specified in the access control list policy spec. If no policy spec is defined or an empty trust domain is specified, then a default value "public" is used. This trust domain is used to generate the identity of the application in the TLS cert.
 
@@ -22,7 +22,7 @@ The following tables lists the different properties for access control, policies
 
 ### Access Control
 
-| Property      | Type   | 说明                                                                             |
+| Property      | Type   | Description                                                                    |
 | ------------- | ------ | ------------------------------------------------------------------------------ |
 | defaultAction | string | Global default action when no other policy is matched                          |
 | trustDomain   | string | Trust domain assigned to the application. Default is "public".                 |
@@ -30,7 +30,7 @@ The following tables lists the different properties for access control, policies
 
 ### Policies
 
-| Property      | Type   | 说明                                                                                                  |
+| Property      | Type   | Description                                                                                         |
 | ------------- | ------ | --------------------------------------------------------------------------------------------------- |
 | app           | string | AppId of the calling app to allow/deny service invocation from                                      |
 | namespace     | string | Namespace value that needs to be matched with the namespace of the calling app                      |
@@ -40,7 +40,7 @@ The following tables lists the different properties for access control, policies
 
 ### Operations
 
-| Property | Type   | 说明                                                                                                                                                              |
+| Property | Type   | Description                                                                                                                                                     |
 | -------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name     | string | Path name of the operations allowed on the called app. Wildcard "\*" can be used in a path to match. Wildcard "\*\*" can be used to match under multiple paths. |
 | httpVerb | list   | List specific http verbs that can be used by the calling app. Wildcard "\*" can be used to match any http verb. Unused for grpc invocation.                     |
@@ -259,7 +259,7 @@ spec:
     trustDomain: "myDomain"
 ```
 
-### 自托管模式
+### Self-hosted mode
 
 This example uses the [hello world](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world/README.md) quickstart.
 
@@ -269,7 +269,7 @@ The following steps run the Sentry service locally with mTLS enabled, set up nec
 
 2. In a command prompt, set these environment variables:
 
-
+   {{< tabs "Linux/MacOS" Windows >}}
 
    {{% codetab %}}
 
@@ -284,7 +284,7 @@ export NAMESPACE=default
 {{% /codetab %}}
 ```
 
-
+{{% codetab %}}
 
 ```powershell
 $env:DAPR_TRUST_ANCHORS=$(Get-Content -raw $env:USERPROFILE\.dapr\certs\ca.crt)
@@ -313,7 +313,7 @@ daprd --app-id nodeapp --dapr-grpc-port 50002 -dapr-http-port 3501 --log-level d
 
 5. In another command prompt, set these environment variables:
 
-
+   {{< tabs "Linux/MacOS" Windows >}}
 
    {{% codetab %}}
 
@@ -335,7 +335,7 @@ daprd --app-id nodeapp --dapr-grpc-port 50002 -dapr-http-port 3501 --log-level d
  $env:NAMESPACE="default"
 ````
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -353,7 +353,7 @@ daprd --app-id nodeapp --dapr-grpc-port 50002 -dapr-http-port 3501 --log-level d
 
 8. You should see the calls to the node app fail in the python app command prompt based due to the **deny** operation action in the nodeappconfig file. Change this action to **allow** and re-run the apps and you should then see this call succeed.
 
-### Kubernetes 模式
+### Kubernetes mode
 
 This example uses the [hello kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes/README.md) quickstart.
 
@@ -389,7 +389,7 @@ spec:
         image: dapriosamples/hello-k8s-python:edge
 ```
 
-## Community call demo
+## 社区示例
 
 Watch this [video](https://youtu.be/j99RN_nxExA?t=1108) on how to apply access control list for service invocation.
 

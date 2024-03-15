@@ -42,7 +42,7 @@ If the optional `archive` metadata is set to `true`, on each state change, the R
 
 ## Spec metadata fields
 
-| Field    | Required | Details                                  | 如何使用Dapr扩展来开发和运行Dapr应用程序                                           |
+| Field    | Required | Details                                  | Example                                                            |
 | -------- | :------: | ---------------------------------------- | ------------------------------------------------------------------ |
 | address  |     Y    | The address for RethinkDB server         | `"127.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
 | database |     Y    | The database to use. Alpha-numerics only | `"dapr"`                                                           |
@@ -53,7 +53,7 @@ If the optional `archive` metadata is set to `true`, on each state change, the R
 
 ## Setup RethinkDB
 
-
+{{< tabs "Self-Hosted" >}}
 
 {{% codetab %}}
 You can run [RethinkDB](https://rethinkdb.com/) locally using Docker:
@@ -68,9 +68,10 @@ To connect to the admin UI:
 open "http://$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' rethinkdb):8080"
 ```
 
+{{% /codetab %}}
+{{% /codetab %}}
 
-
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [the how-to guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components.

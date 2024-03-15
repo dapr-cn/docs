@@ -9,7 +9,7 @@ aliases:
   - /zh-hans/concepts/middleware-concept/
 ---
 
-Dapr allows custom processing pipelines to be defined by chaining a series of middleware components. 在本指南中，您将了解如何创建一个中间件组件。 要了解如何配置现有中间件组件，请参阅 [配置中间件组件]({{< ref middleware.md >}})
+Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 在本指南中，您将了解如何创建一个中间件组件。 要了解如何配置现有中间件组件，请参阅 [配置中间件组件]({{< ref middleware.md >}})
 
 ## 编写自定义HTTP中间件
 

@@ -33,7 +33,7 @@ The above example uses `apiKey` as  a plain string. It is recommended to use a s
 
 ## Spec metadata fields
 
-| Field               | Required | Binding support | Details                                                                                                                                                                                    | 如何使用Dapr扩展来开发和运行Dapr应用程序              |
+| Field               | Required | Binding support | Details                                                                                                                                                                                    | Example                               |
 | ------------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- |
 | `endpoint`          |     Y    | Output          | Azure OpenAI service endpoint URL.                                                                                                                                                         | `"https://myopenai.openai.azure.com"` |
 | `apiKey`            |    Y\*   | Output          | The access key of the Azure OpenAI service. Only required when not using Microsoft Entra ID authentication.                                                                                | `"1234567890abcdef"`                  |
@@ -104,14 +104,15 @@ Read more about the importance and usage of these parameters in the [Azure OpenA
 
 #### 示例
 
-
+{{< tabs Linux >}}
+{{% codetab %}}
 
 ```bash
 curl -d '{ "data": {"deploymentId: "my-model" , "prompt": "A dog is ", "maxTokens":15}, "operation": "completion" }' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -175,9 +176,9 @@ The data parameters are:
 - `presencePenalty` - (optional) Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics. Defaults to 0.0 for the chat completion API.
 - `frequencyPenalty` - (optional) Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim. Defaults to 0.0 for the chat completion API.
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Linux >}}
 
 {{% codetab %}}
 
@@ -204,7 +205,7 @@ curl -d '{
 http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -254,9 +255,9 @@ The data parameters are:
 - `deploymentId` - string that specifies the model deployment ID to use.
 - `message` - string that specifies the text to embed.
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Linux >}}
 
 {{% codetab %}}
 
@@ -271,7 +272,7 @@ curl -d '{
 http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -289,7 +290,7 @@ Watch [the following Community Call presentation](https://youtu.be/rTovKpG0rhY?s
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/rTovKpG0rhY?si=XP1S-80SIg1ptJuG&amp;start=80" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

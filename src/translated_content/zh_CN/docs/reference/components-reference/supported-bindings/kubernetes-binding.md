@@ -30,12 +30,12 @@ spec:
 
 ## Spec metadata fields
 
-| Field               | Required | Binding support | Details                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ------------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `namespace`         |     Y    | Input           | The Kubernetes namespace to read events from                                                            | `"default"`              |
-| `resyncPeriodInSec` |     N    | Input           | The period of time to refresh event list from Kubernetes API server. Defaults to `"10"`                 | `"15"`                   |
-| `direction`         |     N    | Input           | The direction of the binding                                                                            | `"input"`                |
-| `kubeconfigPath`    |     N    | Input           | The path to the kubeconfig file. If not specified, the binding uses the default in-cluster config value | `"/path/to/kubeconfig"`  |
+| Field               | Required | Binding support | Details                                                                                                 | Example                 |
+| ------------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `namespace`         |     Y    | Input           | The Kubernetes namespace to read events from                                                            | `"default"`             |
+| `resyncPeriodInSec` |     N    | Input           | The period of time to refresh event list from Kubernetes API server. Defaults to `"10"`                 | `"15"`                  |
+| `direction`         |     N    | Input           | The direction of the binding                                                                            | `"input"`               |
+| `kubeconfigPath`    |     N    | Input           | The path to the kubeconfig file. If not specified, the binding uses the default in-cluster config value | `"/path/to/kubeconfig"` |
 
 ## Binding support
 
@@ -117,7 +117,7 @@ roleRef:
   apiGroup: ""
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

@@ -41,7 +41,7 @@ spec:
 
 ### 获取锁
 
-
+{{< tabs HTTP Dotnet Go >}}
 
 {{% codetab %}}
 
@@ -51,7 +51,7 @@ curl -X POST http://localhost:3500/v1.0-alpha1/lock/lockstore
    -d '{"resourceId":"my_file_name", "lockOwner":"random_id_abc123", "expiryInSeconds": 60}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -86,7 +86,7 @@ namespace LockService
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -116,13 +116,13 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ### 释放现有锁
 
-
+{{< tabs HTTP Dotnet Go >}}
 
 {{% codetab %}}
 
@@ -132,7 +132,7 @@ curl -X POST http://localhost:3500/v1.0-alpha1/unlock/lockstore
    -d '{"resourceId":"my_file_name", "lockOwner":"random_id_abc123"}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -156,7 +156,7 @@ namespace LockService
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -185,7 +185,7 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

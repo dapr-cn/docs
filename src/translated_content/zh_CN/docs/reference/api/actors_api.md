@@ -23,7 +23,7 @@ POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId
 
 #### HTTP Response Codes
 
-| Code | 说明                             |
+| Code | Description                    |
 | ---- | ------------------------------ |
 | 200  | Request successful             |
 | 500  | Request failed                 |
@@ -31,7 +31,7 @@ POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId
 
 #### URL Parameters
 
-| Parameter   | 说明                                |
+| Parameter   | Description                       |
 | ----------- | --------------------------------- |
 | `daprPort`  | The Dapr port.                    |
 | `actorType` | The actor type.                   |
@@ -97,7 +97,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 204  | Request successful |
 | 400  | Actor not found    |
@@ -105,7 +105,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state
 
 #### URL Parameters
 
-| Parameter   | 说明              |
+| Parameter   | Description     |
 | ----------- | --------------- |
 | `daprPort`  | The Dapr port.  |
 | `actorType` | The actor type. |
@@ -152,7 +152,7 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state/<key>
 
 #### HTTP Response Codes
 
-| Code | 说明                                            |
+| Code | Description                                   |
 | ---- | --------------------------------------------- |
 | 200  | Request successful                            |
 | 204  | Key not found, and the response will be empty |
@@ -161,7 +161,7 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state/<key>
 
 #### URL Parameters
 
-| Parameter   | 说明                           |
+| Parameter   | Description                  |
 | ----------- | ---------------------------- |
 | `daprPort`  | The Dapr port.               |
 | `actorType` | The actor type.              |
@@ -199,7 +199,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders
 
 A JSON object with the following fields:
 
-| Field     | 说明                                                                                                                                                                                         |
+| Field     | Description                                                                                                                                                                                |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `dueTime` | Specifies the time after which the reminder is invoked. Its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration)                                                   |
 | `period`  | Specifies the period between different invocations. Its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) or ISO 8601 duration format with optional recurrence. |
@@ -240,7 +240,7 @@ To configure the reminder to fire only once, the period should be set to empty s
 
 #### HTTP Response Codes
 
-| Code | 说明                                   |
+| Code | Description                          |
 | ---- | ------------------------------------ |
 | 204  | Request successful                   |
 | 500  | Request failed                       |
@@ -248,7 +248,7 @@ To configure the reminder to fire only once, the period should be set to empty s
 
 #### URL Parameters
 
-| Parameter   | 说明                                  |
+| Parameter   | Description                         |
 | ----------- | ----------------------------------- |
 | `daprPort`  | The Dapr port.                      |
 | `actorType` | The actor type.                     |
@@ -281,14 +281,14 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<nam
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 500  | Request failed     |
 
 #### URL Parameters
 
-| Parameter   | 说明                               |
+| Parameter   | Description                      |
 | ----------- | -------------------------------- |
 | `daprPort`  | The Dapr port.                   |
 | `actorType` | The actor type.                  |
@@ -326,14 +326,14 @@ DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 204  | Request successful |
 | 500  | Request failed     |
 
 #### URL Parameters
 
-| Parameter   | 说明                                  |
+| Parameter   | Description                         |
 | ----------- | ----------------------------------- |
 | `daprPort`  | The Dapr port.                      |
 | `actorType` | The actor type.                     |
@@ -361,7 +361,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<n
 
 #### Timer request body:
 
-The format for the timer request body is the same as for [actor reminders]({{< ref "#reminder-request-body" >}}). For example:
+The format for the timer request body is the same as for [actor reminders]({{< ref "#reminder-request-body" >}}). 例如：
 
 The following specifies a `dueTime` of 3 seconds and a period of 7 seconds.
 
@@ -383,7 +383,7 @@ A `dueTime` of 0 means to fire immediately.  The following body means to fire im
 
 #### HTTP Response Codes
 
-| Code | 说明                                   |
+| Code | Description                          |
 | ---- | ------------------------------------ |
 | 204  | Request successful                   |
 | 500  | Request failed                       |
@@ -391,7 +391,7 @@ A `dueTime` of 0 means to fire immediately.  The following body means to fire im
 
 #### URL Parameters
 
-| Parameter   | 说明                               |
+| Parameter   | Description                      |
 | ----------- | -------------------------------- |
 | `daprPort`  | The Dapr port.                   |
 | `actorType` | The actor type.                  |
@@ -425,14 +425,14 @@ DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<nam
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 204  | Request successful |
 | 500  | Request failed     |
 
 #### URL Parameters
 
-| Parameter   | 说明                               |
+| Parameter   | Description                      |
 | ----------- | -------------------------------- |
 | `daprPort`  | The Dapr port.                   |
 | `actorType` | The actor type.                  |
@@ -460,14 +460,14 @@ GET http://localhost:<appPort>/dapr/config
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 500  | Request failed     |
 
 #### URL Parameters
 
-| Parameter | 说明                    |
+| Parameter | Description           |
 | --------- | --------------------- |
 | `appPort` | The application port. |
 
@@ -482,7 +482,7 @@ curl -X GET http://localhost:3000/dapr/config \
 
 The above command returns the config (all fields are optional):
 
-| Parameter                 | 说明                                                                                                                                                                                                             |
+| Parameter                 | Description                                                                                                                                                                                                    |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities`                | The actor types this app supports.                                                                                                                                                                             |
 | `actorIdleTimeout`        | Specifies how long to wait before deactivating an idle actor.  An actor is idle if no actor method calls and no reminders have fired on it.                                                                    |
@@ -495,14 +495,14 @@ The above command returns the config (all fields are optional):
 | `entitiesConfig`          | Array of entity configurations that allow per actor type settings. Any configuration defined here must have an entity that maps back into the root level entities.                                             |
 
 {{% alert title="Note" color="primary" %}}
-Actor settings in configuration for timeouts and intervals use [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) format. You can use string formats to represent durations. For example:
+Actor settings in configuration for timeouts and intervals use [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) format. You can use string formats to represent durations. 例如：
 
 - `1h30m` or `1.5h`: A duration of 1 hour and 30 minutes
 - `1d12h`: A duration of 1 day and 12 hours
 - `500ms`: A duration of 500 milliseconds
 - `-30m`: A negative duration of 30 minutes
 
-
+{{% /alert %}}
 
 ```json
 {
@@ -540,7 +540,7 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 400  | Actor not found    |
@@ -548,7 +548,7 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 
 #### URL Parameters
 
-| Parameter   | 说明                    |
+| Parameter   | Description           |
 | ----------- | --------------------- |
 | `appPort`   | The application port. |
 | `actorType` | The actor type.       |
@@ -582,7 +582,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 500  | Request failed     |
@@ -590,7 +590,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
 
 #### URL Parameters
 
-| Parameter    | 说明                                |
+| Parameter    | Description                       |
 | ------------ | --------------------------------- |
 | `appPort`    | The application port.             |
 | `actorType`  | The actor type.                   |
@@ -620,7 +620,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/remind/<remin
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 500  | Request failed     |
@@ -628,7 +628,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/remind/<remin
 
 #### URL Parameters
 
-| Parameter      | 说明                                  |
+| Parameter      | Description                         |
 | -------------- | ----------------------------------- |
 | `appPort`      | The application port.               |
 | `actorType`    | The actor type.                     |
@@ -658,7 +658,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/timer/<timerN
 
 #### HTTP Response Codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 500  | Request failed     |
@@ -666,7 +666,7 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/timer/<timerN
 
 #### URL Parameters
 
-| Parameter   | 说明                               |
+| Parameter   | Description                      |
 | ----------- | -------------------------------- |
 | `appPort`   | The application port.            |
 | `actorType` | The actor type.                  |
@@ -699,13 +699,13 @@ GET http://localhost:<appPort>/healthz
 
 #### HTTP Response Codes
 
-| Code | 说明             |
+| Code | Description    |
 | ---- | -------------- |
 | 200  | App is healthy |
 
 #### URL Parameters
 
-| Parameter | 说明                    |
+| Parameter | Description           |
 | --------- | --------------------- |
 | `appPort` | The application port. |
 

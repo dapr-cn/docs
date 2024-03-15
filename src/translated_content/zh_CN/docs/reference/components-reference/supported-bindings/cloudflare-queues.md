@@ -54,7 +54,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field         | Required | Binding support | Details                                                                             | 如何使用Dapr扩展来开发和运行Dapr应用程序                     |
+| Field         | Required | Binding support | Details                                                                             | Example                                      |
 | ------------- | :------: | --------------- | ----------------------------------------------------------------------------------- | -------------------------------------------- |
 | `queueName`   |     Y    | Output          | Name of the existing Cloudflare Queue                                               | `"mydaprqueue"`                              |
 | `key`         |     Y    | Output          | Ed25519 private key, PEM-encoded                                                    | _See example above_                          |
@@ -103,7 +103,7 @@ Use a separate Worker for each Dapr component. Do not use the same Worker script
 
 {{< tabs "Let Dapr manage the Worker" "Manually provision the Worker script" >}}
 
-
+{{% codetab %}}
 
 <!-- Let Dapr manage the Worker -->
 
@@ -122,7 +122,7 @@ If you want to let Dapr manage the Worker for you, you will need to provide thes
 
 When Dapr is configured to manage the Worker for you, when a Dapr Runtime is started it checks that the Worker exists and it's up-to-date. If the Worker doesn't exist, or if it's using an outdated version, Dapr creates or upgrades it for you automatically.
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -181,7 +181,7 @@ Once your Worker has been deployed, you will need to initialize the component wi
 - **`workerName`**: Name of the Worker script. This is the value you set in the `name` property in the `wrangler.toml` file.
 - **`workerUrl`**: URL of the deployed Worker. The `npx wrangler command` will show the full URL to you, for example `https://mydaprqueue.mydomain.workers.dev`.
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -195,7 +195,7 @@ All Cloudflare Workers listen on the public Internet, so Dapr needs to use addit
 
 To let Dapr issue bearer tokens, and have your Worker validate them, you will need to generate a new Ed25519 key pair. Here are examples of generating the key pair using OpenSSL or the step CLI.
 
-
+{{< tabs "Generate with OpenSSL" "Generate with the step CLI" >}}
 
 {{% codetab %}}
 
@@ -219,7 +219,7 @@ openssl pkey -in private.pem -pubout -out public.pem
 > $(brew --prefix)/opt/openssl@3/bin/openssl pkey -in private.pem -pubout -out public.pem
 > ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -236,7 +236,7 @@ step crypto keypair \
   --insecure --no-password
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -249,7 +249,7 @@ Regardless of how you generated your key pair, with the instructions above you'l
 Protect the private part of your key and treat it as a secret value!
 {{% /alert %}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

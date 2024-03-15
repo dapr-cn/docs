@@ -139,7 +139,7 @@ spec:
 
 ## Setup HashiCorp Consul
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 HashiCorp offer in depth guides on how to setup Consul for different hosting models. Check out the [self-hosted guide here](https://learn.hashicorp.com/collections/consul/getting-started)
@@ -151,6 +151,6 @@ HashiCorp offer in depth guides on how to setup Consul for different hosting mod
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Service invocation building block]({{< ref service-invocation >}})

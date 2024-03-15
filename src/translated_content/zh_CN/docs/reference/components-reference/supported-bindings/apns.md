@@ -34,12 +34,12 @@ spec:
 
 ## Spec metadata fields
 
-| Field         | Required | Binding support | Details                                                                                                                                                                                        | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ------------- | :------: | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `development` |     Y    | Output          | Tells the binding which APNs service to use. Set to `"true"` to use the development service or `"false"` to use the production service. Default: `"true"`                                      | `"true"`                 |
-| `key-id`      |     Y    | Output          | The identifier for the private key from the Apple Developer Portal                                                                                                                             | `"private-key-id`"       |
-| `team-id`     |     Y    | Output          | The identifier for the organization or author from the Apple Developer Portal                                                                                                                  | `"team-id"`              |
-| `private-key` |     Y    | Output          | Is a PKCS #8-formatted private key. It is intended that the private key is stored in the secret store and not exposed directly in the configuration. See [here](#private-key) for more details | `"pem file"`             |
+| Field         | Required | Binding support | Details                                                                                                                                                                                        | Example            |
+| ------------- | :------: | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `development` |     Y    | Output          | Tells the binding which APNs service to use. Set to `"true"` to use the development service or `"false"` to use the production service. Default: `"true"`                                      | `"true"`           |
+| `key-id`      |     Y    | Output          | The identifier for the private key from the Apple Developer Portal                                                                                                                             | `"private-key-id`" |
+| `team-id`     |     Y    | Output          | The identifier for the organization or author from the Apple Developer Portal                                                                                                                  | `"team-id"`        |
+| `private-key` |     Y    | Output          | Is a PKCS #8-formatted private key. It is intended that the private key is stored in the secret store and not exposed directly in the configuration. See [here](#private-key) for more details | `"pem file"`       |
 
 ### Private key
 
@@ -133,7 +133,7 @@ Besides the `device-token` value, the HTTP headers specified in the [Apple docum
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

@@ -35,7 +35,7 @@ As a prerequisite the operating system must supports Unix Domain Sockets, any UN
 
 Select your environment to begin making your component discoverable.
 
-
+{{< tabs "Standalone" "Kubernetes" >}}
 
 {{% codetab %}}
 [uds]: https\://en.wikipedia.org/wiki/Unix\_domain\_socket
@@ -107,7 +107,7 @@ Retrieve the value, replacing `$PORT` with the Dapr HTTP port:
 curl http://localhost:$PORT/v1.0/state/prod-mystore/name
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -244,8 +244,9 @@ Retrieve the value, replacing `$PORT` with the Dapr HTTP port:
 curl http://localhost:$PORT/v1.0/state/prod-mystore/name
 ```
 
+{{% /codetab %}}
+{{< /tabs >}}
 
-
-##
+## Next Steps
 
 Get started with developing .NET pluggable component using this [sample code](https://github.com/dapr/samples/tree/master/pluggable-components-dotnet-template)

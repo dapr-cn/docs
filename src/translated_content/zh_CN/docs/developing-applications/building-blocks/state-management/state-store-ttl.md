@@ -35,7 +35,7 @@ Dapr 允许对每个状态设置请求的生存时间(TTL)。 这意味着应用
 
 您可以在状态存储设置请求的元数据中设置状态TTL：
 
-
+{{< tabs Python ".NET" Go "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
 
@@ -63,7 +63,7 @@ with DaprClient() as client:
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -89,7 +89,7 @@ await client.SaveStateAsync(storeName, stateKeyName, state, metadata: new Dictio
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -116,7 +116,7 @@ if err := client.SaveState(ctx, store, "key1", []byte("hello world"), md); err !
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run .
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -124,7 +124,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value": "250", "metadata": { "ttlInSeconds": "120" } }]' http://localhost:3601/v1.0/state/statestore
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -132,7 +132,7 @@ curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{"key": "order_1", "value": "250", "metadata": {"ttlInSeconds": "120"}}]' -Uri 'http://localhost:3601/v1.0/state/statestore'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

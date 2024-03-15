@@ -48,7 +48,7 @@ In order to use DynamoDB as a Dapr state store, the table must have a primary ke
 
 ## Spec metadata fields
 
-| Field            | Required | Details                                                                                                                                                                                                                                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                     |
+| Field            | Required | Details                                                                                                                                                                                                                                                                                       | Example                                      |
 | ---------------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | table            |     Y    | name of the DynamoDB table to use                                                                                                                                                                                                                                                             | `"Contracts"`                                |
 | accessKey        |     N    | ID of the AWS account with appropriate permissions to SNS and SQS. Can be `secretKeyRef` to use a secret reference                                                                                                                                                                            | `"AKIAIOSFODNN7EXAMPLE"`                     |
@@ -155,7 +155,7 @@ $ aws dynamodb get-item \
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

@@ -10,7 +10,7 @@ description: 了解 Dapr 为何使用 CloudEvents，它们如何在 Dapr 发布/
 
 Dapr 使用 CloudEvents 为事件负载提供额外的上下文，从而启用以下功能：
 
-- Tracing
+- 追踪
 - 用于正确反序列化事件数据的 Content-type
 - 发送方应用程序的验证
 
@@ -27,7 +27,7 @@ Dapr 使用 CloudEvents 为事件负载提供额外的上下文，从而启用�
 - `id`
 - `source`
 - `specversion`
-- `type`
+- `类型`
 - `traceparent`
 - `traceid`
 - `tracestate`
@@ -96,7 +96,7 @@ Dapr 会自动生成多个 CloudEvent 属性。 您可以通过提供以下可�
 
 例如，要在代码中替换[上面的CloudEvent示例]({{< ref "#cloudevents-example" >}})中的`source`和`id`值：
 
-
+{{< tabs "Python" ".NET" >}}
 
  <!-- Python -->
 
@@ -113,7 +113,7 @@ with DaprClient() as client:
     )
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -136,7 +136,7 @@ Console.WriteLine("Published data: " + order);
 await Task.Delay(TimeSpan.FromSeconds(1));
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -164,7 +164,7 @@ await Task.Delay(TimeSpan.FromSeconds(1));
 {{% alert title="重要" color="warning" %}}
 虽然你可以替换 `traceid`/`traceparent` 和 `tracestate`，否则可能会干扰跟踪事件，并在跟踪工具中报告不一致的结果。 推荐使用Open Telemetry进行分布式跟踪。 [了解更多关于分布式追踪。]({{< ref tracing-overview\.md >}})
 
-
+{{% /alert %}}
 
 ## 发布您自己的 CloudEvent
 
@@ -179,14 +179,14 @@ await Task.Delay(TimeSpan.FromSeconds(1));
 - `topic`
 - `pubsubname`
 - `source`
-- `type`
+- `类型`
 - `specversion`
 
 您可以向自定义 CloudEvent 添加不属于官方 CloudEvent 规范的附加字段。 Dapr 将按原样传递这些字段。
 
 ### 如何使用Dapr扩展来开发和运行Dapr应用程序
 
-
+{{< tabs "Dapr CLI" "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
 
@@ -196,7 +196,7 @@ await Task.Delay(TimeSpan.FromSeconds(1));
 dapr publish --publish-app-id orderprocessing --pubsub order-pub-sub --topic orders --data '{\"orderId\": \"100\"}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -206,7 +206,7 @@ dapr publish --publish-app-id orderprocessing --pubsub order-pub-sub --topic ord
 curl -X POST http://localhost:3601/v1.0/publish/order-pub-sub/orders -H "Content-Type: application/cloudevents+json" -d '{"specversion" : "1.0", "type" : "com.dapr.cloudevent.sent", "source" : "testcloudeventspubsub", "subject" : "Cloud Events Test", "id" : "someCloudEventId", "time" : "2021-08-02T09:00:00Z", "datacontenttype" : "application/cloudevents+json", "data" : {"orderId": "100"}}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -216,7 +216,7 @@ curl -X POST http://localhost:3601/v1.0/publish/order-pub-sub/orders -H "Content
 Invoke-RestMethod -Method Post -ContentType 'application/cloudevents+json' -Body '{"specversion" : "1.0", "type" : "com.dapr.cloudevent.sent", "source" : "testcloudeventspubsub", "subject" : "Cloud Events Test", "id" : "someCloudEventId", "time" : "2021-08-02T09:00:00Z", "datacontenttype" : "application/cloudevents+json", "data" : {"orderId": "100"}}' -Uri 'http://localhost:3601/v1.0/publish/order-pub-sub/orders'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

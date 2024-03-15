@@ -48,7 +48,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field               | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                |
+| Field               | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                         | Example                                                                 |
 | ------------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | `accountName`       |     Y    | Input/Output    | The name of the Azure Storage account                                                                                                                                                                                                                                                                                                                                           | `"account1"`                                                            |
 | `accountKey`        |    Y\*   | Input/Output    | The access key of the Azure Storage account. Only required when not using Microsoft Entra ID authentication.                                                                                                                                                                                                                                                                    | `"access-key"`                                                          |
@@ -81,7 +81,7 @@ To set time to live at message level use the `metadata` section in the request b
 
 The field name is `ttlInSeconds`.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myStorageQueue \
@@ -97,7 +97,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myStorageQueue \
       }'
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

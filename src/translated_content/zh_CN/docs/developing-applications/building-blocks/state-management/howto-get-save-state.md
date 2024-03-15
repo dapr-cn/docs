@@ -22,7 +22,7 @@ description: 使用键值对来持久化状态
 
 为了本指南的目的，我们将使用一个Redis状态存储，但是来自[支持列表]({{< ref supported-state-stores >}})的任何状态存储都可以使用。
 
-
+{{< tabs "Self-Hosted (CLI)" Kubernetes>}}
 
 {{% codetab %}}
 
@@ -33,7 +33,7 @@ description: 使用键值对来持久化状态
 
 通过 `statestore.yaml` 组件，您可以轻松更换底层组件，而无需更改应用程序代码。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -56,7 +56,7 @@ spec:
 
 请参阅 [如何在 Kubernetes 上设置不同的状态存储]({{< ref "setup-state-store" >}})。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -68,7 +68,7 @@ spec:
 
 以下示例演示如何使用 Dapr 状态管理 API 保存和检索单个键/值对。
 
-
+{{< tabs Dotnet Java Python Go Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
 
@@ -115,7 +115,7 @@ namespace EventService
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -163,7 +163,7 @@ public class OrderProcessingServiceApplication {
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -196,7 +196,7 @@ while True:
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -244,7 +244,7 @@ func main() {
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -300,7 +300,7 @@ main();
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -324,7 +324,7 @@ curl http://localhost:3601/v1.0/state/statestore/order_1
 
 重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -348,7 +348,7 @@ Invoke-RestMethod -Uri 'http://localhost:3601/v1.0/state/statestore/order_1'
 
 重启你的sidecar，然后再次尝试检索状态，看看存储的状态是否与应用状态保持一致。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -356,7 +356,7 @@ Invoke-RestMethod -Uri 'http://localhost:3601/v1.0/state/statestore/order_1'
 
 下面是利用 Dapr SDKs 删除状态的代码例子。
 
-
+{{< tabs Dotnet Java Python Go Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
 
@@ -386,7 +386,7 @@ namespace EventService
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -416,7 +416,7 @@ public class OrderProcessingServiceApplication {
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -439,7 +439,7 @@ with DaprClient() as client:
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -474,7 +474,7 @@ func main() {
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 go run OrderProcessingService.go
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -505,7 +505,7 @@ main();
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -517,7 +517,7 @@ curl -X DELETE 'http://localhost:3601/v1.0/state/statestore/order_1'
 
 再次尝试获取状态。 请注意，不会返回任何值。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -529,7 +529,7 @@ Invoke-RestMethod -Method Delete -Uri 'http://localhost:3601/v1.0/state/statesto
 
 再次尝试获取状态。 请注意，不会返回任何值。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -537,7 +537,7 @@ Invoke-RestMethod -Method Delete -Uri 'http://localhost:3601/v1.0/state/statesto
 
 下面是利用 Dapr SDK 保存和检索多个状态的代码示例。
 
-
+{{< tabs Dotnet Java Python Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
 
@@ -593,7 +593,7 @@ namespace EventService
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -626,7 +626,7 @@ public class OrderProcessingServiceApplication {
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -652,7 +652,7 @@ with DaprClient() as client:
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -694,7 +694,7 @@ main();
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -710,7 +710,7 @@ curl -X POST -H "Content-Type: application/json" -d '[{ "key": "order_1", "value
 curl -X POST -H "Content-Type: application/json" -d '{"keys":["order_1", "order_2"]}' http://localhost:3601/v1.0/state/statestore/bulk
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -726,7 +726,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '[{ "key": 
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["order_1", "order_2"]}' -Uri 'http://localhost:3601/v1.0/state/statestore/bulk'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -738,7 +738,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["
 
 下面是利用 Dapr SDK 执行状态事务的代码示例。
 
-
+{{< tabs Dotnet Java Python Javascript "HTTP API (Bash)" "HTTP API (PowerShell)">}}
 
 {{% codetab %}}
 
@@ -790,7 +790,7 @@ namespace EventService
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 dotnet run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -843,7 +843,7 @@ public class OrderProcessingServiceApplication {
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 mvn spring-boot:run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -890,7 +890,7 @@ while True:
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 -- python3 OrderProcessingService.py
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -950,7 +950,7 @@ main();
 dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-grpc-port 60001 npm start
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -966,7 +966,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"operations": [{"operation
 curl -X POST -H "Content-Type: application/json" -d '{"keys":["order_1", "order_2"]}' http://localhost:3601/v1.0/state/statestore/bulk
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -982,7 +982,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"operatio
 Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"keys":["order_1", "order_2"]}' -Uri 'http://localhost:3601/v1.0/state/statestore/bulk'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

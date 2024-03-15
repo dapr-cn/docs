@@ -5,7 +5,7 @@ linkTitle: upgrade
 description: Detailed information on the upgrade CLI command
 ---
 
-### 说明
+### Description
 
 Upgrade or downgrade Dapr on supported hosting platforms.
 
@@ -27,7 +27,7 @@ dapr upgrade [flags]
 
 ### Flags
 
-| Name                 | Environment Variable | Default  | 说明                                                                                                                           |
+| Name                 | Environment Variable | Default  | Description                                                                                                                  |
 | -------------------- | -------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `--help`, `-h`       |                      |          | Print this help message                                                                                                      |
 | `--kubernetes`, `-k` |                      | `false`  | Upgrade/Downgrade Dapr in a Kubernetes cluster                                                                               |
@@ -69,6 +69,6 @@ Dapr root certificate of your Kubernetes cluster expires in <n> days. Expiry dat
 Please see docs.dapr.io for certificate renewal instructions to avoid service interruptions.
 ```
 
-### 相关链接
+### Related links
 
 - [Upgrade Dapr on a Kubernetes cluster]({{< ref kubernetes-upgrade.md >}})

@@ -13,7 +13,7 @@ Multicast DNS (mDNS) is configured automatically in [self-hosted mode]({{< ref s
 
 The component resolves target apps by using the host system's mDNS service. You can learn more about mDNS [here](https://en.wikipedia.org/wiki/Multicast_DNS).
 
-### 疑难解答
+### Troubleshooting
 
 In some cloud provider virtual networks, such as Microsoft Azure, mDNS is not available. Use an alternate provider such as [HashiCorp Consul]({{< ref setup-nr-consul.md >}}) instead.
 
@@ -23,7 +23,7 @@ On some enterprise-managed systems, mDNS may be disabled on macOS if a network f
 
 Not applicable, as mDNS is configured by Dapr when running in self-hosted mode.
 
-## 相关链接
+## Related links
 
 - [Service invocation building block]({{< ref service-invocation >}})
 - [mDNS reference](https://en.wikipedia.org/wiki/Multicast_DNS)

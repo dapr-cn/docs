@@ -33,7 +33,7 @@ description: Enable Dapr metrics and logs with Azure Monitor for Azure Kubernete
 
 You can use [azm-config-map.yaml](/docs/azm-config-map.yaml) to enable Prometheus metrics endpoint scrape.
 
-If you installed Dapr to a different namespace, you need to change the `monitor_kubernetes_pod_namespaces` array values. For example:
+If you installed Dapr to a different namespace, you need to change the `monitor_kubernetes_pod_namespaces` array values. 例如：
 
 ```yaml
 ...
@@ -67,7 +67,7 @@ kubectl apply -f ./azm-config.map.yaml
 
 Add `dapr.io/log-as-json: "true"` annotation to your deployment yaml.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```yaml
 apiVersion: apps/v1

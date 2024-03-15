@@ -18,12 +18,12 @@ description: 学习如何编写和实现可插拔组件
 
 目前支持以下组件API：
 
-- State stores
+- 状态存储
 - Pub/sub
 - 绑定
-- Secret stores
+- Secret stores（密钥存储）
 
-| Component |      Type      |                                                  gRPC 定义                                                 |                                                      内置参考实现                                                     | 文档                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Component |       类型       |                                                  gRPC 定义                                                 |                                                      内置参考实现                                                     | 文档                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | :-------: | :------------: | :------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |    状态存储   |     `state`    |       [state.proto](https://github.com/dapr/dapr/blob/master/dapr/proto/components/v1/state.proto)       |                   [Redis](https://github.com/dapr/components-contrib/tree/master/state/redis)                   | [概念]({{< ref "state-management-overview" >}})，[如何操作]({{< ref "howto-get-save-state" >}})，[API规范]({{< ref "state_api" >}})                                                                                                  |
 |  Pub/sub  |    `pubsub`    |      [pubsub.proto](https://github.com/dapr/dapr/blob/master/dapr/proto/components/v1/pubsub.proto)      |                   [Redis](https://github.com/dapr/components-contrib/tree/master/pubsub/redis)                  | [概念]({{< ref "pubsub-overview" >}})，[如何操作]({{< ref "howto-publish-subscribe" >}})，[API规范]({{< ref "pubsub_api" >}})                                                                                                        |
@@ -88,7 +88,7 @@ service StateStore {
 
 ### 定义服务
 
-提供所需服务的具体实现。 每个组件都有一个 gRPC 服务定义，用于其核心功能，与核心组件接口相同。 For example:
+提供所需服务的具体实现。 每个组件都有一个 gRPC 服务定义，用于其核心功能，与核心组件接口相同。 例如：
 
 - **状态存储**
 
@@ -116,17 +116,17 @@ service StateStore {
 
 返回语义错误也是可插拔组件协议的一部分。 组件必须返回具有语义意义的特定 gRPC 代码，这些错误用于从并发要求到仅供信息使用的各种情况。
 
-| 错误       | gRPC错误代码                   | 源组件         | 说明            |
-| -------- | -------------------------- | ----------- | ------------- |
-| Etag不匹配  | `codes.FailedPrecondition` | State store | 映射错误，无法满足并发需求 |
-| ETag 无效  | `codes.InvalidArgument`    | State store |               |
-| 批量删除行不匹配 | `codes.Internal`           | State store |               |
+| 错误       | gRPC错误代码                   | 源组件  | 说明            |
+| -------- | -------------------------- | ---- | ------------- |
+| Etag不匹配  | `codes.FailedPrecondition` | 状态存储 | 映射错误，无法满足并发需求 |
+| ETag 无效  | `codes.InvalidArgument`    | 状态存储 |               |
+| 批量删除行不匹配 | `codes.Internal`           | 状态存储 |               |
 
 在[状态管理概述]({{< ref "state-management-overview\.md#concurrency" >}})中了解更多关于并发要求的信息。
 
 以下示例演示如何在您自己的可插拔组件中返回错误，更改消息以满足您的需求。
 
-
+{{< tabs ".NET" "Java" "Go" >}}
 
  <!-- .NET -->
 
@@ -203,7 +203,7 @@ metadata.Add("grpc-status-details-bin", status.ToByteArray());
 throw new RpcException(new Grpc.Core.Status(baseStatusCode, "fake-err-msg"), metadata);
 ```
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -262,7 +262,7 @@ final Status status = Status.newBuilder()
 return Mono.error(StatusProto.toStatusException(status));
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -308,7 +308,7 @@ br.Metadata = map[string]string{
 st, err := st.WithDetails(br)
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

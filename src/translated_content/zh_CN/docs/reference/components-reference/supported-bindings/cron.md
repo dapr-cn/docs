@@ -28,10 +28,10 @@ spec:
 
 ## Spec metadata fields
 
-| Field       | Required | Binding support | Details                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ----------- | :------: | --------------- | ----------------------------------------------------------------------------- | ------------------------ |
-| `schedule`  |     Y    | Input           | The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"`           |
-| `direction` |     N    | Input           | The direction of the binding                                                  | `"input"`                |
+| Field       | Required | Binding support | Details                                                                       | Example        |
+| ----------- | :------: | --------------- | ----------------------------------------------------------------------------- | -------------- |
+| `schedule`  |     Y    | Input           | The valid cron schedule to use. See [this](#schedule-format) for more details | `"@every 15m"` |
+| `direction` |     N    | Input           | The direction of the binding                                                  | `"input"`      |
 
 ### Schedule Format
 
@@ -46,7 +46,7 @@ The Dapr cron binding supports following formats:
 |     5     | Month            | 1 to 12, or \*                                                    |
 |     6     | Day of the week  | 0 to 7 (where 0 and 7 represent Sunday), or \* |
 
-For example:
+例如：
 
 - `30 * * * * *` - every 30 seconds
 - `0 15 * * * *` - every 15 minutes
@@ -77,7 +77,7 @@ When running this code, note that the `/scheduled` endpoint is called every fift
 
 This component supports **input** binding interface.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

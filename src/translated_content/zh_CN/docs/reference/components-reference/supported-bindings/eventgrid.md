@@ -57,7 +57,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                   | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                 |
+| Field                   | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                         | Example                                  |
 | ----------------------- | :------: | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
 | `accessKey`             |     Y    | Output          | The Access Key to be used for publishing an Event Grid Event to a custom topic                                                                                                                                                                                                                                                                  | `"accessKey"`                            |
 | `topicEndpoint`         |     Y    | Output          | The topic endpoint in which this output binding should publish events                                                                                                                                                                                                                                                                           | `"topic-endpoint"`                       |
@@ -73,7 +73,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ### Scope
 
-Scope is the identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, a resource group, a top-level resource belonging to a resource provider namespace, or an Event Grid topic. For example:
+Scope is the identifier of the resource to which the event subscription needs to be created or updated. The scope can be a subscription, a resource group, a top-level resource belonging to a resource provider namespace, or an Event Grid topic. 例如：
 
 - `/subscriptions/{subscriptionId}/` for a subscription
 - `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}` for a resource group
@@ -298,7 +298,7 @@ $ kubectl delete pod nginx-nginx-ingress-controller-649df94867-fp6mg
 # .."OPTIONS /api/events HTTP/1.1" 200..
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

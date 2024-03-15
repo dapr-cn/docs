@@ -22,7 +22,7 @@ Dapr 客户端包允许您从 .NET 应用程序中与其他 Dapr 应用程序进
 
 您可以使用 `DaprClient` 或 `System.Net.Http.HttpClient` 来调用您的服务。
 
-
+{{< tabs SDK HTTP>}}
 
 {{% codetab %}}
 
@@ -35,7 +35,7 @@ var account = await client.InvokeMethodAsync<object, Account>("routing", "deposi
 Console.WriteLine("Returned: id:{0} | Balance:{1}", account.Id, account.Balance);
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -48,7 +48,7 @@ var account = await response.Content.ReadFromJsonAsync<Account>(cancellationToke
 Console.WriteLine("Returned: id:{0} | Balance:{1}", account.Id, account.Balance);
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -132,7 +132,7 @@ await client.InvokeBindingAsync("send-email", "create", email);
 
 ### 检索密钥
 
-
+{{< tabs Multi-value-secret Single-value-secret >}}
 
 {{% codetab %}}
 
@@ -146,7 +146,7 @@ Console.WriteLine($"Got secret keys: {string.Join(", ", secrets.Keys)}");
 
 {{% / codetab %}}
 
-
+{{% codetab %}}
 
 ```csharp
 var client = new DaprClientBuilder().Build();
@@ -164,7 +164,7 @@ Console.WriteLine("Got a secret value, I'm not going to be print it, it's a secr
 
 {{% /codetab %}}
 
-
+{{< /tabs >}}
 
 - 有关秘密的完整指南，请访问[操作方法: 检索秘密]({{< ref howto-secrets.md >}})。
 

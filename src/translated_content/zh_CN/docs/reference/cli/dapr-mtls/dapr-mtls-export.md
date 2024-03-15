@@ -6,7 +6,7 @@ description: Detailed information on the mtls export CLI command
 weight: 1000
 ---
 
-### 说明
+### Description
 
 Export the root Certificate Authority (CA), issuer cert and issuer key to local files
 
@@ -22,7 +22,7 @@ dapr mtls export [flags]
 
 ### Flags
 
-| Name           | Environment Variable | Default           | 说明                                          |
+| Name           | Environment Variable | Default           | Description                                 |
 | -------------- | -------------------- | ----------------- | ------------------------------------------- |
 | `--help`, `-h` |                      |                   | help for export                             |
 | `--out`, `-o`  |                      | current directory | The output directory path to save the certs |

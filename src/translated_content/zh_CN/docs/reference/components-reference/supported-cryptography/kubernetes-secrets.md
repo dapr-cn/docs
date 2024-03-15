@@ -12,7 +12,7 @@ The purpose of this component is to load the Kubernetes secret named after the k
 {{% alert title="Note" color="primary" %}}
 This component uses the cryptographic engine in Dapr to perform operations. Although keys are never exposed to your application, Dapr has access to the raw key material.
 
-
+{{% /alert %}}
 
 A Dapr `crypto.yaml` component file has the following structure:
 
@@ -38,6 +38,6 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 \| `defaultNamespace` | N | Default namespace to retrieve secrets from. If unset, the namespace must be specified for each key, as `namespace/secretName/key` | `"default-ns"` |
 \| `kubeconfigPath` | N | The path to the kubeconfig file. If not specified, the component uses the default in-cluster config value | `"/path/to/kubeconfig"`
 
-## 相关链接
+## Related links
 
 [Cryptography building block]({{< ref cryptography >}})

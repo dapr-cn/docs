@@ -15,7 +15,7 @@ Dapr 提供了一个专用的秘钥 API，允许开发者从秘钥存储中检�
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -127,7 +127,7 @@ Order-processor输出：
 == APP == INFO:root:Fetched Secret: {'secret': 'YourPasskeyHere'}
 ```
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -244,7 +244,7 @@ Order-processor输出：
 == APP == Fetched Secret: {"secret":"YourPasskeyHere"}
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -357,7 +357,7 @@ Order-processor输出：
 == APP == Fetched Secret: [secret, YourPasskeyHere]
 ```
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -469,7 +469,7 @@ Order-processor输出：
 == APP == Fetched Secret: {secret=YourPasskeyHere}
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -580,7 +580,7 @@ Order-processor输出：
 == APP == Fetched Secret:  YourPasskeyHere
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

@@ -269,7 +269,7 @@ if __name__ == '__main__':
     return OrderResult(processed=True) 
 ```
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -493,7 +493,7 @@ start().catch((e) => {
 });
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -744,7 +744,7 @@ class OrderProcessingWorkflow : Workflow<OrderPayload, OrderResult>
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/BxiKpEmchgQ?start=2564" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -1090,7 +1090,7 @@ public class OrderProcessingWorkflow extends Workflow {
 - [`ProcessPaymentActivity`](https://github.com/dapr/quickstarts/tree/master/workflows/java/sdk/order-processor/src/main/java/io/dapr/quickstarts/workflows/activities/ProcessPaymentActivity.java)
 - [`UpdateInventoryActivity`](https://github.com/dapr/quickstarts/tree/master/workflows/java/sdk/order-processor/src/main/java/io/dapr/quickstarts/workflows/activities/UpdateInventoryActivity.java)
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -1337,7 +1337,7 @@ func restockInventory(daprClient client.Client, inventory []InventoryItem) error
 
 同时，`OrderProcessingWorkflow`及其活动在[`workflow.go`](https://github.com/dapr/quickstarts/workflows/go/sdk/order-processor/workflow.go)中定义为方法。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

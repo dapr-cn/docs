@@ -8,7 +8,7 @@ description: Overview of how to get Dapr running on your Kubernetes cluster
 
 Dapr can be configured to run on any supported versions of Kubernetes. To achieve this, Dapr begins by deploying the following Kubernetes services, which provide first-class integration to make running applications with Dapr easy.
 
-| Kubernetes services     | 说明                                                                                                                                                                                                                                                                        |
+| Kubernetes services     | Description                                                                                                                                                                                                                                                               |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dapr-operator`         | Manages [component]({{< ref components >}}) updates and Kubernetes services endpoints for Dapr (state stores, pub/subs, etc.)                                                   |
 | `dapr-sidecar-injector` | Injects Dapr into [annotated](#adding-dapr-to-a-kubernetes-deployment) deployment pods and adds the environment variables `DAPR_HTTP_PORT` and `DAPR_GRPC_PORT` to enable user-defined applications to easily communicate with Dapr without hard-coding Dapr port values. |
@@ -58,7 +58,7 @@ For information about:
 
 [Work through the Hello Kubernetes tutorial](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes) to learn more about getting started with Dapr on your Kubernetes cluster.
 
-## 相关链接
+## Related links
 
 - [Deploy Dapr to a Kubernetes cluster]({{< ref kubernetes-deploy >}})
 - [Upgrade Dapr on a Kubernetes cluster]({{< ref kubernetes-upgrade >}})

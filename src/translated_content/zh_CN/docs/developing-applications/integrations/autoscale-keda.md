@@ -15,7 +15,7 @@ Dapr以其模块化的构建方式，加上许多[pub/sub组件]({{< ref pubsub 
 {{% alert title="注意" color="primary" %}}
 如果您正在使用Azure容器应用程序，请参考官方的Azure文档，了解如何使用KEDA扩展器[扩展Dapr应用程序的规模](https://learn.microsoft.com/azure/container-apps/dapr-keda-scaling)。
 
-
+{{% /alert %}}
 
 ## 安装KEDA
 
@@ -144,7 +144,7 @@ spec:
 {{% alert title="重要" color="warning" %}}
 将连接字符串、主题和消费者组设置为_相同_的值，对于确保自动缩放正常工作，对于Dapr服务订阅和KEDA缩放器配置来说非常关键。
 
-
+{{% /alert %}}
 
 将 KEDA 扩展器部署到 Kubernetes:
 

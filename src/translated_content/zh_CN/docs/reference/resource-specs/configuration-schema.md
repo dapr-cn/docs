@@ -75,7 +75,7 @@ spec:
 
 ### Spec fields
 
-| Field           | Required | Details                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                                                                                                                                                                                                                                                   |
+| Field           | Required | Details                                                                                                                                                                                                                         | Example                                                                                                                                                                                                                                                                                                                                                                    |
 | --------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | accessControl   |     N    | Applied to Dapr sidecar for the called application. Enables the configuration of policies that restrict what operations calling applications can perform (via service invocation) on the called appliaction. | [Learn more about the `accessControl` configuration.]({{< ref invoke-allowlist.md >}})                                                                                                                                                                                                              |
 | api             |     N    | Used to enable only the Dapr sidecar APIs used by the application.                                                                                                                                                              | [Learn more about the `api` configuration.]({{< ref api-allowlist.md >}})                                                                                                                                                                                                                           |
@@ -108,10 +108,10 @@ spec:
 
 ### Spec fields
 
-| Field | Required | Details                        | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                                                                                                          |
+| Field | Required | Details                        | Example                                                                                                                                                                                                                           |
 | ----- | :------: | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | mtls  |     N    | Defines the mTLS configuration | `allowedClockSkew: 15m`<br>`workloadCertTTL:24h`<br>[Learn more about the `mtls` configuration.]({{< ref "configuration-overview\.md#mtls-mutual-tls" >}}) |
 
-## 相关链接
+## Related links
 
 - [Learn more about how to use configuration specs]({{< ref configuration-overview\.md >}})

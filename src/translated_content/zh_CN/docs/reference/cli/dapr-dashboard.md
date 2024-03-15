@@ -5,7 +5,7 @@ linkTitle: dashboard
 description: Detailed information on the dashboard CLI command
 ---
 
-### 说明
+### Description
 
 Start [Dapr dashboard](https://github.com/dapr/dashboard).
 
@@ -22,7 +22,7 @@ dapr dashboard [flags]
 
 ### Flags
 
-| Name                 | Environment Variable | Default       | 说明                                                                          |
+| Name                 | Environment Variable | Default       | Description                                                                 |
 | -------------------- | -------------------- | ------------- | --------------------------------------------------------------------------- |
 | `--address`, `-a`    |                      | `localhost`   | Address to listen on. Only accepts IP address or localhost as a value       |
 | `--help`, `-h`       |                      |               | Prints this help message                                                    |

@@ -13,13 +13,13 @@ weight: 20
 {{% alert title="注意" color="primary" %}}
 如果你还没有，请[尝试使用服务调用快速入门]({{< ref serviceinvocation-quickstart.md >}})快速了解如何使用服务调用 API。
 
-
+{{% /alert %}}
 
 ## 为您的服务选择一个ID
 
 Dapr 允许您为您的应用分配一个全局唯一ID。 此 ID 为您的应用程序封装了状态，不管它可能有多少实例。
 
-
+{{< tabs Python JavaScript ".NET" Java Go Kubernetes >}}
 
 {{% codetab %}}
 
@@ -37,7 +37,7 @@ dapr run  --app-id checkout --app-protocol https --dapr-http-port 3500 -- python
 dapr run --app-id order-processor --app-port 8001 --app-protocol https --dapr-http-port 3501 -- python3 order-processor/app.py
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -55,7 +55,7 @@ dapr run  --app-id checkout --dapr-http-port 3500 --app-protocol https -- npm st
 dapr run --app-id order-processor --app-port 5001 --dapr-http-port 3501 --app-protocol https -- npm start
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -73,7 +73,7 @@ dapr run  --app-id checkout --dapr-http-port 3500 --app-protocol https -- dotnet
 dapr run --app-id order-processor --app-port 7001 --dapr-http-port 3501 --app-protocol https -- dotnet run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -91,7 +91,7 @@ dapr run --app-id checkout --dapr-http-port 3500 --app-protocol https -- java -j
 dapr run --app-id order-processor --app-port 9001 --dapr-http-port 3501 --app-protocol https -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -109,7 +109,7 @@ dapr run --app-id checkout --dapr-http-port 3500 --app-protocol https -- go run 
 dapr run --app-id order-processor --app-port 6006 --dapr-http-port 3501 --app-protocol https -- go run .
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -141,9 +141,9 @@ spec:
 ...
 ```
 
-如果您的应用程序使用TLS连接，您可以使用`app-protocol: "https"`注解告知Dapr通过TLS调用您的应用程序（完整列表[在这里]({{< ref arguments-annotations-overview\.md >}})）。 Note that Dapr does not validate TLS certificates presented by the app.
+如果您的应用程序使用TLS连接，您可以使用`app-protocol: "https"`注解告知Dapr通过TLS调用您的应用程序（完整列表[在这里]({{< ref arguments-annotations-overview\.md >}})）。 请注意，Dapr 不会验证应用程序提供的 TLS 证书。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -153,7 +153,7 @@ spec:
 
 下面是利用 Dapr SDK 进行服务调用的代码示例。
 
-
+{{< tabs Python JavaScript ".NET" Java  Go >}}
 
 {{% codetab %}}
 
@@ -180,7 +180,7 @@ while True:
     logging.info('Result: ' + str(result))
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -215,7 +215,7 @@ function sleep(ms) {
 main();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -256,7 +256,7 @@ namespace EventService
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -311,7 +311,7 @@ public class CheckoutServiceApplication {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -367,7 +367,7 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -408,7 +408,7 @@ curl 'http://dapr-app-id:checkout@localhost:3602/checkout/100' -X POST
 dapr invoke --app-id checkout --method checkout/100
 ```
 
-### Namespaces
+### 命名空间
 
 当在[支持命名空间的平台]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})上运行时，您需要在应用ID中包含目标应用的命名空间。 例如，按照 `<app>.<namespace>` 格式，使用 `checkout.production`。
 
@@ -430,7 +430,7 @@ curl http://localhost:3602/v1.0/invoke/checkout.production/method/checkout/100 -
 
 了解有关跟踪和日志的更多信息，请参阅[可观测性]({{< ref observability-concept.md >}})文章。
 
-## Related Links
+## 相关链接
 
 - [服务调用概述]({{< ref service-invocation-overview\.md >}})
 - [服务调用API规范]({{< ref service_invocation_api.md >}})

@@ -36,18 +36,18 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                          | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| --------------- | :------: | -------------------------------------------------------------------------------- | ------------------------ |
-| regionId        |     Y    | The specific region the AlibabaCloud OOS Parameter Store instance is deployed in | `"cn-hangzhou"`          |
-| accessKeyId     |     Y    | The AlibabaCloud Access Key ID to access this resource                           | `"accessKeyId"`          |
-| accessKeySecret |     Y    | The AlibabaCloud Access Key Secret to access this resource                       | `"accessKeySecret"`      |
-| securityToken   |     N    | The AlibabaCloud Security Token to use                                           | `"securityToken"`        |
+| Field           | Required | Details                                                                          | Example             |
+| --------------- | :------: | -------------------------------------------------------------------------------- | ------------------- |
+| regionId        |     Y    | The specific region the AlibabaCloud OOS Parameter Store instance is deployed in | `"cn-hangzhou"`     |
+| accessKeyId     |     Y    | The AlibabaCloud Access Key ID to access this resource                           | `"accessKeyId"`     |
+| accessKeySecret |     Y    | The AlibabaCloud Access Key Secret to access this resource                       | `"accessKeySecret"` |
+| securityToken   |     N    | The AlibabaCloud Security Token to use                                           | `"securityToken"`   |
 
 ## Optional per-request metadata properties
 
 The following [optional query parameters]({{< ref "secrets_api.md#query-parameters" >}}) can be provided when retrieving secrets from this secret store:
 
-| Query Parameter       | 说明                                                                                                                                          |
+| Query Parameter       | Description                                                                                                                                 |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `metadata.version_id` | Version for the given secret key                                                                                                            |
 | `metadata.path`       | (For bulk requests only) The path from the metadata. If not set, defaults to root path (all secrets). |
@@ -56,7 +56,7 @@ The following [optional query parameters]({{< ref "secrets_api.md#query-paramete
 
 Setup AlibabaCloud OOS Parameter Store using the AlibabaCloud documentation: https\://www\.alibabacloud.com/help/en/doc-detail/186828.html.
 
-## 相关链接
+## Related links
 
 - [Secrets building block]({{< ref secrets >}})
 - [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})

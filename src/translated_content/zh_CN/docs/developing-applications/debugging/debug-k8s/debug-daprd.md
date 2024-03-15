@@ -6,7 +6,7 @@ weight: 2000
 description: 如何在你的 Kubernetes 集群中调试 Dapr sidecar(daprd)
 ---
 
-## Overview
+## 概述
 
 有时有必要了解 Dapr sidecar（daprd） 中发生了什么，它作为 sidecar 运行在您的应用程序旁边，尤其是当您诊断您的 Dapr 应用程序并想知道 Dapr 本身是否出了问题时。 此外，你可能正在为 Kubernetes 中的 Dapr 开发一个新功能，并且想调试你的代码。
 

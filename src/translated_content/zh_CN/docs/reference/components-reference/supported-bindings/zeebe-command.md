@@ -32,12 +32,12 @@ spec:
 
 ## Spec metadata fields
 
-| Field                    | Required | Binding support | Details                                                                                  | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ------------------------ | :------: | --------------- | ---------------------------------------------------------------------------------------- | ------------------------ |
-| `gatewayAddr`            |     Y    | Output          | Zeebe gateway address                                                                    | `"localhost:26500"`      |
-| `gatewayKeepAlive`       |     N    | Output          | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds | `"45s"`                  |
-| `usePlainTextConnection` |     N    | Output          | Whether to use a plain text connection or not                                            | `"true"`, `"false"`      |
-| `caCertificatePath`      |     N    | Output          | The path to the CA cert                                                                  | `"/path/to/ca-cert"`     |
+| Field                    | Required | Binding support | Details                                                                                  | Example              |
+| ------------------------ | :------: | --------------- | ---------------------------------------------------------------------------------------- | -------------------- |
+| `gatewayAddr`            |     Y    | Output          | Zeebe gateway address                                                                    | `"localhost:26500"`  |
+| `gatewayKeepAlive`       |     N    | Output          | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds | `"45s"`              |
+| `usePlainTextConnection` |     N    | Output          | Whether to use a plain text connection or not                                            | `"true"`, `"false"`  |
+| `caCertificatePath`      |     N    | Output          | The path to the CA cert                                                                  | `"/path/to/ca-cert"` |
 
 ## Binding support
 
@@ -147,7 +147,7 @@ The metadata parameters are:
 
 The binding returns a JSON with the following response:
 
-
+{{< tabs "BPMN" "DMN" >}}
 
 {{% codetab %}}
 
@@ -169,7 +169,7 @@ The binding returns a JSON with the following response:
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -204,7 +204,7 @@ The binding returns a JSON with the following response:
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -251,7 +251,7 @@ For more information please visit the [official documentation](https://docs.camu
 
 To perform a `create-instance` operation, invoke the Zeebe command binding with a `POST` method, and the following JSON body:
 
-
+{{< tabs "By BPMN process ID" "By process definition key" "Synchronous execution" >}}
 
 {{% codetab %}}
 
@@ -269,7 +269,7 @@ To perform a `create-instance` operation, invoke the Zeebe command binding with 
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -287,7 +287,7 @@ To perform a `create-instance` operation, invoke the Zeebe command binding with 
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -308,7 +308,7 @@ To perform a `create-instance` operation, invoke the Zeebe command binding with 
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -691,7 +691,7 @@ The data parameters are:
 
 The binding does not return a response body.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

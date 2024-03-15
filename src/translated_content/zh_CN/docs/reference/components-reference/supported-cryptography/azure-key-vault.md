@@ -42,12 +42,12 @@ The Azure Key Vault cryptography component supports authentication with Microsof
 
 ## Spec metadata fields
 
-| Field         | Required | Details                                                                                                                                                          | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `vaultName`   |     Y    | Azure Key Vault name                                                                                                                                             | `"mykeyvault"`           |
-| Auth metadata |     Y    | See [Authenticating to Azure]({{< ref "authenticating-azure.md" >}}) for more information |                          |
+| Field         | Required | Details                                                                                                                                                          | Example        |
+| ------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `vaultName`   |     Y    | Azure Key Vault name                                                                                                                                             | `"mykeyvault"` |
+| Auth metadata |     Y    | See [Authenticating to Azure]({{< ref "authenticating-azure.md" >}}) for more information |                |
 
-## 相关链接
+## Related links
 
 - [Cryptography building block]({{< ref cryptography >}})
 - [Authenticating to Azure]({{< ref azure-authentication >}})

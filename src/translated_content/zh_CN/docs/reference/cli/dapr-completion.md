@@ -5,7 +5,7 @@ linkTitle: completion
 description: Detailed information on the completion CLI command
 ---
 
-### 说明
+### Description
 
 Generates shell completion scripts
 
@@ -18,7 +18,7 @@ dapr completion [command]
 
 ### Flags
 
-| Name           | Environment Variable | Default | 说明                       |
+| Name           | Environment Variable | Default | Description              |
 | -------------- | -------------------- | ------- | ------------------------ |
 | `--help`, `-h` |                      |         | Prints this help message |
 

@@ -128,7 +128,7 @@ Dapr 工作流程允许您为任何时间范围（包括分钟、天甚至年）
 
 由于工作流重试策略是在代码中配置的，开发人员的具体体验可能会因工作流 SDK 版本的不同而有所差异。 通常，可以使用以下参数配置工作流重试策略。
 
-| Parameter   | 说明                     |
+| 参数          | 说明                     |
 | ----------- | ---------------------- |
 | **最大尝试次数**  | 执行活动或子工作流的最大次数。        |
 | **第一次重试间隔** | 第一次重试前的等待时间。           |
@@ -180,7 +180,7 @@ Dapr Workflow 依赖于 Durable Task Framework for Go（也称为 [durabletask-g
 
 例如，可以用以下方式代替
 
-
+{{< tabs ".NET" Java JavaScript Go >}}
 
 {{% codetab %}}
 
@@ -191,7 +191,7 @@ Guid newIdentifier = Guid.NewGuid();
 string randomString = GetRandomString();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -202,7 +202,7 @@ UUID newIdentifier = UUID.randomUUID();
 string randomString = GetRandomString();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -213,7 +213,7 @@ const newIdentifier = uuidv4();
 const randomString = getRandomString();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -222,13 +222,13 @@ const randomString = getRandomString();
 const currentTime = time.Now()
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 这样做：
 
-
+{{< tabs ".NET" Java JavaScript Go >}}
 
 {{% codetab %}}
 
@@ -239,7 +239,7 @@ Guid newIdentifier = context.NewGuid();
 string randomString = await context.CallActivityAsync<string>("GetRandomString");
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -250,7 +250,7 @@ Guid newIdentifier = context.NewGuid();
 String randomString = context.callActivity(GetRandomString.class.getName(), String.class).await();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -260,7 +260,7 @@ const currentTime = context.getCurrentUtcDateTime();
 const randomString = yield context.callActivity(getRandomString);
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -268,7 +268,7 @@ const randomString = yield context.callActivity(getRandomString);
 const currentTime = ctx.CurrentUTCDateTime()
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -280,7 +280,7 @@ const currentTime = ctx.CurrentUTCDateTime()
 
 例如，可以用以下方式代替
 
-
+{{< tabs ".NET" Java JavaScript Go >}}
 
 {{% codetab %}}
 
@@ -290,7 +290,7 @@ string configuration = Environment.GetEnvironmentVariable("MY_CONFIGURATION")!;
 string data = await new HttpClient().GetStringAsync("https://example.com/api/data");
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -302,7 +302,7 @@ HttpRequest request = HttpRequest.newBuilder().uri(new URI("https://postman-echo
 HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -321,7 +321,7 @@ fetch('https://postman-echo.com/get')
   });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -330,13 +330,13 @@ fetch('https://postman-echo.com/get')
 resp, err := http.Get("http://example.com/api/data")
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 这样做：
 
-
+{{< tabs ".NET" Java JavaScript Go >}}
 
 {{% codetab %}}
 
@@ -346,7 +346,7 @@ string configuation = workflowInput.Configuration; // imaginary workflow input a
 string data = await context.CallActivityAsync<string>("MakeHttpCall", "https://example.com/api/data");
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -356,7 +356,7 @@ String configuation = ctx.getInput(InputType.class).getConfiguration(); // imagi
 String data = ctx.callActivity(MakeHttpCall.class, "https://example.com/api/data", String.class).await();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -366,7 +366,7 @@ const configuation = workflowInput.getConfiguration(); // imaginary workflow inp
 const data = yield ctx.callActivity(makeHttpCall, "https://example.com/api/data");
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -376,9 +376,10 @@ err := ctx.CallActivity(MakeHttpCallActivity, workflow.ActivityInput("https://ex
 
 ```
 
+{{% /codetab %}}
+{{< /tabs >}}
 
-
-####
+#### 工作流函数必须只在工作流调度线程上执行。
 
 每种语言 SDK 的实现都要求所有函数操作在同一线程（goroutine 等）上运行。 该功能已安排。 工作流函数不得：
 
@@ -389,7 +390,7 @@ err := ctx.CallActivity(MakeHttpCallActivity, workflow.ActivityInput("https://ex
 
 例如，可以用以下方式代替
 
-
+{{< tabs ".NET" Java JavaScript Go >}}
 
 {{% codetab %}}
 
@@ -399,7 +400,7 @@ Task t = Task.Run(() => context.CallActivityAsync("DoSomething"));
 await context.CreateTimer(5000).ConfigureAwait(false);
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -411,13 +412,13 @@ new Thread(() -> {
 ctx.createTimer(Duration.ofSeconds(5)).await();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
 不要将JavaScript工作流声明为`async`。 Node.js运行时不保证异步函数是确定性的。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -429,13 +430,13 @@ go func() {
 err := ctx.CreateTimer(time.Second).Await(nil)
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 这样做：
 
-
+{{< tabs ".NET" Java JavaScript Go >}}
 
 {{% codetab %}}
 
@@ -445,7 +446,7 @@ Task t = context.CallActivityAsync("DoSomething");
 await context.CreateTimer(5000).ConfigureAwait(true);
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -455,13 +456,13 @@ ctx.callActivity(DoSomethingActivity.class.getName()).await();
 ctx.createTimer(Duration.ofSeconds(5)).await();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
 由于Node.js运行时不能保证异步函数是确定性的，所以始终将JavaScript工作流声明为同步生成器函数。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -471,7 +472,7 @@ task := ctx.CallActivity(DoSomething)
 task.Await(nil)
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

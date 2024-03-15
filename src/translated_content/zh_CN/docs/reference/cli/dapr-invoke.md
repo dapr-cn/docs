@@ -5,7 +5,7 @@ linkTitle: invoke
 description: Detailed information on the invoke CLI command
 ---
 
-### 说明
+### Description
 
 Invoke a method on a given Dapr application.
 
@@ -21,7 +21,7 @@ dapr invoke [flags]
 
 ### Flags
 
-| Name                | Environment Variable | Default | 说明                                                                       |
+| Name                | Environment Variable | Default | Description                                                              |
 | ------------------- | -------------------- | ------- | ------------------------------------------------------------------------ |
 | `--app-id`, `-a`    | `APP_ID`             |         | The application id to invoke                                             |
 | `--help`, `-h`      |                      |         | Print this help message                                                  |

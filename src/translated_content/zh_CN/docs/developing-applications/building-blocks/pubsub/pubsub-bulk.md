@@ -15,13 +15,13 @@ description: 了解如何在 Dapr 中使用批量发布和订阅 API。
 
 ### 批量发布消息时的限制
 
-The bulk publish API allows you to publish multiple messages to a topic in a single request. 它是_非事务性_，即从一个单一的批量请求中，一些消息可以成功，一些消息可以失败。 如果任何消息发布失败，批量发布操作将返回一个失败消息列表。
+批量发布API允许您在单个请求中发布多条消息到一个主题。 它是_非事务性_，即从一个单一的批量请求中，一些消息可以成功，一些消息可以失败。 如果任何消息发布失败，批量发布操作将返回一个失败消息列表。
 
 批量发布操作也不能保证消息的顺序。
 
 ### 如何使用Dapr扩展来开发和运行Dapr应用程序
 
-
+{{< tabs Java Javascript Dotnet Python Go "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
 
 {{% codetab %}}
 
@@ -53,7 +53,7 @@ class BulkPublisher {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -104,7 +104,7 @@ start().catch((e) => {
 });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -142,7 +142,7 @@ else
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -172,7 +172,7 @@ response = requests.post(base_url.format(pubsub_name, topic_name), json=payload)
 print(response.status_code)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -219,7 +219,7 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -242,7 +242,7 @@ curl -X POST http://localhost:3500/v1.0-alpha1/publish/bulk/my-pubsub-name/topic
       ]'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -264,7 +264,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Uri 'http://loca
       ]'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -309,7 +309,7 @@ scopes:
 
 应用程序收到一个 `EntryId` 与批量消息中的每个条目（单个消息）相关联。 这 `EntryId` 必须由应用程序用于传达该特定条目的状态。 如果应用程序在 `EntryId` 的状态上未能通知，那么它将被视为 `RETRY`。
 
-A JSON-encoded payload body with the processing status against each entry needs to be sent:
+需要发送一个带有每个条目处理状态的JSON编码的负载主体：
 
 ```json
 {
@@ -329,11 +329,11 @@ A JSON-encoded payload body with the processing status against each entry needs 
 
 可能的状态值:
 
-| Status    | 说明                                       |
-| --------- | ---------------------------------------- |
-| `SUCCESS` | Message is processed successfully        |
-| `RETRY`   | Message to be retried by Dapr            |
-| `DROP`    | Warning is logged and message is dropped |
+| 状态        | 说明            |
+| --------- | ------------- |
+| `SUCCESS` | 消息已成功处理       |
+| `RETRY`   | 将由 Dapr 重试的消息 |
+| `DROP`    | 警告被记录下来，信息被删除 |
 
 请参考[预期的批量订阅HTTP响应]({{< ref pubsub_api.md >}})以获取有关响应的更多见解。
 
@@ -341,7 +341,7 @@ A JSON-encoded payload body with the processing status against each entry needs 
 
 有关如何使用批量订阅，请参阅以下代码示例：
 
-
+{{< tabs "Java" "JavaScript" ".NET" >}}
 
 {{% codetab %}}
 
@@ -383,7 +383,7 @@ class BulkSubscriber {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -418,7 +418,7 @@ async function start() {
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -468,7 +468,7 @@ public class BulkMessageController : ControllerBase
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -490,11 +490,11 @@ public class BulkMessageController : ControllerBase
 
 目前，以下组件已更新以支持此级别的优化：
 
-|     Component    | Bulk Publish | Bulk Subscribe |
-| :--------------: | :----------: | -------------- |
-|       Kafka      |      Yes     | Yes            |
-| Azure Servicebus |      Yes     | Yes            |
-|  Azure Eventhubs |      Yes     | Yes            |
+|     Component    | 批量发布 | 批量订阅 |
+| :--------------: | :--: | ---- |
+|       Kafka      |  Yes | Yes  |
+| Azure Servicebus |  Yes | Yes  |
+|  Azure Eventhubs |  Yes | Yes  |
 
 ## 例子
 

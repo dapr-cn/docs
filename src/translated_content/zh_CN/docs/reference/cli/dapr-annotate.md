@@ -5,7 +5,7 @@ linkTitle: annotate
 description: Add Dapr annotatations to a Kubernetes configuration
 ---
 
-### 说明
+### Description
 
 Add Dapr annotations to a Kubernetes configuration. This enables you to add/change the Dapr annotations on a deployment files. See [Kubernetes annotations]({{< ref arguments-annotations-overview >}}) for a full description of each annotation available in the following list of flags.
 
@@ -21,7 +21,7 @@ dapr annotate [flags] CONFIG-FILE
 
 ### Flags
 
-| Name                                 | Environment Variable | Default | 说明                                                                                                                                                                                                     |
+| Name                                 | Environment Variable | Default | Description                                                                                                                                                                                            |
 | ------------------------------------ | -------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--kubernetes, -k`                   |                      |         | Apply annotations to Kubernetes resources. Required                                                                                                                                                    |
 | `--api-token-secret`                 |                      |         | The secret to use for the API token                                                                                                                                                                    |

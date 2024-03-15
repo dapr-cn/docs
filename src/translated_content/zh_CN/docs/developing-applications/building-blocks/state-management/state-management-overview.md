@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 状态管理概览
-linkTitle: Overview
+linkTitle: 概述
 weight: 100
 description: 状态管理 API 构建块概述
 ---
@@ -42,7 +42,7 @@ Dapr数据存储被建模为组件，可以在不修改你的服务代码的情�
 
 [并非所有的存储都是相等的]({{< ref supported-state-stores.md >}}). 为了保证应用程序的可移植性，你可以了解下存储引擎的功能，使你的代码适应不同的存储引擎。
 
-#### Concurrency
+#### 并发
 
 Dapr支持使用ETags的乐观并发控制（OCC）。 当请求状态值时，Dapr始终会将一个ETag属性附加到返回的状态中。 当用户代码:
 
@@ -63,7 +63,7 @@ Dapr支持使用ETags的乐观并发控制（OCC）。 当请求状态值时，D
 
 阅读[API参考]({{< ref state_api.md >}})，了解如何设置并发选项。
 
-#### Consistency
+#### 一致性
 
 Dapr同时支持**强一致性**和**最终一致性**，其中最终一致性为默认行为。
 
@@ -147,7 +147,7 @@ KEYS "myApp*"
 
 ##### 查询 Actor 状态
 
-如果数据存储支持 SQL 查询，您可以使用 SQL 查询 Actor 的状态。 For example:
+如果数据存储支持 SQL 查询，您可以使用 SQL 查询 Actor 的状态。 例如：
 
 ```sql
 SELECT * FROM StateTable WHERE Id='<app-id>||<actor-type>||<actor-id>||<key>'
@@ -163,7 +163,7 @@ SELECT AVG(value) FROM StateTable WHERE Id LIKE '<app-id>||<thermometer>||*||tem
 
 Dapr 允许[对每个状态设置请求的生存时间(TTL)]({{< ref state-store-ttl.md >}})。 这意味着应用程序可以为每个存储的状态设置生存时间，并且在过期后无法检索这些状态。
 
-### State management API
+### 状态管理 API
 
 状态管理API可以在[state management API reference]({{< ref state_api.md >}})中找到，它描述了如何通过提供键来检索、保存、删除和查询状态值。
 
@@ -176,7 +176,7 @@ Dapr 允许[对每个状态设置请求的生存时间(TTL)]({{< ref state-store
 | 快速入门/教程                                                                                                                      | 说明                                                                                              |
 | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [状态管理快速入门]({{< ref statemanagement-quickstart.md >}}) | 使用状态管理 API 创建有状态应用程序。                                                                           |
-| [你好，世界](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-world)                                               | _推荐_ <br> 演示如何在本地运行 Dapr。 重点介绍服务调用和状态管理。                                                        |
+| [Hello world 教程](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md)                            | _推荐_ <br> 演示如何在本地运行 Dapr。 重点介绍服务调用和状态管理。                                                        |
 | [你好，世界 Kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)                               | _推荐_ <br> 演示如何在 Kubernetes 中运行 Dapr。 重点介绍服务调用和_状态管理_。 |
 
 ### 直接在应用中开始使用状态管理

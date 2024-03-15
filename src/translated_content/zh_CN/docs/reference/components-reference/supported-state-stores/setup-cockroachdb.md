@@ -51,7 +51,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                      | Required | Details                                                                                                                                                                    | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                      |
+| Field                      | Required | Details                                                                                                                                                                    | Example                                                                       |
 | -------------------------- | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | `connectionString`         |     Y    | The connection string for CockroachDB                                                                                                                                      | `"host=localhost user=root port=26257 connect_timeout=10 database=dapr_test"` |
 | `timeoutInSeconds`         |     N    | Timeout, in seconds, for all database operations. Defaults to `20`                                                                                                         | `30`                                                                          |
@@ -63,7 +63,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Setup CockroachDB
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 
@@ -83,7 +83,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
    docker exec -it roach1 ./cockroach sql --insecure -e 'create database dapr_test'
    ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 The easiest way to install CockroachDB on Kubernetes is by using the [CockroachDB Operator](https://github.com/cockroachdb/cockroach-operator):
@@ -104,7 +104,7 @@ You can set the interval for the deletion of expired records with the `cleanupIn
 - Longer intervals require less frequent scans for expired rows, but can require storing expired records for longer, potentially requiring more storage space. If you plan to store many records in your state table, with short TTLs, consider setting `cleanupIntervalInSeconds` to a smaller value - for example, `300` (300 seconds, or 5 minutes).
 - If you do not plan to use TTLs with Dapr and the CockroachDB state store, you should consider setting `cleanupIntervalInSeconds` to a value <= 0 (e.g. `0` or `-1`) to disable the periodic cleanup and reduce the load on the database.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

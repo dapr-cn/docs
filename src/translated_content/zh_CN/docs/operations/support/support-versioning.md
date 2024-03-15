@@ -58,7 +58,7 @@ SDKs, CLIs and Dashboard are versioning follows a `MAJOR.MINOR.PATCH` format. A 
 
 Samples and examples in SDKs version with that repo.
 
-## Components
+## 组件
 
 Components are implemented in the components-contrib repository and follow a `MAJOR` versioning scheme. The version for components adheres to major versions (vX), as patches and non-breaking changes are added to the latest major version. The version is incremented when there’s a non-backwards compatible change in a component interface, for example, changing an existing method in the State Store interface.
 
@@ -67,7 +67,7 @@ The [components-contrib](https://github.com/dapr/components-contrib/) repo relea
 Note: Components have a production usage lifecycle status: Alpha, Beta and Stable. These statuses are not related to their versioning. The tables of supported components shows both their versions and their status.
 
 - List of [state store components]({{< ref supported-state-stores.md >}})
-- List of [pub/sub components]({{< ref supported-pubsub.md >}})
+- 支持的[发布/订阅组件]({{< ref supported-pubsub.md >}})
 - List of [binding components]({{< ref supported-bindings.md >}})
 - List of [secret store components]({{< ref supported-secret-stores.md >}})
 - List of [configuration store components]({{< ref supported-configuration-stores.md >}})
@@ -123,7 +123,7 @@ Quickstarts in the [Quickstarts repo](https://github.com/dapr/quickstarts) are v
 
 Samples in the [Samples repo](https://github.com/dapr/samples) are each versioned on a case by case basis depending on the sample maintainer. Samples that become very out of date with the runtime releases (many versions behind) or have not been maintained for more than 1 year will be removed.
 
-## 相关链接
+## Related links
 
 - Read the [Supported releases]({{< ref support-release-policy.md >}})
 - Read the [Breaking Changes and Deprecation Policy]({{< ref breaking-changes-and-deprecations.md >}})

@@ -8,7 +8,7 @@ description: Configure a larger http read buffer size
 
 Dapr has a default limit of 4KB for the http header read buffer size.  When sending http headers that are bigger than the default 4KB, you can increase this value. Otherwise, you may encounter a `Too big request header` service invocation error. You can change the http header size by using the `dapr.io/http-read-buffer-size` annotation or `--dapr-http-read-buffer-size` flag when using the CLI.
 
-
+{{< tabs Self-hosted Kubernetes >}}
 
 {{% codetab %}}
 
@@ -20,7 +20,7 @@ dapr run --dapr-http-read-buffer-size 16 node app.js
 
 This tells Dapr to set maximum read buffer size to `16` KB.
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -51,10 +51,10 @@ spec:
 ...
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Dapr Kubernetes pod annotations spec]({{< ref arguments-annotations-overview\.md >}})

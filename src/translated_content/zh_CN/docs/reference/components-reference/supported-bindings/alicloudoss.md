@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field         | Required | Binding support | Details                     | 如何使用Dapr扩展来开发和运行Dapr应用程序              |
+| Field         | Required | Binding support | Details                     | Example                               |
 | ------------- | -------- | --------------- | --------------------------- | ------------------------------------- |
 | `endpoint`    | Y        | Output          | Alicloud OSS endpoint.      | https\://oss-cn-hangzhou.aliyuncs.com |
 | `accessKeyID` | Y        | Output          | Access key ID credential.   |                                       |
@@ -64,11 +64,11 @@ To perform a create object operation, invoke the binding with a `POST` method an
 By default, a random UUID is auto-generated as the object key. See below for Metadata support to set the key for the object.
 {{% /alert %}}
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
 **Saving to a random generated UUID file**
 
-
+{{< tabs "Windows" "Linux/MacOS" >}}
 
 {{% codetab %}}
 
@@ -76,7 +76,7 @@ By default, a random UUID is auto-generated as the object key. See below for Met
 curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -84,13 +84,14 @@ curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localh
 curl -d '{ "operation": "create", "data": "Hello World" }' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 <br />
 
-
+**Saving to a specific file**
+{{< tabs "Windows" "Linux/MacOS" >}}
 
 {{% codetab %}}
 
@@ -98,7 +99,7 @@ curl -d '{ "operation": "create", "data": "Hello World" }' http://localhost:<dap
 curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\", \"metadata\": { \"key\": \"my-key\" } }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -106,7 +107,7 @@ curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\", \"metadata\": {
 curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "key": "my-key" } }' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -131,7 +132,7 @@ You can set the key with the following metadata:
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Bindings building block]({{< ref bindings >}})
 - [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})

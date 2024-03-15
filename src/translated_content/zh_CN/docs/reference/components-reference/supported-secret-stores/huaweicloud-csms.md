@@ -34,17 +34,17 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                          | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| --------------- | :------: | ---------------------------------------------------------------- | ------------------------ |
-| region          |     Y    | The specific region the HuaweiCloud CSMS instance is deployed in | `"cn-north-4"`           |
-| accessKey       |     Y    | The HuaweiCloud Access Key to access this resource               | `"accessKey"`            |
-| secretAccessKey |     Y    | The HuaweiCloud Secret Access Key to access this resource        | `"secretAccessKey"`      |
+| Field           | Required | Details                                                          | Example             |
+| --------------- | :------: | ---------------------------------------------------------------- | ------------------- |
+| region          |     Y    | The specific region the HuaweiCloud CSMS instance is deployed in | `"cn-north-4"`      |
+| accessKey       |     Y    | The HuaweiCloud Access Key to access this resource               | `"accessKey"`       |
+| secretAccessKey |     Y    | The HuaweiCloud Secret Access Key to access this resource        | `"secretAccessKey"` |
 
 ## Optional per-request metadata properties
 
 The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided when retrieving secrets from this secret store:
 
-| Query Parameter       | 说明                                |
+| Query Parameter       | Description                       |
 | --------------------- | --------------------------------- |
 | `metadata.version_id` | Version for the given secret key. |
 
@@ -52,7 +52,7 @@ The following [optional query parameters]({{< ref "secrets_api#query-parameters"
 
 Setup HuaweiCloud Cloud Secret Management Service (CSMS) using the HuaweiCloud documentation: https\://support.huaweicloud.com/intl/en-us/usermanual-dew/dew_01_9993.html.
 
-## 相关链接
+## Related links
 
 - [Secrets building block]({{< ref secrets >}})
 - [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})

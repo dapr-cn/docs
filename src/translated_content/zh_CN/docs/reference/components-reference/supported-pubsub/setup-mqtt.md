@@ -38,7 +38,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field        |        Required        | Details                                                                                                                                                                                                               | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                   |
+| Field        |        Required        | Details                                                                                                                                                                                                               | Example                                                                                    |
 | ------------ | :--------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | url          |            Y           | Address of the MQTT broker. Can be `secretKeyRef` to use a secret reference. <br> Use the **`tcp://`** URI scheme for non-TLS communication. <br> Use the **`ssl://`** URI scheme for TLS communication.              | `"tcp://[username][:password]@host.domain[:port]"`                                         |
 | consumerID   |            N           | The client ID used to connect to the MQTT broker for the consumer connection. Defaults to the Dapr app ID.<br>Note: if `producerID` is not set, `-consumer` is appended to this value for the consumer connection     | `"myMqttClientApp"`                                                                        |
@@ -64,7 +64,7 @@ There is a crucial difference between the two ways of retries:
 
 ### Communication using TLS
 
-To configure communication using TLS, ensure that the MQTT broker (for example, mosquitto) is configured to support certificates and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. For example:
+To configure communication using TLS, ensure that the MQTT broker (for example, mosquitto) is configured to support certificates and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. 例如：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -99,7 +99,7 @@ Note that while the `caCert` and `clientCert` values may not be secrets, they ca
 
 ### Consuming a shared topic
 
-When consuming a shared topic, each consumer must have a unique identifier. By default, the application ID is used to uniquely identify each consumer and publisher. In self-hosted mode, invoking each `dapr run` with a different application ID is sufficient to have them consume from the same shared topic. However, on Kubernetes, multiple instances of an application pod will share the same application ID, prohibiting all instances from consuming the same topic. To overcome this, configure the component's `consumerID` metadata with a `{uuid}` tag, which will give each instance a randomly generated `consumerID` value on start up. For example:
+When consuming a shared topic, each consumer must have a unique identifier. By default, the application ID is used to uniquely identify each consumer and publisher. In self-hosted mode, invoking each `dapr run` with a different application ID is sufficient to have them consume from the same shared topic. However, on Kubernetes, multiple instances of an application pod will share the same application ID, prohibiting all instances from consuming the same topic. To overcome this, configure the component's `consumerID` metadata with a `{uuid}` tag, which will give each instance a randomly generated `consumerID` value on start up. 例如：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -130,7 +130,7 @@ Note that in the case, the value of the consumer ID is random every time Dapr re
 
 ## Create a MQTT broker
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 You can run a MQTT broker [locally using Docker](https://hub.docker.com/_/eclipse-mosquitto):
@@ -139,7 +139,8 @@ You can run a MQTT broker [locally using Docker](https://hub.docker.com/_/eclips
 docker run -d -p 1883:1883 -p 9001:9001 --name mqtt eclipse-mosquitto:1.6
 ```
 
-
+You can then interact with the server using the client port: `mqtt://localhost:1883`
+{{% /codetab %}}
 
 {{% codetab %}}
 You can run a MQTT broker in kubernetes using following yaml:
@@ -194,11 +195,12 @@ spec:
       protocol: TCP
 ```
 
-
+You can then interact with the server using the client port: `tcp://mqtt-broker.default.svc.cluster.local:1883`
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

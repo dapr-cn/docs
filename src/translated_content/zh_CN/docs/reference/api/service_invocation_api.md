@@ -38,7 +38,7 @@ If there's a network error or other transient error, Dapr will return a `500` er
 
 In case a user invokes Dapr over HTTP to talk to a gRPC enabled service, an error from the called gRPC service will return as `500` and a successful response will return as `200OK`.
 
-| Code | 说明                                     |
+| Code | Description                            |
 | ---- | -------------------------------------- |
 | XXX  | Upstream status returned               |
 | 400  | Method name not given                  |
@@ -47,7 +47,7 @@ In case a user invokes Dapr over HTTP to talk to a gRPC enabled service, an erro
 
 ### URL Parameters
 
-| Parameter         | 说明                                                                 |
+| Parameter         | Description                                                        |
 | ----------------- | ------------------------------------------------------------------ |
 | daprPort          | the Dapr port                                                      |
 | appID             | the App ID associated with the remote app                          |

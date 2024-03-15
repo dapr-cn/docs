@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Resiliency spec
-linkTitle: Resiliency
+linkTitle: 弹性
 weight: 3000
 description: The basic spec for a Dapr resiliency resource
 ---
@@ -55,11 +55,11 @@ targets: # Required
 
 ## Spec fields
 
-| Field    | Required | Details                                                                                                                                                                                                                                                                                      | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                   |
+| Field    | Required | Details                                                                                                                                                                                                                                                                                      | Example                                                                    |
 | -------- | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | policies |     Y    | The configuration of resiliency policies, including: <br><ul><li>`timeouts`</li><li>`retries`</li><li>`circuitBreakers`</li></ul> <br> [See more examples with all of the built-in policies]({{< ref policies.md >}}) | timeout: `general`<br>retry: `retryForever`<br>circuit breaker: `simpleCB` |
 | targets  |     Y    | The configuration for the applications, actors, or components that use the resiliency policies. <br>[See more examples in the resiliency targets guide]({{< ref targets.md >}})                                       | `apps` <br>`components`<br>`actors`                                        |
 
-## 相关链接
+## Related links
 
 [Learn more about resiliency policies and targets]({{< ref resiliency-overview\.md >}})

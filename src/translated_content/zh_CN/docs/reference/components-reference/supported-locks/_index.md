@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Lock component specs
-linkTitle: Locks
+linkTitle: 锁
 weight: 6000
 description: The supported locks that interface with Dapr
 no_list: true

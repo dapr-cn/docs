@@ -6,7 +6,7 @@ weight: 2000
 description: Customize processing pipelines by adding middleware components
 ---
 
-Dapr allows custom processing pipelines to be defined by chaining a series of middleware components. There are two places that you can use a middleware pipeline:
+Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 There are two places that you can use a middleware pipeline:
 
 1. Building block APIs - HTTP middleware components are executed when invoking any Dapr HTTP APIs.
 2. Service-to-Service invocation - HTTP middleware components are applied to service-to-service invocation calls.
@@ -65,7 +65,7 @@ spec:
         type: middleware.http.uppercase
 ```
 
-## 相关链接
+## Related links
 
 - [Learn how to author middleware components]({{< ref develop-middleware.md >}})
 - [Component schema]({{< ref component-schema.md >}})

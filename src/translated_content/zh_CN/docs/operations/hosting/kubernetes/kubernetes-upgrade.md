@@ -16,7 +16,7 @@ Refer to the [Dapr version policy]({{< ref "support-release-policy.md#upgrade-pa
 
  <!-- Dapr CLI -->
 
-
+{{% codetab %}}
 
 ## Upgrade using the Dapr CLI
 
@@ -57,7 +57,7 @@ The CustomResourceDefinition "configurations.dapr.io" is invalid: spec.preserveU
 
 2. Proceed with the `dapr upgrade --runtime-version {{% dapr-latest-version long="true" %}} -k` command.
 
-
+{{% /codetab %}}
 
  <!-- Helm -->
 
@@ -119,7 +119,7 @@ As of version 1.0.0 onwards, existing certificate values will automatically be r
    kubectl rollout restart deploy/<DEPLOYMENT-NAME>
    ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -127,7 +127,7 @@ As of version 1.0.0 onwards, existing certificate values will automatically be r
 
 [Enable high availability mode in an existing Dapr deployment with a few additional steps.]({{< ref "kubernetes-production.md#enabling-high-availability-in-an-existing-dapr-deployment" >}})
 
-## 相关链接
+## Related links
 
 - [Dapr on Kubernetes]({{< ref kubernetes-overview\.md >}})
 - [More on upgrading Dapr with Helm]({{< ref "kubernetes-production.md#upgrade-dapr-with-helm" >}})

@@ -8,12 +8,12 @@ description: 修改默认的 Dapr actor 运行时配置行为
 
 您可以使用以下配置参数修改默认的 Dapr actor 运行时行为。
 
-| Parameter                                                 | 说明                                                                                                                     | Default         |
+| 参数                                                        | 说明                                                                                                                     | 默认值             |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------- |
-| `entities`                                                | 主机支持的角色类型。                                                                                                             | N/A             |
+| 108469                                                    | 主机支持的角色类型。                                                                                                             | N/A             |
 | `actorIdleTimeout`                                        | 停用空闲 actor 前的超时。 每当经过 `actorScanInterval` 会进行一次超时检查。                                                                   | 60分钟            |
 | `actorScanInterval`                                       | 持续时间，指定多久扫描一次 Actors，以停用闲置的 Actors。 闲置时间超过 actor_idle_timeout 的 Actors 将被停用。 | 30秒             |
-| `drainOngoingCallTimeout`                                 | 重新平衡后的 Actors 重定位过程中的持续时间。 这将指定当前活动 actor 方法完成的超时时间。 If there is no current actor method call, this is ignored.        | 60秒             |
+| `drainOngoingCallTimeout`                                 | 重新平衡后的 Actors 重定位过程中的持续时间。 这将指定当前活动 actor 方法完成的超时时间。 如果没有当前 actor 方法调用，那么将忽略此时间。                                       | 60秒             |
 | `drainRebalancedActors`                                   | 如果为 true ，那么 Dapr 将等待 `drainOngoingCallTimeout` 以允许当前 actor 调用完成，然后再尝试停用 actor。                                        | true            |
 | `reentrancy` (`ActorReentrancyConfig`) | 配置 actor 的重入行为。 如果不提供，则禁用重入功能。                                                                                         | disabled, false |
 | `remindersStoragePartitions`                              | 配置 actor 提醒的分区数量。 如果未提供，则所有 reminder 将作为单个记录保存在 actor 的状态存储中。                                                          | 0               |
@@ -21,7 +21,7 @@ description: 修改默认的 Dapr actor 运行时配置行为
 
 ## 示例
 
-
+{{< tabs ".NET" JavaScript Python Java Go >}}
 
 {{% codetab %}}
 
@@ -63,7 +63,7 @@ public void ConfigureServices(IServiceCollection services)
 
 [查看注册 Actors 的.NET SDK文档]({{< ref "dotnet-actors-usage.md#registring-actors" >}})。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -97,7 +97,7 @@ const client = new DaprClient(daprHost, daprPort, CommunicationProtocolEnum.HTTP
 
 [查看使用JavaScript SDK编写actors的文档]({{< ref "js-actors.md#registering-actors" >}})。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -121,7 +121,7 @@ ActorRuntime.set_actor_config(
 
 [请参阅有关使用 Python SDK 运行 Actors 的文档]({{< ref "python-actor.md" >}})
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -141,7 +141,7 @@ ActorRuntime.getInstance().getConfig().setRemindersStoragePartitions(7);
 
 [请参阅有关使用Java SDK编写Actor的文档]({{< ref "java.md#actors" >}}).
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -194,7 +194,7 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 
 [查看使用 Go SDK 与 actors 的示例](https://github.com/dapr/go-sdk/tree/main/examples/actor)。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

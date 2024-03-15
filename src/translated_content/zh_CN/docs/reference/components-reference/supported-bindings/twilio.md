@@ -36,12 +36,12 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field        | Required | Binding support | Details                              | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ------------ | :------: | --------------- | ------------------------------------ | ------------------------ |
-| `toNumber`   |     Y    | Output          | The target number to send the sms to | `"111-111-1111"`         |
-| `fromNumber` |     Y    | Output          | The sender phone number              | `"222-222-2222"`         |
-| `accountSid` |     Y    | Output          | The Twilio account SID               | `"account sid"`          |
-| `authToken`  |     Y    | Output          | The Twilio auth token                | `"auth token"`           |
+| Field        | Required | Binding support | Details                              | Example          |
+| ------------ | :------: | --------------- | ------------------------------------ | ---------------- |
+| `toNumber`   |     Y    | Output          | The target number to send the sms to | `"111-111-1111"` |
+| `fromNumber` |     Y    | Output          | The sender phone number              | `"222-222-2222"` |
+| `accountSid` |     Y    | Output          | The Twilio account SID               | `"account sid"`  |
+| `authToken`  |     Y    | Output          | The Twilio auth token                | `"auth token"`   |
 
 ## Binding support
 
@@ -49,7 +49,7 @@ This component supports **output binding** with the following operations:
 
 - `create`
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

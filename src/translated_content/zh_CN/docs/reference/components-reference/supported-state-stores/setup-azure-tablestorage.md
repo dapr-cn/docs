@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                                                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                             |
+| Field             | Required | Details                                                                                                                                                                                 | Example                                              |
 | ----------------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | `accountName`     |     Y    | The storage account name                                                                                                                                                                | `"mystorageaccount"`.                                |
 | `accountKey`      |     Y    | Primary or secondary storage key                                                                                                                                                        | `"key"`                                              |
@@ -102,11 +102,11 @@ will create the following record in a table:
 | ------------ | ------- | ----- |
 | myservice    | nihilus | darth |
 
-## Concurrency
+## 并发
 
 Azure Table Storage state concurrency is achieved by using `ETag`s according to [the official documentation](https://docs.microsoft.com/azure/storage/common/storage-concurrency#managing-concurrency-in-table-storage).
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

@@ -30,7 +30,7 @@ Dapr 提供了各种包来帮助开发 Java 应用程序。 使用它们，您�
 
 接下来，导入Java SDK包以开始使用。 选择您首选的构建工具以了解如何导入。
 
-
+{{< tabs Maven Gradle >}}
 
 {{% codetab %}}
 
@@ -67,7 +67,7 @@ Dapr 提供了各种包来帮助开发 Java 应用程序。 使用它们，您�
 </project>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -87,7 +87,7 @@ dependencies {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

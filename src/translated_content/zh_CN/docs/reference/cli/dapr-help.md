@@ -5,7 +5,7 @@ linkTitle: help
 description: Detailed information on the help CLI command
 ---
 
-### 说明
+### Description
 
 Help provides help for any command in the application.
 
@@ -17,6 +17,6 @@ dapr help [command] [flags]
 
 ### Flags
 
-| Name           | Environment Variable | Default | 说明                       |
+| Name           | Environment Variable | Default | Description              |
 | -------------- | -------------------- | ------- | ------------------------ |
 | `--help`, `-h` |                      |         | Prints this help message |

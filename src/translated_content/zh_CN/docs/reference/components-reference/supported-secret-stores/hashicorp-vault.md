@@ -52,7 +52,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field               | Required | Details                                                                                                                                                                                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序          |
+| Field               | Required | Details                                                                                                                                                                                                                                                                 | Example                           |
 | ------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | vaultAddr           |     N    | The address of the Vault server. Defaults to `"https://127.0.0.1:8200"`                                                                                                                                                                                                 | `"https://127.0.0.1:8200"`        |
 | caPem               |     N    | The inlined contents of the CA certificate to use, in PEM format. If defined, takes precedence over `caPath` and `caCert`.                                                                                                                                              | See below                         |
@@ -71,13 +71,13 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided to Hashicorp Vault secret store component:
 
-| Query Parameter       | 说明                                |
+| Query Parameter       | Description                       |
 | --------------------- | --------------------------------- |
 | `metadata.version_id` | Version for the given secret key. |
 
 ## Setup Hashicorp Vault instance
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 Setup Hashicorp Vault using the Vault documentation: https\://www\.vaultproject.io/docs/install/index.html.
@@ -147,7 +147,7 @@ spec:
           -----END CERTIFICATE-----
 ```
 
-## 相关链接
+## Related links
 
 - [Secrets building block]({{< ref secrets >}})
 - [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})

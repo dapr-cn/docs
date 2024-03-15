@@ -20,7 +20,7 @@ Dapr 应用能够在没有 CloudEvent 封装的情况下将原始事件发布到
 
 要禁用 CloudEvent 包装，请将 `rawPayload` 元数据设置为 `true` ，作为发布的一部分。 这允许订阅者接收这些消息，而不必分析 CloudEvent 。
 
-
+{{< tabs curl "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
 
@@ -28,7 +28,7 @@ Dapr 应用能够在没有 CloudEvent 封装的情况下将原始事件发布到
 curl -X "POST" http://localhost:3500/v1.0/publish/pubsub/TOPIC_A?metadata.rawPayload=true -H "Content-Type: application/json" -d '{"order-number": "345"}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -50,7 +50,7 @@ with DaprClient() as d:
     print(req_data, flush=True)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -66,7 +66,7 @@ $app->run(function(\DI\FactoryInterface $factory) {
 });
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -80,7 +80,7 @@ Dapr 应用程序还能够订阅来自不使用 CloudEvent 封装的现有 pub/s
 
 在使用编程式订阅时，添加额外的元数据条目`rawPayload`，这样Dapr sidecar就会自动将有效载荷包装到与当前Dapr SDK兼容的CloudEvent中。
 
-
+{{< tabs "Python" "PHP SDK" >}}
 
 {{% codetab %}}
 
@@ -112,7 +112,8 @@ def ds_subscriber():
 app.run()
 ```
 
-
+{{% /codetab %}}
+{{% codetab %}}
 
 ```php
 <?php
@@ -138,7 +139,7 @@ $app->start();
 
 {{% /codetab %}}
 
-
+{{< /tabs >}}
 
 ## 声明式订阅原始事件
 

@@ -74,7 +74,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field                                                     | Required | Details                                                                   | 如何使用Dapr扩展来开发和运行Dapr应用程序         |
+| Field                                                     | Required | Details                                                                   | Example                          |
 | --------------------------------------------------------- | :------: | ------------------------------------------------------------------------- | -------------------------------- |
 | natsURL                                                   |     Y    | NATS server address URL                                                   | `"nats://localhost:4222"`        |
 | jwt                                                       |     N    | NATS decentralized authentication JWT                                     | `"eyJhbGciOiJ...6yJV_adQssw5c"`  |
@@ -104,7 +104,7 @@ spec:
 
 ## Create a NATS server
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 You can run a NATS Server with JetStream enabled locally using Docker:
@@ -132,7 +132,7 @@ kubectl get svc my-nats
 
 For more information on helm chart settings, see the [Helm chart documentation](https://helm.sh/docs/helm/helm_install/).
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -148,7 +148,7 @@ nats -s localhost:4222 stream add myStream --subjects mySubject
 
 Let's say you'd like each message to be processed by only one application or pod with the same app-id. Typically, the `consumerID` metadata spec helps you define competing consumers.
 
-Since `consumerID` is not supported in NATS JetStream, you need to specify `durableName` and `queueGroupName` to achieve the competing consumers pattern. For example:
+Since `consumerID` is not supported in NATS JetStream, you need to specify `durableName` and `queueGroupName` to achieve the competing consumers pattern. 例如：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -169,7 +169,7 @@ spec:
     value: "my-queue-group"
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

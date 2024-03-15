@@ -60,7 +60,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 > When a new RabbitMQ message gets published, all values from the associated metadata are added to the message's header values.
 
-| Field                    | Required | Binding support | Details                                                                                                                                                                                                                                                    | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                              |
+| Field                    | Required | Binding support | Details                                                                                                                                                                                                                                                    | Example                                                                                                               |
 | ------------------------ | :------: | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `queueName`              |     Y    | Input/Output    | The RabbitMQ queue name                                                                                                                                                                                                                                    | `"myqueue"`                                                                                                           |
 | `host`                   |     Y    | Input/Output    | The RabbitMQ host address                                                                                                                                                                                                                                  | `"amqp://[username][:password]@host.domain[:port]"` or with TLS: `"amqps://[username][:password]@host.domain[:port]"` |
@@ -94,9 +94,10 @@ To set time to live at message level use the `metadata` section in the request b
 
 The field name is `ttlInSeconds`.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
-
+{{< tabs Windows Linux >}}
+{{% codetab %}}
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
@@ -112,7 +113,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
       }"
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -130,9 +131,10 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
       }'
 ```
 
+{{% /codetab %}}
+{{< /tabs >}}
 
-
-##
+## Specifying a priority per message
 
 Priority can be defined at the message level. If `maxPriority` parameter is set, high priority messages will have priority over other low priority messages.
 
@@ -140,9 +142,10 @@ To set priority at message level use the `metadata` section in the request body 
 
 The field name is `priority`.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
-
+{{< tabs Windows Linux >}}
+{{% codetab %}}
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
@@ -158,7 +161,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
       }"
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -176,9 +179,10 @@ curl -X POST http://localhost:3500/v1.0/bindings/myRabbitMQ \
       }'
 ```
 
+{{% /codetab %}}
+{{< /tabs >}}
 
-
-##
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

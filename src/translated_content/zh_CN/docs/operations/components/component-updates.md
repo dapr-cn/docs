@@ -50,10 +50,10 @@ Any create, update, or deletion of these component types is ignored by the sidec
 
 ## 深入阅读
 
-- [Components concept]({{< ref components-concept.md >}})
+- [Dapr组件概念]({{< ref components-concept.md >}})
 - [Reference secrets in component definitions]({{< ref component-secrets.md >}})
 - [Supported state stores]({{< ref supported-state-stores >}})
 - [Supported pub/sub brokers]({{< ref supported-pubsub >}})
 - [Supported secret stores]({{< ref supported-secret-stores >}})
-- [Supported bindings]({{< ref supported-bindings >}})
+- [支持的绑定列表]({{< ref supported-bindings >}})
 - [Set component scopes]({{< ref component-scopes.md >}})

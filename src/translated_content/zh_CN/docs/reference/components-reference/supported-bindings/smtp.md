@@ -50,19 +50,19 @@ The example configuration shown above, contain a username and password as plain-
 
 ## Spec metadata fields
 
-| Field           | Required | Binding support | Details                                                                                                                                                                                                                            | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| --------------- | :------: | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `host`          |     Y    | Output          | The host where your SMTP server runs                                                                                                                                                                                               | `"smtphost"`             |
-| `port`          |     Y    | Output          | The port your SMTP server listens on                                                                                                                                                                                               | `"9999"`                 |
-| `user`          |     Y    | Output          | The user to authenticate against the SMTP server                                                                                                                                                                                   | `"user"`                 |
-| `password`      |     Y    | Output          | The password of the user                                                                                                                                                                                                           | `"password"`             |
-| `skipTLSVerify` |     N    | Output          | If set to true, the SMPT server's TLS certificate will not be verified. Defaults to `"false"`                                                                                                                                      | `"true"`, `"false"`      |
-| `emailFrom`     |     N    | Output          | If set, this specifies the email address of the sender. See [also](#example-request)                                                                                                                                               | `"me@example.com"`       |
-| `emailTo`       |     N    | Output          | If set, this specifies the email address of the receiver. See [also](#example-request)                                                                                                                                             | `"me@example.com"`       |
-| `emailCc`       |     N    | Output          | If set, this specifies the email address to CC in. See [also](#example-request)                                                                                                                                                    | `"me@example.com"`       |
-| `emailBcc`      |     N    | Output          | If set, this specifies email address to BCC in. See [also](#example-request)                                                                                                                                                       | `"me@example.com"`       |
-| `subject`       |     N    | Output          | If set, this specifies the subject of the email message. See [also](#example-request)                                                                                                                                              | `"subject of mail"`      |
-| `priority`      |     N    | Output          | If set, this specifies the priority (X-Priority) of the email message, from 1 (lowest) to 5 (highest) (default value: 3). See [also](#example-request) | `"1"`                    |
+| Field           | Required | Binding support | Details                                                                                                                                                                                                                            | Example             |
+| --------------- | :------: | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `host`          |     Y    | Output          | The host where your SMTP server runs                                                                                                                                                                                               | `"smtphost"`        |
+| `port`          |     Y    | Output          | The port your SMTP server listens on                                                                                                                                                                                               | `"9999"`            |
+| `user`          |     Y    | Output          | The user to authenticate against the SMTP server                                                                                                                                                                                   | `"user"`            |
+| `password`      |     Y    | Output          | The password of the user                                                                                                                                                                                                           | `"password"`        |
+| `skipTLSVerify` |     N    | Output          | If set to true, the SMPT server's TLS certificate will not be verified. Defaults to `"false"`                                                                                                                                      | `"true"`, `"false"` |
+| `emailFrom`     |     N    | Output          | If set, this specifies the email address of the sender. See [also](#example-request)                                                                                                                                               | `"me@example.com"`  |
+| `emailTo`       |     N    | Output          | If set, this specifies the email address of the receiver. See [also](#example-request)                                                                                                                                             | `"me@example.com"`  |
+| `emailCc`       |     N    | Output          | If set, this specifies the email address to CC in. See [also](#example-request)                                                                                                                                                    | `"me@example.com"`  |
+| `emailBcc`      |     N    | Output          | If set, this specifies email address to BCC in. See [also](#example-request)                                                                                                                                                       | `"me@example.com"`  |
+| `subject`       |     N    | Output          | If set, this specifies the subject of the email message. See [also](#example-request)                                                                                                                                              | `"subject of mail"` |
+| `priority`      |     N    | Output          | If set, this specifies the priority (X-Priority) of the email message, from 1 (lowest) to 5 (highest) (default value: 3). See [also](#example-request) | `"1"`               |
 
 ## Binding support
 
@@ -85,7 +85,7 @@ When sending an email, the metadata in the configuration and in the request is c
 
 The `emailTo`, `emailCC` and `emailBCC` fields can contain multiple email addresses separated by a semicolon.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```json
 {
@@ -102,7 +102,7 @@ The `emailTo`, `emailCC` and `emailBCC` fields can contain multiple email addres
 
 The `emailTo`, `emailCC` and `emailBCC` fields can contain multiple email addresses separated by a semicolon.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

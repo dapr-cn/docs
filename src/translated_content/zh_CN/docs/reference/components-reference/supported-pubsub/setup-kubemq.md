@@ -30,7 +30,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                                                                                                                                                                                                                                                                                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                                  |
+| Field             | Required | Details                                                                                                                                                                                                                                                                                                                                                                       | Example                                                   |
 | ----------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | address           |     Y    | Address of the KubeMQ server                                                                                                                                                                                                                                                                                                                                                  | `"localhost:50000"`                                       |
 | store             |     N    | type of pubsub, true: pubsub persisted (EventsStore), false: pubsub in-memory (Events)                                                                                                                                                                                                                                                  | `true` or `false` (default is `false`) |
@@ -42,7 +42,7 @@ spec:
 
 ## Create a KubeMQ broker
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
@@ -57,7 +57,7 @@ docker run -d -p 8080:8080 -p 50000:50000 -p 9090:9090 -e KUBEMQ_TOKEN=<your-key
 
 You can then interact with the server using the client port: `localhost:50000`
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -74,7 +74,7 @@ kubectl apply -f https://deploy.kubemq.io/init
 kubectl apply -f https://deploy.kubemq.io/key/<your-key>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -84,7 +84,7 @@ Go to [KubeMQ CLI](https://github.com/kubemq-io/kubemqctl/releases) and download
 
 ## Browse KubeMQ Dashboard
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
@@ -94,7 +94,7 @@ Open a browser and navigate to [http://localhost:8080](http://localhost:8080)
 
 <!-- END_IGNORE -->
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 With KubeMQCTL installed, run the following command:
@@ -109,7 +109,7 @@ Or, with kubectl installed, run port-forward command:
 kubectl port-forward svc/kubemq-cluster-api -n kubemq 8080:8080
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -117,7 +117,7 @@ kubectl port-forward svc/kubemq-cluster-api -n kubemq 8080:8080
 
 Visit [KubeMQ Documentation](https://docs.kubemq.io/) for more information.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

@@ -44,9 +44,9 @@ FAIL /v1.0/invoke/demo.default/method/"$(curl
 
 ## Spec metadata fields
 
-| Field | Details                                                            | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ----- | ------------------------------------------------------------------ | ------------------------ |
-| rule  | the regexp expression to be used by the HTTP request RouterChecker | `^[A-Za-z0-9/._-]+$`     |
+| Field | Details                                                            | Example              |
+| ----- | ------------------------------------------------------------------ | -------------------- |
+| rule  | the regexp expression to be used by the HTTP request RouterChecker | `^[A-Za-z0-9/._-]+$` |
 
 ## Dapr configuration
 
@@ -64,7 +64,7 @@ spec:
       type: middleware.http.routerchecker
 ```
 
-## 相关链接
+## Related links
 
 - [Middleware]({{< ref middleware.md >}})
 - [Configuration concept]({{< ref configuration-concept.md >}})

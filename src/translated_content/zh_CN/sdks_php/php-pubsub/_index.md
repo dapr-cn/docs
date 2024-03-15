@@ -22,7 +22,7 @@ $app->post('/publish', function(\Dapr\Client\DaprClient $daprClient) {
 
 PHP SDK 允许在构建自定义 cloud event 或发布原始数据时设置数据内容类型。
 
-
+{{< tabs CloudEvent "Raw" >}}
 
 {{% codetab %}}
 
@@ -33,7 +33,8 @@ $event->data = $xml;
 $event->data_content_type = 'application/xml';
 ```
 
-
+{{% /codetab %}}
+{{% codetab %}}
 
 ```php
 <?php
@@ -49,7 +50,7 @@ $daprClient->publishEvent(pubsubName: 'pubsub', topicName: 'my-topic', data: $ra
 
 {{% /alert %}}
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

@@ -60,7 +60,7 @@ Applications 视图显示在您的机器上本地运行的 Dapr 应用程序。
 
 使用 VS Code 扩展，您可以使用[多目标调试](https://code.visualstudio.com/docs/editor/debugging#_multitarget-debugging)同时调试多个 Dapr 应用程序。
 
-### Community call demo
+### 社区示例
 
 查看这个[视频](https://www.youtube.com/watch?v=OtbYCBt9C34\&t=85)以了解如何使用 Dapr VS Code 扩展:
 

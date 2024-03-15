@@ -20,7 +20,7 @@ weight: 300
 {{% alert title="注意" color="primary" %}}
 如果你还没有，请[尝试使用绑定快速入门]({{< ref bindings-quickstart.md >}})快速了解如何使用绑定 API。
 
-
+{{% /alert %}}
 
 ## 创建绑定
 
@@ -33,7 +33,7 @@ weight: 300
 
 在创建绑定组件时，[请指定支持的绑定`direction`（方向）]({{< ref "bindings_api.md#binding-direction-optional" >}})。
 
-
+{{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
@@ -65,7 +65,7 @@ spec:
     value: output
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -97,7 +97,7 @@ spec:
     value: output
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -105,7 +105,7 @@ spec:
 
 下面的代码示例利用 Dapr SDK 在运行中的 Dapr 实例上调用输出绑定端点。
 
-
+{{< tabs Dotnet Java Python Go JavaScript>}}
 
 {{% codetab %}}
 
@@ -145,7 +145,7 @@ namespace EventService
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -183,7 +183,7 @@ public class OrderProcessingServiceApplication {
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -211,7 +211,7 @@ while True:
     
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -249,7 +249,7 @@ func main() {
     
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -291,7 +291,7 @@ function sleep(ms) {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -307,7 +307,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:3601/v1.0/bind
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ysklxm81MTs?start=1960" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-## References
+## 参考资料
 
 - [绑定API]({{< ref bindings_api.md >}})
 - [绑定组件]({{< ref bindings >}})

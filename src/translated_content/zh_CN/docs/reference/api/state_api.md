@@ -1,7 +1,7 @@
 ---
 type: docs
 title: State management API reference
-linkTitle: State management API
+linkTitle: 状态管理 API
 description: Detailed documentation on the state management API
 weight: 200
 ---
@@ -26,7 +26,7 @@ spec:
     value: <VALUE>
 ```
 
-| Setting         | 说明                                                                                     |
+| Setting         | Description                                                                            |
 | --------------- | -------------------------------------------------------------------------------------- |
 | `metadata.name` | The name of the state store.                                                           |
 | `spec/metadata` | An open key value pair metadata that allows a binding to define connection properties. |
@@ -57,7 +57,7 @@ POST http://localhost:<daprPort>/v1.0/state/<storename>
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                           |
+| Parameter   | Description                                                                                                                                                                  |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daprPort`  | The Dapr port                                                                                                                                                                |
 | `storename` | The `metadata.name` field in the user-configured `statestore.yaml` component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
@@ -77,7 +77,7 @@ POST http://localhost:3500/v1.0/state/myStore?metadata.contentType=application/j
 
 A JSON array of state objects. Each state object is comprised with the following fields:
 
-| Field      | 说明                                                                                                        |
+| Field      | Description                                                                                               |
 | ---------- | --------------------------------------------------------------------------------------------------------- |
 | `key`      | State key                                                                                                 |
 | `value`    | State value, which can be any byte array                                                                  |
@@ -87,11 +87,11 @@ A JSON array of state objects. Each state object is comprised with the following
 
 > **ETag format:** Dapr runtime treats ETags as opaque strings. The exact ETag format is defined by the corresponding data store.
 
-#### 元数据
+#### Metadata
 
 Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.`, as shown below.
 
-| Parameter               | 说明                                                                                                                                                                          |
+| Parameter               | Description                                                                                                                                                                 |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `metadata.ttlInSeconds` | The number of seconds for the message to expire, as [described here]({{< ref state-store-ttl.md >}}) |
 
@@ -101,7 +101,7 @@ Metadata can be sent via query parameters in the request's URL. It must be prefi
 
 #### Response Codes
 
-| Code  | 说明                                                           |
+| Code  | Description                                                  |
 | ----- | ------------------------------------------------------------ |
 | `204` | State saved                                                  |
 | `400` | State store is missing or misconfigured or malformed request |
@@ -111,7 +111,7 @@ Metadata can be sent via query parameters in the request's URL. It must be prefi
 
 None.
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/state/starwars?metadata.contentType=application/json \
@@ -143,7 +143,7 @@ GET http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### URL Parameters
 
-| Parameter     | 说明                                                                                                                                                                     |
+| Parameter     | Description                                                                                                                                                            |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daprPort`    | The Dapr port                                                                                                                                                          |
 | `storename`   | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
@@ -163,7 +163,7 @@ GET http://localhost:3500/v1.0/state/myStore/myKey?metadata.contentType=applicat
 
 #### Response Codes
 
-| Code  | 说明                                      |
+| Code  | Description                             |
 | ----- | --------------------------------------- |
 | `200` | Get state successful                    |
 | `204` | Key is not found                        |
@@ -172,7 +172,7 @@ GET http://localhost:3500/v1.0/state/myStore/myKey?metadata.contentType=applicat
 
 #### Response Headers
 
-| Header | 说明                     |
+| Header | Description            |
 | ------ | ---------------------- |
 | `ETag` | ETag of returned value |
 
@@ -180,7 +180,7 @@ GET http://localhost:3500/v1.0/state/myStore/myKey?metadata.contentType=applicat
 
 JSON-encoded value
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```shell
 curl http://localhost:3500/v1.0/state/starwars/planet?metadata.contentType=application/json
@@ -212,7 +212,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/bulk
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                     |
+| Parameter   | Description                                                                                                                                                            |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daprPort`  | The Dapr port                                                                                                                                                          |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
@@ -230,7 +230,7 @@ POST/PUT http://localhost:3500/v1.0/state/myStore/bulk?metadata.partitionKey=myp
 
 #### Response Codes
 
-| Code  | 说明                                      |
+| Code  | Description                             |
 | ----- | --------------------------------------- |
 | `200` | Get state successful                    |
 | `400` | State store is missing or misconfigured |
@@ -240,7 +240,7 @@ POST/PUT http://localhost:3500/v1.0/state/myStore/bulk?metadata.partitionKey=myp
 
 An array of JSON-encoded values
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```shell
 curl http://localhost:3500/v1.0/state/myRedisStore/bulk \
@@ -286,7 +286,7 @@ DELETE http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### URL Parameters
 
-| Parameter     | 说明                                                                                                                                                                     |
+| Parameter     | Description                                                                                                                                                            |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daprPort`    | The Dapr port                                                                                                                                                          |
 | `storename`   | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
@@ -304,7 +304,7 @@ DELETE http://localhost:3500/v1.0/state/myStore/myKey?metadata.contentType=appli
 
 #### Request Headers
 
-| Header   | 说明                                                                       |
+| Header   | Description                                                              |
 | -------- | ------------------------------------------------------------------------ |
 | If-Match | (Optional) ETag associated with the key to be deleted |
 
@@ -312,7 +312,7 @@ DELETE http://localhost:3500/v1.0/state/myStore/myKey?metadata.contentType=appli
 
 #### Response Codes
 
-| Code  | 说明                                      |
+| Code  | Description                             |
 | ----- | --------------------------------------- |
 | `204` | Delete state successful                 |
 | `400` | State store is missing or misconfigured |
@@ -322,7 +322,7 @@ DELETE http://localhost:3500/v1.0/state/myStore/myKey?metadata.contentType=appli
 
 None.
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```shell
 curl -X DELETE http://localhost:3500/v1.0/state/starwars/planet -H "If-Match: xxxxxxx"
@@ -344,7 +344,7 @@ POST/PUT http://localhost:<daprPort>/v1.0-alpha1/state/<storename>/query
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                     |
+| Parameter   | Description                                                                                                                                                            |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daprPort`  | The Dapr port                                                                                                                                                          |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
@@ -360,7 +360,7 @@ POST http://localhost:3500/v1.0-alpha1/state/myStore/query?metadata.contentType=
 
 #### Response Codes
 
-| Code  | 说明                                      |
+| Code  | Description                             |
 | ----- | --------------------------------------- |
 | `200` | State query successful                  |
 | `400` | State store is missing or misconfigured |
@@ -370,7 +370,7 @@ POST http://localhost:3500/v1.0-alpha1/state/myStore/query?metadata.contentType=
 
 An array of JSON-encoded values
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```shell
 curl -X POST http://localhost:3500/v1.0-alpha1/state/myStore/query?metadata.contentType=application/json \
@@ -476,7 +476,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/transaction
 
 #### HTTP Response Codes
 
-| Code  | 说明                                                           |
+| Code  | Description                                                  |
 | ----- | ------------------------------------------------------------ |
 | `204` | Request successful                                           |
 | `400` | State store is missing or misconfigured or malformed request |
@@ -484,7 +484,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/transaction
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                     |
+| Parameter   | Description                                                                                                                                                            |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daprPort`  | The Dapr port                                                                                                                                                          |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
@@ -499,21 +499,21 @@ POST http://localhost:3500/v1.0/state/myStore/transaction?metadata.contentType=a
 
 #### Request Body
 
-| Field        | 说明                                                                                              |
+| Field        | Description                                                                                     |
 | ------------ | ----------------------------------------------------------------------------------------------- |
 | `operations` | A JSON array of state `operation`                                                               |
 | `metadata`   | (optional) The `metadata` for the transaction that applies to all operations |
 
 All transactional databases implement the following required operations:
 
-| Operation | 说明                        |
+| Operation | Description               |
 | --------- | ------------------------- |
 | `upsert`  | Adds or updates the value |
 | `delete`  | Deletes the value         |
 
 Each operation has an associated `request` that is comprised of the following fields:
 
-| Request    | 说明                                                                                                                     |
+| Request    | Description                                                                                                            |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `key`      | State key                                                                                                              |
 | `value`    | State value, which can be any byte array                                                                               |
@@ -584,7 +584,7 @@ A Dapr-compatible state store shall use the following key scheme:
 - _\<App ID>||\<state key>_ key format for general states
 - _\<App ID>||\<Actor type>||\<Actor id>||\<state key>_ key format for Actor states.
 
-### Concurrency
+### 并发
 
 Dapr uses Optimized Concurrency Control (OCC) with ETags. Dapr makes the following requirements optional on state stores:
 
@@ -594,7 +594,7 @@ Dapr uses Optimized Concurrency Control (OCC) with ETags. Dapr makes the followi
 - When ETag is missing in the write requests, the state store shall handle the requests in a _last-write-wins_ fashion. This allows optimizations for high-throughput write scenarios, in which data contingency is low or has no negative effects.
 - A store shall _always_ return ETags when returning states to callers.
 
-### Consistency
+### 一致性
 
 Dapr allows clients to attach a consistency hint to _get_, _set_, and _delete_ operation. Dapr supports two consistency levels: **strong** and **eventual**.
 

@@ -34,7 +34,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field       | Required | Binding support | Details                     | 如何使用Dapr扩展来开发和运行Dapr应用程序                                          |
+| Field       | Required | Binding support | Details                     | Example                                                           |
 | ----------- | :------: | --------------- | --------------------------- | ----------------------------------------------------------------- |
 | `address`   |     Y    | Input           | Address of RethinkDB server | `"27.0.0.1:28015"`, `"rethinkdb.default.svc.cluster.local:28015"` |
 | `database`  |     Y    | Input           | RethinDB database name      | `"dapr"`                                                          |
@@ -44,7 +44,7 @@ spec:
 
 This component only supports **input** binding interface.
 
-## 相关链接
+## Related links
 
 - [Combine this binding with Dapr Pub/Sub](https://github.com/mchmarny/dapr-state-store-change-handler) to stream state changes to a topic
 - [Basic schema for a Dapr component]({{< ref component-schema >}})

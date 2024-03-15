@@ -5,7 +5,7 @@ linkTitle: uninstall
 description: Detailed information on the uninstall CLI command
 ---
 
-### 说明
+### Description
 
 Uninstall Dapr runtime.
 
@@ -22,7 +22,7 @@ dapr uninstall [flags]
 
 ### Flags
 
-| Name                  | Environment Variable | Default       | 说明                                                                                                                                                  |
+| Name                  | Environment Variable | Default       | Description                                                                                                                                         |
 | --------------------- | -------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--all`               |                      | `false`       | Remove Redis, Zipkin containers in addition to actor placement container. Remove default dapr dir located at `$HOME/.dapr or %USERPROFILE%\.dapr\`. |
 | `--help`, `-h`        |                      |               | Print this help message                                                                                                                             |

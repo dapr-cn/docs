@@ -52,7 +52,8 @@ All components start at the Alpha stage.
 A component may skip the Beta stage and conformance test requirement per the discretion of the Maintainer if:
 
 - The component is a binding
--
+- The certification tests are comprehensive
+  {{% /alert %}}
 
 ### Stable
 
@@ -78,7 +79,7 @@ Each component in the [components-contrib](https://github.com/dapr/components-co
 
 The conformance tests are defined for the following building blocks:
 
-- State store
+- 状态存储
 - Secret store
 - 绑定
 - Pub/sub（发布/订阅）

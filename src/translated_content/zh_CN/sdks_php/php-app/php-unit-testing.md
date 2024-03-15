@@ -16,7 +16,7 @@ no_list: true
 1. 根据初始状态返回的结果
 2. 基于初始状态的结果状态
 
-
+{{< tabs "integration test with TestClient" "unit test" >}}
 
 {{% codetab %}}
 
@@ -111,7 +111,8 @@ class TheTest extends \PHPUnit\Framework\TestCase
 }
 ```
 
-
+{{% /codetab %}}
+{{% codetab %}}
 
 ```php
 <?php
@@ -162,13 +163,13 @@ class TheTest extends \PHPUnit\Framework\TestCase
 
 {{% /codetab %}}
 
-
+{{< /tabs >}}
 
 ## 测试 Transaction
 
 在基于事务进行构建时，您可能希望测试如何处理失败的事务。 为此，您需要注入异常并确保事务符合您的预期。
 
-
+{{< tabs "integration test with TestClient" "unit test" >}}
 
 {{% codetab %}}
 
@@ -244,7 +245,8 @@ class TheTest extends \PHPUnit\Framework\TestCase {
 }
 ```
 
-
+{{% /codetab %}}
+{{% codetab %}}
 
 ```php
 <?php
@@ -278,3 +280,4 @@ class TheTest extends \PHPUnit\Framework\TestCase {
 
 {{% /codetab %}}
 
+{{< /tabs >}}

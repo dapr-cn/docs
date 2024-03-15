@@ -54,7 +54,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                           | Required | Details                                                                                                                                                                                   | 如何使用Dapr扩展来开发和运行Dapr应用程序                              |
+| Field                           | Required | Details                                                                                                                                                                                   | Example                                               |
 | ------------------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | instancePrincipalAuthentication |     N    | Boolean to indicate whether instance principal based authentication is used. Default: `"false"`                                                                                           | `"true"` or  `"false"` .                              |
 | configFileAuthentication        |     N    | Boolean to indicate whether identity credential details are provided through a configuration file. Default: `"false"` Not required nor used when instancePrincipalAuthentication is true. | `"true"` or  `"false"` .                              |
@@ -172,11 +172,11 @@ The exact value of the expiry-time-from-ttl depends of course on the time at whi
 
 Note that expired state is not removed from the state store by this component. An application operator may decide to run a periodic job that does a form of garbage collection in order to explicitly remove all state that has an  **expiry-time-from-ttl** label with a timestamp in the past.
 
-## Concurrency
+## 并发
 
 OCI Object Storage state concurrency is achieved by using `ETag`s. Each object in OCI Object Storage is assigned a unique ETag when it is created or updated (aka replaced). When the `Set` and `Delete` requests for this state store specify the FirstWrite concurrency policy, then the request need to provide the actual ETag value for the state to be written or removed for the request to be successful.
 
-## Consistency
+## 一致性
 
 OCI Object Storage state does not support Transactions.
 
@@ -184,7 +184,7 @@ OCI Object Storage state does not support Transactions.
 
 OCI Object Storage state does not support the Query API.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

@@ -5,7 +5,7 @@ linkTitle: components
 description: Detailed information on the components CLI command
 ---
 
-### 说明
+### Description
 
 List all Dapr components.
 
@@ -21,7 +21,7 @@ dapr components [flags]
 
 ### Flags
 
-| Name                     | Environment Variable | Default | 说明                                                                             |
+| Name                     | Environment Variable | Default | Description                                                                    |
 | ------------------------ | -------------------- | ------- | ------------------------------------------------------------------------------ |
 | `--kubernetes`, `-k`     |                      | `false` | List all Dapr components in a Kubernetes cluster (required) |
 | `--all-namespaces`, `-A` |                      | `true`  | If true, list all Dapr components in all namespaces                            |

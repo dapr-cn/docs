@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 绑定概述
-linkTitle: Overview
+linkTitle: 概述
 weight: 100
 description: Dapr 绑定API构建块概述
 ---
@@ -51,7 +51,7 @@ description: Dapr 绑定API构建块概述
 {{% alert title="注意" color="primary" %}}
 在启动时，Dapr会向应用程序发送[OPTIONS请求]({{< ref "bindings_api.md#invoking-service-code-through-input-bindings" >}})，以获取所有已定义的输入绑定。 如果应用程序要订阅绑定，Dapr 将收到 2xx 或 405 的状态代码。
 
-
+{{% /alert %}}
 
 阅读[使用输入绑定创建事件驱动应用指南]({{< ref howto-triggers.md >}})以开始使用输入绑定。
 
@@ -104,7 +104,7 @@ description: Dapr 绑定API构建块概述
 
 想跳过快速入门？ Not a problem. 您可以直接在应用程序中尝试 绑定 构建块，以调用输出绑定并触发输入绑定。 安装[Dapr]({{< ref "getting-started/_index.md" >}})之后，您可以开始使用绑定 API，从[输入绑定操作方法指南]({{< ref howto-triggers.md >}})开始。
 
-## Next Steps
+## 下一步
 
 - 关注以下指南：
   - [操作方法：使用输入绑定从不同资源触发服务]({{< ref howto-triggers.md >}})

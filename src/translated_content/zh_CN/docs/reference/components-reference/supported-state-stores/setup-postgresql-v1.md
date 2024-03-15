@@ -67,7 +67,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 The following metadata options are **required** to authenticate using a PostgreSQL connection string.
 
-| Field              | Required | Details                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                      |
+| Field              | Required | Details                                                                                                                                                                                                                         | Example                                                                                       |
 | ------------------ | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `connectionString` |     Y    | The connection string for the PostgreSQL database. See the PostgreSQL [documentation on database connections](https://www.postgresql.org/docs/current/libpq-connect.html) for information on how to define a connection string. | `"host=localhost user=postgres password=example port=5432 connect_timeout=10 database=my_db"` |
 
@@ -75,7 +75,7 @@ The following metadata options are **required** to authenticate using a PostgreS
 
 Authenticating with Microsoft Entra ID is supported with Azure Database for PostgreSQL. All authentication methods supported by Dapr can be used, including client credentials ("service principal") and Managed Identity.
 
-| Field               | Required | Details                                                                                                                                                                                                                                                                                                                                                                                     | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                              |
+| Field               | Required | Details                                                                                                                                                                                                                                                                                                                                                                                     | Example                                                                                               |
 | ------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `useAzureAD`        |     Y    | Must be set to `true` to enable the component to retrieve access tokens from Microsoft Entra ID.                                                                                                                                                                                                                                                                                            | `"true"`                                                                                              |
 | `connectionString`  |     Y    | The connection string for the PostgreSQL database.<br>This must contain the user, which corresponds to the name of the user created inside PostgreSQL that maps to the Microsoft Entra ID identity; this is often the name of the corresponding principal (e.g. the name of the Microsoft Entra ID application). This connection string should not contain any password. | `"host=mydb.postgres.database.azure.com user=myapplication port=5432 database=my_db sslmode=require"` |
@@ -85,7 +85,7 @@ Authenticating with Microsoft Entra ID is supported with Azure Database for Post
 
 ### Other metadata options
 
-| Field                   | Required | Details                                                                                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                    |
+| Field                   | Required | Details                                                                                                                                                                                                                                                                                         | Example                                     |
 | ----------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
 | `tableName`             |     N    | Name of the table where the data is stored. Defaults to `state`. Can optionally have the schema name as prefix, such as `public.state`                                                                                                                                                          | `"state"`, `"public.state"`                 |
 | `metadataTableName`     |     N    | Name of the table Dapr uses to store a few metadata properties. Defaults to `dapr_metadata`. Can optionally have the schema name as prefix, such as `public.dapr_metadata`                                                                                                                      | `"dapr_metadata"`, `"public.dapr_metadata"` |
@@ -98,7 +98,7 @@ Authenticating with Microsoft Entra ID is supported with Azure Database for Post
 
 ## Setup PostgreSQL
 
-
+{{< tabs "Self-Hosted" >}}
 
 {{% codetab %}}
 
@@ -119,7 +119,7 @@ Authenticating with Microsoft Entra ID is supported with Azure Database for Post
    CREATE DATABASE my_dapr;
    ```
 
-
+{{% /codetab %}}
 
 {{% /tabs %}}
 
@@ -144,7 +144,7 @@ CREATE INDEX expiredate_idx
     USING btree (expiredate ASC NULLS LAST);
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 向 Azure 进行身份验证
-linkTitle: Overview
+linkTitle: 概述
 description: 如何使用 Microsoft Entra ID 和/或托管身份认证 Azure 组件
 aliases:
   - /zh-hans/operations/components/setup-secret-store/supported-secret-stores/azure-keyvault-managed-identity/
@@ -80,31 +80,31 @@ Microsoft Entra ID 构建在开放标准（如 OAuth 2.0）之上，该标准允
 
 #### 使用客户端凭据进行身份验证：
 
-| Field               | Required | Details                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                     |
-| ------------------- | -------- | ------------------------------------------------------- | -------------------------------------------- |
-| `azureTenantId`     | Y        | ID of the Microsoft Entra ID tenant                     | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`     |
-| `azureClientId`     | Y        | Client ID (application ID)           | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`     |
-| `azureClientSecret` | Y        | Client secret (application password) | `"Ecy3XG7zVZK3/vl/a2NSB+a1zXLa8RnMum/IgD0E"` |
+| 字段                  | 必填 | Details                  | 如何使用Dapr扩展来开发和运行Dapr应用程序                     |
+| ------------------- | -- | ------------------------ | -------------------------------------------- |
+| `azureTenantId`     | 是  | Microsoft Entra ID 租户的ID | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`     |
+| `azureClientId`     | 是  | 客户端 ID（应用程序 ID）          | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`     |
+| `azureClientSecret` | 是  | 客户端 secret（应用程序密码）       | `"Ecy3XG7zVZK3/vl/a2NSB+a1zXLa8RnMum/IgD0E"` |
 
 在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes secret 的引用。
 
 #### 使用证书进行身份验证
 
-| Field                      | Required                                        | Details                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                           |
-| -------------------------- | ----------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `azureTenantId`            | Y                                               | ID of the Microsoft Entra ID tenant           | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                           |
-| `azureClientId`            | Y                                               | Client ID (application ID) | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                           |
-| `azureCertificate`         | `azureCertificate` 和 `azureCertificateFile` 二选一 | 证书和私钥（PFX/PKCS#12 格式）                         | `"-----BEGIN PRIVATE KEY-----\n MIIEvgI... \n -----END PRIVATE KEY----- \n -----BEGIN CERTIFICATE----- \n MIICoTC... \n -----END CERTIFICATE-----` |
-| `azureCertificateFile`     | `azureCertificate` 和 `azureCertificateFile` 二选一 | 包含证书和私钥的 PFX/PKCS#12 文件的路径                    | `"/path/to/file.pem"`                                                                                                                              |
-| `azureCertificatePassword` | N                                               | 证书的密码（如果已加密）                                  | `"password"`                                                                                                                                       |
+| 字段                         | 必填                                              | Details                    | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                           |
+| -------------------------- | ----------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `azureTenantId`            | 是                                               | Microsoft Entra ID 租户的ID   | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                           |
+| `azureClientId`            | 是                                               | 客户端 ID（应用程序 ID）            | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                           |
+| `azureCertificate`         | `azureCertificate` 和 `azureCertificateFile` 二选一 | 证书和私钥（PFX/PKCS#12 格式）      | `"-----BEGIN PRIVATE KEY-----\n MIIEvgI... \n -----END PRIVATE KEY----- \n -----BEGIN CERTIFICATE----- \n MIICoTC... \n -----END CERTIFICATE-----` |
+| `azureCertificateFile`     | `azureCertificate` 和 `azureCertificateFile` 二选一 | 包含证书和私钥的 PFX/PKCS#12 文件的路径 | `"/path/to/file.pem"`                                                                                                                              |
+| `azureCertificatePassword` | 否                                               | 证书的密码（如果已加密）               | `"password"`                                                                                                                                       |
 
 在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes secret 的引用。
 
 #### 使用 Managed Identities (MI) 进行身份验证
 
-| Field           | Required | Details                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                 |
-| --------------- | -------- | --------------------------------------------- | ---------------------------------------- |
-| `azureClientId` | N        | Client ID (application ID) | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"` |
+| 字段              | 必填 | Details         | 如何使用Dapr扩展来开发和运行Dapr应用程序                 |
+| --------------- | -- | --------------- | ---------------------------------------- |
+| `azureClientId` | 否  | 客户端 ID（应用程序 ID） | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"` |
 
 [使用 Managed Identities]({{< ref howto-mi.md >}})，通常建议使用`azureClientId`字段。 当使用系统分配的身份时，该字段是可选的，但当使用用户分配的身份时可能是必需的。
 
@@ -129,7 +129,7 @@ Microsoft Entra ID 构建在开放标准（如 OAuth 2.0）之上，该标准允
 
 在此示例中，你将设置一个使用 Microsoft Entra ID 进行身份验证的 Azure Key Vault 机密存储组件。
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
@@ -177,7 +177,7 @@ spec:
     value : "[pfx_certificate_file_fully_qualified_local_path]"
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 In Kubernetes, you store the client secret or the certificate into the Kubernetes Secret Store and then refer to those in the YAML file.
@@ -274,7 +274,7 @@ In Kubernetes, you store the client secret or the certificate into the Kubernete
    kubectl apply -f azurekeyvault.yaml
    ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -282,7 +282,7 @@ In Kubernetes, you store the client secret or the certificate into the Kubernete
 
 {{< button text="生成新的 Microsoft Entra ID 应用程序和 Service Principal >>" page="howto-aad.md" >}}
 
-## References
+## 参考资料
 
 - [Microsoft Entra ID app credential: Azure CLI reference](https://docs.microsoft.com/cli/azure/ad/app/credential)
 - [Azure托管服务标识（MSI）概述](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview)

@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Pub/sub brokers component specs
-linkTitle: Pub/sub brokers
+linkTitle: 发布/订阅代理
 weight: 2000
 description: The supported pub/sub brokers that interface with Dapr
 aliases:

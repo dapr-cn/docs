@@ -48,7 +48,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field               | Required | Details                                                                                                                                                                                                                                                                                                      | 如何使用Dapr扩展来开发和运行Dapr应用程序                            |
+| Field               | Required | Details                                                                                                                                                                                                                                                                                                      | Example                                             |
 | ------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- |
 | `connectionString`  |     Y    | The connection string for the SQLite database. See below for more details.                                                                                                                                                                                                                                   | `"path/to/data.db"`, `"file::memory:?cache=shared"` |
 | `timeout`           |     N    | Timeout for operations on the database, as a [Go duration](https://pkg.go.dev/time#ParseDuration). Integers are interpreted as number of seconds. Defaults to `20s`                                                                                                                                          | `"30s"`, `30`                                       |
@@ -97,7 +97,7 @@ However, storing your SQLite database in a networked filesystem (for example via
 
 Given the risk of data corruption that running SQLite over a networked filesystem (such as via NFS or SMB) comes with, we do not recommend doing that with Dapr in production environment. However, if you do want to do that, you should configure your SQLite Dapr component with `disableWAL` set to `true`.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

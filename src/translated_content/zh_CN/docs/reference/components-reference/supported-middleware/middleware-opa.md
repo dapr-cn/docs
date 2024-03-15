@@ -75,7 +75,7 @@ You can prototype and experiment with policies using the [official OPA playgroun
 
 ## Spec metadata fields
 
-| Field             | Details                                                                                                                                                                                                                                                                                                                     | 如何使用Dapr扩展来开发和运行Dapr应用程序                                          |
+| Field             | Details                                                                                                                                                                                                                                                                                                                     | Example                                                           |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `rego`            | The Rego policy language                                                                                                                                                                                                                                                                                                    | See above                                                         |
 | `defaultStatus`   | The status code to return for denied responses                                                                                                                                                                                                                                                                              | `"https://accounts.google.com"`, `"https://login.salesforce.com"` |
@@ -213,7 +213,7 @@ type Result struct {
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Open Policy Agent](https://www.openpolicyagent.org)
 - [HTTP API example](https://www.openpolicyagent.org/docs/latest/http-api-authorization/)

@@ -32,7 +32,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field      | Required | Details                                                                                                                                                                                                                     | 如何使用Dapr扩展来开发和运行Dapr应用程序                                         |
+| Field      | Required | Details                                                                                                                                                                                                                     | Example                                                          |
 | ---------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `audience` |     Y    | The audience expected in the tokens. Usually, this corresponds to the client ID of your application that is created as part of a credential hosted by a OpenID Connect platform.                                            |                                                                  |
 | `issuer`   |     Y    | The issuer authority, which is the value expected in the issuer claim in the tokens.                                                                                                                                        | `"https://accounts.google.com"`                                  |
@@ -61,7 +61,7 @@ spec:
       type: middleware.http.bearer
 ```
 
-## 相关链接
+## Related links
 
 - [Middleware]({{< ref middleware.md >}})
 - [Configuration concept]({{< ref configuration-concept.md >}})

@@ -46,7 +46,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                                                    | Required | Details                                                                                                                                                                                                                                                                                                                                                                                       | default                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                      |
+| Field                                                    | Required | Details                                                                                                                                                                                                                                                                                                                                                                                       | default                                                         | Example                                                                       |
 | -------------------------------------------------------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | instanceName                                             |     N    | Instance name                                                                                                                                                                                                                                                                                                                                                                                 | `time.Now().String()`                                           | `dapr-rocketmq-test`                                                          |
 | consumerGroup                                            |     N    | Consumer group name. Recommend. If `producerGroup` is `null`，`groupName` is used.                                                                                                                                                                                                                                                                                                             |                                                                 | `dapr-rocketmq-test-g-c `                                                     |
@@ -85,7 +85,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 For backwards-compatibility reasons, the following values in the metadata are supported, although their use is discouraged.
 
-| Field (supported but deprecated) | Required | Details                                                  | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
+| Field (supported but deprecated) | Required | Details                                                  | Example                  |
 | --------------------------------------------------- | :------: | -------------------------------------------------------- | ------------------------ |
 | groupName                                           |     N    | Producer group name for RocketMQ publishers              | `"my_unique_group_name"` |
 | sendTimeOut                                         |     N    | Timeout duration for publishing a message in nanoseconds | `0`                      |
@@ -103,7 +103,7 @@ When invoking the RocketMQ pub/sub, it's possible to provide an optional partiti
 
 You need to specify `rocketmq-tag` , `"rocketmq-key"` , `rocketmq-shardingkey` , `rocketmq-queue` in `metadata`
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myRocketMQ/myTopic?metadata.rocketmq-tag=?&metadata.rocketmq-key=?&metadata.rocketmq-shardingkey=key&metadata.rocketmq-queue=1 \
@@ -161,7 +161,7 @@ http://localhost:3500/v1.0/publish/myRocketMQ/myTopic?metadata.rocketmq-sharding
 
 If the `ShardingKey` does not exist, the `RoundRobin` algorithm is used to determine the queue id.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Pub/Sub building block]({{< ref pubsub >}})

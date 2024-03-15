@@ -13,7 +13,7 @@ description: 了解如何获取应用程序配置并订阅更改
 {{% alert title="注意" color="primary" %}}
 如果你还没有，请[尝试使用配置快速入门]({{< ref configuration-quickstart.md >}})快速了解如何使用配置 API。
 
-
+{{% /alert %}}
 
 ## 在存储中创建配置项目
 
@@ -49,7 +49,7 @@ MSET orderId1 "101||1" orderId2 "102||1"
 {{% alert title="注意" color="primary" %}}
 由于Redis配置组件与Redis `statestore.yaml`组件具有相同的元数据，如果您已经有一个Redis `statestore.yaml`，您可以简单地复制/更改Redis状态存储组件类型。
 
-
+{{% /alert %}}
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -71,7 +71,7 @@ spec:
 
 下面的示例展示了如何使用 Dapr 配置 API 获取已保存的配置项。
 
-
+{{< tabs ".NET" Java Python Go Javascript "HTTP API (BASH)" "HTTP API (Powershell)">}}
 
 {{% codetab %}}
 
@@ -99,7 +99,7 @@ namespace ConfigurationApi
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -132,7 +132,7 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -149,7 +149,7 @@ with DaprClient() as d:
         print(f"Got key={configuration.items[0].key} value={configuration.items[0].value} version={configuration.items[0].version}")
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -179,7 +179,7 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -211,7 +211,7 @@ async function main() {
 main().catch((e) => console.error(e));
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -227,7 +227,7 @@ dapr run --app-id orderprocessing --dapr-http-port 3601
 curl http://localhost:3601/v1.0/configuration/configstore?key=orderId1
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -243,7 +243,7 @@ dapr run --app-id orderprocessing --dapr-http-port 3601
 Invoke-RestMethod -Uri 'http://localhost:3601/v1.0/configuration/configstore?key=orderId1'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -251,7 +251,7 @@ Invoke-RestMethod -Uri 'http://localhost:3601/v1.0/configuration/configstore?key
 
 以下是利用 SDK 订阅 `[orderId1, orderId2]` 的代码示例，使用的是 `configstore` 商店组件。
 
-
+{{< tabs ".NET" "ASP.NET Core" Java Python Go Javascript>}}
 
 {{% codetab %}}
 
@@ -289,7 +289,7 @@ await foreach (var items in subscribe.Source)
 dapr run --app-id orderprocessing -- dotnet run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -344,7 +344,7 @@ namespace ConfigurationApi
 dapr run --app-id orderprocessing -- dotnet run
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -424,7 +424,7 @@ executeConfiguration()
 dapr run --app-id orderprocessing -- python3 OrderProcessingService.py
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -463,7 +463,7 @@ func main() {
 dapr run --app-id orderprocessing -- go run main.go
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -509,7 +509,7 @@ main().catch((e) => console.error(e));
 dapr run --app-id orderprocessing --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -519,7 +519,7 @@ dapr run --app-id orderprocessing --app-protocol grpc --dapr-grpc-port 3500 -- n
 
 以下代码示例展示了如何使用取消订阅 API 取消订阅配置更新。
 
-
+{{< tabs ".NET" Java Python Go Javascript "HTTP API (BASH)" "HTTP API (Powershell)">}}
 
 {{% codetab %}}
 
@@ -548,7 +548,7 @@ async Task unsubscribe(string subscriptionId)
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -582,7 +582,7 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -598,7 +598,7 @@ with DaprClient() as d:
   print(f"Unsubscribed successfully? {isSuccess}", flush=True)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -632,7 +632,7 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -673,7 +673,7 @@ async function main() {
 main().catch((e) => console.error(e));
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -681,7 +681,7 @@ main().catch((e) => console.error(e));
 curl 'http://localhost:<DAPR_HTTP_PORT>/v1.0/configuration/configstore/<subscription-id>/unsubscribe'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -689,7 +689,7 @@ curl 'http://localhost:<DAPR_HTTP_PORT>/v1.0/configuration/configstore/<subscrip
 Invoke-RestMethod -Uri 'http://localhost:<DAPR_HTTP_PORT>/v1.0/configuration/configstore/<subscription-id>/unsubscribe'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

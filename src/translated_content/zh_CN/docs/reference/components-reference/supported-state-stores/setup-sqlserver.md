@@ -70,7 +70,7 @@ If you wish to use SQL server as an [actor state store]({{< ref "state_api.md#co
 
 The following metadata options are **required** to authenticate using SQL Server credentials. This is supported on both SQL Server and Azure SQL.
 
-| Field              | Required | Details                                                                                                                                                                                             | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                           |
+| Field              | Required | Details                                                                                                                                                                                             | Example                                                                                            |
 | ------------------ | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `connectionString` |     Y    | The connection string used to connect.<br>If the connection string contains the database, it must already exist. Otherwise, if the database is omitted, a default database named "Dapr" is created. | `"Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password=myPassword;"` |
 
@@ -78,7 +78,7 @@ The following metadata options are **required** to authenticate using SQL Server
 
 Authenticating with Microsoft Entra ID is supported with Azure SQL only. All authentication methods supported by Dapr can be used, including client credentials ("service principal") and Managed Identity.
 
-| Field               | Required | Details                                                                                                                                                                                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                   |
+| Field               | Required | Details                                                                                                                                                                                                                                       | Example                                                                    |
 | ------------------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | `useAzureAD`        |     Y    | Must be set to `true` to enable the component to retrieve access tokens from Microsoft Entra ID.                                                                                                                                              | `"true"`                                                                   |
 | `connectionString`  |     Y    | The connection string or URL of the Azure SQL database, **without credentials**.<br>If the connection string contains the database, it must already exist. Otherwise, if the database is omitted, a default database named "Dapr" is created. | `"sqlserver://myServerName.database.windows.net:1433?database=myDataBase"` |
@@ -88,7 +88,7 @@ Authenticating with Microsoft Entra ID is supported with Azure SQL only. All aut
 
 ### Other metadata options
 
-| Field                      | Required | Details                                                                                                                                                                                                                                                                           | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                      |
+| Field                      | Required | Details                                                                                                                                                                                                                                                                           | Example                                                                                                                                       |
 | -------------------------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tableName`                |     N    | The name of the table to use. Alpha-numeric with underscores. Defaults to `"state"`                                                                                                                                                                                               | `"table_name"`                                                                                                                                |
 | `metadataTableName`        |     N    | Name of the table Dapr uses to store a few metadata properties. Defaults to `dapr_metadata`.                                                                                                                                                                                      | `"dapr_metadata"`                                                                                                                             |
@@ -134,7 +134,7 @@ The state store does not have an index on the `ExpireDate` column, which means t
 CREATE CLUSTERED INDEX expiredate_idx ON state(ExpireDate ASC)
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

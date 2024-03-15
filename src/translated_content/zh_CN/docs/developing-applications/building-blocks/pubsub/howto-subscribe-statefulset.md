@@ -64,7 +64,7 @@ spec:
     value: "false"
 ```
 
-MQTT3协议具有共享主题，允许多个订阅者对主题的消息进行"竞争"，这意味着消息只会被其中一个订阅者处理。 For example:
+MQTT3协议具有共享主题，允许多个订阅者对主题的消息进行"竞争"，这意味着消息只会被其中一个订阅者处理。 例如：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

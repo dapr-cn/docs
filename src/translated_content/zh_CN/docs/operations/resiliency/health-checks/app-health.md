@@ -8,7 +8,7 @@ description: Reacting to apps' health status changes
 
 The app health checks feature allows probing for the health of your application and reacting to status changes.
 
-应用程序无法响应的原因有很多。 For example, your application:
+Applications can become unresponsive for a variety of reasons. For example, your application:
 
 - Could be too busy to accept new work;
 - Could have crashed; or
@@ -57,7 +57,7 @@ Adding this flag is both necessary and sufficient to enable app health checks wi
 
 The full list of options are listed in this table:
 
-| CLI flags                                                                                                                                                             | Kubernetes deployment annotation    | 说明                                                                                                                                                | Default value |
+| CLI flags                                                                                                                                                             | Kubernetes deployment annotation    | Description                                                                                                                                       | Default value |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `--enable-app-health-check`                                                                                                                                           | `dapr.io/enable-app-health-check`   | Boolean that enables the health checks                                                                                                            | Disabled      |
 | [`--app-health-check-path`]({{< ref "app-health.md#health-check-paths" >}})                    | `dapr.io/app-health-check-path`     | Path that Dapr invokes for health probes when the app channel is HTTP (this value is ignored if the app channel is using gRPC) | `/healthz`    |
@@ -69,7 +69,7 @@ The full list of options are listed in this table:
 
 Additionally, app health checks are impacted by the protocol used for the app channel, which is configured with the following flag or annotation:
 
-| CLI flag                                                                                                                                  | Kubernetes deployment annotation | 说明                                                                                                                                         | Default value |
+| CLI flag                                                                                                                                  | Kubernetes deployment annotation | Description                                                                                                                                | Default value |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | [`--app-protocol`]({{< ref "app-health.md#health-check-paths" >}}) | `dapr.io/app-protocol`           | Protocol used for the app channel. supported values are `http`, `grpc`, `https`, `grpcs`, and `h2c` (HTTP/2 Cleartext). | `http`        |
 
@@ -97,7 +97,7 @@ While responding to a health probe request, your app _may_ decide to perform add
 
 By default, when app health checks are enabled, Dapr probes your application every 5 seconds. You can configure the interval, in seconds, with `app-health-probe-interval`. These probes happen regularly, regardless of whether your application is healthy or not.
 
-#### 超时
+#### Timeouts
 
 When the Dapr runtime (sidecar) is initially started, Dapr waits for a successful health probe before considering the app healthy. This means that pub/sub subscriptions, input bindings, and service invocation requests won't be enabled for your application until this first health check is complete and successful.
 
@@ -113,9 +113,9 @@ A threshold greater than 1 can help exclude transient failures due to external c
 
 Thresholds only apply to failures. A single successful response is enough for Dapr to consider your app to be healthy and resume normal operations.
 
-## 如何使用Dapr扩展来开发和运行Dapr应用程序
+## Example
 
-
+{{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
@@ -135,7 +135,7 @@ dapr run \
     <command to execute>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -165,7 +165,7 @@ spec:
         dapr.io/app-health-threshold: "2"
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

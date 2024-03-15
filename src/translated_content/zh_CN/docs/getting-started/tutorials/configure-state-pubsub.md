@@ -29,14 +29,14 @@ Dapr 可以使用任何 Redis 实例：
 
 如果您已经有了 Redis 存储，请转到 [配置](#configure-dapr-components) 部分。
 
-
+{{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
-作为初始化过程的一部分，Dapr CLI 会自动在自托管环境中安装 Redis。 您已经准备就绪了！ 跳到 [下一步](#next-steps)。
+Redis is automatically installed in self-hosted environments by the Dapr CLI as part of the initialization process. 您已经准备就绪了！ 跳到 [下一步](#next-steps)。
 {{% /codetab %}}
 
 {{% codetab %}}
-您可以使用[Helm](https://helm.sh/)在我们的Kubernetes集群中创建一个Redis实例。 开始之前，[安装 Helm v3](https://github.com/helm/helm#install)。
+You can use [Helm](https://helm.sh/) to create a Redis instance in our Kubernetes cluster. 开始之前，[安装 Helm v3](https://github.com/helm/helm#install)。
 
 安装 Redis 到您的集群：
 
@@ -64,10 +64,10 @@ redis-replicas-1    1/1     Running   0          22s
 - 主机名是 `redis-master.default.svc.cluster.local:6379`
 - 密钥 `redis` 是自动创建的。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
-验证你是否有 Azure订阅.
+Verify you have an Azure subscription.
 
 1. 打开并登录[Azure 门户](https://ms.portal.azure.com/#create/Microsoft.Cache)，开始创建 Azure Redis Cache 流程。
 2. 填写必要的信息.
@@ -83,7 +83,7 @@ redis-replicas-1    1/1     Running   0          22s
       kubectl create secret generic redis --from-literal=redis-password=*********
       ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -95,7 +95,7 @@ redis-replicas-1    1/1     Running   0          22s
    kubectl create secret generic redis --from-literal=redis-password=*********
    ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -107,7 +107,7 @@ redis-replicas-1    1/1     Running   0          22s
    kubectl create secret generic redis --from-literal=redis-password=*********
    ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -117,7 +117,7 @@ Dapr 定义了用于使用组件构建块功能的资源。 这些步骤将介�
 
 #### 找到您的组件文件
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 
@@ -126,13 +126,13 @@ Dapr 定义了用于使用组件构建块功能的资源。 这些步骤将介�
 - **Windows**: `%USERPROFILE%\.dapr\components\`
 - **Linux/MacOS**: `$HOME/.dapr/components`
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
 由于 Kubernetes 文件使用 `kubectl` 应用，因此可以在任何目录中创建它们。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -140,7 +140,7 @@ Dapr 定义了用于使用组件构建块功能的资源。 这些步骤将介�
 
 创建一个名为`redis-state.yaml`的文件，并粘贴以下内容：
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 
@@ -165,7 +165,7 @@ spec:
   #   value: true 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -192,7 +192,7 @@ spec:
 
 请注意，上面的代码示例使用您之前在设置集群时创建的 Kubernetes 密钥。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -204,7 +204,7 @@ spec:
 
 创建一个名为 `redis-pubsub.yaml` 的文件，并粘贴以下内容：
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 
@@ -229,7 +229,7 @@ spec:
   #   value: true 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -256,7 +256,7 @@ spec:
 
 请注意，上面的代码示例使用您之前在设置集群时创建的 Kubernetes 密钥。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -308,7 +308,7 @@ spec:
 
 ### 第 3 步：应用配置
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
@@ -324,7 +324,7 @@ spec:
 
 如果你在[无 Docker 的 Slim 模式]({{< ref self-hosted-no-docker.md >}})下初始化了 Dapr，你需要手动创建默认目录，或者始终使用 `--resources-path` 指定一个组件目录。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -335,7 +335,7 @@ kubectl apply -f redis-state.yaml
 kubectl apply -f redis-pubsub.yaml
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

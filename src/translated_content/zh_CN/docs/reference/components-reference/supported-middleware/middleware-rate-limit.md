@@ -28,9 +28,9 @@ spec:
 
 ## Spec metadata fields
 
-| Field                  | Details                                                                                                                                             | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `maxRequestsPerSecond` | The maximum requests per second by remote IP.<br>The component looks at the `X-Forwarded-For` and `X-Real-IP` headers to determine the caller's IP. | `10`                     |
+| Field                  | Details                                                                                                                                             | Example |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `maxRequestsPerSecond` | The maximum requests per second by remote IP.<br>The component looks at the `X-Forwarded-For` and `X-Real-IP` headers to determine the caller's IP. | `10`    |
 
 Once the limit is reached, the requests will fail with HTTP Status code _429: Too Many Requests_.
 
@@ -56,7 +56,7 @@ spec:
       type: middleware.http.ratelimit
 ```
 
-## 相关链接
+## Related links
 
 - [Control max concurrently]({{< ref control-concurrency.md >}})
 - [Middleware]({{< ref middleware.md >}})

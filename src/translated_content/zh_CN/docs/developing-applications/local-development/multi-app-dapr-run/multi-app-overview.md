@@ -18,7 +18,7 @@ description: 用一个命令行工具命令运行多个应用程序
 
 多应用运行模板文件描述了如何启动多个应用程序，就像您运行了许多单独的命令行工具 `run` 命令一样。 默认情况下，此模板文件被称为 `dapr.yaml`。
 
-
+{{< tabs Self-hosted Kubernetes>}}
 
 {{% codetab %}}
 
@@ -68,7 +68,7 @@ apps:
 
 您还可以将每个应用程序目录的 `.dapr` 目录命名为除 `.dapr` 之外的其他名称，例如 `webapp` 或 `backend`。 这有助于明确资源或应用程序目录路径。
 
-## Logs
+## 日志
 
 运行模板为每个应用程序及其关联的daprd进程提供两个日志目标字段：
 
@@ -91,7 +91,7 @@ apps:
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/s1p9MNl4VGo?start=2456" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -111,7 +111,7 @@ apps:
 
 文件 `service.yaml` 和 `deployment.yaml` 用于在 Kubernetes 的 `default` 命名空间中部署应用程序。 该功能专门针对在Kubernetes的开发/测试环境中运行多个应用程序。
 
-您可以使用任何首选名称来命名模板文件，而不仅限于默认名称。 For example:
+您可以使用任何首选名称来命名模板文件，而不仅限于默认名称。 例如：
 
 ```bash
 dapr run -k -f ./<your-preferred-file-name>.yaml
@@ -142,7 +142,7 @@ apps:
 
 有关模板属性的更详细示例和解释，请参阅[多应用程序模板]({{< ref multi-app-template.md >}})。
 
-## Logs
+## 日志
 
 运行模板为每个应用程序及其关联的daprd进程提供两个日志目标字段：
 
@@ -165,7 +165,7 @@ apps:
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nWatANwaAik?si=O8XR-TUaiY0gclgO&amp;start=1024" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

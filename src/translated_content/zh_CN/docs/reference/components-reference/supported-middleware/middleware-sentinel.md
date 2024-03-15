@@ -42,7 +42,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field               | Details                                                     | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                   |
+| Field               | Details                                                     | Example                                                                                                    |
 | ------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | appName             | the name of current running service                         | `nodeapp`                                                                                                  |
 | logDir              | the log directory path                                      | `/var/tmp/sentinel`                                                                                        |
@@ -78,7 +78,7 @@ spec:
         type: middleware.http.sentinel
 ```
 
-## 相关链接
+## Related links
 
 - [Sentinel Github](https://github.com/alibaba/sentinel-golang)
 - [Middleware]({{< ref middleware.md >}})

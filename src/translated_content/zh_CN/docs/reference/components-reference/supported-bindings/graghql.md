@@ -34,7 +34,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                    | Required | Binding support | Details                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                    |
+| Field                    | Required | Binding support | Details                                                                                                 | Example                                     |
 | ------------------------ | :------: | --------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
 | `endpoint`               |     Y    | Output          | GraphQL endpoint string See [here](#url-format) for more details                                        | `"http://localhost:4000/graphql/graphql"`   |
 | `header:[HEADERKEY]`     |     N    | Output          | GraphQL header. Specify the header key in the `name`, and the header value in the `value`.              | `"no-cache"` (see above) |
@@ -77,7 +77,7 @@ Metadata: map[string]string{
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

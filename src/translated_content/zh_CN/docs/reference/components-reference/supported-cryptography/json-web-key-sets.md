@@ -18,7 +18,7 @@ This component supports loading a JWKS:
 {{% alert title="Note" color="primary" %}}
 This component uses the cryptographic engine in Dapr to perform operations. Although keys are never exposed to your application, Dapr has access to the raw key material.
 
-
+{{% /alert %}}
 
 A Dapr `crypto.yaml` component file has the following structure:
 
@@ -69,12 +69,12 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                | Required | Details                                                                                                                                              | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                                                                                     |
+| Field                | Required | Details                                                                                                                                              | Example                                                                                                                                                                                                      |
 | -------------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `jwks`               |     Y    | Path to the JWKS document                                                                                                                            | Local file: `"fixtures/crypto/jwks/jwks.json"`<br>HTTP(S) URL: `"https://example.com/.well-known/jwks.json"`<br>Embedded JWKS: `{"keys": […]}` (can be base64-encoded) |
 | `requestTimeout`     |     N    | Timeout for network requests when fetching the JWKS document from a HTTP(S) URL, as a Go duration. Default: "30s"                 | `"5s"`                                                                                                                                                                                                       |
 | `minRefreshInterval` |     N    | Minimum interval to wait before subsequent refreshes of the JWKS document from a HTTP(S) source, as a Go duration. Default: "10m" | `"1h"`                                                                                                                                                                                                       |
 
-## 相关链接
+## Related links
 
 [Cryptography building block]({{< ref cryptography >}})

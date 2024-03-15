@@ -58,7 +58,7 @@ spec:
 
 Once you have created the component's YAML file, follow these instructions to apply it based on your hosting environment:
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 To run locally, create a `components` dir containing the YAML file and provide the path to the `dapr run` command with the flag `--resources-path`.
@@ -71,7 +71,7 @@ To deploy in Kubernetes, assuming your component file is named `mybinding.yaml`,
 kubectl apply -f mybinding.yaml
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -79,7 +79,7 @@ kubectl apply -f mybinding.yaml
 
 Visit the [bindings reference]({{< ref supported-bindings >}}) for a full list of supported resources.
 
-## 相关链接
+## Related links
 
 - [Bindings building block]({{< ref bindings >}})
 - [Supported bindings]({{<ref supported-bindings >}})

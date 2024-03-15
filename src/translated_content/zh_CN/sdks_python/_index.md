@@ -24,7 +24,7 @@ Dapr 提供了各种子包来帮助开发 Python 应用程序。 使用它们，
 
 要开始使用 Python SDK，请安装主 Dapr Python SDK 包。
 
-
+{{< tabs Stable Development>}}
 
 {{% codetab %}}
 
@@ -34,7 +34,7 @@ Dapr 提供了各种子包来帮助开发 Python 应用程序。 使用它们，
 pip install dapr
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -46,7 +46,7 @@ pip install dapr
 pip install dapr-dev
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

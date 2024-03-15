@@ -89,7 +89,7 @@ If you wish to use Redis as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| Field                 | Required | Details                                                                                                                                                                                                                                                                                              | 如何使用Dapr扩展来开发和运行Dapr应用程序                                        |
+| Field                 | Required | Details                                                                                                                                                                                                                                                                                              | Example                                                         |
 | --------------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | redisHost             |     Y    | Connection-string for the redis host                                                                                                                                                                                                                                                                 | `localhost:6379`, `redis-master.default.svc.cluster.local:6379` |
 | redisPassword         |     Y    | Password for Redis host. No Default. Can be `secretKeyRef` to use a secret reference                                                                                                                                                                                                                 | `""`, `"KeFg23!"`                                               |
@@ -123,7 +123,7 @@ If you wish to use Redis as an actor store, append the following to the yaml.
 
 Dapr can use any Redis instance: containerized, running on your local dev machine, or a managed cloud service.
 
-
+{{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
 A Redis instance is automatically created as a Docker container when you run `dapr init`
@@ -140,7 +140,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 
 2. Run `kubectl get pods` to see the Redis containers now running in your cluster.
 
-3. Add `redis-master:6379` as the `redisHost` in your [redis.yaml](#configuration) file. For example:
+3. Add `redis-master:6379` as the `redisHost` in your [redis.yaml](#configuration) file. 例如：
    ```yaml
        metadata:
        - name: redisHost
@@ -153,7 +153,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 
    - **Linux/MacOS**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode` and copy the outputted password.
 
-   Add this password as the `redisPassword` value in your [redis.yaml](#configuration) file. For example:
+   Add this password as the `redisPassword` value in your [redis.yaml](#configuration) file. 例如：
 
    ```yaml
        metadata:
@@ -161,7 +161,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
          value: lhDOkwTlp0
    ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 **Note**: this approach requires having an Azure Subscription.
@@ -188,7 +188,9 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 [AWS Redis](https://aws.amazon.com/redis/)
 {{% /codetab %}}
 
-
+{{% codetab %}}
+[GCP Cloud MemoryStore](https://cloud.google.com/memorystore/)
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -288,7 +290,7 @@ Consecutively, you can now store, retrieve, and query these documents.
 
 Consider the example from ["How-To: Query state"]({{< ref "howto-state-query-api.md#example-data-and-query" >}}) guide. Let's run it with Redis.
 
-
+{{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" "Redis Enterprise Cloud" "Alibaba Cloud" >}}
 
 {{% codetab %}}
 If you are using a self-hosted deployment of Dapr, a Redis instance without the JSON module is automatically created as a Docker container when you run `dapr init`.
@@ -309,7 +311,7 @@ Use following command to create an instance of redis compatible with query API.
 docker run -p 9445:9445 --name rejson --rm redislabs/rejson:2.0.6
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 Follow instructions for [Redis deployment in Kubernetes](#setup-redis) with one extra detail.
@@ -335,7 +337,7 @@ master:
    - /usr/lib/redis/modules/redisearch.so
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 {{% alert title="Note" color="warning" %}}
@@ -357,7 +359,9 @@ Memory Store does not support modules and cannot be used with query.
 {{% /alert %}}
 {{% /codetab %}}
 
-
+{{% codetab %}}
+[Redis Enterprise Cloud](https://docs.redis.com/latest/rc/)
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -367,7 +371,7 @@ Memory Store does not support modules and cannot be used with query.
 
 <!-- END_IGNORE -->
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -487,7 +491,7 @@ The result will be:
 
 The query syntax and documentation is available [here]({{< ref howto-state-query-api.md >}})
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

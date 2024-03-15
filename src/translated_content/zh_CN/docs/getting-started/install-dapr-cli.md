@@ -21,7 +21,7 @@ Dapr CLI 同时支持 [自托管]({{< ref self-hosted >}}) 和 [Kubernetes]({{< 
 
 ### 第 1 步：安装 Dapr CLI
 
-
+{{< tabs Linux Windows MacOS Binaries>}}
 
 {{% codetab %}}
 
@@ -57,7 +57,7 @@ wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O 
 wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | DAPR_INSTALL_DIR="$HOME/dapr" /bin/bash -s {{% dapr-latest-version cli="true" %}}
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -122,7 +122,7 @@ winget install Dapr.CLI.Preview
 3. 按照安装提示接受许可证和安装目录。 所选文件夹已添加到用户的PATH环境变量中。 默认值设置为`$Env:SystemDrive\dapr`。
 4. 点击 `Install` 开始安装。 安装完成后，您将看到一条最终消息。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -184,20 +184,20 @@ curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh 
 curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | DAPR_INSTALL_DIR="$HOME/dapr" -s {{% dapr-latest-version cli="true" %}}
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
-每次发行的Dapr CLI包括各种操作系统和架构。 您可以手动下载并安装这些二进制版本。
+Each release of Dapr CLI includes various OSes and architectures. 您可以手动下载并安装这些二进制版本。
 
 1. 从最新的[Dapr Release](https://github.com/dapr/cli/releases)下载所需的Dapr CLI。
 2. 解压缩 (例如，dapr_linux_amd64.tar.gz, dapr_windows_amd64.zip).
 3. 将其移动到你想要的位置。
    - 对于Linux/MacOS，我们推荐使用`/usr/local/bin`。
-   - 对于 Windows，请创建一个目录并将其添加到系统路径中。 For example:
+   - 对于 Windows，请创建一个目录并将其添加到系统路径中。 例如：
      - 创建一个名为 `C:\dapr` 的目录。
      - 通过编辑系统环境变量，将新创建的目录添加到用户 PATH。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

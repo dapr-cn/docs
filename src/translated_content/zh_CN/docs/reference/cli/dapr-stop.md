@@ -5,7 +5,7 @@ linkTitle: stop
 description: Detailed information on the stop CLI command
 ---
 
-### 说明
+### Description
 
 Stop Dapr instances and their associated apps.
 
@@ -21,7 +21,7 @@ dapr stop [flags]
 
 ### Flags
 
-| Name               | Environment Variable | Default | 说明                                                                                                                                                                                                                                                       |
+| Name               | Environment Variable | Default | Description                                                                                                                                                                                                                                              |
 | ------------------ | -------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--app-id`, `-a`   | `APP_ID`             |         | The application id to be stopped                                                                                                                                                                                                                         |
 | `--help`, `-h`     |                      |         | Print this help message                                                                                                                                                                                                                                  |

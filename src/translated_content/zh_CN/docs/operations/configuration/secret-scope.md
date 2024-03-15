@@ -27,31 +27,31 @@ secrets:
 
 The following table lists the properties for secret scopes:
 
-| Property       | Type   | 说明                                                                              |
-| -------------- | ------ | ------------------------------------------------------------------------------- |
-| storeName      | string | Name of the secret store component. storeName must be unique within the list    |
-| defaultAccess  | string | Access modifier. Accepted values "allow" (default) or "deny" |
-| allowedSecrets | list   | List of secret keys that can be accessed                                        |
-| deniedSecrets  | list   | List of secret keys that cannot be accessed                                     |
+| Property  | Type   | Description                                                                     |
+| --------- | ------ | ------------------------------------------------------------------------------- |
+| storeName | string | Name of the secret store component. storeName must be unique within the list    |
+| 默认权限      | string | Access modifier. Accepted values "allow" (default) or "deny" |
+| 允许的密钥     | list   | List of secret keys that can be accessed                                        |
+| 被拒绝的密钥    | list   | List of secret keys that cannot be accessed                                     |
 
 When an `allowedSecrets` list is present with at least one element, only those secrets defined in the list can be accessed by the application.
 
-## Permission priority
+## 权限优先级
 
 The `allowedSecrets` and `deniedSecrets` list values take priorty over the `defaultAccess`.
 
-| Scenarios                              | defaultAccess | allowedSecrets                                             | deniedSecrets                                              | permission                   |
-| -------------------------------------- | ------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------- |
-| 1 - Only default access                | deny/allow    | empty                                                      | empty                                                      | deny/allow                   |
-| 2 - Default deny with allowed list     | deny          | ["s1"] | empty                                                      | only "s1" can be accessed    |
-| 3 - Default allow with denied list     | allow         | empty                                                      | ["s1"] | only "s1" cannot be accessed |
-| 4 - Default allow with allowed list    | allow         | ["s1"] | empty                                                      | only "s1" can be accessed    |
-| 5 - Default deny with denied list      | deny          | empty                                                      | ["s1"] | deny                         |
-| 6 - Default deny/allow with both lists | deny/allow    | ["s1"] | ["s2"] | only "s1" can be accessed    |
+| Scenarios                          | 默认权限  | 允许的密钥                                                      | 被拒绝的密钥                                                     | 权限         |
+| ---------------------------------- | ----- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------- |
+| 1 - 仅默认访问                          | 拒绝/允许 | 为空                                                         | 为空                                                         | 拒绝/允许      |
+| 2 - 默认为拒绝的允许列表                     | 拒绝    | ["s1"] | 为空                                                         | 只能访问"s1"   |
+| 3 - Default allow with denied list | 允许    | 为空                                                         | ["s1"] | 仅限"s1"无法访问 |
+| 4 - 默认允许的允许列表                      | 允许    | ["s1"] | 为空                                                         | 只能访问"s1"   |
+| 5 - 默认拒绝的拒绝列表                      | 拒绝    | 为空                                                         | ["s1"] | 拒绝         |
+| 6 - 默认拒绝/允许的两个列表                   | 拒绝/允许 | ["s1"] | ["s2"] | 只能访问"s1"   |
 
 ## 示例
 
-### Scenario 1 : Deny access to all secrets for a secret store
+### 场景1：拒绝访问密钥存储中的所有密钥
 
 In Kubernetes cluster, the native Kubernetes secret store is added to Dapr application by default. In some scenarios it may be necessary to deny access to Dapr secrets for a given application. To add this configuration follow the steps below:
 
@@ -77,7 +77,7 @@ dapr.io/config: appconfig
 
 With this defined, the application no longer has access to Kubernetes secret store.
 
-### Scenario 2 : Allow access to only certain secrets in a secret store
+### 场景2：只允许访问密钥仓库中的某些密钥
 
 To allow a Dapr application to have access to only certain secrets, define the following `config.yaml`:
 
@@ -96,9 +96,9 @@ spec:
 
 This example defines configuration for secret store named vault. The default access to the secret store is `deny`, whereas some secrets are accessible by the application based on the `allowedSecrets` list. Follow [these instructions]({{< ref configuration-overview\.md >}}) to apply configuration to the sidecar.
 
-### Scenario 3: Deny access to certain sensitive secrets in a secret store
+### 场景3：拒绝访问密钥仓库中的某些敏感密钥
 
-Define the following `config.yaml`:
+定义以下 `config.yaml`:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1

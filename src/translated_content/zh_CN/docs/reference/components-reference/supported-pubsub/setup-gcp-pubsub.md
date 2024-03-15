@@ -69,7 +69,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                   | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                 |
+| Field                   | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example                                                                                                  |
 | ----------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | projectId               |     Y    | GCP project id                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `myproject-123`                                                                                          |
 | endpoint                |     N    | GCP endpoint for the component to use. Only used for local development (for example) with [GCP Pub/Sub Emulator](https://cloud.google.com/pubsub/docs/emulator). The `endpoint` is unnecessary when running against the GCP production API.                                                                                                                                                                                                          | `"http://localhost:8085"`                                                                                |
@@ -102,7 +102,7 @@ Since the GCP Pub/Sub component uses the GCP Go Client Libraries, by default it 
 
 ## Create a GCP Pub/Sub
 
-
+{{< tabs "Self-Hosted" "GCP" >}}
 
 {{% codetab %}}
 For local development, the [GCP Pub/Sub Emulator](https://cloud.google.com/pubsub/docs/emulator) is used to test the GCP Pub/Sub Component. Follow [these instructions](https://cloud.google.com/pubsub/docs/emulator#start) to run the GCP Pub/Sub Emulator.
@@ -142,7 +142,7 @@ spec:
     value: "localhost:8085"
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -150,11 +150,11 @@ You can use either "explicit" or "implicit" credentials to configure access to y
 
 Follow the instructions [here](https://cloud.google.com/pubsub/docs/quickstart-console) on setting up Google Cloud Pub/Sub system.
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

@@ -30,7 +30,7 @@ aliases:
 
 与其他 actor 配置元素类似，actor 运行时通过 actor 的 endpoint 为 `GET /dapr/config` 提供适当的配置以分区 actor 提醒。 选择您偏好的语言来进行 actor 运行时配置示例。
 
-
+{{< tabs ".NET" JavaScript Python Java Go >}}
 
 {{% codetab %}}
 
@@ -59,7 +59,7 @@ public void ConfigureServices(IServiceCollection services)
 
 [查看注册 Actors 的.NET SDK文档]({{< ref "dotnet-actors-usage.md#registring-actors" >}})。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -92,7 +92,7 @@ await actor.unregisterActorReminder("reminder-id");
 
 [查看使用JavaScript SDK编写actors的文档]({{< ref "js-actors.md#registering-actors" >}})。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -112,7 +112,7 @@ ActorRuntime.set_actor_config(
 
 [请参阅有关使用 Python SDK 运行 Actors 的文档]({{< ref "python-actor.md" >}})
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -129,7 +129,7 @@ ActorRuntime.getInstance().getConfig().setRemindersStoragePartitions(7);
 
 [请参阅有关使用Java SDK编写Actor的文档]({{< ref "java.md#actors" >}}).
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -163,7 +163,7 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 
 [查看使用 Go SDK 与 actors 的示例](https://github.com/dapr/go-sdk/tree/main/examples/actor)。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

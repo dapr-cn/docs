@@ -78,7 +78,7 @@ That's it! There's no need to include any SDKs or instrument your application co
 
 Deploy and run some applications. Wait for the trace to propagate to your tracing backend and view them there.
 
-## 相关链接
+## Related links
 
 - Try out the [observability quickstart](https://github.com/dapr/quickstarts/tree/master/tutorials/observability/README.md)
 - Learn how to set [tracing configuration options]({{< ref "configuration-overview\.md#tracing" >}})

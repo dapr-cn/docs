@@ -24,7 +24,7 @@ Note that workflow instance IDs can only contain alphanumeric characters, unders
 
 ### URL parameters
 
-| Parameter               | 说明                                                                                     |
+| Parameter               | Description                                                                            |
 | ----------------------- | -------------------------------------------------------------------------------------- |
 | `workflowComponentName` | Use `dapr` for Dapr Workflows                                                          |
 | `workflowName`          | Identify the workflow type                                                             |
@@ -36,7 +36,7 @@ Any request content will be passed to the workflow as input. The Dapr API passes
 
 ### HTTP response codes
 
-| Code  | 说明                                                                      |
+| Code  | Description                                                             |
 | ----- | ----------------------------------------------------------------------- |
 | `202` | Accepted                                                                |
 | `400` | Request was malformed                                                   |
@@ -65,18 +65,18 @@ Terminating a workflow terminates all of the child workflows created by the work
 
 Terminating a workflow has no effect on any in-flight activity executions that were started by the terminated instance.
 
-
+{{% /alert %}}
 
 ### URL parameters
 
-| Parameter               | 说明                                                       |
+| Parameter               | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
 | `workflowComponentName` | Use `dapr` for Dapr Workflows                            |
 | `instanceId`            | Unique value created for each run of a specific workflow |
 
 ### HTTP response codes
 
-| Code  | 说明                                                                      |
+| Code  | Description                                                             |
 | ----- | ----------------------------------------------------------------------- |
 | `202` | Accepted                                                                |
 | `400` | Request was malformed                                                   |
@@ -97,11 +97,11 @@ POST http://localhost:3500/v1.0-beta1/workflows/<workflowComponentName>/<instanc
 {{% alert title="Note" color="primary" %}}
 The exact mechanism for subscribing to an event depends on the workflow component that you're using. Dapr Workflow has one way of subscribing to external events but other workflow components might have different ways.
 
-
+{{% /alert %}}
 
 ### URL parameters
 
-| Parameter               | 说明                                                       |
+| Parameter               | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
 | `workflowComponentName` | Use `dapr` for Dapr Workflows                            |
 | `instanceId`            | Unique value created for each run of a specific workflow |
@@ -109,7 +109,7 @@ The exact mechanism for subscribing to an event depends on the workflow componen
 
 ### HTTP response codes
 
-| Code  | 说明                                                                      |
+| Code  | Description                                                             |
 | ----- | ----------------------------------------------------------------------- |
 | `202` | Accepted                                                                |
 | `400` | Request was malformed                                                   |
@@ -129,14 +129,14 @@ POST http://localhost:3500/v1.0-beta1/workflows/<workflowComponentName>/<instanc
 
 ### URL parameters
 
-| Parameter               | 说明                                                       |
+| Parameter               | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
 | `workflowComponentName` | Use `dapr` for Dapr Workflows                            |
 | `instanceId`            | Unique value created for each run of a specific workflow |
 
 ### HTTP response codes
 
-| Code  | 说明                                         |
+| Code  | Description                                |
 | ----- | ------------------------------------------ |
 | `202` | Accepted                                   |
 | `400` | Request was malformed                      |
@@ -156,14 +156,14 @@ POST http://localhost:3500/v1.0-beta1/workflows/<workflowComponentName>/<instanc
 
 ### URL parameters
 
-| Parameter               | 说明                                                       |
+| Parameter               | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
 | `workflowComponentName` | Use `dapr` for Dapr Workflows                            |
 | `instanceId`            | Unique value created for each run of a specific workflow |
 
 ### HTTP response codes
 
-| Code  | 说明                                         |
+| Code  | Description                                |
 | ----- | ------------------------------------------ |
 | `202` | Accepted                                   |
 | `400` | Request was malformed                      |
@@ -187,14 +187,14 @@ Only `COMPLETED`, `FAILED`, or `TERMINATED` workflows can be purged.
 
 ### URL parameters
 
-| Parameter               | 说明                                                       |
+| Parameter               | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
 | `workflowComponentName` | Use `dapr` for Dapr Workflows                            |
 | `instanceId`            | Unique value created for each run of a specific workflow |
 
 ### HTTP response codes
 
-| Code  | 说明                                         |
+| Code  | Description                                |
 | ----- | ------------------------------------------ |
 | `202` | Accepted                                   |
 | `400` | Request was malformed                      |
@@ -214,14 +214,14 @@ GET http://localhost:3500/v1.0-beta1/workflows/<workflowComponentName>/<instance
 
 ### URL parameters
 
-| Parameter               | 说明                                                       |
+| Parameter               | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
 | `workflowComponentName` | Use `dapr` for Dapr Workflows                            |
 | `instanceId`            | Unique value created for each run of a specific workflow |
 
 ### HTTP response codes
 
-| Code  | 说明                                                                      |
+| Code  | Description                                                             |
 | ----- | ----------------------------------------------------------------------- |
 | `200` | OK                                                                      |
 | `400` | Request was malformed                                                   |
@@ -244,7 +244,7 @@ The API call will provide a JSON response similar to this:
  }
 ```
 
-| Parameter       | 说明                                                                                                                                                                          |
+| Parameter       | Description                                                                                                                                                                 |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `runtimeStatus` | The status of the workflow instance. Values include: `"RUNNING"`, `"COMPLETED"`, `"CONTINUED_AS_NEW"`, `"FAILED"`, `"CANCELED"`, `"TERMINATED"`, `"PENDING"`, `"SUSPENDED"` |
 
@@ -265,7 +265,7 @@ spec:
     value: <VALUE>
 ```
 
-| Setting         | 说明                                                             |
+| Setting         | Description                                                    |
 | --------------- | -------------------------------------------------------------- |
 | `metadata.name` | The name of the workflow component.                            |
 | `spec/metadata` | Additional metadata parameters specified by workflow component |

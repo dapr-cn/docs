@@ -40,13 +40,13 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field          | Required | Binding support | Details                                                          | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| -------------- | :------: | --------------- | ---------------------------------------------------------------- | ------------------------ |
-| `table`        |     Y    | Output          | The DynamoDB table name                                          | `"items"`                |
-| `region`       |     Y    | Output          | The specific AWS region the AWS DynamoDB instance is deployed in | `"us-east-1"`            |
-| `accessKey`    |     Y    | Output          | The AWS Access Key to access this resource                       | `"key"`                  |
-| `secretKey`    |     Y    | Output          | The AWS Secret Access Key to access this resource                | `"secretAccessKey"`      |
-| `sessionToken` |     N    | Output          | The AWS session token to use                                     | `"sessionToken"`         |
+| Field          | Required | Binding support | Details                                                          | Example             |
+| -------------- | :------: | --------------- | ---------------------------------------------------------------- | ------------------- |
+| `table`        |     Y    | Output          | The DynamoDB table name                                          | `"items"`           |
+| `region`       |     Y    | Output          | The specific AWS region the AWS DynamoDB instance is deployed in | `"us-east-1"`       |
+| `accessKey`    |     Y    | Output          | The AWS Access Key to access this resource                       | `"key"`             |
+| `secretKey`    |     Y    | Output          | The AWS Secret Access Key to access this resource                | `"secretAccessKey"` |
+| `sessionToken` |     N    | Output          | The AWS session token to use                                     | `"sessionToken"`    |
 
 {{% alert title="Important" color="warning" %}}
 When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernetes), if you're using a node/pod that has already been attached to an IAM policy defining access to AWS resources, you **must not** provide AWS access-key, secret-key, and tokens in the definition of the component spec you're using.\
@@ -58,7 +58,7 @@ This component supports **output binding** with the following operations:
 
 - `create`
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

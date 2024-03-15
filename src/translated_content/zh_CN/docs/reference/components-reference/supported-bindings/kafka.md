@@ -63,7 +63,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field                         | Required | Binding support                                                                                                                                                    | Details                                                                                                                                                                                                                                                    | 如何使用Dapr扩展来开发和运行Dapr应用程序                                   |
+| Field                         | Required | Binding support                                                                                                                                                    | Details                                                                                                                                                                                                                                                    | Example                                                    |
 | ----------------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `topics`                      |     N    | Input                                                                                                                                                              | A comma-separated string of topics.                                                                                                                                                                                                                        | `"mytopic1,topic2"`                                        |
 | `brokers`                     |     Y    | Input/Output                                                                                                                                                       | A comma-separated string of Kafka brokers.                                                                                                                                                                                                                 | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"` |
@@ -103,7 +103,7 @@ This component supports **output binding** with the following operations:
 
 - `create`
 
-## 鉴权
+## Authentication
 
 Kafka supports a variety of authentication schemes and Dapr supports several: SASL password, mTLS, OIDC/OAuth2. [Learn more about Kafka's authentication method for both the Kafka binding and Kafka pub/sub components]({{< ref "setup-apache-kafka.md#authentication" >}}).
 
@@ -113,7 +113,7 @@ When invoking the Kafka binding, its possible to provide an optional partition k
 
 The field name is `partitionKey`.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
@@ -133,7 +133,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
 
 An HTTP 204 (No Content) and empty body will be returned if successful.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

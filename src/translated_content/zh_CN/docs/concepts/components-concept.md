@@ -1,7 +1,7 @@
 ---
 type: docs
-title: Components
-linkTitle: Components
+title: 组件
+linkTitle: 组件
 weight: 300
 description: 构建模块和应用所使用的模块化功能
 ---
@@ -45,7 +45,7 @@ Dapr 还允许用户创建自己的私有组件，称为可插拔组件。 这�
 在可能的情况下，鼓励向 Dapr 项目和社区捐赠内置组件。
 
 不过，可插拔组件非常适合想要创建自己的私有组件的方案，这些组件不包含在 Dapr 项目中。
-For example:
+例如：
 
 - 你的组件可能特定于你的公司或带来 IP 问题，因此它不能包含在 Dapr component 存储库中。
 - 您希望组件更新与 Dapr 发布周期解耦。
@@ -64,21 +64,21 @@ For example:
 
 以下是 Dapr 提供的组件：
 
-### State stores
+### 状态存储
 
 状态存储组件是存储键值对的数据存储（数据库、文件、内存），其作为[状态管理]({{< ref "state-management-overview\.md" >}})的构建块之一。
 
 - [状态存储列表]({{< ref supported-state-stores >}})
 - [状态存储实现](https://github.com/dapr/components-contrib/tree/master/state)
 
-### Name resolution
+### 命名解析
 
 命名解析组件与[服务调用]({{< ref "service-invocation-overview\.md" >}})构建块配合使用，与托管环境集成以提供服务到服务的发现。 例如，Kubernetes 命名解析组件与 Kubernetes DNS 服务集成，自托管使用 mDNS，VM 集群可以使用 Consul 命名解析组件。
 
 - [名称解析组件列表]({{< ref supported-name-resolution >}})
 - [名称解析实现](https://github.com/dapr/components-contrib/tree/master/nameresolution)
 
-### Pub/sub brokers
+### 发布/订阅代理
 
 发布/订阅组件是消息分发器，可以作为[发布和订阅](pubsub-overview.md)构建块的一部分来传递消息给/从服务。
 
@@ -92,21 +92,21 @@ For example:
 - [支持的绑定列表]({{< ref supported-bindings >}})
 - [绑定实现](https://github.com/dapr/components-contrib/tree/master/bindings)
 
-### Secret stores
+### Secret stores（密钥存储）
 
 一个[秘密]({{< ref "secrets-overview\.md" >}})是任何你想保护的私人信息，以防止不需要的访问。 秘密存储用来存储可在应用中检索和使用的密钥。
 
 - [支持的密钥存储列表]({{< ref supported-secret-stores >}})
 - [密钥存储实现](https://github.com/dapr/components-contrib/tree/master/secretstores)
 
-### Configuration stores
+### 配置存储
 
 配置存储用于保存应用数据，配置可在应用启动或者配置更改的时候被应用读取。 配置存储支持动态加载（热更新）。
 
 - [支持的配置存储列表]({{< ref supported-configuration-stores >}})
 - [配置存储实现](https://github.com/dapr/components-contrib/tree/master/configuration)
 
-### Locks
+### 锁
 
 锁组件用作分布式锁，以提供对资源（如队列或数据库）的互斥访问。
 
