@@ -11,7 +11,7 @@ weight: 30
 通过使用 Dapr 的 gRPC 代理功能，您可以使用现有的基于 proto 的 gRPC 服务，并让流量通过 Dapr sidecar。 这样做可以为开发人员带来以下[Dapr服务调用]({{< ref service-invocation-overview\.md >}})的好处：
 
 1. 双向认证
-2. Tracing
+2. 追踪
 3. Metrics
 4. 访问列表
 5. 网络层弹性
@@ -126,7 +126,7 @@ ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server")
 
 gRPC 支持的所有语言都允许添加元数据。 以下是几个例子：
 
-
+{{< tabs Java Dotnet Python JavaScript Ruby "C++">}}
 
 {{% codetab %}}
 
@@ -139,7 +139,7 @@ stub = MetadataUtils.attachHeaders(stub, header);
 stub.SayHello(new HelloRequest() { Name = "Darth Malak" });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -152,7 +152,7 @@ var metadata = new Metadata
 var call = client.SayHello(new HelloRequest { Name = "Darth Nihilus" }, metadata);
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -161,7 +161,7 @@ metadata = (('dapr-app-id', 'server'),)
 response = stub.SayHello(request={ name: 'Darth Revan' }, metadata=metadata)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -172,7 +172,7 @@ metadata.add('dapr-app-id', 'server');
 client.sayHello({ name: "Darth Malgus" }, metadata)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -181,7 +181,7 @@ metadata = { 'dapr-app-id' : 'server' }
 response = service.sayHello({ 'name': 'Darth Bane' }, metadata)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -190,7 +190,7 @@ grpc::ClientContext context;
 context.AddMetadata("dapr-app-id", "server");
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -235,9 +235,9 @@ spec:
 
 `dapr.io/app-protocol: "grpc"` 注解告诉 Dapr 使用 gRPC 调用应用。
 
-如果您的应用程序使用TLS连接，您可以使用`app-protocol: "grpcs"`注解告知Dapr通过TLS调用您的应用程序（完整列表[在这里]({{< ref arguments-annotations-overview\.md >}})）。 Note that Dapr does not validate TLS certificates presented by the app.
+如果您的应用程序使用TLS连接，您可以使用`app-protocol: "grpcs"`注解告知Dapr通过TLS调用您的应用程序（完整列表[在这里]({{< ref arguments-annotations-overview\.md >}})）。 请注意，Dapr 不会验证应用程序提供的 TLS 证书。
 
-### Namespaces
+### 命名空间
 
 当运行于[支持命名空间的平台]({{< ref "service_invocation_api.md#namespace-supported-platforms" >}})，您需要在应用ID中包含目标应用的命名空间：`myApp.production`
 
@@ -259,9 +259,9 @@ ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server.production")
 
 当使用 Dapr 作为代理流处理 RPC 进行 gRPC 调用时，你必须设置一个额外的元数据选项 `dapr-stream`，其值为 `true`。
 
-For example:
+例如：
 
-
+{{< tabs Go Java Dotnet Python JavaScript Ruby "C++">}}
 
 {{% codetab %}}
 
@@ -270,7 +270,7 @@ ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server")
 ctx = metadata.AppendToOutgoingContext(ctx, "dapr-stream", "true")
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -280,7 +280,7 @@ Metadata.Key<String> jwtKey = Metadata.Key.of("dapr-app-id", "server");
 Metadata.Key<String> jwtKey = Metadata.Key.of("dapr-stream", "true");
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -292,7 +292,7 @@ var metadata = new Metadata
 };
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -300,7 +300,7 @@ var metadata = new Metadata
 metadata = (('dapr-app-id', 'server'), ('dapr-stream', 'true'),)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -310,7 +310,7 @@ metadata.add('dapr-app-id', 'server');
 metadata.add('dapr-stream', 'true');
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -319,7 +319,7 @@ metadata = { 'dapr-app-id' : 'server' }
 metadata = { 'dapr-stream' : 'true' }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -329,7 +329,7 @@ context.AddMetadata("dapr-app-id", "server");
 context.AddMetadata("dapr-stream", "true");
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -341,13 +341,13 @@ context.AddMetadata("dapr-stream", "true");
 - 重试策略只影响初始连接“握手”。 如果您的弹性策略包括重试，Dapr 将检测到与目标应用程序建立初始连接时的故障，并将重试直到成功（或直到策略中定义的重试次数用尽）。
 - 同样，弹性策略中定义的超时仅适用于初始的“握手”过程。 连接建立后，超时不再影响流。
 
-## Related Links
+## 相关链接
 
 - [服务调用概述]({{< ref service-invocation-overview\.md >}})
 - [服务调用API规范]({{< ref service_invocation_api.md >}})
 - [gRPC代理社区会议视频](https://youtu.be/B_vkXqptpXY?t=70)
 
-## Community call demo
+## 社区示例
 
 观看这个[视频](https://youtu.be/B_vkXqptpXY?t=69)，了解如何使用 Dapr 的 gRPC 代理功能:
 

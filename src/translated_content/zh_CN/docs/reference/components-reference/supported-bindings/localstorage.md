@@ -26,9 +26,9 @@ spec:
 
 ## Spec metadata fields
 
-| Field      | Required | Binding support | Details                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ---------- | :------: | --------------- | ------------------------------------------------------- | ------------------------ |
-| `rootPath` |     Y    | Output          | The root path anchor to which files can be read / saved | `"/temp/files"`          |
+| Field      | Required | Binding support | Details                                                 | Example         |
+| ---------- | :------: | --------------- | ------------------------------------------------------- | --------------- |
+| `rootPath` |     Y    | Output          | The root path anchor to which files can be read / saved | `"/temp/files"` |
 
 ## Binding support
 
@@ -56,13 +56,15 @@ To perform a create file operation, invoke the Local Storage binding with a `POS
 
 ##### Save text to a random generated UUID file
 
-
+{{< tabs Windows Linux >}}
+{{% codetab %}}
+On Windows, utilize cmd prompt (PowerShell has different escaping mechanism)
 
 ```bash
 curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -71,13 +73,13 @@ curl -d '{ "operation": "create", "data": "Hello World" }' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ##### Save text to a specific file
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -86,7 +88,7 @@ curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\", \"metadata\": {
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -95,7 +97,7 @@ curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "fileName
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -103,7 +105,7 @@ curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "fileName
 
 To upload a file, encode it as Base64. The binding should automatically detect the Base64 encoding.
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -111,7 +113,7 @@ To upload a file, encode it as Base64. The binding should automatically detect t
 curl -d "{ \"operation\": \"create\", \"data\": \"YOUR_BASE_64_CONTENT\", \"metadata\": { \"fileName\": \"my-test-file.jpg\" } }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -120,7 +122,7 @@ curl -d '{ "operation": "create", "data": "YOUR_BASE_64_CONTENT", "metadata": { 
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -148,9 +150,9 @@ To perform a get file operation, invoke the Local Storage binding with a `POST` 
 }
 ```
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -158,7 +160,7 @@ To perform a get file operation, invoke the Local Storage binding with a `POST` 
 curl -d '{ \"operation\": \"get\", \"metadata\": { \"fileName\": \"myfile\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -167,7 +169,7 @@ curl -d '{ "operation": "get", "metadata": { "fileName": "myfile" }}' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -196,9 +198,9 @@ If you only want to list the files beneath a particular directory below the `roo
 }
 ```
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -206,7 +208,7 @@ If you only want to list the files beneath a particular directory below the `roo
 curl -d '{ \"operation\": \"list\", \"metadata\": { \"fileName\": \"my/cool/directory\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -215,7 +217,7 @@ curl -d '{ "operation": "list", "metadata": { "fileName": "my/cool/directory" }}
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -236,9 +238,9 @@ To perform a delete file operation, invoke the Local Storage binding with a `POS
 }
 ```
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -246,7 +248,7 @@ To perform a delete file operation, invoke the Local Storage binding with a `POS
 curl -d '{ \"operation\": \"delete\", \"metadata\": { \"fileName\": \"myfile\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -255,7 +257,7 @@ curl -d '{ "operation": "delete", "metadata": { "fileName": "myfile" }}' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -277,7 +279,7 @@ By default the Local Storage output binding auto generates a UUID as the file na
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

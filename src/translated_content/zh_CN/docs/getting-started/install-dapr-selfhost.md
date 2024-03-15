@@ -22,7 +22,9 @@ Dapr 初始化包括：
 3. 创建一个**默认组件文件夹**，其中包含上述的组件定义。
 4. 运行 **Dapr Placement 服务容器实例**以获得本地 actor 支持。
 
-
+{{% alert title="Kubernetes Development Environment" color="primary" %}}
+To initialize Dapr in your local or remote **Kubernetes** cluster for development (including the Redis and Zipkin containers listed above), see [how to initialize Dapr for development on Kubernetes]({{\<ref "kubernetes-deploy.md#install-dapr-from-the-official-dapr-helm-chart-with-development-flag">}})
+{{% /alert %}}
 
 {{% alert title="Docker" color="primary" %}}
 推荐的开发环境需要[Docker](https://docs.docker.com/install/)。 虽然您可以在不依赖 Docker 的情况下[初始化 Dapr]({{< ref self-hosted-no-docker.md >}})，但本指南中的后续步骤将假定使用推荐的 Docker 开发环境。
@@ -32,7 +34,7 @@ Dapr 初始化包括：
 
 ### 第 1 步：打开提升权限终端
 
-
+{{< tabs "Linux/MacOS" "Windows">}}
 
 {{% codetab %}}
 
@@ -41,7 +43,7 @@ Dapr 初始化包括：
 - 您使用 `sudo` 运行 Docker 命令，或者
 - 安装路径为 `/usr/local/bin` （默认安装路径）。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -50,13 +52,13 @@ Dapr 初始化包括：
 1. 右键单击 Windows 终端或命令提示符图标。
 2. 选择**以管理员身份运行**。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ### 第 2 步：运行 init CLI 命令
 
-
+{{< tabs "Linux/MacOS" "Windows">}}
 
 {{% codetab %}}
 
@@ -71,7 +73,7 @@ dapr init
 1. 导航到**Docker Desktop** > **设置** > **高级**。
 2. 选择\*\*允许使用默认的 Docker 套接字（需要密码）\*\*复选框。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -81,7 +83,7 @@ dapr init
 dapr init
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -122,7 +124,7 @@ docker ps
 - 在Windows上，在 `%UserProfile%\.dapr`
 - 在Linux/MacOS上，在`~/.dapr`下
 
-
+{{< tabs "Linux/MacOS" "Windows">}}
 
 {{% codetab %}}
 
@@ -136,10 +138,10 @@ ls $HOME/.dapr
 
 <br>
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
-您可以使用PowerShell或命令行进行验证。 如果使用PowerShell，请运行：
+You can verify using either PowerShell or command line. 如果使用PowerShell，请运行：
 
 ```powershell
 explorer "$env:USERPROFILE\.dapr"
@@ -155,7 +157,7 @@ explorer "%USERPROFILE%\.dapr"
 
 <img src="/images/install-dapr-selfhost/windows-view-components.png" width=600>
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

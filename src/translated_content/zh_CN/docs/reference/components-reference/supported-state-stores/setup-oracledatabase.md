@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                | Required | Details                                                                                                                  | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                                                                                                                                  |
+| Field                | Required | Details                                                                                                                  | Example                                                                                                                                                                                                                                                   |
 | -------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | connectionString     |     Y    | The connection string for Oracle Database                                                                                | `"oracle://user/password@host:port/servicename"` for example `"oracle://demo:demo@localhost:1521/xe"` or for Autonomous Database `"oracle://states_schema:State12345pw@adb.us-ashburn-1.oraclecloud.com:1522/k8j2agsqjsw_daprdb_low.adb.oraclecloud.com"` |
 | oracleWalletLocation |     N    | Location of the contents of an Oracle Wallet file (required to connect to Autonomous Database on OCI) | `"/home/app/state/Wallet_daprDB/"`                                                                                                                                                                                                                        |
@@ -107,13 +107,13 @@ Note that expired state is not removed from the state store by this component. A
  where  expiration_time < SYS_EXTRACT_UTC(SYSTIMESTAMP);
 ```
 
-## Concurrency
+## 并发
 
 Concurrency in the Oracle Database state store is achieved by using `ETag`s. Each piece of state recorded in the Oracle Database state store is assigned a unique ETag - a generated, unique string stored in the column ETag - when it is created or updated. Note: the column UPDATE_TIME is also updated whenever a `Set` operation is performed on an existing record.
 
 Only when the `Set` and `Delete` requests for this state store specify the _FirstWrite_ concurrency policy, then the request needs to provide the actual ETag value for the state to be written or removed for the request to be successful. If a different or no concurrency policy is specified, then no check is performed on the ETag value.
 
-## Consistency
+## 一致性
 
 The Oracle Database state store supports Transactions. Multiple `Set` and `Delete` commands can be combined in a request that is processed as a single, atomic transaction.
 
@@ -125,7 +125,7 @@ Oracle Database state store does not currently support the Query API.
 
 ## Create an Oracle Database and User Schema
 
-
+{{< tabs "Self-Hosted" "Autonomous Database on OCI">}}
 
 {{% codetab %}}
 
@@ -175,7 +175,7 @@ Oracle Database state store does not currently support the Query API.
      )
    ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -210,11 +210,11 @@ Oracle Database state store does not currently support the Query API.
      )
    ```
 
-
+{{% /codetab %}}
 
 {{% /tabs %}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

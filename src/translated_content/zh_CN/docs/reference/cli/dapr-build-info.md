@@ -5,7 +5,7 @@ linkTitle: build-info
 description: Detailed build information on dapr CLI and daprd executables
 ---
 
-### 说明
+### Description
 
 Get the version and git commit data for `dapr` and `daprd` executables.
 

@@ -27,7 +27,7 @@ Multi-App Run模板文件是一个YAML文件，您可以使用它同时运行多
 
 执行以下命令行工具命令来读取默认命名为 `dapr.yaml` 的多应用运行模板文件：
 
-
+{{< tabs Self-hosted Kubernetes>}}
 
 {{% codetab %}}
 
@@ -39,7 +39,7 @@ Multi-App Run模板文件是一个YAML文件，您可以使用它同时运行多
 dapr run -f <dir_path>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -49,7 +49,7 @@ dapr run -f <dir_path>
 dapr run -f -k <dir_path>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -57,7 +57,7 @@ dapr run -f -k <dir_path>
 
 如果多应用运行模板文件的名称不是`dapr.yaml`，那么您可以提供相对或绝对文件路径给命令：
 
-
+{{< tabs Self-hosted Kubernetes>}}
 
 {{% codetab %}}
 
@@ -67,7 +67,7 @@ dapr run -f -k <dir_path>
 dapr run -f ./path/to/<your-preferred-file-name>.yaml
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -77,7 +77,7 @@ dapr run -f ./path/to/<your-preferred-file-name>.yaml
 dapr run -f -k ./path/to/<your-preferred-file-name>.yaml
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -93,7 +93,7 @@ dapr list
 
 随时使用以下任一命令停止多应用运行模板：
 
-
+{{< tabs Self-hosted Kubernetes>}}
 
 {{% codetab %}}
 
@@ -111,7 +111,7 @@ dapr stop -f <dir_path>
 dapr stop -f ./path/to/<your-preferred-file-name>.yaml
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -129,7 +129,7 @@ dapr stop -f -k
 dapr stop -f -k ./path/to/<your-preferred-file-name>.yaml
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -137,7 +137,7 @@ dapr stop -f -k ./path/to/<your-preferred-file-name>.yaml
 
 多应用运行模板文件可以包括以下属性。 下面是一个示例模板，显示了配置了一些属性的两个应用程序。
 
-
+{{< tabs Self-hosted Kubernetes>}}
 
 {{% codetab %}}
 
@@ -179,7 +179,7 @@ apps:
 - 在apps部分下的`appDirPath`应该相对于模板文件路径提供。
 - 所有其他在apps部分下的相对路径都应该相对于`appDirPath`提供。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -216,13 +216,13 @@ apps:
 - 在apps部分下的`appDirPath`应该相对于模板文件路径提供。
 - 所有在app部分下的相对路径都应该相对于`appDirPath`提供。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ## 模板属性
 
-
+{{< tabs Self-hosted Kubernetes>}}
 
 {{% codetab %}}
 
@@ -232,41 +232,41 @@ apps:
 
 {{< table "table table-white table-striped table-bordered" >}}
 
-| 属性                       | Required | Details                                                                                                                                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                  |             |
-| ------------------------ | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ----------- |
-| `appDirPath`             |     Y    | 应用代码的路径                                                                                                                                                                                                                 | `./webapp/`, `./backend/`                 |             |
-| `appID`                  |     N    | 应用程序的应用程序 ID。 如果未提供，将从`appDirPath`派生                                                                                                                                                                                    | `webapp`, `backend`                       |             |
-| `resourcesPath`          |     N    | **Deprecated**. Dapr 资源的路径。 可以按照惯例设置为默认值                                                                                                                                                                                | `./app/components`, `./webapp/components` |             |
-| `resourcesPaths`         |     N    | 逗号分隔的 Dapr 资源路径。 可以按照惯例设置为默认值                                                                                                                                                                                           | `./app/components`, `./webapp/components` |             |
-| `appChannelAddress`      |     N    | 应用程序监听的网络地址。 可以按照惯例设置为默认值。                                                                                                                                                                                              | `127.0.0.1`                               | `localhost` |
-| `configFilePath`         |     N    | 应用程序配置文件的路径                                                                                                                                                                                                             | `./webapp/config.yaml`                    |             |
-| `appProtocol`            |     N    | The protocol Dapr uses to talk to the application.                                                                                                                                                                      | `http`, `grpc`                            |             |
-| `appPort`                |     N    | The port your application is listening on                                                                                                                                                                               | `8080`, `3000`                            |             |
-| `daprHTTPPort`           |     N    | Dapr HTTP端口                                                                                                                                                                                                             |                                           |             |
-| `daprGRPCPort`           |     N    | Dapr GRPC端口                                                                                                                                                                                                             |                                           |             |
-| `daprInternalGRPCPort`   |     N    | dapr 内部 API 监听的 gRPC 端口；在从本地 DNS 组件解析值时使用                                                                                                                                                                               |                                           |             |
-| `metricsPort`            |     N    | The port that Dapr sends its metrics information to                                                                                                                                                                     |                                           |             |
-| `unixDomainSocket`       |     N    | Path to a unix domain socket dir mount. If specified, communication with the Dapr sidecar uses unix domain sockets for lower latency and greater throughput when compared to using TCP ports. Not available on Windows. | `/tmp/test-socket`                        |             |
-| `profilePort`            |     N    | The port for the profile server to listen on                                                                                                                                                                            |                                           |             |
-| `enableProfiling`        |     N    | 通过 HTTP 端点启用性能检测                                                                                                                                                                                                        |                                           |             |
-| `apiListenAddresses`     |     N    | Dapr API监听地址                                                                                                                                                                                                            |                                           |             |
-| `logLevel`               |     N    | The log verbosity.                                                                                                                                                                                                      |                                           |             |
-| `appMaxConcurrency`      |     N    | The concurrency level of the application; default is unlimited                                                                                                                                                          |                                           |             |
-| `placementHostAddress`   |     N    |                                                                                                                                                                                                                         |                                           |             |
-| `appSSL`                 |     N    | 当 Dapr 调用应用程序时启用 https                                                                                                                                                                                                  |                                           |             |
-| `daprHTTPMaxRequestSize` |     N    | Max size of the request body in MB.                                                                                                                                                                                     |                                           |             |
-| `daprHTTPReadBufferSize` |     N    | Max size of the HTTP read buffer in KB. This also limits the maximum size of HTTP headers. The default 4 KB                                                                                                             |                                           |             |
-| `enableAppHealthCheck`   |     N    | 在应用程序上启用应用健康检查                                                                                                                                                                                                          | `true`, `false`                           |             |
-| `appHealthCheckPath`     |     N    | 健康检查文件的路径                                                                                                                                                                                                               | `/healthz`                                |             |
-| `appHealthProbeInterval` |     N    | Interval to probe for the health of the app in seconds                                                                                                                                                                  |                                           |             |
-|                          |          |                                                                                                                                                                                                                         |                                           |             |
-| `appHealthProbeTimeout`  |     N    | Timeout for app health probes in milliseconds                                                                                                                                                                           |                                           |             |
-| `appHealthThreshold`     |     N    | Number of consecutive failures for the app to be considered unhealthy                                                                                                                                                   |                                           |             |
-| `enableApiLogging`       |     N    | Enable the logging of all API calls from application to Dapr                                                                                                                                                            |                                           |             |
-| `runtimePath`            |     N    | Dapr runtime install path                                                                                                                                                                                               |                                           |             |
-| `env`                    |     N    | 映射到环境变量；每个应用程序应用的环境变量将覆盖所有应用程序共享的环境变量                                                                                                                                                                                   | `DEBUG`, `DAPR_HOST_ADD`                  |             |
-| `appLogDestination`      |     N    | 用于输出应用日志的日志目的地; 其值可以是 file、console 或 fileAndConsole。 默认值为 fileAndConsole                                                                                                                                                | `file`, `console`, `fileAndConsole`       |             |
-| `daprdLogDestination`    |     N    | 用于输出 daprd 日志的日志目标；其值可以是文件（file），控制台（console）或文件和控制台（fileAndConsole）。 默认值为 file                                                                                                                                         | `file`, `console`, `fileAndConsole`       |             |
+| 属性                       |  必填 | Details                                                                                                                      | 如何使用Dapr扩展来开发和运行Dapr应用程序                  |             |
+| ------------------------ | :-: | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ----------- |
+| `appDirPath`             |  是  | 应用代码的路径                                                                                                                      | `./webapp/`, `./backend/`                 |             |
+| `appID`                  |  否  | 应用程序的应用程序 ID。 如果未提供，将从`appDirPath`派生                                                                                         | `webapp`, `backend`                       |             |
+| `resourcesPath`          |  否  | **Deprecated**. Dapr 资源的路径。 可以按照惯例设置为默认值                                                                                     | `./app/components`, `./webapp/components` |             |
+| `resourcesPaths`         |  否  | 逗号分隔的 Dapr 资源路径。 可以按照惯例设置为默认值                                                                                                | `./app/components`, `./webapp/components` |             |
+| `appChannelAddress`      |  否  | 应用程序监听的网络地址。 可以按照惯例设置为默认值。                                                                                                   | `127.0.0.1`                               | `localhost` |
+| `configFilePath`         |  否  | 应用程序配置文件的路径                                                                                                                  | `./webapp/config.yaml`                    |             |
+| `appProtocol`            |  否  | Dapr 用于与应用程序通信的协议。                                                                                                           | `http`, `grpc`                            |             |
+| `appPort`                |  否  | 应用程序正在侦听的端口                                                                                                                  | `8080`, `3000`                            |             |
+| `daprHTTPPort`           |  否  | Dapr HTTP端口                                                                                                                  |                                           |             |
+| `daprGRPCPort`           |  否  | Dapr GRPC端口                                                                                                                  |                                           |             |
+| `daprInternalGRPCPort`   |  否  | dapr 内部 API 监听的 gRPC 端口；在从本地 DNS 组件解析值时使用                                                                                    |                                           |             |
+| `metricsPort`            |  否  | Dapr 将 metrics 信息发送到的端口                                                                                                      |                                           |             |
+| `unixDomainSocket`       |  否  | Unix domain socket 目录挂载的路径。 如果指定了，与 Dapr sidecar 的通信将使用 unix domain sockets，与使用 TCP 端口相比，具有更低的延迟和更大的吞吐量。 在 Windows 操作系统上不可用。 | `/tmp/test-socket`                        |             |
+| `profilePort`            |  否  | 要监听的性能检测服务的端口                                                                                                                |                                           |             |
+| `enableProfiling`        |  否  | 通过 HTTP 端点启用性能检测                                                                                                             |                                           |             |
+| `apiListenAddresses`     |  否  | Dapr API监听地址                                                                                                                 |                                           |             |
+| `logLevel`               |  否  | 日志详细程度。                                                                                                                      |                                           |             |
+| `appMaxConcurrency`      |  否  | 应用程序的并发级别；默认为无限制                                                                                                             |                                           |             |
+| `placementHostAddress`   |  否  |                                                                                                                              |                                           |             |
+| `appSSL`                 |  否  | 当 Dapr 调用应用程序时启用 https                                                                                                       |                                           |             |
+| `daprHTTPMaxRequestSize` |  否  | 请求正文的最大尺寸，单位为MB。                                                                                                             |                                           |             |
+| `daprHTTPReadBufferSize` |  否  | Http 请求头读取缓冲区的最大大小，单位为KB。 这也限制了 HTTP 标头的最大大小。 默认是4KB。                                                                        |                                           |             |
+| `enableAppHealthCheck`   |  否  | 在应用程序上启用应用健康检查                                                                                                               | `true`, `false`                           |             |
+| `appHealthCheckPath`     |  否  | 健康检查文件的路径                                                                                                                    | `/healthz`                                |             |
+| `appHealthProbeInterval` |  否  | 以秒为单位探测应用程序健康状态的间隔                                                                                                           |                                           |             |
+|                          |     |                                                                                                                              |                                           |             |
+| `appHealthProbeTimeout`  |  否  | 应用健康探测的超时时间（以毫秒为单位）                                                                                                          |                                           |             |
+| `appHealthThreshold`     |  否  | 应用被视为不健康之前的最大连续失败次数                                                                                                          |                                           |             |
+| `enableApiLogging`       |  否  | 启用从应用程序到 Dapr 的所有 API 调用的日志记录                                                                                                |                                           |             |
+| `runtimePath`            |  否  | Dapr 运行时安装路径                                                                                                                 |                                           |             |
+| `env`                    |  否  | 映射到环境变量；每个应用程序应用的环境变量将覆盖所有应用程序共享的环境变量                                                                                        | `DEBUG`, `DAPR_HOST_ADD`                  |             |
+| `appLogDestination`      |  否  | 用于输出应用日志的日志目的地; 其值可以是 file、console 或 fileAndConsole。 默认值为 fileAndConsole                                                     | `file`, `console`, `fileAndConsole`       |             |
+| `daprdLogDestination`    |  否  | 用于输出 daprd 日志的日志目标；其值可以是文件（file），控制台（console）或文件和控制台（fileAndConsole）。 默认值为 file                                              | `file`, `console`, `fileAndConsole`       |             |
 
 {{< /table >}}
 
@@ -275,6 +275,7 @@ apps:
 观看[此视频以了解多应用运行的概述](https://youtu.be/s1p9MNl4VGo?t=2456):
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/s1p9MNl4VGo?start=2456" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -284,39 +285,39 @@ apps:
 
 {{< table "table table-white table-striped table-bordered" >}}
 
-| 属性                       | Required | Details                                                                                                                                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                       |             |
-| ------------------------ | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ----------- |
-| `appDirPath`             |     Y    | 应用代码的路径                                                                                                                                                                                                                 | `./webapp/`, `./backend/`                      |             |
-| `appID`                  |     N    | 应用程序的应用程序 ID。 如果未提供，将从`appDirPath`派生                                                                                                                                                                                    | `webapp`, `backend`                            |             |
-| `appChannelAddress`      |     N    | 应用程序监听的网络地址。 可以按照惯例设置为默认值。                                                                                                                                                                                              | `127.0.0.1`                                    | `localhost` |
-| `appProtocol`            |     N    | The protocol Dapr uses to talk to the application.                                                                                                                                                                      | `http`, `grpc`                                 |             |
-| `appPort`                |     N    | The port your application is listening on                                                                                                                                                                               | `8080`, `3000`                                 |             |
-| `daprHTTPPort`           |     N    | Dapr HTTP端口                                                                                                                                                                                                             |                                                |             |
-| `daprGRPCPort`           |     N    | Dapr GRPC端口                                                                                                                                                                                                             |                                                |             |
-| `daprInternalGRPCPort`   |     N    | dapr 内部 API 监听的 gRPC 端口；在从本地 DNS 组件解析值时使用                                                                                                                                                                               |                                                |             |
-| `metricsPort`            |     N    | The port that Dapr sends its metrics information to                                                                                                                                                                     |                                                |             |
-| `unixDomainSocket`       |     N    | Path to a unix domain socket dir mount. If specified, communication with the Dapr sidecar uses unix domain sockets for lower latency and greater throughput when compared to using TCP ports. Not available on Windows. | `/tmp/test-socket`                             |             |
-| `profilePort`            |     N    | The port for the profile server to listen on                                                                                                                                                                            |                                                |             |
-| `enableProfiling`        |     N    | 通过 HTTP 端点启用性能检测                                                                                                                                                                                                        |                                                |             |
-| `apiListenAddresses`     |     N    | Dapr API监听地址                                                                                                                                                                                                            |                                                |             |
-| `logLevel`               |     N    | The log verbosity.                                                                                                                                                                                                      |                                                |             |
-| `appMaxConcurrency`      |     N    | The concurrency level of the application; default is unlimited                                                                                                                                                          |                                                |             |
-| `placementHostAddress`   |     N    |                                                                                                                                                                                                                         |                                                |             |
-| `appSSL`                 |     N    | 当 Dapr 调用应用程序时启用 https                                                                                                                                                                                                  |                                                |             |
-| `daprHTTPMaxRequestSize` |     N    | Max size of the request body in MB.                                                                                                                                                                                     |                                                |             |
-| `daprHTTPReadBufferSize` |     N    | Max size of the HTTP read buffer in KB. This also limits the maximum size of HTTP headers. The default 4 KB                                                                                                             |                                                |             |
-| `enableAppHealthCheck`   |     N    | 在应用程序上启用应用健康检查                                                                                                                                                                                                          | `true`, `false`                                |             |
-| `appHealthCheckPath`     |     N    | 健康检查文件的路径                                                                                                                                                                                                               | `/healthz`                                     |             |
-| `appHealthProbeInterval` |     N    | Interval to probe for the health of the app in seconds                                                                                                                                                                  |                                                |             |
-|                          |          |                                                                                                                                                                                                                         |                                                |             |
-| `appHealthProbeTimeout`  |     N    | Timeout for app health probes in milliseconds                                                                                                                                                                           |                                                |             |
-| `appHealthThreshold`     |     N    | Number of consecutive failures for the app to be considered unhealthy                                                                                                                                                   |                                                |             |
-| `enableApiLogging`       |     N    | Enable the logging of all API calls from application to Dapr                                                                                                                                                            |                                                |             |
-| `env`                    |     N    | 映射到环境变量；每个应用程序应用的环境变量将覆盖所有应用程序共享的环境变量                                                                                                                                                                                   | `DEBUG`, `DAPR_HOST_ADD`                       |             |
-| `appLogDestination`      |     N    | 用于输出应用日志的日志目的地; 其值可以是 file、console 或 fileAndConsole。 默认值为 fileAndConsole                                                                                                                                                | `file`, `console`, `fileAndConsole`            |             |
-| `daprdLogDestination`    |     N    | 用于输出 daprd 日志的日志目标；其值可以是文件（file），控制台（console）或文件和控制台（fileAndConsole）。 默认值为 file                                                                                                                                         | `file`, `console`, `fileAndConsole`            |             |
-| `containerImage`         |     N    | 部署到 Kubernetes 开发/测试环境时要使用的容器映像的 URI。                                                                                                                                                                                   | `ghcr.io/dapr/samples/hello-k8s-python:latest` |             |
-| `createService`          |     N    | 在部署到开发/测试环境时为应用程序创建一个Kubernetes服务。                                                                                                                                                                                      | `true`, `false`                                |             |
+| 属性                       |  必填 | Details                                                                                                                      | 如何使用Dapr扩展来开发和运行Dapr应用程序                       |             |
+| ------------------------ | :-: | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ----------- |
+| `appDirPath`             |  是  | 应用代码的路径                                                                                                                      | `./webapp/`, `./backend/`                      |             |
+| `appID`                  |  否  | 应用程序的应用程序 ID。 如果未提供，将从`appDirPath`派生                                                                                         | `webapp`, `backend`                            |             |
+| `appChannelAddress`      |  否  | 应用程序监听的网络地址。 可以按照惯例设置为默认值。                                                                                                   | `127.0.0.1`                                    | `localhost` |
+| `appProtocol`            |  否  | Dapr 用于与应用程序通信的协议。                                                                                                           | `http`, `grpc`                                 |             |
+| `appPort`                |  否  | 应用程序正在侦听的端口                                                                                                                  | `8080`, `3000`                                 |             |
+| `daprHTTPPort`           |  否  | Dapr HTTP端口                                                                                                                  |                                                |             |
+| `daprGRPCPort`           |  否  | Dapr GRPC端口                                                                                                                  |                                                |             |
+| `daprInternalGRPCPort`   |  否  | dapr 内部 API 监听的 gRPC 端口；在从本地 DNS 组件解析值时使用                                                                                    |                                                |             |
+| `metricsPort`            |  否  | Dapr 将 metrics 信息发送到的端口                                                                                                      |                                                |             |
+| `unixDomainSocket`       |  否  | Unix domain socket 目录挂载的路径。 如果指定了，与 Dapr sidecar 的通信将使用 unix domain sockets，与使用 TCP 端口相比，具有更低的延迟和更大的吞吐量。 在 Windows 操作系统上不可用。 | `/tmp/test-socket`                             |             |
+| `profilePort`            |  否  | 要监听的性能检测服务的端口                                                                                                                |                                                |             |
+| `enableProfiling`        |  否  | 通过 HTTP 端点启用性能检测                                                                                                             |                                                |             |
+| `apiListenAddresses`     |  否  | Dapr API监听地址                                                                                                                 |                                                |             |
+| `logLevel`               |  否  | 日志详细程度。                                                                                                                      |                                                |             |
+| `appMaxConcurrency`      |  否  | 应用程序的并发级别；默认为无限制                                                                                                             |                                                |             |
+| `placementHostAddress`   |  否  |                                                                                                                              |                                                |             |
+| `appSSL`                 |  否  | 当 Dapr 调用应用程序时启用 https                                                                                                       |                                                |             |
+| `daprHTTPMaxRequestSize` |  否  | 请求正文的最大尺寸，单位为MB。                                                                                                             |                                                |             |
+| `daprHTTPReadBufferSize` |  否  | Http 请求头读取缓冲区的最大大小，单位为KB。 这也限制了 HTTP 标头的最大大小。 默认是4KB。                                                                        |                                                |             |
+| `enableAppHealthCheck`   |  否  | 在应用程序上启用应用健康检查                                                                                                               | `true`, `false`                                |             |
+| `appHealthCheckPath`     |  否  | 健康检查文件的路径                                                                                                                    | `/healthz`                                     |             |
+| `appHealthProbeInterval` |  否  | 以秒为单位探测应用程序健康状态的间隔                                                                                                           |                                                |             |
+|                          |     |                                                                                                                              |                                                |             |
+| `appHealthProbeTimeout`  |  否  | 应用健康探测的超时时间（以毫秒为单位）                                                                                                          |                                                |             |
+| `appHealthThreshold`     |  否  | 应用被视为不健康之前的最大连续失败次数                                                                                                          |                                                |             |
+| `enableApiLogging`       |  否  | 启用从应用程序到 Dapr 的所有 API 调用的日志记录                                                                                                |                                                |             |
+| `env`                    |  否  | 映射到环境变量；每个应用程序应用的环境变量将覆盖所有应用程序共享的环境变量                                                                                        | `DEBUG`, `DAPR_HOST_ADD`                       |             |
+| `appLogDestination`      |  否  | 用于输出应用日志的日志目的地; 其值可以是 file、console 或 fileAndConsole。 默认值为 fileAndConsole                                                     | `file`, `console`, `fileAndConsole`            |             |
+| `daprdLogDestination`    |  否  | 用于输出 daprd 日志的日志目标；其值可以是文件（file），控制台（console）或文件和控制台（fileAndConsole）。 默认值为 file                                              | `file`, `console`, `fileAndConsole`            |             |
+| `containerImage`         |  否  | 部署到 Kubernetes 开发/测试环境时要使用的容器映像的 URI。                                                                                        | `ghcr.io/dapr/samples/hello-k8s-python:latest` |             |
+| `createService`          |  否  | 在部署到开发/测试环境时为应用程序创建一个Kubernetes服务。                                                                                           | `true`, `false`                                |             |
 
 {{< /table >}}
 
@@ -326,6 +327,6 @@ apps:
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nWatANwaAik?si=O8XR-TUaiY0gclgO&amp;start=1024" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}

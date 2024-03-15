@@ -15,7 +15,7 @@ Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-versi
 {{% alert title="注意" color="primary" %}}
 如果你还没有，请[尝试使用工作流快速入门]({{< ref workflow-quickstart.md >}})快速了解如何使用工作流。
 
-
+{{% /alert %}}
 
 ## 将工作流作为代码编写
 
@@ -33,7 +33,7 @@ Dapr sidecar 不加载任何工作流定义。 相反，Sidecar 只是驱动工�
 
 [工作流活动]({{< ref "workflow-features-concepts.md#workflow-activites" >}})是工作流中的基本工作单元，是在业务流程中编排的任务。
 
-
+{{< tabs Python JavaScript ".NET" Java Go >}}
 
 {{% codetab %}}
 
@@ -50,7 +50,7 @@ def hello_act(ctx: WorkflowActivityContext, input):
 
 [查看上下文中的`hello_act`工作流活动。](https://github.com/dapr/python-sdk/blob/master/examples/demo_workflow/app.py#LL40C1-L43C59)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -80,7 +80,7 @@ export default class WorkflowActivityContext {
 
 [查看工作流活动的上下文。](https://github.com/dapr/js-sdk/blob/main/src/workflow/runtime/WorkflowActivityContext.ts)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -150,7 +150,7 @@ public class ProcessPaymentActivity : WorkflowActivity<PaymentRequest, object>
 
 [查看完整的 `ProcessPaymentActivity.cs` 工作流活动示例。](https://github.com/dapr/dotnet-sdk/blob/master/examples/Workflow/WorkflowConsoleApp/Activities/ProcessPaymentActivity.cs)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -193,7 +193,7 @@ public class DemoWorkflowActivity implements WorkflowActivity {
 
 [查看上下文中的Java SDK工作流活动示例。](https://github.com/dapr/java-sdk/blob/master/examples/src/main/java/io/dapr/examples/workflows/DemoWorkflowActivity.java)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -215,7 +215,7 @@ func TestActivity(ctx workflow.ActivityContext) (any, error) {
 
 [查看Go SDK工作流活动示例的上下文。](https://github.com/dapr/go-sdk/tree/main/examples/workflow/README.md)
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -223,7 +223,7 @@ func TestActivity(ctx workflow.ActivityContext) (any, error) {
 
 接下来，在工作流中注册并调用活动。
 
-
+{{< tabs Python JavaScript ".NET" Java Go >}}
 
 {{% codetab %}}
 
@@ -243,7 +243,7 @@ def hello_world_wf(ctx: DaprWorkflowContext, input):
 
 [查看上下文中的`hello_world_wf`工作流。](https://github.com/dapr/python-sdk/blob/master/examples/demo_workflow/app.py#LL32C1-L38C51)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -287,7 +287,7 @@ export default class WorkflowRuntime {
 
 [查看上下文中的`WorkflowRuntime`。](https://github.com/dapr/js-sdk/blob/main/src/workflow/runtime/WorkflowRuntime.ts)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -329,7 +329,7 @@ export default class WorkflowRuntime {
 
 [查看完整的 `OrderProcessingWorkflow.cs` 工作流示例。](https://github.com/dapr/dotnet-sdk/blob/master/examples/Workflow/WorkflowConsoleApp/Workflows/OrderProcessingWorkflow.cs)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -359,7 +359,7 @@ public class DemoWorkflowWorker {
 
 [查看上下文中的Java SDK工作流。](https://github.com/dapr/java-sdk/blob/master/examples/src/main/java/io/dapr/examples/workflows/DemoWorkflowWorker.java)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -390,7 +390,7 @@ func TestWorkflow(ctx *workflow.WorkflowContext) (any, error) {
 
 [查看上下文中的Go SDK工作流。](https://github.com/dapr/go-sdk/tree/main/examples/workflow/README.md)
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -398,7 +398,7 @@ func TestWorkflow(ctx *workflow.WorkflowContext) (any, error) {
 
 最后，使用工作流编写应用程序。
 
-
+{{< tabs Python JavaScript ".NET" Java Go >}}
 
 {{% codetab %}}
 
@@ -486,7 +486,7 @@ if __name__ == '__main__':
     main()
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -633,7 +633,7 @@ export default class DaprWorkflowClient {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -704,7 +704,7 @@ app.MapGet("/orders/{orderId}", async (string orderId, DaprWorkflowClient client
 app.Run();
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -751,7 +751,7 @@ public class DemoWorkflow extends Workflow {
 
 [查看上下文中的完整Java SDK工作流示例。](https://github.com/dapr/java-sdk/blob/master/examples/src/main/java/io/dapr/examples/workflows/DemoWorkflow.java)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1082,14 +1082,14 @@ func TestActivity(ctx workflow.ActivityContext) (any, error) {
 
 [在上下文中查看完整的Go SDK工作流示例。](https://github.com/dapr/go-sdk/tree/main/examples/workflow/README.md)
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 {{% alert title="重要" color="warning" %}}
 由于基于重播的工作流的执行方式，您将编写执行 I/O 和与系统交互等操作的逻辑 **内部活动**。 与此同时，**工作流方法**只是为了协调这些活动。
 
-
+{{% /alert %}}
 
 ## 下一步
 

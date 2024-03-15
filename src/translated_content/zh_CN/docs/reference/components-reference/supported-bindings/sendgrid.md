@@ -48,7 +48,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field           | Required | Binding support | Details                                                                                                                                                            | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
+| Field           | Required | Binding support | Details                                                                                                                                                            | Example                  |
 | --------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
 | `apiKey`        |     Y    | Output          | SendGrid API key, this should be considered a secret value                                                                                                         | `"apikey"`               |
 | `emailFrom`     |     N    | Output          | If set this specifies the 'from' email address of the email message. Only a single email address is allowed. Optional field, see [below](#example-request-payload) | `"me@example.com"`       |
@@ -96,7 +96,7 @@ If a dynamic template is used, a `dynamicTemplateId` needs to be provided and th
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

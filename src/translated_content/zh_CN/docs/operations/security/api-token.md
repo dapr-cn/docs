@@ -22,7 +22,7 @@ openssl rand 16 | base64
 
 The token authentication configuration is slightly different for either Kubernetes or self-hosted Dapr deployments:
 
-### Self-hosted（自托管）
+### Self-hosted
 
 In self-hosting scenario, Dapr looks for the presence of `DAPR_API_TOKEN` environment variable. If that environment variable is set when the `daprd` process launches, Dapr enforces authentication on its public APIs:
 
@@ -54,7 +54,7 @@ When deployed, Dapr sidecar injector will automatically create a secret referenc
 
 ## Rotate a token
 
-### Self-hosted（自托管）
+### Self-hosted
 
 To rotate the configured token in self-hosted, update the `DAPR_API_TOKEN` environment variable to the new value and restart the `daprd` process.
 
@@ -96,14 +96,14 @@ Once token authentication is configured in Dapr, all clients invoking Dapr API n
 
 ### HTTP
 
-In case of HTTP, Dapr requires the API token in the `dapr-api-token` header. For example:
+In case of HTTP, Dapr requires the API token in the `dapr-api-token` header. 例如：
 
 ```text
 GET http://<daprAddress>/v1.0/metadata
 dapr-api-token: <token>
 ```
 
-Using curl, you can pass the header using the `--header` (or `-H`) option. For example:
+Using curl, you can pass the header using the `--header` (or `-H`) option. 例如：
 
 ```sh
 curl http://localhost:3500/v1.0/metadata \
@@ -133,7 +133,7 @@ containers:
       name: dapr-api-token
 ```
 
-### Self-hosted（自托管）
+### Self-hosted
 
 In self-hosted mode, you can set the token as an environment variable for your app:
 

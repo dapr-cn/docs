@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Pub/Sub brokers
-linkTitle: Pub/sub brokers
+linkTitle: 发布/订阅代理
 description: Guidance on setting up different message brokers for Dapr Pub/Sub
 weight: 700
 aliases:
@@ -47,12 +47,12 @@ For example, you can choose to use `{namespace}` as the `consumerGroup` to enabl
 
 Visit [this guide]({{< ref "howto-publish-subscribe.md#step-3-publish-a-topic" >}}) for instructions on configuring and using pub/sub components.
 
-## 相关链接
+## Related links
 
 - Overview of the Dapr [Pub/Sub building block]({{< ref pubsub-overview\.md >}})
 - Try the [Pub/Sub quickstart sample](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub)
 - Read the [guide on publishing and subscribing]({{< ref howto-publish-subscribe.md >}})
-- Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
+- 了解[topic范围]({{< ref pubsub-scopes.md >}})
 - Learn about [message time-to-live]({{< ref pubsub-message-ttl.md >}})
 - Learn [how to configure Pub/Sub components with multiple namespaces]({{< ref pubsub-namespaces.md >}})
 - List of [pub/sub components]({{< ref supported-pubsub >}})

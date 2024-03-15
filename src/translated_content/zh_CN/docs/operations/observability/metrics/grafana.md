@@ -8,22 +8,25 @@ description: How to view Dapr metrics in a Grafana dashboard.
 
 ## Available dashboards
 
-
+{{< tabs "System Service" "Sidecars" "Actors" >}}
 
 {{% codetab %}}
 The `grafana-system-services-dashboard.json` template shows Dapr system component status, dapr-operator, dapr-sidecar-injector, dapr-sentry, and dapr-placement:
 
 <img src="/images/grafana-system-service-dashboard.png" alt="Screenshot of the system service dashboard" width=1200>
+{{% /codetab %}}
 
 {{% codetab %}}
 The `grafana-sidecar-dashboard.json` template shows Dapr sidecar status, including sidecar health/resources, throughput/latency of HTTP and gRPC, Actor, mTLS, etc.:
 
 <img src="/images/grafana-sidecar-dashboard.png" alt="Screenshot of the sidecar dashboard" width=1200>
+{{% /codetab %}}
 
 {{% codetab %}}
 The `grafana-actor-dashboard.json` template shows Dapr Sidecar status, actor invocation throughput/latency, timer/reminder triggers, and turn-based concurrnecy:
 
 <img src="/images/grafana-actor-dashboard.png" alt="Screenshot of the actor dashboard" width=1200>
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -55,7 +58,7 @@ The `grafana-actor-dashboard.json` template shows Dapr Sidecar status, actor inv
    helm install grafana grafana/grafana -n dapr-monitoring --set persistence.enabled=false
    ```
 
-
+   {{% /alert %}}
 
 3. Retrieve the admin password for Grafana login:
 
@@ -162,6 +165,7 @@ First you need to connect Prometheus as a data source to Grafana.
    Hover your mouse over the `i` in the corner to the description of each chart:
 
    <img src="/images/grafana-tooltip.png" alt="Screenshot of the tooltip for graphs" width=700>
+   {{% /alert %}}
 
 ## References
 
@@ -171,7 +175,7 @@ First you need to connect Prometheus as a data source to Grafana.
 - [Prometheus Query Language](https://prometheus.io/docs/prometheus/latest/querying/basics/)
 - [Supported Dapr metrics](https://github.com/dapr/dapr/blob/master/docs/development/dapr-metrics.md)
 
-## 如何使用Dapr扩展来开发和运行Dapr应用程序
+## Example
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8W-iBDNvCUM?start=2577" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

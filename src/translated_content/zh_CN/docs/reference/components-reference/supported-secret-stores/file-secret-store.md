@@ -36,11 +36,11 @@ spec:
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                                                                                                           | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| --------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| secretsFile     |     Y    | The path to the file where secrets are stored                                                                                                                     | `"path/to/file.json"`    |
-| nestedSeparator |     N    | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"`                                                                                  | `":"`                    |
-| multiValued     |     N    | `"true"` sets the `multipleKeyValuesPerSecret` behavior. Allows one level of multi-valued key/value pairs before flattening JSON hierarchy. Defaults to `"false"` | `"true"`                 |
+| Field           | Required | Details                                                                                                                                                           | Example               |
+| --------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| secretsFile     |     Y    | The path to the file where secrets are stored                                                                                                                     | `"path/to/file.json"` |
+| nestedSeparator |     N    | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"`                                                                                  | `":"`                 |
+| multiValued     |     N    | `"true"` sets the `multipleKeyValuesPerSecret` behavior. Allows one level of multi-valued key/value pairs before flattening JSON hierarchy. Defaults to `"false"` | `"true"`              |
 
 ## Setup JSON file to hold the secrets
 
@@ -68,7 +68,7 @@ If `multiValued` is `false`, the store loads [the JSON file]({{< ref "#setup-jso
 | "connectionStrings:sql"   | `"your sql connection string"`   |
 | "connectionStrings:mysql" | `"your mysql connection string"` |
 
-If the `multiValued` setting set to true, invoking a `GET` request on the key `connectionStrings` results in a 500 HTTP response and an error message. For example:
+If the `multiValued` setting set to true, invoking a `GET` request on the key `connectionStrings` results in a 500 HTTP response and an error message. 例如：
 
 ```shell
 $ curl http://localhost:3501/v1.0/secrets/local-secret-store/connectionStrings
@@ -176,7 +176,7 @@ $ curl http://localhost:3501/v1.0/secrets/local-secret-store/connectionStrings
 
 This is useful in order to mimic secret stores like Vault or Kubernetes that return multiple key/value pairs per secret key.
 
-## 相关链接
+## Related links
 
 - [Secrets building block]({{< ref secrets >}})
 - [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})

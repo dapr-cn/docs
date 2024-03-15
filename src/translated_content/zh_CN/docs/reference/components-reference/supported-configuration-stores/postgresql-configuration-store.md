@@ -63,7 +63,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 The following metadata options are **required** to authenticate using a PostgreSQL connection string.
 
-| Field              | Required | Details                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                      |
+| Field              | Required | Details                                                                                                                                                                                                                         | Example                                                                                       |
 | ------------------ | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `connectionString` |     Y    | The connection string for the PostgreSQL database. See the PostgreSQL [documentation on database connections](https://www.postgresql.org/docs/current/libpq-connect.html) for information on how to define a connection string. | `"host=localhost user=postgres password=example port=5432 connect_timeout=10 database=my_db"` |
 
@@ -71,7 +71,7 @@ The following metadata options are **required** to authenticate using a PostgreS
 
 Authenticating with Microsoft Entra ID is supported with Azure Database for PostgreSQL. All authentication methods supported by Dapr can be used, including client credentials ("service principal") and Managed Identity.
 
-| Field               | Required | Details                                                                                                                                                                                                                                                                                                                                                                                     | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                              |
+| Field               | Required | Details                                                                                                                                                                                                                                                                                                                                                                                     | Example                                                                                               |
 | ------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `useAzureAD`        |     Y    | Must be set to `true` to enable the component to retrieve access tokens from Microsoft Entra ID.                                                                                                                                                                                                                                                                                            | `"true"`                                                                                              |
 | `connectionString`  |     Y    | The connection string for the PostgreSQL database.<br>This must contain the user, which corresponds to the name of the user created inside PostgreSQL that maps to the Microsoft Entra ID identity; this is often the name of the corresponding principal (e.g. the name of the Microsoft Entra ID application). This connection string should not contain any password. | `"host=mydb.postgres.database.azure.com user=myapplication port=5432 database=my_db sslmode=require"` |
@@ -81,12 +81,12 @@ Authenticating with Microsoft Entra ID is supported with Azure Database for Post
 
 ### Other metadata options
 
-| Field                   | Required | Details                                                                                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ----------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `table`                 |     Y    | Table name for configuration information, must be lowercased.                                                                                                                                                                                                                                   | `configtable`            |
-| `maxConns`              |     N    | Maximum number of connections pooled by this component. Set to 0 or lower to use the default value, which is the greater of 4 or the number of CPUs.                                                                                                                                            | `"4"`                    |
-| `connectionMaxIdleTime` |     N    | Max idle time before unused connections are automatically closed in the connection pool. By default, there's no value and this is left to the database driver to choose.                                                                                                                        | `"5m"`                   |
-| `queryExecMode`         |     N    | Controls the default mode for executing queries. By default Dapr uses the extended protocol and automatically prepares and caches prepared statements. However, this may be incompatible with proxies such as PGBouncer. In this case it may be preferrable to use `exec` or `simple_protocol`. | `"simple_protocol"`      |
+| Field                   | Required | Details                                                                                                                                                                                                                                                                                         | Example             |
+| ----------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `table`                 |     Y    | Table name for configuration information, must be lowercased.                                                                                                                                                                                                                                   | `configtable`       |
+| `maxConns`              |     N    | Maximum number of connections pooled by this component. Set to 0 or lower to use the default value, which is the greater of 4 or the number of CPUs.                                                                                                                                            | `"4"`               |
+| `connectionMaxIdleTime` |     N    | Max idle time before unused connections are automatically closed in the connection pool. By default, there's no value and this is left to the database driver to choose.                                                                                                                        | `"5m"`              |
+| `queryExecMode`         |     N    | Controls the default mode for executing queries. By default Dapr uses the extended protocol and automatically prepares and caches prepared statements. However, this may be incompatible with proxies such as PGBouncer. In this case it may be preferrable to use `exec` or `simple_protocol`. | `"simple_protocol"` |
 
 ## Set up PostgreSQL as Configuration Store
 
@@ -169,9 +169,9 @@ Example of subscribe HTTP API:
 curl -l 'http://<host>:<dapr-http-port>/configuration/mypostgresql/subscribe?key=<keyname1>&key=<keyname2>&metadata.pgNotifyChannel=<channel name>'
 ```
 
+{{% /alert %}}
 
-
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Configuration building block]({{< ref configuration-api-overview >}})

@@ -47,12 +47,12 @@ auth: # Optional
 
 ## Spec fields
 
-| Field     | Required | Details                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                 |
+| Field     | Required | Details                                                                                                                         | Example                                                                                                                                  |
 | --------- | :------: | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | baseUrl   |     Y    | Base URL of the non-Dapr endpoint                                                                                               | `"https://api.github.com"`, `"http://api.github.com"`                                                                                    |
 | headers   |     N    | HTTP request headers for service invocation                                                                                     | `name: "Accept-Language" value: "en-US"` <br/> `name: "Authorization" secretKeyRef.name: "my-secret" secretKeyRef.key: "myGithubToken" ` |
 | clientTLS |     N    | Enables TLS authentication to an endpoint with any standard combination of root certificate, client certificate and private key |                                                                                                                                          |
 
-## 相关链接
+## Related links
 
 [Learn how to invoke non-Dapr endpoints.]({{< ref howto-invoke-non-dapr-endpoints.md >}})

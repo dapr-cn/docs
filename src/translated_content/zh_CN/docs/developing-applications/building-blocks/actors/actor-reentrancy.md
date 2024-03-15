@@ -30,7 +30,7 @@ ActorA -> Actor B -> Actor A
 
 可重入 actor 必须提供适当的配置。 与其他 actor 配置元素类似，这是由 actor 端点 `GET /dapr/config` 完成的。
 
-
+{{< tabs ".NET" JavaScript Python Java Go >}}
 
 {{% codetab %}}
 
@@ -55,7 +55,7 @@ public class Startup
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -75,7 +75,7 @@ const clientOptions = {
 };
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -105,7 +105,7 @@ def do_something_reentrant():
 	return
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -114,7 +114,7 @@ def do_something_reentrant():
 ```java
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -172,7 +172,7 @@ func reentrantCallHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

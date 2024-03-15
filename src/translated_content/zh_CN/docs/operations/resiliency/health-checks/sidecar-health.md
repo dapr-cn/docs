@@ -6,7 +6,7 @@ weight: 200
 description: Dapr sidecar health checks
 ---
 
-Dapr提供了一种使用[HTTP `/healthz`端点]({{< ref health_api.md >}})来确定其健康状况的方法。 有了这个端点，_daprd_ 进程或者 sidecar 就可以：
+Dapr provides a way to determine its health using an [HTTP `/healthz` endpoint]({{< ref health_api.md >}}). With this endpoint, the _daprd_ process, or sidecar, can be:
 
 - Probed for its overall health
 - Probed for Dapr sidecar readiness during initialization
@@ -85,7 +85,7 @@ Any HTTP status code between 200 and 399 indicates success; any other status cod
 The kubelet uses readiness probes to know when a container is ready to start accepting traffic. A pod is considered ready when all of its containers are ready. One use of this readiness signal is to control which pods are used as backends for Kubernetes services. When a pod is not ready, it is removed from Kubernetes service load balancers.
 
 {{% alert title="Note" color="primary" %}}
-The Dapr sidecar will be in ready state once the application is accessible on its configured port. 在应用程序启动/初始化期间，应用程序无法访问 Dapr 组件。
+The Dapr sidecar will be in ready state once the application is accessible on its configured port. The application cannot access the Dapr components during application start up/initialization.
 {{% /alert %}}
 
 #### How to configure a readiness probe in Kubernetes
@@ -132,7 +132,7 @@ Dapr has its HTTP health endpoint `/v1.0/healthz` on port 3500. This can be used
       failureThreshold: 3
 ```
 
-## 相关链接
+## Related links
 
 - [Endpoint health API]({{< ref health_api.md >}})
 - [Actor health API]({{< ref "actors_api.md#health-check" >}})

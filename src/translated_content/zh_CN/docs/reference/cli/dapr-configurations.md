@@ -5,7 +5,7 @@ linkTitle: configurations
 description: Detailed information on the configurations CLI command
 ---
 
-### 说明
+### Description
 
 List all Dapr configurations.
 
@@ -21,7 +21,7 @@ dapr configurations [flags]
 
 ### Flags
 
-| Name                     | Environment Variable | Default | 说明                                                                                    |
+| Name                     | Environment Variable | Default | Description                                                                           |
 | ------------------------ | -------------------- | ------- | ------------------------------------------------------------------------------------- |
 | `--kubernetes`, `-k`     |                      | `false` | List all Dapr configurations in Kubernetes cluster (required).     |
 | `--all-namespaces`, `-A` |                      | `true`  | If true, list all Dapr configurations in all namespaces (optional) |

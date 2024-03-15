@@ -34,7 +34,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field       | Required | Binding support | Details                          | 如何使用Dapr扩展来开发和运行Dapr应用程序                                     |
+| Field       | Required | Binding support | Details                          | Example                                                      |
 | ----------- | :------: | --------------- | -------------------------------- | ------------------------------------------------------------ |
 | `id`        |     Y    | Input/Output    | Unique id                        | `"test_webhook_id"`                                          |
 | `url`       |     Y    | Input/Output    | DingTalk's Webhook url           | `"https://oapi.dingtalk.com/robot/send?access_token=******"` |
@@ -82,7 +82,7 @@ curl -X POST http://localhost:3500/v1.0/bindings/myDingTalk \
       }'
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

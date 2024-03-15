@@ -120,7 +120,7 @@ dapr-prom-prometheus-pushgateway-688665d597-h4xx2   1/1     Running   0         
 dapr-prom-prometheus-server-694fd8d7c-q5d59         2/2     Running   0          4m58s
 ```
 
-## 如何使用Dapr扩展来开发和运行Dapr应用程序
+## Example
 
 <div class="embed-responsive embed-responsive-16by9">
     <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8W-iBDNvCUM?start=2577" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

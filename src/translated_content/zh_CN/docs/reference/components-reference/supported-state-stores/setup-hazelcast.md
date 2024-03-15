@@ -32,14 +32,14 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field            | Required | Details                             | 如何使用Dapr扩展来开发和运行Dapr应用程序           |
+| Field            | Required | Details                             | Example                            |
 | ---------------- | :------: | ----------------------------------- | ---------------------------------- |
 | hazelcastServers |     Y    | A comma delimited string of servers | `"hazelcast:3000,hazelcast2:3000"` |
 | hazelcastMap     |     Y    | Hazelcast Map configuration         | `"foo-map"`                        |
 
 ## Setup Hazelcast
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 You can run Hazelcast locally using Docker:
@@ -57,7 +57,7 @@ The easiest way to install Hazelcast on Kubernetes is by using the [Helm chart](
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

@@ -27,7 +27,7 @@ spec:
 
 The following table lists the properties for tracing:
 
-| Property                 | Type   | 说明                                                                                             |
+| Property                 | Type   | Description                                                                                    |
 | ------------------------ | ------ | ---------------------------------------------------------------------------------------------- |
 | `samplingRate`           | string | Set sampling rate for tracing to be enabled or disabled.                                       |
 | `stdout`                 | bool   | True write more verbose information to the traces                                              |
@@ -63,7 +63,7 @@ Changing `samplingRate` to 0 disables tracing altogether.
 The OpenTelemetry (otel) endpoint can also be configured via an environment variables. The presence of the OTEL_EXPORTER_OTLP_ENDPOINT environment variable
 turns on tracing for the sidecar.
 
-| Environment Variable          | 说明                                                                                 |
+| Environment Variable          | Description                                                                        |
 | ----------------------------- | ---------------------------------------------------------------------------------- |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | Sets the Open Telemetry (OTEL) server address, turns on tracing |
 | `OTEL_EXPORTER_OTLP_INSECURE` | Sets the connection to the endpoint as unencrypted (true/false) |

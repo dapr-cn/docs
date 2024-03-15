@@ -13,7 +13,7 @@ description: 使用密钥存储构建块安全地获取密钥
 {{% alert title="注意" color="primary" %}}
 如果你还没有，请[尝试使用密钥管理快速入门]({{< ref secrets-quickstart.md >}})快速了解如何使用密钥 API。
 
-
+{{% /alert %}}
 
 ## 设置密钥存储
 
@@ -70,7 +70,7 @@ curl http://localhost:3601/v1.0/secrets/localsecretstore/secret
 
 现在您已经设置好了本地密钥存储，可以调用 Dapr 从您的应用程序代码中获取密钥。 下面是利用 Dapr SDK 检索密钥的代码示例。
 
-
+{{< tabs Dotnet Java Python Go Javascript>}}
 
 {{% codetab %}}
 
@@ -103,7 +103,7 @@ namespace EventService
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -137,7 +137,7 @@ public class OrderProcessingServiceApplication {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -167,7 +167,7 @@ with DaprClient() as client:
     logging.info(sorted(secret.secrets.items()))
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -205,7 +205,7 @@ func main() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -234,7 +234,7 @@ async function main() {
 main();
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

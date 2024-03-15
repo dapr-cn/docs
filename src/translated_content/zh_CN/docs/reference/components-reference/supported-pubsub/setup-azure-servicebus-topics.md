@@ -71,7 +71,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                             | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                           | 如何使用Dapr扩展来开发和运行Dapr应用程序             |
+| Field                             | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                           | Example                              |
 | --------------------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | `connectionString`                |     Y    | Shared access policy connection string for the Service Bus. Required unless using Microsoft Entra ID authentication.                                                                                                                                                                                                                                                                                              | See example above                    |
 | `namespaceName`                   |     N    | Parameter to set the address of the Service Bus namespace, as a fully-qualified domain name. Required if using Microsoft Entra ID authentication.                                                                                                                                                                                                                                                                 | `"namespace.servicebus.windows.net"` |
@@ -171,7 +171,7 @@ To subscribe to a topic that has [sessions enabled](https://learn.microsoft.com/
 
 Follow the instructions [here](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-quickstart-topics-subscriptions-portal) on setting up Azure Service Bus Topics.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Pub/Sub building block]({{< ref pubsub >}})

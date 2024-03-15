@@ -6,7 +6,7 @@ weight: 6000
 description: 在应用程序中使用 Dapr gRPC API
 ---
 
-Dapr implements both an HTTP and a gRPC API for local calls. [gRPC](https://grpc.io/)对于低延迟、高性能的场景非常有用，并且可以使用proto客户端进行开发语言的集成。
+Dapr 同时实现了 HTTP 和 gRPC 的API 用于本地调用。 [gRPC](https://grpc.io/)对于低延迟、高性能的场景非常有用，并且可以使用proto客户端进行开发语言的集成。
 
 [在 Dapr SDK 文档中查找自动生成的客户端列表]({{< ref sdks >}}).
 
@@ -18,7 +18,7 @@ The Dapr runtime implements a [proto service](https://github.com/dapr/dapr/blob/
 
 ## 配置 Dapr 以通过 gRPC 与应用通信
 
-
+{{< tabs "Self-hosted" "Kubernetes">}}
 
 <!--selfhosted-->
 
@@ -32,13 +32,13 @@ dapr run --app-protocol grpc --app-port 5005 node app.js
 
 This tells Dapr to communicate with your app via gRPC over port `5005`.
 
-
+{{% /codetab %}}
 
 <!--k8s-->
 
 {{% codetab %}}
 
-On Kubernetes, set the following annotations in your deployment YAML:
+在Kubernetes中，需要在deployment YAML文件中配置以下注解:
 
 ```yaml
 apiVersion: apps/v1
@@ -65,7 +65,7 @@ spec:
 ...
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -227,7 +227,7 @@ spec:
 
 ## 运行程序
 
-
+{{< tabs "Self-hosted" "Kubernetes">}}
 
 <!--selfhosted-->
 
@@ -239,7 +239,7 @@ spec:
 dapr run --app-id goapp --app-port 50001 --app-protocol grpc go run main.go
 ```
 
-
+{{% /codetab %}}
 
 <!--k8s-->
 
@@ -247,7 +247,7 @@ dapr run --app-id goapp --app-port 50001 --app-protocol grpc go run main.go
 
 在 Kubernetes 上，根据上述说明，在您的 pod spec 模板中设置所需的 `dapr.io/app-protocol: "grpc"` 和 `dapr.io/app-port: "50001` 注解。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

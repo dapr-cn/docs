@@ -68,7 +68,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                             | Required | Details                                                                                                                                                                                                                                                                                                                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序             |
+| Field                             | Required | Details                                                                                                                                                                                                                                                                                                                                                                       | Example                              |
 | --------------------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | `connectionString`                |     Y    | Shared access policy connection string for the Service Bus. Required unless using Microsoft Entra ID authentication.                                                                                                                                                                                                                                                          | See example above                    |
 | `consumerID`                      |     N    | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. | `"channel1"`                         |
@@ -166,7 +166,7 @@ Azure Service Bus supports sending and receiving multiple messages in a single o
 
 To set the metadata for bulk publish operation, set the query parameters on the HTTP request or the gRPC metadata as documented [here]({{< ref pubsub_api >}})
 
-| 元数据                        | Default                               |
+| Metadata                   | Default                               |
 | -------------------------- | ------------------------------------- |
 | `metadata.maxBulkPubBytes` | `131072` (128 KiB) |
 
@@ -182,7 +182,7 @@ When subscribing to a topic, you can configure `bulkSubscribe` options. Refer to
 
 Follow the instructions [here](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-quickstart-portal) on setting up Azure Service Bus Queues.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Pub/Sub building block]({{< ref pubsub >}})

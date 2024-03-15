@@ -21,7 +21,7 @@ description: 开始使用 Dapr 的配置构建块
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -147,7 +147,7 @@ if unsubscribed == True:
     print("App unsubscribed from config changes", flush=True)
 ```
 
-
+{{% /codetab %}}
 
 <!-- JavaScript -->
 
@@ -273,7 +273,7 @@ setTimeout(() => {
 },
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -395,7 +395,7 @@ try
 }
 ```
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -518,7 +518,7 @@ if (unsubscribe.getIsUnsubscribed()) {
 }
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -642,7 +642,7 @@ case <-ctx.Done():
 	}
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

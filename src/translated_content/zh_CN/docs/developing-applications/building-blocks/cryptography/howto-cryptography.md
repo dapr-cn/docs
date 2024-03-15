@@ -11,11 +11,11 @@ description: 学习如何加密和解密文件
 {{% alert title="注意" color="primary" %}}
 Dapr密码学目前处于alpha阶段。
 
-
+{{% /alert %}}
 
 ## 加密
 
-
+{{< tabs "JavaScript" "Go" ".NET" >}}
 
 {{% codetab %}}
 
@@ -55,7 +55,7 @@ await pipeline(
 );
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -134,7 +134,7 @@ if err != nil {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -155,13 +155,13 @@ var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
 var encryptedBytesResult = await client.EncryptAsync(componentName, plaintextBytes, keyName, new EncryptionOptions(KeyWrapAlgorithm.Rsa));
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ## 解密
 
-
+{{< tabs "JavaScript" "Go" ".NET" >}}
 
 {{% codetab %}}
 
@@ -187,7 +187,7 @@ await pipeline(
 );
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -204,7 +204,7 @@ out, err := sdkClient.Decrypt(context.Background(), rf, dapr.EncryptOptions{
 })
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -228,7 +228,7 @@ public async Task<string> DecryptBytesAsync(byte[] encryptedBytes)
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

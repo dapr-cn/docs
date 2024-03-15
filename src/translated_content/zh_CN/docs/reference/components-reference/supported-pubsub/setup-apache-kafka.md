@@ -66,7 +66,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field                       | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                               |                                            |
+| Field                       | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Example                                                                                                |                                            |
 | --------------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
 | brokers                     |     Y    | A comma-separated list of Kafka brokers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `"localhost:9092,dapr-kafka.myapp.svc.cluster.local:9093"`                                             |                                            |
 | consumerGroup               |     N    | A kafka consumer group to listen on. Each record published to a topic is delivered to one consumer within each consumer group subscribed to the topic. If a value for `consumerGroup` is provided, any value for `consumerID` is ignored - a combination of the consumer group and a random unique identifier will be set for the `consumerID` instead.                                                                                                                                                                                                                        | `"group1"`                                                                                             |                                            |
@@ -110,7 +110,7 @@ The `secretKeyRef` above is referencing  a [kubernetes secrets store]({{< ref ku
 
 The metadata `version` must be set to `1.0.0` when using Azure EventHubs with Kafka.
 
-### 鉴权
+### Authentication
 
 Kafka supports a variety of authentication schemes and Dapr supports several: SASL password, mTLS, OIDC/OAuth2. With the added authentication methods, the `authRequired` field has
 been deprecated from the v1.6 release and instead the `authType` field should be used. If `authRequired` is set to `true`, Dapr will attempt to configure `authType` correctly
@@ -432,7 +432,7 @@ When invoking the Kafka pub/sub, its possible to provide an optional partition k
 
 The param name is `partitionKey`.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myKafka/myTopic?metadata.partitionKey=key1 \
@@ -475,7 +475,7 @@ When configuring the Kafka pub/sub component metadata, you must define:
 
 Schema subjects are automatically derived from topic names, using the standard naming convention. For example, for a topic named `my-topic`, the schema subject will be `my-topic-value`.
 When interacting with the message payload within the service, it is in JSON format. The payload is transparently serialized/deserialized within the Dapr component.
-Date/Datetime fields must be passed as their [Epoch Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) equivalent (rather than typical Iso8601). For example:
+Date/Datetime fields must be passed as their [Epoch Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) equivalent (rather than typical Iso8601). 例如：
 
 - `2024-01-10T04:36:05.986Z` should be passed as `1704861365986` (the number of milliseconds since Jan 1st, 1970)
 - `2024-01-10` should be passed as `19732` (the number of days since Jan 1st, 1970)
@@ -484,7 +484,7 @@ Date/Datetime fields must be passed as their [Epoch Unix timestamp](https://en.w
 
 In order to indicate to the Kafka pub/sub component that the message should be using Avro serialization, the `valueSchemaType` metadata must be set to `Avro`.
 
-
+{{< tabs curl "Python SDK">}}
 
 {{% codetab %}}
 
@@ -492,7 +492,7 @@ In order to indicate to the Kafka pub/sub component that the message should be u
 curl -X "POST" http://localhost:3500/v1.0/publish/pubsub/my-topic?metadata.rawPayload=true&metadata.valueSchemaType=Avro -H "Content-Type: application/json" -d '{"order_number": "345", "created_date": 1704861365986}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -515,7 +515,7 @@ with DaprClient() as d:
     print(req_data, flush=True)
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -523,7 +523,7 @@ with DaprClient() as d:
 
 In order to indicate to the Kafka pub/sub component that the message should be deserialized using Avro, the `valueSchemaType` metadata must be set to `Avro` in the subscription metadata.
 
-
+{{< tabs "Python (FastAPI)" >}}
 
 {{% codetab %}}
 
@@ -557,13 +557,13 @@ app.include_router(router)
 
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ## Create a Kafka instance
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 You can run Kafka locally using [this](https://github.com/wurstmeister/kafka-docker) Docker image.
@@ -576,7 +576,7 @@ To run Kafka on Kubernetes, you can use any Kafka operator, such as [Strimzi](ht
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md##step-1-setup-the-pubsub-component" >}}) for instructions on configuring pub/sub components

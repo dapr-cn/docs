@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 查看可插拔组件概述
-linkTitle: Overview
+linkTitle: 概述
 weight: 1000
 description: 可插拔组件剖析和支持的组件类型概述
 ---

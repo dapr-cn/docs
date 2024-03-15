@@ -59,7 +59,7 @@ Here a few scenarios when the `"direction"` metadata field could help:
 
 - If the detached Dapr sidecar is scaled to zero and the application reaches the sidecar (before even starting an HTTP server), the `"wait for the app to become ready"` deadlocks the app and the sidecar into waiting for each other.
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -140,14 +140,14 @@ OPTIONS http://localhost:<appPort>/<name>
 
 #### HTTP Response codes
 
-| Code       | 说明                                               |
+| Code       | Description                                      |
 | ---------- | ------------------------------------------------ |
 | 404        | Application does not want to bind to the binding |
 | 2xx or 405 | Application wants to bind to the binding         |
 
 #### URL Parameters
 
-| Parameter | 说明                      |
+| Parameter | Description             |
 | --------- | ----------------------- |
 | appPort   | the application port    |
 | name      | the name of the binding |
@@ -166,13 +166,13 @@ POST http://localhost:<appPort>/<name>
 
 #### HTTP Response codes
 
-| Code | 说明                                                   |
+| Code | Description                                          |
 | ---- | ---------------------------------------------------- |
 | 200  | Application processed the input binding successfully |
 
 #### URL Parameters
 
-| Parameter | 说明                      |
+| Parameter | Description             |
 | --------- | ----------------------- |
 | appPort   | the application port    |
 | name      | the name of the binding |
@@ -214,7 +214,7 @@ POST/PUT http://localhost:<daprPort>/v1.0/bindings/<name>
 
 ### HTTP Response codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 204  | Empty Response     |
@@ -243,7 +243,7 @@ The `operation` field tells the Dapr binding which operation it should perform.
 
 ### URL Parameters
 
-| Parameter | 说明                                       |
+| Parameter | Description                              |
 | --------- | ---------------------------------------- |
 | daprPort  | the Dapr port                            |
 | name      | the name of the output binding to invoke |
@@ -270,6 +270,6 @@ curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
 
 There are common metadata properties which are support across multiple binding components. The list below illustrates them:
 
-| Property     | 说明                                                  | Binding definition                                                                                                                                      | Available in                                     |
+| Property     | Description                                         | Binding definition                                                                                                                                      | Available in                                     |
 | ------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
 | ttlInSeconds | Defines the time to live in seconds for the message | If set in the binding definition will cause all messages to have a default time to live. The message ttl overrides any value in the binding definition. | RabbitMQ, Azure Service Bus, Azure Storage Queue |

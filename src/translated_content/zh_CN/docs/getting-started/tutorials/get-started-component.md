@@ -83,19 +83,20 @@ dapr run --app-id myapp --dapr-http-port 3500 --resources-path .
 - 按 Ctrl+C 或 Command+C。
 - 在终端中运行`dapr stop`命令。
 
-
+{{% /alert %}}
 
 ## 第 4 步：获取秘密
 
 在另一个终端中运行:
 
-
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)">}}
+{{% codetab %}}
 
 ```bash
 curl http://localhost:3500/v1.0/secrets/my-secret-store/my-secret
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -103,9 +104,10 @@ curl http://localhost:3500/v1.0/secrets/my-secret-store/my-secret
 Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/secrets/my-secret-store/my-secret'
 ```
 
+{{% /codetab %}}
+{{< /tabs >}}
 
-
-
+**Output:**
 
 ```json
 {"my-secret":"I'm Batman"}

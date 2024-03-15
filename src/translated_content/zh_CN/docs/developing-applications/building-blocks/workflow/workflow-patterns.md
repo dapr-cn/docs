@@ -16,7 +16,7 @@ Dapr 工作流简化了微服务架构中复杂的有状态协调要求。 以�
 
 在某些情况下，可能需要跨多个微服务编排工作流的步骤。 为了提高可靠性和可伸缩性，还可以使用队列来触发各个步骤。
 
-虽然模式很简单，但实现中隐藏着许多复杂性。 For example:
+虽然模式很简单，但实现中隐藏着许多复杂性。 例如：
 
 - 如果其中一个微服务长时间不可用，会发生什么情况？
 - 失败的步骤可以自动重试吗？
@@ -25,7 +25,7 @@ Dapr 工作流简化了微服务架构中复杂的有状态协调要求。 以�
 
 Dapr 工作流解决了这些复杂问题，它允许您在自己选择的编程语言中以简单函数的形式简洁地实现任务链模式，如下例所示。
 
-
+{{< tabs Python JavaScript ".NET" Java Go >}}
 
 {{% codetab %}}
 
@@ -71,7 +71,7 @@ def error_handler(ctx, error):
 
 > **注意** 工作流重试策略将在 Python SDK 的未来版本中提供。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -146,7 +146,7 @@ start().catch((e) => {
 });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -180,7 +180,7 @@ catch (TaskFailedException) // Task failures are surfaced as TaskFailedException
 
 > **注意** 在上面的示例中， `"Step1"`, `"Step2"`, `"Step3"`, 和 `"MyCompensation"` 代表工作流活动，它们是代码中实际执行工作流步骤的函数。 为简洁起见，此示例中省略了这些活动实现。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -236,7 +236,7 @@ public class ChainWorkflow extends Workflow {
     }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -288,7 +288,7 @@ func Step3(ctx workflow.ActivityContext) (any, error) {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -316,7 +316,7 @@ func Step3(ctx workflow.ActivityContext) (any, error) {
 
 Dapr 工作流提供了一种将扇出/扇入模式表达为简单函数的方法，如下例所示：
 
-
+{{< tabs Python JavaScript ".NET" Java Go >}}
 
 {{% codetab %}}
 
@@ -357,7 +357,7 @@ def process_results(ctx, final_result: int):
     print(f'Final result: {final_result}.')
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -466,7 +466,7 @@ start().catch((e) => {
 });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -492,7 +492,7 @@ int sum = parallelTasks.Sum(t => t.Result);
 await context.CallActivityAsync("PostResults", sum);
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -519,7 +519,7 @@ public class FaninoutWorkflow extends Workflow {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -586,7 +586,7 @@ func ProcessResults(ctx workflow.ActivityContext) (any, error) {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -688,7 +688,7 @@ curl http://localhost:3500/v1.0-beta1/workflows/dapr/12345678
 
 Dapr 工作流原生支持这种模式，允许您实现_永恒的工作流_。 与其编写无限的 while 循环（这是一种反模式），Dapr Workflow 提供了一个 _continue-as-new_ API，工作流作者可以使用它从头开始重新启动一个工作流函数，并使用新的输入。
 
-
+{{< tabs Python JavaScript ".NET" Java Go >}}
 
 {{% codetab %}}
 
@@ -736,7 +736,7 @@ def send_alert(ctx, message: str):
     print(f'*** Alert: {message}')
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -765,7 +765,7 @@ const statusMonitorWorkflow: TWorkflow = async function* (ctx: WorkflowContext):
   };
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -807,7 +807,7 @@ public override async Task<object> RunAsync(WorkflowContext context, MyEntitySta
 
 > 这个示例假设您有一个预定义的 `MyEntityState` 类，其中有一个布尔 `IsHealthy` 属性。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -850,7 +850,7 @@ public class MonitorWorkflow extends Workflow {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -904,7 +904,7 @@ func SendAlert(ctx workflow.ActivityContext) (any, error) {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -934,7 +934,7 @@ func SendAlert(ctx workflow.ActivityContext) (any, error) {
 
 下面的示例代码展示了如何使用 Dapr 工作流实现这种模式。
 
-
+{{< tabs Python JavaScript ".NET" Java Go >}}
 
 {{% codetab %}}
 
@@ -994,7 +994,7 @@ def place_order(_, order: Order) -> None:
     print(f'*** Placing order: {order}')
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1135,7 +1135,7 @@ start().catch((e) => {
 });
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1180,7 +1180,7 @@ public override async Task<OrderResult> RunAsync(WorkflowContext context, OrderP
 
 > **注意** 在上面的示例中，`RequestApprovalActivity`是要调用的工作流活动的名称，`ApprovalResult`是工作流应用程序定义的枚举。 为简洁起见，示例代码中未包含这些定义。
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1218,7 +1218,7 @@ public class ExternalSystemInteractionWorkflow extends Workflow {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1276,13 +1276,13 @@ func PlaceOrder(ctx workflow.ActivityContext) (any, error) {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 传递事件以恢复工作流执行的代码是工作流的外部代码。 工作流事件可通过 [raise event]({{< ref "howto-manage-workflow\.md#raise-an-event" >}}) 工作流管理 API 传递到等待中的工作流实例，如下例所示:
 
-
+{{< tabs Python JavaScript ".NET" Java Go >}}
 
 {{% codetab %}}
 
@@ -1300,7 +1300,7 @@ with DaprClient() as d:
         event_data=asdict(Approval("Jane Doe")))
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1314,7 +1314,7 @@ import { DaprClient } from "@dapr/dapr";
   }
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1329,7 +1329,7 @@ await daprClient.RaiseWorkflowEventAsync(
     eventData: ApprovalResult.Approved);
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1340,7 +1340,7 @@ System.out.println("**SendExternalMessage: RestartEvent**");
 client.raiseEvent(restartingInstanceId, "RestartEvent", "RestartEventPayload");
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -1367,7 +1367,7 @@ func raiseEvent() {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

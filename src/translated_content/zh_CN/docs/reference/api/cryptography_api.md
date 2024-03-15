@@ -25,7 +25,7 @@ PUT http://localhost:<daprPort>/v1.0/crypto/<crypto-store-name>/encrypt
 
 #### URL Parameters
 
-| Parameter         | 说明                                                          |
+| Parameter         | Description                                                 |
 | ----------------- | ----------------------------------------------------------- |
 | daprPort          | The Dapr port                                               |
 | crypto-store-name | The name of the crypto store to get the encryption key from |
@@ -38,7 +38,7 @@ Additional encryption parameters are configured by setting headers with the appr
 values. The following table details the required and optional headers to set with every
 encryption request.
 
-| Header Key                    | 说明                                                                                                                                                                                                  | Allowed Values                                                                    | Required                                                 |
+| Header Key                    | Description                                                                                                                                                                                         | Allowed Values                                                                    | Required                                                 |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | dapr-key-name                 | The name of the key to use for the encryption operation                                                                                                                                             |                                                                                   | Yes                                                      |
 | dapr-key-wrap-algorithm       | The key wrap algorithm to use                                                                                                                                                                       | `A256KW`, `A128CBC`, `A192CBC`, `RSA-OAEP-256`                                    | Yes                                                      |
@@ -55,7 +55,7 @@ returns an array of bytes with the encrypted payload.
 
 #### Response Codes
 
-| Code | 说明                                                                      |
+| Code | Description                                                             |
 | ---- | ----------------------------------------------------------------------- |
 | 200  | OK                                                                      |
 | 400  | Crypto provider not found                                               |
@@ -91,7 +91,7 @@ PUT curl http://localhost:3500/v1.0/crypto/<crypto-store-name>/decrypt
 
 #### URL Parameters
 
-| Parameter         | 说明                                                          |
+| Parameter         | Description                                                 |
 | ----------------- | ----------------------------------------------------------- |
 | daprPort          | The Dapr port                                               |
 | crypto-store-name | The name of the crypto store to get the decryption key from |
@@ -103,7 +103,7 @@ PUT curl http://localhost:3500/v1.0/crypto/<crypto-store-name>/decrypt
 Additional decryption parameters are configured by setting headers with the appropriate values. The following table
 details the required and optional headers to set with every decryption request.
 
-| Header Key    | 说明                                                       | Required |
+| Header Key    | Description                                              | Required |
 | ------------- | -------------------------------------------------------- | -------- |
 | dapr-key-name | The name of the key to use for the decryption operation. | Yes      |
 
@@ -116,7 +116,7 @@ returns an array of bytes representing the decrypted payload.
 
 #### Response Codes
 
-| Code | 说明                                                                      |
+| Code | Description                                                             |
 | ---- | ----------------------------------------------------------------------- |
 | 200  | OK                                                                      |
 | 400  | Crypto provider not found                                               |

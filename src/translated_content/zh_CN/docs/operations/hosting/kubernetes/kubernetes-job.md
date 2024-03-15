@@ -18,7 +18,7 @@ Stopping the Dapr sidecar causes its readiness and liveness probes to fail in yo
 
 To prevent Kubernetes from trying to restart your job, set your job's `restartPolicy` to `Never`.
 
-Be sure to use the _POST_ HTTP verb when calling the shutdown HTTP API. For example:
+Be sure to use the _POST_ HTTP verb when calling the shutdown HTTP API. 例如：
 
 ```yaml
 apiVersion: batch/v1
@@ -63,7 +63,7 @@ func main() {
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Deploy Dapr on Kubernetes]({{< ref kubernetes-deploy.md >}})
 - [Upgrade Dapr on Kubernetes]({{< ref kubernetes-upgrade.md >}})

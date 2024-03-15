@@ -12,7 +12,7 @@ This topic details the supported versions of Dapr releases, the upgrade policies
 
 Dapr releases use `MAJOR.MINOR.PATCH` versioning. For example, 1.0.0.
 
-| Versioning | 说明                                                                                                                                                                                                                                                             |
+| Versioning | Description                                                                                                                                                                                                                                                    |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `MAJOR`    | Updated when there’s a non-backward compatible change to the runtime, such as an API change. A `MAJOR` release can also occur then there is a considered a significant addition/change of functionality that needs to differentiate from the previous version. |
 | `MINOR`    | Updated as part of the regular release cadence, including new features, bug, and security fixes.                                                                                                                                                               |
@@ -151,7 +151,7 @@ Below is a list of software that the latest version of Dapr (v{{% dapr-latest-ve
 | [Open Telemetry collector (OTEL)](https://github.com/open-telemetry/opentelemetry-collector/releases) | v0.4.0                                                                                                                            |
 | [Prometheus](https://prometheus.io/download/)                                                                            | v2.28                                                                                                                             |
 
-## 相关链接
+## Related links
 
 - Read the [Versioning Policy]({{< ref support-versioning.md >}})
 - Read the [Breaking Changes and Deprecation Policy]({{< ref breaking-changes-and-deprecations.md >}})

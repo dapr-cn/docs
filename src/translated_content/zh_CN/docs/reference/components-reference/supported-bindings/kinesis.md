@@ -47,7 +47,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field          | Required | Binding support | Details                                                                                                                                                                                                                      | 如何使用Dapr扩展来开发和运行Dapr应用程序                 |
+| Field          | Required | Binding support | Details                                                                                                                                                                                                                      | Example                                  |
 | -------------- | :------: | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
 | `mode`         |     N    | Input           | The Kinesis stream mode. `shared`- Shared throughput, `extended` - Extended/Enhanced fanout methods. More details are [here](https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html). Defaults to `"shared"` | `"shared"`, `"extended"`                 |
 | `streamName`   |     Y    | Input/Output    | The AWS Kinesis Stream Name                                                                                                                                                                                                  | `"stream"`                               |
@@ -70,7 +70,7 @@ This component supports **output binding** with the following operations:
 
 - `create`
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

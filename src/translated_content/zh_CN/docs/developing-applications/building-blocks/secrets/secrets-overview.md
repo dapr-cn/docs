@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 密钥管理概览
-linkTitle: Overview
+linkTitle: 概述
 weight: 1000
 description: 机密管理 API 构建基块概述
 ---

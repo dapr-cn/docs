@@ -12,7 +12,7 @@ API logging enables you to see the API calls your application makes to the Dapr 
 
 API logging is disabled by default.
 
-To enable API logging, you can use the `--enable-api-logging` command-line option when starting the `daprd` process. For example:
+To enable API logging, you can use the `--enable-api-logging` command-line option when starting the `daprd` process. 例如：
 
 ```bash
 ./daprd --enable-api-logging
@@ -90,7 +90,7 @@ Using the Dapr Configuration spec, you can set the default value for the `--enab
 - When `logging.apiLogging.enabled` is `true`, Dapr runtimes have API logging enabled by default, and it can be disabled by setting
   `--enable-api-logging=false` or with the `dapr.io/enable-api-logging: false` annotation.
 
-For example:
+例如：
 
 ```yaml
 logging:
@@ -104,7 +104,7 @@ By default, logs for API calls in the HTTP endpoints include the full URL being 
 
 To reduce the risk of PII being accidentally included in API logs (when enabled), Dapr can instead log the abstract route being invoked (for example, `POST /v1.0/invoke/{id}/method/{method:*}`). This can help ensuring compliance with privacy regulations such as GDPR.
 
-To enable obfuscation of URLs in Dapr's HTTP API logs, set `logging.apiLogging.obfuscateURLs` to `true`. For example:
+To enable obfuscation of URLs in Dapr's HTTP API logs, set `logging.apiLogging.obfuscateURLs` to `true`. 例如：
 
 ```yaml
 logging:
@@ -120,7 +120,7 @@ When API logging is enabled, all calls to the Dapr API server are logged, includ
 
 You can configure Dapr to not log calls to health check endpoints when API logging is enabled using the Dapr Configuration spec, by setting `logging.apiLogging.omitHealthChecks: true`. The default value is `false`, which means that health checks calls are logged in the API logs.
 
-For example:
+例如：
 
 ```yaml
 logging:

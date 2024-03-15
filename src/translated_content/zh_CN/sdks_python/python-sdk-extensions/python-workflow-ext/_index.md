@@ -17,7 +17,7 @@ Dapr Python SDK 提供了一个内置的 Dapr Workflow 扩展，`dapr.ext.workfl
 
 您可以通过下面的方式下载和安装 Dapr Workflow 扩展：
 
-
+{{< tabs Stable Development>}}
 
 {{% codetab %}}
 
@@ -25,18 +25,18 @@ Dapr Python SDK 提供了一个内置的 Dapr Workflow 扩展，`dapr.ext.workfl
 pip install dapr-ext-workflow
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 {{% alert title="Note" color="warning" %}}
-开发包将包含与 Dapr 运行时的预发布版本兼容的功能和行为。 在安装 `dapr-dev` 包之前，请务必卸载任何稳定版本的 Python SDK 扩展。
+The development package will contain features and behavior that will be compatible with the pre-release version of the Dapr runtime. 在安装 `dapr-dev` 包之前，请务必卸载任何稳定版本的 Python SDK 扩展。
 {{% /alert %}}
 
 ```bash
 pip3 install dapr-ext-workflow-dev
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

@@ -54,7 +54,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                                                                                                           | Required | Details                                                                                                                                                                                                                                                                             | 如何使用Dapr扩展来开发和运行Dapr应用程序                                |
+| Field                                                                                                           | Required | Details                                                                                                                                                                                                                                                                             | Example                                                 |
 | --------------------------------------------------------------------------------------------------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | project_id                                                                                 |     Y    | The ID of the GCP project to use                                                                                                                                                                                                                                                    | `"project-id"`                                          |
 | endpoint                                                                                                        |     N    | GCP endpoint for the component to use. Only used for local development with (for example) [GCP Datastore Emulator](https://cloud.google.com/datastore/docs/tools/datastore-emulator). The `endpoint` is unnecessary when running against the GCP production API. | `"localhost:8432"`                                      |
@@ -76,7 +76,7 @@ Since the GCP Firestore component uses the GCP Go Client Libraries, by default i
 
 ## Setup GCP Firestore
 
-
+{{< tabs "Self-Hosted" "Google Cloud" >}}
 
 {{% codetab %}}
 You can use the GCP Datastore emulator to run locally using the instructions [here](https://cloud.google.com/datastore/docs/tools/datastore-emulator).
@@ -90,7 +90,7 @@ Follow the instructions [here](https://cloud.google.com/datastore/docs/quickstar
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

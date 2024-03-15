@@ -27,14 +27,14 @@ GET http://localhost:<daprPort>/v1.0/healthz
 
 #### HTTP Response Codes
 
-| Code | 说明                  |
+| Code | Description         |
 | ---- | ------------------- |
 | 204  | Dapr is healthy     |
 | 500  | Dapr is not healthy |
 
 #### URL Parameters
 
-| Parameter | 说明            |
+| Parameter | Description   |
 | --------- | ------------- |
 | daprPort  | The Dapr port |
 
@@ -65,14 +65,14 @@ GET http://localhost:<daprPort>/v1.0/healthz/outbound
 
 #### HTTP Response Codes
 
-| Code | 说明                  |
+| Code | Description         |
 | ---- | ------------------- |
 | 204  | Dapr is healthy     |
 | 500  | Dapr is not healthy |
 
 #### URL Parameters
 
-| Parameter | 说明            |
+| Parameter | Description   |
 | --------- | ------------- |
 | daprPort  | The Dapr port |
 

@@ -32,9 +32,9 @@ spec:
 
 ## Spec metadata fields
 
-| Field    | Required | Details                                                                                                                                                                                                                             | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| -------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `prefix` |     N    | If set, limits operations to environment variables with the given prefix. The prefix is removed from the returned secrets' names.<br>The matching is case-insensitive on Windows and case-sensitive on all other operating systems. | `"MYAPP_"`               |
+| Field    | Required | Details                                                                                                                                                                                                                             | Example    |
+| -------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `prefix` |     N    | If set, limits operations to environment variables with the given prefix. The prefix is removed from the returned secrets' names.<br>The matching is case-insensitive on Windows and case-sensitive on all other operating systems. | `"MYAPP_"` |
 
 ## Notes
 

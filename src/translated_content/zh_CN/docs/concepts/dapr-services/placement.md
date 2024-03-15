@@ -17,42 +17,42 @@ Placement 服务作为 `dapr init -k` 的一部分部署，或通过 Dapr Helm c
 
 ## Placement 表
 
-有一个[HTTP API `/placement/state`用于公布 Placement 表信息]({{< ref placement_api.md >}})的 Placement 服务。 The API is exposed on the sidecar on the same port as the healthz. This is an unauthenticated endpoint, and is disabled by default. 您需要将 `DAPR_PLACEMENT_METADATA_ENABLED` 环境或 `metadata-enabled` 命令行参数设置为true以启用它。 如果您正在使用helm，则只需将 `dapr_placement.metadataEnabled` 设置为true。
+有一个[HTTP API `/placement/state`用于公布 Placement 表信息]({{< ref placement_api.md >}})的 Placement 服务。 API 在与 healthz 相同的端口上通过 sidecar 暴露。 这是一个未经身份验证的端点，默认情况下被禁用。 您需要将 `DAPR_PLACEMENT_METADATA_ENABLED` 环境或 `metadata-enabled` 命令行参数设置为true以启用它。 如果您正在使用helm，则只需将 `dapr_placement.metadataEnabled` 设置为true。
 
-### Usecase:
+### 使用案例：
 
-The placement table API can be used for retrieving the current placement table, which contains all the actors registered. This can be helpful for debugging and allows tools to extract and present information about actors.
+可以使用放置表API来检索当前的 Placement 表，其中包含所有已注册的 Actors。 这对于调试非常有帮助，并且允许工具提取和展示有关演员的信息。
 
-### HTTP Request
+### HTTP 请求
 
 ```
 GET http://localhost:<healthzPort>/placement/state
 ```
 
-### HTTP Response Codes
+### HTTP 响应码
 
-| Code | 说明                                                          |
-| ---- | ----------------------------------------------------------- |
-| 200  | Placement tables information returned                       |
-| 500  | Placement could not return the placement tables information |
+| 响应码 | 说明                 |
+| --- | ------------------ |
+| 200 | 返回的 Placement 表信息  |
+| 500 | 无法返回 Placement 表信息 |
 
-### HTTP Response Body
+### HTTP 响应正文
 
-**Placement tables API Response Object**
+**Placement 表 API 响应对象**
 
-| Name         | Type                                                                                    | 说明                                           |
-| ------------ | --------------------------------------------------------------------------------------- | -------------------------------------------- |
-| tableVersion | int                                                                                     | The placement table version                  |
-| hostList     | [Actor Host Info](#actorhostinfo)[] | A json array of registered actors host info. |
+| 名称           | 类型                                                                                      | 说明                        |
+| ------------ | --------------------------------------------------------------------------------------- | ------------------------- |
+| tableVersion | int                                                                                     | Placement 表版本             |
+| hostList     | [Actor Host Info](#actorhostinfo)[] | 已注册 Actors 主机信息的 Json 数组。 |
 
-<a id="actorhostinfo"></a>**Actor Host Info**
+<a id="actorhostinfo"></a>**Actor 主机信息**
 
-| Name       | Type              | 说明                                         |
-| ---------- | ----------------- | ------------------------------------------ |
-| name       | string            | The host:port address of the actor.        |
-| appId      | string            | app id.                                    |
-| actorTypes | json string array | List of actor types it hosts.              |
-| updatedAt  | timestamp         | Timestamp of the actor registered/updated. |
+| 名称         | 类型        | 说明                  |
+| ---------- | --------- | ------------------- |
+| name       | string    | 执行组件的 host：port 地址。 |
+| appId      | string    | app id.             |
+| actorTypes | json字符串数组 | 托管的 actor 类型列表。     |
+| updatedAt  | timestamp | Actor 注册/更新的时间戳。    |
 
 ### 示例
 

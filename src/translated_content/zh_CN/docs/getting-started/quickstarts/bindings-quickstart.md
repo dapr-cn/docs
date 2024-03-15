@@ -17,7 +17,7 @@ description: 开始使用 Dapr 的绑定构建块
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -232,7 +232,7 @@ spec:
 - `spec/type`指定了此绑定所使用的PostgreSQL。
 - `spec/metadata`定义了组件使用的PostgreSQL实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -442,7 +442,7 @@ spec:
 - `spec/type`指定了此绑定所使用的PostgreSQL。
 - `spec/metadata`定义了组件使用的PostgreSQL实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -654,7 +654,7 @@ spec:
 - `spec/type`指定了此绑定所使用的PostgreSQL。
 - `spec/metadata`定义了组件使用的PostgreSQL实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -872,7 +872,7 @@ spec:
 - `spec/type`指定了此绑定所使用的PostgreSQL。
 - `spec/metadata`定义了组件使用的PostgreSQL实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -1092,7 +1092,7 @@ spec:
 - `spec/type`指定了此绑定所使用的PostgreSQL。
 - `spec/metadata`定义了组件使用的PostgreSQL实例的连接。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

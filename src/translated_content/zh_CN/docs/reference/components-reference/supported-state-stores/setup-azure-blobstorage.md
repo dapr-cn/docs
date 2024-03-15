@@ -47,7 +47,7 @@ If you are using `v1` of this component, you should continue to use `v1` until y
 
 ## Spec metadata fields
 
-| Field                |                        Required                        | Details                                                                                                                                                                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                 |
+| Field                |                        Required                        | Details                                                                                                                                                                                                                                                                                                                                                                         | Example                                                                                                  |
 | -------------------- | :----------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `accountName`        |                            Y                           | The storage account name                                                                                                                                                                                                                                                                                                                                                        | `"mystorageaccount"`.                                                                                    |
 | `accountKey`         | Y (unless using Microsoft Entra ID) | Primary or secondary storage key                                                                                                                                                                                                                                                                                                                                                | `"key"`                                                                                                  |
@@ -111,7 +111,7 @@ az role assignment create \
 
 When authenticating your component using Microsoft Entra ID, the `accountKey` field is not required. Instead, please specify the required credentials in the component's metadata (if any) according to the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document.
 
-For example:
+例如：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -165,11 +165,11 @@ curl -X POST http://localhost:3500/v1.0/state \
 
 This creates the blob file in the container with `key` as filename and `value` as the contents of file.
 
-## Concurrency
+## 并发
 
 Azure Blob Storage state concurrency is achieved by using `ETag`s according to [the Azure Blob Storage documentation](https://docs.microsoft.com/azure/storage/common/storage-concurrency#managing-concurrency-in-blob-storage).
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

@@ -6,7 +6,7 @@ description: Detailed information on the mtls expiry CLI command
 weight: 2000
 ---
 
-### 说明
+### Description
 
 Checks the expiry of the root Certificate Authority (CA) certificate
 
@@ -22,7 +22,7 @@ dapr mtls expiry [flags]
 
 ### Flags
 
-| Name           | Environment Variable | Default | 说明              |
+| Name           | Environment Variable | Default | Description     |
 | -------------- | -------------------- | ------- | --------------- |
 | `--help`, `-h` |                      |         | help for expiry |
 

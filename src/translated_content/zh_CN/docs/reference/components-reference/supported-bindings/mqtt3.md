@@ -44,7 +44,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field               |        Required        | Binding support | Details                                                                                                                                                                                                                                                                                                                                                     | 如何使用Dapr扩展来开发和运行Dapr应用程序                           |
+| Field               |        Required        | Binding support | Details                                                                                                                                                                                                                                                                                                                                                     | Example                                            |
 | ------------------- | :--------------------: | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | `url`               |            Y           | Input/Output    | Address of the MQTT broker. Can be `secretKeyRef` to use a secret reference. <br> Use the **`tcp://`** URI scheme for non-TLS communication. <br> Use the **`ssl://`** URI scheme for TLS communication.                                                                                                                                                    | `"tcp://[username][:password]@host.domain[:port]"` |
 | `topic`             |            Y           | Input/Output    | The topic to listen on or send events to.                                                                                                                                                                                                                                                                                                                   | `"mytopic"`                                        |
@@ -59,7 +59,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ### Communication using TLS
 
-To configure communication using TLS, ensure that the MQTT broker (e.g. emqx) is configured to support certificates and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. For example:
+To configure communication using TLS, ensure that the MQTT broker (e.g. emqx) is configured to support certificates and provide the `caCert`, `clientCert`, `clientKey` metadata in the component configuration. 例如：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -104,7 +104,7 @@ spec:
 
 ### Consuming a shared topic
 
-When consuming a shared topic, each consumer must have a unique identifier. If running multiple instances of an application, you configure the component's `consumerID` metadata with a `{uuid}` tag, which will give each instance a randomly generated `consumerID` value on start up. For example:
+When consuming a shared topic, each consumer must have a unique identifier. If running multiple instances of an application, you configure the component's `consumerID` metadata with a `{uuid}` tag, which will give each instance a randomly generated `consumerID` value on start up. 例如：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -172,7 +172,7 @@ You can override the retain property in component metadata on a per-request basi
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

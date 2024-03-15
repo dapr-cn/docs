@@ -44,12 +44,12 @@ The `InvokeRequest.Metadata` for `bindings.kitex` requires the client to fill in
 - `methodName`
 - `version`
 
-| Field         | Required | Binding support | Details                                                                                   | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ------------- | :------: | --------------- | ----------------------------------------------------------------------------------------- | ------------------------ |
-| `hostPorts`   |     Y    | Output          | IP address and port information of the Kitex server (Thrift)           | `"127.0.0.1:8888"`       |
-| `destService` |     Y    | Output          | Service name of the Kitex server (Thrift)                              | `"echo"`                 |
-| `methodName`  |     Y    | Output          | Method name under a specific service name of the Kitex server (Thrift) | `"echo"`                 |
-| `version`     |     Y    | Output          | Kitex version                                                                             | `"0.5.0"`                |
+| Field         | Required | Binding support | Details                                                                                   | Example            |
+| ------------- | :------: | --------------- | ----------------------------------------------------------------------------------------- | ------------------ |
+| `hostPorts`   |     Y    | Output          | IP address and port information of the Kitex server (Thrift)           | `"127.0.0.1:8888"` |
+| `destService` |     Y    | Output          | Service name of the Kitex server (Thrift)                              | `"echo"`           |
+| `methodName`  |     Y    | Output          | Method name under a specific service name of the Kitex server (Thrift) | `"echo"`           |
+| `version`     |     Y    | Output          | Kitex version                                                                             | `"0.5.0"`          |
 
 ## Binding support
 
@@ -57,7 +57,7 @@ This component supports **output binding** with the following operations:
 
 - `get`
 
-## 如何使用Dapr扩展来开发和运行Dapr应用程序
+## Example
 
 When using Kitex binding:
 
@@ -82,7 +82,7 @@ For example, the variable `reqData` needs to be _encoded_ by the Thrift protocol
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

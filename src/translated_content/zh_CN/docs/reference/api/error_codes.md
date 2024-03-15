@@ -17,7 +17,7 @@ For http calls made to Dapr runtime, when an error is encountered, an error json
 
 Following table lists the error codes returned by Dapr runtime:
 
-| Error Code                                                                                                            | 说明                                                                                                  |
+| Error Code                                                                                                            | Description                                                                                         |
 | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | ERR_ACTOR_INSTANCE_MISSING                             | Error getting an actor instance. This means that actor is now hosted in some other service replica. |
 | ERR_ACTOR_RUNTIME_NOT_FOUND       | Error getting the actor instance.                                                                   |

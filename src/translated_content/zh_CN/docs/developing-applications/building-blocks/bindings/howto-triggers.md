@@ -26,7 +26,7 @@ weight: 200
 {{% alert title="注意" color="primary" %}}
 如果你还没有，请[尝试使用绑定快速入门]({{< ref bindings-quickstart.md >}})快速了解如何使用绑定 API。
 
-
+{{% /alert %}}
 
 ## 创建绑定
 
@@ -39,7 +39,7 @@ weight: 200
 
 在创建绑定组件时，[请指定支持的绑定`direction`（方向）]({{< ref "bindings_api.md#binding-direction-optional" >}})。
 
-
+{{< tabs "Self-Hosted (CLI)" Kubernetes >}}
 
 {{% codetab %}}
 
@@ -71,7 +71,7 @@ spec:
     value: input
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -103,7 +103,7 @@ spec:
     value: input
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -116,7 +116,7 @@ spec:
 
 下面是利用 Dapr SDK 展示输出绑定的代码示例。
 
-
+{{< tabs Dotnet Java Python Go JavaScript>}}
 
 {{% codetab %}}
 
@@ -144,7 +144,7 @@ namespace CheckoutService.controller
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -169,7 +169,7 @@ public class CheckoutServiceController {
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -190,7 +190,7 @@ app.run(6002)
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -224,7 +224,7 @@ func main() {
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -259,7 +259,7 @@ async function start() {
 
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -288,9 +288,9 @@ spec:
 
 事件传递保证由绑定实现控制。 根据绑定实现，事件传递可以正好一次或至少一次。
 
-## References
+## 参考资料
 
-- [Bindings building block]({{< ref bindings >}})
+- [绑定构建块]({{< ref bindings >}})
 - [绑定 API]({{< ref bindings_api.md >}})
-- [Components concept]({{< ref components-concept.md >}})
-- [Supported bindings]({{< ref supported-bindings >}})
+- [Dapr组件概念]({{< ref components-concept.md >}})
+- [支持的绑定列表]({{< ref supported-bindings >}})

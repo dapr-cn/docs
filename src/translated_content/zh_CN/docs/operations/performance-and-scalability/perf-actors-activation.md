@@ -53,6 +53,6 @@ Test parameters:
 - No app restarts
 - No sidecar restarts
 
-## 相关链接
+## Related links
 
 - For more information see [overview of Dapr on Kubernetes]({{< ref kubernetes-overview\.md >}})

@@ -32,7 +32,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field       | Required | Binding support | Details                                | 如何使用Dapr扩展来开发和运行Dapr应用程序                       |
+| Field       | Required | Binding support | Details                                | Example                                        |
 | ----------- | :------: | --------------- | -------------------------------------- | ---------------------------------------------- |
 | `url`       |     Y    | Output          | The Cosmos DB url for Gremlin APIs     | `"wss://******.gremlin.cosmos.azure.com:443/"` |
 | `masterKey` |     Y    | Output          | The Cosmos DB account master key       | `"masterKey"`                                  |
@@ -57,7 +57,7 @@ This component supports **output binding** with the following operations:
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

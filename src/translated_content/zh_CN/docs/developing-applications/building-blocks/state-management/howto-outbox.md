@@ -33,7 +33,7 @@ description: 在状态存储和Pub/sub（发布/订阅）消息代理之间提�
 鼓励使用竞争使用者模式（例如，[Apache Kafka]（{{< ref setup-apache-kafka>}}）的消息代理来减少重复事件的可能性。
 {{% /alert %}}
 
-## Usage
+## 用法
 
 要启用发件箱功能，请在状态存储组件上添加以下必需和可选字段：
 
@@ -60,12 +60,12 @@ spec:
 
 ### 元数据字段
 
-| Name                          | Required | 默认值                   | 说明                                                                                                                                                  |
-| ----------------------------- | -------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| outboxPublishPubsub           | Yes      | N/A                   | 设置 pub/sub 组件的名称，以便在发布状态更改时传递通知                                                                                                                     |
-| outboxPublishTopic            | Yes      | N/A                   | 设置接收通过 `outboxPublishPubsub` 配置的发布/订阅上的状态更改的主题。 消息主体将是“insert”或“update”操作的状态事务项                                                                     |
-| outboxPubsub                  | No       | `outboxPublishPubsub` | 设置 Dapr 使用的 pub/sub 组件，以协调状态和发布/订阅事务。 如果未设置，则使用配置为 `outboxPublishPubsub` 的 pub/sub 组件。 如果您想要将用于发送通知状态更改的发布/订阅组件与用于协调事务的组件分开，这将非常有用                  |
-| outboxDiscardWhenMissingState | No       | `false`               | 通过将`outboxDiscardWhenMissingState`设置为`true`，Dapr 会在数据库中找不到状态并且不重试时丢弃事务。 如果在 Dapr 能够传递消息之前由于任何原因状态存储数据已被删除，并且您希望 Dapr 从发布/订阅中删除项目并停止重试获取状态，则此设置可能很有用 |
+| 名称                            | 必填  | 默认值                   | 说明                                                                                                                                                  |
+| ----------------------------- | --- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| outboxPublishPubsub           | Yes | N/A                   | 设置 pub/sub 组件的名称，以便在发布状态更改时传递通知                                                                                                                     |
+| outboxPublishTopic            | Yes | N/A                   | 设置接收通过 `outboxPublishPubsub` 配置的发布/订阅上的状态更改的主题。 消息主体将是“insert”或“update”操作的状态事务项                                                                     |
+| outboxPubsub                  | No  | `outboxPublishPubsub` | 设置 Dapr 使用的 pub/sub 组件，以协调状态和发布/订阅事务。 如果未设置，则使用配置为 `outboxPublishPubsub` 的 pub/sub 组件。 如果您想要将用于发送通知状态更改的发布/订阅组件与用于协调事务的组件分开，这将非常有用                  |
+| outboxDiscardWhenMissingState | No  | `false`               | 通过将`outboxDiscardWhenMissingState`设置为`true`，Dapr 会在数据库中找不到状态并且不重试时丢弃事务。 如果在 Dapr 能够传递消息之前由于任何原因状态存储数据已被删除，并且您希望 Dapr 从发布/订阅中删除项目并停止重试获取状态，则此设置可能很有用 |
 
 ### 在同一个状态存储上合并发件箱和非发件箱消息
 

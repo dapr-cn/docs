@@ -15,7 +15,7 @@ Dapr 在保存和检索状态时不会转换状态值。 Dapr要求所有的状�
 {{% alert title="注意" color="primary" %}}
 Azure Cosmos DB 是一个支持多种 API 的多模数据库。 默认的Dapr Cosmos DB状态存储实现使用[Azure Cosmos DB SQL API](https://docs.microsoft.com/azure/cosmos-db/sql-query-getting-started)。
 
-
+{{% /alert %}}
 
 ## 连接到 Azure Cosmos DB
 
@@ -27,7 +27,7 @@ Azure Cosmos DB 是一个支持多种 API 的多模数据库。 默认的Dapr Co
 {{% alert title="注意" color="primary" %}}
 当你为 Dapr 配置 Azure Cosmos DB 时，需要指定要使用的确切数据库和集合。 下面的 Cosmos DB [SQL API](https://docs.microsoft.com/azure/cosmos-db/sql-query-getting-started) 示例假设你已经连接到了正确的数据库和一个名为 "states" 的集合。
 
-
+{{% /alert %}}
 
 ## 通过 App ID 列出键
 
@@ -70,3 +70,4 @@ SELECT * FROM states WHERE states.id = 'mypets||cat||leroy||food'
 {{% alert title="警告" color="warning" %}}
 您不应该手动更新或删除存储中的状态。 所有的写入和删除操作都应该通过 Dapr 运行时来完成。 \*\*唯一的例外：\*\*通常需要在状态存储中删除 actor 记录，一旦您知道这些不再使用，以防止未使用的 actor 实例的累积，这些实例可能永远不会再次加载。
 
+{{% /alert %}}

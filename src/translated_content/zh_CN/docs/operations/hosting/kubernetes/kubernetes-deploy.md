@@ -18,7 +18,7 @@ Both the Dapr CLI and the Dapr Helm chart automatically deploy with affinity for
 
  <!-- Dapr CLI -->
 
-
+{{% codetab %}}
 
 ## Install with Dapr CLI
 
@@ -174,7 +174,7 @@ Run the following command on your local machine to uninstall Dapr on your cluste
 dapr uninstall -k
 ```
 
-
+{{% /codetab %}}
 
  <!-- Helm -->
 
@@ -242,7 +242,7 @@ If you want to install the Dapr dashboard, use this Helm chart with the addition
 
 `helm install dapr dapr/dapr-dashboard --namespace dapr-system`
 
-For example:
+例如：
 
 ```bash
 helm repo add dapr https://dapr.github.io/helm-charts/
@@ -280,7 +280,7 @@ helm uninstall dapr --namespace dapr-system
 - Read [the Kubernetes productions guidelines]({{< ref kubernetes-production.md >}}) for recommended Helm chart values for production setups
 - [More details on Dapr Helm charts](https://github.com/dapr/dapr/blob/master/charts/dapr/README.md)
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -292,7 +292,7 @@ Alternatively, you can use Dapr container images based on Mariner 2 (minimal dis
 
 To use Mariner-based images for Dapr, you need to add `-mariner` to your Docker tags. For example, while `ghcr.io/dapr/dapr:latest` is the Docker image based on _distroless_, `ghcr.io/dapr/dapr:latest-mariner` is based on Mariner. Tags pinned to a specific version are also available, such as `{{% dapr-latest-version short="true" %}}-mariner`.
 
-
+{{< tabs "Dapr CLI" "Helm" >}}
 
  <!-- Dapr CLI -->
 
@@ -304,13 +304,13 @@ In the Dapr CLI, you can switch to using Mariner-based images with the `--image-
 dapr init -k --image-variant mariner
 ```
 
-
+{{% /codetab %}}
 
  <!-- Helm -->
 
 {{% codetab %}}
 
-With Kubernetes and Helm, you can use Mariner-based images by setting the `global.tag` option and adding `-mariner`. For example:
+With Kubernetes and Helm, you can use Mariner-based images by setting the `global.tag` option and adding `-mariner`. 例如：
 
 ```sh
 helm upgrade --install dapr dapr/dapr \
@@ -321,11 +321,11 @@ helm upgrade --install dapr dapr/dapr \
   --wait
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Deploy Dapr with Helm parameters and other details]({{< ref "kubernetes-production.md#deploy-dapr-with-helm" >}})
 - [Upgrade Dapr on Kubernetes]({{< ref kubernetes-upgrade.md >}})

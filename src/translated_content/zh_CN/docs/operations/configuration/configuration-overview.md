@@ -18,7 +18,7 @@ A Dapr sidecar can also apply a configuration by using a `--config` flag to the 
 
 #### Kubernetes sidecar
 
-In Kubernetes mode the Dapr configuration is a Configuration resource, that is applied to the cluster. For example:
+In Kubernetes mode the Dapr configuration is a Configuration resource, that is applied to the cluster. 例如：
 
 ```bash
 kubectl apply -f myappconfig.yaml
@@ -30,7 +30,7 @@ You can use the Dapr CLI to list the Configuration resources
 dapr configurations -k
 ```
 
-A Dapr sidecar can apply a specific configuration by using a `dapr.io/config` annotation. For example:
+A Dapr sidecar can apply a specific configuration by using a `dapr.io/config` annotation. 例如：
 
 ```yml
   annotations:
@@ -58,7 +58,7 @@ The following configuration settings can be applied to Dapr application sidecars
 - [Turning on preview features](#turning-on-preview-features)
 - [Example sidecar configuration](#example-sidecar-configuration)
 
-#### Tracing
+#### 追踪
 
 Tracing configuration turns on tracing for an application.
 
@@ -75,7 +75,7 @@ tracing:
 
 The following table lists the properties for tracing:
 
-| Property                 | Type   | 说明                                                                                |
+| Property                 | Type   | Description                                                                       |
 | ------------------------ | ------ | --------------------------------------------------------------------------------- |
 | `samplingRate`           | string | Set sampling rate for tracing to be enabled or disabled.                          |
 | `stdout`                 | bool   | True write more verbose information to the traces                                 |
@@ -90,7 +90,7 @@ set `samplingRate : "0"` in the configuration. The valid range of samplingRate i
 The OpenTelemetry (otel) endpoint can also be configured via an environment variables. The presence of the OTEL_EXPORTER_OTLP_ENDPOINT environment variable
 turns on tracing for the sidecar.
 
-| Environment Variable          | 说明                                                                                 |
+| Environment Variable          | Description                                                                        |
 | ----------------------------- | ---------------------------------------------------------------------------------- |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | Sets the Open Telemetry (OTEL) server address, turns on tracing |
 | `OTEL_EXPORTER_OTLP_INSECURE` | Sets the connection to the endpoint as unencrypted (true/false) |
@@ -114,7 +114,7 @@ metrics:
 
 The following table lists the properties for metrics:
 
-| Property                    | Type    | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Property                    | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | --------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `enabled`                   | boolean | When set to true, the default, enables metrics collection and the metrics endpoint.                                                                                                                                                                                                                                                                                                                                                             |
 | `rules`                     | array   | Named rule to filter metrics. Each rule contains a set of `labels` to filter on and a `regex` expression to apply to the metrics path.                                                                                                                                                                                                                                                                                                          |
@@ -122,7 +122,7 @@ The following table lists the properties for metrics:
 
 To mitigate high memory usage and egress costs associated with [high cardinality metrics]({{< ref "metrics-overview\.md#high-cardinality-metrics" >}}) with the HTTP server, you should set the `metrics.http.increasedCardinality` property to `false`.
 
-Using rules, you can set regular expressions for every metric exposed by the Dapr sidecar. For example:
+Using rules, you can set regular expressions for every metric exposed by the Dapr sidecar. 例如：
 
 ```yml
 metrics:
@@ -137,7 +137,7 @@ metrics:
 
 See [metrics documentation]({{< ref "metrics-overview\.md" >}}) for more information.
 
-#### 日志
+#### Logging
 
 The logging section can be used to configure how logging works in the Dapr Runtime.
 
@@ -153,7 +153,7 @@ logging:
 
 The following table lists the properties for logging:
 
-| Property                      | Type    | 说明                                                                                                                                                                                                                                                                                                  |
+| Property                      | Type    | Description                                                                                                                                                                                                                                                                                         |
 | ----------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `apiLogging.enabled`          | boolean | The default value for the `--enable-api-logging` flag for `daprd` (and the corresponding `dapr.io/enable-api-logging` annotation): the value set in the Configuration spec is used as default unless a `true` or `false` value is passed to each Dapr Runtime. Default: `false`. |
 | `apiLogging.obfuscateURLs`    | boolean | When enabled, obfuscates the values of URLs in HTTP API logs (if enabled), logging the abstract route name rather than the full path being invoked, which could contain Personal Identifiable Information (PII). Default: `false`.                            |
@@ -183,7 +183,7 @@ appHttpPipeline: # for outgoing http calls
 
 The following table lists the properties for HTTP handlers:
 
-| Property | Type   | 说明                               |
+| Property | Type   | Description                      |
 | -------- | ------ | -------------------------------- |
 | `name`   | string | Name of the middleware component |
 | `type`   | string | Type of middleware component     |
@@ -314,7 +314,7 @@ A Dapr control plane configuration contains the following sections:
 
 The `mtls` section contains properties for mTLS.
 
-| Property                  | Type   | 说明                                                                                                                                                                                                                                          |
+| Property                  | Type   | Description                                                                                                                                                                                                                                 |
 | ------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `enabled`                 | bool   | If true, enables mTLS for communication between services and apps in the cluster.                                                                                                                                                           |
 | `allowedClockSkew`        | string | Allowed tolerance when checking the expiration of TLS certificates, to allow for clock skew. Follows the format used by [Go's time.ParseDuration](https://pkg.go.dev/time#ParseDuration). Default is `15m` (15 minutes). |

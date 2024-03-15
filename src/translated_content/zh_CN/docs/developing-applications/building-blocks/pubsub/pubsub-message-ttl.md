@@ -21,7 +21,7 @@ Dapr 允许对每个消息设置生存时间(TTL)。 这意味着应用程序可
 {{% alert title="注意" color="primary" %}}
 您还可以在创建时为给定的消息代理设置消息 TTL。 根据你正在使用的组件的具体特性，看看这是否合适。
 
-
+{{% /alert %}}
 
 ### 受支持的组件
 
@@ -39,7 +39,7 @@ Azure Service Bus支持[实体级别的生存时间](https://docs.microsoft.com/
 
 消息 TTL 可以设置在元数据中，作为发布请求的一部分：
 
-
+{{< tabs curl "Python SDK" "PHP SDK">}}
 
 {{% codetab %}}
 
@@ -47,7 +47,7 @@ Azure Service Bus支持[实体级别的生存时间](https://docs.microsoft.com/
 curl -X "POST" http://localhost:3500/v1.0/publish/pubsub/TOPIC_A?metadata.ttlInSeconds=120 -H "Content-Type: application/json" -d '{"order-number": "345"}'
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -69,7 +69,7 @@ with DaprClient() as d:
     print(req_data, flush=True)
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -85,7 +85,7 @@ $app->run(function(\DI\FactoryInterface $factory) {
 });
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -93,7 +93,7 @@ $app->run(function(\DI\FactoryInterface $factory) {
 
 ## 下一步
 
-- Learn about [topic scoping]({{< ref pubsub-scopes.md >}})
+- 了解[topic范围]({{< ref pubsub-scopes.md >}})
 - 学习 [如何配置具有多个命名空间的 Pub/Sub 组件]({{< ref pubsub-namespaces.md >}})
 - List of [pub/sub components]({{< ref supported-pubsub >}})
 - Read the [API reference]({{< ref pubsub_api.md >}})

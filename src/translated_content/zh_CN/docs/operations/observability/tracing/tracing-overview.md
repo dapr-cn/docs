@@ -72,7 +72,7 @@ In the following scenarios, Dapr does some of the work for you, with you then cr
 
 ##### Multiple service calls to different services from single service
 
-When you are calling multiple services from a single service, you need to propagate the trace headers. For example:
+When you are calling multiple services from a single service, you need to propagate the trace headers. 例如：
 
 ```
 service A -> service B
@@ -83,7 +83,7 @@ service A -> service D
 [ .. some code logic ..]
 ```
 
-In this case:
+本例中：
 
 1. When `service A` first calls `service B`, Dapr generates the trace headers in `service A`.
 2. The trace headers in `service A` are propagated to `service B`.

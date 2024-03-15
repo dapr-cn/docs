@@ -14,7 +14,7 @@ When Dapr runs, it matches it's own configured namespace with the namespace of t
 
 Namespaces can be used to limit component access to particular Dapr instances.
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 In self hosted mode, a developer can specify the namespace to a Dapr instance by setting the `NAMESPACE` environment variable.
@@ -52,7 +52,7 @@ setx NAMESPACE "production"
 # run Dapr as usual
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 Let's consider the following component in Kubernetes:
@@ -106,7 +106,7 @@ scopes:
 - app2
 ```
 
-### Community call demo
+### 社区示例
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8W-iBDNvCUM?start=1763" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -120,7 +120,7 @@ Read [Service invocation across namespaces]({{< ref "service-invocation-namespac
 
 Read [Configure Pub/Sub components with multiple namespaces]({{< ref "pubsub-namespaces.md" >}}) for more information on using namespaces with pub/sub.
 
-## 相关链接
+## Related links
 
 - [Configure Pub/Sub components with multiple namespaces]({{< ref "pubsub-namespaces.md" >}})
 - [Use secret scoping]({{< ref "secrets-scopes.md" >}})

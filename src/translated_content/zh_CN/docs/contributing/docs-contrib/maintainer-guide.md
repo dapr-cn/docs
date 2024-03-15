@@ -249,7 +249,7 @@ upmerge 后，为发布准备 docs 分支。 在两个单独的 PR 中，您需�
 {{% alert title="重要" color="primary" %}}
 此部分只能在安全管理员工作站（SAW）上完成。 如果您没有SAW设备，请向拥有该设备的团队成员寻求帮助。
 
-
+{{% /alert %}}
 
 1. 确保您是IDWeb中`DMAdaprweb`安全组的成员。
 

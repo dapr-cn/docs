@@ -59,7 +59,7 @@ If you wish to use MongoDB as an actor store, add this metadata option to your C
 
 ## Spec metadata fields
 
-| Field            |    Required   | Details                                                                                             | 如何使用Dapr扩展来开发和运行Dapr应用程序                                              |
+| Field            |    Required   | Details                                                                                             | Example                                                               |
 | ---------------- | :-----------: | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | server           | Y<sup>1</sup> | The server to connect to, when using DNS SRV record                                                 | `"server.example.com"`                                                |
 | host             | Y<sup>1</sup> | The host to connect to                                                                              | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
@@ -78,7 +78,7 @@ If you wish to use MongoDB as an actor store, add this metadata option to your C
 
 ## Setup MongoDB
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 You can run a single MongoDB instance locally using Docker:
@@ -108,7 +108,7 @@ The username is typically `admin` by default.
 
 This state store supports [Time-To-Live (TTL)]({{< ref state-store-ttl.md >}}) for records stored with Dapr. When storing data using Dapr, you can set the `ttlInSeconds` metadata property to indicate when the data should be considered "expired".
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

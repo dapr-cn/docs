@@ -45,7 +45,7 @@ Note that you can not use secret just for username/password. If you use secret, 
 
 ## Spec metadata fields
 
-| Field             | Required | Binding support | Details                                                                                                                      | 如何使用Dapr扩展来开发和运行Dapr应用程序                     |
+| Field             | Required | Binding support | Details                                                                                                                      | Example                                      |
 | ----------------- | :------: | --------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | `url`             |     Y    | Output          | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"` |
 | `pemPath`         |     Y    | Output          | Path to the PEM file. Used with SSL connection                                                                               | `"path/to/pem/file"`                         |
@@ -89,7 +89,7 @@ This component supports **output binding** with the following operations:
 
 This binding supports parametrized queries, which allow separating the SQL query itself from user-supplied values. The usage of parametrized queries is **strongly recommended** for security reasons, as they prevent [SQL Injection attacks](https://owasp.org/www-community/attacks/SQL_Injection).
 
-For example:
+例如：
 
 ```sql
 -- ❌ WRONG! Includes values in the query and is vulnerable to SQL Injection attacks.
@@ -185,7 +185,7 @@ The `close` operation can be used to explicitly close the DB connection and retu
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

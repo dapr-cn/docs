@@ -339,7 +339,7 @@ The log output will appear like the following:"
 
 As an additional tool to alert you to the upcoming certificate expiration beginning with release 1.7.0 the CLI now prints the certificate expiration status whenever you interact with a Kubernetes-based deployment.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```bash
 dapr status -k
@@ -396,7 +396,7 @@ spec:
 
 In addition to the Dapr configuration, you also need to provide the TLS certificates to each Dapr sidecar instance. You can do so by setting the following environment variables before running the Dapr instance:
 
-
+{{< tabs "Linux/MacOS" Windows >}}
 
 {{% codetab %}}
 
@@ -407,7 +407,7 @@ export DAPR_CERT_KEY=`cat $HOME/.dapr/certs/issuer.key`
 export NAMESPACE=default
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -418,7 +418,7 @@ $env:DAPR_CERT_KEY=$(Get-Content -raw $env:USERPROFILE\.dapr\certs\issuer.key)
 $env:NAMESPACE="default"
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

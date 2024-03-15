@@ -5,7 +5,7 @@ linkTitle: publish
 description: Detailed information on the publish CLI command
 ---
 
-### 说明
+### Description
 
 Publish a pub-sub event.
 
@@ -21,7 +21,7 @@ dapr publish [flags]
 
 ### Flags
 
-| Name                         | Environment Variable | Default                                                      | 说明                                                                       |
+| Name                         | Environment Variable | Default                                                      | Description                                                              |
 | ---------------------------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | `--publish-app-id`, `-i`     |                      | The ID that represents the app from which you are publishing |                                                                          |
 | `--pubsub`, `-p`             |                      | The name of the pub/sub component                            |                                                                          |

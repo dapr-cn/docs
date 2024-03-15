@@ -19,7 +19,7 @@ description: 开始使用Dapr的状态管理构建块
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -154,7 +154,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -300,7 +300,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -437,7 +437,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -579,7 +579,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -716,7 +716,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -724,7 +724,7 @@ spec:
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -845,7 +845,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -974,7 +974,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -1097,7 +1097,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -1225,7 +1225,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -1348,7 +1348,7 @@ spec:
 - `metadata/name`是您的应用程序与组件通信的方式（在代码示例中称为`DAPR_STORE_NAME`）。
 - `spec/metadata`定义了组件使用的Redis实例的连接。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

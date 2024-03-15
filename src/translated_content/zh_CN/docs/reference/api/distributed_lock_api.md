@@ -18,7 +18,7 @@ POST http://localhost:<daprPort>/v1.0-alpha1/lock/<storename>
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                                |
+| Parameter   | Description                                                                                                                                                                       |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daprPort`  | The Dapr port                                                                                                                                                                     |
 | `storename` | The `metadata.name` field component file. Refer to the [component schema]({{< ref component-schema.md >}}) |
@@ -29,7 +29,7 @@ None
 
 ### HTTP Response codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 204  | Empty Response     |
@@ -48,7 +48,7 @@ The lock endpoint receives the following JSON payload:
 }
 ```
 
-| Field           | 说明                                                                      |
+| Field           | Description                                                             |
 | --------------- | ----------------------------------------------------------------------- |
 | resourceId      | The ID of the resource to lock. Can be any value                        |
 | lockOwner       | The name of the lock owner. Should be set to a unique value per-request |
@@ -92,7 +92,7 @@ POST http://localhost:<daprPort>/v1.0-alpha1/unlock/<storename>
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                                |
+| Parameter   | Description                                                                                                                                                                       |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daprPort`  | The Dapr port                                                                                                                                                                     |
 | `storename` | The `metadata.name` field component file. Refer to the [component schema]({{< ref component-schema.md >}}) |
@@ -103,7 +103,7 @@ None
 
 ### HTTP Response codes
 
-| Code | 说明                 |
+| Code | Description        |
 | ---- | ------------------ |
 | 200  | Request successful |
 | 204  | Empty Response     |
@@ -133,7 +133,7 @@ The unlock endpoint returns the following payload:
 
 The `status` field contains the following response codes:
 
-| Code | 说明                            |
+| Code | Description                   |
 | ---- | ----------------------------- |
 | 0    | Success                       |
 | 1    | Lock doesn't exist            |

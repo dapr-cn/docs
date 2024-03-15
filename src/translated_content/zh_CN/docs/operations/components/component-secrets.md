@@ -88,7 +88,7 @@ auth:
 
 The above "Secret is a string" case yaml tells Dapr to extract a connection string named `asbNsConnstring` from the defined `secretStore` and assign the value to the `connectionString` field in the component since there is no key embedded in the "secret" from the `secretStore` because it is a plain string. This requires the secret `name` and secret `key` to be identical.
 
-## 如何使用Dapr扩展来开发和运行Dapr应用程序
+## Example
 
 ### Referencing a Kubernetes secret
 
@@ -167,7 +167,7 @@ These resources grant Dapr permissions to get secrets from the Kubernetes secret
 In production scenario to limit Dapr's access to certain secret resources alone, you can use the `resourceNames` field. See this [link](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-resources) for further explanation.
 {{% /alert %}}
 
-## 相关链接
+## Related links
 
 - [Use secret scoping]({{< ref "secrets-scopes.md" >}})
 - [Limit the secrets that can be read from secret stores]({{< ref "secret-scope.md" >}})

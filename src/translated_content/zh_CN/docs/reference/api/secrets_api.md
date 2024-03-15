@@ -18,7 +18,7 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>
 
 #### URL Parameters
 
-| Parameter         | 说明                                                  |
+| Parameter         | Description                                         |
 | ----------------- | --------------------------------------------------- |
 | daprPort          | the Dapr port                                       |
 | secret-store-name | the name of the secret store to get the secret from |
@@ -28,13 +28,13 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>
 
 #### Query Parameters
 
-Some secret stores support **optional**, per-request metadata properties. Use query parameters to provide those properties. For example:
+Some secret stores support **optional**, per-request metadata properties. Use query parameters to provide those properties. 例如：
 
 ```
 GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/<name>?metadata.version_id=15
 ```
 
-Observe that not all secret stores support the same set of parameters. For example:
+Observe that not all secret stores support the same set of parameters. 例如：
 
 - Hashicorp Vault, GCP Secret Manager and AWS Secret Manager support the `version_id` parameter
 - Only AWS Secret Manager supports the `version_stage` parameter
@@ -82,7 +82,7 @@ The above example demonstrates a response from a secret store with name/value se
 
 #### Response Codes
 
-| Code | 说明                                               |
+| Code | Description                                      |
 | ---- | ------------------------------------------------ |
 | 200  | OK                                               |
 | 204  | Secret not found                                 |
@@ -113,7 +113,7 @@ GET http://localhost:<daprPort>/v1.0/secrets/<secret-store-name>/bulk
 
 #### URL Parameters
 
-| Parameter         | 说明                                                  |
+| Parameter         | Description                                         |
 | ----------------- | --------------------------------------------------- |
 | daprPort          | the Dapr port                                       |
 | secret-store-name | the name of the secret store to get the secret from |
@@ -147,7 +147,7 @@ curl http://localhost:3500/v1.0/secrets/kubernetes/bulk
 
 #### Response Codes
 
-| Code | 说明                                               |
+| Code | Description                                      |
 | ---- | ------------------------------------------------ |
 | 200  | OK                                               |
 | 400  | Secret store is missing or misconfigured         |

@@ -23,7 +23,7 @@ description: 开始使用 Dapr 的发布和订阅构建块
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -207,7 +207,7 @@ with DaprClient() as client:
     )
 ```
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -361,7 +361,7 @@ await client.pubsub.publish(PUBSUB_NAME, PUBSUB_TOPIC, order);
 console.log("Published data: " + JSON.stringify(order));
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -521,7 +521,7 @@ await client.PublishEventAsync("orderpubsub", "orders", order);
 Console.WriteLine("Published data: " + order);
 ```
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -691,7 +691,7 @@ client.publishEvent(
 logger.info("Published data: " + order.getOrderId());
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -850,7 +850,7 @@ if err := client.PublishEvent(ctx, PUBSUB_NAME, PUBSUB_TOPIC, []byte(order)); er
 fmt.Println("Published data: ", order)
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -858,7 +858,7 @@ fmt.Println("Published data: ", order)
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -1036,7 +1036,7 @@ spec:
 - `spec/metadata`定义了组件实例的连接。
 - `scopes`指定哪个应用程序可以使用该组件。
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -1197,7 +1197,7 @@ spec:
 - `spec/metadata`定义了组件实例的连接。
 - `scopes`指定哪个应用程序可以使用该组件。
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -1353,7 +1353,7 @@ spec:
 - `spec/metadata`定义了组件实例的连接。
 - `scopes`指定哪个应用程序可以使用该组件。
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -1521,7 +1521,7 @@ scopes:
 - `spec/metadata`定义了组件实例的连接。
 - `scopes`指定哪个应用程序可以使用该组件。
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -1682,7 +1682,7 @@ scopes:
 - `spec/metadata`定义了组件实例的连接。
 - `scopes`指定哪个应用程序可以使用该组件。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

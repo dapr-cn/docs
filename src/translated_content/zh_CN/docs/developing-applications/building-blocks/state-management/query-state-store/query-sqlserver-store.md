@@ -22,7 +22,7 @@ Dapr 在保存和检索状态时不会转换状态值。 Dapr要求所有的状�
 {{% alert title="注意" color="primary" %}}
 当您为 Dapr 配置 Azure SQL 数据库时，需要明确指定要使用的表名。 下面的 Azure SQL 示例假设您已经连接到了一个名为 "states" 的正确数据库。
 
-
+{{% /alert %}}
 
 ## 通过 App ID 列出键
 
@@ -73,3 +73,4 @@ SELECT * FROM states WHERE [Key] = 'mypets||cat||leroy||food'
 {{% alert title="警告" color="warning" %}}
 您不应该手动更新或删除存储中的状态。 所有的写入和删除操作都应该通过 Dapr 运行时来完成。 \*\*唯一的例外：\*\*通常需要在状态存储中删除 actor 记录，一旦您知道这些不再使用，以防止未使用的 actor 实例的累积，这些实例可能永远不会再次加载。
 
+{{% /alert %}}

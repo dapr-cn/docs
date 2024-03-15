@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 配置概览
-linkTitle: Overview
+linkTitle: 概述
 weight: 1000
 description: Dapr 配置管理构建块概述
 ---

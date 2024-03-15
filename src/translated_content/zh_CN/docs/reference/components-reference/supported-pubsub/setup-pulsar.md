@@ -68,7 +68,7 @@ The above example uses secrets as plain strings. It is recommended to use a [sec
 
 ## Spec metadata fields
 
-| Field                   | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                 |
+| Field                   | Required | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Example                                                                                  |
 | ----------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
 | host                    |     Y    | Address of the Pulsar broker. Default is `"localhost:6650"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `"localhost:6650"` OR `"http://pulsar-pj54qwwdpz4b-pulsar.ap-sg.public.pulsar.com:8080"` |
 | enableTLS               |     N    | Enable TLS.  Default: `"false"`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `"true"`, `"false"`                                                                      |
@@ -94,7 +94,7 @@ The above example uses secrets as plain strings. It is recommended to use a [sec
 
 To authenticate to pulsar using a static [JWT token](https://pulsar.apache.org/docs/en/security-jwt), you can use the following metadata field:
 
-| Field | Required | Details                        | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                      |
+| Field | Required | Details                        | Example                                                                                       |
 | ----- | :------: | ------------------------------ | --------------------------------------------------------------------------------------------- |
 | token |     N    | Token used for authentication. | [How to create Pulsar token](https://pulsar.apache.org/docs/en/security-jwt/#generate-tokens) |
 
@@ -124,7 +124,7 @@ It is recommended that you use a secret reference for the client secret.
 The pulsar OAuth2 authenticator is not specifically complaint with OIDC so it is your responsibility to ensure fields are compliant. For example, the issuer URL must use the `https` protocol, the requested scopes include `openid`, etc.
 If the `oauth2TokenCAPEM` field is omitted then the system's certificate pool is used for connecting to the OAuth2 issuer if using `https`.
 
-| Field              | Required | Details                                                                                                                | 如何使用Dapr扩展来开发和运行Dapr应用程序                                |
+| Field              | Required | Details                                                                                                                | Example                                                 |
 | ------------------ | :------: | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | oauth2TokenURL     |     N    | URL to request the OIDC client_credentials token from. Must not be empty.                         | "https\://oauth.example.com/o/oauth2/token"\`           |
 | oauth2TokenCAPEM   |     N    | CA PEM certificate bundle to connect to the OAuth2 issuer. If not defined, the system's certificate pool will be used. | `"---BEGIN CERTIFICATE---\n...\n---END CERTIFICATE---"` |
@@ -287,7 +287,7 @@ When invoking the Pulsar pub/sub, it's possible to provide an optional partition
 
 The parameter name is `partitionKey`.
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```shell
 curl -X POST http://localhost:3500/v1.0/publish/myPlusar/myTopic?metadata.partitionKey=key1 \
@@ -323,7 +323,7 @@ To ensure that messages arrive in order for each consumer subscribed to a specif
 
 ## Create a Pulsar instance
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
@@ -338,7 +338,7 @@ docker run -it \
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 Refer to the following [Helm chart](https://pulsar.apache.org/docs/helm-overview) Documentation.
@@ -346,7 +346,7 @@ Refer to the following [Helm chart](https://pulsar.apache.org/docs/helm-overview
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

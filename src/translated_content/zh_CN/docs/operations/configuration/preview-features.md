@@ -20,7 +20,7 @@ The current list of preview features can be found [here]({{<ref support-preview-
 
 The `features` section under the `Configuration` spec contains the following properties:
 
-| Property | Type   | 说明                                                       |
+| Property | Type   | Description                                              |
 | -------- | ------ | -------------------------------------------------------- |
 | name     | string | The name of the preview feature that is enabled/disabled |
 | enabled  | bool   | Boolean specifying if the feature is enabled or disabled |
@@ -69,7 +69,7 @@ In Kubernetes mode, the configuration must be provided via a configuration compo
 kubectl apply -f previewConfig.yaml
 ```
 
-This configuration component can then be referenced in any application by modifying the application's configuration to reference that specific configuration component via the `dapr.io/config` element. For example:
+This configuration component can then be referenced in any application by modifying the application's configuration to reference that specific configuration component via the `dapr.io/config` element. 例如：
 
 ```yaml
 apiVersion: apps/v1

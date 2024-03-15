@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Secret store components
-linkTitle: Secret stores
+linkTitle: Secret stores（密钥存储）
 description: Guidance on setting up different secret store components
 weight: 800
 aliases:
@@ -61,7 +61,7 @@ When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernet
 
 Once you have created the component's YAML file, follow these instructions to apply it based on your hosting environment:
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 To run locally, create a `components` dir containing the YAML file and provide the path to the `dapr run` command with the flag `--resources-path`.
@@ -74,7 +74,7 @@ To deploy in Kubernetes, assuming your component file is named `secret-store.yam
 kubectl apply -f secret-store.yaml
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -82,7 +82,7 @@ kubectl apply -f secret-store.yaml
 
 Visit the [secret stores reference]({{< ref supported-secret-stores >}}) for a full list of supported secret stores.
 
-## 相关链接
+## Related links
 
 - [Supported secret store components]({{< ref supported-secret-stores >}})
 - [Secrets building block]({{< ref secrets >}})

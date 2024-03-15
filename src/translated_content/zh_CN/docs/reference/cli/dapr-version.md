@@ -5,7 +5,7 @@ linkTitle: version
 description: Print Dapr runtime and CLI version.
 ---
 
-### 说明
+### Description
 
 Print the version for `dapr` CLI and `daprd` executables either in normal or JSON formats.
 
@@ -21,7 +21,7 @@ dapr version [flags]
 
 ### Flags
 
-| Name             | Environment Variable | Default | 说明                                               |
+| Name             | Environment Variable | Default | Description                                      |
 | ---------------- | -------------------- | ------- | ------------------------------------------------ |
 | `--help`, `-h`   |                      |         | Print this help message                          |
 | `--output`, `-o` |                      |         | Output format (options: json) |

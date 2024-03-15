@@ -53,7 +53,7 @@ If you are using Helm, install the [Helm v3 client](https://helm.sh/docs/intro/i
 The latest Dapr Helm chart no longer supports Helm v2. [Migrate from Helm v2 to Helm v3](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/).
 {{% /alert %}}
 
-## 疑难解答
+## Troubleshooting
 
 The external IP address of load balancer is not shown from `kubectl get svc`.
 
@@ -76,9 +76,9 @@ $ minikube service calculator-front-end
 🎉  Opening kubernetes service  default/calculator-front-end in default browser...
 ```
 
-## 相关链接
+## Related links
 
-- [尝试 Dapr 快速入门]({{< ref quickstarts.md >}})
+- [Try out a Dapr quickstart]({{< ref quickstarts.md >}})
 - Learn how to [deploy Dapr on your cluster]({{< ref kubernetes-deploy.md >}})
 - [Upgrade Dapr on Kubernetes]({{< ref kubernetes-upgrade.md >}})
 - [Kubernetes production guidelines]({{< ref kubernetes-production.md >}})

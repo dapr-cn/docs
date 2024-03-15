@@ -54,7 +54,7 @@ If you understand the above, but want to deploy the Dapr control plane to Window
 helm install dapr dapr/dapr --set global.daprControlPlaneOs=windows
 ```
 
-
+{{% /alert %}}
 
 ## Install Dapr applications
 
@@ -172,7 +172,7 @@ kubectl delete -f deploy_windows.yaml
 helm uninstall dapr
 ```
 
-## 相关链接
+## Related links
 
 - See the [official Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) for examples of more advanced configuration via node affinity
 - [Get started: Prep Windows for containers](https://docs.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment)

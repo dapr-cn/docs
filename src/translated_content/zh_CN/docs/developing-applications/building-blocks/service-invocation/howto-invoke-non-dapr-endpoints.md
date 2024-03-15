@@ -19,7 +19,7 @@ weight: 40
 
 ## HTTP服务调用到外部服务或非Dapr端点
 
-有时候你需要调用一个非 Dapr 的 HTTP 终端点。 For example:
+有时候你需要调用一个非 Dapr 的 HTTP 终端点。 例如：
 
 - 您可以选择仅在整个应用程序的一部分中使用 Dapr，包括旧代码开发
 - 您可能无法访问代码以迁移现有应用程序以使用 Dapr
@@ -78,7 +78,7 @@ weight: 40
 
 ### 在调用 Dapr 启用的应用程序时使用 appId
 
-AppID 始终用于调用 Dapr 应用程序，使用 `appID` 和 `my-method`。 阅读[操作方法：使用HTTP调用服务]({{< ref howto-invoke-discover-services.md >}})指南，了解更多信息。 For example:
+AppID 始终用于调用 Dapr 应用程序，使用 `appID` 和 `my-method`。 阅读[操作方法：使用HTTP调用服务]({{< ref howto-invoke-discover-services.md >}})指南，了解更多信息。 例如：
 
 ```sh
 localhost:3500/v1.0/invoke/<appID>/method/<my-method>
@@ -134,13 +134,13 @@ spec:
         key: tls.key
 ```
 
-## Related Links
+## 相关链接
 
 - [HTTPEndpoint reference]({{< ref httpendpoints-schema.md >}})
 - [服务调用概述]({{< ref service-invocation-overview\.md >}})
 - [服务调用API规范]({{< ref service_invocation_api.md >}})
 
-## Community call demo
+## 社区示例
 
 观看此 [视频](https://youtu.be/BEXJgLsO4hA?t=364) 以了解如何使用服务调用来调用非 Dapr 终端点。
 

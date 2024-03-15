@@ -33,7 +33,7 @@ scopes:
 
 ## Spec fields
 
-| Field              | Required | Details                                                                                                          | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                            |
+| Field              | Required | Details                                                                                                          | Example                                                                                                                                             |
 | ------------------ | :------: | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | apiVersion         |     Y    | The version of the Dapr (and Kubernetes if applicable) API you are calling                    | `dapr.io/v1alpha1`                                                                                                                                  |
 | kind               |     Y    | The type of resource. For components is must always be `Component`                                               | `Component`                                                                                                                                         |
@@ -84,12 +84,12 @@ spec:
       value: "false"
 ```
 
-## 相关链接
+## Related links
 
-- [Components concept]({{< ref components-concept.md >}})
+- [Dapr组件概念]({{< ref components-concept.md >}})
 - [Reference secrets in component definitions]({{< ref component-secrets.md >}})
 - [Supported state stores]({{< ref supported-state-stores >}})
 - [Supported pub/sub brokers]({{< ref supported-pubsub >}})
 - [Supported secret stores]({{< ref supported-secret-stores >}})
-- [Supported bindings]({{< ref supported-bindings >}})
+- [支持的绑定列表]({{< ref supported-bindings >}})
 - [Set component scopes]({{< ref component-scopes.md >}})

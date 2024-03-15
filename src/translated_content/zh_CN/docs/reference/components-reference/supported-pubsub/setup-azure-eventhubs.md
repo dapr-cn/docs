@@ -60,7 +60,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                     | Required | Details                                                                                                                                                                                                                                                                                                                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                                                                                                                                           |
+| Field                     | Required | Details                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                                                                                                                                                                                                            |
 | ------------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `connectionString`        |    Y\*   | Connection string for the Event Hub or the Event Hub namespace.<br>\* Mutally exclusive with `eventHubNamespace` field.<br>\* Required when not using [Microsoft Entra ID Authentication]({{< ref "authenticating-azure.md" >}})                                                                       | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` or `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key}"` |
 | `eventHubNamespace`       |    Y\*   | The Event Hub Namespace name.<br>\* Mutally exclusive with `connectionString` field.<br>\* Required when using [Microsoft Entra ID Authentication]({{< ref "authenticating-azure.md" >}})                                                                                                              | `"namespace"`                                                                                                                                                                                                                                                      |
@@ -125,7 +125,7 @@ Azure Eventhubs supports sending and receiving multiple messages in a single ope
 
 To set the metadata for bulk publish operation, set the query parameters on the HTTP request or the gRPC metadata, [as documented in the API reference]({{< ref pubsub_api >}}).
 
-| 元数据                        | Default   |
+| Metadata                   | Default   |
 | -------------------------- | --------- |
 | `metadata.maxBulkPubBytes` | `1000000` |
 
@@ -144,7 +144,7 @@ When subscribing to a topic, you can configure the checkpointing frequency in a 
 
 [Learn more about checkpointing](https://learn.microsoft.com/azure/event-hubs/event-hubs-features#checkpointing).
 
-| 元数据                                        | Default |
+| Metadata                                   | Default |
 | ------------------------------------------ | ------- |
 | `metadata.checkPointFrequencyPerPartition` | `1`     |
 
@@ -231,7 +231,7 @@ For example, the headers of a delivered HTTP subscription message would contain:
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

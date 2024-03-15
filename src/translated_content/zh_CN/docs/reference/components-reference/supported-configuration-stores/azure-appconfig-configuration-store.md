@@ -50,7 +50,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                 | Required | Details                                                                                                                                                                                                                                                                                                                        | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                 |
+| Field                 | Required | Details                                                                                                                                                                                                                                                                                                                        | Example                                                                                                  |
 | --------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | connectionString      |    Y\*   | Connection String for the Azure App Configuration instance. No Default. Can be `secretKeyRef` to use a secret reference. \*Mutally exclusive with host field. \*Not to be used when [Azure Authentication](https://docs.dapr.io/developing-applications/integrations/azure/azure-authentication/authenticating-azure/) is used | `Endpoint=https://foo.azconfig.io;Id=osOX-l9-s0:sig;Secret=00000000000000000000000000000000000000000000` |
 | host                  |    N\*   | Endpoint for the Azure App Configuration instance. No Default. \*Mutally exclusive with connectionString field. \*To be used when [Azure Authentication](https://docs.dapr.io/developing-applications/integrations/azure/azure-authentication/authenticating-azure/) is used                                                   | `https://dapr.azconfig.io`                                                                               |
@@ -104,7 +104,7 @@ The label can be populated using query parameters in the request URL:
 GET curl http://localhost:<daprPort>/v1.0/configuration/<store-name>?key=<key name>&metadata.label=<label value>
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Configuration building block]({{< ref configuration-api-overview >}})

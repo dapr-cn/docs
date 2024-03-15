@@ -104,7 +104,7 @@ description: How to install Fluentd, Elastic Search, and Kibana to search logs i
 
 2. Enable JSON formatted log in Dapr sidecar
 
-   Add the `dapr.io/log-as-json: "true"` annotation to your deployment yaml. For example:
+   Add the `dapr.io/log-as-json: "true"` annotation to your deployment yaml. 例如：
 
    ```yaml
    apiVersion: apps/v1

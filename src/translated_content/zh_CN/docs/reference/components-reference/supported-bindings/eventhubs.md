@@ -66,7 +66,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                     | Required | Binding support | Details                                                                                                                                                                                                                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                                                                                                                                           |
+| Field                     | Required | Binding support | Details                                                                                                                                                                                                                                                                                                 | Example                                                                                                                                                                                                                                                            |
 | ------------------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `eventHub`                |    Y\*   | Input/Output    | The name of the Event Hubs hub ("topic"). Required if using Microsoft Entra ID authentication or if the connection string doesn't contain an `EntityPath` value                                                                                                                      | `mytopic`                                                                                                                                                                                                                                                          |
 | `connectionString`        |    Y\*   | Input/Output    | Connection string for the Event Hub or the Event Hub namespace.<br>\* Mutally exclusive with `eventHubNamespace` field.<br>\* Required when not using [Microsoft Entra ID Authentication]({{< ref "authenticating-azure.md" >}}) | `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={EventHub}"` or `"Endpoint=sb://{EventHubNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key}"` |
@@ -129,7 +129,7 @@ For example, the headers of a HTTP `Read()` response would contain:
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

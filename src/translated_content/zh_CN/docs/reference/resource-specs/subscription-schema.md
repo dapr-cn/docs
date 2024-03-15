@@ -38,7 +38,7 @@ scopes:
 
 ### Spec fields
 
-| Field           | Required | Details                                                                                                                                                                                                                                                                                                                                                                                          | 如何使用Dapr扩展来开发和运行Dapr应用程序                             |
+| Field           | Required | Details                                                                                                                                                                                                                                                                                                                                                                                          | Example                                              |
 | --------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
 | topic           |     Y    | The name of the topic to which your component subscribes.                                                                                                                                                                                                                                                                                                                                        | `orders`                                             |
 | routes          |     Y    | The routes configuration for this topic, including specifying the condition for sending a message to a specific path. Includes the following fields: <br><ul><li>match: The CEL expression used to match the event. If not specified, the route is considered the default. </li><li>path: The path for events that match this rule. </li></ul>The endpoint to which all topic messages are sent. | `match: event.type == "widget"` <br>`path: /widgets` |
@@ -70,15 +70,15 @@ scopes:
 
 ### Spec fields
 
-| Field           | Required | Details                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| --------------- | :------: | ----------------------------------------------------------------------- | ------------------------ |
-| topic           |     Y    | The name of the topic to which your component subscribes.               | `orders`                 |
-| route           |     Y    | The endpoint to which all topic messages are sent.                      | `/checkout`              |
-| pubsubname      |     N    | The name of your pub/sub component.                                     | `pubsub`                 |
-| deadlettertopic |     N    | The name of the dead letter topic that forwards undeliverable messages. | `poisonMessages`         |
-| bulksubscribe   |     N    | Enable bulk subscribe properties.                                       | `true`, `false`          |
+| Field           | Required | Details                                                                 | Example          |
+| --------------- | :------: | ----------------------------------------------------------------------- | ---------------- |
+| topic           |     Y    | The name of the topic to which your component subscribes.               | `orders`         |
+| route           |     Y    | The endpoint to which all topic messages are sent.                      | `/checkout`      |
+| pubsubname      |     N    | The name of your pub/sub component.                                     | `pubsub`         |
+| deadlettertopic |     N    | The name of the dead letter topic that forwards undeliverable messages. | `poisonMessages` |
+| bulksubscribe   |     N    | Enable bulk subscribe properties.                                       | `true`, `false`  |
 
-## 相关链接
+## Related links
 
 - [Learn more about the declarative subscription method]({{< ref "subscription-methods.md#declarative-subscriptions" >}})
 - [Learn more about dead letter topics]({{< ref pubsub-deadletter.md >}})

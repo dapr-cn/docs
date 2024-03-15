@@ -32,7 +32,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field              | Required | Binding support | Details                                                                                                                                                                          | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                               |
+| Field              | Required | Binding support | Details                                                                                                                                                                          | Example                                                                                                |
 | ------------------ | :------: | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `connectionString` |     Y    | Output          | The Azure SignalR connection string                                                                                                                                              | `"Endpoint=https://<your-azure-signalr>.service.signalr.net;AccessKey=<your-access-key>;Version=1.0;"` |
 | `hub`              |     N    | Output          | Defines the hub in which the message will be send. The hub can be dynamically defined as a metadata value when publishing to an output binding (key is "hub") | `"myhub"`                                                                                              |
@@ -89,7 +89,7 @@ Applications publishing to an Azure SignalR output binding should send a message
 
 For more information on integration Azure SignalR into a solution check the [documentation](https://docs.microsoft.com/azure/azure-signalr/)
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

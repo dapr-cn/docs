@@ -53,7 +53,7 @@ $app->run(fn(\Dapr\Client\DaprClient $daprClient) => $daprClient->saveState(stor
 
 硬编码的键名很有用，但是为什么不让状态对象可复用性更高呢？ 当提交事务或保存对象为状态时，您可以传递一个应用于对象中每个键的前缀。
 
-
+{{< tabs "Transaction prefix" "StateManager prefix" >}}
 
 {{% codetab %}}
 
@@ -71,7 +71,8 @@ $app->run(function (TransactionObject $object ) {
 });
 ```
 
-
+{{% /codetab %}}
+{{% codetab %}}
 
 ```php
 <?php
@@ -90,3 +91,4 @@ $app->run(function(\Dapr\State\StateManager $stateManager) {
 
 {{% /codetab %}}
 
+{{< /tabs >}}

@@ -38,7 +38,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field       | Required | Binding support | Details                                                               | 如何使用Dapr扩展来开发和运行Dapr应用程序             |
+| Field       | Required | Binding support | Details                                                               | Example                              |
 | ----------- | :------: | --------------- | --------------------------------------------------------------------- | ------------------------------------ |
 | `bucket`    |     Y    | Output          | The name of the Huawei OBS bucket to write to                         | `"My-OBS-Bucket"`                    |
 | `endpoint`  |     Y    | Output          | The specific Huawei OBS endpoint                                      | `"obs.cn-north-4.myhuaweicloud.com"` |
@@ -73,13 +73,15 @@ To perform a create operation, invoke the Huawei OBS binding with a `POST` metho
 
 ##### Save text to a random generated UUID file
 
-
+{{< tabs Windows Linux >}}
+{{% codetab %}}
+On Windows, utilize cmd prompt (PowerShell has different escaping mechanism)
 
 ```bash
 curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -88,13 +90,13 @@ curl -d '{ "operation": "create", "data": "Hello World" }' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ##### Save text to a specific file
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -103,7 +105,7 @@ curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\", \"metadata\": {
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -112,7 +114,7 @@ curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "key": "m
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -138,9 +140,9 @@ To upload a binary file (for example, _.jpg_, _.zip_), invoke the Huawei OBS bin
 }
 ```
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -149,7 +151,7 @@ curl -d "{ \"operation\": \"upload\", \"data\": { \"sourceFile\": \".\my-test-fi
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -158,7 +160,7 @@ curl -d '{ "operation": "upload", "data": { "sourceFile": "./my-test-file.jpg" }
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -183,9 +185,9 @@ The metadata parameters are:
 
 - `key` - the name of the object
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -193,7 +195,7 @@ The metadata parameters are:
 curl -d '{ \"operation\": \"get\", \"metadata\": { \"key\": \"my-test-file.txt\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -202,7 +204,7 @@ curl -d '{ "operation": "get", "metadata": { "key": "my-test-file.txt" }}' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -231,7 +233,7 @@ The metadata parameters are:
 
 ##### Delete object
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -239,7 +241,7 @@ The metadata parameters are:
 curl -d '{ \"operation\": \"delete\", \"metadata\": { \"key\": \"my-test-file.txt\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -248,7 +250,7 @@ curl -d '{ "operation": "delete", "metadata": { "key": "my-test-file.txt" }}' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -279,9 +281,9 @@ The data parameters are:
 - `marker` - (optional) marker is where you want Huawei OBS to start listing from. Huawei OBS starts listing after this specified key. Marker can be any key in the bucket. The marker value may then be used in a subsequent call to request the next set of list items.
 - `delimiter` - (optional) A delimiter is a character you use to group keys. It returns objects/files with their object key other than that is specified by the delimiter pattern.
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -289,7 +291,7 @@ The data parameters are:
 curl -d '{ \"operation\": \"list\", \"data\": { \"maxResults\": 5, \"prefix\": \"dapr-\", \"marker\": \"obstest\", \"delimiter\": \"jpg\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -298,7 +300,7 @@ curl -d '{ "operation": "list", "data": { "maxResults": 5, "prefix": "dapr-", "m
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -306,7 +308,7 @@ curl -d '{ "operation": "list", "data": { "maxResults": 5, "prefix": "dapr-", "m
 
 The response body contains the list of found objects.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

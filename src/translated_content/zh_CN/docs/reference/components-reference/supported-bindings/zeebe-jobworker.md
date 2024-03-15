@@ -56,7 +56,7 @@ spec:
 
 ## Spec metadata fields
 
-| Field                    | Required | Binding support | Details                                                                                                                                                                                                                                                                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                       |
+| Field                    | Required | Binding support | Details                                                                                                                                                                                                                                                                                                 | Example                                        |
 | ------------------------ | :------: | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
 | `gatewayAddr`            |     Y    | Input           | Zeebe gateway address                                                                                                                                                                                                                                                                                   | `"localhost:26500"`                            |
 | `gatewayKeepAlive`       |     N    | Input           | Sets how often keep alive messages should be sent to the gateway. Defaults to 45 seconds                                                                                                                                                                                                                | `"45s"`                                        |
@@ -111,7 +111,7 @@ Task headers will be passed by the binding as metadata (HTTP headers) to the job
 The binding will also pass the following job related variables as metadata. The values will be passed as string. The table contains also the
 original data type so that it can be converted back to the equivalent data type in the used programming language for the worker.
 
-| 元数据                                | Data type | 说明                                                                                              |
+| Metadata                           | Data type | Description                                                                                     |
 | ---------------------------------- | --------- | ----------------------------------------------------------------------------------------------- |
 | X-Zeebe-Job-Key                    | int64     | The key, a unique identifier for the job                                                        |
 | X-Zeebe-Job-Type                   | string    | The type of the job (should match what was requested)                        |
@@ -126,7 +126,7 @@ original data type so that it can be converted back to the equivalent data type 
 | X-Zeebe-Deadline                   | int64     | When the job can be activated again, sent as a UNIX epoch timestamp                             |
 | X-Zeebe-Autocomplete               | bool      | The autocomplete status that is defined in the binding metadata                                 |
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

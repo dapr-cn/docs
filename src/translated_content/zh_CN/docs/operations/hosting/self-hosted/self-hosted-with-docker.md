@@ -107,7 +107,7 @@ Each container will receive a unique IP on that network and be able to communica
 
 The syntax and tooling of Docker Compose is outside the scope of this article, however, it is recommended you refer to the [official Docker documentation](https://docs.docker.com/compose/) for further details.
 
-In order to run your applications using Dapr and Docker Compose you'll need to define the sidecar pattern in your `docker-compose.yml`. For example:
+In order to run your applications using Dapr and Docker Compose you'll need to define the sidecar pattern in your `docker-compose.yml`. 例如：
 
 ```yaml
 version: '3'

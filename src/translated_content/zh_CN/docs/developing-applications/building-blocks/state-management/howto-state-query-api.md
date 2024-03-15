@@ -148,9 +148,9 @@ ORDER BY
   person.id DESC
 ```
 
-Execute the query with the following command:
+使用以下命令执行查询：
 
-
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
 
 {{% codetab %}}
 
@@ -158,7 +158,7 @@ Execute the query with the following command:
 curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query1.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -166,7 +166,7 @@ curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query
 Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query1.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -248,9 +248,9 @@ SELECT * FROM c WHERE
   person.org IN ("Dev Ops", "Hardware")
 ```
 
-Execute the query with the following command:
+使用以下命令执行查询：
 
-
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
 
 {{% codetab %}}
 
@@ -258,7 +258,7 @@ Execute the query with the following command:
 curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query2.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -266,7 +266,7 @@ curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query
 Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query2.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -329,9 +329,9 @@ ORDER BY
 LIMIT 3
 ```
 
-Execute the query with the following command:
+使用以下命令执行查询：
 
-
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
 
 {{% codetab %}}
 
@@ -339,7 +339,7 @@ Execute the query with the following command:
 curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query3.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -347,7 +347,7 @@ curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query
 Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query3.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -434,7 +434,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 }
 ```
 
-
+{{< tabs "HTTP API (Bash)" "HTTP API (PowerShell)" >}}
 
 {{% codetab %}}
 
@@ -442,7 +442,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api
 curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query3-token.json http://localhost:3500/v1.0-alpha1/state/statestore/query | jq .
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -450,7 +450,7 @@ curl -s -X POST -H "Content-Type: application/json" -d @query-api-examples/query
 Invoke-RestMethod -Method Post -ContentType 'application/json' -InFile query-api-examples/query3-token.json -Uri 'http://localhost:3500/v1.0-alpha1/state/statestore/query'
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

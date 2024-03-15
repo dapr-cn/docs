@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadatafield
 
-| Field   | Required | Details                                    | 如何使用Dapr扩展来开发和运行Dapr应用程序         |
+| Field   | Required | Details                                    | Example                          |
 | ------- | :------: | ------------------------------------------ | -------------------------------- |
 | natsURL |     Y    | NATS server address URL                    | "`nats://localhost:4222`"        |
 | jwt     |     N    | NATS decentralized authentication JWT      | "`eyJhbGciOiJ...6yJV_adQssw5c`"  |
@@ -45,7 +45,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Create a NATS server
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 You can run a NATS Server with JetStream enabled locally using Docker:
@@ -79,7 +79,7 @@ It is necessary to create a key value bucket, this can easily done via NATS CLI.
 nats kv add <bucketName>
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

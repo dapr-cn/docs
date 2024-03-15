@@ -1,6 +1,6 @@
 ---
 type: docs
-title: Logs
+title: 日志
 linkTitle: Overview
 weight: 1000
 description: Understand Dapr logging
@@ -16,7 +16,7 @@ If you want to use a search engine such as Elastic Search or Azure Monitor to se
 
 Dapr produces logs based on the following schema:
 
-| Field                       | 说明                                                   | 如何使用Dapr扩展来开发和运行Dapr应用程序   |
+| Field                       | Description                                          | Example                    |
 | --------------------------- | ---------------------------------------------------- | -------------------------- |
 | time                        | ISO8601 Timestamp                                    | `2011-10-05T14:48:00.000Z` |
 | level                       | Log Level (info/warn/debug/error) | `info`                     |

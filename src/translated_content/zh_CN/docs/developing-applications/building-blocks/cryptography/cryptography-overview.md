@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 加密概述
-linkTitle: Overview
+linkTitle: 概述
 weight: 1000
 description: Dapr 加密概述
 ---

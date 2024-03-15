@@ -49,7 +49,7 @@ By default, the `placement` binary is installed in:
 - For Linux/MacOS: `/$HOME/.dapr/bin`
 - For Windows: `%USERPROFILE%\.dapr\bin`
 
-
+{{< tabs "Linux/MacOS" "Windows">}}
 
 {{% codetab %}}
 
@@ -67,7 +67,7 @@ INFO[0001] leader is established.                        instance=Nicoletaz-L10.
 
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -87,7 +87,7 @@ time="2022-10-17T14:56:56.8232286-05:00" level=info msg="leader is established."
 
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

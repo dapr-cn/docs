@@ -16,7 +16,7 @@ description: 通过状态管理API开始使用Dapr的弹性能力
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -188,7 +188,7 @@ INFO[0036] Recovered processing operation component[statestore] output.
 == APP == Getting Order:  { orderId: '9' }
 ```
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -360,7 +360,7 @@ INFO[0036] Recovered processing operation component[statestore] output.
 == APP == Getting Order:  { orderId: '9' }
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -533,7 +533,7 @@ INFO[0036] Recovered processing operation component[statestore] output.
 == APP == Getting Order:  { orderId: '9' }
 ```
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -708,7 +708,7 @@ INFO[0036] Recovered processing operation component[statestore] output.
 == APP == Getting Order:  { orderId: '9' }
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -880,7 +880,7 @@ INFO[0036] Recovered processing operation component[statestore] output.
 == APP == Getting Order:  { orderId: '9' }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

@@ -49,7 +49,7 @@ If you wish to use MySQL as an actor store, append the following to the yaml.
 
 ## Spec metadata fields
 
-| Field                      | Required | Details                                                                                                                                                                    | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                                                                                                                             |
+| Field                      | Required | Details                                                                                                                                                                    | Example                                                                                                                                                                                                                                              |
 | -------------------------- | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `connectionString`         |     Y    | The connection string to connect to MySQL. Do not add the schema to the connection string                                                                                  | [Non SSL connection](#non-ssl-connection): `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true"`, [Enforced SSL Connection](#enforced-ssl-connection):  `"<user>:<password>@tcp(<server>:3306)/?allowNativePasswords=true&tls=custom"` |
 | `schemaName`               |     N    | The schema name to use. Will be created if schema does not exist. Defaults to `"dapr_state_store"`                                                                         | `"custom_schema"`, `"dapr_schema"`                                                                                                                                                                                                                   |
@@ -63,7 +63,7 @@ If you wish to use MySQL as an actor store, append the following to the yaml.
 
 Dapr can use any MySQL instance - containerized, running on your local dev machine, or a managed cloud service.
 
-
+{{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
 
 {{% codetab %}}
 
@@ -77,7 +77,7 @@ This example does not describe a production configuration because it sets the pa
 docker run --name dapr-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -101,7 +101,7 @@ We can use [Helm](https://helm.sh/) to quickly create a MySQL instance in our Ku
 
 4. With the password you can construct your connection string.
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -111,7 +111,7 @@ We can use [Helm](https://helm.sh/) to quickly create a MySQL instance in our Ku
 
 If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [documentation on SSL database connections](http://bit.ly/MySQLSSL), for information on how to download the required certificate.
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -119,7 +119,7 @@ If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [do
 
 [AWS MySQL](https://aws.amazon.com/rds/mysql/)
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -127,7 +127,7 @@ If you are using [MySQL on Azure](http://bit.ly/AzureMySQLSSL) see the Azure [do
 
 [GCP MySQL](https://cloud.google.com/sql/docs/mysql/features)
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -150,7 +150,7 @@ The interval at which the deletion of expired records happens is set with the `c
 - Longer intervals require less frequent scans for expired rows, but can require storing expired records for longer, potentially requiring more storage space. If you plan to store many records in your state table, with short TTLs, consider setting `cleanupIntervalInSeconds` to a smaller value, for example `300` (300 seconds, or 5 minutes).
 - If you do not plan to use TTLs with Dapr and the MySQL state store, you should consider setting `cleanupIntervalInSeconds` to a value <= 0 (e.g. `0` or `-1`) to disable the periodic cleanup and reduce the load on the database.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

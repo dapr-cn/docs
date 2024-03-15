@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 贡献概述
-linkTitle: Overview
+linkTitle: 概述
 weight: 10
 description: |
   为任何 Dapr 项目仓库做贡献的通用指南

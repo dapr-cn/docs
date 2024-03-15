@@ -43,7 +43,7 @@ If you wish to use Cosmos DB as an actor store, append the following to the yam
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                                                           | 如何使用Dapr扩展来开发和运行Dapr应用程序                     |
+| Field           | Required | Details                                                                                                           | Example                                      |
 | --------------- | :------: | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | url             |     Y    | The Cosmos DB url                                                                                                 | `"https://******.documents.azure.com:443/"`. |
 | masterKey       |    Y\*   | The key to authenticate to the Cosmos DB account. Only required when not using Microsoft Entra ID authentication. | `"key"`                                      |
@@ -206,9 +206,9 @@ indexing_policy {
 
 This optimization comes at the cost of queries against fields inside of documents within the state store. This would likely impact any stored procedures or SQL queries defined and executed. It is only recommended that this optimization be applied only if you are using the Dapr State Management API or Dapr Actors to interact with Cosmos DB.
 
+{{% /alert %}}
 
-
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

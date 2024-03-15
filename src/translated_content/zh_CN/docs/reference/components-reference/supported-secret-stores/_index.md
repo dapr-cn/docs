@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Secret store component specs
-linkTitle: Secret stores
+linkTitle: Secret stores（密钥存储）
 weight: 4000
 description: The supported secret stores that interface with Dapr
 aliases:

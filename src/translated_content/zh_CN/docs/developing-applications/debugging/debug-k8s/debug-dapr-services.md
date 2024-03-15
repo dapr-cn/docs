@@ -6,7 +6,7 @@ weight: 1000
 description: 在 Kubernetes 中如何在 Dapr 控制面板中进行调试
 ---
 
-## Overview
+## 概述
 
 有时有必要了解 Dapr 控制面板（也称为 Kubernetes 服务），包括 `dapr-sidecar-injector`、`dapr-operator`、`dapr-placement` 和 `dapr-sentry`，尤其是当您诊断您的 Dapr 应用程序并想知道 Dapr 本身是否出了问题时。 此外，你可能正在为 Kubernetes 中的 Dapr 开发一个新功能，并且想调试你的代码。
 

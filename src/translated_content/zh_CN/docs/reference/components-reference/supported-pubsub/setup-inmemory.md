@@ -24,7 +24,7 @@ spec:
 
 > Note: in-memory does not require any specific metadata for the component to work, however spec.metadata is a required field.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}}) in the Related links section
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

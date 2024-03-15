@@ -34,7 +34,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                   | Required | Binding support | Details                                                                                                                                                     | 如何使用Dapr扩展来开发和运行Dapr应用程序  |
+| Field                   | Required | Binding support | Details                                                                                                                                                     | Example                   |
 | ----------------------- | :------: | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | `redisHost`             |     Y    | Output          | The Redis host address                                                                                                                                      | `"localhost:6379"`        |
 | `redisPassword`         |     Y    | Output          | The Redis password                                                                                                                                          | `"password"`              |
@@ -159,7 +159,7 @@ Dapr can use any Redis instance - containerized, running on your local dev machi
 
 _Note: Dapr does not support Redis >= 7. It is recommended to use Redis 6_
 
-
+{{< tabs "Self-Hosted" "Kubernetes" "AWS" "GCP" "Azure">}}
 
 {{% codetab %}}
 The Dapr CLI will automatically create and setup a Redis Streams instance for you.
@@ -177,7 +177,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 
 2. Run `kubectl get pods` to see the Redis containers now running in your cluster.
 
-3. Add `redis-master:6379` as the `redisHost` in your redis.yaml file. For example:
+3. Add `redis-master:6379` as the `redisHost` in your redis.yaml file. 例如：
 
    ```yaml
        metadata:
@@ -191,32 +191,34 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 
    - **Linux/MacOS**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode` and copy the outputted password.
 
-   Add this password as the `redisPassword` value in your redis.yaml file. For example:
+   Add this password as the `redisPassword` value in your redis.yaml file. 例如：
 
    ```yaml
        - name: redisPassword
          value: "lhDOkwTlp0"
    ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 [AWS Redis](https://aws.amazon.com/redis/)
 {{% /codetab %}}
 
-
+{{% codetab %}}
+[GCP Cloud MemoryStore](https://cloud.google.com/memorystore/)
+{{% /codetab %}}
 
 {{% codetab %}}
 [Azure Redis](https://docs.microsoft.com/azure/azure-cache-for-redis/quickstart-create-redis)
 {{% /codetab %}}
 
-
+{{< /tabs >}}
 
 {{% alert title="Note" color="primary" %}}
 The Dapr CLI automatically deploys a local redis instance in self hosted mode as part of the `dapr init` command.
 {{% /alert %}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

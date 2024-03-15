@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Configuration API reference
-linkTitle: 配置 API
+linkTitle: Configuration API
 description: Detailed documentation on the configuration API
 weight: 700
 ---
@@ -18,7 +18,7 @@ GET http://localhost:<daprPort>/v1.0/configuration/<storename>
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                             |
+| Parameter   | Description                                                                                                                                                                    |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `daprPort`  | The Dapr port                                                                                                                                                                  |
 | `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
@@ -26,7 +26,7 @@ GET http://localhost:<daprPort>/v1.0/configuration/<storename>
 #### Query Parameters
 
 If no query parameters are provided, all configuration items are returned.
-To specify the keys of the configuration items to get, use one or more `key` query parameters. For example:
+To specify the keys of the configuration items to get, use one or more `key` query parameters. 例如：
 
 ```
 GET http://localhost:<daprPort>/v1.0/configuration/mystore?key=config1&key=config2
@@ -46,7 +46,7 @@ None
 
 #### Response Codes
 
-| Code  | 说明                                                                   |
+| Code  | Description                                                          |
 | ----- | -------------------------------------------------------------------- |
 | `204` | Get operation successful                                             |
 | `400` | Configuration store is missing or misconfigured or malformed request |
@@ -56,7 +56,7 @@ None
 
 JSON-encoded value of key/value pairs for each configuration item.
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```shell
 curl -X GET 'http://localhost:3500/v1.0/configuration/mystore?key=myConfigKey' 
@@ -84,7 +84,7 @@ GET http://localhost:<daprPort>/v1.0/configuration/<storename>/subscribe
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                             |
+| Parameter   | Description                                                                                                                                                                    |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `daprPort`  | The Dapr port                                                                                                                                                                  |
 | `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
@@ -92,7 +92,7 @@ GET http://localhost:<daprPort>/v1.0/configuration/<storename>/subscribe
 #### Query Parameters
 
 If no query parameters are provided, all configuration items are subscribed to.
-To specify the keys of the configuration items to subscribe to, use one or more `key` query parameters. For example:
+To specify the keys of the configuration items to subscribe to, use one or more `key` query parameters. 例如：
 
 ```
 GET http://localhost:<daprPort>/v1.0/configuration/mystore/subscribe?key=config1&key=config2
@@ -112,7 +112,7 @@ None
 
 #### Response Codes
 
-| Code  | 说明                                                                   |
+| Code  | Description                                                          |
 | ----- | -------------------------------------------------------------------- |
 | `200` | Subscribe operation successful                                       |
 | `400` | Configuration store is missing or misconfigured or malformed request |
@@ -122,7 +122,7 @@ None
 
 JSON-encoded value
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```shell
 curl -X GET 'http://localhost:3500/v1.0/configuration/mystore/subscribe?key=myConfigKey' 
@@ -150,7 +150,7 @@ GET http://localhost:<daprPort>/v1.0/configuration/<storename>/<subscription-id>
 
 #### URL Parameters
 
-| Parameter         | 说明                                                                                                                                                                             |
+| Parameter         | Description                                                                                                                                                                    |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `daprPort`        | The Dapr port                                                                                                                                                                  |
 | `storename`       | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
@@ -168,7 +168,7 @@ None
 
 #### Response Codes
 
-| Code  | 说明                                                                   |
+| Code  | Description                                                          |
 | ----- | -------------------------------------------------------------------- |
 | `200` | Unsubscribe operation successful                                     |
 | `400` | Configuration store is missing or misconfigured or malformed request |
@@ -182,7 +182,7 @@ None
 }
 ```
 
-### 如何使用Dapr扩展来开发和运行Dapr应用程序
+### Example
 
 ```shell
 curl -X GET 'http://localhost:3500/v1.0-alpha1/configuration/mystore/bf3aa454-312d-403c-af95-6dec65058fa2/unsubscribe'
@@ -221,7 +221,7 @@ POST http://localhost:<appPort>/configuration/<store-name>/<key>
 
 #### URL Parameters
 
-| Parameter   | 说明                                                                                                                                                                             |
+| Parameter   | Description                                                                                                                                                                    |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `appPort`   | The application port                                                                                                                                                           |
 | `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
@@ -242,7 +242,7 @@ A list of configuration items for a given subscription id. Configuration items c
 }
 ```
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
 ```json
 {

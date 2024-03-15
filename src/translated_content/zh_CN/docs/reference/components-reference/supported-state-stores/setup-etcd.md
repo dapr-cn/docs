@@ -50,7 +50,7 @@ If you are using `v1`, you should continue to use `v1` until you create a new Et
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                                                                                                                                                          | 如何使用Dapr扩展来开发和运行Dapr应用程序                               |
+| Field           | Required | Details                                                                                                                                                                                                          | Example                                                |
 | --------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 | `endpoints`     |     Y    | Connection string to the Etcd cluster                                                                                                                                                                            | `"192.168.0.1:2379,192.168.0.2:2379,192.168.0.3:2379"` |
 | `keyPrefixPath` |     N    | Key prefix path in Etcd. Default is no prefix.                                                                                                                                                                   | `"dapr"`                                               |
@@ -61,7 +61,7 @@ If you are using `v1`, you should continue to use `v1` until you create a new Et
 
 ## Setup Etcd
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 
@@ -83,13 +83,13 @@ Save the `docker-compose.yml` file and run the following command to start the Et
 docker-compose up -d
 ```
 
-This starts the Etcd server in the background and expose the default Etcd port of `2379`. You can then interact with the server using the `etcdctl` command-line client on `localhost:12379`. For example:
+This starts the Etcd server in the background and expose the default Etcd port of `2379`. You can then interact with the server using the `etcdctl` command-line client on `localhost:12379`. 例如：
 
 ```sh
 etcdctl --endpoints=localhost:2379 put mykey myvalue
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -97,11 +97,11 @@ Use [Helm](https://helm.sh/) to quickly create an Etcd instance in your Kubernet
 
 Follow the [Bitnami instructions](https://github.com/bitnami/charts/tree/main/bitnami/etcd) to get started with setting up Etcd in Kubernetes.
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

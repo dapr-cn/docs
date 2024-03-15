@@ -24,7 +24,8 @@ aliases:
 在您正在使用的组件规范的定义中**不能**提供AWS访问密钥、秘密密钥和令牌：
 
 - 当在 EKS（AWS Kubernetes）上运行 Dapr sidecar (`daprd`) 与您的应用程序时
--
+- If using a node/pod that has already been attached to an IAM policy defining access to AWS resources
+  {{% /alert %}}
 
 ## 在组件清单文件中明确指定凭证的替代方法
 
@@ -50,7 +51,7 @@ Dapr 然后在 Dapr 组件清单中不指定凭据的情况下对 AWS 进行身�
 
 ### 以单机模式在本地运行 dapr 时验证到 AWS
 
-
+{{< tabs "Linux/MacOS" "Windows" >}}
 
  <!-- linux -->
 
@@ -76,7 +77,7 @@ AWS_PROFILE=myprofile daprd...
 
 您可以使用任何[支持的环境变量](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html#envvars-list)来配置 Dapr。
 
-
+{{% /codetab %}}
 
  <!-- windows -->
 
@@ -84,7 +85,7 @@ AWS_PROFILE=myprofile daprd...
 
 在Windows上，在启动`dapr`或`daprd`命令之前，需要先设置环境变量，不支持像在Linux/MacOS中内联操作。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -95,7 +96,7 @@ AWS_PROFILE=myprofile daprd...
 - [AwsHelper](https://pypi.org/project/awshelper/)
 - [aws-sso-util](https://github.com/benkehoe/aws-sso-util)
 
-
+{{< tabs "Linux/MacOS" "Windows" >}}
 
  <!-- linux -->
 
@@ -113,7 +114,7 @@ or
 AWS_PROFILE=myprofile awshelper daprd...
 ```
 
-
+{{% /codetab %}}
 
  <!-- windows -->
 
@@ -121,7 +122,7 @@ AWS_PROFILE=myprofile awshelper daprd...
 
 在Windows上，在启动`awshelper`命令之前需要设置环境变量，不支持像在Linux/MacOS中内联操作。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

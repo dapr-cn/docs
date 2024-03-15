@@ -16,7 +16,7 @@ New Relic offers a Prometheus OpenMetrics Integration.
 
 This document explains how to install it in your cluster, either using a Helm chart (recommended).
 
-## 安装
+## Installation
 
 1. Install Helm following the official instructions.
 

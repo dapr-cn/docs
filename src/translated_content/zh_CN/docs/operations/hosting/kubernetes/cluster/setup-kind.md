@@ -151,9 +151,9 @@ If you are using Docker Desktop, verify that you have [the recommended settings]
    kubectl apply -f components.yaml
    ```
 
-## 相关链接
+## Related links
 
-- [尝试 Dapr 快速入门]({{< ref quickstarts.md >}})
+- [Try out a Dapr quickstart]({{< ref quickstarts.md >}})
 - Learn how to [deploy Dapr on your cluster]({{< ref kubernetes-deploy.md >}})
 - [Upgrade Dapr on Kubernetes]({{< ref kubernetes-upgrade.md >}})
 - [Kubernetes production guidelines]({{< ref kubernetes-production.md >}})

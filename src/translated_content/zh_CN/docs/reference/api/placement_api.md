@@ -24,7 +24,7 @@ GET http://localhost:<healthzPort>/placement/state
 
 ## HTTP Response Codes
 
-| Code | 说明                                                          |
+| Code | Description                                                 |
 | ---- | ----------------------------------------------------------- |
 | 200  | Placement tables information returned                       |
 | 500  | Placement could not return the placement tables information |
@@ -33,14 +33,14 @@ GET http://localhost:<healthzPort>/placement/state
 
 **Placement tables API Response Object**
 
-| Name         | Type                                                                                    | 说明                                           |
+| Name         | Type                                                                                    | Description                                  |
 | ------------ | --------------------------------------------------------------------------------------- | -------------------------------------------- |
 | tableVersion | int                                                                                     | The placement table version                  |
 | hostList     | [Actor Host Info](#actorhostinfo)[] | A json array of registered actors host info. |
 
 <a id="actorhostinfo"></a>**Actor Host Info**
 
-| Name       | Type              | 说明                                         |
+| Name       | Type              | Description                                |
 | ---------- | ----------------- | ------------------------------------------ |
 | name       | string            | The host:port address of the actor.        |
 | appId      | string            | app id.                                    |

@@ -12,7 +12,7 @@ Dapr工作流目前处于beta阶段。 [查看已知限制 {{% dapr-latest-versi
 
 现在，您已经[在应用程序中编写了工作流及其活动]({{< ref howto-author-workflow\.md >}})，可以使用HTTP API调用来启动、终止和获取有关工作流的信息。 更多信息，请阅读 [工作流 API 参考]({{< ref workflow_api.md >}})。
 
-
+{{< tabs Python JavaScript ".NET" Java Go HTTP >}}
 
 <!--Python-->
 
@@ -63,7 +63,7 @@ d.purge_workflow(instance_id=instanceId, workflow_component=workflowComponent)
 d.terminate_workflow(instance_id=instanceId, workflow_component=workflowComponent)
 ```
 
-
+{{% /codetab %}}
 
 <!--JavaScript-->
 
@@ -136,7 +136,7 @@ start().catch((e) => {
 });
 ```
 
-
+{{% /codetab %}}
 
 <!--NET-->
 
@@ -173,7 +173,7 @@ await daprClient.ResumeWorkflowAsync(orderId, workflowComponent);
 await daprClient.PurgeWorkflowAsync(orderId, workflowComponent);
 ```
 
-
+{{% /codetab %}}
 
 <!--Java-->
 
@@ -239,7 +239,7 @@ public class DemoWorkflowClient {
 }
 ```
 
-
+{{% /codetab %}}
 
 <!--Go-->
 
@@ -319,7 +319,7 @@ type RaiseEventWorkflowRequest struct {
 }
 ```
 
-
+{{% /codetab %}}
 
 <!--HTTP-->
 
@@ -335,7 +335,7 @@ type RaiseEventWorkflowRequest struct {
 POST http://localhost:3500/v1.0-beta1/workflows/dapr/OrderProcessingWorkflow/start?instanceID=12345678
 ```
 
-Note that workflow instance IDs can only contain alphanumeric characters, underscores, and dashes.
+请注意，工作流实例 ID 只能包含字母数字字符、下划线和破折号。
 
 ### 终止工作流程
 
@@ -347,7 +347,7 @@ POST http://localhost:3500/v1.0-beta1/workflows/dapr/12345678/terminate
 
 ### 引发事件
 
-For workflow components that support subscribing to external events, such as the Dapr Workflow engine, you can use the following "raise event" API to deliver a named event to a specific workflow instance.
+对于支持订阅外部事件的工作流组件（如 Dapr 工作流引擎），您可以使用以下 "raise event" API 向特定工作流实例发送已命名的事件。
 
 ```http
 POST http://localhost:3500/v1.0-beta1/workflows/<workflowComponentName>/<instanceID>/raiseEvent/<eventName>
@@ -389,7 +389,7 @@ GET http://localhost:3500/v1.0-beta1/workflows/dapr/12345678
 
 了解有关这些HTTP调用的更多信息，请参阅[工作流API参考指南]({{< ref workflow_api.md >}})。
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

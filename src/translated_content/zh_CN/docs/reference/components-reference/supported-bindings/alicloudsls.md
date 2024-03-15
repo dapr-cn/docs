@@ -30,11 +30,11 @@ spec:
 
 ## Spec metadata fields
 
-| Field             | Required | Binding support | Details                      | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ----------------- | -------- | --------------- | ---------------------------- | ------------------------ |
-| `AccessKeyID`     | Y        | Output          | Access key ID credential.    |                          |
-| `AccessKeySecret` | Y        | Output          | Access key credential secret |                          |
-| `Endpoint`        | Y        | Output          | Alicloud SLS endpoint.       |                          |
+| Field             | Required | Binding support | Details                      | Example |
+| ----------------- | -------- | --------------- | ---------------------------- | ------- |
+| `AccessKeyID`     | Y        | Output          | Access key ID credential.    |         |
+| `AccessKeySecret` | Y        | Output          | Access key credential secret |         |
+| `Endpoint`        | Y        | Output          | Alicloud SLS endpoint.       |         |
 
 ## Binding support
 
@@ -65,9 +65,9 @@ To perform a log store operation, invoke the binding with a `POST` method and th
 Note, the value of "project"，"logstore"，"topic" and "source" property should provide in the metadata properties.
 {{% /alert %}}
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs "Windows" "Linux/MacOS" >}}
 
 {{% codetab %}}
 
@@ -75,7 +75,7 @@ Note, the value of "project"，"logstore"，"topic" and "source" property should
 curl -X POST -H "Content-Type: application/json" -d "{\"metadata\":{\"project\":\"project-name\",\"logstore\":\"logstore-name\",\"topic\":\"topic-name\",\"source\":\"source-name\"},\"data\":{\"log-filed\":\"log info\"}" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -83,7 +83,7 @@ curl -X POST -H "Content-Type: application/json" -d "{\"metadata\":{\"project\":
 curl -X POST -H "Content-Type: application/json" -d '{"metadata":{"project":"project-name","logstore":"logstore-name","topic":"topic-name","source":"source-name"},"data":{"log-filed":"log info"}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -93,7 +93,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"metadata":{"project":"pro
 
 As Alibaba Cloud SLS producer API is asynchronous, there is no response for this binding (there is no callback interface to accept the response of success or failure, only a record for failure any reason to the console log).
 
-## 相关链接
+## Related links
 
 - [Bindings building block]({{< ref bindings >}})
 - [How-To: Trigger application with input binding]({{< ref howto-triggers.md >}})

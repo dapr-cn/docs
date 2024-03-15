@@ -48,7 +48,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field                                                                                                           | Required | Details                                        | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                     |
+| Field                                                                                                           | Required | Details                                        | Example                                                                                      |
 | --------------------------------------------------------------------------------------------------------------- | :------: | ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | type                                                                                                            |     Y    | The type of the account.                       | `"service_account"`                                                                          |
 | project_id                                                                                 |     Y    | The project ID associated with this component. | `"project_id"`                                                                               |
@@ -65,7 +65,7 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided to the GCP Secret Manager component:
 
-| Query Parameter       | 说明                                |
+| Query Parameter       | Description                       |
 | --------------------- | --------------------------------- |
 | `metadata.version_id` | Version for the given secret key. |
 
@@ -73,7 +73,7 @@ The following [optional query parameters]({{< ref "secrets_api#query-parameters"
 
 Setup GCP Secret Manager using the GCP documentation: https\://cloud.google.com/secret-manager/docs/quickstart.
 
-## 相关链接
+## Related links
 
 - [Secrets building block]({{< ref secrets >}})
 - [How-To: Retrieve a secret]({{< ref "howto-secrets.md" >}})

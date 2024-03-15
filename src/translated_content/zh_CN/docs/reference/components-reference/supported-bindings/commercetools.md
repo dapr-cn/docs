@@ -40,7 +40,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field          | Required | Binding support | Details                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序       |
+| Field          | Required | Binding support | Details                                         | Example                        |
 | -------------- | :------: | --------------- | ----------------------------------------------- | ------------------------------ |
 | `region`       |     Y    | Output          | The region of the commercetools project         | `"europe-west1"`               |
 | `provider`     |     Y    | Output          | The cloud provider, either gcp or aws           | `"gcp"`, `"aws"`               |
@@ -57,7 +57,7 @@ This component supports **output binding** with the following operations:
 
 - `create`
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

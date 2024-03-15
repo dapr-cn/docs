@@ -12,7 +12,7 @@ Dapr SDK 是创建可插拔组件的最简单方法。 选择你最喜欢的语�
 
 ## 可插拔组件 SDK
 
-| 语言                                                                                                                     |     Status     |
+| 语言                                                                                                                     |       状态       |
 | ---------------------------------------------------------------------------------------------------------------------- | :------------: |
 | [Go]({{< ref pluggable-components-go >}})       | In development |
 | [.NET]({{< ref pluggable-components-dotnet >}}) | In development |

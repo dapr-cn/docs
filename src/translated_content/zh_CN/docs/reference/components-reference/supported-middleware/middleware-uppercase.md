@@ -41,7 +41,7 @@ spec:
       type: middleware.http.uppercase
 ```
 
-## 相关链接
+## Related links
 
 - [Middleware]({{< ref middleware.md >}})
 - [Configuration concept]({{< ref configuration-concept.md >}})

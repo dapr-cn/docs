@@ -38,7 +38,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                        | 如何使用Dapr扩展来开发和运行Dapr应用程序                     |
+| Field             | Required | Details                                                        | Example                                      |
 | ----------------- | :------: | -------------------------------------------------------------- | -------------------------------------------- |
 | servers           |     Y    | Comma delimited list of servers                                | `"zookeeper.default.svc.cluster.local:2181"` |
 | sessionTimeout    |     Y    | The session timeout value                                      | `"5s"`                                       |
@@ -48,7 +48,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Setup Zookeeper
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 You can run Zookeeper locally using Docker:
@@ -73,11 +73,12 @@ To interact with Zookeeper, find the service with: `kubectl get svc zookeeper`.
 
 For example, if installing using the example above, the Zookeeper host address would be:
 
-
+`zookeeper.default.svc.cluster.local:2181`
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

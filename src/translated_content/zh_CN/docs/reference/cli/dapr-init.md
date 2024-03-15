@@ -5,7 +5,7 @@ linkTitle: init
 description: Detailed information on the init CLI command
 ---
 
-### 说明
+### Description
 
 Install Dapr on supported hosting platforms.
 
@@ -22,7 +22,7 @@ dapr init [flags]
 
 ### Flags
 
-| Name                  | Environment Variable                                                                       | Default                             | 说明                                                                                                                                                                                                                                                          |   |
+| Name                  | Environment Variable                                                                       | Default                             | Description                                                                                                                                                                                                                                                 |   |
 | --------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | - |
 | `--dashboard-version` |                                                                                            | `latest`                            | The version of the Dapr dashboard to install, for example: `1.0.0`                                                                                                                                                                                          |   |
 | `--enable-ha`         |                                                                                            | `false`                             | Enable high availability (HA) mode                                                                                                                                                                                                       |   |
@@ -48,7 +48,7 @@ dapr init [flags]
 
 ### 示例
 
-
+{{< tabs "Self-hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 
@@ -154,7 +154,7 @@ Uninstall Dapr from that Docker network.
 dapr uninstall --all --network mynet
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -201,6 +201,6 @@ Scenario 2 : dapr image hosted under a new/different directory in private regist
 dapr init -k --image-registry docker.io/username/<directory-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}

@@ -44,7 +44,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                 | 如何使用Dapr扩展来开发和运行Dapr应用程序                   |
+| Field             | Required | Details                                                 | Example                                    |
 | ----------------- | :------: | ------------------------------------------------------- | ------------------------------------------ |
 | hosts             |     Y    | Comma separated value of the hosts                      | `"cassandra.cassandra.svc.cluster.local"`. |
 | port              |     N    | Port for communication. Default `"9042"`                | `"9042"`                                   |
@@ -58,7 +58,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Setup Cassandra
 
-
+{{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
 You can run Cassandra locally with the Datastax Docker image:
@@ -83,11 +83,12 @@ To interact with Cassandra, find the service with: `kubectl get svc -n cassandra
 
 For example, if installing using the example above, the Cassandra DNS would be:
 
-
+`cassandra.cassandra.svc.cluster.local`
+{{% /codetab %}}
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-get-save-state.md#step-2-save-and-retrieve-a-single-state" >}}) for instructions on configuring state store components

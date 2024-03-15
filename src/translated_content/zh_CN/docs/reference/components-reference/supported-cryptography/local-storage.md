@@ -20,7 +20,7 @@ Supported file formats:
 {{% alert title="Note" color="primary" %}}
 This component uses the cryptographic engine in Dapr to perform operations. Although keys are never exposed to your application, Dapr has access to the raw key material.
 
-
+{{% /alert %}}
 
 A Dapr `crypto.yaml` component file has the following structure:
 
@@ -43,9 +43,9 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field  | Required | Details                                                                                                                           | 如何使用Dapr扩展来开发和运行Dapr应用程序 |
-| ------ | :------: | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `path` |     Y    | Folder containing the keys to be loaded. When loading a key, the name of the key will be used as name of the file in this folder. | `/path/to/folder`        |
+| Field  | Required | Details                                                                                                                           | Example           |
+| ------ | :------: | --------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `path` |     Y    | Folder containing the keys to be loaded. When loading a key, the name of the key will be used as name of the file in this folder. | `/path/to/folder` |
 
 **Example**
 
@@ -56,6 +56,6 @@ Let's say you've set `path=/mnt/keys`, which contains the following files:
 
 When using the component, you can reference the keys as `mykey1.pm` and `mykey2`.
 
-## 相关链接
+## Related links
 
 [Cryptography building block]({{< ref cryptography >}})

@@ -14,7 +14,7 @@ Dapr 在保存和检索状态时不会转换状态值。 Dapr要求所有的状�
 
 {{% alert title="注意" color="primary" %}}以下示例使用 Redis CLI 来查询作为Dapr默认状态存储实现的 Redis 中的状态数据。
 
-
+{{% /alert %}}
 
 ## 连接Redis
 
@@ -75,3 +75,4 @@ HGET mypets||cat||leroy||food value
 {{% alert title="警告" color="warning" %}}
 您不应该手动更新或删除存储中的状态。 所有的写入和删除操作都应该通过 Dapr 运行时来完成。 \*\*唯一的例外：\*\*通常需要在状态存储中删除 actor 记录，一旦您知道这些不再使用，以防止未使用的 actor 实例的累积，这些实例可能永远不会再次加载。
 
+{{% /alert %}}

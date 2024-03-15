@@ -26,7 +26,7 @@ spec:
 
 > Note: While in-memory does not require any specific metadata for the component to work, `spec.metadata` is a required field.
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Learn [how to create and configure state store components]({{< ref howto-get-save-state.md >}})

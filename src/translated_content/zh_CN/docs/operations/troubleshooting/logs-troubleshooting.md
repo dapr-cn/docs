@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Configure and view Dapr Logs
-linkTitle: Logs
+linkTitle: 日志
 weight: 2000
 description: Understand how logging works in Dapr and how to configure and view logs
 ---
@@ -20,7 +20,7 @@ The levels outlined below are the same for both system components and the Dapr s
 
 error produces the minimum amount of output, where debug produces the maximum amount. The default level is info, which provides a balanced amount of information for operating Dapr in normal conditions.
 
-To set the output level, you can use the `--log-level` command-line option. For example:
+To set the output level, you can use the `--log-level` command-line option. 例如：
 
 ```bash
 ./daprd --log-level error
@@ -96,7 +96,7 @@ Components:
 - dapr_placement
 - dapr_sidecar_injector
 
-如何使用Dapr扩展来开发和运行Dapr应用程序:
+Example:
 
 ```bash
 helm install dapr dapr/dapr --namespace dapr-system --set dapr_operator.logLevel=error

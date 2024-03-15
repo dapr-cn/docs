@@ -36,7 +36,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field      |        Required        | Details                                                                                                                                                                                                                                                                                                                                                                       | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                   |
+| Field      |        Required        | Details                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                                    |
 | ---------- | :--------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | url        |            Y           | Address of the AMQP broker. Can be `secretKeyRef` to use a secret reference. <br> Use the **`amqp://`** URI scheme for non-TLS communication. <br> Use the **`amqps://`** URI scheme for TLS communication.                                                                                                                                                                   | `"amqp://host.domain[:port]"`                                                              |
 | username   |            Y           | The username to connect to the broker. Only required if anonymous is not specified or set to `false` .                                                                                                                                                                                                                                                                        | `default`                                                                                  |
@@ -54,7 +54,7 @@ To configure communication using TLS:
 1. Ensure that the Solace broker is configured to support certificates.
 2. Provide the `caCert`, `clientCert`, and `clientKey` metadata in the component configuration.
 
-For example:
+例如：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -91,7 +91,7 @@ By default, messages are published and subscribed over topics. If you would like
 
 ## Create a Solace broker
 
-
+{{< tabs "Self-Hosted" "SaaS">}}
 
 {{% codetab %}}
 You can run a Solace broker [locally using Docker](https://hub.docker.com/r/solace/solace-pubsub-standard):
@@ -100,7 +100,8 @@ You can run a Solace broker [locally using Docker](https://hub.docker.com/r/sola
 docker run -d -p 8080:8080 -p 55554:55555 -p 8008:8008 -p 1883:1883 -p 8000:8000 -p 5672:5672 -p 9000:9000 -p 2222:2222 --shm-size=2g --env username_admin_globalaccesslevel=admin --env username_admin_password=admin --name=solace solace/solace-pubsub-standard
 ```
 
-
+You can then interact with the server using the client port: `mqtt://localhost:5672`
+{{% /codetab %}}
 
 {{% codetab %}}
 You can also sign up for a free SaaS broker on [Solace Cloud](https://console.solace.cloud/login/new-account?product=event-streaming).
@@ -108,7 +109,7 @@ You can also sign up for a free SaaS broker on [Solace Cloud](https://console.so
 
 {{< /tabs >}}
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - Read [this guide]({{< ref "howto-publish-subscribe.md#step-2-publish-a-topic" >}}) for instructions on configuring pub/sub components

@@ -44,7 +44,7 @@ Deprecations can apply to:
 
 1. APIs, including alpha APIs
 2. Preview features
-3. Components
+3. 组件
 4. CLI
 5. Features that could result in security vulnerabilities
 
@@ -68,7 +68,7 @@ After announcing a future breaking change, the change will happen in 2 releases 
 | Twitter Binding Component                                                                                                                                                                                                                                                                                                                                                                                                    | 1.10.0                   | 1.11.0         |
 | NATS Streaming PubSub Component                                                                                                                                                                                                                                                                                                                                                                                              | 1.11.0                   | 1.13.0         |
 
-## 相关链接
+## Related links
 
 - Read the [Versioning Policy]({{< ref support-versioning.md >}})
 - Read the [Supported Releases]({{< ref support-release-policy.md >}})

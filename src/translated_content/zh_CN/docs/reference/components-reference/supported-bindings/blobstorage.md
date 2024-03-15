@@ -40,7 +40,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field               | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                         | 如何使用Dapr扩展来开发和运行Dapr应用程序    |
+| Field               | Required | Binding support | Details                                                                                                                                                                                                                                                                                                                                                                         | Example                     |
 | ------------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
 | `accountName`       |     Y    | Input/Output    | The name of the Azure Storage account                                                                                                                                                                                                                                                                                                                                           | `"myexmapleaccount"`        |
 | `accountKey`        |    Y\*   | Input/Output    | The access key of the Azure Storage account. Only required when not using Microsoft Entra ID authentication.                                                                                                                                                                                                                                                                    | `"access-key"`              |
@@ -80,13 +80,15 @@ To perform a create blob operation, invoke the Azure Blob Storage binding with a
 
 ##### Save text to a random generated UUID blob
 
-
+{{< tabs Windows Linux >}}
+{{% codetab %}}
+On Windows, utilize cmd prompt (PowerShell has different escaping mechanism)
 
 ```bash
 curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\" }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -95,13 +97,13 @@ curl -d '{ "operation": "create", "data": "Hello World" }' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ##### Save text to a specific blob
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -110,7 +112,7 @@ curl -d "{ \"operation\": \"create\", \"data\": \"Hello World\", \"metadata\": {
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -119,7 +121,7 @@ curl -d '{ "operation": "create", "data": "Hello World", "metadata": { "blobName
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -148,7 +150,7 @@ spec:
 
 Then you can upload it as you would normally:
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -156,7 +158,7 @@ Then you can upload it as you would normally:
 curl -d "{ \"operation\": \"create\", \"data\": \"YOUR_BASE_64_CONTENT\", \"metadata\": { \"blobName\": \"my-test-file.jpg\" } }" http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -165,7 +167,7 @@ curl -d '{ "operation": "create", "data": "YOUR_BASE_64_CONTENT", "metadata": { 
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -199,9 +201,9 @@ The metadata parameters are:
 - `blobName` - the name of the blob
 - `includeMetadata`- (optional) defines if the user defined metadata should be returned or not, defaults to: false
 
-#### 如何使用Dapr扩展来开发和运行Dapr应用程序
+#### Example
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -209,7 +211,7 @@ The metadata parameters are:
 curl -d '{ \"operation\": \"get\", \"metadata\": { \"blobName\": \"myblob\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -218,7 +220,7 @@ curl -d '{ "operation": "get", "metadata": { "blobName": "myblob" }}' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -253,7 +255,7 @@ The metadata parameters are:
 
 ##### Delete blob
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -261,7 +263,7 @@ The metadata parameters are:
 curl -d '{ \"operation\": \"delete\", \"metadata\": { \"blobName\": \"myblob\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -270,13 +272,13 @@ curl -d '{ "operation": "delete", "metadata": { "blobName": "myblob" }}' \
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ##### Delete blob snapshots only
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -284,7 +286,7 @@ curl -d '{ "operation": "delete", "metadata": { "blobName": "myblob" }}' \
 curl -d '{ \"operation\": \"delete\", \"metadata\": { \"blobName\": \"myblob\", \"deleteSnapshots\": \"only\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -293,13 +295,13 @@ curl -d '{ "operation": "delete", "metadata": { "blobName": "myblob", "deleteSna
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
 ##### Delete blob including snapshots
 
-
+{{< tabs Windows Linux >}}
 
 {{% codetab %}}
 
@@ -307,7 +309,7 @@ curl -d '{ "operation": "delete", "metadata": { "blobName": "myblob", "deleteSna
 curl -d '{ \"operation\": \"delete\", \"metadata\": { \"blobName\": \"myblob\", \"deleteSnapshots\": \"include\" }}' http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 
@@ -316,7 +318,7 @@ curl -d '{ "operation": "delete", "metadata": { "blobName": "myblob", "deleteSna
       http://localhost:<dapr-port>/v1.0/bindings/<binding-name>
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -445,7 +447,7 @@ Applications publishing to an Azure Blob Storage output binding should send a me
 }
 ```
 
-## 相关链接
+## Related links
 
 - [Basic schema for a Dapr component]({{< ref component-schema >}})
 - [Bindings building block]({{< ref bindings >}})

@@ -23,7 +23,7 @@ description: 开始使用 Dapr 的 Cryptography 构建块
 
 当前，您可以使用Go SDK来体验密码学 API。
 
-
+{{< tabs "JavaScript" "Go" >}}
 
  <!-- JavaScript -->
 
@@ -230,7 +230,7 @@ async function encryptDecryptStream(client) {
 }
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -476,7 +476,7 @@ func encryptDecryptFile(client dapr.Client) {
 }
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

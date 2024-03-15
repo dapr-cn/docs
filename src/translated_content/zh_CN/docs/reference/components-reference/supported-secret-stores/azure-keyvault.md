@@ -47,7 +47,7 @@ The Azure Key Vault secret store component supports authentication with Microsof
 
 ## Spec metadata fields
 
-| Field              | Required | Details                                                                                                                                                        | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                       |
+| Field              | Required | Details                                                                                                                                                        | Example                                                                                                                        |
 | ------------------ | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `vaultName`        |     Y    | The name of the Azure Key Vault                                                                                                                                | `"mykeyvault"`                                                                                                                 |
 | `azureEnvironment` |     N    | Optional name for the Azure environment if using a different Azure cloud                                                                                       | `"AZUREPUBLICCLOUD"` (default value), `"AZURECHINACLOUD"`, `"AZUREUSGOVERNMENTCLOUD"`, `"AZUREGERMANCLOUD"` |
@@ -59,12 +59,12 @@ Additionally, you must provide the authentication fields as explained in the [Au
 
 The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided when retrieving secrets from this secret store:
 
-| Query Parameter       | 说明                                                                                                                  |
+| Query Parameter       | Description                                                                                                         |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `metadata.version_id` | Version for the given secret key.                                                                                   |
 | `metadata.maxresults` | (For bulk requests only) Number of secrets to return, after which the request will be truncated. |
 
-## 如何使用Dapr扩展来开发和运行Dapr应用程序
+## Example
 
 ### 前期准备
 
@@ -74,7 +74,7 @@ The following [optional query parameters]({{< ref "secrets_api#query-parameters"
 - You are using bash or zsh shell
 - You've created an Microsoft Entra ID application (Service Principal) per the instructions in [Authenticating to Azure]({{< ref authenticating-azure.md >}}). You will need the following values:
 
-  | Value                  | 说明                                                                       |
+  | Value                  | Description                                                              |
   | ---------------------- | ------------------------------------------------------------------------ |
   | `SERVICE_PRINCIPAL_ID` | The ID of the Service Principal that you created for a given application |
 
@@ -129,7 +129,7 @@ Other less restrictive roles, like "Key Vault Secrets Officer" and "Key Vault Ad
 
 ### Configure the component
 
-
+{{< tabs "Self-Hosted" "Kubernetes">}}
 
 {{% codetab %}}
 
@@ -179,7 +179,7 @@ spec:
     value : "[pfx_certificate_file_fully_qualified_local_path]"
 ```
 
-
+{{% /codetab %}}
 
 {{% codetab %}}
 In Kubernetes, you store the client secret or the certificate into the Kubernetes Secret Store and then refer to those in the YAML file. Before you start, you need the details of [the Microsoft Entra ID application you created]({{< ref authenticating-azure.md >}}).
@@ -330,7 +330,7 @@ When using **managed identity directly**, you can have multiple identities assoc
 
 However, when using **managed identity via Microsoft Entra ID workload identity**, `azureClientId` is not necessary and has no effect. The Azure identity to be used is inferred from the service account tied to an Azure identity via the Azure federated identity.
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

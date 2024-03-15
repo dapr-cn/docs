@@ -1,7 +1,7 @@
 ---
 type: docs
 title: Configuration store component specs
-linkTitle: Configuration stores
+linkTitle: 配置存储
 weight: 5000
 description: The supported configuration stores that interface with Dapr
 aliases:

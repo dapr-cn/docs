@@ -16,7 +16,7 @@ description: 通过服务调用API开始使用Dapr的弹性能力
 
 在继续快速入门之前，请选择您首选的特定语言 Dapr SDK。
 
-
+{{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
 
  <!-- Python -->
 
@@ -228,7 +228,7 @@ dapr run --app-port 8001 --app-id order-processor --app-protocol http --dapr-htt
 == APP == Order received: {"orderId": 10}
 ```
 
-
+{{% /codetab %}}
 
  <!-- JavaScript -->
 
@@ -365,7 +365,7 @@ spec:
 
 在 `order-processor` 窗口中，停止服务：
 
-
+{{< tabs "MacOs" "Windows" >}}
 
  <!-- MacOS -->
 
@@ -375,7 +375,7 @@ spec:
 CMD + C
 ```
 
-
+{{% /codetab %}}
 
  <!-- Windows -->
 
@@ -385,7 +385,7 @@ CMD + C
 CTRL + C
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -461,7 +461,7 @@ dapr run --app-port 5001 --app-id order-processor  --resources-path ../../../res
 == APP == Order received: {"orderId": 10}
 ```
 
-
+{{% /codetab %}}
 
  <!-- .NET -->
 
@@ -600,7 +600,7 @@ spec:
 
 在 `order-processor` 窗口中，停止服务：
 
-
+{{< tabs "MacOs" "Windows" >}}
 
  <!-- MacOS -->
 
@@ -610,7 +610,7 @@ spec:
 CMD + C
 ```
 
-
+{{% /codetab %}}
 
  <!-- Windows -->
 
@@ -620,7 +620,7 @@ CMD + C
 CTRL + C
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -696,7 +696,7 @@ dapr run --app-port 7001 --app-id order-processor --app-protocol http --dapr-htt
 == APP == Order received: {"orderId": 10}
 ```
 
-
+{{% /codetab %}}
 
  <!-- Java -->
 
@@ -836,7 +836,7 @@ spec:
 
 在 `order-processor` 窗口中，停止服务：
 
-
+{{< tabs "MacOs" "Windows" >}}
 
  <!-- MacOS -->
 
@@ -846,7 +846,7 @@ spec:
 CMD + C
 ```
 
-
+{{% /codetab %}}
 
  <!-- Windows -->
 
@@ -856,7 +856,7 @@ CMD + C
 CTRL + C
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -932,7 +932,7 @@ dapr run --app-id order-processor  --resources-path ../../../resources/ --app-po
 == APP == Order received: {"orderId": 10}
 ```
 
-
+{{% /codetab %}}
 
  <!-- Go -->
 
@@ -1069,7 +1069,7 @@ spec:
 
 在 `order-processor` 窗口中，停止服务：
 
-
+{{< tabs "MacOs" "Windows" >}}
 
  <!-- MacOS -->
 
@@ -1079,7 +1079,7 @@ spec:
 CMD + C
 ```
 
-
+{{% /codetab %}}
 
  <!-- Windows -->
 
@@ -1089,7 +1089,7 @@ CMD + C
 CTRL + C
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 
@@ -1165,7 +1165,7 @@ dapr run --app-port 6001 --app-id order-processor  --resources-path ../../../res
 == APP == Order received: {"orderId": 10}
 ```
 
-
+{{% /codetab %}}
 
 {{< /tabs >}}
 

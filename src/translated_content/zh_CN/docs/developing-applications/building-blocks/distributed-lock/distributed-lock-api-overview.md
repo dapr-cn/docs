@@ -1,7 +1,7 @@
 ---
 type: docs
 title: 分布式锁概述
-linkTitle: Overview
+linkTitle: 概述
 weight: 1000
 description: 分布式锁应用程序接口构件概述
 ---

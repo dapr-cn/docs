@@ -44,7 +44,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field          | Details                                                                                                                                                                      | 如何使用Dapr扩展来开发和运行Dapr应用程序                           |
+| Field          | Details                                                                                                                                                                      | Example                                            |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | clientId       | The client ID of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                                 |                                                    |
 | clientSecret   | The client secret of your application that is created as part of a credential hosted by a OAuth-enabled platform                                                             |                                                    |
@@ -71,7 +71,7 @@ spec:
       type: middleware.http.oauth2
 ```
 
-## 相关链接
+## Related links
 
 - [Configure API authorization with OAuth]({{< ref oauth >}})
 - [Middleware OAuth sample (interactive)](https://github.com/dapr/samples/tree/master/middleware-oauth-google)

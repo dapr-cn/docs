@@ -5,7 +5,7 @@ linkTitle: mtls
 description: Detailed information on the mtls CLI command
 ---
 
-### 说明
+### Description
 
 Check if mTLS is enabled.
 
@@ -22,7 +22,7 @@ dapr mtls [command]
 
 ### Flags
 
-| Name                 | Environment Variable | Default | 说明                                               |
+| Name                 | Environment Variable | Default | Description                                      |
 | -------------------- | -------------------- | ------- | ------------------------------------------------ |
 | `--help`, `-h`       |                      |         | Print this help message                          |
 | `--kubernetes`, `-k` |                      | `false` | Check if mTLS is enabled in a Kubernetes cluster |

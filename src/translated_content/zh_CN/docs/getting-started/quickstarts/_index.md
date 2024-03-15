@@ -12,7 +12,7 @@ no_list: true
 {{% alert title="注意" color="primary" %}}
 我们正在积极努力向我们的快速入门库中添加内容。 与此同时，您可以通过我们的[tutorials]({{< ref "getting-started/tutorials/_index.md" >}})来了解Dapr。
 
-
+{{% /alert %}}
 
 #### 在您开始之前
 
