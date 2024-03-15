@@ -20,7 +20,7 @@ def update_source(c):
 
     # copy dapr main content
     source_content_dir = f"{source_base_dir}/daprdocs/content/en/"
-    shutil.copytree(source_content_dir, f"{content_dir}/content")
+    shutil.copytree(source_content_dir, f"{content_dir}/docs")
     print("dapr content is copied")
 
 
@@ -53,57 +53,57 @@ def update_source(c):
     print("sdk content is copied")
 
     # create crowdin.yml
-    with open(f"{repo_base_dir}/crowdin.yml", "w", encoding='utf8') as f:
-        f.write("""project_id_env: CROWDIN_PROJECT_ID
-api_token_env: CROWDIN_PERSONAL_TOKEN
-base_path: "./src/"
-preserve_hierarchy: true
-files:
-""")
-        # create an item for every file in content directory and append to crowdin.yml
-        for root, dirs, files in os.walk(content_dir):
-            for file in files:
-                target_root = root.replace(content_dir, "/content")
-                file_path = f"{target_root}/{file}"
-                source = file_path.replace("\\", "/")
-                f.write(f"    - source: {source}\n")
-                translation = file_path.replace('/content', '/translated_content/%locale_with_underscore%') \
-                    .replace("\\", "/")
-                f.write(
-                    f"      translation: {translation}\n")
+#     with open(f"{repo_base_dir}/crowdin.yml", "w", encoding='utf8') as f:
+#         f.write("""project_id_env: CROWDIN_PROJECT_ID
+# api_token_env: CROWDIN_PERSONAL_TOKEN
+# base_path: "./src/"
+# preserve_hierarchy: true
+# files:
+# """)
+#         # create an item for every file in content directory and append to crowdin.yml
+#         for root, dirs, files in os.walk(content_dir):
+#             for file in files:
+#                 target_root = root.replace(content_dir, "/content")
+#                 file_path = f"{target_root}/{file}"
+#                 source = file_path.replace("\\", "/")
+#                 f.write(f"    - source: {source}\n")
+#                 translation = file_path.replace('/content', '/translated_content/%locale_with_underscore%') \
+#                     .replace("\\", "/")
+#                 f.write(
+#                     f"      translation: {translation}\n")
 
-    # update aliases
-    # insert /zh-hans to every head of alias in the head of *.md files in content directory
-    for root, dirs, files in os.walk(content_dir):
-        # load file as markdown
-        for file in files:
-            if file.endswith(".md"):
-                with open(f"{root}/{file}", "r", encoding='utf8') as f:
-                    content = f.read()
-                # find all text between aliases: and --- of that
-                aliases_lines = re.findall(r"^aliases:.*?---", content, re.MULTILINE | re.DOTALL)
-                # split lines by new line
-                aliases_lines = [line.split("\n") for line in aliases_lines]
-                # flatten list
-                aliases_lines = [item for sublist in aliases_lines for item in sublist]
-                # filter line that starts with "- \"/", "- \'/" or "- /", skip blanks before
-                aliases_lines = [line for line in aliases_lines if
-                                 line.strip().startswith("- \"/") or line.strip().startswith(
-                                     "- \'/") or line.strip().startswith("- /")]
-                if aliases_lines:
-                    # create replacement map
-                    replacements = {}
-                    for line in aliases_lines:
-                        # insert /zh-hans before the first "/"
-                        index = line.find("/")
-                        if index != -1:
-                            replacements[line] = line[:index] + "/zh-hans" + line[index:]
-                    # replace all aliases: lines with the new lines
-                    for line in aliases_lines:
-                        content = content.replace(line, replacements[line])
-                    # write the new content to file
-                    with open(f"{root}/{file}", "w", encoding='utf8') as f:
-                        f.write(content)
+#     # update aliases
+#     # insert /zh-hans to every head of alias in the head of *.md files in content directory
+#     for root, dirs, files in os.walk(content_dir):
+#         # load file as markdown
+#         for file in files:
+#             if file.endswith(".md"):
+#                 with open(f"{root}/{file}", "r", encoding='utf8') as f:
+#                     content = f.read()
+#                 # find all text between aliases: and --- of that
+#                 aliases_lines = re.findall(r"^aliases:.*?---", content, re.MULTILINE | re.DOTALL)
+#                 # split lines by new line
+#                 aliases_lines = [line.split("\n") for line in aliases_lines]
+#                 # flatten list
+#                 aliases_lines = [item for sublist in aliases_lines for item in sublist]
+#                 # filter line that starts with "- \"/", "- \'/" or "- /", skip blanks before
+#                 aliases_lines = [line for line in aliases_lines if
+#                                  line.strip().startswith("- \"/") or line.strip().startswith(
+#                                      "- \'/") or line.strip().startswith("- /")]
+#                 if aliases_lines:
+#                     # create replacement map
+#                     replacements = {}
+#                     for line in aliases_lines:
+#                         # insert /zh-hans before the first "/"
+#                         index = line.find("/")
+#                         if index != -1:
+#                             replacements[line] = line[:index] + "/zh-hans" + line[index:]
+#                     # replace all aliases: lines with the new lines
+#                     for line in aliases_lines:
+#                         content = content.replace(line, replacements[line])
+#                     # write the new content to file
+#                     with open(f"{root}/{file}", "w", encoding='utf8') as f:
+#                         f.write(content)
 
 
 @task
