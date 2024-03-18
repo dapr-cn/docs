@@ -137,7 +137,7 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
       <p class="card-text">创建 Java 客户端，与 Dapr sidecar 和其他 Dapr 应用程序进行交互。</p>
       
       
-      <a href="{{< ref java-client >}}"></a>
+      <a href="{{< ref java-client ></a>
     </div>
   </div>
   <div class="card">
@@ -146,7 +146,7 @@ try (DaprClient client = (new DaprClientBuilder()).build()) {
       <p class="card-text">创建和管理与其他Dapr API配合工作的工作流（Workflow）（使用Java）。</p>
       
       
-      <a href="{{< ref workflow >}}"></a>
+      <a href="{{< ref workflow ></a>
     </div>
   </div>
 </div>
