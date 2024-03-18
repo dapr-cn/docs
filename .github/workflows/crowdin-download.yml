@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v2
       - name: remove old files
         run: |
+          cd src
           rm -rf translated_content
           mkdir -p translated_content/zh_CN
           cp -r content/* translated_content/zh_CN
