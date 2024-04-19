@@ -11,7 +11,7 @@ Dapr 鼓励社区帮助确定优先级。 GitHub 项目委员会可查看和提�
 
 [<img src="/images/roadmap.png" alt="Dapr Roadmap板的截图" width=500 >](https://aka.ms/dapr/roadmap)
 
-{{< button text="查看待办事项" link="https\://aka.ms/dapr/roadmap" color="primary" >}} <br />
+{{< button text="查看待办事项" link="https://aka.ms/dapr/roadmap" color="primary" >}} <br />
 
 请通过添加 GitHub issue 的👍来投票，了解您最希望看到 Dapr 支持的功能。 这将有助于 Dapr 维护人员了解哪些功能将提供最大的价值。
 

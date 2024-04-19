@@ -79,7 +79,7 @@ class ProxyCompiler {
 {
   "autoload": {
     "psr-4": {
-      "Dapr\\Proxies\\": "path/to/proxies"
+      "Dapr\Proxies\": "path/to/proxies"
     }
   },
   "scripts": {

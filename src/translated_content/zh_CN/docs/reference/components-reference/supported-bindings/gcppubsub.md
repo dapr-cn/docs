@@ -54,20 +54,20 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field                         | Required | Binding support               | Details                                             | Example                                                                                    |
-| ----------------------------- | :------: | ----------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `topic`                       |     Y    | Output                        | GCP Pub/Sub topic name                              | `"topic1"`                                                                                 |
-| `subscription`                |     N    | GCP Pub/Sub subscription name | `"name1"`                                           |                                                                                            |
-| `type`                        |     Y    | Output                        | GCP credentials type                                | `service_account`                                                                          |
-| `project_id`                  |     Y    | Output                        | GCP project id                                      | `projectId`                                                                                |
-| `private_key_id`              |     N    | Output                        | GCP private key id                                  | `"privateKeyId"`                                                                           |
+| Field                         | Required | Binding support               | Details                                                             | Example                                                                                    |
+| ----------------------------- | :------: | ----------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `topic`                       |     Y    | Output                        | GCP Pub/Sub topic name                                              | `"topic1"`                                                                                 |
+| `subscription`                |     N    | GCP Pub/Sub subscription name | `"name1"`                                                           |                                                                                            |
+| `type`                        |     Y    | Output                        | GCP credentials type                                                | `service_account`                                                                          |
+| `project_id`                  |     Y    | Output                        | GCP project id                                                      | `projectId`                                                                                |
+| `private_key_id`              |     N    | Output                        | GCP private key id                                                  | `"privateKeyId"`                                                                           |
 | `private_key`                 |     Y    | Output                        | GCP credentials private key. Replace with x509 cert | `12345-12345`                                                                              |
-| `client_email`                |     Y    | Output                        | GCP client email                                    | `"client@email.com"`                                                                       |
-| `client_id`                   |     N    | Output                        | GCP client id                                       | `0123456789-0123456789`                                                                    |
-| `auth_uri`                    |     N    | Output                        | Google account OAuth endpoint                       | `https://accounts.google.com/o/oauth2/auth`                                                |
-| `token_uri`                   |     N    | Output                        | Google account token uri                            | `https://oauth2.googleapis.com/token`                                                      |
-| `auth_provider_x509_cert_url` |     N    | Output                        | GCP credentials cert url                            | `https://www.googleapis.com/oauth2/v1/certs`                                               |
-| `client_x509_cert_url`        |     N    | Output                        | GCP credentials project x509 cert url               | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
+| `client_email`                |     Y    | Output                        | GCP client email                                                    | `"client@email.com"`                                                                       |
+| `client_id`                   |     N    | Output                        | GCP client id                                                       | `0123456789-0123456789`                                                                    |
+| `auth_uri`                    |     N    | Output                        | Google account OAuth endpoint                                       | `https://accounts.google.com/o/oauth2/auth`                                                |
+| `token_uri`                   |     N    | Output                        | Google account token uri                                            | `https://oauth2.googleapis.com/token`                                                      |
+| `auth_provider_x509_cert_url` |     N    | Output                        | GCP credentials cert url                                            | `https://www.googleapis.com/oauth2/v1/certs`                                               |
+| `client_x509_cert_url`        |     N    | Output                        | GCP credentials project x509 cert url                               | `https://www.googleapis.com/robot/v1/metadata/x509/<PROJECT_NAME>.iam.gserviceaccount.com` |
 | `direction`                   |     N    | Input/Output                  | The direction of the binding.                       | `"input"`, `"output"`, `"input, output"`                                                   |
 
 ## Binding support

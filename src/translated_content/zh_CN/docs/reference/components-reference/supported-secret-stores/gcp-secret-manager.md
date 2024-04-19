@@ -48,30 +48,30 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field                                                                                                           | Required | Details                                        | Example                                                                                      |
-| --------------------------------------------------------------------------------------------------------------- | :------: | ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Field                                                                                                           | Required | Details                                                        | Example                                                                                      |
+| --------------------------------------------------------------------------------------------------------------- | :------: | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | type                                                                                                            |     Y    | The type of the account.                       | `"service_account"`                                                                          |
 | project_id                                                                                 |     Y    | The project ID associated with this component. | `"project_id"`                                                                               |
-| private_key_id                                                        |     N    | The private key ID                             | `"privatekey"`                                                                               |
-| client_email                                                                               |     Y    | The client email address                       | `"client@example.com"`                                                                       |
-| client_id                                                                                  |     N    | The ID of the client                           | `"11111111"`                                                                                 |
-| auth_uri                                                                                   |     N    | The authentication URI                         | `"https://accounts.google.com/o/oauth2/auth"`                                                |
-| token_uri                                                                                  |     N    | The authentication token URI                   | `"https://oauth2.googleapis.com/token"`                                                      |
-| auth_provider_x509_cert_url |     N    | The certificate URL for the auth provider      | `"https://www.googleapis.com/oauth2/v1/certs"`                                               |
-| client_x509_cert_url                             |     N    | The certificate URL for the client             | `"https://www.googleapis.com/robot/v1/metadata/x509/<project-name>.iam.gserviceaccount.com"` |
-| private_key                                                                                |     Y    | The private key for authentication             | `"privateKey"`                                                                               |
+| private_key_id                                                        |     N    | The private key ID                                             | `"privatekey"`                                                                               |
+| client_email                                                                               |     Y    | The client email address                                       | `"client@example.com"`                                                                       |
+| client_id                                                                                  |     N    | The ID of the client                                           | `"11111111"`                                                                                 |
+| auth_uri                                                                                   |     N    | The authentication URI                                         | `"https://accounts.google.com/o/oauth2/auth"`                                                |
+| token_uri                                                                                  |     N    | The authentication token URI                                   | `"https://oauth2.googleapis.com/token"`                                                      |
+| auth_provider_x509_cert_url |     N    | The certificate URL for the auth provider                      | `"https://www.googleapis.com/oauth2/v1/certs"`                                               |
+| client_x509_cert_url                             |     N    | The certificate URL for the client                             | `"https://www.googleapis.com/robot/v1/metadata/x509/<project-name>.iam.gserviceaccount.com"` |
+| private_key                                                                                |     Y    | The private key for authentication                             | `"privateKey"`                                                                               |
 
 ## Optional per-request metadata properties
 
 The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided to the GCP Secret Manager component:
 
-| Query Parameter       | Description                       |
-| --------------------- | --------------------------------- |
+| Query Parameter       | Description                                       |
+| --------------------- | ------------------------------------------------- |
 | `metadata.version_id` | Version for the given secret key. |
 
 ## Setup GCP Secret Manager instance
 
-Setup GCP Secret Manager using the GCP documentation: https\://cloud.google.com/secret-manager/docs/quickstart.
+Setup GCP Secret Manager using the GCP documentation: https://cloud.google.com/secret-manager/docs/quickstart.
 
 ## Related links
 

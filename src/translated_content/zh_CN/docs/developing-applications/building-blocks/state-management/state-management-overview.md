@@ -173,11 +173,11 @@ Dapr 允许[对每个状态设置请求的生存时间(TTL)]({{< ref state-store
 
 想测试一下 Dapr 状态管理 API 吗？ 浏览以下快速入门和教程以查看状态管理的实际应用：
 
-| 快速入门/教程                                                                                                                      | 说明                                                                                              |
-| ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| 快速入门/教程                                                                                                                                      | 说明                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [状态管理快速入门]({{< ref statemanagement-quickstart.md >}}) | 使用状态管理 API 创建有状态应用程序。                                                                           |
-| [Hello world 教程](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md)                            | _推荐_ <br> 演示如何在本地运行 Dapr。 重点介绍服务调用和状态管理。                                                        |
-| [你好，世界 Kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)                               | _推荐_ <br> 演示如何在 Kubernetes 中运行 Dapr。 重点介绍服务调用和_状态管理_。 |
+| [Hello world 教程](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md)                                            | _推荐_ <br> 演示如何在本地运行 Dapr。 重点介绍服务调用和状态管理。                                                        |
+| [你好，世界 Kubernetes](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)                                               | _推荐_ <br> 演示如何在 Kubernetes 中运行 Dapr。 重点介绍服务调用和_状态管理_。 |
 
 ### 直接在应用中开始使用状态管理
 

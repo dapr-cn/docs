@@ -52,27 +52,27 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field               | Required | Details                                                                                                                                                                                                                                                                 | Example                           |
-| ------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| vaultAddr           |     N    | The address of the Vault server. Defaults to `"https://127.0.0.1:8200"`                                                                                                                                                                                                 | `"https://127.0.0.1:8200"`        |
-| caPem               |     N    | The inlined contents of the CA certificate to use, in PEM format. If defined, takes precedence over `caPath` and `caCert`.                                                                                                                                              | See below                         |
-| caPath              |     N    | The path to a folder holding the CA certificate file to use, in PEM format. If the folder contains multiple files, only the first file found will be used. If defined, takes precedence over `caCert`.                                                                  | `"path/to/cacert/holding/folder"` |
-| caCert              |     N    | The path to the CA certificate to use, in PEM format.                                                                                                                                                                                                                   | `""path/to/cacert.pem"`           |
-| skipVerify          |     N    | Skip TLS verification. Defaults to `"false"`                                                                                                                                                                                                                            | `"true"`, `"false"`               |
-| tlsServerName       |     N    | The name of the server requested during TLS handshake in order to support virtual hosting. This value is also used to verify the TLS certificate presented by Vault server.                                                                                             | `"tls-server"`                    |
-| vaultTokenMountPath |     Y    | Path to file containing token                                                                                                                                                                                                                                           | `"path/to/file"`                  |
-| vaultToken          |     Y    | [Token](https://learn.hashicorp.com/tutorials/vault/tokens) for authentication within Vault.                                                                                                                                                                            | `"tokenValue"`                    |
-| vaultKVPrefix       |     N    | The prefix in vault. Defaults to `"dapr"`                                                                                                                                                                                                                               | `"dapr"`, `"myprefix"`            |
-| vaultKVUsePrefix    |     N    | If false, vaultKVPrefix is forced to be empty. If the value is not given or set to true, vaultKVPrefix is used when accessing the vault. Setting it to false is needed to be able to use the BulkGetSecret method of the store.                                         | `"true"`, `"false"`               |
-| enginePath          |     N    | The [engine](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) path in vault. Defaults to `"secret"`                                                                                                                                                                | `"kv"`, `"any"`                   |
+| Field               | Required | Details                                                                                                                                                                                                                                                                                                                                 | Example                           |
+| ------------------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| vaultAddr           |     N    | The address of the Vault server. Defaults to `"https://127.0.0.1:8200"`                                                                                                                                                                                                                                                 | `"https://127.0.0.1:8200"`        |
+| caPem               |     N    | The inlined contents of the CA certificate to use, in PEM format. If defined, takes precedence over `caPath` and `caCert`.                                                                                                                                                                              | See below                         |
+| caPath              |     N    | The path to a folder holding the CA certificate file to use, in PEM format. If the folder contains multiple files, only the first file found will be used. If defined, takes precedence over `caCert`.                                                                                  | `"path/to/cacert/holding/folder"` |
+| caCert              |     N    | The path to the CA certificate to use, in PEM format.                                                                                                                                                                                                                                                                   | `""path/to/cacert.pem"`           |
+| skipVerify          |     N    | Skip TLS verification. Defaults to `"false"`                                                                                                                                                                                                                                                                            | `"true"`, `"false"`               |
+| tlsServerName       |     N    | The name of the server requested during TLS handshake in order to support virtual hosting. This value is also used to verify the TLS certificate presented by Vault server.                                                                                                                             | `"tls-server"`                    |
+| vaultTokenMountPath |     Y    | Path to file containing token                                                                                                                                                                                                                                                                                                           | `"path/to/file"`                  |
+| vaultToken          |     Y    | [Token](https://learn.hashicorp.com/tutorials/vault/tokens) for authentication within Vault.                                                                                                                                                                                                                            | `"tokenValue"`                    |
+| vaultKVPrefix       |     N    | The prefix in vault. Defaults to `"dapr"`                                                                                                                                                                                                                                                                               | `"dapr"`, `"myprefix"`            |
+| vaultKVUsePrefix    |     N    | If false, vaultKVPrefix is forced to be empty. If the value is not given or set to true, vaultKVPrefix is used when accessing the vault. Setting it to false is needed to be able to use the BulkGetSecret method of the store.                                                         | `"true"`, `"false"`               |
+| enginePath          |     N    | The [engine](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) path in vault. Defaults to `"secret"`                                                                                                                                                                                                                | `"kv"`, `"any"`                   |
 | vaultValueType      |     N    | Vault value type. `map` means to parse the value into `map[string]string`, `text` means to use the value as a string. 'map' sets the `multipleKeyValuesPerSecret` behavior. `text` makes Vault behave as a secret store with name/value semantics.  Defaults to `"map"` | `"map"`, `"text"`                 |
 
 ## Optional per-request metadata properties
 
 The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided to Hashicorp Vault secret store component:
 
-| Query Parameter       | Description                       |
-| --------------------- | --------------------------------- |
+| Query Parameter       | Description                                       |
+| --------------------- | ------------------------------------------------- |
 | `metadata.version_id` | Version for the given secret key. |
 
 ## Setup Hashicorp Vault instance
@@ -80,11 +80,11 @@ The following [optional query parameters]({{< ref "secrets_api#query-parameters"
 {{< tabs "Self-Hosted" "Kubernetes" >}}
 
 {{% codetab %}}
-Setup Hashicorp Vault using the Vault documentation: https\://www\.vaultproject.io/docs/install/index.html.
+Setup Hashicorp Vault using the Vault documentation: https://www.vaultproject.io/docs/install/index.html.
 {{% /codetab %}}
 
 {{% codetab %}}
-For Kubernetes, you can use the Helm Chart: https\://github.com/hashicorp/vault-helm.
+For Kubernetes, you can use the Helm Chart: https://github.com/hashicorp/vault-helm.
 {{% /codetab %}}
 
 {{< /tabs >}}

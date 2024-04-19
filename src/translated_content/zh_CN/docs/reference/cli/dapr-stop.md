@@ -21,10 +21,10 @@ dapr stop [flags]
 
 ### Flags
 
-| Name               | Environment Variable | Default | Description                                                                                                                                                                                                                                              |
-| ------------------ | -------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--app-id`, `-a`   | `APP_ID`             |         | The application id to be stopped                                                                                                                                                                                                                         |
-| `--help`, `-h`     |                      |         | Print this help message                                                                                                                                                                                                                                  |
+| Name               | Environment Variable | Default | Description                                                                                                                                                                                                                                                                              |
+| ------------------ | -------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--app-id`, `-a`   | `APP_ID`             |         | The application id to be stopped                                                                                                                                                                                                                                                         |
+| `--help`, `-h`     |                      |         | Print this help message                                                                                                                                                                                                                                                                  |
 | `--run-file`, `-f` |                      |         | Stop running multiple applications at once using a Multi-App Run template file. Currently in [alpha]({{< ref "support-preview-features.md" >}}) and only available in Linux/MacOS |
 
 ### 示例

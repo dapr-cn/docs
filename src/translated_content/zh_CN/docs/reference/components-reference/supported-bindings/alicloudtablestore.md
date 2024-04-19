@@ -40,13 +40,13 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field          | Required | Binding support | Details                       | Example                                      |
-| -------------- | -------- | --------------- | ----------------------------- | -------------------------------------------- |
-| `endpoint`     | Y        | Output          | Alicloud Tablestore endpoint. | https\://tablestore-cn-hangzhou.aliyuncs.com |
-| `accessKeyID`  | Y        | Output          | Access key ID credential.     |                                              |
-| `accessKey`    | Y        | Output          | Access key credential.        |                                              |
-| `instanceName` | Y        | Output          | Name of the instance.         |                                              |
-| `tableName`    | Y        | Output          | Name of the table.            |                                              |
+| Field          | Required | Binding support | Details                                       | Example                                                                                     |
+| -------------- | -------- | --------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `endpoint`     | Y        | Output          | Alicloud Tablestore endpoint. | https://tablestore-cn-hangzhou.aliyuncs.com |
+| `accessKeyID`  | Y        | Output          | Access key ID credential.     |                                                                                             |
+| `accessKey`    | Y        | Output          | Access key credential.        |                                                                                             |
+| `instanceName` | Y        | Output          | Name of the instance.         |                                                                                             |
+| `tableName`    | Y        | Output          | Name of the table.            |                                                                                             |
 
 ## Binding support
 

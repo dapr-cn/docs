@@ -47,12 +47,12 @@ GET http://localhost:<healthzPort>/placement/state
 
 <a id="actorhostinfo"></a>**Actor 主机信息**
 
-| 名称         | 类型        | 说明                  |
-| ---------- | --------- | ------------------- |
-| name       | string    | 执行组件的 host：port 地址。 |
-| appId      | string    | app id.             |
-| actorTypes | json字符串数组 | 托管的 actor 类型列表。     |
-| updatedAt  | timestamp | Actor 注册/更新的时间戳。    |
+| 名称         | 类型        | 说明                      |
+| ---------- | --------- | ----------------------- |
+| name       | string    | 执行组件的 host：port 地址。     |
+| appId      | string    | app id. |
+| actorTypes | json字符串数组 | 托管的 actor 类型列表。         |
+| updatedAt  | timestamp | Actor 注册/更新的时间戳。        |
 
 ### 示例
 

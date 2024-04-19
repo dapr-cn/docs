@@ -18,9 +18,9 @@ aliases:
 1. `actors\|\|<actor type>\|\|metadata` 中的元数据记录被用于存储给定 actor 类型的持久化配置。
 2. 同一 actor 类型的 reminder 子集被存储在多个记录中。
 
-| Key                                                                               | Value                                                                                                                         |
-| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `actors\\|\\|<actor type>\\|\\|metadata`                                          | `{ "id": <actor metadata identifier>, "actorRemindersMetadata": { "partitionCount": <number of partitions for reminders> } }` |
+| Key                                                                                       | Value                                                                                                                         |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `actors\\|\\|<actor type>\\|\\|metadata`                                              | `{ "id": <actor metadata identifier>, "actorRemindersMetadata": { "partitionCount": <number of partitions for reminders> } }` |
 | `actors\\|\\|<actor type>\\|\\|<actor metadata identifier>\\|\\|reminders\\|\\|1` | `[ <reminder 1-1>, <reminder 1-2>, ... , <reminder 1-n> ]`                                                                    |
 | `actors\\|\\|<actor type>\\|\\|<actor metadata identifier>\\|\\|reminders\\|\\|2` | `[ <reminder 1-1>, <reminder 1-2>, ... , <reminder 1-m> ]`                                                                    |
 

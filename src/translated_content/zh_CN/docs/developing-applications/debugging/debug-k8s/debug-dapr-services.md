@@ -38,7 +38,7 @@ make release GOOS=linux GOARCH=amd64 DEBUG=1
 
 ### 2. 构建 Dapr 调试 Docker 镜像
 
-使用下面的命令将调试二进制文件打包成 Docker 镜像。 在此之前，你需要登录到你的 docker 账号，如果还没有 docker 账号，可以在 "https\://hub.docker.com/" 中注册。
+使用下面的命令将调试二进制文件打包成 Docker 镜像。 在此之前，你需要登录到你的 docker 账号，如果还没有 docker 账号，可以在 "https://hub.docker.com/" 中注册。
 
 ```bash
 export DAPR_TAG=dev

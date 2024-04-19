@@ -63,8 +63,8 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 ### URL Parameters
 
-| Parameter | Description    |
-| --------- | -------------- |
+| Parameter | Description                    |
+| --------- | ------------------------------ |
 | daprPort  | The Dapr port. |
 
 ### HTTP Response Codes
@@ -78,29 +78,29 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 **Metadata API Response Object**
 
-| Name                    | Type                                                                                                                         | Description                                                                                                          |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| id                      | string                                                                                                                       | Application ID                                                                                                       |
-| runtimeVersion          | string                                                                                                                       | Version of the Dapr runtime                                                                                          |
-| enabledFeatures         | string[]                                                                 | List of features enabled by Dapr Configuration, see https\://docs.dapr.io/operations/configuration/preview-features/ |
-| actors                  | [Metadata API Response Registered Actor](#metadataapiresponseactor)[]    | A json encoded array of registered actors metadata.                                                                  |
-| extended.attributeName  | string                                                                                                                       | List of custom attributes as key-value pairs, where key is the attribute name.                                       |
-| components              | [Metadata API Response Component](#metadataapiresponsecomponent)[]       | A json encoded array of loaded components metadata.                                                                  |
-| httpEndpoints           | [Metadata API Response HttpEndpoint](#metadataapiresponsehttpendpoint)[] | A json encoded array of loaded HttpEndpoints metadata.                                                               |
-| subscriptions           | [Metadata API Response Subscription](#metadataapiresponsesubscription)[] | A json encoded array of pub/sub subscriptions metadata.                                                              |
-| appConnectionProperties | [Metadata API Response AppConnectionProperties](#metadataapiresponseappconnectionproperties)                                 | A json encoded object of app connection properties.                                                                  |
+| Name                                   | Type                                                                                                                         | Description                                                                                                                                                         |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                                     | string                                                                                                                       | Application ID                                                                                                                                                      |
+| runtimeVersion                         | string                                                                                                                       | Version of the Dapr runtime                                                                                                                                         |
+| enabledFeatures                        | string[]                                                                 | List of features enabled by Dapr Configuration, see https://docs.dapr.io/operations/configuration/preview-features/ |
+| actors                                 | [Metadata API Response Registered Actor](#metadataapiresponseactor)[]    | A json encoded array of registered actors metadata.                                                                                                 |
+| extended.attributeName | string                                                                                                                       | List of custom attributes as key-value pairs, where key is the attribute name.                                                                      |
+| components                             | [Metadata API Response Component](#metadataapiresponsecomponent)[]       | A json encoded array of loaded components metadata.                                                                                                 |
+| httpEndpoints                          | [Metadata API Response HttpEndpoint](#metadataapiresponsehttpendpoint)[] | A json encoded array of loaded HttpEndpoints metadata.                                                                                              |
+| subscriptions                          | [Metadata API Response Subscription](#metadataapiresponsesubscription)[] | A json encoded array of pub/sub subscriptions metadata.                                                                                             |
+| appConnectionProperties                | [Metadata API Response AppConnectionProperties](#metadataapiresponseappconnectionproperties)                                 | A json encoded object of app connection properties.                                                                                                 |
 
 <a id="metadataapiresponseactor"></a>**Metadata API Response Registered Actor**
 
-| Name  | Type    | Description                |
-| ----- | ------- | -------------------------- |
+| Name  | Type    | Description                                |
+| ----- | ------- | ------------------------------------------ |
 | type  | string  | The registered actor type. |
 | count | integer | Number of actors running.  |
 
 <a id="metadataapiresponsecomponent"></a>**Metadata API Response Component**
 
-| Name         | Type   | Description                                                 |
-| ------------ | ------ | ----------------------------------------------------------- |
+| Name         | Type   | Description                                                                 |
+| ------------ | ------ | --------------------------------------------------------------------------- |
 | name         | string | Name of the component.                                      |
 | type         | string | Component type.                                             |
 | version      | string | Component version.                                          |
@@ -108,14 +108,14 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 <a id="metadataapiresponsehttpendpoint"></a>**Metadata API Response HttpEndpoint**
 
-| Name | Type   | Description               |
-| ---- | ------ | ------------------------- |
+| Name | Type   | Description                               |
+| ---- | ------ | ----------------------------------------- |
 | name | string | Name of the HttpEndpoint. |
 
 <a id="metadataapiresponsesubscription"></a>**Metadata API Response Subscription**
 
-| Name            | Type                                                                                                                                    | Description                                     |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Name            | Type                                                                                                                                    | Description                                                     |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | pubsubname      | string                                                                                                                                  | Name of the pub/sub.                            |
 | topic           | string                                                                                                                                  | Topic name.                                     |
 | metadata        | object                                                                                                                                  | Metadata associated with the subscription.      |
@@ -124,15 +124,15 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 <a id="metadataapiresponsesubscriptionrules"></a>**Metadata API Response Subscription Rules**
 
-| Name  | Type   | Description                                                                                                                                                        |
-| ----- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| match | string | CEL expression to match the message, see https\://docs.dapr.io/developing-applications/building-blocks/pubsub/howto-route-messages/#common-expression-language-cel |
-| path  | string | Path to route the message if the match expression is true.                                                                                                         |
+| Name  | Type   | Description                                                                                                                                                                                                       |
+| ----- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| match | string | CEL expression to match the message, see https://docs.dapr.io/developing-applications/building-blocks/pubsub/howto-route-messages/#common-expression-language-cel |
+| path  | string | Path to route the message if the match expression is true.                                                                                                                                        |
 
 <a id="metadataapiresponseappconnectionproperties"></a>**Metadata API Response AppConnectionProperties**
 
-| Name           | Type                                                                                                      | Description                                               |
-| -------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Name           | Type                                                                                                      | Description                                                               |
+| -------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | port           | integer                                                                                                   | Port on which the app is listening.                       |
 | protocol       | string                                                                                                    | Protocol used by the app.                                 |
 | channelAddress | string                                                                                                    | Host address on which the app is listening.               |
@@ -141,8 +141,8 @@ GET http://localhost:<daprPort>/v1.0/metadata
 
 <a id="metadataapiresponseappconnectionpropertieshealth"></a>**Metadata API Response AppConnectionProperties Health**
 
-| Name                | Type    | Description                                                                |
-| ------------------- | ------- | -------------------------------------------------------------------------- |
+| Name                | Type    | Description                                                                                |
+| ------------------- | ------- | ------------------------------------------------------------------------------------------ |
 | healthCheckPath     | string  | Health check path, applicable for HTTP protocol.                           |
 | healthProbeInterval | string  | Time between each health probe, in go duration format.                     |
 | healthProbeTimeout  | string  | Timeout for each health probe, in go duration format.                      |
@@ -239,9 +239,9 @@ PUT http://localhost:<daprPort>/v1.0/metadata/attributeName
 
 ### URL Parameters
 
-| Parameter     | Description                                                         |
-| ------------- | ------------------------------------------------------------------- |
-| daprPort      | The Dapr port.                                                      |
+| Parameter     | Description                                                                                         |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| daprPort      | The Dapr port.                                                                      |
 | attributeName | Custom attribute name. This is they key name in the key-value pair. |
 
 ### HTTP Request Body

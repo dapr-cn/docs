@@ -38,10 +38,10 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field         | Required | Details                                                             | Example                                   |
-| ------------- | :------: | ------------------------------------------------------------------- | ----------------------------------------- |
-| datacenter    |     Y    | Datacenter to use                                                   | `"dc1"`                                   |
-| httpAddr      |     Y    | Address of the Consul server                                        | `"consul.default.svc.cluster.local:8500"` |
+| Field         | Required | Details                                                                             | Example                                   |
+| ------------- | :------: | ----------------------------------------------------------------------------------- | ----------------------------------------- |
+| datacenter    |     Y    | Datacenter to use                                                                   | `"dc1"`                                   |
+| httpAddr      |     Y    | Address of the Consul server                                                        | `"consul.default.svc.cluster.local:8500"` |
 | aclToken      |     N    | Per Request ACL Token. Default is `""`                              | `"token"`                                 |
 | scheme        |     N    | Scheme is the URI scheme for the Consul server. Default is `"http"` | `"http"`                                  |
 | keyPrefixPath |     N    | Key prefix path in Consul. Default is `""`                          | `"dapr"`                                  |

@@ -38,13 +38,13 @@ Additional encryption parameters are configured by setting headers with the appr
 values. The following table details the required and optional headers to set with every
 encryption request.
 
-| Header Key                    | Description                                                                                                                                                                                         | Allowed Values                                                                    | Required                                                 |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| dapr-key-name                 | The name of the key to use for the encryption operation                                                                                                                                             |                                                                                   | Yes                                                      |
-| dapr-key-wrap-algorithm       | The key wrap algorithm to use                                                                                                                                                                       | `A256KW`, `A128CBC`, `A192CBC`, `RSA-OAEP-256`                                    | Yes                                                      |
+| Header Key                    | Description                                                                                                                                                                                                                         | Allowed Values                                                                                    | Required                                                 |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| dapr-key-name                 | The name of the key to use for the encryption operation                                                                                                                                                                             |                                                                                                   | Yes                                                      |
+| dapr-key-wrap-algorithm       | The key wrap algorithm to use                                                                                                                                                                                                       | `A256KW`, `A128CBC`, `A192CBC`, `RSA-OAEP-256`                                                    | Yes                                                      |
 | dapr-omit-decryption-key-name | If true, omits the decryption key name from header `dapr-decryption-key-name` from the output. If false, includes the specified decryption key name specified in header `dapr-decryption-key-name`. | The following values will be accepted as true: `y`, `yes`, `true`, `t`, `on`, `1` | No                                                       |
-| dapr-decryption-key-name      | If `dapr-omit-decryption-key-name` is true, this contains the name of the intended decryption key to include in the output.                                                                         |                                                                                   | Required only if `dapr-omit-decryption-key-name` is true |
-| dapr-data-encryption-cipher   | The cipher to use for the encryption operation                                                                                                                                                      | `aes-gcm` or `chacha20-poly1305`                                                  | No                                                       |
+| dapr-decryption-key-name      | If `dapr-omit-decryption-key-name` is true, this contains the name of the intended decryption key to include in the output.                                                                                         |                                                                                                   | Required only if `dapr-omit-decryption-key-name` is true |
+| dapr-data-encryption-cipher   | The cipher to use for the encryption operation                                                                                                                                                                                      | `aes-gcm` or `chacha20-poly1305`                                                                  | No                                                       |
 
 ### HTTP Response
 
@@ -103,8 +103,8 @@ PUT curl http://localhost:3500/v1.0/crypto/<crypto-store-name>/decrypt
 Additional decryption parameters are configured by setting headers with the appropriate values. The following table
 details the required and optional headers to set with every decryption request.
 
-| Header Key    | Description                                              | Required |
-| ------------- | -------------------------------------------------------- | -------- |
+| Header Key    | Description                                                              | Required |
+| ------------- | ------------------------------------------------------------------------ | -------- |
 | dapr-key-name | The name of the key to use for the decryption operation. | Yes      |
 
 ### HTTP Response

@@ -27,13 +27,13 @@ dapr upgrade [flags]
 
 ### Flags
 
-| Name                 | Environment Variable | Default  | Description                                                                                                                  |
-| -------------------- | -------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `--help`, `-h`       |                      |          | Print this help message                                                                                                      |
-| `--kubernetes`, `-k` |                      | `false`  | Upgrade/Downgrade Dapr in a Kubernetes cluster                                                                               |
+| Name                 | Environment Variable | Default  | Description                                                                                                                                  |
+| -------------------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--help`, `-h`       |                      |          | Print this help message                                                                                                                      |
+| `--kubernetes`, `-k` |                      | `false`  | Upgrade/Downgrade Dapr in a Kubernetes cluster                                                                                               |
 | `--runtime-version`  |                      | `latest` | The version of the Dapr runtime to upgrade/downgrade to, for example: `1.0.0`                                                |
 | `--set`              |                      |          | Set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2) |
-| `--image-registry`   |                      |          | Pulls container images required by Dapr from the given image registry                                                        |
+| `--image-registry`   |                      |          | Pulls container images required by Dapr from the given image registry                                                                        |
 
 ### 示例
 

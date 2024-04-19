@@ -48,12 +48,12 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field          | Required | Binding support | Details                                                                                | Example             |
-| -------------- | :------: | --------------- | -------------------------------------------------------------------------------------- | ------------------- |
-| `region`       |     N    | Output          | The specific AWS region                                                                | `"eu-west-1"`       |
-| `accessKey`    |     N    | Output          | The AWS Access Key to access this resource                                             | `"key"`             |
-| `secretKey`    |     N    | Output          | The AWS Secret Access Key to access this resource                                      | `"secretAccessKey"` |
-| `sessionToken` |     N    | Output          | The AWS session token to use                                                           | `"sessionToken"`    |
+| Field          | Required | Binding support | Details                                                                                                | Example             |
+| -------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------ | ------------------- |
+| `region`       |     N    | Output          | The specific AWS region                                                                                | `"eu-west-1"`       |
+| `accessKey`    |     N    | Output          | The AWS Access Key to access this resource                                                             | `"key"`             |
+| `secretKey`    |     N    | Output          | The AWS Secret Access Key to access this resource                                                      | `"secretAccessKey"` |
+| `sessionToken` |     N    | Output          | The AWS session token to use                                                                           | `"sessionToken"`    |
 | `emailFrom`    |     N    | Output          | If set, this specifies the email address of the sender. See [also](#example-request)   | `"me@example.com"`  |
 | `emailTo`      |     N    | Output          | If set, this specifies the email address of the receiver. See [also](#example-request) | `"me@example.com"`  |
 | `emailCc`      |     N    | Output          | If set, this specifies the email address to CC in. See [also](#example-request)        | `"me@example.com"`  |

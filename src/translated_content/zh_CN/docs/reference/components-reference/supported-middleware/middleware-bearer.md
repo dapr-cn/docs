@@ -32,10 +32,10 @@ spec:
 
 ## Spec metadata fields
 
-| Field      | Required | Details                                                                                                                                                                                                                     | Example                                                          |
-| ---------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Field      | Required | Details                                                                                                                                                                                                                                                     | Example                                                          |
+| ---------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `audience` |     Y    | The audience expected in the tokens. Usually, this corresponds to the client ID of your application that is created as part of a credential hosted by a OpenID Connect platform.                                            |                                                                  |
-| `issuer`   |     Y    | The issuer authority, which is the value expected in the issuer claim in the tokens.                                                                                                                                        | `"https://accounts.google.com"`                                  |
+| `issuer`   |     Y    | The issuer authority, which is the value expected in the issuer claim in the tokens.                                                                                                                                                        | `"https://accounts.google.com"`                                  |
 | `jwksURL`  |     N    | Address of the JWKS (JWK Set containing the public keys for verifying tokens). If empty, will try to fetch the URL set in the OpenID Configuration document `<issuer>/.well-known/openid-configuration`. | `"https://accounts.google.com/.well-known/openid-configuration"` |
 
 Common values for `issuer` include:

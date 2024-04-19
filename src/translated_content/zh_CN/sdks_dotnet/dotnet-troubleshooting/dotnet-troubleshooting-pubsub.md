@@ -89,7 +89,7 @@ curl http://localhost:5000/dapr/subscribe -v
 ]
 ```
 
-***
+---&#x20;
 
 有了这个命令的输出，你就可以诊断问题或进入下一步了。
 
@@ -121,7 +121,7 @@ app.UseEndpoints(endpoints =>
 
 如果JSON输出是一个空数组 (如 `[]`)，那么订阅处理程序将被注册，但没有任何topic终结点。
 
-***
+---
 
 如果你正在使用一个控制器来处理 发布/订阅 ，你应该有一个类似的方法：
 
@@ -138,7 +138,7 @@ public async Task<ActionResult> Withdraw(...)
 
 在这个例子中，`Topic` 和 `HttpPost` 属性是必需的，但其他细节可能有所不同。
 
-***
+---
 
 如果你使用的是 发布/订阅 的路由，你应该有一个终结点，比如：
 
@@ -148,7 +148,7 @@ endpoints.MapPost("deposit", ...).WithTopic("pubsub", "deposit");
 
 在这个示例中，调用 `WithTopic(...)` 是必需的，但其他细节可能不同。
 
-***
+---
 
 **在纠正这段代码并重新测试后，如果JSON输出仍然是空数组（像 `[]` ），那么请在这个仓库上打开一个问题，并包含 `Startup.cs` 的内容和你的发布/订阅终结点。**
 

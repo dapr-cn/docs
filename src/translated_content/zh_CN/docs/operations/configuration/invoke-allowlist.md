@@ -22,29 +22,29 @@ The following tables lists the different properties for access control, policies
 
 ### Access Control
 
-| Property      | Type   | Description                                                                    |
-| ------------- | ------ | ------------------------------------------------------------------------------ |
-| defaultAction | string | Global default action when no other policy is matched                          |
-| trustDomain   | string | Trust domain assigned to the application. Default is "public".                 |
-| policies      | string | Policies to determine what operations the calling app can do on the called app |
+| Property      | Type   | Description                                                                                    |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| defaultAction | string | Global default action when no other policy is matched                                          |
+| trustDomain   | string | Trust domain assigned to the application. Default is "public". |
+| policies      | string | Policies to determine what operations the calling app can do on the called app                 |
 
 ### Policies
 
-| Property      | Type   | Description                                                                                         |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| app           | string | AppId of the calling app to allow/deny service invocation from                                      |
-| namespace     | string | Namespace value that needs to be matched with the namespace of the calling app                      |
+| Property      | Type   | Description                                                                                                         |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| app           | string | AppId of the calling app to allow/deny service invocation from                                                      |
+| namespace     | string | Namespace value that needs to be matched with the namespace of the calling app                                      |
 | trustDomain   | string | Trust domain that needs to be matched with the trust domain of the calling app. Default is "public" |
-| defaultAction | string | App level default action in case the app is found but no specific operation is matched              |
-| operations    | string | operations that are allowed from the calling app                                                    |
+| defaultAction | string | App level default action in case the app is found but no specific operation is matched                              |
+| operations    | string | operations that are allowed from the calling app                                                                    |
 
 ### Operations
 
-| Property | Type   | Description                                                                                                                                                     |
-| -------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property | Type   | Description                                                                                                                                                                                                     |
+| -------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name     | string | Path name of the operations allowed on the called app. Wildcard "\*" can be used in a path to match. Wildcard "\*\*" can be used to match under multiple paths. |
 | httpVerb | list   | List specific http verbs that can be used by the calling app. Wildcard "\*" can be used to match any http verb. Unused for grpc invocation.                     |
-| action   | string | Access modifier. Accepted values "allow" (default) or "deny"                                                                                 |
+| action   | string | Access modifier. Accepted values "allow" (default) or "deny"                                                                                                                 |
 
 ## Policy rules
 

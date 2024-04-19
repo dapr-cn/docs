@@ -160,7 +160,7 @@ info: WorkflowConsoleApp.Activities.NotifyActivity[0]
       Order 12345678 processed successfully!
 ```
 
-如果您在计算机上本地为 Dapr 配置了 Zipkin，则可以在 Zipkin Web UI 中查看工作流的 trace span（通常在 http\://localhost:9411/zipkin/）。
+如果您在计算机上本地为 Dapr 配置了 Zipkin，则可以在 Zipkin Web UI 中查看工作流的 trace span（通常在 http://localhost:9411/zipkin/）。
 
 ## 例子
 

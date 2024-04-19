@@ -47,10 +47,10 @@ The Azure Key Vault secret store component supports authentication with Microsof
 
 ## Spec metadata fields
 
-| Field              | Required | Details                                                                                                                                                        | Example                                                                                                                        |
-| ------------------ | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `vaultName`        |     Y    | The name of the Azure Key Vault                                                                                                                                | `"mykeyvault"`                                                                                                                 |
-| `azureEnvironment` |     N    | Optional name for the Azure environment if using a different Azure cloud                                                                                       | `"AZUREPUBLICCLOUD"` (default value), `"AZURECHINACLOUD"`, `"AZUREUSGOVERNMENTCLOUD"`, `"AZUREGERMANCLOUD"` |
+| Field              | Required | Details                                                                                                                                                                        | Example                                                                                                                        |
+| ------------------ | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `vaultName`        |     Y    | The name of the Azure Key Vault                                                                                                                                                | `"mykeyvault"`                                                                                                                 |
+| `azureEnvironment` |     N    | Optional name for the Azure environment if using a different Azure cloud                                                                                                       | `"AZUREPUBLICCLOUD"` (default value), `"AZURECHINACLOUD"`, `"AZUREUSGOVERNMENTCLOUD"`, `"AZUREGERMANCLOUD"` |
 | Auth metadata      |          | See [Authenticating to Azure]({{< ref authenticating-azure.md >}}) for more information |                                                                                                                                |
 
 Additionally, you must provide the authentication fields as explained in the [Authenticating to Azure]({{< ref authenticating-azure.md >}}) document.
@@ -59,8 +59,8 @@ Additionally, you must provide the authentication fields as explained in the [Au
 
 The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided when retrieving secrets from this secret store:
 
-| Query Parameter       | Description                                                                                                         |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Query Parameter       | Description                                                                                                                         |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `metadata.version_id` | Version for the given secret key.                                                                                   |
 | `metadata.maxresults` | (For bulk requests only) Number of secrets to return, after which the request will be truncated. |
 

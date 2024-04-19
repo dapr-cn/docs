@@ -357,8 +357,8 @@ event.type == "mymessage.v2"
 
 - **示例:**
   - 具有 DNS 权限的互联网范围的唯一 URI。
-    - https\://github.com/cloudevents
-    - mailto:cncf-wg-serverless\@lists.cncf.io
+    - https://github.com/cloudevents
+    - mailto:cncf-wg-serverless@lists.cncf.io
   - 具有 UUID 的普遍唯一的 URN。
     - urn:uuid:6e8bc430-9c3a-11d9-9669-0800200c9a66
   - 特定应用的标识符:
@@ -446,7 +446,7 @@ event.type == "mymessage.v2"
   - 事件 `type` 用于标识“blob created”事件
   - 事件的 `id` 是唯一标识事件实例的，用于区分同名 blob 的独立创建的发生次数。
   新创建的 blob 的名称在 `subject` 中传递：
-  - `source`: https\://example.com/storage/tenant/container
+  - `source`: https://example.com/storage/tenant/container
   - `subject`: mynewfile.jpg
 
 #### time

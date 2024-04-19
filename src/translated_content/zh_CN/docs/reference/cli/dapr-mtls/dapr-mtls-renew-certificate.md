@@ -32,7 +32,7 @@ dapr mtls renew-certificate [flags]
 | `--ca-root-certificate`       |                      |          | File path to user provided PEM root certificate                                                                 |   |
 | `--issuer-public-certificate` |                      |          | File path to user provided PEM issuer certificate                                                               |   |
 | `--issuer-private-key`        |                      |          | File path to user provided PEM issue private key                                                                |   |
-| `--private-key`               |                      |          | User provided root.key file which is used to generate root certificate                                          |   |
+| `--private-key`               |                      |          | User provided root.key file which is used to generate root certificate                          |   |
 
 ### 示例
 

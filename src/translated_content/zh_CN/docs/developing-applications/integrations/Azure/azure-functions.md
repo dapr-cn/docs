@@ -16,4 +16,4 @@ Dapr 通过扩展与 [Azure Functions 运行时](https://learn.microsoft.com/azu
 
 通过此扩展，您可以为无服务器和事件驱动的应用程序同时提供两者。
 
-{{< button text="尝试使用Dapr扩展程序来使用Azure Functions" link="https\://learn.microsoft.com/azure/azure-functions/functions-bindings-dapr" >}}
+{{< button text="尝试使用Dapr扩展程序来使用Azure Functions" link="https://learn.microsoft.com/azure/azure-functions/functions-bindings-dapr" >}}

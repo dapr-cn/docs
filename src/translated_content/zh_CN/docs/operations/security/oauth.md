@@ -40,12 +40,12 @@ Authorization/Token URLs of some of the popular authorization servers:
 
 <!-- IGNORE_LINKS -->
 
-| Server             | Authorization URL                                            | Token URL                                                                                |
-| ------------------ | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| Microsoft Entra ID | https\://login.microsoftonline.com/{tenant}/oauth2/authorize | https\://login.microsoftonline.com/{tenant}/oauth2/token                                 |
-| GitHub             | https\://github.com/login/oauth/authorize                    | https\://github.com/login/oauth/access_token                        |
-| 谷歌                 | https\://accounts.google.com/o/oauth2/v2/auth                | https\://accounts.google.com/o/oauth2/token https\://www\.googleapis.com/oauth2/v4/token |
-| Twitter            | https\://api.twitter.com/oauth/authorize                     | https\://api.twitter.com/oauth2/token                                                    |
+| Server             | Authorization URL                                                                                           | Token URL                                                                                                                                                                             |
+| ------------------ | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Microsoft Entra ID | https://login.microsoftonline.com/{tenant}/oauth2/authorize | https://login.microsoftonline.com/{tenant}/oauth2/token                                                                               |
+| GitHub             | https://github.com/login/oauth/authorize                                    | https://github.com/login/oauth/access_token                                                                                      |
+| 谷歌                 | https://accounts.google.com/o/oauth2/v2/auth                | https://accounts.google.com/o/oauth2/token https://www.googleapis.com/oauth2/v4/token |
+| Twitter            | https://api.twitter.com/oauth/authorize                     | https://api.twitter.com/oauth2/token                                                                                                  |
 
 <!-- END_IGNORE -->
 

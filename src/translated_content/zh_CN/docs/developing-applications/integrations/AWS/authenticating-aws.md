@@ -16,9 +16,9 @@ aliases:
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `region`       | 要连接到哪个 AWS 区域。 在某些情况下（例如在自托管模式下运行Dapr时），这个标志可以由环境变量`AWS_REGION`提供。 由于Dapr sidecar注入不允许在Dapr sidecar上配置环境变量，建议始终在组件规范中设置`region`属性。                                |
 | `endpoint`     | 终端节点通常由 AWS 开发工具包在内部处理。 然而，在某些情况下，将其设置为本地可能是有意义的 - 例如，如果在开发时使用[DynamoDB本地版](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)。 |
-| `accessKey`    | AWS Access key id.                                                                                                                                                |
-| `secretKey`    | AWS Secret access key. 与`accessKey`一起使用，明确指定证书。                                                                                                                   |
-| `sessionToken` | AWS Session token. 与 `accessKey` 和 `secretKey` 一起使用。 当使用普通IAM用户的 access key和密钥时，通常不需要session token。                                                               |
+| `accessKey`    | AWS Access key id.                                                                                                                                |
+| `secretKey`    | AWS Secret access key. 与`accessKey`一起使用，明确指定证书。                                                                                                   |
+| `sessionToken` | AWS Session token. 与 `accessKey` 和 `secretKey` 一起使用。 当使用普通IAM用户的 access key和密钥时，通常不需要session token。                                               |
 
 {{% alert title="重要" color="warning" %}}
 在您正在使用的组件规范的定义中**不能**提供AWS访问密钥、秘密密钥和令牌：

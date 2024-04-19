@@ -51,11 +51,11 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                             | Example                                   |
-| --------------- | :------: | ----------------------------------------------------------------------------------- | ----------------------------------------- |
-| `kvNamespaceID` |     Y    | ID of the pre-created Workers KV namespace                                          | `"123456789abcdef8b5588f3d134f74ac"`      |
-| `workerName`    |     Y    | Name of the Worker to connect to                                                    | `"mydaprkv"`                              |
-| `key`           |     Y    | Ed25519 private key, PEM-encoded                                                    | _See example above_                       |
+| Field           | Required | Details                                                                                                             | Example                                   |
+| --------------- | :------: | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `kvNamespaceID` |     Y    | ID of the pre-created Workers KV namespace                                                                          | `"123456789abcdef8b5588f3d134f74ac"`      |
+| `workerName`    |     Y    | Name of the Worker to connect to                                                                                    | `"mydaprkv"`                              |
+| `key`           |     Y    | Ed25519 private key, PEM-encoded                                                                                    | _See example above_                       |
 | `cfAccountID`   |    Y/N   | Cloudflare account ID. Required to have Dapr manage the worker.                     | `"456789abcdef8b5588f3d134f74ac"def`      |
 | `cfAPIToken`    |    Y/N   | API token for Cloudflare. Required to have Dapr manage the Worker.                  | `"secret-key"`                            |
 | `workerUrl`     |    Y/N   | URL of the Worker. Required if the Worker has been pre-provisioned outside of Dapr. | `"https://mydaprkv.mydomain.workers.dev"` |
@@ -208,7 +208,7 @@ openssl genpkey -algorithm ed25519 -out private.pem
 openssl pkey -in private.pem -pubout -out public.pem
 ```
 
-> On macOS, using openssl\@3 from Homebrew:
+> On macOS, using openssl@3 from Homebrew:
 >
 > ```sh
 > $(brew --prefix)/opt/openssl@3/bin/openssl genpkey -algorithm ed25519 -out private.pem

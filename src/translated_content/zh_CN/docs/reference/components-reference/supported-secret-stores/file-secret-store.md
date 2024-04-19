@@ -36,10 +36,10 @@ spec:
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                                                                                                           | Example               |
-| --------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| secretsFile     |     Y    | The path to the file where secrets are stored                                                                                                                     | `"path/to/file.json"` |
-| nestedSeparator |     N    | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"`                                                                                  | `":"`                 |
+| Field           | Required | Details                                                                                                                                                                                           | Example               |
+| --------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| secretsFile     |     Y    | The path to the file where secrets are stored                                                                                                                                                     | `"path/to/file.json"` |
+| nestedSeparator |     N    | Used by the store when flattening the JSON hierarchy to a map. Defaults to `":"`                                                                                                  | `":"`                 |
 | multiValued     |     N    | `"true"` sets the `multipleKeyValuesPerSecret` behavior. Allows one level of multi-valued key/value pairs before flattening JSON hierarchy. Defaults to `"false"` | `"true"`              |
 
 ## Setup JSON file to hold the secrets
@@ -62,9 +62,9 @@ The flag `multiValued` determines whether the secret store presents a [name/valu
 
 If `multiValued` is `false`, the store loads [the JSON file]({{< ref "#setup-json-file-to-hold-the-secrets" >}}) and create a map with the following key-value pairs:
 
-| flattened key             | value                            |
-| ------------------------- | -------------------------------- |
-| "redisPassword"           | `"your redis password"`          |
+| flattened key                             | value                            |
+| ----------------------------------------- | -------------------------------- |
+| "redisPassword"                           | `"your redis password"`          |
 | "connectionStrings:sql"   | `"your sql connection string"`   |
 | "connectionStrings:mysql" | `"your mysql connection string"` |
 

@@ -18,9 +18,9 @@ POST http://localhost:<daprPort>/v1.0-alpha1/lock/<storename>
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                                       |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                                     |
+| Parameter   | Description                                                                                                                                                                                                       |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                                                                                                                                     |
 | `storename` | The `metadata.name` field component file. Refer to the [component schema]({{< ref component-schema.md >}}) |
 
 #### Query Parameters
@@ -48,11 +48,11 @@ The lock endpoint receives the following JSON payload:
 }
 ```
 
-| Field           | Description                                                             |
-| --------------- | ----------------------------------------------------------------------- |
+| Field           | Description                                                                             |
+| --------------- | --------------------------------------------------------------------------------------- |
 | resourceId      | The ID of the resource to lock. Can be any value                        |
 | lockOwner       | The name of the lock owner. Should be set to a unique value per-request |
-| expiryInSeconds | The time in seconds to hold the lock before it expires                  |
+| expiryInSeconds | The time in seconds to hold the lock before it expires                                  |
 
 ### HTTP Response Body
 
@@ -92,9 +92,9 @@ POST http://localhost:<daprPort>/v1.0-alpha1/unlock/<storename>
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                                       |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                                     |
+| Parameter   | Description                                                                                                                                                                                                       |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                                                                                                                                     |
 | `storename` | The `metadata.name` field component file. Refer to the [component schema]({{< ref component-schema.md >}}) |
 
 #### Query Parameters

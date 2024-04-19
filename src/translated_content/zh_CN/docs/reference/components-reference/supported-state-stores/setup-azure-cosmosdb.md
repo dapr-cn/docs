@@ -43,13 +43,13 @@ If you wish to use Cosmos DB as an actor store, append the following to the yam
 
 ## Spec metadata fields
 
-| Field           | Required | Details                                                                                                           | Example                                      |
-| --------------- | :------: | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| url             |     Y    | The Cosmos DB url                                                                                                 | `"https://******.documents.azure.com:443/"`. |
-| masterKey       |    Y\*   | The key to authenticate to the Cosmos DB account. Only required when not using Microsoft Entra ID authentication. | `"key"`                                      |
-| database        |     Y    | The name of the database                                                                                          | `"db"`                                       |
-| collection      |     Y    | The name of the collection (container)                                                         | `"collection"`                               |
-| actorStateStore |     N    | Consider this state store for actors. Defaults to `"false"`                                                       | `"true"`, `"false"`                          |
+| Field           | Required | Details                                                                                                                                           | Example                                                      |
+| --------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| url             |     Y    | The Cosmos DB url                                                                                                                                 | `"https://******.documents.azure.com:443/"`. |
+| masterKey       |    Y\*   | The key to authenticate to the Cosmos DB account. Only required when not using Microsoft Entra ID authentication. | `"key"`                                                      |
+| database        |     Y    | The name of the database                                                                                                                          | `"db"`                                                       |
+| collection      |     Y    | The name of the collection (container)                                                                                         | `"collection"`                                               |
+| actorStateStore |     N    | Consider this state store for actors. Defaults to `"false"`                                                                       | `"true"`, `"false"`                                          |
 
 ### Microsoft Entra ID authentication
 

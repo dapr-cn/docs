@@ -12,8 +12,8 @@ Dapr support for Kubernetes is aligned with [Kubernetes Version Skew Policy](htt
 
 Use the following resource settings as a starting point. Requirements vary depending on cluster size, number of pods, and other factors. Perform individual testing to find the right values for your environment.
 
-| Deployment           | CPU                       | Memory                       |
-| -------------------- | ------------------------- | ---------------------------- |
+| Deployment           | CPU                                                       | Memory                                                       |
+| -------------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
 | **Operator**         | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 100Mi |
 | **Sidecar Injector** | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 30Mi  |
 | **Sentry**           | Limit: 1, Request: 100m   | Limit: 200Mi, Request: 30Mi  |
@@ -53,8 +53,8 @@ If not set, the Dapr sidecar runs without resource settings, which may lead to i
 
 Example settings for the Dapr sidecar in a production-ready setup:
 
-| CPU                        | Memory                        |
-| -------------------------- | ----------------------------- |
+| CPU                                                        | Memory                                                        |
+| ---------------------------------------------------------- | ------------------------------------------------------------- |
 | Limit: 300m, Request: 100m | Limit: 1000Mi, Request: 250Mi |
 
 The CPU and memory limits above account for Dapr supporting a high number of I/O bound operations. Use a [monitoring tool]({{< ref observability >}}) to get a baseline for the sidecar (and app) containers and tune these settings based on those baselines.

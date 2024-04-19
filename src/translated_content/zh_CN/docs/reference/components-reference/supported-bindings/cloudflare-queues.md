@@ -54,10 +54,10 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field         | Required | Binding support | Details                                                                             | Example                                      |
-| ------------- | :------: | --------------- | ----------------------------------------------------------------------------------- | -------------------------------------------- |
-| `queueName`   |     Y    | Output          | Name of the existing Cloudflare Queue                                               | `"mydaprqueue"`                              |
-| `key`         |     Y    | Output          | Ed25519 private key, PEM-encoded                                                    | _See example above_                          |
+| Field         | Required | Binding support | Details                                                                                                             | Example                                      |
+| ------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `queueName`   |     Y    | Output          | Name of the existing Cloudflare Queue                                                                               | `"mydaprqueue"`                              |
+| `key`         |     Y    | Output          | Ed25519 private key, PEM-encoded                                                                                    | _See example above_                          |
 | `cfAccountID` |    Y/N   | Output          | Cloudflare account ID. Required to have Dapr manage the worker.                     | `"456789abcdef8b5588f3d134f74ac"def`         |
 | `cfAPIToken`  |    Y/N   | Output          | API token for Cloudflare. Required to have Dapr manage the Worker.                  | `"secret-key"`                               |
 | `workerUrl`   |    Y/N   | Output          | URL of the Worker. Required if the Worker has been pre-provisioned outside of Dapr. | `"https://mydaprqueue.mydomain.workers.dev"` |
@@ -212,7 +212,7 @@ openssl genpkey -algorithm ed25519 -out private.pem
 openssl pkey -in private.pem -pubout -out public.pem
 ```
 
-> On macOS, using openssl\@3 from Homebrew:
+> On macOS, using openssl@3 from Homebrew:
 >
 > ```sh
 > $(brew --prefix)/opt/openssl@3/bin/openssl genpkey -algorithm ed25519 -out private.pem

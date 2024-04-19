@@ -16,7 +16,7 @@ Timer 和 reminder 的功能非常相似。 主要的区别在于，Dapr actor �
 
 Timer 和 reminder 的调度配置是相同的，总结如下:
 
-***
+---
 
 `dueTime`是一个可选的参数，它设置了首次调用回调之前的时间或时间间隔。 如果忽略了 `dueTime` ，则在 timer/reminder 注册后立即调用回调。
 
@@ -26,7 +26,7 @@ Timer 和 reminder 的调度配置是相同的，总结如下:
 - time.Duration 格式，例如 `2h30m`
 - [ISO 8601持续时间](https://zh.wikipedia.org/wiki/ISO_8601#持续时间)格式，例如`PT2H30M`
 
-***
+---
 
 `period` 是一个可选参数，用于设置两个连续回调调用之间的时间间隔。 当以`ISO 8601-1 duration`格式指定时，您还可以配置重复次数，以限制回调调用的总次数。
 如果`period`被省略，回调函数将只被调用一次。
@@ -36,7 +36,7 @@ Timer 和 reminder 的调度配置是相同的，总结如下:
 - time.Duration 格式，例如 `2h30m`
 - [ISO 8601持续时间](https://zh.wikipedia.org/wiki/ISO_8601#持续时间)格式，例如`PT2H30M`，`R5/PT1M30S`
 
-***
+---
 
 `ttl`是一个可选的参数，它设定时间或时间间隔，其后timer/reminder将过期并删除。 如果省略`ttl`，则不应用任何限制。
 
@@ -46,7 +46,7 @@ Timer 和 reminder 的调度配置是相同的，总结如下:
 - time.Duration 格式，例如 `2h30m`
 - [ISO 8601持续时间](https://zh.wikipedia.org/wiki/ISO_8601#持续时间)格式。 示例：`PT2H30M`
 
-***
+---
 
 Actor 运行时验证调度配置的正确性并返回无效输入的错误。
 

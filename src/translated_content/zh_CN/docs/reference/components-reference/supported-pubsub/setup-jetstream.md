@@ -98,7 +98,7 @@ spec:
 | rateLimit                                                 |     N    | [Rate Limit]                                                              | `1024`                           |
 | heartbeat                                                 |     N    | [Heartbeat]                                                               | `10s`                            |
 | ackPolicy                                                 |     N    | [Ack Policy]                                                              | `explicit`                       |
-| deliverPolicy                                             |     N    | One of: all, last, new, sequence, time                                    | `all`                            |
+| deliverPolicy                                             |     N    | One of: all, last, new, sequence, time                    | `all`                            |
 | domain                                                    |     N    | [JetStream Leafondes] | `HUB`                            |
 | apiPrefix                                                 |     N    | [JetStream Leafnodes] | `PREFIX`                         |
 
@@ -178,35 +178,19 @@ spec:
 - [NATS CLI](https://github.com/nats-io/natscli)
 
 [Durable Name]: https://docs.nats.io/jetstream/concepts/consumers#durable-name
-
 [Start Sequence]: https://docs.nats.io/jetstream/concepts/consumers#deliverbystartsequence
-
 [Start Time]: https://docs.nats.io/jetstream/concepts/consumers#deliverbystarttime
-
 [Replay Policy]: https://docs.nats.io/jetstream/concepts/consumers#replaypolicy
-
 [Flow Control]: https://docs.nats.io/jetstream/concepts/consumers#flowcontrol
-
 [Ack Wait]: https://docs.nats.io/jetstream/concepts/consumers#ackwait
-
 [Max Deliver]: https://docs.nats.io/jetstream/concepts/consumers#maxdeliver
-
 [BackOff]: https://docs.nats.io/jetstream/concepts/consumers#backoff
-
 [Max Ack Pending]: https://docs.nats.io/jetstream/concepts/consumers#maxackpending
-
 [Replicas]: https://docs.nats.io/jetstream/concepts/consumers#replicas
-
 [Memory Storage]: https://docs.nats.io/jetstream/concepts/consumers#memorystorage
-
 [Rate Limit]: https://docs.nats.io/jetstream/concepts/consumers#ratelimit
-
 [Heartbeat]: https://docs.nats.io/jetstream/concepts/consumers#heartbeat
-
 [Ack Policy]: https://docs.nats.io/nats-concepts/jetstream/consumers#ackpolicy
-
 [JetStream Leafonodes]: https://docs.nats.io/running-a-nats-service/configuration/leafnodes/jetstream_leafnodes
-
 [Decentralized JWT Authentication/Authorization]: https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/jwt
-
 [NATS token based authentication]: https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/tokens

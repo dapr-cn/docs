@@ -26,8 +26,8 @@ spec:
     value: <VALUE>
 ```
 
-| Setting         | Description                                                                            |
-| --------------- | -------------------------------------------------------------------------------------- |
+| Setting         | Description                                                                                            |
+| --------------- | ------------------------------------------------------------------------------------------------------ |
 | `metadata.name` | The name of the state store.                                                           |
 | `spec/metadata` | An open key value pair metadata that allows a binding to define connection properties. |
 
@@ -57,9 +57,9 @@ POST http://localhost:<daprPort>/v1.0/state/<storename>
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                                  |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                                |
+| Parameter   | Description                                                                                                                                                                                                  |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `daprPort`  | The Dapr port                                                                                                                                                                                                |
 | `storename` | The `metadata.name` field in the user-configured `statestore.yaml` component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
 
 The optional request metadata is passed via URL query parameters. For example,
@@ -91,8 +91,8 @@ A JSON array of state objects. Each state object is comprised with the following
 
 Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.`, as shown below.
 
-| Parameter               | Description                                                                                                                                                                 |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter               | Description                                                                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `metadata.ttlInSeconds` | The number of seconds for the message to expire, as [described here]({{< ref state-store-ttl.md >}}) |
 
 > **TTL:** Only certain state stores support the TTL option, according the [supported state stores]({{< ref supported-state-stores.md >}}).
@@ -143,13 +143,13 @@ GET http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### URL Parameters
 
-| Parameter     | Description                                                                                                                                                            |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`    | The Dapr port                                                                                                                                                          |
+| Parameter     | Description                                                                                                                                                                                                            |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`    | The Dapr port                                                                                                                                                                                                          |
 | `storename`   | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
-| `key`         | The key of the desired state                                                                                                                                           |
-| `consistency` | (optional) Read consistency mode; see [state operation options](#optional-behaviors)                                                                |
-| `metadata`    | (optional) Metadata as query parameters to the state store                                                                                          |
+| `key`         | The key of the desired state                                                                                                                                                                                           |
+| `consistency` | (optional) Read consistency mode; see [state operation options](#optional-behaviors)                                                                                                                |
+| `metadata`    | (optional) Metadata as query parameters to the state store                                                                                                                                          |
 
 The optional request metadata is passed via URL query parameters. For example,
 
@@ -212,11 +212,11 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/bulk
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                            |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                          |
+| Parameter   | Description                                                                                                                                                                                                            |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                                                                                                                                          |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
-| `metadata`  | (optional) Metadata as query parameters to the state store                                                                                          |
+| `metadata`  | (optional) Metadata as query parameters to the state store                                                                                                                                          |
 
 The optional request metadata is passed via URL query parameters. For example,
 
@@ -286,13 +286,13 @@ DELETE http://localhost:<daprPort>/v1.0/state/<storename>/<key>
 
 #### URL Parameters
 
-| Parameter     | Description                                                                                                                                                            |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`    | The Dapr port                                                                                                                                                          |
+| Parameter     | Description                                                                                                                                                                                                            |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`    | The Dapr port                                                                                                                                                                                                          |
 | `storename`   | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
-| `key`         | The key of the desired state                                                                                                                                           |
-| `concurrency` | (optional) Either _first-write_ or _last-write_; see [state operation options](#optional-behaviors)                                                 |
-| `consistency` | (optional) Either _strong_ or _eventual_; see [state operation options](#optional-behaviors)                                                        |
+| `key`         | The key of the desired state                                                                                                                                                                                           |
+| `concurrency` | (optional) Either _first-write_ or _last-write_; see [state operation options](#optional-behaviors)                                                                                                 |
+| `consistency` | (optional) Either _strong_ or _eventual_; see [state operation options](#optional-behaviors)                                                                                                        |
 
 The optional request metadata is passed via URL query parameters. For example,
 
@@ -344,11 +344,11 @@ POST/PUT http://localhost:<daprPort>/v1.0-alpha1/state/<storename>/query
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                            |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                          |
+| Parameter   | Description                                                                                                                                                                                                            |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                                                                                                                                          |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
-| `metadata`  | (optional) Metadata as query parameters to the state store                                                                                          |
+| `metadata`  | (optional) Metadata as query parameters to the state store                                                                                                                                          |
 
 The optional request metadata is passed via URL query parameters. For example,
 
@@ -484,9 +484,9 @@ POST/PUT http://localhost:<daprPort>/v1.0/state/<storename>/transaction
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                            |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`  | The Dapr port                                                                                                                                                          |
+| Parameter   | Description                                                                                                                                                                                                            |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                                                                                                                                          |
 | `storename` | `metadata.name` field in the user-configured statestore.yaml component file. Refer to the [Dapr state store configuration structure](#component-file) mentioned above. |
 
 The optional request metadata is passed via URL query parameters. For example,

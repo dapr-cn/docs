@@ -57,9 +57,9 @@ If you want to send your own custom CloudEvent, use the `application/cloudevents
 
 Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.`, as shown below.
 
-| Parameter               | Description                                                                                                                                                                                                     |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `metadata.ttlInSeconds` | The number of seconds for the message to expire, as [described here]({{< ref pubsub-message-ttl.md >}})                                  |
+| Parameter               | Description                                                                                                                                                                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `metadata.ttlInSeconds` | The number of seconds for the message to expire, as [described here]({{< ref pubsub-message-ttl.md >}})                                 |
 | `metadata.rawPayload`   | Boolean to determine if Dapr should publish the event without wrapping it as CloudEvent, as [described here]({{< ref pubsub-raw.md >}}) |
 
 > Additional metadata parameters are available based on each pubsub component.
@@ -109,19 +109,19 @@ The `Content-Type` header should always be set to `application/json` since the r
 
 ### URL Parameters
 
-| **Parameter** | **Description**                                                                                                                                                   |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `daprPort`    | The Dapr port                                                                                                                                                     |
-| `pubsubname`  | The name of pub/sub component                                                                                                                                     |
-| `topic`       | The name of the topic                                                                                                                                             |
+| **Parameter** | **Description**                                                                                                                                                                   |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`    | The Dapr port                                                                                                                                                                     |
+| `pubsubname`  | The name of pub/sub component                                                                                                                                                     |
+| `topic`       | The name of the topic                                                                                                                                                             |
 | `metadata`    | Query parameters for [metadata]({{< ref "pubsub_api.md#metadata" >}}) |
 
 ### Metadata
 
 Metadata can be sent via query parameters in the request's URL. It must be prefixed with `metadata.`, as shown in the table below.
 
-| **Parameter**              | **Description**                                                                               |
-| -------------------------- | --------------------------------------------------------------------------------------------- |
+| **Parameter**              | **Description**                                                                                               |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `metadata.rawPayload`      | Boolean to determine if Dapr should publish the messages without wrapping them as CloudEvent. |
 | `metadata.maxBulkPubBytes` | Maximum bytes to publish in a bulk publish request.                                           |
 
@@ -191,8 +191,8 @@ Example:
 
 Optionally, metadata can be sent via the request body.
 
-| Parameter    | Description                                                                                                                                                                                             |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter    | Description                                                                                                                                                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `rawPayload` | boolean to subscribe to events that do not comply with CloudEvent specification, as [described here]({{< ref pubsub-raw.md >}}) |
 
 ### Provide route(s) for Dapr to deliver topic events
@@ -239,11 +239,11 @@ Dapr assumes that a JSON-encoded payload response without `status` field or an e
 
 The HTTP response might be different from HTTP 2xx. The following are Dapr's behavior in different HTTP statuses:
 
-| HTTP Status | Description                                                                                                        |
-| ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| HTTP Status | Description                                                                                                                        |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | 2xx         | message is processed as per status in payload (`SUCCESS` if empty; ignored if invalid payload). |
-| 404         | error is logged and message is dropped                                                                             |
-| other       | warning is logged and message to be retried                                                                        |
+| 404         | error is logged and message is dropped                                                                                             |
+| other       | warning is logged and message to be retried                                                                                        |
 
 ## Subscribe multiple messages from a given topic
 
@@ -286,11 +286,11 @@ A JSON-encoded payload body with the processing status against each entry needs 
 
 The HTTP response might be different from HTTP 2xx. The following are Dapr's behavior in different HTTP statuses:
 
-| HTTP Status | Description                                      |
-| ----------- | ------------------------------------------------ |
-| 2xx         | message is processed as per status in payload.   |
-| 404         | error is logged and all messages are dropped     |
-| other       | warning is logged and all messages to be retried |
+| HTTP Status | Description                                                    |
+| ----------- | -------------------------------------------------------------- |
+| 2xx         | message is processed as per status in payload. |
+| 404         | error is logged and all messages are dropped                   |
+| other       | warning is logged and all messages to be retried               |
 
 ## Message envelope
 

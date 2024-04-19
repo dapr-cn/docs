@@ -27,12 +27,12 @@ secrets:
 
 The following table lists the properties for secret scopes:
 
-| Property  | Type   | Description                                                                     |
-| --------- | ------ | ------------------------------------------------------------------------------- |
+| Property  | Type   | Description                                                                                     |
+| --------- | ------ | ----------------------------------------------------------------------------------------------- |
 | storeName | string | Name of the secret store component. storeName must be unique within the list    |
 | 默认权限      | string | Access modifier. Accepted values "allow" (default) or "deny" |
-| 允许的密钥     | list   | List of secret keys that can be accessed                                        |
-| 被拒绝的密钥    | list   | List of secret keys that cannot be accessed                                     |
+| 允许的密钥     | list   | List of secret keys that can be accessed                                                        |
+| 被拒绝的密钥    | list   | List of secret keys that cannot be accessed                                                     |
 
 When an `allowedSecrets` list is present with at least one element, only those secrets defined in the list can be accessed by the application.
 

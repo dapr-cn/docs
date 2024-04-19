@@ -32,10 +32,10 @@ dotnet add package Dapr.Client
 
 对 Dapr .NET SDK 进行测试。 演练 .NET 快速入门和教程，了解 Dapr 的实际应用：
 
-| SDK 示例                                                                                                 | 说明                                                 |
-| ------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| SDK 示例                                                                                                 | 说明                                                                 |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | [快速入门]({{< ref quickstarts >}}) | 使用 .NET SDK 在短短几分钟内体验 Dapr 的 API 构建块。              |
-| [SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples)                                       | 克隆 SDK 存储库以尝试一些示例并开始使用。                            |
+| [SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples)                                       | 克隆 SDK 存储库以尝试一些示例并开始使用。                                            |
 | [发布/订阅教程](https://github.com/dapr/quickstarts/tree/master/tutorials/pub-sub)                           | 了解 Dapr .NET SDK 如何与其他 Dapr SDK 协同工作，以启用发布/订阅应用程序。 |
 
 ## 可用软件包
@@ -47,7 +47,7 @@ dotnet add package Dapr.Client
       <p class="card-text">创建与 Dapr sidecar 和其他 Dapr 应用程序交互的 .NET 客户端。</p>
       
       
-      <a href="{{< ref dotnet-client >}}"></a>
+      <a href="{{< ref dotnet-client ></a>
     </div>
   </div>
   <div class="card">
@@ -65,7 +65,7 @@ dotnet add package Dapr.Client
       <p class="card-text">在 .NET 中创建具有状态、提醒/计时器和方法的 virtual actor。</p>
       
       
-      <a href="{{< ref dotnet-actors >}}"></a>
+      <a href="{{< ref dotnet-actors ></a>
     </div>
   </div>
   <div class="card">
@@ -74,7 +74,7 @@ dotnet add package Dapr.Client
       <p class="card-text">创建和管理与 .NET 中的其他 Dapr API 配合使用的工作流。</p>
       
       
-      <a href="{{< ref dotnet-workflow >}}"></a>
+      <a href="{{< ref dotnet-workflow ></a>
     </div>
   </div>
 </div>
@@ -90,7 +90,7 @@ dotnet add package Dapr.Client
       <p class="card-text">了解 .NET Dapr 应用程序的本地开发选项</p>
       
       
-      <a href="{{< ref dotnet-development >}}"></a>
+      <a href="{{< ref dotnet-development ></a>
     </div>
   </div>
   <div class="card">

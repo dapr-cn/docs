@@ -90,13 +90,13 @@ Microsoft Entra ID 构建在开放标准（如 OAuth 2.0）之上，该标准允
 
 #### 使用证书进行身份验证
 
-| 字段                         | 必填                                              | Details                    | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                           |
-| -------------------------- | ----------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `azureTenantId`            | 是                                               | Microsoft Entra ID 租户的ID   | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                           |
-| `azureClientId`            | 是                                               | 客户端 ID（应用程序 ID）            | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                           |
+| 字段                         | 必填                                              | Details                    | 如何使用Dapr扩展来开发和运行Dapr应用程序                                                                                                                                |
+| -------------------------- | ----------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `azureTenantId`            | 是                                               | Microsoft Entra ID 租户的ID   | `"cd4b2887-304c-47e1-b4d5-65447fdd542b"`                                                                                                                |
+| `azureClientId`            | 是                                               | 客户端 ID（应用程序 ID）            | `"c7dd251f-811f-4ba2-a905-acd4d3f8f08b"`                                                                                                                |
 | `azureCertificate`         | `azureCertificate` 和 `azureCertificateFile` 二选一 | 证书和私钥（PFX/PKCS#12 格式）      | `"-----BEGIN PRIVATE KEY-----\n MIIEvgI... \n -----END PRIVATE KEY----- \n -----BEGIN CERTIFICATE----- \n MIICoTC... \n -----END CERTIFICATE-----` |
-| `azureCertificateFile`     | `azureCertificate` 和 `azureCertificateFile` 二选一 | 包含证书和私钥的 PFX/PKCS#12 文件的路径 | `"/path/to/file.pem"`                                                                                                                              |
-| `azureCertificatePassword` | 否                                               | 证书的密码（如果已加密）               | `"password"`                                                                                                                                       |
+| `azureCertificateFile`     | `azureCertificate` 和 `azureCertificateFile` 二选一 | 包含证书和私钥的 PFX/PKCS#12 文件的路径 | `"/path/to/file.pem"`                                                                                                                                   |
+| `azureCertificatePassword` | 否                                               | 证书的密码（如果已加密）               | `"password"`                                                                                                                                            |
 
 在 Kubernetes 上运行时，您还可以对上述任何或所有值使用对 Kubernetes secret 的引用。
 

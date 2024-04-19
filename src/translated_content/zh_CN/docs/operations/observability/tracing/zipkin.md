@@ -43,7 +43,7 @@ dapr run --app-id mynode --app-port 3000 node app.js
 
 ### Viewing Traces
 
-To view traces, in your browser go to http\://localhost:9411 and you will see the Zipkin UI.
+To view traces, in your browser go to http://localhost:9411 and you will see the Zipkin UI.
 
 ## Configure Kubernetes
 

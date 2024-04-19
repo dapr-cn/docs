@@ -10,12 +10,12 @@ Dapr 机器人由一系列命令触发，帮助 Dapr 组织完成常见任务。
 
 ## 命令参考
 
-| 命令               | 目标                    | 说明                                                     | 谁可以使用                                                                             | 仓库                                                                                                            |
-| ---------------- | --------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `/assign`        | Issue                 | 将问题分配给一个用户或一组用户                                        | 任何人                                                                               | `dapr`，`docs`，`quickstarts`，`cli`，`components-contrib`，`go-sdk`，`js-sdk`，`java-sdk`，`python-sdk`，`dotnet-sdk` |
+| 命令               | 目标                    | 说明                                                                                     | 谁可以使用                                                                             | 仓库                                                                                                            |
+| ---------------- | --------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `/assign`        | Issue                 | 将问题分配给一个用户或一组用户                                                                        | 任何人                                                                               | `dapr`，`docs`，`quickstarts`，`cli`，`components-contrib`，`go-sdk`，`js-sdk`，`java-sdk`，`python-sdk`，`dotnet-sdk` |
 | `/ok-to-test`    | Pull requests         | `dapr`: 触发端到端测试 <br/> `components-contrib`: 触发一致性和认证测试 | 列在[bot](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js)中的用户 | `dapr`，`components-contrib`                                                                                   |
-| `/ok-to-perf`    | Pull requests         | 触发性能测试。                                                | 列在[bot](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js)中的用户 | `dapr`                                                                                                        |
-| `/make-me-laugh` | Issue 或者 pull request | 发布一个随机笑话                                               | 列在[bot](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js)中的用户 | `dapr`，`components-contrib`                                                                                   |
+| `/ok-to-perf`    | Pull requests         | 触发性能测试。                                                                                | 列在[bot](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js)中的用户 | `dapr`                                                                                                        |
+| `/make-me-laugh` | Issue 或者 pull request | 发布一个随机笑话                                                                               | 列在[bot](https://github.com/dapr/dapr/blob/master/.github/scripts/dapr_bot.js)中的用户 | `dapr`，`components-contrib`                                                                                   |
 
 ## 标签参考
 
