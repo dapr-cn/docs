@@ -275,7 +275,7 @@ public record Doodad(
 - [Uri](https://learn.microsoft.com/zh-cn/dotnet/api/system.uri)
 - [XmlQualifiedName](https://learn.microsoft.com/zh-cn/dotnet/api/system.xml.xmlqualifiedname)
 
-再次，如果您想通过您的Actor方法传递这些类型，无需额外考虑，因为它们会被序列化和反序列化而无问题。 此外，自身标有(SerializeableAttribute)[https\://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute]属性的类型将被序列化。
+再次，如果您想通过您的Actor方法传递这些类型，无需额外考虑，因为它们会被序列化和反序列化而无问题。 此外，自身标有(SerializeableAttribute)[https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute]属性的类型将被序列化。
 
 ### 枚举类型
 

@@ -36,12 +36,12 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field         | Required | Binding support | Details                     | Example                               |
-| ------------- | -------- | --------------- | --------------------------- | ------------------------------------- |
-| `endpoint`    | Y        | Output          | Alicloud OSS endpoint.      | https\://oss-cn-hangzhou.aliyuncs.com |
-| `accessKeyID` | Y        | Output          | Access key ID credential.   |                                       |
-| `accessKey`   | Y        | Output          | Access key credential.      |                                       |
-| `bucket`      | Y        | Output          | Name of the storage bucket. |                                       |
+| Field         | Required | Binding support | Details                                     | Example                                                                              |
+| ------------- | -------- | --------------- | ------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `endpoint`    | Y        | Output          | Alicloud OSS endpoint.      | https://oss-cn-hangzhou.aliyuncs.com |
+| `accessKeyID` | Y        | Output          | Access key ID credential.   |                                                                                      |
+| `accessKey`   | Y        | Output          | Access key credential.      |                                                                                      |
+| `bucket`      | Y        | Output          | Name of the storage bucket. |                                                                                      |
 
 ## Binding support
 

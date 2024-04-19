@@ -30,11 +30,11 @@ spec:
 
 ## Spec metadata fields
 
-| Field             | Required | Binding support | Details                      | Example |
-| ----------------- | -------- | --------------- | ---------------------------- | ------- |
-| `AccessKeyID`     | Y        | Output          | Access key ID credential.    |         |
-| `AccessKeySecret` | Y        | Output          | Access key credential secret |         |
-| `Endpoint`        | Y        | Output          | Alicloud SLS endpoint.       |         |
+| Field             | Required | Binding support | Details                                   | Example |
+| ----------------- | -------- | --------------- | ----------------------------------------- | ------- |
+| `AccessKeyID`     | Y        | Output          | Access key ID credential. |         |
+| `AccessKeySecret` | Y        | Output          | Access key credential secret              |         |
+| `Endpoint`        | Y        | Output          | Alicloud SLS endpoint.    |         |
 
 ## Binding support
 

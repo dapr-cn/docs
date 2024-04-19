@@ -35,8 +35,8 @@ In the example above, an incoming HTTP request for `/mall/activity/info?id=123` 
 
 # Spec metadata fields
 
-| Field    | Details                                                                                                                                                    | Example           |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Field    | Details                                                                                                                                                                                    | Example           |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | `routes` | String containing a JSON-encoded or YAML-encoded dictionary. Each key in the dictionary is the incoming path, and the value is the path it's converted to. | See example above |
 
 ## Dapr configuration

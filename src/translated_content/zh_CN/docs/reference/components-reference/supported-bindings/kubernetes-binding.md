@@ -30,11 +30,11 @@ spec:
 
 ## Spec metadata fields
 
-| Field               | Required | Binding support | Details                                                                                                 | Example                 |
-| ------------------- | :------: | --------------- | ------------------------------------------------------------------------------------------------------- | ----------------------- |
-| `namespace`         |     Y    | Input           | The Kubernetes namespace to read events from                                                            | `"default"`             |
+| Field               | Required | Binding support | Details                                                                                                                 | Example                 |
+| ------------------- | :------: | --------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `namespace`         |     Y    | Input           | The Kubernetes namespace to read events from                                                                            | `"default"`             |
 | `resyncPeriodInSec` |     N    | Input           | The period of time to refresh event list from Kubernetes API server. Defaults to `"10"`                 | `"15"`                  |
-| `direction`         |     N    | Input           | The direction of the binding                                                                            | `"input"`               |
+| `direction`         |     N    | Input           | The direction of the binding                                                                                            | `"input"`               |
 | `kubeconfigPath`    |     N    | Input           | The path to the kubeconfig file. If not specified, the binding uses the default in-cluster config value | `"/path/to/kubeconfig"` |
 
 ## Binding support

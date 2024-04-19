@@ -22,4 +22,4 @@ weight: 4000
 - [一个现有的 AKS 集群](https://learn.microsoft.com/azure/aks/tutorial-kubernetes-deploy-cluster)
 - [Azure Kubernetes Service RBAC管理员角色](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#azure-kubernetes-service-rbac-admin)
 
-{{< button text="了解更多关于 Dapr 扩展的 AKS" link="https\://learn.microsoft.com/azure/aks/dapr" >}}
+{{< button text="了解更多关于 Dapr 扩展的 AKS" link="https://learn.microsoft.com/azure/aks/dapr" >}}

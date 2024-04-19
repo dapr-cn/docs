@@ -56,10 +56,10 @@ The baseline test included direct, non-encrypted traffic, without telemetry, dir
 ### Control plane performance
 
 The Dapr control plane uses a total of 0.009 vCPU and 61.6 Mb when running in non-HA mode, meaning a single replica per system component.
-When running in a highly available production setup, the Dapr control plane consumes \~0.02 vCPU and 185 Mb.
+When running in a highly available production setup, the Dapr control plane consumes ~0.02 vCPU and 185 Mb.
 
-| Component        | vCPU  | Memory  |
-| ---------------- | ----- | ------- |
+| Component        | vCPU                  | Memory                  |
+| ---------------- | --------------------- | ----------------------- |
 | Operator         | 0.001 | 12.5 Mb |
 | Sentry           | 0.005 | 13.6 Mb |
 | Sidecar Injector | 0.002 | 14.6 Mb |
@@ -77,7 +77,7 @@ There are a number of variants that affect the CPU and memory consumption for ea
 ### Data plane performance
 
 The Dapr sidecar uses 0.48 vCPU and 23Mb per 1000 requests per second.
-End-to-end, the Dapr sidecars (client and server) add \~1.40 ms to the 90th percentile latency, and \~2.10 ms to the 99th percentile latency. End-to-end here is a call from one app to another app receiving a response. This is shown by steps 1-7 in [this diagram]({{< ref service-invocation-overview.md >}}).
+End-to-end, the Dapr sidecars (client and server) add ~1.40 ms to the 90th percentile latency, and ~2.10 ms to the 99th percentile latency. End-to-end here is a call from one app to another app receiving a response. This is shown by steps 1-7 in [this diagram]({{< ref service-invocation-overview.md >}}).
 
 This performance is on par or better than commonly used service meshes.
 

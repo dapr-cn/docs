@@ -138,11 +138,11 @@ Consul名称解析组件特别适用于多机部署，并且可以在包括Kuber
 
 Dapr 文档包含多个快速入门，利用不同示例架构中的服务调用构建块。 为了对服务调用 Api 及其功能有一个直观的了解，我们建议从我们的快速入门开始：
 
-| 快速入门/教程                                                                                                                      | 说明                                            |
-| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| 快速入门/教程                                                                                                                                      | 说明                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
 | [配置快速入门]({{< ref serviceinvocation-quickstart.md >}}) | 这个快速入门让您直接与服务调用构建块进行交互。                       |
-| [Hello world 教程](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md)                            | 本教程展示了如何在本地计算机上同时使用服务调用和状态管理构建块。              |
-| [Hello world kubernetes 教程](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-kubernetes/README.md)            | 本教程介绍了在 Kubernetes 中使用 Dapr，并涵盖了服务调用和状态管理构建块。 |
+| [Hello world 教程](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-world/README.md)                                            | 本教程展示了如何在本地计算机上同时使用服务调用和状态管理构建块。              |
+| [Hello world kubernetes 教程](https://github.com/dapr/quickstarts/blob/master/tutorials/hello-kubernetes/README.md)                            | 本教程介绍了在 Kubernetes 中使用 Dapr，并涵盖了服务调用和状态管理构建块。 |
 
 ### 直接在应用中开始使用服务调用
 

@@ -21,9 +21,9 @@ dapr version [flags]
 
 ### Flags
 
-| Name             | Environment Variable | Default | Description                                      |
-| ---------------- | -------------------- | ------- | ------------------------------------------------ |
-| `--help`, `-h`   |                      |         | Print this help message                          |
+| Name             | Environment Variable | Default | Description                                                      |
+| ---------------- | -------------------- | ------- | ---------------------------------------------------------------- |
+| `--help`, `-h`   |                      |         | Print this help message                                          |
 | `--output`, `-o` |                      |         | Output format (options: json) |
 
 ### 示例

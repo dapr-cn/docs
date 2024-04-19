@@ -63,7 +63,7 @@ Python SDK 导入是主 SDK 安装中包含的子包，但在使用时需要导�
       <p class="card-text">编写Python应用程序与Dapr sidecar和其他Dapr应用程序进行交互，包括在Python中使用有状态的 virtual actors</p>
       
       
-      <a href="{{< ref python-client >}}"></a>
+      <a href="{{< ref python-client ></a>
     </div>
   </div>
   <div class="card">
@@ -72,7 +72,7 @@ Python SDK 导入是主 SDK 安装中包含的子包，但在使用时需要导�
       <p class="card-text">创建并与Dapr的Actor框架交互。</p>
       
       
-      <a href="{{< ref python-actor >}}"></a>
+      <a href="{{< ref python-actor ></a>
     </div>
   </div>
 </div>
@@ -90,7 +90,7 @@ SDK扩展主要作为接收发布/订阅事件的实用工具，以编程方式�
       <p class="card-text">使用 gRPC 服务器扩展创建 Dapr 服务。</p>
       
       
-      <a href="{{< ref python-grpc >}}"></a>
+      <a href="{{< ref python-grpc ></a>
     </div>
   </div>
   <div class="card">
@@ -99,7 +99,7 @@ SDK扩展主要作为接收发布/订阅事件的实用工具，以编程方式�
       <p class="card-text">使用Dapr FastAPI扩展与Dapr Python虚拟actor和发布/订阅进行集成。</p>
       
       
-      <a href="{{< ref python-fastapi >}}"></a>
+      <a href="{{< ref python-fastapi ></a>
     </div>
   </div>
   <div class="card">
@@ -108,7 +108,7 @@ SDK扩展主要作为接收发布/订阅事件的实用工具，以编程方式�
       <p class="card-text">使用Dapr Flask扩展与Dapr Python virtual actors 集成。</p>
       
       
-      <a href="{{< ref python-sdk-extensions >}}"></a>
+      <a href="{{< ref python-sdk-extensions ></a>
     </div>
   </div>
   <div class="card">
@@ -117,7 +117,7 @@ SDK扩展主要作为接收发布/订阅事件的实用工具，以编程方式�
       <p class="card-text">使用Python编写与其他Dapr API配合工作的工作流。</p>
       
       
-      <a href="{{< ref python-workflow >}}"></a>
+      <a href="{{< ref python-workflow ></a>
     </div>
   </div>
 </div>
@@ -154,7 +154,7 @@ git clone https://github.com/dapr/python-sdk.git
       <p class="card-text">了解Dapr SDK中的序列化更多信息。</p>
       
       
-      <a href="{{< ref sdk-serialization >}}"></a>
+      <a href="{{< ref sdk-serialization ></a>
     </div>
   </div>
   <div class="card">

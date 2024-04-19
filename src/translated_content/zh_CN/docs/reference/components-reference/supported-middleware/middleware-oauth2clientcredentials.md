@@ -46,15 +46,15 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | tokenURL            | The endpoint is used by the client to obtain an access token by presenting its authorization grant or refresh token                                                          | `"https://accounts.google.com/o/oauth2/token"`     |
 | headerName          | The authorization header name to forward to your application                                                                                                                 | `"authorization"`                                  |
 | endpointParamsQuery | Specifies additional parameters for requests to the token endpoint                                                                                                           | `true`                                             |
-| authStyle           | Optionally specifies how the endpoint wants the client ID & client secret sent. See the table of possible values below                                                       | `0`                                                |
+| authStyle           | Optionally specifies how the endpoint wants the client ID & client secret sent. See the table of possible values below                   | `0`                                                |
 
 ### Possible values for `authStyle`
 
-| Value | Meaning                                                                                                                                                                                                                                            |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `1`   | Sends the "client_id" and "client_secret" in the POST body as application/x-www-form-urlencoded parameters.                                                                                              |
+| Value | Meaning                                                                                                                                                                                                                                                                                                            |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `1`   | Sends the "client_id" and "client_secret" in the POST body as application/x-www-form-urlencoded parameters.                                                                                                                                              |
 | `2`   | Sends the "client_id" and "client_secret" using HTTP Basic Authorization. This is an optional style described in the [OAuth2 RFC 6749 section 2.3.1](https://tools.ietf.org/html/rfc6749#section-2.3.1). |
-| `0`   | Means to auto-detect which authentication style the provider wants by trying both ways and caching the successful way for the future.                                                                                                              |
+| `0`   | Means to auto-detect which authentication style the provider wants by trying both ways and caching the successful way for the future.                                                                                                                                                              |
 
 ## Dapr configuration
 

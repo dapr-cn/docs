@@ -34,9 +34,9 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field              | Required | Details                                                         | Example                                       |
-| ------------------ | :------: | --------------------------------------------------------------- | --------------------------------------------- |
-| hosts              |     Y    | Comma delimited endpoints                                       | `"memcached.default.svc.cluster.local:11211"` |
+| Field              | Required | Details                                                                         | Example                                       |
+| ------------------ | :------: | ------------------------------------------------------------------------------- | --------------------------------------------- |
+| hosts              |     Y    | Comma delimited endpoints                                                       | `"memcached.default.svc.cluster.local:11211"` |
 | maxIdleConnections |     N    | The max number of idle connections. Defaults to `"2"`           | `"3"`                                         |
 | timeout            |     N    | The timeout for the calls in milliseconds. Defaults to `"1000"` | `"1000"`                                      |
 

@@ -42,9 +42,9 @@ The Azure Key Vault cryptography component supports authentication with Microsof
 
 ## Spec metadata fields
 
-| Field         | Required | Details                                                                                                                                                          | Example        |
-| ------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `vaultName`   |     Y    | Azure Key Vault name                                                                                                                                             | `"mykeyvault"` |
+| Field         | Required | Details                                                                                                                                                                          | Example        |
+| ------------- | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `vaultName`   |     Y    | Azure Key Vault name                                                                                                                                                             | `"mykeyvault"` |
 | Auth metadata |     Y    | See [Authenticating to Azure]({{< ref "authenticating-azure.md" >}}) for more information |                |
 
 ## Related links

@@ -71,12 +71,12 @@ d.terminate_workflow(instance_id=instanceId, workflow_component=workflowComponen
 
 在代码中管理工作流。 在[编写工作流]({{< ref "howto-author-workflow.md#write-the-application" >}})指南中的工作流示例中，工作流是使用以下API在代码中注册的：
 
-- **client.workflow\.start**: 启动一个工作流实例
-- **client.workflow\.get**: 获取工作流的状态信息
-- **client.workflow\.pause**: 暂停或中止一个工作流实例，稍后可恢复该实例
-- **client.workflow\.resume**: 恢复暂停的工作流实例
-- **client.workflow\.purge**: 删除与特定工作流实例相关的所有元数据
-- **client.workflow\.terminate**: 终止或停止工作流的特定实例
+- **client.workflow.start**: 启动一个工作流实例
+- **client.workflow.get**: 获取工作流的状态信息
+- **client.workflow.pause**: 暂停或中止一个工作流实例，稍后可恢复该实例
+- **client.workflow.resume**: 恢复暂停的工作流实例
+- **client.workflow.purge**: 删除与特定工作流实例相关的所有元数据
+- **client.workflow.terminate**: 终止或停止工作流的特定实例
 
 ```javascript
 import { DaprClient } from "@dapr/dapr";

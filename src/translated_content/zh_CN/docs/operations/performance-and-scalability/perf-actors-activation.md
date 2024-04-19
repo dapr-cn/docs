@@ -45,11 +45,11 @@ Test parameters:
 
 ### Results
 
-- The actual throughput was \~500 qps.
-- The tp90 latency was \~3ms.
-- The tp99 latency was \~6.2ms.
-- Dapr app consumed \~523m CPU and \~304.7Mb of Memory
-- Dapr sidecar consumed 2m CPU and \~18.2Mb of Memory
+- The actual throughput was ~500 qps.
+- The tp90 latency was ~3ms.
+- The tp99 latency was ~6.2ms.
+- Dapr app consumed ~523m CPU and ~304.7Mb of Memory
+- Dapr sidecar consumed 2m CPU and ~18.2Mb of Memory
 - No app restarts
 - No sidecar restarts
 

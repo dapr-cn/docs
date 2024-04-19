@@ -38,10 +38,10 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                        | Example                                      |
-| ----------------- | :------: | -------------------------------------------------------------- | -------------------------------------------- |
-| servers           |     Y    | Comma delimited list of servers                                | `"zookeeper.default.svc.cluster.local:2181"` |
-| sessionTimeout    |     Y    | The session timeout value                                      | `"5s"`                                       |
+| Field             | Required | Details                                                                        | Example                                      |
+| ----------------- | :------: | ------------------------------------------------------------------------------ | -------------------------------------------- |
+| servers           |     Y    | Comma delimited list of servers                                                | `"zookeeper.default.svc.cluster.local:2181"` |
+| sessionTimeout    |     Y    | The session timeout value                                                      | `"5s"`                                       |
 | maxBufferSize     |     N    | The maximum size of buffer. Defaults to `"1048576"`            | `"1048576"`                                  |
 | maxConnBufferSize |     N    | The maximum size of connection buffer. Defaults to `"1048576`" | `"1048576"`                                  |
 | keyPrefixPath     |     N    | The key prefix path in Zookeeper. No default                   | `"dapr"`                                     |

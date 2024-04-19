@@ -25,8 +25,8 @@ Within the official container images, Dapr runs as a process with user ID (UID) 
 
 Although you can mount a Volume in any folder within the Dapr sidecar container, prevent conflicts and ensure smooth operations going forward by placing all mountpoints within one of the following locations, or in a subfolder within them:
 
-| Location | Description                                                                                             |
-| -------- | ------------------------------------------------------------------------------------------------------- |
+| Location | Description                                                                                                             |
+| -------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `/mnt`   | Recommended for Volumes containing persistent data that the Dapr sidecar process can read and/or write. |
 | `/tmp`   | Recommended for Volumes containing temporary data, such as scratch disks.                               |
 

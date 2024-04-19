@@ -77,13 +77,13 @@ Dapr 工作流 _创作 SDK_ 是特定于语言的 SDK，其中包含用于实现
 
 您可以使用以下 SDK 创作工作流。
 
-| 语言栈        | 包                                                                                                        |
-| ---------- | -------------------------------------------------------------------------------------------------------- |
-| Python     | [dapr-ext-workflow](https://github.com/dapr/python-sdk/tree/master/ext/dapr-ext-workflow)                |
-| JavaScript | [DaprWorkflowClient](https://github.com/dapr/js-sdk/blob/main/src/workflow/client/DaprWorkflowClient.ts) |
-| .NET       | [Dapr.Workflow](https://www.nuget.org/profiles/dapr.io)                                                  |
-| Java       | [io.dapr.workflows](https://dapr.github.io/java-sdk/io/dapr/workflows/package-summary.html)              |
-| Go         | [工作流](https://github.com/dapr/go-sdk/tree/main/client/workflow.go)                                       |
+| 语言栈                  | 包                                                                                                                           |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Python               | [dapr-ext-workflow](https://github.com/dapr/python-sdk/tree/master/ext/dapr-ext-workflow)                                   |
+| JavaScript           | [DaprWorkflowClient](https://github.com/dapr/js-sdk/blob/main/src/workflow/client/DaprWorkflowClient.ts)                    |
+| .NET | [Dapr.Workflow](https://www.nuget.org/profiles/dapr.io)                                                     |
+| Java                 | [io.dapr.workflows](https://dapr.github.io/java-sdk/io/dapr/workflows/package-summary.html) |
+| Go                   | [工作流](https://github.com/dapr/go-sdk/tree/main/client/workflow.go)                                                          |
 
 ## 试用工作流
 
@@ -91,14 +91,14 @@ Dapr 工作流 _创作 SDK_ 是特定于语言的 SDK，其中包含用于实现
 
 想要测试工作流？ 通过以下快速入门和教程了解工作流的实际操作：
 
-| 快速入门/教程                                                                                                               | 说明                                                  |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| [配置快速入门]({{< ref workflow-quickstart.md >}})   | 运行具有四个工作流活动的工作流应用程序，以查看 Dapr 工作流的运行情况               |
-| [Workflow Python SDK示例](https://github.com/dapr/python-sdk/tree/master/examples/demo_workflow)                        | 了解如何创建 Dapr 工作流并使用 Python 的 `DaprClient` 包调用它。      |
-| [Workflow JavaScript SDK示例](https://github.com/dapr/js-sdk/tree/main/examples/workflow)                               | 了解如何使用JavaScript SDK创建Dapr工作流并调用它。                  |
-| [Workflow .NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow)                               | 了解如何创建 Dapr 工作流并使用 ASP.NET Core Web API 调用它。        |
-| [Workflow Java SDK示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/workflows) | 了解如何创建 Dapr 工作流并使用 Java 的 `io.dapr.workflows` 包调用它。 |
-| [Workflow Go SDK示例](https://github.com/dapr/go-sdk/tree/main/examples/workflow/README.md)                             | 了解如何创建 Dapr 工作流并使用 Go 的 `workflow` 包调用它。            |
+| 快速入门/教程                                                                                                                             | 说明                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [配置快速入门]({{< ref workflow-quickstart.md >}}) | 运行具有四个工作流活动的工作流应用程序，以查看 Dapr 工作流的运行情况                        |
+| [Workflow Python SDK示例](https://github.com/dapr/python-sdk/tree/master/examples/demo_workflow)                                      | 了解如何创建 Dapr 工作流并使用 Python 的 `DaprClient` 包调用它。               |
+| [Workflow JavaScript SDK示例](https://github.com/dapr/js-sdk/tree/main/examples/workflow)                                             | 了解如何使用JavaScript SDK创建Dapr工作流并调用它。                           |
+| [Workflow .NET SDK示例](https://github.com/dapr/dotnet-sdk/tree/master/examples/Workflow)                             | 了解如何创建 Dapr 工作流并使用 ASP.NET Core Web API 调用它。 |
+| [Workflow Java SDK示例](https://github.com/dapr/java-sdk/tree/master/examples/src/main/java/io/dapr/examples/workflows)               | 了解如何创建 Dapr 工作流并使用 Java 的 `io.dapr.workflows` 包调用它。          |
+| [Workflow Go SDK示例](https://github.com/dapr/go-sdk/tree/main/examples/workflow/README.md)                                           | 了解如何创建 Dapr 工作流并使用 Go 的 `workflow` 包调用它。                     |
 
 ### 直接在应用中开始使用工作流
 

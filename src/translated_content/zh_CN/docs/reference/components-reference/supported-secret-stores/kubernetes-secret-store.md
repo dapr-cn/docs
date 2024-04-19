@@ -43,8 +43,8 @@ spec:
 
 The following [optional query parameters]({{< ref "secrets_api#query-parameters" >}}) can be provided to Kubernetes secret store component:
 
-| Query Parameter      | Description                                                                      |
-| -------------------- | -------------------------------------------------------------------------------- |
+| Query Parameter      | Description                                                                                                      |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `metadata.namespace` | The namespace of the secret. If not specified, the namespace of the pod is used. |
 
 ## Related links

@@ -63,9 +63,9 @@ curl -X POST http://localhost:3500/v1.0/state \
 
 creates the following records in table STATE:
 
-| KEY     | VALUE | CREATION_TIME | BINARY_YN | ETAG                                 |
-| ------- | ----- | ---------------------------------- | ------------------------------ | ------------------------------------ |
-| nihilus | darth | 2022-02-14T22:11:00                | N                              | 79dfb504-5b27-43f6-950f-d55d5ae0894f |
+| KEY     | VALUE | CREATION_TIME                  | BINARY_YN | ETAG                                 |
+| ------- | ----- | --------------------------------------------------- | ------------------------------ | ------------------------------------ |
+| nihilus | darth | 2022-02-14T22:11:00 | N                              | 79dfb504-5b27-43f6-950f-d55d5ae0894f |
 
 Dapr uses a fixed key scheme with _composite keys_ to partition state across applications. For general states, the key format is:
 `App-ID||state key`. The Oracle Database state store maps this key in its entirety to the KEY column.
@@ -94,9 +94,9 @@ curl -X POST http://localhost:3500/v1.0/state \
 
 creates the following object:
 
-| KEY       | VALUE     | CREATION_TIME | EXPIRATION_TIME | BINARY_YN | ETAG                                 |
-| --------- | --------- | ---------------------------------- | ------------------------------------ | ------------------------------ | ------------------------------------ |
-| temporary | ephemeral | 2022-03-31T22:11:00                | 2022-03-31T22:13:00                  | N                              | 79dfb504-5b27-43f6-950f-d55d5ae0894f |
+| KEY       | VALUE     | CREATION_TIME                  | EXPIRATION_TIME                | BINARY_YN | ETAG                                 |
+| --------- | --------- | --------------------------------------------------- | --------------------------------------------------- | ------------------------------ | ------------------------------------ |
+| temporary | ephemeral | 2022-03-31T22:11:00 | 2022-03-31T22:13:00 | N                              | 79dfb504-5b27-43f6-950f-d55d5ae0894f |
 
 with the EXPIRATION_TIME set to a timestamp 2 minutes (120 seconds) (later than the CREATION_TIME)
 

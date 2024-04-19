@@ -270,6 +270,6 @@ curl -X POST http://localhost:3500/v1.0/bindings/myKafka \
 
 There are common metadata properties which are support across multiple binding components. The list below illustrates them:
 
-| Property     | Description                                         | Binding definition                                                                                                                                      | Available in                                     |
-| ------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Property     | Description                                         | Binding definition                                                                                                                                                                      | Available in                                     |
+| ------------ | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
 | ttlInSeconds | Defines the time to live in seconds for the message | If set in the binding definition will cause all messages to have a default time to live. The message ttl overrides any value in the binding definition. | RabbitMQ, Azure Service Bus, Azure Storage Queue |

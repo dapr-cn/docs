@@ -44,17 +44,17 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field             | Required | Details                                                 | Example                                    |
-| ----------------- | :------: | ------------------------------------------------------- | ------------------------------------------ |
-| hosts             |     Y    | Comma separated value of the hosts                      | `"cassandra.cassandra.svc.cluster.local"`. |
-| port              |     N    | Port for communication. Default `"9042"`                | `"9042"`                                   |
-| username          |     Y    | The username of database user. No default               | `"user"`                                   |
-| password          |     Y    | The password for the user                               | `"password"`                               |
-| consistency       |     N    | The consistency values                                  | `"All"`, `"Quorum"`                        |
-| table             |     N    | Table name. Defaults to `"items"`                       | `"items"`, `"tab"`                         |
-| keyspace          |     N    | The cassandra keyspace to use. Defaults to `"dapr"`     | `"dapr"`                                   |
-| protoVersion      |     N    | The proto version for the client. Defaults to `"4"`     | `"3"`, `"4"`                               |
-| replicationFactor |     N    | The replication factor for the calls. Defaults to `"1"` | `"3"`                                      |
+| Field             | Required | Details                                                                 | Example                                                    |
+| ----------------- | :------: | ----------------------------------------------------------------------- | ---------------------------------------------------------- |
+| hosts             |     Y    | Comma separated value of the hosts                                      | `"cassandra.cassandra.svc.cluster.local"`. |
+| port              |     N    | Port for communication. Default `"9042"`                | `"9042"`                                                   |
+| username          |     Y    | The username of database user. No default               | `"user"`                                                   |
+| password          |     Y    | The password for the user                                               | `"password"`                                               |
+| consistency       |     N    | The consistency values                                                  | `"All"`, `"Quorum"`                                        |
+| table             |     N    | Table name. Defaults to `"items"`                       | `"items"`, `"tab"`                                         |
+| keyspace          |     N    | The cassandra keyspace to use. Defaults to `"dapr"`     | `"dapr"`                                                   |
+| protoVersion      |     N    | The proto version for the client. Defaults to `"4"`     | `"3"`, `"4"`                                               |
+| replicationFactor |     N    | The replication factor for the calls. Defaults to `"1"` | `"3"`                                                      |
 
 ## Setup Cassandra
 

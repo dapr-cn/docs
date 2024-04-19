@@ -31,8 +31,8 @@ POST/GET/PUT/DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId
 
 #### URL Parameters
 
-| Parameter   | Description                       |
-| ----------- | --------------------------------- |
+| Parameter   | Description                                       |
+| ----------- | ------------------------------------------------- |
 | `daprPort`  | The Dapr port.                    |
 | `actorType` | The actor type.                   |
 | `actorId`   | The actor ID.                     |
@@ -105,8 +105,8 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state
 
 #### URL Parameters
 
-| Parameter   | Description     |
-| ----------- | --------------- |
+| Parameter   | Description                     |
+| ----------- | ------------------------------- |
 | `daprPort`  | The Dapr port.  |
 | `actorType` | The actor type. |
 | `actorId`   | The actor ID.   |
@@ -161,8 +161,8 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/state/<key>
 
 #### URL Parameters
 
-| Parameter   | Description                  |
-| ----------- | ---------------------------- |
+| Parameter   | Description                                  |
+| ----------- | -------------------------------------------- |
 | `daprPort`  | The Dapr port.               |
 | `actorType` | The actor type.              |
 | `actorId`   | The actor ID.                |
@@ -199,9 +199,9 @@ POST/PUT http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders
 
 A JSON object with the following fields:
 
-| Field     | Description                                                                                                                                                                                |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `dueTime` | Specifies the time after which the reminder is invoked. Its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration)                                                   |
+| Field     | Description                                                                                                                                                                                                                                |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `dueTime` | Specifies the time after which the reminder is invoked. Its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration)                                                                   |
 | `period`  | Specifies the period between different invocations. Its format should be [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) or ISO 8601 duration format with optional recurrence. |
 
 `period` field supports `time.Duration` format and ISO 8601 format with some limitations. For `period`, only duration format of ISO 8601 duration `Rn/PnYnMnWnDTnHnMnS` is supported. `Rn/` specifies that the reminder will be invoked `n` number of times.
@@ -248,8 +248,8 @@ To configure the reminder to fire only once, the period should be set to empty s
 
 #### URL Parameters
 
-| Parameter   | Description                         |
-| ----------- | ----------------------------------- |
+| Parameter   | Description                                         |
+| ----------- | --------------------------------------------------- |
 | `daprPort`  | The Dapr port.                      |
 | `actorType` | The actor type.                     |
 | `actorId`   | The actor ID.                       |
@@ -288,8 +288,8 @@ GET http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<nam
 
 #### URL Parameters
 
-| Parameter   | Description                      |
-| ----------- | -------------------------------- |
+| Parameter   | Description                                      |
+| ----------- | ------------------------------------------------ |
 | `daprPort`  | The Dapr port.                   |
 | `actorType` | The actor type.                  |
 | `actorId`   | The actor ID.                    |
@@ -333,8 +333,8 @@ DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/reminders/<
 
 #### URL Parameters
 
-| Parameter   | Description                         |
-| ----------- | ----------------------------------- |
+| Parameter   | Description                                         |
+| ----------- | --------------------------------------------------- |
 | `daprPort`  | The Dapr port.                      |
 | `actorType` | The actor type.                     |
 | `actorId`   | The actor ID.                       |
@@ -391,8 +391,8 @@ A `dueTime` of 0 means to fire immediately.  The following body means to fire im
 
 #### URL Parameters
 
-| Parameter   | Description                      |
-| ----------- | -------------------------------- |
+| Parameter   | Description                                      |
+| ----------- | ------------------------------------------------ |
 | `daprPort`  | The Dapr port.                   |
 | `actorType` | The actor type.                  |
 | `actorId`   | The actor ID.                    |
@@ -432,8 +432,8 @@ DELETE http://localhost:<daprPort>/v1.0/actors/<actorType>/<actorId>/timers/<nam
 
 #### URL Parameters
 
-| Parameter   | Description                      |
-| ----------- | -------------------------------- |
+| Parameter   | Description                                      |
+| ----------- | ------------------------------------------------ |
 | `daprPort`  | The Dapr port.                   |
 | `actorType` | The actor type.                  |
 | `actorId`   | The actor ID.                    |
@@ -467,8 +467,8 @@ GET http://localhost:<appPort>/dapr/config
 
 #### URL Parameters
 
-| Parameter | Description           |
-| --------- | --------------------- |
+| Parameter | Description                           |
+| --------- | ------------------------------------- |
 | `appPort` | The application port. |
 
 #### 示例
@@ -482,17 +482,17 @@ curl -X GET http://localhost:3000/dapr/config \
 
 The above command returns the config (all fields are optional):
 
-| Parameter                 | Description                                                                                                                                                                                                    |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entities`                | The actor types this app supports.                                                                                                                                                                             |
-| `actorIdleTimeout`        | Specifies how long to wait before deactivating an idle actor.  An actor is idle if no actor method calls and no reminders have fired on it.                                                                    |
-| `actorScanInterval`       | A duration which specifies how often to scan for actors to deactivate idle actors.  Actors that have been idle longer than the actorIdleTimeout will be deactivated.                                           |
+| Parameter                 | Description                                                                                                                                                                                                                                                    |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `entities`                | The actor types this app supports.                                                                                                                                                                                                             |
+| `actorIdleTimeout`        | Specifies how long to wait before deactivating an idle actor.  An actor is idle if no actor method calls and no reminders have fired on it.                                                                                    |
+| `actorScanInterval`       | A duration which specifies how often to scan for actors to deactivate idle actors.  Actors that have been idle longer than the actorIdleTimeout will be deactivated.                                                           |
 | `drainOngoingCallTimeout` | A duration used when in the process of draining rebalanced actors.  This specifies how long to wait for the current active actor method to finish.  If there is no current actor method call, this is ignored. |
 | `drainRebalancedActors`   | A bool.  If true, Dapr will wait for `drainOngoingCallTimeout` to allow a current actor call to complete before trying to deactivate an actor.  If false, do not wait.                                         |
-| `reentrancy`              | A configuration object that holds the options for actor reentrancy.                                                                                                                                            |
-| `enabled`                 | A flag in the reentrancy configuration that is needed to enable reentrancy.                                                                                                                                    |
-| `maxStackDepth`           | A value in the reentrancy configuration that controls how many reentrant calls be made to the same actor.                                                                                                      |
-| `entitiesConfig`          | Array of entity configurations that allow per actor type settings. Any configuration defined here must have an entity that maps back into the root level entities.                                             |
+| `reentrancy`              | A configuration object that holds the options for actor reentrancy.                                                                                                                                                                            |
+| `enabled`                 | A flag in the reentrancy configuration that is needed to enable reentrancy.                                                                                                                                                                    |
+| `maxStackDepth`           | A value in the reentrancy configuration that controls how many reentrant calls be made to the same actor.                                                                                                                                      |
+| `entitiesConfig`          | Array of entity configurations that allow per actor type settings. Any configuration defined here must have an entity that maps back into the root level entities.                                                             |
 
 {{% alert title="Note" color="primary" %}}
 Actor settings in configuration for timeouts and intervals use [time.ParseDuration](https://pkg.go.dev/time#ParseDuration) format. You can use string formats to represent durations. 例如：
@@ -548,8 +548,8 @@ DELETE http://localhost:<appPort>/actors/<actorType>/<actorId>
 
 #### URL Parameters
 
-| Parameter   | Description           |
-| ----------- | --------------------- |
+| Parameter   | Description                           |
+| ----------- | ------------------------------------- |
 | `appPort`   | The application port. |
 | `actorType` | The actor type.       |
 | `actorId`   | The actor ID.         |
@@ -590,8 +590,8 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/<methodName>
 
 #### URL Parameters
 
-| Parameter    | Description                       |
-| ------------ | --------------------------------- |
+| Parameter    | Description                                       |
+| ------------ | ------------------------------------------------- |
 | `appPort`    | The application port.             |
 | `actorType`  | The actor type.                   |
 | `actorId`    | The actor ID.                     |
@@ -628,8 +628,8 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/remind/<remin
 
 #### URL Parameters
 
-| Parameter      | Description                         |
-| -------------- | ----------------------------------- |
+| Parameter      | Description                                         |
+| -------------- | --------------------------------------------------- |
 | `appPort`      | The application port.               |
 | `actorType`    | The actor type.                     |
 | `actorId`      | The actor ID.                       |
@@ -666,8 +666,8 @@ PUT http://localhost:<appPort>/actors/<actorType>/<actorId>/method/timer/<timerN
 
 #### URL Parameters
 
-| Parameter   | Description                      |
-| ----------- | -------------------------------- |
+| Parameter   | Description                                      |
+| ----------- | ------------------------------------------------ |
 | `appPort`   | The application port.            |
 | `actorType` | The actor type.                  |
 | `actorId`   | The actor ID.                    |
@@ -705,8 +705,8 @@ GET http://localhost:<appPort>/healthz
 
 #### URL Parameters
 
-| Parameter | Description           |
-| --------- | --------------------- |
+| Parameter | Description                           |
+| --------- | ------------------------------------- |
 | `appPort` | The application port. |
 
 #### 示例

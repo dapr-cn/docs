@@ -8,7 +8,7 @@ description: 在本地调试与你的 Kubernetes 集群相连的 Dapr 应用程�
 
 Bridge to Kubernetes 允许你在你的开发计算机上运行和调试代码，同时仍然与你的应用程序或服务的其他部分连接到你的 Kubernetes 集群。 这种类型的调试通常称为_本地隧道调试_。
 
-{{< button text="了解更多关于 Bridge to Kubernetes" link="https\://aka.ms/bridge-vscode-dapr" >}}
+{{< button text="了解更多关于 Bridge to Kubernetes" link="https://aka.ms/bridge-vscode-dapr" >}}
 
 ## 调试 Dapr 应用
 

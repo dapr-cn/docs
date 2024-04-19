@@ -236,7 +236,7 @@ apps:
 | ------------------------ | :-: | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ----------- |
 | `appDirPath`             |  是  | 应用代码的路径                                                                                                                      | `./webapp/`, `./backend/`                 |             |
 | `appID`                  |  否  | 应用程序的应用程序 ID。 如果未提供，将从`appDirPath`派生                                                                                         | `webapp`, `backend`                       |             |
-| `resourcesPath`          |  否  | **Deprecated**. Dapr 资源的路径。 可以按照惯例设置为默认值                                                                                     | `./app/components`, `./webapp/components` |             |
+| `resourcesPath`          |  否  | **Deprecated**. Dapr 资源的路径。 可以按照惯例设置为默认值                                                                     | `./app/components`, `./webapp/components` |             |
 | `resourcesPaths`         |  否  | 逗号分隔的 Dapr 资源路径。 可以按照惯例设置为默认值                                                                                                | `./app/components`, `./webapp/components` |             |
 | `appChannelAddress`      |  否  | 应用程序监听的网络地址。 可以按照惯例设置为默认值。                                                                                                   | `127.0.0.1`                               | `localhost` |
 | `configFilePath`         |  否  | 应用程序配置文件的路径                                                                                                                  | `./webapp/config.yaml`                    |             |

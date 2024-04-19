@@ -93,7 +93,7 @@ spec:
 
 All the certificates in the directory pointed by `SSL_CERT_DIR` are installed.
 
-1. On Linux containers, all the certificate extensions supported by OpenSSL are supported. For more information, see https\://www\.openssl.org/docs/man1.1.1/man1/openssl-rehash.html
+1. On Linux containers, all the certificate extensions supported by OpenSSL are supported. For more information, see https://www.openssl.org/docs/man1.1.1/man1/openssl-rehash.html
 2. On Windows container, all the certificate extensions supported by certoc.exe are supported. For more information, see certoc.exe present in [Windows Server Core](https://hub.docker.com/_/microsoft-windows-servercore)
 
 ## Example

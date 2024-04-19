@@ -244,8 +244,8 @@ The API call will provide a JSON response similar to this:
  }
 ```
 
-| Parameter       | Description                                                                                                                                                                 |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter       | Description                                                                                                                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `runtimeStatus` | The status of the workflow instance. Values include: `"RUNNING"`, `"COMPLETED"`, `"CONTINUED_AS_NEW"`, `"FAILED"`, `"CANCELED"`, `"TERMINATED"`, `"PENDING"`, `"SUSPENDED"` |
 
 ## Component format
@@ -267,7 +267,7 @@ spec:
 
 | Setting         | Description                                                    |
 | --------------- | -------------------------------------------------------------- |
-| `metadata.name` | The name of the workflow component.                            |
+| `metadata.name` | The name of the workflow component.            |
 | `spec/metadata` | Additional metadata parameters specified by workflow component |
 
 However, Dapr comes with a built-in `dapr` workflow component that is built on Dapr Actors. No component file is required to use the built-in Dapr workflow component.

@@ -18,9 +18,9 @@ GET http://localhost:<daprPort>/v1.0/configuration/<storename>
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                                    |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `daprPort`  | The Dapr port                                                                                                                                                                  |
+| Parameter   | Description                                                                                                                                                                                                    |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                                                                                                                                  |
 | `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
 
 #### Query Parameters
@@ -84,9 +84,9 @@ GET http://localhost:<daprPort>/v1.0/configuration/<storename>/subscribe
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                                    |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `daprPort`  | The Dapr port                                                                                                                                                                  |
+| Parameter   | Description                                                                                                                                                                                                    |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`  | The Dapr port                                                                                                                                                                                                  |
 | `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
 
 #### Query Parameters
@@ -150,11 +150,11 @@ GET http://localhost:<daprPort>/v1.0/configuration/<storename>/<subscription-id>
 
 #### URL Parameters
 
-| Parameter         | Description                                                                                                                                                                    |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `daprPort`        | The Dapr port                                                                                                                                                                  |
+| Parameter         | Description                                                                                                                                                                                                    |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `daprPort`        | The Dapr port                                                                                                                                                                                                  |
 | `storename`       | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
-| `subscription-id` | The value from the `id` field returned from the response of the subscribe endpoint                                                                                             |
+| `subscription-id` | The value from the `id` field returned from the response of the subscribe endpoint                                                                                                                             |
 
 #### Query Parameters
 
@@ -221,11 +221,11 @@ POST http://localhost:<appPort>/configuration/<store-name>/<key>
 
 #### URL Parameters
 
-| Parameter   | Description                                                                                                                                                                    |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `appPort`   | The application port                                                                                                                                                           |
+| Parameter   | Description                                                                                                                                                                                                    |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appPort`   | The application port                                                                                                                                                                                           |
 | `storename` | The `metadata.name` field component file. Refer to the [component spec]({{< ref component-schema.md>}}) |
-| `key`       | The key subscribed to                                                                                                                                                          |
+| `key`       | The key subscribed to                                                                                                                                                                                          |
 
 #### Request Body
 

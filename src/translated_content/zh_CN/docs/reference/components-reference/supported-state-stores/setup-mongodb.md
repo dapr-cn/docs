@@ -65,11 +65,11 @@ If you wish to use MongoDB as an actor store, add this metadata option to your C
 | host             | Y<sup>1</sup> | The host to connect to                                                                              | `"mongo-mongodb.default.svc.cluster.local:27017"`                     |
 | username         |       N       | The username of the user to connect with (applicable in conjunction with `host`) | `"admin"`                                                             |
 | password         |       N       | The password of the user (applicable in conjunction with `host`)                 | `"password"`                                                          |
-| databaseName     |       N       | The name of the database to use. Defaults to `"daprStore"`                                          | `"daprStore"`                                                         |
-| collectionName   |       N       | The name of the collection to use. Defaults to `"daprCollection"`                                   | `"daprCollection"`                                                    |
+| databaseName     |       N       | The name of the database to use. Defaults to `"daprStore"`                          | `"daprStore"`                                                         |
+| collectionName   |       N       | The name of the collection to use. Defaults to `"daprCollection"`                   | `"daprCollection"`                                                    |
 | writeConcern     |       N       | The write concern to use                                                                            | `"majority"`                                                          |
 | readConcern      |       N       | The read concern to use                                                                             | `"majority"`, `"local"`,`"available"`, `"linearizable"`, `"snapshot"` |
-| operationTimeout |       N       | The timeout for the operation. Defaults to `"5s"`                                                   | `"5s"`                                                                |
+| operationTimeout |       N       | The timeout for the operation. Defaults to `"5s"`                                   | `"5s"`                                                                |
 | params           | N<sup>2</sup> | Additional parameters to use                                                                        | `"?authSource=daprStore&ssl=true"`                                    |
 
 > <sup>[1]</sup> The `server` and `host` fields are mutually exclusive. If neither or both are set, Dapr returns an error.

@@ -36,7 +36,7 @@ This document explains how to install it in your cluster, either using a Helm ch
   helm install newrelic/newrelic-logging --name newrelic-logging --set licenseKey=YOUR_LICENSE_KEY
   ```
 
-For EU users, add \`--set endpoint=https\://log-api.eu.newrelic.com/log/v1 to any of the helm install commands above.
+For EU users, add \`--set endpoint=https://log-api.eu.newrelic.com/log/v1 to any of the helm install commands above.
 
 By default, tailing is set to /var/log/containers/\*.log. To change this setting, provide your preferred path by adding --set fluentBit.path=DESIRED_PATH to any of the helm install commands above.
 
@@ -52,7 +52,7 @@ By default, tailing is set to /var/log/containers/\*.log. To change this setting
 
 2. In the downloaded new-relic-fluent-plugin.yml file, replace the placeholder value LICENSE_KEY with your New Relic license key.
 
-   For EU users, replace the ENDPOINT environment variable to https\://log-api.eu.newrelic.com/log/v1.
+   For EU users, replace the ENDPOINT environment variable to https://log-api.eu.newrelic.com/log/v1.
 
 3. Once the License key has been added, run the following command in your terminal or command-line interface:
    ```bash

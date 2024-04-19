@@ -43,8 +43,8 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 ## Spec metadata fields
 
-| Field  | Required | Details                                                                                                                           | Example           |
-| ------ | :------: | --------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Field  | Required | Details                                                                                                                                                           | Example           |
+| ------ | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `path` |     Y    | Folder containing the keys to be loaded. When loading a key, the name of the key will be used as name of the file in this folder. | `/path/to/folder` |
 
 **Example**

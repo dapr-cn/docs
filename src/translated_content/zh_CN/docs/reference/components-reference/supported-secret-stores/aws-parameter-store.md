@@ -40,12 +40,12 @@ The above example uses secrets as plain strings. It is recommended to use a loca
 
 ## Spec metadata fields
 
-| Field        | Required | Details                                                                         | Example             |
-| ------------ | :------: | ------------------------------------------------------------------------------- | ------------------- |
-| region       |     Y    | The specific AWS region the AWS SSM Parameter Store instance is deployed in     | `"us-east-1"`       |
-| accessKey    |     Y    | The AWS Access Key to access this resource                                      | `"key"`             |
-| secretKey    |     Y    | The AWS Secret Access Key to access this resource                               | `"secretAccessKey"` |
-| sessionToken |     N    | The AWS session token to use                                                    | `"sessionToken"`    |
+| Field        | Required | Details                                                                                         | Example             |
+| ------------ | :------: | ----------------------------------------------------------------------------------------------- | ------------------- |
+| region       |     Y    | The specific AWS region the AWS SSM Parameter Store instance is deployed in                     | `"us-east-1"`       |
+| accessKey    |     Y    | The AWS Access Key to access this resource                                                      | `"key"`             |
+| secretKey    |     Y    | The AWS Secret Access Key to access this resource                                               | `"secretAccessKey"` |
+| sessionToken |     N    | The AWS session token to use                                                                    | `"sessionToken"`    |
 | prefix       |     N    | Allows you to specify more than one SSM parameter store secret store component. | `"prefix"`          |
 
 {{% alert title="Important" color="warning" %}}
@@ -54,7 +54,7 @@ When running the Dapr sidecar (daprd) with your application on EKS (AWS Kubernet
 
 ## Create an AWS SSM Parameter Store instance
 
-Setup AWS SSM Parameter Store using the AWS documentation: https\://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html.
+Setup AWS SSM Parameter Store using the AWS documentation: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html.
 
 ## Related links
 

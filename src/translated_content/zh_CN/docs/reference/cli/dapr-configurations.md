@@ -21,14 +21,14 @@ dapr configurations [flags]
 
 ### Flags
 
-| Name                     | Environment Variable | Default | Description                                                                           |
-| ------------------------ | -------------------- | ------- | ------------------------------------------------------------------------------------- |
-| `--kubernetes`, `-k`     |                      | `false` | List all Dapr configurations in Kubernetes cluster (required).     |
-| `--all-namespaces`, `-A` |                      | `true`  | If true, list all Dapr configurations in all namespaces (optional) |
-| `--namespace`            |                      |         | List Dapr configurations in specific namespace.                                       |
-| `--name`, `-n`           |                      |         | Print specific Dapr configuration. (optional)                      |
-| `--output`, `-o`         |                      | `list`  | Output format (options: json or yaml or list)                      |
-| `--help`, `-h`           |                      |         | Print this help message                                                               |
+| Name                     | Environment Variable | Default | Description                                                                                       |
+| ------------------------ | -------------------- | ------- | ------------------------------------------------------------------------------------------------- |
+| `--kubernetes`, `-k`     |                      | `false` | List all Dapr configurations in Kubernetes cluster (required). |
+| `--all-namespaces`, `-A` |                      | `true`  | If true, list all Dapr configurations in all namespaces (optional)             |
+| `--namespace`            |                      |         | List Dapr configurations in specific namespace.                                   |
+| `--name`, `-n`           |                      |         | Print specific Dapr configuration. (optional)                  |
+| `--output`, `-o`         |                      | `list`  | Output format (options: json or yaml or list)                  |
+| `--help`, `-h`           |                      |         | Print this help message                                                                           |
 
 ### 示例
 

@@ -14,4 +14,4 @@ weight: 2000
 
 尝试使用[Dapr和Azure API Management集成示例](https://github.com/dapr/samples/tree/master/dapr-apim-integration)。
 
-{{< button text="了解更多关于Dapr集成策略" link="https\://docs.microsoft.com/azure/api-management/api-management-dapr-policies" >}}
+{{< button text="了解更多关于Dapr集成策略" link="https://docs.microsoft.com/azure/api-management/api-management-dapr-policies" >}}

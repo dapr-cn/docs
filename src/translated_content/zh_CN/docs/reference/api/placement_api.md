@@ -33,19 +33,19 @@ GET http://localhost:<healthzPort>/placement/state
 
 **Placement tables API Response Object**
 
-| Name         | Type                                                                                    | Description                                  |
-| ------------ | --------------------------------------------------------------------------------------- | -------------------------------------------- |
-| tableVersion | int                                                                                     | The placement table version                  |
+| Name         | Type                                                                                    | Description                                                  |
+| ------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| tableVersion | int                                                                                     | The placement table version                                  |
 | hostList     | [Actor Host Info](#actorhostinfo)[] | A json array of registered actors host info. |
 
 <a id="actorhostinfo"></a>**Actor Host Info**
 
-| Name       | Type              | Description                                |
-| ---------- | ----------------- | ------------------------------------------ |
-| name       | string            | The host:port address of the actor.        |
-| appId      | string            | app id.                                    |
-| actorTypes | json string array | List of actor types it hosts.              |
-| updatedAt  | timestamp         | Timestamp of the actor registered/updated. |
+| Name       | Type              | Description                                                         |
+| ---------- | ----------------- | ------------------------------------------------------------------- |
+| name       | string            | The host:port address of the actor. |
+| appId      | string            | app id.                                             |
+| actorTypes | json string array | List of actor types it hosts.                       |
+| updatedAt  | timestamp         | Timestamp of the actor registered/updated.          |
 
 ## 示例
 
