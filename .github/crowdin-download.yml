@@ -2,7 +2,7 @@ name: Download translation from Crowdin
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "10 1 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -12,26 +12,15 @@ on:
 jobs:
   synchronize-with-crowdin:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        version_tag:
-          - v1.5
-          - v1.4
-          - v1.3
-          - v1.2
-          - v1.1
-          - v1.0
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          ref: ${{ matrix.version_tag }}/translate_site
-      - name: sleep
+      - name: remove old files
         run: |
-          # sleep some time according to the version tag. e.g. v1.5 will sleep for 5*30 seconds
-          sleep $(($(echo ${{ matrix.version_tag }} | sed -e 's/v//' -e 's/\.//g')*30))
+          cd src
+          rm -rf translated_content
+          mkdir -p translated_content/zh_CN
+          cp -r content/* translated_content/zh_CN
       - name: crowdin action
         uses: crowdin/github-action@v1.19.0
         with:
@@ -39,11 +28,10 @@ jobs:
           upload_translations: false
           download_translations: true
           dryrun_action: false
-          crowdin_branch_name: ${{ matrix.version_tag }}_translate_site
 
           # This is the name of the git branch that Crowdin will create when opening a pull request.
           # This branch does NOT need to be manually created. It will be created automatically by the action.
-          localization_branch_name: l10n_crowdin_action_${{ matrix.version_tag }}
+          localization_branch_name: l10n_crowdin_action
           create_pull_request: false
           push_translations: false
           pull_request_title: "New Crowdin translations"
@@ -51,7 +39,7 @@ jobs:
           pull_request_labels: "translation update, automated pr"
           # This is the name of the git branch to with pull request will be created.
           # If not specified default repository branch will be used.
-          pull_request_base_branch_name: ${{ matrix.version_tag }}/translate_site
+          pull_request_base_branch_name: main
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
@@ -70,16 +58,12 @@ jobs:
           commit-message: "New Crowdin translations"
           signoff: false
           delete-branch: true
-          branch: l10n_crowdin_action_${{ matrix.version_tag }}
-          base: ${{ matrix.version_tag }}/translate_site
+          branch: l10n_crowdin_action
+          base: main
           title: "New Crowdin translations"
           labels: |
             automated pr
-            ${{ matrix.version_tag }}
           assignees: |
             newbe36524
           reviewers: |
             newbe36524
-          team-reviewers: |
-            owners
-            maintainers
