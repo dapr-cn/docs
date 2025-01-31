@@ -8,6 +8,10 @@ description: "The basic spec for a Dapr resiliency resource"
 
 The `Resiliency` Dapr resource allows you to define and apply fault tolerance resiliency policies. Resiliency specs are applied when the Dapr sidecar starts. 
 
+{{% alert title="Note" color="primary" %}}
+Any resiliency resource can be restricted to a particular [namepsace]({{< ref isolation-concept.md >}}) and restricted access through scopes to any particular set of applications.
+{{% /alert %}}
+
 ## Format
 
 ```yml
@@ -28,6 +32,9 @@ spec:
         duration: <REPLACE-WITH-VALUE>
         maxInterval: <REPLACE-WITH-VALUE>
         maxRetries: <REPLACE-WITH-VALUE>
+        matching:
+          httpStatusCodes: <REPLACE-WITH-VALUE>
+          gRPCStatusCodes: <REPLACE-WITH-VALUE>
     circuitBreakers:
       circuitBreakerName: # Replace with any unique name
         maxRequests: <REPLACE-WITH-VALUE>

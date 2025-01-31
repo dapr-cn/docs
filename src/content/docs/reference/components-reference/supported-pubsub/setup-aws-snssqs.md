@@ -68,7 +68,8 @@ spec:
     #   value: 5
     # - name: concurrencyMode # Optional
     #   value: "single"
-
+    # - name: concurrencyLimit # Optional
+    #   value: "0"
 
 ```
 
@@ -83,7 +84,7 @@ The above example uses secrets as plain strings. It is recommended to use [a sec
 | accessKey          | Y  | ID of the AWS account/role with appropriate permissions to SNS and SQS (see below) | `"AKIAIOSFODNN7EXAMPLE"`
 | secretKey          | Y  | Secret for the AWS user/role. If using an `AssumeRole` access, you will also need to provide a `sessionToken` |`"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"`
 | region             | Y  | The AWS region where the SNS/SQS assets are located or be created in. See [this page](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ugi&l=na) for valid regions. Ensure that SNS and SQS are available in that region | `"us-east-1"`
-| consumerID       | N | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. See the [pub/sub broker component file]({{< ref setup-pubsub.md >}}) to learn how ConsumerID is automatically generated. | `"channel1"`
+| consumerID       | N | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. See the [pub/sub broker component file]({{< ref setup-pubsub.md >}}) to learn how ConsumerID is automatically generated. | Can be set to string value (such as `"channel1"` in the example above) or string format value (such as `"{podName}"`, etc.). [See all of template tags you can use in your component metadata.]({{< ref "component-schema.md#templated-metadata-values" >}})
 | endpoint          | N  | AWS endpoint for the component to use. Only used for local development with, for example, [localstack](https://github.com/localstack/localstack). The `endpoint` is unnecessary when running against production AWS | `"http://localhost:4566"`
 | sessionToken      | N  | AWS session token to use.  A session token is only required if you are using temporary security credentials | `"TOKEN"`
 | messageReceiveLimit | N  | Number of times a message is received, after processing of that message fails, that once reached, results in removing of that message from the queue. If `sqsDeadLettersQueueName` is specified, `messageReceiveLimit` is the number of times a message is received, after processing of that message fails, that once reached, results in moving of the message to the SQS dead-letters queue. Default: `10` | `10`
@@ -98,6 +99,7 @@ The above example uses secrets as plain strings. It is recommended to use [a sec
 | disableDeleteOnRetryLimit | N  | When set to true, after retrying and failing of `messageRetryLimit` times processing a message, reset the message visibility timeout so that other consumers can try processing, instead of deleting the message from SQS (the default behvior). Default: `"false"` | `"true"`, `"false"`
 | assetsManagementTimeoutSeconds | N  | Amount of time in seconds, for an AWS asset management operation, before it times out and cancelled. Asset management operations are any operations performed on STS, SNS and SQS, except message publish and consume operations that implement the default Dapr component retry behavior. The value can be set to any non-negative float/integer. Default: `5` | `0.5`, `10`
 | concurrencyMode | N  | When messages are received in bulk from SQS, call the subscriber sequentially (“single” message at a time), or concurrently (in “parallel”). Default: `"parallel"` | `"single"`, `"parallel"`
+| concurrencyLimit | N | Defines the maximum number of concurrent workers handling messages. This value is ignored when concurrencyMode is set to `"single"`. To avoid limiting the number of concurrent workers, set this to `0`. Default: `0` | `100`
 
 ### Additional info
 

@@ -24,10 +24,10 @@ dapr uninstall [flags]
 
 | Name                 | Environment Variable | Default       | Description                                                                                                                                         |
 | -------------------- | -------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--all`              |                      | `false`       | Remove Redis, Zipkin containers in addition to actor placement container. Remove default dapr dir located at `$HOME/.dapr or %USERPROFILE%\.dapr\`. |
+| `--all`              |                      | `false`       | Remove Redis, Zipkin containers in addition to the Scheduler service and the actor Placement service containers. Remove default Dapr dir located at `$HOME/.dapr or %USERPROFILE%\.dapr\`. |
 | `--help`, `-h`       |                      |               | Print this help message                                                                                                                             |
 | `--kubernetes`, `-k` |                      | `false`       | Uninstall Dapr from a Kubernetes cluster                                                                                                            |
-| `--namespace`, `-n`  |                      | `dapr-system` | The Kubernetes namespace to uninstall Dapr from                                                                                                     |
+| `--namespace`, `-n`  |                      | `dapr-system` | The Kubernetes namespace from which Dapr is uninstalled                                                                                                     |
 |  `--container-runtime`  |              |    `docker`      | Used to pass in a different container runtime other than Docker. Supported container runtimes are: `docker`, `podman` |
 
 ### Examples
@@ -38,7 +38,7 @@ dapr uninstall [flags]
 dapr uninstall
 ```
 
-You can also use option `--all` to remove .dapr directory, Redis, Placement and Zipkin containers
+You can also use option `--all` to remove .dapr directory, Redis, Placement, Scheduler, and Zipkin containers
 
 ```bash
 dapr uninstall --all

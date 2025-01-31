@@ -36,7 +36,7 @@ dapr init [flags]
 | `--runtime-version`   |                      | `latest`      | The version of the Dapr runtime to install, for example: `1.0.0`                     |
 | `--image-variant`   |                      |                 | The image variant to use for the Dapr runtime, for example: `mariner`               |
 | `--set`               |                      |               | Configure options on the command line to be passed to the Dapr Helm chart and the Kubernetes cluster upon install. Can specify multiple values in a comma-separated list, for example: `key1=val1,key2=val2`                     |
-| `--slim`, `-s`        |                      | `false`       | Exclude placement service, Redis and Zipkin containers from self-hosted installation |
+| `--slim`, `-s`        |                      | `false`       | Exclude placement service, scheduler service, and the Redis and Zipkin containers from self-hosted installation |
 | `--timeout`           |                      | `300`         | The wait timeout for the Kubernetes installation                                     |
 | `--wait`              |                      | `false`       | Wait for Kubernetes initialization to complete                                       |
 |        N/A            |DAPR_DEFAULT_IMAGE_REGISTRY|          | It is used to specify the default container registry to pull images from. When its value is set to `GHCR` or `ghcr` it pulls the required images from Github container registry. To default to Docker hub, unset the environment variable or leave it blank|
@@ -45,6 +45,7 @@ dapr init [flags]
 |        N/A            | DAPR_HELM_REPO_PASSWORD | A password for a private Helm chart  |The password required to access the private Dapr Helm chart. If it can be accessed publicly, this env variable does not need to be set| |
 |  `--container-runtime`  |              |    `docker`      | Used to pass in a different container runtime other than Docker. Supported container runtimes are: `docker`, `podman` |
 |  `--dev`  |              |          | Creates Redis and Zipkin deployments when run in Kubernetes. |
+|  `--scheduler-volume`  |              |          | Self-hosted only. Optionally, you can specify a volume for the scheduler service data directory. By default, without this flag, scheduler data is not persisted and not resilient to restarts. |
 
 
 ### Examples
@@ -55,7 +56,9 @@ dapr init [flags]
 
 **Install**
 
-Install Dapr by pulling container images for Placement, Redis, and Zipkin. By default, these images are pulled from Docker Hub. 
+Install Dapr by pulling container images for Placement, Scheduler, Redis, and Zipkin. By default, these images are pulled from Docker Hub.
+
+> By default, a `dapr_scheduler` local volume is created for Scheduler service to be used as the database directory. The host file location for this volume is likely located at `/var/lib/docker/volumes/dapr_scheduler/_data` or `~/.local/share/containers/storage/volumes/dapr_scheduler/_data`, depending on your container runtime.
 
 ```bash
 dapr init
@@ -71,10 +74,10 @@ dapr init -s
 
 **Specify a runtime version**
 
-You can also specify a specific runtime version. Be default, the latest version is used.
+You can also specify a specific runtime version. By default, the latest version is used.
 
 ```bash
-dapr init --runtime-version 1.13.0
+dapr init --runtime-version 1.13.4
 ```
 
 **Install with image variant**
@@ -187,7 +190,7 @@ Use the `--set` flag to configure a set of [Helm Chart values](https://github.co
 dapr init -k --set global.tag=1.0.0 --set dapr_operator.logLevel=error
 ```
 
-You can also specify a private registry to pull container images from. As of now `dapr init -k` does not use specific images for sentry, operator, placement and sidecar. It relies on only Dapr runtime container image `dapr` for all these images.
+You can also specify a private registry to pull container images from. As of now `dapr init -k` does not use specific images for sentry, operator, placement, scheduler, and sidecar. It relies on only Dapr runtime container image `dapr` for all these images.
 
 Scenario 1 : dapr image hosted directly under root folder in private registry - 
 ```bash

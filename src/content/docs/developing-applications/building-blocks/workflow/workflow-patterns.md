@@ -248,11 +248,11 @@ func TaskChainWorkflow(ctx *workflow.WorkflowContext) (any, error) {
 		return nil, err
 	}
 	var result2 int
-	if err := ctx.CallActivity(Step1, workflow.ActivityInput(input)).Await(&result2); err != nil {
+	if err := ctx.CallActivity(Step2, workflow.ActivityInput(input)).Await(&result2); err != nil {
 		return nil, err
 	}
 	var result3 int
-	if err := ctx.CallActivity(Step1, workflow.ActivityInput(input)).Await(&result3); err != nil {
+	if err := ctx.CallActivity(Step3, workflow.ActivityInput(input)).Await(&result3); err != nil {
 		return nil, err
 	}
 	return []int{result1, result2, result3}, nil
@@ -586,7 +586,45 @@ The key takeaways from this example are:
 - The number of parallel tasks can be static or dynamic
 - The workflow itself is capable of aggregating the results of parallel executions
 
-While not shown in the example, it's possible to go further and limit the degree of concurrency using simple, language-specific constructs. Furthermore, the execution of the workflow is durable. If a workflow starts 100 parallel task executions and only 40 complete before the process crashes, the workflow restarts itself automatically and only schedules the remaining 60 tasks.
+Furthermore, the execution of the workflow is durable. If a workflow starts 100 parallel task executions and only 40 complete before the process crashes, the workflow restarts itself automatically and only schedules the remaining 60 tasks.
+
+It's possible to go further and limit the degree of concurrency using simple, language-specific constructs. The sample code below illustrates how to restrict the degree of fan-out to just 5 concurrent activity executions:
+
+{{< tabs ".NET" >}}
+
+{{% codetab %}}
+<!-- .NET -->
+```csharp
+
+//Revisiting the earlier example...
+// Get a list of N work items to process in parallel.
+object[] workBatch = await context.CallActivityAsync<object[]>("GetWorkBatch", null);
+
+const int MaxParallelism = 5;
+var results = new List<int>();
+var inFlightTasks = new HashSet<Task<int>>();
+foreach(var workItem in workBatch)
+{
+  if (inFlightTasks.Count >= MaxParallelism)
+  {
+    var finishedTask = await Task.WhenAny(inFlightTasks);
+    results.Add(finishedTask.Result);
+    inFlightTasks.Remove(finishedTask);
+  }
+
+  inFlightTasks.Add(context.CallActivityAsync<int>("ProcessWorkItem", workItem));
+}
+results.AddRange(await Task.WhenAll(inFlightTasks));
+
+var sum = results.Sum(t => t);
+await context.CallActivityAsync("PostResults", sum);
+```
+
+{{% /codetab %}}
+
+{{< /tabs >}}
+
+Limiting the degree of concurrency in this way can be useful for limiting contention against shared resources. For example, if the activities need to call into external resources that have their own concurrency limits, like a databases or external APIs, it can be useful to ensure that no more than a specified number of activities call that resource concurrently.
 
 ## Async HTTP APIs
 
@@ -609,7 +647,7 @@ The Dapr workflow HTTP API supports the asynchronous request-reply pattern out-o
 The following `curl` commands illustrate how the workflow APIs support this pattern.
 
 ```bash
-curl -X POST http://localhost:3500/v1.0-beta1/workflows/dapr/OrderProcessingWorkflow/start?instanceID=12345678 -d '{"Name":"Paperclips","Quantity":1,"TotalCost":9.95}'
+curl -X POST http://localhost:3500/v1.0/workflows/dapr/OrderProcessingWorkflow/start?instanceID=12345678 -d '{"Name":"Paperclips","Quantity":1,"TotalCost":9.95}'
 ```
 
 The previous command will result in the following response JSON:
@@ -621,7 +659,7 @@ The previous command will result in the following response JSON:
 The HTTP client can then construct the status query URL using the workflow instance ID and poll it repeatedly until it sees the "COMPLETE", "FAILURE", or "TERMINATED" status in the payload.
 
 ```bash
-curl http://localhost:3500/v1.0-beta1/workflows/dapr/12345678
+curl http://localhost:3500/v1.0/workflows/dapr/12345678
 ```
 
 The following is an example of what an in-progress workflow status might look like.
@@ -711,7 +749,7 @@ def status_monitor_workflow(ctx: wf.DaprWorkflowContext, job: JobStatus):
             ctx.call_activity(send_alert, input=f"Job '{job.job_id}' is unhealthy!")
         next_sleep_interval = 5  # check more frequently when unhealthy
 
-    yield ctx.create_timer(fire_at=ctx.current_utc_datetime + timedelta(seconds=next_sleep_interval))
+    yield ctx.create_timer(fire_at=ctx.current_utc_datetime + timedelta(minutes=next_sleep_interval))
 
     # restart from the beginning with a new JobStatus input
     ctx.continue_as_new(job)
@@ -858,7 +896,7 @@ func StatusMonitorWorkflow(ctx *workflow.WorkflowContext) (any, error) {
 	}
 	if status == "healthy" {
 		job.IsHealthy = true
-		sleepInterval = time.Second * 60
+		sleepInterval = time.Minutes * 60
 	} else {
 		if job.IsHealthy {
 			job.IsHealthy = false
@@ -867,7 +905,7 @@ func StatusMonitorWorkflow(ctx *workflow.WorkflowContext) (any, error) {
 				return "", err
 			}
 		}
-		sleepInterval = time.Second * 5
+		sleepInterval = time.Minutes * 5
 	}
 	if err := ctx.CreateTimer(sleepInterval).Await(nil); err != nil {
 		return "", err
@@ -1327,7 +1365,7 @@ func raiseEvent() {
   if err != nil {
     log.Fatalf("failed to initialize the client")
   }
-  err = daprClient.RaiseEventWorkflowBeta1(context.Background(), &client.RaiseEventWorkflowRequest{
+  err = daprClient.RaiseEventWorkflow(context.Background(), &client.RaiseEventWorkflowRequest{
     InstanceID: "instance_id",
     WorkflowComponent: "dapr",
     EventName: "approval_received",

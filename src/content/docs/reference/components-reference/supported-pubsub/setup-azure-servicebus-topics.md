@@ -30,7 +30,7 @@ spec:
   - name: connectionString
     value: "Endpoint=sb://{ServiceBusNamespace}.servicebus.windows.net/;SharedAccessKeyName={PolicyName};SharedAccessKey={Key};EntityPath={ServiceBus}"
   # - name: consumerID # Optional: defaults to the app's own ID
-  #   value: "{identifier}" 
+  #   value: channel1 
   # - name: timeoutInSec # Optional
   #   value: 60
   # - name: handlerTimeoutInSec # Optional
@@ -75,7 +75,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 |--------------------|:--------:|---------|---------|
 | `connectionString`   | Y  | Shared access policy connection string for the Service Bus. Required unless using Microsoft Entra ID authentication. | See example above
 | `namespaceName`| N | Parameter to set the address of the Service Bus namespace, as a fully-qualified domain name. Required if using Microsoft Entra ID authentication. | `"namespace.servicebus.windows.net"` |
-| `consumerID`         | N        | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. (`appID`) value. |
+| `consumerID`         | N        | Consumer ID (consumer tag) organizes one or more consumers into a group. Consumers with the same consumer ID work as one virtual consumer; for example, a message is processed only once by one of the consumers in the group. If the `consumerID` is not provided, the Dapr runtime set it to the Dapr application ID (`appID`) value. (`appID`) value. | Can be set to string value (such as `"channel1"` in the example above) or string format value (such as `"{podName}"`, etc.). [See all of template tags you can use in your component metadata.]({{< ref "component-schema.md#templated-metadata-values" >}})
 | `timeoutInSec`       | N  | Timeout for sending messages and for management operations. Default: `60` |`30`
 | `handlerTimeoutInSec`| N  |  Timeout for invoking the app's handler. Default: `60` | `30`
 | `lockRenewalInSec`      | N  | Defines the frequency at which buffered message locks will be renewed. Default: `20`. | `20`
@@ -83,8 +83,8 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | `maxConcurrentHandlers` | N  | Defines the maximum number of concurrent message handlers. Default: `0` (unlimited) | `10`
 | `disableEntityManagement` | N  | When set to true, queues and subscriptions do not get created automatically. Default: `"false"` | `"true"`, `"false"`
 | `defaultMessageTimeToLiveInSec` | N  | Default message time to live, in seconds. Used during subscription creation only. | `10`
-| `autoDeleteOnIdleInSec` | N  | Time in seconds to wait before auto deleting idle subscriptions. Used during subscription creation only. Default: `0` (disabled) | `3600`
-| `maxDeliveryCount`      | N  | Defines the number of attempts the server will make to deliver a message. Used during subscription creation only. Default set by server. | `10`
+| `autoDeleteOnIdleInSec` | N  | Time in seconds to wait before auto deleting idle subscriptions. Used during subscription creation only. Must be 300s or greater. Default: `0` (disabled) | `3600`
+| `maxDeliveryCount`      | N  | Defines the number of attempts the server makes to deliver a message. Used during subscription creation only. Default set by server. | `10`
 | `lockDurationInSec`     | N  | Defines the length in seconds that a message will be locked for before expiring. Used during subscription creation only. Default set by server. | `30`
 | `minConnectionRecoveryInSec` | N | Minimum interval (in seconds) to wait before attempting to reconnect to Azure Service Bus in case of a connection failure. Default: `2` | `5`
 | `maxConnectionRecoveryInSec` | N | Maximum interval (in seconds) to wait before attempting to reconnect to Azure Service Bus in case of a connection failure. After each attempt, the component waits a random number of seconds, increasing every time, between the minimum and the maximum. Default: `300` (5 minutes) | `600`
@@ -155,7 +155,9 @@ In addition to the [settable metadata listed above](#sending-a-message-with-meta
 - `metadata.EnqueuedTimeUtc`
 - `metadata.SequenceNumber`
 
-To find out more details on the purpose of any of these metadata properties, please refer to [the official Azure Service Bus documentation](https://docs.microsoft.com/rest/api/servicebus/message-headers-and-properties#message-headers).
+To find out more details on the purpose of any of these metadata properties refer to [the official Azure Service Bus documentation](https://docs.microsoft.com/rest/api/servicebus/message-headers-and-properties#message-headers).
+
+In addition, all entries of `ApplicationProperties` from the original Azure Service Bus message are appended as `metadata.<application property's name>`.
 
 > Note: that all times are populated by the server and are not adjusted for clock skews.
 

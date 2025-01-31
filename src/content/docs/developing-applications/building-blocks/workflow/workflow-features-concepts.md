@@ -6,10 +6,6 @@ weight: 2000
 description: "Learn more about the Dapr Workflow features and concepts"
 ---
 
-{{% alert title="Note" color="primary" %}}
-Dapr Workflow is currently in beta. [See known limitations for {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
-{{% /alert %}}
-
 Now that you've learned about the [workflow building block]({{< ref workflow-overview.md >}}) at a high level, let's deep dive into the features and concepts included with the Dapr Workflow engine and SDKs. Dapr Workflow exposes several core features and concepts which are common across all supported languages. 
 
 {{% alert title="Note" color="primary" %}}
@@ -48,7 +44,7 @@ This "replay" behavior continues until the workflow function completes or fails 
 Using this replay technique, a workflow is able to resume execution from any "await" point as if it had never been unloaded from memory. Even the values of local variables from previous runs can be restored without the workflow engine knowing anything about what data they stored. This ability to restore state makes Dapr Workflows _durable_ and _fault tolerant_.
 
 {{% alert title="Note" color="primary" %}}
-The workflow replay behavior described here requires that workflow function code be _deterministic_. Deterministic workflow functions take the exact same actions when provided the exact same inputs. [Learn more about the limitations around deterministic workflow code.]({{< ref "workflow-features-concepts.md#workflow-determinism-and-code-constraints" >}})
+The workflow replay behavior described here requires that workflow function code be _deterministic_. Deterministic workflow functions take the exact same actions when provided the exact same inputs. [Learn more about the limitations around deterministic workflow code.]({{< ref "workflow-features-concepts.md#workflow-determinism-and-code-restraints" >}})
 {{% /alert %}}
 
 
@@ -75,9 +71,9 @@ You can use the following two techniques to write workflows that may need to sch
 
 ### Updating workflow code
 
-Because workflows are long-running and durable, updating workflow code must be done with extreme care. As discussed in the [workflow determinism]({{< ref "#workflow-determinism-and-code-constraints" >}}) limitation section, workflow code must be deterministic. Updates to workflow code must preserve this determinism if there are any non-completed workflow instances in the system. Otherwise, updates to workflow code can result in runtime failures the next time those workflows execute.
+Because workflows are long-running and durable, updating workflow code must be done with extreme care. As discussed in the [workflow determinism]({{< ref "#workflow-determinism-and-code-restraints" >}}) limitation section, workflow code must be deterministic. Updates to workflow code must preserve this determinism if there are any non-completed workflow instances in the system. Otherwise, updates to workflow code can result in runtime failures the next time those workflows execute.
 
-[See known limitations]({{< ref "workflow-features-concepts.md#workflow-determinism-and-code-constraints" >}})
+[See known limitations]({{< ref "#limitations" >}})
 
 ## Workflow activities
 
@@ -123,7 +119,7 @@ Retries are internally implemented using durable timers. This means that workflo
 The actions performed by a retry policy are saved into a workflow's history. Care must be taken not to change the behavior of a retry policy after a workflow has already been executed. Otherwise, the workflow may behave unexpectedly when replayed. See the notes on [updating workflow code]({{< ref "#updating-workflow-code" >}}) for more information.
 {{% /alert %}}
 
-It's possible to use both workflow retry policies and Dapr Resiliency policies together. For example, if a workflow activity uses a Dapr client to invoke a service, the Dapr client uses the configured resiliency policy. See [Quickstart: Service-to-service resiliency]({{< ref "#resiliency-serviceinvo-quickstart" >}}) for more information with an example.  However, if the activity itself fails for any reason, including exhausting the retries on the resiliency policy, then the workflow's resiliency policy kicks in.
+It's possible to use both workflow retry policies and Dapr Resiliency policies together. For example, if a workflow activity uses a Dapr client to invoke a service, the Dapr client uses the configured resiliency policy. See [Quickstart: Service-to-service resiliency]({{< ref "resiliency-serviceinvo-quickstart.md" >}}) for more information with an example.  However, if the activity itself fails for any reason, including exhausting the retries on the resiliency policy, then the workflow's resiliency policy kicks in.
 
 {{% alert title="Note" color="primary" %}}
 Using workflow retry policies and resiliency policies together can result in unexpected behavior. For example, if a workflow activity exhausts its configured retry policy, the workflow engine will still retry the activity according to the workflow retry policy. This can result in the activity being retried more times than expected.
@@ -135,7 +131,7 @@ Because workflow retry policies are configured in code, the exact developer expe
 | --- | --- |
 | **Maximum number of attempts** | The maximum number of times to execute the activity or child workflow. |
 | **First retry interval** | The amount of time to wait before the first retry. |
-| **Backoff coefficient** | The amount of time to wait before each subsequent retry. |
+| **Backoff coefficient** | The coefficient used to determine the rate of increase of back-off. For example a coefficient of 2 doubles the wait of each subsequent retry. |
 | **Maximum retry interval** | The maximum amount of time to wait before each subsequent retry. |
 | **Retry timeout** | The overall timeout for retries, regardless of any configured max number of attempts. |
 
@@ -199,7 +195,7 @@ string randomString = GetRandomString();
 // DON'T DO THIS!
 Instant currentTime = Instant.now();
 UUID newIdentifier = UUID.randomUUID();
-string randomString = GetRandomString();
+String randomString = getRandomString();
 ```
 
 {{% /codetab %}}
@@ -246,7 +242,7 @@ string randomString = await context.CallActivityAsync<string>("GetRandomString")
 ```java
 // Do this!!
 Instant currentTime = context.getCurrentInstant();
-Guid newIdentifier = context.NewGuid();
+Guid newIdentifier = context.newGuid();
 String randomString = context.callActivity(GetRandomString.class.getName(), String.class).await();
 ```
 
@@ -342,7 +338,7 @@ Do this:
 
 ```csharp
 // Do this!!
-string configuation = workflowInput.Configuration; // imaginary workflow input argument
+string configuration = workflowInput.Configuration; // imaginary workflow input argument
 string data = await context.CallActivityAsync<string>("MakeHttpCall", "https://example.com/api/data");
 ```
 
@@ -352,7 +348,7 @@ string data = await context.CallActivityAsync<string>("MakeHttpCall", "https://e
 
 ```java
 // Do this!!
-String configuation = ctx.getInput(InputType.class).getConfiguration(); // imaginary workflow input argument
+String configuration = ctx.getInput(InputType.class).getConfiguration(); // imaginary workflow input argument
 String data = ctx.callActivity(MakeHttpCall.class, "https://example.com/api/data", String.class).await();
 ```
 
@@ -362,7 +358,7 @@ String data = ctx.callActivity(MakeHttpCall.class, "https://example.com/api/data
 
 ```javascript
 // Do this!!
-const configuation = workflowInput.getConfiguration(); // imaginary workflow input argument
+const configuration = workflowInput.getConfiguration(); // imaginary workflow input argument
 const data = yield ctx.callActivity(makeHttpCall, "https://example.com/api/data");
 ```
 

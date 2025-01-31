@@ -49,7 +49,7 @@ with DaprClient("mydomain:50051?tls=true") as d:
     # use the client
 ```  
 
-#### Environment variables:  
+#### Configuration options:  
 
 ##### Dapr Sidecar Endpoints
 You can use the standardised `DAPR_GRPC_ENDPOINT` environment variable to
@@ -75,12 +75,47 @@ set it in the environment and the client will use it automatically.
 You can read more about Dapr API token authentication [here](https://docs.dapr.io/operations/security/api-token/).
 
 ##### Health timeout
-On client initialisation, a health check is performed against the Dapr sidecar (`/healthz/outboud`).
+On client initialisation, a health check is performed against the Dapr sidecar (`/healthz/outbound`).
 The client will wait for the sidecar to be up and running before proceeding.  
 
-The default timeout is 60 seconds, but it can be overridden by setting the `DAPR_HEALTH_TIMEOUT`
+The default healthcheck timeout is 60 seconds, but it can be overridden by setting the `DAPR_HEALTH_TIMEOUT`
 environment variable.
 
+##### Retries and timeout
+
+The Dapr client can retry a request if a specific error code is received from the sidecar. This is
+configurable through the `DAPR_API_MAX_RETRIES` environment variable and is picked up automatically, 
+not requiring any code changes.
+The default value for `DAPR_API_MAX_RETRIES` is `0`, which means no retries will be made.  
+
+You can fine-tune more retry parameters by creating a `dapr.clients.retry.RetryPolicy` object and
+passing it to the DaprClient constructor:
+
+```python
+from dapr.clients.retry import RetryPolicy
+
+retry = RetryPolicy(
+    max_attempts=5, 
+    initial_backoff=1, 
+    max_backoff=20, 
+    backoff_multiplier=1.5,
+    retryable_http_status_codes=[408, 429, 500, 502, 503, 504],
+    retryable_grpc_status_codes=[StatusCode.UNAVAILABLE, StatusCode.DEADLINE_EXCEEDED, ]
+)
+
+with DaprClient(retry_policy=retry) as d:
+    ...
+```
+
+or for actors:
+```python
+factory = ActorProxyFactory(retry_policy=RetryPolicy(max_attempts=3))
+proxy = ActorProxy.create('DemoActor', ActorId('1'), DemoActorInterface, factory)
+```
+
+**Timeout** can be set for all calls through the environment variable `DAPR_API_TIMEOUT_SECONDS`. The default value is 60 seconds.
+
+> Note: You can control timeouts on service invocation separately, by passing a `timeout` parameter to the `invoke_method` method. 
 
 ## Error handling
 Initially, errors in Dapr followed the [Standard gRPC error model](https://grpc.io/docs/guides/error/#standard-error-model). However, to provide more detailed and informative error messages, in version 1.13 an enhanced error model has been introduced which aligns with the gRPC [Richer error model](https://grpc.io/docs/guides/error/#richer-error-model). In response, the Python SDK implemented `DaprGrpcError`, a custom exception class designed to improve the developer experience.  
@@ -181,7 +216,7 @@ with DaprClient() as d:
 - For a full list of state store query options visit [How-To: Query state]({{< ref howto-state-query-api.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/state_store_query) for code samples and instructions to try out state store querying.
 
-### Publish & subscribe to messages
+### Publish & subscribe
 
 #### Publish messages
 
@@ -220,6 +255,126 @@ def mytopic_important(event: v1.Event) -> None:
 - For more information about pub/sub, visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/pubsub-simple) for code samples and instructions to try out pub/sub.
 
+#### Streaming message subscription
+
+You can create a streaming subscription to a PubSub topic using either the `subscribe`
+or `subscribe_handler` methods.
+
+The `subscribe` method returns a `Subscription` object, which allows you to pull messages from the
+stream by
+calling the `next_message` method. This will block on the main thread while waiting for messages.
+When done, you should call the close method to terminate the
+subscription and stop receiving messages.
+
+The `subscribe_with_handler` method accepts a callback function that is executed for each message
+received from the stream.
+It runs in a separate thread, so it doesn't block the main thread. The callback should return a
+`TopicEventResponse` (ex. `TopicEventResponse('success')`), indicating whether the message was
+processed successfully, should be retried, or should be discarded. The method will automatically
+manage message acknowledgements based on the returned status. The call to `subscribe_with_handler`
+method returns a close function, which should be called to terminate the subscription when you're
+done.
+
+Here's an example of using the `subscribe` method: 
+
+```python
+import time
+
+from dapr.clients import DaprClient
+from dapr.clients.grpc.subscription import StreamInactiveError
+
+counter = 0
+
+
+def process_message(message):
+    global counter
+    counter += 1
+    # Process the message here
+    print(f'Processing message: {message.data()} from {message.topic()}...')
+    return 'success'
+
+
+def main():
+    with DaprClient() as client:
+        global counter
+
+        subscription = client.subscribe(
+            pubsub_name='pubsub', topic='TOPIC_A', dead_letter_topic='TOPIC_A_DEAD'
+        )
+
+        try:
+            while counter < 5:
+                try:
+                    message = subscription.next_message()
+
+                except StreamInactiveError as e:
+                    print('Stream is inactive. Retrying...')
+                    time.sleep(1)
+                    continue
+                if message is None:
+                    print('No message received within timeout period.')
+                    continue
+
+                # Process the message
+                response_status = process_message(message)
+
+                if response_status == 'success':
+                    subscription.respond_success(message)
+                elif response_status == 'retry':
+                    subscription.respond_retry(message)
+                elif response_status == 'drop':
+                    subscription.respond_drop(message)
+
+        finally:
+            print("Closing subscription...")
+            subscription.close()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+And here's an example of using the `subscribe_with_handler` method:
+
+```python
+import time
+
+from dapr.clients import DaprClient
+from dapr.clients.grpc._response import TopicEventResponse
+
+counter = 0
+
+
+def process_message(message):
+    # Process the message here
+    global counter
+    counter += 1
+    print(f'Processing message: {message.data()} from {message.topic()}...')
+    return TopicEventResponse('success')
+
+
+def main():
+    with (DaprClient() as client):
+        # This will start a new thread that will listen for messages
+        # and process them in the `process_message` function
+        close_fn = client.subscribe_with_handler(
+            pubsub_name='pubsub', topic='TOPIC_A', handler_fn=process_message,
+            dead_letter_topic='TOPIC_A_DEAD'
+        )
+
+        while counter < 5:
+            time.sleep(1)
+
+        print("Closing subscription...")
+        close_fn()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+- For more information about pub/sub, visit [How-To: Publish & subscribe]({{< ref howto-publish-subscribe.md >}}).
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/main/examples/pubsub-simple) for code samples and instructions to try out streaming pub/sub.
 
 ### Interact with output bindings
 
@@ -231,7 +386,7 @@ with DaprClient() as d:
 ```
 
 - For a full guide on output bindings visit [How-To: Use bindings]({{< ref howto-bindings.md >}}).
-- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/invoke-binding) for code samples and instructions to try out output bindings.
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/main/examples/invoke-binding) for code samples and instructions to try out output bindings.
 
 ### Retrieve secrets
 
@@ -320,6 +475,40 @@ def main():
 
 - Learn more about using a distributed lock: [How-To: Use a lock]({{< ref howto-use-distributed-lock.md >}}).
 - Visit [Python SDK examples](https://github.com/dapr/python-sdk/blob/master/examples/distributed_lock) for code samples and instructions to try out distributed lock.
+
+### Cryptography
+
+```python
+from dapr.clients import DaprClient
+
+message = 'The secret is "passw0rd"'
+
+def main():
+    with DaprClient() as d:
+        resp = d.encrypt(
+            data=message.encode(),
+            options=EncryptOptions(
+                component_name='crypto-localstorage',
+                key_name='rsa-private-key.pem',
+                key_wrap_algorithm='RSA',
+            ),
+        )
+        encrypt_bytes = resp.read()
+
+        resp = d.decrypt(
+            data=encrypt_bytes,
+            options=DecryptOptions(
+                component_name='crypto-localstorage',
+                key_name='rsa-private-key.pem',
+            ),
+        )
+        decrypt_bytes = resp.read()
+
+        print(decrypt_bytes.decode())  # The secret is "passw0rd"
+```
+
+- For a full list of state operations visit [How-To: Use the cryptography APIs]({{< ref howto-cryptography.md >}}).
+- Visit [Python SDK examples](https://github.com/dapr/python-sdk/tree/master/examples/crypto) for code samples and instructions to try out cryptography
 
 ### Workflow
 

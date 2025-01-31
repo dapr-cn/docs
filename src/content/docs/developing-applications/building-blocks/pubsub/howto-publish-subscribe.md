@@ -65,7 +65,7 @@ scopes:
 
 You can override this file with another [pubsub component]({{< ref setup-pubsub >}}) by creating a components directory (in this example, `myComponents`) containing the file and using the flag `--resources-path` with the `dapr run` CLI command.
 
-{{< tabs Dotnet Java Python Go Javascript >}}
+{{< tabs ".NET" Java Python Go JavaScript >}}
 
 {{% codetab %}}
 
@@ -153,12 +153,13 @@ scopes:
 
 ## Subscribe to topics
 
-Dapr provides two methods by which you can subscribe to topics:
+Dapr provides three methods by which you can subscribe to topics:
 
 - **Declaratively**, where subscriptions are defined in an external file.
+- **Streaming**, where subscriptions are defined in user code.
 - **Programmatically**, where subscriptions are defined in user code.
 
-Learn more in the [declarative and programmatic subscriptions doc]({{< ref subscription-methods.md >}}). This example demonstrates a **declarative** subscription.
+Learn more in the [declarative, streaming, and programmatic subscriptions doc]({{< ref subscription-methods.md >}}). This example demonstrates a **declarative** subscription.
 
 Create a file named `subscription.yaml` and paste the following:
 
@@ -184,9 +185,16 @@ The example above shows an event subscription to topic `orders`, for the pubsub 
 
 Place `subscription.yaml` in the same directory as your `pubsub.yaml` component. When Dapr starts up, it loads subscriptions along with the components.
 
+{{% alert title="Note" color="primary" %}}
+This feature is currently in preview.
+Dapr can be made to "hot reload" declarative subscriptions, whereby updates are picked up automatically without needing a restart.
+This is enabled by via the [`HotReload` feature gate]({{< ref "support-preview-features.md" >}}).
+To prevent reprocessing or loss of unprocessed messages, in-flight messages between Dapr and your application are unaffected during hot reload events.
+{{% /alert %}}
+
 Below are code examples that leverage Dapr SDKs to subscribe to the topic you defined in `subscription.yaml`.
 
-{{< tabs Dotnet Java Python Go JavaScript>}}
+{{< tabs ".NET" Java Python Go JavaScript>}}
 
 {{% codetab %}}
 
@@ -422,7 +430,7 @@ Invoke-RestMethod -Method Post -ContentType 'application/json' -Body '{"orderId"
 
 Below are code examples that leverage Dapr SDKs to publish a topic.
 
-{{< tabs Dotnet Java Python Go Javascript>}}
+{{< tabs ".NET" Java Python Go JavaScript>}}
 
 {{% codetab %}}
 

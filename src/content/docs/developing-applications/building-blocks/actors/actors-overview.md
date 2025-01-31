@@ -52,7 +52,19 @@ You would use Dapr Workflow when you need to define and orchestrate complex work
 
 [Learn more about Dapr Workflow and how to use workflows in your application.]({{< ref workflow-overview.md >}})
 
+## Actor types and actor IDs
+
+Actors are uniquely defined as an instance of an actor type, similar to how an object is an instance of a class. For example, you might have an actor type that implements the functionality of a calculator. There could be many actors of that type distributed across various nodes in a cluster.
+
+Each actor is uniquely identified by an actor ID. An actor ID can be _any_ string value you choose. If you do not provide an actor ID, Dapr generates a random string for you as an ID.
+
 ## Features
+
+### Namespaced actors
+
+Dapr supports namespaced actors. An actor type can be deployed into different namespaces. You can call instances of these actors in the same namespace. 
+ 
+[Learn more about namespaced actors and how they work.]({{< ref namespaced-actors.md >}})
 
 ### Actor lifetime
 
@@ -92,7 +104,7 @@ The Dapr actor runtime provides a simple turn-based access model for accessing a
 
 ### State
 
-Transactional state stores can be used to store actor state. To specify which state store to use for actors, specify value of property `actorStateStore` as `true` in the state store component's metadata section. Actors state is stored with a specific scheme in transactional state stores, allowing for consistent querying. Only a single state store component can be used as the state store for all actors. Read the [state API reference]({{< ref state_api.md >}}) and the [actors API reference]({{< ref actors_api.md >}}) to learn more about state stores for actors.
+Transactional state stores can be used to store actor state. Regardless of whether you intend to store any state in your actor, you must specify a value for property `actorStateStore` as `true` in the state store component's metadata section. Actors state is stored with a specific scheme in transactional state stores, allowing for consistent querying. Only a single state store component can be used as the state store for all actors. Read the [state API reference]({{< ref state_api.md >}}) and the [actors API reference]({{< ref actors_api.md >}}) to learn more about state stores for actors.
 
 ### Actor timers and reminders
 

@@ -2,15 +2,15 @@
 type: docs
 title: "Quickstart: Workflow"
 linkTitle: Workflow
-weight: 78
+weight: 73
 description: Get started with the Dapr Workflow building block
 ---
 
 {{% alert title="Note" color="primary" %}}
-Dapr Workflow is currently in beta. [See known limitations for {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}). 
+Redis is currently used as the state store component for Workflows in the Quickstarts. However, Redis does not support transaction rollbacks and should not be used in production as an actor state store.
 {{% /alert %}}
 
-Let's take a look at the Dapr [Workflow building block]({{< ref workflow-overview.md >}}). In this Quickstart, you'll create a simple console application to demonstrate Dapr's workflow programming model and the workflow management APIs. 
+Let's take a look at the Dapr [Workflow building block]({{< ref workflow-overview.md >}}). In this Quickstart, you'll create a simple console application to demonstrate Dapr's workflow programming model and the workflow management APIs.
 
 In this guide, you'll:
 
@@ -29,8 +29,8 @@ Select your preferred language-specific Dapr SDK before proceeding with the Quic
 The `order-processor` console app starts and manages the `order_processing_workflow`, which simulates purchasing items from a store. The workflow consists of five unique workflow activities, or tasks:
 
 - `notify_activity`: Utilizes a logger to print out messages throughout the workflow. These messages notify you when:
-   - You have insufficient inventory
-   - Your payment couldn't be processed, etc.
+  - You have insufficient inventory
+  - Your payment couldn't be processed, etc.
 - `process_payment_activity`: Processes and authorizes the payment.
 - `verify_inventory_activity`: Checks the state store to ensure there is enough inventory present for purchase.
 - `update_inventory_activity`: Removes the requested items from the state store and updates the store with the new remaining inventory value.
@@ -48,7 +48,7 @@ For this example, you will need:
 
 ### Step 2: Set up the environment
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows).
+Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows/python/sdk).
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -66,15 +66,22 @@ Install the Dapr Python SDK package:
 pip3 install -r requirements.txt
 ```
 
+Return to the `python/sdk` directory:
+
+```bash
+cd ..
+```
+
+
 ### Step 3: Run the order processor app
 
-In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}):
+In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}). From the `python/sdk` directory, run the following command:
 
 ```bash
 dapr run -f .
 ```
 
-This starts the `order-processor` app with unique workflow ID and runs the workflow activities. 
+This starts the `order-processor` app with unique workflow ID and runs the workflow activities.
 
 Expected output:
 
@@ -105,7 +112,7 @@ Running `dapr init` launches the [openzipkin/zipkin](https://hub.docker.com/r/op
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`). 
+View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`).
 
 <img src="/images/workflow-trace-spans-zipkin.png" width=800 style="padding-bottom:15px;">
 
@@ -122,9 +129,10 @@ When you ran `dapr run -f .`:
 1. The `NotifyActivity` workflow activity sends a notification saying that order `f4e1926e-3721-478d-be8a-f5bebd1995da` has completed.
 1. The workflow terminates as completed.
 
-#### `order-processor/app.py` 
+#### `order-processor/app.py`
 
 In the application's program file:
+
 - The unique workflow order ID is generated
 - The workflow is scheduled
 - The workflow status is retrieved
@@ -276,7 +284,6 @@ The `order-processor` console app starts and manages the lifecycle of an order p
 - `processPaymentActivity`: Processes and authorizes the payment.
 - `updateInventoryActivity`: Updates the state store with the new remaining inventory value.
 
-
 ### Step 1: Pre-requisites
 
 For this example, you will need:
@@ -289,7 +296,7 @@ For this example, you will need:
 
 ### Step 2: Set up the environment
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows).
+Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows/javascript/sdk).
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -307,22 +314,21 @@ Install the dependencies:
 cd ./javascript/sdk
 npm install
 npm run build
-cd ..
 ```
 
 ### Step 3: Run the order processor app
 
-In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}):
+In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}). From the `javascript/sdk` directory, run the following command:
 
 ```bash
 dapr run -f .
 ```
 
-This starts the `order-processor` app with unique workflow ID and runs the workflow activities. 
+This starts the `order-processor` app with unique workflow ID and runs the workflow activities.
 
 Expected output:
 
-```
+```log
 == APP - workflowApp == == APP == Orchestration scheduled with ID: 0c332155-1e02-453a-a333-28cfc7777642
 == APP - workflowApp == == APP == Waiting 30 seconds for instance 0c332155-1e02-453a-a333-28cfc7777642 to complete...
 == APP - workflowApp == == APP == Received "Orchestrator Request" work item with instance id '0c332155-1e02-453a-a333-28cfc7777642'
@@ -393,7 +399,7 @@ Running `dapr init` launches the [openzipkin/zipkin](https://hub.docker.com/r/op
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`). 
+View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`).
 
 <img src="/images/workflow-trace-spans-zipkin.png" width=800 style="padding-bottom:15px;">
 
@@ -410,9 +416,10 @@ When you ran `dapr run -f .`:
 1. The `notifyActivity` workflow activity sends a notification saying that order `0c332155-1e02-453a-a333-28cfc7777642` has completed.
 1. The workflow terminates as completed.
 
-#### `order-processor/workflowApp.ts` 
+#### `order-processor/workflowApp.ts`
 
 In the application file:
+
 - The unique workflow order ID is generated
 - The workflow is scheduled
 - The workflow status is retrieved
@@ -489,25 +496,28 @@ start().catch((e) => {
 {{% codetab %}}
 
 The `order-processor` console app starts and manages the lifecycle of an order processing workflow that stores and retrieves data in a state store. The workflow consists of four workflow activities, or tasks:
+
 - `NotifyActivity`: Utilizes a logger to print out messages throughout the workflow
 - `ReserveInventoryActivity`: Checks the state store to ensure that there is enough inventory for the purchase
 - `ProcessPaymentActivity`: Processes and authorizes the payment
 - `UpdateInventoryActivity`: Removes the requested items from the state store and updates the store with the new remaining inventory value
-
 
 ### Step 1: Pre-requisites
 
 For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [.NET SDK or .NET 6 SDK installed](https://dotnet.microsoft.com/download).
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
+- [.NET 7](https://dotnet.microsoft.com/download/dotnet/7.0), [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0) or [.NET 9](https://dotnet.microsoft.com/download/dotnet/9.0) installed
+
+**NOTE:** .NET 7 is the minimally supported version of .NET by Dapr.Workflows in Dapr v1.15. Only .NET 8 and .NET 9
+will be supported in Dapr v1.16 and later releases.
 
 ### Step 2: Set up the environment
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows).
+Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows/csharp/sdk).
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -519,15 +529,28 @@ In a new terminal window, navigate to the `order-processor` directory:
 cd workflows/csharp/sdk/order-processor
 ```
 
+Install the dependencies:
+
+```bash
+dotnet restore
+dotnet build
+```
+
+Return to the `csharp/sdk` directory:
+
+```bash
+cd ..
+```
+
 ### Step 3: Run the order processor app
 
-In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}):
+In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}). From the `csharp/sdk` directory, run the following command:
 
 ```bash
 dapr run -f .
 ```
 
-This starts the `order-processor` app with unique workflow ID and runs the workflow activities. 
+This starts the `order-processor` app with unique workflow ID and runs the workflow activities.
 
 Expected output:
 
@@ -567,7 +590,7 @@ Running `dapr init` launches the [openzipkin/zipkin](https://hub.docker.com/r/op
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`). 
+View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`).
 
 <img src="/images/workflow-trace-spans-zipkin.png" width=800 style="padding-bottom:15px;">
 
@@ -584,9 +607,10 @@ When you ran `dapr run -f .`:
 1. The `NotifyActivity` workflow activity sends a notification saying that order `6d2abcc9` has completed.
 1. The workflow terminates as completed.
 
-#### `order-processor/Program.cs` 
+#### `order-processor/Program.cs`
 
 In the application's program file:
+
 - The unique workflow order ID is generated
 - The workflow is scheduled
 - The workflow status is retrieved
@@ -625,25 +649,24 @@ OrderPayload orderInfo = new OrderPayload(itemToPurchase, 15000, ammountToPurcha
 // Start the workflow
 Console.WriteLine("Starting workflow {0} purchasing {1} {2}", orderId, ammountToPurchase, itemToPurchase);
 
-await daprClient.StartWorkflowAsync(
-    workflowComponent: DaprWorkflowComponent,
-    workflowName: nameof(OrderProcessingWorkflow),
+await daprWorkflowClient.ScheduleNewWorkflowAsync(
+    name: nameof(OrderProcessingWorkflow),
     input: orderInfo,
     instanceId: orderId);
 
 // Wait for the workflow to start and confirm the input
-GetWorkflowResponse state = await daprClient.WaitForWorkflowStartAsync(
-    instanceId: orderId,
-    workflowComponent: DaprWorkflowComponent);
+WorkflowState state = await daprWorkflowClient.WaitForWorkflowStartAsync(
+    instanceId: orderId);
 
-Console.WriteLine("Your workflow has started. Here is the status of the workflow: {0}", state.RuntimeStatus);
+Console.WriteLine($"{nameof(OrderProcessingWorkflow)} (ID = {orderId}) started successfully with {state.ReadInputAs<OrderPayload>()}");
 
 // Wait for the workflow to complete
+using var ctx = new CancellationTokenSource(TimeSpan.FromSeconds(5));
 state = await daprClient.WaitForWorkflowCompletionAsync(
     instanceId: orderId,
-    workflowComponent: DaprWorkflowComponent);
+    cancellation: ctx.Token);
 
-Console.WriteLine("Workflow Status: {0}", state.RuntimeStatus);
+Console.WriteLine("Workflow Status: {0}", state.ReadCustomStatusAs<string>());
 ```
 
 #### `order-processor/Workflows/OrderProcessingWorkflow.cs`
@@ -694,7 +717,7 @@ class OrderProcessingWorkflow : Workflow<OrderPayload, OrderResult>
                     nameof(UpdateInventoryActivity),
                     new PaymentRequest(RequestId: orderId, order.Name, order.Quantity, order.TotalCost));                
             }
-            catch (TaskFailedException)
+            catch (WorkflowTaskFailedException)
             {
                 // Let them know their payment was processed
                 await context.CallActivityAsync(
@@ -717,6 +740,7 @@ class OrderProcessingWorkflow : Workflow<OrderPayload, OrderResult>
 #### `order-processor/Activities` directory
 
 The `Activities` directory holds the four workflow activities used by the workflow, defined in the following files:
+
 - `NotifyActivity.cs`
 - `ReserveInventoryActivity.cs`
 - `ProcessPaymentActivity.cs`
@@ -734,22 +758,22 @@ Watch [this video to walk through the Dapr Workflow .NET demo](https://youtu.be/
 {{% codetab %}}
 
 The `order-processor` console app starts and manages the lifecycle of an order processing workflow that stores and retrieves data in a state store. The workflow consists of four workflow activities, or tasks:
+
 - `NotifyActivity`: Utilizes a logger to print out messages throughout the workflow
 - `RequestApprovalActivity`: Requests approval for processing payment
 - `ReserveInventoryActivity`: Checks the state store to ensure that there is enough inventory for the purchase
 - `ProcessPaymentActivity`: Processes and authorizes the payment
 - `UpdateInventoryActivity`: Removes the requested items from the state store and updates the store with the new remaining inventory value
 
-
 ### Step 1: Pre-requisites
 
 For this example, you will need:
 
 - [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- Java JDK 11 (or greater):
-    - [Microsoft JDK 11](https://docs.microsoft.com/java/openjdk/download#openjdk-11)
-    - [Oracle JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK11)
-    - [OpenJDK 11](https://jdk.java.net/11/)
+- Java JDK 17 (or greater):
+    - [Microsoft JDK 17](https://docs.microsoft.com/java/openjdk/download#openjdk-17)
+    - [Oracle JDK 17](https://www.oracle.com/technetwork/java/javase/downloads/index.html#JDK17)
+    - [OpenJDK 17](https://jdk.java.net/17/)
 - [Apache Maven](https://maven.apache.org/install.html) version 3.x.
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
@@ -757,7 +781,7 @@ For this example, you will need:
 
 ### Step 2: Set up the environment
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows).
+Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows/java/sdk).
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -775,15 +799,22 @@ Install the dependencies:
 mvn clean install
 ```
 
-### Step 3: Run the order processor app
-
-In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}):
+Return to the `java/sdk` directory:
 
 ```bash
+cd ..
+```
+
+### Step 3: Run the order processor app
+
+In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}). From the `java/sdk` directory, run the following command:
+
+```bash
+cd workflows/java/sdk
 dapr run -f .
 ```
 
-This starts the `order-processor` app with unique workflow ID and runs the workflow activities. 
+This starts the `order-processor` app with unique workflow ID and runs the workflow activities.
 
 Expected output:
 
@@ -826,7 +857,7 @@ Running `dapr init` launches the [openzipkin/zipkin](https://hub.docker.com/r/op
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`). 
+View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`).
 
 <img src="/images/workflow-trace-spans-zipkin.png" width=800 style="padding-bottom:15px;">
 
@@ -1073,7 +1104,6 @@ The `Activities` directory holds the four workflow activities used by the workfl
  <!-- Go -->
 {{% codetab %}}
 
-
 The `order-processor` console app starts and manages the `OrderProcessingWorkflow` workflow, which simulates purchasing items from a store. The workflow consists of five unique workflow activities, or tasks:
 
 - `NotifyActivity`: Utilizes a logger to print out messages throughout the workflow. These messages notify you when:
@@ -1096,27 +1126,27 @@ For this example, you will need:
 
 ### Step 2: Set up the environment
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows).
+Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/workflows/go/sdk).
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-In a new terminal window, navigate to the `order-processor` directory:
+In a new terminal window, navigate to the `sdk` directory:
 
 ```bash
-cd workflows/go/sdk/order-processor
+cd workflows/go/sdk
 ```
 
 ### Step 3: Run the order processor app
 
-In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}):
+In the terminal, start the order processor app alongside a Dapr sidecar using [Multi-App Run]({{< ref multi-app-dapr-run >}}). From the `go/sdk` directory, run the following command:
 
 ```bash
 dapr run -f .
 ```
 
-This starts the `order-processor` app with unique workflow ID and runs the workflow activities. 
+This starts the `order-processor` app with unique workflow ID and runs the workflow activities.
 
 Expected output:
 
@@ -1157,7 +1187,7 @@ Running `dapr init` launches the [openzipkin/zipkin](https://hub.docker.com/r/op
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`). 
+View the workflow trace spans in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`).
 
 <img src="/images/workflow-trace-spans-zipkin.png" width=800 style="padding-bottom:15px;">
 
@@ -1174,9 +1204,10 @@ When you ran `dapr run`:
 1. The `NotifyActivity` workflow activity sends a notification saying that order `48ee83b7-5d80-48d5-97f9-6b372f5480a5` has completed.
 1. The workflow terminates as completed.
 
-#### `order-processor/main.go` 
+#### `order-processor/main.go`
 
 In the application's program file:
+
 - The unique workflow order ID is generated
 - The workflow is scheduled
 - The workflow status is retrieved
@@ -1317,6 +1348,7 @@ Meanwhile, the `OrderProcessingWorkflow` and its activities are defined as metho
 {{< /tabs >}}
 
 ## Tell us what you think!
+
 We're continuously working to improve our Quickstart examples and value your feedback. Did you find this Quickstart helpful? Do you have suggestions for improvement?
 
 Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).

@@ -6,10 +6,6 @@ weight: 4000
 description: "The Dapr Workflow engine architecture"
 ---
 
-{{% alert title="Note" color="primary" %}}
-Dapr Workflow is currently in beta. [See known limitations for {{% dapr-latest-version cli="true" %}}]({{< ref "workflow-overview.md#limitations" >}}).
-{{% /alert %}}
-
 [Dapr Workflows]({{< ref "workflow-overview.md" >}}) allow developers to define workflows using ordinary code in a variety of programming languages. The workflow engine runs inside of the Dapr sidecar and orchestrates workflow code deployed as part of your application. This article describes:
 
 - The architecture of the Dapr Workflow engine
@@ -51,7 +47,9 @@ If you're familiar with Dapr actors, you may notice a few differences in terms o
 
 The `durabletask-go` core used by the workflow engine writes distributed traces using Open Telemetry SDKs. These traces are captured automatically by the Dapr sidecar and exported to the configured Open Telemetry provider, such as Zipkin.
 
-Each workflow instance managed by the engine is represented as one or more spans. There is a single parent span representing the full workflow execution and child spans for the various tasks, including spans for activity task execution and durable timers. Workflow activity code also has access to the trace context, allowing distributed trace context to flow to external services that are invoked by the workflow.
+Each workflow instance managed by the engine is represented as one or more spans. There is a single parent span representing the full workflow execution and child spans for the various tasks, including spans for activity task execution and durable timers. 
+
+> Workflow activity code currently **does not** have access to the trace context.
 
 ## Internal workflow actors
 

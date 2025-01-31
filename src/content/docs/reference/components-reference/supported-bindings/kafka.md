@@ -45,6 +45,10 @@ spec:
     value: "newest"
   - name: maxMessageBytes # Optional.
     value: "1024"
+  - name: heartbeatInterval # Optional.
+    value: 5s
+  - name: sessionTimeout # Optional.
+    value: 15s
   - name: version # Optional.
     value: "2.0.0"
   - name: direction
@@ -59,6 +63,8 @@ spec:
     value: true
   - name: schemaLatestVersionCacheTTL # Optional. When using Schema Registry Avro serialization/deserialization. The TTL for schema caching when publishing a message with latest schema available.
     value: 5m
+  - name: escapeHeaders # Optional.
+    value: false
 ```
 
 ## Spec metadata fields
@@ -90,6 +96,12 @@ spec:
 | `schemaRegistryAPISecret` | N | When using Schema Registry Avro serialization/deserialization. The Schema Registry credentials API Secret. | `ABCDEFGMEADFF` |
 | `schemaCachingEnabled` | N | When using Schema Registry Avro serialization/deserialization. Enables caching for schemas. Default is `true` | `true` |
 | `schemaLatestVersionCacheTTL` | N | When using Schema Registry Avro serialization/deserialization. The TTL for schema caching when publishing a message with latest schema available. Default is 5 min | `5m` |
+| `clientConnectionTopicMetadataRefreshInterval` | N | Input/Output | The interval for the client connection's topic metadata to be refreshed with the broker as a Go duration. Defaults to `9m`. | `"4m"` |
+| `clientConnectionKeepAliveInterval` | N | Input/Output | The maximum time for the client connection to be kept alive with the broker, as a Go duration, before closing the connection. A zero value (default) means keeping alive indefinitely. | `"4m"` |
+| `consumerFetchDefault` | N | Input/Output | The default number of message bytes to fetch from the broker in each request. Default is `"1048576"` bytes. | `"2097152"` |
+| `heartbeatInterval` | N | Input | The interval between heartbeats to the consumer coordinator. At most, the value should be set to a 1/3 of the `sessionTimeout` value. Defaults to `"3s"`. | `"5s"` |
+| `sessionTimeout` | N | Input | The timeout used to detect client failures when using Kafka’s group management facility. If the broker fails to receive any heartbeats from the consumer before the expiration of this session timeout, then the consumer is removed and initiates a rebalance. Defaults to `"10s"`. | `"20s"` |
+| `escapeHeaders` | N | Input | Enables URL escaping of the message header values received by the consumer. Allows receiving content with special characters that are usually not allowed in HTTP headers. Default is `false`. | `true` |
 
 #### Note
 The metadata `version` must be set to `1.0.0` when using Azure EventHubs with Kafka.

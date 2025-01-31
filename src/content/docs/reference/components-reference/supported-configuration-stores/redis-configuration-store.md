@@ -24,9 +24,10 @@ spec:
     value: <address>:6379
   - name: redisPassword
     value: **************
+  - name: useEntraID
+    value: "true"
   - name: enableTLS
     value: <bool>
-
 ```
 
 {{% alert title="Warning" color="warning" %}}
@@ -39,9 +40,11 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 | Field              | Required | Details | Example |
 |--------------------|:--------:|---------|---------|
 | redisHost | Y | Output |  The Redis host address | `"localhost:6379"` |
-| redisPassword | Y | Output | The Redis password | `"password"` |
+| redisPassword | N | Output | The Redis password | `"password"` |
 | redisUsername | N | Output | Username for Redis host. Defaults to empty. Make sure your Redis server version is 6 or above, and have created acl rule correctly. | `"username"` |
 | enableTLS | N | Output |  If the Redis instance supports TLS with public certificates it can be configured to enable or disable TLS. Defaults to `"false"` | `"true"`, `"false"` |
+| clientCert        | N | Output        | The content of the client certificate, used for Redis instances that require client-side certificates. Must be used with `clientKey` and `enableTLS` must be set to true. It is recommended to use a secret store as described [here]({{< ref component-secrets.md >}})  | `"----BEGIN CERTIFICATE-----\nMIIC..."` |
+| clientKey        | N | Output        | The content of the client private key, used in conjunction with `clientCert` for authentication. It is recommended to use a secret store as described [here]({{< ref component-secrets.md >}})  | `"----BEGIN PRIVATE KEY-----\nMIIE..."` |
 | failover           | N | Output         | Property to enabled failover configuration. Needs sentinelMasterName to be set. Defaults to `"false"` | `"true"`, `"false"`
 | sentinelMasterName | N | Output         | The Sentinel master name. See [Redis Sentinel Documentation](https://redis.io/docs/reference/sentinel-clients/) | `""`,  `"127.0.0.1:6379"`
 | redisType        | N | Output        | The type of Redis. There are two valid values, one is `"node"` for single node mode, the other is `"cluster"` for Redis cluster mode. Defaults to `"node"`. | `"cluster"`
@@ -63,7 +66,7 @@ The above example uses secrets as plain strings. It is recommended to use a secr
 
 Dapr can use any Redis instance: containerized, running on your local dev machine, or a managed cloud service.
 
-{{< tabs "Self-Hosted" "Kubernetes" "Azure" "AWS" "GCP" >}}
+{{< tabs "Self-Hosted" "Kubernetes" "AWS" "Azure" "GCP" >}}
 
 {{% codetab %}}
 A Redis instance is automatically created as a Docker container when you run `dapr init`
@@ -79,7 +82,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
     ```
 
 2. Run `kubectl get pods` to see the Redis containers now running in your cluster.
-3. Add `redis-master:6379` as the `redisHost` in your [redis.yaml](#configuration) file. For example:
+3. Add `redis-master:6379` as the `redisHost` in your [redis.yaml](#component-format) file. For example:
     ```yaml
         metadata:
         - name: redisHost
@@ -90,7 +93,7 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 
     - **Linux/MacOS**: Run `kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode` and copy the outputted password.
 
-    Add this password as the `redisPassword` value in your [redis.yaml](#configuration) file. For example:
+    Add this password as the `redisPassword` value in your [redis.yaml](#component-format) file. For example:
     ```yaml
         metadata:
         - name: redisPassword
@@ -99,27 +102,37 @@ You can use [Helm](https://helm.sh/) to quickly create a Redis instance in our K
 {{% /codetab %}}
 
 {{% codetab %}}
-**Note**: this approach requires having an Azure Subscription.
-
-1. [Start the Azure Cache for Redis creation flow](https://ms.portal.azure.com/#create/Microsoft.Cache). Log in if necessary.
-2. Fill out necessary information and **check the "Unblock port 6379" box**, which will allow us to persist state without SSL.
-3. Click "Create" to kickoff deployment of your Redis instance.
-4. Once your instance is created, you'll need to grab the Host name (FQDN) and your access key:
-   - For the Host name: navigate to the resource's "Overview" and copy "Host name".
-   - For your access key: navigate to "Settings" > "Access Keys" to copy and save your key.
-5. Add your key and your host to a `redis.yaml` file that Dapr can apply to your cluster. 
-   - If you're running a sample, add the host and key to the provided `redis.yaml`. 
-   - If you're creating a project from the ground up, create a `redis.yaml` file as specified in [Configuration](#configuration). 
-   
-   Set the `redisHost` key to `[HOST NAME FROM PREVIOUS STEP]:6379` and the `redisPassword` key to the key you saved earlier. 
-   
-   **Note:** In a production-grade application, follow [secret management]({{< ref component-secrets.md >}}) instructions to securely manage your secrets.
-
-> **NOTE:** Dapr pub/sub uses [Redis Streams](https://redis.io/topics/streams-intro) that was introduced by Redis 5.0, which isn't currently available on Azure Managed Redis Cache. Consequently, you can use Azure Managed Redis Cache only for state persistence.
+[AWS Redis](https://aws.amazon.com/redis/)
 {{% /codetab %}}
 
 {{% codetab %}}
-[AWS Redis](https://aws.amazon.com/redis/)
+
+1. [Create an Azure Cache for Redis instance using the official Microsoft documentation.](https://docs.microsoft.com/azure/azure-cache-for-redis/quickstart-create-redis)
+
+1. Once your instance is created, grab the Host name (FQDN) and your access key from the Azure portal. 
+   - For the Host name: 
+     - Navigate to the resource's **Overview** page.
+     - Copy the **Host name** value.
+   - For your access key: 
+     - Navigate to **Settings** > **Access Keys**. 
+     - Copy and save your key.
+
+1. Add your key and your host name to a `redis.yaml` file that Dapr can apply to your cluster. 
+   - If you're running a sample, add the host and key to the provided `redis.yaml`. 
+   - If you're creating a project from the ground up, create a `redis.yaml` file as specified in [the Component format section](#component-format). 
+   
+1. Set the `redisHost` key to `[HOST NAME FROM PREVIOUS STEP]:6379` and the `redisPassword` key to the key you saved earlier. 
+   
+   **Note:** In a production-grade application, follow [secret management]({{< ref component-secrets.md >}}) instructions to securely manage your secrets.
+
+1. Enable EntraID support:
+   - Enable Entra ID authentication on your Azure Redis server. This may takes a few minutes.
+   - Set `useEntraID` to `"true"` to implement EntraID support for Azure Cache for Redis.
+
+1. Set `enableTLS` to `"true"` to support TLS. 
+
+> **Note:**`useEntraID` assumes that either your UserPrincipal (via AzureCLICredential) or the SystemAssigned managed identity have the RedisDataOwner role permission. If a user-assigned identity is used, [you need to specify the `azureClientID` property]({{< ref "howto-mi.md#set-up-identities-in-your-component" >}}).
+
 {{% /codetab %}}
 
 {{% codetab %}}

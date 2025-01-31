@@ -72,38 +72,38 @@ def update_source(c):
 #                 f.write(
 #                     f"      translation: {translation}\n")
 
-#     # update aliases
-#     # insert /zh-hans to every head of alias in the head of *.md files in content directory
-#     for root, dirs, files in os.walk(content_dir):
-#         # load file as markdown
-#         for file in files:
-#             if file.endswith(".md"):
-#                 with open(f"{root}/{file}", "r", encoding='utf8') as f:
-#                     content = f.read()
-#                 # find all text between aliases: and --- of that
-#                 aliases_lines = re.findall(r"^aliases:.*?---", content, re.MULTILINE | re.DOTALL)
-#                 # split lines by new line
-#                 aliases_lines = [line.split("\n") for line in aliases_lines]
-#                 # flatten list
-#                 aliases_lines = [item for sublist in aliases_lines for item in sublist]
-#                 # filter line that starts with "- \"/", "- \'/" or "- /", skip blanks before
-#                 aliases_lines = [line for line in aliases_lines if
-#                                  line.strip().startswith("- \"/") or line.strip().startswith(
-#                                      "- \'/") or line.strip().startswith("- /")]
-#                 if aliases_lines:
-#                     # create replacement map
-#                     replacements = {}
-#                     for line in aliases_lines:
-#                         # insert /zh-hans before the first "/"
-#                         index = line.find("/")
-#                         if index != -1:
-#                             replacements[line] = line[:index] + "/zh-hans" + line[index:]
-#                     # replace all aliases: lines with the new lines
-#                     for line in aliases_lines:
-#                         content = content.replace(line, replacements[line])
-#                     # write the new content to file
-#                     with open(f"{root}/{file}", "w", encoding='utf8') as f:
-#                         f.write(content)
+    # update aliases
+    # insert /zh-hans to every head of alias in the head of *.md files in content directory
+    for root, dirs, files in os.walk(content_dir):
+        # load file as markdown
+        for file in files:
+            if file.endswith(".md"):
+                with open(f"{root}/{file}", "r", encoding='utf8') as f:
+                    content = f.read()
+                # find all text between aliases: and --- of that
+                aliases_lines = re.findall(r"^aliases:.*?---", content, re.MULTILINE | re.DOTALL)
+                # split lines by new line
+                aliases_lines = [line.split("\n") for line in aliases_lines]
+                # flatten list
+                aliases_lines = [item for sublist in aliases_lines for item in sublist]
+                # filter line that starts with "- \"/", "- \'/" or "- /", skip blanks before
+                aliases_lines = [line for line in aliases_lines if
+                                 line.strip().startswith("- \"/") or line.strip().startswith(
+                                     "- \'/") or line.strip().startswith("- /")]
+                if aliases_lines:
+                    # create replacement map
+                    replacements = {}
+                    for line in aliases_lines:
+                        # insert /zh-hans before the first "/"
+                        index = line.find("/")
+                        if index != -1:
+                            replacements[line] = line[:index] + "/zh-hans" + line[index:]
+                    # replace all aliases: lines with the new lines
+                    for line in aliases_lines:
+                        content = content.replace(line, replacements[line])
+                    # write the new content to file
+                    with open(f"{root}/{file}", "w", encoding='utf8') as f:
+                        f.write(content)
 
 
 @task

@@ -35,7 +35,13 @@ If you don't specify a timeout value, the policy does not enforce a time and def
 
 ## Retries
 
-With `retries`, you can define a retry strategy for failed operations, including requests failed due to triggering a defined timeout or circuit breaker policy. The following retry options are configurable:
+With `retries`, you can define a retry strategy for failed operations, including requests failed due to triggering a defined timeout or circuit breaker policy. 
+
+{{% alert title="Pub/sub component retries vs inbound resiliency" color="warning" %}}
+Each [pub/sub component]({{< ref supported-pubsub >}}) has its own built-in retry behaviors. Explicity applying a Dapr resiliency policy doesn't override these implicit retry policies. Rather, the resiliency policy augments the built-in retry, which can cause repetitive clustering of messages.
+{{% /alert %}}
+
+The following retry options are configurable:
 
 | Retry option | Description |
 | ------------ | ----------- |
@@ -43,6 +49,15 @@ With `retries`, you can define a retry strategy for failed operations, including
 | `duration` | Determines the time interval between retries. Only applies to the `constant` policy.<br/>Valid values are of the form `200ms`, `15s`, `2m`, etc.<br/> Defaults to `5s`.|
 | `maxInterval` | Determines the maximum interval between retries to which the `exponential` back-off policy can grow.<br/>Additional retries always occur after a duration of `maxInterval`. Defaults to `60s`. Valid values are of the form `5s`, `1m`, `1m30s`, etc |
 | `maxRetries` | The maximum number of retries to attempt. <br/>`-1` denotes an unlimited number of retries, while `0` means the request will not be retried (essentially behaving as if the retry policy were not set).<br/>Defaults to `-1`. |
+| `matching.httpStatusCodes` | Optional: a comma-separated string of HTTP status codes or code ranges to retry. Status codes not listed are not retried.<br/>Valid values: 100-599, [Reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)<br/>Format: `<code>` or range `<start>-<end>`<br/>Example: "429,501-503"<br/>Default: empty string `""` or field is not set. Retries on all HTTP errors. |
+| `matching.gRPCStatusCodes` | Optional: a comma-separated string of gRPC status codes or code ranges to retry. Status codes not listed are not retried.<br/>Valid values: 0-16, [Reference](https://grpc.io/docs/guides/status-codes/)<br/>Format: `<code>` or range `<start>-<end>`<br/>Example: "1,501-503"<br/>Default: empty string `""` or field is not set. Retries on all gRPC errors. |
+
+
+{{% alert title="httpStatusCodes and gRPCStatusCodes format" color="warning" %}}
+The field values should follow the format as specified in the field description or in the "Example 2" below.
+An incorrectly formatted value will produce an error log ("Could not read resiliency policy") and `daprd` startup sequence will proceed.
+{{% /alert %}}
+
 
 The exponential back-off window uses the following formula:
 
@@ -71,7 +86,20 @@ spec:
         maxRetries: -1 # Retry indefinitely
 ```
 
+Example 2:
 
+```yaml
+spec:
+  policies:
+    retries:
+      retry5xxOnly:
+        policy: constant
+        duration: 5s
+        maxRetries: 3
+        matching:
+          httpStatusCodes: "429,500-599" # retry the HTTP status codes in this range. All others are not retried. 
+          gRPCStatusCodes: "1-4,8-11,13,14" # retry gRPC status codes in these ranges and separate single codes.
+```
 
 ## Circuit Breakers
 
@@ -82,7 +110,7 @@ Circuit Breaker (CB) policies are used when other applications/services/componen
 | `maxRequests` | The maximum number of requests allowed to pass through when the CB is half-open (recovering from failure). Defaults to `1`. |
 | `interval` | The cyclical period of time used by the CB to clear its internal counts. If set to 0 seconds, this never clears. Defaults to `0s`. |
 | `timeout` | The period of the open state (directly after failure) until the CB switches to half-open. Defaults to `60s`. |
-| `trip` | A [Common Expression Language (CEL)](https://github.com/google/cel-spec) statement that is evaluated by the CB. When the statement evaluates to true, the CB trips and becomes open. Defaults to `consecutiveFailures > 5`. |
+| `trip` | A [Common Expression Language (CEL)](https://github.com/google/cel-spec) statement that is evaluated by the CB. When the statement evaluates to true, the CB trips and becomes open. Defaults to `consecutiveFailures > 5`. Other possible values are `requests` and `totalFailures` where `requests` represents the number of either successful or failed calls before the circuit opens and `totalFailures` represents the total (not necessarily consecutive) number of failed attempts before the circuit opens. Example: `requests > 5` and `totalFailures >3`.|
 
 Example:
 
