@@ -5,6 +5,3 @@ linkTitle: "贡献指南"
 weight: 60
 description: 如何为Dapr项目做出贡献
 ---
-```
-
-您已接受截至2023年10月的数据
