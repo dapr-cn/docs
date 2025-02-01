@@ -1,206 +1,193 @@
 ---
 type: docs
-title: "Error codes reference guide"
-linkTitle: "Reference"
-description: "List of gRPC and HTTP error codes in Dapr and their descriptions"
+title: "错误代码参考指南"
+linkTitle: "参考"
+description: "Dapr 中 gRPC 和 HTTP 错误代码列表及其描述"
 weight: 20
 ---
 
-The following tables list the error codes returned by Dapr runtime.
-The error codes are returned in the response body of an HTTP request or in the `ErrorInfo` section of a gRPC status response, if one is present. 
-An effort is underway to enrich all gRPC error responses according to the [Richer Error Model]({{< ref "grpc-error-codes.md#richer-grpc-error-model" >}}). Error codes without a corresponding gRPC code indicate those errors have not yet been updated to this model.
+以下表格列出了 Dapr 运行时返回的错误代码。
+错误代码会在 HTTP 请求的响应体中或 gRPC 状态响应的 `ErrorInfo` 部分返回（如果存在）。
+我们正在努力根据 [更丰富的错误模型]({{< ref "grpc-error-codes.md#richer-grpc-error-model" >}}) 来改进所有 gRPC 错误响应。没有对应 gRPC 代码的错误代码表示这些错误尚未更新到此模型。
 
-### Actors API
+### 演员 API
 
-| HTTP Code                          | gRPC Code | Description                                                             |
-| ---------------------------------- | --------- | ----------------------------------------------------------------------- |
-| `ERR_ACTOR_INSTANCE_MISSING`       |           | Missing actor instance                                                  |
-| `ERR_ACTOR_INVOKE_METHOD`          |           | Error invoking actor method                                             |
-| `ERR_ACTOR_RUNTIME_NOT_FOUND`      |           | Actor runtime not found                                                 |
-| `ERR_ACTOR_STATE_GET`              |           | Error getting actor state                                               |
-| `ERR_ACTOR_STATE_TRANSACTION_SAVE` |           | Error saving actor transaction                                          |
-| `ERR_ACTOR_REMINDER_CREATE`        |           | Error creating actor reminder                                           |
-| `ERR_ACTOR_REMINDER_DELETE`        |           | Error deleting actor reminder                                           |
-| `ERR_ACTOR_REMINDER_GET`           |           | Error getting actor reminder                                            |
-| `ERR_ACTOR_REMINDER_NON_HOSTED`    |           | Reminder operation on non-hosted actor type                             |
-| `ERR_ACTOR_TIMER_CREATE`           |           | Error creating actor timer                                              |
-| `ERR_ACTOR_NO_APP_CHANNEL`         |           | App channel not initialized                                             |
-| `ERR_ACTOR_STACK_DEPTH`            |           | Maximum actor call stack depth exceeded                                 |
-| `ERR_ACTOR_NO_PLACEMENT`           |           | Placement service not configured                                        |
-| `ERR_ACTOR_RUNTIME_CLOSED`         |           | Actor runtime is closed                                                 |
-| `ERR_ACTOR_NAMESPACE_REQUIRED`     |           | Actors must have a namespace configured when running in Kubernetes mode |
-| `ERR_ACTOR_NO_ADDRESS`             |           | No address found for actor                                              |
+| HTTP 代码                          | gRPC 代码 | 描述                                                             |
+| ---------------------------------- | --------- | ---------------------------------------------------------------- |
+| `ERR_ACTOR_INSTANCE_MISSING`       |           | 缺少演员实例                                                     |
+| `ERR_ACTOR_INVOKE_METHOD`          |           | 调用演员方法时发生错误                                           |
+| `ERR_ACTOR_RUNTIME_NOT_FOUND`      |           | 找不到演员运行时                                                 |
+| `ERR_ACTOR_STATE_GET`              |           | 获取演员状态时发生错误                                           |
+| `ERR_ACTOR_STATE_TRANSACTION_SAVE` |           | 保存演员事务时发生错误                                           |
+| `ERR_ACTOR_REMINDER_CREATE`        |           | 创建演员提醒时发生错误                                           |
+| `ERR_ACTOR_REMINDER_DELETE`        |           | 删除演员提醒时发生错误                                           |
+| `ERR_ACTOR_REMINDER_GET`           |           | 获取演员提醒时发生错误                                           |
+| `ERR_ACTOR_REMINDER_NON_HOSTED`    |           | 非托管演员类型的提醒操作                                         |
+| `ERR_ACTOR_TIMER_CREATE`           |           | 创建演员计时器时发生错误                                         |
+| `ERR_ACTOR_NO_APP_CHANNEL`         |           | 应用通道未初始化                                                 |
+| `ERR_ACTOR_STACK_DEPTH`            |           | 超过演员调用堆栈的最大深度                                       |
+| `ERR_ACTOR_NO_PLACEMENT`           |           | 未配置放置服务                                                   |
+| `ERR_ACTOR_RUNTIME_CLOSED`         |           | 演员运行时已关闭                                                 |
+| `ERR_ACTOR_NAMESPACE_REQUIRED`     |           | 在 Kubernetes 模式下运行时，演员必须配置命名空间                 |
+| `ERR_ACTOR_NO_ADDRESS`             |           | 找不到演员的地址                                                |
 
+### 工作流 API
 
-### Workflows API
+| HTTP 代码                          | gRPC 代码 | 描述                                                                             |
+| ---------------------------------- | --------- | -------------------------------------------------------------------------------- |
+| `ERR_GET_WORKFLOW`                 |           | 获取工作流时发生错误                                                              |
+| `ERR_START_WORKFLOW`               |           | 启动工作流时发生错误                                                              |
+| `ERR_PAUSE_WORKFLOW`               |           | 暂停工作流时发生错误                                                              |
+| `ERR_RESUME_WORKFLOW`              |           | 恢复工作流时发生错误                                                              |
+| `ERR_TERMINATE_WORKFLOW`           |           | 终止工作流时发生错误                                                              |
+| `ERR_PURGE_WORKFLOW`               |           | 清除工作流时发生错误                                                              |
+| `ERR_RAISE_EVENT_WORKFLOW`         |           | 在工作流中引发事件时发生错误                                                      |
+| `ERR_WORKFLOW_COMPONENT_MISSING`   |           | 缺少工作流组件                                                                   |
+| `ERR_WORKFLOW_COMPONENT_NOT_FOUND` |           | 找不到工作流组件                                                                 |
+| `ERR_WORKFLOW_EVENT_NAME_MISSING`  |           | 缺少工作流事件名称                                                               |
+| `ERR_WORKFLOW_NAME_MISSING`        |           | 未配置工作流名称                                                                 |
+| `ERR_INSTANCE_ID_INVALID`          |           | 无效的工作流实例 ID。（仅允许字母数字和下划线字符）                               |
+| `ERR_INSTANCE_ID_NOT_FOUND`        |           | 找不到工作流实例 ID                                                              |
+| `ERR_INSTANCE_ID_PROVIDED_MISSING` |           | 缺少工作流实例 ID                                                                |
+| `ERR_INSTANCE_ID_TOO_LONG`         |           | 工作流实例 ID 过长                                                               |
 
-| HTTP Code                          | gRPC Code | Description                                                                             |
-| ---------------------------------- | --------- | --------------------------------------------------------------------------------------- |
-| `ERR_GET_WORKFLOW`                 |           | Error getting workflow                                                                  |
-| `ERR_START_WORKFLOW`               |           | Error starting workflow                                                                 |
-| `ERR_PAUSE_WORKFLOW`               |           | Error pausing workflow                                                                  |
-| `ERR_RESUME_WORKFLOW`              |           | Error resuming workflow                                                                 |
-| `ERR_TERMINATE_WORKFLOW`           |           | Error terminating workflow                                                              |
-| `ERR_PURGE_WORKFLOW`               |           | Error purging workflow                                                                  |
-| `ERR_RAISE_EVENT_WORKFLOW`         |           | Error raising event in workflow                                                         |
-| `ERR_WORKFLOW_COMPONENT_MISSING`   |           | Missing workflow component                                                              |
-| `ERR_WORKFLOW_COMPONENT_NOT_FOUND` |           | Workflow component not found                                                            |
-| `ERR_WORKFLOW_EVENT_NAME_MISSING`  |           | Missing workflow event name                                                             |
-| `ERR_WORKFLOW_NAME_MISSING`        |           | Workflow name not configured                                                            |
-| `ERR_INSTANCE_ID_INVALID`          |           | Invalid workflow instance ID. (Only alphanumeric and underscore characters are allowed) |
-| `ERR_INSTANCE_ID_NOT_FOUND`        |           | Workflow instance ID not found                                                          |
-| `ERR_INSTANCE_ID_PROVIDED_MISSING` |           | Missing workflow instance ID                                                            |
-| `ERR_INSTANCE_ID_TOO_LONG`         |           | Workflow instance ID too long                                                           |
+### 状态管理 API
 
+| HTTP 代码                               | gRPC 代码                               | 描述                               |
+| --------------------------------------- | --------------------------------------- | ---------------------------------- |
+| `ERR_STATE_TRANSACTION`                 |                                         | 状态事务出错                       |
+| `ERR_STATE_SAVE`                        |                                         | 保存状态时出错                     |
+| `ERR_STATE_GET`                         |                                         | 获取状态时出错                     |
+| `ERR_STATE_DELETE`                      |                                         | 删除状态时出错                     |
+| `ERR_STATE_BULK_DELETE`                 |                                         | 批量删除状态时出错                 |
+| `ERR_STATE_BULK_GET`                    |                                         | 批量获取状态时出错                 |
+| `ERR_NOT_SUPPORTED_STATE_OPERATION`     |                                         | 事务中不支持的操作                 |
+| `ERR_STATE_QUERY`                       | `DAPR_STATE_QUERY_FAILED`               | 查询状态时出错                     |
+| `ERR_STATE_STORE_NOT_FOUND`             | `DAPR_STATE_NOT_FOUND`                  | 找不到状态存储                     |
+| `ERR_STATE_STORE_NOT_CONFIGURED`        | `DAPR_STATE_NOT_CONFIGURED`             | 未配置状态存储                     |
+| `ERR_STATE_STORE_NOT_SUPPORTED`         | `DAPR_STATE_TRANSACTIONS_NOT_SUPPORTED` | 状态存储不支持事务                 |
+| `ERR_STATE_STORE_NOT_SUPPORTED`         | `DAPR_STATE_QUERYING_NOT_SUPPORTED`     | 状态存储不支持查询                 |
+| `ERR_STATE_STORE_TOO_MANY_TRANSACTIONS` | `DAPR_STATE_TOO_MANY_TRANSACTIONS`      | 每个事务的操作过多                 |
+| `ERR_MALFORMED_REQUEST`                 | `DAPR_STATE_ILLEGAL_KEY`                | 无效的键                           |
 
-### State management API
+### 配置 API
 
-| HTTP Code                               | gRPC Code                               | Description                               |
-| --------------------------------------- | --------------------------------------- | ----------------------------------------- |
-| `ERR_STATE_TRANSACTION`                 |                                         | Error in state transaction                |
-| `ERR_STATE_SAVE`                        |                                         | Error saving state                        |
-| `ERR_STATE_GET`                         |                                         | Error getting state                       |
-| `ERR_STATE_DELETE`                      |                                         | Error deleting state                      |
-| `ERR_STATE_BULK_DELETE`                 |                                         | Error deleting state in bulk              |
-| `ERR_STATE_BULK_GET`                    |                                         | Error getting state in bulk               |
-| `ERR_NOT_SUPPORTED_STATE_OPERATION`     |                                         | Operation not supported in transaction    |
-| `ERR_STATE_QUERY`                       | `DAPR_STATE_QUERY_FAILED`               | Error querying state                      |
-| `ERR_STATE_STORE_NOT_FOUND`             | `DAPR_STATE_NOT_FOUND`                  | State store not found                     |
-| `ERR_STATE_STORE_NOT_CONFIGURED`        | `DAPR_STATE_NOT_CONFIGURED`             | State store not configured                |
-| `ERR_STATE_STORE_NOT_SUPPORTED`         | `DAPR_STATE_TRANSACTIONS_NOT_SUPPORTED` | State store does not support transactions |
-| `ERR_STATE_STORE_NOT_SUPPORTED`         | `DAPR_STATE_QUERYING_NOT_SUPPORTED`     | State store does not support querying     |
-| `ERR_STATE_STORE_TOO_MANY_TRANSACTIONS` | `DAPR_STATE_TOO_MANY_TRANSACTIONS`      | Too many operations per transaction       |
-| `ERR_MALFORMED_REQUEST`                 | `DAPR_STATE_ILLEGAL_KEY`                | Invalid key                               |
+| HTTP 代码                                | gRPC 代码 | 描述                            |
+| ---------------------------------------- | --------- | ------------------------------- |
+| `ERR_CONFIGURATION_GET`                  |           | 获取配置时出错                  |
+| `ERR_CONFIGURATION_STORE_NOT_CONFIGURED` |           | 未配置配置存储                  |
+| `ERR_CONFIGURATION_STORE_NOT_FOUND`      |           | 找不到配置存储                  |
+| `ERR_CONFIGURATION_SUBSCRIBE`            |           | 订阅配置时出错                  |
+| `ERR_CONFIGURATION_UNSUBSCRIBE`          |           | 取消订阅配置时出错              |
 
+### 加密 API
 
-### Configuration API
+| HTTP 代码                             | gRPC 代码 | 描述                     |
+| ------------------------------------- | --------- | ------------------------ |
+| `ERR_CRYPTO`                          |           | 加密操作出错             |
+| `ERR_CRYPTO_KEY`                      |           | 检索加密密钥时出错       |
+| `ERR_CRYPTO_PROVIDER_NOT_FOUND`       |           | 找不到加密提供者         |
+| `ERR_CRYPTO_PROVIDERS_NOT_CONFIGURED` |           | 未配置加密提供者         |
 
-| HTTP Code                                | gRPC Code | Description                            |
-| ---------------------------------------- | --------- | -------------------------------------- |
-| `ERR_CONFIGURATION_GET`                  |           | Error getting configuration            |
-| `ERR_CONFIGURATION_STORE_NOT_CONFIGURED` |           | Configuration store not configured     |
-| `ERR_CONFIGURATION_STORE_NOT_FOUND`      |           | Configuration store not found          |
-| `ERR_CONFIGURATION_SUBSCRIBE`            |           | Error subscribing to configuration     |
-| `ERR_CONFIGURATION_UNSUBSCRIBE`          |           | Error unsubscribing from configuration |
+### 密钥管理 API
 
+| HTTP 代码                          | gRPC 代码 | 描述                 |
+| ---------------------------------- | --------- | -------------------- |
+| `ERR_SECRET_GET`                   |           | 获取密钥时出错       |
+| `ERR_SECRET_STORE_NOT_FOUND`       |           | 找不到密钥存储       |
+| `ERR_SECRET_STORES_NOT_CONFIGURED` |           | 未配置密钥存储       |
+| `ERR_PERMISSION_DENIED`            |           | 策略拒绝权限         |
 
-### Crypto API
+### 发布/订阅和消息传递错误
 
-| HTTP Code                             | gRPC Code | Description                     |
-| ------------------------------------- | --------- | ------------------------------- |
-| `ERR_CRYPTO`                          |           | Error in crypto operation       |
-| `ERR_CRYPTO_KEY`                      |           | Error retrieving crypto key     |
-| `ERR_CRYPTO_PROVIDER_NOT_FOUND`       |           | Crypto provider not found       |
-| `ERR_CRYPTO_PROVIDERS_NOT_CONFIGURED` |           | Crypto providers not configured |
+| HTTP 代码                     | gRPC 代码                              | 描述                                |
+| ----------------------------- | -------------------------------------- | ----------------------------------- |
+| `ERR_PUBSUB_EMPTY`            | `DAPR_PUBSUB_NAME_EMPTY`               | 发布/订阅名称为空                   |
+| `ERR_PUBSUB_NOT_FOUND`        | `DAPR_PUBSUB_NOT_FOUND`                | 找不到发布/订阅                     |
+| `ERR_PUBSUB_NOT_FOUND`        | `DAPR_PUBSUB_TEST_NOT_FOUND`           | 找不到发布/订阅                     |
+| `ERR_PUBSUB_NOT_CONFIGURED`   | `DAPR_PUBSUB_NOT_CONFIGURED`           | 未配置发布/订阅                     |
+| `ERR_TOPIC_NAME_EMPTY`        | `DAPR_PUBSUB_TOPIC_NAME_EMPTY`         | 主题名称为空                        |
+| `ERR_PUBSUB_FORBIDDEN`        | `DAPR_PUBSUB_FORBIDDEN`                | 禁止访问主题的应用 ID               |
+| `ERR_PUBSUB_PUBLISH_MESSAGE`  | `DAPR_PUBSUB_PUBLISH_MESSAGE`          | 发布消息时出错                      |
+| `ERR_PUBSUB_REQUEST_METADATA` | `DAPR_PUBSUB_METADATA_DESERIALIZATION` | 反序列化元数据时出错                |
+| `ERR_PUBSUB_CLOUD_EVENTS_SER` | `DAPR_PUBSUB_CLOUD_EVENT_CREATION`     | 创建 CloudEvent 时出错              |
+| `ERR_PUBSUB_EVENTS_SER`       | `DAPR_PUBSUB_MARSHAL_ENVELOPE`         | 编组 Cloud Event 信封时出错         |
+| `ERR_PUBSUB_EVENTS_SER`       | `DAPR_PUBSUB_MARSHAL_EVENTS`           | 将事件编组为字节时出错              |
+| `ERR_PUBSUB_EVENTS_SER`       | `DAPR_PUBSUB_UNMARSHAL_EVENTS`         | 解组事件时出错                      |
+| `ERR_PUBLISH_OUTBOX`          |                                        | 将消息发布到 outbox 时出错          |
 
+### 对话 API
 
-### Secrets API
+| HTTP 代码                         | gRPC 代码 | 描述                                   |
+| --------------------------------- | --------- | -------------------------------------- |
+| `ERR_CONVERSATION_INVALID_PARMS`  |           | 对话组件的参数无效                     |
+| `ERR_CONVERSATION_INVOKE`         |           | 调用对话时出错                         |
+| `ERR_CONVERSATION_MISSING_INPUTS` |           | 对话缺少输入                           |
+| `ERR_CONVERSATION_NOT_FOUND`      |           | 找不到对话                             |
 
-| HTTP Code                          | gRPC Code | Description                 |
-| ---------------------------------- | --------- | --------------------------- |
-| `ERR_SECRET_GET`                   |           | Error getting secret        |
-| `ERR_SECRET_STORE_NOT_FOUND`       |           | Secret store not found      |
-| `ERR_SECRET_STORES_NOT_CONFIGURED` |           | Secret store not configured |
-| `ERR_PERMISSION_DENIED`            |           | Permission denied by policy |
+### 服务调用 / 直接消息传递 API
 
+| HTTP 代码           | gRPC 代码 | 描述                  |
+| ------------------- | --------- | --------------------- |
+| `ERR_DIRECT_INVOKE` |           | 调用服务时出错        |
 
-### Pub/Sub and messaging errors
+### 绑定 API
 
-| HTTP Code                     | gRPC Code                              | Description                            |
-| ----------------------------- | -------------------------------------- | -------------------------------------- |
-| `ERR_PUBSUB_EMPTY`            | `DAPR_PUBSUB_NAME_EMPTY`               | Pubsub name is empty                   |
-| `ERR_PUBSUB_NOT_FOUND`        | `DAPR_PUBSUB_NOT_FOUND`                | Pubsub not found                       |
-| `ERR_PUBSUB_NOT_FOUND`        | `DAPR_PUBSUB_TEST_NOT_FOUND`           | Pubsub not found                       |
-| `ERR_PUBSUB_NOT_CONFIGURED`   | `DAPR_PUBSUB_NOT_CONFIGURED`           | Pubsub not configured                  |
-| `ERR_TOPIC_NAME_EMPTY`        | `DAPR_PUBSUB_TOPIC_NAME_EMPTY`         | Topic name is empty                    |
-| `ERR_PUBSUB_FORBIDDEN`        | `DAPR_PUBSUB_FORBIDDEN`                | Access to topic forbidden for APP ID   |
-| `ERR_PUBSUB_PUBLISH_MESSAGE`  | `DAPR_PUBSUB_PUBLISH_MESSAGE`          | Error publishing message               |
-| `ERR_PUBSUB_REQUEST_METADATA` | `DAPR_PUBSUB_METADATA_DESERIALIZATION` | Error deserializing metadata           |
-| `ERR_PUBSUB_CLOUD_EVENTS_SER` | `DAPR_PUBSUB_CLOUD_EVENT_CREATION`     | Error creating CloudEvent              |
-| `ERR_PUBSUB_EVENTS_SER`       | `DAPR_PUBSUB_MARSHAL_ENVELOPE`         | Error marshalling Cloud Event envelope |
-| `ERR_PUBSUB_EVENTS_SER`       | `DAPR_PUBSUB_MARSHAL_EVENTS`           | Error marshalling events to bytes      |
-| `ERR_PUBSUB_EVENTS_SER`       | `DAPR_PUBSUB_UNMARSHAL_EVENTS`         | Error unmarshalling events             |
-| `ERR_PUBLISH_OUTBOX`          |                                        | Error publishing message to outbox     |
+| HTTP 代码                   | gRPC 代码 | 描述                     |
+| --------------------------- | --------- | ------------------------ |
+| `ERR_INVOKE_OUTPUT_BINDING` |           | 调用输出绑定时出错       |
 
+### 分布式锁 API
 
-### Conversation API
+| HTTP 代码                       | gRPC 代码 | 描述                     |
+| ------------------------------- | --------- | ------------------------ |
+| `ERR_LOCK_STORE_NOT_CONFIGURED` |           | 未配置锁存储             |
+| `ERR_LOCK_STORE_NOT_FOUND`      |           | 找不到锁存储             |
+| `ERR_TRY_LOCK`                  |           | 获取锁时出错             |
+| `ERR_UNLOCK`                    |           | 释放锁时出错             |
 
-| HTTP Code                         | gRPC Code | Description                                   |
-| --------------------------------- | --------- | --------------------------------------------- |
-| `ERR_CONVERSATION_INVALID_PARMS`  |           | Invalid parameters for conversation component |
-| `ERR_CONVERSATION_INVOKE`         |           | Error invoking conversation                   |
-| `ERR_CONVERSATION_MISSING_INPUTS` |           | Missing inputs for conversation               |
-| `ERR_CONVERSATION_NOT_FOUND`      |           | Conversation not found                        |
+### 健康检查
 
+| HTTP 代码                       | gRPC 代码 | 描述                     |
+| ------------------------------- | --------- | ------------------------ |
+| `ERR_HEALTH_NOT_READY`          |           | Dapr 未准备好            |
+| `ERR_HEALTH_APPID_NOT_MATCH`    |           | Dapr 应用 ID 不匹配      |
+| `ERR_OUTBOUND_HEALTH_NOT_READY` |           | Dapr 出站未准备好        |
 
-### Service Invocation / Direct Messaging API
+### 通用
 
-| HTTP Code           | gRPC Code | Description            |
-| ------------------- | --------- | ---------------------- |
-| `ERR_DIRECT_INVOKE` |           | Error invoking service |
+| HTTP 代码                    | gRPC 代码 | 描述                     |
+| ---------------------------- | --------- | ------------------------ |
+| `ERR_API_UNIMPLEMENTED`      |           | API 未实现               |
+| `ERR_APP_CHANNEL_NIL`        |           | 应用通道为 nil           |
+| `ERR_BAD_REQUEST`            |           | 错误请求                 |
+| `ERR_BODY_READ`              |           | 读取请求体时出错         |
+| `ERR_INTERNAL`               |           | 内部错误                 |
+| `ERR_MALFORMED_REQUEST`      |           | 请求格式错误             |
+| `ERR_MALFORMED_REQUEST_DATA` |           | 请求数据格式错误         |
+| `ERR_MALFORMED_RESPONSE`     |           | 响应格式错误             |
 
+### 调度/作业 API
 
-### Bindings API
+| HTTP 代码                       | gRPC 代码                       | 描述                                |
+| ------------------------------- | ------------------------------- | ----------------------------------- |
+| `DAPR_SCHEDULER_SCHEDULE_JOB`   | `DAPR_SCHEDULER_SCHEDULE_JOB`   | 调度作业时出错                      |
+| `DAPR_SCHEDULER_JOB_NAME`       | `DAPR_SCHEDULER_JOB_NAME`       | 作业名称应仅在 URL 中设置           |
+| `DAPR_SCHEDULER_JOB_NAME_EMPTY` | `DAPR_SCHEDULER_JOB_NAME_EMPTY` | 作业名称为空                        |
+| `DAPR_SCHEDULER_GET_JOB`        | `DAPR_SCHEDULER_GET_JOB`        | 获取作业时出错                      |
+| `DAPR_SCHEDULER_LIST_JOBS`      | `DAPR_SCHEDULER_LIST_JOBS`      | 列出作业时出错                      |
+| `DAPR_SCHEDULER_DELETE_JOB`     | `DAPR_SCHEDULER_DELETE_JOB`     | 删除作业时出错                      |
+| `DAPR_SCHEDULER_EMPTY`          | `DAPR_SCHEDULER_EMPTY`          | 必需的参数为空                      |
+| `DAPR_SCHEDULER_SCHEDULE_EMPTY` | `DAPR_SCHEDULER_SCHEDULE_EMPTY` | 未提供作业的调度                    |
 
-| HTTP Code                   | gRPC Code | Description                   |
-| --------------------------- | --------- | ----------------------------- |
-| `ERR_INVOKE_OUTPUT_BINDING` |           | Error invoking output binding |
+### 通用
 
+| HTTP 代码 | gRPC 代码 | 描述         |
+| --------- | --------- | ------------ |
+| `ERROR`   | `ERROR`   | 通用错误     |
 
-### Distributed Lock API
+## 下一步
 
-| HTTP Code                       | gRPC Code | Description               |
-| ------------------------------- | --------- | ------------------------- |
-| `ERR_LOCK_STORE_NOT_CONFIGURED` |           | Lock store not configured |
-| `ERR_LOCK_STORE_NOT_FOUND`      |           | Lock store not found      |
-| `ERR_TRY_LOCK`                  |           | Error acquiring lock      |
-| `ERR_UNLOCK`                    |           | Error releasing lock      |
-
-
-### Healthz
-
-| HTTP Code                       | gRPC Code | Description                 |
-| ------------------------------- | --------- | --------------------------- |
-| `ERR_HEALTH_NOT_READY`          |           | Dapr not ready              |
-| `ERR_HEALTH_APPID_NOT_MATCH`    |           | Dapr  App ID does not match |
-| `ERR_OUTBOUND_HEALTH_NOT_READY` |           | Dapr outbound not ready     |
-
-
-### Common
-
-| HTTP Code                    | gRPC Code | Description                |
-| ---------------------------- | --------- | -------------------------- |
-| `ERR_API_UNIMPLEMENTED`      |           | API not implemented        |
-| `ERR_APP_CHANNEL_NIL`        |           | App channel is nil         |
-| `ERR_BAD_REQUEST`            |           | Bad request                |
-| `ERR_BODY_READ`              |           | Error reading request body |
-| `ERR_INTERNAL`               |           | Internal error             |
-| `ERR_MALFORMED_REQUEST`      |           | Malformed request          |
-| `ERR_MALFORMED_REQUEST_DATA` |           | Malformed request data     |
-| `ERR_MALFORMED_RESPONSE`     |           | Malformed response         |
-
-
-### Scheduler/Jobs API
-
-| HTTP Code                       | gRPC Code                       | Description                            |
-| ------------------------------- | ------------------------------- | -------------------------------------- |
-| `DAPR_SCHEDULER_SCHEDULE_JOB`   | `DAPR_SCHEDULER_SCHEDULE_JOB`   | Error scheduling job                   |
-| `DAPR_SCHEDULER_JOB_NAME`       | `DAPR_SCHEDULER_JOB_NAME`       | Job name should only be set in the url |
-| `DAPR_SCHEDULER_JOB_NAME_EMPTY` | `DAPR_SCHEDULER_JOB_NAME_EMPTY` | Job name is empty                      |
-| `DAPR_SCHEDULER_GET_JOB`        | `DAPR_SCHEDULER_GET_JOB`        | Error getting job                      |
-| `DAPR_SCHEDULER_LIST_JOBS`      | `DAPR_SCHEDULER_LIST_JOBS`      | Error listing jobs                     |
-| `DAPR_SCHEDULER_DELETE_JOB`     | `DAPR_SCHEDULER_DELETE_JOB`     | Error deleting job                     |
-| `DAPR_SCHEDULER_EMPTY`          | `DAPR_SCHEDULER_EMPTY`          | Required argument is empty             |
-| `DAPR_SCHEDULER_SCHEDULE_EMPTY` | `DAPR_SCHEDULER_SCHEDULE_EMPTY` | No schedule provided for job           |
-
-
-### Generic
-
-| HTTP Code | gRPC Code | Description   |
-| --------- | --------- | ------------- |
-| `ERROR`   | `ERROR`   | Generic error |
-
-## Next steps
-
-- [Handling HTTP error codes]({{< ref http-error-codes.md >}})
-- [Handling gRPC error codes]({{< ref grpc-error-codes.md >}})
+- [处理 HTTP 错误代码]({{< ref http-error-codes.md >}})
+- [处理 gRPC 错误代码]({{< ref grpc-error-codes.md >}})
+`

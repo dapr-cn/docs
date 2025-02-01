@@ -1,7 +1,10 @@
 ---
 type: docs
-title: "Suggested Dapr docs templates"
-linkTitle: "Docs templates"
+title: "Dapr 文档模板建议"
+linkTitle: "文档模板"
 weight: 100
-description: Suggested template guidance for new Dapr doc articles
+description: 为新的 Dapr 文档文章提供模板建议
 ---
+```
+
+您接受的训练数据截至到2023年1

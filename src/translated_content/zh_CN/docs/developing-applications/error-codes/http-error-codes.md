@@ -1,21 +1,22 @@
 ---
 type: docs
-title: "Handling HTTP error codes"
+title: "处理 HTTP 错误代码"
 linkTitle: "HTTP"
-description: "Detailed reference of the Dapr HTTP error codes and how to handle them"
+description: "Dapr HTTP 错误代码的详细参考及其处理方法"
 weight: 30
 ---
 
-For HTTP calls made to Dapr runtime, when an error is encountered, an error JSON is returned in response body. The JSON contains an error code and an descriptive error message. 
+在向 Dapr 运行时发出的 HTTP 调用中，如果发生错误，响应体会返回一个错误的 JSON。该 JSON 包含错误代码和描述性错误信息。
 
 ```
 {
     "errorCode": "ERR_STATE_GET",
-    "message": "Requested state key does not exist in state store."
+    "message": "请求的状态键在状态存储中不存在。"
 }
 ```
 
-## Related
+## 相关内容
 
-- [Error code reference list]({{< ref error-codes-reference.md >}})
-- [Handling gRPC error codes]({{< ref grpc-error-codes.md >}})
+- [错误代码参考列表]({{< ref error-codes-reference.md >}})
+- [处理 gRPC 错误代码]({{< ref grpc-error-codes.md >}})
+`

@@ -1,36 +1,36 @@
 ---
 type: docs
-title: "Dapr Software Development Kits (SDKs)"
+title: "Dapr 软件开发工具包 (SDKs)"
 linkTitle: "SDKs"
 weight: 30
-description: "Use your favorite languages with Dapr"
+description: "使用您喜欢的语言与 Dapr 一起工作"
 no_list: true
 ---
 
-The Dapr SDKs are the easiest way for you to get Dapr into your application. Choose your favorite language and get up and running with Dapr in minutes.
+Dapr SDKs 是将 Dapr 集成到应用程序中的最简单方法。选择您喜欢的语言，几分钟内即可开始使用 Dapr。
 
-## SDK packages
+## SDK 包
 
-Select your [preferred language below]({{< ref "#sdk-languages" >}}) to learn more about client, server, actor, and workflow packages. 
+选择您[偏好的语言]({{< ref "#sdk-languages" >}})以了解有关客户端、服务扩展、actor 和工作流包的更多信息。
 
-- **Client**: The Dapr client allows you to invoke Dapr building block APIs and perform each building block's actions
-- **Server extensions**: The Dapr service extensions allow you to create services that can be invoked by other services and subscribe to topics
-- **Actor**: The Dapr Actor SDK allows you to build virtual actors with methods, state, timers, and persistent reminders
-- **Workflow**: Dapr Workflow makes it easy for you to write long running business logic and integrations in a reliable way
+- **客户端**: Dapr 客户端允许您调用 Dapr 构建块 API 并执行每个构建块的操作。
+- **服务扩展**: Dapr 服务扩展使您能够创建可被其他服务调用的服务并订阅主题。
+- **actor**: Dapr actor SDK 允许您构建具有方法、状态、计时器和持久性提醒的虚拟 actor。
+- **工作流**: Dapr 工作流使您能够可靠地编写长时间运行的业务逻辑和集成。
 
-## SDK languages
+## SDK 语言
 
-| Language | Status | Client | Server extensions | Actor | Workflow |
+| 语言 | 状态 | 客户端 | 服务扩展 | actor | 工作流 |
 |----------|:------|:----------:|:-----------:|:---------:|:---------:|
-| [.NET]({{< ref dotnet >}}) | Stable | ✔ |  [ASP.NET Core](https://github.com/dapr/dotnet-sdk/tree/master/examples/AspNetCore) | ✔ | ✔ |
-| [Python]({{< ref python >}}) | Stable | ✔ | [gRPC]({{< ref python-grpc.md >}}) <br />[FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}})| ✔ | ✔ |
-| [Java]({{< ref java >}}) | Stable | ✔ | Spring Boot  <br /> Quarkus| ✔ | ✔ |
-| [Go]({{< ref go >}}) | Stable | ✔ | ✔ | ✔ | ✔ |
-| [PHP]({{< ref php >}}) | Stable | ✔ | ✔ | ✔ | |
-| [JavaScript]({{< ref js >}}) | Stable| ✔ | | ✔ | ✔  |
-| [C++](https://github.com/dapr/cpp-sdk) | In development | ✔ | | |
-| [Rust]({{< ref rust >}}) | In development | ✔ | | ✔ | |
+| [.NET]({{< ref dotnet >}}) | 稳定 | ✔ |  [ASP.NET Core](https://github.com/dapr/dotnet-sdk/tree/master/examples/AspNetCore) | ✔ | ✔ |
+| [Python]({{< ref python >}}) | 稳定 | ✔ | [gRPC]({{< ref python-grpc.md >}}) <br />[FastAPI]({{< ref python-fastapi.md >}})<br />[Flask]({{< ref python-flask.md >}})| ✔ | ✔ |
+| [Java]({{< ref java >}}) | 稳定 | ✔ | Spring Boot  <br /> Quarkus| ✔ | ✔ |
+| [Go]({{< ref go >}}) | 稳定 | ✔ | ✔ | ✔ | ✔ |
+| [PHP]({{< ref php >}}) | 稳定 | ✔ | ✔ | ✔ | |
+| [JavaScript]({{< ref js >}}) | 稳定| ✔ | | ✔ | ✔  |
+| [C++](https://github.com/dapr/cpp-sdk) | 开发中 | ✔ | | |
+| [Rust]({{< ref rust >}}) | 开发中 | ✔ | | ✔ | |
 
-## Further reading
+## 进一步阅读
 
-- [Serialization in the Dapr SDKs]({{< ref sdk-serialization.md >}})
+- [Dapr SDKs 中的序列化]({{< ref sdk-serialization.md >}})

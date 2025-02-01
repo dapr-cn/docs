@@ -1,29 +1,29 @@
 ---
 type: docs
-title: "Dapr Sentry control plane service overview"
+title: "Dapr Sentry 控制平面服务概述"
 linkTitle: "Sentry"
-description: "Overview of the Dapr sentry service"
+description: "Dapr Sentry 服务概述"
 ---
 
-The Dapr Sentry service manages mTLS between services and acts as a certificate authority. It generates mTLS certificates and distributes them to any running sidecars. This allows sidecars to communicate with encrypted, mTLS traffic. For more information read the [sidecar-to-sidecar communication overview]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}}). 
+Dapr Sentry 服务负责管理服务之间的 mTLS，并作为证书颁发机构。它生成 mTLS 证书并将其分发给所有正在运行的 sidecar。这样，sidecar 可以通过加密的 mTLS 流量进行通信。有关更多信息，请阅读 [sidecar-to-sidecar 通信概述]({{< ref "security-concept.md#sidecar-to-sidecar-communication" >}})。
 
-## Self-hosted mode
+## 自托管模式
 
-The Sentry service Docker container is not started automatically as part of [`dapr init`]({{< ref self-hosted-with-docker.md >}}). However it can be executed manually by following the instructions for setting up [mutual TLS]({{< ref "mtls.md#self-hosted" >}}).
+Sentry 服务的 Docker 容器不会作为 [`dapr init`]({{< ref self-hosted-with-docker.md >}}) 的一部分自动启动。不过，您可以按照 [mutual TLS]({{< ref "mtls.md#self-hosted" >}}) 的设置说明手动启动。
 
-
-It can also be run manually as a process if you are running in [slim-init mode]({{< ref self-hosted-no-docker.md >}}).
+如果您在 [slim-init 模式]({{< ref self-hosted-no-docker.md >}}) 下运行，也可以手动以进程的方式启动。
 
 <img src="/images/security-mTLS-sentry-selfhosted.png" width=1000>
 
-## Kubernetes mode
+## Kubernetes 模式
 
-The sentry service is deployed as part of `dapr init -k`, or via the Dapr Helm charts. For more information on running Dapr on Kubernetes, visit the [Kubernetes hosting page]({{< ref kubernetes >}}).
+Sentry 服务可以通过 `dapr init -k` 或使用 Dapr Helm Chart 部署。有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。
 
 <img src="/images/security-mTLS-sentry-kubernetes.png" width=1000>
 
-## Further reading
+## 进一步阅读
 
-- [Security overview]({{< ref security-concept.md >}})
-- [Self-hosted mode]({{< ref self-hosted-with-docker.md >}})
-- [Kubernetes mode]({{< ref kubernetes >}})
+- [安全概述]({{< ref security-concept.md >}})
+- [自托管模式]({{< ref self-hosted-with-docker.md >}})
+- [Kubernetes 模式]({{< ref kubernetes >}})
+`

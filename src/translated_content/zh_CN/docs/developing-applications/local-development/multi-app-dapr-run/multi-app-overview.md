@@ -1,34 +1,34 @@
 ---
 type: docs
-title: Multi-App Run overview
-linkTitle: Multi-App Run overview
+title: 多应用运行概述
+linkTitle: 多应用运行概述
 weight: 1000
-description: Run multiple applications with one CLI command
+description: 使用一个CLI命令运行多个应用程序
 ---
 
-{{% alert title="Note" color="primary" %}}
- Multi-App Run for **Kubernetes** is currently a preview feature.
+{{% alert title="注意" color="primary" %}}
+**Kubernetes** 的多应用运行目前是一个预览功能。
 {{% /alert %}}
 
-Let's say you want to run several applications locally to test them together, similar to a production scenario. Multi-App Run allows you to start and stop a set of applications simultaneously, either:
-- Locally/self-hosted with processes, or
-- By building container images and deploying to a Kubernetes cluster
-   - You can use a local Kubernetes cluster (KiND) or one deploy to a Cloud (AKS, EKS, and GKE).
+如果您想在本地运行多个应用程序进行联合测试，类似于生产环境，多应用运行功能可以帮助您同时启动和停止一组应用程序。这些应用程序可以是：
+- 本地/自托管的进程，或
+- 通过构建容器镜像并部署到Kubernetes集群
+   - 您可以使用本地Kubernetes集群（如KiND）或将其部署到云（如AKS、EKS和GKE）。
 
-The Multi-App Run template file describes how to start multiple applications as if you had run many separate CLI `run` commands. By default, this template file is called `dapr.yaml`.
+多应用运行模板文件描述了如何启动多个应用程序，类似于您运行多个单独的CLI `run`命令。默认情况下，此模板文件名为`dapr.yaml`。
 
-{{< tabs Self-hosted Kubernetes>}}
+{{< tabs 自托管 Kubernetes>}}
 
 {{% codetab %}}
 <!--selfhosted-->
 
-## Multi-App Run template file
+## 多应用运行模板文件
 
-When you execute `dapr run -f .`, it starts the multi-app template file (named `dapr.yaml`) present in the current directory to run all the applications.
+执行`dapr run -f .`时，它会启动当前目录中的多应用模板文件（名为`dapr.yaml`）以运行所有应用程序。
 
-You can name template file with preferred name other than the default. For example `dapr run -f ./<your-preferred-file-name>.yaml`.
+您可以使用自己喜欢的名称命名模板文件，而不是默认名称。例如`dapr run -f ./<your-preferred-file-name>.yaml`。
 
-The following example includes some of the template properties you can customize for your applications. In the example, you can simultaneously launch 2 applications with app IDs of `processor` and `emit-metrics`.
+以下示例展示了一些您可以为应用程序自定义的模板属性。在示例中，您可以同时启动2个应用程序，应用程序ID分别为`processor`和`emit-metrics`。
 
 ```yaml
 version: 1
@@ -46,46 +46,46 @@ apps:
     command: ["go","run", "app.go"]
 ```
 
-For a more in-depth example and explanation of the template properties, see [Multi-app template]({{< ref multi-app-template.md >}}).
+有关模板属性的更深入示例和解释，请参见[多应用模板]({{< ref multi-app-template.md >}})。
 
-## Locations for resources and configuration files
+## 资源和配置文件的位置
 
-You have options on where to place your applications' resources and configuration files when using Multi-App Run.
+使用多应用运行时，您可以选择将应用程序的资源和配置文件放置在哪里。
 
-### Point to one file location (with convention)
+### 单一文件位置（遵循约定）
 
-You can set all of your applications resources and configurations at the `~/.dapr` root. This is helpful when all applications share the same resources path, like when testing on a local machine.
+您可以将所有应用程序的资源和配置放在`~/.dapr`根目录下。当所有应用程序共享相同的资源路径时，这种方式很有帮助，比如在本地机器上测试时。
 
-### Separate file locations for each application (with convention)
+### 独立文件位置（遵循约定）
 
-When using Multi-App Run, each application directory can have a `.dapr` folder, which contains a `config.yaml` file and a `resources` directory. Otherwise, if the `.dapr` directory is not present within the app directory, the default `~/.dapr/resources/` and `~/.dapr/config.yaml` locations are used.
+使用多应用运行时，每个应用程序目录可以有一个`.dapr`文件夹，其中包含一个`config.yaml`文件和一个`resources`目录。如果应用程序目录中不存在`.dapr`目录，则使用默认的`~/.dapr/resources/`和`~/.dapr/config.yaml`位置。
 
-If you decide to add a `.dapr` directory in each application directory, with a `/resources` directory and `config.yaml` file, you can specify different resources paths for each application. This approach remains within convention by using the default `~/.dapr`.
+如果您决定在每个应用程序目录中添加一个`.dapr`目录，其中包含一个`/resources`目录和`config.yaml`文件，您可以为每个应用程序指定不同的资源路径。这种方法仍然遵循默认的`~/.dapr`约定。
 
-### Point to separate locations (custom)
+### 自定义位置
 
-You can also name each app directory's `.dapr` directory something other than `.dapr`, such as, `webapp`, or `backend`. This helps if you'd like to be explicit about resource or application directory paths.
+您还可以将每个应用程序目录的`.dapr`目录命名为其他名称，例如`webapp`或`backend`。如果您希望明确资源或应用程序目录路径，这将有所帮助。
 
-## Logs
+## 日志
 
-The run template provides two log destination fields for each application and its associated daprd process:
+运行模板为每个应用程序及其关联的daprd进程提供了两个日志目标字段：
 
-1. `appLogDestination` : This field configures the log destination for the application. The possible values are `console`, `file` and `fileAndConsole`. The default value is `fileAndConsole` where application logs are written to both console and to a file by default.
+1. `appLogDestination`：此字段配置应用程序的日志目标。可能的值是`console`、`file`和`fileAndConsole`。默认值是`fileAndConsole`，应用程序日志默认写入控制台和文件。
 
-1. `daprdLogDestination` : This field configures the log destination for the `daprd` process. The possible values are `console`, `file` and `fileAndConsole`. The default value is `file` where the `daprd` logs are written to a file by default.
+2. `daprdLogDestination`：此字段配置`daprd`进程的日志目标。可能的值是`console`、`file`和`fileAndConsole`。默认值是`file`，`daprd`日志默认写入文件。
 
-### Log file format
+### 日志文件格式
 
-Logs for application and `daprd` are captured in separate files. These log files are created automatically under `.dapr/logs` directory under each application directory (`appDirPath` in the template). These log file names follow the pattern seen below:
+应用程序和`daprd`的日志分别捕获在不同的文件中。这些日志文件会自动创建在每个应用程序目录（模板中的`appDirPath`）下的`.dapr/logs`目录中。这些日志文件名遵循以下模式：
 
-- `<appID>_app_<timestamp>.log` (file name format for `app` log)
-- `<appID>_daprd_<timestamp>.log` (file name format for `daprd` log)
+- `<appID>_app_<timestamp>.log`（`app`日志的文件名格式）
+- `<appID>_daprd_<timestamp>.log`（`daprd`日志的文件名格式）
 
-Even if you've decided to rename your resources folder to something other than `.dapr`, the log files are written only to the `.dapr/logs` folder (created in the application directory).
+即使您决定将资源文件夹重命名为其他名称，日志文件也只会写入应用程序目录中创建的`.dapr/logs`文件夹。
 
-## Watch the demo
+## 观看演示
 
-Watch [this video for an overview on Multi-App Run](https://youtu.be/s1p9MNl4VGo?t=2456):
+观看[此视频以了解多应用运行的概述](https://youtu.be/s1p9MNl4VGo?t=2456)：
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/s1p9MNl4VGo?start=2456" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -94,27 +94,27 @@ Watch [this video for an overview on Multi-App Run](https://youtu.be/s1p9MNl4VGo
 {{% codetab %}}
 <!--kubernetes-->
 
-## Multi-App Run template file
+## 多应用运行模板文件
 
-When you execute `dapr run -k -f .` or `dapr run -k -f dapr.yaml`, the applications defined in the `dapr.yaml` Multi-App Run template file starts in Kubernetes default namespace.
+执行`dapr run -k -f .`或`dapr run -k -f dapr.yaml`时，`dapr.yaml`多应用运行模板文件中定义的应用程序将在Kubernetes默认命名空间中启动。
 
-> **Note:** Currently, the Multi-App Run template can only start applications in the default Kubernetes namespace.
+> **注意：** 目前，多应用运行模板只能在默认的Kubernetes命名空间中启动应用程序。
 
-The necessary default service and deployment definitions for Kubernetes are generated within the `.dapr/deploy` folder for each app in the `dapr.yaml` template.
+Kubernetes所需的默认服务和部署定义会在`dapr.yaml`模板中为每个应用程序生成在`.dapr/deploy`文件夹中。
 
-If the `createService` field is set to `true` in the `dapr.yaml` template for an app, then the `service.yaml` file is generated in the `.dapr/deploy` folder of the app.
+如果`dapr.yaml`模板中应用程序的`createService`字段设置为`true`，则会在应用程序的`.dapr/deploy`文件夹中生成`service.yaml`文件。
 
-Otherwise, only the `deployment.yaml` file is generated for each app that has the `containerImage` field set.
+否则，只会为每个设置了`containerImage`字段的应用程序生成`deployment.yaml`文件。
 
-The files `service.yaml` and `deployment.yaml` are used to deploy the applications in `default` namespace in Kubernetes. This feature is specifically targeted only for running multiple apps in a dev/test environment in Kubernetes.
+文件`service.yaml`和`deployment.yaml`用于在Kubernetes的`default`命名空间中部署应用程序。此功能专门针对在Kubernetes中运行多个应用程序的开发/测试环境。
 
-You can name the template file with any preferred name other than the default. For example:
+您可以使用任何首选名称命名模板文件，而不是默认名称。例如：
 
 ```bash
 dapr run -k -f ./<your-preferred-file-name>.yaml
 ```
 
-The following example includes some of the template properties you can customize for your applications. In the example, you can simultaneously launch 2 applications with app IDs of `nodeapp` and `pythonapp`.
+以下示例展示了一些您可以为应用程序自定义的模板属性。在示例中，您可以同时启动2个应用程序，应用程序ID分别为`nodeapp`和`pythonapp`。
 
 ```yaml
 version: 1
@@ -132,32 +132,32 @@ apps:
     containerImage: ghcr.io/dapr/samples/hello-k8s-python:latest
 ```
 
-> **Note:**
-> - If the `containerImage` field is not specified, `dapr run -k -f` produces an error.
-> - The `createService` field defines a basic service in Kubernetes (ClusterIP or LoadBalancer) that targets the `--app-port` specified in the template. If `createService` isn't specified, the application is not accessible from outside the cluster.
+> **注意：**
+> - 如果未指定`containerImage`字段，`dapr run -k -f`会产生错误。
+> - `createService`字段定义了一个基本的Kubernetes服务（ClusterIP或LoadBalancer），目标是模板中指定的`--app-port`。如果未指定`createService`，则应用程序无法从集群外部访问。
 
-For a more in-depth example and explanation of the template properties, see [Multi-app template]({{< ref multi-app-template.md >}}).
+有关模板属性的更深入示例和解释，请参见[多应用模板]({{< ref multi-app-template.md >}})。
 
-## Logs
+## 日志
 
-The run template provides two log destination fields for each application and its associated daprd process:
+运行模板为每个应用程序及其关联的daprd进程提供了两个日志目标字段：
 
-1. `appLogDestination` : This field configures the log destination for the application. The possible values are `console`, `file` and `fileAndConsole`. The default value is `fileAndConsole` where application logs are written to both console and to a file by default.
+1. `appLogDestination`：此字段配置应用程序的日志目标。可能的值是`console`、`file`和`fileAndConsole`。默认值是`fileAndConsole`，应用程序日志默认写入控制台和文件。
 
-2. `daprdLogDestination` : This field configures the log destination for the `daprd` process. The possible values are `console`, `file` and `fileAndConsole`. The default value is `file` where the `daprd` logs are written to a file by default.
+2. `daprdLogDestination`：此字段配置`daprd`进程的日志目标。可能的值是`console`、`file`和`fileAndConsole`。默认值是`file`，`daprd`日志默认写入文件。
 
-### Log file format
+### 日志文件格式
 
-Logs for application and `daprd` are captured in separate files. These log files are created automatically under `.dapr/logs` directory under each application directory (`appDirPath` in the template). These log file names follow the pattern seen below:
+应用程序和`daprd`的日志分别捕获在不同的文件中。这些日志文件会自动创建在每个应用程序目录（模板中的`appDirPath`）下的`.dapr/logs`目录中。这些日志文件名遵循以下模式：
 
-- `<appID>_app_<timestamp>.log` (file name format for `app` log)
-- `<appID>_daprd_<timestamp>.log` (file name format for `daprd` log)
+- `<appID>_app_<timestamp>.log`（`app`日志的文件名格式）
+- `<appID>_daprd_<timestamp>.log`（`daprd`日志的文件名格式）
 
-Even if you've decided to rename your resources folder to something other than `.dapr`, the log files are written only to the `.dapr/logs` folder (created in the application directory).
+即使您决定将资源文件夹重命名为其他名称，日志文件也只会写入应用程序目录中创建的`.dapr/logs`文件夹。
 
-## Watch the demo
+## 观看演示
 
-Watch [this video for an overview on Multi-App Run in Kubernetes](https://youtu.be/nWatANwaAik?si=O8XR-TUaiY0gclgO&t=1024):
+观看[此视频以了解Kubernetes中的多应用运行概述](https://youtu.be/nWatANwaAik?si=O8XR-TUaiY0gclgO&t=1024)：
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nWatANwaAik?si=O8XR-TUaiY0gclgO&amp;start=1024" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -165,8 +165,8 @@ Watch [this video for an overview on Multi-App Run in Kubernetes](https://youtu.
 
 {{< /tabs >}}
 
-## Next steps
+## 下一步
 
-- [Learn the Multi-App Run template file structure and its properties]({{< ref multi-app-template.md >}})
-- [Try out the self-hosted Multi-App Run template with the Service Invocation quickstart]({{< ref serviceinvocation-quickstart.md >}})
-- [Try out the Kubernetes Multi-App Run template with the `hello-kubernetes` tutorial](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)
+- [了解多应用运行模板文件结构及其属性]({{< ref multi-app-template.md >}})
+- [尝试使用服务调用快速入门的自托管多应用运行模板]({{< ref serviceinvocation-quickstart.md >}})
+- [尝试使用`hello-kubernetes`教程的Kubernetes多应用运行模板](https://github.com/dapr/quickstarts/tree/master/tutorials/hello-kubernetes)

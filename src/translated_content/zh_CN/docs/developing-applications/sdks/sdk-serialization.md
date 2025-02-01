@@ -1,23 +1,23 @@
 ---
 type: docs
-title: "Serialization in Dapr's SDKs"
-linkTitle: "Serialization"
-description: "How Dapr serializes data within the SDKs"
+title: "Dapr SDK中的序列化"
+linkTitle: "序列化"
+description: "Dapr如何在SDK中序列化数据"
 weight: 2000
 aliases:
   - '/zh-hans/developing-applications/sdks/serialization/'
 ---
 
-An SDK for Dapr should provide serialization for two use cases. First, for API objects sent through request and response payloads. Second, for objects to be persisted. For both these use cases, a default serialization is provided. In the Java SDK, it is the [DefaultObjectSerializer](https://dapr.github.io/java-sdk/io/dapr/serializer/DefaultObjectSerializer.html) class, providing JSON serialization.
+Dapr的SDK应该提供两种用例的序列化功能。首先是通过请求和响应负载发送的API对象。其次是需要持久化的对象。对于这两种用例，SDK提供了默认的序列化。在Java SDK中，使用[DefaultObjectSerializer](https://dapr.github.io/java-sdk/io/dapr/serializer/DefaultObjectSerializer.html)类来进行JSON序列化。
 
-## Service invocation
+## 服务调用
 
 ```java
     DaprClient client = (new DaprClientBuilder()).build();
     client.invokeService("myappid", "saySomething", "My Message", HttpExtension.POST).block();
 ```
 
-In the example above, the app will receive a `POST` request for the `saySomething` method with the request payload as `"My Message"` - quoted since the serializer will serialize the input String to JSON.
+在上面的示例中，应用程序会收到一个针对`saySomething`方法的`POST`请求，请求负载为`"My Message"` - 引号是因为序列化器会将输入字符串序列化为JSON格式。
 
 ```text
 POST /saySomething HTTP/1.1
@@ -28,13 +28,13 @@ Content-Length: 12
 "My Message"
 ```
 
-## State management
+## 状态管理
 
 ```java
     DaprClient client = (new DaprClientBuilder()).build();
     client.saveState("MyStateStore", "MyKey", "My Message").block();
 ```
-In this example, `My Message` will be saved. It is not quoted because Dapr's API will internally parse the JSON request object before saving it.
+在此示例中，`My Message`将被保存。它没有加引号，因为Dapr的API会在内部解析JSON请求对象后再保存它。
 
 ```JSON
 [
@@ -45,34 +45,34 @@ In this example, `My Message` will be saved. It is not quoted because Dapr's API
 ]
 ```
 
-## PubSub
+## 发布订阅
 
 ```java
   DaprClient client = (new DaprClientBuilder()).build();
   client.publishEvent("TopicName", "My Message").block();
 ```
 
-The event is published and the content is serialized to `byte[]` and sent to Dapr sidecar. The subscriber will receive it as a [CloudEvent](https://github.com/cloudevents/spec). Cloud event defines `data` as String. Dapr SDK also provides a built-in deserializer for `CloudEvent` object.
+事件被发布，内容被序列化为`byte[]`并发送到Dapr sidecar。订阅者将以[CloudEvent](https://github.com/cloudevents/spec)的形式接收它。CloudEvent定义`data`为字符串。Dapr SDK还为`CloudEvent`对象提供了内置的反序列化器。
 
 ```java
   @PostMapping(path = "/TopicName")
   public void handleMessage(@RequestBody(required = false) byte[] body) {
-      // Dapr's event is compliant to CloudEvent.
+      // Dapr的事件符合CloudEvent。
       CloudEvent event = CloudEvent.deserialize(body);
   }
 ```
 
-## Bindings
+## 绑定
 
-In this case, the object is serialized to `byte[]` as well and the input binding receives the raw `byte[]` as-is and deserializes it to the expected object type.
+在这种情况下，对象也被序列化为`byte[]`，输入绑定接收原始的`byte[]`并将其反序列化为预期的对象类型。
 
-* Output binding:
+* 输出绑定：
 ```java
     DaprClient client = (new DaprClientBuilder()).build();
     client.invokeBinding("sample", "My Message").block();
 ```
 
-* Input binding:
+* 输入绑定：
 ```java
   @PostMapping(path = "/sample")
   public void handleInputBinding(@RequestBody(required = false) byte[] body) {
@@ -80,17 +80,17 @@ In this case, the object is serialized to `byte[]` as well and the input binding
       System.out.println(message);
   }
 ```
-It should print:
+它应该打印：
 ```
 My Message
 ```
 
-## Actor Method invocation
-Object serialization and deserialization for invocation of Actor's methods are same as for the service method invocation, the only difference is that the application does not need to deserialize the request or serialize the response since it is all done transparently by the SDK.
+## actor方法调用
+actor方法调用的对象序列化和反序列化与服务方法调用相同，唯一的区别是应用程序不需要手动反序列化请求或序列化响应，因为这些操作都由SDK自动完成。
 
-For Actor's methods, the SDK only supports methods with zero or one parameter.
+对于actor的方法，SDK仅支持具有零个或一个参数的方法。
 
-* Invoking an Actor's method:
+* 调用actor的方法：
 ```java
 public static void main() {
     ActorProxyBuilder builder = new ActorProxyBuilder("DemoActor");
@@ -98,38 +98,38 @@ public static void main() {
 }
 ```
 
-* Implementing an Actor's method:
+* 实现actor的方法：
 ```java
 public String say(String something) {
   System.out.println(something);
   return "OK";
 }
 ```
-It should print:
+它应该打印：
 ```
     My Message
 ```
 
-## Actor's state management
-Actors can also have state. In this case, the state manager will serialize and deserialize the objects using the state serializer and handle it transparently to the application.
+## actor的状态管理
+actor也可以有状态。在这种情况下，状态管理器将使用状态序列化器来序列化和反序列化对象，并自动处理这些操作。
 
 ```java
 public String actorMethod(String message) {
-    // Reads a state from key and deserializes it to String.
+    // 从键读取状态并将其反序列化为字符串。
     String previousMessage = super.getActorStateManager().get("lastmessage", String.class).block();
 
-    // Sets the new state for the key after serializing it.
+    // 在序列化后为键设置新状态。
     super.getActorStateManager().set("lastmessage", message).block();
     return previousMessage;
 }
 ```
 
-## Default serializer
+## 默认序列化器
 
-The default serializer for Dapr is a JSON serializer with the following expectations:
+Dapr的默认序列化器是一个JSON序列化器，具有以下期望：
 
-1. Use of basic [JSON data types](https://www.w3schools.com/js/js_json_datatypes.asp) for cross-language and cross-platform compatibility: string, number, array, boolean, null and another JSON object. Every complex property type in application's serializable objects (DateTime, for example), should be represented as one of the JSON's basic types.
-2. Data persisted with the default serializer should be saved as JSON objects too, without extra quotes or encoding. The example below shows how a string and a JSON object would look like in a Redis store.
+1. 使用基本的[JSON数据类型](https://www.w3schools.com/js/js_json_datatypes.asp)以实现跨语言和跨平台的兼容性：字符串、数字、数组、布尔值、null和另一个JSON对象。应用程序可序列化对象中的每个复杂属性类型（例如DateTime）都应表示为JSON的基本类型之一。
+2. 使用默认序列化器持久化的数据也应保存为JSON对象，没有额外的引号或编码。下面的示例显示了字符串和JSON对象在Redis存储中的样子。
 ```bash
 redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||message
 "This is a message to be saved and retrieved."
@@ -138,9 +138,9 @@ redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928
  redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||mydata
 {"value":"My data value."}
 ```
-3. Custom serializers must serialize object to `byte[]`.
-4. Custom serializers must deserialize `byte[]` to object.
-5. When user provides a custom serializer, it should be transferred or persisted as `byte[]`. When persisting, also encode as Base64 string. This is done natively by most JSON libraries.
+3. 自定义序列化器必须将对象序列化为`byte[]`。
+4. 自定义序列化器必须将`byte[]`反序列化为对象。
+5. 当用户提供自定义序列化器时，它应作为`byte[]`传输或持久化。持久化时，也要编码为Base64字符串。这是大多数JSON库本地完成的。
 ```bash
 redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928192||message
 "VGhpcyBpcyBhIG1lc3NhZ2UgdG8gYmUgc2F2ZWQgYW5kIHJldHJpZXZlZC4="
@@ -150,4 +150,4 @@ redis-cli MGET "ActorStateIT_StatefulActorService||StatefulActorTest||1581130928
 "eyJ2YWx1ZSI6Ik15IGRhdGEgdmFsdWUuIn0="
 ```
 
-*As of now, the [Java SDK](https://github.com/dapr/java-sdk/) is the only Dapr SDK that implements this specification. In the near future, other SDKs will also implement the same.*
+*截至目前，[Java SDK](https://github.com/dapr/java-sdk/)是唯一实现此规范的Dapr SDK。在不久的将来，其他SDK也将实现相同的功能。*

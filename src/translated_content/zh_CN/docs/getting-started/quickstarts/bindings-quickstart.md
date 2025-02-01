@@ -1,4 +1,3 @@
-
 ---
 type: docs
 title: "快速入门：输入和输出绑定"
@@ -9,20 +8,20 @@ description: "开始使用 Dapr 的绑定构建块"
 
 我们来了解一下 Dapr 的[绑定构建块]({{< ref bindings >}})。通过使用绑定，您可以：
 
-- 通过外部系统的事件触发您的应用程序。
+- 让您的应用程序响应来自外部系统的事件。
 - 与外部系统进行交互。
 
-在本教程中，您将使用输入 [Cron]({{< ref cron.md >}}) 绑定每 10 秒调度一次批处理脚本。该脚本处理一个 JSON 文件，并使用 [PostgreSQL]({{< ref postgresql.md >}}) Dapr 绑定将数据输出到 SQL 数据库。
+在本快速入门中，您将使用输入 [Cron]({{< ref cron.md >}}) 绑定每 10 秒调度一次批处理脚本。该脚本处理一个 JSON 文件，并使用 [PostgreSQL]({{< ref postgresql.md >}}) Dapr 绑定将数据输出到 SQL 数据库。
 
 <img src="/images/bindings-quickstart/bindings-quickstart.png" width=800 style="padding-bottom:15px;">
 
-在开始之前，请选择您偏好的 Dapr SDK 语言版本。
+在继续快速入门之前，请选择您偏好的 Dapr SDK 语言版本。
 
 {{< tabs "Python" "JavaScript" ".NET" "Java" "Go" >}}
  <!-- Python -->
 {{% codetab %}}
 
-### 前提条件
+### 先决条件
 
 您需要准备以下环境：
 
@@ -34,7 +33,7 @@ description: "开始使用 Dapr 的绑定构建块"
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/bindings/python/sdk)。
+克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings/python/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -42,7 +41,7 @@ git clone https://github.com/dapr/quickstarts.git
 
 ### 步骤 2：本地运行 PostgreSQL Docker 容器
 
-在您的机器上本地运行 [PostgreSQL 实例](https://www.postgresql.org/)的 Docker 容器。快速入门示例提供了一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
+在您的机器上通过 Docker 容器本地运行 [PostgreSQL 实例](https://www.postgresql.org/)。快速入门示例中包含一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
 
 在终端窗口中，从快速入门克隆目录的根目录导航到 `bindings/db` 目录。
 
@@ -50,7 +49,7 @@ git clone https://github.com/dapr/quickstarts.git
 cd bindings/db
 ```
 
-运行以下命令来启动容器：
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
@@ -89,7 +88,7 @@ pip3 install -r requirements.txt
 dapr run --app-id batch-sdk --app-port 50051 --resources-path ../../../components -- python3 app.py
 ```
 
-> **注意**：在 Windows 中，您可能需要使用 `python app.py` 而不是 `python3 app.py`。
+> **注意**：在 Windows 中，由于未定义 Python3.exe，您可能需要使用 `python app.py` 而不是 `python3 app.py`。
 
 `process_batch` 函数中的代码每 10 秒执行一次（在 `components` 目录中的 [`binding-cron.yaml`]({{< ref "#componentsbinding-cronyaml-component-file" >}}) 中定义）。绑定触发器通过 Dapr 边车在您的应用程序中查找通过 HTTP POST 调用的路由。
 
@@ -176,7 +175,7 @@ select * from orders;
 - 启动 Cron [绑定构建块]({{< ref bindings >}})
 - 每 10 秒调用绑定端点（`batch`）
 
-此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
+为此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -205,7 +204,7 @@ spec:
 
 使用 `binding-postgresql.yaml` 组件，您可以轻松地更换后端数据库[绑定]({{< ref supported-bindings.md >}})，而无需进行代码更改。
 
-此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
+为此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -233,7 +232,7 @@ spec:
  <!-- JavaScript -->
 {{% codetab %}}
 
-### 前提条件
+### 先决条件
 
 您需要准备以下环境：
 
@@ -245,7 +244,7 @@ spec:
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/bindings/javascript/sdk)。
+克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings/javascript/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -253,7 +252,7 @@ git clone https://github.com/dapr/quickstarts.git
 
 ### 步骤 2：本地运行 PostgreSQL Docker 容器
 
-在您的机器上本地运行 [PostgreSQL 实例](https://www.postgresql.org/)的 Docker 容器。快速入门示例提供了一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
+在您的机器上通过 Docker 容器本地运行 [PostgreSQL 实例](https://www.postgresql.org/)。快速入门示例中包含一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
 
 在终端窗口中，从快速入门克隆目录的根目录导航到 `bindings/db` 目录。
 
@@ -261,7 +260,7 @@ git clone https://github.com/dapr/quickstarts.git
 cd bindings/db
 ```
 
-运行以下命令来启动容器：
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
@@ -382,7 +381,7 @@ select * from orders;
 - 启动 Cron [绑定构建块]({{< ref bindings >}})
 - 每 10 秒调用绑定端点（`batch`）
 
-此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
+为此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -411,7 +410,7 @@ spec:
 
 使用 `binding-postgresql.yaml` 组件，您可以轻松地更换后端数据库[绑定]({{< ref supported-bindings.md >}})，而无需进行代码更改。
 
-此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
+为此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -439,7 +438,7 @@ spec:
  <!-- .NET -->
 {{% codetab %}}
 
-### 前提条件
+### 先决条件
 
 您需要准备以下环境：
 
@@ -449,11 +448,11 @@ spec:
 <!-- END_IGNORE -->
 - [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)、[.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0) 或 [.NET 9](https://dotnet.microsoft.com/download/dotnet/9.0) 已安装
 
-**注意：** .NET 6 是此版本中 Dapr .NET SDK 包的最低支持版本。只有 .NET 8 和 .NET 9 将在 Dapr v1.16 及更高版本中得到支持。
+**注意：** .NET 6 是此版本中 Dapr .NET SDK 包的最低支持版本。仅 .NET 8 和 .NET 9 将在 Dapr v1.16 及更高版本中得到支持。
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/bindings/csharp/sdk)。
+克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings/csharp/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -461,7 +460,7 @@ git clone https://github.com/dapr/quickstarts.git
 
 ### 步骤 2：本地运行 PostgreSQL Docker 容器
 
-在您的机器上本地运行 [PostgreSQL 实例](https://www.postgresql.org/)的 Docker 容器。快速入门示例提供了一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
+在您的机器上通过 Docker 容器本地运行 [PostgreSQL 实例](https://www.postgresql.org/)。快速入门示例中包含一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
 
 在终端窗口中，从快速入门克隆目录的根目录导航到 `bindings/db` 目录。
 
@@ -469,7 +468,7 @@ git clone https://github.com/dapr/quickstarts.git
 cd bindings/db
 ```
 
-运行以下命令来启动容器：
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
@@ -592,7 +591,7 @@ select * from orders;
 - 启动 Cron [绑定构建块]({{< ref bindings >}})
 - 每 10 秒调用绑定端点（`batch`）
 
-此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
+为此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -621,7 +620,7 @@ spec:
 
 使用 `binding-postgresql.yaml` 组件，您可以轻松地更换后端数据库[绑定]({{< ref supported-bindings.md >}})，而无需进行代码更改。
 
-此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
+为此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -649,7 +648,7 @@ spec:
  <!-- Java -->
 {{% codetab %}}
 
-### 前提条件
+### 先决条件
 
 您需要准备以下环境：
 
@@ -664,7 +663,7 @@ spec:
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/bindings/java/sdk)。
+克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings/java/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -672,7 +671,7 @@ git clone https://github.com/dapr/quickstarts.git
 
 ### 步骤 2：本地运行 PostgreSQL Docker 容器
 
-在您的机器上本地运行 [PostgreSQL 实例](https://www.postgresql.org/)的 Docker 容器。快速入门示例提供了一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
+在您的机器上通过 Docker 容器本地运行 [PostgreSQL 实例](https://www.postgresql.org/)。快速入门示例中包含一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
 
 在终端窗口中，从快速入门克隆目录的根目录导航到 `bindings/db` 目录。
 
@@ -680,7 +679,7 @@ git clone https://github.com/dapr/quickstarts.git
 cd bindings/db
 ```
 
-运行以下命令来启动容器：
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
@@ -806,7 +805,7 @@ select * from orders;
 - 启动 Cron [绑定构建块]({{< ref bindings >}})
 - 每 10 秒调用绑定端点（`batch`）
 
-此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
+为此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -835,7 +834,7 @@ spec:
 
 使用 `binding-postgresql.yaml` 组件，您可以轻松地更换后端数据库[绑定]({{< ref supported-bindings.md >}})，而无需进行代码更改。
 
-此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
+为此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -863,7 +862,7 @@ spec:
  <!-- Go -->
 {{% codetab %}}
 
-### 前提条件
+### 先决条件
 
 您需要准备以下环境：
 
@@ -875,7 +874,7 @@ spec:
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/bindings/go/sdk)。
+克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/bindings/go/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -883,7 +882,7 @@ git clone https://github.com/dapr/quickstarts.git
 
 ### 步骤 2：本地运行 PostgreSQL Docker 容器
 
-在您的机器上本地运行 [PostgreSQL 实例](https://www.postgresql.org/)的 Docker 容器。快速入门示例提供了一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
+在您的机器上通过 Docker 容器本地运行 [PostgreSQL 实例](https://www.postgresql.org/)。快速入门示例中包含一个 Docker Compose 文件，用于本地自定义、构建、运行和初始化带有默认 `orders` 表的 `postgres` 容器。
 
 在终端窗口中，从快速入门克隆目录的根目录导航到 `bindings/db` 目录。
 
@@ -891,7 +890,7 @@ git clone https://github.com/dapr/quickstarts.git
 cd bindings/db
 ```
 
-运行以下命令来启动容器：
+运行以下命令以设置容器：
 
 ```bash
 docker compose up
@@ -1022,7 +1021,7 @@ select * from orders;
 - 启动 Cron [绑定构建块]({{< ref bindings >}})
 - 每 10 秒调用绑定端点（`batch`）
 
-此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
+为此快速入门包含的 Cron `binding-cron.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -1051,7 +1050,7 @@ spec:
 
 使用 `binding-postgresql.yaml` 组件，您可以轻松地更换后端数据库[绑定]({{< ref supported-bindings.md >}})，而无需进行代码更改。
 
-此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
+为此快速入门包含的 PostgreSQL `binding-postgresql.yaml` 文件包含以下内容：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -1082,7 +1081,7 @@ spec:
 
 我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
 
-加入我们的[discord 频道](https://discord.com/channels/778680217417809931/953427615916638238)进行讨论。
+加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238)进行讨论。
 
 ## 下一步
 

@@ -1,7 +1,10 @@
 ---
 type: docs
-title: "Authenticate to Azure"
-linkTitle: "Authenticate to Azure"
+title: "Azure 身份验证"
+linkTitle: "Azure 身份验证"
 weight: 1600
-description: "Learn about authenticating Azure components using Microsoft Entra ID or Managed Identities"
+description: "了解如何使用 Microsoft Entra ID 或托管身份来进行 Azure 组件的身份验证"
 ---
+```
+
+您接受的训练数据截至2023年1

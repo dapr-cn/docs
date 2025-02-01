@@ -1,29 +1,28 @@
 ---
 type: docs
-title: "How to: Autoscale a Dapr app with KEDA"
+title: "如何：使用 KEDA 自动扩展 Dapr 应用"
 linkTitle: "KEDA"
-description: "How to configure your Dapr application to autoscale using KEDA"
+description: "如何配置您的 Dapr 应用程序以使用 KEDA 进行自动扩展"
 weight: 3000
 ---
 
-Dapr, with its building-block API approach, along with the many [pub/sub components]({{< ref pubsub >}}), makes it easy to write message processing applications. Since Dapr can run in many environments (for example VMs, bare-metal, Cloud or Edge Kubernetes) the autoscaling of Dapr applications is managed by the hosting layer.
+Dapr 通过其构建块 API 方法和众多 [pubsub 组件]({{< ref pubsub >}})，简化了消息处理应用程序的编写。由于 Dapr 可以在虚拟机、裸机、云或边缘 Kubernetes 等多种环境中运行，因此 Dapr 应用程序的自动扩展由其运行环境的管理层负责。
 
-For Kubernetes, Dapr integrates with [KEDA](https://github.com/kedacore/keda), an event driven autoscaler for Kubernetes. Many of Dapr's pub/sub components overlap with the scalers provided by [KEDA](https://github.com/kedacore/keda), so it's easy to configure your Dapr deployment on Kubernetes to autoscale based on the back pressure using KEDA.
+在 Kubernetes 环境中，Dapr 与 [KEDA](https://github.com/kedacore/keda) 集成，KEDA 是一个用于 Kubernetes 的事件驱动自动扩展器。Dapr 的许多 pubsub 组件与 KEDA 提供的扩展器功能相似，因此可以轻松配置您的 Dapr 部署在 Kubernetes 上使用 KEDA 根据负载进行自动扩展。
 
-In this guide, you configure a scalable Dapr application, along with the back pressure on Kafka topic. However, you can apply this approach to _any_ [pub/sub components]({{< ref pubsub >}}) offered by Dapr.
+在本指南中，您将配置一个可扩展的 Dapr 应用程序，并在 Kafka 主题上进行负载管理。不过，您可以将此方法应用于 Dapr 提供的 _任何_ [pubsub 组件]({{< ref pubsub >}})。
 
-{{% alert title="Note" color="primary" %}}
- If you're working with Azure Container Apps, refer to the official Azure documentation for [scaling Dapr applications using KEDA scalers](https://learn.microsoft.com/azure/container-apps/dapr-keda-scaling).
-
+{{% alert title="注意" color="primary" %}}
+ 如果您正在使用 Azure 容器应用，请参阅官方 Azure 文档以了解[使用 KEDA 扩展器扩展 Dapr 应用程序](https://learn.microsoft.com/azure/container-apps/dapr-keda-scaling)。
 {{% /alert %}}
 
-## Install KEDA
+## 安装 KEDA
 
-To install KEDA, follow the [Deploying KEDA](https://keda.sh/docs/latest/deploy/) instructions on the KEDA website.
+要安装 KEDA，请按照 KEDA 网站上的[部署 KEDA](https://keda.sh/docs/latest/deploy/)说明进行操作。
 
-## Install and deploy Kafka
+## 安装和部署 Kafka
 
-If you don't have access to a Kafka service, you can install it into your Kubernetes cluster for this example by using Helm:
+如果您无法访问 Kafka 服务，可以使用 Helm 将其安装到您的 Kubernetes 集群中以进行此示例：
 
 ```bash
 helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts/
@@ -35,7 +34,7 @@ helm install kafka confluentinc/cp-helm-charts -n kafka \
 		--set cp-kafka-connect.enabled=false
 ```
 
-To check on the status of the Kafka deployment:
+检查 Kafka 部署的状态：
 
 ```shell
 kubectl rollout status deployment.apps/kafka-cp-control-center -n kafka
@@ -44,16 +43,16 @@ kubectl rollout status statefulset.apps/kafka-cp-kafka -n kafka
 kubectl rollout status statefulset.apps/kafka-cp-zookeeper -n kafka
 ```
 
-Once installed, deploy the Kafka client and wait until it's ready:
+安装完成后，部署 Kafka 客户端并等待其准备就绪：
 
 ```shell
 kubectl apply -n kafka -f deployment/kafka-client.yaml
 kubectl wait -n kafka --for=condition=ready pod kafka-client --timeout=120s
 ```
 
-## Create the Kafka topic
+## 创建 Kafka 主题
 
-Create the topic used in this example (`demo-topic`):
+创建本示例中使用的主题（`demo-topic`）：
 
 ```shell
 kubectl -n kafka exec -it kafka-client -- kafka-topics \
@@ -65,11 +64,11 @@ kubectl -n kafka exec -it kafka-client -- kafka-topics \
 		--if-not-exists
 ```
 
-> The number of topic `partitions` is related to the maximum number of replicas KEDA creates for your deployments.
+> 主题 `partitions` 的数量与 KEDA 为您的部署创建的最大副本数相关。
 
-## Deploy a Dapr pub/sub component
+## 部署 Dapr pubsub 组件
 
-Deploy the Dapr Kafka pub/sub component for Kubernetes. Paste the following YAML into a file named `kafka-pubsub.yaml`:
+为 Kubernetes 部署 Dapr Kafka pubsub 组件。将以下 YAML 粘贴到名为 `kafka-pubsub.yaml` 的文件中：
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -88,25 +87,25 @@ spec:
       value: autoscaling-subscriber
 ```
 
-The above YAML defines the pub/sub component that your application subscribes to and that [you created earlier (`demo-topic`)]({{< ref "#create-the-kakfa-topic" >}}). 
+上述 YAML 定义了您的应用程序订阅的 pubsub 组件，以及 [您之前创建的 (`demo-topic`)]({{< ref "#create-the-kakfa-topic" >}})。
 
-If you used the [Kafka Helm install instructions]({{< ref "#install-and-deploy-kafka" >}}), you can leave the `brokers` value as-is. Otherwise, change this value to the connection string to your Kafka brokers.
+如果您使用了 [Kafka Helm 安装说明]({{< ref "#install-and-deploy-kafka" >}})，可以保持 `brokers` 值不变。否则，请将此值更改为您的 Kafka brokers 的连接字符串。
 
-Notice the `autoscaling-subscriber` value set for `consumerID`. This value is used later to ensure that KEDA and your deployment use the same [Kafka partition offset](http://cloudurable.com/blog/kafka-architecture-topics/index.html#:~:text=Kafka%20continually%20appended%20to%20partitions,fit%20on%20a%20single%20server.).
+注意为 `consumerID` 设置的 `autoscaling-subscriber` 值。此值用于确保 KEDA 和您的部署使用相同的 [Kafka 分区偏移量](http://cloudurable.com/blog/kafka-architecture-topics/index.html#:~:text=Kafka%20continually%20appended%20to%20partitions,fit%20on%20a%20single%20server.)，以便正确进行扩展。
 
-Now, deploy the component to the cluster:
+现在，将组件部署到集群：
 
 ```bash
 kubectl apply -f kafka-pubsub.yaml
 ```
 
-## Deploy KEDA autoscaler for Kafka
+## 为 Kafka 部署 KEDA 自动扩展器
 
-Deploy the KEDA scaling object that:
-- Monitors the lag on the specified Kafka topic
-- Configures the Kubernetes Horizontal Pod Autoscaler (HPA) to scale your Dapr deployment in and out
+部署 KEDA 扩展对象，该对象：
+- 监控指定 Kafka 主题上的滞后
+- 配置 Kubernetes 水平 Pod 自动扩展器 (HPA) 以扩展您的 Dapr 部署
 
-Paste the following into a file named `kafka_scaler.yaml`, and configure your Dapr deployment in the required place:
+将以下内容粘贴到名为 `kafka_scaler.yaml` 的文件中，并在需要的地方配置您的 Dapr 部署：
 
 ```yaml
 apiVersion: keda.sh/v1alpha1
@@ -128,38 +127,36 @@ spec:
       lagThreshold: "5"
 ```
 
-Let's review a few metadata values in the file above:
+让我们回顾一下上面文件中的一些元数据值：
 
-| Values | Description |
+| 值 | 描述 |
 | ------ | ----------- |
-| `scaleTargetRef`/`name` | The Dapr ID of your app defined in the Deployment (The value of the `dapr.io/id` annotation). |
-| `pollingInterval` | The frequency in seconds with which KEDA checks Kafka for current topic partition offset. |
-| `minReplicaCount` | The minimum number of replicas KEDA creates for your deployment. If your application takes a long time to start, it may be better to set this to `1` to ensure at least one replica of your deployment is always running. Otherwise, set to `0` and KEDA creates the first replica for you. |
-| `maxReplicaCount` | The maximum number of replicas for your deployment. Given how [Kafka partition offset](http://cloudurable.com/blog/kafka-architecture-topics/index.html#:~:text=Kafka%20continually%20appended%20to%20partitions,fit%20on%20a%20single%20server.) works, you shouldn't set that value higher than the total number of topic partitions. |
-| `triggers`/`metadata`/`topic` | Should be set to the same topic to which your Dapr deployment subscribed (in this example, `demo-topic`). |
-| `triggers`/`metadata`/`bootstrapServers` | Should be set to the same broker connection string used in the `kafka-pubsub.yaml` file. |
-| `triggers`/`metadata`/`consumerGroup` | Should be set to the same value as the `consumerID` in the `kafka-pubsub.yaml` file. |
+| `scaleTargetRef`/`name` | 在部署中定义的应用程序的 Dapr ID（`dapr.io/id` 注释的值）。 |
+| `pollingInterval` | KEDA 检查 Kafka 当前主题分区偏移量的频率（以秒为单位）。 |
+| `minReplicaCount` | KEDA 为您的部署创建的最小副本数。如果您的应用程序启动时间较长，最好将其设置为 `1` 以确保您的部署始终至少有一个副本在运行。否则，设置为 `0`，KEDA 会为您创建第一个副本。 |
+| `maxReplicaCount` | 您的部署的最大副本数。鉴于 [Kafka 分区偏移量](http://cloudurable.com/blog/kafka-architecture-topics/index.html#:~:text=Kafka%20continually%20appended%20to%20partitions,fit%20on%20a%20single%20server.) 的工作原理，您不应将该值设置得高于主题分区的总数。 |
+| `triggers`/`metadata`/`topic` | 应设置为您的 Dapr 部署订阅的相同主题（在本示例中为 `demo-topic`）。 |
+| `triggers`/`metadata`/`bootstrapServers` | 应设置为 `kafka-pubsub.yaml` 文件中使用的相同 broker 连接字符串。 |
+| `triggers`/`metadata`/`consumerGroup` | 应设置为 `kafka-pubsub.yaml` 文件中 `consumerID` 的相同值。 |
 
-{{% alert title="Important" color="warning" %}}
- Setting the connection string, topic, and consumer group to the *same* values for both the Dapr service subscription and the KEDA scaler configuration is critical to ensure the autoscaling works correctly.
-
+{{% alert title="重要" color="warning" %}}
+ 为 Dapr 服务订阅和 KEDA 扩展器配置设置相同的连接字符串、主题和消费者组值对于确保自动扩展正常工作至关重要。
 {{% /alert %}}
 
-
-Deploy the KEDA scaler to Kubernetes:
+将 KEDA 扩展器部署到 Kubernetes：
 
 ```bash
 kubectl apply -f kafka_scaler.yaml
 ```
 
-All done!
+全部完成！
 
-## See the KEDA scaler work
+## 查看 KEDA 扩展器工作
 
-Now that the `ScaledObject` KEDA object is configured, your deployment will scale based on the lag of the Kafka topic. [Learn more about configuring KEDA for Kafka topics](https://keda.sh/docs/2.0/scalers/apache-kafka/).
+现在 `ScaledObject` KEDA 对象已配置，您的部署将根据 Kafka 主题的滞后进行扩展。[了解有关为 Kafka 主题配置 KEDA 的更多信息](https://keda.sh/docs/2.0/scalers/apache-kafka/)。
 
-As defined in the KEDA scaler manifest, you can now start publishing messages to your Kafka topic `demo-topic` and watch the pods autoscale when the lag threshold is higher than `5` topics. Publish messages to the Kafka Dapr component by using the Dapr [Publish]({{< ref dapr-publish >}}) CLI command.
+如 KEDA 扩展器清单中定义的，您现在可以开始向您的 Kafka 主题 `demo-topic` 发布消息，并在滞后阈值高于 `5` 个主题时观察 pod 自动扩展。使用 Dapr [发布]({{< ref dapr-publish >}}) CLI 命令向 Kafka Dapr 组件发布消息。
 
-## Next steps
+## 下一步
 
-[Learn about scaling your Dapr pub/sub or binding application with KEDA in Azure Container Apps](https://learn.microsoft.com/azure/container-apps/dapr-keda-scaling)
+[了解有关在 Azure 容器应用中使用 KEDA 扩展 Dapr pubsub 或绑定应用程序的信息](https://learn.microsoft.com/azure/container-apps/dapr-keda-scaling)

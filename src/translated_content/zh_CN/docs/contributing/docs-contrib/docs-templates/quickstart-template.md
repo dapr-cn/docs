@@ -1,92 +1,92 @@
 ---
 type: docs
-title: "Quickstart guide template"
-linkTitle: "Quickstart template"
+title: "快速入门指南模板"
+linkTitle: "快速入门模板"
 weight: 20
-description: Suggested template and guidance for creating a quickstart guide
+description: 创建快速入门指南的建议模板和指导
 ---
 
-## Contributing a new quickstart guide
+## 贡献新的快速入门指南
 
-Dapr quickstart guides consist of quick instructions that walk readers through a prepared quickstart, saved to the [dapr/quickstarts repo](https://github.com/dapr/quickstarts). These quickstarts package an entire feature or building block in one place, making it easy for the reader to experience how it works without compromising their own project.
+Dapr 快速入门指南包含一些简明的指令，帮助读者完成一个预先准备好的快速入门项目，这些项目保存在 [dapr/quickstarts 仓库](https://github.com/dapr/quickstarts)中。这些快速入门将整个功能或构建块集中在一起，使读者能够轻松体验其工作原理，而不影响他们自己的项目。
 
-The quickstart instructions should be succinct, direct, and clear. The sole purpose of a quickstart guide is to simply instruct a reader through the prepared quickstart. If you'd like to explain the concepts behind the quickstart, direct the reader to a concept article for more context.
+快速入门指令应当简洁明了。快速入门指南的唯一目的是简单地指导读者完成准备好的快速入门。如果您想解释快速入门背后的概念，请将读者引导到相关的概念文章以获取更多背景信息。
 
-{{% alert title="Note" color="primary" %}}
-This template is only a suggestion. Feel free to change based on your document's purpose.
+{{% alert title="注意" color="primary" %}}
+此模板仅为建议。可以根据文档的具体需求进行调整。
 {{% /alert %}}
 
-Learn more about [contributing to the Dapr docs]({{< ref contributing-docs.md >}}), like [front-matter]({{< ref "contributing-docs.md#front-matter" >}}) and [shortcodes]({{< ref "contributing-docs.md#shortcodes" >}}).
+了解更多关于如何[贡献 Dapr 文档]({{< ref contributing-docs.md >}})的信息，例如[前置内容]({{< ref "contributing-docs.md#front-matter" >}})和[短代码]({{< ref "contributing-docs.md#shortcodes" >}})。
 
-### Template
+### 模板
 
 ```md
 ---
-type: #Required; docs
-title: #Required; "Quickstart: Brief, clear title"
-linkTitle: #Required; This will display in the docs table of contents
-weight: #Required; Use the correct weight based on hierarchy
-description: #Required; One-sentence description of what to expect in the article
+type: #必填; docs
+title: #必填; "快速入门：简洁明了的标题"
+linkTitle: #必填; 这将在文档目录中显示
+weight: #必填; 根据层级使用正确的权重
+description: #必填; 一句话描述文章的预期内容
 ---
 
 <!--
-Remove all the comments in this template before opening a PR.
+在提交 PR 之前，删除此模板中的所有注释。
 -->
 
 <!-- 
-H1: The title in the Hugo front-matter serves as the article's markdown H1. 
+H1：Hugo 前置内容中的标题作为文章的 markdown H1。
 -->
 
-<!-- Introductory paragraph  
-Required. Light intro that briefly describes what the quickstart will cover. Link off to the appropriate concept or overview docs to provide context. -->
+<!-- 引言段落  
+必填。简要介绍快速入门将涵盖的内容。链接到适当的概念或概述文档以提供背景。 -->
 
 <!-- 
-Include a diagram or image, if possible. 
+如果可能，包含一个图表或图像。
 -->
 
 <!-- 
-Make sure the quickstart includes examples for multiple programming languages. 
+确保快速入门包含多个编程语言的示例。
 -->
 
-## Pre-requisites
+## 前置条件
 
 <!--
-Make sure the reader is prepared for a successful quickstart walk through by listing what they may need.
+列出读者在开始快速入门之前可能需要准备的内容，以确保顺利完成。
 -->
 
-## Step 1: Set up the environment
+## 步骤 1：设置环境
 
 <!-- 
-Link to the quickstart sample for the reader to clone. 
+提供快速入门示例的链接，供读者克隆。
 -->
 
-## Step 2: <action or task>
+## 步骤 2：<操作或任务>
 
 <!-- 
-Each H2 step should start with a verb/action word.
--->
-
-<!--
-Include code snippets where possible. 
--->
-
-## Tell us what you think!
-
-We're continuously working to improve our Quickstart examples and value your feedback. Did you find this quickstart helpful? Do you have suggestions for improvement?
-
-Join the discussion in our [discord channel](https://discord.gg/22ZtJrNe).
-
-<!-- Since Dapr is an open community of contributors, make sure to provide a link to the discord discussion to welcome feedback.
--->
-
-## Next steps
-
-<!--
-Link to related pages and examples. For example, the building block overview, the HTTP version of an SDK quickstart sample, etc.
+每个 H2 步骤应以动词/动作词开头。
 -->
 
 <!--
-Use the button shortcode to direct readers to more in-depth, related scenarios, like the Dapr tutorials.
+尽可能包含代码片段。
+-->
+
+## 告诉我们您的想法！
+
+我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
+
+欢迎加入我们的 [discord 频道](https://discord.gg/22ZtJrNe)进行讨论。
+
+<!-- 由于 Dapr 是一个开放的贡献者社区，请确保提供 discord 讨论的链接以欢迎反馈。
+-->
+
+## 下一步
+
+<!--
+链接到相关页面和示例。例如，构建块概述，SDK 快速入门示例的 HTTP 版本等。
+-->
+
+<!--
+使用按钮短代码将读者引导到更深入的相关场景，例如 Dapr 教程。
 -->
 
 ```

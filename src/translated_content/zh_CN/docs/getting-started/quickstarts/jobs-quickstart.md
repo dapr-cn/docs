@@ -1,4 +1,3 @@
-
 ---
 type: docs
 title: "快速入门：作业"
@@ -13,12 +12,12 @@ description: 开始使用 Dapr 作业构建块
 
 [Dapr 作业构建块]({{< ref jobs-overview.md >}}) 允许您在特定时间或间隔调度和运行作业。在本快速入门中，您将学习如何使用 Dapr 的作业 API 来调度、获取和删除作业。
 
-您可以通过以下两种方式来体验本快速入门：
+您可以通过以下两种方式来体验此作业快速入门：
 
-- [使用多应用运行模板文件同时运行所有示例应用程序]({{< ref "#run-using-multi-app-run" >}})，或
-- [一次运行一个应用程序]({{< ref "#run-one-job-application-at-a-time" >}})
+- [同时运行所有示例应用程序]({{< ref "#run-using-multi-app-run" >}})，或
+- [逐个运行应用程序]({{< ref "#run-one-job-application-at-a-time" >}})
 
-## 使用多应用运行
+## 同时运行多个应用
 
 在开始之前，请选择您偏好的 Dapr SDK 语言。目前，您可以使用 Go SDK 来试验作业 API。
 
@@ -34,7 +33,7 @@ description: 开始使用 Dapr 作业构建块
 
 ### 步骤 1：准备工作
 
-您需要以下环境和工具：
+您需要以下工具：
 
 - [Dapr CLI 和已初始化的环境](https://docs.dapr.io/getting-started)。
 - [最新版本的 Go](https://go.dev/dl/)。
@@ -50,7 +49,7 @@ description: 开始使用 Dapr 作业构建块
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-从快速入门目录的根目录，导航到作业目录：
+从仓库根目录导航到作业目录：
 
 ```bash
 cd jobs/go/sdk
@@ -58,7 +57,7 @@ cd jobs/go/sdk
 
 ### 步骤 3：调度作业
 
-运行以下命令来启动应用程序并调度作业：
+运行应用程序并调度作业：
 
 ```bash
 dapr run -f .
@@ -104,25 +103,25 @@ dapr stop -f .
 
 ### 发生了什么？
 
-在您运行 `dapr init` 初始化 Dapr 环境时：
+在 Dapr 安装期间运行 `dapr init` 时：
 
 - `dapr_scheduler` 控制平面与其他 Dapr 服务一起启动。
 - [在 `.dapr/components` 目录中生成了 `dapr.yaml` 多应用运行模板文件]({{< ref "#dapryaml-multi-app-run-template-file" >}})。
 
-在本快速入门中，运行 `dapr run -f .` 启动了 `job-scheduler` 和 `job-service`。在终端输出中，您可以看到以下作业的调度、检索和删除过程。
+在此快速入门中运行 `dapr run -f .` 启动了 `job-scheduler` 和 `job-service`。在终端输出中，您可以看到以下作业正在调度、检索和删除。
 
-- `R2-D2` 作业被调度。
-- `C-3PO` 作业被调度。
-- `C-3PO` 作业被检索。
-- `BB-8` 作业被调度。
-- `BB-8` 作业被检索。
-- `BB-8` 作业被删除。
+- `R2-D2` 作业正在调度。
+- `C-3PO` 作业正在调度。
+- `C-3PO` 作业正在检索。
+- `BB-8` 作业正在调度。
+- `BB-8` 作业正在检索。
+- `BB-8` 作业正在删除。
 - `R2-D2` 作业在 5 秒后执行。
 - `R2-D2` 作业在 10 秒后执行。
 
 #### `dapr.yaml` 多应用运行模板文件
 
-使用 `dapr run -f .` 运行 [多应用运行模板文件]({{< ref multi-app-dapr-run >}}) 启动项目中的所有应用程序。在本快速入门中，`dapr.yaml` 文件包含以下内容：
+使用 `dapr run -f .` 运行 [多应用运行模板文件]({{< ref multi-app-dapr-run >}}) 启动项目中的所有应用程序。在此快速入门中，`dapr.yaml` 文件包含以下内容：
 
 ```yml
 version: 1
@@ -418,7 +417,7 @@ func delete(droidJob DroidJob) error {
 
 {{< /tabs >}}
 
-## 一次运行一个作业应用程序
+## 逐个运行作业应用程序
 
 {{< tabs Go >}}
 
@@ -432,7 +431,7 @@ func delete(droidJob DroidJob) error {
 
 ### 步骤 1：准备工作
 
-您需要以下环境和工具：
+您需要以下工具：
 
 - [Dapr CLI 和已初始化的环境](https://docs.dapr.io/getting-started)。
 - [最新版本的 Go](https://go.dev/dl/)。
@@ -448,7 +447,7 @@ func delete(droidJob DroidJob) error {
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-从快速入门目录的根目录，导航到作业目录：
+从仓库根目录导航到作业目录：
 
 ```bash
 cd jobs/go/sdk
@@ -456,7 +455,7 @@ cd jobs/go/sdk
 
 ### 步骤 3：调度作业
 
-在终端中，运行 `job-service` 应用：
+在终端中运行 `job-service` 应用：
 
 ```bash
 dapr run --app-id job-service --app-port 6200 --dapr-grpc-port 6281 --app-protocol grpc -- go run .
@@ -472,7 +471,7 @@ dapr run --app-id job-service --app-port 6200 --dapr-grpc-port 6281 --app-protoc
 == APP == 在端口启动服务器：6200
 ```
 
-在新的终端窗口中，运行 `job-scheduler` 应用：
+在新终端窗口中运行 `job-scheduler` 应用：
 
 ```bash
 dapr run --app-id job-scheduler --app-port 6300 -- go run .
@@ -501,7 +500,7 @@ dapr run --app-id job-scheduler --app-port 6300 -- go run .
 == APP == 执行维护作业：Memory Wipe
 ```
 
-了解在您运行 `dapr run` 时 [`job-service`]({{< ref "#job-service-app" >}}) 和 [`job-scheduler`]({{< ref "#job-scheduler-app" >}}) 应用程序中发生的具体过程。
+解读当您运行 `dapr run` 时 [`job-service`]({{< ref "#job-service-app" >}}) 和 [`job-scheduler`]({{< ref "#job-scheduler-app" >}}) 应用程序中发生的事情。
 
 {{% /codetab %}}
 
@@ -509,7 +508,7 @@ dapr run --app-id job-scheduler --app-port 6300 -- go run .
 
 ## 观看演示
 
-观看使用 Go HTTP 示例的作业 API 实际操作，录制于 [Dapr 社区电话 #107](https://www.youtube.com/live/WHGOc7Ec_YQ?si=JlOlcJKkhRuhf5R1&t=849)。
+观看使用 Go HTTP 示例的作业 API 演示，录制于 [Dapr 社区电话 #107](https://www.youtube.com/live/WHGOc7Ec_YQ?si=JlOlcJKkhRuhf5R1&t=849)。
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/WHGOc7Ec_YQ?si=JlOlcJKkhRuhf5R1&amp;start=849" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -517,7 +516,7 @@ dapr run --app-id job-scheduler --app-port 6300 -- go run .
 
 我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
 
-加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238) 讨论。
+加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238) 参与讨论。
 
 ## 下一步
 

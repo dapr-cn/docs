@@ -1,114 +1,112 @@
 ---
 type: docs
-title: "Contribution overview"
-linkTitle: "Overview"
+title: "贡献概览"
+linkTitle: "概览"
 weight: 10
 description: >
-  General guidance for contributing to any of the Dapr project repositories
+  对Dapr项目的任何代码库进行贡献的一般指导
 ---
 
-Thank you for your interest in Dapr!
-This document provides the guidelines for how to contribute to the [Dapr project](https://github.com/dapr) through issues and pull requests. Contributions can also come in additional ways such as engaging with the community in community calls, commenting on issues or pull requests, and more.
+感谢您对Dapr项目的关注！
+本文档为您提供如何通过提交问题和拉取请求来为[Dapr项目](https://github.com/dapr)做出贡献的指南。您还可以通过其他方式参与，例如参加社区电话会议、对问题或拉取请求进行评论等。
 
-See the [Dapr community repository](https://github.com/dapr/community) for more information on community engagement and community membership.
+有关社区参与和成员资格的更多信息，请参阅[Dapr社区代码库](https://github.com/dapr/community)。
 
-## Dapr Repository Index
+## Dapr代码库索引
 
- Below is a list of repositories under the Dapr organization where you can contribute:
+以下是Dapr组织下的代码库列表，您可以在这些代码库中进行贡献：
 
-1. **Docs**: This [repository](https://github.com/dapr/docs) contains the documentation for Dapr. You can contribute by updating existing documentation, fixing errors, or adding new content to improve user experience and clarity. Please see the specific guidelines for [docs contributions]({{< ref contributing-docs >}}).
+1. **文档**：此[代码库](https://github.com/dapr/docs)包含Dapr的文档。您可以通过更新现有文档、修复错误或添加新内容来改善用户体验和清晰度。请参阅[文档贡献指南](https://github.com/dapr/docs/blob/master/CONTRIBUTING.md)。
 
-2. **Quickstarts**: The Quickstarts [repository](https://github.com/dapr/quickstarts) provides simple, step-by-step guides to help users get started with Dapr quickly. [Contributions in this repository](https://github.com/dapr/quickstarts/blob/master/CONTRIBUTING.md) involve creating new quickstarts, improving existing ones, or ensuring they stay up-to-date with the latest features.
+2. **快速入门**：快速入门[代码库](https://github.com/dapr/quickstarts)提供简单的分步指南，帮助用户快速上手Dapr。您可以通过创建新的快速入门、改进现有的快速入门或确保它们与最新功能保持同步来贡献。[查看贡献指南](https://github.com/dapr/quickstarts/blob/master/CONTRIBUTING.md)。
 
-3. **Runtime**: The Dapr runtime [repository](https://github.com/dapr/dapr) houses the core runtime components. Here, you can contribute by fixing bugs, optimizing performance, implementing new features, or enhancing existing ones.
+3. **运行时**：Dapr运行时[代码库](https://github.com/dapr/dapr)包含核心运行时组件。您可以通过修复错误、优化性能、实现新功能或增强现有功能来贡献。
 
-4. **Components-contrib**: This [repository](https://github.com/dapr/components-contrib) hosts a collection of community-contributed components for Dapr. You can contribute by adding new components, improving existing ones, or reviewing and testing contributions from the community.
+4. **组件贡献**：此[代码库](https://github.com/dapr/components-contrib)托管了Dapr的社区贡献组件集合。您可以通过添加新组件、改进现有组件或审查和测试社区的贡献来参与。
 
-5. **SDKs**: Dapr SDKs provide libraries for various programming languages to interact with Dapr. You can contribute by improving SDK functionalities, fixing bugs, or adding support for new features. Please see the [contribution guidelines]({{< ref sdk-contrib >}}) for specific SDKs.
+5. **SDKs**：Dapr SDKs为各种编程语言提供与Dapr交互的库。您可以通过改进SDK功能、修复错误或添加对新功能的支持来贡献。请参阅[SDK贡献指南](https://github.com/dapr/docs/blob/master/CONTRIBUTING.md)以获取特定SDK的详细信息。
 
-6. **CLI**: Dapr cli sets up Dapr on a local dev machine or a Kubernetes cluster for launching and managing Dapr instances. Contributions to the CLI repository include adding new features, fixing bugs, improving usability, and ensuring compatibility with the latest Dapr releases. Please see the [Development Guide](https://github.com/dapr/cli/blob/master/docs/development/development.md) for help in getting started with developing the Dapr cli. 
+6. **CLI**：Dapr CLI用于在本地开发机器或Kubernetes集群上设置Dapr以启动和管理Dapr实例。对CLI代码库的贡献包括添加新功能、修复错误、提高可用性，并确保与最新的Dapr版本兼容。请参阅[开发指南](https://github.com/dapr/cli/blob/master/docs/development/development.md)以获取有关开发Dapr CLI的帮助。
 
-## Issues
+## 问题
 
-### Issue types
+### 问题类型
 
-In most Dapr repositories there are usually 4 types of issues:
+在大多数Dapr代码库中，通常有4种类型的问题：
 
-- Issue/Bug: You've found a bug with the code, and want to report it, or create an issue to track the bug.
-- Issue/Discussion: You have something on your mind, which requires input form others in a discussion, before it eventually manifests as a proposal.
-- Issue/Proposal: Used for items that propose a new idea or functionality. This allows feedback from others before code is written.
-- Issue/Question: Use this issue type, if you need help or have a question.
+- 问题/错误：您发现了代码中的错误，并希望报告或创建一个问题来跟踪该错误。
+- 问题/讨论：您有一些想法，需要在讨论中获得他人的意见，然后最终形成提案。
+- 问题/提案：用于提出新想法或功能的项目。这允许在编写代码之前获得他人的反馈。
+- 问题/问题：如果您需要帮助或有问题，请使用此问题类型。
 
-### Before submitting
+### 提交之前
 
-Before you submit an issue, make sure you've checked the following:
+在提交问题之前，请确保您已检查以下内容：
 
-1. Is it the right repository?
-    - The Dapr project is distributed across multiple repositories. Check the list of [repositories](https://github.com/dapr) if you aren't sure which repo is the correct one.
-1. Check for existing issues
-    - Before you create a new issue, please do a search in [open issues](https://github.com/dapr/dapr/issues) to see if the issue or feature request has already been filed.
-    - If you find your issue already exists, make relevant comments and add your [reaction](https://github.com/blog/2119-add-reaction-to-pull-requests-issues-and-comments). Use a reaction:
-        - 👍 up-vote
-        - 👎 down-vote
-1. For bugs
-    - Check it's not an environment issue. For example, if running on Kubernetes, make sure prerequisites are in place. (state stores, bindings, etc.)
-    - You have as much data as possible. This usually comes in the form of logs and/or stacktrace. If running on Kubernetes or other environment, look at the logs of the Dapr services (runtime, operator, placement service). More details on how to get logs can be found [here]({{< ref "logs-troubleshooting.md" >}}).
-1. For proposals
-    - Many changes to the Dapr runtime may require changes to the API. In that case, the best place to discuss the potential feature is the main [Dapr repo](https://github.com/dapr/dapr).
-    - Other examples could include bindings, state stores or entirely new components.
+1. 这是正确的代码库吗？
+    - Dapr项目分布在多个代码库中。如果您不确定哪个代码库是正确的，请查看[代码库列表](https://github.com/dapr)。
+1. 检查现有问题
+    - 在创建新问题之前，请在[开放问题](https://github.com/dapr/dapr/issues)中搜索，查看该问题或功能请求是否已被提交。
+    - 如果您发现您的问题已经存在，请进行相关评论并添加您的[反应](https://github.com/blog/2119-add-reaction-to-pull-requests-issues-and-comments)。使用反应：
+        - 👍 赞成
+        - 👎 反对
+1. 对于错误
+    - 检查这不是环境问题。例如，如果在Kubernetes上运行，请确保先决条件已到位。（state存储、bindings等）
+    - 您拥有尽可能多的数据。这通常以日志和/或堆栈跟踪的形式出现。如果在Kubernetes或其他环境中运行，请查看Dapr服务（运行时、operator、placement服务）的日志。有关如何获取日志的更多详细信息，请参阅[此处]({{< ref "logs-troubleshooting.md" >}})。
+1. 对于提案
+    - 许多对Dapr运行时的更改可能需要对API进行更改。在这种情况下，讨论潜在功能的最佳地点是主要的[Dapr代码库](https://github.com/dapr/dapr)。
+    - 其他示例可能包括bindings、state存储或全新的组件。
 
+## 拉取请求
 
-## Pull Requests
+所有贡献都通过拉取请求提交。要提交建议的更改，请遵循以下工作流程：
 
-All contributions come through pull requests. To submit a proposed change, follow this workflow:
+1. 确保已提出问题（错误或提案），以设定您即将进行的贡献的期望。
+1. 分叉相关代码库并创建新分支
+    - 一些Dapr代码库支持[Codespaces]({{< ref codespaces.md >}})，为您提供即时环境以构建和测试您的更改。
+	- 有关设置Dapr开发环境的更多信息，请参阅[开发Dapr文档](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md)。
+1. 创建您的更改
+    - 代码更改需要测试
+1. 更新相关文档以反映更改
+1. 使用[DCO签署]({{< ref "contributing-overview.md#developer-certificate-of-origin-signing-your-work" >}})提交并打开PR
+1. 等待CI过程完成并确保所有检查通过
+1. 项目的维护者将被分配，您可以在几天内期待审查
 
-1. Make sure there's an issue (bug or proposal) raised, which sets the expectations for the contribution you are about to make.
-1. Fork the relevant repo and create a new branch
-    - Some Dapr repos support [Codespaces]({{< ref codespaces.md >}}) to provide an instant environment for you to build and test your changes.
-	- See the [Developing Dapr docs](https://github.com/dapr/dapr/blob/master/docs/development/developing-dapr.md) for more information about setting up a Dapr development environment.
-1. Create your change
-    - Code changes require tests
-1. Update relevant documentation for the change
-1. Commit with [DCO sign-off]({{< ref "contributing-overview.md#developer-certificate-of-origin-signing-your-work" >}}) and open a PR
-1. Wait for the CI process to finish and make sure all checks are green
-1. A maintainer of the project will be assigned, and you can expect a review within a few days
+#### 使用草稿PR以获得早期反馈
 
+在投入过多时间之前进行沟通的好方法是创建一个“草稿”PR并与您的审阅者分享。标准做法是在PR的标题中添加“[WIP]”前缀，并分配**do-not-merge**标签。这将让查看您PR的人知道它尚未成熟。
 
-#### Use work-in-progress PRs for early feedback
+## 使用第三方代码
 
-A good way to communicate before investing too much time is to create a "Work-in-progress" PR and share it with your reviewers. The standard way of doing this is to add a "[WIP]" prefix in your PR's title and assign the **do-not-merge** label. This will let people looking at your PR know that it is not well baked yet.
+- 第三方代码必须包含许可证。
 
-## Use of Third-party code
+## 开发者来源证书：签署您的工作
+#### 每次提交都需要签署
 
-- Third-party code must include licenses.
-
-## Developer Certificate of Origin: Signing your work
-#### Every commit needs to be signed
-
-The Developer Certificate of Origin (DCO) is a lightweight way for contributors to certify that they wrote or otherwise have the right to submit the code they are contributing to the project. Here is the full text of the [DCO](https://developercertificate.org/), reformatted for readability:
+开发者来源证书（DCO）是一种轻量级方式，供贡献者证明他们编写或以其他方式有权提交他们贡献给项目的代码。以下是[DCO](https://developercertificate.org/)的完整文本，经过重新格式化以提高可读性：
 ```
-By making a contribution to this project, I certify that:
-    (a) The contribution was created in whole or in part by me and I have the right to submit it under the open source license indicated in the file; or
-    (b) The contribution is based upon previous work that, to the best of my knowledge, is covered under an appropriate open source license and I have the right under that license to submit that work with modifications, whether created in whole or in part by me, under the same open source license (unless I am permitted to submit under a different license), as indicated in the file; or
-    (c) The contribution was provided directly to me by some other person who certified (a), (b) or (c) and I have not modified it.
-    (d) I understand and agree that this project and the contribution are public and that a record of the contribution (including all personal information I submit with it, including my sign-off) is maintained indefinitely and may be redistributed consistent with this project or the open source license(s) involved.
+通过对该项目进行贡献，我证明：
+    (a) 该贡献完全或部分由我创建，并且我有权根据文件中指明的开源许可证提交它；或者
+    (b) 该贡献基于我所知的适当开源许可证覆盖的先前工作，并且我有权根据该许可证提交该工作及其修改，无论是由我完全或部分创建的，均根据相同的开源许可证（除非我被允许根据不同的许可证提交），如文件中所示；或者
+    (c) 该贡献是由其他人直接提供给我的，他们证明了(a)、(b)或(c)，而我没有修改它。
+    (d) 我理解并同意该项目和贡献是公开的，并且贡献的记录（包括我提交的所有个人信息，包括我的签署）将被无限期地维护，并可能根据该项目或涉及的开源许可证进行再分发。
 ```
-Contributors sign-off that they adhere to these requirements by adding a `Signed-off-by` line to commit messages.
+贡献者通过在提交消息中添加`Signed-off-by`行来签署他们遵守这些要求。
 
 ```
-This is my commit message
+这是我的提交消息
 Signed-off-by: Random J Developer <random@developer.example.org>
 ```
-Git even has a `-s` command line option to append this automatically to your commit message:
+Git甚至有一个`-s`命令行选项，可以自动将其附加到您的提交消息中：
 ```
-$ git commit -s -m 'This is my commit message'
+$ git commit -s -m '这是我的提交消息'
 ```
 
-Each Pull Request is checked  whether or not commits in a Pull Request do contain a valid Signed-off-by line.
+每个拉取请求都会检查拉取请求中的提交是否包含有效的Signed-off-by行。
 
-#### I didn't sign my commit, now what?!
+#### 我没有签署我的提交，现在怎么办？！
 
-No worries - You can easily replay your changes, sign them and force push them!
+别担心 - 您可以轻松地重放您的更改，签署它们并强制推送它们！
 
 ```
 git checkout <branch-name>
@@ -116,6 +114,7 @@ git commit --amend --no-edit --signoff
 git push --force-with-lease <remote-name> <branch-name>
 ```
 
-## Code of Conduct
+## 行为准则
 
-Please see the [Dapr community code of conduct](https://github.com/dapr/community/blob/master/CODE-OF-CONDUCT.md).
+请参阅[Dapr社区行为准则](https://github.com/dapr/community/blob/master/CODE-OF-CONDUCT.md)。
+`

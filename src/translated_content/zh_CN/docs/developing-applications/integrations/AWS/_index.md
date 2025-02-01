@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Integrations with AWS"
+title: "AWS 集成"
 linkTitle: "AWS"
 weight: 1000
-description: "Dapr integrations with AWS services"
+description: "Dapr 集成 AWS 服务"
 ---

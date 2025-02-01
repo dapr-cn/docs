@@ -1,7 +1,7 @@
 ---
 type: docs
-title: "Integrations with Diagrid"
+title: "Diagrid 集成"
 linkTitle: "Diagrid"
 weight: 1000
-description: "Dapr integrations with Diagrid"
+description: "Dapr 和 Diagrid 的集成"
 ---

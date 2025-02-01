@@ -1,86 +1,86 @@
 ---
 type: docs
-title: "How-to guide template"
-linkTitle: "How-to template"
+title: "操作指南模板"
+linkTitle: "操作模板"
 weight: 30
-description: Suggested template and guidance for creating a how-to guide
+description: 创建操作指南的建议模板和指导
 ---
 
-## Contributing a new how-to guide
+## 贡献新的操作指南
 
-How-to guides provide step-by-step practical guidance to readers who wish to:
+操作指南为读者提供逐步的实用指导，帮助他们实现以下目标：
 
-- Enable a feature
-- Integrate a technology
-- Use Dapr in a specific scenario
+- 启用某个功能
+- 集成某项技术
+- 在特定场景中使用 Dapr
 
-How-to guides can be considered "next-level", self-guided docs compared to quickstarts. How-to scenarios will take longer and can be more easily applied to the reader's individual project or environment.
+操作指南相较于快速入门，是更高级别的自助文档。操作场景通常需要更长的时间，并且更容易应用于读者的个人项目或环境。
 
-When naming your how-to document, include the sub-directory name in the file name. If you need to create a new sub-directory, make sure it's descriptive and includes the relevant component or concept name. For example, _pubsub-namespaces_.
+命名操作文档时，应在文件名中包含子目录名称。如果需要创建新的子目录，请确保其具有描述性，并包含相关组件或概念名称。例如，_pubsub-namespaces_。
 
-{{% alert title="Note" color="primary" %}}
-This template is only a suggestion. Feel free to change based on your document's purpose.
+{{% alert title="注意" color="primary" %}}
+此模板仅为建议。可以根据文档的目的进行调整。
 {{% /alert %}}
 
-Learn more about [contributing to the Dapr docs]({{< ref contributing-docs.md >}}), like [front-matter]({{< ref "contributing-docs.md#front-matter" >}}) and [shortcodes]({{< ref "contributing-docs.md#shortcodes" >}}).
+了解更多关于[贡献 Dapr 文档]({{< ref contributing-docs.md >}})的信息，例如[前置内容]({{< ref "contributing-docs.md#front-matter" >}})和[短代码]({{< ref "contributing-docs.md#shortcodes" >}})。
 
-### Template
+### 模板
 
 ```md
 ---
-type: #Required; docs
-title: #Required; "How to: Brief, clear title"
-linkTitle: #Required; "How to: Shorter than regular title, to show in table of contents"
-weight: #Required; Use the correct weight based on hierarchy
-description: #Required; One-sentence description of what to expect in the article
+type: #必填; docs
+title: #必填; "如何：简洁明了的标题"
+linkTitle: #必填; "如何：比常规标题更短，以便在目录中显示"
+weight: #必填; 根据层级使用正确的权重
+description: #必填; 对文章内容的期望进行一句话描述
 ---
 
 <!--
-Remove all the comments in this template before opening a PR.
+在提交 PR 之前，请删除此模板中的所有注释。
 -->
 
 <!-- 
-H1: The title in the Hugo front-matter serves as the article's markdown H1. 
+H1：Hugo 前置内容中的标题作为文章的 markdown H1。
 -->
 
-<!-- Introductory paragraph  
-Required. Light intro that briefly describes what the how-to will cover and any default Dapr characteristics. Link off to the appropriate concept or overview docs to provide context. -->
+<!-- 引言段落  
+必填。简要介绍将涵盖的内容以及任何默认的 Dapr 特性。链接到适当的概念或概述文档以提供背景。 -->
 
 <!-- 
-Include a diagram or image, if possible. 
+如果可能，包含一个图表或图像。
 -->
 
 <!--
-If applicable, link to the related quickstart in a shortcode note or alert with text like:
+如果适用，请在短代码注释或警报中链接到相关的快速入门，文本如：
 
- If you haven't already, [try out the <topic> quickstart](link) for a quick walk-through on how to use <topic>.
+ 如果您还没有，请[尝试 <topic> 快速入门](link)，以快速了解如何使用 <topic>。
 
 -->
 
 <!-- 
-Make sure the how-to includes examples for multiple programming languages, OS, or deployment targets, if applicable. 
+确保操作指南包含多个编程语言、操作系统或部署目标的示例（如果适用）。
 -->
 
-## <Action or task>
+## <操作或任务>
 
 <!-- 
-Unlike quickstarts, do not use "Step 1", "Step 2", etc.  
+与快速入门不同，不要使用“步骤 1”、“步骤 2”等。
 -->
 
-## <Action or task>
+## <操作或任务>
 
 <!-- 
-Each H2 step should start with a verb/action word.
+每个 H2 步骤应以动词/动作词开头。
 -->
 
 <!--
-Include code snippets where possible. 
+尽可能包含代码片段。
 -->
 
-## Next steps
+## 后续步骤
 
 <!--
-Link to related pages and examples. For example, the building block overview, the related tutorial, API reference, etc.
+链接到相关页面和示例。例如，构建块概述、相关教程、API 参考等。
 -->
 
 ```

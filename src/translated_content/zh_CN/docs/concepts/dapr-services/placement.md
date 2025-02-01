@@ -1,65 +1,65 @@
 ---
 type: docs
-title: "Dapr Placement control plane service overview"
+title: "Dapr Placement 控制平面服务概述"
 linkTitle: "Placement"
-description: "Overview of the Dapr Placement service"
+description: "Dapr Placement 服务概述"
 ---
 
-The Dapr Placement service is used to calculate and distribute distributed hash tables for the location of [Dapr actors]({{< ref actors >}}) running in [self-hosted mode]({{< ref self-hosted >}}) or on [Kubernetes]({{< ref kubernetes >}}). Grouped by namespace, the hash tables map actor types to pods or processes so a Dapr application can communicate with the actor. Anytime a Dapr application activates a Dapr actor, the Placement service updates the hash tables with the latest actor location.
+Dapr Placement 服务用于计算和分发用于定位的分布式哈希表，以便在[自托管模式]({{< ref self-hosted >}})或[Kubernetes]({{< ref kubernetes >}})上运行的[Dapr actor]({{< ref actors >}})能够被正确定位。哈希表按命名空间分组，将actor类型映射到相应的pod或进程，以便Dapr应用程序可以与actor进行通信。每当Dapr应用程序激活一个Dapr actor时，Placement服务会更新哈希表以反映最新的actor位置。
 
-## Self-hosted mode
+## 自托管模式
 
-The Placement service Docker container is started automatically as part of [`dapr init`]({{< ref self-hosted-with-docker.md >}}). It can also be run manually as a process if you are running in [slim-init mode]({{< ref self-hosted-no-docker.md >}}).
+在自托管模式下，Placement服务的Docker容器会在执行[`dapr init`]({{< ref self-hosted-with-docker.md >}})时自动启动。如果您使用[slim-init模式]({{< ref self-hosted-no-docker.md >}})，也可以手动将其作为进程运行。
 
-## Kubernetes mode
+## Kubernetes模式
 
-The Placement service is deployed as part of `dapr init -k`, or via the Dapr Helm charts. You can run Placement in high availability (HA) mode. [Learn more about setting HA mode in your Kubernetes service.]({{< ref "kubernetes-production.md#individual-service-ha-helm-configuration" >}})
+在Kubernetes模式下，Placement服务可以通过执行`dapr init -k`或使用Dapr Helm图表进行部署。您可以选择在高可用性（HA）模式下运行Placement服务。[了解更多关于在Kubernetes中设置HA模式的信息。]({{< ref "kubernetes-production.md#individual-service-ha-helm-configuration" >}})
 
-For more information on running Dapr on Kubernetes, visit the [Kubernetes hosting page]({{< ref kubernetes >}}).
+有关在Kubernetes上运行Dapr的更多信息，请访问[Kubernetes托管页面]({{< ref kubernetes >}})。
 
-## Placement tables
+## Placement表
 
-There is an [HTTP API `/placement/state` for Placement service]({{< ref placement_api.md >}}) that exposes placement table information. The API is exposed on the sidecar on the same port as the healthz. This is an unauthenticated endpoint, and is disabled by default. You need to set `DAPR_PLACEMENT_METADATA_ENABLED` environment or `metadata-enabled` command line args to true to enable it. If you are using helm you just need to set `dapr_placement.metadataEnabled` to true.
+Placement服务提供了一个HTTP API `/placement/state`，用于公开placement表的信息。该API与sidecar的healthz端口相同。这个端点默认是禁用的且不需要身份验证。要启用它，您需要将`DAPR_PLACEMENT_METADATA_ENABLED`环境变量或`metadata-enabled`命令行参数设置为true。如果您使用helm，只需将`dapr_placement.metadataEnabled`设置为true。
 
-{{% alert title="Important" color="warning" %}}
-When deploying actors into different namespaces ({{< ref namespaced-actors.md >}}), it is recommended to disable the `metadata-enabled` if you want to prevent retrieving actors from all namespaces. The metadata endpoint is scoped to all namespaces.
+{{% alert title="重要" color="warning" %}}
+当actor被部署到不同的命名空间时，如果您希望防止从所有命名空间检索actor信息，建议禁用`metadata-enabled`。元数据端点的范围覆盖所有命名空间。
 {{% /alert %}}
 
-### Usecase:
-The placement table API can be used to retrieve the current placement table, which contains all the actors registered across all namespaces. This is helpful for debugging and allowing tools to extract and present information about actors.
+### 用例：
+placement表API可用于检索当前的placement表，其中包含所有命名空间中注册的actor信息。这对于调试和工具提取、呈现actor信息非常有帮助。
 
-### HTTP Request
+### HTTP请求
 
 ```
 GET http://localhost:<healthzPort>/placement/state
 ```
 
-### HTTP Response Codes
+### HTTP响应代码
 
-Code | Description
+代码 | 描述
 ---- | -----------
-200  | Placement tables information returned
-500  | Placement could not return the placement tables information
+200  | 返回placement表信息
+500  | Placement无法返回placement表信息
 
-### HTTP Response Body
+### HTTP响应体
 
-**Placement tables API Response Object**
+**Placement表API响应对象**
 
-Name                   | Type                                                                  | Description
+名称                   | 类型                                                                  | 描述
 ----                   | ----                                                                  | -----------
-tableVersion           | int                                                                   | The placement table version
-hostList               | [Actor Host Info](#actorhostinfo)[]                                   | A json array of registered actors host info.
+tableVersion           | int                                                                   | placement表版本
+hostList               | [Actor Host Info](#actorhostinfo)[]                                   | 注册的actor主机信息的json数组。
 
-<a id="actorhostinfo"></a>**Actor Host Info**
+<a id="actorhostinfo"></a>**Actor主机信息**
 
-Name  | Type    | Description
+名称  | 类型    | 描述
 ----  | ----    | -----------
-name  | string  | The host:port address of the actor.
-appId | string  | app id.
-actorTypes | json string array | List of actor types it hosts.
-updatedAt | timestamp | Timestamp of the actor registered/updated.
+name  | string  | actor的主机:端口地址。
+appId | string  | 应用程序ID。
+actorTypes | json string array | 它托管的actor类型列表。
+updatedAt | timestamp | actor注册/更新的时间戳。
 
-### Examples
+### 示例
 
 ```shell
  curl localhost:8080/placement/state
@@ -93,6 +93,6 @@ updatedAt | timestamp | Timestamp of the actor registered/updated.
 }
 ```
 
-## Related links
+## 相关链接
 
-[Learn more about the Placement API.]({{< ref placement_api.md >}})
+[了解更多关于Placement API的信息。]({{< ref placement_api.md >}})

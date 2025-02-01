@@ -1,47 +1,47 @@
 ---
 type: docs
-title: "How to: Generate a new Microsoft Entra ID application and Service Principal"
-linkTitle: "How to: Generate Microsoft Entra ID and Service Principal"
+title: "如何创建新的 Microsoft Entra ID 应用程序和服务主体"
+linkTitle: "如何创建 Microsoft Entra ID 应用程序和服务主体"
 weight: 30000
-description: "Learn how to generate an Microsoft Entra ID and use it as a Service Principal"
+description: "了解如何创建 Microsoft Entra ID 应用程序并将其用作服务主体"
 ---
 
-## Prerequisites
+## 先决条件
 
-- [An Azure subscription](https://azure.microsoft.com/free/)
+- [一个 Azure 订阅](https://azure.microsoft.com/free/)
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
 - [jq](https://stedolan.github.io/jq/download/)
-- OpenSSL (included by default on all Linux and macOS systems, as well as on WSL)
-- Make sure you're using a bash or zsh shell
+- OpenSSL（默认包含在所有 Linux 和 macOS 系统中，以及 WSL 中）
+- 确保您使用的是 bash 或 zsh shell
 
-## Log into Azure using the Azure CLI
+## 使用 Azure CLI 登录 Azure
 
-In a new terminal, run the following command:
+在新终端中，运行以下命令：
 
 ```sh
 az login
 az account set -s [your subscription id]
 ```
 
-### Create an Microsoft Entra ID application
+### 创建 Microsoft Entra ID 应用程序
 
-Create the Microsoft Entra ID application with:
+使用以下命令创建 Microsoft Entra ID 应用程序：
 
 ```sh
-# Friendly name for the application / Service Principal
+# 应用程序 / 服务主体的友好名称
 APP_NAME="dapr-application"
 
-# Create the app
+# 创建应用程序
 APP_ID=$(az ad app create --display-name "${APP_NAME}"  | jq -r .appId)
 ```
 
-Select how you'd prefer to pass credentials.
+选择传递凭据的方式。
 
-{{< tabs "Client secret" "PFX certificate">}}
+{{< tabs "客户端密钥" "PFX 证书">}}
 
 {{% codetab %}}
 
-To create a **client secret**, run the following command. 
+要创建一个**客户端密钥**，运行以下命令。
 
 ```sh
 az ad app credential reset \
@@ -49,9 +49,9 @@ az ad app credential reset \
   --years 2
 ```
 
-This generates a random, 40-characters long password based on the `base64` charset. This password will be valid for 2 years, before you need to rotate it.
+这将生成一个基于 `base64` 字符集的随机40字符长的密码。此密码有效期为2年，之后需要更新。
 
-Save the output values returned; you'll need them for Dapr to authenticate with Azure. The expected output:
+请保存返回的输出值；您将需要它们来让 Dapr 通过 Azure 进行身份验证。预期输出：
 
 ```json
 {
@@ -61,16 +61,16 @@ Save the output values returned; you'll need them for Dapr to authenticate with 
 }
 ```
 
-When adding the returned values to your Dapr component's metadata:
+在将返回的值添加到您的 Dapr 组件的元数据时：
 
-- `appId` is the value for `azureClientId`
-- `password` is the value for `azureClientSecret` (this was randomly-generated)
-- `tenant` is the value for `azureTenantId`
+- `appId` 是 `azureClientId` 的值
+- `password` 是 `azureClientSecret` 的值（这是随机生成的）
+- `tenant` 是 `azureTenantId` 的值
 
 {{% /codetab %}}
 
 {{% codetab %}}
-For a **PFX (PKCS#12) certificate**, run the following command to create a self-signed certificate:
+对于 **PFX (PKCS#12) 证书**，运行以下命令以创建自签名证书：
 
 ```sh
 az ad app credential reset \
@@ -78,11 +78,11 @@ az ad app credential reset \
   --create-cert
 ```
 
-> **Note:** Self-signed certificates are recommended for development only. For production, you should use certificates signed by a CA and imported with the `--cert` flag.
+> **注意：** 自签名证书仅建议用于开发环境。在生产环境中，您应使用由 CA 签名并通过 `--cert` 标志导入的证书。
 
-The output of the command above should look like:
+上述命令的输出应如下所示：
 
-Save the output values returned; you'll need them for Dapr to authenticate with Azure. The expected output:
+请保存返回的输出值；您将需要它们来让 Dapr 通过 Azure 进行身份验证。预期输出：
 
 ```json
 {
@@ -93,44 +93,45 @@ Save the output values returned; you'll need them for Dapr to authenticate with 
 }
 ```
 
-When adding the returned values to your Dapr component's metadata:
+在将返回的值添加到您的 Dapr 组件的元数据时：
 
-- `appId` is the value for `azureClientId`
-- `tenant` is the value for `azureTenantId`
-- `fileWithCertAndPrivateKey` indicates the location of the self-signed PFX certificate and private key. Use the contents of that file as `azureCertificate` (or write it to a file on the server and use `azureCertificateFile`)
+- `appId` 是 `azureClientId` 的值
+- `tenant` 是 `azureTenantId` 的值
+- `fileWithCertAndPrivateKey` 表示自签名 PFX 证书和私钥的位置。使用该文件的内容作为 `azureCertificate`（或将其写入服务器上的文件并使用 `azureCertificateFile`）
 
-> **Note:** While the generated file has the `.pem` extension, it contains a certificate and private key encoded as PFX (PKCS#12).
+> **注意：** 虽然生成的文件具有 `.pem` 扩展名，但它包含编码为 PFX (PKCS#12) 的证书和私钥。
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-### Create a Service Principal
+### 创建服务主体
 
-Once you have created an Microsoft Entra ID application, create a Service Principal for that application. With this Service Principal, you can grant it access to Azure resources. 
+一旦您创建了 Microsoft Entra ID 应用程序，为该应用程序创建一个服务主体。通过此服务主体，您可以授予其访问 Azure 资源的权限。
 
-To create the Service Principal, run the following command:
+要创建服务主体，运行以下命令：
 
 ```sh
 SERVICE_PRINCIPAL_ID=$(az ad sp create \
   --id "${APP_ID}" \
   | jq -r .id)
-echo "Service Principal ID: ${SERVICE_PRINCIPAL_ID}"
+echo "服务主体 ID: ${SERVICE_PRINCIPAL_ID}"
 ```
 
-Expected output:
+预期输出：
 
 ```text
-Service Principal ID: 1d0ccf05-5427-4b5e-8eb4-005ac5f9f163
+服务主体 ID: 1d0ccf05-5427-4b5e-8eb4-005ac5f9f163
 ```
 
-The returned value above is the **Service Principal ID**, which is different from the Microsoft Entra ID application ID (client ID). The Service Principal ID is defined within an Azure tenant and used to grant access to Azure resources to an application  
-You'll use the Service Principal ID to grant permissions to an application to access Azure resources. 
+上面返回的值是**服务主体 ID**，它与 Microsoft Entra ID 应用程序 ID（客户端 ID）不同。服务主体 ID 在 Azure 租户内定义，用于授予应用程序访问 Azure 资源的权限。  
+您将使用服务主体 ID 授予应用程序访问 Azure 资源的权限。
 
-Meanwhile, **the client ID** is used by your application to authenticate. You'll use the client ID in Dapr manifests to configure authentication with Azure services.
+同时，**客户端 ID** 由您的应用程序用于身份验证。您将在 Dapr 清单中使用客户端 ID 来配置与 Azure 服务的身份验证。
 
-Keep in mind that the Service Principal that was just created does not have access to any Azure resource by default. Access will need to be granted to each resource as needed, as documented in the docs for the components.
+请记住，刚刚创建的服务主体默认没有访问任何 Azure 资源的权限。需要根据需要为每个资源授予访问权限，如组件文档中所述。
 
-## Next steps
+## 下一步
 
-{{< button text="Use Managed Identities >>" page="howto-mi.md" >}}
+{{< button text="使用托管身份" page="howto-mi.md" >}}
+`

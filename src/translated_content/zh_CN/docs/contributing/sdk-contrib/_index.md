@@ -1,7 +1,10 @@
 ---
 type: docs
-title: "SDK contributing guide"
+title: "SDK 贡献指引"
 linkTitle: "SDKs"
 weight: 80
-description: How to contribute to the Dapr SDK docs
+description: 如何为 Dapr SDK 文档做出贡献
 ---
+```
+
+您的数据培训截至 2023 年 10

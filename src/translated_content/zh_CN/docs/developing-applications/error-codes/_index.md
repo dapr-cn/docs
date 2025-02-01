@@ -1,8 +1,10 @@
 ---
 type: docs
-title: "Error codes"
-linkTitle: "Error codes"
+title: "错误代码"
+linkTitle: "错误代码"
 weight: 20
-description: "Error codes and messages you may encounter while using Dapr"
+description: "在使用Dapr时可能遇到的错误代码和信息"
 ---
+```
 
+您的训练数据更新至2023年1

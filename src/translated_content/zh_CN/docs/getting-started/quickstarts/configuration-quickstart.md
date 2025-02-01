@@ -1,13 +1,12 @@
-
 ---
 type: docs
 title: "快速入门：配置"
 linkTitle: 配置
 weight: 78
-description: 开始使用 Dapr 的配置构建块
+description: 开始使用 Dapr 的配置模块
 ---
 
-我们来了解一下 Dapr 的[配置构建块]({{< ref configuration-api-overview.md >}})。配置项通常是动态的，并且与应用程序的需求紧密相关。配置项是包含配置信息的键/值对，例如：
+接下来，我们将介绍 Dapr 的[配置模块]({{< ref configuration-api-overview.md >}})。配置项通常具有动态特性，并且与应用程序的需求紧密相关。配置项是包含配置信息的键/值对，例如：
 - 应用程序 ID
 - 分区键
 - 数据库名称等
@@ -36,7 +35,7 @@ description: 开始使用 Dapr 的配置构建块
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration/python/sdk)。
+克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/configuration/python/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -62,7 +61,7 @@ cd configuration/python/sdk/order-processor
 pip3 install -r requirements.txt
 ```
 
-通过 Dapr 边车运行 `order-processor` 服务。
+在 Dapr 边车环境中运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --resources-path ../../../components/ --app-port 6001 -- python3 app.py
@@ -96,7 +95,7 @@ dapr run --app-id order-processor --resources-path ../../../components/ --app-po
 
 > **注意**：在 Windows 中，您可能需要使用 `python app.py` 而不是 `python3 app.py`。
 
-应用程序将返回更新后的配置值：
+应用程序将显示更新后的配置值：
 
 ```
 == APP == Configuration for orderId1 : value: "103"
@@ -107,7 +106,7 @@ dapr run --app-id order-processor --resources-path ../../../components/ --app-po
 
 ### `order-processor` 服务
 
-`order-processor` 服务包含以下代码：
+`order-processor` 服务包括以下代码：
 - 从配置存储中获取配置项
 - 订阅配置更新（您之前在 CLI 中进行的操作）
 - 取消订阅配置更新，并在 20 秒不活动后退出应用程序。
@@ -157,7 +156,7 @@ if unsubscribed == True:
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration/javascript/sdk)。
+克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/configuration/javascript/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -183,7 +182,7 @@ cd configuration/javascript/sdk/order-processor
 npm install
 ```
 
-通过 Dapr 边车运行 `order-processor` 服务。
+在 Dapr 边车环境中运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --resources-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
@@ -211,7 +210,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 dapr run --app-id order-processor --resources-path ../../../components/ --app-protocol grpc --dapr-grpc-port 3500 -- node index.js
 ```
 
-应用程序将返回更新后的配置值：
+应用程序将显示更新后的配置值：
 
 ```
 == APP == Configuration for orderId1: {"key":"orderId1","value":"103","version":"","metadata":{}}
@@ -220,7 +219,7 @@ dapr run --app-id order-processor --resources-path ../../../components/ --app-pr
 
 ### `order-processor` 服务
 
-`order-processor` 服务包含以下代码：
+`order-processor` 服务包括以下代码：
 - 从配置存储中获取配置项
 - 订阅配置更新（您之前在 CLI 中进行的操作）
 - 取消订阅配置更新，并在 20 秒不活动后退出应用程序。
@@ -280,7 +279,7 @@ setTimeout(() => {
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration/csharp/sdk)。
+克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/configuration/csharp/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -307,7 +306,7 @@ dotnet restore
 dotnet build
 ```
 
-通过 Dapr 边车运行 `order-processor` 服务。
+在 Dapr 边车环境中运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor-http --resources-path ../../../components/ --app-port 7001 -- dotnet run --project .
@@ -335,7 +334,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 dapr run --app-id order-processor-http --resources-path ../../../components/ --app-port 7001 -- dotnet run --project .
 ```
 
-应用程序将返回更新后的配置值：
+应用程序将显示更新后的配置值：
 
 ```
 == APP == Configuration for orderId1: {"Value":"103","Version":"","Metadata":{}}
@@ -344,7 +343,7 @@ dapr run --app-id order-processor-http --resources-path ../../../components/ --a
 
 ### `order-processor` 服务
 
-`order-processor` 服务包含以下代码：
+`order-processor` 服务包括以下代码：
 - 从配置存储中获取配置项
 - 订阅配置更新（您之前在 CLI 中进行的操作）
 - 取消订阅配置更新，并在 20 秒不活动后退出应用程序。
@@ -400,7 +399,7 @@ try
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration/java/sdk)。
+克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/configuration/java/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -426,7 +425,7 @@ cd configuration/java/sdk/order-processor
 mvn clean install
 ```
 
-通过 Dapr 边车运行 `order-processor` 服务。
+在 Dapr 边车环境中运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --resources-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
@@ -454,7 +453,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 dapr run --app-id order-processor --resources-path ../../../components -- java -jar target/OrderProcessingService-0.0.1-SNAPSHOT.jar
 ```
 
-应用程序将返回更新后的配置值：
+应用程序将显示更新后的配置值：
 
 ```
 == APP == Configuration for orderId1: {'value':'103'}
@@ -463,7 +462,7 @@ dapr run --app-id order-processor --resources-path ../../../components -- java -
 
 ### `order-processor` 服务
 
-`order-processor` 服务包含以下代码：
+`order-processor` 服务包括以下代码：
 - 从配置存储中获取配置项
 - 订阅配置更新（您之前在 CLI 中进行的操作）
 - 取消订阅配置更新，并在 20 秒不活动后退出应用程序。
@@ -515,7 +514,7 @@ if (unsubscribe.getIsUnsubscribed()) {
 
 ### 步骤 1：设置环境
 
-克隆[快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/configuration/go/sdk)。
+克隆[快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/configuration/go/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -535,7 +534,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "101" orderId2 "102"
 cd configuration/go/sdk/order-processor
 ```
 
-通过 Dapr 边车运行 `order-processor` 服务。
+在 Dapr 边车环境中运行 `order-processor` 服务。
 
 ```bash
 dapr run --app-id order-processor --app-port 6001 --resources-path ../../../components -- go run .
@@ -564,7 +563,7 @@ docker exec dapr_redis redis-cli MSET orderId1 "103" orderId2 "104"
 dapr run --app-id order-processor --app-port 6001 --resources-path ../../../components -- go run .
 ```
 
-应用程序将返回更新后的配置值：
+应用程序将显示更新后的配置值：
 
 ```
 == APP == Configuration for orderId1: {"Value":"103","Version":"","Metadata":null}
@@ -573,7 +572,7 @@ dapr run --app-id order-processor --app-port 6001 --resources-path ../../../comp
 
 ### `order-processor` 服务
 
-`order-processor` 服务包含以下代码：
+`order-processor` 服务包括以下代码：
 - 从配置存储中获取配置项
 - 订阅配置更新（您之前在 CLI 中进行的操作）
 - 取消订阅配置更新，并在 20 秒不活动后退出应用程序。
@@ -595,7 +594,7 @@ for _, item := range CONFIGURATION_ITEMS {
 ```go
 // 订阅配置更改
 err = client.SubscribeConfigurationItems(ctx, DAPR_CONFIGURATION_STORE, CONFIGURATION_ITEMS, func(id string, config map[string]*dapr.ConfigurationItem) {
-	// 应用程序订阅配置更改时的首次调用仅返回订阅 ID
+	// 应用程序首次订阅配置更改时仅返回订阅 ID
 	if len(config) == 0 {
 		fmt.Println("App subscribed to config changes with subscription id: " + id)
 		subscriptionId = id
@@ -625,11 +624,11 @@ case <-ctx.Done():
 
 观看此视频[演示配置 API 快速入门](https://youtu.be/EcE6IGuX9L8?t=94)：
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EcE6IGuX9L8?start=94" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EcE6IGuX9L8?start=94" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## 告诉我们您的想法！
 
-我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
+我们正在不断改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
 
 加入我们的[Discord 频道](https://discord.com/channels/778680217417809931/953427615916638238)讨论。
 
@@ -641,6 +640,6 @@ case <-ctx.Done():
   - [.NET](https://github.com/dapr/quickstarts/tree/master/configuration/csharp/http)
   - [Java](https://github.com/dapr/quickstarts/tree/master/configuration/java/http)
   - [Go](https://github.com/dapr/quickstarts/tree/master/configuration/go/http)
-- 了解更多关于[配置构建块]({{< ref configuration-api-overview >}})
+- 了解更多关于[配置模块]({{< ref configuration-api-overview >}})的信息
 
 {{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

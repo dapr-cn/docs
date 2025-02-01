@@ -1,44 +1,43 @@
 ---
 type: docs
-title: "How to: Use managed identities"
-linkTitle: "How to: Use managed identities"
+title: "如何使用托管身份"
+linkTitle: "如何使用托管身份"
 weight: 40000
 aliases:
   - "/zh-hans/developing-applications/integrations/azure/azure-authentication/howto-msi/"
-description: "Learn how to use managed identities"
+description: "学习如何使用托管身份"
 ---
 
-Using managed identities, authentication happens automatically by virtue of your application running on top of an Azure service that has either a system-managed or a user-assigned identity. 
+托管身份可以自动进行身份验证，因为您的应用程序运行在具有系统分配或用户分配身份的 Azure 服务上。
 
-To get started, you need to enable a managed identity as a service option/functionality in various Azure services, independent of Dapr. Enabling this creates an identity (or application) under the hood for Microsoft Entra ID (previously Azure Active Directory ID) purposes.
+要开始使用，您需要在各种 Azure 服务中启用托管身份作为服务选项/功能，这与 Dapr 无关。启用后，会在后台为 Microsoft Entra ID（以前称为 Azure Active Directory ID）创建一个身份（或应用程序）。
 
-Your Dapr services can then leverage that identity to authenticate with Microsoft Entra ID, transparently and without you having to specify any credentials.
+然后，您的 Dapr 服务可以利用该身份与 Microsoft Entra ID 进行认证，过程是透明的，您无需指定任何凭据。
 
-In this guide, you learn how to:
-- Grant your identity to the Azure service you're using via official Azure documentation
-- Set up either a system-managed or user-assigned identity in your component
+在本指南中，您将学习如何：
+- 通过官方 Azure 文档将您的身份授予您正在使用的 Azure 服务
+- 在您的组件中设置系统管理或用户分配身份
 
+以上是全部内容。
 
-That's about all there is to it.
-
-{{% alert title="Note" color="primary" %}}
-In your component YAML, you only need the [`azureClientId` property]({{< ref "authenticating-azure.md#authenticating-with-managed-identities-mi" >}}) if using user-assigned identity. Otherwise, you can omit this property for system-managed identity to be used by default.
+{{% alert title="注意" color="primary" %}}
+在您的组件 YAML 中，如果使用用户分配身份，您只需要 [`azureClientId` 属性]({{< ref "authenticating-azure.md#authenticating-with-managed-identities-mi" >}})。否则，您可以省略此属性，默认使用系统管理身份。
 {{% /alert %}}
 
-## Grant access to the service
+## 授予服务访问权限
 
-Set the requisite Microsoft Entra ID role assignments or custom permissions to your system-managed or user-assigned identity for a particular Azure resource (as identified by the resource scope).
+为特定 Azure 资源（由资源范围标识）设置必要的 Microsoft Entra ID 角色分配或自定义权限给您的系统管理或用户分配身份。
 
-You can set up a managed identity to a new or existing Azure resource. The instructions depend on the service use. Check the following official documentation for the most appropriate instructions:
+您可以为新的或现有的 Azure 资源设置托管身份。说明取决于所使用的服务。请查看以下官方文档以获取最合适的说明：
 
 - [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/azure/aks/use-managed-identity)
 - [Azure Container Apps (ACA)](https://learn.microsoft.com/azure/container-apps/dapr-components?tabs=yaml#using-managed-identity)
-- [Azure App Service](https://docs.microsoft.com/azure/app-service/overview-managed-identity) (including Azure Web Apps and Azure Functions)
+- [Azure App Service](https://docs.microsoft.com/azure/app-service/overview-managed-identity)（包括 Azure Web Apps 和 Azure Functions）
 - [Azure Virtual Machines (VM)](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm)
 - [Azure Virtual Machines Scale Sets (VMSS)](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vmss)
 - [Azure Container Instance (ACI)](https://docs.microsoft.com/azure/container-instances/container-instances-managed-identity)
 
-After assigning a system-managed identity to your Azure resource, you'll have credentials like the following:
+在为您的 Azure 资源分配系统管理身份后，您将获得如下信息：
 
 ```json
 {
@@ -49,32 +48,32 @@ After assigning a system-managed identity to your Azure resource, you'll have cr
 }
 ```
 
-From the returned values, take note of the **`principalId`** value, which is [the Service Principal ID created for your identity]({{< ref "howto-aad.md#create-a-service-principal" >}}). Use that to grant access permissions for your Azure resources component to access the identity.
+请注意 **`principalId`** 值，这是为您的身份创建的 [服务主体 ID]({{< ref "howto-aad.md#create-a-service-principal" >}})。使用它来授予您的 Azure 资源组件访问权限。
 
-{{% alert title="Managed identities in Azure Container Apps" color="primary" %}}
-Every container app has a completely different system-managed identity, making it very unmanageable to handle the required role assignments across multiple apps. 
+{{% alert title="Azure Container Apps 中的托管身份" color="primary" %}}
+每个容器应用都有一个完全不同的系统管理身份，这使得在多个应用之间处理所需的角色分配非常难以管理。
 
-Instead, it's _strongly recommended_ to use a user-assigned identity and attach this to all the apps that should load the component. Then, you should scope the component to those same apps.
+因此，_强烈建议_ 使用用户分配身份并将其附加到所有应加载组件的应用中。然后，您应将组件范围限定在这些相同的应用上。
 {{% /alert %}}
 
-## Set up identities in your component
+## 在您的组件中设置身份
 
-By default, Dapr Azure components look up the system-managed identity of the environment they run in and authenticate as that. Generally, for a given component, there are no required properties to use system-managed identity other than the service name, storage account name, and any other properites required by the Azure service (listed in the documentation). 
+默认情况下，Dapr Azure 组件会查找其运行环境的系统管理身份并以此进行认证。通常，对于给定组件，除了服务名称、存储帐户名称和 Azure 服务所需的任何其他属性（在文档中列出）外，没有使用系统管理身份的必需属性。
 
-For user-assigned idenitities, in addition to the basic properties required by the service you're using, you need to specify the `azureClientId` (user-assigned identity ID) in the component. Make sure the user-assigned identity is attached to the Azure service Dapr is running on, or else you won't be able to use that identity.
+对于用户分配身份，除了您正在使用的服务所需的基本属性外，您还需要在组件中指定 `azureClientId`（用户分配身份 ID）。确保用户分配身份已附加到 Dapr 运行的 Azure 服务上，否则您将无法使用该身份。
 
-{{% alert title="Note" color="primary" %}}
-If the sidecar loads a component which does not specify `azureClientId`, it only tries the system-assigned identity. If the component specifies the `azureClientId` property, it only tries the particular user-assigned identity with that ID.
+{{% alert title="注意" color="primary" %}}
+如果 sidecar 加载的组件未指定 `azureClientId`，它只会尝试系统分配身份。如果组件指定了 `azureClientId` 属性，它只会尝试具有该 ID 的特定用户分配身份。
 {{% /alert %}}
 
-The following examples demonstrate setting up either a system-managed or user-assigned identity in an Azure KeyVault secrets component.
+以下示例演示了在 Azure KeyVault secrets 组件中设置系统管理或用户分配身份。
 
-{{< tabs "System-managed" "User-assigned" "Kubernetes" >}}
+{{< tabs "系统管理" "用户分配" "Kubernetes" >}}
 
  <!-- system managed -->
 {{% codetab %}}
 
-If you set up system-managed identity using an Azure KeyVault component, the YAML would look like the following:
+如果您使用 Azure KeyVault 组件设置系统管理身份，YAML 将如下所示：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -89,14 +88,14 @@ spec:
     value: mykeyvault
 ```
 
-In this example, the system-managed identity looks up the service identity and communicates with the `mykeyvault` vault. Next, grant your system-managed identiy access to the desired service.
+在此示例中，系统管理身份查找服务身份并与 `mykeyvault` 保管库通信。接下来，授予您的系统管理身份访问所需服务的权限。
 
 {{% /codetab %}}
 
  <!-- user assigned -->
 {{% codetab %}}
 
-If you set up user-assigned identity using an Azure KeyVault component, the YAML would look like the following:
+如果您使用 Azure KeyVault 组件设置用户分配身份，YAML 将如下所示：
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -113,32 +112,33 @@ spec:
     value: someAzureIdentityClientIDHere
 ```
 
-Once you've set up the component YAML with the `azureClientId` property, you can grant your user-assigned identity access to your service.
+一旦您在组件 YAML 中设置了 `azureClientId` 属性，您就可以授予您的用户分配身份访问您的服务。
 
 {{% /codetab %}}
 
  <!-- k8s -->
 {{% codetab %}}
 
-For component configuration in Kubernetes or AKS, refer to the [Workload Identity guidance.](https://learn.microsoft.com/azure/aks/workload-identity-overview?tabs=dotnet)
+有关 Kubernetes 或 AKS 中的组件配置，请参阅 [工作负载身份指南。](https://learn.microsoft.com/azure/aks/workload-identity-overview?tabs=dotnet)
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-## Troubleshooting
+## 故障排除
 
-If you receive an error or your managed identity doesn't work as expected, check if the following items are true:
+如果您收到错误或托管身份未按预期工作，请检查以下项目是否为真：
 
-- The system-managed identity or user-assigned identity don't have the required permissions on the target resource.
-- The user-assigned identity isn't attached to the Azure service (container app or pod) from which you're loading the component. This can especially happen if:
-  - You have an unscoped component (a component loaded by all container apps in an environment, or all deployments in your AKS cluster). 
-  - You attached the user-assigned identity to only one container app or one deployment in AKS (using [Azure Workload Identity](https://learn.microsoft.com/azure/aks/workload-identity-overview?tabs=dotnet)). 
-  
-  In this scenario, since the identity isn't attached to every other container app or deployment in AKS, the component referencing the user-assigned identity via `azureClientId` fails.
+- 系统管理身份或用户分配身份没有目标资源的所需权限。
+- 用户分配身份未附加到您加载组件的 Azure 服务（容器应用或 pod）。这尤其可能发生在：
+  - 您有一个未限定范围的组件（由环境中的所有容器应用或 AKS 集群中的所有部署加载的组件）。
+  - 您仅将用户分配身份附加到 AKS 中的一个容器应用或一个部署（使用 [Azure 工作负载身份](https://learn.microsoft.com/azure/aks/workload-identity-overview?tabs=dotnet)）。
 
-> **Best practice:** When using user-assigned identities, make sure to scope your components to specific apps!
+  在这种情况下，由于身份未附加到 AKS 中的每个其他容器应用或部署，引用用户分配身份的组件通过 `azureClientId` 失败。
 
-## Next steps
+> **最佳实践：** 使用用户分配身份时，请确保将您的组件范围限定在特定应用上！
 
-{{< button text="Refer to Azure component specs >>" page="components-reference" >}}
+## 下一步
+
+{{< button text="参考 Azure 组件规范 >>" page="components-reference" >}}
+`

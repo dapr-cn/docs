@@ -3,30 +3,29 @@ type: docs
 title: "IntelliJ"
 linkTitle: "IntelliJ"
 weight: 2000
-description: "Configuring IntelliJ community edition for debugging with Dapr"
+description: "在IntelliJ社区版中配置Dapr调试环境"
 ---
 
-When developing Dapr applications, you typically use the Dapr CLI to start your 'Daprized' service similar to this:
+在开发Dapr应用程序时，通常会使用Dapr CLI来启动您的服务，例如：
 
 ```bash
 dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 app.js
 ```
 
-This uses the default components yaml files (created on `dapr init`) so that your service can interact with the local Redis container. This is great when you are just getting started but what if you want to attach a debugger to your service and step through the code? This is where you can use the dapr cli without invoking an app.
+这会使用默认的组件yaml文件（在执行`dapr init`时创建），使您的服务能够与本地Redis容器交互。这种方式在初期非常有用，但如果您需要附加调试器来逐步调试代码，该怎么办？此时，您可以选择不通过Dapr CLI直接启动应用程序。
 
+一种方法是先通过命令行运行`dapr run --`，然后启动您的代码并附加调试器。虽然这种方法可行，但需要在终端和IDE之间切换，并且对其他开发人员来说可能不够直观。
 
-One approach to attaching the debugger to your service is to first run `dapr run --` from the command line and then launch your code and attach the debugger. While this is a perfectly acceptable solution, it does require a few extra steps (like switching between terminal and IDE) and some instruction to developers who might want to clone your repo and hit the "play" button to begin debugging.
+本文档将介绍如何直接在IntelliJ中使用`dapr`进行调试。在开始之前，请确保您已通过`dapr init`初始化了Dapr的开发环境。
 
-This document explains how to use `dapr` directly from IntelliJ. As a pre-requisite, make sure you have initialized the Dapr's dev environment via `dapr init`.
+让我们开始吧！
 
-Let's get started!
+## 将Dapr添加为“外部工具”
 
-## Add Dapr as an 'External Tool'
+首先，在修改配置文件之前，请退出IntelliJ。
 
-First, quit IntelliJ before modifying the configurations file directly.
-
-### IntelliJ configuration file location
-For versions [2020.1](https://www.jetbrains.com/help/idea/2020.1/tuning-the-ide.html#config-directory) and above the configuration files for tools should be located in:
+### IntelliJ配置文件位置
+对于版本[2020.1](https://www.jetbrains.com/help/idea/2020.1/tuning-the-ide.html#config-directory)及以上，工具的配置文件应位于：
 
 {{< tabs Windows Linux  MacOS >}}
 
@@ -54,25 +53,25 @@ For versions [2020.1](https://www.jetbrains.com/help/idea/2020.1/tuning-the-ide.
 
 {{< /tabs >}}
 
-> The configuration file location is different for version 2019.3 or prior. See [here](https://www.jetbrains.com/help/idea/2019.3/tuning-the-ide.html#config-directory) for more details.
+> 对于2019.3或更早版本，配置文件位置不同。请参见[此处](https://www.jetbrains.com/help/idea/2019.3/tuning-the-ide.html#config-directory)了解更多详情。
 
-Change the version of IntelliJ in the path if needed.
+如有需要，请更改路径中的IntelliJ版本。
 
-Create or edit the file in `<CONFIG PATH>/tools/External\ Tools.xml` (change IntelliJ version in path if needed). The `<CONFIG PATH>` is OS dependent as seen above.
+在`<CONFIG PATH>/tools/External\ Tools.xml`中创建或编辑文件（如有需要更改路径中的IntelliJ版本）。`<CONFIG PATH>`是操作系统相关的，如上所示。
 
-Add a new `<tool></tool>` entry:
+添加一个新的`<tool></tool>`条目：
 
 ```xml
 <toolSet name="External Tools">
   ...
-  <!-- 1. Each tool has its own app-id, so create one per application to be debugged -->
+  <!-- 1. 每个工具都有自己的app-id，因此为每个要调试的应用程序创建一个 -->
   <tool name="dapr for DemoService in examples" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
     <exec>
-      <!-- 2. For Linux or MacOS use: /usr/local/bin/dapr -->
+      <!-- 2. 对于Linux或MacOS使用：/usr/local/bin/dapr -->
       <option name="COMMAND" value="C:\dapr\dapr.exe" />
-      <!-- 3. Choose app, http and grpc ports that do not conflict with other daprd command entries (placement address should not change). -->
+      <!-- 3. 选择不与其他daprd命令条目冲突的应用程序、http和grpc端口（placement地址不应更改）。 -->
       <option name="PARAMETERS" value="run -app-id demoservice -app-port 3000 -dapr-http-port 3005 -dapr-grpc-port 52000" />
-      <!-- 4. Use the folder where the `components` folder is located -->
+      <!-- 4. 使用`components`文件夹所在的文件夹 -->
       <option name="WORKING_DIRECTORY" value="C:/Code/dapr/java-sdk/examples" />
     </exec>
   </tool>
@@ -80,30 +79,30 @@ Add a new `<tool></tool>` entry:
 </toolSet>
 ```
 
-Optionally, you may also create a new entry for a sidecar tool that can be reused across many projects:
+可选地，您还可以为可以在多个项目中重用的sidecar工具创建一个新条目：
 
 ```xml
 <toolSet name="External Tools">
   ...
-  <!-- 1. Reusable entry for apps with app port. -->
+  <!-- 1. 可重用的应用程序端口条目。 -->
   <tool name="dapr with app-port" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
     <exec>
-      <!-- 2. For Linux or MacOS use: /usr/local/bin/dapr -->
+      <!-- 2. 对于Linux或MacOS使用：/usr/local/bin/dapr -->
       <option name="COMMAND" value="c:\dapr\dapr.exe" />
-      <!-- 3. Prompts user 4 times (in order): app id, app port, Dapr's http port, Dapr's grpc port. -->
+      <!-- 3. 提示用户4次（按顺序）：应用程序id、应用程序端口、Dapr的http端口、Dapr的grpc端口。 -->
       <option name="PARAMETERS" value="run --app-id $Prompt$ --app-port $Prompt$ --dapr-http-port $Prompt$ --dapr-grpc-port $Prompt$" />
-      <!-- 4. Use the folder where the `components` folder is located -->
+      <!-- 4. 使用`components`文件夹所在的文件夹 -->
       <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
     </exec>
   </tool>
-  <!-- 1. Reusable entry for apps without app port. -->
+  <!-- 1. 无应用程序端口的可重用条目。 -->
   <tool name="dapr without app-port" description="Dapr sidecar" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
     <exec>
-      <!-- 2. For Linux or MacOS use: /usr/local/bin/dapr -->
+      <!-- 2. 对于Linux或MacOS使用：/usr/local/bin/dapr -->
       <option name="COMMAND" value="c:\dapr\dapr.exe" />
-      <!-- 3. Prompts user 3 times (in order): app id, Dapr's http port, Dapr's grpc port. -->
+      <!-- 3. 提示用户3次（按顺序）：应用程序id、Dapr的http端口、Dapr的grpc端口。 -->
       <option name="PARAMETERS" value="run --app-id $Prompt$ --dapr-http-port $Prompt$ --dapr-grpc-port $Prompt$" />
-      <!-- 4. Use the folder where the `components` folder is located -->
+      <!-- 4. 使用`components`文件夹所在的文件夹 -->
       <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
     </exec>
   </tool>
@@ -111,43 +110,43 @@ Optionally, you may also create a new entry for a sidecar tool that can be reuse
 </toolSet>
 ```
 
-## Create or edit run configuration
+## 创建或编辑运行配置
 
-Now, create or edit the run configuration for the application to be debugged. It can be found in the menu next to the `main()` function.
+现在，为要调试的应用程序创建或编辑运行配置。它可以在`main()`函数旁边的菜单中找到。
 
-![Edit run configuration menu](/images/intellij_debug_menu.png)
+![编辑运行配置菜单](/images/intellij_debug_menu.png)
 
-Now, add the program arguments and environment variables. These need to match the ports defined in the entry in 'External Tool' above.
+现在，添加程序参数和环境变量。这些需要与上面“外部工具”条目中定义的端口匹配。
 
-* Command line arguments for this example: `-p 3000`
-* Environment variables for this example: `DAPR_HTTP_PORT=3005;DAPR_GRPC_PORT=52000`
+* 此示例的命令行参数：`-p 3000`
+* 此示例的环境变量：`DAPR_HTTP_PORT=3005;DAPR_GRPC_PORT=52000`
 
-![Edit run configuration](/images/intellij_edit_run_configuration.png)
+![编辑运行配置](/images/intellij_edit_run_configuration.png)
 
-## Start debugging
+## 开始调试
 
-Once the one-time config above is done, there are two steps required to debug a Java application with Dapr in IntelliJ:
+一旦完成上述一次性配置，调试IntelliJ中的Java应用程序与Dapr需要两个步骤：
 
-1. Start `dapr` via `Tools` -> `External Tool` in IntelliJ.
+1. 通过IntelliJ中的`工具` -> `外部工具`启动`dapr`。
 
-![Run dapr as 'External Tool'](/images/intellij_start_dapr.png)
+![将dapr作为“外部工具”运行](/images/intellij_start_dapr.png)
 
-2. Start your application in debug mode.
+2. 以调试模式启动您的应用程序。
 
-![Start application in debug mode](/images/intellij_debug_app.png)
+![以调试模式启动应用程序](/images/intellij_debug_app.png)
 
-## Wrapping up
+## 总结
 
-After debugging, make sure you stop both `dapr` and your app in IntelliJ.
+调试后，请确保在IntelliJ中停止`dapr`和您的应用程序。
 
->Note: Since you launched the service(s) using the **dapr** ***run*** CLI command, the **dapr** ***list*** command will show runs from IntelliJ in the list of apps that are currently running with Dapr.
+>注意：由于您使用**dapr** ***run*** CLI命令启动了服务，**dapr** ***list***命令将在当前运行的Dapr应用程序列表中显示来自IntelliJ的运行。
 
-Happy debugging!
+祝调试愉快！
 
-## Related links
+## 相关链接
 
 <!-- IGNORE_LINKS -->
 
-- [Change](https://intellij-support.jetbrains.com/hc/en-us/articles/206544519-Directories-used-by-the-IDE-to-store-settings-caches-plugins-and-logs) in IntelliJ configuration directory location
+- [更改](https://intellij-support.jetbrains.com/hc/en-us/articles/206544519-Directories-used-by-the-IDE-to-store-settings-caches-plugins-and-logs) IntelliJ配置目录位置
 
 <!-- END_IGNORE -->

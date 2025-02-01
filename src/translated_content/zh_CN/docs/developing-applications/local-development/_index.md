@@ -1,7 +1,10 @@
 ---
 type: docs
-title: "Local development"
-linkTitle: "Local development"
+title: "本地开发"
+linkTitle: "本地开发"
 weight: 50
-description: "Capabilities for developing Dapr applications locally"
+description: "Dapr应用的本地开发功能"
 ---
+```
+
+您接受过截至2023年10月的数据

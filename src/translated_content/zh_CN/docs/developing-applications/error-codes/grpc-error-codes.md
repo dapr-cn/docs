@@ -1,38 +1,37 @@
 ---
 type: docs
-title: Handling gRPC error codes
+title: 处理 gRPC 错误代码
 linkTitle: "gRPC"
 weight: 40
-description: "Information on Dapr gRPC errors and how to handle them"
+description: "关于 Dapr gRPC 错误及其处理方法的信息"
 ---
 
-Initially, errors followed the [Standard gRPC error model](https://grpc.io/docs/guides/error/#standard-error-model). However, to provide more detailed and informative error messages, an enhanced error model has been defined which aligns with the gRPC [Richer error model](https://grpc.io/docs/guides/error/#richer-error-model). 
+最初，错误是按照 [标准 gRPC 错误模型](https://grpc.io/docs/guides/error/#standard-error-model) 进行处理的。然而，为了提供更详细且信息丰富的错误消息，定义了一个增强的错误模型，与 gRPC 的 [更丰富的错误模型](https://grpc.io/docs/guides/error/#richer-error-model) 保持一致。
 
-{{% alert title="Note" color="primary" %}}
-Not all Dapr errors have been converted to the richer gRPC error model.
+{{% alert title="注意" color="primary" %}}
+并不是所有的 Dapr 错误都已转换为更丰富的 gRPC 错误模型。
 {{% /alert %}}
 
-## Standard gRPC Error Model
+## 标准 gRPC 错误模型
 
-The [Standard gRPC error model](https://grpc.io/docs/guides/error/#standard-error-model) is an approach to error reporting in gRPC. Each error response includes an error code and an error message. The error codes are standardized and reflect common error conditions. 
+[标准 gRPC 错误模型](https://grpc.io/docs/guides/error/#standard-error-model) 是 gRPC 中的一种错误报告方法。每个错误响应都包含一个错误代码和一条错误消息。错误代码是标准化的，反映了常见的错误情况。
 
-**Example of a Standard gRPC Error Response:**
+**标准 gRPC 错误响应示例：**
 ```
 ERROR:
   Code: InvalidArgument
-  Message: input key/keyPrefix 'bad||keyname' can't contain '||'
+  Message: 输入键/键前缀 'bad||keyname' 不能包含 '||'
 ```
 
-## Richer gRPC Error Model
+## 更丰富的 gRPC 错误模型
 
-The [Richer gRPC error model](https://grpc.io/docs/guides/error/#richer-error-model) extends the standard error model by providing additional context and details about the error. This model includes the standard error `code` and `message`, along with a `details` section that can contain various types of information, such as `ErrorInfo`, `ResourceInfo`, and `BadRequest` details.
+[更丰富的 gRPC 错误模型](https://grpc.io/docs/guides/error/#richer-error-model) 通过提供关于错误的额外上下文和详细信息来扩展标准错误模型。此模型包括标准错误 `code` 和 `message`，以及一个 `details` 部分，可以包含各种类型的信息，如 `ErrorInfo`、`ResourceInfo` 和 `BadRequest` 详细信息。
 
-
-**Example of a Richer gRPC Error Response:**
+**更丰富的 gRPC 错误响应示例：**
 ```
 ERROR:
   Code: InvalidArgument
-  Message: input key/keyPrefix 'bad||keyname' can't contain '||'
+  Message: 输入键/键前缀 'bad||keyname' 不能包含 '||'
   Details:
   1)	{
     	  "@type": "type.googleapis.com/google.rpc.ErrorInfo",
@@ -49,19 +48,19 @@ ERROR:
     	  "fieldViolations": [
     	    {
     	      "field": "bad||keyname",
-    	      "description": "input key/keyPrefix 'bad||keyname' can't contain '||'"
+    	      "description": "输入键/键前缀 'bad||keyname' 不能包含 '||'"
     	    }
     	  ]
     	}
 ```
 
-For HTTP clients, Dapr translates the gRPC error model to a similar structure in JSON format. The response includes an `errorCode`, a `message`, and a `details` array that mirrors the structure found in the richer gRPC model.
+对于 HTTP 客户端，Dapr 会将 gRPC 错误模型转换为类似的 JSON 格式结构。响应包括一个 `errorCode`、一个 `message` 和一个 `details` 数组，反映了更丰富的 gRPC 模型中的结构。
 
-**Example of an HTTP error response:**
+**HTTP 错误响应示例：**
 ```json
 {
     "errorCode": "ERR_MALFORMED_REQUEST",
-    "message": "api error: code = InvalidArgument desc = input key/keyPrefix 'bad||keyname' can't contain '||'",
+    "message": "api error: code = InvalidArgument desc = 输入键/键前缀 'bad||keyname' 不能包含 '||'",
     "details": [
         {
             "@type": "type.googleapis.com/google.rpc.ErrorInfo",
@@ -81,7 +80,7 @@ For HTTP clients, Dapr translates the gRPC error model to a similar structure in
             "field_violations": [
                 {
                     "field": "bad||keyname",
-                    "description": "api error: code = InvalidArgument desc = input key/keyPrefix 'bad||keyname' can't contain '||'"
+                    "description": "api error: code = InvalidArgument desc = 输入键/键前缀 'bad||keyname' 不能包含 '||'"
                 }
             ]
         }
@@ -89,9 +88,9 @@ For HTTP clients, Dapr translates the gRPC error model to a similar structure in
 }
 ```
 
-You can find the specification of all the possible status details [here](https://github.com/googleapis/googleapis/blob/master/google/rpc/error_details.proto).
+您可以在[这里](https://github.com/googleapis/googleapis/blob/master/google/rpc/error_details.proto)找到所有可能状态详细信息的规范。
 
-## Related Links
+## 相关链接
 
-- [Authoring error codes](https://github.com/dapr/dapr/tree/master/pkg/api/errors)
-- [Using error codes in the Go SDK](https://docs.dapr.io/developing-applications/sdks/go/go-client/#error-handling)
+- [编写错误代码](https://github.com/dapr/dapr/tree/master/pkg/api/errors)
+- [在 Go SDK 中使用错误代码](https://docs.dapr.io/developing-applications/sdks/go/go-client/#error-handling)

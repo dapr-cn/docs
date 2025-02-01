@@ -1,7 +1,10 @@
 ---
 type: docs
-title: "Visual Studio Code integration with Dapr"
+title: "Dapr 与 Visual Studio Code 的集成"
 linkTitle: "Visual Studio Code"
 weight: 1000
-description: "How to develop and run Dapr applications in Visual Studio Code"
+description: "在 Visual Studio Code 中如何高效地开发和运行 Dapr 应用程序"
 ---
+```
+
+您已接受截至2023年10月的数据

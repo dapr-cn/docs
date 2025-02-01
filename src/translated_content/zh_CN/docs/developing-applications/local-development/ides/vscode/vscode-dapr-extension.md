@@ -1,68 +1,68 @@
 ---
 type: docs
-title: "Dapr Visual Studio Code extension overview"
-linkTitle: "Dapr extension"
+title: "Dapr Visual Studio Code 扩展概述"
+linkTitle: "Dapr 扩展"
 weight: 10000
-description:  "How to develop and run Dapr applications with the Dapr extension"
+description:  "如何使用 Dapr 扩展开发和运行 Dapr 应用程序"
 ---
 
+Dapr 提供了一个*预览版*的 [Dapr Visual Studio Code 扩展](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr)，专为本地开发设计。该扩展为用户提供多种功能，以便更好地管理 Dapr 应用程序，并调试支持的 Dapr 语言的应用程序，包括 .NET、Go、PHP、Python 和 Java。
 
-Dapr offers a *preview* [Dapr Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) for local development which enables users a variety of features related to better managing their Dapr applications and debugging of your Dapr applications for all supported Dapr languages which are .NET, Go, PHP, Python and Java.
+<a href="vscode:extension/ms-azuretools.vscode-dapr" class="btn btn-primary" role="button">在 VSCode 中打开</a>
 
-<a href="vscode:extension/ms-azuretools.vscode-dapr" class="btn btn-primary" role="button">Open in VSCode</a>
+## 功能
 
-## Features
+### 脚手架 Dapr 调试任务
 
-### Scaffold Dapr debugging tasks
+Dapr 扩展利用 Visual Studio Code 的[内置调试功能](https://code.visualstudio.com/Docs/editor/debugging)帮助您调试应用程序。
 
-The Dapr extension helps you debug your applications with Dapr using Visual Studio Code's [built-in debugging capability](https://code.visualstudio.com/Docs/editor/debugging).
+通过 `Dapr: Scaffold Dapr Tasks` [命令面板](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)操作，您可以更新现有的 `task.json` 和 `launch.json` 文件，以便在开始调试时启动和配置 Dapr sidecar。
 
-Using the `Dapr: Scaffold Dapr Tasks` [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) operation, you can update your existing `task.json` and `launch.json` files to launch and configure the Dapr sidecar when you begin debugging.
+1. 确保为您的应用程序设置了启动配置。([了解更多](https://code.visualstudio.com/Docs/editor/debugging))
+2. 使用 `Ctrl+Shift+P` 打开命令面板
+3. 选择 `Dapr: Scaffold Dapr Tasks`
+4. 使用 `F5` 或通过运行视图运行您的应用程序和 Dapr sidecar。
 
-1. Make sure you have a launch configuration set for your app. ([Learn more](https://code.visualstudio.com/Docs/editor/debugging))
-2. Open the Command Palette with `Ctrl+Shift+P`
-3. Select `Dapr: Scaffold Dapr Tasks`
-4. Run your app and the Dapr sidecar with `F5` or via the Run view.
+### 脚手架 Dapr 组件
 
-### Scaffold Dapr components
+在将 Dapr 添加到应用程序时，您可能希望创建一个独立的组件目录，以区别于 `dapr init` 初始化的默认组件。
 
-When adding Dapr to your application, you may want to have a dedicated components directory, separate from the default components initialized as part of `dapr init`.
+要使用默认的 `statestore`、`pubsub` 和 `zipkin` 组件创建一个专用的组件文件夹，请使用 `Dapr: Scaffold Dapr Components` [命令面板](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)操作。
 
-To create a dedicated components folder with the default `statestore`, `pubsub`, and `zipkin` components, use the `Dapr: Scaffold Dapr Components` [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) operation.
+1. 在 Visual Studio Code 中打开您的应用程序目录
+2. 使用 `Ctrl+Shift+P` 打开命令面板
+3. 选择 `Dapr: Scaffold Dapr Components`
+4. 使用 `dapr run --resources-path ./components -- ...` 运行您的应用程序
 
-1. Open your application directory in Visual Studio Code
-2. Open the Command Palette with `Ctrl+Shift+P`
-3. Select `Dapr: Scaffold Dapr Components`
-4. Run your application with `dapr run --resources-path ./components -- ...`
+### 查看正在运行的 Dapr 应用程序
 
-### View running Dapr applications
+应用程序视图显示在您的机器上本地运行的 Dapr 应用程序。
 
-The Applications view shows Dapr applications running locally on your machine.
+<br /><img src="/images/vscode-extension-view.png" alt="Dapr VSCode 扩展视图运行应用程序选项的截图" width="800">
 
-<br /><img src="/images/vscode-extension-view.png" alt="Screenshot of the Dapr VSCode extension view running applications option" width="800">
+### 调用 Dapr 应用程序
 
-### Invoke Dapr applications
+在应用程序视图中，用户可以右键单击并通过 GET 或 POST 方法调用 Dapr 应用程序，并可选择指定一个负载。
 
-Within the Applications view, users can right-click and invoke Dapr apps via GET or POST methods, optionally specifying a payload.
+<br /><img src="/images/vscode-extension-invoke.png" alt="Dapr VSCode 扩展调用选项的截图" width="800">
 
-<br /><img src="/images/vscode-extension-invoke.png" alt="Screenshot of the Dapr VSCode extension invoke option" width="800">
+### 向 Dapr 应用程序发布事件
 
-### Publish events to Dapr applications
+在应用程序视图中，用户可以右键单击并向正在运行的 Dapr 应用程序发布消息，指定主题和负载。
 
-Within the Applications view, users can right-click and publish messages to a running Dapr application, specifying the topic and payload.
+用户还可以向所有正在运行的 Dapr 应用程序发布消息。
 
-Users can also publish messages to all running applications.
+<br /><img src="/images/vscode-extension-publish.png" alt="Dapr VSCode 扩展发布选项的截图" width="800">
 
-  <br /><img src="/images/vscode-extension-publish.png" alt="Screenshot of the Dapr VSCode extension publish option" width="800">
-## Additional resources
+## 其他资源
 
-### Debugging multiple Dapr applications at the same time
+### 同时调试多个 Dapr 应用程序
 
-Using the VS Code extension, you can debug multiple Dapr applications at the same time with [Multi-target debugging](https://code.visualstudio.com/docs/editor/debugging#_multitarget-debugging).
+使用 VS Code 扩展，您可以使用[多目标调试](https://code.visualstudio.com/docs/editor/debugging#_multitarget-debugging)同时调试多个 Dapr 应用程序。
 
-### Community call demo
+### 社区电话演示
 
-Watch this [video](https://www.youtube.com/watch?v=OtbYCBt9C34&t=85) on how to use the Dapr VS Code extension:
+观看此[视频](https://www.youtube.com/watch?v=OtbYCBt9C34&t=85)，了解如何使用 Dapr VS Code 扩展：
 
 <div class="embed-responsive embed-responsive-16by9">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OtbYCBt9C34?start=85" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

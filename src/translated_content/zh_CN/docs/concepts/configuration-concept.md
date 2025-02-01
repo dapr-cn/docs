@@ -1,18 +1,18 @@
 ---
 type: docs
-title: "Application and control plane configuration"
-linkTitle: "Configuration"
+title: "应用和控制平面配置"
+linkTitle: "配置"
 weight: 400
-description: "Change the behavior of Dapr application sidecars or globally on Dapr control plane system services"
+description: "调整 Dapr 应用程序的 sidecar 或 Dapr 控制平面系统服务的全局行为"
 ---
 
-With Dapr configurations, you use settings and policies to change:
-- The behavior of individual Dapr applications
-- The global behavior of the Dapr control plane system services
+通过 Dapr 配置，您可以通过设置和策略来更改：
+- 单个 Dapr 应用程序的行为
+- Dapr 控制平面系统服务的全局行为
 
-For example, set a sampling rate policy on the application sidecar configuration to indicate which methods can be called from another application. If you set a policy on the Dapr control plane configuration, you can change the certificate renewal period for all certificates that are deployed to application sidecar instances.
+例如，您可以在应用程序的 sidecar 配置中设置采样率策略，以指定哪些方法可以被其他应用程序调用。如果您在 Dapr 控制平面配置中设置策略，您可以调整部署到应用程序 sidecar 实例的所有证书的更新周期。
 
-Configurations are defined and deployed as a YAML file. In the following application configuration example, a tracing endpoint is set for where to send the metrics information, capturing all the sample traces.
+配置以 YAML 文件的形式定义并部署。以下是一个应用程序配置示例，其中设置了一个跟踪端点，用于发送指标信息，并捕获所有的跟踪样本。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -27,11 +27,11 @@ spec:
       endpointAddress: "http://localhost:9411/api/v2/spans"
 ```
 
-The above YAML configures tracing for metrics recording. You can load it in local self-hosted mode by either:
-- Editing the default configuration file called `config.yaml` file in your `.dapr` directory, or 
-- Applying it to your Kubernetes cluster with `kubectl/helm`.
+上述 YAML 配置用于记录指标的跟踪。您可以通过以下方式在本地自托管模式中加载它：
+- 编辑 `.dapr` 目录中的默认配置文件 `config.yaml`，或
+- 使用 `kubectl/helm` 将其应用到您的 Kubernetes 集群。
 
-The following example shows the Dapr control plane configuration called `daprsystem` in the `dapr-system` namespace.
+以下示例展示了在 `dapr-system` 命名空间中名为 `daprsystem` 的 Dapr 控制平面配置。
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -46,14 +46,16 @@ spec:
     allowedClockSkew: "15m"
 ```
 
-By default, there is a single configuration file called `daprsystem` installed with the Dapr control plane system services. This configuration file applies global control plane settings and is set up when Dapr is deployed to Kubernetes.
+默认情况下，安装 Dapr 控制平面系统服务时会有一个名为 `daprsystem` 的单一配置文件。此配置文件应用全局控制平面设置，并在 Dapr 部署到 Kubernetes 时设置。
 
-[Learn more about configuration options.]({{< ref "configuration-overview.md" >}})
+[了解更多关于配置选项的信息。]({{< ref "configuration-overview.md" >}})
 
-{{% alert title="Important" color="warning" %}}
-Dapr application and control plane configurations should not be confused with the [configuration building block API]({{< ref configuration-api-overview >}}), which enables applications to retrieve key/value data from configuration store components. 
+{{% alert title="重要" color="warning" %}}
+Dapr 应用程序和控制平面配置不应与 [配置构建块 API]({{< ref configuration-api-overview >}}) 混淆，后者使应用程序能够从配置存储组件中检索键/值数据。
 {{% /alert %}}
 
-## Next steps
+## 下一步
 
-{{< button text="Learn more about configuration" page="configuration-overview" >}}
+{{< button text="了解更多关于配置的信息" page="configuration-overview" >}}
+```
+This translation aims to maintain the original intent while improving clarity and fluency in Chinese. It addresses the issues identified in the direct translation by restructuring sentences and using more natural expressio

@@ -1,37 +1,37 @@
 ---
 type: docs
-title: "Errors overview"
-linkTitle: "Overview"
+title: "错误概述"
+linkTitle: "概述"
 weight: 10
-description: "Overview of Dapr errors"
+description: "Dapr 错误概述"
 ---
 
-An error code is a numeric or alphamueric code that indicates the nature of an error and, when possible, why it occured. 
+错误代码是用于指示错误性质的数字或字母数字代码，并在可能的情况下，说明其发生的原因。
 
-Dapr error codes are standardized strings for over 80+ common errors across HTTP and gRPC requests when using the Dapr APIs. These codes are both:
-- Returned in the JSON response body of the request.
-- When enabled, logged in debug-level logs in the runtime.
-  - If you're running in Kubernetes, error codes are logged in the sidecar.
-  - If you're running in self-hosted, you can enable and run debug logs.
+Dapr 错误代码是标准化的字符串，适用于 Dapr API 中 HTTP 和 gRPC 请求的 80 多种常见错误。这些代码会：
+- 在请求的 JSON 响应体中返回。
+- 启用后，会在运行时的调试级别日志中记录。
+  - 如果您在 Kubernetes 中运行，错误代码会记录在 sidecar 中。
+  - 如果您在自托管中运行，可以启用并查看调试日志。
 
-## Error format
+## 错误格式
 
-Dapr error codes consist of a prefix, a category, and shorthand of the error itself. For example:
+Dapr 错误代码由前缀、类别和错误本身的简写组成。例如：
 
-| Prefix | Category | Error shorthand |  
+| 前缀 | 类别 | 错误简写 |  
 | ------ | -------- | --------------- |
 | ERR_ | PUBSUB_ | NOT_FOUND |
 
-Some of the most common errors returned include:
+一些最常见的返回错误包括：
 
 - ERR_ACTOR_TIMER_CREATE
 - ERR_PURGE_WORKFLOW
 - ERR_STATE_STORE_NOT_FOUND
 - ERR_HEALTH_NOT_READY
 
-> **Note:** [See a full list of error codes in Dapr.]({{< ref error-codes-reference.md >}})
+> **注意：** [查看 Dapr 中错误代码的完整列表。]({{< ref error-codes-reference.md >}})
 
-An error returned for a state store not found might look like the following:
+对于未找到的状态存储返回的错误可能如下所示：
 
 ```json
 {
@@ -41,22 +41,22 @@ An error returned for a state store not found might look like the following:
 }
 ```
 
-The returned error includes:
-- The error code: `ERR_STATE_STORE_NOT_FOUND`
-- The error message describing the issue: `state store <name> is not found`
-- The app ID in which the error is occuring: `nodeapp`
-- The reason for the error: `DAPR_STATE_NOT_FOUND`
+返回的错误包括：
+- 错误代码：`ERR_STATE_STORE_NOT_FOUND`
+- 描述问题的错误消息：`state store <name> is not found`
+- 发生错误的应用程序 ID：`nodeapp`
+- 错误的原因：`DAPR_STATE_NOT_FOUND`
 
-## Dapr error code metrics
+## Dapr 错误代码指标
 
-Metrics help you see when exactly errors are occuring from within the runtime. Error code metrics are collected using the `error_code_total` endpoint. This endpoint is disabled by default. You can [enable it using the `recordErrorCodes` field in your configuration file]({{< ref "metrics-overview.md#configuring-metrics-for-error-codes" >}}). 
+指标帮助您查看错误在运行时发生的具体时间。错误代码指标通过 `error_code_total` 端点收集。此端点默认情况下是禁用的。您可以[通过配置文件中的 `recordErrorCodes` 字段启用它]({{< ref "metrics-overview.md#configuring-metrics-for-error-codes" >}})。
 
-## Demo
+## 演示
 
-Watch a demo presented during [Diagrid's Dapr v1.15 celebration](https://www.diagrid.io/videos/dapr-1-15-deep-dive) to see how to enable error code metrics and handle error codes returned in the runtime.
+观看 [Diagrid 的 Dapr v1.15 庆祝活动](https://www.diagrid.io/videos/dapr-1-15-deep-dive) 中的演示，了解如何启用错误代码指标以及处理运行时返回的错误代码。
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NTnwoDhHIcQ?si=I2uCB_TINGxlu-9v&amp;start=2812" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## Next step
+## 下一步
 
-{{< button text="See a list of all Dapr error codes" page="error-codes-reference" >}}
+{{< button text="查看所有 Dapr 错误代码的列表" page="error-codes-reference" >}}

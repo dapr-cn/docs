@@ -1,102 +1,101 @@
 ---
 type: docs
-title: "Conceptual article template"
-linkTitle: "Conceptual template"
+title: "概念文章模板"
+linkTitle: "概念模板"
 weight: 10
-description: Suggested template and guidance for creating a concept article
+description: 创建概念文章的建议模板和指导
 ---
 
+## 贡献新的概念或概述文章
 
-## Contributing a new conceptual or overview article
+概念（或概述）文章旨在回答以下问题：
 
-Conceptual (or overview) articles answer the questions:
+- 为什么这个功能对你很重要？
+- 它能帮助你解决哪些问题？
 
-- Why should you care about this feature?
-- What problems does it help you solve?
+尽管组件、API 或 SDK 规范可以帮助读者理解如何使用这些功能，概念文章则提供了更深入的背景和上下文。请链接到规范文章，但尽量避免简单重复规范内容。
 
-While a component, API, or SDK spec may help readers understand how to use or work with these features, a conceptual article provides more depth and context. Link off to the spec article, but try not to simply repeat the spec.
+在为你的概念文章命名时，确保其名称、参数和术语与规范保持一致。如有必要，请同时更新两者。
 
-When naming your conceptual article, make sure it is consistent with the spec in terms of names, parameters, and terminology. Make sure you update both as needed.
-
-{{% alert title="Note" color="primary" %}}
-This template is only a suggestion. Feel free to change based on your document's purpose.
+{{% alert title="注意" color="primary" %}}
+此模板仅为建议。可以根据文档的目的进行调整。
 {{% /alert %}}
 
-Learn more about [contributing to the Dapr docs]({{< ref contributing-docs.md >}}), like [front-matter]({{< ref "contributing-docs.md#front-matter" >}}) and [shortcodes]({{< ref "contributing-docs.md#shortcodes" >}}).
+了解更多关于[为 Dapr 文档做贡献]({{< ref contributing-docs.md >}})的信息，例如[前置内容]({{< ref "contributing-docs.md#front-matter" >}})和[短代码]({{< ref "contributing-docs.md#shortcodes" >}})。
 
-### Template
+### 模板
 
 ```md
 ---
-type: #Required; docs
-title: #Required; Brief, clear title
-linkTitle: #Required; Brief title
-weight: #Required; Use the correct weight based on hierarchy
-description: #Required; One-sentence description of what to expect in the article
+type: #必填; docs
+title: #必填; 简洁明了的标题
+linkTitle: #必填; 简短标题
+weight: #必填; 根据层级使用正确的权重
+description: #必填; 对文章内容的简短描述
 ---
 
 <!--
-Remove all the comments in this template before opening a PR.
+在打开 PR 之前，删除此模板中的所有注释。
 -->
 
 <!-- 
-H1: The title in the Hugo front-matter serves as the article's markdown H1. 
+H1: Hugo 前置内容中的标题作为文章的 markdown H1。
 -->
 
-<!-- Introductory paragraph  
-Required. Brief intro that describes the concepts that the article will cover. Link off to the appropriate reference, specs, or how-to guides to provide context. -->
+<!-- 简介段落  
+必填。简要介绍文章将涵盖的概念。链接到适当的参考、规范或操作指南以提供上下文。 -->
 
 <!-- 
-Include a diagram or image, if possible. 
+如果可能，包含图表或图片。
 -->
 
-## <Section 1 H2>
+## <章节 1 H2>
 
 <!-- 
-Add your content here.  
+在此添加你的内容。
 -->
 
-## <Section 2 H2>
+## <章节 2 H2>
 
 <!-- 
-Each H2 step should start with a noun/descriptive word.
+每个 H2 步骤应以名词/描述性词语开头。
 -->
 
-## <Section 3 H2>
+## <章节 3 H2>
 
 <!--
-Add your content here.
+在此添加你的内容。
 -->
 
 <!--
-Include diagrams or images throughout, where applicable.
+在适用的地方，包含图表或图片。
 -->
 
-## Try out <concept>
+## 体验 <概念>
 
 <!-- 
-If applicable, include a section with links to the related quickstart, how-to guides, or tutorials. --> 
+如果适用，包含一个部分，链接到相关的快速开始、操作指南或教程。
+--> 
 
-### Quickstarts and tutorials
+### 快速开始和教程
 
-Want to put the Dapr <topic> API to the test? Walk through the following quickstart and tutorials to see <topic> in action:
+想要体验 Dapr <主题> API？通过以下快速开始和教程来了解 <主题> 的实际应用：
 
-| Quickstart/tutorial | Description |
+| 快速开始/教程 | 描述 |
 | ------------------- | ----------- |
-| [<topic> quickstart](link) | Description of the quickstart. |
-| [<topic> tutorial](link) | Description of the tutorial. |
+| [<主题> 快速开始](link) | 快速开始的描述。 |
+| [<主题> 教程](link) | 教程的描述。 |
 
-### Start using <topic> directly in your app
+### 在你的应用中直接使用 <主题>
 
-Want to skip the quickstarts? Not a problem. You can try out the <topic> building block directly in your application. After [Dapr is installed](link), you can begin using the <topic> API, starting with [the <topic> how-to guide](link).
-
+想跳过快速开始？没问题。你可以在你的应用中直接使用 <主题> 构建块。在[Dapr 安装完成](link)后，你可以开始使用 <主题> API，从[<主题> 操作指南](link)开始。
 
 -->
 
-## Next steps
+## 下一步
 
 <!--
-Link to related pages and examples. For example, the related API spec, related building blocks, etc.
+链接到相关页面和示例。例如，相关的 API 规范，相关的构建块等。
 -->
 
-```
+`

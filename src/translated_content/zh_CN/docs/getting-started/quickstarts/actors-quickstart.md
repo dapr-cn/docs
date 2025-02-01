@@ -1,13 +1,12 @@
-
 ---
 type: docs
-title: "快速入门：actors"
-linkTitle: "actors"
+title: "快速入门：Actors"
+linkTitle: "Actors"
 weight: 76
-description: "开始使用 Dapr 的 actors 构建模块"
+description: "开始使用 Dapr 的 Actors 构建模块"
 ---
 
-我们来了解一下 Dapr 的 [actors 构建模块]({{< ref actors >}})。在这个快速入门中，您将运行一个智能设备微服务和一个简单的控制台客户端，来演示 Dapr actors 的有状态对象模式。
+我们来了解一下 Dapr 的 [Actors 构建模块]({{< ref actors >}})。在这个快速入门中，您将运行一个智能设备微服务和一个简单的控制台客户端，以演示 Dapr Actors 中的有状态对象模式。
 
 目前，您可以通过 .NET SDK 体验这个 actors 快速入门。
 
@@ -16,7 +15,7 @@ description: "开始使用 Dapr 的 actors 构建模块"
  <!-- .NET -->
 {{% codetab %}}
 
-以下是 .NET actors 快速入门的概述：
+以下是 .NET actors 快速入门的简要概述：
 
 1. 使用 `SmartDevice.Service` 微服务，您将托管：
    - 两个 `SmokeDetectorActor` 烟雾报警对象
@@ -40,7 +39,7 @@ description: "开始使用 Dapr 的 actors 构建模块"
 
 ### 步骤 1：设置环境
 
-克隆 [快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/actors/csharp/sdk)。
+克隆 [Quickstarts 仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/actors/csharp/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
@@ -67,9 +66,9 @@ dapr run --app-id actorservice --app-port 5001 --dapr-http-port 3500 --resources
 == APP == info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
 == APP ==       Request starting HTTP/1.1 GET http://127.0.0.1:5001/healthz - -
 == APP == info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
-== APP ==       Executing endpoint 'Dapr actors 健康检查'
+== APP ==       Executing endpoint 'Dapr Actors Health Check'
 == APP == info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
-== APP ==       Executed endpoint 'Dapr actors 健康检查'
+== APP ==       Executed endpoint 'Dapr Actors Health Check'
 == APP == info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 == APP ==       Request finished HTTP/1.1 GET http://127.0.0.1:5001/healthz - - - 200 - text/plain 5.2599ms
 ```
@@ -204,7 +203,7 @@ dapr run --app-id actorclient -- dotnet run
             await proxySmartDevice.SoundAlarm();
         }
 
-        // 每 15 秒注册一个提醒以刷新和清除警报状态
+        // 注册一个提醒，每 15 秒刷新并清除警报状态
         await this.RegisterReminderAsync("AlarmRefreshReminder", null, TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15));
     }
     ```
@@ -227,10 +226,10 @@ dapr run --app-id actorclient -- dotnet run
    Console.WriteLine($"Device 2 state: {storedDeviceData2}");
    ```
 
-1. `ControllerActor` 还使用 `RegisterReminderAsync` 创建一个持久的提醒，以在 15 秒后调用 `ClearAlarm`。
+1. `ControllerActor` 还使用 `RegisterReminderAsync` 创建一个持久提醒，在 15 秒后调用 `ClearAlarm`。
 
    ```csharp
-   // 每 15 秒注册一个提醒以刷新和清除警报状态
+   // 注册一个提醒，每 15 秒刷新并清除警报状态
    await this.RegisterReminderAsync("AlarmRefreshReminder", null, TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15));
    ```
 
@@ -247,12 +246,12 @@ dapr run --app-id actorclient -- dotnet run
 
 ## 告诉我们您的想法！
 
-我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
+我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进的建议吗？
 
 加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238) 讨论。
 
 ## 下一步
 
-了解更多关于 [actor 构建模块]({{< ref actors >}})
+了解更多关于 [Actor 构建模块]({{< ref actors >}}) 的信息
 
 {{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}
