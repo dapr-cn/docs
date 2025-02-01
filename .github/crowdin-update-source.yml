@@ -2,7 +2,7 @@ name: Update source to crowdin
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "10 0 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -11,22 +11,9 @@ on:
 jobs:
   synchronize-with-crowdin:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        version_tag:
-          - v1.5
-          - v1.4
-          - v1.3
-          - v1.2
-          - v1.1
-          - v1.0
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          ref: ${{ matrix.version_tag }}/translate_site
       - name: crowdin action
         uses: crowdin/github-action@v1.19.0
         with:
@@ -35,7 +22,6 @@ jobs:
           upload_translations: false
           download_translations: false
           dryrun_action: false
-          crowdin_branch_name: ${{ matrix.version_tag }}_translate_site
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
