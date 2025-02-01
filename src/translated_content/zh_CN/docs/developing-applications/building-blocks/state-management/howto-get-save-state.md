@@ -892,6 +892,7 @@ dapr run --app-id orderprocessing --app-port 6001 --dapr-http-port 3601 --dapr-g
 ```
 
 {{% /codetab %}}
+{{% codetab %}}
 ```python
 # 依赖项
 import random
