@@ -1,95 +1,95 @@
+
 ---
 type: docs
-title: "Quickstart: Actors"
-linkTitle: "Actors"
+title: "快速入门：actors"
+linkTitle: "actors"
 weight: 76
-description: "Get started with Dapr's Actors building block"
+description: "开始使用 Dapr 的 actors 构建模块"
 ---
 
-Let's take a look at Dapr's [Actors building block]({{< ref actors >}}). In this Quickstart, you will run a smart device microservice and a simple console client to demonstrate the stateful object patterns in Dapr Actors.  
+我们来了解一下 Dapr 的 [actors 构建模块]({{< ref actors >}})。在这个快速入门中，您将运行一个智能设备微服务和一个简单的控制台客户端，来演示 Dapr actors 的有状态对象模式。
 
-Currently, you can experience this actors quickstart using the .NET SDK.
+目前，您可以通过 .NET SDK 体验这个 actors 快速入门。
 
 {{< tabs ".NET" >}}
 
  <!-- .NET -->
 {{% codetab %}}
 
-As a quick overview of the .NET actors quickstart:
+以下是 .NET actors 快速入门的概述：
 
-1. Using a `SmartDevice.Service` microservice, you host:
-   - Two `SmokeDetectorActor` smoke alarm objects
-   - A `ControllerActor` object that commands and controls the smart devices  
-2. Using a `SmartDevice.Client` console app, the client app interacts with each actor, or the controller, to perform actions in aggregate. 
-3. The `SmartDevice.Interfaces` contains the shared interfaces and data types used by both the service and client apps.
+1. 使用 `SmartDevice.Service` 微服务，您将托管：
+   - 两个 `SmokeDetectorActor` 烟雾报警对象
+   - 一个 `ControllerActor` 对象，用于指挥和控制智能设备
+2. 使用 `SmartDevice.Client` 控制台应用程序，客户端应用程序与每个 actor 或控制器交互，以执行聚合操作。
+3. `SmartDevice.Interfaces` 包含服务和客户端应用程序使用的共享接口和数据类型。
 
 <img src="/images/actors-quickstart/actors-quickstart.png" width=800 style="padding-bottom:15px;">
 
-### Pre-requisites
+### 先决条件
 
-For this example, you will need:
+对于这个示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
+- [Dapr CLI 和已初始化的环境](https://docs.dapr.io/getting-started)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
-- [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0), [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0) or [.NET 9](https://dotnet.microsoft.com/download/dotnet/9.0) installed
+- 安装 [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)、[.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0) 或 [.NET 9](https://dotnet.microsoft.com/download/dotnet/9.0)
 
-**NOTE:** .NET 6 is the minimally supported version of .NET for the Dapr .NET SDK packages in this release. Only .NET 8 and .NET 9
-will be supported in Dapr v1.16 and later releases.
+**注意：** .NET 6 是此版本中 Dapr .NET SDK 包的最低支持版本。只有 .NET 8 和 .NET 9 将在 Dapr v1.16 及更高版本中得到支持。
 
-### Step 1: Set up the environment
+### 步骤 1：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/actors/csharp/sdk).
+克隆 [快速入门仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/actors/csharp/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-### Step 2: Run the service app
+### 步骤 2：运行服务应用程序
 
-In a new terminal window, navigate to the `actors/csharp/sdk/service` directory and restore dependencies:
+在一个新的终端窗口中，导航到 `actors/csharp/sdk/service` 目录并恢复依赖项：
 
 ```bash
 cd actors/csharp/sdk/service
 dotnet build
 ```
 
-Run the `SmartDevice.Service`, which will start service itself and the Dapr sidecar:
+运行 `SmartDevice.Service`，这将启动服务本身和 Dapr 边车：
 
 ```bash
 dapr run --app-id actorservice --app-port 5001 --dapr-http-port 3500 --resources-path ../../../resources -- dotnet run --urls=http://localhost:5001/
 ```
 
-Expected output:
+预期输出：
 
 ```bash
 == APP == info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
 == APP ==       Request starting HTTP/1.1 GET http://127.0.0.1:5001/healthz - -
 == APP == info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
-== APP ==       Executing endpoint 'Dapr Actors Health Check'
+== APP ==       Executing endpoint 'Dapr actors 健康检查'
 == APP == info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
-== APP ==       Executed endpoint 'Dapr Actors Health Check'
+== APP ==       Executed endpoint 'Dapr actors 健康检查'
 == APP == info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 == APP ==       Request finished HTTP/1.1 GET http://127.0.0.1:5001/healthz - - - 200 - text/plain 5.2599ms
 ```
 
-### Step 3: Run the client app
+### 步骤 3：运行客户端应用程序
 
-In a new terminal instance, navigate to the `actors/csharp/sdk/client` directory and install the dependencies:
+在一个新的终端实例中，导航到 `actors/csharp/sdk/client` 目录并安装依赖项：
 
 ```bash
 cd ./actors/csharp/sdk/client
 dotnet build
 ```
 
-Run the `SmartDevice.Client` app:
+运行 `SmartDevice.Client` 应用程序：
 
 ```bash
 dapr run --app-id actorclient -- dotnet run
 ```
 
-Expected output:
+预期输出：
 
 ```bash
 == APP == Startup up...
@@ -111,25 +111,24 @@ Expected output:
 == APP == Device 2 state: Location: Second Floor, Status: Ready
 ```
 
-### (Optional) Step 4: View in Zipkin
+### （可选）步骤 4：在 Zipkin 中查看
 
-If you have Zipkin configured for Dapr locally on your machine, you can view the actor's interaction with the client in the Zipkin web UI (typically at `http://localhost:9411/zipkin/`).
+如果您在本地机器上为 Dapr 配置了 Zipkin，您可以在 Zipkin Web UI 中查看 actor 与客户端的交互（通常在 `http://localhost:9411/zipkin/`）。
 
 <img src="/images/actors-quickstart/actor-client-interaction-zipkin.png" width=800 style="padding-bottom:15px;">
 
+### 发生了什么？
 
-### What happened?
+当您运行客户端应用程序时，发生了一些事情：
 
-When you ran the client app, a few things happened:
+1. 两个 `SmokeDetectorActor` actors 在 [客户端应用程序中创建](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/client/Program.cs) 并使用对象状态初始化：
+   - `ActorProxy.Create<ISmartDevice>(actorId, actorType)`
+   - `proxySmartDevice.SetDataAsync(data)`
 
-1. Two `SmokeDetectorActor` actors were [created in the client application](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/client/Program.cs) and initialized with object state with:
-   - `ActorProxy.Create<ISmartDevice>(actorId, actorType)` 
-   - `proxySmartDevice.SetDataAsync(data)`  
-   
-   These objects are re-entrant and hold the state, as shown by `proxySmartDevice.GetDataAsync()`.
+   这些对象是可重入的并持有状态，如 `proxySmartDevice.GetDataAsync()` 所示。
 
    ```csharp
-   // Actor Ids and types
+   // Actor Ids 和类型
    var deviceId1 = "1";
    var deviceId2 = "2";
    var smokeDetectorActorType = "SmokeDetectorActor";
@@ -137,19 +136,19 @@ When you ran the client app, a few things happened:
    
    Console.WriteLine("Startup up...");
    
-   // An ActorId uniquely identifies the first actor instance for the first device
+   // ActorId 唯一标识第一个设备的第一个 actor 实例
    var deviceActorId1 = new ActorId(deviceId1);
    
-   // Create a new instance of the data class that will be stored in the first actor
+   // 创建将存储在第一个 actor 中的数据类的新实例
    var deviceData1 = new SmartDeviceData(){
        Location = "First Floor",
        Status = "Ready",
    };
    
-   // Create the local proxy by using the same interface that the service implements.
+   // 使用服务实现的相同接口创建本地代理。
    var proxySmartDevice1 = ActorProxy.Create<ISmartDevice>(deviceActorId1, smokeDetectorActorType);
    
-   // Now you can use the actor interface to call the actor's methods.
+   // 现在您可以使用 actor 接口调用 actor 的方法。
    Console.WriteLine($"Calling SetDataAsync on {smokeDetectorActorType}:{deviceActorId1}...");
    var setDataResponse1 = await proxySmartDevice1.SetDataAsync(deviceData1);
    Console.WriteLine($"Got response: {setDataResponse1}");
@@ -158,19 +157,19 @@ When you ran the client app, a few things happened:
    var storedDeviceData1 = await proxySmartDevice1.GetDataAsync();
    Console.WriteLine($"Device 1 state: {storedDeviceData1}");
    
-   // Create a second actor for second device
+   // 为第二个设备创建第二个 actor
    var deviceActorId2 = new ActorId(deviceId2);
    
-   // Create a new instance of the data class that will be stored in the first actor
+   // 创建将存储在第一个 actor 中的数据类的新实例
    var deviceData2 = new SmartDeviceData(){
        Location = "Second Floor",
        Status = "Ready",
    };
    
-   // Create the local proxy by using the same interface that the service implements.
+   // 使用服务实现的相同接口创建本地代理。
    var proxySmartDevice2 = ActorProxy.Create<ISmartDevice>(deviceActorId2, smokeDetectorActorType);
    
-   // Now you can use the actor interface to call the second actor's methods.
+   // 现在您可以使用 actor 接口调用第二个 actor 的方法。
    Console.WriteLine($"Calling SetDataAsync on {smokeDetectorActorType}:{deviceActorId2}...");
    var setDataResponse2 = await proxySmartDevice2.SetDataAsync(deviceData2);
    Console.WriteLine($"Got response: {setDataResponse2}");
@@ -180,7 +179,7 @@ When you ran the client app, a few things happened:
    Console.WriteLine($"Device 2 state: {storedDeviceData2}");
    ```
 
-1. The [`DetectSmokeAsync` method of `SmokeDetectorActor 1` is called](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/SmokeDetectorActor.cs#L70).
+1. [`SmokeDetectorActor 1` 的 `DetectSmokeAsync` 方法被调用](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/SmokeDetectorActor.cs#L70)。
 
    ```csharp
     public async Task DetectSmokeAsync()
@@ -192,7 +191,7 @@ When you ran the client app, a few things happened:
     }
    ```
 
-1. The [`TriggerAlarmForAllDetectors` method of `ControllerActor` is called](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/ControllerActor.cs#L54). The `ControllerActor` internally triggers all alarms when smoke is detected 
+1. [`ControllerActor` 的 `TriggerAlarmForAllDetectors` 方法被调用](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/ControllerActor.cs#L54)。当检测到烟雾时，`ControllerActor` 内部触发所有警报
 
     ```csharp 
     public async Task TriggerAlarmForAllDetectors()
@@ -205,21 +204,21 @@ When you ran the client app, a few things happened:
             await proxySmartDevice.SoundAlarm();
         }
 
-        // Register a reminder to refresh and clear alarm state every 15 seconds
+        // 每 15 秒注册一个提醒以刷新和清除警报状态
         await this.RegisterReminderAsync("AlarmRefreshReminder", null, TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15));
     }
     ```
     
-    The console [prints a message indicating that smoke has been detected](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/client/Program.cs#L65).
+    控制台 [打印一条消息，指示检测到烟雾](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/client/Program.cs#L65)。
 
     ```csharp
-    // Smoke is detected on device 1 that triggers an alarm on all devices.
+    // 在设备 1 上检测到烟雾，触发所有设备的警报。
     Console.WriteLine($"Detecting smoke on Device 1...");
     proxySmartDevice1 = ActorProxy.Create<ISmartDevice>(deviceActorId1, smokeDetectorActorType);
     await proxySmartDevice1.DetectSmokeAsync();   
     ```
 
-1. The [`SoundAlarm` methods](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/SmokeDetectorActor.cs#L78) of `SmokeDetectorActor 1` and `2` are called.
+1. `SmokeDetectorActor 1` 和 `2` 的 [`SoundAlarm` 方法](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/SmokeDetectorActor.cs#L78) 被调用。
 
    ```csharp
    storedDeviceData1 = await proxySmartDevice1.GetDataAsync();
@@ -228,33 +227,32 @@ When you ran the client app, a few things happened:
    Console.WriteLine($"Device 2 state: {storedDeviceData2}");
    ```
 
-1. The `ControllerActor` also creates a durable reminder to call `ClearAlarm` after 15 seconds using `RegisterReminderAsync`.
+1. `ControllerActor` 还使用 `RegisterReminderAsync` 创建一个持久的提醒，以在 15 秒后调用 `ClearAlarm`。
 
    ```csharp
-   // Register a reminder to refresh and clear alarm state every 15 seconds
+   // 每 15 秒注册一个提醒以刷新和清除警报状态
    await this.RegisterReminderAsync("AlarmRefreshReminder", null, TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15));
    ```
 
-For full context of the sample, take a look at the following code:
+要了解示例的完整上下文，请查看以下代码：
 
-- [`SmokeDetectorActor.cs`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/SmokeDetectorActor.cs): Implements the smart device actors
-- [`ControllerActor.cs`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/ControllerActor.cs): Implements the controller actor that manages all devices
-- [`ISmartDevice`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/interfaces/ISmartDevice.cs): The method definitions and shared data types for each `SmokeDetectorActor`
-- [`IController`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/interfaces/IController.cs): The method definitions and shared data types for the `ControllerActor`
+- [`SmokeDetectorActor.cs`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/SmokeDetectorActor.cs)：实现智能设备 actors
+- [`ControllerActor.cs`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/service/ControllerActor.cs)：实现管理所有设备的控制器 actor
+- [`ISmartDevice`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/interfaces/ISmartDevice.cs)：每个 `SmokeDetectorActor` 的方法定义和共享数据类型
+- [`IController`](https://github.com/dapr/quickstarts/blob/master/actors/csharp/sdk/interfaces/IController.cs)：`ControllerActor` 的方法定义和共享数据类型
 
 {{% /codetab %}}
 
-
 {{< /tabs >}}
 
-## Tell us what you think!
+## 告诉我们您的想法！
 
-We're continuously working to improve our Quickstart examples and value your feedback. Did you find this Quickstart helpful? Do you have suggestions for improvement?
+我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
 
-Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).
+加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238) 讨论。
 
-## Next steps
+## 下一步
 
-Learn more about [the Actor building block]({{< ref actors >}})
+了解更多关于 [actor 构建模块]({{< ref actors >}})
 
-{{< button text="Explore Dapr tutorials  >>" page="getting-started/tutorials/_index.md" >}}
+{{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

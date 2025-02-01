@@ -1,117 +1,118 @@
+
 ---
 type: docs
-title: "Quickstart: Cryptography"
-linkTitle: Cryptography
+title: "快速入门：加密技术"
+linkTitle: 加密技术
 weight: 79
-description: Get started with the Dapr Cryptography building block
+description: 开始使用 Dapr 加密构建块
 ---
 
 {{% alert title="Alpha" color="warning" %}}
-The cryptography building block is currently in **alpha**. 
+加密构建块目前处于**初始阶段**。
 {{% /alert %}}
 
-Let's take a look at the Dapr [cryptography building block]({{< ref cryptography >}}). In this Quickstart, you'll create an application that encrypts and decrypts data using the Dapr cryptography APIs. You'll:
+我们来了解一下 Dapr 的[加密构建块]({{< ref cryptography >}})。在这个快速入门中，您将创建一个应用程序，使用 Dapr 加密 API 来加密和解密数据。您将：
 
-- Encrypt and then decrypt a short string (using an RSA key), reading the result in-memory, in a Go byte slice.
-- Encrypt and then decrypt a large file (using an AES key), storing the encrypted and decrypted data to files using streams.
+- 加密并解密一个短字符串（使用 RSA 密钥），在内存中读取结果，存储在 Go 的字节切片中。
+- 加密并解密一个大文件（使用 AES 密钥），通过流将加密和解密的数据存储到文件中。
 
 <img src="/images/crypto-quickstart.png" width=800 style="padding-bottom:15px;">
 
-{{% alert title="Note" color="primary" %}}
-This example uses the Dapr SDK, which leverages gRPC and is **strongly** recommended when using cryptographic APIs to encrypt and decrypt messages.
+{{% alert title="注意" color="primary" %}}
+此示例使用 Dapr SDK，该 SDK 利用 gRPC，并在使用加密 API 加密和解密消息时**强烈**推荐使用。
 {{% /alert %}}
 
-Currently, you can experience the cryptography API using the Go SDK.
+目前，您可以使用 Go SDK 体验加密 API。
 
 {{< tabs "JavaScript" "Go" >}}
 
  <!-- JavaScript -->
 {{% codetab %}}
 
-> This quickstart includes a JavaScript application called `crypto-quickstart`.
+> 此快速入门包括一个名为 `crypto-quickstart` 的 JavaScript 应用程序。
 
-### Pre-requisites
+### 前置条件
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Latest Node.js installed](https://nodejs.org/download/).
+- [Dapr CLI 和已初始化的环境](https://docs.dapr.io/getting-started)。
+- [安装最新的 Node.js](https://nodejs.org/download/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
-- [OpenSSL](https://www.openssl.org/source/) available on your system
+- 系统上可用的 [OpenSSL](https://www.openssl.org/source/)
 
-### Step 1: Set up the environment
+### 步骤 1：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/cryptography/javascript/sdk)
+克隆 [Quickstarts 仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/cryptography/javascript/sdk)
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-In the terminal, from the root directory, navigate to the cryptography sample.
+在终端中，从根目录导航到加密示例。
 
 ```bash
 cd cryptography/javascript/sdk
 ```
 
-Navigate into the folder with the source code:
+导航到包含源代码的文件夹：
 
 ```bash
 cd ./crypto-quickstart
 ```
 
-Install the dependencies:
+安装依赖项：
 
 ```bash
 npm install
 ```
 
-### Step 2: Run the application with Dapr
+### 步骤 2：使用 Dapr 运行应用程序
 
-The application code defines two required keys:
+应用程序代码定义了两个必需的密钥：
 
-- Private RSA key 
-- A 256-bit symmetric (AES) key
+- 私有 RSA 密钥
+- 一个 256 位对称（AES）密钥
 
-Generate two keys, an RSA key and and AES key using OpenSSL and write these to two files:
+使用 OpenSSL 生成一个 RSA 密钥和一个 AES 密钥，并将它们分别写入两个文件：
 
 ```bash
 mkdir -p keys
-# Generate a private RSA key, 4096-bit keys
+# 生成一个私有 RSA 密钥，4096 位密钥
 openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -out keys/rsa-private-key.pem
-# Generate a 256-bit key for AES
+# 为 AES 生成一个 256 位密钥
 openssl rand -out keys/symmetric-key-256 32
 ```
 
-Run the Go service app with Dapr:
+使用 Dapr 运行 Go 服务应用程序：
 
 ```bash
 dapr run --app-id crypto-quickstart --resources-path ../../../components/ -- npm start
 ```
 
-**Expected output**
+**预期输出**
 
 ```
 == APP == 2023-10-25T14:30:50.435Z INFO [GRPCClient, GRPCClient] Opening connection to 127.0.0.1:58173
-== APP == == Encrypting message using buffers
-== APP == Encrypted the message, got 856 bytes
-== APP == == Decrypting message using buffers
-== APP == Decrypted the message, got 24 bytes
-== APP == The secret is "passw0rd"
-== APP == == Encrypting message using streams
-== APP == Encrypting federico-di-dio-photography-Q4g0Q-eVVEg-unsplash.jpg to encrypted.out
-== APP == Encrypted the message to encrypted.out
-== APP == == Decrypting message using streams
-== APP == Decrypting encrypted.out to decrypted.out.jpg
-== APP == Decrypted the message to decrypted.out.jpg
+== APP == == 使用缓冲区加密消息
+== APP == 加密了消息，得到 856 字节
+== APP == == 使用缓冲区解密消息
+== APP == 解密了消息，得到 24 字节
+== APP == 密码是 "passw0rd"
+== APP == == 使用流加密消息
+== APP == 加密 federico-di-dio-photography-Q4g0Q-eVVEg-unsplash.jpg 到 encrypted.out
+== APP == 将消息加密到 encrypted.out
+== APP == == 使用流解密消息
+== APP == 解密 encrypted.out 到 decrypted.out.jpg
+== APP == 将消息解密到 decrypted.out.jpg
 ```
 
-### What happened?
+### 发生了什么？
 
 #### `local-storage.yaml`
 
-Earlier, you created a directory inside `crypto-quickstarts` called `keys`. In [the `local-storage` component YAML](https://github.com/dapr/quickstarts/tree/master/cryptography/components/local-storage.yaml), the `path` metadata maps to the newly created `keys` directory.
+之前，您在 `crypto-quickstarts` 中创建了一个名为 `keys` 的目录。在 [`local-storage` 组件 YAML](https://github.com/dapr/quickstarts/tree/master/cryptography/components/local-storage.yaml) 中，`path` 元数据映射到新创建的 `keys` 目录。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -123,13 +124,13 @@ spec:
   version: v1
   metadata:
     - name: path
-      # Path is relative to the folder where the example is located
+      # 路径相对于示例所在的文件夹
       value: ./keys
 ```
 
 #### `index.mjs`
 
-[The application file](https://github.com/dapr/quickstarts/blob/master/cryptography/javascript/sdk/crypto-quickstart/index.mjs) encrypts and decrypts messages and files using the RSA and AES keys that you generated. The application creates a new Dapr SDK client:
+[应用程序文件](https://github.com/dapr/quickstarts/blob/master/cryptography/javascript/sdk/crypto-quickstart/index.mjs) 使用您生成的 RSA 和 AES 密钥加密和解密消息和文件。应用程序创建了一个新的 Dapr SDK 客户端：
 
 ```javascript
 async function start() {
@@ -139,25 +140,25 @@ async function start() {
     communicationProtocol: CommunicationProtocolEnum.GRPC,
   });
 
-  // Encrypt and decrypt a message from a buffer
+  // 使用缓冲区加密和解密消息
   await encryptDecryptBuffer(client);
 
-  // Encrypt and decrypt a message using streams
+  // 使用流加密和解密消息
   await encryptDecryptStream(client);
 }
 ```
 
-##### Encrypting and decrypting a string using the RSA key
+##### 使用 RSA 密钥加密和解密字符串
 
-Once the client is created, the application encrypts a message:
+一旦创建了客户端，应用程序就会加密一条消息：
 
 ```javascript
 async function encryptDecryptBuffer(client) {
-  // Message to encrypt
+  // 要加密的消息
   const plaintext = `The secret is "passw0rd"`
 
-  // First, encrypt the message
-  console.log("== Encrypting message using buffers");
+  // 首先，加密消息
+  console.log("== 使用缓冲区加密消息");
 
   const encrypted = await client.crypto.encrypt(plaintext, {
     componentName: "localstorage",
@@ -165,34 +166,34 @@ async function encryptDecryptBuffer(client) {
     keyWrapAlgorithm: "RSA",
   });
 
-  console.log("Encrypted the message, got", encrypted.length, "bytes");
+  console.log("加密了消息，得到", encrypted.length, "字节");
 ```
 
-The application then decrypts the message:
+然后应用程序解密消息：
 
 ```javascript
-  // Decrypt the message
-  console.log("== Decrypting message using buffers");
+  // 解密消息
+  console.log("== 使用缓冲区解密消息");
   const decrypted = await client.crypto.decrypt(encrypted, {
     componentName: "localstorage",
   });
 
-  console.log("Decrypted the message, got", decrypted.length, "bytes");
+  console.log("解密了消息，得到", decrypted.length, "字节");
   console.log(decrypted.toString("utf8"));
 
   // ...
 }
 ``` 
 
-##### Encrypt and decrpyt a large file using the AES key
+##### 使用 AES 密钥加密和解密大文件
 
-Next, the application encrypts a large image file:
+接下来，应用程序加密一个大图像文件：
 
 ```javascript
 async function encryptDecryptStream(client) {
-  // First, encrypt the message
-  console.log("== Encrypting message using streams");
-  console.log("Encrypting", testFileName, "to encrypted.out");
+  // 首先，加密消息
+  console.log("== 使用流加密消息");
+  console.log("加密", testFileName, "到 encrypted.out");
 
   await pipeline(
     createReadStream(testFileName),
@@ -204,15 +205,15 @@ async function encryptDecryptStream(client) {
     createWriteStream("encrypted.out"),
   );
 
-  console.log("Encrypted the message to encrypted.out");
+  console.log("将消息加密到 encrypted.out");
 ```
 
-The application then decrypts the large image file:
+然后应用程序解密大图像文件：
 
 ```javascript
-  // Decrypt the message
-  console.log("== Decrypting message using streams");
-  console.log("Decrypting encrypted.out to decrypted.out.jpg");
+  // 解密消息
+  console.log("== 使用流解密消息");
+  console.log("解密 encrypted.out 到 decrypted.out.jpg");
   await pipeline(
     createReadStream("encrypted.out"),
     await client.crypto.decrypt({
@@ -221,7 +222,7 @@ The application then decrypts the large image file:
     createWriteStream("decrypted.out.jpg"),
   );
 
-  console.log("Decrypted the message to decrypted.out.jpg");
+  console.log("将消息解密到 decrypted.out.jpg");
 }
 ```
 
@@ -230,78 +231,78 @@ The application then decrypts the large image file:
  <!-- Go -->
 {{% codetab %}}
 
-> This quickstart includes a Go application called `crypto-quickstart`.
+> 此快速入门包括一个名为 `crypto-quickstart` 的 Go 应用程序。
 
-### Pre-requisites
+### 前置条件
 
-For this example, you will need:
+对于此示例，您将需要：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Latest version of Go](https://go.dev/dl/).
+- [Dapr CLI 和已初始化的环境](https://docs.dapr.io/getting-started)。
+- [最新版本的 Go](https://go.dev/dl/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
-- [OpenSSL](https://www.openssl.org/source/) available on your system
+- 系统上可用的 [OpenSSL](https://www.openssl.org/source/)
 
-### Step 1: Set up the environment
+### 步骤 1：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/cryptography/go/sdk)
+克隆 [Quickstarts 仓库中提供的示例](https://github.com/dapr/quickstarts/tree/master/cryptography/go/sdk)
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-In the terminal, from the root directory, navigate to the cryptography sample.
+在终端中，从根目录导航到加密示例。
 
 ```bash
 cd cryptography/go/sdk
 ```
 
-### Step 2: Run the application with Dapr
+### 步骤 2：使用 Dapr 运行应用程序
 
-Navigate into the folder with the source code:
+导航到包含源代码的文件夹：
 
 ```bash
 cd ./crypto-quickstart
 ```
 
-The application code defines two required keys:
+应用程序代码定义了两个必需的密钥：
 
-- Private RSA key 
-- A 256-bit symmetric (AES) key
+- 私有 RSA 密钥
+- 一个 256 位对称（AES）密钥
 
-Generate two keys, an RSA key and and AES key using OpenSSL and write these to two files:
+使用 OpenSSL 生成一个 RSA 密钥和一个 AES 密钥，并将它们分别写入两个文件：
 
 ```bash
 mkdir -p keys
-# Generate a private RSA key, 4096-bit keys
+# 生成一个私有 RSA 密钥，4096 位密钥
 openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -out keys/rsa-private-key.pem
-# Generate a 256-bit key for AES
+# 为 AES 生成一个 256 位密钥
 openssl rand -out keys/symmetric-key-256 32
 ```
 
-Run the Go service app with Dapr:
+使用 Dapr 运行 Go 服务应用程序：
 
 ```bash
 dapr run --app-id crypto-quickstart --resources-path ../../../components/ -- go run .
 ```
 
-**Expected output**
+**预期输出**
 
 ```
 == APP == dapr client initializing for: 127.0.0.1:52407
-== APP == Encrypted the message, got 856 bytes
-== APP == Decrypted the message, got 24 bytes
-== APP == The secret is "passw0rd"
-== APP == Wrote decrypted data to encrypted.out
-== APP == Wrote decrypted data to decrypted.out.jpg
+== APP == 加密了消息，得到 856 字节
+== APP == 解密了消息，得到 24 字节
+== APP == 密码是 "passw0rd"
+== APP == 将解密数据写入 encrypted.out
+== APP == 将解密数据写入 decrypted.out.jpg
 ```
 
-### What happened?
+### 发生了什么？
 
 #### `local-storage.yaml`
 
-Earlier, you created a directory inside `crypto-quickstarts` called `keys`. In [the `local-storage` component YAML](https://github.com/dapr/quickstarts/tree/master/cryptography/components/local-storage.yaml), the `path` metadata maps to the newly created `keys` directory.
+之前，您在 `crypto-quickstarts` 中创建了一个名为 `keys` 的目录。在 [`local-storage` 组件 YAML](https://github.com/dapr/quickstarts/tree/master/cryptography/components/local-storage.yaml) 中，`path` 元数据映射到新创建的 `keys` 目录。
 
 ```yml
 apiVersion: dapr.io/v1alpha1
@@ -313,44 +314,44 @@ spec:
   version: v1
   metadata:
     - name: path
-      # Path is relative to the folder where the example is located
+      # 路径相对于示例所在的文件夹
       value: ./keys
 ```
 
 #### `app.go`
 
-[The application file](https://github.com/dapr/quickstarts/tree/master/cryptography/go/sdk/crypto-quickstart/app.go) encrypts and decrypts messages and files using the RSA and AES keys that you generated. The application creates a new Dapr SDK client:
+[应用程序文件](https://github.com/dapr/quickstarts/tree/master/cryptography/go/sdk/crypto-quickstart/app.go) 使用您生成的 RSA 和 AES 密钥加密和解密消息和文件。应用程序创建了一个新的 Dapr SDK 客户端：
 
 ```go
 func main() {
-	// Create a new Dapr SDK client
+	// 创建一个新的 Dapr SDK 客户端
 	client, err := dapr.NewClient()
     
     //...
 
-	// Step 1: encrypt a string using the RSA key, then decrypt it and show the output in the terminal
+	// 步骤 1：使用 RSA 密钥加密字符串，然后解密并在终端中显示输出
 	encryptDecryptString(client)
 
-	// Step 2: encrypt a large file and then decrypt it, using the AES key
+	// 步骤 2：加密大文件，然后使用 AES 密钥解密
 	encryptDecryptFile(client)
 }
 ```
 
-##### Encrypting and decrypting a string using the RSA key
+##### 使用 RSA 密钥加密和解密字符串
 
-Once the client is created, the application encrypts a message:
+一旦创建了客户端，应用程序就会加密一条消息：
 
 ```go
 func encryptDecryptString(client dapr.Client) {
     // ...
 
-	// Encrypt the message
+	// 加密消息
 	encStream, err := client.Encrypt(context.Background(),
 		strings.NewReader(message),
 		dapr.EncryptOptions{
 			ComponentName: CryptoComponentName,
-			// Name of the key to use
-			// Since this is a RSA key, we specify that as key wrapping algorithm
+			// 要使用的密钥名称
+			// 由于这是一个 RSA 密钥，我们将其指定为密钥包装算法
 			KeyName:          RSAKeyName,
 			KeyWrapAlgorithm: "RSA",
 		},
@@ -358,62 +359,62 @@ func encryptDecryptString(client dapr.Client) {
 
     // ...
 
-	// The method returns a readable stream, which we read in full in memory
+	// 该方法返回一个可读流，我们在内存中完整读取
 	encBytes, err := io.ReadAll(encStream)
     // ...
 
-	fmt.Printf("Encrypted the message, got %d bytes\n", len(encBytes))
+	fmt.Printf("加密了消息，得到 %d 字节\n", len(encBytes))
 ```
 
-The application then decrypts the message:
+然后应用程序解密消息：
 
 ```go
-	// Now, decrypt the encrypted data
+	// 现在，解密加密数据
 	decStream, err := client.Decrypt(context.Background(),
 		bytes.NewReader(encBytes),
 		dapr.DecryptOptions{
-			// We just need to pass the name of the component
+			// 我们只需要传递组件的名称
 			ComponentName: CryptoComponentName,
-			// Passing the name of the key is optional
+			// 传递密钥名称是可选的
 			KeyName: RSAKeyName,
 		},
 	)
 
     // ...
 
-	// The method returns a readable stream, which we read in full in memory
+	// 该方法返回一个可读流，我们在内存中完整读取
 	decBytes, err := io.ReadAll(decStream)
 
     // ...
 
-	// Print the message on the console
-	fmt.Printf("Decrypted the message, got %d bytes\n", len(decBytes))
+	// 在控制台上打印消息
+	fmt.Printf("解密了消息，得到 %d 字节\n", len(decBytes))
 	fmt.Println(string(decBytes))
 }
 ``` 
 
-##### Encrypt and decrpyt a large file using the AES key
+##### 使用 AES 密钥加密和解密大文件
 
-Next, the application encrypts a large image file:
+接下来，应用程序加密一个大图像文件：
 
 ```go
 func encryptDecryptFile(client dapr.Client) {
 	const fileName = "liuguangxi-66ouBTTs_x0-unsplash.jpg"
 
-	// Get a readable stream to the input file
+	// 获取输入文件的可读流
 	plaintextF, err := os.Open(fileName)
 
     // ...
 
 	defer plaintextF.Close()
 
-	// Encrypt the file
+	// 加密文件
 	encStream, err := client.Encrypt(context.Background(),
 		plaintextF,
 		dapr.EncryptOptions{
 			ComponentName: CryptoComponentName,
-			// Name of the key to use
-			// Since this is a symmetric key, we specify AES as key wrapping algorithm
+			// 要使用的密钥名称
+			// 由于这是一个对称密钥，我们将其指定为 AES 密钥包装算法
 			KeyName:          SymmetricKeyName,
 			KeyWrapAlgorithm: "AES",
 		},
@@ -421,48 +422,48 @@ func encryptDecryptFile(client dapr.Client) {
 
     // ...
 
-	// Write the encrypted data to a file "encrypted.out"
+	// 将加密数据写入文件 "encrypted.out"
 	encryptedF, err := os.Create("encrypted.out")
 
     // ...
 
 	encryptedF.Close()
 
-	fmt.Println("Wrote decrypted data to encrypted.out")
+	fmt.Println("将解密数据写入 encrypted.out")
 ```
 
-The application then decrypts the large image file:
+然后应用程序解密大图像文件：
 
 ```go
-	// Now, decrypt the encrypted data
-	// First, open the file "encrypted.out" again, this time for reading
+	// 现在，解密加密数据
+	// 首先，再次打开文件 "encrypted.out"，这次用于读取
 	encryptedF, err = os.Open("encrypted.out")
 
     // ...
 
 	defer encryptedF.Close()
 
-	// Now, decrypt the encrypted data
+	// 现在，解密加密数据
 	decStream, err := client.Decrypt(context.Background(),
 		encryptedF,
 		dapr.DecryptOptions{
-			// We just need to pass the name of the component
+			// 我们只需要传递组件的名称
 			ComponentName: CryptoComponentName,
-			// Passing the name of the key is optional
+			// 传递密钥名称是可选的
 			KeyName: SymmetricKeyName,
 		},
 	)
 
     // ...
 
-	// Write the decrypted data to a file "decrypted.out.jpg"
+	// 将解密数据写入文件 "decrypted.out.jpg"
 	decryptedF, err := os.Create("decrypted.out.jpg")
 
     // ...
 
 	decryptedF.Close()
 
-	fmt.Println("Wrote decrypted data to decrypted.out.jpg")
+	fmt.Println("将解密数据写入 decrypted.out.jpg")
 }
 ```
 
@@ -471,21 +472,21 @@ The application then decrypts the large image file:
 
 {{< /tabs >}}
 
-## Watch the demo
+## 观看演示
 
-Watch this [demo video of the cryptography API from the Dapr Community Call #83](https://youtu.be/PRWYX4lb2Sg?t=1148):
+观看来自 Dapr 社区电话 #83 的加密 API [演示视频](https://youtu.be/PRWYX4lb2Sg?t=1148)：
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PRWYX4lb2Sg?start=1148" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PRWYX4lb2Sg?start=1148" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## Tell us what you think!
+## 告诉我们您的想法！
 
-We're continuously working to improve our Quickstart examples and value your feedback. Did you find this Quickstart helpful? Do you have suggestions for improvement?
+我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
 
-Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).
+加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238)进行讨论。
 
-## Next steps
+## 下一步
 
-- Walk through [more examples of encrypting and decrypting using the cryptography API]({{< ref howto-cryptography.md >}})
-- Learn more about [cryptography as a Dapr building block]({{< ref cryptography-overview.md >}})
+- 通过 [更多使用加密 API 加密和解密的示例]({{< ref howto-cryptography.md >}}) 进行学习
+- 了解更多关于 [作为 Dapr 构建块的加密技术]({{< ref cryptography-overview.md >}})
 
-{{< button text="Explore Dapr tutorials  >>" page="getting-started/tutorials/_index.md" >}}
+{{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}

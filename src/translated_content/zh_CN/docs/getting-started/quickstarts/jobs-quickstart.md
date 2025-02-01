@@ -1,127 +1,128 @@
+
 ---
 type: docs
-title: "Quickstart: Jobs"
-linkTitle: Jobs
+title: "快速入门：作业"
+linkTitle: 作业
 weight: 80
-description: Get started with the Dapr jobs building block
+description: 开始使用 Dapr 作业构建块
 ---
 
 {{% alert title="Alpha" color="warning" %}}
-The jobs building block is currently in **alpha**. 
+作业构建块目前处于 **alpha** 阶段。
 {{% /alert %}}
 
-Let's take a look at the [Dapr jobs building block]({{< ref jobs-overview.md >}}), which schedules and runs jobs at a specific time or interval. In this Quickstart, you'll schedule, get, and delete a job using Dapr's Job API.
+[Dapr 作业构建块]({{< ref jobs-overview.md >}}) 允许您在特定时间或间隔调度和运行作业。在本快速入门中，您将学习如何使用 Dapr 的作业 API 来调度、获取和删除作业。
 
-You can try out this jobs quickstart by either:
+您可以通过以下两种方式来体验本快速入门：
 
-- [Running all applications in this sample simultaneously with the Multi-App Run template file]({{< ref "#run-using-multi-app-run" >}}), or
-- [Running one application at a time]({{< ref "#run-one-job-application-at-a-time" >}})
+- [使用多应用运行模板文件同时运行所有示例应用程序]({{< ref "#run-using-multi-app-run" >}})，或
+- [一次运行一个应用程序]({{< ref "#run-one-job-application-at-a-time" >}})
 
-## Run using Multi-App Run
+## 使用多应用运行
 
-Select your preferred language-specific Dapr SDK before proceeding with the Quickstart. Currently, you can experiment with the jobs API with the Go SDK.
+在开始之前，请选择您偏好的 Dapr SDK 语言。目前，您可以使用 Go SDK 来试验作业 API。
 
 {{< tabs Go >}}
 
  <!-- Go -->
 {{% codetab %}}
 
-This quickstart includes two apps:
+本快速入门包含两个应用程序：
 
-- **`job-scheduler.go`:** schedules, retrieves, and deletes jobs.
-- **`job-service.go`:** handles the scheduled jobs.
+- **`job-scheduler.go`：** 负责调度、检索和删除作业。
+- **`job-service.go`：** 负责处理已调度的作业。
 
-### Step 1: Pre-requisites
+### 步骤 1：准备工作
 
-For this example, you will need:
+您需要以下环境和工具：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Latest version of Go](https://go.dev/dl/).
+- [Dapr CLI 和已初始化的环境](https://docs.dapr.io/getting-started)。
+- [最新版本的 Go](https://go.dev/dl/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
-### Step 2: Set up the environment
+### 步骤 2：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/jobs/go/sdk).
+克隆 [快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/jobs/go/sdk)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-From the root of the Quickstarts directory, navigate into the jobs directory:
+从快速入门目录的根目录，导航到作业目录：
 
 ```bash
 cd jobs/go/sdk
 ```
 
-### Step 3: Schedule jobs
+### 步骤 3：调度作业
 
-Run the application and schedule jobs with one command:
+运行以下命令来启动应用程序并调度作业：
 
 ```bash
 dapr run -f .
 ```
 
-**Expected output**
+**预期输出**
 
 ```text
-== APP - job-service == dapr client initializing for: 127.0.0.1:6281
-== APP - job-service == Registered job handler for:  R2-D2
-== APP - job-service == Registered job handler for:  C-3PO
-== APP - job-service == Registered job handler for:  BB-8
-== APP - job-service == Starting server on port: 6200
-== APP - job-service == Job scheduled:  R2-D2
-== APP - job-service == Job scheduled:  C-3PO
-== APP - job-service == 2024/07/17 18:09:59 job:{name:"C-3PO"  due_time:"10s"  data:{value:"{\"droid\":\"C-3PO\",\"Task\":\"Memory Wipe\"}"}}
-== APP - job-scheduler == Get job response:  {"droid":"C-3PO","Task":"Memory Wipe"}
-== APP - job-service == Job scheduled:  BB-8
-== APP - job-service == 2024/07/17 18:09:59 job:{name:"BB-8"  due_time:"15s"  data:{value:"{\"droid\":\"BB-8\",\"Task\":\"Internal Gyroscope Check\"}"}}
-== APP - job-scheduler == Get job response:  {"droid":"BB-8","Task":"Internal Gyroscope Check"}
-== APP - job-scheduler == Deleted job:  BB-8
+== APP - job-service == dapr 客户端初始化中：127.0.0.1:6281
+== APP - job-service == 已注册作业处理程序：R2-D2
+== APP - job-service == 已注册作业处理程序：C-3PO
+== APP - job-service == 已注册作业处理程序：BB-8
+== APP - job-service == 在端口启动服务器：6200
+== APP - job-service == 作业已调度：R2-D2
+== APP - job-service == 作业已调度：C-3PO
+== APP - job-service == 2024/07/17 18:09:59 作业：{name:"C-3PO"  due_time:"10s"  data:{value:"{\"droid\":\"C-3PO\",\"Task\":\"Memory Wipe\"}"}}
+== APP - job-scheduler == 获取作业响应：{"droid":"C-3PO","Task":"Memory Wipe"}
+== APP - job-service == 作业已调度：BB-8
+== APP - job-service == 2024/07/17 18:09:59 作业：{name:"BB-8"  due_time:"15s"  data:{value:"{\"droid\":\"BB-8\",\"Task\":\"Internal Gyroscope Check\"}"}}
+== APP - job-scheduler == 获取作业响应：{"droid":"BB-8","Task":"Internal Gyroscope Check"}
+== APP - job-scheduler == 已删除作业：BB-8
 ```
 
-After 5 seconds, the terminal output should present the `R2-D2` job being processed:
+5 秒后，终端输出应显示 `R2-D2` 作业正在处理：
 
 ```text
-== APP - job-service == Starting droid: R2-D2
-== APP - job-service == Executing maintenance job: Oil Change
+== APP - job-service == 启动机器人：R2-D2
+== APP - job-service == 执行维护作业：Oil Change
 ```
 
-After 10 seconds, the terminal output should present the `C3-PO` job being processed:
+10 秒后，终端输出应显示 `C3-PO` 作业正在处理：
 
 ```text
-== APP - job-service == Starting droid: C-3PO
-== APP - job-service == Executing maintenance job: Memory Wipe
+== APP - job-service == 启动机器人：C-3PO
+== APP - job-service == 执行维护作业：Memory Wipe
 ```
 
-Once the process has completed, you can stop and clean up application processes with a single command.
+完成后，您可以使用以下命令停止并清理应用程序进程。
 
 ```bash
 dapr stop -f .
 ```
 
-### What happened?
+### 发生了什么？
 
-When you ran `dapr init` during Dapr install:
+在您运行 `dapr init` 初始化 Dapr 环境时：
 
-- The `dapr_scheduler` control plane was started alongside other Dapr services.
-- [The `dapr.yaml` Multi-App Run template file]({{< ref "#dapryaml-multi-app-run-template-file" >}}) was generated in the `.dapr/components` directory.
+- `dapr_scheduler` 控制平面与其他 Dapr 服务一起启动。
+- [在 `.dapr/components` 目录中生成了 `dapr.yaml` 多应用运行模板文件]({{< ref "#dapryaml-multi-app-run-template-file" >}})。
 
-Running `dapr run -f .` in this Quickstart started both the `job-scheduler` and the `job-service`. In the terminal output, you can see the following jobs being scheduled, retrieved, and deleted.
+在本快速入门中，运行 `dapr run -f .` 启动了 `job-scheduler` 和 `job-service`。在终端输出中，您可以看到以下作业的调度、检索和删除过程。
 
-- The `R2-D2` job is being scheduled.
-- The `C-3PO` job is being scheduled.
-- The `C-3PO` job is being retrieved.
-- The `BB-8` job is being scheduled.
-- The `BB-8` job is being retrieved.
-- The `BB-8` job is being deleted.
-- The `R2-D2` job is being executed after 5 seconds.
-- The `R2-D2` job is being executed after 10 seconds.
+- `R2-D2` 作业被调度。
+- `C-3PO` 作业被调度。
+- `C-3PO` 作业被检索。
+- `BB-8` 作业被调度。
+- `BB-8` 作业被检索。
+- `BB-8` 作业被删除。
+- `R2-D2` 作业在 5 秒后执行。
+- `R2-D2` 作业在 10 秒后执行。
 
-#### `dapr.yaml` Multi-App Run template file
+#### `dapr.yaml` 多应用运行模板文件
 
-Running the [Multi-App Run template file]({{< ref multi-app-dapr-run >}}) with `dapr run -f .` starts all applications in your project. In this Quickstart, the `dapr.yaml` file contains the following:
+使用 `dapr run -f .` 运行 [多应用运行模板文件]({{< ref multi-app-dapr-run >}}) 启动项目中的所有应用程序。在本快速入门中，`dapr.yaml` 文件包含以下内容：
 
 ```yml
 version: 1
@@ -138,9 +139,9 @@ apps:
     command: ["go", "run", "."]
 ```
 
-#### `job-service` app
+#### `job-service` 应用
 
-The `job-service` application creates service invocation handlers to manage the lifecycle of the job (`scheduleJob`, `getJob`, and `deleteJob`).
+`job-service` 应用程序创建服务调用处理程序以管理作业的生命周期（`scheduleJob`、`getJob` 和 `deleteJob`）。
 
 ```go
 if err := server.AddServiceInvocationHandler("scheduleJob", scheduleJob); err != nil {
@@ -156,7 +157,7 @@ if err := server.AddServiceInvocationHandler("deleteJob", deleteJob); err != nil
 }
 ```
 
-Next, job event handlers are registered for all droids:
+接下来，为所有机器人注册作业事件处理程序：
 
 ```go
 for _, jobName := range jobNames {
@@ -172,10 +173,10 @@ if err = server.Start(); err != nil {
 }
 ```
 
-The `job-service` then call functions that handle scheduling, getting, deleting, and handling job events. 
+然后，`job-service` 调用处理调度、获取、删除和处理作业事件的函数。
 
 ```go
-// Handler that schedules a DroidJob
+// 处理调度 DroidJob 的处理程序
 func scheduleJob(ctx context.Context, in *common.InvocationEvent) (out *common.Content, err error) {
 
 	if in == nil {
@@ -201,7 +202,7 @@ func scheduleJob(ctx context.Context, in *common.InvocationEvent) (out *common.C
 		return nil, err
 	}
 
-	// schedule job
+	// 调度作业
 	job := daprc.Job{
 		Name:    droidJob.Name,
 		DueTime: droidJob.DueTime,
@@ -228,7 +229,7 @@ func scheduleJob(ctx context.Context, in *common.InvocationEvent) (out *common.C
 
 }
 
-// Handler that gets a job by name
+// 处理按名称获取作业的处理程序
 func getJob(ctx context.Context, in *common.InvocationEvent) (out *common.Content, err error) {
 
 	if in == nil {
@@ -250,7 +251,7 @@ func getJob(ctx context.Context, in *common.InvocationEvent) (out *common.Conten
 	return out, err
 }
 
-// Handler that deletes a job by name
+// 处理按名称删除作业的处理程序
 func deleteJob(ctx context.Context, in *common.InvocationEvent) (out *common.Content, err error) {
 	if in == nil {
 		err = errors.New("no invocation parameter")
@@ -271,7 +272,7 @@ func deleteJob(ctx context.Context, in *common.InvocationEvent) (out *common.Con
 	return out, err
 }
 
-// Handler that handles job events
+// 处理作业事件的处理程序
 func handleJob(ctx context.Context, job *common.JobEvent) error {
     var jobData common.Job
     if err := json.Unmarshal(job.Data, &jobData); err != nil {
@@ -290,9 +291,9 @@ func handleJob(ctx context.Context, job *common.JobEvent) error {
 }
 ```
 
-#### `job-scheduler` app
+#### `job-scheduler` 应用
 
-In the `job-scheduler` application, the R2D2, C3PO, and BB8 jobs are first defined as `[]DroidJob`:
+在 `job-scheduler` 应用程序中，首先将 R2D2、C3PO 和 BB8 作业定义为 `[]DroidJob`：
 
 ```go
 droidJobs := []DroidJob{
@@ -302,27 +303,26 @@ droidJobs := []DroidJob{
 }
 ```
 
-
-The jobs are then scheduled, retrieved, and deleted using the jobs API. As you can see from the terminal output, first the R2D2 job is scheduled:
+然后使用作业 API 调度、检索和删除作业。正如您从终端输出中看到的，首先调度 R2D2 作业：
 
 ```go
-// Schedule R2D2 job
+// 调度 R2D2 作业
 err = schedule(droidJobs[0])
 if err != nil {
 	log.Fatalln("Error scheduling job: ", err)
 }
 ```
 
-Then, the C3PO job is scheduled, and returns job data:
+然后调度 C3PO 作业，并返回作业数据：
 
 ```go
-// Schedule C-3PO job
+// 调度 C-3PO 作业
 err = schedule(droidJobs[1])
 if err != nil {
 	log.Fatalln("Error scheduling job: ", err)
 }
 
-// Get C-3PO job
+// 获取 C-3PO 作业
 resp, err := get(droidJobs[1])
 if err != nil {
 	log.Fatalln("Error retrieving job: ", err)
@@ -330,23 +330,23 @@ if err != nil {
 fmt.Println("Get job response: ", resp)
 ```
 
-The BB8 job is then scheduled, retrieved, and deleted:
+然后调度、检索和删除 BB8 作业：
 
 ```go
-// Schedule BB-8 job
+// 调度 BB-8 作业
 err = schedule(droidJobs[2])
 if err != nil {
 	log.Fatalln("Error scheduling job: ", err)
 }
 
-// Get BB-8 job
+// 获取 BB-8 作业
 resp, err = get(droidJobs[2])
 if err != nil {
 	log.Fatalln("Error retrieving job: ", err)
 }
 fmt.Println("Get job response: ", resp)
 
-// Delete BB-8 job
+// 删除 BB-8 作业
 err = delete(droidJobs[2])
 if err != nil {
 	log.Fatalln("Error deleting job: ", err)
@@ -354,10 +354,10 @@ if err != nil {
 fmt.Println("Job deleted: ", droidJobs[2].Name)
 ```
 
-The `job-scheduler.go` also defines the `schedule`, `get`, and `delete` functions, calling from `job-service.go`.
+`job-scheduler.go` 还定义了 `schedule`、`get` 和 `delete` 函数，从 `job-service.go` 调用。
 
 ```go
-// Schedules a job by invoking grpc service from job-service passing a DroidJob as an argument
+// 通过从 job-service 调用 grpc 服务并传递 DroidJob 作为参数来调度作业
 func schedule(droidJob DroidJob) error {
 	jobData, err := json.Marshal(droidJob)
 	if err != nil {
@@ -370,7 +370,7 @@ func schedule(droidJob DroidJob) error {
 		Data:        []byte(jobData),
 	}
 
-	// Schedule Job
+	// 调度作业
 	_, err = app.daprClient.InvokeMethodWithContent(context.Background(), "job-service", "scheduleJob", "POST", content)
 	if err != nil {
 		fmt.Println("Error invoking method: ", err)
@@ -380,14 +380,14 @@ func schedule(droidJob DroidJob) error {
 	return nil
 }
 
-// Gets a job by invoking grpc service from job-service passing a job name as an argument
+// 通过从 job-service 调用 grpc 服务并传递作业名称作为参数来获取作业
 func get(droidJob DroidJob) (string, error) {
 	content := &daprc.DataContent{
 		ContentType: "text/plain",
 		Data:        []byte(droidJob.Name),
 	}
 
-	//get job
+	// 获取作业
 	resp, err := app.daprClient.InvokeMethodWithContent(context.Background(), "job-service", "getJob", "GET", content)
 	if err != nil {
 		fmt.Println("Error invoking method: ", err)
@@ -397,7 +397,7 @@ func get(droidJob DroidJob) (string, error) {
 	return string(resp), nil
 }
 
-// Deletes a job by invoking grpc service from job-service passing a job name as an argument
+// 通过从 job-service 调用 grpc 服务并传递作业名称作为参数来删除作业
 func delete(droidJob DroidJob) error {
 	content := &daprc.DataContent{
 		ContentType: "text/plain",
@@ -418,113 +418,113 @@ func delete(droidJob DroidJob) error {
 
 {{< /tabs >}}
 
-## Run one job application at a time
+## 一次运行一个作业应用程序
 
 {{< tabs Go >}}
 
  <!-- Go -->
 {{% codetab %}}
 
-This quickstart includes two apps:
+本快速入门包含两个应用程序：
 
-- **`job-scheduler.go`:** schedules, retrieves, and deletes jobs.
-- **`job-service.go`:** handles the scheduled jobs.
+- **`job-scheduler.go`：** 负责调度、检索和删除作业。
+- **`job-service.go`：** 负责处理已调度的作业。
 
-### Step 1: Pre-requisites
+### 步骤 1：准备工作
 
-For this example, you will need:
+您需要以下环境和工具：
 
-- [Dapr CLI and initialized environment](https://docs.dapr.io/getting-started).
-- [Latest version of Go](https://go.dev/dl/).
+- [Dapr CLI 和已初始化的环境](https://docs.dapr.io/getting-started)。
+- [最新版本的 Go](https://go.dev/dl/)。
 <!-- IGNORE_LINKS -->
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 <!-- END_IGNORE -->
 
-### Step 2: Set up the environment
+### 步骤 2：设置环境
 
-Clone the [sample provided in the Quickstarts repo](https://github.com/dapr/quickstarts/tree/master/jobs).
+克隆 [快速入门仓库中的示例](https://github.com/dapr/quickstarts/tree/master/jobs)。
 
 ```bash
 git clone https://github.com/dapr/quickstarts.git
 ```
 
-From the root of the Quickstarts directory, navigate into the jobs directory:
+从快速入门目录的根目录，导航到作业目录：
 
 ```bash
 cd jobs/go/sdk
 ```
 
-### Step 3: Schedule jobs
+### 步骤 3：调度作业
 
-In the terminal, run the `job-service` app:
+在终端中，运行 `job-service` 应用：
 
 ```bash
 dapr run --app-id job-service --app-port 6200 --dapr-grpc-port 6281 --app-protocol grpc -- go run .
 ```
 
-**Expected output**
+**预期输出**
 
 ```text
-== APP == dapr client initializing for: 127.0.0.1:6281
-== APP == Registered job handler for:  R2-D2
-== APP == Registered job handler for:  C-3PO
-== APP == Registered job handler for:  BB-8
-== APP == Starting server on port: 6200
+== APP == dapr 客户端初始化中：127.0.0.1:6281
+== APP == 已注册作业处理程序：R2-D2
+== APP == 已注册作业处理程序：C-3PO
+== APP == 已注册作业处理程序：BB-8
+== APP == 在端口启动服务器：6200
 ```
 
-In a new terminal window, run the `job-scheduler` app:
+在新的终端窗口中，运行 `job-scheduler` 应用：
 
 ```bash
 dapr run --app-id job-scheduler --app-port 6300 -- go run .
 ```
 
-**Expected output**
+**预期输出**
 
 ```text
-== APP == dapr client initializing for: 
-== APP == Get job response:  {"droid":"C-3PO","Task":"Memory Wipe"}
-== APP == Get job response:  {"droid":"BB-8","Task":"Internal Gyroscope Check"}
-== APP == Job deleted:  BB-8
+== APP == dapr 客户端初始化中：
+== APP == 获取作业响应：{"droid":"C-3PO","Task":"Memory Wipe"}
+== APP == 获取作业响应：{"droid":"BB-8","Task":"Internal Gyroscope Check"}
+== APP == 作业已删除：BB-8
 ```
 
-Return to the `job-service` app terminal window. The output should be:
+返回到 `job-service` 应用的终端窗口。输出应为：
 
 ```text
-== APP == Job scheduled:  R2-D2
-== APP == Job scheduled:  C-3PO
-== APP == 2024/07/17 18:25:36 job:{name:"C-3PO"  due_time:"10s"  data:{value:"{\"droid\":\"C-3PO\",\"Task\":\"Memory Wipe\"}"}}
-== APP == Job scheduled:  BB-8
-== APP == 2024/07/17 18:25:36 job:{name:"BB-8"  due_time:"15s"  data:{value:"{\"droid\":\"BB-8\",\"Task\":\"Internal Gyroscope Check\"}"}}
-== APP == Starting droid: R2-D2
-== APP == Executing maintenance job: Oil Change
-== APP == Starting droid: C-3PO
-== APP == Executing maintenance job: Memory Wipe
+== APP == 作业已调度：R2-D2
+== APP == 作业已调度：C-3PO
+== APP == 2024/07/17 18:25:36 作业：{name:"C-3PO"  due_time:"10s"  data:{value:"{\"droid\":\"C-3PO\",\"Task\":\"Memory Wipe\"}"}}
+== APP == 作业已调度：BB-8
+== APP == 2024/07/17 18:25:36 作业：{name:"BB-8"  due_time:"15s"  data:{value:"{\"droid\":\"BB-8\",\"Task\":\"Internal Gyroscope Check\"}"}}
+== APP == 启动机器人：R2-D2
+== APP == 执行维护作业：Oil Change
+== APP == 启动机器人：C-3PO
+== APP == 执行维护作业：Memory Wipe
 ```
 
-Unpack what happened in the [`job-service`]({{< ref "#job-service-app" >}}) and [`job-scheduler`]({{< ref "#job-scheduler-app" >}}) applications when you ran `dapr run`.
+了解在您运行 `dapr run` 时 [`job-service`]({{< ref "#job-service-app" >}}) 和 [`job-scheduler`]({{< ref "#job-scheduler-app" >}}) 应用程序中发生的具体过程。
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
+## 观看演示
 
-## Watch the demo
+观看使用 Go HTTP 示例的作业 API 实际操作，录制于 [Dapr 社区电话 #107](https://www.youtube.com/live/WHGOc7Ec_YQ?si=JlOlcJKkhRuhf5R1&t=849)。
 
-See the jobs API in action using a Go HTTP example, recorded during the [Dapr Community Call #107(https://www.youtube.com/live/WHGOc7Ec_YQ?si=JlOlcJKkhRuhf5R1&t=849)].
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/WHGOc7Ec_YQ?si=JlOlcJKkhRuhf5R1&amp;start=849" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/WHGOc7Ec_YQ?si=JlOlcJKkhRuhf5R1&amp;start=849" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+## 告诉我们您的想法！
 
-## Tell us what you think!
+我们正在不断努力改进我们的快速入门示例，并重视您的反馈。您觉得这个快速入门有帮助吗？您有改进建议吗？
 
-We're continuously working to improve our Quickstart examples and value your feedback. Did you find this Quickstart helpful? Do you have suggestions for improvement?
+加入我们的 [discord 频道](https://discord.com/channels/778680217417809931/953427615916638238) 讨论。
 
-Join the discussion in our [discord channel](https://discord.com/channels/778680217417809931/953427615916638238).
+## 下一步
 
-## Next steps
-
-- HTTP samples of this quickstart:
+- 本快速入门的 HTTP 示例：
   - [Go](https://github.com/dapr/quickstarts/tree/master/jobs/go/http)
-- Learn more about [the jobs building block]({{< ref jobs-overview.md >}})
-- Learn more about [the scheduler control plane]({{< ref scheduler.md >}})
+- 了解更多关于 [作业构建块]({{< ref jobs-overview.md >}})
+- 了解更多关于 [调度器控制平面]({{< ref scheduler.md >}})
 
-{{< button text="Explore Dapr tutorials  >>" page="getting-started/tutorials/_index.md" >}}
+{{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}
+`

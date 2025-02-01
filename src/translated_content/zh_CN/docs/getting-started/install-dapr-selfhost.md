@@ -1,89 +1,87 @@
+
 ---
 type: docs
-title: "Initialize Dapr in your local environment"
-linkTitle: "Init Dapr locally"
+title: "在本地环境中配置 Dapr"
+linkTitle: "本地配置 Dapr"
 weight: 20
-description: "Fetch the Dapr sidecar binaries and install them locally using `dapr init`"
+description: "使用 `dapr init` 获取并在本地安装 Dapr sidecar 二进制文件"
 aliases:
   - /zh-hans/getting-started/set-up-dapr/install-dapr/
 ---
 
-Now that you've [installed the Dapr CLI]({{<ref install-dapr-cli.md>}}), use the CLI to initialize Dapr on your local machine.
+现在您已经[安装了 Dapr CLI]({{<ref install-dapr-cli.md>}})，可以使用 CLI 在本地计算机上配置 Dapr。
 
-Dapr runs as a sidecar alongside your application. In self-hosted mode, this means it is a process on your local machine. By initializing Dapr, you:
+Dapr 作为一个附属进程与您的应用程序一起运行。在自托管模式下，这意味着它在您的本地计算机上作为一个进程运行。通过配置 Dapr，您可以：
 
-- Fetch and install the Dapr sidecar binaries locally.
-- Create a development environment that streamlines application development with Dapr. 
+- 获取并在本地安装 Dapr sidecar 的二进制文件。
+- 创建一个简化应用程序开发的环境。
 
-Dapr initialization includes:
+Dapr 的配置过程包括：
 
-1. Running a **Redis container instance** to be used as a local state store and message broker.
-1. Running a **Zipkin container instance** for observability.
-1. Creating a **default components folder** with component definitions for the above.
-1. Running a **Dapr placement service container instance** for local actor support.
-1. Running a **Dapr scheduler service container instance** for job scheduling.
+1. 启动一个 **Redis 容器实例** 作为本地状态存储和消息代理。
+2. 启动一个 **Zipkin 容器实例** 以实现可观测性。
+3. 创建一个包含上述组件定义的 **默认组件文件夹**。
+4. 启动一个 **Dapr placement service 容器实例** 以支持本地 actor。
+5. 启动一个 **Dapr scheduler service 容器实例** 以进行任务调度。
 
-{{% alert title="Kubernetes Development Environment" color="primary" %}}
-To initialize Dapr in your local or remote **Kubernetes** cluster for development (including the Redis and Zipkin containers listed above), see [how to initialize Dapr for development on Kubernetes]({{<ref "kubernetes-deploy.md#install-dapr-from-the-official-dapr-helm-chart-with-development-flag" >}})
+{{% alert title="Kubernetes 开发环境" color="primary" %}}
+要在本地或远程 **Kubernetes** 集群中配置 Dapr 进行开发（包括上面列出的 Redis 和 Zipkin 容器），请参阅[如何在 Kubernetes 上配置 Dapr 进行开发]({{<ref "kubernetes-deploy.md#install-dapr-from-the-official-dapr-helm-chart-with-development-flag" >}})
 {{% /alert %}}
 
 {{% alert title="Docker" color="primary" %}}
-The recommended development environment requires [Docker](https://docs.docker.com/install/). While you can [initialize Dapr without a dependency on Docker]({{< ref self-hosted-no-docker.md >}}), the next steps in this guide assume the recommended Docker development environment.
+推荐的开发环境需要 [Docker](https://docs.docker.com/install/)。虽然您可以[在没有 Docker 依赖的情况下配置 Dapr]({{< ref self-hosted-no-docker.md >}})，但本指南的下一步假设您使用推荐的 Docker 开发环境。
 
-You can also install [Podman](https://podman.io/) in place of Docker. Read more about [initializing Dapr using Podman]({{< ref dapr-init.md >}}).
+您也可以安装 [Podman](https://podman.io/) 代替 Docker。阅读更多关于[使用 Podman 配置 Dapr]({{< ref dapr-init.md >}})的信息。
 {{% /alert %}}
 
-### Step 1: Open an elevated terminal
+### 步骤 1：打开具有管理员权限的终端
 
 {{< tabs "Linux/MacOS" "Windows">}}
 
 {{% codetab %}}
 
-You will need to use `sudo` for this quickstart if:
-
-- You run your Docker commands with `sudo`, or
-- The install path is `/usr/local/bin` (default install path).
+如果您在运行 Docker 命令时使用 `sudo`，或者安装路径是 `/usr/local/bin`（默认安装路径），则需要在此快速入门中使用 `sudo`。
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-Run Windows Terminal or command prompt as administrator.
+以管理员身份运行 Windows Terminal 或命令提示符。
 
-1. Right click on the Windows Terminal or command prompt icon.
-1. Select **Run as administrator**.
+1. 右键单击 Windows Terminal 或命令提示符图标。
+2. 选择 **以管理员身份运行**。
 
 {{% /codetab %}}
 
 {{< /tabs >}}
 
-### Step 2: Run the init CLI command
+### 步骤 2：运行 init CLI 命令
 
 {{< tabs "Linux/MacOS" "Windows">}}
 
 {{% codetab %}}
 
-Install the latest Dapr runtime binaries:
+安装最新的 Dapr 运行时二进制文件：
 
 ```bash
 dapr init
 ```
 
-If you run your Docker cmds with sudo, you need to use:
+如果您在运行 Docker 命令时使用 sudo，则需要使用：
 
 ```bash
 sudo dapr init
 ```
 
-If you are installing on **Mac OS Silicon** with Docker, you may need to perform the following workaround to enable `dapr init` to talk to Docker without using Kubernetes.
-1. Navigate to **Docker Desktop** > **Settings** > **Advanced**.
-1. Select the **Allow the default Docker socket to be used (requires password)** checkbox.
+如果您在 **Mac OS Silicon** 上使用 Docker 安装，可能需要执行以下变通方法以使 `dapr init` 能够在不使用 Kubernetes 的情况下与 Docker 通信。
+1. 导航到 **Docker Desktop** > **Settings** > **Advanced**。
+2. 选中 **允许使用默认 Docker 套接字（需要密码）** 复选框。
 
 {{% /codetab %}}
 
 {{% codetab %}}
 
-Install the latest Dapr runtime binaries:
+安装最新的 Dapr 运行时二进制文件：
 
 ```bash
 dapr init
@@ -93,47 +91,47 @@ dapr init
 
 {{< /tabs >}}
 
-**Expected output:**
+**预期输出：**
 
 <img src="/images/install-dapr-selfhost/dapr-init-output.png" style=
 "padding-bottom: 5px" >
 
-[See the troubleshooting guide if you encounter any error messages regarding Docker not being installed or running.]({{< ref "common_issues.md#dapr-cant-connect-to-docker-when-installing-the-dapr-cli" >}})
+[如果您遇到任何关于 Docker 未安装或未运行的错误消息，请参阅故障排除指南。]({{< ref "common_issues.md#dapr-cant-connect-to-docker-when-installing-the-dapr-cli" >}})
 
-### Step 3: Verify Dapr version
+### 步骤 3：验证 Dapr 版本
 
 ```bash
 dapr --version
 ```
 
-**Output:**  
+**输出：**  
 
 `CLI version: {{% dapr-latest-version cli="true" %}}` <br>
 `Runtime version: {{% dapr-latest-version long="true" %}}`
 
-### Step 4: Verify containers are running
+### 步骤 4：验证容器是否正在运行
 
-As mentioned earlier, the `dapr init` command launches several containers that will help you get started with Dapr. Verify you have container instances with `daprio/dapr`, `openzipkin/zipkin`, and `redis` images running:
+如前所述，`dapr init` 命令启动了几个容器，这些容器将帮助您开始使用 Dapr。通过 `daprio/dapr`、`openzipkin/zipkin` 和 `redis` 镜像验证您是否有容器实例在运行：
 
 ```bash
 docker ps
 ```
 
-**Output:**  
+**输出：**  
 
 <img src="/images/install-dapr-selfhost/docker-containers.png">
 
-### Step 5: Verify components directory has been initialized
+### 步骤 5：验证组件目录是否已初始化
 
-On `dapr init`, the CLI also creates a default components folder that contains several YAML files with definitions for a state store, Pub/sub, and Zipkin. The Dapr sidecar will read these components and use:
+在 `dapr init` 时，CLI 还会创建一个默认组件文件夹，其中包含几个 YAML 文件，这些文件定义了状态存储、发布/订阅和 Zipkin。Dapr sidecar 将读取这些组件并使用：
 
-- The Redis container for state management and messaging.
-- The Zipkin container for collecting traces.
+- Redis 容器进行状态管理和消息传递。
+- Zipkin 容器用于收集跟踪。
 
-Verify by opening your components directory:
+通过打开您的组件目录进行验证：
 
-- On Windows, under `%UserProfile%\.dapr`
-- On Linux/MacOS, under `~/.dapr`
+- 在 Windows 上，位于 `%UserProfile%\.dapr`
+- 在 Linux/MacOS 上，位于 `~/.dapr`
 
 {{< tabs "Linux/MacOS" "Windows">}}
 
@@ -143,7 +141,7 @@ Verify by opening your components directory:
 ls $HOME/.dapr
 ```
 
-**Output:**  
+**输出：**  
 
 `bin  components  config.yaml`
 
@@ -152,17 +150,17 @@ ls $HOME/.dapr
 {{% /codetab %}}
 
 {{% codetab %}}
-You can verify using either PowerShell or command line. If using PowerShell, run:
+您可以使用 PowerShell 或命令行进行验证。如果使用 PowerShell，运行：
 ```powershell
 explorer "$env:USERPROFILE\.dapr"
 ```
 
-If using command line, run: 
+如果使用命令行，运行： 
 ```cmd
 explorer "%USERPROFILE%\.dapr"
 ```
 
-**Result:**
+**结果：**
 
 <img src="/images/install-dapr-selfhost/windows-view-components.png" width=600>
 
@@ -172,14 +170,12 @@ explorer "%USERPROFILE%\.dapr"
 
 <br>
 
-### Slim init
+### 精简初始化
 
-To install the CLI without any default configuration files or Docker containers, use the `--slim` flag. [Learn more about the `init` command and its flags.]({{< ref dapr-init.md >}})
+要安装没有任何默认配置文件或 Docker 容器的 CLI，请使用 `--slim` 标志。[了解更多关于 `init` 命令及其标志的信息。]({{< ref dapr-init.md >}})
 
 ```bash
 dapr init --slim
 ```
 
-
-{{< button text="Next step: Use the Dapr API >>" page="getting-started/get-started-api.md" >}}
-
+{{< button text="下一步：使用 Dapr API >>" page="getting-started/get-started-api.md" >}}
