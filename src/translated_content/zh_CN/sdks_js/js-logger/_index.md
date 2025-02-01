@@ -103,3 +103,4 @@ const client = new DaprClient({
   communicationProtocol: CommunicationProtocolEnum.HTTP,
   logger: { level: LogLevel.Verbose, service: winstonLoggerService },
 });
+```

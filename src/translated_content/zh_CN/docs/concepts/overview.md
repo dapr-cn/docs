@@ -157,4 +157,3 @@ Dapr 是为[操作]({{< ref operations >}})和安全性而设计的。Dapr 的 s
 通过 Dapr CLI 安装的[仪表板](https://github.com/dapr/dashboard)提供了一个基于 Web 的 UI，使您能够查看信息、查看日志等，以运行 Dapr 应用。
 
 Dapr 支持[监控工具]({{< ref observability >}})，以便更深入地了解 Dapr 系统服务和 sidecar，而 Dapr 的[可观测性功能]({{< ref "observability-concept.md" >}})提供了对您的应用的洞察，如跟踪和指标。
-`

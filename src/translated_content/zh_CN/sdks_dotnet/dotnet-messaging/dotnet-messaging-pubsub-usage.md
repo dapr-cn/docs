@@ -110,3 +110,4 @@ builder.Services.AddDaprPublishSubscribeClient((serviceProvider, daprPubSubClien
 });
 
 var app = builder.Build();
+```

@@ -168,3 +168,4 @@ curl http://localhost:3500/v1.0/secrets/vault/bulk
         "key2": "value2"
     }
 }
+```

@@ -1,4 +1,3 @@
-
 ---
 type: docs
 title: "Dapr 教程"
@@ -33,4 +32,3 @@ no_list: true
 | [Bindings](https://github.com/dapr/quickstarts/tree/master/tutorials/bindings)            | 演示如何使用 Dapr 创建与其他组件的输入和输出绑定，使用 Kafka 作为绑定的实现。                                                                            |
 | [可观测性](https://github.com/dapr/quickstarts/tree/master/tutorials/observability) | 演示 Dapr 的追踪能力，使用 Zipkin 作为追踪组件。 |
 | [Secret Store](https://github.com/dapr/quickstarts/tree/master/tutorials/secretstore) | 演示使用 Dapr Secrets API 访问密钥存储。 |
-`

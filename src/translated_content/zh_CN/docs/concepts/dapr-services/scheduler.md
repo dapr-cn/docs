@@ -30,4 +30,3 @@ Scheduler 服务作为 `dapr init -k` 的一部分或通过 Dapr Helm 图表部�
 ## 相关链接
 
 [了解更多关于作业 API 的信息。]({{< ref jobs_api.md >}})
-`

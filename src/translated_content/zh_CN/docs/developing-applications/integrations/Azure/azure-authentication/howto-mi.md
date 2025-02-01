@@ -141,4 +141,3 @@ spec:
 ## 下一步
 
 {{< button text="参考 Azure 组件规范 >>" page="components-reference" >}}
-`

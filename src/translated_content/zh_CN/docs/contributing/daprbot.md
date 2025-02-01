@@ -27,4 +27,3 @@ Dapr 机器人通过一系列命令来帮助处理 Dapr 组织中的常见任务
 | `sdk-needed`              | Issue                 | 在 SDK 仓库中创建新的 issue 以跟踪 SDK 工作                      | `dapr`               |
 | `documentation required`  | Issue 或 pull request | 在 `dapr/docs` 中创建一个新的 issue 以跟踪文档工作               | `components-contrib` |
 | `new component`           | Issue 或 pull request | 在 `dapr/dapr` 中创建一个新的 issue 以注册新组件                 | `components-contrib` |
-`

@@ -1,4 +1,3 @@
-<Meaning-Based Translation>
 ---
 type: docs
 title: "Azure Event Hubs"

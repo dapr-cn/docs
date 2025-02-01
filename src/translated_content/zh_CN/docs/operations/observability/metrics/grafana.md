@@ -1,5 +1,3 @@
-Certainly! Here's a revised version of the document with a focus on natural Chinese expression and clarity:
-
 ---
 type: docs
 title: "如何使用Grafana监控指标"

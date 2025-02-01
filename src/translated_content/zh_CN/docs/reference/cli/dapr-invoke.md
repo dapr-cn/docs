@@ -38,3 +38,4 @@ dapr invoke --app-id target --method sample --data '{"key":"value"}'
 
 # 使用 GET 请求方法调用目标应用的一个示例方法
 dapr invoke --app-id target --method sample --verb GET
+```

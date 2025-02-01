@@ -153,3 +153,4 @@ curl -X POST http://localhost:3500/v1.0-alpha/unlock/redisStore \
 {
     "status": 0
 }
+```

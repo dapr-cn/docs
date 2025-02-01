@@ -1,4 +1,3 @@
-<Meaning-Based Translation>
 ---
 type: docs
 title: "commercetools GraphQL 绑定说明"

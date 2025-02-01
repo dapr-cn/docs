@@ -1,4 +1,3 @@
-<Meaning-Based Translation>
 ---
 type: docs
 title: "密码学组件规范"

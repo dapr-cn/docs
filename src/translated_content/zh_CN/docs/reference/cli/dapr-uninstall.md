@@ -54,3 +54,4 @@ dapr uninstall --all --container-runtime podman
 
 ```bash
 dapr uninstall -k
+```

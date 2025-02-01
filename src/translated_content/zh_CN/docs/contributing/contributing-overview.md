@@ -117,4 +117,3 @@ git push --force-with-lease <remote-name> <branch-name>
 ## 行为准则
 
 请参阅[Dapr社区行为准则](https://github.com/dapr/community/blob/master/CODE-OF-CONDUCT.md)。
-`

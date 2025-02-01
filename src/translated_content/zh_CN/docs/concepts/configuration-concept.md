@@ -57,5 +57,3 @@ Dapr 应用程序和控制平面配置不应与 [配置构建块 API]({{< ref co
 ## 下一步
 
 {{< button text="了解更多关于配置的信息" page="configuration-overview" >}}
-```
-This translation aims to maintain the original intent while improving clarity and fluency in Chinese. It addresses the issues identified in the direct translation by restructuring sentences and using more natural expressio

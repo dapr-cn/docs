@@ -32,3 +32,4 @@ dapr stop [flags]
 ```bash
 # 停止 Dapr 应用程序
 dapr stop --app-id <ID>
+```

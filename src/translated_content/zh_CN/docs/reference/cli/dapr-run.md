@@ -90,3 +90,4 @@ dapr run -f dapr.yaml
 
 # 在 Kubernetes 上运行多应用程序运行模板文件
 dapr run -k -f dapr.yaml
+```

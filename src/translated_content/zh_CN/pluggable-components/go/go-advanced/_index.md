@@ -1,5 +1,3 @@
-<Meaning-Based Translation>
-```markdown
 ---
 type: docs
 title: "Dapr 可插拔组件 Go SDK 的高级用法"

@@ -59,3 +59,4 @@ dapr dashboard -k -p 9999
 ```
 您的 Kubernetes 集群的 Dapr 根证书将在 <n> 天后过期。到期日期：<date:time> UTC。
 请访问 docs.dapr.io 获取证书更新说明，以避免服务中断。
+```

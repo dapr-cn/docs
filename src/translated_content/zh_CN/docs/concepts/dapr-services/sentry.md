@@ -26,4 +26,3 @@ Sentry 服务可以通过 `dapr init -k` 或使用 Dapr Helm Chart 部署。有�
 - [安全概述]({{< ref security-concept.md >}})
 - [自托管模式]({{< ref self-hosted-with-docker.md >}})
 - [Kubernetes 模式]({{< ref kubernetes >}})
-`

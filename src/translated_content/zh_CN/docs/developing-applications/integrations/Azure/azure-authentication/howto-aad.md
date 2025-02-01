@@ -134,4 +134,3 @@ echo "服务主体 ID: ${SERVICE_PRINCIPAL_ID}"
 ## 下一步
 
 {{< button text="使用托管身份" page="howto-mi.md" >}}
-`

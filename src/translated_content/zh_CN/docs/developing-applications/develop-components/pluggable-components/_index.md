@@ -7,6 +7,3 @@ weight: 100
 aliases:
   - "/zh-hans/operations/components/pluggable-components/pluggable-components-overview/"
 ---
-```
-
-您掌握了截至2023年10月的

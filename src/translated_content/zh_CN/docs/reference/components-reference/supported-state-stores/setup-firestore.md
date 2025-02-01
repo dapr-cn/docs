@@ -1,4 +1,3 @@
-<Meaning-Based Translation>
 ---
 type: docs
 title: "GCP Firestore（Datastore 模式）"

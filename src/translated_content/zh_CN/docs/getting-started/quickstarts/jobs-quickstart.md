@@ -526,4 +526,3 @@ dapr run --app-id job-scheduler --app-port 6300 -- go run .
 - 了解更多关于 [调度器控制平面]({{< ref scheduler.md >}})
 
 {{< button text="探索 Dapr 教程  >>" page="getting-started/tutorials/_index.md" >}}
-`

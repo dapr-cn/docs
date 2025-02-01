@@ -59,3 +59,4 @@ dapr mtls -k
 ```
 您的 Kubernetes 集群的 Dapr 根证书将在 <n> 天后到期。到期日期：<date:time> UTC。
 请参阅 docs.dapr.io 以获取证书更新说明，以避免服务中断。
+```

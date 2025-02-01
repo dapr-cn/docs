@@ -349,3 +349,4 @@ public class MyOperation(DaprJobsClient daprJobsClient)
         await daprJobsClient.DeleteJobAsync(jobName, cancellationToken);
     }
 }
+```

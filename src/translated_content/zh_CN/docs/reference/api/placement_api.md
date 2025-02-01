@@ -83,3 +83,4 @@ updatedAt | timestamp | actor 注册/更新的时间戳。
     ],
     "tableVersion": 1
 }
+```

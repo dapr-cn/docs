@@ -113,3 +113,4 @@ dapr completion powershell >> $PROFILE
 bash        生成 bash 自动补全脚本
 powershell  生成 powershell 自动补全脚本
 zsh         生成 zsh 自动补全脚本
+```

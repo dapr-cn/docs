@@ -10,4 +10,3 @@ description: "Dapr Sidecar 注入器过程概述"
 ## 运行 Sidecar 注入器
 
 Sidecar 注入器服务可以通过执行 `dapr init -k` 部署，或者通过 Dapr 的 Helm chart 进行部署。有关在 Kubernetes 上运行 Dapr 的更多信息，请访问 [Kubernetes 托管页面]({{< ref kubernetes >}})。
-`

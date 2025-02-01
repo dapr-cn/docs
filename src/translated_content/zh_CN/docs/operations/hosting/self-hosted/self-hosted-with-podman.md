@@ -49,3 +49,4 @@ podman run --network="host" --mount type=bind,source="$(pwd)"/components,target=
 
 ```bash
 dapr uninstall --container-runtime podman --all
+```

@@ -21,3 +21,4 @@ metadata:
 spec:
   type: workflowbackend.actor
   version: v1
+```

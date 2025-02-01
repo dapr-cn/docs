@@ -5,6 +5,3 @@ linkTitle: "Visual Studio Code"
 weight: 1000
 description: "在 Visual Studio Code 中如何高效地开发和运行 Dapr 应用程序"
 ---
-```
-
-您已接受截至2023年10月的数据

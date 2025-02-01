@@ -20,4 +20,4 @@ description: Dapr文档中常见术语和缩写的定义
 | 命名空间 | Dapr中的命名空间提供隔离功能，从而支持多租户。 | 了解更多关于命名空间的[组件]({{< ref component-scopes.md >}})、[服务调用]({{< ref service-invocation-namespaces.md >}})、[发布/订阅]({{< ref pubsub-namespaces.md >}})和[actors]({{< ref namespaced-actors.md >}})
 | 自主管理 | 在Windows/macOS/Linux机器上运行应用程序的能力，使用Dapr。Dapr提供在“自主管理”模式下运行的能力。 | [自主管理模式]({{< ref self-hosted-overview.md >}})
 | 服务 | 一个正在运行的应用程序或程序。这可以指您的应用程序或Dapr应用程序。 |
-| 边车 | 一个与您的应用程序一起运行的程序，作为一个单独的进程或容器。 | [边车模式](https://docs.microsoft.com/azure/architecture/patterns/sidecar)
+| sidecar | 一个与您的应用程序一起运行的程序，作为一个单独的进程或容器。 | [边车模式](https://docs.microsoft.com/azure/architecture/patterns/sidecar)

@@ -1,4 +1,3 @@
-
 ---
 type: docs
 title: "定义一个组件"

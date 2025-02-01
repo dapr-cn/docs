@@ -69,3 +69,4 @@ dapr mtls renew-certificate -k --private-key myprivatekey.key --valid-until <天
 使用现有的私有 root.key 为 Kubernetes 集群生成新的根证书和颁发者证书。
 ```bash
 dapr mtls renew-certificate -k --private-key myprivatekey.key
+```

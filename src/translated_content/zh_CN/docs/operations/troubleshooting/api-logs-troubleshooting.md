@@ -125,3 +125,4 @@ Dapr gRPC API 发出的日志不受此配置选项的影响，因为它们仅包
 logging:
   apiLogging:
     omitHealthChecks: true
+```

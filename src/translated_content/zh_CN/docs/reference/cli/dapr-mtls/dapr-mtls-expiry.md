@@ -31,3 +31,4 @@ dapr mtls expiry [flags]
 ```bash
 # 查看 Kubernetes 证书的有效期
 dapr mtls expiry
+```

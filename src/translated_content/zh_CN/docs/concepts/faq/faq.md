@@ -39,4 +39,3 @@ Dapr 集成了以下框架：
 - Java SDK 中的 Spring Boot Web 应用
 - .NET SDK 中的 ASP.NET Core
 - [Azure API 管理](https://cloudblogs.microsoft.com/opensource/2020/09/22/announcing-dapr-integration-azure-api-management-service-apim/)
-`
