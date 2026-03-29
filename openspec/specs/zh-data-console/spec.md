@@ -23,7 +23,8 @@ flowchart TD
 | Requirement | 说明 | 场景数 |
 | --- | --- | --- |
 | Sidebar prioritizes zh data | 侧边栏须以翻译工作台与中文数据作为主工作流入口 | 3 |
-| Console renders standardized datasets | 页面须展示统一 JSON 数据集；术语表支持行内 CRUD | 3 |
+| Console renders standardized datasets | 控制台须展示经协调的权威状态，而非仅凭 translation-state 乐观覆盖 | 3 |
+| Console surfaces integrity risks explicitly | 链路断裂时须直出风险，不得把缺失译文伪装为已翻译 | 2 |
 | Console handles empty and failed datasets | 页面须处理缺失、空数据、写入失败与只读降级 | 4 |
 
 ## Requirements
@@ -44,19 +45,30 @@ The system SHALL present first-level navigation items named `翻译工作台` an
 - **THEN** the console MUST NOT display a demo-only workspace entry that is unrelated to the current translation management workflows
 
 ### Requirement: Console renders standardized datasets
-The system SHALL provide a dedicated zh data view that loads standardized JSON datasets from the zh repository and renders summary cards plus dataset-specific tables or editors for sync status, glossary, source manifest, and copy log; the sync status view MUST expose both source synchronization and translation freshness signals, and the glossary view MUST support search, inline create, inline update, and delete without requiring route navigation.
+The system SHALL provide a dedicated zh data view that loads standardized JSON datasets from the zh repository and renders summary cards plus dataset-specific tables or editors for sync status, glossary, source manifest, and copy log; the sync status view MUST expose authoritative source synchronization and translation freshness signals derived from reconciled datasets rather than from `translation-state.json` alone.
 
 #### Scenario: Workspace summary loads successfully
 - **WHEN** the zh data view loads with valid dataset files
-- **THEN** the page SHALL display summary metrics derived from sync status, glossary size, and latest copy batch metadata
+- **THEN** the page SHALL display summary metrics derived from the reconciled sync status, glossary size, and latest copy batch metadata
 
 #### Scenario: User switches dataset tabs
 - **WHEN** the user selects one of `同步状态`、`术语表`、`源文清单` or `复制日志`
 - **THEN** the console SHALL render records from the corresponding standardized dataset without requiring route navigation
 
-#### Scenario: User manages glossary rows inline
-- **WHEN** the user creates, updates, or deletes a glossary row with valid input inside the `术语表` tab
-- **THEN** the console SHALL persist the change and refresh the glossary-derived view state without leaving the current page
+#### Scenario: Translation-state match alone cannot promote a missing file
+- **WHEN** a record has a matching `translation-state.json` source sha but the authoritative sync dataset still reports the target translation as missing or inconsistent
+- **THEN** the console MUST NOT render that record as `已翻译` solely because of the translation-state match
+
+### Requirement: Console surfaces integrity risks explicitly
+The system SHALL surface integrity audit warnings when synchronized datasets disagree so that operators can identify where the pipeline is broken.
+
+#### Scenario: Console shows audit summary when datasets disagree
+- **WHEN** the current version contains one or more integrity audit findings
+- **THEN** the console SHALL render a visible warning summary that reports the count and category of mismatches
+
+#### Scenario: File-level audit finding is actionable
+- **WHEN** the operator inspects a file-level integrity warning in the console
+- **THEN** the UI SHALL expose enough metadata to identify the affected version, relative path, and conflicting dataset states without opening raw JSON files manually
 
 ### Requirement: Console handles empty and failed datasets
 The system SHALL expose explicit empty-state and error-state feedback when expected zh datasets are missing, unreadable, or have zero records, and it SHALL also surface glossary write-path failures or unavailability without hiding already readable glossary data.

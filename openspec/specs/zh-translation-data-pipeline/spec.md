@@ -30,7 +30,8 @@ flowchart TD
 | Zh repo stores translation management data in JSON | zh 仓须建立统一 JSON 数据目录 | 2 |
 | Source copy mirrors bucket and relative path | 源文复制须沿用内容桶与相对路径镜像 | 2 |
 | Copy operations are traceable | 每次复制须记录批次、来源与结果 | 2 |
-| Translation freshness is derived from sync time | 译文状态须基于同步时间与译文更新时间判断 | 2 |
+| Translation freshness is derived from sync time | 译文状态须改为基于目标文件存在性、sha 命中与时间戳兜底共同判定 | 3 |
+| Pipeline datasets stay internally consistent | `sync-status`、`source`、`copy-log` 须从同一批权威文件状态推导 | 2 |
 
 ## Requirements
 
@@ -72,12 +73,27 @@ The system SHALL record batch-level and file-level tracking metadata for each so
 - **THEN** it SHALL delete the existing `data/source/` tree first, copy all source files again, and verify mirrored file existence plus sha256 equality without depending on translation files
 
 ### Requirement: Translation freshness is derived from sync time
-The system SHALL derive translation status from the mirrored source verification time and the translation file timestamp, while explicitly flagging orphan translations that no longer have a corresponding source document.
+The system SHALL derive translation freshness from a single verified decision path that checks target translation file existence, `translation-state.json` source-sha matches, and translation timestamps as a fallback, while explicitly flagging orphan translations that no longer have a corresponding source document.
 
-#### Scenario: Translation newer than sync time is treated as translated
-- **WHEN** a translation file exists and its `translationUpdatedAt` is later than the current `syncedAt`
-- **THEN** the pipeline SHALL mark the record as `translated`
+#### Scenario: Source sha match survives a later resync
+- **WHEN** a mirrored source record still has the same `sourceSha256` as its matching `translation-state.json` entry and the target translation file exists during a later synchronization run
+- **THEN** the pipeline SHALL keep that record in `translated` state even if the target file timestamp is earlier than the new `syncedAt`
 
-#### Scenario: Missing or orphan translation is surfaced explicitly
-- **WHEN** the translation file is missing for a mirrored source record, or a translation file exists without a corresponding source record
-- **THEN** the pipeline SHALL mark the record as `missingTranslation` or `orphanTranslation` respectively and include it in the queryable sync-status dataset
+#### Scenario: Missing target file invalidates translation-state optimism
+- **WHEN** a `translation-state.json` entry exists for a source record but the expected target translation file does not exist during synchronization
+- **THEN** the pipeline MUST mark the record as `missingTranslation` instead of `translated`
+
+#### Scenario: Orphan translation remains explicit
+- **WHEN** a translation file exists without a corresponding mirrored source record
+- **THEN** the pipeline SHALL mark the record as `orphanTranslation` and include it in the queryable sync-status dataset
+
+### Requirement: Pipeline datasets stay internally consistent
+The system SHALL derive `sync-status.json`, `source.json` bucket aggregates, and the latest `copy-log.json` translation summary from the same verified file-level translation decisions within a synchronization run.
+
+#### Scenario: Source bucket aggregates reflect verified translation results
+- **WHEN** the synchronization run completes its verified file-level decisions
+- **THEN** each bucket written to `source.json` SHALL expose translated, stale, missing, and orphan counts that exactly match the corresponding subset of `sync-status.json`
+
+#### Scenario: Latest copy batch summary matches sync-status totals
+- **WHEN** the pipeline writes the latest batch record to `copy-log.json`
+- **THEN** that batch's `translationSummary` SHALL equal the totals aggregated from the synchronized `sync-status.json` items written in the same run

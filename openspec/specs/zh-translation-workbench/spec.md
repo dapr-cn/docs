@@ -31,8 +31,9 @@ flowchart TD
 | User can enqueue multiple files for translation | 用户须可多选并批量建队 | 2 |
 | Translation templates are file-backed Handlebars assets | 提示词模板须独立保存为 `.hbs` 文件 | 2 |
 | Glossary is injected into every translation request | 每次翻译须系统化引用术语表 | 2 |
-| Translation queue is serial and observable | 队列须逐个执行并暴露四态 | 3 |
+| Translation queue is serial and observable | 任务完成语义须扩展到衍生数据协调完成 | 3 |
 | Failed files can be retried | 失败项须支持单项重试 | 2 |
+| Successful translations reconcile downstream datasets | 工作台成功翻译后须立即闭环回写下游数据集 | 2 |
 | Localized front matter aliases are normalized before write | 译文落盘前须把 `aliases` 的站内路径归一化为本地化前缀且保持幂等 | 3 |
 
 ## Requirements
@@ -86,19 +87,30 @@ The system SHALL load glossary terms from the selected version's glossary datase
 - **THEN** the rendered prompt MUST include that file's `sourceContent` and `targetPath` values in addition to the glossary payload
 
 ### Requirement: Translation queue is serial and observable
-The system SHALL execute queued files one at a time in submission order, and it MUST expose per-file states `waiting`、`translating`、`completed`、and `failed` through a status API that the frontend can poll without a page refresh.
+The system SHALL execute queued files one at a time in submission order, and it MUST expose per-file states `waiting`、`translating`、`completed`、and `failed` through a status API that the frontend can poll without a page refresh; a file MUST NOT transition to `completed` until its translated output and required downstream datasets have been durably reconciled.
 
 #### Scenario: Newly queued files start in waiting state
 - **WHEN** a translation job is first created
 - **THEN** every queued file except the active head item SHALL be reported as `waiting`
 
-#### Scenario: Active file advances through translating to completed
-- **WHEN** a queued file begins Claude execution and the translation is written successfully
-- **THEN** the system SHALL transition that file from `translating` to `completed` before the next queued file begins
+#### Scenario: Active file completes only after dataset reconciliation
+- **WHEN** a queued file finishes translation successfully
+- **THEN** the system SHALL persist the target file, update `translation-state.json`, reconcile `sync-status.json` plus downstream summary datasets, and only then transition that file from `translating` to `completed`
 
-#### Scenario: Frontend can observe status changes without manual refresh
-- **WHEN** the frontend polls the translation job status endpoint while a job is running
-- **THEN** it SHALL receive the latest per-file states and aggregate counts for waiting, translating, completed, and failed items
+#### Scenario: Frontend observes post-reconciliation status without manual refresh
+- **WHEN** the frontend polls the translation job status endpoint after a file completes
+- **THEN** it SHALL receive the final per-file state only after the reconciled dataset view for that version is ready to be consumed by downstream pages
+
+### Requirement: Successful translations reconcile downstream datasets
+The system SHALL reconcile the selected version's authoritative translation datasets immediately after a successful translation write so that downstream consumers do not need to wait for the next full source synchronization run.
+
+#### Scenario: Workbench updates authoritative status for a newly translated file
+- **WHEN** a source document is translated successfully from the workbench
+- **THEN** the matching `sync-status.json` item SHALL be updated to the effective translated state for that source sha before the job is reported as completed
+
+#### Scenario: Workbench updates aggregate summaries in the same version
+- **WHEN** one or more files in a version complete successfully
+- **THEN** the system SHALL update the affected bucket aggregates in `source.json` and the latest batch translation summary in `copy-log.json` for that same version before returning the final job state
 
 ### Requirement: Failed files can be retried
 The system SHALL allow a failed translation item to be retried from the workbench without recreating the entire job, and a retry MUST re-enter the normal serial queue lifecycle for that file.
