@@ -35,6 +35,8 @@ flowchart TD
 | Failed files can be retried | 失败项须支持单项重试 | 2 |
 | Successful translations reconcile downstream datasets | 工作台成功翻译后须立即闭环回写下游数据集 | 2 |
 | Localized front matter aliases are normalized before write | 译文落盘前须把 `aliases` 的站内路径归一化为本地化前缀且保持幂等 | 3 |
+| Workbench validates markdown output before persistence | 工作台须在成功态前完成结构校验 | 2 |
+| Validation failure blocks downstream reconciliation | 校验失败不得继续回写权威数据集 | 2 |
 
 ## Requirements
 
@@ -137,3 +139,25 @@ The system SHALL inspect the YAML front matter of a translated Markdown document
 #### Scenario: Documents without applicable aliases remain otherwise unchanged
 - **WHEN** the translated Markdown document has no `aliases` field, or its alias entries are not site-relative path strings
 - **THEN** the system MUST leave the rest of the translated document unchanged apart from the existing newline normalization behavior
+
+### Requirement: Workbench validates markdown output before persistence
+The system SHALL validate every Markdown translation candidate produced by the workbench after output normalization and before the candidate is accepted as a successful translation result.
+
+#### Scenario: Validated markdown is persisted normally
+- **WHEN** a Markdown translation candidate passes frontmatter and heading-structure validation
+- **THEN** the workbench SHALL write the target translation file and continue the existing `translation-state.json` plus downstream dataset reconciliation flow
+
+#### Scenario: Invalid markdown never reaches completed state
+- **WHEN** a Markdown translation candidate fails structural validation
+- **THEN** the workbench MUST mark that job item as `failed` rather than `completed`
+
+### Requirement: Validation failure blocks downstream reconciliation
+The system SHALL stop the success pipeline when translation validation fails, and it MUST ensure that invalid candidates do not update `translation-state.json`, `sync-status.json`, `source.json`, or `copy-log.json`.
+
+#### Scenario: Failed validation does not update translation-state
+- **WHEN** validation fails before the workbench success path completes
+- **THEN** the system SHALL leave the corresponding `translation-state.json` entry unchanged
+
+#### Scenario: Failed validation leaves downstream datasets untouched
+- **WHEN** validation fails for a queued Markdown file
+- **THEN** the workbench SHALL skip dataset reconciliation, delete any invalid target file that exists, and surface the validator diagnostics through the job item error payload or server logs
