@@ -1,3 +1,0 @@
-[submodule "src/source_docs"]
-	path = src/source_docs
-	url = https://github.com/dapr/docs.git

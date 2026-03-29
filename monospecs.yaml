@@ -1,0 +1,50 @@
+version: "1.0"
+commit_when_archive: true
+
+# Workspace mode is disabled to use manual icon configuration
+# To enable workspace mode, uncomment the line below:
+# workspace: ".hagicode.code-workspace"
+
+repositories:
+- path: "repos/v1.15"
+  url: "https://github.com/dapr/docs.git"
+  displayName: "v1.15"
+  branch: "v1.15"
+  icon: "📘"
+  tags: [ upstream, source ]
+- path: "repos/fork-v1.15"
+  url: "https://github.com/dapr-cn/fork-docs.git"
+  displayName: "fork-v1.15"
+  branch: "v1.15"
+  icon: "🍴"
+  tags: [ fork, pr-source ]
+- path: "repos/v1.15_zh"
+  url: "https://github.com/dapr/docs-zh.git"
+  displayName: "v1.15_zh"
+  branch: "v1.15_content"
+  icon: "🌐"
+  tags: [ zh-official ]
+- path: "repos/v1.17"
+  url: "https://github.com/dapr/docs.git"
+  displayName: "v1.17"
+  branch: "v1.17"
+  icon: "📘"
+  tags: [ upstream, source ]
+- path: "repos/fork-v1.17"
+  url: "https://github.com/dapr-cn/fork-docs.git"
+  displayName: "fork-v1.17"
+  branch: "v1.17"
+  icon: "🍴"
+  tags: [ fork, pr-source ]
+- path: "repos/v1.17_zh"
+  url: "https://github.com/dapr/docs-zh.git"
+  displayName: "v1.17_zh"
+  branch: "v1.17_content"
+  icon: "🌐"
+  tags: [ zh-official ]
+- path: "repos/dapr-docs-copilot"
+  url: "https://github.com/dapr-cn/dapr-docs-copilot.git"
+  displayName: "dapr-docs-copilot"
+  branch: "main"
+  icon: "🛠️"
+  tags: [ admin, copilot ]

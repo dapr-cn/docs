@@ -1,0 +1,33 @@
+{
+  "name": "dapr-docs-mono",
+  "version": "1.0.0",
+  "description": "Dapr Docs Monorepo - Management repository for Dapr ecosystem projects",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clone:repos": "node scripts/clone-repos.mjs",
+    "clone:all": "npm run clone:repos",
+    "zh:data:sync": "tsx scripts/zh-data/sync_source_documents.ts",
+    "zh:data:test": "tsx scripts/zh-data/tests/test_sync_source_documents.ts"
+  },
+  "keywords": [
+    "dapr",
+    "monorepo"
+  ],
+  "author": "Dapr Docs",
+  "license": "MIT",
+  "dependencies": {
+    "animejs": "^4.3.6",
+    "chalk": "^5.6.2",
+    "cli-table3": "^0.6.5",
+    "commander": "^14.0.3",
+    "glob": "^13.0.6",
+    "js-yaml": "^4.1.0",
+    "ora": "^9.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -14,6 +14,20 @@
 
 - <https://docs.dapr.io>
 
+## 源码同步
+
+本仓库已移除根仓 `git submodule` 依赖，不再使用 `src/source_docs`。
+
+如需拉取上游源码，请执行：
+
+```bash
+npm install
+npm run clone:repos
+```
+
+中文数据同步现统一使用 `scripts/zh-data/sync_source_documents.ts`。
+默认读取 `repos/v1.17`，也可通过 `SOURCE_REPO_BRANCH` 覆盖来源分支。
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):

@@ -4,3 +4,6 @@
 
 node_modules
 /daprdocs
+repos/
+src/source_docs/
+tmp/
