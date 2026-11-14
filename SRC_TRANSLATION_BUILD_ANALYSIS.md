@@ -24,7 +24,7 @@
 2. 以相同的相对路径，在 `src/translated_content/zh_CN` 中维护中文译文。
 3. 在构建阶段，将中文目录挂载进 Hugo，生成中文站点。
 
-多版本管理并不发生在 `src` 内，而是发生在根目录的 `repos/*` 与 `monospecs.yaml` 中。也就是说：
+多版本管理并不发生在 `src` 内，而是发生在仓库根目录的 `repos/*` 与 mono 仓库的 `.hagicode/monospecs.yaml` 中。也就是说：
 
 - `src` 解决的是“内容汇总与翻译映射”。
 - `repos/*` 解决的是“版本选择与仓库角色管理”。
@@ -43,7 +43,7 @@
 
 ### 2.1 根目录仓库编排
 
-根目录通过 `monospecs.yaml` 管理多个版本与多个角色的仓库：
+版本与仓库角色由 mono 仓库的 `.hagicode/monospecs.yaml` 管理（本仓库已不再保存该文件）：
 
 - `repos/v1.15`：上游官方英文源码仓
 - `repos/fork-v1.15`：dapr-cn 的 fork
@@ -52,11 +52,7 @@
 - `repos/fork-v1.17`：dapr-cn 的 fork
 - `repos/v1.17_zh`：官方中文翻译仓
 
-对应配置见：
-
-- `monospecs.yaml:8`
-- `monospecs.yaml:27`
-- `monospecs.yaml:39`
+对应配置见 mono 仓库的 `.hagicode/monospecs.yaml`。迁移前本仓库 `monospecs.yaml` 的行号（8、27、39）以迁移前的提交为准。
 
 这说明“一个版本”至少包含三类仓库角色：
 
@@ -592,7 +588,7 @@
 
 若后续开始做新管理界面，建议按如下顺序推进：
 
-1. 先以 `monospecs.yaml` 建立“版本与仓库角色”模型。
+1. 先以 mono 仓库的 `.hagicode/monospecs.yaml` 建立“版本与仓库角色”模型。
 2. 再从 `hugo.yaml` 或历史 `config.toml` 提取“挂载规则”模型。
 3. 最后再把 `src` 中的“路径镜像翻译模型”折叠进统一页面数据结构。
 
@@ -611,8 +607,7 @@
 ### 根仓
 
 - `README.md`
-- `monospecs.yaml`
-- `scripts/clone-repos.mjs`
+- mono 仓库的 `.hagicode/monospecs.yaml` 与 `scripts/sync-repos.mjs`（版本仓库的克隆与同步）
 
 ### `src` 历史流程
 

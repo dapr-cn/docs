@@ -18,15 +18,16 @@
 
 本仓库已移除根仓 `git submodule` 依赖，不再使用 `src/source_docs`。
 
-如需拉取上游源码，请执行：
+上游源码与中文数据的拉取和同步已统一由 dapr-cn-mono（mono 仓库根目录）负责。在 mono 根目录执行：
 
 ```bash
 pnpm install
-pnpm run clone:repos
+pnpm run sync:repos
 ```
 
-中文数据同步现统一使用 `scripts/zh-data/sync_source_documents.ts`。
-默认读取 `repos/v1.17`，也可通过 `SOURCE_REPO_BRANCH` 覆盖来源分支。
+中文数据同步命令为 mono 根目录的 `pnpm run zh:data:sync`，任务位于 mono 根目录的 `scripts/zh-data/sync_source_documents.ts`。
+默认读取 `repos/v1.17`（相对 mono 根目录），也可通过 `SOURCE_REPO_BRANCH` 覆盖来源分支。
+本仓库不再保留 `zh:data:*` 与克隆脚本。
 
 ## Contributors ✨
 
