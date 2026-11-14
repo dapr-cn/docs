@@ -21,8 +21,8 @@
 如需拉取上游源码，请执行：
 
 ```bash
-npm install
-npm run clone:repos
+pnpm install
+pnpm run clone:repos
 ```
 
 中文数据同步现统一使用 `scripts/zh-data/sync_source_documents.ts`。
