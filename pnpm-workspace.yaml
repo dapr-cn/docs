@@ -1,0 +1,5 @@
+# pnpm settings (pnpm 12 reads these here, not from package.json).
+# Dependency lifecycle scripts run only for approved packages:
+#   esbuild - selects and verifies its platform binary (used by tsx).
+allowBuilds:
+  esbuild: true

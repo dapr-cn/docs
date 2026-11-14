@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "clone:repos": "node scripts/clone-repos.mjs",
-    "clone:all": "npm run clone:repos",
+    "clone:all": "pnpm run clone:repos",
     "zh:data:sync": "tsx scripts/zh-data/sync_source_documents.ts",
     "zh:data:test": "tsx scripts/zh-data/tests/test_sync_source_documents.ts"
   },
@@ -29,5 +29,6 @@
     "@types/node": "^25.3.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
-  }
+  },
+  "packageManager": "pnpm@12.16.1"
 }
